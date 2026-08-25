@@ -834,7 +834,11 @@ const staticQuestions = [
         type: "open-text",
         question: "Prüfungsaufgabe Ausbildung (LF 1): Nenne 4 gesetzliche Pflichten eines Auszubildenden nach dem Berufsbildungsgesetz (BBiG).",
         musterloesung: "1. Lernpflicht / Bemühungspflicht (Auszubildender muss sich bemühen, die Fertigkeiten zu erwerben).\n2. Sorgfaltspflicht (sorgfältige Behandlung von Werkzeugen, Maschinen und Materialien).\n3. Gehorsamspflicht (Folgeleistung von Weisungen der Ausbilder).\n4. Berufsschulpflicht (Teilnahme am Berufsschulunterricht).\nWeitere Pflichten: Führen des Berichtshefts (Ausbildungsnachweis), Schweigepflicht (Betriebsgeheimnisse wahren), Krankmeldungspflicht.",
-        explanation: "Die Pflichten des Auszubildenden stehen im § 13 des Berufsbildungsgesetzes (BBiG) geschrieben und sind Teil des Ausbildungsvertrags."
+        explanation: "Hintergrundwissen & Details zu den Azubi-Pflichten (§ 13 BBiG):\n" +
+            "- Lernpflicht: Der Azubi schuldet keinen Arbeitserfolg (wie ein normaler Angestellter), sondern die ernsthafte Bemühung, den Beruf zu erlernen.\n" +
+            "- Berichtspflicht: Das Berichtsheft (Ausbildungsnachweis) ist Zulassungsvoraussetzung zur Abschlussprüfung. Das Führen muss während der Arbeitszeit ermöglicht werden.\n" +
+            "- Schweigepflicht: Gilt auch nach Beendigung der Ausbildung bezüglich Geschäfts- und Betriebsgeheimnissen.\n" +
+            "- Pflegliche Behandlung: Werkzeuge und Maschinen müssen ordnungsgemäß benutzt und vor Schaden bewahrt werden (Verstoß kann zur Abmahnung führen)."
     },
     {
         id: 81,
@@ -848,7 +852,10 @@ const staticQuestions = [
             "Arbeitszeitgesetz (ArbZG)"
         ],
         correctAnswer: 0,
-        explanation: "Das Berufsbildungsgesetz (BBiG) regelt die Berufsausbildungsvorbereitung, die Berufsausbildung (Rechte/Pflichten, Verträge, Prüfungen) sowie die Fortbildung und Umschulung in Deutschland."
+        explanation: "Lern-Zusammenfassung zum Berufsbildungsgesetz (BBiG):\n" +
+            "- Geltungsbereich: Regelt bundesweit die betriebliche Berufsausbildung, Fortbildung und Umschulung.\n" +
+            "- Wichtige Inhalte: Mindestvergütung für Auszubildende, Regelungen zum Ausbildungsvertrag (Rechte/Pflichten, Kündigung, Probezeit von 1-4 Monaten), Ausbilder-Eignung (AEVO), sowie die Organisation und Zulassung zu Prüfungen.\n" +
+            "- Abgrenzung: Das BetrVG regelt die Mitbestimmung der Arbeitnehmer, das JArbSchG schützt Jugendliche unter 18 Jahren bei der Arbeit, und das ArbZG regelt Arbeitszeitgrenzen (z. B. max. 8-10 Stunden pro Tag)."
     },
     {
         id: 82,
@@ -856,7 +863,11 @@ const staticQuestions = [
         type: "open-text",
         question: "Prüfungsaufgabe Mitbestimmung (LF 1): Unter welchen Voraussetzungen kann in einem Betrieb eine Jugend- und Auszubildendenvertretung (JAV) gewählt werden?",
         musterloesung: "Voraussetzungen:\n1. Es müssen im Betrieb mindestens 5 Arbeitnehmer unter 18 Jahren oder Auszubildende (in der Berufsausbildung) unter 25 Jahren beschäftigt sein.\n2. Es muss im Betrieb bereits ein Betriebsrat existieren.",
-        explanation: "Eine JAV kann nicht alleine ohne einen Betriebsrat existieren. Sie vertritt die speziellen Belange der Jugendlichen und Azubis gegenüber dem Betriebsrat."
+        explanation: "Lernkarte JAV & Mitbestimmung:\n" +
+            "- Zweck: Die JAV vertritt die speziellen Interessen von Jugendlichen und Auszubildenden gegenüber dem Betriebsrat (z. B. Übernahme nach der Ausbildung, Qualität der Ausbildung).\n" +
+            "- Besonderheit: Die JAV hat kein direktes Mitbestimmungsrecht gegenüber dem Arbeitgeber. Sie muss Anträge und Anliegen über den Betriebsrat einreichen.\n" +
+            "- Wahlberechtigung (Aktives Wahlrecht): Alle Azubis unter 25 Jahren und alle Jugendlichen unter 18 Jahren.\n" +
+            "- Wählbarkeit (Passives Wahlrecht): Alle Arbeitnehmer/Azubis des Betriebs unter 25 Jahren (ausgenommen Betriebsratsmitglieder)."
     },
     {
         id: 83,
@@ -870,7 +881,10 @@ const staticQuestions = [
             "Alle Arbeitnehmer, unabhängig von Alter und Dauer der Betriebszugehörigkeit."
         ],
         correctAnswer: 0,
-        explanation: "Laut § 7 BetrVG sind alle Arbeitnehmer wahlberechtigt (aktives Wahlrecht), die das 18. Lebensjahr vollendet haben. Leiharbeitnehmer sind wahlberechtigt, wenn sie länger als drei Monate im Betrieb eingesetzt werden."
+        explanation: "Betriebsratswahl-Regeln (BetrVG):\n" +
+            "- Aktives Wahlrecht (Wer darf wählen?): Alle Arbeitnehmer des Betriebs ab vollendetem 18. Lebensjahr. Leiharbeitnehmer dürfen wählen, wenn sie länger als 3 Monate im Betrieb arbeiten.\n" +
+            "- Passives Wahlrecht (Wer darf gewählt werden?): Alle wahlberechtigten Arbeitnehmer, die seit mindestens 6 Monaten dem Betrieb angehören (§ 8 BetrVG).\n" +
+            "- Ausnahmen: Leitende Angestellte (z. B. Prokuristen, Geschäftsführer) sind weder aktiv wahlberechtigt noch passiv wählbar, da sie Arbeitgeberfunktionen ausüben."
     },
     {
         id: 84,
@@ -878,7 +892,10 @@ const staticQuestions = [
         type: "open-text",
         question: "Prüfungsaufgabe Tarifrecht (LF 1): Erläutere den Unterschied zwischen einem Manteltarifvertrag und einem Entgelttarifvertrag bezüglich ihrer typischen Inhalte und Laufzeiten.",
         musterloesung: "- Manteltarifvertrag (Rahmentarifvertrag): Regelt allgemeine Arbeitsbedingungen wie Arbeitszeiten, Urlaubsanspruch, Kündigungsfristen oder Arbeitsbedingungen. Er hat meist eine lange Laufzeit (mehrere Jahre).\n- Entgelttarifvertrag (Lohntarifvertrag): Regelt die konkrete Höhe der Löhne, Gehälter und Ausbildungsvergütungen. Er hat eine kurze Laufzeit (meist 1 bis 2 Jahre) und wird regelmäßig neu verhandelt.",
-        explanation: "Die Tarifverträge werden zwischen Gewerkschaften und Arbeitgeberverbänden (oder einzelnen Arbeitgebern) ausgehandelt."
+        explanation: "Lern-Details zum Tarifrecht:\n" +
+            "- Tarifautonomie: Der Staat hält sich aus den Verhandlungen heraus. Die Tarifpartner (Gewerkschaften für die Arbeitnehmer und Arbeitgeberverbände für die Arbeitgeber) verhandeln die Verträge eigenständig.\n" +
+            "- Friedenspflicht: Während der Laufzeit eines Tarifvertrags darf bezüglich der geregelten Inhalte nicht gestreikt werden. Erst nach Ablauf (und Scheitern neuer Verhandlungen) sind Streiks zulässig.\n" +
+            "- Günstigkeitsprinzip: Abweichungen vom Tarifvertrag im Einzelarbeitsvertrag sind nur zulässig, wenn sie für den Arbeitnehmer günstiger sind (z. B. mehr Urlaub oder höheres Gehalt)."
     },
     {
         id: 85,
@@ -892,7 +909,12 @@ const staticQuestions = [
             "Alle Personen, die sich in einer Erstausbildung befinden."
         ],
         correctAnswer: 0,
-        explanation: "Nach § 2 JArbSchG ist ein Kind, wer noch nicht 15 Jahre alt ist, und ein Jugendlicher, wer 15, aber noch nicht 18 Jahre alt ist."
+        explanation: "Altersgrenzen & Regeln nach dem JArbSchG:\n" +
+            "- Kind: Wer noch nicht 15 Jahre alt ist (Beschäftigungsverbot, Ausnahmen nur für leichte Tätigkeiten wie Zeitungen austragen ab 13 Jahren für max. 2 Stunden).\n" +
+            "- Jugendlicher: Wer 15, aber noch nicht 18 Jahre alt ist. Hier greifen Schutzvorschriften:\n" +
+            "  * Arbeitszeit: Max. 8 Stunden täglich, max. 40 Stunden wöchentlich, nur an 5 Tagen in der Woche.\n" +
+            "  * Freizeit: Samstags- und Sonntagsarbeit ist grundsätzlich verboten (Ausnahmen für Gastronomie/Krankenhäuser mit Freizeitausgleich).\n" +
+            "  * Nachtruhe: Beschäftigung nur zwischen 6:00 und 20:00 Uhr (Ausnahmen für Schichtbetriebe ab 16 Jahren)."
     },
     {
         id: 86,
@@ -900,7 +922,15 @@ const staticQuestions = [
         type: "open-text",
         question: "Prüfungsaufgabe Projektmanagement (LF 6): Erkläre den Unterschied zwischen einem Lastenheft und einem Pflichtenheft bezüglich des Urhebers und des Inhalts.",
         musterloesung: "- Lastenheft: Wird vom AUFTRAGGEBER (Kunden) erstellt. Es beschreibt die Gesamtheit der Anforderungen ('Was' soll getan werden und 'Wofür').\n- Pflichtenheft: Wird vom AUFTRAGNEHMER (Dienstleister) erstellt. Es beschreibt das konkrete Realisierungskonzept ('Wie' und 'Womit' werden die Anforderungen umgesetzt).",
-        explanation: "Das Lastenheft ist die Basis für die Ausschreibung, das Pflichtenheft ist die vertragliche Grundlage für die Umsetzung."
+        explanation: "Lern-Vergleich (Lastenheft vs. Pflichtenheft):\n" +
+            "- Lastenheft (Requirements Specification):\n" +
+            "  * Beschreibt den SOLL-Zustand aus Nutzersicht.\n" +
+            "  * Dient als Ausschreibungsgrundlage für Angebote.\n" +
+            "  * Beantwortet: 'Was wird benötigt?'\n" +
+            "- Pflichtenheft (System Specification / Functional Specification):\n" +
+            "  * Beschreibt die konkrete technische Umsetzung.\n" +
+            "  * Ist Teil des Vertrags und rechtlich bindend.\n" +
+            "  * Beantwortet: 'Wie lösen wir die Anforderungen technisch?'"
     },
     {
         id: 87,
@@ -914,7 +944,10 @@ const staticQuestions = [
             "Vorgangspuffer (VP)"
         ],
         correctAnswer: 0,
-        explanation: "Der Freie Puffer (FP) ist der Zeitraum, um den ein Vorgang verschoben werden kann, ohne den FAZ des Nachfolgers zu verändern. Formel: FP = FAZ(Nachfolger) - FEZ."
+        explanation: "Pufferzeiten-Erklärung (Netzplantechnik):\n" +
+            "- Gesamtpuffer (GP): Der Zeitraum, um den ein Vorgang verschoben werden kann, ohne das Projektende zu gefährden. Formel: GP = SAZ - FAZ (oder SEZ - FEZ). Wenn GP = 0, liegt der Vorgang auf dem Kritischen Pfad.\n" +
+            "- Freier Puffer (FP): Der Zeitraum, um den ein Vorgang verschoben werden kann, ohne den frühesten Start (FAZ) des direkten Nachfolgers zu beeinflussen. Formel: FP = FAZ(Nachfolger) - FEZ(aktuell).\n" +
+            "- Wichtig: Der freie Puffer kann nie größer als der Gesamtpuffer sein (FP <= GP)."
     },
     {
         id: 88,
@@ -922,7 +955,11 @@ const staticQuestions = [
         type: "open-text",
         question: "Prüfungsaufgabe Projektmanagement (LF 6): Nenne die 4 klassischen Phasen eines Projektlebenszyklus in der richtigen chronologischen Reihenfolge.",
         musterloesung: "1. Definitionsphase (Initiierung, Zieldefinition)\n2. Planungsphase (Ressourcen-, Ablauf- und Terminplanung)\n3. Realisierungsphase / Durchführungsphase (Entwicklung, Umsetzung)\n4. Abschlussphase (Abnahme, Einführung, Evaluierung)",
-        explanation: "Jede Phase endet typischerweise mit einem definierten Meilenstein und der Freigabe für die nächste Phase."
+        explanation: "Lernübersicht Projektphasen:\n" +
+            "- 1. Definitionsphase: Projektauftrag wird erstellt, Projektziele festgelegt (SMART-Formel), Stakeholder analysiert und die Machbarkeit geprüft.\n" +
+            "- 2. Planungsphase: Strukturplan (WBS) wird erstellt, Netzplan berechnet, Ressourcen zugeteilt und das Budget kalkuliert.\n" +
+            "- 3. Realisierungsphase: Das eigentliche Produkt wird entwickelt. Projektleiter führt Projektcontrolling durch (Soll-Ist-Vergleiche, Meilensteintrendanalyse).\n" +
+            "- 4. Abschlussphase: Abnahme durch den Kunden, Erstellung des Projektabschlussberichts, Auflösung des Projektteams und 'Lessons Learned'-Sitzung."
     },
     {
         id: 89,
@@ -936,7 +973,10 @@ const staticQuestions = [
             "Ein Meilenstein hat keine Dauer, da er nicht geplant werden kann."
         ],
         correctAnswer: 0,
-        explanation: "Ein Meilenstein markiert ein wichtiges Ereignis oder Zwischenergebnis im Projekt (z.B. Abnahme Pflichtenheft). Er besitzt definitionsgemäß keine eigene Dauer (Dauer = 0)."
+        explanation: "Lernkarte Meilensteine:\n" +
+            "- Definition: Ein Meilenstein ist ein Kontrollpunkt oder ein Ereignis von besonderer Bedeutung im Projektverlauf (z.B. Fertigstellung des Prototyps, Freigabe des Budgets).\n" +
+            "- Dauer: Er hat keine eigene Dauer (Dauer = 0) und verbraucht keine Ressourcen. Er beschreibt einen Zeitpunkt, keinen Zeitraum.\n" +
+            "- Nutzen: Er dient der Strukturierung des Projekts und der Überprüfung des Projektfortschritts (Meilensteintrendanalyse - MTA)."
     },
     {
         id: 90,
@@ -944,7 +984,10 @@ const staticQuestions = [
         type: "open-text",
         question: "Prüfungsaufgabe Projektorganisation (LF 6): Erläutere das Prinzip der Matrix-Projektorganisation und nenne das wesentliche Merkmal bezüglich der Weisungsbefugnis.",
         musterloesung: "Prinzip: Die Mitarbeiter verbleiben in ihren Fachabteilungen (Linie) und arbeiten nur zeitweise für das Projekt.\nWesentliches Merkmal: Der Mitarbeiter hat zwei Vorgesetzte. Der Linien-Vorgesetzte (Fachabteilungsleiter) behält die disziplinarische Weisungsbefugnis (z.B. Urlaub), während der Projektleiter die fachliche Weisungsbefugnis für die Projektaufgaben erhält. Dies führt häufig zu Konflikten.",
-        explanation: "Die Matrix-Organisation ist sehr flexibel, erfordert aber eine enge Abstimmung zwischen Projekt- und Linienmanagern."
+        explanation: "Vergleich der Projektorganisationsformen:\n" +
+            "- Stabs-Projektorganisation (Einflussorganisation): Projektleiter hat keine Weisungsbefugnis, berät nur. Mitarbeiter bleibt zu 100% in der Linie. (Vorteil: Keine Umorganisation. Nachteil: Projektleiter hat kaum Durchsetzungskraft).\n" +
+            "- Matrix-Projektorganisation: Geteilte Weisungsbefugnis (Linienleiter disziplinarisch, Projektleiter fachlich). (Vorteil: Flexibel, Wissenstransfer. Nachteil: Konflikte bei Ressourcenpriorisierung, Überlastung der Mitarbeiter).\n" +
+            "- Reine (autonome) Projektorganisation: Mitarbeiter wird voll aus der Linie herausgelöst und untersteht allein dem Projektleiter. (Vorteil: Schnelle Entscheidungen, hohe Identifikation. Nachteil: Wiedereingliederung nach Projektende schwierig)."
     },
     {
         id: 91,
@@ -958,7 +1001,18 @@ const staticQuestions = [
             "GP = FEZ - SAZ"
         ],
         correctAnswer: 0,
-        explanation: "Der Gesamtpuffer ist die Zeitspanne, die ein Vorgang verschoben werden kann, ohne das Projektende zu verzögern. Formel: GP = SAZ - FAZ (Spätester - Frühester Anfangszeitpunkt)."
+        explanation: "Formeln und Logik im Netzplan:\n" +
+            "- Abkürzungen:\n" +
+            "  * FAZ = Frühester Anfangszeitpunkt | FEZ = Frühester Endzeitpunkt\n" +
+            "  * SAZ = Spätester Anfangszeitpunkt | SEZ = Spätester Endzeitpunkt\n" +
+            "- Vorwärtsrechnung (ermittelt FAZ und FEZ):\n" +
+            "  * FEZ = FAZ + Dauer\n" +
+            "  * FAZ(Nachfolger) = Maximum aller FEZ der Vorgänger\n" +
+            "- Rückwärtsrechnung (ermittelt SEZ und SAZ):\n" +
+            "  * SAZ = SEZ - Dauer\n" +
+            "  * SEZ(Vorgänger) = Minimum aller SAZ der Nachfolger\n" +
+            "- Pufferberechnung:\n" +
+            "  * Gesamtpuffer: GP = SAZ - FAZ  oder  GP = SEZ - FEZ"
     },
     {
         id: 92,
@@ -966,7 +1020,12 @@ const staticQuestions = [
         type: "open-text",
         question: "Prüfungsaufgabe Netzwerk (LF 3): Erkläre die genaue Funktion und die beteiligten OSI-Schichten des Protokolls ARP (Address Resolution Protocol) laut deinen Unterlagen.",
         musterloesung: "Funktion: ARP löst IP-Adressen (logische Adressen) in MAC-Adressen (physische Adressen) auf.\nBeteiligte Schichten: Layer 2 (Sicherungsschicht) und Layer 3 (Vermittlungsschicht).",
-        explanation: "ARP wird verwendet, um im lokalen Netzwerk (LAN) herauszufinden, welche MAC-Adresse zu einer bekannten IP-Adresse gehört, damit Frames adressiert werden können."
+        explanation: "Lernkarte ARP (Address Resolution Protocol):\n" +
+            "- Warum benötigt man ARP? Router und Switche im lokalen Netzwerk senden Datenrahmen (Frames) auf Layer 2 an physikalische MAC-Adressen. Die Software (z.B. Browser) kennt aber meist nur die IP-Adresse (Layer 3). ARP schließt diese Lücke.\n" +
+            "- Ablauf (ARP Request/Reply):\n" +
+            "  1. Sender schickt einen 'ARP Request' als Broadcast (an alle) ins Netz: 'Wer hat die IP-Adresse 10.4.1.57? Bitte sag mir deine MAC-Adresse!'\n" +
+            "  2. Das Zielgerät antwortet mit einem 'ARP Reply' direkt an den Sender (Unicast): 'Ich habe diese IP-Adresse, meine MAC lautet f8:e0:79:af:57:eb!'\n" +
+            "  3. Der Sender speichert diese Zuordnung im lokalen ARP-Cache, um zukünftige Anfragen zu vermeiden."
     },
     {
         id: 93,
@@ -974,7 +1033,13 @@ const staticQuestions = [
         type: "open-text",
         question: "Prüfungsaufgabe Netzwerk (LF 3): Erkläre die genaue Funktion und die beteiligten OSI-Schichten des Protokolls DNS (Domain Name System) laut deinen Unterlagen.",
         musterloesung: "Funktion: DNS löst Domänennamen (menschenlesbare Namen wie google.com) in IP-Adressen (maschinenlesbare Adressen) auf.\nBeteiligte Schichten: Layer 3 (Vermittlungsschicht) und Layer 7 (Anwendungsschicht).",
-        explanation: "DNS fungiert als das 'Telefonbuch' des Internets. Es ermöglicht den Aufruf von Websites über deren Namen statt über numerische IP-Adressen."
+        explanation: "Lernkarte DNS (Domain Name System):\n" +
+            "- Funktion: DNS übersetzt für Menschen lesbare Domains (z. B. www.gfn.de) in IP-Adressen (z. B. 193.18.23.4), die von Routern auf Layer 3 verarbeitet werden können.\n" +
+            "- Aufbau: DNS ist eine weltweit hierarchisch und dezentral verteilte Datenbank. Die Auflösung erfolgt über:\n" +
+            "  * Root-Nameserver (Wurzelserver)\n" +
+            "  * TLD-Nameserver (Top-Level-Domain, z. B. für .de, .com)\n" +
+            "  * Autoritative Nameserver (für die spezifische Domain)\n" +
+            "- Details: DNS verwendet standardmäßig Port 53 über das verbindunglose UDP-Protokoll (schneller). Bei großen Datenmengen (z. B. Zonentransfers) wird TCP genutzt."
     },
     {
         id: 94,
@@ -982,7 +1047,13 @@ const staticQuestions = [
         type: "open-text",
         question: "Prüfungsaufgabe Netzwerk (LF 3): Erkläre die genaue Funktion und die beteiligten OSI-Schichten des Protokolls DHCP (Dynamic Host Configuration Protocol) laut deinen Unterlagen.",
         musterloesung: "Funktion: DHCP verteilt automatisch verschiedene Konfigurationen (wie IP-Adresse, Subnetzmaske, Standard-Gateway und DNS-Server) an die Netzwerkteilnehmer.\nBeteiligte Schichten: Layer 3 (Vermittlungsschicht) bis Layer 7 (Anwendungsschicht).",
-        explanation: "DHCP ermöglicht die automatische Netzwerkkonfiguration von Endgeräten (Plug-and-Play), wodurch manuelle Konfigurationen und IP-Adresskonflikte vermieden werden."
+        explanation: "Lernkarte DHCP (Dynamic Host Configuration Protocol):\n" +
+            "- Nutzen: Vermeidet manuelle Konfigurationen von Hand (Fehlerquelle, Zeitaufwand) und verhindert IP-Adresskonflikte (wenn zwei Geräte versehentlich dieselbe IP erhalten).\n" +
+            "- Ablauf (DORA-Prinzip):\n" +
+            "  1. Discover: Client sendet einen Broadcast: 'Ich brauche eine IP-Konfiguration!'\n" +
+            "  2. Offer: DHCP-Server bietet eine freie IP-Adresse an.\n" +
+            "  3. Request: Client fordert dieses Angebot offiziell an.\n" +
+            "  4. Acknowledge: Server bestätigt die Zuweisung (inkl. IP, Maske, Gateway, DNS und Lease-Time [Gültigkeitsdauer der IP])."
     },
     {
         id: 95,
@@ -990,7 +1061,10 @@ const staticQuestions = [
         type: "open-text",
         question: "Prüfungsaufgabe Netzwerk (LF 3): Beschreibe den Aufbau einer MAC-Adresse (Gesamtlänge in Bit/Bytes, Darstellung und die zwei Hauptbestandteile aus den 6 Oktetten) laut deinen Unterlagen.",
         musterloesung: "Eine MAC-Adresse hat eine Gesamtlänge von 48 Bit (6 Oktette/Bytes) und wird in hexadezimaler Darstellung angegeben (z. B. f8:e0:79:af:57:eb).\nSie gliedert sich in:\n- Die ersten 3 Oktette (Bytes): OUI (Organisationally Unique Identifier), welcher weltweit eindeutig den Hersteller identifiziert.\n- Die letzten 3 Oktette (Bytes): NIC Specific (Network Interface Controller Specific), welcher die eindeutige ID der Netzwerkkarte kennzeichnet.",
-        explanation: "Die MAC-Adresse arbeitet auf OSI-Layer 2 und dient der eindeutigen Identifikation von Netzwerkteilnehmern im Ethernet."
+        explanation: "Lernkarte MAC-Adresse (Media Access Control):\n" +
+            "- Funktionsweise: MAC-Adressen sind physikalische, hardwareseitig eingebrannte Adressen von Netzwerkgeräten auf OSI-Layer 2. Im LAN kommunizieren Switche ausschließlich über MAC-Adressen, indem sie eine Source-Address-Table (SAT) pflegen.\n" +
+            "- OUI (3 Bytes): Wird von der IEEE an Hersteller vergeben (z.B. f8:e0:79 für Intel oder Apple). So lässt sich die Hardware einem Hersteller zuordnen.\n" +
+            "- NIC Specific (3 Bytes): Wird vom Hersteller fortlaufend vergeben. So wird garantiert, dass weltweit keine zwei Netzwerkkarten dieselbe MAC-Adresse besitzen."
     },
     {
         id: 96,
@@ -1004,7 +1078,11 @@ const staticQuestions = [
             "IP-Mapping-Präfix - die ersten 4 Bytes"
         ],
         correctAnswer: 0,
-        explanation: "Der OUI (Organisationally Unique Identifier) umfasst die ersten 3 Bytes (24 Bit) einer MAC-Adresse und wird vom IEEE an Hersteller vergeben."
+        explanation: "Lernkarte OUI (Organisationally Unique Identifier):\n" +
+            "- Länge: Die ersten 24 Bit (3 Bytes) einer 48-Bit MAC-Adresse.\n" +
+            "- Zweck: Identifiziert weltweit eindeutig den Hersteller der Netzwerkkarte.\n" +
+            "- Verwaltung: Wird zentral durch das IEEE (Institute of Electrical and Electronics Engineers) an Hardwarehersteller lizenziert.\n" +
+            "- Beispiel: Siehst du eine MAC-Adresse, die mit '00:05:cd' beginnt, weißt du anhand des OUI-Katalogs sofort, dass die Netzwerkkarte von Cisco Systems stammt."
     },
     {
         id: 97,
@@ -1012,7 +1090,13 @@ const staticQuestions = [
         type: "open-text",
         question: "Prüfungsaufgabe Netzwerk (LF 3): Erkläre im Aufbau des ersten Oktetts einer MAC-Adresse die Bedeutung des Bits b0 (I/G-Bit) und des Bits b1 (U/L-Bit) laut deinen Unterlagen.",
         musterloesung: "- Bit b0 (least significant bit): Bestimmt, ob es eine Unicast-Adresse (Wert 0, Übertragung an einen einzelnen Empfänger) oder eine Multicast-Adresse (Wert 1, Übertragung an eine Gruppe) ist.\n- Bit b1: Bestimmt, ob die Adresse weltweit einzigartig ist (Wert 0, globally unique / OUI enforced) oder lokal geändert/administriert wurde (Wert 1, locally administered).",
-        explanation: "Diese beiden Bits im ersten Oktett ermöglichen spezielle Netzwerk-Szenarien, wie das softwareseitige Überschreiben (Spoofing) der physikalischen MAC-Adresse."
+        explanation: "Detailliertes Hintergrundwissen zu den Bits b0 und b1:\n" +
+            "- Bit b0 (Individual/Group bit): Ist das erste übertragene Bit im ersten Oktett einer MAC-Adresse.\n" +
+            "  * 0 = Unicast: Paket ist an genau ein einziges Gerät gerichtet.\n" +
+            "  * 1 = Multicast: Paket geht an eine vordefinierte Empfängergruppe (z. B. IPv6-Multicast beginnt oft mit 33:33).\n" +
+            "- Bit b1 (Universal/Local bit): Bestimmt die Herkunft der MAC.\n" +
+            "  * 0 = Universal (Globally administered): Die MAC wurde vom Hersteller eingebrannt und der OUI ist gültig.\n" +
+            "  * 1 = Local (Locally administered): Die MAC wurde softwareseitig überschrieben. Das schützt z. B. deine Privatsphäre auf dem iPhone, da iOS beim WLAN-Scan zufällige, lokale MACs generiert (MAC-Address Randomization)."
     }
 ];
 
