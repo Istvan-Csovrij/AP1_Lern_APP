@@ -28,13 +28,15 @@ const questionCodeEl = document.getElementById("question-code");
 const answersContainer = document.getElementById("answers-container");
 const submitBtn = document.getElementById("submit-btn");
 const nextBtn = document.getElementById("next-btn");
-const prevBtn = document.getElementById("prev-btn");
 const feedbackCard = document.getElementById("feedback-card");
 const feedbackTitle = document.getElementById("feedback-title");
 const feedbackText = document.getElementById("feedback-text");
 const explanationText = document.getElementById("explanation-text");
 const themeFiltersContainer = document.getElementById("theme-filters");
-const starBtn = document.getElementById("star-btn");
+
+// Dynamic DOM elements (initialized in DOMContentLoaded to prevent null caching)
+let prevBtn;
+let starBtn;
 
 // Stat Elements
 const statCorrectEl = document.getElementById("stat-correct");
@@ -52,6 +54,8 @@ let regenerateBtn;
 document.addEventListener("DOMContentLoaded", () => {
     typeSelect = document.getElementById("question-type-select");
     regenerateBtn = document.getElementById("regenerate-btn");
+    prevBtn = document.getElementById("prev-btn");
+    starBtn = document.getElementById("star-btn");
 
     const savedMode = localStorage.getItem("ap1_type_mode") || "mix";
     if (typeSelect) typeSelect.value = savedMode;
@@ -63,7 +67,10 @@ document.addEventListener("DOMContentLoaded", () => {
     
     resetStatsBtn.addEventListener("click", resetStats);
     nextBtn.addEventListener("click", loadNextQuestion);
-    if (prevBtn) prevBtn.addEventListener("click", loadPrevQuestion);
+    
+    if (prevBtn) {
+        prevBtn.addEventListener("click", loadPrevQuestion);
+    }
     
     if (starBtn) {
         starBtn.addEventListener("click", toggleStarCurrentQuestion);
