@@ -113,6 +113,11 @@ function filterQuestions(theme) {
     // Shuffle the filtered questions to make it dynamic
     shuffleArray(filteredQuestions);
     
+    // Limit to exactly 30 questions per round
+    if (filteredQuestions.length > 30) {
+        filteredQuestions = filteredQuestions.slice(0, 30);
+    }
+    
     currentQuestionIndex = 0;
     loadQuestion();
 }
@@ -349,7 +354,7 @@ function loadNextQuestion() {
     currentQuestionIndex++;
     if (currentQuestionIndex >= filteredQuestions.length) {
         // Reshuffle and start over
-        alert("Glückwunsch! Du hast alle Fragen dieser Kategorie durchgearbeitet. Die Fragen werden neu gemischt.");
+        alert(`Glückwunsch! Du hast alle ${filteredQuestions.length} Fragen dieser Runde durchgearbeitet. Die Fragen werden neu gemischt!`);
         shuffleArray(filteredQuestions);
         currentQuestionIndex = 0;
     }
