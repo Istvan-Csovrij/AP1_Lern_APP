@@ -1526,7 +1526,7 @@ const staticQuestions = [
         theme: "lf4",
         type: "open-text",
         question: "Prüfungsaufgabe IT-Sicherheit (LF 4): Erläutere die drei klassischen Schutzziele der Informationssicherheit (CIA-Triade): Vertraulichkeit, Integrität und Verfügbarkeit.",
-        musterloesung: "1. Vertraulichkeit (Confidentiality): Daten und Informationen dürfen nur von Personen gelesen oder modifiziert werden, die dafür eine Autorisierung besitzen (Schutz vor unbefugtem Zugriff).\n2. Integrität (Integrity): Die Daten müssen korrekt, vollständig und unverändert sein. Manipulationen oder Übertragungsfehler müssen ausgeschlossen oder nachweisbar sein (Schutz vor unbefugter Änderung).\n3. Verfügbarkeit (Availability): IT-Systeme, Dienste und Daten müssen für berechtigte Benutzer zum geplanten Zeitpunkt nutzbar und funktionsfähig sein (Schutz vor Systemausfällen).",
+        musterloesung: "1. Vertraulichkeit (Confidentiality): Daten und Informationen dürfen nur von Personen gelesen oder modifiziert werden, die dafür eine Autorisierung besitzen (Schutz vor unbefugtem Zugriff).\n2. Integrität (Integrity): Die Daten müssen korrekt, vollständig und unverändert sein. Manipulationen oder Übertragungsfehler müssen ausgeschlossen oder nachweisbar sein (Schutz vor unbefugter Änderung).\n3. Verfügbarkeit (Availability): IT-Systeme, Dienste und Daten müssen für berechtigte Benutzer zum geplanten Zeitpunkt nutzbar und funktionsfähig sein (Schutz vor systemweiten Ausfällen).",
         explanation: "Lernkarte Schutzziele:\n" +
             "- Vertraulichkeit wird z. B. durch Verschlüsselung (AES) und Passwörter geschützt.\n" +
             "- Integrität wird z. B. durch Hash-Prüfsummen (SHA-256) oder digitale Signaturen gewährleistet.\n" +
@@ -1552,7 +1552,73 @@ const staticQuestions = [
         explanation: "Lernkarte Zins & Tilgung:\n" +
             "- Beim Ratendarlehen (Abzahlungsdarlehen) bleibt die Tilgungsrate konstant, während die Zinsen jährlich auf die schrumpfende Restschuld berechnet werden. Dadurch sinkt die jährliche Kreditrate (Annuität) kontinuierlich.\n" +
             "- Leasing hat den steuerlichen Vorteil, dass die Raten sofort als Betriebsausgaben abgesetzt werden können, ist aber in der Summe oft teurer als ein Bankkredit."
+    },
+    {
+        id: 136,
+        theme: "lf1",
+        type: "multiple-choice",
+        question: "Prüfungsaufgabe Rechtsformen (LF 1): Welche Aussage zur Haftung bei einer GmbH und einer Offenen Handelsgesellschaft (OHG) laut deinem Westermann-Buch ist korrekt?",
+        options: [
+            "Bei beiden haftet der Gesellschafter unbeschränkt auch mit seinem Privatvermögen.",
+            "Bei der GmbH haftet nur das Gesellschaftsvermögen, bei der OHG haften alle Gesellschafter unbeschränkt auch mit ihrem Privatvermögen.",
+            "Bei der OHG haftet nur das Gesellschaftsvermögen, bei der GmbH haften alle Gesellschafter unbeschränkt.",
+            "Bei beiden haftet der Gesellschafter nur mit seiner geleisteten Kapitaleinlage."
+        ],
+        correctAnswer: 1,
+        explanation: "Lernkarte Rechtsformen & Haftung:\n" +
+            "- GmbH (Gesellschaft mit beschränkter Haftung): Kapitalgesellschaft. Haftung ist auf das Gesellschaftsvermögen (mind. 25.000 € Stammkapital) beschränkt.\n" +
+            "- OHG (Offene Handelsgesellschaft): Personengesellschaft. Alle Gesellschafter haften unbeschränkt, persönlich, direkt und solidarisch (einer für alle, alle für einen) auch mit ihrem gesamten Privatvermögen."
+    },
+    {
+        id: 137,
+        theme: "lf1",
+        type: "open-text",
+        question: "Prüfungsaufgabe Betriebsorganisation (LF 1): Nenne den Unterschied zwischen einem Einliniensystem und einem Stabliniensystem laut deiner Westermann-Lernfelder und erläutere den Begriff 'Stabsstelle' anhand eines Beispiels.",
+        musterloesung: "- Einliniensystem: Jede Stelle hat genau einen direkten Vorgesetzten (Prinzip der Einheit der Auftragserteilung). Dienstwege sind eindeutig, können aber lang und schwerfällig sein.\n- Stabliniensystem: Ist eine Erweiterung des Einliniensystems. Linienstellen werden durch Stabsstellen unterstützt.\n- Stabsstelle: Eine Stelle ohne eigene Weisungsbefugnis. Sie hat beratende, unterstützende oder vorbereitende Aufgaben für die Leitungsebene (z. B. Assistenz der Geschäftsführung, Rechtsabteilung, IT-Sicherheitsbeauftragter).",
+        explanation: "Lernkarte Aufbauorganisation:\n" +
+            "- Vorteil Einliniensystem: Klare Kompetenzen und Verantwortlichkeiten.\n" +
+            "- Vorteil Stabliniensystem: Entlastung der Führungskräfte durch Spezialisten (Stäbe), ohne das Prinzip der eindeutigen Dienstwege aufzugeben."
+    },
+    {
+        id: 138,
+        theme: "lf1",
+        type: "multiple-choice",
+        question: "Prüfungsaufgabe Marktformen (LF 1): Welcher Marktform entspricht eine Situation, in der es viele Nachfrager (Kunden), aber nur sehr wenige Anbieter (Unternehmen) gibt (z. B. auf dem deutschen Mobilfunkmarkt) laut deinem Westermann-Lehrbuch?",
+        options: [
+            "Monopol",
+            "Angebotsoligopol",
+            "Polypol",
+            "Nachfrageoligopol (Oligopson)"
+        ],
+        correctAnswer: 1,
+        explanation: "Lernkarte Marktformen:\n" +
+            "- Monopol: Nur ein Anbieter (z. B. staatliches Postmonopol früher), viele Nachfrager.\n" +
+            "- Oligopol: Wenige Anbieter, viele Nachfrager (Angebotsoligopol) oder viele Anbieter, wenige Nachfrager (Nachfrageoligopol).\n" +
+            "- Polypol: Viele Anbieter, viele Nachfrager (vollständige Konkurrenz, z. B. auf dem Gemüsemarkt)."
+    },
+    {
+        id: 139,
+        theme: "lf1",
+        type: "open-text",
+        question: "Prüfungsaufgabe Ausbildung (LF 1): Nenne drei wesentliche gesetzliche Pflichten des Ausbildenden (Betriebs) gegenüber dem Auszubildenden laut Berufsbildungsgesetz (BBiG).",
+        musterloesung: "1. Ausbildungspflicht: Der Ausbildende muss dem Azubi die Fertigkeiten und Kenntnisse vermitteln, die zum Erreichen des Ausbildungsziels erforderlich sind.\n2. Bereitstellung von Ausbildungsmitteln: Werkzeuge, Materialien und Unterlagen (Berichtsheft) müssen kostenlos zur Verfügung gestellt werden.\n3. Freistellungspflicht: Der Azubi muss für die Berufsschule, Prüfungen und Ausbildungsmaßnahmen freigestellt werden (ohne Entgeltausfall).\n4. Vergütungspflicht: Zahlung einer angemessenen Ausbildungsvergütung.\n5. Fürsorgepflicht: Schutz vor Gefahren für Leben und Gesundheit am Arbeitsplatz.\n6. Zeugnispflicht: Ausstellung eines schriftlichen Ausbildungszeugnisses am Ende der Ausbildung.",
+        explanation: "Lernkarte Pflichten des Ausbilders (§ 14 BBiG):\n" +
+            "- Diese Pflichten stehen den Pflichten des Auszubildenden (§ 13 BBiG, z. B. Lernpflicht, Sorgfaltspflicht, Gehorsamspflicht, Berufsschulpflicht) gegenüber."
+    },
+    {
+        id: 140,
+        theme: "lf1",
+        type: "multiple-choice",
+        question: "Prüfungsaufgabe Mitbestimmung (LF 1): Ab welcher Mitarbeiterzahl kann in einem Betrieb ein Betriebsrat nach dem Betriebsverfassungsgesetz (BetrVG) gewählt werden laut deinem Westermann-Lehrbuch?",
+        options: [
+            "Ab mindestens 5 ständigen wahlberechtigten Arbeitnehmern, von denen 3 wählbar sein müssen.",
+            "Ab mindestens 20 wahlberechtigten Arbeitnehmern.",
+            "Ab mindestens 100 wahlberechtigten Arbeitnehmern.",
+            "In jedem Betrieb, unabhängig von der Mitarbeiterzahl."
+        ],
+        correctAnswer: 0,
+        explanation: "Lernkarte Betriebsratswahl (§ 1 BetrVG):\n" +
+            "- Wahlberechtigt (aktives Wahlrecht): Alle Arbeitnehmer des Betriebs, die das 18. Lebensjahr vollendet haben.\n" +
+            "- Wählbar (passives Wahlrecht): Alle wahlberechtigten Arbeitnehmer, die dem Betrieb seit mindestens 6 Monaten angehören."
     }
 ];
-
-
