@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AP1 Prüfungstrainer - Fachinformatiker</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- FontAwesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <h1><i class="fa-solid fa-graduation-cap"></i> AP1 Prüfungstrainer</h1>
+            <p>Vorbereitung auf die IHK-Abschlussprüfung Teil 1 (Fachinformatiker)</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Sidebar / Filter -->
+        <section class="sidebar">
+            <div class="card">
+                <h3><i class="fa-solid fa-filter"></i> Themenbereiche</h3>
+                <div class="theme-filters" id="theme-filters">
+                    <button class="filter-btn active" data-theme="all">Alle Themen</button>
+                    <button class="filter-btn" data-theme="lf1">LF 1: Unternehmen & Markt</button>
+                    <button class="filter-btn" data-theme="lf2">LF 2: Arbeitsplatz & Hardware</button>
+                    <button class="filter-btn" data-theme="lf3">LF 3: Netzwerke & Protokolle</button>
+                    <button class="filter-btn" data-theme="lf4">LF 4: Schutz & Sicherheit</button>
+                    <button class="filter-btn" data-theme="lf5">LF 5: Software & SQL</button>
+                    <button class="filter-btn" data-theme="lf6">LF 6: Services & WiSo</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3><i class="fa-solid fa-gear"></i> Aufgaben-Optionen</h3>
+                <div class="control-group" style="display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.5rem;">
+                    <label for="question-type-select" style="font-size: 0.9rem; color: var(--text-light); font-weight: 600;">Aufgabentyp:</label>
+                    <select id="question-type-select" class="select-input" style="width: 100%; padding: 0.75rem; border: 2px solid var(--border-color); border-radius: var(--radius); font-size: 0.95rem; color: var(--text-color); background-color: white; outline: none; transition: var(--transition); cursor: pointer;">
+                        <option value="mix">Zufälliger Mix (50/50)</option>
+                        <option value="open">Nur offene Aufgaben (BaWü)</option>
+                        <option value="standard">Nur MC & Zahleneingabe</option>
+                    </select>
+                </div>
+                <button class="btn btn-primary btn-full" id="regenerate-btn" style="margin-top: 1rem;">
+                    <i class="fa-solid fa-arrows-rotate"></i> Neu generieren
+                </button>
+            </div>
+
+            <div class="card stats-card">
+                <h3><i class="fa-solid fa-chart-simple"></i> Lernfortschritt</h3>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-num" id="stat-correct">0</span>
+                        <span class="stat-label">Richtig</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-num" id="stat-wrong">0</span>
+                        <span class="stat-label">Falsch</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-num" id="stat-total">0</span>
+                        <span class="stat-label">Gesamt</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-num" id="stat-percent">0%</span>
+                        <span class="stat-label">Erfolg</span>
+                    </div>
+                </div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar" id="progress-bar" style="width: 0%"></div>
+                </div>
+                <button class="btn btn-secondary btn-full" id="reset-stats-btn">
+                    <i class="fa-solid fa-rotate-left"></i> Statistik zurücksetzen
+                </button>
+            </div>
+        </section>
+
+        <!-- Main Content Area -->
+        <section class="quiz-area">
+            <div class="card quiz-card" id="quiz-card">
+                <div class="quiz-header">
+                    <span class="badge" id="question-theme">Lernfeld</span>
+                    <span class="question-number" id="question-number">Frage 0 von 0</span>
+                </div>
+
+                <div class="question-container">
+                    <h2 id="question-text">Lade Fragen...</h2>
+                    
+                    <!-- For Code analysis, SQL or Pseudocode -->
+                    <div id="code-block-container" class="code-block-container" style="display: none;">
+                        <pre><code id="question-code"></code></pre>
+                    </div>
+                </div>
+
+                <!-- Input options container -->
+                <div class="answers-container" id="answers-container">
+                    <!-- JavaScript will insert buttons or input fields here -->
+                </div>
+
+                <!-- Action buttons -->
+                <div class="quiz-actions">
+                    <button class="btn btn-primary" id="submit-btn" style="display: none;">
+                        <i class="fa-solid fa-circle-check"></i> Antwort prüfen
+                    </button>
+                    <button class="btn btn-primary" id="next-btn" style="display: none;">
+                        Nächste Frage <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Explanation & feedback card -->
+            <div class="card feedback-card" id="feedback-card" style="display: none;">
+                <h3 id="feedback-title">Richtig!</h3>
+                <div id="feedback-text"></div>
+                <div class="explanation-section" id="explanation-section">
+                    <h4>Erklärung:</h4>
+                    <p id="explanation-text"></p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 AP1 Prüfungstrainer - Erstellt zur Vorbereitung für Fachinformatiker Anwendungsentwicklung</p>
+    </footer>
+
+    <!-- Load the questions first, then the application logic -->
+    <script src="questions.js"></script>
+    <script src="generator.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
