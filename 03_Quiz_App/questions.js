@@ -1303,6 +1303,68 @@ const staticQuestions = [
         explanation: "Lernkarte SI vs. IEC:\n" +
             "- Warum wird man 'betrogen'? Wenn du eine 1 TB Festplatte kaufst, rechnet der Hersteller mit 1.000.000.000.000 Bytes. Windows rechnet jedoch in TiB (Teilfaktor 1.024) um und zeigt dir daher nur ca. 931 GB freie Kapazität an.\n" +
             "- Mnemotechnik: K-M-G-T (Kilo, Mega, Giga, Tera). Steht ein 'i' in der Abkürzung (KiB, MiB, GiB), teilst du durch 1.024, ansonsten durch 1.000."
+    },
+    {
+        id: 113,
+        theme: "lf3",
+        type: "open-text",
+        question: "Prüfungsaufgabe OSI-Modell (LF 3): Nenne die zwei Hauptgruppen (zusammengefasste Schichten), in die das OSI-Referenzmodell gegliedert wird, und ordne die 7 Schichten diesen Gruppen zu.",
+        musterloesung: "1. Anwendungsorientierte Schichten (Schichten 5 bis 7):\n   * Schicht 7: Anwendungsschicht (Application Layer)\n   * Schicht 6: Darstellungsschicht (Presentation Layer)\n   * Schicht 5: Sitzungsschicht (Session Layer)\n\n2. Transportorientierte / netzwerknahe Schichten (Schichten 1 bis 4):\n   * Schicht 4: Transportschicht (Transport Layer)\n   * Schicht 3: Vermittlungsschicht (Network Layer)\n   * Schicht 2: Sicherungsschicht (Data Link Layer)\n   * Schicht 1: Bitübertragungsschicht (Physical Layer)",
+        explanation: "Lernkarte OSI-Modell-Gruppen:\n" +
+            "- Die anwendungsorientierten Schichten (5-7) regeln die Dateninteraktion, Datenkodierung und Sitzungssteuerung der Applikationen.\n" +
+            "- Die transportorientierten Schichten (1-4) kümmern sich um den logischen und physikalischen Datentransport (z.B. Segmentierung, IP-Routing und Bitübertragung) durch das Netzwerk."
+    },
+    {
+        id: 114,
+        theme: "lf3",
+        type: "open-text",
+        question: "Prüfungsaufgabe Netzwerkprotokolle (LF 3): Ordne die vier Protokolle TCP, IP, UDP und IPsec den entsprechenden Schichten (Layer 1 bis 7) des OSI-Referenzmodells zu.",
+        musterloesung: "- Schicht 4 (Transportschicht): TCP (Transmission Control Protocol) und UDP (User Datagram Protocol)\n- Schicht 3 (Vermittlungsschicht): IP (Internet Protocol) und IPsec (Internet Protocol Security)\n- Schichten 7-5, Schicht 2 und Schicht 1: Keine dieser vier Protokolle arbeitet auf diesen Schichten.",
+        explanation: "Lernkarte Protokolle & Schichten:\n" +
+            "- TCP (verbindungsorientiert mit Flusskontrolle) und UDP (verbindungslos und schnell) regeln den End-zu-End-Transport auf Schicht 4.\n" +
+            "- IP regelt die logische Adressierung und das Routing von Paketen auf Schicht 3.\n" +
+            "- IPsec verschlüsselt und authentifiziert IP-Verbindungen direkt auf Schicht 3 (wird primär für sichere VPN-Verbindungen genutzt)."
+    },
+    {
+        id: 115,
+        theme: "lf3",
+        type: "open-text",
+        question: "Prüfungsaufgabe Netzwerkgeräte (LF 3): Erkläre die Funktion eines Access Points (AP) im Netzwerk laut deinen Unterlagen.",
+        musterloesung: "Ein Access Point (AP) ist ein aktives Netzwerkgerät, das als Schnittstelle (Brücke) zwischen einem kabelgebundenen Netzwerk (LAN) und drahtlosen Endgeräten (WLAN-Clients wie Smartphones oder Laptops) fungiert. Er wandelt die elektrischen Signale des Netzwerkkabels in Funksignale um und ermöglicht so den drahtlosen Geräten den Zugang zum Netzwerk und dem Internet.",
+        explanation: "Lernkarte Access Point:\n" +
+            "- Ein AP arbeitet primär auf OSI-Schicht 2 (Sicherungsschicht) und leitet Frames basierend auf MAC-Adressen weiter, ähnlich wie ein Switch.\n" +
+            "- Abgrenzung zum WLAN-Router: Ein WLAN-Router ist ein Kombi-Gerät, das einen Access Point, einen Switch und einen Router (zur Adressübersetzung/NAT ins Internet) in einem Gehäuse vereint."
+    },
+    {
+        id: 116,
+        theme: "lf3",
+        type: "open-text",
+        question: "Prüfungsaufgabe WLAN-Sicherheit (LF 3): Nenne 6 Möglichkeiten, mit denen ein drahtloses Netzwerk (WLAN) abgesichert und geschützt werden kann.",
+        musterloesung: "1. Starke Verschlüsselung aktivieren (WPA3 mit SAE oder mindestens WPA2-AES).\n2. Langes, komplexes WLAN-Passwort (WPA-Key) vergeben (Schutz vor Wörterbuch- und Brute-Force-Angriffen).\n3. WPA2/WPA3 Enterprise (IEEE 802.1X) mit RADIUS-Server für individuelle Benutzerauthentifizierung nutzen.\n4. SSID-Broadcast deaktivieren (Netzwerknamen verstecken - erschwert das Auffinden).\n5. MAC-Adressfilterung einrichten (nur bekannte MAC-Adressen von Endgeräten zulassen).\n6. WPS (Wi-Fi Protected Setup) am Router deaktivieren (Sicherheitslücke bei PIN-Eingabe).\n7. Firmware des Routers/Access Points regelmäßig aktualisieren (Sicherheitsupdates).\n8. Separates Gast-WLAN (VLAN) für Besucher einrichten.",
+        explanation: "Lernkarte WLAN-Sicherheit:\n" +
+            "- Die WPA-Verschlüsselung und ein komplexes Passwort bilden den Hauptschutz.\n" +
+            "- MAC-Filterung und das Deaktivieren des SSID-Broadcasts bieten nur geringen Schutz (sog. 'Security durch Obscurity'), da Hacker MAC-Adressen leicht klonen (speichern/fälschen) und versteckte Netzwerknamen mit Sniffer-Tools abfangen können.\n" +
+            "- WPA2/WPA3 Enterprise wird in Unternehmen verwendet, damit sich jeder Nutzer mit seinen eigenen Login-Daten statt mit einem gemeinsamen Netzwerkschlüssel anmeldet."
+    },
+    {
+        id: 117,
+        theme: "lf3",
+        type: "open-text",
+        question: "Prüfungsaufgabe WLAN-Verschlüsselung (LF 3): Erläutere die wesentlichen Verbesserungen von WPA3 gegenüber dem älteren WPA2-Standard (insbesondere bezüglich SAE und Angriffsschutz) laut deinen Unterlagen.",
+        musterloesung: "1. SAE (Simultaneous Authentication of Equals): Ersetzt das anfällige PSK-Verfahren. Endgerät und Access Point authentifizieren sich gegenseitig über Hashes, ohne dass das Passwort im Klartext übertragen werden muss.\n2. Schutz vor Wörterbuch- und Brute-Force-Angriffen: Da kein einfacher Key-Austausch abgefangen werden kann, sind Offline-Passwortangriffe (Brute-Force) nutzlos.\n3. Forward Secrecy: Selbst wenn das WLAN-Passwort nachträglich entschlüsselt oder geleakt wird, können zuvor aufgezeichnete Datenströme nicht im Nachhinein entschlüsselt werden.\n4. Schutz vor Man-in-the-Middle-Angriffen (KRACK-Lücke behoben).\n5. Stärkere Verschlüsselung: Bis zu 192-Bit-Verschlüsselung im Enterprise-Bereich.",
+        explanation: "Lernkarte WPA3 & SAE:\n" +
+            "- WPA2 (PSK) nutzt einen 4-Wege-Handshake. Fängt ein Angreifer diesen Anmeldevorgang auf, kann er das Passwort offline per Brute-Force/Wörterbuch-Datei knacken.\n" +
+            "- WPA3 (SAE) basiert auf dem Dragonfly-Schlüsselaustausch. Hierbei tauschen Geräte mathematische Beweise aus, ohne das Passwort jemals preiszugeben. Das verhindert Offline-Angriffe und garantiert Forward Secrecy."
+    },
+    {
+        id: 118,
+        theme: "lf3",
+        type: "open-text",
+        question: "Prüfungsaufgabe Subnetting (LF 3): Der IP-Adressbereich 192.168.164.0 bis 192.168.164.255 soll in 4 gleichgroße Subnetze geteilt werden. Benenne das erste und dritte Netz, nenne die Subnetzmaske und berechne die maximale Hostanzahl pro Subnetz mit Rechenweg.",
+        musterloesung: "- 1. Subnetz Netzadresse: 192.168.164.0\n- 3. Subnetz Netzadresse: 192.168.164.128\n- Subnetzmaske: 255.255.255.192 (oder /26)\n\nRechenweg Hosts:\n1. Adressen pro Netz: 256 Gesamt-Adressen / 4 Netze = 64 Adressen pro Subnetz.\n2. Host-Bits bestimmen: 64 = 2^6 -> h = 6 Hostbits.\n3. Nutzbare Hosts berechnen: 2^h - 2 (Abzug von Netzadresse und Broadcastadresse).\n4. Rechnung: 2^6 - 2 = 64 - 2 = 62 nutzbare Hosts pro Subnetz.",
+        explanation: "Lernkarte Subnetting-Rechenweg:\n" +
+            "- Subnetzmaske: 32 Gesamtbits - 6 Hostbits = 26 Netzbits (/26). Letztes Byte: 11000000 binär = 128 + 64 = 192 dezimal. Daher 255.255.255.192.\n" +
+            "- Die Netzgrenzen liegen bei .0 (1. Netz), .64 (2. Netz), .128 (3. Netz) und .192 (4. Netz)."
     }
 ];
 
