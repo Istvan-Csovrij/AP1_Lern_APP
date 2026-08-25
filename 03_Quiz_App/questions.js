@@ -1365,6 +1365,36 @@ const staticQuestions = [
         explanation: "Lernkarte Subnetting-Rechenweg:\n" +
             "- Subnetzmaske: 32 Gesamtbits - 6 Hostbits = 26 Netzbits (/26). Letztes Byte: 11000000 binär = 128 + 64 = 192 dezimal. Daher 255.255.255.192.\n" +
             "- Die Netzgrenzen liegen bei .0 (1. Netz), .64 (2. Netz), .128 (3. Netz) und .192 (4. Netz)."
+    },
+    {
+        id: 119,
+        theme: "lf3",
+        type: "open-text",
+        question: "Prüfungsaufgabe Netzwerktechnik (LF 3): Beschreibe das Konzept der Strukturierten Verkabelung (nach DIN EN 50173) und nenne die drei Verkabelungsbereiche mit den typischen Kabelmedien und den dazugehörigen Verteilern laut deinen Unterlagen.",
+        musterloesung: "- Primärbereich (Flächenverkabelung): Verbindet Gebäude untereinander. Geht vom Standortverteiler (SV) zu den Gebäudeverteilern (GV). Medium: Bevorzugt Lichtwellenleiter (LWL / Glasfaser) wegen galvanischer Trennung (Blitzschutz) und Distanzen.\n- Sekundärbereich (Steigbereich): Verbindet Stockwerke innerhalb eines Gebäudes. Geht vom Gebäudeverteiler (GV) zu den Etagenverteilern (EV). Medium: LWL oder Kupfer (Twisted Pair).\n- Tertiärbereich (Horizontalverkabelung): Verbindet den Etagenverteiler (EV) mit den Anschlussdosen (TA) in den Räumen. Medium: Fast ausschließlich Kupfer (Twisted-Pair-Kabel) bis max. 90m Kabellänge (100m inkl. Patchkabel). LWL nur in Ausnahmen.",
+        explanation: "Lernkarte Strukturierte Verkabelung:\n" +
+            "- Ziel: Zukunftssichere, herstellerunabhängige und strukturierte Gebäudeverkabelung nach DIN EN 50173, um teure Umrüstungen bei Technologiewechseln zu vermeiden.\n" +
+            "- Die Abkürzungen von deiner Folie stehen für:\n" +
+            "  * SV: Standortverteiler (Campus Distributor)\n" +
+            "  * GV: Gebäudeverteiler (Building Distributor)\n" +
+            "  * EV: Etagenverteiler (Floor Distributor)\n" +
+            "  * TA: Informationstechnischer Anschluss (Telecommunications Outlet / Dose)"
+    },
+    {
+        id: 120,
+        theme: "lf3",
+        type: "multiple-choice",
+        question: "Prüfungsaufgabe Netzwerktechnik (LF 3): Welches Kabelmedium wird im Primärbereich (Flächenverkabelung zwischen Gebäuden) der strukturierten Verkabelung bevorzugt eingesetzt und warum?",
+        options: [
+            "Lichtwellenleiter (LWL) - Wegen der galvanischen Trennung (Schutz vor Potenzialunterschieden/Blitzeinschlägen) und hoher Reichweite.",
+            "Kupferkabel (Twisted Pair Cat 7) - Weil es kostengünstiger ist und keinen Medienkonverter benötigt.",
+            "Koaxialkabel - Weil es mechanisch stabiler im Erdboden verlegt werden kann.",
+            "WLAN-Richtfunk - Weil dadurch keine Erdarbeiten zwischen den Gebäuden nötig sind."
+        ],
+        correctAnswer: 0,
+        explanation: "Lernkarte LWL im Primärbereich:\n" +
+            "- Glasfaserkabel leiten Lichtsignale statt Strom. Da sie nicht leitend sind, trennen sie die Gebäude galvanisch. Dies verhindert Stromschäden bei Blitzeinschlägen und schützt sensible Netzwerkkomponenten.\n" +
+            "- Zudem bieten LWL-Kabel eine extrem hohe Bandbreite und sehr geringe Signaldämpfung, was Übertragungsstrecken von mehreren Kilometern ermöglicht."
     }
 ];
 
