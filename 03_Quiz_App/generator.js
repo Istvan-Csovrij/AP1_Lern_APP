@@ -323,7 +323,8 @@ function generateDynamicQuestions(typeMode = "mix") {
         { name: "IP", layer: "3", layerName: "Vermittlungsschicht (Network Layer)" },
         { name: "ICMP", layer: "3", layerName: "Vermittlungsschicht (Network Layer)" },
         { name: "ARP", layer: "2", layerName: "Sicherungsschicht (Data Link Layer)" },
-        { name: "Ethernet", layer: "2", layerName: "Sicherungsschicht (Data Link Layer)" }
+        { name: "Ethernet", layer: "2", layerName: "Sicherungsschicht (Data Link Layer)" },
+        { name: "DHCP", layer: "7", layerName: "Anwendungsschicht (Application Layer)" }
     ];
     for (let i = 0; i < 60; i++) {
         const proto = osiProtocols[Math.floor(Math.random() * osiProtocols.length)];

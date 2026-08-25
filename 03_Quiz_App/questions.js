@@ -959,6 +959,60 @@ const staticQuestions = [
         ],
         correctAnswer: 0,
         explanation: "Der Gesamtpuffer ist die Zeitspanne, die ein Vorgang verschoben werden kann, ohne das Projektende zu verzögern. Formel: GP = SAZ - FAZ (Spätester - Frühester Anfangszeitpunkt)."
+    },
+    {
+        id: 92,
+        theme: "lf3",
+        type: "open-text",
+        question: "Prüfungsaufgabe Netzwerk (LF 3): Erkläre die genaue Funktion und die beteiligten OSI-Schichten des Protokolls ARP (Address Resolution Protocol) laut deinen Unterlagen.",
+        musterloesung: "Funktion: ARP löst IP-Adressen (logische Adressen) in MAC-Adressen (physische Adressen) auf.\nBeteiligte Schichten: Layer 2 (Sicherungsschicht) und Layer 3 (Vermittlungsschicht).",
+        explanation: "ARP wird verwendet, um im lokalen Netzwerk (LAN) herauszufinden, welche MAC-Adresse zu einer bekannten IP-Adresse gehört, damit Frames adressiert werden können."
+    },
+    {
+        id: 93,
+        theme: "lf3",
+        type: "open-text",
+        question: "Prüfungsaufgabe Netzwerk (LF 3): Erkläre die genaue Funktion und die beteiligten OSI-Schichten des Protokolls DNS (Domain Name System) laut deinen Unterlagen.",
+        musterloesung: "Funktion: DNS löst Domänennamen (menschenlesbare Namen wie google.com) in IP-Adressen (maschinenlesbare Adressen) auf.\nBeteiligte Schichten: Layer 3 (Vermittlungsschicht) und Layer 7 (Anwendungsschicht).",
+        explanation: "DNS fungiert als das 'Telefonbuch' des Internets. Es ermöglicht den Aufruf von Websites über deren Namen statt über numerische IP-Adressen."
+    },
+    {
+        id: 94,
+        theme: "lf3",
+        type: "open-text",
+        question: "Prüfungsaufgabe Netzwerk (LF 3): Erkläre die genaue Funktion und die beteiligten OSI-Schichten des Protokolls DHCP (Dynamic Host Configuration Protocol) laut deinen Unterlagen.",
+        musterloesung: "Funktion: DHCP verteilt automatisch verschiedene Konfigurationen (wie IP-Adresse, Subnetzmaske, Standard-Gateway und DNS-Server) an die Netzwerkteilnehmer.\nBeteiligte Schichten: Layer 3 (Vermittlungsschicht) bis Layer 7 (Anwendungsschicht).",
+        explanation: "DHCP ermöglicht die automatische Netzwerkkonfiguration von Endgeräten (Plug-and-Play), wodurch manuelle Konfigurationen und IP-Adresskonflikte vermieden werden."
+    },
+    {
+        id: 95,
+        theme: "lf3",
+        type: "open-text",
+        question: "Prüfungsaufgabe Netzwerk (LF 3): Beschreibe den Aufbau einer MAC-Adresse (Gesamtlänge in Bit/Bytes, Darstellung und die zwei Hauptbestandteile aus den 6 Oktetten) laut deinen Unterlagen.",
+        musterloesung: "Eine MAC-Adresse hat eine Gesamtlänge von 48 Bit (6 Oktette/Bytes) und wird in hexadezimaler Darstellung angegeben (z. B. f8:e0:79:af:57:eb).\nSie gliedert sich in:\n- Die ersten 3 Oktette (Bytes): OUI (Organisationally Unique Identifier), welcher weltweit eindeutig den Hersteller identifiziert.\n- Die letzten 3 Oktette (Bytes): NIC Specific (Network Interface Controller Specific), welcher die eindeutige ID der Netzwerkkarte kennzeichnet.",
+        explanation: "Die MAC-Adresse arbeitet auf OSI-Layer 2 und dient der eindeutigen Identifikation von Netzwerkteilnehmern im Ethernet."
+    },
+    {
+        id: 96,
+        theme: "lf3",
+        type: "multiple-choice",
+        question: "Prüfungsaufgabe Netzwerk (LF 3): Welcher Teil einer MAC-Adresse identifiziert weltweit eindeutig den Hersteller des Netzwerkadapters?",
+        options: [
+            "OUI (Organisationally Unique Identifier) - die ersten 3 Bytes",
+            "NIC Specific - die letzten 3 Bytes",
+            "MAC Header - das erste Byte",
+            "IP-Mapping-Präfix - die ersten 4 Bytes"
+        ],
+        correctAnswer: 0,
+        explanation: "Der OUI (Organisationally Unique Identifier) umfasst die ersten 3 Bytes (24 Bit) einer MAC-Adresse und wird vom IEEE an Hersteller vergeben."
+    },
+    {
+        id: 97,
+        theme: "lf3",
+        type: "open-text",
+        question: "Prüfungsaufgabe Netzwerk (LF 3): Erkläre im Aufbau des ersten Oktetts einer MAC-Adresse die Bedeutung des Bits b0 (I/G-Bit) und des Bits b1 (U/L-Bit) laut deinen Unterlagen.",
+        musterloesung: "- Bit b0 (least significant bit): Bestimmt, ob es eine Unicast-Adresse (Wert 0, Übertragung an einen einzelnen Empfänger) oder eine Multicast-Adresse (Wert 1, Übertragung an eine Gruppe) ist.\n- Bit b1: Bestimmt, ob die Adresse weltweit einzigartig ist (Wert 0, globally unique / OUI enforced) oder lokal geändert/administriert wurde (Wert 1, locally administered).",
+        explanation: "Diese beiden Bits im ersten Oktett ermöglichen spezielle Netzwerk-Szenarien, wie das softwareseitige Überschreiben (Spoofing) der physikalischen MAC-Adresse."
     }
 ];
 
