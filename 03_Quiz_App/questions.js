@@ -1252,6 +1252,17 @@ const staticQuestions = [
             "- Netzadresse: Identifiziert das gesamte Netzwerk (alle Hostbits sind binär 0). Ungeeignet für Geräte.\n" +
             "- Broadcastadresse: Dient zum Senden von Rundrufen an alle Geräte im Netz (alle Hostbits sind binär 1, hier: 192.168.10.255). Ungeeignet für Einzelgeräte.\n" +
             "- Loopback-Bereich (127.0.0.0 bis 127.255.255.255): Ist für den localhost reserviert. Pakete an diese IP verlassen die Netzwerkkarte nie."
+    },
+    {
+        id: 108,
+        theme: "lf3",
+        type: "open-text",
+        question: "Prüfungsaufgabe Netzwerktechnik (LF 3): Erkläre das Einsatzszenario sowie die Funktionsweise und Einschränkungen des Übergangsverfahrens DS-Lite (Dual Stack Lite) laut deinen Unterlagen.",
+        musterloesung: "Einsatzszenario: Ermöglicht Geräten mit einem reinen IPv6-Anschluss (z.B. bei modernen Glasfaser- oder Kabelanschlüssen) den Zugriff auf das ältere IPv4-Internet.\n\nFunktionsweise:\n1. Die IPv4-Datenpakete des Endgeräts werden in IPv6-Pakete verpackt (getunnelt).\n2. Diese Pakete werden über das reine IPv6-Netz des Providers transportiert.\n3. Beim Provider werden die Pakete entpackt und über eine zentrale IPv4-Adresse (Carrier-Grade NAT / CGNAT) ins IPv4-Internet geleitet.\n\nEinschränkung: Da der Kunde keine eigene öffentliche IPv4-Adresse besitzt, ist eine direkte IPv4-Portfreigabe von außen (z.B. für ein Heim-NAS oder VPN) nicht ohne weiteres möglich.",
+        explanation: "Lernkarte DS-Lite (Dual Stack Lite):\n" +
+            "- Warum DS-Lite? Da IPv4-Adressen knapp sind, vergeben Provider an Neukunden oft nur noch eine echte IPv6-Adresse. Damit der Kunde trotzdem IPv4-Websites aufrufen kann, wird DS-Lite verwendet.\n" +
+            "- AFTR-Gateway: Der Router beim Provider, der die Pakete entpackt und übersetzt, heißt AFTR (Address Family Transition Router).\n" +
+            "- Portfreigaben: Während IPv4-Portfreigaben blockiert sind, funktionieren IPv6-Verbindungen von außen (z. B. auf ein IPv6-fähiges Gerät zu Hause) problemlos direkt."
     }
 ];
 
