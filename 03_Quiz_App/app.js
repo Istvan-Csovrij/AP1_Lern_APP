@@ -8,6 +8,10 @@ let currentQuestionIndex = 0;
 let starredStaticIds = JSON.parse(localStorage.getItem("ap1_starred_static_ids")) || [];
 let starredDynamicObjects = JSON.parse(localStorage.getItem("ap1_starred_dynamic_objects")) || [];
 
+// Active session persistence to resume quiz after checking bookmarks
+let savedNormalRound = null;
+let currentTheme = "all";
+
 // Answer state for the current round
 let answeredQuestions = [];
 let userAnswers = [];
@@ -37,6 +41,7 @@ const themeFiltersContainer = document.getElementById("theme-filters");
 // Dynamic DOM elements (initialized in DOMContentLoaded to prevent null caching)
 let prevBtn;
 let starBtn;
+let resumeQuizBtn;
 
 // Stat Elements
 const statCorrectEl = document.getElementById("stat-correct");
@@ -56,6 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
     regenerateBtn = document.getElementById("regenerate-btn");
     prevBtn = document.getElementById("prev-btn");
     starBtn = document.getElementById("star-btn");
+    resumeQuizBtn = document.getElementById("resume-quiz-btn");
 
     const savedMode = localStorage.getItem("ap1_type_mode") || "mix";
     if (typeSelect) typeSelect.value = savedMode;
@@ -74,6 +80,10 @@ document.addEventListener("DOMContentLoaded", () => {
     
     if (starBtn) {
         starBtn.addEventListener("click", toggleStarCurrentQuestion);
+    }
+    
+    if (resumeQuizBtn) {
+        resumeQuizBtn.addEventListener("click", resumeNormalQuizRound);
     }
     
     if (regenerateBtn) {
@@ -127,6 +137,21 @@ function setupThemeFilters() {
 // Filter questions based on category (including Favorites)
 function filterQuestions(theme) {
     if (theme === "favorites") {
+        // Save current round if we are coming from a normal theme and have active questions
+        if (currentTheme !== "favorites" && filteredQuestions.length > 0) {
+            savedNormalRound = {
+                filteredQuestions: [...filteredQuestions],
+                currentQuestionIndex: currentQuestionIndex,
+                answeredQuestions: [...answeredQuestions],
+                userAnswers: [...userAnswers],
+                theme: currentTheme
+            };
+            if (resumeQuizBtn) {
+                resumeQuizBtn.style.display = "inline-flex";
+                resumeQuizBtn.innerHTML = `<i class="fa-solid fa-arrow-left"></i> Haupt-Quiz fortsetzen (Fr. ${currentQuestionIndex + 1})`;
+            }
+        }
+        
         const starredStatics = staticQuestions.filter(q => starredStaticIds.includes(q.id));
         const starredDynamics = [...starredDynamicObjects];
         filteredQuestions = [...starredStatics, ...starredDynamics];
@@ -145,6 +170,10 @@ function filterQuestions(theme) {
             if (starBtn) starBtn.style.display = "inline-flex";
         }
     } else {
+        // If they click on another theme filter, we discard the saved round
+        savedNormalRound = null;
+        if (resumeQuizBtn) resumeQuizBtn.style.display = "none";
+        
         if (starBtn) starBtn.style.display = "inline-flex";
         if (theme === "all") {
             filteredQuestions = [...questions];
@@ -152,6 +181,8 @@ function filterQuestions(theme) {
             filteredQuestions = questions.filter(q => q.theme === theme);
         }
     }
+    
+    currentTheme = theme;
     
     // Shuffle the filtered questions to make it dynamic
     shuffleArray(filteredQuestions);
@@ -166,6 +197,33 @@ function filterQuestions(theme) {
     userAnswers = new Array(filteredQuestions.length).fill(null);
     
     currentQuestionIndex = 0;
+    loadQuestion();
+}
+
+// Resume the saved normal round
+function resumeNormalQuizRound() {
+    if (!savedNormalRound) return;
+    
+    // Restore the saved round variables
+    filteredQuestions = [...savedNormalRound.filteredQuestions];
+    currentQuestionIndex = savedNormalRound.currentQuestionIndex;
+    answeredQuestions = [...savedNormalRound.answeredQuestions];
+    userAnswers = [...savedNormalRound.userAnswers];
+    currentTheme = savedNormalRound.theme;
+    
+    // Update sidebar filters active state
+    const filterButtons = themeFiltersContainer.querySelectorAll(".filter-btn");
+    filterButtons.forEach(btn => {
+        btn.classList.remove("active");
+        if (btn.getAttribute("data-theme") === currentTheme) {
+            btn.classList.add("active");
+        }
+    });
+    
+    // Clear saved round state
+    savedNormalRound = null;
+    if (resumeQuizBtn) resumeQuizBtn.style.display = "none";
+    
     loadQuestion();
 }
 
