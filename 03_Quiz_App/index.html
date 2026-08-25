@@ -107,13 +107,23 @@
                 </div>
 
                 <!-- Action buttons -->
-                <div class="quiz-actions">
-                    <button class="btn btn-primary" id="submit-btn" style="display: none;">
-                        <i class="fa-solid fa-circle-check"></i> Antwort prüfen
+                <div class="quiz-actions" style="display: flex; gap: 0.5rem; justify-content: space-between; align-items: center; width: 100%; margin-top: 1.5rem;">
+                    <button class="btn btn-secondary" id="prev-btn" style="display: inline-flex; align-items: center; gap: 0.25rem;">
+                        <i class="fa-solid fa-arrow-left"></i> Zurück
                     </button>
-                    <button class="btn btn-primary" id="next-btn" style="display: none;">
-                        Nächste Frage <i class="fa-solid fa-arrow-right"></i>
+                    <div>
+                        <button class="btn btn-primary" id="submit-btn" style="display: none;">
+                            <i class="fa-solid fa-circle-check"></i> Antwort prüfen
+                        </button>
+                    </div>
+                    <button class="btn btn-secondary" id="next-btn" style="display: inline-flex; align-items: center; gap: 0.25rem;">
+                        Nächste <i class="fa-solid fa-arrow-right"></i>
                     </button>
+                </div>
+
+                <!-- Navigation grid container -->
+                <div class="question-grid" id="question-grid" style="display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; margin-top: 1.5rem; padding: 1rem; border-top: 1px solid var(--border-color);">
+                    <!-- Numbers will be generated here -->
                 </div>
             </div>
 

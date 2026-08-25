@@ -8,6 +8,10 @@ let currentQuestionIndex = 0;
 let starredStaticIds = JSON.parse(localStorage.getItem("ap1_starred_static_ids")) || [];
 let starredDynamicObjects = JSON.parse(localStorage.getItem("ap1_starred_dynamic_objects")) || [];
 
+// Answer state for the current round
+let answeredQuestions = [];
+let userAnswers = [];
+
 // Stats object
 let stats = {
     correct: 0,
@@ -24,6 +28,7 @@ const questionCodeEl = document.getElementById("question-code");
 const answersContainer = document.getElementById("answers-container");
 const submitBtn = document.getElementById("submit-btn");
 const nextBtn = document.getElementById("next-btn");
+const prevBtn = document.getElementById("prev-btn");
 const feedbackCard = document.getElementById("feedback-card");
 const feedbackTitle = document.getElementById("feedback-title");
 const feedbackText = document.getElementById("feedback-text");
@@ -58,6 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
     
     resetStatsBtn.addEventListener("click", resetStats);
     nextBtn.addEventListener("click", loadNextQuestion);
+    if (prevBtn) prevBtn.addEventListener("click", loadPrevQuestion);
     
     if (starBtn) {
         starBtn.addEventListener("click", toggleStarCurrentQuestion);
@@ -125,6 +131,8 @@ function filterQuestions(theme) {
             codeBlockContainer.style.display = "none";
             answersContainer.innerHTML = "";
             if (starBtn) starBtn.style.display = "none";
+            const gridContainer = document.getElementById("question-grid");
+            if (gridContainer) gridContainer.innerHTML = "";
             return;
         } else {
             if (starBtn) starBtn.style.display = "inline-flex";
@@ -145,6 +153,10 @@ function filterQuestions(theme) {
     if (theme !== "favorites" && filteredQuestions.length > 30) {
         filteredQuestions = filteredQuestions.slice(0, 30);
     }
+    
+    // Reset answers state for the current round
+    answeredQuestions = new Array(filteredQuestions.length).fill(false);
+    userAnswers = new Array(filteredQuestions.length).fill(null);
     
     currentQuestionIndex = 0;
     loadQuestion();
@@ -198,6 +210,7 @@ function toggleStarCurrentQuestion() {
     localStorage.setItem("ap1_starred_dynamic_objects", JSON.stringify(starredDynamicObjects));
     
     updateStarBtnUI();
+    renderQuestionGrid();
 }
 
 // Update star button appearance
@@ -214,6 +227,57 @@ function updateStarBtnUI() {
         starIcon.className = "fa-regular fa-star";
         starBtn.style.color = "#a0aec0";
     }
+}
+
+// Render the navigation grid showing status of all 30 questions
+function renderQuestionGrid() {
+    const gridContainer = document.getElementById("question-grid");
+    if (!gridContainer || filteredQuestions.length === 0) return;
+    gridContainer.innerHTML = "";
+    
+    filteredQuestions.forEach((q, idx) => {
+        const item = document.createElement("button");
+        item.className = "grid-item";
+        item.textContent = idx + 1;
+        item.style.width = "2.2rem";
+        item.style.height = "2.2rem";
+        item.style.borderRadius = "6px";
+        item.style.border = "none";
+        item.style.fontSize = "0.95rem";
+        item.style.fontWeight = "bold";
+        item.style.cursor = "pointer";
+        item.style.display = "flex";
+        item.style.alignItems = "center";
+        item.style.justifyContent = "center";
+        item.style.transition = "all 0.2s";
+        
+        const isAnswered = answeredQuestions[idx];
+        const isStarred = isQuestionStarred(q);
+        const isActive = idx === currentQuestionIndex;
+        
+        if (isActive) {
+            item.style.boxShadow = "0 0 0 3px #3182ce"; // Blue active ring
+        }
+        
+        if (isStarred) {
+            item.style.backgroundColor = "#feb2b2"; // Red background for marked/starred questions
+            item.style.color = "#9b2c2c";
+            item.style.border = "2px solid #e53e3e";
+        } else if (isAnswered) {
+            item.style.backgroundColor = "#4a5568"; // Dark grey for answered
+            item.style.color = "white";
+        } else {
+            item.style.backgroundColor = "#edf2f7"; // Light grey for unanswered (hell)
+            item.style.color = "#4a5568";
+        }
+        
+        item.onclick = () => {
+            currentQuestionIndex = idx;
+            loadQuestion();
+        };
+        
+        gridContainer.appendChild(item);
+    });
 }
 
 // Load current question to UI
@@ -235,10 +299,21 @@ function loadQuestion() {
         if (starBtn) starBtn.style.display = "inline-flex";
     }
     
+    // Update navigation buttons status
+    if (prevBtn) {
+        prevBtn.disabled = currentQuestionIndex === 0;
+        prevBtn.style.opacity = currentQuestionIndex === 0 ? "0.5" : "1";
+        prevBtn.style.cursor = currentQuestionIndex === 0 ? "not-allowed" : "pointer";
+    }
+    
     const q = filteredQuestions[currentQuestionIndex];
+    const isAnswered = answeredQuestions[currentQuestionIndex];
     
     // Update star button icon state
     updateStarBtnUI();
+    
+    // Render question grid dashboard
+    renderQuestionGrid();
     
     // Update headers
     questionThemeEl.textContent = getThemeLabel(q.theme);
@@ -255,53 +330,139 @@ function loadQuestion() {
     
     answersContainer.innerHTML = "";
     
-    // Render answer input based on type
-    if (q.type === "multiple-choice" || q.type === "true-false") {
-        q.options.forEach((opt, idx) => {
-            const btn = document.createElement("button");
-            btn.className = "answer-option";
-            btn.innerHTML = `<span class="opt-marker"><i class="fa-regular fa-circle"></i></span> ${escapeHtml(opt)}`;
-            btn.addEventListener("click", () => handleSelectOption(btn, idx));
-            answersContainer.appendChild(btn);
-        });
-    } else if (q.type === "text-input") {
-        const inputContainer = document.createElement("div");
-        inputContainer.className = "text-answer-container";
+    if (isAnswered) {
+        // Restore answered state
+        const ans = userAnswers[currentQuestionIndex];
         
-        const input = document.createElement("input");
-        input.type = "text";
-        input.className = "text-input";
-        input.placeholder = "Gib deine Antwort ein...";
-        input.id = "text-answer-input";
+        if (q.type === "multiple-choice" || q.type === "true-false") {
+            q.options.forEach((opt, idx) => {
+                const btn = document.createElement("button");
+                btn.className = "answer-option disabled";
+                
+                const isSelected = idx === ans.selectedIndex;
+                const isCorrect = idx === q.correctAnswer;
+                
+                if (isCorrect) {
+                    btn.classList.add("correct");
+                    btn.innerHTML = `<span class="opt-marker"><i class="fa-solid fa-circle-check"></i></span> ${escapeHtml(opt)}`;
+                } else if (isSelected) {
+                    btn.classList.add("wrong");
+                    btn.innerHTML = `<span class="opt-marker"><i class="fa-solid fa-circle-xmark"></i></span> ${escapeHtml(opt)}`;
+                } else {
+                    btn.innerHTML = `<span class="opt-marker"><i class="fa-regular fa-circle"></i></span> ${escapeHtml(opt)}`;
+                }
+                answersContainer.appendChild(btn);
+            });
+            showFeedback(ans.isCorrect, q.explanation);
+        } else if (q.type === "text-input") {
+            const inputContainer = document.createElement("div");
+            inputContainer.className = "text-answer-container";
+            
+            const input = document.createElement("input");
+            input.type = "text";
+            input.className = `text-input ${ans.isCorrect ? 'correct' : 'wrong'}`;
+            input.value = ans.userAnswer;
+            input.disabled = true;
+            
+            inputContainer.appendChild(input);
+            answersContainer.appendChild(inputContainer);
+            
+            const correctText = ans.isCorrect ? "" : `Richtige Antwort(en): ${q.correctAnswers.join(" oder ")}`;
+            showFeedback(ans.isCorrect, q.explanation, correctText);
+        } else if (q.type === "open-text") {
+            const modelAnswerTitle = document.createElement("div");
+            modelAnswerTitle.className = "model-answer-title";
+            modelAnswerTitle.innerHTML = "<strong>Vergleich mit der Musterlösung:</strong>";
+            
+            const modelAnswerBody = document.createElement("div");
+            modelAnswerBody.className = "model-answer-body";
+            modelAnswerBody.innerHTML = `
+                <div class="user-typed-preview">
+                    <strong>Deine Antwort:</strong><br>
+                    ${escapeHtml(ans.typed).replace(/\n/g, "<br>")}
+                </div>
+                <div class="musterloesung-text">
+                    <strong>Musterlösung:</strong><br>
+                    ${escapeHtml(q.musterloesung).replace(/\n/g, "<br>")}
+                </div>
+            `;
+            
+            const statusText = document.createElement("div");
+            statusText.style.fontWeight = "bold";
+            statusText.style.marginTop = "1rem";
+            statusText.style.textAlign = "center";
+            statusText.style.color = ans.isCorrect ? "#2f855a" : "#c53030";
+            statusText.innerHTML = ans.isCorrect 
+                ? '<i class="fa-solid fa-circle-check"></i> Du hast diese Antwort als RICHTIG bewertet.' 
+                : '<i class="fa-solid fa-circle-xmark"></i> Du hast diese Antwort als FALSCH bewertet.';
+            
+            answersContainer.appendChild(modelAnswerTitle);
+            answersContainer.appendChild(modelAnswerBody);
+            answersContainer.appendChild(statusText);
+            
+            showFeedback(ans.isCorrect, q.explanation, ans.isCorrect ? "Du hattest diese Frage gewusst." : "Du hattest diese Frage nicht gewusst.");
+        }
         
-        // Listen to Enter key
-        input.addEventListener("keypress", (e) => {
-            if (e.key === "Enter") {
-                checkTextInputAnswer(input.value.trim());
-            }
-        });
-        
-        inputContainer.appendChild(input);
-        answersContainer.appendChild(inputContainer);
-        
-        submitBtn.style.display = "inline-flex";
-        submitBtn.innerHTML = '<i class="fa-solid fa-circle-check"></i> Antwort prüfen';
-        submitBtn.onclick = () => checkTextInputAnswer(input.value.trim());
-    } else if (q.type === "open-text") {
-        const inputContainer = document.createElement("div");
-        inputContainer.className = "text-answer-container";
-        
-        const textarea = document.createElement("textarea");
-        textarea.className = "text-input open-textarea";
-        textarea.placeholder = "Schreibe deine Antwort hier...";
-        textarea.id = "open-text-input";
-        
-        inputContainer.appendChild(textarea);
-        answersContainer.appendChild(inputContainer);
-        
-        submitBtn.style.display = "inline-flex";
-        submitBtn.innerHTML = '<i class="fa-solid fa-eye"></i> Musterlösung anzeigen';
-        submitBtn.onclick = () => showOpenTextSolution();
+        // Show Next button
+        nextBtn.style.display = "inline-flex";
+        nextBtn.innerHTML = 'Nächste <i class="fa-solid fa-arrow-right"></i>';
+    } else {
+        // Render empty state to be answered
+        if (q.type === "multiple-choice" || q.type === "true-false") {
+            q.options.forEach((opt, idx) => {
+                const btn = document.createElement("button");
+                btn.className = "answer-option";
+                btn.innerHTML = `<span class="opt-marker"><i class="fa-regular fa-circle"></i></span> ${escapeHtml(opt)}`;
+                btn.addEventListener("click", () => handleSelectOption(btn, idx));
+                answersContainer.appendChild(btn);
+            });
+            // For MC, skip serves as next
+            nextBtn.style.display = "inline-flex";
+            nextBtn.innerHTML = 'Überspringen <i class="fa-solid fa-angles-right"></i>';
+        } else if (q.type === "text-input") {
+            const inputContainer = document.createElement("div");
+            inputContainer.className = "text-answer-container";
+            
+            const input = document.createElement("input");
+            input.type = "text";
+            input.className = "text-input";
+            input.placeholder = "Gib deine Antwort ein...";
+            input.id = "text-answer-input";
+            
+            input.addEventListener("keypress", (e) => {
+                if (e.key === "Enter") {
+                    checkTextInputAnswer(input.value.trim());
+                }
+            });
+            
+            inputContainer.appendChild(input);
+            answersContainer.appendChild(inputContainer);
+            
+            submitBtn.style.display = "inline-flex";
+            submitBtn.innerHTML = '<i class="fa-solid fa-circle-check"></i> Antwort prüfen';
+            submitBtn.onclick = () => checkTextInputAnswer(input.value.trim());
+            
+            nextBtn.style.display = "inline-flex";
+            nextBtn.innerHTML = 'Überspringen <i class="fa-solid fa-angles-right"></i>';
+        } else if (q.type === "open-text") {
+            const inputContainer = document.createElement("div");
+            inputContainer.className = "text-answer-container";
+            
+            const textarea = document.createElement("textarea");
+            textarea.className = "text-input open-textarea";
+            textarea.placeholder = "Schreibe deine Antwort hier...";
+            textarea.id = "open-text-input";
+            
+            inputContainer.appendChild(textarea);
+            answersContainer.appendChild(inputContainer);
+            
+            submitBtn.style.display = "inline-flex";
+            submitBtn.innerHTML = '<i class="fa-solid fa-eye"></i> Musterlösung anzeigen';
+            submitBtn.onclick = () => showOpenTextSolution();
+            
+            nextBtn.style.display = "inline-flex";
+            nextBtn.innerHTML = 'Überspringen <i class="fa-solid fa-angles-right"></i>';
+        }
     }
 }
 
@@ -310,10 +471,15 @@ function handleSelectOption(selectedBtn, selectedIndex) {
     const q = filteredQuestions[currentQuestionIndex];
     const allOptions = answersContainer.querySelectorAll(".answer-option");
     
-    // Disable clicking other options
     allOptions.forEach(opt => opt.classList.add("disabled"));
     
     const isCorrect = selectedIndex === q.correctAnswer;
+    
+    answeredQuestions[currentQuestionIndex] = true;
+    userAnswers[currentQuestionIndex] = {
+        selectedIndex: selectedIndex,
+        isCorrect: isCorrect
+    };
     
     if (isCorrect) {
         selectedBtn.classList.add("correct");
@@ -324,7 +490,6 @@ function handleSelectOption(selectedBtn, selectedIndex) {
         selectedBtn.classList.add("wrong");
         selectedBtn.querySelector(".opt-marker").innerHTML = '<i class="fa-solid fa-circle-xmark"></i>';
         
-        // Show the correct answer in green
         const correctBtn = allOptions[q.correctAnswer];
         correctBtn.classList.add("correct");
         correctBtn.querySelector(".opt-marker").innerHTML = '<i class="fa-solid fa-circle-check"></i>';
@@ -333,7 +498,8 @@ function handleSelectOption(selectedBtn, selectedIndex) {
         showFeedback(false, q.explanation);
     }
     
-    nextBtn.style.display = "inline-flex";
+    nextBtn.innerHTML = 'Nächste <i class="fa-solid fa-arrow-right"></i>';
+    renderQuestionGrid();
 }
 
 // Check text input answer
@@ -345,12 +511,16 @@ function checkTextInputAnswer(userAnswer) {
     input.disabled = true;
     submitBtn.style.display = "none";
     
-    // Compare answers case-insensitively and ignore extra whitespace
     const normalizedUser = userAnswer.toLowerCase().replace(/\s+/g, "");
-    
     const isCorrect = q.correctAnswers.some(ans => 
         ans.toLowerCase().replace(/\s+/g, "") === normalizedUser
     );
+    
+    answeredQuestions[currentQuestionIndex] = true;
+    userAnswers[currentQuestionIndex] = {
+        userAnswer: userAnswer,
+        isCorrect: isCorrect
+    };
     
     if (isCorrect) {
         input.classList.add("correct");
@@ -360,12 +530,12 @@ function checkTextInputAnswer(userAnswer) {
         input.classList.add("wrong");
         updateScore(false);
         
-        // Display the correct answer
         const correctText = `Richtige Antwort(en): ${q.correctAnswers.join(" oder ")}`;
         showFeedback(false, q.explanation, correctText);
     }
     
-    nextBtn.style.display = "inline-flex";
+    nextBtn.innerHTML = 'Nächste <i class="fa-solid fa-arrow-right"></i>';
+    renderQuestionGrid();
 }
 
 // Show the model solution for open text questions and render rating buttons
@@ -374,9 +544,9 @@ function showOpenTextSolution() {
     const textarea = document.getElementById("open-text-input");
     const userAnswer = textarea.value.trim() || "(Keine Antwort eingegeben)";
     
-    // Clear the inputs to show model answer and rating buttons
     answersContainer.innerHTML = "";
     submitBtn.style.display = "none";
+    nextBtn.style.display = "none"; // Hide Skip while self-grading
     
     const modelAnswerTitle = document.createElement("div");
     modelAnswerTitle.className = "model-answer-title";
@@ -397,16 +567,23 @@ function showOpenTextSolution() {
     
     const ratingContainer = document.createElement("div");
     ratingContainer.className = "rating-container";
+    ratingContainer.style.display = "flex";
+    ratingContainer.style.gap = "0.5rem";
+    ratingContainer.style.marginTop = "1rem";
     
     const correctBtn = document.createElement("button");
     correctBtn.className = "btn btn-correct";
+    correctBtn.style.backgroundColor = "#48bb78";
+    correctBtn.style.color = "white";
     correctBtn.innerHTML = '<i class="fa-solid fa-check"></i> Hatte ich gewusst (Richtig)';
-    correctBtn.onclick = () => handleOpenTextResult(true, q.explanation);
+    correctBtn.onclick = () => handleOpenTextResult(true, userAnswer);
     
     const wrongBtn = document.createElement("button");
     wrongBtn.className = "btn btn-wrong";
+    wrongBtn.style.backgroundColor = "#f56565";
+    wrongBtn.style.color = "white";
     wrongBtn.innerHTML = '<i class="fa-solid fa-xmark"></i> Nicht gewusst (Falsch)';
-    wrongBtn.onclick = () => handleOpenTextResult(false, q.explanation);
+    wrongBtn.onclick = () => handleOpenTextResult(false, userAnswer);
     
     ratingContainer.appendChild(correctBtn);
     ratingContainer.appendChild(wrongBtn);
@@ -417,13 +594,23 @@ function showOpenTextSolution() {
 }
 
 // Handle self-graded open-text result
-function handleOpenTextResult(isCorrect, explanation) {
+function handleOpenTextResult(isCorrect, userAnswer) {
+    const q = filteredQuestions[currentQuestionIndex];
     answersContainer.innerHTML = "";
+    
+    answeredQuestions[currentQuestionIndex] = true;
+    userAnswers[currentQuestionIndex] = {
+        typed: userAnswer,
+        isCorrect: isCorrect
+    };
+    
     updateScore(isCorrect);
-    showFeedback(isCorrect, explanation, isCorrect ? "Sehr gut! Du hast deine Antwort als richtig bewertet." : "Kein Problem! Verinnerliche die Musterlösung für das nächste Mal.");
+    showFeedback(isCorrect, q.explanation, isCorrect ? "Sehr gut! Du hast deine Antwort als richtig bewertet." : "Kein Problem! Verinnerliche die Musterlösung für das nächste Mal.");
+    
     nextBtn.style.display = "inline-flex";
+    nextBtn.innerHTML = 'Nächste <i class="fa-solid fa-arrow-right"></i>';
+    renderQuestionGrid();
 }
-
 
 // Show feedback details
 function showFeedback(isCorrect, explanation, extraText = "") {
@@ -443,14 +630,20 @@ function showFeedback(isCorrect, explanation, extraText = "") {
 
 // Load next question
 function loadNextQuestion() {
-    currentQuestionIndex++;
-    if (currentQuestionIndex >= filteredQuestions.length) {
-        // Reshuffle and start over
-        alert(`Glückwunsch! Du hast alle ${filteredQuestions.length} Fragen dieser Runde durchgearbeitet. Die Fragen werden neu gemischt!`);
-        shuffleArray(filteredQuestions);
-        currentQuestionIndex = 0;
+    if (currentQuestionIndex < filteredQuestions.length - 1) {
+        currentQuestionIndex++;
+        loadQuestion();
+    } else {
+        alert(`Glückwunsch! Du hast das Ende der Runde erreicht. Du kannst auf der Übersichtstafel unten deine Antworten noch einmal überprüfen, die markierten Fragen lernen oder auf "Neu generieren" klicken für eine neue Runde!`);
     }
-    loadQuestion();
+}
+
+// Load previous question
+function loadPrevQuestion() {
+    if (currentQuestionIndex > 0) {
+        currentQuestionIndex--;
+        loadQuestion();
+    }
 }
 
 // Update Score statistics
