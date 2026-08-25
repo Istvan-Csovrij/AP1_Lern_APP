@@ -1097,6 +1097,73 @@ const staticQuestions = [
             "- Bit b1 (Universal/Local bit): Bestimmt die Herkunft der MAC.\n" +
             "  * 0 = Universal (Globally administered): Die MAC wurde vom Hersteller eingebrannt und der OUI ist gültig.\n" +
             "  * 1 = Local (Locally administered): Die MAC wurde softwareseitig überschrieben. Das schützt z. B. deine Privatsphäre auf dem iPhone, da iOS beim WLAN-Scan zufällige, lokale MACs generiert (MAC-Address Randomization)."
+    },
+    {
+        id: 98,
+        theme: "lf3",
+        type: "open-text",
+        question: "Prüfungsaufgabe Netzwerk (LF 3): Erkläre die gängige Eselsbrücke zur Aufteilung einer IP-Verbindung mit der Post-Zustellung (Netzanteil, Hostanteil und Port) laut deinen Unterlagen.",
+        musterloesung: "- Netzanteil: Entspricht dem Straßennamen (bestimmt, in welchem Netzbereich/Wohnbereich sich der Empfänger befindet).\n- Hostanteil: Entspricht der Hausnummer (identifiziert das konkrete Endgerät/Gebäude in diesem Netz).\n- Port: Entspricht dem Namen des Empfängers (bestimmt, welche konkrete Anwendung/Person im Haus die Daten erhalten soll).",
+        explanation: "Diese Eselsbrücke hilft, die Adressierungsstufen zu verstehen:\n" +
+            "- Der Router lenkt Pakete anhand des Netzanteils (Straße) zum richtigen Netzwerk.\n" +
+            "- Der Switch leitet sie innerhalb des Netzwerks an das Zielgerät (Hausnummer) weiter.\n" +
+            "- Das Betriebssystem übergibt das Paket anhand des Ports (Name) an die richtige App (z.B. Webserver)."
+    },
+    {
+        id: 99,
+        theme: "lf3",
+        type: "multiple-choice",
+        question: "Prüfungsaufgabe Netzwerk (LF 3): Welche Regel gilt ausnahmslos für den Aufbau einer Subnetzmaske im Binärformat (z. B. für CIDR)?",
+        options: [
+            "Subnetzmasken bestehen immer aus aufeinanderfolgenden 1en und danach 0en. Die 1en und 0en werden niemals gemischt.",
+            "Subnetzmasken können beliebige Folgen von 1en und 0en enthalten.",
+            "Subnetzmasken müssen immer genau zur Hälfte aus 1en und zur Hälfte aus 0en bestehen.",
+            "Eine Subnetzmaske darf im Binärformat keine 0en enthalten."
+        ],
+        correctAnswer: 0,
+        explanation: "Lernkarte Subnetzmasken-Regel:\n" +
+            "- Aufbau: Eine Subnetzmaske maskiert den Netzanteil einer IP-Adresse mit 1en und den Hostanteil mit 0en.\n" +
+            "- Wichtigste Regel: Die 1en müssen immer lückenlos nacheinander folgen, gefolgt von den 0en. Es darf keine Mischung wie 101010... geben.\n" +
+            "- CIDR (Classless Inter-Domain Routing): Nutzt diese Regel aus, indem einfach die Anzahl der 1en geschrieben wird (z. B. '/24' für 24 Einsen, was der Maske 255.255.255.0 entspricht)."
+    },
+    {
+        id: 100,
+        theme: "lf3",
+        type: "open-text",
+        question: "Prüfungsaufgabe Netzwerk (LF 3): Vergleiche die IP-Versionen IPv4 und IPv6 bezüglich ihrer Bit-Breite, der Anzahl der Blöcke/Oktette, der Trennzeichen und ihrer Darstellung laut deinen Unterlagen.",
+        musterloesung: "- IPv4: 32 Bit, aufgeteilt in 4 Oktette (Bytes), getrennt durch Punkte, in gepunkteter Dezimalschreibweise (dotted-decimal, z. B. 192.168.10.1).\n- IPv6: 128 Bit, aufgeteilt in 8 Blöcke von je 16 Bit, getrennt durch Doppelpunkte, in hexadezimaler Darstellung (z. B. 2001:0db8:3c4d:0015:0000:0000:1a2f:1a2b).",
+        explanation: "Lernkarte IPv4 vs. IPv6:\n" +
+            "- Warum IPv6? Der 32-Bit-Adressraum von IPv4 (ca. 4,3 Milliarden Adressen) ist erschöpft. IPv6 bietet durch 128 Bit unvorstellbar viele Adressen (ca. 340 Sextillionen).\n" +
+            "- IPv4-Darstellung: Jedes Oktett hat 8 Bit (Wert von 0 bis 255).\n" +
+            "- IPv6-Darstellung: Jeder der 8 Blöcke wird als 4-stellige Hexadezimalzahl geschrieben (Werte von 0000 bis FFFF). Führende Nullen innerhalb eines Blocks können weggelassen werden, und aufeinanderfolgende Null-Blöcke können einmalig durch '::' abgekürzt werden."
+    },
+    {
+        id: 101,
+        theme: "lf3",
+        type: "multiple-choice",
+        question: "Prüfungsaufgabe Netzwerk (LF 3): Auf welcher Schicht des OSI-Referenzmodells arbeiten Ports zur Adressierung von bestimmten Applikationen auf einem Zielgerät?",
+        options: [
+            "Schicht 4 - Transportschicht (Transport Layer)",
+            "Schicht 3 - Vermittlungsschicht (Network Layer)",
+            "Schicht 7 - Anwendungsschicht (Application Layer)",
+            "Schicht 2 - Sicherungsschicht (Data Link Layer)"
+        ],
+        correctAnswer: 0,
+        explanation: "Lernkarte Ports & Schicht 4:\n" +
+            "- Schichtzuordnung: Ports gehören zu den Transportschicht-Protokollen (TCP und UDP) auf OSI-Layer 4.\n" +
+            "- Zweck: Während IP-Adressen (Schicht 3) ein bestimmtes Gerät im Netzwerk adressieren, adressieren Ports die konkrete Software (Prozess) auf diesem Gerät.\n" +
+            "- Portbereiche: Well Known Ports (0 - 1023, fest zugewiesen), Registered Ports (1024 - 49151), Dynamic/Private Ports (49152 - 65535)."
+    },
+    {
+        id: 102,
+        theme: "lf3",
+        type: "open-text",
+        question: "Prüfungsaufgabe Netzwerk (LF 3): Ordne den Ports 80, 23 und 143 die jeweilige Anwendung und das Protokoll laut deinen Unterlagen zu.",
+        musterloesung: "- Port 80: HTTP (Web-Server - Webseiten-Anfrage)\n- Port 23: Telnet (Konsole - textbasierte Fernsteuerung/Konfiguration)\n- Port 143: IMAP (Mail-Server - E-Mail-Abholung vom Server)",
+        explanation: "Hintergrundwissen zu den Ports von deiner Folie:\n" +
+            "- Port 80 (HTTP): Überträgt unverschlüsselte Webseiten (für verschlüsselte Übertragung wird HTTPS auf Port 443 genutzt).\n" +
+            "- Port 23 (Telnet): Ermöglicht unverschlüsselte Remote-Kommandozeilenverbindungen (wurde aus Sicherheitsgründen durch SSH auf Port 22 ersetzt).\n" +
+            "- Port 143 (IMAP): Holt E-Mails ab, wobei die Mails auf dem Server verbleiben (im Gegensatz zu POP3 auf Port 110, welches Mails standardmäßig herunterlädt und löscht)."
     }
 ];
 
