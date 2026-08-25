@@ -1509,6 +1509,49 @@ const staticQuestions = [
         explanation: "Lernkarte SQL-Kategorien:\n" +
             "- Neben DDL und DML gibt es auch noch DCL (Data Control Language) für die Rechtevergabe (GRANT, REVOKE) und TCL (Transaction Control Language) für die Transaktionssteuerung (COMMIT, ROLLBACK).\n" +
             "- Merkregel: DDL ändert die Struktur (das Gerüst), DML ändert die Daten (den Inhalt)."
+    },
+    {
+        id: 132,
+        theme: "lf2",
+        type: "open-text",
+        question: "Prüfungsaufgabe IT-Systeme (LF 2): Erläutere die Funktion und den Einsatzzweck der folgenden drei IT-Komponenten: Core-Switch, Domain Controller (DC) und Demilitarisierte Zone (DMZ).",
+        musterloesung: "- Core-Switch: Der zentrale Backbone-Switch im Netzwerk. Er verbindet verschiedene Subnetze und Segmente (z.B. Etagen-Switche) miteinander und leitet Datenströme mit extrem hoher Bandbreite und minimaler Latenz weiter.\n- Domain Controller (DC): Ein Server in Windows-Netzwerken, der die zentrale Datenbank (Active Directory) verwaltet. Er dient der Authentifizierung und Autorisierung von Benutzern, Computern und Gruppenrechten im gesamten Netz.\n- Demilitarisierte Zone (DMZ): Ein separates, geschütztes Netzwerksegment zwischen dem internen LAN und dem unsicheren Internet (WAN). Es enthält öffentlich erreichbare Server (z. B. Webserver, E-Mail-Server) und wird durch Firewalls nach außen und innen abgesichert.",
+        explanation: "Lernkarte IT-Begriffe:\n" +
+            "- Core-Switch: Bildet den Kern des dreistufigen Netzwerk-Designs (Core, Distribution, Access).\n" +
+            "- Domain Controller: Nutzt Protokolle wie Kerberos und LDAP für die Benutzeranmeldung.\n" +
+            "- DMZ: Falls ein Server in der DMZ gehackt wird, verhindert die innere Firewall, dass der Angreifer ins interne LAN gelangt."
+    },
+    {
+        id: 133,
+        theme: "lf4",
+        type: "open-text",
+        question: "Prüfungsaufgabe IT-Sicherheit (LF 4): Erläutere die drei klassischen Schutzziele der Informationssicherheit (CIA-Triade): Vertraulichkeit, Integrität und Verfügbarkeit.",
+        musterloesung: "1. Vertraulichkeit (Confidentiality): Daten und Informationen dürfen nur von Personen gelesen oder modifiziert werden, die dafür eine Autorisierung besitzen (Schutz vor unbefugtem Zugriff).\n2. Integrität (Integrity): Die Daten müssen korrekt, vollständig und unverändert sein. Manipulationen oder Übertragungsfehler müssen ausgeschlossen oder nachweisbar sein (Schutz vor unbefugter Änderung).\n3. Verfügbarkeit (Availability): IT-Systeme, Dienste und Daten müssen für berechtigte Benutzer zum geplanten Zeitpunkt nutzbar und funktionsfähig sein (Schutz vor Systemausfällen).",
+        explanation: "Lernkarte Schutzziele:\n" +
+            "- Vertraulichkeit wird z. B. durch Verschlüsselung (AES) und Passwörter geschützt.\n" +
+            "- Integrität wird z. B. durch Hash-Prüfsummen (SHA-256) oder digitale Signaturen gewährleistet.\n" +
+            "- Verfügbarkeit wird z. B. durch redundante Hardware (RAID, USV, Backup-Leitungen) gesichert."
+    },
+    {
+        id: 134,
+        theme: "lf2",
+        type: "open-text",
+        question: "Prüfungsaufgabe Hardware (LF 2): Nenne die Bezeichnungen für die Grafikschnittstellen VGA, DVI, HDMI und DisplayPort und vergleiche kurz ihre Signalübertragungsarten (analog vs. digital) sowie Audiofähigkeiten.",
+        musterloesung: "- VGA (Video Graphics Array): Analoge Bildübertragung, keine Audioübertragung. Veralteter Standard.\n- DVI (Digital Visual Interface): Überträgt primär digitale Bildsignale (einige Varianten wie DVI-I auch analog), standardmäßig keine Audioübertragung.\n- HDMI (High-Definition Multimedia Interface): Digitale Bild- und Audioübertragung. Weit verbreitet im Consumer-Bereich (TV, Konsolen).\n- DisplayPort (DP): Digitale Bild- und Audioübertragung. Standard im IT- und PC-Bereich (unterstützt hohe Bildwiederholraten und Daisy-Chaining).",
+        explanation: "Lernkarte Grafikschnittstellen:\n" +
+            "- HDMI und DisplayPort übertragen beide HD-Video und Mehrkanal-Ton über ein einziges Kabel.\n" +
+            "- DisplayPort besitzt Verriegelungshaken am Stecker, die ein versehentliches Herausrutschen verhindern.\n" +
+            "- VGA-Kabel sind anfällig für elektromagnetische Störungen, da das Signal analog übertragen wird."
+    },
+    {
+        id: 135,
+        theme: "lf6",
+        type: "open-text",
+        question: "Prüfungsaufgabe Wirtschaftlichkeit (LF 6): Für eine IT-Anschaffung über 240.000 EUR wird ein Ratendarlehen mit 5% p.a. Zinsen auf 4 Jahre bei jährlicher Tilgungsrate (60.000 EUR Tilgung pro Jahr) mit einem Leasingangebot (monatlich 6.000 EUR, Laufzeit 4 Jahre, Restwertübernahme 16.000 EUR) verglichen. Ermittle rechnerisch die Gesamtkosten beider Alternativen und gib an, welche wirtschaftlicher ist.",
+        musterloesung: "1. Berechnung Finanzierung (Ratendarlehen mit jährlicher Zinszahlung auf die Restschuld):\n- Jahr 1: Restschuld = 240.000 EUR. Zinsen (5% von 240.000) = 12.000 EUR. Tilgung = 60.000 EUR. Rate = 72.000 EUR.\n- Jahr 2: Restschuld = 180.000 EUR. Zinsen (5% von 180.000) = 9.000 EUR. Tilgung = 60.000 EUR. Rate = 69.000 EUR.\n- Jahr 3: Restschuld = 120.000 EUR. Zinsen (5% von 120.000) = 6.000 EUR. Tilgung = 60.000 EUR. Rate = 66.000 EUR.\n- Jahr 4: Restschuld = 60.000 EUR. Zinsen (5% von 60.000) = 3.000 EUR. Tilgung = 60.000 EUR. Rate = 63.000 EUR.\n-> Gesamte Zinsen = 12.000 + 9.000 + 6.000 + 3.000 = 30.000 EUR.\n-> Gesamtkosten Finanzierung = 240.000 (Tilgung) + 30.000 (Zinsen) = 270.000 EUR.\n\n2. Berechnung Leasing:\n- Leasingraten über 48 Monate (4 Jahre * 12): 48 * 6.000 EUR = 288.000 EUR.\n- Restwertübernahme = 16.000 EUR.\n-> Gesamtkosten Leasing = 288.000 + 16.000 = 304.000 EUR.\n\nFazit: Die Finanzierung über das Ratendarlehen (270.000 EUR) ist wirtschaftlicher als das Leasing (304.000 EUR). Die Einsparung beträgt 34.000 EUR (ca. 11,2% Ersparnis).",
+        explanation: "Lernkarte Zins & Tilgung:\n" +
+            "- Beim Ratendarlehen (Abzahlungsdarlehen) bleibt die Tilgungsrate konstant, während die Zinsen jährlich auf die schrumpfende Restschuld berechnet werden. Dadurch sinkt die jährliche Kreditrate (Annuität) kontinuierlich.\n" +
+            "- Leasing hat den steuerlichen Vorteil, dass die Raten sofort als Betriebsausgaben abgesetzt werden können, ist aber in der Summe oft teurer als ein Bankkredit."
     }
 ];
 
