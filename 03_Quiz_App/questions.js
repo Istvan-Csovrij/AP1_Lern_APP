@@ -1478,7 +1478,37 @@ const staticQuestions = [
         musterloesung: "Revisionssichere Archivierung:\nEine Archivierung, die gesetzlichen Vorgaben (wie der GoBD) entspricht und sicherstellt, dass elektronische Dokumente unveränderbar, manipulationssicher, dauerhaft lesbar, vollständig, nachvollziehbar und auffindbar aufbewahrt werden (oft realisiert durch WORM-Speichermedien).\n\nVorteile von LTO & LTFS:\n1. LTO-Bandtechnologie ist extrem kosteneffizient. Die Gesamtbetriebskosten (TCO) liegen über einen 10-Jahres-Zeitraum um ca. 86% niedriger als bei reinen Festplatten-Systemen.\n2. LTFS (Linear Tape File System) ermöglicht es, das Magnetband wie eine normale externe Festplatte per Drag & Drop im Betriebssystem zu nutzen (Dateien direkt auf das Band ziehen/kopieren), ohne dass spezielle Tape-Backup-Software benötigt wird.",
         explanation: "Lernkarte revisionssichere Archivierung:\n" +
             "- Aufbewahrungsfristen: Rechnungen und Handelsbücher müssen laut § 257 HGB 10 Jahre archiviert werden.\n" +
-            "- LTO (Linear Tape Open) ist ein offener Standard für Magnetbänder. Er bietet auch Hardware-Verschlüsselung und WORM-Unterstützung (Write Once Read Many), was für Revisionssicherheit essenziell ist."
+            "- LTO (Linear Tape Open) is ein offener Standard für Magnetbänder. Er bietet auch Hardware-Verschlüsselung und WORM-Unterstützung (Write Once Read Many), was für Revisionssicherheit essenziell ist."
+    },
+    {
+        id: 129,
+        theme: "lf5",
+        type: "open-text",
+        question: "Prüfungsaufgabe Datenbanken (LF 5): Nenne vier wesentliche Funktionen eines Datenbank-Management-Systems (DBMS) laut deinen Unterlagen.",
+        musterloesung: "1. Datenkonsistenz & Integrität: Gewährleistet korrekte Datenbeziehungen und Constraints (z.B. Fremdschlüssel-Beziehungen).\n2. Mehrbenutzersteuerung (Concurrency Control): Verhindert Datenkonflikte bei gleichzeitigem Zugriff mehrerer Benutzer auf dieselbe Ressource (Sperrmechanismen).\n3. Datensicherheit & Zugriffskontrolle: Zuweisung von Rechten und Rollen (wer darf welche Daten lesen/schreiben).\n4. Transaktionsmanagement (ACID-Prinzip): Stellt sicher, dass Transaktionen entweder ganz oder gar nicht ausgeführt werden.\n5. Datensicherung und Wiederherstellung (Backup & Recovery): Erstellung von Sicherungen und Wiederherstellung nach Abstürzen.\n6. Datenbeschreibung (Data Dictionary): Verwaltung der Metadaten über die Tabellenstruktur.",
+        explanation: "Lernkarte DBMS-Funktionen:\n" +
+            "- Das DBMS ist die Software (z. B. MySQL, PostgreSQL, Oracle), die den Zugriff auf die physischen Datenbankdateien regelt.\n" +
+            "- Wichtiges IHK-Prinzip: **ACID** (Atomicity, Consistency, Isolation, Durability) beschreibt die Eigenschaften sicherer Transaktionen."
+    },
+    {
+        id: 130,
+        theme: "lf5",
+        type: "open-text",
+        question: "Prüfungsaufgabe Datenbanken (LF 5): Nenne zwei Vorteile und zwei Nachteile einer relationalen Datenbank gegenüber anderen Datenhaltungssystemen (wie NoSQL-Datenbanken) laut deinen Unterlagen.",
+        musterloesung: "Vorteile:\n1. Hohe Datenkonsistenz & Integrität: Fehlerhafte Einträge oder verwaiste Datensätze werden durch Constraints (z. B. referenzielle Integrität) verhindert.\n2. Redundanzfreiheit: Durch den Prozess der Normalisierung werden doppelte Datenbestände vermieden, was Speicherplatz spart und Anomalien verhindert.\n3. Standardisierte Abfragesprache: Nutzung der standardisierten und weit verbreiteten Sprache SQL.\n\nNachteile:\n1. Schlechte horizontale Skalierbarkeit: Das Aufteilen einer relationalen Datenbank über viele Server (Sharding) ist aufgrund komplexer Tabellenbeziehungen (Joins) extrem schwierig.\n2. Starres Tabellenschema: Jede Änderung an der Datenstruktur (z. B. Hinzufügen einer Spalte) erfordert eine Anpassung des Datenbankschemas, was im laufenden Betrieb komplex ist.\n3. Performance-Verlust bei großen Datenmengen: Komplexe Verknüpfungen (Tabellen-Joins) erfordern bei Millionen von Datensätzen einen hohen Rechen- und RAM-Aufwand.",
+        explanation: "Lernkarte relationale Datenbanken:\n" +
+            "- Relationale Datenbanken speichern Daten in Tabellen (Zeilen und Spalten), die über Primär- und Fremdschlüssel miteinander verknüpft sind.\n" +
+            "- Für unstrukturierte, extrem große oder sich ständig ändernde Datenstrukturen werden heute häufig NoSQL-Datenbanken (z. B. Dokumentendatenbanken wie MongoDB) bevorzugt."
+    },
+    {
+        id: 131,
+        theme: "lf5",
+        type: "open-text",
+        question: "Prüfungsaufgabe SQL (LF 5): Erläutere den Unterschied zwischen den SQL-Kategorien DDL (Data Definition Language) und DML (Data Manipulation Language) und nenne zu jeder Kategorie drei typische Befehle.",
+        musterloesung: "- DDL (Data Definition Language - Daten-Definitions-Sprache):\n  * Beschreibung: Dient zur Definition und Änderung der Datenbankstruktur (Schema, Tabellen, Indizes).\n  * Befehle: CREATE (Tabellen erstellen), ALTER (Tabellenstruktur ändern), DROP (Tabellen/Datenbank löschen), TRUNCATE (Tabelle leeren, Struktur behalten).\n\n- DML (Data Manipulation Language - Daten-Manipulations-Sprache):\n  * Beschreibung: Dient zur Verwaltung und Abfrage der eigentlichen Daten innerhalb der Tabellen.\n  * Befehle: SELECT (Daten abfragen), INSERT (Daten hinzufügen), UPDATE (Daten ändern), DELETE (Daten löschen).",
+        explanation: "Lernkarte SQL-Kategorien:\n" +
+            "- Neben DDL und DML gibt es auch noch DCL (Data Control Language) für die Rechtevergabe (GRANT, REVOKE) und TCL (Transaction Control Language) für die Transaktionssteuerung (COMMIT, ROLLBACK).\n" +
+            "- Merkregel: DDL ändert die Struktur (das Gerüst), DML ändert die Daten (den Inhalt)."
     }
 ];
 
