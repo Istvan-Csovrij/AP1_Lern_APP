@@ -29,6 +29,9 @@
                     <button class="filter-btn" data-theme="lf4">LF 4: Schutz & Sicherheit</button>
                     <button class="filter-btn" data-theme="lf5">LF 5: Software & SQL</button>
                     <button class="filter-btn" data-theme="lf6">LF 6: Services & WiSo</button>
+                    <button class="filter-btn" data-theme="favorites" id="favorites-filter-btn" style="border: 2px solid #ffc107; font-weight: bold; margin-top: 0.5rem;">
+                        <i class="fa-solid fa-star" style="color: #ffc107; margin-right: 0.25rem;"></i> Merkliste ⭐
+                    </button>
                 </div>
             </div>
 
@@ -79,9 +82,14 @@
         <!-- Main Content Area -->
         <section class="quiz-area">
             <div class="card quiz-card" id="quiz-card">
-                <div class="quiz-header">
-                    <span class="badge" id="question-theme">Lernfeld</span>
-                    <span class="question-number" id="question-number">Frage 0 von 0</span>
+                <div class="quiz-header" style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
+                    <div style="display: flex; align-items: center; gap: 0.5rem;">
+                        <span class="badge" id="question-theme">Lernfeld</span>
+                        <span class="question-number" id="question-number">Frage 0 von 0</span>
+                    </div>
+                    <button class="star-btn" id="star-btn" title="Frage merken / demarkieren" style="background: none; border: none; font-size: 1.4rem; color: #ffc107; cursor: pointer; transition: transform 0.2s; display: flex; align-items: center; justify-content: center; padding: 0.25rem;">
+                        <i class="fa-regular fa-star"></i>
+                    </button>
                 </div>
 
                 <div class="question-container">

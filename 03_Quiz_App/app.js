@@ -4,6 +4,10 @@ let questions = [];
 let filteredQuestions = [];
 let currentQuestionIndex = 0;
 
+// Starred (bookmarked) questions persistence
+let starredStaticIds = JSON.parse(localStorage.getItem("ap1_starred_static_ids")) || [];
+let starredDynamicObjects = JSON.parse(localStorage.getItem("ap1_starred_dynamic_objects")) || [];
+
 // Stats object
 let stats = {
     correct: 0,
@@ -25,6 +29,7 @@ const feedbackTitle = document.getElementById("feedback-title");
 const feedbackText = document.getElementById("feedback-text");
 const explanationText = document.getElementById("explanation-text");
 const themeFiltersContainer = document.getElementById("theme-filters");
+const starBtn = document.getElementById("star-btn");
 
 // Stat Elements
 const statCorrectEl = document.getElementById("stat-correct");
@@ -53,6 +58,10 @@ document.addEventListener("DOMContentLoaded", () => {
     
     resetStatsBtn.addEventListener("click", resetStats);
     nextBtn.addEventListener("click", loadNextQuestion);
+    
+    if (starBtn) {
+        starBtn.addEventListener("click", toggleStarCurrentQuestion);
+    }
     
     if (regenerateBtn) {
         regenerateBtn.addEventListener("click", () => {
@@ -102,19 +111,38 @@ function setupThemeFilters() {
     });
 }
 
-// Filter questions based on category
+// Filter questions based on category (including Favorites)
 function filterQuestions(theme) {
-    if (theme === "all") {
-        filteredQuestions = [...questions];
+    if (theme === "favorites") {
+        const starredStatics = staticQuestions.filter(q => starredStaticIds.includes(q.id));
+        const starredDynamics = [...starredDynamicObjects];
+        filteredQuestions = [...starredStatics, ...starredDynamics];
+        
+        if (filteredQuestions.length === 0) {
+            questionThemeEl.textContent = "Merkliste";
+            questionNumberEl.textContent = "0 von 0";
+            questionTextEl.textContent = "Deine Merkliste ist aktuell leer. Du kannst Fragen während des Quizzes markieren, indem du oben rechts auf das Stern-Symbol (⭐) klickst!";
+            codeBlockContainer.style.display = "none";
+            answersContainer.innerHTML = "";
+            if (starBtn) starBtn.style.display = "none";
+            return;
+        } else {
+            if (starBtn) starBtn.style.display = "inline-flex";
+        }
     } else {
-        filteredQuestions = questions.filter(q => q.theme === theme);
+        if (starBtn) starBtn.style.display = "inline-flex";
+        if (theme === "all") {
+            filteredQuestions = [...questions];
+        } else {
+            filteredQuestions = questions.filter(q => q.theme === theme);
+        }
     }
     
     // Shuffle the filtered questions to make it dynamic
     shuffleArray(filteredQuestions);
     
-    // Limit to exactly 30 questions per round
-    if (filteredQuestions.length > 30) {
+    // Limit to exactly 30 questions per round (only if not in favorites mode to let them practice all favorites)
+    if (theme !== "favorites" && filteredQuestions.length > 30) {
         filteredQuestions = filteredQuestions.slice(0, 30);
     }
     
@@ -127,6 +155,64 @@ function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [array[i], array[j]] = [array[j], array[i]];
+    }
+}
+
+// Check if a question is currently starred
+function isQuestionStarred(q) {
+    if (!q) return false;
+    if (q.id < 1000) {
+        return starredStaticIds.includes(q.id);
+    } else {
+        return starredDynamicObjects.some(obj => obj.question === q.question);
+    }
+}
+
+// Toggle star state for the current question
+function toggleStarCurrentQuestion() {
+    if (filteredQuestions.length === 0) return;
+    const q = filteredQuestions[currentQuestionIndex];
+    const isStarred = isQuestionStarred(q);
+    
+    if (isStarred) {
+        // Remove from starred
+        if (q.id < 1000) {
+            starredStaticIds = starredStaticIds.filter(id => id !== q.id);
+        } else {
+            starredDynamicObjects = starredDynamicObjects.filter(obj => obj.question !== q.question);
+        }
+    } else {
+        // Add to starred
+        if (q.id < 1000) {
+            if (!starredStaticIds.includes(q.id)) {
+                starredStaticIds.push(q.id);
+            }
+        } else {
+            if (!starredDynamicObjects.some(obj => obj.question === q.question)) {
+                starredDynamicObjects.push(q);
+            }
+        }
+    }
+    
+    localStorage.setItem("ap1_starred_static_ids", JSON.stringify(starredStaticIds));
+    localStorage.setItem("ap1_starred_dynamic_objects", JSON.stringify(starredDynamicObjects));
+    
+    updateStarBtnUI();
+}
+
+// Update star button appearance
+function updateStarBtnUI() {
+    if (!starBtn || filteredQuestions.length === 0) return;
+    const q = filteredQuestions[currentQuestionIndex];
+    const isStarred = isQuestionStarred(q);
+    const starIcon = starBtn.querySelector("i");
+    
+    if (isStarred) {
+        starIcon.className = "fa-solid fa-star";
+        starBtn.style.color = "#ffc107";
+    } else {
+        starIcon.className = "fa-regular fa-star";
+        starBtn.style.color = "#a0aec0";
     }
 }
 
@@ -143,10 +229,16 @@ function loadQuestion() {
         questionTextEl.textContent = "Für diesen Themenbereich wurden noch keine Fragen erstellt.";
         codeBlockContainer.style.display = "none";
         answersContainer.innerHTML = "";
+        if (starBtn) starBtn.style.display = "none";
         return;
+    } else {
+        if (starBtn) starBtn.style.display = "inline-flex";
     }
     
     const q = filteredQuestions[currentQuestionIndex];
+    
+    // Update star button icon state
+    updateStarBtnUI();
     
     // Update headers
     questionThemeEl.textContent = getThemeLabel(q.theme);
