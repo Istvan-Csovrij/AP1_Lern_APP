@@ -1164,6 +1164,94 @@ const staticQuestions = [
             "- Port 80 (HTTP): Überträgt unverschlüsselte Webseiten (für verschlüsselte Übertragung wird HTTPS auf Port 443 genutzt).\n" +
             "- Port 23 (Telnet): Ermöglicht unverschlüsselte Remote-Kommandozeilenverbindungen (wurde aus Sicherheitsgründen durch SSH auf Port 22 ersetzt).\n" +
             "- Port 143 (IMAP): Holt E-Mails ab, wobei die Mails auf dem Server verbleiben (im Gegensatz zu POP3 auf Port 110, welches Mails standardmäßig herunterlädt und löscht)."
+    },
+    {
+        id: 103,
+        theme: "lf3",
+        type: "open-text",
+        question: "Prüfungsaufgabe Subnetting (LF 3): Der IP-Adressbereich 192.168.164.0 bis 192.168.164.255 soll in genau 4 gleichgroße Subnetze unter maximaler Ausnutzung des Adressraumes aufgeteilt werden.\n\nGib die Subnetzmaske, die maximale Anzahl Hosts pro Subnetz und für jedes der 4 Subnetze die erste und letzte nutzbare Hostadresse an.",
+        musterloesung: "Subnetzmaske: 255.255.255.192 (oder /26)\nMax. Hosts pro Subnetz: 62 (2^6 - 2 = 62)\n\n- 1. Subnetz: Erste nutzbare IP: 192.168.164.1 | Letzte nutzbare IP: 192.168.164.62\n- 2. Subnetz: Erste nutzbare IP: 192.168.164.65 | Letzte nutzbare IP: 192.168.164.126\n- 3. Subnetz: Erste nutzbare IP: 192.168.164.129 | Letzte nutzbare IP: 192.168.164.190\n- 4. Subnetz: Erste nutzbare IP: 192.168.164.193 | Letzte nutzbare IP: 192.168.164.254",
+        explanation: "Ausführliche Herleitung & Lernschritte:\n" +
+            "1. Gesamtbereich bestimmen: Der Adressbereich umfasst 256 Adressen (ein klassisches /24 Netz).\n" +
+            "2. Größe der Subnetze ermitteln: Bei 4 gleichgroßen Subnetzen hat jedes Subnetz 256 / 4 = 64 Adressen.\n" +
+            "3. Host-Bits bestimmen: Da 64 = 2^6, werden 6 Bits für die Adressierung der Hosts benötigt. Die verbleibenden 2 Bits (8 - 6) gehen in den Netzanteil. Das ergibt ein /26 Netz (24 + 2).\n" +
+            "4. Subnetzmaske berechnen: Binär 11111111.11111111.11111111.11000000 -> Dezimal: 255.255.255.192.\n" +
+            "5. Maximale Host-Anzahl pro Subnetz: Gesamt-Adressen pro Netz (64) minus Netzadresse (erste IP) und Broadcastadresse (letzte IP) = 64 - 2 = 62 Hosts.\n" +
+            "6. Subnetz-Bereiche auflisten (die Netzadressen steigen immer um die Schrittweite 64):\n" +
+            "   * 1. Subnetz (.0): Erste nutzbare IP: .1, Letzte nutzbare IP: .62 (Broadcast: .63)\n" +
+            "   * 2. Subnetz (.64): Erste nutzbare IP: .65, Letzte nutzbare IP: .126 (Broadcast: .127)\n" +
+            "   * 3. Subnetz (.128): Erste nutzbare IP: .129, Letzte nutzbare IP: .190 (Broadcast: .191)\n" +
+            "   * 4. Subnetz (.192): Erste nutzbare IP: .193, Letzte nutzbare IP: .254 (Broadcast: .255)"
+    },
+    {
+        id: 104,
+        theme: "lf3",
+        type: "multiple-choice",
+        question: "Prüfungsaufgabe IP-Klassen (LF 3): Nenne für die klassischen IP-Adressklassen B, C und D die jeweilige Standard-Subnetzmaske.",
+        options: [
+            "Klasse B: 255.255.0.0, Klasse C: 255.255.255.0, Klasse D: Keine Standardmaske (für Multicast reserviert)",
+            "Klasse B: 255.0.0.0, Klasse C: 255.255.0.0, Klasse D: 255.255.255.0",
+            "Klasse B: 255.255.255.0, Klasse C: 255.255.255.128, Klasse D: 255.255.255.255",
+            "Klasse B: 255.255.0.0, Klasse C: 255.255.255.0, Klasse D: 255.255.255.0"
+        ],
+        correctAnswer: 0,
+        explanation: "Lern-Zusammenfassung zu den klassischen IP-Klassen:\n" +
+            "- Klasse A: IP-Bereich 0.0.0.0 bis 127.255.255.255. Standard-Subnetzmaske ist 255.0.0.0 (/8).\n" +
+            "- Klasse B: IP-Bereich 128.0.0.0 bis 191.255.255.255. Standard-Subnetzmaske ist 255.255.0.0 (/16).\n" +
+            "- Klasse C: IP-Bereich 192.0.0.0 bis 223.255.255.255. Standard-Subnetzmaske ist 255.255.255.0 (/24).\n" +
+            "- Klasse D: IP-Bereich 224.0.0.0 bis 239.255.255.255. Diese Klasse ist für Multicast-Gruppen reserviert und besitzt keine Standard-Subnetzmaske für Unicast-Endgeräte."
+    },
+    {
+        id: 105,
+        theme: "lf3",
+        type: "multiple-choice",
+        question: "Prüfungsaufgabe IP-Adressraum (LF 3): Ermittle die Anzahl der IPv4-Hostadressen, die in einem Subnetz mit der Subnetzmaske 255.255.0.0 maximal an Endgeräte vergeben werden können.",
+        options: [
+            "65.534 Hostadressen (2^16 - 2)",
+            "65.536 Hostadressen (2^16)",
+            "16.777.214 Hostadressen (2^24 - 2)",
+            "254 Hostadressen (2^8 - 2)"
+        ],
+        correctAnswer: 0,
+        explanation: "Herleitung der Hostanzahl:\n" +
+            "- Die Subnetzmaske 255.255.0.0 entspricht im CIDR-Format /16.\n" +
+            "- Das bedeutet, dass von den 32 Gesamt-Bits einer IPv4-Adresse genau 16 Bits für den Netzanteil und 16 Bits für den Hostanteil bestimmt sind (32 - 16 = 16).\n" +
+            "- Gesamtzahl möglicher Adress-Kombinationen im Hostanteil: 2^16 = 65.536.\n" +
+            "- Abzug der zwei geschützten Sonderadressen:\n" +
+            "  * Erste Adresse (Hostbits alle 0) = Netzadresse (z.B. 192.168.0.0)\n" +
+            "  * Letzte Adresse (Hostbits alle 1) = Broadcastadresse (z.B. 192.168.255.255)\n" +
+            "- Formel: 2^h - 2 -> 2^16 - 2 = 65.536 - 2 = 65.534 nutzbare Hostadressen."
+    },
+    {
+        id: 106,
+        theme: "lf3",
+        type: "open-text",
+        question: "Prüfungsaufgabe Subnetting (LF 3): Für das Netzwerk 192.168.1.0/24 sollen für 5 Abteilungen jeweils ein eigenes Subnetz eingerichtet werden. Jedes Subnetz muss mindestens 20 Hosts unterstützen.\n\nErmittle die benötigte Subnetzmaske und die Netzadressen für die Subnetze 2 und 3.",
+        musterloesung: "Subnetzmaske: 255.255.255.224 (oder /27)\nNetzadresse Subnetz 2: 192.168.1.32\nNetzadresse Subnetz 3: 192.168.1.64",
+        explanation: "Ausführliche Herleitung & Lernschritte:\n" +
+            "1. Anforderung Hosts: Jedes Subnetz muss mindestens 20 Host-IPs bieten. Wir suchen die kleinste Zweierpotenz 2^h - 2 >= 20:\n" +
+            "   * h=4: 2^4 - 2 = 14 Hosts (zu wenig)\n" +
+            "   * h=5: 2^5 - 2 = 30 Hosts (reicht aus!)\n" +
+            "   Wir benötigen also h=5 Bits für die Hosts.\n" +
+            "2. Ermittlung der Subnetzmaske: Eine IP-Adresse hat 32 Bits. Wenn wir 5 Bits für den Host reservieren, verbleiben 32 - 5 = 27 Bits für den Netzanteil (/27).\n" +
+            "   * Binär: 11111111.11111111.11111111.11100000 -> Dezimal: 255.255.255.224.\n" +
+            "3. Anforderung Subnetze prüfen: Das Originalnetz war /24. Unser Subnetz hat /27, wir haben also 3 Bits für die Subnetze hinzugewonnen (27 - 24 = 3).\n" +
+            "   * Mögliche Subnetze: 2^3 = 8 Subnetze. Da wir nur 5 Abteilungen haben, reicht das perfekt.\n" +
+            "4. Netzgrenzen bestimmen: Da h=5 Hostbits vorhanden sind, beträgt die Schrittweite (Blockgröße) 2^5 = 32 IP-Adresse pro Subnetz:\n" +
+            "   * Subnetz 1: Netzadresse 192.168.1.0 (Bereich .0 bis .31)\n" +
+            "   * Subnetz 2: Netzadresse 192.168.1.32 (Bereich .32 bis .63)\n" +
+            "   * Subnetz 3: Netzadresse 192.168.1.64 (Bereich .64 bis .95)"
+    },
+    {
+        id: 107,
+        theme: "lf3",
+        type: "open-text",
+        question: "Prüfungsaufgabe IP-Adressierung (LF 3): Ein neuer Datenbankserver wird in ein Netzwerk integriert. Als IP-Adressen werden vorgeschlagen: 192.168.10.0/24, 192.168.10.200/24 und 127.0.0.1/8.\n\nBeurteile die Eignung dieser drei IP-Adressen für den Datenbankserver.",
+        musterloesung: "1. 192.168.10.0/24: Ungeeignet (Netzadresse des Subnetzes, darf nicht an Endgeräte vergeben werden).\n2. 192.168.10.200/24: Geeignet (liegt im nutzbaren Host-Bereich von .1 bis .254).\n3. 127.0.0.1/8: Ungeeignet (Loopback-Adresse / Localhost, dient nur internen Diagnosezwecken auf dem eigenen Gerät und ist im Netzwerk nicht routbar).",
+        explanation: "Lernübersicht zur Adressgültigkeit:\n" +
+            "- Netzadresse: Identifiziert das gesamte Netzwerk (alle Hostbits sind binär 0). Ungeeignet für Geräte.\n" +
+            "- Broadcastadresse: Dient zum Senden von Rundrufen an alle Geräte im Netz (alle Hostbits sind binär 1, hier: 192.168.10.255). Ungeeignet für Einzelgeräte.\n" +
+            "- Loopback-Bereich (127.0.0.0 bis 127.255.255.255): Ist für den localhost reserviert. Pakete an diese IP verlassen die Netzwerkkarte nie."
     }
 ];
 
