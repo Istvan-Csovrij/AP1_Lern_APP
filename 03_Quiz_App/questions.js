@@ -1263,6 +1263,46 @@ const staticQuestions = [
             "- Warum DS-Lite? Da IPv4-Adressen knapp sind, vergeben Provider an Neukunden oft nur noch eine echte IPv6-Adresse. Damit der Kunde trotzdem IPv4-Websites aufrufen kann, wird DS-Lite verwendet.\n" +
             "- AFTR-Gateway: Der Router beim Provider, der die Pakete entpackt und übersetzt, heißt AFTR (Address Family Transition Router).\n" +
             "- Portfreigaben: Während IPv4-Portfreigaben blockiert sind, funktionieren IPv6-Verbindungen von außen (z. B. auf ein IPv6-fähiges Gerät zu Hause) problemlos direkt."
+    },
+    {
+        id: 109,
+        theme: "lf2",
+        type: "open-text",
+        question: "Prüfungsaufgabe Hardware (LF 2): Beschreibe die drei Schritte beim Einbau einer CPU und erkläre den physikalischen Grund für die Verwendung von Wärmeleitpaste (Wärmeleitmedium) laut deinen Unterlagen.",
+        musterloesung: "Einbauschritte:\n1. Hebel anheben: Löst die Sockelarretierung.\n2. CPU ausrichten: Dreiecksmarkierung an CPU und Sockel abgleichen und CPU ohne Kraft einsetzen (Verbiegung der Pins vermeiden).\n3. CPU sichern: Hebel absenken und einrasten lassen, um die CPU zu fixieren.\n\nGrund für Wärmeleitpaste:\nDie Wärmeleitpaste gleicht mikroskopische Unebenheiten (Rauheit) zwischen der CPU-Oberfläche und dem Kühlerboden aus. Sie verdrängt die dort eingeschlossene Luft (die ein schlechter Wärmeleiter bzw. thermischer Isolator ist) und optimiert so den Wärmeübergang zum Kühler.",
+        explanation: "Lernkarte CPU-Einbau:\n" +
+            "- Die Wärmeleitpaste muss hauchdünn aufgetragen werden. Eine zu dicke Schicht verschlechtert die Temperaturen, da Paste schlechter leitet als direkt aufeinanderliegendes Kupfer/Aluminium.\n" +
+            "- Bei Spannungswandlern (VRMs) oder M.2 NVMe SSDs werden wegen der größeren Abstände meist elastische Wärmeleitpads verwendet."
+    },
+    {
+        id: 110,
+        theme: "lf2",
+        type: "open-text",
+        question: "Prüfungsaufgabe Hardware (LF 2): Berechne die maximale Datenübertragungsrate (Bandbreite) eines DDR4-3200 Moduls in MB/s und gib die offizielle PC-Modulbezeichnung an. Erkläre zudem kurz den Unterschied zwischen symmetrischem und asymmetrischem Dual-Channel-Modus.",
+        musterloesung: "Bandbreiten-Berechnung:\nDa RAM über einen 64-Bit breiten Kanal kommuniziert (64 Bit / 8 = 8 Bytes), rechnen wir:\n3200 MHz * 8 Bytes = 25.600 MB/s (entspricht 25,6 GB/s).\nModulbezeichnung: PC4-25600 (PC4 steht für DDR4, 25600 für die Übertragungsrate in MB/s).\n\nDual-Channel-Modi:\n- Symmetrisch (Symmetric Mode): Beide Kanäle haben dieselbe RAM-Kapazität (z.B. 2x 8 GB). Der gesamte RAM läuft mit doppelter Bandbreite (128-Bit).\n- Asymmetrisch (Flex Mode): Kanäle haben ungleiche Kapazitäten (z.B. 4 GB + 8 GB). Nur der überlappende Teil (hier: 2x 4 GB = 8 GB) läuft im schnellen Dual-Channel, der Rest läuft im langsameren Single-Channel.",
+        explanation: "Lernkarte RAM-Leistung:\n" +
+            "- Dual-Channel verdoppelt nicht die RAM-Größe, sondern die Busbreite von 64 auf 128 Bit, was die Transferraten drastisch erhöht.\n" +
+            "- Riegel-Steckplätze: Um Dual-Channel zu nutzen, müssen die Module in den vom Handbuch vorgegebenen Slots stecken (meist Slot A2 und B2, d.h. mit einer Lücke dazwischen)."
+    },
+    {
+        id: 111,
+        theme: "lf2",
+        type: "open-text",
+        question: "Prüfungsaufgabe Hardware (LF 2): Vergleiche die Speichertechnologien NAS (Network Attached Storage) und SAN (Storage Area Network) bezüglich ihres Zugriffskonzepts (dateibasiert vs. blockbasiert), der typischen Netzwerk-Protokolle und des Einsatzzwecks.",
+        musterloesung: "- NAS (Network Attached Storage):\n  * Zugriff: Dateibasiert (dateiorientiert).\n  * Protokolle: SMB, CIFS (Windows), NFS (Linux).\n  * Netzwerk: Normales, gemeinsam genutztes LAN.\n  * Einsatzzweck: Zentrales File-Sharing für Benutzer (Dokumentenablage, Gruppenlaufwerke).\n- SAN (Storage Area Network):\n  * Zugriff: Blockbasiert (Speicher wird wie eine lokale Festplatte eingebunden).\n  * Protokolle: Fibre Channel (FC), iSCSI.\n  * Netzwerk: Ein dediziertes, separates Hochgeschwindigkeits-Netzwerk.\n  * Einsatzzweck: Hochleistungsdatenbanken, Server-Virtualisierungscluster (z.B. VMware vSphere).",
+        explanation: "Lernkarte NAS vs. SAN:\n" +
+            "- NAS verhält sich wie ein freigegebener Ordner im Netz. Der Client sieht ein Dateisystem (z.B. NTFS oder ext4), das auf dem NAS läuft.\n" +
+            "- SAN stellt rohen Speicherplatz (LUNs) bereit. Der Server partitioniert und formatiert diesen Speicherplatz selbst mit seinem eigenen Dateisystem, als wäre es eine physisch eingebaute Festplatte."
+    },
+    {
+        id: 112,
+        theme: "lf2",
+        type: "open-text",
+        question: "Prüfungsaufgabe Speicherberechnung (LF 2): Erläutere den Unterschied zwischen den Dezimal-Präfixen (SI-Einheiten wie KB, MB, GB) und den Binär-Präfixen (IEC-Einheiten wie KiB, MiB, GiB) bezüglich ihres Umrechnungsfaktors und nenne jeweils einen typischen Praxis-Kontext.",
+        musterloesung: "- Dezimal-Präfixe (SI, z. B. GB):\n  * Umrechnungsfaktor: Basis 10 (1.000er Schritte, 1 GB = 10^9 Bytes = 1.000.000.000 Bytes).\n  * Praxis-Kontext: Angaben von Festplattenherstellern (HDD/SSD-Kapazitäten) und Netzwerk-Bandbreiten (z. B. Gbit/s).\n- Binär-Präfixe (IEC, z. B. GiB):\n  * Umrechnungsfaktor: Basis 2 (1.024er Schritte, 1 GiB = 2^30 Bytes = 1.073.741.824 Bytes).\n  * Praxis-Kontext: Betriebssysteme (wie Windows, die Dateigrößen und RAM-Belegung berechnen).",
+        explanation: "Lernkarte SI vs. IEC:\n" +
+            "- Warum wird man 'betrogen'? Wenn du eine 1 TB Festplatte kaufst, rechnet der Hersteller mit 1.000.000.000.000 Bytes. Windows rechnet jedoch in TiB (Teilfaktor 1.024) um und zeigt dir daher nur ca. 931 GB freie Kapazität an.\n" +
+            "- Mnemotechnik: K-M-G-T (Kilo, Mega, Giga, Tera). Steht ein 'i' in der Abkürzung (KiB, MiB, GiB), teilst du durch 1.024, ansonsten durch 1.000."
     }
 ];
 
