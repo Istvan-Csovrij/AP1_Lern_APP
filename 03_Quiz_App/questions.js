@@ -1395,6 +1395,90 @@ const staticQuestions = [
         explanation: "Lernkarte LWL im Primärbereich:\n" +
             "- Glasfaserkabel leiten Lichtsignale statt Strom. Da sie nicht leitend sind, trennen sie die Gebäude galvanisch. Dies verhindert Stromschäden bei Blitzeinschlägen und schützt sensible Netzwerkkomponenten.\n" +
             "- Zudem bieten LWL-Kabel eine extrem hohe Bandbreite und sehr geringe Signaldämpfung, was Übertragungsstrecken von mehreren Kilometern ermöglicht."
+    },
+    {
+        id: 121,
+        theme: "lf2",
+        type: "open-text",
+        question: "Prüfungsaufgabe Künstliche Intelligenz (LF 2): Erkläre die Begriffe Künstliche Intelligenz (KI), Machine Learning (ML) und Deep Learning (DL) und beschreibe, wie sie hierarchisch ineinander eingeordnet sind.",
+        musterloesung: "- Künstliche Intelligenz (KI): Die Fähigkeit von Maschinen, basierend auf Algorithmen Aufgaben autonom auszuführen und anpassungsfähig auf unbekannte Situationen zu reagieren.\n- Machine Learning (ML): Ein Teilbereich der KI. Nutzt statistische Verfahren, damit Systeme selbstständig aus Daten Muster und Zusammenhänge lernen und Vorhersagen treffen, ohne explizit dafür programmiert zu sein.\n- Deep Learning (DL): Ein Teilbereich von ML, der mit tiefen künstlichen neuronalen Netzen arbeitet (mehrere versteckte Schichten). Besonders leistungsfähig bei unstrukturierten Daten (z. B. Bildern, Sprache).\n\nHierarchische Einordnung:\nDL ist ein Teilbereich von ML, und ML ist wiederum ein Teilbereich von KI (Verschachtelung: KI > ML > DL).",
+        explanation: "Lernkarte KI-Begriffe:\n" +
+            "- KI ist der Oberbegriff für alles, was menschliches Verhalten simuliert.\n" +
+            "- ML lernt aktiv aus Beispielen anhand von Trainingsdaten.\n" +
+            "- DL simuliert mit künstlichen Neuronen die Arbeitsweise des menschlichen Gehirns in vielen übereinanderliegenden Netzwerkschichten (Layers)."
+    },
+    {
+        id: 122,
+        theme: "lf1",
+        type: "open-text",
+        question: "Prüfungsaufgabe EU-KI-Verordnung (LF 1): Was ist das Hauptziel der EU-KI-Verordnung (EU AI Act) und welche Risikoklassen werden darin unterschieden? Nenne zu jeder Klasse ein Beispiel.",
+        musterloesung: "Hauptziel:\nRegelung des sicheren, fairen, transparenten und vertrauenswürdigen Einsatzes von KI-Systemen in der EU bei gleichzeitigem Schutz von Grundrechten und Sicherheit.\n\nRisikoklassen & Beispiele:\n1. Unannehmbares Risiko (verboten): z. B. Social Scoring (soziale Bewertung durch Regierungen), biometrische Kategorisierung oder Echtzeit-Gesichtserkennung im öffentlichen Raum.\n2. Hohes Risiko (streng reguliert): z. B. KI in kritischer Infrastruktur, Bildung, Beschäftigung (Bewerberauswahl) oder Strafverfolgung.\n3. Begrenztes Risiko (Transparenzpflichten): z. B. Chatbots oder Deepfakes (Nutzer müssen erkennen, dass sie mit einer KI interagieren).\n4. Minimales Risiko (frei nutzbar): z. B. Spam-Filter oder KI in Videospielen.",
+        explanation: "Lernkarte EU AI Act:\n" +
+            "- Die Verordnung trat am 1. August 2024 EU-weit in Kraft.\n" +
+            "- Sie gilt für Anbieter (Entwickler), Importeure, Händler und Bereitsteller/Nutzer von KI-Systemen innerhalb der EU."
+    },
+    {
+        id: 123,
+        theme: "lf1",
+        type: "open-text",
+        question: "Prüfungsaufgabe EU-KI-Verordnung (LF 1): Definiere den Begriff 'Akteur' im Kontext der EU-KI-Verordnung, nenne drei Beispiele für Akteure und erkläre das Kürzel 'GPAI'.",
+        musterloesung: "Akteur:\nEine natürliche oder juristische Person, die an der Entwicklung, Bereitstellung, Nutzung, dem Import, Vertrieb oder der Überwachung von KI-Systemen im Lebenszyklus beteiligt ist.\n\nDrei Beispiele für Akteure:\n1. Anbieter (Entwickelt die KI oder lässt sie entwickeln, um sie in den Markt einzuführen).\n2. Betreiber / Nutzer (Nutzt das KI-System im beruflichen Kontext).\n3. Importeur (Führt ein KI-System aus Drittländern in die EU ein).\n\nErklärung GPAI:\nGPAI steht für General Purpose Artificial Intelligence (KI-Modelle mit allgemeinem Verwendungszweck). Das sind KI-Modelle, die auf großen Datenmengen trainiert wurden, eine breite Palette von Aufgaben bewältigen können (wie Text-, Bild- oder Codegenerierung) und sich in verschiedene Anwendungen integrieren lassen (z. B. GPT-4 oder Gemini).",
+        explanation: "Lernkarte GPAI & Akteure:\n" +
+            "- Der AI Act legt fest, dass GPAI-Modelle transparent sein müssen (z. B. Offenlegung der Trainingsdaten und Einhaltung des Urheberrechts).\n" +
+            "- Die Akteure haben je nach ihrer Rolle unterschiedliche Pflichten (die meisten Pflichten liegen beim Anbieter)."
+    },
+    {
+        id: 124,
+        theme: "lf2",
+        type: "open-text",
+        question: "Prüfungsaufgabe Cloud Computing (LF 2): Beschreibe die Nutzungsmodelle Private Cloud und Public Cloud, nenne den Vorteil der Skalierung von Ressourcen in Cloud-Systemen gegenüber dem eigenen Rechenzentrum und nenne ein Datenschutzproblem.",
+        musterloesung: "Nutzungsmodelle:\n- Private Cloud: IT-Infrastruktur, die exklusiv für ein einziges Unternehmen betrieben wird (entweder intern im eigenen Rechenzentrum oder extern beim Hoster). Höchste Kontrolle und Sicherheit.\n- Public Cloud: IT-Infrastruktur wird über das Internet öffentlich für jedermann bereitgestellt (z.B. AWS, Azure, Google Cloud). Abrechnung nach Nutzung, keine eigene Hardware nötig.\n\nVorteil der Cloud-Skalierung:\nElastizität und Geschwindigkeit: Ressourcen (CPU, RAM, Speicher) können bei Bedarf innerhalb von Sekunden dynamisch und vollautomatisch hoch- oder herunterskaliert werden (Skalierbarkeit). Im eigenen RZ erfordert dies den physischen Kauf und Einbau neuer Server (hoher Zeit- und Kostenaufwand).\n\nDatenschutzproblem:\nDatenübertragung ins Ausland und Speicherung auf Servern von US-amerikanischen Providern (Drittstaaten-Problematik/Cloud Act), wodurch die Einhaltung der EU-DSGVO gefährdet sein kann.",
+        explanation: "Lernkarte Cloud-Skalierung & Datenschutz:\n" +
+            "- Vertikale Skalierung (Scale Up): Server mit mehr CPU/RAM ausstatten.\n" +
+            "- Horizontale Skalierung (Scale Out): Mehr Instanzen des Servers hinzufügen (in der Cloud vollautomatisch möglich).\n" +
+            "- Datenschutz-Tipp: Bei sensiblen Daten Verträge abschließen, die eine Datenspeicherung ausschließlich innerhalb der EU zusichern."
+    },
+    {
+        id: 125,
+        theme: "lf2",
+        type: "open-text",
+        question: "Prüfungsaufgabe Cloud Computing (LF 2): Erläutere die drei Cloud-Service-Modelle IaaS, PaaS und SaaS und erkläre, inwiefern durch Cloud-Auslagerung Zeiteinsparung, Skalierbarkeit und Kostenreduktion erzielt werden können.",
+        musterloesung: "Service-Modelle:\n- IaaS (Infrastructure as a Service): Bereitstellung von roher IT-Infrastruktur (virtuelle Server, Speicher, Netzwerke). Der Kunde verwaltet OS und Software selbst.\n- PaaS (Platform as a Service): Bereitstellung einer Entwicklungs- und Laufzeitumgebung (z.B. für Datenbanken, Web-Apps). OS und Middleware werden vom Provider verwaltet, der Kunde bringt nur seinen Code ein.\n- SaaS (Software as a Service): Bereitstellung fertiger Software über den Webbrowser (z.B. Microsoft 365, Salesforce). Der Provider übernimmt die gesamte Verwaltung.\n\nVorteile der Auslagerung:\n- Zeiteinsparung: Keine zeitaufwendige Wartung, Installation, Patching oder Verkabelung der physischen Infrastruktur.\n- Skalierbarkeit: Schnelles Hinzubuchen oder Kündigen von Ressourcen je nach Auslastung.\n- Kostenreduktion: Wegfall hoher Vorabinvestitionen in Hardware (CAPEX wird zu OPEX). Bezahlt wird nur, was tatsächlich genutzt wird (Pay-per-Use).",
+        explanation: "Lernkarte Cloud-Services:\n" +
+            "- Es gilt: Je höher die Service-Stufe (IaaS -> PaaS -> SaaS), desto weniger Administrationsaufwand hat der Kunde, desto weniger Flexibilität besitzt er aber auch.\n" +
+            "- In der Prüfung wird oft gefragt, wer für das Betriebssystem verantwortlich ist: Bei IaaS der Kunde, bei PaaS/SaaS der Provider."
+    },
+    {
+        id: 126,
+        theme: "lf3",
+        type: "open-text",
+        question: "Prüfungsaufgabe VPN & VLAN (LF 3): Ein VPN verbindet vier Unternehmensstandorte über IPsec. Nenne den VPN-Verbindungstyp sowie den verwendeten IPsec-Modus. Berechne zudem die maximale Anzahl an VLANs in einem Netzwerk auf Basis des IEEE 802.1Q Standard-Tags.",
+        musterloesung: "- VPN-Verbindungstyp: Site-to-Site VPN (oder Gateway-to-Gateway VPN / LAN-zu-LAN-Kopplung).\n- IPsec-Verbindungsmodus: Tunnelmodus (Tunnel Mode) - das gesamte ursprüngliche IP-Paket inklusive Header wird verschlüsselt und in ein neues IPsec-Paket verpackt.\n\nVLAN-Berechnung:\n1. Der VLAN-Tag nach IEEE 802.1Q reserviert im Ethernet-Frame exakt 12 Bit für die VLAN-ID (VID).\n2. Die maximale Anzahl an Binärkombinationen mit 12 Bit beträgt: 2^12 = 4.096.\n3. Da die IDs 0 (reserviert) und 4095 (reserviert) nicht genutzt werden, können maximal 4.094 nutzbare VLANs eingerichtet werden.",
+        explanation: "Lernkarte VPN & VLAN:\n" +
+            "- Site-to-Site VPN: Verbindet ganze Netzwerke dauerhaft über Router/Firewalls. Mitarbeiter greifen ohne eigene VPN-Software direkt auf Ressourcen im anderen Standort zu.\n" +
+            "- IPsec Transportmodus vs. Tunnelmodus: Im Transportmodus wird nur die Payload (Nutzdaten) verschlüsselt, nicht der IP-Header. Im Tunnelmodus wird alles verschlüsselt, was maximale Sicherheit bietet.\n" +
+            "- VLANs trennen Netzwerke logisch auf Layer 2, um Broadcast-Stürme zu reduzieren und Sicherheitsbereiche abzugrenzen."
+    },
+    {
+        id: 127,
+        theme: "lf4",
+        type: "open-text",
+        question: "Prüfungsaufgabe Datensicherung (LF 4): Vergleiche die Vollsicherung mit der differenziellen Sicherung. Erläutere zudem das Backupverfahren 'Klonen' unter Berücksichtigung des benötigten Speichervolumens und den Auswirkungen auf das Archivbit.",
+        musterloesung: "Vollsicherung vs. Differenzielle Sicherung:\n- Vollsicherung (Backup): Sichert alle Daten vollständig. Das Archivbit wird danach zurückgesetzt (auf 0 / nicht geändert).\n- Differenzielle Sicherung: Sichert alle Daten, die sich seit der letzten Vollsicherung geändert haben. Das Archivbit wird NICHT zurückgesetzt (bleibt auf 1 / geändert).\n\nBackupverfahren Klonen:\n- Funktion: Erzeugt eine exakte 1:1 Kopie (Image) eines Datenträgers oder Dateisystems im aktuellen Zustand.\n- Speichervolumen: Benötigt sehr viel Speicherplatz (100% des Quellmediums bzw. der belegten Blöcke).\n- Archivbit: Das Klonen hat KEINE Auswirkung auf das Archivbit (es wird weder gelesen noch verändert), da es ein bitgenaues Abbild auf Blockebene ist.",
+        explanation: "Lernkarte Backup & Archivbit:\n" +
+            "- Das Archivbit (A-Bit) zeigt Windows an, ob eine Datei seit dem letzten Backup geändert wurde (A-Bit = 1 bedeutet: geändert, muss gesichert werden).\n" +
+            "- Vollsicherung und inkrementelle Sicherung setzen das A-Bit zurück.\n" +
+            "- Differenzielle Sicherung liest das A-Bit, setzt es aber NICHT zurück, weshalb jede tägliche differenzielle Sicherung immer größer wird."
+    },
+    {
+        id: 128,
+        theme: "lf4",
+        type: "open-text",
+        question: "Prüfungsaufgabe Archivierung (LF 4): Erläutere die Anforderungen an eine 'revisionssichere Archivierung' und nenne zwei wesentliche Vorteile des Einsatzes von LTO-Magnetbändern mit dem 'Linear Tape File System' (LTFS) laut deinen Unterlagen.",
+        musterloesung: "Revisionssichere Archivierung:\nEine Archivierung, die gesetzlichen Vorgaben (wie der GoBD) entspricht und sicherstellt, dass elektronische Dokumente unveränderbar, manipulationssicher, dauerhaft lesbar, vollständig, nachvollziehbar und auffindbar aufbewahrt werden (oft realisiert durch WORM-Speichermedien).\n\nVorteile von LTO & LTFS:\n1. LTO-Bandtechnologie ist extrem kosteneffizient. Die Gesamtbetriebskosten (TCO) liegen über einen 10-Jahres-Zeitraum um ca. 86% niedriger als bei reinen Festplatten-Systemen.\n2. LTFS (Linear Tape File System) ermöglicht es, das Magnetband wie eine normale externe Festplatte per Drag & Drop im Betriebssystem zu nutzen (Dateien direkt auf das Band ziehen/kopieren), ohne dass spezielle Tape-Backup-Software benötigt wird.",
+        explanation: "Lernkarte revisionssichere Archivierung:\n" +
+            "- Aufbewahrungsfristen: Rechnungen und Handelsbücher müssen laut § 257 HGB 10 Jahre archiviert werden.\n" +
+            "- LTO (Linear Tape Open) ist ein offener Standard für Magnetbänder. Er bietet auch Hardware-Verschlüsselung und WORM-Unterstützung (Write Once Read Many), was für Revisionssicherheit essenziell ist."
     }
 ];
 
