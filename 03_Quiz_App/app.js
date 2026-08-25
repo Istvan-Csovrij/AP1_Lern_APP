@@ -161,7 +161,18 @@ function filterQuestions(theme) {
             questionNumberEl.textContent = "0 von 0";
             questionTextEl.textContent = "Deine Merkliste ist aktuell leer. Du kannst Fragen während des Quizzes markieren, indem du oben rechts auf das Stern-Symbol (⭐) klickst!";
             codeBlockContainer.style.display = "none";
+            
+            // Mobile Optimization: Show inline resume button inside the question card
             answersContainer.innerHTML = "";
+            if (savedNormalRound) {
+                const inlineResumeBtn = document.createElement("button");
+                inlineResumeBtn.className = "btn btn-primary btn-full";
+                inlineResumeBtn.style.marginTop = "1rem";
+                inlineResumeBtn.innerHTML = `<i class="fa-solid fa-arrow-left"></i> Haupt-Quiz fortsetzen (Frage ${savedNormalRound.currentQuestionIndex + 1})`;
+                inlineResumeBtn.onclick = resumeNormalQuizRound;
+                answersContainer.appendChild(inlineResumeBtn);
+            }
+            
             if (starBtn) starBtn.style.display = "none";
             const gridContainer = document.getElementById("question-grid");
             if (gridContainer) gridContainer.innerHTML = "";
