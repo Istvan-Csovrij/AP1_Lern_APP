@@ -2514,5 +2514,58 @@ Das Angebot der Hemak AG ist mit einem Einstandspreis von 495,12 EUR rein quanti
 Ergebnis: Die USV muss eine Mindestleistung von 5.699,40 VA aufweisen.`,
         explanation: `Lernkarte USV-Dimensionierung:
 - Drucker und andere Heizgeräte (Kaffeemaschinen, Kopierer) dürfen NIEMALS an eine USV angeschlossen werden, da sie die USV durch extreme Stromspitzen zerstören oder sofort entladen können.`
+    },
+    {
+        id: 189,
+        theme: "lf6",
+        type: "open-text",
+        question: "Prüfungsaufgabe IT-Service-Management (Sommer 2023 / LF 6): Klassifiziere die folgenden 5 Meldungen aus einem Ticketsystem begründet in die ITIL-Kategorien 'Incident' (Störung), 'Service Request' (Serviceanfrage) oder 'Event' (Ereignis):\n1. Mitteilung, dass die Lizenz der Office-Anwendung in 14 Tagen abläuft.\n2. Ein Mitarbeiter beantragt eine Maus für Linkshänder.\n3. Der Accesspoint im Lager funktioniert nicht.\n4. Statusmeldung: Mehr als fünf fehlgeschlagene Anmeldeversuche auf dem Konto von Herr Müller.\n5. Ein Mitarbeiter meldet, dass sein Bildschirm flackert.",
+        musterloesung: `Klassifizierung der Tickets:
+1. Event: Automatisierte Benachrichtigung über eine Zustandsänderung (Lizenzablauf). Es liegt zum aktuellen Zeitpunkt noch keine Störung des Betriebs vor.
+2. Service Request: Anforderung einer Standarddienstleistung bzw. Standard-Hardware (Maus für Linkshänder) durch einen Anwender.
+3. Incident: Ungeplante Störung bzw. Unterbrechung des IT-Services (Netzwerkverbindung im Lager), die behoben werden muss.
+4. Event: Protokolliertes Systemereignis (Sicherheitsmeldung), das auf ein mögliches Problem (Tippfehler des Users oder Brute-Force-Angriff) hindeutet.
+5. Incident: Unerwartete Qualitätsminderung einer Hardware (flackernder Monitor), die den normalen Arbeitsablauf des Mitarbeiters behindert.`,
+        explanation: `Lernkarte ITIL-Begriffe:
+- Incident: Eine ungeplante Unterbrechung oder Qualitätsminderung eines IT-Services. Ziel: Schnellstmögliche Wiederherstellung.
+- Service Request: Eine formelle Anfrage eines Benutzers nach Bereitstellung von Hardware, Software, Passwörtern oder Informationen.
+- Event: Jedes erkennbare Vorkommnis, das für die Verwaltung der IT-Infrastruktur von Bedeutung ist.`
+    },
+    {
+        id: 190,
+        theme: "lf3",
+        type: "open-text",
+        question: "Prüfungsaufgabe WLAN & MAC-Adressierung (Sommer 2023 / LF 3): Beantworte folgende Fragen zu WLAN und Netzwerkhardware:\n1. Nenne eine wesentliche Neuerung, die der Standard IEEE 802.11ax (ab Wi-Fi 6E) im Vergleich zu älteren Standards bietet.\n2. Wie viele Bits werden für die Darstellung einer physischen MAC-Adresse benötigt?\n3. Auf welcher Schicht des OSI-Schichtenmodells arbeitet die physische MAC-Adresse zur Weiterleitung von Ethernet-Frames?",
+        musterloesung: `1. Neuerung Wi-Fi 6E: Erschließung und Nutzung des neuen 6-GHz-Frequenzbands (bietet viel mehr Frequenzspektrum, weniger Überlagerungen/Interferenzen und breitere Kanäle bis 160 MHz).
+2. Bit-Anzahl MAC-Adresse: 48 Bits (entspricht 6 Bytes, meist dargestellt in Hexadezimalform, z. B. 0C-DD-24-CE-C6-D8).
+3. OSI-Schicht: Schicht 2 (Sicherungsschicht / Data Link Layer).`,
+        explanation: `Lernkarte Netzwerk-Grundlagen:
+- Wi-Fi 6E erweitert den Standard Wi-Fi 6 um das 6-GHz-Band, um verstopfte 2,4-GHz- und 5-GHz-Bänder zu entlasten.
+- Die MAC-Adresse (Media Access Control) dient der eindeutigen Adressierung auf Schicht 2 (Hardware-Ebene).`
+    },
+    {
+        id: 191,
+        theme: "lf5",
+        type: "open-text",
+        question: "Prüfungsaufgabe Programmierung (Sommer 2023 / LF 5): Erstelle eine JavaScript-Funktion 'loginUeberpruefung(username, passwort)'. Die Funktion nutzt die Hilfsfunktion 'DB_Abfrage(username, passwort)', welche folgende Rückgabewerte liefert:\n- 0: Daten korrekt\n- 1: Benutzername existiert nicht\n- 2: Passwort falsch\n\nWenn die Daten korrekt sind, soll die Funktion 'true' zurückgeben. In allen anderen Fällen soll der Text 'Daten nicht korrekt' auf der Konsole ausgegeben und 'false' zurückgegeben werden.",
+        musterloesung: `JavaScript-Code:
+\`\`\`javascript
+function loginUeberpruefung(username, passwort) {
+    // Führe die Datenbankabfrage durch und speichere den Rückgabewert
+    let abfrageErgebnis = DB_Abfrage(username, passwort);
+    
+    // Wenn das Ergebnis 0 ist, sind die Anmeldedaten korrekt
+    if (abfrageErgebnis === 0) {
+        return true;
+    } else {
+        // Bei jedem anderen Wert (1 oder 2) Fehlermeldung ausgeben und false zurückgeben
+        console.log("Daten nicht korrekt");
+        return false;
+    }
+}
+\`\`\``,
+        explanation: `Lernkarte Programmierlogik:
+- Der Vergleichsoperator === stellt sicher, dass sowohl der Wert als auch der Datentyp (Zahl 0) übereinstimmen.
+- Durch die Kapselung in einen else-Block wird die Fehlermeldung nur im Fehlerfall ausgegeben.`
     }
 ];
