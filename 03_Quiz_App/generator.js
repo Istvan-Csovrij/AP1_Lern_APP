@@ -18,7 +18,7 @@ function generateDynamicQuestions(typeMode = "mix") {
     // ==========================================
     
     // 1.1 Wirtschaftlichkeitsrechnungen (Angebotsvergleich)
-    for (let i = 0; i < 200; i++) {
+    for (let i = 0; i < 15; i++) {
         const count = Math.floor(Math.random() * 41) + 10; // 10 bis 50 Stück
         const priceA = Math.floor(Math.random() * 100) + 100; // 100 bis 200 EUR
         const priceB = priceA + Math.floor(Math.random() * 30) + 15; // Teurer, da mehr Garantie
@@ -97,7 +97,7 @@ function generateDynamicQuestions(typeMode = "mix") {
     // ==========================================
     
     // 2.1 RAID-Kapazitätsberechnungen
-    for (let i = 0; i < 200; i++) {
+    for (let i = 0; i < 15; i++) {
         const diskCount = Math.floor(Math.random() * 5) + 3; // 3 bis 7 Platten
         const diskSizeList = [1, 2, 4, 6, 8, 10, 12];
         const diskSize = diskSizeList[Math.floor(Math.random() * diskSizeList.length)];
@@ -160,7 +160,7 @@ function generateDynamicQuestions(typeMode = "mix") {
         { name: "Windows 11 Enterprise", target: "Große Unternehmen mit komplexer IT-Infrastruktur und Volumenlizenzen" },
         { name: "Windows 11 Education", target: "Schulpersonal, Lehrkräfte und Studierende in Bildungseinrichtungen" }
     ];
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < 10; i++) {
         const targetEdition = winEditions[Math.floor(Math.random() * winEditions.length)];
         const wrongEditions = winEditions.filter(e => e.name !== targetEdition.name).map(e => e.name);
         const isOpen = shouldBeOpenText();
@@ -189,7 +189,7 @@ function generateDynamicQuestions(typeMode = "mix") {
 
     // ==========================================
     //     // 3.1 Subnetting (IP, NetID, Broadcast, Hosts)
-    for (let i = 0; i < 300; i++) {
+    for (let i = 0; i < 20; i++) {
         const ip3 = Math.floor(Math.random() * 254) + 1;
         const ip4 = Math.floor(Math.random() * 254) + 1;
         const masks = [
@@ -326,7 +326,7 @@ function generateDynamicQuestions(typeMode = "mix") {
         { name: "Ethernet", layer: "2", layerName: "Sicherungsschicht (Data Link Layer)" },
         { name: "DHCP", layer: "7", layerName: "Anwendungsschicht (Application Layer)" }
     ];
-    for (let i = 0; i < 60; i++) {
+    for (let i = 0; i < 10; i++) {
         const proto = osiProtocols[Math.floor(Math.random() * osiProtocols.length)];
         const wrongLayers = ["Schicht 1", "Schicht 2", "Schicht 3", "Schicht 4", "Schicht 7"].filter(l => !l.includes(proto.layer));
         const isOpen = shouldBeOpenText();
@@ -370,7 +370,7 @@ function generateDynamicQuestions(typeMode = "mix") {
         { name: "Computer-Wurm (Worm)", desc: "verbreiten sich selbstständig über Netzwerke und Sicherheitslücken, ohne ein Wirtsprogramm zu benötigen" },
         { name: "Computer-Virus", desc: "benötigen zwingend ein Wirtsprogramm zur Ausbreitung und hängen sich an andere ausführbare Dateien an" }
     ];
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < 10; i++) {
         const mw = malwareTypes[Math.floor(Math.random() * malwareTypes.length)];
         const wrongMW = malwareTypes.filter(m => m.name !== mw.name).map(m => m.name);
         const isOpen = shouldBeOpenText();
@@ -403,7 +403,7 @@ function generateDynamicQuestions(typeMode = "mix") {
         { name: "Integrität (Integrity)", desc: "Sicherstellung, dass Daten vollständig, korrekt und unversehrt bleiben und nicht unbemerkt manipuliert werden" },
         { name: "Verfügbarkeit (Availability)", desc: "Sicherstellung, dass IT-Systeme, Dienste und Daten für berechtigte Benutzer zur vereinbarten Zeit betriebsbereit sind" }
     ];
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < 10; i++) {
         const goal = securityGoals[Math.floor(Math.random() * securityGoals.length)];
         const wrongGoals = securityGoals.filter(g => g.name !== goal.name).map(g => g.name);
         const isOpen = shouldBeOpenText();
@@ -435,7 +435,7 @@ function generateDynamicQuestions(typeMode = "mix") {
     // ==========================================
     
     // 5.1 Pseudocode Schleifen-Tracing
-    for (let i = 0; i < 200; i++) {
+    for (let i = 0; i < 15; i++) {
         const startErg = Math.floor(Math.random() * 5); // 0 bis 4
         const multiplier = Math.floor(Math.random() * 3) + 1; // 1 bis 3
         const loopLimit = Math.floor(Math.random() * 4) + 4; // 4 bis 7
@@ -488,7 +488,7 @@ function generateDynamicQuestions(typeMode = "mix") {
         { q: "Welches HTML-Tag wird verwendet, um eine ungeordnete Liste (mit Aufzählungspunkten) zu erstellen?", options: ["<ul>", "<ol>", "<li>", "<list>"], answer: 0, exp: "<ul> (unordered list) definiert eine ungeordnete Liste mit Punkten. <ol> (ordered list) definiert eine nummerierte Liste, und <li> steht für ein einzelnes Listenelement (list item)." },
         { q: "Wie lautet die korrekte CSS-Syntax, um alle Absätze (<p>-Elemente) fett gedruckt anzuzeigen?", options: ["p { font-weight: bold; }", "p { font-style: bold; }", "p { text-weight: bold; }", "p { text-style: bold; }"], answer: 0, exp: "Die korrekte CSS-Eigenschaft lautet 'font-weight: bold;'." }
     ];
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < 10; i++) {
         const item = htmlCssQuestions[Math.floor(Math.random() * htmlCssQuestions.length)];
         const isOpen = shouldBeOpenText();
 
@@ -543,7 +543,7 @@ function generateDynamicQuestions(typeMode = "mix") {
             explanation: "Um Durchschnittswerte pro Kategorie anzuzeigen, wird die Aggregatfunktion AVG(Preis) in Kombination mit GROUP BY Kategorie verwendet."
         }
     ];
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < 10; i++) {
         const scenario = sqlScenarios[Math.floor(Math.random() * sqlScenarios.length)];
         const isOpen = shouldBeOpenText();
         
@@ -608,7 +608,7 @@ function generateDynamicQuestions(typeMode = "mix") {
             exp: "Da die Zuordnung in beide Richtungen eindeutig ist (Mitarbeiter -> Dienstwagen: max. 1, Dienstwagen -> Mitarbeiter: 1), handelt es sich um eine 1:1-Beziehung."
         }
     ];
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < 10; i++) {
         const scenario = erScenarios[Math.floor(Math.random() * erScenarios.length)];
         const isOpen = shouldBeOpenText();
         
@@ -643,7 +643,7 @@ function generateDynamicQuestions(typeMode = "mix") {
         { q: "Welches Prinzip sichert in relationalen Datenbanken, dass Fremdschlüssel-Beziehungen konsistent bleiben und keine verwaisten Einträge entstehen?", options: ["Referenzielle Integrität", "Redundanzfreiheit", "Normalisierung", "Kapselung"], answer: 0, exp: "Die referenzielle Integrität stellt sicher, dass Datensätze nicht gelöscht werden können, solange andere Datensätze (über Fremdschlüssel) auf sie verweisen. Dies verhindert ungültige Beziehungen." },
         { q: "Was versteht man unter dem Begriff 'Redundanz' in einer Datenbank?", options: ["Mehrfaches Vorhandensein derselben Daten im System, was zu Inkonsistenzen führen kann.", "Fehlen von Backups im Speicher.", "Löschen von Datensätzen.", "Die Geschwindigkeit der Abfragen."], answer: 0, exp: "Redundanz bedeutet, dass dieselben Daten mehrfach abgespeichert sind. Normalisierung dient dazu, Redundanzen zu minimieren, um Inkonsistenzen zu verhindern." }
     ];
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < 10; i++) {
         const item = databaseConcepts[Math.floor(Math.random() * databaseConcepts.length)];
         const isOpen = shouldBeOpenText();
 
@@ -672,7 +672,7 @@ function generateDynamicQuestions(typeMode = "mix") {
     // ==========================================
     // BINÄR-, DEZIMAL- & HEXADEZIMAL-UMRECHNUNG (lf3)
     // ==========================================
-    for (let i = 0; i < 150; i++) {
+    for (let i = 0; i < 20; i++) {
         const num = Math.floor(Math.random() * 256); // 0 bis 255
         const binStr = num.toString(2).padStart(8, '0');
         const hexStr = num.toString(16).toUpperCase();
@@ -845,7 +845,7 @@ function generateDynamicQuestions(typeMode = "mix") {
     // ==========================================
     // STROM- & ENERGIEKOSTEN-BERECHNUNG (lf2)
     // ==========================================
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < 10; i++) {
         const powerWatts = (Math.floor(Math.random() * 9) + 2) * 50; // 100 bis 500 Watt
         const days = [30, 90, 365][Math.floor(Math.random() * 3)];
         const centPerKwh = Math.floor(Math.random() * 16) + 30; // 30 bis 45 Cent
@@ -886,7 +886,7 @@ function generateDynamicQuestions(typeMode = "mix") {
     // ==========================================
     // SPEICHERBEDARFS-BERECHNUNG (DATEIVOLUMEN) (lf2)
     // ==========================================
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < 10; i++) {
         const mbits = Math.floor(Math.random() * 9) + 2; // 2 bis 10 Mbit/s
         const hours = Math.floor(Math.random() * 12) + 2; // 2 bis 13 Stunden
         
@@ -927,7 +927,7 @@ function generateDynamicQuestions(typeMode = "mix") {
     // ==========================================
     // DATENÜBERTRAGUNGSZEIT-BERECHNUNG (lf3)
     // ==========================================
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < 10; i++) {
         const fileGb = [5, 10, 20, 50, 100][Math.floor(Math.random() * 5)]; // Dateigröße
         const speedMbit = [50, 100, 250, 500, 1000][Math.floor(Math.random() * 5)]; // Leitungsgeschwindigkeit
         const overheadPercent = [10, 20][Math.floor(Math.random() * 2)]; // 10% oder 20% Protokoll-Overhead
@@ -1019,7 +1019,7 @@ function generateDynamicQuestions(typeMode = "mix") {
             exp: "Der Text besagt: Wenn die Uptime unter den garantierten Wert fällt, erhält der Kunde Service-Gutschriften ('customer is eligible to receive service credits as financial compensation')."
         }
     ];
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < 10; i++) {
         const item = englishTexts[Math.floor(Math.random() * englishTexts.length)];
         const isOpen = shouldBeOpenText();
 
