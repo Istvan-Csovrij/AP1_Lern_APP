@@ -2604,5 +2604,39 @@ function loginUeberpruefung(username, passwort) {
         explanation: `Lernkarte Netzwerkadressen:
 - Die Netzwerkadresse kennzeichnet das Subnetz als Ganzes und darf nicht an Hosts vergeben werden.
 - Die Broadcastadresse dient dazu, Datenpakete an alle Hosts im Subnetz gleichzeitig zu senden.`
+    },
+    {
+        id: 194,
+        theme: "lf4",
+        type: "open-text",
+        question: "Prüfungsaufgabe Schutzbedarfsanalyse (Sommer 2023 / LF 4): Für eine Auftrags- und Kundenverwaltung soll der Schutzbedarf bezüglich Vertraulichkeit, Integrität und Verfügbarkeit (Kategorien: normal, hoch, sehr hoch) bestimmt werden. Ordne die Kategorien begründet zu anhand dieser Vorgaben:\n1. Vertraulichkeit: Es werden Kundendaten verarbeitet, deren Missbrauch dem Unternehmen großen Schaden (50.000 bis 500.000 EUR) zufügt.\n2. Integrität: Manipulationen an Preisangaben führen zu Schäden über 50.000 EUR und erheblichem Vertrauensverlust.\n3. Verfügbarkeit: Ein Ausfall von über 24 Stunden ist hinnehmbar, da auf Ersatzgeräten weitergearbeitet werden kann.",
+        musterloesung: `- Vertraulichkeit: hoch
+  * Begründung: Der Missbrauch von personenbezogenen Kundendaten kann einen beträchtlichen finanziellen Schaden (zwischen 50.000 und 500.000 EUR) und Imageverlust verursachen.
+
+- Integrität: hoch
+  * Begründung: Verfälschte Preisdaten führen zu Fehlbuchungen, Vertragsstreitigkeiten und erheblichem Ansehensverlust bei Kunden.
+
+- Verfügbarkeit: normal
+  * Begründung: Ein Ausfall von mehr als 24 Stunden behindert zwar das Arbeiten, gefährdet das Unternehmen aber nicht existenziell, da unkompliziert auf andere PCs ausgewichen werden kann.`,
+        explanation: `Lernkarte Schutzbedarfsanalyse:
+- Der Schutzbedarf (normal, hoch, sehr hoch) wird für jedes Schutzziel einzeln ermittelt, indem man die maximalen Auswirkungen eines Schadensfalls bewertet.`
+    },
+    {
+        id: 195,
+        theme: "lf5",
+        type: "open-text",
+        question: "Prüfungsaufgabe ER-Modellierung (Sommer 2023 / LF 5): Gegeben sind die Entitäten 'Mitarbeiter', 'Laptop' und 'Projekt'. Bestimme die Kardinalitäten (in Min..Max-Notation) für folgende Beziehungen:\n1. Mitarbeiter zu Laptop (Ein Laptop gehört genau einem Mitarbeiter. Ein Mitarbeiter kann keinen oder mehrere Laptops besitzen.)\n2. Mitarbeiter zu Projekt (In einem Projekt arbeiten mehrere Mitarbeiter. Ein Mitarbeiter kann in mehreren Projekten arbeiten.)",
+        musterloesung: `Kardinalitäten in Min..Max-Notation:
+
+1. Beziehung Mitarbeiter <-> Laptop (1:N):
+- Mitarbeiter zu Laptop: 0..* (oder 0..N) (Ein Mitarbeiter kann 0 bis N Laptops besitzen).
+- Laptop zu Mitarbeiter: 1..1 (Ein Laptop gehört genau einem Mitarbeiter).
+
+2. Beziehung Mitarbeiter <-> Projekt (N:M):
+- Mitarbeiter zu Projekt: 0..* (oder 0..N) (Ein Mitarbeiter kann in 0 bis N Projekten mitarbeiten).
+- Projekt zu Mitarbeiter: 1..* (oder 1..N) (In einem Projekt arbeitet mindestens 1 bis N Mitarbeiter).`,
+        explanation: `Lernkarte ER-Kardinalitäten:
+- 1:N-Beziehungen werden über einen Fremdschlüssel auf der N-Seite (hier Laptop) realisiert.
+- N:M-Beziehungen müssen im relationalen Modell über eine Verknüpfungstabelle (z. B. Projekt_Mitarbeiter) in zwei 1:N-Beziehungen aufgelöst werden.`
     }
 ];
