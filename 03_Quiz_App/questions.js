@@ -1869,5 +1869,25 @@ Es werden wöchentlich 10.080 Bilder gespeichert. Der Speicherbedarf beträgt ca
             "- RAID 0 erhöht die Lese- und Schreibgeschwindigkeit, bietet aber null Ausfallsicherheit. Fällt eine Platte aus, sind alle Daten verloren.\n" +
             "- RAID 5 ist die am häufigsten genutzte Konfiguration, da sie ein gutes Gleichgewicht aus Kapazität und Ausfallsicherheit (Toleranz für 1 Ausfall) bietet.\n" +
             "- RAID 10 verbindet die Sicherheit von RAID 1 mit der Performance von RAID 0, benötigt aber mindestens 4 Festplatten."
+    },
+    {
+        id: 153,
+        theme: "lf5",
+        type: "open-text",
+        question: "Prüfungsaufgabe Softwaretest (LF 5): Erläutere die beiden Blackbox-Testverfahren Äquivalenzklassenbildung und Grenzwertanalyse und beschreibe ihre Anwendung anhand einer Eingabe, die Ganzzahlen von 1 bis 100 akzeptiert.",
+        musterloesung: "- Äquivalenzklassenbildung:\n  * Definition: Teilt die Menge der möglichen Eingabewerte in Klassen auf. Es wird angenommen, dass alle Werte innerhalb einer Klasse vom Programm gleich verarbeitet werden. Man benötigt pro Klasse nur einen Testwert.\n  * Klassen für Werte 1 bis 100:\n    1. Gültige Äquivalenzklasse (GÄK): Zahlen von 1 bis 100 (z. B. Testwert: 50).\n    2. Ungültige Äquivalenzklasse 1 (UÄK1): Werte < 1 (z. B. Testwert: 0 oder -5).\n    3. Ungültige Äquivalenzklasse 2 (UÄK2): Werte > 100 (z. B. Testwert: 101 oder 200).\n    4. (Optional) Ungültige Datentypen: Buchstaben, Sonderzeichen.\n\n- Grenzwertanalyse:\n  * Definition: Testet gezielt die Grenzen der Äquivalenzklassen (die Ränder), da dort durch Programmierfehler (z. B. falsche Operatoren wie '<' statt '<=') am häufigsten Fehler auftreten. Zu testen sind die Grenzwerte selbst sowie die Werte direkt daneben.\n  * Werte für Grenzen 1 und 100:\n    - Untere Grenze (1): Testwerte 0, 1, 2.\n    - Obere Grenze (100): Testwerte 99, 100, 101.",
+        explanation: "Lernkarte Softwaretest (Blackbox):\n" +
+            "- Blackbox-Tests testen die Funktion einer Software ohne Kenntnis des inneren Codes.\n" +
+            "- Äquivalenzklassenbildung reduziert die Testfälle auf ein Minimum. Die Grenzwertanalyse stellt sicher, dass Grenzbedingungen korrekt eingehalten werden."
+    },
+    {
+        id: 154,
+        theme: "lf3",
+        type: "open-text",
+        question: "Prüfungsaufgabe Netzwerkdiagnose (LF 3): Erkläre die genaue Funktionsweise sowie das jeweils genutzte Protokoll der beiden Windows-Befehle 'ping' und 'tracert' (Traceroute).",
+        musterloesung: "- ping:\n  * Funktion: Prüft die Erreichbarkeit eines Hosts im Netzwerk und misst die Zeit für die Hin- und Rückverbindung (Latenz).\n  * Protokoll: ICMP (Internet Control Message Protocol - arbeitet auf OSI-Schicht 3).\n  * Funktionsweise: Sendet ein 'ICMP Echo Request'-Paket an den Ziel-Host. Dieser antwortet bei Erreichbarkeit mit einem 'ICMP Echo Reply'-Paket.\n\n- tracert (Traceroute):\n  * Funktion: Ermittelt den genauen Pfad (die IP-Adressen aller beteiligten Router/Hops) zu einem Ziel-Host.\n  * Protokoll: ICMP (und teilweise UDP).\n  * Funktionsweise: Sendet Pakete mit schrittweise erhöhter Lebensdauer (TTL - Time to Live), beginnend bei TTL=1. Der erste Router dekrementiert die TTL auf 0, verwirft das Paket und sendet ein 'ICMP Time Exceeded'-Fehlerpaket zurück, wodurch seine IP registriert wird. Dann wird das Paket mit TTL=2 gesendet, um den zweiten Router zu ermitteln, und so weiter, bis das Ziel erreicht wird.",
+        explanation: "Lernkarte Netzwerkdiagnose:\n" +
+            "- TTL (Time to Live) ist ein Zähler im IP-Header, der verhindert, dass Pakete durch Routing-Schleifen endlos im Netz kreisen.\n" +
+            "- Gibt ein Router auf dem Weg keine ICMP-Antworten zurück, wird dies in der Ausgabe als Sternchen (`* * * Zeitüberschreitung der Anforderung`) dargestellt."
     }
 ];
