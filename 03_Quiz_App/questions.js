@@ -2557,15 +2557,52 @@ function loginUeberpruefung(username, passwort) {
     // Wenn das Ergebnis 0 ist, sind die Anmeldedaten korrekt
     if (abfrageErgebnis === 0) {
         return true;
-    } else {
-        // Bei jedem anderen Wert (1 oder 2) Fehlermeldung ausgeben und false zurückgeben
-        console.log("Daten nicht korrekt");
-        return false;
-    }
-}
-\`\`\``,
-        explanation: `Lernkarte Programmierlogik:
-- Der Vergleichsoperator === stellt sicher, dass sowohl der Wert als auch der Datentyp (Zahl 0) übereinstimmen.
-- Durch die Kapselung in einen else-Block wird die Fehlermeldung nur im Fehlerfall ausgegeben.`
+    },
+    {
+        id: 192,
+        theme: "lf6",
+        type: "open-text",
+        question: "Prüfungsaufgabe Handelskalkulation (Sommer 2023 / LF 6): Ein IT-Systemhaus beschafft 30 Laptops zu einem Listeneinkaufspreis von je 1.300,00 EUR netto. Der Großhändler gewährt 20 % Rabatt und 3 % Skonto. Die Transportkosten betragen 10,00 EUR netto pro Laptop.\nDie Laptops werden an einen Kunden für einen Listenverkaufspreis von je 1.800,00 EUR netto verkauft. Das Systemhaus gewährt dem Kunden 20 % Rabatt und 2 % Skonto. Die internen Handlungskosten betragen 35 % auf den Einstandspreis.\n\nBerechne:\n1. Den Bezugspreis (Einstandspreis) pro Laptop netto bei Ausnutzung des Lieferantenskontos.\n2. Den Selbstkostenpreis pro Laptop netto.\n3. Den tatsächlichen Gewinn/Verlust (in EUR und in % bezogen auf die Selbstkosten) pro Laptop bei Ausnutzung aller Skonti. Der Rechenweg ist anzugeben.",
+        musterloesung: `1. Bezugskalkulation (Einkauf):
+  Listeneinkaufspreis: 1.300,00 EUR
+- Lieferantenrabatt (20 %): - 260,00 EUR
+= Zieleinkaufspreis: 1.040,00 EUR
+- Lieferantenskonto (3 % von 1.040): - 31,20 EUR
+= Bareinkaufspreis: 1.008,80 EUR
++ Bezugskosten (Transport): + 10,00 EUR
+= Bezugspreis (Einstandspreis): 1.018,80 EUR
+
+2. Selbstkostenpreis:
+  Bezugspreis (Einstandspreis): 1.018,80 EUR
++ Handlungskosten (35 % von 1.018,80): + 356,58 EUR
+= Selbstkostenpreis: 1.375,38 EUR
+
+3. Verkaufskalkulation & Gewinnberechnung:
+  Listenverkaufspreis: 1.800,00 EUR
+- Kundenrabatt (20 %): - 360,00 EUR
+= Zielverkaufspreis: 1.440,00 EUR
+- Kundenskonto (2 % von 1.440): - 28,80 EUR
+= Barverkaufspreis (Nettoerlös): 1.411,20 EUR
+
+- Gewinn (in EUR): Barverkaufspreis (1.411,20 EUR) - Selbstkostenpreis (1.375,38 EUR) = 35,82 EUR (Gewinn)
+- Gewinn (in % bezogen auf Selbstkosten): (35,82 EUR / 1.375,38 EUR) * 100 = 2,60 %`,
+        explanation: `Lernkarte Handelskalkulation:
+- Bezugskosten werden erst nach Abzug des Skontos zum Bareinkaufspreis addiert.
+- Handlungskosten werden auf den Einstandspreis (Bezugspreis) aufgeschlagen.
+- Der Gewinn ist die Differenz zwischen dem Nettoerlös (Barverkaufspreis) und den Selbstkosten.`
+    },
+    {
+        id: 193,
+        theme: "lf3",
+        type: "open-text",
+        question: "Prüfungsaufgabe Netzwerktechnik (Sommer 2023 / LF 3): Aus der IP-Konfiguration eines Laptops sind folgende Werte bekannt:\n- IPv4-Adresse: 10.1.10.1\n- Subnetzmaske: 255.255.0.0 (bzw. /16)\n\nBestimme die Netzwerkadresse sowie die Broadcastadresse des IP-Subnetzes, in dem sich der Laptop befindet. Der Rechenweg/die Logik ist kurz zu beschreiben.",
+        musterloesung: `- Netzwerkadresse: 10.1.0.0
+  * Erklärung: Die ersten 16 Bits (2 Oktette: 10.1) bilden den Netzanteil, der unverändert bleibt. Die restlichen 16 Bits des Hostanteils werden auf 0 gesetzt (binär 00000000.00000000).
+
+- Broadcastadresse: 10.1.255.255
+  * Erklärung: Der Netzanteil (10.1) bleibt unverändert. Alle Bits des Hostanteils werden auf 1 gesetzt (binär 11111111.11111111 entspricht dezimal 255.255).`,
+        explanation: `Lernkarte Netzwerkadressen:
+- Die Netzwerkadresse kennzeichnet das Subnetz als Ganzes und darf nicht an Hosts vergeben werden.
+- Die Broadcastadresse dient dazu, Datenpakete an alle Hosts im Subnetz gleichzeitig zu senden.`
     }
 ];
