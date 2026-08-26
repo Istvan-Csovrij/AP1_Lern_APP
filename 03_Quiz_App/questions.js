@@ -2168,15 +2168,126 @@ while (anzUrlaubstage > 0) {
     if (anzUrlaubstage - tage >= 0) {
         console.log("Urlaub genehmigt.");
         anzUrlaubstage -= tage;
-    } else {
-        console.log("Urlaub nicht genehmigt.");
-    }
-}
-console.log("Urlaub aufgebraucht.");
+    },
+    {
+        id: 169,
+        theme: "lf6",
+        type: "open-text",
+        question: "Prüfungsaufgabe Beschaffung (Sommer 2024 / LF 6): Ein Unternehmen möchte für ein neues Projekt Hardware beschaffen und sucht nach geeigneten Lieferanten. Nenne jeweils 2 interne und 2 externe Bezugsquellen, die das Unternehmen für die Lieferantensuche nutzen kann.",
+        musterloesung: `- Interne Bezugsquellen (aus dem eigenen Unternehmen):
+  1. Lieferantendatei / Lieferantenkartei (im Warenwirtschafts-/ERP-System gespeicherte Kontaktdaten).
+  2. Eigene Einkaufsstatistiken / frühere Bestellungen (Bewertung bereits bekannter Lieferanten).
+
+- Externe Bezugsquellen (außerhalb des Unternehmens):
+  1. Internetrecherchen (Preissuchmaschinen, Suchmaschinen, Websites der Hersteller).
+  2. Fachmessen, Ausstellungen und Produktpräsentationen.
+  3. Branchen- und Adressbücher (z. B. "Gelbe Seiten", "Wer liefert was").
+  4. Fachzeitschriften, IHK-Datenbanken oder Bezugsquellenverzeichnisse.`,
+        explanation: `Lernkarte Bezugsquellen:
+- Interne Quellen greifen auf bereits vorhandenes Wissen zurück (schneller, risikoärmer).
+- Externe Quellen erschließen neue Anbieter und ermöglichen aktuelle Marktvergleiche.`
+    },
+    {
+        id: 170,
+        theme: "lf6",
+        type: "open-text",
+        question: "Prüfungsaufgabe Wareneingangsprüfung (Sommer 2024 / LF 6): Zwei Wochen nach der Bestellung wird das Videoüberwachungssystem geliefert. Erläutere 4 wesentliche Arbeitsschritte, die bei einer ordnungsgemäßen Wareneingangsprüfung durchgeführt werden müssen.",
+        musterloesung: `1. Identitäts- und Mengenprüfung (Abgleich): Vergleichen der gelieferten Ware und der Anzahl mit dem Lieferschein und der ursprünglichen Bestellung (Wurde die richtige Ware in der richtigen Menge geliefert?).
+2. Äußere Sichtprüfung auf Transportschäden: Untersuchung der Transportverpackung auf Feuchtigkeit, Deformationen oder Risse noch im Beisein des Frachtführers (Paketdienstes), um Transportschäden sofort vermerken zu können.
+3. Qualitäts- und Funktionsprüfung: Auspacken der Geräte und Untersuchung auf offensichtliche Mängel (z. B. Kratzer, Brüche) sowie ggf. Durchführung eines kurzen Funktionstests (z. B. Kamera einschalten).
+4. Dokumentation & Buchung: Quittieren des Lieferscheins, Erfassen des Wareneingangs im ERP-System zur Aktualisierung des Lagerbestands und ggf. Verfassen einer Mängelrüge bei fehlerhafter Lieferung.`,
+        explanation: `Lernkarte Wareneingang:
+- Eine unverzügliche Wareneingangsprüfung ist laut § 377 HGB für Kaufleute Pflicht (Rügepflicht). Werden Mängel zu spät gemeldet, gilt die Ware als genehmigt.`
+    },
+    {
+        id: 171,
+        theme: "lf3",
+        type: "open-text",
+        question: "Prüfungsaufgabe Netzwerktechnik (Sommer 2024 / LF 3): Die Geschäftsleitung möchte vom Homeoffice aus direkt auf das neu installierte Videoüberwachungssystem mit der privaten IP-Adresse '192.168.0.33' zugreifen. Begründe ausführlich, warum dieser direkte Zugriff aus dem Internet technisch nicht möglich ist.",
+        musterloesung: `Begründung:
+- Die IP-Adresse 192.168.0.33 liegt im privaten IP-Adressbereich (Klasse C nach RFC 1918).
+- Private IP-Adressen sind im weltweiten öffentlichen Internet nicht routingfähig. Sie werden von den Routern im Internet ignoriert und verworfen, um weltweite Adresskonflikte zu vermeiden.
+- Ein Zugriff aus dem Homeoffice ist nur über einen gesicherten Tunnel (z. B. ein Virtual Private Network / VPN) oder über ein auf dem Router konfiguriertes NAT/PAT (Portweiterleitung) möglich, bei dem eine öffentliche IP-Adresse des Routers auf die interne IP der Kamera umgeleitet wird.`,
+        explanation: `Lernkarte Private IPs (RFC 1918):
+- Private Bereiche: 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16.
+- Diese Adressen dürfen ausschließlich in lokalen Netzen (LANs) verwendet werden und sind im Internet unsichtbar.`
+    },
+    {
+        id: 172,
+        theme: "lf3",
+        type: "open-text",
+        question: "Prüfungsaufgabe Subnetz-Routbarkeit (Sommer 2024 / LF 3): In einem Firmennetzwerk mit dem IP-Adressbereich 192.168.0.0/24 werden neue Kameras mit den IP-Adressen 192.168.1.33 bis 192.168.9.33 angeschlossen. Die Clients im Netz (192.168.0.50 bis 192.168.0.200) können diese Kameras nicht erreichen. Begründe, warum die Kommunikation ohne weitere Maßnahmen fehlschlägt.",
+        musterloesung: `Begründung:
+- Die Subnetzmaske /24 (255.255.255.0) legt fest, dass die ersten drei Oktette (24 Bit) den Netzwerkanteil bilden. Für die Clients lautet das logische Subnetz also '192.168.0.x'.
+- Die neuen Kameras befinden sich jedoch in anderen Subnetzen ('192.168.1.x' bis '192.168.9.x').
+- Da Clients und Kameras in unterschiedlichen IP-Netzen liegen, können sie nicht direkt (auf OSI-Schicht 2) miteinander kommunizieren. Es wird zwingend ein Router (Gateway) benötigt, der zwischen den Netzen vermittelt, oder die Subnetzmaske der Clients müsste angepasst werden (z. B. auf /16), damit alle IPs im selben Netz liegen.`,
+        explanation: `Lernkarte Subnetzgrenzen:
+- Ohne Router (Gateway) können IP-Geräte nur mit Partnern kommunizieren, deren IP-Adresse im selben Subnetz liegt (ermittelt durch die logische UND-Verknüpfung von eigener IP und Subnetzmaske).`
+    },
+    {
+        id: 173,
+        theme: "lf3",
+        type: "open-text",
+        question: "Prüfungsaufgabe Gateway-Konfiguration (Sommer 2024 / LF 3): Ein Client im Firmennetzwerk kommt nicht ins Internet. Laut Netzplan lautet die IP des Routers 192.168.0.254, die IP des Testservers lautet 192.168.0.1. Die manuelle Client-Konfiguration zeigt:\n- IPv4-Adresse: 192.168.0.51\n- Subnetzmaske: 255.255.255.0\n- Standardgateway: 192.168.0.1\n- DNS-Server: 192.168.0.254\n\nErkläre den Konfigurationsfehler und seine konkrete Auswirkung.",
+        musterloesung: `Konfigurationsfehler:
+- Als Standardgateway (Default Gateway) wurde fälschlicherweise die IP-Adresse des Testservers (192.168.0.1) anstelle der IP-Adresse des Routers (192.168.0.254) eingetragen.
+
+Auswirkung:
+- Jedes Mal, wenn der Client Datenpakete an Adressen außerhalb des eigenen Subnetzes (z. B. ins Internet) senden möchte, schickt er diese an den Testserver (192.168.0.1). Da der Testserver kein Routing ins Internet betreibt, verbleiben die Pakete dort und der Client hat keine Internetverbindung.`,
+        explanation: `Lernkarte Standardgateway:
+- Das Standardgateway muss immer das Gerät im lokalen Netz sein, welches physisch und logisch mit externen Netzen (z. B. dem Internet) verbunden ist – in der Regel also der Router.`
+    },
+    {
+        id: 174,
+        theme: "lf3",
+        type: "open-text",
+        question: "Prüfungsaufgabe IPv6-Adresstypen (Sommer 2024 / LF 3): In der Konfiguration eines Netzwerkadapters befinden sich zwei IPv6-Adressen:\n1. fe80::868c:6a65:bb44:b228\n2. 2001:db8:1234:55::a/64\n\nBenenne die beiden IPv6-Adresstypen und beschreibe kurz ihren jeweiligen Verwendungszweck.",
+        musterloesung: `1. Adresse 'fe80::...': Link-Local-Adresse (LLA)
+- Zweck: Wird für die Kommunikation innerhalb desselben lokalen Netzwerksegments (Link) verwendet. Sie wird automatisch generiert und dient z. B. für Protokolle wie Nachbarschaftserkennung (NDP), Autokonfiguration (SLAAC) oder DHCPv6. Sie wird nicht über Router hinweg weitergeleitet.
+
+2. Adresse '2001:db8::...': Global Unicast Address (GUA)
+- Zweck: Eine weltweit eindeutige, öffentlich routingfähige IPv6-Adresse. Sie entspricht einer öffentlichen IPv4-Adresse und ermöglicht die weltweite Kommunikation über das Internet.`,
+        explanation: `Lernkarte IPv6-Adressbereiche:
+- Link-Local-Adressen beginnen immer mit dem Präfix 'fe80::/10'.
+- Global Unicast-Adressen liegen aktuell im Bereich ab '2000::/3'.`
+    },
+    {
+        id: 175,
+        theme: "lf4",
+        type: "open-text",
+        question: "Prüfungsaufgabe Datenschutz & Videoüberwachung (Sommer 2024 / LF 4): Ein Händler richtet an seinem Ladenlokal eine Videokamera ein, die auch einen Teil des öffentlichen Bürgersteigs erfasst. Erkläre die datenschutzrechtliche Zulässigkeit dieses Vorhabens laut DSGVO/BDSG und nenne die erforderliche Maßnahme.",
+        musterloesung: `Zulässigkeit:
+- Die Videoüberwachung des öffentlichen Raums (wie eines Bürgersteigs) durch private Betreiber ist grundsätzlich unzulässig, da sie das Recht auf informationelle Selbstbestimmung der Passanten verletzt. Private Unternehmen dürfen ausschließlich das eigene Privat- bzw. Betriebsgelände überwachen.
+
+Erforderliche Maßnahme:
+- Der Erfassungswinkel der Kamera muss physisch so angepasst werden, dass der öffentliche Raum nicht mehr erfasst wird. Ist dies baulich nicht möglich, müssen diese Bereiche im Videobild softwareseitig dauerhaft unkenntlich gemacht (geschwärzt, verpixelt oder maskiert) werden.
+- Zudem muss an gut sichtbarer Stelle ein Hinweisschild mit Kamerasymbol und Informationen gemäß Art. 13 DSGVO (Verantwortlicher, Zweck der Überwachung, Speicherdauer) angebracht werden.`,
+        explanation: `Lernkarte Videoüberwachung nach DSGVO:
+- Zulässig nur bei berechtigtem Interesse (z. B. Diebstahlschutz) und wenn dies erforderlich ist (kein milderes Mittel). Öffentlicher Raum ist tabu!`
+    },
+    {
+        id: 176,
+        theme: "lf5",
+        type: "open-text",
+        question: "Prüfungsaufgabe SQL & Datenbanken (Sommer 2024 / LF 5): Gegeben ist das Relationenmodell:\nimages (filename, filesize, timestamp)\nFormuliere die entsprechenden SQL-Befehle für die folgenden Aktionen:\n1. Lösche den Datenbankeintrag für die Bilddatei mit dem Namen 'testbild.jpg'.\n2. Bestimme die Gesamtgröße (Summe) aller Bilddateien, die in der Tabelle erfasst sind.\n3. Füge einen neuen Datenbankeintrag für die Bilddatei mit dem Namen 'testbild.jpg', der Größe 117000 Byte und dem Zeitstempel 1667292685 hinzu.",
+        musterloesung: `1. Datensatz löschen:
+\`\`\`sql
+DELETE FROM images WHERE filename = 'testbild.jpg';
+\`\`\`
+
+2. Summe berechnen:
+\`\`\`sql
+SELECT SUM(filesize) FROM images;
+\`\`\`
+
+3. Datensatz hinzufügen:
+\`\`\`sql
+INSERT INTO images (filename, filesize, timestamp) 
+VALUES ('testbild.jpg', 117000, 1667292685);
 \`\`\``,
-        explanation: `Lernkarte Struktogramme (Nassi-Shneiderman):
-- Der Schleifenblock umschließt alle eingerückten Aktionen.
-- Verzweigungen werden als Dreiecke mit True (T) und False (F) dargestellt.
-- Wertzuweisungen werden als einfache Anweisungen umgesetzt.`
+        explanation: `Lernkarte SQL-Manipulationsbefehle:
+- DELETE löscht bestehende Datensätze (DML).
+- SUM() ist eine Aggregatfunktion zur Summenbildung.
+- INSERT INTO fügt neue Zeilen in eine Tabelle ein.`
     }
 ];
