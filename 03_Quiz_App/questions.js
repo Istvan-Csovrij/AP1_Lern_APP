@@ -2086,5 +2086,97 @@ SELECT COUNT(*) FROM Mitarbeiter WHERE stadt = 'Mannheim';
 - CREATE TABLE dient der Definition der Tabellenstruktur (DDL - Data Definition Language).
 - ORDER BY sortiert standardmäßig aufsteigend (ASC).
 - COUNT(*) ist eine Aggregatfunktion, die die Anzahl der übereinstimmenden Zeilen zählt.`
+    },
+    {
+        id: 166,
+        theme: "lf6",
+        type: "open-text",
+        question: "Prüfungsaufgabe Angebotsvergleich (Sommer 2025 / LF 6): Ein Händler möchte für sein Unternehmen genau einen PC HP-GIGA-4711 beschaffen. Es liegen drei Angebote vor:\n- Angebot 1 (BH GmbH): Stückpreis 390 EUR, ab Werk, Lieferkosten 30 EUR. Neukundenrabatt 10 %, Skonto 3 % bei Zahlung innerhalb von 10 Tagen.\n- Angebot 2 (CBS KG): Stückpreis 320 EUR, ab Werk, Lieferkosten 40 EUR. Rabatt 5 %, Skonto 2 % bei Zahlung innerhalb von 14 Tagen.\n- Angebot 3 (Lhanding Plus Ltd.): Stückpreis 190 EUR, frei Haus, Frachtkosten pauschal 200 EUR pro Sendung. 10 % Rabatt bei Abnahme von mindestens 5 Stück, Skonto 3 % bei Zahlung innerhalb von 10 Tagen.\n\nFühre eine quantitative Bezugskalkulation (für 1 Stück) durch, ermittle den Einstandspreis (Bezugspreis) für alle drei Angebote und entscheide dich für das wirtschaftlichste Angebot. Der Rechenweg ist anzugeben.",
+        musterloesung: `1. Bezugskalkulation BH GmbH:
+  Listeneinkaufspreis: 390,00 EUR
+- Lieferantenrabatt (10 %): - 39,00 EUR
+= Zieleinkaufspreis: 351,00 EUR
+- Lieferantenskonto (3 % von 351): - 10,53 EUR
+= Bareinkaufspreis: 340,47 EUR
++ Bezugskosten (Lieferung): + 30,00 EUR
+= Einstandspreis: 370,47 EUR
+
+2. Bezugskalkulation CBS KG:
+  Listeneinkaufspreis: 320,00 EUR
+- Lieferantenrabatt (5 %): - 16,00 EUR
+= Zieleinkaufspreis: 304,00 EUR
+- Lieferantenskonto (2 % von 304): - 6,08 EUR
+= Bareinkaufspreis: 297,92 EUR
++ Bezugskosten (Lieferung): + 40,00 EUR
+= Einstandspreis: 337,92 EUR
+
+3. Bezugskalkulation Lhanding Plus Ltd. (Achtung Falle! Es wird nur 1 PC gekauft):
+  Listeneinkaufspreis: 190,00 EUR
+- Lieferantenrabatt: 0,00 EUR (Rabatt gibt es erst ab 5 Stück!)
+= Zieleinkaufspreis: 190,00 EUR
+- Lieferantenskonto (3 % von 190): - 5,70 EUR
+= Bareinkaufspreis: 184,30 EUR
++ Bezugskosten (Fracht): + 200,00 EUR
+= Einstandspreis: 384,30 EUR
+
+Ergebnis:
+Das Angebot der CBS KG ist mit einem Einstandspreis von 337,92 EUR das wirtschaftlichste Angebot (BH GmbH kostet 370,47 EUR; Lhanding Plus Ltd. kostet 384,30 EUR).`,
+        explanation: `Lernkarte Angebotsvergleich:
+- Achte extrem genau auf die Bedingungen! Wenn Bedingungen wie "Mindestabnahme von 5 Stück" für den Rabatt nicht erfüllt sind, darf der Rabatt in der Kalkulation nicht abgezogen werden.
+- Ab Werk bedeutet, dass der Käufer die Transportkosten (Bezugskosten) tragen muss.`
+    },
+    {
+        id: 167,
+        theme: "lf5",
+        type: "open-text",
+        question: "Prüfungsaufgabe XML-Fehlerkorrektur (Sommer 2025 / LF 5): Finde und korrigiere die vier Syntaxfehler in der folgenden XML-Datei, damit sie fehlerfrei eingelesen werden kann:\n\n\`\`\`xml\n<mitarbeiter>\n  <name>Simpson</name>\n  <vorname>Herbert<vorname>\n  <adresse>\n    <strasse>Immergrünstr.742</straße>\n    <stadt>sprungfeld\n  </adresse>\n  <abteilung>Sicherheit</abteilung>\n  <urlaubsanträge>\n    <urlaubsantrag>\n      <antragsnr>1</antragsnr>\n      <startdatum>1.2.2024</startdatum>\n      <enddatum>15.2.2024</enddatum>\n    </urlaubsanträge>\n    </urlaubsantrag>\n</mitarbeiter>\n\`\`\`",
+        musterloesung: `Die vier Fehler und deren Korrekturen lauten:
+
+1. Zeile 3: <vorname>Herbert<vorname>
+- Fehler: Dem schließenden Tag fehlt das Symbol '/'.
+- Korrektur: <vorname>Herbert</vorname>
+
+2. Zeile 5: <strasse>Immergrünstr.742</straße>
+- Fehler: Mismatch im Tag-Namen (Start-Tag 'strasse' mit Doppel-S, End-Tag 'straße' mit Eszett). Groß-/Kleinschreibung und Schreibweisen müssen exakt übereinstimmen.
+- Korrektur: <strasse>Immergrünstr.742</strasse>
+
+3. Zeile 6: <stadt>sprungfeld
+- Fehler: Dem Element fehlt das schließende Tag.
+- Korrektur: <stadt>sprungfeld</stadt>
+
+4. Zeilen 13-14: </urlaubsanträge> und </urlaubsantrag>
+- Fehler: Falsche Verschachtelung (Nesting-Fehler). Das innere Element <urlaubsantrag> (Zeile 10) muss geschlossen werden, bevor das äußere Element <urlaubsanträge> (Zeile 9) geschlossen werden darf.
+- Korrektur: Die Reihenfolge der schließenden Tags muss umgedreht werden:
+    </urlaubsantrag>
+  </urlaubsanträge>`,
+        explanation: `Lernkarte XML-Syntaxregeln:
+- XML-Tags sind case-sensitive (achten auf Groß-/Kleinschreibung und Schreibweise).
+- Jedes geöffnete Tag muss wieder geschlossen werden.
+- Elemente müssen korrekt geschachtelt sein (Last-In-First-Out-Prinzip).`
+    },
+    {
+        id: 168,
+        theme: "lf5",
+        type: "open-text",
+        question: "Prüfungsaufgabe Struktogramm-Implementierung (Sommer 2025 / LF 5): Setze das Struktogramm zur Urlaubsverwaltung in lauffähigen JavaScript-Code um. Das Struktogramm besitzt folgende Logik:\n- Initialisierung: anzUrlaubstage = 29\n- Wiederholung solange: anzUrlaubstage > 0\n  * Ausgabe: 'Sie haben noch ' + anzUrlaubstage + ' Tage Urlaub.'\n  * Ausgabe: 'Wieviele Tage Urlaub möchten Sie nehmen?'\n  * Eingabe: tage\n  * Verzweigung (IF): anzUrlaubstage - tage >= 0\n    - JA (Wahr): Ausgabe: 'Urlaub genehmigt.' und anzUrlaubstage um tage vermindern\n    - NEIN (Falsch): Ausgabe: 'Urlaub nicht genehmigt.'\n- Nach der Schleife (außerhalb): Ausgabe: 'Urlaub aufgebraucht.'",
+        musterloesung: `JavaScript-Code:
+\`\`\`javascript
+let anzUrlaubstage = 29;
+while (anzUrlaubstage > 0) {
+    console.log("Sie haben noch " + anzUrlaubstage + " Tage Urlaub.");
+    let tage = parseInt(prompt("Wieviele Tage Urlaub möchten Sie nehmen?"));
+    if (anzUrlaubstage - tage >= 0) {
+        console.log("Urlaub genehmigt.");
+        anzUrlaubstage -= tage;
+    } else {
+        console.log("Urlaub nicht genehmigt.");
+    }
+}
+console.log("Urlaub aufgebraucht.");
+\`\`\``,
+        explanation: `Lernkarte Struktogramme (Nassi-Shneiderman):
+- Der Schleifenblock umschließt alle eingerückten Aktionen.
+- Verzweigungen werden als Dreiecke mit True (T) und False (F) dargestellt.
+- Wertzuweisungen werden als einfache Anweisungen umgesetzt.`
     }
 ];
