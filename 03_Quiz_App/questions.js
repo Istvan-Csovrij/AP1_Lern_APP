@@ -2081,7 +2081,7 @@ SELECT * FROM Mitarbeiter ORDER BY name ASC;
 3. Anzahl ermitteln:
 \`\`\`sql
 SELECT COUNT(*) FROM Mitarbeiter WHERE stadt = 'Mannheim';
-\`\`\`,
+\`\`\``,
         explanation: `Lernkarte SQL-Grundlagen:
 - CREATE TABLE dient der Definition der Tabellenstruktur (DDL - Data Definition Language).
 - ORDER BY sortiert standardmäßig aufsteigend (ASC).
@@ -2168,16 +2168,6 @@ while (anzUrlaubstage > 0) {
     if (anzUrlaubstage - tage >= 0) {
         console.log("Urlaub genehmigt.");
         anzUrlaubstage -= tage;
-    } else {
-        console.log("Urlaub nicht genehmigt.");
-    }
-}
-console.log("Urlaub aufgebraucht.");
-\`\`\``,
-        explanation: `Lernkarte Struktogramme (Nassi-Shneiderman):
-- Der Schleifenblock umschließt alle eingerückten Aktionen.
-- Verzweigungen werden als Dreiecke mit True (T) und False (F) dargestellt.
-- Wertzuweisungen werden als einfache Anweisungen umgesetzt.`
     },
     {
         id: 169,
@@ -2452,15 +2442,6 @@ function pruefeNummer(nummer) {
     // Multipliziere die ersten 9 Ziffern (Index 0 bis 8) mit ihrer Stelle (1 bis 9)
     for (let i = 0; i < 9; i++) {
         sum += nummer[i] * (i + 1);
-    }
-    // Berechne die Prüfziffer (Rest der Division durch 10)
-    let berechnetePruefziffer = sum % 10;
-    // Vergleiche die berechnete Prüfziffer mit der an Index 9
-    return berechnetePruefziffer === nummer[9];
-}
-\`\`\``,
-        explanation: `Lernkarte Algorithmen (Prüfziffern):
-- Prüfziffern (wie bei IBAN, ISBN oder Kundenkarten) dienen dazu, Tippfehler bei der Dateneingabe sofort im Frontend zu erkennen, ohne eine Datenbankabfrage durchführen zu müssen.`
     },
     {
         id: 186,
@@ -2586,7 +2567,8 @@ function loginUeberpruefung(username, passwort) {
         explanation: `Lernkarte Programmierlogik:
 - Der Vergleichsoperator === stellt sicher, dass sowohl der Wert als auch der Datentyp (Zahl 0) übereinstimmen.
 - Durch die Kapselung in einen else-Block wird die Fehlermeldung nur im Fehlerfall ausgegeben.`
-    },
+    }
+,
     {
         id: 192,
         theme: "lf6",

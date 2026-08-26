@@ -822,7 +822,10 @@ function escapeHtml(text) {
         '&': '&amp;',
         '<': '&lt;',
         '>': '&gt;',
-        '"': '&quot;',\n        "'": '&#039;'\n    };\n    return text.replace(/[&<>"']/g, function(m) { return map[m]; });
+        '"': '&quot;',
+        "'": '&#039;'
+    };
+    return text.replace(/[&<>"']/g, function(m) { return map[m]; });
 }
 
 // ==================== EXAM MODE LOGIC ====================
