@@ -1893,5 +1893,48 @@ Es werden wöchentlich 10.080 Bilder gespeichert. Der Speicherbedarf beträgt ca
         explanation: `Lernkarte Netzwerkdiagnose:
 - TTL (Time to Live) ist ein Zähler im IP-Header, der verhindert, dass Pakete durch Routing-Schleifen endlos im Netz kreisen.
 - Gibt ein Router auf dem Weg keine ICMP-Antworten zurück, wird dies in der Ausgabe als Sternchen (* * * Zeitüberschreitung der Anforderung) dargestellt.`
+    },
+    {
+        id: 155,
+        theme: "lf6",
+        type: "open-text",
+        question: "Prüfungsaufgabe Handelskalkulation (LF 6): Ein IT-Systemhaus kauft Hardware-Komponenten für einen Listeneinkaufspreis von 2.000 EUR. Berechne den Einstandspreis (Bezugspreis) anhand der folgenden Konditionen: Lieferantenrabatt 10 %, Lieferantenskonto 2 %, Bezugskosten (Transport und Verpackung) 50 EUR. Der Rechenweg ist anzugeben.",
+        musterloesung: `Kalkulationsschema (Vorwärtskalkulation):
+1. Listeneinkaufspreis: 2.000,00 EUR
+2. - Lieferantenrabatt (10 % von 2.000): - 200,00 EUR
+3. = Zieleinkaufspreis: 1.800,00 EUR
+4. - Lieferantenskonto (2 % von 1.800): - 36,00 EUR
+5. = Bareinkaufspreis: 1.764,00 EUR
+6. + Bezugskosten (Transport/Verpackung): + 50,00 EUR
+7. = Einstandspreis (Bezugspreis): 1.814,00 EUR
+
+Ergebnis: Der Einstandspreis beträgt 1.814,00 EUR.`,
+        explanation: `Lernkarte Handelskalkulation:
+- Der Lieferantenrabatt wird immer vom Listeneinkaufspreis abgezogen.
+- Das Lieferantenskonto wird immer vom Zieleinkaufspreis berechnet und abgezogen.
+- Die Bezugskosten (Verpackung, Fracht, Porto) werden zum Bareinkaufspreis hinzugerechnet, um den Einstandspreis (die tatsächlichen Kosten für die Ware auf Lager) zu ermitteln.`
+    },
+    {
+        id: 156,
+        theme: "lf6",
+        type: "open-text",
+        question: "Prüfungsaufgabe Verzugszinsen (LF 6): Ein Kunde bezahlt eine fällige Rechnung über 12.000 EUR brutto mit einer Verspätung von 45 Tagen. Berechne die Verzugszinsen, die der Verkäufer dem Kunden für diesen Zeitraum in Rechnung stellen darf. Der Zinssatz beträgt 9 % p.a. (Rechne mit der deutschen Zinsmethode: 30 Tage pro Monat, 360 Tage pro Jahr). Der Rechenweg ist anzugeben.",
+        musterloesung: `Zinsberechnungsformel:
+Z = (K * p * t) / (100 * 360)
+
+wobei:
+- K (Kapital) = 12.000 EUR
+- p (Zinssatz) = 9 % p.a.
+- t (Zeitraum) = 45 Tage
+
+Rechnung:
+Z = (12.000 * 9 * 45) / 36.000
+Z = 4.860.000 / 36.000
+Z = 135,00 EUR
+
+Ergebnis: Der Verkäufer darf dem Kunden für die 45 Tage Verzug 135,00 EUR Verzugszinsen berechnen.`,
+        explanation: `Lernkarte Verzugszinsen:
+- Nach der kaufmännischen Zinsmethode (deutsche Zinsmethode) hat jeder Monat 30 Tage und das Jahr 360 Tage.
+- Verzugszinsen werden bei B2B-Geschäften (Business-to-Business) gesetzlich auf 9 Prozentpunkte über dem jeweiligen Basiszinssatz festgelegt (§ 288 Abs. 2 BGB).`
     }
 ];
