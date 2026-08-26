@@ -2081,7 +2081,7 @@ SELECT * FROM Mitarbeiter ORDER BY name ASC;
 3. Anzahl ermitteln:
 ```sql
 SELECT COUNT(*) FROM Mitarbeiter WHERE stadt = 'Mannheim';
-````,
+```,
         explanation: `Lernkarte SQL-Grundlagen:
 - CREATE TABLE dient der Definition der Tabellenstruktur (DDL - Data Definition Language).
 - ORDER BY sortiert standardmäßig aufsteigend (ASC).
@@ -2173,7 +2173,7 @@ while (anzUrlaubstage > 0) {
     }
 }
 console.log("Urlaub aufgebraucht.");
-````,
+```,
         explanation: `Lernkarte Struktogramme (Nassi-Shneiderman):
 - Der Schleifenblock umschließt alle eingerückten Aktionen.
 - Verzweigungen werden als Dreiecke mit True (T) und False (F) dargestellt.
@@ -2294,7 +2294,7 @@ SELECT SUM(filesize) FROM images;
 ```sql
 INSERT INTO images (filename, filesize, timestamp) 
 VALUES ('testbild.jpg', 117000, 1667292685);
-````,
+```,
         explanation: `Lernkarte SQL-Manipulationsbefehle:
 - DELETE löscht bestehende Datensätze (DML).
 - SUM() ist eine Aggregatfunktion zur Summenbildung.
@@ -2316,7 +2316,7 @@ function deleteOldFiles() {
         deleteFileByName(oldestFile);
     }
 }
-````,
+```,
         explanation: `Lernkarte Programmierlogik:
 - Da gelöschte Dateien aus der Liste entfernt werden, rückt die nächstältere Datei automatisch an Index 0 auf.
 - Die Schleifenbedingung prüft vor jedem Durchlauf, ob die Speichergrenze bereits unterschritten wurde.`
@@ -2458,7 +2458,7 @@ function pruefeNummer(nummer) {
     // Vergleiche die berechnete Prüfziffer mit der an Index 9
     return berechnetePruefziffer === nummer[9];
 }
-````,
+```,
         explanation: `Lernkarte Algorithmen (Prüfziffern):
 - Prüfziffern (wie bei IBAN, ISBN oder Kundenkarten) dienen dazu, Tippfehler bei der Dateneingabe sofort im Frontend zu erkennen, ohne eine Datenbankabfrage durchführen zu müssen.`
     },
@@ -2582,7 +2582,7 @@ function loginUeberpruefung(username, passwort) {
         return false;
     }
 }
-````,
+```,
         explanation: `Lernkarte Programmierlogik:
 - Der Vergleichsoperator === stellt sicher, dass sowohl der Wert als auch der Datentyp (Zahl 0) übereinstimmen.
 - Durch die Kapselung in einen else-Block wird die Fehlermeldung nur im Fehlerfall ausgegeben.`
