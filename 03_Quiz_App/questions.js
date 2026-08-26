@@ -2442,6 +2442,15 @@ function pruefeNummer(nummer) {
     // Multipliziere die ersten 9 Ziffern (Index 0 bis 8) mit ihrer Stelle (1 bis 9)
     for (let i = 0; i < 9; i++) {
         sum += nummer[i] * (i + 1);
+    }
+    // Berechne die Prüfziffer (Rest der Division durch 10)
+    let berechnetePruefziffer = sum % 10;
+    // Vergleiche die berechnete Prüfziffer mit der an Index 9
+    return berechnetePruefziffer === nummer[9];
+}
+\`\`\``,
+        explanation: `Lernkarte Algorithmen (Prüfziffern):
+- Prüfziffern (wie bei IBAN, ISBN oder Kundenkarten) dienen dazu, Tippfehler bei der Dateneingabe sofort im Frontend zu erkennen, ohne eine Datenbankabfrage durchführen zu müssen.`
     },
     {
         id: 186,
