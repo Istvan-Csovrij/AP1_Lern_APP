@@ -1637,5 +1637,16 @@ const staticQuestions = [
             "- AH (Authentication Header): Gewährleistet Datenintegrität und Authentizität. Wichtig: **AH verschlüsselt die Daten NICHT!** (Keine Vertraulichkeit).\n" +
             "- ESP (Encapsulating Security Payload): Gewährleistet Integrität, Authentizität UND verschlüsselt die Nutzdaten (bietet somit Vertraulichkeit).\n" +
             "- In der Praxis wird fast immer ESP verwendet, um eine sichere Übertragung zu gewährleisten."
+    },
+    {
+        id: 142,
+        theme: "lf3",
+        type: "open-text",
+        question: "Prüfungsaufgabe NAT & PAT (LF 3): Erkläre den Sinn und Zweck von Network Address Translation (NAT) und unterscheide kurz die drei Varianten: statisches NAT, dynamisches NAT und Port Address Translation (PAT) / Masquerading.",
+        musterloesung: "- Sinn und Zweck: NAT ermöglicht die Kommunikation zwischen privaten Netzwerken (LAN) und öffentlichen Netzwerken (Internet). Es übersetzt private IP-Adressen (RFC 1918) in öffentliche IP-Adressen und schont dadurch den begrenzten öffentlichen IPv4-Adressraum.\n- Statisches NAT (1:1): Weist einer festen privaten IP-Adresse dauerhaft eine feste öffentliche IP-Adresse zu (wichtig für interne Server, die von außen über das Internet erreichbar sein müssen).\n- Dynamisches NAT (N:M): Weist einer privaten IP-Adresse temporär eine freie öffentliche IP-Adresse aus einem Pool von verfügbaren öffentlichen IPs zu (für die Dauer einer Sitzung).\n- Port Address Translation (PAT) / NAPT / Masquerading (N:1): Übersetzt viele private IP-Adressen in eine einzige öffentliche IP-Adresse, indem für jede Verbindung zusätzlich eine eindeutige Portnummer vergeben wird (Standard bei Heim- und Firmenroutern).",
+        explanation: "Lernkarte NAT-Verfahren:\n" +
+            "- Private IP-Adressbereiche (nach RFC 1918) werden im Internet nicht geroutet und müssen zwingend übersetzt werden.\n" +
+            "- Private Bereiche: 10.0.0.0/8, 172.16.0.0/12, und 192.168.0.0/16.\n" +
+            "- PAT (Port Address Translation) ist das am häufigsten eingesetzte Verfahren, da es Tausenden von Geräten im LAN ermöglicht, über eine einzige öffentliche IP-Adresse ins Internet zu gehen."
     }
 ];
