@@ -4,37 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AP1 Prüfungstrainer - Fachinformatiker</title>
-    <link rel="stylesheet" href="style.css?v=32">
+    <link rel="stylesheet" href="style.css?v=33">
     <!-- FontAwesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <div id="debug-log" style="background: #ffebeb; color: #ad0000; padding: 1rem; border: 2px solid #ad0000; margin: 1rem; font-family: monospace; white-space: pre-wrap; z-index: 10000; position: relative;">
-        <strong>Debug Log (v29):</strong>
-    </div>
-    <script>
-        (function() {
-            const debugLog = document.getElementById("debug-log");
-            window.onerror = function(message, source, lineno, colno, error) {
-                debugLog.innerHTML += "\n[Error] " + message + "\n  at " + source + ":" + lineno + ":" + colno;
-                if (error && error.stack) {
-                    debugLog.innerHTML += "\n  Stack: " + error.stack;
-                }
-                return false;
-            };
-            const originalLog = console.log;
-            console.log = function(...args) {
-                originalLog.apply(console, args);
-                debugLog.innerHTML += "\n[Log] " + args.map(a => typeof a === 'object' ? JSON.stringify(a) : a).join(" ");
-            };
-            const originalError = console.error;
-            console.error = function(...args) {
-                originalError.apply(console, args);
-                debugLog.innerHTML += "\n[Error Log] " + args.map(a => typeof a === 'object' ? JSON.stringify(a) : a).join(" ");
-            };
-            console.log("Debug console initialized.");
-        })();
-    </script>
     <header>
         <div class="header-container">
             <h1><i class="fa-solid fa-graduation-cap"></i> AP1 Prüfungstrainer</h1>
@@ -277,8 +251,8 @@
     </footer>
 
     <!-- Load the questions first, then the application logic -->
-    <script src="questions.js?v=32"></script>
-    <script src="generator.js?v=32"></script>
-    <script src="app.js?v=32"></script>
+    <script src="questions.js?v=33"></script>
+    <script src="generator.js?v=33"></script>
+    <script src="app.js?v=33"></script>
 </body>
 </html>
