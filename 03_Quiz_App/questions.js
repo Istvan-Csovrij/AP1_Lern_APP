@@ -1620,5 +1620,22 @@ const staticQuestions = [
         explanation: "Lernkarte Betriebsratswahl (§ 1 BetrVG):\n" +
             "- Wahlberechtigt (aktives Wahlrecht): Alle Arbeitnehmer des Betriebs, die das 18. Lebensjahr vollendet haben.\n" +
             "- Wählbar (passives Wahlrecht): Alle wahlberechtigten Arbeitnehmer, die dem Betrieb seit mindestens 6 Monaten angehören."
+    },
+    {
+        id: 141,
+        theme: "lf3",
+        type: "multiple-choice",
+        question: "Prüfungsaufgabe VPN-Protokolle (LF 3): Welche Aussage bezüglich der beiden IPsec-Subprotokolle AH (Authentication Header) und ESP (Encapsulating Security Payload) ist für die IHK-Prüfung korrekt?",
+        options: [
+            "Sowohl AH als auch ESP verschlüsseln den gesamten Datenbereich (Payload) des IP-Pakets.",
+            "AH bietet Datenintegrität und Authentizität, verschlüsselt jedoch keine Daten. ESP bietet zusätzlich die Verschlüsselung der Daten (Vertraulichkeit).",
+            "ESP dient ausschließlich der Vergabe von IP-Adressen im VPN-Tunnel, während AH den Verbindungsaufbau regelt.",
+            "AH verschlüsselt den IP-Header, während ESP ausschließlich den Nutzdatenbereich (Payload) unverschlüsselt überträgt."
+        ],
+        correctAnswer: 1,
+        explanation: "Lernkarte IPsec-Protokolle (AH vs. ESP):\n" +
+            "- AH (Authentication Header): Gewährleistet Datenintegrität und Authentizität. Wichtig: **AH verschlüsselt die Daten NICHT!** (Keine Vertraulichkeit).\n" +
+            "- ESP (Encapsulating Security Payload): Gewährleistet Integrität, Authentizität UND verschlüsselt die Nutzdaten (bietet somit Vertraulichkeit).\n" +
+            "- In der Praxis wird fast immer ESP verwendet, um eine sichere Übertragung zu gewährleisten."
     }
 ];
