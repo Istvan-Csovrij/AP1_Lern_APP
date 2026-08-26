@@ -1648,5 +1648,226 @@ const staticQuestions = [
             "- Private IP-Adressbereiche (nach RFC 1918) werden im Internet nicht geroutet und müssen zwingend übersetzt werden.\n" +
             "- Private Bereiche: 10.0.0.0/8, 172.16.0.0/12, und 192.168.0.0/16.\n" +
             "- PAT (Port Address Translation) ist das am häufigsten eingesetzte Verfahren, da es Tausenden von Geräten im LAN ermöglicht, über eine einzige öffentliche IP-Adresse ins Internet zu gehen."
+    },
+    {
+        id: 143,
+        theme: "lf3",
+        type: "multiple-choice",
+        question: "Prüfungsaufgabe Speichersysteme (LF 3): Welcher grundlegende Unterschied besteht bezüglich des Datenzugriffsverfahrens und der verwendeten Protokolle zwischen einem NAS (Network Attached Storage) und einem SAN (Storage Area Network)?",
+        options: [
+            "NAS greift blockbasiert über Fibre Channel zu; SAN greift dateibasiert über SMB/CIFS oder NFS zu.",
+            "NAS greift dateibasiert über SMB/CIFS oder NFS zu; SAN greift blockbasiert über Fibre Channel oder iSCSI zu.",
+            "Beide Speichertypen greifen ausschließlich dateibasiert über FTP oder HTTP auf die Festplatten zu.",
+            "NAS wird direkt als lokale Festplatte per SATA angebunden; SAN wird nur über WLAN per FTP angesprochen."
+        ],
+        correctAnswer: 1,
+        explanation: "Lernkarte Datenzugriff NAS vs. SAN:\n" +
+            "- NAS (Network Attached Storage): Bietet dateibasierten Zugriff (File Level). Dateien werden über klassische Dateishare-Protokolle wie SMB (Windows) oder NFS (Linux) im LAN übertragen.\n" +
+            "- SAN (Storage Area Network): Bietet blockbasierten Zugriff (Block Level). Der Server sieht den Speicher wie eine eingebaute lokale Festplatte und formatiert ihn mit einem eigenen Dateisystem. Übertragen wird über Fibre Channel oder iSCSI in einem separaten Hochgeschwindigkeitsnetzwerk."
+    },
+    {
+        id: 144,
+        theme: "lf3",
+        type: "open-text",
+        question: "Prüfungsaufgabe SAN (LF 3): Nenne drei wesentliche Vorteile eines SAN (Storage Area Network) gegenüber lokalen Einzelspeichern (Direct Attached Storage / DAS) sowie die zwei am Markt verbreiteten Haupt-Übertragungstechnologien.",
+        musterloesung: "Vorteile (drei nennen):
+1. Zentralisierte Verwaltung: Der gesamte Speicherplatz wird an einer Stelle verwaltet und kann flexibel virtuellen Servern zugeordnet werden.
+2. Hohe Ausfallsicherheit & Redundanz: Durch redundante Pfade (Multipathing) und zentrale RAID-Systeme sind Daten optimal geschützt.
+3. LAN-Entlastung: Das SAN läuft in einem eigenen physisch getrennten Netz parallel zum LAN, wodurch der Speicherverkehr das normale Anwendernetzwerk nicht belastet.
+4. Betriebssystem-Unabhängigkeit: Verschiedene Server mit unterschiedlichen OS können sich denselben Speicherpool teilen.
+
+Haupt-Technologien:
+1. Fibre Channel (FC): Spezielles optisches Hochgeschwindigkeitsnetzwerk, benötigt eigene Host-Bus-Adapter (HBA) und FC-Switche.
+2. iSCSI (Internet SCSI): Transportiert SCSI-Speicherbefehle über das normale Ethernet-Netzwerk (günstiger, da Standard-Netzwerkkomponenten genutzt werden).",
+        explanation: "Lernkarte SAN-Architektur:
+" +
+            "- Das SAN dient der Anbindung von Festplatten-Arrays an Virtualisierungs-Cluster (z.B. VMware ESXi) oder große Datenbankserver, bei denen maximale Performance und Flexibilität gefragt sind."
+    },
+    {
+        id: 145,
+        theme: "lf3",
+        type: "multiple-choice",
+        question: "Prüfungsaufgabe Netzwerkdiagnose (LF 3): Welches Kommandozeilen-Tool wird zur Abfrage von Nameservern verwendet und wie lautet die exakte Syntax in der Windows-Eingabeaufforderung, um ein Reverse Lookup für die IP-Adresse 8.8.8.8 durchzuführen?",
+        options: [
+            "ping -a 8.8.8.8",
+            "nslookup 8.8.8.8",
+            "tracert 8.8.8.8",
+            "ipconfig /lookup 8.8.8.8"
+        ],
+        correctAnswer: 1,
+        explanation: "Lernkarte Nslookup:
+" +
+            "- nslookup (Name System Lookup) dient der DNS-Diagnose.
+" +
+            "- Vorwärtsauflösung (Forward Lookup): Auflösung eines Namens in eine IP (z. B. `nslookup www.heise.de`).
+" +
+            "- Rückwärtsauflösung (Reverse Lookup): Auflösung einer IP in einen Namen (z. B. `nslookup 8.8.8.8`).
+" +
+            "- ping -a löst zwar auch Adressen auf, ist aber ein ICMP-Echotest und kein dediziertes Nameserver-Abfragetool."
+    },
+    {
+        id: 146,
+        theme: "lf2",
+        type: "open-text",
+        question: "Prüfungsaufgabe USV (LF 2): Erläutere die drei Klassen von unterbrechungsfreien Stromversorgungen (USV) nach der Norm DIN EN 62040-3 (VFD, VI und VFI) bezüglich ihrer Funktionsweise und Umschaltzeiten bei einem Netzausfall.",
+        musterloesung: "1. Klasse 3: VFD (Voltage and Frequency Dependent - Offline-/Standby-USV):
+- Funktionsweise: Leitet den Netzstrom im Normalbetrieb direkt an die Verbraucher weiter und lädt nebenbei den Akku. Bei Stromausfall schaltet sie auf Akkubetrieb um.
+- Umschaltzeit: Bis zu 10 Millisekunden.
+- Schutz: Nur vor Stromausfall und kurzen Spannungsspitzen.
+
+2. Klasse 2: VI (Voltage Independent - Line-Interactive-USV):
+- Funktionsweise: Regelt Spannungsschwankungen über einen eingebauten Transformator (AVR) ständig aus. Frequenz wird direkt übernommen. Schaltet bei Ausfall auf Akku.
+- Umschaltzeit: Ca. 2 bis 4 Millisekunden.
+- Schutz: Vor Stromausfall, Unter-/Überspannungen.
+
+3. Klasse 1: VFI (Voltage and Frequency Independent - Online-/Doppelwandler-USV):
+- Funktionsweise: Der Eingangsstrom wird permanent in Gleichstrom und direkt wieder in sauberen Wechselstrom gewandelt (Doppelwandlung). Die Geräte laufen dauerhaft über den Wechselrichter.
+- Umschaltzeit: 0 Millisekunden (unterbrechungsfrei!).
+- Schutz: Vollständiger Schutz vor allen Netzstörungen (Frequenzschwankungen, Oberschwingungen etc.). Höchster Schutz, aber teurer und geringerer Wirkungsgrad.",
+        explanation: "Lernkarte USV-Klassen:
+" +
+            "- VFI SS 111 stellt die höchste Klassifizierung dar (Spannung und Frequenz unabhängig, Sinus-Ausgangsform in jedem Zustand, 0 ms Umschaltzeit).
+" +
+            "- Kritische Infrastruktur wie Server und Core-Switche werden grundsätzlich mit Klasse-1-USV (VFI) gesichert."
+    },
+    {
+        id: 147,
+        theme: "lf4",
+        type: "open-text",
+        question: "Prüfungsaufgabe IT-Sicherheit (LF 4): Erläutere kurz die Funktionsweise und Gefahren der folgenden fünf Bedrohungen: Trojaner, Ransomware, Phishing, DDoS-Angriff und Brute-Force-Angriff.",
+        musterloesung: "- Trojaner: Schadsoftware, die sich als nützliche Anwendung tarnt (z. B. nützliches Tool oder Anhang). Sie erfordert eine Benutzerinteraktion zum Starten und öffnet Angreifern Hintertüren (Backdoors) im System.
+- Ransomware: Verschlüsselungstrojaner, die das gesamte System oder wichtige Benutzerdaten verschlüsseln und den Zugriff sperren. Die Angreifer erpressen das Opfer und fordern Lösegeld (Ransom) für den Entschlüsselungsschlüssel.
+- Phishing: Methode, bei der Angreifer über gefälschte E-Mails, SMS oder Webseiten (z. B. täuschend echte Bankportale) versuchen, sensible Daten wie Passwörter, PINs oder Kreditkartennummern abzugreifen.
+- Distributed Denial of Service (DDoS): Überlastungsangriff, bei dem ein Server oder Dienst gezielt mit einer riesigen Menge an Anfragen aus einem Botnetz (viele infizierte Rechner gleichzeitig) geflutet wird, bis er abstürzt oder unbrauchbar wird.
+- Brute-Force-Angriff: Eine automatisierte Passwort-Knackmethode, bei der eine Software systematisch alle möglichen Zeichenkombinationen (oder Wörterbuch-Einträge) durchprobiert, bis das richtige Passwort gefunden wurde.",
+        explanation: "Lernkarte Malware & Angriffe:
+" +
+            "- Gegen Phishing hilft Mitarbeiterschulung und 2-Faktor-Authentisierung (2FA).
+" +
+            "- Gegen Ransomware sind regelmäßige Offline-Backups (z. B. auf Tapes) der beste Schutz.
+" +
+            "- Gegen Brute-Force helfen Kontosperrungen nach Falscheingaben und komplexe Passwortrichtlinien."
+    },
+    {
+        id: 148,
+        theme: "lf2",
+        type: "open-text",
+        question: "Prüfungsaufgabe Virtualisierung (LF 2): Nenne jeweils zwei Vorteile der Servervirtualisierung sowie der Anwendungsvirtualisierung und erläutere kurz den Begriff 'Disaster Recovery' in diesem Kontext.",
+        musterloesung: "Vorteile Servervirtualisierung (zwei nennen):
+1. Bessere Hardwareauslastung: Mehrere virtuelle Server teilen sich die Ressourcen eines leistungsstarken physischen Hosts (Konsolidierung).
+2. Kosteneinsparung: Weniger physische Server bedeuten weniger Anschaffungskosten, geringeren Stromverbrauch und weniger Abwärme (Kühlung).
+3. Schnelle Bereitstellung: Neue Server können in Minuten als VM aufgesetzt werden.
+4. Isolation: Fehler auf einer VM betreffen nicht die anderen VMs auf demselben Host.
+
+Vorteile Anwendungsvirtualisierung (zwei nennen):
+1. Keine lokale Installation: Anwendungen laufen in einer isolierten Laufzeitumgebung (Sandbox) auf dem Client, ohne tief in das lokale OS einzugreifen.
+2. Konfliktfreiheit: Es können verschiedene Versionen derselben App (z.B. Office) gleichzeitig auf einem PC betrieben werden.
+3. Zentrale Verwaltung: Updates müssen nur einmal auf dem Server eingepflegt werden.
+
+Disaster Recovery:
+- Die schnelle Wiederherstellung der IT-Infrastruktur nach einem schweren Ausfall (z. B. Hardwaredefekt). Da VMs als einfache Dateien (z. B. vmdk) vorliegen, können sie extrem schnell über Backups oder Snapshots auf einer völlig anderen physischen Hardware wieder in Betrieb genommen werden.",
+        explanation: "Lernkarte Virtualisierung:
+" +
+            "- Ein Hypervisor steuert die Verteilung der physischen Ressourcen an die Gast-Betriebssysteme.
+" +
+            "- Disaster Recovery Pläne definieren den RTO (Recovery Time Objective - wie lange darf der Ausfall dauern) und RPO (Recovery Point Objective - wie viel Datenverlust ist tolerierbar)."
+    },
+    {
+        id: 149,
+        theme: "lf2",
+        type: "open-text",
+        question: "Prüfungsaufgabe Speicherplatzberechnung Video (LF 2): Für eine Marketingkampagne soll ein unkomprimiertes 4K-Werbevideo auf dem Server abgelegt werden. Das Video hat folgende Eigenschaften: Auflösung 3840 x 2160 Pixel, Farbtiefe 24 Bit, Dauer 6 Minuten, Bildfrequenz 60 FPS. Berechne den benötigten Speicherbedarf in vollen GiB (Gibibyte). Der Rechenweg ist anzugeben.",
+        musterloesung: "Rechenweg:
+1. Pixel pro Frame berechnen:
+   3.840 * 2.160 = 8.294.400 Pixel
+2. Datenmenge pro Frame in Byte:
+   8.294.400 Pixel * (24 Bit / 8) = 24.883.200 Bytes (bzw. ca. 24.88 MB)
+3. Datenmenge pro Sekunde (bei 60 FPS):
+   24.883.200 Bytes/Frame * 60 Frames/Sekunde = 1.492.992.000 Bytes/Sekunde
+4. Gesamtdauer in Sekunden:
+   6 Minuten * 60 Sekunden = 360 Sekunden
+5. Gesamtgröße in Bytes:
+   1.492.992.000 Bytes/Sekunde * 360 Sekunden = 537.477.120.000 Bytes
+6. Umrechnung in GiB (Teilung durch 1024^3 bzw. 1.073.741.824):
+   537.477.120.000 Bytes / 1.073.741.824 = 500,561... GiB
+
+Ergebnis:
+Der benötigte Speicherplatz beträgt ca. 500,56 GiB (bzw. 501 volle GiB).",
+        explanation: "Lernkarte Speicherberechnung:
+" +
+            "- Achte in IHK-Prüfungen genau auf die gefragte Einheit! Einheiten mit 'i' (GiB, MiB) rechnen mit dem Faktor 1024 (binär), während SI-Einheiten (GB, MB) mit dem Faktor 1000 (dezimal) rechnen.\n" +
+            "- Formel: Gesamtgröße = Breite * Höhe * (Farbtiefe in Byte) * FPS * Zeit in Sekunden."
+    },
+    {
+        id: 150,
+        theme: "lf2",
+        type: "open-text",
+        question: "Prüfungsaufgabe Speicherplatzberechnung Kamera (LF 2): Eine Überwachungskamera im Serverraum speichert jede Minute genau ein Standbild. Jedes Bild hat das Format 800 x 600 Pixel, eine Farbtiefe von 32 Bit und wird mit einem Kompressionsfaktor von 1:10 (Faktor 0,1) abgesichert. Berechne die Anzahl der Bilder pro Woche und den dafür erforderlichen Speicherplatz in vollen GiB (Gibibyte).",
+        musterloesung: "Rechenweg:
+1. Unkomprimierte Größe eines Bildes in Byte:
+   800 * 600 Pixel * (32 Bit / 8) = 800 * 600 * 4 Byte = 1.920.000 Bytes
+2. Komprimierte Größe des Bildes (Kompression 1:10):
+   1.920.000 Bytes / 10 = 192.000 Bytes
+3. Anzahl der Bilder pro Woche berechnen:
+   60 Bilder/Stunde * 24 Stunden/Tag * 7 Tage/Woche = 10.080 Bilder pro Woche
+4. Gesamtgröße in Bytes pro Woche:
+   10.080 Bilder * 192.000 Bytes/Bild = 1.935.360.000 Bytes
+5. Umrechnung in GiB (Teilung durch 1024^3 bzw. 1.073.741.824):
+   1.935.360.000 Bytes / 1.073.741.824 = 1,802... GiB
+
+Ergebnis:
+Es werden wöchentlich 10.080 Bilder gespeichert. Der Speicherbedarf beträgt ca. 1,80 GiB (bzw. 2 volle GiB).",
+        explanation: "Lernkarte Kameraspeicher:
+" +
+            "- Bei einer Farbtiefe von 32 Bit wird neben den RGB-Farben (je 8 Bit für Rot, Grün, Blau) zusätzlich ein Alpha-Kanal (8 Bit für Transparenz) übertragen.\n" +
+            "- Kompression 1:10 bedeutet, dass die Datei auf ein Zehntel ihrer Originalgröße geschrumpft wird."
+    },
+    {
+        id: 151,
+        theme: "lf5",
+        type: "open-text",
+        question: "Prüfungsaufgabe UML-Beziehungen (LF 5): Erläutere den Unterschied zwischen den UML-Klassendiagramm-Beziehungen Assoziation, Aggregation und Komposition und nenne jeweils das grafische Verbindungselement/Symbol laut Standard.",
+        musterloesung: "- Assoziation:
+  * Definition: Eine einfache, neutrale Beziehung zwischen zwei unabhängigen Klassen (z. B. Kunde nutzt Auto).
+  * Symbol: Eine einfache Verbindungslinie (eventuell mit Richtungspfeil).
+
+- Aggregation:
+  * Definition: Eine 'Besteht-aus'-Beziehung, bei der die Teile zwar Teil des Ganzen sind, aber unabhängig davon existieren und überleben können (Schwache Beziehung, z. B. Bibliothek und Buch. Wenn die Bibliothek schließt, existieren die Bücher weiter).
+  * Symbol: Eine Linie mit einer leeren (weißen) Raute am Ende der übergeordneten Klasse.
+
+- Komposition:
+  * Definition: Eine existenzabhängige 'Besteht-aus'-Beziehung, bei der die Teile zwingend an das Ganze gekoppelt sind und ohne dieses nicht existieren können (Starke Beziehung, z. B. Gebäude und Raum. Wird das Gebäude abgerissen, verschwinden auch die Räume).
+  * Symbol: Eine Linie mit einer ausgefüllten (schwarzen) Raute am Ende der übergeordneten Klasse.",
+        explanation: "Lernkarte UML-Beziehungen:
+" +
+            "- Die Multiplizitäten (Kardinalitäten) an den Beziehungsenden geben an, wie viele Instanzen der einen Klasse mit wie vielen Instanzen der anderen Klasse verknüpft sein können (z.B. `1..*` oder `0..1`)."
+    },
+    {
+        id: 152,
+        theme: "lf2",
+        type: "open-text",
+        question: "Prüfungsaufgabe RAID-Kapazitätsberechnung (LF 2): Ein Server soll mit vier baugleichen Festplatten mit jeweils 6 TB Speicherkapazität ausgestattet werden. Berechne die jeweils nutzbare Netto-Speicherkapazität des Verbunds für die folgenden RAID-Konfigurationen: RAID 0, RAID 1, RAID 5 und RAID 10. Der Rechenweg ist stichwortartig anzugeben.",
+        musterloesung: "Berechnung bei 4 Festplatten à 6 TB (Gesamtkapazität brutto = 24 TB):
+
+- RAID 0 (Striping - keine Redundanz):
+  * Formel/Erklärung: Alle Platten werden addiert. Netto-Kapazität = N * Kapazität.
+  * Rechnung: 4 * 6 TB = 24 TB.
+
+- RAID 1 (Spiegelung - volle Redundanz):
+  * Formel/Erklärung: Daten werden auf alle Platten gespiegelt. Netto-Kapazität = Kapazität einer einzelnen Platte.
+  * Rechnung: 1 * 6 TB = 6 TB.
+
+- RAID 5 (Parity - Fehlertoleranz von 1 Platte):
+  * Formel/Erklärung: Die Kapazität einer Platte wird für Paritätsdaten abgezogen. Netto-Kapazität = (N - 1) * Kapazität.
+  * Rechnung: (4 - 1) * 6 TB = 3 * 6 TB = 18 TB.
+
+- RAID 10 (Striping von Spiegelsets - Fehlertoleranz von bis zu 2 Platten):
+  * Formel/Erklärung: Die Hälfte der Platten wird zur Spiegelung genutzt. Netto-Kapazität = (N / 2) * Kapazität.
+  * Rechnung: (4 / 2) * 6 TB = 2 * 6 TB = 12 TB.",
+        explanation: "Lernkarte RAID-Systeme:
+" +
+            "- RAID 0 erhöht die Lese- und Schreibgeschwindigkeit, bietet aber null Ausfallsicherheit. Fällt eine Platte aus, sind alle Daten verloren.\n" +
+            "- RAID 5 ist die am häufigsten genutzte Konfiguration, da sie ein gutes Gleichgewicht aus Kapazität und Ausfallsicherheit (Toleranz für 1 Ausfall) bietet.\n" +
+            "- RAID 10 verbindet die Sicherheit von RAID 1 mit der Performance von RAID 0, benötigt aber mindestens 4 Festplatten."
     }
 ];
