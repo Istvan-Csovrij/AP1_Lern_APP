@@ -2063,7 +2063,7 @@ Erklärung:
         type: "open-text",
         question: "Prüfungsaufgabe SQL & Datenbanken (Sommer 2025 / LF 5): Gegeben ist das Relationenmodell:\nMitarbeiter (mID, vorname, name, strasse, stadt)\nFormuliere die entsprechenden SQL-Befehle für die folgenden Aktionen:\n1. Erstelle die Tabelle 'Mitarbeiter' (mID ist Ganzzahl und Primärschlüssel, die restlichen Felder sind Textfelder bis 100 Zeichen).\n2. Zeige alle Mitarbeiterdaten sortiert nach dem Attribut 'name' (alphabetisch aufsteigend) an.\n3. Ermittle die Anzahl der Mitarbeiter, die aus der Stadt 'Mannheim' kommen.",
         musterloesung: `1. Tabelle anlegen:
-\`\`\`sql
+```sql
 CREATE TABLE Mitarbeiter (
     mID INT PRIMARY KEY,
     vorname VARCHAR(100),
@@ -2071,17 +2071,17 @@ CREATE TABLE Mitarbeiter (
     strasse VARCHAR(100),
     stadt VARCHAR(100)
 );
-\`\`\`
+```
 
 2. Sortierte Abfrage:
-\`\`\`sql
+```sql
 SELECT * FROM Mitarbeiter ORDER BY name ASC;
-\`\`\`
+```
 
 3. Anzahl ermitteln:
-\`\`\`sql
+```sql
 SELECT COUNT(*) FROM Mitarbeiter WHERE stadt = 'Mannheim';
-\`\`\``,
+````,
         explanation: `Lernkarte SQL-Grundlagen:
 - CREATE TABLE dient der Definition der Tabellenstruktur (DDL - Data Definition Language).
 - ORDER BY sortiert standardmäßig aufsteigend (ASC).
@@ -2129,7 +2129,7 @@ Das Angebot der CBS KG ist mit einem Einstandspreis von 337,92 EUR das wirtschaf
         id: 167,
         theme: "lf5",
         type: "open-text",
-        question: "Prüfungsaufgabe XML-Fehlerkorrektur (Sommer 2025 / LF 5): Finde und korrigiere die vier Syntaxfehler in der folgenden XML-Datei, damit sie fehlerfrei eingelesen werden kann:\n\n\`\`\`xml\n<mitarbeiter>\n  <name>Simpson</name>\n  <vorname>Herbert<vorname>\n  <adresse>\n    <strasse>Immergrünstr.742</straße>\n    <stadt>sprungfeld\n  </adresse>\n  <abteilung>Sicherheit</abteilung>\n  <urlaubsanträge>\n    <urlaubsantrag>\n      <antragsnr>1</antragsnr>\n      <startdatum>1.2.2024</startdatum>\n      <enddatum>15.2.2024</enddatum>\n    </urlaubsanträge>\n    </urlaubsantrag>\n</mitarbeiter>\n\`\`\`",
+        question: "Prüfungsaufgabe XML-Fehlerkorrektur (Sommer 2025 / LF 5): Finde und korrigiere die vier Syntaxfehler in der folgenden XML-Datei, damit sie fehlerfrei eingelesen werden kann:\n\n```xml\n<mitarbeiter>\n  <name>Simpson</name>\n  <vorname>Herbert<vorname>\n  <adresse>\n    <strasse>Immergrünstr.742</straße>\n    <stadt>sprungfeld\n  </adresse>\n  <abteilung>Sicherheit</abteilung>\n  <urlaubsanträge>\n    <urlaubsantrag>\n      <antragsnr>1</antragsnr>\n      <startdatum>1.2.2024</startdatum>\n      <enddatum>15.2.2024</enddatum>\n    </urlaubsanträge>\n    </urlaubsantrag>\n</mitarbeiter>\n```",
         musterloesung: `Die vier Fehler und deren Korrekturen lauten:
 
 1. Zeile 3: <vorname>Herbert<vorname>
@@ -2160,7 +2160,7 @@ Das Angebot der CBS KG ist mit einem Einstandspreis von 337,92 EUR das wirtschaf
         type: "open-text",
         question: "Prüfungsaufgabe Struktogramm-Implementierung (Sommer 2025 / LF 5): Setze das Struktogramm zur Urlaubsverwaltung in lauffähigen JavaScript-Code um. Das Struktogramm besitzt folgende Logik:\n- Initialisierung: anzUrlaubstage = 29\n- Wiederholung solange: anzUrlaubstage > 0\n  * Ausgabe: 'Sie haben noch ' + anzUrlaubstage + ' Tage Urlaub.'\n  * Ausgabe: 'Wieviele Tage Urlaub möchten Sie nehmen?'\n  * Eingabe: tage\n  * Verzweigung (IF): anzUrlaubstage - tage >= 0\n    - JA (Wahr): Ausgabe: 'Urlaub genehmigt.' und anzUrlaubstage um tage vermindern\n    - NEIN (Falsch): Ausgabe: 'Urlaub nicht genehmigt.'\n- Nach der Schleife (außerhalb): Ausgabe: 'Urlaub aufgebraucht.'",
         musterloesung: `JavaScript-Code:
-\`\`\`javascript
+```javascript
 let anzUrlaubstage = 29;
 while (anzUrlaubstage > 0) {
     console.log("Sie haben noch " + anzUrlaubstage + " Tage Urlaub.");
@@ -2168,6 +2168,16 @@ while (anzUrlaubstage > 0) {
     if (anzUrlaubstage - tage >= 0) {
         console.log("Urlaub genehmigt.");
         anzUrlaubstage -= tage;
+    } else {
+        console.log("Urlaub nicht genehmigt.");
+    }
+}
+console.log("Urlaub aufgebraucht.");
+````,
+        explanation: `Lernkarte Struktogramme (Nassi-Shneiderman):
+- Der Schleifenblock umschließt alle eingerückten Aktionen.
+- Verzweigungen werden als Dreiecke mit True (T) und False (F) dargestellt.
+- Wertzuweisungen werden als einfache Anweisungen umgesetzt.`
     },
     {
         id: 169,
@@ -2271,20 +2281,20 @@ Erforderliche Maßnahme:
         type: "open-text",
         question: "Prüfungsaufgabe SQL & Datenbanken (Sommer 2024 / LF 5): Gegeben ist das Relationenmodell:\nimages (filename, filesize, timestamp)\nFormuliere die entsprechenden SQL-Befehle für die folgenden Aktionen:\n1. Lösche den Datenbankeintrag für die Bilddatei mit dem Namen 'testbild.jpg'.\n2. Bestimme die Gesamtgröße (Summe) aller Bilddateien, die in der Tabelle erfasst sind.\n3. Füge einen neuen Datenbankeintrag für die Bilddatei mit dem Namen 'testbild.jpg', der Größe 117000 Byte und dem Zeitstempel 1667292685 hinzu.",
         musterloesung: `1. Datensatz löschen:
-\`\`\`sql
+```sql
 DELETE FROM images WHERE filename = 'testbild.jpg';
-\`\`\`
+```
 
 2. Summe berechnen:
-\`\`\`sql
+```sql
 SELECT SUM(filesize) FROM images;
-\`\`\`
+```
 
 3. Datensatz hinzufügen:
-\`\`\`sql
+```sql
 INSERT INTO images (filename, filesize, timestamp) 
 VALUES ('testbild.jpg', 117000, 1667292685);
-\`\`\``,
+````,
         explanation: `Lernkarte SQL-Manipulationsbefehle:
 - DELETE löscht bestehende Datensätze (DML).
 - SUM() ist eine Aggregatfunktion zur Summenbildung.
@@ -2296,7 +2306,7 @@ VALUES ('testbild.jpg', 117000, 1667292685);
         type: "open-text",
         question: "Prüfungsaufgabe Programmierung (Sommer 2024 / LF 5): Erstelle eine Funktion 'deleteOldFiles()' in JavaScript, die so lange lückenlos die jeweils älteste Bilddatei löscht, bis die Gesamtgröße der verbleibenden Dateien unter 1 GB (1.000.000.000 Byte) liegt. Nutze hierzu folgende Hilfsfunktionen:\n- getTotalFileSize(): Gibt die Gesamtgröße aller Bilddateien in Byte zurück.\n- getFileNameByNumber(0): Gibt den Dateinamen der ältesten Datei zurück.\n- deleteFileByName(filename): Löscht die Datei mit dem übergebenen Dateinamen.",
         musterloesung: `JavaScript-Code:
-\`\`\`javascript
+```javascript
 function deleteOldFiles() {
     // Die Schleife läuft so lange, wie die Gesamtgröße 1 GB oder mehr beträgt
     while (getTotalFileSize() >= 1000000000) {
@@ -2306,7 +2316,7 @@ function deleteOldFiles() {
         deleteFileByName(oldestFile);
     }
 }
-\`\`\``,
+````,
         explanation: `Lernkarte Programmierlogik:
 - Da gelöschte Dateien aus der Liste entfernt werden, rückt die nächstältere Datei automatisch an Index 0 auf.
 - Die Schleifenbedingung prüft vor jedem Durchlauf, ob die Speichergrenze bereits unterschritten wurde.`
@@ -2423,7 +2433,7 @@ Ergebnis: Die USV muss eine Mindestleistung von 1.194,12 VA (bzw. aufgerundet 1.
         id: 184,
         theme: "lf5",
         type: "open-text",
-        question: "Prüfungsaufgabe SQL-Fehlersuche (Winter 2024/25 / LF 5): Beim Ausführen des folgenden SQL-Befehls in einer Kundendatenbank treten 2 Fehler auf. Benenne diese Fehler:\n\n\`\`\`sql\nINSERT INTO Kunde (knr, name, vorname, strasse, plz, ort, geschlecht)\nVALUES ('128', 'Müller', 'Tamara', 'Brunnengasse 4', '74722', 'Buchen', 'w', '1999-08-10');\n\`\`\`",
+        question: "Prüfungsaufgabe SQL-Fehlersuche (Winter 2024/25 / LF 5): Beim Ausführen des folgenden SQL-Befehls in einer Kundendatenbank treten 2 Fehler auf. Benenne diese Fehler:\n\n```sql\nINSERT INTO Kunde (knr, name, vorname, strasse, plz, ort, geschlecht)\nVALUES ('128', 'Müller', 'Tamara', 'Brunnengasse 4', '74722', 'Buchen', 'w', '1999-08-10');\n```",
         musterloesung: `Die 2 Fehler lauten:
 1. Anzahl-Diskrepanz (Spalten vs. Werte): In der Spaltenliste des INSERT INTO werden 7 Spalten definiert (knr, name, vorname, strasse, plz, ort, geschlecht). In der VALUES-Liste werden jedoch 8 Werte übergeben. Der letzte Wert ('1999-08-10') hat keine zugehörige Spalte.
 2. Fehlende Spaltendefinition: Die Spalte für das Geburtsdatum (z. B. 'geburtsdatum') fehlt in der Spaltenliste des INSERT-Befehls. Um den Fehler zu beheben, muss entweder diese Spalte hinzugefügt oder der Wert '1999-08-10' gelöscht werden.`,
@@ -2436,7 +2446,7 @@ Ergebnis: Die USV muss eine Mindestleistung von 1.194,12 VA (bzw. aufgerundet 1.
         type: "open-text",
         question: "Prüfungsaufgabe Algorithmen Prüfziffer (Winter 2024/25 / LF 5): Eine Kundenkartennummer besteht aus einem Array mit 10 Ganzzahlen. Die Ziffern an Index 0 bis 8 werden jeweils mit ihrer Stelle (Index + 1) multipliziert. Die Summe der Produkte wird modulo 10 geteilt. Der Rest entspricht der Prüfziffer, die an Index 9 steht. Schreibe eine JavaScript-Funktion 'pruefeNummer(nummer)', die 'true' zurückgibt, wenn die Ziffer an Index 9 mit der berechneten Prüfziffer übereinstimmt, andernfalls 'false'.",
         musterloesung: `JavaScript-Code:
-\`\`\`javascript
+```javascript
 function pruefeNummer(nummer) {
     let sum = 0;
     // Multipliziere die ersten 9 Ziffern (Index 0 bis 8) mit ihrer Stelle (1 bis 9)
@@ -2448,7 +2458,7 @@ function pruefeNummer(nummer) {
     // Vergleiche die berechnete Prüfziffer mit der an Index 9
     return berechnetePruefziffer === nummer[9];
 }
-\`\`\``,
+````,
         explanation: `Lernkarte Algorithmen (Prüfziffern):
 - Prüfziffern (wie bei IBAN, ISBN oder Kundenkarten) dienen dazu, Tippfehler bei der Dateneingabe sofort im Frontend zu erkennen, ohne eine Datenbankabfrage durchführen zu müssen.`
     },
@@ -2558,7 +2568,7 @@ Ergebnis: Die USV muss eine Mindestleistung von 5.699,40 VA aufweisen.`,
         type: "open-text",
         question: "Prüfungsaufgabe Programmierung (Sommer 2023 / LF 5): Erstelle eine JavaScript-Funktion 'loginUeberpruefung(username, passwort)'. Die Funktion nutzt die Hilfsfunktion 'DB_Abfrage(username, passwort)', welche folgende Rückgabewerte liefert:\n- 0: Daten korrekt\n- 1: Benutzername existiert nicht\n- 2: Passwort falsch\n\nWenn die Daten korrekt sind, soll die Funktion 'true' zurückgeben. In allen anderen Fällen soll der Text 'Daten nicht korrekt' auf der Konsole ausgegeben und 'false' zurückgegeben werden.",
         musterloesung: `JavaScript-Code:
-\`\`\`javascript
+```javascript
 function loginUeberpruefung(username, passwort) {
     // Führe die Datenbankabfrage durch und speichere den Rückgabewert
     let abfrageErgebnis = DB_Abfrage(username, passwort);
@@ -2566,6 +2576,16 @@ function loginUeberpruefung(username, passwort) {
     // Wenn das Ergebnis 0 ist, sind die Anmeldedaten korrekt
     if (abfrageErgebnis === 0) {
         return true;
+    } else {
+        // Bei jedem anderen Wert (1 oder 2) Fehlermeldung ausgeben und false zurückgeben
+        console.log("Daten nicht korrekt");
+        return false;
+    }
+}
+````,
+        explanation: `Lernkarte Programmierlogik:
+- Der Vergleichsoperator === stellt sicher, dass sowohl der Wert als auch der Datentyp (Zahl 0) übereinstimmen.
+- Durch die Kapselung in einen else-Block wird die Fehlermeldung nur im Fehlerfall ausgegeben.`
     },
     {
         id: 192,

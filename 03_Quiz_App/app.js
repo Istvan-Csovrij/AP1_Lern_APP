@@ -67,67 +67,72 @@ let regenerateBtn;
 
 // Initialize application
 document.addEventListener("DOMContentLoaded", () => {
-    typeSelect = document.getElementById("question-type-select");
-    regenerateBtn = document.getElementById("regenerate-btn");
-    prevBtn = document.getElementById("prev-btn");
-    starBtn = document.getElementById("star-btn");
-    resumeQuizBtn = document.getElementById("resume-quiz-btn");
+    try {
+        typeSelect = document.getElementById("question-type-select");
+        regenerateBtn = document.getElementById("regenerate-btn");
+        prevBtn = document.getElementById("prev-btn");
+        starBtn = document.getElementById("star-btn");
+        resumeQuizBtn = document.getElementById("resume-quiz-btn");
 
-    const savedMode = localStorage.getItem("ap1_type_mode") || "mix";
-    if (typeSelect) typeSelect.value = savedMode;
+        const savedMode = localStorage.getItem("ap1_type_mode") || "mix";
+        if (typeSelect) typeSelect.value = savedMode;
 
-    initQuestions(savedMode);
-    loadStats();
-    setupThemeFilters();
-    filterQuestions("all");
-    
-    resetStatsBtn.addEventListener("click", resetStats);
-    nextBtn.addEventListener("click", loadNextQuestion);
-    
-    if (prevBtn) {
-        prevBtn.addEventListener("click", loadPrevQuestion);
-    }
-    
-    if (starBtn) {
-        starBtn.addEventListener("click", toggleStarCurrentQuestion);
-    }
-    
-    if (resumeQuizBtn) {
-        resumeQuizBtn.addEventListener("click", resumeNormalQuizRound);
-    }
+        initQuestions(savedMode);
+        loadStats();
+        setupThemeFilters();
+        filterQuestions("all");
+        
+        resetStatsBtn.addEventListener("click", resetStats);
+        nextBtn.addEventListener("click", loadNextQuestion);
+        
+        if (prevBtn) {
+            prevBtn.addEventListener("click", loadPrevQuestion);
+        }
+        
+        if (starBtn) {
+            starBtn.addEventListener("click", toggleStarCurrentQuestion);
+        }
+        
+        if (resumeQuizBtn) {
+            resumeQuizBtn.addEventListener("click", resumeNormalQuizRound);
+        }
 
-    // Exam Mode Buttons
-    const examModeBtn = document.getElementById("exam-mode-btn");
-    const simulationModeBtn = document.getElementById("simulation-mode-btn");
-    const examPrevBtn = document.getElementById("exam-prev-btn");
-    const examSkipBtn = document.getElementById("exam-skip-btn");
-    const examNextBtn = document.getElementById("exam-next-btn");
-    const examExitBtn = document.getElementById("exam-exit-btn");
-    const examSubmitBtn = document.getElementById("exam-submit-btn");
-    const resultsBackBtn = document.getElementById("results-back-btn");
+        // Exam Mode Buttons
+        const examModeBtn = document.getElementById("exam-mode-btn");
+        const simulationModeBtn = document.getElementById("simulation-mode-btn");
+        const examPrevBtn = document.getElementById("exam-prev-btn");
+        const examSkipBtn = document.getElementById("exam-skip-btn");
+        const examNextBtn = document.getElementById("exam-next-btn");
+        const examExitBtn = document.getElementById("exam-exit-btn");
+        const examSubmitBtn = document.getElementById("exam-submit-btn");
+        const resultsBackBtn = document.getElementById("results-back-btn");
 
-    if (examModeBtn) examModeBtn.addEventListener("click", () => startExamMode(false));
-    if (simulationModeBtn) simulationModeBtn.addEventListener("click", () => startExamMode(true));
-    if (examPrevBtn) examPrevBtn.addEventListener("click", loadPrevExamQuestion);
-    if (examSkipBtn) examSkipBtn.addEventListener("click", skipExamQuestion);
-    if (examNextBtn) examNextBtn.addEventListener("click", saveAndNextExamQuestion);
-    if (examExitBtn) examExitBtn.addEventListener("click", exitExamMode);
-    if (examSubmitBtn) examSubmitBtn.addEventListener("click", submitExam);
-    if (resultsBackBtn) resultsBackBtn.addEventListener("click", showMainQuizMode);
-    
-    if (regenerateBtn) {
-        regenerateBtn.addEventListener("click", () => {
-            const selectedMode = typeSelect.value;
-            localStorage.setItem("ap1_type_mode", selectedMode);
-            initQuestions(selectedMode);
-            
-            // Re-apply the current theme filter
-            const activeFilterBtn = themeFiltersContainer.querySelector(".filter-btn.active");
-            const currentTheme = activeFilterBtn ? activeFilterBtn.getAttribute("data-theme") : "all";
-            filterQuestions(currentTheme);
-            
-            alert("Die Übungsaufgaben wurden entsprechend deinen Optionen erfolgreich neu generiert!");
-        });
+        if (examModeBtn) examModeBtn.addEventListener("click", () => startExamMode(false));
+        if (simulationModeBtn) simulationModeBtn.addEventListener("click", () => startExamMode(true));
+        if (examPrevBtn) examPrevBtn.addEventListener("click", loadPrevExamQuestion);
+        if (examSkipBtn) examSkipBtn.addEventListener("click", skipExamQuestion);
+        if (examNextBtn) examNextBtn.addEventListener("click", saveAndNextExamQuestion);
+        if (examExitBtn) examExitBtn.addEventListener("click", exitExamMode);
+        if (examSubmitBtn) examSubmitBtn.addEventListener("click", submitExam);
+        if (resultsBackBtn) resultsBackBtn.addEventListener("click", showMainQuizMode);
+        
+        if (regenerateBtn) {
+            regenerateBtn.addEventListener("click", () => {
+                const selectedMode = typeSelect.value;
+                localStorage.setItem("ap1_type_mode", selectedMode);
+                initQuestions(selectedMode);
+                
+                // Re-apply the current theme filter
+                const activeFilterBtn = themeFiltersContainer.querySelector(".filter-btn.active");
+                const currentTheme = activeFilterBtn ? activeFilterBtn.getAttribute("data-theme") : "all";
+                filterQuestions(currentTheme);
+                
+                alert("Die Übungsaufgaben wurden entsprechend deinen Optionen erfolgreich neu generiert!");
+            });
+        }
+    } catch (error) {
+        console.error("Initialization error:", error);
+        alert("Fehler bei der Initialisierung der Quiz-App:\n" + error.message + "\n\nStacktrace:\n" + error.stack);
     }
 });
 
