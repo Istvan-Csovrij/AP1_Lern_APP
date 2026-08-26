@@ -2442,14 +2442,50 @@ function pruefeNummer(nummer) {
     // Multipliziere die ersten 9 Ziffern (Index 0 bis 8) mit ihrer Stelle (1 bis 9)
     for (let i = 0; i < 9; i++) {
         sum += nummer[i] * (i + 1);
-    }
-    // Berechne die Prüfziffer (Rest der Division durch 10)
-    let berechnetePruefziffer = sum % 10;
-    // Vergleiche die berechnete Prüfziffer mit der an Index 9
-    return berechnetePruefziffer === nummer[9];
-}
-\`\`\``,
-        explanation: `Lernkarte Algorithmen (Prüfziffern):
-- Prüfziffern (wie bei IBAN, ISBN oder Kundenkarten) dienen dazu, Tippfehler bei der Dateneingabe sofort im Frontend zu erkennen, ohne eine Datenbankabfrage durchführen zu müssen.`
+    },
+    {
+        id: 186,
+        theme: "lf3",
+        type: "open-text",
+        question: "Prüfungsaufgabe IP-Konfiguration (Winter 2024/25 / LF 3): Ein neuer Client soll in der Abteilung Verkauf/Service (VK/S) einer Firma konfiguriert werden. Laut logischem Netzwerkplan gelten folgende Parameter:\n- Das Subnetz der Abteilung VK/S lautet 10.3.0.0/16.\n- Die IP-Adressen 10.3.0.2 und 10.3.0.3 sind bereits an PCs vergeben.\n- Der abteilungsinterne DNS- und Dateiserver hat die IP-Adresse 10.3.0.1.\n- Der Router besitzt im Subnetz der Abteilung VK/S die IP-Adresse 10.3.0.100.\n\nGib eine vollständige, gültige IPv4-Konfiguration (IP-Adresse, Subnetzmaske, Standardgateway, bevorzugter DNS-Server) für den neuen Client an.",
+        musterloesung: `Gültige Client-Konfiguration:
+- IP-Adresse: 10.3.0.4 (oder jede andere freie Adresse im Bereich 10.3.0.4 bis 10.3.255.255, ausgenommen 10.3.0.100 und 10.3.0.110/Drucker)
+- Subnetzmaske: 255.255.0.0 (entspricht dem CIDR-Präfix /16)
+- Standardgateway: 10.3.0.100 (die IP-Adresse der Router-Schnittstelle im lokalen Subnetz)
+- Bevorzugter DNS-Server: 10.3.0.1 (die IP-Adresse des abteilungsinternen DNS-Servers)`,
+        explanation: `Lernkarte IP-Netzkonfiguration:
+- Der Client muss eine freie IP-Adresse im selben Subnetz wie der DNS-Server und das Standardgateway besitzen.
+- Das Standardgateway vermittelt den Datenverkehr in fremde Subnetze und ins Internet.
+- Der DNS-Server übersetzt Domainnamen in IP-Adressen.`
+    },
+    {
+        id: 187,
+        theme: "lf6",
+        type: "open-text",
+        question: "Prüfungsaufgabe Angebotsvergleich (Winter 2024/25 / LF 6): Ein Händler vergleicht zwei Angebote für einen neuen Arbeitsplatz (Rechner und Monitor):\n- Angebot 1 (Hemak AG): Listeneinkaufspreis gesamt 533,01 EUR netto, Treue-Rabatt 10 %, Verpackung/Versand 25,00 EUR. Skonto 2 % bei Zahlung innerhalb von 10 Tagen.\n- Angebot 2 (DiWin GmbH): Listeneinkaufspreis gesamt 595,00 EUR netto, Neukunden-Rabatt 20 %, Verpackung/Versand 50,00 EUR. Skonto 3 % bei Zahlung innerhalb von 7 Tagen.\n\nBerechne für beide Angebote den Bezugspreis (Einstandspreis) netto unter Ausnutzung des Skontos. Entscheide dich für das wirtschaftlichere Angebot. Der Rechenweg ist anzugeben.",
+        musterloesung: `1. Bezugskalkulation Hemak AG:
+  Listeneinkaufspreis (Gesamt): 533,01 EUR
+- Lieferantenrabatt (10 %): - 53,30 EUR
+= Zieleinkaufspreis: 479,71 EUR
+- Lieferantenskonto (2 % von 479,71): - 9,59 EUR
+= Bareinkaufspreis: 470,12 EUR
++ Bezugskosten (Versand): + 25,00 EUR
+= Bezugspreis (Einstandspreis): 495,12 EUR
+
+2. Bezugskalkulation DiWin GmbH:
+  Listeneinkaufspreis (Gesamt): 595,00 EUR
+- Lieferantenrabatt (20 %): - 119,00 EUR
+= Zieleinkaufspreis: 476,00 EUR
+- Lieferantenskonto (3 % von 476,00): - 14,28 EUR
+= Bareinkaufspreis: 461,72 EUR
++ Bezugskosten (Versand): + 50,00 EUR
+= Bezugspreis (Einstandspreis): 511,72 EUR
+
+Ergebnis:
+Das Angebot der Hemak AG ist mit einem Einstandspreis von 495,12 EUR rein quantitativ das wirtschaftlichere Angebot (Ersparnis von 16,60 EUR gegenüber dem Angebot der DiWin GmbH mit 511,72 EUR).`,
+        explanation: `Lernkarte Angebotsvergleich:
+- Rabatt wird immer auf den Listeneinkaufspreis gewährt.
+- Skonto wird vom rabattierten Zieleinkaufspreis abgezogen.
+- Die Versandkosten (Bezugskosten) werden zum Bareinkaufspreis addiert, um den endgültigen Einstandspreis (Bezugspreis) zu erhalten.`
     }
 ];
