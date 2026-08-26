@@ -2360,5 +2360,96 @@ Der Gesamt-Bezugspreis beträgt 11.564,82 EUR netto.`,
 - Langjährige Geschäftsbeziehung: Ein eingespieltes Vertrauensverhältnis erleichtert die Kommunikation und sorgt für Kulanz im Problemfall.`,
         explanation: `Lernkarte Lieferantenbewertung:
 - Bei der Lieferantenauswahl spielen nicht nur quantitative Kriterien (Preis, Rabatt, Konditionen), sondern vor allem qualitative Kriterien (Qualität, Liefertreue, Service, Nachhaltigkeit) eine entscheidende Rolle.`
+    },
+    {
+        id: 181,
+        theme: "lf6",
+        type: "open-text",
+        question: "Prüfungsaufgabe Verkaufskalkulation (Winter 2024/25 / LF 6): Ein Händler kalkuliert den Verkaufspreis für ein PC-Set ausgehend von einem Einstandspreis (Bezugspreis) von 500,00 EUR. Ermittle den Listenverkaufspreis (netto) anhand der folgenden Kalkulationssätze:\n- Handlungskostenzuschlag: 30 %\n- Gewinnzuschlag: 15 %\n- Kundenskonto: 2 % (wird vom Listenverkaufspreis gewährt; Kalkulation 'im Hundert')\nDer Rechenweg ist anzugeben.",
+        musterloesung: `Kalkulationsschema (Verkaufskalkulation):
+1. Einstandspreis: 500,00 EUR
+2. + Handlungskosten (30 % von 500): + 150,00 EUR
+3. = Selbstkostenpreis: 650,00 EUR
+4. + Gewinnzuschlag (15 % von 650): + 97,50 EUR
+5. = Barverkaufspreis: 747,50 EUR
+6. + Kundenskonto (2 % im Hundert):
+   - Der Barverkaufspreis entspricht 98 % des Zielverkaufspreises (100 % - 2 % Skonto).
+   - Rechnung: 747,50 EUR / 0,98 = 762,76 EUR
+   - Skonto-Betrag = 762,76 EUR - 747,50 EUR = 15,26 EUR
+7. = Listenverkaufspreis (netto): 762,76 EUR
+
+Ergebnis: Der Netto-Listenverkaufspreis beträgt 762,76 EUR.`,
+        explanation: `Lernkarte Verkaufskalkulation:
+- Im Gegensatz zur Einkaufskalkulation wird bei der Verkaufskalkulation rückwärts gerechnet (im Hundert), da das Skonto auf den höheren Zielverkaufspreis gewährt wird (Barverkaufspreis = 98 %, Zielverkaufspreis = 100 %).`
+    },
+    {
+        id: 182,
+        theme: "lf3",
+        type: "open-text",
+        question: "Prüfungsaufgabe Netzwerktechnik (Winter 2024/25 / LF 3): Erläutere auf Basis des OSI-Schichtenmodells die grundlegenden Unterschiede zwischen einer MAC-Adresse und einer IP-Adresse bezüglich ihrer Schicht, ihrer Eindeutigkeit und ihres Verwendungszwecks.",
+        musterloesung: `- MAC-Adresse (Physical Address):
+  * OSI-Schicht: Schicht 2 (Sicherungsschicht / Data Link Layer).
+  * Eindeutigkeit: Vom Hersteller der Netzwerkkarte fest eingebrannt und weltweit physisch eindeutig.
+  * Verwendungszweck: Dient der direkten Adressierung von Geräten innerhalb desselben lokalen Netzwerks (LAN / Broadcast-Domain).
+
+- IP-Adresse (Logical Address):
+  * OSI-Schicht: Schicht 3 (Vermittlungsschicht / Network Layer).
+  * Eindeutigkeit: Wird dem Gerät logisch und flexibel je nach Standort im Netzwerk zugewiesen.
+  * Verwendungszweck: Ermöglicht das systemübergreifende Routing von Datenpaketen über Subnetzgrenzen hinweg im weltweiten Internet.`,
+        explanation: `Lernkarte Adressierung im Netz:
+- Switches arbeiten auf Schicht 2 und leiten Pakete anhand von MAC-Adressen weiter.
+- Router arbeiten auf Schicht 3 und leiten Pakete anhand von IP-Adressen weiter.`
+    },
+    {
+        id: 183,
+        theme: "lf6",
+        type: "open-text",
+        question: "Prüfungsaufgabe USV-Leistungsberechnung (Winter 2024/25 / LF 6): Ein Serverraum soll mit einer USV abgesichert werden. An der USV werden Geräte mit folgenden Leistungsdaten betrieben:\n- Server 1: Wirkleistung 400 W, Leistungsfaktor (cos phi) 0,80\n- Server 2: Wirkleistung 300 W, Leistungsfaktor (cos phi) 0,85\n\n1. Berechne die gesamte Scheinleistung (S) in VA.\n2. Berechne die erforderliche Mindest-Scheinleistung der USV, wenn eine Leistungsreserve von 40 % eingerechnet werden soll. Der Rechenweg ist anzugeben.",
+        musterloesung: `1. Berechnung der Scheinleistungen (Formel: S = P / cos phi):
+- Server 1: S1 = 400 W / 0,80 = 500 VA
+- Server 2: S2 = 300 W / 0,85 = 352,94 VA
+- Gesamte Scheinleistung: S_ges = 500 VA + 352,94 VA = 852,94 VA
+
+2. Berechnung der USV-Mindestleistung (40 % Leistungsreserve):
+- S_min = S_ges * 1,40
+- S_min = 852,94 VA * 1,40 = 1.194,12 VA
+
+Ergebnis: Die USV muss eine Mindestleistung von 1.194,12 VA (bzw. aufgerundet 1.200 VA) aufweisen.`,
+        explanation: `Lernkarte USV-Dimensionierung:
+- USV-Leistungen werden in Scheinleistung (VA - Voltampere) angegeben, da sie induktive und kapazitive Lasten der Netzteile abfangen müssen.
+- Wirkleistung (Watt) beschreibt die tatsächlich verbrauchte Energie, Scheinleistung (VA) die Gesamtbelastung der Leitung.`
+    },
+    {
+        id: 184,
+        theme: "lf5",
+        type: "open-text",
+        question: "Prüfungsaufgabe SQL-Fehlersuche (Winter 2024/25 / LF 5): Beim Ausführen des folgenden SQL-Befehls in einer Kundendatenbank treten 2 Fehler auf. Benenne diese Fehler:\n\n\`\`\`sql\nINSERT INTO Kunde (knr, name, vorname, strasse, plz, ort, geschlecht)\nVALUES ('128', 'Müller', 'Tamara', 'Brunnengasse 4', '74722', 'Buchen', 'w', '1999-08-10');\n\`\`\`",
+        musterloesung: `Die 2 Fehler lauten:
+1. Anzahl-Diskrepanz (Spalten vs. Werte): In der Spaltenliste des INSERT INTO werden 7 Spalten definiert (knr, name, vorname, strasse, plz, ort, geschlecht). In der VALUES-Liste werden jedoch 8 Werte übergeben. Der letzte Wert ('1999-08-10') hat keine zugehörige Spalte.
+2. Fehlende Spaltendefinition: Die Spalte für das Geburtsdatum (z. B. 'geburtsdatum') fehlt in der Spaltenliste des INSERT-Befehls. Um den Fehler zu beheben, muss entweder diese Spalte hinzugefügt oder der Wert '1999-08-10' gelöscht werden.`,
+        explanation: `Lernkarte SQL INSERT-Syntax:
+- Bei einem INSERT-Statement muss die Anzahl der angegebenen Spalten exakt mit der Anzahl der übergebenen Werte übereinstimmen. Andernfalls bricht das DBMS die Transaktion mit einem Syntaxfehler ab.`
+    },
+    {
+        id: 185,
+        theme: "lf5",
+        type: "open-text",
+        question: "Prüfungsaufgabe Algorithmen Prüfziffer (Winter 2024/25 / LF 5): Eine Kundenkartennummer besteht aus einem Array mit 10 Ganzzahlen. Die Ziffern an Index 0 bis 8 werden jeweils mit ihrer Stelle (Index + 1) multipliziert. Die Summe der Produkte wird modulo 10 geteilt. Der Rest entspricht der Prüfziffer, die an Index 9 steht. Schreibe eine JavaScript-Funktion 'pruefeNummer(nummer)', die 'true' zurückgibt, wenn die Ziffer an Index 9 mit der berechneten Prüfziffer übereinstimmt, andernfalls 'false'.",
+        musterloesung: `JavaScript-Code:
+\`\`\`javascript
+function pruefeNummer(nummer) {
+    let sum = 0;
+    // Multipliziere die ersten 9 Ziffern (Index 0 bis 8) mit ihrer Stelle (1 bis 9)
+    for (let i = 0; i < 9; i++) {
+        sum += nummer[i] * (i + 1);
+    }
+    // Berechne die Prüfziffer (Rest der Division durch 10)
+    let berechnetePruefziffer = sum % 10;
+    // Vergleiche die berechnete Prüfziffer mit der an Index 9
+    return berechnetePruefziffer === nummer[9];
+}
+\`\`\``,
+        explanation: `Lernkarte Algorithmen (Prüfziffern):
+- Prüfziffern (wie bei IBAN, ISBN oder Kundenkarten) dienen dazu, Tippfehler bei der Dateneingabe sofort im Frontend zu erkennen, ohne eine Datenbankabfrage durchführen zu müssen.`
     }
 ];
