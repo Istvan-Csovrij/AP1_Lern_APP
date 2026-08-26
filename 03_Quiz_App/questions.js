@@ -2168,6 +2168,16 @@ while (anzUrlaubstage > 0) {
     if (anzUrlaubstage - tage >= 0) {
         console.log("Urlaub genehmigt.");
         anzUrlaubstage -= tage;
+    } else {
+        console.log("Urlaub nicht genehmigt.");
+    }
+}
+console.log("Urlaub aufgebraucht.");
+\`\`\``,
+        explanation: `Lernkarte Struktogramme (Nassi-Shneiderman):
+- Der Schleifenblock umschließt alle eingerückten Aktionen.
+- Verzweigungen werden als Dreiecke mit True (T) und False (F) dargestellt.
+- Wertzuweisungen werden als einfache Anweisungen umgesetzt.`
     },
     {
         id: 169,
