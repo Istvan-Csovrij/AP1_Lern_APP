@@ -53,6 +53,20 @@
                 </button>
             </div>
 
+            <!-- IHK-Prüfungsmodus Card -->
+            <div class="card exam-card" style="border: 2px solid #10b981; box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.1);">
+                <h3 style="color: #047857; margin-bottom: 0.5rem;"><i class="fa-solid fa-file-signature"></i> IHK-Prüfungsmodus</h3>
+                <p style="font-size: 0.85rem; color: var(--text-light); margin-bottom: 0.75rem; line-height: 1.35;">Trainiere reale Prüfungsaufgaben unter Echtzeitbedingungen.</p>
+                <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                    <button class="btn btn-full" id="exam-mode-btn" style="background-color: #10b981; color: white; justify-content: center; font-weight: bold; border: none; font-size: 0.95rem; display: flex; align-items: center; gap: 0.5rem; width: 100%;">
+                        <i class="fa-solid fa-graduation-cap"></i> IHK-Übungsmodus
+                    </button>
+                    <button class="btn btn-full" id="simulation-mode-btn" style="background-color: #3b82f6; color: white; justify-content: center; font-weight: bold; border: none; font-size: 0.95rem; display: flex; align-items: center; gap: 0.5rem; width: 100%;">
+                        <i class="fa-solid fa-stopwatch"></i> 90-Min.-Simulation
+                    </button>
+                </div>
+            </div>
+
             <div class="card stats-card">
                 <h3><i class="fa-solid fa-chart-simple"></i> Lernfortschritt</h3>
                 <div class="stats-grid">
@@ -137,6 +151,96 @@
                 <div class="explanation-section" id="explanation-section">
                     <h4>Erklärung:</h4>
                     <p id="explanation-text"></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Exam Mode Content Area (hidden by default) -->
+        <section class="exam-area" id="exam-area" style="display: none; flex-direction: column; gap: 1rem; width: 100%; max-width: 800px; margin-bottom: 2rem;">
+            <!-- Exam info card -->
+            <div class="card" style="display: flex; justify-content: space-between; align-items: center; border-left: 5px solid #10b981; padding: 1rem;">
+                <div>
+                    <h2 id="exam-mode-title" style="margin: 0; color: #0f766e; font-size: 1.4rem;">IHK-Übungsmodus</h2>
+                    <p style="margin: 0.25rem 0 0 0; color: var(--text-light); font-size: 0.9rem;">Bearbeite die Aufgaben. Antworten werden gespeichert und am Ende ausgewertet.</p>
+                </div>
+                <div id="exam-timer-container" style="display: none; align-items: center; gap: 0.5rem; background-color: #fee2e2; padding: 0.5rem 1rem; border-radius: 9999px; border: 1px solid #fca5a5; color: #991b1b; font-weight: bold; font-size: 1.1rem;">
+                    <i class="fa-solid fa-clock-rotate-left fa-spin"></i> <span id="exam-timer">90:00</span>
+                </div>
+            </div>
+
+            <!-- Exam Question Card -->
+            <div class="card quiz-card" id="exam-question-card">
+                <div class="quiz-header" style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
+                    <span class="badge" id="exam-question-theme" style="background-color: #0f766e;">Lernfeld</span>
+                    <span class="question-number" id="exam-question-number">Aufgabe 1 von 25</span>
+                </div>
+
+                <div class="question-container" style="margin-top: 1rem;">
+                    <h2 id="exam-question-text">Lade Prüfungsaufgabe...</h2>
+                    <div id="exam-code-block-container" class="code-block-container" style="display: none; margin-top: 0.75rem;">
+                        <pre><code id="exam-question-code"></code></pre>
+                    </div>
+                </div>
+
+                <div class="answers-container" id="exam-answers-container" style="margin-top: 1.25rem;">
+                    <!-- Input options or Textareas will be dynamically rendered here -->
+                </div>
+
+                <div class="quiz-actions" style="display: flex; gap: 0.5rem; justify-content: space-between; align-items: center; width: 100%; margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border-color);">
+                    <button class="btn btn-secondary" id="exam-prev-btn" style="display: inline-flex; align-items: center; gap: 0.25rem;">
+                        <i class="fa-solid fa-arrow-left"></i> Vorherige
+                    </button>
+                    <button class="btn" id="exam-skip-btn" style="background-color: #a0aec0; color: white; display: inline-flex; align-items: center; gap: 0.25rem; border: none;">
+                        Überspringen <i class="fa-solid fa-angles-right"></i>
+                    </button>
+                    <button class="btn btn-primary" id="exam-next-btn" style="display: inline-flex; align-items: center; gap: 0.25rem;">
+                        Speichern & Weiter <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Exam Navigation Dashboard -->
+            <div class="card" style="padding: 1.25rem;">
+                <h4 style="margin: 0 0 0.75rem 0; font-size: 0.95rem; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.05em;"><i class="fa-solid fa-grip"></i> Aufgabenübersicht</h4>
+                <div class="question-grid" id="exam-question-grid" style="display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: flex-start; border-top: none; padding-top: 0;">
+                    <!-- Numbers 1 to 25 -->
+                </div>
+                
+                <div style="display: flex; gap: 1rem; margin-top: 1.5rem; flex-wrap: wrap; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-color); padding-top: 1rem;">
+                    <button class="btn btn-secondary" id="exam-exit-btn" style="border: 2px solid #e53e3e; color: #e53e3e; font-weight: bold; background: none;">
+                        <i class="fa-solid fa-right-from-bracket"></i> Abbrechen & zurück
+                    </button>
+                    <button class="btn" id="exam-submit-btn" style="background-color: #10b981; color: white; font-weight: bold; font-size: 1.05rem; border: none; display: flex; align-items: center; gap: 0.5rem;">
+                        <i class="fa-solid fa-paper-plane"></i> Prüfung abgeben & auswerten
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Exam Results Area (hidden by default) -->
+        <section class="results-area" id="exam-results-area" style="display: none; flex-direction: column; gap: 1rem; width: 100%; max-width: 800px; margin-bottom: 2rem;">
+            <div class="card" style="text-align: center; padding: 2rem; border-top: 8px solid #3b82f6;">
+                <div id="results-badge" style="display: inline-block; padding: 0.5rem 1.5rem; border-radius: 9999px; font-weight: bold; font-size: 1.2rem; margin-bottom: 1rem; color: white;">
+                    BESTANDEN
+                </div>
+                <h2 id="results-score-title" style="margin: 0; font-size: 2rem; color: var(--text-color);">Du hast 0% erreicht</h2>
+                <p id="results-points-label" style="margin: 0.5rem 0 1rem 0; font-size: 1.1rem; color: var(--text-light);">0 von 0 Punkten (Mindestens 51% zum Bestehen)</p>
+                <div style="max-width: 400px; margin: 0 auto 1.5rem auto; background-color: #edf2f7; border-radius: 9999px; height: 1.5rem; overflow: hidden; border: 1px solid var(--border-color);">
+                    <div id="results-progress" style="background-color: #3b82f6; height: 100%; transition: width 0.5s ease-out; width: 0%;"></div>
+                </div>
+                <p id="results-time-spent" style="color: var(--text-light); font-size: 0.95rem; font-style: italic; margin-bottom: 1rem;"></p>
+                <button class="btn btn-primary" id="results-back-btn" style="margin-top: 1rem; font-weight: bold; display: inline-flex; align-items: center; gap: 0.5rem;">
+                    <i class="fa-solid fa-house"></i> Zurück zur Hauptseite
+                </button>
+            </div>
+
+            <div class="card" style="padding: 1.5rem;">
+                <h3 style="margin: 0 0 1rem 0;"><i class="fa-solid fa-list-check"></i> Detaillierte Auswertung</h3>
+                <p style="font-size: 0.9rem; color: var(--text-light); margin-bottom: 1.5rem; border-left: 3px solid #ffc107; padding-left: 0.5rem; line-height: 1.4;">
+                    <strong>Selbstbewertung erforderlich:</strong> Offene Aufgaben können nicht automatisch bewertet werden. Bitte vergleiche deine Antwort mit der Musterlösung und klicke auf "Richtig" oder "Falsch", um deine Endnote zu berechnen.
+                </p>
+                <div id="results-list" style="display: flex; flex-direction: column; gap: 1.5rem;">
+                    <!-- Question reviews with answer vs correct and self grading buttons -->
                 </div>
             </div>
         </section>

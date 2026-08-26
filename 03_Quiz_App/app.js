@@ -23,6 +23,16 @@ let stats = {
     total: 0
 };
 
+// Exam & Simulation State
+let isExamActive = false;
+let isSimulationMode = false;
+let examQuestions = [];
+let examAnswers = [];
+let examCurrentIndex = 0;
+let examTimerInterval = null;
+let examSecondsRemaining = 90 * 60;
+let examSecondsElapsed = 0;
+
 // DOM Elements
 const questionThemeEl = document.getElementById("question-theme");
 const questionNumberEl = document.getElementById("question-number");
@@ -85,6 +95,25 @@ document.addEventListener("DOMContentLoaded", () => {
     if (resumeQuizBtn) {
         resumeQuizBtn.addEventListener("click", resumeNormalQuizRound);
     }
+
+    // Exam Mode Buttons
+    const examModeBtn = document.getElementById("exam-mode-btn");
+    const simulationModeBtn = document.getElementById("simulation-mode-btn");
+    const examPrevBtn = document.getElementById("exam-prev-btn");
+    const examSkipBtn = document.getElementById("exam-skip-btn");
+    const examNextBtn = document.getElementById("exam-next-btn");
+    const examExitBtn = document.getElementById("exam-exit-btn");
+    const examSubmitBtn = document.getElementById("exam-submit-btn");
+    const resultsBackBtn = document.getElementById("results-back-btn");
+
+    if (examModeBtn) examModeBtn.addEventListener("click", () => startExamMode(false));
+    if (simulationModeBtn) simulationModeBtn.addEventListener("click", () => startExamMode(true));
+    if (examPrevBtn) examPrevBtn.addEventListener("click", loadPrevExamQuestion);
+    if (examSkipBtn) examSkipBtn.addEventListener("click", skipExamQuestion);
+    if (examNextBtn) examNextBtn.addEventListener("click", saveAndNextExamQuestion);
+    if (examExitBtn) examExitBtn.addEventListener("click", exitExamMode);
+    if (examSubmitBtn) examSubmitBtn.addEventListener("click", submitExam);
+    if (resultsBackBtn) resultsBackBtn.addEventListener("click", showMainQuizMode);
     
     if (regenerateBtn) {
         regenerateBtn.addEventListener("click", () => {
@@ -792,4 +821,488 @@ function escapeHtml(text) {
         "'": '&#039;'
     };
     return text.replace(/[&<>"']/g, function(m) { return map[m]; });
+}
+
+// ==================== EXAM MODE LOGIC ====================
+
+// Starts the exam or simulation
+function startExamMode(simulation) {
+    if (isExamActive) {
+        if (!confirm("Du befindest dich bereits in einer Prüfung. Möchtest du diese abbrechen und eine neue starten?")) {
+            return;
+        }
+        clearInterval(examTimerInterval);
+    }
+
+    isExamActive = true;
+    isSimulationMode = simulation;
+    examCurrentIndex = 0;
+    
+    // Select questions
+    // Core pool: Real exam questions (id >= 157)
+    let coreExamPool = staticQuestions.filter(q => q.id >= 157);
+    
+    // Other pools: static questions and dynamic generators
+    let otherStaticPool = staticQuestions.filter(q => q.id < 157);
+    let dynamicPool = generateDynamicQuestions("mix"); // standard generator
+    
+    // Mix and shuffle
+    shuffleArray(coreExamPool);
+    shuffleArray(otherStaticPool);
+    shuffleArray(dynamicPool);
+
+    // Target: 25 questions total
+    // Select 15 questions from core exam questions (real ones) and 10 from others to ensure a solid and varied test!
+    let selected = [];
+    
+    // Grab up to 15 real exam questions
+    selected.push(...coreExamPool.slice(0, 15));
+    
+    // Grab remaining 10 from static and dynamic pools
+    let countNeeded = 25 - selected.length;
+    let mixedOthers = [...otherStaticPool, ...dynamicPool];
+    shuffleArray(mixedOthers);
+    selected.push(...mixedOthers.slice(0, countNeeded));
+    
+    shuffleArray(selected); // shuffle the final selection so they are distributed randomly
+    examQuestions = selected;
+
+    // Initialize answer sheet
+    examAnswers = new Array(examQuestions.length).fill(null).map(() => ({
+        userAnswer: "",
+        selectedIndex: null,
+        isSkipped: false,
+        isCorrect: false,
+        isSelfGraded: false
+    }));
+
+    // Setup UI view
+    document.querySelector(".sidebar").style.display = "none";
+    document.querySelector(".quiz-area").style.display = "none";
+    document.getElementById("exam-area").style.display = "flex";
+    document.getElementById("exam-results-area").style.display = "none";
+
+    // Setup Mode Info & Title
+    const titleEl = document.getElementById("exam-mode-title");
+    const timerContainer = document.getElementById("exam-timer-container");
+    
+    if (simulation) {
+        titleEl.textContent = "IHK-Prüfungssimulation";
+        timerContainer.style.display = "flex";
+        
+        // Reset timer to 90 minutes
+        examSecondsRemaining = 90 * 60;
+        examSecondsElapsed = 0;
+        document.getElementById("exam-timer").textContent = formatExamTime(examSecondsRemaining);
+        
+        examTimerInterval = setInterval(() => {
+            examSecondsRemaining--;
+            examSecondsElapsed++;
+            document.getElementById("exam-timer").textContent = formatExamTime(examSecondsRemaining);
+            
+            if (examSecondsRemaining <= 0) {
+                clearInterval(examTimerInterval);
+                alert("Die Zeit ist abgelaufen! Deine Prüfung wird automatisch abgegeben.");
+                submitExam();
+            }
+        }, 1000);
+    } else {
+        titleEl.textContent = "IHK-Übungsmodus";
+        timerContainer.style.display = "none";
+        examSecondsElapsed = 0;
+        examTimerInterval = setInterval(() => {
+            examSecondsElapsed++;
+        }, 1000);
+    }
+
+    loadExamQuestion();
+}
+
+// Formats seconds into MM:SS
+function formatExamTime(totalSeconds) {
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = totalSeconds % 60;
+    return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+}
+
+// Loads current exam question
+function loadExamQuestion() {
+    const q = examQuestions[examCurrentIndex];
+    const ans = examAnswers[examCurrentIndex];
+
+    // Header updates
+    document.getElementById("exam-question-theme").textContent = getThemeLabel(q.theme);
+    document.getElementById("exam-question-number").textContent = `Aufgabe ${examCurrentIndex + 1} von ${examQuestions.length}`;
+    document.getElementById("exam-question-text").textContent = q.question;
+
+    // Handle code block
+    const codeBlock = document.getElementById("exam-code-block-container");
+    const codeEl = document.getElementById("exam-question-code");
+    if (q.code) {
+        codeEl.textContent = q.code;
+        codeBlock.style.display = "block";
+    } else {
+        codeBlock.style.display = "none";
+    }
+
+    // Prev Button
+    const prevBtn = document.getElementById("exam-prev-btn");
+    prevBtn.disabled = examCurrentIndex === 0;
+    prevBtn.style.opacity = examCurrentIndex === 0 ? "0.5" : "1";
+    prevBtn.style.cursor = examCurrentIndex === 0 ? "not-allowed" : "pointer";
+
+    // Skip Button styling
+    const skipBtn = document.getElementById("exam-skip-btn");
+    if (ans.isSkipped) {
+        skipBtn.style.backgroundColor = "#e53e3e";
+        skipBtn.style.color = "white";
+    } else {
+        skipBtn.style.backgroundColor = "#a0aec0";
+        skipBtn.style.color = "white";
+    }
+
+    // Render Answers
+    const answersContainer = document.getElementById("exam-answers-container");
+    answersContainer.innerHTML = "";
+
+    if (q.type === "multiple-choice" || q.type === "true-false") {
+        q.options.forEach((opt, idx) => {
+            const btn = document.createElement("button");
+            btn.className = "answer-option";
+            if (ans.selectedIndex === idx) {
+                btn.classList.add("selected");
+                btn.style.borderColor = "#3182ce";
+                btn.style.backgroundColor = "#ebf8ff";
+                btn.innerHTML = `<span class="opt-marker"><i class="fa-solid fa-circle-dot" style="color: #3182ce;"></i></span> ${escapeHtml(opt)}`;
+            } else {
+                btn.innerHTML = `<span class="opt-marker"><i class="fa-regular fa-circle"></i></span> ${escapeHtml(opt)}`;
+            }
+            
+            btn.onclick = () => {
+                const allOpts = answersContainer.querySelectorAll(".answer-option");
+                allOpts.forEach(o => {
+                    o.classList.remove("selected");
+                    o.style.borderColor = "";
+                    o.style.backgroundColor = "";
+                    o.querySelector(".opt-marker").innerHTML = '<i class="fa-regular fa-circle"></i>';
+                });
+                btn.classList.add("selected");
+                btn.style.borderColor = "#3182ce";
+                btn.style.backgroundColor = "#ebf8ff";
+                btn.querySelector(".opt-marker").innerHTML = '<i class="fa-solid fa-circle-dot" style="color: #3182ce;"></i>';
+                ans.selectedIndex = idx;
+                ans.isSkipped = false;
+                renderExamQuestionGrid();
+            };
+            
+            answersContainer.appendChild(btn);
+        });
+    } else if (q.type === "text-input") {
+        const inputContainer = document.createElement("div");
+        inputContainer.className = "text-answer-container";
+        
+        const input = document.createElement("input");
+        input.type = "text";
+        input.className = "text-input";
+        input.placeholder = "Gib deine Antwort hier ein...";
+        input.value = ans.userAnswer;
+        
+        input.oninput = () => {
+            ans.userAnswer = input.value.trim();
+            ans.isSkipped = false;
+            renderExamQuestionGrid();
+        };
+        
+        inputContainer.appendChild(input);
+        answersContainer.appendChild(inputContainer);
+    } else if (q.type === "open-text") {
+        const inputContainer = document.createElement("div");
+        inputContainer.className = "text-answer-container";
+        
+        const textarea = document.createElement("textarea");
+        textarea.className = "text-input open-textarea";
+        textarea.placeholder = "Schreibe deine handschriftliche Antwort bzw. Lösungsansatz hier...";
+        textarea.value = ans.userAnswer;
+        
+        textarea.oninput = () => {
+            ans.userAnswer = textarea.value.trim();
+            ans.isSkipped = false;
+            renderExamQuestionGrid();
+        };
+        
+        inputContainer.appendChild(textarea);
+        answersContainer.appendChild(inputContainer);
+    }
+
+    renderExamQuestionGrid();
+}
+
+// Navigates to previous question
+function loadPrevExamQuestion() {
+    if (examCurrentIndex > 0) {
+        examCurrentIndex--;
+        loadExamQuestion();
+    }
+}
+
+// Skips the current question
+function skipExamQuestion() {
+    const ans = examAnswers[examCurrentIndex];
+    ans.isSkipped = true;
+    ans.selectedIndex = null;
+    ans.userAnswer = "";
+    
+    goToNextExamOrWrap();
+}
+
+// Saves answer and proceeds
+function saveAndNextExamQuestion() {
+    const q = examQuestions[examCurrentIndex];
+    const ans = examAnswers[examCurrentIndex];
+
+    // Check if answered
+    let hasAnswered = false;
+    if (q.type === "multiple-choice" || q.type === "true-false") {
+        hasAnswered = ans.selectedIndex !== null;
+    } else {
+        hasAnswered = ans.userAnswer.length > 0;
+    }
+
+    if (!hasAnswered) {
+        ans.isSkipped = true;
+    } else {
+        ans.isSkipped = false;
+    }
+
+    goToNextExamOrWrap();
+}
+
+// Helper to progress index
+function goToNextExamOrWrap() {
+    if (examCurrentIndex < examQuestions.length - 1) {
+        examCurrentIndex++;
+        loadExamQuestion();
+    } else {
+        alert("Du hast das Ende der Fragen erreicht! Klicke unten auf 'Prüfung abgeben & auswerten', um das Testergebnis zu sehen.");
+    }
+}
+
+// Renders the Grid at the bottom of Exam Card
+function renderExamQuestionGrid() {
+    const gridContainer = document.getElementById("exam-question-grid");
+    if (!gridContainer || examQuestions.length === 0) return;
+    gridContainer.innerHTML = "";
+
+    examQuestions.forEach((q, idx) => {
+        const item = document.createElement("button");
+        item.className = "grid-item";
+        item.textContent = idx + 1;
+        item.style.width = "2.2rem";
+        item.style.height = "2.2rem";
+        item.style.borderRadius = "6px";
+        item.style.border = "none";
+        item.style.fontSize = "0.95rem";
+        item.style.fontWeight = "bold";
+        item.style.cursor = "pointer";
+        item.style.display = "flex";
+        item.style.alignItems = "center";
+        item.style.justifyContent = "center";
+        item.style.transition = "all 0.2s";
+
+        const ans = examAnswers[idx];
+        const isActive = idx === examCurrentIndex;
+        
+        let hasAnswer = false;
+        if (q.type === "multiple-choice" || q.type === "true-false") {
+            hasAnswer = ans.selectedIndex !== null;
+        } else {
+            hasAnswer = ans.userAnswer.length > 0;
+        }
+
+        if (isActive) {
+            item.style.boxShadow = "0 0 0 3px #0f766e"; // Green active ring
+        }
+
+        if (ans.isSkipped) {
+            item.style.backgroundColor = "#feb2b2"; // Red for skipped
+            item.style.color = "#9b2c2c";
+            item.style.border = "2px solid #e53e3e";
+        } else if (hasAnswer) {
+            item.style.backgroundColor = "#319795"; // Dark green for answered
+            item.style.color = "white";
+        } else {
+            item.style.backgroundColor = "#edf2f7"; // Light grey for untouched
+            item.style.color = "#4a5568";
+        }
+
+        item.onclick = () => {
+            examCurrentIndex = idx;
+            loadExamQuestion();
+        };
+
+        gridContainer.appendChild(item);
+    });
+}
+
+// Exit and abort the exam
+function exitExamMode() {
+    if (confirm("Möchtest du die aktuelle Prüfung wirklich abbrechen? Deine Antworten gehen dabei verloren.")) {
+        clearInterval(examTimerInterval);
+        showMainQuizMode();
+    }
+}
+
+// Restores default mode views
+function showMainQuizMode() {
+    isExamActive = false;
+    isSimulationMode = false;
+    clearInterval(examTimerInterval);
+
+    document.querySelector(".sidebar").style.display = "block";
+    document.querySelector(".quiz-area").style.display = "block";
+    document.getElementById("exam-area").style.display = "none";
+    document.getElementById("exam-results-area").style.display = "none";
+    
+    // Reload normal quiz state
+    filterQuestions(currentTheme);
+}
+
+// Submits the exam and calculates the score
+function submitExam() {
+    clearInterval(examTimerInterval);
+
+    // Auto-calculate objective questions
+    examQuestions.forEach((q, idx) => {
+        const ans = examAnswers[idx];
+        
+        if (q.type === "multiple-choice" || q.type === "true-false") {
+            ans.isCorrect = ans.selectedIndex === q.correctAnswer;
+            ans.isSelfGraded = true;
+        } else if (q.type === "text-input") {
+            const normalizedUser = ans.userAnswer.toLowerCase().replace(/\s+/g, "");
+            ans.isCorrect = q.correctAnswers.some(correct => 
+                correct.toLowerCase().replace(/\s+/g, "") === normalizedUser
+            );
+            ans.isSelfGraded = true;
+        } else if (q.type === "open-text") {
+            // Open text starts as incorrect/unmarked, requires self-grading
+            ans.isCorrect = false;
+            ans.isSelfGraded = false;
+        }
+    });
+
+    renderExamResults();
+}
+
+// Renders the Results view
+function renderExamResults() {
+    document.getElementById("exam-area").style.display = "none";
+    const resultsArea = document.getElementById("exam-results-area");
+    resultsArea.style.display = "flex";
+
+    // Calculate score
+    calculateExamScores();
+
+    // Time spent
+    const minutesElapsed = Math.floor(examSecondsElapsed / 60);
+    const secondsElapsed = examSecondsElapsed % 60;
+    const timeSpentStr = `Bearbeitungszeit: ${minutesElapsed} Minute(n) und ${secondsElapsed} Sekunde(n).`;
+    document.getElementById("results-time-spent").textContent = timeSpentStr;
+}
+
+// Recalculates points and displays them in results
+function calculateExamScores() {
+    let totalQuestions = examQuestions.length;
+    let correctCount = examAnswers.filter(ans => ans.isCorrect).length;
+    let percent = totalQuestions > 0 ? Math.round((correctCount / totalQuestions) * 100) : 0;
+
+    const badge = document.getElementById("results-badge");
+    if (percent >= 51) {
+        badge.textContent = "BESTANDEN 🎉";
+        badge.style.backgroundColor = "#48bb78";
+    } else {
+        badge.textContent = "NICHT BESTANDEN ❌";
+        badge.style.backgroundColor = "#e53e3e";
+    }
+
+    document.getElementById("results-score-title").textContent = `Du hast ${percent}% erreicht`;
+    document.getElementById("results-points-label").textContent = `${correctCount} von ${totalQuestions} Aufgaben richtig bewertet (51% benötigt)`;
+    document.getElementById("results-progress").style.width = `${percent}%`;
+
+    // Render detailed list
+    const resultsList = document.getElementById("results-list");
+    resultsList.innerHTML = "";
+
+    examQuestions.forEach((q, idx) => {
+        const ans = examAnswers[idx];
+        const item = document.createElement("div");
+        item.className = "card";
+        item.style.borderLeft = ans.isCorrect ? "6px solid #48bb78" : "6px solid #e53e3e";
+        item.style.marginBottom = "1rem";
+        item.style.padding = "1rem";
+
+        let userAnsText = "";
+        let correctAnsText = "";
+        
+        if (q.type === "multiple-choice" || q.type === "true-false") {
+            userAnsText = ans.selectedIndex !== null ? q.options[ans.selectedIndex] : "(Keine Antwort)";
+            correctAnsText = q.options[q.correctAnswer];
+        } else if (q.type === "text-input") {
+            userAnsText = ans.userAnswer || "(Keine Antwort)";
+            correctAnsText = q.correctAnswers.join(" oder ");
+        } else {
+            userAnsText = ans.userAnswer || "(Keine Antwort)";
+            correctAnsText = q.musterloesung;
+        }
+
+        let selfGradingHTML = "";
+        if (q.type === "open-text") {
+            selfGradingHTML = `
+                <div style="margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed #e2e8f0; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem;">
+                    <span style="font-weight: 600; font-size: 0.9rem; color: #718096;">Bewerte deine Antwort:</span>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <button class="btn" style="background-color: ${ans.isCorrect ? '#38a169' : '#e2e8f0'}; color: ${ans.isCorrect ? 'white' : '#4a5568'}; font-weight: bold; font-size: 0.85rem; padding: 0.4rem 0.8rem; border: none; cursor: pointer;" onclick="gradeExamOpenQuestion(${idx}, true)">
+                            <i class="fa-solid fa-check"></i> Richtig
+                        </button>
+                        <button class="btn" style="background-color: ${(!ans.isCorrect && ans.isSelfGraded) ? '#e53e3e' : '#e2e8f0'}; color: ${(!ans.isCorrect && ans.isSelfGraded) ? 'white' : '#4a5568'}; font-weight: bold; font-size: 0.85rem; padding: 0.4rem 0.8rem; border: none; cursor: pointer;" onclick="gradeExamOpenQuestion(${idx}, false)">
+                            <i class="fa-solid fa-xmark"></i> Falsch
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        item.innerHTML = `
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem;">
+                <span class="badge" style="background-color: #4a5568; margin-bottom: 0;">Aufgabe ${idx + 1} (${getThemeLabel(q.theme)})</span>
+                <span style="font-weight: bold; color: ${ans.isCorrect ? '#38a169' : '#e53e3e'};">
+                    ${ans.isCorrect ? '<i class="fa-solid fa-check-double"></i> 1 Punkt' : '<i class="fa-solid fa-xmark"></i> 0 Punkte'}
+                </span>
+            </div>
+            <h4 style="margin: 0.5rem 0; font-size: 1.05rem;">${escapeHtml(q.question)}</h4>
+            ${q.code ? `<pre style="background: #f7fafc; padding: 0.50rem; border-radius: 6px; font-size: 0.85rem; border: 1px solid #e2e8f0; margin: 0.5rem 0;"><code style="font-family: monospace;">${escapeHtml(q.code)}</code></pre>` : ''}
+            <div style="margin-top: 0.75rem; font-size: 0.95rem; line-height: 1.45;">
+                <div style="margin-bottom: 0.5rem;">
+                    <strong>Deine Antwort:</strong> <span style="font-style: italic; color: #2d3748;">${escapeHtml(userAnsText).replace(/\n/g, "<br>")}</span>
+                </div>
+                <div>
+                    <strong>Musterlösung:</strong> <span style="color: #2b6cb0;">${escapeHtml(correctAnsText).replace(/\n/g, "<br>")}</span>
+                </div>
+                ${q.explanation ? `<div style="margin-top: 0.5rem; font-size: 0.85rem; color: #718096; background-color: #f7fafc; padding: 0.5rem; border-radius: 4px; border-left: 2px solid #3182ce;">
+                    <strong>Erklärung:</strong> ${escapeHtml(q.explanation).replace(/\n/g, "<br>")}
+                </div>` : ''}
+            </div>
+            ${selfGradingHTML}
+        `;
+
+        resultsList.appendChild(item);
+    });
+}
+
+// User-triggered self-grading helper
+function gradeExamOpenQuestion(idx, isCorrect) {
+    const ans = examAnswers[idx];
+    ans.isCorrect = isCorrect;
+    ans.isSelfGraded = true; // Mark as self graded to style the button
+    calculateExamScores(); // Refresh scores dynamically
 }
