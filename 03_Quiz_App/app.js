@@ -843,13 +843,26 @@ function startExamMode(simulation) {
     isSimulationMode = simulation;
     examCurrentIndex = 0;
     
-    // Select questions
+    // Select questions based on selected typeMode (e.g. for Baden-Württemberg open-text exams)
+    const chosenMode = typeSelect ? typeSelect.value : "mix";
+    
     // Core pool: Real exam questions (id >= 157)
-    let coreExamPool = staticQuestions.filter(q => q.id >= 157);
+    let coreExamPool = staticQuestions.filter(q => q.id >= 157 && (chosenMode !== "open" || q.type === "open-text"));
     
     // Other pools: static questions and dynamic generators
-    let otherStaticPool = staticQuestions.filter(q => q.id < 157);
-    let dynamicPool = generateDynamicQuestions("mix"); // standard generator
+    let otherStaticPool = [];
+    let dynamicPool = [];
+    
+    if (chosenMode === "open") {
+        otherStaticPool = staticQuestions.filter(q => q.id < 157 && q.type === "open-text");
+        dynamicPool = generateDynamicQuestions("open");
+    } else if (chosenMode === "standard") {
+        otherStaticPool = staticQuestions.filter(q => q.id < 157 && q.type !== "open-text");
+        dynamicPool = generateDynamicQuestions("standard");
+    } else {
+        otherStaticPool = staticQuestions.filter(q => q.id < 157);
+        dynamicPool = generateDynamicQuestions("mix");
+    }
     
     // Mix and shuffle
     shuffleArray(coreExamPool);
