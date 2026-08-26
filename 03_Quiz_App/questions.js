@@ -2289,5 +2289,62 @@ VALUES ('testbild.jpg', 117000, 1667292685);
 - DELETE löscht bestehende Datensätze (DML).
 - SUM() ist eine Aggregatfunktion zur Summenbildung.
 - INSERT INTO fügt neue Zeilen in eine Tabelle ein.`
+    },
+    {
+        id: 177,
+        theme: "lf5",
+        type: "open-text",
+        question: "Prüfungsaufgabe Programmierung (Sommer 2024 / LF 5): Erstelle eine Funktion 'deleteOldFiles()' in JavaScript, die so lange lückenlos die jeweils älteste Bilddatei löscht, bis die Gesamtgröße der verbleibenden Dateien unter 1 GB (1.000.000.000 Byte) liegt. Nutze hierzu folgende Hilfsfunktionen:\n- getTotalFileSize(): Gibt die Gesamtgröße aller Bilddateien in Byte zurück.\n- getFileNameByNumber(0): Gibt den Dateinamen der ältesten Datei zurück.\n- deleteFileByName(filename): Löscht die Datei mit dem übergebenen Dateinamen.",
+        musterloesung: `JavaScript-Code:
+\`\`\`javascript
+function deleteOldFiles() {
+    // Die Schleife läuft so lange, wie die Gesamtgröße 1 GB oder mehr beträgt
+    while (getTotalFileSize() >= 1000000000) {
+        // Ermittle den Dateinamen der ältesten Datei (immer an Index 0)
+        let oldestFile = getFileNameByNumber(0);
+        // Lösche die älteste Datei
+        deleteFileByName(oldestFile);
+    }
+}
+\`\`\``,
+        explanation: `Lernkarte Programmierlogik:
+- Da gelöschte Dateien aus der Liste entfernt werden, rückt die nächstältere Datei automatisch an Index 0 auf.
+- Die Schleifenbedingung prüft vor jedem Durchlauf, ob die Speichergrenze bereits unterschritten wurde.`
+    },
+    {
+        id: 178,
+        theme: "lf4",
+        type: "open-text",
+        question: "Prüfungsaufgabe Schutzbedarfsanalyse (Sommer 2024 / LF 4): Bestimme und begründe den Schutzbedarf für die Videodaten einer Filial-Videoüberwachung bezüglich der drei Schutzziele:\n1. Vertraulichkeit (Klassifizierung: Vertraulich oder Intern)\n2. Integrität (Klassifizierung: Erhöhte oder Normale Anforderungen)\n3. Verfügbarkeit (Klassifizierung: Extrem hoch [0,5h], Sehr hoch [4h], Hoch [24h], Normal [72h])",
+        musterloesung: `1. Vertraulichkeit: Intern (oder Vertraulich)
+- Begründung: Die Aufnahmen zeigen Kunden und Mitarbeiter (personenbezogene Daten) sowie sensible Sicherheitsbereiche. Unbefugte dürfen diese Daten nicht einsehen, um Persönlichkeitsrechte zu schützen und Einbruchsplanungen vorzubeugen.
+
+2. Integrität: Normale Anforderungen
+- Begründung: Vereinzelte Bildfehler oder kurze Aussetzer in einer Videodatei sind tolerierbar. Es entstehen dadurch keine lebensbedrohlichen Situationen (wie bei Medizingeräten) oder unmittelbare finanzielle Schäden.
+
+3. Verfügbarkeit: Normal (Wiederanlaufzeit 72h)
+- Begründung: Fällt das Kamerasystem für einige Stunden aus, läuft der Supermarktbetrieb normal weiter. Ein Systemausfall gefährdet die Existenz der Filiale nicht unmittelbar, weshalb ein Wiederanlauf innerhalb von 3 Tagen ausreichend ist.`,
+        explanation: `Lernkarte Schutzbedarfsanalyse:
+- Der Schutzbedarf orientiert sich an den möglichen Schadensfolgen bei einer Verletzung des jeweiligen Schutzziels (Vertraulichkeit, Integrität, Verfügbarkeit).`
+    },
+    {
+        id: 179,
+        theme: "lf6",
+        type: "open-text",
+        question: "Prüfungsaufgabe Handelskalkulation (Sommer 2024 / LF 6): Ein Händler kauft 10 Videoüberwachungssysteme für einen Gesamt-Listeneinkaufspreis von 12.550 EUR netto. Der Lieferant gewährt 5 % Rabatt und 3 % Skonto bei Zahlung innerhalb von 10 Tagen. Die Lieferung erfolgt 'frei Haus'. Berechne den Gesamt-Bezugspreis (Einstandspreis) netto unter Ausnutzung des Skontos. Der Rechenweg ist anzugeben.",
+        musterloesung: `Kalkulationsschema:
+1. Listeneinkaufspreis (Gesamt): 12.550,00 EUR
+2. - Lieferantenrabatt (5 % von 12.550): - 627,50 EUR
+3. = Zieleinkaufspreis: 11.922,50 EUR
+4. - Lieferantenskonto (3 % von 11.922,50): - 357,68 EUR
+5. = Bareinkaufspreis: 11.564,82 EUR
+6. + Bezugskosten (frei Haus): + 0,00 EUR
+7. = Bezugspreis (Einstandspreis): 11.564,82 EUR
+
+Ergebnis:
+Der Gesamt-Bezugspreis beträgt 11.564,82 EUR netto.`,
+        explanation: `Lernkarte Handelskalkulation:
+- "Frei Haus" bedeutet, dass die Versandkosten bereits im Preis enthalten sind (Bezugskosten = 0 EUR).
+- Das Skonto wird immer vom zuvor rabattierten Zieleinkaufspreis berechnet und abgezogen.`
     }
 ];
