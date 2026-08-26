@@ -2487,5 +2487,32 @@ Das Angebot der Hemak AG ist mit einem Einstandspreis von 495,12 EUR rein quanti
 - Rabatt wird immer auf den Listeneinkaufspreis gewährt.
 - Skonto wird vom rabattierten Zieleinkaufspreis abgezogen.
 - Die Versandkosten (Bezugskosten) werden zum Bareinkaufspreis addiert, um den endgültigen Einstandspreis (Bezugspreis) zu erhalten.`
+    },
+    {
+        id: 188,
+        theme: "lf6",
+        type: "open-text",
+        question: "Prüfungsaufgabe USV-Dimensionierung & Scheinleistung (Winter 2024/25 / LF 6): Eine USV soll die IT-Infrastruktur absichern. Folgende Verbraucher sind vorhanden:\n- 3 Server (je 230 V, 3 A)\n- 1 Laptop (230 V, 0,8 A)\n- 5 PCs (je 230 V, 0,8 A)\n- 1 Router (230 V, 0,5 A)\n- 3 Switches (je 230 V, 0,8 A)\n- 1 Firewall (230 V, 1 A)\n- 2 Laserdrucker (je 230 V, 2 A)\n- 1 Farblaser (230 V, 3 A)\n\n1. Entscheide begründet, welche der Geräte an die USV angeschlossen werden sollten und welche nicht.\n2. Berechne die gesamte Scheinleistung (S) in VA für alle an die USV angeschlossenen Geräte.\n3. Berechne die benötigte Mindestleistung der USV bei einer Leistungsreserve von 40 %. Der Rechenweg ist anzugeben.",
+        musterloesung: `1. Geräteauswahl für die USV:
+- Angeschlossen werden: Server, Laptop, PCs, Router, Switches und die Firewall (zur Aufrechterhaltung des Netzwerkbetriebs und zur Vermeidung von Datenverlusten/Dateisystemfehlern).
+- NICHT angeschlossen werden: Laserdrucker und Farblaser.
+  * Begründung: Laserdrucker erzeugen durch ihre Heizelemente (Fixierstation) extrem hohe Leistungsspitzen beim Einschalten und Drucken. Diese Spitzen würden eine USV überlasten. Zudem ist das Weiterdrucken bei Stromausfall nicht geschäftskritisch.
+
+2. Berechnung der gesamten Scheinleistung (S = U * I):
+- 3 Server: 3 * 230 V * 3 A = 2.070 VA
+- 1 Laptop: 1 * 230 V * 0,8 A = 184 VA
+- 5 PCs: 5 * 230 V * 0,8 A = 920 VA
+- 1 Router: 1 * 230 V * 0,5 A = 115 VA
+- 3 Switches: 3 * 230 V * 0,8 A = 552 VA
+- 1 Firewall: 1 * 230 V * 1 A = 230 VA
+- Gesamte Scheinleistung S_ges: 2.070 + 184 + 920 + 115 + 552 + 230 = 4.071 VA
+
+3. USV-Mindestleistung mit 40 % Leistungsreserve:
+- S_min = S_ges * 1,40
+- S_min = 4.071 VA * 1,40 = 5.699,40 VA (bzw. ca. 5,7 kVA)
+
+Ergebnis: Die USV muss eine Mindestleistung von 5.699,40 VA aufweisen.`,
+        explanation: `Lernkarte USV-Dimensionierung:
+- Drucker und andere Heizgeräte (Kaffeemaschinen, Kopierer) dürfen NIEMALS an eine USV angeschlossen werden, da sie die USV durch extreme Stromspitzen zerstören oder sofort entladen können.`
     }
 ];
