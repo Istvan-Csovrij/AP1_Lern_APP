@@ -432,3 +432,9 @@ footer {
     background-color: #dc2626;
 }
 
+/* Centered 1-column layout for Exam Mode */
+.container.exam-mode-active {
+    grid-template-columns: 1fr;
+    justify-items: center;
+}
+

@@ -882,6 +882,7 @@ function startExamMode(simulation) {
     }));
 
     // Setup UI view
+    document.querySelector(".container").classList.add("exam-mode-active");
     document.querySelector(".sidebar").style.display = "none";
     document.querySelector(".quiz-area").style.display = "none";
     document.getElementById("exam-area").style.display = "flex";
@@ -1163,6 +1164,7 @@ function showMainQuizMode() {
     isSimulationMode = false;
     clearInterval(examTimerInterval);
 
+    document.querySelector(".container").classList.remove("exam-mode-active");
     document.querySelector(".sidebar").style.display = "block";
     document.querySelector(".quiz-area").style.display = "block";
     document.getElementById("exam-area").style.display = "none";
