@@ -2158,16 +2158,7 @@ Das Angebot der CBS KG ist mit einem Einstandspreis von 337,92 EUR das wirtschaf
         id: 168,
         theme: "lf5",
         type: "open-text",
-        question: "Prüfungsaufgabe Struktogramm-Implementierung (Sommer 2025 / LF 5): Setze das Struktogramm zur Urlaubsverwaltung in lauffähigen JavaScript-Code um. Das Struktogramm besitzt folgende Logik:
-- Initialisierung: anzUrlaubstage = 29
-- Wiederholung solange: anzUrlaubstage > 0
-  * Ausgabe: 'Sie haben noch ' + anzUrlaubstage + ' Tage Urlaub.'
-  * Ausgabe: 'Wieviele Tage Urlaub möchten Sie nehmen?'
-  * Eingabe: tage
-  * Verzweigung (IF): anzUrlaubstage - tage >= 0
-    - JA (Wahr): Ausgabe: 'Urlaub genehmigt.' und anzUrlaubstage um tage vermindern
-    - NEIN (Falsch): Ausgabe: 'Urlaub nicht genehmigt.'
-- Nach der Schleife (außerhalb): Ausgabe: 'Urlaub aufgebraucht.'",
+        question: "Prüfungsaufgabe Struktogramm-Implementierung (Sommer 2025 / LF 5): Setze das Struktogramm zur Urlaubsverwaltung in lauffähigen JavaScript-Code um. Das Struktogramm besitzt folgende Logik:\n- Initialisierung: anzUrlaubstage = 29\n- Wiederholung solange: anzUrlaubstage > 0\n  * Ausgabe: 'Sie haben noch ' + anzUrlaubstage + ' Tage Urlaub.'\n  * Ausgabe: 'Wieviele Tage Urlaub möchten Sie nehmen?'\n  * Eingabe: tage\n  * Verzweigung (IF): anzUrlaubstage - tage >= 0\n    - JA (Wahr): Ausgabe: 'Urlaub genehmigt.' und anzUrlaubstage um tage vermindern\n    - NEIN (Falsch): Ausgabe: 'Urlaub nicht genehmigt.'\n- Nach der Schleife (außerhalb): Ausgabe: 'Urlaub aufgebraucht.'",
         musterloesung: `JavaScript-Code:
 \`\`\`javascript
 let anzUrlaubstage = 29;
@@ -2288,12 +2279,7 @@ Erforderliche Maßnahme:
         id: 176,
         theme: "lf5",
         type: "open-text",
-        question: "Prüfungsaufgabe SQL & Datenbanken (Sommer 2024 / LF 5): Gegeben ist das Relationenmodell:
-images (filename, filesize, timestamp)
-Formuliere die entsprechenden SQL-Befehle für die folgenden Aktionen:
-1. Lösche den Datenbankeintrag für die Bilddatei mit dem Namen 'testbild.jpg'.
-2. Bestimme die Gesamtgröße (Summe) aller Bilddateien, die in der Tabelle erfasst sind.
-3. Füge einen neuen Datenbankeintrag für die Bilddatei mit dem Namen 'testbild.jpg', der Größe 117000 Byte und dem Zeitstempel 1667292685 hinzu.",
+        question: "Prüfungsaufgabe SQL & Datenbanken (Sommer 2024 / LF 5): Gegeben ist das Relationenmodell:\nimages (filename, filesize, timestamp)\nFormuliere die entsprechenden SQL-Befehle für die folgenden Aktionen:\n1. Lösche den Datenbankeintrag für die Bilddatei mit dem Namen 'testbild.jpg'.\n2. Bestimme die Gesamtgröße (Summe) aller Bilddateien, die in der Tabelle erfasst sind.\n3. Füge einen neuen Datenbankeintrag für die Bilddatei mit dem Namen 'testbild.jpg', der Größe 117000 Byte und dem Zeitstempel 1667292685 hinzu.",
         musterloesung: `1. Datensatz löschen:
 \`\`\`sql
 DELETE FROM images WHERE filename = 'testbild.jpg';
@@ -2318,10 +2304,7 @@ VALUES ('testbild.jpg', 117000, 1667292685);
         id: 177,
         theme: "lf5",
         type: "open-text",
-        question: "Prüfungsaufgabe Programmierung (Sommer 2024 / LF 5): Erstelle eine Funktion 'deleteOldFiles()' in JavaScript, die so lange lückenlos die jeweils älteste Bilddatei löscht, bis die Gesamtgröße der verbleibenden Dateien unter 1 GB (1.000.000.000 Byte) liegt. Nutze hierzu folgende Hilfsfunktionen:
-- getTotalFileSize(): Gibt die Gesamtgröße aller Bilddateien in Byte zurück.
-- getFileNameByNumber(0): Gibt den Dateinamen der ältesten Datei zurück.
-- deleteFileByName(filename): Löscht die Datei mit dem übergebenen Dateinamen.",
+        question: "Prüfungsaufgabe Programmierung (Sommer 2024 / LF 5): Erstelle eine Funktion 'deleteOldFiles()' in JavaScript, die so lange lückenlos die jeweils älteste Bilddatei löscht, bis die Gesamtgröße der verbleibenden Dateien unter 1 GB (1.000.000.000 Byte) liegt. Nutze hierzu folgende Hilfsfunktionen:\n- getTotalFileSize(): Gibt die Gesamtgröße aller Bilddateien in Byte zurück.\n- getFileNameByNumber(0): Gibt den Dateinamen der ältesten Datei zurück.\n- deleteFileByName(filename): Löscht die Datei mit dem übergebenen Dateinamen.",
         musterloesung: `JavaScript-Code:
 \`\`\`javascript
 function deleteOldFiles() {
@@ -2583,12 +2566,7 @@ Ergebnis: Die USV muss eine Mindestleistung von 5.699,40 VA aufweisen.`,
         id: 191,
         theme: "lf5",
         type: "open-text",
-        question: "Prüfungsaufgabe Programmierung (Sommer 2023 / LF 5): Erstelle eine JavaScript-Funktion 'loginUeberpruefung(username, passwort)'. Die Funktion nutzt die Hilfsfunktion 'DB_Abfrage(username, passwort)', welche folgende Rückgabewerte liefert:
-- 0: Daten korrekt
-- 1: Benutzername existiert nicht
-- 2: Passwort falsch
-
-Wenn die Daten korrekt sind, soll die Funktion 'true' zurückgeben. In allen anderen Fällen soll der Text 'Daten nicht korrekt' auf der Konsole ausgegeben und 'false' zurückgegeben werden.",
+        question: "Prüfungsaufgabe Programmierung (Sommer 2023 / LF 5): Erstelle eine JavaScript-Funktion 'loginUeberpruefung(username, passwort)'. Die Funktion nutzt die Hilfsfunktion 'DB_Abfrage(username, passwort)', welche folgende Rückgabewerte liefert:\n- 0: Daten korrekt\n- 1: Benutzername existiert nicht\n- 2: Passwort falsch\n\nWenn die Daten korrekt sind, soll die Funktion 'true' zurückgeben. In allen anderen Fällen soll der Text 'Daten nicht korrekt' auf der Konsole ausgegeben und 'false' zurückgegeben werden.",
         musterloesung: `JavaScript-Code:
 \`\`\`javascript
 function loginUeberpruefung(username, passwort) {
