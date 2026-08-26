@@ -2346,5 +2346,19 @@ Der Gesamt-Bezugspreis beträgt 11.564,82 EUR netto.`,
         explanation: `Lernkarte Handelskalkulation:
 - "Frei Haus" bedeutet, dass die Versandkosten bereits im Preis enthalten sind (Bezugskosten = 0 EUR).
 - Das Skonto wird immer vom zuvor rabattierten Zieleinkaufspreis berechnet und abgezogen.`
+    },
+    {
+        id: 180,
+        theme: "lf6",
+        type: "open-text",
+        question: "Prüfungsaufgabe Lieferantenauswahl (Sommer 2024 / LF 6): Ein Lieferant bietet zwar günstige Basispreise an, gewährt jedoch vorerst keinerlei Rabatte für Neuaufträge. Nenne 3 triftige kaufmännische oder logistische Gründe, weshalb ein IT-Systemhaus dennoch bei diesem Lieferanten bestellen sollte.",
+        musterloesung: `Triftige Gründe (drei nennen):
+- Schnelle und garantierte Lieferzeit: Kurze Lieferzeiten verringern das Risiko von Verzögerungen im Kundenprojekt.
+- Hohe Produktqualität & Zuverlässigkeit: Geringe Ausfall- und Mängelquoten sparen Reklamations- und Supportkosten.
+- Hervorragender Kundenservice / Gewährleistung: Schneller Austausch defekter Ware und ein kompetenter Support sind oft wichtiger als ein kleiner Rabatt.
+- Gute Zahlungsbedingungen: Z. B. ein langes Zahlungsziel (Zahlung innerhalb von 30 Tagen) oder attraktive Skonto-Regelungen, was die Liquidität schont.
+- Langjährige Geschäftsbeziehung: Ein eingespieltes Vertrauensverhältnis erleichtert die Kommunikation und sorgt für Kulanz im Problemfall.`,
+        explanation: `Lernkarte Lieferantenbewertung:
+- Bei der Lieferantenauswahl spielen nicht nur quantitative Kriterien (Preis, Rabatt, Konditionen), sondern vor allem qualitative Kriterien (Qualität, Liefertreue, Service, Nachhaltigkeit) eine entscheidende Rolle.`
     }
 ];
