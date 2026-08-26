@@ -1936,5 +1936,155 @@ Ergebnis: Der Verkäufer darf dem Kunden für die 45 Tage Verzug 135,00 EUR Verz
         explanation: `Lernkarte Verzugszinsen:
 - Nach der kaufmännischen Zinsmethode (deutsche Zinsmethode) hat jeder Monat 30 Tage und das Jahr 360 Tage.
 - Verzugszinsen werden bei B2B-Geschäften (Business-to-Business) gesetzlich auf 9 Prozentpunkte über dem jeweiligen Basiszinssatz festgelegt (§ 288 Abs. 2 BGB).`
+    },
+    {
+        id: 157,
+        theme: "lf3",
+        type: "open-text",
+        question: "Prüfungsaufgabe Netzwerkverkabelung (Sommer 2025 / LF 3): Für die strukturierte Verkabelung eines Kraftwerks wird im Primärbereich (Außenbereich) ein Single-Mode-Glasfaserkabel gewählt. Begründe, welche Kabelmedien im Sekundärbereich (Gebäude-Steigbereich) und im Tertiärbereich (Etagenverkabelung) verwendet werden können.",
+        musterloesung: `- Sekundärbereich (Steigbereich): Glasfaserkabel (z. B. Multi-Mode-Glasfaser / LWL). Dies eignet sich perfekt für vertikale Verbindungen zwischen den Etagenverteilern, da es unempfindlich gegenüber elektromagnetischen Störungen ist und Potenzialunterschiede zwischen den Stockwerken verhindert.
+- Tertiärbereich (Etagenbereich): Kupferkabel (Twisted-Pair ab Cat 6A / Cat 7 / Cat 8) mit RJ45-Anschlüssen. Diese Kabel sind flexibel, kostengünstig und ideal für die Endgeräteanbindung über Strecken bis maximal 90 m (plus 10 m Patchkabel für die Verbindung zur Dose und zum Endgerät).`,
+        explanation: `Lernkarte Strukturierte Verkabelung:
+- Primärbereich (Campus): Verbindung zwischen Gebäuden (immer LWL wg. Strecke und Potenzialtrennung).
+- Sekundärbereich (Gebäude): Verbindung zwischen Stockwerken (LWL bevorzugt).
+- Tertiärbereich (Etage): Verbindung von Etagenverteilern zu Dosen/Arbeitsplätzen (Kupfer/Twisted-Pair bevorzugt).`
+    },
+    {
+        id: 158,
+        theme: "lf3",
+        type: "open-text",
+        question: "Prüfungsaufgabe IPv6-Adressierung (Sommer 2025 / LF 3): In einem Subnetz mit dem Präfix '2001:db8::/64' sind bereits folgende Geräte im Netzplan konfiguriert:\n- Router: 2001:db8::1\n- DHCP-Server: 2001:db8::2\n- Laptop 1: 2001:db8::3\n- Laptop 2: 2001:db8::4\n- PC 1: 2001:db8::5\n- PC 2: 2001:db8::6\n\nAls Global Unicast Address (GUA) wird einem neu angeschlossenen Computer die nächste freie (fortlaufende) IP-Adresse zugewiesen. Ermittle diese Adresse und gib sie vollständig gekürzt an.",
+        musterloesung: `Die gesuchte gekürzte Adresse lautet:
+2001:db8::7
+
+Erklärung:
+- Der Netzwerkanteil (Präfix) '2001:db8::/64' belegt die ersten 64 Bit.
+- Die Host-IDs werden sequenziell hochgezählt. Da '::1' bis '::6' bereits belegt sind, ist die nächste freie hexadezimale Stelle die '::7'.`,
+        explanation: `Lernkarte IPv6-Kürzungsregeln:
+- Führende Nullen innerhalb eines Blocks können weggelassen werden (z. B. '0db8' wird zu 'db8').
+- Aufeinanderfolgende Null-Blöcke können einmalig durch ein Doppel-Doppelpunkt '::' ersetzt werden.`
+    },
+    {
+        id: 159,
+        theme: "lf3",
+        type: "open-text",
+        question: "Prüfungsaufgabe IPv4-Hostberechnung & Router-Konfiguration (Sommer 2025 / LF 3):\n1. Berechne die maximale Anzahl an verfügbaren (nutzbaren) Host-IP-Adressen in einem IPv4-Netzwerk mit dem IP-Bereich 172.16.0.0/16.\n2. Die letzte nutzbare Hostadresse dieses Netzwerks soll für das Standard-Gateway des Routers reserviert werden. Nenne diese IP-Adresse und die zugehörige Subnetzmaske.",
+        musterloesung: `1. Maximale Anzahl nutzbarer Hostadressen:
+- Ein /16-Netzwerk hat 16 Bits für den Host-Anteil (32 - 16 = 16).
+- Gesamtzahl der IP-Adressen = 2^16 = 65.536.
+- Nutzbare Adressen = 2^16 - 2 = 65.534.
+(Abzuziehen sind die Netzadresse 172.16.0.0 und die Broadcast-Adresse 172.16.255.255).
+
+2. Konfiguration für den Router (letzte nutzbare IP):
+- Die letzte nutzbare Hostadresse liegt direkt vor der Broadcast-Adresse (172.16.255.255 - 1).
+- IP-Adresse: 172.16.255.254
+- Subnetzmaske (für /16): 255.255.0.0`,
+        explanation: `Lernkarte IP-Berechnung:
+- Die Subnetzmaske für ein /16-Netzwerk hat die ersten zwei Oktette auf 255 (255.255.0.0).
+- Die erste nutzbare IP-Adresse lautet 172.16.0.1, die letzte nutzbare lautet 172.16.255.254.`
+    },
+    {
+        id: 160,
+        theme: "lf3",
+        type: "open-text",
+        question: "Prüfungsaufgabe WLAN-Technik (Sommer 2025 / LF 3): Für das WLAN sollen Access-Points nach dem Standard IEEE 802.11ax installiert werden, die das neue 6-GHz-Frequenzband nutzen. Nenne 3 wesentliche Vorteile des neuen 6-GHz-Bands gegenüber dem klassischen 2,4-GHz-Frequenzband.",
+        musterloesung: `- Höhere Übertragungsraten / Bandbreiten: Im 6-GHz-Band stehen breitere Kanäle (bis zu 160 MHz statt meist nur 20 MHz) zur Verfügung, was extrem hohe Geschwindigkeiten ermöglicht.
+- Geringere Störungen / Interferenzen: Da das 6-GHz-Band frisch freigegeben ist, wird es nicht von Altgeräten blockiert und ist immun gegen typische Störer wie Mikrowellen, Bluetooth-Geräte oder Babyphones, die im 2,4-GHz-Netz senden.
+- Mehr überlappungsfreie Kanäle: Es gibt im 6-GHz-Band eine viel größere Auswahl an Kanälen, wodurch benachbarte Access-Points sich in großen Gebäuden nicht mehr gegenseitig stören (keine Kanal-Überlappung).`,
+        explanation: `Lernkarte WLAN-Frequenzen:
+- 2,4 GHz: Große Reichweite, durchdringt Wände gut, aber extrem überlastet und langsame Datenraten.
+- 5 GHz: Gute Datenrate, mittlere Reichweite, teilweise DFS/TPC-reguliert.
+- 6 GHz: Maximale Datenrate, sehr geringe Latenz, aber geringere Reichweite (wird stark durch Wände gedämpft).`
+    },
+    {
+        id: 161,
+        theme: "lf4",
+        type: "open-text",
+        question: "Prüfungsaufgabe IT-Sicherheit Phishing-Erkennung (Sommer 2025 / LF 4): Ein Mitarbeiter erhält eine E-Mail mit dem Betreff 'WICHTIG! Konto gesperrt' von 'krusty@sparkasse.de' mit einer unpersönlichen Anrede ('Sehr geehrte Damen und Herren') und der Aufforderung, sein Konto über einen Link freizuschalten. Nenne 3 typische Merkmale dieser E-Mail, an denen man Phishing erkennen kann.",
+        musterloesung: `Typische Phishing-Merkmale (drei nennen):
+1. Absenderadresse stimmt nicht: Die E-Mail-Domain nutzt den Namen 'Krusty' (unseriös für eine Bank) oder die Absender-Domain passt nicht zur echten Bank.
+2. Allgemeine, unpersönliche Anrede: Sparkassen sprechen Kunden bei sicherheitsrelevanten Vorgängen immer mit ihrem echten Namen an, niemals mit 'Sehr geehrte Damen und Herren'.
+3. Künstlicher Zeitdruck / Drohung: Die Aufforderung zur Freischaltung 'innerhalb von 24 Stunden' soll den Empfänger unter Druck setzen, unüberlegt zu handeln.
+4. Aufforderung zum Anklicken eines Links für sensible Daten: Banken senden keine E-Mails, um Konten über eingebettete Links zu entsperren.`,
+        explanation: `Lernkarte Phishing-Prävention:
+- Der beste Schutz vor Phishing ist die Sensibilisierung der Mitarbeiter (Security Awareness Training) sowie technische Filter (SPF, DKIM, DMARC) auf dem Mailserver.`
+    },
+    {
+        id: 162,
+        theme: "lf4",
+        type: "open-text",
+        question: "Prüfungsaufgabe Passwortsicherheit & 2FA (Sommer 2025 / LF 4):\n1. Beurteile das Sicherheitsrisiko, wenn ein Mitarbeiter dasselbe Passwort für alle Online-Anwendungen verwendet.\n2. Nenne den Hauptvorteil eines Passwortmanagers.\n3. Erkläre das grundlegende Funktionsprinzip einer Zwei-Faktor-Authentisierung (2FA).",
+        musterloesung: `1. Sicherheitsrisiko:
+- Wenn ein einziger Dienst gehackt oder per Phishing kompromittiert wird, hat der Angreifer sofortigen Zugriff auf alle anderen Accounts des Benutzers (z. B. E-Mail, ERP, Banking) – das Risiko eines Domino-Effekts ist extrem hoch.
+
+2. Vorteil eines Passwortmanagers:
+- Er generiert und speichert hochkomplexe, einzigartige Passwörter für jeden einzelnen Dienst in einem verschlüsselten Tresor. Der Benutzer muss sich nur noch ein einziges Master-Passwort merken.
+
+3. Prinzip der Zwei-Faktor-Authentisierung (2FA):
+- Die Anmeldung erfordert den Nachweis von zwei unterschiedlichen Faktoren aus den folgenden drei Kategorien:
+  * Wissen (z. B. Passwort, PIN)
+  * Besitz (z. B. Smartphone für Authenticator-Apps, Sicherheits-Token/YubiKey, Smartcard)
+  * Sein / Biometrie (z. B. Fingerabdruck, Gesichtsscan)
+- Ein Angreifer kann sich ohne den zweiten physischen Faktor (z. B. das Smartphone) selbst dann nicht anmelden, wenn er das Passwort kennt.`,
+        explanation: `Lernkarte Authentisierung:
+- Ein-Faktor-Authentisierung (nur Passwort) gilt heute in Firmennetzwerken als unsicher.
+- 2FA schützt effektiv vor den Folgen gestohlener Passwörter.`
+    },
+    {
+        id: 163,
+        theme: "lf4",
+        type: "open-text",
+        question: "Prüfungsaufgabe IT-Schutzziele (Sommer 2025 / LF 4): Angreifer erlangen unerlaubten Zugriff auf das Urlaubsplanungstool eines Unternehmens und manipulieren die Urlaubsanträge der Mitarbeiter. Begründe für jedes der drei klassischen IT-Schutzziele (Vertraulichkeit, Integrität, Verfügbarkeit), ob es in diesem Szenario verletzt wurde.",
+        musterloesung: `- Vertraulichkeit (Confidentiality): Verletzt. Unbefugte Dritte konnten die Urlaubsanträge der Mitarbeiter (personenbezogene und interne Daten) einsehen.
+- Integrität (Integrity): Verletzt. Die Daten wurden unautorisiert verändert (die Urlaubsdaten wurden manipuliert), sodass die Daten nicht mehr verlässlich und korrekt sind.
+- Verfügbarkeit (Availability): Nicht verletzt (bzw. nicht betroffen). Das System und die Daten waren weiterhin abrufbar und wurden nicht gelöscht oder durch Verschlüsselung (Ransomware) blockiert.`,
+        explanation: `Lernkarte CIA-Triade (Schutzziele):
+- Vertraulichkeit: Nur Berechtigte dürfen Daten lesen.
+- Integrität: Daten dürfen nicht unbemerkt verändert werden.
+- Verfügbarkeit: Systeme und Daten müssen für Berechtigte nutzbar sein.`
+    },
+    {
+        id: 164,
+        theme: "lf6",
+        type: "open-text",
+        question: "Prüfungsaufgabe Beschaffung & Service-Level-Agreement (Sommer 2025 / LF 6):\n1. Entsteht durch das Absenden einer schriftlichen Anfrage zur Beschaffung von IT-Systemen eine rechtliche Verpflichtung für den Absender?\n2. Erkläre den Begriff 'Service-Level-Agreement' (SLA) und nenne ein typisches Beispiel für dessen Inhalt.",
+        musterloesung: `1. Rechtliche Verpflichtung bei einer Anfrage:
+- Nein. Eine Anfrage ist rechtlich unverbindlich (eine sogenannte "invitatio ad offerendum" - Einladung zur Abgabe eines Angebots) und verpflichtet den Absender weder zum Kauf noch zu sonstigen Leistungen.
+
+2. Service-Level-Agreement (SLA):
+- Definition: Eine vertragliche Vereinbarung zwischen einem Dienstleister (z. B. IT-Dienstleister) und einem Kunden, in der messbare Serviceleistungen wie Reaktionszeiten, Verfügbarkeiten und Lösungszeiten definiert werden.
+- Beispiel für den Inhalt: Garantierte Verfügbarkeit des Servers von 99,9 % pro Jahr, maximale Reaktionszeit bei Störungen der Priorität 1 von 2 Stunden.`,
+        explanation: `Lernkarte IT-Beschaffung:
+- Eine Anfrage führt erst über das Angebot des Händlers und die Bestellung des Kunden (oder umgekehrt) zu einem rechtlich bindenden Kaufvertrag.`
+    },
+    {
+        id: 165,
+        theme: "lf5",
+        type: "open-text",
+        question: "Prüfungsaufgabe SQL & Datenbanken (Sommer 2025 / LF 5): Gegeben ist das Relationenmodell:\nMitarbeiter (mID, vorname, name, strasse, stadt)\nFormuliere die entsprechenden SQL-Befehle für die folgenden Aktionen:\n1. Erstelle die Tabelle 'Mitarbeiter' (mID ist Ganzzahl und Primärschlüssel, die restlichen Felder sind Textfelder bis 100 Zeichen).\n2. Zeige alle Mitarbeiterdaten sortiert nach dem Attribut 'name' (alphabetisch aufsteigend) an.\n3. Ermittle die Anzahl der Mitarbeiter, die aus der Stadt 'Mannheim' kommen.",
+        musterloesung: `1. Tabelle anlegen:
+\`\`\`sql
+CREATE TABLE Mitarbeiter (
+    mID INT PRIMARY KEY,
+    vorname VARCHAR(100),
+    name VARCHAR(100),
+    strasse VARCHAR(100),
+    stadt VARCHAR(100)
+);
+\`\`\`
+
+2. Sortierte Abfrage:
+\`\`\`sql
+SELECT * FROM Mitarbeiter ORDER BY name ASC;
+\`\`\`
+
+3. Anzahl ermitteln:
+\`\`\`sql
+SELECT COUNT(*) FROM Mitarbeiter WHERE stadt = 'Mannheim';
+\`\`\``,
+        explanation: `Lernkarte SQL-Grundlagen:
+- CREATE TABLE dient der Definition der Tabellenstruktur (DDL - Data Definition Language).
+- ORDER BY sortiert standardmäßig aufsteigend (ASC).
+- COUNT(*) ist eine Aggregatfunktion, die die Anzahl der übereinstimmenden Zeilen zählt.`
     }
 ];
