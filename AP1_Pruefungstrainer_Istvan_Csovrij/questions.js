@@ -2668,4 +2668,172 @@ function loginUeberpruefung(username, passwort) {
 - 1:N-Beziehungen werden über einen Fremdschlüssel auf der N-Seite (hier Laptop) realisiert.
 - N:M-Beziehungen müssen im relationalen Modell über eine Verknüpfungstabelle (z. B. Projekt_Mitarbeiter) in zwei 1:N-Beziehungen aufgelöst werden.`
     }
+,
+    {
+        id: 196,
+        theme: "lf6",
+        type: "open-text",
+        question: "Prüfungsaufgabe Aufbauorganisation (Sommer 2026 / LF 6):\nDas aktuelle Organigramm eines IT-Unternehmens zeigt eine Struktur mit der Geschäftsführung an der Spitze, beratenden Stellen (Öffentlichkeitsarbeit, Rechtsabteilung) an der Seite und einer Aufteilung in Funktionsbereiche (Einkauf, Entwicklung) sowie Kundensegmente (Privatkunden, Behörden).\n\nBeantworte folgende Fragen:\n1. Nenne und erkläre die 3 verschiedenen Organisationsstrukturen, die in dieser Mischstruktur enthalten sind.\n2. Nenne und erkläre die Stellenarten, die im Organigramm dargestellt sind.\n3. Beschreibe jeweils einen wesentlichen Vorteil und Nachteil dieser divisionalen und funktionalen Mischstruktur.",
+        musterloesung: `1. Die 3 Organisationsstrukturen:
+- Einliniensystem (oder Stabliniensystem): Klare Dienstwege von der Geschäftsführung nach unten mit beratenden Stabsstellen an der Seite.
+- Funktionale Organisation (Verrichtungsorganisation): Aufteilung der Abteilungen nach Aufgaben (Einkauf, Entwicklung, Fertigung, Verkauf, Verwaltung, Rechnungswesen).
+- Divisionale Organisation (Spartenorganisation / Objektorganisation): Aufteilung der nachgelagerten Stellen nach Kundengruppen (Privatkunden, Gewerbe & Unternehmen, Behörden).
+
+2. Stellenarten:
+- Instanz (Leitende Stelle): Stelle mit Weisungsbefugnis und Fachverantwortung (z. B. Geschäftsführung).
+- Linienstelle (Ausführende Stelle): Abteilung oder Mitarbeiter im regulären Dienstweg mit Fachverantwortung für bestimmte Aufgaben (z. B. Einkauf, Entwicklung).
+- Stabsstelle: Beratende, unterstützende Stelle ohne direkte Weisungsbefugnis gegenüber der Linie (z. B. Rechtsabteilung, Öffentlichkeitsarbeit).
+
+3. Vor- und Nachteile:
+- Vorteil: Sehr hohe Kundenorientierung und Flexibilität durch die kundenorientierten Sparten (Divisionen); gleichzeitig klare fachliche Spezialisierung im Funktionsbereich.
+- Nachteil: Hohe Personalkosten durch die Gefahr von Doppelarbeiten (z. B. wenn jede Sparte eigene administrative Aufgaben erledigt); erhöhter Koordinationsbedarf zwischen den Sparten und Funktionen.`,
+        explanation: `Lernkarte Aufbauorganisation:
+- Einliniensysteme zeichnen sich durch Eindeutigkeit der Weisungswege aus.
+- Stabsstellen dienen der Entlastung der Instanzen, treffen aber selbst keine operativen Weisungen.
+- Spartenorganisationen gliedern nach Objekten (Produkten, Regionen oder Kunden).`
+    },
+    {
+        id: 197,
+        theme: "lf6",
+        type: "open-text",
+        question: "Prüfungsaufgabe Handelskalkulation (Sommer 2026 / LF 6):\nFür einen neuen Artikel im Sortiment soll eine Handelskalkulation durchgeführt werden. Folgende Daten sind bekannt:\n- Barverkaufspreis (netto): 1.000,00 EUR\n- Handlungskostenzuschlag: 20 %\n- Lieferer-Rabatt: 10 %\n- Gewinnzuschlag: 5 %\n- Bezugskosten (Transport): 25,00 EUR\n- Lieferer-Skonto: 3 %\n\nErmittle den Listeneinkaufspreis (netto) mittels Rückwärtskalkulation. Der vollständige Rechenweg ist anzugeben.",
+        musterloesung: `Rückwärtskalkulation (von unten nach oben):
+
+1. Selbstkostenpreis berechnen:
+   Barverkaufspreis = 1.000,00 EUR (entspricht 105 %, da Gewinn = 5 % auf Selbstkosten aufgeschlagen wird)
+   Selbstkostenpreis = 1.000,00 EUR / 1,05 = 952,38 EUR
+   Gewinn = 47,62 EUR
+
+2. Bezugspreis (Einstandspreis) berechnen:
+   Selbstkostenpreis = 952,38 EUR (entspricht 120 %, da Handlungskosten = 20 % auf den Bezugspreis aufgeschlagen werden)
+   Bezugspreis = 952,38 EUR / 1,20 = 793,65 EUR
+   Handlungskosten = 158,73 EUR
+
+3. Bareinkaufspreis berechnen:
+   Bezugspreis = Bareinkaufspreis + Bezugskosten
+   Bareinkaufspreis = 793,65 EUR - 25,00 EUR = 768,65 EUR
+
+4. Zieleinkaufspreis berechnen:
+   Bareinkaufspreis = 768,65 EUR (entspricht 97 %, da Liefererskonto = 3 % vom Zieleinkaufspreis abgezogen wird)
+   Zieleinkaufspreis = 768,65 EUR / 0,97 = 792,42 EUR
+   Liefererskonto = 23,77 EUR
+
+5. Listeneinkaufspreis berechnen:
+   Zieleinkaufspreis = 792,42 EUR (entspricht 90 %, da Liefererrabatt = 10 % vom Listeneinkaufspreis abgezogen wird)
+   Listeneinkaufspreis = 792,42 EUR / 0,90 = 880,47 EUR
+   Liefererrabatt = 88,05 EUR
+
+Ergebnis: Der Listeneinkaufspreis beträgt 880,47 EUR.`,
+        explanation: `Lernkarte Handelskalkulation (Rückwärts):
+- Gewinnsatz und Handlungskostensatz beziehen sich in der Einkaufskalkulation immer auf die vorherige Stufe (Selbstkosten bzw. Bezugspreis = Basis 100 %).
+- Bezugskosten werden bei der Rückwärtsrechnung vom Bezugspreis abgezogen, um den Bareinkaufspreis zu erhalten.
+- Rabatt und Skonto beziehen sich auf den Listeneinkaufspreis bzw. Zieleinkaufspreis.`
+    },
+    {
+        id: 198,
+        theme: "lf4",
+        type: "open-text",
+        question: "Prüfungsaufgabe Datenverfügbarkeit & RAID (Sommer 2026 / LF 4):\n1. Berechne die maximale Ausfallzeit pro Jahr (in Minuten) für die Verfügbarkeitsklasse 3 (99,9 % Verfügbarkeit) bei 365 Tagen.\n2. Berechne die nutzbare Speicherkapazität (in TB) bei 6 Festplatten mit jeweils 20 TB Kapazität (ohne Hot-Spare) für ein RAID 5 und ein RAID 10.\n3. Begründe anhand des Aufbaus eines RAID 10 Systems, warum der Umstieg von RAID 5 auf RAID 10 die Datenverfügbarkeit positiv beeinflusst.\n4. Bewerte die Aussage: 'Wenn man RAID verwendet, benötigt man kein Backup.'",
+        musterloesung: `1. Maximale Ausfallzeit pro Jahr:
+- Gesamtminuten pro Jahr = 365 Tage * 24 Std * 60 Min = 525.600 Minuten.
+- Maximale Ausfallzeit (0,1 % von 525.600) = 525.600 * 0,001 = 525,6 Minuten (entspricht 8 Stunden und 45,6 Minuten).
+
+2. Nutzbare Speicherkapazität:
+- RAID 5: Kapazität = (n - 1) * Festplattengröße = (6 - 1) * 20 TB = 100 TB nutzbarer Speicher.
+- RAID 10: Kapazität = (n / 2) * Festplattengröße = (6 / 2) * 20 TB = 60 TB nutzbarer Speicher.
+
+3. Begründung des Umstiegs auf RAID 10:
+- RAID 10 spiegelt die Daten zuerst (RAID 1) und verteilt sie dann (RAID 0). Dadurch kann in jedem Spiegelpaar eine Platte ausfallen, ohne dass Daten verloren gehen (im Idealfall bis zu 3 Platten gleichzeitig).
+- Zudem entfällt die Paritätsberechnung von RAID 5. Ein Rebuild (Wiederherstellung nach Plattenwechsel) belastet das System deutlich weniger und geht viel schneller, was das Risiko eines Folgeausfalls während der kritischen Rebuild-Phase stark senkt.
+
+4. Bewertung der Aussage:
+- Die Aussage ist falsch. RAID sorgt für Betriebskontinuität und Ausfallsicherheit bei physischen Festplattendefekten (Hardware-Redundanz). Es schützt jedoch nicht vor logischem Datenverlust (z. B. durch Viren, Ransomware/Verschlüsselung, versehentliches Löschen, Softwarefehler) oder physischen Katastrophen (Brand, Diebstahl, Überschwemmung). Hierfür ist zwingend ein externes, getrenntes Backup erforderlich.`,
+        explanation: `Lernkarte Datenverfügbarkeit:
+- RAID erhöht die Ausfallsicherheit (High Availability), ist aber kein Ersatz für Datensicherung (Disaster Recovery).
+- RAID 5 verkraftet den Ausfall von maximal 1 beliebigen Festplatte.
+- RAID 10 halbiert die Bruttokapazität durch Spiegelung.`
+    },
+    {
+        id: 199,
+        theme: "lf3",
+        type: "open-text",
+        question: "Prüfungsaufgabe IPv6-Konfiguration (Sommer 2026 / LF 3):\nEin Provider teilt ein IPv6-Präfix 2001:0db8:00ea:2300::/56 zu. Das Subnetz für den Admin-PC lautet 2001:0db8:00ea:2301::/64. Der Admin-PC hat die PC-Nummer AB.1001. Die Router-Schnittstelle im lokalen Netz (Gateway) hat fe80::1, der lokale DNS-Server fe80::d.\n\nGib eine vollständige manuelle IPv6-Konfiguration in Kurzform für den Admin-PC an:\n1. Globale IPv6-Adresse (mit Präfixlänge /64; die PC-Nummer AB.1001 muss im Interface-Identifier enthalten sein)\n2. Standardgateway\n3. Bevorzugter DNS-Server",
+        musterloesung: `Manuelle IPv6-Konfiguration (Kurzform):
+
+1. Globale IPv6-Adresse: 2001:db8:ea:2301::ab:1001/64
+   * Erklärung zur Kurzform: Führende Nullen in Blöcken werden weggelassen (db8 statt 0db8, ea statt 00ea). Aufeinanderfolgende Null-Blöcke werden durch :: abgekürzt. Der Interface-Identifier am Ende enthält die PC-Nummer als Hexadezimalwert (ab:1001).
+   
+2. Standardgateway: fe80::1
+   * Erklärung: Link-Local-Adresse der Router-Schnittstelle im lokalen Netz.
+
+3. Bevorzugter DNS-Server: fe80::d
+   * Erklärung: Link-Local-Adresse des DNS-Servers im lokalen Netz.`,
+        explanation: `Lernkarte IPv6-Regeln:
+- IPv6-Adressen bestehen aus 8 Blöcken à 16 Bit (hexadezimal).
+- Das Kürzen erfolgt durch: 1. Weglassen führender Nullen pro Block, 2. Einmaliges Ersetzen von aufeinanderfolgenden Nullblöcken durch ::.
+- Link-Local-Adressen (fe80::/10) sind nur im lokalen Segment gültig und werden häufig für Gateways und lokale Dienste verwendet.`
+    },
+    {
+        id: 200,
+        theme: "lf5",
+        type: "open-text",
+        question: "Prüfungsaufgabe Programmierung CSV-Prüfung (Sommer 2026 / LF 5):\nEin Kunde meldet fehlerhafte Artikelpreise in Bestellungen. Schreibe eine JavaScript-Funktion 'pruefeFehlendenPreis(daten, artikelID)', die ein Array von CSV-Zeilen ('daten') und eine Artikel-ID ('artikelID') erhält.\nDie CSV-Struktur lautet:\nBestellID;Bestelldatum;ArtikelID;Artikelbezeichnung;Menge;Preis;Hersteller;HerstellerID\n\nDie Funktion soll 'true' zurückgeben, wenn für die übergebene 'artikelID' mindestens eine Zeile existiert, in welcher der Preis leer (leerer String) oder gleich 'NULL' ist. Andernfalls soll 'false' zurückgegeben werden.",
+        musterloesung: `JavaScript-Code:
+\`\`\`javascript
+function pruefeFehlendenPreis(daten, artikelID) {
+    // Schleife durch alle übergebenen Zeilen des Arrays
+    for (let i = 0; i < daten.length; i++) {
+        let zeile = daten[i];
+        
+        // Zeile anhand des Semikolons in Felder aufteilen
+        let felder = zeile.split(";");
+        
+        // Sicherstellen, dass die Zeile genügend Felder hat
+        if (felder.length > 5) {
+            let currentArtikelID = felder[2]; // Index 2: ArtikelID
+            let preis = felder[5];           // Index 5: Preis
+            
+            // Wenn die gesuchte Artikel-ID übereinstimmt
+            if (currentArtikelID === artikelID) {
+                // Prüfe, ob das Preisfeld leer ist oder den String 'NULL' enthält
+                if (preis === "" || preis === "NULL") {
+                    return true; // Unvollständiger Preis gefunden!
+                }
+            }
+        }
+    }
+    return false; // Alle Preise für diese ArtikelID sind vollständig vorhanden
+}
+\`\`\``,
+        explanation: `Lernkarte CSV-Verarbeitung:
+- Die split(';')-Methode teilt einen String an den Trennzeichen in ein Array von Teilstrings auf.
+- In JavaScript beginnt die Indizierung bei 0 (BestellID = Index 0, Bestelldatum = Index 1, ArtikelID = Index 2, Preis = Index 5).
+- Vorzeitiges Verlassen der Schleife per 'return true' spart Rechenleistung, sobald der erste Fehler gefunden wird.`
+    },
+    {
+        id: 201,
+        theme: "lf5",
+        type: "open-text",
+        question: "Prüfungsaufgabe Datenbanken & SQL (Sommer 2026 / LF 5):\n1. Gegeben ist die flache CSV-Struktur:\nBestellID;Bestelldatum;ArtikelID;Artikelbezeichnung;Menge;Preis;Hersteller;HerstellerID\nÜberführe diese Struktur in ein redundanzfreies Relationenmodell in der 3. Normalform (3NF). Kennzeichne Primärschlüssel (PK) und Fremdschlüssel (FK) eindeutig.\n2. Gegeben ist die Relation: Kunde (KundeID, Name, Straße, Telefonnr, Email, Ortnr)\nFormuliere einen SQL-Befehl, der alle Kunden anzeigt, bei denen keine E-Mail-Adresse hinterlegt ist.",
+        musterloesung: `1. Relationenmodell in 3. Normalform (3NF):
+- Bestellung (BestellID [PK], Bestelldatum)
+- Bestellposition (BestellID [PK][FK], ArtikelID [PK][FK], Menge)
+- Artikel (ArtikelID [PK], Artikelbezeichnung, Preis, HerstellerID [FK])
+- Hersteller (HerstellerID [PK], Hersteller)
+
+* Erklärung zur Normalisierung: 
+  * 1NF: Alle Attribute sind atomar (bereits gegeben).
+  * 2NF: Jedes Nicht-Primärattribut ist voll funktionell abhängig vom Primärschlüssel. Die Menge hängt von der Kombination aus BestellID und ArtikelID ab (n:m), während Bestelldatum nur von BestellID und Artikeldaten nur von ArtikelID abhängen. Daher Aufteilung in eigene Relationen.
+  * 3NF: Keine transitiven Abhängigkeiten. Der Herstellername hängt von der HerstellerID ab, welche wiederum von der ArtikelID abhängt. Daher wird die HerstellerID zum Fremdschlüssel und der Herstellername in eine eigene Tabelle ausgelagert.
+
+2. SQL-Abfrage:
+\`\`\`sql
+SELECT * FROM Kunde 
+WHERE Email IS NULL OR Email = '';
+\`\`\``,
+        explanation: `Lernkarte Normalisierung & SQL:
+- Primärschlüssel identifizieren einen Datensatz eindeutig. Zusammengesetzte Schlüssel werden in n:m-Verknüpfungstabellen (Bestellposition) verwendet.
+- Fremdschlüssel verweisen auf die Primärschlüssel anderer Relationen, um Beziehungen abzubilden.
+- NULL repräsentiert einen fehlenden oder unbekannten Wert in Datenbanken und muss mit 'IS NULL' abgefragt werden.`
+    }
 ];
