@@ -2911,4 +2911,149 @@ WHERE Email IS NULL OR Email = '';
 - Link-Local-Adressen (fe80::/10) werden nicht über Router hinweg weitergeleitet.
 - Ping (ICMP Echo Request) testet die Erreichbarkeit auf Schicht 3 des OSI-Modells.`
     }
+,
+    {
+        id: 204,
+        theme: "lf4",
+        type: "open-text",
+        question: "Prüfungsaufgabe Speichersysteme & Datenvolumen (Herbst 2022 / LF 4):\nEine Produktionslinie erzeugt Kartonbahnen mit einer Breite von 50,80 cm und einer Geschwindigkeit von 30,48 m/min. Zur Qualitätskontrolle werden fortlaufend Kamerabilder erfasst (Scanfläche pro Aufnahme: 50,80 cm breit x 30,48 cm lang; Auflösung: 400x400 dpi; Farbtiefe: 16 Bit; 1 Inch = 2,54 cm). Die Produktionszeit beträgt 12 Stunden am Tag.\n\nBeantworte folgende Fragen:\n1. Ermittle die Anzahl der Aufnahmen/Scans pro Tag.\n2. Berechne das zu speichernde Datenvolumen in MiB pro Scan.\n3. Berechne das gesamte Datenvolumen pro Tag in TiB (auf volle TiB aufrunden).\n4. Berechne die maximale Netto-Speicherkapazität (in TB) bei einer RAID 5 Konfiguration unter Verwendung aller verfügbaren Festplatten (2x 3 TB und 7x 2 TB) an einem RAID-Hostadapter.\n5. Berechne die Kapazität desselben Plattenpools bei Einsatz von JBOD und nenne zwei Vorteile von JBOD gegenüber einem RAID 0.\n6. Nenne drei Vorteile eines SAN (Storage Area Network) gegenüber einem NAS (Network Attached Storage).\n7. Nenne jeweils einen Vor- und Nachteil der Kennzeichnung mittels QR-Code bzw. RFID-Chips gegenüber dem herkömmlichen Barcode.",
+        musterloesung: `1. Anzahl der Aufnahmen pro Tag:
+- Geschwindigkeit: 30,48 m/min = 3048 cm/min.
+- Länge eines Scans: 30,48 cm.
+- Scans pro Minute: 3048 cm / 30,48 cm = 100 Scans.
+- Scans pro Tag (12 Stunden): 100 Scans/min * 60 min/std * 12 std/Tag = 72.000 Scans/Tag.
+
+2. Datenvolumen pro Scan in MiB:
+- Breite in Inch: 50,80 cm / 2,54 cm = 20 Inch.
+- Länge in Inch: 30,48 cm / 2,54 cm = 12 Inch.
+- Pixelanzahl: (20 Inch * 400 dpi) * (12 Inch * 400 dpi) = 8.000 * 4.800 = 38.400.000 Pixel.
+- Datenvolumen pro Scan: 38.400.000 Pixel * 16 Bit (2 Byte) = 76.800.000 Byte.
+- Umrechnung in MiB: 76.800.000 Byte / 1024 / 1024 = 73,24 MiB.
+
+3. Gesamtvolumen pro Tag in TiB:
+- Gesamtvolumen: 72.000 Scans * 73,24 MiB = 5.273.280 MiB.
+- Umrechnung in TiB: 5.273.280 MiB / 1024 / 1024 = 5,03 TiB.
+- Aufgerundet auf volle TiB: 6 TiB.
+*(Hinweis: Bei IHK-Standardwerten von 100.000 Scans und 70 MiB: 100.000 * 70 MiB = 7.000.000 MiB / 1024^2 = 6,68 TiB -> aufgerundet 7 TiB).*
+
+4. Maximale RAID 5 Kapazität:
+- Da in einem RAID 5 alle Festplatten gleich groß sein müssen, werden die 3 TB Platten als 2 TB Platten behandelt.
+- Anzahl der nutzbaren Platten (n) = 7 + 2 = 9 Platten.
+- Kapazität: (n - 1) * kleinste Plattengröße = (9 - 1) * 2 TB = 16 TB Netto-Speicherkapazität.
+*(Ein RAID 5 mit nur den zwei 3 TB Platten ist nicht möglich, da mindestens 3 Platten benötigt werden).*
+
+5. JBOD-Kapazität & Vorteile:
+- JBOD-Kapazität (Summe aller Platten): (2 * 3 TB) + (7 * 2 TB) = 6 TB + 14 TB = 20 TB (bzw. 20 TiB).
+* Vorteile von JBOD gegenüber RAID 0:
+  - Unterschiedliche Festplattengrößen können verlustfrei kombiniert werden (bei RAID 0 bestimmt die kleinste Platte die nutzbare Größe aller anderen).
+  - Höhere Datensicherheit bei Plattenausfall: Fällt eine Platte in JBOD aus, sind nur die Daten dieser einen Platte verloren. Bei RAID 0 sind sofort alle Daten im gesamten Verbund unwiderruflich zerstört.
+
+6. Vorteile eines SAN gegenüber einem NAS:
+- Blockbasierter Speicherzugriff (deutlich schneller und effizienter für Datenbanken und Virtualisierung).
+- Eigener, dedizierter Netzwerk-Übertragungsweg (z. B. Fibre Channel oder iSCSI), wodurch das reguläre Benutzer-LAN entlastet wird.
+- Bessere Skalierbarkeit und flexiblere dynamische Speicherzuweisung an Server.
+
+7. QR-Code & RFID vs. Barcode:
+- QR-Code Vorteil: Kann deutlich mehr Daten speichern, besitzt Fehlerkorrektur (trotz Verschmutzung lesbar) und ist omnidirektional (aus jedem Winkel) scannbar.
+- QR-Code Nachteil: Benötigt Kamera-Scanner statt einfacher Laser-Scanner; optische Sichtverbindung zwingend nötig.
+- RFID-Chip Vorteil: Keine optische Sichtverbindung nötig; Pulkerfassung möglich (hunderte Chips gleichzeitig über Distanz auslesen); Chips sind wiederbeschreibbar.
+- RFID-Chip Nachteil: Sehr hohe Anschaffungskosten für Etiketten und Lesesysteme; Störanfälligkeit durch Metalle und Flüssigkeiten.`,
+        explanation: `Lernkarte Speichersysteme & Medien:
+- MiB (Mebibyte) und TiB (Tebibyte) basieren auf dem Binärsystem (Faktor 1024), während MB und TB auf dem Dezimalsystem (Faktor 1000) basieren.
+- RAID 5 verteilt Paritätsdaten über alle Platten und verkraftet den Ausfall von genau einer Platte.
+- SAN arbeitet auf Blockebene (wie lokale Platten), NAS stellt Freigaben auf Dateiebene (Protokolle SMB, NFS) zur Verfügung.`
+    },
+    {
+        id: 205,
+        theme: "lf3",
+        type: "open-text",
+        question: "Prüfungsaufgabe IPv6 & Nutzwertanalyse (Herbst 2022 / LF 3):\nBeantworte folgende netzwerk- und beschaffungsbezogene Fragen:\n1. Nenne zwei technologische Vorteile der IPv6-Adressierung gegenüber IPv4 für den Bereich IoT.\n2. Gegeben ist die IPv6-Adresse 2001:da8:5f2d:28::/64. Gib das ungekürzte Standortpräfix (48 Bit) und die ungekürzte Teilnetz-ID (16 Bit) im Hexadezimalformat an.\n3. Bestimme, wie viele Subnetze (/64) mit einem /48-Präfix gebildet werden können.\n4. In einer Testumgebung mit dem Präfix 2001:da8:5f2d:29::/64 hat der Router die IP ::1 und der Switch ::2. Vergib sinnvolle Gateway- und Host-IPv6-Adressen für: den Switch, einen Sensor, eine Steuerung und einen Industrie-PC (IP: ::20).\n5. Gib die IPv6-Befehle an, um die Erreichbarkeit des Loopback-Interfaces sowie des Gateways (Router) zu prüfen.\n6. Erkläre die Herkunft der IPv6-Adresse fe80::62eb:69ff:fed2:d2a6/64.\n7. Ein IT-Einkauf vergleicht drei Angebote für 30 Laptops (Noteplus AG: 1015€ gesamt, Lieferzeit 5 Wochen, Qual. Gut, Mängel bekannt; Notebook-Clever: 1110€ gesamt, Lieferzeit 3 Wochen, Qual. Durchschnitt, keine Beanstandung; PC-Genie: 1300€ gesamt, Lieferzeit 1 Woche, Qual. Sehr gut, hohe Kulanz). Führe eine Nutzwertanalyse (Skala 1 bis 3) mit den Kriterien Bezugspreis (Gew. 11), Lieferzeit (Gew. 8), Qualität (Gew. 9) und Erfahrung (Gew. 5) durch. Berechne die Gesamtpunkte und gib eine begründete Empfehlung ab.",
+        musterloesung: `1. Vorteile von IPv6 im IoT:
+- Nahezu unerschöpflicher Adressraum (jedes Gerät weltweit kann eine eindeutige globale IP erhalten; NAT entfällt).
+- Automatische Adresskonfiguration (SLAAC ermöglicht Plug-and-Play ohne DHCP-Server).
+- Schlankerer Protokoll-Header beschleunigt die Verarbeitung in kleinen Routern/Gateways.
+
+2. Ungekürzte IPv6-Bestandteile:
+- Ungekürztes Standortpräfix (48 Bit): 2001:0da8:5f2d
+- Ungekürzte Teilnetz-ID (16 Bit): 0028
+
+3. Anzahl der Teilnetze:
+- Für die Subnetz-ID verbleiben 64 Bit - 48 Bit = 16 Bit.
+- Anzahl der Teilnetze = 2^16 = 65.536.
+
+4. IPv6-Adressvergabe in der Testumgebung:
+- Switch: Adresse = 2001:da8:5f2d:29::2/64 | Gateway = 2001:da8:5f2d:29::1/64
+- Sensor: Adresse = 2001:da8:5f2d:29::18/64 (oder jede freie Host-ID, z.B. ::3) | Gateway = 2001:da8:5f2d:29::1/64
+- Steuerung: Adresse = 2001:da8:5f2d:29::19/64 (oder jede freie Host-ID, z.B. ::4) | Gateway = 2001:da8:5f2d:29::1/64
+- Industrie-PC: Adresse = 2001:da8:5f2d:29::20/64 | Gateway = 2001:da8:5f2d:29::1/64
+
+5. IPv6-Pingbefehle:
+- Loopback-Interface: ping ::1
+- Standardgateway: ping 2001:da8:5f2d:29::1
+
+6. Herkunft der Adresse fe80::62eb:69ff:fed2:d2a6:
+- Es handelt sich um eine Link-Local-Adresse (erkenntlich am Präfix fe80::). Diese wird vom Betriebssystem automatisch für das lokale Netzsegment generiert (SLAAC, oft unter Einbeziehung der MAC-Adresse über EUI-64 oder zufallsbasiert).
+
+7. Nutzwertanalyse:
+- Bezugspreis (Gew. 11): Noteplus (cheapest) = 3 (33 P.) | Notebook-Clever = 2 (22 P.) | PC-Genie = 1 (11 P.)
+- Lieferzeit (Gew. 8): Noteplus (5 W.) = 1 (8 P.) | Notebook-Clever (3 W.) = 2 (16 P.) | PC-Genie (1 W.) = 3 (24 P.)
+- Qualität (Gew. 9): Noteplus = 2 (18 P.) | Notebook-Clever = 1 (9 P.) | PC-Genie = 3 (27 P.)
+- Erfahrung/Service (Gew. 5): Noteplus = 1 (5 P.) | Notebook-Clever = 2 (10 P.) | PC-Genie = 3 (15 P.)
+
+* Gesamtpunkte:
+  - Noteplus AG, Mainz: 33 + 8 + 18 + 5 = 64 Punkte.
+  - Notebook-Clever.de, Berlin: 22 + 16 + 9 + 10 = 57 Punkte.
+  - PC-Genie KG, Frankfurt: 11 + 24 + 27 + 15 = 77 Punkte.
+* Empfehlung: Es wird das Angebot der PC-Genie KG aus Frankfurt empfohlen, da es mit 77 Punkten den höchsten Nutzwert aufweist. Ausschlaggebend waren die extrem kurze Lieferzeit, die beste Qualität und der hervorragende Service.`,
+        explanation: `Lernkarte IPv6 & Nutzwertanalyse:
+- Link-Local-IPs fangen immer mit fe80:: an.
+- Ein IPv6-Präfix /64 ist Standard für Endbenutzer-Netze, da es die Autokonfiguration (SLAAC) unterstützt.
+- Die Nutzwertanalyse ist ein quantitatives Punktebewertungsverfahren zur Entscheidungsfindung bei mehreren Kriterien.`
+    },
+    {
+        id: 206,
+        theme: "lf4",
+        type: "open-text",
+        question: "Prüfungsaufgabe Betriebssystem-Sicherheit & BSI (Frühjahr 2023 / LF 4):\nBeantworte folgende Fragen zur Sicherheit von Arbeitsplatzrechnern und Richtlinien:\n1. Benenne im Schalenmodell eines PC-Systems die Schicht oberhalb und unterhalb des Betriebssystems und beschreibe jeweils eine Funktion dieser Schichten.\n2. Nenne zwei allgemeine Aufgaben des BSI (Bundesamt für Sicherheit in der Informationstechnik).\n3. Erkläre den Begriff 'Härtung' (hardening) eines Betriebssystems und nenne zwei typische Beispiele hierfür.\n4. Nenne zwei im Betriebssystem integrierte Systemwerkzeuge ('Bordmittel'), mit denen die IT-Sicherheit direkt erhöht werden kann.\n5. Beschreibe, wozu Gruppenrichtlinien (GPOs) auf einem Arbeitsplatzrechner eingesetzt werden können.\n6. Beschreibe, inwiefern eine Protokollierung (Logging) zur Erhöhung der IT-Sicherheit beitragen kann und nenne die besonderen datenschutzrechtlichen Anforderungen (DSGVO), die dabei beachtet werden müssen.",
+        musterloesung: `1. Schalenmodell des PC-Systems:
+- Schicht oberhalb des OS: Anwendungsschicht (Anwendungsprogramme)
+  * Funktion: Interaktion mit dem Benutzer zur Ausführung spezifischer Aufgaben (z. B. Webbrowser, Office-Programme), greift über APIs des Betriebssystems auf Hardware-Ressourcen zu.
+- Schicht unterhalb des OS: Hardwareschicht (und BIOS/UEFI)
+  * Funktion: Physikalische Ausführung von Berechnungen, Datenspeicherung und Bereitstellung physischer Schnittstellen (z. B. CPU, RAM, Netzwerkkarte).
+
+2. Aufgaben des BSI:
+- Abwehr von Sicherheitsrisiken für die IT-Systeme des Bundes.
+- Erstellung von Sicherheitsstandards (z. B. IT-Grundschutz) und Durchführung von Sicherheitszertifizierungen für IT-Produkte.
+- Information und Sensibilisierung der Öffentlichkeit (Bürger, Unternehmen) zu Gefahren im Cyberraum.
+
+3. Härtung eines Betriebssystems:
+- Definition: Konfiguration des OS zur Minimierung der Angriffsfläche durch Deaktivierung nicht benötigter Funktionen, Dienste und Protokolle.
+- Beispiele:
+  * Abschalten ungenutzter Dienste (z. B. Bluetooth oder Remoteregistrierung auf Desktop-PCs).
+  * Schließen nicht benötigter Ports in der Firewall.
+  * Regelmäßiges Patchen (automatische Sicherheitsupdates).
+
+4. Integrierte Systemwerkzeuge (Bordmittel):
+- Lokale Sicherheitsrichtlinien / Gruppenrichtlinien-Editor (gpedit.msc) zur Rechteverwaltung.
+- Windows Defender Antivirus / Windows Defender Firewall.
+- BitLocker zur vollständigen Festplattenverschlüsselung.
+
+5. Einsatz von Gruppenrichtlinien (GPOs):
+- GPOs dienen zur zentralen Konfiguration und Durchsetzung von Einstellungen für Benutzer und Computer im Netzwerk.
+- Beispiele: Durchsetzung von Mindestpasswortlängen, Sperrung des Zugriffs auf die Eingabeaufforderung (cmd) oder Systemsteuerung, automatische Verteilung von Netzwerklaufwerken und Druckern.
+
+6. Protokollierung (Logging) & Datenschutz:
+* Beitrag zur IT-Sicherheit:
+  - Nachvollziehbarkeit von Ereignissen (Audit-Trail: Wer hat sich wann angemeldet?).
+  - Früherkennung von Angriffen (z. B. wiederholte Anmeldefehler).
+  - Forensische Schadensanalyse nach einem Sicherheitsvorfall.
+* Datenschutz-Anforderungen (DSGVO):
+  - Personenbezogene Daten (z. B. IP-Adressen, Benutzernamen) dürfen nur pseudonymisiert oder anonymisiert erfasst werden, sofern für den Zweck nicht zwingend Klartext nötig ist.
+  - Zweckbindung und definierte Aufbewahrungsfristen (Protokolle müssen nach Ablauf einer Frist, z. B. 7 oder 14 Tage, automatisch gelöscht werden).
+  - Streng reglementierter Zugriff: Nur berechtigte Personen (IT-Sicherheitsbeauftragte) dürfen Protokolldaten einsehen, um internen Datenmissbrauch zu verhindern.`,
+        explanation: `Lernkarte System-Sicherheit:
+- GPOs (Group Policy Objects) können lokal (lgpo) oder über Active Directory (AD) verteilt werden.
+- IT-Grundschutz-Kataloge des BSI bieten standardisierte Empfehlungen zur Absicherung von IT-Infrastrukturen.
+- Logfiles sollten manipulationssicher an einen zentralen Syslog-Server weitergeleitet werden.`
+    }
 ];
