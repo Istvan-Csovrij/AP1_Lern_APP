@@ -2836,4 +2836,79 @@ WHERE Email IS NULL OR Email = '';
 - Fremdschlüssel verweisen auf die Primärschlüssel anderer Relationen, um Beziehungen abzubilden.
 - NULL repräsentiert einen fehlenden oder unbekannten Wert in Datenbanken und muss mit 'IS NULL' abgefragt werden.`
     }
+,
+    {
+        id: 202,
+        theme: "lf2",
+        type: "open-text",
+        question: "Prüfungsaufgabe PC-Hardware & Mainboard (Sommer 2022 / LF 2):\nBeantworte folgende Fragen zum Hardware-Zusammenbau und zur Systemleistung:\n1. Nenne die drei Schritte für den Einbau einer CPU und beschreibe, welche zwei Punkte beim Einsetzen besonders zu beachten sind.\n2. Erläutere, welche Aufgabe die Wärmeleitpaste hat.\n3. Erläutere, was beim Einsetzen von zwei RAM-Riegeln beachtet werden muss, damit diese im Dual Channel Modus arbeiten.\n4. Nenne je einen Vorteil und Nachteil einer M.2 SSD gegenüber einer SATA SSD.\n5. Nenne zwei Vorteile eines USB-C Anschlusses gegenüber einem USB-3.0-Anschluss (Typ A).\n6. Beschreibe, welche Besonderheit ein umrahmter USB-Anschluss mit der Beschriftung 'BIOS / BIOS FLBK' (Flashback) an der Gehäuserückseite hat.\n7. Erläutere den Begriff 'Logische Prozessoren' im Taskmanager und gib eine Taktfrequenz von 3,4 GHz in Hertz an.",
+        musterloesung: `1. Schritte beim CPU-Einbau:
+- Hebel des CPU-Sockels nach oben ziehen (anheben).
+- Die CPU vorsichtig unter Beachtung der korrekten Ausrichtung (Pfeilmarkierungen deckungsgleich bringen) in den Sockel einsetzen.
+- Den Hebel wieder nach unten drücken und arretieren, um die CPU zu sichern.
+* Zu beachten beim Einsetzen:
+  - Die Orientierung muss stimmen: Der Pfeil auf der CPU muss exakt auf den Pfeil am CPU-Sockel ausgerichtet sein (die CPU passt nur in einer Position).
+  - Keine Gewalt anwenden: Die CPU darf nicht in den Sockel gepresst werden, um ein Verbiegen der empfindlichen Kontakte im Sockel zu vermeiden.
+
+2. Aufgabe der Wärmeleitpaste:
+- Die Wärmeleitpaste gleicht mikroskopisch kleine Unebenheiten und Lufteinschlüsse zwischen der CPU-Oberfläche und dem Kühlkörper aus. Da Luft Wärme extrem schlecht leitet, minimiert die Paste den thermischen Widerstand und optimiert die Wärmeabgabe an den Kühler.
+
+3. RAM im Dual-Channel-Modus betreiben:
+- Die RAM-Riegel müssen in separate Speicherkanäle eingesetzt werden. Bei vier vorhandenen Slots bestückt man in der Regel paarweise entweder die Slots DIMM A2 und DIMM B2 (primär empfohlen) oder alternativ DIMM A1 und DIMM B1. Werden fälschlicherweise Slots desselben Kanals (z. B. A1 und A2) belegt, läuft der RAM nur im langsameren Single-Channel-Modus.
+
+4. M.2 SSD vs. SATA SSD:
+- Vorteil: Wesentlich höhere Datenübertragungsraten (NVMe über PCIe-Lanes) sowie kabellose, platzsparende Montage direkt auf dem Mainboard.
+- Nachteil: Höhere Wärmeentwicklung unter Dauerlast (kann zur temperaturbedingten Drosselung führen) sowie oft ein etwas höherer Anschaffungspreis pro Gigabyte.
+
+5. Vorteile von USB-C gegenüber USB 3.0 Typ-A:
+- Punktsymmetrische Bauform (der Stecker ist verdrehsicher und kann in beiden Ausrichtungen eingesteckt werden).
+- Unterstützung alternativer Protokolle (z. B. DisplayPort, Thunderbolt) sowie deutlich höhere Leistungsübertragung (Power Delivery) zum Laden von größeren Geräten.
+
+6. Besonderheit des USB-Flashback-Anschlusses:
+- Über diesen dedizierten Port kann eine neue BIOS/UEFI-Firmware direkt von einem USB-Stick aufgespielt werden, ohne dass eine CPU, RAM oder eine Grafikkarte auf dem Mainboard installiert sein müssen (BIOS-Flashback).
+
+7. Taskmanager-Auswertung:
+- Logische Prozessoren: Bezeichnet die Anzahl der dem Betriebssystem zur Verfügung stehenden virtuellen Kerne. Durch Multithreading (Hyper-Threading / SMT) kann ein physischer Rechenkern zwei Threads parallel abarbeiten (z. B. 16 physische Kerne = 32 logische Prozessoren).
+- Taktfrequenz in Hertz: 3,4 GHz entsprechen 3.400.000.000 Hz (3,4 Milliarden Hertz).`,
+        explanation: `Lernkarte PC-Systeme & Hardware:
+- Die CPU-Ausrichtung wird durch eine kleine Dreiecksmarkierung an einer Ecke signalisiert.
+- Dual-Channel verdoppelt die Busbreite des Speicher-Interface von 64 Bit auf 128 Bit.
+- BIOS-Flashback schützt das Mainboard vor Unbrauchbarkeit bei fehlerhaften Updates.`
+    },
+    {
+        id: 203,
+        theme: "lf3",
+        type: "open-text",
+        question: "Prüfungsaufgabe WLAN & OSI-Modell (Sommer 2022 / LF 3):\nEin Client soll per WLAN angebunden werden. Beantworte folgende Fragen zum Netzwerk-Troubleshooting:\n1. Nenne zwei wesentliche Informationen, die vom Administrator erfragt werden müssen, um das Notebook im WLAN anzumelden (WPA-PSK).\n2. Nenne je einen Vor- und Nachteil von WPA-Enterprise (RADIUS) gegenüber WPA-PSK und gib eine Empfehlung für die passende Unternehmensgröße.\n3. Ergänze die fehlenden Spalten der OSI-Modell-Fehlersuchtabelle für Schicht 7 (Anwendung), Schicht 3 (Vermittlung), Schicht 2 (Sicherung) und Schicht 1 (Bitübertragung) mit Name, Protokoll, Adresse und einem typischen Fehler.\n4. Eine ipconfig-Ausgabe zeigt die MAC-Adresse 50-1A-C5-F2-38-B7 und die IPv6-Adresse fe80::85e1:1ec1:c9e2:3cbb. Erkläre jeweils kurz die Herkunft dieser beiden Adressen.\n5. Der Client erhält per DHCP die IP-Adresse 192.168.0.52 mit der Subnetzmaske 255.255.255.0 und dem Gateway 192.168.0.1. Bestimme die Netzadresse, die Hostadresse und die Broadcastadresse.\n6. Ein anschließender Ping auf das Standardgateway (192.168.0.1) ist erfolgreich. Warum zeigt das System dennoch 'Kein Netzwerkzugriff'?",
+        musterloesung: `1. Benötigte Informationen für WPA-PSK:
+- Die SSID (Netzwerkname) zur Identifikation des WLANs.
+- Der WPA-PSK-Netzwerkschlüssel (WLAN-Passwort).
+
+2. WPA-Enterprise (RADIUS) vs. WPA-PSK:
+- Vorteil: Deutlich höhere Sicherheit. Jeder Nutzer besitzt eigene Anmeldedaten. Scheidet ein Mitarbeiter aus, wird nur sein Account gesperrt. Bei WPA-PSK müsste das Passwort für alle Geräte im Unternehmen geändert werden.
+- Nachteil: Hoher Administrations- und Hardwareaufwand ( RADIUS-Server, Benutzerverwaltung/Active Directory zwingend erforderlich).
+- Empfehlung: Für mittlere bis große Unternehmen geeignet.
+
+3. OSI-Tabelle Ergänzungen:
+- Schicht 7: Anwendungsschicht (Application) | Protokoll: HTTP, HTTPS, DHCP, DNS | Adresse: - | Fehler: Webserver antwortet nicht.
+- Schicht 3: Vermittlungsschicht (Network) | Protokoll: IP (IPv4, IPv6), ICMP | Adresse: IP-Adresse | Fehler: Falsches Standardgateway konfiguriert.
+- Schicht 2: Sicherungsschicht (Data Link) | Protokoll: Ethernet, IEEE 802.11 (WLAN) | Adresse: MAC-Adresse | Fehler: MAC-Filter sperrt Client / falsches WLAN-Passwort.
+- Schicht 1: Bitübertragungsschicht (Physical) | Protokoll: - | Adresse: - | Fehler: Medium getrennt / Hardware defekt.
+
+4. Herkunft der Adressen:
+- MAC-Adresse (50-1A-C5-F2-38-B7): Die physische Adresse des WLAN-Adapters. Sie wird vom Hersteller fest eingebrannt und ist weltweit eindeutig.
+- IPv6-Adresse (fe80::85e1:1ec1:c9e2:3cbb): Eine Link-Local-Adresse (Präfix fe80::). Sie wird vom Betriebssystem automatisch generiert (SLAAC/EUI-64 oder zufällig) und ist nur im lokalen Segment gültig.
+
+5. Adressberechnung (Subnetz 192.168.0.52/24):
+- Netzadresse: 192.168.0.0
+- Hostadresse: 192.168.0.52
+- Broadcastadresse: 192.168.0.255
+
+6. Fehleranalyse (Ping auf Gateway erfolgreich, aber kein Internet):
+- Da das Standardgateway (der Router) antwortet, ist die Verbindung im lokalen Netzwerk (LAN) in Ordnung. Der Fehler liegt außerhalb des lokalen Netzes: Entweder hat der Router selbst keine Verbindung ins WAN (Internetverbindung unterbrochen) oder es liegt ein Ausfall des DNS-Servers vor (Webseiten-Namen können nicht in IP-Adressen übersetzt werden).`,
+        explanation: `Lernkarte WLAN & Netzwerk-Troubleshooting:
+- DHCP (Dynamic Host Configuration Protocol) vergibt IP-Adressen dynamisch an Clients.
+- Link-Local-Adressen (fe80::/10) werden nicht über Router hinweg weitergeleitet.
+- Ping (ICMP Echo Request) testet die Erreichbarkeit auf Schicht 3 des OSI-Modells.`
+    }
 ];
