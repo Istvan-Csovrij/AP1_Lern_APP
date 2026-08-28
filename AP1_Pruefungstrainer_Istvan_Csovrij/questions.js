@@ -3056,4 +3056,136 @@ WHERE Email IS NULL OR Email = '';
 - IT-Grundschutz-Kataloge des BSI bieten standardisierte Empfehlungen zur Absicherung von IT-Infrastrukturen.
 - Logfiles sollten manipulationssicher an einen zentralen Syslog-Server weitergeleitet werden.`
     }
+,
+    {
+        id: 207,
+        theme: "lf3",
+        type: "open-text",
+        question: "Prüfungsaufgabe Überwachungskameras & Bandbreite (Sommer 2026 / LF 3/4):\nEin Logistikzentrum soll mit Sicherheitskameras ausgestattet werden. Beantworte folgende Aufgaben aus der Planung:\n1. In der Spezifikation steht 'no default passwords'. Beschreibe zwei mögliche Konsequenzen dieser Voreinstellung.\n2. Eine Kamera benötigt inklusive Infrarot-Nachtmodus (IR) und Heizung (heater) maximal 24 W Leistung. Wähle aus der Tabelle den passenden PoE-Standard (IEEE 802.3af mit 6,49-12,95 W oder IEEE 802.3at mit 12,95-25,50 W) und berechne die Stromstärke in mA bei einer Spannung von 48 V.\n3. Berechne die erforderliche Datenübertragungsrate in Mbit/s für einen Live-Stream bei einer Auflösung von 1920x1080 @ 30fps, einer Farbtiefe von 24 Bit und einer Komprimierung auf 30 % (Ergebnis auf volle Mbit/s aufrunden). Der Rechenweg ist anzugeben.\n4. Berechne die notwendige Speicherkapazität in TiB für die Aufnahmen von 4 Kameras über einen Zeitraum von 72 Stunden (reche mit der berechneten Übertragungsrate bzw. dem Ausweichwert von 482 Mbit/s). Ergebnis auf volle TiB aufrunden.\n5. Erkläre das Prinzip des 'Daisy Chaining' bei Monitoren und nenne einen Vorteil sowie die technischen Voraussetzungen zur Nutzung.",
+        musterloesung: `1. Konsequenzen von "no default passwords":
+- Erhöhte Sicherheit ab Werk: Der Administrator wird gezwungen, bei der Ersteinrichtung ein individuelles Kennwort festzulegen, was Angriffe über allbekannte Standardpasswörter (wie admin/admin) verhindert.
+- Erhöhter Aufwand: Bei Passwortverlust kann kein Standardzugang genutzt werden, was einen physischen Werksreset der Kamera erforderlich macht.
+
+2. PoE-Standard und Stromstärke:
+- Gewählter Standard: IEEE 802.3at (PoE+), da die Leistungsaufnahme (24 W) im Bereich von 12,95 bis 25,50 W liegt.
+- Stromstärke I = P / U = 24 W / 48 V = 0,5 A = 500 mA.
+
+3. Datenübertragungsrate (Bandbreite) berechnen:
+- Pixel pro Sekunde: 1920 * 1080 Pixel/Frame * 30 Frames/Sekunde = 62.208.000 Pixel/s.
+- Datenmenge unkomprimiert: 62.208.000 Pixel/s * 24 Bit = 1.492.992.000 Bit/s.
+- In Megabit pro Sekunde (dezimal): 1.492.992.000 Bit/s / 1.000.000 = 1492,992 Mbit/s.
+- Komprimierung auf 30 %: 1492,992 Mbit/s * 0,30 = 447,8976 Mbit/s.
+- Aufgerundet: 448 Mbit/s.
+*(Hinweis: Bei binärer Umrechnung: 1.492.992.000 / 1024^2 = 1423,83 Mibit/s * 0,30 = 427,15 Mibit/s -> aufgerundet 428 Mibit/s).*
+
+4. Speicherkapazität berechnen (für 72 Std. und 4 Kameras):
+* Rechnung mit 448 Mbit/s:
+  - Bandbreite gesamt: 4 * 448 Mbit/s = 1792 Mbit/s.
+  - Datenvolumen pro Sekunde: 1792 Mbit/s / 8 = 224 MByte/s.
+  - Gesamtsekunden in 72 Std.: 72 * 3600 s = 259.200 s.
+  - Speicherbedarf: 224 MByte/s * 259.200 s = 58.060.800 MByte = 58.060.800.000.000 Byte.
+  - In TiB (binär): 58.060.800.000.000 / 1024^4 = 52,80 TiB -> aufgerundet 53 TiB.
+* Rechnung mit Ausweichwert 482 Mbit/s:
+  - Bandbreite gesamt: 4 * 482 Mbit/s = 1928 Mbit/s.
+  - Datenvolumen pro Sekunde: 1928 Mbit/s / 8 = 241 MByte/s.
+  - Speicherbedarf: 241 MByte/s * 259.200 s = 62.467.200 MByte = 62.467.200.000.000 Byte.
+  - In TiB (binär): 62.467.200.000.000 / 1024^4 = 56,81 TiB -> aufgerundet 57 TiB.
+
+5. Daisy Chaining (Monitore):
+- Prinzip: Monitore werden in Reihe hintereinander verkabelt (PC -> Monitor 1 -> Monitor 2 -> Monitor 3) statt jeder einzeln am PC angeschlossen zu werden.
+- Vorteil: Deutlich verringerter Kabelsalat; am PC/Grafikkarte wird nur ein einziger DisplayPort-Ausgang benötigt.
+- Voraussetzungen: Die Grafikkarte und das Betriebssystem müssen DisplayPort 1.2 oder höher mit MST (Multi-Stream Transport) unterstützen. Die Monitore in der Kette müssen einen DP-Eingang und einen DP-Ausgang besitzen (der letzte Monitor benötigt keinen Ausgang).`,
+        explanation: `Lernkarte PoE & Video-Streaming:
+- IEEE 802.3af (PoE) liefert bis zu 15,4 W am Switchport (ca. 12,95 W am Gerät).
+- IEEE 802.3at (PoE+) liefert bis zu 30 W am Switchport (ca. 25,5 W am Gerät).
+- DisplayPort MST ermöglicht es, mehrere unabhängige Videosignale über eine einzige physische Leitung zu übertragen.`
+    },
+    {
+        id: 208,
+        theme: "lf3",
+        type: "open-text",
+        question: "Prüfungsaufgabe Netzwerkgrundlagen & IPv6 (Sommer 2026 / LF 3):\nBeantworte folgende netzwerkbezogene Fragen:\n1. Erkläre die Bedeutung der LEDs an einem Ethernet-Netzwerkanschluss (durchgehendes Leuchten vs. unregelmäßiges Blinken).\n2. Ordne die folgenden Netzwerk-Komponenten/Begriffe den passenden Schichten (1, 2, 3, 4 oder 7) des OSI-Modells zu: DHCP, TCP, verbindungslokale IPv6-Adresse (fe80::), physische Adresse (MAC), Buchse mit LED.\n3. Gegeben ist die IPv6-Adresse fe80::521a:c5ff:fef2:38b7. Bestimme: die Gesamtlänge einer IPv6-Adresse in Bits, die ungekürzte Darstellung der Adresse, die Präfixlänge und den Interface-Identifier.\n4. Nenne zwei grundlegende Netzwerkinformationen, die ein Client von einem DHCP-Server erhält.\n5. Erkläre kurz die Aufgabe des Address Resolution Protocol (ARP) im Netzwerk.\n6. Gib den Befehl an, um die Verbindung zum Standardgateway 192.168.0.1 per Eingabeaufforderung zu prüfen.\n7. Ein PC hat die IP 192.168.0.52 und die MAC 50-1A-C5-F2-38-B7. Der lokale Router hat die IP 192.168.0.1 und die MAC d4-3f-cb-8c-37-8b. Welcher Adresse wird 'Eigener PC' und welcher 'Standardgateway' zugeordnet?",
+        musterloesung: `1. Bedeutung der Netzwerk-LEDs:
+- LED leuchtet durchgehend: Physische Verbindung (Link) zum Switch/Netzwerkpartner ist erfolgreich hergestellt (Schicht 1 steht).
+- LED blinkt unregelmäßig: Es findet eine aktive Datenübertragung statt (Activity / Senden & Empfangen).
+
+2. OSI-Schichten-Zuordnung:
+- Schicht 7 (Anwendungsschicht / Application): DHCP
+- Schicht 4 (Transportschicht / Transport): TCP
+- Schicht 3 (Vermittlungsschicht / Network): Verbindungslokale IPv6-Adresse (fe80::)
+- Schicht 2 (Sicherungsschicht / Data Link): Physische Adresse (MAC-Adresse)
+- Schicht 1 (Bitübertragungsschicht / Physical): Buchse mit LED
+
+3. IPv6-Eigenschaften für fe80::521a:c5ff:fef2:38b7:
+- Gesamtlänge in Bits: 128 Bits.
+- Ungekürzte Darstellung: fe80:0000:0000:0000:521a:c5ff:fef2:38b7 (oder fe80:0:0:0:521a:c5ff:fef2:38b7).
+- Präfixlänge: /64 (Standard bei Link-Local-Adressen).
+- Interface-Identifier (Host-Teil): 521a:c5ff:fef2:38b7.
+
+4. Informationen durch den DHCP-Server:
+- Eine eindeutige IPv4-Adresse.
+- Die passende Subnetzmaske (sowie Standardgateway und DNS-Server-Adressen).
+
+5. Aufgabe von ARP:
+- ARP (Address Resolution Protocol) löst bekannte IP-Adressen (Schicht 3) in physische MAC-Adressen (Schicht 2) im lokalen Netzwerk auf. Dies ist notwendig, damit Datenpakete auf der Ethernet-Ebene (Schicht 2) an die richtige Netzwerkkarte zugestellt werden können.
+
+6. Befehl zur Erreichbarkeitsprüfung:
+- ping 192.168.0.1
+
+7. Zuordnung der Systemkomponenten:
+- Eigener PC: IP-Adresse = 192.168.0.52 | MAC-Adresse = 50-1A-C5-F2-38-B7
+- Standardgateway (Router): IP-Adresse = 192.168.0.1 | MAC-Adresse = d4-3f-cb-8c-37-8b`,
+        explanation: `Lernkarte Netzwerkgrundlagen:
+- DHCP arbeitet auf Schicht 7, verwendet aber UDP (Schicht 4) zur Übertragung.
+- Link-Local-IPv6-Adressen werden lokal automatisch generiert, oft mittels EUI-64 aus der MAC-Adresse (erkenntlich am eingefügten 'ff:fe' in der Mitte des Host-Teils).`
+    },
+    {
+        id: 209,
+        theme: "lf2",
+        type: "open-text",
+        question: "Prüfungsaufgabe CAD-Dateiformate & Netzteilberechnung (Sommer 2026 / LF 2):\nBeantworte folgende Aufgaben zur Arbeitsplatzrechner-Planung und Dateiformaten:\n1. Nenne drei Möglichkeiten, wie du dich über ein unbekanntes Dateiformat informieren kannst, wenn der Dateityp unbekannt ist.\n2. Beschreibe, wie du Kundendaten (z. B. im PLY-Format) nutzen kannst, wenn das hauseigene CAD-System dieses Format nicht direkt unterstützt.\n3. Erkläre den Unterschied zwischen einem Textformat (ASCII) und einem Binärformat bezüglich Lesbarkeit und Speicherbedarf.\n4. Eine PLY-3D-Modelldatei enthält 3.840 Punkte (jeder Punkt hat 3 Koordinaten x,y,z im 32-Bit/4-Byte-Float-Format). Berechne den Speicherbedarf für die Koordinaten in KiB. Berechne außerdem, wie viele Farben mit RGB (8 Bit pro Kanal) dargestellt werden können und wie viel Prozent zusätzlicher Speicherplatz pro Bildpunkt benötigt wird, wenn zu jedem Punkt ein RGB-Farbwert (3 Byte) hinzukommt.\n5. Berechne die erforderliche Leistung eines Netzteils für folgende Komponenten: Mainboard (20W), CPU (172W), CPU-Lüfter (12W), 4x RAM (je 5W), Grafikkarte (310W), 2x M.2 SSD (je 5W), 2x Gehäuselüfter (je 8W). Schlage einen Sicherheitszuschlag von 10 % auf und wähle die passende Netzteilgröße in 50W-Schritten.\n6. Berechne die jährlichen Stromkosten bei 200 Arbeitstagen à 9 Std. Täglich, wenn die durchschnittliche Leistungsabgabe 325 W beträgt, das Netzteil eine Effizienz von 90 % besitzt und der Strompreis 0,40 EUR/kWh beträgt. Der Rechenweg ist anzugeben.",
+        musterloesung: `1. Informationsbeschaffung über unbekannte Dateiformate:
+- Dateiendung online in Datenbanken (z. B. FileInfo.com) recherchieren.
+- Die Datei in einem Text- oder Hex-Editor öffnen und den Datei-Header (Magic Bytes) analysieren, um das Format zu identifizieren.
+- Die Herstellerdokumentation einsehen oder den Absender der Datei nach dem verwendeten Programm fragen.
+
+2. Nutzung nicht-unterstützter Formate im CAD-System:
+- Die Datei mithilfe eines Konverters (Konvertierungstool) oder eines Drittanbieter-CAD-Programms in ein kompatibles Standardformat (wie OBJ, STL oder STEP) umwandeln.
+
+3. ASCII- vs. Binärformat:
+- ASCII-Format: Textbasiert, im Klartext für Menschen lesbar, höherer Speicherbedarf durch Zeichenkodierung (jedes Zeichen belegt mind. 1 Byte).
+- Binärformat: Maschinenlesbar (Nullen und Einsen), nicht im Klartext lesbar, extrem kompakter Speicherbedarf und schnellere Verarbeitung durch Computer.
+
+4. PLY-Datei Berechnungen:
+- Speicherbedarf für 3.840 Punkte:
+  * Pro Punkt: 3 Koordinaten * 4 Byte = 12 Byte.
+  * Gesamtbyte: 3.840 Punkte * 12 Byte = 46.080 Byte.
+  * In KiB (binär): 46.080 Byte / 1024 = 45 KiB.
+- RGB-Farbanzahl: 8 Bit pro Kanal = 24 Bit Farbtiefe. 2^24 = 16.777.216 Farben (ca. 16,8 Millionen).
+- Zusätzlicher Speicherplatz:
+  * RGB-Farbwert benötigt 3 Byte zusätzlich.
+  * Verhältnis: (3 Byte zusätzlich / 12 Byte Basis) * 100 = 25 % zusätzlicher Speicherbedarf.
+
+5. Netzteilberechnung:
+- Leistungsbedarf der Komponenten:
+  * Mainboard: 20 W
+  * Prozessor: 172 W
+  * Prozessor-Lüfter: 12 W
+  * RAM: 4 * 5 W = 20 W
+  * Grafikkarte: 310 W
+  * M.2 SSDs: 2 * 5 W = 10 W
+  * Gehäuselüfter: 2 * 8 W = 16 W
+  * Summe = 20 + 172 + 12 + 20 + 310 + 10 + 16 = 560 W.
+- Mit 10 % Sicherheitszuschlag: 560 W * 1,1 = 616 W.
+- Gewählte Netzteilgröße (nächster 50W-Schritt): 650 W Netzteil.
+
+6. Stromkostenberechnung:
+- Gesamtlaufzeit: 200 Tage * 9 Stunden = 1.800 Stunden.
+- Leistungsaufnahme aus dem Netz (bei 90 % Effizienz): 325 W Leistungsabgabe / 0,90 Wirkungsgrad = 361,11 W (= 0,36111 kW).
+- Gesamtverbrauch: 0,36111 kW * 1.800 Stunden = 650 kWh.
+- Jährliche Stromkosten: 650 kWh * 0,40 EUR/kWh = 260,00 EUR.`,
+        explanation: `Lernkarte Hardware-Planung:
+- Netzteile arbeiten bei ca. 50 % bis 80 % Auslastung am effizientesten (80 Plus Zertifizierungen).
+- Der Wirkungsgrad gibt das Verhältnis zwischen abgegebener Gleichstromleistung (für PC-Komponenten) und aufgenommener Wechselstromleistung (aus der Steckdose) an. Verluste entstehen als Wärme.`
+    }
 ];
