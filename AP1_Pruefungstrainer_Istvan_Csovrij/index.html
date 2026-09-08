@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AP1 Prüfungstrainer - Fachinformatiker</title>
-    <link rel="stylesheet" href="style.css?v=43">
+    <link rel="stylesheet" href="style.css?v=44">
     <!-- FontAwesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -32,6 +32,9 @@
                     <button class="filter-btn" data-theme="lf4">LF 4: Schutz & Sicherheit</button>
                     <button class="filter-btn" data-theme="lf5">LF 5: Software & SQL</button>
                     <button class="filter-btn" data-theme="lf6">LF 6: Services & WiSo</button>
+                    <button class="filter-btn highlight-bawue-btn" data-theme="bawue-focus" id="bawue-focus-btn" style="border: 2px solid #8b5cf6; background: linear-gradient(135deg, #f5f3ff, #ede9fe); color: #6d28d9; font-weight: bold; margin-top: 0.5rem; text-align: left; display: flex; align-items: center; gap: 0.5rem;">
+                        <i class="fa-solid fa-wand-magic-sparkles" style="color: #8b5cf6;"></i> 🔮 IHK Stuttgart Fokus (Kristallkugel)
+                    </button>
                     <button class="filter-btn" data-theme="favorites" id="favorites-filter-btn" style="border: 2px solid #ffc107; font-weight: bold; margin-top: 0.5rem;">
                         <i class="fa-solid fa-star" style="color: #ffc107; margin-right: 0.25rem;"></i> Merkliste ⭐
                     </button>
@@ -65,6 +68,15 @@
                         <i class="fa-solid fa-stopwatch"></i> 90-Min.-Simulation
                     </button>
                 </div>
+            </div>
+
+            <!-- Diagramm-Zeichenboard Card -->
+            <div class="card whiteboard-card" style="border: 2px solid #8b5cf6; box-shadow: 0 4px 6px -1px rgba(139, 92, 246, 0.15);">
+                <h3 style="color: #6d28d9; margin-bottom: 0.5rem;"><i class="fa-solid fa-pen-ruler"></i> Diagramm-Board</h3>
+                <p style="font-size: 0.85rem; color: var(--text-light); margin-bottom: 0.75rem; line-height: 1.35;">Zeichne & skizziere Use-Case, Klassendiagramme, ERD, EPK, BPMN oder Netzpläne.</p>
+                <button class="btn btn-full" id="open-whiteboard-sidebar-btn" style="background: linear-gradient(135deg, #8b5cf6, #6d28d9); color: white; justify-content: center; font-weight: bold; border: none; font-size: 0.95rem; display: flex; align-items: center; gap: 0.5rem; width: 100%;">
+                    <i class="fa-solid fa-palette"></i> Zeichenboard öffnen
+                </button>
             </div>
 
             <div class="card stats-card">
@@ -104,9 +116,14 @@
                         <span class="badge" id="question-theme">Lernfeld</span>
                         <span class="question-number" id="question-number">Frage 0 von 0</span>
                     </div>
-                    <button class="star-btn" id="star-btn" title="Frage merken / demarkieren" style="background: none; border: none; font-size: 1.4rem; color: #ffc107; cursor: pointer; transition: transform 0.2s; display: flex; align-items: center; justify-content: center; padding: 0.25rem;">
-                        <i class="fa-regular fa-star"></i>
-                    </button>
+                    <div style="display: flex; align-items: center; gap: 0.5rem;">
+                        <button class="btn btn-secondary" id="quiz-whiteboard-btn" title="Diagramm-Zeichenboard öffnen" style="padding: 0.35rem 0.65rem; font-size: 0.85rem; display: flex; align-items: center; gap: 0.35rem; border-radius: 6px; border: 1px solid #8b5cf6; color: #6d28d9; background: #f5f3ff;">
+                            <i class="fa-solid fa-pen-ruler"></i> <span style="font-weight: 600;">Skizzieren</span>
+                        </button>
+                        <button class="star-btn" id="star-btn" title="Frage merken / demarkieren" style="background: none; border: none; font-size: 1.4rem; color: #ffc107; cursor: pointer; transition: transform 0.2s; display: flex; align-items: center; justify-content: center; padding: 0.25rem;">
+                            <i class="fa-regular fa-star"></i>
+                        </button>
+                    </div>
                 </div>
 
                 <div class="question-container">
@@ -172,7 +189,12 @@
             <div class="card quiz-card" id="exam-question-card">
                 <div class="quiz-header" style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
                     <span class="badge" id="exam-question-theme" style="background-color: #0f766e;">Lernfeld</span>
-                    <span class="question-number" id="exam-question-number">Aufgabe 1 von 25</span>
+                    <div style="display: flex; align-items: center; gap: 0.5rem;">
+                        <button class="btn btn-secondary" id="exam-whiteboard-btn" title="Diagramm-Zeichenboard öffnen" style="padding: 0.35rem 0.65rem; font-size: 0.85rem; display: flex; align-items: center; gap: 0.35rem; border-radius: 6px; border: 1px solid #8b5cf6; color: #6d28d9; background: #f5f3ff;">
+                            <i class="fa-solid fa-pen-ruler"></i> <span style="font-weight: 600;">Skizzieren</span>
+                        </button>
+                        <span class="question-number" id="exam-question-number">Aufgabe 1 von 25</span>
+                    </div>
                 </div>
 
                 <div class="question-container" style="margin-top: 1rem;">
@@ -246,13 +268,107 @@
         </section>
     </main>
 
+    <!-- Whiteboard Modal (Interaktives Zeichen- & Diagrammboard) -->
+    <div id="whiteboard-modal" class="whiteboard-modal" style="display: none;">
+        <div class="whiteboard-backdrop" id="whiteboard-backdrop"></div>
+        <div class="whiteboard-dialog">
+            <div class="whiteboard-header">
+                <div style="display: flex; align-items: center; gap: 0.75rem;">
+                    <div class="wb-header-icon"><i class="fa-solid fa-pen-ruler"></i></div>
+                    <div>
+                        <h3 style="margin: 0; font-size: 1.15rem; color: #1e293b;">Interaktives Diagramm- & Skizzen-Board</h3>
+                        <p style="margin: 0; font-size: 0.8rem; color: #64748b;">Modelliere Use-Case, Klassen, ERD, EPK, BPMN, Struktogramme & Netzpläne</p>
+                    </div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                    <button id="wb-download-btn" class="wb-action-btn" title="Skizze als PNG herunterladen">
+                        <i class="fa-solid fa-download"></i> <span class="wb-btn-label">PNG Export</span>
+                    </button>
+                    <button id="wb-clear-btn" class="wb-action-btn wb-danger-btn" title="Board leeren">
+                        <i class="fa-solid fa-trash-can"></i> <span class="wb-btn-label">Löschen</span>
+                    </button>
+                    <button id="close-whiteboard-btn" class="wb-close-btn" title="Schließen">&times;</button>
+                </div>
+            </div>
+
+            <!-- Toolbar -->
+            <div class="whiteboard-toolbar">
+                <div class="wb-toolgroup">
+                    <span class="wb-group-title">Formen & Werkzeuge</span>
+                    <div class="wb-buttons-row">
+                        <button class="wb-tool-btn active" data-tool="pen" title="Freihand-Stift"><i class="fa-solid fa-pen"></i><span>Stift</span></button>
+                        <button class="wb-tool-btn" data-tool="line" title="Gerade Linie"><i class="fa-solid fa-minus"></i><span>Linie</span></button>
+                        <button class="wb-tool-btn" data-tool="arrow" title="Pfeil (Fluss / Assoziation)"><i class="fa-solid fa-arrow-right"></i><span>Pfeil</span></button>
+                        <button class="wb-tool-btn" data-tool="dasharrow" title="Gestrichelter Pfeil (&lt;&lt;include&gt;&gt; / &lt;&lt;extend&gt;&gt;)"><i class="fa-solid fa-ellipsis"></i><span>Gestrichelt</span></button>
+                        <button class="wb-tool-btn" data-tool="rect" title="Rechteck (Klasse / Entität / Aktivität / Funktion)"><i class="fa-regular fa-square"></i><span>Rechteck</span></button>
+                        <button class="wb-tool-btn" data-tool="ellipse" title="Oval / Kreis (Use-Case / Ereignis)"><i class="fa-regular fa-circle"></i><span>Use-Case</span></button>
+                        <button class="wb-tool-btn" data-tool="diamond" title="Raute / Gateway / XOR / Entscheidung"><i class="fa-solid fa-diamond"></i><span>Raute</span></button>
+                        <button class="wb-tool-btn" data-tool="actor" title="Akteur (Use-Case Männchen)"><i class="fa-solid fa-person"></i><span>Akteur</span></button>
+                        <button class="wb-tool-btn" data-tool="text" title="Text einfügen"><i class="fa-solid fa-font"></i><span>Text</span></button>
+                        <button class="wb-tool-btn" data-tool="eraser" title="Radiergummi"><i class="fa-solid fa-eraser"></i><span>Radierer</span></button>
+                    </div>
+                </div>
+
+                <div class="wb-separator"></div>
+
+                <div class="wb-toolgroup">
+                    <span class="wb-group-title">Farbe</span>
+                    <div class="wb-color-palette">
+                        <button class="wb-color-btn active" data-color="#1e293b" style="background-color: #1e293b;" title="Schwarz"></button>
+                        <button class="wb-color-btn" data-color="#2563eb" style="background-color: #2563eb;" title="Blau"></button>
+                        <button class="wb-color-btn" data-color="#dc2626" style="background-color: #dc2626;" title="Rot"></button>
+                        <button class="wb-color-btn" data-color="#16a34a" style="background-color: #16a34a;" title="Grün"></button>
+                        <button class="wb-color-btn" data-color="#9333ea" style="background-color: #9333ea;" title="Lila"></button>
+                        <button class="wb-color-btn" data-color="#d97706" style="background-color: #d97706;" title="Orange"></button>
+                    </div>
+                </div>
+
+                <div class="wb-separator"></div>
+
+                <div class="wb-toolgroup">
+                    <span class="wb-group-title">Stärke</span>
+                    <div class="wb-size-selector">
+                        <button class="wb-size-btn" data-size="2" title="Fein (2px)">2px</button>
+                        <button class="wb-size-btn active" data-size="4" title="Normal (4px)">4px</button>
+                        <button class="wb-size-btn" data-size="8" title="Dick (8px)">8px</button>
+                    </div>
+                </div>
+
+                <div class="wb-separator"></div>
+
+                <div class="wb-toolgroup">
+                    <span class="wb-group-title">Optionen</span>
+                    <div class="wb-buttons-row">
+                        <button id="wb-grid-toggle" class="wb-opt-btn active" title="Karoraster ein/aus">
+                            <i class="fa-solid fa-border-all"></i> <span>Raster</span>
+                        </button>
+                        <button id="wb-undo-btn" class="wb-opt-btn" title="Schritt rückgängig machen (Strg+Z)">
+                            <i class="fa-solid fa-rotate-left"></i> <span>Undo</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Canvas Area -->
+            <div class="whiteboard-canvas-wrapper grid-active" id="wb-canvas-wrapper">
+                <canvas id="whiteboard-canvas"></canvas>
+            </div>
+
+            <div class="whiteboard-footer">
+                <span style="font-size: 0.85rem; color: #64748b; display: flex; align-items: center; gap: 0.4rem;">
+                    <i class="fa-solid fa-lightbulb" style="color: #eab308;"></i> <strong>Tipp:</strong> Halte die Maustaste gedrückt und ziehe die gewünschte Form auf. Mit "Text" klickst du auf das Board zum Beschriften.
+                </span>
+            </div>
+        </div>
+    </div>
+
     <footer>
         <p>&copy; 2026 AP1 Prüfungstrainer - Entwickelt von Istvan Csovrij</p>
     </footer>
 
     <!-- Load the questions first, then the application logic -->
-    <script src="questions.js?v=43"></script>
-    <script src="generator.js?v=43"></script>
-    <script src="app.js?v=43"></script>
+    <script src="questions.js?v=44"></script>
+    <script src="generator.js?v=44"></script>
+    <script src="app.js?v=44"></script>
 </body>
 </html>

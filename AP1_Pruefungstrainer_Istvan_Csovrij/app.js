@@ -81,6 +81,7 @@ document.addEventListener("DOMContentLoaded", () => {
         loadStats();
         setupThemeFilters();
         filterQuestions("all");
+        initWhiteboard();
         
         resetStatsBtn.addEventListener("click", resetStats);
         nextBtn.addEventListener("click", loadNextQuestion);
@@ -222,6 +223,12 @@ function filterQuestions(theme) {
         if (starBtn) starBtn.style.display = "inline-flex";
         if (theme === "all") {
             filteredQuestions = [...questions];
+        } else if (theme === "bawue-focus") {
+            filteredQuestions = questions.filter(q => 
+                q.isBawueFocus === true || 
+                q.theme === "bawue-special" || 
+                (q.topic && q.topic.toLowerCase().includes("bawü"))
+            );
         } else {
             filteredQuestions = questions.filter(q => q.theme === theme);
         }
@@ -493,7 +500,7 @@ function loadQuestion() {
                 </div>
                 <div class="musterloesung-text">
                     <strong>Musterlösung:</strong><br>
-                    ${escapeHtml(q.musterloesung).replace(/\n/g, "<br>")}
+                    ${escapeHtml(q.musterloesung || q.correctAnswer || "").replace(/\n/g, "<br>")}
                 </div>
             `;
             
@@ -671,7 +678,7 @@ function showOpenTextSolution() {
         </div>
         <div class="musterloesung-text">
             <strong>Musterlösung:</strong><br>
-            ${escapeHtml(q.musterloesung).replace(/\n/g, "<br>")}
+            ${escapeHtml(q.musterloesung || q.correctAnswer || "").replace(/\n/g, "<br>")}
         </div>
     `;
     
@@ -811,7 +818,10 @@ function getThemeLabel(key) {
         lf3: "LF 3: Netzwerke & Protokolle",
         lf4: "LF 4: Schutz & Sicherheit",
         lf5: "LF 5: Software & SQL",
-        lf6: "LF 6: Services & WiSo"
+        lf6: "LF 6: Services & WiSo",
+        wiso: "WiSo: Wirtschafts- & Sozialkunde",
+        "bawue-special": "BW Spezial: IT-Systeme & Prozesse",
+        "bawue-focus": "🔮 IHK Stuttgart Fokus"
     };
     return labels[key] || key;
 }
@@ -1272,7 +1282,7 @@ function calculateExamScores() {
             correctAnsText = q.correctAnswers.join(" oder ");
         } else {
             userAnsText = ans.userAnswer || "(Keine Antwort)";
-            correctAnsText = q.musterloesung;
+            correctAnsText = q.musterloesung || q.correctAnswer || "";
         }
 
         let selfGradingHTML = "";
@@ -1325,4 +1335,445 @@ function gradeExamOpenQuestion(idx, isCorrect) {
     ans.isCorrect = isCorrect;
     ans.isSelfGraded = true; // Mark as self graded to style the button
     calculateExamScores(); // Refresh scores dynamically
+}
+
+
+// ============================================================================
+// Interactive Diagram Whiteboard Canvas Engine
+// ============================================================================
+let wbCanvas = null;
+let wbCtx = null;
+let wbWrapper = null;
+let wbCurrentTool = "pen";
+let wbCurrentColor = "#1e293b";
+let wbCurrentSize = 4;
+let wbIsDrawing = false;
+let wbStartX = 0;
+let wbStartY = 0;
+let wbHistory = [];
+const WB_MAX_HISTORY = 25;
+let wbSnapshot = null;
+
+function initWhiteboard() {
+    const modal = document.getElementById("whiteboard-modal");
+    wbCanvas = document.getElementById("whiteboard-canvas");
+    wbWrapper = document.getElementById("wb-canvas-wrapper");
+    if (!modal || !wbCanvas || !wbWrapper) return;
+    
+    wbCtx = wbCanvas.getContext("2d", { willReadFrequently: true });
+
+    // Open Whiteboard Buttons
+    const openSidebarBtn = document.getElementById("open-whiteboard-sidebar-btn");
+    const openQuizBtn = document.getElementById("quiz-whiteboard-btn");
+    const openExamBtn = document.getElementById("exam-whiteboard-btn");
+    const closeBtn = document.getElementById("close-whiteboard-btn");
+    const backdrop = document.getElementById("whiteboard-backdrop");
+
+    if (openSidebarBtn) openSidebarBtn.addEventListener("click", openWhiteboard);
+    if (openQuizBtn) openQuizBtn.addEventListener("click", openWhiteboard);
+    if (openExamBtn) openExamBtn.addEventListener("click", openWhiteboard);
+    if (closeBtn) closeBtn.addEventListener("click", closeWhiteboard);
+    if (backdrop) backdrop.addEventListener("click", closeWhiteboard);
+
+    // Escape key to close & Ctrl+Z to undo
+    window.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && modal.style.display !== "none") {
+            closeWhiteboard();
+        }
+        if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "z" && modal.style.display !== "none") {
+            e.preventDefault();
+            wbUndo();
+        }
+    });
+
+    // Tool selection
+    const toolBtns = modal.querySelectorAll(".wb-tool-btn");
+    toolBtns.forEach(btn => {
+        btn.addEventListener("click", () => {
+            toolBtns.forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+            wbCurrentTool = btn.getAttribute("data-tool");
+        });
+    });
+
+    // Color selection
+    const colorBtns = modal.querySelectorAll(".wb-color-btn");
+    colorBtns.forEach(btn => {
+        btn.addEventListener("click", () => {
+            colorBtns.forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+            wbCurrentColor = btn.getAttribute("data-color");
+        });
+    });
+
+    // Size selection
+    const sizeBtns = modal.querySelectorAll(".wb-size-btn");
+    sizeBtns.forEach(btn => {
+        btn.addEventListener("click", () => {
+            sizeBtns.forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+            wbCurrentSize = parseInt(btn.getAttribute("data-size"), 10) || 4;
+        });
+    });
+
+    // Grid toggle
+    const gridToggleBtn = document.getElementById("wb-grid-toggle");
+    if (gridToggleBtn) {
+        gridToggleBtn.addEventListener("click", () => {
+            wbWrapper.classList.toggle("grid-active");
+            gridToggleBtn.classList.toggle("active", wbWrapper.classList.contains("grid-active"));
+        });
+    }
+
+    // Undo button
+    const undoBtn = document.getElementById("wb-undo-btn");
+    if (undoBtn) undoBtn.addEventListener("click", wbUndo);
+
+    // Clear button
+    const clearBtn = document.getElementById("wb-clear-btn");
+    if (clearBtn) {
+        clearBtn.addEventListener("click", () => {
+            if (confirm("Möchtest du die gesamte Zeichnung wirklich löschen?")) {
+                wbClearCanvas();
+                wbSaveHistory();
+            }
+        });
+    }
+
+    // Download PNG button
+    const downloadBtn = document.getElementById("wb-download-btn");
+    if (downloadBtn) {
+        downloadBtn.addEventListener("click", wbExportPNG);
+    }
+
+    // Canvas Events (Mouse & Touch)
+    wbCanvas.addEventListener("mousedown", wbStartDraw);
+    window.addEventListener("mousemove", wbMoveDraw);
+    window.addEventListener("mouseup", wbEndDraw);
+
+    wbCanvas.addEventListener("touchstart", wbTouchStart, { passive: false });
+    window.addEventListener("touchmove", wbTouchMove, { passive: false });
+    window.addEventListener("touchend", wbTouchEnd, { passive: false });
+
+    // Handle Window Resize
+    window.addEventListener("resize", () => {
+        if (modal.style.display !== "none") {
+            resizeWhiteboardCanvas(true);
+        }
+    });
+}
+
+function openWhiteboard() {
+    const modal = document.getElementById("whiteboard-modal");
+    if (!modal) return;
+    modal.style.display = "flex";
+    setTimeout(() => {
+        resizeWhiteboardCanvas(false);
+    }, 60);
+}
+
+function closeWhiteboard() {
+    const modal = document.getElementById("whiteboard-modal");
+    if (!modal) return;
+    modal.style.display = "none";
+}
+
+function resizeWhiteboardCanvas(preserveContent) {
+    if (!wbCanvas || !wbWrapper || !wbCtx) return;
+    const rect = wbWrapper.getBoundingClientRect();
+    if (rect.width <= 0 || rect.height <= 0) return;
+
+    let tempCanvas = null;
+    if (preserveContent && wbCanvas.width > 0 && wbCanvas.height > 0) {
+        tempCanvas = document.createElement("canvas");
+        tempCanvas.width = wbCanvas.width;
+        tempCanvas.height = wbCanvas.height;
+        const tempCtx = tempCanvas.getContext("2d");
+        tempCtx.drawImage(wbCanvas, 0, 0);
+    }
+
+    const dpr = window.devicePixelRatio || 1;
+    wbCanvas.width = rect.width * dpr;
+    wbCanvas.height = rect.height * dpr;
+    wbCtx.scale(dpr, dpr);
+
+    if (tempCanvas) {
+        wbCtx.drawImage(tempCanvas, 0, 0, rect.width, rect.height);
+    } else if (wbHistory.length === 0) {
+        wbSaveHistory();
+    }
+}
+
+function getCanvasCoords(e) {
+    const rect = wbCanvas.getBoundingClientRect();
+    return {
+        x: e.clientX - rect.left,
+        y: e.clientY - rect.top
+    };
+}
+
+function wbSaveHistory() {
+    if (!wbCtx || !wbCanvas) return;
+    try {
+        const img = wbCtx.getImageData(0, 0, wbCanvas.width, wbCanvas.height);
+        wbHistory.push(img);
+        if (wbHistory.length > WB_MAX_HISTORY) {
+            wbHistory.shift();
+        }
+    } catch (e) {}
+}
+
+function wbUndo() {
+    if (wbHistory.length > 1) {
+        wbHistory.pop(); // Remove current state
+        const prev = wbHistory[wbHistory.length - 1];
+        if (prev && wbCtx) {
+            wbCtx.putImageData(prev, 0, 0);
+        }
+    } else if (wbHistory.length === 1) {
+        wbClearCanvas();
+    }
+}
+
+function wbClearCanvas() {
+    if (!wbCtx || !wbCanvas) return;
+    wbCtx.clearRect(0, 0, wbCanvas.width, wbCanvas.height);
+}
+
+function wbStartDraw(e) {
+    const modal = document.getElementById("whiteboard-modal");
+    if (!modal || modal.style.display === "none") return;
+    if (e.target !== wbCanvas) return;
+
+    const coords = getCanvasCoords(e);
+    wbStartX = coords.x;
+    wbStartY = coords.y;
+    wbIsDrawing = true;
+
+    if (wbCurrentTool === "text") {
+        wbIsDrawing = false;
+        const text = prompt("Gib den gewünschten Beschriftungstext ein:", "");
+        if (text && text.trim()) {
+            wbCtx.save();
+            wbCtx.fillStyle = wbCurrentColor;
+            wbCtx.font = `bold ${wbCurrentSize * 3 + 12}px sans-serif`;
+            wbCtx.textBaseline = "top";
+            wbCtx.fillText(text.trim(), wbStartX, wbStartY);
+            wbCtx.restore();
+            wbSaveHistory();
+        }
+        return;
+    }
+
+    try {
+        wbSnapshot = wbCtx.getImageData(0, 0, wbCanvas.width, wbCanvas.height);
+    } catch (err) {}
+
+    if (wbCurrentTool === "pen" || wbCurrentTool === "eraser") {
+        wbCtx.beginPath();
+        wbCtx.moveTo(wbStartX, wbStartY);
+    }
+}
+
+function wbMoveDraw(e) {
+    if (!wbIsDrawing) return;
+    const coords = getCanvasCoords(e);
+    const currX = coords.x;
+    const currY = coords.y;
+
+    if (wbCurrentTool === "pen") {
+        wbCtx.save();
+        wbCtx.strokeStyle = wbCurrentColor;
+        wbCtx.lineWidth = wbCurrentSize;
+        wbCtx.lineCap = "round";
+        wbCtx.lineJoin = "round";
+        wbCtx.lineTo(currX, currY);
+        wbCtx.stroke();
+        wbCtx.restore();
+    } else if (wbCurrentTool === "eraser") {
+        wbCtx.save();
+        wbCtx.globalCompositeOperation = "destination-out";
+        wbCtx.lineWidth = wbCurrentSize * 4 + 10;
+        wbCtx.lineCap = "round";
+        wbCtx.lineJoin = "round";
+        wbCtx.lineTo(currX, currY);
+        wbCtx.stroke();
+        wbCtx.restore();
+    } else {
+        // Shapes preview with snapshot restore
+        if (wbSnapshot) {
+            wbCtx.putImageData(wbSnapshot, 0, 0);
+        }
+        drawShape(wbStartX, wbStartY, currX, currY, wbCurrentTool, wbCurrentColor, wbCurrentSize);
+    }
+}
+
+function wbEndDraw(e) {
+    if (!wbIsDrawing) return;
+    wbIsDrawing = false;
+    wbSnapshot = null;
+    wbSaveHistory();
+}
+
+function wbTouchStart(e) {
+    if (e.touches.length === 1) {
+        e.preventDefault();
+        const touch = e.touches[0];
+        wbStartDraw(touch);
+    }
+}
+
+function wbTouchMove(e) {
+    if (wbIsDrawing && e.touches.length === 1) {
+        e.preventDefault();
+        const touch = e.touches[0];
+        wbMoveDraw(touch);
+    }
+}
+
+function wbTouchEnd(e) {
+    if (wbIsDrawing) {
+        e.preventDefault();
+        wbEndDraw(e);
+    }
+}
+
+function drawShape(x0, y0, x1, y1, tool, color, size) {
+    wbCtx.save();
+    wbCtx.strokeStyle = color;
+    wbCtx.fillStyle = color;
+    wbCtx.lineWidth = size;
+    wbCtx.lineCap = "round";
+    wbCtx.lineJoin = "round";
+
+    if (tool === "line") {
+        wbCtx.beginPath();
+        wbCtx.moveTo(x0, y0);
+        wbCtx.lineTo(x1, y1);
+        wbCtx.stroke();
+    } else if (tool === "arrow" || tool === "dasharrow") {
+        if (tool === "dasharrow") {
+            wbCtx.setLineDash([6, 6]);
+        }
+        // Draw line
+        wbCtx.beginPath();
+        wbCtx.moveTo(x0, y0);
+        wbCtx.lineTo(x1, y1);
+        wbCtx.stroke();
+
+        // Draw arrowhead
+        wbCtx.setLineDash([]);
+        const angle = Math.atan2(y1 - y0, x1 - x0);
+        const headlen = Math.max(12, size * 3.5);
+        wbCtx.beginPath();
+        wbCtx.moveTo(x1, y1);
+        wbCtx.lineTo(x1 - headlen * Math.cos(angle - Math.PI / 6), y1 - headlen * Math.sin(angle - Math.PI / 6));
+        wbCtx.lineTo(x1 - headlen * Math.cos(angle + Math.PI / 6), y1 - headlen * Math.sin(angle + Math.PI / 6));
+        wbCtx.closePath();
+        wbCtx.fill();
+    } else if (tool === "rect") {
+        const w = x1 - x0;
+        const h = y1 - y0;
+        wbCtx.strokeRect(x0, y0, w, h);
+    } else if (tool === "ellipse") {
+        const rx = Math.abs(x1 - x0) / 2;
+        const ry = Math.abs(y1 - y0) / 2;
+        const cx = Math.min(x0, x1) + rx;
+        const cy = Math.min(y0, y1) + ry;
+        wbCtx.beginPath();
+        wbCtx.ellipse(cx, cy, Math.max(1, rx), Math.max(1, ry), 0, 0, 2 * Math.PI);
+        wbCtx.stroke();
+    } else if (tool === "diamond") {
+        const cx = (x0 + x1) / 2;
+        const cy = (y0 + y1) / 2;
+        wbCtx.beginPath();
+        wbCtx.moveTo(cx, y0);
+        wbCtx.lineTo(x1, cy);
+        wbCtx.lineTo(cx, y1);
+        wbCtx.lineTo(x0, cy);
+        wbCtx.closePath();
+        wbCtx.stroke();
+    } else if (tool === "actor") {
+        // UML Use-Case Stickman Actor
+        const w = x1 - x0;
+        const h = y1 - y0;
+        const topY = Math.min(y0, y1);
+        const botY = Math.max(y0, y1);
+        const totalH = Math.max(25, botY - topY);
+        const midX = (x0 + x1) / 2;
+
+        const headR = totalH * 0.15;
+        const headCY = topY + headR;
+        const neckY = headCY + headR;
+        const waistY = neckY + totalH * 0.35;
+        const armsY = neckY + totalH * 0.12;
+        const armSpan = Math.max(totalH * 0.25, Math.abs(w) / 2);
+
+        // Head
+        wbCtx.beginPath();
+        wbCtx.arc(midX, headCY, headR, 0, 2 * Math.PI);
+        wbCtx.stroke();
+
+        // Torso
+        wbCtx.beginPath();
+        wbCtx.moveTo(midX, neckY);
+        wbCtx.lineTo(midX, waistY);
+
+        // Arms
+        wbCtx.moveTo(midX - armSpan, armsY);
+        wbCtx.lineTo(midX + armSpan, armsY);
+
+        // Left Leg
+        wbCtx.moveTo(midX, waistY);
+        wbCtx.lineTo(midX - armSpan * 0.8, botY);
+
+        // Right Leg
+        wbCtx.moveTo(midX, waistY);
+        wbCtx.lineTo(midX + armSpan * 0.8, botY);
+
+        wbCtx.stroke();
+    }
+
+    wbCtx.restore();
+}
+
+function wbExportPNG() {
+    if (!wbCanvas) return;
+    
+    // Create temporary export canvas with white background
+    const exportCanvas = document.createElement("canvas");
+    exportCanvas.width = wbCanvas.width;
+    exportCanvas.height = wbCanvas.height;
+    const expCtx = exportCanvas.getContext("2d");
+
+    // Fill with solid white background
+    expCtx.fillStyle = "#ffffff";
+    expCtx.fillRect(0, 0, exportCanvas.width, exportCanvas.height);
+
+    // If grid is active, draw grid on export
+    if (wbWrapper && wbWrapper.classList.contains("grid-active")) {
+        expCtx.strokeStyle = "#e2e8f0";
+        expCtx.lineWidth = 1;
+        const step = 24 * (window.devicePixelRatio || 1);
+        for (let x = 0; x < exportCanvas.width; x += step) {
+            expCtx.beginPath();
+            expCtx.moveTo(x, 0);
+            expCtx.lineTo(x, exportCanvas.height);
+            expCtx.stroke();
+        }
+        for (let y = 0; y < exportCanvas.height; y += step) {
+            expCtx.beginPath();
+            expCtx.moveTo(0, y);
+            expCtx.lineTo(exportCanvas.width, y);
+            expCtx.stroke();
+        }
+    }
+
+    // Draw drawings on top
+    expCtx.drawImage(wbCanvas, 0, 0);
+
+    const link = document.createElement("a");
+    link.download = `IHK_AP1_Diagramm_Skizze_${new Date().toISOString().slice(0, 10)}.png`;
+    link.href = exportCanvas.toDataURL("image/png");
+    link.click();
 }

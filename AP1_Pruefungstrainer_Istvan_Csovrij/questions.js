@@ -5,6 +5,7 @@ const staticQuestions = [
     // === LERNFELD 1: UNTERNEHMEN & MARKT (lf1) ===
     {
         id: 1,
+        isBawueFocus: true,
         theme: "lf1",
         type: "multiple-choice",
         question: "Welches Rechtsgeschäft ist einseitig verpflichtend?",
@@ -19,6 +20,7 @@ const staticQuestions = [
     },
     {
         id: 2,
+        isBawueFocus: true,
         theme: "lf1",
         type: "multiple-choice",
         question: "Ein Auszubildender (19 Jahre) kauft ohne Wissen seiner Eltern ein teures Smartphone auf Raten. Wie ist die Rechtslage?",
@@ -35,6 +37,7 @@ const staticQuestions = [
     // === LERNFELD 2: ARBEITSPLATZ & HARDWARE (lf2) ===
     {
         id: 3,
+        isBawueFocus: true,
         theme: "lf2",
         type: "multiple-choice",
         question: "Welcher RAID-Level bietet trotz Ausfallsicherheit die verhältnismäßig größte Nettospeicherkapazität bei mindestens 3 Festplatten?",
@@ -50,6 +53,7 @@ const staticQuestions = [
     },
     {
         id: 4,
+        isBawueFocus: true,
         theme: "lf2",
         type: "text-input",
         question: "Wie lautet der Fachbegriff für den Typ von Speicher, der beim Ausschalten des Computers alle gespeicherten Daten verliert? (Abkürzung mit 3 Buchstaben)",
@@ -58,6 +62,7 @@ const staticQuestions = [
     },
     {
         id: 26,
+        isBawueFocus: true,
         theme: "lf2",
         type: "multiple-choice",
         question: "Welche Windows 11 Edition ist für den Heimanwender gedacht und bietet standardmäßig keine Möglichkeit, einer klassischen Active Directory-Domäne beizutreten?",
@@ -74,6 +79,7 @@ const staticQuestions = [
     // === LERNFELD 3: NETZWERKE & PROTOKOLLE (lf3) ===
     {
         id: 5,
+        isBawueFocus: true,
         theme: "lf3",
         type: "text-input",
         question: "Gegeben ist die IP-Adresse 192.168.10.45 mit der Subnetzmaske 255.255.255.0. Wie lautet die Netzwerkadresse (Network ID)?",
@@ -82,6 +88,7 @@ const staticQuestions = [
     },
     {
         id: 6,
+        isBawueFocus: true,
         theme: "lf3",
         type: "text-input",
         question: "Gegeben ist die IP-Adresse 192.168.10.45 mit der Subnetzmaske 255.255.255.0. Wie lautet die Broadcast-Adresse?",
@@ -90,6 +97,7 @@ const staticQuestions = [
     },
     {
         id: 7,
+        isBawueFocus: true,
         theme: "lf3",
         type: "multiple-choice",
         question: "Auf welcher Schicht des OSI-Referenzmodells arbeitet ein IP-Router zur Weiterleitung von Datenpaketen?",
@@ -104,6 +112,7 @@ const staticQuestions = [
     },
     {
         id: 8,
+        isBawueFocus: true,
         theme: "lf3",
         type: "multiple-choice",
         question: "Welches Protokoll dient der automatischen Zuweisung von IP-Adressen, Subnetzmasken und Standard-Gateways an Netzwerk-Clients?",
@@ -118,6 +127,7 @@ const staticQuestions = [
     },
     {
         id: 18,
+        isBawueFocus: true,
         theme: "lf3",
         type: "text-input",
         question: "Auf welcher Schicht des OSI-Modells ist der Begriff 'Frame' (Rahmen) zu finden? Gib die Nummer der Schicht an (1-7):",
@@ -126,6 +136,7 @@ const staticQuestions = [
     },
     {
         id: 19,
+        isBawueFocus: true,
         theme: "lf3",
         type: "multiple-choice",
         question: "Wozu nutzt man das Spanning Tree Protocol (STP) in einem lokalen Netzwerk?",
@@ -140,6 +151,7 @@ const staticQuestions = [
     },
     {
         id: 20,
+        isBawueFocus: true,
         theme: "lf3",
         type: "multiple-choice",
         question: "Unter welcher IEEE-Norm sind die Standards für drahtlose lokale Netzwerke (WLAN) spezifiziert?",
@@ -154,6 +166,7 @@ const staticQuestions = [
     },
     {
         id: 21,
+        isBawueFocus: true,
         theme: "lf3",
         type: "text-input",
         question: "Wie viele nutzbare Hosts können in einem Subnetz mit der Subnetzmaske 255.255.255.240 (/28) adressiert werden?",
@@ -162,6 +175,7 @@ const staticQuestions = [
     },
     {
         id: 22,
+        isBawueFocus: true,
         theme: "lf3",
         type: "text-input",
         question: "Wie lautet die Netzwerkadresse (Network ID) für die IP-Adresse 16.218.108.91 /27?",
@@ -170,6 +184,7 @@ const staticQuestions = [
     },
     {
         id: 23,
+        isBawueFocus: true,
         theme: "lf3",
         type: "multiple-choice",
         question: "Welche Funktion hat die IPv6-Multicastadresse ff02::2?",
@@ -184,6 +199,7 @@ const staticQuestions = [
     },
     {
         id: 27,
+        isBawueFocus: true,
         theme: "lf3",
         type: "multiple-choice",
         question: "Welches ist das Hauptmerkmal einer Arbeitsgruppe (Workgroup) im Vergleich zu einer Active-Directory-Domäne unter Windows?",
@@ -198,6 +214,7 @@ const staticQuestions = [
     },
     {
         id: 28,
+        isBawueFocus: true,
         theme: "lf3",
         type: "text-input",
         question: "In welchem Standardverzeichnis legt Windows 11 Treiberpakete ab, damit neue Hardware sofort automatisch ohne Datenträger installiert werden kann? (DriverStore-Pfad)",
@@ -208,6 +225,7 @@ const staticQuestions = [
     // === LERNFELD 4: SCHUTZ & SICHERHEIT (lf4) ===
     {
         id: 9,
+        isBawueFocus: true,
         theme: "lf4",
         type: "multiple-choice",
         question: "Welche Backup-Methode sichert an jedem Wochentag ausschließlich die Daten, die sich seit dem letzten VOLLBACKUP geändert haben?",
@@ -222,6 +240,7 @@ const staticQuestions = [
     },
     {
         id: 24,
+        isBawueFocus: true,
         theme: "lf4",
         type: "multiple-choice",
         question: "Ein Unternehmen macht samstags ein Vollbackup (80 GiB). Mo fallen 10 GiB, Di 20 GiB und Mi 30 GiB neue Daten an. Wie viel Datenvolumen wird am DIENSTAG gesichert bei a) inkrementeller Sicherung und b) differenzieller Sicherung?",
@@ -236,6 +255,7 @@ const staticQuestions = [
     },
     {
         id: 10,
+        isBawueFocus: true,
         theme: "lf4",
         type: "multiple-choice",
         question: "Welches kryptografische Verfahren nutzt einen öffentlichen Schlüssel (Public Key) zur Verschlüsselung und einen privaten Schlüssel (Private Key) zur Entschlüsselung?",
@@ -250,6 +270,7 @@ const staticQuestions = [
     },
     {
         id: 11,
+        isBawueFocus: true,
         theme: "lf4",
         type: "multiple-choice",
         question: "Welches IT-Sicherheitsziel stellt sicher, dass Daten unversehrt, vollständig und vor unbefugter oder unbemerkter Veränderung geschützt sind?",
@@ -264,6 +285,7 @@ const staticQuestions = [
     },
     {
         id: 29,
+        isBawueFocus: true,
         theme: "lf4",
         type: "text-input",
         question: "Wie groß darf eine einzelne Datei unter dem Dateisystem FAT32 maximal sein? Gib die Zahl mit der Einheit an (z. B. '4 GB'):",
@@ -272,6 +294,7 @@ const staticQuestions = [
     },
     {
         id: 30,
+        isBawueFocus: true,
         theme: "lf4",
         type: "text-input",
         question: "Welcher Registry-Pfad / Schlüssel (Key) wird in Windows 11 unter Hyper-V verwendet, um bei der Installation die Hardware-Prüfungen 'BypassTPMCheck' und 'BypassSecureBootCheck' manuell zu hinterlegen?",
@@ -280,6 +303,7 @@ const staticQuestions = [
     },
     {
         id: 31,
+        isBawueFocus: true,
         theme: "lf4",
         type: "multiple-choice",
         question: "Welche Funktion hat die Benutzerkontensteuerung (UAC - User Account Control) in Windows 11 primär?",
@@ -294,6 +318,7 @@ const staticQuestions = [
     },
     {
         id: 32,
+        isBawueFocus: true,
         theme: "lf4",
         type: "multiple-choice",
         question: "Welcher Typ von Malware benötigt im Gegensatz zu Viren keinen 'Wirt' (also kein legitimes Programm, an das er sich anhängt), sondern verbreitet sich selbstständig über Netzwerke und Sicherheitslücken?",
@@ -308,6 +333,7 @@ const staticQuestions = [
     },
     {
         id: 33,
+        isBawueFocus: true,
         theme: "lf4",
         type: "multiple-choice",
         question: "Welche Art der Verschlüsselung wird standardmäßig bei Windows BitLocker eingesetzt, um Festplatten komplett zu verschlüsseln?",
@@ -322,6 +348,7 @@ const staticQuestions = [
     },
     {
         id: 34,
+        isBawueFocus: true,
         theme: "lf4",
         type: "multiple-choice",
         question: "Welche Komprimierungsart eignet sich für die Speicherung von Textdokumenten oder Programm-Quellcodes?",
@@ -338,6 +365,7 @@ const staticQuestions = [
     // === LERNFELD 5: SOFTWARE & SQL (lf5) ===
     {
         id: 12,
+        isBawueFocus: true,
         theme: "lf5",
         type: "multiple-choice",
         question: "Welcher SQL-Befehl wird verwendet, um alle Datensätze aus einer Tabelle 'Kunden' abzurufen, bei denen der Ort 'Berlin' ist, sortiert nach dem Nachnamen?",
@@ -352,6 +380,7 @@ const staticQuestions = [
     },
     {
         id: 13,
+        isBawueFocus: true,
         theme: "lf5",
         type: "text-input",
         question: "Gegeben ist folgendes Pseudocode-Segment. Welchen Wert hat die Variable 'erg' am Ende der Ausführung?",
@@ -361,6 +390,7 @@ const staticQuestions = [
     },
     {
         id: 14,
+        isBawueFocus: true,
         theme: "lf5",
         type: "text-input",
         question: "Gegeben ist folgende PIN-Prüfung als Pseudocode. Welche Ausgabe liefert das Programm bei der Eingabe '12A456'?",
@@ -370,6 +400,7 @@ const staticQuestions = [
     },
     {
         id: 35,
+        isBawueFocus: true,
         theme: "lf5",
         type: "text-input",
         question: "Wofür steht die Abkürzung 'KISS' im Software-Engineering und Code-Design?",
@@ -378,6 +409,7 @@ const staticQuestions = [
     },
     {
         id: 36,
+        isBawueFocus: true,
         theme: "lf5",
         type: "text-input",
         question: "Wie lautet das Standardformat einer User Story in der agilen Anforderungsanalyse? (Ergänze den letzten Teil: 'Als [Rolle] möchte ich [Ziel], damit ...')",
@@ -386,6 +418,7 @@ const staticQuestions = [
     },
     {
         id: 37,
+        isBawueFocus: true,
         theme: "lf5",
         type: "multiple-choice",
         question: "Welchen Testtyp führt ein Entwickler aus, um sicherzustellen, dass eine einzelne, isolierte Klasse oder Funktion fehlerfrei arbeitet?",
@@ -400,6 +433,7 @@ const staticQuestions = [
     },
     {
         id: 38,
+        isBawueFocus: true,
         theme: "lf5",
         type: "multiple-choice",
         question: "Welche UML-Beziehung beschreibt im Use-Case-Diagramm (Anwendungsfalldiagramm) einen Anwendungsfall, der unter bestimmten Bedingungen optional ausgeführt werden kann?",
@@ -414,6 +448,7 @@ const staticQuestions = [
     },
     {
         id: 39,
+        isBawueFocus: true,
         theme: "lf5",
         type: "multiple-choice",
         question: "Wie werden Multiplizitäten (Kardinalitäten) standardmäßig in einem UML-Use-Case-Diagramm dargestellt?",
@@ -428,6 +463,7 @@ const staticQuestions = [
     },
     {
         id: 40,
+        isBawueFocus: true,
         theme: "lf5",
         type: "multiple-choice",
         question: "Wie nennt man Softwaretests, die nach einer Code-Änderung oder einem Update durchgeführt werden, um sicherzustellen, dass keine funktionierenden Systembereiche unbeabsichtigt beschädigt wurden?",
@@ -444,6 +480,7 @@ const staticQuestions = [
     // === LERNFELD 6: SERVICES & WISO (lf6) ===
     {
         id: 15,
+        isBawueFocus: true,
         theme: "lf6",
         type: "multiple-choice",
         question: "Ein Systemhaus bestellt 20 Notebooks für ein Kundenprojekt beim Großhändler. Bei der sofortigen Lieferung stellt der Techniker fest, dass statt 16 GB RAM nur 8 GB verbaut sind. Welche Rechtslage gilt?",
@@ -458,6 +495,7 @@ const staticQuestions = [
     },
     {
         id: 16,
+        isBawueFocus: true,
         theme: "lf6",
         type: "multiple-choice",
         question: "Welche Methode eignet sich am besten, um verschiedene Angebote für eine neue Serverinfrastruktur sowohl nach quantitativen (Kosten) als auch nach qualitativen Kriterien (Garantiezeit, Support, Energieeffizienz) strukturiert zu bewerten?",
@@ -472,6 +510,7 @@ const staticQuestions = [
     },
     {
         id: 17,
+        isBawueFocus: true,
         theme: "lf6",
         type: "multiple-choice",
         question: "Wie wird ein Vertrag bezeichnet, in dem sich ein Dienstleister verpflichtet, dem Auftraggeber die Verfügbarkeit eines IT-Services (z. B. 99,9 % Server-Uptime im Jahr) vertraglich zuzusichern?",
@@ -486,6 +525,7 @@ const staticQuestions = [
     },
     {
         id: 25,
+        isBawueFocus: true,
         theme: "lf6",
         type: "multiple-choice",
         question: "Ein Programm zum Betrachten von Internetseiten nennt man...",
@@ -500,6 +540,7 @@ const staticQuestions = [
     },
     {
         id: 41,
+        isBawueFocus: true,
         theme: "lf6",
         type: "multiple-choice",
         question: "Wie wird ein Cloud-Dienst bezeichnet, bei dem der Provider dem Kunden eine fertige Laufzeitumgebung (z.B. für Datenbanken oder Java-Code) bereitstellt und das Betriebssystem verwaltet, während der Kunde nur seine Anwendungen einpflegt?",
@@ -514,6 +555,7 @@ const staticQuestions = [
     },
     {
         id: 42,
+        isBawueFocus: true,
         theme: "lf6",
         type: "multiple-choice",
         question: "Welchen großen Vorteil bietet die Skalierung von Cloud-Systemen gegenüber physischen Systemen in einem eigenen lokalen Rechenzentrum?",
@@ -528,6 +570,7 @@ const staticQuestions = [
     },
     {
         id: 43,
+        isBawueFocus: true,
         theme: "lf6",
         type: "text-input",
         question: "Welcher Begriff beschreibt das gesamte Nutzungserlebnis, das ein Anwender bei der Bedienung einer Software, Webseite oder App erfährt? (Abkürzung mit 2 Buchstaben)",
@@ -536,6 +579,7 @@ const staticQuestions = [
     },
     {
         id: 44,
+        isBawueFocus: true,
         theme: "lf6",
         type: "multiple-choice",
         question: "Ein Lieferant verspricht in einem Kaufvertrag, Notebooks bis zum 6. November zu liefern. Es erfolgt keine Lieferung. Der Lieferant gerät in Lieferungsverzug. Welche rechtliche Voraussetzung muss für den Verzug erfüllt sein?",
@@ -550,6 +594,7 @@ const staticQuestions = [
     },
     {
         id: 45,
+        isBawueFocus: true,
         theme: "lf6",
         type: "text-input",
         question: "Wie nennt man die Rügepflicht, bei der ein Mangel bei einer B2B-Lieferung erst nach Tagen oder Wochen bei der Benutzung auffällt, aber dennoch sofort gemeldet werden muss? (Begriff mit 2 Wörtern, z. B. '... Mangel')",
@@ -558,6 +603,7 @@ const staticQuestions = [
     },
     {
         id: 46,
+        isBawueFocus: true,
         theme: "lf6",
         type: "open-text",
         question: "Prüfungsaufgabe Vertragsrecht (LF 6): Die IT AG bestellt Notebooks. Bei der Warenannahme wird festgestellt, dass die Notebooks nicht die vereinbarten 8 GB RAM, sondern nur 4 GB RAM haben. Nenne die vorliegende Art der Vertragsstörung.",
@@ -566,6 +612,7 @@ const staticQuestions = [
     },
     {
         id: 47,
+        isBawueFocus: true,
         theme: "lf6",
         type: "open-text",
         question: "Prüfungsaufgabe Vertragsrecht (LF 6): Beschreibe, was ein Käufer (Unternehmen) im Rahmen eines zweiseitigen Handelskaufs (§ 377 HGB) tun muss, wenn er eine mangelhafte Lieferung erhält, um seine Gewährleistungsrechte zu wahren.",
@@ -574,6 +621,7 @@ const staticQuestions = [
     },
     {
         id: 48,
+        isBawueFocus: true,
         theme: "lf4",
         type: "open-text",
         question: "Prüfungsaufgabe IT-Sicherheit (LF 4): Erläutere den Unterschied zwischen einem Computer-Virus und einem Computer-Wurm bezüglich ihrer Ausbreitung und Vermehrung.",
@@ -582,6 +630,7 @@ const staticQuestions = [
     },
     {
         id: 49,
+        isBawueFocus: true,
         theme: "lf4",
         type: "open-text",
         question: "Prüfungsaufgabe IT-Sicherheit (LF 4): Erläutere, wie ein Distributed Denial of Service (DDoS)-Angriff abläuft und welches Ziel er verfolgt.",
@@ -590,6 +639,7 @@ const staticQuestions = [
     },
     {
         id: 50,
+        isBawueFocus: true,
         theme: "lf2",
         type: "open-text",
         question: "Prüfungsaufgabe Ergonomie (LF 2): Nenne 4 wesentliche Kriterien, die bei der ergonomischen Einrichtung eines Bildschirmarbeitsplatzes beachtet werden müssen.",
@@ -598,6 +648,7 @@ const staticQuestions = [
     },
     {
         id: 51,
+        isBawueFocus: true,
         theme: "lf4",
         type: "open-text",
         question: "Prüfungsaufgabe Datenschutz (LF 4): Die DSGVO nennt verschiedene Grundsätze für die Verarbeitung personenbezogener Daten. Nenne und erläutere kurz 3 dieser Grundsätze.",
@@ -606,6 +657,7 @@ const staticQuestions = [
     },
     {
         id: 52,
+        isBawueFocus: true,
         theme: "lf4",
         type: "open-text",
         question: "Prüfungsaufgabe Backup (LF 4): Erkläre das Großvater-Vater-Sohn-Prinzip (Generationen-Prinzip) bei der Datensicherung und nenne dessen Vorteil.",
@@ -614,6 +666,7 @@ const staticQuestions = [
     },
     {
         id: 53,
+        isBawueFocus: true,
         theme: "lf4",
         type: "open-text",
         question: "Prüfungsaufgabe Backup (LF 4): Unterscheide das differenzielle Backup vom inkrementellen Backup bezüglich des täglichen Speicherbedarfs und des Aufwands bei einer Datenwiederherstellung (Restore).",
@@ -622,6 +675,7 @@ const staticQuestions = [
     },
     {
         id: 54,
+        isBawueFocus: true,
         theme: "lf4",
         type: "open-text",
         question: "Prüfungsaufgabe Kryptografie (LF 4): Erläutere den Unterschied zwischen symmetrischer und asymmetrischer Verschlüsselung und nenne jeweils ein typisches Protokoll.",
@@ -630,6 +684,7 @@ const staticQuestions = [
     },
     {
         id: 55,
+        isBawueFocus: true,
         theme: "lf6",
         type: "open-text",
         question: "Prüfungsaufgabe Vertragsrecht (LF 6): Nenne die Rügefristen für Mängel beim zweiseitigen Handelskauf (§ 377 HGB) für offene Mängel, verdeckte Mängel und arglistig verschwiegene Mängel.",
@@ -638,6 +693,7 @@ const staticQuestions = [
     },
     {
         id: 56,
+        isBawueFocus: true,
         theme: "lf6",
         type: "open-text",
         question: "Prüfungsaufgabe Vertragsrecht (LF 6): Nenne jeweils die Hauptpflichten des Verkäufers und des Käufers bei einem rechtsgültigen Kaufvertrag nach § 433 BGB.",
@@ -646,6 +702,7 @@ const staticQuestions = [
     },
     {
         id: 57,
+        isBawueFocus: true,
         theme: "lf5",
         type: "open-text",
         question: "Prüfungsaufgabe UML (LF 5): Erläutere den Hauptzweck eines UML-Anwendungsfalldiagramms (Use-Case-Diagramm) und nenne zwei seiner Hauptelemente.",
@@ -654,6 +711,7 @@ const staticQuestions = [
     },
     {
         id: 58,
+        isBawueFocus: true,
         theme: "lf5",
         type: "open-text",
         question: "Prüfungsaufgabe Softwaretechnik (LF 10): Unterscheide den Unit-Test (Modultest) vom Integrationstest bezüglich des Testgegenstands.",
@@ -662,6 +720,7 @@ const staticQuestions = [
     },
     {
         id: 59,
+        isBawueFocus: true,
         theme: "lf6",
         type: "open-text",
         question: "Prüfungsaufgabe Wirtschaftlichkeit (LF 6): Was ist das Ziel einer Nutzwertanalyse (NWA) bei IT-Beschaffungen und wie läuft sie grob ab?",
@@ -670,6 +729,7 @@ const staticQuestions = [
     },
     {
         id: 60,
+        isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
         question: "Prüfungsaufgabe Netzwerk (LF 3): Erläutere kurz die Funktionsweise und das Ziel des Domain Name Systems (DNS) im Internet.",
@@ -678,6 +738,7 @@ const staticQuestions = [
     },
     {
         id: 61,
+        isBawueFocus: true,
         theme: "lf2",
         type: "open-text",
         question: "Prüfungsaufgabe Hardware (LF 2): Erkläre den Unterschied zwischen einem Typ-1-Hypervisor (Bare-Metal) und einem Typ-2-Hypervisor (Hosted) bei der Virtualisierung.",
@@ -686,6 +747,7 @@ const staticQuestions = [
     },
     {
         id: 62,
+        isBawueFocus: true,
         theme: "lf2",
         type: "open-text",
         question: "Prüfungsaufgabe Hardware (LF 2): Unterscheide die USV-Klassen (Offline-USV, Line-Interactive-USV und Online-USV) bezüglich ihrer Schutzwirkung.",
@@ -694,6 +756,7 @@ const staticQuestions = [
     },
     {
         id: 63,
+        isBawueFocus: true,
         theme: "lf5",
         type: "open-text",
         question: "Prüfungsaufgabe UML (LF 5): Erkläre im Kontext von UML-Klassendiagrammen den Unterschied zwischen Aggregation und Komposition.",
@@ -702,6 +765,7 @@ const staticQuestions = [
     },
     {
         id: 64,
+        isBawueFocus: true,
         theme: "lf6",
         type: "open-text",
         question: "Prüfungsaufgabe Projektmanagement (LF 6): Erläutere das Prinzip des 'Magischen Dreiecks des Projektmanagements' und nenne seine drei Eckpunkte.",
@@ -710,6 +774,7 @@ const staticQuestions = [
     },
     {
         id: 65,
+        isBawueFocus: true,
         theme: "lf5",
         type: "open-text",
         question: "Prüfungsaufgabe Softwarequalität (LF 10): Unterscheide den Black-Box-Test vom White-Box-Test.",
@@ -718,6 +783,7 @@ const staticQuestions = [
     },
     {
         id: 66,
+        isBawueFocus: true,
         theme: "lf5",
         type: "open-text",
         question: "Prüfungsaufgabe Datenbanken (LF 18): Beschreibe die Bedingungen, die erfüllt sein müssen, damit sich eine Datenbanktabelle in der 1. und in der 2. Normalform befindet.",
@@ -726,6 +792,7 @@ const staticQuestions = [
     },
     {
         id: 67,
+        isBawueFocus: true,
         theme: "lf6",
         type: "open-text",
         question: "Prüfungsaufgabe Rechnungswesen (LF 6): Erkläre den Begriff 'Deckungsbeitrag' und nenne die Formel zu dessen Berechnung.",
@@ -734,6 +801,7 @@ const staticQuestions = [
     },
     {
         id: 68,
+        isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
         question: "Prüfungsaufgabe Netzwerk (LF 3): Nenne 3 wesentliche Vorteile von IPv6 gegenüber dem älteren IPv4-Protokoll.",
@@ -742,6 +810,7 @@ const staticQuestions = [
     },
     {
         id: 69,
+        isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
         question: "Prüfungsaufgabe Netzwerk (LF 3): Welche Aufgabe hat das Standard-Gateway (Default Gateway) in der IP-Konfiguration eines Endgeräts?",
@@ -750,6 +819,7 @@ const staticQuestions = [
     },
     {
         id: 70,
+        isBawueFocus: true,
         theme: "lf4",
         type: "open-text",
         question: "Prüfungsaufgabe Datenschutz (LF 4): Nenne 4 Rechte, die betroffenen Personen laut DSGVO bezüglich ihrer personenbezogenen Daten zustehen.",
@@ -758,6 +828,7 @@ const staticQuestions = [
     },
     {
         id: 71,
+        isBawueFocus: true,
         theme: "lf5",
         type: "open-text",
         question: "Prüfungsaufgabe Softwarearchitektur (LF 5): Erkläre die Funktionsweise des Model-View-Controller (MVC) Architekturmusters und nenne die Aufgaben der 3 Komponenten.",
@@ -766,6 +837,7 @@ const staticQuestions = [
     },
     {
         id: 72,
+        isBawueFocus: true,
         theme: "lf6",
         type: "open-text",
         question: "Prüfungsaufgabe Projektmanagement (LF 6): Unterscheide im agilen Scrum-Framework die Aufgaben des Product Owners von denen des Scrum Masters.",
@@ -774,6 +846,7 @@ const staticQuestions = [
     },
     {
         id: 73,
+        isBawueFocus: true,
         theme: "lf2",
         type: "open-text",
         question: "Prüfungsaufgabe Hardware (LF 2): Nenne jeweils 2 technische Vor- und Nachteile einer Solid-State-Drive (SSD) im Vergleich zu einer klassischen Festplatte (HDD).",
@@ -782,6 +855,7 @@ const staticQuestions = [
     },
     {
         id: 74,
+        isBawueFocus: true,
         theme: "lf4",
         type: "open-text",
         question: "Prüfungsaufgabe IT-Sicherheit (LF 4): Erläutere den Unterschied zwischen einem Paketfilter und einer Stateful Inspection Firewall.",
@@ -790,6 +864,7 @@ const staticQuestions = [
     },
     {
         id: 75,
+        isBawueFocus: true,
         theme: "lf6",
         type: "open-text",
         question: "Prüfungsaufgabe Gewährleistung (LF 6): Unterscheide die gesetzliche Gewährleistung (Mängelhaftung) von einer Herstellergarantie.",
@@ -798,6 +873,7 @@ const staticQuestions = [
     },
     {
         id: 76,
+        isBawueFocus: true,
         theme: "lf6",
         type: "open-text",
         question: "Prüfungsaufgabe Kaufrecht (LF 6): Nenne die rechtlichen Voraussetzungen, damit ein Käufer bei einer mangelhaften Lieferung das Recht auf Minderung des Kaufpreises oder Rücktritt vom Vertrag geltend machen kann.",
@@ -806,6 +882,7 @@ const staticQuestions = [
     },
     {
         id: 77,
+        isBawueFocus: true,
         theme: "lf6",
         type: "open-text",
         question: "Prüfungsaufgabe Kaufrecht (LF 6): Ab wann gerät ein Käufer bei einer Rechnung ohne vereinbartes Zahlungsziel automatisch in Zahlungsverzug und wie hoch ist der gesetzliche Verzugszinssatz im B2C- und B2B-Bereich?",
@@ -814,6 +891,7 @@ const staticQuestions = [
     },
     {
         id: 78,
+        isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
         question: "Prüfungsaufgabe Netzwerk (LF 3): Erläutere den Sinn und Zweck von Virtual Local Area Networks (VLANs) in einem Firmennetzwerk.",
@@ -822,6 +900,7 @@ const staticQuestions = [
     },
     {
         id: 79,
+        isBawueFocus: true,
         theme: "lf6",
         type: "open-text",
         question: "Prüfungsaufgabe Projektmanagement (LF 6): Erkläre im Kontext eines Netzplans den Begriff 'Kritischer Pfad' und dessen Bedeutung für die Projektdauer.",
@@ -830,6 +909,7 @@ const staticQuestions = [
     },
     {
         id: 80,
+        isBawueFocus: true,
         theme: "lf1",
         type: "open-text",
         question: "Prüfungsaufgabe Ausbildung (LF 1): Nenne 4 gesetzliche Pflichten eines Auszubildenden nach dem Berufsbildungsgesetz (BBiG).",
@@ -842,6 +922,7 @@ const staticQuestions = [
     },
     {
         id: 81,
+        isBawueFocus: true,
         theme: "lf1",
         type: "multiple-choice",
         question: "Prüfungsaufgabe Ausbildung (LF 1): Welches Gesetz regelt primär die gesetzlichen Mindeststandards und Rahmenbedingungen für die Berufsausbildung in Deutschland?",
@@ -859,6 +940,7 @@ const staticQuestions = [
     },
     {
         id: 82,
+        isBawueFocus: true,
         theme: "lf1",
         type: "open-text",
         question: "Prüfungsaufgabe Mitbestimmung (LF 1): Unter welchen Voraussetzungen kann in einem Betrieb eine Jugend- und Auszubildendenvertretung (JAV) gewählt werden?",
@@ -871,6 +953,7 @@ const staticQuestions = [
     },
     {
         id: 83,
+        isBawueFocus: true,
         theme: "lf1",
         type: "multiple-choice",
         question: "Prüfungsaufgabe Mitbestimmung (LF 1): Wer besitzt das aktive Wahlrecht bei Betriebsratswahlen nach dem Betriebsverfassungsgesetz (BetrVG)?",
@@ -888,6 +971,7 @@ const staticQuestions = [
     },
     {
         id: 84,
+        isBawueFocus: true,
         theme: "lf1",
         type: "open-text",
         question: "Prüfungsaufgabe Tarifrecht (LF 1): Erläutere den Unterschied zwischen einem Manteltarifvertrag und einem Entgelttarifvertrag bezüglich ihrer typischen Inhalte und Laufzeiten.",
@@ -899,6 +983,7 @@ const staticQuestions = [
     },
     {
         id: 85,
+        isBawueFocus: true,
         theme: "lf1",
         type: "multiple-choice",
         question: "Prüfungsaufgabe Jugendschutz (LF 1): Wer gilt laut Jugendarbeitsschutzgesetz (JArbSchG) als 'Jugendlicher' und darf nur unter Einhaltung strenger Schutzvorschriften beschäftigt werden?",
@@ -918,6 +1003,7 @@ const staticQuestions = [
     },
     {
         id: 86,
+        isBawueFocus: true,
         theme: "lf6",
         type: "open-text",
         question: "Prüfungsaufgabe Projektmanagement (LF 6): Erkläre den Unterschied zwischen einem Lastenheft und einem Pflichtenheft bezüglich des Urhebers und des Inhalts.",
@@ -934,6 +1020,7 @@ const staticQuestions = [
     },
     {
         id: 87,
+        isBawueFocus: true,
         theme: "lf6",
         type: "multiple-choice",
         question: "Prüfungsaufgabe Projektmanagement (LF 6): Welcher Pufferwert in einem Netzplan gibt an, um wie viel sich ein Vorgang verschieben lässt, ohne den frühesten Anfang des direkten Nachfolgers zu beeinflussen?",
@@ -951,6 +1038,7 @@ const staticQuestions = [
     },
     {
         id: 88,
+        isBawueFocus: true,
         theme: "lf6",
         type: "open-text",
         question: "Prüfungsaufgabe Projektmanagement (LF 6): Nenne die 4 klassischen Phasen eines Projektlebenszyklus in der richtigen chronologischen Reihenfolge.",
@@ -963,6 +1051,7 @@ const staticQuestions = [
     },
     {
         id: 89,
+        isBawueFocus: true,
         theme: "lf6",
         type: "multiple-choice",
         question: "Prüfungsaufgabe Projektmanagement (LF 6): Welche Eigenschaft kennzeichnet einen Meilenstein in einem Projektablaufplan bezüglich seiner Dauer?",
@@ -980,6 +1069,7 @@ const staticQuestions = [
     },
     {
         id: 90,
+        isBawueFocus: true,
         theme: "lf6",
         type: "open-text",
         question: "Prüfungsaufgabe Projektorganisation (LF 6): Erläutere das Prinzip der Matrix-Projektorganisation und nenne das wesentliche Merkmal bezüglich der Weisungsbefugnis.",
@@ -991,6 +1081,7 @@ const staticQuestions = [
     },
     {
         id: 91,
+        isBawueFocus: true,
         theme: "lf6",
         type: "multiple-choice",
         question: "Prüfungsaufgabe Projektmanagement (LF 6): Wie lautet die mathematische Formel zur Berechnung des Gesamtpuffers (GP) eines Vorgangs im Netzplan?",
@@ -1016,6 +1107,7 @@ const staticQuestions = [
     },
     {
         id: 92,
+        isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
         question: "Prüfungsaufgabe Netzwerk (LF 3): Erkläre die genaue Funktion und die beteiligten OSI-Schichten des Protokolls ARP (Address Resolution Protocol) laut deinen Unterlagen.",
@@ -1029,6 +1121,7 @@ const staticQuestions = [
     },
     {
         id: 93,
+        isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
         question: "Prüfungsaufgabe Netzwerk (LF 3): Erkläre die genaue Funktion und die beteiligten OSI-Schichten des Protokolls DNS (Domain Name System) laut deinen Unterlagen.",
@@ -1043,6 +1136,7 @@ const staticQuestions = [
     },
     {
         id: 94,
+        isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
         question: "Prüfungsaufgabe Netzwerk (LF 3): Erkläre die genaue Funktion und die beteiligten OSI-Schichten des Protokolls DHCP (Dynamic Host Configuration Protocol) laut deinen Unterlagen.",
@@ -1057,6 +1151,7 @@ const staticQuestions = [
     },
     {
         id: 95,
+        isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
         question: "Prüfungsaufgabe Netzwerk (LF 3): Beschreibe den Aufbau einer MAC-Adresse (Gesamtlänge in Bit/Bytes, Darstellung und die zwei Hauptbestandteile aus den 6 Oktetten) laut deinen Unterlagen.",
@@ -1068,6 +1163,7 @@ const staticQuestions = [
     },
     {
         id: 96,
+        isBawueFocus: true,
         theme: "lf3",
         type: "multiple-choice",
         question: "Prüfungsaufgabe Netzwerk (LF 3): Welcher Teil einer MAC-Adresse identifiziert weltweit eindeutig den Hersteller des Netzwerkadapters?",
@@ -1086,6 +1182,7 @@ const staticQuestions = [
     },
     {
         id: 97,
+        isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
         question: "Prüfungsaufgabe Netzwerk (LF 3): Erkläre im Aufbau des ersten Oktetts einer MAC-Adresse die Bedeutung des Bits b0 (I/G-Bit) und des Bits b1 (U/L-Bit) laut deinen Unterlagen.",
@@ -1100,6 +1197,7 @@ const staticQuestions = [
     },
     {
         id: 98,
+        isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
         question: "Prüfungsaufgabe Netzwerk (LF 3): Erkläre die gängige Eselsbrücke zur Aufteilung einer IP-Verbindung mit der Post-Zustellung (Netzanteil, Hostanteil und Port) laut deinen Unterlagen.",
@@ -1111,6 +1209,7 @@ const staticQuestions = [
     },
     {
         id: 99,
+        isBawueFocus: true,
         theme: "lf3",
         type: "multiple-choice",
         question: "Prüfungsaufgabe Netzwerk (LF 3): Welche Regel gilt ausnahmslos für den Aufbau einer Subnetzmaske im Binärformat (z. B. für CIDR)?",
@@ -1128,6 +1227,7 @@ const staticQuestions = [
     },
     {
         id: 100,
+        isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
         question: "Prüfungsaufgabe Netzwerk (LF 3): Vergleiche die IP-Versionen IPv4 und IPv6 bezüglich ihrer Bit-Breite, der Anzahl der Blöcke/Oktette, der Trennzeichen und ihrer Darstellung laut deinen Unterlagen.",
@@ -1139,6 +1239,7 @@ const staticQuestions = [
     },
     {
         id: 101,
+        isBawueFocus: true,
         theme: "lf3",
         type: "multiple-choice",
         question: "Prüfungsaufgabe Netzwerk (LF 3): Auf welcher Schicht des OSI-Referenzmodells arbeiten Ports zur Adressierung von bestimmten Applikationen auf einem Zielgerät?",
@@ -1156,6 +1257,7 @@ const staticQuestions = [
     },
     {
         id: 102,
+        isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
         question: "Prüfungsaufgabe Netzwerk (LF 3): Ordne den Ports 80, 23 und 143 die jeweilige Anwendung und das Protokoll laut deinen Unterlagen zu.",
@@ -1167,6 +1269,7 @@ const staticQuestions = [
     },
     {
         id: 103,
+        isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
         question: "Prüfungsaufgabe Subnetting (LF 3): Der IP-Adressbereich 192.168.164.0 bis 192.168.164.255 soll in genau 4 gleichgroße Subnetze unter maximaler Ausnutzung des Adressraumes aufgeteilt werden.\n\nGib die Subnetzmaske, die maximale Anzahl Hosts pro Subnetz und für jedes der 4 Subnetze die erste und letzte nutzbare Hostadresse an.",
@@ -1185,6 +1288,7 @@ const staticQuestions = [
     },
     {
         id: 104,
+        isBawueFocus: true,
         theme: "lf3",
         type: "multiple-choice",
         question: "Prüfungsaufgabe IP-Klassen (LF 3): Nenne für die klassischen IP-Adressklassen B, C und D die jeweilige Standard-Subnetzmaske.",
@@ -1203,6 +1307,7 @@ const staticQuestions = [
     },
     {
         id: 105,
+        isBawueFocus: true,
         theme: "lf3",
         type: "multiple-choice",
         question: "Prüfungsaufgabe IP-Adressraum (LF 3): Ermittle die Anzahl der IPv4-Hostadressen, die in einem Subnetz mit der Subnetzmaske 255.255.0.0 maximal an Endgeräte vergeben werden können.",
@@ -1224,6 +1329,7 @@ const staticQuestions = [
     },
     {
         id: 106,
+        isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
         question: "Prüfungsaufgabe Subnetting (LF 3): Für das Netzwerk 192.168.1.0/24 sollen für 5 Abteilungen jeweils ein eigenes Subnetz eingerichtet werden. Jedes Subnetz muss mindestens 20 Hosts unterstützen.\n\nErmittle die benötigte Subnetzmaske und die Netzadressen für die Subnetze 2 und 3.",
@@ -1244,6 +1350,7 @@ const staticQuestions = [
     },
     {
         id: 107,
+        isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
         question: "Prüfungsaufgabe IP-Adressierung (LF 3): Ein neuer Datenbankserver wird in ein Netzwerk integriert. Als IP-Adressen werden vorgeschlagen: 192.168.10.0/24, 192.168.10.200/24 und 127.0.0.1/8.\n\nBeurteile die Eignung dieser drei IP-Adressen für den Datenbankserver.",
@@ -1255,6 +1362,7 @@ const staticQuestions = [
     },
     {
         id: 108,
+        isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
         question: "Prüfungsaufgabe Netzwerktechnik (LF 3): Erkläre das Einsatzszenario sowie die Funktionsweise und Einschränkungen des Übergangsverfahrens DS-Lite (Dual Stack Lite) laut deinen Unterlagen.",
@@ -1266,6 +1374,7 @@ const staticQuestions = [
     },
     {
         id: 109,
+        isBawueFocus: true,
         theme: "lf2",
         type: "open-text",
         question: "Prüfungsaufgabe Hardware (LF 2): Beschreibe die drei Schritte beim Einbau einer CPU und erkläre den physikalischen Grund für die Verwendung von Wärmeleitpaste (Wärmeleitmedium) laut deinen Unterlagen.",
@@ -1276,6 +1385,7 @@ const staticQuestions = [
     },
     {
         id: 110,
+        isBawueFocus: true,
         theme: "lf2",
         type: "open-text",
         question: "Prüfungsaufgabe Hardware (LF 2): Berechne die maximale Datenübertragungsrate (Bandbreite) eines DDR4-3200 Moduls in MB/s und gib die offizielle PC-Modulbezeichnung an. Erkläre zudem kurz den Unterschied zwischen symmetrischem und asymmetrischem Dual-Channel-Modus.",
@@ -1286,6 +1396,7 @@ const staticQuestions = [
     },
     {
         id: 111,
+        isBawueFocus: true,
         theme: "lf2",
         type: "open-text",
         question: "Prüfungsaufgabe Hardware (LF 2): Vergleiche die Speichertechnologien NAS (Network Attached Storage) und SAN (Storage Area Network) bezüglich ihres Zugriffskonzepts (dateibasiert vs. blockbasiert), der typischen Netzwerk-Protokolle und des Einsatzzwecks.",
@@ -1296,6 +1407,7 @@ const staticQuestions = [
     },
     {
         id: 112,
+        isBawueFocus: true,
         theme: "lf2",
         type: "open-text",
         question: "Prüfungsaufgabe Speicherberechnung (LF 2): Erläutere den Unterschied zwischen den Dezimal-Präfixen (SI-Einheiten wie KB, MB, GB) und den Binär-Präfixen (IEC-Einheiten wie KiB, MiB, GiB) bezüglich ihres Umrechnungsfaktors und nenne jeweils einen typischen Praxis-Kontext.",
@@ -1306,6 +1418,7 @@ const staticQuestions = [
     },
     {
         id: 113,
+        isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
         question: "Prüfungsaufgabe OSI-Modell (LF 3): Nenne die zwei Hauptgruppen (zusammengefasste Schichten), in die das OSI-Referenzmodell gegliedert wird, und ordne die 7 Schichten diesen Gruppen zu.",
@@ -1316,6 +1429,7 @@ const staticQuestions = [
     },
     {
         id: 114,
+        isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
         question: "Prüfungsaufgabe Netzwerkprotokolle (LF 3): Ordne die vier Protokolle TCP, IP, UDP und IPsec den entsprechenden Schichten (Layer 1 bis 7) des OSI-Referenzmodells zu.",
@@ -1327,6 +1441,7 @@ const staticQuestions = [
     },
     {
         id: 115,
+        isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
         question: "Prüfungsaufgabe Netzwerkgeräte (LF 3): Erkläre die Funktion eines Access Points (AP) im Netzwerk laut deinen Unterlagen.",
@@ -1337,6 +1452,7 @@ const staticQuestions = [
     },
     {
         id: 116,
+        isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
         question: "Prüfungsaufgabe WLAN-Sicherheit (LF 3): Nenne 6 Möglichkeiten, mit denen ein drahtloses Netzwerk (WLAN) abgesichert und geschützt werden kann.",
@@ -1348,6 +1464,7 @@ const staticQuestions = [
     },
     {
         id: 117,
+        isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
         question: "Prüfungsaufgabe WLAN-Verschlüsselung (LF 3): Erläutere die wesentlichen Verbesserungen von WPA3 gegenüber dem älteren WPA2-Standard (insbesondere bezüglich SAE und Angriffsschutz) laut deinen Unterlagen.",
@@ -1358,6 +1475,7 @@ const staticQuestions = [
     },
     {
         id: 118,
+        isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
         question: "Prüfungsaufgabe Subnetting (LF 3): Der IP-Adressbereich 192.168.164.0 bis 192.168.164.255 soll in 4 gleichgroße Subnetze geteilt werden. Benenne das erste und dritte Netz, nenne die Subnetzmaske und berechne die maximale Hostanzahl pro Subnetz mit Rechenweg.",
@@ -1368,6 +1486,7 @@ const staticQuestions = [
     },
     {
         id: 119,
+        isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
         question: "Prüfungsaufgabe Netzwerktechnik (LF 3): Beschreibe das Konzept der Strukturierten Verkabelung (nach DIN EN 50173) und nenne die drei Verkabelungsbereiche mit den typischen Kabelmedien und den dazugehörigen Verteilern laut deinen Unterlagen.",
@@ -1382,6 +1501,7 @@ const staticQuestions = [
     },
     {
         id: 120,
+        isBawueFocus: true,
         theme: "lf3",
         type: "multiple-choice",
         question: "Prüfungsaufgabe Netzwerktechnik (LF 3): Welches Kabelmedium wird im Primärbereich (Flächenverkabelung zwischen Gebäuden) der strukturierten Verkabelung bevorzugt eingesetzt und warum?",
@@ -1398,6 +1518,7 @@ const staticQuestions = [
     },
     {
         id: 121,
+        isBawueFocus: true,
         theme: "lf2",
         type: "open-text",
         question: "Prüfungsaufgabe Künstliche Intelligenz (LF 2): Erkläre die Begriffe Künstliche Intelligenz (KI), Machine Learning (ML) und Deep Learning (DL) und beschreibe, wie sie hierarchisch ineinander eingeordnet sind.",
@@ -1409,6 +1530,7 @@ const staticQuestions = [
     },
     {
         id: 122,
+        isBawueFocus: true,
         theme: "lf1",
         type: "open-text",
         question: "Prüfungsaufgabe EU-KI-Verordnung (LF 1): Was ist das Hauptziel der EU-KI-Verordnung (EU AI Act) und welche Risikoklassen werden darin unterschieden? Nenne zu jeder Klasse ein Beispiel.",
@@ -1419,6 +1541,7 @@ const staticQuestions = [
     },
     {
         id: 123,
+        isBawueFocus: true,
         theme: "lf1",
         type: "open-text",
         question: "Prüfungsaufgabe EU-KI-Verordnung (LF 1): Definiere den Begriff 'Akteur' im Kontext der EU-KI-Verordnung, nenne drei Beispiele für Akteure und erkläre das Kürzel 'GPAI'.",
@@ -1429,6 +1552,7 @@ const staticQuestions = [
     },
     {
         id: 124,
+        isBawueFocus: true,
         theme: "lf2",
         type: "open-text",
         question: "Prüfungsaufgabe Cloud Computing (LF 2): Beschreibe die Nutzungsmodelle Private Cloud und Public Cloud, nenne den Vorteil der Skalierung von Ressourcen in Cloud-Systemen gegenüber dem eigenen Rechenzentrum und nenne ein Datenschutzproblem.",
@@ -1440,6 +1564,7 @@ const staticQuestions = [
     },
     {
         id: 125,
+        isBawueFocus: true,
         theme: "lf2",
         type: "open-text",
         question: "Prüfungsaufgabe Cloud Computing (LF 2): Erläutere die drei Cloud-Service-Modelle IaaS, PaaS und SaaS und erkläre, inwiefern durch Cloud-Auslagerung Zeiteinsparung, Skalierbarkeit und Kostenreduktion erzielt werden können.",
@@ -1450,6 +1575,7 @@ const staticQuestions = [
     },
     {
         id: 126,
+        isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
         question: "Prüfungsaufgabe VPN & VLAN (LF 3): Ein VPN verbindet vier Unternehmensstandorte über IPsec. Nenne den VPN-Verbindungstyp sowie den verwendeten IPsec-Modus. Berechne zudem die maximale Anzahl an VLANs in einem Netzwerk auf Basis des IEEE 802.1Q Standard-Tags.",
@@ -1461,6 +1587,7 @@ const staticQuestions = [
     },
     {
         id: 127,
+        isBawueFocus: true,
         theme: "lf4",
         type: "open-text",
         question: "Prüfungsaufgabe Datensicherung (LF 4): Vergleiche die Vollsicherung mit der differenziellen Sicherung. Erläutere zudem das Backupverfahren 'Klonen' unter Berücksichtigung des benötigten Speichervolumens und den Auswirkungen auf das Archivbit.",
@@ -1472,6 +1599,7 @@ const staticQuestions = [
     },
     {
         id: 128,
+        isBawueFocus: true,
         theme: "lf4",
         type: "open-text",
         question: "Prüfungsaufgabe Archivierung (LF 4): Erläutere die Anforderungen an eine 'revisionssichere Archivierung' und nenne zwei wesentliche Vorteile des Einsatzes von LTO-Magnetbändern mit dem 'Linear Tape File System' (LTFS) laut deinen Unterlagen.",
@@ -1482,6 +1610,7 @@ const staticQuestions = [
     },
     {
         id: 129,
+        isBawueFocus: true,
         theme: "lf5",
         type: "open-text",
         question: "Prüfungsaufgabe Datenbanken (LF 5): Nenne vier wesentliche Funktionen eines Datenbank-Management-Systems (DBMS) laut deinen Unterlagen.",
@@ -1492,6 +1621,7 @@ const staticQuestions = [
     },
     {
         id: 130,
+        isBawueFocus: true,
         theme: "lf5",
         type: "open-text",
         question: "Prüfungsaufgabe Datenbanken (LF 5): Nenne zwei Vorteile und zwei Nachteile einer relationalen Datenbank gegenüber anderen Datenhaltungssystemen (wie NoSQL-Datenbanken) laut deinen Unterlagen.",
@@ -1502,6 +1632,7 @@ const staticQuestions = [
     },
     {
         id: 131,
+        isBawueFocus: true,
         theme: "lf5",
         type: "open-text",
         question: "Prüfungsaufgabe SQL (LF 5): Erläutere den Unterschied zwischen den SQL-Kategorien DDL (Data Definition Language) und DML (Data Manipulation Language) und nenne zu jeder Kategorie drei typische Befehle.",
@@ -1512,6 +1643,7 @@ const staticQuestions = [
     },
     {
         id: 132,
+        isBawueFocus: true,
         theme: "lf2",
         type: "open-text",
         question: "Prüfungsaufgabe IT-Systeme (LF 2): Erläutere die Funktion und den Einsatzzweck der folgenden drei IT-Komponenten: Core-Switch, Domain Controller (DC) und Demilitarisierte Zone (DMZ).",
@@ -1523,6 +1655,7 @@ const staticQuestions = [
     },
     {
         id: 133,
+        isBawueFocus: true,
         theme: "lf4",
         type: "open-text",
         question: "Prüfungsaufgabe IT-Sicherheit (LF 4): Erläutere die drei klassischen Schutzziele der Informationssicherheit (CIA-Triade): Vertraulichkeit, Integrität und Verfügbarkeit.",
@@ -1534,6 +1667,7 @@ const staticQuestions = [
     },
     {
         id: 134,
+        isBawueFocus: true,
         theme: "lf2",
         type: "open-text",
         question: "Prüfungsaufgabe Hardware (LF 2): Nenne die Bezeichnungen für die Grafikschnittstellen VGA, DVI, HDMI und DisplayPort und vergleiche kurz ihre Signalübertragungsarten (analog vs. digital) sowie Audiofähigkeiten.",
@@ -1545,6 +1679,7 @@ const staticQuestions = [
     },
     {
         id: 135,
+        isBawueFocus: true,
         theme: "lf6",
         type: "open-text",
         question: "Prüfungsaufgabe Wirtschaftlichkeit (LF 6): Für eine IT-Anschaffung über 240.000 EUR wird ein Ratendarlehen mit 5% p.a. Zinsen auf 4 Jahre bei jährlicher Tilgungsrate (60.000 EUR Tilgung pro Jahr) mit einem Leasingangebot (monatlich 6.000 EUR, Laufzeit 4 Jahre, Restwertübernahme 16.000 EUR) verglichen. Ermittle rechnerisch die Gesamtkosten beider Alternativen und gib an, welche wirtschaftlicher ist.",
@@ -1555,6 +1690,7 @@ const staticQuestions = [
     },
     {
         id: 136,
+        isBawueFocus: true,
         theme: "lf1",
         type: "multiple-choice",
         question: "Prüfungsaufgabe Rechtsformen (LF 1): Welche Aussage zur Haftung bei einer GmbH und einer Offenen Handelsgesellschaft (OHG) laut deinem Westermann-Buch ist korrekt?",
@@ -1571,6 +1707,7 @@ const staticQuestions = [
     },
     {
         id: 137,
+        isBawueFocus: true,
         theme: "lf1",
         type: "open-text",
         question: "Prüfungsaufgabe Betriebsorganisation (LF 1): Nenne den Unterschied zwischen einem Einliniensystem und einem Stabliniensystem laut deiner Westermann-Lernfelder und erläutere den Begriff 'Stabsstelle' anhand eines Beispiels.",
@@ -1581,6 +1718,7 @@ const staticQuestions = [
     },
     {
         id: 138,
+        isBawueFocus: true,
         theme: "lf1",
         type: "multiple-choice",
         question: "Prüfungsaufgabe Marktformen (LF 1): Welcher Marktform entspricht eine Situation, in der es viele Nachfrager (Kunden), aber nur sehr wenige Anbieter (Unternehmen) gibt (z. B. auf dem deutschen Mobilfunkmarkt) laut deinem Westermann-Lehrbuch?",
@@ -1598,6 +1736,7 @@ const staticQuestions = [
     },
     {
         id: 139,
+        isBawueFocus: true,
         theme: "lf1",
         type: "open-text",
         question: "Prüfungsaufgabe Ausbildung (LF 1): Nenne drei wesentliche gesetzliche Pflichten des Ausbildenden (Betriebs) gegenüber dem Auszubildenden laut Berufsbildungsgesetz (BBiG).",
@@ -1607,6 +1746,7 @@ const staticQuestions = [
     },
     {
         id: 140,
+        isBawueFocus: true,
         theme: "lf1",
         type: "multiple-choice",
         question: "Prüfungsaufgabe Mitbestimmung (LF 1): Ab welcher Mitarbeiterzahl kann in einem Betrieb ein Betriebsrat nach dem Betriebsverfassungsgesetz (BetrVG) gewählt werden laut deinem Westermann-Lehrbuch?",
@@ -1623,6 +1763,7 @@ const staticQuestions = [
     },
     {
         id: 141,
+        isBawueFocus: true,
         theme: "lf3",
         type: "multiple-choice",
         question: "Prüfungsaufgabe VPN-Protokolle (LF 3): Welche Aussage bezüglich der beiden IPsec-Subprotokolle AH (Authentication Header) und ESP (Encapsulating Security Payload) ist für die IHK-Prüfung korrekt?",
@@ -1640,6 +1781,7 @@ const staticQuestions = [
     },
     {
         id: 142,
+        isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
         question: "Prüfungsaufgabe NAT & PAT (LF 3): Erkläre den Sinn und Zweck von Network Address Translation (NAT) und unterscheide kurz die drei Varianten: statisches NAT, dynamisches NAT und Port Address Translation (PAT) / Masquerading.",
@@ -1651,6 +1793,7 @@ const staticQuestions = [
     },
     {
         id: 143,
+        isBawueFocus: true,
         theme: "lf3",
         type: "multiple-choice",
         question: "Prüfungsaufgabe Speichersysteme (LF 3): Welcher grundlegende Unterschied besteht bezüglich des Datenzugriffsverfahrens und der verwendeten Protokolle zwischen einem NAS (Network Attached Storage) und einem SAN (Storage Area Network)?",
@@ -1667,6 +1810,7 @@ const staticQuestions = [
     },
     {
         id: 144,
+        isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
         question: "Prüfungsaufgabe SAN (LF 3): Nenne drei wesentliche Vorteile eines SAN (Storage Area Network) gegenüber lokalen Einzelspeichern (Direct Attached Storage / DAS) sowie die zwei am Markt verbreiteten Haupt-Übertragungstechnologien.",
@@ -1684,6 +1828,7 @@ Haupt-Technologien:
     },
     {
         id: 145,
+        isBawueFocus: true,
         theme: "lf3",
         type: "multiple-choice",
         question: "Prüfungsaufgabe Netzwerkdiagnose (LF 3): Welches Kommandozeilen-Tool wird zur Abfrage von Nameservern verwendet und wie lautet die exakte Syntax in der Windows-Eingabeaufforderung, um ein Reverse Lookup für die IP-Adresse 8.8.8.8 durchzuführen?",
@@ -1702,6 +1847,7 @@ Haupt-Technologien:
     },
     {
         id: 146,
+        isBawueFocus: true,
         theme: "lf2",
         type: "open-text",
         question: "Prüfungsaufgabe USV (LF 2): Erläutere die drei Klassen von unterbrechungsfreien Stromversorgungen (USV) nach der Norm DIN EN 62040-3 (VFD, VI und VFI) bezüglich ihrer Funktionsweise und Umschaltzeiten bei einem Netzausfall.",
@@ -1725,6 +1871,7 @@ Haupt-Technologien:
     },
     {
         id: 147,
+        isBawueFocus: true,
         theme: "lf4",
         type: "open-text",
         question: "Prüfungsaufgabe IT-Sicherheit (LF 4): Erläutere kurz die Funktionsweise und Gefahren der folgenden fünf Bedrohungen: Trojaner, Ransomware, Phishing, DDoS-Angriff und Brute-Force-Angriff.",
@@ -1740,6 +1887,7 @@ Haupt-Technologien:
     },
     {
         id: 148,
+        isBawueFocus: true,
         theme: "lf2",
         type: "open-text",
         question: "Prüfungsaufgabe Virtualisierung (LF 2): Nenne jeweils zwei Vorteile der Servervirtualisierung sowie der Anwendungsvirtualisierung und erläutere kurz den Begriff 'Disaster Recovery' in diesem Kontext.",
@@ -1762,6 +1910,7 @@ Disaster Recovery:
     },
     {
         id: 149,
+        isBawueFocus: true,
         theme: "lf2",
         type: "open-text",
         question: "Prüfungsaufgabe Speicherplatzberechnung Video (LF 2): Für eine Marketingkampagne soll ein unkomprimiertes 4K-Werbevideo auf dem Server abgelegt werden. Das Video hat folgende Eigenschaften: Auflösung 3840 x 2160 Pixel, Farbtiefe 24 Bit, Dauer 6 Minuten, Bildfrequenz 60 FPS. Berechne den benötigten Speicherbedarf in vollen GiB (Gibibyte). Der Rechenweg ist anzugeben.",
@@ -1787,6 +1936,7 @@ Der benötigte Speicherplatz beträgt ca. 500,56 GiB (bzw. 501 volle GiB).`,
     },
     {
         id: 150,
+        isBawueFocus: true,
         theme: "lf2",
         type: "open-text",
         question: "Prüfungsaufgabe Speicherplatzberechnung Kamera (LF 2): Eine Überwachungskamera im Serverraum speichert jede Minute genau ein Standbild. Jedes Bild hat das Format 800 x 600 Pixel, eine Farbtiefe von 32 Bit und wird mit einem Kompressionsfaktor von 1:10 (Faktor 0,1) abgesichert. Berechne die Anzahl der Bilder pro Woche und den dafür erforderlichen Speicherplatz in vollen GiB (Gibibyte).",
@@ -1810,6 +1960,7 @@ Es werden wöchentlich 10.080 Bilder gespeichert. Der Speicherbedarf beträgt ca
     },
     {
         id: 151,
+        isBawueFocus: true,
         theme: "lf5",
         type: "open-text",
         question: "Prüfungsaufgabe UML-Beziehungen (LF 5): Erläutere den Unterschied zwischen den UML-Klassendiagramm-Beziehungen Assoziation, Aggregation und Komposition und nenne jeweils das grafische Verbindungselement/Symbol laut Standard.",
@@ -1829,6 +1980,7 @@ Es werden wöchentlich 10.080 Bilder gespeichert. Der Speicherbedarf beträgt ca
     },
     {
         id: 152,
+        isBawueFocus: true,
         theme: "lf2",
         type: "open-text",
         question: "Prüfungsaufgabe RAID-Kapazitätsberechnung (LF 2): Ein Server soll mit vier baugleichen Festplatten mit jeweils 6 TB Speicherkapazität ausgestattet werden. Berechne die jeweils nutzbare Netto-Speicherkapazität des Verbunds für die folgenden RAID-Konfigurationen: RAID 0, RAID 1, RAID 5 und RAID 10. Der Rechenweg ist stichwortartig anzugeben.",
@@ -1856,6 +2008,7 @@ Es werden wöchentlich 10.080 Bilder gespeichert. Der Speicherbedarf beträgt ca
     },
     {
         id: 153,
+        isBawueFocus: true,
         theme: "lf5",
         type: "open-text",
         question: "Prüfungsaufgabe Softwaretest (LF 5): Erläutere die beiden Blackbox-Testverfahren Äquivalenzklassenbildung und Grenzwertanalyse und beschreibe ihre Anwendung anhand einer Eingabe, die Ganzzahlen von 1 bis 100 akzeptiert.",
@@ -1878,6 +2031,7 @@ Es werden wöchentlich 10.080 Bilder gespeichert. Der Speicherbedarf beträgt ca
     },
     {
         id: 154,
+        isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
         question: "Prüfungsaufgabe Netzwerkdiagnose (LF 3): Erkläre die genaue Funktionsweise sowie das jeweils genutzte Protokoll der beiden Windows-Befehle 'ping' und 'tracert' (Traceroute).",
@@ -1896,6 +2050,7 @@ Es werden wöchentlich 10.080 Bilder gespeichert. Der Speicherbedarf beträgt ca
     },
     {
         id: 155,
+        isBawueFocus: true,
         theme: "lf6",
         type: "open-text",
         question: "Prüfungsaufgabe Handelskalkulation (LF 6): Ein IT-Systemhaus kauft Hardware-Komponenten für einen Listeneinkaufspreis von 2.000 EUR. Berechne den Einstandspreis (Bezugspreis) anhand der folgenden Konditionen: Lieferantenrabatt 10 %, Lieferantenskonto 2 %, Bezugskosten (Transport und Verpackung) 50 EUR. Der Rechenweg ist anzugeben.",
@@ -1916,6 +2071,7 @@ Ergebnis: Der Einstandspreis beträgt 1.814,00 EUR.`,
     },
     {
         id: 156,
+        isBawueFocus: true,
         theme: "lf6",
         type: "open-text",
         question: "Prüfungsaufgabe Verzugszinsen (LF 6): Ein Kunde bezahlt eine fällige Rechnung über 12.000 EUR brutto mit einer Verspätung von 45 Tagen. Berechne die Verzugszinsen, die der Verkäufer dem Kunden für diesen Zeitraum in Rechnung stellen darf. Der Zinssatz beträgt 9 % p.a. (Rechne mit der deutschen Zinsmethode: 30 Tage pro Monat, 360 Tage pro Jahr). Der Rechenweg ist anzugeben.",
@@ -1939,6 +2095,7 @@ Ergebnis: Der Verkäufer darf dem Kunden für die 45 Tage Verzug 135,00 EUR Verz
     },
     {
         id: 157,
+        isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
         question: "Prüfungsaufgabe Netzwerkverkabelung (Sommer 2025 / LF 3): Für die strukturierte Verkabelung eines Kraftwerks wird im Primärbereich (Außenbereich) ein Single-Mode-Glasfaserkabel gewählt. Begründe, welche Kabelmedien im Sekundärbereich (Gebäude-Steigbereich) und im Tertiärbereich (Etagenverkabelung) verwendet werden können.",
@@ -1951,6 +2108,7 @@ Ergebnis: Der Verkäufer darf dem Kunden für die 45 Tage Verzug 135,00 EUR Verz
     },
     {
         id: 158,
+        isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
         question: "Prüfungsaufgabe IPv6-Adressierung (Sommer 2025 / LF 3): In einem Subnetz mit dem Präfix '2001:db8::/64' sind bereits folgende Geräte im Netzplan konfiguriert:\n- Router: 2001:db8::1\n- DHCP-Server: 2001:db8::2\n- Laptop 1: 2001:db8::3\n- Laptop 2: 2001:db8::4\n- PC 1: 2001:db8::5\n- PC 2: 2001:db8::6\n\nAls Global Unicast Address (GUA) wird einem neu angeschlossenen Computer die nächste freie (fortlaufende) IP-Adresse zugewiesen. Ermittle diese Adresse und gib sie vollständig gekürzt an.",
@@ -1966,6 +2124,7 @@ Erklärung:
     },
     {
         id: 159,
+        isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
         question: "Prüfungsaufgabe IPv4-Hostberechnung & Router-Konfiguration (Sommer 2025 / LF 3):\n1. Berechne die maximale Anzahl an verfügbaren (nutzbaren) Host-IP-Adressen in einem IPv4-Netzwerk mit dem IP-Bereich 172.16.0.0/16.\n2. Die letzte nutzbare Hostadresse dieses Netzwerks soll für das Standard-Gateway des Routers reserviert werden. Nenne diese IP-Adresse und die zugehörige Subnetzmaske.",
@@ -1985,6 +2144,7 @@ Erklärung:
     },
     {
         id: 160,
+        isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
         question: "Prüfungsaufgabe WLAN-Technik (Sommer 2025 / LF 3): Für das WLAN sollen Access-Points nach dem Standard IEEE 802.11ax installiert werden, die das neue 6-GHz-Frequenzband nutzen. Nenne 3 wesentliche Vorteile des neuen 6-GHz-Bands gegenüber dem klassischen 2,4-GHz-Frequenzband.",
@@ -1998,6 +2158,7 @@ Erklärung:
     },
     {
         id: 161,
+        isBawueFocus: true,
         theme: "lf4",
         type: "open-text",
         question: "Prüfungsaufgabe IT-Sicherheit Phishing-Erkennung (Sommer 2025 / LF 4): Ein Mitarbeiter erhält eine E-Mail mit dem Betreff 'WICHTIG! Konto gesperrt' von 'krusty@sparkasse.de' mit einer unpersönlichen Anrede ('Sehr geehrte Damen und Herren') und der Aufforderung, sein Konto über einen Link freizuschalten. Nenne 3 typische Merkmale dieser E-Mail, an denen man Phishing erkennen kann.",
@@ -2011,6 +2172,7 @@ Erklärung:
     },
     {
         id: 162,
+        isBawueFocus: true,
         theme: "lf4",
         type: "open-text",
         question: "Prüfungsaufgabe Passwortsicherheit & 2FA (Sommer 2025 / LF 4):\n1. Beurteile das Sicherheitsrisiko, wenn ein Mitarbeiter dasselbe Passwort für alle Online-Anwendungen verwendet.\n2. Nenne den Hauptvorteil eines Passwortmanagers.\n3. Erkläre das grundlegende Funktionsprinzip einer Zwei-Faktor-Authentisierung (2FA).",
@@ -2032,6 +2194,7 @@ Erklärung:
     },
     {
         id: 163,
+        isBawueFocus: true,
         theme: "lf4",
         type: "open-text",
         question: "Prüfungsaufgabe IT-Schutzziele (Sommer 2025 / LF 4): Angreifer erlangen unerlaubten Zugriff auf das Urlaubsplanungstool eines Unternehmens und manipulieren die Urlaubsanträge der Mitarbeiter. Begründe für jedes der drei klassischen IT-Schutzziele (Vertraulichkeit, Integrität, Verfügbarkeit), ob es in diesem Szenario verletzt wurde.",
@@ -2045,6 +2208,7 @@ Erklärung:
     },
     {
         id: 164,
+        isBawueFocus: true,
         theme: "lf6",
         type: "open-text",
         question: "Prüfungsaufgabe Beschaffung & Service-Level-Agreement (Sommer 2025 / LF 6):\n1. Entsteht durch das Absenden einer schriftlichen Anfrage zur Beschaffung von IT-Systemen eine rechtliche Verpflichtung für den Absender?\n2. Erkläre den Begriff 'Service-Level-Agreement' (SLA) und nenne ein typisches Beispiel für dessen Inhalt.",
@@ -2059,6 +2223,7 @@ Erklärung:
     },
     {
         id: 165,
+        isBawueFocus: true,
         theme: "lf5",
         type: "open-text",
         question: "Prüfungsaufgabe SQL & Datenbanken (Sommer 2025 / LF 5): Gegeben ist das Relationenmodell:\nMitarbeiter (mID, vorname, name, strasse, stadt)\nFormuliere die entsprechenden SQL-Befehle für die folgenden Aktionen:\n1. Erstelle die Tabelle 'Mitarbeiter' (mID ist Ganzzahl und Primärschlüssel, die restlichen Felder sind Textfelder bis 100 Zeichen).\n2. Zeige alle Mitarbeiterdaten sortiert nach dem Attribut 'name' (alphabetisch aufsteigend) an.\n3. Ermittle die Anzahl der Mitarbeiter, die aus der Stadt 'Mannheim' kommen.",
@@ -2089,6 +2254,7 @@ SELECT COUNT(*) FROM Mitarbeiter WHERE stadt = 'Mannheim';
     },
     {
         id: 166,
+        isBawueFocus: true,
         theme: "lf6",
         type: "open-text",
         question: "Prüfungsaufgabe Angebotsvergleich (Sommer 2025 / LF 6): Ein Händler möchte für sein Unternehmen genau einen PC HP-GIGA-4711 beschaffen. Es liegen drei Angebote vor:\n- Angebot 1 (BH GmbH): Stückpreis 390 EUR, ab Werk, Lieferkosten 30 EUR. Neukundenrabatt 10 %, Skonto 3 % bei Zahlung innerhalb von 10 Tagen.\n- Angebot 2 (CBS KG): Stückpreis 320 EUR, ab Werk, Lieferkosten 40 EUR. Rabatt 5 %, Skonto 2 % bei Zahlung innerhalb von 14 Tagen.\n- Angebot 3 (Lhanding Plus Ltd.): Stückpreis 190 EUR, frei Haus, Frachtkosten pauschal 200 EUR pro Sendung. 10 % Rabatt bei Abnahme von mindestens 5 Stück, Skonto 3 % bei Zahlung innerhalb von 10 Tagen.\n\nFühre eine quantitative Bezugskalkulation (für 1 Stück) durch, ermittle den Einstandspreis (Bezugspreis) für alle drei Angebote und entscheide dich für das wirtschaftlichste Angebot. Der Rechenweg ist anzugeben.",
@@ -2127,6 +2293,7 @@ Das Angebot der CBS KG ist mit einem Einstandspreis von 337,92 EUR das wirtschaf
     },
     {
         id: 167,
+        isBawueFocus: true,
         theme: "lf5",
         type: "open-text",
         question: "Prüfungsaufgabe XML-Fehlerkorrektur (Sommer 2025 / LF 5): Finde und korrigiere die vier Syntaxfehler in der folgenden XML-Datei, damit sie fehlerfrei eingelesen werden kann:\n\n\`\`\`xml\n<mitarbeiter>\n  <name>Simpson</name>\n  <vorname>Herbert<vorname>\n  <adresse>\n    <strasse>Immergrünstr.742</straße>\n    <stadt>sprungfeld\n  </adresse>\n  <abteilung>Sicherheit</abteilung>\n  <urlaubsanträge>\n    <urlaubsantrag>\n      <antragsnr>1</antragsnr>\n      <startdatum>1.2.2024</startdatum>\n      <enddatum>15.2.2024</enddatum>\n    </urlaubsanträge>\n    </urlaubsantrag>\n</mitarbeiter>\n\`\`\`",
@@ -2156,6 +2323,7 @@ Das Angebot der CBS KG ist mit einem Einstandspreis von 337,92 EUR das wirtschaf
     },
     {
         id: 168,
+        isBawueFocus: true,
         theme: "lf5",
         type: "open-text",
         question: "Prüfungsaufgabe Struktogramm-Implementierung (Sommer 2025 / LF 5): Setze das Struktogramm zur Urlaubsverwaltung in lauffähigen JavaScript-Code um. Das Struktogramm besitzt folgende Logik:\n- Initialisierung: anzUrlaubstage = 29\n- Wiederholung solange: anzUrlaubstage > 0\n  * Ausgabe: 'Sie haben noch ' + anzUrlaubstage + ' Tage Urlaub.'\n  * Ausgabe: 'Wieviele Tage Urlaub möchten Sie nehmen?'\n  * Eingabe: tage\n  * Verzweigung (IF): anzUrlaubstage - tage >= 0\n    - JA (Wahr): Ausgabe: 'Urlaub genehmigt.' und anzUrlaubstage um tage vermindern\n    - NEIN (Falsch): Ausgabe: 'Urlaub nicht genehmigt.'\n- Nach der Schleife (außerhalb): Ausgabe: 'Urlaub aufgebraucht.'",
@@ -2181,6 +2349,7 @@ console.log("Urlaub aufgebraucht.");
     },
     {
         id: 169,
+        isBawueFocus: true,
         theme: "lf6",
         type: "open-text",
         question: "Prüfungsaufgabe Beschaffung (Sommer 2024 / LF 6): Ein Unternehmen möchte für ein neues Projekt Hardware beschaffen und sucht nach geeigneten Lieferanten. Nenne jeweils 2 interne und 2 externe Bezugsquellen, die das Unternehmen für die Lieferantensuche nutzen kann.",
@@ -2199,6 +2368,7 @@ console.log("Urlaub aufgebraucht.");
     },
     {
         id: 170,
+        isBawueFocus: true,
         theme: "lf6",
         type: "open-text",
         question: "Prüfungsaufgabe Wareneingangsprüfung (Sommer 2024 / LF 6): Zwei Wochen nach der Bestellung wird das Videoüberwachungssystem geliefert. Erläutere 4 wesentliche Arbeitsschritte, die bei einer ordnungsgemäßen Wareneingangsprüfung durchgeführt werden müssen.",
@@ -2211,6 +2381,7 @@ console.log("Urlaub aufgebraucht.");
     },
     {
         id: 171,
+        isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
         question: "Prüfungsaufgabe Netzwerktechnik (Sommer 2024 / LF 3): Die Geschäftsleitung möchte vom Homeoffice aus direkt auf das neu installierte Videoüberwachungssystem mit der privaten IP-Adresse '192.168.0.33' zugreifen. Begründe ausführlich, warum dieser direkte Zugriff aus dem Internet technisch nicht möglich ist.",
@@ -2224,6 +2395,7 @@ console.log("Urlaub aufgebraucht.");
     },
     {
         id: 172,
+        isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
         question: "Prüfungsaufgabe Subnetz-Routbarkeit (Sommer 2024 / LF 3): In einem Firmennetzwerk mit dem IP-Adressbereich 192.168.0.0/24 werden neue Kameras mit den IP-Adressen 192.168.1.33 bis 192.168.9.33 angeschlossen. Die Clients im Netz (192.168.0.50 bis 192.168.0.200) können diese Kameras nicht erreichen. Begründe, warum die Kommunikation ohne weitere Maßnahmen fehlschlägt.",
@@ -2236,6 +2408,7 @@ console.log("Urlaub aufgebraucht.");
     },
     {
         id: 173,
+        isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
         question: "Prüfungsaufgabe Gateway-Konfiguration (Sommer 2024 / LF 3): Ein Client im Firmennetzwerk kommt nicht ins Internet. Laut Netzplan lautet die IP des Routers 192.168.0.254, die IP des Testservers lautet 192.168.0.1. Die manuelle Client-Konfiguration zeigt:\n- IPv4-Adresse: 192.168.0.51\n- Subnetzmaske: 255.255.255.0\n- Standardgateway: 192.168.0.1\n- DNS-Server: 192.168.0.254\n\nErkläre den Konfigurationsfehler und seine konkrete Auswirkung.",
@@ -2249,6 +2422,7 @@ Auswirkung:
     },
     {
         id: 174,
+        isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
         question: "Prüfungsaufgabe IPv6-Adresstypen (Sommer 2024 / LF 3): In der Konfiguration eines Netzwerkadapters befinden sich zwei IPv6-Adressen:\n1. fe80::868c:6a65:bb44:b228\n2. 2001:db8:1234:55::a/64\n\nBenenne die beiden IPv6-Adresstypen und beschreibe kurz ihren jeweiligen Verwendungszweck.",
@@ -2263,6 +2437,7 @@ Auswirkung:
     },
     {
         id: 175,
+        isBawueFocus: true,
         theme: "lf4",
         type: "open-text",
         question: "Prüfungsaufgabe Datenschutz & Videoüberwachung (Sommer 2024 / LF 4): Ein Händler richtet an seinem Ladenlokal eine Videokamera ein, die auch einen Teil des öffentlichen Bürgersteigs erfasst. Erkläre die datenschutzrechtliche Zulässigkeit dieses Vorhabens laut DSGVO/BDSG und nenne die erforderliche Maßnahme.",
@@ -2277,6 +2452,7 @@ Erforderliche Maßnahme:
     },
     {
         id: 176,
+        isBawueFocus: true,
         theme: "lf5",
         type: "open-text",
         question: "Prüfungsaufgabe SQL & Datenbanken (Sommer 2024 / LF 5): Gegeben ist das Relationenmodell:\nimages (filename, filesize, timestamp)\nFormuliere die entsprechenden SQL-Befehle für die folgenden Aktionen:\n1. Lösche den Datenbankeintrag für die Bilddatei mit dem Namen 'testbild.jpg'.\n2. Bestimme die Gesamtgröße (Summe) aller Bilddateien, die in der Tabelle erfasst sind.\n3. Füge einen neuen Datenbankeintrag für die Bilddatei mit dem Namen 'testbild.jpg', der Größe 117000 Byte und dem Zeitstempel 1667292685 hinzu.",
@@ -2302,6 +2478,7 @@ VALUES ('testbild.jpg', 117000, 1667292685);
     },
     {
         id: 177,
+        isBawueFocus: true,
         theme: "lf5",
         type: "open-text",
         question: "Prüfungsaufgabe Programmierung (Sommer 2024 / LF 5): Erstelle eine Funktion 'deleteOldFiles()' in JavaScript, die so lange lückenlos die jeweils älteste Bilddatei löscht, bis die Gesamtgröße der verbleibenden Dateien unter 1 GB (1.000.000.000 Byte) liegt. Nutze hierzu folgende Hilfsfunktionen:\n- getTotalFileSize(): Gibt die Gesamtgröße aller Bilddateien in Byte zurück.\n- getFileNameByNumber(0): Gibt den Dateinamen der ältesten Datei zurück.\n- deleteFileByName(filename): Löscht die Datei mit dem übergebenen Dateinamen.",
@@ -2323,6 +2500,7 @@ function deleteOldFiles() {
     },
     {
         id: 178,
+        isBawueFocus: true,
         theme: "lf4",
         type: "open-text",
         question: "Prüfungsaufgabe Schutzbedarfsanalyse (Sommer 2024 / LF 4): Bestimme und begründe den Schutzbedarf für die Videodaten einer Filial-Videoüberwachung bezüglich der drei Schutzziele:\n1. Vertraulichkeit (Klassifizierung: Vertraulich oder Intern)\n2. Integrität (Klassifizierung: Erhöhte oder Normale Anforderungen)\n3. Verfügbarkeit (Klassifizierung: Extrem hoch [0,5h], Sehr hoch [4h], Hoch [24h], Normal [72h])",
@@ -2339,6 +2517,7 @@ function deleteOldFiles() {
     },
     {
         id: 179,
+        isBawueFocus: true,
         theme: "lf6",
         type: "open-text",
         question: "Prüfungsaufgabe Handelskalkulation (Sommer 2024 / LF 6): Ein Händler kauft 10 Videoüberwachungssysteme für einen Gesamt-Listeneinkaufspreis von 12.550 EUR netto. Der Lieferant gewährt 5 % Rabatt und 3 % Skonto bei Zahlung innerhalb von 10 Tagen. Die Lieferung erfolgt 'frei Haus'. Berechne den Gesamt-Bezugspreis (Einstandspreis) netto unter Ausnutzung des Skontos. Der Rechenweg ist anzugeben.",
@@ -2359,6 +2538,7 @@ Der Gesamt-Bezugspreis beträgt 11.564,82 EUR netto.`,
     },
     {
         id: 180,
+        isBawueFocus: true,
         theme: "lf6",
         type: "open-text",
         question: "Prüfungsaufgabe Lieferantenauswahl (Sommer 2024 / LF 6): Ein Lieferant bietet zwar günstige Basispreise an, gewährt jedoch vorerst keinerlei Rabatte für Neuaufträge. Nenne 3 triftige kaufmännische oder logistische Gründe, weshalb ein IT-Systemhaus dennoch bei diesem Lieferanten bestellen sollte.",
@@ -2373,6 +2553,7 @@ Der Gesamt-Bezugspreis beträgt 11.564,82 EUR netto.`,
     },
     {
         id: 181,
+        isBawueFocus: true,
         theme: "lf6",
         type: "open-text",
         question: "Prüfungsaufgabe Verkaufskalkulation (Winter 2024/25 / LF 6): Ein Händler kalkuliert den Verkaufspreis für ein PC-Set ausgehend von einem Einstandspreis (Bezugspreis) von 500,00 EUR. Ermittle den Listenverkaufspreis (netto) anhand der folgenden Kalkulationssätze:\n- Handlungskostenzuschlag: 30 %\n- Gewinnzuschlag: 15 %\n- Kundenskonto: 2 % (wird vom Listenverkaufspreis gewährt; Kalkulation 'im Hundert')\nDer Rechenweg ist anzugeben.",
@@ -2394,6 +2575,7 @@ Ergebnis: Der Netto-Listenverkaufspreis beträgt 762,76 EUR.`,
     },
     {
         id: 182,
+        isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
         question: "Prüfungsaufgabe Netzwerktechnik (Winter 2024/25 / LF 3): Erläutere auf Basis des OSI-Schichtenmodells die grundlegenden Unterschiede zwischen einer MAC-Adresse und einer IP-Adresse bezüglich ihrer Schicht, ihrer Eindeutigkeit und ihres Verwendungszwecks.",
@@ -2412,6 +2594,7 @@ Ergebnis: Der Netto-Listenverkaufspreis beträgt 762,76 EUR.`,
     },
     {
         id: 183,
+        isBawueFocus: true,
         theme: "lf6",
         type: "open-text",
         question: "Prüfungsaufgabe USV-Leistungsberechnung (Winter 2024/25 / LF 6): Ein Serverraum soll mit einer USV abgesichert werden. An der USV werden Geräte mit folgenden Leistungsdaten betrieben:\n- Server 1: Wirkleistung 400 W, Leistungsfaktor (cos phi) 0,80\n- Server 2: Wirkleistung 300 W, Leistungsfaktor (cos phi) 0,85\n\n1. Berechne die gesamte Scheinleistung (S) in VA.\n2. Berechne die erforderliche Mindest-Scheinleistung der USV, wenn eine Leistungsreserve von 40 % eingerechnet werden soll. Der Rechenweg ist anzugeben.",
@@ -2431,6 +2614,7 @@ Ergebnis: Die USV muss eine Mindestleistung von 1.194,12 VA (bzw. aufgerundet 1.
     },
     {
         id: 184,
+        isBawueFocus: true,
         theme: "lf5",
         type: "open-text",
         question: "Prüfungsaufgabe SQL-Fehlersuche (Winter 2024/25 / LF 5): Beim Ausführen des folgenden SQL-Befehls in einer Kundendatenbank treten 2 Fehler auf. Benenne diese Fehler:\n\n\`\`\`sql\nINSERT INTO Kunde (knr, name, vorname, strasse, plz, ort, geschlecht)\nVALUES ('128', 'Müller', 'Tamara', 'Brunnengasse 4', '74722', 'Buchen', 'w', '1999-08-10');\n\`\`\`",
@@ -2442,6 +2626,7 @@ Ergebnis: Die USV muss eine Mindestleistung von 1.194,12 VA (bzw. aufgerundet 1.
     },
     {
         id: 185,
+        isBawueFocus: true,
         theme: "lf5",
         type: "open-text",
         question: "Prüfungsaufgabe Algorithmen Prüfziffer (Winter 2024/25 / LF 5): Eine Kundenkartennummer besteht aus einem Array mit 10 Ganzzahlen. Die Ziffern an Index 0 bis 8 werden jeweils mit ihrer Stelle (Index + 1) multipliziert. Die Summe der Produkte wird modulo 10 geteilt. Der Rest entspricht der Prüfziffer, die an Index 9 steht. Schreibe eine JavaScript-Funktion 'pruefeNummer(nummer)', die 'true' zurückgibt, wenn die Ziffer an Index 9 mit der berechneten Prüfziffer übereinstimmt, andernfalls 'false'.",
@@ -2464,6 +2649,7 @@ function pruefeNummer(nummer) {
     },
     {
         id: 186,
+        isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
         question: "Prüfungsaufgabe IP-Konfiguration (Winter 2024/25 / LF 3): Ein neuer Client soll in der Abteilung Verkauf/Service (VK/S) einer Firma konfiguriert werden. Laut logischem Netzwerkplan gelten folgende Parameter:\n- Das Subnetz der Abteilung VK/S lautet 10.3.0.0/16.\n- Die IP-Adressen 10.3.0.2 und 10.3.0.3 sind bereits an PCs vergeben.\n- Der abteilungsinterne DNS- und Dateiserver hat die IP-Adresse 10.3.0.1.\n- Der Router besitzt im Subnetz der Abteilung VK/S die IP-Adresse 10.3.0.100.\n\nGib eine vollständige, gültige IPv4-Konfiguration (IP-Adresse, Subnetzmaske, Standardgateway, bevorzugter DNS-Server) für den neuen Client an.",
@@ -2479,6 +2665,7 @@ function pruefeNummer(nummer) {
     },
     {
         id: 187,
+        isBawueFocus: true,
         theme: "lf6",
         type: "open-text",
         question: "Prüfungsaufgabe Angebotsvergleich (Winter 2024/25 / LF 6): Ein Händler vergleicht zwei Angebote für einen neuen Arbeitsplatz (Rechner und Monitor):\n- Angebot 1 (Hemak AG): Listeneinkaufspreis gesamt 533,01 EUR netto, Treue-Rabatt 10 %, Verpackung/Versand 25,00 EUR. Skonto 2 % bei Zahlung innerhalb von 10 Tagen.\n- Angebot 2 (DiWin GmbH): Listeneinkaufspreis gesamt 595,00 EUR netto, Neukunden-Rabatt 20 %, Verpackung/Versand 50,00 EUR. Skonto 3 % bei Zahlung innerhalb von 7 Tagen.\n\nBerechne für beide Angebote den Bezugspreis (Einstandspreis) netto unter Ausnutzung des Skontos. Entscheide dich für das wirtschaftlichere Angebot. Der Rechenweg ist anzugeben.",
@@ -2509,6 +2696,7 @@ Das Angebot der Hemak AG ist mit einem Einstandspreis von 495,12 EUR rein quanti
     },
     {
         id: 188,
+        isBawueFocus: true,
         theme: "lf6",
         type: "open-text",
         question: "Prüfungsaufgabe USV-Dimensionierung & Scheinleistung (Winter 2024/25 / LF 6): Eine USV soll die IT-Infrastruktur absichern. Folgende Verbraucher sind vorhanden:\n- 3 Server (je 230 V, 3 A)\n- 1 Laptop (230 V, 0,8 A)\n- 5 PCs (je 230 V, 0,8 A)\n- 1 Router (230 V, 0,5 A)\n- 3 Switches (je 230 V, 0,8 A)\n- 1 Firewall (230 V, 1 A)\n- 2 Laserdrucker (je 230 V, 2 A)\n- 1 Farblaser (230 V, 3 A)\n\n1. Entscheide begründet, welche der Geräte an die USV angeschlossen werden sollten und welche nicht.\n2. Berechne die gesamte Scheinleistung (S) in VA für alle an die USV angeschlossenen Geräte.\n3. Berechne die benötigte Mindestleistung der USV bei einer Leistungsreserve von 40 %. Der Rechenweg ist anzugeben.",
@@ -2536,6 +2724,7 @@ Ergebnis: Die USV muss eine Mindestleistung von 5.699,40 VA aufweisen.`,
     },
     {
         id: 189,
+        isBawueFocus: true,
         theme: "lf6",
         type: "open-text",
         question: "Prüfungsaufgabe IT-Service-Management (Sommer 2023 / LF 6): Klassifiziere die folgenden 5 Meldungen aus einem Ticketsystem begründet in die ITIL-Kategorien 'Incident' (Störung), 'Service Request' (Serviceanfrage) oder 'Event' (Ereignis):\n1. Mitteilung, dass die Lizenz der Office-Anwendung in 14 Tagen abläuft.\n2. Ein Mitarbeiter beantragt eine Maus für Linkshänder.\n3. Der Accesspoint im Lager funktioniert nicht.\n4. Statusmeldung: Mehr als fünf fehlgeschlagene Anmeldeversuche auf dem Konto von Herr Müller.\n5. Ein Mitarbeiter meldet, dass sein Bildschirm flackert.",
@@ -2552,6 +2741,7 @@ Ergebnis: Die USV muss eine Mindestleistung von 5.699,40 VA aufweisen.`,
     },
     {
         id: 190,
+        isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
         question: "Prüfungsaufgabe WLAN & MAC-Adressierung (Sommer 2023 / LF 3): Beantworte folgende Fragen zu WLAN und Netzwerkhardware:\n1. Nenne eine wesentliche Neuerung, die der Standard IEEE 802.11ax (ab Wi-Fi 6E) im Vergleich zu älteren Standards bietet.\n2. Wie viele Bits werden für die Darstellung einer physischen MAC-Adresse benötigt?\n3. Auf welcher Schicht des OSI-Schichtenmodells arbeitet die physische MAC-Adresse zur Weiterleitung von Ethernet-Frames?",
@@ -2564,6 +2754,7 @@ Ergebnis: Die USV muss eine Mindestleistung von 5.699,40 VA aufweisen.`,
     },
     {
         id: 191,
+        isBawueFocus: true,
         theme: "lf5",
         type: "open-text",
         question: "Prüfungsaufgabe Programmierung (Sommer 2023 / LF 5): Erstelle eine JavaScript-Funktion 'loginUeberpruefung(username, passwort)'. Die Funktion nutzt die Hilfsfunktion 'DB_Abfrage(username, passwort)', welche folgende Rückgabewerte liefert:\n- 0: Daten korrekt\n- 1: Benutzername existiert nicht\n- 2: Passwort falsch\n\nWenn die Daten korrekt sind, soll die Funktion 'true' zurückgeben. In allen anderen Fällen soll der Text 'Daten nicht korrekt' auf der Konsole ausgegeben und 'false' zurückgegeben werden.",
@@ -2589,6 +2780,7 @@ function loginUeberpruefung(username, passwort) {
     },
     {
         id: 192,
+        isBawueFocus: true,
         theme: "lf6",
         type: "open-text",
         question: "Prüfungsaufgabe Handelskalkulation (Sommer 2023 / LF 6): Ein IT-Systemhaus beschafft 30 Laptops zu einem Listeneinkaufspreis von je 1.300,00 EUR netto. Der Großhändler gewährt 20 % Rabatt und 3 % Skonto. Die Transportkosten betragen 10,00 EUR netto pro Laptop.\nDie Laptops werden an einen Kunden für einen Listenverkaufspreis von je 1.800,00 EUR netto verkauft. Das Systemhaus gewährt dem Kunden 20 % Rabatt und 2 % Skonto. Die internen Handlungskosten betragen 35 % auf den Einstandspreis.\n\nBerechne:\n1. Den Bezugspreis (Einstandspreis) pro Laptop netto bei Ausnutzung des Lieferantenskontos.\n2. Den Selbstkostenpreis pro Laptop netto.\n3. Den tatsächlichen Gewinn/Verlust (in EUR und in % bezogen auf die Selbstkosten) pro Laptop bei Ausnutzung aller Skonti. Der Rechenweg ist anzugeben.",
@@ -2622,6 +2814,7 @@ function loginUeberpruefung(username, passwort) {
     },
     {
         id: 193,
+        isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
         question: "Prüfungsaufgabe Netzwerktechnik (Sommer 2023 / LF 3): Aus der IP-Konfiguration eines Laptops sind folgende Werte bekannt:\n- IPv4-Adresse: 10.1.10.1\n- Subnetzmaske: 255.255.0.0 (bzw. /16)\n\nBestimme die Netzwerkadresse sowie die Broadcastadresse des IP-Subnetzes, in dem sich der Laptop befindet. Der Rechenweg/die Logik ist kurz zu beschreiben.",
@@ -2636,6 +2829,7 @@ function loginUeberpruefung(username, passwort) {
     },
     {
         id: 194,
+        isBawueFocus: true,
         theme: "lf4",
         type: "open-text",
         question: "Prüfungsaufgabe Schutzbedarfsanalyse (Sommer 2023 / LF 4): Für eine Auftrags- und Kundenverwaltung soll der Schutzbedarf bezüglich Vertraulichkeit, Integrität und Verfügbarkeit (Kategorien: normal, hoch, sehr hoch) bestimmt werden. Ordne die Kategorien begründet zu anhand dieser Vorgaben:\n1. Vertraulichkeit: Es werden Kundendaten verarbeitet, deren Missbrauch dem Unternehmen großen Schaden (50.000 bis 500.000 EUR) zufügt.\n2. Integrität: Manipulationen an Preisangaben führen zu Schäden über 50.000 EUR und erheblichem Vertrauensverlust.\n3. Verfügbarkeit: Ein Ausfall von über 24 Stunden ist hinnehmbar, da auf Ersatzgeräten weitergearbeitet werden kann.",
@@ -2652,6 +2846,7 @@ function loginUeberpruefung(username, passwort) {
     },
     {
         id: 195,
+        isBawueFocus: true,
         theme: "lf5",
         type: "open-text",
         question: "Prüfungsaufgabe ER-Modellierung (Sommer 2023 / LF 5): Gegeben sind die Entitäten 'Mitarbeiter', 'Laptop' und 'Projekt'. Bestimme die Kardinalitäten (in Min..Max-Notation) für folgende Beziehungen:\n1. Mitarbeiter zu Laptop (Ein Laptop gehört genau einem Mitarbeiter. Ein Mitarbeiter kann keinen oder mehrere Laptops besitzen.)\n2. Mitarbeiter zu Projekt (In einem Projekt arbeiten mehrere Mitarbeiter. Ein Mitarbeiter kann in mehreren Projekten arbeiten.)",
@@ -2671,6 +2866,7 @@ function loginUeberpruefung(username, passwort) {
 ,
     {
         id: 196,
+        isBawueFocus: true,
         theme: "lf6",
         type: "open-text",
         question: "Prüfungsaufgabe Aufbauorganisation (Sommer 2026 / LF 6):\nDas aktuelle Organigramm eines IT-Unternehmens zeigt eine Struktur mit der Geschäftsführung an der Spitze, beratenden Stellen (Öffentlichkeitsarbeit, Rechtsabteilung) an der Seite und einer Aufteilung in Funktionsbereiche (Einkauf, Entwicklung) sowie Kundensegmente (Privatkunden, Behörden).\n\nBeantworte folgende Fragen:\n1. Nenne und erkläre die 3 verschiedenen Organisationsstrukturen, die in dieser Mischstruktur enthalten sind.\n2. Nenne und erkläre die Stellenarten, die im Organigramm dargestellt sind.\n3. Beschreibe jeweils einen wesentlichen Vorteil und Nachteil dieser divisionalen und funktionalen Mischstruktur.",
@@ -2694,6 +2890,7 @@ function loginUeberpruefung(username, passwort) {
     },
     {
         id: 197,
+        isBawueFocus: true,
         theme: "lf6",
         type: "open-text",
         question: "Prüfungsaufgabe Handelskalkulation (Sommer 2026 / LF 6):\nFür einen neuen Artikel im Sortiment soll eine Handelskalkulation durchgeführt werden. Folgende Daten sind bekannt:\n- Barverkaufspreis (netto): 1.000,00 EUR\n- Handlungskostenzuschlag: 20 %\n- Lieferer-Rabatt: 10 %\n- Gewinnzuschlag: 5 %\n- Bezugskosten (Transport): 25,00 EUR\n- Lieferer-Skonto: 3 %\n\nErmittle den Listeneinkaufspreis (netto) mittels Rückwärtskalkulation. Der vollständige Rechenweg ist anzugeben.",
@@ -2731,6 +2928,7 @@ Ergebnis: Der Listeneinkaufspreis beträgt 880,47 EUR.`,
     },
     {
         id: 198,
+        isBawueFocus: true,
         theme: "lf4",
         type: "open-text",
         question: "Prüfungsaufgabe Datenverfügbarkeit & RAID (Sommer 2026 / LF 4):\n1. Berechne die maximale Ausfallzeit pro Jahr (in Minuten) für die Verfügbarkeitsklasse 3 (99,9 % Verfügbarkeit) bei 365 Tagen.\n2. Berechne die nutzbare Speicherkapazität (in TB) bei 6 Festplatten mit jeweils 20 TB Kapazität (ohne Hot-Spare) für ein RAID 5 und ein RAID 10.\n3. Begründe anhand des Aufbaus eines RAID 10 Systems, warum der Umstieg von RAID 5 auf RAID 10 die Datenverfügbarkeit positiv beeinflusst.\n4. Bewerte die Aussage: 'Wenn man RAID verwendet, benötigt man kein Backup.'",
@@ -2755,6 +2953,7 @@ Ergebnis: Der Listeneinkaufspreis beträgt 880,47 EUR.`,
     },
     {
         id: 199,
+        isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
         question: "Prüfungsaufgabe IPv6-Konfiguration (Sommer 2026 / LF 3):\nEin Provider teilt ein IPv6-Präfix 2001:0db8:00ea:2300::/56 zu. Das Subnetz für den Admin-PC lautet 2001:0db8:00ea:2301::/64. Der Admin-PC hat die PC-Nummer AB.1001. Die Router-Schnittstelle im lokalen Netz (Gateway) hat fe80::1, der lokale DNS-Server fe80::d.\n\nGib eine vollständige manuelle IPv6-Konfiguration in Kurzform für den Admin-PC an:\n1. Globale IPv6-Adresse (mit Präfixlänge /64; die PC-Nummer AB.1001 muss im Interface-Identifier enthalten sein)\n2. Standardgateway\n3. Bevorzugter DNS-Server",
@@ -2775,6 +2974,7 @@ Ergebnis: Der Listeneinkaufspreis beträgt 880,47 EUR.`,
     },
     {
         id: 200,
+        isBawueFocus: true,
         theme: "lf5",
         type: "open-text",
         question: "Prüfungsaufgabe Programmierung CSV-Prüfung (Sommer 2026 / LF 5):\nEin Kunde meldet fehlerhafte Artikelpreise in Bestellungen. Schreibe eine JavaScript-Funktion 'pruefeFehlendenPreis(daten, artikelID)', die ein Array von CSV-Zeilen ('daten') und eine Artikel-ID ('artikelID') erhält.\nDie CSV-Struktur lautet:\nBestellID;Bestelldatum;ArtikelID;Artikelbezeichnung;Menge;Preis;Hersteller;HerstellerID\n\nDie Funktion soll 'true' zurückgeben, wenn für die übergebene 'artikelID' mindestens eine Zeile existiert, in welcher der Preis leer (leerer String) oder gleich 'NULL' ist. Andernfalls soll 'false' zurückgegeben werden.",
@@ -2812,6 +3012,7 @@ function pruefeFehlendenPreis(daten, artikelID) {
     },
     {
         id: 201,
+        isBawueFocus: true,
         theme: "lf5",
         type: "open-text",
         question: "Prüfungsaufgabe Datenbanken & SQL (Sommer 2026 / LF 5):\n1. Gegeben ist die flache CSV-Struktur:\nBestellID;Bestelldatum;ArtikelID;Artikelbezeichnung;Menge;Preis;Hersteller;HerstellerID\nÜberführe diese Struktur in ein redundanzfreies Relationenmodell in der 3. Normalform (3NF). Kennzeichne Primärschlüssel (PK) und Fremdschlüssel (FK) eindeutig.\n2. Gegeben ist die Relation: Kunde (KundeID, Name, Straße, Telefonnr, Email, Ortnr)\nFormuliere einen SQL-Befehl, der alle Kunden anzeigt, bei denen keine E-Mail-Adresse hinterlegt ist.",
@@ -2839,6 +3040,7 @@ WHERE Email IS NULL OR Email = '';
 ,
     {
         id: 202,
+        isBawueFocus: true,
         theme: "lf2",
         type: "open-text",
         question: "Prüfungsaufgabe PC-Hardware & Mainboard (Sommer 2022 / LF 2):\nBeantworte folgende Fragen zum Hardware-Zusammenbau und zur Systemleistung:\n1. Nenne die drei Schritte für den Einbau einer CPU und beschreibe, welche zwei Punkte beim Einsetzen besonders zu beachten sind.\n2. Erläutere, welche Aufgabe die Wärmeleitpaste hat.\n3. Erläutere, was beim Einsetzen von zwei RAM-Riegeln beachtet werden muss, damit diese im Dual Channel Modus arbeiten.\n4. Nenne je einen Vorteil und Nachteil einer M.2 SSD gegenüber einer SATA SSD.\n5. Nenne zwei Vorteile eines USB-C Anschlusses gegenüber einem USB-3.0-Anschluss (Typ A).\n6. Beschreibe, welche Besonderheit ein umrahmter USB-Anschluss mit der Beschriftung 'BIOS / BIOS FLBK' (Flashback) an der Gehäuserückseite hat.\n7. Erläutere den Begriff 'Logische Prozessoren' im Taskmanager und gib eine Taktfrequenz von 3,4 GHz in Hertz an.",
@@ -2877,6 +3079,7 @@ WHERE Email IS NULL OR Email = '';
     },
     {
         id: 203,
+        isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
         question: "Prüfungsaufgabe WLAN & OSI-Modell (Sommer 2022 / LF 3):\nEin Client soll per WLAN angebunden werden. Beantworte folgende Fragen zum Netzwerk-Troubleshooting:\n1. Nenne zwei wesentliche Informationen, die vom Administrator erfragt werden müssen, um das Notebook im WLAN anzumelden (WPA-PSK).\n2. Nenne je einen Vor- und Nachteil von WPA-Enterprise (RADIUS) gegenüber WPA-PSK und gib eine Empfehlung für die passende Unternehmensgröße.\n3. Ergänze die fehlenden Spalten der OSI-Modell-Fehlersuchtabelle für Schicht 7 (Anwendung), Schicht 3 (Vermittlung), Schicht 2 (Sicherung) und Schicht 1 (Bitübertragung) mit Name, Protokoll, Adresse und einem typischen Fehler.\n4. Eine ipconfig-Ausgabe zeigt die MAC-Adresse 50-1A-C5-F2-38-B7 und die IPv6-Adresse fe80::85e1:1ec1:c9e2:3cbb. Erkläre jeweils kurz die Herkunft dieser beiden Adressen.\n5. Der Client erhält per DHCP die IP-Adresse 192.168.0.52 mit der Subnetzmaske 255.255.255.0 und dem Gateway 192.168.0.1. Bestimme die Netzadresse, die Hostadresse und die Broadcastadresse.\n6. Ein anschließender Ping auf das Standardgateway (192.168.0.1) ist erfolgreich. Warum zeigt das System dennoch 'Kein Netzwerkzugriff'?",
@@ -2914,6 +3117,7 @@ WHERE Email IS NULL OR Email = '';
 ,
     {
         id: 204,
+        isBawueFocus: true,
         theme: "lf4",
         type: "open-text",
         question: "Prüfungsaufgabe Speichersysteme & Datenvolumen (Herbst 2022 / LF 4):\nEine Produktionslinie erzeugt Kartonbahnen mit einer Breite von 50,80 cm und einer Geschwindigkeit von 30,48 m/min. Zur Qualitätskontrolle werden fortlaufend Kamerabilder erfasst (Scanfläche pro Aufnahme: 50,80 cm breit x 30,48 cm lang; Auflösung: 400x400 dpi; Farbtiefe: 16 Bit; 1 Inch = 2,54 cm). Die Produktionszeit beträgt 12 Stunden am Tag.\n\nBeantworte folgende Fragen:\n1. Ermittle die Anzahl der Aufnahmen/Scans pro Tag.\n2. Berechne das zu speichernde Datenvolumen in MiB pro Scan.\n3. Berechne das gesamte Datenvolumen pro Tag in TiB (auf volle TiB aufrunden).\n4. Berechne die maximale Netto-Speicherkapazität (in TB) bei einer RAID 5 Konfiguration unter Verwendung aller verfügbaren Festplatten (2x 3 TB und 7x 2 TB) an einem RAID-Hostadapter.\n5. Berechne die Kapazität desselben Plattenpools bei Einsatz von JBOD und nenne zwei Vorteile von JBOD gegenüber einem RAID 0.\n6. Nenne drei Vorteile eines SAN (Storage Area Network) gegenüber einem NAS (Network Attached Storage).\n7. Nenne jeweils einen Vor- und Nachteil der Kennzeichnung mittels QR-Code bzw. RFID-Chips gegenüber dem herkömmlichen Barcode.",
@@ -2965,6 +3169,7 @@ WHERE Email IS NULL OR Email = '';
     },
     {
         id: 205,
+        isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
         question: "Prüfungsaufgabe IPv6 & Nutzwertanalyse (Herbst 2022 / LF 3):\nBeantworte folgende netzwerk- und beschaffungsbezogene Fragen:\n1. Nenne zwei technologische Vorteile der IPv6-Adressierung gegenüber IPv4 für den Bereich IoT.\n2. Gegeben ist die IPv6-Adresse 2001:da8:5f2d:28::/64. Gib das ungekürzte Standortpräfix (48 Bit) und die ungekürzte Teilnetz-ID (16 Bit) im Hexadezimalformat an.\n3. Bestimme, wie viele Subnetze (/64) mit einem /48-Präfix gebildet werden können.\n4. In einer Testumgebung mit dem Präfix 2001:da8:5f2d:29::/64 hat der Router die IP ::1 und der Switch ::2. Vergib sinnvolle Gateway- und Host-IPv6-Adressen für: den Switch, einen Sensor, eine Steuerung und einen Industrie-PC (IP: ::20).\n5. Gib die IPv6-Befehle an, um die Erreichbarkeit des Loopback-Interfaces sowie des Gateways (Router) zu prüfen.\n6. Erkläre die Herkunft der IPv6-Adresse fe80::62eb:69ff:fed2:d2a6/64.\n7. Ein IT-Einkauf vergleicht drei Angebote für 30 Laptops (Noteplus AG: 1015€ gesamt, Lieferzeit 5 Wochen, Qual. Gut, Mängel bekannt; Notebook-Clever: 1110€ gesamt, Lieferzeit 3 Wochen, Qual. Durchschnitt, keine Beanstandung; PC-Genie: 1300€ gesamt, Lieferzeit 1 Woche, Qual. Sehr gut, hohe Kulanz). Führe eine Nutzwertanalyse (Skala 1 bis 3) mit den Kriterien Bezugspreis (Gew. 11), Lieferzeit (Gew. 8), Qualität (Gew. 9) und Erfahrung (Gew. 5) durch. Berechne die Gesamtpunkte und gib eine begründete Empfehlung ab.",
@@ -3012,6 +3217,7 @@ WHERE Email IS NULL OR Email = '';
     },
     {
         id: 206,
+        isBawueFocus: true,
         theme: "lf4",
         type: "open-text",
         question: "Prüfungsaufgabe Betriebssystem-Sicherheit & BSI (Frühjahr 2023 / LF 4):\nBeantworte folgende Fragen zur Sicherheit von Arbeitsplatzrechnern und Richtlinien:\n1. Benenne im Schalenmodell eines PC-Systems die Schicht oberhalb und unterhalb des Betriebssystems und beschreibe jeweils eine Funktion dieser Schichten.\n2. Nenne zwei allgemeine Aufgaben des BSI (Bundesamt für Sicherheit in der Informationstechnik).\n3. Erkläre den Begriff 'Härtung' (hardening) eines Betriebssystems und nenne zwei typische Beispiele hierfür.\n4. Nenne zwei im Betriebssystem integrierte Systemwerkzeuge ('Bordmittel'), mit denen die IT-Sicherheit direkt erhöht werden kann.\n5. Beschreibe, wozu Gruppenrichtlinien (GPOs) auf einem Arbeitsplatzrechner eingesetzt werden können.\n6. Beschreibe, inwiefern eine Protokollierung (Logging) zur Erhöhung der IT-Sicherheit beitragen kann und nenne die besonderen datenschutzrechtlichen Anforderungen (DSGVO), die dabei beachtet werden müssen.",
@@ -3059,6 +3265,7 @@ WHERE Email IS NULL OR Email = '';
 ,
     {
         id: 207,
+        isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
         question: "Prüfungsaufgabe Überwachungskameras & Bandbreite (Sommer 2026 / LF 3/4):\nEin Logistikzentrum soll mit Sicherheitskameras ausgestattet werden. Beantworte folgende Aufgaben aus der Planung:\n1. In der Spezifikation steht 'no default passwords'. Beschreibe zwei mögliche Konsequenzen dieser Voreinstellung.\n2. Eine Kamera benötigt inklusive Infrarot-Nachtmodus (IR) und Heizung (heater) maximal 24 W Leistung. Wähle aus der Tabelle den passenden PoE-Standard (IEEE 802.3af mit 6,49-12,95 W oder IEEE 802.3at mit 12,95-25,50 W) und berechne die Stromstärke in mA bei einer Spannung von 48 V.\n3. Berechne die erforderliche Datenübertragungsrate in Mbit/s für einen Live-Stream bei einer Auflösung von 1920x1080 @ 30fps, einer Farbtiefe von 24 Bit und einer Komprimierung auf 30 % (Ergebnis auf volle Mbit/s aufrunden). Der Rechenweg ist anzugeben.\n4. Berechne die notwendige Speicherkapazität in TiB für die Aufnahmen von 4 Kameras über einen Zeitraum von 72 Stunden (reche mit der berechneten Übertragungsrate bzw. dem Ausweichwert von 482 Mbit/s). Ergebnis auf volle TiB aufrunden.\n5. Erkläre das Prinzip des 'Daisy Chaining' bei Monitoren und nenne einen Vorteil sowie die technischen Voraussetzungen zur Nutzung.",
@@ -3102,6 +3309,7 @@ WHERE Email IS NULL OR Email = '';
     },
     {
         id: 208,
+        isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
         question: "Prüfungsaufgabe Netzwerkgrundlagen & IPv6 (Sommer 2026 / LF 3):\nBeantworte folgende netzwerkbezogene Fragen:\n1. Erkläre die Bedeutung der LEDs an einem Ethernet-Netzwerkanschluss (durchgehendes Leuchten vs. unregelmäßiges Blinken).\n2. Ordne die folgenden Netzwerk-Komponenten/Begriffe den passenden Schichten (1, 2, 3, 4 oder 7) des OSI-Modells zu: DHCP, TCP, verbindungslokale IPv6-Adresse (fe80::), physische Adresse (MAC), Buchse mit LED.\n3. Gegeben ist die IPv6-Adresse fe80::521a:c5ff:fef2:38b7. Bestimme: die Gesamtlänge einer IPv6-Adresse in Bits, die ungekürzte Darstellung der Adresse, die Präfixlänge und den Interface-Identifier.\n4. Nenne zwei grundlegende Netzwerkinformationen, die ein Client von einem DHCP-Server erhält.\n5. Erkläre kurz die Aufgabe des Address Resolution Protocol (ARP) im Netzwerk.\n6. Gib den Befehl an, um die Verbindung zum Standardgateway 192.168.0.1 per Eingabeaufforderung zu prüfen.\n7. Ein PC hat die IP 192.168.0.52 und die MAC 50-1A-C5-F2-38-B7. Der lokale Router hat die IP 192.168.0.1 und die MAC d4-3f-cb-8c-37-8b. Welcher Adresse wird 'Eigener PC' und welcher 'Standardgateway' zugeordnet?",
@@ -3141,6 +3349,7 @@ WHERE Email IS NULL OR Email = '';
     },
     {
         id: 209,
+        isBawueFocus: true,
         theme: "lf2",
         type: "open-text",
         question: "Prüfungsaufgabe CAD-Dateiformate & Netzteilberechnung (Sommer 2026 / LF 2):\nBeantworte folgende Aufgaben zur Arbeitsplatzrechner-Planung und Dateiformaten:\n1. Nenne drei Möglichkeiten, wie du dich über ein unbekanntes Dateiformat informieren kannst, wenn der Dateityp unbekannt ist.\n2. Beschreibe, wie du Kundendaten (z. B. im PLY-Format) nutzen kannst, wenn das hauseigene CAD-System dieses Format nicht direkt unterstützt.\n3. Erkläre den Unterschied zwischen einem Textformat (ASCII) und einem Binärformat bezüglich Lesbarkeit und Speicherbedarf.\n4. Eine PLY-3D-Modelldatei enthält 3.840 Punkte (jeder Punkt hat 3 Koordinaten x,y,z im 32-Bit/4-Byte-Float-Format). Berechne den Speicherbedarf für die Koordinaten in KiB. Berechne außerdem, wie viele Farben mit RGB (8 Bit pro Kanal) dargestellt werden können und wie viel Prozent zusätzlicher Speicherplatz pro Bildpunkt benötigt wird, wenn zu jedem Punkt ein RGB-Farbwert (3 Byte) hinzukommt.\n5. Berechne die erforderliche Leistung eines Netzteils für folgende Komponenten: Mainboard (20W), CPU (172W), CPU-Lüfter (12W), 4x RAM (je 5W), Grafikkarte (310W), 2x M.2 SSD (je 5W), 2x Gehäuselüfter (je 8W). Schlage einen Sicherheitszuschlag von 10 % auf und wähle die passende Netzteilgröße in 50W-Schritten.\n6. Berechne die jährlichen Stromkosten bei 200 Arbeitstagen à 9 Std. Täglich, wenn die durchschnittliche Leistungsabgabe 325 W beträgt, das Netzteil eine Effizienz von 90 % besitzt und der Strompreis 0,40 EUR/kWh beträgt. Der Rechenweg ist anzugeben.",
@@ -3191,6 +3400,7 @@ WHERE Email IS NULL OR Email = '';
 ,
     {
         id: 210,
+        isBawueFocus: true,
         topic: "LF 1 - Aufbauorganisation, Leitungssysteme & Führung",
         type: "open-text",
         title: "Aufbauorganisation: Einlinien- vs. Mehrliniensystem, Stabsstellen, Führungsstile & Stellenbeschreibung",
@@ -3235,6 +3445,7 @@ WHERE Email IS NULL OR Email = '';
     },
     {
         id: 211,
+        isBawueFocus: true,
         topic: "LF 1 - Marktformen, Wirtschaftslehre & Rechtsformen",
         type: "open-text",
         title: "Wirtschaftslehre: Marktformen, Ökonomisches Prinzip, E-Commerce, Leasing & Vertretungsbefugnisse (Prokura)",
@@ -3271,6 +3482,7 @@ WHERE Email IS NULL OR Email = '';
     },
     {
         id: 212,
+        isBawueFocus: true,
         topic: "LF 2 - PC-Hardware, Systemarchitektur & Energieeffizienz",
         type: "open-text",
         title: "Hardware-Architektur: Mainboard-Chipsatz, BIOS/UEFI, CPU-Caches & RAM-Konfiguration",
@@ -3309,6 +3521,7 @@ WHERE Email IS NULL OR Email = '';
     },
     {
         id: 213,
+        isBawueFocus: true,
         topic: "LF 3 - Netzwerktechnik, OSI-Modell, USV & Verkabelung",
         type: "open-text",
         title: "Netzwerktechnik: OSI-Schichten, DHCP/UDP/NAT, VLAN, USV-Klassen & Strukturierte Verkabelung",
@@ -3358,6 +3571,7 @@ WHERE Email IS NULL OR Email = '';
     },
     {
         id: 214,
+        isBawueFocus: true,
         topic: "LF 4 - Software-Engineering, UML & Qualitätssicherung",
         type: "open-text",
         title: "Software-Engineering: OOP-Konzepte, UML-Diagramme, Testverfahren & Qualitätsmanagement",
@@ -3410,6 +3624,7 @@ WHERE Email IS NULL OR Email = '';
     },
     {
         id: 215,
+        isBawueFocus: true,
         topic: "LF 4 / KI & EU AI Act",
         type: "open-text",
         title: "Künstliche Intelligenz (KI), Machine Learning & EU AI Act (EU-KI-Verordnung)",
@@ -3452,6 +3667,7 @@ WHERE Email IS NULL OR Email = '';
 ,
     {
         id: 216,
+        isBawueFocus: true,
         topic: "LF 1 - Unternehmensziele, Zielarten & Zielbeziehungen",
         type: "open-text",
         title: "Unternehmensziele: Formalziele, Sachziele, Sozialziele, Ökologische Ziele & Zielbeziehungen",
@@ -3487,6 +3703,7 @@ WHERE Email IS NULL OR Email = '';
     },
     {
         id: 217,
+        isBawueFocus: true,
         topic: "LF 1 / WiSo - Betriebswirtschaftliche Kennzahlen & Wirtschaftlichkeit",
         type: "open-text",
         title: "Wirtschaftlichkeitsrechnung: Wirtschaftlichkeit, Produktivität, Rentabilitäten & Marktanteil",
@@ -3534,6 +3751,7 @@ WHERE Email IS NULL OR Email = '';
     },
     {
         id: 218,
+        isBawueFocus: true,
         topic: "LF 1 / WiSo - Arbeitsrecht, Gehaltsabrechnung & Sozialversicherung",
         type: "open-text",
         title: "Arbeits- & Sozialrecht: Brutto-Netto-Abrechnung, 5 Säulen der Sozialversicherung, Überstunden & Kündigung",
@@ -3619,5 +3837,252 @@ WHERE Email IS NULL OR Email = '';
         correctAnswer: "Zielharmonie (komplementäre Ziele)",
         explanation: "Bei komplementären Zielen (Zielharmonie) unterstützt das Erreichen des einen Ziels gleichzeitig das Erreichen des anderen Ziels.",
         points: 2
+    }
+,
+    {
+        id: 222,
+        theme: "lf1",
+        isBawueFocus: true,
+        topic: "LF 1/2 - Projektmanagement & Netzplantechnik",
+        type: "open-text",
+        title: "Projektmanagement: Netzplantechnik (FAZ, FEZ, SAZ, SEZ, Pufferzeiten & Kritischer Weg)",
+        question: "Für das Projekt 'Rollout von 80 neuen CAD-Workstations' liegt folgende Vorgangsliste vor:\n\n" +
+                  "| Vorgang | Bezeichnung | Dauer | Vorgänger |\n" +
+                  "| :--- | :--- | :--- | :--- |\n" +
+                  "| A | Hardware beschaffen | 4 Tage | - |\n" +
+                  "| B | Basis-Betriebssystem-Image erstellen | 3 Tage | A |\n" +
+                  "| C | CAD-Spezialsoftware konfigurieren | 5 Tage | A |\n" +
+                  "| D | Netzwerkanschlüsse und Patching | 2 Tage | A |\n" +
+                  "| E | Endmontage und Softwareverteilung | 4 Tage | B, C |\n" +
+                  "| F | Benutzerschulung und Übergabe | 2 Tage | D, E |\n\n" +
+                  "Lösen Sie folgende Aufgaben:\n\n" +
+                  "1. Führen Sie die **Vorwärtsrechnung** (FAZ und FEZ) für alle Vorgänge durch. Welcher früheste Endzeitpunkt (Projektdauer) ergibt sich? (4 Punkte)\n" +
+                  "2. Führen Sie die **Rückwärtsrechnung** (SEZ und SAZ) durch. (4 Punkte)\n" +
+                  "3. Berechnen Sie für alle Vorgänge den **Gesamtpuffer (GP)** und den **freien Puffer (FP)**. (4 Punkte)\n" +
+                  "4. Bestimmen Sie den **Kritischen Weg (Critical Path)** und erklären Sie die Konsequenz einer 2-tägigen Verzögerung bei Vorgang C vs. Vorgang D. (4 Punkte)\n" +
+                  "5. Vergleichen Sie ein **Gantt-Diagramm (Balkendiagramm)** mit einem **Netzplan**. Nennen Sie jeweils einen Vorteil. (4 Punkte)",
+        correctAnswer: "1. Vorwärtsrechnung (FAZ / FEZ) - Start bei Tag 0 (4 Punkte):\n" +
+                       "   - Vorgang A (Dauer 4): FAZ = 0, FEZ = 4\n" +
+                       "   - Vorgang B (Dauer 3, Vorgänger A): FAZ = 4, FEZ = 7\n" +
+                       "   - Vorgang C (Dauer 5, Vorgänger A): FAZ = 4, FEZ = 9\n" +
+                       "   - Vorgang D (Dauer 2, Vorgänger A): FAZ = 4, FEZ = 6\n" +
+                       "   - Vorgang E (Dauer 4, Vorgänger B [FEZ 7] und C [FEZ 9]): FAZ = max(7, 9) = 9, FEZ = 13\n" +
+                       "   - Vorgang F (Dauer 2, Vorgänger D [FEZ 6] und E [FEZ 13]): FAZ = max(6, 13) = 13, FEZ = 15\n" +
+                       "   -> Gesamte Projektdauer: 15 Tage (FEZ von F).\n\n" +
+                       "2. Rückwärtsrechnung (SEZ / SAZ) - Ende bei Tag 15 (4 Punkte):\n" +
+                       "   - Vorgang F (Dauer 2): SEZ = 15, SAZ = 13\n" +
+                       "   - Vorgang E (Dauer 4, Nachfolger F [SAZ 13]): SEZ = 13, SAZ = 9\n" +
+                       "   - Vorgang D (Dauer 2, Nachfolger F [SAZ 13]): SEZ = 13, SAZ = 11\n" +
+                       "   - Vorgang C (Dauer 5, Nachfolger E [SAZ 9]): SEZ = 9, SAZ = 4\n" +
+                       "   - Vorgang B (Dauer 3, Nachfolger E [SAZ 9]): SEZ = 9, SAZ = 6\n" +
+                       "   - Vorgang A (Dauer 4, Nachfolger B [SAZ 6], C [SAZ 4], D [SAZ 11]): SEZ = min(6, 4, 11) = 4, SAZ = 0\n\n" +
+                       "3. Pufferzeiten (GP = SAZ - FAZ; FP = min(FAZ_Nachfolger) - FEZ) (4 Punkte):\n" +
+                       "   - Vorgang A: GP = 0 - 0 = 0, FP = min(4, 4, 4) - 4 = 0\n" +
+                       "   - Vorgang B: GP = 6 - 4 = 2 Tage, FP = 9 (FAZ E) - 7 = 2 Tage\n" +
+                       "   - Vorgang C: GP = 4 - 4 = 0, FP = 9 (FAZ E) - 9 = 0\n" +
+                       "   - Vorgang D: GP = 11 - 4 = 7 Tage, FP = 13 (FAZ F) - 6 = 7 Tage\n" +
+                       "   - Vorgang E: GP = 9 - 9 = 0, FP = 13 (FAZ F) - 13 = 0\n" +
+                       "   - Vorgang F: GP = 13 - 13 = 0, FP = 15 - 15 = 0\n\n" +
+                       "4. Kritischer Weg & Verzögerung (4 Punkte):\n" +
+                       "   - Kritischer Weg: Vorgänge mit GP = 0 -> **A -> C -> E -> F** (Dauer = 4 + 5 + 4 + 2 = 15 Tage).\n" +
+                       "   - Konsequenz Verzögerung Vorgang C (auf dem kritischen Weg, GP = 0): Jede Verzögerung bei C (z. B. 2 Tage) verschiebt das gesamte Projektende direkt um 2 Tage nach hinten (Gesamtdauer 17 Tage).\n" +
+                       "   - Konsequenz Verzögerung Vorgang D (nicht-kritisch, GP = 7 Tage): Eine Verzögerung um 2 Tage hat KEINE Auswirkungen auf das Projektende, da der Puffer von 7 Tagen die Verzögerung vollständig abfedert.\n\n" +
+                       "5. Gantt-Diagramm vs. Netzplan (4 Punkte):\n" +
+                       "   - Vorteil Gantt-Diagramm: Sehr anschauliche, intuitive Kalenderdarstellung des zeitlichen Verlaufs und der Überschneidungen auf einer horizontalen Zeitachse (optimal für Stakeholder-Präsentationen).\n" +
+                       "   - Vorteil Netzplan: Zeigt explizit alle logischen Abhängigkeiten zwischen Vorgängen, ermöglicht die mathematische Berechnung von Pufferzeiten und identifiziert sofort den Kritischen Weg.",
+        explanation: "Netzplantechnik (FAZ, FEZ, SAZ, SEZ, GP, FP, Kritischer Weg) ist einer der am häufigsten abgefragten Rechen- und Logikbereiche in der AP1 Baden-Württemberg.",
+        points: 20
+    },
+    {
+        id: 223,
+        theme: "lf1",
+        isBawueFocus: true,
+        topic: "LF 1 - Wirtschaftlichkeit: Break-Even, AfA & Nutzwertanalyse",
+        type: "open-text",
+        title: "Kaufmännische Prozesse: Break-Even-Analyse, Lineare Abschreibung (AfA) & Nutzwertanalyse",
+        question: "Ein IT-Unternehmen prüft die Wirtschaftlichkeit neuer Investitionen. Lösen Sie folgende Teilaufgaben:\n\n" +
+                  "1. **Break-Even-Analyse (Gewinnschwelle):**\n" +
+                  "   Ein neues Cloud-Security-Paket verursacht fixe Entwicklungskosten von 48.000,00 € pro Jahr. Die variablen Kosten (Server-Ressourcen, Support) betragen 30,00 € pro Lizenz/Monat. Der Verkaufspreis beträgt 70,00 € pro Lizenz/Monat.\n" +
+                  "   a) Berechnen Sie den **Deckungsbeitrag pro Lizenz** (pro Jahr). (2 Punkte)\n" +
+                  "   b) Berechnen Sie die **Break-Even-Menge** (Anzahl Lizenzen, ab der das Projekt die Gewinnzone erreicht). (2 Punkte)\n" +
+                  "   c) Erklären Sie den Begriff **Break-Even-Point**. (1 Punkt)\n" +
+                  "2. **Lineare Abschreibung (AfA nach EStG):**\n" +
+                  "   Am 01.07.2026 beschafft das Unternehmen ein Enterprise-Storage-System für 72.000,00 € netto (Nutzungsdauer laut amtlicher AfA-Tabelle: 3 Jahre / 36 Monate).\n" +
+                  "   a) Berechnen Sie den **jährlichen linearen Abschreibungsbetrag** (AfA-Satz und AfA in €). (2 Punkte)\n" +
+                  "   b) Berechnen Sie die zeitanteilige Abschreibung für das Anschaffungsjahr 2026 (Monats-pro-rata) und den **Restbuchwert** zum 31.12.2026. (3 Punkte)\n" +
+                  "   c) Ermitteln Sie den Restbuchwert zum 31.12.2027. (2 Punkte)\n" +
+                  "3. **Nutzwertanalyse (Entscheidungsmatrix):**\n" +
+                  "   Für zwei Server-Angebote (A und B) liegt folgende Bewertungsmatrix vor (Punkte 1-10):\n" +
+                  "   - Kriterium 1: Anschaffungspreis (Gewichtung 30 %) -> Angebot A: 8 Punkte, Angebot B: 6 Punkte\n" +
+                  "   - Kriterium 2: Energieeffizienz / Stromverbrauch (Gewichtung 25 %) -> Angebot A: 6 Punkte, Angebot B: 9 Punkte\n" +
+                  "   - Kriterium 3: Ausfallsicherheit / Redundanz (Gewichtung 25 %) -> Angebot A: 7 Punkte, Angebot B: 8 Punkte\n" +
+                  "   - Kriterium 4: Service & Support (Gewichtung 20 %) -> Angebot A: 9 Punkte, Angebot B: 7 Punkte\n" +
+                  "   a) Berechnen Sie den gewichteten Gesamtnutzwert für Angebot A und Angebot B. (4 Punkte)\n" +
+                  "   b) Welches Angebot ist wirtschaftlich und technisch zu bevorzugen? (2 Punkte)",
+        correctAnswer: "1. Break-Even-Analyse (5 Punkte):\n" +
+                       "   a) Deckungsbeitrag (DB) pro Monat: Preis - variable Kosten = 70,00 € - 30,00 € = 40,00 € / Monat (entspricht 480,00 € pro Jahr).\n" +
+                       "   b) Break-Even-Menge (BEP):\n" +
+                       "      - Formel: BEP = Fixkosten / Deckungsbeitrag pro Stück\n" +
+                       "      - Auf Jahresbasis: 48.000,00 € / 480,00 €/Jahr = **100 Lizenzen**\n" +
+                       "      - (Auf Monatsbasis: (48.000 € / 12 = 4.000 € Fixkosten/Monat) / 40,00 € = 100 Lizenzen).\n" +
+                       "   c) Begriff: Der Break-Even-Point (Gewinnschwelle) ist die Absatzmenge, bei der die Gesamterlöse exakt den Gesamtkosten (Fixkosten + variable Kosten) entsprechen. Gewinn = 0 €; jede darüber verkaufte Einheit erwirtschaftet Gewinn.\n\n" +
+                       "2. Lineare Abschreibung (AfA) (7 Punkte):\n" +
+                       "   a) Jährlicher AfA-Betrag:\n" +
+                       "      - AfA-Satz: 100 % / 3 Jahre = 33,333 %\n" +
+                       "      - Jährliche AfA: 72.000,00 € / 3 Jahre = **24.000,00 € pro volles Jahr**\n" +
+                       "   b) Anschaffungsjahr 2026 (Kauf am 01.07. -> 6 Monate zeitanteilig):\n" +
+                       "      - AfA 2026: 24.000,00 € * (6 Monate / 12 Monate) = **12.000,00 €**\n" +
+                       "      - Restbuchwert 31.12.2026: 72.000,00 € - 12.000,00 € = **60.000,00 €**\n" +
+                       "   c) Folgejahr 2027:\n" +
+                       "      - AfA 2027: 24.000,00 € (volles Jahr)\n" +
+                       "      - Restbuchwert 31.12.2027: 60.000,00 € - 24.000,00 € = **36.000,00 €**\n\n" +
+                       "3. Nutzwertanalyse (6 Punkte):\n" +
+                       "   a) Berechnung der gewichteten Nutzwerte (Teilnutzwert = Gewicht * Punkte):\n" +
+                       "      * Angebot A:\n" +
+                       "        - Preis: 0,30 * 8 = 2,40\n" +
+                       "        - Energieeffizienz: 0,25 * 6 = 1,50\n" +
+                       "        - Redundanz: 0,25 * 7 = 1,75\n" +
+                       "        - Service: 0,20 * 9 = 1,80\n" +
+                       "        -> Gesamtnutzwert A = 2,40 + 1,50 + 1,75 + 1,80 = **7,45 Punkte**\n" +
+                       "      * Angebot B:\n" +
+                       "        - Preis: 0,30 * 6 = 1,80\n" +
+                       "        - Energieeffizienz: 0,25 * 9 = 2,25\n" +
+                       "        - Redundanz: 0,25 * 8 = 2,00\n" +
+                       "        - Service: 0,20 * 7 = 1,40\n" +
+                       "        -> Gesamtnutzwert B = 1,80 + 2,25 + 2,00 + 1,40 = **7,45 Punkte** (Gleichstand!)\n" +
+                       "   b) Entscheidungsempfehlung: Da beide Angebote denselben Gesamtnutzwert (7,45) aufweisen, erfolgt die Entscheidung nach Priorisierung der Kriterien: Wenn laufende Betriebskosten und Hochverfügbarkeit oberste Priorität haben, ist **Angebot B** vorzuziehen (bessere Energieeffizienz 9 vs 6 und höhere Redundanz 8 vs 7). Steht geringer Investitionsaufwand und bester Service im Vordergrund, wird **Angebot A** gewählt.",
+        explanation: "Break-Even-Point, AfA-Monatsberechnung (pro rata temporis) und Nutzwertanalyse sind Standardaufgaben der IHK.",
+        points: 18
+    },
+    {
+        id: 224,
+        theme: "lf4",
+        isBawueFocus: true,
+        topic: "LF 4 - Prozessmodellierung: EPK & BPMN 2.0",
+        type: "open-text",
+        title: "Geschäftsprozesse: Ereignisgesteuerte Prozesskette (EPK) & BPMN 2.0 Modellierung",
+        question: "Ein Supportprozess soll analysiert und modelliert werden:\n\n" +
+                  "Prozessbeschreibung:\n" +
+                  "'Wenn ein Kunde ein Ticket einreicht, wird die Störungsmeldung durch den 1st-Level-Support erfasst. Anschließend wird geprüft, ob es sich um ein Standardproblem handelt. Wenn ja, wird die Lösung direkt an den Kunden übermittelt und das Ticket geschlossen. Wenn nein, wird das Ticket an den 2nd-Level-Support weitergeleitet und parallel dazu der Kunde über die Verzögerung per E-Mail informiert. Erst wenn der 2nd-Level-Support die Lösung erarbeitet hat und die Kundenbenachrichtigung erfolgt ist, wird das Ticket geschlossen.'\n\n" +
+                  "1. **Ereignisgesteuerte Prozesskette (EPK):**\n" +
+                  "   a) Welche grundlegenden Symbole werden in einer EPK für **Ereignisse** und **Funktionen** verwendet und welche Syntaxregel gilt für ihre Abfolge? (2 Punkte)\n" +
+                  "   b) Erklären Sie die drei logischen Konnektoren (**AND / UND**, **OR / ODER**, **XOR / Exklusiv-ODER**). (3 Punkte)\n" +
+                  "   c) Welche Konnektoren müssen im beschriebenen Prozess an der Verzweigung (Standardproblem?) und bei der Zusammenführung vor dem Schließen eingesetzt werden? (3 Punkte)\n" +
+                  "2. **BPMN 2.0 (Business Process Model and Notation):**\n" +
+                  "   a) Erklären Sie den Unterschied zwischen einem **Pool** und einer **Lane** in BPMN. (2 Punkte)\n" +
+                  "   b) Welche Bedeutung haben **exklusive Gateways (XOR)** und **parallele Gateways (AND)** in BPMN? (2 Punkte)\n" +
+                  "   c) Nennen Sie die drei Arten von Startereignissen, Zwischenereignissen und Endereignissen bezüglich ihrer Linienstärke/Grafik. (2 Punkte)\n" +
+                  "3. Nennen Sie **zwei Vorteile von BPMN 2.0** gegenüber der klassischen EPK. (2 Punkte)",
+        correctAnswer: "1. Ereignisgesteuerte Prozesskette (EPK) (8 Punkte):\n" +
+                       "   a) Symbole & Syntax:\n" +
+                       "      - Ereignis: Sechseck (Hexagon), beschreibt einen Zustand in der Vergangenheitsform (z. B. 'Ticket eingereicht').\n" +
+                       "      - Funktion: Rechteck mit abgerundeten Ecken, beschreibt eine Aktion im Infinitiv (z. B. 'Störung erfassen').\n" +
+                       "      - Syntaxregel: Ereignisse und Funktionen müssen sich streng abwechseln (Ereignis -> Funktion -> Ereignis). Niemals dürfen zwei Ereignisse oder zwei Funktionen direkt aufeinander folgen!\n" +
+                       "   b) Logische Konnektoren (Kreise mit Symbol):\n" +
+                       "      - AND (∧): Alle ausgehenden bzw. eingehenden Pfade müssen zwingend ausgeführt werden (Parallelität / Synchronisation).\n" +
+                       "      - OR (∨): Mindestens ein Pfad oder mehrere Pfade können ausgeführt werden (inklusive ODER).\n" +
+                       "      - XOR (⊕): Genau ein einziger Pfad wird ausgeführt, die anderen schließen sich aus (Entweder-Oder).\n" +
+                       "   c) Konnektoren im Beispiel:\n" +
+                       "      - Nach der Prüfung (Standardproblem?): **XOR-Verzweigung** (entweder Standardproblem ODER komplexer Fall).\n" +
+                       "      - Bei Weiterleitung an 2nd-Level & Kundeninfo: **AND-Verzweigung** (beides findet parallel statt).\n" +
+                       "      - Vor dem Schließen nach 2nd-Level: **AND-Zusammenführung** (beide Pfade müssen beendet sein, bevor geschlossen wird).\n\n" +
+                       "2. BPMN 2.0 (6 Punkte):\n" +
+                       "   a) Pool vs. Lane:\n" +
+                       "      - Pool: Repräsentiert eine eigenständige Organisationseinheit oder ein Unternehmen (z. B. 'IT-Dienstleister' oder 'Kunde'). Kommunikation zwischen Pools erfolgt über Nachrichtenflüsse (Message Flow, gestrichelt).\n" +
+                       "      - Lane: Unterteilt einen Pool horizontal/vertikal in interne Abteilungen oder Rollen (z. B. Lane '1st-Level-Support', Lane '2nd-Level-Support'). Kontrollfluss innerhalb einer Lane läuft über Sequenzflüsse (durchgezogene Pfeile).\n" +
+                       "   b) Gateways (Rauten):\n" +
+                       "      - Exklusives Gateway (XOR, Raute mit X): Verzweigung in genau einen Pfad basierend auf Bedingungen.\n" +
+                       "      - Paralleles Gateway (AND, Raute mit +): Teilt den Ablauf in mehrere gleichzeitig ablaufende Pfade (ohne Bedingung) oder synchronisiert sie.\n" +
+                       "   c) Ereignis-Grafik in BPMN:\n" +
+                       "      - Startereignis: Dünne einfache Kreislinie (○).\n" +
+                       "      - Zwischenereignis: Doppelte dünne Kreislinie (◎).\n" +
+                       "      - Endereignis: Dicke/fette Kreislinie (● / hervorgehobener Rand).\n\n" +
+                       "3. Vorteile von BPMN 2.0 (2 Punkte):\n" +
+                       "   - International standardisiert (ISO/IEC 19510) und von fast allen Workflow-Engines direkt ausführbar (technische Automatisierbarkeit).\n" +
+                       "   - Bessere Modellierung von Organisationsgrenzen (Pools/Lanes) und systemübergreifender Kommunikation (Message Flows).",
+        explanation: "EPK und BPMN 2.0 Prozessmodellierungen werden in der Baden-Württembergischen AP1 regelmäßig zur Analyse von betrieblichen Workflows verlangt.",
+        points: 16
+    },
+    {
+        id: 225,
+        theme: "lf4",
+        isBawueFocus: true,
+        topic: "LF 4 - Algorithmen: Struktogramme & Pseudocode",
+        type: "open-text",
+        title: "Programmierung & Logik: Nassi-Shneiderman Struktogramme, Kontrollstrukturen & Pseudocode",
+        question: "Gegeben ist folgende Aufgabenstellung zur Rabattberechnung in einem Onlineshop:\n\n" +
+                  "'Ein Kunde bestellt Waren im Gesamtwert von `bestellwert`. Wenn der Kunde den Status `premium` hat, erhält er ab einem Bestellwert von 100 € einen Rabatt von 10 %, andernfalls 5 %. Standard-Kunden erhalten ab 200 € Bestellwert einen Rabatt von 5 %, darunter keinen Rabatt (0 %). Am Ende wird der Rechnungsbetrag berechnet und ausgegeben. Solange weitere Artikel im Warenkorb liegen, soll die Erfassung wiederholt werden.'\n\n" +
+                  "1. **Struktogramm-Bausteine (Nassi-Shneiderman):**\n" +
+                  "   a) Skizzieren/beschreiben Sie das Symbol für eine **Sequenz (einfache Anweisung)**. (1 Punkt)\n" +
+                  "   b) Beschreiben Sie das Symbol für eine **Zweiseitige Verzweigung (IF-THEN-ELSE)**. (2 Punkte)\n" +
+                  "   c) Wie unterscheiden sich im Struktogramm eine **kopfgesteuerte Schleife (WHILE)** und eine **fußgesteuerte Schleife (DO-WHILE)** grafisch? (3 Punkte)\n" +
+                  "   d) Wie wird eine **Zählschleife (FOR)** dargestellt? (1 Punkt)\n" +
+                  "2. **Logik-Entwurf:** Formulieren Sie den vollständigen Algorithmus zur Rabatt- und Rechnungsbetragsberechnung in sauber strukturiertem **Pseudocode** (inkl. Verzweigungen). (6 Punkte)\n" +
+                  "3. **Fehleranalyse:** Welche Gefahr besteht, wenn in einer Schleife die Abbruchbedingung falsch formuliert oder die Zählvariable nicht verändert wird? (3 Punkte)",
+        correctAnswer: "1. Struktogramm-Grundsymbole (7 Punkte):\n" +
+                       "   a) Sequenz (Anweisung): Ein einfaches rechteckiges Kästchen mit dem Anweisungstext (wird von oben nach unten durchlaufen).\n" +
+                       "   b) Zweiseitige Verzweigung (IF-THEN-ELSE): Ein Rechteck mit einem oberen Dreieckskeil. Oben steht die Bedingung; links steht der 'JA/WAHR'-Zweig mit Anweisungen, rechts steht der 'NEIN/FALSCH'-Zweig mit Anweisungen.\n" +
+                       "   c) Schleifen-Darstellung:\n" +
+                       "      - Kopfgesteuerte Schleife (WHILE / abweisend): Ein L-förmiger Rahmen mit dem Schleifenbalken OBEN (Bedingung steht oben im Balken). Der Schleifenkörper wird nur durchlaufen, wenn die Bedingung anfangs wahr ist (0 bis n Durchläufe).\n" +
+                       "      - Fußgesteuerte Schleife (DO-WHILE / annehmend): Ein L-förmiger Rahmen mit dem Schleifenbalken UNTEN (Bedingung steht unten). Der Schleifenkörper wird mindestens einmal zwingend ausgeführt (1 bis n Durchläufe).\n" +
+                       "   d) Zählschleife (FOR): Ein Kasten mit linkem Balken und oberer Schleifenleiste: 'FÜR i = 1 BIS n SCHRITT 1'.\n\n" +
+                       "2. Pseudocode für die Rabattberechnung (6 Punkte):\n" +
+                       "```text\n" +
+                       "WENN status == 'premium' DANN\n" +
+                       "    WENN bestellwert >= 100 DANN\n" +
+                       "        rabattProzent = 0.10\n" +
+                       "    SONST\n" +
+                       "        rabattProzent = 0.05\n" +
+                       "    ENDE_WENN\n" +
+                       "SONST\n" +
+                       "    WENN bestellwert >= 200 DANN\n" +
+                       "        rabattProzent = 0.05\n" +
+                       "    SONST\n" +
+                       "        rabattProzent = 0.00\n" +
+                       "    ENDE_WENN\n" +
+                       "ENDE_WENN\n" +
+                       "\n" +
+                       "rabattBetrag = bestellwert * rabattProzent\n" +
+                       "rechnungsbetrag = bestellwert - rabattBetrag\n" +
+                       "AUSGABE 'Rechnungsbetrag:', rechnungsbetrag\n" +
+                       "```\n\n" +
+                       "3. Fehleranalyse (3 Punkte):\n" +
+                       "   - Es entsteht eine **Endlosschleife (Infinite Loop)**.\n" +
+                       "   - Das Programm reagiert nicht mehr, blockiert CPU-Ressourcen (100 % Kernauslastung) und stürzt ab bzw. erzeugt einen Programm-Freeze / Stack Overflow / Speicherüberlauf.",
+        explanation: "Nassi-Shneiderman Struktogramme (DIN 66261) und Pseudocode sind feste Programmier-Bestandteile der AP1.",
+        points: 16
+    },
+    {
+        id: 226,
+        theme: "lf3",
+        isBawueFocus: true,
+        topic: "LF 3/4 - Fachenglisch: Technische Logs & Troubleshooting",
+        type: "open-text",
+        title: "Fachenglisch: Analyse von englischen Server-Logfiles & Troubleshooting",
+        question: "In einem Supportfall analysieren Sie folgenden Auszug aus einem englischsprachigen Server-Logfile (Webserver / API-Gateway):\n\n" +
+                  "```text\n" +
+                  "[2026-09-08 14:22:15.104] [CRITICAL] [auth-service] Connection to database cluster 'db-node-01.internal' timed out after 30000ms.\n" +
+                  "[2026-09-08 14:22:15.109] [ERROR] [api-gateway] HTTP 504 Gateway Timeout on POST /api/v1/auth/login. Client IP: 192.168.10.45.\n" +
+                  "[2026-09-08 14:22:15.115] [WARNING] [load-balancer] Health check failed for backend 'auth-service-01'. Marking node as UNHEALTHY.\n" +
+                  "[2026-09-08 14:22:16.002] [INFO] [failover-daemon] Automatic failover triggered. Redirecting incoming traffic to secondary cluster 'db-node-02.internal'.\n" +
+                  "```\n\n" +
+                  "Beantworten Sie folgende IHK-Fragen auf Deutsch:\n\n" +
+                  "1. Übersetzen und erklären Sie sinngemäß die **Fehlerursache** in Zeile 1 und 2. (4 Punkte)\n" +
+                  "2. Was bedeutet die Statusmeldung des Load-Balancers in Zeile 3 und welche Konsequenz hat das 'Marking node as UNHEALTHY'? (3 Punkte)\n" +
+                  "3. Welche automatische Notfallmaßnahme (**Failover**) wird in Zeile 4 eingeleitet? (3 Punkte)\n" +
+                  "4. Nennen Sie den Unterschied zwischen dem HTTP-Statuscode **502 Bad Gateway** und **504 Gateway Timeout**. (2 Punkte)",
+        correctAnswer: "1. Fehlerursache (4 Punkte):\n" +
+                       "   - Zeile 1: Der Authentifizierungsdienst ('auth-service') konnte keine Verbindung zum primären Datenbank-Cluster ('db-node-01.internal') aufbauen; nach 30 Sekunden (30.000 ms) wurde die Verbindung wegen Zeitüberschreitung abgebrochen (Connection Timeout).\n" +
+                       "   - Zeile 2: Das API-Gateway meldet daraufhin an den Client (IP 192.168.10.45) den Fehlercode HTTP 504 (Gateway Timeout), weil der dahinterliegende Authentifizierungsserver nicht rechtzeitig geantwortet hat.\n\n" +
+                       "2. Load-Balancer Health-Check & Konsequenz (3 Punkte):\n" +
+                       "   - Bedeutung: Der periodische Funktions-/Gesundheitstest (Health Check) für den Knoten 'auth-service-01' ist fehlgeschlagen.\n" +
+                       "   - Konsequenz: Der Knoten wird als fehlerhaft/nicht einsatzbereit markiert ('UNHEALTHY') und der Load-Balancer leitet ab sofort keine neuen Client-Anfragen mehr an diesen defekten Server weiter, um Verbindungsabbrüche für Nutzer zu verhindern.\n\n" +
+                       "3. Automatisches Failover (3 Punkte):\n" +
+                       "   - Der Ausfallerkennungs-Dienst (Failover-Daemon) schaltet den Datenverkehr automatisch auf das redundante Ersatzsystem / den sekundären Datenbank-Cluster ('db-node-02.internal') um, damit der Dienst ohne manuellen Eingriff weiterläuft (Hochverfügbarkeit).\n\n" +
+                       "4. HTTP 502 vs. 504 (2 Punkte):\n" +
+                       "   - HTTP 502 Bad Gateway: Der Proxy/Gateway hat eine ungültige Antwort (z. B. Verbindungsabbruch oder fehlerhafte Daten) vom Upstream-Server erhalten.\n" +
+                       "   - HTTP 504 Gateway Timeout: Der Proxy/Gateway hat innerhalb der vorgegebenen Zeitspanne überhaupt keine Antwort vom Upstream-Server erhalten (Zeitüberschreitung).",
+        explanation: "Fachenglische Textauszüge, Logs und Handbücher sinngemäß auf Deutsch zu verstehen und zu erklären ist ein fester Bestandteil der Baden-Württembergischen IHK-Abschlussprüfung.",
+        points: 12
     }
 ];

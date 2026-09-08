@@ -438,3 +438,338 @@ footer {
     justify-items: center;
 }
 
+/* Highlight BaWü Focus Filter Button */
+.highlight-bawue-btn {
+    transition: all 0.25s ease !important;
+}
+
+.highlight-bawue-btn:hover {
+    background: linear-gradient(135deg, #ede9fe, #ddd6fe) !important;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(139, 92, 246, 0.2);
+}
+
+.highlight-bawue-btn.active {
+    background: linear-gradient(135deg, #8b5cf6, #6d28d9) !important;
+    color: #ffffff !important;
+    border-color: #6d28d9 !important;
+    box-shadow: 0 4px 12px rgba(109, 40, 217, 0.35);
+}
+
+.highlight-bawue-btn.active i {
+    color: #fde047 !important;
+}
+
+/* Whiteboard Card in Sidebar */
+.whiteboard-card {
+    transition: transform 0.2s ease;
+}
+
+.whiteboard-card:hover {
+    transform: translateY(-2px);
+}
+
+/* ==========================================================================
+   Interactive Whiteboard / Diagramming Canvas Modal
+   ========================================================================== */
+.whiteboard-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    animation: wbFadeIn 0.2s ease-out;
+}
+
+@keyframes wbFadeIn {
+    from { opacity: 0; transform: scale(0.98); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.whiteboard-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.7);
+    backdrop-filter: blur(4px);
+}
+
+.whiteboard-dialog {
+    position: relative;
+    z-index: 10000;
+    background: #ffffff;
+    width: 95vw;
+    max-width: 1250px;
+    height: 90vh;
+    max-height: 850px;
+    border-radius: 14px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    overflow: hidden;
+}
+
+.whiteboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1.25rem;
+    background: #f8fafc;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.wb-header-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    box-shadow: 0 2px 5px rgba(139, 92, 246, 0.3);
+}
+
+.wb-action-btn {
+    padding: 0.45rem 0.85rem;
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+    background: #ffffff;
+    color: var(--text-color);
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: var(--transition);
+}
+
+.wb-action-btn:hover {
+    background: #f1f5f9;
+    border-color: #cbd5e1;
+}
+
+.wb-danger-btn {
+    border-color: #fecaca;
+    color: #dc2626;
+    background: #fef2f2;
+}
+
+.wb-danger-btn:hover {
+    background: #fee2e2;
+    border-color: #f87171;
+}
+
+.wb-close-btn {
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    color: #64748b;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0 0.25rem;
+    transition: color 0.2s;
+}
+
+.wb-close-btn:hover {
+    color: #0f172a;
+}
+
+/* Toolbar */
+.whiteboard-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem 1.25rem;
+    background: #f1f5f9;
+    border-bottom: 1px solid var(--border-color);
+    overflow-x: auto;
+    flex-wrap: wrap;
+}
+
+.wb-toolgroup {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.wb-group-title {
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #64748b;
+    letter-spacing: 0.05em;
+}
+
+.wb-buttons-row {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    flex-wrap: wrap;
+}
+
+.wb-tool-btn {
+    padding: 0.35rem 0.6rem;
+    border-radius: 6px;
+    border: 1px solid #cbd5e1;
+    background: #ffffff;
+    color: var(--text-color);
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    transition: all 0.15s ease;
+    user-select: none;
+}
+
+.wb-tool-btn:hover {
+    background: #e2e8f0;
+}
+
+.wb-tool-btn.active {
+    background: #8b5cf6;
+    color: white;
+    border-color: #7c3aed;
+    box-shadow: 0 2px 4px rgba(139, 92, 246, 0.3);
+}
+
+.wb-separator {
+    width: 1px;
+    height: 32px;
+    background: #cbd5e1;
+    margin: 0 0.15rem;
+}
+
+.wb-color-palette {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.wb-color-btn {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 2px solid white;
+    box-shadow: 0 0 0 1px #94a3b8;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.wb-color-btn:hover {
+    transform: scale(1.15);
+}
+
+.wb-color-btn.active {
+    box-shadow: 0 0 0 2.5px #8b5cf6;
+    transform: scale(1.2);
+}
+
+.wb-size-selector {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.wb-size-btn {
+    padding: 0.25rem 0.55rem;
+    border-radius: 4px;
+    border: 1px solid #cbd5e1;
+    background: white;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-color);
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.wb-size-btn:hover {
+    background: #e2e8f0;
+}
+
+.wb-size-btn.active {
+    background: #1e293b;
+    color: white;
+    border-color: #1e293b;
+}
+
+.wb-opt-btn {
+    padding: 0.35rem 0.6rem;
+    border-radius: 6px;
+    border: 1px solid #cbd5e1;
+    background: white;
+    color: var(--text-color);
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    transition: all 0.15s ease;
+}
+
+.wb-opt-btn:hover {
+    background: #e2e8f0;
+}
+
+.wb-opt-btn.active {
+    background: #e2e8f0;
+    color: #0f172a;
+    font-weight: 700;
+    border-color: #94a3b8;
+}
+
+/* Canvas Wrapper & Grid Pattern */
+.whiteboard-canvas-wrapper {
+    flex: 1;
+    position: relative;
+    background: #ffffff;
+    overflow: hidden;
+    cursor: crosshair;
+    touch-action: none;
+}
+
+.whiteboard-canvas-wrapper.grid-active {
+    background-image: 
+        linear-gradient(to right, #e2e8f0 1px, transparent 1px),
+        linear-gradient(to bottom, #e2e8f0 1px, transparent 1px);
+    background-size: 24px 24px;
+}
+
+#whiteboard-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.whiteboard-footer {
+    padding: 0.45rem 1.25rem;
+    background: #f8fafc;
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+}
+
+@media (max-width: 768px) {
+    .whiteboard-dialog {
+        width: 100vw;
+        height: 100vh;
+        max-height: 100vh;
+        border-radius: 0;
+    }
+    .wb-btn-label {
+        display: none;
+    }
+    .wb-separator {
+        display: none;
+    }
+}
+
