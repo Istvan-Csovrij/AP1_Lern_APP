@@ -3188,4 +3188,265 @@ WHERE Email IS NULL OR Email = '';
 - Netzteile arbeiten bei ca. 50 % bis 80 % Auslastung am effizientesten (80 Plus Zertifizierungen).
 - Der Wirkungsgrad gibt das Verhältnis zwischen abgegebener Gleichstromleistung (für PC-Komponenten) und aufgenommener Wechselstromleistung (aus der Steckdose) an. Verluste entstehen als Wärme.`
     }
+,
+    {
+        id: 210,
+        topic: "LF 1 - Aufbauorganisation, Leitungssysteme & Führung",
+        type: "open-text",
+        title: "Aufbauorganisation: Einlinien- vs. Mehrliniensystem, Stabsstellen, Führungsstile & Stellenbeschreibung",
+        question: "Die Geschäftsleitung eines IT-Unternehmens plant eine Reorganisation der Softwareabteilung. Beantworten Sie dazu die folgenden IHK-Prüfungsfragen:\n\n" +
+                  "1. Vergleichen Sie das **Einliniensystem** und das **Mehrliniensystem**. Erklären Sie das jeweilige Leitungsprinzip. (2 Punkte)\n" +
+                  "2. Nennen Sie jeweils **zwei Vorteile** und **zwei Nachteile** des Mehrliniensystems. (4 Punkte)\n" +
+                  "3. Wie wird die Stelle 'Assistenz der Geschäftsleitung' in der Organisationslehre bezeichnet und welche besondere Eigenschaft hat sie bezüglich Weisungsbefugnissen? (2 Punkte)\n" +
+                  "4. Nennen Sie zwei Hauptaufgaben einer Stabsstelle. (2 Punkte)\n" +
+                  "5. Die Entwickler wünschen sich einen **kooperativen Führungsstil**. Nennen Sie drei typische Verhaltensweisen / Merkmale dieses Führungsstils. (3 Punkte)\n" +
+                  "6. Für alle Mitarbeiter sollen einheitliche Stellenbeschreibungen erstellt werden. Nennen Sie **vier wesentliche Bestandteile** einer Stellenbeschreibung. (4 Punkte)",
+        correctAnswer: "1. Leitungsprinzipien:\n" +
+                       "   - Einliniensystem: Jede Stelle/jeder Mitarbeiter hat genau einen direkten Vorgesetzten (Einheit der Auftragserteilung). Die Anweisungswege sind eindeutig und linear.\n" +
+                       "   - Mehrliniensystem (Funktionsmeistersystem): Eine Stelle kann von mehreren übergeordneten Fachvorgesetzten gleichzeitig fachliche Weisungen erhalten (Prinzip des kürzesten Weges).\n\n" +
+                       "2. Vor- und Nachteile des Mehrliniensystems:\n" +
+                       "   - Vorteile (2 Punkte):\n" +
+                       "     * Kürzere, direkte Kommunikations- und Informationswege (kein zeitraubender Dienstweg über Zwischeninstanzen).\n" +
+                       "     * Spezialisierung der Führungskräfte auf ihre Fachbereiche (hohe Fachkompetenz der Anweisungen).\n" +
+                       "     * Entlastung der oberen Unternehmensführung von operativen Fachfragen.\n" +
+                       "   - Nachteile (2 Punkte):\n" +
+                       "     * Gefahr von widersprüchlichen Anweisungen verschiedener Fachvorgesetzter.\n" +
+                       "     * Unklare Verantwortlichkeiten und schwierige Fehlerzurechnung.\n" +
+                       "     * Konfliktpotenzial und Kompetenzstreitigkeiten zwischen den Vorgesetzten.\n\n" +
+                       "3. Stabsstelle & Weisungsbefugnis (2 Punkte):\n" +
+                       "   - Bezeichnung: Stabsstelle (oder Staborganisation).\n" +
+                       "   - Weisungsbefugnis: Stabsstellen haben reine Beratungs- und Unterstützungsfunktion und besitzen KEINE fachliche oder disziplinarische Weisungsbefugnis gegenüber Linienstellen.\n\n" +
+                       "4. Aufgaben einer Stabsstelle (2 Punkte):\n" +
+                       "   - Entlastung der Führungskraft von Routine- und Rechercheaufgaben.\n" +
+                       "   - Beschaffung, Analyse und Aufbereitung von Informationen.\n" +
+                       "   - Vorbereitung von unternehmerischen Entscheidungen und strategische Planung.\n\n" +
+                       "5. Merkmale des kooperativen Führungsstils (3 Punkte):\n" +
+                       "   - Einbindung der Mitarbeiter in Entscheidungs- und Planungsprozesse (Partizipation).\n" +
+                       "   - Offene, transparente Kommunikation und Feedbackkultur auf Augenhöhe.\n" +
+                       "   - Delegation von Verantwortung, Aufgaben und Handlungsspielräumen an die Mitarbeiter.\n" +
+                       "   - Vertrauen und Förderung der Eigeninitiative statt reiner Kontrolle.\n\n" +
+                       "6. Bestandteile einer Stellenbeschreibung (4 Punkte):\n" +
+                       "   - 1. Stellenbezeichnung / Name der Position (z. B. Senior Frontend Developer).\n" +
+                       "   - 2. Organisatorische Eingliederung (Über- und Unterstellungsverhältnisse, Vertretungsregelung).\n" +
+                       "   - 3. Aufgaben und Kompetenzen (Haupt-, Nebenaufgaben, Befugnisse und Verantwortungsbereiche).\n" +
+                       "   - 4. Anforderungsprofil (erforderliche fachliche Qualifikationen, Ausbildung, Berufserfahrung, Soft Skills).",
+        explanation: "Aufbauorganisation und Leitungssysteme sind feste Standardinhalte der AP1. Achten Sie besonders auf die klare Trennung von Linien- und Stabsstellen sowie die Vor- und Nachteile von Ein- und Mehrliniensystemen.",
+        points: 17
+    },
+    {
+        id: 211,
+        topic: "LF 1 - Marktformen, Wirtschaftslehre & Rechtsformen",
+        type: "open-text",
+        title: "Wirtschaftslehre: Marktformen, Ökonomisches Prinzip, E-Commerce, Leasing & Vertretungsbefugnisse (Prokura)",
+        question: "Beantworten Sie folgende betriebswirtschaftliche Aufgaben aus dem Bereich Wirtschaftslehre und Unternehmensführung:\n\n" +
+                  "1. Erklären Sie die drei grundlegenden **Marktformen** (Monopol, Oligopol, Polypol) anhand der Anzahl von Anbietern und Nachfragern. (3 Punkte)\n" +
+                  "2. Was unterscheidet einen **Käufermarkt** von einem **Verkäufermarkt** und welche drei Bedingungen kennzeichnen das Modell des **vollkommenen Marktes**? (4 Punkte)\n" +
+                  "3. Erläutern Sie das **Ökonomische Prinzip** und grenzen Sie das **Maximalprinzip** vom **Minimalprinzip** mit jeweils einem Beispiel ab. (4 Punkte)\n" +
+                  "4. Nennen Sie **zwei betriebswirtschaftliche Vorteile von Leasing** gegenüber dem Direktkauf von Server-Hardware für ein Unternehmen. (2 Punkte)\n" +
+                  "5. Ein Prokurist besitzt eine weitreichende kaufmännische Vollmacht. Nennen Sie **drei Rechtsgeschäfte**, die ein Prokurist laut HGB ausdrücklich **nicht** vornehmen darf. (3 Punkte)",
+        correctAnswer: "1. Marktformen (3 Punkte):\n" +
+                       "   - Monopol: Ein einziger Anbieter steht vielen Nachfragern gegenüber (Angebotsmonopol) oder viele Anbieter einem Nachfrager (Nachfragemonopol). Der Monopolist kann Preise weitgehend unabhängig bestimmen.\n" +
+                       "   - Oligopol: Wenige Anbieter stehen vielen Nachfragern gegenüber (Angebotsoligopol) oder wenige Nachfrager vielen Anbietern. Hoher Wettbewerb und gegenseitige Reaktionsabhängigkeit.\n" +
+                       "   - Polypol: Viele Anbieter stehen vielen Nachfragern gegenüber. Starker Wettbewerb (vollständige Konkurrenz), Preisbildung erfolgt über Angebot und Nachfrage.\n\n" +
+                       "2. Käufer-/Verkäufermarkt & vollkommener Markt (4 Punkte):\n" +
+                       "   - Käufermarkt: Angebotsüberhang (Angebot > Nachfrage). Die Käufer haben die stärkere Verhandlungsmacht und bestimmen Preise/Konditionen.\n" +
+                       "   - Verkäufermarkt: Nachfrageüberhang (Nachfrage > Angebot). Die Verkäufer haben die stärkere Marktmacht (z. B. bei Chip-Mangel).\n" +
+                       "   - Vollkommener Markt (Merkmale): Homogene Güter (völlig gleichartig), vollkommene Markttransparenz (alle Marktteilnehmer kennen alle Preise), keine persönlichen/sachlichen/räumlichen/zeitlichen Präferenzen, unendliche Reaktionsgeschwindigkeit.\n\n" +
+                       "3. Ökonomisches Prinzip (4 Punkte):\n" +
+                       "   - Minimalprinzip: Ein fest vorgegebenes Ziel soll mit minimalem (geringstmöglichem) Mitteleinsatz erreicht werden. (Beispiel: Kauf von genau 20 vorkonfigurierten Laptops zum günstigsten Preis).\n" +
+                       "   - Maximalprinzip: Mit fest vorgegebenen Mitteln (Budget/Ressourcen) soll der maximal mögliche Erfolg/Ertrag erzielt werden. (Beispiel: Mit einem festen Budget von 10.000 € so viele Laptops wie möglich beschaffen).\n\n" +
+                       "4. Vorteile von Leasing (2 Punkte):\n" +
+                       "   - Schonung der Liquidität und des Eigenkapitals (keine hohe Anfangsinvestition nötig).\n" +
+                       "   - Leasingraten sind voll als Betriebsausgaben steuerlich absetzbar.\n" +
+                       "   - 'Pay-as-you-earn'-Effekt: Die Hardware erwirtschaftet ihren Ertrag während der Vertragslaufzeit.\n" +
+                       "   - Schnelle Anpassung an den technischen Fortschritt durch Hardwaretausch nach Leasingende.\n\n" +
+                       "5. Grenzen der Prokura (3 Punkte):\n" +
+                       "   - Unterzeichnung und Einreichung des Jahresabschlusses / der Bilanz.\n" +
+                       "   - Veräußerung oder Belastung von Grundstücken / Immobilien (außer bei gesonderter Grundstücksvollmacht).\n" +
+                       "   - Einstellung oder Verkauf des Handelsgeschäfts bzw. Liquidation/Insolvenzanmeldung.\n" +
+                       "   - Aufnahme neuer Gesellschafter.\n" +
+                       "   - Erteilung oder Übertragung der Prokura an Dritte.",
+        explanation: "Wirtschafts- und Rechtskunde-Grundlagen gehören zu den festen Bestandteilen der IHK-Ganzheitlichen Aufgaben I und II. Merken Sie sich die Ausschlussgeschäfte der Prokura und die beiden Ausprägungen des ökonomischen Prinzips.",
+        points: 16
+    },
+    {
+        id: 212,
+        topic: "LF 2 - PC-Hardware, Systemarchitektur & Energieeffizienz",
+        type: "open-text",
+        title: "Hardware-Architektur: Mainboard-Chipsatz, BIOS/UEFI, CPU-Caches & RAM-Konfiguration",
+        question: "Für ein neues Entwicklerteam sollen leistungsfähige Workstations konfiguriert werden. Beantworten Sie folgende hardwaretechnische Fragestellungen:\n\n" +
+                  "1. Welche zentrale Aufgabe hat der **Chipsatz** auf dem Mainboard und welche **drei standardisierten Formfaktoren** für Mainboards werden im PC-Bereich unterschieden? (3 Punkte)\n" +
+                  "2. Vergleichen Sie das traditionelle **BIOS** mit dem modernen **UEFI**. Nennen Sie zwei entscheidende Vorteile von UEFI (u. a. im Bereich Systemsicherheit). (3 Punkte)\n" +
+                  "3. Nennen Sie die Hauptaufgabe der **ALU** (Arithmetic Logic Unit) im Prozessor und erklären Sie Funktion und Unterschiede der **Cache-Stufen L1, L2 und L3**. (4 Punkte)\n" +
+                  "4. Erklären Sie den Unterschied zwischen **DRAM** und **SRAM**. Was bewirkt der **Dual-Channel-Betrieb** beim Arbeitsspeicher und was bedeutet eine geringere **CAS-Latenz (CL)**? (4 Punkte)\n" +
+                  "5. Nennen Sie **zwei konkrete Maßnahmen**, um die laufenden Energiekosten an IT-Arbeitsplätzen spürbar zu senken. (2 Punkte)",
+        correctAnswer: "1. Mainboard-Chipsatz & Formfaktoren (3 Punkte):\n" +
+                       "   - Aufgabe des Chipsatzes: Steuerung und Koordination der gesamten Datenflüsse und Kommunikation zwischen CPU, RAM, Grafikkarten (PCIe), Massenspeichern (M.2 NVMe, SATA) und Peripherieschnittstellen (USB, LAN, Audio).\n" +
+                       "   - Formfaktoren: ATX (Standard-Großformat), Micro-ATX (mATX, kompaktes Mittelformat), Mini-ITX (sehr kompaktes Kleinformat für Small-Form-Factor-PCs).\n\n" +
+                       "2. BIOS vs. UEFI (3 Punkte):\n" +
+                       "   - BIOS (Basic Input/Output System): Veraltete 16-Bit-Firmware, Beschränkung auf MBR-Partitionen bis maximal 2,2 TB, langsame Initialisierung.\n" +
+                       "   - UEFI (Unified Extensible Firmware Interface): Moderne 64-Bit-Firmware-Schnittstelle.\n" +
+                       "   - Vorteile von UEFI:\n" +
+                       "     * Secure Boot: Verhindert das Starten von nicht digital signierter Software / Boot-Malware.\n" +
+                       "     * Unterstützung von GPT-Partitionstabellen für Datenträger größer als 2,2 TB (bis zu 9,4 ZB).\n" +
+                       "     * Deutlich schnellerer Systemstart durch parallele Hardware-Initialisierung und grafische Benutzeroberfläche mit Mausunterstützung.\n\n" +
+                       "3. CPU-Aufbau & Cache-Hierarchie (4 Punkte):\n" +
+                       "   - ALU (Arithmetisch-Logische Einheit): Führt alle arithmetischen (Addition, Subtraktion etc.) und logischen Rechenoperationen (UND, ODER, NICHT, Vergleiche) aus.\n" +
+                       "   - Cache-Speicher (Funktion): Extrem schneller Pufferspeicher auf der CPU, um Latenzen beim Zugriff auf den langsameren RAM zu minimieren.\n" +
+                       "     * L1-Cache: Kleinster Speicher (einige KB pro Kern), läuft mit vollem CPU-Takt, extrem geringe Latenz.\n" +
+                       "     * L2-Cache: Größer als L1 (einige MB pro Kern), minimal langsamer als L1.\n" +
+                       "     * L3-Cache: Größter Cache (geteilt von allen CPU-Kernen), dient dem Datenaustausch zwischen den Kernen.\n\n" +
+                       "4. RAM-Technologie (4 Punkte):\n" +
+                       "   - DRAM vs. SRAM: DRAM (Dynamic RAM) speichert Daten über Kondensatoren und benötigt ständige periodische Refreshes (günstig, hohe Dichte, als Hauptspeicher genutzt). SRAM (Static RAM) speichert Daten über Flip-Flops ohne Refresh (sehr schnell, teuer, für CPU-Caches genutzt).\n" +
+                       "   - Dual-Channel: Nutzt zwei separate 64-Bit-Speicherkanäle gleichzeitig, wodurch sich die theoretische Bandbreite des Speicherbusses auf 128 Bit verdoppelt.\n" +
+                       "   - CAS-Latenz (CL): Gibt die Anzahl der Taktzyklen an, die zwischen dem Senden einer Spaltenadresse und dem Eintreffen der Daten am Ausgang vergehen. Eine geringere Latenz bedeutet schnellere Datenbereitstellung.\n\n" +
+                       "5. Energiesparmaßnahmen (2 Punkte):\n" +
+                       "   - Einsatz von energieeffizienten Netzteilen mit 80 PLUS Gold/Platinum Zertifizierung und sparsamen Monitoren mit automatischer Abschaltung.\n" +
+                       "   - Konsequente Nutzung von Energieprofilen / Standby-Modi im Betriebssystem und schaltbaren Steckdosenleisten gegen Standby-Verbrauch.\n" +
+                       "   - Einsatz von Thin Clients / Mini-PCs statt überdimensionierter Desktop-Rechner für Office-Tätigkeiten.",
+        explanation: "Hardwarekomponenten, Speicherhierarchien und Energieeffizienz sind zentrale Themen in LF 2. Verinnerlichen Sie die Unterschiede zwischen DRAM/SRAM, UEFI/BIOS und den Cache-Ebenen.",
+        points: 16
+    },
+    {
+        id: 213,
+        topic: "LF 3 - Netzwerktechnik, OSI-Modell, USV & Verkabelung",
+        type: "open-text",
+        title: "Netzwerktechnik: OSI-Schichten, DHCP/UDP/NAT, VLAN, USV-Klassen & Strukturierte Verkabelung",
+        question: "Beantworten Sie folgende Aufgaben aus dem Bereich der Netzwerktechnik, Infrastruktur und Hochverfügbarkeit:\n\n" +
+                  "1. Nennen Sie alle **sieben Schichten des OSI-Referenzmodells** in der richtigen Reihenfolge (Schicht 1 bis 7). Teilen Sie diese in die zwei Hauptgruppen (Transportorientiert vs. Anwendungsorientiert) ein und nennen Sie die Hauptaufgabe von **Schicht 3**. (4 Punkte)\n" +
+                  "2. **Netzwerkprotokolle & Adressierung:**\n" +
+                  "   a) Nennen Sie **vier typische Netzwerkeinstellungen**, die ein DHCP-Server an Clients verteilt. (2 Punkte)\n" +
+                  "   b) Nennen Sie die Hauptmerkmale des Protokolls **UDP** im Vergleich zu TCP. (1 Punkt)\n" +
+                  "   c) Nennen Sie **zwei wesentliche Gründe** für den Einsatz von NAT (Network Address Translation). (1 Punkt)\n" +
+                  "   d) Rechnen Sie die IPv4-Adresse `192.168.1.2` in das **Hexadezimalformat** um. (1 Punkt)\n" +
+                  "3. Nennen Sie **drei Vorteile** des Einsatzes von **VLANs** und **zwei Protokolle**, die bei sicherem VPN-Fernzugriff eingesetzt werden. (3 Punkte)\n" +
+                  "4. Erklären Sie den Zweck einer **USV** (Unterbrechungsfreie Stromversorgung) und unterscheiden Sie die drei standardisierten USV-Klassen: **VFD (Offline)**, **VI (Line-Interactive)** und **VFI (Online)**. (4 Punkte)\n" +
+                  "5. Beschreiben Sie den Aufbau der **strukturierten Gebäudeverkabelung** (Primär-, Sekundär- und Tertiärverkabelung) und ordnen Sie jedem Bereich das typische Kabelmedium und den Einsatzort zu. (4 Punkte)",
+        correctAnswer: "1. OSI-Referenzmodell (4 Punkte):\n" +
+                       "   - Schicht 1: Bitübertragungsschicht (Physical Layer)\n" +
+                       "   - Schicht 2: Sicherungsschicht (Data Link Layer)\n" +
+                       "   - Schicht 3: Vermittlungsschicht (Network Layer) -> Hauptaufgabe: Logische Adressierung (IP) und Routing von Datenpaketen zwischen verschiedenen Netzen.\n" +
+                       "   - Schicht 4: Transportschicht (Transport Layer)\n" +
+                       "   - Schicht 5: Sitzungsschicht (Session Layer)\n" +
+                       "   - Schicht 6: Darstellungsschicht (Presentation Layer)\n" +
+                       "   - Schicht 7: Anwendungsschicht (Application Layer)\n" +
+                       "   - Hauptgruppen: Schichten 1-4 = Transportorientierte Schichten (Netzwerkbasis); Schichten 5-7 = Anwendungsorientierte Schichten.\n\n" +
+                       "2. Protokolle & Adressierung (5 Punkte):\n" +
+                       "   a) DHCP-Optionen: IP-Adresse, Subnetzmaske, Standard-Gateway (Default Gateway), DNS-Server-Adressen (optional: NTP-Server, Domain-Name, WINS).\n" +
+                       "   b) UDP (User Datagram Protocol): Verbindungsloses, ungesichertes Transportprotokoll ohne Handshake, ohne Empfangsbestätigung und ohne Flusskontrolle (dafür minimale Latenz, ideal für VoIP/Live-Streams).\n" +
+                       "   c) NAT-Gründe: Einsparung öffentlicher IPv4-Adressen (viele interne private IPs teilen sich eine öffentliche IP) und Sicherheitsgewinn durch Verbergen der internen Netzwerkstruktur nach außen.\n" +
+                       "   d) Hexadezimal-Umrechnung 192.168.1.2:\n" +
+                       "      * 192 = C0\n" +
+                       "      * 168 = A8\n" +
+                       "      * 1 = 01\n" +
+                       "      * 2 = 02\n" +
+                       "      -> Hex-Adresse: C0.A8.01.02 (oder C0 A8 01 02)\n\n" +
+                       "3. VLAN & VPN (3 Punkte):\n" +
+                       "   - VLAN-Vorteile: Höhere Sicherheit durch logische Trennung von Netzen (z. B. Gastnetz, Management, Buchhaltung); Begrenzung von Broadcast-Domänen zur Leistungssteigerung; hohe Flexibilität bei Raum-/Arbeitsplatzwechseln ohne Umverkabelung.\n" +
+                       "   - VPN-Protokolle: IPsec (IP Security) und SSL/TLS (OpenVPN, WireGuard).\n\n" +
+                       "4. USV-Klassifizierung (4 Punkte):\n" +
+                       "   - Zweck: Sicherstellung der kontinuierlichen Stromversorgung bei Netzausfall und Schutz vor Spannungsspitzen/Spannungsschwankungen für geordnetes Weiterarbeiten oder kontrolliertes Herunterfahren.\n" +
+                       "   - VFD (Voltage and Frequency Dependent / Offline-USV): Leitet Netzstrom direkt durch; schaltet bei Stromausfall mit kurzer Umschaltzeit (2-10 ms) auf Akku um (einfacher Desktop-Schutz).\n" +
+                       "   - VI (Voltage Independent / Line-Interactive): Besitzt einen automatischen Spannungsregler (AVR) zur Filterung von Unter-/Überspannungen ohne Akkubetrieb; schnelle Umschaltzeit (2-4 ms).\n" +
+                       "   - VFI (Voltage and Frequency Independent / Online-USV / Dauerwandler): Wandelt Netzstrom ständig von AC zu DC und wieder zu AC um; 0 ms Umschaltzeit, perfekter Sinusstrom für Server und Rechenzentren.\n\n" +
+                       "5. Strukturierte Verkabelung (4 Punkte):\n" +
+                       "   - Primärbereich (Geländeverkabelung): Verbindet den Standortverteiler (SV) mit den Gebäudeverteilern (GV) verschiedener Gebäude auf dem Gelände. Medium: Glasfaser (LWL / Singlemode oder Multimode) wegen hoher Reichweite und galvanischer Trennung.\n" +
+                       "   - Sekundärbereich (Steigbereich / Gebäudeverkabelung): Verbindet den Gebäudeverteiler (GV) mit den Etagenverteilern (EV) in den einzelnen Stockwerken. Medium: Glasfaser (LWL) oder hochwertige Twisted-Pair-Kupferkabel (Cat. 7/8).\n" +
+                       "   - Tertiärbereich (Etagenverkabelung / Horizontalbereich): Verbindet den Etagenverteiler (EV / Patchfeld) mit den Endgerätedosen (RJ45) am Arbeitsplatz. Maximale Länge: 90 m Verlegekabel + 10 m Patchkabel (100 m Gesamtlänge). Medium: Twisted Pair (Cat. 6a / Cat. 7).",
+        explanation: "Das OSI-Modell, strukturierte Verkabelung nach EN 50173 und USV-Klassen sind absolute Standardfragen in der IHK AP1 Prüfung.",
+        points: 20
+    },
+    {
+        id: 214,
+        topic: "LF 4 - Software-Engineering, UML & Qualitätssicherung",
+        type: "open-text",
+        title: "Software-Engineering: OOP-Konzepte, UML-Diagramme, Testverfahren & Qualitätsmanagement",
+        question: "Beantworten Sie folgende Aufgaben zur Softwareentwicklung, Objektorientierung und Qualitätssicherung:\n\n" +
+                  "1. **Objektorientierte Programmierung (OOP):**\n" +
+                  "   a) Erklären Sie den Unterschied zwischen einer **Klasse** und einem **Objekt (Instanz)**. (2 Punkte)\n" +
+                  "   b) Erläutern Sie das Prinzip der **Vererbung** (Generalisierung/Spezialisierung). (1 Punkt)\n" +
+                  "   c) Was unterscheidet eine **Aggregation** von einer **Komposition** im Klassendiagramm? Nennen Sie die jeweilige Raute. (2 Punkte)\n" +
+                  "2. **UML-Modellierung:**\n" +
+                  "   a) Was spezifiziert ein **Use-Case (Anwendungsfall)** und worin liegt der Unterschied zwischen einer `«include»`- und einer `«extend»`-Beziehung? (3 Punkte)\n" +
+                  "   b) Wozu dient ein **Aktivitätsdiagramm** im Softwareentwicklungsprozess? (1 Punkt)\n" +
+                  "3. **Softwaretests & Testverfahren:**\n" +
+                  "   a) Vergleichen Sie einen **Compiler** mit einem **Interpreter**. (2 Punkte)\n" +
+                  "   b) Erklären Sie den Unterschied zwischen **Black-Box-Tests** und **White-Box-Tests**. (2 Punkte)\n" +
+                  "   c) Nennen Sie **drei standardisierte Teststufen** im Softwaretest. (1 Punkt)\n" +
+                  "4. **Qualitätsmanagement & Projektmanagement:**\n" +
+                  "   a) Erklären Sie die vier Phasen des **PDCA-Zyklus**. (2 Punkte)\n" +
+                  "   b) Nennen Sie **drei Qualitätsmerkmale für Software** nach DIN EN ISO 25010 (bzw. ISO 9126). (2 Punkte)\n" +
+                  "   c) Lösen Sie das Akronym **SMART** für Zieldefinitionen auf. (2 Punkte)",
+        correctAnswer: "1. Objektorientierte Programmierung (5 Punkte):\n" +
+                       "   a) Klasse vs. Objekt: Eine Klasse ist der abstrakte Bauplan/Schablone (definiert Attribute und Methoden). Ein Objekt (Instanz) ist das konkrete, zur Laufzeit im Speicher erzeugte Exemplar dieser Klasse mit individuellen Attributwerten.\n" +
+                       "   b) Vererbung: Ermöglicht es einer abgeleiteten Unterklasse (Subklasse), Attribute und Methoden einer Oberklasse (Superklasse) zu übernehmen und zu erweitern (Spezialisierung). Vermeidung von Code-Duplizierung.\n" +
+                       "   c) Aggregation vs. Komposition:\n" +
+                       "      * Aggregation (leere Raute ◊): Lose Teil-Ganzes-Beziehung ('hat-ein'). Das Teil-Objekt kann auch ohne das Ganze eigenständig existieren (z. B. Abteilung und Mitarbeiter).\n" +
+                       "      * Komposition (ausgefüllte schwarze Raute ♦): Strikte Teil-Ganzes-Beziehung mit existenzieller Abhängigkeit. Das Teil kann ohne das Ganze nicht existieren und hat die gleiche Lebensdauer (z. B. Haus und Zimmer).\n\n" +
+                       "2. UML-Modellierung (4 Punkte):\n" +
+                       "   a) Use-Case & Include/Extend: Ein Use-Case beschreibt eine in sich geschlossene Interaktionssequenz zwischen einem Akteur und dem System mit greifbarem Nutzen.\n" +
+                       "      * «include»: Zwingende, immer ausgeführte Teilfunktion (Pfeil zeigt zum inkludierten Use-Case).\n" +
+                       "      * «extend»: Optionale Erweiterung, die nur unter bestimmten Bedingungen (Extension Point) ausgeführt wird (Pfeil zeigt zum Basisanwendungsfall).\n" +
+                       "   b) Aktivitätsdiagramm: Visualisiert den Ablauf von Aktionen, Kontroll- und Datenflüssen (Geschäftsprozesse, Algorithmen) mit Verzweigungen und parallelen Pfaden.\n\n" +
+                       "3. Tests & Übersetzung (5 Punkte):\n" +
+                       "   a) Compiler vs. Interpreter: Ein Compiler übersetzt den gesamten Quelltext vor der Ausführung einmalig vollständig in Maschinencode (schnelle Laufzeit, z. B. C/C++, Rust). Ein Interpreter liest und führt den Quellcode zur Laufzeit Zeile für Zeile aus (z. B. Python, JavaScript).\n" +
+                       "   b) Black-Box vs. White-Box: Black-Box-Tests prüfen Funktionalität und Ein-/Ausgabe von außen ohne Kenntnis des inneren Quellcodes. White-Box-Tests prüfen die innere Programmstruktur, Codeüberdeckung und Kontrollflüsse mit Kenntnis des Quellcodes.\n" +
+                       "   c) Teststufen: Modultest/Unit-Test -> Integrationstest -> Systemtest -> Abnahmetest (Acceptance Test).\n\n" +
+                       "4. Qualitäts- & Projektmanagement (6 Punkte):\n" +
+                       "   a) PDCA-Zyklus (Deming-Kreis):\n" +
+                       "      * Plan: Ist-Zustand analysieren, Qualitätsziele und Maßnahmen planen.\n" +
+                       "      * Do: Geplante Maßnahmen im kleinen Rahmen umsetzen/ausführen.\n" +
+                       "      * Check: Ergebnisse überprüfen und mit den Zielen vergleichen.\n" +
+                       "      * Act: Erfolgreiche Maßnahmen als neuen Standard etablieren und kontinuierliche Verbesserung vorantreiben.\n" +
+                       "   b) ISO 25010 Software-Qualitätsmerkmale: Funktionalität, Zuverlässigkeit, Benutzbarkeit (Usability), Effizienz (Performance), Wartbarkeit, Übertragbarkeit (Portabilität), Sicherheit.\n" +
+                       "   c) SMART-Kriterien:\n" +
+                       "      * S = Spezifisch (präzise und eindeutig formuliert)\n" +
+                       "      * M = Messbar (anhand klarer Metriken überprüfbar)\n" +
+                       "      * A = Akzeptiert / Attraktiv (von den Beteiligten mitgetragen)\n" +
+                       "      * R = Realistisch (mit den verfügbaren Ressourcen machbar)\n" +
+                       "      * T = Terminiert (mit klarem Endtermin versehen).",
+        explanation: "UML-Klassendiagramme, Testmethodik und das Qualitätsmanagement (ISO 25010, PDCA, SMART) sind wiederkehrende Prüfungsklassiker in der AP1.",
+        points: 20
+    },
+    {
+        id: 215,
+        topic: "LF 4 / KI & EU AI Act",
+        type: "open-text",
+        title: "Künstliche Intelligenz (KI), Machine Learning & EU AI Act (EU-KI-Verordnung)",
+        question: "Künstliche Intelligenz und europäische KI-Regulierung sind hochaktuelle Schwerpunkte in der IT-Ausbildung. Beantworten Sie folgende Fachfragen:\n\n" +
+                  "1. **Grundlagen der Künstlichen Intelligenz:**\n" +
+                  "   a) Definieren Sie den Begriff **Künstliche Intelligenz (KI)**. (1 Punkt)\n" +
+                  "   b) Wie unterscheiden sich **Machine Learning (ML)** und **Deep Learning (DL)** von klassischer KI? (2 Punkte)\n" +
+                  "   c) Was versteht man unter **Reinforcement Learning (Bestärkendes Lernen)**? (1 Punkt)\n" +
+                  "2. **KI-Konzepte & Technologien:**\n" +
+                  "   a) Grenzen Sie **Schwache KI (Narrow AI)** von **Starker KI / AGI (Artificial General Intelligence)** ab. (2 Punkte)\n" +
+                  "   b) Aus welchen **drei Schichten (Ebenen)** besteht ein künstliches neuronales Netz? (1 Punkt)\n" +
+                  "   c) Erklären Sie den Begriff **Prompting (Prompt Engineering)** im Kontext generativer Sprachmodelle. (1 Punkt)\n" +
+                  "3. **EU AI Act (Europäische KI-Verordnung):**\n" +
+                  "   a) Welches übergeordnete Ziel verfolgt der EU AI Act? (1 Punkt)\n" +
+                  "   b) Erläutern Sie das **risikobasierte Klassifizierungssystem** des EU AI Acts (die 4 Risikostufen) mit jeweils einem konkreten Praxisbeispiel. (4 Punkte)\n" +
+                  "4. **GPAI & Pflichten:**\n" +
+                  "   a) Was ist ein **GPAI-Modell (General Purpose AI)**? (1 Punkt)\n" +
+                  "   b) Welche Kernpflichten haben **Anbieter von Hochrisiko-KI-Systemen** laut EU AI Act? (2 Punkte)",
+        correctAnswer: "1. KI-Grundlagen (4 Punkte):\n" +
+                       "   a) Definition KI: Ein Teilgebiet der Informatik, das sich mit der Entwicklung von Systemen befasst, die menschenähnliche kognitive Fähigkeiten wie Lernen, Schlussfolgern, Problemlösen, Sprachverstehen und Entscheiden maschinell nachbilden.\n" +
+                       "   b) ML vs. DL: Machine Learning ist ein Teilbereich der KI, bei dem Algorithmen eigenständig aus Daten Muster lernen, anstatt explizit programmiert zu werden. Deep Learning ist wiederum ein Teilbereich des ML, der künstliche neuronale Netze mit vielen verborgenen Schichten (Deep Neural Networks) nutzt, um hochkomplexe Muster (z. B. in Bild- und Sprachverarbeitung) zu erfassen.\n" +
+                       "   c) Reinforcement Learning: Ein Lernverfahren, bei dem ein autonomer Software-Agent durch Interaktion mit einer Umgebung durch Belohnungen (Rewards) und Bestrafungen (Penalties) lernt, die optimale Handlungsstrategie zur Zielerreichung zu finden.\n\n" +
+                       "2. KI-Arten & Technologien (4 Punkte):\n" +
+                       "   a) Narrow AI vs. AGI: Schwache KI (Narrow AI) ist auf eine einzige spezifische Aufgabe trainiert und optimiert (z. B. Schacherkennung, Bildklassifikation, Übersetzung) und kann nicht eigenständig auf andere Domänen transferiert werden. Starke KI / AGI (Artificial General Intelligence) besitzt menschenähnliche, vielseitige Denk-, Abstraktions- und Lernfähigkeiten über alle Wissensdomänen hinweg.\n" +
+                       "   b) Schichten neuronaler Netze: 1. Eingabeschicht (Input Layer), 2. Verborgene Schichten (Hidden Layers), 3. Ausgabeschicht (Output Layer).\n" +
+                       "   c) Prompting: Das gezielte Formulieren von Eingabeanweisungen, Rollen, Kontexten und Beispielen (Prompts), um von einem generativen KI-Modell (LLM) das präziseste und qualitativ hochwertigste Ergebnis zu erhalten.\n\n" +
+                       "3. EU AI Act & Risikoklassen (5 Punkte):\n" +
+                       "   a) Ziel: Gewährleistung von Sicherheit, Transparenz, Grundrechteschutz und ethischen Standards beim Einsatz von KI im EU-Binnenmarkt bei gleichzeitiger Innovationsförderung.\n" +
+                       "   b) Die 4 Risikostufen des EU AI Acts:\n" +
+                       "      * 1. Unannehmbares Risiko (Verboten): Praktiken, die Grundrechte verletzen (z. B. staatliches Social Scoring, biometrische Echtzeit-Überwachung im öffentlichen Raum, kognitive Verhaltensmanipulation).\n" +
+                       "      * 2. Hohes Risiko (High Risk): Streng reguliert mit Zulassungspflicht, Qualitätsmanagement, menschlicher Aufsicht und CE-Kennzeichnung (z. B. KI in kritischer Infrastruktur, Medizingeräten, HR-Bewerberauswahl, Kreditwürdigkeitsprüfung, Justiz).\n" +
+                       "      * 3. Begrenztes Risiko / Spezifisches Transparenzrisiko: Unterliegt Transparenzpflichten, d. h. Nutzer müssen informiert werden, dass sie mit einer KI interagieren (z. B. Kundenservice-Chatbots, Deepfakes, KI-generierte Inhalte).\n" +
+                       "      * 4. Minimales / Kein Risiko: Frei nutzbar ohne Auflagen (z. B. KI-Spamfilter, KI in Videospielen, Bestandsoptimierung).\n\n" +
+                       "4. GPAI & Betreiberpflichten (3 Punkte):\n" +
+                       "   a) GPAI (General Purpose AI / Allzweck-KI): Vielseitige Basismodelle (Foundation Models wie GPT-4), die auf breiten Datenmengen trainiert sind und für unterschiedlichste Folgeaufgaben genutzt oder in andere KI-Systeme integriert werden können.\n" +
+                       "   b) Pflichten bei Hochrisiko-KI: Einrichtung eines umfassenden Qualitätsmanagementsystems (QMS) und Risikomanagementsystems; Gewährleistung hoher Datenqualität gegen Verzerrungen (Bias); lückenlose technische Dokumentation und automatische Protokollierung (Logging); Sicherstellung wirksamer menschlicher Aufsicht (Human Oversight); Erfüllung hoher Cyber-Sicherheitsstandards.",
+        explanation: "Der EU AI Act und Grundlagen moderner KI-Systeme (ML, DL, Prompting, Neuronale Netze) sind hochaktuelle, zukunftsrelevante Prüfungsthemen für IT-Berufe.",
+        points: 16
+    }
 ];
