@@ -435,7 +435,7 @@ function loadQuestion() {
     // Update headers
     questionThemeEl.textContent = getThemeLabel(q.theme);
     questionNumberEl.textContent = `Frage ${currentQuestionIndex + 1} von ${filteredQuestions.length}`;
-    questionTextEl.textContent = q.question;
+    questionTextEl.innerHTML = formatQuestionText(q.question);
     
     // Handle code snippet
     if (q.code) {
@@ -828,6 +828,7 @@ function getThemeLabel(key) {
 
 // Helper to escape HTML characters
 function escapeHtml(text) {
+    if (text === null || text === undefined) return "";
     const map = {
         '&': '&amp;',
         '<': '&lt;',
@@ -835,7 +836,24 @@ function escapeHtml(text) {
         '"': '&quot;',
         "'": '&#039;'
     };
-    return text.replace(/[&<>"']/g, function(m) { return map[m]; });
+    return String(text).replace(/[&<>"']/g, function(m) { return map[m]; });
+}
+
+// Helper to format question text with markdown bolding, code and line breaks
+function formatQuestionText(text) {
+    if (!text) return "";
+    let formatted = escapeHtml(text);
+    
+    // Bold markdown: **text** -> <strong>text</strong>
+    formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+    
+    // Inline code markdown: `code` -> <code>code</code>
+    formatted = formatted.replace(/`([^`]+)`/g, '<code style="background: #f1f5f9; padding: 0.15rem 0.35rem; border-radius: 4px; font-size: 0.9em; border: 1px solid #e2e8f0; font-family: monospace;">$1</code>');
+    
+    // Convert newlines to <br>
+    formatted = formatted.replace(/\n/g, '<br>');
+    
+    return formatted;
 }
 
 // ==================== EXAM MODE LOGIC ====================
@@ -962,7 +980,7 @@ function loadExamQuestion() {
     // Header updates
     document.getElementById("exam-question-theme").textContent = getThemeLabel(q.theme);
     document.getElementById("exam-question-number").textContent = `Aufgabe ${examCurrentIndex + 1} von ${examQuestions.length}`;
-    document.getElementById("exam-question-text").textContent = q.question;
+    document.getElementById("exam-question-text").innerHTML = formatQuestionText(q.question);
 
     // Handle code block
     const codeBlock = document.getElementById("exam-code-block-container");
@@ -1309,7 +1327,7 @@ function calculateExamScores() {
                     ${ans.isCorrect ? '<i class="fa-solid fa-check-double"></i> 1 Punkt' : '<i class="fa-solid fa-xmark"></i> 0 Punkte'}
                 </span>
             </div>
-            <h4 style="margin: 0.5rem 0; font-size: 1.05rem;">${escapeHtml(q.question)}</h4>
+            <h4 style="margin: 0.5rem 0; font-size: 1.05rem; line-height: 1.5;">${formatQuestionText(q.question)}</h4>
             ${q.code ? `<pre style="background: #f7fafc; padding: 0.50rem; border-radius: 6px; font-size: 0.85rem; border: 1px solid #e2e8f0; margin: 0.5rem 0;"><code style="font-family: monospace;">${escapeHtml(q.code)}</code></pre>` : ''}
             <div style="margin-top: 0.75rem; font-size: 0.95rem; line-height: 1.45;">
                 <div style="margin-bottom: 0.5rem;">

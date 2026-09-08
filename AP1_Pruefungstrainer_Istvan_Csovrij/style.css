@@ -187,10 +187,17 @@ header {
 }
 
 .question-container h2 {
-    font-size: 1.35rem;
-    font-weight: 600;
+    font-size: 1.15rem;
+    font-weight: 500;
+    line-height: 1.65;
     color: var(--primary-dark);
-    margin-bottom: 1rem;
+    margin-bottom: 1.25rem;
+    white-space: normal;
+}
+
+.question-container h2 strong {
+    color: #1e3a8a;
+    font-weight: 700;
 }
 
 /* Code block styles */
