@@ -3449,4 +3449,175 @@ WHERE Email IS NULL OR Email = '';
         explanation: "Der EU AI Act und Grundlagen moderner KI-Systeme (ML, DL, Prompting, Neuronale Netze) sind hochaktuelle, zukunftsrelevante Prüfungsthemen für IT-Berufe.",
         points: 16
     }
+,
+    {
+        id: 216,
+        topic: "LF 1 - Unternehmensziele, Zielarten & Zielbeziehungen",
+        type: "open-text",
+        title: "Unternehmensziele: Formalziele, Sachziele, Sozialziele, Ökologische Ziele & Zielbeziehungen",
+        question: "Ein IT-Systemhaus formuliert für das kommende Geschäftsjahr seine strategische Unternehmensplanung. Beantworten Sie folgende betriebswirtschaftliche Aufgaben:\n\n" +
+                  "1. **Zielarten unterscheiden:** Erklären Sie die vier grundlegenden Zielarten (**Formalziele/ökonomische Ziele**, **Sachziele/Leistungsziele**, **soziale Ziele**, **ökologische Ziele**) und nennen Sie für jede Zielart ein konkretes Praxisbeispiel aus einem IT-Unternehmen. (4 Punkte)\n" +
+                  "2. **Zielbeziehungen:** Erläutern Sie die drei möglichen Beziehungen zwischen verschiedenen Unternehmenszielen (**Zielharmonie/komplementär**, **Zielkonflikt/konkurrierend**, **Zielindifferenz/neutral**) anhand von Beispielen. (3 Punkte)\n" +
+                  "3. **Erwerbswirtschaftlich vs. Gemeinwirtschaftlich:** Vergleichen Sie die primären Zielsetzungen eines privaten IT-Dienstleisters (erwerbswirtschaftlich) mit denen eines kommunalen Rechenzentrums (öffentlich/gemeinwirtschaftlich). (3 Punkte)\n" +
+                  "4. **Green-IT & Nachhaltigkeit:** Das Management möchte die Hardwarebeschaffung auf nachhaltige 'Green-IT'-Kriterien umstellen. Nennen Sie **vier messbare Kriterien**, die in die Beschaffungsmatrix einfließen sollten. (4 Punkte)\n" +
+                  "5. **Zielerreichungsgrad:** Ein Softwarehaus plante für ein neues Cloud-Backup-Produkt einen Jahresumsatz von 500.000 €. Tatsächlich wurden 440.000 € erzielt. Berechnen Sie den Zielerreichungsgrad in Prozent. (2 Punkte)",
+        correctAnswer: "1. Die vier Zielarten (4 Punkte):\n" +
+                       "   - Ökonomische Ziele (Formalziele / Erfolgsziele): Beschreiben den wirtschaftlichen und finanziellen Erfolg (z. B. Steigerung des Jahresgewinns um 15 %, Erhöhung der Eigenkapitalrentabilität auf 12 %, Umsatzwachstum, Marktanteilssteigerung).\n" +
+                       "   - Sachziele (Leistungsziele): Bestimmen das konkrete Produkt- und Dienstleistungsangebot sowie Art, Menge, Qualität und Termine der betrieblichen Leistung (z. B. Einführung eines 24/7-Managed-Security-Services, Release von Version 2.0 bis Q3, Senkung der Reaktionszeit im Support auf unter 15 Minuten).\n" +
+                       "   - Soziale Ziele (Mitarbeiterbezogene Ziele): Betreffen das Wohlbefinden und die Interessen der Mitarbeiter (z. B. Erhöhung der Ausbildungsquote, Angebot von Homeoffice/Gleitzeit, betriebliche Weiterbildungsangebote, ergonomische Arbeitsplätze, faire Vergütung).\n" +
+                       "   - Ökologische Ziele (Umweltbezogene Ziele): Betreffen den schonenden Umgang mit der Natur und natürlichen Ressourcen (z. B. Reduktion des Stromverbrauchs im Rechenzentrum um 12 % durch Kaltgangeinhausung, 100 % Ökostrom-Nutzung, papierloses Büro, Einführung von Mehrweg-Verpackungen).\n\n" +
+                       "2. Zielbeziehungen (3 Punkte):\n" +
+                       "   - Zielharmonie (komplementäre Ziele): Das Erreichen von Ziel A fördert automatisch das Erreichen von Ziel B (Beispiel: Steigerung der Softwarequalität senkt Supportkosten und erhöht gleichzeitig Kundenzufriedenheit und Gewinn).\n" +
+                       "   - Zielkonflikt (konkurrierende Ziele): Das Erreichen von Ziel A behindert oder verringert das Erreichen von Ziel B (Beispiel: Höchste Verfügbarkeit durch 4-fache Redundanz erhöht die Hardwarekosten und schmälert kurzfristig den Gewinn; Lohnerhöhungen für Mitarbeiter senken die Marge).\n" +
+                       "   - Zielindifferenz / Zielneutralität: Die Erreichung von Ziel A hat keinerlei Einfluss auf Ziel B (Beispiel: Umstellung auf Ökostrom in der Firmenzentrale hat keinen Einfluss auf die Einhaltung von Programmierstandards im Software-Team).\n\n" +
+                       "3. Erwerbswirtschaftlich vs. Gemeinwirtschaftlich (3 Punkte):\n" +
+                       "   - Erwerbswirtschaftliches Unternehmen (privater IT-Dienstleister): Vorrangiges Ziel ist die langfristige Gewinnmaximierung, Erzielung einer angemessenen Kapitalrendite und Sicherung der Wettbewerbsposition am freien Markt.\n" +
+                       "   - Öffentliches / gemeinwirtschaftliches Unternehmen (z. B. kommunales Rechenzentrum): Vorrangiges Ziel ist die bedarfsgerechte und zuverlässige Versorgung der öffentlichen Verwaltung und Bürger (Bedarfsdeckung). Wirtschaftliche Ziele sind Kostendeckung, Verlustminimierung und sparsamer Mitteleinsatz, nicht maximale Kapitalrendite.\n\n" +
+                       "4. Green-IT Beschaffungskriterien (4 Punkte):\n" +
+                       "   - 1. Energieeffizienz (geringer Stromverbrauch im Betrieb und Standby, z. B. 80 PLUS Titanium Netzteile, Energy Star Zertifizierung).\n" +
+                       "   - 2. Reparierbarkeit und Modularität (leichter Komponententausch, kein verklebtes Gehäuse, hohe Ersatzteilverfügbarkeit über 5+ Jahre).\n" +
+                       "   - 3. Recyclingfähigkeit und Schadstofffreiheit (Einhaltung von RoHS/WEEE, hoher Anteil recycelter Kunststoffe/Metalle, schadstoffarme Fertigung).\n" +
+                       "   - 4. Langlebigkeit und Update-Garantie (robuste Verarbeitung, garantierte Treiber- und Sicherheitsupdate-Versorgung über den gesamten Lebenszyklus).\n\n" +
+                       "5. Berechnung Zielerreichungsgrad (2 Punkte):\n" +
+                       "   - Formel: Zielerreichungsgrad = (Ist-Wert / Soll-Wert) * 100 %\n" +
+                       "   - Rechnung: (440.000 € / 500.000 €) * 100 % = 0,88 * 100 % = 88,00 %\n" +
+                       "   - Ergebnis: 88 % (Fehlbetrag zum Ziel: 12 Prozentpunkte)",
+        explanation: "Unternehmensziele, Zielbeziehungen (Harmonie, Konflikt, Indifferenz) und Green-IT sind Kernbestandteile von LF 1 und WiSo.",
+        points: 16
+    },
+    {
+        id: 217,
+        topic: "LF 1 / WiSo - Betriebswirtschaftliche Kennzahlen & Wirtschaftlichkeit",
+        type: "open-text",
+        title: "Wirtschaftlichkeitsrechnung: Wirtschaftlichkeit, Produktivität, Rentabilitäten & Marktanteil",
+        question: "Ein IT-Systemhaus analysiert die Jahresabschlussdaten und Leistungsdaten seiner Cloud-Sparte. Lösen Sie die folgenden Berechnungen und betriebswirtschaftlichen Aufgaben:\n\n" +
+                  "1. **Wirtschaftlichkeit:**\n" +
+                  "   a) Nennen Sie die mathematische Formel zur Berechnung der **Wirtschaftlichkeit**. (1 Punkt)\n" +
+                  "   b) Ein IT-Projekt erwirtschaftet Erträge (Verkaufserlöse) von 780.000 € bei Gesamtaufwendungen (Kosten) von 650.000 €. Berechnen Sie die Wirtschaftlichkeit und beurteilen Sie das Ergebnis. (2 Punkte)\n" +
+                  "   c) Was passiert mit der Wirtschaftlichkeit, wenn die Verkaufspreise aufgrund von Konkurrenzdruck um 10 % sinken, die Kosten jedoch exakt gleich bleiben? (1 Punkt)\n" +
+                  "2. **Produktivität:**\n" +
+                  "   a) Nennen Sie die Definition und Grundformel der **Produktivität**. (1 Punkt)\n" +
+                  "   b) Vor der Einführung eines automatisierten Deployment-Tools benötigte das Support-Team 8 Arbeitsstunden, um 40 Kunden-Updates auszurollen. Nach der Automatisierung schaffen sie 60 Updates in 6 Arbeitsstunden. Berechnen Sie die Produktivität vor und nach der Umstellung (Updates pro Stunde) sowie die prozentuale Produktivitätssteigerung. (4 Punkte)\n" +
+                  "3. **Rentabilitätskennzahlen:**\n" +
+                  "   a) Ein IT-Unternehmen erzielte einen Jahresgewinn von 180.000 €. Das eingesetzte Eigenkapital beträgt 1.200.000 €, das Fremdkapital 800.000 € (Fremdkapitalzinsen: 40.000 €). Die Gesamterlöse (Umsatz) lagen bei 2.400.000 €.\n" +
+                  "   b) Berechnen Sie die **Eigenkapitalrentabilität** (EKR). (2 Punkte)\n" +
+                  "   c) Berechnen Sie die **Gesamtkapitalrentabilität** (GKR). (3 Punkte)\n" +
+                  "   d) Berechnen Sie die **Umsatzrentabilität** (Umsatzrendite / ROS). (2 Punkte)\n" +
+                  "4. **Marktanteil:** Im deutschen Markt für Firewall-Appliances beträgt das gesamte Marktvolumen 55.000.000 € pro Jahr. Das Unternehmen erzielt in diesem Segment einen eigenen Umsatz von 6.600.000 €. Berechnen Sie den **Marktanteil** des Unternehmens in Prozent. (2 Punkte)",
+        correctAnswer: "1. Wirtschaftlichkeit (4 Punkte):\n" +
+                       "   a) Formel: Wirtschaftlichkeit = Ertrag / Aufwand (oder Erlöse / Kosten)\n" +
+                       "   b) Rechnung: Wirtschaftlichkeit = 780.000 € / 650.000 € = 1,20 (oder 120 %)\n" +
+                       "      - Beurteilung: Da der Wert > 1,0 ist, arbeitet das Projekt wirtschaftlich (Gewinnzone: pro 1,00 € Einsatz werden 1,20 € Ertrag erwirtschaftet).\n" +
+                       "   c) Auswirkung: Da der Zähler (Ertrag) sinkt und der Nenner (Aufwand) gleich bleibt, sinkt der Wert der Wirtschaftlichkeit (die Wirtschaftlichkeit wird kleiner).\n\n" +
+                       "2. Produktivität (5 Punkte):\n" +
+                       "   a) Formel: Produktivität = Ausbringungsmenge (Output) / Faktoreinsatzmenge (Input)\n" +
+                       "   b) Berechnung:\n" +
+                       "      * Vor Umstellung: 40 Updates / 8 Stunden = 5,00 Updates pro Stunde\n" +
+                       "      * Nach Umstellung: 60 Updates / 6 Stunden = 10,00 Updates pro Stunde\n" +
+                       "      * Produktivitätssteigerung: ((10,00 - 5,00) / 5,00) * 100 % = (5,00 / 5,00) * 100 % = +100 % (Verdopplung der Produktivität).\n\n" +
+                       "3. Rentabilitätskennzahlen (7 Punkte):\n" +
+                       "   a) Eigenkapitalrentabilität (EKR):\n" +
+                       "      - Formel: EKR = (Gewinn / Eigenkapital) * 100 %\n" +
+                       "      - Rechnung: (180.000 € / 1.200.000 €) * 100 % = 0,15 * 100 % = 15,00 %\n" +
+                       "   b) Gesamtkapitalrentabilität (GKR):\n" +
+                       "      - Gesamtkapital = Eigenkapital + Fremdkapital = 1.200.000 € + 800.000 € = 2.000.000 €\n" +
+                       "      - Formel: GKR = ((Gewinn + Fremdkapitalzinsen) / Gesamtkapital) * 100 %\n" +
+                       "      - Rechnung: ((180.000 € + 40.000 €) / 2.000.000 €) * 100 % = (220.000 € / 2.000.000 €) * 100 % = 11,00 %\n" +
+                       "   c) Umsatzrentabilität (ROS):\n" +
+                       "      - Formel: Umsatzrentabilität = (Gewinn / Umsatz) * 100 %\n" +
+                       "      - Rechnung: (180.000 € / 2.400.000 €) * 100 % = 0,075 * 100 % = 7,50 %\n\n" +
+                       "4. Marktanteil (2 Punkte):\n" +
+                       "   - Formel: Marktanteil = (Eigener Umsatz / Marktvolumen) * 100 %\n" +
+                       "   - Rechnung: (6.600.000 € / 55.000.000 €) * 100 % = 0,12 * 100 % = 12,00 %",
+        explanation: "Wirtschaftlichkeit (Ertrag/Aufwand), Produktivität (Menge/Einsatz) und die drei Rentabilitäten (EKR, GKR, Umsatzrentabilität) sind essenzielle IHK-Prüfungsrechenaufgaben in WiSo und LF 1.",
+        points: 18
+    },
+    {
+        id: 218,
+        topic: "LF 1 / WiSo - Arbeitsrecht, Gehaltsabrechnung & Sozialversicherung",
+        type: "open-text",
+        title: "Arbeits- & Sozialrecht: Brutto-Netto-Abrechnung, 5 Säulen der Sozialversicherung, Überstunden & Kündigung",
+        question: "Beantworten Sie folgende praxisnahe Fragestellungen aus dem Arbeits-, Tarif- und Sozialversicherungsrecht:\n\n" +
+                  "1. **Gehaltsabrechnung & Sozialabgaben:**\n" +
+                  "   a) Ein Auszubildender im 1. Lehrjahr erhält eine monatliche Ausbildungsvergütung von 1.050,00 € brutto (Steuerklasse I, keine Kirchensteuer, keine Lohnsteuer). Die Sozialversicherungsabgaben betragen für den Arbeitnehmeranteil pauschal 20,0 % des Bruttos. Berechnen Sie den monatlichen Auszahlungsbetrag (Nettogehalt). (2 Punkte)\n" +
+                  "   b) Nennen Sie die **fünf gesetzlichen Säulen der Sozialversicherung** in Deutschland und geben Sie an, wer jeweils die Beiträge trägt (Arbeitgeber/Arbeitnehmer paritätisch oder allein). (5 Punkte)\n" +
+                  "2. **Arbeitszeit & Überstunden:**\n" +
+                  "   a) Laut Ausbildungsvertrag gilt für eine 19-jährige Auszubildende eine 38-Stunden-Woche. In einer Projekt-Rollout-Woche leistet sie 45 Arbeitsstunden. Wie viele Überstunden sind in dieser Woche angefallen? (1 Punkt)\n" +
+                  "   b) Welche gesetzlichen Regelungen gelten laut BBiG für Überstunden von Auszubildenden (Zulässigkeit, Vergütung/Freizeitausgleich)? (2 Punkte)\n" +
+                  "3. **Tariferhöhung & Gewerkschaft:**\n" +
+                  "   a) Ein Fachinformatiker verdient aktuell 3.200,00 € brutto. Ein neuer Tarifvertrag sieht eine Gehaltserhöhung um 4,5 % vor. Berechnen Sie das neue Monatsbruttogehalt. (2 Punkte)\n" +
+                  "   b) Der Mitarbeiter zahlt 1,0 % seines Monatsbruttogehalts als Gewerkschaftsbeitrag. Wie viel Euro Gewerkschaftsbeitrag zahlt er im gesamten Jahr (12 Monate) nach der Gehaltserhöhung? (2 Punkte)\n" +
+                  "4. **Kündigung & Urlaub:**\n" +
+                  "   a) Ein Mitarbeiter befindet sich in der 4. Woche seiner 6-monatigen Probezeit. Welche Kündigungsfrist gilt laut BGB während der Probezeit und bedarf die Kündigung einer Begründung? (2 Punkte)\n" +
+                  "   b) Wie viele Werktage bzw. Arbeitstage beträgt der gesetzliche Mindesturlaub nach dem Bundesurlaubsgesetz (BUrlG) bei einer 5-Tage-Arbeitswoche? (2 Punkte)",
+        correctAnswer: "1. Gehalt & Sozialversicherung (7 Punkte):\n" +
+                       "   a) Nettoberechnung:\n" +
+                       "      - Sozialversicherungsabzug: 1.050,00 € * 20,0 % = 210,00 €\n" +
+                       "      - Nettogehalt: 1.050,00 € - 210,00 € = 840,00 €\n" +
+                       "   b) Die 5 Säulen der Sozialversicherung:\n" +
+                       "      - 1. Krankenversicherung (GKV) -> paritätisch (ca. 50 % AN / 50 % AG zzgl. hälftiger Zusatzbeitrag)\n" +
+                       "      - 2. Pflegeversicherung (PV) -> paritätisch (50 % AN / 50 % AG; Kinderlosenzuschlag trägt AN allein)\n" +
+                       "      - 3. Rentenversicherung (RV) -> paritätisch (50 % AN / 50 % AG, je 9,3 % bei 18,6 % Gesamtsatz)\n" +
+                       "      - 4. Arbeitslosenversicherung (AV) -> paritätisch (50 % AN / 50 % AG, je 1,3 % bei 2,6 % Gesamtsatz)\n" +
+                       "      - 5. Gesetzliche Unfallversicherung (Berufsgenossenschaft / DGUV) -> wird zu 100 % ALLEIN vom Arbeitgeber getragen!\n\n" +
+                       "2. Arbeitszeit & Überstunden (3 Punkte):\n" +
+                       "   a) Überstunden: 45 Stunden - 38 Stunden = 7 Überstunden.\n" +
+                       "   b) Überstunden im BBiG: Überstunden für Azubis dürfen nur in begründeten Ausnahmefällen anfallen und müssen dem Ausbildungszweck dienen. Sie müssen stets besonders vergütet oder durch entsprechenden bezahlten Freizeitausgleich abgegolten werden.\n\n" +
+                       "3. Tariferhöhung & Gewerkschaft (4 Punkte):\n" +
+                       "   a) Neues Monatsbrutto: 3.200,00 € * 1,045 = 3.344,00 € (Erhöhung um 144,00 €)\n" +
+                       "   b) Gewerkschaftsbeitrag pro Jahr: 3.344,00 € * 1,0 % = 33,44 € pro Monat -> 33,44 € * 12 Monate = 401,28 € pro Jahr.\n\n" +
+                       "4. Kündigung & Mindesturlaub (4 Punkte):\n" +
+                       "   a) Probezeit-Kündigung: Kündigungsfrist beträgt 2 Wochen zu jedem beliebigen Kalendertag (§ 622 Abs. 3 BGB). Eine Angabe von Gründen ist im Kündigungsschreiben nicht erforderlich (Schriftform zwingend nach § 623 BGB).\n" +
+                       "   b) Gesetzlicher Mindesturlaub (BUrlG): 24 Werktage bei einer 6-Tage-Woche, das entspricht genau 20 Arbeitstagen bei einer 5-Tage-Woche (4 volle Wochen bezahlter Jahresurlaub).",
+        explanation: "Sozialversicherungsbeiträge, Unfallversicherung (100% AG-finanziert!), Kündigungsfristen und Mindesturlaub nach BUrlG gehören zu den Standardfragen jeder WiSo-Prüfung.",
+        points: 18
+    },
+    {
+        id: 219,
+        topic: "LF 1 / WiSo - Betriebswirtschaftliche Kennzahlen",
+        type: "multiple-choice",
+        question: "Aufgrund von starkem Wettbewerbsdruck muss ein IT-Systemhaus seine Dienstleistungspreise senken. Die Gesamtaufwendungen (Kosten) bleiben unverändert, wodurch die Verkaufserlöse (Erträge) sinken. Welche Aussage zur Wirtschaftlichkeit trifft exakt zu?",
+        options: [
+            "Die Wirtschaftlichkeit wird größer.",
+            "Die Wirtschaftlichkeit wird kleiner.",
+            "Die Produktivität sinkt proportional zum Preis.",
+            "Die Rentabilität bleibt unverändert.",
+            "Die Wirtschaftlichkeit bleibt genau 1,0."
+        ],
+        correctAnswer: "Die Wirtschaftlichkeit wird kleiner.",
+        explanation: "Wirtschaftlichkeit = Ertrag / Aufwand. Wenn der Ertrag (Zähler) sinkt und der Aufwand (Nenner) gleich bleibt, wird der resultierende Quotient (die Wirtschaftlichkeit) kleiner.",
+        points: 2
+    },
+    {
+        id: 220,
+        topic: "LF 1 / WiSo - Arbeitsrecht & Sozialversicherung",
+        type: "multiple-choice",
+        question: "Welche der fünf gesetzlichen Säulen der Sozialversicherung in Deutschland wird finanziell zu 100 % vom Arbeitgeber getragen?",
+        options: [
+            "Gesetzliche Krankenversicherung (GKV)",
+            "Gesetzliche Rentenversicherung (GRV)",
+            "Gesetzliche Unfallversicherung (Berufsgenossenschaft)",
+            "Gesetzliche Pflegeversicherung (GPV)",
+            "Arbeitslosenversicherung (ALV)"
+        ],
+        correctAnswer: "Gesetzliche Unfallversicherung (Berufsgenossenschaft)",
+        explanation: "Die gesetzliche Unfallversicherung (abgewickelt über die Berufsgenossenschaften wie z. B. VBG für IT-Berufe) ist die einzige Sozialversicherung, deren Beiträge zu 100 % vom Arbeitgeber gezahlt werden.",
+        points: 2
+    },
+    {
+        id: 221,
+        topic: "LF 1 / WiSo - Unternehmensziele",
+        type: "multiple-choice",
+        question: "Welche Zielbeziehung liegt vor, wenn die Einführung einer neuen automatisierten Test-Pipeline sowohl die Software-Entwicklungsgeschwindigkeit erhöht als auch gleichzeitig die Fehlerquote im Produktivbetrieb senkt?",
+        options: [
+            "Zielkonflikt (konkurrierende Ziele)",
+            "Zielharmonie (komplementäre Ziele)",
+            "Zielindifferenz (neutrale Ziele)",
+            "Zielantagonismus (sich ausschließende Ziele)",
+            "Zielsubstanz (identische Ziele)"
+        ],
+        correctAnswer: "Zielharmonie (komplementäre Ziele)",
+        explanation: "Bei komplementären Zielen (Zielharmonie) unterstützt das Erreichen des einen Ziels gleichzeitig das Erreichen des anderen Ziels.",
+        points: 2
+    }
 ];
