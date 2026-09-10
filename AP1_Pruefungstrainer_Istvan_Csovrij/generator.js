@@ -1374,5 +1374,289 @@ function generateDynamicQuestions(typeMode = "mix") {
         });
     }
 
+    
+    // ==========================================
+    // RECHNEN, FORMELN & HANDELSKALKULATION DYNAMISCHE GENERATOREN (AP1)
+    // ==========================================
+
+    // C.1 Dynamische Elektrotechnik & Stromkosten-Berechnungen
+    for (let i = 0; i < 20; i++) {
+        const watt = (Math.floor(Math.random() * 20) + 5) * 20; // 100 bis 480 Watt
+        const hoursPerDay = 24;
+        const days = 365;
+        const pricePerKwh = (Math.floor(Math.random() * 20) + 30) / 100; // 0.30 bis 0.49 €/kWh
+        
+        const kwhPerYear = (watt / 1000) * hoursPerDay * days;
+        const costPerYear = kwhPerYear * pricePerKwh;
+        const costRounded = costPerYear.toFixed(2);
+        const isOpen = shouldBeOpenText();
+
+        if (isOpen) {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "calculations",
+                topic: "Stromkostenberechnung Dauerbetrieb",
+                isCalculation: true,
+                isBawueFocus: true,
+                type: "open-text",
+                question: `Prüfungsaufgabe Energiekosten (LF 2 / WiSo): Ein Server hat eine durchschnittliche Leistungsaufnahme von ${watt} W im 24/7-Dauerbetrieb (365 Tage/Jahr).\nDer Strompreis beträgt ${pricePerKwh.toFixed(2)} € pro kWh.\n\nBerechne:\na) Den jährlichen Energieverbrauch in kWh.\nb) Die jährlichen Stromkosten in Euro.`,
+                musterloesung: `a) Jährlicher Energieverbrauch:\n- Formel: E = P * t = (${watt} W / 1.000 kW/W) * 24 h/Tag * 365 Tage = ${(watt/1000).toFixed(3)} kW * 8.760 h = ${kwhPerYear.toFixed(2)} kWh.\n\nb) Jährliche Stromkosten:\n- Kosten = ${kwhPerYear.toFixed(2)} kWh * ${pricePerKwh.toFixed(2)} €/kWh = ${costRounded} € pro Jahr.`,
+                explanation: `Energie E = P * t. Immer von Watt in Kilowatt umrechnen (durch 1.000 teilen) und mit 8.760 Jahresstunden multiplizieren.`
+            });
+        } else {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "calculations",
+                topic: "Stromkostenberechnung",
+                isCalculation: true,
+                isBawueFocus: true,
+                type: "multiple-choice",
+                question: `Prüfungsaufgabe Energiekosten: Ein Switch verbraucht dauerhaft ${watt} W (24/7, 365 Tage/Jahr). Strompreis: ${pricePerKwh.toFixed(2)} €/kWh. Wie hoch sind die jährlichen Stromkosten?`,
+                options: [
+                    `${costRounded} € pro Jahr`,
+                    `${(costPerYear * 1.19).toFixed(2)} € pro Jahr`,
+                    `${(kwhPerYear * 0.2).toFixed(2)} € pro Jahr`,
+                    `${(costPerYear / 12).toFixed(2)} € pro Jahr`
+                ],
+                correctAnswer: 0,
+                explanation: `Rechnung: (${watt}/1000 kW) * 8.760 h = ${kwhPerYear.toFixed(2)} kWh. ${kwhPerYear.toFixed(2)} kWh * ${pricePerKwh.toFixed(2)} € = ${costRounded} €.`
+            });
+        }
+    }
+
+    // C.2 Dynamische Handelskalkulation (Einkauf bis Einstandspreis)
+    for (let i = 0; i < 20; i++) {
+        const lep = (Math.floor(Math.random() * 30) + 10) * 100; // 1.000 bis 3.900 €
+        const rabattProzent = (Math.floor(Math.random() * 4) + 2) * 5; // 10%, 15%, 20%, 25%
+        const skontoProzent = Math.random() < 0.5 ? 2 : 3; // 2% oder 3%
+        const bezugskosten = (Math.floor(Math.random() * 10) + 2) * 10; // 20 bis 110 €
+
+        const rabattBetrag = lep * (rabattProzent / 100);
+        const zep = lep - rabattBetrag;
+        const skontoBetrag = zep * (skontoProzent / 100);
+        const bep = zep - skontoBetrag;
+        const einstandspreis = bep + bezugskosten;
+
+        const isOpen = shouldBeOpenText();
+
+        if (isOpen) {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "calculations",
+                topic: "Einkaufskalkulation Bezugspreis",
+                isCalculation: true,
+                isBawueFocus: true,
+                type: "open-text",
+                question: `Prüfungsaufgabe Handelskalkulation: Ein IT-Händler beschafft Server-Hardware:\n- Listeneinkaufspreis (LEP): ${lep.toFixed(2)} €\n- Lieferantenrabatt: ${rabattProzent} %\n- Lieferantenskonto: ${skontoProzent} %\n- Bezugskosten (Fracht/Verpackung): ${bezugskosten.toFixed(2)} €\n\nBerechne schrittweise den Bezugspreis (Einstandspreis).`,
+                musterloesung: `Kalkulationsschritte:\n  Listeneinkaufspreis (LEP): ${lep.toFixed(2)} €\n- Lieferantenrabatt (${rabattProzent} %): -${rabattBetrag.toFixed(2)} €\n= Zieleinkaufspreis (ZEP): ${zep.toFixed(2)} €\n- Lieferantenskonto (${skontoProzent} % von ${zep.toFixed(2)} €): -${skontoBetrag.toFixed(2)} €\n= Bareinkaufspreis (BEP): ${bep.toFixed(2)} €\n+ Bezugskosten: +${bezugskosten.toFixed(2)} €\n= Bezugspreis (Einstandspreis): ${einstandspreis.toFixed(2)} €.`,
+                explanation: `Reihenfolge: LEP - Rabatt = ZEP. ZEP - Skonto = BEP. BEP + Bezugskosten = Einstandspreis.`
+            });
+        } else {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "calculations",
+                topic: "Einkaufskalkulation",
+                isCalculation: true,
+                isBawueFocus: true,
+                type: "multiple-choice",
+                question: `Prüfungsaufgabe Handelskalkulation: LEP = ${lep.toFixed(2)} €, Rabatt = ${rabattProzent} %, Skonto = ${skontoProzent} %, Bezugskosten = ${bezugskosten.toFixed(2)} €. Wie hoch ist der Bezugspreis (Einstandspreis)?`,
+                options: [
+                    `${einstandspreis.toFixed(2)} €`,
+                    `${(bep).toFixed(2)} € (ohne Bezugskosten)`,
+                    `${(zep + bezugskosten).toFixed(2)} € (ohne Skonto)`,
+                    `${(lep - rabattBetrag + bezugskosten).toFixed(2)} €`
+                ],
+                correctAnswer: 0,
+                explanation: `LEP (${lep} €) - ${rabattProzent}% Rabatt = ${zep.toFixed(2)} € (ZEP) - ${skontoProzent}% Skonto = ${bep.toFixed(2)} € (BEP) + ${bezugskosten} € = ${einstandspreis.toFixed(2)} €.`
+            });
+        }
+    }
+
+    // C.3 Dynamische Zahlensystem-Umrechnungen (Dezimal <-> Binär <-> Hexadezimal)
+    for (let i = 0; i < 20; i++) {
+        const decVal = Math.floor(Math.random() * 230) + 25; // 25 bis 255
+        const binVal = decVal.toString(2);
+        const hexVal = decVal.toString(16).toUpperCase();
+        const octVal = decVal.toString(8);
+
+        const mode = Math.floor(Math.random() * 3);
+        const isOpen = shouldBeOpenText();
+
+        if (mode === 0) {
+            // Dec to Bin/Hex
+            if (isOpen) {
+                dynamicQuestions.push({
+                    id: currentId++,
+                    theme: "calculations",
+                    topic: "Zahlensysteme Umrechnung",
+                    isCalculation: true,
+                    isBawueFocus: true,
+                    type: "open-text",
+                    question: `Prüfungsaufgabe Zahlensysteme: Wandle die Dezimalzahl **${decVal}** in das Binärsystem (Dualzahl) und das Hexadezimalsystem um.`,
+                    musterloesung: `Dezimalzahl: ${decVal}\n- Binär: ${binVal} (2)\n- Hexadezimal: ${hexVal} (16)\n- Oktal: ${octVal} (8)`,
+                    explanation: `Binär durch fortlaufende Division durch 2 oder Summe von 2er-Potenzen. Hexadezimal durch 4-Bit-Nibbles.`
+                });
+            } else {
+                dynamicQuestions.push({
+                    id: currentId++,
+                    theme: "calculations",
+                    topic: "Zahlensysteme: Dezimal nach Hexadezimal",
+                    isCalculation: true,
+                    isBawueFocus: true,
+                    type: "multiple-choice",
+                    question: `Prüfungsaufgabe Zahlensysteme: Welcher Hexadezimalwert entspricht der Dezimalzahl ${decVal}?`,
+                    options: [
+                        `${hexVal} (16) [Binär: ${binVal}]`,
+                        `${(decVal + 1).toString(16).toUpperCase()} (16)`,
+                        `${(decVal - 1).toString(16).toUpperCase()} (16)`,
+                        `${octVal} (16)`
+                    ],
+                    correctAnswer: 0,
+                    explanation: `${decVal} = ${binVal} (2) = ${hexVal} (16).`
+                });
+            }
+        } else if (mode === 1) {
+            // Hex to Dec
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "calculations",
+                topic: "Zahlensysteme: Hexadezimal nach Dezimal",
+                isCalculation: true,
+                isBawueFocus: true,
+                type: "multiple-choice",
+                question: `Prüfungsaufgabe Zahlensysteme: Wandle den Hexadezimalwert ${hexVal} (16) in eine Dezimalzahl um.`,
+                options: [
+                    `${decVal}`,
+                    `${decVal + 16}`,
+                    `${decVal - 8}`,
+                    `${decVal + 10}`
+                ],
+                correctAnswer: 0,
+                explanation: `Hexadezimal ${hexVal} = ${decVal} im Dezimalsystem (Binär: ${binVal}).`
+            });
+        } else {
+            // Bin to Hex
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "calculations",
+                topic: "Zahlensysteme: Binär nach Hexadezimal",
+                isCalculation: true,
+                isBawueFocus: true,
+                type: "multiple-choice",
+                question: `Prüfungsaufgabe Zahlensysteme: Wandle die Binärzahl ${binVal} (2) in das Hexadezimalsystem um.`,
+                options: [
+                    `${hexVal} (16)`,
+                    `${(decVal + 2).toString(16).toUpperCase()} (16)`,
+                    `${octVal} (16)`,
+                    `${(decVal - 1).toString(16).toUpperCase()} (16)`
+                ],
+                correctAnswer: 0,
+                explanation: `Gruppiere die Bits in 4er-Blöcke von rechts: ${binVal} (2) = ${hexVal} (16).`
+            });
+        }
+    }
+
+    // C.4 Dynamische Datenübertragungszeit & Downloadberechnungen
+    for (let i = 0; i < 20; i++) {
+        const fileSizeGB = Math.floor(Math.random() * 8) + 2; // 2 bis 9 GB
+        const speedMbit = [50, 100, 250, 500, 1000][Math.floor(Math.random() * 5)];
+        const totalMbit = fileSizeGB * 8 * 1000;
+        const totalSeconds = totalMbit / speedMbit;
+        const minutes = (totalSeconds / 60).toFixed(1);
+
+        const isOpen = shouldBeOpenText();
+
+        if (isOpen) {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "calculations",
+                topic: "Datenübertragungszeit",
+                isCalculation: true,
+                isBawueFocus: true,
+                type: "open-text",
+                question: `Prüfungsaufgabe Übertragungszeit: Ein Software-Update mit ${fileSizeGB} GB Dateigröße soll über eine Internetleitung mit ${speedMbit} Mbit/s heruntergeladen werden.\n\nBerechne die Übertragungszeit in Sekunden und Minuten (ohne Protokoll-Overhead).`,
+                musterloesung: `Rechnung:\n1. Datenmenge in Megabit: ${fileSizeGB} GB * 8 Gbit/GB * 1.000 Mbit/Gbit = ${totalMbit} Mbit.\n2. Zeit in Sekunden: ${totalMbit} Mbit / ${speedMbit} Mbit/s = ${totalSeconds.toFixed(0)} Sekunden.\n3. Zeit in Minuten: ${totalSeconds.toFixed(0)} s / 60 s/min = ${minutes} Minuten.`,
+                explanation: `Immer Datenmenge in Bit umrechnen (Faktor 8) und Einheiten (Mbit/s vs GB) anpassen.`
+            });
+        } else {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "calculations",
+                topic: "Downloadzeit",
+                isCalculation: true,
+                isBawueFocus: true,
+                type: "multiple-choice",
+                question: `Prüfungsaufgabe Übertragungszeit: Dateigröße = ${fileSizeGB} GB, Bandbreite = ${speedMbit} Mbit/s. Wie lange dauert der Download rein rechnerisch?`,
+                options: [
+                    `${totalSeconds.toFixed(0)} Sekunden (${minutes} Minuten)`,
+                    `${(totalSeconds * 8).toFixed(0)} Sekunden`,
+                    `${(totalSeconds / 8).toFixed(0)} Sekunden`,
+                    `${(fileSizeGB * 60).toFixed(0)} Sekunden`
+                ],
+                correctAnswer: 0,
+                explanation: `(${fileSizeGB} * 8.000 Mbit) / ${speedMbit} Mbit/s = ${totalSeconds.toFixed(0)} s (${minutes} min).`
+            });
+        }
+    }
+
+    // C.5 Dynamische Zins- & Skontovergleich-Berechnungen
+    for (let i = 0; i < 15; i++) {
+        const rechnungBetrag = (Math.floor(Math.random() * 15) + 5) * 1000; // 5.000 bis 19.000 €
+        const skontoPct = Math.random() < 0.5 ? 2 : 3;
+        const skontoTage = 10;
+        const nettoTage = 30;
+        const diffTage = nettoTage - skontoTage; // 20 Tage
+        const kreditZinsPct = Math.floor(Math.random() * 5) + 8; // 8 bis 12%
+
+        const skontoErsparnis = rechnungBetrag * (skontoPct / 100);
+        const ueberweisung = rechnungBetrag - skontoErsparnis;
+        const kreditzinsen = (ueberweisung * kreditZinsPct * diffTage) / (100 * 360);
+        const reingewinn = skontoErsparnis - kreditzinsen;
+
+        dynamicQuestions.push({
+            id: currentId++,
+            theme: "calculations",
+            topic: "Skontoausnutzung vs. Kredit",
+            isCalculation: true,
+            isBawueFocus: true,
+            type: "multiple-choice",
+            question: `Prüfungsaufgabe Finanzierung: Eine Rechnung über ${rechnungBetrag.toFixed(2)} € bietet ${skontoPct} % Skonto bei Zahlung innerhalb von ${skontoTage} Tagen (oder 30 Tage netto). Zur Skontonutzung wird ein Kontokorrentkredit für ${diffTage} Tage zu ${kreditZinsPct} % p.a. aufgenommen. Wie hoch ist der finanzielle Vorteil (Reingewinn)?`,
+            options: [
+                `${reingewinn.toFixed(2)} € Ersparnis (Skonto ${skontoErsparnis.toFixed(2)} € minus ${kreditzinsen.toFixed(2)} € Zinsen)`,
+                `${skontoErsparnis.toFixed(2)} €`,
+                `${kreditzinsen.toFixed(2)} €`,
+                `Kein Vorteil (Verlust von ${kreditzinsen.toFixed(2)} €)`
+            ],
+            correctAnswer: 0,
+            explanation: `Skontoersparnis = ${skontoErsparnis.toFixed(2)} €. Kreditzinsen für ${diffTage} Tage = (${ueberweisung.toFixed(2)} € * ${kreditZinsPct}% * ${diffTage}) / 36.000 = ${kreditzinsen.toFixed(2)} €. Vorteil = ${reingewinn.toFixed(2)} €.`
+        });
+    }
+
+    // C.6 Dynamische Amortisationsberechnungen (Investition & Einsparung)
+    for (let i = 0; i < 15; i++) {
+        const invest = (Math.floor(Math.random() * 20) + 10) * 1000; // 10.000 bis 29.000 €
+        const einsparungJahr = (Math.floor(Math.random() * 8) + 4) * 1000; // 4.000 bis 11.000 €
+        const amortJahre = (invest / einsparungJahr).toFixed(2);
+        const amortMonate = ((invest / einsparungJahr) * 12).toFixed(1);
+
+        dynamicQuestions.push({
+            id: currentId++,
+            theme: "calculations",
+            topic: "Statische Amortisation",
+            isCalculation: true,
+            isBawueFocus: true,
+            type: "multiple-choice",
+            question: `Prüfungsaufgabe Wirtschaftlichkeit: Ein IT-Projekt kostet einmalig ${invest.toFixed(2)} € und spart pro Jahr ${einsparungJahr.toFixed(2)} € an Betriebskosten. Nach welcher Amortisationszeit hat sich die Investition bezahlt gemacht?`,
+            options: [
+                `${amortJahre} Jahre (ca. ${amortMonate} Monate)`,
+                `${(invest / 12).toFixed(0)} Monate`,
+                `${(einsparungJahr / 1000).toFixed(1)} Jahre`,
+                `${(invest / einsparungJahr * 1.5).toFixed(2)} Jahre`
+            ],
+            correctAnswer: 0,
+            explanation: `Formel: Amortisationszeit = Anschaffungskosten / jährliche Einsparung = ${invest} € / ${einsparungJahr} € = ${amortJahre} Jahre (${amortMonate} Monate).`
+        });
+    }
+
     return dynamicQuestions;
 }

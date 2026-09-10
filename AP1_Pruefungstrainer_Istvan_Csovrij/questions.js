@@ -5045,6 +5045,539 @@ WHERE Email IS NULL OR Email = '';
         "question": "Prüfungsaufgabe Struktogramm-Tracing (BaWü-Fokus): Analysiere das oben dargestellte Struktogramm nach Nassi-Shneiderman.\n\nAufgabe:\na) Berechne den Endpreis und den Rabattsatz für: `einkaufswert = 300 €`, `istStammkunde = true`.\nb) Berechne den Endpreis und den Rabattsatz für: `einkaufswert = 600 €`, `istStammkunde = false`.\nc) Welcher Rabatt ergibt sich für einen Neukunden (`istStammkunde = false`) bei einem Einkaufswert von `150 €`?",
         "musterloesung": "a) Fall 1 (300 €, Stammkunde):\n- Bedingung 1: 300 >= 500 ist FALSCH.\n- Bedingung 2: 300 >= 200 ist WAHR -> rabatt = 5%.\n- Bedingung 3: istStammkunde == true ist WAHR -> rabatt = 5 + 3 = 8%.\n- Endpreis: 300 € * (1 - 0,08) = 300 € * 0,92 = 276,00 € (Rabatt: 8%).\n\nb) Fall 2 (600 €, kein Stammkunde):\n- Bedingung 1: 600 >= 500 ist WAHR -> rabatt = 10%.\n- Bedingung 3: istStammkunde == true ist FALSCH -> rabatt bleibt 10%.\n- Endpreis: 600 € * (1 - 0,10) = 600 € * 0,90 = 540,00 € (Rabatt: 10%).\n\nc) Fall 3 (150 €, kein Stammkunde):\n- 150 < 500 und 150 < 200 -> rabatt = 0%.\n- Kein Stammkunde -> rabatt = 0%.\n- Endpreis = 150,00 €.",
         "explanation": "Struktogramme werden von oben nach unten sequenziell abgearbeitet. Verzweigungen prüfen Bedingungen hierarchisch. Tracing-Tabellen helfen, alle Variablenzustände fehlerfrei zu berechnen."
+},
+    {
+        "id": 276,
+        "theme": "calculations",
+        "topic": "Elektrotechnik: Ohmsches Gesetz & Leistung",
+        "isCalculation": true,
+        "isBawueFocus": true,
+        "type": "multiple-choice",
+        "question": "Ein Server-Netzteil zieht an einer 230-V-Wechselstromsteckdose (U = 230 V) einen Strom von I = 2,5 A. Wie groß ist die aufgenommene Wirkleistung P bei einem Wirkleistungsfaktor cos φ = 1,0?",
+        "options": [
+                "P = 575 W (bzw. 0,575 kW)",
+                "P = 92 W",
+                "P = 232,5 W",
+                "P = 1.150 W"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Formel: P = U * I * cos φ. Bei cos φ = 1,0 gilt: P = 230 V * 2,5 A = 575 W = 0,575 kW."
+},
+    {
+        "id": 277,
+        "theme": "calculations",
+        "topic": "Energiekostenberechnung 24/7",
+        "isCalculation": true,
+        "isBawueFocus": true,
+        "type": "multiple-choice",
+        "question": "Ein Switch im Serverraum hat eine konstante Leistungsaufnahme von 120 W im 24/7-Dauerbetrieb (365 Tage/Jahr). Der Strompreis beträgt 0,35 € pro kWh. Wie hoch sind die jährlichen Stromkosten?",
+        "options": [
+                "367,92 € pro Jahr",
+                "1.051,20 € pro Jahr",
+                "42,00 € pro Jahr",
+                "126,14 € pro Jahr"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Rechnung:\n1. Jahres-Betriebsstunden: 24 h/Tag * 365 Tage = 8.760 h.\n2. Energieverbrauch in kWh: (120 W / 1.000) * 8.760 h = 0,12 kW * 8.760 h = 1.051,2 kWh.\n3. Stromkosten: 1.051,2 kWh * 0,35 €/kWh = 367,92 €."
+},
+    {
+        "id": 278,
+        "theme": "calculations",
+        "topic": "Wirkleistung vs. Scheinleistung (USV)",
+        "isCalculation": true,
+        "isBawueFocus": true,
+        "type": "multiple-choice",
+        "question": "Eine unterbrechungsfreie Stromversorgung (USV) hat eine Nenn-Scheinleistung von S = 1.500 VA und einen Leistungsfaktor von cos φ = 0,8. Welche maximale Wirkleistung P in Watt darf die angeschlossene IT-Hardware in Summe ziehen?",
+        "options": [
+                "P = 1.200 W (1,2 kW)",
+                "P = 1.500 W",
+                "P = 1.875 W",
+                "P = 960 W"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Formel: Wirkleistung P = Scheinleistung S * cos φ = 1.500 VA * 0,8 = 1.200 W. Scheinleistung in VA darf nicht 1:1 mit Watt gleichgesetzt werden, wenn cos φ < 1 ist."
+},
+    {
+        "id": 279,
+        "theme": "calculations",
+        "topic": "USV Überbrückungszeit / Autonomiezeit",
+        "isCalculation": true,
+        "isBawueFocus": true,
+        "type": "multiple-choice",
+        "question": "Eine USV-Batteriebank liefert 24 V und eine Kapazität von 50 Ah. Bei einem Netzausfall muss eine Last von 600 W versorgt werden. Der Wirkungsgrad der USV liegt bei η = 85 %. Wie lange (in Minuten) kann die Last versorgt werden?",
+        "options": [
+                "102 Minuten (1,7 Stunden)",
+                "120 Minuten (2,0 Stunden)",
+                "60 Minuten (1,0 Stunde)",
+                "85 Minuten"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Rechnung:\n1. Gespeicherte Energie: 24 V * 50 Ah = 1.200 Wh.\n2. Nutzeffektive Energie: 1.200 Wh * 0,85 = 1.020 Wh.\n3. Autonomiezeit in Stunden: t = 1.020 Wh / 600 W = 1,7 h.\n4. In Minuten: 1,7 h * 60 min/h = 102 Minuten."
+},
+    {
+        "id": 280,
+        "theme": "calculations",
+        "topic": "RZ Energieeffizienz: PUE-Faktor",
+        "isCalculation": true,
+        "isBawueFocus": true,
+        "type": "multiple-choice",
+        "question": "Ein Rechenzentrum verbraucht pro Jahr insgesamt 180.000 kWh elektrische Gesamtenergie. Davon entfallen 120.000 kWh direkt auf die IT-Infrastruktur (Server, Storage, Netzwerk). Wie hoch ist der PUE-Wert (Power Usage Effectiveness)?",
+        "options": [
+                "PUE = 1,50",
+                "PUE = 0,67",
+                "PUE = 1,20",
+                "PUE = 2,16"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Formel: PUE = Gesamtenergiebedarf des Rechenzentrums / Energiebedarf der reinen IT-Geräte = 180.000 kWh / 120.000 kWh = 1,50. (Ein PUE nahe 1,0 ist ideal)."
+},
+    {
+        "id": 281,
+        "theme": "calculations",
+        "topic": "Speichereinheiten: SI vs. IEC",
+        "isCalculation": true,
+        "isBawueFocus": true,
+        "type": "multiple-choice",
+        "question": "Was ist der rechnerische Unterschied zwischen 1 MB (Megabyte nach SI-Standard) und 1 MiB (Mebibyte nach IEC-Standard)?",
+        "options": [
+                "1 MB = 1.000.000 Bytes (10^6), während 1 MiB = 1.048.576 Bytes (2^20) entspricht. 1 MiB ist also ca. 4,86 % größer.",
+                "1 MB = 1.048.576 Bytes und 1 MiB = 1.000.000 Bytes.",
+                "1 MB und 1 MiB sind exakt identisch.",
+                "1 MB basiert auf Basis 2, 1 MiB auf Basis 16."
+        ],
+        "correctAnswer": 0,
+        "explanation": "SI-Präfixe (KB, MB, GB, TB) nutzen Zehnerpotenzen (10^3, 10^6, 10^9). IEC-Präfixe (KiB, MiB, GiB, TiB) nutzen Zweierpotenzen (2^10 = 1024, 2^20 = 1.048.576, 2^30 = 1.073.741.824)."
+},
+    {
+        "id": 282,
+        "theme": "calculations",
+        "topic": "Festplatten-Nettokapazität (TB vs. GiB)",
+        "isCalculation": true,
+        "isBawueFocus": true,
+        "type": "multiple-choice",
+        "question": "Ein Festplattenhersteller deklariert eine SSD mit 1 TB (1.000.000.000.000 Bytes). Welcher Wert in GiB (Binär-Gigabyte) wird dem Betriebssystem nach der Formatierung angezeigt?",
+        "options": [
+                "ca. 931,32 GiB (10^12 Bytes / 1024^3 Bytes)",
+                "exakt 1.000,00 GiB",
+                "ca. 976,56 GiB",
+                "ca. 894,25 GiB"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Rechnung: 1.000.000.000.000 Bytes / (1024 * 1024 * 1024) Bytes/GiB = 1.000.000.000.000 / 1.073.741.824 ≈ 931,32 GiB."
+},
+    {
+        "id": 283,
+        "theme": "calculations",
+        "topic": "Umrechnung TiB in GiB & MiB",
+        "isCalculation": true,
+        "isBawueFocus": true,
+        "type": "multiple-choice",
+        "question": "Wie viele GiB (Gibibyte) und wie viele MiB (Mebibyte) entsprechen einem Storage-Pool von 4 TiB (Tebibyte)?",
+        "options": [
+                "4.096 GiB und 4.194.304 MiB",
+                "4.000 GiB und 4.000.000 MiB",
+                "2.048 GiB und 2.097.152 MiB",
+                "8.192 GiB und 8.388.608 MiB"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Rechnung:\n4 TiB * 1.024 GiB/TiB = 4.096 GiB.\n4.096 GiB * 1.024 MiB/GiB = 4.194.304 MiB."
+},
+    {
+        "id": 284,
+        "theme": "calculations",
+        "topic": "Downloadzeit / Übertragungsdauer",
+        "isCalculation": true,
+        "isBawueFocus": true,
+        "type": "multiple-choice",
+        "question": "Ein ISO-Image mit 4,5 GB Dateigröße (4.500 MB = 36.000 Mbit) soll über eine 100-Mbit/s-Internetleitung heruntergeladen werden. Wie lange dauert der Download rein rechnerisch bei voller Bandbreitenauslastung ohne Overhead?",
+        "options": [
+                "360 Sekunden (6 Minuten)",
+                "45 Sekunden",
+                "450 Sekunden (7,5 Minuten)",
+                "288 Sekunden (4,8 Minuten)"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Rechnung:\n1. Datenmenge in Bit: 4,5 GB * 8 Gbit/GB = 36 Gbit = 36.000 Mbit.\n2. Dauer: 36.000 Mbit / 100 Mbit/s = 360 Sekunden = 6 Minuten."
+},
+    {
+        "id": 285,
+        "theme": "calculations",
+        "topic": "Backup-Übertragungszeit mit Protokoll-Overhead",
+        "isCalculation": true,
+        "isBawueFocus": true,
+        "type": "multiple-choice",
+        "question": "Ein Backup-Server überträgt 600 GB Daten über eine 1-Gbit/s-Ethernetverbindung (Netto-Übertragungsrate nach 15 % Protokoll-Overhead beträgt 850 Mbit/s bzw. 106,25 MB/s). Wie lange dauert die Datenübertragung?",
+        "options": [
+                "ca. 5.647 Sekunden (ca. 1 Stunde 34 Minuten)",
+                "ca. 4.800 Sekunden (1 Stunde 20 Minuten)",
+                "ca. 600 Sekunden (10 Minuten)",
+                "ca. 2 Stunden 45 Minuten"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Rechnung:\n1. Effektive Übertragungsrate: 1.000 Mbit/s * 0,85 = 850 Mbit/s = 106,25 MB/s.\n2. Datenmenge in MB: 600 GB * 1.000 MB/GB = 600.000 MB.\n3. Zeit: 600.000 MB / 106,25 MB/s ≈ 5.647,06 Sekunden ≈ 94,12 Minuten ≈ 1 h 34 min."
+},
+    {
+        "id": 286,
+        "theme": "calculations",
+        "topic": "Backup-Zeitfenster (Backup Window)",
+        "isCalculation": true,
+        "isBawueFocus": true,
+        "type": "multiple-choice",
+        "question": "Ein nächtliches Backup-Fenster beträgt maximal 5 Stunden (18.000 Sekunden). Zu sichern sind 1,5 TB Daten. Das Backup-Ziel erreicht eine mittlere Schreibrate von 75 MB/s. Reicht das Zeitfenster aus?",
+        "options": [
+                "Nein, das Backup benötigt ca. 20.000 Sekunden (5,56 Stunden) und überschreitet das Zeitfenster um ca. 33 Minuten.",
+                "Ja, das Backup benötigt exakt 4 Stunden.",
+                "Ja, das Backup benötigt ca. 2,5 Stunden.",
+                "Nein, das Backup benötigt mehr als 12 Stunden."
+        ],
+        "correctAnswer": 0,
+        "explanation": "Rechnung:\n1. 1,5 TB = 1.500.000 MB.\n2. Übertragungszeit: 1.500.000 MB / 75 MB/s = 20.000 Sekunden = 5,556 Stunden = 5 Stunden 33 Minuten 20 Sekunden.\n3. Da 5,56 h > 5,00 h, reicht das Backup-Fenster nicht aus!"
+},
+    {
+        "id": 287,
+        "theme": "calculations",
+        "topic": "Zahlensysteme: Dezimal nach Binär",
+        "isCalculation": true,
+        "isBawueFocus": true,
+        "type": "multiple-choice",
+        "question": "Wie lautet die Binärdarstellung (Dualzahl) der Dezimalzahl 213?",
+        "options": [
+                "11010101 (2)",
+                "11100101 (2)",
+                "10110101 (2)",
+                "11011001 (2)"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Zerlegung nach Zweierpotenzen:\n213 = 128 + 64 + 16 + 4 + 1\n= (1 * 128) + (1 * 64) + (0 * 32) + (1 * 16) + (0 * 8) + (1 * 4) + (0 * 2) + (1 * 1)\n= 11010101 (2)."
+},
+    {
+        "id": 288,
+        "theme": "calculations",
+        "topic": "Zahlensysteme: Binär nach Hexadezimal (Nibbles)",
+        "isCalculation": true,
+        "isBawueFocus": true,
+        "type": "multiple-choice",
+        "question": "Wandle die 12-Bit-Binärzahl 110111110010 (2) in das Hexadezimalsystem um:",
+        "options": [
+                "DF2 (16)",
+                "E72 (16)",
+                "CF2 (16)",
+                "DFA (16)"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Aufteilung in 4-Bit-Blöcke (Nibbles/Tetraden) von rechts nach links:\n- 0010 (2) = 2 (16)\n- 1111 (2) = 15 = F (16)\n- 1101 (2) = 13 = D (16)\nErgebnis: DF2 (16)."
+},
+    {
+        "id": 289,
+        "theme": "calculations",
+        "topic": "Zahlensysteme: Hexadezimal nach Dezimal",
+        "isCalculation": true,
+        "isBawueFocus": true,
+        "type": "multiple-choice",
+        "question": "Welchem Dezimalwert entspricht der Hexadezimalwert 3A7 (16)?",
+        "options": [
+                "935",
+                "871",
+                "983",
+                "1.024"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Rechnung nach 16er-Potenzen:\n3A7 (16) = (3 * 16^2) + (10 * 16^1) + (7 * 16^0)\n= (3 * 256) + (10 * 16) + (7 * 1)\n= 768 + 160 + 7 = 935."
+},
+    {
+        "id": 290,
+        "theme": "calculations",
+        "topic": "Zahlensysteme: Oktal nach Binär & Dezimal",
+        "isCalculation": true,
+        "isBawueFocus": true,
+        "type": "multiple-choice",
+        "question": "Welche Binär- und Dezimalzahl entspricht der Oktalzahl 754 (8)?",
+        "options": [
+                "Binär: 111101100 (2) | Dezimal: 492",
+                "Binär: 111101010 (2) | Dezimal: 486",
+                "Binär: 110101100 (2) | Dezimal: 512",
+                "Binär: 111111100 (2) | Dezimal: 508"
+        ],
+        "correctAnswer": 0,
+        "explanation": "1. Binär über 3-Bit-Triaden:\n- 7 (8) = 111\n- 5 (8) = 101\n- 4 (8) = 100\n-> 111101100 (2).\n2. Dezimal über 8er-Potenzen: (7 * 64) + (5 * 8) + (4 * 1) = 448 + 40 + 4 = 492."
+},
+    {
+        "id": 291,
+        "theme": "calculations",
+        "topic": "IPv4 Subnetting & Adressberechnung",
+        "isCalculation": true,
+        "isBawueFocus": true,
+        "type": "multiple-choice",
+        "question": "Ein Administrator teilt das Netz 192.168.50.0 mit der Subnetzmaske /27 (255.255.255.224) auf. Wie viele nutzbare Host-IP-Adressen gibt es pro Subnetz und wie lautet die Broadcast-Adresse des 1. Subnetzes?",
+        "options": [
+                "30 nutzbare Hosts | Broadcast-Adresse: 192.168.50.31",
+                "32 nutzbare Hosts | Broadcast-Adresse: 192.168.50.32",
+                "62 nutzbare Hosts | Broadcast-Adresse: 192.168.50.63",
+                "14 nutzbare Hosts | Broadcast-Adresse: 192.168.50.15"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Rechnung:\n1. Host-Bits: 32 - 27 = 5 Bits.\n2. Gesamte IP-Adressen: 2^5 = 32 Adressen (192.168.50.0 bis .31).\n3. Nutzbare Hosts: 2^5 - 2 = 30 (Netzadresse .0 und Broadcast .31 abgezogen).\n4. Broadcast-Adresse des 1. Subnetzes ist 192.168.50.31."
+},
+    {
+        "id": 292,
+        "theme": "calculations",
+        "topic": "Handelskalkulation: Einkaufskalkulation (Bezugspreis)",
+        "isCalculation": true,
+        "isBawueFocus": true,
+        "type": "multiple-choice",
+        "question": "Ein IT-Systemhaus kauft Hardware ein:\n- Listeneinkaufspreis (LEP): 2.000,00 €\n- Lieferantenrabatt: 15 %\n- Lieferantenskonto: 2 %\n- Bezugskosten (Fracht/Zoll): 50,00 €\n\nWie hoch ist der Bezugspreis (Einstandspreis)?",
+        "options": [
+                "1.716,00 €",
+                "1.750,00 €",
+                "1.666,00 €",
+                "1.700,00 €"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Kalkulationsschema:\n  Listeneinkaufspreis: 2.000,00 €\n- Lieferantenrabatt (15 %): -300,00 €\n= Zieleinkaufspreis (ZEP): 1.700,00 €\n- Lieferantenskonto (2 % von 1.700 €): -34,00 €\n= Bareinkaufspreis (BEP): 1.666,00 €\n+ Bezugskosten: +50,00 €\n= Bezugspreis (Einstandspreis): 1.716,00 €."
+},
+    {
+        "id": 293,
+        "theme": "calculations",
+        "topic": "Handelskalkulation: Selbstkostenpreis",
+        "isCalculation": true,
+        "isBawueFocus": true,
+        "type": "multiple-choice",
+        "question": "Der Einstandspreis für ein Netzwerk-Bundle beträgt 1.500,00 €. Das Systemhaus kalkuliert mit einem Handlungskostenzuschlagssatz (HKZ) von 40 %. Wie hoch sind die Selbstkosten?",
+        "options": [
+                "2.100,00 €",
+                "1.900,00 €",
+                "2.500,00 €",
+                "1.850,00 €"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Formel: Selbstkosten = Bezugspreis + (Bezugspreis * HKZ / 100) = 1.500,00 € + 600,00 € = 2.100,00 € (bzw. 1.500 € * 1,40 = 2.100,00 €)."
+},
+    {
+        "id": 294,
+        "theme": "calculations",
+        "topic": "Handelskalkulation: Differenzkalkulation (Gewinnzuschlag)",
+        "isCalculation": true,
+        "isBawueFocus": true,
+        "type": "multiple-choice",
+        "question": "Ein IT-Dienstleister ermittelt für ein Softwarepaket Selbstkosten von 800,00 €. Der am Markt maximal durchsetzbare Nettoverkaufspreis (Barverkaufspreis BVP) beträgt 1.000,00 €. Wie hoch sind der absolute Gewinn und der kalkulierte Gewinnzuschlagssatz in Prozent?",
+        "options": [
+                "Gewinn: 200,00 € | Gewinnzuschlagssatz: 25 %",
+                "Gewinn: 200,00 € | Gewinnzuschlagssatz: 20 %",
+                "Gewinn: 160,00 € | Gewinnzuschlagssatz: 20 %",
+                "Gewinn: 250,00 € | Gewinnzuschlagssatz: 31,25 %"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Rechnung:\n1. Absoluter Gewinn = Barverkaufspreis (1.000 €) - Selbstkosten (800 €) = 200,00 €.\n2. Gewinnzuschlagssatz = (Gewinn / Selbstkosten) * 100 = (200 € / 800 €) * 100 = 25,0 %."
+},
+    {
+        "id": 295,
+        "theme": "calculations",
+        "topic": "Kreditarten: Annuitäten- vs. Ratendarlehen",
+        "isCalculation": true,
+        "isBawueFocus": true,
+        "type": "multiple-choice",
+        "question": "Wie unterscheidet sich der Verlauf der monatlichen Gesamtrate bei einem Annuitätendarlehen von dem bei einem Ratendarlehen (Abzahlungsdarlehen)?",
+        "options": [
+                "Beim Annuitätendarlehen bleibt die monatliche Gesamtrate konstant (Zinsanteil sinkt, Tilgungsanteil steigt). Beim Ratendarlehen bleibt die Tilgungsrate konstant, wodurch die Gesamtrate monatlich sinkt.",
+                "Beim Annuitätendarlehen steigt die Gesamtrate monatlich an.",
+                "Beim Ratendarlehen werden am Ende alle Zinsen auf einmal fällig.",
+                "Es gibt keinen Unterschied, beide Darlehensformen haben identische monatliche Raten."
+        ],
+        "correctAnswer": 0,
+        "explanation": "Annuitätendarlehen = Feste, gleichbleibende Rate (Annuität). Da die Restschuld sinkt, sinken die Zinsen und der Tilgungsanteil wächst. Ratendarlehen = Feste Tilgung + sinkende Zinsen = monatlich abnehmende Gesamtrate."
+},
+    {
+        "id": 296,
+        "theme": "calculations",
+        "topic": "Zinsformel & Überbrückungskredit",
+        "isCalculation": true,
+        "isBawueFocus": true,
+        "type": "multiple-choice",
+        "question": "Ein IT-Unternehmen nimmt einen kurzfristigen Betriebsmittelkredit über 60.000,00 € für genau 90 Tage zu einem Zinssatz von 8 % p.a. auf (kaufmännische Zinsmethode 30/360 Tage). Wie hoch sind die anfallenden Kreditzinsen?",
+        "options": [
+                "1.200,00 €",
+                "4.800,00 €",
+                "1.600,00 €",
+                "900,00 €"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Kaufmännische Zinsformel: Z = (K * p * t) / (100 * 360)\nZ = (60.000 * 8 * 90) / 36.000 = 43.200.000 / 36.000 = 1.200,00 €."
+},
+    {
+        "id": 297,
+        "theme": "calculations",
+        "topic": "Skontoausnutzung vs. Kontokorrentkredit",
+        "isCalculation": true,
+        "isBawueFocus": true,
+        "type": "multiple-choice",
+        "question": "Eine Rechnung über 10.000,00 € bietet: 3 % Skonto bei Zahlung innerhalb von 10 Tagen oder 30 Tage netto. Das Unternehmen nimmt für 20 Tage einen Kontokorrentkredit zu 12 % p.a. auf, um Skonto zu ziehen. Wie hoch ist der Netto-Finanzierungsgewinn durch die Skontonutzung?",
+        "options": [
+                "235,33 € Reingewinn (Skontoersparnis 300,00 € abzüglich 64,67 € Kreditzinsen)",
+                "300,00 €",
+                "150,00 €",
+                "Kein Gewinn, die Kreditaufnahme ist teurer als das Skonto"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Rechnung:\n1. Skontoabzug: 3 % von 10.000 € = 300,00 € Ersparnis.\n2. Zu finanzierender Überweisungsbetrag: 9.700,00 €.\n3. Kreditzinsen für 20 Tage (30 - 10 Tage): Z = (9.700 * 12 * 20) / (100 * 360) = 64,67 €.\n4. Reingewinn = 300,00 € - 64,67 € = 235,33 €."
+},
+    {
+        "id": 298,
+        "theme": "calculations",
+        "topic": "Effektiver Jahreszins Lieferantenkredit",
+        "isCalculation": true,
+        "isBawueFocus": true,
+        "type": "multiple-choice",
+        "question": "Ein Lieferant bietet: 2 % Skonto bei Zahlung innerhalb von 10 Tagen, 30 Tage netto. Welchem effektiven Jahreszinssatz (p_eff) entspricht dieser Lieferantenkredit bei Nichtausnutzung des Skontos?",
+        "options": [
+                "36,0 % p.a. (Berechnung: (2 % * 360) / (30 - 10))",
+                "2,0 % p.a.",
+                "24,0 % p.a.",
+                "18,0 % p.a."
+        ],
+        "correctAnswer": 0,
+        "explanation": "Formel für eff. Jahreszins: p_eff = (Skontosatz * 360) / (Zahlungsziel - Skontofrist) = (2 * 360) / (30 - 10) = 720 / 20 = 36,0 % p.a. Dies verdeutlicht, wie extrem teuer der Verzicht auf Skonto ist!"
+},
+    {
+        "id": 299,
+        "theme": "calculations",
+        "topic": "Leasing vs. Kauf Wirtschaftlichkeitsvergleich",
+        "isCalculation": true,
+        "isBawueFocus": true,
+        "type": "multiple-choice",
+        "question": "Ein Unternehmen benötigt neue Server für 3 Jahre:\n- Kauf: Anschaffung 24.000 €, Wartung 1.000 €/Jahr, geschätzter Restwert nach 3 Jahren: 3.000 €.\n- Leasing: 0 € Anzahlung, monatliche Rate 700 € (inkl. Wartung).\n\nWelche Option ist über die 3 Jahre wirtschaftlicher und um wie viel Euro?",
+        "options": [
+                "Kauf ist um 1.200,00 € günstiger (Kauf: 24.000 € Gesamtkosten vs. Leasing: 25.200 €).",
+                "Leasing ist um 2.400,00 € günstiger.",
+                "Beide Optionen sind auf den Cent exakt gleich teuer.",
+                "Kauf ist um 4.200,00 € teurer."
+        ],
+        "correctAnswer": 0,
+        "explanation": "Kostenvergleich:\n- Kauf: 24.000 € (Kauf) + 3.000 € (Wartung 3 Jahre) - 3.000 € (Restwerterlös) = 24.000,00 €.\n- Leasing: 36 Monate * 700 €/Monat = 25.200,00 €.\n- Differenz: 25.200 € - 24.000 € = 1.200,00 € Vorteil für den Kauf."
+},
+    {
+        "id": 300,
+        "theme": "calculations",
+        "topic": "Statische Amortisationsrechnung",
+        "isCalculation": true,
+        "isBawueFocus": true,
+        "type": "multiple-choice",
+        "question": "Die Anschaffung eines energieeffizienten Server-Clusters kostet 36.000,00 €. Durch die Maßnahme werden jährlich 12.000,00 € an Strom- und Lizenzkosten eingespart. Nach welcher Amortisationszeit hat sich die Investition amortisiert?",
+        "options": [
+                "3,0 Jahre (36 Monate)",
+                "2,5 Jahre (30 Monate)",
+                "4,0 Jahre (48 Monate)",
+                "1,5 Jahre (18 Monate)"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Formel (statische Amortisation): Amortisationszeit = Anschaffungskosten / jährliche Einsparung = 36.000,00 € / 12.000,00 €/Jahr = 3,0 Jahre (36 Monate)."
+},
+    {
+        "id": 301,
+        "theme": "calculations",
+        "topic": "Return on Investment (ROI)",
+        "isCalculation": true,
+        "isBawueFocus": true,
+        "type": "multiple-choice",
+        "question": "Ein IT-Systemhaus investiert 80.000,00 € in eine automatisierte Bereitstellungsplattform. Der durchschnittliche jährliche Nettogewinn durch diese Lösung beträgt 20.000,00 €. Wie hoch ist der Return on Investment (ROI)?",
+        "options": [
+                "25,0 %",
+                "40,0 %",
+                "20,0 %",
+                "16,0 %"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Formel: ROI = (Gewinn / Kapitaleinsatz) * 100 = (20.000,00 € / 80.000,00 €) * 100 = 25,0 %."
+},
+    {
+        "id": 302,
+        "theme": "calculations",
+        "topic": "Lineare Abschreibung (AfA)",
+        "isCalculation": true,
+        "isBawueFocus": true,
+        "type": "multiple-choice",
+        "question": "Ein Server wird für 9.000,00 € netto angeschafft. Die betriebsgewöhnliche Nutzungsdauer laut amtlicher AfA-Tabelle beträgt 3 Jahre. Wie hoch sind der jährliche Abschreibungsbetrag und der Restbuchwert am Ende des 2. Nutzungsjahres?",
+        "options": [
+                "Jährliche AfA: 3.000,00 € | Restbuchwert nach Jahr 2: 3.000,00 €",
+                "Jährliche AfA: 4.500,00 € | Restbuchwert nach Jahr 2: 0,00 €",
+                "Jährliche AfA: 3.000,00 € | Restbuchwert nach Jahr 2: 6.000,00 €",
+                "Jährliche AfA: 2.000,00 € | Restbuchwert nach Jahr 2: 5.000,00 €"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Lineare AfA:\n1. Jährlicher Abschreibungsbetrag: 9.000 € / 3 Jahre = 3.000,00 €/Jahr.\n2. Abschreibung nach 2 Jahren: 2 * 3.000 € = 6.000,00 €.\n3. Restbuchwert Ende Jahr 2 = 9.000 € - 6.000 € = 3.000,00 €."
+},
+    {
+        "id": 303,
+        "theme": "calculations",
+        "topic": "Wahr/Falsch: Skontoabzug",
+        "isCalculation": true,
+        "isBawueFocus": true,
+        "type": "true-false",
+        "question": "Wahr oder Falsch: Skonto wird in der Handelskalkulation immer auf den Zieleinkaufspreis (nach Abzug des Rabatts) berechnet und nicht auf den ursprünglichen Listeneinkaufspreis.",
+        "options": [
+                "Wahr (Richtig)",
+                "Falsch (Skonto wird vom Bruttopreis oder Listeneinkaufspreis berechnet)"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Richtig! Der Skontobetrag errechnet sich stets aus dem Zieleinkaufspreis (LEP minus Rabatt)."
+},
+    {
+        "id": 304,
+        "theme": "calculations",
+        "topic": "Wahr/Falsch: PUE-Wert",
+        "isCalculation": true,
+        "isBawueFocus": true,
+        "type": "true-false",
+        "question": "Wahr oder Falsch: Ein PUE-Wert von 1,1 kennzeichnet ein wesentlich energieeffizienteres Rechenzentrum als ein PUE-Wert von 2,0.",
+        "options": [
+                "Wahr (Richtig)",
+                "Falsch (Ein höherer PUE-Wert bedeutet bessere Effizienz)"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Richtig! Der ideale PUE-Wert ist 1,0 (100 % der Energie fließen in IT-Hardware). Je näher an 1,0, desto weniger Energie wird für Kühlung und Nebenverluste verschwendet."
+},
+    {
+        "id": 305,
+        "theme": "calculations",
+        "topic": "IHK Fallstudie Vollständige Handelskalkulation",
+        "isCalculation": true,
+        "isBawueFocus": true,
+        "type": "open-text",
+        "question": "Prüfungsaufgabe Handelskalkulation (BaWü-Fokus): Für die Beschaffung und den Weiterverkauf von 20 High-End-Workstations liegen folgende Daten vor:\n\n- Listeneinkaufspreis (LEP): 1.500,00 € pro Stück\n- Lieferantenrabatt: 20 %\n- Lieferantenskonto: 3 %\n- Bezugskosten: insgesamt 200,00 € (für alle 20 Stück zusammen)\n- Handlungskostenzuschlag (HKZ): 35 %\n- Gewinnzuschlag: 15 %\n- Kundenskonto: 2 % (im Hundert)\n- Kundenrabatt: 10 % (im Hundert)\n- Umsatzsteuer: 19 %\n\nAufgabe:\nBerechne pro Stück:\na) Den Bezugspreis (Einstandspreis)\nb) Die Selbstkosten\nc) Den Barverkaufspreis (BVP)\nd) Den Zielverkaufspreis (ZVP) und den Netto-Listenverkaufspreis (LVP netto)\ne) Den Brutto-Verkaufspreis inklusive 19 % USt.",
+        "musterloesung": "Vollständige Vorwärtskalkulation (pro Stück):\n\n1. Einkaufskalkulation:\n  Listeneinkaufspreis (LEP): 1.500,00 €\n- Lieferantenrabatt (20 %): -300,00 €\n= Zieleinkaufspreis (ZEP): 1.200,00 €\n- Lieferantenskonto (3 % von 1.200 €): -36,00 €\n= Bareinkaufspreis (BEP): 1.164,00 €\n+ Bezugskosten (200 € / 20 Stück): +10,00 €\n= a) Bezugspreis (Einstandspreis): 1.174,00 €\n\n2. Selbstkosten:\n+ Handlungskosten (35 % von 1.174 €): +410,90 €\n= b) Selbstkosten: 1.584,90 €\n\n3. Verkaufskalkulation:\n+ Gewinnzuschlag (15 % von 1.584,90 €): +237,74 €\n= c) Barverkaufspreis (BVP): 1.822,64 €\n\n4. Im-Hundert-Kalkulation für Kundenskonto & Rabatt:\n+ Kundenskonto (2 % im Hundert -> BVP / 0,98): +37,20 €\n= d1) Zielverkaufspreis (ZVP): 1.859,84 €\n+ Kundenrabatt (10 % im Hundert -> ZVP / 0,90): +206,65 €\n= d2) Listenverkaufspreis netto (LVP): 2.066,49 €\n\n5. Endpreis:\n+ Umsatzsteuer (19 % von 2.066,49 €): +392,63 €\n= e) Listenverkaufspreis brutto: 2.459,12 € pro Stück.",
+        "explanation": "Wichtig: Lieferantenrabatt und Skonto werden 'vom Hundert' abgezogen. Kundenskonto und Kundenrabatt in der Vorwärtskalkulation müssen 'im Hundert' aufgeschlagen werden (Division durch 0,98 bzw. 0,90), damit der Kunde nach seinem Abzug genau den BVP zahlt!"
+},
+    {
+        "id": 306,
+        "theme": "calculations",
+        "topic": "IHK Fallstudie RZ-Stromkosten & Amortisation",
+        "isCalculation": true,
+        "isBawueFocus": true,
+        "type": "open-text",
+        "question": "Prüfungsaufgabe RZ-Stromkosten & Amortisation (BaWü-Fokus): Eine IT-Abteilung betreibt 10 ältere Server mit einer durchschnittlichen Leistungsaufnahme von jeweils 450 Watt im 24/7-Dauerbetrieb (8.760 h/Jahr).\n\nEs wird vorgeschlagen, diese durch 2 moderne Hochleistungsserver zu ersetzen, die jeweils 300 Watt verbrauchen.\n- Strompreis: 0,40 € pro kWh\n- Anschaffungskosten für die 2 neuen Server inkl. Migration: 18.000,00 €\n\nAufgabe:\na) Berechne die jährlichen Stromkosten der alten 10 Server.\nb) Berechne die jährlichen Stromkosten der neuen 2 Server.\nc) Berechne die jährliche Stromkostenersparnis in Euro.\nd) Ermittle die Amortisationszeit (in Jahren und Monaten).",
+        "musterloesung": "a) Stromkosten alte Server (10 Stück à 450 W = 4.500 W = 4,5 kW):\n- Jahresenergie: 4,5 kW * 8.760 h = 39.420 kWh.\n- Stromkosten alt: 39.420 kWh * 0,40 €/kWh = 15.768,00 € pro Jahr.\n\nb) Stromkosten neue Server (2 Stück à 300 W = 600 W = 0,6 kW):\n- Jahresenergie: 0,6 kW * 8.760 h = 5.256 kWh.\n- Stromkosten neu: 5.256 kWh * 0,40 €/kWh = 2.102,40 € pro Jahr.\n\nc) Jährliche Ersparnis:\n- 15.768,00 € - 2.102,40 € = 13.665,60 € pro Jahr.\n\nd) Amortisationszeit:\n- Amortisationsdauer = 18.000,00 € / 13.665,60 €/Jahr ≈ 1,317 Jahre.\n- In Monaten: 1,317 * 12 Monate ≈ 15,8 Monate (ca. 1 Jahr und 4 Monate).",
+        "explanation": "Formel: E = P * t. Stromkosten = E * Arbeitspreis. Amortisationszeit = Investition / jährliche Netto-Einsparung."
+},
+    {
+        "id": 307,
+        "theme": "calculations",
+        "topic": "IHK Fallstudie Zahlensystem-Umrechnungen",
+        "isCalculation": true,
+        "isBawueFocus": true,
+        "type": "open-text",
+        "question": "Prüfungsaufgabe Zahlensysteme (BaWü-Fokus): Führe folgende Umrechnungen schrittweise durch:\n\na) Wandle die Dezimalzahl 179 in das Binär- (Dual-) und Hexadezimalsystem um.\nb) Wandle die Hexadezimalzahl 2E5 (16) in das Dezimalsystem um.\nc) Wandle die Binärzahl 10111011 (2) in das Oktalsystem um.",
+        "musterloesung": "a) Dezimal 179 umwandeln:\n- Binär: 179 = 128 + 32 + 16 + 2 + 1 = 10110011 (2).\n- Hexadezimal: 1011 (2) = B (16), 0011 (2) = 3 (16) -> B3 (16). (Probe: 11 * 16 + 3 = 176 + 3 = 179).\n\nb) 2E5 (16) in Dezimal:\n- (2 * 16^2) + (14 * 16^1) + (5 * 16^0) = (2 * 256) + (14 * 16) + (5 * 1) = 512 + 224 + 5 = 741 (10).\n\nc) 10111011 (2) in Oktal:\n- Aufteilung in 3-Bit-Triaden von rechts: 010 | 111 | 011 (2)\n- 010 (2) = 2 (8)\n- 111 (2) = 7 (8)\n- 011 (2) = 3 (8)\n- Ergebnis: 273 (8). (Probe: 2 * 64 + 7 * 8 + 3 = 128 + 56 + 3 = 187).",
+        "explanation": "Binär <-> Hexadezimal: 4-Bit-Gruppen (Tetraden). Binär <-> Oktal: 3-Bit-Gruppen (Triaden)."
+},
+    {
+        "id": 308,
+        "theme": "calculations",
+        "topic": "IHK Fallstudie Datenübertragungszeit & Overhead",
+        "isCalculation": true,
+        "isBawueFocus": true,
+        "type": "open-text",
+        "question": "Prüfungsaufgabe Bandbreite & WAN-Replikation (BaWü-Fokus):\nEin Unternehmen möchte täglich ein VM-Replikat von 800 GiB über eine gemietete Standleitung mit 250 Mbit/s in ein Ausweich-Rechenzentrum übertragen.\n\nAufgabe:\na) Berechne die Datenmenge von 800 GiB in Gigabit (Gbit).\nb) Berechne die Übertragungszeit in Stunden und Minuten unter idealen Bedingungen (ohne Overhead).\nc) Die Replikationssoftware verursacht 12 % Protokoll- und Verschlüsselungs-Overhead. Berechne die tatsächliche Replikationsdauer.",
+        "musterloesung": "a) Datenmenge in Gigabit:\n- 800 GiB * 1.024 MiB/GiB * 1.024 KiB/MiB * 1.024 Bytes/KiB = 858.993.459.200 Bytes.\n- In Bit: 858.993.459.200 * 8 = 6.871.947.673.600 Bits ≈ 6.871,95 Gbit (bzw. vereinfacht 800 GiB * 8 = 6.400 Gibibit = ca. 6.872 Gbit).\n\nb) Ideale Übertragungszeit (bei 250 Mbit/s = 0,25 Gbit/s):\n- t = 6.871,95 Gbit / 0,25 Gbit/s = 27.487,8 Sekunden.\n- In Stunden: 27.487,8 s / 3.600 s/h ≈ 7,635 Stunden = 7 Stunden 38 Minuten.\n\nc) Mit 12 % Overhead:\n- Datenmenge mit Overhead: 6.871,95 Gbit * 1,12 = 7.696,58 Gbit.\n- Zeit: 7.696,58 Gbit / 0,25 Gbit/s = 30.786,3 Sekunden.\n- In Stunden: 30.786,3 s / 3.600 s/h ≈ 8,552 Stunden = 8 Stunden 33 Minuten 7 Sekunden.",
+        "explanation": "Achtung: Byte in Bit umrechnen (Faktor 8) und Einheiten (Mbit/s vs. Gbit) angleichen!"
 }
 
 ];

@@ -262,6 +262,59 @@ function filterQuestions(theme) {
                     q.question.toLowerCase().includes("entscheidungstabelle")
                 ))
             );
+        } else if (theme === "calculations" || theme === "rechnen") {
+            filteredQuestions = questions.filter(q => 
+                q.theme === "calculations" || 
+                q.isCalculation === true || 
+                (q.topic && (
+                    q.topic.toLowerCase().includes("rechn") || 
+                    q.topic.toLowerCase().includes("kalkulation") || 
+                    q.topic.toLowerCase().includes("strom") || 
+                    q.topic.toLowerCase().includes("leistung") || 
+                    q.topic.toLowerCase().includes("übertragung") || 
+                    q.topic.toLowerCase().includes("download") || 
+                    q.topic.toLowerCase().includes("umrechnung") || 
+                    q.topic.toLowerCase().includes("kredit") || 
+                    q.topic.toLowerCase().includes("leasing") || 
+                    q.topic.toLowerCase().includes("amortisation") || 
+                    q.topic.toLowerCase().includes("skonto") || 
+                    q.topic.toLowerCase().includes("zins") || 
+                    q.topic.toLowerCase().includes("binär") || 
+                    q.topic.toLowerCase().includes("hexadezimal") || 
+                    q.topic.toLowerCase().includes("oktal") || 
+                    q.topic.toLowerCase().includes("zahlensystem") || 
+                    q.topic.toLowerCase().includes("subnetting") || 
+                    q.topic.toLowerCase().includes("raid") || 
+                    q.topic.toLowerCase().includes("pue") || 
+                    q.topic.toLowerCase().includes("usv") || 
+                    q.topic.toLowerCase().includes("speichereinheit")
+                )) ||
+                (q.question && (
+                    q.question.toLowerCase().includes("berechne") || 
+                    q.question.toLowerCase().includes("kalkulation") || 
+                    q.question.toLowerCase().includes("bezugspreis") || 
+                    q.question.toLowerCase().includes("einstandspreis") || 
+                    q.question.toLowerCase().includes("selbstkosten") || 
+                    q.question.toLowerCase().includes("barverkaufspreis") || 
+                    q.question.toLowerCase().includes("listenverkaufspreis") || 
+                    q.question.toLowerCase().includes("stromkosten") || 
+                    q.question.toLowerCase().includes("kwh") || 
+                    q.question.toLowerCase().includes("wirkleistung") || 
+                    q.question.toLowerCase().includes("scheinleistung") || 
+                    q.question.toLowerCase().includes("mbit/s") || 
+                    q.question.toLowerCase().includes("übertragungszeit") || 
+                    q.question.toLowerCase().includes("downloadzeit") || 
+                    q.question.toLowerCase().includes("amortisation") || 
+                    q.question.toLowerCase().includes("zinssatz") || 
+                    q.question.toLowerCase().includes("skonto") || 
+                    q.question.toLowerCase().includes("dezimal") || 
+                    q.question.toLowerCase().includes("hexadezimal") || 
+                    q.question.toLowerCase().includes("dualzahl") || 
+                    q.question.toLowerCase().includes("oktal") || 
+                    q.question.toLowerCase().includes("gibibyte") || 
+                    q.question.toLowerCase().includes("tebibyte")
+                ))
+            );
         } else {
             filteredQuestions = questions.filter(q => q.theme === theme);
         }
@@ -884,7 +937,9 @@ function getThemeLabel(key) {
         "bawue-special": "BW Spezial: IT-Systeme & Prozesse",
         "bawue-focus": "🔮 IHK Stuttgart Fokus",
         diagrams: "📐 Diagramme & Modellierung",
-        "diagram-training": "📐 Diagramme & Modellierung"
+        "diagram-training": "📐 Diagramme & Modellierung",
+        calculations: "🧮 Rechnen & Handelskalkulation",
+        rechnen: "🧮 Rechnen & Handelskalkulation"
     };
     return labels[key] || key;
 }
