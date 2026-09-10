@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AP1 Prüfungstrainer - Fachinformatiker</title>
-    <link rel="stylesheet" href="style.css?v=49">
+    <link rel="stylesheet" href="style.css?v=50">
     <!-- FontAwesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -47,6 +47,15 @@
                 </div>
             </div>
 
+            <!-- Diagramm-Zeichenboard Card (Direkt unter Themenbereiche für schnellen Zugriff) -->
+            <div class="card whiteboard-card" style="border: 2px solid #8b5cf6; box-shadow: 0 4px 6px -1px rgba(139, 92, 246, 0.15);">
+                <h3 style="color: #6d28d9; margin-bottom: 0.5rem;"><i class="fa-solid fa-pen-ruler"></i> Diagramm-Board</h3>
+                <p style="font-size: 0.85rem; color: var(--text-light); margin-bottom: 0.75rem; line-height: 1.35;">Zeichne & skizziere Use-Case, Klassendiagramme, ERD, EPK, BPMN oder Netzpläne.</p>
+                <button class="btn btn-full" id="open-whiteboard-sidebar-btn" style="background: linear-gradient(135deg, #8b5cf6, #6d28d9); color: white; justify-content: center; font-weight: bold; border: none; font-size: 0.95rem; display: flex; align-items: center; gap: 0.5rem; width: 100%;">
+                    <i class="fa-solid fa-palette"></i> Zeichenboard öffnen
+                </button>
+            </div>
+
             <div class="card">
                 <h3><i class="fa-solid fa-gear"></i> Aufgaben-Optionen</h3>
                 <div class="control-group" style="display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.5rem;">
@@ -74,15 +83,6 @@
                         <i class="fa-solid fa-stopwatch"></i> 90-Min.-Simulation
                     </button>
                 </div>
-            </div>
-
-            <!-- Diagramm-Zeichenboard Card -->
-            <div class="card whiteboard-card" style="border: 2px solid #8b5cf6; box-shadow: 0 4px 6px -1px rgba(139, 92, 246, 0.15);">
-                <h3 style="color: #6d28d9; margin-bottom: 0.5rem;"><i class="fa-solid fa-pen-ruler"></i> Diagramm-Board</h3>
-                <p style="font-size: 0.85rem; color: var(--text-light); margin-bottom: 0.75rem; line-height: 1.35;">Zeichne & skizziere Use-Case, Klassendiagramme, ERD, EPK, BPMN oder Netzpläne.</p>
-                <button class="btn btn-full" id="open-whiteboard-sidebar-btn" style="background: linear-gradient(135deg, #8b5cf6, #6d28d9); color: white; justify-content: center; font-weight: bold; border: none; font-size: 0.95rem; display: flex; align-items: center; gap: 0.5rem; width: 100%;">
-                    <i class="fa-solid fa-palette"></i> Zeichenboard öffnen
-                </button>
             </div>
 
             <div class="card stats-card">
@@ -379,8 +379,8 @@
     </footer>
 
     <!-- Load the questions first, then the application logic -->
-    <script src="questions.js?v=49"></script>
-    <script src="generator.js?v=49"></script>
-    <script src="app.js?v=49"></script>
+    <script src="questions.js?v=50"></script>
+    <script src="generator.js?v=50"></script>
+    <script src="app.js?v=50"></script>
 </body>
 </html>
