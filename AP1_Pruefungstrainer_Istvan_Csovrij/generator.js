@@ -1172,5 +1172,207 @@ function generateDynamicQuestions(typeMode = "mix") {
         });
     }
 
+    
+    // ==========================================
+    // DIAGRAMME & MODELLIERUNG DYNAMISCHE GENERATOREN (AP1 SPEZIAL)
+    // ==========================================
+
+    // D.1 Dynamische ERD-Kardinalitäten & Fremdschlüssel-Generierung
+    const erdScenarios = [
+        { entA: "Kunde", entB: "Bestellung", card: "1:n", rel: "erteilt", fkTable: "Bestellung", fkField: "FK_KundenNr", reason: "Ein Kunde kann beliebig viele Bestellungen aufgeben, jede Bestellung gehört zu genau einem Kunden." },
+        { entA: "Abteilung", entB: "Mitarbeiter", card: "1:n", rel: "beschäftigt", fkTable: "Mitarbeiter", fkField: "FK_AbteilungsID", reason: "Eine Abteilung hat viele Mitarbeiter, jeder Mitarbeiter ist genau einer Abteilung zugeordnet." },
+        { entA: "Projekt", entB: "Entwickler", card: "n:m", rel: "arbeitet an", fkTable: "Projekt_Entwickler (Zwischentabelle)", fkField: "FK_ProjektID und FK_EntwicklerID", reason: "Ein Entwickler arbeitet an mehreren Projekten, ein Projekt hat mehrere Entwickler (erfordert Zwischentabelle)." },
+        { entA: "Rechnung", entB: "Rechnungsposition", card: "1:n", rel: "besteht aus", fkTable: "Rechnungsposition", fkField: "FK_RechnungsNr", reason: "Eine Rechnung hat 1..n Positionen, jede Position gehört zu exakt einer Rechnung." },
+        { entA: "Student", entB: "Vorlesung", card: "n:m", rel: "besucht", fkTable: "Student_Vorlesung (Zwischentabelle)", fkField: "FK_MatrikelNr und FK_VorlesungsID", reason: "Mehrere Studenten hören mehrere Vorlesungen (n:m Beziehung)." },
+        { entA: "Mitarbeiter", entB: "Dienstwagen", card: "1:1", rel: "besitzt fest", fkTable: "Mitarbeiter oder Dienstwagen", fkField: "FK_DienstwagenID / FK_MitarbeiterID", reason: "Jedem Mitarbeiter ist höchstens ein Dienstwagen fest zugeordnet und umgekehrt." },
+        { entA: "Server", entB: "Festplatte", card: "1:n", rel: "enthält", fkTable: "Festplatte", fkField: "FK_ServerID", reason: "Ein Server besitzt mehrere Festplatten, eine Festplatte ist fest in einem Server verbaut." },
+        { entA: "SoftwareLizenz", entB: "ArbeitsplatzPC", card: "n:m", rel: "ist installiert auf", fkTable: "Lizenz_PC (Zwischentabelle)", fkField: "FK_LizenzKey und FK_PC_InventarNr", reason: "Volumenlizenzen können auf mehreren PCs installiert sein, ein PC hat mehrere Lizenzen." }
+    ];
+
+    for (let i = 0; i < 25; i++) {
+        const item = erdScenarios[Math.floor(Math.random() * erdScenarios.length)];
+        const isFkQuestion = Math.random() < 0.5;
+        const isOpen = shouldBeOpenText();
+
+        if (isFkQuestion) {
+            if (isOpen) {
+                dynamicQuestions.push({
+                    id: currentId++,
+                    theme: "diagrams",
+                    topic: "ERD Fremdschlüssel-Modellierung",
+                    isDiagram: true,
+                    isBawueFocus: true,
+                    diagramType: "ERD",
+                    type: "open-text",
+                    question: `Prüfungsaufgabe ERD & Tabellenschema: Im Datenmodell eines IT-Systems besteht zwischen **${item.entA}** und **${item.entB}** die Beziehung **'${item.rel}'** (${item.card}).\n\nIn welcher Tabelle muss der Fremdschlüssel (Foreign Key) angelegt werden und wie lautet die datenbanktheoretische Begründung?`,
+                    musterloesung: `Fremdschlüssel-Platzierung: In der Tabelle '${item.fkTable}'.\n\nBegründung: ${item.reason}`,
+                    explanation: `Bei 1:n Beziehungen wandert der PK der 1-Seite in die Tabelle der n-Seite. Bei n:m Beziehungen entsteht eine separate Verknüpfungstabelle.`
+                });
+            } else {
+                dynamicQuestions.push({
+                    id: currentId++,
+                    theme: "diagrams",
+                    topic: "ERD Fremdschlüssel-Modellierung",
+                    isDiagram: true,
+                    isBawueFocus: true,
+                    diagramType: "ERD",
+                    type: "multiple-choice",
+                    question: `Prüfungsaufgabe ERD & Relationenmodell: Gegeben ist die Beziehung '${item.entA}' ${item.rel} '${item.entB}' mit Kardinalität ${item.card}. Wo muss der Fremdschlüssel im Tabellenschema platziert werden?`,
+                    options: [
+                        `In der Tabelle '${item.fkTable}' (${item.fkField})`,
+                        `Ausschließlich in der Tabelle '${item.entA}'`,
+                        `In einer temporären Logdatei`,
+                        `Fremdschlüssel sind bei dieser Beziehung nicht zulässig`
+                    ],
+                    correctAnswer: 0,
+                    explanation: `Regel: ${item.reason}`
+                });
+            }
+        } else {
+            // Cardinality question
+            if (isOpen) {
+                dynamicQuestions.push({
+                    id: currentId++,
+                    theme: "diagrams",
+                    topic: "ERD Kardinalitäten bestimmen",
+                    isDiagram: true,
+                    isBawueFocus: true,
+                    diagramType: "ERD",
+                    type: "open-text",
+                    question: `Prüfungsaufgabe ERD-Modellierung: Bestimme die logische Kardinalität (1:1, 1:n oder n:m) für folgende Fachanforderung:\n"${item.entA} ${item.rel} ${item.entB}".\n\nBegründe deine Entscheidung aus Sicht des Datenbankentwurfs.`,
+                    musterloesung: `Kardinalität: ${item.card}\n\nBegründung: ${item.reason}`,
+                    explanation: `Prüfe immer beide Leserichtungen: Wie viele ${item.entB} hat ein ${item.entA} (max)? Und wie viele ${item.entA} gehören zu einem ${item.entB} (max)?`
+                });
+            } else {
+                const optList = ["1:n", "n:m", "1:1", "m:1 (bzw. n:1)"];
+                const correctIdx = optList.indexOf(item.card) !== -1 ? optList.indexOf(item.card) : 0;
+                dynamicQuestions.push({
+                    id: currentId++,
+                    theme: "diagrams",
+                    topic: "ERD Kardinalitäten",
+                    isDiagram: true,
+                    isBawueFocus: true,
+                    diagramType: "ERD",
+                    type: "multiple-choice",
+                    question: `Prüfungsaufgabe ERD: Welche Kardinalität beschreibt die Beziehung zwischen '${item.entA}' und '${item.entB}' (${item.reason})?`,
+                    options: [
+                        `${item.card} (Erklärung: ${item.reason})`,
+                        item.card === "1:n" ? "n:m (Zwischentabelle)" : "1:n (Fremdschlüssel)",
+                        item.card === "1:1" ? "n:m (Mehrfachbezug)" : "1:1 (Identitätsbezug)",
+                        "Keine relationale Beziehung möglich"
+                    ],
+                    correctAnswer: 0,
+                    explanation: item.reason
+                });
+            }
+        }
+    }
+
+    // D.2 Dynamische Netzplantechnik-Aufgaben (Vorwärts-, Rückwärtsrechnung & Puffer)
+    for (let i = 0; i < 20; i++) {
+        const dA = Math.floor(Math.random() * 4) + 2; // 2..5 Tage
+        const dB = Math.floor(Math.random() * 3) + 2; // 2..4 Tage
+        const dC = Math.floor(Math.random() * 4) + 3; // 3..6 Tage
+        const dD = Math.floor(Math.random() * 3) + 2; // 2..4 Tage
+
+        // Structure: A (start) -> B and C (parallel) -> D (join end)
+        const fazA = 0;
+        const fezA = fazA + dA;
+        
+        const fazB = fezA;
+        const fezB = fazB + dB;
+        
+        const fazC = fezA;
+        const fezC = fazC + dC;
+
+        const fazD = Math.max(fezB, fezC);
+        const fezD = fazD + dD;
+
+        // Backward calculation
+        const sezD = fezD;
+        const sazD = sezD - dD;
+
+        const sezB = sazD;
+        const sazB = sezB - dB;
+        const gpB = sazB - fazB;
+
+        const sezC = sazD;
+        const sazC = sezC - dC;
+        const gpC = sazC - fazC;
+
+        const criticalBranch = (fezC >= fezB) ? "A ➔ C ➔ D" : "A ➔ B ➔ D";
+        const criticalBranchText = (fezC >= fezB) 
+            ? `Der kritische Pfad verläuft über Vorgang C (Dauer ${dC} Tage), da dieser länger dauert als Vorgang B (Dauer ${dB} Tage). Kritischer Pfad: A ➔ C ➔ D.`
+            : `Der kritische Pfad verläuft über Vorgang B (Dauer ${dB} Tage), da dieser länger dauert als Vorgang C (Dauer ${dC} Tage). Kritischer Pfad: A ➔ B ➔ D.`;
+
+        const isOpen = shouldBeOpenText();
+
+        if (isOpen) {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "diagrams",
+                topic: "Netzplantechnik Berechnung",
+                isDiagram: true,
+                isBawueFocus: true,
+                diagramType: "Netzplantechnik",
+                type: "open-text",
+                code: `Vorgänge:\n- Vorgang A (Start): Dauer = ${dA} Tage\n- Vorgang B (Vorgänger A): Dauer = ${dB} Tage\n- Vorgang C (Vorgänger A): Dauer = ${dC} Tage\n- Vorgang D (Vorgänger B und C): Dauer = ${dD} Tage (Projektende)`,
+                question: `Prüfungsaufgabe Netzplantechnik: Gegeben ist ein IT-Projekt mit den 4 oben aufgeführten Vorgängen.\n\nAufgabe:\n1. Berechne den Frühesten Anfangs- und Endzeitpunkt (FAZ, FEZ) für alle Vorgänge.\n2. Berechne die Gesamtdauer des Projekts.\n3. Bestimme den Gesamtpuffer (GP) für Vorgang B und Vorgang C.\n4. Welcher Pfad bildet den Kritischen Pfad?`,
+                musterloesung: `1. Vorwärtsrechnung:\n- Vorgang A: FAZ = ${fazA}, FEZ = ${fezA}\n- Vorgang B: FAZ = ${fazB}, FEZ = ${fezB}\n- Vorgang C: FAZ = ${fazC}, FEZ = ${fezC}\n- Vorgang D: FAZ = max(${fezB}, ${fezC}) = ${fazD}, FEZ = ${fezD}\n\n2. Gesamtlaufzeit des Projekts: ${fezD} Tage.\n\n3. Gesamtpuffer (GP):\n- Vorgang B: GP = SAZ - FAZ = ${sazB} - ${fazB} = ${gpB} Tag(e)\n- Vorgang C: GP = SAZ - FAZ = ${sazC} - ${fazC} = ${gpC} Tag(e)\n\n4. Kritischer Pfad: ${criticalBranch} (Gesamtpuffer = 0).`,
+                explanation: `Vorwärtsrechnung ermittelt das Maximum der Vorgänger-FEZs. Der Pfad mit Gesamtpuffer = 0 ist der kritische Pfad.`
+            });
+        } else {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "diagrams",
+                topic: "Netzplantechnik Gesamtdauer & Kritischer Pfad",
+                isDiagram: true,
+                isBawueFocus: true,
+                diagramType: "Netzplantechnik",
+                type: "multiple-choice",
+                code: `Vorgänge:\n- A: Dauer = ${dA} Tage (Start)\n- B: Dauer = ${dB} Tage (nach A)\n- C: Dauer = ${dC} Tage (nach A)\n- D: Dauer = ${dD} Tage (nach B und C)`,
+                question: `Prüfungsaufgabe Netzplantechnik: Wie lange dauert das gesamte Projekt und welcher Pfad ist der Kritische Pfad?`,
+                options: [
+                    `Gesamtdauer = ${fezD} Tage | Kritischer Pfad = ${criticalBranch}`,
+                    `Gesamtdauer = ${dA + dB + dC + dD} Tage (einfache Summe aller Vorgänge)`,
+                    `Gesamtdauer = ${fezA + fazD} Tage | Kritischer Pfad = A ➔ D`,
+                    `Gesamtdauer = ${fezA + Math.min(fezB, fezC) + dD} Tage`
+                ],
+                correctAnswer: 0,
+                explanation: `Gesamtdauer: ${fezA} (A) + max(${dB}, ${dC}) (längerer paralleler Zweig) + ${dD} (D) = ${fezD} Tage. ${criticalBranchText}`
+            });
+        }
+    }
+
+    // D.3 Dynamische UML Klassendiagramm- & Use-Case-Generatoren
+    const umlPatterns = [
+        { title: "UML Use-Case: <<include>> vs <<extend>>", q: "Im Use-Case-Diagramm eines Geldautomaten: Beim Use-Case 'Geld abheben' wird zwingend 'PIN prüfen' aufgerufen. Welche Beziehung liegt vor?", optA: "<<include>> mit Pfeil auf 'PIN prüfen'", optB: "<<extend>> mit Pfeil auf 'Geld abheben'", optC: "Generalisierung", optD: "Komposition", correct: 0, exp: "Zwingend erforderlich = <<include>>. Pfeil zeigt auf den aufgerufenen Use-Case." },
+        { title: "UML Klassendiagramm: Komposition", q: "In einem Ticketsystem enthält eine Klasse 'Ticket' mehrere Objekte der Klasse 'TicketHistorienEintrag'. Wird ein Ticket gelöscht, müssen alle Historieneinträge ebenfalls unwiderruflich gelöscht werden. Welche Beziehung liegt vor?", optA: "Komposition (ausgefüllte schwarze Raute an 'Ticket')", optB: "Aggregation (weiße Raute)", optC: "Generalisierung (Vererbung)", optD: "Realisierung (Interface)", correct: 0, exp: "Existenzabhängigkeit ('Teil stirbt mit dem Ganzen') = Komposition mit schwarzer Raute an der Besitzerklasse." },
+        { title: "UML Klassendiagramm: Aggregation", q: "In einer Schulungssoftware: Die Klasse 'Kurs' enthält mehrere 'Teilnehmer'. Wird ein Kurs beendet/gelöscht, bleiben die Teilnehmer weiterhin im System gespeichert. Welche Beziehung liegt vor?", optA: "Aggregation (leere weiße Raute an 'Kurs')", optB: "Komposition (schwarze Raute)", optC: "Generalisierung", optD: "Assoziation 1:1", correct: 0, exp: "Schwache Bindung ('Hat-ein' ohne Existenzvernichtung) = Aggregation mit weißer Raute." },
+        { title: "BPMN 2.0: Exklusives vs Paralleles Gateway", q: "In einem BPMN-Prozess sollen nach der Prüfung 'Zahlungsmethode' entweder 'Kreditkartenzahlung' ODER 'Rechnungskauf' durchlaufen werden. Welches Symbol wird verwendet?", optA: "Exklusives Gateway (Raute mit 'X')", optB: "Paralleles Gateway (Raute mit '+')", optC: "Inklusives Gateway (Raute mit 'O')", optD: "Ereignisbasiertes Gateway", correct: 0, exp: "Entweder-oder (genau 1 Pfad) = Exclusive Gateway (XOR)." }
+    ];
+
+    for (let i = 0; i < 15; i++) {
+        const item = umlPatterns[Math.floor(Math.random() * umlPatterns.length)];
+        dynamicQuestions.push({
+            id: currentId++,
+            theme: "diagrams",
+            topic: item.title,
+            isDiagram: true,
+            isBawueFocus: true,
+            diagramType: "UML / BPMN",
+            type: "multiple-choice",
+            question: `Prüfungsaufgabe Modellierung: ${item.q}`,
+            options: [
+                item.optA,
+                item.optB,
+                item.optC,
+                item.optD
+            ],
+            correctAnswer: item.correct,
+            explanation: item.exp
+        });
+    }
+
     return dynamicQuestions;
 }

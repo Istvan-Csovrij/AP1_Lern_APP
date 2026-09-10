@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AP1 Prüfungstrainer - Fachinformatiker</title>
-    <link rel="stylesheet" href="style.css?v=47">
+    <link rel="stylesheet" href="style.css?v=48">
     <!-- FontAwesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -32,6 +32,9 @@
                     <button class="filter-btn" data-theme="lf4">LF 4: Schutz & Sicherheit</button>
                     <button class="filter-btn" data-theme="lf5">LF 5: Software & SQL</button>
                     <button class="filter-btn" data-theme="lf6">LF 6: Services & WiSo</button>
+                    <button class="filter-btn highlight-diagram-btn" data-theme="diagrams" id="diagrams-filter-btn" style="border: 2px solid #06b6d4; background: linear-gradient(135deg, #ecfeff, #cffafe); color: #0891b2; font-weight: bold; margin-top: 0.5rem; text-align: left; display: flex; align-items: center; gap: 0.5rem;">
+                        <i class="fa-solid fa-diagram-project" style="color: #0891b2;"></i> 📐 Diagramme & Modellierung (AP1)
+                    </button>
                     <button class="filter-btn highlight-bawue-btn" data-theme="bawue-focus" id="bawue-focus-btn" style="border: 2px solid #8b5cf6; background: linear-gradient(135deg, #f5f3ff, #ede9fe); color: #6d28d9; font-weight: bold; margin-top: 0.5rem; text-align: left; display: flex; align-items: center; gap: 0.5rem;">
                         <i class="fa-solid fa-wand-magic-sparkles" style="color: #8b5cf6;"></i> 🔮 IHK Stuttgart Fokus (Kristallkugel)
                     </button>
@@ -133,6 +136,9 @@
                     <div id="code-block-container" class="code-block-container" style="display: none;">
                         <pre><code id="question-code"></code></pre>
                     </div>
+
+                    <!-- Diagram Interactive helper banner -->
+                    <div id="diagram-banner-container" style="display: none; margin-top: 0.75rem;"></div>
                 </div>
 
                 <!-- Input options container -->
@@ -202,6 +208,9 @@
                     <div id="exam-code-block-container" class="code-block-container" style="display: none; margin-top: 0.75rem;">
                         <pre><code id="exam-question-code"></code></pre>
                     </div>
+
+                    <!-- Exam Diagram Interactive helper banner -->
+                    <div id="exam-diagram-banner-container" style="display: none; margin-top: 0.75rem;"></div>
                 </div>
 
                 <div class="answers-container" id="exam-answers-container" style="margin-top: 1.25rem;">
@@ -367,8 +376,8 @@
     </footer>
 
     <!-- Load the questions first, then the application logic -->
-    <script src="questions.js?v=47"></script>
-    <script src="generator.js?v=47"></script>
-    <script src="app.js?v=47"></script>
+    <script src="questions.js?v=48"></script>
+    <script src="generator.js?v=48"></script>
+    <script src="app.js?v=48"></script>
 </body>
 </html>

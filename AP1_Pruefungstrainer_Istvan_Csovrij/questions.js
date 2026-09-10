@@ -4416,6 +4416,635 @@ WHERE Email IS NULL OR Email = '';
         ],
         "correctAnswer": 0,
         explanation: "Richtig! Mit der Schuldrechtsreform 2022 wurde die Beweislastumkehr von 6 Monaten auf 12 Monate verdoppelt."
-    }
+    },
+    {
+        "id": 239,
+        "theme": "diagrams",
+        "topic": "UML Use-Case-Diagramm",
+        "isDiagram": true,
+        "isBawueFocus": true,
+        "diagramType": "UML Use-Case",
+        "type": "multiple-choice",
+        "question": "Welche Aussagen zu den Basiselementen eines UML-Use-Case-Diagramms (Anwendungsfalldiagramm) treffen nach IHK-Standard zu?",
+        "options": [
+                "Akteure stehen außerhalb der Systemgrenze, Anwendungsfälle (Ellipsen) liegen innerhalb des Systems, und Akteure werden mit durchgezogenen Linien (Assoziationen) mit Use-Cases verbunden.",
+                "Akteure müssen zwingend innerhalb der Systemgrenze liegen und dürfen nur über gestrichelte Pfeile kommunizieren.",
+                "Use-Cases werden als Rechtecke dargestellt und Akteure als Rauten.",
+                "Zwischen zwei Akteuren darf es niemals eine Generalisierungsbeziehung geben."
+        ],
+        "correctAnswer": 0,
+        "explanation": "Im UML-Use-Case-Diagramm visualisiert die Systemgrenze das zu entwickelnde System. Akteure (Personen, Nachbarsysteme, Rollen) stehen außerhalb und interagieren über Assoziationen (durchgezogene Linien) mit den Use-Cases (Ellipsen) im Inneren."
+},
+    {
+        "id": 240,
+        "theme": "diagrams",
+        "topic": "UML Use-Case <<include>>",
+        "isDiagram": true,
+        "isBawueFocus": true,
+        "diagramType": "UML Use-Case",
+        "type": "multiple-choice",
+        "question": "Ein Entwickler modelliert einen Checkout-Prozess für einen Webshop: Bei jedem Aufruf von **'Bestellung abschließen'** muss zwingend der Use-Case **'Lagerbestand prüfen'** ausgeführt werden. Welcher Beziehungstyp und welche Pfeilrichtung ist korrekt?",
+        "options": [
+                "Gestrichelter Pfeil mit <<include>>, der vom Basis-Use-Case 'Bestellung abschließen' auf 'Lagerbestand prüfen' zeigt.",
+                "Gestrichelter Pfeil mit <<extend>>, der von 'Lagerbestand prüfen' auf 'Bestellung abschließen' zeigt.",
+                "Gestrichelter Pfeil mit <<include>>, der von 'Lagerbestand prüfen' auf 'Bestellung abschließen' zeigt.",
+                "Durchgezogene Linie mit weißer Dreiecksspitze (Generalisierung) zu 'Lagerbestand prüfen'."
+        ],
+        "correctAnswer": 0,
+        "explanation": "Eine <<include>>-Beziehung bedeutet, dass ein Use-Case zwingend und immer einen anderen Use-Case einschließt. Der gestrichelte Pfeil zeigt dabei vom Basis-Use-Case ('Bestellung abschließen') HIN zum inkludierten Use-Case ('Lagerbestand prüfen')."
+},
+    {
+        "id": 241,
+        "theme": "diagrams",
+        "topic": "UML Use-Case <<extend>>",
+        "isDiagram": true,
+        "isBawueFocus": true,
+        "diagramType": "UML Use-Case",
+        "type": "multiple-choice",
+        "question": "Beim Use-Case **'Flug buchen'** kann der Kunde optional (nur unter einer Bedingung wie z. B. 'Kunde wählt Sitzplatzreservierung') den Use-Case **'Sitzplatz reservieren'** ausführen. Wie wird diese optionale Beziehung modelliert?",
+        "options": [
+                "Gestrichelter Pfeil mit <<extend>>, der vom erweiternden Use-Case 'Sitzplatz reservieren' auf den Basis-Use-Case 'Flug buchen' zeigt.",
+                "Gestrichelter Pfeil mit <<extend>>, der von 'Flug buchen' auf 'Sitzplatz reservieren' zeigt.",
+                "Gestrichelter Pfeil mit <<include>>, der von 'Flug buchen' auf 'Sitzplatz reservieren' zeigt.",
+                "Durchgezogene Assoziationslinie ohne Stereotyp."
+        ],
+        "correctAnswer": 0,
+        "explanation": "Eine <<extend>>-Beziehung erweitert einen Basis-Use-Case nur optional unter bestimmten Bedingungen (Extension Point). Der gestrichelte Pfeil zeigt dabei vom erweiternden Use-Case ('Sitzplatz reservieren') AUF den Basis-Use-Case ('Flug buchen')."
+},
+    {
+        "id": 242,
+        "theme": "diagrams",
+        "topic": "UML Klassendiagramm Struktur",
+        "isDiagram": true,
+        "isBawueFocus": true,
+        "diagramType": "UML Klassendiagramm",
+        "type": "multiple-choice",
+        "question": "In welcher vertikalen Reihenfolge sind die drei Abteilungen (Fächer) einer Klasse im Standard-UML-Klassendiagramm angeordnet?",
+        "options": [
+                "1. Klassenname (oben), 2. Attribute / Variablen (Mitte), 3. Methoden / Operationen (unten)",
+                "1. Methoden (oben), 2. Klassenname (Mitte), 3. Attribute (unten)",
+                "1. Klassenname (oben), 2. Methoden (Mitte), 3. Attribute (unten)",
+                "1. Schnittstellen (oben), 2. Klassenname (Mitte), 3. Parameter (unten)"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Ein Standard-UML-Klassenkasten ist dreigeteilt: 1. Fach (oben) = Klassenname (evtl. mit Stereotyp <<interface>>), 2. Fach (Mitte) = Attribute mit Datentyp und Sichtbarkeit, 3. Fach (unten) = Methoden/Operationen mit Parametern und Rückgabetyp."
+},
+    {
+        "id": 243,
+        "theme": "diagrams",
+        "topic": "UML Sichtbarkeiten (Visibilities)",
+        "isDiagram": true,
+        "isBawueFocus": true,
+        "diagramType": "UML Klassendiagramm",
+        "type": "multiple-choice",
+        "question": "Welche Bedeutung haben die Sichtbarkeitsmodifikatoren `+`, `-`, `#` und `~` vor Attributen und Methoden in einem UML-Klassendiagramm?",
+        "options": [
+                "+ = public (öffentlich), - = private (privat / gekapselt), # = protected (geschützt für Unterklassen), ~ = package (Paketsichtbarkeit)",
+                "+ = private, - = public, # = package, ~ = protected",
+                "+ = statisch, - = dynamisch, # = final, ~ = abstract",
+                "+ = Pflichtfeld, - = optional, # = Primärschlüssel, ~ = Fremdschlüssel"
+        ],
+        "correctAnswer": 0,
+        "explanation": "In UML steht '+' für public (jederzeit zugreifbar), '-' für private (Kapselung, nur innerhalb der eigenen Klasse), '#' für protected (in der Klasse und abgeleiteten Klassen sichtbar) und '~' für package (innerhalb desselben Pakets)."
+},
+    {
+        "id": 244,
+        "theme": "diagrams",
+        "topic": "UML Aggregation vs. Komposition",
+        "isDiagram": true,
+        "isBawueFocus": true,
+        "diagramType": "UML Klassendiagramm",
+        "type": "multiple-choice",
+        "question": "Was unterscheidet eine **Komposition** (ausgefüllte, schwarze Raute `◆`) von einer **Aggregation** (leere, weiße Raute `◇`) im UML-Klassendiagramm?",
+        "options": [
+                "Bei der Komposition besteht eine existenzielle Abhängigkeit (Teilobjekt stirbt mit dem Ganzen, z. B. Rechnung ◆─ 1..* Rechnungsposition). Bei der Aggregation kann das Teilobjekt unabhängig weiterbestehen (z. B. Abteilung ◇─ * Mitarbeiter).",
+                "Bei der Aggregation wird das Teilobjekt beim Löschen des Ganzen automatisch gelöscht, bei der Komposition nicht.",
+                "Die Komposition wird nur für Interfaces verwendet, die Aggregation für Datenbanktabellen.",
+                "Es gibt keinen Unterschied, die Raute ist rein dekorativ."
+        ],
+        "correctAnswer": 0,
+        "explanation": "Komposition (schwarze Raute) = 'Besteht-aus' mit starker Existenzabhängigkeit (löscht man die Rechnung, existieren die Posten nicht mehr). Aggregation (weiße Raute) = 'Hat-ein' mit schwacher Bindung (wird die Abteilung aufgelöst, bleibt der Mitarbeiter im Unternehmen)."
+},
+    {
+        "id": 245,
+        "theme": "diagrams",
+        "topic": "UML Generalisierung / Vererbung",
+        "isDiagram": true,
+        "isBawueFocus": true,
+        "diagramType": "UML Klassendiagramm",
+        "type": "multiple-choice",
+        "question": "Wie wird Vererbung (Generalisierung) zwischen der Kindklasse `Manager` und der Elternklasse `Mitarbeiter` in UML grafisch dargestellt?",
+        "options": [
+                "Eine durchgezogene Linie mit einer geschlossenen, nicht ausgefüllten (weißen) Dreiecksspitze, die auf die Elternklasse `Mitarbeiter` zeigt.",
+                "Eine gestrichelte Linie mit offener Pfeilspitze, die auf `Manager` zeigt.",
+                "Eine durchgezogene Linie mit einer schwarzen Raute an `Mitarbeiter`.",
+                "Ein Kreis mit einem Kreuz (XOR-Symbol) zwischen beiden Klassen."
+        ],
+        "correctAnswer": 0,
+        "explanation": "Generalisierung/Vererbung ('Ist-ein'-Beziehung) wird in UML durch eine durchgezogene Linie mit einem hohlen (weißen) Dreieck dargestellt, das stets auf die Oberklasse/Superklasse zeigt."
+},
+    {
+        "id": 246,
+        "theme": "diagrams",
+        "topic": "ERD Chen-Notation",
+        "isDiagram": true,
+        "isBawueFocus": true,
+        "diagramType": "ERD",
+        "type": "multiple-choice",
+        "question": "Welche Formen repräsentieren Entitätstypen, Attribute und Beziehungstypen in der klassischen Chen-Notation eines Entity-Relationship-Diagramms (ERD)?",
+        "options": [
+                "Rechteck = Entitätstyp, Oval/Ellipse = Attribut (unterstrichen = Primärschlüssel), Raute = Beziehungstyp",
+                "Oval = Entitätstyp, Rechteck = Attribut, Dreieck = Beziehungstyp",
+                "Raute = Entitätstyp, Sechseck = Attribut, Kreis = Beziehungstyp",
+                "Rechteck = Beziehungstyp, Raute = Attribut, Kreis = Primärschlüssel"
+        ],
+        "correctAnswer": 0,
+        "explanation": "In der klassischen Chen-Notation stehen Rechtecke für Entitätstypen (Tabellen/Objekte wie KUNDE), Ellipsen für Attribute (Eigenschaften wie Name) und Rauten für Beziehungen (Verknüpfungen wie 'kauft'). Primärschlüsselattribute werden unterstrichen."
+},
+    {
+        "id": 247,
+        "theme": "diagrams",
+        "topic": "ERD n:m Auflösung",
+        "isDiagram": true,
+        "isBawueFocus": true,
+        "diagramType": "ERD",
+        "type": "multiple-choice",
+        "question": "Im ERD besteht zwischen `PROJEKT` und `MITARBEITER` eine `n:m`-Beziehung. Wie wird diese Beziehung bei der Überführung in das relationale Datenbankschema (Tabellenentwurf) aufgelöst?",
+        "options": [
+                "Durch Erstellung einer dritten Verknüpfungstabelle (z. B. `Projekt_Mitarbeiter`), die die Primärschlüssel beider Tabellen als Fremdschlüssel (und meist als kombinierten Primärschlüssel) enthält.",
+                "Durch Speichern aller Mitarbeiter-IDs als kommagetrennte Liste in der Projekt-Tabelle.",
+                "Durch einfaches Eintragen des Fremdschlüssels `ProjektID` in der Tabelle `MITARBEITER`.",
+                "Eine n:m-Beziehung kann in relationalen Datenbanken nicht realisiert werden."
+        ],
+        "correctAnswer": 0,
+        "explanation": "Um die 1. Normalform nicht zu verletzen (keine atomaren Listen/Wiederholungsgruppen), werden n:m-Beziehungen im relationalen Modell immer über eine Zwischentabelle (Assoziationstabelle) aufgelöst, die zwei 1:n-Beziehungen abbildet."
+},
+    {
+        "id": 248,
+        "theme": "diagrams",
+        "topic": "ERD 1:n Fremdschlüssel",
+        "isDiagram": true,
+        "isBawueFocus": true,
+        "diagramType": "ERD",
+        "type": "multiple-choice",
+        "question": "Gegeben ist die 1:n Beziehung: Ein `KUNDE` (1) kann mehrere `AUFTRAEGE` (n) aufgeben. Wo muss der Fremdschlüssel in den relationalen Tabellen platziert werden?",
+        "options": [
+                "In der Tabelle `AUFTRAG` (n-Seite) als Fremdschlüssel `FK_KundenNr`, der auf den Primärschlüssel der Tabelle `KUNDE` verweist.",
+                "In der Tabelle `KUNDE` (1-Seite) als Fremdschlüssel `FK_AuftragsNr`.",
+                "In beiden Tabellen gleichzeitig.",
+                "In einer separaten 1:1 Kopplungstabelle."
+        ],
+        "correctAnswer": 0,
+        "explanation": "Bei einer 1:n Beziehung wandert der Primärschlüssel der 1-Seite (z. B. KundenNr) IMMER als Fremdschlüssel in die Tabelle der n-Seite (Auftrag), da jeder Auftrag genau einem Kunden zugeordnet ist."
+},
+    {
+        "id": 249,
+        "theme": "diagrams",
+        "topic": "ERD Krähenfuß-Notation",
+        "isDiagram": true,
+        "isBawueFocus": true,
+        "diagramType": "ERD",
+        "type": "multiple-choice",
+        "question": "Was bedeuten die Symbole `||` (zwei parallele Striche) und `o<` (Kreis mit Krähenfuß) an den Verbindungslinien in der Krähenfuß-Notation (Martin-Notation)?",
+        "options": [
+                "|| = genau eins (1..1, Pflichtbeziehung), o< = null bis viele (0..*, optionale Mehrfachbeziehung)",
+                "|| = null oder eins, o< = mindestens zwei",
+                "|| = unendlich, o< = exakt null",
+                "|| = Primärschlüssel, o< = Fremdschlüssel"
+        ],
+        "correctAnswer": 0,
+        "explanation": "In der Krähenfuß-Notation bezeichnet '||' 'Exactly One' (Minimal- und Maximalkardinalität 1). 'o<' (Kreis = optional 0, Krähenfuß = many *) bezeichnet 'Zero or More' (0..*)."
+},
+    {
+        "id": 250,
+        "theme": "diagrams",
+        "topic": "UML Aktivitätsdiagramm Fork & Join",
+        "isDiagram": true,
+        "isBawueFocus": true,
+        "diagramType": "UML Aktivitätsdiagramm",
+        "type": "multiple-choice",
+        "question": "Was ist der fundamentale Unterschied zwischen einer **Raute (Decision / Verzweigung)** und einem **dicken Balken (Fork / Join / Synchronisationsbalken)** im UML-Aktivitätsdiagramm?",
+        "options": [
+                "Die Raute wählt genau EINEN alternativen Pfad basierend auf Bedingungen ([ja]/[nein]), während der Fork-Balken den Ablauf in MEHRERE parallele, gleichzeitig ablaufende Pfade aufspaltet (und der Join-Balken wartet, bis alle fertig sind).",
+                "Die Raute steht für parallele Threads, der Balken für IF-Bedingungen.",
+                "Die Raute markiert das Programmende, der Balken den Programmstart.",
+                "Der Balken dient ausschließlich zur Einbindung von Datenbankzugriffen."
+        ],
+        "correctAnswer": 0,
+        "explanation": "Raute = Exklusive Verzweigung / Entscheidung (Decision/Merge). Synchronisationsbalken = Nebenläufigkeit / Parallelität (Fork = Aufspaltung in parallele Kontrollflüsse; Join = Synchronisation/Warten auf Beendigung aller parallelen Zweige)."
+},
+    {
+        "id": 251,
+        "theme": "diagrams",
+        "topic": "EPK Grundregeln",
+        "isDiagram": true,
+        "isBawueFocus": true,
+        "diagramType": "EPK",
+        "type": "multiple-choice",
+        "question": "Welche elementare Konstruktionsregel gilt für eine gültige EPK (Ereignisgesteuerte Prozesskette)?",
+        "options": [
+                "Ereignisse (Sechsecke) und Funktionen (abgerundete Rechtecke) müssen sich immer streng abwechseln. Ein Ereignis kann selbst keine Entscheidung treffen (daher kein OR/XOR-Split direkt nach einem Ereignis!).",
+                "Eine EPK darf nur aus Funktionen bestehen; Ereignisse sind optional.",
+                "Zwei Funktionen dürfen direkt hintereinandergeschaltet werden, ohne ein Zwischenereignis.",
+                "Nach einem Startereignis muss immer sofort ein XOR-Operator folgen."
+        ],
+        "correctAnswer": 0,
+        "explanation": "In einer EPK gilt das strenge Abwechselungsprinzip (Ereignis -> Funktion -> Ereignis). Da Ereignisse passive Zustände sind, können sie keine Entscheidungen treffen – Entscheidungen trifft nur eine Funktion, weshalb Verzweigungen (XOR/OR) nur nach Funktionen folgen dürfen!"
+},
+    {
+        "id": 252,
+        "theme": "diagrams",
+        "topic": "EPK Konnektoren",
+        "isDiagram": true,
+        "isBawueFocus": true,
+        "diagramType": "EPK",
+        "type": "multiple-choice",
+        "question": "In einer EPK soll nach der Funktion **'Server-Hardware prüfen'** im Fehlerfall der Pfad 'Ersatzteil bestellen' und im fehlerfreien Fall der Pfad 'Betriebssystem installieren' beschritten werden. Welcher Konnektor muss verwendet werden?",
+        "options": [
+                "XOR-Konnektor (Exklusives Oder), da sich die beiden Pfade gegenseitig ausschließen und genau eine Bedingung zutrifft.",
+                "UND-Konnektor, damit beide Pfade gleichzeitig ausgeführt werden.",
+                "ODER-Konnektor, damit eventuell beide Pfade zutreffen.",
+                "Kein Konnektor, sondern eine direkte Verbindungslinie."
+        ],
+        "correctAnswer": 0,
+        "explanation": "Wenn sich Pfade gegenseitig ausschließen (entweder fehlerfrei ODER defekt, niemals beides gleichzeitig), ist zwingend der XOR-Operator (Exklusives Oder) einzusetzen."
+},
+    {
+        "id": 253,
+        "theme": "diagrams",
+        "topic": "BPMN 2.0 Gateways",
+        "isDiagram": true,
+        "isBawueFocus": true,
+        "diagramType": "BPMN 2.0",
+        "type": "multiple-choice",
+        "question": "Welches Symbol kennzeichnet in einem BPMN-2.0-Diagramm ein **Paralleles Gateway (AND-Split / AND-Join)**?",
+        "options": [
+                "Eine Raute mit einem Pluszeichen (+) im Inneren.",
+                "Eine Raute mit einem X im Inneren (Exclusive Gateway).",
+                "Eine Raute mit einem Kreis (O) im Inneren (Inclusive Gateway).",
+                "Eine Raute mit einem Stern/Fünfeck im Inneren (Event-based Gateway)."
+        ],
+        "correctAnswer": 0,
+        "explanation": "BPMN Gateways: '+' = Parallel (AND, alle Pfade laufen gleichzeitig), 'X' oder leer = Exklusiv (XOR, genau ein Pfad), 'O' = Inklusiv (OR, einer oder mehrere Pfade), Fünfeck = Ereignisbasiert."
+},
+    {
+        "id": 254,
+        "theme": "diagrams",
+        "topic": "BPMN 2.0 Pools & Swimlanes",
+        "isDiagram": true,
+        "isBawueFocus": true,
+        "diagramType": "BPMN 2.0",
+        "type": "multiple-choice",
+        "question": "Wie wird der Nachrichtenaustausch zwischen zwei separaten **Pools** (z. B. 'Kunde' und 'IT-Dienstleister') in BPMN 2.0 korrekt dargestellt?",
+        "options": [
+                "Über Nachrichtenflüsse (Message Flow), dargestellt als gestrichelte Pfeillinie mit einem offenen Kreis am Start und einer offenen Pfeilspitze am Ende.",
+                "Über normale Sequenzflüsse (durchgezogene Pfeillinie).",
+                "Über Assoziationslinien mit schwarzen Rauten.",
+                "Zwischen zwei Pools darf es in BPMN keine Verbindungen geben."
+        ],
+        "correctAnswer": 0,
+        "explanation": "Pool-übergreifend dürfen NUR gestrichelte Nachrichtenflüsse (Message Flows) verwendet werden. Durchgezogene Sequenzflüsse (Sequence Flows) dürfen NIEMALS Poolgrenzen überschreiten!"
+},
+    {
+        "id": 255,
+        "theme": "diagrams",
+        "topic": "Netzplantechnik DIN 69900",
+        "isDiagram": true,
+        "isBawueFocus": true,
+        "diagramType": "Netzplantechnik",
+        "type": "multiple-choice",
+        "question": "Gegeben ist der Standard-Vorgangsknoten nach DIN 69900. Welche Abkürzungen stehen für den 'Frühesten Anfangszeitpunkt', 'Spätesten Endzeitpunkt' und 'Gesamtpuffer'?",
+        "options": [
+                "FAZ (Frühester Anfang), SEZ (Spätestes Ende), GP (Gesamtpuffer)",
+                "FEZ (Frühester Anfang), SAZ (Spätestes Ende), FP (Gesamtpuffer)",
+                "FAZ = Fertigstellungsanfang, SEZ = Standardende, GP = Grenzperiode",
+                "FAP = Frühester Arbeitsplan, SEP = Spätester Endplan, GP = Gruppenphase"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Nach DIN 69900: FAZ = Frühester Anfangszeitpunkt, FEZ = Frühester Endzeitpunkt, SAZ = Spätester Anfangszeitpunkt, SEZ = Spätester Endzeitpunkt, GP = Gesamtpuffer (SAZ - FAZ), FP = Freier Puffer."
+},
+    {
+        "id": 256,
+        "theme": "diagrams",
+        "topic": "Netzplantechnik Vorwärtsrechnung",
+        "isDiagram": true,
+        "isBawueFocus": true,
+        "diagramType": "Netzplantechnik",
+        "type": "multiple-choice",
+        "question": "Vorgang D (Dauer 5 Tage) hat zwei direkte Vorgänger: Vorgang B (FEZ = 4) und Vorgang C (FEZ = 7). Welcher **FAZ** und **FEZ** ergibt sich für Vorgang D bei der Vorwärtsrechnung?",
+        "options": [
+                "FAZ = 7 Tage, FEZ = 12 Tage (Bei der Vorwärtsrechnung gilt: FAZ = Maximum aller FEZ der Vorgänger; FEZ = FAZ + Dauer = 7 + 5 = 12).",
+                "FAZ = 4 Tage, FEZ = 9 Tage",
+                "FAZ = 11 Tage, FEZ = 16 Tage",
+                "FAZ = 5,5 Tage, FEZ = 10,5 Tage"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Ein Nachfolger kann erst beginnen, wenn ALLE Vorgänger abgeschlossen sind. Daher gilt bei mehreren Vorgängern: FAZ = max(FEZ_Vorgänger) = max(4, 7) = 7. FEZ = FAZ + Dauer = 7 + 5 = 12."
+},
+    {
+        "id": 257,
+        "theme": "diagrams",
+        "topic": "Netzplantechnik Pufferberechnung",
+        "isDiagram": true,
+        "isBawueFocus": true,
+        "diagramType": "Netzplantechnik",
+        "type": "multiple-choice",
+        "question": "Für einen Vorgang X (Dauer D = 6 Tage) wurden berechnet: FAZ = 8, FEZ = 14, SAZ = 11, SEZ = 17. Wie groß ist der **Gesamtpuffer (GP)**?",
+        "options": [
+                "GP = 3 Tage (Berechnung: GP = SAZ - FAZ = 11 - 8 = 3 bzw. SEZ - FEZ = 17 - 14 = 3)",
+                "GP = 6 Tage",
+                "GP = 0 Tage",
+                "GP = 9 Tage"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Der Gesamtpuffer (GP) berechnet sich nach der Formel: GP = SAZ - FAZ = 11 - 8 = 3 Tage (oder äquivalent SEZ - FEZ = 17 - 14 = 3 Tage)."
+},
+    {
+        "id": 258,
+        "theme": "diagrams",
+        "topic": "Netzplantechnik Kritischer Pfad",
+        "isDiagram": true,
+        "isBawueFocus": true,
+        "diagramType": "Netzplantechnik",
+        "type": "multiple-choice",
+        "question": "Welche Eigenschaft zeichnet den **Kritischen Pfad** eines Projekts aus und warum ist er für das Projektmanagement essenziell?",
+        "options": [
+                "Alle Vorgänge auf dem kritischen Pfad haben einen Gesamtpuffer von GP = 0. Jede zeitliche Verzögerung eines Vorgangs auf diesem Pfad führt direkt zu einer Verzögerung des Projektgesamttermins.",
+                "Es ist der Pfad mit den geringsten Hardwarekosten.",
+                "Es ist der Pfad, der die wenigsten Risiken enthält.",
+                "Auf dem kritischen Pfad besitzen alle Vorgänge maximalen freien Puffer (FP > 5)."
+        ],
+        "correctAnswer": 0,
+        "explanation": "Der kritische Pfad bestimmt die minimale Gesamtdauer des Projekts. Bei allen Vorgängen auf diesem Pfad gilt GP = 0 und FP = 0. Jede Verzögerung verschiebt das Projektende um die gleiche Dauer nach hinten!"
+},
+    {
+        "id": 259,
+        "theme": "diagrams",
+        "topic": "Netzplantechnik Freier Puffer",
+        "isDiagram": true,
+        "isBawueFocus": true,
+        "diagramType": "Netzplantechnik",
+        "type": "multiple-choice",
+        "question": "Wie unterscheidet sich der **Freie Puffer (FP)** vom **Gesamtpuffer (GP)**?",
+        "options": [
+                "Der Freie Puffer gibt an, wie weit ein Vorgang verschoben werden kann, OHNE den frühesten Anfang (FAZ) der nachfolgenden Vorgänge zu gefährden (FP = min(FAZ_Nachfolger) - FEZ_aktuell).",
+                "Der Freie Puffer ist immer größer als der Gesamtpuffer.",
+                "Der Freie Puffer gilt nur für das Gesamtprojekt am Ende.",
+                "Der Freie Puffer ist identisch mit der Vorgangsdauer."
+        ],
+        "correctAnswer": 0,
+        "explanation": "Gesamtpuffer (GP): Verschiebung ohne Gefährdung des Projektendtermins. Freier Puffer (FP): Verschiebung ohne Gefährdung des frühestmöglichen Beginns (FAZ) der direkten Nachfolger."
+},
+    {
+        "id": 260,
+        "theme": "diagrams",
+        "topic": "Struktogramm Schleifentypen",
+        "isDiagram": true,
+        "isBawueFocus": true,
+        "diagramType": "Struktogramm",
+        "type": "multiple-choice",
+        "question": "Wie unterscheidet sich eine kopfgesteuerte Schleife (WHILE) von einer fußgesteuerten Schleife (DO-WHILE / REPEAT-UNTIL) in einem DIN-66261-Struktogramm (Nassi-Shneiderman)?",
+        "options": [
+                "Bei der kopfgesteuerten Schleife steht der Bedingungsbalken oben (Prüfung vor dem ersten Durchlauf; kann 0-mal ausgeführt werden); bei der fußgesteuerten Schleife steht die Bedingung unten (wird mindestens 1-mal ausgeführt).",
+                "Kopfgesteuerte Schleifen sind dreieckig, fußgesteuerte Schleifen kreisförmig.",
+                "Kopfgesteuerte Schleifen werden immer mindestens einmal ausgeführt.",
+                "Struktogramme unterstützen nur Zählschleifen (FOR)."
+        ],
+        "correctAnswer": 0,
+        "explanation": "Kopfgesteuerte Schleife (Pre-Condition): Bedingung oben -> Ausführung nur, wenn Bedingung zu Beginn wahr ist (0 bis n Durchläufe). Fußgesteuerte Schleife (Post-Condition): Bedingung unten -> Rumpf wird mindestens 1-mal durchlaufen (1 bis n Durchläufe)."
+},
+    {
+        "id": 261,
+        "theme": "diagrams",
+        "topic": "Entscheidungstabelle Vollständigkeit",
+        "isDiagram": true,
+        "isBawueFocus": true,
+        "diagramType": "Entscheidungstabelle",
+        "type": "multiple-choice",
+        "question": "Eine Entscheidungstabelle zur Freigabe von Firewall-Regeln besitzt 3 unabhängige Bedingungen, die jeweils entweder 'Ja' (J) oder 'Nein' (N) annehmen können. Wie viele Regeln (Spalten) muss die Tabelle für eine vollständige Prüfung enthalten?",
+        "options": [
+                "8 Regeln (Berechnung: 2^3 = 8 Spalten für alle logischen Wertekombinationen).",
+                "3 Regeln (Entspricht der Zeilenzahl).",
+                "6 Regeln (3 * 2).",
+                "16 Regeln (2^4)."
+        ],
+        "correctAnswer": 0,
+        "explanation": "Bei n unabhängigen binären Bedingungen beträgt die Anzahl der theoretisch möglichen Kombinationen (Regelspalten) 2^n. Bei 3 Bedingungen sind es 2^3 = 8 Regeln."
+},
+    {
+        "id": 262,
+        "theme": "diagrams",
+        "topic": "UML Use-Case Wahr/Falsch",
+        "isDiagram": true,
+        "isBawueFocus": true,
+        "diagramType": "UML Use-Case",
+        "type": "true-false",
+        "question": "Wahr oder Falsch: Im UML-Use-Case-Diagramm zeigt der gestrichelte Pfeil mit dem Stereotyp <<include>> immer vom aufrufenden Basis-Use-Case HIN zum eingeschlossenen Teil-Use-Case.",
+        "options": [
+                "Wahr (Richtig)",
+                "Falsch (Er zeigt in die Gegenrichtung)"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Richtig! Der Basis-Use-Case 'inkludiert' den Teil-Use-Case, daher zeigt der Pfeil vom Basis-Use-Case auf den inkludierten Use-Case."
+},
+    {
+        "id": 263,
+        "theme": "diagrams",
+        "topic": "UML Klassendiagramm Wahr/Falsch",
+        "isDiagram": true,
+        "isBawueFocus": true,
+        "diagramType": "UML Klassendiagramm",
+        "type": "true-false",
+        "question": "Wahr oder Falsch: Im UML-Klassendiagramm steht die gefüllte (schwarze) Raute bei einer Komposition immer an der Klasse, die das übergeordnete 'Ganze' (den Container/Besitzer) repräsentiert.",
+        "options": [
+                "Wahr (Richtig)",
+                "Falsch (Sie steht am Teilobjekt)"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Richtig! Sowohl bei Aggregation (leere Raute) als auch bei Komposition (schwarze Raute) befindet sich die Raute stets an der übergeordneten Besitzerklasse ('Ganzes')."
+},
+    {
+        "id": 264,
+        "theme": "diagrams",
+        "topic": "ERD Wahr/Falsch",
+        "isDiagram": true,
+        "isBawueFocus": true,
+        "diagramType": "ERD",
+        "type": "true-false",
+        "question": "Wahr oder Falsch: In der Chen-Notation eines ERDs wird ein mehrwertiges Attribut (z. B. ein Mitarbeiter besitzt mehrere Telefonnummern) durch zwei konzentrische Ellipsen (Doppel-Oval) gekennzeichnet.",
+        "options": [
+                "Wahr (Richtig)",
+                "Falsch (Es wird als Sechseck dargestellt)"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Richtig! Ein Doppel-Oval stellt in der Chen-Notation ein mehrwertiges Attribut dar (im relationalen Datenbankschema muss dieses in eine eigene Tabelle überführt werden)."
+},
+    {
+        "id": 265,
+        "theme": "diagrams",
+        "topic": "Netzplantechnik Wahr/Falsch",
+        "isDiagram": true,
+        "isBawueFocus": true,
+        "diagramType": "Netzplantechnik",
+        "type": "true-false",
+        "question": "Wahr oder Falsch: Vorgänge, die auf dem Kritischen Pfad eines Netzplans liegen, besitzen stets einen Gesamtpuffer (GP) von 0 Tagen.",
+        "options": [
+                "Wahr (Richtig)",
+                "Falsch (Der Puffer ist größer als 0)"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Richtig! Auf dem kritischen Pfad gilt ausnahmslos GP = 0 (und FP = 0), da es keinerlei zeitlichen Spielraum gibt."
+},
+    {
+        "id": 266,
+        "theme": "diagrams",
+        "topic": "IHK Fallstudie Helpdesk ERD & Use-Case",
+        "isDiagram": true,
+        "isBawueFocus": true,
+        "diagramType": "UML Use-Case / ERD",
+        "type": "open-text",
+        "question": "Prüfungsaufgabe Modellierung (BaWü-Fokus): Für ein mittelständisches Unternehmen soll ein internes IT-Ticketsystem modelliert werden.\n\nAnforderungen:\n1. Ein Mitarbeiter (Kunde) kann mehrere Tickets erfassen. Jedes Ticket gehört zu genau einem Mitarbeiter.\n2. Ein Support-Mitarbeiter kann mehrere Tickets bearbeiten. Ein Ticket kann vorübergehend keinem oder genau einem Support-Mitarbeiter zugewiesen sein.\n3. Zu einem Ticket können mehrere Statuskommentare erfasst werden.\n\nAufgabe:\na) Bestimme die ERD-Kardinalitäten zwischen MITARBEITER ─ TICKET und TICKET ─ SUPPORT.\nb) Wo müssen die Fremdschlüssel platziert werden?\nc) Skizziere die Struktur bei Bedarf auf dem Whiteboard.",
+        "musterloesung": "a) ERD-Kardinalitäten:\n- MITARBEITER ─ (1:n) ─ TICKET (1 Mitarbeiter erstellt [0..*] Tickets; 1 Ticket gehört zu [1..1] Mitarbeiter).\n- SUPPORT ─ (1:n) ─ TICKET (1 Support-Mitarbeiter bearbeitet [0..*] Tickets; 1 Ticket ist [0..1] Support-Mitarbeitern zugewiesen).\n- TICKET ─ (1:n) ─ STATUSKOMMENTAR.\n\nb) Fremdschlüsselplatzierung:\n- In Tabelle TICKET: `FK_MitarbeiterNr` (NOT NULL) und `FK_SupportMitarbeiterNr` (NULLable, da Zuweisung optional ist).\n- In Tabelle STATUSKOMMENTAR: `FK_TicketNr` (NOT NULL).\n\nc) Tabellenschema:\nMITARBEITER(MitarbeiterNr (PK), Name, Abt)\nTICKET(TicketID (PK), Betreff, ErstellDatum, FK_MitarbeiterNr, FK_SupportMitarbeiterNr)\nSTATUSKOMMENTAR(KommentarID (PK), Text, Zeitstempel, FK_TicketNr)",
+        "explanation": "Bei 1:n Beziehungen wird der Primärschlüssel der 1-Seite immer als Fremdschlüssel in der n-Tabelle abgelegt. Da ein Ticket anfangs keinem Support-Mitarbeiter zugeordnet sein muss, ist dieser FK als NULL-fähig zu deklarieren."
+},
+    {
+        "id": 267,
+        "theme": "diagrams",
+        "topic": "IHK Fallstudie Netzplan Rollout",
+        "isDiagram": true,
+        "isBawueFocus": true,
+        "diagramType": "Netzplantechnik",
+        "type": "open-text",
+        "code": "+---------+--------------------+-------+------------+\n| Vorgang | Bezeichnung        | Dauer | Vorgänger  |\n+---------+--------------------+-------+------------+\n| A       | Hardware beschaffen| 4 T.  | -          |\n| B       | Images erstellen   | 2 T.  | -          |\n| C       | Clients clonen     | 3 T.  | A, B       |\n| D       | Switch konfigurieren| 1 T. | -          |\n| E       | Rollout vor Ort    | 5 T.  | C, D       |\n+---------+--------------------+-------+------------+",
+        "question": "Prüfungsaufgabe Netzplantechnik (BaWü-Fokus): Gegeben ist die obige Vorgangstabelle für einen Client-Rollout.\n\nAufgabe:\n1. Führe die Vorwärts- und Rückwärtsrechnung durch (Projektstart = Tag 0).\n2. Berechne FAZ, FEZ, SAZ, SEZ und Gesamtpuffer (GP) für alle 5 Vorgänge.\n3. Nenne den Kritischen Pfad und die Gesamtlaufzeit des Projekts.",
+        "musterloesung": "1. & 2. Berechnung der Knotenwerte (nach DIN 69900):\n- Vorgang A (D=4): FAZ=0, FEZ=4 | SAZ=0, SEZ=4 | GP = 0, FP = 0 (Kritisch)\n- Vorgang B (D=2): FAZ=0, FEZ=2 | SAZ=2, SEZ=4 | GP = 2, FP = 2\n- Vorgang C (D=3, Vorl.: A,B -> FAZ=max(4,2)=4): FAZ=4, FEZ=7 | SAZ=4, SEZ=7 | GP = 0, FP = 0 (Kritisch)\n- Vorgang D (D=1): FAZ=0, FEZ=1 | SAZ=6, SEZ=7 | GP = 6, FP = 6\n- Vorgang E (D=5, Vorl.: C,D -> FAZ=max(7,1)=7): FAZ=7, FEZ=12 | SAZ=7, SEZ=12 | GP = 0, FP = 0 (Kritisch)\n\n3. Kritischer Pfad & Dauer:\n- Kritischer Pfad: A ➔ C ➔ E (alle mit GP = 0)\n- Gesamtlaufzeit des Projekts: 12 Tage.",
+        "explanation": "Vorwärtsrechnung: FAZ = max(FEZ aller Vorgänger), FEZ = FAZ + Dauer. Rückwärtsrechnung: SEZ = min(SAZ aller Nachfolger), SAZ = SEZ - Dauer. GP = SAZ - FAZ. Kritischer Pfad umfasst alle Vorgänge mit GP=0."
+},
+    {
+        "id": 268,
+        "theme": "diagrams",
+        "topic": "IHK Fallstudie EPK & BPMN Prozess",
+        "isDiagram": true,
+        "isBawueFocus": true,
+        "diagramType": "EPK / BPMN",
+        "type": "open-text",
+        "question": "Prüfungsaufgabe Prozessmodellierung (BaWü-Fokus): In einer Prüfung soll ein Beschaffungsprozess von Hardware dargestellt werden.\n\nAufgabe:\na) Nenne zwei typische Syntaxfehler, die in Prüfungen bei Ereignisgesteuerten Prozessketten (EPK) häufig auftreten.\nb) Erkläre, wie die Verantwortlichkeiten (z. B. 'Fachabteilung', 'Einkauf', 'IT-Leitung') in BPMN 2.0 übersichtlich dargestellt werden.\nc) Wann wird in BPMN 2.0 ein 'Paralleles Gateway' (+) im Gegensatz zu einem 'Exklusiven Gateway' (X) eingesetzt?",
+        "musterloesung": "a) Häufige EPK-Syntaxfehler:\n1. Regelverstoß beim Wechsel: Zwei Funktionen oder zwei Ereignisse folgen direkt aufeinander ohne Zwischenelement.\n2. Verzweigung nach Ereignis: Ein OR- oder XOR-Operator folgt direkt auf ein Ereignis (Ereignisse sind passiv und können keine Entscheidungen treffen).\n\nb) Verantwortlichkeiten in BPMN 2.0:\n- Über Pools (für externe Organisationen) und Swimlanes (Bahnen innerhalb eines Pools für Abteilungen wie Einkauf, IT, Fachabteilung).\n\nc) Gateway-Einsatz in BPMN 2.0:\n- Paralleles Gateway (+): Wenn zwei oder mehr Teilaufgaben gleichzeitig und unabhängig voneinander ausgeführt werden müssen (z. B. 'Hardware bestellen' UND 'Lizenz anfordern').\n- Exklusives Gateway (X): Wenn genau eine Alternative basierend auf einer Bedingung gewählt wird (z. B. 'Betrag > 1.000 €: Genehmigung erforderlich' vs. 'Betrag <= 1.000 €: Direkt bestellen').",
+        "explanation": "EPKs fordern strengen Wechsel und Entscheidungen nur durch Funktionen. BPMN 2.0 nutzt Swimlanes für organisatorische Zuordnungen und standardisierte Gateway-Symbole (+ für parallel, X für exklusiv)."
+},
+    {
+        "id": 269,
+        "theme": "diagrams",
+        "topic": "IHK Fallstudie UML Klassendiagramm Asset",
+        "isDiagram": true,
+        "isBawueFocus": true,
+        "diagramType": "UML Klassendiagramm",
+        "type": "open-text",
+        "code": "+---------------------------------------+\n|              Geraet                   |\n+---------------------------------------+\n| - inventarNr: String                  |\n| - anschaffungsDatum: Date             |\n| # standort: String                    |\n+---------------------------------------+\n| + getInventarNr(): String             |\n| + ermittleRestwert(): double          |\n+---------------------------------------+\n                  /\\\n                 /  \\ (Generalisierung)\n               +------+------+\n               |             |\n+-----------------------+ +-----------------------+\n|       Workstation     | |        Server         |\n+-----------------------+ +-----------------------+\n| - betriebssystem: Str | | - rackEinheit: int    |\n| - arbeitsspeicher: int| | - redundantesNetz: bool|\n+-----------------------+ +-----------------------+",
+        "question": "Prüfungsaufgabe Klassendiagramm (BaWü-Fokus): Betrachte das oben dargestellte Klassendiagramm.\n\nAufgabe:\na) Welche OOP-Beziehung liegt zwischen `Geraet` und `Workstation`/`Server` vor und welche Pfeilspitze gehört dorthin?\nb) Welche Bedeutung hat das Zeichen `#` vor dem Attribut `standort` in der Klasse `Geraet`?\nc) Kann die Methode `getInventarNr()` von außen auf einem `Workstation`-Objekt aufgerufen werden? Begründe.",
+        "musterloesung": "a) Beziehung: Generalisierung / Vererbung ('Ist-ein'-Beziehung). `Geraet` ist die Oberklasse (Superklasse), `Workstation` und `Server` sind abgeleitete Unterklassen. Das Symbol ist eine durchgezogene Linie mit einer geschlossenen, nicht ausgefüllten (weißen) Dreiecksspitze zur Oberklasse `Geraet`.\n\nb) Sichtbarkeit `#`: Bedeutet `protected`. Das Attribut `standort` ist in der Klasse `Geraet` sowie in allen abgeleiteten Klassen (`Workstation`, `Server`) direkt sichtbar und veränderbar, jedoch vor Zugriffen von außen gekapselt.\n\nc) Aufruf `getInventarNr()`: Ja, der Aufruf ist möglich. Durch die Vererbung erbt `Workstation` alle öffentlichen Methoden der Oberklasse, und das führende `+` kennzeichnet die Methode als `public`.",
+        "explanation": "Generalisierung vererbt Attribute und Methoden. Private (-) Attribute werden nicht direkt vererbt bzw. sind gekapselt, Protected (#) Attribute sind für Kindklassen zugänglich, Public (+) Methoden sind überall aufrufbar."
+},
+    {
+        "id": 270,
+        "theme": "diagrams",
+        "topic": "UML Sequenzdiagramm",
+        "isDiagram": true,
+        "isBawueFocus": true,
+        "diagramType": "UML Sequenzdiagramm",
+        "type": "multiple-choice",
+        "question": "Wie werden im UML-Sequenzdiagramm die Lebenslinie eines Objekts sowie synchrone und asynchrone Methodenaufrufe dargestellt?",
+        "options": [
+                "Lebenslinie = gestrichelte vertikale Linie mit Aktivierungsbalken; synchroner Aufruf = durchgezogene Linie mit gefüllter Dreieckspfeilspitze (Aufrufer wartet auf Antwort); asynchroner Aufruf = durchgezogene Linie mit offener Pfeilspitze (Aufrufer arbeitet sofort weiter).",
+                "Lebenslinie = durchgezogene horizontale Linie; synchrone Aufrufe sind immer gestrichelt.",
+                "Synchrone Aufrufe dürfen nur mit Rauten dargestellt werden.",
+                "Sequenzdiagramme kennen keine Pfeile, sondern nur Kästchen."
+        ],
+        "correctAnswer": 0,
+        "explanation": "Im Sequenzdiagramm verläuft die Zeit von oben nach unten entlang der vertikalen gestrichelten Lebenslinie. Ein gefüllter Pfeil stellt einen synchronen Aufruf (Blockierung bis Antwort eintrifft) dar; ein offener Pfeil einen asynchronen Aufruf (Non-Blocking)."
+},
+    {
+        "id": 271,
+        "theme": "diagrams",
+        "topic": "UML Zustandsdiagramm (State Machine)",
+        "isDiagram": true,
+        "isBawueFocus": true,
+        "diagramType": "UML Zustandsdiagramm",
+        "type": "multiple-choice",
+        "question": "Ein Ticket wechselt von `Neu` zu `In Bearbeitung`, wenn ein Mitarbeiter die Aktion ausführt (`[Mitarbeiter zugewiesen] / sendeBestaetigung()`). Welche Bedeutung haben die Bestandteile einer Transition `Ereignis [Wächter] / Aktion` in UML?",
+        "options": [
+                "Ereignis (Trigger, löst Übergang aus) [Wächterbedingung / Guard, boolesche Bedingung] / Effekt / Aktion (wird beim Übergang ausgeführt).",
+                "Startzustand [Endzustand] / Methodenname.",
+                "Klassenname [Attribute] / Sichtbarkeit.",
+                "Primärschlüssel [Fremdschlüssel] / Tabellenname."
+        ],
+        "correctAnswer": 0,
+        "explanation": "Die Syntax einer Transition im Zustandsdiagramm lautet: Trigger [Guard] / Action. Der Trigger stößt den Übergang an, der Guard (in eckigen Klammern) muss wahr sein, und die Action (nach dem Schrägstrich) wird beim Wechsel ausgeführt."
+},
+    {
+        "id": 272,
+        "theme": "diagrams",
+        "topic": "Programmablaufplan (PAP nach DIN 66001)",
+        "isDiagram": true,
+        "isBawueFocus": true,
+        "diagramType": "PAP",
+        "type": "multiple-choice",
+        "question": "Welche Symbole werden in einem Programmablaufplan (PAP nach DIN 66001) für Start/Stopp, Operationen und Verzweigungen genutzt?",
+        "options": [
+                "Oval / abgerundetes Rechteck = Grenzstelle (Start/Stopp), Rechteck = Operation / Anweisung, Raute = Verzweigung / Entscheidung (Bedingung).",
+                "Rechteck = Start/Stopp, Kreis = Operation, Dreieck = Verzweigung.",
+                "Kreuz = Start, Pfeil = Operation, Doppelstrich = Verzweigung.",
+                "Sechseck = Start, Raute = Operation, Kreis = Verzweigung."
+        ],
+        "correctAnswer": 0,
+        "explanation": "Nach DIN 66001: Abgerundetes Rechteck/Oval = Start/Ende (Grenzstelle), Rechteck = Operation/Verarbeitungsschritt, Raute = Verzweigung/Entscheidung mit ausgehenden Pfaden (z. B. Ja/Nein)."
+},
+    {
+        "id": 273,
+        "theme": "diagrams",
+        "topic": "ERD (min, max)-Notation",
+        "isDiagram": true,
+        "isBawueFocus": true,
+        "diagramType": "ERD",
+        "type": "multiple-choice",
+        "question": "Im Unterschied zur Chen-Notation gibt die (min, max)-Notation (z. B. `(0, 1)`, `(1, n)`, `(0, *)`) an, wie oft eine Entität an der Beziehung mindestens und höchstens teilnehmen muss. Was bedeutet `(1, 1)`?",
+        "options": [
+                "Obligatorische Einzelteilnahme: Jede Entität muss an genau einer Beziehungsausprägung teilnehmen (weder 0 noch mehr als 1).",
+                "Optionale Teilnahme: Die Entität kann teilnehmen, muss aber nicht.",
+                "Die Entität hat genau 1 Primärschlüssel und 1 Fremdschlüssel.",
+                "Es handelt sich um eine unbeschränkte Mehrfachbeziehung."
+        ],
+        "correctAnswer": 0,
+        "explanation": "Die (min, max)-Notation definiert min = Mindestanzahl der Teilnahmen (0 = optional, 1 = Pflicht) und max = Höchstanzahl (1 = maximal eins, * bzw. n = beliebig viele). (1, 1) bedeutet daher genau ein obligatorisches Vorkommen."
+},
+    {
+        "id": 274,
+        "theme": "diagrams",
+        "topic": "BPMN 2.0 Wahr/Falsch",
+        "isDiagram": true,
+        "isBawueFocus": true,
+        "diagramType": "BPMN 2.0",
+        "type": "true-false",
+        "question": "Wahr oder Falsch: Ein Exklusives Gateway (XOR) in BPMN 2.0 spaltet den Kontrollfluss so auf, dass bei der Ausführung immer alle ausgehenden Pfade gleichzeitig durchlaufen werden müssen.",
+        "options": [
+                "Wahr",
+                "Falsch (Richtig: Es wird genau 1 einziger Pfad basierend auf Bedingungen gewählt)"
+        ],
+        "correctAnswer": 1,
+        "explanation": "Falsch! Ein Exklusives Gateway (XOR) wählt genau einen Pfad aus. Das Parallele Gateway (+) spaltet in alle Pfade gleichzeitig auf."
+},
+    {
+        "id": 275,
+        "theme": "diagrams",
+        "topic": "Struktogramm Fehleranalyse",
+        "isDiagram": true,
+        "isBawueFocus": true,
+        "diagramType": "Struktogramm",
+        "type": "open-text",
+        "code": "+--------------------------------------------------------+\n| Eingabe: einkaufswert, istStammkunde                   |\n+--------------------------------------------------------+\n| rabatt = 0                                             |\n+--------------------------------------------------------+\n| einkaufswert >= 500 ?                                  |\n|                      JA /                              |\n| +--------------------------------+-------------------+ |\n| | rabatt = 10                    | einkaufswert >= 200? | |\n| |                                |      JA /         | |\n| |                                | +---------+-----+ | |\n| |                                | | rabatt=5| r=0 | | |\n| +--------------------------------+---------+-----+ | |\n+--------------------------------------------------------+\n| istStammkunde == true ?                                |\n|                      JA /                              |\n| +--------------------------------+-------------------+ |\n| | rabatt = rabatt + 3            | TUE NICHTS        | |\n| +--------------------------------+-------------------+ |\n+--------------------------------------------------------+\n| endpreis = einkaufswert * (1 - rabatt / 100)           |\n+--------------------------------------------------------+\n| Ausgabe: endpreis, rabatt                              |",
+        "question": "Prüfungsaufgabe Struktogramm-Tracing (BaWü-Fokus): Analysiere das oben dargestellte Struktogramm nach Nassi-Shneiderman.\n\nAufgabe:\na) Berechne den Endpreis und den Rabattsatz für: `einkaufswert = 300 €`, `istStammkunde = true`.\nb) Berechne den Endpreis und den Rabattsatz für: `einkaufswert = 600 €`, `istStammkunde = false`.\nc) Welcher Rabatt ergibt sich für einen Neukunden (`istStammkunde = false`) bei einem Einkaufswert von `150 €`?",
+        "musterloesung": "a) Fall 1 (300 €, Stammkunde):\n- Bedingung 1: 300 >= 500 ist FALSCH.\n- Bedingung 2: 300 >= 200 ist WAHR -> rabatt = 5%.\n- Bedingung 3: istStammkunde == true ist WAHR -> rabatt = 5 + 3 = 8%.\n- Endpreis: 300 € * (1 - 0,08) = 300 € * 0,92 = 276,00 € (Rabatt: 8%).\n\nb) Fall 2 (600 €, kein Stammkunde):\n- Bedingung 1: 600 >= 500 ist WAHR -> rabatt = 10%.\n- Bedingung 3: istStammkunde == true ist FALSCH -> rabatt bleibt 10%.\n- Endpreis: 600 € * (1 - 0,10) = 600 € * 0,90 = 540,00 € (Rabatt: 10%).\n\nc) Fall 3 (150 €, kein Stammkunde):\n- 150 < 500 und 150 < 200 -> rabatt = 0%.\n- Kein Stammkunde -> rabatt = 0%.\n- Endpreis = 150,00 €.",
+        "explanation": "Struktogramme werden von oben nach unten sequenziell abgearbeitet. Verzweigungen prüfen Bedingungen hierarchisch. Tracing-Tabellen helfen, alle Variablenzustände fehlerfrei zu berechnen."
+}
 
 ];

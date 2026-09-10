@@ -229,6 +229,39 @@ function filterQuestions(theme) {
                 q.theme === "bawue-special" || 
                 (q.topic && q.topic.toLowerCase().includes("bawü"))
             );
+        } else if (theme === "diagrams" || theme === "diagram-training") {
+            filteredQuestions = questions.filter(q => 
+                q.theme === "diagrams" || 
+                q.isDiagram === true || 
+                (q.diagramType && q.diagramType.length > 0) ||
+                (q.topic && (
+                    q.topic.toLowerCase().includes("diagramm") || 
+                    q.topic.toLowerCase().includes("uml") || 
+                    q.topic.toLowerCase().includes("erd") || 
+                    q.topic.toLowerCase().includes("epk") || 
+                    q.topic.toLowerCase().includes("bpmn") || 
+                    q.topic.toLowerCase().includes("netzplan") || 
+                    q.topic.toLowerCase().includes("struktogramm") || 
+                    q.topic.toLowerCase().includes("pap") ||
+                    q.topic.toLowerCase().includes("use-case") ||
+                    q.topic.toLowerCase().includes("use case") ||
+                    q.topic.toLowerCase().includes("klassendiagramm") ||
+                    q.topic.toLowerCase().includes("entscheidungstabelle")
+                )) ||
+                (q.question && (
+                    q.question.toLowerCase().includes("use-case") ||
+                    q.question.toLowerCase().includes("klassendiagramm") ||
+                    q.question.toLowerCase().includes("erd") ||
+                    q.question.toLowerCase().includes("entity-relationship") ||
+                    q.question.toLowerCase().includes("kardinalität") ||
+                    q.question.toLowerCase().includes("epk") ||
+                    q.question.toLowerCase().includes("bpmn") ||
+                    q.question.toLowerCase().includes("netzplan") ||
+                    q.question.toLowerCase().includes("kritischer pfad") ||
+                    q.question.toLowerCase().includes("struktogramm") ||
+                    q.question.toLowerCase().includes("entscheidungstabelle")
+                ))
+            );
         } else {
             filteredQuestions = questions.filter(q => q.theme === theme);
         }
@@ -443,6 +476,34 @@ function loadQuestion() {
         codeBlockContainer.style.display = "block";
     } else {
         codeBlockContainer.style.display = "none";
+    }
+
+    // Handle Diagram sketch helper banner
+    const diagBanner = document.getElementById("diagram-banner-container");
+    if (diagBanner) {
+        const isDiag = q.isDiagram === true || q.diagramType || q.theme === "diagrams" || (q.topic && (q.topic.toLowerCase().includes("diagramm") || q.topic.toLowerCase().includes("uml") || q.topic.toLowerCase().includes("erd") || q.topic.toLowerCase().includes("epk") || q.topic.toLowerCase().includes("bpmn") || q.topic.toLowerCase().includes("netzplan") || q.topic.toLowerCase().includes("struktogramm")));
+        if (isDiag) {
+            const diagName = q.diagramType || (q.topic ? q.topic : "Diagramm / Modell");
+            diagBanner.style.display = "block";
+            diagBanner.innerHTML = `
+                <div style="background: linear-gradient(135deg, #f0fdf4, #ecfeff); border: 1px solid #06b6d4; border-radius: 8px; padding: 0.65rem 0.9rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem;">
+                    <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.88rem; color: #0e7490;">
+                        <i class="fa-solid fa-pen-ruler" style="color: #0891b2; font-size: 1.15rem;"></i>
+                        <span><strong>Diagramm-Aufgabe (${escapeHtml(diagName)}):</strong> Skizziere oder prüfe dein Modell im Zeichenboard!</span>
+                    </div>
+                    <button id="inline-quiz-wb-btn" class="btn" style="background: linear-gradient(135deg, #0891b2, #0284c7); color: white; padding: 0.35rem 0.75rem; font-size: 0.85rem; border-radius: 6px; border: none; cursor: pointer; font-weight: 600; display: inline-flex; align-items: center; gap: 0.35rem;">
+                        <i class="fa-solid fa-palette"></i> Whiteboard öffnen
+                    </button>
+                </div>
+            `;
+            const inlineBtn = document.getElementById("inline-quiz-wb-btn");
+            if (inlineBtn) {
+                inlineBtn.onclick = openWhiteboard;
+            }
+        } else {
+            diagBanner.style.display = "none";
+            diagBanner.innerHTML = "";
+        }
     }
     
     answersContainer.innerHTML = "";
@@ -821,7 +882,9 @@ function getThemeLabel(key) {
         lf6: "LF 6: Services & WiSo",
         wiso: "WiSo: Wirtschafts- & Sozialkunde",
         "bawue-special": "BW Spezial: IT-Systeme & Prozesse",
-        "bawue-focus": "🔮 IHK Stuttgart Fokus"
+        "bawue-focus": "🔮 IHK Stuttgart Fokus",
+        diagrams: "📐 Diagramme & Modellierung",
+        "diagram-training": "📐 Diagramme & Modellierung"
     };
     return labels[key] || key;
 }
@@ -990,6 +1053,34 @@ function loadExamQuestion() {
         codeBlock.style.display = "block";
     } else {
         codeBlock.style.display = "none";
+    }
+
+    // Handle Exam Diagram helper banner
+    const examDiagBanner = document.getElementById("exam-diagram-banner-container");
+    if (examDiagBanner) {
+        const isDiag = q.isDiagram === true || q.diagramType || q.theme === "diagrams" || (q.topic && (q.topic.toLowerCase().includes("diagramm") || q.topic.toLowerCase().includes("uml") || q.topic.toLowerCase().includes("erd") || q.topic.toLowerCase().includes("epk") || q.topic.toLowerCase().includes("bpmn") || q.topic.toLowerCase().includes("netzplan") || q.topic.toLowerCase().includes("struktogramm")));
+        if (isDiag) {
+            const diagName = q.diagramType || (q.topic ? q.topic : "Diagramm / Modell");
+            examDiagBanner.style.display = "block";
+            examDiagBanner.innerHTML = `
+                <div style="background: linear-gradient(135deg, #f0fdf4, #ecfeff); border: 1px solid #06b6d4; border-radius: 8px; padding: 0.65rem 0.9rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem;">
+                    <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.88rem; color: #0e7490;">
+                        <i class="fa-solid fa-pen-ruler" style="color: #0891b2; font-size: 1.15rem;"></i>
+                        <span><strong>Diagramm-Aufgabe (${escapeHtml(diagName)}):</strong> Skizziere deine Lösung auf dem Zeichenboard!</span>
+                    </div>
+                    <button id="inline-exam-wb-btn" class="btn" style="background: linear-gradient(135deg, #0891b2, #0284c7); color: white; padding: 0.35rem 0.75rem; font-size: 0.85rem; border-radius: 6px; border: none; cursor: pointer; font-weight: 600; display: inline-flex; align-items: center; gap: 0.35rem;">
+                        <i class="fa-solid fa-palette"></i> Whiteboard öffnen
+                    </button>
+                </div>
+            `;
+            const inlineExamBtn = document.getElementById("inline-exam-wb-btn");
+            if (inlineExamBtn) {
+                inlineExamBtn.onclick = openWhiteboard;
+            }
+        } else {
+            examDiagBanner.style.display = "none";
+            examDiagBanner.innerHTML = "";
+        }
     }
 
     // Prev Button
