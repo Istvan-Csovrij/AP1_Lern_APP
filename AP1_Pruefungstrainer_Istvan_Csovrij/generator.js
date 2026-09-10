@@ -1045,5 +1045,132 @@ function generateDynamicQuestions(typeMode = "mix") {
         }
     }
 
+
+    // ============================================================================
+    // DYNAMISCHE GENERATOREN: IT-VERTRAGSRECHT, PROZESSE & WISO (Tag 13 & 14)
+    // ============================================================================
+
+    // 1. IT-Vertragstypen Generator (Kauf, Dienst, Werk, Werklieferung, SaaS/Miete)
+    const contractScenarios = [
+        {
+            desc: "Ein IT-Berater führt eine dreitägige Schulung für die Mitarbeiter eines Kunden zum Thema 'IT-Sicherheitsbewusstsein' auf Stundensatzbasis durch. Ein messbarer Lernerfolg wird vertraglich nicht garantiert.",
+            type: "Dienstvertrag (§ 611 BGB)",
+            reason: "Geschuldet ist das reine fachgerechte Tätigwerden / Unterrichten, nicht ein bestimmter garantierter Prüfungserfolg."
+        },
+        {
+            desc: "Ein Systemhaus entwickelt für eine Spedition ein individuelles Tourenplanungs-Tool nach einem detaillierten Pflichtenheft mit garantierter Funktionsfähigkeit und vereinbarter Gesamtabnahme.",
+            type: "Werkvertrag (§ 631 BGB)",
+            reason: "Geschuldet ist die Herbeiführung eines konkreten, mangelfreien Erfolgs (fertige Software) inklusive förmlicher Abnahme."
+        },
+        {
+            desc: "Ein Büro kauft 25 Standard-Office-Lizenzen (OEM-Pakete) auf DVD im Fachhandel und bezahlt die Ware sofort.",
+            type: "Kaufvertrag (§ 433 BGB)",
+            reason: "Standardsoftware auf Datenträgern wird rechtlich wie eine bewegliche Sache behandelt (Kaufvertrag mit dauerhafter Übereignung)."
+        },
+        {
+            desc: "Ein Unternehmen mietet für 24 Monate virtuelle Server-Kapazitäten und Speicherplatz in der Cloud gegen eine monatliche Nutzungsgebühr inklusive 99,9 % Verfügbarkeits-SLA.",
+            type: "Mietvertrag (§ 535 BGB) / SaaS-Vertrag",
+            reason: "Geschuldet ist die zeitweise Gebrauchsüberlassung von IT-Ressourcen im vertragsgemäßen Zustand während der Mietdauer."
+        },
+        {
+            desc: "Ein Hardware-Hersteller baut aus kundenspezifisch ausgewählten Komponenten (Gehäuse, CPU, Spezialgrafikkarten) 5 Render-Workstations und liefert diese an eine Filmproduktionsfirma.",
+            type: "Werklieferungsvertrag (§ 650 BGB)",
+            reason: "Herstellung und Lieferung einer beweglichen Sache aus eigenem Material; unterliegt weitgehend den Vorschriften des Kaufvertragsrechts."
+        }
+    ];
+
+    for (let i = 0; i < 15; i++) {
+        const item = contractScenarios[Math.floor(Math.random() * contractScenarios.length)];
+        const isOpen = shouldBeOpenText();
+        if (isOpen) {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "lf1",
+                isBawueFocus: true,
+                type: "open-text",
+                question: `Prüfungsfall IT-Vertragsrecht (LF 1 / WiSo):\n\nSachverhalt:\n"${item.desc}"\n\nAufgabe:\n1. Benennen Sie den zutreffenden Vertragstyp nach BGB.\n2. Begründen Sie Ihre Entscheidung rechtlich anhand der geschuldeten Hauptleistung.`,
+                musterloesung: `1. Vertragstyp: ${item.type}\n2. Begründung: ${item.reason}`,
+                explanation: `Lernkarte IT-Vertragstypen: Dienstvertrag = Bemühen/Tätigkeit (§ 611 BGB); Werkvertrag = Konkreter Erfolg + Abnahme (§ 631 BGB); Kaufvertrag = Dauerhafte Übereignung (§ 433 BGB); Werklieferung = Herstellung beweglicher Sachen (§ 650 BGB).`
+            });
+        } else {
+            const allTypes = ["Dienstvertrag (§ 611 BGB)", "Werkvertrag (§ 631 BGB)", "Kaufvertrag (§ 433 BGB)", "Mietvertrag (§ 535 BGB) / SaaS-Vertrag", "Werklieferungsvertrag (§ 650 BGB)"];
+            const wrongTypes = allTypes.filter(t => t !== item.type);
+            const shuffledOptions = [item.type, ...wrongTypes.slice(0, 3)].sort(() => Math.random() - 0.5);
+            const correctIdx = shuffledOptions.indexOf(item.type);
+
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "lf1",
+                isBawueFocus: true,
+                type: "multiple-choice",
+                question: `Prüfungsaufgabe Vertragsrecht (LF 1 / WiSo):\n\nSachverhalt:\n"${item.desc}"\n\nUm welchen Vertragstyp handelt es sich hierbei?`,
+                options: shuffledOptions,
+                correctAnswer: correctIdx,
+                explanation: item.reason
+            });
+        }
+    }
+
+    // 2. Dynamischer 50:50 (Wahr/Falsch) WiSo & Prozessfragen Generator
+    const trueFalseItems = [
+        {
+            q: "Wahr oder Falsch: Die förmliche Abnahme (§ 640 BGB) ist ein wesentliches Merkmal des Werkvertrags, welches die Fälligkeit des Werklohns auslöst und die Beweislast für Mängel auf den Besteller überträgt.",
+            isTrue: true,
+            exp: "Richtig! Die Abnahme billigt das Werk als im Wesentlichen vertragsgemäß, löst die Fälligkeit der Vergütung aus (§ 641 BGB) und kehrt die Beweislast um."
+        },
+        {
+            q: "Wahr oder Falsch: Ein 16-jähriger Auszubildender kann ohne Zustimmung seiner Eltern einen 2-jährigen Handyvertrag mit monatlicher Grundgebühr abschließen, wenn er die erste Monatsrate bar bezahlt.",
+            isTrue: false,
+            exp: "Falsch! Dauerschuldverhältnisse und Raten-/Kreditverträge fallen NIEMALS unter den Taschengeldparagraphen (§ 110 BGB). Sie sind schwebend unwirksam bis zur Genehmigung der Eltern."
+        },
+        {
+            q: "Wahr oder Falsch: Beim beiderseitigen Handelskauf (B2B) führt das Unterlassen der unverzüglichen Mängelrüge (§ 377 HGB) dazu, dass die Ware als genehmigt gilt und gesetzliche Gewährleistungsansprüche für offene Mängel erlöschen.",
+            isTrue: true,
+            exp: "Richtig! Nach § 377 Abs. 2 HGB gilt die Ware bei unterlassener unverzüglicher Rüge als genehmigt."
+        },
+        {
+            q: "Wahr oder Falsch: Supportprozesse (Unterstützungsprozesse) wie Buchhaltung oder interne IT-Administration haben immer direkten Kontakt zum externen Kunden und erzeugen den Hauptumsatz.",
+            isTrue: false,
+            exp: "Falsch! Kernprozesse erzeugen den direkten Kundennutzen und Umsatz. Supportprozesse unterstützen die Kernprozesse intern und haben meist interne Kunden."
+        },
+        {
+            q: "Wahr oder Falsch: Bei der Drei-Wege-Rechnungsprüfung im Einkauf werden die Bestellung, der Wareneingangsschein (Lieferschein) und die Eingangsrechnung vor der Zahlungsfreigabe miteinander abgeglichen.",
+            isTrue: true,
+            exp: "Richtig! Der Drei-Wege-Abgleich (Three-Way Match) stellt sicher, dass nur tatsächlich bestellte und mängelfrei gelieferte Mengen zum vereinbarten Preis bezahlt werden."
+        },
+        {
+            q: "Wahr oder Falsch: Die gesetzliche Verzugszinspauschale bei Entgeltforderungen zwischen Unternehmen (B2B) nach § 288 Abs. 5 BGB beträgt 40,00 €.",
+            isTrue: true,
+            exp: "Richtig! Bei B2B-Zahlungsverzug hat der Gläubiger nach § 288 Abs. 5 BGB Anspruch auf eine gesetzliche Schadenspauschale von 40,00 € zusätzlich zu den Verzugszinsen (9 Prozentpunkte über Basiszinssatz)."
+        },
+        {
+            q: "Wahr oder Falsch: Ein unverbindliches Online-Shop-Angebot ('solange der Vorrat reicht') stellt eine rechtlich bindende Willenserklärung dar.",
+            isTrue: false,
+            exp: "Falsch! Es handelt sich um eine Aufforderung zur Abgabe eines Angebots (invitatio ad offerendum) mit Freizeichnungsklausel."
+        },
+        {
+            q: "Wahr oder Falsch: Nach § 477 BGB gilt beim Verbrauchsgüterkauf eine 12-monatige gesetzliche Beweislastumkehr zugunsten des Verbrauchers.",
+            isTrue: true,
+            exp: "Richtig! Zeigt sich ein Mangel innerhalb von 12 Monaten ab Übergabe, wird vermutet, dass er bereits beim Kauf vorlag."
+        }
+    ];
+
+    for (let i = 0; i < 20; i++) {
+        const tf = trueFalseItems[Math.floor(Math.random() * trueFalseItems.length)];
+        dynamicQuestions.push({
+            id: currentId++,
+            theme: "lf1",
+            isBawueFocus: true,
+            type: "true-false",
+            question: tf.q,
+            options: [
+                "Wahr (Richtig)",
+                "Falsch"
+            ],
+            correctAnswer: tf.isTrue ? 0 : 1,
+            explanation: tf.exp
+        });
+    }
+
     return dynamicQuestions;
 }

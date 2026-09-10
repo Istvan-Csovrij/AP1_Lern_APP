@@ -4084,5 +4084,338 @@ WHERE Email IS NULL OR Email = '';
                        "   - HTTP 504 Gateway Timeout: Der Proxy/Gateway hat innerhalb der vorgegebenen Zeitspanne überhaupt keine Antwort vom Upstream-Server erhalten (Zeitüberschreitung).",
         explanation: "Fachenglische Textauszüge, Logs und Handbücher sinngemäß auf Deutsch zu verstehen und zu erklären ist ein fester Bestandteil der Baden-Württembergischen IHK-Abschlussprüfung.",
         points: 12
+    },
+    {
+        id: 227,
+        theme: "lf1",
+        isBawueFocus: true,
+        topic: "LF 1 / WiSo - Prozesse im Unternehmen: Prozessorganisation & Wertschöpfung",
+        type: "open-text",
+        title: "Geschäftsprozesse: Funktionsorientierung vs. Prozessorientierung, Kern- & Supportprozesse",
+        question: "Ein IT-Systemhaus mit 80 Mitarbeitern stellt seine Arbeitsweise von einer rein funktionsorientierten Aufbauorganisation auf eine durchgängige Prozessorganisation um.\n\n" +
+                  "1. **Funktionsorientierung vs. Prozessorientierung (4 Punkte):**\n" +
+                  "   a) Erklären Sie das klassische 'Abteilungs-/Silodenken' einer funktionsorientierten Organisation und nennen Sie zwei typische Nachteile für Kunden. (2 Punkte)\n" +
+                  "   b) Was kennzeichnet im Gegensatz dazu eine prozessorientierte Organisation und welcher Vorteil ergibt sich für Durchlaufzeiten? (2 Punkte)\n\n" +
+                  "2. **Prozessarten im Systemhaus (6 Punkte):**\n" +
+                  "   Klassifizieren Sie folgende vier betriebliche Abläufe begründet als **Kernprozess**, **Supportprozess (Unterstützungsprozess)** oder **Führungsprozess / Steuerungsprozess**:\n" +
+                  "   - *Ablauf 1:* Planung und Rollout von 50 Server-Workstations beim Kunden inklusive Inbetriebnahme.\n" +
+                  "   - *Ablauf 2:* Monatliche Gehaltsabrechnung und Urlaubsverwaltung in der Personalabteilung (HR).\n" +
+                  "   - *Ablauf 3:* Strategische Jahresplanung der Geschäftsleitung zur Einführung von KI-gestütztem IT-Monitoring.\n" +
+                  "   - *Ablauf 4:* Wartung und Patch-Management der internen Firmen-Firewall durch die interne IT-Administration.\n\n" +
+                  "3. **Prozess vs. Workflow (3 Punkte):**\n" +
+                  "   Grenzen Sie die Begriffe **Geschäftsprozess** und **Workflow** klar voneinander ab.\n\n" +
+                  "4. **Kundenorientierung (3 Punkte):**\n" +
+                  "   Erklären Sie den Unterschied zwischen einem **externen Kunden** und einem **internen Kunden** an einem konkreten Beispiel aus dem IT-Helpdesk.",
+        correctAnswer: "1. Funktions- vs. Prozessorientierung (4 Punkte):\n" +
+                       "   a) Funktionsorientierung & Silodenken:\n" +
+                       "      - Mitarbeiter denken nur innerhalb ihrer eigenen Abteilung (z. B. nur Vertrieb oder nur Technik) und optimieren nur Teilbereiche, anstatt das Gesamtergebnis im Blick zu haben.\n" +
+                       "      - Nachteile für Kunden: Hoher Abstimmungsaufwand, Informationsverluste an Schnittstellen, lange Wartezeiten und unklare Verantwortlichkeiten ('Niemand fühlt sich zuständig').\n" +
+                       "   b) Prozessorientierung:\n" +
+                       "      - Die Abläufe sind horizontal entlang der Wertschöpfungskette am Kundennutzen ausgerichtet (End-to-End).\n" +
+                       "      - Vorteil für Durchlaufzeiten: Vermeidung von Liegezeiten, Wegfall von Medienbrüchen und schnellere Auftragsbearbeitung durch klare Prozessverantwortliche (Process Owner).\n\n" +
+                       "2. Klassifikation der Prozessarten (6 Punkte):\n" +
+                       "   - Ablauf 1 (Server-Rollout): **Kernprozess** (direkte Wertschöpfung für den externen Kunden, erzeugt Umsatz/Kundennutzen).\n" +
+                       "   - Ablauf 2 (Gehaltsabrechnung): **Supportprozess / Unterstützungsprozess** (notwendige interne Dienstleistung, schafft keinen direkten Kundennutzen, unterstützt aber den Betrieb).\n" +
+                       "   - Ablauf 3 (Strategische Jahresplanung): **Führungsprozess / Steuerungsprozess** (strategische Ausrichtung, Zielvorgaben und Unternehmenssteuerung durch das Management).\n" +
+                       "   - Ablauf 4 (Interne Firewall-Wartung): **Supportprozess / Unterstützungsprozess** (stellt die Funktionsfähigkeit der internen IT-Infrastruktur sicher).\n\n" +
+                       "3. Geschäftsprozess vs. Workflow (3 Punkte):\n" +
+                       "   - **Geschäftsprozess:** Die fachlich-organisatorische, betriebswirtschaftliche Gesamtheit aller Aktivitäten zur Erreichung eines geschäftlichen Ziels (z. B. 'Beschaffung von Hardware').\n" +
+                       "   - **Workflow:** Die konkrete, IT-technische, oft automatisierte operative Ausführung eines Teilprozesses oder Arbeitsablaufs in einem Softwaresystem (z. B. automatisiertes Routing eines Genehmigungs-Tickets in Jira/ServiceNow).\n\n" +
+                       "4. Interner vs. externer Kunde (3 Punkte):\n" +
+                       "   - **Externer Kunde:** Der zahlende Auftraggeber von außerhalb des Unternehmens (z. B. Kunde kauft Cloud-Hosting).\n" +
+                       "   - **Interner Kunde:** Ein Kollege oder eine Abteilung innerhalb des eigenen Unternehmens, die eine IT-Dienstleistung empfängt (z. B. Mitarbeiterin aus dem Marketing meldet defekten Laptop beim internen IT-Helpdesk; Helpdesk betrachtet sie als internen Kunden mit SLA-Qualitätsanspruch).",
+        explanation: "Prozessorientierung, Kern- und Supportprozesse sowie Kundenfokussierung sind elementare Kerninhalte von LF 1 und WiSo.",
+        points: 16
+    },
+    {
+        id: 228,
+        theme: "lf1",
+        isBawueFocus: true,
+        topic: "LF 1 / WiSo - Beschaffung: Der Ende-zu-Ende Beschaffungsprozess im IT-Unternehmen",
+        type: "open-text",
+        title: "Beschaffungsmanagement: Phasen des Beschaffungsprozesses von der Bedarfsanforderung bis zur Zahlung",
+        question: "Ein IT-Dienstleister plant die Beschaffung von 30 High-End-Entwickler-Notebooks.\n\n" +
+                  "1. **Phasen des Beschaffungsprozesses (6 Punkte):**\n" +
+                  "   Bringen Sie die folgenden 6 Prozessschritte in die korrekte zeitlich-logische Reihenfolge (1 bis 6) und beschreiben Sie kurz den Hauptzweck jedes Schritts:\n" +
+                  "   - Schritt A: *Wareneingangskontrolle & Lieferscheinabgleich*\n" +
+                  "   - Schritt B: *Rechnungsprüfung (Drei-Wege-Abgleich: Bestellung, Lieferschein, Rechnung)*\n" +
+                  "   - Schritt C: *Bedarfsanforderung (Banf) & Budgetgenehmigung*\n" +
+                  "   - Schritt D: *Bestellabwicklung (Übermittlung der Bestellung an den Lieferanten)*\n" +
+                  "   - Schritt E: *Angebotseinholung & Nutzwertanalyse / Lieferantenbewertung*\n" +
+                  "   - Schritt F: *Zahlungsanweisung unter Berücksichtigung von Skonto*\n\n" +
+                  "2. **Lastenheft vs. Pflichtenheft bei Beschaffung (4 Punkte):**\n" +
+                  "   Wer erstellt im Beschaffungsprozess das **Lastenheft** (Was/Wofür?) und wer erstellt das **Pflichtenheft** (Wie/Womit?)?\n\n" +
+                  "3. **Drei-Wege-Rechnungsprüfung (4 Punkte):**\n" +
+                  "   Welche drei Dokumente werden bei der kaufmännischen Rechnungsprüfung vor der Freigabe zwingend abgeglichen und welche Diskrepanzen werden dabei aufgedeckt?\n\n" +
+                  "4. **Skonto-Berechnung (2 Punkte):**\n" +
+                  "   Auf der Rechnung über 45.000,00 € netto steht die Zahlungsbedingung: *'Zahlbar innerhalb 10 Tagen mit 3 % Skonto oder innerhalb 30 Tagen netto'*. Berechnen Sie den Überweisungsbetrag bei Skontoabzug.",
+        correctAnswer: "1. Chronologische Reihenfolge der Phasen (6 Punkte):\n" +
+                       "   1. **Schritt C:** Bedarfsanforderung (Banf) & Budgetgenehmigung (Fachabteilung meldet Bedarf, Kostenstelle/Vorgesetzter genehmigt Budget).\n" +
+                       "   2. **Schritt E:** Angebotseinholung & Nutzwertanalyse / Lieferantenbewertung (Einkauf holt Vergleichsangebote ein und bewertet nach Preis/Leistung).\n" +
+                       "   3. **Schritt D:** Bestellabwicklung (Verbindliche Bestellung wird an den ausgewählten Lieferanten übermittelt -> Kaufvertragsschluss).\n" +
+                       "   4. **Schritt A:** Wareneingangskontrolle & Lieferscheinabgleich (Physische Prüfung auf Transportschäden, Vollständigkeit und Rüge nach § 377 HGB).\n" +
+                       "   5. **Schritt B:** Rechnungsprüfung (Drei-Wege-Abgleich: Buchhalterische Prüfung von Bestellung, Lieferschein und Eingangsrechnung).\n" +
+                       "   6. **Schritt F:** Zahlungsanweisung (Termingerechte Überweisung durch die Buchhaltung unter Ausnutzung von Skonto).\n\n" +
+                       "2. Lastenheft vs. Pflichtenheft (4 Punkte):\n" +
+                       "   - **Lastenheft:** Wird vom **Auftraggeber / Besteller (Kunden)** erstellt. Beschreibt die Gesamtheit der Anforderungen (*WAS* und *WOFÜR*).\n" +
+                       "   - **Pflichtenheft:** Wird vom **Auftragnehmer / Lieferanten** erstellt. Beschreibt den konkreten Realisierungs- und Lieferplan (*WIE* und *WOMIT*).\n\n" +
+                       "3. Drei-Wege-Rechnungsprüfung (4 Punkte):\n" +
+                       "   - Die 3 Dokumente: **Bestellung (Purchase Order)**, **Lieferschein / Wareneingangsbeleg (Goods Receipt)** und **Lieferantenrechnung (Invoice)**.\n" +
+                       "   - Aufgedeckte Diskrepanzen: Falsche Preise (Rechnung weicht von Bestellpreis ab), Mengenabweichungen (Berechnung von nicht gelieferten Artikeln), falsche Rabatte oder fehlende Artikel.\n\n" +
+                       "4. Skonto-Berechnung (2 Punkte):\n" +
+                       "   - Skontobetrag: 45.000,00 € * 0,03 = 1.350,00 €\n" +
+                       "   - Überweisungsbetrag: 45.000,00 € - 1.350,00 € = **43.650,00 €** (netto).",
+        explanation: "Der kaufmännische Beschaffungsprozess von der Bedarfsanforderung über die Rechnungsprüfung bis zur Skontoberechnung ist Prüfungsstandard.",
+        points: 16
+    },
+    {
+        id: 229,
+        theme: "lf1",
+        isBawueFocus: true,
+        topic: "LF 1 / WiSo - Vertragsrecht: IT-Vertragstypen & Abgrenzung",
+        type: "open-text",
+        title: "Vertragsrecht: Abgrenzung von Kaufvertrag, Dienstvertrag, Werkvertrag & Werklieferungsvertrag",
+        question: "Ein IT-Systemhaus schließt mit verschiedenen Kunden unterschiedliche Verträge ab.\n\n" +
+                  "1. **Dienstvertrag vs. Werkvertrag (6 Punkte):**\n" +
+                  "   a) Was schuldet der Auftragnehmer bei einem **Dienstvertrag (§ 611 BGB)** und was bei einem **Werkvertrag (§ 631 BGB)**? (2 Punkte)\n" +
+                  "   b) Warum ist die **förmliche Abnahme (§ 640 BGB)** nur beim Werkvertrag zwingend erforderlich und welche drei rechtlichen Wirkungen löst sie aus? (4 Punkte)\n\n" +
+                  "2. **Fallzuordnungen IT-Vertragstypen (6 Punkte):**\n" +
+                  "   Bestimmen Sie für folgende 3 IT-Praxisfälle den zutreffenden Vertragstyp nach BGB:\n" +
+                  "   - *Fall A:* Das Systemhaus programmiert für einen Kunden eine maßgeschneiderte E-Commerce-Plattform nach einem detaillierten Pflichtenheft mit fest vereinbarten Funktionsgarantien.\n" +
+                  "   - *Fall B:* Ein Senior-Consultant des Systemhauses berät die Geschäftsleitung eines Kunden an 3 Tagen zum Thema 'Cloud-Migration' auf Stundennachweis ohne Erfolgszusage.\n" +
+                  "   - *Fall C:* Das Systemhaus assembliert aus Einzelkomponenten (Mainboard, CPU, RAM) zehn maßgeschneiderte Hochleistungs-CAD-Workstations und übereignet sie an das Architektur-Büro.\n\n" +
+                  "3. **SaaS / Cloud-Verträge (4 Punkte):**\n" +
+                  "   Ein Kunde nutzt Software über das Internet als Software-as-a-Service (SaaS, z. B. Microsoft 365) gegen monatliche Gebühr. Welche vertragsrechtliche Einordnung greift hier überwiegend und welche Hauptpflicht hat der Provider bezüglich der Verfügbarkeit?",
+        correctAnswer: "1. Dienstvertrag vs. Werkvertrag (6 Punkte):\n" +
+                       "   a) Geschuldete Leistung:\n" +
+                       "      - Dienstvertrag (§ 611 BGB): Geschuldet wird das reine **Tätigwerden / Bemühen** nach bestem Wissen (kein bestimmter Erfolg garantiert).\n" +
+                       "      - Werkvertrag (§ 631 BGB): Geschuldet wird die Herbeiführung eines konkreten, mangelfreien **Erfolgs / Werkergebnisses**.\n" +
+                       "   b) Abnahme (§ 640 BGB) & Wirkungen:\n" +
+                       "      - Die Abnahme ist die körperliche Entgegennahme des Werkes verbunden mit der Billigung als im Wesentlichen vertragsgemäß.\n" +
+                       "      - 3 zentrale Rechtswirkungen der Abnahme:\n" +
+                       "        1. **Fälligkeit der Vergütung (Werklohn):** Der Vergütungsanspruch wird fällig (§ 641 BGB).\n" +
+                       "        2. **Gefahrübergang:** Die Gefahr des zufälligen Untergangs geht auf den Besteller über (§ 644 BGB).\n" +
+                       "        3. **Beweislastumkehr & Verjährungsbeginn:** Vor der Abnahme muss der Auftragnehmer Mängelfreiheit beweisen; nach der Abnahme muss der Kunde Mängel beweisen. Die 2-jährige Gewährleistungsfrist beginnt zu laufen.\n\n" +
+                       "2. Zuordnung der Praxisfälle (6 Punkte):\n" +
+                       "   - Fall A (Individualsoftware nach Pflichtenheft): **Werkvertrag (§ 631 BGB)**, da ein konkreter Erfolg (funktionierende Plattform nach Pflichtenheft) geschuldet ist.\n" +
+                       "   - Fall B (IT-Beratung nach Stundennachweis): **Dienstvertrag (§ 611 BGB)**, da reine Beratungstätigkeit ohne Garantie eines messbaren wirtschaftlichen Erfolgs geschuldet wird.\n" +
+                       "   - Fall C (Individuell gebaute CAD-Workstations): **Werklieferungsvertrag (§ 650 BGB)** (Herstellung und Übereignung einer beweglichen Sache aus eigenen Bauteilen; unterliegt weitgehend Kaufvertragsrecht).\n\n" +
+                       "3. SaaS / Cloud-Verträge (4 Punkte):\n" +
+                       "   - Einordnung: Weist überwiegend Züge eines **Mietvertrags (§ 535 BGB)** auf (zeitweise Gebrauchsüberlassung von Software/Infrastruktur) kombiniert mit dienstvertraglichen Elementen (Support, Wartung).\n" +
+                       "   - Hauptpflicht des Providers: Erhaltung der Software im vertragsgemäßen, betriebsbereiten Zustand während der gesamten Vertragslaufzeit und Gewährleistung der im Service Level Agreement (SLA) garantierten Mindestverfügbarkeit (z. B. 99,5 % p. a.).",
+        explanation: "Die präzise Abgrenzung von Dienstvertrag, Werkvertrag und Werklieferungsvertrag ist eine klassische IHK-Prüfungsaufgabe in ganz Deutschland und BaWü.",
+        points: 16
+    },
+    {
+        id: 230,
+        theme: "lf1",
+        isBawueFocus: true,
+        topic: "LF 1 / WiSo - Vertragsrecht: Zweiseitiger Handelskauf & Rügepflicht (§ 377 HGB)",
+        type: "open-text",
+        title: "B2B-Handelskauf: Rügefristen, Mängelarten & Rechtsfolgen bei unterlassener Rüge nach § 377 HGB",
+        question: "Die IT-Solutions GmbH (Kaufmann nach HGB) bestellt beim Großhändler Server-Express OHG 20 Managed Gigabit-Switches mit je 48 Ports. Bei der Lieferung treten rechtliche Fragen auf:\n\n" +
+                  "1. **Rechtsnatur des Geschäfts (2 Punkte):**\n" +
+                  "   Warum handelt es sich hierbei um einen **beiderseitigen (zweiseitigen) Handelskauf** und welches Gesetzbuch findet vorrangig Anwendung?\n\n" +
+                  "2. **Rügepflicht nach § 377 HGB (6 Punkte):**\n" +
+                  "   a) Welche zwei Pflichten treffen die IT-Solutions GmbH unverzüglich nach Ablieferung der Ware? (2 Punkte)\n" +
+                  "   b) Unterscheiden Sie **offene Mängel**, **versteckte Mängel** und **arglistig verschwiegene Mängel** bezüglich der Rügefristen. (4 Punkte)\n\n" +
+                  "3. **Fallanalyse (5 Punkte):**\n" +
+                  "   Die Switches werden am Montag geliefert. Bei der Warenannahme wird das Paket ungeöffnet ins Lager gestellt. Nach 4 Wochen packt der IT-Techniker die Geräte aus und stellt fest, dass alle Switches nur 24 Ports statt der bestellten 48 Ports haben (Falschlieferung/Mangel). Die GmbH reklamiert sofort beim Großhändler.\n" +
+                  "   - Prüfen Sie die Rechtslage: Hat die IT-Solutions GmbH noch Anspruch auf Nacherfüllung / Umtausch? Begründen Sie mit § 377 HGB.\n\n" +
+                  "4. **Verbrauchsgüterkauf im Vergleich (3 Punkte):**\n" +
+                  "   Gilt die strenge Rügepflicht nach § 377 HGB auch für einen privaten Verbraucher (B2C), der im Online-Shop Hardware bestellt? Begründen Sie.",
+        correctAnswer: "1. Rechtsnatur (2 Punkte):\n" +
+                       "   - Beide Vertragspartner (GmbH und OHG) sind Kaufleute im Sinne des Handelsgesetzbuches (HGB) und das Geschäft gehört zum Betrieb ihres Handelsgewerbes -> **zweiseitiger Handelskauf (§ 343 HGB)**.\n" +
+                       "   - Das **HGB** findet vorrangig als Spezialgesetz vor dem BGB Anwendung.\n\n" +
+                       "2. Rügepflicht nach § 377 HGB (6 Punkte):\n" +
+                       "   a) Die 2 Pflichten des Käufers:\n" +
+                       "      1. **Untersuchungspflicht:** Die Ware muss unverzüglich (ohne schuldhaftes Zögern) nach der Ablieferung untersucht werden.\n" +
+                       "      2. **Rügepflicht:** Zeigt sich ein Mangel, muss dieser dem Verkäufer unverzüglich angezeigt (gerügt) werden.\n" +
+                       "   b) Mängelarten & Rügefristen:\n" +
+                       "      - **Offener Mangel:** Bei ordnungsgemäßer Untersuchung sofort erkennbar (z. B. Gehäuseschaden, falsche Portanzahl) -> Rüge muss **unverzüglich (innerhalb weniger Tage)** erfolgen.\n" +
+                       "      - **Versteckter Mangel:** Bei normaler Eingangsprüfung nicht erkennbar (z. B. thermischer Chipfehler bei Volllast nach 3 Wochen) -> Rüge muss **unverzüglich nach der Entdeckung** innerhalb der 2-jährigen Verjährungsfrist erfolgen.\n" +
+                       "      - **Arglistig verschwiegener Mangel:** Verkäufer wusste vom Mangel und hat ihn verheimlicht -> Verkäufer kann sich nicht auf verspätete Rüge berufen (§ 377 Abs. 5 HGB); Verjährungsfrist 3 Jahre (§ 195 BGB).\n\n" +
+                       "3. Fallanalyse (5 Punkte):\n" +
+                       "   - **Rechtsfolge:** Die IT-Solutions GmbH hat **keinen Anspruch mehr auf Nacherfüllung oder Umtausch**.\n" +
+                       "   - **Begründung:** Die falsche Portanzahl (24 statt 48 Ports) stellt einen offenen Mangel (Aliud-Lieferung, § 434 Abs. 5 BGB) dar. Da die GmbH die Ware erst nach 4 Wochen geprüft hat, erfolgte die Rüge nicht unverzüglich. Nach § 377 Abs. 2 HGB gilt die Ware somit als **genehmigt**. Alle gesetzlichen Gewährleistungsansprüche sind erloschen.\n\n" +
+                       "4. Verbrauchsgüterkauf (B2C) (3 Punkte):\n" +
+                       "   - **Nein**, die Rügepflicht nach § 377 HGB gilt ausschließlich für Kaufleute (B2B).\n" +
+                       "   - Verbraucher (B2C nach § 474 BGB) haben **keine Rügepflicht** und können Mängel während der gesamten 2-jährigen gesetzlichen Gewährleistungsfrist geltend machen.",
+        explanation: "§ 377 HGB Rügepflicht ist einer der wichtigsten Rechtsbestandteile der AP1-Abschlussprüfung.",
+        points: 16
+    },
+    {
+        id: 231,
+        theme: "lf1",
+        isBawueFocus: true,
+        topic: "LF 1 / WiSo - Rechtsgrundlagen: Geschäftsfähigkeit & Willenserklärungen",
+        type: "open-text",
+        title: "Bürgerliches Recht: Geschäftsfähigkeit (§§ 104-113 BGB), Taschengeldparagraph & schwebende Unwirksamkeit",
+        question: "In einem IT-Fachgeschäft ereignen sich folgende Verkaufsfälle:\n\n" +
+                  "1. **Stufen der Geschäftsfähigkeit (6 Punkte):**\n" +
+                  "   Erläutern Sie die 3 gesetzlichen Stufen der Geschäftsfähigkeit (Altersgrenzen und rechtliche Wirksamkeit von Willenserklärungen):\n" +
+                  "   - Stufe 1: *Geschäftsunfähigkeit (§ 104 BGB)*\n" +
+                  "   - Stufe 2: *Beschränkte Geschäftsfähigkeit (§ 106 BGB)*\n" +
+                  "   - Stufe 3: *Unbeschränkte Geschäftsfähigkeit (§ 2 BGB)*\n\n" +
+                  "2. **Fallbeurteilungen (6 Punkte):**\n" +
+                  "   Beurteilen Sie die Rechtswirksamkeit des jeweiligen Kaufvertrags (wirksam, nichtig oder schwebend unwirksam? Begründen Sie):\n" +
+                  "   - *Fall 1:* Der 6-jährige Tim kauft von seinem Taschengeld im Laden eine Gaming-Maus für 35,00 € in bar.\n" +
+                  "   - *Fall 2:* Der 16-jährige Auszubildende Jan kauft ein Smartphone für 400,00 € auf 24 Monatsraten ohne Wissen seiner Eltern.\n" +
+                  "   - *Fall 3:* Die 15-jährige Sarah kauft eine externe SSD für 80,00 € und bezahlt den Betrag sofort vollständig in bar aus ihrem angesparten Taschengeld.\n\n" +
+                  "3. **Taschengeldparagraph § 110 BGB (2 Punkte):**\n" +
+                  "   Unter welcher zwingenden Voraussetzung wird ein Vertrag nach § 110 BGB ohne vorherige Zustimmung der Eltern wirksam?",
+        correctAnswer: "1. Stufen der Geschäftsfähigkeit (6 Punkte):\n" +
+                       "   - **Geschäftsunfähigkeit (0 bis unter 7 Jahre, § 104 Nr. 1 BGB):** Willenserklärungen sind von Anfang an **nichtig (§ 105 Abs. 1 BGB)**. Gesetzliche Vertreter handeln.\n" +
+                       "   - **Beschränkte Geschäftsfähigkeit (7 bis unter 18 Jahre, § 106 BGB):** Verträge sind **schwebend unwirksam**, bis die gesetzlichen Vertreter (Eltern) zustimmen (§ 108 BGB). Ausnahmen: Lediglich rechtlicher Vorteil (§ 107) oder Taschengeldparagraph (§ 110).\n" +
+                       "   - **Unbeschränkte Geschäftsfähigkeit (ab Vollendung des 18. Lebensjahres, § 2 BGB):** Alle Willenserklärungen und Verträge sind voll **rechtswirksam**.\n\n" +
+                       "2. Fallbeurteilungen (6 Punkte):\n" +
+                       "   - **Fall 1 (6-jähriger Tim):** Kaufvertrag ist **nichtig (§ 105 Abs. 1 BGB)**, da Tim unter 7 Jahre alt und somit geschäftsunfähig ist. Der Taschengeldparagraph greift hier nicht!\n" +
+                       "   - **Fall 2 (16-jähriger Jan, Ratenkauf):** Kaufvertrag ist **schwebend unwirksam (§ 108 Abs. 1 BGB)**. Ein Ratenkauf / Kreditgeschäft fällt **niemals** unter den Taschengeldparagraphen (§ 110 BGB), da die Leistung nicht sofort vollständig bewirkt wird. Verweigern die Eltern die Genehmigung, wird der Vertrag endgültig unwirksam.\n" +
+                       "   - **Fall 3 (15-jährige Sarah, SSD Barzahlung):** Kaufvertrag ist **voll wirksam nach § 110 BGB (Taschengeldparagraph)**, da Sarah die Leistung sofort und vollständig mit Mitteln bewirkt hat, die ihr zu diesem Zweck oder zur freien Verfügung überlassen wurden.\n\n" +
+                       "3. Voraussetzung des § 110 BGB (2 Punkte):\n" +
+                       "   - Der Minderjährige muss die vertragsmäßige Leistung **vollständig bewirkt (in voller Höhe bezahlt)** haben mit Mitteln, die ihm zur freien Verfügung oder zu diesem Zweck überlassen wurden (keine Ratenzahlung, keine Schuldenübernahme!).",
+        explanation: "Geschäftsfähigkeit, Taschengeldparagraph und Ratenkäufe von Minderjährigen sind beliebte Prüfungsfälle der IHK.",
+        points: 14
+    },
+    {
+        id: 232,
+        theme: "lf1",
+        isBawueFocus: true,
+        topic: "LF 1 / WiSo - Vertragsrecht: Gewährleistung (§§ 434 ff. BGB) vs. Garantie",
+        type: "open-text",
+        title: "Mängelrechte beim Kaufvertrag: Sachmängel, Vorrang der Nacherfüllung & Gewährleistung vs. Garantie",
+        question: "Ein Unternehmen beschafft 10 Laserdrucker. Nach der Inbetriebnahme treten Mängel auf.\n\n" +
+                  "1. **Gesetzliche Gewährleistung vs. Freiwillige Garantie (4 Punkte):**\n" +
+                  "   Stellen Sie die gesetzliche **Gewährleistung (Sachmängelhaftung nach BGB)** und die **Herstellergarantie** tabellarisch oder stichpunktartig anhand von 3 Kriterien (Rechtsnatur, Verpflichteter, Dauer) gegenüber.\n\n" +
+                  "2. **Rechte des Käufers bei Sachmängeln (6 Punkte):**\n" +
+                  "   a) Welches Recht steht dem Käufer im Rahmen des **Vorrangs der Nacherfüllung (§ 439 BGB)** zu und welche Wahlmöglichkeit hat er? (3 Punkte)\n" +
+                  "   b) Unter welchen Voraussetzungen kann der Käufer zu den **Sekundärrechten (Rücktritt, Minderung, Schadensersatz)** übergehen? (3 Punkte)\n\n" +
+                  "3. **Beweislastumkehr beim Verbrauchsgüterkauf (§ 477 BGB) (4 Punkte):**\n" +
+                  "   Wie lange gilt seit der Schuldrechtsreform die gesetzliche **Beweislastumkehr zugunsten des Verbrauchers** und was besagt diese Regelung?",
+        correctAnswer: "1. Gewährleistung vs. Garantie (4 Punkte):\n" +
+                       "   - **Gesetzliche Gewährleistung (Sachmängelhaftung):**\n" +
+                       "     * Rechtsnatur: Gesetzlich vorgeschrieben (§§ 434 ff. BGB), nicht abdingbar gegenüber Verbrauchern.\n" +
+                       "     * Verpflichteter: Immer der **Verkäufer (Vertragspartner)**.\n" +
+                       "     * Dauer: Gesetzlich **2 Jahre** ab Übergabe bei neuen beweglichen Sachen (§ 438 BGB).\n" +
+                       "   - **Herstellergarantie:**\n" +
+                       "     * Rechtsnatur: Freiwillige vertragliche Zusicherung (§ 443 BGB), Bedingungen frei gestaltbar.\n" +
+                       "     * Verpflichteter: In der Regel der **Hersteller** (oder Garantiegeber).\n" +
+                       "     * Dauer: Frei wählbar (z. B. 1 Jahr, 3 Jahre, 5 Jahre Bring-In / Vor-Ort-Garantie).\n\n" +
+                       "2. Rechte bei Sachmängeln (6 Punkte):\n" +
+                       "   a) Vorrang der Nacherfüllung (§ 439 BGB):\n" +
+                       "      - Der Käufer hat zunächst das Recht auf **Nacherfüllung**.\n" +
+                       "      - Wahlrecht des Käufers: Er kann nach seiner Wahl entweder die **Beseitigung des Mangels (Nachbesserung / Reparatur)** oder die **Lieferung einer mangelfreien Sache (Nachlieferung / Umtausch)** verlangen. Der Verkäufer trägt alle erforderlichen Kosten (Transport, Arbeits- und Materialkosten).\n" +
+                       "   b) Übergang zu den Sekundärrechten:\n" +
+                       "      - Voraussetzung: Dem Verkäufer wurde eine angemessene Frist zur Nacherfüllung gesetzt und diese ist erfolglos verstrichen, oder die Nacherfüllung ist zweimal fehlgeschlagen (§ 440 BGB) bzw. wurde vom Verkäufer endgültig verweigert.\n" +
+                       "      - Sekundärrechte: **Rücktritt vom Kaufvertrag (§ 323 BGB)** (Geld zurück gegen Ware), **Minderung des Kaufpreises (§ 441 BGB)** und/oder **Schadensersatz statt der Leistung (§ 280 BGB)**.\n\n" +
+                       "3. Beweislastumkehr beim Verbrauchsgüterkauf (§ 477 BGB) (4 Punkte):\n" +
+                       "   - **Dauer:** **1 Jahr (12 Monate)** ab Lieferung (seit der Reform 2022, zuvor 6 Monate).\n" +
+                       "   - **Bedeutung:** Zeigt sich innerhalb von 12 Monaten ab Übergabe ein Mangel, wird gesetzlich vermutet, dass die Ware bereits bei Gefahrübergang mangelhaft war. Der Verkäufer müsste das Gegenteil beweisen.",
+        explanation: "Nacherfüllung (§ 439 BGB), 12 Monate Beweislastumkehr (§ 477 BGB) und Garantieabgrenzung sind Kernfragen des Wirtschaftsrechts.",
+        points: 14
+    },
+    {
+        id: 233,
+        theme: "lf1",
+        isBawueFocus: true,
+        topic: "LF 1 / WiSo - Vertragsrecht: Leistungsstörungen - Lieferungsverzug & Fixgeschäft",
+        type: "open-text",
+        title: "Vertragsstörungen: Lieferverzug (§ 286 BGB), Mahnung & Rechtsfolgen beim Fixkauf",
+        question: "Ein IT-Unternehmen bestellt Hardware für ein wichtiges Kunden-Event.\n\n" +
+                  "1. **Voraussetzungen des Lieferungsverzugs (4 Punkte):**\n" +
+                  "   Welche drei Voraussetzungen müssen vorliegen, damit ein Lieferant in **Lieferverzug (§ 286 BGB)** gerät?\n\n" +
+                  "2. **Entbehrlichkeit der Mahnung (4 Punkte):**\n" +
+                  "   In welchen zwei Fällen ist eine Mahnung zur Inverzugsetzung **entbehrlich**?\n\n" +
+                  "3. **Fixkauf / Relatives Fixgeschäft (6 Punkte):**\n" +
+                  "   Für eine IT-Messe am 15.10. bestellt die Firma Präsentations-Displays mit dem ausdrücklichen Zusatz: *'Lieferung fix am 14.10. bis 12:00 Uhr zum Messeaufbau'*. Die Displays treffen am 14.10. nicht ein.\n" +
+                  "   - Welche besonderen Rechte hat der Besteller sofort am 15.10., ohne dem Lieferanten eine Nachfrist setzen zu müssen? Begründen Sie.",
+        correctAnswer: "1. Voraussetzungen des Lieferverzugs (4 Punkte):\n" +
+                       "   1. **Fälligkeit der Lieferung:** Der Liefertermin muss erreicht und überschritten sein.\n" +
+                       "   2. **Mahnung des Gläubigers:** Grundsätzlich muss der Käufer nach Fälligkeit mahnen (es sei denn, die Mahnung ist gesetzlich entbehrlich).\n" +
+                       "   3. **Nichtleistung trotz Möglichkeit:** Die Ware wurde noch nicht geliefert.\n" +
+                       "   4. **Verschulden des Schuldners:** Der Lieferant hat die Verzögerung zu vertreten (Vorsatz oder Fahrlässigkeit, § 276 BGB; bei Gattungsschulden haftet er für Beschaffungsrisiko).\n\n" +
+                       "2. Entbehrlichkeit der Mahnung (§ 286 Abs. 2 BGB) (4 Punkte):\n" +
+                       "   1. Wenn für die Leistung eine Zeit nach dem **Kalender bestimmt** ist (z. B. 'Lieferung am 06. November').\n" +
+                       "   2. Wenn der Schuldner die Leistung ernsthaft und endgültig verweigert.\n\n" +
+                       "3. Rechte beim Fixkauf / Fixgeschäft (6 Punkte):\n" +
+                       "   - Da der Leistungszeitpunkt für den Besteller essenziell war (Messeauftritt) und dies vertraglich vereinbart wurde, liegt ein **relatives Fixgeschäft (§ 323 Abs. 2 Nr. 2 BGB)** vor.\n" +
+                       "   - **Rechte des Bestellers ohne Nachfristsetzung:**\n" +
+                       "     1. **Sofortiger Rücktritt vom Vertrag (§ 323 Abs. 2 Nr. 2 BGB)**: Der Besteller muss keine Nachfrist gewähren, da die Lieferung nach der Messe für ihn sinnlos ist.\n" +
+                       "     2. **Schadensersatz statt der Leistung (§ 280, 281 BGB)**: Ersatz von Mehrkosten (z. B. Kosten für teure Notfall-Mietgeräte vom Messe-Service vor Ort).\n" +
+                       "     3. **Deckungskauf:** Der Besteller kann sich die Displays anderweitig beschaffen und die Preisdifferenz als Verzugsschaden geltend machen.",
+        explanation: "Lieferungsverzug, Fixgeschäfte und Schadensersatz bei Leistungsstörungen sind IHK-Standardthemen.",
+        points: 14
+    },
+    {
+        id: 234,
+        theme: "lf1",
+        isBawueFocus: true,
+        type: "multiple-choice",
+        question: "Welche Aussage zur Einordnung von Unternehmensprozessen ist RICHTIG?",
+        options: [
+            "Die Gehaltsabrechnung der Mitarbeiter ist ein Kernprozess, weil sie monatlich zwingend durchgeführt werden muss.",
+            "Die Softwareentwicklung für einen externen Kunden ist ein Kernprozess, da sie unmittelbar Wertschöpfung erzeugt.",
+            "Supportprozesse haben immer direkten Kontakt zum externen Endkunden.",
+            "Führungsprozesse dürfen ausschließlich von externen Unternehmensberatern durchgeführt werden."
+        ],
+        correctAnswer: 1,
+        explanation: "Kernprozesse (primäre Prozesse) zeichnen sich dadurch aus, dass sie direkten Kundennutzen und Wertschöpfung für das Unternehmen generieren. Die Softwareentwicklung für Kunden ist ein klassischer Kernprozess."
+    },
+    {
+        id: 235,
+        theme: "lf1",
+        isBawueFocus: true,
+        type: "multiple-choice",
+        question: "Ein 17-jähriger Auszubildender bestellt online ein Notebook auf Ratenzahlung (12 Monatsraten à 80 €). Die Eltern wissen nichts davon. Wie ist der Kaufvertrag rechtlich einzuordnen?",
+        options: [
+            "Voll wirksam nach § 110 BGB (Taschengeldparagraph), da der Auszubildende eigenes Einkommen hat.",
+            "Schwebend unwirksam nach § 108 BGB, da Ratenkredite nicht unter den Taschengeldparagraphen fallen.",
+            "Von Anfang an nichtig nach § 105 BGB, da Minderjährige keine Online-Käufe tätigen dürfen.",
+            "Voll wirksam, da Jugendliche ab 16 Jahren voll geschäftsfähig sind."
+        ],
+        correctAnswer: 1,
+        explanation: "Der Taschengeldparagraph (§ 110 BGB) greift nur, wenn die Leistung mit den überlassenen Mitteln VOLLSTÄNDIG bewirkt (bar bezahlt) wird. Raten- und Kreditverträge sind schwebend unwirksam, bis die gesetzlichen Vertreter zustimmen."
+    },
+    {
+        id: 236,
+        theme: "lf1",
+        isBawueFocus: true,
+        type: "multiple-choice",
+        question: "Die IT-GmbH bestellt bei einem Händler 10 Monitore (B2B). Bei der Anlieferung am Montag wird die Ware unbesehen ins Lager gestellt. Nach 3 Wochen stellt sich heraus, dass 3 Monitore Glasbruch haben. Welche Rechtsfolge tritt nach § 377 HGB ein?",
+        options: [
+            "Der Händler muss die Monitore umtauschen, da die gesetzliche Gewährleistungsfrist 2 Jahre beträgt.",
+            "Die Ware gilt als genehmigt, da die IT-GmbH ihrer unverzüglichen Untersuchungs- und Rügepflicht nicht nachgekommen ist.",
+            "Die IT-GmbH kann sofort vom Kaufvertrag zurücktreten.",
+            "Der Händler muss Schadensersatz in Höhe des doppelten Kaufpreises zahlen."
+        ],
+        correctAnswer: 1,
+        explanation: "Beim beiderseitigen Handelskauf (B2B) greift die Rügepflicht nach § 377 HGB. Offene Mängel müssen unverzüglich (binnen weniger Tage) gerügt werden. Nach 3 Wochen gilt die Ware als genehmigt und Gewährleistungsansprüche erlöschen."
+    },
+    {
+        id: 237,
+        theme: "lf1",
+        isBawueFocus: true,
+        type: "true-false",
+        question: "Wahr oder Falsch: Bei einem IT-Dienstvertrag (§ 611 BGB) schuldet der Auftragnehmer das reine fachgerechte Bemühen (z. B. IT-Beratung), während bei einem Werkvertrag (§ 631 BGB) ein konkreter, mangelfreier Erfolg (z. B. funktionierende Individualsoftware) geschuldet wird.",
+        options: [
+            "Wahr (Richtig)",
+            "Falsch"
+        ],
+        "correctAnswer": 0,
+        explanation: "Richtig! Beim Dienstvertrag ist die ordnungsgemäße Tätigkeit geschuldet (ohne Erfolgsgarantie), beim Werkvertrag ist die mangelfreie Erstellung des versprochenen Werkes (Erfolg) geschuldet."
+    },
+    {
+        id: 238,
+        theme: "lf1",
+        isBawueFocus: true,
+        type: "true-false",
+        question: "Wahr oder Falsch: Die gesetzliche Beweislastumkehr zugunsten des Verbrauchers (§ 477 BGB beim Verbrauchsgüterkauf) beträgt in Deutschland seit 2022 genau 12 Monate.",
+        options: [
+            "Wahr (Richtig)",
+            "Falsch (Es sind weiterhin nur 6 Monate)"
+        ],
+        "correctAnswer": 0,
+        explanation: "Richtig! Mit der Schuldrechtsreform 2022 wurde die Beweislastumkehr von 6 Monaten auf 12 Monate verdoppelt."
     }
+
 ];
