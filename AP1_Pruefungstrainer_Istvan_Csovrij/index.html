@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AP1 Prüfungstrainer - Fachinformatiker</title>
-    <link rel="stylesheet" href="style.css?v=54">
+    <link rel="stylesheet" href="style.css?v=56">
     <!-- FontAwesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -78,6 +78,9 @@
                 <div class="question-container">
                     <h2 id="question-text">Lade Fragen...</h2>
                     
+                    <!-- For Visual SVG Diagram Renderings -->
+                    <div id="diagram-visual-container" class="diagram-visual-container" style="display: none; margin: 1rem 0;"></div>
+
                     <!-- For Code analysis, SQL or Pseudocode -->
                     <div id="code-block-container" class="code-block-container" style="display: none;">
                         <pre><code id="question-code"></code></pre>
@@ -120,6 +123,7 @@
                 <div class="explanation-section" id="explanation-section">
                     <h4>Erklärung:</h4>
                     <p id="explanation-text"></p>
+                    <div id="solution-diagram-container" class="solution-diagram-container" style="display: none; margin: 1rem 0;"></div>
                 </div>
             </div>
         </section>
@@ -213,6 +217,10 @@
 
                 <div class="question-container" style="margin-top: 1rem;">
                     <h2 id="exam-question-text">Lade Prüfungsaufgabe...</h2>
+                    
+                    <!-- For Exam Visual SVG Diagram Renderings -->
+                    <div id="exam-diagram-visual-container" class="diagram-visual-container" style="display: none; margin: 1rem 0;"></div>
+
                     <div id="exam-code-block-container" class="code-block-container" style="display: none; margin-top: 0.75rem;">
                         <pre><code id="exam-question-code"></code></pre>
                     </div>
@@ -383,9 +391,10 @@
         <p>&copy; 2026 AP1 Prüfungstrainer - Entwickelt von Istvan Csovrij</p>
     </footer>
 
-    <!-- Load the questions first, then the application logic -->
-    <script src="questions.js?v=54"></script>
-    <script src="generator.js?v=54"></script>
-    <script src="app.js?v=54"></script>
+    <!-- Load diagram library, questions, generator and application logic -->
+    <script src="diagrams.js?v=56"></script>
+    <script src="questions.js?v=56"></script>
+    <script src="generator.js?v=56"></script>
+    <script src="app.js?v=56"></script>
 </body>
 </html>

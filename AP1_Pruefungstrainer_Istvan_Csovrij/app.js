@@ -523,6 +523,24 @@ function loadQuestion() {
     questionNumberEl.textContent = `Frage ${currentQuestionIndex + 1} von ${filteredQuestions.length}`;
     questionTextEl.innerHTML = formatQuestionText(q.question);
     
+    // Handle Visual Diagram Graphic (SVG)
+    const diagContainer = document.getElementById("diagram-visual-container");
+    if (diagContainer) {
+        if (q.diagramSvg) {
+            diagContainer.innerHTML = `
+                <div class="svg-diagram-wrapper">
+                    <span class="diagram-header-badge"><i class="fa-solid fa-image"></i> ${escapeHtml(q.diagramTitle || "Referenzdiagramm / Modell")}</span>
+                    ${q.diagramSvg}
+                    ${q.diagramCaption ? `<div class="diagram-caption">${escapeHtml(q.diagramCaption)}</div>` : ''}
+                </div>
+            `;
+            diagContainer.style.display = "flex";
+        } else {
+            diagContainer.innerHTML = "";
+            diagContainer.style.display = "none";
+        }
+    }
+    
     // Handle code snippet
     if (q.code) {
         questionCodeEl.textContent = q.code;
@@ -605,6 +623,15 @@ function loadQuestion() {
             modelAnswerTitle.className = "model-answer-title";
             modelAnswerTitle.innerHTML = "<strong>Vergleich mit der Musterlösung:</strong>";
             
+            const solSvg = q.solutionDiagramSvg || (q.isDiagram ? q.diagramSvg : null);
+            const diagSvgHTML = solSvg ? `
+                <div class="svg-diagram-wrapper" style="margin-top: 1rem; border-color: #86efac; background: #f0fdf4;">
+                    <span class="solution-diagram-badge"><i class="fa-solid fa-circle-check"></i> Grafische Musterlösung:</span>
+                    ${solSvg}
+                    ${q.solutionDiagramCaption ? `<div class="diagram-caption">${escapeHtml(q.solutionDiagramCaption)}</div>` : ''}
+                </div>
+            ` : '';
+            
             const modelAnswerBody = document.createElement("div");
             modelAnswerBody.className = "model-answer-body";
             modelAnswerBody.innerHTML = `
@@ -616,6 +643,7 @@ function loadQuestion() {
                     <strong>Musterlösung:</strong><br>
                     ${escapeHtml(q.musterloesung || q.correctAnswer || "").replace(/\n/g, "<br>")}
                 </div>
+                ${diagSvgHTML}
             `;
             
             const statusText = document.createElement("div");
@@ -783,6 +811,15 @@ function showOpenTextSolution() {
     modelAnswerTitle.className = "model-answer-title";
     modelAnswerTitle.innerHTML = "<strong>Vergleiche deine Antwort mit der Musterlösung:</strong>";
     
+    const solSvg = q.solutionDiagramSvg || (q.isDiagram ? q.diagramSvg : null);
+    const diagSvgHTML = solSvg ? `
+        <div class="svg-diagram-wrapper" style="margin-top: 1rem; border-color: #86efac; background: #f0fdf4;">
+            <span class="solution-diagram-badge"><i class="fa-solid fa-circle-check"></i> Grafische Musterlösung:</span>
+            ${solSvg}
+            ${q.solutionDiagramCaption ? `<div class="diagram-caption">${escapeHtml(q.solutionDiagramCaption)}</div>` : ''}
+        </div>
+    ` : '';
+    
     const modelAnswerBody = document.createElement("div");
     modelAnswerBody.className = "model-answer-body";
     modelAnswerBody.innerHTML = `
@@ -794,6 +831,7 @@ function showOpenTextSolution() {
             <strong>Musterlösung:</strong><br>
             ${escapeHtml(q.musterloesung || q.correctAnswer || "").replace(/\n/g, "<br>")}
         </div>
+        ${diagSvgHTML}
     `;
     
     const ratingContainer = document.createElement("div");
@@ -857,6 +895,25 @@ function showFeedback(isCorrect, explanation, extraText = "") {
     }
     
     explanationText.innerHTML = (explanation || "Keine Erklärung verfügbar.").replace(/\n/g, "<br>");
+    
+    const q = filteredQuestions && filteredQuestions[currentQuestionIndex] ? filteredQuestions[currentQuestionIndex] : null;
+    const solDiagContainer = document.getElementById("solution-diagram-container");
+    if (solDiagContainer) {
+        const solSvg = q ? (q.solutionDiagramSvg || (q.isDiagram ? q.diagramSvg : null)) : null;
+        if (solSvg) {
+            solDiagContainer.innerHTML = `
+                <div class="svg-diagram-wrapper" style="border-color: #86efac; background: #f0fdf4;">
+                    <span class="solution-diagram-badge"><i class="fa-solid fa-circle-check"></i> Musterlösung (Grafisches Diagramm):</span>
+                    ${solSvg}
+                    ${q.solutionDiagramCaption ? `<div class="diagram-caption">${escapeHtml(q.solutionDiagramCaption)}</div>` : ''}
+                </div>
+            `;
+            solDiagContainer.style.display = "flex";
+        } else {
+            solDiagContainer.innerHTML = "";
+            solDiagContainer.style.display = "none";
+        }
+    }
 }
 
 // Load next question
@@ -1099,6 +1156,24 @@ function loadExamQuestion() {
     document.getElementById("exam-question-theme").textContent = getThemeLabel(q.theme);
     document.getElementById("exam-question-number").textContent = `Aufgabe ${examCurrentIndex + 1} von ${examQuestions.length}`;
     document.getElementById("exam-question-text").innerHTML = formatQuestionText(q.question);
+
+    // Handle Visual Diagram Graphic (SVG) in Exam Mode
+    const examDiagContainer = document.getElementById("exam-diagram-visual-container");
+    if (examDiagContainer) {
+        if (q.diagramSvg) {
+            examDiagContainer.innerHTML = `
+                <div class="svg-diagram-wrapper">
+                    <span class="diagram-header-badge"><i class="fa-solid fa-image"></i> ${escapeHtml(q.diagramTitle || "Referenzdiagramm / Modell")}</span>
+                    ${q.diagramSvg}
+                    ${q.diagramCaption ? `<div class="diagram-caption">${escapeHtml(q.diagramCaption)}</div>` : ''}
+                </div>
+            `;
+            examDiagContainer.style.display = "flex";
+        } else {
+            examDiagContainer.innerHTML = "";
+            examDiagContainer.style.display = "none";
+        }
+    }
 
     // Handle code block
     const codeBlock = document.getElementById("exam-code-block-container");
@@ -1466,6 +1541,15 @@ function calculateExamScores() {
             `;
         }
 
+        const solSvg = q.solutionDiagramSvg || (q.isDiagram ? q.diagramSvg : null);
+        const diagSvgHTML = solSvg ? `
+            <div class="svg-diagram-wrapper" style="margin-top: 0.75rem; border-color: #86efac; background: #f0fdf4;">
+                <span class="solution-diagram-badge"><i class="fa-solid fa-circle-check"></i> Musterlösung (Grafisches Diagramm):</span>
+                ${solSvg}
+                ${q.solutionDiagramCaption ? `<div class="diagram-caption">${escapeHtml(q.solutionDiagramCaption)}</div>` : ''}
+            </div>
+        ` : '';
+
         item.innerHTML = `
             <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem;">
                 <span class="badge" style="background-color: #4a5568; margin-bottom: 0;">Aufgabe ${idx + 1} (${getThemeLabel(q.theme)})</span>
@@ -1482,6 +1566,7 @@ function calculateExamScores() {
                 <div>
                     <strong>Musterlösung:</strong> <span style="color: #2b6cb0;">${escapeHtml(correctAnsText).replace(/\n/g, "<br>")}</span>
                 </div>
+                ${diagSvgHTML}
                 ${q.explanation ? `<div style="margin-top: 0.5rem; font-size: 0.85rem; color: #718096; background-color: #f7fafc; padding: 0.5rem; border-radius: 4px; border-left: 2px solid #3182ce;">
                     <strong>Erklärung:</strong> ${escapeHtml(q.explanation).replace(/\n/g, "<br>")}
                 </div>` : ''}

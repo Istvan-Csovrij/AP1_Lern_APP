@@ -4433,6 +4433,7 @@ WHERE Email IS NULL OR Email = '';
                 "Zwischen zwei Akteuren darf es niemals eine Generalisierungsbeziehung geben."
         ],
         "correctAnswer": 0,
+        "solutionDiagramSvg": VisualDiagrams.getUseCaseDiagramSvg("Online-Shop Bestellsystem"),
         "explanation": "Im UML-Use-Case-Diagramm visualisiert die Systemgrenze das zu entwickelnde System. Akteure (Personen, Nachbarsysteme, Rollen) stehen außerhalb und interagieren über Assoziationen (durchgezogene Linien) mit den Use-Cases (Ellipsen) im Inneren."
 },
     {
@@ -4451,6 +4452,7 @@ WHERE Email IS NULL OR Email = '';
                 "Durchgezogene Linie mit weißer Dreiecksspitze (Generalisierung) zu 'Lagerbestand prüfen'."
         ],
         "correctAnswer": 0,
+        "solutionDiagramSvg": VisualDiagrams.getUseCaseDiagramSvg("Online-Shop Bestellsystem"),
         "explanation": "Eine <<include>>-Beziehung bedeutet, dass ein Use-Case zwingend und immer einen anderen Use-Case einschließt. Der gestrichelte Pfeil zeigt dabei vom Basis-Use-Case ('Bestellung abschließen') HIN zum inkludierten Use-Case ('Lagerbestand prüfen')."
 },
     {
@@ -4469,6 +4471,7 @@ WHERE Email IS NULL OR Email = '';
                 "Durchgezogene Assoziationslinie ohne Stereotyp."
         ],
         "correctAnswer": 0,
+        "solutionDiagramSvg": VisualDiagrams.getUseCaseDiagramSvg("Online-Shop Bestellsystem"),
         "explanation": "Eine <<extend>>-Beziehung erweitert einen Basis-Use-Case nur optional unter bestimmten Bedingungen (Extension Point). Der gestrichelte Pfeil zeigt dabei vom erweiternden Use-Case ('Sitzplatz reservieren') AUF den Basis-Use-Case ('Flug buchen')."
 },
     {
@@ -4487,6 +4490,7 @@ WHERE Email IS NULL OR Email = '';
                 "1. Schnittstellen (oben), 2. Klassenname (Mitte), 3. Parameter (unten)"
         ],
         "correctAnswer": 0,
+        "solutionDiagramSvg": VisualDiagrams.getClassDiagramSvg(),
         "explanation": "Ein Standard-UML-Klassenkasten ist dreigeteilt: 1. Fach (oben) = Klassenname (evtl. mit Stereotyp <<interface>>), 2. Fach (Mitte) = Attribute mit Datentyp und Sichtbarkeit, 3. Fach (unten) = Methoden/Operationen mit Parametern und Rückgabetyp."
 },
     {
@@ -4505,6 +4509,7 @@ WHERE Email IS NULL OR Email = '';
                 "+ = Pflichtfeld, - = optional, # = Primärschlüssel, ~ = Fremdschlüssel"
         ],
         "correctAnswer": 0,
+        "solutionDiagramSvg": VisualDiagrams.getClassDiagramSvg(),
         "explanation": "In UML steht '+' für public (jederzeit zugreifbar), '-' für private (Kapselung, nur innerhalb der eigenen Klasse), '#' für protected (in der Klasse und abgeleiteten Klassen sichtbar) und '~' für package (innerhalb desselben Pakets)."
 },
     {
@@ -4523,6 +4528,7 @@ WHERE Email IS NULL OR Email = '';
                 "Es gibt keinen Unterschied, die Raute ist rein dekorativ."
         ],
         "correctAnswer": 0,
+        "solutionDiagramSvg": VisualDiagrams.getClassDiagramSvg(),
         "explanation": "Komposition (schwarze Raute) = 'Besteht-aus' mit starker Existenzabhängigkeit (löscht man die Rechnung, existieren die Posten nicht mehr). Aggregation (weiße Raute) = 'Hat-ein' mit schwacher Bindung (wird die Abteilung aufgelöst, bleibt der Mitarbeiter im Unternehmen)."
 },
     {
@@ -4541,6 +4547,7 @@ WHERE Email IS NULL OR Email = '';
                 "Ein Kreis mit einem Kreuz (XOR-Symbol) zwischen beiden Klassen."
         ],
         "correctAnswer": 0,
+        "solutionDiagramSvg": VisualDiagrams.getClassDiagramSvg(),
         "explanation": "Generalisierung/Vererbung ('Ist-ein'-Beziehung) wird in UML durch eine durchgezogene Linie mit einem hohlen (weißen) Dreieck dargestellt, das stets auf die Oberklasse/Superklasse zeigt."
 },
     {
@@ -4559,6 +4566,7 @@ WHERE Email IS NULL OR Email = '';
                 "Rechteck = Beziehungstyp, Raute = Attribut, Kreis = Primärschlüssel"
         ],
         "correctAnswer": 0,
+        "solutionDiagramSvg": VisualDiagrams.getErdDiagramSvg(),
         "explanation": "In der klassischen Chen-Notation stehen Rechtecke für Entitätstypen (Tabellen/Objekte wie KUNDE), Ellipsen für Attribute (Eigenschaften wie Name) und Rauten für Beziehungen (Verknüpfungen wie 'kauft'). Primärschlüsselattribute werden unterstrichen."
 },
     {
@@ -4577,6 +4585,7 @@ WHERE Email IS NULL OR Email = '';
                 "Eine n:m-Beziehung kann in relationalen Datenbanken nicht realisiert werden."
         ],
         "correctAnswer": 0,
+        "solutionDiagramSvg": VisualDiagrams.getErdDiagramSvg(),
         "explanation": "Um die 1. Normalform nicht zu verletzen (keine atomaren Listen/Wiederholungsgruppen), werden n:m-Beziehungen im relationalen Modell immer über eine Zwischentabelle (Assoziationstabelle) aufgelöst, die zwei 1:n-Beziehungen abbildet."
 },
     {
@@ -4595,6 +4604,7 @@ WHERE Email IS NULL OR Email = '';
                 "In einer separaten 1:1 Kopplungstabelle."
         ],
         "correctAnswer": 0,
+        "solutionDiagramSvg": VisualDiagrams.getErdDiagramSvg(),
         "explanation": "Bei einer 1:n Beziehung wandert der Primärschlüssel der 1-Seite (z. B. KundenNr) IMMER als Fremdschlüssel in die Tabelle der n-Seite (Auftrag), da jeder Auftrag genau einem Kunden zugeordnet ist."
 },
     {
@@ -4613,6 +4623,7 @@ WHERE Email IS NULL OR Email = '';
                 "|| = Primärschlüssel, o< = Fremdschlüssel"
         ],
         "correctAnswer": 0,
+        "solutionDiagramSvg": VisualDiagrams.getErdDiagramSvg(),
         "explanation": "In der Krähenfuß-Notation bezeichnet '||' 'Exactly One' (Minimal- und Maximalkardinalität 1). 'o<' (Kreis = optional 0, Krähenfuß = many *) bezeichnet 'Zero or More' (0..*)."
 },
     {
@@ -4649,6 +4660,7 @@ WHERE Email IS NULL OR Email = '';
                 "Nach einem Startereignis muss immer sofort ein XOR-Operator folgen."
         ],
         "correctAnswer": 0,
+        "solutionDiagramSvg": VisualDiagrams.getEpkDiagramSvg(),
         "explanation": "In einer EPK gilt das strenge Abwechselungsprinzip (Ereignis -> Funktion -> Ereignis). Da Ereignisse passive Zustände sind, können sie keine Entscheidungen treffen – Entscheidungen trifft nur eine Funktion, weshalb Verzweigungen (XOR/OR) nur nach Funktionen folgen dürfen!"
 },
     {
@@ -4667,6 +4679,7 @@ WHERE Email IS NULL OR Email = '';
                 "Kein Konnektor, sondern eine direkte Verbindungslinie."
         ],
         "correctAnswer": 0,
+        "solutionDiagramSvg": VisualDiagrams.getEpkDiagramSvg(),
         "explanation": "Wenn sich Pfade gegenseitig ausschließen (entweder fehlerfrei ODER defekt, niemals beides gleichzeitig), ist zwingend der XOR-Operator (Exklusives Oder) einzusetzen."
 },
     {
@@ -4685,6 +4698,7 @@ WHERE Email IS NULL OR Email = '';
                 "Eine Raute mit einem Stern/Fünfeck im Inneren (Event-based Gateway)."
         ],
         "correctAnswer": 0,
+        "solutionDiagramSvg": VisualDiagrams.getBpmnDiagramSvg(),
         "explanation": "BPMN Gateways: '+' = Parallel (AND, alle Pfade laufen gleichzeitig), 'X' oder leer = Exklusiv (XOR, genau ein Pfad), 'O' = Inklusiv (OR, einer oder mehrere Pfade), Fünfeck = Ereignisbasiert."
 },
     {
@@ -4703,6 +4717,7 @@ WHERE Email IS NULL OR Email = '';
                 "Zwischen zwei Pools darf es in BPMN keine Verbindungen geben."
         ],
         "correctAnswer": 0,
+        "solutionDiagramSvg": VisualDiagrams.getBpmnDiagramSvg(),
         "explanation": "Pool-übergreifend dürfen NUR gestrichelte Nachrichtenflüsse (Message Flows) verwendet werden. Durchgezogene Sequenzflüsse (Sequence Flows) dürfen NIEMALS Poolgrenzen überschreiten!"
 },
     {
@@ -4721,6 +4736,7 @@ WHERE Email IS NULL OR Email = '';
                 "FAP = Frühester Arbeitsplan, SEP = Spätester Endplan, GP = Gruppenphase"
         ],
         "correctAnswer": 0,
+        "solutionDiagramSvg": VisualDiagrams.getNetzplanDiagramSvg(),
         "explanation": "Nach DIN 69900: FAZ = Frühester Anfangszeitpunkt, FEZ = Frühester Endzeitpunkt, SAZ = Spätester Anfangszeitpunkt, SEZ = Spätester Endzeitpunkt, GP = Gesamtpuffer (SAZ - FAZ), FP = Freier Puffer."
 },
     {
@@ -4739,6 +4755,7 @@ WHERE Email IS NULL OR Email = '';
                 "FAZ = 5,5 Tage, FEZ = 10,5 Tage"
         ],
         "correctAnswer": 0,
+        "solutionDiagramSvg": VisualDiagrams.getNetzplanDiagramSvg(),
         "explanation": "Ein Nachfolger kann erst beginnen, wenn ALLE Vorgänger abgeschlossen sind. Daher gilt bei mehreren Vorgängern: FAZ = max(FEZ_Vorgänger) = max(4, 7) = 7. FEZ = FAZ + Dauer = 7 + 5 = 12."
 },
     {
@@ -4757,6 +4774,7 @@ WHERE Email IS NULL OR Email = '';
                 "GP = 9 Tage"
         ],
         "correctAnswer": 0,
+        "solutionDiagramSvg": VisualDiagrams.getNetzplanDiagramSvg(),
         "explanation": "Der Gesamtpuffer (GP) berechnet sich nach der Formel: GP = SAZ - FAZ = 11 - 8 = 3 Tage (oder äquivalent SEZ - FEZ = 17 - 14 = 3 Tage)."
 },
     {
@@ -4775,6 +4793,7 @@ WHERE Email IS NULL OR Email = '';
                 "Auf dem kritischen Pfad besitzen alle Vorgänge maximalen freien Puffer (FP > 5)."
         ],
         "correctAnswer": 0,
+        "solutionDiagramSvg": VisualDiagrams.getNetzplanDiagramSvg(),
         "explanation": "Der kritische Pfad bestimmt die minimale Gesamtdauer des Projekts. Bei allen Vorgängen auf diesem Pfad gilt GP = 0 und FP = 0. Jede Verzögerung verschiebt das Projektende um die gleiche Dauer nach hinten!"
 },
     {
@@ -4793,6 +4812,7 @@ WHERE Email IS NULL OR Email = '';
                 "Der Freie Puffer ist identisch mit der Vorgangsdauer."
         ],
         "correctAnswer": 0,
+        "solutionDiagramSvg": VisualDiagrams.getNetzplanDiagramSvg(),
         "explanation": "Gesamtpuffer (GP): Verschiebung ohne Gefährdung des Projektendtermins. Freier Puffer (FP): Verschiebung ohne Gefährdung des frühestmöglichen Beginns (FAZ) der direkten Nachfolger."
 },
     {
@@ -4811,6 +4831,7 @@ WHERE Email IS NULL OR Email = '';
                 "Struktogramme unterstützen nur Zählschleifen (FOR)."
         ],
         "correctAnswer": 0,
+        "solutionDiagramSvg": VisualDiagrams.getStruktogrammSvg(),
         "explanation": "Kopfgesteuerte Schleife (Pre-Condition): Bedingung oben -> Ausführung nur, wenn Bedingung zu Beginn wahr ist (0 bis n Durchläufe). Fußgesteuerte Schleife (Post-Condition): Bedingung unten -> Rumpf wird mindestens 1-mal durchlaufen (1 bis n Durchläufe)."
 },
     {
@@ -4845,6 +4866,7 @@ WHERE Email IS NULL OR Email = '';
                 "Falsch (Er zeigt in die Gegenrichtung)"
         ],
         "correctAnswer": 0,
+        "solutionDiagramSvg": VisualDiagrams.getUseCaseDiagramSvg("Online-Shop Bestellsystem"),
         "explanation": "Richtig! Der Basis-Use-Case 'inkludiert' den Teil-Use-Case, daher zeigt der Pfeil vom Basis-Use-Case auf den inkludierten Use-Case."
 },
     {
@@ -4861,6 +4883,7 @@ WHERE Email IS NULL OR Email = '';
                 "Falsch (Sie steht am Teilobjekt)"
         ],
         "correctAnswer": 0,
+        "solutionDiagramSvg": VisualDiagrams.getClassDiagramSvg(),
         "explanation": "Richtig! Sowohl bei Aggregation (leere Raute) als auch bei Komposition (schwarze Raute) befindet sich die Raute stets an der übergeordneten Besitzerklasse ('Ganzes')."
 },
     {
@@ -4877,6 +4900,7 @@ WHERE Email IS NULL OR Email = '';
                 "Falsch (Es wird als Sechseck dargestellt)"
         ],
         "correctAnswer": 0,
+        "solutionDiagramSvg": VisualDiagrams.getErdDiagramSvg(),
         "explanation": "Richtig! Ein Doppel-Oval stellt in der Chen-Notation ein mehrwertiges Attribut dar (im relationalen Datenbankschema muss dieses in eine eigene Tabelle überführt werden)."
 },
     {
@@ -4893,6 +4917,7 @@ WHERE Email IS NULL OR Email = '';
                 "Falsch (Der Puffer ist größer als 0)"
         ],
         "correctAnswer": 0,
+        "solutionDiagramSvg": VisualDiagrams.getNetzplanDiagramSvg(),
         "explanation": "Richtig! Auf dem kritischen Pfad gilt ausnahmslos GP = 0 (und FP = 0), da es keinerlei zeitlichen Spielraum gibt."
 },
     {
@@ -4905,6 +4930,7 @@ WHERE Email IS NULL OR Email = '';
         "type": "open-text",
         "question": "Prüfungsaufgabe Modellierung (BaWü-Fokus): Für ein mittelständisches Unternehmen soll ein internes IT-Ticketsystem modelliert werden.\n\nAnforderungen:\n1. Ein Mitarbeiter (Kunde) kann mehrere Tickets erfassen. Jedes Ticket gehört zu genau einem Mitarbeiter.\n2. Ein Support-Mitarbeiter kann mehrere Tickets bearbeiten. Ein Ticket kann vorübergehend keinem oder genau einem Support-Mitarbeiter zugewiesen sein.\n3. Zu einem Ticket können mehrere Statuskommentare erfasst werden.\n\nAufgabe:\na) Bestimme die ERD-Kardinalitäten zwischen MITARBEITER ─ TICKET und TICKET ─ SUPPORT.\nb) Wo müssen die Fremdschlüssel platziert werden?\nc) Skizziere die Struktur bei Bedarf auf dem Whiteboard.",
         "musterloesung": "a) ERD-Kardinalitäten:\n- MITARBEITER ─ (1:n) ─ TICKET (1 Mitarbeiter erstellt [0..*] Tickets; 1 Ticket gehört zu [1..1] Mitarbeiter).\n- SUPPORT ─ (1:n) ─ TICKET (1 Support-Mitarbeiter bearbeitet [0..*] Tickets; 1 Ticket ist [0..1] Support-Mitarbeitern zugewiesen).\n- TICKET ─ (1:n) ─ STATUSKOMMENTAR.\n\nb) Fremdschlüsselplatzierung:\n- In Tabelle TICKET: `FK_MitarbeiterNr` (NOT NULL) und `FK_SupportMitarbeiterNr` (NULLable, da Zuweisung optional ist).\n- In Tabelle STATUSKOMMENTAR: `FK_TicketNr` (NOT NULL).\n\nc) Tabellenschema:\nMITARBEITER(MitarbeiterNr (PK), Name, Abt)\nTICKET(TicketID (PK), Betreff, ErstellDatum, FK_MitarbeiterNr, FK_SupportMitarbeiterNr)\nSTATUSKOMMENTAR(KommentarID (PK), Text, Zeitstempel, FK_TicketNr)",
+        "solutionDiagramSvg": VisualDiagrams.getUseCaseDiagramSvg("IT-Helpdesk Ticketverwaltung"),
         "explanation": "Bei 1:n Beziehungen wird der Primärschlüssel der 1-Seite immer als Fremdschlüssel in der n-Tabelle abgelegt. Da ein Ticket anfangs keinem Support-Mitarbeiter zugeordnet sein muss, ist dieser FK als NULL-fähig zu deklarieren."
 },
     {
@@ -4918,6 +4944,7 @@ WHERE Email IS NULL OR Email = '';
         "code": "+---------+--------------------+-------+------------+\n| Vorgang | Bezeichnung        | Dauer | Vorgänger  |\n+---------+--------------------+-------+------------+\n| A       | Hardware beschaffen| 4 T.  | -          |\n| B       | Images erstellen   | 2 T.  | -          |\n| C       | Clients clonen     | 3 T.  | A, B       |\n| D       | Switch konfigurieren| 1 T. | -          |\n| E       | Rollout vor Ort    | 5 T.  | C, D       |\n+---------+--------------------+-------+------------+",
         "question": "Prüfungsaufgabe Netzplantechnik (BaWü-Fokus): Gegeben ist die obige Vorgangstabelle für einen Client-Rollout.\n\nAufgabe:\n1. Führe die Vorwärts- und Rückwärtsrechnung durch (Projektstart = Tag 0).\n2. Berechne FAZ, FEZ, SAZ, SEZ und Gesamtpuffer (GP) für alle 5 Vorgänge.\n3. Nenne den Kritischen Pfad und die Gesamtlaufzeit des Projekts.",
         "musterloesung": "1. & 2. Berechnung der Knotenwerte (nach DIN 69900):\n- Vorgang A (D=4): FAZ=0, FEZ=4 | SAZ=0, SEZ=4 | GP = 0, FP = 0 (Kritisch)\n- Vorgang B (D=2): FAZ=0, FEZ=2 | SAZ=2, SEZ=4 | GP = 2, FP = 2\n- Vorgang C (D=3, Vorl.: A,B -> FAZ=max(4,2)=4): FAZ=4, FEZ=7 | SAZ=4, SEZ=7 | GP = 0, FP = 0 (Kritisch)\n- Vorgang D (D=1): FAZ=0, FEZ=1 | SAZ=6, SEZ=7 | GP = 6, FP = 6\n- Vorgang E (D=5, Vorl.: C,D -> FAZ=max(7,1)=7): FAZ=7, FEZ=12 | SAZ=7, SEZ=12 | GP = 0, FP = 0 (Kritisch)\n\n3. Kritischer Pfad & Dauer:\n- Kritischer Pfad: A ➔ C ➔ E (alle mit GP = 0)\n- Gesamtlaufzeit des Projekts: 12 Tage.",
+        "solutionDiagramSvg": VisualDiagrams.getNetzplanDiagramSvg(),
         "explanation": "Vorwärtsrechnung: FAZ = max(FEZ aller Vorgänger), FEZ = FAZ + Dauer. Rückwärtsrechnung: SEZ = min(SAZ aller Nachfolger), SAZ = SEZ - Dauer. GP = SAZ - FAZ. Kritischer Pfad umfasst alle Vorgänge mit GP=0."
 },
     {
@@ -4930,6 +4957,7 @@ WHERE Email IS NULL OR Email = '';
         "type": "open-text",
         "question": "Prüfungsaufgabe Prozessmodellierung (BaWü-Fokus): In einer Prüfung soll ein Beschaffungsprozess von Hardware dargestellt werden.\n\nAufgabe:\na) Nenne zwei typische Syntaxfehler, die in Prüfungen bei Ereignisgesteuerten Prozessketten (EPK) häufig auftreten.\nb) Erkläre, wie die Verantwortlichkeiten (z. B. 'Fachabteilung', 'Einkauf', 'IT-Leitung') in BPMN 2.0 übersichtlich dargestellt werden.\nc) Wann wird in BPMN 2.0 ein 'Paralleles Gateway' (+) im Gegensatz zu einem 'Exklusiven Gateway' (X) eingesetzt?",
         "musterloesung": "a) Häufige EPK-Syntaxfehler:\n1. Regelverstoß beim Wechsel: Zwei Funktionen oder zwei Ereignisse folgen direkt aufeinander ohne Zwischenelement.\n2. Verzweigung nach Ereignis: Ein OR- oder XOR-Operator folgt direkt auf ein Ereignis (Ereignisse sind passiv und können keine Entscheidungen treffen).\n\nb) Verantwortlichkeiten in BPMN 2.0:\n- Über Pools (für externe Organisationen) und Swimlanes (Bahnen innerhalb eines Pools für Abteilungen wie Einkauf, IT, Fachabteilung).\n\nc) Gateway-Einsatz in BPMN 2.0:\n- Paralleles Gateway (+): Wenn zwei oder mehr Teilaufgaben gleichzeitig und unabhängig voneinander ausgeführt werden müssen (z. B. 'Hardware bestellen' UND 'Lizenz anfordern').\n- Exklusives Gateway (X): Wenn genau eine Alternative basierend auf einer Bedingung gewählt wird (z. B. 'Betrag > 1.000 €: Genehmigung erforderlich' vs. 'Betrag <= 1.000 €: Direkt bestellen').",
+        "solutionDiagramSvg": VisualDiagrams.getEpkDiagramSvg(),
         "explanation": "EPKs fordern strengen Wechsel und Entscheidungen nur durch Funktionen. BPMN 2.0 nutzt Swimlanes für organisatorische Zuordnungen und standardisierte Gateway-Symbole (+ für parallel, X für exklusiv)."
 },
     {
@@ -4943,6 +4971,7 @@ WHERE Email IS NULL OR Email = '';
         "code": "+---------------------------------------+\n|              Geraet                   |\n+---------------------------------------+\n| - inventarNr: String                  |\n| - anschaffungsDatum: Date             |\n| # standort: String                    |\n+---------------------------------------+\n| + getInventarNr(): String             |\n| + ermittleRestwert(): double          |\n+---------------------------------------+\n                  /\\\n                 /  \\ (Generalisierung)\n               +------+------+\n               |             |\n+-----------------------+ +-----------------------+\n|       Workstation     | |        Server         |\n+-----------------------+ +-----------------------+\n| - betriebssystem: Str | | - rackEinheit: int    |\n| - arbeitsspeicher: int| | - redundantesNetz: bool|\n+-----------------------+ +-----------------------+",
         "question": "Prüfungsaufgabe Klassendiagramm (BaWü-Fokus): Betrachte das oben dargestellte Klassendiagramm.\n\nAufgabe:\na) Welche OOP-Beziehung liegt zwischen `Geraet` und `Workstation`/`Server` vor und welche Pfeilspitze gehört dorthin?\nb) Welche Bedeutung hat das Zeichen `#` vor dem Attribut `standort` in der Klasse `Geraet`?\nc) Kann die Methode `getInventarNr()` von außen auf einem `Workstation`-Objekt aufgerufen werden? Begründe.",
         "musterloesung": "a) Beziehung: Generalisierung / Vererbung ('Ist-ein'-Beziehung). `Geraet` ist die Oberklasse (Superklasse), `Workstation` und `Server` sind abgeleitete Unterklassen. Das Symbol ist eine durchgezogene Linie mit einer geschlossenen, nicht ausgefüllten (weißen) Dreiecksspitze zur Oberklasse `Geraet`.\n\nb) Sichtbarkeit `#`: Bedeutet `protected`. Das Attribut `standort` ist in der Klasse `Geraet` sowie in allen abgeleiteten Klassen (`Workstation`, `Server`) direkt sichtbar und veränderbar, jedoch vor Zugriffen von außen gekapselt.\n\nc) Aufruf `getInventarNr()`: Ja, der Aufruf ist möglich. Durch die Vererbung erbt `Workstation` alle öffentlichen Methoden der Oberklasse, und das führende `+` kennzeichnet die Methode als `public`.",
+        "solutionDiagramSvg": VisualDiagrams.getClassDiagramSvg(),
         "explanation": "Generalisierung vererbt Attribute und Methoden. Private (-) Attribute werden nicht direkt vererbt bzw. sind gekapselt, Protected (#) Attribute sind für Kindklassen zugänglich, Public (+) Methoden sind überall aufrufbar."
 },
     {
@@ -5015,6 +5044,7 @@ WHERE Email IS NULL OR Email = '';
                 "Es handelt sich um eine unbeschränkte Mehrfachbeziehung."
         ],
         "correctAnswer": 0,
+        "solutionDiagramSvg": VisualDiagrams.getErdDiagramSvg(),
         "explanation": "Die (min, max)-Notation definiert min = Mindestanzahl der Teilnahmen (0 = optional, 1 = Pflicht) und max = Höchstanzahl (1 = maximal eins, * bzw. n = beliebig viele). (1, 1) bedeutet daher genau ein obligatorisches Vorkommen."
 },
     {
@@ -5031,6 +5061,7 @@ WHERE Email IS NULL OR Email = '';
                 "Falsch (Richtig: Es wird genau 1 einziger Pfad basierend auf Bedingungen gewählt)"
         ],
         "correctAnswer": 1,
+        "solutionDiagramSvg": VisualDiagrams.getBpmnDiagramSvg(),
         "explanation": "Falsch! Ein Exklusives Gateway (XOR) wählt genau einen Pfad aus. Das Parallele Gateway (+) spaltet in alle Pfade gleichzeitig auf."
 },
     {
@@ -5044,6 +5075,7 @@ WHERE Email IS NULL OR Email = '';
         "code": "+--------------------------------------------------------+\n| Eingabe: einkaufswert, istStammkunde                   |\n+--------------------------------------------------------+\n| rabatt = 0                                             |\n+--------------------------------------------------------+\n| einkaufswert >= 500 ?                                  |\n|                      JA /                              |\n| +--------------------------------+-------------------+ |\n| | rabatt = 10                    | einkaufswert >= 200? | |\n| |                                |      JA /         | |\n| |                                | +---------+-----+ | |\n| |                                | | rabatt=5| r=0 | | |\n| +--------------------------------+---------+-----+ | |\n+--------------------------------------------------------+\n| istStammkunde == true ?                                |\n|                      JA /                              |\n| +--------------------------------+-------------------+ |\n| | rabatt = rabatt + 3            | TUE NICHTS        | |\n| +--------------------------------+-------------------+ |\n+--------------------------------------------------------+\n| endpreis = einkaufswert * (1 - rabatt / 100)           |\n+--------------------------------------------------------+\n| Ausgabe: endpreis, rabatt                              |",
         "question": "Prüfungsaufgabe Struktogramm-Tracing (BaWü-Fokus): Analysiere das oben dargestellte Struktogramm nach Nassi-Shneiderman.\n\nAufgabe:\na) Berechne den Endpreis und den Rabattsatz für: `einkaufswert = 300 €`, `istStammkunde = true`.\nb) Berechne den Endpreis und den Rabattsatz für: `einkaufswert = 600 €`, `istStammkunde = false`.\nc) Welcher Rabatt ergibt sich für einen Neukunden (`istStammkunde = false`) bei einem Einkaufswert von `150 €`?",
         "musterloesung": "a) Fall 1 (300 €, Stammkunde):\n- Bedingung 1: 300 >= 500 ist FALSCH.\n- Bedingung 2: 300 >= 200 ist WAHR -> rabatt = 5%.\n- Bedingung 3: istStammkunde == true ist WAHR -> rabatt = 5 + 3 = 8%.\n- Endpreis: 300 € * (1 - 0,08) = 300 € * 0,92 = 276,00 € (Rabatt: 8%).\n\nb) Fall 2 (600 €, kein Stammkunde):\n- Bedingung 1: 600 >= 500 ist WAHR -> rabatt = 10%.\n- Bedingung 3: istStammkunde == true ist FALSCH -> rabatt bleibt 10%.\n- Endpreis: 600 € * (1 - 0,10) = 600 € * 0,90 = 540,00 € (Rabatt: 10%).\n\nc) Fall 3 (150 €, kein Stammkunde):\n- 150 < 500 und 150 < 200 -> rabatt = 0%.\n- Kein Stammkunde -> rabatt = 0%.\n- Endpreis = 150,00 €.",
+        "solutionDiagramSvg": VisualDiagrams.getStruktogrammSvg(),
         "explanation": "Struktogramme werden von oben nach unten sequenziell abgearbeitet. Verzweigungen prüfen Bedingungen hierarchisch. Tracing-Tabellen helfen, alle Variablenzustände fehlerfrei zu berechnen."
 },
     {
@@ -5333,6 +5365,7 @@ WHERE Email IS NULL OR Email = '';
                 "1.700,00 €"
         ],
         "correctAnswer": 0,
+        "solutionDiagramSvg": VisualDiagrams.getKalkulationTreeSvg(),
         "explanation": "Kalkulationsschema:\n  Listeneinkaufspreis: 2.000,00 €\n- Lieferantenrabatt (15 %): -300,00 €\n= Zieleinkaufspreis (ZEP): 1.700,00 €\n- Lieferantenskonto (2 % von 1.700 €): -34,00 €\n= Bareinkaufspreis (BEP): 1.666,00 €\n+ Bezugskosten: +50,00 €\n= Bezugspreis (Einstandspreis): 1.716,00 €."
 },
     {
@@ -5350,6 +5383,7 @@ WHERE Email IS NULL OR Email = '';
                 "1.850,00 €"
         ],
         "correctAnswer": 0,
+        "solutionDiagramSvg": VisualDiagrams.getKalkulationTreeSvg(),
         "explanation": "Formel: Selbstkosten = Bezugspreis + (Bezugspreis * HKZ / 100) = 1.500,00 € + 600,00 € = 2.100,00 € (bzw. 1.500 € * 1,40 = 2.100,00 €)."
 },
     {
@@ -5367,6 +5401,7 @@ WHERE Email IS NULL OR Email = '';
                 "Gewinn: 250,00 € | Gewinnzuschlagssatz: 31,25 %"
         ],
         "correctAnswer": 0,
+        "solutionDiagramSvg": VisualDiagrams.getKalkulationTreeSvg(),
         "explanation": "Rechnung:\n1. Absoluter Gewinn = Barverkaufspreis (1.000 €) - Selbstkosten (800 €) = 200,00 €.\n2. Gewinnzuschlagssatz = (Gewinn / Selbstkosten) * 100 = (200 € / 800 €) * 100 = 25,0 %."
 },
     {
@@ -5544,6 +5579,7 @@ WHERE Email IS NULL OR Email = '';
         "type": "open-text",
         "question": "Prüfungsaufgabe Handelskalkulation (BaWü-Fokus): Für die Beschaffung und den Weiterverkauf von 20 High-End-Workstations liegen folgende Daten vor:\n\n- Listeneinkaufspreis (LEP): 1.500,00 € pro Stück\n- Lieferantenrabatt: 20 %\n- Lieferantenskonto: 3 %\n- Bezugskosten: insgesamt 200,00 € (für alle 20 Stück zusammen)\n- Handlungskostenzuschlag (HKZ): 35 %\n- Gewinnzuschlag: 15 %\n- Kundenskonto: 2 % (im Hundert)\n- Kundenrabatt: 10 % (im Hundert)\n- Umsatzsteuer: 19 %\n\nAufgabe:\nBerechne pro Stück:\na) Den Bezugspreis (Einstandspreis)\nb) Die Selbstkosten\nc) Den Barverkaufspreis (BVP)\nd) Den Zielverkaufspreis (ZVP) und den Netto-Listenverkaufspreis (LVP netto)\ne) Den Brutto-Verkaufspreis inklusive 19 % USt.",
         "musterloesung": "Vollständige Vorwärtskalkulation (pro Stück):\n\n1. Einkaufskalkulation:\n  Listeneinkaufspreis (LEP): 1.500,00 €\n- Lieferantenrabatt (20 %): -300,00 €\n= Zieleinkaufspreis (ZEP): 1.200,00 €\n- Lieferantenskonto (3 % von 1.200 €): -36,00 €\n= Bareinkaufspreis (BEP): 1.164,00 €\n+ Bezugskosten (200 € / 20 Stück): +10,00 €\n= a) Bezugspreis (Einstandspreis): 1.174,00 €\n\n2. Selbstkosten:\n+ Handlungskosten (35 % von 1.174 €): +410,90 €\n= b) Selbstkosten: 1.584,90 €\n\n3. Verkaufskalkulation:\n+ Gewinnzuschlag (15 % von 1.584,90 €): +237,74 €\n= c) Barverkaufspreis (BVP): 1.822,64 €\n\n4. Im-Hundert-Kalkulation für Kundenskonto & Rabatt:\n+ Kundenskonto (2 % im Hundert -> BVP / 0,98): +37,20 €\n= d1) Zielverkaufspreis (ZVP): 1.859,84 €\n+ Kundenrabatt (10 % im Hundert -> ZVP / 0,90): +206,65 €\n= d2) Listenverkaufspreis netto (LVP): 2.066,49 €\n\n5. Endpreis:\n+ Umsatzsteuer (19 % von 2.066,49 €): +392,63 €\n= e) Listenverkaufspreis brutto: 2.459,12 € pro Stück.",
+        "solutionDiagramSvg": VisualDiagrams.getKalkulationTreeSvg(),
         "explanation": "Wichtig: Lieferantenrabatt und Skonto werden 'vom Hundert' abgezogen. Kundenskonto und Kundenrabatt in der Vorwärtskalkulation müssen 'im Hundert' aufgeschlagen werden (Division durch 0,98 bzw. 0,90), damit der Kunde nach seinem Abzug genau den BVP zahlt!"
 },
     {
@@ -5645,6 +5681,7 @@ WHERE Email IS NULL OR Email = '';
                 "300,00 €"
         ],
         "correctAnswer": 0,
+        "solutionDiagramSvg": VisualDiagrams.getKalkulationTreeSvg(),
         "explanation": "Formel: Selbstkosten = Bezugspreis + Handlungskosten.\nRechnung: 200,00 € + (200,00 € * 0,30) = 200,00 € + 60,00 € = 260,00 €."
 },
     {
@@ -5696,6 +5733,7 @@ WHERE Email IS NULL OR Email = '';
                 "LVP netto = 1.050,00 € | LVP brutto = 1.249,50 €"
         ],
         "correctAnswer": 0,
+        "solutionDiagramSvg": VisualDiagrams.getKalkulationTreeSvg(),
         "explanation": "Rechnung:\n1. LVP netto (im Hundert): ZVP / (1 - 0,10) = 900,00 € / 0,90 = 1.000,00 €.\n2. LVP brutto: 1.000,00 € * 1,19 = 1.190,00 €."
 },
     {
@@ -5713,6 +5751,7 @@ WHERE Email IS NULL OR Email = '';
                 "ca. 92,00 €"
         ],
         "correctAnswer": 0,
+        "solutionDiagramSvg": VisualDiagrams.getKalkulationTreeSvg(),
         "explanation": "Rückwärtskalkulation:\n1. LVP netto = 100,00 € - 10 % Kundenrabatt (10,00 €) = ZVP 90,00 €.\n2. ZVP 90,00 € - 2 % Kundenskonto (1,80 €) = BVP 88,20 €.\n3. BVP 88,20 € / 1,15 (Gewinn) = Selbstkosten 76,70 €.\n4. Selbstkosten 76,70 € / 1,25 (HKZ) = Bezugspreis 61,36 €.\n5. Bezugspreis 61,36 € - 5,00 € Bezugskosten = BEP 56,36 €.\n6. BEP 56,36 € / 0,98 (Lieferantenskonto) = ZEP 57,51 €.\n7. ZEP 57,51 € / 0,80 (Lieferantenrabatt) = max. LEP ≈ 71,89 € bis 71,98 €."
 },
     {
@@ -5773,6 +5812,7 @@ WHERE Email IS NULL OR Email = '';
         "type": "open-text",
         "question": "Prüfungsaufgabe Handelskalkulation (BaWü-Fokus): Gegeben sind folgende Werte für 100 Server-Netzteile:\n\n- Listeneinkaufspreis (LEP): 120,00 € pro Stück\n- Lieferantenrabatt: 25 %\n- Lieferantenskonto: 2 %\n- Bezugskosten: 90,00 € (für alle 100 Stück zusammen)\n- Handlungskostenzuschlag (HKZ): 20 %\n- Gewinnzuschlag: 20 %\n- Kundenskonto: 3 % (im Hundert)\n- Kundenrabatt: 5 % (im Hundert)\n- Umsatzsteuer: 19 %\n\nAufgabe:\nBerechne pro Stück:\n1. Zieleinkaufspreis (ZEP)\n2. Bareinkaufspreis (BEP)\n3. Bezugspreis (Einstandspreis)\n4. Selbstkosten\n5. Barverkaufspreis (BVP)\n6. Zielverkaufspreis (ZVP)\n7. Listenverkaufspreis (LVP netto)\n8. Endpreis (LVP brutto)",
         "musterloesung": "Schrittweise Lösung (pro Stück):\n\n1. LEP: 120,00 €\n- Lieferantenrabatt (25 %): -30,00 €\n= 1. ZEP: 90,00 €\n\n- Lieferantenskonto (2 % von 90 €): -1,80 €\n= 2. BEP: 88,20 €\n\n+ Bezugskosten (90 € / 100): +0,90 €\n= 3. Bezugspreis (Einstandspreis): 89,10 €\n\n+ Handlungskosten (20 % von 89,10 €): +17,82 €\n= 4. Selbstkosten: 106,92 €\n\n+ Gewinnzuschlag (20 % von 106,92 €): +21,38 €\n= 5. Barverkaufspreis (BVP): 128,30 €\n\n+ Kundenskonto (3 % im Hundert -> 128,30 € / 0,97): +3,97 €\n= 6. Zielverkaufspreis (ZVP): 132,27 €\n\n+ Kundenrabatt (5 % im Hundert -> 132,27 € / 0,95): +6,96 €\n= 7. Listenverkaufspreis netto (LVP): 139,23 €\n\n+ 19 % USt (19 % von 139,23 €): +26,45 €\n= 8. Listenverkaufspreis brutto: 165,68 €.",
+        "solutionDiagramSvg": VisualDiagrams.getKalkulationTreeSvg(),
         "explanation": "Vorwärtskalkulationsschema schrittweise von oben nach unten anwenden."
 },
     {
@@ -5857,6 +5897,7 @@ WHERE Email IS NULL OR Email = '';
                 "ZVP = 290,00 € und Vertreterprovision = 29,00 €"
         ],
         "correctAnswer": 0,
+        "solutionDiagramSvg": VisualDiagrams.getKalkulationTreeSvg(),
         "explanation": "Rechnung 'im Hundert':\nZielverkaufspreis (ZVP) = 100 %\n- Kundenskonto: 3 %\n- Vertreterprovision: 10 %\n= Barverkaufspreis (BVP): 87 % (100 % - 13 %)\n\nZVP = BVP / 0,87 = 243,60 € / 0,87 = 280,00 €.\nKundenskonto (3 % von 280 €) = 8,40 €.\nVertreterprovision (10 % von 280 €) = 28,00 €.\nProbe: 280,00 € - 8,40 € - 28,00 € = 243,60 € (BVP)."
 },
     {
@@ -5891,6 +5932,7 @@ WHERE Email IS NULL OR Email = '';
                 "Gleichgewichtspreis = 70,00 € bei 100 Stück"
         ],
         "correctAnswer": 0,
+        "solutionDiagramSvg": VisualDiagrams.getMarktgleichgewichtSvg(),
         "explanation": "Das Marktgleichgewicht ist der Schnittpunkt von Angebot und Nachfrage:\nBei einem Preis von 40,00 € stimmen die angebotene Menge (400 Stück) und die nachgefragte Menge (400 Stück) exakt überein."
 },
     {
@@ -5967,6 +6009,7 @@ WHERE Email IS NULL OR Email = '';
         "type": "open-text",
         "question": "IHK-Prüfungsaufgabe (BaWü-Fokus): Bei der ConSystem GmbH wird für einen Kunden ein Arbeitsplatz-Bildschirm kalkuliert.\n\nGegebene Daten:\n- Listeneinkaufspreis: 200,00 €\n- Lieferantenrabatt: 10 %\n- Lieferantenskonto: 2 %\n- Bezugskosten: 2,60 €\n- Handlungskostenzuschlag: 25 %\n- Gewinnzuschlag: 8,87 %\n- Kundenskonto: 3 % (im Hundert)\n- Vertreterprovision: 10 % (im Hundert)\n- Kundenrabatt: 20 % (im Hundert)\n\nAufgaben:\n1. Führen Sie die Handelskalkulation schrittweise durch und ermitteln Sie:\n   a) Bezugspreis (Einstandspreis)\n   b) Selbstkosten\n   c) Barverkaufspreis (BVP)\n   d) Zielverkaufspreis (ZVP)\n   e) Listenverkaufspreis netto (LVP)\n2. Berechnen Sie den Kalkulationszuschlag in Prozent.\n3. Berechnen Sie die Handelsspanne in Prozent.\n4. Erläutern Sie, warum für den Auftrag (Lieferung + Montage/Installation) ein Werklieferungsvertrag abgeschlossen wird.",
         "musterloesung": "Musterlösung:\n\n1. Handelskalkulation:\n- Listeneinkaufspreis: 200,00 €\n- 10 % Lieferantenrabatt: -20,00 €\n= Zieleinkaufspreis: 180,00 €\n- 2 % Lieferantenskonto: -3,60 €\n= Bareinkaufspreis: 176,40 €\n+ Bezugskosten: +2,60 €\n= a) Bezugs-/Einstandspreis: 179,00 €\n\n+ 25 % Handlungskosten (25 % von 179,00 €): +44,75 €\n= b) Selbstkosten: 223,75 €\n\n+ 8,87 % Gewinnzuschlag (8,87 % von 223,75 €): +19,85 €\n= c) Barverkaufspreis (BVP): 243,60 €\n\n+ 3 % Kundenskonto & 10 % Provision (13 % im Hundert -> 243,60 € / 0,87):\n  - Kundenskonto: +8,40 €\n  - Vertreterprovision: +28,00 €\n= d) Zielverkaufspreis (ZVP): 280,00 €\n\n+ 20 % Kundenrabatt (20 % im Hundert -> 280,00 € / 0,80):\n  - Kundenrabatt: +70,00 €\n= e) Listenverkaufspreis netto (LVP): 350,00 €\n\n2. Kalkulationszuschlag:\nFormel: [(LVP - Bezugspreis) / Bezugspreis] * 100\nRechnung: [(350,00 € - 179,00 €) / 179,00 €] * 100 = (171,00 € / 179,00 €) * 100 = 95,53 %.\n\n3. Handelsspanne:\nFormel: [(LVP - Bezugspreis) / LVP] * 100\nRechnung: [(350,00 € - 179,00 €) / 350,00 €] * 100 = (171,00 € / 350,00 €) * 100 = 48,86 %.\n\n4. Vertragsart:\nEs wird ein Werklieferungsvertrag (§ 650 BGB) abgeschlossen. Die Lieferung der Hardware ist kaufvertraglich (§ 433 BGB), der Aufbau, die Verkabelung, Software-Installation und Übergabe ist werkvertraglich (§ 631 BGB), da ein betriebsbereiter Arbeitsplatz (Erfolg) geschuldet wird.",
+        "solutionDiagramSvg": VisualDiagrams.getKalkulationTreeSvg(),
         "explanation": "Vollständige Handelskalkulation mit Vorwärtskalkulation, Vertreterprovision, Kalkulationszuschlag, Handelsspanne und Vertragsarten."
 },
     {
@@ -6313,6 +6356,323 @@ WHERE Email IS NULL OR Email = '';
         ],
         "correctAnswer": 0,
         "explanation": "Der erweiterte Wirtschaftskreislauf (IHK-Standard) besteht aus 5 Sektoren:\n1. Private Haushalte (Arbeitskraft, Konsum)\n2. Unternehmen (Produktion, Löhne, Investitionen)\n3. Staat (Steuern, Subventionen, öffentliche Aufträge)\n4. Banken / Vermögensveränderung (Sparen, Kredite, Zinsen)\n5. Ausland (Exporte, Importe)."
-}
-
+},
+// =========================================================================
+    // Visuelle Diagramm-Aufgaben (Erkennung & Modellierung mit SVG)
+    // =========================================================================
+    {
+        "id": 354,
+        "theme": "diagrams",
+        "topic": "Diagramm-Erkennung: UML Use-Case-Diagramm",
+        "isDiagram": true,
+        "diagramType": "UML Use-Case-Diagramm",
+        "isBawueFocus": true,
+        "type": "multiple-choice",
+        "question": "Betrachte das oben abgebildete visuelle Modell. Um welchen Diagrammtyp handelt es sich und was stellt das gestrichelte Rechteck dar?",
+        "diagramTitle": "Visualisierung 1: Systemmodell",
+        "diagramCaption": "Abbildung: Systemmodell mit Akteuren (Kunde, Payment Gateway) und Anwendungsfällen",
+        "diagramSvg": VisualDiagrams.getUseCaseDiagramSvg("Online-Shop Bestellsystem"),
+        "options": [
+            "UML-Anwendungsfalldiagramm (Use-Case-Diagramm) mit einer Systemgrenze (Scope des Onlineshops)",
+            "UML-Klassendiagramm mit Paketstruktur",
+            "Entity-Relationship-Diagramm (ERD) mit Entitätsmengen",
+            "Ereignisgesteuerte Prozesskette (EPK) mit Organisationseinheiten"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Es handelt sich um ein UML-Use-Case-Diagramm (Anwendungsfalldiagramm):
+- Männchen-Symbole = Akteure (Akteur 'Kunde' und externes System 'Payment Gateway')
+- Ovale = Use Cases (z. B. 'Artikel suchen', 'Bestellung aufgeben')
+- Gestricheltes Rechteck = Systemgrenze (grenzt das zu entwickelnde Onlineshop-System von externen Akteuren ab)
+- Gestrichelte Pfeile = <<include>> (zwingend erforderlich) und <<extend>> (optionale Erweiterung)."
+    },
+    {
+        "id": 355,
+        "theme": "diagrams",
+        "topic": "Diagramm-Erkennung: UML Klassendiagramm & Komposition",
+        "isDiagram": true,
+        "diagramType": "UML Klassendiagramm",
+        "isBawueFocus": true,
+        "type": "multiple-choice",
+        "question": "Betrachte das abgebildete UML-Klassendiagramm. Was bedeutet die ausgefüllte schwarze Raute (Diamant) an der Beziehung zwischen den Klassen 'Bestellung' und 'Bestellposition'?",
+        "diagramTitle": "Visualisierung 2: Objektorientiertes Datenmodell",
+        "diagramCaption": "Abbildung: UML-Klassendiagramm mit Attributen, Methoden, Multiplizitäten und Beziehungen",
+        "diagramSvg": VisualDiagrams.getClassDiagramSvg(),
+        "options": [
+            "Komposition (strenge existenzabhängige Teil-Ganzes-Beziehung: Wird eine Bestellung gelöscht, werden auch alle zugehörigen Bestellpositionen unwiderruflich gelöscht).",
+            "Aggregation (schwache Teil-Ganzes-Beziehung: Die Teile können auch ohne das Ganze eigenständig weiter existieren).",
+            "Generalisierung / Vererbung (Bestellposition erbt Attribute von Bestellung).",
+            "Einfache lose Assoziation ohne Lebenszeitabhängigkeit."
+        ],
+        "correctAnswer": 0,
+        "explanation": "In der UML-Notation bedeutet:
+- Ausgefüllte schwarze Raute = Komposition: Eine existenzabhängige Teil-Ganzes-Beziehung (starke Bindung). Die Lebensdauer des Teils (Bestellposition) ist an das Ganze (Bestellung) gebunden.
+- Helle/leere Raute = Aggregation (schwache Bindung).
+- Pfeil mit weißem Dreieck = Generalisierung / Vererbung.
+- Die Notation '1' und '1..*' zeigt die Multiplizitäten (Eine Bestellung hat mindestens 1 oder beliebig viele Positionen)."
+    },
+    {
+        "id": 356,
+        "theme": "diagrams",
+        "topic": "Diagramm-Erkennung: Entity-Relationship-Modell (ERD)",
+        "isDiagram": true,
+        "diagramType": "Entity-Relationship-Modell (ERD)",
+        "isBawueFocus": true,
+        "type": "multiple-choice",
+        "question": "Betrachte das abgebildete Entity-Relationship-Diagramm (ERD nach Chen). Welche Bedeutung haben die unterstrichenen Attribute in den Ellipsen (z. B. 'KundenNr', 'BestellNr', 'ArtikelNr')?",
+        "diagramTitle": "Visualisierung 3: Konzeptionelles Datenmodell",
+        "diagramCaption": "Abbildung: ERD in Chen-Notation mit Entitätstypen, Beziehungstypen und Kardinalitäten (1:n und n:m)",
+        "diagramSvg": VisualDiagrams.getErdDiagramSvg(),
+        "options": [
+            "Primärschlüssel-Attribute (eindeutige Identifikationsmerkmale der Entität)",
+            "Fremdschlüssel-Attribute zur Tabellenverknüpfung",
+            "Optionale Attribute mit NULL-Werten",
+            "Mehrwertige Attribute"
+        ],
+        "correctAnswer": 0,
+        "explanation": "In der Chen-Notation für ER-Modelle gilt:
+- Rechtecke = Entitätstypen (z. B. KUNDE, BESTELLUNG, ARTIKEL)
+- Rauten = Beziehungstypen (z. B. erteilt [1:n], umfasst [n:m])
+- Ovale/Ellipsen = Attribute
+- Unterstrichene Attribute (z. B. KundenNr) = Primärschlüssel (Primary Key), die jede Entität in der Tabelle eindeutig identifizieren."
+    },
+    {
+        "id": 357,
+        "theme": "diagrams",
+        "topic": "Diagramm-Erkennung: Ereignisgesteuerte Prozesskette (EPK)",
+        "isDiagram": true,
+        "diagramType": "Ereignisgesteuerte Prozesskette (EPK)",
+        "isBawueFocus": true,
+        "type": "multiple-choice",
+        "question": "Betrachte die abgebildete Ereignisgesteuerte Prozesskette (EPK). Welches logische Verknüpfungselement (Konnektor) ist nach der Funktion 'Bestellung prüfen' geschaltet und was bewirkt es?",
+        "diagramTitle": "Visualisierung 4: Geschäftsprozessmodell (EPK)",
+        "diagramCaption": "Abbildung: EPK-Prozess mit Ereignissen (Sechsecke), Funktionen (abgerundete Rechtecke) und Konnektoren",
+        "diagramSvg": VisualDiagrams.getEpkDiagramSvg(),
+        "options": [
+            "XOR-Konnektor (Exklusives Oder: Es tritt genau einer der beiden Folgepfade ein – entweder 'Auftrag bestätigt' ODER 'Auftrag abgelehnt')",
+            "AND-Konnektor (Und-Verknüpfung: Beide Folgepfade müssen parallel ausgeführt werden)",
+            "OR-Konnektor (Inklusives Oder: Mindestens ein Pfad oder beide Pfade treten ein)",
+            "Rückkopplungsschleife ohne logischen Operator"
+        ],
+        "correctAnswer": 0,
+        "explanation": "EPK-Grundregeln:
+- Sechsecke (Rosa/Rot) = Ereignisse (Zustände, z. B. 'Kunde bestellt', 'Auftrag bestätigt')
+- Abgerundete Rechtecke (Grün) = Funktionen (Aktivitäten / Verben, z. B. 'Bestellung prüfen')
+- Kreis mit 'XOR' = Exklusives Oder (Entweder/Oder, niemals beides gleichzeitig).
+- Wichtige IHK-Regel: Auf ein Ereignis darf keine direkte XOR/OR-Verzweigung ohne vorherige Funktion folgen!"
+    },
+    {
+        "id": 358,
+        "theme": "diagrams",
+        "topic": "Diagramm-Erkennung: BPMN 2.0 Prozessmodell",
+        "isDiagram": true,
+        "diagramType": "BPMN 2.0",
+        "isBawueFocus": true,
+        "type": "multiple-choice",
+        "question": "Betrachte das abgebildete Geschäftsprozessdiagramm in BPMN 2.0 Notation. Welche Elemente repräsentieren jeweils den Prozessstart, die Aufgaben und die exklusive Verzweigung?",
+        "diagramTitle": "Visualisierung 5: BPMN 2.0 Ablauf",
+        "diagramCaption": "Abbildung: Standardisierter BPMN 2.0 Ablauf mit Start-Event, Tasks, Exclusive Gateway (✕) und End-Event",
+        "diagramSvg": VisualDiagrams.getBpmnDiagramSvg(),
+        "options": [
+            "Grüner Kreis (Start-Event), abgerundete blaue Rechtecke (Tasks / Aktivitäten), Raute mit Kreuz ✕ (Exclusive Gateway / XOR-Verzweigung)",
+            "Rotes Sechseck (Start), Ellipsen (Tasks), Dreieck (Gateway)",
+            "Doppelkreis (Start), Pfeile (Tasks), Parallelogramm (Gateway)",
+            "Quadrat (Start), Zylinder (Tasks), Kreis mit Plus (Gateway)"
+        ],
+        "correctAnswer": 0,
+        "explanation": "BPMN 2.0 Standardelemente:
+- Dünner grüner Kreis = Start Event
+- Abgerundete Rechtecke = Tasks (Aktivitäten wie 'Auftrag erfassen', 'Waren kommissionieren')
+- Raute mit 'X' = Exclusive Gateway (XOR: Nur ein Ausgangspfad wird gewählt)
+- Dicker roter Kreis = End Event."
+    },
+    {
+        "id": 359,
+        "theme": "diagrams",
+        "topic": "Diagramm-Erkennung: Nassi-Shneiderman Struktogramm (DIN 66261)",
+        "isDiagram": true,
+        "diagramType": "Struktogramm (DIN 66261)",
+        "isBawueFocus": true,
+        "type": "multiple-choice",
+        "question": "Betrachte das abgebildete Struktogramm nach DIN 66261. Welche Programmier-Kontrollstrukturen sind von oben nach unten korrekt dargestellt?",
+        "diagramTitle": "Visualisierung 6: Algorithmenentwurf",
+        "diagramCaption": "Abbildung: DIN 66261 Struktogramm mit linearer Sequenz, Verzweigung (IF-ELSE) und kopfgesteuerter Schleife",
+        "diagramSvg": VisualDiagrams.getStruktogrammSvg(),
+        "options": [
+            "1. Lineare Sequenz (Anweisungsblock) -> 2. Verzweigung / Selektion (IF-THEN-ELSE mit Ja/Nein) -> 3. Kopfgesteuerte Zählschleife (FOR / WHILE)",
+            "1. Fußgesteuerte Schleife -> 2. Switch-Case -> 3. Rekursion",
+            "1. Parallele Ausführung -> 2. Endlosschleife -> 3. Funktionsaufruf",
+            "1. Try-Catch Block -> 2. Goto-Sprung -> 3. Return"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Struktogramm-Bausteine nach DIN 66261:
+- Einfaches Rechteck = Sequenz (z. B. 'rabatt = 0.0')
+- Dreieckig geteilter Block mit Bedingung = Alternative / Verzweigung (IF 'rabattCode != null' mit linkem JA-Zweig und rechtem NEIN-Zweig)
+- L-förmig umrahmter Block = Schleife / Iteration (z. B. 'FÜR JEDEN Artikel in warenkorb')."
+    },
+    {
+        "id": 360,
+        "theme": "diagrams",
+        "topic": "Diagramm-Erkennung: Netzplan (DIN 69900) & Kritischer Pfad",
+        "isDiagram": true,
+        "diagramType": "Netzplan (DIN 69900)",
+        "isBawueFocus": true,
+        "type": "multiple-choice",
+        "question": "Betrachte den abgebildeten Netzplan nach DIN 69900. Welche Vorgänge liegen auf dem kritischen Pfad und warum sind diese für die Projektdauer entscheidend?",
+        "diagramTitle": "Visualisierung 7: Projektnetzplan (DIN 69900)",
+        "diagramCaption": "Abbildung: Netzplanknoten mit Vorwärtsrechnung (FAZ/FEZ), Rückwärtsrechnung (SAZ/SEZ), Pufferzeiten (GP/FP) und rotem Kritischen Pfad",
+        "diagramSvg": VisualDiagrams.getNetzplanDiagramSvg(),
+        "options": [
+            "V1 -> V2 -> V4 (Rot markiert): Ihre Gesamtpufferzeit ist GP = 0. Jede Verzögerung bei diesen Vorgängen verlängert unmittelbar das gesamte Projektende (Tag 18).",
+            "V1 -> V3 -> V4: Weil V3 die höchste Gesamtpufferzeit von GP = 4 Tagen besitzt.",
+            "Nur Vorgang V4, da er am Ende des Projekts liegt.",
+            "Alle Vorgänge liegen gleichermaßen auf dem kritischen Pfad."
+        ],
+        "correctAnswer": 0,
+        "explanation": "Netzplantechnik nach DIN 69900:
+- FAZ (Frühester Anfangszeitpunkt), FEZ (Frühester Endzeitpunkt)
+- SAZ (Spätester Anfangszeitpunkt), SEZ (Spätester Endzeitpunkt)
+- GP (Gesamtpuffer) = SAZ - FAZ (oder SEZ - FEZ)
+- Der kritische Pfad verbindet alle Vorgänge mit GP = 0 (hier V1 [D=4] -> V2 [D=6] -> V4 [D=8] = 18 Tage). Eine Verzögerung führt sofort zum Projektverzug!"
+    },
+    {
+        "id": 361,
+        "theme": "diagrams",
+        "topic": "Diagramm-Erkennung: Stabliniensystem Organigramm",
+        "isDiagram": true,
+        "diagramType": "Organigramm (Stabliniensystem)",
+        "isBawueFocus": true,
+        "type": "multiple-choice",
+        "question": "Betrachte das abgebildete Organisationsdiagramm (Organigramm). Welche Funktion hat das seitlich angegliederte Oval 'Stab: Datenschutz & Revision'?",
+        "diagramTitle": "Visualisierung 8: Organisationsstruktur",
+        "diagramCaption": "Abbildung: Stabliniensystem mit Geschäftsleitung, Stabsstelle und Linieninstanzen (IT, Vertrieb, Finanzen)",
+        "diagramSvg": VisualDiagrams.getOrganigrammStabSvg(),
+        "options": [
+            "Stabsstelle: Beratende, prüfende und unterstützende Funktion für die Geschäftsleitung ohne eigene Weisungsbefugnis gegenüber den nachgeordneten Linienabteilungen.",
+            "Höchste Weisungsinstanz mit Durchgriffsrecht auf alle Mitarbeiter.",
+            "Ausgelagerte externe Tochtergesellschaft.",
+            "Matrix-Schnittstelle zwischen Einkauf und Vertrieb."
+        ],
+        "correctAnswer": 0,
+        "explanation": "Im Stabliniensystem gilt:
+- Linienstellen (Rechtecke) sind in die hierarchische Befehlskette eingebunden und besitzen Weisungsbefugnis.
+- Stabsstellen (z. B. Datenschutzbeauftragter, Revision, Rechtsabteilung) beraten die Geschäftsführung als Stabsassistenten, haben aber KEINE disziplinarische Weisungsbefugnis gegenüber der Linie."
+    },
+    {
+        "id": 362,
+        "theme": "diagrams",
+        "topic": "Diagramm-Erkennung: Marktpreisbildung & Marktgleichgewicht",
+        "isDiagram": true,
+        "diagramType": "Marktgleichgewicht Diagramm",
+        "isBawueFocus": true,
+        "type": "multiple-choice",
+        "question": "Betrachte das abgebildete Preisbildungsdiagramm. Welcher Zustand liegt im markierten roten Bereich (Preis = 20,00 €, Nachfrage = 600 Stk., Angebot = 200 Stk.) vor?",
+        "diagramTitle": "Visualisierung 9: Volkswirtschaftliches Marktmodell",
+        "diagramCaption": "Abbildung: Koordinatensystem mit Angebot, Nachfrage, Marktgleichgewicht G (40 €, 400 Stk.) und Nachfrageüberhang",
+        "diagramSvg": VisualDiagrams.getMarktgleichgewichtSvg(),
+        "options": [
+            "Nachfrageüberhang von 400 Stück (600 Nachfrage - 200 Angebot) -> Verkäufermarkt mit Aufwärtsdruck auf die Preise.",
+            "Angebotsüberhang von 400 Stück -> Käufermarkt mit Abwärtsdruck auf die Preise.",
+            "Vollkommenes Marktgleichgewicht bei 20,00 €.",
+            "Monopolistischer Sättigungspunkt."
+        ],
+        "correctAnswer": 0,
+        "explanation": "Marktmechanismus:
+- Liegt der Preis (20 €) UNTER dem Gleichgewichtspreis (40 €), fragen Kunden mehr nach (600 Stk.), als die Anbieter bereitstellen (200 Stk.).
+- Es entsteht ein Nachfrageüberhang von 600 - 200 = 400 Stück (Knappheit, Verkäufermarkt).
+- Liegt der Preis über 40 €, entsteht ein Angebotsüberhang (Käufermarkt)."
+    },
+    {
+        "id": 363,
+        "theme": "diagrams",
+        "topic": "Diagramm-Erkennung: Handelskalkulation Schema-Treppe",
+        "isDiagram": true,
+        "diagramType": "Kalkulationsschema Treppe",
+        "isBawueFocus": true,
+        "type": "multiple-choice",
+        "question": "Betrachte das abgebildete visuelle Kalkulationsschema. Welche Formel gilt für den Übergang vom Barverkaufspreis (BVP) zum Zielverkaufspreis (ZVP) bei Vorhandensein von 3 % Kundenskonto?",
+        "diagramTitle": "Visualisierung 10: Handelskalkulation Vorwärtskalkulation",
+        "diagramCaption": "Abbildung: Vollständiges Kalkulationsschema vom Listeneinkaufspreis (LEP) bis zum Listenverkaufspreis (LVP brutto)",
+        "diagramSvg": VisualDiagrams.getKalkulationTreeSvg(),
+        "options": [
+            "Rechnung 'im Hundert': ZVP = BVP / (1 - Skonto/100) = BVP / 0,97",
+            "Rechnung 'vom Hundert': ZVP = BVP * 1,03",
+            "Rechnung 'auf Hundert': ZVP = BVP * 0,97",
+            "ZVP = BVP + 19 % MwSt."
+        ],
+        "correctAnswer": 0,
+        "explanation": "Wichtige IHK-Regel der Handelskalkulation:
+- Kundenskonto und Kundenrabatt werden IM HUNDERT (vom höheren Zielpreis ausgehend) berechnet!
+- Da ZVP = 100 % und Skonto = 3 %, entspricht der BVP genau 97 %.
+- Formel: ZVP = BVP / 0,97 (oder BVP / (100 - Skonto) * 100)."
+    },
+    {
+        "id": 364,
+        "theme": "diagrams",
+        "topic": "Modellierungs-Aufgabe: UML Use-Case-Diagramm entwerfen",
+        "isDiagram": true,
+        "diagramType": "UML Use-Case-Diagramm",
+        "isBawueFocus": true,
+        "type": "open-text",
+        "question": "IHK-Prüfungsaufgabe (Modellierung): Skizziere auf dem Whiteboard oder beschreibe ein UML-Use-Case-Diagramm für ein Online-Bestellsystem mit folgenden Vorgaben:\n\n1. Akteure: 'Kunde' (primär) und 'Payment Gateway' (externes Zahlsystem).\n2. Use Cases: 'Artikel suchen', 'Bestellung aufgeben', 'Bonität prüfen' und 'Gutschein einlösen'.\n3. Beziehungen: Die Use-Cases müssen über eine Systemgrenze sauber abgegrenzt werden. Die 'Bonitätsprüfung' ist bei jeder Bestellung zwingend erforderlich (<<include>>), während das 'Gutschein einlösen' optional möglich ist (<<extend>>).\n\nVergleiche anschließend deine Skizze mit der visuellen Musterlösung.",
+        "solutionDiagramSvg": VisualDiagrams.getUseCaseDiagramSvg("Online-Shop Bestellsystem"),
+        "solutionDiagramCaption": "Visuelle Musterlösung: UML-Use-Case-Diagramm mit Akteuren, Systemgrenze, <<include>> und <<extend>>",
+        "musterloesung": "Grafische und textliche Musterlösung:\n\n1. Systemgrenze: Rechteck mit Titel 'Online-Shop Bestellsystem'\n2. Akteure:\n   - Akteur 'Kunde' links außerhalb der Grenze\n   - Akteur 'Payment Gateway' rechts außerhalb der Grenze\n3. Use-Cases (Ovale):\n   - 'Artikel suchen' verbunden mit Kunde\n   - 'Bestellung aufgeben' verbunden mit Kunde und Payment Gateway\n   - <<include>> Pfeil gestrichelt von 'Bestellung aufgeben' zu 'Bonität prüfen' (zwingender Teilprozess)\n   - <<extend>> Pfeil gestrichelt von 'Gutschein einlösen' zu 'Bestellung aufgeben' (optionale Erweiterung).",
+        "explanation": "Vollständige Modellierung eines UML-Use-Case-Diagramms gemäß DIN/ISO UML-Standard mit sauberer Unterscheidung von <<include>> und <<extend>>."
+    },
+    {
+        "id": 365,
+        "theme": "diagrams",
+        "topic": "Modellierungs-Aufgabe: UML Klassendiagramm entwerfen",
+        "isDiagram": true,
+        "diagramType": "UML Klassendiagramm",
+        "isBawueFocus": true,
+        "type": "open-text",
+        "question": "IHK-Prüfungsaufgabe (Modellierung): Modellieren Sie ein UML-Klassendiagramm für ein Bestellsystem mit folgenden Anforderungen:\n\n1. Klassen: Kunde, Bestellung und Bestellposition mit je 3 Fächern (Klassenname, Attribute, Methoden).\n2. Beziehungen:\n   - Ein Kunde kann 0..* Bestellungen besitzen (Assoziation).\n   - Eine Bestellung besteht aus 1..* Bestellpositionen als existenzabhängige Komposition (schwarze Raute).\n3. Sichtbarkeiten: Private Attribute (-) und öffentliche Methoden (+).\n\nSkizziere den Entwurf im Whiteboard und überprüfe ihn mit der grafischen Musterlösung.",
+        "solutionDiagramSvg": VisualDiagrams.getClassDiagramSvg(),
+        "solutionDiagramCaption": "Visuelle Musterlösung: UML-Klassendiagramm mit Attributen, Methoden, Komposition und Multiplizitäten",
+        "musterloesung": "Musterlösung für das Klassendiagramm:\n\n- Klasse Kunde: - kundenNr: int, - name: String, - email: String | + getBestellungen(), + addBestellung(), + getUmsatz(): double\n- Klasse Bestellung: - bestellNr: int, - datum: Date, - status: String | + berechneGesamtpreis(): double, + addPosition()\n- Klasse Bestellposition: - positionsNr: int, - menge: int, - einzelpreis: double | + getZwischensumme(): double\n- Multiplizität: Kunde [1] --- (0..*) Bestellung\n- Komposition: Bestellung [1] ◆--- (1..*) Bestellposition (schwarze Raute bei Bestellung).",
+        "explanation": "Klassendiagramm mit 3-teiligen Klassenboxen, Sichtbarkeitsmodifikatoren (+ / -), Multiplizitäten und Kompositionsraute."
+    },
+    {
+        "id": 366,
+        "theme": "diagrams",
+        "topic": "Modellierungs-Aufgabe: Entity-Relationship-Diagramm (ERD) nach Chen",
+        "isDiagram": true,
+        "diagramType": "Entity-Relationship-Modell (ERD)",
+        "isBawueFocus": true,
+        "type": "open-text",
+        "question": "IHK-Prüfungsaufgabe (Modellierung): Modellieren Sie ein konzeptionelles Datenmodell (ER-Modell in Chen-Notation) für ein Vertriebssystem:\n\n1. Entitäten: KUNDE, BESTELLUNG und ARTIKEL.\n2. Beziehungen: KUNDE 'erteilt' BESTELLUNG (1:n) und BESTELLUNG 'umfasst' ARTIKEL (n:m).\n3. Kennzeichnen Sie für jede Entität die Primärschlüssel-Attribute durch Unterstreichung.\n\nSkizziere dein ERD im Whiteboard und vergleiche mit der Musterlösung.",
+        "solutionDiagramSvg": VisualDiagrams.getErdDiagramSvg(),
+        "solutionDiagramCaption": "Visuelle Musterlösung: ERD nach Chen mit 1:n und n:m Kardinalitäten sowie unterstrichenen Primärschlüsseln",
+        "musterloesung": "Musterlösung für das ER-Diagramm:\n\n- Entität KUNDE [Rechteck] mit Attributen (KundenNr [PK unterstrichen], Name, Ort)\n- Beziehung 'erteilt' [Raute] mit Kardinalität 1:n (1 Kunde -> n Bestellungen)\n- Entität BESTELLUNG [Rechteck] mit Attributen (BestellNr [PK unterstrichen], Datum)\n- Beziehung 'umfasst' [Raute] mit Kardinalität n:m und Beziehungsattribut 'Menge'\n- Entität ARTIKEL [Rechteck] mit Attributen (ArtikelNr [PK unterstrichen], Bezeichnung, Preis).",
+        "explanation": "ER-Modellierung nach Chen mit korrekter Notation für Entitäten, Attribute, Rauten für Beziehungen und Multiplizitäten."
+    },
+    {
+        "id": 367,
+        "theme": "diagrams",
+        "topic": "Modellierungs-Aufgabe: Ereignisgesteuerte Prozesskette (EPK)",
+        "isDiagram": true,
+        "diagramType": "Ereignisgesteuerte Prozesskette (EPK)",
+        "isBawueFocus": true,
+        "type": "open-text",
+        "question": "IHK-Prüfungsaufgabe (Geschäftsprozesse): Erstellen Sie eine Ereignisgesteuerte Prozesskette (EPK) für den Prozess 'Kundenauftrag bearbeiten' mit folgenden Schritten:\n\n1. Start-Ereignis: 'Kunde bestellt Ware'\n2. Funktion: 'Bestellung prüfen'\n3. XOR-Verzweigung:\n   - Pfad A: 'Auftrag abgelehnt' -> 'Absage versenden' -> 'Kunde informiert'\n   - Pfad B: 'Auftrag bestätigt' -> 'Rechnung erstellen' -> 'Rechnung versendet'\n\nSkizziere die EPK auf dem Whiteboard und vergleiche mit der visuellen Musterlösung.",
+        "solutionDiagramSvg": VisualDiagrams.getEpkDiagramSvg(),
+        "solutionDiagramCaption": "Visuelle Musterlösung: EPK mit Ereignissen (Sechsecke), Funktionen (abgerundete Rechtecke) und XOR-Verzweigung",
+        "musterloesung": "Musterlösung EPK:\n\n- Sechseck: 'Kunde bestellt Ware' (Start-Ereignis)\n- Pfeil zu grünem abgerundeten Rechteck: 'Bestellung prüfen' (Funktion)\n- Pfeil zu Kreis mit XOR-Konnektor\n- Verzweigung zu zwei Sechsecken: 'Auftrag abgelehnt' ODER 'Auftrag bestätigt'\n- Nach 'Auftrag abgelehnt': Funktion 'Absage versenden' -> Ereignis 'Kunde informiert'\n- Nach 'Auftrag bestätigt': Funktion 'Rechnung erstellen' -> Ereignis 'Rechnung versendet'.",
+        "explanation": "Ereignisgesteuerte Prozesskette unter Einhaltung des Wechsels von Ereignis und Funktion sowie Verzweigungsregeln."
+    },
+    {
+        "id": 368,
+        "theme": "diagrams",
+        "topic": "Modellierungs-Aufgabe: Netzplan (DIN 69900) mit Kritischem Pfad",
+        "isDiagram": true,
+        "diagramType": "Netzplan (DIN 69900)",
+        "isBawueFocus": true,
+        "type": "open-text",
+        "question": "IHK-Prüfungsaufgabe (Projektmanagement): Berechnen und zeichnen Sie einen Netzplan nach DIN 69900 für folgende 4 Vorgänge:\n\n- Vorgang V1: Dauer 4 Tage, Vorgänger: keine\n- Vorgang V2: Dauer 6 Tage, Vorgänger: V1\n- Vorgang V3: Dauer 2 Tage, Vorgänger: V1\n- Vorgang V4: Dauer 8 Tage, Vorgänger: V2 und V3\n\nAufgaben:\n1. Berechnen Sie in der Vorwärtsrechnung FAZ und FEZ.\n2. Berechnen Sie in der Rückwärtsrechnung SAZ und SEZ.\n3. Bestimmen Sie für jeden Vorgang Gesamtpuffer (GP) und Freien Puffer (FP).\n4. Identifizieren Sie den Kritischen Pfad und die gesamte Projektdauer.",
+        "solutionDiagramSvg": VisualDiagrams.getNetzplanDiagramSvg(),
+        "solutionDiagramCaption": "Visuelle Musterlösung: DIN 69900 Netzplan mit 7-Felder-Knoten, Vor-/Rückwärtsrechnung und Kritischem Pfad",
+        "musterloesung": "Musterlösung Netzplan:\n\n1. Vorwärtsrechnung:\n- V1: FAZ=0, D=4 -> FEZ=4\n- V2: FAZ=4, D=6 -> FEZ=10\n- V3: FAZ=4, D=2 -> FEZ=6\n- V4: FAZ=max(10, 6)=10, D=8 -> FEZ=18 (Projektdauer = 18 Tage)\n\n2. Rückwärtsrechnung (Projektende = 18):\n- V4: SEZ=18, D=8 -> SAZ=10\n- V2: SEZ=10, D=6 -> SAZ=4\n- V3: SEZ=10, D=2 -> SAZ=8\n- V1: SEZ=min(4, 8)=4, D=4 -> SAZ=0\n\n3. Pufferzeiten:\n- V1: GP = 0 - 0 = 0, FP = 0\n- V2: GP = 4 - 4 = 0, FP = 0\n- V3: GP = 8 - 4 = 4 Tage, FP = 10 - 6 = 4 Tage\n- V4: GP = 10 - 10 = 0, FP = 0\n\n4. Kritischer Pfad:\nV1 -> V2 -> V4 mit Gesamtpuffer GP = 0 und einer Projektdauer von 18 Tagen.",
+        "explanation": "Vollständige Netzplanberechnung nach DIN 69900 mit 7-teiligem Knoten, Vorwärts- und Rückwärtsrechnung sowie Bestimmung des Kritischen Pfads."
+    }
 ];

@@ -2320,5 +2320,287 @@ function generateDynamicQuestions(typeMode = "mix") {
         }
     }
 
+    
+    // =========================================================================
+    // C.17 DYNAMISCHE DIAGRAMM-ERKENNUNGSAUFGABEN & MODELLIERUNG MIT LIVE-SVG
+    // =========================================================================
+
+    // C.17.1 Dynamische Use-Case-Diagramm Erkennung & Modellierung
+    for (let i = 0; i < 12; i++) {
+        const systems = [
+            { title: "Smart-Home Steuerungssystem", actor: "Hausbewohner", sub: "Cloud-Server" },
+            { title: "IT-Helpdesk Ticketsystem", actor: "Mitarbeiter", sub: "LDAP-Server" },
+            { title: "Krankenhaus-Patientenverwaltung", actor: "Arzt/Pfleger", sub: "Krankenkassen-API" },
+            { title: "Flugbuchungs-Portal", actor: "Passagier", sub: "Zahlungsschnittstelle" },
+            { title: "Lagerlogistik-Verwaltung", actor: "Lagerist", sub: "ERP-System" }
+        ];
+        const sys = systems[i % systems.length];
+        const isOpen = shouldBeOpenText();
+
+        if (isOpen) {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "diagrams",
+                topic: `UML Use-Case-Modellierung: ${sys.title}`,
+                isDiagram: true,
+                diagramType: "UML Use-Case-Diagramm",
+                isBawueFocus: true,
+                type: "open-text",
+                question: `Prüfungsaufgabe UML (Modellierung): Erstelle für das '${sys.title}' ein vollständiges UML-Anwendungsfalldiagramm.\n\nVorgaben:\n- Primärer Akteur: '${sys.actor}'\n- Sekundäres Fremdsystem: '${sys.sub}'\n- Bette wesentliche Anwendungsfälle in die Systemgrenze ein.\n- Integriere eine zwingende <<include>>-Beziehung (z. B. Authentifizierung/Prüfung) und eine optionale <<extend>>-Beziehung.\n\nSkizziere dein Diagramm auf dem Whiteboard und vergleiche mit der grafischen Musterlösung.`,
+                solutionDiagramSvg: VisualDiagrams.getUseCaseDiagramSvg(sys.title),
+                solutionDiagramCaption: `Grafische Referenz-Musterlösung für: ${sys.title}`,
+                musterloesung: `Musterlösung Use-Case-Diagramm (${sys.title}):\n- Systemgrenze als Rechteck mit Titel '${sys.title}'.\n- Akteur '${sys.actor}' links außerhalb der Systemgrenze mit Assoziationslinien zu den Kernanwendungsfällen.\n- Akteur '${sys.sub}' rechts außerhalb der Systemgrenze.\n- Gestrichelter Pfeil mit <<include>> für zwingende Teilabläufe.\n- Gestrichelter Pfeil mit <<extend>> für optionale Erweiterungen.`,
+                explanation: "Anwendungsfalldiagramme beschreiben die funktionale Sicht eines Systems aus Perspektive der Akteure (DIN/ISO UML)."
+            });
+        } else {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "diagrams",
+                topic: `Diagramm-Erkennung: UML Use-Case (${sys.title})`,
+                isDiagram: true,
+                diagramType: "UML Use-Case-Diagramm",
+                isBawueFocus: true,
+                type: "multiple-choice",
+                question: `Betrachte das abgebildete Modell für '${sys.title}'. Welcher Diagrammtyp liegt vor und welche Modellierungselemente werden verwendet?`,
+                diagramTitle: `Systemmodell: ${sys.title}`,
+                diagramCaption: `Abbildung: Modellierung für '${sys.title}' mit Akteuren, Ovale als Use-Cases und Systemgrenze`,
+                diagramSvg: VisualDiagrams.getUseCaseDiagramSvg(sys.title),
+                options: [
+                    "UML-Use-Case-Diagramm (Akteure, Anwendungsfall-Ovale, Systemgrenze, <<include>> & <<extend>> Beziehungen)",
+                    "UML-Aktivitätsdiagramm mit Swimlanes",
+                    "UML-Zustandsdiagramm mit Transitionen",
+                    "ER-Datenmodell nach Chen"
+                ],
+                correctAnswer: 0,
+                explanation: `Das Diagramm zeigt ein UML-Use-Case-Diagramm für das ${sys.title}. Die Männchen symbolisieren Akteure, die Ovale Anwendungsfälle und das Rechteck die Systemgrenze.`
+            });
+        }
+    }
+
+    // C.17.2 Dynamische Klassendiagramm-Erkennung & Multiplizitäten
+    for (let i = 0; i < 10; i++) {
+        const isOpen = shouldBeOpenText();
+        if (isOpen) {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "diagrams",
+                topic: "UML Klassendiagramm: Struktur & Methoden",
+                isDiagram: true,
+                diagramType: "UML Klassendiagramm",
+                isBawueFocus: true,
+                type: "open-text",
+                question: "Prüfungsaufgabe UML (Klassendiagramm): Entwerfen Sie ein 3-teiliges UML-Klassendiagramm für die Entitäten 'Kunde', 'Bestellung' und 'Bestellposition'. Berücksichtigen Sie Attribute mit Datentypen, Methoden mit Rückgabetypen, Multiplizitäten (1 zu 1..*) sowie eine existenzabhängige Komposition (schwarze Raute).\n\nNutze das Whiteboard für deine Skizze und vergleiche deine Lösung mit der visuellen Musterlösung.",
+                solutionDiagramSvg: VisualDiagrams.getClassDiagramSvg(),
+                solutionDiagramCaption: "Visuelle Musterlösung: UML-Klassendiagramm",
+                musterloesung: "Musterlösung:\n1. Dreigeteilte Klassenboxen (Name, Attribute, Methoden).\n2. Sichtbarkeiten: - für private Attribute, + für public Methoden.\n3. Komposition: Ausgefüllte Raute bei Bestellung zur Kennzeichnung der Lebenszeitbindung der Positionen.\n4. Multiplizitäten: 1 Kunde hat 0..* Bestellungen; 1 Bestellung hat 1..* Bestellpositionen.",
+                explanation: "Objektorientierte Modellierung mit UML-Klassendiagrammen nach ISO/IEC 19505."
+            });
+        } else {
+            const multVariations = [
+                { q: "Was bedeutet die Multiplizität '1..*' bei der Klasse Bestellposition?", correct: "Mindestens eine, aber beliebig viele Bestellpositionen pro Bestellung.", wrong1: "Genau eine Position.", wrong2: "Beliebig viele inklusive null Positionen.", wrong3: "Genau 10 Positionen." },
+                { q: "Welche Sichtbarkeit bedeutet das Vorzeichen '-' vor Attributen wie '- kundenNr: int'?", correct: "Private (nur innerhalb der eigenen Klasse sichtbar)", wrong1: "Public (überall öffentlich zugänglich)", wrong2: "Protected (nur im Paket und Unterklassen)", wrong3: "Package-Private" },
+                { q: "Was kennzeichnet die ausgefüllte schwarze Raute an der Beziehung zur Klasse Bestellposition?", correct: "Komposition (Existenzabhängigkeit: Löschung von Bestellung löscht alle Positionen)", wrong1: "Aggregation (Lose Bindung ohne Löschweitergabe)", wrong2: "Vererbung", wrong3: "Schnittstellen-Implementierung" }
+            ];
+            const v = multVariations[i % multVariations.length];
+
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "diagrams",
+                topic: "Diagramm-Erkennung: UML Klassendiagramm Details",
+                isDiagram: true,
+                diagramType: "UML Klassendiagramm",
+                isBawueFocus: true,
+                type: "multiple-choice",
+                question: `Betrachte das abgebildete UML-Klassendiagramm.\n${v.q}`,
+                diagramTitle: "UML-Klassendiagramm Prüfung",
+                diagramCaption: "Abbildung: 3-Fach-Klassenboxen mit Attributen, Methoden, Kompositionsraute und Multiplizitäten",
+                diagramSvg: VisualDiagrams.getClassDiagramSvg(),
+                options: [
+                    v.correct,
+                    v.wrong1,
+                    v.wrong2,
+                    v.wrong3
+                ],
+                correctAnswer: 0,
+                explanation: "UML-Klassendiagramm-Standard: 3 Fächer (Klasse, Attribute, Operationen), Sichtbarkeiten (+ public, - private, # protected), Rauten (schwarz = Komposition, weiß = Aggregation)."
+            });
+        }
+    }
+
+    // C.17.3 Dynamische ERD-Erkennung & Kardinalitäten
+    for (let i = 0; i < 10; i++) {
+        const isOpen = shouldBeOpenText();
+        if (isOpen) {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "diagrams",
+                topic: "ER-Modellierung: Chen-Notation & Normalisierung",
+                isDiagram: true,
+                diagramType: "Entity-Relationship-Modell (ERD)",
+                isBawueFocus: true,
+                type: "open-text",
+                question: "Prüfungsaufgabe Datenbanken (ERD): Erstelle ein vollständiges Entity-Relationship-Diagramm in Chen-Notation für ein Handelssystem mit den Entitäten KUNDE, BESTELLUNG und ARTIKEL.\n\nVorgaben:\n- KUNDE erteilt BESTELLUNG (1:n)\n- BESTELLUNG umfasst ARTIKEL (n:m) mit Beziehungsattribut Menge\n- Unterstreiche alle Primärschlüssel-Attribute\n\nSkizziere das ERD im Whiteboard und überprüfe es mit der grafischen Musterlösung.",
+                solutionDiagramSvg: VisualDiagrams.getErdDiagramSvg(),
+                solutionDiagramCaption: "Visuelle Musterlösung: ERD in Chen-Notation",
+                musterloesung: "Musterlösung ERD (Chen):\n- Entitätstypen: Rechtecke KUNDE, BESTELLUNG, ARTIKEL.\n- Beziehungstypen: Rauten 'erteilt' (1:n) und 'umfasst' (n:m).\n- Attribute: Ellipsen, wobei Primärschlüssel (KundenNr, BestellNr, ArtikelNr) unterstrichen sind.\n- Beziehungsattribut 'Menge' an der Raute 'umfasst'.",
+                explanation: "Konzeptioneller Datenbankentwurf mit Entity-Relationship-Modellen (Chen-Notation)."
+            });
+        } else {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "diagrams",
+                topic: "Diagramm-Erkennung: ERD (Chen-Notation)",
+                isDiagram: true,
+                diagramType: "Entity-Relationship-Modell (ERD)",
+                isBawueFocus: true,
+                type: "multiple-choice",
+                question: "Betrachte das abgebildete Datenmodell in Chen-Notation. Wie wird die n:m Beziehung zwischen 'BESTELLUNG' und 'ARTIKEL' bei der Überführung in ein relationales Datenbankschema aufgelöst?",
+                diagramTitle: "Entity-Relationship-Modell (ERD)",
+                diagramCaption: "Abbildung: Chen-Notation mit Entitäten (Rechtecke), Beziehungen (Rauten) und Attributen (Ellipsen)",
+                diagramSvg: VisualDiagrams.getErdDiagramSvg(),
+                options: [
+                    "Durch Erzeugung einer Zwischentabelle / Verknüpfungstabelle (z. B. 'Bestellposition') mit den Fremdschlüsseln BestellNr und ArtikelNr sowie dem Attribut Menge.",
+                    "Indem die ArtikelNr direkt als Fremdschlüssel in die Tabelle BESTELLUNG eingetragen wird.",
+                    "Indem die BestellNr als Fremdschlüssel in die Tabelle ARTIKEL eingetragen wird.",
+                    "n:m Beziehungen können ohne zusätzliche Zwischentabelle direkt in SQL gespeichert werden."
+                ],
+                correctAnswer: 0,
+                explanation: "Im relationalen Modell können n:m Beziehungen nicht direkt abgebildet werden. Sie müssen in zwei 1:n Beziehungen mit einer Verknüpfungstabelle (Composite Key aus beiden Fremdschlüsseln + Beziehungsattribute wie Menge) aufgelöst werden."
+            });
+        }
+    }
+
+    // C.17.4 Dynamische EPK- & BPMN-Erkennung
+    for (let i = 0; i < 10; i++) {
+        const isEpk = i % 2 === 0;
+        const isOpen = shouldBeOpenText();
+
+        if (isEpk) {
+            if (isOpen) {
+                dynamicQuestions.push({
+                    id: currentId++,
+                    theme: "diagrams",
+                    topic: "Prozessmodellierung: Ereignisgesteuerte Prozesskette (EPK)",
+                    isDiagram: true,
+                    diagramType: "Ereignisgesteuerte Prozesskette (EPK)",
+                    isBawueFocus: true,
+                    type: "open-text",
+                    question: "Prüfungsaufgabe Prozessmodellierung (EPK): Modellieren Sie eine EPK für den Prozess 'Kundenauftragsprüfung' mit den Elementen: Ereignis 'Kunde bestellt Ware' -> Funktion 'Bestellung prüfen' -> XOR-Verzweigung in 'Auftrag abgelehnt' bzw. 'Auftrag bestätigt' mit Folgeaktivitäten.\n\nSkizziere die EPK auf dem Whiteboard und vergleiche mit der visuellen Musterlösung.",
+                    solutionDiagramSvg: VisualDiagrams.getEpkDiagramSvg(),
+                    solutionDiagramCaption: "Visuelle Musterlösung: EPK mit Ereignissen, Funktionen und XOR-Konnektor",
+                    musterloesung: "Musterlösung EPK:\n- Strikter Wechsel zwischen Ereignissen (Sechseck) und Funktionen (abgerundetes Rechteck).\n- Konnektor XOR nach Funktion 'Bestellung prüfen'.\n- Zwei getrennte Pfade für Zusage/Rechnungserstellung und Ablehnung/Absage.",
+                    explanation: "EPK-Regeln: Wechsel von Ereignis (Zustand) und Funktion (Aktivität). Keine direkte Verzweigung nach Ereignissen ohne vorherige Entscheidung/Funktion."
+                });
+            } else {
+                dynamicQuestions.push({
+                    id: currentId++,
+                    theme: "diagrams",
+                    topic: "Diagramm-Erkennung: EPK Formregeln",
+                    isDiagram: true,
+                    diagramType: "Ereignisgesteuerte Prozesskette (EPK)",
+                    isBawueFocus: true,
+                    type: "multiple-choice",
+                    question: "Betrachte die abgebildete Ereignisgesteuerte Prozesskette (EPK). Welche fundamentale Syntaxregel der EPK ist in dem Modell korrekt eingehalten?",
+                    diagramTitle: "EPK Prozessmodell",
+                    diagramCaption: "Abbildung: EPK mit hexagonalen Ereignissen, rechteckigen Funktionen und XOR-Entscheidung",
+                    diagramSvg: VisualDiagrams.getEpkDiagramSvg(),
+                    options: [
+                        "Auf ein Ereignis folgt eine Funktion und auf eine Funktion folgt ein Ereignis (alternierende Reihenfolge; Ereignisse lösen Funktionen aus).",
+                        "Eine EPK besteht ausschließlich aus Funktionen ohne Ereignisse.",
+                        "Ereignisse dürfen selbst Entscheidungen treffen und verzweigen.",
+                        "Funktionen werden immer durch Rauten dargestellt."
+                    ],
+                    correctAnswer: 0,
+                    explanation: "Grundregel der EPK: Ereignisse (Zustände) und Funktionen (Aktivitäten) wechseln sich ab. Da Ereignisse passiv sind, können sie keine Entscheidungen treffen – Verzweigungen (XOR/OR/AND) müssen stets von einer Funktion ausgehen."
+                });
+            }
+        } else {
+            // BPMN 2.0
+            if (isOpen) {
+                dynamicQuestions.push({
+                    id: currentId++,
+                    theme: "diagrams",
+                    topic: "BPMN 2.0: Ablaufmodellierung mit Gateways",
+                    isDiagram: true,
+                    diagramType: "BPMN 2.0",
+                    isBawueFocus: true,
+                    type: "open-text",
+                    question: "Prüfungsaufgabe Prozessmodellierung (BPMN 2.0): Zeichnen Sie ein standardkonformes BPMN 2.0 Diagramm für einen Warenversand-Prozess mit Start-Event, zwei Aufgaben (Tasks), einem exklusiven Gateway (XOR) und End-Event.\n\nSkizziere dein BPMN-Diagramm auf dem Whiteboard und vergleiche mit der Referenzgrafik.",
+                    solutionDiagramSvg: VisualDiagrams.getBpmnDiagramSvg(),
+                    solutionDiagramCaption: "Visuelle Musterlösung: BPMN 2.0 Standarddiagramm",
+                    musterloesung: "Musterlösung BPMN 2.0:\n- Start-Event: Grüner dünner Kreis mit Prozessstart\n- Tasks: Abgerundete Rechtecke mit Aktivitäten\n- Exclusive Gateway: Raute mit 'X' für datenbasierte Entscheidung (exklusiver Pfad)\n- End-Event: Roter dicker Kreis zur Beendigung des Prozesses.",
+                    explanation: "BPMN 2.0 (Business Process Model and Notation) ist der weltweite Standard für die Modellierung von Geschäftsprozessen."
+                });
+            } else {
+                dynamicQuestions.push({
+                    id: currentId++,
+                    theme: "diagrams",
+                    topic: "Diagramm-Erkennung: BPMN 2.0 Symbole",
+                    isDiagram: true,
+                    diagramType: "BPMN 2.0",
+                    isBawueFocus: true,
+                    type: "multiple-choice",
+                    question: "Betrachte das abgebildete BPMN 2.0 Diagramm. Welcher Unterschied besteht zwischen einem exklusiven Gateway (XOR / Raute mit X) und einem parallelen Gateway (AND / Raute mit +)?",
+                    diagramTitle: "BPMN 2.0 Geschäftsprozess",
+                    diagramCaption: "Abbildung: BPMN 2.0 Prozessablauf mit Startereignis, Tasks, XOR-Gateway und Endereignis",
+                    diagramSvg: VisualDiagrams.getBpmnDiagramSvg(),
+                    options: [
+                        "Exklusives Gateway (X): Es wird genau ein einziger Ausgangspfad gewählt. Paralleles Gateway (+): Alle ausgehenden Pfade werden gleichzeitig/parallel ausgeführt.",
+                        "Exklusives Gateway führt alle Pfade aus, paralleles Gateway nur einen.",
+                        "Es gibt keinen Unterschied, beide Symbole sind austauschbar.",
+                        "Parallele Gateways dienen nur zur Fehlerbehandlung."
+                    ],
+                    correctAnswer: 0,
+                    explanation: "BPMN-Gateways: Exclusive Gateway (XOR, Raute mit X) wählt exakt einen Pfad basierend auf Bedingungen. Parallel Gateway (AND, Raute mit +) spaltet den Token auf und startet alle Pfade parallel."
+                });
+            }
+        }
+    }
+
+    // C.17.5 Dynamische Netzplan- & Kritischer Pfad Generatoren
+    for (let i = 0; i < 8; i++) {
+        const isOpen = shouldBeOpenText();
+        if (isOpen) {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "diagrams",
+                topic: "Netzplantechnik: DIN 69900 Pufferzeiten & Projektlaufzeit",
+                isDiagram: true,
+                diagramType: "Netzplan (DIN 69900)",
+                isBawueFocus: true,
+                type: "open-text",
+                question: "Prüfungsaufgabe Projektmanagement (Netzplan nach DIN 69900):\nGegeben ist ein Projektnetzplan mit Vorgängen V1 (4 Tage), V2 (6 Tage), V3 (2 Tage) und V4 (8 Tage).\n\nBerechnen Sie:\n1. Früheste Termine (FAZ, FEZ)\n2. Späteste Termine (SAZ, SEZ)\n3. Gesamtpuffer (GP) und Freier Puffer (FP) für jeden Vorgang\n4. Den Kritischen Pfad und die Gesamtdauer.\n\nSkizziere den Netzplan im Whiteboard und überprüfe ihn mit der visuellen Musterlösung.",
+                solutionDiagramSvg: VisualDiagrams.getNetzplanDiagramSvg(),
+                solutionDiagramCaption: "Visuelle Musterlösung: DIN 69900 Netzplan mit 7-Felder-Knoten",
+                musterloesung: "Musterlösung Netzplan:\n- V1 (D=4): FAZ=0, FEZ=4, SAZ=0, SEZ=4, GP=0, FP=0 (Kritisch)\n- V2 (D=6): FAZ=4, FEZ=10, SAZ=4, SEZ=10, GP=0, FP=0 (Kritisch)\n- V3 (D=2): FAZ=4, FEZ=6, SAZ=8, SEZ=10, GP=4, FP=4\n- V4 (D=8): FAZ=10, FEZ=18, SAZ=10, SEZ=18, GP=0, FP=0 (Kritisch)\n- Gesamtdauer: 18 Tage. Kritischer Pfad: V1 -> V2 -> V4.",
+                explanation: "Netzplantechnik nach DIN 69900 mit Vorwärts-/Rückwärtsrechnung und Pufferberechnung."
+            });
+        } else {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "diagrams",
+                topic: "Diagramm-Erkennung: DIN 69900 7-Felder-Knoten",
+                isDiagram: true,
+                diagramType: "Netzplan (DIN 69900)",
+                isBawueFocus: true,
+                type: "multiple-choice",
+                question: "Betrachte den abgebildeten DIN 69900 Netzplan. Wie berechnet sich der Gesamtpuffer (GP) und der Freie Puffer (FP) eines Vorgangs?",
+                diagramTitle: "DIN 69900 Netzplan Analyse",
+                diagramCaption: "Abbildung: Netzplan mit 7-Felder-Knotenstruktur und rot markiertem kritischen Pfad",
+                diagramSvg: VisualDiagrams.getNetzplanDiagramSvg(),
+                options: [
+                    "Gesamtpuffer GP = SAZ - FAZ (oder SEZ - FEZ); Freier Puffer FP = min(FAZ Nachfolger) - FEZ",
+                    "GP = FEZ + SEZ; FP = SAZ + FAZ",
+                    "GP = Dauer * 2; FP = Dauer / 2",
+                    "Puffer existieren nur auf dem kritischen Pfad"
+                ],
+                correctAnswer: 0,
+                explanation: "Formeln der Netzplantechnik nach DIN 69900:
+- Gesamtpuffer (GP): Zeitspanne, um die ein Vorgang verschoben werden kann, ohne das Projektende zu gefährden (GP = SAZ - FAZ = SEZ - FEZ).
+- Freier Puffer (FP): Zeitspanne, um die ein Vorgang verschoben werden kann, ohne den frühesten Anfang des Nachfolgers zu verschieben (FP = FAZ_nachfolger - FEZ)."
+            });
+        }
+    }
+
     return dynamicQuestions;
 }
