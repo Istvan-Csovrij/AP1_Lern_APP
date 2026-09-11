@@ -6676,5 +6676,295 @@ WHERE Email IS NULL OR Email = '';
         "solutionDiagramCaption": "Visuelle Musterlösung: DIN 69900 Netzplan mit 7-Felder-Knoten, Vor-/Rückwärtsrechnung und Kritischem Pfad",
         "musterloesung": "Musterlösung Netzplan:\n\n1. Vorwärtsrechnung:\n- V1: FAZ=0, D=4 -> FEZ=4\n- V2: FAZ=4, D=6 -> FEZ=10\n- V3: FAZ=4, D=2 -> FEZ=6\n- V4: FAZ=max(10, 6)=10, D=8 -> FEZ=18 (Projektdauer = 18 Tage)\n\n2. Rückwärtsrechnung (Projektende = 18):\n- V4: SEZ=18, D=8 -> SAZ=10\n- V2: SEZ=10, D=6 -> SAZ=4\n- V3: SEZ=10, D=2 -> SAZ=8\n- V1: SEZ=min(4, 8)=4, D=4 -> SAZ=0\n\n3. Pufferzeiten:\n- V1: GP = 0 - 0 = 0, FP = 0\n- V2: GP = 4 - 4 = 0, FP = 0\n- V3: GP = 8 - 4 = 4 Tage, FP = 10 - 6 = 4 Tage\n- V4: GP = 10 - 10 = 0, FP = 0\n\n4. Kritischer Pfad:\nV1 -> V2 -> V4 mit Gesamtpuffer GP = 0 und einer Projektdauer von 18 Tagen.",
         "explanation": "Vollständige Netzplanberechnung nach DIN 69900 mit 7-teiligem Knoten, Vorwärts- und Rückwärtsrechnung sowie Bestimmung des Kritischen Pfads."
-    }
+    },
+{
+    "id": 369,
+    "theme": "lf1",
+    "topic": "Vertragsrecht: Realsicherheiten & Eigentumsvorbehalt (Woche 1 - 6 Punkte)",
+    "isBawueFocus": true,
+    "type": "open-text",
+    "question": "IHK-Prüfungsaufgabe (LF 1 - Vertragsrecht & Kreditsicherheiten):\nDie it-tec GmbH möchte sich bei Warenlieferungen an Firmenkunden gegen Zahlungsausfälle absichern.\n\n1. Erläutern Sie, wie sich das Unternehmen durch die Vereinbarung eines Eigentumsvorbehalts absichern kann. (2 Punkte)\n2. Unterscheiden Sie den einfachen vom verlängerten Eigentumsvorbehalt. (2 Punkte)\n3. Erläutern Sie den Unterschied zwischen Besitz (§ 854 BGB) und Eigentum (§ 903 BGB) im rechtlichen Sinne. (2 Punkte)",
+    "musterloesung": "Musterlösung (6 Punkte):\n\n1. Absicherung durch Eigentumsvorbehalt (2 Punkte):\n- Die it-tec GmbH vereinbart im Kaufvertrag bzw. in den AGB, dass die gelieferte Ware bis zur vollständigen Bezahlung aller Forderungen Eigentum des Verkäufers bleibt (§ 449 BGB).\n- Gerät der Kunde in Zahlungsverzug, kann die it-tec GmbH vom Vertrag zurücktreten und die Ware als Eigentümer herausverlangen (Schutz vor Insolvenz des Kunden).\n\n2. Einfacher vs. Verlängerter Eigentumsvorbehalt (2 Punkte):\n- Einfacher Eigentumsvorbehalt: Das Eigentum verbleibt beim Verkäufer, bis der Kaufpreis vollständig entrichtet ist. Die Ware darf vom Käufer vor Bezahlung weder weiterveräußert noch verarbeitet werden.\n- Verlängerter Eigentumsvorbehalt: Der Käufer darf die Ware im ordnungsgemäßen Geschäftsbetrieb weiterverarbeiten oder an Dritte weiterverkaufen. Im Gegenzug tritt der Käufer bereits im Voraus die aus dem Weiterverkauf entstehenden Kundenforderungen an den Verkäufer ab (Vorausabtretung). Bei Weiterverarbeitung erwirbt der Lieferant anteiliges Miteigentum an der neuen Sache.\n\n3. Besitz vs. Eigentum nach BGB (2 Punkte):\n- Besitz (§ 854 BGB): Tatsächliche Sachherrschaft über eine Sache (wer die Sache physisch in Händen hält / nutzt).\n- Eigentum (§ 903 BGB): Rechtliche Herrschaftsmacht über eine Sache (wem die Sache rechtlich gehört; der Eigentümer darf nach Belieben mit der Sache verfahren und Dritte von jeder Einwirkung ausschließen).",
+    "explanation": "Der Eigentumsvorbehalt ist eine typische Realsicherheit bei Warenlieferungen auf Ziel (§ 449 BGB). Beim verlängerten Eigentumsvorbehalt sichert die Vorausabtretung (Zession) den Lieferanten auch nach Weiterveräußerung der Ware ab."
+},
+{
+    "id": 370,
+    "theme": "lf1",
+    "topic": "Vertragsarten: Kauf auf Probe vs. Kauf zur Probe (Woche 1 - 4 Punkte)",
+    "isBawueFocus": true,
+    "type": "open-text",
+    "question": "IHK-Prüfungsaufgabe (LF 1 - Kaufvertragsarten):\nUnterscheiden Sie die beiden gesetzlichen Kaufvertragsarten 'Kauf auf Probe' (§ 454 BGB) und 'Kauf zur Probe'.\n\nGehen Sie in Ihrer Antwort auf Vertragsbindung, Rückgaberecht und den typischen betriebswirtschaftlichen Zweck ein. (4 Punkte)",
+    "musterloesung": "Musterlösung (4 Punkte):\n\n1. Kauf auf Probe (§ 454 BGB) (2 Punkte):\n- Zustandekommen unter einer aufschiebenden Bedingung (Genehmigungsvorbehalt des Käufers).\n- Der Käufer erhält die Ware zur Ansicht bzw. für einen vereinbarten Zeitraum zum Testen.\n- Gefällt die Ware nicht, kann der Käufer sie innerhalb der Frist ohne Angabe von Gründen zurückgeben (der Kaufvertrag wird dann nicht wirksam).\n- Erst mit Billigung oder Ablauf der Prüffrist ohne Ablehnung wird der Kaufvertrag verbindlich wirksam.\n\n2. Kauf zur Probe (2 Punkte):\n- Ein sofort rechtswirksamer, unbedingter Kaufvertrag über eine kleine Menge einer Ware.\n- Zweck: Das Unternehmen möchte die Qualität, Maßhaltigkeit oder Verwendbarkeit des Materials für eventuelle spätere Großaufträge in der eigenen Praxis testen.\n- Es besteht KEIN automatisches Rückgaberecht (die Kleinmenge muss bezahlt und behalten werden, sofern mangelfrei).\n- Bei Zufriedenheit folgt üblicherweise eine größere Folgebestellung.",
+    "explanation": "Kauf auf Probe = Vertrag wird erst mit Billigung nach Testphase rechtswirksam (Rückgaberecht). Kauf zur Probe = sofort fester Kauf einer Kleinmenge zur Qualitätsprüfung für Folgebestellungen."
+},
+{
+    "id": 371,
+    "theme": "lf1",
+    "topic": "Marktformen & Wettbewerb: Sack&Pack AG (Woche 1 - 4 Punkte)",
+    "isBawueFocus": true,
+    "type": "multiple-choice",
+    "question": "Die Sack&Pack AG agiert aktuell auf einem Markt mit wenigen Anbietern und einer sehr großen Anzahl von Nachfragern. In den nächsten Jahren ist zu erwarten, dass viele neue Anbieter auf den Markt drängen.\n\nWelche Marktform liegt aktuell vor und welche Marktform wird in Zukunft entstehen?",
+    "options": [
+        "Aktuell: Angebotsoligopol | Zukunft: Polypol",
+        "Aktuell: Nachfrageoligopol | Zukunft: Monopol",
+        "Aktuell: Angebotsmonopol | Zukunft: Zweiseitiges Oligopol",
+        "Aktuell: Polypol | Zukunft: Angebotsoligopol"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Aktuell: Wenige Anbieter + viele Nachfrager = Angebotsoligopol. Zukunft: Wenn viele neue Anbieter hinzutreten (viele Anbieter + viele Nachfrager), entsteht ein Polypol (vollständige Konkurrenz mit starkem Preiswettbewerb)."
+},
+{
+    "id": 372,
+    "theme": "lf1",
+    "topic": "Personal- & Kostenrechnung: Stundensatz interner Mitarbeiter vs. Extern (Woche 1 - 6 Punkte)",
+    "isCalculation": true,
+    "isBawueFocus": true,
+    "type": "open-text",
+    "question": "IHK-Prüfungsaufgabe (LF 1 / LF 6 - Stundensatzkalkulation):\nDie Geschäftsleitung prüft, ob eine IT-Aufgabe intern besetzt oder an einen externen Berater (Stundensatz: 85,00 EUR) vergeben werden soll.\n\nKalkulationsdaten für den internen IT-Spezialisten:\n- Kalender-Arbeitstage pro Jahr: 260 Tage\n- Tariflicher Jahresurlaub: 30 Tage\n- Kalkulatorische Ausfalltage durch Krankheit: 5 Tage\n- Gesetzliche Feiertage (auf Arbeitstage fallend): 5 Tage\n- Vereinbarte tägliche Arbeitszeit: 7,8 Stunden\n- Gesamte Jahrespersonalkosten (inkl. AG-Sozialanteile & Gemeinkostenzuschlag): 140.000,00 EUR\n\nAufgaben:\n1. Berechnen Sie die produktiven Arbeitstage und Arbeitsstunden pro Jahr. (2 Punkte)\n2. Ermitteln Sie den kalkulatorischen internen Stundensatz auf zwei Nachkommastellen genau. (2 Punkte)\n3. Vergleichen Sie den internen Stundensatz mit dem externen Berater und geben Sie eine begründete Empfehlung ab. (2 Punkte)",
+    "musterloesung": "Musterlösung (6 Punkte):\n\n1. Produktive Jahresarbeitszeit (2 Punkte):\n- Produktive Arbeitstage = 260 Kalendertage - 30 (Urlaub) - 5 (Krankheit) - 5 (Feiertage) = 220 Arbeitstage\n- Produktive Arbeitsstunden = 220 Tage * 7,8 Stunden/Tag = 1.716,0 Stunden pro Jahr\n\n2. Interner Stundensatz (2 Punkte):\n- Formel: Interner Stundensatz = Gesamte Jahrespersonalkosten / Produktive Jahresstunden\n- Stundensatz = 140.000,00 EUR / 1.716 h = 81,58508... EUR ≈ 81,59 EUR/Stunde\n\n3. Wirtschaftlicher Vergleich & Empfehlung (2 Punkte):\n- Vergleich: Der interne Stundensatz (81,59 EUR/h) ist um 3,41 EUR/h (ca. 4,01 %) günstiger als der Stundensatz des externen Beraters (85,00 EUR/h).\n- Empfehlung: Aus Kostengründen sowie zur dauerhaften Bindung von technischem Know-how im Unternehmen ist der Einsatz des internen IT-Spezialisten vorzuziehen.",
+    "explanation": "Berechnung: 140.000 EUR / ((260 - 30 - 5 - 5) * 7,8) = 140.000 / 1.716 = 81,59 EUR/h. Da 81,59 EUR < 85,00 EUR, ist der interne Mitarbeiter günstiger."
+},
+{
+    "id": 373,
+    "theme": "lf6",
+    "topic": "Materialwirtschaft & Beschaffung: Bestellverfahren für Filament-Spulen (Woche 1 - 8 Punkte)",
+    "isBawueFocus": true,
+    "type": "open-text",
+    "question": "IHK-Prüfungsaufgabe (LF 1 / LF 6 - Materialdisposition):\nBei Materialbestellungen können das Bestellrhythmus- und das Bestellpunktverfahren angewendet werden.\n\n1. Unterscheiden Sie die beiden Bestellverfahren bezüglich Auslöser, Bestellintervall und Bestellmenge. (5 Punkte)\n2. Die it-tec GmbH ist ein neues Unternehmen am Markt und fertigt 3D-Druckteile. Es liegen noch keinerlei historische Vergleichswerte über den genauen Materialverbrauch der Filament-Spulen vor.\nEmpfehlen und begründen Sie, welches Bestellverfahren für die Filament-Spulen der it-tec GmbH geeignet ist. (3 Punkte)",
+    "musterloesung": "Musterlösung (8 Punkte):\n\n1. Gegenüberstellung der Bestellverfahren (5 Punkte):\n- Bestellrhythmusverfahren:\n  * Auslöser: Zeitgesteuert in festen Zeitabständen (z. B. jeden Montag oder alle 14 Tage).\n  * Bestellmenge: Variabel je nach bisherigem Verbrauch (Auffüllen bis zum Soll- bzw. Höchstbestand) oder festgelegte Losgröße.\n  * Vorteil / Eignung: Geringer Kontrollaufwand; ideal bei konstantem, gleichmäßigem und gut vorhersehbarem Materialverbrauch.\n\n- Bestellpunktverfahren:\n  * Auslöser: Bestandsgesteuert, sobald der reale Lagerbestand durch Entnahmen den Meldebestand erreicht oder unterschreitet (Meldebestand = [Tagesverbrauch * Beschaffungszeit] + Mindestbestand).\n  * Bestellzeitpunkt: Variabel je nach tatsächlichem Verbrauch.\n  * Bestellmenge: In der Regel feste, wirtschaftliche Bestellmenge (optimale Losgröße).\n  * Vorteil / Eignung: Laufende Überwachung durch das ERP-/Warenwirtschaftssystem; ideal bei schwankendem und unregelmäßigem Bedarf.\n\n2. Empfehlung für die it-tec GmbH (3 Punkte):\n- Empfohlenes Verfahren: Bestellpunktverfahren.\n- Begründung: Da die it-tec GmbH als neuer Marktteilnehmer noch keine Erfahrungswerte und Vergangenheitsdaten über den Spulenverbrauch besitzt, ist der Bedarf stark schwankend und schwer planbar. Beim Bestellrhythmusverfahren bestünde die akute Gefahr, dass das Material vor dem festen Bestelltermin verbraucht ist und es zum Produktionsstillstand kommt. Das Bestellpunktverfahren sichert durch die kontinuierliche Bestandsüberwachung und den Meldebestand die Liefer- und Produktionsfähigkeit zuverlässig ab.",
+    "explanation": "Bestellrhythmusverfahren = feste Termine (nur bei konstantem Verbrauch). Bestellpunktverfahren = fester Meldebestand (ideal bei schwankendem oder neuem Bedarf)."
+},
+{
+    "id": 374,
+    "theme": "lf6",
+    "topic": "Handelskalkulation: Handlungskosten Online vs. Stationär (Woche 1 - 6 Punkte)",
+    "isBawueFocus": true,
+    "type": "open-text",
+    "question": "IHK-Prüfungsaufgabe (LF 6 - Kostenrechnung & Handelsbetrieb):\n1. Erläutern Sie, was im betrieblichen Rechnungswesen unter dem Begriff 'Handlungskosten' verstanden wird und nennen Sie 4 konkrete Kostenpositionen. (2 Punkte)\n2. Erläutern Sie die Unterscheidung zwischen Einzelkosten und Gemeinkosten bei Handlungskosten. (2 Punkte)\n3. Erläutern Sie, warum die Handlungskosten im Online-Handel (E-Commerce) in der Regel deutlich geringer sind als im stationären Filialgeschäft. (2 Punkte)",
+    "musterloesung": "Musterlösung (6 Punkte):\n\n1. Definition & Kostenpositionen (2 Punkte):\n- Definition: Handlungskosten sind alle betrieblichen Aufwendungen eines Handelsunternehmens, die neben den reinen Wareneinstandskosten anfallen, um die Handelsleistung (Einkauf, Lagerung, Bereitstellung, Verkauf, Verwaltung) zu erbringen.\n- Kostenpositionen (Beispiele):\n  * Raumkosten (Miete, Heizung, Strom, Reinigung für Geschäfts- und Lagerräume)\n  * Personalkosten & Personalnebenkosten (Löhne, Gehälter, Verkaufsberater, Logistik)\n  * Lagerkosten (Lagerverwaltung, Instandhaltung, Lagereinrichtung)\n  * Werbekosten (Online-Marketing, Printwerbung, Prospekte)\n  * Verpackungs- und Versandkosten sowie allgemeine Verwaltungskosten.\n\n2. Einzelkosten vs. Gemeinkosten (2 Punkte):\n- Einzelkosten ('besondere Handlungskosten'): Können einem bestimmten Kostenträger (Auftrag/Ware) direkt zugerechnet werden (z. B. auftragsspezifische Spezialverpackung, direkte Frachtkosten).\n- Gemeinkosten ('allgemeine Handlungskosten'): Fallen für das Gesamtunternehmen an und können den Waren nur indirekt über einen prozentualen Handlungskostenzuschlagssatz (HKZ) zugerechnet werden (z. B. Ladenmiete, Verwaltungsgehälter, Buchhaltung).\n\n3. Handlungskosten im Online- vs. Stationärhandel (2 Punkte):\n- Im Online-Handel entfallen sehr teure Verkaufsflächen und Schaufenster in hochpreisigen Innenstadtlagen (stattdessen günstige Logistikzentren am Stadtrand).\n- Deutlich weniger Beratungspersonal im Direktkontakt auf der Verkaufsfläche erforderlich (automatisierter Webshop mit Self-Service).\n- Skalierbare Prozesse in der automatisierten Auftragsabwicklung und effizientere zentrale Lagerhaltung mit hoher Umschlagshäufigkeit.\n- Günstigere und hochgradig zielgerichtete digitale Werbekanäle (Performance Marketing).",
+    "explanation": "Handlungskosten umfassen Raum-, Personal-, Lager-, Verwaltungs- und Vertriebskosten. Sie werden als Handlungskostenzuschlagssatz (HKZ) auf den Bareinkaufspreis kalkuliert."
+},
+{
+    "id": 375,
+    "theme": "lf2",
+    "topic": "Hardware & Strom: USV-Überbrückungszeit für Server (Woche 1 - 5 Punkte)",
+    "isCalculation": true,
+    "isBawueFocus": true,
+    "type": "open-text",
+    "question": "IHK-Prüfungsaufgabe (LF 2 / LF 6 - USV-Berechnung):\nZwei Server sollen mit einer Unterbrechungsfreien Stromversorgung (USV) gegen Netzausfälle abgesichert werden.\n\nTechnische Angaben:\n- 2 Server mit jeweils einem 700 W Netzteil (Volllastbetrieb)\n- USV mit 4 Akkus zu je 100 Ah Ladungsmenge (Q)\n- Nennspannung pro Akku: 12 V\n- Hinweise: Akkus sind bei Netzausfall zu 100 % geladen und werden vollständig entladen. Umwandlungsverluste werden nicht berücksichtigt.\n\nErmitteln Sie unter Angabe der Rechenwege:\n1. Die an die USV angeschlossene elektrische Leistung (P in Watt). (1 Punkt)\n2. Die gesamte Ladungsmenge der 4 Akkus (Q in Ah). (1 Punkt)\n3. Die elektrische Energie, welche die 4 Akkus abgeben können (W in Wh). (1 Punkt)\n4. Die theoretische Überbrückungszeit der USV in Stunden und Minuten (auf volle Minuten abgerundet). (2 Punkte)",
+    "musterloesung": "Musterlösung (5 Punkte):\n\n1. Angeschlossene Leistung (P) (1 Punkt):\n- P = 2 Server * 700 W = 1.400 W (Watt)\n\n2. Gesamte Ladungsmenge der 4 Akkus (Q) (1 Punkt):\n- Q_ges = 4 Akkus * 100 Ah = 400 Ah (Amperestunden)\n\n3. Gespeicherte elektrische Energie (W) (1 Punkt):\n- Formel: W = Q * U\n- W = 400 Ah * 12 V = 4.800 Wh (Wattstunden)\n\n4. Theoretische Überbrückungszeit (t) (2 Punkte):\n- Formel: P = W / t  =>  t = W / P\n- t = 4.800 Wh / 1.400 W = 3,42857... Stunden\n- Minutenberechnung: 0,42857 h * 60 min/h = 25,71 Minuten\n- Ergebnis: 3 Stunden und 25 Minuten (abgerundet).",
+    "explanation": "P = 2 * 700 W = 1.400 W. W = 4 * 100 Ah * 12 V = 4.800 Wh. Überbrückungszeit t = 4.800 Wh / 1.400 W = 3,428 h = 3 Stunden und 25 Minuten."
+},
+{
+    "id": 376,
+    "theme": "lf6",
+    "topic": "Finanzierung & Investition: Abzahlungsdarlehen vs. Leasing (Woche 1 - 9 Punkte)",
+    "isCalculation": true,
+    "isBawueFocus": true,
+    "type": "open-text",
+    "question": "IHK-Prüfungsaufgabe (LF 1 / LF 6 - Investitions- & Finanzierungsvergleich):\nDie Techi Automotive AG plant die Beschaffung von Robotern im Anschaffungswert von 240.000,00 EUR.\n\nAlternative 1: Raten- / Abzahlungsdarlehen\n- Darlehensbetrag: 240.000,00 EUR\n- Laufzeit: 4 Jahre mit gleichbleibender Tilgung am Jahresende\n- Zinssatz: 5,0 % p.a. auf die jeweilige Restschuld zu Jahresbeginn\n\nAlternative 2: Leasingvertrag\n- Laufzeit: 4 Jahre (48 Monate) mit monatlicher Leasingrate von 6.000,00 EUR\n- Vereinbarter Restwert bei Übernahme am Laufzeitende: 16.000,00 EUR\n\nAufgaben:\n1. Erstellen Sie den Tilgungsplan für das Abzahlungsdarlehen (Anfangsschuld, Zinsen, Tilgung, Kreditrate, Restschuld pro Jahr). (4 Punkte)\n2. Berechnen Sie die Gesamtkosten für beide Alternativen. (2 Punkte)\n3. Geben Sie eine begründete Stellungnahme ab, welche Alternative wirtschaftlicher ist, wie hoch die absolute Ersparnis ist und berechnen Sie die prozentuale Mehrbelastung des teureren Angebots. (3 Punkte)",
+    "musterloesung": "Musterlösung (9 Punkte):\n\n1. Tilgungsplan Abzahlungsdarlehen (Lineare Tilgung = 240.000 EUR / 4 = 60.000 EUR p.a.) (4 Punkte):\n- Jahr 1: Anfangsschuld 240.000,00 EUR | Zinsen (5%): 12.000,00 EUR | Tilgung: 60.000,00 EUR | Kreditrate: 72.000,00 EUR | Restschuld: 180.000,00 EUR\n- Jahr 2: Anfangsschuld 180.000,00 EUR | Zinsen (5%): 9.000,00 EUR | Tilgung: 60.000,00 EUR | Kreditrate: 69.000,00 EUR | Restschuld: 120.000,00 EUR\n- Jahr 3: Anfangsschuld 120.000,00 EUR | Zinsen (5%): 6.000,00 EUR | Tilgung: 60.000,00 EUR | Kreditrate: 66.000,00 EUR | Restschuld: 60.000,00 EUR\n- Jahr 4: Anfangsschuld 60.000,00 EUR | Zinsen (5%): 3.000,00 EUR | Tilgung: 60.000,00 EUR | Kreditrate: 63.000,00 EUR | Restschuld: 0,00 EUR\n- Summen: Gesamtzinsen = 30.000,00 EUR | Gesamttilgung = 240.000,00 EUR | Gesamtzahlung = 270.000,00 EUR\n\n2. Gesamtkostenvergleich (2 Punkte):\n- Gesamtkosten Darlehen = 240.000,00 EUR + 30.000,00 EUR = 270.000,00 EUR\n- Gesamtkosten Leasing = (48 Monate * 6.000,00 EUR) + 16.000,00 EUR (Restwert) = 288.000,00 EUR + 16.000,00 EUR = 304.000,00 EUR\n\n3. Stellungnahme & Prozentabweichung (3 Punkte):\n- Absolute Ersparnis = 304.000,00 EUR - 270.000,00 EUR = 34.000,00 EUR\n- Prozentuale Mehrbelastung des Leasings = (34.000,00 EUR / 270.000,00 EUR) * 100 = 12,5925... % ≈ 12,59 %\n- Stellungnahme: Die Finanzierung des Roboters über das Raten- / Abzahlungsdarlehen ist um 34.000,00 EUR (12,59 %) günstiger als das Leasingangebot.",
+    "explanation": "Darlehen Gesamtzinsen = 12k + 9k + 6k + 3k = 30.000 EUR -> Gesamtkosten 270.000 EUR. Leasing = 48 * 6.000 + 16.000 = 304.000 EUR. Differenz: 34.000 EUR bzw. 12,59% bezogen auf 270.000 EUR."
+},
+{
+    "id": 377,
+    "theme": "lf2",
+    "topic": "Digitalisierung & Speicherbedarf: Bildscans in der Qualitätssicherung (Woche 1 - 4 Punkte)",
+    "isCalculation": true,
+    "isBawueFocus": true,
+    "type": "open-text",
+    "question": "IHK-Prüfungsaufgabe (LF 2 / LF 4 - Bildauflösung & Speicherbedarf):\nIn einer industriellen Fertigungsanlage werden Bauteile zur Qualitätskontrolle digital erfasst.\n\nProduktionsangaben:\n- Betriebszeit pro Tag: 16 Stunden\n- Taktung: 30 Teile verlassen pro Stunde die Fertigung\n- 2/3 der Teile werden beidseitig (2 Scans) erfasst, die übrigen 1/3 der Teile nur einseitig (1 Scan)\n\nScan-Parameter:\n- Erfasste Scanfläche: 50 cm x 30 cm\n- Auflösung: 400 dpi x 400 dpi\n- Farbtiefe: 24 Bit (unkomprimiert RGB)\n- Umrechnungsfaktor: 1 Inch = 2,54 cm\n\nAufgaben:\n1. Ermitteln Sie die Gesamtzahl der Scans/Aufnahmen pro Tag mit Rechenweg. (2 Punkte)\n2. Ermitteln Sie das unkomprimierte Speichervolumen pro Tag in vollen GiB (Binärpräfix) mit Rechenweg. (2 Punkte)",
+    "musterloesung": "Musterlösung (4 Punkte):\n\n1. Anzahl Scans pro Tag (2 Punkte):\n- Teile pro Tag = 16 Stunden * 30 Teile/Stunde = 480 gefertigte Teile/Tag\n- Beidseitig gescannt (2/3) = 480 * (2/3) = 320 Teile => 320 * 2 Aufnahmen = 640 Scans\n- Einseitig gescannt (1/3) = 480 * (1/3) = 160 Teile => 160 * 1 Aufnahme = 160 Scans\n- Gesamtzahl Scans/Tag = 640 + 160 = 800 Scans pro Tag\n\n2. Speicherplatzbedarf pro Tag in GiB (2 Punkte):\n- Umrechnung Scanfläche in Inch:\n  * Breite = 50 cm / 2,54 cm/Inch = 19,6850... Inch\n  * Höhe = 30 cm / 2,54 cm/Inch = 11,8110... Inch\n- Pixelanzahl bei 400 dpi:\n  * Pixel horizontal = 19,6850 * 400 dpi = 7.874,015... ≈ 7.874 Pixel\n  * Pixel vertikal = 11,8110 * 400 dpi = 4.724,409... ≈ 4.724 Pixel\n  * Gesamte Pixel pro Bild = 7.874 * 4.724 = 37.196.776 Pixel\n- Dateigröße pro Bild bei 24 Bit (3 Bytes pro Pixel):\n  * Dateigröße = 37.196.776 Pixel * 3 Bytes = 111.590.328 Bytes (≈ 111,59 MB)\n- Gesamt-Tagesvolumen für 800 Scans:\n  * Gesamtbytes = 800 Scans * 111.590.328 Bytes = 89.272.262.400 Bytes\n- Umrechnung in GiB (1 GiB = 1024^3 = 1.073.741.824 Bytes):\n  * Speichervolumen = 89.272.262.400 / 1.073.741.824 = 83,1413... GiB ≈ 84 GiB (aufgerundet).\n(Hinweis bei 600 Scans: 600 * 111.590.328 / 1024^3 = 62,35 GiB ≈ 63 GiB).",
+    "explanation": "Tages-Scans: 480 Teile -> 320 * 2 + 160 * 1 = 800 Scans. Pixel: (50/2,54*400) * (30/2,54*400) = 37,2 MPixel * 3 Bytes = 111,6 MB pro Scan. 800 * 111,6 MB = 89,27 GB = 83,14 GiB."
+},
+{
+    "id": 378,
+    "theme": "lf6",
+    "topic": "Materialwirtschaft: Verschnittberechnung im Hundert & Lagerdisposition (Woche 1 - 6 Punkte)",
+    "isCalculation": true,
+    "isBawueFocus": true,
+    "type": "open-text",
+    "question": "IHK-Prüfungsaufgabe (LF 1 / LF 6 - Materialbedarfs- & Verschnittkalkulation):\nFür die Netzwerkinstallation eines Bürogebäudes müssen 2.300 Meter Verlegekabel im Gebäude fest installiert werden. Der Betrieb kalkuliert mit 10 % Verschnitt von der einzukaufenden Kabelmenge.\n\nLagerbestandsdaten vor Projektstart:\n- Gesamter Lagerbestand: 2.400 Meter\n- Eiserner Bestand (Mindestbestand): 500 Meter\n- Werkstattbestand (in laufender Fertigung): 200 Meter\n- Vormerkbestand für andere Kundenprojekte: 400 Meter\n\nAufgaben:\n1. Ermitteln Sie die für das Projekt verfügbare Kabelmenge aus dem Lagerbestand. (2 Punkte)\n2. Berechnen Sie die einzukaufende Kabelmenge (inkl. 10 % Verschnitt 'im Hundert') in vollen Metern. (2 Punkte)\n3. Berechnen Sie die beim Lieferanten zu bestellende Kabelmenge. (2 Punkte)",
+    "musterloesung": "Musterlösung (6 Punkte):\n\n1. Verfügbare Lagermenge (2 Punkte):\n- Formel: Verfügbare Menge = Lagerbestand - Eiserner Bestand - Werkstattbestand - Vormerkbestand\n- Rechnung: 2.400 m - 500 m - 200 m - 400 m = 1.300 Meter\n\n2. Einzukaufende Kabelmenge (Rechnung 'im Hundert') (2 Punkte):\n- Da der Verschnitt 10 % von der Einkaufsmenge (100 %) ausmacht, entsprechen die benötigten 2.300 m genau 90 % der einzukaufenden Menge.\n- Formel: Einzukaufende Menge = Benötigte Menge / (100 % - Verschnittquote) = 2.300 m / 0,90\n- Rechnung: 2.300 / 0,90 = 2.555,555... Meter => aufgerundet: 2.556 Meter\n\n3. Tatsächliche Bestellmenge (2 Punkte):\n- Formel: Bestellmenge = Einzukaufende Menge - Verfügbare Lagermenge\n- Rechnung: 2.556 m - 1.300 m = 1.256 Meter.",
+    "explanation": "Verschnitt im Hundert: 2.300 / (1 - 0,10) = 2.556 m. Verfügbarer Lagerbestand: 2.400 - 500 - 200 - 400 = 1.300 m. Bestellmenge = 2.556 - 1.300 = 1.256 m."
+},
+{
+    "id": 379,
+    "theme": "lf3",
+    "topic": "Netzwerktechnik: Bandbreitenberechnung VoIP & Datenabgleich (Woche 1 - 3 Punkte)",
+    "isCalculation": true,
+    "isBawueFocus": true,
+    "type": "open-text",
+    "question": "IHK-Prüfungsaufgabe (LF 3 - Netzwerkbandbreitenanalyse):\nDie Klammer GmbH plant für die FMX GmbH eine Netzwerkmodernisierung.\n\nDer externe Internet- und Standortanschluss muss folgende Anforderungen erfüllen:\n- 25 gleichzeitige Telefonate über Voice over IP (VoIP) mit je mindestens 100 kbit/s pro Sprachkanal\n- Kontinuierlicher Produktionsdatenabgleich mit dem Server der Firmenzentrale: mindestens 10 Mbit/s\n\nAufgabe:\nErmitteln Sie die notwendige symmetrische Gesamtbandbreite des Anschlusses in Mbit/s (unter Angabe des Rechenwegs). (3 Punkte)",
+    "musterloesung": "Musterlösung (3 Punkte):\n\n1. Bandbreitenbedarf VoIP-Telefonie:\n- Bandbreite VoIP = 25 Kanäle * 100 kbit/s = 2.500 kbit/s\n- Umrechnung in Mbit/s: 2.500 kbit/s / 1.000 = 2,5 Mbit/s\n\n2. Bandbreitenbedarf Datenabgleich:\n- Bandbreite Produktionsdaten = 10,0 Mbit/s\n\n3. Erforderliche Gesamtbandbreite:\n- Gesamtbandbreite = 2,5 Mbit/s + 10,0 Mbit/s = 12,5 Mbit/s (symmetrisch im Up- und Download).",
+    "explanation": "25 * 100 kbit/s = 2.500 kbit/s = 2,5 Mbit/s. 2,5 Mbit/s + 10 Mbit/s = 12,5 Mbit/s symmetrische Gesamtbandbreite."
+},
+{
+    "id": 380,
+    "theme": "lf1",
+    "topic": "Realsicherheiten: Eigentumsvorbehalt nach BGB (Woche 1 - MC)",
+    "isBawueFocus": true,
+    "type": "multiple-choice",
+    "question": "Was versteht man unter einem 'verlängerten Eigentumsvorbehalt'?",
+    "options": [
+        "Der Käufer darf die Ware weiterverarbeiten oder weiterverkaufen und tritt im Gegenzug die daraus entstehenden Kundenforderungen an den Verkäufer ab (Vorausabtretung).",
+        "Die Zahlungsfrist des Kunden wird automatisch um weitere 30 Tage verlängert.",
+        "Der Eigentumsvorbehalt gilt über den Tod des Verkäufers hinaus.",
+        "Der Verkäufer behält das Eigentum für immer, auch nach vollständiger Bezahlung."
+    ],
+    "correctAnswer": 0,
+    "explanation": "Beim verlängerten Eigentumsvorbehalt darf die Vorbehaltsware im ordnungsgemäßen Geschäftsbetrieb veräußert/verarbeitet werden; als Sicherheit tritt der Kunde die neuen Forderungen an den Lieferanten ab."
+},
+{
+    "id": 381,
+    "theme": "lf1",
+    "topic": "Kaufvertragsarten: Kauf auf Probe vs. Kauf zur Probe (Woche 1 - MC)",
+    "isBawueFocus": true,
+    "type": "multiple-choice",
+    "question": "Welche Aussage unterscheidet den 'Kauf auf Probe' (§ 454 BGB) vom 'Kauf zur Probe'?",
+    "options": [
+        "Beim Kauf auf Probe hat der Käufer ein gesetzliches Rückgaberecht bei Nichtgefallen (aufschiebende Bedingung); der Kauf zur Probe ist ein sofort verbindlicher Kauf einer Kleinmenge ohne Rückgaberecht.",
+        "Beim Kauf zur Probe kann der Käufer die Ware jederzeit kostenlos zurückgeben.",
+        "Beide Begriffe bezeichnen exakt dieselbe Rechtsform.",
+        "Beim Kauf auf Probe muss immer erst nach 12 Monaten bezahlt werden."
+    ],
+    "correctAnswer": 0,
+    "explanation": "Kauf auf Probe = Kauf unter Genehmigungsvorbehalt (Rückgaberecht). Kauf zur Probe = fester Kauf einer Kleinmenge zur Qualitätsprüfung für Folgebestellungen."
+},
+{
+    "id": 382,
+    "theme": "lf1",
+    "topic": "Personal- & Kostenrechnung: Stundensatz interner Mitarbeiter (Woche 1 - MC)",
+    "isCalculation": true,
+    "isBawueFocus": true,
+    "type": "multiple-choice",
+    "question": "Ein IT-Systemadministrator verursacht Jahresgesamtkosten von 140.000,00 EUR. Bei 260 Arbeitstagen fallen 30 Urlaubstage, 5 Krankheitstage und 5 Feiertage an. Die tägliche Arbeitszeit beträgt 7,8 Stunden.\n\nWie hoch ist der kalkulatorische Stundensatz des Administrators?",
+    "options": [
+        "81,59 EUR/h",
+        "68,91 EUR/h",
+        "85,00 EUR/h",
+        "74,79 EUR/h"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Produktive Tage: 260 - 30 - 5 - 5 = 220 Tage. Produktive Stunden: 220 * 7,8 h = 1.716 h. Stundensatz: 140.000 EUR / 1.716 h = 81,585... EUR ≈ 81,59 EUR/h."
+},
+{
+    "id": 383,
+    "theme": "lf6",
+    "topic": "Materialwirtschaft: Meldebestand beim Bestellpunktverfahren (Woche 1 - MC)",
+    "isCalculation": true,
+    "isBawueFocus": true,
+    "type": "multiple-choice",
+    "question": "Wie berechnet sich der Meldebestand beim Bestellpunktverfahren in der Materialwirtschaft?",
+    "options": [
+        "Meldebestand = (Tagesverbrauch * Lieferzeit in Tagen) + Mindestbestand (Sicherheitsbestand)",
+        "Meldebestand = Höchstbestand - Mindestbestand",
+        "Meldebestand = (Jahresbedarf / 360) * Sicherheitsbestand",
+        "Meldebestand = Durchschnittlicher Lagerbestand + Optimale Bestellmenge"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Der Meldebestand muss den voraussichtlichen Verbrauch während der Wiederbeschaffungszeit (Tagesverbrauch * Lieferzeit) plus den eisernen Sicherheitsbestand abdecken."
+},
+{
+    "id": 384,
+    "theme": "lf6",
+    "topic": "Handelskalkulation: Handlungskostenzuschlagssatz (Woche 1 - MC)",
+    "isCalculation": true,
+    "isBawueFocus": true,
+    "type": "multiple-choice",
+    "question": "Wie wird der Handlungskostenzuschlagssatz (HKZ in %) in der Handelskalkulation rechnerisch ermittelt?",
+    "options": [
+        "HKZ (%) = (Handlungskosten / Wareneinsatz bzw. Fertigungsmaterial) * 100",
+        "HKZ (%) = (Gewinn / Selbstkosten) * 100",
+        "HKZ (%) = (Umsatzerlöse / Gesamtkosten) * 100",
+        "HKZ (%) = (Listenverkaufspreis - Bezugspreis) / 100"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Der Handlungskostenzuschlagssatz setzt die gesamten Handlungskosten ins Verhältnis zum Wareneinsatz (HKZ = [Handlungskosten / Wareneinsatz] * 100) und wird auf den Bezugspreis aufgeschlagen."
+},
+{
+    "id": 385,
+    "theme": "lf2",
+    "topic": "Hardware & Strom: USV-Überbrückungszeit (Woche 1 - MC)",
+    "isCalculation": true,
+    "isBawueFocus": true,
+    "type": "multiple-choice",
+    "question": "Eine USV besitzt 4 Akkus à 100 Ah bei 12 V. Daran sind zwei Server mit je 700 W Netzteilen unter Volllast angeschlossen. Verluste werden vernachlässigt.\n\nWie lange kann die USV die Server bei Stromausfall versorgen?",
+    "options": [
+        "3 Stunden und 25 Minuten",
+        "4 Stunden und 10 Minuten",
+        "2 Stunden und 45 Minuten",
+        "1 Stunde und 50 Minuten"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Gesamtenergie W = 4 * 100 Ah * 12 V = 4.800 Wh. Gesamtleistung P = 2 * 700 W = 1.400 W. t = 4.800 / 1.400 = 3,428 h = 3 Std. und 25 Min."
+},
+{
+    "id": 386,
+    "theme": "lf6",
+    "topic": "Finanzierung & Investition: Abzahlungsdarlehen vs. Leasing (Woche 1 - MC)",
+    "isCalculation": true,
+    "isBawueFocus": true,
+    "type": "multiple-choice",
+    "question": "Ein Abzahlungsdarlehen über 240.000 EUR (4 Jahre, 5 % Zinsen p.a., 60.000 EUR Tilgung p.a.) steht einem Leasingangebot (48 Monate à 6.000 EUR + 16.000 EUR Restwert) gegenüber.\n\nWelche Aussage zum Kostenvergleich ist korrekt?",
+    "options": [
+        "Das Abzahlungsdarlehen ist um 34.000 EUR (12,59 %) günstiger als das Leasingangebot.",
+        "Das Leasingangebot ist um 34.000 EUR günstiger als das Darlehen.",
+        "Beide Finanzierungsarten verursachen exakt die gleichen Gesamtkosten von 304.000 EUR.",
+        "Das Darlehen verursacht 304.000 EUR Gesamtkosten, das Leasing nur 270.000 EUR"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Darlehen Gesamtkosten: 240.000 + 30.000 Zinsen = 270.000 EUR. Leasing: 288.000 + 16.000 = 304.000 EUR. Differenz: 34.000 EUR (12,59 % günstiger)."
+},
+{
+    "id": 387,
+    "theme": "lf2",
+    "topic": "Digitalisierung & Speicherbedarf: Scanqualität & Farbtiefe (Woche 1 - MC)",
+    "isCalculation": true,
+    "isBawueFocus": true,
+    "type": "multiple-choice",
+    "question": "Wie viele Bytes belegt ein unkomprimiertes Farbbild mit 24 Bit Farbtiefe und einer Auflösung von 7.874 x 4.724 Pixeln?",
+    "options": [
+        "ca. 111,6 MB (111.590.328 Bytes)",
+        "ca. 37,2 MB (37.196.776 Bytes)",
+        "ca. 297,5 MB (297.574.208 Bytes)",
+        "ca. 892,7 MB (892.722.624 Bytes)"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Pixel = 7.874 * 4.724 = 37.196.776 Pixel. Bei 24 Bit Farbtiefe (24 Bit / 8 Bit/Byte = 3 Bytes/Pixel) ergibt sich: 37.196.776 * 3 = 111.590.328 Bytes ≈ 111,59 MB."
+},
+{
+    "id": 388,
+    "theme": "lf6",
+    "topic": "Materialwirtschaft: Verschnittkalkulation 'im Hundert' (Woche 1 - MC)",
+    "isCalculation": true,
+    "isBawueFocus": true,
+    "type": "multiple-choice",
+    "question": "Ein Installationsbetrieb benötigt 2.300 m Kabel und rechnet mit 10 % Verschnitt von der einzukaufenden Menge (Rechnung im Hundert). Welche Menge muss insgesamt beschafft werden?",
+    "options": [
+        "2.556 Meter (Rechnung: 2.300 m / 0,90)",
+        "2.530 Meter (Rechnung: 2.300 m * 1,10)",
+        "2.300 Meter (Rechnung: ohne Verschnitt)",
+        "2.760 Meter (Rechnung: 2.300 m * 1,20)"
+    ],
+    "correctAnswer": 0,
+    "explanation": "Bei 'Verschnitt von der Einkaufsmenge' handelt es sich um eine Prozentrechnung im Hundert: Einkaufsmenge (100 %) - 10 % Verschnitt = 90 % Nettomenge. 2.300 / 0,90 = 2.555,56 m ≈ 2.556 Meter."
+},
+{
+    "id": 389,
+    "theme": "lf3",
+    "topic": "Netzwerktechnik: VoIP-Bandbreitenberechnung (Woche 1 - MC)",
+    "isCalculation": true,
+    "isBawueFocus": true,
+    "type": "multiple-choice",
+    "question": "Wie viel Bandbreite in Mbit/s benötigen 25 parallele VoIP-Gespräche bei einer Datenrate von 100 kbit/s pro Gespräch plus ein Produktionsdatenabgleich von 10 Mbit/s?",
+    "options": [
+        "12,5 Mbit/s",
+        "10,25 Mbit/s",
+        "35,0 Mbit/s",
+        "2,5 Mbit/s"
+    ],
+    "correctAnswer": 0,
+    "explanation": "25 * 100 kbit/s = 2.500 kbit/s = 2,5 Mbit/s. Zusammen mit dem Datenabgleich (10 Mbit/s) ergibt sich eine Mindestbandbreite von 12,5 Mbit/s."
+}
 ];

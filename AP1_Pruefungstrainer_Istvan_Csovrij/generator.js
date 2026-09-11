@@ -2619,6 +2619,319 @@ function generateDynamicQuestions(typeMode = "mix") {
             });
         }
     }
+// =========================================================================
+    // === AUTHENTISCHE DYNAMISCHE GENERATOREN: WOCHE 1 (LF 1, LF 2, LF 3, LF 6) ===
+    // =========================================================================
+
+    // G1. Stundensatzberechnung Personal (LF 1 / LF 6)
+    for (let i = 0; i < 15; i++) {
+        const calDays = Math.floor(Math.random() * 21) + 250; // 250 - 270 Tage
+        const vacation = Math.floor(Math.random() * 6) + 28; // 28 - 33 Tage
+        const sickDays = Math.floor(Math.random() * 6) + 4; // 4 - 9 Tage
+        const holidays = Math.floor(Math.random() * 5) + 4; // 4 - 8 Tage
+        const dailyHours = [7.5, 7.8, 8.0][Math.floor(Math.random() * 3)];
+        const yearlyCost = (Math.floor(Math.random() * 8) + 10) * 10000; // 100.000 - 170.000 EUR
+        const externRate = Math.floor(Math.random() * 25) + 75; // 75 - 99 EUR/h
+
+        const prodDays = calDays - vacation - sickDays - holidays;
+        const prodHours = Math.round(prodDays * dailyHours * 10) / 10;
+        const hourRate = Math.round((yearlyCost / prodHours) * 100) / 100;
+        const isInternalCheaper = hourRate < externRate;
+        const diffRate = Math.round(Math.abs(hourRate - externRate) * 100) / 100;
+
+        const isOpen = shouldBeOpenText();
+        if (isOpen) {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "lf1",
+                topic: "Kostenrechnung: Kalkulatorischer Mitarbeiter-Stundensatz (LF 1/6)",
+                isCalculation: true,
+                isBawueFocus: true,
+                type: "open-text",
+                question: `Prüfungsaufgabe Stundensatzkalkulation (LF 1 / LF 6):\nEin Unternehmen prüft den Einsatz eines internen IT-Mitarbeiters im Vergleich zu einem externen Dienstleister (${externRate.toFixed(2)} EUR/h).\n\nKalkulationsdaten:\n- Kalenderarbeitstage pro Jahr: ${calDays} Tage\n- Jahresurlaub: ${vacation} Tage\n- Krankheitstage: ${sickDays} Tage\n- Feiertage auf Arbeitstagen: ${holidays} Tage\n- Tägliche Arbeitszeit: ${dailyHours} Stunden\n- Jahrespersonalkosten: ${yearlyCost.toLocaleString('de-DE')} EUR\n\nAufgaben:\n1. Berechnen Sie die produktiven Jahresstunden.\n2. Berechnen Sie den internen Stundensatz (auf 2 Nachkommastellen genau).\n3. Geben Sie an, welche Option wirtschaftlicher ist.`,
+                musterloesung: `Musterlösung:\n1. Produktive Tage = ${calDays} - ${vacation} - ${sickDays} - ${holidays} = ${prodDays} Tage.\n   Produktive Stunden = ${prodDays} * ${dailyHours} h = ${prodHours.toLocaleString('de-DE')} Stunden/Jahr.\n2. Interner Stundensatz = ${yearlyCost.toLocaleString('de-DE')} EUR / ${prodHours.toLocaleString('de-DE')} h = ${hourRate.toFixed(2)} EUR/h.\n3. Wirtschaftlichkeit: ${isInternalCheaper ? `Der interne Mitarbeiter (${hourRate.toFixed(2)} EUR/h) ist um ${diffRate.toFixed(2)} EUR/h günstiger als der externe Berater (${externRate.toFixed(2)} EUR/h).` : `Der externe Berater (${externRate.toFixed(2)} EUR/h) ist um ${diffRate.toFixed(2)} EUR/h günstiger als der interne Mitarbeiter (${hourRate.toFixed(2)} EUR/h).`}`,
+                explanation: `Berechnung: Jahreskosten / ([Kalendertage - Urlaub - Krankheit - Feiertage] * tägliche Arbeitszeit) = ${yearlyCost} / (${prodDays} * ${dailyHours}) = ${hourRate.toFixed(2)} EUR/h.`
+            });
+        } else {
+            const wrong1 = (hourRate * 1.15).toFixed(2);
+            const wrong2 = (hourRate * 0.85).toFixed(2);
+            const wrong3 = (hourRate + 12.5).toFixed(2);
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "lf1",
+                topic: "Kostenrechnung: Kalkulatorischer Mitarbeiter-Stundensatz (LF 1/6)",
+                isCalculation: true,
+                isBawueFocus: true,
+                type: "multiple-choice",
+                question: `Ein IT-Spezialist verursacht Jahresgesamtkosten von ${yearlyCost.toLocaleString('de-DE')} EUR. Bei ${calDays} Arbeitstagen, ${vacation} Urlaubstagen, ${sickDays} Krankheitstagen und ${holidays} Feiertagen arbeitet er täglich ${dailyHours} Stunden.\n\nWie hoch ist der kalkulatorische Stundensatz?`,
+                options: [
+                    `${hourRate.toFixed(2)} EUR/h`,
+                    `${wrong1} EUR/h`,
+                    `${wrong2} EUR/h`,
+                    `${wrong3} EUR/h`
+                ],
+                correctAnswer: 0,
+                explanation: `Produktive Stunden: (${calDays} - ${vacation} - ${sickDays} - ${holidays}) * ${dailyHours} = ${prodHours} h. Stundensatz = ${yearlyCost} EUR / ${prodHours} h = ${hourRate.toFixed(2)} EUR/h.`
+            });
+        }
+    }
+
+    // G2. USV-Überbrückungszeit (LF 2 / LF 6)
+    for (let i = 0; i < 15; i++) {
+        const serverCount = Math.floor(Math.random() * 3) + 2; // 2 - 4 Server
+        const serverWatt = [500, 600, 700, 750, 800][Math.floor(Math.random() * 5)];
+        const batteryCount = [2, 4, 6, 8][Math.floor(Math.random() * 4)];
+        const batteryAh = [80, 100, 120, 150][Math.floor(Math.random() * 4)];
+        const voltage = 12; // 12 V
+
+        const totalPowerW = serverCount * serverWatt;
+        const totalCapacityAh = batteryCount * batteryAh;
+        const totalEnergyWh = totalCapacityAh * voltage;
+        const timeHoursExact = totalEnergyWh / totalPowerW;
+        const hours = Math.floor(timeHoursExact);
+        const minutes = Math.floor((timeHoursExact - hours) * 60);
+
+        const isOpen = shouldBeOpenText();
+        if (isOpen) {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "lf2",
+                topic: "Hardware & Strom: USV-Überbrückungszeit Dimensionierung (LF 2/6)",
+                isCalculation: true,
+                isBawueFocus: true,
+                type: "open-text",
+                question: `Prüfungsaufgabe USV-Berechnung (LF 2 / LF 6):\nEine USV-Anlage sichert ${serverCount} Server mit je ${serverWatt} Watt Netzteilen unter Volllast ab.\nDie USV verfügt über ${batteryCount} Akkus mit je ${batteryAh} Ah bei einer Spannung von ${voltage} V (Verluste vernachlässigt, 100% Entladung).\n\nBerechnen Sie:\n1. Die Gesamtleistung P in Watt.\n2. Die gesamte gespeicherte Energie W in Wh.\n3. Die theoretische Überbrückungszeit in Stunden und Minuten (auf volle Minuten abgerundet).`,
+                musterloesung: `Musterlösung:\n1. Gesamtleistung P = ${serverCount} Server * ${serverWatt} W = ${totalPowerW} Watt.\n2. Gespeicherte Energie W = ${batteryCount} Akkus * ${batteryAh} Ah * ${voltage} V = ${totalEnergyWh} Wh.\n3. Überbrückungszeit t = W / P = ${totalEnergyWh} Wh / ${totalPowerW} W = ${timeHoursExact.toFixed(3)} Stunden = ${hours} Stunden und ${minutes} Minuten.`,
+                explanation: `Formel: P = Server * Watt; W = Akkus * Ah * Volt; t = W / P. Zeit = ${hours} Std. und ${minutes} Min.`
+            });
+        } else {
+            const wrongMin = (minutes + 15) % 60;
+            const wrongHr = hours + 1;
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "lf2",
+                topic: "Hardware & Strom: USV-Überbrückungszeit (LF 2/6)",
+                isCalculation: true,
+                isBawueFocus: true,
+                type: "multiple-choice",
+                question: `Eine USV mit ${batteryCount} Akkus à ${batteryAh} Ah (${voltage} V) puffert ${serverCount} Server à ${serverWatt} W.\n\nWie lange ist die theoretische Überbrückungszeit bei Stromausfall?`,
+                options: [
+                    `${hours} Stunden und ${minutes} Minuten`,
+                    `${wrongHr} Stunden und ${wrongMin} Minuten`,
+                    `${hours} Stunden und 55 Minuten`,
+                    `${hours + 2} Stunden und 10 Minuten`
+                ],
+                correctAnswer: 0,
+                explanation: `Energie W = ${batteryCount} * ${batteryAh} Ah * ${voltage} V = ${totalEnergyWh} Wh. Leistung P = ${serverCount} * ${serverWatt} W = ${totalPowerW} W. Zeit t = ${totalEnergyWh} / ${totalPowerW} = ${hours} Std. ${minutes} Min.`
+            });
+        }
+    }
+
+    // G3. Finanzierungsvergleich Abzahlungsdarlehen vs. Leasing (LF 1 / LF 6)
+    for (let i = 0; i < 15; i++) {
+        const investSum = [120000, 180000, 240000, 300000][Math.floor(Math.random() * 4)];
+        const years = 4;
+        const interestRate = [4.0, 5.0, 6.0][Math.floor(Math.random() * 3)];
+        const linearTilgung = investSum / years;
+
+        let totalInterest = 0;
+        let restSchuld = investSum;
+        for (let y = 1; y <= years; y++) {
+            const zinsYear = restSchuld * (interestRate / 100);
+            totalInterest += zinsYear;
+            restSchuld -= linearTilgung;
+        }
+        const totalLoanCost = investSum + totalInterest;
+
+        // Leasing
+        const monthlyRate = Math.round((investSum / 40) / 500) * 500; // e.g. 6000 for 240k
+        const residualValue = Math.round((investSum * 0.065) / 1000) * 1000; // e.g. 16000 for 240k
+        const totalLeasingCost = (years * 12 * monthlyRate) + residualValue;
+
+        const diffSavings = Math.abs(totalLeasingCost - totalLoanCost);
+        const isLoanCheaper = totalLoanCost < totalLeasingCost;
+        const pctDiff = Math.round((diffSavings / (isLoanCheaper ? totalLoanCost : totalLeasingCost)) * 10000) / 100;
+
+        const isOpen = shouldBeOpenText();
+        if (isOpen) {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "lf6",
+                topic: "Investitionsrechnung: Abzahlungsdarlehen vs. Leasing (LF 1/6)",
+                isCalculation: true,
+                isBawueFocus: true,
+                type: "open-text",
+                question: `Prüfungsaufgabe Finanzierungsvergleich (LF 1 / LF 6):\nEin Unternehmen plant die Anschaffung von Maschinen im Wert von ${investSum.toLocaleString('de-DE')} EUR.\n\nAlternative 1: Abzahlungsdarlehen über ${years} Jahre mit linearer Tilgung zu ${interestRate.toFixed(1)} % p.a. auf die jeweilige Restschuld zu Jahresbeginn.\nAlternative 2: Leasingvertrag über ${years} Jahre (${years * 12} Monate) à ${monthlyRate.toLocaleString('de-DE')} EUR/Monat mit Übernahme zum Restwert von ${residualValue.toLocaleString('de-DE')} EUR.\n\nAufgaben:\n1. Berechnen Sie die Gesamtkosten des Abzahlungsdarlehens.\n2. Berechnen Sie die Gesamtkosten des Leasings.\n3. Welche Alternative ist wirtschaftlicher und wie hoch ist die prozentuale Abweichung?`,
+                musterloesung: `Musterlösung:\n1. Darlehen Gesamtzinsen = ${totalInterest.toLocaleString('de-DE')} EUR => Gesamtkosten Darlehen = ${totalLoanCost.toLocaleString('de-DE')} EUR.\n2. Gesamtkosten Leasing = (${years * 12} Monate * ${monthlyRate.toLocaleString('de-DE')} EUR) + ${residualValue.toLocaleString('de-DE')} EUR = ${totalLeasingCost.toLocaleString('de-DE')} EUR.\n3. Vergleich: Das ${isLoanCheaper ? 'Abzahlungsdarlehen' : 'Leasing'} ist um ${diffSavings.toLocaleString('de-DE')} EUR günstiger (Abweichung: ${pctDiff.toFixed(2)} %).`,
+                explanation: `Lineare Tilgung: ${linearTilgung.toLocaleString('de-DE')} EUR/Jahr. Zinsen sinken jährlich auf die Restschuld. Gesamtkosten: Darlehen = ${totalLoanCost.toLocaleString('de-DE')} EUR vs. Leasing = ${totalLeasingCost.toLocaleString('de-DE')} EUR.`
+            });
+        } else {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "lf6",
+                topic: "Investitionsrechnung: Darlehen vs. Leasing (LF 1/6)",
+                isCalculation: true,
+                isBawueFocus: true,
+                type: "multiple-choice",
+                question: `Eine Investition von ${investSum.toLocaleString('de-DE')} EUR wird verglichen: Abzahlungsdarlehen (${years} Jahre, ${interestRate.toFixed(1)} % p.a. Zinsen) vs. Leasing (${years * 12} Monate à ${monthlyRate.toLocaleString('de-DE')} EUR + ${residualValue.toLocaleString('de-DE')} EUR Restwert).\n\nWie hoch sind die Gesamtkosten beider Alternativen?`,
+                options: [
+                    `Darlehen: ${totalLoanCost.toLocaleString('de-DE')} EUR | Leasing: ${totalLeasingCost.toLocaleString('de-DE')} EUR`,
+                    `Darlehen: ${(totalLoanCost + 20000).toLocaleString('de-DE')} EUR | Leasing: ${totalLeasingCost.toLocaleString('de-DE')} EUR`,
+                    `Darlehen: ${totalLoanCost.toLocaleString('de-DE')} EUR | Leasing: ${(totalLeasingCost + 30000).toLocaleString('de-DE')} EUR`,
+                    `Beide exakt ${totalLoanCost.toLocaleString('de-DE')} EUR`
+                ],
+                correctAnswer: 0,
+                explanation: `Gesamtzinsen Darlehen: ${totalInterest.toLocaleString('de-DE')} EUR. Gesamtkosten Darlehen = ${totalLoanCost.toLocaleString('de-DE')} EUR. Leasing = ${years * 12} * ${monthlyRate} + ${residualValue} = ${totalLeasingCost.toLocaleString('de-DE')} EUR.`
+            });
+        }
+    }
+
+    // G4. Bildscans & Speicherplatzberechnung (LF 2 / LF 4)
+    for (let i = 0; i < 15; i++) {
+        const hours = [8, 16, 24][Math.floor(Math.random() * 3)];
+        const partsPerHour = [20, 30, 40][Math.floor(Math.random() * 3)];
+        const widthCm = [40, 50, 60][Math.floor(Math.random() * 3)];
+        const heightCm = [25, 30, 40][Math.floor(Math.random() * 3)];
+        const dpi = [300, 400][Math.floor(Math.random() * 2)];
+        const bytePerPixel = 3; // 24 Bit RGB
+
+        const totalParts = hours * partsPerHour;
+        const doubleScans = Math.round(totalParts * (2 / 3));
+        const singleScans = totalParts - doubleScans;
+        const totalScans = (doubleScans * 2) + singleScans;
+
+        const widthInch = widthCm / 2.54;
+        const heightInch = heightCm / 2.54;
+        const pixelW = Math.round(widthInch * dpi);
+        const pixelH = Math.round(heightInch * dpi);
+        const bytesPerScan = pixelW * pixelH * bytePerPixel;
+        const totalBytes = totalScans * bytesPerScan;
+        const totalGiB = Math.round((totalBytes / (1024 * 1024 * 1024)) * 10) / 10;
+        const gibRounded = Math.ceil(totalBytes / (1024 * 1024 * 1024));
+
+        const isOpen = shouldBeOpenText();
+        if (isOpen) {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "lf2",
+                topic: "Digitalisierung & Speicherbedarf: Scanfläche & Auflösung (LF 2/4)",
+                isCalculation: true,
+                isBawueFocus: true,
+                type: "open-text",
+                question: `Prüfungsaufgabe Bildverarbeitung (LF 2 / LF 4):\nIn einer Fertigung laufen Anlagen ${hours} h/Tag bei ${partsPerHour} Teilen/h.\n2/3 der Teile werden beidseitig (2 Scans) und 1/3 einseitig (1 Scan) erfasst.\nScanparameter: ${widthCm} cm x ${heightCm} cm, ${dpi} dpi x ${dpi} dpi, Farbtiefe 24 Bit unkomprimiert (1 Inch = 2,54 cm).\n\nAufgaben:\n1. Ermitteln Sie die Gesamtzahl der Scans pro Tag.\n2. Berechnen Sie das tägliche unkomprimierte Speichervolumen in vollen GiB (Binärpräfix).`,
+                musterloesung: `Musterlösung:\n1. Gefertigte Teile = ${hours} h * ${partsPerHour} Teile/h = ${totalParts} Teile.\n   Scans = (${doubleScans} * 2) + (${singleScans} * 1) = ${totalScans} Scans/Tag.\n2. Pixel pro Bild = (${widthCm} / 2,54 * ${dpi}) * (${heightCm} / 2,54 * ${dpi}) ≈ ${pixelW} * ${pixelH} = ${(pixelW * pixelH).toLocaleString('de-DE')} Pixel.\n   Dateigröße pro Bild = ${(pixelW * pixelH).toLocaleString('de-DE')} * 3 Bytes ≈ ${(bytesPerScan / 1000000).toFixed(2)} MB.\n   Tagesvolumen = ${totalScans} * ${bytesPerScan} Bytes = ${totalBytes.toLocaleString('de-DE')} Bytes => ${gibRounded} GiB (genau: ${totalGiB} GiB).`,
+                explanation: `Scans pro Tag: ${totalScans}. Pixel: ${pixelW} x ${pixelH}. Pro Scan: ${(bytesPerScan / (1024*1024)).toFixed(1)} MiB. Tagesbedarf: ${gibRounded} GiB.`
+            });
+        } else {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "lf2",
+                topic: "Digitalisierung & Speicherbedarf: Scan-Speicherplatz (LF 2/4)",
+                isCalculation: true,
+                isBawueFocus: true,
+                type: "multiple-choice",
+                question: `Bei ${hours} h Betrieb und ${partsPerHour} Teilen/h werden 2/3 beidseitig und 1/3 einseitig mit ${dpi} dpi (${widthCm}x${heightCm} cm, 24 Bit) gescannt.\n\nWie viele Scans fallen täglich an und welches Speichervolumen in GiB wird benötigt?`,
+                options: [
+                    `${totalScans} Scans | ca. ${gibRounded} GiB`,
+                    `${totalParts} Scans | ca. ${Math.round(gibRounded * 0.6)} GiB`,
+                    `${totalScans * 2} Scans | ca. ${gibRounded * 2} GiB`,
+                    `${totalScans} Scans | ca. ${Math.round(gibRounded * 10)} GiB`
+                ],
+                correctAnswer: 0,
+                explanation: `Teile: ${totalParts} -> ${doubleScans}*2 + ${singleScans}*1 = ${totalScans} Scans. Speichervolumen = ${totalScans} * (${pixelW}*${pixelH}*3) / 1024^3 ≈ ${gibRounded} GiB.`
+            });
+        }
+    }
+
+    // G5. Materialbedarfsplanung & Verschnittberechnung "im Hundert" (LF 1 / LF 6)
+    for (let i = 0; i < 15; i++) {
+        const netMeters = [1800, 2300, 2800, 3200][Math.floor(Math.random() * 4)];
+        const wastePct = [5, 8, 10, 12][Math.floor(Math.random() * 4)];
+        const stock = netMeters + 100;
+        const ironStock = 500;
+        const workStock = 200;
+        const reservedStock = 400;
+
+        const availableStock = stock - ironStock - workStock - reservedStock;
+        const grossToPurchase = Math.ceil(netMeters / (1 - (wastePct / 100)));
+        const orderAmount = Math.max(0, grossToPurchase - availableStock);
+
+        const isOpen = shouldBeOpenText();
+        if (isOpen) {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "lf6",
+                topic: "Materialdisposition: Verschnittrechnung im Hundert & Bestellmenge (LF 1/6)",
+                isCalculation: true,
+                isBawueFocus: true,
+                type: "open-text",
+                question: `Prüfungsaufgabe Materialbedarfsplanung (LF 1 / LF 6):\nFür ein Projekt werden netto ${netMeters} Meter Verlegekabel benötigt. Der Betrieb rechnet mit ${wastePct} % Verschnitt von der einzukaufenden Menge (Rechnung im Hundert).\nLagerbestand: ${stock} m, Mindestbestand (Eiserner Bestand): ${ironStock} m, Werkstattbestand: ${workStock} m, Vormerkbestand: ${reservedStock} m.\n\nAufgaben:\n1. Ermitteln Sie die für das Projekt verfügbare Lagermenge.\n2. Berechnen Sie die einzukaufende Menge (inkl. Verschnitt) in vollen Metern.\n3. Berechnen Sie die erforderliche Bestellmenge beim Lieferanten.`,
+                musterloesung: `Musterlösung:\n1. Verfügbare Menge = ${stock} m - ${ironStock} m - ${workStock} m - ${reservedStock} m = ${availableStock} Meter.\n2. Einzukaufende Menge (im Hundert) = ${netMeters} m / (1 - ${wastePct / 100}) = ${grossToPurchase} Meter.\n3. Bestellmenge = ${grossToPurchase} m - ${availableStock} m = ${orderAmount} Meter.`,
+                explanation: `Verschnitt im Hundert: Netto / (1 - ${wastePct}%) = ${netMeters} / ${1 - wastePct/100} = ${grossToPurchase} m. Verfügbar = ${availableStock} m. Bestellung = ${orderAmount} m.`
+            });
+        } else {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "lf6",
+                topic: "Materialdisposition: Verschnittrechnung im Hundert (LF 1/6)",
+                isCalculation: true,
+                isBawueFocus: true,
+                type: "multiple-choice",
+                question: `Ein Betrieb benötigt ${netMeters} m Kabel mit ${wastePct} % Verschnitt von der Einkaufsmenge. Lagerbestand: ${stock} m, Mindestbestand: ${ironStock} m, Werkstatt: ${workStock} m, Vormerk: ${reservedStock} m.\n\nWelche Bestellmenge muss geordert werden?`,
+                options: [
+                    `${orderAmount} Meter (Einkauf: ${grossToPurchase} m, Verfügbar: ${availableStock} m)`,
+                    `${grossToPurchase} Meter (ohne Lagerverrechnung)`,
+                    `${orderAmount + 300} Meter`,
+                    `${Math.round(netMeters * (1 + wastePct / 100))} Meter`
+                ],
+                correctAnswer: 0,
+                explanation: `Einkaufsmenge = ${netMeters} / (1 - 0,${wastePct < 10 ? '0' + wastePct : wastePct}) = ${grossToPurchase} m. Verfügbar = ${stock} - ${ironStock} - ${workStock} - ${reservedStock} = ${availableStock} m. Bestellmenge = ${grossToPurchase} - ${availableStock} = ${orderAmount} m.`
+            });
+        }
+    }
+
+    // G6. Externe Bandbreite VoIP & Datenabgleich (LF 3)
+    for (let i = 0; i < 15; i++) {
+        const calls = [20, 25, 30, 40, 50][Math.floor(Math.random() * 5)];
+        const kbitPerCall = 100; // 100 kbit/s
+        const syncMbit = [5, 10, 15, 20][Math.floor(Math.random() * 4)];
+
+        const voipMbit = (calls * kbitPerCall) / 1000;
+        const totalMbit = Math.round((voipMbit + syncMbit) * 10) / 10;
+
+        const isOpen = shouldBeOpenText();
+        if (isOpen) {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "lf3",
+                topic: "Netzwerktechnik: Bandbreitenberechnung VoIP & Synchronisation (LF 3)",
+                isCalculation: true,
+                isBawueFocus: true,
+                type: "open-text",
+                question: `Prüfungsaufgabe WAN-Bandbreitenanalyse (LF 3):\nEin Standortanschluss soll für folgende Anforderungen ausgelegt werden:\n- ${calls} parallele VoIP-Gespräche mit mindestens ${kbitPerCall} kbit/s pro Verbindung.\n- Kontinuierlicher Datenabgleich mit der Firmenzentrale: mindestens ${syncMbit} Mbit/s.\n\nErmitteln Sie die erforderliche symmetrische Gesamtbandbreite des Internetanschlusses in Mbit/s.`,
+                musterloesung: `Musterlösung:\n1. Bandbreite VoIP = ${calls} * ${kbitPerCall} kbit/s = ${calls * kbitPerCall} kbit/s = ${voipMbit.toFixed(1)} Mbit/s.\n2. Bandbreite Datenabgleich = ${syncMbit} Mbit/s.\n3. Symmetrische Gesamtbandbreite = ${voipMbit.toFixed(1)} Mbit/s + ${syncMbit} Mbit/s = ${totalMbit.toFixed(1)} Mbit/s.`,
+                explanation: `VoIP: ${calls} * 100 kbit/s = ${voipMbit} Mbit/s. Daten: ${syncMbit} Mbit/s. Gesamt: ${totalMbit} Mbit/s.`
+            });
+        } else {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "lf3",
+                topic: "Netzwerktechnik: VoIP-Bandbreitenbedarf (LF 3)",
+                isCalculation: true,
+                isBawueFocus: true,
+                type: "multiple-choice",
+                question: `Wie viel Bandbreite benötigen ${calls} VoIP-Gespräche à ${kbitPerCall} kbit/s plus ${syncMbit} Mbit/s Produktionsdatenabgleich?`,
+                options: [
+                    `${totalMbit.toFixed(1)} Mbit/s`,
+                    `${(totalMbit * 1.5).toFixed(1)} Mbit/s`,
+                    `${(calls * 0.1).toFixed(1)} Mbit/s`,
+                    `${syncMbit} Mbit/s`
+                ],
+                correctAnswer: 0,
+                explanation: `${calls} * ${kbitPerCall} kbit/s = ${voipMbit} Mbit/s. Gesamt: ${voipMbit} + ${syncMbit} = ${totalMbit} Mbit/s.`
+            });
+        }
+    }
 
     return dynamicQuestions;
 }
