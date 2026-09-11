@@ -5774,6 +5774,200 @@ WHERE Email IS NULL OR Email = '';
         "question": "Prüfungsaufgabe Handelskalkulation (BaWü-Fokus): Gegeben sind folgende Werte für 100 Server-Netzteile:\n\n- Listeneinkaufspreis (LEP): 120,00 € pro Stück\n- Lieferantenrabatt: 25 %\n- Lieferantenskonto: 2 %\n- Bezugskosten: 90,00 € (für alle 100 Stück zusammen)\n- Handlungskostenzuschlag (HKZ): 20 %\n- Gewinnzuschlag: 20 %\n- Kundenskonto: 3 % (im Hundert)\n- Kundenrabatt: 5 % (im Hundert)\n- Umsatzsteuer: 19 %\n\nAufgabe:\nBerechne pro Stück:\n1. Zieleinkaufspreis (ZEP)\n2. Bareinkaufspreis (BEP)\n3. Bezugspreis (Einstandspreis)\n4. Selbstkosten\n5. Barverkaufspreis (BVP)\n6. Zielverkaufspreis (ZVP)\n7. Listenverkaufspreis (LVP netto)\n8. Endpreis (LVP brutto)",
         "musterloesung": "Schrittweise Lösung (pro Stück):\n\n1. LEP: 120,00 €\n- Lieferantenrabatt (25 %): -30,00 €\n= 1. ZEP: 90,00 €\n\n- Lieferantenskonto (2 % von 90 €): -1,80 €\n= 2. BEP: 88,20 €\n\n+ Bezugskosten (90 € / 100): +0,90 €\n= 3. Bezugspreis (Einstandspreis): 89,10 €\n\n+ Handlungskosten (20 % von 89,10 €): +17,82 €\n= 4. Selbstkosten: 106,92 €\n\n+ Gewinnzuschlag (20 % von 106,92 €): +21,38 €\n= 5. Barverkaufspreis (BVP): 128,30 €\n\n+ Kundenskonto (3 % im Hundert -> 128,30 € / 0,97): +3,97 €\n= 6. Zielverkaufspreis (ZVP): 132,27 €\n\n+ Kundenrabatt (5 % im Hundert -> 132,27 € / 0,95): +6,96 €\n= 7. Listenverkaufspreis netto (LVP): 139,23 €\n\n+ 19 % USt (19 % von 139,23 €): +26,45 €\n= 8. Listenverkaufspreis brutto: 165,68 €.",
         "explanation": "Vorwärtskalkulationsschema schrittweise von oben nach unten anwenden."
+},
+    {
+        "id": 321,
+        "theme": "calculations",
+        "topic": "Handelskalkulation: Kalkulationszuschlag",
+        "isCalculation": true,
+        "isBawueFocus": true,
+        "type": "multiple-choice",
+        "question": "Ein IT-Systemhaus ermittelt für einen Monitor einen Bezugs-/Einstandspreis von 179,00 € und einen Listenverkaufspreis (netto) von 350,00 €. Wie hoch ist der Kalkulationszuschlag in Prozent?",
+        "options": [
+                "95,53 % (Formel: [(LVP - Bezugspreis) * 100] / Bezugspreis)",
+                "48,86 %",
+                "51,14 %",
+                "195,53 %"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Kalkulationszuschlag Formel:\nKalkulationszuschlag = [(Listenverkaufspreis - Bezugspreis) / Bezugspreis] * 100\nRechnung: [(350,00 € - 179,00 €) / 179,00 €] * 100 = (171,00 € / 179,00 €) * 100 = 95,53 %.\nDer Kalkulationszuschlag ist der prozentuale Aufschlag auf den Einstands-/Bezugspreis, um den Listenverkaufspreis zu berechnen."
+},
+    {
+        "id": 322,
+        "theme": "calculations",
+        "topic": "Handelskalkulation: Handelsspanne",
+        "isCalculation": true,
+        "isBawueFocus": true,
+        "type": "multiple-choice",
+        "question": "Für denselben Monitor (Bezugspreis 179,00 €, Listenverkaufspreis netto 350,00 €) soll nun die Handelsspanne berechnet werden. Wie hoch ist die Handelsspanne in Prozent?",
+        "options": [
+                "48,86 % (Formel: [(LVP - Bezugspreis) * 100] / LVP)",
+                "95,53 %",
+                "51,14 %",
+                "35,00 %"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Handelsspanne Formel:\nHandelsspanne = [(Listenverkaufspreis - Bezugspreis) / Listenverkaufspreis] * 100\nRechnung: [(350,00 € - 179,00 €) / 350,00 €] * 100 = (171,00 € / 350,00 €) * 100 = 48,86 %.\nAls Handelsspanne wird die Differenz zwischen Listenverkaufspreis (netto) und Einstandspreis bezeichnet, ausgedrückt in Prozent des Listenverkaufspreises (netto)."
+},
+    {
+        "id": 323,
+        "theme": "calculations",
+        "topic": "Handelskalkulation: Kalkulationsfaktor",
+        "isCalculation": true,
+        "isBawueFocus": true,
+        "type": "multiple-choice",
+        "question": "Wie lautet der Kalkulationsfaktor für den Bezugspreis von 179,00 € und einen Listenverkaufspreis netto von 350,00 €, und wozu dient er?",
+        "options": [
+                "ca. 1,9553 (LVP / Bezugspreis) – Multiplikator zur direkten Ermittlung des LVP aus dem Bezugspreis",
+                "ca. 0,5114 – Quotient aus Bezugspreis geteilt durch LVP",
+                "ca. 0,9553 – Der Kalkulationsfaktor ist identisch mit dem Kalkulationszuschlag als Dezimalzahl",
+                "ca. 2,4360 – Faktor aus Barverkaufspreis und Einstandspreis"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Formel: Kalkulationsfaktor = Listenverkaufspreis (netto) / Bezugspreis\nRechnung: 350,00 € / 179,00 € ≈ 1,9553.\nZweck: Mit dem Kalkulationsfaktor kann man bei gegebener Kostenstruktur durch einfache Multiplikation sofort den Netto-Listenverkaufspreis aus dem Bezugspreis errechnen: LVP = Bezugspreis * Kalkulationsfaktor."
+},
+    {
+        "id": 324,
+        "theme": "lf1",
+        "topic": "Vertragsarten: Werklieferungsvertrag vs. Kauf- und Werkvertrag",
+        "isBawueFocus": true,
+        "type": "multiple-choice",
+        "question": "Ein IT-Dienstleister liefert einem Kunden Hardware (PCs, Monitore) und übernimmt zusätzlich den vollständigen Aufbau, die Verkabelung, die Betriebssystem- und Softwareinstallation sowie die schlüsselfertige Übergabe des PC-Arbeitsplatzes. Welche Vertragsart liegt vor?",
+        "options": [
+                "Werklieferungsvertrag (§ 650 BGB)",
+                "Reiner Kaufvertrag (§ 433 BGB)",
+                "Dienstvertrag (§ 611 BGB)",
+                "Mietvertrag (§ 535 BGB)"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Es liegt ein Werklieferungsvertrag (§ 650 BGB) vor:\n- Lieferung der Hardware = Kaufvertragliches Element (Übereignung von Sachen).\n- Aufbau, Montage, Verkabelung und schlüsselfertige Installation = Werkvertragliches Element (Herbeiführung eines garantierten Erfolgs).\nFormel: Kaufvertrag + Werkvertrag = Werklieferungsvertrag."
+},
+    {
+        "id": 325,
+        "theme": "calculations",
+        "topic": "Handelskalkulation: Vertreterprovision & Skonto im Hundert",
+        "isCalculation": true,
+        "isBawueFocus": true,
+        "type": "multiple-choice",
+        "question": "In einer Handelskalkulation beträgt der Barverkaufspreis (BVP) 243,60 €. Dem Kunden werden 3 % Kundenskonto und dem Handelsvertreter 10 % Provision gewährt (zusammen 13 % im Hundert bezogen auf den Zielverkaufspreis). Wie hoch sind der Zielverkaufspreis (ZVP) und die Vertreterprovision?",
+        "options": [
+                "ZVP = 280,00 € und Vertreterprovision = 28,00 €",
+                "ZVP = 275,27 € und Vertreterprovision = 24,36 €",
+                "ZVP = 267,96 € und Vertreterprovision = 26,80 €",
+                "ZVP = 290,00 € und Vertreterprovision = 29,00 €"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Rechnung 'im Hundert':\nZielverkaufspreis (ZVP) = 100 %\n- Kundenskonto: 3 %\n- Vertreterprovision: 10 %\n= Barverkaufspreis (BVP): 87 % (100 % - 13 %)\n\nZVP = BVP / 0,87 = 243,60 € / 0,87 = 280,00 €.\nKundenskonto (3 % von 280 €) = 8,40 €.\nVertreterprovision (10 % von 280 €) = 28,00 €.\nProbe: 280,00 € - 8,40 € - 28,00 € = 243,60 € (BVP)."
+},
+    {
+        "id": 326,
+        "theme": "lf1",
+        "topic": "Wirtschaftlichkeit: Total Cost of Ownership (TCO)",
+        "isCalculation": true,
+        "isBawueFocus": true,
+        "type": "multiple-choice",
+        "question": "Was versteht man unter dem Begriff 'Total Cost of Ownership' (TCO) bei IT-Investitionen und welche Kostenfaktoren gehören dazu?",
+        "options": [
+                "Die ganzheitliche Erfassung aller Kosten über den gesamten Lebenszyklus: Einmalige Anschaffungskosten plus laufende Betriebskosten (Energie, Wartung, Support, Schulung, Lizenzen, Entsorgung)",
+                "Ausschließlich die reinen Anschaffungs- und Transportkosten der Hardware bei der Erstbestellung",
+                "Der Listenverkaufspreis abzüglich Skonto und Rabatt",
+                "Die reinen Personalkosten der IT-Abteilung pro Monat"
+        ],
+        "correctAnswer": 0,
+        "explanation": "TCO (Total Cost of Ownership) = Gesamtkosten des Eigentums / Betriebs.\nEs berücksichtigt nicht nur den Kaufpreis, sondern alle direkten und indirekten Kosten über die Nutzungsdauer:\n- Anschaffung (Hardware, Software, Rollout)\n- Betriebskosten (Stromverbrauch, Kühlung im RZ, Internet)\n- Wartung & Serviceverträge (SLA, Patches, Ersatzteile)\n- Mitarbeiterschulungen & Benutzer-Support\n- Entsorgungskosten (WEEE, Datenträgervernichtung nach DIN 66399)."
+},
+    {
+        "id": 327,
+        "theme": "calculations",
+        "topic": "Preisbildung: Marktgleichgewicht & Gleichgewichtspreis",
+        "isCalculation": true,
+        "isBawueFocus": true,
+        "type": "multiple-choice",
+        "question": "Auf einem Markt gilt folgende Preis-Mengen-Situation:\n- Nachfragefunktion: Bei 100 Stück = 70 €, bei 200 Stück = 60 €, bei 300 Stück = 50 €, bei 400 Stück = 40 €, bei 500 Stück = 30 €.\n- Angebotsfunktion: Bei 100 Stück = 10 €, bei 200 Stück = 20 €, bei 300 Stück = 30 €, bei 400 Stück = 40 €, bei 500 Stück = 50 €.\n\nWie hoch sind der Gleichgewichtspreis und die Gleichgewichtsmenge?",
+        "options": [
+                "Gleichgewichtspreis = 40,00 € bei einer Gleichgewichtsmenge von 400 Stück",
+                "Gleichgewichtspreis = 50,00 € bei 300 Stück",
+                "Gleichgewichtspreis = 30,00 € bei 500 Stück",
+                "Gleichgewichtspreis = 70,00 € bei 100 Stück"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Das Marktgleichgewicht ist der Schnittpunkt von Angebot und Nachfrage:\nBei einem Preis von 40,00 € stimmen die angebotene Menge (400 Stück) und die nachgefragte Menge (400 Stück) exakt überein."
+},
+    {
+        "id": 328,
+        "theme": "calculations",
+        "topic": "Preisbildung: Marktumsatz beim Gleichgewichtspreis",
+        "isCalculation": true,
+        "isBawueFocus": true,
+        "type": "multiple-choice",
+        "question": "Gegeben ist das Marktgleichgewicht mit einem Gleichgewichtspreis von 40,00 € und einer Gleichgewichtsmenge von 400 Stück. Wie hoch ist der Gesamtumsatz am Markt beim Gleichgewichtspreis?",
+        "options": [
+                "16.000,00 € (Umsatz = Preis * Menge = 40 € * 400 Stück)",
+                "8.000,00 €",
+                "24.000,00 €",
+                "4.000,00 €"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Formel für Marktumsatz:\nUmsatz = Gleichgewichtspreis * Gleichgewichtsmenge\nRechnung: 40,00 € * 400 Stück = 16.000,00 €."
+},
+    {
+        "id": 329,
+        "theme": "calculations",
+        "topic": "Preisbildung: Nachfrageüberhang berechnen",
+        "isCalculation": true,
+        "isBawueFocus": true,
+        "type": "multiple-choice",
+        "question": "Bei einem festgesetzten Preis von 20,00 € bieten die Hersteller 200 Stück an, während die Kunden 600 Stück nachfragen. Welche Marktsituation liegt vor und wie groß ist die Differenz?",
+        "options": [
+                "Nachfrageüberhang von 400 Stück (Nachfrage 600 - Angebot 200 = 400 Stück)",
+                "Angebotsüberhang von 400 Stück",
+                "Marktgleichgewicht mit Überhang 0 Stück",
+                "Nachfrageüberhang von 200 Stück"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Da der Preis (20 €) unter dem Gleichgewichtspreis (40 €) liegt, ist die Nachfrage (600 Stück) größer als das Angebot (200 Stück).\nEs liegt ein Nachfrageüberhang (Verkäufermarkt) in Höhe von 600 - 200 = 400 Stück vor."
+},
+    {
+        "id": 330,
+        "theme": "calculations",
+        "topic": "Preisbildung: Angebotsüberhang berechnen",
+        "isCalculation": true,
+        "isBawueFocus": true,
+        "type": "multiple-choice",
+        "question": "Bei einem Preis von 60,00 € bieten die Hersteller 600 Stück an, während die Kunden nur 200 Stück kaufen wollen. Welche Marktsituation liegt vor?",
+        "options": [
+                "Angebotsüberhang von 400 Stück (Angebot 600 - Nachfrage 200 = 400 Stück) -> Käufermarkt",
+                "Nachfrageüberhang von 400 Stück -> Verkäufermarkt",
+                "Gleichgewichtspreis bei 60,00 €",
+                "Angebotsüberhang von 200 Stück"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Da der Preis (60 €) über dem Gleichgewichtspreis (40 €) liegt, ist das Angebot (600 Stück) größer als die Nachfrage (200 Stück).\nEs liegt ein Angebotsüberhang von 600 - 200 = 400 Stück vor. Da die Kunden wählerisch sein können, spricht man von einem Käufermarkt."
+},
+    {
+        "id": 331,
+        "theme": "lf1",
+        "topic": "Wahr/Falsch: Werklieferungsvertrag & TCO",
+        "isBawueFocus": true,
+        "type": "true-false",
+        "question": "Wahr oder Falsch:\n1. Ein Werklieferungsvertrag (§ 650 BGB) liegt vor, wenn die Lieferung beweglicher Sachen mit montage- und werkvertraglichen Installationsleistungen kombiniert wird.\n2. Bei der TCO-Analyse werden die Anschaffungskosten sowie die gesamten Betriebs- und Entsorgungskosten über den Lebenszyklus berücksichtigt.",
+        "options": [
+                "Wahr (Beide Aussagen sind fachlich und rechtlich absolut zutreffend)",
+                "Falsch (Ein Werklieferungsvertrag existiert im deutschen Recht nicht)"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Richtig! Der Werklieferungsvertrag kombiniert Ware und Werkerstellung, und TCO (Total Cost of Ownership) betrachtet ganzheitlich Lebenszykluskosten."
+},
+    {
+        "id": 332,
+        "theme": "calculations",
+        "topic": "IHK Fallstudie: ConSystem GmbH Gesamtkalkulation & Kennzahlen",
+        "isCalculation": true,
+        "isBawueFocus": true,
+        "type": "open-text",
+        "question": "IHK-Prüfungsaufgabe (BaWü-Fokus): Bei der ConSystem GmbH wird für einen Kunden ein Arbeitsplatz-Bildschirm kalkuliert.\n\nGegebene Daten:\n- Listeneinkaufspreis: 200,00 €\n- Lieferantenrabatt: 10 %\n- Lieferantenskonto: 2 %\n- Bezugskosten: 2,60 €\n- Handlungskostenzuschlag: 25 %\n- Gewinnzuschlag: 8,87 %\n- Kundenskonto: 3 % (im Hundert)\n- Vertreterprovision: 10 % (im Hundert)\n- Kundenrabatt: 20 % (im Hundert)\n\nAufgaben:\n1. Führen Sie die Handelskalkulation schrittweise durch und ermitteln Sie:\n   a) Bezugspreis (Einstandspreis)\n   b) Selbstkosten\n   c) Barverkaufspreis (BVP)\n   d) Zielverkaufspreis (ZVP)\n   e) Listenverkaufspreis netto (LVP)\n2. Berechnen Sie den Kalkulationszuschlag in Prozent.\n3. Berechnen Sie die Handelsspanne in Prozent.\n4. Erläutern Sie, warum für den Auftrag (Lieferung + Montage/Installation) ein Werklieferungsvertrag abgeschlossen wird.",
+        "musterloesung": "Musterlösung:\n\n1. Handelskalkulation:\n- Listeneinkaufspreis: 200,00 €\n- 10 % Lieferantenrabatt: -20,00 €\n= Zieleinkaufspreis: 180,00 €\n- 2 % Lieferantenskonto: -3,60 €\n= Bareinkaufspreis: 176,40 €\n+ Bezugskosten: +2,60 €\n= a) Bezugs-/Einstandspreis: 179,00 €\n\n+ 25 % Handlungskosten (25 % von 179,00 €): +44,75 €\n= b) Selbstkosten: 223,75 €\n\n+ 8,87 % Gewinnzuschlag (8,87 % von 223,75 €): +19,85 €\n= c) Barverkaufspreis (BVP): 243,60 €\n\n+ 3 % Kundenskonto & 10 % Provision (13 % im Hundert -> 243,60 € / 0,87):\n  - Kundenskonto: +8,40 €\n  - Vertreterprovision: +28,00 €\n= d) Zielverkaufspreis (ZVP): 280,00 €\n\n+ 20 % Kundenrabatt (20 % im Hundert -> 280,00 € / 0,80):\n  - Kundenrabatt: +70,00 €\n= e) Listenverkaufspreis netto (LVP): 350,00 €\n\n2. Kalkulationszuschlag:\nFormel: [(LVP - Bezugspreis) / Bezugspreis] * 100\nRechnung: [(350,00 € - 179,00 €) / 179,00 €] * 100 = (171,00 € / 179,00 €) * 100 = 95,53 %.\n\n3. Handelsspanne:\nFormel: [(LVP - Bezugspreis) / LVP] * 100\nRechnung: [(350,00 € - 179,00 €) / 350,00 €] * 100 = (171,00 € / 350,00 €) * 100 = 48,86 %.\n\n4. Vertragsart:\nEs wird ein Werklieferungsvertrag (§ 650 BGB) abgeschlossen. Die Lieferung der Hardware ist kaufvertraglich (§ 433 BGB), der Aufbau, die Verkabelung, Software-Installation und Übergabe ist werkvertraglich (§ 631 BGB), da ein betriebsbereiter Arbeitsplatz (Erfolg) geschuldet wird.",
+        "explanation": "Vollständige Handelskalkulation mit Vorwärtskalkulation, Vertreterprovision, Kalkulationszuschlag, Handelsspanne und Vertragsarten."
 }
 
 ];

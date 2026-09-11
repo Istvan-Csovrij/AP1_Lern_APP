@@ -1825,5 +1825,255 @@ function generateDynamicQuestions(typeMode = "mix") {
         }
     }
 
+    
+    // ==========================================
+    // C.9 KALKULATIONSZUSCHLAG, HANDELSSPANNE & KALKULATIONSFAKTOR
+    // ==========================================
+    for (let i = 0; i < 20; i++) {
+        const bezugspreis = Math.floor(Math.random() * 250) + 50; // 50 bis 300 €
+        const aufschlagFaktor = (Math.floor(Math.random() * 120) + 30) / 100; // 0.30 bis 1.50
+        const lvpNetto = Number((bezugspreis * (1 + aufschlagFaktor)).toFixed(2));
+        
+        const differenz = Number((lvpNetto - bezugspreis).toFixed(2));
+        const kalkZuschlag = Number(((differenz / bezugspreis) * 100).toFixed(2));
+        const handelsspanne = Number(((differenz / lvpNetto) * 100).toFixed(2));
+        const kalkFaktor = Number((lvpNetto / bezugspreis).toFixed(4));
+
+        const subType = Math.floor(Math.random() * 3);
+        const isOpen = shouldBeOpenText();
+
+        if (subType === 0) {
+            // Kalkulationszuschlag
+            if (isOpen) {
+                dynamicQuestions.push({
+                    id: currentId++,
+                    theme: "calculations",
+                    topic: "Kalkulationszuschlag",
+                    isCalculation: true,
+                    isBawueFocus: true,
+                    type: "open-text",
+                    question: `Prüfungsaufgabe Handelskalkulation: Ein IT-Händler bezieht einen Switch zum Einstandspreis (Bezugspreis) von ${bezugspreis.toFixed(2)} € und verkauft ihn für ${lvpNetto.toFixed(2)} € netto (Listenverkaufspreis).\n\nBerechne den Kalkulationszuschlag in Prozent. (Gib die Formel und den Rechenweg an)`,
+                    musterloesung: `Kalkulationszuschlag:\n- Formel: [(Listenverkaufspreis - Bezugspreis) / Bezugspreis] * 100\n- Differenz (Rohgewinn/Zuschlag in €): ${lvpNetto.toFixed(2)} € - ${bezugspreis.toFixed(2)} € = ${differenz.toFixed(2)} €\n- Rechnung: (${differenz.toFixed(2)} € / ${bezugspreis.toFixed(2)} €) * 100 = ${kalkZuschlag.toFixed(2)} %\n- Ergebnis: ${kalkZuschlag.toFixed(2)} %`,
+                    explanation: `Der Kalkulationszuschlag bezieht sich immer auf den Bezugs-/Einstandspreis (Basis = 100 %).`
+                });
+            } else {
+                dynamicQuestions.push({
+                    id: currentId++,
+                    theme: "calculations",
+                    topic: "Kalkulationszuschlag",
+                    isCalculation: true,
+                    isBawueFocus: true,
+                    type: "multiple-choice",
+                    question: `Bezugspreis = ${bezugspreis.toFixed(2)} €, Listenverkaufspreis (netto) = ${lvpNetto.toFixed(2)} €. Wie hoch ist der Kalkulationszuschlag?`,
+                    options: [
+                        `${kalkZuschlag.toFixed(2)} % (Formel: [(LVP - Bezugspreis) / Bezugspreis] * 100)`,
+                        `${handelsspanne.toFixed(2)} %`,
+                        `${(kalkZuschlag * 0.8).toFixed(2)} %`,
+                        `${(100 + kalkZuschlag).toFixed(2)} %`
+                    ],
+                    correctAnswer: 0,
+                    explanation: `Kalkulationszuschlag = ((${lvpNetto} - ${bezugspreis}) / ${bezugspreis}) * 100 = ${kalkZuschlag.toFixed(2)} %.`
+                });
+            }
+        } else if (subType === 1) {
+            // Handelsspanne
+            if (isOpen) {
+                dynamicQuestions.push({
+                    id: currentId++,
+                    theme: "calculations",
+                    topic: "Handelsspanne",
+                    isCalculation: true,
+                    isBawueFocus: true,
+                    type: "open-text",
+                    question: `Prüfungsaufgabe Handelskalkulation: Ein IT-Fachhändler kauft Festplatten zu einem Bezugspreis von ${bezugspreis.toFixed(2)} € ein und setzt den Netto-Listenverkaufspreis auf ${lvpNetto.toFixed(2)} € fest.\n\nBerechne die Handelsspanne in Prozent.`,
+                    musterloesung: `Handelsspanne:\n- Formel: [(Listenverkaufspreis - Bezugspreis) / Listenverkaufspreis] * 100\n- Differenz: ${lvpNetto.toFixed(2)} € - ${bezugspreis.toFixed(2)} € = ${differenz.toFixed(2)} €\n- Rechnung: (${differenz.toFixed(2)} € / ${lvpNetto.toFixed(2)} €) * 100 = ${handelsspanne.toFixed(2)} %\n- Ergebnis: ${handelsspanne.toFixed(2)} %`,
+                    explanation: `Die Handelsspanne drückt die Marge im Verhältnis zum Netto-Verkaufspreis aus (Basis LVP = 100 %).`
+                });
+            } else {
+                dynamicQuestions.push({
+                    id: currentId++,
+                    theme: "calculations",
+                    topic: "Handelsspanne",
+                    isCalculation: true,
+                    isBawueFocus: true,
+                    type: "multiple-choice",
+                    question: `Bezugspreis = ${bezugspreis.toFixed(2)} €, Listenverkaufspreis (netto) = ${lvpNetto.toFixed(2)} €. Wie hoch ist die Handelsspanne?`,
+                    options: [
+                        `${handelsspanne.toFixed(2)} % (Formel: [(LVP - Bezugspreis) / LVP] * 100)`,
+                        `${kalkZuschlag.toFixed(2)} %`,
+                        `${(handelsspanne * 1.2).toFixed(2)} %`,
+                        `${(100 - handelsspanne).toFixed(2)} %`
+                    ],
+                    correctAnswer: 0,
+                    explanation: `Handelsspanne = ((${lvpNetto} - ${bezugspreis}) / ${lvpNetto}) * 100 = ${handelsspanne.toFixed(2)} %.`
+                });
+            }
+        } else {
+            // Kalkulationsfaktor
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "calculations",
+                topic: "Kalkulationsfaktor",
+                isCalculation: true,
+                isBawueFocus: true,
+                type: "multiple-choice",
+                question: `Ein IT-Artikel hat einen Bezugspreis von ${bezugspreis.toFixed(2)} € und soll für ${lvpNetto.toFixed(2)} € netto angeboten werden. Wie lautet der Kalkulationsfaktor?`,
+                options: [
+                    `${kalkFaktor.toFixed(4)} (LVP / Bezugspreis)`,
+                    `${(1 / kalkFaktor).toFixed(4)}`,
+                    `${(kalkZuschlag / 100).toFixed(4)}`,
+                    `${(handelsspanne / 100).toFixed(4)}`
+                ],
+                correctAnswer: 0,
+                explanation: `Kalkulationsfaktor = LVP / Bezugspreis = ${lvpNetto.toFixed(2)} € / ${bezugspreis.toFixed(2)} € = ${kalkFaktor.toFixed(4)}.`
+            });
+        }
+    }
+
+    // ==========================================
+    // C.10 PREISBILDUNG, MARKTGLEICHGEWICHT & ÜBERHÄNGE
+    // ==========================================
+    for (let i = 0; i < 15; i++) {
+        const pGleich = (Math.floor(Math.random() * 6) + 3) * 10; // 30, 40, 50, 60, 70, 80 €
+        const qGleich = (Math.floor(Math.random() * 8) + 2) * 100; // 200 bis 900 Stück
+        const umsatz = pGleich * qGleich;
+        
+        const pNiedrig = pGleich - 15;
+        const qAngebotNiedrig = qGleich - 200;
+        const qNachfrageNiedrig = qGleich + 200;
+        const nachfrageUeberhang = qNachfrageNiedrig - qAngebotNiedrig;
+
+        const pHoch = pGleich + 15;
+        const qAngebotHoch = qGleich + 200;
+        const qNachfrageHoch = qGleich - 200;
+        const angebotsUeberhang = qAngebotHoch - qNachfrageHoch;
+
+        const subQ = Math.floor(Math.random() * 3);
+        const isOpen = shouldBeOpenText();
+
+        if (subQ === 0) {
+            // Umsatz beim Gleichgewichtspreis
+            if (isOpen) {
+                dynamicQuestions.push({
+                    id: currentId++,
+                    theme: "calculations",
+                    topic: "Marktgleichgewicht: Marktumsatz",
+                    isCalculation: true,
+                    isBawueFocus: true,
+                    type: "open-text",
+                    question: `Prüfungsaufgabe Preisbildung: Am Markt für SSD-Speicher stellt sich ein Gleichgewichtspreis von ${pGleich},00 € bei einer Gleichgewichtsmenge von ${qGleich} Stück ein.\n\nBerechne den gesamten Marktumsatz im Marktgleichgewicht.`,
+                    musterloesung: `Rechnung Marktumsatz:\n- Formel: Umsatz = Gleichgewichtspreis * Gleichgewichtsmenge\n- Rechnung: ${pGleich},00 € * ${qGleich} Stück = ${umsatz.toLocaleString('de-DE')} €\n- Ergebnis: ${umsatz.toLocaleString('de-DE')} €`,
+                    explanation: `Im Marktgleichgewicht schneiden sich Angebots- und Nachfragekurve. Der Umsatz ist Preis * Menge.`
+                });
+            } else {
+                dynamicQuestions.push({
+                    id: currentId++,
+                    theme: "calculations",
+                    topic: "Marktgleichgewicht: Marktumsatz",
+                    isCalculation: true,
+                    isBawueFocus: true,
+                    type: "multiple-choice",
+                    question: `Bei einem Gleichgewichtspreis von ${pGleich},00 € und einer Gleichgewichtsmenge von ${qGleich} Stück: Wie hoch ist der Gesamtumsatz am Markt?`,
+                    options: [
+                        `${umsatz.toLocaleString('de-DE')} € (Umsatz = ${pGleich} € * ${qGleich} Stück)`,
+                        `${(umsatz * 0.5).toLocaleString('de-DE')} €`,
+                        `${(umsatz * 1.5).toLocaleString('de-DE')} €`,
+                        `${(pGleich + qGleich).toLocaleString('de-DE')} €`
+                    ],
+                    correctAnswer: 0,
+                    explanation: `Umsatz = Preis * Menge = ${pGleich} € * ${qGleich} = ${umsatz.toLocaleString('de-DE')} €.`
+                });
+            }
+        } else if (subQ === 1) {
+            // Nachfrageüberhang
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "calculations",
+                topic: "Marktüberhang: Nachfrageüberhang",
+                isCalculation: true,
+                isBawueFocus: true,
+                type: "multiple-choice",
+                question: `Auf einem Markt liegt der aktuelle Preis bei ${pNiedrig},00 € (unter dem Gleichgewichtspreis von ${pGleich},00 €). Die Anbieter bieten ${qAngebotNiedrig} Stück an, während die Kunden ${qNachfrageNiedrig} Stück nachfragen. Welche Marktsituation liegt vor und wie groß ist der Überhang?`,
+                options: [
+                    `Nachfrageüberhang von ${nachfrageUeberhang} Stück (${qNachfrageNiedrig} - ${qAngebotNiedrig}) -> Verkäufermarkt`,
+                    `Angebotsüberhang von ${nachfrageUeberhang} Stück -> Käufermarkt`,
+                    `Marktgleichgewicht von ${qGleich} Stück`,
+                    `Nachfrageüberhang von ${qAngebotNiedrig} Stück`
+                ],
+                correctAnswer: 0,
+                explanation: `Liegt der Preis unter dem Gleichgewichtspreis, ist die Nachfrage größer als das Angebot (Nachfrageüberhang). Die Verkäufer haben Marktmacht (Verkäufermarkt). Überhang: ${qNachfrageNiedrig} - ${qAngebotNiedrig} = ${nachfrageUeberhang} Stück.`
+            });
+        } else {
+            // Angebotsüberhang
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "calculations",
+                topic: "Marktüberhang: Angebotsüberhang",
+                isCalculation: true,
+                isBawueFocus: true,
+                type: "multiple-choice",
+                question: `Auf einem Markt liegt der aktuelle Preis bei ${pHoch},00 € (über dem Gleichgewichtspreis von ${pGleich},00 €). Die Hersteller bieten ${qAngebotHoch} Stück an, aber die Kunden fragen nur ${qNachfrageHoch} Stück nach. Welche Marktsituation liegt vor?`,
+                options: [
+                    `Angebotsüberhang von ${angebotsUeberhang} Stück (${qAngebotHoch} - ${qNachfrageHoch}) -> Käufermarkt`,
+                    `Nachfrageüberhang von ${angebotsUeberhang} Stück -> Verkäufermarkt`,
+                    `Vollkommener Markt im Gleichgewicht`,
+                    `Angebotsüberhang von ${qNachfrageHoch} Stück`
+                ],
+                correctAnswer: 0,
+                explanation: `Liegt der Preis über dem Gleichgewichtspreis, bieten Hersteller mehr an als nachgefragt wird (Angebotsüberhang). Käufer haben Auswahl- und Verhandlungsmacht (Käufermarkt). Überhang = ${qAngebotHoch} - ${qNachfrageHoch} = ${angebotsUeberhang} Stück.`
+            });
+        }
+    }
+
+    // ==========================================
+    // C.11 TOTAL COST OF OWNERSHIP (TCO) & LEBENSZYKLUSKOSTEN
+    // ==========================================
+    for (let i = 0; i < 10; i++) {
+        const serverCount = Math.floor(Math.random() * 5) + 2; // 2 bis 6 Server
+        const hwKauf = serverCount * 3500;
+        const stromJahr = serverCount * 650;
+        const wartungJahr = serverCount * 450;
+        const jahre = 3;
+        const schulung = 2500;
+        const entsorgung = serverCount * 80;
+
+        const betriebskosten = (stromJahr + wartungJahr) * jahre + schulung + entsorgung;
+        const tcoGesamt = hwKauf + betriebskosten;
+
+        const isOpen = shouldBeOpenText();
+
+        if (isOpen) {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "calculations",
+                topic: "TCO-Berechnung (Total Cost of Ownership)",
+                isCalculation: true,
+                isBawueFocus: true,
+                type: "open-text",
+                question: `Prüfungsaufgabe Wirtschaftlichkeit / TCO (LF 1 / LF 6): Ein Unternehmen plant die Beschaffung von ${serverCount} Servern über eine geplante Nutzungsdauer von ${jahre} Jahren.\n\nKostenpositionen:\n- Anschaffungspreis pro Server: 3.500,00 €\n- Stromkosten pro Server und Jahr: ${stromJahr / serverCount},00 €\n- Wartungs- und Supportvertrag pro Server und Jahr: ${wartungJahr / serverCount},00 €\n- Einmalige Administratorschulung: ${schulung},00 €\n- Fachgerechte Entsorgung pro Server am Ende des Lebenszyklus: ${entsorgung / serverCount},00 €\n\nAufgabe:\nBerechne die Total Cost of Ownership (TCO) für alle ${serverCount} Server über die gesamte Laufzeit von ${jahre} Jahren.`,
+                musterloesung: `TCO-Berechnung:\n1. Einmalige Anschaffungskosten: ${serverCount} * 3.500 € = ${hwKauf.toLocaleString('de-DE')} €\n2. Laufende Betriebskosten (${jahre} Jahre):\n   - Strom: ${serverCount} * ${stromJahr / serverCount} € * ${jahre} Jahre = ${(stromJahr * jahre).toLocaleString('de-DE')} €\n   - Wartung/Support: ${serverCount} * ${wartungJahr / serverCount} € * ${jahre} Jahre = ${(wartungJahr * jahre).toLocaleString('de-DE')} €\n   - Schulung: ${schulung.toLocaleString('de-DE')} €\n   - Entsorgung: ${serverCount} * ${entsorgung / serverCount} € = ${entsorgung.toLocaleString('de-DE')} €\n3. TCO Gesamtkosten = ${hwKauf.toLocaleString('de-DE')} € + ${(betriebskosten).toLocaleString('de-DE')} € = ${tcoGesamt.toLocaleString('de-DE')} €`,
+                explanation: `TCO umfasst immer Anschaffung + sämtliche Betriebs-, Wartungs-, Schulungs- und Entsorgungskosten.`
+            });
+        } else {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "calculations",
+                topic: "TCO-Berechnung (Total Cost of Ownership)",
+                isCalculation: true,
+                isBawueFocus: true,
+                type: "multiple-choice",
+                question: `Berechne die TCO über ${jahre} Jahre für ${serverCount} Server (Kauf: ${hwKauf.toLocaleString('de-DE')} €; Strom/Wartung pro Jahr: ${(stromJahr + wartungJahr).toLocaleString('de-DE')} €; Schulung: ${schulung} €; Entsorgung: ${entsorgung} €):`,
+                options: [
+                    `${tcoGesamt.toLocaleString('de-DE')} €`,
+                    `${hwKauf.toLocaleString('de-DE')} € (nur Anschaffungskosten)`,
+                    `${(hwKauf + (stromJahr + wartungJahr)).toLocaleString('de-DE')} € (ohne Mehrjahresbetrieb)`,
+                    `${(tcoGesamt * 1.25).toLocaleString('de-DE')} €`
+                ],
+                correctAnswer: 0,
+                explanation: `TCO = Anschaffung (${hwKauf} €) + Betrieb (${jahre} Jahre * ${(stromJahr + wartungJahr)} € = ${(stromJahr + wartungJahr) * jahre} €) + Schulung (${schulung} €) + Entsorgung (${entsorgung} €) = ${tcoGesamt.toLocaleString('de-DE')} €.`
+            });
+        }
+    }
+
     return dynamicQuestions;
 }
