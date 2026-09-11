@@ -4366,8 +4366,9 @@ WHERE Email IS NULL OR Email = '';
                        "   - Es entsteht eine **Endlosschleife (Infinite Loop)**.\n" +
                        "   - Das Programm reagiert nicht mehr, blockiert CPU-Ressourcen (100 % Kernauslastung) und stürzt ab bzw. erzeugt einen Programm-Freeze / Stack Overflow / Speicherüberlauf.",
         explanation: "Nassi-Shneiderman Struktogramme (DIN 66261) und Pseudocode sind feste Programmier-Bestandteile der AP1.",
-        points: 16
-    },
+        points: 16,
+        solutionDiagramSvg: VisualDiagrams.getRabattStruktogrammSvg()
+},
     {
         id: 226,
         isHard: true,
@@ -4862,7 +4863,7 @@ WHERE Email IS NULL OR Email = '';
                 "Es gibt keinen Unterschied, die Raute ist rein dekorativ."
         ],
         "correctAnswer": 0,
-        "solutionDiagramSvg": VisualDiagrams.getClassDiagramSvg(),
+        "solutionDiagramSvg": VisualDiagrams.getAggregationKompositionSvg(),
         "explanation": "Komposition (schwarze Raute) = 'Besteht-aus' mit starker Existenzabhängigkeit (löscht man die Rechnung, existieren die Posten nicht mehr). Aggregation (weiße Raute) = 'Hat-ein' mit schwacher Bindung (wird die Abteilung aufgelöst, bleibt der Mitarbeiter im Unternehmen)."
 },
     {
@@ -5165,7 +5166,7 @@ WHERE Email IS NULL OR Email = '';
                 "Struktogramme unterstützen nur Zählschleifen (FOR)."
         ],
         "correctAnswer": 0,
-        "solutionDiagramSvg": VisualDiagrams.getStruktogrammSvg(),
+        "solutionDiagramSvg": VisualDiagrams.getLoopComparisonStruktogrammSvg(),
         "explanation": "Kopfgesteuerte Schleife (Pre-Condition): Bedingung oben -> Ausführung nur, wenn Bedingung zu Beginn wahr ist (0 bis n Durchläufe). Fußgesteuerte Schleife (Post-Condition): Bedingung unten -> Rumpf wird mindestens 1-mal durchlaufen (1 bis n Durchläufe)."
 },
     {
@@ -5419,7 +5420,7 @@ WHERE Email IS NULL OR Email = '';
         "code": "+--------------------------------------------------------+\n| Eingabe: einkaufswert, istStammkunde                   |\n+--------------------------------------------------------+\n| rabatt = 0                                             |\n+--------------------------------------------------------+\n| einkaufswert >= 500 ?                                  |\n|                      JA /                              |\n| +--------------------------------+-------------------+ |\n| | rabatt = 10                    | einkaufswert >= 200? | |\n| |                                |      JA /         | |\n| |                                | +---------+-----+ | |\n| |                                | | rabatt=5| r=0 | | |\n| +--------------------------------+---------+-----+ | |\n+--------------------------------------------------------+\n| istStammkunde == true ?                                |\n|                      JA /                              |\n| +--------------------------------+-------------------+ |\n| | rabatt = rabatt + 3            | TUE NICHTS        | |\n| +--------------------------------+-------------------+ |\n+--------------------------------------------------------+\n| endpreis = einkaufswert * (1 - rabatt / 100)           |\n+--------------------------------------------------------+\n| Ausgabe: endpreis, rabatt                              |",
         "question": "Prüfungsaufgabe Struktogramm-Tracing (BaWü-Fokus): Analysiere das oben dargestellte Struktogramm nach Nassi-Shneiderman.\n\nAufgabe:\na) Berechne den Endpreis und den Rabattsatz für: `einkaufswert = 300 €`, `istStammkunde = true`.\nb) Berechne den Endpreis und den Rabattsatz für: `einkaufswert = 600 €`, `istStammkunde = false`.\nc) Welcher Rabatt ergibt sich für einen Neukunden (`istStammkunde = false`) bei einem Einkaufswert von `150 €`?",
         "musterloesung": "a) Fall 1 (300 €, Stammkunde):\n- Bedingung 1: 300 >= 500 ist FALSCH.\n- Bedingung 2: 300 >= 200 ist WAHR -> rabatt = 5%.\n- Bedingung 3: istStammkunde == true ist WAHR -> rabatt = 5 + 3 = 8%.\n- Endpreis: 300 € * (1 - 0,08) = 300 € * 0,92 = 276,00 € (Rabatt: 8%).\n\nb) Fall 2 (600 €, kein Stammkunde):\n- Bedingung 1: 600 >= 500 ist WAHR -> rabatt = 10%.\n- Bedingung 3: istStammkunde == true ist FALSCH -> rabatt bleibt 10%.\n- Endpreis: 600 € * (1 - 0,10) = 600 € * 0,90 = 540,00 € (Rabatt: 10%).\n\nc) Fall 3 (150 €, kein Stammkunde):\n- 150 < 500 und 150 < 200 -> rabatt = 0%.\n- Kein Stammkunde -> rabatt = 0%.\n- Endpreis = 150,00 €.",
-        "solutionDiagramSvg": VisualDiagrams.getStruktogrammSvg(),
+        "solutionDiagramSvg": VisualDiagrams.getStammkundeStruktogrammSvg(),
         "explanation": "Struktogramme werden von oben nach unten sequenziell abgearbeitet. Verzweigungen prüfen Bedingungen hierarchisch. Tracing-Tabellen helfen, alle Variablenzustände fehlerfrei zu berechnen."
 },
     {

@@ -332,6 +332,271 @@ var VisualDiagrams = {
         </svg>
         `;
     },
+    // 6a. Struktogramm Rabattberechnung Onlineshop (DIN 66261)
+    getRabattStruktogrammSvg: function() {
+        return `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 440" width="100%" height="100%">
+            <rect width="680" height="440" fill="#f8fafc" rx="8" />
+            <text x="340" y="24" font-family="sans-serif" font-size="14" font-weight="bold" fill="#1e3a8a" text-anchor="middle">DIN 66261 Nassi-Shneiderman Struktogramm: Rabattberechnung Onlineshop</text>
+            
+            <!-- Outer Schleife: SOLANGE noch Artikel im Warenkorb DO -->
+            <rect x="30" y="40" width="620" height="30" fill="#fef3c7" stroke="#b45309" stroke-width="2" />
+            <text x="45" y="60" font-family="sans-serif" font-size="12" font-weight="bold" fill="#92400e">SOLANGE noch Artikel im Warenkorb vorhanden DO</text>
+            
+            <!-- Schleifenkörper links (L-Rahmen) -->
+            <rect x="30" y="70" width="25" height="310" fill="#fef3c7" stroke="#b45309" stroke-width="2" />
+            
+            <!-- Innerer Bereich -->
+            <g transform="translate(55, 70)">
+                <!-- 1. Eingabe -->
+                <rect x="0" y="0" width="595" height="32" fill="#ffffff" stroke="#1e293b" stroke-width="1.5" />
+                <text x="15" y="21" font-family="monospace" font-size="12" font-weight="bold" fill="#0f172a">Eingabe: status, bestellwert</text>
+                
+                <!-- 2. Große Verzweigung: status == 'premium' ? -->
+                <polygon points="0,32 595,32 297,72" fill="#e0f2fe" stroke="#1e293b" stroke-width="1.5" />
+                <text x="297" y="52" font-family="sans-serif" font-size="12" font-weight="bold" fill="#0369a1" text-anchor="middle">status == 'premium' ?</text>
+                <text x="30" y="65" font-family="sans-serif" font-size="11" font-weight="bold" fill="#16a34a">JA (Premium-Kunde)</text>
+                <text x="565" y="65" font-family="sans-serif" font-size="11" font-weight="bold" fill="#dc2626" text-anchor="end">NEIN (Standard-Kunde)</text>
+                
+                <!-- Trennlinie Mitte -->
+                <line x1="297" y1="72" x2="297" y2="182" stroke="#1e293b" stroke-width="1.5" />
+                
+                <!-- LINKE SEITE: Premium (bestellwert >= 100 ?) -->
+                <polygon points="0,72 297,72 148,112" fill="#f0fdf4" stroke="#1e293b" stroke-width="1.2" />
+                <text x="148" y="92" font-family="sans-serif" font-size="11" font-weight="bold" fill="#166534" text-anchor="middle">bestellwert &gt;= 100 ?</text>
+                <text x="15" y="105" font-family="sans-serif" font-size="10" font-weight="bold" fill="#16a34a">JA</text>
+                <text x="282" y="105" font-family="sans-serif" font-size="10" font-weight="bold" fill="#dc2626" text-anchor="end">NEIN</text>
+                
+                <line x1="148" y1="112" x2="148" y2="182" stroke="#1e293b" stroke-width="1.2" />
+                <rect x="0" y="112" width="148" height="70" fill="#dcfce7" stroke="#1e293b" stroke-width="1" />
+                <text x="10" y="152" font-family="monospace" font-size="11" font-weight="bold" fill="#166534">rabattProzent = 0.10</text>
+                <text x="10" y="168" font-family="sans-serif" font-size="10" fill="#166534">(10 % Rabatt)</text>
+                
+                <rect x="148" y="112" width="149" height="70" fill="#f0fdf4" stroke="#1e293b" stroke-width="1" />
+                <text x="158" y="152" font-family="monospace" font-size="11" font-weight="bold" fill="#166534">rabattProzent = 0.05</text>
+                <text x="158" y="168" font-family="sans-serif" font-size="10" fill="#166534">(5 % Rabatt)</text>
+                
+                <!-- RECHTE SEITE: Standard (bestellwert >= 200 ?) -->
+                <polygon points="297,72 595,72 446,112" fill="#fef2f2" stroke="#1e293b" stroke-width="1.2" />
+                <text x="446" y="92" font-family="sans-serif" font-size="11" font-weight="bold" fill="#991b1b" text-anchor="middle">bestellwert &gt;= 200 ?</text>
+                <text x="312" y="105" font-family="sans-serif" font-size="10" font-weight="bold" fill="#16a34a">JA</text>
+                <text x="580" y="105" font-family="sans-serif" font-size="10" font-weight="bold" fill="#dc2626" text-anchor="end">NEIN</text>
+                
+                <line x1="446" y1="112" x2="446" y2="182" stroke="#1e293b" stroke-width="1.2" />
+                <rect x="297" y="112" width="149" height="70" fill="#fee2e2" stroke="#1e293b" stroke-width="1" />
+                <text x="307" y="152" font-family="monospace" font-size="11" font-weight="bold" fill="#991b1b">rabattProzent = 0.05</text>
+                <text x="307" y="168" font-family="sans-serif" font-size="10" fill="#991b1b">(5 % Rabatt)</text>
+                
+                <rect x="446" y="112" width="149" height="70" fill="#fef2f2" stroke="#1e293b" stroke-width="1" />
+                <text x="456" y="152" font-family="monospace" font-size="11" font-weight="bold" fill="#991b1b">rabattProzent = 0.00</text>
+                <text x="456" y="168" font-family="sans-serif" font-size="10" fill="#991b1b">(Kein Rabatt)</text>
+                
+                <!-- 3. Berechnung Rabatt & Rechnungsbetrag -->
+                <rect x="0" y="182" width="595" height="40" fill="#ffffff" stroke="#1e293b" stroke-width="1.5" />
+                <text x="15" y="207" font-family="monospace" font-size="12" fill="#0f172a">rabattBetrag = bestellwert * rabattProzent</text>
+                
+                <rect x="0" y="222" width="595" height="40" fill="#ffffff" stroke="#1e293b" stroke-width="1.5" />
+                <text x="15" y="247" font-family="monospace" font-size="12" font-weight="bold" fill="#0f172a">rechnungsbetrag = bestellwert - rabattBetrag</text>
+                
+                <!-- 4. Ausgabe -->
+                <rect x="0" y="262" width="595" height="48" fill="#f1f5f9" stroke="#1e293b" stroke-width="1.5" />
+                <text x="15" y="291" font-family="monospace" font-size="12" font-weight="bold" fill="#0f172a">AUSGABE: "Rechnungsbetrag: ", rechnungsbetrag</text>
+            </g>
+            
+            <!-- Fußzeile -->
+            <text x="340" y="418" font-family="sans-serif" font-size="12" font-style="italic" fill="#475569" text-anchor="middle">DIN 66261: Kopfgesteuerte Schleife (Gelb) mit geschachtelter Dreiecks-Verzweigung (Blau/Grün/Rot)</text>
+        </svg>
+        `;
+    },
+
+    // 6b. Struktogramm Tracing / Stammkunde (DIN 66261)
+    getStammkundeStruktogrammSvg: function() {
+        return `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 430" width="100%" height="100%">
+            <rect width="680" height="430" fill="#f8fafc" rx="8" />
+            <text x="340" y="24" font-family="sans-serif" font-size="14" font-weight="bold" fill="#1e3a8a" text-anchor="middle">DIN 66261 Nassi-Shneiderman Struktogramm: Rabatt-Tracing</text>
+            
+            <g transform="translate(40, 40)">
+                <!-- 1. Eingabe -->
+                <rect x="0" y="0" width="600" height="35" fill="#ffffff" stroke="#1e293b" stroke-width="1.5" />
+                <text x="15" y="23" font-family="monospace" font-size="12" font-weight="bold" fill="#0f172a">Eingabe: einkaufswert, istStammkunde</text>
+                
+                <!-- 2. rabatt = 0 -->
+                <rect x="0" y="35" width="600" height="30" fill="#f8fafc" stroke="#1e293b" stroke-width="1.5" />
+                <text x="15" y="55" font-family="monospace" font-size="12" fill="#0f172a">rabatt = 0</text>
+                
+                <!-- 3. Verzweigung 1: einkaufswert >= 500 ? -->
+                <polygon points="0,65 600,65 300,105" fill="#e0f2fe" stroke="#1e293b" stroke-width="1.5" />
+                <text x="300" y="85" font-family="sans-serif" font-size="12" font-weight="bold" fill="#0369a1" text-anchor="middle">einkaufswert &gt;= 500 ?</text>
+                <text x="30" y="98" font-family="sans-serif" font-size="11" font-weight="bold" fill="#16a34a">JA</text>
+                <text x="570" y="98" font-family="sans-serif" font-size="11" font-weight="bold" fill="#dc2626" text-anchor="end">NEIN</text>
+                
+                <line x1="300" y1="105" x2="300" y2="185" stroke="#1e293b" stroke-width="1.5" />
+                
+                <!-- JA: rabatt = 10 -->
+                <rect x="0" y="105" width="300" height="80" fill="#dcfce7" stroke="#1e293b" stroke-width="1.2" />
+                <text x="150" y="150" font-family="monospace" font-size="13" font-weight="bold" fill="#166534" text-anchor="middle">rabatt = 10</text>
+                
+                <!-- NEIN: einkaufswert >= 200 ? -->
+                <polygon points="300,105 600,105 450,140" fill="#fef2f2" stroke="#1e293b" stroke-width="1.2" />
+                <text x="450" y="123" font-family="sans-serif" font-size="11" font-weight="bold" fill="#991b1b" text-anchor="middle">einkaufswert &gt;= 200 ?</text>
+                <text x="320" y="133" font-family="sans-serif" font-size="10" font-weight="bold" fill="#16a34a">JA</text>
+                <text x="580" y="133" font-family="sans-serif" font-size="10" font-weight="bold" fill="#dc2626" text-anchor="end">NEIN</text>
+                
+                <line x1="450" y1="140" x2="450" y2="185" stroke="#1e293b" stroke-width="1.2" />
+                <rect x="300" y="140" width="150" height="45" fill="#fee2e2" stroke="#1e293b" stroke-width="1" />
+                <text x="375" y="167" font-family="monospace" font-size="12" font-weight="bold" fill="#991b1b" text-anchor="middle">rabatt = 5</text>
+                
+                <rect x="450" y="140" width="150" height="45" fill="#fef2f2" stroke="#1e293b" stroke-width="1" />
+                <text x="525" y="167" font-family="monospace" font-size="12" font-weight="bold" fill="#991b1b" text-anchor="middle">rabatt = 0</text>
+                
+                <!-- 4. Verzweigung 2: istStammkunde == true ? -->
+                <polygon points="0,185 600,185 300,225" fill="#f3e8ff" stroke="#1e293b" stroke-width="1.5" />
+                <text x="300" y="205" font-family="sans-serif" font-size="12" font-weight="bold" fill="#7e22ce" text-anchor="middle">istStammkunde == true ?</text>
+                <text x="30" y="218" font-family="sans-serif" font-size="11" font-weight="bold" fill="#16a34a">JA</text>
+                <text x="570" y="218" font-family="sans-serif" font-size="11" font-weight="bold" fill="#dc2626" text-anchor="end">NEIN</text>
+                
+                <line x1="300" y1="225" x2="300" y2="275" stroke="#1e293b" stroke-width="1.5" />
+                <rect x="0" y="225" width="300" height="50" fill="#ede9fe" stroke="#1e293b" stroke-width="1.2" />
+                <text x="150" y="255" font-family="monospace" font-size="12" font-weight="bold" fill="#6b21a8" text-anchor="middle">rabatt = rabatt + 3</text>
+                
+                <rect x="300" y="225" width="300" height="50" fill="#ffffff" stroke="#1e293b" stroke-width="1.2" />
+                <text x="450" y="255" font-family="monospace" font-size="12" fill="#64748b" text-anchor="middle">-- TUE NICHTS --</text>
+                
+                <!-- 5. Endpreis -->
+                <rect x="0" y="275" width="600" height="40" fill="#ffffff" stroke="#1e293b" stroke-width="1.5" />
+                <text x="15" y="300" font-family="monospace" font-size="12" font-weight="bold" fill="#0f172a">endpreis = einkaufswert * (1 - rabatt / 100)</text>
+                
+                <!-- 6. Ausgabe -->
+                <rect x="0" y="315" width="600" height="40" fill="#f1f5f9" stroke="#1e293b" stroke-width="1.5" />
+                <text x="15" y="340" font-family="monospace" font-size="12" font-weight="bold" fill="#0f172a">Ausgabe: endpreis, rabatt</text>
+            </g>
+            
+            <text x="340" y="415" font-family="sans-serif" font-size="12" font-style="italic" fill="#475569" text-anchor="middle">DIN 66261 Nassi-Shneiderman: Gestaffelte Dreiecksverzweigung &amp; Stammkunden-Bonus</text>
+        </svg>
+        `;
+    },
+
+    // 6c. Struktogramm Schleifentypen Vergleich (DIN 66261)
+    getLoopComparisonStruktogrammSvg: function() {
+        return `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 340" width="100%" height="100%">
+            <rect width="680" height="340" fill="#f8fafc" rx="8" />
+            <text x="340" y="24" font-family="sans-serif" font-size="14" font-weight="bold" fill="#1e3a8a" text-anchor="middle">DIN 66261: Kopfgesteuerte (WHILE) vs. Fußgesteuerte Schleife (DO-WHILE)</text>
+            
+            <!-- LINKER TEIL: Kopfgesteuerte Schleife (WHILE) -->
+            <g transform="translate(30, 45)">
+                <text x="150" y="20" font-family="sans-serif" font-size="13" font-weight="bold" fill="#0369a1" text-anchor="middle">1. Kopfgesteuerte Schleife (WHILE)</text>
+                <text x="150" y="38" font-family="sans-serif" font-size="11" fill="#64748b" text-anchor="middle">Prüfung VOR dem Rumpf (0 bis n Durchläufe)</text>
+                
+                <!-- Balken OBEN -->
+                <rect x="10" y="55" width="280" height="35" fill="#dbeafe" stroke="#0284c7" stroke-width="2" rx="3" />
+                <text x="25" y="77" font-family="monospace" font-size="11" font-weight="bold" fill="#0369a1">SOLANGE bedingung == wahr DO</text>
+                
+                <!-- L-Körper links -->
+                <rect x="10" y="90" width="30" height="110" fill="#dbeafe" stroke="#0284c7" stroke-width="2" />
+                
+                <!-- Schleifenrumpf -->
+                <rect x="40" y="90" width="250" height="55" fill="#ffffff" stroke="#1e293b" stroke-width="1.5" />
+                <text x="55" y="122" font-family="monospace" font-size="12" fill="#0f172a">anweisung_1()</text>
+                
+                <rect x="40" y="145" width="250" height="55" fill="#ffffff" stroke="#1e293b" stroke-width="1.5" />
+                <text x="55" y="177" font-family="monospace" font-size="12" fill="#0f172a">i = i + 1</text>
+                
+                <text x="150" y="225" font-family="sans-serif" font-size="11" font-weight="bold" fill="#16a34a" text-anchor="middle">✓ Kann 0-mal ausgeführt werden (abweisend)</text>
+            </g>
+            
+            <line x1="340" y1="45" x2="340" y2="300" stroke="#cbd5e1" stroke-width="2" stroke-dasharray="4,4" />
+            
+            <!-- RECHTER TEIL: Fußgesteuerte Schleife (DO-WHILE) -->
+            <g transform="translate(370, 45)">
+                <text x="150" y="20" font-family="sans-serif" font-size="13" font-weight="bold" fill="#b45309" text-anchor="middle">2. Fußgesteuerte Schleife (DO-WHILE)</text>
+                <text x="150" y="38" font-family="sans-serif" font-size="11" fill="#64748b" text-anchor="middle">Prüfung NACH dem Rumpf (mind. 1 Durchlauf)</text>
+                
+                <!-- L-Körper links -->
+                <rect x="10" y="55" width="30" height="110" fill="#fef3c7" stroke="#d97706" stroke-width="2" />
+                
+                <!-- Schleifenrumpf -->
+                <rect x="40" y="55" width="250" height="55" fill="#ffffff" stroke="#1e293b" stroke-width="1.5" />
+                <text x="55" y="87" font-family="monospace" font-size="12" fill="#0f172a">anweisung_1()</text>
+                
+                <rect x="40" y="110" width="250" height="55" fill="#ffffff" stroke="#1e293b" stroke-width="1.5" />
+                <text x="55" y="142" font-family="monospace" font-size="12" fill="#0f172a">i = i + 1</text>
+                
+                <!-- Balken UNTEN -->
+                <rect x="10" y="165" width="280" height="35" fill="#fef3c7" stroke="#d97706" stroke-width="2" rx="3" />
+                <text x="25" y="187" font-family="monospace" font-size="11" font-weight="bold" fill="#92400e">SOLANGE bedingung == wahr (oder BIS)</text>
+                
+                <text x="150" y="225" font-family="sans-serif" font-size="11" font-weight="bold" fill="#dc2626" text-anchor="middle">✓ Wird MINDESTENS 1-mal ausgeführt (annehmend)</text>
+            </g>
+            
+            <text x="340" y="325" font-family="sans-serif" font-size="12" font-style="italic" fill="#475569" text-anchor="middle">DIN 66261: Schleifenbalken oben = WHILE (pre-check), Schleifenbalken unten = DO-WHILE (post-check)</text>
+        </svg>
+        `;
+    },
+
+    // 2b. UML Aggregation vs Komposition (UML Klassendiagramm)
+    getAggregationKompositionSvg: function() {
+        return `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 320" width="100%" height="100%">
+            <rect width="680" height="320" fill="#f8fafc" rx="8" />
+            <text x="340" y="24" font-family="sans-serif" font-size="14" font-weight="bold" fill="#1e3a8a" text-anchor="middle">UML Klassendiagramm: Aggregation (◇) vs. Komposition (◆)</text>
+            
+            <!-- 1. Aggregation (Links) -->
+            <g transform="translate(30, 45)">
+                <rect width="300" height="230" fill="#ffffff" stroke="#0284c7" stroke-width="1.5" rx="6" />
+                <text x="150" y="24" font-family="sans-serif" font-size="13" font-weight="bold" fill="#0369a1" text-anchor="middle">1. Aggregation (Leere Raute ◇)</text>
+                <text x="150" y="42" font-family="sans-serif" font-size="11" fill="#64748b" text-anchor="middle">Lose Teil-Ganzes-Beziehung ("hat-ein")</text>
+                
+                <!-- Klasse Ganzes -->
+                <rect x="20" y="60" width="110" height="40" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.5" rx="4" />
+                <text x="75" y="85" font-family="sans-serif" font-size="12" font-weight="bold" fill="#0369a1" text-anchor="middle">Abteilung</text>
+                
+                <!-- Raute leer -->
+                <polygon points="130,80 142,73 154,80 142,87" fill="#ffffff" stroke="#0284c7" stroke-width="2" />
+                <line x1="154" y1="80" x2="180" y2="80" stroke="#0284c7" stroke-width="2" />
+                
+                <!-- Klasse Teil -->
+                <rect x="180" y="60" width="100" height="40" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.5" rx="4" />
+                <text x="230" y="85" font-family="sans-serif" font-size="12" font-weight="bold" fill="#0369a1" text-anchor="middle">Mitarbeiter</text>
+                
+                <rect x="15" y="125" width="270" height="90" fill="#f0fdf4" stroke="#86efac" stroke-width="1" rx="4" />
+                <text x="25" y="145" font-family="sans-serif" font-size="11" font-weight="bold" fill="#166534">✓ Nicht-existenziell gebunden:</text>
+                <text x="25" y="165" font-family="sans-serif" font-size="11" fill="#166534">Wird die Abteilung aufgelöst, existiert</text>
+                <text x="25" y="183" font-family="sans-serif" font-size="11" fill="#166534">der Mitarbeiter weiterhin eigenständig</text>
+                <text x="25" y="201" font-family="sans-serif" font-size="11" fill="#166534">im Unternehmen.</text>
+            </g>
+            
+            <!-- 2. Komposition (Rechts) -->
+            <g transform="translate(350, 45)">
+                <rect width="300" height="230" fill="#ffffff" stroke="#7c3aed" stroke-width="1.5" rx="6" />
+                <text x="150" y="24" font-family="sans-serif" font-size="13" font-weight="bold" fill="#6d28d9" text-anchor="middle">2. Komposition (Gefüllte Raute ◆)</text>
+                <text x="150" y="42" font-family="sans-serif" font-size="11" fill="#64748b" text-anchor="middle">Strikte Teil-Ganzes-Beziehung ("besteht-aus")</text>
+                
+                <!-- Klasse Ganzes -->
+                <rect x="20" y="60" width="110" height="40" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.5" rx="4" />
+                <text x="75" y="85" font-family="sans-serif" font-size="12" font-weight="bold" fill="#6d28d9" text-anchor="middle">Gebäude / PC</text>
+                
+                <!-- Raute gefüllt -->
+                <polygon points="130,80 142,73 154,80 142,87" fill="#7c3aed" stroke="#7c3aed" stroke-width="2" />
+                <line x1="154" y1="80" x2="180" y2="80" stroke="#7c3aed" stroke-width="2" />
+                
+                <!-- Klasse Teil -->
+                <rect x="180" y="60" width="100" height="40" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.5" rx="4" />
+                <text x="230" y="85" font-family="sans-serif" font-size="12" font-weight="bold" fill="#6d28d9" text-anchor="middle">Stockwerk / CPU</text>
+                
+                <rect x="15" y="125" width="270" height="90" fill="#fef2f2" stroke="#fca5a5" stroke-width="1" rx="4" />
+                <text x="25" y="145" font-family="sans-serif" font-size="11" font-weight="bold" fill="#991b1b">✓ Existenziell abhängig:</text>
+                <text x="25" y="165" font-family="sans-serif" font-size="11" fill="#991b1b">Wird das Gebäude abgerissen, werden</text>
+                <text x="25" y="183" font-family="sans-serif" font-size="11" fill="#991b1b">auch die Stockwerke zerstört. Gleiche</text>
+                <text x="25" y="201" font-family="sans-serif" font-size="11" fill="#991b1b">Lebensdauer von Ganzem und Teil.</text>
+            </g>
+            
+            <text x="340" y="305" font-family="sans-serif" font-size="12" font-style="italic" fill="#475569" text-anchor="middle">UML-Regel: Die Raute steht immer auf der Seite des GANZEN (Owner / Aggregator / Container)</text>
+        </svg>
+        `;
+    },
+
 
     // 7. Netzplan (DIN 69900)
     getNetzplanDiagramSvg: function() {
@@ -667,7 +932,7 @@ var VisualDiagrams = {
         `;
     },
 
-    // 12. Universeller Auto-Resolver für Diagramme & Tabellen
+        // 12. Universeller Auto-Resolver für Diagramme & Tabellen
     getAutoDiagramSvg: function(q) {
         if (!q) return null;
         // 1. Wenn die Frage bereits eine explizite grafische Musterlösung besitzt
@@ -679,8 +944,11 @@ var VisualDiagrams = {
             return q.diagramSvg;
         }
         
-        // 3. Strikte Prüfung: Ist diese Frage WIRKLICH eine Modellierungs- / Diagramm-Aufgabe?
-        // Wenn nicht, darf KEIN Diagramm angezeigt werden (z. B. Übertragungszeit, USV, Mathe, WiSo, Gesetze)!
+        // 3. Strikte Prüfung: Reine Theorie-/Textaufgaben (z. B. ID 214, 222, 224, 378, 409) erhalten KEIN generisches Auto-Diagramm
+        if (q.id === 214 || q.id === 222 || q.id === 224 || q.id === 378 || q.id === 409) {
+            return null;
+        }
+
         const isExplicitDiagramTask = q.isDiagram === true || 
                                       q.theme === "diagrams" || 
                                       (q.diagramType && typeof q.diagramType === "string" && q.diagramType.trim().length > 0) ||
@@ -737,7 +1005,10 @@ var VisualDiagrams = {
             return VisualDiagrams.getUseCaseDiagramSvg(title);
         }
         
-        // 4. Klassendiagramm
+        // 4. Klassendiagramm (inkl. Aggregation vs Komposition)
+        if (text.includes("aggregation") && text.includes("komposition")) {
+            return VisualDiagrams.getAggregationKompositionSvg();
+        }
         if (/\b(klassendiagramm|uml-klasse|komposition|aggregation)\b/i.test(text)) {
             return VisualDiagrams.getClassDiagramSvg();
         }
@@ -757,8 +1028,17 @@ var VisualDiagrams = {
             return VisualDiagrams.getNetzplanDiagramSvg();
         }
         
-        // 8. Struktogramm
+        // 8. Struktogramm (Rabatt / Stammkunde / Schleifentypen / Standard)
         if (/\b(struktogramm|nassi-shneiderman|din 66261)\b/i.test(text)) {
+            if (text.includes("rabatt") && (text.includes("onlineshop") || text.includes("bestellwert") || text.includes("premium"))) {
+                return VisualDiagrams.getRabattStruktogrammSvg();
+            }
+            if (text.includes("stammkunde") || text.includes("rabatt = rabatt + 3")) {
+                return VisualDiagrams.getStammkundeStruktogrammSvg();
+            }
+            if (text.includes("kopfgesteuert") || text.includes("fußgesteuert") || text.includes("schleifentyp") || text.includes("do-while")) {
+                return VisualDiagrams.getLoopComparisonStruktogrammSvg();
+            }
             return VisualDiagrams.getStruktogrammSvg();
         }
         
@@ -767,6 +1047,16 @@ var VisualDiagrams = {
             return VisualDiagrams.getOrganigrammStabSvg();
         }
         
+        // 10. Marktgleichgewicht
+        if (text.includes("marktgleichgewicht") || text.includes("preisbildung") || text.includes("nachfrageüberhang")) {
+            return VisualDiagrams.getMarktgleichgewichtSvg();
+        }
+
+        // 11. Handelskalkulation
+        if (text.includes("handelskalkulation") || text.includes("schema-treppe") || text.includes("bezugspreis")) {
+            return VisualDiagrams.getKalkulationTreeSvg();
+        }
+
         return null;
     }
 
