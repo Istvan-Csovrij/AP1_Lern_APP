@@ -577,7 +577,7 @@ var VisualDiagrams = {
             <path d="M 230 204 L 360 204" stroke="#d97706" stroke-width="2" stroke-dasharray="4,3" marker-end="url(#kalk-arrow)" />
         </svg>
         `;
-    }
+    },
 
     // 11. Relationales ERD- & Tabellenschema-Diagramm (Chen + Relationale Tabellen)
     getRelationalErdSvg: function(entA = "Server", entB = "Festplatte", rel = "enthält", card = "1:n", fkTable = "Festplatte", fkField = "FK_ServerID", reason = "Ein Server besitzt mehrere Festplatten, eine Festplatte ist fest in einem Server verbaut.") {

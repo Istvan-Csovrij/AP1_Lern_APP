@@ -35,16 +35,16 @@ function generateDynamicQuestions(typeMode = "mix") {
 
         if (isOpen) {
             let qText = "";
-            let mLösung = "";
+            let mLoesung = "";
             if (qType === 0) {
                 qText = `Prüfungsaufgabe Wirtschaftlichkeit (LF 6): Ein Unternehmen möchte für seine Mitarbeiter ${count} neue Monitore beschaffen. Angebot A kostet ${priceA} EUR pro Stück. Berechne die Gesamtkosten für Angebot A.`;
-                mLösung = `${totalA} EUR. (Rechnung: ${count} Stück * ${priceA} EUR/Stück = ${totalA} EUR).`;
+                mLoesung = `${totalA} EUR. (Rechnung: ${count} Stück * ${priceA} EUR/Stück = ${totalA} EUR).`;
             } else if (qType === 1) {
                 qText = `Prüfungsaufgabe Wirtschaftlichkeit (LF 6): Ein Unternehmen möchte für seine Mitarbeiter ${count} neue Monitore beschaffen. Angebot B kostet ${priceB} EUR pro Stück. Berechne die Gesamtkosten für Angebot B.`;
-                mLösung = `${totalB} EUR. (Rechnung: ${count} Stück * ${priceB} EUR/Stück = ${totalB} EUR).`;
+                mLoesung = `${totalB} EUR. (Rechnung: ${count} Stück * ${priceB} EUR/Stück = ${totalB} EUR).`;
             } else {
                 qText = `Prüfungsaufgabe Wirtschaftlichkeit (LF 6): Für die Anschaffung von ${count} neuen Monitoren liegen drei Angebote vor:\nAngebot A: ${priceA} EUR/Stück\nAngebot B: ${priceB} EUR/Stück\nAngebot C: ${priceC} EUR/Stück\n\nWelches Angebot hat die niedrigsten Gesamtanschaffungskosten und warum?`;
-                mLösung = `Angebot C hat die niedrigsten Kosten (${totalC} EUR), da der Stückpreis mit ${priceC} EUR der geringste ist.`;
+                mLoesung = `Angebot C hat die niedrigsten Kosten (${totalC} EUR), da der Stückpreis mit ${priceC} EUR der geringste ist.`;
             }
 
             dynamicQuestions.push({
@@ -52,7 +52,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                 theme: "lf6",
                 type: "open-text",
                 question: qText,
-                musterloesung: mLösung,
+                musterloesung: mLoesung,
                 explanation: `Rechnung: Menge (${count}) * Stückpreis.`
             });
         } else {
@@ -242,19 +242,19 @@ function generateDynamicQuestions(typeMode = "mix") {
 
         if (isOpen) {
             let qText = "";
-            let mLösung = "";
+            let mLoesung = "";
             if (qType === 0) {
                 qText = `Prüfungsaufgabe Netzwerk (LF 3): Gegeben ist die IP-Adresse ${baseIP} mit der Subnetzmaske ${m.maskStr} (/${m.slash}). Bestimme die Netzwerkadresse (Network ID).`;
-                mLösung = `Netzwerkadresse: ${netID}`;
+                mLoesung = `Netzwerkadresse: ${netID}`;
             } else if (qType === 1) {
                 qText = `Prüfungsaufgabe Netzwerk (LF 3): Gegeben ist die IP-Adresse ${baseIP} mit der Subnetzmaske ${m.maskStr} (/${m.slash}). Bestimme die Broadcast-Adresse.`;
-                mLösung = `Broadcast-Adresse: ${broadcast}`;
+                mLoesung = `Broadcast-Adresse: ${broadcast}`;
             } else if (qType === 2) {
                 qText = `Prüfungsaufgabe Netzwerk (LF 3): Berechne die Anzahl der nutzbaren Host-IP-Adressen für ein Subnetz mit der Subnetzmaske ${m.maskStr} (/${m.slash}).`;
-                mLösung = `${hostsCount} Hosts.`;
+                mLoesung = `${hostsCount} Hosts.`;
             } else {
                 qText = `Prüfungsaufgabe Netzwerk (LF 3): Gegeben ist die IP-Adresse ${baseIP} mit der Subnetzmaske ${m.maskStr} (/${m.slash}). Bestimme den ersten und den letzten nutzbaren Hostbereich.`;
-                mLösung = `Erster Host: ${hostMin}, Letzter Host: ${hostMax}`;
+                mLoesung = `Erster Host: ${hostMin}, Letzter Host: ${hostMax}`;
             }
 
             dynamicQuestions.push({
@@ -262,7 +262,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                 theme: "lf3",
                 type: "open-text",
                 question: qText,
-                musterloesung: `${mLösung}\n\n${explanationStr}`,
+                musterloesung: mLoesung,
                 explanation: explanationStr
             });
         } else {
@@ -684,14 +684,14 @@ function generateDynamicQuestions(typeMode = "mix") {
         
         let questionText = "";
         let correctAnswersList = [];
-        let mLösung = "";
+        let mLoesung = "";
         let explanationStr = "";
         
         if (qType === 0) {
             // Dezimal zu Binär
             questionText = `Prüfungsaufgabe Zahlensysteme (LF 3): Rechne die Dezimalzahl ${num} in eine 8-Bit-Binärzahl um.`;
             correctAnswersList = [binStr];
-            mLösung = binStr;
+            mLoesung = binStr;
             
             let temp = num;
             let steps = [];
@@ -709,7 +709,7 @@ function generateDynamicQuestions(typeMode = "mix") {
             // Binär zu Dezimal
             questionText = `Prüfungsaufgabe Zahlensysteme (LF 3): Rechne die Binärzahl ${binStr} in eine Dezimalzahl um.`;
             correctAnswersList = [num.toString()];
-            mLösung = num.toString();
+            mLoesung = num.toString();
             
             let sumSteps = [];
             let activeStellen = [];
@@ -732,7 +732,7 @@ function generateDynamicQuestions(typeMode = "mix") {
             // Dezimal zu Hexadezimal
             questionText = `Prüfungsaufgabe Zahlensysteme (LF 3): Rechne die Dezimalzahl ${num} in eine Hexadezimalzahl um.`;
             correctAnswersList = [hexStr, "0x" + hexStr];
-            mLösung = hexStr;
+            mLoesung = hexStr;
             
             let temp = num;
             let steps = [];
@@ -755,7 +755,7 @@ function generateDynamicQuestions(typeMode = "mix") {
             // Hexadezimal zu Dezimal
             questionText = `Prüfungsaufgabe Zahlensysteme (LF 3): Rechne die Hexadezimalzahl ${hexStr} in eine Dezimalzahl um.`;
             correctAnswersList = [num.toString()];
-            mLösung = num.toString();
+            mLoesung = num.toString();
             
             let firstDigit = hexStr[0] || '0';
             let secondDigit = hexStr[1] || '';
@@ -782,7 +782,7 @@ function generateDynamicQuestions(typeMode = "mix") {
             // Binär zu Hexadezimal
             questionText = `Prüfungsaufgabe Zahlensysteme (LF 3): Rechne die Binärzahl ${binStr} in eine Hexadezimalzahl um.`;
             correctAnswersList = [hexStr, "0x" + hexStr];
-            mLösung = hexStr;
+            mLoesung = hexStr;
             
             let leftNibble = binStr.substring(0, 4);
             let rightNibble = binStr.substring(4, 8);
@@ -804,7 +804,7 @@ function generateDynamicQuestions(typeMode = "mix") {
             // Hexadezimal zu Binär
             questionText = `Prüfungsaufgabe Zahlensysteme (LF 3): Rechne die Hexadezimalzahl ${hexStr} in eine 8-Bit-Binärzahl um.`;
             correctAnswersList = [binStr];
-            mLösung = binStr;
+            mLoesung = binStr;
             
             let firstDigit = hexStr[0] || '0';
             let secondDigit = hexStr[1] || '';
@@ -829,7 +829,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                 theme: "lf3",
                 type: "open-text",
                 question: questionText,
-                musterloesung: `Ergebnis: ${mLösung}.\n\n${explanationStr}`,
+                musterloesung: `Ergebnis: ${mLoesung}`,
                 explanation: explanationStr
             });
         } else {
