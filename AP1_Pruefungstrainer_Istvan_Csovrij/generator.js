@@ -3425,5 +3425,903 @@ function generateDynamicQuestions(typeMode = "mix") {
         }
     }
 
+    
+    // ============================================================================
+    // 🔥 MEISTERKLASSE: SCHWERE PRÜFUNGSAUFGABEN (IHK HARDCORE / PROFI-NIVEAU)
+    // ============================================================================
+
+    // MC1: Mehrstufige VLSM-Subnetzplanung (LF 3 / Rechnen / Schwer)
+    for (let i = 0; i < 20; i++) {
+        const netBaseB = [16, 20, 24, 32, 48][Math.floor(Math.random() * 5)];
+        const baseNet = `172.${netBaseB}.0.0/20`;
+        const abtA_hosts = [420, 460, 490, 500][Math.floor(Math.random() * 4)]; // Needs /23 (512 IPs)
+        const abtB_hosts = [180, 210, 230, 240][Math.floor(Math.random() * 4)]; // Needs /24 (256 IPs)
+        const abtC_hosts = [45, 52, 58, 60][Math.floor(Math.random() * 4)];      // Needs /26 (64 IPs)
+        const abtD_hosts = 2; // Needs /30 (4 IPs)
+
+        const netA = `172.${netBaseB}.0.0/23 (Maske: 255.255.254.0) -> Erste Host-IP: 172.${netBaseB}.0.1, Letzte Host-IP: 172.${netBaseB}.1.254, Broadcast: 172.${netBaseB}.1.255 (Kapazität: 510 nutzbare Hosts)`;
+        const netB = `172.${netBaseB}.2.0/24 (Maske: 255.255.255.0) -> Erste Host-IP: 172.${netBaseB}.2.1, Letzte Host-IP: 172.${netBaseB}.2.254, Broadcast: 172.${netBaseB}.2.255 (Kapazität: 254 nutzbare Hosts)`;
+        const netC = `172.${netBaseB}.3.0/26 (Maske: 255.255.255.192) -> Erste Host-IP: 172.${netBaseB}.3.1, Letzte Host-IP: 172.${netBaseB}.3.62, Broadcast: 172.${netBaseB}.3.63 (Kapazität: 62 nutzbare Hosts)`;
+        const netD = `172.${netBaseB}.3.64/30 (Maske: 255.255.255.252) -> Erste Host-IP: 172.${netBaseB}.3.65, Letzte Host-IP: 172.${netBaseB}.3.66, Broadcast: 172.${netBaseB}.3.67 (Kapazität: 2 nutzbare Hosts)`;
+
+        const qText = `🔥 Meisterklasse Prüfungsaufgabe VLSM (LF 3):\nEin Unternehmen erhält den Adressblock ${baseNet} zugewiesen. Für eine Standortvernetzung müssen vier Teilnetze mit Variable Length Subnet Masking (VLSM) ohne Adressverschwendung gebildet werden:\n- Subnetz A (Produktion): ${abtA_hosts} Hosts benötigt\n- Subnetz B (Verwaltung): ${abtB_hosts} Hosts benötigt\n- Subnetz C (Server / DMZ): ${abtC_hosts} Hosts benötigt\n- Subnetz D (Point-to-Point WAN-Link): ${abtD_hosts} Hosts benötigt\n\nErmittle für alle vier Subnetze:\n1. Das jeweilige Subnetz-Präfix (CIDR) und die Subnetzmaske in Dotted-Decimal-Notation.\n2. Die Netz-ID, den ersten nutzbaren Host, den letzten nutzbaren Host und die Broadcast-Adresse.`;
+
+        const mLoesung = `Musterlösung VLSM-Subnetzplanung:\nSortierung nach Hostbedarf (absteigend):\n\n1. Subnetz A (${abtA_hosts} Hosts):\n   - Benötigte Adressen: ${abtA_hosts} + 2 = ${abtA_hosts + 2} -> Nächste Zweierpotenz = 512 (2^9) -> 9 Host-Bits, 23 Netz-Bits (/23).\n   - ${netA}\n\n2. Subnetz B (${abtB_hosts} Hosts):\n   - Benötigte Adressen: ${abtB_hosts} + 2 = ${abtB_hosts + 2} -> 2^8 = 256 Adressen -> 8 Host-Bits (/24).\n   - ${netB}\n\n3. Subnetz C (${abtC_hosts} Hosts):\n   - Benötigte Adressen: ${abtC_hosts} + 2 = ${abtC_hosts + 2} -> 2^6 = 64 Adressen -> 6 Host-Bits (/26).\n   - ${netC}\n\n4. Subnetz D (${abtD_hosts} Hosts WAN):\n   - Benötigte Adressen: 2 + 2 = 4 -> 2^2 = 4 Adressen -> 2 Host-Bits (/30).\n   - ${netD}`;
+
+        const isOpen = shouldBeOpenText();
+        if (isOpen) {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "lf3",
+                topic: "🔥 Meisterklasse: VLSM Multi-Subnetzplanung (LF 3)",
+                isCalculation: true,
+                isHard: true,
+                difficulty: "hard",
+                isBawueFocus: true,
+                type: "open-text",
+                question: qText,
+                musterloesung: mLoesung,
+                explanation: `VLSM-Regel: Immer mit dem größten Subnetz beginnen, um Fragmentierung zu vermeiden. Subnetz A (/23 = 512 IPs), B (/24 = 256 IPs), C (/26 = 64 IPs), D (/30 = 4 IPs).`
+            });
+        } else {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "lf3",
+                topic: "🔥 Meisterklasse: VLSM Multi-Subnetzplanung (LF 3)",
+                isCalculation: true,
+                isHard: true,
+                difficulty: "hard",
+                isBawueFocus: true,
+                type: "multiple-choice",
+                question: qText + `\n\nWelche Netz-ID und Subnetzmaske erhält Subnetz C (Server/DMZ)?`,
+                options: [
+                    `172.${netBaseB}.3.0/26 (255.255.255.192)`,
+                    `172.${netBaseB}.2.0/26 (255.255.255.192)`,
+                    `172.${netBaseB}.3.0/25 (255.255.255.128)`,
+                    `172.${netBaseB}.4.0/26 (255.255.255.192)`
+                ],
+                correctAnswer: 0,
+                explanation: `Nach Subnetz A (172.${netBaseB}.0.0/23 = 0.0-1.255) und Subnetz B (172.${netBaseB}.2.0/24 = 2.0-2.255) beginnt Subnetz C bei 172.${netBaseB}.3.0 mit /26 (255.255.255.192).`
+            });
+        }
+    }
+
+    // MC2: CIDR Route Summarization & Longest Prefix Match Routing (LF 3 / Schwer)
+    for (let i = 0; i < 15; i++) {
+        const thirdOctet = [16, 32, 64, 128][Math.floor(Math.random() * 4)];
+        const nets = [
+            `192.168.${thirdOctet}.0/24`,
+            `192.168.${thirdOctet + 1}.0/24`,
+            `192.168.${thirdOctet + 2}.0/24`,
+            `192.168.${thirdOctet + 3}.0/24`
+        ];
+        const summaryNet = `192.168.${thirdOctet}.0/22`;
+        const summaryMask = "255.255.252.0";
+
+        const isOpen = shouldBeOpenText();
+        const qText = `🔥 Meisterklasse Routing & CIDR (LF 3):\nEin Core-Router verbindet vier getrennte Netze:\n- Netz 1: ${nets[0]}\n- Netz 2: ${nets[1]}\n- Netz 3: ${nets[2]}\n- Netz 4: ${nets[3]}\n\nZur Verkleinerung der Routingtabelle sollen diese vier Teilnetze zu einer einzigen zusammengefassten Supernet-Route (Route Summarization / CIDR Aggregation) aggregiert werden.\n\nErmitteln Sie die optimale summarische Route (Netz-ID und CIDR-Präfix sowie Subnetzmaske in Dotted-Decimal-Notation) und erläutern Sie die binäre Herleitung.`;
+
+        const mLoesung = `Musterlösung CIDR Route Summarization:\n1. Summarische Route: ${summaryNet} mit Subnetzmaske ${summaryMask}\n2. Binäre Herleitung im 3. Oktett:\n   ${thirdOctet}  = ${(thirdOctet).toString(2).padStart(8, '0')}\n   ${thirdOctet + 1} = ${(thirdOctet + 1).toString(2).padStart(8, '0')}\n   ${thirdOctet + 2} = ${(thirdOctet + 2).toString(2).padStart(8, '0')}\n   ${thirdOctet + 3} = ${(thirdOctet + 3).toString(2).padStart(8, '0')}\n   Gemeinsame führende Bits im 3. Oktett: 6 Bits identisch -> 16 + 6 = 22 Bits Netzanteil (/22).\n   Subnetzmaske: 255.255.(256 - 4).0 = 255.255.252.0.`;
+
+        if (isOpen) {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "lf3",
+                topic: "🔥 Meisterklasse: CIDR Route Aggregation & Supernetting (LF 3)",
+                isCalculation: true,
+                isHard: true,
+                difficulty: "hard",
+                isBawueFocus: true,
+                type: "open-text",
+                question: qText,
+                musterloesung: mLoesung,
+                explanation: `4x /24 Netze fassen 4*256 = 1024 Adressen zusammen. 1024 = 2^10 Host-Bits -> 32 - 10 = 22 Netz-Bits (/22). Maske = ${summaryMask}.`
+            });
+        } else {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "lf3",
+                topic: "🔥 Meisterklasse: CIDR Route Aggregation & Supernetting (LF 3)",
+                isCalculation: true,
+                isHard: true,
+                difficulty: "hard",
+                isBawueFocus: true,
+                type: "multiple-choice",
+                question: qText + `\n\nWelche zusammengefasste Route ist korrekt?`,
+                options: [
+                    `${summaryNet} (Subnetzmaske: ${summaryMask})`,
+                    `192.168.${thirdOctet}.0/23 (Subnetzmaske: 255.255.254.0)`,
+                    `192.168.${thirdOctet}.0/21 (Subnetzmaske: 255.255.248.0)`,
+                    `192.168.0.0/16 (Subnetzmaske: 255.255.0.0)`
+                ],
+                correctAnswer: 0,
+                explanation: `Die 4 Netze haben 6 identische Bits im 3. Oktett. 16 + 6 = 22 Bit Präfix (${summaryNet}, ${summaryMask}).`
+            });
+        }
+    }
+
+    // MC3: Enterprise Storage, Datacenter Backup, Deduplication, Compression & Bandbreite (LF 3 / LF 2 / LF 7 / Schwer)
+    for (let i = 0; i < 15; i++) {
+        const rawTB = [12, 16, 20, 24][Math.floor(Math.random() * 4)]; // Terabyte
+        const dedupRatio = [2.5, 3.0, 4.0][Math.floor(Math.random() * 3)];
+        const compPercent = [20, 25, 30][Math.floor(Math.random() * 3)];
+        const backupHours = [3, 4, 5][Math.floor(Math.random() * 3)];
+        const overheadPercent = 10; // 10% TCP/IP/Ethernet overhead
+        const maxLinkUtilization = 0.80; // max 80% Auslastung
+
+        // Step 1: After Deduplication
+        const afterDedupTB = rawTB / dedupRatio;
+        // Step 2: After Compression
+        const afterCompTB = afterDedupTB * (1 - (compPercent / 100));
+        // In GByte:
+        const backupGByte = afterCompTB * 1000;
+        // In Gbit:
+        const backupGbitNet = backupGByte * 8;
+        // Gross with 10% overhead:
+        const backupGbitGross = backupGbitNet * (1 + (overheadPercent / 100));
+        // Seconds:
+        const totalSeconds = backupHours * 3600;
+        // Required Mbit/s gross:
+        const reqMbitGross = (backupGbitGross * 1000) / totalSeconds;
+        // Required line speed accounting for 80% max utilization:
+        const recommendedLineMbit = reqMbitGross / maxLinkUtilization;
+
+        const qText = `🔥 Meisterklasse Datacenter & Übertragung (LF 3 / LF 7):\nEin Unternehmen muss ein nächtliches Full-Backup eines Datenbestands von ${rawTB} TB (Dezimal: 1 TB = 1.000 GB) über eine WAN-Strecke in ein sekundäres Rechenzentrum übertragen.\n\nRahmenbedingungen:\n- Deduplizierungsrate der Backup-Appliance: ${dedupRatio}:1\n- Anschließende Datenkompression: ${compPercent}%\n- Zeitfenster für das Backup (Backup-Window): maximal ${backupHours} Stunden\n- Protokoll- und Verschlüsselungs-Overhead (IPsec / TCP / L2): ${overheadPercent}%\n- Maximale Leitungsdauerlast: maximal ${maxLinkUtilization * 100}% der nominalen Bandbreite\n\nAufgaben:\n1. Berechnen Sie das effektiv zu übertragende Datenvolumen in GByte (GB).\n2. Berechnen Sie die mindestens erforderliche Brutto-Übertragungsrate in Mbit/s (ohne Auslastungspuffer).\n3. Ermitteln Sie die empfohlene Mindestbandbreite des WAN-Anschlusses in Mbit/s unter Einhaltung der maximalen 80%-Auslastungsgrenze.`;
+
+        const mLoesung = `Musterlösung Datacenter Backup-Dimensionierung:\n\n1. Effektives Datenvolumen:\n   - Nach Deduplikation (${dedupRatio}:1): ${rawTB} TB / ${dedupRatio} = ${afterDedupTB.toFixed(2)} TB\n   - Nach Kompression (-${compPercent}%): ${afterDedupTB.toFixed(2)} TB * (1 - ${compPercent / 100}) = ${afterCompTB.toFixed(2)} TB = ${backupGByte.toFixed(0)} GB\n\n2. Brutto-Datenmenge mit ${overheadPercent}% Overhead:\n   - Netto-Bits: ${backupGByte.toFixed(0)} GB * 8 = ${backupGbitNet.toFixed(0)} Gbit = ${(backupGbitNet * 1000).toFixed(0)} Mbit\n   - Brutto (+${overheadPercent}% Overhead): ${(backupGbitNet * 1000).toFixed(0)} Mbit * 1,10 = ${(backupGbitGross * 1000).toFixed(0)} Mbit\n   - Zeitfenster: ${backupHours} Stunden * 3.600 s = ${totalSeconds} Sekunden\n   - Erforderliche Brutto-Rate: ${(backupGbitGross * 1000).toFixed(0)} Mbit / ${totalSeconds} s = ${reqMbitGross.toFixed(2)} Mbit/s\n\n3. Empfohlene Mindestbandbreite bei max. 80% Leitungsnutzung:\n   - Bandbreite = ${reqMbitGross.toFixed(2)} Mbit/s / 0,80 = ${recommendedLineMbit.toFixed(2)} Mbit/s (z. B. 1 Gbit/s oder ${Math.ceil(recommendedLineMbit / 100) * 100} Mbit/s Anschluss).`;
+
+        const isOpen = shouldBeOpenText();
+        if (isOpen) {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "lf3",
+                topic: "🔥 Meisterklasse: Enterprise Backup & Bandbreiten-Kalkulation (LF 3)",
+                isCalculation: true,
+                isHard: true,
+                difficulty: "hard",
+                isBawueFocus: true,
+                type: "open-text",
+                question: qText,
+                musterloesung: mLoesung,
+                explanation: `1. Dedup -> Kompression -> ${backupGByte.toFixed(0)} GB. 2. * 8 * 1.10 / ${totalSeconds} s = ${reqMbitGross.toFixed(2)} Mbit/s. 3. / 0.80 = ${recommendedLineMbit.toFixed(2)} Mbit/s.`
+            });
+        } else {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "lf3",
+                topic: "🔥 Meisterklasse: Enterprise Backup & Bandbreiten-Kalkulation (LF 3)",
+                isCalculation: true,
+                isHard: true,
+                difficulty: "hard",
+                isBawueFocus: true,
+                type: "multiple-choice",
+                question: qText + `\n\nWie hoch ist die mindestens erforderliche Brutto-Übertragungsrate (Frage 2)?`,
+                options: [
+                    `${reqMbitGross.toFixed(2)} Mbit/s`,
+                    `${(reqMbitGross * 0.8).toFixed(2)} Mbit/s`,
+                    `${(reqMbitGross * 1.5).toFixed(2)} Mbit/s`,
+                    `${(reqMbitGross / 8).toFixed(2)} Mbit/s`
+                ],
+                correctAnswer: 0,
+                explanation: `Brutto-Datenvolumen = ${(backupGbitGross * 1000).toFixed(0)} Mbit. Geteilt durch ${totalSeconds} s = ${reqMbitGross.toFixed(2)} Mbit/s.`
+            });
+        }
+    }
+
+    // MC4: RAID 6 / RAID 10 mit Write Penalty, IOPS-Verlust & Rebuild-Zeiten (LF 2 / LF 7 / Schwer)
+    for (let i = 0; i < 15; i++) {
+        const diskCount = [8, 10, 12, 16][Math.floor(Math.random() * 4)];
+        const diskSizeTB = [12, 16, 18, 20][Math.floor(Math.random() * 4)];
+        const diskIops = 75; // SAS HDD 7.2k
+        const rebuildRateMBs = 80; // 80 MB/s
+
+        // RAID 6: Net Capacity = (N - 2) * Size
+        const raid6NetTB = (diskCount - 2) * diskSizeTB;
+        // In TiB: TB * 10^12 / 2^40 = TB * 0.9094947
+        const raid6NetTiB = raid6NetTB * (Math.pow(1000, 4) / Math.pow(1024, 4));
+
+        // Rebuild time: 1 disk size in MB / rebuildRate
+        const diskSizeMB = diskSizeTB * 1000 * 1000;
+        const rebuildSeconds = diskSizeMB / rebuildRateMBs;
+        const rebuildHours = rebuildSeconds / 3600;
+
+        const qText = `🔥 Meisterklasse Storage & RAID (LF 2 / LF 7):\nEin Enterprise-Storage-System wird mit ${diskCount} Enterprise-SAS-Festplatten (je ${diskSizeTB} TB Bruttokapazität nach Herstellerangabe in Dezimal, 7.200 U/min, Einzelfestplattenleistung 75 IOPS) in einem RAID 6-Verbund konfiguriert.\n\nAufgaben:\n1. Berechnen Sie die nutzbare Netto-Speicherkapazität des RAID 6 in Terabyte (TB) und in Tebibyte (TiB, gerundet auf 2 Nachkommastellen).\n2. Erläutern Sie den Begriff "Write Penalty" bei RAID 6 und geben Sie den Write-Penalty-Faktor an.\n3. Berechnen Sie die Rebuild-Dauer in Stunden (gerundet auf 1 Nachkommastelle), wenn eine defekte ${diskSizeTB}-TB-Festplatte getauscht wird und der RAID-Controller im Hintergrund eine Rebuild-Geschwindigkeit von durchschnittlich ${rebuildRateMBs} MB/s freigibt.`;
+
+        const mLoesung = `Musterlösung RAID 6 Enterprise Storage:\n\n1. Nutzbare Nettokapazität:\n   - RAID 6 Formel: (N - 2) * Festplattengröße = (${diskCount} - 2) * ${diskSizeTB} TB = ${raid6NetTB} TB (Dezimal).\n   - Umrechnung in TiB (Binär): ${raid6NetTB} * 10^12 Bytes / 1024^4 Bytes = ${raid6NetTiB.toFixed(2)} TiB.\n\n2. Write Penalty bei RAID 6:\n   - Bei RAID 6 müssen für jeden Schreibzugriff die Daten und zwei unabhängige Paritätsblöcke (P und Q) aktualisiert werden (Read-Modify-Write).\n   - Dies erfordert 3 Leseoperationen und 3 Schreiboperationen = 6 I/O-Operationen pro logischem Schreibvorgang (Write Penalty = 6).\n\n3. Rebuild-Dauer der ${diskSizeTB}-TB-Platte:\n   - Datenmenge: ${diskSizeTB} TB = ${(diskSizeTB * 1000 * 1000).toLocaleString('de-DE')} MB\n   - Rebuild-Zeit = ${(diskSizeTB * 1000 * 1000)} MB / ${rebuildRateMBs} MB/s = ${rebuildSeconds.toFixed(0)} Sekunden\n   - In Stunden: ${rebuildSeconds.toFixed(0)} s / 3.600 s/h = ${rebuildHours.toFixed(1)} Stunden (ca. ${(rebuildHours / 24).toFixed(1)} Tage).`;
+
+        const isOpen = shouldBeOpenText();
+        if (isOpen) {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "lf2",
+                topic: "🔥 Meisterklasse: RAID 6 Write Penalty & Rebuild-Kalkulation (LF 2)",
+                isCalculation: true,
+                isHard: true,
+                difficulty: "hard",
+                isBawueFocus: true,
+                type: "open-text",
+                question: qText,
+                musterloesung: mLoesung,
+                explanation: `RAID 6: (N-2)*${diskSizeTB} TB = ${raid6NetTB} TB = ${raid6NetTiB.toFixed(2)} TiB. Write Penalty = 6. Rebuild = ${rebuildHours.toFixed(1)} h.`
+            });
+        } else {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "lf2",
+                topic: "🔥 Meisterklasse: RAID 6 Write Penalty & Rebuild-Kalkulation (LF 2)",
+                isCalculation: true,
+                isHard: true,
+                difficulty: "hard",
+                isBawueFocus: true,
+                type: "multiple-choice",
+                question: qText + `\n\nWie hoch ist der Write-Penalty-Faktor bei RAID 6 und wie lang ist die Rebuild-Dauer?`,
+                options: [
+                    `Write Penalty: 6 I/Os pro Schreibzugriff | Rebuild-Dauer: ${rebuildHours.toFixed(1)} Stunden`,
+                    `Write Penalty: 4 I/Os pro Schreibzugriff | Rebuild-Dauer: ${(rebuildHours * 0.75).toFixed(1)} Stunden`,
+                    `Write Penalty: 2 I/Os pro Schreibzugriff | Rebuild-Dauer: ${(rebuildHours * 0.5).toFixed(1)} Stunden`,
+                    `Write Penalty: 8 I/Os pro Schreibzugriff | Rebuild-Dauer: ${(rebuildHours * 1.5).toFixed(1)} Stunden`
+                ],
+                correctAnswer: 0,
+                explanation: `RAID 6 hat Write Penalty = 6 (3 Reads + 3 Writes). Rebuild = ${diskSizeTB}*10^6 MB / ${rebuildRateMBs} MB/s / 3600 = ${rebuildHours.toFixed(1)} h.`
+            });
+        }
+    }
+
+    // MC5: USV-Dimensionierung mit Scheinleistung, Wirkleistung, cos phi, Batteriekapa in Ah & Autonomiezeit (LF 2 / LF 7 / Schwer)
+    for (let i = 0; i < 15; i++) {
+        const serverCount = [6, 8, 10, 12][Math.floor(Math.random() * 4)];
+        const serverPowerW = 550; // Watt
+        const serverCosPhi = 0.88;
+        const switchCount = 2;
+        const switchPowerW = 150;
+        const switchCosPhi = 0.95;
+        const storagePowerW = 600;
+        const storageCosPhi = 0.90;
+        const reservePercent = 25; // 25% Reserve
+        const autonomyMinutes = 30; // 30 min
+        const dcVoltage = 48; // 48V DC Bus
+        const inverterEfficiency = 0.90; // 90%
+        const maxDod = 0.80; // 80% Depth of Discharge
+
+        // Active Power (W)
+        const totalActivePowerW = (serverCount * serverPowerW) + (switchCount * switchPowerW) + storagePowerW;
+        // Apparent Power (VA)
+        const totalApparentPowerVA = ((serverCount * serverPowerW) / serverCosPhi) + 
+                                     ((switchCount * switchPowerW) / switchCosPhi) + 
+                                     (storagePowerW / storageCosPhi);
+        // Required USV Apparent Power with 25% reserve:
+        const requiredUsvVA = totalApparentPowerVA * (1 + (reservePercent / 100));
+        const requiredUsvKVA = requiredUsvVA / 1000;
+
+        // Battery Capacity: C = (P * t_h) / (U * eta * DOD)
+        const autonomyHours = autonomyMinutes / 60;
+        const energyWh = totalActivePowerW * autonomyHours;
+        const batteryAh = energyWh / (dcVoltage * inverterEfficiency * maxDod);
+
+        const qText = `🔥 Meisterklasse Stromversorgung & USV-Dimensionierung (LF 2 / LF 7):\nEin Server-Rack in einem Rechenzentrum beherbergt folgende Komponenten:\n- ${serverCount}x 2HE-Server mit je ${serverPowerW} W Wirkleistung (Leistungsfaktor cos φ = ${serverCosPhi})\n- ${switchCount}x Redundante Core-Switche mit je ${switchPowerW} W (cos φ = ${switchCosPhi})\n- 1x SAN-Storage-Shelf mit ${storagePowerW} W (cos φ = ${storageCosPhi})\n\nAnforderungen an die Online-Dauerwandler-USV (VFI nach EN 62040-3):\n- Sicherheitsreserve für Lastspitzen und Erweiterungen: ${reservePercent}%\n- Gewünschte Autonomiezeit (Überbrückungszeit bei Stromausfall): ${autonomyMinutes} Minuten\n- USV-Gleichspannungs-Zwischenkreis (DC-Bus): ${dcVoltage} V\n- Wechselrichter-Wirkungsgrad der USV: ${inverterEfficiency * 100}%\n- Maximale Batterie-Entladetiefe (DOD = Depth of Discharge zum Zellenschutz): ${maxDod * 100}%\n\nAufgaben:\n1. Berechnen Sie die gesamte elektrische Wirkleistung P (in Watt) und die gesamte Scheinleistung S (in VA).\n2. Berechnen Sie die empfohlene Mindest-Scheinleistung der USV in kVA (inkl. ${reservePercent}% Reserve).\n3. Berechnen Sie die erforderliche Akkukapazität des externen Batteriepacks in Amperestunden (Ah).`;
+
+        const mLoesung = `Musterlösung USV- & Batterie-Kalkulation:\n\n1. Elektrische Wirk- und Scheinleistung:\n   - Gesamte Wirkleistung P:\n     P = (${serverCount} * ${serverPowerW} W) + (${switchCount} * ${switchPowerW} W) + ${storagePowerW} W = ${(serverCount * serverPowerW)} W + ${(switchCount * switchPowerW)} W + ${storagePowerW} W = ${totalActivePowerW} Watt (${(totalActivePowerW / 1000).toFixed(2)} kW)\n   - Gesamte Scheinleistung S (S = P / cos φ):\n     S_Server = ${(serverCount * serverPowerW)} / ${serverCosPhi} = ${((serverCount * serverPowerW) / serverCosPhi).toFixed(1)} VA\n     S_Switch = ${(switchCount * switchPowerW)} / ${switchCosPhi} = ${((switchCount * switchPowerW) / switchCosPhi).toFixed(1)} VA\n     S_Storage = ${storagePowerW} / ${storageCosPhi} = ${(storagePowerW / storageCosPhi).toFixed(1)} VA\n     S_Gesamt = ${totalApparentPowerVA.toFixed(1)} VA (${(totalApparentPowerVA / 1000).toFixed(2)} kVA)\n\n2. USV-Scheinleistung mit ${reservePercent}% Sicherheitsreserve:\n   - S_USV = ${totalApparentPowerVA.toFixed(1)} VA * 1,25 = ${requiredUsvVA.toFixed(1)} VA = ${requiredUsvKVA.toFixed(2)} kVA (z. B. Standardgröße: ${Math.ceil(requiredUsvKVA)} kVA USV).\n\n3. Erforderliche Akkukapazität für ${autonomyMinutes} min (${autonomyHours} h):\n   - Benötigte Energie = ${totalActivePowerW} W * ${autonomyHours} h = ${energyWh.toFixed(0)} Wh\n   - Batteriekapazität C = Energie / (U_DC * Wirkungsgrad * DOD)\n   - C = ${energyWh.toFixed(0)} Wh / (${dcVoltage} V * ${inverterEfficiency} * ${maxDod}) = ${energyWh.toFixed(0)} Wh / ${(dcVoltage * inverterEfficiency * maxDod).toFixed(2)} V = ${batteryAh.toFixed(1)} Ah.`;
+
+        const isOpen = shouldBeOpenText();
+        if (isOpen) {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "lf2",
+                topic: "🔥 Meisterklasse: USV-Dimensionierung & Schein-/Wirkleistung (LF 2)",
+                isCalculation: true,
+                isHard: true,
+                difficulty: "hard",
+                isBawueFocus: true,
+                type: "open-text",
+                question: qText,
+                musterloesung: mLoesung,
+                explanation: `P = ${totalActivePowerW} W, S = ${totalApparentPowerVA.toFixed(0)} VA. USV (+25%) = ${requiredUsvKVA.toFixed(2)} kVA. Batterie = ${batteryAh.toFixed(1)} Ah bei ${dcVoltage}V.`
+            });
+        } else {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "lf2",
+                topic: "🔥 Meisterklasse: USV-Dimensionierung & Schein-/Wirkleistung (LF 2)",
+                isCalculation: true,
+                isHard: true,
+                difficulty: "hard",
+                isBawueFocus: true,
+                type: "multiple-choice",
+                question: qText + `\n\nWelche USV-Leistung (kVA) und Akkukapazität (Ah) werden benötigt?`,
+                options: [
+                    `${requiredUsvKVA.toFixed(2)} kVA USV-Leistung | ${batteryAh.toFixed(1)} Ah Akkukapazität`,
+                    `${(requiredUsvKVA * 0.8).toFixed(2)} kVA USV-Leistung | ${(batteryAh * 0.7).toFixed(1)} Ah Akkukapazität`,
+                    `${(requiredUsvKVA * 1.5).toFixed(2)} kVA USV-Leistung | ${(batteryAh * 1.4).toFixed(1)} Ah Akkukapazität`,
+                    `${(totalActivePowerW / 1000).toFixed(2)} kVA USV-Leistung | ${(batteryAh / 2).toFixed(1)} Ah Akkukapazität`
+                ],
+                correctAnswer: 0,
+                explanation: `USV: ${totalApparentPowerVA.toFixed(0)} VA * 1.25 = ${requiredUsvKVA.toFixed(2)} kVA. Akku: ${energyWh.toFixed(0)} Wh / (${dcVoltage}*0.9*0.8) = ${batteryAh.toFixed(1)} Ah.`
+            });
+        }
+    }
+
+    // MC6: Rechenzentrums-PUE, Kühlung & Energiekostenberechnung (LF 2 / LF 7 / Schwer)
+    for (let i = 0; i < 15; i++) {
+        const itPowerKW = [100, 120, 150, 180][Math.floor(Math.random() * 4)];
+        const totalPowerKW = itPowerKW + [60, 75, 90, 110][Math.floor(Math.random() * 4)];
+        const currentPUE = totalPowerKW / itPowerKW;
+        const targetPUE = 1.25;
+        const electricityPriceEur = 0.32; // 0,32 EUR/kWh
+        const hoursPerYear = 8760; // 365 * 24
+
+        const currentYearlyKWh = totalPowerKW * hoursPerYear;
+        const currentYearlyCostEur = currentYearlyKWh * electricityPriceEur;
+
+        const targetTotalPowerKW = itPowerKW * targetPUE;
+        const targetYearlyKWh = targetTotalPowerKW * hoursPerYear;
+        const targetYearlyCostEur = targetYearlyKWh * electricityPriceEur;
+
+        const yearlySavingsEur = currentYearlyCostEur - targetYearlyCostEur;
+
+        const qText = `🔥 Meisterklasse Datacenter Green-IT & PUE (LF 2 / LF 7):\nEin Rechenzentrum misst im Dauerbetrieb eine durchschnittliche Leistungsaufnahme der IT-Hardware (Server, Storage, Switche) von ${itPowerKW} kW. Die gesamte Leistungsaufnahme der gesamten RZ-Infrastruktur (inkl. Kältemaschinen, USV-Verlusten, Lüftung und Beleuchtung) beträgt ${totalPowerKW} kW.\n\nRahmendaten:\n- Strompreis: ${electricityPriceEur.toFixed(2)} EUR / kWh\n- Betriebsstunden pro Jahr: ${hoursPerYear} Stunden (24/7/365)\n- Geplante Modernisierung (Kaltgang-Einhausung, Freikühlung, hocheffiziente USV) zur Senkung des PUE-Werts auf ${targetPUE.toFixed(2)}.\n\nAufgaben:\n1. Berechnen Sie den aktuellen PUE-Wert (Power Usage Effectiveness) des Rechenzentrums (gerundet auf 2 Nachkommastellen).\n2. Berechnen Sie die aktuellen jährlichen Stromkosten in EUR.\n3. Berechnen Sie die jährliche Stromkostenersparnis in EUR nach Erreichen des Ziel-PUE-Werts von ${targetPUE.toFixed(2)}.`;
+
+        const mLoesung = `Musterlösung PUE & Rechenzentrums-Kühlkosten:\n\n1. Aktueller PUE-Wert:\n   - Formel: PUE = Gesamtenergieaufnahme / IT-Energieaufnahme\n   - PUE = ${totalPowerKW} kW / ${itPowerKW} kW = ${currentPUE.toFixed(2)}\n\n2. Aktuelle jährliche Stromkosten:\n   - Jahresverbrauch = ${totalPowerKW} kW * ${hoursPerYear} h = ${currentYearlyKWh.toLocaleString('de-DE')} kWh\n   - Stromkosten = ${currentYearlyKWh.toLocaleString('de-DE')} kWh * ${electricityPriceEur.toFixed(2)} EUR/kWh = ${currentYearlyCostEur.toLocaleString('de-DE', {minimumFractionDigits: 2, maximumFractionDigits: 2})} EUR\n\n3. Jährliche Stromkostenersparnis mit PUE ${targetPUE.toFixed(2)}:\n   - Neue Gesamtleistung = ${itPowerKW} kW * ${targetPUE.toFixed(2)} = ${targetTotalPowerKW.toFixed(1)} kW\n   - Neuer Jahresverbrauch = ${targetTotalPowerKW.toFixed(1)} kW * ${hoursPerYear} h = ${targetYearlyKWh.toLocaleString('de-DE')} kWh\n   - Neue Stromkosten = ${targetYearlyKWh.toLocaleString('de-DE')} kWh * ${electricityPriceEur.toFixed(2)} EUR/kWh = ${targetYearlyCostEur.toLocaleString('de-DE', {minimumFractionDigits: 2, maximumFractionDigits: 2})} EUR\n   - Jährliche Ersparnis = ${yearlySavingsEur.toLocaleString('de-DE', {minimumFractionDigits: 2, maximumFractionDigits: 2})} EUR / Jahr.`;
+
+        const isOpen = shouldBeOpenText();
+        if (isOpen) {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "lf2",
+                topic: "🔥 Meisterklasse: Rechenzentrums-PUE & Energiekostenkalkulation (LF 2)",
+                isCalculation: true,
+                isHard: true,
+                difficulty: "hard",
+                isBawueFocus: true,
+                type: "open-text",
+                question: qText,
+                musterloesung: mLoesung,
+                explanation: `PUE = ${currentPUE.toFixed(2)}. Vorher: ${currentYearlyCostEur.toFixed(0)} EUR. Nachher: ${targetYearlyCostEur.toFixed(0)} EUR. Ersparnis = ${yearlySavingsEur.toFixed(0)} EUR/Jahr.`
+            });
+        } else {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "lf2",
+                topic: "🔥 Meisterklasse: Rechenzentrums-PUE & Energiekostenkalkulation (LF 2)",
+                isCalculation: true,
+                isHard: true,
+                difficulty: "hard",
+                isBawueFocus: true,
+                type: "multiple-choice",
+                question: qText + `\n\nWie hoch ist der PUE-Wert und wie viel Geld wird jährlich eingespart?`,
+                options: [
+                    `PUE: ${currentPUE.toFixed(2)} | Jährliche Ersparnis: ${yearlySavingsEur.toLocaleString('de-DE', {maximumFractionDigits: 0})} EUR`,
+                    `PUE: ${(currentPUE * 0.8).toFixed(2)} | Jährliche Ersparnis: ${(yearlySavingsEur * 0.7).toLocaleString('de-DE', {maximumFractionDigits: 0})} EUR`,
+                    `PUE: ${(currentPUE * 1.2).toFixed(2)} | Jährliche Ersparnis: ${(yearlySavingsEur * 1.4).toLocaleString('de-DE', {maximumFractionDigits: 0})} EUR`,
+                    `PUE: 1.00 | Jährliche Ersparnis: 0 EUR`
+                ],
+                correctAnswer: 0,
+                explanation: `PUE = ${totalPowerKW}/${itPowerKW} = ${currentPUE.toFixed(2)}. Ersparnis = (${totalPowerKW} - ${targetTotalPowerKW.toFixed(1)}) * 8760 * ${electricityPriceEur} = ${yearlySavingsEur.toFixed(0)} EUR.`
+            });
+        }
+    }
+
+    // MC7: Vollständige 12-stufige Handelskalkulation (LF 1 / LF 6 / Schwer)
+    for (let i = 0; i < 15; i++) {
+        const lep = [1200, 1500, 2000, 2400][Math.floor(Math.random() * 4)]; // Listeneinkaufspreis
+        const lieferRabattP = 15; // 15%
+        const lieferSkontoP = 2;  // 2%
+        const bezugskosten = 50;  // 50 EUR
+        const hkzP = 25;          // 25% Handlungskostenzuschlag
+        const gewinnP = 20;       // 20% Gewinn
+        const kundenSkontoP = 2;  // 2% Kundenskonto
+        const kundenRabattP = 10; // 10% Kundenrabatt
+        const ustP = 19;          // 19% USt
+
+        // 1. LEP
+        // 2. - Lieferrabatt (15%)
+        const zep = lep * (1 - lieferRabattP / 100);
+        // 3. - Lieferskonto (2%)
+        const bep = zep * (1 - lieferSkontoP / 100);
+        // 4. + Bezugskosten
+        const ep = bep + bezugskosten;
+        // 5. + HKZ (25%)
+        const sk = ep * (1 + hkzP / 100);
+        // 6. + Gewinn (20%)
+        const bvp = sk * (1 + gewinnP / 100);
+        // 7. + Kundenskonto (2% im Hundert -> BVP / 0.98)
+        const zvp = bvp / (1 - kundenSkontoP / 100);
+        // 8. + Kundenrabatt (10% im Hundert -> ZVP / 0.90)
+        const lvpNetto = zvp / (1 - kundenRabattP / 100);
+        // 9. + 19% USt
+        const lvpBrutto = lvpNetto * 1.19;
+
+        const qText = `🔥 Meisterklasse Handelskalkulation (LF 1 / LF 6):\nEin Systemhaus kalkuliert den Verkaufspreis für einen Highend-Datenbankserver.\n\nGegebene Kalkulationsdaten:\n- Listeneinkaufspreis (LEP): ${lep.toFixed(2)} EUR\n- Lieferantenrabatt: ${lieferRabattP} %\n- Lieferantenskonto: ${lieferSkontoP} %\n- Bezugskosten (Transport & Versicherung): ${bezugskosten.toFixed(2)} EUR\n- Handlungskostenzuschlagssatz (HKZ): ${hkzP} %\n- Gewinnzuschlagssatz: ${gewinnP} %\n- Kundenskonto: ${kundenSkontoP} % (vom Zielverkaufspreis)\n- Kundenrabatt: ${kundenRabattP} % (vom Netto-Listenverkaufspreis)\n- Umsatzsteuer: ${ustP} %\n\nFühren Sie eine vollständige 12-stufige Vorwärtskalkulation durch und ermitteln Sie:\n1. Den Bezugspreis (Einstandspreis).\n2. Die Selbstkosten.\n3. Den Barverkaufspreis.\n4. Den Netto-Listenverkaufspreis.\n5. Den Brutto-Listenverkaufspreis (inkl. 19% USt).`;
+
+        const mLoesung = `Musterlösung Vollständige Vorwärtskalkulation:\n\n1.  Listeneinkaufspreis (LEP): ${lep.toFixed(2)} EUR\n2.  - Lieferantenrabatt (${lieferRabattP} %): -${(lep * lieferRabattP / 100).toFixed(2)} EUR\n3.  = Zieleinkaufspreis (ZEP): ${zep.toFixed(2)} EUR\n4.  - Lieferantenskonto (${lieferSkontoP} %): -${(zep * lieferSkontoP / 100).toFixed(2)} EUR\n5.  = Bareinkaufspreis (BEP): ${bep.toFixed(2)} EUR\n6.  + Bezugskosten: +${bezugskosten.toFixed(2)} EUR\n7.  = Bezugspreis / Einstandspreis: ${ep.toFixed(2)} EUR\n8.  + Handlungskosten (${hkzP} % von EP): +${(ep * hkzP / 100).toFixed(2)} EUR\n9.  = Selbstkosten (SK): ${sk.toFixed(2)} EUR\n10. + Gewinn (${gewinnP} % von SK): +${(sk * gewinnP / 100).toFixed(2)} EUR\n11. = Barverkaufspreis (BVP): ${bvp.toFixed(2)} EUR\n12. + Kundenskonto (${kundenSkontoP} % im Hundert: ${bvp.toFixed(2)} / 0,98 - ${bvp.toFixed(2)}): +${(zvp - bvp).toFixed(2)} EUR\n13. = Zielverkaufspreis (ZVP): ${zvp.toFixed(2)} EUR\n14. + Kundenrabatt (${kundenRabattP} % im Hundert: ${zvp.toFixed(2)} / 0,90 - ${zvp.toFixed(2)}): +${(lvpNetto - zvp).toFixed(2)} EUR\n15. = Netto-Listenverkaufspreis: ${lvpNetto.toFixed(2)} EUR\n16. + 19 % Umsatzsteuer: +${(lvpNetto * 0.19).toFixed(2)} EUR\n17. = Brutto-Listenverkaufspreis: ${lvpBrutto.toFixed(2)} EUR.`;
+
+        const isOpen = shouldBeOpenText();
+        if (isOpen) {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "lf6",
+                topic: "🔥 Meisterklasse: 12-stufige Handelskalkulation (LF 1 / LF 6)",
+                isCalculation: true,
+                isHard: true,
+                difficulty: "hard",
+                isBawueFocus: true,
+                type: "open-text",
+                question: qText,
+                musterloesung: mLoesung,
+                explanation: `EP = ${ep.toFixed(2)} EUR, SK = ${sk.toFixed(2)} EUR, BVP = ${bvp.toFixed(2)} EUR, LVP Netto = ${lvpNetto.toFixed(2)} EUR, LVP Brutto = ${lvpBrutto.toFixed(2)} EUR.`
+            });
+        } else {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "lf6",
+                topic: "🔥 Meisterklasse: 12-stufige Handelskalkulation (LF 1 / LF 6)",
+                isCalculation: true,
+                isHard: true,
+                difficulty: "hard",
+                isBawueFocus: true,
+                type: "multiple-choice",
+                question: qText + `\n\nWie hoch sind der Netto- und der Brutto-Listenverkaufspreis?`,
+                options: [
+                    `Netto: ${lvpNetto.toFixed(2)} EUR | Brutto: ${lvpBrutto.toFixed(2)} EUR`,
+                    `Netto: ${(lvpNetto * 0.9).toFixed(2)} EUR | Brutto: ${(lvpBrutto * 0.9).toFixed(2)} EUR`,
+                    `Netto: ${(lvpNetto * 1.1).toFixed(2)} EUR | Brutto: ${(lvpBrutto * 1.1).toFixed(2)} EUR`,
+                    `Netto: ${bvp.toFixed(2)} EUR | Brutto: ${(bvp * 1.19).toFixed(2)} EUR`
+                ],
+                correctAnswer: 0,
+                explanation: `Vorwärtskalkulation im Hundert für Skonto und Rabatt: LVP Netto = ${lvpNetto.toFixed(2)} EUR, Brutto (19%) = ${lvpBrutto.toFixed(2)} EUR.`
+            });
+        }
+    }
+
+    // MC8: TCO 5-Jahres-Kostenvergleich Cloud (AWS/Azure) vs. On-Premises (LF 1 / LF 6 / Schwer)
+    for (let i = 0; i < 15; i++) {
+        const onPremCapex = [35000, 45000, 60000][Math.floor(Math.random() * 3)]; // Hardware, Switche, USV
+        const onPremMaintenanceYear = 4000; // Wartung, Lizenzen
+        const onPremPowerYear = 3500; // Strom & Kühlung
+        const onPremAdminHoursYear = 120; // 120 h Wartung
+        const adminHourlyRate = 80; // 80 EUR/h
+
+        const onPremTotal5Years = onPremCapex + ((onPremMaintenanceYear + onPremPowerYear + (onPremAdminHoursYear * adminHourlyRate)) * 5);
+
+        const cloudMonthlyFee = [950, 1200, 1450][Math.floor(Math.random() * 3)]; // VM, Storage, Backup
+        const cloudEgressMonthly = 150; // Traffic
+        const cloudSetupCapex = 5000; // Migration & Setup
+        const cloudAdminHoursYear = 30; // 30 h Cloud-Betreuung
+
+        const cloudTotal5Years = cloudSetupCapex + (((cloudMonthlyFee + cloudEgressMonthly) * 12 + (cloudAdminHoursYear * adminHourlyRate)) * 5);
+
+        const diffEur = Math.abs(onPremTotal5Years - cloudTotal5Years);
+        const cheaperOption = onPremTotal5Years < cloudTotal5Years ? "On-Premises" : "Cloud";
+
+        const qText = `🔥 Meisterklasse TCO & Cloud-Wirtschaftlichkeit (LF 1 / LF 6):\nEin Unternehmen plant den Betrieb seiner ERP-Infrastruktur für einen Betrachtungszeitraum von 5 Jahren und vergleicht On-Premises mit einer Cloud-Lösung (AWS / Azure).\n\nSzenario A (On-Premises Rechenzentrum):\n- Anschaffung Server, Storage, USV, Firewall (Capex): ${onPremCapex.toLocaleString('de-DE')} EUR einmalig\n- Jährliche Software-Lizenzen und Hersteller-Wartungsverträge: ${onPremMaintenanceYear.toLocaleString('de-DE')} EUR / Jahr\n- Jährliche Strom- und Kühlungskosten: ${onPremPowerYear.toLocaleString('de-DE')} EUR / Jahr\n- Administrationsaufwand: ${onPremAdminHoursYear} Stunden pro Jahr zu ${adminHourlyRate} EUR / Stunde\n\nSzenario B (Cloud SaaS / IaaS):\n- Einmalige Setup- und Migrationskosten: ${cloudSetupCapex.toLocaleString('de-DE')} EUR einmalig\n- Monatliche IaaS-Gebühren (VMs, Managed Storage, Backup): ${cloudMonthlyFee.toLocaleString('de-DE')} EUR / Monat\n- Monatliche Daten-Egress- und Traffic-Kosten: ${cloudEgressMonthly.toLocaleString('de-DE')} EUR / Monat\n- Administrationsaufwand: ${cloudAdminHoursYear} Stunden pro Jahr zu ${adminHourlyRate} EUR / Stunde\n\nAufgaben:\n1. Berechnen Sie die Total Cost of Ownership (TCO) für beide Szenarien über den 5-Jahres-Zeitraum.\n2. Ermitteln Sie die kostengünstigere Variante und die absolute Kostenersparnis über 5 Jahre.`;
+
+        const mLoesung = `Musterlösung TCO 5-Jahres-Vergleich:\n\n1. Szenario A (On-Premises):\n   - Einmalig (Capex): ${onPremCapex.toLocaleString('de-DE')} EUR\n   - Laufende Kosten pro Jahr (Opex): ${onPremMaintenanceYear} EUR (Wartung) + ${onPremPowerYear} EUR (Strom) + (${onPremAdminHoursYear} h * ${adminHourlyRate} EUR/h = ${onPremAdminHoursYear * adminHourlyRate} EUR Admin) = ${(onPremMaintenanceYear + onPremPowerYear + (onPremAdminHoursYear * adminHourlyRate)).toLocaleString('de-DE')} EUR / Jahr\n   - Gesamtkosten 5 Jahre: ${onPremCapex.toLocaleString('de-DE')} EUR + (5 * ${(onPremMaintenanceYear + onPremPowerYear + (onPremAdminHoursYear * adminHourlyRate)).toLocaleString('de-DE')} EUR) = ${onPremTotal5Years.toLocaleString('de-DE')} EUR\n\n2. Szenario B (Cloud):\n   - Einmalig: ${cloudSetupCapex.toLocaleString('de-DE')} EUR\n   - Laufende Kosten pro Jahr (Opex): ((${cloudMonthlyFee} + ${cloudEgressMonthly}) EUR * 12 Monate = ${((cloudMonthlyFee + cloudEgressMonthly) * 12).toLocaleString('de-DE')} EUR) + (${cloudAdminHoursYear} h * ${adminHourlyRate} EUR/h = ${cloudAdminHoursYear * adminHourlyRate} EUR Admin) = ${(((cloudMonthlyFee + cloudEgressMonthly) * 12) + (cloudAdminHoursYear * adminHourlyRate)).toLocaleString('de-DE')} EUR / Jahr\n   - Gesamtkosten 5 Jahre: ${cloudSetupCapex.toLocaleString('de-DE')} EUR + (5 * ${(((cloudMonthlyFee + cloudEgressMonthly) * 12) + (cloudAdminHoursYear * adminHourlyRate)).toLocaleString('de-DE')} EUR) = ${cloudTotal5Years.toLocaleString('de-DE')} EUR\n\n3. Ergebnis:\n   - ${cheaperOption} ist über 5 Jahre um ${diffEur.toLocaleString('de-DE')} EUR günstiger.`;
+
+        const isOpen = shouldBeOpenText();
+        if (isOpen) {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "lf6",
+                topic: "🔥 Meisterklasse: TCO-Vergleich Cloud vs. On-Premises (LF 1 / LF 6)",
+                isCalculation: true,
+                isHard: true,
+                difficulty: "hard",
+                isBawueFocus: true,
+                type: "open-text",
+                question: qText,
+                musterloesung: mLoesung,
+                explanation: `On-Premises TCO = ${onPremTotal5Years.toLocaleString('de-DE')} EUR. Cloud TCO = ${cloudTotal5Years.toLocaleString('de-DE')} EUR. Ersparnis = ${diffEur.toLocaleString('de-DE')} EUR.`
+            });
+        } else {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "lf6",
+                topic: "🔥 Meisterklasse: TCO-Vergleich Cloud vs. On-Premises (LF 1 / LF 6)",
+                isCalculation: true,
+                isHard: true,
+                difficulty: "hard",
+                isBawueFocus: true,
+                type: "multiple-choice",
+                question: qText + `\n\nWelche TCO-Kosten ergeben sich für 5 Jahre?`,
+                options: [
+                    `On-Premises: ${onPremTotal5Years.toLocaleString('de-DE')} EUR | Cloud: ${cloudTotal5Years.toLocaleString('de-DE')} EUR`,
+                    `On-Premises: ${(onPremTotal5Years * 1.2).toLocaleString('de-DE')} EUR | Cloud: ${(cloudTotal5Years * 0.8).toLocaleString('de-DE')} EUR`,
+                    `On-Premises: ${(onPremTotal5Years * 0.7).toLocaleString('de-DE')} EUR | Cloud: ${(cloudTotal5Years * 1.3).toLocaleString('de-DE')} EUR`,
+                    `On-Premises: ${onPremCapex.toLocaleString('de-DE')} EUR | Cloud: ${cloudSetupCapex.toLocaleString('de-DE')} EUR`
+                ],
+                correctAnswer: 0,
+                explanation: `On-Premises = ${onPremCapex} + 5*${onPremMaintenanceYear + onPremPowerYear + onPremAdminHoursYear*adminHourlyRate} = ${onPremTotal5Years.toLocaleString('de-DE')} EUR. Cloud = ${cloudTotal5Years.toLocaleString('de-DE')} EUR.`
+            });
+        }
+    }
+
+    // MC9: Komplexer Netzplan mit 8–10 Vorgängen, Vorwärts-/Rückwärtsrechnung & Pufferzeiten (LF 1 / LF 2 / LF 6 / Schwer)
+    for (let i = 0; i < 15; i++) {
+        // Activities:
+        // A: Dauer 3, Vorgänger - -> FAZ: 0, FEZ: 3
+        // B: Dauer 4, Vorgänger A -> FAZ: 3, FEZ: 7
+        // C: Dauer 2, Vorgänger A -> FAZ: 3, FEZ: 5
+        // D: Dauer 5, Vorgänger B -> FAZ: 7, FEZ: 12
+        // E: Dauer 3, Vorgänger C -> FAZ: 5, FEZ: 8
+        // F: Dauer 4, Vorgänger D, E -> FAZ: 12, FEZ: 16
+        // G: Dauer 2, Vorgänger E -> FAZ: 8, FEZ: 10
+        // H: Dauer 3, Vorgänger F, G -> FAZ: 16, FEZ: 19
+        // Project Duration: 19 Days
+        // Backward:
+        // H: SEZ 19, SAZ 16, GP = 0, FP = 0 (Critical)
+        // F: SEZ 16, SAZ 12, GP = 0, FP = 0 (Critical)
+        // G: SEZ 16, SAZ 14, GP = 16 - 10 = 6, FP = 16 - 10 = 6
+        // D: SEZ 12, SAZ 7,  GP = 0, FP = 0 (Critical)
+        // E: SEZ = min(SAZ_F=12, SAZ_G=14) = 12, SAZ = 9. GP = 12 - 8 = 4, FP = min(FAZ_F=12, FAZ_G=8) - 8 = 0
+        // C: SEZ = SAZ_E = 9, SAZ = 7. GP = 9 - 5 = 4, FP = FAZ_E - FEZ_C = 5 - 5 = 0
+        // B: SEZ = SAZ_D = 7, SAZ = 3. GP = 0, FP = 0 (Critical)
+        // A: SEZ = min(SAZ_B=3, SAZ_C=7) = 3, SAZ = 0. GP = 0, FP = 0 (Critical)
+        // Critical Path: A -> B -> D -> F -> H (Gesamtdauer = 19 Tage)
+
+        const qText = `🔥 Meisterklasse Netzplantechnik & Kritischer Pfad (LF 1 / LF 6):\nFür ein Software-Rollout liegt folgende Vorgangsliste vor:\n- Vorgang A: Kick-Off & Ist-Analyse (Dauer: 3 Tage, Vorgänger: keine)\n- Vorgang B: Backend-Konfiguration (Dauer: 4 Tage, Vorgänger: A)\n- Vorgang C: Schulungsunterlagen erstellen (Dauer: 2 Tage, Vorgänger: A)\n- Vorgang D: Datenbank-Migration (Dauer: 5 Tage, Vorgänger: B)\n- Vorgang E: Key-User-Schulung (Dauer: 3 Tage, Vorgänger: C)\n- Vorgang F: Integrationstest & Abnahme (Dauer: 4 Tage, Vorgänger: D, E)\n- Vorgang G: Benutzer-Handbuch drucken (Dauer: 2 Tage, Vorgänger: E)\n- Vorgang H: Go-Live & Übergabe (Dauer: 3 Tage, Vorgänger: F, G)\n\nAufgaben:\n1. Führen Sie die Vorwärtsrechnung (FAZ, FEZ) und Rückwärtsrechnung (SAZ, SEZ) durch.\n2. Berechnen Sie den Gesamtpuffer (GP = SAZ - FAZ) und den Freien Puffer (FP = min(FAZ_Nachfolger) - FEZ) für die Vorgänge C, E und G.\n3. Bestimmen Sie die Projektdauer und den Kritischen Pfad.\n4. Vorgang C verzögert sich um 3 Tage. Welche Auswirkung hat dies auf den Gesamtendtermin des Projekts?`;
+
+        const mLoesung = `Musterlösung Netzplantechnik:\n\n1. Vorwärts- und Rückwärtsrechnung:\n- Vorgang A (D=3): FAZ=0, FEZ=3 | SAZ=0, SEZ=3 | GP=0, FP=0 (Kritisch)\n- Vorgang B (D=4): FAZ=3, FEZ=7 | SAZ=3, SEZ=7 | GP=0, FP=0 (Kritisch)\n- Vorgang C (D=2): FAZ=3, FEZ=5 | SAZ=7, SEZ=9 | GP=4, FP=0\n- Vorgang D (D=5): FAZ=7, FEZ=12 | SAZ=7, SEZ=12 | GP=0, FP=0 (Kritisch)\n- Vorgang E (D=3): FAZ=5, FEZ=8 | SAZ=9, SEZ=12 | GP=4, FP=0\n- Vorgang F (D=4): FAZ=12, FEZ=16 | SAZ=12, SEZ=16 | GP=0, FP=0 (Kritisch)\n- Vorgang G (D=2): FAZ=8, FEZ=10 | SAZ=14, SEZ=16 | GP=6, FP=6\n- Vorgang H (D=3): FAZ=16, FEZ=19 | SAZ=16, SEZ=19 | GP=0, FP=0 (Kritisch)\n\n2. Pufferzeiten für C, E, G:\n- Vorgang C: GP = 4 Tage, FP = 0 Tage\n- Vorgang E: GP = 4 Tage, FP = 0 Tage\n- Vorgang G: GP = 6 Tage, FP = 6 Tage\n\n3. Projektdauer & Kritischer Pfad:\n- Gesamtdauer: 19 Werktage\n- Kritischer Pfad: A -> B -> D -> F -> H (alle Vorgänge mit GP = 0)\n\n4. Auswirkung der Verzögerung von Vorgang C um 3 Tage:\n- Vorgang C hat einen Gesamtpuffer von 4 Tagen. Eine Verzögerung um 3 Tage liegt vollständig innerhalb des Puffers (3 <= 4 Tage).\n- Der Projektendtermin (19 Tage) verschiebt sich NICHT!`;
+
+        const isOpen = shouldBeOpenText();
+        if (isOpen) {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "lf6",
+                topic: "🔥 Meisterklasse: Netzplan-Berechnung & Kritischer Pfad (LF 1 / LF 6)",
+                isCalculation: true,
+                isHard: true,
+                difficulty: "hard",
+                isBawueFocus: true,
+                type: "open-text",
+                question: qText,
+                musterloesung: mLoesung,
+                explanation: `Kritischer Pfad: A-B-D-F-H = 19 Tage. GP(C)=4, GP(E)=4, GP(G)=6. Verzögerung um 3 Tage verschiebt Projekttermin nicht.`
+            });
+        } else {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "lf6",
+                topic: "🔥 Meisterklasse: Netzplan-Berechnung & Kritischer Pfad (LF 1 / LF 6)",
+                isCalculation: true,
+                isHard: true,
+                difficulty: "hard",
+                isBawueFocus: true,
+                type: "multiple-choice",
+                question: qText + `\n\nWelcher Kritische Pfad und welche Gesamtdauer ergeben sich?`,
+                options: [
+                    `Kritischer Pfad: A -> B -> D -> F -> H | Projektdauer: 19 Tage`,
+                    `Kritischer Pfad: A -> C -> E -> F -> H | Projektdauer: 15 Tage`,
+                    `Kritischer Pfad: A -> C -> E -> G -> H | Projektdauer: 13 Tage`,
+                    `Kritischer Pfad: A -> B -> D -> E -> H | Projektdauer: 18 Tage`
+                ],
+                correctAnswer: 0,
+                explanation: `Pfad A-B-D-F-H = 3+4+5+4+3 = 19 Tage (alle GP=0). Pfad A-C-E-F-H = 3+2+3+4+3 = 15 Tage (4 Tage Puffer).`
+            });
+        }
+    }
+
+    // MC10: Komplexe SQL-Abfragen über 4 Tabellen mit GROUP BY, HAVING, subqueries & Aggregation (LF 5 / Schwer)
+    for (let i = 0; i < 15; i++) {
+        const minOrders = [2, 3, 4][Math.floor(Math.random() * 3)];
+        const minRevenue = [3000, 5000, 7500][Math.floor(Math.random() * 3)];
+        const year = 2025;
+
+        const sqlCode = `SELECT 
+    k.kunden_nr,
+    k.nachname,
+    k.firma,
+    COUNT(DISTINCT b.bestell_nr) AS anzahl_bestellungen,
+    ROUND(SUM(bp.menge * bp.einzelpreis * (1 - bp.rabatt_prozent / 100.0)), 2) AS gesamtumsatz_euro
+FROM tbl_kunde k
+INNER JOIN tbl_bestellung b ON k.kunden_nr = b.kunden_nr
+INNER JOIN tbl_bestellposition bp ON b.bestell_nr = bp.bestell_nr
+INNER JOIN tbl_artikel a ON bp.artikel_nr = a.artikel_nr
+WHERE b.bestell_datum BETWEEN '${year}-01-01' AND '${year}-12-31'
+  AND b.status != 'storniert'
+GROUP BY k.kunden_nr, k.nachname, k.firma
+HAVING COUNT(DISTINCT b.bestell_nr) >= ${minOrders}
+   AND SUM(bp.menge * bp.einzelpreis * (1 - bp.rabatt_prozent / 100.0)) > ${minRevenue}
+ORDER BY gesamtumsatz_euro DESC;`;
+
+        const qText = `🔥 Meisterklasse SQL & Relationale Abfragen (LF 5):\nEin Online-Großhändler besitzt folgendes relationales Datenbankschema:\n- tbl_kunde (kunden_nr [PK], nachname, vorname, firma, plz, ort)\n- tbl_bestellung (bestell_nr [PK], kunden_nr [FK], bestell_datum, status)\n- tbl_bestellposition (pos_nr [PK], bestell_nr [FK], artikel_nr [FK], menge, einzelpreis, rabatt_prozent)\n- tbl_artikel (artikel_nr [PK], bezeichnung, kategorie, einkaufspreis)\n\nAufgabenstellung:\nSchreiben Sie eine syntaktisch einwandfreie SQL-Abfrage nach ANSI-SQL-Standard, die:\n1. Kunden-Nr, Nachname, Firmenname, Anzahl getätigter Bestellungen und den rabattbereinigten Gesamtumsatz (auf 2 Nachkommastellen gerundet) ausgibt.\n2. Nur Bestellungen aus dem Kalenderjahr ${year} berücksichtigt, die nicht den Status 'storniert' besitzen.\n3. Nur Kunden anzeigt, die im Jahr ${year} mindestens ${minOrders} Bestellungen getätigt haben UND einen Gesamtumsatz von über ${minRevenue} EUR erzielt haben.\n4. Das Ergebnis absteigend nach dem Gesamtumsatz sortiert.`;
+
+        const isOpen = shouldBeOpenText();
+        if (isOpen) {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "lf5",
+                topic: "🔥 Meisterklasse: Komplexe SQL-Aggregation & Multi-Table-JOIN (LF 5)",
+                isHard: true,
+                difficulty: "hard",
+                isBawueFocus: true,
+                type: "open-text",
+                question: qText,
+                code: sqlCode,
+                musterloesung: `Musterlösung SQL-Statement:\n\n${sqlCode}\n\nErläuterung:\n- INNER JOIN über alle relevanten Tabellen verknüpft Kunden mit ihren Positionen.\n- WHERE filtert vor der Aggregation nach Datum (${year}) und Status (!= 'storniert').\n- GROUP BY gruppiert nach allen nicht-aggregierten Spalten des SELECTs.\n- HAVING filtert nach den aggregierten Bedingungen (COUNT(DISTINCT bestell_nr) >= ${minOrders} und SUM(...) > ${minRevenue}).\n- ORDER BY sortiert absteigend (DESC).`,
+                explanation: `INNER JOINs verknüpfen Tabellen. WHERE filtert Einzelzeilen vorab. GROUP BY fasst Kunden zusammen. HAVING filtert Aggregatwerte. ORDER BY sortiert.`
+            });
+        } else {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "lf5",
+                topic: "🔥 Meisterklasse: Komplexe SQL-Aggregation & Multi-Table-JOIN (LF 5)",
+                isHard: true,
+                difficulty: "hard",
+                isBawueFocus: true,
+                type: "multiple-choice",
+                question: qText + `\n\nWelche SQL-Klausel muss verwendet werden, um die Filterung "Gesamtumsatz > ${minRevenue} EUR" durchzuführen?`,
+                options: [
+                    `HAVING SUM(bp.menge * bp.einzelpreis * (1 - bp.rabatt_prozent / 100.0)) > ${minRevenue}`,
+                    `WHERE SUM(bp.menge * bp.einzelpreis * (1 - bp.rabatt_prozent / 100.0)) > ${minRevenue}`,
+                    `GROUP BY SUM(bp.menge * bp.einzelpreis) > ${minRevenue}`,
+                    `ORDER BY SUM(bp.menge) > ${minRevenue}`
+                ],
+                correctAnswer: 0,
+                explanation: `Bedingungen auf Aggregatfunktionen (SUM, COUNT, AVG) dürfen niemals in der WHERE-Klausel stehen, sondern MÜSSEN zwingend in der HAVING-Klausel nach dem GROUP BY definiert werden.`
+            });
+        }
+    }
+
+    // MC11: Datenbank-Normalisierung & Anomalien (1NF bis 3NF) (LF 5 / Schwer)
+    for (let i = 0; i < 15; i++) {
+        const qText = `🔥 Meisterklasse Datenbank-Design & Normalisierung (LF 5):\nGegeben ist folgende unnormalisierte Relation für Rechnungsdaten:\nRechnung_Unnormalisiert (RechnungsNr, RechnungsDatum, KundenNr, KundenName, KundenStrasse, KundenPLZ, KundenOrt, ArtikelListe, GesamtBetrag, ProjektleiterNr, ProjektleiterName)\n\nHierbei enthält das Feld "ArtikelListe" mehrere durch Komma getrennte Artikel inkl. Mengen und Einzelpreisen.\n\nAufgaben:\n1. Definieren Sie die 1., 2. und 3. Normalform (1NF, 2NF, 3NF).\n2. Zeigen Sie auf, welche Normalformen in der gegebenen Tabelle verletzt sind und überführen Sie das Schema vollständig in die 3. Normalform (Tabellennamen, Primärschlüssel [PK] und Fremdschlüssel [FK] angeben).\n3. Erläutern Sie anhand der Ausgangstabelle je ein konkretes Beispiel für:\n   a) Eine Einfüge-Anomalie (Insertion Anomaly)\n   b) Eine Änderungs-Anomalie (Update Anomaly)\n   c) Eine Lösch-Anomalie (Deletion Anomaly).`;
+
+        const mLoesung = `Musterlösung Datenbank-Normalisierung:\n\n1. Definitionen der Normalformen:\n- 1NF: Jedes Attribut enthält nur atomare (unteilbare) Werte; keine Wiederholungsgruppen/Mehrfachwerte.\n- 2NF: Befindet sich in 1NF UND jedes Nicht-Schlüssel-Attribut ist voll funktional vom gesamten Primärschlüssel abhängig (keine partiellen Abhängigkeiten bei zusammengesetzten Schlüsseln).\n- 3NF: Befindet sich in 2NF UND kein Nicht-Schlüssel-Attribut hängt transitiv von einem anderen Nicht-Schlüssel-Attribut ab (keine transitiven Abhängigkeiten).\n\n2. Überführung in die 3. Normalform:\n- tbl_Kunde (KundenNr [PK], KundenName, KundenStrasse, PLZ [FK])\n- tbl_Ort (PLZ [PK], Ort)  -- Löst transitive Abhängigkeit PLZ -> Ort auf (3NF)\n- tbl_Projektleiter (ProjektleiterNr [PK], ProjektleiterName)\n- tbl_Rechnung (RechnungsNr [PK], RechnungsDatum, KundenNr [FK], ProjektleiterNr [FK])\n- tbl_Artikel (ArtikelNr [PK], Bezeichnung, Einzelpreis)\n- tbl_Rechnungsposition (RechnungsNr [PK, FK], PositionsNr [PK], ArtikelNr [FK], Menge, Einzelpreis_Historisch)\n\n3. Anomalien in der unnormalisierten Tabelle:\n- a) Einfüge-Anomalie: Ein neuer Kunde kann erst in die Datenbank eingetragen werden, wenn er mindestens eine Rechnung mit einem Artikel erzeugt hat.\n- b) Änderungs-Anomalie: Zieht ein Kunde um, muss die Adresse in dutzenden alten Rechnungszeilen manuell geändert werden; wird eine Zeile vergessen, entstehen inkonsistente Daten.\n- c) Lösch-Anomalie: Wird die einzige Rechnung eines Kunden storniert und gelöscht, werden gleichzeitig die gesamten Kundendaten unwiederbringlich gelöscht.`;
+
+        const isOpen = shouldBeOpenText();
+        if (isOpen) {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "lf5",
+                topic: "🔥 Meisterklasse: Normalisierung 1NF-3NF & Datenbank-Anomalien (LF 5)",
+                isHard: true,
+                difficulty: "hard",
+                isBawueFocus: true,
+                type: "open-text",
+                question: qText,
+                musterloesung: mLoesung,
+                explanation: `1NF = atomare Werte. 2NF = voll funktionale Abhängigkeit vom PK. 3NF = keine transitiven Abhängigkeiten. Anomalien: Einfügen, Ändern, Löschen.`
+            });
+        } else {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "lf5",
+                topic: "🔥 Meisterklasse: Normalisierung 1NF-3NF & Datenbank-Anomalien (LF 5)",
+                isHard: true,
+                difficulty: "hard",
+                isBawueFocus: true,
+                type: "multiple-choice",
+                question: qText + `\n\nWann liegt eine Verletzung der 3. Normalform (3NF) vor?`,
+                options: [
+                    `Wenn ein Nicht-Schlüssel-Attribut transitiv von einem Primärschlüssel abhängt (d.h. von einem anderen Nicht-Schlüssel-Attribut)`,
+                    `Wenn Attribute nicht atomar sind (z. B. mehrere Werte in einem Datenfeld)`,
+                    `Wenn ein Attribut nur von einem Teil eines zusammengesetzten Primärschlüssels abhängt`,
+                    `Wenn in einer Tabelle keine Fremdschlüssel definiert wurden`
+                ],
+                correctAnswer: 0,
+                explanation: `Eine 3NF-Verletzung liegt vor, wenn funktionale Abhängigkeiten zwischen Nicht-Schlüssel-Attributen bestehen (z. B. PLZ -> Ort, Kundennummer -> Kundenname).`
+            });
+        }
+    }
+
+    // MC12: Algorithmen, 2D-Arrays / Matrizen, Trace-Tabellen & Zeitkomplexität (LF 5 / LF 8 / Schwer)
+    for (let i = 0; i < 15; i++) {
+        const matrixCode = `FUNCTION AnalyzeMatrix(matrix[3][3]):
+    sum_diag = 0
+    max_val = matrix[0][0]
+    swap_count = 0
+    
+    FOR i FROM 0 TO 2 DO:
+        FOR j FROM 0 TO 2 DO:
+            IF i == j THEN:
+                sum_diag = sum_diag + matrix[i][j]
+            END IF
+            IF matrix[i][j] > max_val THEN:
+                max_val = matrix[i][j]
+                swap_count = swap_count + 1
+            END IF
+        END FOR
+    END FOR
+    
+    RETURN (sum_diag, max_val, swap_count)`;
+
+        const sampleMatrix = [
+            [4, 2, 7],
+            [1, 9, 3],
+            [8, 5, 6]
+        ];
+        // i=0:
+        // j=0: val=4, i==j -> sum_diag=4, max_val=4
+        // j=1: val=2, max_val=4
+        // j=2: val=7, max_val=7 (swap_count=1)
+        // i=1:
+        // j=0: val=1
+        // j=1: val=9, i==j -> sum_diag=4+9=13, max_val=9 (swap_count=2)
+        // j=2: val=3
+        // i=2:
+        // j=0: val=8
+        // j=1: val=5
+        // j=2: val=6, i==j -> sum_diag=13+6=19
+        // Result: sum_diag=19, max_val=9, swap_count=2
+
+        const qText = `🔥 Meisterklasse Algorithmen & Trace-Tabelle (LF 5 / LF 8):\nGegeben ist folgender Pseudocode zur Analyse einer 3x3-Matrix:\n\n${matrixCode}\n\nGegebene Eingabematrix:\nmatrix = [\n  [4, 2, 7],\n  [1, 9, 3],\n  [8, 5, 6]\n]\n\nAufgaben:\n1. Erstellen Sie eine vollständige Trace-Tabelle für alle 9 Schleifendurchläufe mit den Spalten (i, j, matrix[i][j], sum_diag, max_val, swap_count).\n2. Geben Sie die finalen Rückgabewerte der Funktion an.\n3. Bestimmen Sie die Zeitkomplexität des Algorithmus in der O-Notation bezogen auf eine quadratische Matrix der Größe N x N.`;
+
+        const mLoesung = `Musterlösung Trace-Tabelle & Komplexität:\n\n1. Trace-Tabelle:\n| Durchlauf | i | j | matrix[i][j] | sum_diag | max_val | swap_count |\n|---|---|---|---|---|---|---|\n| Start | - | - | - | 0 | 4 | 0 |\n| 1 | 0 | 0 | 4 | 4 | 4 | 0 |\n| 2 | 0 | 1 | 2 | 4 | 4 | 0 |\n| 3 | 0 | 2 | 7 | 4 | 7 | 1 |\n| 4 | 1 | 0 | 1 | 4 | 7 | 1 |\n| 5 | 1 | 1 | 9 | 13 | 9 | 2 |\n| 6 | 1 | 2 | 3 | 13 | 9 | 2 |\n| 7 | 2 | 0 | 8 | 13 | 9 | 2 |\n| 8 | 2 | 1 | 5 | 13 | 9 | 2 |\n| 9 | 2 | 2 | 6 | 19 | 9 | 2 |\n\n2. Finale Rückgabewerte:\n- sum_diag = 19 (Hauptdiagonale: 4 + 9 + 6 = 19)\n- max_val = 9 (Größter Wert der Matrix)\n- swap_count = 2\n\n3. Zeitkomplexität:\n- Zwei verschachtelte Zählschleifen von 0 bis N-1 durchlaufen genau N * N = N^2 Elemente.\n- Die Zeitkomplexität beträgt O(N^2) (quadratischer Aufwand).`;
+
+        const isOpen = shouldBeOpenText();
+        if (isOpen) {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "lf5",
+                topic: "🔥 Meisterklasse: Algorithmen, Trace-Tabelle & Komplexität O(n) (LF 5)",
+                isHard: true,
+                difficulty: "hard",
+                isBawueFocus: true,
+                type: "open-text",
+                question: qText,
+                code: matrixCode,
+                musterloesung: mLoesung,
+                explanation: `Hauptdiagonale = 4+9+6 = 19. Max = 9. Swaps = 2. Komplexität: 2 verschachtelte Schleifen = O(N^2).`
+            });
+        } else {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "lf5",
+                topic: "🔥 Meisterklasse: Algorithmen, Trace-Tabelle & Komplexität O(n) (LF 5)",
+                isHard: true,
+                difficulty: "hard",
+                isBawueFocus: true,
+                type: "multiple-choice",
+                question: qText + `\n\nWelche Rückgabewerte liefert die Funktion für die gegebene Matrix?`,
+                options: [
+                    `sum_diag = 19, max_val = 9, swap_count = 2`,
+                    `sum_diag = 13, max_val = 8, swap_count = 3`,
+                    `sum_diag = 22, max_val = 9, swap_count = 1`,
+                    `sum_diag = 19, max_val = 7, swap_count = 2`
+                ],
+                correctAnswer: 0,
+                explanation: `Hauptdiagonale: 4 + 9 + 6 = 19. Maximalwert = 9 (wurde bei 7 und 9 aktualisiert -> swap_count = 2).`
+            });
+        }
+    }
+
+    // MC13: IT-Sicherheit: BSI-Grundschutz, Ransomware Incident Response (5 Phasen), Art. 33 DSGVO & TOMs (LF 4 / Schwer)
+    for (let i = 0; i < 15; i++) {
+        const qText = `🔥 Meisterklasse IT-Sicherheit, Incident Response & DSGVO (LF 4):\nEin mittelständisches Handelsunternehmen wird Opfer eines gezielten Ransomware-Angriffs. Erste Systeme verschlüsseln Datenbestände, und ein Erpresserschreiben fordert 500.000 EUR in Bitcoin.\n\nAufgaben:\n1. Skizzieren Sie den Ablauf eines professionellen Incident-Response-Prozesses anhand der 5 Phasen nach dem BSI-Leitfaden (Erkennung/Triage, Eindämmung, Beseitigung, Wiederherstellung, Nachbereitung / Lessons Learned).\n2. Nennen Sie zwei Sofortmaßnahmen in der Phase "Eindämmung" (Containment), um eine Ausbreitung im internen Netzwerk sofort zu stoppen.\n3. Erläutern Sie die rechtliche Meldepflicht nach Art. 33 DSGVO (Meldefrist, zuständige Behörde, erforderliche Mindestangaben).\n4. Nennen Sie 4 Technische und Organisatorische Maßnahmen (TOM nach Art. 32 DSGVO), mit denen dieser Vorfall präventiv hätte verhindert oder abgemildert werden können.`;
+
+        const mLoesung = `Musterlösung IT-Sicherheitsvorfall & Datenschutz:\n\n1. Die 5 Phasen des Incident-Response-Prozesses (BSI):\n- 1. Identifikation & Triage: Vorfall verifizieren, Ausmaß feststellen, Incident-Response-Team (CSIRT) aktivieren.\n- 2. Eindämmung (Containment): Schadensbegrenzung, infizierte Systeme isolieren, laterale Bewegung des Angreifers stoppen.\n- 3. Beseitigung (Eradication): Malware, Backdoors, kompromittierte Konten und Persistenzmechanismen vollständig entfernen.\n- 4. Wiederherstellung (Recovery): Sauberes Einspielen verifizierter Offline-/Immutable-Backups, kontrollierter Wiederanlauf unter Monitoring.\n- 5. Lessons Learned: Dokumentation, Schwachstellenanalyse, Härtung der IT-Infrastruktur.\n\n2. Sofortmaßnahmen zur Eindämmung:\n- Trennung aller Netzwerkverbindungen der betroffenen Server (Netzwerkkabel ziehen / VLANs isolieren / Port-Shutdown am Switch), KEIN Ausschalten der Rechner (zum Erhalt von RAM-Forensik).\n- Sperrung aller Domänen-Admin-Accounts und Zurücksetzen sämtlicher Privileged Access Zugangsdaten.\n\n3. Meldepflicht nach Art. 33 DSGVO:\n- Frist: Unverzüglich, spätestens binnen 72 Stunden nach Bekanntwerden des Vorfalls.\n- Behörde: Der zuständige Landesbeauftragte für Datenschutz (LfDI des jeweiligen Bundeslandes).\n- Inhalt: Art der Datenschutzverletzung, betroffene Datenkategorien, ungefähre Zahl der Betroffenen, Kontaktdaten des DSB, wahrscheinliche Folgen und ergriffene Gegenmaßnahmen.\n\n4. Präventive TOMs (Art. 32 DSGVO):\n- 3-2-1-1-0 Backup-Strategie mit unveränderbarem (Immutable/WORM) oder Air-Gapped Offline-Backup.\n- Mehrfaktor-Authentifizierung (MFA) an allen Fernzugängen (VPN, RDP, Web-Portale).\n- Endpoint Detection & Response (EDR) mit verhaltensbasierter Angriffserkennung.\n- Netzwerksegmentierung (VLANs, DMZ, Microsegmentation) und Principle of Least Privilege (PoLP).`;
+
+        const isOpen = shouldBeOpenText();
+        if (isOpen) {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "lf4",
+                topic: "🔥 Meisterklasse: BSI Incident Response, DSGVO Art. 33 & TOMs (LF 4)",
+                isHard: true,
+                difficulty: "hard",
+                isBawueFocus: true,
+                type: "open-text",
+                question: qText,
+                musterloesung: mLoesung,
+                explanation: `5 Phasen: Identifikation, Eindämmung, Beseitigung, Recovery, Lessons Learned. DSGVO Art. 33: 72-Stunden-Meldepflicht an Aufsichtsbehörde. TOMs: 3-2-1-Backup, MFA, EDR.`
+            });
+        } else {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "lf4",
+                topic: "🔥 Meisterklasse: BSI Incident Response, DSGVO Art. 33 & TOMs (LF 4)",
+                isHard: true,
+                difficulty: "hard",
+                isBawueFocus: true,
+                type: "multiple-choice",
+                question: qText + `\n\nInnerhalb welcher Frist muss eine Datenschutzverletzung an die zuständige Aufsichtsbehörde gemeldet werden?`,
+                options: [
+                    `Unverzüglich, spätestens innerhalb von 72 Stunden nach Bekanntwerden (Art. 33 DSGVO)`,
+                    `Innerhalb von 14 Werktagen`,
+                    `Innerhalb von 24 Stunden, sonst droht sofortige Betriebsschließung`,
+                    `Innerhalb von 30 Kalendertagen`
+                ],
+                correctAnswer: 0,
+                explanation: `Gemäß Art. 33 Abs. 1 DSGVO muss der Verantwortliche eine Verletzung des Schutzes personenbezogener Daten unverzüglich und möglichst binnen 72 Stunden melden.`
+            });
+        }
+    }
+
+    // MC14: Projektmanagement & Earned Value Analyse (EVM) (LF 1 / LF 6 / Schwer)
+    for (let i = 0; i < 15; i++) {
+        const bac = [100000, 150000, 200000][Math.floor(Math.random() * 3)]; // Budget at Completion
+        const pv = bac * 0.60; // Planwert 60%
+        const ev = bac * 0.50; // Fertigstellungswert 50%
+        const ac = bac * 0.65; // Ist-Kosten 65%
+
+        const cv = ev - ac; // Cost Variance (<0 -> über Budget)
+        const sv = ev - pv; // Schedule Variance (<0 -> Verzug)
+        const cpi = ev / ac; // <1 -> ineffizient
+        const spi = ev / pv; // <1 -> Verzögerung
+        const eac = bac / cpi; // Estimate at Completion
+
+        const qText = `🔥 Meisterklasse Projektmanagement & Earned Value Analyse (LF 1 / LF 6):\nFür ein IT-Migrationsprojekt mit einem Gesamtbudget (BAC = Budget at Completion) von ${bac.toLocaleString('de-DE')} EUR liegen zum aktuellen Stichtag folgende Kennzahlen vor:\n- Planwert (PV = Planned Value): ${pv.toLocaleString('de-DE')} EUR\n- Ist-Kosten (AC = Actual Cost): ${ac.toLocaleString('de-DE')} EUR\n- Fertigstellungswert (EV = Earned Value): ${ev.toLocaleString('de-DE')} EUR\n\nAufgaben:\n1. Berechnen Sie die Kostenabweichung (CV = Cost Variance) und die Terminabweichung (SV = Schedule Variance).\n2. Berechnen Sie den Kosteneffizienzindex (CPI = Cost Performance Index) und den Termineffizienzindex (SPI = Schedule Performance Index) auf 2 Nachkommastellen genau.\n3. Berechnen Sie die prognostizierten Gesamtkosten bei Projektabschluss (EAC = Estimate at Completion).\n4. Interpretieren Sie den aktuellen Projektstatus für den Lenkungsausschuss (Termintreue und Budgettreue).`;
+
+        const mLoesung = `Musterlösung Earned Value Analyse (EVM):\n\n1. Kosten- und Terminabweichung:\n- CV (Cost Variance) = EV - AC = ${ev.toLocaleString('de-DE')} EUR - ${ac.toLocaleString('de-DE')} EUR = ${cv.toLocaleString('de-DE')} EUR (Negativ: Kostenüberschreitung von ${Math.abs(cv).toLocaleString('de-DE')} EUR).\n- SV (Schedule Variance) = EV - PV = ${ev.toLocaleString('de-DE')} EUR - ${pv.toLocaleString('de-DE')} EUR = ${sv.toLocaleString('de-DE')} EUR (Negativ: Zeitverzug im Gegenwert von ${Math.abs(sv).toLocaleString('de-DE')} EUR).\n\n2. Effizienz-Indizes:\n- CPI (Cost Performance Index) = EV / AC = ${ev} / ${ac} = ${cpi.toFixed(2)} (Für jeden investierten Euro wurden nur ${(cpi * 100).toFixed(0)} Cent Projektwert geschaffen).\n- SPI (Schedule Performance Index) = EV / PV = ${ev} / ${pv} = ${spi.toFixed(2)} (Das Projekt arbeitet mit einer Geschwindigkeit von ${(spi * 100).toFixed(0)} % des geplanten Tempos).\n\n3. Prognose Gesamtkosten (EAC):\n- EAC = BAC / CPI = ${bac.toLocaleString('de-DE')} EUR / ${cpi.toFixed(2)} = ${eac.toLocaleString('de-DE', {maximumFractionDigits: 0})} EUR (Budgetüberschreitung um ${(eac - bac).toLocaleString('de-DE', {maximumFractionDigits: 0})} EUR).\n\n4. Interpretation:\n- Das Projekt ist sowohl hinter dem Zeitplan (SPI < 1, SV < 0) als auch über dem Budget (CPI < 1, CV < 0). Es sind sofortige steuernde Maßnahmen (z. B. Scope-Reduktion / Fast-Tracking) erforderlich.`;
+
+        const isOpen = shouldBeOpenText();
+        if (isOpen) {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "lf6",
+                topic: "🔥 Meisterklasse: Earned Value Analyse (EVM) & Projektcontrolling (LF 1 / LF 6)",
+                isCalculation: true,
+                isHard: true,
+                difficulty: "hard",
+                isBawueFocus: true,
+                type: "open-text",
+                question: qText,
+                musterloesung: mLoesung,
+                explanation: `CV = EV - AC = ${cv.toLocaleString('de-DE')} EUR. SV = EV - PV = ${sv.toLocaleString('de-DE')} EUR. CPI = ${cpi.toFixed(2)}, SPI = ${spi.toFixed(2)}. EAC = ${eac.toFixed(0)} EUR.`
+            });
+        } else {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "lf6",
+                topic: "🔥 Meisterklasse: Earned Value Analyse (EVM) & Projektcontrolling (LF 1 / LF 6)",
+                isCalculation: true,
+                isHard: true,
+                difficulty: "hard",
+                isBawueFocus: true,
+                type: "multiple-choice",
+                question: qText + `\n\nWie lauten die Werte für CPI und die voraussichtlichen Gesamtkosten (EAC)?`,
+                options: [
+                    `CPI: ${cpi.toFixed(2)} | EAC: ${eac.toLocaleString('de-DE', {maximumFractionDigits: 0})} EUR`,
+                    `CPI: 1.15 | EAC: ${(bac * 0.9).toLocaleString('de-DE', {maximumFractionDigits: 0})} EUR`,
+                    `CPI: 1.00 | EAC: ${bac.toLocaleString('de-DE')} EUR`,
+                    `CPI: ${(cpi * 0.5).toFixed(2)} | EAC: ${(eac * 1.5).toLocaleString('de-DE', {maximumFractionDigits: 0})} EUR`
+                ],
+                correctAnswer: 0,
+                explanation: `CPI = EV / AC = ${ev}/${ac} = ${cpi.toFixed(2)}. EAC = BAC / CPI = ${bac}/${cpi.toFixed(2)} = ${eac.toFixed(0)} EUR.`
+            });
+        }
+    }
+
+    // MC15: BGB Vertragsrecht & Leistungsstörungen (Werkvertrag vs. Dienstvertrag, Sachmängelhaftung § 437 BGB) (LF 1 / Schwer)
+    for (let i = 0; i < 15; i++) {
+        const qText = `🔥 Meisterklasse IT-Vertragsrecht & Gewährleistung (LF 1 / LF 6):\nEin Unternehmen beauftragt ein Softwarehaus mit der Erstellung einer maßgeschneiderten Warenwirtschaftssoftware für 60.000 EUR. Im Vertrag wird vereinbart, dass die Software den im Pflichtenheft definierten automatischen Lagerabgleich fehlerfrei beherrschen muss.\n\nNach der Bereitstellung stellt der Auftraggeber fest, dass der Lagerabgleich bei mehr als 100 gleichzeitigen Buchungen abstürzt. Der Auftraggeber verweigert die Abnahme und will sofort vom Vertrag zurücktreten und Schadensersatz verlangen.\n\nAufgaben:\n1. Bestimmen Sie den zutreffenden Vertragstyp nach BGB (Werkvertrag gem. § 631 BGB oder Dienstvertrag gem. § 611 BGB) und begründen Sie Ihre Entscheidung.\n2. Ist der sofortige Rücktritt des Auftraggebers rechtlich sofort zulässig? Erläutern Sie das gestufte System der Mängelrechte nach BGB (§ 437 / § 634 BGB) und die rechtlichen Voraussetzungen für Rücktritt oder Minderung.\n3. Welche Rechte hat der Auftragnehmer (Recht zur zweiten Andienung)? Wie viele Nachbesserungsversuche stehen ihm üblicherweise nach BGB zu?`;
+
+        const mLoesung = `Musterlösung IT-Vertragsrecht & Mängelhaftung:\n\n1. Vertragstyp:\n- Es handelt sich um einen Werkvertrag gem. § 631 BGB (bzw. Werklieferungsvertrag nach § 650 BGB bei Individualsoftware).\n- Begründung: Das Softwarehaus schuldet einen konkreten werkvertraglichen Erfolg (eine funktionstüchtige, abnahmefähige Software gemäß Pflichtenheft), nicht bloß ein reines Tätigwerden/Bemühen wie beim Dienstvertrag.\n\n2. Zulässigkeit des sofortigen Rücktritts:\n- Nein, der sofortige Rücktritt ist unzulässig.\n- Begründung: Vorrang der Nacherfüllung ("Recht zur zweiten Andienung"). Der Auftraggeber muss dem Auftragnehmer zunächst eine angemessene Frist zur Nacherfüllung (Mängelbeseitigung/Nachbesserung) setzen.\n- Erst nach fruchtlosem Ablauf der Frist oder bei endgültiger Verweigerung greifen die sekundären Mängelrechte: Rücktritt vom Vertrag, Minderung der Vergütung oder Schadensersatz statt der Leistung.\n\n3. Rechte des Auftragnehmers:\n- Der Auftragnehmer hat das Recht, den Mangel innerhalb der gesetzten Frist kostenfrei zu beheben (Nacherfüllungsanspruch).\n- Gemäß § 440 BGB gilt eine Nachbesserung im Regelfall nach dem erfolglosen zweiten Versuch als fehlgeschlagen, sofern sich nicht aus der Art der Sache oder den Umständen etwas anderes ergibt.`;
+
+        const isOpen = shouldBeOpenText();
+        if (isOpen) {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "lf1",
+                topic: "🔥 Meisterklasse: Werkvertrag vs. Dienstvertrag & Mängelrechte BGB (LF 1)",
+                isHard: true,
+                difficulty: "hard",
+                isBawueFocus: true,
+                type: "open-text",
+                question: qText,
+                musterloesung: mLoesung,
+                explanation: `Werkvertrag (§ 631 BGB), da Erfolg geschuldet. Sofortiger Rücktritt unzulässig wg. Vorrang der Nacherfüllung (§ 634 BGB, Recht zur 2. Andienung, i.d.R. 2 Versuche).`
+            });
+        } else {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "lf1",
+                topic: "🔥 Meisterklasse: Werkvertrag vs. Dienstvertrag & Mängelrechte BGB (LF 1)",
+                isHard: true,
+                difficulty: "hard",
+                isBawueFocus: true,
+                type: "multiple-choice",
+                question: qText + `\n\nWelcher Vertragstyp liegt vor und darf der Auftraggeber sofort zurücktreten?`,
+                options: [
+                    `Werkvertrag (§ 631 BGB) | Sofortiger Rücktritt unzulässig (Vorrang der Nacherfüllung / Recht zur 2. Andienung)`,
+                    `Dienstvertrag (§ 611 BGB) | Sofortiger Rücktritt sofort wirksam`,
+                    `Kaufvertrag (§ 433 BGB) | Auftraggeber kann ohne Fristsetzung Minderung fordern`,
+                    `Werkvertrag (§ 631 BGB) | Sofortiger Rücktritt sofort zulässig`
+                ],
+                correctAnswer: 0,
+                explanation: `Individualsoftware = Werkvertrag (Erfolg geschuldet). Der Auftragnehmer hat das Recht zur zweiten Andienung (Nacherfüllung vor Rücktritt).`
+            });
+        }
+    }
+
     return dynamicQuestions;
 }

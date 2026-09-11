@@ -605,6 +605,8 @@ var staticQuestions = [
     },
     {
         id: 46,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf6",
         type: "open-text",
@@ -614,6 +616,8 @@ var staticQuestions = [
     },
     {
         id: 47,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf6",
         type: "open-text",
@@ -623,6 +627,8 @@ var staticQuestions = [
     },
     {
         id: 48,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf4",
         type: "open-text",
@@ -632,6 +638,8 @@ var staticQuestions = [
     },
     {
         id: 49,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf4",
         type: "open-text",
@@ -641,6 +649,8 @@ var staticQuestions = [
     },
     {
         id: 50,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf2",
         type: "open-text",
@@ -650,6 +660,8 @@ var staticQuestions = [
     },
     {
         id: 51,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf4",
         type: "open-text",
@@ -659,6 +671,8 @@ var staticQuestions = [
     },
     {
         id: 52,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf4",
         type: "open-text",
@@ -668,6 +682,8 @@ var staticQuestions = [
     },
     {
         id: 53,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf4",
         type: "open-text",
@@ -677,6 +693,8 @@ var staticQuestions = [
     },
     {
         id: 54,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf4",
         type: "open-text",
@@ -686,6 +704,8 @@ var staticQuestions = [
     },
     {
         id: 55,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf6",
         type: "open-text",
@@ -695,6 +715,8 @@ var staticQuestions = [
     },
     {
         id: 56,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf6",
         type: "open-text",
@@ -704,6 +726,8 @@ var staticQuestions = [
     },
     {
         id: 57,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf5",
         type: "open-text",
@@ -713,6 +737,8 @@ var staticQuestions = [
     },
     {
         id: 58,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf5",
         type: "open-text",
@@ -722,6 +748,8 @@ var staticQuestions = [
     },
     {
         id: 59,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf6",
         type: "open-text",
@@ -731,6 +759,8 @@ var staticQuestions = [
     },
     {
         id: 60,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
@@ -740,6 +770,8 @@ var staticQuestions = [
     },
     {
         id: 61,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf2",
         type: "open-text",
@@ -749,6 +781,8 @@ var staticQuestions = [
     },
     {
         id: 62,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf2",
         type: "open-text",
@@ -758,6 +792,8 @@ var staticQuestions = [
     },
     {
         id: 63,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf5",
         type: "open-text",
@@ -767,6 +803,8 @@ var staticQuestions = [
     },
     {
         id: 64,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf6",
         type: "open-text",
@@ -776,6 +814,8 @@ var staticQuestions = [
     },
     {
         id: 65,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf5",
         type: "open-text",
@@ -785,6 +825,8 @@ var staticQuestions = [
     },
     {
         id: 66,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf5",
         type: "open-text",
@@ -794,6 +836,8 @@ var staticQuestions = [
     },
     {
         id: 67,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf6",
         type: "open-text",
@@ -803,6 +847,8 @@ var staticQuestions = [
     },
     {
         id: 68,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
@@ -812,6 +858,8 @@ var staticQuestions = [
     },
     {
         id: 69,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
@@ -821,6 +869,8 @@ var staticQuestions = [
     },
     {
         id: 70,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf4",
         type: "open-text",
@@ -830,6 +880,8 @@ var staticQuestions = [
     },
     {
         id: 71,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf5",
         type: "open-text",
@@ -839,6 +891,8 @@ var staticQuestions = [
     },
     {
         id: 72,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf6",
         type: "open-text",
@@ -848,6 +902,8 @@ var staticQuestions = [
     },
     {
         id: 73,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf2",
         type: "open-text",
@@ -857,6 +913,8 @@ var staticQuestions = [
     },
     {
         id: 74,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf4",
         type: "open-text",
@@ -866,6 +924,8 @@ var staticQuestions = [
     },
     {
         id: 75,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf6",
         type: "open-text",
@@ -875,6 +935,8 @@ var staticQuestions = [
     },
     {
         id: 76,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf6",
         type: "open-text",
@@ -884,6 +946,8 @@ var staticQuestions = [
     },
     {
         id: 77,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf6",
         type: "open-text",
@@ -893,6 +957,8 @@ var staticQuestions = [
     },
     {
         id: 78,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
@@ -902,6 +968,8 @@ var staticQuestions = [
     },
     {
         id: 79,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf6",
         type: "open-text",
@@ -911,6 +979,8 @@ var staticQuestions = [
     },
     {
         id: 80,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf1",
         type: "open-text",
@@ -942,6 +1012,8 @@ var staticQuestions = [
     },
     {
         id: 82,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf1",
         type: "open-text",
@@ -973,6 +1045,8 @@ var staticQuestions = [
     },
     {
         id: 84,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf1",
         type: "open-text",
@@ -1005,6 +1079,8 @@ var staticQuestions = [
     },
     {
         id: 86,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf6",
         type: "open-text",
@@ -1040,6 +1116,8 @@ var staticQuestions = [
     },
     {
         id: 88,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf6",
         type: "open-text",
@@ -1071,6 +1149,8 @@ var staticQuestions = [
     },
     {
         id: 90,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf6",
         type: "open-text",
@@ -1109,6 +1189,8 @@ var staticQuestions = [
     },
     {
         id: 92,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
@@ -1123,6 +1205,8 @@ var staticQuestions = [
     },
     {
         id: 93,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
@@ -1138,6 +1222,8 @@ var staticQuestions = [
     },
     {
         id: 94,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
@@ -1153,6 +1239,8 @@ var staticQuestions = [
     },
     {
         id: 95,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
@@ -1184,6 +1272,8 @@ var staticQuestions = [
     },
     {
         id: 97,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
@@ -1199,6 +1289,8 @@ var staticQuestions = [
     },
     {
         id: 98,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
@@ -1229,6 +1321,8 @@ var staticQuestions = [
     },
     {
         id: 100,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
@@ -1259,6 +1353,8 @@ var staticQuestions = [
     },
     {
         id: 102,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
@@ -1271,6 +1367,8 @@ var staticQuestions = [
     },
     {
         id: 103,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
@@ -1331,6 +1429,8 @@ var staticQuestions = [
     },
     {
         id: 106,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
@@ -1352,6 +1452,8 @@ var staticQuestions = [
     },
     {
         id: 107,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
@@ -1364,6 +1466,8 @@ var staticQuestions = [
     },
     {
         id: 108,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
@@ -1376,6 +1480,8 @@ var staticQuestions = [
     },
     {
         id: 109,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf2",
         type: "open-text",
@@ -1387,6 +1493,8 @@ var staticQuestions = [
     },
     {
         id: 110,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf2",
         type: "open-text",
@@ -1398,6 +1506,8 @@ var staticQuestions = [
     },
     {
         id: 111,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf2",
         type: "open-text",
@@ -1409,6 +1519,8 @@ var staticQuestions = [
     },
     {
         id: 112,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf2",
         type: "open-text",
@@ -1420,6 +1532,8 @@ var staticQuestions = [
     },
     {
         id: 113,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
@@ -1431,6 +1545,8 @@ var staticQuestions = [
     },
     {
         id: 114,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
@@ -1443,6 +1559,8 @@ var staticQuestions = [
     },
     {
         id: 115,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
@@ -1454,6 +1572,8 @@ var staticQuestions = [
     },
     {
         id: 116,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
@@ -1466,6 +1586,8 @@ var staticQuestions = [
     },
     {
         id: 117,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
@@ -1477,6 +1599,8 @@ var staticQuestions = [
     },
     {
         id: 118,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
@@ -1488,6 +1612,8 @@ var staticQuestions = [
     },
     {
         id: 119,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
@@ -1520,6 +1646,8 @@ var staticQuestions = [
     },
     {
         id: 121,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf2",
         type: "open-text",
@@ -1532,6 +1660,8 @@ var staticQuestions = [
     },
     {
         id: 122,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf1",
         type: "open-text",
@@ -1543,6 +1673,8 @@ var staticQuestions = [
     },
     {
         id: 123,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf1",
         type: "open-text",
@@ -1554,6 +1686,8 @@ var staticQuestions = [
     },
     {
         id: 124,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf2",
         type: "open-text",
@@ -1566,6 +1700,8 @@ var staticQuestions = [
     },
     {
         id: 125,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf2",
         type: "open-text",
@@ -1577,6 +1713,8 @@ var staticQuestions = [
     },
     {
         id: 126,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
@@ -1589,6 +1727,8 @@ var staticQuestions = [
     },
     {
         id: 127,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf4",
         type: "open-text",
@@ -1601,6 +1741,8 @@ var staticQuestions = [
     },
     {
         id: 128,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf4",
         type: "open-text",
@@ -1612,6 +1754,8 @@ var staticQuestions = [
     },
     {
         id: 129,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf5",
         type: "open-text",
@@ -1623,6 +1767,8 @@ var staticQuestions = [
     },
     {
         id: 130,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf5",
         type: "open-text",
@@ -1634,6 +1780,8 @@ var staticQuestions = [
     },
     {
         id: 131,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf5",
         type: "open-text",
@@ -1645,6 +1793,8 @@ var staticQuestions = [
     },
     {
         id: 132,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf2",
         type: "open-text",
@@ -1657,6 +1807,8 @@ var staticQuestions = [
     },
     {
         id: 133,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf4",
         type: "open-text",
@@ -1669,6 +1821,8 @@ var staticQuestions = [
     },
     {
         id: 134,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf2",
         type: "open-text",
@@ -1681,6 +1835,8 @@ var staticQuestions = [
     },
     {
         id: 135,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf6",
         type: "open-text",
@@ -1709,6 +1865,8 @@ var staticQuestions = [
     },
     {
         id: 137,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf1",
         type: "open-text",
@@ -1738,6 +1896,8 @@ var staticQuestions = [
     },
     {
         id: 139,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf1",
         type: "open-text",
@@ -1783,6 +1943,8 @@ var staticQuestions = [
     },
     {
         id: 142,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
@@ -1812,6 +1974,8 @@ var staticQuestions = [
     },
     {
         id: 144,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
@@ -1849,6 +2013,8 @@ Haupt-Technologien:
     },
     {
         id: 146,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf2",
         type: "open-text",
@@ -1873,6 +2039,8 @@ Haupt-Technologien:
     },
     {
         id: 147,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf4",
         type: "open-text",
@@ -1889,6 +2057,8 @@ Haupt-Technologien:
     },
     {
         id: 148,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf2",
         type: "open-text",
@@ -1912,6 +2082,8 @@ Disaster Recovery:
     },
     {
         id: 149,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf2",
         type: "open-text",
@@ -1938,6 +2110,8 @@ Der benötigte Speicherplatz beträgt ca. 500,56 GiB (bzw. 501 volle GiB).`,
     },
     {
         id: 150,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf2",
         type: "open-text",
@@ -1962,6 +2136,8 @@ Es werden wöchentlich 10.080 Bilder gespeichert. Der Speicherbedarf beträgt ca
     },
     {
         id: 151,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf5",
         type: "open-text",
@@ -1982,6 +2158,8 @@ Es werden wöchentlich 10.080 Bilder gespeichert. Der Speicherbedarf beträgt ca
     },
     {
         id: 152,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf2",
         type: "open-text",
@@ -2010,6 +2188,8 @@ Es werden wöchentlich 10.080 Bilder gespeichert. Der Speicherbedarf beträgt ca
     },
     {
         id: 153,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf5",
         type: "open-text",
@@ -2033,6 +2213,8 @@ Es werden wöchentlich 10.080 Bilder gespeichert. Der Speicherbedarf beträgt ca
     },
     {
         id: 154,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
@@ -2052,6 +2234,8 @@ Es werden wöchentlich 10.080 Bilder gespeichert. Der Speicherbedarf beträgt ca
     },
     {
         id: 155,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf6",
         type: "open-text",
@@ -2073,6 +2257,8 @@ Ergebnis: Der Einstandspreis beträgt 1.814,00 EUR.`,
     },
     {
         id: 156,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf6",
         type: "open-text",
@@ -2097,6 +2283,8 @@ Ergebnis: Der Verkäufer darf dem Kunden für die 45 Tage Verzug 135,00 EUR Verz
     },
     {
         id: 157,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
@@ -2110,6 +2298,8 @@ Ergebnis: Der Verkäufer darf dem Kunden für die 45 Tage Verzug 135,00 EUR Verz
     },
     {
         id: 158,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
@@ -2126,6 +2316,8 @@ Erklärung:
     },
     {
         id: 159,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
@@ -2146,6 +2338,8 @@ Erklärung:
     },
     {
         id: 160,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
@@ -2160,6 +2354,8 @@ Erklärung:
     },
     {
         id: 161,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf4",
         type: "open-text",
@@ -2174,6 +2370,8 @@ Erklärung:
     },
     {
         id: 162,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf4",
         type: "open-text",
@@ -2196,6 +2394,8 @@ Erklärung:
     },
     {
         id: 163,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf4",
         type: "open-text",
@@ -2210,6 +2410,8 @@ Erklärung:
     },
     {
         id: 164,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf6",
         type: "open-text",
@@ -2225,6 +2427,8 @@ Erklärung:
     },
     {
         id: 165,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf5",
         type: "open-text",
@@ -2256,6 +2460,8 @@ SELECT COUNT(*) FROM Mitarbeiter WHERE stadt = 'Mannheim';
     },
     {
         id: 166,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf6",
         type: "open-text",
@@ -2295,6 +2501,8 @@ Das Angebot der CBS KG ist mit einem Einstandspreis von 337,92 EUR das wirtschaf
     },
     {
         id: 167,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf5",
         type: "open-text",
@@ -2351,6 +2559,8 @@ console.log("Urlaub aufgebraucht.");
     },
     {
         id: 169,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf6",
         type: "open-text",
@@ -2370,6 +2580,8 @@ console.log("Urlaub aufgebraucht.");
     },
     {
         id: 170,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf6",
         type: "open-text",
@@ -2383,6 +2595,8 @@ console.log("Urlaub aufgebraucht.");
     },
     {
         id: 171,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
@@ -2397,6 +2611,8 @@ console.log("Urlaub aufgebraucht.");
     },
     {
         id: 172,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
@@ -2410,6 +2626,8 @@ console.log("Urlaub aufgebraucht.");
     },
     {
         id: 173,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
@@ -2424,6 +2642,8 @@ Auswirkung:
     },
     {
         id: 174,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
@@ -2439,6 +2659,8 @@ Auswirkung:
     },
     {
         id: 175,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf4",
         type: "open-text",
@@ -2454,6 +2676,8 @@ Erforderliche Maßnahme:
     },
     {
         id: 176,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf5",
         type: "open-text",
@@ -2502,6 +2726,8 @@ function deleteOldFiles() {
     },
     {
         id: 178,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf4",
         type: "open-text",
@@ -2519,6 +2745,8 @@ function deleteOldFiles() {
     },
     {
         id: 179,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf6",
         type: "open-text",
@@ -2540,6 +2768,8 @@ Der Gesamt-Bezugspreis beträgt 11.564,82 EUR netto.`,
     },
     {
         id: 180,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf6",
         type: "open-text",
@@ -2555,6 +2785,8 @@ Der Gesamt-Bezugspreis beträgt 11.564,82 EUR netto.`,
     },
     {
         id: 181,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf6",
         type: "open-text",
@@ -2577,6 +2809,8 @@ Ergebnis: Der Netto-Listenverkaufspreis beträgt 762,76 EUR.`,
     },
     {
         id: 182,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
@@ -2596,6 +2830,8 @@ Ergebnis: Der Netto-Listenverkaufspreis beträgt 762,76 EUR.`,
     },
     {
         id: 183,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf6",
         type: "open-text",
@@ -2616,6 +2852,8 @@ Ergebnis: Die USV muss eine Mindestleistung von 1.194,12 VA (bzw. aufgerundet 1.
     },
     {
         id: 184,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf5",
         type: "open-text",
@@ -2651,6 +2889,8 @@ function pruefeNummer(nummer) {
     },
     {
         id: 186,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
@@ -2667,6 +2907,8 @@ function pruefeNummer(nummer) {
     },
     {
         id: 187,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf6",
         type: "open-text",
@@ -2698,6 +2940,8 @@ Das Angebot der Hemak AG ist mit einem Einstandspreis von 495,12 EUR rein quanti
     },
     {
         id: 188,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf6",
         type: "open-text",
@@ -2726,6 +2970,8 @@ Ergebnis: Die USV muss eine Mindestleistung von 5.699,40 VA aufweisen.`,
     },
     {
         id: 189,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf6",
         type: "open-text",
@@ -2743,6 +2989,8 @@ Ergebnis: Die USV muss eine Mindestleistung von 5.699,40 VA aufweisen.`,
     },
     {
         id: 190,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
@@ -2782,6 +3030,8 @@ function loginUeberpruefung(username, passwort) {
     },
     {
         id: 192,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf6",
         type: "open-text",
@@ -2816,6 +3066,8 @@ function loginUeberpruefung(username, passwort) {
     },
     {
         id: 193,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
@@ -2831,6 +3083,8 @@ function loginUeberpruefung(username, passwort) {
     },
     {
         id: 194,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf4",
         type: "open-text",
@@ -2848,6 +3102,8 @@ function loginUeberpruefung(username, passwort) {
     },
     {
         id: 195,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf5",
         type: "open-text",
@@ -2868,6 +3124,8 @@ function loginUeberpruefung(username, passwort) {
 ,
     {
         id: 196,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf6",
         type: "open-text",
@@ -2892,6 +3150,8 @@ function loginUeberpruefung(username, passwort) {
     },
     {
         id: 197,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf6",
         type: "open-text",
@@ -2930,6 +3190,8 @@ Ergebnis: Der Listeneinkaufspreis beträgt 880,47 EUR.`,
     },
     {
         id: 198,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf4",
         type: "open-text",
@@ -2955,6 +3217,8 @@ Ergebnis: Der Listeneinkaufspreis beträgt 880,47 EUR.`,
     },
     {
         id: 199,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
@@ -3014,6 +3278,8 @@ function pruefeFehlendenPreis(daten, artikelID) {
     },
     {
         id: 201,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf5",
         type: "open-text",
@@ -3042,6 +3308,8 @@ WHERE Email IS NULL OR Email = '';
 ,
     {
         id: 202,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf2",
         type: "open-text",
@@ -3081,6 +3349,8 @@ WHERE Email IS NULL OR Email = '';
     },
     {
         id: 203,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
@@ -3119,6 +3389,8 @@ WHERE Email IS NULL OR Email = '';
 ,
     {
         id: 204,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf4",
         type: "open-text",
@@ -3171,6 +3443,8 @@ WHERE Email IS NULL OR Email = '';
     },
     {
         id: 205,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
@@ -3219,6 +3493,8 @@ WHERE Email IS NULL OR Email = '';
     },
     {
         id: 206,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf4",
         type: "open-text",
@@ -3267,6 +3543,8 @@ WHERE Email IS NULL OR Email = '';
 ,
     {
         id: 207,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
@@ -3311,6 +3589,8 @@ WHERE Email IS NULL OR Email = '';
     },
     {
         id: 208,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf3",
         type: "open-text",
@@ -3351,6 +3631,8 @@ WHERE Email IS NULL OR Email = '';
     },
     {
         id: 209,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         theme: "lf2",
         type: "open-text",
@@ -3402,6 +3684,8 @@ WHERE Email IS NULL OR Email = '';
 ,
     {
         id: 210,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         topic: "LF 1 - Aufbauorganisation, Leitungssysteme & Führung",
         type: "open-text",
@@ -3447,6 +3731,8 @@ WHERE Email IS NULL OR Email = '';
     },
     {
         id: 211,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         topic: "LF 1 - Marktformen, Wirtschaftslehre & Rechtsformen",
         type: "open-text",
@@ -3484,6 +3770,8 @@ WHERE Email IS NULL OR Email = '';
     },
     {
         id: 212,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         topic: "LF 2 - PC-Hardware, Systemarchitektur & Energieeffizienz",
         type: "open-text",
@@ -3523,6 +3811,8 @@ WHERE Email IS NULL OR Email = '';
     },
     {
         id: 213,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         topic: "LF 3 - Netzwerktechnik, OSI-Modell, USV & Verkabelung",
         type: "open-text",
@@ -3573,6 +3863,8 @@ WHERE Email IS NULL OR Email = '';
     },
     {
         id: 214,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         topic: "LF 4 - Software-Engineering, UML & Qualitätssicherung",
         type: "open-text",
@@ -3626,6 +3918,8 @@ WHERE Email IS NULL OR Email = '';
     },
     {
         id: 215,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         topic: "LF 4 / KI & EU AI Act",
         type: "open-text",
@@ -3669,6 +3963,8 @@ WHERE Email IS NULL OR Email = '';
 ,
     {
         id: 216,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         topic: "LF 1 - Unternehmensziele, Zielarten & Zielbeziehungen",
         type: "open-text",
@@ -3705,6 +4001,8 @@ WHERE Email IS NULL OR Email = '';
     },
     {
         id: 217,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         topic: "LF 1 / WiSo - Betriebswirtschaftliche Kennzahlen & Wirtschaftlichkeit",
         type: "open-text",
@@ -3753,6 +4051,8 @@ WHERE Email IS NULL OR Email = '';
     },
     {
         id: 218,
+        isHard: true,
+        difficulty: "hard",
         isBawueFocus: true,
         topic: "LF 1 / WiSo - Arbeitsrecht, Gehaltsabrechnung & Sozialversicherung",
         type: "open-text",
@@ -3794,6 +4094,8 @@ WHERE Email IS NULL OR Email = '';
     },
     {
         id: 219,
+        isHard: true,
+        difficulty: "hard",
         topic: "LF 1 / WiSo - Betriebswirtschaftliche Kennzahlen",
         type: "multiple-choice",
         question: "Aufgrund von starkem Wettbewerbsdruck muss ein IT-Systemhaus seine Dienstleistungspreise senken. Die Gesamtaufwendungen (Kosten) bleiben unverändert, wodurch die Verkaufserlöse (Erträge) sinken. Welche Aussage zur Wirtschaftlichkeit trifft exakt zu?",
@@ -3810,6 +4112,8 @@ WHERE Email IS NULL OR Email = '';
     },
     {
         id: 220,
+        isHard: true,
+        difficulty: "hard",
         topic: "LF 1 / WiSo - Arbeitsrecht & Sozialversicherung",
         type: "multiple-choice",
         question: "Welche der fünf gesetzlichen Säulen der Sozialversicherung in Deutschland wird finanziell zu 100 % vom Arbeitgeber getragen?",
@@ -3826,6 +4130,8 @@ WHERE Email IS NULL OR Email = '';
     },
     {
         id: 221,
+        isHard: true,
+        difficulty: "hard",
         topic: "LF 1 / WiSo - Unternehmensziele",
         type: "multiple-choice",
         question: "Welche Zielbeziehung liegt vor, wenn die Einführung einer neuen automatisierten Test-Pipeline sowohl die Software-Entwicklungsgeschwindigkeit erhöht als auch gleichzeitig die Fehlerquote im Produktivbetrieb senkt?",
@@ -3843,6 +4149,8 @@ WHERE Email IS NULL OR Email = '';
 ,
     {
         id: 222,
+        isHard: true,
+        difficulty: "hard",
         theme: "lf1",
         isBawueFocus: true,
         topic: "LF 1/2 - Projektmanagement & Netzplantechnik",
@@ -3897,6 +4205,8 @@ WHERE Email IS NULL OR Email = '';
     },
     {
         id: 223,
+        isHard: true,
+        difficulty: "hard",
         theme: "lf1",
         isBawueFocus: true,
         topic: "LF 1 - Wirtschaftlichkeit: Break-Even, AfA & Nutzwertanalyse",
@@ -3958,6 +4268,8 @@ WHERE Email IS NULL OR Email = '';
     },
     {
         id: 224,
+        isHard: true,
+        difficulty: "hard",
         theme: "lf4",
         isBawueFocus: true,
         topic: "LF 4 - Prozessmodellierung: EPK & BPMN 2.0",
@@ -4007,6 +4319,8 @@ WHERE Email IS NULL OR Email = '';
     },
     {
         id: 225,
+        isHard: true,
+        difficulty: "hard",
         theme: "lf4",
         isBawueFocus: true,
         topic: "LF 4 - Algorithmen: Struktogramme & Pseudocode",
@@ -4056,6 +4370,8 @@ WHERE Email IS NULL OR Email = '';
     },
     {
         id: 226,
+        isHard: true,
+        difficulty: "hard",
         theme: "lf3",
         isBawueFocus: true,
         topic: "LF 3/4 - Fachenglisch: Technische Logs & Troubleshooting",
@@ -4089,6 +4405,8 @@ WHERE Email IS NULL OR Email = '';
     },
     {
         id: 227,
+        isHard: true,
+        difficulty: "hard",
         theme: "lf1",
         isBawueFocus: true,
         topic: "LF 1 / WiSo - Prozesse im Unternehmen: Prozessorganisation & Wertschöpfung",
@@ -4131,6 +4449,8 @@ WHERE Email IS NULL OR Email = '';
     },
     {
         id: 228,
+        isHard: true,
+        difficulty: "hard",
         theme: "lf1",
         isBawueFocus: true,
         topic: "LF 1 / WiSo - Beschaffung: Der Ende-zu-Ende Beschaffungsprozess im IT-Unternehmen",
@@ -4172,6 +4492,8 @@ WHERE Email IS NULL OR Email = '';
     },
     {
         id: 229,
+        isHard: true,
+        difficulty: "hard",
         theme: "lf1",
         isBawueFocus: true,
         topic: "LF 1 / WiSo - Vertragsrecht: IT-Vertragstypen & Abgrenzung",
@@ -4210,6 +4532,8 @@ WHERE Email IS NULL OR Email = '';
     },
     {
         id: 230,
+        isHard: true,
+        difficulty: "hard",
         theme: "lf1",
         isBawueFocus: true,
         topic: "LF 1 / WiSo - Vertragsrecht: Zweiseitiger Handelskauf & Rügepflicht (§ 377 HGB)",
@@ -4248,6 +4572,8 @@ WHERE Email IS NULL OR Email = '';
     },
     {
         id: 231,
+        isHard: true,
+        difficulty: "hard",
         theme: "lf1",
         isBawueFocus: true,
         topic: "LF 1 / WiSo - Rechtsgrundlagen: Geschäftsfähigkeit & Willenserklärungen",
@@ -4281,6 +4607,8 @@ WHERE Email IS NULL OR Email = '';
     },
     {
         id: 232,
+        isHard: true,
+        difficulty: "hard",
         theme: "lf1",
         isBawueFocus: true,
         topic: "LF 1 / WiSo - Vertragsrecht: Gewährleistung (§§ 434 ff. BGB) vs. Garantie",
@@ -4318,6 +4646,8 @@ WHERE Email IS NULL OR Email = '';
     },
     {
         id: 233,
+        isHard: true,
+        difficulty: "hard",
         theme: "lf1",
         isBawueFocus: true,
         topic: "LF 1 / WiSo - Vertragsrecht: Leistungsstörungen - Lieferungsverzug & Fixgeschäft",
@@ -4350,6 +4680,8 @@ WHERE Email IS NULL OR Email = '';
     },
     {
         id: 234,
+        isHard: true,
+        difficulty: "hard",
         theme: "lf1",
         isBawueFocus: true,
         type: "multiple-choice",
@@ -4924,6 +5256,8 @@ WHERE Email IS NULL OR Email = '';
 },
     {
         "id": 266,
+        "isHard": true,
+        "difficulty": "hard",
         "theme": "diagrams",
         "topic": "IHK Fallstudie Helpdesk ERD & Use-Case",
         "isDiagram": true,
@@ -4937,6 +5271,8 @@ WHERE Email IS NULL OR Email = '';
 },
     {
         "id": 267,
+        "isHard": true,
+        "difficulty": "hard",
         "theme": "diagrams",
         "topic": "IHK Fallstudie Netzplan Rollout",
         "isDiagram": true,
@@ -4951,6 +5287,8 @@ WHERE Email IS NULL OR Email = '';
 },
     {
         "id": 268,
+        "isHard": true,
+        "difficulty": "hard",
         "theme": "diagrams",
         "topic": "IHK Fallstudie EPK & BPMN Prozess",
         "isDiagram": true,
@@ -4964,6 +5302,8 @@ WHERE Email IS NULL OR Email = '';
 },
     {
         "id": 269,
+        "isHard": true,
+        "difficulty": "hard",
         "theme": "diagrams",
         "topic": "IHK Fallstudie UML Klassendiagramm Asset",
         "isDiagram": true,
@@ -5068,6 +5408,8 @@ WHERE Email IS NULL OR Email = '';
 },
     {
         "id": 275,
+        "isHard": true,
+        "difficulty": "hard",
         "theme": "diagrams",
         "topic": "Struktogramm Fehleranalyse",
         "isDiagram": true,
@@ -5574,6 +5916,8 @@ WHERE Email IS NULL OR Email = '';
 },
     {
         "id": 305,
+        "isHard": true,
+        "difficulty": "hard",
         "theme": "calculations",
         "topic": "IHK Fallstudie Vollständige Handelskalkulation",
         "isCalculation": true,
@@ -5586,6 +5930,8 @@ WHERE Email IS NULL OR Email = '';
 },
     {
         "id": 306,
+        "isHard": true,
+        "difficulty": "hard",
         "theme": "calculations",
         "topic": "IHK Fallstudie RZ-Stromkosten & Amortisation",
         "isCalculation": true,
@@ -5597,6 +5943,8 @@ WHERE Email IS NULL OR Email = '';
 },
     {
         "id": 307,
+        "isHard": true,
+        "difficulty": "hard",
         "theme": "calculations",
         "topic": "IHK Fallstudie Zahlensystem-Umrechnungen",
         "isCalculation": true,
@@ -5608,6 +5956,8 @@ WHERE Email IS NULL OR Email = '';
 },
     {
         "id": 308,
+        "isHard": true,
+        "difficulty": "hard",
         "theme": "calculations",
         "topic": "IHK Fallstudie Datenübertragungszeit & Overhead",
         "isCalculation": true,
@@ -5807,6 +6157,8 @@ WHERE Email IS NULL OR Email = '';
 },
     {
         "id": 320,
+        "isHard": true,
+        "difficulty": "hard",
         "theme": "calculations",
         "topic": "IHK Fallstudie Komplette Handelskalkulation Tabelle",
         "isCalculation": true,
@@ -6004,6 +6356,8 @@ WHERE Email IS NULL OR Email = '';
 },
     {
         "id": 332,
+        "isHard": true,
+        "difficulty": "hard",
         "theme": "calculations",
         "topic": "IHK Fallstudie: ConSystem GmbH Gesamtkalkulation & Kennzahlen",
         "isCalculation": true,
@@ -6609,6 +6963,8 @@ WHERE Email IS NULL OR Email = '';
     },
     {
         "id": 364,
+        "isHard": true,
+        "difficulty": "hard",
         "theme": "diagrams",
         "topic": "Modellierungs-Aufgabe: UML Use-Case-Diagramm entwerfen",
         "isDiagram": true,
@@ -6623,6 +6979,8 @@ WHERE Email IS NULL OR Email = '';
     },
     {
         "id": 365,
+        "isHard": true,
+        "difficulty": "hard",
         "theme": "diagrams",
         "topic": "Modellierungs-Aufgabe: UML Klassendiagramm entwerfen",
         "isDiagram": true,
@@ -6637,6 +6995,8 @@ WHERE Email IS NULL OR Email = '';
     },
     {
         "id": 366,
+        "isHard": true,
+        "difficulty": "hard",
         "theme": "diagrams",
         "topic": "Modellierungs-Aufgabe: Entity-Relationship-Diagramm (ERD) nach Chen",
         "isDiagram": true,
@@ -6651,6 +7011,8 @@ WHERE Email IS NULL OR Email = '';
     },
     {
         "id": 367,
+        "isHard": true,
+        "difficulty": "hard",
         "theme": "diagrams",
         "topic": "Modellierungs-Aufgabe: Ereignisgesteuerte Prozesskette (EPK)",
         "isDiagram": true,
@@ -6665,6 +7027,8 @@ WHERE Email IS NULL OR Email = '';
     },
     {
         "id": 368,
+        "isHard": true,
+        "difficulty": "hard",
         "theme": "diagrams",
         "topic": "Modellierungs-Aufgabe: Netzplan (DIN 69900) mit Kritischem Pfad",
         "isDiagram": true,
@@ -6679,6 +7043,8 @@ WHERE Email IS NULL OR Email = '';
     },
 {
     "id": 369,
+        "isHard": true,
+        "difficulty": "hard",
     "theme": "lf1",
     "topic": "Vertragsrecht: Realsicherheiten & Eigentumsvorbehalt (Woche 1 - 6 Punkte)",
     "isBawueFocus": true,
@@ -6689,6 +7055,8 @@ WHERE Email IS NULL OR Email = '';
 },
 {
     "id": 370,
+        "isHard": true,
+        "difficulty": "hard",
     "theme": "lf1",
     "topic": "Vertragsarten: Kauf auf Probe vs. Kauf zur Probe (Woche 1 - 4 Punkte)",
     "isBawueFocus": true,
@@ -6715,6 +7083,8 @@ WHERE Email IS NULL OR Email = '';
 },
 {
     "id": 372,
+        "isHard": true,
+        "difficulty": "hard",
     "theme": "lf1",
     "topic": "Personal- & Kostenrechnung: Stundensatz interner Mitarbeiter vs. Extern (Woche 1 - 6 Punkte)",
     "isCalculation": true,
@@ -6726,6 +7096,8 @@ WHERE Email IS NULL OR Email = '';
 },
 {
     "id": 373,
+        "isHard": true,
+        "difficulty": "hard",
     "theme": "lf6",
     "topic": "Materialwirtschaft & Beschaffung: Bestellverfahren für Filament-Spulen (Woche 1 - 8 Punkte)",
     "isBawueFocus": true,
@@ -6736,6 +7108,8 @@ WHERE Email IS NULL OR Email = '';
 },
 {
     "id": 374,
+        "isHard": true,
+        "difficulty": "hard",
     "theme": "lf6",
     "topic": "Handelskalkulation: Handlungskosten Online vs. Stationär (Woche 1 - 6 Punkte)",
     "isBawueFocus": true,
@@ -6746,6 +7120,8 @@ WHERE Email IS NULL OR Email = '';
 },
 {
     "id": 375,
+        "isHard": true,
+        "difficulty": "hard",
     "theme": "lf2",
     "topic": "Hardware & Strom: USV-Überbrückungszeit für Server (Woche 1 - 5 Punkte)",
     "isCalculation": true,
@@ -6757,6 +7133,8 @@ WHERE Email IS NULL OR Email = '';
 },
 {
     "id": 376,
+        "isHard": true,
+        "difficulty": "hard",
     "theme": "lf6",
     "topic": "Finanzierung & Investition: Abzahlungsdarlehen vs. Leasing (Woche 1 - 9 Punkte)",
     "isCalculation": true,
@@ -6768,6 +7146,8 @@ WHERE Email IS NULL OR Email = '';
 },
 {
     "id": 377,
+        "isHard": true,
+        "difficulty": "hard",
     "theme": "lf2",
     "topic": "Digitalisierung & Speicherbedarf: Bildscans in der Qualitätssicherung (Woche 1 - 4 Punkte)",
     "isCalculation": true,
@@ -6779,6 +7159,8 @@ WHERE Email IS NULL OR Email = '';
 },
 {
     "id": 378,
+        "isHard": true,
+        "difficulty": "hard",
     "theme": "lf6",
     "topic": "Materialwirtschaft: Verschnittberechnung im Hundert & Lagerdisposition (Woche 1 - 6 Punkte)",
     "isCalculation": true,
@@ -6790,6 +7172,8 @@ WHERE Email IS NULL OR Email = '';
 },
 {
     "id": 379,
+        "isHard": true,
+        "difficulty": "hard",
     "theme": "lf3",
     "topic": "Netzwerktechnik: Bandbreitenberechnung VoIP & Datenabgleich (Woche 1 - 3 Punkte)",
     "isCalculation": true,
@@ -6969,6 +7353,8 @@ WHERE Email IS NULL OR Email = '';
 },
 {
     "id": 390,
+        "isHard": true,
+        "difficulty": "hard",
     "theme": "lf2",
     "topic": "Virtualisierung: Server-Virtualisierung & Hypervisor (Musterklausur 1)",
     "isBawueFocus": true,
@@ -6979,6 +7365,8 @@ WHERE Email IS NULL OR Email = '';
 },
 {
     "id": 391,
+        "isHard": true,
+        "difficulty": "hard",
     "theme": "lf3",
     "topic": "Netzwerktechnik: Beurteilung von IPv4-Adressen (Musterklausur 1)",
     "isBawueFocus": true,
@@ -6989,6 +7377,8 @@ WHERE Email IS NULL OR Email = '';
 },
 {
     "id": 392,
+        "isHard": true,
+        "difficulty": "hard",
     "theme": "lf3",
     "topic": "Netzwerktechnik: OSI-Schichtenmodell & Kopplungselemente (Musterklausur 1)",
     "isBawueFocus": true,
@@ -6999,6 +7389,8 @@ WHERE Email IS NULL OR Email = '';
 },
 {
     "id": 393,
+        "isHard": true,
+        "difficulty": "hard",
     "theme": "lf6",
     "topic": "Cloud-Computing: OpenStack & Cloud-Service-Modelle (Musterklausur 1)",
     "isBawueFocus": true,
@@ -7009,6 +7401,8 @@ WHERE Email IS NULL OR Email = '';
 },
 {
     "id": 394,
+        "isHard": true,
+        "difficulty": "hard",
     "theme": "lf2",
     "topic": "Elektrotechnik: Physikalische & elektrische Grundgrößen (Musterklausur 2)",
     "isCalculation": true,
@@ -7020,6 +7414,8 @@ WHERE Email IS NULL OR Email = '';
 },
 {
     "id": 395,
+        "isHard": true,
+        "difficulty": "hard",
     "theme": "lf2",
     "topic": "Speichertechnik: RAID-Level & Speicherkapazität (Musterklausur 2)",
     "isCalculation": true,
@@ -7031,6 +7427,8 @@ WHERE Email IS NULL OR Email = '';
 },
 {
     "id": 396,
+        "isHard": true,
+        "difficulty": "hard",
     "theme": "lf3",
     "topic": "Netzwerktechnik: DNS-Architektur & Namensauflösung (Musterklausur 2)",
     "isBawueFocus": true,
@@ -7041,6 +7439,8 @@ WHERE Email IS NULL OR Email = '';
 },
 {
     "id": 397,
+        "isHard": true,
+        "difficulty": "hard",
     "theme": "lf1",
     "topic": "Unternehmensorganisation: Matrixorganisation vs. Stabsstellen (Musterklausur 3)",
     "isBawueFocus": true,
@@ -7051,6 +7451,8 @@ WHERE Email IS NULL OR Email = '';
 },
 {
     "id": 398,
+        "isHard": true,
+        "difficulty": "hard",
     "theme": "lf4",
     "topic": "Datenschutz & Telearbeit: DSGVO TOMs im Homeoffice (Musterklausur 3)",
     "isBawueFocus": true,
@@ -7061,6 +7463,8 @@ WHERE Email IS NULL OR Email = '';
 },
 {
     "id": 399,
+        "isHard": true,
+        "difficulty": "hard",
     "theme": "lf3",
     "topic": "Netzwerktechnik & Mobilfunk: 5G-Technologie & Anwendungsfelder (Musterklausur 3)",
     "isBawueFocus": true,
@@ -7071,6 +7475,8 @@ WHERE Email IS NULL OR Email = '';
 },
 {
     "id": 400,
+        "isHard": true,
+        "difficulty": "hard",
     "theme": "lf4",
     "topic": "Kryptographie & IT-Sicherheit: Symmetrische vs. Asymmetrische Verschlüsselung (Musterklausur 3)",
     "isBawueFocus": true,
@@ -7081,6 +7487,8 @@ WHERE Email IS NULL OR Email = '';
 },
 {
     "id": 401,
+        "isHard": true,
+        "difficulty": "hard",
     "theme": "lf2",
     "topic": "Speicherhardware: ECC-RAM & RAID 5 Performance (Musterklausur 4)",
     "isBawueFocus": true,
@@ -7091,6 +7499,8 @@ WHERE Email IS NULL OR Email = '';
 },
 {
     "id": 402,
+        "isHard": true,
+        "difficulty": "hard",
     "theme": "lf5",
     "topic": "Datenbanken: SQL-Troubleticket-Abfragen (Musterklausur 4)",
     "isBawueFocus": true,
@@ -7101,6 +7511,8 @@ WHERE Email IS NULL OR Email = '';
 },
 {
     "id": 403,
+        "isHard": true,
+        "difficulty": "hard",
     "theme": "lf3",
     "topic": "Netzwerktechnik: Webserver-Erreichbarkeit & DynDNS / DMZ (Musterklausur 5)",
     "isBawueFocus": true,
@@ -7111,6 +7523,8 @@ WHERE Email IS NULL OR Email = '';
 },
 {
     "id": 404,
+        "isHard": true,
+        "difficulty": "hard",
     "theme": "lf4",
     "topic": "Datensicherheit: Passwortspeicherung mit Hashing & Salt (Musterklausur 5)",
     "isBawueFocus": true,
@@ -7121,6 +7535,8 @@ WHERE Email IS NULL OR Email = '';
 },
 {
     "id": 405,
+        "isHard": true,
+        "difficulty": "hard",
     "theme": "lf4",
     "topic": "Datenschutz: Betroffenenrechte & Datenschutzgrundsätze nach DSGVO (Musterklausur 5)",
     "isBawueFocus": true,
@@ -7131,6 +7547,8 @@ WHERE Email IS NULL OR Email = '';
 },
 {
     "id": 406,
+        "isHard": true,
+        "difficulty": "hard",
     "theme": "lf6",
     "topic": "Handelskalkulation: Vorwärtskalkulation vom Listeneinkaufspreis zum Brutto-Verkaufspreis",
     "isCalculation": true,
@@ -7142,6 +7560,8 @@ WHERE Email IS NULL OR Email = '';
 },
 {
     "id": 407,
+        "isHard": true,
+        "difficulty": "hard",
     "theme": "lf6",
     "topic": "Handelskalkulation: Rückwärtskalkulation (Maximaler Einkaufspreis)",
     "isCalculation": true,
@@ -7153,6 +7573,8 @@ WHERE Email IS NULL OR Email = '';
 },
 {
     "id": 408,
+        "isHard": true,
+        "difficulty": "hard",
     "theme": "lf6",
     "topic": "Handelskalkulation: Kalkulationszuschlag, Kalkulationsfaktor & Handelsspanne",
     "isCalculation": true,
@@ -7161,5 +7583,129 @@ WHERE Email IS NULL OR Email = '';
     "question": "IHK-Prüfungsaufgabe (LF 6 - Kennzahlen der Handelskalkulation):\nFür einen Server liegt der Bezugspreis (Einstandspreis) bei 800,00 EUR. Der kalkulierte Netto-Listenverkaufspreis beträgt 1.280,00 EUR.\n\nBerechnen Sie folgende drei Kennzahlen:\n1. Kalkulationszuschlag (in %)\n2. Kalkulationsfaktor\n3. Handelsspanne (in %)",
     "musterloesung": "Musterlösung:\n\n1. Kalkulationszuschlag (in %):\n- Formel: Kalkulationszuschlag = ((Netto-LVP - Bezugspreis) / Bezugspreis) * 100\n- Rechnung: ((1.280 EUR - 800 EUR) / 800 EUR) * 100 = (480 / 800) * 100 = 60,0 %\n\n2. Kalkulationsfaktor:\n- Formel: Kalkulationsfaktor = Netto-LVP / Bezugspreis (oder 1 + Kalkulationszuschlag/100)\n- Rechnung: 1.280 EUR / 800 EUR = 1,60\n\n3. Handelsspanne (in %):\n- Formel: Handelsspanne = ((Netto-LVP - Bezugspreis) / Netto-LVP) * 100\n- Rechnung: ((1.280 EUR - 800 EUR) / 1.280 EUR) * 100 = (480 / 1.280) * 100 = 37,5 %.",
     "explanation": "Kalkulationszuschlag bezieht sich auf den Bezugspreis (480/800 = 60%). Handelsspanne bezieht sich auf den Netto-LVP (480/1280 = 37,5%). Kalkulationsfaktor = 1,60."
-}
+},
+
+    // ============================================================================
+    // 🔥 STATISCHE MEISTERKLASSE-PRÜFUNGSAUFGABEN (IHK HARDCORE / PROFI-NIVEAU)
+    // ============================================================================
+    {
+        id: 409,
+        isBawueFocus: true,
+        isHard: true,
+        difficulty: "hard",
+        isCalculation: true,
+        theme: "lf3",
+        topic: "🔥 Meisterklasse: 5-Stufige VLSM Multi-Subnetzplanung (LF 3)",
+        type: "open-text",
+        question: `🔥 Meisterklasse Prüfungsaufgabe VLSM (LF 3):\nEin Unternehmen erhält vom ISP den Adressblock 192.168.100.0/23 zugewiesen. Es müssen fünf Teilnetze für unterschiedliche Unternehmensbereiche mit Variable Length Subnet Masking (VLSM) ohne Adressverschwendung gebildet werden:\n- Subnetz 1 (Entwicklung): 110 Hosts benötigt\n- Subnetz 2 (Vertrieb & Marketing): 58 Hosts benötigt\n- Subnetz 3 (Server / DMZ): 28 Hosts benötigt\n- Subnetz 4 (Geschäftsführung & HR): 12 Hosts benötigt\n- Subnetz 5 (Point-to-Point WAN-Verbindung zum Zweigwerk): 2 Hosts benötigt\n\nAufgaben:\n1. Sortieren Sie die Teilnetze nach der erforderlichen Hostanzahl absteigend.\n2. Ermitteln Sie für jedes der 5 Teilnetze:\n   - Das CIDR-Präfix und die Subnetzmaske in Dotted-Decimal-Notation\n   - Die Netz-ID\n   - Die erste nutzbare Host-IP-Adresse\n   - Die letzte nutzbare Host-IP-Adresse\n   - Die Broadcast-Adresse\n3. Wie viele ungenutzte IP-Adressen verbleiben im gesamten /23-Block für spätere Erweiterungen?`,
+        musterloesung: `Musterlösung 5-stufige VLSM-Planung:\n\n1. Sortierung & Dimensionierung (absteigend):\n\n- Subnetz 1 (Entwicklung, 110 Hosts):\n  * Benötigte Adressen: 110 + 2 = 112 -> Nächste Zweierpotenz: 128 (2^7) -> 7 Host-Bits -> /25 (255.255.255.128)\n  * Netz-ID: 192.168.100.0/25\n  * 1. Host-IP: 192.168.100.1\n  * Letzte Host-IP: 192.168.100.126\n  * Broadcast: 192.168.100.127 (Kapazität: 126 nutzbare Hosts)\n\n- Subnetz 2 (Vertrieb, 58 Hosts):\n  * Benötigte Adressen: 58 + 2 = 60 -> Nächste Zweierpotenz: 64 (2^6) -> 6 Host-Bits -> /26 (255.255.255.192)\n  * Netz-ID: 192.168.100.128/26\n  * 1. Host-IP: 192.168.100.129\n  * Letzte Host-IP: 192.168.100.190\n  * Broadcast: 192.168.100.191 (Kapazität: 62 nutzbare Hosts)\n\n- Subnetz 3 (Server / DMZ, 28 Hosts):\n  * Benötigte Adressen: 28 + 2 = 30 -> Nächste Zweierpotenz: 32 (2^5) -> 5 Host-Bits -> /27 (255.255.255.224)\n  * Netz-ID: 192.168.100.192/27\n  * 1. Host-IP: 192.168.100.193\n  * Letzte Host-IP: 192.168.100.222\n  * Broadcast: 192.168.100.223 (Kapazität: 30 nutzbare Hosts)\n\n- Subnetz 4 (Geschäftsführung, 12 Hosts):\n  * Benötigte Adressen: 12 + 2 = 14 -> Nächste Zweierpotenz: 16 (2^4) -> 4 Host-Bits -> /28 (255.255.255.240)\n  * Netz-ID: 192.168.100.224/28\n  * 1. Host-IP: 192.168.100.225\n  * Letzte Host-IP: 192.168.100.238\n  * Broadcast: 192.168.100.239 (Kapazität: 14 nutzbare Hosts)\n\n- Subnetz 5 (WAN Point-to-Point, 2 Hosts):\n  * Benötigte Adressen: 2 + 2 = 4 -> 2^2 -> 2 Host-Bits -> /30 (255.255.255.252)\n  * Netz-ID: 192.168.100.240/30\n  * 1. Host-IP: 192.168.100.241\n  * Letzte Host-IP: 192.168.100.242\n  * Broadcast: 192.168.100.243 (Kapazität: 2 nutzbare Hosts)\n\n3. Verbleibender freier Adressraum:\n- Im ersten /24-Block (192.168.100.x): 192.168.100.244 bis 192.168.100.255 (12 IP-Adressen frei).\n- Der gesamte zweite /24-Block (192.168.101.0/24 mit 256 IP-Adressen) ist noch vollständig ungenutzt.\n- Freie Adressen gesamt: 12 + 256 = 268 IP-Adressen (von 512).`,
+        explanation: "VLSM-Prinzip: Immer mit dem größten Subnetz beginnen, um Lücken und Adressfragmentierung zu vermeiden."
+    },
+    {
+        id: 410,
+        isBawueFocus: true,
+        isHard: true,
+        difficulty: "hard",
+        isCalculation: true,
+        theme: "lf6",
+        topic: "🔥 Meisterklasse: 12-Stufige Handelskalkulation Vorwärts & Rückwärts (LF 1 / LF 6)",
+        type: "open-text",
+        question: `🔥 Meisterklasse Handelskalkulation (LF 1 / LF 6):\nEin IT-Dienstleister kalkuliert den Verkaufspreis für einen hochverfügbaren Virtualisierungs-Server.\n\nKalkulationsvorgaben:\n- Listeneinkaufspreis (LEP): 4.000,00 EUR\n- Lieferantenrabatt: 20 %\n- Lieferantenskonto: 3 %\n- Bezugskosten (Spedition, Spezialversicherung): 120,00 EUR\n- Handlungskostenzuschlagssatz (HKZ): 30 %\n- Gewinnzuschlagssatz: 25 %\n- Kundenskonto: 2 % (vom Zielverkaufspreis)\n- Kundenrabatt: 15 % (vom Netto-Listenverkaufspreis)\n- Umsatzsteuer: 19 %\n\nFühren Sie das vollständige Kalkulationsschema durch und berechnen Sie:\n1. Den Bareinkaufspreis (BEP) und Bezugspreis (Einstandspreis).\n2. Die Selbstkosten und den Barverkaufspreis (BVP).\n3. Den Zielverkaufspreis (ZVP) und den Netto-Listenverkaufspreis (LVP netto).\n4. Den Brutto-Listenverkaufspreis inkl. 19% USt.`,
+        musterloesung: `Musterlösung Vollständige Vorwärtskalkulation:\n\n1.  Listeneinkaufspreis (LEP): 4.000,00 EUR\n2.  - Lieferantenrabatt (20 %): -800,00 EUR\n3.  = Zieleinkaufspreis (ZEP): 3.200,00 EUR\n4.  - Lieferantenskonto (3 %): -96,00 EUR\n5.  = Bareinkaufspreis (BEP): 3.104,00 EUR\n6.  + Bezugskosten: +120,00 EUR\n7.  = Bezugspreis / Einstandspreis: 3.224,00 EUR\n8.  + Handlungskosten (30 % von 3.224,00 EUR): +967,20 EUR\n9.  = Selbstkosten (SK): 4.191,20 EUR\n10. + Gewinn (25 % von 4.191,20 EUR): +1.047,80 EUR\n11. = Barverkaufspreis (BVP): 5.239,00 EUR\n12. + Kundenskonto (2 % im Hundert: 5.239,00 / 0,98 * 0,02): +106,92 EUR\n13. = Zielverkaufspreis (ZVP): 5.345,92 EUR\n14. + Kundenrabatt (15 % im Hundert: 5.345,92 / 0,85 * 0,15): +943,40 EUR\n15. = Netto-Listenverkaufspreis: 6.289,32 EUR\n16. + 19 % Umsatzsteuer (19 % von 6.289,32 EUR): +1.194,97 EUR\n17. = Brutto-Listenverkaufspreis: 7.484,29 EUR.`,
+        explanation: "Wichtig: Skonto und Rabatt auf der Verkaufsseite müssen 'im Hundert' berechnet werden: ZVP = BVP / (1 - Skonto/100), LVP = ZVP / (1 - Rabatt/100)."
+    },
+    {
+        id: 411,
+        isBawueFocus: true,
+        isHard: true,
+        difficulty: "hard",
+        isCalculation: true,
+        theme: "lf2",
+        topic: "🔥 Meisterklasse: USV-Dimensionierung, Batteriekapa & PUE (LF 2 / LF 7)",
+        type: "open-text",
+        question: `🔥 Meisterklasse Datacenter & Stromversorgung (LF 2 / LF 7):\nEin Server-Rack mit redundanter A/B-Stromversorgung beherbergt:\n- 8x Server mit je 700 W Wirkleistung (Leistungsfaktor cos φ = 0,85)\n- 4x Top-of-Rack Switche mit je 120 W (cos φ = 0,95)\n- 1x All-Flash SAN Storage mit 850 W (cos φ = 0,90)\n\nAnforderungen:\n- USV-Sicherheitszuschlag: 25 %\n- Gewünschte Autonomiezeit bei vollständigem Netzausfall: 45 Minuten\n- USV DC-Batterie-Zwischenkreisspannung: 48 V DC\n- Wechselrichter-Wirkungsgrad: 90 %\n- Maximale Batterieentladetiefe (DOD): 80 %\n- Die gesamte Leistungsaufnahme des Serverraums inkl. Klimatisierung und USV-Verlusten beträgt 14,5 kW.\n\nAufgaben:\n1. Berechnen Sie die gesamte Wirkleistung P (kW) und Scheinleistung S (kVA) der IT-Hardware.\n2. Berechnen Sie die empfohlene Mindest-USV-Leistung in kVA (inkl. 25% Reserve).\n3. Berechnen Sie die erforderliche Batteriekapazität in Amperestunden (Ah) für 45 Minuten Überbrückungszeit.\n4. Berechnen Sie den PUE-Wert (Power Usage Effectiveness) des Serverraums.`,
+        musterloesung: `Musterlösung Datacenter Strom & USV:\n\n1. Wirk- und Scheinleistung:\n- Wirkleistung P = (8 * 700 W) + (4 * 120 W) + 850 W = 5.600 W + 480 W + 850 W = 6.930 Watt = 6,93 kW\n- Scheinleistung S = (5.600 / 0,85) + (480 / 0,95) + (850 / 0,90) = 6.588,24 VA + 505,26 VA + 944,44 VA = 8.037,94 VA = 8,04 kVA\n\n2. USV-Scheinleistung:\n- S_USV = 8,04 kVA * 1,25 = 10,05 kVA (Empfohlene USV: 11 kVA oder 12 kVA Modell).\n\n3. Batteriekapazität für 45 min (0,75 h):\n- Benötigte Energie = 6.930 W * 0,75 h = 5.197,5 Wh\n- Kapazität C = 5.197,5 Wh / (48 V * 0,90 * 0,80) = 5.197,5 Wh / 34,56 V = 150,39 Ah (z. B. 160 Ah Batteriepack).\n\n4. PUE-Wert:\n- PUE = Gesamtleistung / IT-Leistung = 14,5 kW / 6,93 kW = 2,09 (Optimierungsbedarf bei der Kühlung).`,
+        explanation: "P = Summe aller Wirkleistungen. S = P / cos phi. Batterie C = Energie / (U * eta * DOD). PUE = P_Gesamt / P_IT."
+    },
+    {
+        id: 412,
+        isBawueFocus: true,
+        isHard: true,
+        difficulty: "hard",
+        isCalculation: true,
+        theme: "lf2",
+        topic: "🔥 Meisterklasse: RAID 6 vs RAID 10, IOPS Write Penalty & Rebuild (LF 2 / LF 7)",
+        type: "open-text",
+        question: `🔥 Meisterklasse Storage & RAID-Vergleich (LF 2 / LF 7):\nEin Datenbankserver benötigt einen neuen Storage-Pool mit 12x 18 TB Enterprise HDDs (7.200 RPM, 75 IOPS pro Platte). Es stehen RAID 6 und RAID 10 zur Auswahl.\n\nAufgaben:\n1. Berechnen Sie für beide RAID-Level die nutzbare Netto-Kapazität in Terabyte (TB, dezimal) und in Tebibyte (TiB, binär).\n2. Erläutern Sie das 'Write Penalty' Phänomen und geben Sie die Write-Penalty-Werte für RAID 6 und RAID 10 an.\n3. Berechnen Sie die maximalen Lese- und Schreib-IOPS des Gesamtsystems für beide Konfigurationen.\n4. Berechnen Sie die Rebuild-Dauer einer 18-TB-Platte bei RAID 6, wenn der Controller mit 90 MB/s Durchsatz rebuildet.`,
+        musterloesung: `Musterlösung RAID-Storage-Architektur:\n\n1. Speicherkapazitäten (12 Festplatten à 18 TB):\n- RAID 6: (N - 2) * 18 TB = 10 * 18 TB = 180 TB (Dezimal).\n  In TiB: 180 * (1.000^4 / 1.024^4) = 163,71 TiB.\n- RAID 10: (N / 2) * 18 TB = 6 * 18 TB = 108 TB (Dezimal).\n  In TiB: 108 * (1.000^4 / 1.024^4) = 98,22 TiB.\n\n2. Write Penalty:\n- RAID 6: Write Penalty = 6 (Jeder logische Schreibvorgang erfordert 3 Lese- und 3 Schreib-I/Os für Daten + P + Q Parität).\n- RAID 10: Write Penalty = 2 (Jeder Schreibvorgang wird auf 2 gespiegelte Platten geschrieben = 2 I/Os).\n\n3. IOPS-Leistung (12 Disks * 75 IOPS = 900 Raw IOPS):\n- Read-IOPS: Bei beiden Systemen 900 Read-IOPS.\n- Write-IOPS RAID 6: 900 / 6 = 150 Write-IOPS.\n- Write-IOPS RAID 10: 900 / 2 = 450 Write-IOPS (3x schneller bei Schreibzugriffen!).\n\n4. Rebuild-Dauer RAID 6:\n- 18 TB = 18.000.000 MB\n- Zeit = 18.000.000 MB / 90 MB/s = 200.000 Sekunden\n- In Stunden: 200.000 s / 3.600 s/h = 55,56 Stunden (ca. 2,3 Tage).`,
+        explanation: "RAID 6 bietet mehr Kapazität (N-2), aber hohe Write Penalty (6). RAID 10 bietet maximale I/O-Performance (Write Penalty 2) und schnelle Rebuilds, verliert aber 50% Kapazität."
+    },
+    {
+        id: 413,
+        isBawueFocus: true,
+        isHard: true,
+        difficulty: "hard",
+        isCalculation: true,
+        isDiagram: true,
+        theme: "lf6",
+        topic: "🔥 Meisterklasse: Netzplan-Berechnung mit 9 Vorgängen (LF 1 / LF 6)",
+        type: "open-text",
+        question: `🔥 Meisterklasse Netzplantechnik (LF 1 / LF 6):\nEin ERP-Einführungsprojekt besteht aus 9 Vorgängen (A bis I):\n- Vorgang A: Kick-Off (Dauer: 2 Tage, Vorgänger: keine)\n- Vorgang B: Prozessanalyse (Dauer: 5 Tage, Vorgänger: A)\n- Vorgang C: Hardware-Beschaffung (Dauer: 8 Tage, Vorgänger: A)\n- Vorgang D: Software-Customizing (Dauer: 7 Tage, Vorgänger: B)\n- Vorgang E: Server-Installation (Dauer: 3 Tage, Vorgänger: C)\n- Vorgang F: Schnittstellenprogrammierung (Dauer: 6 Tage, Vorgänger: B)\n- Vorgang G: Integrationstest (Dauer: 4 Tage, Vorgänger: D, E, F)\n- Vorgang H: Anwenderschulung (Dauer: 3 Tage, Vorgänger: G)\n- Vorgang I: Go-Live (Dauer: 2 Tage, Vorgänger: H)\n\nAufgaben:\n1. Ermitteln Sie die Vorwärts- und Rückwärtsrechnung (FAZ, FEZ, SAZ, SEZ).\n2. Berechnen Sie Gesamtpuffer (GP) und Freien Puffer (FP) für alle 9 Vorgänge.\n3. Bestimmen Sie den Kritischen Pfad und die Gesamtdauer des Projekts.\n4. Vorgang C (Hardware) verzögert sich um 4 Tage. Welche Auswirkung hat das auf das Gesamtprojekt?`,
+        musterloesung: `Musterlösung Netzplantechnik:\n\n1. & 2. Netzplan-Tabelle:\n- Vorgang A (D=2): FAZ=0, FEZ=2 | SAZ=0, SEZ=2 | GP=0, FP=0 (Kritisch)\n- Vorgang B (D=5): FAZ=2, FEZ=7 | SAZ=2, SEZ=7 | GP=0, FP=0 (Kritisch)\n- Vorgang C (D=8): FAZ=2, FEZ=10 | SAZ=3, SEZ=11 | GP=1, FP=1\n- Vorgang D (D=7): FAZ=7, FEZ=14 | SAZ=7, SEZ=14 | GP=0, FP=0 (Kritisch)\n- Vorgang E (D=3): FAZ=10, FEZ=13 | SAZ=11, SEZ=14 | GP=1, FP=1\n- Vorgang F (D=6): FAZ=7, FEZ=13 | SAZ=8, SEZ=14 | GP=1, FP=1\n- Vorgang G (D=4): FAZ=14, FEZ=18 | SAZ=14, SEZ=18 | GP=0, FP=0 (Kritisch)\n- Vorgang H (D=3): FAZ=18, FEZ=21 | SAZ=18, SEZ=21 | GP=0, FP=0 (Kritisch)\n- Vorgang I (D=2): FAZ=21, FEZ=23 | SAZ=21, SEZ=23 | GP=0, FP=0 (Kritisch)\n\n3. Kritischer Pfad & Gesamtdauer:\n- Kritischer Pfad: A -> B -> D -> G -> H -> I (Dauer: 2 + 5 + 7 + 4 + 3 + 2 = 23 Werktage).\n\n4. Auswirkung der Verzögerung bei Vorgang C (+4 Tage):\n- Vorgang C hat einen Gesamtpuffer von 1 Tag.\n- Eine Verzögerung um 4 Tage überschreitet den Puffer um 3 Tage (4 - 1 = 3 Tage).\n- Der Pfad A -> C -> E -> G wird neuer Engpass und verschiebt das Projektende um 3 Tage auf 26 Werktage!`,
+        explanation: "Gesamtpuffer GP = SAZ - FAZ = SEZ - FEZ. Freier Puffer FP = min(FAZ_Nachfolger) - FEZ. Wenn Verzögerung > GP, verschiebt sich der Projektendtermin."
+    },
+    {
+        id: 414,
+        isBawueFocus: true,
+        isHard: true,
+        difficulty: "hard",
+        theme: "lf5",
+        topic: "🔥 Meisterklasse: Komplexe SQL-Multi-Table-Abfrage mit HAVING (LF 5)",
+        type: "open-text",
+        question: `🔥 Meisterklasse SQL-Datenbanken (LF 5):\nGegeben ist ein Datenbankschema für einen Cloud-Anbieter:\n- tbl_kunde (kunden_id [PK], nachname, firma, premium_status)\n- tbl_vertrag (vertrags_id [PK], kunden_id [FK], beginn_datum, ende_datum, status)\n- tbl_service_nutzung (nutzungs_id [PK], vertrags_id [FK], service_id [FK], verbrauchte_stunden, abrechnungs_monat)\n- tbl_service (service_id [PK], service_name, stundensatz_eur)\n\nAufgabenstellung:\nErstellen Sie ein ANSI-SQL-Query, das für das Jahr 2025 alle Kunden ermittelt, die:\n1. Mindestens 2 aktive Verträge (status = 'aktiv') besitzen.\n2. In Summe über alle genutzten Services im Jahr 2025 Kosten von über 10.000,00 EUR verursacht haben.\n3. Ausgegeben werden sollen: kunden_id, firma, Anzahl aktiver Verträge und die abrechenbare Gesamtsumme (gerundet auf 2 Dezimalstellen).\n4. Sortieren Sie das Ergebnis absteigend nach der Gesamtsumme.`,
+        code: `SELECT 
+    k.kunden_id,
+    k.firma,
+    COUNT(DISTINCT v.vertrags_id) AS anzahl_vertraege,
+    ROUND(SUM(sn.verbrauchte_stunden * s.stundensatz_eur), 2) AS gesamtbetrag_eur
+FROM tbl_kunde k
+INNER JOIN tbl_vertrag v ON k.kunden_id = v.kunden_id
+INNER JOIN tbl_service_nutzung sn ON v.vertrags_id = sn.vertrags_id
+INNER JOIN tbl_service s ON sn.service_id = s.service_id
+WHERE v.status = 'aktiv'
+  AND sn.abrechnungs_monat BETWEEN '2025-01' AND '2025-12'
+GROUP BY k.kunden_id, k.firma
+HAVING COUNT(DISTINCT v.vertrags_id) >= 2
+   AND SUM(sn.verbrauchte_stunden * s.stundensatz_eur) > 10000.00
+ORDER BY gesamtbetrag_eur DESC;`,
+        musterloesung: `Musterlösung SQL-Statement:\n\nSELECT 
+    k.kunden_id,
+    k.firma,
+    COUNT(DISTINCT v.vertrags_id) AS anzahl_vertraege,
+    ROUND(SUM(sn.verbrauchte_stunden * s.stundensatz_eur), 2) AS gesamtbetrag_eur
+FROM tbl_kunde k
+INNER JOIN tbl_vertrag v ON k.kunden_id = v.kunden_id
+INNER JOIN tbl_service_nutzung sn ON v.vertrags_id = sn.vertrags_id
+INNER JOIN tbl_service s ON sn.service_id = s.service_id
+WHERE v.status = 'aktiv'
+  AND sn.abrechnungs_monat BETWEEN '2025-01' AND '2025-12'
+GROUP BY k.kunden_id, k.firma
+HAVING COUNT(DISTINCT v.vertrags_id) >= 2
+   AND SUM(sn.verbrauchte_stunden * s.stundensatz_eur) > 10000.00
+ORDER BY gesamtbetrag_eur DESC;\n\nErklärung:\n- INNER JOIN über 4 Tabellen.\n- WHERE filtert vorab auf aktive Verträge und das Abrechnungsjahr 2025.\n- GROUP BY auf Primärschlüssel und Spalten des SELECTs.\n- HAVING prüft die Aggregatbedingungen (> 10.000 EUR und >= 2 Verträge).\n- ORDER BY sortiert absteigend.`,
+        explanation: "Aggregierte Bedingungen (COUNT, SUM) müssen zwingend in die HAVING-Klausel!"
+    },
+    {
+        id: 415,
+        isBawueFocus: true,
+        isHard: true,
+        difficulty: "hard",
+        theme: "lf1",
+        topic: "🔥 Meisterklasse: Earned Value Analyse & Projekt-Forecasting (LF 1 / LF 6)",
+        type: "open-text",
+        question: `🔥 Meisterklasse Projektcontrolling & EVM (LF 1 / LF 6):\nEin IT-Infrastrukturprojekt mit einem Budget at Completion (BAC) von 250.000 EUR und einer geplanten Laufzeit von 10 Monaten wird nach 6 Monaten auditiert. Folgende Kennzahlen liegen vor:\n- Planned Value (PV): 150.000 EUR\n- Actual Cost (AC): 175.000 EUR\n- Earned Value (EV): 120.000 EUR\n\nAufgaben:\n1. Berechnen Sie die Kostenabweichung (CV) und die Terminabweichung (SV).\n2. Berechnen Sie den Cost Performance Index (CPI) und den Schedule Performance Index (SPI).\n3. Berechnen Sie die prognostizierten Gesamtkosten (EAC = Estimate at Completion) und die voraussichtliche Restdauer in Monaten.\n4. Formulieren Sie eine präzise Handlungsempfehlung für das Management.`,
+        musterloesung: `Musterlösung Earned Value Analyse:\n\n1. Abweichungen:\n- Cost Variance: CV = EV - AC = 120.000 EUR - 175.000 EUR = -55.000 EUR (Kostenüberschreitung um 55.000 EUR).\n- Schedule Variance: SV = EV - PV = 120.000 EUR - 150.000 EUR = -30.000 EUR (Terminverzug im Gegenwert von 30.000 EUR).\n\n2. Effizienz-Kennzahlen:\n- CPI = EV / AC = 120.000 / 175.000 = 0,69 (Für jeden investierten Euro werden nur 69 Cent Wert generiert).\n- SPI = EV / PV = 120.000 / 150.000 = 0,80 (Projektfortschritt beträgt 80 % der geplanten Geschwindigkeit).\n\n3. Prognosen:\n- Voraussichtliche Gesamtkosten: EAC = BAC / CPI = 250.000 EUR / 0,6857 = 364.583 EUR (Budgetüberschreitung von ca. 114.583 EUR).\n- Voraussichtliche Gesamtdauer: Geplante Dauer / SPI = 10 Monate / 0,80 = 12,5 Monate (Verzögerung um 2,5 Monate).\n\n4. Handlungsempfehlung:\n- Sofortiger Projekt-Krisenworkshop: Scope Reduction (Nicht-essenzielle Features streichen), Change-Requests stoppen und Ressourcen-Engpässe bereinigen.`,
+        explanation: "CPI = EV / AC. SPI = EV / PV. EAC = BAC / CPI. CPI < 1 bedeutet Kostenüberschreitung, SPI < 1 bedeutet Terminverzug."
+    }
+
 ];

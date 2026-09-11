@@ -63,12 +63,14 @@ const resetStatsBtn = document.getElementById("reset-stats-btn");
 
 // Task Options Elements
 let typeSelect;
+let difficultySelect;
 let regenerateBtn;
 
 // Initialize application
 document.addEventListener("DOMContentLoaded", () => {
     try {
         typeSelect = document.getElementById("question-type-select");
+        difficultySelect = document.getElementById("question-difficulty-select");
         regenerateBtn = document.getElementById("regenerate-btn");
         prevBtn = document.getElementById("prev-btn");
         starBtn = document.getElementById("star-btn");
@@ -76,6 +78,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const savedMode = localStorage.getItem("ap1_type_mode") || "mix";
         if (typeSelect) typeSelect.value = savedMode;
+
+        const savedDiff = localStorage.getItem("ap1_difficulty_mode") || "all";
+        if (difficultySelect) difficultySelect.value = savedDiff;
 
         initQuestions(savedMode);
         loadStats();
@@ -129,10 +134,20 @@ document.addEventListener("DOMContentLoaded", () => {
                 filterQuestions(currentTheme);
             });
         }
+
+        if (difficultySelect) {
+            difficultySelect.addEventListener("change", () => {
+                const selectedDiff = difficultySelect.value;
+                localStorage.setItem("ap1_difficulty_mode", selectedDiff);
+                const activeFilterBtn = themeFiltersContainer ? themeFiltersContainer.querySelector(".filter-btn.active") : null;
+                const currentTheme = activeFilterBtn ? activeFilterBtn.getAttribute("data-theme") : "all";
+                filterQuestions(currentTheme);
+            });
+        }
         
         if (regenerateBtn) {
             regenerateBtn.addEventListener("click", () => {
-                const selectedMode = typeSelect.value;
+                const selectedMode = typeSelect ? typeSelect.value : "mix";
                 localStorage.setItem("ap1_type_mode", selectedMode);
                 initQuestions(selectedMode);
                 
@@ -342,10 +357,41 @@ function filterQuestions(theme) {
                     q.question.toLowerCase().includes("tebibyte")
                 ))
             );
+        } else if (theme === "hard-mode" || theme === "hard") {
+            filteredQuestions = questions.filter(q => 
+                q.isHard === true || 
+                q.difficulty === "hard" || 
+                q.isMasterclass === true ||
+                (q.topic && q.topic.includes("Meisterklasse")) ||
+                (q.question && q.question.includes("Meisterklasse"))
+            );
         } else {
             filteredQuestions = questions.filter(q => q.theme === theme);
         }
         
+        // Apply Schwierigkeitsgrad filter if selected and not already in dedicated hard-mode
+        if (difficultySelect && difficultySelect.value === "hard" && theme !== "hard-mode") {
+            const hardSubset = filteredQuestions.filter(q => 
+                q.isHard === true || 
+                q.difficulty === "hard" || 
+                q.isMasterclass === true ||
+                (q.topic && q.topic.includes("Meisterklasse")) ||
+                (q.question && q.question.includes("Meisterklasse"))
+            );
+            if (hardSubset.length > 0) {
+                filteredQuestions = hardSubset;
+            }
+        } else if (difficultySelect && difficultySelect.value === "standard" && theme !== "hard-mode") {
+            const stdSubset = filteredQuestions.filter(q => 
+                !q.isHard && q.difficulty !== "hard" && !q.isMasterclass &&
+                !(q.topic && q.topic.includes("Meisterklasse")) &&
+                !(q.question && q.question.includes("Meisterklasse"))
+            );
+            if (stdSubset.length > 0) {
+                filteredQuestions = stdSubset;
+            }
+        }
+
         // Safety: If open-text mode is active, ensure 100% of filtered questions are open-text
         if (typeSelect && typeSelect.value === "open") {
             filteredQuestions = filteredQuestions.filter(q => q.type === "open-text");
@@ -1032,7 +1078,9 @@ function getThemeLabel(key) {
         diagrams: "📐 Diagramme & Modellierung",
         "diagram-training": "📐 Diagramme & Modellierung",
         calculations: "🧮 Rechnen & Handelskalkulation",
-        rechnen: "🧮 Rechnen & Handelskalkulation"
+        rechnen: "🧮 Rechnen & Handelskalkulation",
+        "hard-mode": "🔥 IHK Meisterklasse (Schwer)",
+        hard: "🔥 IHK Meisterklasse (Schwer)"
     };
     return labels[key] || key;
 }
@@ -1084,9 +1132,13 @@ function startExamMode(simulation) {
     
     // Select questions based on selected typeMode (e.g. for Baden-Württemberg open-text exams)
     const chosenMode = typeSelect ? typeSelect.value : "mix";
+    const isHardExam = difficultySelect && difficultySelect.value === "hard";
     
     // Core pool: Real exam questions (id >= 157)
     let coreExamPool = staticQuestions.filter(q => q.id >= 157 && (chosenMode !== "open" || q.type === "open-text"));
+    if (isHardExam) {
+        coreExamPool = coreExamPool.filter(q => q.isHard || q.difficulty === "hard" || (q.topic && q.topic.includes("Meisterklasse")) || (q.question && q.question.includes("Meisterklasse")));
+    }
     
     // Other pools: static questions and dynamic generators
     let otherStaticPool = [];
@@ -1101,6 +1153,11 @@ function startExamMode(simulation) {
     } else {
         otherStaticPool = staticQuestions.filter(q => q.id < 157);
         dynamicPool = generateDynamicQuestions("mix");
+    }
+
+    if (isHardExam) {
+        otherStaticPool = otherStaticPool.filter(q => q.isHard || q.difficulty === "hard" || (q.topic && q.topic.includes("Meisterklasse")) || (q.question && q.question.includes("Meisterklasse")));
+        dynamicPool = dynamicPool.filter(q => q.isHard || q.difficulty === "hard" || (q.topic && q.topic.includes("Meisterklasse")) || (q.question && q.question.includes("Meisterklasse")));
     }
     
     // Mix and shuffle

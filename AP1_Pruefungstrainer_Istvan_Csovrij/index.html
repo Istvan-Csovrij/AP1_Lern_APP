@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AP1 Prüfungstrainer - Fachinformatiker</title>
-    <link rel="stylesheet" href="style.css?v=73">
+    <link rel="stylesheet" href="style.css?v=74">
     <!-- FontAwesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -40,6 +40,9 @@
                     </button>
                     <button class="filter-btn highlight-bawue-btn" data-theme="bawue-focus" id="bawue-focus-btn" style="border: 2px solid #8b5cf6; background: linear-gradient(135deg, #f5f3ff, #ede9fe); color: #6d28d9; font-weight: bold; margin-top: 0.5rem; text-align: left; display: flex; align-items: center; gap: 0.5rem;">
                         <i class="fa-solid fa-wand-magic-sparkles" style="color: #8b5cf6;"></i> 🔮 IHK Stuttgart Fokus (Kristallkugel)
+                    </button>
+                    <button class="filter-btn highlight-hard-btn" data-theme="hard-mode" id="hard-mode-btn" style="border: 2px solid #ef4444; background: linear-gradient(135deg, #fef2f2, #fee2e2); color: #b91c1c; font-weight: bold; margin-top: 0.5rem; text-align: left; display: flex; align-items: center; gap: 0.5rem;">
+                        <i class="fa-solid fa-fire-flame-curved" style="color: #ef4444;"></i> 🔥 IHK Meisterklasse (Schwere Aufgaben)
                     </button>
                     <button class="filter-btn" data-theme="favorites" id="favorites-filter-btn" style="border: 2px solid #ffc107; font-weight: bold; margin-top: 0.5rem;">
                         <i class="fa-solid fa-star" style="color: #ffc107; margin-right: 0.25rem;"></i> Merkliste ⭐
@@ -139,6 +142,14 @@
                         <option value="mix">Zufälliger Mix (50/50)</option>
                         <option value="open">Nur offene Aufgaben (BaWü)</option>
                         <option value="standard">Nur MC & Zahleneingabe</option>
+                    </select>
+                </div>
+                <div class="control-group" style="display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.75rem;">
+                    <label for="question-difficulty-select" style="font-size: 0.9rem; color: var(--text-light); font-weight: 600;">Schwierigkeitsgrad:</label>
+                    <select id="question-difficulty-select" class="select-input" style="width: 100%; padding: 0.75rem; border: 2px solid var(--border-color); border-radius: var(--radius); font-size: 0.95rem; color: var(--text-color); background-color: white; outline: none; transition: var(--transition); cursor: pointer;">
+                        <option value="all">Alle Schwierigkeitsgrade</option>
+                        <option value="hard">🔥 Nur schwere Aufgaben (Meisterklasse)</option>
+                        <option value="standard">Prüfungsstandard (IHK Basis)</option>
                     </select>
                 </div>
                 <button class="btn btn-primary btn-full" id="regenerate-btn" style="margin-top: 1rem;">
@@ -392,9 +403,9 @@
     </footer>
 
     <!-- Load diagram library, questions, generator and application logic -->
-    <script src="diagrams.js?v=73"></script>
-    <script src="questions.js?v=73"></script>
-    <script src="generator.js?v=73"></script>
-    <script src="app.js?v=73"></script>
+    <script src="diagrams.js?v=74"></script>
+    <script src="questions.js?v=74"></script>
+    <script src="generator.js?v=74"></script>
+    <script src="app.js?v=74"></script>
 </body>
 </html>
