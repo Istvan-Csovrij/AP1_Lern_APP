@@ -2932,6 +2932,242 @@ function generateDynamicQuestions(typeMode = "mix") {
             });
         }
     }
+// =========================================================================
+    // === AUTHENTISCHE DYNAMISCHE GENERATOREN: MUSTERKLAUSUREN & PREISBILDUNG ===
+    // =========================================================================
+
+    // G7. Handelskalkulation: Vorwärtskalkulation (LF 6 / Rechnen)
+    for (let i = 0; i < 15; i++) {
+        const lep = [800, 1000, 1200, 1500, 2000][Math.floor(Math.random() * 5)];
+        const lRabattPct = [10, 15, 20][Math.floor(Math.random() * 3)];
+        const lSkontoPct = 2; // 2 %
+        const bezugskosten = [15, 20, 25, 30][Math.floor(Math.random() * 4)];
+        const hkzPct = [25, 30, 35, 40][Math.floor(Math.random() * 4)];
+        const gewinnPct = [10, 12, 15][Math.floor(Math.random() * 3)];
+
+        const zep = lep * (1 - lRabattPct / 100);
+        const bep = zep * (1 - lSkontoPct / 100);
+        const bezugspreis = bep + bezugskosten;
+        const handlungskosten = bezugspreis * (hkzPct / 100);
+        const selbstkosten = bezugspreis + handlungskosten;
+        const gewinn = selbstkosten * (gewinnPct / 100);
+        const bvp = selbstkosten + gewinn;
+
+        const isOpen = shouldBeOpenText();
+        if (isOpen) {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "lf6",
+                topic: "Handelskalkulation: Vorwärtskalkulation bis Barverkaufspreis (LF 6)",
+                isCalculation: true,
+                isBawueFocus: true,
+                type: "open-text",
+                question: `Prüfungsaufgabe Handelskalkulation (LF 6):\nKalkulieren Sie für einen Hardware-Artikel den Barverkaufspreis (BVP) anhand folgender Angaben:\n- Listeneinkaufspreis (LEP): ${lep.toFixed(2)} EUR\n- Lieferantenrabatt: ${lRabattPct} %\n- Lieferantenskonto: ${lSkontoPct} %\n- Bezugskosten: ${bezugskosten.toFixed(2)} EUR\n- Handlungskostenzuschlag (HKZ): ${hkzPct} %\n- Gewinnzuschlag: ${gewinnPct} %\n\nErmitteln Sie Bezugspreis, Selbstkosten und Barverkaufspreis (BVP) mit vollständigem Rechenweg.`,
+                musterloesung: `Musterlösung:\n1. LEP = ${lep.toFixed(2)} EUR - ${lRabattPct}% Rabatt (${(lep * lRabattPct / 100).toFixed(2)} EUR) = ZEP: ${zep.toFixed(2)} EUR.\n2. ZEP - ${lSkontoPct}% Skonto (${(zep * lSkontoPct / 100).toFixed(2)} EUR) = BEP: ${bep.toFixed(2)} EUR.\n3. BEP + Bezugskosten (${bezugskosten.toFixed(2)} EUR) = Bezugspreis: ${bezugspreis.toFixed(2)} EUR.\n4. Bezugspreis + ${hkzPct}% HKZ (${handlungskosten.toFixed(2)} EUR) = Selbstkosten: ${selbstkosten.toFixed(2)} EUR.\n5. Selbstkosten + ${gewinnPct}% Gewinn (${gewinn.toFixed(2)} EUR) = Barverkaufspreis (BVP): ${bvp.toFixed(2)} EUR.`,
+                explanation: `Vorwärtskalkulation: LEP (${lep} EUR) -> Rabatt (${lRabattPct}%) -> Skonto (${lSkontoPct}%) -> Bezugskosten (${bezugskosten} EUR) = Bezugspreis (${bezugspreis.toFixed(2)} EUR) -> HKZ (${hkzPct}%) = Selbstkosten (${selbstkosten.toFixed(2)} EUR) -> Gewinn (${gewinnPct}%) = BVP (${bvp.toFixed(2)} EUR).`
+            });
+        } else {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "lf6",
+                topic: "Handelskalkulation: Bezugspreis & Selbstkosten (LF 6)",
+                isCalculation: true,
+                isBawueFocus: true,
+                type: "multiple-choice",
+                question: `Ein Server hat einen Listeneinkaufspreis von ${lep.toFixed(2)} EUR (${lRabattPct} % Rabatt, ${lSkontoPct} % Skonto, ${bezugskosten.toFixed(2)} EUR Bezugskosten, ${hkzPct} % HKZ, ${gewinnPct} % Gewinn).\n\nWie hoch ist der Bezugspreis (Einstandspreis)?`,
+                options: [
+                    `${bezugspreis.toFixed(2)} EUR`,
+                    `${(bezugspreis * 1.15).toFixed(2)} EUR`,
+                    `${selbstkosten.toFixed(2)} EUR`,
+                    `${zep.toFixed(2)} EUR`
+                ],
+                correctAnswer: 0,
+                explanation: `ZEP = ${lep} * ${(1 - lRabattPct/100).toFixed(2)} = ${zep.toFixed(2)} EUR. BEP = ${zep.toFixed(2)} * 0,98 = ${bep.toFixed(2)} EUR. Bezugspreis = ${bep.toFixed(2)} + ${bezugskosten} = ${bezugspreis.toFixed(2)} EUR.`
+            });
+        }
+    }
+
+    // G8. Kalkulationszuschlag & Handelsspanne (LF 6 / Rechnen)
+    for (let i = 0; i < 15; i++) {
+        const bezugspreis = [400, 500, 600, 800, 1000][Math.floor(Math.random() * 5)];
+        const markupPct = [40, 50, 60, 75, 80][Math.floor(Math.random() * 5)];
+        const nettoLvp = Math.round(bezugspreis * (1 + markupPct / 100));
+        const diff = nettoLvp - bezugspreis;
+        const kalkFaktor = Math.round((nettoLvp / bezugspreis) * 100) / 100;
+        const handelsspanne = Math.round(((diff / nettoLvp) * 100) * 10) / 10;
+
+        const isOpen = shouldBeOpenText();
+        if (isOpen) {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "lf6",
+                topic: "Handelskalkulation: Kalkulationszuschlag, Faktor & Handelsspanne (LF 6)",
+                isCalculation: true,
+                isBawueFocus: true,
+                type: "open-text",
+                question: `Prüfungsaufgabe Kennzahlen der Handelskalkulation (LF 6):\nFür einen Artikel beträgt der Bezugspreis ${bezugspreis.toFixed(2)} EUR und der Netto-Listenverkaufspreis ${nettoLvp.toFixed(2)} EUR.\n\nBerechnen Sie:\n1. Den Kalkulationszuschlag in %\n2. Den Kalkulationsfaktor\n3. Die Handelsspanne in %`,
+                musterloesung: `Musterlösung:\n1. Kalkulationszuschlag = ((${nettoLvp} EUR - ${bezugspreis} EUR) / ${bezugspreis} EUR) * 100 = ${markupPct.toFixed(1)} %.\n2. Kalkulationsfaktor = ${nettoLvp} EUR / ${bezugspreis} EUR = ${kalkFaktor.toFixed(2)}.\n3. Handelsspanne = ((${nettoLvp} EUR - ${bezugspreis} EUR) / ${nettoLvp} EUR) * 100 = ${handelsspanne.toFixed(1)} %.`,
+                explanation: `Kalkulationszuschlag = Diff/Bezugspreis = ${markupPct}%. Handelsspanne = Diff/Netto-LVP = ${handelsspanne}%. Kalkulationsfaktor = ${kalkFaktor}.`
+            });
+        } else {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "lf6",
+                topic: "Handelskalkulation: Handelsspanne & Kalkulationsfaktor (LF 6)",
+                isCalculation: true,
+                isBawueFocus: true,
+                type: "multiple-choice",
+                question: `Bei einem Bezugspreis von ${bezugspreis.toFixed(2)} EUR und Netto-LVP von ${nettoLvp.toFixed(2)} EUR: Wie hoch sind Kalkulationszuschlag und Handelsspanne?`,
+                options: [
+                    `Kalkulationszuschlag: ${markupPct.toFixed(1)} % | Handelsspanne: ${handelsspanne.toFixed(1)} %`,
+                    `Kalkulationszuschlag: ${handelsspanne.toFixed(1)} % | Handelsspanne: ${markupPct.toFixed(1)} %`,
+                    `Beide exakt ${markupPct.toFixed(1)} %`,
+                    `Kalkulationszuschlag: ${(markupPct + 10).toFixed(1)} % | Handelsspanne: ${(handelsspanne - 10).toFixed(1)} %`
+                ],
+                correctAnswer: 0,
+                explanation: `Kalkulationszuschlag bezieht sich auf Bezugspreis (${diff}/${bezugspreis} = ${markupPct}%). Handelsspanne bezieht sich auf Verkaufspreis (${diff}/${nettoLvp} = ${handelsspanne}%).`
+            });
+        }
+    }
+
+    // G9. RAID-Kapazitäten & Ausfallsicherheit (LF 2 / Rechnen)
+    for (let i = 0; i < 15; i++) {
+        const diskCount = [4, 6, 8][Math.floor(Math.random() * 3)];
+        const diskSizeTiB = [2, 4, 8, 12][Math.floor(Math.random() * 4)];
+        const raidType = [5, 6, 10][Math.floor(Math.random() * 3)];
+
+        let netCapacity = 0;
+        let faultTolerance = "";
+        if (raidType === 5) {
+            netCapacity = (diskCount - 1) * diskSizeTiB;
+            faultTolerance = "1 Festplatte";
+        } else if (raidType === 6) {
+            netCapacity = (diskCount - 2) * diskSizeTiB;
+            faultTolerance = "2 Festplatten gleichzeitig";
+        } else {
+            netCapacity = (diskCount / 2) * diskSizeTiB;
+            faultTolerance = "mindestens 1 Festplatte (max. 1 pro Spiegelpaar)";
+        }
+
+        const isOpen = shouldBeOpenText();
+        if (isOpen) {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "lf2",
+                topic: "Speichertechnik: RAID-Nettokapazität & Ausfallsicherheit (LF 2)",
+                isCalculation: true,
+                isBawueFocus: true,
+                type: "open-text",
+                question: `Prüfungsaufgabe Speicherhardware (LF 2):\nEin Speicher-Server wird mit ${diskCount} Festplatten à ${diskSizeTiB} TiB in einem RAID ${raidType}-Verbund aufgebaut.\n\n1. Berechnen Sie die nutzbare Netto-Speicherkapazität in TiB.\n2. Wie viele Festplatten dürfen maximal gleichzeitig ausfallen, ohne dass es zu Datenverlust kommt?`,
+                musterloesung: `Musterlösung:\n1. Netto-Speicherkapazität RAID ${raidType}: ${raidType === 5 ? `(n - 1) * Kapazität = (${diskCount} - 1) * ${diskSizeTiB} TiB = ${netCapacity} TiB.` : raidType === 6 ? `(n - 2) * Kapazität = (${diskCount} - 2) * ${diskSizeTiB} TiB = ${netCapacity} TiB.` : `(n / 2) * Kapazität = (${diskCount} / 2) * ${diskSizeTiB} TiB = ${netCapacity} TiB.`}\n2. Ausfallsicherheit: Es darf / dürfen ${faultTolerance} ausfallen.`,
+                explanation: `Formel RAID ${raidType}: ${raidType === 5 ? '(n-1)*C' : raidType === 6 ? '(n-2)*C' : '(n/2)*C'}. Netto = ${netCapacity} TiB.`
+            });
+        } else {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "lf2",
+                topic: "Speichertechnik: RAID-Kapazität (LF 2)",
+                isCalculation: true,
+                isBawueFocus: true,
+                type: "multiple-choice",
+                question: `Ein RAID ${raidType} besteht aus ${diskCount} Festplatten à ${diskSizeTiB} TiB. Welche Netto-Speicherkapazität steht zur Verfügung?`,
+                options: [
+                    `${netCapacity} TiB`,
+                    `${diskCount * diskSizeTiB} TiB`,
+                    `${netCapacity - diskSizeTiB} TiB`,
+                    `${netCapacity / 2} TiB`
+                ],
+                correctAnswer: 0,
+                explanation: `RAID ${raidType} bei ${diskCount} Platten à ${diskSizeTiB} TiB ergibt ${netCapacity} TiB nutzbare Kapazität.`
+            });
+        }
+    }
+
+    // G10. Elektrotechnik: Grundgrößen & Ohmsches Gesetz (LF 2 / Rechnen)
+    for (let i = 0; i < 15; i++) {
+        const u = [12, 24, 230][Math.floor(Math.random() * 3)];
+        const i_amp = [2, 5, 10, 16][Math.floor(Math.random() * 4)];
+        const r = Math.round((u / i_amp) * 10) / 10;
+        const p = u * i_amp;
+        const hours = [2, 4, 8, 24][Math.floor(Math.random() * 4)];
+        const energyWh = p * hours;
+
+        const isOpen = shouldBeOpenText();
+        if (isOpen) {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "lf2",
+                topic: "Elektrotechnik: Ohmsches Gesetz, Leistung & Energie (LF 2)",
+                isCalculation: true,
+                isBawueFocus: true,
+                type: "open-text",
+                question: `Prüfungsaufgabe Elektrotechnik (LF 2):\nEin IT-Gerät wird an einer Spannung von ${u} V betrieben. Dabei wird eine Stromstärke von ${i_amp} A gemessen.\n\nBerechnen Sie:\n1. Den elektrischen Widerstand R in Ohm.\n2. Die elektrische Leistung P in Watt.\n3. Die verbrauchte elektrische Energie W in Wh bei einer Betriebsdauer von ${hours} Stunden.`,
+                musterloesung: `Musterlösung:\n1. Widerstand R = U / I = ${u} V / ${i_amp} A = ${r} Ohm (Ω).\n2. Leistung P = U * I = ${u} V * ${i_amp} A = ${p} Watt (W).\n3. Energie W = P * t = ${p} W * ${hours} h = ${energyWh} Wh (Wattstunden).`,
+                explanation: `R = U / I = ${r} Ω. P = U * I = ${p} W. W = P * t = ${energyWh} Wh.`
+            });
+        } else {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "lf2",
+                topic: "Elektrotechnik: Leistung & Energie (LF 2)",
+                isCalculation: true,
+                isBawueFocus: true,
+                type: "multiple-choice",
+                question: `Ein IT-System zieht bei ${u} V Spannung einen Strom von ${i_amp} A. Welche Leistung P und welcher Energieverbrauch W fallen in ${hours} Stunden an?`,
+                options: [
+                    `P = ${p} W | W = ${energyWh} Wh`,
+                    `P = ${p * 2} W | W = ${energyWh * 2} Wh`,
+                    `P = ${r} W | W = ${energyWh / 2} Wh`,
+                    `P = ${u} W | W = ${p} Wh`
+                ],
+                correctAnswer: 0,
+                explanation: `P = ${u} V * ${i_amp} A = ${p} W. W = ${p} W * ${hours} h = ${energyWh} Wh.`
+            });
+        }
+    }
+
+    // G11. IPv4-Subnetting & Host-Kapazitäten (LF 3 / Rechnen)
+    for (let i = 0; i < 15; i++) {
+        const prefix = [24, 25, 26, 27, 28, 29, 30][Math.floor(Math.random() * 7)];
+        const hostBits = 32 - prefix;
+        const totalIps = Math.pow(2, hostBits);
+        const usableHosts = prefix === 31 ? 2 : prefix === 32 ? 1 : totalIps - 2;
+        const maskOctet = 256 - totalIps;
+        const fullMask = `255.255.255.${maskOctet}`;
+
+        const isOpen = shouldBeOpenText();
+        if (isOpen) {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "lf3",
+                topic: "Netzwerktechnik: Subnetzmaske & nutzbare Host-IPs (LF 3)",
+                isCalculation: true,
+                isBawueFocus: true,
+                type: "open-text",
+                question: `Prüfungsaufgabe Subnetting (LF 3):\nEin Netzwerk-Segment erhält die CIDR-Präfixlänge /${prefix}.\n\n1. Ermitteln Sie die zugehörige Subnetzmaske in dotted-decimal Notation.\n2. Berechnen Sie die maximale Anzahl an nutzbaren Host-IP-Adressen in diesem Subnetz.`,
+                musterloesung: `Musterlösung:\n1. Subnetzmaske: ${fullMask} (Präfix /${prefix} = ${prefix} gesetzte Einsen-Bits).\n2. Host-Bits = 32 - ${prefix} = ${hostBits} Bits => 2^${hostBits} = ${totalIps} IP-Adressen gesamt.\n   Nutzbare Hosts = ${totalIps} - 2 (abzüglich Netz-ID und Broadcast-Adresse) = ${usableHosts} Host-Adressen.`,
+                explanation: `/${prefix} -> Host-Bits: ${hostBits} -> 2^${hostBits} - 2 = ${usableHosts} nutzbare Host-IPs. Subnetzmaske: ${fullMask}.`
+            });
+        } else {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "lf3",
+                topic: "Netzwerktechnik: Host-Adressen je CIDR-Präfix (LF 3)",
+                isCalculation: true,
+                isBawueFocus: true,
+                type: "multiple-choice",
+                question: `Wie viele nutzbare Host-IP-Adressen stehen in einem Subnetz mit der Präfixlänge /${prefix} (${fullMask}) zur Verfügung?`,
+                options: [
+                    `${usableHosts} Hosts`,
+                    `${totalIps} Hosts (inkl. Netz-ID und Broadcast)`,
+                    `${usableHosts * 2} Hosts`,
+                    `${usableHosts + 8} Hosts`
+                ],
+                correctAnswer: 0,
+                explanation: `Host-Bits = 32 - ${prefix} = ${hostBits}. 2^${hostBits} - 2 = ${usableHosts} nutzbare Hosts.`
+            });
+        }
+    }
 
     return dynamicQuestions;
 }

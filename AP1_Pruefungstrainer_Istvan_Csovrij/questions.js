@@ -6966,5 +6966,200 @@ WHERE Email IS NULL OR Email = '';
     ],
     "correctAnswer": 0,
     "explanation": "25 * 100 kbit/s = 2.500 kbit/s = 2,5 Mbit/s. Zusammen mit dem Datenabgleich (10 Mbit/s) ergibt sich eine Mindestbandbreite von 12,5 Mbit/s."
+},
+{
+    "id": 390,
+    "theme": "lf2",
+    "topic": "Virtualisierung: Server-Virtualisierung & Hypervisor (Musterklausur 1)",
+    "isBawueFocus": true,
+    "type": "open-text",
+    "question": "IHK-Prüfungsaufgabe (LF 2 - Virtualisierung):\nFür das Rechenzentrum eines Unternehmens soll eine Server-Virtualisierung eingeführt werden.\n\n1. Erläutern Sie das Prinzip der Server-Virtualisierung (inkl. der Rolle des Hypervisors). (3 Punkte)\n2. Nennen Sie je zwei Vorteile und zwei Nachteile virtueller Server gegenüber dedizierten physischen Servern. (4 Punkte)\n3. Nennen Sie drei Hardware-Komponenten, die typischerweise durch den Hypervisor virtualisiert werden. (3 Punkte)",
+    "musterloesung": "Musterlösung:\n\n1. Prinzip der Server-Virtualisierung:\n- Ein physischer Host-Server wird mithilfe einer Abstraktionsschicht (Hypervisor bzw. Virtual Machine Monitor) in mehrere logisch voneinander isolierte Virtuelle Maschinen (VMs) unterteilt.\n- Jede VM verfügt über ein eigenes Gastbetriebssystem und emulierte virtuelle Hardware (vCPU, vRAM, vDisk, vNIC), teilt sich jedoch die realen physischen Ressourcen des Host-Systems. Ziel ist eine optimale Ressourcenauslastung (Konsolidierung).\n\n2. Vor- und Nachteile:\n- Vorteile: Bessere Hardware- und Energieauslastung (Konsolidierung), schnellere Bereitstellung/Provisionierung neuer Server, einfache Snapshot- und Backup-Möglichkeiten, einfache Migration bei Hardwarewartung (Live Migration).\n- Nachteile: Single Point of Failure (fällt der Host aus, stehen alle VMs), hoher Bedarf an leistungsfähiger Host-Hardware (RAM, I/O-Durchsatz), Performance-Overhead bei extrem rechen-/grafikintensiven Spezialanwendungen.\n\n3. Virtualisierte Hardware-Komponenten:\n- Prozessor-Kerne (vCPUs)\n- Arbeitsspeicher (vRAM)\n- Festspeicher / Speicherplatz (virtuelle Festplatten / vDisks)\n- Netzwerkadapter (vNICs) und Schnittstellen.",
+    "explanation": "Virtualisierung trennt Betriebssystem und Applikationen von der physischen Hardware über einen Hypervisor (Typ 1 Bare-Metal oder Typ 2 Hosted)."
+},
+{
+    "id": 391,
+    "theme": "lf3",
+    "topic": "Netzwerktechnik: Beurteilung von IPv4-Adressen (Musterklausur 1)",
+    "isBawueFocus": true,
+    "type": "open-text",
+    "question": "IHK-Prüfungsaufgabe (LF 3 - IPv4-Adressierung):\nEin neuer Datenbankserver soll eine feste IPv4-Adresse erhalten. Folgende drei Adressen wurden vorgeschlagen:\n\n1. 192.168.10.0/24\n2. 192.168.10.200/24\n3. 127.0.0.1/8\n\nBeurteilen Sie für jede dieser drei IPv4-Adressen, ob sie als Host-Adresse für den Datenbankserver geeignet ist, und begründen Sie Ihre Entscheidung fachlich.",
+    "musterloesung": "Musterlösung:\n\n1. 192.168.10.0/24:\n- Nicht geeignet! Dies ist die Netz-Adresse (Netz-ID) des Subnetzes 192.168.10.0/24. Die erste Adresse eines Subnetzes identifiziert das Netzwerk selbst und darf keinem Host zugewiesen werden.\n\n2. 192.168.10.200/24:\n- Geeignet! Dies ist eine gültige private Host-IP-Adresse im Subnetz (Nutzbarer Bereich: 192.168.10.1 bis 192.168.10.254, Broadcast: .255). Sie kann dem Server fest zugewiesen werden.\n\n3. 127.0.0.1/8:\n- Nicht geeignet! Dies ist die reservierte IPv4-Loopback-Adresse (Localhost). Datenpakete an diese Adresse verlassen den Rechner nicht und werden intern an den IP-Stack zurückgeleitet. Sie dient nur lokalen Diagnosen und internen Schnittstellen.",
+    "explanation": "Netz-ID (.0/24) und Broadcast (.255/24) sind für Hosts reserviert. 127.0.0.0/8 ist der Loopback-Bereich."
+},
+{
+    "id": 392,
+    "theme": "lf3",
+    "topic": "Netzwerktechnik: OSI-Schichtenmodell & Kopplungselemente (Musterklausur 1)",
+    "isBawueFocus": true,
+    "type": "open-text",
+    "question": "IHK-Prüfungsaufgabe (LF 3 - OSI-Referenzmodell):\n1. Ordnen Sie den OSI-Schichten 1 (Bitübertragung), 2 (Sicherung), 3 (Vermittlung) und 4 (Transport) jeweils das typische Kopplungselement (Netzwerkkomponente) zu.\n2. Nennen Sie für Schicht 2, Schicht 3 und Schicht 4 die dort verwendeten Adressierungsarten.\n3. Nennen Sie für Schicht 4 (Transport) zwei zentrale Protokolle und deren Hauptunterschied.",
+    "musterloesung": "Musterlösung:\n\n1. Schichten & Kopplungselemente:\n- Schicht 1 (Physical): Repeater, Hub\n- Schicht 2 (Data Link): Switch (Layer-2), Bridge\n- Schicht 3 (Network): Router, Layer-3-Switch\n- Schicht 4-7: Gateway, Proxy, Application Firewall\n\n2. Adressierungsarten je Schicht:\n- Schicht 2 (Sicherungsschicht): MAC-Adresse (physikalische Hardware-Adresse, 48 Bit)\n- Schicht 3 (Vermittlungsschicht): IP-Adresse (logische Netzwerkadresse, IPv4 32 Bit / IPv6 128 Bit)\n- Schicht 4 (Transportschicht): Port-Nummer (16 Bit, 0–65535, z. B. Port 80 HTTP, Port 443 HTTPS)\n\n3. Protokolle der Schicht 4:\n- TCP (Transmission Control Protocol): Verbindungsorientiert, garantiert fehlerfreie Übertragung durch Bestätigungen (ACKs) und Flusskontrolle (3-Way-Handshake).\n- UDP (User Datagram Protocol): Verbindungslos, unbestätigt, minimaler Header-Overhead, optimiert für Echtzeitanwendungen (VoIP, Video-Streaming, DNS).",
+    "explanation": "Schicht 1: Hub/Repeater | Schicht 2: Switch (MAC) | Schicht 3: Router (IP) | Schicht 4: TCP/UDP (Ports)."
+},
+{
+    "id": 393,
+    "theme": "lf6",
+    "topic": "Cloud-Computing: OpenStack & Cloud-Service-Modelle (Musterklausur 1)",
+    "isBawueFocus": true,
+    "type": "open-text",
+    "question": "IHK-Prüfungsaufgabe (LF 6 - Cloud Computing):\nEin Kunde interessiert sich für den Einsatz einer OpenStack-basierten Cloud-Lösung.\n\n1. Unterscheiden Sie die drei Cloud-Service-Modelle IaaS, PaaS und SaaS anhand der Verantwortungsbereiche des Kunden.\n2. Erläutern Sie zwei wesentliche Vorteile einer Open-Source-Cloud-Architektur (wie OpenStack) im Vergleich zu proprietären Cloud-Anbietern.\n3. Nennen Sie zwei relevante ISO/IEC-Sicherheitszertifizierungen für Cloud-Rechenzentren in Deutschland.",
+    "musterloesung": "Musterlösung:\n\n1. Cloud-Service-Modelle:\n- IaaS (Infrastructure as a Service): Der Provider stellt virtuelle Server, Speicher und Netzwerke bereit. Der Kunde verwaltet Betriebssystem, Middleware, Laufzeitumgebung, Daten und Anwendungen (z. B. OpenStack, AWS EC2).\n- PaaS (Platform as a Service): Der Provider verwaltet Infrastruktur und Betriebssystem. Der Kunde bringt lediglich seine eigenen Anwendungsdaten und Softwarecodes mit (z. B. Docker-Hosting, Datenbank-Plattformen).\n- SaaS (Software as a Service): Der Provider stellt die vollständige schlüsselfertige Anwendung bereit. Der Kunde nutzt die Software nur als Anwender (z. B. Microsoft 365, Salesforce).\n\n2. Vorteile von OpenStack:\n- Vermeidung von Vendor Lock-in (keine Abhängigkeit von einem einzelnen Anbieter; Workloads lassen sich zwischen Providern und On-Premises portieren).\n- Volle Kontrolle über die Datenhoheit, Sicherheit und Konfigurationsmöglichkeiten.\n\n3. Relevante ISO-Zertifizierungen:\n- ISO/IEC 27001 (Informationssicherheits-Managementsystem ISMS)\n- ISO/IEC 27018 (Datenschutz in Cloud-Diensten).",
+    "explanation": "IaaS = Infrastruktur | PaaS = Entwicklungsplattform | SaaS = fertige Software. OpenStack verhindert Vendor Lock-in."
+},
+{
+    "id": 394,
+    "theme": "lf2",
+    "topic": "Elektrotechnik: Physikalische & elektrische Grundgrößen (Musterklausur 2)",
+    "isCalculation": true,
+    "isBawueFocus": true,
+    "type": "open-text",
+    "question": "IHK-Prüfungsaufgabe (LF 2 - Elektrotechnische Grundlagen):\nVervollständigen Sie die Angaben zu den sechs elektrotechnischen Grundgrößen:\n\n1. Elektrische Spannung (Formelzeichen, Einheit, Einheitenzeichen)\n2. Elektrische Stromstärke (Formelzeichen, Einheit, Einheitenzeichen)\n3. Elektrischer Widerstand (Formelzeichen, Einheit, Einheitenzeichen, ohmsches Gesetz)\n4. Elektrische Leistung (Formelzeichen, Einheit, Einheitenzeichen, Formel)\n5. Elektrische Energie / Arbeit (Formelzeichen, Einheit, Formel)\n6. Elektrische Ladung / Kapazität (Formelzeichen, Einheit, Formel)",
+    "musterloesung": "Musterlösung:\n\n1. Elektrische Spannung: Formelzeichen U | Einheit: Volt | Einheitenzeichen: V\n2. Elektrische Stromstärke: Formelzeichen I | Einheit: Ampere | Einheitenzeichen: A\n3. Elektrischer Widerstand: Formelzeichen R | Einheit: Ohm | Einheitenzeichen: Ω | Formel: R = U / I\n4. Elektrische Leistung: Formelzeichen P | Einheit: Watt | Einheitenzeichen: W | Formel: P = U * I = W / t\n5. Elektrische Arbeit / Energie: Formelzeichen W (oder E) | Einheit: Wattstunde (Wh) / Joule (J) | Formel: W = P * t = U * I * t\n6. Elektrische Ladungsmenge: Formelzeichen Q | Einheit: Amperestunde (Ah) / Coulomb (C) | Formel: Q = I * t (bzw. W = Q * U).",
+    "explanation": "Ohmsches Gesetz: U = R * I. Leistung: P = U * I. Energie: W = P * t = Q * U. Ladung: Q = I * t."
+},
+{
+    "id": 395,
+    "theme": "lf2",
+    "topic": "Speichertechnik: RAID-Level & Speicherkapazität (Musterklausur 2)",
+    "isCalculation": true,
+    "isBawueFocus": true,
+    "type": "open-text",
+    "question": "IHK-Prüfungsaufgabe (LF 2 - RAID-Systeme):\nEin Server soll mit 4 baugleichen Festplatten à 1 TiB Speicherkapazität ausgestattet werden.\n\nBerechnen Sie für folgende RAID-Level jeweils die nutzbare Netto-Speicherkapazität (in TiB), die minimale Festplattenanzahl und die maximale Anzahl an Festplatten, die gleichzeitig ausfallen dürfen, ohne dass Daten verloren gehen:\n\n1. RAID 0 (Striping)\n2. RAID 1 (Mirroring mit 2 Platten)\n3. RAID 5 (Striping mit verteilter Parität)\n4. RAID 6 (Striping mit doppelter Parität)\n5. RAID 10 (1+0, Striping über gespiegelte Paare)",
+    "musterloesung": "Musterlösung (für 4 Platten à 1 TiB):\n\n1. RAID 0:\n- Nettokapazität: 4 TiB (n * C = 4 * 1 TiB)\n- Min. Platten: 2\n- Ausfallsicherheit: 0 Platten (fällt eine Platte aus, sind alle Daten verloren).\n\n2. RAID 1 (bei 2 Platten à 1 TiB):\n- Nettokapazität: 1 TiB (C)\n- Min. Platten: 2\n- Ausfallsicherheit: 1 Platte.\n\n3. RAID 5:\n- Nettokapazität: 3 TiB ((n - 1) * C = (4 - 1) * 1 TiB)\n- Min. Platten: 3\n- Ausfallsicherheit: 1 beliebige Platte (Parität auf allen Platten verteilt).\n\n4. RAID 6:\n- Nettokapazität: 2 TiB ((n - 2) * C = (4 - 2) * 1 TiB)\n- Min. Platten: 4\n- Ausfallsicherheit: 2 beliebige Platten (zwei unabhängige Paritätsblöcke).\n\n5. RAID 10 (1+0):\n- Nettokapazität: 2 TiB ((n / 2) * C = (4 / 2) * 1 TiB)\n- Min. Platten: 4\n- Ausfallsicherheit: Mindestens 1 Platte, maximal 2 Platten (solange nicht beide Platten desselben Spiegelpaares ausfallen).",
+    "explanation": "RAID 0 = n*C (keine Redundanz). RAID 1 = 1*C. RAID 5 = (n-1)*C. RAID 6 = (n-2)*C. RAID 10 = (n/2)*C."
+},
+{
+    "id": 396,
+    "theme": "lf3",
+    "topic": "Netzwerktechnik: DNS-Architektur & Namensauflösung (Musterklausur 2)",
+    "isBawueFocus": true,
+    "type": "open-text",
+    "question": "IHK-Prüfungsaufgabe (LF 3 - DNS Domain Name System):\n1. Erläutern Sie die Hauptaufgabe des Domain Name Systems (DNS) in IP-Netzwerken. (2 Punkte)\n2. Erläutern Sie den hierarchischen Aufbau des DNS anhand des FQDN 'pc-01.training.fachinformatiker.net.'. (4 Punkte)\n3. Was versteht man unter einem 'DNS-Forwarder' (Weiterleitungsserver) und wann wird er eingesetzt? (3 Punkte)",
+    "musterloesung": "Musterlösung:\n\n1. Hauptaufgabe des DNS:\n- DNS fungiert als 'Telefonbuch des Internets'. Es übersetzt menschenlesbare Domainnamen (z. B. www.beispiel.de) in maschinenlesbare IP-Adressen (z. B. 192.0.2.1) über Forward-Lookups (und umgekehrt über Reverse-Lookups mit PTR-Records).\n\n2. Hierarchischer Aufbau (von rechts nach links gelesen):\n- '.' (Root-Domain / Root-Zone): Oberste Ebene, verwaltet von den 13 weltweiten Root-Name-Server-Clustern (A bis M).\n- 'net' (Top-Level-Domain / TLD): Generische TLD (gTLD), verwaltet durch die zuständige Registry.\n- 'fachinformatiker' (Second-Level-Domain / SLD): Registrierter Firmen- oder Organisationsname.\n- 'training' (Subdomain): Untergeordnete Abteilung oder Dienst-Struktur innerhalb der Organisation.\n- 'pc-01' (Host-Name): Name des konkreten Endgeräts / Rechners.\n\n3. DNS-Forwarder:\n- Ein interner DNS-Server leitet Anfragen für externe Domain-Namen, die er nicht selbst autoritativ verwalten oder im Cache auflösen kann, an einen festgelegten externen Forwarder weiter (z. B. DNS-Server des ISPs oder öffentliche DNS wie 8.8.8.8 / 1.1.1.1).\n- Vorteil: Entlastung der internen Root-Iterationen und Beschleunigung durch zentrales Caching.",
+    "explanation": "DNS löst FQDNs hierarchisch auf: Root (.) -> TLD (net) -> SLD (fachinformatiker) -> Subdomain (training) -> Host (pc-01)."
+},
+{
+    "id": 397,
+    "theme": "lf1",
+    "topic": "Unternehmensorganisation: Matrixorganisation vs. Stabsstellen (Musterklausur 3)",
+    "isBawueFocus": true,
+    "type": "open-text",
+    "question": "IHK-Prüfungsaufgabe (LF 1 - Aufbauorganisation):\nEin wachsendes IT-Systemhaus plant die Umstellung von einer Einlinienorganisation auf eine Matrixorganisation.\n\n1. Nennen Sie zwei wesentliche Vorteile der Matrixorganisation. (2 Punkte)\n2. Nennen Sie zwei typische Nachteile bzw. Risiken der Matrixorganisation. (2 Punkte)\n3. Erläutern Sie das Wesen einer Stabsstelle (z. B. 'Assistent der Geschäftsleitung' oder 'Datenschutzbeauftragter') bezüglich Weisungsbefugnis und Funktion. (2 Punkte)",
+    "musterloesung": "Musterlösung:\n\n1. Vorteile der Matrixorganisation:\n- Bessere Auslastung und flexible teamübergreifende Zusammenarbeit von Spezialisten über mehrere Projekte hinweg.\n- Förderung von interdisziplinärem Fachwissen und schnellem Wissensaustausch zwischen Fachabteilungen und Projektleitungen.\n- Entlastung der obersten Unternehmensführung.\n\n2. Nachteile der Matrixorganisation:\n- Kompetenzkonflikte und Prioritätenstreitigkeiten durch Mehrfachunterstellung der Mitarbeiter (zwei Vorgesetzte: Fachabteilungsleiter und Projektleiter).\n- Hoher Abstimmungs- und Kommunikationsaufwand zwischen den Leitungsinstanzen.\n- Gefahr von Rollenunsicherheit und Überlastung der Mitarbeiter bei widersprüchlichen Weisungen.\n\n3. Wesen einer Stabsstelle:\n- Eine Stabsstelle ist eine beratende und unterstützende Organisationseinheit ohne eigene fachliche oder disziplinarische Weisungsbefugnis gegenüber nachgeordneten Linieninstanzen.\n- Sie dient der Zuarbeit, Entlastung und Entscheidungsvorbereitung für die zugeordnete Führungskraft (Instanz).",
+    "explanation": "Matrix = Mehrliniensystem mit 2 Dimensionen (Funktionen & Projekte). Stabsstellen beraten ohne Weisungsbefugnis."
+},
+{
+    "id": 398,
+    "theme": "lf4",
+    "topic": "Datenschutz & Telearbeit: DSGVO TOMs im Homeoffice (Musterklausur 3)",
+    "isBawueFocus": true,
+    "type": "open-text",
+    "question": "IHK-Prüfungsaufgabe (LF 4 - Datenschutz & Informationssicherheit):\nEin IT-Dienstleister ermöglicht Mitarbeitern mobiles Arbeiten / Telearbeit im Homeoffice.\n\n1. Erläutern Sie vier konkrete technisch-organisatorische Maßnahmen (TOMs nach Art. 32 DSGVO), um personenbezogene Kundendaten bei der mobilen Arbeit zu schützen. (4 Punkte)\n2. Nennen Sie zwei zusätzliche administrative Aufgaben, die der IT-Abteilung durch die Verwaltung mobiler Benutzer-Endgeräte (Laptops, Smartphones) entstehen. (2 Punkte)",
+    "musterloesung": "Musterlösung:\n\n1. Technisch-organisatorische Maßnahmen (TOMs):\n- Vollständige Festplattenverschlüsselung (z. B. BitLocker / LUKS), damit bei Verlust oder Diebstahl des Laptops keine Daten ausgelesen werden können.\n- Erzwungene verschlüsselte VPN-Verbindung (Virtual Private Network) mit Zwei-Faktor-Authentifizierung (2FA / MFA) für den Fernzugriff auf Unternehmensressourcen.\n- Einsatz von Mobile Device Management (MDM) zur Durchsetzung von Sicherheitsrichtlinien (automatische Updates, Remote-Wipe bei Geräteverlust).\n- Blickschutzfilter (Privacy Filter) gegen unbefugtes Einsehen durch Dritte im öffentlichen Raum / zu Hause und Verbot privater Nutzung dienstlicher Geräte.\n\n2. Administrative Aufgaben der IT-Abteilung:\n- Bereitstellung, Inventarisierung, Konfiguration und Rollout sicherer Endgeräte (Staging via MDM/Autopilot).\n- Kontinuierliches Patch-Management, Endpoint-Security-Überwachung und Incident-Response bei Sicherheitsvorfällen.",
+    "explanation": "DSGVO TOMs bei Telearbeit: Festplattenverschlüsselung, VPN mit 2FA, MDM, automatische Bildschirmsperre."
+},
+{
+    "id": 399,
+    "theme": "lf3",
+    "topic": "Netzwerktechnik & Mobilfunk: 5G-Technologie & Anwendungsfelder (Musterklausur 3)",
+    "isBawueFocus": true,
+    "type": "open-text",
+    "question": "IHK-Prüfungsaufgabe (LF 3 - Übertragungstechnologien):\n1. Beschreiben Sie vier zentrale technische Merkmale des Mobilfunkstandards 5G im Vergleich zu 4G/LTE. (4 Punkte)\n2. Erläutern Sie zwei zukunftsweisende Anwendungsbereiche, die erst durch 5G ermöglicht oder entscheidend vorangetrieben werden. (2 Punkte)",
+    "musterloesung": "Musterlösung:\n\n1. Technische Merkmale von 5G:\n- Extrem niedrige Latenz (Ultra-Reliable Low Latency Communication, URLLC): Latenzzeiten unter 1 Millisekunde (bei 4G ca. 20–50 ms).\n- Sehr hohe Spitzen-Datenübertragungsraten (Enhanced Mobile Broadband, eMBB): Bis zu 10–20 Gbit/s im Downlink.\n- Massive Machine-Type Communications (mMTC): Hohe Verbindungsdichte von bis zu 1 Million IoT-Geräte pro Quadratkilometer.\n- Network Slicing: Logische Aufteilung eines physischen 5G-Netzes in isolierte virtuelle Subnetze mit garantierten Dienstgüten (QoS) für unterschiedliche Anwendungsfälle.\n- Beamforming & Massive MIMO: Gezielte Ausrichtung von Funksignalen auf einzelne Endgeräte zur Steigerung von Reichweite und Effizienz.\n\n2. Anwendungsbereiche:\n- Autonomes Fahren & Car-to-X-Kommunikation: Echtzeit-Reaktionszeiten zur Kollisionsvermeidung und Verkehrssteuerung.\n- Industrie 4.0 & Smart Factory: Drahtlose Echtzeit-Steuerung von Robotern, fahrerlosen Transportsystemen (FTS) und Sensoren in Fertigungshallen.",
+    "explanation": "5G bietet Latenz < 1 ms, bis zu 20 Gbit/s, Network Slicing und 1 Mio Geräte/km² für Industrie 4.0 und autonomes Fahren."
+},
+{
+    "id": 400,
+    "theme": "lf4",
+    "topic": "Kryptographie & IT-Sicherheit: Symmetrische vs. Asymmetrische Verschlüsselung (Musterklausur 3)",
+    "isBawueFocus": true,
+    "type": "open-text",
+    "question": "IHK-Prüfungsaufgabe (LF 4 - Kryptographie):\n1. Unterscheiden Sie symmetrische von asymmetrischer Verschlüsselung (Schlüsselanzahl, Schlüsselverteilung, Performance). (4 Punkte)\n2. Erläutern Sie, wie bei HTTPS / TLS eine sogenannte 'Hybridverschlüsselung' realisiert wird und warum man beide Verfahren kombiniert. (3 Punkte)\n3. Wie garantiert eine Digitale Signatur mit Zertifikat die Authentizität und Unverfälschtheit (Integrität) einer Nachricht? (3 Punkte)",
+    "musterloesung": "Musterlösung:\n\n1. Symmetrisch vs. Asymmetrisch:\n- Symmetrische Verschlüsselung: Verwendet denselben geheimen Schlüssel (Shared Secret) für Ver- und Entschlüsselung (z. B. AES). Sehr schnell und effizient für große Datenmengen. Problem: Sicherer Schlüsselaustausch über unsichere Netze erforderlich.\n- Asymmetrische Verschlüsselung: Verwendet ein Schlüsselpaar aus Public Key (öffentlich zum Verschlüsseln/Signatur prüfen) und Private Key (geheim zum Entschlüsseln/Signieren, z. B. RSA, ECC). Kein Schlüsselaustauschproblem, aber rechenintensiv und langsam.\n\n2. Hybridverschlüsselung (z. B. TLS/HTTPS):\n- Ablauf: Zu Beginn der Verbindung (TLS-Handshake) wird über ein asymmetrisches Verfahren (z. B. RSA oder Diffie-Hellman) ein zufälliger, einmaliger symmetrischer Sitzungsschlüssel (Session Key) sicher ausgehandelt.\n- Anschließend werden alle Nutzdaten ausschließlich symmetrisch (mit AES) und somit extrem performant verschlüsselt.\n\n3. Digitale Signatur:\n- Der Absender berechnet den Hashwert der Nachricht und verschlüsselt diesen mit seinem privaten Schlüssel (Private Key) -> Digitale Signatur.\n- Der Empfänger entschlüsselt die Signatur mit dem öffentlichen Schlüssel des Absenders (aus dem CA-Zertifikat) und vergleicht das Ergebnis mit dem selbst berechneten Hashwert.\n- Stimmen beide Werte überein, ist bewiesen: Die Nachricht stammt wirklich vom Absender (Authentizität) und wurde unterwegs nicht manipuliert (Integrität).",
+    "explanation": "Symmetrisch (AES) = schnell, ein Key. Asymmetrisch (RSA) = Public/Private Key. Hybrid = Asymmetrischer Key Exchange + Symmetrischer Datentransfer."
+},
+{
+    "id": 401,
+    "theme": "lf2",
+    "topic": "Speicherhardware: ECC-RAM & RAID 5 Performance (Musterklausur 4)",
+    "isBawueFocus": true,
+    "type": "open-text",
+    "question": "IHK-Prüfungsaufgabe (LF 2 - Server-Hardware):\n1. Erläutern Sie, wie sich ECC-Speichermodule (Error-Correcting Code RAM) bei 1-Bit- und 2-Bit-Speicherfehlern verhalten. (3 Punkte)\n2. Warum ist bei einem RAID-5-Verbund die Schreibgeschwindigkeit bauartbedingt geringer als die Lesegeschwindigkeit? (3 Punkte)",
+    "musterloesung": "Musterlösung:\n\n1. ECC-RAM Verhalten:\n- 1-Bit-Fehler (Single-Bit-Error): Werden durch den ECC-Algorithmus (z. B. Hamming-Code) während des laufenden Betriebs automatisch erkannt und in Echtzeit korrigiert, ohne dass das Betriebssystem abstürzt oder Daten beschädigt werden.\n- 2-Bit-Fehler (Multi-Bit-Error): Werden zuverlässig erkannt, können jedoch mathematisch nicht korrigiert werden. Um Datenkorruption zu verhindern, löst das System einen kontrollierten Stopp (Kernel Panic / Blue Screen / NMI) aus.\n\n2. RAID 5 Schreib- vs. Lesegeschwindigkeit:\n- Beim Lesen können Datenblöcke parallel von allen Platten gleichzeitig ohne Rechenaufwand gelesen werden (hoher Durchsatz).\n- Beim Schreiben entsteht der sogenannte 'Write Penalty' (Parity-Overhead): Für jeden Schreibvorgang müssen alte Daten und alte Parität gelesen, die neue Parität per XOR berechnet und anschließend neue Daten sowie neue Parität auf zwei Platten geschrieben werden (2 Lese- und 2 Schreibzugriffe pro Operation).",
+    "explanation": "ECC: 1-Bit-Fehler werden korrigiert, 2-Bit-Fehler erkannt. RAID 5 Write Penalty: XOR-Neuberechnung erfordert Read-Modify-Write."
+},
+{
+    "id": 402,
+    "theme": "lf5",
+    "topic": "Datenbanken: SQL-Troubleticket-Abfragen (Musterklausur 4)",
+    "isBawueFocus": true,
+    "type": "open-text",
+    "question": "IHK-Prüfungsaufgabe (LF 5 - Relationale Datenbanken & SQL):\nGegeben sind die beiden Tabellen eines IT-Helpdesk-Systems:\n\n- `KUNDE` (`KundenNr` [PK], `Name`, `Ort`)\n- `TICKET` (`TicketNr` [PK], `KundenNr` [FK], `Titel`, `Status`, `Erstelldatum`)\n\nFormulieren Sie die SQL-Befehle für folgende Anforderungen:\n1. Ermitteln Sie den Kundennamen, die Ticketnummer und den Titel für alle Tickets mit dem Status 'Offen'.\n2. Zählen Sie die Anzahl der offenen Tickets pro Kunde (Ausgabe: `KundenNr`, `AnzahlTickets`) und sortieren Sie absteigend nach der Anzahl.",
+    "musterloesung": "Musterlösung:\n\n1. SQL-Abfrage mit INNER JOIN:\n```sql\nSELECT KUNDE.Name, TICKET.TicketNr, TICKET.Titel\nFROM KUNDE\nINNER JOIN TICKET ON KUNDE.KundenNr = TICKET.KundenNr\nWHERE TICKET.Status = 'Offen';\n```\n\n2. SQL-Abfrage mit Aggregatfunktion GROUP BY:\n```sql\nSELECT KundenNr, COUNT(*) AS AnzahlTickets\nFROM TICKET\nWHERE Status = 'Offen'\nGROUP BY KundenNr\nORDER BY AnzahlTickets DESC;\n```",
+    "explanation": "JOIN verbindet KUNDE und TICKET über den Fremdschlüssel KundenNr. COUNT(*) mit GROUP BY aggregiert Tickets je Kunde."
+},
+{
+    "id": 403,
+    "theme": "lf3",
+    "topic": "Netzwerktechnik: Webserver-Erreichbarkeit & DynDNS / DMZ (Musterklausur 5)",
+    "isBawueFocus": true,
+    "type": "open-text",
+    "question": "IHK-Prüfungsaufgabe (LF 3 - Netzwerkarchitektur & DMZ):\nEin Unternehmen möchte einen eigenen Webserver am Firmenstandort betreiben.\n\n1. Der Firmenanschluss besitzt keine feste IP-Adresse, sondern erhält täglich eine dynamische öffentliche IP. Erläutern Sie, wie der Webserver dennoch dauerhaft unter einer festen Domain erreichbar gemacht werden kann. (3 Punkte)\n2. Der Webserver soll aus Sicherheitsgründen nicht direkt im internen Firmennetzwerk betrieben werden. Erläutern Sie das Sicherheitskonzept einer Demilitarisierten Zone (DMZ). (3 Punkte)",
+    "musterloesung": "Musterlösung:\n\n1. Dynamisches DNS (DynDNS / DDNS):\n- Der Router oder ein lokaler DynDNS-Client auf dem Server prüft regelmäßig die vom Provider zugewiesene öffentliche IP-Adresse.\n- Bei jedem IP-Wechsel sendet der Client automatisch ein verschlüsseltes Update an den DynDNS-Dienstanbieter.\n- Der DynDNS-Server aktualisiert den A-Record der Domain im DNS in Echtzeit, sodass die Domain dauerhaft auf die aktuelle öffentliche IP auflöst.\n\n2. Demilitarisierte Zone (DMZ):\n- Eine DMZ ist ein separates, logisch isoliertes Subnetz zwischen dem unsicheren Internet und dem schützenswerten internen LAN, getrennt durch Firewalls (Single- oder Dual-Homed Firewall).\n- Öffentlich erreichbare Server (Web, Mail, DNS) stehen in der DMZ. Sollte ein Server kompromittiert werden, verhindert die Firewall, dass der Angreifer direkten Zugriff auf das interne Unternehmensnetzwerk erhält.",
+    "explanation": "DynDNS aktualisiert A-Records bei IP-Wechsel. Die DMZ isoliert öffentlich zugängliche Server vom internen Firmennetzwerk."
+},
+{
+    "id": 404,
+    "theme": "lf4",
+    "topic": "Datensicherheit: Passwortspeicherung mit Hashing & Salt (Musterklausur 5)",
+    "isBawueFocus": true,
+    "type": "open-text",
+    "question": "IHK-Prüfungsaufgabe (LF 4 - Authentifizierung & Kryptographie):\nIn einer Benutzerdatenbank sollen Passwörter für ein Kundenportal sicher gespeichert werden.\n\n1. Warum dürfen Passwörter niemals im Klartext oder mit einfacher symmetrischer Verschlüsselung gespeichert werden?\n2. Erläutern Sie das Verfahren des Passwort-Hashings mit Salt (kryptographischer Zusatzwert) und Pepper.\n3. Nennen Sie zwei moderne, empfohlene Hash-Algorithmen für Passwörter.",
+    "musterloesung": "Musterlösung:\n\n1. Warum kein Klartext / keine Verschlüsselung:\n- Bei einem Datenbank-Leak (z. B. durch SQL-Injection) wären Klartext-Passwörter sofort gestohlen.\n- Bei Verschlüsselung muss der Schlüssel irgendwo gespeichert werden; wird der Schlüssel kompromittiert, sind alle Passwörter entschlüsselbar.\n\n2. Passwort-Hashing mit Salt & Pepper:\n- Kryptographische Einwegfunktion (Hash): Das Passwort wird in einen nicht umkehrbaren Hashwert fester Länge umgewandelt.\n- Salt: Eine zufällig generierte, eindeutige Zeichenkette, die vor dem Hashen an jedes Passwort angehängt und mit in der DB gespeichert wird. Verhindert den Einsatz vorgefertigter Rainbow-Tables und sorgt dafür, dass gleiche Passwörter unterschiedliche Hashes erzeugen.\n- Pepper: Ein geheimer, serverweiter Schlüssel, der im Anwendungscode/HSM (getrennt von der DB) liegt und dem Passwort vor dem Hashen hinzugefügt wird.\n\n3. Moderne Algorithmen:\n- bcrypt, Argon2 (Argon2id), PBKDF2 (mit hohen Iterationszahlen / Work-Factors).",
+    "explanation": "Passwörter gehören als gesalzener Einweg-Hash in die DB (Argon2, bcrypt). Salt verhindert Rainbow-Table-Angriffe."
+},
+{
+    "id": 405,
+    "theme": "lf4",
+    "topic": "Datenschutz: Betroffenenrechte & Datenschutzgrundsätze nach DSGVO (Musterklausur 5)",
+    "isBawueFocus": true,
+    "type": "open-text",
+    "question": "IHK-Prüfungsaufgabe (LF 4 - DSGVO Datenschutzrecht):\n1. Nennen und erläutern Sie vier Rechte von betroffenen Personen gemäß der europäischen Datenschutz-Grundverordnung (DSGVO). (4 Punkte)\n2. Unterscheiden Sie die beiden Begriffe 'Pseudonymisierung' und 'Anonymisierung' von personenbezogenen Daten. (2 Punkte)",
+    "musterloesung": "Musterlösung:\n\n1. Rechte der betroffenen Personen:\n- Recht auf Auskunft (Art. 15 DSGVO): Der Betroffene darf erfahren, welche personenbezogenen Daten über ihn zu welchem Zweck gespeichert und verarbeitet werden.\n- Recht auf Berichtigung (Art. 16 DSGVO): Unrichtige oder unvollständige Daten müssen unverzüglich korrigiert werden.\n- Recht auf Löschung / 'Recht auf Vergessenwerden' (Art. 17 DSGVO): Daten müssen gelöscht werden, wenn der Verarbeitungszweck entfällt oder die Einwilligung widerrufen wird.\n- Recht auf Datenübertragbarkeit (Art. 20 DSGVO): Betroffene können verlangen, ihre Daten in einem strukturierten, gängigen und maschinenlesbaren Format (z. B. JSON, XML, CSV) zu erhalten oder an einen anderen Anbieter zu übertragen.\n- Recht auf Widerspruch (Art. 21 DSGVO) gegen die Verarbeitung (z. B. für Direktwerbung).\n\n2. Pseudonymisierung vs. Anonymisierung:\n- Pseudonymisierung: Identifizierende Merkmale (z. B. Name) werden durch ein Pseudonym (z. B. ID 4892) ersetzt. Mit einem getrennt gespeicherten Zuordnungsschlüssel kann der Personenbezug wiederhergestellt werden (unterliegt weiterhin der DSGVO).\n- Anonymisierung: Die Daten werden irreversibel so verändert, dass kein Bezug zu einer Person mehr hergestellt werden kann (unterliegt nicht mehr der DSGVO).",
+    "explanation": "DSGVO-Rechte: Auskunft (Art. 15), Berichtigung (Art. 16), Löschung (Art. 17), Datenübertragbarkeit (Art. 20). Pseudonymisierung ist umkehrbar, Anonymisierung irreversibel."
+},
+{
+    "id": 406,
+    "theme": "lf6",
+    "topic": "Handelskalkulation: Vorwärtskalkulation vom Listeneinkaufspreis zum Brutto-Verkaufspreis",
+    "isCalculation": true,
+    "isBawueFocus": true,
+    "type": "open-text",
+    "question": "IHK-Prüfungsaufgabe (LF 6 - Vollständige Vorwärtskalkulation):\nEin IT-Fachhändler kalkuliert den Verkaufspreis für einen Highend-Arbeitsplatzrechner.\n\nKalkulationsdaten:\n- Listeneinkaufspreis (LEP): 1.200,00 EUR\n- Lieferantenrabatt: 20,0 %\n- Lieferantenskonto: 2,0 %\n- Bezugskosten (Fracht/Versicherung): 24,00 EUR\n- Handlungskostenzuschlagssatz (HKZ): 35,0 %\n- Gewinnzuschlagssatz: 15,0 %\n- Kundenskonto: 3,0 %\n- Kundenrabatt: 10,0 %\n- Umsatzsteuer: 19,0 %\n\nFühren Sie die vollständige Vorwärtskalkulation Schritt für Schritt durch und ermitteln Sie den Brutto-Listenverkaufspreis (Brutto-LVP).",
+    "musterloesung": "Musterlösung:\n\n1. Listeneinkaufspreis (LEP): 1.200,00 EUR\n- Lieferantenrabatt (20 % von 1.200 EUR): - 240,00 EUR\n= Zieleinkaufspreis (ZEP): 960,00 EUR\n- Lieferantenskonto (2 % von 960 EUR): - 19,20 EUR\n= Bareinkaufspreis (BEP): 940,80 EUR\n+ Bezugskosten: + 24,00 EUR\n= Bezugspreis (Einstandspreis): 964,80 EUR\n\n2. + Handlungskosten (35 % von 964,80 EUR): + 337,68 EUR\n= Selbstkosten: 1.302,48 EUR\n+ Gewinnzuschlag (15 % von 1.302,48 EUR): + 195,37 EUR\n= Barverkaufspreis (BVP = 97 % des ZVP): 1.497,85 EUR\n\n3. + Kundenskonto (Rechnung im Hundert: 1.497,85 / 0,97 * 0,03): + 46,33 EUR\n= Zielverkaufspreis (ZVP = 90 % des Netto-LVP): 1.544,18 EUR\n+ Kundenrabatt (Rechnung im Hundert: 1.544,18 / 0,90 * 0,10): + 171,58 EUR\n= Netto-Listenverkaufspreis (Netto-LVP = 100 %): 1.715,76 EUR\n\n4. + Umsatzsteuer (19 % von 1.715,76 EUR): + 326,00 EUR\n= Brutto-Listenverkaufspreis (Brutto-LVP): 2.041,76 EUR.",
+    "explanation": "Vorwärtskalkulation: LEP -> Rabatt -> ZEP -> Skonto -> BEP -> Bezugskosten -> Bezugspreis -> HKZ -> Selbstkosten -> Gewinn -> BVP -> Skonto (im Hundert) -> ZVP -> Rabatt (im Hundert) -> Netto-LVP -> USt -> Brutto-LVP."
+},
+{
+    "id": 407,
+    "theme": "lf6",
+    "topic": "Handelskalkulation: Rückwärtskalkulation (Maximaler Einkaufspreis)",
+    "isCalculation": true,
+    "isBawueFocus": true,
+    "type": "open-text",
+    "question": "IHK-Prüfungsaufgabe (LF 6 - Rückwärtskalkulation):\nEin Einzelhändler möchte ein Gaming-Notebook für maximal 1.499,00 EUR brutto (inkl. 19 % USt) im Laden anbieten.\n\nKalkulationsvorgaben:\n- Kundenrabatt: 10,0 %\n- Kundenskonto: 2,0 %\n- Gewinnzuschlag: 12,0 %\n- Handlungskostenzuschlag: 30,0 %\n- Bezugskosten: 15,00 EUR\n- Lieferantenskonto: 3,0 %\n- Lieferantenrabatt: 15,0 %\n\nErmitteln Sie im Wege der Rückwärtskalkulation den maximalen Listeneinkaufspreis (LEP), den der Händler beim Großhändler akzeptieren darf.",
+    "musterloesung": "Musterlösung:\n\n1. Brutto-LVP: 1.499,00 EUR\n- Umsatzsteuer (/ 1,19 * 0,19): - 239,34 EUR\n= Netto-Listenverkaufspreis: 1.259,66 EUR\n- Kundenrabatt (10 % von 1.259,66 EUR): - 125,97 EUR\n= Zielverkaufspreis: 1.133,69 EUR\n- Kundenskonto (2 % von 1.133,69 EUR): - 22,67 EUR\n= Barverkaufspreis: 1.111,02 EUR\n\n2. - Gewinn (Rechnung vom Hundert: 1.111,02 / 1,12 * 0,12): - 119,04 EUR\n= Selbstkosten (100 %): 991,98 EUR\n- Handlungskosten (Rechnung vom Hundert: 991,98 / 1,30 * 0,30): - 228,92 EUR\n= Bezugspreis (Einstandspreis): 763,06 EUR\n\n3. - Bezugskosten: - 15,00 EUR\n= Bareinkaufspreis: 748,06 EUR\n+ Lieferantenskonto (Rechnung im Hundert: 748,06 / 0,97 * 0,03): + 23,14 EUR\n= Zieleinkaufspreis: 771,20 EUR\n+ Lieferantenrabatt (Rechnung im Hundert: 771,20 / 0,85 * 0,15): + 136,09 EUR\n= Maximaler Listeneinkaufspreis (LEP): 907,29 EUR.",
+    "explanation": "Rückwärtskalkulation rechnet vom Brutto-LVP rückwärts zum maximal zulässigen LEP unter Berücksichtigung von 'im Hundert' und 'vom Hundert'."
+},
+{
+    "id": 408,
+    "theme": "lf6",
+    "topic": "Handelskalkulation: Kalkulationszuschlag, Kalkulationsfaktor & Handelsspanne",
+    "isCalculation": true,
+    "isBawueFocus": true,
+    "type": "open-text",
+    "question": "IHK-Prüfungsaufgabe (LF 6 - Kennzahlen der Handelskalkulation):\nFür einen Server liegt der Bezugspreis (Einstandspreis) bei 800,00 EUR. Der kalkulierte Netto-Listenverkaufspreis beträgt 1.280,00 EUR.\n\nBerechnen Sie folgende drei Kennzahlen:\n1. Kalkulationszuschlag (in %)\n2. Kalkulationsfaktor\n3. Handelsspanne (in %)",
+    "musterloesung": "Musterlösung:\n\n1. Kalkulationszuschlag (in %):\n- Formel: Kalkulationszuschlag = ((Netto-LVP - Bezugspreis) / Bezugspreis) * 100\n- Rechnung: ((1.280 EUR - 800 EUR) / 800 EUR) * 100 = (480 / 800) * 100 = 60,0 %\n\n2. Kalkulationsfaktor:\n- Formel: Kalkulationsfaktor = Netto-LVP / Bezugspreis (oder 1 + Kalkulationszuschlag/100)\n- Rechnung: 1.280 EUR / 800 EUR = 1,60\n\n3. Handelsspanne (in %):\n- Formel: Handelsspanne = ((Netto-LVP - Bezugspreis) / Netto-LVP) * 100\n- Rechnung: ((1.280 EUR - 800 EUR) / 1.280 EUR) * 100 = (480 / 1.280) * 100 = 37,5 %.",
+    "explanation": "Kalkulationszuschlag bezieht sich auf den Bezugspreis (480/800 = 60%). Handelsspanne bezieht sich auf den Netto-LVP (480/1280 = 37,5%). Kalkulationsfaktor = 1,60."
 }
 ];
