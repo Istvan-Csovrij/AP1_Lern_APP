@@ -1,25 +1,7 @@
 // AP1 Fragen-Datenbank
 // Enthält echte und prüfungsnahe Aufgaben basierend auf deinen Lernfeldern (LF1 - LF6), Lernzielkontrollen (LZK) und Unterrichtsmaterialien.
 
-if (typeof window !== "undefined" && typeof window.VisualDiagrams === "undefined") {
-    window.VisualDiagrams = {
-        getUseCaseDiagramSvg: function() { return ""; },
-        getClassDiagramSvg: function() { return ""; },
-        getErdDiagramSvg: function() { return ""; },
-        getEpkDiagramSvg: function() { return ""; },
-        getBpmnDiagramSvg: function() { return ""; },
-        getStruktogrammSvg: function() { return ""; },
-        getNetzplanDiagramSvg: function() { return ""; },
-        getOrganigrammStabSvg: function() { return ""; },
-        getMarktgleichgewichtSvg: function() { return ""; },
-        getKalkulationTreeSvg: function() { return ""; },
-        getRelationalErdSvg: function() { return ""; },
-        getAutoDiagramSvg: function() { return ""; }
-    };
-}
-if (typeof VisualDiagrams === "undefined") {
-    var VisualDiagrams = (typeof window !== "undefined" ? window.VisualDiagrams : null) || {};
-}
+var VisualDiagrams = (typeof window !== "undefined" && window.VisualDiagrams) ? window.VisualDiagrams : ((typeof VisualDiagrams !== "undefined") ? VisualDiagrams : {});
 
 var staticQuestions = [
     // === LERNFELD 1: UNTERNEHMEN & MARKT (lf1) ===

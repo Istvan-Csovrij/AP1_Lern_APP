@@ -670,15 +670,19 @@ var VisualDiagrams = {
     // 12. Universeller Auto-Resolver für Diagramme & Tabellen
     getAutoDiagramSvg: function(q) {
         if (!q) return null;
-        if (q.solutionDiagramSvg) return q.solutionDiagramSvg;
-        if (q.diagramSvg) return q.diagramSvg;
+        if (q.solutionDiagramSvg && typeof q.solutionDiagramSvg === "string" && q.solutionDiagramSvg.trim().length > 10) {
+            return q.solutionDiagramSvg;
+        }
+        if (q.diagramSvg && typeof q.diagramSvg === "string" && q.diagramSvg.trim().length > 10) {
+            return q.diagramSvg;
+        }
         
         const topic = (q.topic || "").toLowerCase();
         const question = (q.question || "").toLowerCase();
         const text = topic + " " + question;
         
-        // 1. ERD & Fremdschlüssel / Tabellenschema
-        if (text.includes("fremdschlüssel") || text.includes("foreign key") || text.includes("tabellenschema") || text.includes("erd") || text.includes("kardinalität") || text.includes("relationenmodell") || text.includes("datenmodell")) {
+        // 1. Relationales Tabellenschema & Fremdschlüssel
+        if (text.includes("fremdschlüssel") || text.includes("foreign key") || text.includes("tabellenschema") || text.includes("relationenmodell") || text.includes("relationales schema") || text.includes("primärschlüssel / fremdschlüssel")) {
             let entA = "Server";
             let entB = "Festplatte";
             let rel = "enthält";
@@ -697,7 +701,12 @@ var VisualDiagrams = {
             return VisualDiagrams.getRelationalErdSvg(entA, entB, rel, card, entB, "FK_" + entA + "ID", reason);
         }
         
-        // 2. Use Case
+        // 2. Chen ER-Diagramm (Konzeptionelles Datenmodell)
+        if (text.includes("erd") || text.includes("chen") || text.includes("entity-relationship") || text.includes("kardinalität") || text.includes("datenmodell")) {
+            return VisualDiagrams.getErdDiagramSvg();
+        }
+        
+        // 3. Use Case
         if (text.includes("use-case") || text.includes("use case") || text.includes("anwendungsfall") || text.includes("include") || text.includes("extend")) {
             let title = "Online-Shop Bestellsystem";
             if (text.includes("ticket") || text.includes("helpdesk")) title = "IT-Helpdesk Ticketverwaltung";
@@ -706,42 +715,42 @@ var VisualDiagrams = {
             return VisualDiagrams.getUseCaseDiagramSvg(title);
         }
         
-        // 3. Klassendiagramm
-        if (text.includes("klassendiagramm") || text.includes("komposition") || text.includes("aggregation") || text.includes("sichtbarkeit") || text.includes("vererbung") || text.includes("multiplizität")) {
+        // 4. Klassendiagramm
+        if (text.includes("klassendiagramm") || text.includes("komposition") || text.includes("aggregation") || text.includes("sichtbarkeit") || text.includes("vererbung") || text.includes("multiplizität") || text.includes("uml-klasse")) {
             return VisualDiagrams.getClassDiagramSvg();
         }
         
-        // 4. EPK
+        // 5. EPK (Ereignisgesteuerte Prozesskette)
         if (text.includes("epk") || text.includes("ereignisgesteuert") || text.includes("prozesskette")) {
             return VisualDiagrams.getEpkDiagramSvg();
         }
         
-        // 5. BPMN
-        if (text.includes("bpmn") || text.includes("gateway") || text.includes("swimlane")) {
+        // 6. BPMN 2.0
+        if (text.includes("bpmn") || text.includes("gateway") || text.includes("swimlane") || text.includes("start-event") || text.includes("end-event")) {
             return VisualDiagrams.getBpmnDiagramSvg();
         }
         
-        // 6. Netzplan
-        if (text.includes("netzplan") || text.includes("kritischer pfad") || text.includes("faz") || text.includes("gesamtpuffer") || text.includes("din 69900")) {
+        // 7. Netzplan
+        if (text.includes("netzplan") || text.includes("kritischer pfad") || text.includes("faz") || text.includes("gesamtpuffer") || text.includes("din 69900") || text.includes("vorwärtsrechnung") || text.includes("rückwärtsrechnung")) {
             return VisualDiagrams.getNetzplanDiagramSvg();
         }
         
-        // 7. Struktogramm
+        // 8. Struktogramm
         if (text.includes("struktogramm") || text.includes("nassi") || text.includes("din 66261") || text.includes("kontrollstruktur")) {
             return VisualDiagrams.getStruktogrammSvg();
         }
         
-        // 8. Organigramm
+        // 9. Organigramm
         if (text.includes("organigramm") || text.includes("stabsstelle") || text.includes("einliniensystem") || text.includes("mehrliniensystem")) {
             return VisualDiagrams.getOrganigrammStabSvg();
         }
         
-        // 9. Marktpreisbildung
+        // 10. Marktpreisbildung
         if (text.includes("marktgleichgewicht") || text.includes("gleichgewichtspreis") || text.includes("nachfrageüberhang") || text.includes("angebotsüberhang")) {
             return VisualDiagrams.getMarktgleichgewichtSvg();
         }
         
-        // 10. Handelskalkulation
+        // 11. Handelskalkulation
         if (text.includes("kalkulation") || text.includes("lep") || text.includes("zep") || text.includes("bep") || text.includes("bezugspreis") || text.includes("einstandspreis") || text.includes("selbstkosten") || text.includes("bvp") || text.includes("zvp") || text.includes("lvp") || text.includes("kalkulationszuschlag") || text.includes("handelsspanne") || text.includes("einkaufskalkulation")) {
             return VisualDiagrams.getKalkulationTreeSvg();
         }
