@@ -670,11 +670,35 @@ var VisualDiagrams = {
     // 12. Universeller Auto-Resolver für Diagramme & Tabellen
     getAutoDiagramSvg: function(q) {
         if (!q) return null;
+        // 1. Wenn die Frage bereits eine explizite grafische Musterlösung besitzt
         if (q.solutionDiagramSvg && typeof q.solutionDiagramSvg === "string" && q.solutionDiagramSvg.trim().length > 10) {
             return q.solutionDiagramSvg;
         }
-        if (q.diagramSvg && typeof q.diagramSvg === "string" && q.diagramSvg.trim().length > 10) {
+        // 2. Wenn die Frage ein Ausgangsdiagramm besitzt und als Diagramm-Aufgabe markiert ist
+        if (q.isDiagram && q.diagramSvg && typeof q.diagramSvg === "string" && q.diagramSvg.trim().length > 10) {
             return q.diagramSvg;
+        }
+        
+        // 3. Strikte Prüfung: Ist diese Frage WIRKLICH eine Modellierungs- / Diagramm-Aufgabe?
+        // Wenn nicht, darf KEIN Diagramm angezeigt werden (z. B. Übertragungszeit, USV, Mathe, WiSo, Gesetze)!
+        const isExplicitDiagramTask = q.isDiagram === true || 
+                                      q.theme === "diagrams" || 
+                                      (q.diagramType && typeof q.diagramType === "string" && q.diagramType.trim().length > 0) ||
+                                      (q.topic && (
+                                          q.topic.toLowerCase().includes("diagramm") || 
+                                          q.topic.toLowerCase().includes("uml") || 
+                                          q.topic.toLowerCase().includes("erd") || 
+                                          q.topic.toLowerCase().includes("epk") || 
+                                          q.topic.toLowerCase().includes("bpmn") || 
+                                          q.topic.toLowerCase().includes("netzplan") || 
+                                          q.topic.toLowerCase().includes("struktogramm") || 
+                                          q.topic.toLowerCase().includes("organigramm") ||
+                                          q.topic.toLowerCase().includes("modellierung") ||
+                                          q.topic.toLowerCase().includes("relationales schema")
+                                      ));
+
+        if (!isExplicitDiagramTask) {
+            return null; // Reine Rechnen-, WiSo- oder Hardware-Aufgaben erhalten niemals ein falsches Diagramm
         }
         
         const topic = (q.topic || "").toLowerCase();
@@ -682,32 +706,30 @@ var VisualDiagrams = {
         const text = topic + " " + question;
         
         // 1. Relationales Tabellenschema & Fremdschlüssel
-        if (text.includes("fremdschlüssel") || text.includes("foreign key") || text.includes("tabellenschema") || text.includes("relationenmodell") || text.includes("relationales schema") || text.includes("primärschlüssel / fremdschlüssel")) {
-            let entA = "Server";
-            let entB = "Festplatte";
-            let rel = "enthält";
+        if (text.includes("tabellenschema") || text.includes("relationenmodell") || text.includes("relationales schema") || text.includes("fremdschlüssel")) {
+            let entA = "Kunde";
+            let entB = "Bestellung";
+            let rel = "erteilt";
             let card = "1:n";
-            let reason = "Ein Server besitzt mehrere Festplatten, eine Festplatte ist in einem Server verbaut.";
+            let reason = "Ein Kunde erteilt mehrere Bestellungen.";
             
-            if (text.includes("kunde") && text.includes("bestellung")) { entA = "Kunde"; entB = "Bestellung"; rel = "erteilt"; card = "1:n"; reason = "Ein Kunde erteilt mehrere Bestellungen."; }
-            else if (text.includes("abteilung") && text.includes("mitarbeiter")) { entA = "Abteilung"; entB = "Mitarbeiter"; rel = "beschäftigt"; card = "1:n"; reason = "Eine Abteilung beschäftigt viele Mitarbeiter."; }
+            if (text.includes("abteilung") && text.includes("mitarbeiter")) { entA = "Abteilung"; entB = "Mitarbeiter"; rel = "beschäftigt"; card = "1:n"; reason = "Eine Abteilung beschäftigt viele Mitarbeiter."; }
             else if (text.includes("projekt") && text.includes("entwickler")) { entA = "Projekt"; entB = "Entwickler"; rel = "arbeitet an"; card = "n:m"; reason = "Entwickler arbeiten an Projekten (n:m)."; }
             else if (text.includes("rechnung") && text.includes("position")) { entA = "Rechnung"; entB = "Rechnungsposition"; rel = "besteht aus"; card = "1:n"; reason = "Eine Rechnung enthält mehrere Positionen."; }
             else if (text.includes("student") && text.includes("vorlesung")) { entA = "Student"; entB = "Vorlesung"; rel = "besucht"; card = "n:m"; reason = "Studenten besuchen Vorlesungen (n:m)."; }
             else if (text.includes("mitarbeiter") && text.includes("dienstwagen")) { entA = "Mitarbeiter"; entB = "Dienstwagen"; rel = "besitzt fest"; card = "1:1"; reason = "Ein Mitarbeiter besitzt maximal 1 Dienstwagen."; }
-            else if (text.includes("software") || text.includes("lizenz")) { entA = "SoftwareLizenz"; entB = "ArbeitsplatzPC"; rel = "installiert auf"; card = "n:m"; reason = "Lizenzen auf PCs (n:m)."; }
             else if (text.includes("server") && text.includes("festplatte")) { entA = "Server"; entB = "Festplatte"; rel = "enthält"; card = "1:n"; reason = "Ein Server besitzt mehrere Festplatten (1:n)."; }
             
             return VisualDiagrams.getRelationalErdSvg(entA, entB, rel, card, entB, "FK_" + entA + "ID", reason);
         }
         
         // 2. Chen ER-Diagramm (Konzeptionelles Datenmodell)
-        if (text.includes("erd") || text.includes("chen") || text.includes("entity-relationship") || text.includes("kardinalität") || text.includes("datenmodell")) {
+        if (/\b(erd|chen-diagramm|chen-notation|entity-relationship|kardinalitäten)\b/i.test(text)) {
             return VisualDiagrams.getErdDiagramSvg();
         }
         
-        // 3. Use Case
-        if (text.includes("use-case") || text.includes("use case") || text.includes("anwendungsfall") || text.includes("include") || text.includes("extend")) {
+        // 3. Use Case Diagramm
+        if (/\b(use-case|use case|anwendungsfalldiagramm|anwendungsfall-diagramm|<<include>>|<<extend>>)\b/i.test(text)) {
             let title = "Online-Shop Bestellsystem";
             if (text.includes("ticket") || text.includes("helpdesk")) title = "IT-Helpdesk Ticketverwaltung";
             if (text.includes("smart-home") || text.includes("smart home")) title = "Smart-Home Steuerung";
@@ -716,43 +738,33 @@ var VisualDiagrams = {
         }
         
         // 4. Klassendiagramm
-        if (text.includes("klassendiagramm") || text.includes("komposition") || text.includes("aggregation") || text.includes("sichtbarkeit") || text.includes("vererbung") || text.includes("multiplizität") || text.includes("uml-klasse")) {
+        if (/\b(klassendiagramm|uml-klasse|komposition|aggregation)\b/i.test(text)) {
             return VisualDiagrams.getClassDiagramSvg();
         }
         
         // 5. EPK (Ereignisgesteuerte Prozesskette)
-        if (text.includes("epk") || text.includes("ereignisgesteuert") || text.includes("prozesskette")) {
+        if (/\b(epk|ereignisgesteuerte prozesskette)\b/i.test(text)) {
             return VisualDiagrams.getEpkDiagramSvg();
         }
         
         // 6. BPMN 2.0
-        if (text.includes("bpmn") || text.includes("gateway") || text.includes("swimlane") || text.includes("start-event") || text.includes("end-event")) {
+        if (/\b(bpmn|swimlane|gateway|start-event|end-event)\b/i.test(text)) {
             return VisualDiagrams.getBpmnDiagramSvg();
         }
         
         // 7. Netzplan
-        if (text.includes("netzplan") || text.includes("kritischer pfad") || text.includes("faz") || text.includes("gesamtpuffer") || text.includes("din 69900") || text.includes("vorwärtsrechnung") || text.includes("rückwärtsrechnung")) {
+        if (/\b(netzplan|kritischer pfad|faz|gesamtpuffer|din 69900)\b/i.test(text)) {
             return VisualDiagrams.getNetzplanDiagramSvg();
         }
         
         // 8. Struktogramm
-        if (text.includes("struktogramm") || text.includes("nassi") || text.includes("din 66261") || text.includes("kontrollstruktur")) {
+        if (/\b(struktogramm|nassi-shneiderman|din 66261)\b/i.test(text)) {
             return VisualDiagrams.getStruktogrammSvg();
         }
         
         // 9. Organigramm
-        if (text.includes("organigramm") || text.includes("stabsstelle") || text.includes("einliniensystem") || text.includes("mehrliniensystem")) {
+        if (/\b(organigramm|stabsstelle|einliniensystem|mehrliniensystem)\b/i.test(text)) {
             return VisualDiagrams.getOrganigrammStabSvg();
-        }
-        
-        // 10. Marktpreisbildung
-        if (text.includes("marktgleichgewicht") || text.includes("gleichgewichtspreis") || text.includes("nachfrageüberhang") || text.includes("angebotsüberhang")) {
-            return VisualDiagrams.getMarktgleichgewichtSvg();
-        }
-        
-        // 11. Handelskalkulation
-        if (text.includes("kalkulation") || text.includes("lep") || text.includes("zep") || text.includes("bep") || text.includes("bezugspreis") || text.includes("einstandspreis") || text.includes("selbstkosten") || text.includes("bvp") || text.includes("zvp") || text.includes("lvp") || text.includes("kalkulationszuschlag") || text.includes("handelsspanne") || text.includes("einkaufskalkulation")) {
-            return VisualDiagrams.getKalkulationTreeSvg();
         }
         
         return null;

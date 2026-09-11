@@ -3804,7 +3804,7 @@ WHERE Email IS NULL OR Email = '';
             "Die Rentabilität bleibt unverändert.",
             "Die Wirtschaftlichkeit bleibt genau 1,0."
         ],
-        correctAnswer: "Die Wirtschaftlichkeit wird kleiner.",
+        correctAnswer: 1,
         explanation: "Wirtschaftlichkeit = Ertrag / Aufwand. Wenn der Ertrag (Zähler) sinkt und der Aufwand (Nenner) gleich bleibt, wird der resultierende Quotient (die Wirtschaftlichkeit) kleiner.",
         points: 2
     },
@@ -3820,7 +3820,7 @@ WHERE Email IS NULL OR Email = '';
             "Gesetzliche Pflegeversicherung (GPV)",
             "Arbeitslosenversicherung (ALV)"
         ],
-        correctAnswer: "Gesetzliche Unfallversicherung (Berufsgenossenschaft)",
+        correctAnswer: 2,
         explanation: "Die gesetzliche Unfallversicherung (abgewickelt über die Berufsgenossenschaften wie z. B. VBG für IT-Berufe) ist die einzige Sozialversicherung, deren Beiträge zu 100 % vom Arbeitgeber gezahlt werden.",
         points: 2
     },
@@ -3836,7 +3836,7 @@ WHERE Email IS NULL OR Email = '';
             "Zielantagonismus (sich ausschließende Ziele)",
             "Zielsubstanz (identische Ziele)"
         ],
-        correctAnswer: "Zielharmonie (komplementäre Ziele)",
+        correctAnswer: 1,
         explanation: "Bei komplementären Zielen (Zielharmonie) unterstützt das Erreichen des einen Ziels gleichzeitig das Erreichen des anderen Ziels.",
         points: 2
     }

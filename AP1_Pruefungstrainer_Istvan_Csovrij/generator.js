@@ -500,7 +500,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                 theme: "lf5",
                 type: "open-text",
                 question: `Prüfungsaufgabe Web-Entwicklung (LF 17): ${item.q}`,
-                musterloesung: item.options[item.answer],
+                musterloesung: `Richtige Antwort: ${item.options[item.answer]}\n\nErklärung / Hintergrund: ${item.exp}`,
                 explanation: item.exp
             });
         } else {
