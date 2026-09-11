@@ -1027,7 +1027,7 @@ function formatQuestionText(text) {
     formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
     
     // Inline code markdown: `code` -> <code>code</code>
-    formatted = formatted.replace(/`([^`]+)`/g, '<code style="background: #f1f5f9; padding: 0.15rem 0.35rem; border-radius: 4px; font-size: 0.9em; border: 1px solid #e2e8f0; font-family: monospace;">$1</code>');
+    formatted = formatted.replace(/\x60([^\x60]+)\x60/g, '<code style="background: #f1f5f9; padding: 0.15rem 0.35rem; border-radius: 4px; font-size: 0.9em; border: 1px solid #e2e8f0; font-family: monospace;">$1</code>');
     
     // Convert newlines to <br>
     formatted = formatted.replace(/\n/g, '<br>');

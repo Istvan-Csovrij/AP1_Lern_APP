@@ -2,6 +2,26 @@
 // Erzeugt über 1.250 zufällige Prüfungsaufgaben aus allen relevanten Bereichen
 // Integriert eine 50%-Regelung für offene Baden-Württemberg-Aufgaben (open-text)
 
+if (typeof window !== "undefined" && typeof window.VisualDiagrams === "undefined") {
+    window.VisualDiagrams = {
+        getUseCaseDiagramSvg: function() { return ""; },
+        getClassDiagramSvg: function() { return ""; },
+        getErdDiagramSvg: function() { return ""; },
+        getEpkDiagramSvg: function() { return ""; },
+        getBpmnDiagramSvg: function() { return ""; },
+        getStruktogrammSvg: function() { return ""; },
+        getNetzplanDiagramSvg: function() { return ""; },
+        getOrganigrammStabSvg: function() { return ""; },
+        getMarktgleichgewichtSvg: function() { return ""; },
+        getKalkulationTreeSvg: function() { return ""; },
+        getRelationalErdSvg: function() { return ""; },
+        getAutoDiagramSvg: function() { return ""; }
+    };
+}
+if (typeof VisualDiagrams === "undefined") {
+    var VisualDiagrams = (typeof window !== "undefined" ? window.VisualDiagrams : null) || {};
+}
+
 function generateDynamicQuestions(typeMode = "mix") {
     const dynamicQuestions = [];
     let currentId = 1000;

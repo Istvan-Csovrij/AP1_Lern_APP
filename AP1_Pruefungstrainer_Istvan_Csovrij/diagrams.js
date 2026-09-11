@@ -7,7 +7,7 @@ function escapeDiagHtml(text) {
     return String(text).replace(/[&<>"']/g, m => map[m]);
 }
 
-const VisualDiagrams = {
+var VisualDiagrams = {
     // 1. UML Anwendungsfalldiagramm (Use-Case-Diagramm)
     getUseCaseDiagramSvg: function(title = "Online-Shop Bestellsystem") {
         return `
