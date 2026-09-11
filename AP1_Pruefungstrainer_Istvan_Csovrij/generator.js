@@ -2075,5 +2075,250 @@ function generateDynamicQuestions(typeMode = "mix") {
         }
     }
 
+    
+    // ==========================================
+    // C.13 BUCHUNGSSÄTZE & FINANZBUCHHALTUNG (Winter Möbelbau & IT-Cases)
+    // ==========================================
+    for (let i = 0; i < 20; i++) {
+        const netValue = (Math.floor(Math.random() * 40) + 5) * 100; // 500 bis 4500 €
+        const ust = Number((netValue * 0.19).toFixed(2));
+        const grossValue = Number((netValue + ust).toFixed(2));
+        
+        const bCase = Math.floor(Math.random() * 4);
+        const isOpen = shouldBeOpenText();
+
+        if (bCase === 0) {
+            // Rohstoffeinkauf auf Ziel (AWR + VORST an VE)
+            if (isOpen) {
+                dynamicQuestions.push({
+                    id: currentId++,
+                    theme: "lf6",
+                    topic: "Buchungssätze: Einkauf auf Ziel",
+                    isCalculation: true,
+                    isBawueFocus: true,
+                    type: "open-text",
+                    question: `Prüfungsaufgabe Buchführung / WiSo: Unser Unternehmen kauft Rohstoffe / Fertigungsmaterial für ${netValue.toLocaleString('de-DE')},00 € netto zuzüglich 19 % Vorsteuer auf Ziel.\n\nBilde den vollständigen Buchungssatz mit Kontonummern (6000 AWR, 2600 VORST, 4400 VE) und Beträgen.`,
+                    musterloesung: `Buchungssatz:\n6000 AWR ${netValue.toLocaleString('de-DE')},00 €\n2600 VORST ${ust.toLocaleString('de-DE')} €\nan 4400 VE ${grossValue.toLocaleString('de-DE')} €`,
+                    explanation: `Aufwand und Vorsteuer im Soll, Verbindlichkeiten im Haben.`
+                });
+            } else {
+                dynamicQuestions.push({
+                    id: currentId++,
+                    theme: "lf6",
+                    topic: "Buchungssätze: Einkauf auf Ziel",
+                    isCalculation: true,
+                    isBawueFocus: true,
+                    type: "multiple-choice",
+                    question: `Einkauf von Rohstoffen für ${netValue.toLocaleString('de-DE')},00 € netto (19 % Vorsteuer: ${ust.toLocaleString('de-DE')} €) auf Ziel. Welcher Buchungssatz ist korrekt?`,
+                    options: [
+                        `6000 AWR ${netValue.toLocaleString('de-DE')},00 € und 2600 VORST ${ust.toLocaleString('de-DE')} € an 4400 VE ${grossValue.toLocaleString('de-DE')} €`,
+                        `4400 VE ${grossValue.toLocaleString('de-DE')} € an 6000 AWR ${netValue.toLocaleString('de-DE')},00 € und 2600 VORST ${ust.toLocaleString('de-DE')} €`,
+                        `6000 AWR ${grossValue.toLocaleString('de-DE')} € an 2800 BK ${grossValue.toLocaleString('de-DE')} €`,
+                        `2600 VORST ${ust.toLocaleString('de-DE')} € an 4400 VE ${grossValue.toLocaleString('de-DE')} €`
+                    ],
+                    correctAnswer: 0,
+                    explanation: `6000 AWR (netto) + 2600 VORST (19 %) an 4400 VE (brutto).`
+                });
+            }
+        } else if (bCase === 1) {
+            // Ausgleich von Verbindlichkeiten per Bank
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "lf6",
+                topic: "Buchungssätze: Lieferantenverbindlichkeiten begleichen",
+                isCalculation: true,
+                isBawueFocus: true,
+                type: "multiple-choice",
+                question: `Wir begleichen eine noch offene Lieferantenrechnung über ${grossValue.toLocaleString('de-DE')} € per Banküberweisung. Wie lautet der Buchungssatz?`,
+                options: [
+                    `4400 VE an 2800 BK ${grossValue.toLocaleString('de-DE')} €`,
+                    `2800 BK an 4400 VE ${grossValue.toLocaleString('de-DE')} €`,
+                    `4400 VE an 2400 FO ${grossValue.toLocaleString('de-DE')} €`,
+                    `6000 AWR an 2800 BK ${grossValue.toLocaleString('de-DE')} €`
+                ],
+                correctAnswer: 0,
+                explanation: `Verbindlichkeiten (4400 VE) nehmen im Soll ab, Bankkonto (2800 BK) nimmt im Haben ab (Passiv-Aktiv-Minderung).`
+            });
+        } else if (bCase === 2) {
+            // Verkauf von BGA / Sachanlagen mit Umsatzsteuer
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "lf6",
+                topic: "Buchungssätze: Anlagenverkauf mit USt",
+                isCalculation: true,
+                isBawueFocus: true,
+                type: "multiple-choice",
+                question: `Verkauf einer gebrauchten Büroeinrichtung/BGA für ${netValue.toLocaleString('de-DE')},00 € netto (+ 19 % USt: ${ust.toLocaleString('de-DE')} €) per Banküberweisung. Wie lautet der Buchungssatz?`,
+                options: [
+                    `2800 BK ${grossValue.toLocaleString('de-DE')} € an 0870 BGA ${netValue.toLocaleString('de-DE')},00 € und 4800 UST ${ust.toLocaleString('de-DE')} €`,
+                    `0870 BGA ${netValue.toLocaleString('de-DE')},00 € und 4800 UST ${ust.toLocaleString('de-DE')} € an 2800 BK ${grossValue.toLocaleString('de-DE')} €`,
+                    `2800 BK ${grossValue.toLocaleString('de-DE')} € an 5000 UEFE ${grossValue.toLocaleString('de-DE')} €`,
+                    `2400 FO an 0870 BGA ${grossValue.toLocaleString('de-DE')} €`
+                ],
+                correctAnswer: 0,
+                explanation: `Bank im Soll mit Bruttobetrag, BGA im Haben mit Nettobetrag, Umsatzsteuer 4800 UST im Haben.`
+            });
+        } else {
+            // Forderungsausgleich Kunde an Bank
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "lf6",
+                topic: "Buchungssätze: Kundenzahlungseingang",
+                isCalculation: true,
+                isBawueFocus: true,
+                type: "multiple-choice",
+                question: `Ein Kunde überweist den fälligen Rechnungsbetrag von ${grossValue.toLocaleString('de-DE')} € auf unser Bankkonto. Wie lautet der Buchungssatz?`,
+                options: [
+                    `2800 BK an 2400 FO ${grossValue.toLocaleString('de-DE')} €`,
+                    `2400 FO an 2800 BK ${grossValue.toLocaleString('de-DE')} €`,
+                    `2800 BK an 5000 UEFE ${grossValue.toLocaleString('de-DE')} €`,
+                    `4400 VE an 2800 BK ${grossValue.toLocaleString('de-DE')} €`
+                ],
+                correctAnswer: 0,
+                explanation: `Bank (2800 BK) nimmt im Soll zu, Forderungen (2400 FO) nehmen im Haben ab (Aktivtausch).`
+            });
+        }
+    }
+
+    // ==========================================
+    // C.14 MATHEMATIK: DREISATZ & LINEARE GLEICHUNGEN
+    // ==========================================
+    for (let i = 0; i < 15; i++) {
+        // Lineare Gleichung: a*x + b = c*x - d
+        const a = Math.floor(Math.random() * 4) + 2; // 2 bis 5
+        const c = a + Math.floor(Math.random() * 5) + 3; // 5 bis 12 (c > a)
+        const xVal = Math.floor(Math.random() * 20) + 5; // Ganzzahliges x von 5 bis 24
+        const b = Math.floor(Math.random() * 30) + 10;
+        const d = (c - a) * xVal - b;
+
+        const isOpen = shouldBeOpenText();
+
+        if (isOpen) {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "calculations",
+                topic: "Mathematik: Lineare Gleichung lösen",
+                isCalculation: true,
+                isBawueFocus: true,
+                type: "open-text",
+                question: `Mathematik für IT-Berufe: Löse die folgende Gleichung schrittweise nach x auf:\n${a}x + ${b} = ${c}x - ${d}`,
+                musterloesung: `Rechenweg:\n1. - ${a}x auf beiden Seiten: ${b} = ${c - a}x - ${d}\n2. + ${d} auf beiden Seiten: ${b + d} = ${c - a}x\n3. Durch ${c - a} teilen: x = ${b + d} / ${c - a} = ${xVal}\nErgebnis: x = ${xVal}`,
+                explanation: `Äquivalenzumformung: Variablen auf eine Seite, Zahlen auf die andere Seite bringen und teilen.`
+            });
+        } else {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "calculations",
+                topic: "Mathematik: Lineare Gleichung lösen",
+                isCalculation: true,
+                isBawueFocus: true,
+                type: "multiple-choice",
+                question: `Löse die Gleichung nach x auf:\n${a}x + ${b} = ${c}x - ${d}`,
+                options: [
+                    `x = ${xVal}`,
+                    `x = ${xVal + 3}`,
+                    `x = ${Math.max(1, xVal - 4)}`,
+                    `x = ${(xVal * 2)}`
+                ],
+                correctAnswer: 0,
+                explanation: `${a}x + ${b} = ${c}x - ${d} -> ${b + d} = ${c - a}x -> x = ${b + d} / ${c - a} = ${xVal}.`
+            });
+        }
+    }
+
+    // ==========================================
+    // C.15 ZAHLENSYSTEME: HEXADEZIMAL <-> BINÄR (Nibble-Verfahren)
+    // ==========================================
+    const hexDigits = ['0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'];
+    const hexToBinMap = {
+        '0': '0000', '1': '0001', '2': '0010', '3': '0011',
+        '4': '0100', '5': '0101', '6': '0110', '7': '0111',
+        '8': '1000', '9': '1001', 'A': '1010', 'B': '1011',
+        'C': '1100', 'D': '1101', 'E': '1110', 'F': '1111'
+    };
+
+    for (let i = 0; i < 15; i++) {
+        const d1 = hexDigits[Math.floor(Math.random() * 15) + 1]; // 1-F
+        const d2 = hexDigits[Math.floor(Math.random() * 16)];
+        const d3 = hexDigits[Math.floor(Math.random() * 16)];
+        const d4 = hexDigits[Math.floor(Math.random() * 16)];
+        const hexStr = `${d1}${d2}${d3}${d4}`;
+        const binCorrect = `${hexToBinMap[d1]} ${hexToBinMap[d2]} ${hexToBinMap[d3]} ${hexToBinMap[d4]}`;
+        
+        // Wrong options with bit flips
+        const binWrong1 = `${hexToBinMap[d1]} ${hexToBinMap[d3]} ${hexToBinMap[d2]} ${hexToBinMap[d4]}`;
+        const binWrong2 = `${hexToBinMap[d2]} ${hexToBinMap[d1]} ${hexToBinMap[d4]} ${hexToBinMap[d3]}`;
+        const binWrong3 = `1111 0000 ${hexToBinMap[d3]} ${hexToBinMap[d4]}`;
+
+        dynamicQuestions.push({
+            id: currentId++,
+            theme: "lf2",
+            topic: "Zahlensysteme: Hexadezimal zu Binär",
+            isCalculation: true,
+            isBawueFocus: true,
+            type: "multiple-choice",
+            question: `Wandle die Hexadezimalzahl ${hexStr} (Basis 16) in das 16-Bit-Binärsystem um (4er-Nibbles):`,
+            options: [
+                `${binCorrect}`,
+                `${binWrong1}`,
+                `${binWrong2}`,
+                `${binWrong3}`
+            ],
+            correctAnswer: 0,
+            explanation: `Nibble-Umwandlung von ${hexStr}:\n${d1} = ${hexToBinMap[d1]}, ${d2} = ${hexToBinMap[d2]}, ${d3} = ${hexToBinMap[d3]}, ${d4} = ${hexToBinMap[d4]}\nErgebnis: ${binCorrect}_2.`
+        });
+    }
+
+    // ==========================================
+    // C.16 EINKAUFSKALKULATION (Winter Möbelbau mit Rabatt, Skonto & Bezugskosten)
+    // ==========================================
+    for (let i = 0; i < 15; i++) {
+        const stueck = (Math.floor(Math.random() * 10) + 1) * 100; // 100 bis 1000 Stück
+        const stueckPreis = (Math.floor(Math.random() * 30) + 5); // 5 bis 35 €
+        const lep = stueck * stueckPreis;
+        const rabattP = [10, 20, 25, 30][Math.floor(Math.random() * 4)];
+        const skontoP = [1, 2, 3][Math.floor(Math.random() * 3)];
+        
+        const rabattBetrag = (lep * rabattP) / 100;
+        const zep = lep - rabattBetrag;
+        const skontoBetrag = (zep * skontoP) / 100;
+        const bep = zep - skontoBetrag;
+        const einstandspreis = bep; // frei Haus
+
+        const isOpen = shouldBeOpenText();
+
+        if (isOpen) {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "calculations",
+                topic: "Einkaufskalkulation: Einstandspreis",
+                isCalculation: true,
+                isBawueFocus: true,
+                type: "open-text",
+                question: `Prüfungsaufgabe Einkaufskalkulation (Winter Möbelbau):\nWir bestellen ${stueck} Bauteile zu einem Listenpreis von ${stueckPreis.toFixed(2)} € pro Stück.\nKonditionen des Lieferanten: ${rabattP} % Rabatt, ${skontoP} % Skonto, Lieferung frei Haus.\n\nBerechne schrittweise:\n1. Listeneinkaufspreis (LEP)\n2. Zieleinkaufspreis (ZEP)\n3. Bareinkaufspreis (BEP)\n4. Einstandspreis / Bezugspreis`,
+                musterloesung: `Kalkulationsschema:\n1. LEP: ${stueck} Stück * ${stueckPreis.toFixed(2)} € = ${lep.toLocaleString('de-DE')},00 € (100 %)\n- ${rabattP} % Rabatt: -${rabattBetrag.toLocaleString('de-DE')} €\n= 2. ZEP: ${zep.toLocaleString('de-DE')} € (100 %)\n- ${skontoP} % Skonto: -${skontoBetrag.toLocaleString('de-DE')} €\n= 3. BEP: ${bep.toLocaleString('de-DE')} €\n+ 0,00 € Bezugskosten (frei Haus)\n= 4. Einstandspreis: ${einstandspreis.toLocaleString('de-DE')} €`,
+                explanation: `Einkaufskalkulation: LEP - Rabatt = ZEP; ZEP - Skonto = BEP; BEP + Bezugskosten = Einstandspreis.`
+            });
+        } else {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "calculations",
+                topic: "Einkaufskalkulation: Einstandspreis",
+                isCalculation: true,
+                isBawueFocus: true,
+                type: "multiple-choice",
+                question: `Bestellung von ${stueck} Stück à ${stueckPreis.toFixed(2)} € (LEP: ${lep.toLocaleString('de-DE')} €). Konditionen: ${rabattP} % Rabatt, ${skontoP} % Skonto, Lieferung frei Haus. Wie hoch ist der Einstandspreis?`,
+                options: [
+                    `${einstandspreis.toLocaleString('de-DE')} €`,
+                    `${(lep - rabattBetrag).toLocaleString('de-DE')} € (ohne Skonto)`,
+                    `${(lep * (1 - (rabattP + skontoP)/100)).toLocaleString('de-DE')} € (falscher Prozentabzug)`,
+                    `${(einstandspreis * 1.19).toLocaleString('de-DE')} € (inkl. USt)`
+                ],
+                correctAnswer: 0,
+                explanation: `LEP ${lep} € - ${rabattP}% (${rabattBetrag} €) = ZEP ${zep} €; ZEP ${zep} € - ${skontoP}% (${skontoBetrag} €) = ${einstandspreis.toLocaleString('de-DE')} €.`
+            });
+        }
+    }
+
     return dynamicQuestions;
 }

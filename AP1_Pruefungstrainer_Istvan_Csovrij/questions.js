@@ -5968,6 +5968,351 @@ WHERE Email IS NULL OR Email = '';
         "question": "IHK-Prüfungsaufgabe (BaWü-Fokus): Bei der ConSystem GmbH wird für einen Kunden ein Arbeitsplatz-Bildschirm kalkuliert.\n\nGegebene Daten:\n- Listeneinkaufspreis: 200,00 €\n- Lieferantenrabatt: 10 %\n- Lieferantenskonto: 2 %\n- Bezugskosten: 2,60 €\n- Handlungskostenzuschlag: 25 %\n- Gewinnzuschlag: 8,87 %\n- Kundenskonto: 3 % (im Hundert)\n- Vertreterprovision: 10 % (im Hundert)\n- Kundenrabatt: 20 % (im Hundert)\n\nAufgaben:\n1. Führen Sie die Handelskalkulation schrittweise durch und ermitteln Sie:\n   a) Bezugspreis (Einstandspreis)\n   b) Selbstkosten\n   c) Barverkaufspreis (BVP)\n   d) Zielverkaufspreis (ZVP)\n   e) Listenverkaufspreis netto (LVP)\n2. Berechnen Sie den Kalkulationszuschlag in Prozent.\n3. Berechnen Sie die Handelsspanne in Prozent.\n4. Erläutern Sie, warum für den Auftrag (Lieferung + Montage/Installation) ein Werklieferungsvertrag abgeschlossen wird.",
         "musterloesung": "Musterlösung:\n\n1. Handelskalkulation:\n- Listeneinkaufspreis: 200,00 €\n- 10 % Lieferantenrabatt: -20,00 €\n= Zieleinkaufspreis: 180,00 €\n- 2 % Lieferantenskonto: -3,60 €\n= Bareinkaufspreis: 176,40 €\n+ Bezugskosten: +2,60 €\n= a) Bezugs-/Einstandspreis: 179,00 €\n\n+ 25 % Handlungskosten (25 % von 179,00 €): +44,75 €\n= b) Selbstkosten: 223,75 €\n\n+ 8,87 % Gewinnzuschlag (8,87 % von 223,75 €): +19,85 €\n= c) Barverkaufspreis (BVP): 243,60 €\n\n+ 3 % Kundenskonto & 10 % Provision (13 % im Hundert -> 243,60 € / 0,87):\n  - Kundenskonto: +8,40 €\n  - Vertreterprovision: +28,00 €\n= d) Zielverkaufspreis (ZVP): 280,00 €\n\n+ 20 % Kundenrabatt (20 % im Hundert -> 280,00 € / 0,80):\n  - Kundenrabatt: +70,00 €\n= e) Listenverkaufspreis netto (LVP): 350,00 €\n\n2. Kalkulationszuschlag:\nFormel: [(LVP - Bezugspreis) / Bezugspreis] * 100\nRechnung: [(350,00 € - 179,00 €) / 179,00 €] * 100 = (171,00 € / 179,00 €) * 100 = 95,53 %.\n\n3. Handelsspanne:\nFormel: [(LVP - Bezugspreis) / LVP] * 100\nRechnung: [(350,00 € - 179,00 €) / 350,00 €] * 100 = (171,00 € / 350,00 €) * 100 = 48,86 %.\n\n4. Vertragsart:\nEs wird ein Werklieferungsvertrag (§ 650 BGB) abgeschlossen. Die Lieferung der Hardware ist kaufvertraglich (§ 433 BGB), der Aufbau, die Verkabelung, Software-Installation und Übergabe ist werkvertraglich (§ 631 BGB), da ein betriebsbereiter Arbeitsplatz (Erfolg) geschuldet wird.",
         "explanation": "Vollständige Handelskalkulation mit Vorwärtskalkulation, Vertreterprovision, Kalkulationszuschlag, Handelsspanne und Vertragsarten."
+},
+    {
+        "id": 333,
+        "theme": "lf6",
+        "topic": "Buchungssätze: Einkauf von Rohstoffen / Material auf Ziel",
+        "isCalculation": true,
+        "isBawueFocus": true,
+        "type": "multiple-choice",
+        "question": "Die Firma Winter Möbelbau kauft Rohstoffe (AWR) für 6.300,00 € netto zuzüglich 19 % Vorsteuer (1.197,00 €) auf Ziel (Rechnungsbetrag 7.497,00 €). Wie lautet der korrekte Buchungssatz?",
+        "options": [
+                "6000 AWR 6.300,00 € und 2600 VORST 1.197,00 € an 4400 VE 7.497,00 €",
+                "4400 VE 7.497,00 € an 6000 AWR 6.300,00 € und 2600 VORST 1.197,00 €",
+                "6000 AWR 7.497,00 € an 2800 BK 7.497,00 €",
+                "6020 AWH 6.300,00 € an 4400 VE 6.300,00 €"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Einkauf auf Ziel (Rechnung):\n- Aufwandskonto im Soll: 6000 AWR (Aufwendungen für Rohstoffe) 6.300,00 €\n- Steuerkonto im Soll: 2600 VORST (Vorsteuer 19 %) 1.197,00 €\n- Passives Bestandskonto im Haben: an 4400 VE (Verbindlichkeiten aus LuL) 7.497,00 €."
+},
+    {
+        "id": 334,
+        "theme": "lf6",
+        "topic": "Buchungssätze: Ausgleich einer Eingangsrechnung per Bank",
+        "isCalculation": true,
+        "isBawueFocus": true,
+        "type": "multiple-choice",
+        "question": "Eine offene Eingangsrechnung für Verbindlichkeiten gegenüber Lieferanten in Höhe von 10.281,60 € wird vollständig per Online-Banküberweisung beglichen. Wie lautet der Buchungssatz?",
+        "options": [
+                "4400 VE 10.281,60 € an 2800 BK 10.281,60 €",
+                "2800 BK 10.281,60 € an 4400 VE 10.281,60 €",
+                "4400 VE 10.281,60 € an 2400 FO 10.281,60 €",
+                "6000 AWR 10.281,60 € an 2800 BK 10.281,60 €"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Ausgleich von Lieferantenverbindlichkeiten per Bank:\n- Das passive Bestandskonto Verbindlichkeiten (4400 VE) nimmt im Soll ab.\n- Das aktive Bestandskonto Bank (2800 BK) nimmt im Haben ab.\nBuchungssatz: 4400 VE an 2800 BK 10.281,60 €."
+},
+    {
+        "id": 335,
+        "theme": "lf6",
+        "topic": "Buchungssätze: Verkauf von Sachanlagen mit Umsatzsteuer",
+        "isCalculation": true,
+        "isBawueFocus": true,
+        "type": "multiple-choice",
+        "question": "Ein gebrauchter Firmentransporter wird zum Netto-Restwert von 4.774,00 € zuzüglich 19 % Umsatzsteuer (907,06 €) verkauft. Der Gesamtbetrag von 5.681,06 € geht sofort per Banküberweisung/Lastschrift ein. Wie lautet der Buchungssatz?",
+        "options": [
+                "2800 BK 5.681,06 € an 0840 FP 4.774,00 € und 4800 UST 907,06 €",
+                "0840 FP 4.774,00 € und 4800 UST 907,06 € an 2800 BK 5.681,06 €",
+                "2800 BK 5.681,06 € an 5000 UEFE 5.681,06 €",
+                "2400 FO 4.774,00 € an 0840 FP 4.774,00 €"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Verkauf von Anlagevermögen (Fuhrpark):\n- Bank (2800 BK) steigt im Soll um den Bruttobetrag (5.681,06 €).\n- Fuhrpark (0840 FP) sinkt im Haben um den Nettobetrag (4.774,00 €).\n- Umsatzsteuer (4800 UST) steigt im Haben um 907,06 €.\nBuchungssatz: 2800 BK 5.681,06 € an 0840 FP 4.774,00 € und 4800 UST 907,06 €."
+},
+    {
+        "id": 336,
+        "theme": "lf6",
+        "topic": "Buchungssätze: Forderungsausgleich durch Kunden",
+        "isCalculation": true,
+        "isBawueFocus": true,
+        "type": "multiple-choice",
+        "question": "Ein Kunde überweist den Rechnungsbetrag für eine gelieferte Ware in Höhe von 9.793,70 € auf das Geschäftskonto der Firma. Wie lautet der Buchungssatz?",
+        "options": [
+                "2800 BK 9.793,70 € an 2400 FO 9.793,70 €",
+                "2400 FO 9.793,70 € an 2800 BK 9.793,70 €",
+                "2800 BK 9.793,70 € an 5000 UEFE 9.793,70 €",
+                "4400 VE 9.793,70 € an 2800 BK 9.793,70 €"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Zahlungseingang eines Kunden:\n- Bankkonto (2800 BK) mehrt sich im Soll (+ 9.793,70 €).\n- Forderungen aus LuL (2400 FO) mindern sich im Haben (- 9.793,70 €).\nBuchungssatz: 2800 BK an 2400 FO 9.793,70 € (Aktivtausch)."
+},
+    {
+        "id": 337,
+        "theme": "calculations",
+        "topic": "Mathematik: Lineare Gleichung mit Klammern lösen",
+        "isCalculation": true,
+        "isBawueFocus": true,
+        "type": "multiple-choice",
+        "question": "Löse die folgende lineare Gleichung nach x auf:\n(40x - 4) / 4 = (40 - 80x) * 2\n\nWelcher Wert für x ist korrekt?",
+        "options": [
+                "x = 0,48",
+                "x = 1,50",
+                "x = 40,00",
+                "x = 17,00"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Rechenweg:\n1. Linke Seite durch 4 kürzen: (40x - 4) / 4 = 10x - 1\n2. Rechte Seite ausmultiplizieren: (40 - 80x) * 2 = 80 - 160x\n3. Gleichung aufstellen: 10x - 1 = 80 - 160x\n4. Äquivalenzumformung: + 160x auf beiden Seiten -> 170x - 1 = 80\n5. + 1 auf beiden Seiten -> 170x = 81\n6. Durch 170 teilen: x = 81 / 170 ≈ 0,47647... gerundet x ≈ 0,48 (in Originalaufgabe: x = 0,48)."
+},
+    {
+        "id": 338,
+        "theme": "calculations",
+        "topic": "Mathematik: Lineare Gleichung lösen",
+        "isCalculation": true,
+        "isBawueFocus": true,
+        "type": "multiple-choice",
+        "question": "Löse folgende Gleichung nach x auf:\n2x + 10 = 8x - 92\n\nWelcher Wert für x ist korrekt?",
+        "options": [
+                "x = 17",
+                "x = 15",
+                "x = 12",
+                "x = 24"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Rechenweg:\n2x + 10 = 8x - 92\n- 2x auf beiden Seiten: 10 = 6x - 92\n+ 92 auf beiden Seiten: 102 = 6x\nDurch 6 teilen: x = 102 / 6 = 17."
+},
+    {
+        "id": 339,
+        "theme": "calculations",
+        "topic": "Mathematik: Dreisatz proportional",
+        "isCalculation": true,
+        "isBawueFocus": true,
+        "type": "multiple-choice",
+        "question": "Eine Serverfarm benötigt für 6 identische Blade-Server unter Volllast 300 W Leistungsaufnahme. Wie viel Watt verbrauchen 4 dieser Blade-Server bei gleicher Auslastung (proportionaler Dreisatz)?",
+        "options": [
+                "200 W (300 W / 6 * 4 = 200 W)",
+                "250 W",
+                "150 W",
+                "180 W"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Dreisatz in drei Schritten:\n1. Schritt: 6 Server = 300 W\n2. Schritt (auf 1 Einheit): 300 W / 6 = 50 W pro Server\n3. Schritt (auf Zielmenge 4): 50 W * 4 = 200 W."
+},
+    {
+        "id": 340,
+        "theme": "lf2",
+        "topic": "Zahlensysteme: Hexadezimal zu Binär (Nibble-Verfahren)",
+        "isCalculation": true,
+        "isBawueFocus": true,
+        "type": "multiple-choice",
+        "question": "Wandle die Hexadezimalzahl ACDC (Basis 16) in eine 16-Bit-Binärzahl um:\n(Hinweis: A=1010, C=1100, D=1101)",
+        "options": [
+                "1010 1100 1101 1100",
+                "1111 0001 0001 0010",
+                "1010 1110 0000 0000",
+                "1001 1000 0111 0110"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Jede Hex-Ziffer wird als 4-Bit-Nibble dargestellt:\n- A (10) = 1010\n- C (12) = 1100\n- D (13) = 1101\n- C (12) = 1100\nZusammen: 1010 1100 1101 1100_2."
+},
+    {
+        "id": 341,
+        "theme": "lf2",
+        "topic": "Zahlensysteme: Hexadezimal zu Binär (F112_16)",
+        "isCalculation": true,
+        "isBawueFocus": true,
+        "type": "multiple-choice",
+        "question": "Wie lautet die Binärdarstellung der Hexadezimalzahl F112 (16)?",
+        "options": [
+                "1111 0001 0001 0010",
+                "1010 1100 1101 1100",
+                "1111 1111 0001 0010",
+                "1110 0001 0001 0001"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Nibble-Zerlegung:\n- F (15) = 1111\n- 1 (1)  = 0001\n- 1 (1)  = 0001\n- 2 (2)  = 0010\nErgebnis: 1111 0001 0001 0010_2."
+},
+    {
+        "id": 342,
+        "theme": "lf2",
+        "topic": "Zahlensysteme: Vor- und Nachteile des Dualsystems",
+        "isBawueFocus": true,
+        "type": "multiple-choice",
+        "question": "Welche Aussage beschreibt die technischen Vor- und Nachteile des Dualsystems (Binärsystems) in Computersystemen zutreffend?",
+        "options": [
+                "Vorteil: Einfache technische Realisierbarkeit von Schaltungen (2 Zustände: Strom an/aus bzw. 1/0 Bit) und hohe Rechengeschwindigkeit. Nachteil: Lange Ziffernfolgen und schwierige Lesbarkeit für Menschen.",
+                "Vorteil: Extrem kurze Zahlenfolgen für Menschen. Nachteil: Schwer in elektronischen Schaltungen abbildbar.",
+                "Vorteil: Keine Rundungsfehler bei Kommazahlen. Nachteil: Langsame Rechengeschwindigkeit in ALUs.",
+                "Vorteil: Unterstützt direkt ASCII-Zeichen ohne Codierung. Nachteil: Benötigt mehr Strom als das Dezimalsystem."
+        ],
+        "correctAnswer": 0,
+        "explanation": "Das Dualsystem basiert auf 2 Zuständen (High/Low, Spannung an/aus), was physikalisch extrem robust und schnell in Transistoren schaltbar ist. Der Nachteil ist die hohe Stellenzahl (z. B. 1111 1111 statt 255)."
+},
+    {
+        "id": 343,
+        "theme": "lf1",
+        "topic": "Marktformen: Monopol, Oligopol & Polypol",
+        "isBawueFocus": true,
+        "type": "multiple-choice",
+        "question": "Ordne die Marktformen korrekt nach der Anzahl der Anbieter und Nachfrager zu:\n1. Monopol\n2. Oligopol\n3. Polypol",
+        "options": [
+                "Monopol = ein Anbieter (oder ein Nachfrager); Oligopol = wenige Anbieter/Nachfrager; Polypol = viele Anbieter und viele Nachfrager",
+                "Monopol = viele Anbieter; Oligopol = ein Anbieter; Polypol = wenige Anbieter",
+                "Monopol = staatlicher Markt; Oligopol = internationaler Markt; Polypol = lokaler Markt",
+                "Monopol = Käufermarkt; Oligopol = Verkäufermarkt; Polypol = Mischmarkt"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Definitionen der Marktformen:\n- Monopol (griech. monos = allein, polein = verkaufen): Ein einziger Marktteilnehmer (Angebotsmonopol oder Nachfragemonopol).\n- Oligopol (oligos = wenig): Wenige Marktteilnehmer auf einer Seite (z. B. Smartphone-Betriebssysteme: Apple iOS & Google Android).\n- Polypol (polys = viel): Vollständiger Wettbewerb mit vielen Anbietern und vielen Nachfragern."
+},
+    {
+        "id": 344,
+        "theme": "lf1",
+        "topic": "Aufbauorganisation: Einlinien-, Mehrlinien- & Stabliniensystem",
+        "isBawueFocus": true,
+        "type": "multiple-choice",
+        "question": "Welche Eigenschaften und Vor-/Nachteile zeichnen das Stabliniensystem aus?",
+        "options": [
+                "Es erweitert das Einliniensystem um Stabsstellen (z. B. Datenschutzbeauftragter, Rechtsabteilung, IT-Revision), die Führungskräfte beratend unterstützen, aber keine formale Weisungsbefugnis gegenüber der Linie besitzen.",
+                "Jeder Mitarbeiter hat mehrere gleichberechtigte Vorgesetzte mit uneingeschränkter Weisungsbefugnis.",
+                "Stabsstellen haben immer die höchste Weisungsbefugnis über alle Abteilungen hinweg.",
+                "Es handelt sich um eine reine Projektorganisation ohne feste Hierarchien."
+        ],
+        "correctAnswer": 0,
+        "explanation": "Stabliniensystem:\n- Stab = Expertenunterstützung ohne Anordnungs-/Weisungsrecht (beratende Funktion).\n- Vorteil: Entlastung der Geschäftsleitung durch Fachwissen.\n- Nachteil: Stäbe haben oft informellen Einfluss ('Schattenmacht'), ohne direkte Verantwortung für die Umsetzung tragen zu müssen."
+},
+    {
+        "id": 345,
+        "theme": "lf1",
+        "topic": "Aufbauorganisation: Aufgabenanalyse vs. Aufgabensynthese",
+        "isBawueFocus": true,
+        "type": "multiple-choice",
+        "question": "Was unterscheidet die Aufgabenanalyse von der Aufgabensynthese bei der Gestaltung der Aufbauorganisation?",
+        "options": [
+                "Aufgabenanalyse: Zerlegung der Unternehmensgesamtaufgabe in Teilaufgaben (nach Verrichtung, Objekt, Rang, Phase). Aufgabensynthese: Zusammenfassung der Teilaufgaben zu Stellen, Instanzen und Abteilungen.",
+                "Aufgabenanalyse fasst Stellen zusammen; Aufgabensynthese zerlegt sie wieder.",
+                "Aufgabenanalyse regelt den zeitlichen Ablauf; Aufgabensynthese regelt die Finanzen.",
+                "Beide Begriffe beschreiben identische Vorgänge im Qualitätsmanagement."
+        ],
+        "correctAnswer": 0,
+        "explanation": "Klassische Organisationslehre:\n1. Aufgabenanalyse: Von der Gesamtaufgabe zu den elementaren Teilaufgaben.\n2. Aufgabensynthese: Zusammenführung verwandter Teilaufgaben zu Stellen (kleinste organisatorische Einheit), Instanzen (Leitungsstellen) und Abteilungen."
+},
+    {
+        "id": 346,
+        "theme": "lf1",
+        "topic": "Führungsstile & Managementtechniken (MbO, MbE, MbD)",
+        "isBawueFocus": true,
+        "type": "multiple-choice",
+        "question": "Ein IT-Leiter vereinbart mit seinen Entwicklern zu Jahresbeginn messbare Projektziele (z. B. Release bis 30.06., Fehlerquote unter 0,5 %). Wie die Entwickler diese Ziele im Detail erreichen, entscheiden sie eigenverantwortlich. Welche Managementtechnik liegt vor?",
+        "options": [
+                "Management by Objectives (Führen durch Zielvereinbarung)",
+                "Management by Exception (Führen nach dem Ausnahmeprinzip)",
+                "Management by Delegation (Führen durch Aufgabenübertragung)",
+                "Autoritäre Führung nach Weisung"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Management by Objectives (MbO):\n- Führungskraft und Mitarbeiter vereinbaren gemeinsam konkrete Soll-Ziele.\n- Mitarbeiter wählt die Mittel und den Lösungsweg selbständig.\n- Am Ende erfolgt ein Soll-Ist-Vergleich."
+},
+    {
+        "id": 347,
+        "theme": "lf1",
+        "topic": "Vollmachten: Prokura (§ 48 ff. HGB) Umfang & Grenzen",
+        "isBawueFocus": true,
+        "type": "multiple-choice",
+        "question": "Welche der folgenden Handlungen darf eine Prokuristin (mit erteilter Prokura 'ppa.') kraft Gesetzes OHNE besondere Spezialvollmacht NICHT durchführen?",
+        "options": [
+                "Grundstücke des Unternehmens verkaufen oder mit einer Hypothek/Grundschuld belasten (§ 49 Abs. 2 HGB) sowie Bilanzen unterschreiben und das Unternehmen auflösen",
+                "Mitarbeiter einstellen, befördern und entlassen",
+                "Kredite und Darlehen für das Unternehmen bei Banken aufnehmen",
+                "Einen Firmenwagen im Wert von 80.000 € für den Außendienst bestellen"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Die Prokura (§ 49 HGB) ermächtigt zu allen Arten von gerichtlichen und außergerichtlichen Geschäften und Rechtshandlungen eines Handelsgewerbes.\nAusnahmen (Prinzipalgeschäfte / Grundstücke):\n- Veräußerung und Belastung von Grundstücken (erfordert gesonderte Grundstücksklausel nach § 49 Abs. 2 HGB)\n- Jahresabschluss/Bilanz unterschreiben\n- Prokura an andere Personen erteilen oder entziehen\n- Insolvenz anmelden oder Betrieb veräußern/auflösen."
+},
+    {
+        "id": 348,
+        "theme": "lf1",
+        "topic": "Ökonomisches Prinzip: Maximalprinzip vs. Minimalprinzip",
+        "isBawueFocus": true,
+        "type": "multiple-choice",
+        "question": "Ein IT-Administrator hat ein festes Budget von 10.000 € (gegebener Input) und versucht, damit die maximal mögliche Anzahl an performanten Server-Komponenten zu beschaffen (maximaler Output). Welches Prinzip des ökonomischen Handelns wendet er an?",
+        "options": [
+                "Maximalprinzip (Fester Input -> Maximaler Output)",
+                "Minimalprinzip (Gegebener Output -> Minimaler Input)",
+                "Extremprinzip (Unbestimmter Input -> Unbestimmter Output)",
+                "Gemeinwirtschaftliches Prinzip"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Ökonomisches Prinzip:\n- Maximalprinzip: Mit gegebenen Mitteln (festes Budget 10.000 €) das bestmögliche / maximale Ergebnis erzielen.\n- Minimalprinzip: Ein festes Ziel (z. B. genau 5 Server mit fester Spezifikation) mit möglichst geringem Aufwand / minimalen Kosten erreichen."
+},
+    {
+        "id": 349,
+        "theme": "lf1",
+        "topic": "Finanzierungsvergleich: Kauf vs. Kredit vs. Leasing",
+        "isBawueFocus": true,
+        "type": "multiple-choice",
+        "question": "Welche Vorteile bietet das IT-Leasing (z. B. von 50 Notebooks für Mitarbeiter) gegenüber dem Sofortkauf aus Eigenkapital?",
+        "options": [
+                "Schonung der Liquidität, bilanzneutral (Pay-as-you-earn), Leasingraten sind sofort voll als Betriebsausgaben steuerlich absetzbar, und regelmäßiger Hardwaretausch nach 3 Jahren sichert aktuellen Technologiestand.",
+                "Das Unternehmen wird sofort ab dem ersten Tag rechtlicher Eigentümer der Hardware.",
+                "Leasing ist in der Gesamtsumme ausnahmslos billiger als ein Barkauf mit Skonto.",
+                "Die Geräte müssen nach Ablauf niemals an die Leasinggesellschaft zurückgegeben werden."
+        ],
+        "correctAnswer": 0,
+        "explanation": "Vorteile von Leasing:\n- Liquiditätsschonung (keine hohe Einmalinvestition)\n- Steuerlicher Vorteil (Raten = Aufwand, senken den steuerlichen Gewinn)\n- Bilanzneutralität (keine Erhöhung des Anlagevermögens/Verschuldungsgrades)\n- Schutz vor Veralterung (Hardware-Refresh nach z. B. 36 Monaten)."
+},
+    {
+        "id": 350,
+        "theme": "lf1",
+        "topic": "Vertragsrecht: Stufen der Geschäftsfähigkeit (§§ 104 ff. BGB)",
+        "isBawueFocus": true,
+        "type": "multiple-choice",
+        "question": "Ein 16-jähriger Auszubildender bestellt im Internet ohne Zustimmung seiner Eltern einen High-End-Gaming-PC für 2.500 € auf Rechnung. Wie ist die rechtliche Wirksamkeit dieses Kaufvertrags einzustufen?",
+        "options": [
+                "Der Vertrag ist schwebend unwirksam (§§ 106, 108 BGB) und wird erst mit der nachträglichen Genehmigung der gesetzlichen Vertreter wirksam (Taschengeldparagraph greift bei 2.500 € auf Rechnung nicht).",
+                "Der Vertrag ist von Anfang an voll wirksam, da Jugendliche ab 14 Jahren unbeschränkt Verträge abschließen dürfen.",
+                "Der Vertrag ist absolut nichtig und kann von den Eltern nicht nachträglich genehmigt werden.",
+                "Der Vertrag ist automatisch wirksam, da der Auszubildende eigenes Gehalt verdient."
+        ],
+        "correctAnswer": 0,
+        "explanation": "Stufen der Geschäftsfähigkeit:\n- 0 bis 6 Jahre: Geschäftsunfähig (Willenserklärungen nichtig § 105 BGB)\n- 7 bis 17 Jahre: Beschränkt geschäftsfähig (§ 106 BGB). Verträge bedürfen der Einwilligung der Eltern. Ohne Einwilligung: schwebend unwirksam bis zur Genehmigung (§ 108 BGB). Der Taschengeldparagraph (§ 110 BGB) gilt nur bei vollständiger Barzahlung mit überlassenen Mitteln, nicht bei Kauf auf Rechnung/Raten!\n- Ab 18 Jahre: Voll geschäftsfähig."
+},
+    {
+        "id": 351,
+        "theme": "lf1",
+        "topic": "Kaufvertrag: Mangelhafte Lieferung & Rechte des Käufers",
+        "isBawueFocus": true,
+        "type": "multiple-choice",
+        "question": "Ein gelieferter Server weist einen defekten RAID-Controller auf (Sachmangel). Welches Recht muss der Käufer vorrangig geltend machen, bevor er vom Vertrag zurücktreten oder den Preis mindern darf?",
+        "options": [
+                "Vorrangiges Recht auf Nacherfüllung (§ 439 BGB: wahlweise Beseitigung des Mangels / Nachbesserung oder Lieferung einer mangelfreien Sache / Nachlieferung)",
+                "Sofortiger Rücktritt vom Kaufvertrag und Geld zurück ohne Fristsetzung",
+                "Sofortige Preisminderung um 50 %",
+                "Sofortige Strafanzeige wegen Betrugs"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Gewährleistungsrechte bei Mängeln:\n1. Vorrangige Rechte (Stufe 1): Nacherfüllung (Käufer hat Wahlrecht zwischen Nachbesserung = Reparatur oder Nachlieferung = Neulieferung). Der Verkäufer hat das Recht zur zweiten Andienung.\n2. Nachrangige Rechte (Stufe 2, nach erfolglosem Ablauf einer angemessenen Frist): Rücktritt vom Vertrag, Minderung des Kaufpreises oder Schadensersatz statt der Leistung."
+},
+    {
+        "id": 352,
+        "theme": "lf1",
+        "topic": "Kaufvertrag: Eigentumsvorbehalt (§ 449 BGB)",
+        "isBawueFocus": true,
+        "type": "multiple-choice",
+        "question": "Was bedeutet der vertraglich vereinbarte einfache 'Eigentumsvorbehalt' bei der Lieferung von IT-Hardware auf Ziel/Raten?",
+        "options": [
+                "Der Käufer wird bei Übergabe sofort Besitzer der Hardware, das rechtliche Eigentum verbleibt jedoch bis zur vollständigen Bezahlung des Kaufpreises beim Verkäufer (aufschiebende Bedingung § 449 BGB).",
+                "Der Käufer wird sofort Eigentümer, der Verkäufer behält den Besitz.",
+                "Die Ware darf vom Käufer 5 Jahre lang nicht genutzt werden.",
+                "Der Verkäufer haftet nicht für Sachmängel."
+        ],
+        "correctAnswer": 0,
+        "explanation": "Unterschied Besitz und Eigentum beim Eigentumsvorbehalt (§ 449 BGB):\n- Besitz = tatsächliche Sachherrschaft (Käufer nutzt die Hardware).\n- Eigentum = rechtliche Herrschaft (geht erst mit Zahlung der letzten Rate auf den Käufer über). Zahlt der Käufer nicht, kann der Verkäufer vom Vertrag zurücktreten und die Ware herausverlangen."
+},
+    {
+        "id": 353,
+        "theme": "lf1",
+        "topic": "Erweiterter Wirtschaftskreislauf: Die 5 Sektoren",
+        "isBawueFocus": true,
+        "type": "multiple-choice",
+        "question": "Welche 5 Wirtschaftssubjekte (Sektoren) bilden den erweiterten volkswirtschaftlichen Wirtschaftskreislauf?",
+        "options": [
+                "Private Haushalte, Unternehmen, Staat, Banken (Kapitalsammelstellen/Finanzsektor) und das Ausland",
+                "Hersteller, Großhändler, Einzelhändler, Endverbraucher, Logistiker",
+                "Geschäftsleitung, Einkauf, Produktion, Vertrieb, Buchhaltung",
+                "Käufer, Verkäufer, Notare, Gerichte, Finanzamt"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Der erweiterte Wirtschaftskreislauf (IHK-Standard) besteht aus 5 Sektoren:\n1. Private Haushalte (Arbeitskraft, Konsum)\n2. Unternehmen (Produktion, Löhne, Investitionen)\n3. Staat (Steuern, Subventionen, öffentliche Aufträge)\n4. Banken / Vermögensveränderung (Sparen, Kredite, Zinsen)\n5. Ausland (Exporte, Importe)."
 }
 
 ];
