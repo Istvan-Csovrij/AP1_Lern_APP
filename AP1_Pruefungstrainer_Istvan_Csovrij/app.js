@@ -117,6 +117,19 @@ document.addEventListener("DOMContentLoaded", () => {
         if (examSubmitBtn) examSubmitBtn.addEventListener("click", submitExam);
         if (resultsBackBtn) resultsBackBtn.addEventListener("click", showMainQuizMode);
         
+        if (typeSelect) {
+            typeSelect.addEventListener("change", () => {
+                const selectedMode = typeSelect.value;
+                localStorage.setItem("ap1_type_mode", selectedMode);
+                initQuestions(selectedMode);
+                
+                // Re-apply the current theme filter
+                const activeFilterBtn = themeFiltersContainer ? themeFiltersContainer.querySelector(".filter-btn.active") : null;
+                const currentTheme = activeFilterBtn ? activeFilterBtn.getAttribute("data-theme") : "all";
+                filterQuestions(currentTheme);
+            });
+        }
+        
         if (regenerateBtn) {
             regenerateBtn.addEventListener("click", () => {
                 const selectedMode = typeSelect.value;
@@ -152,6 +165,9 @@ function initQuestions(typeMode) {
     }
     
     questions = [...filteredStatic, ...dynamicQs];
+    if (typeMode === "open") {
+        questions = questions.filter(q => q.type === "open-text");
+    }
     console.log(`Initialized ${questions.length} questions (Static: ${filteredStatic.length}, Dynamic: ${dynamicQs.length}) for mode: ${typeMode}`);
 }
 
@@ -224,11 +240,22 @@ function filterQuestions(theme) {
         if (theme === "all") {
             filteredQuestions = [...questions];
         } else if (theme === "bawue-focus") {
+            // When selecting BaWü focus, automatically set mode to open-text and reload questions
+            if (typeSelect && typeSelect.value !== "open") {
+                typeSelect.value = "open";
+                localStorage.setItem("ap1_type_mode", "open");
+                initQuestions("open");
+            }
             filteredQuestions = questions.filter(q => 
-                q.isBawueFocus === true || 
-                q.theme === "bawue-special" || 
-                (q.topic && q.topic.toLowerCase().includes("bawü"))
+                q.type === "open-text" && (
+                    q.isBawueFocus === true || 
+                    q.theme === "bawue-special" || 
+                    (q.topic && q.topic.toLowerCase().includes("bawü"))
+                )
             );
+            if (filteredQuestions.length === 0) {
+                filteredQuestions = questions.filter(q => q.type === "open-text");
+            }
         } else if (theme === "diagrams" || theme === "diagram-training") {
             filteredQuestions = questions.filter(q => 
                 q.theme === "diagrams" || 
@@ -317,6 +344,11 @@ function filterQuestions(theme) {
             );
         } else {
             filteredQuestions = questions.filter(q => q.theme === theme);
+        }
+        
+        // Safety: If open-text mode is active, ensure 100% of filtered questions are open-text
+        if (typeSelect && typeSelect.value === "open") {
+            filteredQuestions = filteredQuestions.filter(q => q.type === "open-text");
         }
     }
     
@@ -1090,6 +1122,9 @@ function startExamMode(simulation) {
     selected.push(...mixedOthers.slice(0, countNeeded));
     
     shuffleArray(selected); // shuffle the final selection so they are distributed randomly
+    if (chosenMode === "open") {
+        selected = selected.filter(q => q.type === "open-text");
+    }
     examQuestions = selected;
 
     // Initialize answer sheet

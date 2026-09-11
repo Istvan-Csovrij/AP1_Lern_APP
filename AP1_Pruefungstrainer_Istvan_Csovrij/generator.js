@@ -1159,19 +1159,32 @@ function generateDynamicQuestions(typeMode = "mix") {
 
     for (let i = 0; i < 20; i++) {
         const tf = trueFalseItems[Math.floor(Math.random() * trueFalseItems.length)];
-        dynamicQuestions.push({
-            id: currentId++,
-            theme: "lf1",
-            isBawueFocus: true,
-            type: "true-false",
-            question: tf.q,
-            options: [
-                "Wahr (Richtig)",
-                "Falsch"
-            ],
-            correctAnswer: tf.isTrue ? 0 : 1,
-            explanation: tf.exp
-        });
+        const isOpen = shouldBeOpenText();
+        if (isOpen) {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "lf1",
+                isBawueFocus: true,
+                type: "open-text",
+                question: `Prüfungsaufgabe Rechtskunde / BWL (IHK BaWü):\nBeurteilen und begründen Sie die folgende Aussage rechtlich/fachlich fundiert:\n"${tf.q.replace(/^Wahr oder Falsch:\s*/, '')}"`,
+                musterloesung: `Bewertung: ${tf.isTrue ? 'Die Aussage ist WAHR / ZUTREFFEND.' : 'Die Aussage ist FALSCH / UNZUTREFFEND.'}\nBegründung: ${tf.exp}`,
+                explanation: tf.exp
+            });
+        } else {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "lf1",
+                isBawueFocus: true,
+                type: "true-false",
+                question: tf.q,
+                options: [
+                    "Wahr (Richtig)",
+                    "Falsch"
+                ],
+                correctAnswer: tf.isTrue ? 0 : 1,
+                explanation: tf.exp
+            });
+        }
     }
 
     
@@ -1372,24 +1385,40 @@ function generateDynamicQuestions(typeMode = "mix") {
 
     for (let i = 0; i < 15; i++) {
         const item = umlPatterns[Math.floor(Math.random() * umlPatterns.length)];
-        dynamicQuestions.push({
-            id: currentId++,
-            theme: "diagrams",
-            topic: item.title,
-            isDiagram: true,
-            isBawueFocus: true,
-            diagramType: "UML / BPMN",
-            type: "multiple-choice",
-            question: `Prüfungsaufgabe Modellierung: ${item.q}`,
-            options: [
-                item.optA,
-                item.optB,
-                item.optC,
-                item.optD
-            ],
-            correctAnswer: item.correct,
-            explanation: item.exp
-        });
+        const isOpen = shouldBeOpenText();
+        if (isOpen) {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "diagrams",
+                topic: item.title,
+                isDiagram: true,
+                isBawueFocus: true,
+                diagramType: "UML / BPMN",
+                type: "open-text",
+                question: `Prüfungsaufgabe Modellierung (IHK BaWü - ${item.title}):\n${item.q}\n\nNennen und begründen Sie das passende Modellierungselement bzw. die Beziehung im Diagramm.`,
+                musterloesung: `Fachliche Lösung:\n- Modellierungselement / Beziehung: ${item.optA}\n- Begründung / Regel: ${item.exp}`,
+                explanation: item.exp
+            });
+        } else {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "diagrams",
+                topic: item.title,
+                isDiagram: true,
+                isBawueFocus: true,
+                diagramType: "UML / BPMN",
+                type: "multiple-choice",
+                question: `Prüfungsaufgabe Modellierung: ${item.q}`,
+                options: [
+                    item.optA,
+                    item.optB,
+                    item.optC,
+                    item.optD
+                ],
+                correctAnswer: item.correct,
+                explanation: item.exp
+            });
+        }
     }
 
     
@@ -1535,42 +1564,70 @@ function generateDynamicQuestions(typeMode = "mix") {
             }
         } else if (mode === 1) {
             // Hex to Dec
-            dynamicQuestions.push({
-                id: currentId++,
-                theme: "calculations",
-                topic: "Zahlensysteme: Hexadezimal nach Dezimal",
-                isCalculation: true,
-                isBawueFocus: true,
-                type: "multiple-choice",
-                question: `Prüfungsaufgabe Zahlensysteme: Wandle den Hexadezimalwert ${hexVal} (16) in eine Dezimalzahl um.`,
-                options: [
-                    `${decVal}`,
-                    `${decVal + 16}`,
-                    `${decVal - 8}`,
-                    `${decVal + 10}`
-                ],
-                correctAnswer: 0,
-                explanation: `Hexadezimal ${hexVal} = ${decVal} im Dezimalsystem (Binär: ${binVal}).`
-            });
+            if (isOpen) {
+                dynamicQuestions.push({
+                    id: currentId++,
+                    theme: "calculations",
+                    topic: "Zahlensysteme: Hexadezimal nach Dezimal",
+                    isCalculation: true,
+                    isBawueFocus: true,
+                    type: "open-text",
+                    question: `Prüfungsaufgabe Zahlensysteme: Wandle den Hexadezimalwert **${hexVal}** (Basis 16) mit vollständigem Rechenweg in eine Dezimalzahl um.`,
+                    musterloesung: `Rechenweg für Hexadezimal ${hexVal} (16):\n- Dezimalwert = ${decVal}\n- Dualzahl = ${binVal} (2)`,
+                    explanation: `Hexadezimal ${hexVal} = ${decVal} im Dezimalsystem (Binär: ${binVal}).`
+                });
+            } else {
+                dynamicQuestions.push({
+                    id: currentId++,
+                    theme: "calculations",
+                    topic: "Zahlensysteme: Hexadezimal nach Dezimal",
+                    isCalculation: true,
+                    isBawueFocus: true,
+                    type: "multiple-choice",
+                    question: `Prüfungsaufgabe Zahlensysteme: Wandle den Hexadezimalwert ${hexVal} (16) in eine Dezimalzahl um.`,
+                    options: [
+                        `${decVal}`,
+                        `${decVal + 16}`,
+                        `${decVal - 8}`,
+                        `${decVal + 10}`
+                    ],
+                    correctAnswer: 0,
+                    explanation: `Hexadezimal ${hexVal} = ${decVal} im Dezimalsystem (Binär: ${binVal}).`
+                });
+            }
         } else {
             // Bin to Hex
-            dynamicQuestions.push({
-                id: currentId++,
-                theme: "calculations",
-                topic: "Zahlensysteme: Binär nach Hexadezimal",
-                isCalculation: true,
-                isBawueFocus: true,
-                type: "multiple-choice",
-                question: `Prüfungsaufgabe Zahlensysteme: Wandle die Binärzahl ${binVal} (2) in das Hexadezimalsystem um.`,
-                options: [
-                    `${hexVal} (16)`,
-                    `${(decVal + 2).toString(16).toUpperCase()} (16)`,
-                    `${octVal} (16)`,
-                    `${(decVal - 1).toString(16).toUpperCase()} (16)`
-                ],
-                correctAnswer: 0,
-                explanation: `Gruppiere die Bits in 4er-Blöcke von rechts: ${binVal} (2) = ${hexVal} (16).`
-            });
+            if (isOpen) {
+                dynamicQuestions.push({
+                    id: currentId++,
+                    theme: "calculations",
+                    topic: "Zahlensysteme: Binär nach Hexadezimal",
+                    isCalculation: true,
+                    isBawueFocus: true,
+                    type: "open-text",
+                    question: `Prüfungsaufgabe Zahlensysteme: Wandle die Binärzahl **${binVal}** (Basis 2) in das Hexadezimalsystem um (Nibble-Verfahren).`,
+                    musterloesung: `Nibble-Gruppierung von ${binVal} (2):\n- Hexadezimalwert = ${hexVal} (16)\n- Dezimalwert = ${decVal}`,
+                    explanation: `Binärzahl in 4er-Blöcke (Nibbles) aufteilen und in Hex-Ziffern umwandeln: ${binVal} (2) = ${hexVal} (16).`
+                });
+            } else {
+                dynamicQuestions.push({
+                    id: currentId++,
+                    theme: "calculations",
+                    topic: "Zahlensysteme: Binär nach Hexadezimal",
+                    isCalculation: true,
+                    isBawueFocus: true,
+                    type: "multiple-choice",
+                    question: `Prüfungsaufgabe Zahlensysteme: Wandle die Binärzahl ${binVal} (2) in das Hexadezimalsystem um.`,
+                    options: [
+                        `${hexVal} (16)`,
+                        `${(decVal + 2).toString(16).toUpperCase()} (16)`,
+                        `${octVal} (16)`,
+                        `${(decVal - 1).toString(16).toUpperCase()} (16)`
+                    ],
+                    correctAnswer: 0,
+                    explanation: `Gruppiere die Bits in 4er-Blöcke von rechts: ${binVal} (2) = ${hexVal} (16).`
+                });
+            }
         }
     }
 
@@ -1630,24 +1687,39 @@ function generateDynamicQuestions(typeMode = "mix") {
         const ueberweisung = rechnungBetrag - skontoErsparnis;
         const kreditzinsen = (ueberweisung * kreditZinsPct * diffTage) / (100 * 360);
         const reingewinn = skontoErsparnis - kreditzinsen;
+        const isOpen = shouldBeOpenText();
 
-        dynamicQuestions.push({
-            id: currentId++,
-            theme: "calculations",
-            topic: "Skontoausnutzung vs. Kredit",
-            isCalculation: true,
-            isBawueFocus: true,
-            type: "multiple-choice",
-            question: `Prüfungsaufgabe Finanzierung: Eine Rechnung über ${rechnungBetrag.toFixed(2)} € bietet ${skontoPct} % Skonto bei Zahlung innerhalb von ${skontoTage} Tagen (oder 30 Tage netto). Zur Skontonutzung wird ein Kontokorrentkredit für ${diffTage} Tage zu ${kreditZinsPct} % p.a. aufgenommen. Wie hoch ist der finanzielle Vorteil (Reingewinn)?`,
-            options: [
-                `${reingewinn.toFixed(2)} € Ersparnis (Skonto ${skontoErsparnis.toFixed(2)} € minus ${kreditzinsen.toFixed(2)} € Zinsen)`,
-                `${skontoErsparnis.toFixed(2)} €`,
-                `${kreditzinsen.toFixed(2)} €`,
-                `Kein Vorteil (Verlust von ${kreditzinsen.toFixed(2)} €)`
-            ],
-            correctAnswer: 0,
-            explanation: `Skontoersparnis = ${skontoErsparnis.toFixed(2)} €. Kreditzinsen für ${diffTage} Tage = (${ueberweisung.toFixed(2)} € * ${kreditZinsPct}% * ${diffTage}) / 36.000 = ${kreditzinsen.toFixed(2)} €. Vorteil = ${reingewinn.toFixed(2)} €.`
-        });
+        if (isOpen) {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "calculations",
+                topic: "Skontoausnutzung vs. Kredit",
+                isCalculation: true,
+                isBawueFocus: true,
+                type: "open-text",
+                question: `Prüfungsaufgabe Finanzierung: Eine Rechnung über ${rechnungBetrag.toFixed(2)} € bietet ${skontoPct} % Skonto bei Zahlung innerhalb von ${skontoTage} Tagen (oder 30 Tage netto).\nZur Skontonutzung wird ein Kontokorrentkredit für ${diffTage} Tage zu ${kreditZinsPct} % p.a. aufgenommen.\n\nBerechnen Sie:\n1. Die Skontoersparnis in €\n2. Die Kreditzinsen für ${diffTage} Tage in €\n3. Den finanziellen Reingewinn / Vorteil der Skontoausnutzung in €`,
+                musterloesung: `Lösungsschritte:\n1. Skontoersparnis: ${rechnungBetrag.toFixed(2)} € * ${skontoPct} % = ${skontoErsparnis.toFixed(2)} €\n2. Überweisungsbetrag: ${rechnungBetrag.toFixed(2)} € - ${skontoErsparnis.toFixed(2)} € = ${ueberweisung.toFixed(2)} €\n3. Kreditzinsen für ${diffTage} Tage: (${ueberweisung.toFixed(2)} € * ${kreditZinsPct} * ${diffTage}) / 36.000 = ${kreditzinsen.toFixed(2)} €\n4. Finanzieller Vorteil (Reingewinn): ${skontoErsparnis.toFixed(2)} € - ${kreditzinsen.toFixed(2)} € = ${reingewinn.toFixed(2)} €`,
+                explanation: `Skontoersparnis = ${skontoErsparnis.toFixed(2)} €. Kreditzinsen = ${kreditzinsen.toFixed(2)} €. Vorteil = ${reingewinn.toFixed(2)} €.`
+            });
+        } else {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "calculations",
+                topic: "Skontoausnutzung vs. Kredit",
+                isCalculation: true,
+                isBawueFocus: true,
+                type: "multiple-choice",
+                question: `Prüfungsaufgabe Finanzierung: Eine Rechnung über ${rechnungBetrag.toFixed(2)} € bietet ${skontoPct} % Skonto bei Zahlung innerhalb von ${skontoTage} Tagen (oder 30 Tage netto). Zur Skontonutzung wird ein Kontokorrentkredit für ${diffTage} Tage zu ${kreditZinsPct} % p.a. aufgenommen. Wie hoch ist der finanzielle Vorteil (Reingewinn)?`,
+                options: [
+                    `${reingewinn.toFixed(2)} € Ersparnis (Skonto ${skontoErsparnis.toFixed(2)} € minus ${kreditzinsen.toFixed(2)} € Zinsen)`,
+                    `${skontoErsparnis.toFixed(2)} €`,
+                    `${kreditzinsen.toFixed(2)} €`,
+                    `Kein Vorteil (Verlust von ${kreditzinsen.toFixed(2)} €)`
+                ],
+                correctAnswer: 0,
+                explanation: `Skontoersparnis = ${skontoErsparnis.toFixed(2)} €. Kreditzinsen für ${diffTage} Tage = (${ueberweisung.toFixed(2)} € * ${kreditZinsPct}% * ${diffTage}) / 36.000 = ${kreditzinsen.toFixed(2)} €. Vorteil = ${reingewinn.toFixed(2)} €.`
+            });
+        }
     }
 
     // C.6 Dynamische Amortisationsberechnungen (Investition & Einsparung)
@@ -1656,24 +1728,39 @@ function generateDynamicQuestions(typeMode = "mix") {
         const einsparungJahr = (Math.floor(Math.random() * 8) + 4) * 1000; // 4.000 bis 11.000 €
         const amortJahre = (invest / einsparungJahr).toFixed(2);
         const amortMonate = ((invest / einsparungJahr) * 12).toFixed(1);
+        const isOpen = shouldBeOpenText();
 
-        dynamicQuestions.push({
-            id: currentId++,
-            theme: "calculations",
-            topic: "Statische Amortisation",
-            isCalculation: true,
-            isBawueFocus: true,
-            type: "multiple-choice",
-            question: `Prüfungsaufgabe Wirtschaftlichkeit: Ein IT-Projekt kostet einmalig ${invest.toFixed(2)} € und spart pro Jahr ${einsparungJahr.toFixed(2)} € an Betriebskosten. Nach welcher Amortisationszeit hat sich die Investition bezahlt gemacht?`,
-            options: [
-                `${amortJahre} Jahre (ca. ${amortMonate} Monate)`,
-                `${(invest / 12).toFixed(0)} Monate`,
-                `${(einsparungJahr / 1000).toFixed(1)} Jahre`,
-                `${(invest / einsparungJahr * 1.5).toFixed(2)} Jahre`
-            ],
-            correctAnswer: 0,
-            explanation: `Formel: Amortisationszeit = Anschaffungskosten / jährliche Einsparung = ${invest} € / ${einsparungJahr} € = ${amortJahre} Jahre (${amortMonate} Monate).`
-        });
+        if (isOpen) {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "calculations",
+                topic: "Statische Amortisation",
+                isCalculation: true,
+                isBawueFocus: true,
+                type: "open-text",
+                question: `Prüfungsaufgabe Wirtschaftlichkeit: Ein IT-Projekt verursacht einmalige Anschaffungskosten von ${invest.toFixed(2)} € und führt zu jährlichen Betriebskosteneinsparungen in Höhe von ${einsparungJahr.toFixed(2)} €.\n\nBerechnen Sie die statische Amortisationszeit in Jahren und Monaten (mit Formel und Rechenweg).`,
+                musterloesung: `Rechenweg statische Amortisation:\n- Formel: Amortisationszeit = Anschaffungskosten / jährliche Einsparung\n- Rechnung: ${invest.toFixed(2)} € / ${einsparungJahr.toFixed(2)} €/Jahr = ${amortJahre} Jahre\n- In Monaten: ${amortJahre} * 12 = ${amortMonate} Monate\n- Ergebnis: ${amortJahre} Jahre (ca. ${amortMonate} Monate)`,
+                explanation: `Amortisationszeit = Anschaffungskosten / jährliche Einsparung = ${invest} € / ${einsparungJahr} € = ${amortJahre} Jahre.`
+            });
+        } else {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "calculations",
+                topic: "Statische Amortisation",
+                isCalculation: true,
+                isBawueFocus: true,
+                type: "multiple-choice",
+                question: `Prüfungsaufgabe Wirtschaftlichkeit: Ein IT-Projekt kostet einmalig ${invest.toFixed(2)} € und spart pro Jahr ${einsparungJahr.toFixed(2)} € an Betriebskosten. Nach welcher Amortisationszeit hat sich die Investition bezahlt gemacht?`,
+                options: [
+                    `${amortJahre} Jahre (ca. ${amortMonate} Monate)`,
+                    `${(invest / 12).toFixed(0)} Monate`,
+                    `${(einsparungJahr / 1000).toFixed(1)} Jahre`,
+                    `${(invest / einsparungJahr * 1.5).toFixed(2)} Jahre`
+                ],
+                correctAnswer: 0,
+                explanation: `Formel: Amortisationszeit = Anschaffungskosten / jährliche Einsparung = ${invest} € / ${einsparungJahr} € = ${amortJahre} Jahre (${amortMonate} Monate).`
+            });
+        }
     }
 
     
@@ -1704,99 +1791,169 @@ function generateDynamicQuestions(typeMode = "mix") {
 
         if (step === 0) {
             // ZEP aus LEP und Lieferantenrabatt
-            dynamicQuestions.push({
-                id: currentId++,
-                theme: "calculations",
-                topic: "Zieleinkaufspreis (ZEP) Berechnung",
-                isCalculation: true,
-                isBawueFocus: true,
-                type: "multiple-choice",
-                question: `Prüfungsaufgabe Handelskalkulation: Ein Server kostet laut Katalog (Listeneinkaufspreis LEP) ${lep.toFixed(2)} €. Der Lieferant gewährt ${rabattPct} % Lieferantenrabatt. Wie hoch ist der Zieleinkaufspreis (ZEP)?`,
-                options: [
-                    `${zep.toFixed(2)} € (Rabattabzug: ${rabattBetrag.toFixed(2)} €)`,
-                    `${(lep + rabattBetrag).toFixed(2)} €`,
-                    `${(lep * 0.98).toFixed(2)} €`,
-                    `${(zep - 10).toFixed(2)} €`
-                ],
-                correctAnswer: 0,
-                explanation: `ZEP = LEP (${lep.toFixed(2)} €) - ${rabattPct} % Rabatt (${rabattBetrag.toFixed(2)} €) = ${zep.toFixed(2)} €.`
-            });
+            if (isOpen) {
+                dynamicQuestions.push({
+                    id: currentId++,
+                    theme: "calculations",
+                    topic: "Zieleinkaufspreis (ZEP) Berechnung",
+                    isCalculation: true,
+                    isBawueFocus: true,
+                    type: "open-text",
+                    question: `Prüfungsaufgabe Handelskalkulation (IHK BaWü):\nEin Server kostet laut Katalog (Listeneinkaufspreis LEP) ${lep.toFixed(2)} €. Der Lieferant gewährt ${rabattPct} % Lieferantenrabatt.\n\nBerechnen Sie den Zieleinkaufspreis (ZEP) mit Rechenweg.`,
+                    musterloesung: `Rechenweg:\n- Listeneinkaufspreis (LEP): ${lep.toFixed(2)} €\n- Lieferantenrabatt (${rabattPct} %): - ${rabattBetrag.toFixed(2)} €\n= Zieleinkaufspreis (ZEP): ${zep.toFixed(2)} €`,
+                    explanation: `ZEP = LEP (${lep.toFixed(2)} €) - ${rabattPct} % Rabatt (${rabattBetrag.toFixed(2)} €) = ${zep.toFixed(2)} €.`
+                });
+            } else {
+                dynamicQuestions.push({
+                    id: currentId++,
+                    theme: "calculations",
+                    topic: "Zieleinkaufspreis (ZEP) Berechnung",
+                    isCalculation: true,
+                    isBawueFocus: true,
+                    type: "multiple-choice",
+                    question: `Prüfungsaufgabe Handelskalkulation: Ein Server kostet laut Katalog (Listeneinkaufspreis LEP) ${lep.toFixed(2)} €. Der Lieferant gewährt ${rabattPct} % Lieferantenrabatt. Wie hoch ist der Zieleinkaufspreis (ZEP)?`,
+                    options: [
+                        `${zep.toFixed(2)} € (Rabattabzug: ${rabattBetrag.toFixed(2)} €)`,
+                        `${(lep + rabattBetrag).toFixed(2)} €`,
+                        `${(lep * 0.98).toFixed(2)} €`,
+                        `${(zep - 10).toFixed(2)} €`
+                    ],
+                    correctAnswer: 0,
+                    explanation: `ZEP = LEP (${lep.toFixed(2)} €) - ${rabattPct} % Rabatt (${rabattBetrag.toFixed(2)} €) = ${zep.toFixed(2)} €.`
+                });
+            }
         } else if (step === 1) {
             // BEP aus ZEP und Lieferantenskonto
-            dynamicQuestions.push({
-                id: currentId++,
-                theme: "calculations",
-                topic: "Bareinkaufspreis (BEP) Berechnung",
-                isCalculation: true,
-                isBawueFocus: true,
-                type: "multiple-choice",
-                question: `Prüfungsaufgabe Handelskalkulation: Der Zieleinkaufspreis (ZEP) beträgt ${zep.toFixed(2)} €. Bei Zahlung innerhalb von 10 Tagen werden ${skontoPct} % Lieferantenskonto abgezogen. Wie hoch ist der Bareinkaufspreis (BEP)?`,
-                options: [
-                    `${bep.toFixed(2)} € (Skontoersparnis: ${skontoBetrag.toFixed(2)} €)`,
-                    `${(zep + skontoBetrag).toFixed(2)} €`,
-                    `${(zep * 0.90).toFixed(2)} €`,
-                    `${(bep - 5).toFixed(2)} €`
-                ],
-                correctAnswer: 0,
-                explanation: `BEP = ZEP (${zep.toFixed(2)} €) - ${skontoPct} % Skonto (${skontoBetrag.toFixed(2)} €) = ${bep.toFixed(2)} €.`
-            });
+            if (isOpen) {
+                dynamicQuestions.push({
+                    id: currentId++,
+                    theme: "calculations",
+                    topic: "Bareinkaufspreis (BEP) Berechnung",
+                    isCalculation: true,
+                    isBawueFocus: true,
+                    type: "open-text",
+                    question: `Prüfungsaufgabe Handelskalkulation (IHK BaWü):\nDer Zieleinkaufspreis (ZEP) beträgt ${zep.toFixed(2)} €. Bei Zahlung innerhalb von 10 Tagen werden ${skontoPct} % Lieferantenskonto abgezogen.\n\nBerechnen Sie den Bareinkaufspreis (BEP) mit Rechenweg.`,
+                    musterloesung: `Rechenweg:\n- Zieleinkaufspreis (ZEP): ${zep.toFixed(2)} €\n- Lieferantenskonto (${skontoPct} %): - ${skontoBetrag.toFixed(2)} €\n= Bareinkaufspreis (BEP): ${bep.toFixed(2)} €`,
+                    explanation: `BEP = ZEP (${zep.toFixed(2)} €) - ${skontoPct} % Skonto (${skontoBetrag.toFixed(2)} €) = ${bep.toFixed(2)} €.`
+                });
+            } else {
+                dynamicQuestions.push({
+                    id: currentId++,
+                    theme: "calculations",
+                    topic: "Bareinkaufspreis (BEP) Berechnung",
+                    isCalculation: true,
+                    isBawueFocus: true,
+                    type: "multiple-choice",
+                    question: `Prüfungsaufgabe Handelskalkulation: Der Zieleinkaufspreis (ZEP) beträgt ${zep.toFixed(2)} €. Bei Zahlung innerhalb von 10 Tagen werden ${skontoPct} % Lieferantenskonto abgezogen. Wie hoch ist der Bareinkaufspreis (BEP)?`,
+                    options: [
+                        `${bep.toFixed(2)} € (Skontoersparnis: ${skontoBetrag.toFixed(2)} €)`,
+                        `${(zep + skontoBetrag).toFixed(2)} €`,
+                        `${(zep * 0.90).toFixed(2)} €`,
+                        `${(bep - 5).toFixed(2)} €`
+                    ],
+                    correctAnswer: 0,
+                    explanation: `BEP = ZEP (${zep.toFixed(2)} €) - ${skontoPct} % Skonto (${skontoBetrag.toFixed(2)} €) = ${bep.toFixed(2)} €.`
+                });
+            }
         } else if (step === 2) {
             // Barverkaufspreis BVP aus Selbstkosten und Gewinn
-            dynamicQuestions.push({
-                id: currentId++,
-                theme: "calculations",
-                topic: "Barverkaufspreis (BVP) Berechnung",
-                isCalculation: true,
-                isBawueFocus: true,
-                type: "multiple-choice",
-                question: `Prüfungsaufgabe Handelskalkulation: Die Selbstkosten für ein IT-Produkt betragen ${selbstkosten.toFixed(2)} €. Das Systemhaus kalkuliert einen Gewinnzuschlag von ${gewinnPct} %. Wie hoch ist der Barverkaufspreis (BVP)?`,
-                options: [
-                    `${bvp.toFixed(2)} € (Gewinn: ${gewinnBetrag.toFixed(2)} €)`,
-                    `${(selbstkosten - gewinnBetrag).toFixed(2)} €`,
-                    `${(selbstkosten * 1.19).toFixed(2)} €`,
-                    `${(bvp + 50).toFixed(2)} €`
-                ],
-                correctAnswer: 0,
-                explanation: `BVP = Selbstkosten (${selbstkosten.toFixed(2)} €) + ${gewinnPct} % Gewinn (${gewinnBetrag.toFixed(2)} €) = ${bvp.toFixed(2)} €.`
-            });
+            if (isOpen) {
+                dynamicQuestions.push({
+                    id: currentId++,
+                    theme: "calculations",
+                    topic: "Barverkaufspreis (BVP) Berechnung",
+                    isCalculation: true,
+                    isBawueFocus: true,
+                    type: "open-text",
+                    question: `Prüfungsaufgabe Handelskalkulation (IHK BaWü):\nDie Selbstkosten für ein IT-Produkt betragen ${selbstkosten.toFixed(2)} €. Das Systemhaus kalkuliert einen Gewinnzuschlag von ${gewinnPct} %.\n\nBerechnen Sie den Barverkaufspreis (BVP) mit Rechenweg.`,
+                    musterloesung: `Rechenweg:\n- Selbstkosten: ${selbstkosten.toFixed(2)} €\n- Gewinnzuschlag (${gewinnPct} %): + ${gewinnBetrag.toFixed(2)} €\n= Barverkaufspreis (BVP): ${bvp.toFixed(2)} €`,
+                    explanation: `BVP = Selbstkosten (${selbstkosten.toFixed(2)} €) + ${gewinnPct} % Gewinn (${gewinnBetrag.toFixed(2)} €) = ${bvp.toFixed(2)} €.`
+                });
+            } else {
+                dynamicQuestions.push({
+                    id: currentId++,
+                    theme: "calculations",
+                    topic: "Barverkaufspreis (BVP) Berechnung",
+                    isCalculation: true,
+                    isBawueFocus: true,
+                    type: "multiple-choice",
+                    question: `Prüfungsaufgabe Handelskalkulation: Die Selbstkosten für ein IT-Produkt betragen ${selbstkosten.toFixed(2)} €. Das Systemhaus kalkuliert einen Gewinnzuschlag von ${gewinnPct} %. Wie hoch ist der Barverkaufspreis (BVP)?`,
+                    options: [
+                        `${bvp.toFixed(2)} € (Gewinn: ${gewinnBetrag.toFixed(2)} €)`,
+                        `${(selbstkosten - gewinnBetrag).toFixed(2)} €`,
+                        `${(selbstkosten * 1.19).toFixed(2)} €`,
+                        `${(bvp + 50).toFixed(2)} €`
+                    ],
+                    correctAnswer: 0,
+                    explanation: `BVP = Selbstkosten (${selbstkosten.toFixed(2)} €) + ${gewinnPct} % Gewinn (${gewinnBetrag.toFixed(2)} €) = ${bvp.toFixed(2)} €.`
+                });
+            }
         } else if (step === 3) {
             // Zielverkaufspreis ZVP im Hundert
-            dynamicQuestions.push({
-                id: currentId++,
-                theme: "calculations",
-                topic: "Zielverkaufspreis (ZVP im Hundert)",
-                isCalculation: true,
-                isBawueFocus: true,
-                type: "multiple-choice",
-                question: `Prüfungsaufgabe Handelskalkulation: Der Barverkaufspreis (BVP) beträgt ${bvp.toFixed(2)} €. Dem Kunden werden ${skontoPct} % Kundenskonto gewährt. Welcher Zielverkaufspreis (ZVP) muss kalkuliert werden (Kalkulation im Hundert)?`,
-                options: [
-                    `${zvp.toFixed(2)} € (Berechnung: ${bvp.toFixed(2)} € / ${(1 - skontoPct/100).toFixed(2)})`,
-                    `${(bvp * (1 + skontoPct/100)).toFixed(2)} € (Vom Hundert - fehlerhaft)`,
-                    `${(bvp * 0.98).toFixed(2)} €`,
-                    `${(zvp * 1.19).toFixed(2)} €`
-                ],
-                correctAnswer: 0,
-                explanation: `ZVP = BVP / (1 - ${skontoPct}/100) = ${bvp.toFixed(2)} € / ${(1 - skontoPct/100).toFixed(2)} = ${zvp.toFixed(2)} €. (Im-Hundert-Aufschlag, damit nach Skontoabzug genau der BVP verbleibt).`
-            });
+            if (isOpen) {
+                dynamicQuestions.push({
+                    id: currentId++,
+                    theme: "calculations",
+                    topic: "Zielverkaufspreis (ZVP im Hundert)",
+                    isCalculation: true,
+                    isBawueFocus: true,
+                    type: "open-text",
+                    question: `Prüfungsaufgabe Handelskalkulation (IHK BaWü):\nDer Barverkaufspreis (BVP) beträgt ${bvp.toFixed(2)} €. Dem Kunden werden ${skontoPct} % Kundenskonto gewährt.\n\nBerechnen Sie den Zielverkaufspreis (ZVP) unter Beachtung der Kalkulation im Hundert (mit Formel und Rechenweg).`,
+                    musterloesung: `Rechenweg (Kalkulation im Hundert):\n- Formel: ZVP = BVP / (1 - Kundenskonto % / 100)\n- Rechnung: ${bvp.toFixed(2)} € / ${(1 - skontoPct/100).toFixed(2)} = ${zvp.toFixed(2)} €\n- Ergebnis: ${zvp.toFixed(2)} €\n(Probe: ${zvp.toFixed(2)} € - ${skontoPct} % Skonto = ${bvp.toFixed(2)} €)`,
+                    explanation: `ZVP = BVP / (1 - ${skontoPct}/100) = ${bvp.toFixed(2)} € / ${(1 - skontoPct/100).toFixed(2)} = ${zvp.toFixed(2)} €.`
+                });
+            } else {
+                dynamicQuestions.push({
+                    id: currentId++,
+                    theme: "calculations",
+                    topic: "Zielverkaufspreis (ZVP im Hundert)",
+                    isCalculation: true,
+                    isBawueFocus: true,
+                    type: "multiple-choice",
+                    question: `Prüfungsaufgabe Handelskalkulation: Der Barverkaufspreis (BVP) beträgt ${bvp.toFixed(2)} €. Dem Kunden werden ${skontoPct} % Kundenskonto gewährt. Welcher Zielverkaufspreis (ZVP) muss kalkuliert werden (Kalkulation im Hundert)?`,
+                    options: [
+                        `${zvp.toFixed(2)} € (Berechnung: ${bvp.toFixed(2)} € / ${(1 - skontoPct/100).toFixed(2)})`,
+                        `${(bvp * (1 + skontoPct/100)).toFixed(2)} € (Vom Hundert - fehlerhaft)`,
+                        `${(bvp * 0.98).toFixed(2)} €`,
+                        `${(zvp * 1.19).toFixed(2)} €`
+                    ],
+                    correctAnswer: 0,
+                    explanation: `ZVP = BVP / (1 - ${skontoPct}/100) = ${bvp.toFixed(2)} € / ${(1 - skontoPct/100).toFixed(2)} = ${zvp.toFixed(2)} €. (Im-Hundert-Aufschlag, damit nach Skontoabzug genau der BVP verbleibt).`
+                });
+            }
         } else {
             // LVP brutto mit 19% USt
-            dynamicQuestions.push({
-                id: currentId++,
-                theme: "calculations",
-                topic: "Bruttoverkaufspreis (inkl. 19% MwSt)",
-                isCalculation: true,
-                isBawueFocus: true,
-                type: "multiple-choice",
-                question: `Prüfungsaufgabe Handelskalkulation: Der Netto-Listenverkaufspreis (LVP) einer Softwarelizenz beträgt ${lvpNetto.toFixed(2)} €. Wie hoch ist der Brutto-Verkaufspreis für den Endverbraucher inklusive 19 % Umsatzsteuer?`,
-                options: [
-                    `${lvpBrutto.toFixed(2)} € (USt-Betrag: ${(lvpNetto * 0.19).toFixed(2)} €)`,
-                    `${(lvpNetto / 1.19).toFixed(2)} €`,
-                    `${(lvpNetto + 19).toFixed(2)} €`,
-                    `${(lvpBrutto * 1.19).toFixed(2)} €`
-                ],
-                correctAnswer: 0,
-                explanation: `LVP brutto = LVP netto (${lvpNetto.toFixed(2)} €) * 1,19 = ${lvpBrutto.toFixed(2)} €.`
-            });
+            if (isOpen) {
+                dynamicQuestions.push({
+                    id: currentId++,
+                    theme: "calculations",
+                    topic: "Bruttoverkaufspreis (inkl. 19% MwSt)",
+                    isCalculation: true,
+                    isBawueFocus: true,
+                    type: "open-text",
+                    question: `Prüfungsaufgabe Handelskalkulation (IHK BaWü):\nDer Netto-Listenverkaufspreis (LVP) einer Softwarelizenz beträgt ${lvpNetto.toFixed(2)} €.\n\nBerechnen Sie den Brutto-Verkaufspreis inklusive 19 % Umsatzsteuer (mit Rechenweg).`,
+                    musterloesung: `Rechenweg:\n- Netto-LVP: ${lvpNetto.toFixed(2)} €\n- Umsatzsteuer (19 %): + ${(lvpNetto * 0.19).toFixed(2)} €\n= Brutto-Verkaufspreis: ${lvpBrutto.toFixed(2)} € (oder ${lvpNetto.toFixed(2)} € * 1,19 = ${lvpBrutto.toFixed(2)} €)`,
+                    explanation: `LVP brutto = LVP netto (${lvpNetto.toFixed(2)} €) * 1,19 = ${lvpBrutto.toFixed(2)} €.`
+                });
+            } else {
+                dynamicQuestions.push({
+                    id: currentId++,
+                    theme: "calculations",
+                    topic: "Bruttoverkaufspreis (inkl. 19% MwSt)",
+                    isCalculation: true,
+                    isBawueFocus: true,
+                    type: "multiple-choice",
+                    question: `Prüfungsaufgabe Handelskalkulation: Der Netto-Listenverkaufspreis (LVP) einer Softwarelizenz beträgt ${lvpNetto.toFixed(2)} €. Wie hoch ist der Brutto-Verkaufspreis für den Endverbraucher inklusive 19 % Umsatzsteuer?`,
+                    options: [
+                        `${lvpBrutto.toFixed(2)} € (USt-Betrag: ${(lvpNetto * 0.19).toFixed(2)} €)`,
+                        `${(lvpNetto / 1.19).toFixed(2)} €`,
+                        `${(lvpNetto + 19).toFixed(2)} €`,
+                        `${(lvpBrutto * 1.19).toFixed(2)} €`
+                    ],
+                    correctAnswer: 0,
+                    explanation: `LVP brutto = LVP netto (${lvpNetto.toFixed(2)} €) * 1,19 = ${lvpBrutto.toFixed(2)} €.`
+                });
+            }
         }
     }
 
@@ -1928,23 +2085,37 @@ function generateDynamicQuestions(typeMode = "mix") {
             }
         } else {
             // Kalkulationsfaktor
-            dynamicQuestions.push({
-                id: currentId++,
-                theme: "calculations",
-                topic: "Kalkulationsfaktor",
-                isCalculation: true,
-                isBawueFocus: true,
-                type: "multiple-choice",
-                question: `Ein IT-Artikel hat einen Bezugspreis von ${bezugspreis.toFixed(2)} € und soll für ${lvpNetto.toFixed(2)} € netto angeboten werden. Wie lautet der Kalkulationsfaktor?`,
-                options: [
-                    `${kalkFaktor.toFixed(4)} (LVP / Bezugspreis)`,
-                    `${(1 / kalkFaktor).toFixed(4)}`,
-                    `${(kalkZuschlag / 100).toFixed(4)}`,
-                    `${(handelsspanne / 100).toFixed(4)}`
-                ],
-                correctAnswer: 0,
-                explanation: `Kalkulationsfaktor = LVP / Bezugspreis = ${lvpNetto.toFixed(2)} € / ${bezugspreis.toFixed(2)} € = ${kalkFaktor.toFixed(4)}.`
-            });
+            if (isOpen) {
+                dynamicQuestions.push({
+                    id: currentId++,
+                    theme: "calculations",
+                    topic: "Kalkulationsfaktor",
+                    isCalculation: true,
+                    isBawueFocus: true,
+                    type: "open-text",
+                    question: `Prüfungsaufgabe Kalkulation (IHK BaWü):\nEin IT-Artikel hat einen Bezugspreis von ${bezugspreis.toFixed(2)} € und soll für ${lvpNetto.toFixed(2)} € netto angeboten werden.\n\nBerechnen Sie den Kalkulationsfaktor (mit Formel und 4 Nachkommastellen).`,
+                    musterloesung: `Rechenweg Kalkulationsfaktor:\n- Formel: Kalkulationsfaktor = Netto-Listenverkaufspreis / Bezugspreis\n- Rechnung: ${lvpNetto.toFixed(2)} € / ${bezugspreis.toFixed(2)} € = ${kalkFaktor.toFixed(4)}\n- Ergebnis: ${kalkFaktor.toFixed(4)}`,
+                    explanation: `Kalkulationsfaktor = LVP / Bezugspreis = ${lvpNetto.toFixed(2)} € / ${bezugspreis.toFixed(2)} € = ${kalkFaktor.toFixed(4)}.`
+                });
+            } else {
+                dynamicQuestions.push({
+                    id: currentId++,
+                    theme: "calculations",
+                    topic: "Kalkulationsfaktor",
+                    isCalculation: true,
+                    isBawueFocus: true,
+                    type: "multiple-choice",
+                    question: `Ein IT-Artikel hat einen Bezugspreis von ${bezugspreis.toFixed(2)} € und soll für ${lvpNetto.toFixed(2)} € netto angeboten werden. Wie lautet der Kalkulationsfaktor?`,
+                    options: [
+                        `${kalkFaktor.toFixed(4)} (LVP / Bezugspreis)`,
+                        `${(1 / kalkFaktor).toFixed(4)}`,
+                        `${(kalkZuschlag / 100).toFixed(4)}`,
+                        `${(handelsspanne / 100).toFixed(4)}`
+                    ],
+                    correctAnswer: 0,
+                    explanation: `Kalkulationsfaktor = LVP / Bezugspreis = ${lvpNetto.toFixed(2)} € / ${bezugspreis.toFixed(2)} € = ${kalkFaktor.toFixed(4)}.`
+                });
+            }
         }
     }
 
@@ -2004,42 +2175,70 @@ function generateDynamicQuestions(typeMode = "mix") {
             }
         } else if (subQ === 1) {
             // Nachfrageüberhang
-            dynamicQuestions.push({
-                id: currentId++,
-                theme: "calculations",
-                topic: "Marktüberhang: Nachfrageüberhang",
-                isCalculation: true,
-                isBawueFocus: true,
-                type: "multiple-choice",
-                question: `Auf einem Markt liegt der aktuelle Preis bei ${pNiedrig},00 € (unter dem Gleichgewichtspreis von ${pGleich},00 €). Die Anbieter bieten ${qAngebotNiedrig} Stück an, während die Kunden ${qNachfrageNiedrig} Stück nachfragen. Welche Marktsituation liegt vor und wie groß ist der Überhang?`,
-                options: [
-                    `Nachfrageüberhang von ${nachfrageUeberhang} Stück (${qNachfrageNiedrig} - ${qAngebotNiedrig}) -> Verkäufermarkt`,
-                    `Angebotsüberhang von ${nachfrageUeberhang} Stück -> Käufermarkt`,
-                    `Marktgleichgewicht von ${qGleich} Stück`,
-                    `Nachfrageüberhang von ${qAngebotNiedrig} Stück`
-                ],
-                correctAnswer: 0,
-                explanation: `Liegt der Preis unter dem Gleichgewichtspreis, ist die Nachfrage größer als das Angebot (Nachfrageüberhang). Die Verkäufer haben Marktmacht (Verkäufermarkt). Überhang: ${qNachfrageNiedrig} - ${qAngebotNiedrig} = ${nachfrageUeberhang} Stück.`
-            });
+            if (isOpen) {
+                dynamicQuestions.push({
+                    id: currentId++,
+                    theme: "calculations",
+                    topic: "Marktüberhang: Nachfrageüberhang",
+                    isCalculation: true,
+                    isBawueFocus: true,
+                    type: "open-text",
+                    question: `Prüfungsaufgabe Preisbildung & Marktüberhang (IHK BaWü):\nAuf einem Markt liegt der aktuelle Preis bei ${pNiedrig},00 € (unter dem Gleichgewichtspreis von ${pGleich},00 €).\nDie Anbieter bieten ${qAngebotNiedrig} Stück an, während die Kunden ${qNachfrageNiedrig} Stück nachfragen.\n\n1. Welche Marktsituation liegt vor (Käufer- oder Verkäufermarkt)?\n2. Wie hoch ist der Überhang in Stück?`,
+                    musterloesung: `Fachliche Lösung:\n1. Marktsituation: Nachfrageüberhang (Verkäufermarkt), da bei niedrigem Preis die Nachfrage das Angebot übersteigt.\n2. Überhang: ${qNachfrageNiedrig} Stück (Nachfrage) - ${qAngebotNiedrig} Stück (Angebot) = ${nachfrageUeberhang} Stück Nachfrageüberhang.`,
+                    explanation: `Liegt der Preis unter dem Gleichgewichtspreis, ist die Nachfrage größer als das Angebot (Nachfrageüberhang -> Verkäufermarkt). Überhang = ${nachfrageUeberhang} Stück.`
+                });
+            } else {
+                dynamicQuestions.push({
+                    id: currentId++,
+                    theme: "calculations",
+                    topic: "Marktüberhang: Nachfrageüberhang",
+                    isCalculation: true,
+                    isBawueFocus: true,
+                    type: "multiple-choice",
+                    question: `Auf einem Markt liegt der aktuelle Preis bei ${pNiedrig},00 € (unter dem Gleichgewichtspreis von ${pGleich},00 €). Die Anbieter bieten ${qAngebotNiedrig} Stück an, während die Kunden ${qNachfrageNiedrig} Stück nachfragen. Welche Marktsituation liegt vor und wie groß ist der Überhang?`,
+                    options: [
+                        `Nachfrageüberhang von ${nachfrageUeberhang} Stück (${qNachfrageNiedrig} - ${qAngebotNiedrig}) -> Verkäufermarkt`,
+                        `Angebotsüberhang von ${nachfrageUeberhang} Stück -> Käufermarkt`,
+                        `Marktgleichgewicht von ${qGleich} Stück`,
+                        `Nachfrageüberhang von ${qAngebotNiedrig} Stück`
+                    ],
+                    correctAnswer: 0,
+                    explanation: `Liegt der Preis unter dem Gleichgewichtspreis, ist die Nachfrage größer als das Angebot (Nachfrageüberhang). Die Verkäufer haben Marktmacht (Verkäufermarkt). Überhang: ${qNachfrageNiedrig} - ${qAngebotNiedrig} = ${nachfrageUeberhang} Stück.`
+                });
+            }
         } else {
             // Angebotsüberhang
-            dynamicQuestions.push({
-                id: currentId++,
-                theme: "calculations",
-                topic: "Marktüberhang: Angebotsüberhang",
-                isCalculation: true,
-                isBawueFocus: true,
-                type: "multiple-choice",
-                question: `Auf einem Markt liegt der aktuelle Preis bei ${pHoch},00 € (über dem Gleichgewichtspreis von ${pGleich},00 €). Die Hersteller bieten ${qAngebotHoch} Stück an, aber die Kunden fragen nur ${qNachfrageHoch} Stück nach. Welche Marktsituation liegt vor?`,
-                options: [
-                    `Angebotsüberhang von ${angebotsUeberhang} Stück (${qAngebotHoch} - ${qNachfrageHoch}) -> Käufermarkt`,
-                    `Nachfrageüberhang von ${angebotsUeberhang} Stück -> Verkäufermarkt`,
-                    `Vollkommener Markt im Gleichgewicht`,
-                    `Angebotsüberhang von ${qNachfrageHoch} Stück`
-                ],
-                correctAnswer: 0,
-                explanation: `Liegt der Preis über dem Gleichgewichtspreis, bieten Hersteller mehr an als nachgefragt wird (Angebotsüberhang). Käufer haben Auswahl- und Verhandlungsmacht (Käufermarkt). Überhang = ${qAngebotHoch} - ${qNachfrageHoch} = ${angebotsUeberhang} Stück.`
-            });
+            if (isOpen) {
+                dynamicQuestions.push({
+                    id: currentId++,
+                    theme: "calculations",
+                    topic: "Marktüberhang: Angebotsüberhang",
+                    isCalculation: true,
+                    isBawueFocus: true,
+                    type: "open-text",
+                    question: `Prüfungsaufgabe Preisbildung & Marktüberhang (IHK BaWü):\nAuf einem Markt liegt der aktuelle Preis bei ${pHoch},00 € (über dem Gleichgewichtspreis von ${pGleich},00 €).\nDie Hersteller bieten ${qAngebotHoch} Stück an, aber die Kunden fragen nur ${qNachfrageHoch} Stück nach.\n\n1. Welche Marktsituation liegt vor (Käufer- oder Verkäufermarkt)?\n2. Wie hoch ist der Überhang in Stück?`,
+                    musterloesung: `Fachliche Lösung:\n1. Marktsituation: Angebotsüberhang (Käufermarkt), da das Angebot die Nachfrage übersteigt.\n2. Überhang: ${qAngebotHoch} Stück (Angebot) - ${qNachfrageHoch} Stück (Nachfrage) = ${angebotsUeberhang} Stück Angebotsüberhang.`,
+                    explanation: `Liegt der Preis über dem Gleichgewichtspreis, ist das Angebot größer als die Nachfrage (Angebotsüberhang -> Käufermarkt). Überhang = ${angebotsUeberhang} Stück.`
+                });
+            } else {
+                dynamicQuestions.push({
+                    id: currentId++,
+                    theme: "calculations",
+                    topic: "Marktüberhang: Angebotsüberhang",
+                    isCalculation: true,
+                    isBawueFocus: true,
+                    type: "multiple-choice",
+                    question: `Auf einem Markt liegt der aktuelle Preis bei ${pHoch},00 € (über dem Gleichgewichtspreis von ${pGleich},00 €). Die Hersteller bieten ${qAngebotHoch} Stück an, aber die Kunden fragen nur ${qNachfrageHoch} Stück nach. Welche Marktsituation liegt vor?`,
+                    options: [
+                        `Angebotsüberhang von ${angebotsUeberhang} Stück (${qAngebotHoch} - ${qNachfrageHoch}) -> Käufermarkt`,
+                        `Nachfrageüberhang von ${angebotsUeberhang} Stück -> Verkäufermarkt`,
+                        `Vollkommener Markt im Gleichgewicht`,
+                        `Angebotsüberhang von ${qNachfrageHoch} Stück`
+                    ],
+                    correctAnswer: 0,
+                    explanation: `Liegt der Preis über dem Gleichgewichtspreis, bieten Hersteller mehr an als nachgefragt wird (Angebotsüberhang). Käufer haben Auswahl- und Verhandlungsmacht (Käufermarkt). Überhang = ${qAngebotHoch} - ${qNachfrageHoch} = ${angebotsUeberhang} Stück.`
+                });
+            }
         }
     }
 
@@ -2140,61 +2339,103 @@ function generateDynamicQuestions(typeMode = "mix") {
             }
         } else if (bCase === 1) {
             // Ausgleich von Verbindlichkeiten per Bank
-            dynamicQuestions.push({
-                id: currentId++,
-                theme: "lf6",
-                topic: "Buchungssätze: Lieferantenverbindlichkeiten begleichen",
-                isCalculation: true,
-                isBawueFocus: true,
-                type: "multiple-choice",
-                question: `Wir begleichen eine noch offene Lieferantenrechnung über ${grossValue.toLocaleString('de-DE')} € per Banküberweisung. Wie lautet der Buchungssatz?`,
-                options: [
-                    `4400 VE an 2800 BK ${grossValue.toLocaleString('de-DE')} €`,
-                    `2800 BK an 4400 VE ${grossValue.toLocaleString('de-DE')} €`,
-                    `4400 VE an 2400 FO ${grossValue.toLocaleString('de-DE')} €`,
-                    `6000 AWR an 2800 BK ${grossValue.toLocaleString('de-DE')} €`
-                ],
-                correctAnswer: 0,
-                explanation: `Verbindlichkeiten (4400 VE) nehmen im Soll ab, Bankkonto (2800 BK) nimmt im Haben ab (Passiv-Aktiv-Minderung).`
-            });
+            if (isOpen) {
+                dynamicQuestions.push({
+                    id: currentId++,
+                    theme: "lf6",
+                    topic: "Buchungssätze: Lieferantenverbindlichkeiten begleichen",
+                    isCalculation: true,
+                    isBawueFocus: true,
+                    type: "open-text",
+                    question: `Prüfungsaufgabe Rechnungswesen (IHK BaWü):\nWir begleichen eine noch offene Lieferantenrechnung über ${grossValue.toLocaleString('de-DE')} € per Banküberweisung.\n\nBilden Sie den Buchungssatz (Soll an Haben mit Kontonummern/Kontennamen und Betrag).`,
+                    musterloesung: `Buchungssatz:\n4400 VE an 2800 BK ${grossValue.toLocaleString('de-DE')} €\n\nErklärung: Verbindlichkeiten aus Lieferungen und Leistungen nehmen im Soll ab, Bankkonto nimmt im Haben ab (Passiv-Aktiv-Minderung / Bilanzverkürzung).`,
+                    explanation: `Verbindlichkeiten (4400 VE) nehmen im Soll ab, Bankkonto (2800 BK) nimmt im Haben ab.`
+                });
+            } else {
+                dynamicQuestions.push({
+                    id: currentId++,
+                    theme: "lf6",
+                    topic: "Buchungssätze: Lieferantenverbindlichkeiten begleichen",
+                    isCalculation: true,
+                    isBawueFocus: true,
+                    type: "multiple-choice",
+                    question: `Wir begleichen eine noch offene Lieferantenrechnung über ${grossValue.toLocaleString('de-DE')} € per Banküberweisung. Wie lautet der Buchungssatz?`,
+                    options: [
+                        `4400 VE an 2800 BK ${grossValue.toLocaleString('de-DE')} €`,
+                        `2800 BK an 4400 VE ${grossValue.toLocaleString('de-DE')} €`,
+                        `4400 VE an 2400 FO ${grossValue.toLocaleString('de-DE')} €`,
+                        `6000 AWR an 2800 BK ${grossValue.toLocaleString('de-DE')} €`
+                    ],
+                    correctAnswer: 0,
+                    explanation: `Verbindlichkeiten (4400 VE) nehmen im Soll ab, Bankkonto (2800 BK) nimmt im Haben ab (Passiv-Aktiv-Minderung).`
+                });
+            }
         } else if (bCase === 2) {
             // Verkauf von BGA / Sachanlagen mit Umsatzsteuer
-            dynamicQuestions.push({
-                id: currentId++,
-                theme: "lf6",
-                topic: "Buchungssätze: Anlagenverkauf mit USt",
-                isCalculation: true,
-                isBawueFocus: true,
-                type: "multiple-choice",
-                question: `Verkauf einer gebrauchten Büroeinrichtung/BGA für ${netValue.toLocaleString('de-DE')},00 € netto (+ 19 % USt: ${ust.toLocaleString('de-DE')} €) per Banküberweisung. Wie lautet der Buchungssatz?`,
-                options: [
-                    `2800 BK ${grossValue.toLocaleString('de-DE')} € an 0870 BGA ${netValue.toLocaleString('de-DE')},00 € und 4800 UST ${ust.toLocaleString('de-DE')} €`,
-                    `0870 BGA ${netValue.toLocaleString('de-DE')},00 € und 4800 UST ${ust.toLocaleString('de-DE')} € an 2800 BK ${grossValue.toLocaleString('de-DE')} €`,
-                    `2800 BK ${grossValue.toLocaleString('de-DE')} € an 5000 UEFE ${grossValue.toLocaleString('de-DE')} €`,
-                    `2400 FO an 0870 BGA ${grossValue.toLocaleString('de-DE')} €`
-                ],
-                correctAnswer: 0,
-                explanation: `Bank im Soll mit Bruttobetrag, BGA im Haben mit Nettobetrag, Umsatzsteuer 4800 UST im Haben.`
-            });
+            if (isOpen) {
+                dynamicQuestions.push({
+                    id: currentId++,
+                    theme: "lf6",
+                    topic: "Buchungssätze: Anlagenverkauf mit USt",
+                    isCalculation: true,
+                    isBawueFocus: true,
+                    type: "open-text",
+                    question: `Prüfungsaufgabe Rechnungswesen (IHK BaWü):\nVerkauf einer gebrauchten Büroeinrichtung/BGA für ${netValue.toLocaleString('de-DE')},00 € netto (+ 19 % USt: ${ust.toLocaleString('de-DE')} €) per Banküberweisung.\n\nBilden Sie den vollständigen Buchungssatz mit Beträgen.`,
+                    musterloesung: `Buchungssatz:\n2800 BK ${grossValue.toLocaleString('de-DE')} € an 0870 BGA ${netValue.toLocaleString('de-DE')},00 € und 4800 UST ${ust.toLocaleString('de-DE')} €\n\nErklärung: Bank im Soll mit Bruttobetrag, BGA im Haben mit Nettobetrag, Umsatzsteuer 4800 UST im Haben.`,
+                    explanation: `Bank im Soll mit Bruttobetrag, BGA im Haben mit Nettobetrag, Umsatzsteuer 4800 UST im Haben.`
+                });
+            } else {
+                dynamicQuestions.push({
+                    id: currentId++,
+                    theme: "lf6",
+                    topic: "Buchungssätze: Anlagenverkauf mit USt",
+                    isCalculation: true,
+                    isBawueFocus: true,
+                    type: "multiple-choice",
+                    question: `Verkauf einer gebrauchten Büroeinrichtung/BGA für ${netValue.toLocaleString('de-DE')},00 € netto (+ 19 % USt: ${ust.toLocaleString('de-DE')} €) per Banküberweisung. Wie lautet der Buchungssatz?`,
+                    options: [
+                        `2800 BK ${grossValue.toLocaleString('de-DE')} € an 0870 BGA ${netValue.toLocaleString('de-DE')},00 € und 4800 UST ${ust.toLocaleString('de-DE')} €`,
+                        `0870 BGA ${netValue.toLocaleString('de-DE')},00 € und 4800 UST ${ust.toLocaleString('de-DE')} € an 2800 BK ${grossValue.toLocaleString('de-DE')} €`,
+                        `2800 BK ${grossValue.toLocaleString('de-DE')} € an 5000 UEFE ${grossValue.toLocaleString('de-DE')} €`,
+                        `2400 FO an 0870 BGA ${grossValue.toLocaleString('de-DE')} €`
+                    ],
+                    correctAnswer: 0,
+                    explanation: `Bank im Soll mit Bruttobetrag, BGA im Haben mit Nettobetrag, Umsatzsteuer 4800 UST im Haben.`
+                });
+            }
         } else {
             // Forderungsausgleich Kunde an Bank
-            dynamicQuestions.push({
-                id: currentId++,
-                theme: "lf6",
-                topic: "Buchungssätze: Kundenzahlungseingang",
-                isCalculation: true,
-                isBawueFocus: true,
-                type: "multiple-choice",
-                question: `Ein Kunde überweist den fälligen Rechnungsbetrag von ${grossValue.toLocaleString('de-DE')} € auf unser Bankkonto. Wie lautet der Buchungssatz?`,
-                options: [
-                    `2800 BK an 2400 FO ${grossValue.toLocaleString('de-DE')} €`,
-                    `2400 FO an 2800 BK ${grossValue.toLocaleString('de-DE')} €`,
-                    `2800 BK an 5000 UEFE ${grossValue.toLocaleString('de-DE')} €`,
-                    `4400 VE an 2800 BK ${grossValue.toLocaleString('de-DE')} €`
-                ],
-                correctAnswer: 0,
-                explanation: `Bank (2800 BK) nimmt im Soll zu, Forderungen (2400 FO) nehmen im Haben ab (Aktivtausch).`
-            });
+            if (isOpen) {
+                dynamicQuestions.push({
+                    id: currentId++,
+                    theme: "lf6",
+                    topic: "Buchungssätze: Kundenzahlungseingang",
+                    isCalculation: true,
+                    isBawueFocus: true,
+                    type: "open-text",
+                    question: `Prüfungsaufgabe Rechnungswesen (IHK BaWü):\nEin Kunde überweist den fälligen Rechnungsbetrag von ${grossValue.toLocaleString('de-DE')} € auf unser Bankkonto.\n\nBilden Sie den Buchungssatz (Soll an Haben mit Konten und Betrag).`,
+                    musterloesung: `Buchungssatz:\n2800 BK an 2400 FO ${grossValue.toLocaleString('de-DE')} €\n\nErklärung: Bank (2800 BK) nimmt im Soll zu, Forderungen aus Lieferungen und Leistungen (2400 FO) nehmen im Haben ab (Aktivtausch).`,
+                    explanation: `Bank (2800 BK) nimmt im Soll zu, Forderungen (2400 FO) nehmen im Haben ab (Aktivtausch).`
+                });
+            } else {
+                dynamicQuestions.push({
+                    id: currentId++,
+                    theme: "lf6",
+                    topic: "Buchungssätze: Kundenzahlungseingang",
+                    isCalculation: true,
+                    isBawueFocus: true,
+                    type: "multiple-choice",
+                    question: `Ein Kunde überweist den fälligen Rechnungsbetrag von ${grossValue.toLocaleString('de-DE')} € auf unser Bankkonto. Wie lautet der Buchungssatz?`,
+                    options: [
+                        `2800 BK an 2400 FO ${grossValue.toLocaleString('de-DE')} €`,
+                        `2400 FO an 2800 BK ${grossValue.toLocaleString('de-DE')} €`,
+                        `2800 BK an 5000 UEFE ${grossValue.toLocaleString('de-DE')} €`,
+                        `4400 VE an 2800 BK ${grossValue.toLocaleString('de-DE')} €`
+                    ],
+                    correctAnswer: 0,
+                    explanation: `Bank (2800 BK) nimmt im Soll zu, Forderungen (2400 FO) nehmen im Haben ab (Aktivtausch).`
+                });
+            }
         }
     }
 
@@ -2268,23 +2509,38 @@ function generateDynamicQuestions(typeMode = "mix") {
         const binWrong2 = `${hexToBinMap[d2]} ${hexToBinMap[d1]} ${hexToBinMap[d4]} ${hexToBinMap[d3]}`;
         const binWrong3 = `1111 0000 ${hexToBinMap[d3]} ${hexToBinMap[d4]}`;
 
-        dynamicQuestions.push({
-            id: currentId++,
-            theme: "lf2",
-            topic: "Zahlensysteme: Hexadezimal zu Binär",
-            isCalculation: true,
-            isBawueFocus: true,
-            type: "multiple-choice",
-            question: `Wandle die Hexadezimalzahl ${hexStr} (Basis 16) in das 16-Bit-Binärsystem um (4er-Nibbles):`,
-            options: [
-                `${binCorrect}`,
-                `${binWrong1}`,
-                `${binWrong2}`,
-                `${binWrong3}`
-            ],
-            correctAnswer: 0,
-            explanation: `Nibble-Umwandlung von ${hexStr}:\n${d1} = ${hexToBinMap[d1]}, ${d2} = ${hexToBinMap[d2]}, ${d3} = ${hexToBinMap[d3]}, ${d4} = ${hexToBinMap[d4]}\nErgebnis: ${binCorrect}_2.`
-        });
+        const isOpen = shouldBeOpenText();
+        if (isOpen) {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "lf2",
+                topic: "Zahlensysteme: Hexadezimal zu Binär",
+                isCalculation: true,
+                isBawueFocus: true,
+                type: "open-text",
+                question: `Prüfungsaufgabe Zahlensysteme (IHK BaWü):\nWandeln Sie die Hexadezimalzahl **${hexStr}** (Basis 16) schrittweise in das 16-Bit-Binärmuster (4er-Nibbles) um.`,
+                musterloesung: `Nibble-Umwandlung von ${hexStr}:\n- Ziffer '${d1}' = ${hexToBinMap[d1]}\n- Ziffer '${d2}' = ${hexToBinMap[d2]}\n- Ziffer '${d3}' = ${hexToBinMap[d3]}\n- Ziffer '${d4}' = ${hexToBinMap[d4]}\n\nErgebnis: ${binCorrect}_2`,
+                explanation: `Jede Hex-Ziffer entspricht genau 4 Binärstellen (1 Nibble).`
+            });
+        } else {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "lf2",
+                topic: "Zahlensysteme: Hexadezimal zu Binär",
+                isCalculation: true,
+                isBawueFocus: true,
+                type: "multiple-choice",
+                question: `Wandle die Hexadezimalzahl ${hexStr} (Basis 16) in das 16-Bit-Binärsystem um (4er-Nibbles):`,
+                options: [
+                    `${binCorrect}`,
+                    `${binWrong1}`,
+                    `${binWrong2}`,
+                    `${binWrong3}`
+                ],
+                correctAnswer: 0,
+                explanation: `Nibble-Umwandlung von ${hexStr}:\n${d1} = ${hexToBinMap[d1]}, ${d2} = ${hexToBinMap[d2]}, ${d3} = ${hexToBinMap[d3]}, ${d4} = ${hexToBinMap[d4]}\nErgebnis: ${binCorrect}_2.`
+            });
+        }
     }
 
     // ==========================================
