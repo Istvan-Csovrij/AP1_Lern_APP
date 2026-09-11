@@ -5578,6 +5578,202 @@ WHERE Email IS NULL OR Email = '';
         "question": "Prüfungsaufgabe Bandbreite & WAN-Replikation (BaWü-Fokus):\nEin Unternehmen möchte täglich ein VM-Replikat von 800 GiB über eine gemietete Standleitung mit 250 Mbit/s in ein Ausweich-Rechenzentrum übertragen.\n\nAufgabe:\na) Berechne die Datenmenge von 800 GiB in Gigabit (Gbit).\nb) Berechne die Übertragungszeit in Stunden und Minuten unter idealen Bedingungen (ohne Overhead).\nc) Die Replikationssoftware verursacht 12 % Protokoll- und Verschlüsselungs-Overhead. Berechne die tatsächliche Replikationsdauer.",
         "musterloesung": "a) Datenmenge in Gigabit:\n- 800 GiB * 1.024 MiB/GiB * 1.024 KiB/MiB * 1.024 Bytes/KiB = 858.993.459.200 Bytes.\n- In Bit: 858.993.459.200 * 8 = 6.871.947.673.600 Bits ≈ 6.871,95 Gbit (bzw. vereinfacht 800 GiB * 8 = 6.400 Gibibit = ca. 6.872 Gbit).\n\nb) Ideale Übertragungszeit (bei 250 Mbit/s = 0,25 Gbit/s):\n- t = 6.871,95 Gbit / 0,25 Gbit/s = 27.487,8 Sekunden.\n- In Stunden: 27.487,8 s / 3.600 s/h ≈ 7,635 Stunden = 7 Stunden 38 Minuten.\n\nc) Mit 12 % Overhead:\n- Datenmenge mit Overhead: 6.871,95 Gbit * 1,12 = 7.696,58 Gbit.\n- Zeit: 7.696,58 Gbit / 0,25 Gbit/s = 30.786,3 Sekunden.\n- In Stunden: 30.786,3 s / 3.600 s/h ≈ 8,552 Stunden = 8 Stunden 33 Minuten 7 Sekunden.",
         "explanation": "Achtung: Byte in Bit umrechnen (Faktor 8) und Einheiten (Mbit/s vs. Gbit) angleichen!"
+},
+    {
+        "id": 309,
+        "theme": "calculations",
+        "topic": "Handelskalkulation: Zieleinkaufspreis (ZEP)",
+        "isCalculation": true,
+        "isBawueFocus": true,
+        "type": "multiple-choice",
+        "question": "Ein IT-Systemhaus bestellt 10 Notebooks zum Listeneinkaufspreis (LEP) von jeweils 800,00 € (Gesamt: 8.000,00 €). Der Großhändler gewährt einen Mengenrabatt (Lieferantenrabatt) von 15 %. Wie hoch ist der Zieleinkaufspreis (ZEP) pro Stück und gesamt?",
+        "options": [
+                "680,00 € pro Stück (Gesamt: 6.800,00 €)",
+                "720,00 € pro Stück (Gesamt: 7.200,00 €)",
+                "650,00 € pro Stück (Gesamt: 6.500,00 €)",
+                "700,00 € pro Stück (Gesamt: 7.000,00 €)"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Formel: Zieleinkaufspreis (ZEP) = Listeneinkaufspreis (LEP) - Lieferantenrabatt.\nRechnung pro Stück: 800,00 € - (800,00 € * 0,15) = 800,00 € - 120,00 € = 680,00 € (Gesamt: 6.800,00 €)."
+},
+    {
+        "id": 310,
+        "theme": "calculations",
+        "topic": "Handelskalkulation: Bareinkaufspreis (BEP)",
+        "isCalculation": true,
+        "isBawueFocus": true,
+        "type": "multiple-choice",
+        "question": "Der Zieleinkaufspreis (ZEP) für einen Switch beträgt 500,00 €. Der Lieferant gewährt bei Zahlung innerhalb von 10 Tagen 3 % Skonto (Lieferantenskonto). Wie hoch ist der Bareinkaufspreis (BEP)?",
+        "options": [
+                "485,00 € (Skontoabzug: 15,00 €)",
+                "490,00 €",
+                "475,00 €",
+                "480,00 €"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Formel: Bareinkaufspreis (BEP) = Zieleinkaufspreis (ZEP) - Lieferantenskonto.\nRechnung: 500,00 € - (500,00 € * 0,03) = 500,00 € - 15,00 € = 485,00 €."
+},
+    {
+        "id": 311,
+        "theme": "calculations",
+        "topic": "Handelskalkulation: Bezugspreis / Einstandspreis",
+        "isCalculation": true,
+        "isBawueFocus": true,
+        "type": "multiple-choice",
+        "question": "Der Bareinkaufspreis (BEP) einer Serverlieferung liegt bei 3.200,00 €. An Bezugskosten fallen an: 60,00 € Fracht/Spedition und 20,00 € Transportversicherung. Wie hoch ist der Bezugspreis (Einstandspreis)?",
+        "options": [
+                "3.280,00 €",
+                "3.200,00 €",
+                "3.120,00 €",
+                "3.340,00 €"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Formel: Bezugspreis (Einstandspreis) = Bareinkaufspreis (BEP) + Bezugskosten.\nRechnung: 3.200,00 € + 60,00 € + 20,00 € = 3.280,00 €."
+},
+    {
+        "id": 312,
+        "theme": "calculations",
+        "topic": "Handelskalkulation: Selbstkostenpreis",
+        "isCalculation": true,
+        "isBawueFocus": true,
+        "type": "multiple-choice",
+        "question": "Der Einstandspreis für einen Router beträgt 200,00 €. Das Unternehmen kalkuliert mit einem Handlungskostenzuschlagssatz (HKZ) von 30 % für Lager, Verwaltung und Vertrieb. Wie hoch sind die Selbstkosten?",
+        "options": [
+                "260,00 € (Handlungskosten: 60,00 €)",
+                "230,00 €",
+                "280,00 €",
+                "300,00 €"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Formel: Selbstkosten = Bezugspreis + Handlungskosten.\nRechnung: 200,00 € + (200,00 € * 0,30) = 200,00 € + 60,00 € = 260,00 €."
+},
+    {
+        "id": 313,
+        "theme": "calculations",
+        "topic": "Handelskalkulation: Barverkaufspreis (BVP)",
+        "isCalculation": true,
+        "isBawueFocus": true,
+        "type": "multiple-choice",
+        "question": "Die Selbstkosten für ein IT-Servicepaket betragen 600,00 €. Das Unternehmen möchte einen Gewinnzuschlag von 20 % erzielen. Wie hoch ist der Barverkaufspreis (BVP)?",
+        "options": [
+                "720,00 € (Gewinn: 120,00 €)",
+                "680,00 €",
+                "750,00 €",
+                "700,00 €"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Formel: Barverkaufspreis (BVP) = Selbstkosten + Gewinnzuschlag.\nRechnung: 600,00 € + (600,00 € * 0,20) = 600,00 € + 120,00 € = 720,00 €."
+},
+    {
+        "id": 314,
+        "theme": "calculations",
+        "topic": "Handelskalkulation: Zielverkaufspreis (ZVP)",
+        "isCalculation": true,
+        "isBawueFocus": true,
+        "type": "multiple-choice",
+        "question": "Ein Barverkaufspreis (BVP) beträgt 980,00 €. Dem Kunden soll 2 % Skonto (Kundenskonto) eingeräumt werden. Wie hoch muss der Zielverkaufspreis (ZVP) sein, damit das Unternehmen nach Skontoabzug genau die 980,00 € erhält (Kalkulation 'im Hundert')?",
+        "options": [
+                "1.000,00 € (Berechnung: 980,00 € / 0,98)",
+                "999,60 € (Berechnung: 980,00 € * 1,02)",
+                "960,40 €",
+                "1.020,00 €"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Achtung: In der Vorwärtskalkulation ist der ZVP die 100%-Basis für das Kundenskonto. Da der BVP dem Betrag nach Skontoabzug entspricht, gilt: BVP = 98 % des ZVP.\nFormel: ZVP = BVP / (1 - Skonto/100) = 980,00 € / 0,98 = 1.000,00 €.\n(Probe: 1.000,00 € - 2 % Skonto (20,00 €) = 980,00 €)."
+},
+    {
+        "id": 315,
+        "theme": "calculations",
+        "topic": "Handelskalkulation: Listenverkaufspreis (LVP netto & brutto)",
+        "isCalculation": true,
+        "isBawueFocus": true,
+        "type": "multiple-choice",
+        "question": "Der Zielverkaufspreis (ZVP) beträgt 900,00 €. Dem Kunden wird 10 % Kundenrabatt (im Hundert) gewährt. Wie hoch sind der Netto-Listenverkaufspreis (LVP) und der Brutto-Endpreis (inkl. 19 % USt)?",
+        "options": [
+                "LVP netto = 1.000,00 € | LVP brutto = 1.190,00 €",
+                "LVP netto = 990,00 € | LVP brutto = 1.178,10 €",
+                "LVP netto = 1.000,00 € | LVP brutto = 1.160,00 €",
+                "LVP netto = 1.050,00 € | LVP brutto = 1.249,50 €"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Rechnung:\n1. LVP netto (im Hundert): ZVP / (1 - 0,10) = 900,00 € / 0,90 = 1.000,00 €.\n2. LVP brutto: 1.000,00 € * 1,19 = 1.190,00 €."
+},
+    {
+        "id": 316,
+        "theme": "calculations",
+        "topic": "Handelskalkulation: Rückwärtskalkulation (Max. LEP)",
+        "isCalculation": true,
+        "isBawueFocus": true,
+        "type": "multiple-choice",
+        "question": "Ein IT-Händler möchte ein Zubehörteil für 119,00 € brutto (100,00 € netto LVP) verkaufen. Er kalkuliert mit 10 % Kundenrabatt, 2 % Kundenskonto, 15 % Gewinn, 25 % HKZ, 5,00 € Bezugskosten, 2 % Lieferantenskonto und 20 % Lieferantenrabatt. Welcher maximale Listeneinkaufspreis (LEP) darf im Einkauf akzeptiert werden?",
+        "options": [
+                "ca. 71,98 € (durch schrittweise Rückrechnung von 100,00 € LVP zum LEP)",
+                "ca. 50,00 €",
+                "ca. 85,00 €",
+                "ca. 92,00 €"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Rückwärtskalkulation:\n1. LVP netto = 100,00 € - 10 % Kundenrabatt (10,00 €) = ZVP 90,00 €.\n2. ZVP 90,00 € - 2 % Kundenskonto (1,80 €) = BVP 88,20 €.\n3. BVP 88,20 € / 1,15 (Gewinn) = Selbstkosten 76,70 €.\n4. Selbstkosten 76,70 € / 1,25 (HKZ) = Bezugspreis 61,36 €.\n5. Bezugspreis 61,36 € - 5,00 € Bezugskosten = BEP 56,36 €.\n6. BEP 56,36 € / 0,98 (Lieferantenskonto) = ZEP 57,51 €.\n7. ZEP 57,51 € / 0,80 (Lieferantenrabatt) = max. LEP ≈ 71,89 € bis 71,98 €."
+},
+    {
+        "id": 317,
+        "theme": "calculations",
+        "topic": "Zinsrechnung: Kaufmännische Zinsformel (Tage)",
+        "isCalculation": true,
+        "isBawueFocus": true,
+        "type": "multiple-choice",
+        "question": "Ein Unternehmen leiht sich 36.000,00 € für 40 Tage bei einer Bank zu einem Zinssatz von 7,5 % p.a. (deutsche kaufmännische Zinsmethode: 360 Tage/Jahr). Wie hoch sind die anfallenden Kreditzinsen?",
+        "options": [
+                "300,00 €",
+                "270,00 €",
+                "360,00 €",
+                "750,00 €"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Formel: Z = (K * p * t) / (100 * 360)\nZ = (36.000 * 7,5 * 40) / 36.000 = 10.800.000 / 36.000 = 300,00 €."
+},
+    {
+        "id": 318,
+        "theme": "calculations",
+        "topic": "Zinsrechnung: Monatszinsen",
+        "isCalculation": true,
+        "isBawueFocus": true,
+        "type": "multiple-choice",
+        "question": "Für ein Projekt wird ein Darlehen von 120.000,00 € für 5 Monate zu 6 % p.a. aufgenommen. Wie hoch sind die Zinsen für diese 5 Monate?",
+        "options": [
+                "3.000,00 €",
+                "7.200,00 €",
+                "6.000,00 €",
+                "2.500,00 €"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Formel für Monatszinsen: Z = (K * p * m) / (100 * 12)\nZ = (120.000 * 6 * 5) / 1.200 = 3.600.000 / 1.200 = 3.000,00 €."
+},
+    {
+        "id": 319,
+        "theme": "calculations",
+        "topic": "Wahr/Falsch: Rabatt vs. Skonto",
+        "isCalculation": true,
+        "isBawueFocus": true,
+        "type": "true-false",
+        "question": "Wahr oder Falsch: Ein Rabatt wird meist für Mengenabnahme, Treue oder Aktionen direkt auf der Rechnung vom Listeneinkaufspreis abgezogen, während Skonto ein zeitlich befristeter Preisnachlass für vorzeitige Zahlung innerhalb einer Skontofrist ist.",
+        "options": [
+                "Wahr (Richtig)",
+                "Falsch (Rabatt und Skonto sind rechtlich und kaufmännisch dasselbe)"
+        ],
+        "correctAnswer": 0,
+        "explanation": "Richtig! Rabatt = Leistungsnachlass (Menge, Treue, Personal). Skonto = Zinsvergütung für vorzeitige Zahlung / Liquiditätsvorteil."
+},
+    {
+        "id": 320,
+        "theme": "calculations",
+        "topic": "IHK Fallstudie Komplette Handelskalkulation Tabelle",
+        "isCalculation": true,
+        "isBawueFocus": true,
+        "type": "open-text",
+        "question": "Prüfungsaufgabe Handelskalkulation (BaWü-Fokus): Gegeben sind folgende Werte für 100 Server-Netzteile:\n\n- Listeneinkaufspreis (LEP): 120,00 € pro Stück\n- Lieferantenrabatt: 25 %\n- Lieferantenskonto: 2 %\n- Bezugskosten: 90,00 € (für alle 100 Stück zusammen)\n- Handlungskostenzuschlag (HKZ): 20 %\n- Gewinnzuschlag: 20 %\n- Kundenskonto: 3 % (im Hundert)\n- Kundenrabatt: 5 % (im Hundert)\n- Umsatzsteuer: 19 %\n\nAufgabe:\nBerechne pro Stück:\n1. Zieleinkaufspreis (ZEP)\n2. Bareinkaufspreis (BEP)\n3. Bezugspreis (Einstandspreis)\n4. Selbstkosten\n5. Barverkaufspreis (BVP)\n6. Zielverkaufspreis (ZVP)\n7. Listenverkaufspreis (LVP netto)\n8. Endpreis (LVP brutto)",
+        "musterloesung": "Schrittweise Lösung (pro Stück):\n\n1. LEP: 120,00 €\n- Lieferantenrabatt (25 %): -30,00 €\n= 1. ZEP: 90,00 €\n\n- Lieferantenskonto (2 % von 90 €): -1,80 €\n= 2. BEP: 88,20 €\n\n+ Bezugskosten (90 € / 100): +0,90 €\n= 3. Bezugspreis (Einstandspreis): 89,10 €\n\n+ Handlungskosten (20 % von 89,10 €): +17,82 €\n= 4. Selbstkosten: 106,92 €\n\n+ Gewinnzuschlag (20 % von 106,92 €): +21,38 €\n= 5. Barverkaufspreis (BVP): 128,30 €\n\n+ Kundenskonto (3 % im Hundert -> 128,30 € / 0,97): +3,97 €\n= 6. Zielverkaufspreis (ZVP): 132,27 €\n\n+ Kundenrabatt (5 % im Hundert -> 132,27 € / 0,95): +6,96 €\n= 7. Listenverkaufspreis netto (LVP): 139,23 €\n\n+ 19 % USt (19 % von 139,23 €): +26,45 €\n= 8. Listenverkaufspreis brutto: 165,68 €.",
+        "explanation": "Vorwärtskalkulationsschema schrittweise von oben nach unten anwenden."
 }
 
 ];

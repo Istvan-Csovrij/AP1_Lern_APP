@@ -1658,5 +1658,172 @@ function generateDynamicQuestions(typeMode = "mix") {
         });
     }
 
+    
+    // C.7 Dynamische Einzelstufen der Handelskalkulation (LEP, ZEP, BEP, BVP, ZVP, LVP)
+    for (let i = 0; i < 25; i++) {
+        const step = Math.floor(Math.random() * 5);
+        const lep = (Math.floor(Math.random() * 20) + 5) * 50; // 250 bis 1.250 €
+        const rabattPct = (Math.floor(Math.random() * 4) + 1) * 5; // 5, 10, 15, 20 %
+        const skontoPct = Math.random() < 0.5 ? 2 : 3;
+        const bezugskosten = (Math.floor(Math.random() * 5) + 1) * 10; // 10 bis 50 €
+        const hkzPct = (Math.floor(Math.random() * 4) + 4) * 5; // 20, 25, 30, 35 %
+        const gewinnPct = (Math.floor(Math.random() * 4) + 2) * 5; // 10, 15, 20, 25 %
+
+        const rabattBetrag = lep * (rabattPct / 100);
+        const zep = lep - rabattBetrag;
+        const skontoBetrag = zep * (skontoPct / 100);
+        const bep = zep - skontoBetrag;
+        const einstand = bep + bezugskosten;
+        const hkBetrag = einstand * (hkzPct / 100);
+        const selbstkosten = einstand + hkBetrag;
+        const gewinnBetrag = selbstkosten * (gewinnPct / 100);
+        const bvp = selbstkosten + gewinnBetrag;
+        const zvp = bvp / (1 - (skontoPct / 100));
+        const lvpNetto = zvp / (1 - (rabattPct / 100));
+        const lvpBrutto = lvpNetto * 1.19;
+
+        const isOpen = shouldBeOpenText();
+
+        if (step === 0) {
+            // ZEP aus LEP und Lieferantenrabatt
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "calculations",
+                topic: "Zieleinkaufspreis (ZEP) Berechnung",
+                isCalculation: true,
+                isBawueFocus: true,
+                type: "multiple-choice",
+                question: `Prüfungsaufgabe Handelskalkulation: Ein Server kostet laut Katalog (Listeneinkaufspreis LEP) ${lep.toFixed(2)} €. Der Lieferant gewährt ${rabattPct} % Lieferantenrabatt. Wie hoch ist der Zieleinkaufspreis (ZEP)?`,
+                options: [
+                    `${zep.toFixed(2)} € (Rabattabzug: ${rabattBetrag.toFixed(2)} €)`,
+                    `${(lep + rabattBetrag).toFixed(2)} €`,
+                    `${(lep * 0.98).toFixed(2)} €`,
+                    `${(zep - 10).toFixed(2)} €`
+                ],
+                correctAnswer: 0,
+                explanation: `ZEP = LEP (${lep.toFixed(2)} €) - ${rabattPct} % Rabatt (${rabattBetrag.toFixed(2)} €) = ${zep.toFixed(2)} €.`
+            });
+        } else if (step === 1) {
+            // BEP aus ZEP und Lieferantenskonto
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "calculations",
+                topic: "Bareinkaufspreis (BEP) Berechnung",
+                isCalculation: true,
+                isBawueFocus: true,
+                type: "multiple-choice",
+                question: `Prüfungsaufgabe Handelskalkulation: Der Zieleinkaufspreis (ZEP) beträgt ${zep.toFixed(2)} €. Bei Zahlung innerhalb von 10 Tagen werden ${skontoPct} % Lieferantenskonto abgezogen. Wie hoch ist der Bareinkaufspreis (BEP)?`,
+                options: [
+                    `${bep.toFixed(2)} € (Skontoersparnis: ${skontoBetrag.toFixed(2)} €)`,
+                    `${(zep + skontoBetrag).toFixed(2)} €`,
+                    `${(zep * 0.90).toFixed(2)} €`,
+                    `${(bep - 5).toFixed(2)} €`
+                ],
+                correctAnswer: 0,
+                explanation: `BEP = ZEP (${zep.toFixed(2)} €) - ${skontoPct} % Skonto (${skontoBetrag.toFixed(2)} €) = ${bep.toFixed(2)} €.`
+            });
+        } else if (step === 2) {
+            // Barverkaufspreis BVP aus Selbstkosten und Gewinn
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "calculations",
+                topic: "Barverkaufspreis (BVP) Berechnung",
+                isCalculation: true,
+                isBawueFocus: true,
+                type: "multiple-choice",
+                question: `Prüfungsaufgabe Handelskalkulation: Die Selbstkosten für ein IT-Produkt betragen ${selbstkosten.toFixed(2)} €. Das Systemhaus kalkuliert einen Gewinnzuschlag von ${gewinnPct} %. Wie hoch ist der Barverkaufspreis (BVP)?`,
+                options: [
+                    `${bvp.toFixed(2)} € (Gewinn: ${gewinnBetrag.toFixed(2)} €)`,
+                    `${(selbstkosten - gewinnBetrag).toFixed(2)} €`,
+                    `${(selbstkosten * 1.19).toFixed(2)} €`,
+                    `${(bvp + 50).toFixed(2)} €`
+                ],
+                correctAnswer: 0,
+                explanation: `BVP = Selbstkosten (${selbstkosten.toFixed(2)} €) + ${gewinnPct} % Gewinn (${gewinnBetrag.toFixed(2)} €) = ${bvp.toFixed(2)} €.`
+            });
+        } else if (step === 3) {
+            // Zielverkaufspreis ZVP im Hundert
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "calculations",
+                topic: "Zielverkaufspreis (ZVP im Hundert)",
+                isCalculation: true,
+                isBawueFocus: true,
+                type: "multiple-choice",
+                question: `Prüfungsaufgabe Handelskalkulation: Der Barverkaufspreis (BVP) beträgt ${bvp.toFixed(2)} €. Dem Kunden werden ${skontoPct} % Kundenskonto gewährt. Welcher Zielverkaufspreis (ZVP) muss kalkuliert werden (Kalkulation im Hundert)?`,
+                options: [
+                    `${zvp.toFixed(2)} € (Berechnung: ${bvp.toFixed(2)} € / ${(1 - skontoPct/100).toFixed(2)})`,
+                    `${(bvp * (1 + skontoPct/100)).toFixed(2)} € (Vom Hundert - fehlerhaft)`,
+                    `${(bvp * 0.98).toFixed(2)} €`,
+                    `${(zvp * 1.19).toFixed(2)} €`
+                ],
+                correctAnswer: 0,
+                explanation: `ZVP = BVP / (1 - ${skontoPct}/100) = ${bvp.toFixed(2)} € / ${(1 - skontoPct/100).toFixed(2)} = ${zvp.toFixed(2)} €. (Im-Hundert-Aufschlag, damit nach Skontoabzug genau der BVP verbleibt).`
+            });
+        } else {
+            // LVP brutto mit 19% USt
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "calculations",
+                topic: "Bruttoverkaufspreis (inkl. 19% MwSt)",
+                isCalculation: true,
+                isBawueFocus: true,
+                type: "multiple-choice",
+                question: `Prüfungsaufgabe Handelskalkulation: Der Netto-Listenverkaufspreis (LVP) einer Softwarelizenz beträgt ${lvpNetto.toFixed(2)} €. Wie hoch ist der Brutto-Verkaufspreis für den Endverbraucher inklusive 19 % Umsatzsteuer?`,
+                options: [
+                    `${lvpBrutto.toFixed(2)} € (USt-Betrag: ${(lvpNetto * 0.19).toFixed(2)} €)`,
+                    `${(lvpNetto / 1.19).toFixed(2)} €`,
+                    `${(lvpNetto + 19).toFixed(2)} €`,
+                    `${(lvpBrutto * 1.19).toFixed(2)} €`
+                ],
+                correctAnswer: 0,
+                explanation: `LVP brutto = LVP netto (${lvpNetto.toFixed(2)} €) * 1,19 = ${lvpBrutto.toFixed(2)} €.`
+            });
+        }
+    }
+
+    // C.8 Dynamische Zinsformel-Berechnungen (Tageszinsen Z = K * p * t / 36000)
+    for (let i = 0; i < 20; i++) {
+        const kapital = (Math.floor(Math.random() * 20) + 2) * 5000; // 10.000 bis 105.000 €
+        const zinssatz = (Math.floor(Math.random() * 8) + 4); // 4 bis 11 %
+        const tage = [30, 45, 60, 90, 120, 180][Math.floor(Math.random() * 6)];
+        const zinsen = (kapital * zinssatz * tage) / 36000;
+        const zinsenRounded = zinsen.toFixed(2);
+
+        const isOpen = shouldBeOpenText();
+
+        if (isOpen) {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "calculations",
+                topic: "Kaufmännische Zinsrechnung",
+                isCalculation: true,
+                isBawueFocus: true,
+                type: "open-text",
+                question: `Prüfungsaufgabe Zinsrechnung: Ein IT-Systemhaus nimmt zur Finanzierung eines Großauftrags ein Darlehen von ${kapital.toFixed(2)} € für genau ${tage} Tage auf.\nDer Zinssatz beträgt ${zinssatz} % p.a. (kaufmännische Zinsmethode: 360 Tage/Jahr).\n\nBerechne die anfallenden Zinsen in Euro.`,
+                musterloesung: `Kaufmännische Zinsformel:\n- Formel: Z = (K * p * t) / (100 * 360) = (K * p * t) / 36.000\n- Rechnung: Z = (${kapital.toFixed(2)} € * ${zinssatz} * ${tage}) / 36.000 = ${zinsenRounded} € an Kreditzinsen.`,
+                explanation: `Zinsformel für Tageszinsen: Z = (Kapital * Zinssatz * Tage) / 36.000.`
+            });
+        } else {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "calculations",
+                topic: "Kaufmännische Zinsrechnung",
+                isCalculation: true,
+                isBawueFocus: true,
+                type: "multiple-choice",
+                question: `Prüfungsaufgabe Zinsrechnung: Kapital = ${kapital.toFixed(2)} €, Zinssatz = ${zinssatz} % p.a., Laufzeit = ${tage} Tage. Wie hoch sind die Zinsen nach der kaufmännischen Zinsmethode (360 Tage)?`,
+                options: [
+                    `${zinsenRounded} €`,
+                    `${(zinsen * 1.2).toFixed(2)} €`,
+                    `${(kapital * (zinssatz/100)).toFixed(2)} € (Jahreszinsen)`,
+                    `${(zinsen / 2).toFixed(2)} €`
+                ],
+                correctAnswer: 0,
+                explanation: `Z = (${kapital} * ${zinssatz} * ${tage}) / 36.000 = ${zinsenRounded} €.`
+            });
+        }
+    }
+
     return dynamicQuestions;
 }
