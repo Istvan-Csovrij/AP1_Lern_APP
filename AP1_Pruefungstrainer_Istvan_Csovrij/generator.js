@@ -1194,6 +1194,8 @@ function generateDynamicQuestions(typeMode = "mix") {
         const isFkQuestion = Math.random() < 0.5;
         const isOpen = shouldBeOpenText();
 
+        const erdVisualSvg = VisualDiagrams.getRelationalErdSvg(item.entA, item.entB, item.rel, item.card, item.fkTable, item.fkField, item.reason);
+
         if (isFkQuestion) {
             if (isOpen) {
                 dynamicQuestions.push({
@@ -1202,9 +1204,11 @@ function generateDynamicQuestions(typeMode = "mix") {
                     topic: "ERD Fremdschlüssel-Modellierung",
                     isDiagram: true,
                     isBawueFocus: true,
-                    diagramType: "ERD",
+                    diagramType: "ERD & Tabellenschema",
                     type: "open-text",
                     question: `Prüfungsaufgabe ERD & Tabellenschema: Im Datenmodell eines IT-Systems besteht zwischen **${item.entA}** und **${item.entB}** die Beziehung **'${item.rel}'** (${item.card}).\n\nIn welcher Tabelle muss der Fremdschlüssel (Foreign Key) angelegt werden und wie lautet die datenbanktheoretische Begründung?`,
+                    solutionDiagramSvg: erdVisualSvg,
+                    solutionDiagramCaption: `Relationales Tabellenschema mit Fremdschlüssel für: ${item.entA} ➔ ${item.entB} (${item.card})`,
                     musterloesung: `Fremdschlüssel-Platzierung: In der Tabelle '${item.fkTable}'.\n\nBegründung: ${item.reason}`,
                     explanation: `Bei 1:n Beziehungen wandert der PK der 1-Seite in die Tabelle der n-Seite. Bei n:m Beziehungen entsteht eine separate Verknüpfungstabelle.`
                 });
@@ -1215,7 +1219,10 @@ function generateDynamicQuestions(typeMode = "mix") {
                     topic: "ERD Fremdschlüssel-Modellierung",
                     isDiagram: true,
                     isBawueFocus: true,
-                    diagramType: "ERD",
+                    diagramType: "ERD & Tabellenschema",
+                    diagramSvg: erdVisualSvg,
+                    diagramTitle: `Datenmodell: ${item.entA} & ${item.entB}`,
+                    diagramCaption: `ERD & Relationales Datenbankschema (${item.card})`,
                     type: "multiple-choice",
                     question: `Prüfungsaufgabe ERD & Relationenmodell: Gegeben ist die Beziehung '${item.entA}' ${item.rel} '${item.entB}' mit Kardinalität ${item.card}. Wo muss der Fremdschlüssel im Tabellenschema platziert werden?`,
                     options: [
@@ -1240,6 +1247,8 @@ function generateDynamicQuestions(typeMode = "mix") {
                     diagramType: "ERD",
                     type: "open-text",
                     question: `Prüfungsaufgabe ERD-Modellierung: Bestimme die logische Kardinalität (1:1, 1:n oder n:m) für folgende Fachanforderung:\n"${item.entA} ${item.rel} ${item.entB}".\n\nBegründe deine Entscheidung aus Sicht des Datenbankentwurfs.`,
+                    solutionDiagramSvg: erdVisualSvg,
+                    solutionDiagramCaption: `Visuelles ER-Datenmodell: ${item.entA} ➔ ${item.entB} (${item.card})`,
                     musterloesung: `Kardinalität: ${item.card}\n\nBegründung: ${item.reason}`,
                     explanation: `Prüfe immer beide Leserichtungen: Wie viele ${item.entB} hat ein ${item.entA} (max)? Und wie viele ${item.entA} gehören zu einem ${item.entB} (max)?`
                 });
@@ -1253,6 +1262,8 @@ function generateDynamicQuestions(typeMode = "mix") {
                     isDiagram: true,
                     isBawueFocus: true,
                     diagramType: "ERD",
+                    diagramSvg: erdVisualSvg,
+                    diagramTitle: `Datenmodell: ${item.entA} & ${item.entB}`,
                     type: "multiple-choice",
                     question: `Prüfungsaufgabe ERD: Welche Kardinalität beschreibt die Beziehung zwischen '${item.entA}' und '${item.entB}' (${item.reason})?`,
                     options: [
@@ -1316,6 +1327,8 @@ function generateDynamicQuestions(typeMode = "mix") {
                 isBawueFocus: true,
                 diagramType: "Netzplantechnik",
                 type: "open-text",
+                solutionDiagramSvg: VisualDiagrams.getNetzplanDiagramSvg(),
+                solutionDiagramCaption: "Visuelle Musterlösung: DIN 69900 Netzplan mit Kritischem Pfad",
                 code: `Vorgänge:\n- Vorgang A (Start): Dauer = ${dA} Tage\n- Vorgang B (Vorgänger A): Dauer = ${dB} Tage\n- Vorgang C (Vorgänger A): Dauer = ${dC} Tage\n- Vorgang D (Vorgänger B und C): Dauer = ${dD} Tage (Projektende)`,
                 question: `Prüfungsaufgabe Netzplantechnik: Gegeben ist ein IT-Projekt mit den 4 oben aufgeführten Vorgängen.\n\nAufgabe:\n1. Berechne den Frühesten Anfangs- und Endzeitpunkt (FAZ, FEZ) für alle Vorgänge.\n2. Berechne die Gesamtdauer des Projekts.\n3. Bestimme den Gesamtpuffer (GP) für Vorgang B und Vorgang C.\n4. Welcher Pfad bildet den Kritischen Pfad?`,
                 musterloesung: `1. Vorwärtsrechnung:\n- Vorgang A: FAZ = ${fazA}, FEZ = ${fezA}\n- Vorgang B: FAZ = ${fazB}, FEZ = ${fezB}\n- Vorgang C: FAZ = ${fazC}, FEZ = ${fezC}\n- Vorgang D: FAZ = max(${fezB}, ${fezC}) = ${fazD}, FEZ = ${fezD}\n\n2. Gesamtlaufzeit des Projekts: ${fezD} Tage.\n\n3. Gesamtpuffer (GP):\n- Vorgang B: GP = SAZ - FAZ = ${sazB} - ${fazB} = ${gpB} Tag(e)\n- Vorgang C: GP = SAZ - FAZ = ${sazC} - ${fazC} = ${gpC} Tag(e)\n\n4. Kritischer Pfad: ${criticalBranch} (Gesamtpuffer = 0).`,
@@ -1329,6 +1342,9 @@ function generateDynamicQuestions(typeMode = "mix") {
                 isDiagram: true,
                 isBawueFocus: true,
                 diagramType: "Netzplantechnik",
+                diagramSvg: VisualDiagrams.getNetzplanDiagramSvg(),
+                diagramTitle: "Projektnetzplan (DIN 69900)",
+                diagramCaption: "Netzplan mit 7-Felder-Knoten und kritischem Pfad",
                 type: "multiple-choice",
                 code: `Vorgänge:\n- A: Dauer = ${dA} Tage (Start)\n- B: Dauer = ${dB} Tage (nach A)\n- C: Dauer = ${dC} Tage (nach A)\n- D: Dauer = ${dD} Tage (nach B und C)`,
                 question: `Prüfungsaufgabe Netzplantechnik: Wie lange dauert das gesamte Projekt und welcher Pfad ist der Kritische Pfad?`,

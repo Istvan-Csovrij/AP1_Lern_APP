@@ -578,6 +578,177 @@ const VisualDiagrams = {
         </svg>
         `;
     }
+
+    // 11. Relationales ERD- & Tabellenschema-Diagramm (Chen + Relationale Tabellen)
+    getRelationalErdSvg: function(entA = "Server", entB = "Festplatte", rel = "enthält", card = "1:n", fkTable = "Festplatte", fkField = "FK_ServerID", reason = "Ein Server besitzt mehrere Festplatten, eine Festplatte ist fest in einem Server verbaut.") {
+        const safeA = escapeDiagHtml(entA);
+        const safeB = escapeDiagHtml(entB);
+        const safeRel = escapeDiagHtml(rel);
+        const safeCard = escapeDiagHtml(card);
+        const safeFkTable = escapeDiagHtml(fkTable);
+        const safeFkField = escapeDiagHtml(fkField);
+        const safeReason = escapeDiagHtml(reason);
+
+        return `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 370" width="100%" height="100%">
+            <defs>
+                <marker id="erd-rel-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                    <path d="M 0 1 L 10 5 L 0 9 z" fill="#16a34a" />
+                </marker>
+            </defs>
+            <rect width="700" height="370" fill="#f8fafc" rx="8" />
+            
+            <!-- SECTION 1: Chen ER-Diagramm (Oben) -->
+            <text x="350" y="24" font-family="sans-serif" font-size="13" font-weight="bold" fill="#1e3a8a" text-anchor="middle">1. Konzeptionelles Datenmodell (Chen ER-Notation)</text>
+            
+            <!-- Entität A -->
+            <rect x="50" y="42" width="150" height="42" fill="#dbeafe" stroke="#1d4ed8" stroke-width="2" rx="6" />
+            <text x="125" y="68" font-family="sans-serif" font-size="14" font-weight="bold" fill="#1e3a8a" text-anchor="middle">${safeA}</text>
+            <text x="215" y="60" font-family="sans-serif" font-size="13" font-weight="bold" fill="#dc2626">${card === "1:n" ? "1" : (card === "n:m" ? "n" : "1")}</text>
+
+            <!-- Beziehung (Raute) -->
+            <polygon points="350,38 425,63 350,88 275,63" fill="#fef3c7" stroke="#d97706" stroke-width="2" />
+            <text x="350" y="67" font-family="sans-serif" font-size="12" font-weight="bold" fill="#92400e" text-anchor="middle">${safeRel}</text>
+
+            <!-- Entität B -->
+            <text x="485" y="60" font-family="sans-serif" font-size="13" font-weight="bold" fill="#dc2626">${card === "1:n" ? "n" : (card === "n:m" ? "m" : "1")}</text>
+            <rect x="500" y="42" width="150" height="42" fill="#dbeafe" stroke="#1d4ed8" stroke-width="2" rx="6" />
+            <text x="575" y="68" font-family="sans-serif" font-size="14" font-weight="bold" fill="#1e3a8a" text-anchor="middle">${safeB}</text>
+
+            <!-- Verbindungslinien ERD -->
+            <line x1="200" y1="63" x2="275" y2="63" stroke="#475569" stroke-width="2" />
+            <line x1="425" y1="63" x2="500" y2="63" stroke="#475569" stroke-width="2" />
+
+            <!-- Trennlinie -->
+            <line x1="30" y1="105" x2="670" y2="105" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="4,4" />
+
+            <!-- SECTION 2: Relationales Datenbankschema / Tabellen (Unten) -->
+            <text x="350" y="126" font-family="sans-serif" font-size="13" font-weight="bold" fill="#0f766e" text-anchor="middle">2. Relationales Tabellenschema &amp; Fremdschlüssel-Platzierung</text>
+            
+            <!-- Tabelle A -->
+            <g transform="translate(50, 142)">
+                <rect width="220" height="150" fill="#ffffff" stroke="#1e3a8a" stroke-width="1.5" rx="4" />
+                <rect width="220" height="28" fill="#1e3a8a" rx="4" />
+                <text x="110" y="19" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" text-anchor="middle">tbl_${safeA} (1-Seite)</text>
+                
+                <rect x="6" y="34" width="208" height="22" fill="#fef9c3" rx="3" />
+                <text x="12" y="49" font-family="monospace" font-size="11" font-weight="bold" fill="#854d0e">🔑 PK: ${safeA}_ID (int)</text>
+                <text x="12" y="74" font-family="monospace" font-size="11" fill="#334155">   Bezeichnung (VARCHAR)</text>
+                <text x="12" y="96" font-family="monospace" font-size="11" fill="#334155">   Standort (VARCHAR)</text>
+                <text x="12" y="118" font-family="monospace" font-size="11" fill="#334155">   ErstelltAm (DATE)</text>
+            </g>
+
+            <!-- Tabelle B -->
+            <g transform="translate(430, 142)">
+                <rect width="220" height="150" fill="#ffffff" stroke="#047857" stroke-width="1.5" rx="4" />
+                <rect width="220" height="28" fill="#047857" rx="4" />
+                <text x="110" y="19" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" text-anchor="middle">tbl_${safeB} (n-Seite)</text>
+                
+                <rect x="6" y="34" width="208" height="22" fill="#fef9c3" rx="3" />
+                <text x="12" y="49" font-family="monospace" font-size="11" font-weight="bold" fill="#854d0e">🔑 PK: ${safeB}_ID (int)</text>
+                <text x="12" y="74" font-family="monospace" font-size="11" fill="#334155">   Modell (VARCHAR)</text>
+                <text x="12" y="96" font-family="monospace" font-size="11" fill="#334155">   SerienNr (VARCHAR)</text>
+                
+                <!-- Highlight FK Row -->
+                <rect x="6" y="105" width="208" height="24" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5" rx="3" />
+                <text x="12" y="122" font-family="monospace" font-size="11" font-weight="bold" fill="#166534">🔗 FK: ${safeFkField} (int)</text>
+            </g>
+
+            <!-- Verbindungspfeil vom PK A zum FK B -->
+            <path d="M 270 188 C 350 188, 350 258, 425 258" fill="none" stroke="#16a34a" stroke-width="2.5" stroke-dasharray="5,4" marker-end="url(#erd-rel-arrow)" />
+
+            <!-- Erkärungsbanner unten -->
+            <g transform="translate(50, 305)">
+                <rect width="600" height="50" fill="#f0fdf4" stroke="#86efac" stroke-width="1.5" rx="6" />
+                <text x="300" y="20" font-family="sans-serif" font-size="11" font-weight="bold" fill="#166534" text-anchor="middle">🎯 IHK-Regel: Bei ${safeCard}-Beziehung wandert der Primärschlüssel (PK) der 1-Seite ('${safeA}')</text>
+                <text x="300" y="38" font-family="sans-serif" font-size="11" font-weight="bold" fill="#047857" text-anchor="middle">als Fremdschlüssel (FK) in die Tabelle der n-Seite ('${safeFkTable}')!</text>
+            </g>
+        </svg>
+        `;
+    },
+
+    // 12. Universeller Auto-Resolver für Diagramme & Tabellen
+    getAutoDiagramSvg: function(q) {
+        if (!q) return null;
+        if (q.solutionDiagramSvg) return q.solutionDiagramSvg;
+        if (q.diagramSvg) return q.diagramSvg;
+        
+        const topic = (q.topic || "").toLowerCase();
+        const question = (q.question || "").toLowerCase();
+        const text = topic + " " + question;
+        
+        // 1. ERD & Fremdschlüssel / Tabellenschema
+        if (text.includes("fremdschlüssel") || text.includes("foreign key") || text.includes("tabellenschema") || text.includes("erd") || text.includes("kardinalität") || text.includes("relationenmodell") || text.includes("datenmodell")) {
+            let entA = "Server";
+            let entB = "Festplatte";
+            let rel = "enthält";
+            let card = "1:n";
+            let reason = "Ein Server besitzt mehrere Festplatten, eine Festplatte ist in einem Server verbaut.";
+            
+            if (text.includes("kunde") && text.includes("bestellung")) { entA = "Kunde"; entB = "Bestellung"; rel = "erteilt"; card = "1:n"; reason = "Ein Kunde erteilt mehrere Bestellungen."; }
+            else if (text.includes("abteilung") && text.includes("mitarbeiter")) { entA = "Abteilung"; entB = "Mitarbeiter"; rel = "beschäftigt"; card = "1:n"; reason = "Eine Abteilung beschäftigt viele Mitarbeiter."; }
+            else if (text.includes("projekt") && text.includes("entwickler")) { entA = "Projekt"; entB = "Entwickler"; rel = "arbeitet an"; card = "n:m"; reason = "Entwickler arbeiten an Projekten (n:m)."; }
+            else if (text.includes("rechnung") && text.includes("position")) { entA = "Rechnung"; entB = "Rechnungsposition"; rel = "besteht aus"; card = "1:n"; reason = "Eine Rechnung enthält mehrere Positionen."; }
+            else if (text.includes("student") && text.includes("vorlesung")) { entA = "Student"; entB = "Vorlesung"; rel = "besucht"; card = "n:m"; reason = "Studenten besuchen Vorlesungen (n:m)."; }
+            else if (text.includes("mitarbeiter") && text.includes("dienstwagen")) { entA = "Mitarbeiter"; entB = "Dienstwagen"; rel = "besitzt fest"; card = "1:1"; reason = "Ein Mitarbeiter besitzt maximal 1 Dienstwagen."; }
+            else if (text.includes("software") || text.includes("lizenz")) { entA = "SoftwareLizenz"; entB = "ArbeitsplatzPC"; rel = "installiert auf"; card = "n:m"; reason = "Lizenzen auf PCs (n:m)."; }
+            else if (text.includes("server") && text.includes("festplatte")) { entA = "Server"; entB = "Festplatte"; rel = "enthält"; card = "1:n"; reason = "Ein Server besitzt mehrere Festplatten (1:n)."; }
+            
+            return VisualDiagrams.getRelationalErdSvg(entA, entB, rel, card, entB, "FK_" + entA + "ID", reason);
+        }
+        
+        // 2. Use Case
+        if (text.includes("use-case") || text.includes("use case") || text.includes("anwendungsfall") || text.includes("include") || text.includes("extend")) {
+            let title = "Online-Shop Bestellsystem";
+            if (text.includes("ticket") || text.includes("helpdesk")) title = "IT-Helpdesk Ticketverwaltung";
+            if (text.includes("smart-home") || text.includes("smart home")) title = "Smart-Home Steuerung";
+            if (text.includes("patient") || text.includes("krankenhaus")) title = "Krankenhaus-Patientenverwaltung";
+            return VisualDiagrams.getUseCaseDiagramSvg(title);
+        }
+        
+        // 3. Klassendiagramm
+        if (text.includes("klassendiagramm") || text.includes("komposition") || text.includes("aggregation") || text.includes("sichtbarkeit") || text.includes("vererbung") || text.includes("multiplizität")) {
+            return VisualDiagrams.getClassDiagramSvg();
+        }
+        
+        // 4. EPK
+        if (text.includes("epk") || text.includes("ereignisgesteuert") || text.includes("prozesskette")) {
+            return VisualDiagrams.getEpkDiagramSvg();
+        }
+        
+        // 5. BPMN
+        if (text.includes("bpmn") || text.includes("gateway") || text.includes("swimlane")) {
+            return VisualDiagrams.getBpmnDiagramSvg();
+        }
+        
+        // 6. Netzplan
+        if (text.includes("netzplan") || text.includes("kritischer pfad") || text.includes("faz") || text.includes("gesamtpuffer") || text.includes("din 69900")) {
+            return VisualDiagrams.getNetzplanDiagramSvg();
+        }
+        
+        // 7. Struktogramm
+        if (text.includes("struktogramm") || text.includes("nassi") || text.includes("din 66261") || text.includes("kontrollstruktur")) {
+            return VisualDiagrams.getStruktogrammSvg();
+        }
+        
+        // 8. Organigramm
+        if (text.includes("organigramm") || text.includes("stabsstelle") || text.includes("einliniensystem") || text.includes("mehrliniensystem")) {
+            return VisualDiagrams.getOrganigrammStabSvg();
+        }
+        
+        // 9. Marktpreisbildung
+        if (text.includes("marktgleichgewicht") || text.includes("gleichgewichtspreis") || text.includes("nachfrageüberhang") || text.includes("angebotsüberhang")) {
+            return VisualDiagrams.getMarktgleichgewichtSvg();
+        }
+        
+        // 10. Handelskalkulation
+        if (text.includes("kalkulation") || text.includes("lep") || text.includes("zep") || text.includes("bep") || text.includes("bezugspreis") || text.includes("einstandspreis") || text.includes("selbstkosten") || text.includes("bvp") || text.includes("zvp") || text.includes("lvp") || text.includes("kalkulationszuschlag") || text.includes("handelsspanne") || text.includes("einkaufskalkulation")) {
+            return VisualDiagrams.getKalkulationTreeSvg();
+        }
+        
+        return null;
+    }
+
 };
 
 // Global export

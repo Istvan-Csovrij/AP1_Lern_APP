@@ -623,10 +623,12 @@ function loadQuestion() {
             modelAnswerTitle.className = "model-answer-title";
             modelAnswerTitle.innerHTML = "<strong>Vergleich mit der Musterlösung:</strong>";
             
-            const solSvg = q.solutionDiagramSvg || (q.isDiagram ? q.diagramSvg : null);
+            const solSvg = (typeof VisualDiagrams !== "undefined" && VisualDiagrams.getAutoDiagramSvg) 
+                ? VisualDiagrams.getAutoDiagramSvg(q) 
+                : (q.solutionDiagramSvg || (q.isDiagram ? q.diagramSvg : null));
             const diagSvgHTML = solSvg ? `
                 <div class="svg-diagram-wrapper" style="margin-top: 1rem; border-color: #86efac; background: #f0fdf4;">
-                    <span class="solution-diagram-badge"><i class="fa-solid fa-circle-check"></i> Grafische Musterlösung:</span>
+                    <span class="solution-diagram-badge"><i class="fa-solid fa-circle-check"></i> Grafische Musterlösung / Tabellenschema:</span>
                     ${solSvg}
                     ${q.solutionDiagramCaption ? `<div class="diagram-caption">${escapeHtml(q.solutionDiagramCaption)}</div>` : ''}
                 </div>
@@ -811,10 +813,12 @@ function showOpenTextSolution() {
     modelAnswerTitle.className = "model-answer-title";
     modelAnswerTitle.innerHTML = "<strong>Vergleiche deine Antwort mit der Musterlösung:</strong>";
     
-    const solSvg = q.solutionDiagramSvg || (q.isDiagram ? q.diagramSvg : null);
+    const solSvg = (typeof VisualDiagrams !== "undefined" && VisualDiagrams.getAutoDiagramSvg) 
+        ? VisualDiagrams.getAutoDiagramSvg(q) 
+        : (q.solutionDiagramSvg || (q.isDiagram ? q.diagramSvg : null));
     const diagSvgHTML = solSvg ? `
         <div class="svg-diagram-wrapper" style="margin-top: 1rem; border-color: #86efac; background: #f0fdf4;">
-            <span class="solution-diagram-badge"><i class="fa-solid fa-circle-check"></i> Grafische Musterlösung:</span>
+            <span class="solution-diagram-badge"><i class="fa-solid fa-circle-check"></i> Grafische Musterlösung / Tabellenschema:</span>
             ${solSvg}
             ${q.solutionDiagramCaption ? `<div class="diagram-caption">${escapeHtml(q.solutionDiagramCaption)}</div>` : ''}
         </div>
@@ -899,11 +903,11 @@ function showFeedback(isCorrect, explanation, extraText = "") {
     const q = filteredQuestions && filteredQuestions[currentQuestionIndex] ? filteredQuestions[currentQuestionIndex] : null;
     const solDiagContainer = document.getElementById("solution-diagram-container");
     if (solDiagContainer) {
-        const solSvg = q ? (q.solutionDiagramSvg || (q.isDiagram ? q.diagramSvg : null)) : null;
+        const solSvg = q ? ((typeof VisualDiagrams !== "undefined" && VisualDiagrams.getAutoDiagramSvg) ? VisualDiagrams.getAutoDiagramSvg(q) : (q.solutionDiagramSvg || (q.isDiagram ? q.diagramSvg : null))) : null;
         if (solSvg) {
             solDiagContainer.innerHTML = `
                 <div class="svg-diagram-wrapper" style="border-color: #86efac; background: #f0fdf4;">
-                    <span class="solution-diagram-badge"><i class="fa-solid fa-circle-check"></i> Musterlösung (Grafisches Diagramm):</span>
+                    <span class="solution-diagram-badge"><i class="fa-solid fa-circle-check"></i> Musterlösung (Grafisches Diagramm / Tabellenschema):</span>
                     ${solSvg}
                     ${q.solutionDiagramCaption ? `<div class="diagram-caption">${escapeHtml(q.solutionDiagramCaption)}</div>` : ''}
                 </div>
@@ -1541,10 +1545,12 @@ function calculateExamScores() {
             `;
         }
 
-        const solSvg = q.solutionDiagramSvg || (q.isDiagram ? q.diagramSvg : null);
+        const solSvg = (typeof VisualDiagrams !== "undefined" && VisualDiagrams.getAutoDiagramSvg) 
+            ? VisualDiagrams.getAutoDiagramSvg(q) 
+            : (q.solutionDiagramSvg || (q.isDiagram ? q.diagramSvg : null));
         const diagSvgHTML = solSvg ? `
             <div class="svg-diagram-wrapper" style="margin-top: 0.75rem; border-color: #86efac; background: #f0fdf4;">
-                <span class="solution-diagram-badge"><i class="fa-solid fa-circle-check"></i> Musterlösung (Grafisches Diagramm):</span>
+                <span class="solution-diagram-badge"><i class="fa-solid fa-circle-check"></i> Musterlösung (Grafisches Diagramm / Tabellenschema):</span>
                 ${solSvg}
                 ${q.solutionDiagramCaption ? `<div class="diagram-caption">${escapeHtml(q.solutionDiagramCaption)}</div>` : ''}
             </div>
