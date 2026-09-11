@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AP1 Prüfungstrainer - Fachinformatiker</title>
-    <link rel="stylesheet" href="style.css?v=51">
+    <link rel="stylesheet" href="style.css?v=52">
     <!-- FontAwesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -17,8 +17,8 @@
     </header>
 
     <main class="container">
-        <!-- Sidebar / Filter -->
-        <section class="sidebar">
+        <!-- Left Sidebar: Themenbereiche & Diagramm-Board -->
+        <aside class="sidebar sidebar-left">
             <div class="card">
                 <h3><i class="fa-solid fa-filter"></i> Themenbereiche</h3>
                 <div class="theme-filters" id="theme-filters">
@@ -55,64 +55,7 @@
                     <i class="fa-solid fa-palette"></i> Zeichenboard öffnen
                 </button>
             </div>
-
-            <div class="card">
-                <h3><i class="fa-solid fa-gear"></i> Aufgaben-Optionen</h3>
-                <div class="control-group" style="display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.5rem;">
-                    <label for="question-type-select" style="font-size: 0.9rem; color: var(--text-light); font-weight: 600;">Aufgabentyp:</label>
-                    <select id="question-type-select" class="select-input" style="width: 100%; padding: 0.75rem; border: 2px solid var(--border-color); border-radius: var(--radius); font-size: 0.95rem; color: var(--text-color); background-color: white; outline: none; transition: var(--transition); cursor: pointer;">
-                        <option value="mix">Zufälliger Mix (50/50)</option>
-                        <option value="open">Nur offene Aufgaben (BaWü)</option>
-                        <option value="standard">Nur MC & Zahleneingabe</option>
-                    </select>
-                </div>
-                <button class="btn btn-primary btn-full" id="regenerate-btn" style="margin-top: 1rem;">
-                    <i class="fa-solid fa-arrows-rotate"></i> Neu generieren
-                </button>
-            </div>
-
-            <!-- IHK-Prüfungsmodus Card -->
-            <div class="card exam-card" style="border: 2px solid #10b981; box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.1);">
-                <h3 style="color: #047857; margin-bottom: 0.5rem;"><i class="fa-solid fa-file-signature"></i> IHK-Prüfungsmodus</h3>
-                <p style="font-size: 0.85rem; color: var(--text-light); margin-bottom: 0.75rem; line-height: 1.35;">Trainiere reale Prüfungsaufgaben unter Echtzeitbedingungen.</p>
-                <div style="display: flex; flex-direction: column; gap: 0.5rem;">
-                    <button class="btn btn-full" id="exam-mode-btn" style="background-color: #10b981; color: white; justify-content: center; font-weight: bold; border: none; font-size: 0.95rem; display: flex; align-items: center; gap: 0.5rem; width: 100%;">
-                        <i class="fa-solid fa-graduation-cap"></i> IHK-Übungsmodus
-                    </button>
-                    <button class="btn btn-full" id="simulation-mode-btn" style="background-color: #3b82f6; color: white; justify-content: center; font-weight: bold; border: none; font-size: 0.95rem; display: flex; align-items: center; gap: 0.5rem; width: 100%;">
-                        <i class="fa-solid fa-stopwatch"></i> 90-Min.-Simulation
-                    </button>
-                </div>
-            </div>
-
-            <div class="card stats-card">
-                <h3><i class="fa-solid fa-chart-simple"></i> Lernfortschritt</h3>
-                <div class="stats-grid">
-                    <div class="stat-item">
-                        <span class="stat-num" id="stat-correct">0</span>
-                        <span class="stat-label">Richtig</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-num" id="stat-wrong">0</span>
-                        <span class="stat-label">Falsch</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-num" id="stat-total">0</span>
-                        <span class="stat-label">Gesamt</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-num" id="stat-percent">0%</span>
-                        <span class="stat-label">Erfolg</span>
-                    </div>
-                </div>
-                <div class="progress-bar-container">
-                    <div class="progress-bar" id="progress-bar" style="width: 0%"></div>
-                </div>
-                <button class="btn btn-secondary btn-full" id="reset-stats-btn">
-                    <i class="fa-solid fa-rotate-left"></i> Statistik zurücksetzen
-                </button>
-            </div>
-        </section>
+        </aside>
 
         <!-- Main Content Area -->
         <section class="quiz-area">
@@ -180,6 +123,68 @@
                 </div>
             </div>
         </section>
+
+        <!-- Right Sidebar: Optionen, Prüfungsmodus & Lernfortschritt -->
+        <aside class="sidebar sidebar-right">
+            <!-- Aufgaben-Optionen Card -->
+            <div class="card">
+                <h3><i class="fa-solid fa-gear"></i> Aufgaben-Optionen</h3>
+                <div class="control-group" style="display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.5rem;">
+                    <label for="question-type-select" style="font-size: 0.9rem; color: var(--text-light); font-weight: 600;">Aufgabentyp:</label>
+                    <select id="question-type-select" class="select-input" style="width: 100%; padding: 0.75rem; border: 2px solid var(--border-color); border-radius: var(--radius); font-size: 0.95rem; color: var(--text-color); background-color: white; outline: none; transition: var(--transition); cursor: pointer;">
+                        <option value="mix">Zufälliger Mix (50/50)</option>
+                        <option value="open">Nur offene Aufgaben (BaWü)</option>
+                        <option value="standard">Nur MC & Zahleneingabe</option>
+                    </select>
+                </div>
+                <button class="btn btn-primary btn-full" id="regenerate-btn" style="margin-top: 1rem;">
+                    <i class="fa-solid fa-arrows-rotate"></i> Neu generieren
+                </button>
+            </div>
+
+            <!-- IHK-Prüfungsmodus Card -->
+            <div class="card exam-card" style="border: 2px solid #10b981; box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.1);">
+                <h3 style="color: #047857; margin-bottom: 0.5rem;"><i class="fa-solid fa-file-signature"></i> IHK-Prüfungsmodus</h3>
+                <p style="font-size: 0.85rem; color: var(--text-light); margin-bottom: 0.75rem; line-height: 1.35;">Trainiere reale Prüfungsaufgaben unter Echtzeitbedingungen.</p>
+                <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                    <button class="btn btn-full" id="exam-mode-btn" style="background-color: #10b981; color: white; justify-content: center; font-weight: bold; border: none; font-size: 0.95rem; display: flex; align-items: center; gap: 0.5rem; width: 100%;">
+                        <i class="fa-solid fa-graduation-cap"></i> IHK-Übungsmodus
+                    </button>
+                    <button class="btn btn-full" id="simulation-mode-btn" style="background-color: #3b82f6; color: white; justify-content: center; font-weight: bold; border: none; font-size: 0.95rem; display: flex; align-items: center; gap: 0.5rem; width: 100%;">
+                        <i class="fa-solid fa-stopwatch"></i> 90-Min.-Simulation
+                    </button>
+                </div>
+            </div>
+
+            <!-- Lernfortschritt Card -->
+            <div class="card stats-card">
+                <h3><i class="fa-solid fa-chart-simple"></i> Lernfortschritt</h3>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-num" id="stat-correct">0</span>
+                        <span class="stat-label">Richtig</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-num" id="stat-wrong">0</span>
+                        <span class="stat-label">Falsch</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-num" id="stat-total">0</span>
+                        <span class="stat-label">Gesamt</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-num" id="stat-percent">0%</span>
+                        <span class="stat-label">Erfolg</span>
+                    </div>
+                </div>
+                <div class="progress-bar-container">
+                    <div class="progress-bar" id="progress-bar" style="width: 0%"></div>
+                </div>
+                <button class="btn btn-secondary btn-full" id="reset-stats-btn">
+                    <i class="fa-solid fa-rotate-left"></i> Statistik zurücksetzen
+                </button>
+            </div>
+        </aside>
 
         <!-- Exam Mode Content Area (hidden by default) -->
         <section class="exam-area" id="exam-area" style="display: none; flex-direction: column; gap: 1rem; width: 100%; max-width: 800px; margin-bottom: 2rem;">
@@ -379,8 +384,8 @@
     </footer>
 
     <!-- Load the questions first, then the application logic -->
-    <script src="questions.js?v=51"></script>
-    <script src="generator.js?v=51"></script>
-    <script src="app.js?v=51"></script>
+    <script src="questions.js?v=52"></script>
+    <script src="generator.js?v=52"></script>
+    <script src="app.js?v=52"></script>
 </body>
 </html>

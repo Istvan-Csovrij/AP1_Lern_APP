@@ -1042,7 +1042,7 @@ function startExamMode(simulation) {
 
     // Setup UI view
     document.querySelector(".container").classList.add("exam-mode-active");
-    document.querySelector(".sidebar").style.display = "none";
+    document.querySelectorAll(".sidebar").forEach(s => s.style.display = "none");
     document.querySelector(".quiz-area").style.display = "none";
     document.getElementById("exam-area").style.display = "flex";
     document.getElementById("exam-results-area").style.display = "none";
@@ -1352,7 +1352,7 @@ function showMainQuizMode() {
     clearInterval(examTimerInterval);
 
     document.querySelector(".container").classList.remove("exam-mode-active");
-    document.querySelector(".sidebar").style.display = "block";
+    document.querySelectorAll(".sidebar").forEach(s => s.style.display = "");
     document.querySelector(".quiz-area").style.display = "block";
     document.getElementById("exam-area").style.display = "none";
     document.getElementById("exam-results-area").style.display = "none";
