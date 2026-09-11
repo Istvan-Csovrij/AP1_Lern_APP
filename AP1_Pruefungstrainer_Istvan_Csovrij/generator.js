@@ -2631,9 +2631,9 @@ function generateDynamicQuestions(typeMode = "mix") {
                     "Puffer existieren nur auf dem kritischen Pfad"
                 ],
                 correctAnswer: 0,
-                explanation: "Formeln der Netzplantechnik nach DIN 69900:
+                explanation: `Formeln der Netzplantechnik nach DIN 69900:
 - Gesamtpuffer (GP): Zeitspanne, um die ein Vorgang verschoben werden kann, ohne das Projektende zu gefährden (GP = SAZ - FAZ = SEZ - FEZ).
-- Freier Puffer (FP): Zeitspanne, um die ein Vorgang verschoben werden kann, ohne den frühesten Anfang des Nachfolgers zu verschieben (FP = FAZ_nachfolger - FEZ)."
+- Freier Puffer (FP): Zeitspanne, um die ein Vorgang verschoben werden kann, ohne den frühesten Anfang des Nachfolgers zu verschieben (FP = FAZ_nachfolger - FEZ).`
             });
         }
     }

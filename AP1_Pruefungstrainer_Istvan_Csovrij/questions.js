@@ -6399,11 +6399,11 @@ WHERE Email IS NULL OR Email = '';
             "Ereignisgesteuerte Prozesskette (EPK) mit Organisationseinheiten"
         ],
         "correctAnswer": 0,
-        "explanation": "Es handelt sich um ein UML-Use-Case-Diagramm (Anwendungsfalldiagramm):
+        "explanation": `Es handelt sich um ein UML-Use-Case-Diagramm (Anwendungsfalldiagramm):
 - Männchen-Symbole = Akteure (Akteur 'Kunde' und externes System 'Payment Gateway')
 - Ovale = Use Cases (z. B. 'Artikel suchen', 'Bestellung aufgeben')
 - Gestricheltes Rechteck = Systemgrenze (grenzt das zu entwickelnde Onlineshop-System von externen Akteuren ab)
-- Gestrichelte Pfeile = <<include>> (zwingend erforderlich) und <<extend>> (optionale Erweiterung)."
+- Gestrichelte Pfeile = <<include>> (zwingend erforderlich) und <<extend>> (optionale Erweiterung).`
     },
     {
         "id": 355,
@@ -6424,11 +6424,11 @@ WHERE Email IS NULL OR Email = '';
             "Einfache lose Assoziation ohne Lebenszeitabhängigkeit."
         ],
         "correctAnswer": 0,
-        "explanation": "In der UML-Notation bedeutet:
+        "explanation": `In der UML-Notation bedeutet:
 - Ausgefüllte schwarze Raute = Komposition: Eine existenzabhängige Teil-Ganzes-Beziehung (starke Bindung). Die Lebensdauer des Teils (Bestellposition) ist an das Ganze (Bestellung) gebunden.
 - Helle/leere Raute = Aggregation (schwache Bindung).
 - Pfeil mit weißem Dreieck = Generalisierung / Vererbung.
-- Die Notation '1' und '1..*' zeigt die Multiplizitäten (Eine Bestellung hat mindestens 1 oder beliebig viele Positionen)."
+- Die Notation '1' und '1..*' zeigt die Multiplizitäten (Eine Bestellung hat mindestens 1 oder beliebig viele Positionen).`
     },
     {
         "id": 356,
@@ -6449,11 +6449,11 @@ WHERE Email IS NULL OR Email = '';
             "Mehrwertige Attribute"
         ],
         "correctAnswer": 0,
-        "explanation": "In der Chen-Notation für ER-Modelle gilt:
+        "explanation": `In der Chen-Notation für ER-Modelle gilt:
 - Rechtecke = Entitätstypen (z. B. KUNDE, BESTELLUNG, ARTIKEL)
 - Rauten = Beziehungstypen (z. B. erteilt [1:n], umfasst [n:m])
 - Ovale/Ellipsen = Attribute
-- Unterstrichene Attribute (z. B. KundenNr) = Primärschlüssel (Primary Key), die jede Entität in der Tabelle eindeutig identifizieren."
+- Unterstrichene Attribute (z. B. KundenNr) = Primärschlüssel (Primary Key), die jede Entität in der Tabelle eindeutig identifizieren.`
     },
     {
         "id": 357,
@@ -6474,11 +6474,11 @@ WHERE Email IS NULL OR Email = '';
             "Rückkopplungsschleife ohne logischen Operator"
         ],
         "correctAnswer": 0,
-        "explanation": "EPK-Grundregeln:
+        "explanation": `EPK-Grundregeln:
 - Sechsecke (Rosa/Rot) = Ereignisse (Zustände, z. B. 'Kunde bestellt', 'Auftrag bestätigt')
 - Abgerundete Rechtecke (Grün) = Funktionen (Aktivitäten / Verben, z. B. 'Bestellung prüfen')
 - Kreis mit 'XOR' = Exklusives Oder (Entweder/Oder, niemals beides gleichzeitig).
-- Wichtige IHK-Regel: Auf ein Ereignis darf keine direkte XOR/OR-Verzweigung ohne vorherige Funktion folgen!"
+- Wichtige IHK-Regel: Auf ein Ereignis darf keine direkte XOR/OR-Verzweigung ohne vorherige Funktion folgen!`
     },
     {
         "id": 358,
@@ -6499,11 +6499,11 @@ WHERE Email IS NULL OR Email = '';
             "Quadrat (Start), Zylinder (Tasks), Kreis mit Plus (Gateway)"
         ],
         "correctAnswer": 0,
-        "explanation": "BPMN 2.0 Standardelemente:
+        "explanation": `BPMN 2.0 Standardelemente:
 - Dünner grüner Kreis = Start Event
 - Abgerundete Rechtecke = Tasks (Aktivitäten wie 'Auftrag erfassen', 'Waren kommissionieren')
 - Raute mit 'X' = Exclusive Gateway (XOR: Nur ein Ausgangspfad wird gewählt)
-- Dicker roter Kreis = End Event."
+- Dicker roter Kreis = End Event.`
     },
     {
         "id": 359,
@@ -6524,10 +6524,10 @@ WHERE Email IS NULL OR Email = '';
             "1. Try-Catch Block -> 2. Goto-Sprung -> 3. Return"
         ],
         "correctAnswer": 0,
-        "explanation": "Struktogramm-Bausteine nach DIN 66261:
+        "explanation": `Struktogramm-Bausteine nach DIN 66261:
 - Einfaches Rechteck = Sequenz (z. B. 'rabatt = 0.0')
 - Dreieckig geteilter Block mit Bedingung = Alternative / Verzweigung (IF 'rabattCode != null' mit linkem JA-Zweig und rechtem NEIN-Zweig)
-- L-förmig umrahmter Block = Schleife / Iteration (z. B. 'FÜR JEDEN Artikel in warenkorb')."
+- L-förmig umrahmter Block = Schleife / Iteration (z. B. 'FÜR JEDEN Artikel in warenkorb').`
     },
     {
         "id": 360,
@@ -6548,11 +6548,11 @@ WHERE Email IS NULL OR Email = '';
             "Alle Vorgänge liegen gleichermaßen auf dem kritischen Pfad."
         ],
         "correctAnswer": 0,
-        "explanation": "Netzplantechnik nach DIN 69900:
+        "explanation": `Netzplantechnik nach DIN 69900:
 - FAZ (Frühester Anfangszeitpunkt), FEZ (Frühester Endzeitpunkt)
 - SAZ (Spätester Anfangszeitpunkt), SEZ (Spätester Endzeitpunkt)
 - GP (Gesamtpuffer) = SAZ - FAZ (oder SEZ - FEZ)
-- Der kritische Pfad verbindet alle Vorgänge mit GP = 0 (hier V1 [D=4] -> V2 [D=6] -> V4 [D=8] = 18 Tage). Eine Verzögerung führt sofort zum Projektverzug!"
+- Der kritische Pfad verbindet alle Vorgänge mit GP = 0 (hier V1 [D=4] -> V2 [D=6] -> V4 [D=8] = 18 Tage). Eine Verzögerung führt sofort zum Projektverzug!`
     },
     {
         "id": 361,
@@ -6573,9 +6573,9 @@ WHERE Email IS NULL OR Email = '';
             "Matrix-Schnittstelle zwischen Einkauf und Vertrieb."
         ],
         "correctAnswer": 0,
-        "explanation": "Im Stabliniensystem gilt:
+        "explanation": `Im Stabliniensystem gilt:
 - Linienstellen (Rechtecke) sind in die hierarchische Befehlskette eingebunden und besitzen Weisungsbefugnis.
-- Stabsstellen (z. B. Datenschutzbeauftragter, Revision, Rechtsabteilung) beraten die Geschäftsführung als Stabsassistenten, haben aber KEINE disziplinarische Weisungsbefugnis gegenüber der Linie."
+- Stabsstellen (z. B. Datenschutzbeauftragter, Revision, Rechtsabteilung) beraten die Geschäftsführung als Stabsassistenten, haben aber KEINE disziplinarische Weisungsbefugnis gegenüber der Linie.`
     },
     {
         "id": 362,
@@ -6596,10 +6596,10 @@ WHERE Email IS NULL OR Email = '';
             "Monopolistischer Sättigungspunkt."
         ],
         "correctAnswer": 0,
-        "explanation": "Marktmechanismus:
+        "explanation": `Marktmechanismus:
 - Liegt der Preis (20 €) UNTER dem Gleichgewichtspreis (40 €), fragen Kunden mehr nach (600 Stk.), als die Anbieter bereitstellen (200 Stk.).
 - Es entsteht ein Nachfrageüberhang von 600 - 200 = 400 Stück (Knappheit, Verkäufermarkt).
-- Liegt der Preis über 40 €, entsteht ein Angebotsüberhang (Käufermarkt)."
+- Liegt der Preis über 40 €, entsteht ein Angebotsüberhang (Käufermarkt).`
     },
     {
         "id": 363,
@@ -6620,10 +6620,10 @@ WHERE Email IS NULL OR Email = '';
             "ZVP = BVP + 19 % MwSt."
         ],
         "correctAnswer": 0,
-        "explanation": "Wichtige IHK-Regel der Handelskalkulation:
+        "explanation": `Wichtige IHK-Regel der Handelskalkulation:
 - Kundenskonto und Kundenrabatt werden IM HUNDERT (vom höheren Zielpreis ausgehend) berechnet!
 - Da ZVP = 100 % und Skonto = 3 %, entspricht der BVP genau 97 %.
-- Formel: ZVP = BVP / 0,97 (oder BVP / (100 - Skonto) * 100)."
+- Formel: ZVP = BVP / 0,97 (oder BVP / (100 - Skonto) * 100).`
     },
     {
         "id": 364,
