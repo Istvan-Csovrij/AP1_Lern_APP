@@ -686,6 +686,734 @@ var VisualDiagrams = {
         </svg>
         `;
     },
+    // 7a. Netzplan ERP-Einführungsprojekt (9 Vorgänge, Dauer = 23 Tage) - ID 413
+    getErp9NetzplanDiagramSvg: function() {
+        return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 380" width="100%" height="100%">
+    <defs>
+        <marker id="np9-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#dc2626" />
+        </marker>
+        <marker id="np9-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#0284c7" />
+        </marker>
+    </defs>
+    <rect width="940" height="380" fill="#f8fafc" rx="8" />
+    <text x="470" y="24" font-family="sans-serif" font-size="14" font-weight="bold" fill="#1e3a8a" text-anchor="middle">DIN 69900 Netzplan: ERP-Einführungsprojekt (9 Vorgänge, Dauer = 23 Werktage)</text>
+
+    <!-- Column 1: A (Kick-Off) -->
+    
+    <g transform="translate(20, 140)">
+        <rect width="115" height="68" fill="#fee2e2" stroke="#dc2626" stroke-width="2.5" rx="4" />
+        <line x1="0" y1="22.666666666666668" x2="115" y2="22.666666666666668" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="0" y1="45.333333333333336" x2="115" y2="45.333333333333336" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="38.333333333333336" y1="0" x2="38.333333333333336" y2="22.666666666666668" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="76.66666666666667" y1="0" x2="76.66666666666667" y2="22.666666666666668" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="38.333333333333336" y1="45.333333333333336" x2="38.333333333333336" y2="68" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="76.66666666666667" y1="45.333333333333336" x2="76.66666666666667" y2="68" stroke="#dc2626" stroke-width="1.2" />
+        
+        <!-- Top Row: FAZ, D, FEZ -->
+        <text x="19.166666666666668" y="15.866666666666667" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">0</text>
+        <text x="57.5" y="15.866666666666667" font-family="sans-serif" font-size="10.5" font-weight="bold" text-anchor="middle" fill="#991b1b">D:2</text>
+        <text x="95.83333333333333" y="15.866666666666667" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">2</text>
+        
+        <!-- Middle Row: Name -->
+        <text x="57.5" y="38.53333333333333" font-family="sans-serif" font-size="10.5" font-weight="bold" text-anchor="middle" fill="#991b1b">A: Kick-Off</text>
+        
+        <!-- Bottom Row: SAZ, GP/FP, SEZ -->
+        <text x="19.166666666666668" y="61.20000000000001" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">0</text>
+        <text x="57.5" y="61.20000000000001" font-family="sans-serif" font-size="9.5" font-weight="bold" text-anchor="middle" fill="#991b1b">GP:0</text>
+        <text x="95.83333333333333" y="61.20000000000001" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">2</text>
+    </g>
+
+    <!-- Column 2: B (Prozessanalyse), C (Hardware) -->
+    
+    <g transform="translate(175, 60)">
+        <rect width="115" height="68" fill="#fee2e2" stroke="#dc2626" stroke-width="2.5" rx="4" />
+        <line x1="0" y1="22.666666666666668" x2="115" y2="22.666666666666668" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="0" y1="45.333333333333336" x2="115" y2="45.333333333333336" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="38.333333333333336" y1="0" x2="38.333333333333336" y2="22.666666666666668" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="76.66666666666667" y1="0" x2="76.66666666666667" y2="22.666666666666668" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="38.333333333333336" y1="45.333333333333336" x2="38.333333333333336" y2="68" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="76.66666666666667" y1="45.333333333333336" x2="76.66666666666667" y2="68" stroke="#dc2626" stroke-width="1.2" />
+        
+        <!-- Top Row: FAZ, D, FEZ -->
+        <text x="19.166666666666668" y="15.866666666666667" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">2</text>
+        <text x="57.5" y="15.866666666666667" font-family="sans-serif" font-size="10.5" font-weight="bold" text-anchor="middle" fill="#991b1b">D:5</text>
+        <text x="95.83333333333333" y="15.866666666666667" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">7</text>
+        
+        <!-- Middle Row: Name -->
+        <text x="57.5" y="38.53333333333333" font-family="sans-serif" font-size="10.5" font-weight="bold" text-anchor="middle" fill="#991b1b">B: Analyse</text>
+        
+        <!-- Bottom Row: SAZ, GP/FP, SEZ -->
+        <text x="19.166666666666668" y="61.20000000000001" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">2</text>
+        <text x="57.5" y="61.20000000000001" font-family="sans-serif" font-size="9.5" font-weight="bold" text-anchor="middle" fill="#991b1b">GP:0</text>
+        <text x="95.83333333333333" y="61.20000000000001" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">7</text>
+    </g>
+    
+    <g transform="translate(175, 230)">
+        <rect width="115" height="68" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.5" rx="4" />
+        <line x1="0" y1="22.666666666666668" x2="115" y2="22.666666666666668" stroke="#0284c7" stroke-width="1.2" />
+        <line x1="0" y1="45.333333333333336" x2="115" y2="45.333333333333336" stroke="#0284c7" stroke-width="1.2" />
+        <line x1="38.333333333333336" y1="0" x2="38.333333333333336" y2="22.666666666666668" stroke="#0284c7" stroke-width="1.2" />
+        <line x1="76.66666666666667" y1="0" x2="76.66666666666667" y2="22.666666666666668" stroke="#0284c7" stroke-width="1.2" />
+        <line x1="38.333333333333336" y1="45.333333333333336" x2="38.333333333333336" y2="68" stroke="#0284c7" stroke-width="1.2" />
+        <line x1="76.66666666666667" y1="45.333333333333336" x2="76.66666666666667" y2="68" stroke="#0284c7" stroke-width="1.2" />
+        
+        <!-- Top Row: FAZ, D, FEZ -->
+        <text x="19.166666666666668" y="15.866666666666667" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#0369a1">2</text>
+        <text x="57.5" y="15.866666666666667" font-family="sans-serif" font-size="10.5" font-weight="bold" text-anchor="middle" fill="#0369a1">D:8</text>
+        <text x="95.83333333333333" y="15.866666666666667" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#0369a1">10</text>
+        
+        <!-- Middle Row: Name -->
+        <text x="57.5" y="38.53333333333333" font-family="sans-serif" font-size="10.5" font-weight="bold" text-anchor="middle" fill="#0369a1">C: Hardware</text>
+        
+        <!-- Bottom Row: SAZ, GP/FP, SEZ -->
+        <text x="19.166666666666668" y="61.20000000000001" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#0369a1">3</text>
+        <text x="57.5" y="61.20000000000001" font-family="sans-serif" font-size="9.5" font-weight="bold" text-anchor="middle" fill="#0369a1">GP:1</text>
+        <text x="95.83333333333333" y="61.20000000000001" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#0369a1">11</text>
+    </g>
+
+    <!-- Column 3: D (Customizing), F (Schnittstellen), E (Server) -->
+    
+    <g transform="translate(330, 40)">
+        <rect width="115" height="68" fill="#fee2e2" stroke="#dc2626" stroke-width="2.5" rx="4" />
+        <line x1="0" y1="22.666666666666668" x2="115" y2="22.666666666666668" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="0" y1="45.333333333333336" x2="115" y2="45.333333333333336" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="38.333333333333336" y1="0" x2="38.333333333333336" y2="22.666666666666668" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="76.66666666666667" y1="0" x2="76.66666666666667" y2="22.666666666666668" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="38.333333333333336" y1="45.333333333333336" x2="38.333333333333336" y2="68" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="76.66666666666667" y1="45.333333333333336" x2="76.66666666666667" y2="68" stroke="#dc2626" stroke-width="1.2" />
+        
+        <!-- Top Row: FAZ, D, FEZ -->
+        <text x="19.166666666666668" y="15.866666666666667" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">7</text>
+        <text x="57.5" y="15.866666666666667" font-family="sans-serif" font-size="10.5" font-weight="bold" text-anchor="middle" fill="#991b1b">D:7</text>
+        <text x="95.83333333333333" y="15.866666666666667" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">14</text>
+        
+        <!-- Middle Row: Name -->
+        <text x="57.5" y="38.53333333333333" font-family="sans-serif" font-size="10.5" font-weight="bold" text-anchor="middle" fill="#991b1b">D: Customiz.</text>
+        
+        <!-- Bottom Row: SAZ, GP/FP, SEZ -->
+        <text x="19.166666666666668" y="61.20000000000001" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">7</text>
+        <text x="57.5" y="61.20000000000001" font-family="sans-serif" font-size="9.5" font-weight="bold" text-anchor="middle" fill="#991b1b">GP:0</text>
+        <text x="95.83333333333333" y="61.20000000000001" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">14</text>
+    </g>
+    
+    <g transform="translate(330, 140)">
+        <rect width="115" height="68" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.5" rx="4" />
+        <line x1="0" y1="22.666666666666668" x2="115" y2="22.666666666666668" stroke="#0284c7" stroke-width="1.2" />
+        <line x1="0" y1="45.333333333333336" x2="115" y2="45.333333333333336" stroke="#0284c7" stroke-width="1.2" />
+        <line x1="38.333333333333336" y1="0" x2="38.333333333333336" y2="22.666666666666668" stroke="#0284c7" stroke-width="1.2" />
+        <line x1="76.66666666666667" y1="0" x2="76.66666666666667" y2="22.666666666666668" stroke="#0284c7" stroke-width="1.2" />
+        <line x1="38.333333333333336" y1="45.333333333333336" x2="38.333333333333336" y2="68" stroke="#0284c7" stroke-width="1.2" />
+        <line x1="76.66666666666667" y1="45.333333333333336" x2="76.66666666666667" y2="68" stroke="#0284c7" stroke-width="1.2" />
+        
+        <!-- Top Row: FAZ, D, FEZ -->
+        <text x="19.166666666666668" y="15.866666666666667" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#0369a1">7</text>
+        <text x="57.5" y="15.866666666666667" font-family="sans-serif" font-size="10.5" font-weight="bold" text-anchor="middle" fill="#0369a1">D:6</text>
+        <text x="95.83333333333333" y="15.866666666666667" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#0369a1">13</text>
+        
+        <!-- Middle Row: Name -->
+        <text x="57.5" y="38.53333333333333" font-family="sans-serif" font-size="10.5" font-weight="bold" text-anchor="middle" fill="#0369a1">F: Schnittst.</text>
+        
+        <!-- Bottom Row: SAZ, GP/FP, SEZ -->
+        <text x="19.166666666666668" y="61.20000000000001" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#0369a1">8</text>
+        <text x="57.5" y="61.20000000000001" font-family="sans-serif" font-size="9.5" font-weight="bold" text-anchor="middle" fill="#0369a1">GP:1</text>
+        <text x="95.83333333333333" y="61.20000000000001" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#0369a1">14</text>
+    </g>
+    
+    <g transform="translate(330, 240)">
+        <rect width="115" height="68" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.5" rx="4" />
+        <line x1="0" y1="22.666666666666668" x2="115" y2="22.666666666666668" stroke="#0284c7" stroke-width="1.2" />
+        <line x1="0" y1="45.333333333333336" x2="115" y2="45.333333333333336" stroke="#0284c7" stroke-width="1.2" />
+        <line x1="38.333333333333336" y1="0" x2="38.333333333333336" y2="22.666666666666668" stroke="#0284c7" stroke-width="1.2" />
+        <line x1="76.66666666666667" y1="0" x2="76.66666666666667" y2="22.666666666666668" stroke="#0284c7" stroke-width="1.2" />
+        <line x1="38.333333333333336" y1="45.333333333333336" x2="38.333333333333336" y2="68" stroke="#0284c7" stroke-width="1.2" />
+        <line x1="76.66666666666667" y1="45.333333333333336" x2="76.66666666666667" y2="68" stroke="#0284c7" stroke-width="1.2" />
+        
+        <!-- Top Row: FAZ, D, FEZ -->
+        <text x="19.166666666666668" y="15.866666666666667" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#0369a1">10</text>
+        <text x="57.5" y="15.866666666666667" font-family="sans-serif" font-size="10.5" font-weight="bold" text-anchor="middle" fill="#0369a1">D:3</text>
+        <text x="95.83333333333333" y="15.866666666666667" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#0369a1">13</text>
+        
+        <!-- Middle Row: Name -->
+        <text x="57.5" y="38.53333333333333" font-family="sans-serif" font-size="10.5" font-weight="bold" text-anchor="middle" fill="#0369a1">E: Server-Inst.</text>
+        
+        <!-- Bottom Row: SAZ, GP/FP, SEZ -->
+        <text x="19.166666666666668" y="61.20000000000001" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#0369a1">11</text>
+        <text x="57.5" y="61.20000000000001" font-family="sans-serif" font-size="9.5" font-weight="bold" text-anchor="middle" fill="#0369a1">GP:1</text>
+        <text x="95.83333333333333" y="61.20000000000001" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#0369a1">14</text>
+    </g>
+
+    <!-- Column 4: G (Integrationstest) -->
+    
+    <g transform="translate(490, 140)">
+        <rect width="115" height="68" fill="#fee2e2" stroke="#dc2626" stroke-width="2.5" rx="4" />
+        <line x1="0" y1="22.666666666666668" x2="115" y2="22.666666666666668" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="0" y1="45.333333333333336" x2="115" y2="45.333333333333336" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="38.333333333333336" y1="0" x2="38.333333333333336" y2="22.666666666666668" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="76.66666666666667" y1="0" x2="76.66666666666667" y2="22.666666666666668" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="38.333333333333336" y1="45.333333333333336" x2="38.333333333333336" y2="68" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="76.66666666666667" y1="45.333333333333336" x2="76.66666666666667" y2="68" stroke="#dc2626" stroke-width="1.2" />
+        
+        <!-- Top Row: FAZ, D, FEZ -->
+        <text x="19.166666666666668" y="15.866666666666667" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">14</text>
+        <text x="57.5" y="15.866666666666667" font-family="sans-serif" font-size="10.5" font-weight="bold" text-anchor="middle" fill="#991b1b">D:4</text>
+        <text x="95.83333333333333" y="15.866666666666667" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">18</text>
+        
+        <!-- Middle Row: Name -->
+        <text x="57.5" y="38.53333333333333" font-family="sans-serif" font-size="10.5" font-weight="bold" text-anchor="middle" fill="#991b1b">G: Integrat.</text>
+        
+        <!-- Bottom Row: SAZ, GP/FP, SEZ -->
+        <text x="19.166666666666668" y="61.20000000000001" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">14</text>
+        <text x="57.5" y="61.20000000000001" font-family="sans-serif" font-size="9.5" font-weight="bold" text-anchor="middle" fill="#991b1b">GP:0</text>
+        <text x="95.83333333333333" y="61.20000000000001" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">18</text>
+    </g>
+
+    <!-- Column 5: H (Schulung) -->
+    
+    <g transform="translate(645, 140)">
+        <rect width="115" height="68" fill="#fee2e2" stroke="#dc2626" stroke-width="2.5" rx="4" />
+        <line x1="0" y1="22.666666666666668" x2="115" y2="22.666666666666668" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="0" y1="45.333333333333336" x2="115" y2="45.333333333333336" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="38.333333333333336" y1="0" x2="38.333333333333336" y2="22.666666666666668" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="76.66666666666667" y1="0" x2="76.66666666666667" y2="22.666666666666668" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="38.333333333333336" y1="45.333333333333336" x2="38.333333333333336" y2="68" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="76.66666666666667" y1="45.333333333333336" x2="76.66666666666667" y2="68" stroke="#dc2626" stroke-width="1.2" />
+        
+        <!-- Top Row: FAZ, D, FEZ -->
+        <text x="19.166666666666668" y="15.866666666666667" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">18</text>
+        <text x="57.5" y="15.866666666666667" font-family="sans-serif" font-size="10.5" font-weight="bold" text-anchor="middle" fill="#991b1b">D:3</text>
+        <text x="95.83333333333333" y="15.866666666666667" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">21</text>
+        
+        <!-- Middle Row: Name -->
+        <text x="57.5" y="38.53333333333333" font-family="sans-serif" font-size="10.5" font-weight="bold" text-anchor="middle" fill="#991b1b">H: Schulung</text>
+        
+        <!-- Bottom Row: SAZ, GP/FP, SEZ -->
+        <text x="19.166666666666668" y="61.20000000000001" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">18</text>
+        <text x="57.5" y="61.20000000000001" font-family="sans-serif" font-size="9.5" font-weight="bold" text-anchor="middle" fill="#991b1b">GP:0</text>
+        <text x="95.83333333333333" y="61.20000000000001" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">21</text>
+    </g>
+
+    <!-- Column 6: I (Go-Live) -->
+    
+    <g transform="translate(800, 140)">
+        <rect width="115" height="68" fill="#fee2e2" stroke="#dc2626" stroke-width="2.5" rx="4" />
+        <line x1="0" y1="22.666666666666668" x2="115" y2="22.666666666666668" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="0" y1="45.333333333333336" x2="115" y2="45.333333333333336" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="38.333333333333336" y1="0" x2="38.333333333333336" y2="22.666666666666668" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="76.66666666666667" y1="0" x2="76.66666666666667" y2="22.666666666666668" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="38.333333333333336" y1="45.333333333333336" x2="38.333333333333336" y2="68" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="76.66666666666667" y1="45.333333333333336" x2="76.66666666666667" y2="68" stroke="#dc2626" stroke-width="1.2" />
+        
+        <!-- Top Row: FAZ, D, FEZ -->
+        <text x="19.166666666666668" y="15.866666666666667" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">21</text>
+        <text x="57.5" y="15.866666666666667" font-family="sans-serif" font-size="10.5" font-weight="bold" text-anchor="middle" fill="#991b1b">D:2</text>
+        <text x="95.83333333333333" y="15.866666666666667" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">23</text>
+        
+        <!-- Middle Row: Name -->
+        <text x="57.5" y="38.53333333333333" font-family="sans-serif" font-size="10.5" font-weight="bold" text-anchor="middle" fill="#991b1b">I: Go-Live</text>
+        
+        <!-- Bottom Row: SAZ, GP/FP, SEZ -->
+        <text x="19.166666666666668" y="61.20000000000001" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">21</text>
+        <text x="57.5" y="61.20000000000001" font-family="sans-serif" font-size="9.5" font-weight="bold" text-anchor="middle" fill="#991b1b">GP:0</text>
+        <text x="95.83333333333333" y="61.20000000000001" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">23</text>
+    </g>
+
+    <!-- Connecting Lines -->
+    <!-- A -> B (Critical Red) -->
+    <line x1="135" y1="165" x2="175" y2="100" stroke="#dc2626" stroke-width="2.5" marker-end="url(#np9-red)" />
+    <!-- A -> C (Blue) -->
+    <line x1="135" y1="180" x2="175" y2="255" stroke="#0284c7" stroke-width="1.8" marker-end="url(#np9-blue)" />
+
+    <!-- B -> D (Critical Red) -->
+    <line x1="290" y1="90" x2="330" y2="75" stroke="#dc2626" stroke-width="2.5" marker-end="url(#np9-red)" />
+    <!-- B -> F (Blue) -->
+    <line x1="290" y1="105" x2="330" y2="165" stroke="#0284c7" stroke-width="1.8" marker-end="url(#np9-blue)" />
+
+    <!-- C -> E (Blue) -->
+    <line x1="290" y1="265" x2="330" y2="275" stroke="#0284c7" stroke-width="1.8" marker-end="url(#np9-blue)" />
+
+    <!-- D -> G (Critical Red) -->
+    <line x1="445" y1="75" x2="490" y2="160" stroke="#dc2626" stroke-width="2.5" marker-end="url(#np9-red)" />
+    <!-- F -> G (Blue) -->
+    <line x1="445" y1="174" x2="490" y2="174" stroke="#0284c7" stroke-width="1.8" marker-end="url(#np9-blue)" />
+    <!-- E -> G (Blue) -->
+    <line x1="445" y1="275" x2="490" y2="190" stroke="#0284c7" stroke-width="1.8" marker-end="url(#np9-blue)" />
+
+    <!-- G -> H (Critical Red) -->
+    <line x1="605" y1="174" x2="645" y2="174" stroke="#dc2626" stroke-width="2.5" marker-end="url(#np9-red)" />
+
+    <!-- H -> I (Critical Red) -->
+    <line x1="760" y1="174" x2="800" y2="174" stroke="#dc2626" stroke-width="2.5" marker-end="url(#np9-red)" />
+
+    <!-- Legend Footer -->
+    <rect x="180" y="335" width="580" height="34" fill="#ffffff" stroke="#cbd5e1" stroke-width="1" rx="4" />
+    <circle cx="205" cy="352" r="6" fill="#fee2e2" stroke="#dc2626" stroke-width="2" />
+    <text x="220" y="356" font-family="sans-serif" font-size="11.5" font-weight="bold" fill="#991b1b">Kritischer Pfad: A ➔ B ➔ D ➔ G ➔ H ➔ I (Dauer: 23 Tage, GP = 0)</text>
+    <circle cx="610" cy="352" r="6" fill="#e0f2fe" stroke="#0284c7" stroke-width="2" />
+    <text x="625" y="356" font-family="sans-serif" font-size="11.5" font-weight="bold" fill="#0369a1">Pufferpfad (GP = 1)</text>
+</svg>`;
+    },
+
+    // 7b. Netzplan Client-Rollout (5 Vorgänge, Dauer = 12 Tage) - ID 267
+    getRollout5NetzplanDiagramSvg: function() {
+        return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 740 340" width="100%" height="100%">
+    <defs>
+        <marker id="np5-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#dc2626" />
+        </marker>
+        <marker id="np5-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#0284c7" />
+        </marker>
+    </defs>
+    <rect width="740" height="340" fill="#f8fafc" rx="8" />
+    <text x="370" y="24" font-family="sans-serif" font-size="14" font-weight="bold" fill="#1e3a8a" text-anchor="middle">DIN 69900 Netzplan: Client-Rollout (5 Vorgänge, Dauer = 12 Tage)</text>
+
+    <!-- Column 1: A (Hardware), B (Images), D (Switch) -->
+    
+    <g transform="translate(30, 45)">
+        <rect width="130" height="68" fill="#fee2e2" stroke="#dc2626" stroke-width="2.5" rx="4" />
+        <line x1="0" y1="22.666666666666668" x2="130" y2="22.666666666666668" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="0" y1="45.333333333333336" x2="130" y2="45.333333333333336" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="43.333333333333336" y1="0" x2="43.333333333333336" y2="22.666666666666668" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="86.66666666666667" y1="0" x2="86.66666666666667" y2="22.666666666666668" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="43.333333333333336" y1="45.333333333333336" x2="43.333333333333336" y2="68" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="86.66666666666667" y1="45.333333333333336" x2="86.66666666666667" y2="68" stroke="#dc2626" stroke-width="1.2" />
+        
+        <!-- Top Row: FAZ, D, FEZ -->
+        <text x="21.666666666666668" y="15.866666666666667" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">0</text>
+        <text x="65.0" y="15.866666666666667" font-family="sans-serif" font-size="10.5" font-weight="bold" text-anchor="middle" fill="#991b1b">D:4</text>
+        <text x="108.33333333333333" y="15.866666666666667" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">4</text>
+        
+        <!-- Middle Row: Name -->
+        <text x="65.0" y="38.53333333333333" font-family="sans-serif" font-size="10.5" font-weight="bold" text-anchor="middle" fill="#991b1b">A: Hardware</text>
+        
+        <!-- Bottom Row: SAZ, GP/FP, SEZ -->
+        <text x="21.666666666666668" y="61.20000000000001" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">0</text>
+        <text x="65.0" y="61.20000000000001" font-family="sans-serif" font-size="9.5" font-weight="bold" text-anchor="middle" fill="#991b1b">GP:0</text>
+        <text x="108.33333333333333" y="61.20000000000001" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">4</text>
+    </g>
+    
+    <g transform="translate(30, 135)">
+        <rect width="130" height="68" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.5" rx="4" />
+        <line x1="0" y1="22.666666666666668" x2="130" y2="22.666666666666668" stroke="#0284c7" stroke-width="1.2" />
+        <line x1="0" y1="45.333333333333336" x2="130" y2="45.333333333333336" stroke="#0284c7" stroke-width="1.2" />
+        <line x1="43.333333333333336" y1="0" x2="43.333333333333336" y2="22.666666666666668" stroke="#0284c7" stroke-width="1.2" />
+        <line x1="86.66666666666667" y1="0" x2="86.66666666666667" y2="22.666666666666668" stroke="#0284c7" stroke-width="1.2" />
+        <line x1="43.333333333333336" y1="45.333333333333336" x2="43.333333333333336" y2="68" stroke="#0284c7" stroke-width="1.2" />
+        <line x1="86.66666666666667" y1="45.333333333333336" x2="86.66666666666667" y2="68" stroke="#0284c7" stroke-width="1.2" />
+        
+        <!-- Top Row: FAZ, D, FEZ -->
+        <text x="21.666666666666668" y="15.866666666666667" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#0369a1">0</text>
+        <text x="65.0" y="15.866666666666667" font-family="sans-serif" font-size="10.5" font-weight="bold" text-anchor="middle" fill="#0369a1">D:2</text>
+        <text x="108.33333333333333" y="15.866666666666667" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#0369a1">2</text>
+        
+        <!-- Middle Row: Name -->
+        <text x="65.0" y="38.53333333333333" font-family="sans-serif" font-size="10.5" font-weight="bold" text-anchor="middle" fill="#0369a1">B: Images</text>
+        
+        <!-- Bottom Row: SAZ, GP/FP, SEZ -->
+        <text x="21.666666666666668" y="61.20000000000001" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#0369a1">2</text>
+        <text x="65.0" y="61.20000000000001" font-family="sans-serif" font-size="9.5" font-weight="bold" text-anchor="middle" fill="#0369a1">GP:2</text>
+        <text x="108.33333333333333" y="61.20000000000001" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#0369a1">4</text>
+    </g>
+    
+    <g transform="translate(30, 225)">
+        <rect width="130" height="68" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.5" rx="4" />
+        <line x1="0" y1="22.666666666666668" x2="130" y2="22.666666666666668" stroke="#0284c7" stroke-width="1.2" />
+        <line x1="0" y1="45.333333333333336" x2="130" y2="45.333333333333336" stroke="#0284c7" stroke-width="1.2" />
+        <line x1="43.333333333333336" y1="0" x2="43.333333333333336" y2="22.666666666666668" stroke="#0284c7" stroke-width="1.2" />
+        <line x1="86.66666666666667" y1="0" x2="86.66666666666667" y2="22.666666666666668" stroke="#0284c7" stroke-width="1.2" />
+        <line x1="43.333333333333336" y1="45.333333333333336" x2="43.333333333333336" y2="68" stroke="#0284c7" stroke-width="1.2" />
+        <line x1="86.66666666666667" y1="45.333333333333336" x2="86.66666666666667" y2="68" stroke="#0284c7" stroke-width="1.2" />
+        
+        <!-- Top Row: FAZ, D, FEZ -->
+        <text x="21.666666666666668" y="15.866666666666667" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#0369a1">0</text>
+        <text x="65.0" y="15.866666666666667" font-family="sans-serif" font-size="10.5" font-weight="bold" text-anchor="middle" fill="#0369a1">D:1</text>
+        <text x="108.33333333333333" y="15.866666666666667" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#0369a1">1</text>
+        
+        <!-- Middle Row: Name -->
+        <text x="65.0" y="38.53333333333333" font-family="sans-serif" font-size="10.5" font-weight="bold" text-anchor="middle" fill="#0369a1">D: Switch</text>
+        
+        <!-- Bottom Row: SAZ, GP/FP, SEZ -->
+        <text x="21.666666666666668" y="61.20000000000001" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#0369a1">6</text>
+        <text x="65.0" y="61.20000000000001" font-family="sans-serif" font-size="9.5" font-weight="bold" text-anchor="middle" fill="#0369a1">GP:6</text>
+        <text x="108.33333333333333" y="61.20000000000001" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#0369a1">7</text>
+    </g>
+
+    <!-- Column 2: C (Clients clonen) -->
+    
+    <g transform="translate(270, 90)">
+        <rect width="130" height="68" fill="#fee2e2" stroke="#dc2626" stroke-width="2.5" rx="4" />
+        <line x1="0" y1="22.666666666666668" x2="130" y2="22.666666666666668" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="0" y1="45.333333333333336" x2="130" y2="45.333333333333336" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="43.333333333333336" y1="0" x2="43.333333333333336" y2="22.666666666666668" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="86.66666666666667" y1="0" x2="86.66666666666667" y2="22.666666666666668" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="43.333333333333336" y1="45.333333333333336" x2="43.333333333333336" y2="68" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="86.66666666666667" y1="45.333333333333336" x2="86.66666666666667" y2="68" stroke="#dc2626" stroke-width="1.2" />
+        
+        <!-- Top Row: FAZ, D, FEZ -->
+        <text x="21.666666666666668" y="15.866666666666667" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">4</text>
+        <text x="65.0" y="15.866666666666667" font-family="sans-serif" font-size="10.5" font-weight="bold" text-anchor="middle" fill="#991b1b">D:3</text>
+        <text x="108.33333333333333" y="15.866666666666667" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">7</text>
+        
+        <!-- Middle Row: Name -->
+        <text x="65.0" y="38.53333333333333" font-family="sans-serif" font-size="10.5" font-weight="bold" text-anchor="middle" fill="#991b1b">C: Clonen</text>
+        
+        <!-- Bottom Row: SAZ, GP/FP, SEZ -->
+        <text x="21.666666666666668" y="61.20000000000001" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">4</text>
+        <text x="65.0" y="61.20000000000001" font-family="sans-serif" font-size="9.5" font-weight="bold" text-anchor="middle" fill="#991b1b">GP:0</text>
+        <text x="108.33333333333333" y="61.20000000000001" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">7</text>
+    </g>
+
+    <!-- Column 3: E (Rollout vor Ort) -->
+    
+    <g transform="translate(510, 135)">
+        <rect width="130" height="68" fill="#fee2e2" stroke="#dc2626" stroke-width="2.5" rx="4" />
+        <line x1="0" y1="22.666666666666668" x2="130" y2="22.666666666666668" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="0" y1="45.333333333333336" x2="130" y2="45.333333333333336" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="43.333333333333336" y1="0" x2="43.333333333333336" y2="22.666666666666668" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="86.66666666666667" y1="0" x2="86.66666666666667" y2="22.666666666666668" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="43.333333333333336" y1="45.333333333333336" x2="43.333333333333336" y2="68" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="86.66666666666667" y1="45.333333333333336" x2="86.66666666666667" y2="68" stroke="#dc2626" stroke-width="1.2" />
+        
+        <!-- Top Row: FAZ, D, FEZ -->
+        <text x="21.666666666666668" y="15.866666666666667" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">7</text>
+        <text x="65.0" y="15.866666666666667" font-family="sans-serif" font-size="10.5" font-weight="bold" text-anchor="middle" fill="#991b1b">D:5</text>
+        <text x="108.33333333333333" y="15.866666666666667" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">12</text>
+        
+        <!-- Middle Row: Name -->
+        <text x="65.0" y="38.53333333333333" font-family="sans-serif" font-size="10.5" font-weight="bold" text-anchor="middle" fill="#991b1b">E: Rollout</text>
+        
+        <!-- Bottom Row: SAZ, GP/FP, SEZ -->
+        <text x="21.666666666666668" y="61.20000000000001" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">7</text>
+        <text x="65.0" y="61.20000000000001" font-family="sans-serif" font-size="9.5" font-weight="bold" text-anchor="middle" fill="#991b1b">GP:0</text>
+        <text x="108.33333333333333" y="61.20000000000001" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">12</text>
+    </g>
+
+    <!-- Connections -->
+    <!-- A -> C (Critical Red) -->
+    <line x1="160" y1="80" x2="270" y2="115" stroke="#dc2626" stroke-width="2.5" marker-end="url(#np5-red)" />
+    <!-- B -> C (Blue) -->
+    <line x1="160" y1="165" x2="270" y2="135" stroke="#0284c7" stroke-width="1.8" marker-end="url(#np5-blue)" />
+
+    <!-- C -> E (Critical Red) -->
+    <line x1="400" y1="130" x2="510" y2="160" stroke="#dc2626" stroke-width="2.5" marker-end="url(#np5-red)" />
+    <!-- D -> E (Blue) -->
+    <line x1="160" y1="260" x2="510" y2="185" stroke="#0284c7" stroke-width="1.8" marker-end="url(#np5-blue)" />
+
+    <!-- Legend -->
+    <rect x="130" y="302" width="480" height="30" fill="#ffffff" stroke="#cbd5e1" stroke-width="1" rx="4" />
+    <circle cx="150" cy="317" r="5" fill="#fee2e2" stroke="#dc2626" stroke-width="2" />
+    <text x="165" y="321" font-family="sans-serif" font-size="11" font-weight="bold" fill="#991b1b">Kritischer Pfad: A ➔ C ➔ E (Dauer: 12 Tage, GP = 0)</text>
+    <circle cx="450" cy="317" r="5" fill="#e0f2fe" stroke="#0284c7" stroke-width="2" />
+    <text x="465" y="321" font-family="sans-serif" font-size="11" font-weight="bold" fill="#0369a1">Puffer (B: GP=2, D: GP=6)</text>
+</svg>`;
+    },
+
+    // 7c. Netzplan CAD-Workstations Rollout (6 Vorgänge, Dauer = 22 Tage) - ID 222
+    getCadRollout6NetzplanSvg: function() {
+        return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 340" width="100%" height="100%">
+    <defs>
+        <marker id="np6-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#dc2626" />
+        </marker>
+        <marker id="np6-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#0284c7" />
+        </marker>
+    </defs>
+    <rect width="880" height="340" fill="#f8fafc" rx="8" />
+    <text x="440" y="24" font-family="sans-serif" font-size="14" font-weight="bold" fill="#1e3a8a" text-anchor="middle">DIN 69900 Netzplan: CAD-Workstations Rollout (6 Vorgänge, Dauer = 22 Werktage)</text>
+
+    <!-- Node A -->
+    
+    <g transform="translate(20, 110)">
+        <rect width="120" height="68" fill="#fee2e2" stroke="#dc2626" stroke-width="2.5" rx="4" />
+        <line x1="0" y1="22.666666666666668" x2="120" y2="22.666666666666668" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="0" y1="45.333333333333336" x2="120" y2="45.333333333333336" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="40.0" y1="0" x2="40.0" y2="22.666666666666668" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="80.0" y1="0" x2="80.0" y2="22.666666666666668" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="40.0" y1="45.333333333333336" x2="40.0" y2="68" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="80.0" y1="45.333333333333336" x2="80.0" y2="68" stroke="#dc2626" stroke-width="1.2" />
+        
+        <!-- Top Row: FAZ, D, FEZ -->
+        <text x="20.0" y="15.866666666666667" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">0</text>
+        <text x="60.0" y="15.866666666666667" font-family="sans-serif" font-size="10.5" font-weight="bold" text-anchor="middle" fill="#991b1b">D:3</text>
+        <text x="100.0" y="15.866666666666667" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">3</text>
+        
+        <!-- Middle Row: Name -->
+        <text x="60.0" y="38.53333333333333" font-family="sans-serif" font-size="10.5" font-weight="bold" text-anchor="middle" fill="#991b1b">A: Analyse</text>
+        
+        <!-- Bottom Row: SAZ, GP/FP, SEZ -->
+        <text x="20.0" y="61.20000000000001" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">0</text>
+        <text x="60.0" y="61.20000000000001" font-family="sans-serif" font-size="9.5" font-weight="bold" text-anchor="middle" fill="#991b1b">GP:0</text>
+        <text x="100.0" y="61.20000000000001" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">3</text>
+    </g>
+    <!-- Node B (Top) & Node D (Bottom) -->
+    
+    <g transform="translate(180, 55)">
+        <rect width="120" height="68" fill="#fee2e2" stroke="#dc2626" stroke-width="2.5" rx="4" />
+        <line x1="0" y1="22.666666666666668" x2="120" y2="22.666666666666668" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="0" y1="45.333333333333336" x2="120" y2="45.333333333333336" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="40.0" y1="0" x2="40.0" y2="22.666666666666668" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="80.0" y1="0" x2="80.0" y2="22.666666666666668" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="40.0" y1="45.333333333333336" x2="40.0" y2="68" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="80.0" y1="45.333333333333336" x2="80.0" y2="68" stroke="#dc2626" stroke-width="1.2" />
+        
+        <!-- Top Row: FAZ, D, FEZ -->
+        <text x="20.0" y="15.866666666666667" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">3</text>
+        <text x="60.0" y="15.866666666666667" font-family="sans-serif" font-size="10.5" font-weight="bold" text-anchor="middle" fill="#991b1b">D:10</text>
+        <text x="100.0" y="15.866666666666667" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">13</text>
+        
+        <!-- Middle Row: Name -->
+        <text x="60.0" y="38.53333333333333" font-family="sans-serif" font-size="10.5" font-weight="bold" text-anchor="middle" fill="#991b1b">B: Beschaff.</text>
+        
+        <!-- Bottom Row: SAZ, GP/FP, SEZ -->
+        <text x="20.0" y="61.20000000000001" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">3</text>
+        <text x="60.0" y="61.20000000000001" font-family="sans-serif" font-size="9.5" font-weight="bold" text-anchor="middle" fill="#991b1b">GP:0</text>
+        <text x="100.0" y="61.20000000000001" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">13</text>
+    </g>
+    
+    <g transform="translate(180, 185)">
+        <rect width="120" height="68" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.5" rx="4" />
+        <line x1="0" y1="22.666666666666668" x2="120" y2="22.666666666666668" stroke="#0284c7" stroke-width="1.2" />
+        <line x1="0" y1="45.333333333333336" x2="120" y2="45.333333333333336" stroke="#0284c7" stroke-width="1.2" />
+        <line x1="40.0" y1="0" x2="40.0" y2="22.666666666666668" stroke="#0284c7" stroke-width="1.2" />
+        <line x1="80.0" y1="0" x2="80.0" y2="22.666666666666668" stroke="#0284c7" stroke-width="1.2" />
+        <line x1="40.0" y1="45.333333333333336" x2="40.0" y2="68" stroke="#0284c7" stroke-width="1.2" />
+        <line x1="80.0" y1="45.333333333333336" x2="80.0" y2="68" stroke="#0284c7" stroke-width="1.2" />
+        
+        <!-- Top Row: FAZ, D, FEZ -->
+        <text x="20.0" y="15.866666666666667" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#0369a1">3</text>
+        <text x="60.0" y="15.866666666666667" font-family="sans-serif" font-size="10.5" font-weight="bold" text-anchor="middle" fill="#0369a1">D:5</text>
+        <text x="100.0" y="15.866666666666667" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#0369a1">8</text>
+        
+        <!-- Middle Row: Name -->
+        <text x="60.0" y="38.53333333333333" font-family="sans-serif" font-size="10.5" font-weight="bold" text-anchor="middle" fill="#0369a1">D: Netzwerk</text>
+        
+        <!-- Bottom Row: SAZ, GP/FP, SEZ -->
+        <text x="20.0" y="61.20000000000001" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#0369a1">10</text>
+        <text x="60.0" y="61.20000000000001" font-family="sans-serif" font-size="9.5" font-weight="bold" text-anchor="middle" fill="#0369a1">GP:7</text>
+        <text x="100.0" y="61.20000000000001" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#0369a1">15</text>
+    </g>
+    <!-- Node C -->
+    
+    <g transform="translate(340, 55)">
+        <rect width="120" height="68" fill="#fee2e2" stroke="#dc2626" stroke-width="2.5" rx="4" />
+        <line x1="0" y1="22.666666666666668" x2="120" y2="22.666666666666668" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="0" y1="45.333333333333336" x2="120" y2="45.333333333333336" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="40.0" y1="0" x2="40.0" y2="22.666666666666668" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="80.0" y1="0" x2="80.0" y2="22.666666666666668" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="40.0" y1="45.333333333333336" x2="40.0" y2="68" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="80.0" y1="45.333333333333336" x2="80.0" y2="68" stroke="#dc2626" stroke-width="1.2" />
+        
+        <!-- Top Row: FAZ, D, FEZ -->
+        <text x="20.0" y="15.866666666666667" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">13</text>
+        <text x="60.0" y="15.866666666666667" font-family="sans-serif" font-size="10.5" font-weight="bold" text-anchor="middle" fill="#991b1b">D:4</text>
+        <text x="100.0" y="15.866666666666667" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">17</text>
+        
+        <!-- Middle Row: Name -->
+        <text x="60.0" y="38.53333333333333" font-family="sans-serif" font-size="10.5" font-weight="bold" text-anchor="middle" fill="#991b1b">C: Install.</text>
+        
+        <!-- Bottom Row: SAZ, GP/FP, SEZ -->
+        <text x="20.0" y="61.20000000000001" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">13</text>
+        <text x="60.0" y="61.20000000000001" font-family="sans-serif" font-size="9.5" font-weight="bold" text-anchor="middle" fill="#991b1b">GP:0</text>
+        <text x="100.0" y="61.20000000000001" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">17</text>
+    </g>
+    <!-- Node E -->
+    
+    <g transform="translate(500, 110)">
+        <rect width="120" height="68" fill="#fee2e2" stroke="#dc2626" stroke-width="2.5" rx="4" />
+        <line x1="0" y1="22.666666666666668" x2="120" y2="22.666666666666668" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="0" y1="45.333333333333336" x2="120" y2="45.333333333333336" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="40.0" y1="0" x2="40.0" y2="22.666666666666668" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="80.0" y1="0" x2="80.0" y2="22.666666666666668" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="40.0" y1="45.333333333333336" x2="40.0" y2="68" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="80.0" y1="45.333333333333336" x2="80.0" y2="68" stroke="#dc2626" stroke-width="1.2" />
+        
+        <!-- Top Row: FAZ, D, FEZ -->
+        <text x="20.0" y="15.866666666666667" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">17</text>
+        <text x="60.0" y="15.866666666666667" font-family="sans-serif" font-size="10.5" font-weight="bold" text-anchor="middle" fill="#991b1b">D:3</text>
+        <text x="100.0" y="15.866666666666667" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">20</text>
+        
+        <!-- Middle Row: Name -->
+        <text x="60.0" y="38.53333333333333" font-family="sans-serif" font-size="10.5" font-weight="bold" text-anchor="middle" fill="#991b1b">E: Integrat.</text>
+        
+        <!-- Bottom Row: SAZ, GP/FP, SEZ -->
+        <text x="20.0" y="61.20000000000001" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">17</text>
+        <text x="60.0" y="61.20000000000001" font-family="sans-serif" font-size="9.5" font-weight="bold" text-anchor="middle" fill="#991b1b">GP:0</text>
+        <text x="100.0" y="61.20000000000001" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">20</text>
+    </g>
+    <!-- Node F -->
+    
+    <g transform="translate(660, 110)">
+        <rect width="120" height="68" fill="#fee2e2" stroke="#dc2626" stroke-width="2.5" rx="4" />
+        <line x1="0" y1="22.666666666666668" x2="120" y2="22.666666666666668" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="0" y1="45.333333333333336" x2="120" y2="45.333333333333336" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="40.0" y1="0" x2="40.0" y2="22.666666666666668" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="80.0" y1="0" x2="80.0" y2="22.666666666666668" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="40.0" y1="45.333333333333336" x2="40.0" y2="68" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="80.0" y1="45.333333333333336" x2="80.0" y2="68" stroke="#dc2626" stroke-width="1.2" />
+        
+        <!-- Top Row: FAZ, D, FEZ -->
+        <text x="20.0" y="15.866666666666667" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">20</text>
+        <text x="60.0" y="15.866666666666667" font-family="sans-serif" font-size="10.5" font-weight="bold" text-anchor="middle" fill="#991b1b">D:2</text>
+        <text x="100.0" y="15.866666666666667" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">22</text>
+        
+        <!-- Middle Row: Name -->
+        <text x="60.0" y="38.53333333333333" font-family="sans-serif" font-size="10.5" font-weight="bold" text-anchor="middle" fill="#991b1b">F: Schulung</text>
+        
+        <!-- Bottom Row: SAZ, GP/FP, SEZ -->
+        <text x="20.0" y="61.20000000000001" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">20</text>
+        <text x="60.0" y="61.20000000000001" font-family="sans-serif" font-size="9.5" font-weight="bold" text-anchor="middle" fill="#991b1b">GP:0</text>
+        <text x="100.0" y="61.20000000000001" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">22</text>
+    </g>
+
+    <!-- Connections -->
+    <line x1="140" y1="135" x2="180" y2="95" stroke="#dc2626" stroke-width="2.5" marker-end="url(#np6-red)" />
+    <line x1="140" y1="155" x2="180" y2="210" stroke="#0284c7" stroke-width="1.8" marker-end="url(#np6-blue)" />
+    
+    <line x1="300" y1="89" x2="340" y2="89" stroke="#dc2626" stroke-width="2.5" marker-end="url(#np6-red)" />
+    
+    <line x1="460" y1="95" x2="500" y2="135" stroke="#dc2626" stroke-width="2.5" marker-end="url(#np6-red)" />
+    <line x1="300" y1="210" x2="500" y2="155" stroke="#0284c7" stroke-width="1.8" marker-end="url(#np6-blue)" />
+    
+    <line x1="620" y1="144" x2="660" y2="144" stroke="#dc2626" stroke-width="2.5" marker-end="url(#np6-red)" />
+
+    <!-- Legend -->
+    <rect x="200" y="302" width="480" height="30" fill="#ffffff" stroke="#cbd5e1" stroke-width="1" rx="4" />
+    <circle cx="220" cy="317" r="5" fill="#fee2e2" stroke="#dc2626" stroke-width="2" />
+    <text x="235" y="321" font-family="sans-serif" font-size="11" font-weight="bold" fill="#991b1b">Kritischer Pfad: A ➔ B ➔ C ➔ E ➔ F (Dauer: 22 Tage, GP = 0)</text>
+    <circle cx="530" cy="317" r="5" fill="#e0f2fe" stroke="#0284c7" stroke-width="2" />
+    <text x="545" y="321" font-family="sans-serif" font-size="11" font-weight="bold" fill="#0369a1">Puffer D (GP = 7)</text>
+</svg>`;
+    },
+
+    // 7d. Netzplan Vorgänge V1 bis V4 (4 Vorgänge, Dauer = 18 Tage) - ID 368
+    getV1V4NetzplanDiagramSvg: function() {
+        return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 320" width="100%" height="100%">
+    <defs>
+        <marker id="np4-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#dc2626" />
+        </marker>
+        <marker id="np4-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#0284c7" />
+        </marker>
+    </defs>
+    <rect width="680" height="320" fill="#f8fafc" rx="8" />
+    <text x="340" y="24" font-family="sans-serif" font-size="14" font-weight="bold" fill="#1e3a8a" text-anchor="middle">DIN 69900 Netzplan: Vorgänge V1 bis V4 (Dauer = 18 Tage)</text>
+
+    <!-- Node V1 -->
+    
+    <g transform="translate(40, 95)">
+        <rect width="130" height="75" fill="#fee2e2" stroke="#dc2626" stroke-width="2.5" rx="4" />
+        <line x1="0" y1="25.0" x2="130" y2="25.0" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="0" y1="50.0" x2="130" y2="50.0" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="43.333333333333336" y1="0" x2="43.333333333333336" y2="25.0" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="86.66666666666667" y1="0" x2="86.66666666666667" y2="25.0" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="43.333333333333336" y1="50.0" x2="43.333333333333336" y2="75" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="86.66666666666667" y1="50.0" x2="86.66666666666667" y2="75" stroke="#dc2626" stroke-width="1.2" />
+        
+        <!-- Top Row: FAZ, D, FEZ -->
+        <text x="21.666666666666668" y="17.5" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">0</text>
+        <text x="65.0" y="17.5" font-family="sans-serif" font-size="10.5" font-weight="bold" text-anchor="middle" fill="#991b1b">D:4</text>
+        <text x="108.33333333333333" y="17.5" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">4</text>
+        
+        <!-- Middle Row: Name -->
+        <text x="65.0" y="42.5" font-family="sans-serif" font-size="10.5" font-weight="bold" text-anchor="middle" fill="#991b1b">V1</text>
+        
+        <!-- Bottom Row: SAZ, GP/FP, SEZ -->
+        <text x="21.666666666666668" y="67.5" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">0</text>
+        <text x="65.0" y="67.5" font-family="sans-serif" font-size="9.5" font-weight="bold" text-anchor="middle" fill="#991b1b">GP:0</text>
+        <text x="108.33333333333333" y="67.5" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">4</text>
+    </g>
+    <!-- Node V2 (Top) & Node V3 (Bottom) -->
+    
+    <g transform="translate(250, 40)">
+        <rect width="130" height="75" fill="#fee2e2" stroke="#dc2626" stroke-width="2.5" rx="4" />
+        <line x1="0" y1="25.0" x2="130" y2="25.0" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="0" y1="50.0" x2="130" y2="50.0" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="43.333333333333336" y1="0" x2="43.333333333333336" y2="25.0" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="86.66666666666667" y1="0" x2="86.66666666666667" y2="25.0" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="43.333333333333336" y1="50.0" x2="43.333333333333336" y2="75" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="86.66666666666667" y1="50.0" x2="86.66666666666667" y2="75" stroke="#dc2626" stroke-width="1.2" />
+        
+        <!-- Top Row: FAZ, D, FEZ -->
+        <text x="21.666666666666668" y="17.5" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">4</text>
+        <text x="65.0" y="17.5" font-family="sans-serif" font-size="10.5" font-weight="bold" text-anchor="middle" fill="#991b1b">D:6</text>
+        <text x="108.33333333333333" y="17.5" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">10</text>
+        
+        <!-- Middle Row: Name -->
+        <text x="65.0" y="42.5" font-family="sans-serif" font-size="10.5" font-weight="bold" text-anchor="middle" fill="#991b1b">V2</text>
+        
+        <!-- Bottom Row: SAZ, GP/FP, SEZ -->
+        <text x="21.666666666666668" y="67.5" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">4</text>
+        <text x="65.0" y="67.5" font-family="sans-serif" font-size="9.5" font-weight="bold" text-anchor="middle" fill="#991b1b">GP:0</text>
+        <text x="108.33333333333333" y="67.5" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">10</text>
+    </g>
+    
+    <g transform="translate(250, 160)">
+        <rect width="130" height="75" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.5" rx="4" />
+        <line x1="0" y1="25.0" x2="130" y2="25.0" stroke="#0284c7" stroke-width="1.2" />
+        <line x1="0" y1="50.0" x2="130" y2="50.0" stroke="#0284c7" stroke-width="1.2" />
+        <line x1="43.333333333333336" y1="0" x2="43.333333333333336" y2="25.0" stroke="#0284c7" stroke-width="1.2" />
+        <line x1="86.66666666666667" y1="0" x2="86.66666666666667" y2="25.0" stroke="#0284c7" stroke-width="1.2" />
+        <line x1="43.333333333333336" y1="50.0" x2="43.333333333333336" y2="75" stroke="#0284c7" stroke-width="1.2" />
+        <line x1="86.66666666666667" y1="50.0" x2="86.66666666666667" y2="75" stroke="#0284c7" stroke-width="1.2" />
+        
+        <!-- Top Row: FAZ, D, FEZ -->
+        <text x="21.666666666666668" y="17.5" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#0369a1">4</text>
+        <text x="65.0" y="17.5" font-family="sans-serif" font-size="10.5" font-weight="bold" text-anchor="middle" fill="#0369a1">D:2</text>
+        <text x="108.33333333333333" y="17.5" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#0369a1">6</text>
+        
+        <!-- Middle Row: Name -->
+        <text x="65.0" y="42.5" font-family="sans-serif" font-size="10.5" font-weight="bold" text-anchor="middle" fill="#0369a1">V3</text>
+        
+        <!-- Bottom Row: SAZ, GP/FP, SEZ -->
+        <text x="21.666666666666668" y="67.5" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#0369a1">8</text>
+        <text x="65.0" y="67.5" font-family="sans-serif" font-size="9.5" font-weight="bold" text-anchor="middle" fill="#0369a1">GP:4</text>
+        <text x="108.33333333333333" y="67.5" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#0369a1">10</text>
+    </g>
+    <!-- Node V4 -->
+    
+    <g transform="translate(460, 95)">
+        <rect width="130" height="75" fill="#fee2e2" stroke="#dc2626" stroke-width="2.5" rx="4" />
+        <line x1="0" y1="25.0" x2="130" y2="25.0" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="0" y1="50.0" x2="130" y2="50.0" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="43.333333333333336" y1="0" x2="43.333333333333336" y2="25.0" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="86.66666666666667" y1="0" x2="86.66666666666667" y2="25.0" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="43.333333333333336" y1="50.0" x2="43.333333333333336" y2="75" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="86.66666666666667" y1="50.0" x2="86.66666666666667" y2="75" stroke="#dc2626" stroke-width="1.2" />
+        
+        <!-- Top Row: FAZ, D, FEZ -->
+        <text x="21.666666666666668" y="17.5" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">10</text>
+        <text x="65.0" y="17.5" font-family="sans-serif" font-size="10.5" font-weight="bold" text-anchor="middle" fill="#991b1b">D:8</text>
+        <text x="108.33333333333333" y="17.5" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">18</text>
+        
+        <!-- Middle Row: Name -->
+        <text x="65.0" y="42.5" font-family="sans-serif" font-size="10.5" font-weight="bold" text-anchor="middle" fill="#991b1b">V4</text>
+        
+        <!-- Bottom Row: SAZ, GP/FP, SEZ -->
+        <text x="21.666666666666668" y="67.5" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">10</text>
+        <text x="65.0" y="67.5" font-family="sans-serif" font-size="9.5" font-weight="bold" text-anchor="middle" fill="#991b1b">GP:0</text>
+        <text x="108.33333333333333" y="67.5" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">18</text>
+    </g>
+
+    <!-- Connections -->
+    <line x1="170" y1="125" x2="250" y2="80" stroke="#dc2626" stroke-width="2.5" marker-end="url(#np4-red)" />
+    <line x1="170" y1="145" x2="250" y2="190" stroke="#0284c7" stroke-width="1.8" marker-end="url(#np4-blue)" />
+    
+    <line x1="380" y1="80" x2="460" y2="125" stroke="#dc2626" stroke-width="2.5" marker-end="url(#np4-red)" />
+    <line x1="380" y1="190" x2="460" y2="145" stroke="#0284c7" stroke-width="1.8" marker-end="url(#np4-blue)" />
+
+    <!-- Legend -->
+    <rect x="100" y="280" width="480" height="30" fill="#ffffff" stroke="#cbd5e1" stroke-width="1" rx="4" />
+    <circle cx="120" cy="295" r="5" fill="#fee2e2" stroke="#dc2626" stroke-width="2" />
+    <text x="135" y="299" font-family="sans-serif" font-size="11" font-weight="bold" fill="#991b1b">Kritischer Pfad: V1 ➔ V2 ➔ V4 (Dauer: 18 Tage, GP = 0)</text>
+    <circle cx="430" cy="295" r="5" fill="#e0f2fe" stroke="#0284c7" stroke-width="2" />
+    <text x="445" y="299" font-family="sans-serif" font-size="11" font-weight="bold" fill="#0369a1">Puffer V3 (GP = 4)</text>
+</svg>`;
+    },
+
 
     // 8. Organigramm Stabliniensystem
     getOrganigrammStabSvg: function() {
@@ -1023,8 +1751,20 @@ var VisualDiagrams = {
             return VisualDiagrams.getBpmnDiagramSvg();
         }
         
-        // 7. Netzplan
+        // 7. Netzplan (ERP 9 Vorgänge, Client 5 Vorgänge, CAD 6 Vorgänge, V1..V4 4 Vorgänge oder Standard)
         if (/\b(netzplan|kritischer pfad|faz|gesamtpuffer|din 69900)\b/i.test(text)) {
+            if (text.includes("erp") || text.includes("9 vorgänge") || text.includes("vorgang a: kick-off") || text.includes("customizing") || text.includes("go-live")) {
+                return VisualDiagrams.getErp9NetzplanDiagramSvg();
+            }
+            if (text.includes("client-rollout") || text.includes("images erstellen") || text.includes("clients clonen") || text.includes("5 vorgänge")) {
+                return VisualDiagrams.getRollout5NetzplanDiagramSvg();
+            }
+            if (text.includes("cad-workstation") || text.includes("6 vorgänge") || text.includes("netzwerk-upgrade")) {
+                return VisualDiagrams.getCadRollout6NetzplanSvg();
+            }
+            if (text.includes("v1") && text.includes("v4")) {
+                return VisualDiagrams.getV1V4NetzplanDiagramSvg();
+            }
             return VisualDiagrams.getNetzplanDiagramSvg();
         }
         

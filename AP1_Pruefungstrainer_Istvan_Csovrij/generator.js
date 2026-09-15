@@ -2844,7 +2844,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                 isBawueFocus: true,
                 type: "open-text",
                 question: "Prüfungsaufgabe Projektmanagement (Netzplan nach DIN 69900):\nGegeben ist ein Projektnetzplan mit Vorgängen V1 (4 Tage), V2 (6 Tage), V3 (2 Tage) und V4 (8 Tage).\n\nBerechnen Sie:\n1. Früheste Termine (FAZ, FEZ)\n2. Späteste Termine (SAZ, SEZ)\n3. Gesamtpuffer (GP) und Freier Puffer (FP) für jeden Vorgang\n4. Den Kritischen Pfad und die Gesamtdauer.\n\nSkizziere den Netzplan im Whiteboard und überprüfe ihn mit der visuellen Musterlösung.",
-                solutionDiagramSvg: VisualDiagrams.getNetzplanDiagramSvg(),
+                solutionDiagramSvg: VisualDiagrams.getV1V4NetzplanDiagramSvg(),
                 solutionDiagramCaption: "Visuelle Musterlösung: DIN 69900 Netzplan mit 7-Felder-Knoten",
                 musterloesung: "Musterlösung Netzplan:\n- V1 (D=4): FAZ=0, FEZ=4, SAZ=0, SEZ=4, GP=0, FP=0 (Kritisch)\n- V2 (D=6): FAZ=4, FEZ=10, SAZ=4, SEZ=10, GP=0, FP=0 (Kritisch)\n- V3 (D=2): FAZ=4, FEZ=6, SAZ=8, SEZ=10, GP=4, FP=4\n- V4 (D=8): FAZ=10, FEZ=18, SAZ=10, SEZ=18, GP=0, FP=0 (Kritisch)\n- Gesamtdauer: 18 Tage. Kritischer Pfad: V1 -> V2 -> V4.",
                 explanation: "Netzplantechnik nach DIN 69900 mit Vorwärts-/Rückwärtsrechnung und Pufferberechnung."

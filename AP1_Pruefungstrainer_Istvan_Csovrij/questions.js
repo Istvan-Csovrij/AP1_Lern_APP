@@ -4201,8 +4201,9 @@ WHERE Email IS NULL OR Email = '';
                        "   - Vorteil Gantt-Diagramm: Sehr anschauliche, intuitive Kalenderdarstellung des zeitlichen Verlaufs und der Überschneidungen auf einer horizontalen Zeitachse (optimal für Stakeholder-Präsentationen).\n" +
                        "   - Vorteil Netzplan: Zeigt explizit alle logischen Abhängigkeiten zwischen Vorgängen, ermöglicht die mathematische Berechnung von Pufferzeiten und identifiziert sofort den Kritischen Weg.",
         explanation: "Netzplantechnik (FAZ, FEZ, SAZ, SEZ, GP, FP, Kritischer Weg) ist einer der am häufigsten abgefragten Rechen- und Logikbereiche in der AP1 Baden-Württemberg.",
-        points: 20
-    },
+        points: 20,
+        solutionDiagramSvg: VisualDiagrams.getCadRollout6NetzplanSvg()
+},
     {
         id: 223,
         isHard: true,
@@ -5283,7 +5284,7 @@ WHERE Email IS NULL OR Email = '';
         "code": "+---------+--------------------+-------+------------+\n| Vorgang | Bezeichnung        | Dauer | Vorgänger  |\n+---------+--------------------+-------+------------+\n| A       | Hardware beschaffen| 4 T.  | -          |\n| B       | Images erstellen   | 2 T.  | -          |\n| C       | Clients clonen     | 3 T.  | A, B       |\n| D       | Switch konfigurieren| 1 T. | -          |\n| E       | Rollout vor Ort    | 5 T.  | C, D       |\n+---------+--------------------+-------+------------+",
         "question": "Prüfungsaufgabe Netzplantechnik (BaWü-Fokus): Gegeben ist die obige Vorgangstabelle für einen Client-Rollout.\n\nAufgabe:\n1. Führe die Vorwärts- und Rückwärtsrechnung durch (Projektstart = Tag 0).\n2. Berechne FAZ, FEZ, SAZ, SEZ und Gesamtpuffer (GP) für alle 5 Vorgänge.\n3. Nenne den Kritischen Pfad und die Gesamtlaufzeit des Projekts.",
         "musterloesung": "1. & 2. Berechnung der Knotenwerte (nach DIN 69900):\n- Vorgang A (D=4): FAZ=0, FEZ=4 | SAZ=0, SEZ=4 | GP = 0, FP = 0 (Kritisch)\n- Vorgang B (D=2): FAZ=0, FEZ=2 | SAZ=2, SEZ=4 | GP = 2, FP = 2\n- Vorgang C (D=3, Vorl.: A,B -> FAZ=max(4,2)=4): FAZ=4, FEZ=7 | SAZ=4, SEZ=7 | GP = 0, FP = 0 (Kritisch)\n- Vorgang D (D=1): FAZ=0, FEZ=1 | SAZ=6, SEZ=7 | GP = 6, FP = 6\n- Vorgang E (D=5, Vorl.: C,D -> FAZ=max(7,1)=7): FAZ=7, FEZ=12 | SAZ=7, SEZ=12 | GP = 0, FP = 0 (Kritisch)\n\n3. Kritischer Pfad & Dauer:\n- Kritischer Pfad: A ➔ C ➔ E (alle mit GP = 0)\n- Gesamtlaufzeit des Projekts: 12 Tage.",
-        "solutionDiagramSvg": VisualDiagrams.getNetzplanDiagramSvg(),
+        "solutionDiagramSvg": VisualDiagrams.getRollout5NetzplanDiagramSvg(),
         "explanation": "Vorwärtsrechnung: FAZ = max(FEZ aller Vorgänger), FEZ = FAZ + Dauer. Rückwärtsrechnung: SEZ = min(SAZ aller Nachfolger), SAZ = SEZ - Dauer. GP = SAZ - FAZ. Kritischer Pfad umfasst alle Vorgänge mit GP=0."
 },
     {
@@ -7037,7 +7038,7 @@ WHERE Email IS NULL OR Email = '';
         "isBawueFocus": true,
         "type": "open-text",
         "question": "IHK-Prüfungsaufgabe (Projektmanagement): Berechnen und zeichnen Sie einen Netzplan nach DIN 69900 für folgende 4 Vorgänge:\n\n- Vorgang V1: Dauer 4 Tage, Vorgänger: keine\n- Vorgang V2: Dauer 6 Tage, Vorgänger: V1\n- Vorgang V3: Dauer 2 Tage, Vorgänger: V1\n- Vorgang V4: Dauer 8 Tage, Vorgänger: V2 und V3\n\nAufgaben:\n1. Berechnen Sie in der Vorwärtsrechnung FAZ und FEZ.\n2. Berechnen Sie in der Rückwärtsrechnung SAZ und SEZ.\n3. Bestimmen Sie für jeden Vorgang Gesamtpuffer (GP) und Freien Puffer (FP).\n4. Identifizieren Sie den Kritischen Pfad und die gesamte Projektdauer.",
-        "solutionDiagramSvg": VisualDiagrams.getNetzplanDiagramSvg(),
+        "solutionDiagramSvg": VisualDiagrams.getV1V4NetzplanDiagramSvg(),
         "solutionDiagramCaption": "Visuelle Musterlösung: DIN 69900 Netzplan mit 7-Felder-Knoten, Vor-/Rückwärtsrechnung und Kritischem Pfad",
         "musterloesung": "Musterlösung Netzplan:\n\n1. Vorwärtsrechnung:\n- V1: FAZ=0, D=4 -> FEZ=4\n- V2: FAZ=4, D=6 -> FEZ=10\n- V3: FAZ=4, D=2 -> FEZ=6\n- V4: FAZ=max(10, 6)=10, D=8 -> FEZ=18 (Projektdauer = 18 Tage)\n\n2. Rückwärtsrechnung (Projektende = 18):\n- V4: SEZ=18, D=8 -> SAZ=10\n- V2: SEZ=10, D=6 -> SAZ=4\n- V3: SEZ=10, D=2 -> SAZ=8\n- V1: SEZ=min(4, 8)=4, D=4 -> SAZ=0\n\n3. Pufferzeiten:\n- V1: GP = 0 - 0 = 0, FP = 0\n- V2: GP = 4 - 4 = 0, FP = 0\n- V3: GP = 8 - 4 = 4 Tage, FP = 10 - 6 = 4 Tage\n- V4: GP = 10 - 10 = 0, FP = 0\n\n4. Kritischer Pfad:\nV1 -> V2 -> V4 mit Gesamtpuffer GP = 0 und einer Projektdauer von 18 Tagen.",
         "explanation": "Vollständige Netzplanberechnung nach DIN 69900 mit 7-teiligem Knoten, Vorwärts- und Rückwärtsrechnung sowie Bestimmung des Kritischen Pfads."
@@ -7653,8 +7654,9 @@ WHERE Email IS NULL OR Email = '';
         type: "open-text",
         question: `🔥 Meisterklasse Netzplantechnik (LF 1 / LF 6):\nEin ERP-Einführungsprojekt besteht aus 9 Vorgängen (A bis I):\n- Vorgang A: Kick-Off (Dauer: 2 Tage, Vorgänger: keine)\n- Vorgang B: Prozessanalyse (Dauer: 5 Tage, Vorgänger: A)\n- Vorgang C: Hardware-Beschaffung (Dauer: 8 Tage, Vorgänger: A)\n- Vorgang D: Software-Customizing (Dauer: 7 Tage, Vorgänger: B)\n- Vorgang E: Server-Installation (Dauer: 3 Tage, Vorgänger: C)\n- Vorgang F: Schnittstellenprogrammierung (Dauer: 6 Tage, Vorgänger: B)\n- Vorgang G: Integrationstest (Dauer: 4 Tage, Vorgänger: D, E, F)\n- Vorgang H: Anwenderschulung (Dauer: 3 Tage, Vorgänger: G)\n- Vorgang I: Go-Live (Dauer: 2 Tage, Vorgänger: H)\n\nAufgaben:\n1. Ermitteln Sie die Vorwärts- und Rückwärtsrechnung (FAZ, FEZ, SAZ, SEZ).\n2. Berechnen Sie Gesamtpuffer (GP) und Freien Puffer (FP) für alle 9 Vorgänge.\n3. Bestimmen Sie den Kritischen Pfad und die Gesamtdauer des Projekts.\n4. Vorgang C (Hardware) verzögert sich um 4 Tage. Welche Auswirkung hat das auf das Gesamtprojekt?`,
         musterloesung: `Musterlösung Netzplantechnik:\n\n1. & 2. Netzplan-Tabelle:\n- Vorgang A (D=2): FAZ=0, FEZ=2 | SAZ=0, SEZ=2 | GP=0, FP=0 (Kritisch)\n- Vorgang B (D=5): FAZ=2, FEZ=7 | SAZ=2, SEZ=7 | GP=0, FP=0 (Kritisch)\n- Vorgang C (D=8): FAZ=2, FEZ=10 | SAZ=3, SEZ=11 | GP=1, FP=1\n- Vorgang D (D=7): FAZ=7, FEZ=14 | SAZ=7, SEZ=14 | GP=0, FP=0 (Kritisch)\n- Vorgang E (D=3): FAZ=10, FEZ=13 | SAZ=11, SEZ=14 | GP=1, FP=1\n- Vorgang F (D=6): FAZ=7, FEZ=13 | SAZ=8, SEZ=14 | GP=1, FP=1\n- Vorgang G (D=4): FAZ=14, FEZ=18 | SAZ=14, SEZ=18 | GP=0, FP=0 (Kritisch)\n- Vorgang H (D=3): FAZ=18, FEZ=21 | SAZ=18, SEZ=21 | GP=0, FP=0 (Kritisch)\n- Vorgang I (D=2): FAZ=21, FEZ=23 | SAZ=21, SEZ=23 | GP=0, FP=0 (Kritisch)\n\n3. Kritischer Pfad & Gesamtdauer:\n- Kritischer Pfad: A -> B -> D -> G -> H -> I (Dauer: 2 + 5 + 7 + 4 + 3 + 2 = 23 Werktage).\n\n4. Auswirkung der Verzögerung bei Vorgang C (+4 Tage):\n- Vorgang C hat einen Gesamtpuffer von 1 Tag.\n- Eine Verzögerung um 4 Tage überschreitet den Puffer um 3 Tage (4 - 1 = 3 Tage).\n- Der Pfad A -> C -> E -> G wird neuer Engpass und verschiebt das Projektende um 3 Tage auf 26 Werktage!`,
-        explanation: "Gesamtpuffer GP = SAZ - FAZ = SEZ - FEZ. Freier Puffer FP = min(FAZ_Nachfolger) - FEZ. Wenn Verzögerung > GP, verschiebt sich der Projektendtermin."
-    },
+        explanation: "Gesamtpuffer GP = SAZ - FAZ = SEZ - FEZ. Freier Puffer FP = min(FAZ_Nachfolger) - FEZ. Wenn Verzögerung > GP, verschiebt sich der Projektendtermin.",
+        solutionDiagramSvg: VisualDiagrams.getErp9NetzplanDiagramSvg()
+},
     {
         id: 414,
         isBawueFocus: true,
