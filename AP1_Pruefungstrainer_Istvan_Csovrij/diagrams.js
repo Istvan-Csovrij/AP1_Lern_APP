@@ -1975,6 +1975,347 @@ var VisualDiagrams = {
         `;
     },
 
+    
+    // 2e. Relationales Schema & ERD: IT-Ticketsystem (Mitarbeiter, Support, Ticket, Statuskommentar)
+    getTicketSystemErdRelationalSvg: function() {
+        return `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 440" width="100%" height="100%">
+            <defs>
+                <marker id="fk-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                    <path d="M 0 1 L 10 5 L 0 9 z" fill="#2563eb" />
+                </marker>
+                <marker id="fk-arrow-opt" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                    <path d="M 0 1 L 10 5 L 0 9 z" fill="#7c3aed" />
+                </marker>
+            </defs>
+            <rect width="780" height="440" fill="#f8fafc" rx="8" />
+            <text x="390" y="24" font-family="sans-serif" font-size="15" font-weight="bold" fill="#1e3a8a" text-anchor="middle">Relationales Datenbankschema &amp; ERD: IT-Ticketsystem</text>
+            
+            <!-- Tabelle 1: MITARBEITER (1-Seite oben links) -->
+            <g transform="translate(30, 45)">
+                <rect width="210" height="135" fill="#ffffff" stroke="#0284c7" stroke-width="2" rx="5" />
+                <rect width="210" height="30" fill="#e0f2fe" stroke="#0284c7" stroke-width="2" rx="5" />
+                <text x="105" y="20" font-family="sans-serif" font-size="13" font-weight="bold" fill="#0369a1" text-anchor="middle">MITARBEITER</text>
+                
+                <text x="10" y="52" font-family="monospace" font-size="11.5" font-weight="bold" fill="#b45309">🔑 MitarbeiterNr (PK)</text>
+                <line x1="0" y1="62" x2="210" y2="62" stroke="#e2e8f0" stroke-width="1.5" />
+                <text x="10" y="82" font-family="monospace" font-size="11" fill="#334155">  Name: VARCHAR(50)</text>
+                <text x="10" y="102" font-family="monospace" font-size="11" fill="#334155">  Abteilung: VARCHAR(30)</text>
+                <text x="10" y="122" font-family="monospace" font-size="11" fill="#334155">  Email: VARCHAR(80)</text>
+            </g>
+            
+            <!-- Tabelle 2: SUPPORT_MITARBEITER (1-Seite unten links) -->
+            <g transform="translate(30, 240)">
+                <rect width="210" height="135" fill="#ffffff" stroke="#7c3aed" stroke-width="2" rx="5" />
+                <rect width="210" height="30" fill="#ede9fe" stroke="#7c3aed" stroke-width="2" rx="5" />
+                <text x="105" y="20" font-family="sans-serif" font-size="13" font-weight="bold" fill="#6d28d9" text-anchor="middle">SUPPORT_MITARBEITER</text>
+                
+                <text x="10" y="52" font-family="monospace" font-size="11.5" font-weight="bold" fill="#b45309">🔑 SupportMitarbeiterNr (PK)</text>
+                <line x1="0" y1="62" x2="210" y2="62" stroke="#e2e8f0" stroke-width="1.5" />
+                <text x="10" y="82" font-family="monospace" font-size="11" fill="#334155">  Name: VARCHAR(50)</text>
+                <text x="10" y="102" font-family="monospace" font-size="11" fill="#334155">  Qualifikation: VARCHAR(40)</text>
+                <text x="10" y="122" font-family="monospace" font-size="11" fill="#334155">  Level: INT (1-3)</text>
+            </g>
+            
+            <!-- Tabelle 3: TICKET (Zentrale n-Tabelle Mitte) -->
+            <g transform="translate(290, 80)">
+                <rect width="230" height="230" fill="#ffffff" stroke="#2563eb" stroke-width="2.5" rx="5" />
+                <rect width="230" height="32" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5" rx="5" />
+                <text x="115" y="22" font-family="sans-serif" font-size="14" font-weight="bold" fill="#1d4ed8" text-anchor="middle">TICKET</text>
+                
+                <text x="10" y="55" font-family="monospace" font-size="12" font-weight="bold" fill="#b45309">🔑 TicketID (PK)</text>
+                <line x1="0" y1="66" x2="230" y2="66" stroke="#cbd5e1" stroke-width="1.5" />
+                <text x="10" y="88" font-family="monospace" font-size="11.5" fill="#334155">  Betreff: VARCHAR(100)</text>
+                <text x="10" y="108" font-family="monospace" font-size="11.5" fill="#334155">  ErstellDatum: DATETIME</text>
+                <text x="10" y="128" font-family="monospace" font-size="11.5" fill="#334155">  Status: VARCHAR(20)</text>
+                <line x1="0" y1="140" x2="230" y2="140" stroke="#cbd5e1" stroke-width="1.5" />
+                
+                <rect x="6" y="148" width="218" height="32" fill="#eff6ff" stroke="#3b82f6" stroke-width="1" rx="3" />
+                <text x="10" y="169" font-family="monospace" font-size="11" font-weight="bold" fill="#1e40af">🔗 FK_MitarbeiterNr [NOT NULL]</text>
+                
+                <rect x="6" y="186" width="218" height="32" fill="#faf5ff" stroke="#a855f7" stroke-width="1" rx="3" />
+                <text x="10" y="207" font-family="monospace" font-size="11" font-weight="bold" fill="#7e22ce">🔗 FK_SupportNr [NULLable]</text>
+            </g>
+            
+            <!-- Tabelle 4: STATUSKOMMENTAR (n-Tabelle rechts) -->
+            <g transform="translate(565, 120)">
+                <rect width="190" height="160" fill="#ffffff" stroke="#059669" stroke-width="2" rx="5" />
+                <rect width="190" height="30" fill="#d1fae5" stroke="#059669" stroke-width="2" rx="5" />
+                <text x="95" y="20" font-family="sans-serif" font-size="13" font-weight="bold" fill="#047857" text-anchor="middle">STATUSKOMMENTAR</text>
+                
+                <text x="10" y="52" font-family="monospace" font-size="11.5" font-weight="bold" fill="#b45309">🔑 KommentarID (PK)</text>
+                <line x1="0" y1="62" x2="190" y2="62" stroke="#e2e8f0" stroke-width="1.5" />
+                <text x="10" y="82" font-family="monospace" font-size="11" fill="#334155">  Text: TEXT</text>
+                <text x="10" y="102" font-family="monospace" font-size="11" fill="#334155">  Zeitstempel: DATETIME</text>
+                <line x1="0" y1="114" x2="190" y2="114" stroke="#e2e8f0" stroke-width="1.5" />
+                
+                <rect x="6" y="120" width="178" height="30" fill="#ecfdf5" stroke="#10b981" stroke-width="1" rx="3" />
+                <text x="10" y="140" font-family="monospace" font-size="11" font-weight="bold" fill="#065f46">🔗 FK_TicketNr [NOT NULL]</text>
+            </g>
+            
+            <!-- Beziehungslinie 1: MITARBEITER (1) ── (0..*) TICKET -->
+            <path d="M 240,110 L 265,110 L 265,245 L 290,245" fill="none" stroke="#2563eb" stroke-width="2" />
+            <text x="245" y="102" font-family="sans-serif" font-size="11" font-weight="bold" fill="#0369a1">1</text>
+            <text x="270" y="240" font-family="sans-serif" font-size="11" font-weight="bold" fill="#1d4ed8">0..*</text>
+            
+            <!-- Beziehungslinie 2: SUPPORT (1) ── (0..1) TICKET -->
+            <path d="M 240,305 L 265,305 L 265,282 L 290,282" fill="none" stroke="#7c3aed" stroke-width="2" />
+            <text x="245" y="298" font-family="sans-serif" font-size="11" font-weight="bold" fill="#6d28d9">1</text>
+            <text x="268" y="276" font-family="sans-serif" font-size="11" font-weight="bold" fill="#7e22ce">0..1</text>
+            
+            <!-- Beziehungslinie 3: TICKET (1) ── (0..*) STATUSKOMMENTAR -->
+            <path d="M 520,135 L 542,135 L 542,255 L 565,255" fill="none" stroke="#059669" stroke-width="2" />
+            <text x="525" y="128" font-family="sans-serif" font-size="11" font-weight="bold" fill="#1d4ed8">1</text>
+            <text x="545" y="250" font-family="sans-serif" font-size="11" font-weight="bold" fill="#047857">0..*</text>
+            
+            <!-- Box unten mit Prüfungsregeln -->
+            <rect x="25" y="388" width="730" height="42" fill="#f0fdf4" stroke="#86efac" stroke-width="1.5" rx="5" />
+            <text x="390" y="405" font-family="sans-serif" font-size="11" font-weight="bold" fill="#166534" text-anchor="middle">✓ Prüfungsregel: 1:n-Fremdschlüssel wandert immer in die Tabelle auf der n-Seite (TICKET &amp; STATUSKOMMENTAR)</text>
+            <text x="390" y="422" font-family="sans-serif" font-size="10.5" fill="#166534" text-anchor="middle">Da ein Ticket anfangs unzugewiesen sein kann, ist FK_SupportMitarbeiterNr NULLable (optional 0..1).</text>
+        </svg>
+        `;
+    },
+
+    // 2f. UML Klassendiagramm: Generalisierung / Vererbung (Geraet -> Workstation / Server)
+    getGeraetVererbungSvg: function() {
+        return `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 340" width="100%" height="100%">
+            <defs>
+                <marker id="uml-generalization" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="9" markerHeight="9" orient="auto">
+                    <polygon points="0,0 11,6 0,12" fill="#ffffff" stroke="#1e293b" stroke-width="1.5" />
+                </marker>
+            </defs>
+            <rect width="680" height="340" fill="#f8fafc" rx="8" />
+            <text x="340" y="24" font-family="sans-serif" font-size="14" font-weight="bold" fill="#1e3a8a" text-anchor="middle">UML-Klassendiagramm: Generalisierung / Vererbung (Geraet)</text>
+            
+            <!-- Oberklasse: Geraet (Superklasse) -->
+            <g transform="translate(230, 45)">
+                <rect width="220" height="110" fill="#ffffff" stroke="#0284c7" stroke-width="2" rx="4" />
+                <rect width="220" height="28" fill="#dbeafe" stroke="#0284c7" stroke-width="2" rx="4" />
+                <text x="110" y="19" font-family="sans-serif" font-size="13" font-weight="bold" fill="#0369a1" text-anchor="middle">Geraet</text>
+                
+                <text x="10" y="44" font-family="monospace" font-size="11" fill="#334155">- inventarNr: String</text>
+                <text x="10" y="60" font-family="monospace" font-size="11" fill="#334155">- anschaffungsDatum: Date</text>
+                <rect x="8" y="64" width="204" height="18" fill="#fef3c7" rx="2" />
+                <text x="10" y="77" font-family="monospace" font-size="11" font-weight="bold" fill="#b45309"># standort: String (protected)</text>
+                <line x1="0" y1="84" x2="220" y2="84" stroke="#cbd5e1" stroke-width="1.2" />
+                
+                <text x="10" y="98" font-family="monospace" font-size="11" fill="#0f766e">+ getInventarNr(): String</text>
+            </g>
+            
+            <!-- Unterklasse 1: Workstation -->
+            <g transform="translate(70, 200)">
+                <rect width="220" height="85" fill="#ffffff" stroke="#0284c7" stroke-width="2" rx="4" />
+                <rect width="220" height="28" fill="#f1f5f9" stroke="#0284c7" stroke-width="2" rx="4" />
+                <text x="110" y="19" font-family="sans-serif" font-size="13" font-weight="bold" fill="#0f172a" text-anchor="middle">Workstation</text>
+                
+                <text x="10" y="46" font-family="monospace" font-size="11" fill="#334155">- betriebssystem: String</text>
+                <text x="10" y="64" font-family="monospace" font-size="11" fill="#334155">- arbeitsspeicher: int</text>
+                <line x1="0" y1="70" x2="220" y2="70" stroke="#cbd5e1" stroke-width="1.2" />
+                <text x="10" y="80" font-family="monospace" font-size="10" font-style="italic" fill="#64748b">erbt alle Methoden von Geraet</text>
+            </g>
+            
+            <!-- Unterklasse 2: Server -->
+            <g transform="translate(390, 200)">
+                <rect width="220" height="85" fill="#ffffff" stroke="#0284c7" stroke-width="2" rx="4" />
+                <rect width="220" height="28" fill="#f1f5f9" stroke="#0284c7" stroke-width="2" rx="4" />
+                <text x="110" y="19" font-family="sans-serif" font-size="13" font-weight="bold" fill="#0f172a" text-anchor="middle">Server</text>
+                
+                <text x="10" y="46" font-family="monospace" font-size="11" fill="#334155">- rackEinheit: int</text>
+                <text x="10" y="64" font-family="monospace" font-size="11" fill="#334155">- redundantesNetz: boolean</text>
+                <line x1="0" y1="70" x2="220" y2="70" stroke="#cbd5e1" stroke-width="1.2" />
+                <text x="10" y="80" font-family="monospace" font-size="10" font-style="italic" fill="#64748b">erbt alle Methoden von Geraet</text>
+            </g>
+            
+            <!-- Vererbungslinien mit weißem Dreieck zur Oberklasse -->
+            <line x1="180" y1="200" x2="180" y2="175" stroke="#1e293b" stroke-width="2" />
+            <line x1="500" y1="200" x2="500" y2="175" stroke="#1e293b" stroke-width="2" />
+            <line x1="180" y1="175" x2="500" y2="175" stroke="#1e293b" stroke-width="2" />
+            <line x1="340" y1="175" x2="340" y2="155" stroke="#1e293b" stroke-width="2" marker-end="url(#uml-generalization)" />
+            
+            <!-- Fußzeile -->
+            <rect x="50" y="295" width="580" height="35" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1" rx="4" />
+            <text x="340" y="316" font-family="sans-serif" font-size="11" font-weight="bold" fill="#334155" text-anchor="middle">Symbol: Durchgezogene Linie mit weißer Dreiecksspitze ▷ zeigt immer auf die Oberklasse.</text>
+        </svg>
+        `;
+    },
+
+    // 2g. UML-Sequenzdiagramm (Lebenslinie, synchrone/asynchrone Aufrufe)
+    getSequenzdiagrammSvg: function() {
+        return `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 320" width="100%" height="100%">
+            <defs>
+                <marker id="seq-sync-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                    <polygon points="0,0 10,5 0,10" fill="#1e293b" />
+                </marker>
+                <marker id="seq-reply-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                    <path d="M 0 1 L 10 5 L 0 9" fill="none" stroke="#2563eb" stroke-width="1.8" />
+                </marker>
+            </defs>
+            <rect width="680" height="320" fill="#f8fafc" rx="8" />
+            <text x="340" y="24" font-family="sans-serif" font-size="14" font-weight="bold" fill="#1e3a8a" text-anchor="middle">UML-Sequenzdiagramm: Lebenslinien &amp; Nachrichtenarten</text>
+            
+            <!-- Boxen oben (Objekte / Rollen) -->
+            <g transform="translate(60, 45)">
+                <rect width="120" height="35" fill="#ffffff" stroke="#0284c7" stroke-width="2" rx="4" />
+                <text x="60" y="22" font-family="sans-serif" font-size="12" font-weight="bold" fill="#0369a1" text-anchor="middle">:Client (UI)</text>
+                <line x1="60" y1="35" x2="60" y2="240" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4,4" />
+                <rect x="54" y="90" width="12" height="130" fill="#dbeafe" stroke="#0284c7" stroke-width="1.5" />
+            </g>
+            
+            <g transform="translate(280, 45)">
+                <rect width="120" height="35" fill="#ffffff" stroke="#0284c7" stroke-width="2" rx="4" />
+                <text x="60" y="22" font-family="sans-serif" font-size="12" font-weight="bold" fill="#0369a1" text-anchor="middle">:AuthService</text>
+                <line x1="60" y1="35" x2="60" y2="240" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4,4" />
+                <rect x="54" y="100" width="12" height="90" fill="#dbeafe" stroke="#0284c7" stroke-width="1.5" />
+            </g>
+            
+            <g transform="translate(500, 45)">
+                <rect width="120" height="35" fill="#ffffff" stroke="#0284c7" stroke-width="2" rx="4" />
+                <text x="60" y="22" font-family="sans-serif" font-size="12" font-weight="bold" fill="#0369a1" text-anchor="middle">:Database</text>
+                <line x1="60" y1="35" x2="60" y2="240" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4,4" />
+                <rect x="54" y="125" width="12" height="40" fill="#dbeafe" stroke="#0284c7" stroke-width="1.5" />
+            </g>
+            
+            <!-- Synchroner Aufruf: Client -> AuthService -->
+            <line x1="126" y1="145" x2="334" y2="145" stroke="#1e293b" stroke-width="2" marker-end="url(#seq-sync-arr)" />
+            <text x="230" y="137" font-family="monospace" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle">1: login(user, pw) ▶</text>
+            
+            <!-- Synchroner Aufruf: AuthService -> Database -->
+            <line x1="346" y1="170" x2="554" y2="170" stroke="#1e293b" stroke-width="2" marker-end="url(#seq-sync-arr)" />
+            <text x="450" y="162" font-family="monospace" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle">1.1: findUser() ▶</text>
+            
+            <!-- Antwortnachricht: Database -> AuthService -->
+            <line x1="554" y1="205" x2="346" y2="205" stroke="#2563eb" stroke-width="1.8" stroke-dasharray="4,3" marker-end="url(#seq-reply-arr)" />
+            <text x="450" y="198" font-family="monospace" font-size="10.5" fill="#2563eb" text-anchor="middle">&lt;-- userData</text>
+            
+            <!-- Antwortnachricht: AuthService -> Client -->
+            <line x1="334" y1="230" x2="126" y2="230" stroke="#2563eb" stroke-width="1.8" stroke-dasharray="4,3" marker-end="url(#seq-reply-arr)" />
+            <text x="230" y="223" font-family="monospace" font-size="10.5" fill="#2563eb" text-anchor="middle">&lt;-- jwtToken</text>
+            
+            <!-- Erklärungskasten -->
+            <rect x="40" y="260" width="600" height="48" fill="#f0fdf4" stroke="#86efac" stroke-width="1.2" rx="4" />
+            <text x="340" y="280" font-family="sans-serif" font-size="11" font-weight="bold" fill="#166534" text-anchor="middle">Gefüllte Spitze (▶): Synchron (blockierend) | Gestrichelt mit offener Spitze: Rückgabe (Return)</text>
+            <text x="340" y="296" font-family="sans-serif" font-size="10.5" fill="#166534" text-anchor="middle">Offene Spitze (→): Asynchron (nicht-blockierend) | Vertikaler Balken: Ausführungsfokus (Activation Bar)</text>
+        </svg>
+        `;
+    },
+
+    // 2h. UML-Zustandsdiagramm (State Machine)
+    getZustandsdiagrammSvg: function() {
+        return `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 280" width="100%" height="100%">
+            <defs>
+                <marker id="sm-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                    <polygon points="0,0 10,5 0,10" fill="#1e293b" />
+                </marker>
+            </defs>
+            <rect width="680" height="280" fill="#f8fafc" rx="8" />
+            <text x="340" y="24" font-family="sans-serif" font-size="14" font-weight="bold" fill="#1e3a8a" text-anchor="middle">UML-Zustandsdiagramm (State Machine): Ticket-Lifecycle</text>
+            
+            <!-- Startzustand -->
+            <circle cx="50" cy="110" r="12" fill="#0f172a" />
+            <line x1="62" y1="110" x2="110" y2="110" stroke="#1e293b" stroke-width="2" marker-end="url(#sm-arr)" />
+            <text x="86" y="100" font-family="sans-serif" font-size="10.5" fill="#475569" text-anchor="middle">erfassen()</text>
+            
+            <!-- Zustand 1: Neu -->
+            <g transform="translate(115, 80)">
+                <rect width="110" height="60" fill="#ffffff" stroke="#0284c7" stroke-width="2" rx="10" />
+                <text x="55" y="35" font-family="sans-serif" font-size="13" font-weight="bold" fill="#0369a1" text-anchor="middle">Neu</text>
+            </g>
+            
+            <!-- Transition Neu -> In Bearbeitung -->
+            <line x1="225" y1="110" x2="315" y2="110" stroke="#1e293b" stroke-width="2" marker-end="url(#sm-arr)" />
+            <text x="270" y="88" font-family="monospace" font-size="9.5" font-weight="bold" fill="#7c3aed" text-anchor="middle">zuweisen [Support verfügbar]</text>
+            <text x="270" y="103" font-family="monospace" font-size="9.5" font-weight="bold" fill="#059669" text-anchor="middle">/ sendeBestaetigung()</text>
+            
+            <!-- Zustand 2: In Bearbeitung -->
+            <g transform="translate(320, 80)">
+                <rect width="130" height="60" fill="#ffffff" stroke="#0284c7" stroke-width="2" rx="10" />
+                <text x="65" y="35" font-family="sans-serif" font-size="13" font-weight="bold" fill="#0369a1" text-anchor="middle">In Bearbeitung</text>
+            </g>
+            
+            <!-- Transition In Bearbeitung -> Geschlossen -->
+            <line x1="450" y1="110" x2="540" y2="110" stroke="#1e293b" stroke-width="2" marker-end="url(#sm-arr)" />
+            <text x="495" y="98" font-family="monospace" font-size="10" font-weight="bold" fill="#0f172a" text-anchor="middle">loesen()</text>
+            
+            <!-- Zustand 3: Geschlossen -->
+            <g transform="translate(545, 80)">
+                <rect width="110" height="60" fill="#ffffff" stroke="#059669" stroke-width="2" rx="10" />
+                <text x="55" y="35" font-family="sans-serif" font-size="13" font-weight="bold" fill="#047857" text-anchor="middle">Geschlossen</text>
+            </g>
+            
+            <!-- Transition Geschlossen -> Endzustand -->
+            <line x1="600" y1="140" x2="600" y2="190" stroke="#1e293b" stroke-width="2" marker-end="url(#sm-arr)" />
+            <circle cx="600" cy="215" r="14" fill="#ffffff" stroke="#0f172a" stroke-width="2" />
+            <circle cx="600" cy="215" r="8" fill="#0f172a" />
+            
+            <!-- Syntax-Erklärung -->
+            <rect x="40" y="215" width="480" height="48" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.2" rx="4" />
+            <text x="50" y="235" font-family="sans-serif" font-size="11" font-weight="bold" fill="#0f172a">Transitions-Syntax: Ereignis [Wächter / Guard] / Aktion (Effekt)</text>
+            <text x="50" y="252" font-family="sans-serif" font-size="10.5" fill="#475569">Wächter [ ] ist boolesche Vorbedingung; Aktion / wird beim Zustandswechsel ausgeführt.</text>
+        </svg>
+        `;
+    },
+
+    // 2i. Programmablaufplan (PAP nach DIN 66001)
+    getPapDiagramSvg: function() {
+        return `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 320" width="100%" height="100%">
+            <defs>
+                <marker id="pap-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                    <polygon points="0,0 10,5 0,10" fill="#1e293b" />
+                </marker>
+            </defs>
+            <rect width="680" height="320" fill="#f8fafc" rx="8" />
+            <text x="340" y="24" font-family="sans-serif" font-size="14" font-weight="bold" fill="#1e3a8a" text-anchor="middle">Programmablaufplan (PAP nach DIN 66001)</text>
+            
+            <!-- Start (Grenzstelle: Oval) -->
+            <g transform="translate(50, 60)">
+                <rect width="110" height="45" rx="22.5" fill="#dcfce7" stroke="#16a34a" stroke-width="2" />
+                <text x="55" y="27" font-family="sans-serif" font-size="12" font-weight="bold" fill="#166534" text-anchor="middle">Start</text>
+                <text x="55" y="60" font-family="sans-serif" font-size="10" fill="#64748b" text-anchor="middle">Grenzstelle (Oval)</text>
+            </g>
+            
+            <line x1="160" y1="82" x2="200" y2="82" stroke="#1e293b" stroke-width="2" marker-end="url(#pap-arr)" />
+            
+            <!-- Operation (Rechteck: Anweisung) -->
+            <g transform="translate(205, 60)">
+                <rect width="140" height="45" fill="#dbeafe" stroke="#2563eb" stroke-width="2" rx="3" />
+                <text x="70" y="27" font-family="sans-serif" font-size="12" font-weight="bold" fill="#1d4ed8" text-anchor="middle">rabatt = 0</text>
+                <text x="70" y="60" font-family="sans-serif" font-size="10" fill="#64748b" text-anchor="middle">Operation (Rechteck)</text>
+            </g>
+            
+            <line x1="345" y1="82" x2="390" y2="82" stroke="#1e293b" stroke-width="2" marker-end="url(#pap-arr)" />
+            
+            <!-- Verzweigung (Raute: Bedingung) -->
+            <g transform="translate(395, 45)">
+                <polygon points="65,0 130,37 65,74 0,37" fill="#fef3c7" stroke="#d97706" stroke-width="2" />
+                <text x="65" y="42" font-family="sans-serif" font-size="11" font-weight="bold" fill="#b45309" text-anchor="middle">betrag &gt;= 100?</text>
+                <text x="65" y="90" font-family="sans-serif" font-size="10" fill="#64748b" text-anchor="middle">Verzweigung (Raute)</text>
+            </g>
+            
+            <!-- Pfad Ja -->
+            <line x1="525" y1="82" x2="570" y2="82" stroke="#1e293b" stroke-width="2" marker-end="url(#pap-arr)" />
+            <text x="545" y="74" font-family="sans-serif" font-size="11" font-weight="bold" fill="#16a34a">Ja</text>
+            
+            <rect x="575" y="60" width="80" height="45" fill="#dbeafe" stroke="#2563eb" stroke-width="2" rx="3" />
+            <text x="615" y="27" font-family="sans-serif" font-size="11" font-weight="bold" fill="#1d4ed8" text-anchor="middle">rabatt = 10%</text>
+            
+            <!-- Pfad Nein (nach unten) -->
+            <line x1="460" y1="119" x2="460" y2="180" stroke="#1e293b" stroke-width="2" marker-end="url(#pap-arr)" />
+            <text x="472" y="145" font-family="sans-serif" font-size="11" font-weight="bold" fill="#dc2626">Nein</text>
+            
+            <rect x="400" y="185" width="120" height="45" fill="#dbeafe" stroke="#2563eb" stroke-width="2" rx="3" />
+            <text x="460" y="212" font-family="sans-serif" font-size="11" font-weight="bold" fill="#1d4ed8" text-anchor="middle">rabatt = 0%</text>
+            
+            <!-- Erklärung DIN 66001 unten -->
+            <rect x="40" y="260" width="600" height="42" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2" rx="4" />
+            <text x="340" y="285" font-family="sans-serif" font-size="11" font-weight="bold" fill="#334155" text-anchor="middle">DIN 66001 Standard: Oval = Start/Stopp | Rechteck = Anweisung | Raute = Verzweigung</text>
+        </svg>
+        `;
+    },
+
     getAutoDiagramSvg: function(q) {
         if (!q) return null;
         // 1. Wenn die Frage bereits eine explizite grafische Musterlösung besitzt
@@ -2015,7 +2356,10 @@ var VisualDiagrams = {
         const question = (q.question || "").toLowerCase();
         const text = topic + " " + question;
         
-        // 1. Relationales Tabellenschema & Fremdschlüssel
+        // 1. Relationales Tabellenschema & Fremdschlüssel & ERD Fallstudien
+        if (text.includes("ticketsystem") || (text.includes("ticket") && (text.includes("statuskommentar") || (text.includes("mitarbeiter") && text.includes("support"))))) {
+            return VisualDiagrams.getTicketSystemErdRelationalSvg();
+        }
         if (text.includes("tabellenschema") || text.includes("relationenmodell") || text.includes("relationales schema") || text.includes("fremdschlüssel")) {
             let entA = "Kunde";
             let entB = "Bestellung";
@@ -2052,7 +2396,10 @@ var VisualDiagrams = {
             return VisualDiagrams.getUseCaseDiagramSvg(title);
         }
         
-        // 4. Klassendiagramm (inkl. spezifischer Aggregation & Komposition)
+        // 4. Klassendiagramm (inkl. spezifischer Vererbung, Aggregation & Komposition)
+        if (text.includes("geraet") && (text.includes("workstation") || text.includes("server") || text.includes("generalisierung") || text.includes("vererbung"))) {
+            return VisualDiagrams.getGeraetVererbungSvg();
+        }
         if (text.includes("kurs") && text.includes("teilnehmer")) {
             return VisualDiagrams.getKursTeilnehmerAggregationSvg();
         }
@@ -2129,6 +2476,21 @@ var VisualDiagrams = {
         // 11. Handelskalkulation
         if (text.includes("handelskalkulation") || text.includes("schema-treppe") || text.includes("bezugspreis")) {
             return VisualDiagrams.getKalkulationTreeSvg();
+        }
+
+        // 12. UML Sequenzdiagramm
+        if (/\b(sequenzdiagramm|lebenslinie|synchroner aufruf|asynchroner aufruf)\b/i.test(text)) {
+            return VisualDiagrams.getSequenzdiagrammSvg();
+        }
+
+        // 13. UML Zustandsdiagramm
+        if (/\b(zustandsdiagramm|state machine|transition|wächter|guard)\b/i.test(text)) {
+            return VisualDiagrams.getZustandsdiagrammSvg();
+        }
+
+        // 14. PAP (Programmablaufplan)
+        if (/\b(programmablaufplan|din 66001|grenzstelle)\b/i.test(text) || (text.includes("pap") && text.includes("operation"))) {
+            return VisualDiagrams.getPapDiagramSvg();
         }
 
         return null;

@@ -5261,14 +5261,14 @@ WHERE Email IS NULL OR Email = '';
         "isHard": true,
         "difficulty": "hard",
         "theme": "diagrams",
-        "topic": "IHK Fallstudie Helpdesk ERD & Use-Case",
+        "topic": "IHK Fallstudie IT-Ticketsystem: ERD & Relationales Schema",
         "isDiagram": true,
         "isBawueFocus": true,
-        "diagramType": "UML Use-Case / ERD",
+        "diagramType": "ERD & Relationales Schema",
         "type": "open-text",
-        "question": "Prüfungsaufgabe Modellierung (BaWü-Fokus): Für ein mittelständisches Unternehmen soll ein internes IT-Ticketsystem modelliert werden.\n\nAnforderungen:\n1. Ein Mitarbeiter (Kunde) kann mehrere Tickets erfassen. Jedes Ticket gehört zu genau einem Mitarbeiter.\n2. Ein Support-Mitarbeiter kann mehrere Tickets bearbeiten. Ein Ticket kann vorübergehend keinem oder genau einem Support-Mitarbeiter zugewiesen sein.\n3. Zu einem Ticket können mehrere Statuskommentare erfasst werden.\n\nAufgabe:\na) Bestimme die ERD-Kardinalitäten zwischen MITARBEITER ─ TICKET und TICKET ─ SUPPORT.\nb) Wo müssen die Fremdschlüssel platziert werden?\nc) Skizziere die Struktur bei Bedarf auf dem Whiteboard.",
-        "musterloesung": "a) ERD-Kardinalitäten:\n- MITARBEITER ─ (1:n) ─ TICKET (1 Mitarbeiter erstellt [0..*] Tickets; 1 Ticket gehört zu [1..1] Mitarbeiter).\n- SUPPORT ─ (1:n) ─ TICKET (1 Support-Mitarbeiter bearbeitet [0..*] Tickets; 1 Ticket ist [0..1] Support-Mitarbeitern zugewiesen).\n- TICKET ─ (1:n) ─ STATUSKOMMENTAR.\n\nb) Fremdschlüsselplatzierung:\n- In Tabelle TICKET: `FK_MitarbeiterNr` (NOT NULL) und `FK_SupportMitarbeiterNr` (NULLable, da Zuweisung optional ist).\n- In Tabelle STATUSKOMMENTAR: `FK_TicketNr` (NOT NULL).\n\nc) Tabellenschema:\nMITARBEITER(MitarbeiterNr (PK), Name, Abt)\nTICKET(TicketID (PK), Betreff, ErstellDatum, FK_MitarbeiterNr, FK_SupportMitarbeiterNr)\nSTATUSKOMMENTAR(KommentarID (PK), Text, Zeitstempel, FK_TicketNr)",
-        "solutionDiagramSvg": VisualDiagrams.getUseCaseDiagramSvg("IT-Helpdesk Ticketverwaltung"),
+        "question": "Prüfungsaufgabe Modellierung (BaWü-Fokus): Für ein mittelständisches Unternehmen soll ein internes IT-Ticketsystem als relationales Datenmodell modelliert werden.\n\nAnforderungen:\n1. Ein Mitarbeiter (Kunde) kann mehrere Tickets erfassen. Jedes Ticket gehört zu genau einem Mitarbeiter.\n2. Ein Support-Mitarbeiter kann mehrere Tickets bearbeiten. Ein Ticket kann vorübergehend keinem oder genau einem Support-Mitarbeiter zugewiesen sein.\n3. Zu einem Ticket können mehrere Statuskommentare erfasst werden.\n\nAufgabe:\na) Bestimme die ERD-Kardinalitäten zwischen MITARBEITER ─ TICKET, SUPPORT ─ TICKET und TICKET ─ STATUSKOMMENTAR.\nb) Wo müssen die Fremdschlüssel platziert werden und welche NULL-Eigenschaften gelten?\nc) Erstelle das relationale Tabellenschema mit Angabe aller Primär- und Fremdschlüssel.",
+        "musterloesung": "a) ERD-Kardinalitäten (Chen / Min-Max):\n- MITARBEITER (1) ── [0..*] (n) TICKET (1 Mitarbeiter erstellt [0..*] Tickets; 1 Ticket gehört zu genau [1..1] Mitarbeiter).\n- SUPPORT_MITARBEITER (1) ── [0..*] (n) TICKET (1 Support-Mitarbeiter bearbeitet [0..*] Tickets; 1 Ticket ist [0..1] Support-Mitarbeitern zugewiesen).\n- TICKET (1) ── [0..*] (n) STATUSKOMMENTAR (1 Ticket enthält [0..*] Kommentare; 1 Kommentar gehört zu genau [1..1] Ticket).\n\nb) Fremdschlüsselplatzierung:\n- In Tabelle TICKET: `FK_MitarbeiterNr` (NOT NULL) und `FK_SupportMitarbeiterNr` (NULLable / optional).\n- In Tabelle STATUSKOMMENTAR: `FK_TicketNr` (NOT NULL).\n- Begründung: Bei 1:n-Beziehungen wandert der Primärschlüssel der 1-Seite stets als Fremdschlüssel in die Tabelle der n-Seite.\n\nc) Vollständiges Relationales Tabellenschema:\n- MITARBEITER (MitarbeiterNr [PK], Name, Abteilung, Email)\n- SUPPORT_MITARBEITER (SupportMitarbeiterNr [PK], Name, Qualifikation)\n- TICKET (TicketID [PK], Betreff, ErstellDatum, Status, FK_MitarbeiterNr [NOT NULL], FK_SupportMitarbeiterNr [NULL])\n- STATUSKOMMENTAR (KommentarID [PK], Text, Zeitstempel, FK_TicketNr [NOT NULL])",
+        "solutionDiagramSvg": VisualDiagrams.getTicketSystemErdRelationalSvg(),
         "explanation": "Bei 1:n Beziehungen wird der Primärschlüssel der 1-Seite immer als Fremdschlüssel in der n-Tabelle abgelegt. Da ein Ticket anfangs keinem Support-Mitarbeiter zugeordnet sein muss, ist dieser FK als NULL-fähig zu deklarieren."
 },
     {
@@ -5315,7 +5315,7 @@ WHERE Email IS NULL OR Email = '';
         "code": "+---------------------------------------+\n|              Geraet                   |\n+---------------------------------------+\n| - inventarNr: String                  |\n| - anschaffungsDatum: Date             |\n| # standort: String                    |\n+---------------------------------------+\n| + getInventarNr(): String             |\n| + ermittleRestwert(): double          |\n+---------------------------------------+\n                  /\\\n                 /  \\ (Generalisierung)\n               +------+------+\n               |             |\n+-----------------------+ +-----------------------+\n|       Workstation     | |        Server         |\n+-----------------------+ +-----------------------+\n| - betriebssystem: Str | | - rackEinheit: int    |\n| - arbeitsspeicher: int| | - redundantesNetz: bool|\n+-----------------------+ +-----------------------+",
         "question": "Prüfungsaufgabe Klassendiagramm (BaWü-Fokus): Betrachte das oben dargestellte Klassendiagramm.\n\nAufgabe:\na) Welche OOP-Beziehung liegt zwischen `Geraet` und `Workstation`/`Server` vor und welche Pfeilspitze gehört dorthin?\nb) Welche Bedeutung hat das Zeichen `#` vor dem Attribut `standort` in der Klasse `Geraet`?\nc) Kann die Methode `getInventarNr()` von außen auf einem `Workstation`-Objekt aufgerufen werden? Begründe.",
         "musterloesung": "a) Beziehung: Generalisierung / Vererbung ('Ist-ein'-Beziehung). `Geraet` ist die Oberklasse (Superklasse), `Workstation` und `Server` sind abgeleitete Unterklassen. Das Symbol ist eine durchgezogene Linie mit einer geschlossenen, nicht ausgefüllten (weißen) Dreiecksspitze zur Oberklasse `Geraet`.\n\nb) Sichtbarkeit `#`: Bedeutet `protected`. Das Attribut `standort` ist in der Klasse `Geraet` sowie in allen abgeleiteten Klassen (`Workstation`, `Server`) direkt sichtbar und veränderbar, jedoch vor Zugriffen von außen gekapselt.\n\nc) Aufruf `getInventarNr()`: Ja, der Aufruf ist möglich. Durch die Vererbung erbt `Workstation` alle öffentlichen Methoden der Oberklasse, und das führende `+` kennzeichnet die Methode als `public`.",
-        "solutionDiagramSvg": VisualDiagrams.getClassDiagramSvg(),
+        "solutionDiagramSvg": VisualDiagrams.getGeraetVererbungSvg(),
         "explanation": "Generalisierung vererbt Attribute und Methoden. Private (-) Attribute werden nicht direkt vererbt bzw. sind gekapselt, Protected (#) Attribute sind für Kindklassen zugänglich, Public (+) Methoden sind überall aufrufbar."
 },
     {
@@ -5334,6 +5334,7 @@ WHERE Email IS NULL OR Email = '';
                 "Sequenzdiagramme kennen keine Pfeile, sondern nur Kästchen."
         ],
         "correctAnswer": 0,
+        "solutionDiagramSvg": VisualDiagrams.getSequenzdiagrammSvg(),
         "explanation": "Im Sequenzdiagramm verläuft die Zeit von oben nach unten entlang der vertikalen gestrichelten Lebenslinie. Ein gefüllter Pfeil stellt einen synchronen Aufruf (Blockierung bis Antwort eintrifft) dar; ein offener Pfeil einen asynchronen Aufruf (Non-Blocking)."
 },
     {
@@ -5352,6 +5353,7 @@ WHERE Email IS NULL OR Email = '';
                 "Primärschlüssel [Fremdschlüssel] / Tabellenname."
         ],
         "correctAnswer": 0,
+        "solutionDiagramSvg": VisualDiagrams.getZustandsdiagrammSvg(),
         "explanation": "Die Syntax einer Transition im Zustandsdiagramm lautet: Trigger [Guard] / Action. Der Trigger stößt den Übergang an, der Guard (in eckigen Klammern) muss wahr sein, und die Action (nach dem Schrägstrich) wird beim Wechsel ausgeführt."
 },
     {
@@ -5370,6 +5372,7 @@ WHERE Email IS NULL OR Email = '';
                 "Sechseck = Start, Raute = Operation, Kreis = Verzweigung."
         ],
         "correctAnswer": 0,
+        "solutionDiagramSvg": VisualDiagrams.getPapDiagramSvg(),
         "explanation": "Nach DIN 66001: Abgerundetes Rechteck/Oval = Start/Ende (Grenzstelle), Rechteck = Operation/Verarbeitungsschritt, Raute = Verzweigung/Entscheidung mit ausgehenden Pfaden (z. B. Ja/Nein)."
 },
     {
