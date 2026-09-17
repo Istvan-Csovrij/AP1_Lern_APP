@@ -1342,8 +1342,8 @@ function generateDynamicQuestions(typeMode = "mix") {
                 isBawueFocus: true,
                 diagramType: "Netzplantechnik",
                 type: "open-text",
-                solutionDiagramSvg: VisualDiagrams.getNetzplanDiagramSvg(),
-                solutionDiagramCaption: "Visuelle Musterlösung: DIN 69900 Netzplan mit Kritischem Pfad",
+                solutionDiagramSvg: VisualDiagrams.getDynamic4NodeNetzplanSvg(dA, dB, dC, dD, fezD, criticalBranch),
+                solutionDiagramCaption: `Visuelle Musterlösung: DIN 69900 Netzplan (${fezD} Tage, Kritischer Pfad: ${criticalBranch})`,
                 code: `Vorgänge:\n- Vorgang A (Start): Dauer = ${dA} Tage\n- Vorgang B (Vorgänger A): Dauer = ${dB} Tage\n- Vorgang C (Vorgänger A): Dauer = ${dC} Tage\n- Vorgang D (Vorgänger B und C): Dauer = ${dD} Tage (Projektende)`,
                 question: `Prüfungsaufgabe Netzplantechnik: Gegeben ist ein IT-Projekt mit den 4 oben aufgeführten Vorgängen.\n\nAufgabe:\n1. Berechne den Frühesten Anfangs- und Endzeitpunkt (FAZ, FEZ) für alle Vorgänge.\n2. Berechne die Gesamtdauer des Projekts.\n3. Bestimme den Gesamtpuffer (GP) für Vorgang B und Vorgang C.\n4. Welcher Pfad bildet den Kritischen Pfad?`,
                 musterloesung: `1. Vorwärtsrechnung:\n- Vorgang A: FAZ = ${fazA}, FEZ = ${fezA}\n- Vorgang B: FAZ = ${fazB}, FEZ = ${fezB}\n- Vorgang C: FAZ = ${fazC}, FEZ = ${fezC}\n- Vorgang D: FAZ = max(${fezB}, ${fezC}) = ${fazD}, FEZ = ${fezD}\n\n2. Gesamtlaufzeit des Projekts: ${fezD} Tage.\n\n3. Gesamtpuffer (GP):\n- Vorgang B: GP = SAZ - FAZ = ${sazB} - ${fazB} = ${gpB} Tag(e)\n- Vorgang C: GP = SAZ - FAZ = ${sazC} - ${fazC} = ${gpC} Tag(e)\n\n4. Kritischer Pfad: ${criticalBranch} (Gesamtpuffer = 0).`,
@@ -1357,9 +1357,8 @@ function generateDynamicQuestions(typeMode = "mix") {
                 isDiagram: true,
                 isBawueFocus: true,
                 diagramType: "Netzplantechnik",
-                diagramSvg: VisualDiagrams.getNetzplanDiagramSvg(),
-                diagramTitle: "Projektnetzplan (DIN 69900)",
-                diagramCaption: "Netzplan mit 7-Felder-Knoten und kritischem Pfad",
+                solutionDiagramSvg: VisualDiagrams.getDynamic4NodeNetzplanSvg(dA, dB, dC, dD, fezD, criticalBranch),
+                solutionDiagramCaption: `Visuelle Musterlösung: DIN 69900 Netzplan (${fezD} Tage, Kritischer Pfad: ${criticalBranch})`,
                 type: "multiple-choice",
                 code: `Vorgänge:\n- A: Dauer = ${dA} Tage (Start)\n- B: Dauer = ${dB} Tage (nach A)\n- C: Dauer = ${dC} Tage (nach A)\n- D: Dauer = ${dD} Tage (nach B und C)`,
                 question: `Prüfungsaufgabe Netzplantechnik: Wie lange dauert das gesamte Projekt und welcher Pfad ist der Kritische Pfad?`,
@@ -1377,10 +1376,50 @@ function generateDynamicQuestions(typeMode = "mix") {
 
     // D.3 Dynamische UML Klassendiagramm- & Use-Case-Generatoren
     const umlPatterns = [
-        { title: "UML Use-Case: <<include>> vs <<extend>>", q: "Im Use-Case-Diagramm eines Geldautomaten: Beim Use-Case 'Geld abheben' wird zwingend 'PIN prüfen' aufgerufen. Welche Beziehung liegt vor?", optA: "<<include>> mit Pfeil auf 'PIN prüfen'", optB: "<<extend>> mit Pfeil auf 'Geld abheben'", optC: "Generalisierung", optD: "Komposition", correct: 0, exp: "Zwingend erforderlich = <<include>>. Pfeil zeigt auf den aufgerufenen Use-Case." },
-        { title: "UML Klassendiagramm: Komposition", q: "In einem Ticketsystem enthält eine Klasse 'Ticket' mehrere Objekte der Klasse 'TicketHistorienEintrag'. Wird ein Ticket gelöscht, müssen alle Historieneinträge ebenfalls unwiderruflich gelöscht werden. Welche Beziehung liegt vor?", optA: "Komposition (ausgefüllte schwarze Raute an 'Ticket')", optB: "Aggregation (weiße Raute)", optC: "Generalisierung (Vererbung)", optD: "Realisierung (Interface)", correct: 0, exp: "Existenzabhängigkeit ('Teil stirbt mit dem Ganzen') = Komposition mit schwarzer Raute an der Besitzerklasse." },
-        { title: "UML Klassendiagramm: Aggregation", q: "In einer Schulungssoftware: Die Klasse 'Kurs' enthält mehrere 'Teilnehmer'. Wird ein Kurs beendet/gelöscht, bleiben die Teilnehmer weiterhin im System gespeichert. Welche Beziehung liegt vor?", optA: "Aggregation (leere weiße Raute an 'Kurs')", optB: "Komposition (schwarze Raute)", optC: "Generalisierung", optD: "Assoziation 1:1", correct: 0, exp: "Schwache Bindung ('Hat-ein' ohne Existenzvernichtung) = Aggregation mit weißer Raute." },
-        { title: "BPMN 2.0: Exklusives vs Paralleles Gateway", q: "In einem BPMN-Prozess sollen nach der Prüfung 'Zahlungsmethode' entweder 'Kreditkartenzahlung' ODER 'Rechnungskauf' durchlaufen werden. Welches Symbol wird verwendet?", optA: "Exklusives Gateway (Raute mit 'X')", optB: "Paralleles Gateway (Raute mit '+')", optC: "Inklusives Gateway (Raute mit 'O')", optD: "Ereignisbasiertes Gateway", correct: 0, exp: "Entweder-oder (genau 1 Pfad) = Exclusive Gateway (XOR)." }
+        { 
+            title: "UML Use-Case: <<include>> vs <<extend>>", 
+            q: "Im Use-Case-Diagramm eines Geldautomaten: Beim Use-Case 'Geld abheben' wird zwingend 'PIN prüfen' aufgerufen. Welche Beziehung liegt vor?", 
+            optA: "<<include>> mit Pfeil auf 'PIN prüfen'", 
+            optB: "<<extend>> mit Pfeil auf 'Geld abheben'", 
+            optC: "Generalisierung", 
+            optD: "Komposition", 
+            correct: 0, 
+            exp: "Zwingend erforderlich = <<include>>. Pfeil zeigt auf den aufgerufenen Use-Case.",
+            svg: VisualDiagrams.getGeldautomatUseCaseSvg()
+        },
+        { 
+            title: "UML Klassendiagramm: Komposition", 
+            q: "In einem Ticketsystem enthält eine Klasse 'Ticket' mehrere Objekte der Klasse 'TicketHistorienEintrag'. Wird ein Ticket gelöscht, müssen alle Historieneinträge ebenfalls unwiderruflich gelöscht werden. Welche Beziehung liegt vor?", 
+            optA: "Komposition (ausgefüllte schwarze Raute an 'Ticket')", 
+            optB: "Aggregation (weiße Raute)", 
+            optC: "Generalisierung (Vererbung)", 
+            optD: "Realisierung (Interface)", 
+            correct: 0, 
+            exp: "Existenzabhängigkeit ('Teil stirbt mit dem Ganzen') = Komposition mit schwarzer Raute an der Besitzerklasse.",
+            svg: VisualDiagrams.getTicketKompositionSvg()
+        },
+        { 
+            title: "UML Klassendiagramm: Aggregation", 
+            q: "In einer Schulungssoftware: Die Klasse 'Kurs' enthält mehrere 'Teilnehmer'. Wird ein Kurs beendet/gelöscht, bleiben die Teilnehmer weiterhin im System gespeichert. Welche Beziehung liegt vor?", 
+            optA: "Aggregation (leere weiße Raute an 'Kurs')", 
+            optB: "Komposition (schwarze Raute)", 
+            optC: "Generalisierung", 
+            optD: "Assoziation 1:1", 
+            correct: 0, 
+            exp: "Schwache Bindung ('Hat-ein' ohne Existenzvernichtung) = Aggregation mit weißer Raute.",
+            svg: VisualDiagrams.getKursTeilnehmerAggregationSvg()
+        },
+        { 
+            title: "BPMN 2.0: Exklusives vs Paralleles Gateway", 
+            q: "In einem BPMN-Prozess sollen nach der Prüfung 'Zahlungsmethode' entweder 'Kreditkartenzahlung' ODER 'Rechnungskauf' durchlaufen werden. Welches Symbol wird verwendet?", 
+            optA: "Exklusives Gateway (Raute mit 'X')", 
+            optB: "Paralleles Gateway (Raute mit '+')", 
+            optC: "Inklusives Gateway (Raute mit 'O')", 
+            optD: "Ereignisbasiertes Gateway", 
+            correct: 0, 
+            exp: "Entweder-oder (genau 1 Pfad) = Exclusive Gateway (XOR).",
+            svg: VisualDiagrams.getZahlungsmethodeBpmnSvg()
+        }
     ];
 
     for (let i = 0; i < 15; i++) {
@@ -1395,6 +1434,8 @@ function generateDynamicQuestions(typeMode = "mix") {
                 isBawueFocus: true,
                 diagramType: "UML / BPMN",
                 type: "open-text",
+                solutionDiagramSvg: item.svg,
+                solutionDiagramCaption: `Grafische Musterlösung: ${item.title}`,
                 question: `Prüfungsaufgabe Modellierung (IHK BaWü - ${item.title}):\n${item.q}\n\nNennen und begründen Sie das passende Modellierungselement bzw. die Beziehung im Diagramm.`,
                 musterloesung: `Fachliche Lösung:\n- Modellierungselement / Beziehung: ${item.optA}\n- Begründung / Regel: ${item.exp}`,
                 explanation: item.exp
@@ -1408,6 +1449,8 @@ function generateDynamicQuestions(typeMode = "mix") {
                 isBawueFocus: true,
                 diagramType: "UML / BPMN",
                 type: "multiple-choice",
+                solutionDiagramSvg: item.svg,
+                solutionDiagramCaption: `Grafische Musterlösung: ${item.title}`,
                 question: `Prüfungsaufgabe Modellierung: ${item.q}`,
                 options: [
                     item.optA,

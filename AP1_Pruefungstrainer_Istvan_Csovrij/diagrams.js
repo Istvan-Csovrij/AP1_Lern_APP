@@ -1661,6 +1661,320 @@ var VisualDiagrams = {
     },
 
         // 12. Universeller Auto-Resolver für Diagramme & Tabellen
+    
+    // 2c. UML Klassendiagramm: Kurs ◇── Teilnehmer (Aggregation)
+    getKursTeilnehmerAggregationSvg: function() {
+        return `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 320" width="100%" height="100%">
+            <rect width="680" height="320" fill="#f8fafc" rx="8" />
+            <text x="340" y="24" font-family="sans-serif" font-size="14" font-weight="bold" fill="#1e3a8a" text-anchor="middle">UML-Klassendiagramm: Aggregation (Kurs ◇── Teilnehmer)</text>
+            
+            <!-- Klasse: Kurs (Ganzes) -->
+            <g transform="translate(60, 50)">
+                <rect width="200" height="180" fill="#ffffff" stroke="#0284c7" stroke-width="2" rx="4" />
+                <rect width="200" height="32" fill="#dbeafe" stroke="#0284c7" stroke-width="2" rx="4" />
+                <text x="100" y="22" font-family="sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#0369a1">Kurs</text>
+                
+                <text x="12" y="55" font-family="monospace" font-size="12" fill="#334155">- kursNr: String</text>
+                <text x="12" y="75" font-family="monospace" font-size="12" fill="#334155">- titel: String</text>
+                <text x="12" y="95" font-family="monospace" font-size="12" fill="#334155">- maxTeilnehmer: int</text>
+                <line x1="0" y1="110" x2="200" y2="110" stroke="#cbd5e1" stroke-width="1.5" />
+                
+                <text x="12" y="132" font-family="monospace" font-size="12" fill="#0f766e">+ addTeilnehmer(t: Teilnehmer)</text>
+                <text x="12" y="152" font-family="monospace" font-size="12" fill="#0f766e">+ removeTeilnehmer(t: Teilnehmer)</text>
+                <text x="12" y="172" font-family="monospace" font-size="12" fill="#0f766e">+ beenden()</text>
+            </g>
+            
+            <!-- Aggregations-Linie & Leere Raute am Kurs (Ganzes) -->
+            <g transform="translate(260, 130)">
+                <polygon points="0,0 14,-8 28,0 14,8" fill="#ffffff" stroke="#0284c7" stroke-width="2.5" />
+                <line x1="28" y1="0" x2="160" y2="0" stroke="#0284c7" stroke-width="2.5" />
+                <text x="35" y="-12" font-family="sans-serif" font-size="12" font-weight="bold" fill="#0369a1">1</text>
+                <text x="135" y="-12" font-family="sans-serif" font-size="12" font-weight="bold" fill="#0369a1">0..*</text>
+                <text x="80" y="20" font-family="sans-serif" font-size="11" font-weight="bold" fill="#0284c7" text-anchor="middle">belegt</text>
+            </g>
+            
+            <!-- Klasse: Teilnehmer (Teil) -->
+            <g transform="translate(420, 50)">
+                <rect width="200" height="180" fill="#ffffff" stroke="#0284c7" stroke-width="2" rx="4" />
+                <rect width="200" height="32" fill="#dbeafe" stroke="#0284c7" stroke-width="2" rx="4" />
+                <text x="100" y="22" font-family="sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#0369a1">Teilnehmer</text>
+                
+                <text x="12" y="55" font-family="monospace" font-size="12" fill="#334155">- teilnehmerId: int</text>
+                <text x="12" y="75" font-family="monospace" font-size="12" fill="#334155">- name: String</text>
+                <text x="12" y="95" font-family="monospace" font-size="12" fill="#334155">- email: String</text>
+                <line x1="0" y1="110" x2="200" y2="110" stroke="#cbd5e1" stroke-width="1.5" />
+                
+                <text x="12" y="132" font-family="monospace" font-size="12" fill="#0f766e">+ getKurse()</text>
+                <text x="12" y="152" font-family="monospace" font-size="12" fill="#0f766e">+ getBescheinigung()</text>
+                <text x="12" y="172" font-family="monospace" font-size="12" fill="#0f766e">+ abmelden()</text>
+            </g>
+            
+            <!-- Erklärungskasten unten -->
+            <rect x="50" y="250" width="580" height="55" fill="#f0fdf4" stroke="#86efac" stroke-width="1.5" rx="6" />
+            <text x="340" y="272" font-family="sans-serif" font-size="11.5" font-weight="bold" fill="#166534" text-anchor="middle">✓ Aggregation (Leere Raute ◇ am Container/Kurs): "Hat-ein"-Beziehung</text>
+            <text x="340" y="292" font-family="sans-serif" font-size="11" fill="#166534" text-anchor="middle">Wird der Kurs beendet oder gelöscht, existiert der Teilnehmer unabhängig im System weiter.</text>
+        </svg>
+        `;
+    },
+
+    // 2d. UML Klassendiagramm: Ticket ◆── TicketHistorienEintrag (Komposition)
+    getTicketKompositionSvg: function() {
+        return `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 320" width="100%" height="100%">
+            <rect width="680" height="320" fill="#f8fafc" rx="8" />
+            <text x="340" y="24" font-family="sans-serif" font-size="14" font-weight="bold" fill="#1e3a8a" text-anchor="middle">UML-Klassendiagramm: Komposition (Ticket ◆── TicketHistorienEintrag)</text>
+            
+            <!-- Klasse: Ticket (Ganzes) -->
+            <g transform="translate(40, 50)">
+                <rect width="210" height="180" fill="#ffffff" stroke="#7c3aed" stroke-width="2" rx="4" />
+                <rect width="210" height="32" fill="#ede9fe" stroke="#7c3aed" stroke-width="2" rx="4" />
+                <text x="105" y="22" font-family="sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#6d28d9">Ticket</text>
+                
+                <text x="12" y="55" font-family="monospace" font-size="12" fill="#334155">- ticketNr: int</text>
+                <text x="12" y="75" font-family="monospace" font-size="12" fill="#334155">- titel: String</text>
+                <text x="12" y="95" font-family="monospace" font-size="12" fill="#334155">- status: String</text>
+                <line x1="0" y1="110" x2="210" y2="110" stroke="#cbd5e1" stroke-width="1.5" />
+                
+                <text x="12" y="132" font-family="monospace" font-size="12" fill="#0f766e">+ addHistorie(eintrag)</text>
+                <text x="12" y="152" font-family="monospace" font-size="12" fill="#0f766e">+ getHistorie()</text>
+                <text x="12" y="172" font-family="monospace" font-size="12" fill="#0f766e">+ loeschen()</text>
+            </g>
+            
+            <!-- Kompositions-Linie & Ausgefüllte Raute am Ticket (Ganzes) -->
+            <g transform="translate(250, 130)">
+                <polygon points="0,0 14,-8 28,0 14,8" fill="#7c3aed" stroke="#7c3aed" stroke-width="2.5" />
+                <line x1="28" y1="0" x2="160" y2="0" stroke="#7c3aed" stroke-width="2.5" />
+                <text x="35" y="-12" font-family="sans-serif" font-size="12" font-weight="bold" fill="#6d28d9">1</text>
+                <text x="135" y="-12" font-family="sans-serif" font-size="12" font-weight="bold" fill="#6d28d9">0..*</text>
+                <text x="90" y="20" font-family="sans-serif" font-size="11" font-weight="bold" fill="#7c3aed" text-anchor="middle">besitzt fest</text>
+            </g>
+            
+            <!-- Klasse: TicketHistorienEintrag (Teil) -->
+            <g transform="translate(410, 50)">
+                <rect width="230" height="180" fill="#ffffff" stroke="#7c3aed" stroke-width="2" rx="4" />
+                <rect width="230" height="32" fill="#ede9fe" stroke="#7c3aed" stroke-width="2" rx="4" />
+                <text x="115" y="22" font-family="sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#6d28d9">TicketHistorienEintrag</text>
+                
+                <text x="12" y="55" font-family="monospace" font-size="12" fill="#334155">- eintragsNr: int</text>
+                <text x="12" y="75" font-family="monospace" font-size="12" fill="#334155">- zeitstempel: DateTime</text>
+                <text x="12" y="95" font-family="monospace" font-size="12" fill="#334155">- kommentar: String</text>
+                <line x1="0" y1="110" x2="230" y2="110" stroke="#cbd5e1" stroke-width="1.5" />
+                
+                <text x="12" y="132" font-family="monospace" font-size="12" fill="#0f766e">+ getDetails()</text>
+                <text x="12" y="152" font-family="monospace" font-size="12" fill="#0f766e">+ getBearbeiter()</text>
+                <text x="12" y="172" font-family="monospace" font-size="12" fill="#0f766e">+ printEntry()</text>
+            </g>
+            
+            <!-- Erklärungskasten unten -->
+            <rect x="50" y="250" width="580" height="55" fill="#fef2f2" stroke="#fca5a5" stroke-width="1.5" rx="6" />
+            <text x="340" y="272" font-family="sans-serif" font-size="11.5" font-weight="bold" fill="#991b1b" text-anchor="middle">✓ Komposition (Schwarze Raute ◆ am Ganzen/Ticket): "Besteht-aus"-Beziehung</text>
+            <text x="340" y="292" font-family="sans-serif" font-size="11" fill="#991b1b" text-anchor="middle">Existenzielle Abhängigkeit: Wird das Ticket gelöscht, werden alle Historieneinträge mitgelöscht.</text>
+        </svg>
+        `;
+    },
+
+    // 1b. UML Use-Case: Geldautomat (Geld abheben <<include>> PIN prüfen)
+    getGeldautomatUseCaseSvg: function() {
+        return `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 340" width="100%" height="100%">
+            <defs>
+                <marker id="uc-ga-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                    <path d="M 0 1 L 10 5 L 0 9 z" fill="#0284c7" />
+                </marker>
+                <marker id="uc-ga-dasharrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                    <path d="M 0 1 L 10 5 L 0 9 z" fill="#7c3aed" />
+                </marker>
+            </defs>
+            <rect width="680" height="340" fill="#f8fafc" rx="8" />
+            
+            <!-- Systemgrenze -->
+            <rect x="150" y="30" width="380" height="280" fill="#ffffff" stroke="#0284c7" stroke-width="2" stroke-dasharray="6,4" rx="6" />
+            <text x="165" y="55" font-family="sans-serif" font-size="14" font-weight="bold" fill="#0369a1">Geldautomat (ATM-System)</text>
+            
+            <!-- Akteur links: Bankkunde -->
+            <g transform="translate(60, 110)">
+                <circle cx="20" cy="20" r="14" fill="#f1f5f9" stroke="#1e293b" stroke-width="2.5" />
+                <line x1="20" y1="34" x2="20" y2="70" stroke="#1e293b" stroke-width="2.5" />
+                <line x1="0" y1="46" x2="40" y2="46" stroke="#1e293b" stroke-width="2.5" />
+                <line x1="20" y1="70" x2="4" y2="105" stroke="#1e293b" stroke-width="2.5" />
+                <line x1="20" y1="70" x2="36" y2="105" stroke="#1e293b" stroke-width="2.5" />
+                <text x="20" y="125" font-family="sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="#0f172a">Bankkunde</text>
+            </g>
+            
+            <!-- Akteur rechts: Bank-Host -->
+            <g transform="translate(570, 150)">
+                <circle cx="20" cy="20" r="14" fill="#f1f5f9" stroke="#1e293b" stroke-width="2.5" />
+                <line x1="20" y1="34" x2="20" y2="70" stroke="#1e293b" stroke-width="2.5" />
+                <line x1="0" y1="46" x2="40" y2="46" stroke="#1e293b" stroke-width="2.5" />
+                <line x1="20" y1="70" x2="4" y2="105" stroke="#1e293b" stroke-width="2.5" />
+                <line x1="20" y1="70" x2="36" y2="105" stroke="#1e293b" stroke-width="2.5" />
+                <text x="20" y="125" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#0f172a">Bank-Host (ZKA)</text>
+            </g>
+            
+            <!-- Use Cases (Ovale) -->
+            <ellipse cx="270" cy="170" rx="90" ry="26" fill="#dbeafe" stroke="#2563eb" stroke-width="2" />
+            <text x="270" y="175" font-family="sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="#1d4ed8">Geld abheben</text>
+            
+            <ellipse cx="440" cy="170" rx="80" ry="24" fill="#ede9fe" stroke="#7c3aed" stroke-width="2" />
+            <text x="440" y="175" font-family="sans-serif" font-size="12" font-weight="600" text-anchor="middle" fill="#6d28d9">PIN prüfen</text>
+            
+            <ellipse cx="270" cy="260" rx="90" ry="24" fill="#fef3c7" stroke="#d97706" stroke-width="2" />
+            <text x="270" y="265" font-family="sans-serif" font-size="12" font-weight="600" text-anchor="middle" fill="#b45309">Beleg drucken</text>
+            
+            <!-- Assoziationen -->
+            <line x1="100" y1="165" x2="180" y2="170" stroke="#475569" stroke-width="2" />
+            <line x1="520" y1="170" x2="570" y2="185" stroke="#475569" stroke-width="2" />
+            
+            <!-- Include-Pfeil (Geld abheben -> PIN prüfen) -->
+            <line x1="360" y1="170" x2="430" y2="170" stroke="#7c3aed" stroke-width="2" stroke-dasharray="5,4" marker-end="url(#uc-ga-dasharrow)" />
+            <text x="395" y="155" font-family="sans-serif" font-size="11" font-weight="bold" fill="#6d28d9" text-anchor="middle">&lt;&lt;include&gt;&gt;</text>
+            
+            <!-- Extend-Pfeil (Beleg drucken -> Geld abheben) -->
+            <line x1="270" y1="236" x2="270" y2="202" stroke="#d97706" stroke-width="2" stroke-dasharray="4,4" marker-end="url(#uc-ga-dasharrow)" />
+            <text x="315" y="225" font-family="sans-serif" font-size="11" font-weight="bold" fill="#b45309" text-anchor="start">&lt;&lt;extend&gt;&gt;</text>
+        </svg>
+        `;
+    },
+
+    // 5b. BPMN 2.0: Zahlungsmethode wählen (XOR Gateway)
+    getZahlungsmethodeBpmnSvg: function() {
+        return `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 260" width="100%" height="100%">
+            <defs>
+                <marker id="bpmn-zm-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                    <path d="M 0 1 L 10 5 L 0 9 z" fill="#1e293b" />
+                </marker>
+            </defs>
+            <rect width="680" height="260" fill="#f8fafc" rx="8" />
+            
+            <!-- Start-Event -->
+            <circle cx="60" cy="110" r="20" fill="#dcfce7" stroke="#16a34a" stroke-width="2.5" />
+            <text x="60" y="150" font-family="sans-serif" font-size="11" font-weight="bold" fill="#166534" text-anchor="middle">Checkout gestartet</text>
+            
+            <line x1="80" y1="110" x2="130" y2="110" stroke="#1e293b" stroke-width="2" marker-end="url(#bpmn-zm-arr)" />
+            
+            <!-- Task 1: Zahlungsmethode wählen -->
+            <rect x="135" y="80" width="140" height="60" fill="#ffffff" stroke="#0284c7" stroke-width="2" rx="8" />
+            <text x="205" y="115" font-family="sans-serif" font-size="12" font-weight="bold" fill="#0369a1" text-anchor="middle">Zahlungsart wählen</text>
+            
+            <line x1="275" y1="110" x2="315" y2="110" stroke="#1e293b" stroke-width="2" marker-end="url(#bpmn-zm-arr)" />
+            
+            <!-- Gateway: XOR -->
+            <polygon points="340,85 365,110 340,135 315,110" fill="#fef3c7" stroke="#d97706" stroke-width="2" />
+            <text x="340" y="116" font-family="sans-serif" font-size="16" font-weight="bold" fill="#b45309" text-anchor="middle">✕</text>
+            <text x="340" y="70" font-family="sans-serif" font-size="11" font-weight="bold" fill="#b45309" text-anchor="middle">Zahlungsmethode?</text>
+            
+            <!-- Pfad 1: Kreditkarte -->
+            <line x1="340" y1="85" x2="340" y2="40" stroke="#1e293b" stroke-width="2" />
+            <line x1="340" y1="40" x2="400" y2="40" stroke="#1e293b" stroke-width="2" marker-end="url(#bpmn-zm-arr)" />
+            <text x="360" y="32" font-family="sans-serif" font-size="11" font-weight="bold" fill="#0369a1">[Kreditkarte]</text>
+            <rect x="405" y="15" width="140" height="50" fill="#ffffff" stroke="#0284c7" stroke-width="2" rx="8" />
+            <text x="475" y="45" font-family="sans-serif" font-size="11" font-weight="bold" fill="#0369a1" text-anchor="middle">Kreditkarte belasten</text>
+            
+            <!-- Pfad 2: Rechnungskauf -->
+            <line x1="365" y1="110" x2="400" y2="110" stroke="#1e293b" stroke-width="2" marker-end="url(#bpmn-zm-arr)" />
+            <text x="380" y="102" font-family="sans-serif" font-size="11" font-weight="bold" fill="#b45309">[Rechnungskauf]</text>
+            <rect x="405" y="85" width="140" height="50" fill="#ffffff" stroke="#0284c7" stroke-width="2" rx="8" />
+            <text x="475" y="115" font-family="sans-serif" font-size="11" font-weight="bold" fill="#0369a1" text-anchor="middle">Rechnung erstellen</text>
+            
+            <!-- End Event -->
+            <line x1="545" y1="40" x2="590" y2="40" stroke="#1e293b" stroke-width="2" />
+            <line x1="590" y1="40" x2="590" y2="110" stroke="#1e293b" stroke-width="2" />
+            <line x1="545" y1="110" x2="590" y2="110" stroke="#1e293b" stroke-width="2" />
+            <line x1="590" y1="110" x2="615" y2="110" stroke="#1e293b" stroke-width="2" marker-end="url(#bpmn-zm-arr)" />
+            
+            <circle cx="635" cy="110" r="18" fill="#fee2e2" stroke="#dc2626" stroke-width="4" />
+            <text x="635" y="150" font-family="sans-serif" font-size="11" font-weight="bold" fill="#991b1b" text-anchor="middle">Zahlung erfolgt</text>
+            
+            <text x="340" y="240" font-family="sans-serif" font-size="12" font-style="italic" fill="#64748b" text-anchor="middle">BPMN 2.0: Exklusives Gateway (XOR mit ✕) wählt exakt einen alternativen Zweig aus</text>
+        </svg>
+        `;
+    },
+
+    // 7e. Dynamischer 4-Knoten-Netzplan (mit exakten berechneten Werten)
+    getDynamic4NodeNetzplanSvg: function(dA, dB, dC, dD, fezD, criticalBranch) {
+        const fezA = dA;
+        const fazB = fezA;
+        const fezB = fazB + dB;
+        const fazC = fezA;
+        const fezC = fazC + dC;
+        const fazD = Math.max(fezB, fezC);
+        const calcFezD = fazD + dD;
+        
+        const sezD = calcFezD;
+        const sazD = sezD - dD;
+        
+        const sezB = sazD;
+        const sazB = sezB - dB;
+        const sezC = sazD;
+        const sazC = sezC - dC;
+        
+        const sezA = Math.min(sazB, sazC);
+        const sazA = sezA - dA;
+        
+        const gpA = sazA - 0;
+        const gpB = sazB - fazB;
+        const gpC = sazC - fazC;
+        const gpD = sazD - fazD;
+        
+        const isBCrit = (gpB === 0);
+        const isCCrit = (gpC === 0);
+        
+        function renderNode(x, y, faz, d, fez, name, saz, gp, sez, isCrit) {
+            const bg = isCrit ? "#fee2e2" : "#e0f2fe";
+            const st = isCrit ? "#dc2626" : "#0284c7";
+            const tc = isCrit ? "#991b1b" : "#0369a1";
+            return `
+            <g transform="translate(${x}, ${y})">
+                <rect width="130" height="75" fill="${bg}" stroke="${st}" stroke-width="2" rx="4" />
+                <line x1="0" y1="25" x2="130" y2="25" stroke="${st}" stroke-width="1.2" />
+                <line x1="0" y1="50" x2="130" y2="50" stroke="${st}" stroke-width="1.2" />
+                <line x1="43" y1="0" x2="43" y2="25" stroke="${st}" stroke-width="1.2" />
+                <line x1="86" y1="0" x2="86" y2="25" stroke="${st}" stroke-width="1.2" />
+                <line x1="43" y1="50" x2="43" y2="75" stroke="${st}" stroke-width="1.2" />
+                <line x1="86" y1="50" x2="86" y2="75" stroke="${st}" stroke-width="1.2" />
+                <text x="21" y="17" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="${tc}">${faz}</text>
+                <text x="65" y="17" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle" fill="${tc}">D:${d}</text>
+                <text x="108" y="17" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="${tc}">${fez}</text>
+                <text x="65" y="42" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="${tc}">${name}</text>
+                <text x="21" y="67" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="${tc}">${saz}</text>
+                <text x="65" y="67" font-family="sans-serif" font-size="10" font-weight="bold" text-anchor="middle" fill="${tc}">GP:${gp}</text>
+                <text x="108" y="67" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="${tc}">${sez}</text>
+            </g>`;
+        }
+        
+        return `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 320" width="100%" height="100%">
+            <defs>
+                <marker id="dyn-np-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                    <path d="M 0 1 L 10 5 L 0 9 z" fill="#dc2626" />
+                </marker>
+                <marker id="dyn-np-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                    <path d="M 0 1 L 10 5 L 0 9 z" fill="#0284c7" />
+                </marker>
+            </defs>
+            <rect width="680" height="320" fill="#f8fafc" rx="8" />
+            <text x="340" y="24" font-family="sans-serif" font-size="14" font-weight="bold" fill="#1e3a8a" text-anchor="middle">DIN 69900 Netzplan: Berechnete Projektdauer = ${calcFezD} Tage</text>
+            
+            ${renderNode(40, 95, 0, dA, fezA, "A: Start", sazA, gpA, sezA, true)}
+            ${renderNode(250, 40, fazB, dB, fezB, "B: Zweig 1", sazB, gpB, sezB, isBCrit)}
+            ${renderNode(250, 160, fazC, dC, fezC, "C: Zweig 2", sazC, gpC, sezC, isCCrit)}
+            ${renderNode(460, 95, fazD, dD, calcFezD, "D: Ende", sazD, gpD, sezD, true)}
+            
+            <line x1="170" y1="125" x2="250" y2="80" stroke="${isBCrit ? '#dc2626' : '#0284c7'}" stroke-width="${isBCrit ? '2.5' : '1.8'}" marker-end="${isBCrit ? 'url(#dyn-np-red)' : 'url(#dyn-np-blue)'}" />
+            <line x1="170" y1="145" x2="250" y2="190" stroke="${isCCrit ? '#dc2626' : '#0284c7'}" stroke-width="${isCCrit ? '2.5' : '1.8'}" marker-end="${isCCrit ? 'url(#dyn-np-red)' : 'url(#dyn-np-blue)'}" />
+            
+            <line x1="380" y1="80" x2="460" y2="125" stroke="${isBCrit ? '#dc2626' : '#0284c7'}" stroke-width="${isBCrit ? '2.5' : '1.8'}" marker-end="${isBCrit ? 'url(#dyn-np-red)' : 'url(#dyn-np-blue)'}" />
+            <line x1="380" y1="190" x2="460" y2="145" stroke="${isCCrit ? '#dc2626' : '#0284c7'}" stroke-width="${isCCrit ? '2.5' : '1.8'}" marker-end="${isCCrit ? 'url(#dyn-np-red)' : 'url(#dyn-np-blue)'}" />
+            
+            <rect x="100" y="280" width="480" height="30" fill="#ffffff" stroke="#cbd5e1" stroke-width="1" rx="4" />
+            <circle cx="120" cy="295" r="5" fill="#fee2e2" stroke="#dc2626" stroke-width="2" />
+            <text x="135" y="299" font-family="sans-serif" font-size="11" font-weight="bold" fill="#991b1b">Kritischer Pfad: ${criticalBranch || (isBCrit ? 'A ➔ B ➔ D' : 'A ➔ C ➔ D')} (Dauer: ${calcFezD} Tage)</text>
+        </svg>
+        `;
+    },
+
     getAutoDiagramSvg: function(q) {
         if (!q) return null;
         // 1. Wenn die Frage bereits eine explizite grafische Musterlösung besitzt
@@ -1725,17 +2039,34 @@ var VisualDiagrams = {
         }
         
         // 3. Use Case Diagramm
+        if (text.includes("geldautomat") || text.includes("pin prüfen") || (text.includes("geld abheben") && text.includes("pin"))) {
+            return VisualDiagrams.getGeldautomatUseCaseSvg();
+        }
         if (/\b(use-case|use case|anwendungsfalldiagramm|anwendungsfall-diagramm|<<include>>|<<extend>>)\b/i.test(text)) {
             let title = "Online-Shop Bestellsystem";
             if (text.includes("ticket") || text.includes("helpdesk")) title = "IT-Helpdesk Ticketverwaltung";
             if (text.includes("smart-home") || text.includes("smart home")) title = "Smart-Home Steuerung";
             if (text.includes("patient") || text.includes("krankenhaus")) title = "Krankenhaus-Patientenverwaltung";
+            if (text.includes("flugbuchung") || text.includes("flug")) title = "Flugbuchungs-Portal";
+            if (text.includes("lagerlogistik") || text.includes("lager")) title = "Lagerlogistik-Verwaltung";
             return VisualDiagrams.getUseCaseDiagramSvg(title);
         }
         
-        // 4. Klassendiagramm (inkl. Aggregation vs Komposition)
+        // 4. Klassendiagramm (inkl. spezifischer Aggregation & Komposition)
+        if (text.includes("kurs") && text.includes("teilnehmer")) {
+            return VisualDiagrams.getKursTeilnehmerAggregationSvg();
+        }
+        if (text.includes("ticket") && (text.includes("historie") || text.includes("tickethistorieneintrag"))) {
+            return VisualDiagrams.getTicketKompositionSvg();
+        }
         if (text.includes("aggregation") && text.includes("komposition")) {
             return VisualDiagrams.getAggregationKompositionSvg();
+        }
+        if (text.includes("aggregation") && !text.includes("komposition")) {
+            return VisualDiagrams.getKursTeilnehmerAggregationSvg();
+        }
+        if (text.includes("komposition") && !text.includes("aggregation")) {
+            return VisualDiagrams.getTicketKompositionSvg();
         }
         if (/\b(klassendiagramm|uml-klasse|komposition|aggregation)\b/i.test(text)) {
             return VisualDiagrams.getClassDiagramSvg();
@@ -1747,6 +2078,9 @@ var VisualDiagrams = {
         }
         
         // 6. BPMN 2.0
+        if (text.includes("zahlungsmethode") || text.includes("zahlungsart")) {
+            return VisualDiagrams.getZahlungsmethodeBpmnSvg();
+        }
         if (/\b(bpmn|swimlane|gateway|start-event|end-event)\b/i.test(text)) {
             return VisualDiagrams.getBpmnDiagramSvg();
         }
