@@ -253,6 +253,26 @@ header {
     color: white !important;
 }
 
+.highlight-power-btn {
+    border: 2px solid #eab308 !important;
+    background: linear-gradient(135deg, #fefce8, #fef08a) !important;
+    color: #854d0e !important;
+}
+
+.highlight-power-btn:hover {
+    background: linear-gradient(135deg, #fef08a, #fde047) !important;
+}
+
+.highlight-power-btn.active {
+    background: linear-gradient(135deg, #eab308, #ca8a04) !important;
+    color: white !important;
+    border-color: #ca8a04 !important;
+}
+
+.highlight-power-btn.active i {
+    color: white !important;
+}
+
 /* Stats */
 .stats-grid {
     display: grid;

@@ -1485,6 +1485,7 @@ function generateDynamicQuestions(typeMode = "mix") {
             dynamicQuestions.push({
                 id: currentId++,
                 theme: "calculations",
+                isPowerCalc: true,
                 topic: "Stromkostenberechnung Dauerbetrieb",
                 isCalculation: true,
                 isBawueFocus: true,
@@ -1497,6 +1498,7 @@ function generateDynamicQuestions(typeMode = "mix") {
             dynamicQuestions.push({
                 id: currentId++,
                 theme: "calculations",
+                isPowerCalc: true,
                 topic: "Stromkostenberechnung",
                 isCalculation: true,
                 isBawueFocus: true,
@@ -2995,6 +2997,7 @@ function generateDynamicQuestions(typeMode = "mix") {
             dynamicQuestions.push({
                 id: currentId++,
                 theme: "lf2",
+                isPowerCalc: true,
                 topic: "Hardware & Strom: USV-Überbrückungszeit Dimensionierung (LF 2/6)",
                 isCalculation: true,
                 isBawueFocus: true,
@@ -3009,6 +3012,7 @@ function generateDynamicQuestions(typeMode = "mix") {
             dynamicQuestions.push({
                 id: currentId++,
                 theme: "lf2",
+                isPowerCalc: true,
                 topic: "Hardware & Strom: USV-Überbrückungszeit (LF 2/6)",
                 isCalculation: true,
                 isBawueFocus: true,
@@ -3396,6 +3400,7 @@ function generateDynamicQuestions(typeMode = "mix") {
             dynamicQuestions.push({
                 id: currentId++,
                 theme: "lf2",
+                isPowerCalc: true,
                 topic: "Elektrotechnik: Ohmsches Gesetz, Leistung & Energie (LF 2)",
                 isCalculation: true,
                 isBawueFocus: true,
@@ -3408,6 +3413,7 @@ function generateDynamicQuestions(typeMode = "mix") {
             dynamicQuestions.push({
                 id: currentId++,
                 theme: "lf2",
+                isPowerCalc: true,
                 topic: "Elektrotechnik: Leistung & Energie (LF 2)",
                 isCalculation: true,
                 isBawueFocus: true,

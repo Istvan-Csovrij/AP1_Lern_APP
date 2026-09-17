@@ -357,6 +357,42 @@ function filterQuestions(theme) {
                     q.question.toLowerCase().includes("tebibyte")
                 ))
             );
+        } else if (theme === "power-calc" || theme === "strom" || theme === "power") {
+            filteredQuestions = questions.filter(q => 
+                q.theme === "power-calc" || 
+                q.isPowerCalc === true || 
+                (q.topic && (
+                    q.topic.toLowerCase().includes("strom") || 
+                    q.topic.toLowerCase().includes("leistung") || 
+                    q.topic.toLowerCase().includes("usv") || 
+                    q.topic.toLowerCase().includes("pue") || 
+                    q.topic.toLowerCase().includes("dcie") || 
+                    q.topic.toLowerCase().includes("btu") || 
+                    q.topic.toLowerCase().includes("eer") || 
+                    q.topic.toLowerCase().includes("wirkleistung") || 
+                    q.topic.toLowerCase().includes("scheinleistung") || 
+                    q.topic.toLowerCase().includes("blindleistung") || 
+                    q.topic.toLowerCase().includes("drehstrom") || 
+                    q.topic.toLowerCase().includes("spannungsabfall") || 
+                    q.topic.toLowerCase().includes("ohm") || 
+                    q.topic.toLowerCase().includes("elektrotechnik")
+                )) ||
+                (q.question && (
+                    q.question.toLowerCase().includes("wirkleistung") || 
+                    q.question.toLowerCase().includes("scheinleistung") || 
+                    q.question.toLowerCase().includes("blindleistung") || 
+                    q.question.toLowerCase().includes("kvar") || 
+                    q.question.toLowerCase().includes("kva") || 
+                    q.question.toLowerCase().includes("stromkosten") || 
+                    q.question.toLowerCase().includes("pue") || 
+                    q.question.toLowerCase().includes("dcie") || 
+                    q.question.toLowerCase().includes("klimatisierung") || 
+                    q.question.toLowerCase().includes("autonomiezeit") || 
+                    q.question.toLowerCase().includes("überbrückungszeit") || 
+                    q.question.toLowerCase().includes("spannungsabfall") || 
+                    q.question.toLowerCase().includes("leitungsverlust")
+                ))
+            );
         } else if (theme === "hard-mode" || theme === "hard") {
             filteredQuestions = questions.filter(q => 
                 q.isHard === true || 
@@ -1079,6 +1115,9 @@ function getThemeLabel(key) {
         "diagram-training": "📐 Diagramme & Modellierung",
         calculations: "🧮 Rechnen & Handelskalkulation",
         rechnen: "🧮 Rechnen & Handelskalkulation",
+        "power-calc": "⚡ Strom, Leistung & Einheiten (LF 2/6)",
+        power: "⚡ Strom, Leistung & Einheiten (LF 2/6)",
+        strom: "⚡ Strom, Leistung & Einheiten (LF 2/6)",
         "hard-mode": "🔥 IHK Meisterklasse (Schwer)",
         hard: "🔥 IHK Meisterklasse (Schwer)"
     };

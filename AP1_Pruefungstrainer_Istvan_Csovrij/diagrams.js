@@ -2316,6 +2316,163 @@ var VisualDiagrams = {
         `;
     },
 
+    
+    // 12. Elektrotechnik: Leistungsdreieck (Wirk-, Blind-, Scheinleistung & cos phi)
+    getLeistungsdreieckSvg: function() {
+        return `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 340" width="100%" height="100%">
+            <rect width="680" height="340" fill="#f8fafc" rx="8" />
+            <text x="340" y="24" font-family="sans-serif" font-size="14" font-weight="bold" fill="#1e3a8a" text-anchor="middle">Elektrotechnik: Leistungsdreieck (Wirk-, Blind- &amp; Scheinleistung)</text>
+            
+            <!-- Horizontale Kathete: P (Wirkleistung in W / kW) -->
+            <line x1="120" y1="230" x2="480" y2="230" stroke="#16a34a" stroke-width="4" />
+            <text x="300" y="255" font-family="sans-serif" font-size="13" font-weight="bold" fill="#166534" text-anchor="middle">Wirkleistung P (in W / kW) ➔ verrichtet Nutzarbeit</text>
+            
+            <!-- Vertikale Kathete: Q (Blindleistung in var / kvar) -->
+            <line x1="480" y1="230" x2="480" y2="70" stroke="#dc2626" stroke-width="4" />
+            <text x="495" y="155" font-family="sans-serif" font-size="13" font-weight="bold" fill="#991b1b" text-anchor="start">Blindleistung Q (in var / kvar)</text>
+            
+            <!-- Hypotenuse: S (Scheinleistung in VA / kVA) -->
+            <line x1="120" y1="230" x2="480" y2="70" stroke="#2563eb" stroke-width="4" />
+            <text x="270" y="135" font-family="sans-serif" font-size="13" font-weight="bold" fill="#1d4ed8" text-anchor="middle" transform="rotate(-24, 270, 135)">Scheinleistung S (in VA / kVA)</text>
+            
+            <!-- Winkel phi Bogen -->
+            <path d="M 170,230 A 50,50 0 0,0 165,210" fill="none" stroke="#d97706" stroke-width="2.5" />
+            <text x="180" y="222" font-family="sans-serif" font-size="13" font-weight="bold" fill="#b45309">φ</text>
+            
+            <!-- Rechter Winkel Marker -->
+            <rect x="460" y="210" width="20" height="20" fill="none" stroke="#64748b" stroke-width="1.5" />
+            <circle cx="470" cy="220" r="2" fill="#64748b" />
+            
+            <!-- Formelkasten unten -->
+            <rect x="40" y="270" width="600" height="55" fill="#f0fdf4" stroke="#86efac" stroke-width="1.5" rx="6" />
+            <text x="340" y="292" font-family="monospace" font-size="12" font-weight="bold" fill="#166534" text-anchor="middle">Formeln: S² = P² + Q²  |  cos φ = P / S (Leistungsfaktor)  |  P = S · cos φ</text>
+            <text x="340" y="312" font-family="sans-serif" font-size="11" fill="#166534" text-anchor="middle">1-phasig: P = U · I · cos φ  |  3-phasig Drehstrom (400V): P = √3 · U · I · cos φ</text>
+        </svg>
+        `;
+    },
+
+    // 13. Rechenzentrum: PUE & DCiE Energiefluss
+    getPueDiagramSvg: function() {
+        return `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 320" width="100%" height="100%">
+            <rect width="680" height="320" fill="#f8fafc" rx="8" />
+            <text x="340" y="24" font-family="sans-serif" font-size="14" font-weight="bold" fill="#1e3a8a" text-anchor="middle">Rechenzentrum: PUE &amp; DCiE Energiefluss</text>
+            
+            <!-- Gesamtenergie Box links -->
+            <g transform="translate(40, 60)">
+                <rect width="180" height="180" fill="#ffffff" stroke="#0284c7" stroke-width="2.5" rx="6" />
+                <rect width="180" height="35" fill="#dbeafe" stroke="#0284c7" stroke-width="2" rx="6" />
+                <text x="90" y="23" font-family="sans-serif" font-size="13" font-weight="bold" fill="#0369a1" text-anchor="middle">Gesamtenergie E_Gesamt</text>
+                
+                <text x="90" y="75" font-family="sans-serif" font-size="12" font-weight="bold" fill="#0f172a" text-anchor="middle">100 % Stromaufnahme</text>
+                <text x="90" y="110" font-family="monospace" font-size="13" font-weight="bold" fill="#0284c7" text-anchor="middle">PUE = E_Ges / E_IT</text>
+                <text x="90" y="145" font-family="sans-serif" font-size="11" fill="#64748b" text-anchor="middle">Idealwert = 1,0</text>
+                <text x="90" y="165" font-family="sans-serif" font-size="11" fill="#64748b" text-anchor="middle">Typisch = 1,2 - 1,7</text>
+            </g>
+            
+            <!-- 1. IT-Infrastruktur (Nutzenergie grün) -->
+            <g transform="translate(300, 50)">
+                <rect width="330" height="60" fill="#ecfdf5" stroke="#10b981" stroke-width="2" rx="6" />
+                <text x="15" y="25" font-family="sans-serif" font-size="13" font-weight="bold" fill="#047857">IT-Nutzenergie (E_IT)</text>
+                <text x="15" y="48" font-family="sans-serif" font-size="11" fill="#065f46">Server, Storage, Switches, Router (verrichtet IT-Arbeit)</text>
+                <text x="310" y="38" font-family="sans-serif" font-size="15" font-weight="bold" fill="#047857" text-anchor="end">~ 60 %</text>
+            </g>
+            
+            <!-- 2. Klimatisierung & Kälte (rot) -->
+            <g transform="translate(300, 120)">
+                <rect width="330" height="55" fill="#fef2f2" stroke="#ef4444" stroke-width="1.8" rx="6" />
+                <text x="15" y="25" font-family="sans-serif" font-size="12.5" font-weight="bold" fill="#b91c1c">Kühlung &amp; Klimatisierung (Kältemaschinen)</text>
+                <text x="15" y="44" font-family="sans-serif" font-size="11" fill="#991b1b">Klimageräte, Kaltwassersätze, Pumpen, Lüfter</text>
+                <text x="310" y="36" font-family="sans-serif" font-size="14" font-weight="bold" fill="#b91c1c" text-anchor="end">~ 30 %</text>
+            </g>
+            
+            <!-- 3. USV & Gebäude (orange) -->
+            <g transform="translate(300, 185)">
+                <rect width="330" height="55" fill="#fffbeb" stroke="#f59e0b" stroke-width="1.8" rx="6" />
+                <text x="15" y="25" font-family="sans-serif" font-size="12.5" font-weight="bold" fill="#b45309">USV-Verluste, Beleuchtung &amp; Gebäude</text>
+                <text x="15" y="44" font-family="sans-serif" font-size="11" fill="#92400e">Wechselrichter-Verluste, Transformation, Licht</text>
+                <text x="310" y="36" font-family="sans-serif" font-size="14" font-weight="bold" fill="#b45309" text-anchor="end">~ 10 %</text>
+            </g>
+            
+            <!-- Verbindungslinien -->
+            <line x1="220" y1="150" x2="260" y2="150" stroke="#64748b" stroke-width="2" />
+            <line x1="260" y1="80" x2="300" y2="80" stroke="#10b981" stroke-width="2.5" />
+            <line x1="260" y1="147" x2="300" y2="147" stroke="#ef4444" stroke-width="2.5" />
+            <line x1="260" y1="212" x2="300" y2="212" stroke="#f59e0b" stroke-width="2.5" />
+            <line x1="260" y1="80" x2="260" y2="212" stroke="#64748b" stroke-width="2" />
+            
+            <!-- Fußzeile Formel -->
+            <rect x="40" y="260" width="590" height="45" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5" rx="5" />
+            <text x="335" y="280" font-family="sans-serif" font-size="11.5" font-weight="bold" fill="#0f172a" text-anchor="middle">DCiE = (1 / PUE) · 100 % = (E_IT / E_Gesamt) · 100 %</text>
+            <text x="335" y="296" font-family="sans-serif" font-size="10.5" fill="#64748b" text-anchor="middle">Beispiel: PUE 1,60 ➔ DCiE = 62,5 % Effizienz (37,5 % entfallen auf Infrastruktur/Kühlung)</text>
+        </svg>
+        `;
+    },
+
+    // 14. USV-Dauerwandler & Akkubank
+    getUsvAkkuDiagramSvg: function() {
+        return `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 320" width="100%" height="100%">
+            <defs>
+                <marker id="usv-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                    <polygon points="0,0 10,5 0,10" fill="#1e3a8a" />
+                </marker>
+            </defs>
+            <rect width="680" height="320" fill="#f8fafc" rx="8" />
+            <text x="340" y="24" font-family="sans-serif" font-size="14" font-weight="bold" fill="#1e3a8a" text-anchor="middle">USV-Dauerwandler (Online-USV VFI) &amp; Akkubank-Dimensionierung</text>
+            
+            <!-- 230V Netz links -->
+            <g transform="translate(30, 80)">
+                <rect width="90" height="60" fill="#ffffff" stroke="#0284c7" stroke-width="2" rx="4" />
+                <text x="45" y="25" font-family="sans-serif" font-size="12" font-weight="bold" fill="#0369a1" text-anchor="middle">230V Netz</text>
+                <text x="45" y="45" font-family="monospace" font-size="11" fill="#475569" text-anchor="middle">AC (50Hz)</text>
+            </g>
+            
+            <line x1="120" y1="110" x2="160" y2="110" stroke="#1e293b" stroke-width="2" marker-end="url(#usv-arr)" />
+            
+            <!-- Gleichrichter (AC -> DC) -->
+            <g transform="translate(165, 80)">
+                <rect width="110" height="60" fill="#dbeafe" stroke="#2563eb" stroke-width="2" rx="4" />
+                <text x="55" y="25" font-family="sans-serif" font-size="12" font-weight="bold" fill="#1d4ed8" text-anchor="middle">Gleichrichter</text>
+                <text x="55" y="45" font-family="sans-serif" font-size="11" fill="#1e40af" text-anchor="middle">AC ➔ DC</text>
+            </g>
+            
+            <line x1="275" y1="110" x2="390" y2="110" stroke="#1e293b" stroke-width="2" marker-end="url(#usv-arr)" />
+            
+            <!-- Akkubank unten -->
+            <g transform="translate(230, 175)">
+                <rect width="200" height="75" fill="#fef3c7" stroke="#d97706" stroke-width="2" rx="5" />
+                <text x="100" y="22" font-family="sans-serif" font-size="12" font-weight="bold" fill="#b45309" text-anchor="middle">🔋 Akkubank (48V / 50Ah)</text>
+                <text x="100" y="42" font-family="monospace" font-size="11" fill="#92400e" text-anchor="middle">E = 48V · 50Ah = 2.400 Wh</text>
+                <text x="100" y="62" font-family="sans-serif" font-size="10.5" font-weight="bold" fill="#166534" text-anchor="middle">Nutzbar (80% DoD) = 1.920 Wh</text>
+            </g>
+            <line x1="330" y1="110" x2="330" y2="175" stroke="#d97706" stroke-width="2.5" />
+            
+            <!-- Wechselrichter (DC -> AC) -->
+            <g transform="translate(395, 80)">
+                <rect width="110" height="60" fill="#ede9fe" stroke="#7c3aed" stroke-width="2" rx="4" />
+                <text x="55" y="25" font-family="sans-serif" font-size="12" font-weight="bold" fill="#6d28d9" text-anchor="middle">Wechselrichter</text>
+                <text x="55" y="45" font-family="sans-serif" font-size="11" fill="#5b21b6" text-anchor="middle">DC ➔ AC (η=85%)</text>
+            </g>
+            
+            <line x1="505" y1="110" x2="545" y2="110" stroke="#1e293b" stroke-width="2" marker-end="url(#usv-arr)" />
+            
+            <!-- IT-Last rechts -->
+            <g transform="translate(550, 80)">
+                <rect width="100" height="60" fill="#ecfdf5" stroke="#10b981" stroke-width="2" rx="4" />
+                <text x="50" y="25" font-family="sans-serif" font-size="12" font-weight="bold" fill="#047857" text-anchor="middle">IT-Last</text>
+                <text x="50" y="45" font-family="monospace" font-size="11" font-weight="bold" fill="#065f46" text-anchor="middle">P = 1.600 W</text>
+            </g>
+            
+            <!-- Formelbox unten -->
+            <rect x="30" y="265" width="620" height="45" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2" rx="4" />
+            <text x="340" y="283" font-family="monospace" font-size="11.5" font-weight="bold" fill="#0f172a" text-anchor="middle">Autonomiezeit = (E_nutzbar / (P_Last / η)) · 60 min = (1.920 Wh / 1.882 W) · 60 min ≈ 61 min</text>
+            <text x="340" y="300" font-family="sans-serif" font-size="10.5" fill="#475569" text-anchor="middle">VFI-Prinzip (Voltage and Frequency Independent): Keine Umschaltzeit (0 ms), sauber sinusförmige Spannung.</text>
+        </svg>
+        `;
+    },
+
     getAutoDiagramSvg: function(q) {
         if (!q) return null;
         // 1. Wenn die Frage bereits eine explizite grafische Musterlösung besitzt
@@ -2476,6 +2633,17 @@ var VisualDiagrams = {
         // 11. Handelskalkulation
         if (text.includes("handelskalkulation") || text.includes("schema-treppe") || text.includes("bezugspreis")) {
             return VisualDiagrams.getKalkulationTreeSvg();
+        }
+
+        // 11b. Elektrotechnik, PUE & USV Berechnungs-Diagramme
+        if (text.includes("leistungsdreieck") || (text.includes("wirkleistung") && text.includes("blindleistung") && text.includes("scheinleistung"))) {
+            return VisualDiagrams.getLeistungsdreieckSvg();
+        }
+        if (text.includes("pue") || text.includes("dcie") || (text.includes("rechenzentrum") && text.includes("effizienz"))) {
+            return VisualDiagrams.getPueDiagramSvg();
+        }
+        if (text.includes("autonomiezeit") || (text.includes("usv") && (text.includes("akku") || text.includes("batteriebank") || text.includes("überbrückungszeit")))) {
+            return VisualDiagrams.getUsvAkkuDiagramSvg();
         }
 
         // 12. UML Sequenzdiagramm

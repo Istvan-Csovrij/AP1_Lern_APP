@@ -7712,6 +7712,233 @@ ORDER BY gesamtbetrag_eur DESC;\n\nErklärung:\n- INNER JOIN über 4 Tabellen.\n
         question: `🔥 Meisterklasse Projektcontrolling & EVM (LF 1 / LF 6):\nEin IT-Infrastrukturprojekt mit einem Budget at Completion (BAC) von 250.000 EUR und einer geplanten Laufzeit von 10 Monaten wird nach 6 Monaten auditiert. Folgende Kennzahlen liegen vor:\n- Planned Value (PV): 150.000 EUR\n- Actual Cost (AC): 175.000 EUR\n- Earned Value (EV): 120.000 EUR\n\nAufgaben:\n1. Berechnen Sie die Kostenabweichung (CV) und die Terminabweichung (SV).\n2. Berechnen Sie den Cost Performance Index (CPI) und den Schedule Performance Index (SPI).\n3. Berechnen Sie die prognostizierten Gesamtkosten (EAC = Estimate at Completion) und die voraussichtliche Restdauer in Monaten.\n4. Formulieren Sie eine präzise Handlungsempfehlung für das Management.`,
         musterloesung: `Musterlösung Earned Value Analyse:\n\n1. Abweichungen:\n- Cost Variance: CV = EV - AC = 120.000 EUR - 175.000 EUR = -55.000 EUR (Kostenüberschreitung um 55.000 EUR).\n- Schedule Variance: SV = EV - PV = 120.000 EUR - 150.000 EUR = -30.000 EUR (Terminverzug im Gegenwert von 30.000 EUR).\n\n2. Effizienz-Kennzahlen:\n- CPI = EV / AC = 120.000 / 175.000 = 0,69 (Für jeden investierten Euro werden nur 69 Cent Wert generiert).\n- SPI = EV / PV = 120.000 / 150.000 = 0,80 (Projektfortschritt beträgt 80 % der geplanten Geschwindigkeit).\n\n3. Prognosen:\n- Voraussichtliche Gesamtkosten: EAC = BAC / CPI = 250.000 EUR / 0,6857 = 364.583 EUR (Budgetüberschreitung von ca. 114.583 EUR).\n- Voraussichtliche Gesamtdauer: Geplante Dauer / SPI = 10 Monate / 0,80 = 12,5 Monate (Verzögerung um 2,5 Monate).\n\n4. Handlungsempfehlung:\n- Sofortiger Projekt-Krisenworkshop: Scope Reduction (Nicht-essenzielle Features streichen), Change-Requests stoppen und Ressourcen-Engpässe bereinigen.`,
         explanation: "CPI = EV / AC. SPI = EV / PV. EAC = BAC / CPI. CPI < 1 bedeutet Kostenüberschreitung, SPI < 1 bedeutet Terminverzug."
-    }
+    },
+    // === SPEZIAL-BEREICH: STROM, LEISTUNG & ENERGIE-EINHEITEN (LF 2 / LF 6 / LF 7 / RECHNEN) ===
+    // 7 fundamentale Einheiten mit jeweils 2 komplexen IHK-Prüfungsaufgaben
 
+    // --- Einheit 1: Watt (W) & Kilowatt (kW) / Wirkleistung (P = U · I · cos phi) ---
+    {
+        id: 416,
+        isBawueFocus: true,
+        isHard: true,
+        difficulty: "hard",
+        theme: "power-calc",
+        isPowerCalc: true,
+        isCalculation: true,
+        topic: "⚡ Einheit Watt (W): 1-Phasen-Wirkleistung & B16-Leitungsabsicherung",
+        type: "open-text",
+        solutionDiagramSvg: VisualDiagrams.getLeistungsdreieckSvg(),
+        solutionDiagramCaption: "Grafische Musterlösung: Elektrotechnisches Leistungsdreieck (P, Q, S)",
+        question: `IHK-Prüfungsaufgabe Elektrotechnik (LF 2 / BaWü - Einheit Watt & Wirkleistung):\nIn einem 19"-Serverschrank sind 10 1HE-Server eingebaut. Jeder Server besitzt eine durchschnittliche Wirkleistung von P = 350 W bei einem Leistungsfaktor von cos φ = 0,92. Das Rack wird über eine 1-phasige 230-V-Zuleitung (Wechselstrom) versorgt.\n\nAufgabe:\na) Berechne die gesamte aufgenommene Wirkleistung P_Gesamt in kW.\nb) Berechne die resultierende Scheinleistung S in kVA.\nc) Berechne die Stromstärke I in Ampere (A).\nd) Beurteile rechnerisch, ob der Stromkreis mit einem Standard-Leitungsschutzschalter B16 (16 A) dauerhaft betrieben werden kann oder ob eine Überlastung vorliegt.`,
+        musterloesung: `Musterlösung 1-Phasen-Wirkleistung & Absicherung:\n\na) Gesamte Wirkleistung (P):\n- P_Gesamt = 10 Server × 350 W = 3.500 W = 3,50 kW.\n\nb) Scheinleistung (S):\n- Formel: S = P / cos φ\n- S = 3.500 W / 0,92 ≈ 3.804,35 VA = 3,804 kVA.\n\nc) Stromstärke (I):\n- Formel: I = S / U = P / (U · cos φ)\n- I = 3.804,35 VA / 230 V ≈ 16,54 A.\n\nd) Beurteilung der B16-Absicherung:\n- Nennstrom des B16-Automaten: I_Nenn = 16,0 A.\n- Tatsächlicher Betriebsstrom: I = 16,54 A.\n- Da I (16,54 A) > I_Nenn (16,0 A) ist, wird der Leitungsschutzschalter dauerhaft überlastet (+3,4 % Überlast).\n- Konsequenz: Thermische Auslösung des Bimetall-Auslösers. Das Rack muss auf zwei getrennte 16A-Stromkreise aufgeteilt oder über einen Drehstrom- bzw. 32A-Anschluss versorgt werden.`,
+        explanation: "1-phasig Wechselstrom: P = U · I · cos φ. Scheinleistung S = U · I = P / cos φ. Dauerhafter Strom > 16 A führt zur Auslösung von B16-Automaten."
+    },
+    {
+        id: 417,
+        isBawueFocus: true,
+        isHard: true,
+        difficulty: "hard",
+        theme: "power-calc",
+        isPowerCalc: true,
+        isCalculation: true,
+        topic: "⚡ Einheit Watt (W): 3-Phasen-Drehstrom 400V (CEE 16A) für Blade-Center",
+        type: "open-text",
+        solutionDiagramSvg: VisualDiagrams.getLeistungsdreieckSvg(),
+        solutionDiagramCaption: "Grafische Musterlösung: Leistungsberechnung im 3-Phasen-Drehstromnetz (P = √3 · U · I · cos φ)",
+        question: `IHK-Prüfungsaufgabe Drehstrom (LF 2 / LF 7 - Einheit Watt & 3-Phasen-Leistung):\nEin High-Density Blade-Chassis wird an eine 3-phasige 400-V-Drehstromsteckdose (CEE 16A, 3P+N+PE, Verkettungsspannung U = 400 V) angeschlossen. An allen drei Außenleitern (L1, L2, L3) wird ein symmetrischer Phasenstrom von I = 12,5 A gemessen. Der Leistungsfaktor beträgt cos φ = 0,90.\n\nAufgabe:\na) Berechne die gesamte aufgenommene Wirkleistung P des Blade-Chassis in kW.\nb) Berechne die maximale Wirkleistung P_max, die an diesem 16A-CEE-Anschluss bei gleichem cos φ = 0,90 theoretisch dauerhaft entnommen werden darf.\nc) Nenne zwei entscheidende elektrotechnische Vorteile von 3-Phasen-Drehstrom gegenüber 1-phasigem Wechselstrom bei Serverraum-Installationen.`,
+        musterloesung: `Musterlösung 3-Phasen-Drehstrom:\n\na) Gesamte Wirkleistung (P):\n- Formel für 3-Phasen-Drehstrom: P = √3 · U · I · cos φ\n- P = √3 × 400 V × 12,5 A × 0,90\n- P ≈ 1,73205 × 400 × 12,5 × 0,90 ≈ 7.794,23 W = 7,79 kW.\n\nb) Maximale Wirkleistung an CEE 16A (I_max = 16 A):\n- P_max = √3 × 400 V × 16,0 A × 0,90\n- P_max ≈ 1,73205 × 400 × 16 × 0,90 ≈ 9.976,61 W ≈ 9,98 kW.\n\nc) Vorteile von Drehstrom im Serverraum:\n1. Höhere Leistungsübertragung: Ermöglicht fast 10 kW an einer kompakten 16A-Zuleitung (statt max. 3,68 kW bei 1-phasig 230V).\n2. Geringere Leitungsverluste & Kupferersparnis: Dünnere Kabelquerschnitte bei gleicher Leistung.\n3. Symmetrische Netzbelastung: Bei gleichmäßiger Phasenbelastung hebt sich der Neutralleiterstrom auf (I_N = 0 A).`,
+        explanation: "Drehstrom-Formel: P = √3 · U · I · cos φ mit U = 400 V (Spannung zwischen zwei Außenleitern L1-L2). √3 ≈ 1,732."
+    },
+
+    // --- Einheit 2: Voltampere (VA) / Scheinleistung (S) vs. Blindleistung (Q in var) & USV ---
+    {
+        id: 418,
+        isBawueFocus: true,
+        isHard: true,
+        difficulty: "hard",
+        theme: "power-calc",
+        isPowerCalc: true,
+        isCalculation: true,
+        topic: "⚡ Einheit Voltampere (VA): USV Schein- & Wirkleistungsgrenzen",
+        type: "open-text",
+        solutionDiagramSvg: VisualDiagrams.getLeistungsdreieckSvg(),
+        solutionDiagramCaption: "Grafische Musterlösung: Scheinleistung S (VA) vs. Wirkleistung P (W)",
+        question: `IHK-Prüfungsaufgabe USV-Dimensionierung (LF 2 / LF 6 - Einheit Voltampere VA):\nEin Systemhaus plant die unterbrechungsfreie Stromversorgung für einen Virtualisierungs-Cluster. Die angeschlossene IT-Last hat eine Gesamtwirkleistung von P = 5,2 kW bei einem Leistungsfaktor von cos φ = 0,80.\nIm Angebot befindet sich eine USV mit folgenden Hersteller-Kenndaten:\n- Nenn-Scheinleistung: S_USV = 6,0 kVA (6.000 VA)\n- Power Factor der USV: PF_USV = 0,80 (max. Wirkleistung P_USV = S_USV · PF_USV)\n\nAufgabe:\na) Berechne die aufgenommene Scheinleistung S_Last der Server-Infrastruktur in kVA.\nb) Berechne die maximale Wirkleistung P_USV, die die USV dauerhaft bereitstellen kann.\nc) Beurteile rechnerisch, ob diese USV für die IT-Last ausreicht oder überlastet wird.\nd) Welche Mindest-Scheinleistung in kVA müsste eine USV haben, wenn zusätzlich eine Leistungsreserve von 25 % für zukünftiges Server-Wachstum gefordert wird?`,
+        musterloesung: `Musterlösung USV Schein- & Wirkleistungsgrenzen:\n\na) Scheinleistung der IT-Last (S_Last):\n- Formel: S_Last = P_Last / cos φ\n- S_Last = 5,2 kW / 0,80 = 6,50 kVA (6.500 VA).\n\nb) Maximale Wirkleistung der USV (P_USV):\n- Formel: P_USV = S_USV × PF_USV\n- P_USV = 6,0 kVA × 0,80 = 4,80 kW (4.800 W).\n\nc) Überlastungsprüfung:\n- Scheinleistungs-Check: S_Last (6,5 kVA) > S_USV (6,0 kVA) ➔ Überlastung um 0,5 kVA (+8,3 %).\n- Wirkleistungs-Check: P_Last (5,2 kW) > P_USV (4,8 kW) ➔ Überlastung um 0,4 kW (+8,3 %).\n- Ergebnis: Die USV ist für die Last zu klein dimensioniert und schaltet bei Stromausfall wegen Überlast auf Bypass oder Fehler.\n\nd) Dimensionierung mit 25 % Wachstumsreserve:\n- S_Gefordert = S_Last × 1,25 = 6,50 kVA × 1,25 = 8,125 kVA.\n- Empfohlene USV-Klasse: Mindestens 8,5 kVA bzw. ein gängiges 10-kVA-Modell.`,
+        explanation: "Eine USV hat zwei getrennte Grenzwerte: Scheinleistung S (in VA) und Wirkleistung P (in W). Beide Grenzwerte dürfen von der Last niemals überschritten werden!"
+    },
+    {
+        id: 419,
+        isBawueFocus: true,
+        isHard: true,
+        difficulty: "hard",
+        theme: "power-calc",
+        isPowerCalc: true,
+        isCalculation: true,
+        topic: "⚡ Einheit Var / kVar: Blindleistung (Q) & Leistungsdreieck-Berechnung",
+        type: "open-text",
+        solutionDiagramSvg: VisualDiagrams.getLeistungsdreieckSvg(),
+        solutionDiagramCaption: "Grafische Musterlösung: Satz des Pythagoras im Leistungsdreieck (S² = P² + Q²)",
+        question: `IHK-Prüfungsaufgabe Elektrotechnik (LF 2 / LF 7 - Blindleistung Q & Leistungsfaktor):\nAn der Hauptverteilung eines Rechenzentrums wird eine Gesamt-Scheinleistung von S = 80,0 kVA bei einer Wirkleistung von P = 64,0 kW gemessen.\n\nAufgabe:\na) Berechne den aktuellen Leistungsfaktor cos φ.\nb) Berechne die im Netz vorhandene Blindleistung Q in kvar über den Satz des Pythagoras (S² = P² + Q²).\nc) Erkläre den Unterschied zwischen Wirkleistung P und Blindleistung Q.\nd) Warum fordern Energieversorger bei Großverbrauchern eine Blindleistungskompensation (cos φ ≥ 0,90)?`,
+        musterloesung: `Musterlösung Blindleistung & Leistungsfaktor:\n\na) Leistungsfaktor (cos φ):\n- Formel: cos φ = P / S\n- cos φ = 64,0 kW / 80,0 kVA = 0,80.\n\nb) Blindleistung (Q):\n- Formel nach Pythagoras: S² = P² + Q² ➔ Q = √(S² - P²)\n- Q = √((80 kVA)² - (64 kW)²)\n- Q = √(6.400 - 4.096) = √(2.304) = 48,0 kvar.\n\nc) Unterschied Wirk- vs. Blindleistung:\n- Wirkleistung P (in W/kW): Die tatsächlich in andere Energieformen (Rechenleistung, Wärme, Licht, mechanische Arbeit) umgewandelte Nutzarbeit.\n- Blindleistung Q (in var/kvar): Pendelt ungenutzt zwischen Erzeuger und Verbraucher hin und her, um elektromagnetische Felder in Transformatoren, Motoren und Schaltnetzteilen auf- und abzubauen.\n\nd) Grund für Kompensation (cos φ ≥ 0,90):\n- Blindstrom belastet Stromleitungen, Transformatoren und Schaltanlagen zusätzlich mit thermischen Verlusten (P_V = I² · R), ohne Nutzarbeit zu leisten.\n- Bei schlechtem cos φ müssen Kabel dicker dimensioniert werden; Energieversorger stellen unkompensierte Blindleistung teuer in Rechnung.`,
+        explanation: "Satz des Pythagoras im Leistungsdreieck: S = √(P² + Q²), Q = √(S² - P²), P = S · cos φ."
+    },
+
+    // --- Einheit 3: Kilowattstunde (kWh) & Megawattstunde (MWh) / Energieverbrauch & Stromkosten ---
+    {
+        id: 420,
+        isBawueFocus: true,
+        isHard: true,
+        difficulty: "hard",
+        theme: "power-calc",
+        isPowerCalc: true,
+        isCalculation: true,
+        topic: "⚡ Einheit kWh & MWh: 24/7-Serverraum Stromkosten mit Grund- & Arbeitspreis",
+        type: "open-text",
+        question: `IHK-Prüfungsaufgabe Energiekosten (LF 1 / LF 2 / LF 6 - Einheit kWh & MWh):\nEin Unternehmens-Serverraum mit 12 Servern und SAN-Storage hat eine gemessene durchschnittliche Dauerleistungsaufnahme von P = 6,5 kW im 24/7-Dauerbetrieb (365 Tage/Jahr = 8.760 Stunden).\nDer gewerbliche Stromtarif des Energieversorgers ist wie folgt aufgebaut:\n- Arbeitspreis: 0,32 € pro kWh (netto)\n- Monatlicher Grundpreis: 150,00 € (netto)\n- Umsatzsteuer: 19 %\n\nAufgabe:\na) Berechne den jährlichen Energieverbrauch in Kilowattstunden (kWh) und Megawattstunden (MWh).\nb) Berechne die gesamten jährlichen Stromkosten in Euro (Netto und Brutto inkl. MwSt.).\nc) Durch Virtualisierung wird die Dauerlast um 1,8 kW gesenkt. Berechne die jährliche Netto-Kostenersparnis in Euro.`,
+        musterloesung: `Musterlösung Stromkosten mit Grund- & Arbeitspreis:\n\na) Jährlicher Energieverbrauch (E):\n- Formel: E = P × t\n- E = 6,5 kW × 8.760 h = 56.940 kWh.\n- In MWh: 56.940 kWh / 1.000 = 56,94 MWh.\n\nb) Jährliche Stromkosten:\n1. Arbeitskosten: 56.940 kWh × 0,32 €/kWh = 18.220,80 € netto.\n2. Grundpreis: 12 Monate × 150,00 €/Monat = 1.800,00 € netto.\n3. Gesamtkosten Netto: 18.220,80 € + 1.800,00 € = 20.020,80 € netto.\n4. Gesamtkosten Brutto (+ 19 % MwSt.): 20.020,80 € × 1,19 = 23.824,75 € brutto.\n\nc) Jährliche Netto-Ersparnis bei 1,8 kW Reduktion:\n- Eingesparte Energie: 1,8 kW × 8.760 h = 15.768 kWh.\n- Ersparnis Netto: 15.768 kWh × 0,32 €/kWh = 5.045,76 € pro Jahr.`,
+        explanation: "1 MWh = 1.000 kWh = 1.000.000 Wh. Jahresbetriebsstunden = 365 Tage × 24 h = 8.760 h. Gesamtkosten = (kWh × Arbeitspreis) + (Monate × Grundpreis)."
+    },
+    {
+        id: 421,
+        isBawueFocus: true,
+        isHard: true,
+        difficulty: "hard",
+        theme: "power-calc",
+        isPowerCalc: true,
+        isCalculation: true,
+        topic: "⚡ Einheit kWh: Client-Flotte Betriebszeit vs. Standby-Kostenanalyse",
+        type: "open-text",
+        question: `IHK-Prüfungsaufgabe Green-IT (LF 2 / LF 6 - Energie- & Standby-Analyse):\nEin Unternehmen betreibt 300 Büro-Workstations.\n- Betriebszeit: 220 Arbeitstage pro Jahr mit je 8,5 Betriebsstunden. Leistungsaufnahme im Betrieb: 90 W pro PC.\n- Außerhalb der Arbeitszeit: In der verbleibenden Jahreszeit (Jahr = 8.760 h) verbleiben alle PCs im Standby-Modus mit einer Leistungsaufnahme von 5 W pro PC.\n- Strompreis: 0,36 € pro kWh netto.\n\nAufgabe:\na) Berechne die jährliche Betriebszeit und die jährliche Standby-Zeit in Stunden.\nb) Berechne den jährlichen Energieverbrauch aller 300 PCs getrennt nach Betrieb und Standby in kWh.\nc) Berechne die jährlichen Stromkosten getrennt nach Betrieb und Standby sowie den prozentualen Standby-Kostenanteil an den Gesamtkosten der PC-Flotte.`,
+        musterloesung: `Musterlösung Client-Flotte Betriebs- vs. Standby-Kosten:\n\na) Stunden-Aufteilung pro Jahr:\n- Betriebszeit: 220 Tage × 8,5 h/Tag = 1.870 h.\n- Standby-Zeit: 8.760 h (Gesamtjahr) - 1.870 h = 6.890 h.\n\nb) Jährlicher Energieverbrauch (für 300 PCs):\n- Betrieb: 300 PCs × 0,090 kW × 1.870 h = 27 kW × 1.870 h = 50.490 kWh.\n- Standby: 300 PCs × 0,005 kW × 6.890 h = 1,5 kW × 6.890 h = 10.335 kWh.\n- Gesamtverbrauch: 50.490 kWh + 10.335 kWh = 60.825 kWh.\n\nc) Kosten & Prozentanteil:\n- Kosten Betrieb: 50.490 kWh × 0,36 €/kWh = 18.176,40 €.\n- Kosten Standby: 10.335 kWh × 0,36 €/kWh = 3.720,60 €.\n- Gesamtkosten: 18.176,40 € + 3.720,60 € = 21.897,00 € pro Jahr.\n- Standby-Kostenanteil: (3.720,60 € / 21.897,00 €) × 100 % ≈ 16,99 %.\n(Erkenntnis: Rund 17 % der Stromkosten entstehen durch Geräte im Leerlauf!).`,
+        explanation: "Standby-Zeiten summieren sich über das Jahr massiv auf (fast 6.900 Stunden). Abschaltbare Steckdosenleisten oder automatisches Herunterfahren sparen bares Geld."
+    },
+
+    // --- Einheit 4: Amperestunde (Ah) & Wattstunde (Wh) / USV-Autonomiezeit & Akku-Auslegung ---
+    {
+        id: 422,
+        isBawueFocus: true,
+        isHard: true,
+        difficulty: "hard",
+        theme: "power-calc",
+        isPowerCalc: true,
+        isCalculation: true,
+        topic: "⚡ Einheit Ah & Wh: USV-Autonomiezeit mit Entladetiefe & Wirkungsgrad",
+        type: "open-text",
+        solutionDiagramSvg: VisualDiagrams.getUsvAkkuDiagramSvg(),
+        solutionDiagramCaption: "Grafische Musterlösung: USV-Dauerwandler & Akkubank-Berechnung",
+        question: `IHK-Prüfungsaufgabe USV-Berechnung (LF 2 / LF 7 - Einheiten Ah & Wh):\nEine Online-USV (VFI Dauerwandler) besitzt eine Batteriebank aus 4 in Reihe geschalteten 12-V-Bleiakkus mit je 50 Ah Kapazität (Batteriespannung U_Bank = 4 × 12 V = 48 V).\nBei Stromausfall muss eine konstante IT-Last von P_Last = 1.600 W versorgt werden.\nFolgende Parameter sind gegeben:\n- Wirkungsgrad des Wechselrichters: η = 85 % (0,85)\n- Maximale nutzbare Entladetiefe (DoD): 80 % (0,80) zum Schutz vor Tiefentladung.\n\nAufgabe:\na) Berechne die gesamte theoretische Energie der Akkubank in Wattstunden (Wh).\nb) Berechne die nutzbare Energie E_nutzbar unter Berücksichtigung der Entladetiefe.\nc) Berechne die von der Batterie geforderte elektrische Leistung P_Batt unter Einbeziehung des Wirkungsgrades.\nd) Berechne die reale Überbrückungszeit (Autonomiezeit) in Minuten.`,
+        musterloesung: `Musterlösung USV-Autonomiezeit mit DoD & Wirkungsgrad:\n\na) Gesamte theoretische Batterie-Energie (E_Gesamt):\n- Formel: E = U × Q\n- E_Gesamt = 48 V × 50 Ah = 2.400 Wh (2,40 kWh).\n\nb) Nutzbare Energie bei 80 % Entladetiefe (DoD):\n- E_nutzbar = 2.400 Wh × 0,80 = 1.920 Wh.\n\nc) Von der Batterie geforderte Entladeleistung (P_Batt):\n- Formel: P_Batt = P_Last / η\n- P_Batt = 1.600 W / 0,85 ≈ 1.882,35 W.\n\nd) Autonomiezeit (t):\n- In Stunden: t_h = E_nutzbar / P_Batt = 1.920 Wh / 1.882,35 W ≈ 1,020 h.\n- In Minuten: t_min = 1,020 h × 60 min/h ≈ 61,2 Minuten (ca. 1 Stunde und 1 Minute).`,
+        explanation: "Energie E (Wh) = Spannung U (V) · Ladungsmenge Q (Ah). Last an der Batterie = P_Last / Wirkungsgrad. Autonomiezeit t = E_nutzbar / P_Batt."
+    },
+    {
+        id: 423,
+        isBawueFocus: true,
+        isHard: true,
+        difficulty: "hard",
+        theme: "power-calc",
+        isPowerCalc: true,
+        isCalculation: true,
+        topic: "⚡ Einheit Ah & Wh: Akkubank-Dimensionierung für geforderte Pufferzeit",
+        type: "open-text",
+        solutionDiagramSvg: VisualDiagrams.getUsvAkkuDiagramSvg(),
+        solutionDiagramCaption: "Grafische Musterlösung: USV-Akkubank Auslegung und Verschaltung",
+        question: `IHK-Prüfungsaufgabe USV-Planung (LF 2 / LF 6 - Akkubank-Dimensionierung):\nEin Core-Netzwerkschrank mit Switch- und Router-Hardware zieht eine konstante Wirkleistung von P = 750 W.\nBei Stromausfall muss die USV das System für mindestens t = 45 Minuten (0,75 h) unterbrechungsfrei puffern, bis das Notstromaggregat anspringt.\nDie USV arbeitet mit einer DC-Systemspannung von U = 24 V.\n- Wirkungsgrad der USV: η = 88 % (0,88)\n- Alterungs- und Sicherheitsreserve für die Akkus: +25 % (Faktor 1,25)\n\nAufgabe:\na) Berechne die an der Last benötigte Netto-Energie E_nutz in Wh.\nb) Berechne die erforderliche Brutto-Energie E_Brutto aus den Akkus inklusive Wirkungsgrad und 25 % Alterungsreserve.\nc) Berechne die erforderliche Mindestkapazität der 24-V-Batteriebank in Amperestunden (Ah).\nd) Es stehen Standardakkus mit 12 V / 26 Ah zur Verfügung. Wie viele Akkus werden mindestens benötigt und wie müssen diese verschaltet werden?`,
+        musterloesung: `Musterlösung Akkubank-Dimensionierung:\n\na) Netto-Energie an der Last (E_nutz):\n- E_nutz = P × t = 750 W × 0,75 h = 562,5 Wh.\n\nb) Erforderliche Brutto-Energie aus den Akkus (E_Brutto):\n- Formel: E_Brutto = (E_nutz / η) × 1,25\n- E_Brutto = (562,5 Wh / 0,88) × 1,25 ≈ 639,20 Wh × 1,25 = 799,0 Wh.\n\nc) Mindestkapazität bei 24 V (Q):\n- Formel: Q = E_Brutto / U_System\n- Q = 799,0 Wh / 24 V ≈ 33,29 Ah.\n\nd) Auswahl und Verschaltung der Akkus (12 V / 26 Ah):\n- Energie eines einzelnen Akkus: 12 V × 26 Ah = 312 Wh.\n- Für 24 V Systemspannung müssen jeweils 2 Akkus in Reihe (Strang) geschaltet werden (2 × 12 V = 24 V / 26 Ah = 624 Wh).\n- Da 624 Wh < 799 Wh ist, reicht 1 Strang nicht aus.\n- Es werden 2 parallele Stränge benötigt (2 × 2 = 4 Akkus): 24 V / 52 Ah = 1.248 Wh (1.248 Wh > 799 Wh).\n- Ergebnis: Es werden mindestens 4 Akkus (2 parallele Stränge aus je 2 in Reihe geschalteten Akkus) benötigt.`,
+        explanation: "Reihenschaltung verdoppelt die Spannung (U_ges = U1 + U2, Ah bleibt gleich). Parallelschaltung verdoppelt die Kapazität (Ah_ges = Ah1 + Ah2, V bleibt gleich)."
+    },
+
+    // --- Einheit 5: Power Usage Effectiveness (PUE) & Rechenzentrum-Effizienz ---
+    {
+        id: 424,
+        isBawueFocus: true,
+        isHard: true,
+        difficulty: "hard",
+        theme: "power-calc",
+        isPowerCalc: true,
+        isCalculation: true,
+        topic: "⚡ Einheit PUE & DCiE: Effizienzberechnung & Kaltgang-Einsparpotenzial",
+        type: "open-text",
+        solutionDiagramSvg: VisualDiagrams.getPueDiagramSvg(),
+        solutionDiagramCaption: "Grafische Musterlösung: PUE & DCiE Energiefluss im Rechenzentrum",
+        question: `IHK-Prüfungsaufgabe Rechenzentrum-Effizienz (LF 2 / LF 6 - Kennzahlen PUE & DCiE):\nEin Rechenzentrum verbraucht pro Jahr eine Gesamtenergie von E_Gesamt = 3.600.000 kWh (3,6 GWh).\nDie reine IT-Infrastruktur (Server, Storage, Netzwerk) benötigt davon E_IT = 2.250.000 kWh.\nDer restliche Strom entfällt auf Klimatisierung, USV-Verluste und Beleuchtung. Strompreis: 0,28 €/kWh netto.\n\nAufgabe:\na) Berechne den PUE-Wert (Power Usage Effectiveness) des Rechenzentrums.\nb) Berechne den DCiE-Wert (Data Center Infrastructure Efficiency) in Prozent (%).\nc) Durch den Einbau einer Kaltgangeinhausung und Freikühlung kann der PUE-Wert auf 1,20 gesenkt werden (bei unveränderter IT-Last von 2.250.000 kWh).\n   Berechne den neuen Gesamtstromverbrauch und die jährliche Kosteneinsparung in Euro.`,
+        musterloesung: `Musterlösung PUE & DCiE Effizienz:\n\na) PUE-Wert (Power Usage Effectiveness):\n- Formel: PUE = E_Gesamt / E_IT\n- PUE = 3.600.000 kWh / 2.250.000 kWh = 1,60.\n\nb) DCiE-Wert (Data Center Infrastructure Efficiency):\n- Formel: DCiE = (E_IT / E_Gesamt) × 100 % = (1 / PUE) × 100 %\n- DCiE = (2.250.000 / 3.600.000) × 100 % = (1 / 1,60) × 100 % = 62,5 %.\n\nc) Neuer Gesamtverbrauch & Kosteneinsparung:\n1. Neuer Gesamtverbrauch: E_Gesamt_neu = E_IT × PUE_neu = 2.250.000 kWh × 1,20 = 2.700.000 kWh.\n2. Eingesparte Energie: 3.600.000 kWh - 2.700.000 kWh = 900.000 kWh pro Jahr.\n3. Jährliche Kosteneinsparung: 900.000 kWh × 0,28 €/kWh = 252.000,00 € netto pro Jahr.`,
+        explanation: "PUE = E_Gesamt / E_IT. DCiE = 1 / PUE. Der ideale PUE ist 1,0 (100 % des Stroms gehen direkt in die IT). Moderne RZs erreichen 1,15 bis 1,25."
+    },
+    {
+        id: 425,
+        isBawueFocus: true,
+        isHard: true,
+        difficulty: "hard",
+        theme: "power-calc",
+        isPowerCalc: true,
+        isCalculation: true,
+        topic: "⚡ Einheit PUE & CO2: RZ-Aufschlüsselung & CO2-Bilanzierung",
+        type: "open-text",
+        solutionDiagramSvg: VisualDiagrams.getPueDiagramSvg(),
+        solutionDiagramCaption: "Grafische Musterlösung: Energieaufteilung & PUE-Struktur",
+        question: `IHK-Prüfungsaufgabe RZ-Infrastruktur (LF 2 / LF 6 - PUE & CO2-Bilanz):\nFür ein Firmen-Rechenzentrum liegt folgende monatliche Energiebilanz vor:\n- IT-Hardware (Server, Storage, Switche): 40.000 kWh\n- Kältemaschinen, Pumpen und Ventilatoren: 22.000 kWh\n- USV-Wandlungsverluste & Batterieladung: 4.000 kWh\n- Beleuchtung, Zutrittskontrolle & Sicherheitsanlagen: 2.000 kWh\nDer Strombezug verursacht laut Strommix 380 g CO2 pro kWh.\n\nAufgabe:\na) Berechne den monatlichen Gesamtenergieverbrauch E_Gesamt in kWh.\nb) Berechne den monatlichen PUE-Wert.\nc) Berechne die gesamten jährlichen CO2-Emissionen des Rechenzentrums in Tonnen (t).\nd) Nenne zwei konkrete bauliche oder betriebliche Maßnahmen zur Senkung des PUE-Werts.`,
+        musterloesung: `Musterlösung PUE & CO2-Bilanzierung:\n\na) Monatlicher Gesamtenergieverbrauch:\n- E_Gesamt = 40.000 + 22.000 + 4.000 + 2.000 = 68.000 kWh pro Monat.\n\nb) PUE-Wert:\n- PUE = E_Gesamt / E_IT = 68.000 kWh / 40.000 kWh = 1,70.\n\nc) Jährliche CO2-Emissionen:\n- Jährlicher Gesamtverbrauch: 68.000 kWh/Monat × 12 Monate = 816.000 kWh.\n- CO2-Gesamtmenge: 816.000 kWh × 0,380 kg CO2/kWh = 310.080 kg CO2 = 310,08 Tonnen CO2 pro Jahr.\n\nd) Maßnahmen zur PUE-Senkung:\n1. Kaltgang- oder Warmgangeinhausung: Verhindert die Vermischung von Kalt- und Warmluft, erhöht die Kühleffizienz.\n2. Anhebung der Raum-Solltemperatur (z. B. auf 24-27 °C nach ASHRAE-Empfehlung): Spart massiv Kälteleistung.\n3. Nutzung von indirekter Freikühlung (Free Cooling): Kühlen mit kalter Außenluft ohne Kältemaschine.`,
+        explanation: "CO2-Berechnung: kWh × Emissionsfaktor (in kg/kWh). 1.000 kg = 1 Tonne CO2."
+    },
+
+    // --- Einheit 6: Wärmeleistung & Kühlung (Watt, BTU/h & Kälteleistung kW_th) ---
+    {
+        id: 426,
+        isBawueFocus: true,
+        isHard: true,
+        difficulty: "hard",
+        theme: "power-calc",
+        isPowerCalc: true,
+        isCalculation: true,
+        topic: "⚡ Einheit BTU/h & kW_th: Serverraum-Wärmelast & N+1 Klimadimensionierung",
+        type: "open-text",
+        question: `IHK-Prüfungsaufgabe Klimatisierung (LF 2 / LF 7 - Einheiten kW_th & BTU/h):\nIn einem neu eingerichteten Serverraum werden 6 Serverschränke betrieben.\n- Jeder Schrank hat eine durchschnittliche elektrische Dauerleistung von P_Schrank = 2,8 kW.\n- Die gesamte elektrische Energie wird zu nahezu 100 % in Wärme umgewandelt (P_el ≈ P_thermisch).\n- USV-Anlage und Allgemeinbeleuchtung erzeugen weitere 2,2 kW Abwärme.\n- Für Temperaturspitzen und Raumabwärme ist ein Sicherheitszuschlag von 15 % einzuplanen.\n- Umrechnungsfaktor: 1 kW = 3.412 BTU/h.\n\nAufgabe:\na) Berechne die gesamte abzuführende thermische Wärmelast in kW_th.\nb) Berechne die Wärmelast in BTU/h (British Thermal Units per Hour).\nc) Es sollen modulare Präzisionsklimageräte mit je 6,0 kW Kälteleistung installiert werden. Wie viele Klimageräte müssen installiert werden, wenn eine N+1-Redundanz (Ausfallsicherheit bei Wartung oder Defekt) gefordert ist?`,
+        musterloesung: `Musterlösung Wärmelast in kW_th, BTU/h & N+1:\n\na) Gesamte thermische Wärmelast (P_Kühl):\n- Racks: 6 Schränke × 2,8 kW = 16,8 kW.\n- USV & Beleuchtung: 2,2 kW.\n- Grundwärmelast: 16,8 kW + 2,2 kW = 19,0 kW.\n- Mit +15 % Sicherheitszuschlag: P_Kühl = 19,0 kW × 1,15 = 21,85 kW_th.\n\nb) Wärmelast in BTU/h:\n- Formel: Wärmelast = kW × 3.412 BTU/h\n- Wärmelast = 21,85 kW × 3.412 BTU/(h · kW) ≈ 74.552,2 BTU/h.\n\nc) Dimensionierung mit N+1-Redundanz:\n- Erforderliche Basiseinheiten (N): 21,85 kW / 6,0 kW = 3,64 ➔ 4 Geräte für den Normalbetrieb (4 × 6 kW = 24 kW ≥ 21,85 kW).\n- Mit N+1-Redundanz: N + 1 = 4 + 1 = 5 Klimageräte.\n- Ergebnis: Es müssen mindestens 5 Klimageräte installiert werden.`,
+        explanation: "Elektrische Energie wird im Server zu fast 100 % in Wärme umgewandelt. N+1 bedeutet: N Einheiten decken die Volllast ab, +1 Einheit steht als Ausfallreserve bereit."
+    },
+    {
+        id: 427,
+        isBawueFocus: true,
+        isHard: true,
+        difficulty: "hard",
+        theme: "power-calc",
+        isPowerCalc: true,
+        isCalculation: true,
+        topic: "⚡ Einheit EER: Leistungszahl & Stromkosten der Kälteerzeugung",
+        type: "open-text",
+        question: `IHK-Prüfungsaufgabe Klimatechnik (LF 2 / LF 6 - Kennzahl EER):\nEin Serverraum erzeugt rund um die Uhr (8.760 h/Jahr) eine konstante thermische Abwärme von P_thermisch = 15,0 kW, die vollständig durch eine Split-Klimaanlage abgeführt werden muss.\nDie installierte Klimaanlage besitzt eine Energieeffizienzzahl von EER = 3,2 (Energy Efficiency Ratio = Verhältnis von Kälteleistung zu elektrischer Leistungsaufnahme: EER = P_Kälte / P_el).\nStrompreis: 0,34 €/kWh netto.\n\nAufgabe:\na) Berechne die elektrische Leistungsaufnahme P_el der Klimaanlage in kW.\nb) Berechne den jährlichen Stromverbrauch der Klimaanlage in kWh.\nc) Berechne die jährlichen Stromkosten der Kühlung in Euro.\nd) Wie viel Euro Stromkosten spart das Unternehmen pro Jahr, wenn die Klimaanlage durch ein hocheffizientes System mit EER = 4,8 ersetzt wird?`,
+        musterloesung: `Musterlösung EER-Kühlkosten:\n\na) Elektrische Leistungsaufnahme der Klimaanlage (P_el):\n- Formel: EER = P_Kälte / P_el ➔ P_el = P_Kälte / EER\n- P_el = 15,0 kW / 3,2 = 4,6875 kW_el.\n\nb) Jährlicher Stromverbrauch der Klimaanlage:\n- E_Klima = P_el × 8.760 h = 4,6875 kW × 8.760 h = 41.062,5 kWh.\n\nc) Jährliche Stromkosten der Kühlung:\n- Kosten = 41.062,5 kWh × 0,34 €/kWh = 13.961,25 € pro Jahr.\n\nd) Einsparung bei EER = 4,8:\n1. Neue elektrische Leistung: P_el_neu = 15,0 kW / 4,8 = 3,125 kW_el.\n2. Neuer Jahresverbrauch: 3,125 kW × 8.760 h = 27.375 kWh.\n3. Eingesparte Energie: 41.062,5 kWh - 27.375 kWh = 13.687,5 kWh pro Jahr.\n4. Jährliche Ersparnis: 13.687,5 kWh × 0,34 €/kWh = 4.653,75 € netto pro Jahr.`,
+        explanation: "EER (Energy Efficiency Ratio) gibt an, wie viel Kälteleistung (in kW) pro 1 kW elektrischem Strom erzeugt wird. Je höher der EER, desto sparsamer die Klimaanlage."
+    },
+
+    // --- Einheit 7: Ohm (Ω) & Spannungsabfall (ΔU in Volt & %) auf Zuleitungen ---
+    {
+        id: 428,
+        isBawueFocus: true,
+        isHard: true,
+        difficulty: "hard",
+        theme: "power-calc",
+        isPowerCalc: true,
+        isCalculation: true,
+        topic: "⚡ Einheit Ohm (Ω) & Volt: Spannungsabfall auf Kupferleitung nach DIN VDE",
+        type: "open-text",
+        question: `IHK-Prüfungsaufgabe Leitungsberechnung (LF 2 / LF 7 - Ohm & Spannungsabfall ΔU):\nEin Serverschrank wird über eine l = 35 m lange 1-phasige Wechselstromleitung (Nennspannung U_Nenn = 230 V) mit einem Leitungsquerschnitt von A = 2,5 mm² an die Unterverteilung angeschlossen.\nDer spezifische elektrische Widerstand von Kupfer beträgt ρ = 0,0178 (Ω · mm²) / m.\nDie Serverlast im Schrank zieht bei Spitzenlast einen Strom von I = 14,5 A.\n(Beachte: Bei 1-phasigem Wechselstrom durchfließt der Strom Hin- und Rückleiter, wirksame Leitungslänge = 2 · l = 70 m).\n\nAufgabe:\na) Berechne den elektrischen Gesamtwiderstand R_Leitung des Kabels in Ohm (Ω).\nb) Berechne den absoluten Spannungsabfall ΔU auf der Leitung in Volt (V).\nc) Berechne den relativen Spannungsabfall ΔU_% in Prozent und beurteile, ob der nach DIN VDE 0100-520 maximal zulässige Grenzwert von 3,0 % für Endstromkreise eingehalten wird.`,
+        musterloesung: `Musterlösung Spannungsabfall nach DIN VDE:\n\na) Leitungswiderstand (R_Leitung):\n- Formel: R = (ρ · 2 · l) / A\n- R = (0,0178 (Ω·mm²)/m × 2 × 35 m) / 2,5 mm²\n- R = (0,0178 × 70) / 2,5 = 1,246 / 2,5 = 0,4984 Ω.\n\nb) Absoluter Spannungsabfall (ΔU):\n- Formel: ΔU = R_Leitung × I\n- ΔU = 0,4984 Ω × 14,5 A ≈ 7,227 V ≈ 7,23 V.\n\nc) Relativer Spannungsabfall (ΔU_%):\n- Formel: ΔU_% = (ΔU / U_Nenn) × 100 %\n- ΔU_% = (7,227 V / 230 V) × 100 % ≈ 3,14 %.\n\nBeurteilung nach DIN VDE 0100-520:\n- Maximal zulässiger Grenzwert: 3,0 % (entspricht max. 6,90 V bei 230 V).\n- Ergebnis: Mit 3,14 % wird der zulässige Grenzwert überschritten!\n- Abhilfemaßnahme: Erhöhung des Leitungsquerschnitts auf A = 4,0 mm² (dann beträgt R = 0,3115 Ω und ΔU_% ≈ 1,96 % ≤ 3,0 %).`,
+        explanation: "1-phasiger Spannungsfall: ΔU = (2 · l · I · ρ) / A. Relativer Spannungsfall ΔU_% = ΔU / U_Nenn · 100 %. DIN VDE 0100-520 fordert max. 3 % für Endstromkreise."
+    },
+    {
+        id: 429,
+        isBawueFocus: true,
+        isHard: true,
+        difficulty: "hard",
+        theme: "power-calc",
+        isPowerCalc: true,
+        isCalculation: true,
+        topic: "⚡ Einheit Watt (W): Leitungsverlustleistung (P_v = I² · R) & Querschnittstausch",
+        type: "open-text",
+        question: `IHK-Prüfungsaufgabe Leitungsverluste (LF 2 / LF 6 - Verlustleistung P = I² · R):\nEin PoE+-Switch versorgt 24 Access Points und Überwachungskameras. Über die 30 m lange Zuleitung (A = 1,5 mm², Gesamtwiderstand Hin- und Rückleiter R = 0,712 Ω) fließt im 24/7-Dauerbetrieb (8.760 h/Jahr) ein konstanter Strom von I = 13,0 A. Strompreis: 0,35 €/kWh netto.\n\nAufgabe:\na) Berechne die in der Zuleitung entstehende thermische Verlustleistung P_Verlust = I² · R in Watt.\nb) Berechne die in einem Jahr in der Wand als Verlustwärme verbrauchte Energie in kWh und die daraus resultierenden jährlichen Verlustkosten in Euro.\nc) Wird das Kabel gegen einen Querschnitt von A = 2,5 mm² (neuer Widerstand R_neu = 0,427 Ω) getauscht: Wie hoch ist die jährliche Kosteneinsparung in Euro?`,
+        musterloesung: `Musterlösung Leitungsverlustleistung & Querschnittsoptimierung:\n\na) Verlustleistung in der Leitung (P_Verlust):\n- Formel: P_Verlust = I² × R\n- P_Verlust = (13,0 A)² × 0,712 Ω = 169 × 0,712 = 120,328 W ≈ 120,33 W.\n\nb) Jährliche Verlustenergie und Kosten (1,5 mm²):\n- Energieverlust: E_Verlust = 0,120328 kW × 8.760 h ≈ 1.054,07 kWh pro Jahr.\n- Jährliche Verlustkosten: 1.054,07 kWh × 0,35 €/kWh ≈ 368,92 € pro Jahr.\n\nc) Neue Verlustleistung und Ersparnis bei 2,5 mm²:\n1. Neue Verlustleistung: P_neu = (13,0 A)² × 0,427 Ω = 169 × 0,427 = 72,163 W = 0,072163 kW.\n2. Neuer Jahresenergieverlust: 0,072163 kW × 8.760 h ≈ 632,15 kWh pro Jahr.\n3. Neue Jahreskosten: 632,15 kWh × 0,35 €/kWh ≈ 221,25 € pro Jahr.\n4. Jährliche Ersparnis: 368,92 € - 221,25 € = 147,67 € netto pro Jahr.`,
+        explanation: "Leitungsverluste steigen quadratisch mit dem Strom (I²). Ein größerer Leitungsquerschnitt verringert den Widerstand R und spart im 24/7-Betrieb messbar Stromkosten."
+    }
 ];
