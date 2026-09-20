@@ -21,30 +21,30 @@
     }
   </style>
 </head>
-<body class="bg-slate-50 text-slate-900 antialiased p-4 sm:p-6 font-sans">
+<body class="bg-slate-50 text-slate-900 antialiased p-4 sm:p-6 font-sans text-base">
   <div class="max-w-6xl mx-auto space-y-6">
 
     <!-- Header Card -->
-    <div class="bg-white text-slate-900 border border-slate-200 rounded-2xl p-6 shadow-sm">
+    <div class="bg-white text-slate-900 border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm">
       <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <div class="flex items-center gap-2 mb-1">
-            <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-sky-500/10 text-sky-600 border border-sky-500/20">
+            <span class="px-3 py-1 rounded-full text-sm font-semibold bg-sky-500/10 text-sky-600 border border-sky-500/20">
               IHK Prüfungsvorbereitung AP1 & AP2
             </span>
-            <span class="text-xs text-slate-500">Version 2.0 (Inkl. Mini-Aufgaben Trainer)</span>
+            <span class="text-sm text-slate-500">Version 2.1 (Optimierte Lesbarkeit &amp; Schriftgröße)</span>
           </div>
           <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">IHK Rechen- &amp; Einheiten-Trainer</h1>
-          <p class="text-sm text-slate-500 mt-1">
+          <p class="text-base text-slate-600 mt-1.5">
             Löse gezielte <strong>Mini-Aufgaben</strong> zu atomaren Prüfungs-Schritten oder lies die Formel-Erklärungen nach.
           </p>
         </div>
         <div class="flex items-center gap-3">
           <div class="text-right hidden sm:block">
-            <div class="text-xs text-slate-500">Lernmethode</div>
-            <div class="text-sm font-semibold text-sky-600">Interaktive Mini-Aufgaben</div>
+            <div class="text-sm text-slate-500">Lernmethode</div>
+            <div class="text-base font-bold text-sky-600">Interaktive Mini-Aufgaben</div>
           </div>
-          <div class="p-3 bg-sky-50 text-sky-600 rounded-xl border border-sky-200 text-xl font-bold">
+          <div class="p-3.5 bg-sky-50 text-sky-600 rounded-xl border border-sky-200 text-2xl font-bold">
             🎯
           </div>
         </div>
@@ -52,19 +52,19 @@
 
       <!-- Navigation Tabs (Mini-Aufgaben ist Tab 1!) -->
       <div class="mt-6 border-b border-slate-200 flex flex-wrap gap-2">
-        <button onclick="switchTab('mini')" id="tab-btn-mini" class="tab-btn px-4 py-2.5 text-sm font-bold rounded-t-lg border-b-2 border-sky-600 text-sky-600 bg-sky-50/50 transition-all flex items-center gap-1.5">
+        <button onclick="switchTab('mini')" id="tab-btn-mini" class="tab-btn px-5 py-3 text-base font-bold rounded-t-lg border-b-2 border-sky-600 text-sky-600 bg-sky-50/50 transition-all flex items-center gap-2">
           <span>🎯</span> Mini-Aufgaben (Sofort üben)
         </button>
-        <button onclick="switchTab('elektro')" id="tab-btn-elektro" class="tab-btn px-4 py-2.5 text-sm font-medium rounded-t-lg border-b-2 border-transparent text-slate-500 hover:text-slate-800 transition-all">
+        <button onclick="switchTab('elektro')" id="tab-btn-elektro" class="tab-btn px-5 py-3 text-base font-medium rounded-t-lg border-b-2 border-transparent text-slate-600 hover:text-slate-900 transition-all">
           ⚡ Formeln: USV &amp; Strom
         </button>
-        <button onclick="switchTab('kaufmaennisch')" id="tab-btn-kaufmaennisch" class="tab-btn px-4 py-2.5 text-sm font-medium rounded-t-lg border-b-2 border-transparent text-slate-500 hover:text-slate-800 transition-all">
+        <button onclick="switchTab('kaufmaennisch')" id="tab-btn-kaufmaennisch" class="tab-btn px-5 py-3 text-base font-medium rounded-t-lg border-b-2 border-transparent text-slate-600 hover:text-slate-900 transition-all">
           💶 Formeln: Handelskalkulation &amp; Skonto
         </button>
-        <button onclick="switchTab('wirtschaft')" id="tab-btn-wirtschaft" class="tab-btn px-4 py-2.5 text-sm font-medium rounded-t-lg border-b-2 border-transparent text-slate-500 hover:text-slate-800 transition-all">
+        <button onclick="switchTab('wirtschaft')" id="tab-btn-wirtschaft" class="tab-btn px-5 py-3 text-base font-medium rounded-t-lg border-b-2 border-transparent text-slate-600 hover:text-slate-900 transition-all">
           📈 Formeln: Amortisationszeit &amp; ROI
         </button>
-        <button onclick="switchTab('it')" id="tab-btn-it" class="tab-btn px-4 py-2.5 text-sm font-medium rounded-t-lg border-b-2 border-transparent text-slate-500 hover:text-slate-800 transition-all">
+        <button onclick="switchTab('it')" id="tab-btn-it" class="tab-btn px-5 py-3 text-base font-medium rounded-t-lg border-b-2 border-transparent text-slate-600 hover:text-slate-900 transition-all">
           💾 Formeln: IT-Einheiten &amp; Daten
         </button>
       </div>
@@ -74,122 +74,122 @@
     <div id="tab-content-mini" class="tab-pane space-y-6">
       
       <!-- Themen-Filter Leiste für Mini-Aufgaben -->
-      <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm space-y-3">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-          <div class="text-xs font-bold uppercase tracking-wider text-slate-500">Wähle einen Bereich für Mini-Aufgaben:</div>
+      <div class="bg-white border border-slate-200 rounded-2xl p-5 sm:p-6 shadow-sm space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div class="text-sm font-bold uppercase tracking-wider text-slate-700">Wähle einen Bereich für Mini-Aufgaben:</div>
           <!-- Score Counter -->
-          <div class="flex items-center gap-3 text-xs font-mono">
-            <span class="px-2.5 py-1 rounded bg-emerald-50 border border-emerald-200 text-emerald-700 font-bold">
+          <div class="flex items-center gap-3 text-sm font-mono">
+            <span class="px-3 py-1.5 rounded-lg bg-emerald-50 border border-emerald-200 text-emerald-800 font-bold">
               ✅ Richtig: <span id="score-correct">0</span>
             </span>
-            <span class="px-2.5 py-1 rounded bg-rose-50 border border-rose-200 text-rose-700 font-bold">
+            <span class="px-3 py-1.5 rounded-lg bg-rose-50 border border-rose-200 text-rose-800 font-bold">
               ❌ Falsch: <span id="score-wrong">0</span>
             </span>
-            <span class="px-2.5 py-1 rounded bg-amber-50 border border-amber-200 text-amber-700 font-bold">
+            <span class="px-3 py-1.5 rounded-lg bg-amber-50 border border-amber-200 text-amber-800 font-bold">
               🔥 Serie: <span id="score-streak">0</span>
             </span>
           </div>
         </div>
 
-        <div class="flex flex-wrap gap-1.5 pt-1" id="topic-pills-container">
-          <button onclick="selectMiniTopic('all')" class="topic-pill active px-3 py-1.5 text-xs font-medium rounded-lg border border-slate-300 bg-white hover:bg-slate-100 transition-all" data-topic="all">
+        <div class="flex flex-wrap gap-2 pt-1" id="topic-pills-container">
+          <button onclick="selectMiniTopic('all')" class="topic-pill active px-3.5 py-2 text-sm font-semibold rounded-xl border border-slate-300 bg-white hover:bg-slate-100 transition-all" data-topic="all">
             🎲 Alle gemischt
           </button>
-          <button onclick="selectMiniTopic('zeit_min')" class="topic-pill px-3 py-1.5 text-xs font-medium rounded-lg border border-slate-300 bg-white hover:bg-slate-100 transition-all" data-topic="zeit_min">
+          <button onclick="selectMiniTopic('zeit_min')" class="topic-pill px-3.5 py-2 text-sm font-semibold rounded-xl border border-slate-300 bg-white hover:bg-slate-100 transition-all" data-topic="zeit_min">
             ⏱️ Zeit (3,2 h in Min)
           </button>
-          <button onclick="selectMiniTopic('akku_formel')" class="topic-pill px-3 py-1.5 text-xs font-medium rounded-lg border border-slate-300 bg-white hover:bg-slate-100 transition-all" data-topic="akku_formel">
+          <button onclick="selectMiniTopic('akku_formel')" class="topic-pill px-3.5 py-2 text-sm font-semibold rounded-xl border border-slate-300 bg-white hover:bg-slate-100 transition-all" data-topic="akku_formel">
             🔋 Akku: C = W / (U · η · DoD)
           </button>
-          <button onclick="selectMiniTopic('wirkleistung')" class="topic-pill px-3 py-1.5 text-xs font-medium rounded-lg border border-slate-300 bg-white hover:bg-slate-100 transition-all" data-topic="wirkleistung">
+          <button onclick="selectMiniTopic('wirkleistung')" class="topic-pill px-3.5 py-2 text-sm font-semibold rounded-xl border border-slate-300 bg-white hover:bg-slate-100 transition-all" data-topic="wirkleistung">
             ⚡ Wirkleistung (P = S · cos φ)
           </button>
-          <button onclick="selectMiniTopic('scheinleistung')" class="topic-pill px-3 py-1.5 text-xs font-medium rounded-lg border border-slate-300 bg-white hover:bg-slate-100 transition-all" data-topic="scheinleistung">
+          <button onclick="selectMiniTopic('scheinleistung')" class="topic-pill px-3.5 py-2 text-sm font-semibold rounded-xl border border-slate-300 bg-white hover:bg-slate-100 transition-all" data-topic="scheinleistung">
             ⚡ Scheinleistung (S = P / cos φ)
           </button>
-          <button onclick="selectMiniTopic('energie_wh')" class="topic-pill px-3 py-1.5 text-xs font-medium rounded-lg border border-slate-300 bg-white hover:bg-slate-100 transition-all" data-topic="energie_wh">
+          <button onclick="selectMiniTopic('energie_wh')" class="topic-pill px-3.5 py-2 text-sm font-semibold rounded-xl border border-slate-300 bg-white hover:bg-slate-100 transition-all" data-topic="energie_wh">
             🔋 Energie (W = Q · U)
           </button>
-          <button onclick="selectMiniTopic('skonto_im_hundert')" class="topic-pill px-3 py-1.5 text-xs font-medium rounded-lg border border-slate-300 bg-white hover:bg-slate-100 transition-all" data-topic="skonto_im_hundert">
+          <button onclick="selectMiniTopic('skonto_im_hundert')" class="topic-pill px-3.5 py-2 text-sm font-semibold rounded-xl border border-slate-300 bg-white hover:bg-slate-100 transition-all" data-topic="skonto_im_hundert">
             💶 Skonto "Im Hundert"
           </button>
-          <button onclick="selectMiniTopic('rabatt_vom_hundert')" class="topic-pill px-3 py-1.5 text-xs font-medium rounded-lg border border-slate-300 bg-white hover:bg-slate-100 transition-all" data-topic="rabatt_vom_hundert">
+          <button onclick="selectMiniTopic('rabatt_vom_hundert')" class="topic-pill px-3.5 py-2 text-sm font-semibold rounded-xl border border-slate-300 bg-white hover:bg-slate-100 transition-all" data-topic="rabatt_vom_hundert">
             💶 Rabatt "Vom Hundert"
           </button>
-          <button onclick="selectMiniTopic('ust_auf_hundert')" class="topic-pill px-3 py-1.5 text-xs font-medium rounded-lg border border-slate-300 bg-white hover:bg-slate-100 transition-all" data-topic="ust_auf_hundert">
+          <button onclick="selectMiniTopic('ust_auf_hundert')" class="topic-pill px-3.5 py-2 text-sm font-semibold rounded-xl border border-slate-300 bg-white hover:bg-slate-100 transition-all" data-topic="ust_auf_hundert">
             💶 Netto aus Brutto (19%)
           </button>
-          <button onclick="selectMiniTopic('amort_jahre')" class="topic-pill px-3 py-1.5 text-xs font-medium rounded-lg border border-slate-300 bg-white hover:bg-slate-100 transition-all" data-topic="amort_jahre">
+          <button onclick="selectMiniTopic('amort_jahre')" class="topic-pill px-3.5 py-2 text-sm font-semibold rounded-xl border border-slate-300 bg-white hover:bg-slate-100 transition-all" data-topic="amort_jahre">
             📈 Amortisationszeit (Jahre)
           </button>
-          <button onclick="selectMiniTopic('amort_monate')" class="topic-pill px-3 py-1.5 text-xs font-medium rounded-lg border border-slate-300 bg-white hover:bg-slate-100 transition-all" data-topic="amort_monate">
+          <button onclick="selectMiniTopic('amort_monate')" class="topic-pill px-3.5 py-2 text-sm font-semibold rounded-xl border border-slate-300 bg-white hover:bg-slate-100 transition-all" data-topic="amort_monate">
             📈 Jahre in Monate (× 12)
           </button>
-          <button onclick="selectMiniTopic('roi_calc')" class="topic-pill px-3 py-1.5 text-xs font-medium rounded-lg border border-slate-300 bg-white hover:bg-slate-100 transition-all" data-topic="roi_calc">
+          <button onclick="selectMiniTopic('roi_calc')" class="topic-pill px-3.5 py-2 text-sm font-semibold rounded-xl border border-slate-300 bg-white hover:bg-slate-100 transition-all" data-topic="roi_calc">
             📈 ROI in %
           </button>
-          <button onclick="selectMiniTopic('it_units')" class="topic-pill px-3 py-1.5 text-xs font-medium rounded-lg border border-slate-300 bg-white hover:bg-slate-100 transition-all" data-topic="it_units">
+          <button onclick="selectMiniTopic('it_units')" class="topic-pill px-3.5 py-2 text-sm font-semibold rounded-xl border border-slate-300 bg-white hover:bg-slate-100 transition-all" data-topic="it_units">
             💾 IT: Byte ↔ Bit &amp; Transfer
           </button>
         </div>
       </div>
 
       <!-- AKTUELLE MINI-AUFGABE CARD -->
-      <div class="bg-white border-2 border-sky-400 rounded-2xl p-6 sm:p-8 shadow-sm space-y-5">
+      <div class="bg-white border-2 border-sky-400 rounded-2xl p-6 sm:p-8 shadow-sm space-y-6">
         <div class="flex items-center justify-between">
           <div class="flex items-center gap-2">
-            <span class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-sky-100 text-sky-800" id="mini-badge">
+            <span class="px-3.5 py-1.5 rounded-full text-sm font-bold uppercase tracking-wider bg-sky-100 text-sky-800" id="mini-badge">
               Mini-Aufgabe
             </span>
-            <span class="text-xs text-slate-500 font-mono" id="mini-id">#1</span>
+            <span class="text-sm text-slate-500 font-mono font-semibold" id="mini-id">#1</span>
           </div>
-          <button onclick="generateMiniTask()" class="px-3 py-1.5 text-xs font-medium rounded-lg border border-slate-300 bg-slate-50 hover:bg-slate-100 transition-all flex items-center gap-1.5">
+          <button onclick="generateMiniTask()" class="px-3.5 py-2 text-sm font-semibold rounded-xl border border-slate-300 bg-slate-50 hover:bg-slate-100 transition-all flex items-center gap-2">
             <span>🔄</span> Neue Zufallswerte
           </button>
         </div>
 
         <!-- Aufgabenstellung -->
-        <div class="space-y-2">
-          <h2 class="text-lg sm:text-xl font-bold text-slate-900" id="mini-title">
+        <div class="space-y-3">
+          <h2 class="text-xl sm:text-2xl font-bold text-slate-900" id="mini-title">
             Wird geladen...
           </h2>
-          <p class="text-sm sm:text-base text-slate-700 leading-relaxed bg-slate-50 p-4 rounded-xl border border-slate-200" id="mini-question">
+          <div class="text-base sm:text-lg text-slate-800 leading-relaxed bg-slate-50 p-5 rounded-xl border border-slate-200" id="mini-question">
             Aufgabentext
-          </p>
+          </div>
         </div>
 
         <!-- Eingabebereich -->
-        <div class="space-y-3">
+        <div class="space-y-4">
           <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
             <div class="relative flex-1">
-              <input type="number" step="any" id="mini-input" placeholder="Dein Ergebnis..." class="w-full px-4 py-3 rounded-xl border-2 border-slate-300 bg-white text-lg font-bold font-mono focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500" onkeydown="if(event.key==='Enter') checkMiniTask()" />
+              <input type="number" step="any" id="mini-input" placeholder="Dein Ergebnis..." class="w-full px-5 py-3.5 rounded-xl border-2 border-slate-300 bg-white text-xl font-bold font-mono focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500" onkeydown="if(event.key==='Enter') checkMiniTask()" />
             </div>
-            <span class="px-4 py-3 bg-slate-100 border border-slate-300 rounded-xl text-sm font-bold font-mono text-slate-700 text-center" id="mini-unit">
+            <span class="px-5 py-3.5 bg-slate-100 border border-slate-300 rounded-xl text-base font-bold font-mono text-slate-700 text-center min-w-[120px]" id="mini-unit">
               Einheit
             </span>
-            <button onclick="checkMiniTask()" class="px-6 py-3 rounded-xl bg-sky-600 text-white font-bold text-sm sm:text-base hover:bg-sky-700 transition-all shadow-sm">
+            <button onclick="checkMiniTask()" class="px-7 py-3.5 rounded-xl bg-sky-600 text-white font-bold text-base hover:bg-sky-700 transition-all shadow-sm">
               Antwort prüfen
             </button>
-            <button onclick="toggleMiniHint()" class="px-4 py-3 rounded-xl border border-slate-300 text-xs font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-all">
+            <button onclick="toggleMiniHint()" class="px-5 py-3.5 rounded-xl border border-slate-300 text-sm font-semibold text-slate-700 hover:text-slate-950 hover:bg-slate-50 transition-all">
               💡 Formel-Tipp
             </button>
           </div>
 
           <!-- Tipp Box -->
-          <div id="mini-hint-box" class="hidden p-3.5 rounded-xl bg-amber-50 border border-amber-200 text-xs text-amber-900 font-mono">
+          <div id="mini-hint-box" class="hidden p-4 rounded-xl bg-amber-50 border border-amber-200 text-sm text-amber-900 font-mono">
             <strong>Formel:</strong> <span id="mini-hint-text"></span>
           </div>
 
           <!-- Feedback Box -->
-          <div id="mini-feedback-box" class="hidden p-4 rounded-xl text-sm font-medium space-y-1">
-            <div id="mini-feedback-title" class="font-bold"></div>
-            <div id="mini-feedback-detail" class="text-xs font-mono"></div>
+          <div id="mini-feedback-box" class="hidden p-5 rounded-xl text-base font-medium space-y-2">
+            <div id="mini-feedback-title" class="font-bold text-lg"></div>
+            <div id="mini-feedback-detail" class="text-sm font-mono leading-relaxed"></div>
           </div>
         </div>
 
         <!-- Weiter-Button nach Lösung -->
-        <div id="mini-next-container" class="hidden pt-2 border-t border-slate-200 flex justify-end">
-          <button onclick="generateMiniTask()" class="px-6 py-2.5 rounded-xl bg-emerald-600 text-white font-bold hover:bg-emerald-700 transition-all flex items-center gap-2 shadow-sm">
+        <div id="mini-next-container" class="hidden pt-3 border-t border-slate-200 flex justify-end">
+          <button onclick="generateMiniTask()" class="px-7 py-3 rounded-xl bg-emerald-600 text-white font-bold text-base hover:bg-emerald-700 transition-all flex items-center gap-2 shadow-sm">
             <span>Nächste Mini-Aufgabe</span> <span>➔</span>
           </button>
         </div>
@@ -201,9 +201,9 @@
     <div id="tab-content-elektro" class="tab-pane hidden space-y-6">
       
       <!-- Schnell-Sprung zu Mini-Aufgaben -->
-      <div class="p-3 bg-sky-50 border border-sky-200 rounded-xl flex items-center justify-between">
-        <span class="text-xs font-semibold text-sky-800">Möchtest du diese Themen direkt üben?</span>
-        <button onclick="jumpToMiniTopic('akku_formel')" class="px-3 py-1 bg-sky-600 text-white text-xs font-bold rounded-lg hover:bg-sky-700">
+      <div class="p-4 bg-sky-50 border border-sky-200 rounded-xl flex items-center justify-between">
+        <span class="text-sm font-bold text-sky-900">Möchtest du diese Themen direkt üben?</span>
+        <button onclick="jumpToMiniTopic('akku_formel')" class="px-4 py-2 bg-sky-600 text-white text-sm font-bold rounded-lg hover:bg-sky-700">
           🎯 Mini-Aufgaben zu USV &amp; Akkus starten
         </button>
       </div>
@@ -212,27 +212,27 @@
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
         <!-- LINKE SPALTE -->
         <div class="space-y-6">
-          <div class="bg-white border border-blue-200 rounded-2xl p-5 shadow-sm bg-gradient-to-br from-blue-50/50 to-transparent">
+          <div class="bg-white border border-blue-200 rounded-2xl p-6 shadow-sm bg-gradient-to-br from-blue-50/50 to-transparent">
             <div class="flex items-center justify-between mb-3">
-              <h3 class="font-bold text-sm flex items-center gap-2 text-slate-900">
-                <span class="p-1 bg-blue-100 text-blue-700 rounded text-xs">⚖️</span>
+              <h3 class="font-bold text-base flex items-center gap-2 text-slate-900">
+                <span class="p-1 bg-blue-100 text-blue-700 rounded text-sm">⚖️</span>
                 Entscheidungshilfe: Wann Watt (P), wann VA (S)?
               </h3>
-              <span class="text-[11px] font-semibold text-blue-700 bg-blue-100 px-2 py-0.5 rounded">IHK-Regel</span>
+              <span class="text-xs font-semibold text-blue-700 bg-blue-100 px-2.5 py-1 rounded">IHK-Regel</span>
             </div>
-            <div class="grid grid-cols-2 gap-3 text-xs">
-              <div class="p-3 rounded-xl border border-blue-200 bg-blue-50/30 space-y-1.5">
-                <div class="font-bold text-blue-700">Scheinleistung S (VA / kVA)</div>
-                <div class="text-[11px] text-slate-600 leading-relaxed">
+            <div class="grid grid-cols-2 gap-3 text-sm">
+              <div class="p-3.5 rounded-xl border border-blue-200 bg-blue-50/30 space-y-1.5">
+                <div class="font-bold text-blue-700 text-base">Scheinleistung S (VA / kVA)</div>
+                <div class="text-sm text-slate-600 leading-relaxed">
                   • <strong>USV-Gerätegröße</strong> wählen<br>
                   • <strong>Sicherung &amp; Kabel</strong> (I = S / U)<br>
                   • Trafos &amp; Netzteile<br>
                   <em>(Der Gesamtstrom belastet die Leitung!)</em>
                 </div>
               </div>
-              <div class="p-3 rounded-xl border border-emerald-200 bg-emerald-50/30 space-y-1.5">
-                <div class="font-bold text-emerald-700">Wirkleistung P (W / kW)</div>
-                <div class="text-[11px] text-slate-600 leading-relaxed">
+              <div class="p-3.5 rounded-xl border border-emerald-200 bg-emerald-50/30 space-y-1.5">
+                <div class="font-bold text-emerald-700 text-base">Wirkleistung P (W / kW)</div>
+                <div class="text-sm text-slate-600 leading-relaxed">
                   • <strong>Batterielaufzeit / Autonomie</strong> (W = P · t)<br>
                   • <strong>Stromrechnung / Kosten</strong> (kWh)<br>
                   • Abwärme / Kühlung (W)<br>
@@ -242,30 +242,30 @@
             </div>
           </div>
 
-          <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm space-y-4">
+          <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-4">
             <div class="flex items-center justify-between">
               <h3 class="font-bold text-base flex items-center gap-2 text-slate-900">
-                <span class="p-1.5 bg-amber-100 text-amber-700 rounded-lg text-xs">⚡</span>
+                <span class="p-1.5 bg-amber-100 text-amber-700 rounded-lg text-sm">⚡</span>
                 Wirkleistung vs. Scheinleistung (cos φ)
               </h3>
-              <span class="text-xs font-mono bg-slate-100 text-slate-600 px-2 py-0.5 rounded">P = S · cos φ</span>
+              <span class="text-sm font-mono bg-slate-100 text-slate-700 px-2.5 py-1 rounded">P = S · cos φ</span>
             </div>
-            <div class="p-3.5 rounded-xl border border-slate-200 bg-slate-50 space-y-3">
+            <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-3">
               <div class="grid grid-cols-3 gap-2">
                 <div>
-                  <label class="text-[11px] font-medium text-slate-600">Scheinleistung S (VA)</label>
-                  <input type="number" id="calc-s" value="3000" oninput="calcPower('S')" class="w-full mt-1 px-2.5 py-1 text-xs rounded-lg border border-slate-300 bg-white" />
+                  <label class="text-xs font-semibold text-slate-600">Scheinleistung S (VA)</label>
+                  <input type="number" id="calc-s" value="3000" oninput="calcPower('S')" class="w-full mt-1 px-3 py-1.5 text-sm rounded-lg border border-slate-300 bg-white" />
                 </div>
                 <div>
-                  <label class="text-[11px] font-medium text-slate-600">Leistungsfaktor (cos φ)</label>
-                  <input type="number" step="0.05" id="calc-cos" value="0.8" min="0.1" max="1.0" oninput="calcPower('cos')" class="w-full mt-1 px-2.5 py-1 text-xs rounded-lg border border-slate-300 bg-white" />
+                  <label class="text-xs font-semibold text-slate-600">Leistungsfaktor (cos φ)</label>
+                  <input type="number" step="0.05" id="calc-cos" value="0.8" min="0.1" max="1.0" oninput="calcPower('cos')" class="w-full mt-1 px-3 py-1.5 text-sm rounded-lg border border-slate-300 bg-white" />
                 </div>
                 <div>
-                  <label class="text-[11px] font-medium text-slate-600">Wirkleistung P (W)</label>
-                  <input type="number" id="calc-p" value="2400" oninput="calcPower('P')" class="w-full mt-1 px-2.5 py-1 text-xs rounded-lg border border-slate-300 bg-white font-bold text-emerald-600" />
+                  <label class="text-xs font-semibold text-slate-600">Wirkleistung P (W)</label>
+                  <input type="number" id="calc-p" value="2400" oninput="calcPower('P')" class="w-full mt-1 px-3 py-1.5 text-sm rounded-lg border border-slate-300 bg-white font-bold text-emerald-600" />
                 </div>
               </div>
-              <div id="calc-power-expl" class="text-xs font-mono text-slate-600 pt-1 border-t border-slate-200">
+              <div id="calc-power-expl" class="text-sm font-mono text-slate-700 pt-1 border-t border-slate-200">
                 Rechenweg: 3.000 VA × 0,8 = 2.400 W (2,40 kW)
               </div>
             </div>
@@ -274,40 +274,40 @@
 
         <!-- RECHTE SPALTE -->
         <div class="space-y-6">
-          <div class="bg-white border-2 border-purple-300 rounded-2xl p-5 shadow-sm bg-gradient-to-br from-purple-50/60 to-transparent space-y-4">
+          <div class="bg-white border-2 border-purple-300 rounded-2xl p-6 shadow-sm bg-gradient-to-br from-purple-50/60 to-transparent space-y-4">
             <div class="flex items-center justify-between">
               <h3 class="font-bold text-base flex items-center gap-2 text-purple-800">
-                <span class="p-1.5 bg-purple-100 text-purple-700 rounded-lg text-xs">🔋</span>
-                Akkukapazität berechnen: C = W / (U · η · DoD)
+                <span class="p-1.5 bg-purple-100 text-purple-700 rounded-lg text-sm">🔋</span>
+                Akkukapazität: C = W / (U · η · DoD)
               </h3>
-              <span class="text-xs bg-purple-100 text-purple-700 font-bold px-2 py-0.5 rounded">IHK-Prüfungsformel</span>
+              <span class="text-xs bg-purple-100 text-purple-700 font-bold px-2.5 py-1 rounded">IHK-Prüfungsformel</span>
             </div>
-            <div class="p-3.5 rounded-xl border border-purple-200 bg-white space-y-2">
-              <div class="font-mono text-center text-sm sm:text-base font-bold text-purple-900 bg-purple-50 p-2.5 rounded-lg border border-purple-200">
-                C = 3.200 Wh / (48 V × 0,9 × 0,8) = 3.200 Wh / 34,56 V ≈ <span class="text-purple-700 text-lg">92,6 Ah</span>
+            <div class="p-4 rounded-xl border border-purple-200 bg-white space-y-3">
+              <div class="font-mono text-center text-base sm:text-lg font-bold text-purple-900 bg-purple-50 p-3 rounded-lg border border-purple-200">
+                C = 3.200 Wh / (48 V × 0,9 × 0,8) = 3.200 Wh / 34,56 V ≈ <span class="text-purple-700 text-xl">92,6 Ah</span>
               </div>
-              <div class="grid grid-cols-3 gap-2 text-[11px] text-slate-600 pt-1">
-                <div class="p-2 rounded bg-slate-50 border border-slate-200">
-                  <span class="font-bold text-slate-800 block">WARUM teilen?</span>
+              <div class="grid grid-cols-3 gap-2.5 text-xs text-slate-700 pt-1">
+                <div class="p-2.5 rounded-lg bg-slate-50 border border-slate-200">
+                  <span class="font-bold text-slate-900 block mb-1">WARUM teilen?</span>
                   Durch Zahlen &lt; 1 teilen macht das Ergebnis <strong>größer</strong>! Der Akku muss größer sein als ideal (66,7 Ah), um Verluste auszugleichen.
                 </div>
-                <div class="p-2 rounded bg-slate-50 border border-slate-200">
-                  <span class="font-bold text-slate-800 block">WANN nutzen?</span>
+                <div class="p-2.5 rounded-lg bg-slate-50 border border-slate-200">
+                  <span class="font-bold text-slate-900 block mb-1">WANN nutzen?</span>
                   Sobald im Text <strong>Wirkungsgrad (η = 90%)</strong> oder <strong>Entladetiefe (DoD = 80%)</strong> genannt sind!
                 </div>
-                <div class="p-2 rounded bg-slate-50 border border-slate-200">
-                  <span class="font-bold text-slate-800 block">WIE runden?</span>
+                <div class="p-2.5 rounded-lg bg-slate-50 border border-slate-200">
+                  <span class="font-bold text-slate-900 block mb-1">WIE runden?</span>
                   In der Praxis immer auf die <strong>nächsthöhere</strong> handelsübliche Akkugröße aufrunden (z.B. 100 Ah)!
                 </div>
               </div>
             </div>
           </div>
 
-          <div class="bg-white border-2 border-sky-400 rounded-2xl p-5 shadow-sm space-y-3">
+          <div class="bg-white border-2 border-sky-400 rounded-2xl p-6 shadow-sm space-y-3">
             <h3 class="font-bold text-base text-sky-700 flex items-center gap-2">
               <span>⏱️</span> Dezimalstunden in Minuten (z. B. 3,2 h)
             </h3>
-            <p class="text-xs text-slate-600">
+            <p class="text-sm text-slate-700 leading-relaxed">
               3,2 h = 3 ganze Stunden + (0,2 × 60 min) = <strong>3 Std und 12 Min</strong>.
             </p>
           </div>
@@ -318,16 +318,16 @@
 
     <!-- TAB 3: HANDELSKALKULATION & SKONTO -->
     <div id="tab-content-kaufmaennisch" class="tab-pane hidden space-y-6">
-      <div class="p-3 bg-sky-50 border border-sky-200 rounded-xl flex items-center justify-between">
-        <span class="text-xs font-semibold text-sky-800">Möchtest du Skonto &amp; Handelskalkulation direkt üben?</span>
-        <button onclick="jumpToMiniTopic('skonto_im_hundert')" class="px-3 py-1 bg-sky-600 text-white text-xs font-bold rounded-lg hover:bg-sky-700">
+      <div class="p-4 bg-sky-50 border border-sky-200 rounded-xl flex items-center justify-between">
+        <span class="text-sm font-bold text-sky-900">Möchtest du Skonto &amp; Handelskalkulation direkt üben?</span>
+        <button onclick="jumpToMiniTopic('skonto_im_hundert')" class="px-4 py-2 bg-sky-600 text-white text-sm font-bold rounded-lg hover:bg-sky-700">
           🎯 Mini-Aufgaben zu Skonto &amp; Rabatt starten
         </button>
       </div>
 
       <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
         <h2 class="text-lg font-bold mb-4">Der IHK-Prozent-Versteher: "Im", "Vom" &amp; "Auf" Hundert</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
           <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-2">
             <span class="font-bold uppercase text-blue-700">Vom Hundert (Rabatt)</span>
             <p class="text-slate-600">Basis = 100 %. 1000 € LEP - 10 % = 900 €.</p>
@@ -346,24 +346,24 @@
 
     <!-- TAB 4: WIRTSCHAFTLICHKEIT & AMORTISATION -->
     <div id="tab-content-wirtschaft" class="tab-pane hidden space-y-6">
-      <div class="p-3 bg-sky-50 border border-sky-200 rounded-xl flex items-center justify-between">
-        <span class="text-xs font-semibold text-sky-800">Möchtest du Amortisation &amp; ROI direkt üben?</span>
-        <button onclick="jumpToMiniTopic('amort_jahre')" class="px-3 py-1 bg-sky-600 text-white text-xs font-bold rounded-lg hover:bg-sky-700">
+      <div class="p-4 bg-sky-50 border border-sky-200 rounded-xl flex items-center justify-between">
+        <span class="text-sm font-bold text-sky-900">Möchtest du Amortisation &amp; ROI direkt üben?</span>
+        <button onclick="jumpToMiniTopic('amort_jahre')" class="px-4 py-2 bg-sky-600 text-white text-sm font-bold rounded-lg hover:bg-sky-700">
           🎯 Mini-Aufgaben zu Amortisation starten
         </button>
       </div>
 
       <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
         <h2 class="text-lg font-bold mb-3">Amortisationszeit &amp; ROI Formeln</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
           <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-2">
-            <div class="font-bold text-slate-800">Amortisationszeit in Jahren:</div>
-            <div class="font-mono text-sky-700">t_amort = Investitionskosten / Jährliche Ersparnis</div>
-            <div class="text-slate-500">Monate = Nachkommastelle × 12</div>
+            <div class="font-bold text-slate-900">Amortisationszeit in Jahren:</div>
+            <div class="font-mono text-sky-700 text-base">t_amort = Investitionskosten / Jährliche Ersparnis</div>
+            <div class="text-slate-600">Monate = Nachkommastelle × 12</div>
           </div>
           <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-2">
-            <div class="font-bold text-slate-800">Return on Investment (ROI):</div>
-            <div class="font-mono text-emerald-700">ROI = (Jährliche Ersparnis / Investition) × 100 %</div>
+            <div class="font-bold text-slate-900">Return on Investment (ROI):</div>
+            <div class="font-mono text-emerald-700 text-base">ROI = (Jährliche Ersparnis / Investition) × 100 %</div>
           </div>
         </div>
       </div>
@@ -371,21 +371,21 @@
 
     <!-- TAB 5: IT-EINHEITEN & DATENÜBERTRAGUNG -->
     <div id="tab-content-it" class="tab-pane hidden space-y-6">
-      <div class="p-3 bg-sky-50 border border-sky-200 rounded-xl flex items-center justify-between">
-        <span class="text-xs font-semibold text-sky-800">Möchtest du IT-Einheiten direkt üben?</span>
-        <button onclick="jumpToMiniTopic('it_units')" class="px-3 py-1 bg-sky-600 text-white text-xs font-bold rounded-lg hover:bg-sky-700">
+      <div class="p-4 bg-sky-50 border border-sky-200 rounded-xl flex items-center justify-between">
+        <span class="text-sm font-bold text-sky-900">Möchtest du IT-Einheiten direkt üben?</span>
+        <button onclick="jumpToMiniTopic('it_units')" class="px-4 py-2 bg-sky-600 text-white text-sm font-bold rounded-lg hover:bg-sky-700">
           🎯 Mini-Aufgaben zu IT-Einheiten starten
         </button>
       </div>
 
       <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
         <h2 class="text-lg font-bold mb-3">IT-Einheiten &amp; Übertragungszeit</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
-          <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-1 font-mono">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+          <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-1.5 font-mono">
             <div>1 Byte = 8 Bit</div>
             <div>1 kB = 1.000 Byte (SI) | 1 KiB = 1.024 Byte (IEC)</div>
           </div>
-          <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-1 font-mono">
+          <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-1.5 font-mono">
             <div>Dauer = Dateigröße (Mbit) / Übertragungsrate (Mbit/s)</div>
           </div>
         </div>
@@ -400,14 +400,14 @@
       document.querySelectorAll('.tab-pane').forEach(p => p.classList.add('hidden'));
       document.querySelectorAll('.tab-btn').forEach(b => {
         b.classList.remove('border-sky-600', 'text-sky-600', 'bg-sky-50/50', 'font-bold');
-        b.classList.add('border-transparent', 'text-slate-500');
+        b.classList.add('border-transparent', 'text-slate-600');
       });
 
       const activePane = document.getElementById('tab-content-' + tabId);
       const activeBtn = document.getElementById('tab-btn-' + tabId);
       if (activePane) activePane.classList.remove('hidden');
       if (activeBtn) {
-        activeBtn.classList.remove('border-transparent', 'text-slate-500');
+        activeBtn.classList.remove('border-transparent', 'text-slate-600');
         activeBtn.classList.add('border-sky-600', 'text-sky-600', 'bg-sky-50/50', 'font-bold');
       }
     }
@@ -453,7 +453,7 @@
           topic: "zeit_min",
           badge: "⏱️ Zeitberechnung",
           title: `Dezimalstunden in Minuten umrechnen (${val.toString().replace('.', ',')} h)`,
-          question: `Eine USV-Überbrückungszeit wurde mit <strong>${val.toString().replace('.', ',')} Stunden</strong> berechnet.<br>Wie viele <strong>Minuten</strong> entsprechen die Nachkommastellen (${remH.toString().replace('.', ',')} h)?<br><em>(Hinweis: 1 Stunde = 60 Minuten, nicht 100!)</em>`,
+          question: `Eine USV-Überbrückungszeit wurde mit <strong>${val.toString().replace('.', ',')} Stunden</strong> berechnet.<br><br>Wie viele <strong>Minuten</strong> entsprechen die Nachkommastellen (${remH.toString().replace('.', ',')} h)?<br><span class="text-sm text-slate-500">(Hinweis: 1 Stunde hat 60 Minuten, nicht 100!)</span>`,
           unit: "Minuten",
           expected: min,
           tolerance: 0,
@@ -475,7 +475,7 @@
           topic: "akku_formel",
           badge: "🔋 Akkukapazität",
           title: "Akkukapazität C = W / (U · η · DoD)",
-          question: `Ein Serverschrank benötigt während eines Netzausfalls <strong>${wh.toLocaleString('de-DE')} Wh Energie</strong>.<br>Die Akkuspannung beträgt <strong>${u} V DC</strong>, der Wirkungsgrad des Wechselrichters ist <strong>η = 90 % (0,9)</strong> und die maximale Entladetiefe beträgt <strong>DoD = 80 % (0,8)</strong>.<br>Berechne die benötigte Akkukapazität <strong>C in Ah</strong> (auf 1 Nachkommastelle gerundet):`,
+          question: `Ein Serverschrank benötigt während eines Netzausfalls <strong>${wh.toLocaleString('de-DE')} Wh Energie</strong>.<br><br>Die Akkuspannung beträgt <strong>${u} V DC</strong>, der Wirkungsgrad des Wechselrichters ist <strong>η = 90 % (0,9)</strong> und die maximale Entladetiefe beträgt <strong>DoD = 80 % (0,8)</strong>.<br><br>Berechne die benötigte Akkukapazität <strong>C in Ah</strong> (auf 1 Nachkommastelle gerundet):`,
           unit: "Ah (Amperestunden)",
           expected: parseFloat(c.toFixed(1)),
           tolerance: 0.5,
@@ -493,7 +493,7 @@
           topic: "wirkleistung",
           badge: "⚡ Wirkleistung",
           title: "Wirkleistung P aus Scheinleistung S berechnen",
-          question: `Eine USV-Anlage stellt eine Scheinleistung von <strong>${s.toLocaleString('de-DE')} VA</strong> bereit. Die Last hat einen Leistungsfaktor von <strong>cos φ = ${cos}</strong>.<br>Wie viel <strong>Wirkleistung P in Watt (W)</strong> kann maximal entnommen werden?`,
+          question: `Eine USV-Anlage stellt eine Scheinleistung von <strong>${s.toLocaleString('de-DE')} VA</strong> bereit. Die Last hat einen Leistungsfaktor von <strong>cos φ = ${cos}</strong>.<br><br>Wie viel <strong>Wirkleistung P in Watt (W)</strong> kann maximal entnommen werden?`,
           unit: "Watt (W)",
           expected: p,
           tolerance: 1,
@@ -511,12 +511,12 @@
           topic: "scheinleistung",
           badge: "⚡ Scheinleistung",
           title: "Scheinleistung S für USV-Dimensionierung",
-          question: `Ein Serverschrank verbraucht eine Wirkleistung von <strong>${p.toLocaleString('de-DE')} W</strong> bei einem Leistungsfaktor von <strong>cos φ = ${cos}</strong>.<br>Welche <strong>Scheinleistung S in VA</strong> muss die USV mindestens liefern können?`,
+          question: `Ein Serverschrank verbraucht eine Wirkleistung von <strong>${p.toLocaleString('de-DE')} W</strong> bei einem Leistungsfaktor von <strong>cos φ = ${cos}</strong>.<br><br>Welche <strong>Scheinleistung S in VA</strong> muss die USV mindestens liefern können?`,
           unit: "VA",
           expected: s,
           tolerance: 1,
           hint: `S = P / cos φ = ${p} W / ${cos}`,
-          explanation: `Richtig! S = ${p} W / ${cos} = <strong>${s} VA</strong> (${(s/1000).toFixed(2)} kVA). Für die Dimensionierung von USV und Kabeln ist immer S in VA entscheidend!`
+          explanation: `Richtig! S = ${p} W / ${cos} = <strong>${s} VA</strong> (${(s/1000).toFixed(2)} kVA). Für die Dimensionierung von USV und Leitungen ist immer die Scheinleistung S in VA entscheidend!`
         };
       },
 
@@ -529,7 +529,7 @@
           topic: "energie_wh",
           badge: "🔋 Energieberechnung",
           title: "Gespeicherte Energie W in Wattstunden (Wh)",
-          question: `Eine Akkubank hat eine Nennkapazität von <strong>${q} Ah</strong> bei einer Gleichspannung von <strong>${u} V DC</strong>.<br>Wie viel <strong>elektrische Energie W in Wattstunden (Wh)</strong> ist darin gespeichert? ($W = Q \\cdot U$)`,
+          question: `Eine Akkubank hat eine Nennkapazität von <strong>${q} Ah</strong> bei einer Gleichspannung von <strong>${u} V DC</strong>.<br><br>Wie viel <strong>elektrische Energie W in Wattstunden (Wh)</strong> ist darin gespeichert? ($W = Q \\cdot U$)`,
           unit: "Wh",
           expected: wh,
           tolerance: 0,
@@ -548,7 +548,7 @@
           topic: "skonto_im_hundert",
           badge: "💶 Handelskalkulation",
           title: "Skonto 'Im Hundert' (Zielverkaufspreis)",
-          question: `Ein IT-Dienstleister kalkuliert einen <strong>Barverkaufspreis von ${bar.toFixed(2)} €</strong>. Dem Kunden werden <strong>${skonto} % Skonto</strong> eingeräumt.<br>Da der Zielpreis 100 % ist, entspricht der Barpreis <strong>${basis} %</strong>.<br>Berechne den <strong>Zielverkaufspreis (100 %)</strong> in Euro (auf 2 Nachkommastellen genau):`,
+          question: `Ein IT-Dienstleister kalkuliert einen <strong>Barverkaufspreis von ${bar.toFixed(2)} €</strong>. Dem Kunden werden <strong>${skonto} % Skonto</strong> eingeräumt.<br><br>Da der Zielpreis 100 % ist, entspricht der Barpreis <strong>${basis} %</strong>.<br>Berechne den <strong>Zielverkaufspreis (100 %)</strong> in Euro (auf 2 Nachkommastellen genau):`,
           unit: "€",
           expected: parseFloat(ziel.toFixed(2)),
           tolerance: 0.1,
@@ -567,7 +567,7 @@
           topic: "rabatt_vom_hundert",
           badge: "💶 Handelskalkulation",
           title: "Lieferantenrabatt 'Vom Hundert'",
-          question: `Der Listeneinkaufspreis (LEP) für Hardware beträgt <strong>${lep.toLocaleString('de-DE')} €</strong> (Basis = 100 %). Der Großhändler gewährt <strong>${rabattP} % Rabatt</strong>.<br>Wie hoch ist der <strong>Zieleinkaufspreis (ZEP)</strong> in Euro?`,
+          question: `Der Listeneinkaufspreis (LEP) für Hardware beträgt <strong>${lep.toLocaleString('de-DE')} €</strong> (Basis = 100 %). Der Großhändler gewährt <strong>${rabattP} % Rabatt</strong>.<br><br>Wie hoch ist der <strong>Zieleinkaufspreis (ZEP)</strong> in Euro?`,
           unit: "€",
           expected: zep,
           tolerance: 0.1,
@@ -584,7 +584,7 @@
           topic: "ust_auf_hundert",
           badge: "💶 Umsatzsteuer",
           title: "Nettobetrag aus Bruttobetrag (19 % USt)",
-          question: `Eine Rechnung für IT-Dienstleistungen weist einen Bruttobetrag von <strong>${brutto.toFixed(2)} €</strong> inkl. 19 % USt aus.<br>Wie hoch ist der <strong>Nettobetrag (100 %)</strong> in Euro?`,
+          question: `Eine Rechnung für IT-Dienstleistungen weist einen Bruttobetrag von <strong>${brutto.toFixed(2)} €</strong> inkl. 19 % USt aus.<br><br>Wie hoch ist der <strong>Nettobetrag (100 %)</strong> in Euro?`,
           unit: "€",
           expected: netto,
           tolerance: 0.1,
@@ -602,7 +602,7 @@
           topic: "amort_jahre",
           badge: "📈 Amortisation",
           title: "Statische Amortisationszeit in Jahren",
-          question: `Die Einführung einer neuen Virtualisierungslösung kostet <strong>${invest.toLocaleString('de-DE')} €</strong>. Die jährliche Einsparung an Strom und Wartung beträgt <strong>${saving.toLocaleString('de-DE')} €</strong>.<br>Berechne die <strong>Amortisationszeit in Jahren</strong> (auf 2 Dezimalstellen genau):`,
+          question: `Die Einführung einer neuen Virtualisierungslösung kostet <strong>${invest.toLocaleString('de-DE')} €</strong>. Die jährliche Einsparung an Strom und Wartung beträgt <strong>${saving.toLocaleString('de-DE')} €</strong>.<br><br>Berechne die <strong>Amortisationszeit in Jahren</strong> (auf 2 Dezimalstellen genau):`,
           unit: "Jahre",
           expected: parseFloat(years.toFixed(2)),
           tolerance: 0.05,
@@ -627,7 +627,7 @@
           topic: "amort_monate",
           badge: "📈 Amortisation",
           title: "Dezimaljahre in Monate umrechnen (× 12)",
-          question: `Eine Amortisationsrechnung ergibt <strong>${totalY.replace('.', ',')} Jahre</strong>.<br>Wie viele <strong>Monate</strong> entsprechen die Nachkommastellen (${f.val.toString().replace('.', ',')} Jahre)?<br><em>(Hinweis: 1 Jahr = 12 Monate!)</em>`,
+          question: `Eine Amortisationsrechnung ergibt <strong>${totalY.replace('.', ',')} Jahre</strong>.<br><br>Wie viele <strong>Monate</strong> entsprechen die Nachkommastellen (${f.val.toString().replace('.', ',')} Jahre)?<br><span class="text-sm text-slate-500">(Hinweis: 1 Jahr hat 12 Monate!)</span>`,
           unit: "Monate",
           expected: f.m,
           tolerance: 0,
@@ -645,7 +645,7 @@
           topic: "roi_calc",
           badge: "📈 Wirtschaftlichkeit",
           title: "Return on Investment (ROI in %)",
-          question: `Ein Unternehmen investiert <strong>${invest.toLocaleString('de-DE')} €</strong> in neue Switches und spart dadurch jährlich <strong>${saving.toLocaleString('de-DE')} €</strong> ein.<br>Wie hoch ist der <strong>Return on Investment (ROI) in Prozent</strong>?`,
+          question: `Ein Unternehmen investiert <strong>${invest.toLocaleString('de-DE')} €</strong> in neue Switches und spart dadurch jährlich <strong>${saving.toLocaleString('de-DE')} €</strong> ein.<br><br>Wie hoch ist der <strong>Return on Investment (ROI) in Prozent</strong>?`,
           unit: "%",
           expected: roi,
           tolerance: 0.2,
@@ -662,7 +662,7 @@
           topic: "it_units",
           badge: "💾 IT-Einheiten",
           title: "Megabyte in Megabit umrechnen (1 Byte = 8 Bit)",
-          question: `Eine Downloaddatei hat eine Größe von <strong>${mb} Megabyte (MByte)</strong>.<br>Wie vielen <strong>Megabit (Mbit)</strong> entspricht diese Dateigröße?`,
+          question: `Eine Downloaddatei hat eine Größe von <strong>${mb} Megabyte (MByte)</strong>.<br><br>Wie vielen <strong>Megabit (Mbit)</strong> entspricht diese Dateigröße?`,
           unit: "Mbit",
           expected: mbit,
           tolerance: 0,
