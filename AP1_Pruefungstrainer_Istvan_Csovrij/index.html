@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AP1 Prüfungstrainer - Fachinformatiker</title>
-    <link rel="stylesheet" href="style.css?v=80">
+    <link rel="stylesheet" href="style.css?v=81">
     <!-- FontAwesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -138,77 +138,67 @@
         <aside class="sidebar sidebar-right">
             <!-- Aufgaben-Optionen Card -->
             <div class="card">
-                <h3><i class="fa-solid fa-gear"></i> Aufgaben-Optionen</h3>
-                <div class="control-group" style="display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.5rem;">
-                    <label for="question-type-select" style="font-size: 0.9rem; color: var(--text-light); font-weight: 600;">Aufgabentyp:</label>
-                    <select id="question-type-select" class="select-input" style="width: 100%; padding: 0.75rem; border: 2px solid var(--border-color); border-radius: var(--radius); font-size: 0.95rem; color: var(--text-color); background-color: white; outline: none; transition: var(--transition); cursor: pointer;">
+                <h3 style="margin-bottom: 0.5rem;"><i class="fa-solid fa-gear"></i> Aufgaben-Optionen</h3>
+                <div class="control-group" style="display: flex; flex-direction: column; gap: 0.35rem; margin-top: 0.35rem;">
+                    <label for="question-type-select" style="font-size: 0.85rem; color: var(--text-light); font-weight: 600;">Aufgabentyp:</label>
+                    <select id="question-type-select" class="select-input" style="width: 100%; padding: 0.55rem 0.75rem; border: 2px solid var(--border-color); border-radius: var(--radius); font-size: 0.9rem; color: var(--text-color); background-color: white; outline: none; transition: var(--transition); cursor: pointer;">
                         <option value="mix">Zufälliger Mix (50/50)</option>
                         <option value="open">Nur offene Aufgaben (BaWü)</option>
                         <option value="standard">Nur MC & Zahleneingabe</option>
                     </select>
                 </div>
-                <div class="control-group" style="display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.75rem;">
-                    <label for="question-difficulty-select" style="font-size: 0.9rem; color: var(--text-light); font-weight: 600;">Schwierigkeitsgrad:</label>
-                    <select id="question-difficulty-select" class="select-input" style="width: 100%; padding: 0.75rem; border: 2px solid var(--border-color); border-radius: var(--radius); font-size: 0.95rem; color: var(--text-color); background-color: white; outline: none; transition: var(--transition); cursor: pointer;">
+                <div class="control-group" style="display: flex; flex-direction: column; gap: 0.35rem; margin-top: 0.5rem;">
+                    <label for="question-difficulty-select" style="font-size: 0.85rem; color: var(--text-light); font-weight: 600;">Schwierigkeitsgrad:</label>
+                    <select id="question-difficulty-select" class="select-input" style="width: 100%; padding: 0.55rem 0.75rem; border: 2px solid var(--border-color); border-radius: var(--radius); font-size: 0.9rem; color: var(--text-color); background-color: white; outline: none; transition: var(--transition); cursor: pointer;">
                         <option value="all">Alle Schwierigkeitsgrade</option>
                         <option value="hard">🔥 Nur schwere Aufgaben (Meisterklasse)</option>
                         <option value="standard">Prüfungsstandard (IHK Basis)</option>
                     </select>
                 </div>
-                <button class="btn btn-primary btn-full" id="regenerate-btn" style="margin-top: 1rem;">
+                <button class="btn btn-primary btn-full" id="regenerate-btn" style="margin-top: 0.75rem; padding: 0.6rem; font-size: 0.9rem;">
                     <i class="fa-solid fa-arrows-rotate"></i> Neu generieren
                 </button>
             </div>
 
-            <!-- IHK Rechen- & Einheiten-Trainer Card (Rechte Seite für perfekte Symmetrie) -->
-            <div class="card calc-trainer-card" style="border: 2px solid #0284c7; box-shadow: 0 4px 6px -1px rgba(2, 132, 199, 0.15);">
-                <h3 style="color: #0369a1; margin-bottom: 0.5rem;"><i class="fa-solid fa-calculator"></i> Rechen- &amp; Einheiten-Trainer</h3>
-                <p style="font-size: 0.85rem; color: var(--text-light); margin-bottom: 0.75rem; line-height: 1.35;">
-                    Atomare Rechenschritte: USV-Autonomie, Akku ($C = \frac{W}{U \cdot \eta \cdot \text{DoD}}$), Zeitumrechnung &amp; Skonto.
+            <!-- IHK Rechen- & Einheiten-Trainer Card (Kompakt & Symmetrisch) -->
+            <div class="card calc-trainer-card" style="border: 2px solid #0284c7; box-shadow: 0 4px 6px -1px rgba(2, 132, 199, 0.12);">
+                <h3 style="color: #0369a1; margin-bottom: 0.4rem;"><i class="fa-solid fa-calculator"></i> Rechen-Trainer</h3>
+                <p style="font-size: 0.82rem; color: var(--text-light); margin-bottom: 0.55rem; line-height: 1.35;">
+                    Atomare Rechenschritte: USV, Akku (C = W / (U · η · DoD)), Zeit &amp; Skonto.
                 </p>
 
-                <!-- Schnellrechner 1: Zeitumrechnung -->
-                <div style="background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 8px; padding: 0.6rem; margin-bottom: 0.6rem;">
-                    <div style="font-size: 0.8rem; font-weight: bold; color: #0369a1; margin-bottom: 0.3rem;">
-                        ⏱️ Zeitumrechner (Dezimal $\rightarrow$ Min):
+                <!-- 2-Spaltige Mini-Vorschau: Zeit & Akku nebeneinander -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.45rem; margin-bottom: 0.6rem;">
+                    <!-- Zeit Box -->
+                    <div style="background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 6px; padding: 0.45rem 0.5rem;">
+                        <div style="font-size: 0.72rem; font-weight: 700; color: #0369a1;">⏱️ Zeit (0,2 × 60):</div>
+                        <div style="font-size: 0.82rem; font-weight: 700; color: #0284c7; font-family: monospace; margin-top: 0.15rem;">
+                            3,2 h = 3h 12m
+                        </div>
                     </div>
-                    <div style="display: flex; gap: 0.4rem; align-items: center;">
-                        <input type="number" step="0.01" id="side-calc-dechours" value="3.2" style="width: 75px; padding: 0.3rem 0.4rem; font-size: 0.85rem; font-weight: bold; border: 1px solid #7dd3fc; border-radius: 6px; font-family: monospace;" title="Dezimalstunden eingeben" />
-                        <span style="font-size: 0.8rem; font-weight: bold; color: #64748b;">h =</span>
-                        <div id="side-calc-timeresult" style="font-size: 0.85rem; font-weight: bold; color: #0284c7; font-family: monospace;">3 Std 12 Min</div>
-                    </div>
-                    <div id="side-calc-timedetail" style="font-size: 0.72rem; color: #64748b; margin-top: 0.25rem;">
-                        Rechenweg: 0,2 × 60 = <strong>12 Min</strong>
-                    </div>
-                </div>
-
-                <!-- Schnellrechner 2: Akku-Formel -->
-                <div style="background: #fdf4ff; border: 1px solid #f5d0fe; border-radius: 8px; padding: 0.6rem; margin-bottom: 0.75rem;">
-                    <div style="font-size: 0.8rem; font-weight: bold; color: #86198f; margin-bottom: 0.3rem;">
-                        🔋 Akku-Kapazität: C = W / (U · η · DoD)
-                    </div>
-                    <div style="font-size: 0.75rem; color: #475569; font-family: monospace; line-height: 1.35;">
-                        3.200 Wh / (48 V × 0,9 × 0,8) = <strong style="color: #9333ea; font-size: 0.85rem;">92,6 Ah</strong>
-                    </div>
-                    <div style="font-size: 0.72rem; color: #64748b; margin-top: 0.25rem;">
-                        💡 Durch 0,9 &amp; 0,8 <strong>teilen</strong>, da Akku größer sein muss!
+                    <!-- Akku Box -->
+                    <div style="background: #fdf4ff; border: 1px solid #f5d0fe; border-radius: 6px; padding: 0.45rem 0.5rem;">
+                        <div style="font-size: 0.72rem; font-weight: 700; color: #86198f;">🔋 Akku (DoD/η):</div>
+                        <div style="font-size: 0.82rem; font-weight: 700; color: #9333ea; font-family: monospace; margin-top: 0.15rem;">
+                            C = 92,6 Ah
+                        </div>
                     </div>
                 </div>
 
-                <button class="btn btn-full" id="open-rechentrainer-sidebar-btn" style="background: linear-gradient(135deg, #0284c7, #0369a1); color: white; justify-content: center; font-weight: bold; border: none; font-size: 0.95rem; display: flex; align-items: center; gap: 0.5rem; width: 100%;">
+                <button class="btn btn-full" id="open-rechentrainer-sidebar-btn" style="background: linear-gradient(135deg, #0284c7, #0369a1); color: white; justify-content: center; font-weight: bold; border: none; font-size: 0.9rem; padding: 0.55rem; display: flex; align-items: center; gap: 0.45rem; width: 100%;">
                     <i class="fa-solid fa-arrow-up-right-from-square"></i> Rechentrainer öffnen
                 </button>
             </div>
 
             <!-- IHK-Prüfungsmodus Card -->
             <div class="card exam-card" style="border: 2px solid #10b981; box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.1);">
-                <h3 style="color: #047857; margin-bottom: 0.5rem;"><i class="fa-solid fa-file-signature"></i> IHK-Prüfungsmodus</h3>
-                <p style="font-size: 0.85rem; color: var(--text-light); margin-bottom: 0.75rem; line-height: 1.35;">Trainiere reale Prüfungsaufgaben unter Echtzeitbedingungen.</p>
-                <div style="display: flex; flex-direction: column; gap: 0.5rem;">
-                    <button class="btn btn-full" id="exam-mode-btn" style="background-color: #10b981; color: white; justify-content: center; font-weight: bold; border: none; font-size: 0.95rem; display: flex; align-items: center; gap: 0.5rem; width: 100%;">
+                <h3 style="color: #047857; margin-bottom: 0.4rem;"><i class="fa-solid fa-file-signature"></i> IHK-Prüfungsmodus</h3>
+                <p style="font-size: 0.82rem; color: var(--text-light); margin-bottom: 0.55rem; line-height: 1.35;">Trainiere reale Prüfungsaufgaben unter Echtzeitbedingungen.</p>
+                <div style="display: flex; flex-direction: column; gap: 0.45rem;">
+                    <button class="btn btn-full" id="exam-mode-btn" style="background-color: #10b981; color: white; justify-content: center; font-weight: bold; border: none; font-size: 0.9rem; padding: 0.55rem; display: flex; align-items: center; gap: 0.45rem; width: 100%;">
                         <i class="fa-solid fa-graduation-cap"></i> IHK-Übungsmodus
                     </button>
-                    <button class="btn btn-full" id="simulation-mode-btn" style="background-color: #3b82f6; color: white; justify-content: center; font-weight: bold; border: none; font-size: 0.95rem; display: flex; align-items: center; gap: 0.5rem; width: 100%;">
+                    <button class="btn btn-full" id="simulation-mode-btn" style="background-color: #3b82f6; color: white; justify-content: center; font-weight: bold; border: none; font-size: 0.9rem; padding: 0.55rem; display: flex; align-items: center; gap: 0.45rem; width: 100%;">
                         <i class="fa-solid fa-stopwatch"></i> 90-Min.-Simulation
                     </button>
                 </div>
@@ -473,9 +463,9 @@
     </footer>
 
     <!-- Load diagram library, questions, generator and application logic -->
-    <script src="diagrams.js?v=80"></script>
-    <script src="questions.js?v=80"></script>
-    <script src="generator.js?v=80"></script>
-    <script src="app.js?v=80"></script>
+    <script src="diagrams.js?v=81"></script>
+    <script src="questions.js?v=81"></script>
+    <script src="generator.js?v=81"></script>
+    <script src="app.js?v=81"></script>
 </body>
 </html>
