@@ -1,0 +1,1388 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>IHK Rechen- & Einheiten-Trainer</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <style>
+    :root {
+      --background: #f8fafc;
+      --foreground: #0f172a;
+      --card: #ffffff;
+      --card-foreground: #0f172a;
+      --border: #e2e8f0;
+      --primary: #0284c7;
+      --primary-foreground: #ffffff;
+      --muted-foreground: #64748b;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900 antialiased p-4 sm:p-6 font-sans">
+  <div class="max-w-6xl mx-auto space-y-6">
+
+    <!-- Header Card -->
+    <div class="bg-white text-slate-900 border border-slate-200 rounded-2xl p-6 shadow-sm">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-2 mb-1">
+            <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-sky-500/10 text-sky-600 border border-sky-500/20">
+              IHK Prüfungsvorbereitung AP1 & AP2
+            </span>
+            <span class="text-xs text-slate-500">Version 1.5 (Inkl. Akku-Formel C = W / (U · η · DoD))</span>
+          </div>
+          <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">IHK Rechen- &amp; Einheiten-Trainer</h1>
+          <p class="text-sm text-slate-500 mt-1">
+            Komplexe Prüfungsaufgaben in verständliche Einzelschritte, Entscheidungsregeln und Einheitenumrechnungen zerlegt.
+          </p>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="text-right hidden sm:block">
+            <div class="text-xs text-slate-500">Lernmethode</div>
+            <div class="text-sm font-semibold text-sky-600">Atomare Teilschritte</div>
+          </div>
+          <div class="p-3 bg-sky-50 text-sky-600 rounded-xl border border-sky-200 text-xl font-bold">
+            📐
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigation Tabs -->
+      <div class="mt-6 border-b border-slate-200 flex flex-wrap gap-2">
+        <button onclick="switchTab('elektro')" id="tab-btn-elektro" class="tab-btn px-4 py-2.5 text-sm font-medium rounded-t-lg border-b-2 border-sky-600 text-sky-600 bg-sky-50/50 transition-all">
+          ⚡ Elektrotechnik &amp; Autonomiezeit (USV)
+        </button>
+        <button onclick="switchTab('kaufmaennisch')" id="tab-btn-kaufmaennisch" class="tab-btn px-4 py-2.5 text-sm font-medium rounded-t-lg border-b-2 border-transparent text-slate-500 hover:text-slate-800 transition-all">
+          💶 Handelskalkulation &amp; Skonto
+        </button>
+        <button onclick="switchTab('wirtschaft')" id="tab-btn-wirtschaft" class="tab-btn px-4 py-2.5 text-sm font-medium rounded-t-lg border-b-2 border-transparent text-slate-500 hover:text-slate-800 transition-all">
+          📈 Amortisationszeit &amp; ROI
+        </button>
+        <button onclick="switchTab('it')" id="tab-btn-it" class="tab-btn px-4 py-2.5 text-sm font-medium rounded-t-lg border-b-2 border-transparent text-slate-500 hover:text-slate-800 transition-all">
+          💾 IT-Einheiten &amp; Daten
+        </button>
+        <button onclick="switchTab('trainer')" id="tab-btn-trainer" class="tab-btn px-4 py-2.5 text-sm font-medium rounded-t-lg border-b-2 border-transparent text-slate-500 hover:text-slate-800 transition-all flex items-center gap-1.5">
+          <span>🎯</span> Schritt-für-Schritt Trainer
+        </button>
+      </div>
+    </div>
+
+    <!-- TAB 1: ELEKTROTECHNIK & AUTONOMIEZEIT (USV) -->
+    <div id="tab-content-elektro" class="tab-pane space-y-6">
+
+      <!-- 2-SPALTIGES HAUPTLAYOUT FÜR PERFEKTE SYMMETRIE -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+
+        <!-- LINKE SPALTE: PHYSIK, WIRK-/SCHEINLEISTUNG & PROFI-PARAMETER -->
+        <div class="space-y-6">
+
+          <!-- ENTSCHEIDUNGSMATRIX: WANN WATT, WANN VA? -->
+          <div class="bg-white border border-blue-200 rounded-2xl p-5 shadow-sm bg-gradient-to-br from-blue-50/50 to-transparent">
+            <div class="flex items-center justify-between mb-3">
+              <h3 class="font-bold text-sm flex items-center gap-2 text-slate-900">
+                <span class="p-1 bg-blue-100 text-blue-700 rounded text-xs">⚖️</span>
+                Entscheidungshilfe: Wann Watt (P), wann VA (S)?
+              </h3>
+              <span class="text-[11px] font-semibold text-blue-700 bg-blue-100 px-2 py-0.5 rounded">IHK-Regel</span>
+            </div>
+            <div class="grid grid-cols-2 gap-3 text-xs">
+              <div class="p-3 rounded-xl border border-blue-200 bg-blue-50/30 space-y-1.5">
+                <div class="font-bold text-blue-700">Scheinleistung S (VA / kVA)</div>
+                <div class="text-[11px] text-slate-600 leading-relaxed">
+                  • <strong>USV-Gerätegröße</strong> wählen<br>
+                  • <strong>Sicherung &amp; Kabel</strong> (I = S / U)<br>
+                  • Trafos &amp; Netzteile<br>
+                  <em>(Der Gesamtstrom belastet die Leitung!)</em>
+                </div>
+              </div>
+              <div class="p-3 rounded-xl border border-emerald-200 bg-emerald-50/30 space-y-1.5">
+                <div class="font-bold text-emerald-700">Wirkleistung P (W / kW)</div>
+                <div class="text-[11px] text-slate-600 leading-relaxed">
+                  • <strong>Batterielaufzeit / Autonomie</strong> (W = P · t)<br>
+                  • <strong>Stromrechnung / Kosten</strong> (kWh)<br>
+                  • Abwärme / Kühlung (W)<br>
+                  <em>(Akkus &amp; Zähler kennen kein cos φ!)</em>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Wirkleistung & Scheinleistung Card -->
+          <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm space-y-4">
+            <div class="flex items-center justify-between">
+              <h3 class="font-bold text-base flex items-center gap-2 text-slate-900">
+                <span class="p-1.5 bg-amber-100 text-amber-700 rounded-lg text-xs">⚡</span>
+                Wirkleistung vs. Scheinleistung (cos φ)
+              </h3>
+              <span class="text-xs font-mono bg-slate-100 text-slate-600 px-2 py-0.5 rounded">P = S · cos φ</span>
+            </div>
+
+            <div class="p-3.5 rounded-xl border border-slate-200 bg-slate-50 space-y-3">
+              <div class="grid grid-cols-3 gap-2">
+                <div>
+                  <label class="text-[11px] font-medium text-slate-600">Scheinleistung S (VA)</label>
+                  <input type="number" id="calc-s" value="3000" oninput="calcPower('S')" class="w-full mt-1 px-2.5 py-1 text-xs rounded-lg border border-slate-300 bg-white" />
+                </div>
+                <div>
+                  <label class="text-[11px] font-medium text-slate-600">Leistungsfaktor (cos φ)</label>
+                  <input type="number" step="0.05" id="calc-cos" value="0.8" min="0.1" max="1.0" oninput="calcPower('cos')" class="w-full mt-1 px-2.5 py-1 text-xs rounded-lg border border-slate-300 bg-white" />
+                </div>
+                <div>
+                  <label class="text-[11px] font-medium text-slate-600">Wirkleistung P (W)</label>
+                  <input type="number" id="calc-p" value="2400" oninput="calcPower('P')" class="w-full mt-1 px-2.5 py-1 text-xs rounded-lg border border-slate-300 bg-white font-bold text-emerald-600" />
+                </div>
+              </div>
+              <div id="calc-power-expl" class="text-xs font-mono text-slate-600 pt-1 border-t border-slate-200">
+                Rechenweg: 3.000 VA × 0,8 = 2.400 W (2,40 kW)
+              </div>
+            </div>
+          </div>
+
+          <!-- Profi-USV Parameter Card (η, DoD, Gleichspannung) -->
+          <div class="bg-white border border-slate-200 rounded-2xl p-5 shadow-sm space-y-4">
+            <div class="flex items-center justify-between">
+              <h3 class="font-bold text-base flex items-center gap-2 text-slate-900">
+                <span class="p-1.5 bg-emerald-100 text-emerald-700 rounded-lg text-xs">🛡️</span>
+                Wirkungsgrad (η) &amp; Entladetiefe (DoD)
+              </h3>
+              <span class="text-xs font-mono bg-emerald-100 text-emerald-700 px-2 py-0.5 rounded">Reale USV</span>
+            </div>
+
+            <p class="text-xs text-slate-600 leading-relaxed">
+              In schweren Prüfungsaufgaben dürfen Akkus nicht zu 100% entladen werden (<strong>DoD = Depth of Discharge</strong>, meist 80%) und der Wechselrichter hat Verluste (<strong>η = Wirkungsgrad</strong>, meist 90%).
+            </p>
+
+            <div class="p-3.5 rounded-xl border border-slate-200 bg-slate-50 space-y-2.5">
+              <div class="grid grid-cols-2 gap-2">
+                <div>
+                  <label class="text-[11px] font-medium text-slate-600">Akkukapazität (Ah)</label>
+                  <input type="number" id="profi-ah" value="200" oninput="calcProfiUSV()" class="w-full mt-1 px-2.5 py-1 text-xs rounded-lg border border-slate-300 bg-white" />
+                </div>
+                <div>
+                  <label class="text-[11px] font-medium text-slate-600">Spannung (V DC)</label>
+                  <input type="number" id="profi-volt" value="48" oninput="calcProfiUSV()" class="w-full mt-1 px-2.5 py-1 text-xs rounded-lg border border-slate-300 bg-white" />
+                </div>
+              </div>
+              <div class="grid grid-cols-2 gap-2">
+                <div>
+                  <label class="text-[11px] font-medium text-slate-600">Entladetiefe DoD (%)</label>
+                  <input type="number" id="profi-dod" value="80" oninput="calcProfiUSV()" class="w-full mt-1 px-2.5 py-1 text-xs rounded-lg border border-slate-300 bg-white" />
+                </div>
+                <div>
+                  <label class="text-[11px] font-medium text-slate-600">Wirkungsgrad η (%)</label>
+                  <input type="number" id="profi-eta" value="90" oninput="calcProfiUSV()" class="w-full mt-1 px-2.5 py-1 text-xs rounded-lg border border-slate-300 bg-white" />
+                </div>
+              </div>
+              <div>
+                <label class="text-[11px] font-medium text-slate-600">Serverlast (Watt)</label>
+                <input type="number" id="profi-load" value="3000" oninput="calcProfiUSV()" class="w-full mt-1 px-2.5 py-1 text-xs rounded-lg border border-slate-300 bg-white" />
+              </div>
+              <div class="pt-2 border-t border-slate-200 space-y-1 text-xs font-mono">
+                <div class="flex justify-between">
+                  <span class="text-slate-500 font-sans">Nutzbare Energie:</span>
+                  <span id="profi-res-nutz" class="font-bold text-amber-700">6.912 Wh (statt 9.600 Wh)</span>
+                </div>
+                <div class="flex justify-between items-center text-sm pt-0.5">
+                  <span class="font-sans font-semibold text-slate-900">Autonomiezeit:</span>
+                  <span id="profi-res-time" class="font-bold text-emerald-600">2 Std 18 Min</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- RECHTE SPALTE: ZEITRECHNER (PROMINENT!), AKKU-FORMEL-ERKLÄRER & EINHEITEN -->
+        <div class="space-y-6">
+
+          <!-- ⭐ DER GROSSE ZEIT- & MINUTEN-RECHNER (RECHTE SEITE!) ⭐ -->
+          <div class="bg-white border-2 border-sky-400 rounded-2xl p-5 shadow-sm bg-gradient-to-br from-sky-50 to-transparent space-y-4">
+            <div class="flex items-center justify-between">
+              <h3 class="font-bold text-base flex items-center gap-2 text-sky-700">
+                <span class="p-1.5 bg-sky-100 text-sky-700 rounded-lg text-xs">⏱️</span>
+                Dezimalstunden in Minuten umrechnen
+              </h3>
+              <span class="text-xs bg-sky-100 text-sky-700 font-bold px-2 py-0.5 rounded">IHK-Kernkompetenz</span>
+            </div>
+
+            <p class="text-xs text-slate-600 leading-relaxed">
+              <strong>Die häufigste Prüfungsfalle:</strong> 3,2 h sind <strong>NICHT</strong> 3 Std und 20 Min! Eine Stunde hat <strong>60 Minuten</strong>, nicht 100.
+            </p>
+
+            <!-- Interaktiver Zeit-Rechner -->
+            <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-3">
+              <div>
+                <label class="text-xs font-bold text-slate-800">Dezimalstunden eingeben (z. B. 3.2 oder 2.56):</label>
+                <div class="flex gap-2 mt-1">
+                  <input type="number" step="0.01" id="inp-dechour" value="3.2" oninput="convertTime(this.value)" class="flex-1 px-3 py-2 text-base font-bold font-mono rounded-lg border border-slate-300 bg-white focus:ring-2 focus:ring-sky-500" />
+                  <button onclick="setHourPreset(3.2)" class="px-2.5 py-1 text-xs rounded border border-slate-300 bg-white hover:bg-sky-50 font-mono">3,2 h</button>
+                  <button onclick="setHourPreset(2.56)" class="px-2.5 py-1 text-xs rounded border border-slate-300 bg-white hover:bg-sky-50 font-mono">2,56 h</button>
+                  <button onclick="setHourPreset(1.75)" class="px-2.5 py-1 text-xs rounded border border-slate-300 bg-white hover:bg-sky-50 font-mono">1,75 h</button>
+                </div>
+              </div>
+
+              <!-- Live-Ergebnis Box -->
+              <div class="p-3 rounded-xl border border-emerald-300 bg-emerald-50 space-y-1.5">
+                <div class="text-xs font-bold text-emerald-800 uppercase tracking-wider">Ergebnis:</div>
+                <div id="res-time-main" class="text-lg font-extrabold text-emerald-700 font-mono">
+                  3 Stunden und 12 Minuten
+                </div>
+                <div id="res-time-detail" class="text-xs text-slate-600 font-mono border-t border-emerald-200 pt-1.5">
+                  Rechenweg: Ganze Std = <strong>3 h</strong> | Nachkommastelle: 0,2 × 60 = <strong>12 Minuten</strong>
+                </div>
+              </div>
+
+              <!-- Typische IHK-Werte Schnellübersicht -->
+              <div class="grid grid-cols-4 gap-1.5 text-center text-[11px] font-mono pt-1 text-slate-600">
+                <div class="p-1.5 rounded bg-white border border-slate-200">0,25 h = <strong>15 min</strong></div>
+                <div class="p-1.5 rounded bg-white border border-slate-200">0,33 h = <strong>20 min</strong></div>
+                <div class="p-1.5 rounded bg-white border border-slate-200">0,50 h = <strong>30 min</strong></div>
+                <div class="p-1.5 rounded bg-white border border-slate-200">0,75 h = <strong>45 min</strong></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ⭐ DER AKKU-KAPAZITÄT FORMEL-ERKLÄRER (C = W / (U · η · DoD)) ⭐ -->
+          <div class="bg-white border-2 border-purple-300 rounded-2xl p-5 shadow-sm bg-gradient-to-br from-purple-50/60 to-transparent space-y-4">
+            <div class="flex items-center justify-between">
+              <h3 class="font-bold text-base flex items-center gap-2 text-purple-800">
+                <span class="p-1.5 bg-purple-100 text-purple-700 rounded-lg text-xs">🔋</span>
+                Akkukapazität berechnen: C = W / (U · η · DoD)
+              </h3>
+              <span class="text-xs bg-purple-100 text-purple-700 font-bold px-2 py-0.5 rounded">IHK-Prüfungsformel</span>
+            </div>
+
+            <!-- Formel-Kompaktbox -->
+            <div class="p-3.5 rounded-xl border border-purple-200 bg-white space-y-2">
+              <div class="font-mono text-center text-sm sm:text-base font-bold text-purple-900 bg-purple-50 p-2.5 rounded-lg border border-purple-200">
+                C = 3.200 Wh / (48 V × 0,9 × 0,8) = 3.200 Wh / 34,56 V ≈ <span class="text-purple-700 text-lg">92,6 Ah</span>
+              </div>
+              <div class="grid grid-cols-3 gap-2 text-[11px] text-slate-600 pt-1">
+                <div class="p-2 rounded bg-slate-50 border border-slate-200">
+                  <span class="font-bold text-slate-800 block">WARUM teilen?</span>
+                  Durch Zahlen &lt; 1 teilen macht das Ergebnis <strong>größer</strong>! Der Akku muss größer sein als ideal (66,7 Ah), um Verluste auszugleichen.
+                </div>
+                <div class="p-2 rounded bg-slate-50 border border-slate-200">
+                  <span class="font-bold text-slate-800 block">WANN nutzen?</span>
+                  Sobald im Text <strong>Wirkungsgrad (η = 90%)</strong> oder <strong>Entladetiefe (DoD = 80%)</strong> genannt sind!
+                </div>
+                <div class="p-2 rounded bg-slate-50 border border-slate-200">
+                  <span class="font-bold text-slate-800 block">WIE runden?</span>
+                  In der Praxis immer auf die <strong>nächsthöhere</strong> handelsübliche Akkugröße aufrunden (z.B. 100 Ah)!
+                </div>
+              </div>
+            </div>
+
+            <!-- Interaktiver Rechner für C = W / (U · η · DoD) -->
+            <div class="p-3.5 rounded-xl border border-slate-200 bg-slate-50 space-y-2.5">
+              <div class="text-xs font-bold text-slate-800">Eigene Werte ausprobieren:</div>
+              <div class="grid grid-cols-4 gap-2">
+                <div>
+                  <label class="text-[11px] font-medium text-slate-600">Energie (Wh)</label>
+                  <input type="number" id="formel-wh" value="3200" oninput="calcCapFormula()" class="w-full mt-1 px-2 py-1 text-xs rounded border border-slate-300 bg-white font-mono" />
+                </div>
+                <div>
+                  <label class="text-[11px] font-medium text-slate-600">Spannung (V)</label>
+                  <input type="number" id="formel-volt" value="48" oninput="calcCapFormula()" class="w-full mt-1 px-2 py-1 text-xs rounded border border-slate-300 bg-white font-mono" />
+                </div>
+                <div>
+                  <label class="text-[11px] font-medium text-slate-600">Wirkungsgrad η</label>
+                  <input type="number" step="0.05" id="formel-eta" value="0.9" oninput="calcCapFormula()" class="w-full mt-1 px-2 py-1 text-xs rounded border border-slate-300 bg-white font-mono" />
+                </div>
+                <div>
+                  <label class="text-[11px] font-medium text-slate-600">Entladetiefe DoD</label>
+                  <input type="number" step="0.05" id="formel-dod" value="0.8" oninput="calcCapFormula()" class="w-full mt-1 px-2 py-1 text-xs rounded border border-slate-300 bg-white font-mono" />
+                </div>
+              </div>
+
+              <div class="pt-2 border-t border-slate-200 flex justify-between items-center text-xs font-mono">
+                <span class="text-slate-600 font-sans">Ergebnis Kapazität C:</span>
+                <span id="formel-res-ah" class="font-bold text-base text-purple-700">92,6 Ah</span>
+              </div>
+              <div id="formel-res-detail" class="text-[11px] text-slate-500 font-mono">
+                Nenner = 48 V × 0,9 × 0,8 = 34,56 V | 3.200 Wh / 34,56 V = 92,59 Ah
+              </div>
+            </div>
+          </div>
+
+          <!-- W zu kW & Ah/V zu Wh Minirechner -->
+          <div class="grid grid-cols-2 gap-3">
+            <div class="p-3 rounded-xl border border-slate-200 bg-white space-y-1.5 shadow-sm">
+              <div class="text-[11px] font-bold text-slate-500">WATT ↔ KILOWATT</div>
+              <input type="number" id="inp-watt" value="7500" oninput="convertWatt(this.value)" placeholder="Watt" class="w-full px-2 py-1 text-xs rounded border border-slate-300 bg-slate-50 font-mono" />
+              <input type="number" id="inp-kw" value="7.5" oninput="convertKW(this.value)" placeholder="kW" class="w-full px-2 py-1 text-xs rounded border border-slate-300 bg-slate-50 font-mono" />
+            </div>
+            <div class="p-3 rounded-xl border border-slate-200 bg-white space-y-1.5 shadow-sm">
+              <div class="text-[11px] font-bold text-slate-500">Ah × VOLT = Wh</div>
+              <div class="flex gap-1">
+                <input type="number" id="inp-ah" value="1600" oninput="calcWh()" placeholder="Ah" class="w-1/2 px-2 py-1 text-xs rounded border border-slate-300 bg-slate-50 font-mono" />
+                <input type="number" id="inp-volt" value="12" oninput="calcWh()" placeholder="V" class="w-1/2 px-2 py-1 text-xs rounded border border-slate-300 bg-slate-50 font-mono" />
+              </div>
+              <div id="res-wh" class="text-xs font-bold font-mono text-emerald-600 pt-0.5 truncate">19.200 Wh</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- USV Autonomiezeit / Überbrückungszeit Komplettzerlegung (Volle Breite) -->
+      <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+        <div class="mb-4">
+          <div class="flex items-center justify-between">
+            <h2 class="text-lg font-bold flex items-center gap-2 text-slate-900">
+              <span class="p-1.5 bg-emerald-100 text-emerald-700 rounded-lg text-sm">🔋</span>
+              Autonomiezeit (USV-Überbrückungszeit): Die 5 Schritte
+            </h2>
+            <span class="text-xs bg-emerald-100 text-emerald-700 font-semibold px-2.5 py-1 rounded-full">Fachbegriff: Autonomiezeit</span>
+          </div>
+          <p class="text-xs text-slate-500 mt-1">
+            <strong>Hinweis:</strong> In Prüfungen wird die Überbrückungszeit oft <strong>Autonomiezeit</strong> genannt. Sie gibt an, wie lange die USV die Verbraucher bei Stromausfall autonom versorgen kann.
+          </p>
+        </div>
+
+        <div class="space-y-3">
+          <!-- Schritt 1 -->
+          <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/50 hover:border-sky-300 transition-all">
+            <div class="flex items-start justify-between">
+              <div class="space-y-1">
+                <div class="text-xs font-bold text-sky-700 uppercase tracking-wider">Schritt 1: Gesamtleistung der Verbraucher (P)</div>
+                <div class="text-sm font-medium text-slate-800">Multipliziere Anzahl der Geräte mit der Einzelleistung</div>
+                <div class="text-xs font-mono text-slate-600">
+                  P_ges = 10 Server × 750 W = <strong>7.500 W</strong> (7,5 kW)
+                </div>
+              </div>
+              <span class="text-xs px-2 py-1 rounded bg-white border border-slate-200 font-mono">P = n · P_i</span>
+            </div>
+          </div>
+
+          <!-- Schritt 2 -->
+          <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/50 hover:border-sky-300 transition-all">
+            <div class="flex items-start justify-between">
+              <div class="space-y-1">
+                <div class="text-xs font-bold text-sky-700 uppercase tracking-wider">Schritt 2: Gesamte Akkukapazität (Q)</div>
+                <div class="text-sm font-medium text-slate-800">Multipliziere Anzahl der Akkus mit deren Kapazität in Ah</div>
+                <div class="text-xs font-mono text-slate-600">
+                  Q_ges = 8 Akkus × 200 Ah = <strong>1.600 Ah</strong>
+                </div>
+              </div>
+              <span class="text-xs px-2 py-1 rounded bg-white border border-slate-200 font-mono">Q = n · Q_i</span>
+            </div>
+          </div>
+
+          <!-- Schritt 3 -->
+          <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/50 hover:border-sky-300 transition-all">
+            <div class="flex items-start justify-between">
+              <div class="space-y-1">
+                <div class="text-xs font-bold text-sky-700 uppercase tracking-wider">Schritt 3: Gespeicherte elektrische Energie (W)</div>
+                <div class="text-sm font-medium text-slate-800">Multipliziere Gesamtkapazität mit der Spannung (U = 12 V DC)</div>
+                <div class="text-xs font-mono text-slate-600">
+                  W = Q_ges × U = 1.600 Ah × 12 V = <strong>19.200 Wh</strong> (19,2 kWh)
+                </div>
+              </div>
+              <span class="text-xs px-2 py-1 rounded bg-white border border-slate-200 font-mono">W = Q · U</span>
+            </div>
+          </div>
+
+          <!-- Schritt 4 -->
+          <div class="p-4 rounded-xl border border-slate-200 bg-slate-50/50 hover:border-sky-300 transition-all">
+            <div class="flex items-start justify-between">
+              <div class="space-y-1">
+                <div class="text-xs font-bold text-sky-700 uppercase tracking-wider">Schritt 4: Autonomiezeit in Stunden berechnen (t)</div>
+                <div class="text-sm font-medium text-slate-800">Teile die Gesamtenergie durch die geforderte Gesamtleistung</div>
+                <div class="text-xs font-mono text-slate-600">
+                  t = W / P_ges = 19.200 Wh / 7.500 W = <strong>2,56 h</strong>
+                </div>
+              </div>
+              <span class="text-xs px-2 py-1 rounded bg-white border border-slate-200 font-mono">t = W / P</span>
+            </div>
+          </div>
+
+          <!-- Schritt 5 -->
+          <div class="p-4 rounded-xl border border-emerald-300 bg-emerald-50 hover:border-emerald-400 transition-all">
+            <div class="flex items-start justify-between">
+              <div class="space-y-1">
+                <div class="text-xs font-bold text-emerald-800 uppercase tracking-wider">Schritt 5: Dezimalstunden in Minuten umrechnen (Prüfungsfalle!)</div>
+                <div class="text-sm font-medium text-slate-800">0,56 h sind NICHT 56 Minuten! Multipliziere die Nachkommastelle mit 60.</div>
+                <div class="text-xs font-mono text-slate-600">
+                  Ganze Stunden: <strong>2 h</strong><br>
+                  Minuten: 0,56 × 60 = 33,6 min → abgerundet: <strong>33 min</strong><br>
+                  Endergebnis (Autonomiezeit): <span class="text-emerald-700 font-bold">2 Stunden 33 Minuten</span>
+                </div>
+              </div>
+              <span class="text-xs px-2 py-1 rounded bg-white border border-slate-200 font-mono font-bold text-emerald-700">t_min = 0,xx · 60</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 2: HANDELSKALKULATION & SKONTO -->
+    <div id="tab-content-kaufmaennisch" class="tab-pane hidden space-y-6">
+
+      <!-- Der Prozent-Versteher Card -->
+      <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="text-lg font-bold flex items-center gap-2 text-slate-900">
+            <span class="p-1.5 bg-purple-100 text-purple-700 rounded-lg text-sm">💡</span>
+            Der IHK-Prozent-Versteher: "Im", "Vom" &amp; "Auf" Hundert
+          </h2>
+          <span class="text-xs text-slate-500">Der größte Stolperstein erklärt</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <!-- Vom Hundert -->
+          <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold uppercase text-blue-700">Vom Hundert</span>
+              <span class="text-xs font-mono bg-blue-100 px-2 py-0.5 rounded text-blue-700">Basis = 100%</span>
+            </div>
+            <div class="text-sm font-semibold text-slate-800">Klassischer Rabatt</div>
+            <p class="text-xs text-slate-600">
+              Der Ausgangswert ist 100 %. Man rechnet einfach 100 € × 10 % = 10 €.
+            </p>
+            <div class="pt-2 text-xs font-mono bg-white p-2 rounded border border-slate-200">
+              100 € - 10 % = 90 €
+            </div>
+          </div>
+
+          <!-- Im Hundert -->
+          <div class="p-4 rounded-xl border border-rose-200 bg-rose-50 space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold uppercase text-rose-700">Im Hundert (Skonto!)</span>
+              <span class="text-xs font-mono bg-rose-100 px-2 py-0.5 rounded text-rose-700">Basis = z.B. 97%</span>
+            </div>
+            <div class="text-sm font-semibold text-slate-800">Skonto bei Vorwärtskalkulation</div>
+            <p class="text-xs text-slate-600">
+              Wenn 3 % Skonto vereinbart sind, ist der <strong>Barverkaufspreis = 97 %</strong> und der Zielverkaufspreis = 100 %.
+            </p>
+            <div class="pt-2 text-xs font-mono bg-white p-2 rounded border border-rose-200 text-rose-700 font-bold">
+              Zielpreis = (Barpreis / 97) × 100
+            </div>
+            <div class="text-[11px] text-slate-500">
+              ⚠️ <strong>Falsch:</strong> Barpreis × 1,03!
+            </div>
+          </div>
+
+          <!-- Auf Hundert -->
+          <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold uppercase text-emerald-700">Auf Hundert</span>
+              <span class="text-xs font-mono bg-emerald-100 px-2 py-0.5 rounded text-emerald-700">Basis = 100% (+ 19%)</span>
+            </div>
+            <div class="text-sm font-semibold text-slate-800">Umsatzsteuer (19 %)</div>
+            <p class="text-xs text-slate-600">
+              Der Nettopreis ist 100 %. Der Bruttopreis ist 119 %.
+            </p>
+            <div class="pt-2 text-xs font-mono bg-white p-2 rounded border border-slate-200">
+              Netto = (Brutto / 119) × 100
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Interaktiver Handelskalkulations-Rechner -->
+      <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+          <div>
+            <h2 class="text-lg font-bold flex items-center gap-2 text-slate-900">
+              <span class="p-1.5 bg-emerald-100 text-emerald-700 rounded-lg text-sm">📊</span>
+              Interaktive Handelskalkulation (Einkauf &amp; Verkauf)
+            </h2>
+            <p class="text-xs text-slate-500">Gib deine Werte ein und sieh dir den exakten Rechenweg an.</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="setCalcPreset('standard')" class="px-3 py-1 text-xs font-medium rounded-lg border border-slate-300 bg-white hover:bg-sky-50">Standard IHK-Werte</button>
+          </div>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm text-left border-collapse">
+            <thead>
+              <tr class="border-b border-slate-200 text-xs text-slate-500 uppercase">
+                <th class="py-2.5 px-3">Position</th>
+                <th class="py-2.5 px-3">Prozentsatz</th>
+                <th class="py-2.5 px-3">Betrag (€)</th>
+                <th class="py-2.5 px-3">Erklärung &amp; Formel</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y border-slate-200 font-mono text-xs">
+              <tr class="bg-slate-50/50">
+                <td class="py-2.5 px-3 font-sans font-medium text-slate-900">Listeneinkaufspreis (LEP)</td>
+                <td class="py-2.5 px-3 text-slate-500">100 %</td>
+                <td class="py-2.5 px-3">
+                  <input type="number" id="kalk-lep" value="1000.00" oninput="recalcTrade()" class="w-28 px-2 py-1 text-xs rounded border border-slate-300 bg-white font-bold text-slate-900" />
+                </td>
+                <td class="py-2.5 px-3 text-slate-500 font-sans">Ausgangsbasis des Lieferanten</td>
+              </tr>
+              <tr>
+                <td class="py-2.5 px-3 font-sans text-rose-600">- Lieferantenrabatt</td>
+                <td class="py-2.5 px-3">
+                  <input type="number" id="kalk-rabatt-p" value="10" oninput="recalcTrade()" class="w-16 px-2 py-1 text-xs rounded border border-slate-300 bg-white" /> %
+                </td>
+                <td class="py-2.5 px-3 text-rose-600 font-bold" id="kalk-rabatt-val">- 100,00 €</td>
+                <td class="py-2.5 px-3 text-slate-500 font-sans">vom Hundert: 1000 × 10 %</td>
+              </tr>
+              <tr class="bg-slate-50 font-bold">
+                <td class="py-2.5 px-3 font-sans">= Zieleinkaufspreis (ZEP)</td>
+                <td class="py-2.5 px-3" id="kalk-zep-p">90 %</td>
+                <td class="py-2.5 px-3 text-sky-700" id="kalk-zep-val">900,00 €</td>
+                <td class="py-2.5 px-3 text-slate-500 font-sans font-normal">Rechnungsbetrag vor Skonto</td>
+              </tr>
+              <tr>
+                <td class="py-2.5 px-3 font-sans text-rose-600">- Lieferantenskonto</td>
+                <td class="py-2.5 px-3">
+                  <input type="number" id="kalk-skonto-p" value="3" oninput="recalcTrade()" class="w-16 px-2 py-1 text-xs rounded border border-slate-300 bg-white" /> %
+                </td>
+                <td class="py-2.5 px-3 text-rose-600 font-bold" id="kalk-skonto-val">- 27,00 €</td>
+                <td class="py-2.5 px-3 text-slate-500 font-sans">vom ZEP: 900 × 3 %</td>
+              </tr>
+              <tr class="bg-slate-50 font-bold">
+                <td class="py-2.5 px-3 font-sans">= Bareinkaufspreis (BEP)</td>
+                <td class="py-2.5 px-3">97 %</td>
+                <td class="py-2.5 px-3 text-sky-700" id="kalk-bep-val">873,00 €</td>
+                <td class="py-2.5 px-3 text-slate-500 font-sans font-normal">Tatsächlich überwiesener Betrag</td>
+              </tr>
+              <tr>
+                <td class="py-2.5 px-3 font-sans text-emerald-700">+ Bezugskosten (Fracht/Zoll)</td>
+                <td class="py-2.5 px-3 text-slate-500">—</td>
+                <td class="py-2.5 px-3">
+                  <input type="number" id="kalk-bezug" value="27.00" oninput="recalcTrade()" class="w-28 px-2 py-1 text-xs rounded border border-slate-300 bg-white" />
+                </td>
+                <td class="py-2.5 px-3 text-slate-500 font-sans">Transport- und Verpackungskosten</td>
+              </tr>
+              <tr class="bg-emerald-50 font-bold border-t-2 border-emerald-300">
+                <td class="py-3 px-3 font-sans text-emerald-800">= Bezugspreis (Einstandspreis)</td>
+                <td class="py-3 px-3 text-emerald-800">100 %</td>
+                <td class="py-3 px-3 text-emerald-700 text-sm" id="kalk-einstand-val">900,00 €</td>
+                <td class="py-3 px-3 text-emerald-800 font-sans font-normal">Kosten der Ware bis ins eigene Lager</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 3: WIRTSCHAFTLICHKEIT & AMORTISATIONSZEIT -->
+    <div id="tab-content-wirtschaft" class="tab-pane hidden space-y-6">
+
+      <!-- Grundlagen Card -->
+      <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="text-lg font-bold flex items-center gap-2 text-slate-900">
+            <span class="p-1.5 bg-blue-100 text-blue-700 rounded-lg text-sm">📈</span>
+            Amortisationszeit &amp; Return on Investment (ROI)
+          </h2>
+          <span class="text-xs px-2.5 py-1 rounded bg-blue-100 text-blue-700 font-mono">Wirtschaftlichkeitsprüfung</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="space-y-3 text-sm text-slate-600">
+            <p>
+              Die <strong>statische Amortisationsrechnung</strong> ermittelt, nach welcher Zeitspanne (Jahre / Monate) eine Investition durch die daraus resultierenden Netto-Einsparungen oder Gewinne wieder hereingeholt ist.
+            </p>
+            <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 space-y-2 text-xs">
+              <div class="font-semibold text-slate-900">💡 Die zentralen Formeln:</div>
+              <div>• <strong>Amortisationszeit:</strong> t_amort = Anschaffungskosten / Jährliche Einsparung</div>
+              <div>• <strong>Monats-Umrechnung:</strong> Nachkommastellen der Jahre × 12</div>
+              <div>• <strong>ROI (%):</strong> (Jährliche Einsparung / Investitionskosten) × 100 %</div>
+            </div>
+          </div>
+
+          <!-- Interaktiver Amortisationsrechner -->
+          <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-3">
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="text-xs font-medium text-slate-600">Investitionskosten (€)</label>
+                <input type="number" id="amort-invest" value="12000" oninput="calcAmortization()" class="w-full mt-1 px-3 py-1.5 text-sm rounded-lg border border-slate-300 bg-white" />
+              </div>
+              <div>
+                <label class="text-xs font-medium text-slate-600">Jährliche Einsparung (€)</label>
+                <input type="number" id="amort-saving" value="4500" oninput="calcAmortization()" class="w-full mt-1 px-3 py-1.5 text-sm rounded-lg border border-slate-300 bg-white" />
+              </div>
+            </div>
+
+            <div class="pt-2 border-t border-slate-200 space-y-2 text-xs font-mono">
+              <div class="flex justify-between items-center">
+                <span class="text-slate-500 font-sans">Amortisationszeit (Jahre):</span>
+                <span id="amort-res-years" class="font-bold text-sky-700 text-sm">2,67 Jahre</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-slate-500 font-sans">In Jahren &amp; Monaten:</span>
+                <span id="amort-res-split" class="font-bold text-emerald-700 text-sm">2 Jahre und 8 Monate</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-slate-500 font-sans">Return on Investment (ROI):</span>
+                <span id="amort-res-roi" class="font-bold text-blue-700 text-sm">37,50 % p.a.</span>
+              </div>
+            </div>
+            <div id="amort-expl" class="text-[11px] text-slate-600 bg-white p-2 rounded-lg border border-slate-200">
+              Rechenweg: 12.000 € / 4.500 € = 2,67 Jahre (0,67 × 12 = 8 Monate)
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 4: IT-EINHEITEN & DATENÜBERTRAGUNG -->
+    <div id="tab-content-it" class="tab-pane hidden space-y-6">
+
+      <!-- Dezimal vs. Binär Card -->
+      <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="text-lg font-bold flex items-center gap-2 text-slate-900">
+            <span class="p-1.5 bg-indigo-100 text-indigo-700 rounded-lg text-sm">💾</span>
+            Dezimal (1000er) vs. Binär (1024er) Einheiten
+          </h2>
+          <span class="text-xs px-2.5 py-1 rounded bg-indigo-100 text-indigo-700 font-mono">1 Byte = 8 Bit</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-3">
+            <div class="text-xs font-bold uppercase text-indigo-700 tracking-wider">SI-Präfixe (1000er Basis)</div>
+            <div class="text-sm font-semibold text-slate-800">Festplattenhersteller &amp; Netzwerke</div>
+            <div class="space-y-1.5 text-xs text-slate-600 font-mono">
+              <div>1 kB (Kilobyte) = 1.000 Byte</div>
+              <div>1 MB (Megabyte) = 1.000.000 Byte</div>
+              <div>1 GB (Gigabyte) = 1.000.000.000 Byte</div>
+              <div>1 TB (Terabyte) = 1.000.000.000.000 Byte</div>
+            </div>
+          </div>
+
+          <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-3">
+            <div class="text-xs font-bold uppercase text-emerald-700 tracking-wider">IEC-Präfixe (1024er Basis)</div>
+            <div class="text-sm font-semibold text-slate-800">Betriebssysteme (Windows) &amp; RAM</div>
+            <div class="space-y-1.5 text-xs text-slate-600 font-mono">
+              <div>1 KiB (Kibibyte) = 1.024 Byte</div>
+              <div>1 MiB (Mebibyte) = 1.048.576 Byte</div>
+              <div>1 GiB (Gibibyte) = 1.073.741.824 Byte</div>
+              <div>1 TiB (Tebibyte) = 1.099.511.627.776 Byte</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Übertragungszeiten Rechner -->
+      <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="text-lg font-bold flex items-center gap-2 text-slate-900">
+            <span class="p-1.5 bg-blue-100 text-blue-700 rounded-lg text-sm">🚀</span>
+            Download- &amp; Übertragungszeit Schritt-für-Schritt
+          </h2>
+          <span class="text-xs text-slate-500">Mit Protokoll-Overhead</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+          <div>
+            <label class="text-xs text-slate-600">Dateigröße</label>
+            <div class="flex gap-2 mt-1">
+              <input type="number" id="net-size" value="10" oninput="calcNetTransfer()" class="w-full px-3 py-1.5 text-sm rounded-lg border border-slate-300 bg-white" />
+              <select id="net-size-unit" onchange="calcNetTransfer()" class="px-2 py-1.5 text-xs rounded-lg border border-slate-300 bg-white">
+                <option value="GB">GB</option>
+                <option value="MB">MB</option>
+                <option value="GiB">GiB</option>
+              </select>
+            </div>
+          </div>
+          <div>
+            <label class="text-xs text-slate-600">Leitungsgeschwindigkeit</label>
+            <div class="flex gap-2 mt-1">
+              <input type="number" id="net-speed" value="100" oninput="calcNetTransfer()" class="w-full px-3 py-1.5 text-sm rounded-lg border border-slate-300 bg-white" />
+              <select id="net-speed-unit" onchange="calcNetTransfer()" class="px-2 py-1.5 text-xs rounded-lg border border-slate-300 bg-white">
+                <option value="Mbit">Mbit/s</option>
+                <option value="Gbit">Gbit/s</option>
+                <option value="kbit">kbit/s</option>
+              </select>
+            </div>
+          </div>
+          <div>
+            <label class="text-xs text-slate-600">Protokoll-Overhead (%)</label>
+            <input type="number" id="net-overhead" value="10" oninput="calcNetTransfer()" class="w-full mt-1 px-3 py-1.5 text-sm rounded-lg border border-slate-300 bg-white" />
+          </div>
+        </div>
+
+        <!-- Zwischenschritte -->
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 space-y-2 text-xs font-mono">
+          <div class="text-xs font-sans font-bold text-slate-900 mb-1">Rechenweg:</div>
+          <div id="net-step-1" class="text-slate-600">1. Dateigröße in Megabit: 10 GB × 8 × 1000 = 80.000 Mbit</div>
+          <div id="net-step-2" class="text-slate-600">2. Netto-Geschwindigkeit nach Overhead: 100 Mbit/s × 0,9 = 90 Mbit/s</div>
+          <div id="net-step-3" class="text-slate-600">3. Dauer in Sekunden: 80.000 / 90 ≈ 888,89 s</div>
+          <div id="net-step-4" class="text-sm font-bold text-emerald-700 font-sans pt-1">
+            4. Ergebnis: 14 Minuten 48 Sekunden
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 5: SCHRITT-FÜR-SCHRITT TRAINER -->
+    <div id="tab-content-trainer" class="tab-pane hidden space-y-6">
+
+      <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+          <div>
+            <h2 class="text-xl font-bold flex items-center gap-2 text-slate-900">
+              <span>🎯</span> Interaktiver Schritt-für-Schritt Trainer
+            </h2>
+            <p class="text-sm text-slate-500 mt-1">
+              Löse IHK-Aufgaben Schritt für Schritt. Du wirst bei jedem Teilschritt überprüft.
+            </p>
+          </div>
+          <div class="flex items-center gap-2">
+            <select id="trainer-type-select" onchange="initTrainerExercise()" class="px-3 py-2 text-sm rounded-xl border border-slate-300 bg-white font-medium text-slate-800">
+              <option value="zeit_min">⏱️ Zeit: 3,2 Stunden in Std &amp; Min</option>
+              <option value="akku_formel">🔋 Akku: C = W / (U · η · DoD)</option>
+              <option value="usv_profi">🔋 USV Profi (mit Wirkungsgrad &amp; DoD)</option>
+              <option value="usv">🔋 USV Standard (Autonomiezeit)</option>
+              <option value="amort">📈 Amortisationszeit &amp; ROI</option>
+              <option value="skonto">💶 Skonto "Im Hundert"</option>
+              <option value="wirkleistung">⚡ Wirkleistung aus Scheinleistung (cos φ)</option>
+            </select>
+            <button onclick="initTrainerExercise()" class="px-3 py-2 text-sm font-medium rounded-xl bg-sky-600 text-white hover:bg-sky-700 transition-all flex items-center gap-1.5">
+              <span>🔄</span> Neue Werte
+            </button>
+          </div>
+        </div>
+
+        <!-- Aufgaben-Box -->
+        <div class="p-5 rounded-xl border border-slate-200 bg-slate-50 space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold uppercase tracking-wider text-sky-700" id="trainer-task-badge">Aufgabe</span>
+            <span class="text-xs text-slate-500 font-mono" id="trainer-progress-text">Schritt 1</span>
+          </div>
+          <div class="text-sm sm:text-base font-medium text-slate-900" id="trainer-task-desc">
+            Wird geladen...
+          </div>
+        </div>
+
+        <!-- Aktiver Schritt Container -->
+        <div class="mt-6 p-6 rounded-xl border-2 border-sky-300 bg-white space-y-4 shadow-sm" id="trainer-step-container">
+          <div class="flex items-center justify-between">
+            <h3 class="text-base font-bold text-slate-900" id="trainer-step-title">Schritt 1</h3>
+            <span class="text-xs px-2 py-1 rounded-full bg-sky-100 text-sky-800 font-mono" id="trainer-step-unit">Einheit</span>
+          </div>
+
+          <p class="text-sm text-slate-600" id="trainer-step-instruction">
+            Aufgabentext
+          </p>
+
+          <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+            <div class="relative flex-1">
+              <input type="number" step="any" id="trainer-step-input" placeholder="Dein Ergebnis..." class="w-full px-4 py-2.5 rounded-xl border border-slate-300 bg-slate-50 text-base font-mono focus:outline-none focus:ring-2 focus:ring-sky-500" onkeydown="if(event.key==='Enter') checkTrainerStep()" />
+            </div>
+            <button onclick="checkTrainerStep()" class="px-6 py-2.5 rounded-xl bg-sky-600 text-white font-semibold hover:bg-sky-700 transition-all shadow-sm">
+              Schritt prüfen
+            </button>
+            <button onclick="showTrainerSolution()" class="px-4 py-2.5 rounded-xl border border-slate-300 text-xs text-slate-500 hover:text-slate-800 hover:bg-slate-50 transition-all">
+              Lösungsweg anzeigen
+            </button>
+          </div>
+
+          <!-- Feedback Box -->
+          <div id="trainer-feedback" class="hidden p-4 rounded-xl text-sm font-medium"></div>
+        </div>
+
+        <!-- Zusammenfassung aller bisher gelösten Schritte -->
+        <div class="mt-6 space-y-2" id="trainer-solved-steps-container"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    // TAB SWITCHING
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-pane').forEach(p => p.classList.add('hidden'));
+      document.querySelectorAll('.tab-btn').forEach(b => {
+        b.classList.remove('border-sky-600', 'text-sky-600', 'bg-sky-50/50');
+        b.classList.add('border-transparent', 'text-slate-500');
+      });
+
+      const activePane = document.getElementById('tab-content-' + tabId);
+      const activeBtn = document.getElementById('tab-btn-' + tabId);
+      if (activePane) activePane.classList.remove('hidden');
+      if (activeBtn) {
+        activeBtn.classList.remove('border-transparent', 'text-slate-500');
+        activeBtn.classList.add('border-sky-600', 'text-sky-600', 'bg-sky-50/50');
+      }
+
+      if (tabId === 'trainer' && !currentExercise) {
+        initTrainerExercise();
+      }
+    }
+
+    // ELEKTRO CONVERTERS
+    function convertWatt(w) {
+      const val = parseFloat(w);
+      document.getElementById('inp-kw').value = isNaN(val) ? '' : (val / 1000).toFixed(3);
+    }
+    function convertKW(kw) {
+      const val = parseFloat(kw);
+      document.getElementById('inp-watt').value = isNaN(val) ? '' : Math.round(val * 1000);
+    }
+    function calcWh() {
+      const ah = parseFloat(document.getElementById('inp-ah').value) || 0;
+      const v = parseFloat(document.getElementById('inp-volt').value) || 0;
+      const wh = ah * v;
+      const kwh = (wh / 1000).toFixed(2);
+      document.getElementById('res-wh').innerText = `${wh.toLocaleString('de-DE')} Wh (${kwh.replace('.', ',')} kWh)`;
+    }
+
+    // ZEIT-UMRECHNER (DEZIMALSTUNDEN IN MINUTEN)
+    function convertTime(h) {
+      const val = parseFloat(h);
+      if (isNaN(val) || val < 0) {
+        document.getElementById('res-time-main').innerText = 'Ungültige Eingabe';
+        document.getElementById('res-time-detail').innerText = 'Bitte eine positive Zahl eingeben';
+        return;
+      }
+      const wholeH = Math.floor(val);
+      const remainderH = val - wholeH;
+      const exactMin = remainderH * 60;
+      const roundedMin = Math.floor(exactMin);
+
+      document.getElementById('res-time-main').innerText = `${wholeH} Stunden und ${roundedMin} Minuten`;
+      document.getElementById('res-time-detail').innerHTML = `Rechenweg: Ganze Std = <strong>${wholeH} h</strong> | Nachkommastelle: ${remainderH.toFixed(2).replace('.', ',')} × 60 = <strong>${exactMin.toFixed(1).replace('.', ',')} Minuten</strong> (abgerundet: ${roundedMin} Min)`;
+    }
+
+    function setHourPreset(val) {
+      document.getElementById('inp-dechour').value = val;
+      convertTime(val);
+    }
+
+    // AKKU-FORMEL RECHNER: C = W / (U · η · DoD)
+    function calcCapFormula() {
+      const wh = parseFloat(document.getElementById('formel-wh').value) || 0;
+      const u = parseFloat(document.getElementById('formel-volt').value) || 0;
+      const eta = parseFloat(document.getElementById('formel-eta').value) || 0;
+      const dod = parseFloat(document.getElementById('formel-dod').value) || 0;
+
+      const nenner = u * eta * dod;
+      if (nenner > 0 && wh > 0) {
+        const c = wh / nenner;
+        document.getElementById('formel-res-ah').innerText = `${c.toFixed(1).replace('.', ',')} Ah`;
+        document.getElementById('formel-res-detail').innerText = `Nenner = ${u} V × ${eta} × ${dod} = ${nenner.toFixed(2).replace('.', ',')} V | ${wh} Wh / ${nenner.toFixed(2).replace('.', ',')} V = ${c.toFixed(2).replace('.', ',')} Ah`;
+      } else {
+        document.getElementById('formel-res-ah').innerText = '—';
+      }
+    }
+
+    // PROFI USV RECHNER (Wirkungsgrad & DoD)
+    function calcProfiUSV() {
+      const ah = parseFloat(document.getElementById('profi-ah').value) || 0;
+      const volt = parseFloat(document.getElementById('profi-volt').value) || 0;
+      const dod = (parseFloat(document.getElementById('profi-dod').value) || 0) / 100;
+      const eta = (parseFloat(document.getElementById('profi-eta').value) || 0) / 100;
+      const load = parseFloat(document.getElementById('profi-load').value) || 0;
+
+      const nennEnergie = ah * volt;
+      const nutzEnergie = nennEnergie * dod * eta;
+
+      document.getElementById('profi-res-nutz').innerText = `${Math.round(nutzEnergie).toLocaleString('de-DE')} Wh (${(dod*100).toFixed(0)}% DoD, ${(eta*100).toFixed(0)}% η)`;
+
+      if (load > 0 && nutzEnergie > 0) {
+        const tHours = nutzEnergie / load;
+        const wholeH = Math.floor(tHours);
+        const remMin = Math.floor((tHours - wholeH) * 60);
+        document.getElementById('profi-res-time').innerText = `${wholeH} Std ${remMin} Min (${tHours.toFixed(2).replace('.', ',')} h)`;
+      } else {
+        document.getElementById('profi-res-time').innerText = '—';
+      }
+    }
+
+    // WIRKLEISTUNG RECHNER
+    function calcPower(changed) {
+      let s = parseFloat(document.getElementById('calc-s').value);
+      let cos = parseFloat(document.getElementById('calc-cos').value);
+      let p = parseFloat(document.getElementById('calc-p').value);
+
+      if (changed === 'S' || changed === 'cos') {
+        if (!isNaN(s) && !isNaN(cos)) {
+          p = Math.round(s * cos);
+          document.getElementById('calc-p').value = p;
+        }
+      } else if (changed === 'P') {
+        if (!isNaN(p) && !isNaN(cos) && cos > 0) {
+          s = Math.round(p / cos);
+          document.getElementById('calc-s').value = s;
+        }
+      }
+      document.getElementById('calc-power-expl').innerHTML = `Rechenweg: ${s} VA × ${cos} = ${p} W (${(p/1000).toFixed(2).replace('.', ',')} kW)`;
+    }
+
+    // HANDELSKALKULATION
+    function recalcTrade() {
+      const lep = parseFloat(document.getElementById('kalk-lep').value) || 0;
+      const rabattP = parseFloat(document.getElementById('kalk-rabatt-p').value) || 0;
+      const skontoP = parseFloat(document.getElementById('kalk-skonto-p').value) || 0;
+      const bezug = parseFloat(document.getElementById('kalk-bezug').value) || 0;
+
+      const rabattVal = lep * (rabattP / 100);
+      const zepVal = lep - rabattVal;
+      const zepP = 100 - rabattP;
+
+      const skontoVal = zepVal * (skontoP / 100);
+      const bepVal = zepVal - skontoVal;
+
+      const einstandVal = bepVal + bezug;
+
+      document.getElementById('kalk-rabatt-val').innerText = `- ${rabattVal.toFixed(2).replace('.', ',')} €`;
+      document.getElementById('kalk-zep-p').innerText = `${zepP} %`;
+      document.getElementById('kalk-zep-val').innerText = `${zepVal.toFixed(2).replace('.', ',')} €`;
+      document.getElementById('kalk-skonto-val').innerText = `- ${skontoVal.toFixed(2).replace('.', ',')} €`;
+      document.getElementById('kalk-bep-val').innerText = `${bepVal.toFixed(2).replace('.', ',')} €`;
+      document.getElementById('kalk-einstand-val').innerText = `${einstandVal.toFixed(2).replace('.', ',')} €`;
+    }
+
+    function setCalcPreset(type) {
+      document.getElementById('kalk-lep').value = '1000.00';
+      document.getElementById('kalk-rabatt-p').value = '10';
+      document.getElementById('kalk-skonto-p').value = '3';
+      document.getElementById('kalk-bezug').value = '27.00';
+      recalcTrade();
+    }
+
+    // AMORTISATIONSRECHNER
+    function calcAmortization() {
+      const invest = parseFloat(document.getElementById('amort-invest').value) || 0;
+      const saving = parseFloat(document.getElementById('amort-saving').value) || 0;
+
+      if (saving <= 0) {
+        document.getElementById('amort-res-years').innerText = 'Keine Amortisation';
+        document.getElementById('amort-res-split').innerText = '—';
+        document.getElementById('amort-res-roi').innerText = '0,00 %';
+        return;
+      }
+
+      const years = invest / saving;
+      const wholeYears = Math.floor(years);
+      const remMonths = Math.round((years - wholeYears) * 12);
+      const roi = (saving / invest) * 100;
+
+      document.getElementById('amort-res-years').innerText = `${years.toFixed(2).replace('.', ',')} Jahre`;
+      document.getElementById('amort-res-split').innerText = `${wholeYears} Jahre und ${remMonths} Monate`;
+      document.getElementById('amort-res-roi').innerText = `${roi.toFixed(2).replace('.', ',')} % p.a.`;
+      document.getElementById('amort-expl').innerHTML = `Rechenweg: ${invest.toLocaleString('de-DE')} € / ${saving.toLocaleString('de-DE')} € = ${years.toFixed(2).replace('.', ',')} Jahre (${(years - wholeYears).toFixed(2).replace('.', ',')} × 12 = ${remMonths} Monate)`;
+    }
+
+    // NET TRANSFER CALC
+    function calcNetTransfer() {
+      const size = parseFloat(document.getElementById('net-size').value) || 0;
+      const sizeUnit = document.getElementById('net-size-unit').value;
+      const speed = parseFloat(document.getElementById('net-speed').value) || 0;
+      const speedUnit = document.getElementById('net-speed-unit').value;
+      const overhead = parseFloat(document.getElementById('net-overhead').value) || 0;
+
+      let sizeMbit = 0;
+      if (sizeUnit === 'GB') sizeMbit = size * 1000 * 8;
+      else if (sizeUnit === 'MB') sizeMbit = size * 8;
+      else if (sizeUnit === 'GiB') sizeMbit = size * 1024 * 8;
+
+      let speedMbit = 0;
+      if (speedUnit === 'Mbit') speedMbit = speed;
+      else if (speedUnit === 'Gbit') speedMbit = speed * 1000;
+      else if (speedUnit === 'kbit') speedMbit = speed / 1000;
+
+      const netSpeed = speedMbit * (1 - (overhead / 100));
+      const sec = netSpeed > 0 ? (sizeMbit / netSpeed) : 0;
+
+      const min = Math.floor(sec / 60);
+      const remSec = Math.round(sec % 60);
+
+      document.getElementById('net-step-1').innerText = `1. Dateigröße in Megabit: ${sizeMbit.toLocaleString('de-DE')} Mbit`;
+      document.getElementById('net-step-2').innerText = `2. Netto-Geschwindigkeit (${overhead}% Overhead): ${netSpeed.toFixed(2).replace('.', ',')} Mbit/s`;
+      document.getElementById('net-step-3').innerText = `3. Dauer in Sekunden: ${sec.toFixed(2).replace('.', ',')} s`;
+      document.getElementById('net-step-4').innerText = `4. Ergebnis: ${min} Minuten ${remSec} Sekunden`;
+    }
+
+    // TRAINER ENGINE
+    let currentExercise = null;
+    let currentStepIndex = 0;
+
+    function initTrainerExercise() {
+      const type = document.getElementById('trainer-type-select').value;
+      currentStepIndex = 0;
+      document.getElementById('trainer-solved-steps-container').innerHTML = '';
+      hideTrainerFeedback();
+
+      if (type === 'zeit_min') {
+        const hList = [1.2, 1.4, 2.3, 2.5, 3.2, 3.75, 4.6];
+        const val = hList[Math.floor(Math.random() * hList.length)];
+        const wholeH = Math.floor(val);
+        const remH = parseFloat((val - wholeH).toFixed(2));
+        const min = Math.round(remH * 60);
+
+        currentExercise = {
+          title: "⏱️ Zeit: Dezimalstunden in Minuten",
+          desc: `Eine USV-Berechnung oder Projektzeit liefert ein Ergebnis von <strong>${val.toString().replace('.', ',')} Stunden</strong>. Rechne diese Dezimalstunden exakt in Stunden und Minuten um.`,
+          steps: [
+            {
+              title: "Schritt 1: Ganze Stunden bestimmen",
+              instruction: `Wie viele <strong>ganze Stunden</strong> stecken in ${val.toString().replace('.', ',')} Stunden?`,
+              unit: "Stunden",
+              expected: wholeH,
+              tolerance: 0,
+              formula: `Ganze Stunden = ${wholeH} h`
+            },
+            {
+              title: "Schritt 2: Nachkommastelle in Minuten umrechnen",
+              instruction: `Rechne die Nachkommastelle <strong>${remH.toString().replace('.', ',')} h</strong> in Minuten um. Multipliziere dazu mit 60 (da 1 h = 60 min).`,
+              unit: "Minuten",
+              expected: min,
+              tolerance: 0,
+              formula: `${remH.toString().replace('.', ',')} h × 60 min/h = ${min} Minuten (Endergebnis: ${wholeH} Std ${min} Min)`
+            }
+          ]
+        };
+      } else if (type === 'akku_formel') {
+        const wh = [2400, 3200, 4800, 6000][Math.floor(Math.random() * 4)];
+        const u = [24, 48][Math.floor(Math.random() * 2)];
+        const eta = 0.9;
+        const dod = 0.8;
+        const nenner = u * eta * dod;
+        const cExpected = wh / nenner;
+
+        currentExercise = {
+          title: "🔋 Akku-Kapazität C = W / (U · η · DoD)",
+          desc: `Für ein Notstromsystem werden <strong>${wh} Wh Energie</strong> benötigt. Die Batteriespannung beträgt <strong>${u} V DC</strong>. Der Wechselrichter hat einen Wirkungsgrad von <strong>η = 90 % (0,9)</strong> und die maximale Entladetiefe beträgt <strong>DoD = 80 % (0,8)</strong>.`,
+          steps: [
+            {
+              title: "Schritt 1: Reale effektive Spannung im Nenner berechnen",
+              instruction: `Berechne das Produkt im Nenner: U × η × DoD = ${u} V × 0,9 × 0,8.`,
+              unit: "V",
+              expected: parseFloat(nenner.toFixed(2)),
+              tolerance: 0.1,
+              formula: `Nenner = ${u} V × 0,9 × 0,8 = ${nenner.toFixed(2)} V`
+            },
+            {
+              title: "Schritt 2: Benötigte Akkukapazität C in Ah berechnen",
+              instruction: `Berechne die Kapazität C = ${wh} Wh / ${nenner.toFixed(2)} V (auf 1 Nachkommastelle genau).`,
+              unit: "Ah",
+              expected: parseFloat(cExpected.toFixed(1)),
+              tolerance: 0.5,
+              formula: `C = ${wh} Wh / ${nenner.toFixed(2)} V = ${cExpected.toFixed(1)} Ah`
+            }
+          ]
+        };
+      } else if (type === 'usv_profi') {
+        const servers = Math.floor(Math.random() * 6) + 4;
+        const pServer = [450, 500, 600, 700][Math.floor(Math.random() * 4)];
+        const pGes = servers * pServer;
+        const qBatt = [100, 150, 200][Math.floor(Math.random() * 3)];
+        const uBatt = 12;
+        const battCount = [4, 8][Math.floor(Math.random() * 2)];
+        const uDC = battCount === 4 ? 48 : 96;
+        const wNenn = qBatt * uDC;
+        const dodP = [80, 85, 90][Math.floor(Math.random() * 3)];
+        const etaP = [85, 90][Math.floor(Math.random() * 2)];
+        const wNutz = wNenn * (dodP / 100) * (etaP / 100);
+        const tHours = wNutz / pGes;
+        const wholeHours = Math.floor(tHours);
+        const remMin = Math.floor((tHours - wholeHours) * 60);
+
+        currentExercise = {
+          title: "USV Profi (mit Wirkungsgrad & DoD)",
+          desc: `Ein Serverschrank hat <strong>${servers} Server à ${pServer} W</strong>. Die USV nutzt <strong>${battCount} Akkus à ${uBatt} V mit je ${qBatt} Ah</strong> (in Reihe geschaltet = <strong>${uDC} V DC Gleichspannung</strong>).<br>Vorgaben: Maximale Entladetiefe <strong>DoD = ${dodP} %</strong>, Wechselrichter-Wirkungsgrad <strong>η = ${etaP} %</strong>.`,
+          steps: [
+            {
+              title: "Schritt 1: Gesamtleistung der Last (P_ges)",
+              instruction: `Berechne die gesamte elektrische Wirkleistung der ${servers} Server in Watt.`,
+              unit: "Watt (W)",
+              expected: pGes,
+              tolerance: 0,
+              formula: `P_ges = ${servers} × ${pServer} W = ${pGes} W`
+            },
+            {
+              title: "Schritt 2: Nennenergie der Akkus (W_nenn)",
+              instruction: `Berechne die theoretische Nennenergie in Wattstunden (Wh) aus Kapazität (${qBatt} Ah) und Gleichspannung (${uDC} V DC).`,
+              unit: "Wh",
+              expected: wNenn,
+              tolerance: 0,
+              formula: `W_nenn = ${qBatt} Ah × ${uDC} V = ${wNenn} Wh`
+            },
+            {
+              title: "Schritt 3: Tatsächlich nutzbare Energie (W_nutz)",
+              instruction: `Berechne die tatsächlich nutzbare Energie unter Berücksichtigung von ${dodP} % DoD und ${etaP} % Wirkungsgrad η in Wh (auf ganze Wh gerundet).`,
+              unit: "Wh",
+              expected: Math.round(wNutz),
+              tolerance: 5,
+              formula: `W_nutz = ${wNenn} Wh × 0,${dodP} × 0,${etaP} = ${Math.round(wNutz)} Wh`
+            },
+            {
+              title: "Schritt 4: Reale Autonomiezeit in Minuten",
+              instruction: `Berechne die reale Autonomiezeit und gib das Ergebnis in <strong>vollen Minuten</strong> an (abgerundet).`,
+              unit: "Minuten",
+              expected: Math.floor(tHours * 60),
+              tolerance: 1,
+              formula: `t = W_nutz / P_ges = ${Math.round(wNutz)} Wh / ${pGes} W = ${tHours.toFixed(2)} h = ${Math.floor(tHours * 60)} Minuten (${wholeHours} Std ${remMin} Min)`
+            }
+          ]
+        };
+      } else if (type === 'usv') {
+        const servers = Math.floor(Math.random() * 8) + 4;
+        const pServer = [400, 500, 600, 750, 800][Math.floor(Math.random() * 5)];
+        const akkus = [4, 6, 8, 10][Math.floor(Math.random() * 4)];
+        const ah = [100, 150, 200, 250][Math.floor(Math.random() * 4)];
+        const u = 12;
+
+        const pGes = servers * pServer;
+        const qGes = akkus * ah;
+        const wGes = qGes * u;
+        const tHours = wGes / pGes;
+        const wholeHours = Math.floor(tHours);
+        const remMin = Math.floor((tHours - wholeHours) * 60);
+
+        currentExercise = {
+          title: "USV Autonomiezeit (Standard)",
+          desc: `Ein Rechenzentrum betreibt <strong>${servers} Server</strong> mit einer Leistungsaufnahme von jeweils <strong>${pServer} W</strong>. Die USV verfügt über <strong>${akkus} Akkus</strong> mit jeweils <strong>${ah} Ah</strong> bei einer Nennspannung von <strong>${u} V DC</strong>. Verluste werden vernachlässigt.`,
+          steps: [
+            {
+              title: "Schritt 1: Gesamtleistung der Verbraucher",
+              instruction: `Berechne die gesamte elektrische Wirkleistung (P_ges) aller ${servers} Server in Watt.`,
+              unit: "W (Watt)",
+              expected: pGes,
+              tolerance: 0,
+              formula: `P_ges = ${servers} Server × ${pServer} W = ${pGes} W`
+            },
+            {
+              title: "Schritt 2: Gesamte Akkukapazität",
+              instruction: `Berechne die gesamte Ladungsmenge (Q_ges) aller ${akkus} Akkus in Amperestunden (Ah).`,
+              unit: "Ah (Amperestunden)",
+              expected: qGes,
+              tolerance: 0,
+              formula: `Q_ges = ${akkus} Akkus × ${ah} Ah = ${qGes} Ah`
+            },
+            {
+              title: "Schritt 3: Gespeicherte Energie (W)",
+              instruction: `Berechne die gesamte elektrische Energie (W) in Wattstunden (Wh) bei einer Spannung von ${u} V.`,
+              unit: "Wh (Wattstunden)",
+              expected: wGes,
+              tolerance: 0,
+              formula: `W = Q_ges × U = ${qGes} Ah × ${u} V = ${wGes} Wh`
+            },
+            {
+              title: "Schritt 4: Autonomiezeit in vollen Minuten",
+              instruction: `Berechne die theoretische Autonomiezeit und gib das Ergebnis in <strong>vollen Minuten</strong> an (auf ganze Minuten abgerundet).`,
+              unit: "Minuten",
+              expected: Math.floor(tHours * 60),
+              tolerance: 1,
+              formula: `t = W / P = ${wGes} Wh / ${pGes} W = ${tHours.toFixed(2)} h = ${Math.floor(tHours * 60)} Minuten (${wholeHours} Std ${remMin} Min)`
+            }
+          ]
+        };
+      } else if (type === 'amort') {
+        const invest = (Math.floor(Math.random() * 20) + 5) * 1000;
+        const savingYear = (Math.floor(Math.random() * 6) + 2) * 1000;
+        const years = invest / savingYear;
+        const wholeYears = Math.floor(years);
+        const remMonths = Math.round((years - wholeYears) * 12);
+        const roi = (savingYear / invest) * 100;
+
+        currentExercise = {
+          title: "Amortisationszeit & ROI berechnen",
+          desc: `Ein Unternehmen investiert <strong>${invest.toLocaleString('de-DE')} €</strong> in ein neues Cloud-Speichersystem. Dadurch werden jährliche Betriebskosten in Höhe von <strong>${savingYear.toLocaleString('de-DE')} € eingespart</strong>.`,
+          steps: [
+            {
+              title: "Schritt 1: Amortisationszeit in Jahren berechnen",
+              instruction: `Berechne die statische Amortisationszeit in Jahren (auf 2 Nachkommastellen genau). Formel: Investitionskosten / Jährliche Ersparnis.`,
+              unit: "Jahre",
+              expected: parseFloat(years.toFixed(2)),
+              tolerance: 0.05,
+              formula: `t_amort = ${invest} € / ${savingYear} € = ${years.toFixed(2)} Jahre`
+            },
+            {
+              title: "Schritt 2: Nachkommastelle in Monate umrechnen",
+              instruction: `Wieviele volle Monate entsprechen die Nachkommastellen der errechneten Amortisationszeit (${(years - wholeYears).toFixed(2)} Jahre × 12)?`,
+              unit: "Monate",
+              expected: remMonths,
+              tolerance: 1,
+              formula: `Monate = ${(years - wholeYears).toFixed(2)} × 12 = ${remMonths} Monate (Gesamt: ${wholeYears} Jahre und ${remMonths} Monate)`
+            },
+            {
+              title: "Schritt 3: Return on Investment (ROI) in Prozent",
+              instruction: `Berechne den jährlichen ROI in Prozent (auf 1 Nachkommastelle genau). Formel: (Jährliche Ersparnis / Investitionskosten) × 100 %.`,
+              unit: "% (Prozent)",
+              expected: parseFloat(roi.toFixed(1)),
+              tolerance: 0.2,
+              formula: `ROI = (${savingYear} € / ${invest} €) × 100 % = ${roi.toFixed(1)} %`
+            }
+          ]
+        };
+      } else if (type === 'skonto') {
+        const barpreis = (Math.floor(Math.random() * 50) + 20) * 10;
+        const skontoP = [2, 3, 4][Math.floor(Math.random() * 3)];
+        const basisP = 100 - skontoP;
+        const zielpreis = (barpreis / basisP) * 100;
+        const skontoBetrag = (barpreis / basisP) * skontoP;
+
+        currentExercise = {
+          title: "Skontoberechnung (Im Hundert)",
+          desc: `Ein IT-Dienstleister hat einen <strong>Barverkaufspreis von ${barpreis.toFixed(2)} €</strong> kalkuliert. Dem Kunden sollen <strong>${skontoP} % Kundenskonto</strong> gewährt werden. Berechne den Zielverkaufspreis.`,
+          steps: [
+            {
+              title: "Schritt 1: Den Prozentsatz des Barverkaufspreises bestimmen",
+              instruction: `Wenn der Zielverkaufspreis 100 % ist und der Kunde ${skontoP} % Skonto abzieht: Wieviel Prozent entspricht der Barverkaufspreis?`,
+              unit: "% (Prozent)",
+              expected: basisP,
+              tolerance: 0,
+              formula: `Basis = 100 % - ${skontoP} % Skonto = ${basisP} %`
+            },
+            {
+              title: "Schritt 2: Den Skontobetrag in Euro berechnen",
+              instruction: `Berechne den Skontobetrag in Euro (auf 2 Nachkommastellen genau). Formel: (Barpreis / ${basisP}) × ${skontoP}`,
+              unit: "€ (Euro)",
+              expected: parseFloat(skontoBetrag.toFixed(2)),
+              tolerance: 0.05,
+              formula: `Skonto = (${barpreis} € / ${basisP}) × ${skontoP} = ${skontoBetrag.toFixed(2)} €`
+            },
+            {
+              title: "Schritt 3: Den Zielverkaufspreis in Euro berechnen",
+              instruction: `Berechne den Zielverkaufspreis (Barverkaufspreis + Skonto).`,
+              unit: "€ (Euro)",
+              expected: parseFloat(zielpreis.toFixed(2)),
+              tolerance: 0.05,
+              formula: `Zielverkaufspreis = ${barpreis} € + ${skontoBetrag.toFixed(2)} € = ${zielpreis.toFixed(2)} €`
+            }
+          ]
+        };
+      } else if (type === 'wirkleistung') {
+        const s = [1500, 2000, 3000, 5000][Math.floor(Math.random() * 4)];
+        const cos = [0.75, 0.8, 0.85, 0.9][Math.floor(Math.random() * 4)];
+        const p = Math.round(s * cos);
+
+        currentExercise = {
+          title: "Wirkleistung aus Scheinleistung & cos φ",
+          desc: `Eine USV-Anlage liefert eine Scheinleistung von <strong>${s} VA</strong>. Der angeschlossene Verbraucher hat einen Leistungsfaktor von <strong>cos φ = ${cos}</strong>.`,
+          steps: [
+            {
+              title: "Schritt 1: Wirkleistung P in Watt berechnen",
+              instruction: `Berechne die tatsächliche Wirkleistung P in Watt (W).`,
+              unit: "Watt (W)",
+              expected: p,
+              tolerance: 1,
+              formula: `P = S × cos φ = ${s} VA × ${cos} = ${p} W`
+            },
+            {
+              title: "Schritt 2: Wirkleistung in Kilowatt (kW) angeben",
+              instruction: `Rechne die ermittelten ${p} W in Kilowatt (kW) um.`,
+              unit: "Kilowatt (kW)",
+              expected: p / 1000,
+              tolerance: 0.01,
+              formula: `kW = ${p} W / 1000 = ${(p/1000).toFixed(3)} kW`
+            }
+          ]
+        };
+      }
+
+      renderTrainerStep();
+    }
+
+    function renderTrainerStep() {
+      const step = currentExercise.steps[currentStepIndex];
+      document.getElementById('trainer-task-badge').innerText = currentExercise.title;
+      document.getElementById('trainer-task-desc').innerHTML = currentExercise.desc;
+      document.getElementById('trainer-progress-text').innerText = `Schritt ${currentStepIndex + 1} von ${currentExercise.steps.length}`;
+
+      document.getElementById('trainer-step-title').innerText = step.title;
+      document.getElementById('trainer-step-instruction').innerHTML = step.instruction;
+      document.getElementById('trainer-step-unit').innerText = `Einheit: ${step.unit}`;
+
+      const input = document.getElementById('trainer-step-input');
+      input.value = '';
+      input.focus();
+      hideTrainerFeedback();
+    }
+
+    function checkTrainerStep() {
+      const step = currentExercise.steps[currentStepIndex];
+      const val = parseFloat(document.getElementById('trainer-step-input').value.replace(',', '.'));
+
+      if (isNaN(val)) {
+        showTrainerFeedback('Bitte gib eine gültige Zahl ein!', 'error');
+        return;
+      }
+
+      const diff = Math.abs(val - step.expected);
+      if (diff <= step.tolerance) {
+        showTrainerFeedback(`✅ Hervorragend! Richtig: ${step.formula}`, 'success');
+
+        addSolvedStepUI(step);
+
+        currentStepIndex++;
+        if (currentStepIndex < currentExercise.steps.length) {
+          setTimeout(() => {
+            renderTrainerStep();
+          }, 1500);
+        } else {
+          setTimeout(() => {
+            showCompletionUI();
+          }, 1500);
+        }
+      } else {
+        showTrainerFeedback(`❌ Leider noch nicht ganz richtig. Überprüfe die Einheiten oder Formel. Brauchst du Hilfe? Klicke auf "Lösungsweg anzeigen".`, 'error');
+      }
+    }
+
+    function showTrainerSolution() {
+      const step = currentExercise.steps[currentStepIndex];
+      showTrainerFeedback(`💡 <strong>Lösungsweg:</strong> ${step.formula}`, 'info');
+    }
+
+    function showTrainerFeedback(msg, type) {
+      const box = document.getElementById('trainer-feedback');
+      box.classList.remove('hidden', 'bg-emerald-100', 'text-emerald-800', 'border-emerald-300', 'bg-rose-100', 'text-rose-800', 'border-rose-300', 'bg-blue-100', 'text-blue-800', 'border-blue-300');
+      box.classList.add('border');
+
+      if (type === 'success') {
+        box.classList.add('bg-emerald-100', 'text-emerald-800', 'border-emerald-300');
+      } else if (type === 'error') {
+        box.classList.add('bg-rose-100', 'text-rose-800', 'border-rose-300');
+      } else {
+        box.classList.add('bg-blue-100', 'text-blue-800', 'border-blue-300');
+      }
+      box.innerHTML = msg;
+    }
+
+    function hideTrainerFeedback() {
+      document.getElementById('trainer-feedback').classList.add('hidden');
+    }
+
+    function addSolvedStepUI(step) {
+      const container = document.getElementById('trainer-solved-steps-container');
+      const item = document.createElement('div');
+      item.className = 'p-3 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-between text-xs';
+      item.innerHTML = `
+        <div class="flex items-center gap-2">
+          <span class="text-emerald-600 font-bold">✓</span>
+          <span class="font-medium text-slate-800">${step.title}:</span>
+          <span class="font-mono text-slate-600">${step.formula}</span>
+        </div>
+        <span class="text-emerald-700 font-semibold">Erledigt</span>
+      `;
+      container.appendChild(item);
+    }
+
+    function showCompletionUI() {
+      const container = document.getElementById('trainer-step-container');
+      container.innerHTML = `
+        <div class="text-center py-6 space-y-3">
+          <div class="text-4xl">🎉</div>
+          <h3 class="text-lg font-bold text-emerald-700">Aufgabe komplett gelöst!</h3>
+          <p class="text-sm text-slate-600 max-w-md mx-auto">
+            Du hast alle atomaren Teilschritte dieser Aufgabe fehlerfrei gemeistert. Genau so setzt man komplexe IHK-Prüfungsfragen zusammen!
+          </p>
+          <button onclick="initTrainerExercise()" class="mt-2 px-6 py-2.5 rounded-xl bg-sky-600 text-white font-semibold hover:bg-sky-700 transition-all shadow-sm">
+            Nächste Übungsaufgabe starten
+          </button>
+        </div>
+      `;
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      calcPower('S');
+      recalcTrade();
+      calcAmortization();
+      calcNetTransfer();
+      calcProfiUSV();
+      calcCapFormula();
+      convertTime(3.2);
+    });
+  </script>
+</body>
+</html>

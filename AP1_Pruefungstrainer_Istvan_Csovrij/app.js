@@ -87,6 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
         setupThemeFilters();
         filterQuestions("all");
         initWhiteboard();
+        initRechentrainer();
         
         resetStatsBtn.addEventListener("click", resetStats);
         nextBtn.addEventListener("click", loadNextQuestion);
@@ -2162,4 +2163,57 @@ function wbExportPNG() {
     link.download = `IHK_AP1_Diagramm_Skizze_${new Date().toISOString().slice(0, 10)}.png`;
     link.href = exportCanvas.toDataURL("image/png");
     link.click();
+}
+
+// ==========================================================================
+// IHK Rechen- & Einheiten-Trainer Modal & Sidebar Quick-Tools
+// ==========================================================================
+function initRechentrainer() {
+    const modal = document.getElementById("rechentrainer-modal");
+    const openBtn = document.getElementById("open-rechentrainer-sidebar-btn");
+    const closeBtn = document.getElementById("close-rechentrainer-btn");
+    const backdrop = document.getElementById("rechentrainer-backdrop");
+
+    function openModal() {
+        if (modal) modal.style.display = "flex";
+    }
+
+    function closeModal() {
+        if (modal) modal.style.display = "none";
+    }
+
+    if (openBtn) openBtn.addEventListener("click", openModal);
+    if (closeBtn) closeBtn.addEventListener("click", closeModal);
+    if (backdrop) backdrop.addEventListener("click", closeModal);
+
+    window.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && modal && modal.style.display !== "none") {
+            closeModal();
+        }
+    });
+
+    // Quick Sidebar Calculator: Decimal Hours to Minutes
+    const sideHourInput = document.getElementById("side-calc-dechours");
+    const sideResult = document.getElementById("side-calc-timeresult");
+    const sideDetail = document.getElementById("side-calc-timedetail");
+
+    if (sideHourInput && sideResult) {
+        function updateSideTime() {
+            const val = parseFloat(sideHourInput.value);
+            if (isNaN(val) || val < 0) {
+                sideResult.innerText = "—";
+                if (sideDetail) sideDetail.innerText = "Ungültige Eingabe";
+                return;
+            }
+            const wholeH = Math.floor(val);
+            const remH = val - wholeH;
+            const min = Math.floor(remH * 60);
+            sideResult.innerText = `${wholeH} Std ${min} Min`;
+            if (sideDetail) {
+                sideDetail.innerHTML = `Rechenweg: ${remH.toFixed(2).replace('.', ',')} × 60 = <strong>${min} Min</strong>`;
+            }
+        }
+        sideHourInput.addEventListener("input", updateSideTime);
+        updateSideTime();
+    }
 }

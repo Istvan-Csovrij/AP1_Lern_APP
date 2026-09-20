@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AP1 Prüfungstrainer - Fachinformatiker</title>
-    <link rel="stylesheet" href="style.css?v=79">
+    <link rel="stylesheet" href="style.css?v=80">
     <!-- FontAwesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -157,6 +157,46 @@
                 </div>
                 <button class="btn btn-primary btn-full" id="regenerate-btn" style="margin-top: 1rem;">
                     <i class="fa-solid fa-arrows-rotate"></i> Neu generieren
+                </button>
+            </div>
+
+            <!-- IHK Rechen- & Einheiten-Trainer Card (Rechte Seite für perfekte Symmetrie) -->
+            <div class="card calc-trainer-card" style="border: 2px solid #0284c7; box-shadow: 0 4px 6px -1px rgba(2, 132, 199, 0.15);">
+                <h3 style="color: #0369a1; margin-bottom: 0.5rem;"><i class="fa-solid fa-calculator"></i> Rechen- &amp; Einheiten-Trainer</h3>
+                <p style="font-size: 0.85rem; color: var(--text-light); margin-bottom: 0.75rem; line-height: 1.35;">
+                    Atomare Rechenschritte: USV-Autonomie, Akku ($C = \frac{W}{U \cdot \eta \cdot \text{DoD}}$), Zeitumrechnung &amp; Skonto.
+                </p>
+
+                <!-- Schnellrechner 1: Zeitumrechnung -->
+                <div style="background: #f0f9ff; border: 1px solid #bae6fd; border-radius: 8px; padding: 0.6rem; margin-bottom: 0.6rem;">
+                    <div style="font-size: 0.8rem; font-weight: bold; color: #0369a1; margin-bottom: 0.3rem;">
+                        ⏱️ Zeitumrechner (Dezimal $\rightarrow$ Min):
+                    </div>
+                    <div style="display: flex; gap: 0.4rem; align-items: center;">
+                        <input type="number" step="0.01" id="side-calc-dechours" value="3.2" style="width: 75px; padding: 0.3rem 0.4rem; font-size: 0.85rem; font-weight: bold; border: 1px solid #7dd3fc; border-radius: 6px; font-family: monospace;" title="Dezimalstunden eingeben" />
+                        <span style="font-size: 0.8rem; font-weight: bold; color: #64748b;">h =</span>
+                        <div id="side-calc-timeresult" style="font-size: 0.85rem; font-weight: bold; color: #0284c7; font-family: monospace;">3 Std 12 Min</div>
+                    </div>
+                    <div id="side-calc-timedetail" style="font-size: 0.72rem; color: #64748b; margin-top: 0.25rem;">
+                        Rechenweg: 0,2 × 60 = <strong>12 Min</strong>
+                    </div>
+                </div>
+
+                <!-- Schnellrechner 2: Akku-Formel -->
+                <div style="background: #fdf4ff; border: 1px solid #f5d0fe; border-radius: 8px; padding: 0.6rem; margin-bottom: 0.75rem;">
+                    <div style="font-size: 0.8rem; font-weight: bold; color: #86198f; margin-bottom: 0.3rem;">
+                        🔋 Akku-Kapazität: C = W / (U · η · DoD)
+                    </div>
+                    <div style="font-size: 0.75rem; color: #475569; font-family: monospace; line-height: 1.35;">
+                        3.200 Wh / (48 V × 0,9 × 0,8) = <strong style="color: #9333ea; font-size: 0.85rem;">92,6 Ah</strong>
+                    </div>
+                    <div style="font-size: 0.72rem; color: #64748b; margin-top: 0.25rem;">
+                        💡 Durch 0,9 &amp; 0,8 <strong>teilen</strong>, da Akku größer sein muss!
+                    </div>
+                </div>
+
+                <button class="btn btn-full" id="open-rechentrainer-sidebar-btn" style="background: linear-gradient(135deg, #0284c7, #0369a1); color: white; justify-content: center; font-weight: bold; border: none; font-size: 0.95rem; display: flex; align-items: center; gap: 0.5rem; width: 100%;">
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i> Rechentrainer öffnen
                 </button>
             </div>
 
@@ -401,14 +441,41 @@
         </div>
     </div>
 
+    <!-- Rechentrainer Modal (Schritt-für-Schritt Formel- & Einheiten-Trainer) -->
+    <div id="rechentrainer-modal" class="whiteboard-modal" style="display: none;">
+        <div class="whiteboard-backdrop" id="rechentrainer-backdrop"></div>
+        <div class="whiteboard-dialog" style="max-width: 1300px; height: 92vh;">
+            <div class="whiteboard-header" style="background: #f0f9ff; border-bottom: 1px solid #bae6fd;">
+                <div style="display: flex; align-items: center; gap: 0.75rem;">
+                    <div style="width: 36px; height: 36px; border-radius: 8px; background: linear-gradient(135deg, #0284c7, #0369a1); color: white; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; box-shadow: 0 2px 5px rgba(2, 132, 199, 0.3);">
+                        <i class="fa-solid fa-calculator"></i>
+                    </div>
+                    <div>
+                        <h3 style="margin: 0; font-size: 1.15rem; color: #0369a1;">IHK Rechen- &amp; Einheiten-Trainer</h3>
+                        <p style="margin: 0; font-size: 0.8rem; color: #64748b;">USV-Autonomie, Akku-Kapazität (C = W / (U · η · DoD)), Zeitumrechnung, Handelskalkulation &amp; Amortisation</p>
+                    </div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                    <a href="rechentrainer.html" target="_blank" class="wb-action-btn" style="color: #0369a1; border: 1px solid #bae6fd; background: #e0f2fe; text-decoration: none; padding: 0.35rem 0.75rem; border-radius: 6px; font-size: 0.85rem; display: flex; align-items: center; gap: 0.35rem; font-weight: 600;">
+                        <i class="fa-solid fa-up-right-from-square"></i> <span>Im neuen Tab öffnen</span>
+                    </a>
+                    <button id="close-rechentrainer-btn" class="wb-close-btn" style="color: #64748b; background: none; border: none; font-size: 1.8rem; cursor: pointer; line-height: 1; padding: 0 0.5rem;" title="Schließen">&times;</button>
+                </div>
+            </div>
+            <div style="flex: 1; width: 100%; height: 100%; overflow: hidden;">
+                <iframe src="rechentrainer.html" style="width: 100%; height: 100%; border: none;"></iframe>
+            </div>
+        </div>
+    </div>
+
     <footer>
         <p>&copy; 2026 AP1 Prüfungstrainer - Entwickelt von Istvan Csovrij</p>
     </footer>
 
     <!-- Load diagram library, questions, generator and application logic -->
-    <script src="diagrams.js?v=79"></script>
-    <script src="questions.js?v=79"></script>
-    <script src="generator.js?v=79"></script>
-    <script src="app.js?v=79"></script>
+    <script src="diagrams.js?v=80"></script>
+    <script src="questions.js?v=80"></script>
+    <script src="generator.js?v=80"></script>
+    <script src="app.js?v=80"></script>
 </body>
 </html>
