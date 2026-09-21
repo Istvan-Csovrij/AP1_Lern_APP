@@ -677,9 +677,14 @@ function loadQuestion() {
                         <i class="fa-solid fa-pen-ruler" style="color: #0891b2; font-size: 1.15rem;"></i>
                         <span><strong>Diagramm-Aufgabe (${escapeHtml(diagName)}):</strong> Skizziere oder prüfe dein Modell im Zeichenboard!</span>
                     </div>
-                    <button id="inline-quiz-wb-btn" class="btn" style="background: linear-gradient(135deg, #0891b2, #0284c7); color: white; padding: 0.35rem 0.75rem; font-size: 0.85rem; border-radius: 6px; border: none; cursor: pointer; font-weight: 600; display: inline-flex; align-items: center; gap: 0.35rem;">
-                        <i class="fa-solid fa-palette"></i> Whiteboard öffnen
-                    </button>
+                    <div style="display: flex; gap: 0.4rem; align-items: center;">
+                        <a href="whiteboard.html?v=86" target="_blank" class="btn" style="background: white; color: #0891b2; border: 1px solid #0891b2; padding: 0.35rem 0.7rem; font-size: 0.85rem; border-radius: 6px; text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 0.35rem;">
+                            <i class="fa-solid fa-up-right-from-square"></i> Im neuen Tab ↗
+                        </a>
+                        <button id="inline-quiz-wb-btn" class="btn" style="background: linear-gradient(135deg, #0891b2, #0284c7); color: white; padding: 0.35rem 0.75rem; font-size: 0.85rem; border-radius: 6px; border: none; cursor: pointer; font-weight: 600; display: inline-flex; align-items: center; gap: 0.35rem;">
+                            <i class="fa-solid fa-palette"></i> Als Fenster
+                        </button>
+                    </div>
                 </div>
             `;
             const inlineBtn = document.getElementById("inline-quiz-wb-btn");
@@ -1334,9 +1339,14 @@ function loadExamQuestion() {
                         <i class="fa-solid fa-pen-ruler" style="color: #0891b2; font-size: 1.15rem;"></i>
                         <span><strong>Diagramm-Aufgabe (${escapeHtml(diagName)}):</strong> Skizziere deine Lösung auf dem Zeichenboard!</span>
                     </div>
-                    <button id="inline-exam-wb-btn" class="btn" style="background: linear-gradient(135deg, #0891b2, #0284c7); color: white; padding: 0.35rem 0.75rem; font-size: 0.85rem; border-radius: 6px; border: none; cursor: pointer; font-weight: 600; display: inline-flex; align-items: center; gap: 0.35rem;">
-                        <i class="fa-solid fa-palette"></i> Whiteboard öffnen
-                    </button>
+                    <div style="display: flex; gap: 0.4rem; align-items: center;">
+                        <a href="whiteboard.html?v=86" target="_blank" class="btn" style="background: white; color: #0891b2; border: 1px solid #0891b2; padding: 0.35rem 0.7rem; font-size: 0.85rem; border-radius: 6px; text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 0.35rem;">
+                            <i class="fa-solid fa-up-right-from-square"></i> Im neuen Tab ↗
+                        </a>
+                        <button id="inline-exam-wb-btn" class="btn" style="background: linear-gradient(135deg, #0891b2, #0284c7); color: white; padding: 0.35rem 0.75rem; font-size: 0.85rem; border-radius: 6px; border: none; cursor: pointer; font-weight: 600; display: inline-flex; align-items: center; gap: 0.35rem;">
+                            <i class="fa-solid fa-palette"></i> Als Fenster
+                        </button>
+                    </div>
                 </div>
             `;
             const inlineExamBtn = document.getElementById("inline-exam-wb-btn");

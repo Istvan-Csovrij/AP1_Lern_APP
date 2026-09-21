@@ -1,0 +1,1444 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IHK AP1 Zeichenboard &amp; Diagramm-Trainer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #8b5cf6;
+            --primary-dark: #6d28d9;
+            --primary-light: #f5f3ff;
+            --text: #1e293b;
+            --text-light: #64748b;
+            --bg: #f8fafc;
+            --border: #cbd5e1;
+            --accent: #0284c7;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            user-select: none;
+        }
+
+        /* Top Header */
+        header {
+            background: #ffffff;
+            border-bottom: 1px solid var(--border);
+            padding: 0.5rem 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.75rem;
+            flex-shrink: 0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            z-index: 20;
+        }
+
+        .header-title-group {
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
+            min-width: 0;
+        }
+
+        .header-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+            box-shadow: 0 2px 5px rgba(139, 92, 246, 0.3);
+        }
+
+        .header-text h1 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #0f172a;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .header-text p {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            flex-shrink: 0;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            padding: 0.4rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: 1px solid var(--border);
+            background: #ffffff;
+            color: var(--text);
+            text-decoration: none;
+            transition: all 0.15s ease;
+            white-space: nowrap;
+        }
+
+        .btn:hover {
+            background: #f1f5f9;
+            border-color: #94a3b8;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #8b5cf6, #6d28d9);
+            color: white;
+            border-color: #7c3aed;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #7c3aed, #5b21b6);
+            border-color: #6d28d9;
+        }
+
+        .btn-success {
+            background: #10b981;
+            color: white;
+            border-color: #059669;
+        }
+
+        .btn-success:hover {
+            background: #059669;
+        }
+
+        .btn-danger {
+            background: #fef2f2;
+            color: #dc2626;
+            border-color: #fecaca;
+        }
+
+        .btn-danger:hover {
+            background: #fee2e2;
+            border-color: #f87171;
+        }
+
+        .autosave-badge {
+            font-size: 0.72rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 9999px;
+            background: #ecfdf5;
+            color: #059669;
+            border: 1px solid #a7f3d0;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            font-weight: 600;
+        }
+
+        /* Toolbar */
+        .toolbar {
+            background: #f1f5f9;
+            border-bottom: 1px solid var(--border);
+            padding: 0.4rem 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
+            overflow-x: auto;
+            flex-shrink: 0;
+            scrollbar-width: thin;
+            z-index: 10;
+        }
+
+        .tool-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+            flex-shrink: 0;
+        }
+
+        .group-label {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            color: var(--text-light);
+            letter-spacing: 0.04em;
+        }
+
+        .btn-row {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .t-btn {
+            padding: 0.35rem 0.55rem;
+            border-radius: 5px;
+            border: 1px solid #cbd5e1;
+            background: #ffffff;
+            color: var(--text);
+            font-size: 0.8rem;
+            font-weight: 500;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            transition: all 0.12s ease;
+            white-space: nowrap;
+        }
+
+        .t-btn:hover {
+            background: #e2e8f0;
+        }
+
+        .t-btn.active {
+            background: #8b5cf6;
+            color: white;
+            border-color: #7c3aed;
+            box-shadow: 0 1px 3px rgba(139, 92, 246, 0.3);
+        }
+
+        .separator {
+            width: 1px;
+            height: 28px;
+            background: #cbd5e1;
+            margin: 0 0.1rem;
+            flex-shrink: 0;
+        }
+
+        /* Colors */
+        .color-palette {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .c-btn {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            border: 2px solid white;
+            box-shadow: 0 0 0 1px #94a3b8;
+            cursor: pointer;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+            flex-shrink: 0;
+        }
+
+        .c-btn:hover {
+            transform: scale(1.15);
+        }
+
+        .c-btn.active {
+            box-shadow: 0 0 0 2.5px #8b5cf6;
+            transform: scale(1.2);
+        }
+
+        .custom-color-input {
+            width: 24px;
+            height: 24px;
+            padding: 0;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            background: none;
+        }
+
+        /* Size Selector */
+        .size-selector {
+            display: flex;
+            align-items: center;
+            gap: 0.2rem;
+        }
+
+        .s-btn {
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            border: 1px solid #cbd5e1;
+            background: white;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text);
+            cursor: pointer;
+        }
+
+        .s-btn.active {
+            background: #1e293b;
+            color: white;
+            border-color: #1e293b;
+        }
+
+        /* Canvas Workspace */
+        .workspace {
+            flex: 1;
+            position: relative;
+            background: #ffffff;
+            overflow: hidden;
+            display: flex;
+        }
+
+        .canvas-container {
+            flex: 1;
+            position: relative;
+            cursor: crosshair;
+            touch-action: none;
+            overflow: hidden;
+        }
+
+        /* Grids */
+        .canvas-container.grid-small {
+            background-image: 
+                linear-gradient(to right, #e2e8f0 1px, transparent 1px),
+                linear-gradient(to bottom, #e2e8f0 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        .canvas-container.grid-large {
+            background-image: 
+                linear-gradient(to right, #e2e8f0 1px, transparent 1px),
+                linear-gradient(to bottom, #e2e8f0 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        .canvas-container.grid-dots {
+            background-image: radial-gradient(#cbd5e1 1.5px, transparent 1.5px);
+            background-size: 24px 24px;
+        }
+
+        #canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Drawer / Cheatsheet Sidebar */
+        .cheatsheet-drawer {
+            width: 380px;
+            max-width: 90vw;
+            background: #ffffff;
+            border-left: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 30;
+            box-shadow: -4px 0 15px rgba(0,0,0,0.1);
+        }
+
+        .cheatsheet-drawer.collapsed {
+            transform: translateX(100%);
+        }
+
+        .drawer-header {
+            padding: 0.75rem 1rem;
+            background: #f8fafc;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .drawer-header h3 {
+            font-size: 0.95rem;
+            color: #0f172a;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .drawer-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1rem;
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+
+        .cheat-card {
+            background: #f8fafc;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 0.85rem;
+            margin-bottom: 1rem;
+        }
+
+        .cheat-card h4 {
+            color: var(--primary-dark);
+            margin-bottom: 0.4rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .stamp-btn {
+            font-size: 0.72rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            border: 1px solid var(--primary);
+            background: var(--primary-light);
+            color: var(--primary-dark);
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .stamp-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .cheat-badge {
+            display: inline-block;
+            padding: 0.15rem 0.4rem;
+            border-radius: 4px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            background: #e2e8f0;
+            color: #334155;
+            margin-right: 0.25rem;
+        }
+
+        /* Toast notification */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #1e293b;
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 8px;
+            font-size: 0.88rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.3);
+            transition: transform 0.25s ease, opacity 0.25s ease;
+            opacity: 0;
+            z-index: 1000;
+            pointer-events: none;
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        /* Bottom status bar */
+        footer {
+            background: #f8fafc;
+            border-top: 1px solid var(--border);
+            padding: 0.3rem 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.75rem;
+            color: var(--text-light);
+            flex-shrink: 0;
+        }
+
+        .shortcut-hints {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .shortcut-hints kbd {
+            background: #e2e8f0;
+            padding: 0.1rem 0.35rem;
+            border-radius: 3px;
+            font-family: monospace;
+            font-size: 0.7rem;
+            border: 1px solid #cbd5e1;
+        }
+
+        @media (max-width: 800px) {
+            .header-text p { display: none; }
+            .shortcut-hints { display: none; }
+            .btn-label { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="header-title-group">
+            <div class="header-icon"><i class="fa-solid fa-pen-ruler"></i></div>
+            <div class="header-text">
+                <h1>IHK AP1 Diagramm-Board</h1>
+                <p>UML Use-Case &amp; Klassen, ERD, EPK, BPMN &amp; Netzpläne</p>
+            </div>
+            <div class="autosave-badge" id="save-status" title="Zeichnung wird automatisch im Browser gesichert">
+                <i class="fa-solid fa-check"></i> <span id="save-status-text">Gespeichert</span>
+            </div>
+        </div>
+
+        <div class="header-actions">
+            <button class="btn" id="cheatsheet-toggle-btn" title="IHK Notationen, Symbole &amp; Stempel einblenden">
+                <i class="fa-solid fa-book-open" style="color: #8b5cf6;"></i> <span class="btn-label">Spickzettel &amp; Vorlagen</span>
+            </button>
+            <button class="btn" id="copy-clipboard-btn" title="Skizze in Zwischenablage kopieren (Strg+C)">
+                <i class="fa-regular fa-copy"></i> <span class="btn-label">Kopieren</span>
+            </button>
+            <button class="btn btn-primary" id="download-png-btn" title="Als PNG-Bild herunterladen">
+                <i class="fa-solid fa-download"></i> <span class="btn-label">PNG Export</span>
+            </button>
+            <button class="btn btn-danger" id="clear-all-btn" title="Board komplett leeren">
+                <i class="fa-solid fa-trash-can"></i>
+            </button>
+            <a href="index.html" class="btn" title="Zurück zur Prüfungs-App" style="margin-left: 0.25rem;">
+                <i class="fa-solid fa-arrow-left"></i> <span class="btn-label">Prüfung</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Toolbar -->
+    <div class="toolbar">
+        <!-- Tools -->
+        <div class="tool-group">
+            <span class="group-label">Werkzeuge</span>
+            <div class="btn-row">
+                <button class="t-btn active" data-tool="pen" title="Freihand-Stift (P)"><i class="fa-solid fa-pen"></i><span>Stift</span></button>
+                <button class="t-btn" data-tool="highlighter" title="Textmarker (H)"><i class="fa-solid fa-highlighter"></i><span>Marker</span></button>
+                <button class="t-btn" data-tool="line" title="Gerade Linie (L)"><i class="fa-solid fa-minus"></i><span>Linie</span></button>
+                <button class="t-btn" data-tool="arrow" title="Flusspfeil gerichtet (A)"><i class="fa-solid fa-arrow-right"></i><span>Pfeil</span></button>
+                <button class="t-btn" data-tool="dasharrow" title="Gestrichelter Pfeil (&lt;&lt;include&gt;&gt; / &lt;&lt;extend&gt;&gt;)"><i class="fa-solid fa-ellipsis"></i><span>Gestrichelt</span></button>
+                <button class="t-btn" data-tool="rect" title="Rechteck (Klasse / Entität / Grenze) (R)"><i class="fa-regular fa-square"></i><span>Rechteck</span></button>
+                <button class="t-btn" data-tool="roundrect" title="Abgerundetes Rechteck (EPK-Funktion / BPMN-Task)"><i class="fa-regular fa-square-full" style="border-radius: 4px;"></i><span>Task/Fkt</span></button>
+                <button class="t-btn" data-tool="ellipse" title="Oval / Kreis (Use-Case / Attribut / Ereignis) (O)"><i class="fa-regular fa-circle"></i><span>Oval</span></button>
+                <button class="t-btn" data-tool="diamond" title="Raute (ERD-Relation / Gateway / Entscheidung)"><i class="fa-solid fa-diamond"></i><span>Raute</span></button>
+                <button class="t-btn" data-tool="hexagon" title="Sechseck (EPK-Ereignis)"><i class="fa-solid fa-draw-polygon"></i><span>EPK-Ereignis</span></button>
+                <button class="t-btn" data-tool="actor" title="Akteur (UML Use-Case Männchen)"><i class="fa-solid fa-person"></i><span>Akteur</span></button>
+                <button class="t-btn" data-tool="classbox" title="UML-Klassenbox (3-zeilig: Name / Attribute / Methoden)"><i class="fa-solid fa-table-cells"></i><span>Klasse</span></button>
+                <button class="t-btn" data-tool="text" title="Text einfügen (Klick auf Board) (T)"><i class="fa-solid fa-font"></i><span>Text</span></button>
+                <button class="t-btn" data-tool="eraser" title="Radierer (E)"><i class="fa-solid fa-eraser"></i><span>Radierer</span></button>
+            </div>
+        </div>
+
+        <div class="separator"></div>
+
+        <!-- Colors -->
+        <div class="tool-group">
+            <span class="group-label">Farbe</span>
+            <div class="color-palette">
+                <button class="c-btn active" data-color="#1e293b" style="background-color: #1e293b;" title="Schwarz/Anthrazit"></button>
+                <button class="c-btn" data-color="#2563eb" style="background-color: #2563eb;" title="Blau"></button>
+                <button class="c-btn" data-color="#dc2626" style="background-color: #dc2626;" title="Rot"></button>
+                <button class="c-btn" data-color="#16a34a" style="background-color: #16a34a;" title="Grün"></button>
+                <button class="c-btn" data-color="#9333ea" style="background-color: #9333ea;" title="Lila / Use-Case"></button>
+                <button class="c-btn" data-color="#ea580c" style="background-color: #ea580c;" title="Orange / EPK"></button>
+                <button class="c-btn" data-color="#0891b2" style="background-color: #0891b2;" title="Türkis / BPMN"></button>
+                <button class="c-btn" data-color="#ca8a04" style="background-color: #ca8a04;" title="Gold/Gelb"></button>
+                <input type="color" id="custom-color-picker" class="custom-color-input" title="Eigene Farbe wählen" value="#475569">
+            </div>
+        </div>
+
+        <div class="separator"></div>
+
+        <!-- Size -->
+        <div class="tool-group">
+            <span class="group-label">Stärke</span>
+            <div class="size-selector">
+                <button class="s-btn" data-size="1" title="1px (Fein)">1px</button>
+                <button class="s-btn" data-size="2" title="2px">2px</button>
+                <button class="s-btn active" data-size="4" title="4px (Standard)">4px</button>
+                <button class="s-btn" data-size="8" title="8px (Fett)">8px</button>
+                <button class="s-btn" data-size="16" title="16px (Marker)">16px</button>
+            </div>
+        </div>
+
+        <div class="separator"></div>
+
+        <!-- Grid & History -->
+        <div class="tool-group">
+            <span class="group-label">Optionen</span>
+            <div class="btn-row">
+                <button class="t-btn" id="grid-mode-btn" title="Raster umschalten (Klein / Groß / Punkte / Aus)">
+                    <i class="fa-solid fa-border-all"></i> <span id="grid-mode-label">Karo 20px</span>
+                </button>
+                <button class="t-btn" id="undo-btn" title="Rückgängig (Strg+Z)"><i class="fa-solid fa-rotate-left"></i><span>Undo</span></button>
+                <button class="t-btn" id="redo-btn" title="Wiederherstellen (Strg+Y)"><i class="fa-solid fa-rotate-right"></i><span>Redo</span></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Workspace -->
+    <div class="workspace">
+        <div class="canvas-container grid-small" id="canvas-container">
+            <canvas id="canvas"></canvas>
+        </div>
+
+        <!-- Cheatsheet Drawer -->
+        <aside class="cheatsheet-drawer collapsed" id="cheatsheet-drawer">
+            <div class="drawer-header">
+                <h3><i class="fa-solid fa-lightbulb" style="color: #eab308;"></i> IHK Notationen &amp; Stempel</h3>
+                <button class="btn" id="close-drawer-btn" style="border: none; padding: 0.2rem 0.5rem; font-size: 1.2rem; cursor: pointer;">&times;</button>
+            </div>
+            <div class="drawer-content">
+                <!-- Stencils (Quick Insert) -->
+                <div class="cheat-card" style="border: 2px solid #8b5cf6; background: #faf5ff;">
+                    <h4 style="color: #6d28d9;"><i class="fa-solid fa-stamp"></i> Schnelle Vorlagen (Stempel)</h4>
+                    <p style="font-size: 0.78rem; color: #64748b; margin-bottom: 0.5rem;">Klicke, um fertige Bausteine in die Board-Mitte zu stempeln:</p>
+                    <div style="display: flex; flex-wrap: wrap; gap: 0.35rem;">
+                        <button class="stamp-btn" onclick="stampTemplate('uml_class')">🗂️ UML-Klasse (3-teilig)</button>
+                        <button class="stamp-btn" onclick="stampTemplate('netzplan')">📊 Netzplan-Knoten (DIN)</button>
+                        <button class="stamp-btn" onclick="stampTemplate('actor_usecase')">👤 Akteur + Use-Case</button>
+                        <button class="stamp-btn" onclick="stampTemplate('erd_entity')">🔲 ERD Entität + PK</button>
+                        <button class="stamp-btn" onclick="stampTemplate('bpmn_gateway')">🔷 BPMN XOR Gateway</button>
+                        <button class="stamp-btn" onclick="stampTemplate('epk_chain')">🔄 EPK Ereignis-Funktion</button>
+                    </div>
+                </div>
+
+                <!-- Use-Case Guide -->
+                <div class="cheat-card">
+                    <h4><span>👤 UML Anwendungsfalldiagramm</span> <span class="cheat-badge">LF 7 / AP1</span></h4>
+                    <ul style="padding-left: 1.1rem; font-size: 0.8rem;">
+                        <li><strong>Systemgrenze:</strong> Großes Rechteck, Systemname oben.</li>
+                        <li><strong>Akteur:</strong> Außerhalb der Grenze (Mensch oder Fremdsystem).</li>
+                        <li><strong>Use-Case:</strong> Ellipse innerhalb der Grenze (Substantiv + Verb im Infinitiv, z.B. <em>"Kunde anlegen"</em>).</li>
+                        <li><strong>&lt;&lt;include&gt;&gt;:</strong> Zwingend nötig! Pfeil zeigt <em>vom Basisfall zum zwingenden Fall</em> (z.B. Login).</li>
+                        <li><strong>&lt;&lt;extend&gt;&gt;:</strong> Optional! Pfeil zeigt <em>vom Erweiterungsfall zurück zum Basisfall</em>.</li>
+                    </ul>
+                </div>
+
+                <!-- Class Diagram Guide -->
+                <div class="cheat-card">
+                    <h4><span>🗂️ UML Klassendiagramm</span> <span class="cheat-badge">LF 8 / AP1</span></h4>
+                    <ul style="padding-left: 1.1rem; font-size: 0.8rem;">
+                        <li><strong>Sichtbarkeiten:</strong> <code>+</code> public, <code>-</code> private, <code>#</code> protected.</li>
+                        <li><strong>Multiplizitäten:</strong> <code>1</code>, <code>0..1</code>, <code>1..*</code>, <code>*</code> oder <code>0..*</code>.</li>
+                        <li><strong>Vererbung:</strong> Durchgezogene Linie mit <em>geschlossenem, weißem Dreieck</em> zur Superklasse.</li>
+                        <li><strong>Komposition:</strong> <em>Ausgefüllte schwarze Raute</em> beim Ganzen (strenge Existenzabhängigkeit, z.B. Bestellung ↔ Positionen).</li>
+                        <li><strong>Aggregation:</strong> <em>Hohle weiße Raute</em> (schwächere "hat-ein"-Beziehung).</li>
+                    </ul>
+                </div>
+
+                <!-- ERD Guide -->
+                <div class="cheat-card">
+                    <h4><span>🗄️ ER-Modell (Chen-Notation)</span> <span class="cheat-badge">LF 8 / AP1</span></h4>
+                    <ul style="padding-left: 1.1rem; font-size: 0.8rem;">
+                        <li><strong>Entitätstyp:</strong> Rechteck (z.B. <code>KUNDE</code>, <code>ARTIKEL</code>).</li>
+                        <li><strong>Attribut:</strong> Ellipse (Primärschlüssel unterstreichen: <u>KundenNr</u>).</li>
+                        <li><strong>Beziehung:</strong> Raute mit Verb (z.B. <em>"erteilt"</em>).</li>
+                        <li><strong>Kardinalitäten:</strong> <code>1:1</code>, <code>1:n</code>, <code>n:m</code> an den Verbindungslinien eintragen.</li>
+                    </ul>
+                </div>
+
+                <!-- EPK Guide -->
+                <div class="cheat-card">
+                    <h4><span>🔄 Ereignisgesteuerte Prozesskette (EPK)</span> <span class="cheat-badge">LF 7 / AP1</span></h4>
+                    <ul style="padding-left: 1.1rem; font-size: 0.8rem;">
+                        <li><strong>Ereignis:</strong> Sechseck (Zustand: <em>"Auftrag eingegangen"</em>).</li>
+                        <li><strong>Funktion:</strong> Abgerundetes Rechteck (Aktion: <em>"Auftrag prüfen"</em>).</li>
+                        <li><strong>Regel:</strong> Immer abwechselnd! Nie Ereignis auf Ereignis.</li>
+                        <li><strong>Konnektoren:</strong> Kreis mit <strong>AND (∧)</strong>, <strong>OR (∨)</strong>, <strong>XOR (X)</strong>.</li>
+                    </ul>
+                </div>
+
+                <!-- BPMN Guide -->
+                <div class="cheat-card">
+                    <h4><span>⚙️ BPMN 2.0 Geschäftsprozess</span> <span class="cheat-badge">LF 7 / AP1</span></h4>
+                    <ul style="padding-left: 1.1rem; font-size: 0.8rem;">
+                        <li><strong>Start-Ereignis:</strong> Dünner grüner Kreis.</li>
+                        <li><strong>End-Ereignis:</strong> Dicker roter Kreis.</li>
+                        <li><strong>Task / Aktivität:</strong> Abgerundetes Rechteck.</li>
+                        <li><strong>XOR-Gateway:</strong> Raute mit 'X' (Verzweigung, genau 1 Pfad).</li>
+                        <li><strong>Parallel-Gateway (AND):</strong> Raute mit '+' (beide Pfade gleichzeitig).</li>
+                    </ul>
+                </div>
+
+                <!-- Netzplan Guide -->
+                <div class="cheat-card">
+                    <h4><span>📊 Netzplan nach DIN 69900</span> <span class="cheat-badge">LF 1 / LF 7</span></h4>
+                    <ul style="padding-left: 1.1rem; font-size: 0.8rem;">
+                        <li><strong>Vorwärts:</strong> <code>FAZ + Dauer = FEZ</code> (bei mehreren Vorgängern gilt das Maximum!).</li>
+                        <li><strong>Rückwärts:</strong> <code>SEZ - Dauer = SAZ</code> (bei mehreren Nachfolgern gilt das Minimum!).</li>
+                        <li><strong>Gesamtpuffer:</strong> <code>GP = SAZ - FAZ = SEZ - FEZ</code>.</li>
+                        <li><strong>Freier Puffer:</strong> <code>FP = min(FAZ Nachfolger) - FEZ</code>.</li>
+                        <li><strong>Kritischer Pfad:</strong> Alle Vorgänge mit <code>GP = 0</code>.</li>
+                    </ul>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Status Footer -->
+    <footer>
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+            <span><i class="fa-solid fa-expand"></i> Ideal für <strong>Split-Screen</strong> (Windows-Taste + Pfeil links/rechts)</span>
+        </div>
+        <div class="shortcut-hints">
+            <span><kbd>P</kbd> Stift</span>
+            <span><kbd>L</kbd> Linie</span>
+            <span><kbd>A</kbd> Pfeil</span>
+            <span><kbd>R</kbd> Rechteck</span>
+            <span><kbd>O</kbd> Oval</span>
+            <span><kbd>T</kbd> Text</span>
+            <span><kbd>E</kbd> Radierer</span>
+            <span><kbd>Strg+Z</kbd> Undo</span>
+            <span><kbd>Strg+Y</kbd> Redo</span>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <i class="fa-solid fa-circle-check" style="color: #34d399;"></i>
+        <span id="toast-text">Meldung</span>
+    </div>
+
+    <script>
+        // ====================================================================
+        // IHK AP1 Standalone Whiteboard Engine
+        // ====================================================================
+        const STORAGE_KEY = "ihk_ap1_whiteboard_data_v1";
+        
+        let canvas = document.getElementById("canvas");
+        let ctx = canvas.getContext("2d", { willReadFrequently: true });
+        let container = document.getElementById("canvas-container");
+        let saveStatus = document.getElementById("save-status");
+        let saveStatusText = document.getElementById("save-status-text");
+
+        // Tool state
+        let currentTool = "pen";
+        let currentColor = "#1e293b";
+        let currentSize = 4;
+        let isDrawing = false;
+        let startX = 0;
+        let startY = 0;
+        let snapshot = null;
+
+        // Undo & Redo History
+        let undoStack = [];
+        let redoStack = [];
+        const MAX_HISTORY = 30;
+
+        // Grid states: small, large, dots, off
+        const gridModes = ["grid-small", "grid-large", "grid-dots", "grid-off"];
+        const gridLabels = ["Karo 20px", "Karo 40px", "Punkt-Raster", "Raster Aus"];
+        let gridIdx = 0;
+
+        // Init Setup
+        window.addEventListener("DOMContentLoaded", () => {
+            initEvents();
+            resizeCanvas(false);
+            loadFromStorage();
+        });
+
+        function resizeCanvas(preserveContent) {
+            const rect = container.getBoundingClientRect();
+            if (rect.width <= 0 || rect.height <= 0) return;
+
+            let tempCanvas = null;
+            if (preserveContent && canvas.width > 0 && canvas.height > 0) {
+                tempCanvas = document.createElement("canvas");
+                tempCanvas.width = canvas.width;
+                tempCanvas.height = canvas.height;
+                const tempCtx = tempCanvas.getContext("2d");
+                tempCtx.drawImage(canvas, 0, 0);
+            }
+
+            const dpr = window.devicePixelRatio || 1;
+            canvas.width = rect.width * dpr;
+            canvas.height = rect.height * dpr;
+            ctx.scale(dpr, dpr);
+
+            if (tempCanvas) {
+                ctx.drawImage(tempCanvas, 0, 0, rect.width, rect.height);
+            } else if (undoStack.length === 0) {
+                pushHistory();
+            }
+        }
+
+        window.addEventListener("resize", () => {
+            resizeCanvas(true);
+        });
+
+        function getCoords(e) {
+            const rect = canvas.getBoundingClientRect();
+            return {
+                x: e.clientX - rect.left,
+                y: e.clientY - rect.top
+            };
+        }
+
+        function pushHistory() {
+            try {
+                const img = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                undoStack.push(img);
+                if (undoStack.length > MAX_HISTORY) undoStack.shift();
+                redoStack = []; // Clear redo on new action
+                saveToStorageDebounced();
+            } catch (err) {}
+        }
+
+        function undo() {
+            if (undoStack.length > 1) {
+                const current = undoStack.pop();
+                redoStack.push(current);
+                const prev = undoStack[undoStack.length - 1];
+                if (prev) {
+                    ctx.putImageData(prev, 0, 0);
+                    saveToStorageDebounced();
+                    showToast("Rückgängig gemacht");
+                }
+            } else if (undoStack.length === 1) {
+                const current = undoStack.pop();
+                redoStack.push(current);
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                saveToStorageDebounced();
+                showToast("Leeres Board");
+            }
+        }
+
+        function redo() {
+            if (redoStack.length > 0) {
+                const next = redoStack.pop();
+                undoStack.push(next);
+                ctx.putImageData(next, 0, 0);
+                saveToStorageDebounced();
+                showToast("Wiederhergestellt");
+            }
+        }
+
+        // Mouse & Touch events
+        function initEvents() {
+            // Tool button clicks
+            document.querySelectorAll(".t-btn[data-tool]").forEach(btn => {
+                btn.addEventListener("click", () => {
+                    document.querySelectorAll(".t-btn[data-tool]").forEach(b => b.classList.remove("active"));
+                    btn.classList.add("active");
+                    currentTool = btn.getAttribute("data-tool");
+                });
+            });
+
+            // Color clicks
+            document.querySelectorAll(".c-btn[data-color]").forEach(btn => {
+                btn.addEventListener("click", () => {
+                    document.querySelectorAll(".c-btn[data-color]").forEach(b => b.classList.remove("active"));
+                    btn.classList.add("active");
+                    currentColor = btn.getAttribute("data-color");
+                });
+            });
+
+            // Custom color picker
+            const colorPicker = document.getElementById("custom-color-picker");
+            if (colorPicker) {
+                colorPicker.addEventListener("input", (e) => {
+                    document.querySelectorAll(".c-btn[data-color]").forEach(b => b.classList.remove("active"));
+                    currentColor = e.target.value;
+                });
+            }
+
+            // Size clicks
+            document.querySelectorAll(".s-btn[data-size]").forEach(btn => {
+                btn.addEventListener("click", () => {
+                    document.querySelectorAll(".s-btn[data-size]").forEach(b => b.classList.remove("active"));
+                    btn.classList.add("active");
+                    currentSize = parseInt(btn.getAttribute("data-size"), 10) || 4;
+                });
+            });
+
+            // Grid toggle
+            const gridBtn = document.getElementById("grid-mode-btn");
+            const gridLabel = document.getElementById("grid-mode-label");
+            gridBtn.addEventListener("click", () => {
+                container.classList.remove(gridModes[gridIdx]);
+                gridIdx = (gridIdx + 1) % gridModes.length;
+                if (gridModes[gridIdx] !== "grid-off") {
+                    container.classList.add(gridModes[gridIdx]);
+                }
+                gridLabel.innerText = gridLabels[gridIdx];
+            });
+
+            // Undo / Redo buttons
+            document.getElementById("undo-btn").addEventListener("click", undo);
+            document.getElementById("redo-btn").addEventListener("click", redo);
+
+            // Clear button
+            document.getElementById("clear-all-btn").addEventListener("click", () => {
+                if (confirm("Möchtest du das gesamte Board wirklich leeren?")) {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    pushHistory();
+                    localStorage.removeItem(STORAGE_KEY);
+                    showToast("Board geleert");
+                }
+            });
+
+            // Download PNG
+            document.getElementById("download-png-btn").addEventListener("click", exportPNG);
+
+            // Copy Clipboard
+            document.getElementById("copy-clipboard-btn").addEventListener("click", copyToClipboard);
+
+            // Cheatsheet Drawer Toggle
+            const drawer = document.getElementById("cheatsheet-drawer");
+            const toggleDrawerBtn = document.getElementById("cheatsheet-toggle-btn");
+            const closeDrawerBtn = document.getElementById("close-drawer-btn");
+
+            toggleDrawerBtn.addEventListener("click", () => {
+                drawer.classList.toggle("collapsed");
+            });
+            closeDrawerBtn.addEventListener("click", () => {
+                drawer.classList.add("collapsed");
+            });
+
+            // Canvas Draw Events (Mouse)
+            canvas.addEventListener("mousedown", onDrawStart);
+            window.addEventListener("mousemove", onDrawMove);
+            window.addEventListener("mouseup", onDrawEnd);
+
+            // Canvas Draw Events (Touch)
+            canvas.addEventListener("touchstart", (e) => {
+                if (e.touches.length === 1) {
+                    e.preventDefault();
+                    onDrawStart(e.touches[0]);
+                }
+            }, { passive: false });
+
+            window.addEventListener("touchmove", (e) => {
+                if (isDrawing && e.touches.length === 1) {
+                    e.preventDefault();
+                    onDrawMove(e.touches[0]);
+                }
+            }, { passive: false });
+
+            window.addEventListener("touchend", (e) => {
+                if (isDrawing) {
+                    e.preventDefault();
+                    onDrawEnd(e);
+                }
+            }, { passive: false });
+
+            // Keyboard Shortcuts
+            window.addEventListener("keydown", (e) => {
+                if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA") return;
+
+                if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "z") {
+                    e.preventDefault();
+                    undo();
+                } else if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "y") {
+                    e.preventDefault();
+                    redo();
+                } else if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "c") {
+                    e.preventDefault();
+                    copyToClipboard();
+                } else if (e.key.toLowerCase() === "p") {
+                    selectTool("pen");
+                } else if (e.key.toLowerCase() === "h") {
+                    selectTool("highlighter");
+                } else if (e.key.toLowerCase() === "l") {
+                    selectTool("line");
+                } else if (e.key.toLowerCase() === "a") {
+                    selectTool("arrow");
+                } else if (e.key.toLowerCase() === "r") {
+                    selectTool("rect");
+                } else if (e.key.toLowerCase() === "o") {
+                    selectTool("ellipse");
+                } else if (e.key.toLowerCase() === "t") {
+                    selectTool("text");
+                } else if (e.key.toLowerCase() === "e") {
+                    selectTool("eraser");
+                }
+            });
+        }
+
+        function selectTool(name) {
+            const btn = document.querySelector(`.t-btn[data-tool="${name}"]`);
+            if (btn) btn.click();
+        }
+
+        function onDrawStart(e) {
+            const coords = getCoords(e);
+            startX = coords.x;
+            startY = coords.y;
+            isDrawing = true;
+
+            if (currentTool === "text") {
+                isDrawing = false;
+                const text = prompt("Gib den Beschriftungstext ein:", "");
+                if (text && text.trim()) {
+                    ctx.save();
+                    ctx.fillStyle = currentColor;
+                    ctx.font = `bold ${Math.max(14, currentSize * 3 + 10)}px sans-serif`;
+                    ctx.textBaseline = "top";
+                    ctx.fillText(text.trim(), startX, startY);
+                    ctx.restore();
+                    pushHistory();
+                }
+                return;
+            }
+
+            try {
+                snapshot = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            } catch (err) {}
+
+            if (currentTool === "pen" || currentTool === "eraser" || currentTool === "highlighter") {
+                ctx.beginPath();
+                ctx.moveTo(startX, startY);
+            }
+        }
+
+        function onDrawMove(e) {
+            if (!isDrawing) return;
+            const coords = getCoords(e);
+            const currX = coords.x;
+            const currY = coords.y;
+
+            if (currentTool === "pen") {
+                ctx.save();
+                ctx.strokeStyle = currentColor;
+                ctx.lineWidth = currentSize;
+                ctx.lineCap = "round";
+                ctx.lineJoin = "round";
+                ctx.lineTo(currX, currY);
+                ctx.stroke();
+                ctx.restore();
+            } else if (currentTool === "highlighter") {
+                ctx.save();
+                ctx.strokeStyle = currentColor;
+                ctx.globalAlpha = 0.35;
+                ctx.lineWidth = Math.max(16, currentSize * 4);
+                ctx.lineCap = "square";
+                ctx.lineJoin = "round";
+                ctx.lineTo(currX, currY);
+                ctx.stroke();
+                ctx.restore();
+            } else if (currentTool === "eraser") {
+                ctx.save();
+                ctx.globalCompositeOperation = "destination-out";
+                ctx.lineWidth = currentSize * 4 + 12;
+                ctx.lineCap = "round";
+                ctx.lineJoin = "round";
+                ctx.lineTo(currX, currY);
+                ctx.stroke();
+                ctx.restore();
+            } else {
+                // Shape preview
+                if (snapshot) {
+                    ctx.putImageData(snapshot, 0, 0);
+                }
+                drawShape(startX, startY, currX, currY, currentTool, currentColor, currentSize);
+            }
+        }
+
+        function onDrawEnd(e) {
+            if (!isDrawing) return;
+            isDrawing = false;
+            snapshot = null;
+            pushHistory();
+        }
+
+        function drawShape(x0, y0, x1, y1, tool, color, size) {
+            ctx.save();
+            ctx.strokeStyle = color;
+            ctx.fillStyle = color;
+            ctx.lineWidth = size;
+            ctx.lineCap = "round";
+            ctx.lineJoin = "round";
+
+            if (tool === "line") {
+                ctx.beginPath();
+                ctx.moveTo(x0, y0);
+                ctx.lineTo(x1, y1);
+                ctx.stroke();
+            } else if (tool === "arrow" || tool === "dasharrow") {
+                if (tool === "dasharrow") {
+                    ctx.setLineDash([7, 6]);
+                }
+                ctx.beginPath();
+                ctx.moveTo(x0, y0);
+                ctx.lineTo(x1, y1);
+                ctx.stroke();
+
+                ctx.setLineDash([]);
+                const angle = Math.atan2(y1 - y0, x1 - x0);
+                const headlen = Math.max(12, size * 3.5);
+                ctx.beginPath();
+                ctx.moveTo(x1, y1);
+                ctx.lineTo(x1 - headlen * Math.cos(angle - Math.PI / 6), y1 - headlen * Math.sin(angle - Math.PI / 6));
+                ctx.lineTo(x1 - headlen * Math.cos(angle + Math.PI / 6), y1 - headlen * Math.sin(angle + Math.PI / 6));
+                ctx.closePath();
+                ctx.fill();
+            } else if (tool === "rect") {
+                ctx.strokeRect(x0, y0, x1 - x0, y1 - y0);
+            } else if (tool === "roundrect") {
+                const w = x1 - x0;
+                const h = y1 - y0;
+                const rx = Math.min(x0, x1);
+                const ry = Math.min(y0, y1);
+                const rw = Math.abs(w);
+                const rh = Math.abs(h);
+                const rad = Math.min(16, rw / 2, rh / 2);
+                ctx.beginPath();
+                ctx.roundRect(rx, ry, rw, rh, rad);
+                ctx.stroke();
+            } else if (tool === "ellipse") {
+                const rx = Math.abs(x1 - x0) / 2;
+                const ry = Math.abs(y1 - y0) / 2;
+                const cx = Math.min(x0, x1) + rx;
+                const cy = Math.min(y0, y1) + ry;
+                ctx.beginPath();
+                ctx.ellipse(cx, cy, Math.max(1, rx), Math.max(1, ry), 0, 0, 2 * Math.PI);
+                ctx.stroke();
+            } else if (tool === "diamond") {
+                const cx = (x0 + x1) / 2;
+                const cy = (y0 + y1) / 2;
+                ctx.beginPath();
+                ctx.moveTo(cx, y0);
+                ctx.lineTo(x1, cy);
+                ctx.lineTo(cx, y1);
+                ctx.lineTo(x0, cy);
+                ctx.closePath();
+                ctx.stroke();
+            } else if (tool === "hexagon") {
+                const minX = Math.min(x0, x1);
+                const maxX = Math.max(x0, x1);
+                const minY = Math.min(y0, y1);
+                const maxY = Math.max(y0, y1);
+                const w = maxX - minX;
+                const h = maxY - minY;
+                const cut = w * 0.2;
+
+                ctx.beginPath();
+                ctx.moveTo(minX + cut, minY);
+                ctx.lineTo(maxX - cut, minY);
+                ctx.lineTo(maxX, minY + h / 2);
+                ctx.lineTo(maxX - cut, maxY);
+                ctx.lineTo(minX + cut, maxY);
+                ctx.lineTo(minX, minY + h / 2);
+                ctx.closePath();
+                ctx.stroke();
+            } else if (tool === "actor") {
+                const topY = Math.min(y0, y1);
+                const botY = Math.max(y0, y1);
+                const totalH = Math.max(25, botY - topY);
+                const midX = (x0 + x1) / 2;
+                const w = Math.abs(x1 - x0);
+
+                const headR = totalH * 0.15;
+                const headCY = topY + headR;
+                const neckY = headCY + headR;
+                const waistY = neckY + totalH * 0.35;
+                const armsY = neckY + totalH * 0.12;
+                const armSpan = Math.max(totalH * 0.25, w / 2);
+
+                // Head
+                ctx.beginPath();
+                ctx.arc(midX, headCY, headR, 0, 2 * Math.PI);
+                ctx.stroke();
+                // Torso
+                ctx.beginPath();
+                ctx.moveTo(midX, neckY);
+                ctx.lineTo(midX, waistY);
+                // Arms
+                ctx.moveTo(midX - armSpan, armsY);
+                ctx.lineTo(midX + armSpan, armsY);
+                // Legs
+                ctx.moveTo(midX, waistY);
+                ctx.lineTo(midX - armSpan * 0.8, botY);
+                ctx.moveTo(midX, waistY);
+                ctx.lineTo(midX + armSpan * 0.8, botY);
+                ctx.stroke();
+            } else if (tool === "classbox") {
+                const minX = Math.min(x0, x1);
+                const minY = Math.min(y0, y1);
+                const w = Math.max(80, Math.abs(x1 - x0));
+                const h = Math.max(80, Math.abs(y1 - y0));
+                const hHeader = Math.max(25, h * 0.28);
+                const hAttr = Math.max(25, h * 0.36);
+
+                // Outer border
+                ctx.strokeRect(minX, minY, w, h);
+                // Separator 1 (under Name)
+                ctx.beginPath();
+                ctx.moveTo(minX, minY + hHeader);
+                ctx.lineTo(minX + w, minY + hHeader);
+                // Separator 2 (under Attributes)
+                ctx.moveTo(minX, minY + hHeader + hAttr);
+                ctx.lineTo(minX + w, minY + hHeader + hAttr);
+                ctx.stroke();
+
+                // Hint labels
+                ctx.save();
+                ctx.fillStyle = "#94a3b8";
+                ctx.font = "italic 11px sans-serif";
+                ctx.fillText("KlassenName", minX + 8, minY + 16);
+                ctx.fillText("- attribute: Typ", minX + 8, minY + hHeader + 16);
+                ctx.fillText("+ methoden(): Typ", minX + 8, minY + hHeader + hAttr + 16);
+                ctx.restore();
+            }
+
+            ctx.restore();
+        }
+
+        // ====================================================================
+        // Stencils / Templates Stamper
+        // ====================================================================
+        function stampTemplate(type) {
+            const rect = canvas.getBoundingClientRect();
+            const cx = rect.width / 2;
+            const cy = rect.height / 2;
+
+            ctx.save();
+            ctx.strokeStyle = "#1e293b";
+            ctx.fillStyle = "#1e293b";
+            ctx.lineWidth = 2;
+
+            if (type === "uml_class") {
+                const w = 180, h = 130;
+                const x = cx - w / 2, y = cy - h / 2;
+                ctx.strokeRect(x, y, w, h);
+                ctx.beginPath();
+                ctx.moveTo(x, y + 35);
+                ctx.lineTo(x + w, y + 35);
+                ctx.moveTo(x, y + 80);
+                ctx.lineTo(x + w, y + 80);
+                ctx.stroke();
+
+                ctx.font = "bold 13px sans-serif";
+                ctx.fillText("Kunde", x + 10, y + 22);
+                ctx.font = "12px monospace";
+                ctx.fillText("- kundenNr: int", x + 10, y + 54);
+                ctx.fillText("- name: String", x + 10, y + 70);
+                ctx.fillText("+ getBestellungen()", x + 10, y + 102);
+            } else if (type === "netzplan") {
+                const w = 180, h = 100;
+                const x = cx - w / 2, y = cy - h / 2;
+                ctx.strokeRect(x, y, w, h);
+                // Grid lines (3 rows, 3 cols)
+                ctx.beginPath();
+                ctx.moveTo(x, y + 33);
+                ctx.lineTo(x + w, y + 33);
+                ctx.moveTo(x, y + 66);
+                ctx.lineTo(x + w, y + 66);
+                ctx.moveTo(x + 60, y);
+                ctx.lineTo(x + 60, y + 33);
+                ctx.moveTo(x + 120, y);
+                ctx.lineTo(x + 120, y + 33);
+                ctx.moveTo(x + 60, y + 66);
+                ctx.lineTo(x + 60, y + h);
+                ctx.moveTo(x + 120, y + 66);
+                ctx.lineTo(x + 120, y + h);
+                ctx.stroke();
+
+                ctx.font = "11px sans-serif";
+                ctx.fillText("FAZ: 0", x + 8, y + 22);
+                ctx.fillText("D: 4", x + 75, y + 22);
+                ctx.fillText("FEZ: 4", x + 128, y + 22);
+
+                ctx.font = "bold 13px sans-serif";
+                ctx.fillText("V1: Planung", x + 25, y + 53);
+
+                ctx.font = "11px sans-serif";
+                ctx.fillText("SAZ: 0", x + 8, y + 88);
+                ctx.fillText("GP: 0", x + 75, y + 88);
+                ctx.fillText("SEZ: 4", x + 128, y + 88);
+            } else if (type === "actor_usecase") {
+                // Actor on left, Oval on right, connecting line
+                const ax = cx - 110, ay = cy;
+                drawShape(ax - 20, ay - 40, ax + 20, ay + 40, "actor", "#1e293b", 2);
+                const ox = cx + 50, oy = cy;
+                drawShape(ox - 65, oy - 28, ox + 65, oy + 28, "ellipse", "#2563eb", 2);
+                // Connecting line
+                ctx.beginPath();
+                ctx.moveTo(ax + 20, ay);
+                ctx.lineTo(ox - 65, oy);
+                ctx.stroke();
+
+                ctx.fillStyle = "#2563eb";
+                ctx.font = "bold 12px sans-serif";
+                ctx.fillText("Bestellung aufgeben", ox - 55, oy + 4);
+                ctx.fillStyle = "#1e293b";
+                ctx.fillText("Kunde", ax - 16, ay + 58);
+            } else if (type === "erd_entity") {
+                // Entity Box with PK Attribute
+                const ex = cx - 60, ey = cy - 25, ew = 120, eh = 50;
+                ctx.strokeRect(ex, ey, ew, eh);
+                ctx.font = "bold 13px sans-serif";
+                ctx.fillText("BESTELLUNG", ex + 14, ey + 30);
+
+                // PK Ellipse
+                const px = cx, py = cy - 80;
+                drawShape(px - 45, py - 20, px + 45, py + 20, "ellipse", "#0284c7", 2);
+                ctx.beginPath();
+                ctx.moveTo(cx, ey);
+                ctx.lineTo(px, py + 20);
+                ctx.stroke();
+
+                ctx.font = "12px sans-serif";
+                ctx.fillText("BestellNr (PK)", px - 35, py + 4);
+                ctx.beginPath();
+                ctx.moveTo(px - 35, py + 7);
+                ctx.lineTo(px + 35, py + 7);
+                ctx.stroke();
+            } else if (type === "bpmn_gateway") {
+                const gx = cx, gy = cy;
+                drawShape(gx - 40, gy - 40, gx + 40, gy + 40, "diamond", "#0891b2", 2.5);
+                ctx.font = "bold 24px sans-serif";
+                ctx.fillStyle = "#0891b2";
+                ctx.fillText("X", gx - 8, gy + 8);
+                ctx.font = "11px sans-serif";
+                ctx.fillText("XOR-Entscheidung", gx - 45, gy + 56);
+            } else if (type === "epk_chain") {
+                // Event 1 (Hexagon) -> XOR -> Function
+                const ex = cx - 120, ey = cy;
+                drawShape(ex - 45, ey - 22, ex + 45, ey + 22, "hexagon", "#ea580c", 2);
+                ctx.font = "10px sans-serif";
+                ctx.fillStyle = "#ea580c";
+                ctx.fillText("Auftrag erteilt", ex - 32, ey + 3);
+
+                // Arrow
+                drawShape(ex + 45, ey, cx - 40, ey, "arrow", "#1e293b", 2);
+
+                // Function (Roundrect)
+                const fx = cx + 30, fy = cy;
+                drawShape(fx - 45, fy - 22, fx + 45, fy + 22, "roundrect", "#16a34a", 2);
+                ctx.font = "10px sans-serif";
+                ctx.fillStyle = "#16a34a";
+                ctx.fillText("Auftrag prüfen", fx - 32, fy + 3);
+            }
+
+            ctx.restore();
+            pushHistory();
+            document.getElementById("cheatsheet-drawer").classList.add("collapsed");
+            showToast("Vorlage eingefügt");
+        }
+
+        // ====================================================================
+        // Storage & Export
+        // ====================================================================
+        let saveTimeout = null;
+        function saveToStorageDebounced() {
+            saveStatusText.innerText = "Speichert...";
+            if (saveTimeout) clearTimeout(saveTimeout);
+            saveTimeout = setTimeout(() => {
+                try {
+                    const dataUrl = canvas.toDataURL("image/png");
+                    localStorage.setItem(STORAGE_KEY, dataUrl);
+                    saveStatusText.innerText = "Gespeichert";
+                } catch (e) {
+                    saveStatusText.innerText = "Lokal";
+                }
+            }, 500);
+        }
+
+        function loadFromStorage() {
+            try {
+                const saved = localStorage.getItem(STORAGE_KEY);
+                if (saved) {
+                    const img = new Image();
+                    img.onload = () => {
+                        ctx.drawImage(img, 0, 0);
+                        pushHistory();
+                        showToast("Vorherige Zeichnung geladen");
+                    };
+                    img.src = saved;
+                }
+            } catch (e) {}
+        }
+
+        function exportPNG() {
+            const expCanvas = document.createElement("canvas");
+            expCanvas.width = canvas.width;
+            expCanvas.height = canvas.height;
+            const expCtx = expCanvas.getContext("2d");
+
+            // Fill solid white
+            expCtx.fillStyle = "#ffffff";
+            expCtx.fillRect(0, 0, expCanvas.width, expCanvas.height);
+
+            // Render grid if enabled
+            if (gridModes[gridIdx] !== "grid-off") {
+                expCtx.strokeStyle = "#e2e8f0";
+                expCtx.lineWidth = 1;
+                const step = (gridModes[gridIdx] === "grid-large" ? 40 : 20) * (window.devicePixelRatio || 1);
+                for (let x = 0; x < expCanvas.width; x += step) {
+                    expCtx.beginPath();
+                    expCtx.moveTo(x, 0);
+                    expCtx.lineTo(x, expCanvas.height);
+                    expCtx.stroke();
+                }
+                for (let y = 0; y < expCanvas.height; y += step) {
+                    expCtx.beginPath();
+                    expCtx.moveTo(0, y);
+                    expCtx.lineTo(expCanvas.width, y);
+                    expCtx.stroke();
+                }
+            }
+
+            // Draw content
+            expCtx.drawImage(canvas, 0, 0);
+
+            const a = document.createElement("a");
+            a.download = `IHK_AP1_Diagramm_${new Date().toISOString().slice(0, 10)}.png`;
+            a.href = expCanvas.toDataURL("image/png");
+            a.click();
+            showToast("PNG-Download gestartet");
+        }
+
+        async function copyToClipboard() {
+            try {
+                const expCanvas = document.createElement("canvas");
+                expCanvas.width = canvas.width;
+                expCanvas.height = canvas.height;
+                const expCtx = expCanvas.getContext("2d");
+                expCtx.fillStyle = "#ffffff";
+                expCtx.fillRect(0, 0, expCanvas.width, expCanvas.height);
+                expCtx.drawImage(canvas, 0, 0);
+
+                expCanvas.toBlob(async (blob) => {
+                    if (!blob) return;
+                    try {
+                        await navigator.clipboard.write([
+                            new ClipboardItem({ "image/png": blob })
+                        ]);
+                        showToast("Skizze in die Zwischenablage kopiert! (Strg+V)");
+                    } catch (err) {
+                        showToast("Kopieren nicht unterstützt - nutze 'PNG Export'");
+                    }
+                }, "image/png");
+            } catch (err) {
+                showToast("Kopieren fehlgeschlagen");
+            }
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById("toast");
+            const toastText = document.getElementById("toast-text");
+            toastText.innerText = msg;
+            toast.classList.add("show");
+            setTimeout(() => {
+                toast.classList.remove("show");
+            }, 2500);
+        }
+    </script>
+</body>
+</html>
