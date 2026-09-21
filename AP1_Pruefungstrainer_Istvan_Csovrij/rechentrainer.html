@@ -32,7 +32,7 @@
             <span class="px-3 py-1 rounded-full text-sm font-semibold bg-sky-500/10 text-sky-600 border border-sky-500/20">
               IHK Prüfungsvorbereitung AP1 & AP2
             </span>
-            <span class="text-sm text-slate-500 font-semibold text-amber-700">Version 2.2 (Elektrotechnik: Ohmsches Gesetz &amp; Leistung)</span>
+            <span class="text-sm text-slate-500 font-semibold text-emerald-700">Version 2.3 (RZ-Effizienz: PUE &amp; DCiE, Elektrotechnik &amp; Leistung)</span>
           </div>
           <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">IHK Rechen- &amp; Einheiten-Trainer</h1>
           <p class="text-base text-slate-600 mt-1.5">
@@ -66,6 +66,9 @@
         </button>
         <button onclick="switchTab('it')" id="tab-btn-it" class="tab-btn px-5 py-3 text-base font-medium rounded-t-lg border-b-2 border-transparent text-slate-600 hover:text-slate-900 transition-all">
           💾 Formeln: IT-Einheiten &amp; Daten
+        </button>
+        <button onclick="switchTab('rz')" id="tab-btn-rz" class="tab-btn px-5 py-3 text-base font-medium rounded-t-lg border-b-2 border-transparent text-slate-600 hover:text-slate-900 transition-all">
+          🏢 Formeln: RZ-Effizienz (PUE &amp; DCiE)
         </button>
       </div>
     </div>
@@ -157,6 +160,17 @@
           </button>
           <button onclick="selectMiniTopic('it_units')" class="topic-pill px-3.5 py-2 text-sm font-semibold rounded-xl border border-slate-300 bg-white hover:bg-slate-100 transition-all" data-topic="it_units">
             💾 IT: Byte ↔ Bit &amp; Transfer
+          </button>
+
+          <!-- Rechenzentrum & Effizienz (PUE / DCiE / Einsparung) -->
+          <button onclick="selectMiniTopic('pue_calc')" class="topic-pill px-3.5 py-2 text-sm font-semibold rounded-xl border border-emerald-400 bg-emerald-50 hover:bg-emerald-100 text-emerald-900 transition-all" data-topic="pue_calc">
+            🏢 RZ: PUE (E_Gesamt / E_IT)
+          </button>
+          <button onclick="selectMiniTopic('dcie_calc')" class="topic-pill px-3.5 py-2 text-sm font-semibold rounded-xl border border-emerald-400 bg-emerald-50 hover:bg-emerald-100 text-emerald-900 transition-all" data-topic="dcie_calc">
+            🏢 RZ: DCiE in % (1 / PUE)
+          </button>
+          <button onclick="selectMiniTopic('pue_savings')" class="topic-pill px-3.5 py-2 text-sm font-semibold rounded-xl border border-emerald-400 bg-emerald-50 hover:bg-emerald-100 text-emerald-900 transition-all" data-topic="pue_savings">
+            💶 RZ: Stromersparnis durch PUE (€)
           </button>
         </div>
       </div>
@@ -683,6 +697,203 @@
           </div>
         </div>
       </div>
+    </div>
+
+    <!-- TAB 6: RECHENZENTRUM-EFFIZIENZ (PUE & DCiE & EINSPARUNG) -->
+    <div id="tab-content-rz" class="tab-pane hidden space-y-6">
+      
+      <!-- Schnell-Sprung zu Mini-Aufgaben -->
+      <div class="p-4 bg-emerald-50 border border-emerald-200 rounded-xl flex flex-wrap items-center justify-between gap-3">
+        <div>
+          <span class="text-base font-bold text-emerald-950 block">Möchtest du RZ-Effizienz &amp; PUE direkt üben?</span>
+          <span class="text-xs text-emerald-700">Wähle einen Bereich für sofortige Mini-Aufgaben:</span>
+        </div>
+        <div class="flex flex-wrap items-center gap-2">
+          <button onclick="jumpToMiniTopic('pue_calc')" class="px-3.5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs sm:text-sm font-bold rounded-xl transition-all shadow-sm flex items-center gap-1.5">
+            <span>🏢</span> PUE-Wert berechnen
+          </button>
+          <button onclick="jumpToMiniTopic('dcie_calc')" class="px-3.5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs sm:text-sm font-bold rounded-xl transition-all shadow-sm flex items-center gap-1.5">
+            <span>📊</span> DCiE-Effizienz in %
+          </button>
+          <button onclick="jumpToMiniTopic('pue_savings')" class="px-3.5 py-2 bg-emerald-700 hover:bg-emerald-800 text-white text-xs sm:text-sm font-bold rounded-xl transition-all shadow-sm flex items-center gap-1.5">
+            <span>💶</span> Stromkosten-Einsparung (€)
+          </button>
+        </div>
+      </div>
+
+      <!-- KOPF-ÜBERSICHT: PUE & DCiE FORMELN -->
+      <div class="bg-white border-2 border-emerald-300 rounded-2xl p-6 sm:p-8 shadow-sm space-y-6 bg-gradient-to-br from-emerald-50/40 via-white to-sky-50/30">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-emerald-200 pb-4">
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-100 text-emerald-900 border border-emerald-300">
+                LF 2 / LF 6 / Green IT
+              </span>
+              <span class="text-xs font-semibold text-slate-500">IHK AP1 &amp; AP2 Standard</span>
+            </div>
+            <h2 class="text-xl sm:text-2xl font-bold text-slate-900 mt-1">
+              Rechenzentrum-Effizienz: PUE &amp; DCiE
+            </h2>
+            <p class="text-sm text-slate-600">
+              Wie viel des eingekauften Stroms fließt tatsächlich in Server &amp; Storage – und wie viel verpufft in Kühlung und USV?
+            </p>
+          </div>
+          <div class="text-xs bg-white border border-emerald-300 text-emerald-950 px-3 py-2 rounded-xl font-medium shadow-xs">
+            👉 <strong>Idealwert:</strong> PUE = 1,00 (DCiE = 100 %) – Unmöglich zu unterbieten!
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          
+          <!-- KARTE 1: PUE FORMEL -->
+          <div class="p-5 sm:p-6 rounded-2xl border-2 border-emerald-200 bg-white shadow-xs space-y-4">
+            <div class="flex items-center justify-between">
+              <h3 class="font-bold text-lg text-emerald-950 flex items-center gap-2">
+                <span class="p-1.5 bg-emerald-100 text-emerald-800 rounded-lg text-base">🏢</span>
+                PUE (Power Usage Effectiveness)
+              </h3>
+              <span class="text-xs font-mono font-bold bg-emerald-50 text-emerald-800 border border-emerald-200 px-2 py-1 rounded">E_Gesamt / E_IT</span>
+            </div>
+
+            <div class="p-4 bg-emerald-50/70 border border-emerald-200 rounded-xl space-y-2 text-center font-mono">
+              <div class="text-xl font-bold text-emerald-900">
+                PUE = E<sub>Gesamt</sub> / E<sub>IT</sub>
+              </div>
+              <div class="text-xs text-slate-600 font-sans">
+                E<sub>Gesamt</sub> = Gesamter Stromverbrauch des RZs (inkl. Klima, USV, Licht)<br>
+                E<sub>IT</sub> = Stromverbrauch reiner IT-Hardware (Server, Storage, Netzwerk)
+              </div>
+            </div>
+
+            <div class="text-xs text-slate-700 space-y-1.5 leading-relaxed">
+              <div>• <strong>Idealwert: 1,0</strong> (Keine Energie für Kühlung, USV-Verluste oder Beleuchtung).</div>
+              <div>• <strong>Altbauten / kleine Serverräume:</strong> PUE 1,8 – 2,2 (mehr als die Hälfte für Kühlung!).</div>
+              <div>• <strong>Moderne Rechenzentren:</strong> PUE 1,2 – 1,4.</div>
+              <div>• <strong>Hyperscaler (Google/AWS):</strong> PUE &lt; 1,15.</div>
+            </div>
+          </div>
+
+          <!-- KARTE 2: DCiE FORMEL -->
+          <div class="p-5 sm:p-6 rounded-2xl border-2 border-sky-200 bg-white shadow-xs space-y-4">
+            <div class="flex items-center justify-between">
+              <h3 class="font-bold text-lg text-sky-950 flex items-center gap-2">
+                <span class="p-1.5 bg-sky-100 text-sky-800 rounded-lg text-base">📊</span>
+                DCiE (Data Center Infrastructure Efficiency)
+              </h3>
+              <span class="text-xs font-mono font-bold bg-sky-50 text-sky-800 border border-sky-200 px-2 py-1 rounded">1 / PUE × 100 %</span>
+            </div>
+
+            <div class="p-4 bg-sky-50/70 border border-sky-200 rounded-xl space-y-2 text-center font-mono">
+              <div class="text-xl font-bold text-sky-900">
+                DCiE = (E<sub>IT</sub> / E<sub>Gesamt</sub>) × 100 % = (1 / PUE) × 100 %
+              </div>
+              <div class="text-xs text-slate-600 font-sans">
+                Der DCiE ist der <strong>Kehrwert des PUE</strong>, ausgedrückt in Prozent!
+              </div>
+            </div>
+
+            <div class="text-xs text-slate-700 space-y-1.5 leading-relaxed">
+              <div>• <strong>Bedeutung:</strong> Wie viel Prozent des bezahlten Stroms fließt tatsächlich in Rechenleistung?</div>
+              <div>• <strong>Beispiel PUE = 1,60:</strong> DCiE = 1 / 1,60 = <strong>62,5 %</strong> (37,5 % sind Overhead/Verluste).</div>
+              <div>• <strong>Beispiel PUE = 1,25:</strong> DCiE = 1 / 1,25 = <strong>80,0 %</strong>.</div>
+              <div>• <strong>Beispiel PUE = 2,00:</strong> DCiE = 1 / 2,00 = <strong>50,0 %</strong> (die Hälfte verpufft!).</div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- RECHENWEG: KOSTENEINSPARUNG DURCH PUE-SENKUNG -->
+        <div class="p-5 sm:p-6 rounded-2xl border border-slate-200 bg-white shadow-xs space-y-4">
+          <h3 class="font-bold text-lg text-slate-900 flex items-center gap-2">
+            <span class="p-1.5 bg-amber-100 text-amber-800 rounded-lg text-base">💶</span>
+            Typischer IHK-Rechenweg: Kosteneinsparung bei PUE-Senkung
+          </h3>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs sm:text-sm font-mono">
+            <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
+              <span class="font-sans font-bold text-slate-900 block text-xs">Schritt 1: Neuer Gesamtstrom</span>
+              <strong class="text-emerald-700 text-sm">E<sub>Ges, neu</sub> = E<sub>IT</sub> × PUE<sub>neu</sub></strong>
+              <span class="text-slate-500 font-sans text-xs block">Bei unveränderter IT-Last sinkt der Gesamtverbrauch.</span>
+            </div>
+            <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
+              <span class="font-sans font-bold text-slate-900 block text-xs">Schritt 2: Stromersparnis (kWh)</span>
+              <strong class="text-emerald-700 text-sm">ΔE = E<sub>Ges, alt</sub> - E<sub>Ges, neu</sub></strong>
+              <span class="text-slate-500 font-sans text-xs block">Oder: ΔE = E<sub>IT</sub> × (PUE<sub>alt</sub> - PUE<sub>neu</sub>)</span>
+            </div>
+            <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
+              <span class="font-sans font-bold text-slate-900 block text-xs">Schritt 3: Ersparnis in Euro (€)</span>
+              <strong class="text-emerald-700 text-sm">Ersparnis = ΔE × Strompreis</strong>
+              <span class="text-slate-500 font-sans text-xs block">z. B. 900.000 kWh × 0,28 €/kWh = 252.000 €/Jahr</span>
+            </div>
+          </div>
+
+          <!-- IHK Prüfungs-Fachbegriffe -->
+          <div class="p-4 rounded-xl bg-emerald-50/50 border border-emerald-200 text-xs sm:text-sm text-emerald-950 space-y-2">
+            <div class="font-bold flex items-center gap-1.5">
+              <span>💡</span> Typische IHK-Maßnahmen zur PUE-Senkung (Musterantworten für offene Fragen):
+            </div>
+            <ul class="list-disc list-inside space-y-1 text-slate-700 font-sans text-xs sm:text-sm">
+              <li><strong>Kaltgang- oder Warmgangeinhausung:</strong> Trennung von kalter Zuluft und warmer Abluft verhindert thermische Kurzschlüsse.</li>
+              <li><strong>Direkte Freikühlung (Free Cooling):</strong> Nutzung kühler Außenluft bei niedrigen Außentemperaturen statt stromintensiver Kompressor-Kältemaschinen.</li>
+              <li><strong>Erhöhung der RZ-Solltemperatur:</strong> Moderne Server vertragen nach ASHRAE A1-A4 bis zu 27 °C Lufteintrittstemperatur (spart pro Grad ca. 4–5 % Kälteenergie).</li>
+              <li><strong>Modulare / hocheffiziente USV-Anlagen:</strong> Betrieb im ECO-Modus oder mit Wirkungsgraden &gt; 96 % statt alter Trafo-USVs.</li>
+              <li><strong>Drehzahlgeregelte EC-Lüfter:</strong> Anpassung des Luftstroms an die tatsächliche Serverlast.</li>
+            </ul>
+          </div>
+
+          <!-- Interaktiver RZ-Effizienz-Rechner -->
+          <div class="p-5 rounded-xl border-2 border-emerald-300 bg-emerald-50/30 space-y-4">
+            <div class="text-xs font-bold text-emerald-900 uppercase tracking-wider flex items-center justify-between">
+              <span>Interaktiver RZ-Effizienz-Rechner (PUE, DCiE &amp; Einsparung):</span>
+              <span class="text-emerald-700 font-normal">Werte anpassen &amp; sofort live berechnen</span>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+              <div>
+                <label class="text-xs font-semibold text-slate-700">E_Gesamt alt (kWh)</label>
+                <input type="number" id="calc-rz-eges" value="3600000" oninput="calcRzEffizienz()" class="w-full mt-1 px-3 py-1.5 text-sm rounded-lg border border-emerald-300 bg-white font-mono font-bold" />
+              </div>
+              <div>
+                <label class="text-xs font-semibold text-slate-700">E_IT (kWh)</label>
+                <input type="number" id="calc-rz-eit" value="2250000" oninput="calcRzEffizienz()" class="w-full mt-1 px-3 py-1.5 text-sm rounded-lg border border-emerald-300 bg-white font-mono font-bold" />
+              </div>
+              <div>
+                <label class="text-xs font-semibold text-slate-700">PUE neu (nach Optimierung)</label>
+                <input type="number" step="0.05" id="calc-rz-puenew" value="1.20" oninput="calcRzEffizienz()" class="w-full mt-1 px-3 py-1.5 text-sm rounded-lg border border-emerald-300 bg-white font-mono font-bold" />
+              </div>
+              <div>
+                <label class="text-xs font-semibold text-slate-700">Strompreis (€ / kWh)</label>
+                <input type="number" step="0.01" id="calc-rz-price" value="0.28" oninput="calcRzEffizienz()" class="w-full mt-1 px-3 py-1.5 text-sm rounded-lg border border-emerald-300 bg-white font-mono font-bold" />
+              </div>
+            </div>
+
+            <!-- Live Output Cards -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 pt-2 text-center font-mono">
+              <div class="p-2.5 bg-white rounded-xl border border-emerald-200">
+                <span class="text-xs text-slate-500 font-sans block">Aktueller PUE:</span>
+                <strong class="text-emerald-800 text-lg" id="out-rz-pue">1,60</strong>
+              </div>
+              <div class="p-2.5 bg-white rounded-xl border border-sky-200">
+                <span class="text-xs text-slate-500 font-sans block">Aktueller DCiE:</span>
+                <strong class="text-sky-800 text-lg" id="out-rz-dcie">62,5 %</strong>
+              </div>
+              <div class="p-2.5 bg-white rounded-xl border border-amber-200">
+                <span class="text-xs text-slate-500 font-sans block">Stromersparnis:</span>
+                <strong class="text-amber-800 text-lg" id="out-rz-kwh">900.000 kWh</strong>
+              </div>
+              <div class="p-2.5 bg-white rounded-xl border border-emerald-400 bg-emerald-50/50">
+                <span class="text-xs text-emerald-800 font-sans block font-bold">Ersparnis pro Jahr:</span>
+                <strong class="text-emerald-700 text-xl font-bold" id="out-rz-eur">252.000 €</strong>
+              </div>
+            </div>
+
+            <div id="calc-rz-expl" class="text-xs font-mono text-slate-700 pt-2 border-t border-emerald-200 leading-relaxed">
+              Rechenweg: PUE = 3.600.000 / 2.250.000 = 1,60 | DCiE = 1 / 1,60 = 62,5 % | E_neu = 2.250.000 × 1,20 = 2.700.000 kWh | Ersparnis = 900.000 kWh × 0,28 € = 252.000 €/Jahr
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
     </div>
 
   </div>
@@ -1261,6 +1472,111 @@
             explanation: `Richtig! Dateigröße: ${sizeMB} MByte × 8 = ${sizeMbit} Mbit. Dauer = ${sizeMbit} Mbit / ${speedMbit} Mbit/s = <strong>${sec} Sekunden</strong>.`
           };
         }
+      },
+
+      // 17. PUE-WERT (RECHENZENTRUM-EFFIZIENZ)
+      pue_calc: function() {
+        const scenarios = [
+          { name: "Ein Colocation-Rechenzentrum", e_ges: 3600000, e_it: 2250000 },
+          { name: "Ein Unternehmens-Rechenzentrum", e_ges: 4500000, e_it: 3000000 },
+          { name: "Ein älterer Serverraum vor Sanierung", e_ges: 1800000, e_it: 1000000 },
+          { name: "Ein modernes Edge-Datacenter", e_ges: 2800000, e_it: 2000000 },
+          { name: "Ein Banken-Rechenzentrum mit USV-Redundanz", e_ges: 5600000, e_it: 4000000 },
+          { name: "Ein Green-IT Cloud-Rechenzentrum", e_ges: 2500000, e_it: 2000000 }
+        ];
+        const isUserSc = Math.random() < 0.35;
+        const sc = isUserSc ? scenarios[0] : scenarios[Math.floor(Math.random() * scenarios.length)];
+        const pue = parseFloat((sc.e_ges / sc.e_it).toFixed(2));
+
+        return {
+          topic: "pue_calc",
+          badge: "🏢 RZ-Effizienz",
+          title: "PUE-Wert berechnen (Power Usage Effectiveness)",
+          question: `${sc.name} verbraucht im Jahr eine <strong>Gesamtenergie von E_Gesamt = ${sc.e_ges.toLocaleString('de-DE')} kWh</strong> (${(sc.e_ges / 1000000).toFixed(1).replace('.', ',')} GWh).<br>Die reine IT-Infrastruktur (Server, Storage, Netzwerk) benötigt davon <strong>E_IT = ${sc.e_it.toLocaleString('de-DE')} kWh</strong>.<br>Der restliche Strom entfällt auf Kühlung, USV-Verluste und Gebäudeinfrastruktur.<br><br>Berechne den <strong>PUE-Wert</strong> des Rechenzentrums (auf 2 Nachkommastellen genau):`,
+          unit: "PUE-Wert",
+          expected: pue,
+          tolerance: 0.05,
+          hint: `PUE = E_Gesamt / E_IT = ${sc.e_ges} / ${sc.e_it}`,
+          explanation: `Richtig! <strong>PUE = E_Gesamt / E_IT</strong> = ${sc.e_ges.toLocaleString('de-DE')} kWh / ${sc.e_it.toLocaleString('de-DE')} kWh = <strong>${pue.toString().replace('.', ',')}</strong>.<br><span class="text-xs text-slate-600">Bedeutung: Für jede kWh IT-Nutzenergie müssen insgesamt ${pue.toString().replace('.', ',')} kWh Strom bezahlt werden (Overhead = ${(pue - 1).toFixed(2).replace('.', ',')} kWh). Der Idealwert ist 1,00.</span>`
+        };
+      },
+
+      // 18. DCiE-WERT (DATA CENTER INFRASTRUCTURE EFFICIENCY IN %)
+      dcie_calc: function() {
+        const type = Math.floor(Math.random() * 2);
+        if (type === 0) {
+          const scenarios = [
+            { e_ges: 3600000, e_it: 2250000, pue: 1.60, dcie: 62.5 },
+            { e_ges: 4000000, e_it: 2500000, pue: 1.60, dcie: 62.5 },
+            { e_ges: 2000000, e_it: 1000000, pue: 2.00, dcie: 50.0 },
+            { e_ges: 2500000, e_it: 2000000, pue: 1.25, dcie: 80.0 },
+            { e_ges: 3000000, e_it: 2000000, pue: 1.50, dcie: 66.7 },
+            { e_ges: 5000000, e_it: 3500000, pue: 1.43, dcie: 70.0 }
+          ];
+          const sc = scenarios[Math.floor(Math.random() * scenarios.length)];
+          return {
+            topic: "dcie_calc",
+            badge: "📊 RZ-Effizienz",
+            title: "DCiE-Wert in Prozent berechnen (E_IT / E_Gesamt)",
+            question: `Ein Rechenzentrum benötigt im Jahr <strong>E_IT = ${sc.e_it.toLocaleString('de-DE')} kWh</strong> für die IT-Geräte bei einem Gesamtenergiebedarf von <strong>E_Gesamt = ${sc.e_ges.toLocaleString('de-DE')} kWh</strong>.<br><br>Berechne den <strong>DCiE-Wert (Data Center Infrastructure Efficiency) in Prozent (%)</strong> (auf 1 Nachkommastelle genau):`,
+            unit: "%",
+            expected: sc.dcie,
+            tolerance: 0.3,
+            hint: `DCiE = (E_IT / E_Gesamt) × 100 % = (${sc.e_it} / ${sc.e_ges}) × 100 %`,
+            explanation: `Richtig! <strong>DCiE = (E_IT / E_Gesamt) × 100 %</strong> = (${sc.e_it.toLocaleString('de-DE')} / ${sc.e_ges.toLocaleString('de-DE')}) × 100 % = <strong>${sc.dcie.toString().replace('.', ',')} %</strong>.<br><span class="text-xs text-slate-600">Hinweis: DCiE ist der Kehrwert des PUE: 1 / PUE = 1 / ${sc.pue.toString().replace('.', ',')} = ${(1/sc.pue * 100).toFixed(1).replace('.', ',')} %.</span>`
+          };
+        } else {
+          const pues = [1.25, 1.40, 1.50, 1.60, 1.80, 2.00];
+          const p = pues[Math.floor(Math.random() * pues.length)];
+          const dcie = parseFloat(((1 / p) * 100).toFixed(1));
+          return {
+            topic: "dcie_calc",
+            badge: "📊 RZ-Effizienz",
+            title: "DCiE-Wert aus gegebenem PUE-Wert ermitteln",
+            question: `Für ein Rechenzentrum wurde ein <strong>PUE-Wert von ${p.toString().replace('.', ',')}</strong> ermittelt.<br><br>Wie hoch ist der <strong>DCiE-Wert in Prozent (%)</strong>?<br><span class="text-xs text-slate-500">(Tipp: DCiE ist der prozentuale Kehrwert des PUE: DCiE = 1 / PUE × 100 %)</span>`,
+            unit: "%",
+            expected: dcie,
+            tolerance: 0.3,
+            hint: `DCiE = (1 / PUE) × 100 % = (1 / ${p}) × 100 %`,
+            explanation: `Richtig! <strong>DCiE = 1 / PUE × 100 %</strong> = (1 / ${p.toString().replace('.', ',')}) × 100 % = <strong>${dcie.toString().replace('.', ',')} %</strong>. Das bedeutet: ${dcie.toString().replace('.', ',')} % des Stroms fließen direkt in echte IT-Rechenleistung.`
+          };
+        }
+      },
+
+      // 19. PUE-SENKUNG & STROMKOSTENEINSPARUNG
+      pue_savings: function() {
+        const scenarios = [
+          { e_it: 2250000, pue_old: 1.60, pue_new: 1.20, price: 0.28 },
+          { e_it: 3000000, pue_old: 1.70, pue_new: 1.30, price: 0.25 },
+          { e_it: 1500000, pue_old: 1.80, pue_new: 1.30, price: 0.30 },
+          { e_it: 4000000, pue_old: 1.55, pue_new: 1.25, price: 0.26 },
+          { e_it: 1800000, pue_old: 1.65, pue_new: 1.25, price: 0.32 },
+          { e_it: 2000000, pue_old: 1.90, pue_new: 1.40, price: 0.28 }
+        ];
+        const isUserSc = Math.random() < 0.4;
+        const sc = isUserSc ? scenarios[0] : scenarios[Math.floor(Math.random() * scenarios.length)];
+        
+        const deltaPue = parseFloat((sc.pue_old - sc.pue_new).toFixed(2));
+        const savedKwh = Math.round(sc.e_it * deltaPue);
+        const e_ges_old = Math.round(sc.e_it * sc.pue_old);
+        const e_ges_new = Math.round(sc.e_it * sc.pue_new);
+        const savedEur = Math.round(savedKwh * sc.price);
+
+        return {
+          topic: "pue_savings",
+          badge: "💶 Kosteneinsparung",
+          title: "Jährliche Stromkosteneinsparung durch PUE-Senkung berechnen",
+          question: `Durch Kaltgangeinhausung und Freikühlung wird der PUE-Wert eines RZs von <strong>${sc.pue_old.toString().replace('.', ',')}</strong> auf <strong>${sc.pue_new.toString().replace('.', ',')}</strong> gesenkt.<br>Die IT-Leistung bleibt unverändert bei <strong>E_IT = ${sc.e_it.toLocaleString('de-DE')} kWh</strong>.<br>Der Strompreis beträgt <strong>${sc.price.toFixed(2).replace('.', ',')} € / kWh</strong> netto.<br><br>Berechne die <strong>jährliche Kosteneinsparung in Euro (€)</strong>:`,
+          unit: "€",
+          expected: savedEur,
+          tolerance: 100,
+          hint: `1. E_Ges,alt = ${sc.e_it} × ${sc.pue_old} = ${e_ges_old} kWh | 2. E_Ges,neu = ${sc.e_it} × ${sc.pue_new} = ${e_ges_new} kWh | 3. Ersparnis = (${e_ges_old} - ${e_ges_new}) × ${sc.price} €`,
+          explanation: `Richtig! In 3 Schritten berechnet:<br>` +
+            `1. <strong>Alter Gesamtverbrauch:</strong> ${sc.e_it.toLocaleString('de-DE')} kWh × ${sc.pue_old.toString().replace('.', ',')} = ${e_ges_old.toLocaleString('de-DE')} kWh<br>` +
+            `2. <strong>Neuer Gesamtverbrauch:</strong> ${sc.e_it.toLocaleString('de-DE')} kWh × ${sc.pue_new.toString().replace('.', ',')} = ${e_ges_new.toLocaleString('de-DE')} kWh<br>` +
+            `3. <strong>Eingesparte Energie:</strong> ${e_ges_old.toLocaleString('de-DE')} - ${e_ges_new.toLocaleString('de-DE')} = ${savedKwh.toLocaleString('de-DE')} kWh<br>` +
+            `4. <strong>Kosteneinsparung:</strong> ${savedKwh.toLocaleString('de-DE')} kWh × ${sc.price.toFixed(2).replace('.', ',')} € = <strong>${savedEur.toLocaleString('de-DE')} €</strong> pro Jahr!`
+        };
       }
     };
 
@@ -1443,11 +1759,38 @@
       document.getElementById('calc-power-expl').innerHTML = `Rechenweg: ${s} VA × ${cos} = ${p} W (${(p/1000).toFixed(2).replace('.', ',')} kW)`;
     }
 
+    function calcRzEffizienz() {
+      const eGes = parseFloat(document.getElementById('calc-rz-eges').value);
+      const eIt = parseFloat(document.getElementById('calc-rz-eit').value);
+      const pueNew = parseFloat(document.getElementById('calc-rz-puenew').value);
+      const price = parseFloat(document.getElementById('calc-rz-price').value);
+
+      if (isNaN(eGes) || isNaN(eIt) || eIt <= 0 || isNaN(pueNew) || isNaN(price)) return;
+
+      const pue = eGes / eIt;
+      const dcie = (eIt / eGes) * 100;
+      const eGesNew = eIt * pueNew;
+      const savedKwh = Math.max(0, eGes - eGesNew);
+      const savedEur = Math.round(savedKwh * price);
+
+      document.getElementById('out-rz-pue').innerText = pue.toFixed(2).replace('.', ',');
+      document.getElementById('out-rz-dcie').innerText = dcie.toFixed(1).replace('.', ',') + ' %';
+      document.getElementById('out-rz-kwh').innerText = Math.round(savedKwh).toLocaleString('de-DE') + ' kWh';
+      document.getElementById('out-rz-eur').innerText = savedEur.toLocaleString('de-DE') + ' €';
+
+      document.getElementById('calc-rz-expl').innerHTML = 
+        `Rechenweg: <strong>PUE</strong> = ${eGes.toLocaleString('de-DE')} / ${eIt.toLocaleString('de-DE')} = <strong>${pue.toFixed(2).replace('.', ',')}</strong> | ` +
+        `<strong>DCiE</strong> = 1 / ${pue.toFixed(2).replace('.', ',')} = <strong>${dcie.toFixed(1).replace('.', ',')} %</strong> | ` +
+        `<strong>E<sub>neu</sub></strong> = ${eIt.toLocaleString('de-DE')} × ${pueNew.toFixed(2).replace('.', ',')} = <strong>${Math.round(eGesNew).toLocaleString('de-DE')} kWh</strong> | ` +
+        `<strong>Ersparnis</strong> = ${Math.round(savedKwh).toLocaleString('de-DE')} kWh × ${price.toFixed(2).replace('.', ',')} € = <strong>${savedEur.toLocaleString('de-DE')} €/Jahr</strong>`;
+    }
+
     window.addEventListener('DOMContentLoaded', () => {
       generateMiniTask();
       calcPower('S');
       calcOhm('U');
       calcPwr('U');
+      calcRzEffizienz();
     });
   </script>
 </body>
