@@ -32,7 +32,7 @@
             <span class="px-3 py-1 rounded-full text-sm font-semibold bg-sky-500/10 text-sky-600 border border-sky-500/20">
               IHK Prüfungsvorbereitung AP1 & AP2
             </span>
-            <span class="text-sm text-slate-500">Version 2.1 (Optimierte Lesbarkeit &amp; Schriftgröße)</span>
+            <span class="text-sm text-slate-500 font-semibold text-amber-700">Version 2.2 (Elektrotechnik: Ohmsches Gesetz &amp; Leistung)</span>
           </div>
           <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">IHK Rechen- &amp; Einheiten-Trainer</h1>
           <p class="text-base text-slate-600 mt-1.5">
@@ -95,6 +95,31 @@
           <button onclick="selectMiniTopic('all')" class="topic-pill active px-3.5 py-2 text-sm font-semibold rounded-xl border border-slate-300 bg-white hover:bg-slate-100 transition-all" data-topic="all">
             🎲 Alle gemischt
           </button>
+          
+          <!-- Elektrotechnik: Ohmsches Gesetz & Elektrische Leistung -->
+          <button onclick="selectMiniTopic('ohm_u')" class="topic-pill px-3.5 py-2 text-sm font-semibold rounded-xl border border-amber-300 bg-amber-50 hover:bg-amber-100 text-amber-900 transition-all" data-topic="ohm_u">
+            ⚡ Ohm: U = R · I (Volt)
+          </button>
+          <button onclick="selectMiniTopic('ohm_r')" class="topic-pill px-3.5 py-2 text-sm font-semibold rounded-xl border border-amber-300 bg-amber-50 hover:bg-amber-100 text-amber-900 transition-all" data-topic="ohm_r">
+            ⚡ Ohm: R = U / I (Ohm)
+          </button>
+          <button onclick="selectMiniTopic('ohm_i')" class="topic-pill px-3.5 py-2 text-sm font-semibold rounded-xl border border-amber-300 bg-amber-50 hover:bg-amber-100 text-amber-900 transition-all" data-topic="ohm_i">
+            ⚡ Ohm: I = U / R (Ampere)
+          </button>
+          <button onclick="selectMiniTopic('power_p')" class="topic-pill px-3.5 py-2 text-sm font-semibold rounded-xl border border-yellow-400 bg-yellow-50 hover:bg-yellow-100 text-yellow-900 transition-all" data-topic="power_p">
+            💡 Leistung: P = U · I (Watt)
+          </button>
+          <button onclick="selectMiniTopic('power_i')" class="topic-pill px-3.5 py-2 text-sm font-semibold rounded-xl border border-yellow-400 bg-yellow-50 hover:bg-yellow-100 text-yellow-900 transition-all" data-topic="power_i">
+            💡 Strom aus P: I = P / U
+          </button>
+          <button onclick="selectMiniTopic('kombi_elektro')" class="topic-pill px-3.5 py-2 text-sm font-semibold rounded-xl border border-purple-300 bg-purple-50 hover:bg-purple-100 text-purple-900 transition-all" data-topic="kombi_elektro">
+            🔀 Kombi: Wann welches Dreieck?
+          </button>
+          <button onclick="selectMiniTopic('einheiten_strom')" class="topic-pill px-3.5 py-2 text-sm font-semibold rounded-xl border border-indigo-300 bg-indigo-50 hover:bg-indigo-100 text-indigo-900 transition-all" data-topic="einheiten_strom">
+            🔄 Einheiten: mA ↔ A &amp; kΩ ↔ Ω
+          </button>
+
+          <!-- USV & Akku -->
           <button onclick="selectMiniTopic('zeit_min')" class="topic-pill px-3.5 py-2 text-sm font-semibold rounded-xl border border-slate-300 bg-white hover:bg-slate-100 transition-all" data-topic="zeit_min">
             ⏱️ Zeit (3,2 h in Min)
           </button>
@@ -110,6 +135,8 @@
           <button onclick="selectMiniTopic('energie_wh')" class="topic-pill px-3.5 py-2 text-sm font-semibold rounded-xl border border-slate-300 bg-white hover:bg-slate-100 transition-all" data-topic="energie_wh">
             🔋 Energie (W = Q · U)
           </button>
+
+          <!-- Kaufmännisch & Wirtschaft -->
           <button onclick="selectMiniTopic('skonto_im_hundert')" class="topic-pill px-3.5 py-2 text-sm font-semibold rounded-xl border border-slate-300 bg-white hover:bg-slate-100 transition-all" data-topic="skonto_im_hundert">
             💶 Skonto "Im Hundert"
           </button>
@@ -217,11 +244,261 @@
     <div id="tab-content-elektro" class="tab-pane hidden space-y-6">
       
       <!-- Schnell-Sprung zu Mini-Aufgaben -->
-      <div class="p-4 bg-sky-50 border border-sky-200 rounded-xl flex items-center justify-between">
-        <span class="text-sm font-bold text-sky-900">Möchtest du diese Themen direkt üben?</span>
-        <button onclick="jumpToMiniTopic('akku_formel')" class="px-4 py-2 bg-sky-600 text-white text-sm font-bold rounded-lg hover:bg-sky-700">
-          🎯 Mini-Aufgaben zu USV &amp; Akkus starten
-        </button>
+      <div class="p-4 bg-sky-50 border border-sky-200 rounded-xl flex flex-wrap items-center justify-between gap-3">
+        <div>
+          <span class="text-base font-bold text-sky-950 block">Möchtest du diese Themen direkt üben?</span>
+          <span class="text-xs text-sky-700">Wähle einen Bereich für sofortige Mini-Aufgaben:</span>
+        </div>
+        <div class="flex flex-wrap items-center gap-2">
+          <button onclick="jumpToMiniTopic('ohm_u')" class="px-3.5 py-2 bg-amber-600 hover:bg-amber-700 text-white text-xs sm:text-sm font-bold rounded-xl transition-all shadow-sm flex items-center gap-1.5">
+            <span>⚡</span> Ohmsches Gesetz (U, R, I)
+          </button>
+          <button onclick="jumpToMiniTopic('power_p')" class="px-3.5 py-2 bg-yellow-600 hover:bg-yellow-700 text-white text-xs sm:text-sm font-bold rounded-xl transition-all shadow-sm flex items-center gap-1.5">
+            <span>💡</span> Elektrische Leistung (P, U, I)
+          </button>
+          <button onclick="jumpToMiniTopic('kombi_elektro')" class="px-3.5 py-2 bg-purple-600 hover:bg-purple-700 text-white text-xs sm:text-sm font-bold rounded-xl transition-all shadow-sm flex items-center gap-1.5">
+            <span>🔀</span> Wann welches Dreieck?
+          </button>
+          <button onclick="jumpToMiniTopic('akku_formel')" class="px-3.5 py-2 bg-sky-600 hover:bg-sky-700 text-white text-xs sm:text-sm font-bold rounded-xl transition-all shadow-sm flex items-center gap-1.5">
+            <span>🔋</span> USV &amp; Akkus
+          </button>
+        </div>
+      </div>
+
+      <!-- DIE BEIDEN MAGISCHEN FORMELDREIECKE (NEU) -->
+      <div class="bg-white border-2 border-amber-300 rounded-2xl p-6 sm:p-8 shadow-sm space-y-6 bg-gradient-to-br from-amber-50/40 via-white to-sky-50/30">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-amber-200 pb-4">
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-amber-100 text-amber-900 border border-amber-300">
+                Grundlagen Elektrotechnik
+              </span>
+              <span class="text-xs font-semibold text-slate-500">IHK AP1 Standard</span>
+            </div>
+            <h2 class="text-xl sm:text-2xl font-bold text-slate-900 mt-1">
+              Die beiden magischen Formeldreiecke
+            </h2>
+            <p class="text-sm text-slate-600">
+              Lege gedanklich den Finger auf die gesuchte Größe: Was übrig bleibt, ist deine Rechenformel!
+            </p>
+          </div>
+          <div class="text-xs bg-white border border-amber-300 text-amber-950 px-3 py-2 rounded-xl font-medium shadow-xs">
+            👉 <strong>Daumenregel:</strong> Oben geteilt durch unten | Unten nebeneinander multipliziert
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          
+          <!-- DREIECK 1: OHMSCHES GESETZ (U = R · I) -->
+          <div class="p-5 sm:p-6 rounded-2xl border-2 border-amber-200 bg-white shadow-xs space-y-4">
+            <div class="flex items-center justify-between">
+              <h3 class="font-bold text-lg text-amber-950 flex items-center gap-2">
+                <span class="p-1.5 bg-amber-100 text-amber-800 rounded-lg text-base">⚡</span>
+                Dreieck 1: Ohmsches Gesetz
+              </h3>
+              <span class="text-xs font-mono font-bold bg-amber-50 text-amber-800 border border-amber-200 px-2 py-1 rounded">U = R · I</span>
+            </div>
+
+            <!-- Visuelle Dreieck-Grafik -->
+            <div class="bg-amber-50/70 border border-amber-200 rounded-xl p-4 flex flex-col items-center justify-center space-y-2 font-mono">
+              <div class="w-32 py-2 px-4 bg-amber-500 text-white font-bold text-center text-lg rounded-xl shadow-xs">
+                U <span class="text-xs font-normal block text-amber-100">Volt (V) - Spannung</span>
+              </div>
+              <div class="w-48 h-0.5 bg-amber-400"></div>
+              <div class="flex items-center gap-3">
+                <div class="w-28 py-2 px-3 bg-white border-2 border-amber-400 text-amber-950 font-bold text-center text-base rounded-xl">
+                  R <span class="text-xs font-normal block text-slate-500">Ohm (Ω)</span>
+                </div>
+                <span class="text-xl font-bold text-amber-600">·</span>
+                <div class="w-28 py-2 px-3 bg-white border-2 border-amber-400 text-amber-950 font-bold text-center text-base rounded-xl">
+                  I <span class="text-xs font-normal block text-slate-500">Ampere (A)</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Drei Formeln im Überblick -->
+            <div class="grid grid-cols-3 gap-2 text-xs font-mono text-center">
+              <div class="p-2 bg-slate-50 rounded-lg border border-slate-200">
+                <span class="text-slate-500 block font-sans">Spannung:</span>
+                <strong class="text-amber-800 text-sm">U = R · I</strong>
+              </div>
+              <div class="p-2 bg-slate-50 rounded-lg border border-slate-200">
+                <span class="text-slate-500 block font-sans">Widerstand:</span>
+                <strong class="text-amber-800 text-sm">R = U / I</strong>
+              </div>
+              <div class="p-2 bg-slate-50 rounded-lg border border-slate-200">
+                <span class="text-slate-500 block font-sans">Stromstärke:</span>
+                <strong class="text-amber-800 text-sm">I = U / R</strong>
+              </div>
+            </div>
+
+            <!-- Interaktiver Ohm-Rechner -->
+            <div class="p-4 rounded-xl border border-amber-200 bg-amber-50/40 space-y-3">
+              <div class="text-xs font-bold text-amber-900 uppercase tracking-wider">Interaktiver Ohm-Rechner:</div>
+              <div class="grid grid-cols-3 gap-2">
+                <div>
+                  <label class="text-xs font-semibold text-slate-600">U (Volt)</label>
+                  <input type="number" step="any" id="calc-ohm-u" value="12" oninput="calcOhm('U')" class="w-full mt-1 px-3 py-1.5 text-sm rounded-lg border border-amber-300 bg-white font-mono font-bold" />
+                </div>
+                <div>
+                  <label class="text-xs font-semibold text-slate-600">R (Ohm Ω)</label>
+                  <input type="number" step="any" id="calc-ohm-r" value="24" oninput="calcOhm('R')" class="w-full mt-1 px-3 py-1.5 text-sm rounded-lg border border-amber-300 bg-white font-mono font-bold" />
+                </div>
+                <div>
+                  <label class="text-xs font-semibold text-slate-600">I (Ampere A)</label>
+                  <input type="number" step="any" id="calc-ohm-i" value="0.5" oninput="calcOhm('I')" class="w-full mt-1 px-3 py-1.5 text-sm rounded-lg border border-amber-300 bg-white font-mono font-bold text-amber-700" />
+                </div>
+              </div>
+              <div id="calc-ohm-expl" class="text-xs font-mono text-slate-700 pt-1 border-t border-amber-200">
+                Rechenweg: I = U / R = 12 V / 24 Ω = 0,5 A (500 mA)
+              </div>
+            </div>
+
+          </div>
+
+          <!-- DREIECK 2: ELEKTRISCHE LEISTUNG (P = U · I) -->
+          <div class="p-5 sm:p-6 rounded-2xl border-2 border-yellow-300 bg-white shadow-xs space-y-4">
+            <div class="flex items-center justify-between">
+              <h3 class="font-bold text-lg text-yellow-950 flex items-center gap-2">
+                <span class="p-1.5 bg-yellow-100 text-yellow-800 rounded-lg text-base">💡</span>
+                Dreieck 2: Elektrische Leistung
+              </h3>
+              <span class="text-xs font-mono font-bold bg-yellow-50 text-yellow-800 border border-yellow-200 px-2 py-1 rounded">P = U · I</span>
+            </div>
+
+            <!-- Visuelle Dreieck-Grafik -->
+            <div class="bg-yellow-50/70 border border-yellow-200 rounded-xl p-4 flex flex-col items-center justify-center space-y-2 font-mono">
+              <div class="w-32 py-2 px-4 bg-yellow-500 text-white font-bold text-center text-lg rounded-xl shadow-xs">
+                P <span class="text-xs font-normal block text-yellow-100">Watt (W) - Leistung</span>
+              </div>
+              <div class="w-48 h-0.5 bg-yellow-400"></div>
+              <div class="flex items-center gap-3">
+                <div class="w-28 py-2 px-3 bg-white border-2 border-yellow-400 text-yellow-950 font-bold text-center text-base rounded-xl">
+                  U <span class="text-xs font-normal block text-slate-500">Volt (V)</span>
+                </div>
+                <span class="text-xl font-bold text-yellow-600">·</span>
+                <div class="w-28 py-2 px-3 bg-white border-2 border-yellow-400 text-yellow-950 font-bold text-center text-base rounded-xl">
+                  I <span class="text-xs font-normal block text-slate-500">Ampere (A)</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Drei Formeln im Überblick -->
+            <div class="grid grid-cols-3 gap-2 text-xs font-mono text-center">
+              <div class="p-2 bg-slate-50 rounded-lg border border-slate-200">
+                <span class="text-slate-500 block font-sans">Leistung:</span>
+                <strong class="text-yellow-800 text-sm">P = U · I</strong>
+              </div>
+              <div class="p-2 bg-slate-50 rounded-lg border border-slate-200">
+                <span class="text-slate-500 block font-sans">Stromstärke:</span>
+                <strong class="text-yellow-800 text-sm">I = P / U</strong>
+              </div>
+              <div class="p-2 bg-slate-50 rounded-lg border border-slate-200">
+                <span class="text-slate-500 block font-sans">Spannung:</span>
+                <strong class="text-yellow-800 text-sm">U = P / I</strong>
+              </div>
+            </div>
+
+            <!-- Interaktiver Leistungs-Rechner -->
+            <div class="p-4 rounded-xl border border-yellow-300 bg-yellow-50/40 space-y-3">
+              <div class="text-xs font-bold text-yellow-900 uppercase tracking-wider">Interaktiver Leistungs-Rechner:</div>
+              <div class="grid grid-cols-3 gap-2">
+                <div>
+                  <label class="text-xs font-semibold text-slate-600">P (Watt W)</label>
+                  <input type="number" step="any" id="calc-pwr-p" value="2300" oninput="calcPwr('P')" class="w-full mt-1 px-3 py-1.5 text-sm rounded-lg border border-yellow-300 bg-white font-mono font-bold text-emerald-700" />
+                </div>
+                <div>
+                  <label class="text-xs font-semibold text-slate-600">U (Volt V)</label>
+                  <input type="number" step="any" id="calc-pwr-u" value="230" oninput="calcPwr('U')" class="w-full mt-1 px-3 py-1.5 text-sm rounded-lg border border-yellow-300 bg-white font-mono font-bold" />
+                </div>
+                <div>
+                  <label class="text-xs font-semibold text-slate-600">I (Ampere A)</label>
+                  <input type="number" step="any" id="calc-pwr-i" value="10" oninput="calcPwr('I')" class="w-full mt-1 px-3 py-1.5 text-sm rounded-lg border border-yellow-300 bg-white font-mono font-bold" />
+                </div>
+              </div>
+              <div id="calc-pwr-expl" class="text-xs font-mono text-slate-700 pt-1 border-t border-yellow-300">
+                Rechenweg: P = 230 V × 10 A = 2.300 W (2,30 kW)
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- ENTSCHEIDUNGSHILFE: WANN WELCHES DREIECK? -->
+        <div class="p-5 rounded-2xl border-2 border-purple-300 bg-purple-50/50 space-y-4">
+          <div class="flex items-center justify-between">
+            <h3 class="font-bold text-base sm:text-lg text-purple-950 flex items-center gap-2">
+              <span class="p-1 bg-purple-200 text-purple-800 rounded-lg text-sm">🧭</span>
+              Prüfungs-Kompass: Wann welches Dreieck verwenden?
+            </h3>
+            <span class="text-xs font-bold bg-purple-200 text-purple-900 px-2.5 py-1 rounded-full">Prüfungswissen</span>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs sm:text-sm">
+            <div class="p-4 rounded-xl bg-white border border-amber-200 shadow-2xs space-y-2">
+              <div class="font-bold text-amber-900 text-base flex items-center gap-1.5">
+                <span>⚡</span> Dreieck U = R · I
+              </div>
+              <p class="text-slate-700 leading-relaxed">
+                Verwende dieses Dreieck, sobald ein <strong>Widerstand (R in Ω)</strong> gegeben oder gesucht ist:
+              </p>
+              <ul class="list-disc list-inside text-slate-600 space-y-1">
+                <li>Leitungswiderstand von Netzwerkkabeln</li>
+                <li>Vorwiderstand für Status-LEDs</li>
+                <li>Innenwiderstand von Komponenten</li>
+                <li>Sensor- und Bus-Abschlusswiderstände</li>
+              </ul>
+            </div>
+
+            <div class="p-4 rounded-xl bg-white border border-yellow-300 shadow-2xs space-y-2">
+              <div class="font-bold text-yellow-900 text-base flex items-center gap-1.5">
+                <span>💡</span> Dreieck P = U · I
+              </div>
+              <p class="text-slate-700 leading-relaxed">
+                Verwende dieses Dreieck, sobald es um <strong>Leistung (P in Watt / kW)</strong> oder Stromverbrauch geht:
+              </p>
+              <ul class="list-disc list-inside text-slate-600 space-y-1">
+                <li>Netzteilauslegung (z. B. 750 W Server)</li>
+                <li>Strombelastung einer Sicherung (z. B. 16 A bei 230 V)</li>
+                <li>PoE-Budget (z. B. 30 W je Port bei 48 V)</li>
+                <li>Abwärme und Kühlleistung im RZ</li>
+              </ul>
+            </div>
+
+            <div class="p-4 rounded-xl bg-white border border-purple-300 shadow-2xs space-y-2">
+              <div class="font-bold text-purple-900 text-base flex items-center gap-1.5">
+                <span>🔀</span> Beide kombinieren (2 Schritte)
+              </div>
+              <p class="text-slate-700 leading-relaxed">
+                Kommen <strong>Widerstand R</strong> UND <strong>Leistung P</strong> zusammen vor?
+              </p>
+              <div class="p-2.5 rounded-lg bg-purple-50 border border-purple-200 font-mono text-xs text-purple-900 space-y-1">
+                <div><strong>Formel 1:</strong> P = I² · R</div>
+                <div><strong>Formel 2:</strong> P = U² / R</div>
+                <div class="text-slate-600 pt-1 font-sans">Oder in 2 Schritten: Erst mit Dreieck 1 oder 2 den Zwischenwert (I oder U) berechnen, dann das Ziel!</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- IHK Einheiten-Fallen -->
+          <div class="p-4 rounded-xl bg-white border border-rose-200 flex flex-col md:flex-row md:items-center justify-between gap-3 text-xs sm:text-sm">
+            <div class="flex items-center gap-2">
+              <span class="text-lg">⚠️</span>
+              <div>
+                <strong class="text-rose-900">Typische IHK-Falle: Einheiten-Präfixe vor der Rechnung anpassen!</strong>
+                <span class="text-slate-600 block">In den Formeln MÜSSEN immer Ampere (A), Ohm (Ω) und Watt (W) stehen, keine Milliampere!</span>
+              </div>
+            </div>
+            <div class="flex flex-wrap gap-2 font-mono text-xs">
+              <span class="px-2.5 py-1 bg-rose-50 text-rose-800 rounded border border-rose-200">500 mA = 0,5 A (÷ 1000)</span>
+              <span class="px-2.5 py-1 bg-rose-50 text-rose-800 rounded border border-rose-200">2,2 kΩ = 2.200 Ω (× 1000)</span>
+              <span class="px-2.5 py-1 bg-rose-50 text-rose-800 rounded border border-rose-200">1,5 kW = 1.500 W (× 1000)</span>
+            </div>
+          </div>
+
+        </div>
+
       </div>
 
       <!-- 2-SPALTIGES HAUPTLAYOUT -->
@@ -458,11 +735,259 @@
 
     // MINI-AUFGABEN GENERATOR
     const taskGenerators = {
+      // 1. OHMSCHES GESETZ: U = R · I
+      ohm_u: function() {
+        const scenarios = [
+          { dev: "Ein PoE-Sensor im Serverraum", r: Math.floor(Math.random() * 40) + 10, i_ma: (Math.floor(Math.random() * 20) + 5) * 10 },
+          { dev: "Eine RS485-Busleitung mit Abschlusswiderstand", r: 120, i_ma: (Math.floor(Math.random() * 15) + 5) * 10 },
+          { dev: "Ein Schutzwiderstand auf einem Mainboard", r: Math.floor(Math.random() * 50) + 20, i_ma: (Math.floor(Math.random() * 25) + 10) * 10 },
+          { dev: "Ein Shunt-Messwiderstand an einer USV-Batterie", r: Math.floor(Math.random() * 20) + 5, i_ma: (Math.floor(Math.random() * 30) + 10) * 10 }
+        ];
+        const sc = scenarios[Math.floor(Math.random() * scenarios.length)];
+        const r = sc.r;
+        const i_a = sc.i_ma / 1000;
+        const u = parseFloat((r * i_a).toFixed(2));
+
+        return {
+          topic: "ohm_u",
+          badge: "⚡ Ohmsches Gesetz",
+          title: "Spannung U aus Widerstand R und Stromstärke I berechnen",
+          question: `${sc.dev} hat einen Widerstand von <strong>R = ${r} Ω</strong>. Es fließt ein Strom von <strong>I = ${sc.i_ma} mA</strong> (${i_a.toString().replace('.', ',')} A).<br><br>Berechne die anliegende <strong>Spannung U in Volt (V)</strong>:`,
+          unit: "Volt (V)",
+          expected: u,
+          tolerance: 0.1,
+          hint: `U = R · I = ${r} Ω × ${i_a} A`,
+          explanation: `Richtig! <strong>Dreieck 1 (U = R · I)</strong>: ${r} Ω × ${i_a.toString().replace('.', ',')} A = <strong>${u.toString().replace('.', ',')} V</strong>.<br><span class="text-xs text-slate-600">Hinweis: ${sc.i_ma} mA müssen vor dem Rechnen immer durch 1.000 in Ampere umgerechnet werden (${i_a} A)!</span>`
+        };
+      },
+
+      ohm_r: function() {
+        const scenarios = [
+          { dev: "Ein 12V-Gehäuselüfter im Server", u: 12, i_a: [0.15, 0.2, 0.25, 0.3, 0.4, 0.5][Math.floor(Math.random() * 6)] },
+          { dev: "Ein 24V-Schaltschrank-Relais", u: 24, i_a: [0.08, 0.1, 0.12, 0.16, 0.2][Math.floor(Math.random() * 5)] },
+          { dev: "Ein Heizwiderstand im Außenschrank (230V)", u: 230, i_a: [1.5, 2.0, 2.5, 3.0][Math.floor(Math.random() * 4)] },
+          { dev: "Ein Vorwiderstand für eine Status-LED", u: [2.0, 2.5, 3.0, 3.3][Math.floor(Math.random() * 4)], i_a: 0.02 }
+        ];
+        const sc = scenarios[Math.floor(Math.random() * scenarios.length)];
+        const r = parseFloat((sc.u / sc.i_a).toFixed(1));
+
+        return {
+          topic: "ohm_r",
+          badge: "⚡ Ohmsches Gesetz",
+          title: "Widerstand R aus Spannung U und Stromstärke I berechnen",
+          question: `${sc.dev} wird mit einer Spannung von <strong>U = ${sc.u} V</strong> betrieben und nimmt einen Strom von <strong>I = ${sc.i_a.toString().replace('.', ',')} A</strong> (${Math.round(sc.i_a * 1000)} mA) auf.<br><br>Wie groß ist der <strong>ohmsche Widerstand R in Ohm (Ω)</strong>?`,
+          unit: "Ohm (Ω)",
+          expected: r,
+          tolerance: 0.5,
+          hint: `R = U / I = ${sc.u} V / ${sc.i_a} A`,
+          explanation: `Richtig! <strong>Dreieck 1 (R = U / I)</strong>: ${sc.u} V / ${sc.i_a.toString().replace('.', ',')} A = <strong>${r.toString().replace('.', ',')} Ω</strong>.`
+        };
+      },
+
+      ohm_i: function() {
+        const scenarios = [
+          { dev: "Ein 5V-Sensorelement", u: 5, r: [25, 50, 100, 200, 250][Math.floor(Math.random() * 5)] },
+          { dev: "Ein 12V-Kühlkörper-Thermostat", u: 12, r: [30, 40, 60, 80][Math.floor(Math.random() * 4)] },
+          { dev: "Ein 24V-Signalgeber an einer Brandmeldeanlage", u: 24, r: [120, 240, 300, 480][Math.floor(Math.random() * 4)] },
+          { dev: "Eine 48V-PoE-Schutzschaltung", u: 48, r: [160, 240, 320][Math.floor(Math.random() * 3)] }
+        ];
+        const sc = scenarios[Math.floor(Math.random() * scenarios.length)];
+        const i_a = parseFloat((sc.u / sc.r).toFixed(3));
+
+        return {
+          topic: "ohm_i",
+          badge: "⚡ Ohmsches Gesetz",
+          title: "Stromstärke I aus Spannung U und Widerstand R berechnen",
+          question: `${sc.dev} liegt an einer Spannung von <strong>U = ${sc.u} V</strong> an und besitzt einen Widerstand von <strong>R = ${sc.r} Ω</strong>.<br><br>Wie groß ist die resultierende <strong>Stromstärke I in Ampere (A)</strong>?`,
+          unit: "Ampere (A)",
+          expected: i_a,
+          tolerance: 0.02,
+          hint: `I = U / R = ${sc.u} V / ${sc.r} Ω`,
+          explanation: `Richtig! <strong>Dreieck 1 (I = U / R)</strong>: ${sc.u} V / ${sc.r} Ω = <strong>${i_a.toString().replace('.', ',')} A</strong> (entspricht ${Math.round(i_a * 1000)} mA).`
+        };
+      },
+
+      // 2. ELEKTRISCHE LEISTUNG: P = U · I
+      power_p: function() {
+        const scenarios = [
+          { dev: "Ein 19-Zoll-Managed-Switch", u: 230, i_a: parseFloat(((Math.floor(Math.random() * 40) + 15) / 100).toFixed(2)) },
+          { dev: "Ein PoE+-WLAN-Access-Point", u: 48, i_a: parseFloat(((Math.floor(Math.random() * 35) + 25) / 100).toFixed(2)) },
+          { dev: "Ein High-End-Server", u: 230, i_a: parseFloat(((Math.floor(Math.random() * 25) + 15) / 10).toFixed(1)) },
+          { dev: "Ein 12V-Mainboard-Spannungswandler", u: 12, i_a: Math.floor(Math.random() * 20) + 10 }
+        ];
+        const sc = scenarios[Math.floor(Math.random() * scenarios.length)];
+        const p = Math.round(sc.u * sc.i_a);
+
+        return {
+          topic: "power_p",
+          badge: "💡 Elektrische Leistung",
+          title: "Leistung P aus Spannung U und Stromstärke I berechnen",
+          question: `${sc.dev} wird mit <strong>U = ${sc.u} V</strong> betrieben und zieht einen Betriebsstrom von <strong>I = ${sc.i_a.toString().replace('.', ',')} A</strong>.<br><br>Berechne die aufgenommene <strong>elektrische Leistung P in Watt (W)</strong>:`,
+          unit: "Watt (W)",
+          expected: p,
+          tolerance: 2,
+          hint: `P = U · I = ${sc.u} V × ${sc.i_a} A`,
+          explanation: `Richtig! <strong>Dreieck 2 (P = U · I)</strong>: ${sc.u} V × ${sc.i_a.toString().replace('.', ',')} A = <strong>${p} W</strong> (${(p / 1000).toFixed(2).replace('.', ',')} kW).`
+        };
+      },
+
+      power_i: function() {
+        const scenarios = [
+          { dev: "Ein 19-Zoll-Rackserver", p: (Math.floor(Math.random() * 8) + 4) * 100, u: 230 },
+          { dev: "Ein Blade-Chassis mit Netzteilen", p: (Math.floor(Math.random() * 12) + 15) * 100, u: 230 },
+          { dev: "Ein PoE-Port am Switch", p: [15, 30, 60, 90][Math.floor(Math.random() * 4)], u: 48 },
+          { dev: "Eine Grafik-Workstation an 230V", p: (Math.floor(Math.random() * 6) + 4) * 100, u: 230 }
+        ];
+        const sc = scenarios[Math.floor(Math.random() * scenarios.length)];
+        const i_a = parseFloat((sc.p / sc.u).toFixed(2));
+
+        return {
+          topic: "power_i",
+          badge: "💡 Elektrische Leistung",
+          title: "Betriebsstrom I aus Leistung P berechnen",
+          question: `${sc.dev} hat eine Leistungsaufnahme von <strong>P = ${sc.p} W</strong> an einer Versorgungsspannung von <strong>U = ${sc.u} V</strong>.<br><br>Welcher <strong>Betriebsstrom I in Ampere (A)</strong> fließt durch die Zuleitung? (auf 2 Nachkommastellen genau)`,
+          unit: "Ampere (A)",
+          expected: i_a,
+          tolerance: 0.1,
+          hint: `I = P / U = ${sc.p} W / ${sc.u} V`,
+          explanation: `Richtig! <strong>Dreieck 2 (I = P / U)</strong>: ${sc.p} W / ${sc.u} V = <strong>${i_a.toString().replace('.', ',')} A</strong>. Wichtig für Leitungs- und Sicherungsdimensionierungen!`
+        };
+      },
+
+      // 3. KOMBINATION & WANN WELCHES DREIECK?
+      kombi_elektro: function() {
+        const type = Math.floor(Math.random() * 3);
+        if (type === 0) {
+          // P & U gegeben -> R gesucht (z.B. Heizung im Rack)
+          const u = 230;
+          const i_choice = [1, 2, 3, 4, 5][Math.floor(Math.random() * 5)];
+          const p = u * i_choice;
+          const r = parseFloat((u / i_choice).toFixed(1));
+
+          return {
+            topic: "kombi_elektro",
+            badge: "🔀 Formel-Kombination",
+            title: "Widerstand R aus Leistung P und Spannung U bestimmen",
+            question: `Ein Schaltschrank-Heizelement leistet <strong>P = ${p} W</strong> bei einer Betriebsspannung von <strong>U = ${u} V</strong>.<br><br><strong>Wann welches Dreieck?</strong><br>1. Schritt: Ermittle die Stromstärke I mit Dreieck 2 (P, U, I).<br>2. Schritt: Ermittle den Widerstand R mit Dreieck 1 (U, R, I).<br><br>Wie groß ist der <strong>Widerstand R in Ohm (Ω)</strong>?`,
+            unit: "Ohm (Ω)",
+            expected: r,
+            tolerance: 0.5,
+            hint: `Schritt 1: I = P / U = ${p} / ${u} = ${i_choice} A | Schritt 2: R = U / I = ${u} / ${i_choice} Ω (oder direkt R = U² / P)`,
+            explanation: `Richtig! In zwei Schritten gelöst:<br>1. <strong>Dreieck 2 (P, U, I):</strong> I = P / U = ${p} W / ${u} V = ${i_choice} A<br>2. <strong>Dreieck 1 (U, R, I):</strong> R = U / I = ${u} V / ${i_choice} A = <strong>${r.toString().replace('.', ',')} Ω</strong>.<br><em>(Alternativ-Formel: R = U² / P = ${u * u} / ${p} = ${r} Ω)</em>.`
+          };
+        } else if (type === 1) {
+          // I & R gegeben -> Verlustleistung P gesucht
+          const r = [0.2, 0.5, 0.8, 1.0, 1.5, 2.0][Math.floor(Math.random() * 6)];
+          const i_a = Math.floor(Math.random() * 6) + 3; // 3 bis 8 A
+          const u_drop = parseFloat((r * i_a).toFixed(2));
+          const p_loss = parseFloat((u_drop * i_a).toFixed(1));
+
+          return {
+            topic: "kombi_elektro",
+            badge: "🔀 Formel-Kombination",
+            title: "Leitungsverlust P aus Strom I und Widerstand R ermitteln",
+            question: `Über ein 230V-Netzkabel fließt ein Server-Betriebsstrom von <strong>I = ${i_a} A</strong>. Der Leitungswiderstand des Kabels beträgt <strong>R = ${r.toString().replace('.', ',')} Ω</strong>.<br><br><strong>Wann welches Dreieck?</strong><br>1. Schritt: Berechne den Spannungsabfall am Kabel mit Dreieck 1 (U = R · I).<br>2. Schritt: Berechne die Verlustleistung mit Dreieck 2 (P = U · I).<br><br>Wie viel <strong>Verlustleistung P in Watt (W)</strong> fällt am Kabel als Wärme ab?`,
+            unit: "Watt (W)",
+            expected: p_loss,
+            tolerance: 0.5,
+            hint: `U_kabel = R · I = ${r} × ${i_a} = ${u_drop} V | P = U · I = ${u_drop} × ${i_a} (oder P = I² · R)`,
+            explanation: `Richtig! In zwei Schritten gelöst:<br>1. <strong>Dreieck 1:</strong> U = R · I = ${r.toString().replace('.', ',')} Ω × ${i_a} A = ${u_drop.toString().replace('.', ',')} V<br>2. <strong>Dreieck 2:</strong> P = U · I = ${u_drop.toString().replace('.', ',')} V × ${i_a} A = <strong>${p_loss.toString().replace('.', ',')} W</strong>.<br><em>(Alternativ: P = I² · R = ${i_a * i_a} × ${r} = ${p_loss} W)</em>.`
+          };
+        } else {
+          // U & R gegeben -> P gesucht
+          const u = [12, 24, 48][Math.floor(Math.random() * 3)];
+          const r = [10, 20, 24, 40, 50, 60][Math.floor(Math.random() * 6)];
+          const i_a = u / r;
+          const p = parseFloat((u * i_a).toFixed(1));
+
+          return {
+            topic: "kombi_elektro",
+            badge: "🔀 Formel-Kombination",
+            title: "Leistung P aus Spannung U und Widerstand R berechnen",
+            question: `Ein Verbraucher mit Widerstand <strong>R = ${r} Ω</strong> wird an eine Gleichspannung von <strong>U = ${u} V</strong> angeschlossen.<br><br>Berechne die aufgenommene <strong>Leistung P in Watt (W)</strong>:<br><span class="text-xs text-slate-500">(Tipp: Erst Stromstärke I berechnen, dann Leistung P ermitteln!)</span>`,
+            unit: "Watt (W)",
+            expected: p,
+            tolerance: 0.2,
+            hint: `I = U / R = ${u} / ${r} = ${i_a.toFixed(2)} A | P = U · I = ${u} × ${i_a.toFixed(2)} (oder P = U² / R)`,
+            explanation: `Richtig!<br>1. <strong>Dreieck 1:</strong> I = U / R = ${u} V / ${r} Ω = ${i_a.toFixed(2).replace('.', ',')} A<br>2. <strong>Dreieck 2:</strong> P = U · I = ${u} V × ${i_a.toFixed(2).replace('.', ',')} A = <strong>${p.toString().replace('.', ',')} W</strong>.<br><em>(Alternativ: P = U² / R = ${u * u} / ${r} = ${p} W)</em>.`
+          };
+        }
+      },
+
+      // 4. EINHEITEN-UMRECHNUNGEN (mA <-> A & kΩ <-> Ω & kW <-> W)
+      einheiten_strom: function() {
+        const type = Math.floor(Math.random() * 4);
+        if (type === 0) {
+          // mA in A
+          const ma = (Math.floor(Math.random() * 45) + 5) * 50; // 250 bis 2500 mA
+          const a = parseFloat((ma / 1000).toFixed(3));
+          return {
+            topic: "einheiten_strom",
+            badge: "🔄 Einheitenumrechnung",
+            title: "Milliampere (mA) in Ampere (A) umrechnen",
+            question: `Ein Sensorsignal weist einen Stromfluss von <strong>${ma} mA</strong> auf.<br><br>Wie vielen <strong>Ampere (A)</strong> entspricht dieser Wert?<br><span class="text-xs text-slate-500">(Wichtig: In Formeln wie U = R · I MUSS immer mit Ampere gerechnet werden!)</span>`,
+            unit: "Ampere (A)",
+            expected: a,
+            tolerance: 0.005,
+            hint: `Ampere = mA / 1.000 = ${ma} / 1.000`,
+            explanation: `Richtig! 1 A = 1.000 mA. Daher: ${ma} mA / 1.000 = <strong>${a.toString().replace('.', ',')} A</strong>.`
+          };
+        } else if (type === 1) {
+          // A in mA
+          const a = parseFloat(((Math.floor(Math.random() * 25) + 5) / 100).toFixed(2)); // 0.05 bis 0.30 A
+          const ma = Math.round(a * 1000);
+          return {
+            topic: "einheiten_strom",
+            badge: "🔄 Einheitenumrechnung",
+            title: "Ampere (A) in Milliampere (mA) umrechnen",
+            question: `Eine Schaltung nimmt einen Strom von <strong>${a.toString().replace('.', ',')} A</strong> auf.<br><br>Wie vielen <strong>Milliampere (mA)</strong> entspricht dieser Wert?`,
+            unit: "mA",
+            expected: ma,
+            tolerance: 0,
+            hint: `mA = A × 1.000 = ${a} × 1.000`,
+            explanation: `Richtig! ${a.toString().replace('.', ',')} A × 1.000 = <strong>${ma} mA</strong>.`
+          };
+        } else if (type === 2) {
+          // kOhm in Ohm
+          const koma = [0.47, 1.0, 1.5, 2.2, 3.3, 4.7, 10.0, 22.0][Math.floor(Math.random() * 8)];
+          const ohm = Math.round(koma * 1000);
+          return {
+            topic: "einheiten_strom",
+            badge: "🔄 Einheitenumrechnung",
+            title: "Kiloohm (kΩ) in Ohm (Ω) umrechnen",
+            question: `Ein Widerstand ist mit <strong>${koma.toString().replace('.', ',')} kΩ</strong> gekennzeichnet.<br><br>Wie viel <strong>Ohm (Ω)</strong> beträgt der Widerstandswert?`,
+            unit: "Ohm (Ω)",
+            expected: ohm,
+            tolerance: 0,
+            hint: `Ohm = kΩ × 1.000 = ${koma} × 1.000`,
+            explanation: `Richtig! 1 kΩ = 1.000 Ω. Somit sind ${koma.toString().replace('.', ',')} kΩ × 1.000 = <strong>${ohm.toLocaleString('de-DE')} Ω</strong>.`
+          };
+        } else {
+          // kW in W
+          const kw = parseFloat(((Math.floor(Math.random() * 40) + 10) / 10).toFixed(1)); // 1.0 bis 5.0 kW
+          const w = Math.round(kw * 1000);
+          return {
+            topic: "einheiten_strom",
+            badge: "🔄 Einheitenumrechnung",
+            title: "Kilowatt (kW) in Watt (W) umrechnen",
+            question: `Ein USV-System hat eine Dauerlast von <strong>${kw.toString().replace('.', ',')} kW</strong>.<br><br>Wie viel <strong>Watt (W)</strong> Wirkleistung entspricht das?`,
+            unit: "Watt (W)",
+            expected: w,
+            tolerance: 0,
+            hint: `Watt = kW × 1.000 = ${kw} × 1.000`,
+            explanation: `Richtig! 1 kW = 1.000 W. Daher: ${kw.toString().replace('.', ',')} kW × 1.000 = <strong>${w.toLocaleString('de-DE')} W</strong>.`
+          };
+        }
+      },
+
+      // 5. ZEITBERECHNUNG (DYNAMISCH ERWEITERT)
       zeit_min: function() {
-        const hours = [1.2, 1.4, 2.3, 2.5, 3.2, 3.75, 4.6, 2.15, 1.8];
-        const val = hours[Math.floor(Math.random() * hours.length)];
-        const wholeH = Math.floor(val);
-        const remH = parseFloat((val - wholeH).toFixed(2));
+        const whole = Math.floor(Math.random() * 6) + 1; // 1 bis 6 Stunden
+        const minOptions = [6, 9, 12, 15, 18, 21, 24, 27, 30, 33, 36, 39, 42, 45, 48, 51, 54];
+        const targetMin = minOptions[Math.floor(Math.random() * minOptions.length)];
+        const decPart = parseFloat((targetMin / 60).toFixed(2));
+        const val = parseFloat((whole + decPart).toFixed(2));
+        const remH = parseFloat((val - whole).toFixed(2));
         const min = Math.round(remH * 60);
 
         return {
@@ -474,16 +999,24 @@
           expected: min,
           tolerance: 0,
           hint: `${remH.toString().replace('.', ',')} h × 60 min/h = ${min} Minuten`,
-          explanation: `Richtig! ${remH.toString().replace('.', ',')} × 60 = <strong>${min} Minuten</strong>. Die Gesamtzeit beträgt somit ${wholeH} Stunden und ${min} Minuten.`
+          explanation: `Richtig! ${remH.toString().replace('.', ',')} × 60 = <strong>${min} Minuten</strong>. Die Gesamtzeit beträgt somit ${whole} Stunden und ${min} Minuten.`
         };
       },
 
+      // 6. AKKUKAPAZITÄT (DYNAMISCH ERWEITERT)
       akku_formel: function() {
-        const whList = [2400, 3200, 3600, 4800, 6000];
-        const wh = whList[Math.floor(Math.random() * whList.length)];
-        const u = [24, 48][Math.floor(Math.random() * 2)];
-        const eta = 0.9;
-        const dod = 0.8;
+        const devs = [
+          "Ein Serverschrank mit Virtualisierungs-Hosts",
+          "Eine Core-Switch- und Firewall-Infrastruktur",
+          "Ein zentrales SAN-Speichersystem (Storage)",
+          "Ein USV-geschützter Knotenpunkt für VoIP und Netzwerk",
+          "Ein medizinisches Server- und Überwachungssystem"
+        ];
+        const dev = devs[Math.floor(Math.random() * devs.length)];
+        const wh = (Math.floor(Math.random() * 30) + 12) * 200; // 2400 bis 8200 Wh
+        const u = [12, 24, 48][Math.floor(Math.random() * 3)];
+        const eta = [0.85, 0.88, 0.9, 0.92, 0.95][Math.floor(Math.random() * 5)];
+        const dod = [0.7, 0.75, 0.8, 0.85][Math.floor(Math.random() * 4)];
         const nenner = u * eta * dod;
         const c = wh / nenner;
 
@@ -491,54 +1024,59 @@
           topic: "akku_formel",
           badge: "🔋 Akkukapazität",
           title: "Akkukapazität C = W / (U · η · DoD)",
-          question: `Ein Serverschrank benötigt während eines Netzausfalls <strong>${wh.toLocaleString('de-DE')} Wh Energie</strong>.<br><br>Die Akkuspannung beträgt <strong>${u} V DC</strong>, der Wirkungsgrad des Wechselrichters ist <strong>η = 90 % (0,9)</strong> und die maximale Entladetiefe beträgt <strong>DoD = 80 % (0,8)</strong>.<br><br>Berechne die benötigte Akkukapazität <strong>C in Ah</strong> (auf 1 Nachkommastelle gerundet):`,
+          question: `${dev} benötigt während eines Netzausfalls <strong>${wh.toLocaleString('de-DE')} Wh Energie</strong>.<br><br>Die Akkuspannung beträgt <strong>${u} V DC</strong>, der Wirkungsgrad ist <strong>η = ${(eta * 100).toFixed(0)} % (${eta.toString().replace('.', ',')})</strong> und die maximale Entladetiefe ist <strong>DoD = ${(dod * 100).toFixed(0)} % (${dod.toString().replace('.', ',')})</strong>.<br><br>Berechne die benötigte Akkukapazität <strong>C in Ah</strong> (auf 1 Nachkommastelle gerundet):`,
           unit: "Ah (Amperestunden)",
           expected: parseFloat(c.toFixed(1)),
           tolerance: 0.5,
-          hint: `C = W / (U × η × DoD) = ${wh} / (${u} × 0,9 × 0,8) = ${wh} / ${nenner.toFixed(2)}`,
-          explanation: `Richtig! C = ${wh} Wh / (${u} V × 0,9 × 0,8) = ${wh} / ${nenner.toFixed(2)} V = <strong>${c.toFixed(1)} Ah</strong>. Da man durch Zahlen kleiner 1 teilt, wird der Akku wie gewünscht größer als ideal.`
+          hint: `C = W / (U × η × DoD) = ${wh} / (${u} × ${eta} × ${dod}) = ${wh} / ${nenner.toFixed(2)}`,
+          explanation: `Richtig! C = ${wh} Wh / (${u} V × ${eta} × ${dod}) = ${wh} / ${nenner.toFixed(2)} V = <strong>${c.toFixed(1)} Ah</strong>. Da man durch Zahlen kleiner 1 teilt, wird der Akku wie gewünscht größer als ideal.`
         };
       },
 
+      // 7. WIRKLEISTUNG (DYNAMISCH ERWEITERT)
       wirkleistung: function() {
-        const s = [1500, 2000, 3000, 4000, 5000][Math.floor(Math.random() * 5)];
-        const cos = [0.75, 0.8, 0.85, 0.9][Math.floor(Math.random() * 4)];
+        const s = (Math.floor(Math.random() * 25) + 6) * 400; // 2400 bis 12000 VA
+        const cosList = [0.65, 0.7, 0.75, 0.8, 0.82, 0.85, 0.88, 0.9, 0.92];
+        const cos = cosList[Math.floor(Math.random() * cosList.length)];
         const p = Math.round(s * cos);
 
         return {
           topic: "wirkleistung",
           badge: "⚡ Wirkleistung",
           title: "Wirkleistung P aus Scheinleistung S berechnen",
-          question: `Eine USV-Anlage stellt eine Scheinleistung von <strong>${s.toLocaleString('de-DE')} VA</strong> bereit. Die Last hat einen Leistungsfaktor von <strong>cos φ = ${cos}</strong>.<br><br>Wie viel <strong>Wirkleistung P in Watt (W)</strong> kann maximal entnommen werden?`,
+          question: `Eine USV-Anlage stellt eine Scheinleistung von <strong>${s.toLocaleString('de-DE')} VA</strong> bereit. Die Last hat einen Leistungsfaktor von <strong>cos φ = ${cos.toString().replace('.', ',')}</strong>.<br><br>Wie viel <strong>Wirkleistung P in Watt (W)</strong> kann maximal entnommen werden?`,
           unit: "Watt (W)",
           expected: p,
           tolerance: 1,
           hint: `P = S × cos φ = ${s} VA × ${cos}`,
-          explanation: `Richtig! P = ${s} VA × ${cos} = <strong>${p} W</strong> (${(p/1000).toFixed(2)} kW).`
+          explanation: `Richtig! P = ${s} VA × ${cos.toString().replace('.', ',')} = <strong>${p.toLocaleString('de-DE')} W</strong> (${(p / 1000).toFixed(2).replace('.', ',')} kW).`
         };
       },
 
+      // 8. SCHEINLEISTUNG (DYNAMISCH ERWEITERT)
       scheinleistung: function() {
-        const p = [1600, 2400, 3200, 4000][Math.floor(Math.random() * 4)];
-        const cos = 0.8;
+        const p = (Math.floor(Math.random() * 30) + 8) * 200; // 1600 bis 7400 W
+        const cosList = [0.7, 0.75, 0.8, 0.85, 0.9];
+        const cos = cosList[Math.floor(Math.random() * cosList.length)];
         const s = Math.round(p / cos);
 
         return {
           topic: "scheinleistung",
           badge: "⚡ Scheinleistung",
           title: "Scheinleistung S für USV-Dimensionierung",
-          question: `Ein Serverschrank verbraucht eine Wirkleistung von <strong>${p.toLocaleString('de-DE')} W</strong> bei einem Leistungsfaktor von <strong>cos φ = ${cos}</strong>.<br><br>Welche <strong>Scheinleistung S in VA</strong> muss die USV mindestens liefern können?`,
+          question: `Ein Serverschrank verbraucht eine Wirkleistung von <strong>${p.toLocaleString('de-DE')} W</strong> bei einem Leistungsfaktor von <strong>cos φ = ${cos.toString().replace('.', ',')}</strong>.<br><br>Welche <strong>Scheinleistung S in VA</strong> muss die USV mindestens liefern können?`,
           unit: "VA",
           expected: s,
           tolerance: 1,
           hint: `S = P / cos φ = ${p} W / ${cos}`,
-          explanation: `Richtig! S = ${p} W / ${cos} = <strong>${s} VA</strong> (${(s/1000).toFixed(2)} kVA). Für die Dimensionierung von USV und Leitungen ist immer die Scheinleistung S in VA entscheidend!`
+          explanation: `Richtig! S = ${p} W / ${cos.toString().replace('.', ',')} = <strong>${s.toLocaleString('de-DE')} VA</strong> (${(s / 1000).toFixed(2).replace('.', ',')} kVA). Für die Dimensionierung von USV und Leitungen ist immer die Scheinleistung S in VA entscheidend!`
         };
       },
 
+      // 9. ENERGIE WH (DYNAMISCH ERWEITERT)
       energie_wh: function() {
-        const q = [80, 100, 150, 200][Math.floor(Math.random() * 4)];
-        const u = [12, 24, 48][Math.floor(Math.random() * 3)];
+        const q = (Math.floor(Math.random() * 30) + 5) * 10; // 50 bis 340 Ah
+        const u = [12, 24, 36, 48][Math.floor(Math.random() * 4)];
         const wh = q * u;
 
         return {
@@ -550,13 +1088,14 @@
           expected: wh,
           tolerance: 0,
           hint: `W = Q × U = ${q} Ah × ${u} V`,
-          explanation: `Richtig! W = ${q} Ah × ${u} V = <strong>${wh.toLocaleString('de-DE')} Wh</strong> (${(wh/1000).toFixed(2)} kWh).`
+          explanation: `Richtig! W = ${q} Ah × ${u} V = <strong>${wh.toLocaleString('de-DE')} Wh</strong> (${(wh / 1000).toFixed(2).replace('.', ',')} kWh).`
         };
       },
 
+      // 10. SKONTO IM HUNDERT (DYNAMISCH ERWEITERT)
       skonto_im_hundert: function() {
-        const bar = (Math.floor(Math.random() * 30) + 15) * 10;
-        const skonto = [2, 3][Math.floor(Math.random() * 2)];
+        const bar = (Math.floor(Math.random() * 60) + 10) * 50; // 500 bis 3450 €
+        const skonto = [1, 2, 3, 4][Math.floor(Math.random() * 4)];
         const basis = 100 - skonto;
         const ziel = (bar / basis) * 100;
 
@@ -573,9 +1112,10 @@
         };
       },
 
+      // 11. RABATT VOM HUNDERT (DYNAMISCH ERWEITERT)
       rabatt_vom_hundert: function() {
-        const lep = (Math.floor(Math.random() * 20) + 10) * 100;
-        const rabattP = [10, 15, 20][Math.floor(Math.random() * 3)];
+        const lep = (Math.floor(Math.random() * 50) + 10) * 150; // 1500 bis 8850 €
+        const rabattP = [5, 8, 10, 12, 15, 20, 25][Math.floor(Math.random() * 7)];
         const rabattVal = lep * (rabattP / 100);
         const zep = lep - rabattVal;
 
@@ -592,9 +1132,10 @@
         };
       },
 
+      // 12. UST AUF HUNDERT (DYNAMISCH ERWEITERT)
       ust_auf_hundert: function() {
-        const netto = [500, 800, 1000, 1200, 1500][Math.floor(Math.random() * 5)];
-        const brutto = netto * 1.19;
+        const netto = (Math.floor(Math.random() * 50) + 6) * 50; // 300 bis 2750 €
+        const brutto = parseFloat((netto * 1.19).toFixed(2));
 
         return {
           topic: "ust_auf_hundert",
@@ -609,9 +1150,10 @@
         };
       },
 
+      // 13. AMORTISATION JAHRE (DYNAMISCH ERWEITERT)
       amort_jahre: function() {
-        const invest = (Math.floor(Math.random() * 15) + 5) * 1000;
-        const saving = (Math.floor(Math.random() * 5) + 2) * 1000;
+        const invest = (Math.floor(Math.random() * 30) + 10) * 1500; // 15000 bis 58500 €
+        const saving = (Math.floor(Math.random() * 15) + 3) * 1000; // 3000 bis 17000 €
         const years = invest / saving;
 
         return {
@@ -627,16 +1169,16 @@
         };
       },
 
+      // 14. AMORTISATION MONATE (DYNAMISCH ERWEITERT)
       amort_monate: function() {
-        const fractions = [
-          { val: 0.25, m: 3 },
-          { val: 0.5, m: 6 },
-          { val: 0.75, m: 9 },
-          { val: 0.33, m: 4 },
-          { val: 0.67, m: 8 }
+        const monthData = [
+          { m: 1, val: 0.08 }, { m: 2, val: 0.17 }, { m: 3, val: 0.25 },
+          { m: 4, val: 0.33 }, { m: 5, val: 0.42 }, { m: 6, val: 0.50 },
+          { m: 7, val: 0.58 }, { m: 8, val: 0.67 }, { m: 9, val: 0.75 },
+          { m: 10, val: 0.83 }, { m: 11, val: 0.92 }
         ];
-        const f = fractions[Math.floor(Math.random() * fractions.length)];
-        const wholeY = Math.floor(Math.random() * 3) + 1;
+        const f = monthData[Math.floor(Math.random() * monthData.length)];
+        const wholeY = Math.floor(Math.random() * 4) + 1;
         const totalY = (wholeY + f.val).toFixed(2);
 
         return {
@@ -652,9 +1194,10 @@
         };
       },
 
+      // 15. ROI (DYNAMISCH ERWEITERT)
       roi_calc: function() {
-        const invest = 20000;
-        const saving = [3000, 4000, 5000, 6000][Math.floor(Math.random() * 4)];
+        const invest = (Math.floor(Math.random() * 25) + 10) * 2000; // 20000 bis 68000 €
+        const saving = (Math.floor(Math.random() * 20) + 4) * 1000; // 4000 bis 23000 €
         const roi = (saving / invest) * 100;
 
         return {
@@ -663,28 +1206,61 @@
           title: "Return on Investment (ROI in %)",
           question: `Ein Unternehmen investiert <strong>${invest.toLocaleString('de-DE')} €</strong> in neue Switches und spart dadurch jährlich <strong>${saving.toLocaleString('de-DE')} €</strong> ein.<br><br>Wie hoch ist der <strong>Return on Investment (ROI) in Prozent</strong>?`,
           unit: "%",
-          expected: roi,
+          expected: parseFloat(roi.toFixed(1)),
           tolerance: 0.2,
           hint: `ROI = (Ersparnis / Investition) × 100 = (${saving} / ${invest}) × 100`,
-          explanation: `Richtig! ROI = (${saving.toLocaleString('de-DE')} € / ${invest.toLocaleString('de-DE')} €) × 100 % = <strong>${roi} %</strong>.`
+          explanation: `Richtig! ROI = (${saving.toLocaleString('de-DE')} € / ${invest.toLocaleString('de-DE')} €) × 100 % = <strong>${roi.toFixed(1)} %</strong>.`
         };
       },
 
+      // 16. IT-EINHEITEN & TRANSFER (DYNAMISCH ERWEITERT)
       it_units: function() {
-        const mb = [125, 250, 500, 1000][Math.floor(Math.random() * 4)];
-        const mbit = mb * 8;
-
-        return {
-          topic: "it_units",
-          badge: "💾 IT-Einheiten",
-          title: "Megabyte in Megabit umrechnen (1 Byte = 8 Bit)",
-          question: `Eine Downloaddatei hat eine Größe von <strong>${mb} Megabyte (MByte)</strong>.<br><br>Wie vielen <strong>Megabit (Mbit)</strong> entspricht diese Dateigröße?`,
-          unit: "Mbit",
-          expected: mbit,
-          tolerance: 0,
-          hint: `Mbit = MByte × 8 = ${mb} × 8`,
-          explanation: `Richtig! ${mb} MByte × 8 = <strong>${mbit} Mbit</strong>. In Netzwerkaufgaben immer zuerst MByte in Mbit umrechnen!`
-        };
+        const type = Math.floor(Math.random() * 3);
+        if (type === 0) {
+          const mb = (Math.floor(Math.random() * 15) + 2) * 125; // 250 bis 2000 MB
+          const mbit = mb * 8;
+          return {
+            topic: "it_units",
+            badge: "💾 IT-Einheiten",
+            title: "Megabyte in Megabit umrechnen (1 Byte = 8 Bit)",
+            question: `Eine Backup-Datei hat eine Größe von <strong>${mb} Megabyte (MByte)</strong>.<br><br>Wie vielen <strong>Megabit (Mbit)</strong> entspricht diese Dateigröße?`,
+            unit: "Mbit",
+            expected: mbit,
+            tolerance: 0,
+            hint: `Mbit = MByte × 8 = ${mb} × 8`,
+            explanation: `Richtig! ${mb} MByte × 8 = <strong>${mbit.toLocaleString('de-DE')} Mbit</strong>. In Netzwerkaufgaben immer zuerst MByte in Mbit umrechnen!`
+          };
+        } else if (type === 1) {
+          const gb = (Math.floor(Math.random() * 15) + 2) * 10; // 20 bis 160 GB
+          const gbit = gb * 8;
+          return {
+            topic: "it_units",
+            badge: "💾 IT-Einheiten",
+            title: "Gigabyte in Gigabit umrechnen (1 Byte = 8 Bit)",
+            question: `Ein Speicher-Snapshot benötigt <strong>${gb} Gigabyte (GByte)</strong> Festplattenplatz.<br><br>Wie vielen <strong>Gigabit (Gbit)</strong> entspricht diese Datenmenge?`,
+            unit: "Gbit",
+            expected: gbit,
+            tolerance: 0,
+            hint: `Gbit = GByte × 8 = ${gb} × 8`,
+            explanation: `Richtig! ${gb} GByte × 8 = <strong>${gbit} Gbit</strong>.`
+          };
+        } else {
+          const sizeMB = [250, 500, 1000, 1500][Math.floor(Math.random() * 4)];
+          const sizeMbit = sizeMB * 8;
+          const speedMbit = [50, 100, 200, 250][Math.floor(Math.random() * 4)];
+          const sec = sizeMbit / speedMbit;
+          return {
+            topic: "it_units",
+            badge: "💾 IT-Einheiten",
+            title: "Übertragungsdauer berechnen (Dateigröße / Datenrate)",
+            question: `Eine Updatedatei mit <strong>${sizeMB} MByte</strong> (${sizeMbit} Mbit) soll über eine Internetleitung mit einer effektiven Bandbreite von <strong>${speedMbit} Mbit/s</strong> übertragen werden.<br><br>Wie viele <strong>Sekunden</strong> dauert die Übertragung?`,
+            unit: "Sekunden",
+            expected: sec,
+            tolerance: 0.5,
+            hint: `Dauer = Dateigröße in Mbit / Übertragungsrate in Mbit/s = (${sizeMB} × 8) / ${speedMbit} = ${sizeMbit} / ${speedMbit}`,
+            explanation: `Richtig! Dateigröße: ${sizeMB} MByte × 8 = ${sizeMbit} Mbit. Dauer = ${sizeMbit} Mbit / ${speedMbit} Mbit/s = <strong>${sec} Sekunden</strong>.`
+          };
+        }
       }
     };
 
@@ -808,6 +1384,46 @@
     }
 
     // FORMEL-TAB CONVERTERS
+    function calcOhm(changed) {
+      let u = parseFloat(document.getElementById('calc-ohm-u').value);
+      let r = parseFloat(document.getElementById('calc-ohm-r').value);
+      let i = parseFloat(document.getElementById('calc-ohm-i').value);
+
+      if (changed === 'U' || changed === 'R') {
+        if (!isNaN(u) && !isNaN(r) && r > 0) {
+          i = parseFloat((u / r).toFixed(3));
+          document.getElementById('calc-ohm-i').value = i;
+          document.getElementById('calc-ohm-expl').innerHTML = `Rechenweg: <strong>I = U / R</strong> = ${u} V / ${r} Ω = <strong>${i.toString().replace('.', ',')} A</strong> (${Math.round(i * 1000)} mA)`;
+        }
+      } else if (changed === 'I') {
+        if (!isNaN(r) && !isNaN(i)) {
+          u = parseFloat((r * i).toFixed(2));
+          document.getElementById('calc-ohm-u').value = u;
+          document.getElementById('calc-ohm-expl').innerHTML = `Rechenweg: <strong>U = R · I</strong> = ${r} Ω × ${i} A = <strong>${u.toString().replace('.', ',')} V</strong>`;
+        }
+      }
+    }
+
+    function calcPwr(changed) {
+      let p = parseFloat(document.getElementById('calc-pwr-p').value);
+      let u = parseFloat(document.getElementById('calc-pwr-u').value);
+      let i = parseFloat(document.getElementById('calc-pwr-i').value);
+
+      if (changed === 'P') {
+        if (!isNaN(p) && !isNaN(u) && u > 0) {
+          i = parseFloat((p / u).toFixed(2));
+          document.getElementById('calc-pwr-i').value = i;
+          document.getElementById('calc-pwr-expl').innerHTML = `Rechenweg: <strong>I = P / U</strong> = ${p} W / ${u} V = <strong>${i.toString().replace('.', ',')} A</strong>`;
+        }
+      } else if (changed === 'U' || changed === 'I') {
+        if (!isNaN(u) && !isNaN(i)) {
+          p = Math.round(u * i);
+          document.getElementById('calc-pwr-p').value = p;
+          document.getElementById('calc-pwr-expl').innerHTML = `Rechenweg: <strong>P = U · I</strong> = ${u} V × ${i} A = <strong>${p.toLocaleString('de-DE')} W</strong> (${(p / 1000).toFixed(2).replace('.', ',')} kW)`;
+        }
+      }
+    }
+
     function calcPower(changed) {
       let s = parseFloat(document.getElementById('calc-s').value);
       let cos = parseFloat(document.getElementById('calc-cos').value);
@@ -830,6 +1446,8 @@
     window.addEventListener('DOMContentLoaded', () => {
       generateMiniTask();
       calcPower('S');
+      calcOhm('U');
+      calcPwr('U');
     });
   </script>
 </body>
