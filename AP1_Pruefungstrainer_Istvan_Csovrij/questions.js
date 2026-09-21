@@ -7954,5 +7954,132 @@ ORDER BY gesamtbetrag_eur DESC;\n\nErklärung:\n- INNER JOIN über 4 Tabellen.\n
         question: `IHK-Prüfungsaufgabe Rechenzentrum-Effizienz (LF 2 / LF 6 - Kennzahlen PUE & DCiE):\nEin Rechenzentrum verbraucht pro Jahr eine Gesamtenergie von E_Gesamt = 3.600.000 kWh (3,6 GWh).\nDie reine IT-Infrastruktur (Server, Storage, Netzwerk) benötigt davon E_IT = 2.250.000 kWh.\nDer restliche Strom entfällt auf Klimatisierung, USV-Verluste und Beleuchtung. Strompreis: 0,28 €/kWh netto.\n\nAufgabe:\na) Berechne den PUE-Wert (Power Usage Effectiveness) des Rechenzentrums.\nb) Berechne den DCiE-Wert (Data Center Infrastructure Efficiency) in Prozent (%).\nc) Durch den Einbau einer Kaltgangeinhausung und Freikühlung kann der PUE-Wert auf 1,20 gesenkt werden (bei unveränderter IT-Last von 2.250.000 kWh).\nBerechne den neuen Gesamtstromverbrauch und die jährliche Kosteneinsparung in Euro.`,
         musterloesung: `Musterlösung Rechenzentrum-Effizienz (PUE & DCiE):\n\na) PUE-Wert (Power Usage Effectiveness):\n- Formel: PUE = E_Gesamt / E_IT\n- PUE = 3.600.000 kWh / 2.250.000 kWh = 1,60.\n- Interpretation: Für jede kWh IT-Nutzenergie müssen 1,60 kWh Gesamtenergie bezahlt werden (Overhead für Kühlung/USV: 0,60 kWh). Der theoretische Idealwert ist 1,00.\n\nb) DCiE-Wert (Data Center Infrastructure Efficiency):\n- Formel: DCiE = (E_IT / E_Gesamt) × 100 % = (1 / PUE) × 100 %\n- DCiE = (2.250.000 kWh / 3.600.000 kWh) × 100 % = (1 / 1,60) × 100 % = 62,5 %.\n- Interpretation: 62,5 % des Gesamtstroms kommen den IT-Systemen zugute; 37,5 % entfallen auf die Infrastruktur (Kühlung/USV/Beleuchtung).\n\nc) Neuer Gesamtverbrauch und Kosteneinsparung bei PUE = 1,20:\n1. Neuer Gesamtverbrauch:\n- Formel: E_Gesamt,neu = E_IT × PUE_neu\n- E_Gesamt,neu = 2.250.000 kWh × 1,20 = 2.700.000 kWh (2,7 GWh).\n\n2. Eingesparte elektrische Energie:\n- ΔE = E_Gesamt,alt - E_Gesamt,neu = 3.600.000 kWh - 2.700.000 kWh = 900.000 kWh.\n  (Alternativ: ΔE = E_IT × (PUE_alt - PUE_neu) = 2.250.000 × (1,60 - 1,20) = 900.000 kWh)\n\n3. Jährliche Kosteneinsparung in Euro:\n- Ersparnis = 900.000 kWh × 0,28 €/kWh = 252.000 € netto pro Jahr.`,
         explanation: "PUE = E_Gesamt / E_IT (Idealwert 1,0). DCiE = 1 / PUE · 100 %. Ersparnis = E_IT · (PUE_alt - PUE_neu) · Strompreis."
+    },
+    {
+        id: 431,
+        isBawueFocus: true,
+        isHard: true,
+        difficulty: "hard",
+        theme: "lf4",
+        isCalculation: false,
+        topic: "🌐 Strukturierte Verkabelung (DIN EN 50173): Sekundär- und Tertiärbereich (Kupfer vs. LWL)",
+        type: "open-text",
+        question: `IHK-Prüfungsaufgabe Strukturierte Verkabelung (FA 230 Sommer 2025 - 1.1):
+Ein Kraftwerk soll nach DIN EN 50173 strukturiert verkabelt werden.
+Für die Primärverkabelung (Geländebereich) wurde ein Single-Mode Glasfaserkabel (LWL) gewählt.
+
+Aufgabe:
+Begründen Sie fachlich, welche Kabel für die Sekundärverkabelung und für die Tertiärverkabelung verwendet werden können.`,
+        musterloesung: `Musterlösung Strukturierte Verkabelung nach DIN EN 50173:
+
+1. Sekundärverkabelung (Gebäude-Backbone / Steigbereich zwischen Gebäudeverteiler GV und Etagenverteilern EV):
+- Geeignetes Kabel: Multi-Mode Glasfaserkabel (MMF, z. B. OM3, OM4 oder OM5) oder alternativ geschirmtes Twisted-Pair-Kupferkabel (mindestens Cat 7 / Cat 8, S/FTP).
+- Fachliche Begründung: Glasfaser bietet sehr hohe Übertragungsbandbreiten (10 Gbit/s bis 100 Gbit/s), überbrückt Etagenhöhen verlustfrei und ist im industriellen Umfeld eines Kraftwerks absolut unempfindlich gegenüber elektromagnetischen Störfeldern (EMV). Kupfer (Cat 7/8) kann bei kurzen Stecken bis 100 m aus Kostengründen eingesetzt werden, sofern keine starken EMV-Störungen vorliegen.
+
+2. Tertiärverkabelung (Horizontalbereich / Etagenverkabelung zwischen Etagenverteiler EV und Telekommunikationsanschlussdosen TA am Arbeitsplatz):
+- Geeignetes Kabel: Geschirmtes Twisted-Pair-Kupferkabel (z. B. Cat 6A oder Cat 7, S/FTP mit RJ45-Anschluss).
+- Fachliche Begründung: Kupferkabel sind kostengünstig, flexibel verlegbar und der universelle Standard für Büroendgeräte (PCs, Drucker, IP-Telefone). Entscheidender Vorteil gegenüber Glasfaser: Kupfer unterstützt Power over Ethernet (PoE / PoE+ nach IEEE 802.3at/bt), wodurch Endgeräte wie WLAN Access Points oder IP-Sicherheitskameras direkt über das Datenkabel mit Strom versorgt werden können.
+(Alternativ: Fiber to the Desk (FTTD) mit Glasfaser, falls im Kraftwerksbereich extreme EMV-Störungen oder höchste Abhörsicherheit gefordert sind).`,
+        explanation: "Primärbereich = Gelände/Campus (Single-Mode LWL). Sekundärbereich = Steigbereich/Etagen (Multi-Mode LWL oder Cat 7). Tertiärbereich = Horizontal zu den Dosen (Cat 6A/7 Kupfer wegen PoE und RJ45)."
+    },
+    {
+        id: 432,
+        isBawueFocus: true,
+        isHard: true,
+        difficulty: "hard",
+        theme: "lf4",
+        isCalculation: true,
+        topic: "🌐 IPv6 Global Scope Unicast Adresse (GUA): EUI-64 & Kürzungsregeln",
+        type: "open-text",
+        question: `IHK-Prüfungsaufgabe IPv6-Konfiguration (FA 230 Sommer 2025 - 1.2):
+Nach Abschluss der Verkabelungsarbeiten wird ein Computer mit der MAC-Adresse AB-CD-EF-10-00-06 an das Kraftwerksnetzwerk angeschlossen.
+Da Dual-Stack verwendet wird, benötigt der Rechner sowohl eine IPv4- als auch eine IPv6-Adresse.
+Das zugewiesene IPv6-Präfix lautet 2001:db8::/64.
+
+Aufgabe:
+Ermitteln Sie die global scope unicast Adresse (GUA) des Computers nach dem modifizierten EUI-64-Verfahren (SLAAC) und geben Sie diese vollständig gekürzt an.
+(Erläutern Sie zusätzlich, welche Adresse bei fortlaufender Adressvergabe vergeben wird, wenn der Router 2001:db8::1 besitzt).`,
+        musterloesung: `Musterlösung IPv6 Global Unicast Adresse (GUA):
+
+1. Bildung des 64-Bit Interface Identifiers nach modifiziertem EUI-64:
+- Gegebene 48-Bit MAC-Adresse: AB-CD-EF-10-00-06
+- Schritt 1: In der Mitte teilen und 'FF-FE' einfügen:
+  AB-CD-EF-FF-FE-10-00-06
+- Schritt 2: Das 7. Bit des ersten Bytes invertieren (Universal/Local Bit):
+  AB (hex) = 1010 1011 (binär)
+  Invertiertes 7. Bit (Bit 1): 1010 1001 (binär) = A9 (hex)
+  Ergibt: A9-CD-EF-FF-FE-10-00-06
+- Schritt 3: In 16-Bit-Hexadektette formatieren:
+  a9cd:efff:fe10:0006
+- Schritt 4: 64-Bit Präfix voranstellen und Nullen kürzen:
+  Präfix: 2001:db8::/64
+  Vollständige GUA: 2001:db8::a9cd:efff:fe10:6
+
+2. Alternative bei sequentieller Vergabe ('nächste verfügbare Adresse'):
+- Besitzt der Router/Default Gateway die Adresse 2001:db8::1/64, lautet die nächste verfügbare GUA für den PC: 2001:db8::2.`,
+        explanation: "EUI-64 fügt FFFE in die Mitte der MAC ein und invertiert das 7. Bit (Universal/Local Bit: aus AB wird A9). Führende Nullen in einem Block (0006 -> 6) müssen gekürzt werden."
+    },
+    {
+        id: 433,
+        isBawueFocus: true,
+        isHard: true,
+        difficulty: "hard",
+        theme: "lf4",
+        isCalculation: true,
+        topic: "🌐 IPv4 Subnetting: Hostanzahl, Netzwerkadresse, Broadcastadresse & Router-IP",
+        type: "open-text",
+        question: `IHK-Prüfungsaufgabe IPv4-Netzwerkkonfiguration (FA 230 Sommer 2025 - 1.3):
+Die IPv4-Adressen werden im Netzwerk 172.16.0.0/16 von einem DHCP-Server vergeben.
+
+Aufgabe:
+a) Berechnen Sie die maximale Anzahl an verfügbaren Hostadressen innerhalb dieses Netzwerkes.
+b) Erläutern Sie in diesem Zusammenhang die Begriffe 'Netzwerkadresse' und 'Broadcastadresse'.
+c) Die letzte verfügbare Adresse soll für den Router reserviert werden. Nennen Sie eine gültige IPv4-Konfiguration (IPv4-Adresse und Subnetzmaske in Dezimalschreibweise) für den Router.`,
+        musterloesung: `Musterlösung IPv4 Subnetting & Konfiguration (172.16.0.0/16):
+
+a) Maximale Anzahl verfügbarer Hostadressen:
+- Präfixlänge /16 bedeutet: 16 Netz-Bits und 32 - 16 = 16 Host-Bits.
+- Gesamte Adressen im Subnetz: 2^16 = 65.536 Adressen.
+- Nutzbare Hostadressen = 2^16 - 2 = 65.536 - 2 = 65.534 Hostadressen.
+(2 Adressen werden abgezogen: die erste für das Netz, die letzte für den Broadcast).
+
+b) Erläuterung der Begriffe:
+- Netzwerkadresse (hier: 172.16.0.0):
+  Dies ist die erste Adresse des Subnetzes, bei der alle Host-Bits auf '0' gesetzt sind. Sie identifiziert das gesamte Teilnetz im Routing und darf keinem einzelnen Host/Endgerät zugewiesen werden.
+- Broadcastadresse (hier: 172.16.255.255):
+  Dies ist die letzte Adresse des Subnetzes, bei der alle Host-Bits auf '1' gesetzt sind. Pakete an diese IP-Adresse werden an alle Hosts im Subnetz weitergeleitet (Rundsendung, z. B. für ARP-Anfragen oder DHCP-Discover). Sie darf ebenfalls keinem einzelnen Gerät zugewiesen werden.
+
+c) Gültige IPv4-Konfiguration für den Router (letzte verfügbare Hostadresse):
+- IPv4-Adresse: 172.16.255.254
+- Subnetzmaske: 255.255.0.0 (entspricht CIDR /16).`,
+        explanation: "Nutzbare Hosts bei /16 = 2^16 - 2 = 65.534. Erste Adresse (172.16.0.0) = Netzadresse, letzte Adresse (172.16.255.255) = Broadcastadresse. Letzter Host vor Broadcast = 172.16.255.254."
+    },
+    {
+        id: 434,
+        isBawueFocus: true,
+        isHard: true,
+        difficulty: "hard",
+        theme: "lf4",
+        isCalculation: false,
+        topic: "📶 WLAN-Technologie: IEEE 802.11ax (Wi-Fi 6E) im 6-GHz-Frequenzband vs. 2,4 GHz",
+        type: "open-text",
+        question: `IHK-Prüfungsaufgabe WLAN-Infrastruktur (FA 230 Sommer 2025 - 1.4):
+Für das WLAN des Kraftwerksbetreibers sollen moderne Access-Points nach dem Standard IEEE 802.11ax im 6-GHz-Frequenzband (Wi-Fi 6E) installiert werden.
+
+Aufgabe:
+Nennen und begründen Sie 3 wesentliche Vorteile des neuen 6-GHz-Frequenzbands gegenüber dem 2,4-GHz-Frequenzband.`,
+        musterloesung: `Musterlösung WLAN IEEE 802.11ax im 6-GHz-Band vs. 2,4-GHz-Band:
+
+1. Deutlich höhere Bandbreiten und Übertragungsraten:
+- Das 6-GHz-Band ermöglicht Kanalbandbreiten von bis zu 80 MHz und 160 MHz (im 2,4-GHz-Band sind nur 20 MHz bzw. theoretisch 40 MHz möglich). Dies ermöglicht Gigabit-Übertragungsraten für datenintensive Anwendungen.
+
+2. Weitaus mehr überlappungsfreie Kanäle (Keine Kanalüberlastung):
+- Im 2,4-GHz-Band gibt es nur 3 überlappungsfreie Kanäle (Kanäle 1, 6 und 11), weshalb es in dichten Umgebungen ständig zu Co-Channel-Interferenzen kommt.
+- Im 6-GHz-Band stehen bis zu 59 zusätzliche Kanäle (bzw. bis zu 7 superbreite 160-MHz-Kanäle) zur Verfügung, wodurch viele Access Points nebeneinander ohne gegenseitige Störung betrieben werden können.
+
+3. Keine Störungen durch Altgeräte ('Greenfield') oder Haushaltsgeräte:
+- Das 2,4-GHz-Band ist extrem überlastet durch Bluetooth, Mikrowellenöfen, Funkmäuse und alte 802.11b/g/n-Geräte, die das gesamte Netz ausbremsen.
+- Das 6-GHz-Band ist exklusiv für Wi-Fi 6E und neuere Standards (Wi-Fi 7) reserviert. Es gibt keine Altlasten (Legacy-Clients), wodurch Latenzen minimiert und die Verbindungsstabilität für industrielle Anwendungen maximiert werden.`,
+        explanation: "6 GHz (Wi-Fi 6E) bietet bis zu 160 MHz breite Kanäle, bis zu 59 störungsfreie Kanäle und schließt alte Legacy-Geräte (Bluetooth, 802.11b/g/n) komplett aus."
     }
 ];
