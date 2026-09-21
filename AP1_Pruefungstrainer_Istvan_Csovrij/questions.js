@@ -8081,5 +8081,303 @@ Nennen und begründen Sie 3 wesentliche Vorteile des neuen 6-GHz-Frequenzbands g
 - Das 2,4-GHz-Band ist extrem überlastet durch Bluetooth, Mikrowellenöfen, Funkmäuse und alte 802.11b/g/n-Geräte, die das gesamte Netz ausbremsen.
 - Das 6-GHz-Band ist exklusiv für Wi-Fi 6E und neuere Standards (Wi-Fi 7) reserviert. Es gibt keine Altlasten (Legacy-Clients), wodurch Latenzen minimiert und die Verbindungsstabilität für industrielle Anwendungen maximiert werden.`,
         explanation: "6 GHz (Wi-Fi 6E) bietet bis zu 160 MHz breite Kanäle, bis zu 59 störungsfreie Kanäle und schließt alte Legacy-Geräte (Bluetooth, 802.11b/g/n) komplett aus."
+    },
+    {
+        id: 435,
+        isBawueFocus: true,
+        isHard: true,
+        difficulty: "hard",
+        theme: "lf5",
+        isCalculation: false,
+        topic: "📄 XML-Syntax & Wohlgeformtheit: Fehleranalyse (Wurzelelement, Schachtelung, Tags)",
+        type: "open-text",
+        question: `IHK-Prüfungsaufgabe Softwareentwicklung (FA 230 Sommer 2025 - 4.1):
+Die Mitarbeiter- und Urlaubsdaten der Firma liegen zurzeit in einer XML-Struktur vor. Beim Einlesen der XML-Datei mit einem Programmcode treten Parsing-Fehler auf.
+
+Aufgabe:
+Nennen Sie 4 typische syntaktische Fehler in XML-Dokumenten, die die 'Wohlgeformtheit' verletzen und Parsing-Fehler verursachen, und beschreiben Sie die jeweilige Korrekturmaßnahme.`,
+        musterloesung: `Musterlösung XML-Wohlgeformtheit und Fehlerkorrektur:
+
+1. Fehlendes, mehrfaches oder uneinheitliches Wurzelelement (Root-Element):
+- Fehler: Eine XML-Datei hat mehrere Wurzelelemente oder keines.
+- Korrektur: Jedes gültige XML-Dokument MUSS genau ein einziges übergeordnetes Wurzelelement besitzen (z. B. <mitarbeiterverwaltung> ... </mitarbeiterverwaltung>), das alle anderen Elemente umschließt.
+
+2. Falsche Schachtelung (Overlapping Tags):
+- Fehler: Tags werden in der falschen Reihenfolge geschlossen (z. B. <mitarbeiter><name>Müller</mitarbeiter></name>).
+- Korrektur: LIFO-Prinzip (Last In, First Out). Das zuletzt geöffnete Tag muss zuerst geschlossen werden: <mitarbeiter><name>Müller</name></mitarbeiter>.
+
+3. Nicht übereinstimmende oder falsch geschriebene Tags (Case-Sensitivity):
+- Fehler: Öffnendes und schließendes Tag unterscheiden sich in Groß-/Kleinschreibung (z. B. <urlaub> ... </Urlaub>) oder schließendes Tag fehlt ganz.
+- Korrektur: XML unterscheidet strikt Groß- und Kleinschreibung. Jedes Tag muss exakt identisch geschlossen werden (<urlaub> ... </urlaub>) oder als Empty-Tag deklariert sein (<eintrag />).
+
+4. Fehlende Anführungszeichen bei Attributwerten:
+- Fehler: Attribute ohne Quotes (z. B. <antrag id=5>).
+- Korrektur: Alle Attributwerte müssen zwingend in einfachen oder doppelten Anführungszeichen stehen: <antrag id="5">.
+
+5. Unmaskierte Sonderzeichen im Textinhalt:
+- Fehler: Zeichen wie '<', '>' oder '&' im Text erzeugen Parser-Fehler.
+- Korrektur: Ersetzung durch vordefinierte XML-Entities (&lt; für <, &gt; für >, &amp; für &) oder Kapselung in einen <![CDATA[ ... ]]> Block.`,
+        explanation: "Ein XML-Dokument ist nur 'wohlgeformt' (well-formed), wenn es genau 1 Wurzelelement hat, alle Tags paarig und korrekt geschachtelt sind, Groß-/Kleinschreibung stimmt und Attributwerte in Anführungszeichen stehen."
+    },
+    {
+        id: 436,
+        isBawueFocus: true,
+        isHard: true,
+        difficulty: "hard",
+        theme: "lf5",
+        isCalculation: false,
+        topic: "🗄️ SQL DDL: Tabelle mit Datentypen und Primärschlüssel anlegen (CREATE TABLE)",
+        type: "open-text",
+        question: `IHK-Prüfungsaufgabe Datenbanktechnik (FA 230 Sommer 2025 - 4.2.1):
+Gegeben ist folgendes Relationenmodell:
+
+Mitarbeiter (mID, vorname, name, strasse, stadt)
+Primärschlüssel: mID
+
+Aufgabe:
+Formulieren Sie den vollständigen SQL-Befehl zum Anlegen der Tabelle 'Mitarbeiter' mit geeigneten Datentypen und Primärschlüssel.`,
+        musterloesung: `Musterlösung CREATE TABLE Mitarbeiter:
+
+SQL-Befehl:
+CREATE TABLE Mitarbeiter (
+    mID INT PRIMARY KEY,
+    vorname VARCHAR(50) NOT NULL,
+    name VARCHAR(50) NOT NULL,
+    strasse VARCHAR(100),
+    stadt VARCHAR(50)
+);
+
+Alternative zulässige Syntax (Tabellen-Constraint):
+CREATE TABLE Mitarbeiter (
+    mID INTEGER,
+    vorname VARCHAR(50),
+    name VARCHAR(50),
+    strasse VARCHAR(100),
+    stadt VARCHAR(50),
+    PRIMARY KEY (mID)
+);
+
+Wichtige IHK-Prüfungskriterien (häufige Fehler vermeiden!):
+1. Der Befehl lautet 'CREATE TABLE', keinesfalls 'creat date'!
+2. Alle 5 Attribute aus dem Relationenmodell müssen enthalten sein: mID, vorname, name, strasse, stadt.
+3. Datentypen: mID als INT / INTEGER, Textattribute als VARCHAR(...) oder CHAR(...).
+4. Der Primärschlüssel 'mID' muss explizit als PRIMARY KEY deklariert sein.`,
+        explanation: "CREATE TABLE [Tabellenname] ([Spalte] [Datentyp] PRIMARY KEY, ...); Primärschlüssel und passende Datentypen (INT, VARCHAR) sind Pflicht."
+    },
+    {
+        id: 437,
+        isBawueFocus: true,
+        isHard: true,
+        difficulty: "hard",
+        theme: "lf5",
+        isCalculation: false,
+        topic: "🗄️ SQL DQL: Sortierung mit ORDER BY und Zählen mit Aggregatfunktion COUNT(*)",
+        type: "open-text",
+        question: `IHK-Prüfungsaufgabe Datenbanktechnik (FA 230 Sommer 2025 - 4.2.2 & 4.2.3):
+Gegeben ist die Tabelle:
+Mitarbeiter (mID, vorname, name, strasse, stadt)
+
+Aufgaben:
+a) Zeigen Sie alle Mitarbeiter sortiert nach 'name' an (Aufgabe 4.2.2).
+b) Ermitteln Sie per SQL-Abfrage, wie viele Mitarbeiter aus 'Mannheim' kommen (Aufgabe 4.2.3).`,
+        musterloesung: `Musterlösung SQL-Abfragen:
+
+a) Alle Mitarbeiter sortiert nach 'name' anzeigen (4.2.2):
+SELECT * FROM Mitarbeiter
+ORDER BY name ASC;
+(Hinweis: 'ASC' steht für aufsteigend A-Z und ist Standard. Häufiger Prüfungsfehler: 'ORDER BY' ist die Klausel zum Sortieren, nicht 'ASV' oder ähnliches!).
+
+b) Anzahl Mitarbeiter aus Mannheim ermitteln (4.2.3):
+SELECT COUNT(*)
+FROM Mitarbeiter
+WHERE stadt = 'Mannheim';
+
+Wichtige IHK-Kriterien zu b):
+1. Die Frage 'wie viele' verlangt zwingend die Aggregatfunktion COUNT(*) bzw. COUNT(mID)!
+   Ein reines 'SELECT * FROM Mitarbeiter WHERE stadt = ...' liefert zwar Datenzeilen, ist aber fachlich falsch, weil keine Anzahl berechnet wird.
+2. Zeichenketten/Strings in SQL müssen immer in einfachen Anführungszeichen stehen: 'Mannheim'.`,
+        explanation: "Sortieren: ORDER BY [Spalte] [ASC|DESC]. Zählen / Anzahl: SELECT COUNT(*) FROM [Tabelle] WHERE [Bedingung]; Strings immer in einfache Quotes '...'."
+    },
+    {
+        id: 438,
+        isBawueFocus: true,
+        isHard: true,
+        difficulty: "hard",
+        theme: "lf5",
+        isCalculation: false,
+        topic: "🗄️ SQL DML: Gezieltes Löschen eines Datensatzes (DELETE FROM mit WHERE)",
+        type: "open-text",
+        question: `IHK-Prüfungsaufgabe Datenbanktechnik (FA 230 Sommer 2025 - 4.2.4):
+Gegeben ist das Relationenmodell:
+Mitarbeiter (mID, vorname, name, strasse, stadt)
+Urlaubsantrag (antragsID, startdatum, enddatum, mID)
+
+Aufgabe:
+Der Urlaubsantrag mit der antragsID 5 soll gelöscht werden.
+Formulieren Sie den entsprechenden SQL-Befehl.`,
+        musterloesung: `Musterlösung DELETE FROM:
+
+SQL-Befehl:
+DELETE FROM Urlaubsantrag
+WHERE antragsID = 5;
+
+Typische IHK-Prüfungsfallen:
+1. Falsche Tabelle gewählt: Es soll ein 'Urlaubsantrag' gelöscht werden, nicht aus der Tabelle 'Mitarbeiter'!
+2. Falsche Spalte in der WHERE-Bedingung: Die Vorgabe lautet 'antragsID 5', nicht 'mID = 5' (sonst würden alle Anträge des Mitarbeiters 5 gelöscht)!
+3. Falsche Syntax: Nach DELETE steht NIE ein Stern '*' (nicht 'DELETE * FROM...'). Ohne WHERE-Klausel würde zudem die gesamte Tabelle geleert.`,
+        explanation: "DELETE FROM [Tabelle] WHERE [Bedingung]; Niemals DELETE * schreiben! Achte genau darauf, welche Tabelle und welche Spalte in der Aufgabe genannt sind."
+    },
+    {
+        id: 439,
+        isBawueFocus: true,
+        isHard: true,
+        difficulty: "hard",
+        theme: "lf5",
+        isCalculation: false,
+        topic: "📊 Nassi-Shneiderman Struktogramm: Schleifen- & Verzweigungslogik (Urlaubswunsch)",
+        type: "open-text",
+        question: `IHK-Prüfungsaufgabe Struktogramm-Analyse (FA 230 Sommer 2025 - Anlage 6):
+Gegeben ist das Struktogramm 'Urlaubswunsch' aus Anlage 6:
+
+1. Initialisierung: anzUrlaubstage = 29
+2. Kopfgesteuerte while-Schleife: Bedingung anzUrlaubstage > 0
+   - Ausgabe: 'Sie haben noch ' + anzUrlaubstage + ' Tage Urlaub.'
+   - Ausgabe: 'Wieviele Tage Urlaub möchten Sie nehmen?'
+   - Eingabe: tage
+   - Verzweigung: anzUrlaubstage - tage >= 0
+     * T (Wahr): Ausgabe 'Urlaub genehmigt.' und anzUrlaubstage um tage vermindern
+     * F (Falsch): Ausgabe 'Urlaub nicht genehmigt.'
+3. Nach Schleifenende: Ausgabe 'Urlaub aufgebraucht.'
+
+Aufgabe:
+Führen Sie einen Schreibtischtest für folgende Eingaben durch und dokumentieren Sie für jeden Durchlauf die Bildschirmausgaben und den neuen Wert von anzUrlaubstage:
+1. Durchlauf: Eingabe tage = 10
+2. Durchlauf: Eingabe tage = 25
+3. Durchlauf: Eingabe tage = 19`,
+        musterloesung: `Musterlösung Schreibtischtest zum Struktogramm 'Urlaubswunsch':
+
+Initialer Zustand vor Schleifeneintritt:
+- anzUrlaubstage = 29
+- Bedingung anzUrlaubstage > 0 (29 > 0) ist WAHR -> Schleifeneintritt.
+
+--- 1. Durchlauf (Eingabe: tage = 10) ---
+1. Ausgabe: 'Sie haben noch 29 Tage Urlaub.'
+2. Ausgabe: 'Wieviele Tage Urlaub möchten Sie nehmen?'
+3. Eingabe: tage = 10
+4. Prüfung der Verzweigung: anzUrlaubstage - tage >= 0 -> 29 - 10 = 19 >= 0 (WAHR/T)
+   - Ausgabe: 'Urlaub genehmigt.'
+   - Berechnung: anzUrlaubstage = anzUrlaubstage - tage = 29 - 10 = 19.
+
+--- 2. Durchlauf (Eingabe: tage = 25) ---
+- Schleifenkopf: anzUrlaubstage > 0 (19 > 0) ist WAHR -> nächster Durchlauf.
+1. Ausgabe: 'Sie haben noch 19 Tage Urlaub.'
+2. Ausgabe: 'Wieviele Tage Urlaub möchten Sie nehmen?'
+3. Eingabe: tage = 25
+4. Prüfung der Verzweigung: anzUrlaubstage - tage >= 0 -> 19 - 25 = -6 >= 0 (FALSCH/F)
+   - Ausgabe: 'Urlaub nicht genehmigt.'
+   - Keine Verminderung! anzUrlaubstage bleibt unverändert bei 19.
+
+--- 3. Durchlauf (Eingabe: tage = 19) ---
+- Schleifenkopf: anzUrlaubstage > 0 (19 > 0) ist WAHR -> nächster Durchlauf.
+1. Ausgabe: 'Sie haben noch 19 Tage Urlaub.'
+2. Ausgabe: 'Wieviele Tage Urlaub möchten Sie nehmen?'
+3. Eingabe: tage = 19
+4. Prüfung der Verzweigung: anzUrlaubstage - tage >= 0 -> 19 - 19 = 0 >= 0 (WAHR/T)
+   - Ausgabe: 'Urlaub genehmigt.'
+   - Berechnung: anzUrlaubstage = 19 - 19 = 0.
+
+--- Schleifenende ---
+- Schleifenkopf: anzUrlaubstage > 0 (0 > 0) ist FALSCH -> Schleife beendet!
+- Abschließende Ausgabe: 'Urlaub aufgebraucht.'`,
+        explanation: "Bei 'Urlaub nicht genehmigt' wird anzUrlaubstage NICHT vermindert. Die Schleife endet erst, wenn anzUrlaubstage <= 0 ist. Dann folgt die Endausgabe 'Urlaub aufgebraucht.'."
+    },
+    {
+        id: 440,
+        isBawueFocus: true,
+        isHard: true,
+        difficulty: "hard",
+        theme: "lf5",
+        isCalculation: false,
+        topic: "💻 Programmierung (15 Punkte): Struktogramm 'Urlaubswunsch' in Code umsetzen",
+        type: "open-text",
+        question: `IHK-Prüfungsaufgabe Programmcode-Implementierung (FA 230 Sommer 2025 - 4.3 - 15 Punkte):
+Setzen Sie das Struktogramm 'Urlaubswunsch' aus Anlage 6 in vollständigen, sauberen Programmcode (Python, Java oder Pseudocode) um.
+
+Vorgaben aus dem Struktogramm:
+- Variable anzUrlaubstage mit 29 initialisieren
+- Kopfgesteuerte Schleife solange anzUrlaubstage > 0
+- Resturlaub ausgeben und Eingabe der Urlaubstage ('tage') als Ganzzahl einlesen
+- Wenn anzUrlaubstage - tage >= 0:
+  -> 'Urlaub genehmigt.' ausgeben und anzUrlaubstage um tage reduzieren
+  Sonst:
+  -> 'Urlaub nicht genehmigt.' ausgeben
+- Nach Verlassen der Schleife:
+  -> 'Urlaub aufgebraucht.' ausgeben.`,
+        musterloesung: `Musterlösung für die 15-Punkte-Programmieraufgabe:
+
+=== Lösung in PYTHON ===
+anzUrlaubstage = 29
+
+while anzUrlaubstage > 0:
+    print(f"Sie haben noch {anzUrlaubstage} Tage Urlaub.")
+    tage = int(input("Wieviele Tage Urlaub möchten Sie nehmen? "))
+    
+    if anzUrlaubstage - tage >= 0:
+        print("Urlaub genehmigt.")
+        anzUrlaubstage -= tage
+    else:
+        print("Urlaub nicht genehmigt.")
+
+print("Urlaub aufgebraucht.")
+
+
+=== Lösung in JAVA ===
+import java.util.Scanner;
+
+public class Urlaubswunsch {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int anzUrlaubstage = 29;
+        
+        while (anzUrlaubstage > 0) {
+            System.out.println("Sie haben noch " + anzUrlaubstage + " Tage Urlaub.");
+            System.out.println("Wieviele Tage Urlaub möchten Sie nehmen?");
+            int tage = scanner.nextInt();
+            
+            if (anzUrlaubstage - tage >= 0) {
+                System.out.println("Urlaub genehmigt.");
+                anzUrlaubstage -= tage; // oder: anzUrlaubstage = anzUrlaubstage - tage;
+            } else {
+                System.out.println("Urlaub nicht genehmigt.");
+            }
+        }
+        System.out.println("Urlaub aufgebraucht.");
+    }
+}
+
+
+=== Lösung in PSEUDOCODE ===
+anzUrlaubstage <- 29
+SOLANGE anzUrlaubstage > 0 MACHE
+    AUSGABE "Sie haben noch " + anzUrlaubstage + " Tage Urlaub."
+    AUSGABE "Wieviele Tage Urlaub möchten Sie nehmen?"
+    EINGABE tage
+    WENN (anzUrlaubstage - tage >= 0) DANN
+        AUSGABE "Urlaub genehmigt."
+        anzUrlaubstage <- anzUrlaubstage - tage
+    SONST
+        AUSGABE "Urlaub nicht genehmigt."
+    ENDE_WENN
+ENDE_SOLANGE
+AUSGABE "Urlaub aufgebraucht."
+
+Bewertungskriterien (15 Punkte):
+- Korrekte Initialisierung der Variable (1 P)
+- Korrekte while-Schleife mit Bedingung (3 P)
+- Ausgabe und Typkonvertierung der Eingabe in Integer (3 P)
+- Korrekte if-else Verzweigung mit Bedingung >= 0 (4 P)
+- Korrekte Verminderung von anzUrlaubstage im True-Zweig (2 P)
+- Ausgabe nach Schleifenende (2 P)`,
+        explanation: "Kopfgesteuerte Schleife (while anzUrlaubstage > 0), Benutzereingabe mit int(input(...)), Verzweigung if (anzUrlaubstage - tage >= 0) mit Subtraktion nur bei Genehmigung."
     }
 ];
