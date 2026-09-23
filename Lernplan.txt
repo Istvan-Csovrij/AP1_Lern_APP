@@ -1,0 +1,419 @@
+ Woche 1: Die sicheren "Punkte-Bringer" (Rechnen, Kalkulation & Elektrotechnik)
+Warum Woche 1? Rechenaufgaben geben in der IHK-Prüfung garantierte, objektive Punkte (kein Interpretationsspielraum der Prüfer). Wenn die Formel sitzt, hast du 100 % der Punkte sicher.
+
+Tag 1–2: Kaufmännische Handelskalkulation & Wirtschaftlichkeit
+Schwerpunkte:
+Vorwärtskalkulation: 
+LEP
+→
+Rabatt
+→
+ZEP
+→
+Skonto
+→
+BEP
+→
+Bezugskosten
+→
+Einstandspreis/Selbstkosten
+LEP→Rabatt→ZEP→Skonto→BEP→Bezugskosten→Einstandspreis/Selbstkosten.
+Rückwärts- und Differenzkalkulation (Berechnung des maximalen Einkaufsrabatts oder des Gewinns).
+TCO (Total Cost of Ownership) über 
+N
+N Jahre (Hardware + Strom + Wartung + Schulung).
+Amortisationszeit & ROI.
+In der App trainieren:
+Kachel: 🧮 Rechnen & Handelskalkulation (AP1) (Modus: Offene Aufgaben).
+15–20 Aufgaben lösen, Rechenschritte handschriftlich auf ein Blatt schreiben.
+Tag 3–4: Strom, Leistung & Dreiphasen-Wechselstrom
+Schwerpunkte:
+1-Phasen-Wechselstrom: 
+P
+=
+U
+⋅
+I
+⋅
+cos
+⁡
+φ
+P=U⋅I⋅cosφ, Scheinleistung 
+S
+=
+U
+⋅
+I
+S=U⋅I, Blindleistung 
+Q
+=
+S
+2
+−
+P
+2
+Q= 
+S 
+2
+ −P 
+2
+ 
+​
+ .
+3-Phasen-Drehstrom (400V CEE): 
+P
+=
+3
+⋅
+U
+⋅
+I
+⋅
+cos
+⁡
+φ
+P= 
+3
+​
+ ⋅U⋅I⋅cosφ.
+Sicherungsüberlastung (B16 Leitungsschutzschalter: 
+I
+Last
+≤
+16
+A
+I 
+Last
+​
+ ≤16A).
+In der App trainieren:
+Kachel: ⚡ Strom, Leistung & Einheiten (AP1) (Aufgaben zu Watt, Voltampere und Blindleistung).
+Tag 5–6: USV-Autonomiezeit, Akkubänke, PUE & Kühlung
+Schwerpunkte:
+USV-Akkubank: Gespeicherte Energie 
+W
+=
+n
+⋅
+U
+⋅
+C
+W=n⋅U⋅C (Wh), Entladetiefe 
+DoD
+=
+80
+%
+DoD=80%, Inverter-Wirkungsgrad 
+η
+η.
+Überbrückungszeit: 
+t
+=
+(
+W
+⋅
+DoD
+⋅
+η
+)
+/
+P
+Last
+t=(W⋅DoD⋅η)/P 
+Last
+​
+ .
+PUE (Power Usage Effectiveness) 
+=
+E
+Gesamt
+/
+E
+IT
+=E 
+Gesamt
+​
+ /E 
+IT
+​
+  und 
+DCiE
+=
+1
+/
+PUE
+⋅
+100
+%
+DCiE=1/PUE⋅100%.
+Wärmelast in 
+BTU/h
+BTU/h (
+1
+kW
+=
+3.412
+BTU/h
+1kW=3.412BTU/h), 
+N
++
+1
+N+1-Klimaredundanz & EER-Kühlfaktor.
+Spannungsabfall 
+Δ
+U
+=
+(
+2
+⋅
+l
+⋅
+I
+⋅
+ρ
+)
+/
+A
+ΔU=(2⋅l⋅I⋅ρ)/A (DIN VDE 0100 max. 
+3
+%
+3%).
+In der App trainieren:
+Kachel: ⚡ Strom, Leistung & Einheiten (AP1) (Aufgaben zu USV, PUE, Kühlung & Ohm).
+Tag 7: Wochen-Review & Merkliste
+Alle markierten Fragen (⭐) wiederholen.
+Formelzettel erstellen (1 DIN-A4-Seite mit allen 10 Rechenformeln).
+📅 Woche 2: Visuelle Modellierung & Diagramme (20–30 Prüfungs-Punkte)
+Warum Woche 2? In jeder IHK AP1 kommt mindestens ein großes Diagramm (ERD, Klassendiagramm, Use-Case, EPK, BPMN oder Netzplan).
+
+Tag 8–9: Entity-Relationship-Diagramm (ERD) & Normalisierung
+Schwerpunkte:
+ERD-Kardinalitäten nach Chen / Martin / Crow's Foot (
+[
+1
+:
+1
+]
+[1:1], 
+[
+1
+:
+n
+]
+[1:n], 
+[
+n
+:
+m
+]
+[n:m]).
+Fremdschlüssel-Platzierung: Bei 
+[
+1
+:
+n
+]
+[1:n] wandert der Primärschlüssel der 1-Seite als Fremdschlüssel in die 
+n
+n-Seite!
+Auflösung von 
+[
+n
+:
+m
+]
+[n:m]-Beziehungen durch Zwischentabellen.
+1., 2. und 3. Normalform (1NF = atomar, 2NF = voll funktional abhängig vom Primärschlüssel, 3NF = keine transitiven Abhängigkeiten).
+In der App trainieren:
+Kachel: 📐 Diagramme & Modellierung (AP1) + Zeichenboard öffnen (ERD skizzieren).
+Tag 10–11: UML-Diagramme (Klassendiagramm & Use-Case)
+Schwerpunkte:
+Klassendiagramm: Klassenaufbau (Name, Attribute, Methoden), Sichtbarkeiten (+ public, - private, # protected).
+Beziehungen:
+Assoziation: einfache Beziehung ───.
+Aggregation: Teil-Ganzes (kann ohne Ganzes existieren) ◇─── (leere Raute).
+Komposition: existenzabhängig ◆─── (gefüllte Raute, z. B. Ticket & Tickethistorie).
+Vererbung / Generalisierung: ──▷ (weißes Dreieck).
+Use-Case-Diagramm: Akteure, Systemgrenze, Anwendungsfälle, <<include>> (Pflicht-Subprozess) vs. <<extend>> (optionale Erweiterung mit Extension Point).
+In der App trainieren:
+Kachel: 📐 Diagramme & Modellierung (AP1) (UML-Aufgaben mit Musterlösungs-SVGs).
+Tag 12–13: Prozessmodellierung (EPK, BPMN) & Netzplantechnik
+Schwerpunkte:
+EPK (Ereignisgesteuerte Prozesskette): Abwechselnd Ereignis (Sechseck) 
+→
+→ Funktion (Rechteck mit runden Ecken) 
+→
+→ Operatoren (UND, ODER, XOR).
+BPMN 2.0: Start-/End-Event (Kreise), Tasks (Rechtecke), Pools & Swimlanes, Gateways (XOR-Exklusiv, AND-Parallel).
+Netzplantechnik (DIN 69900):
+Vorwärtsrechnung: 
+FEZ
+=
+FAZ
++
+D
+FEZ=FAZ+D.
+Rückwärtsrechnung: 
+SAZ
+=
+SEZ
+−
+D
+SAZ=SEZ−D.
+Gesamtpuffer 
+GP
+=
+SAZ
+−
+FAZ
+GP=SAZ−FAZ, Freier Puffer 
+FP
+=
+FAZ
+Nachfolger
+−
+FEZ
+FP=FAZ 
+Nachfolger
+​
+ −FEZ.
+Kritischer Pfad: Alle Vorgänge mit 
+GP
+=
+0
+GP=0.
+In der App trainieren:
+Netzplan- und EPK-Aufgaben lösen und kritische Pfade berechnen.
+Tag 14: Algorithmen-Logik (Struktogramm / PAP)
+Schwerpunkte:
+Nassi-Shneiderman (Sequenz, IF-THEN-ELSE Verzweigung, kopfgesteuerte WHILE-Schleife, fußgesteuerte DO-WHILE, Zählschleife FOR).
+PAP (DIN 66001: Start/Stopp, Operation, Verzweigung/Raute).
+📅 Woche 3: Technische Kernkompetenz & IT-Sicherheit
+Warum Woche 3? Nun vernetzen wir das technische Fachwissen mit rechtlichen Rahmenbedingungen (DSGVO, Schutzziele).
+
+Tag 15–16: IPv4-Subnetting & Netzwerk-Berechnungen
+Schwerpunkte:
+Subnetzmasken: 
+/
+24
+/24 (254 Hosts) bis 
+/
+30
+/30 (2 Hosts - Punkt-zu-Punkt).
+Formel: Host-Bits 
+h
+=
+32
+−
+Pr
+a
+¨
+fix
+h=32−Pr 
+a
+¨
+ fix, Nutzkapazität 
+=
+2
+h
+−
+2
+=2 
+h
+ −2.
+Bestimmung von Netz-ID, First Usable IP, Last Usable IP und Broadcast-Adresse.
+Datenübertragungszeit: 
+t
+=
+Dateigr
+o
+¨
+ße (in Bit)
+/
+Bandbreite (in Bit/s)
+t=Dateigr 
+o
+¨
+ ße (in Bit)/Bandbreite (in Bit/s).
+Präfix-Umrechnungen: 
+GB
+GB (
+10
+9
+10 
+9
+ ) vs. 
+GiB
+GiB (
+2
+30
+=
+1.073.741.824
+Byte
+2 
+30
+ =1.073.741.824Byte).
+In der App trainieren:
+Filter: LF 3: Netzwerke & Protokolle.
+Tag 17–18: SQL-Datenbanken & Hardware / RAID
+Schwerpunkte:
+SQL: SELECT, FROM, WHERE, INNER JOIN / LEFT JOIN, GROUP BY, HAVING, ORDER BY, Aggregatfunktionen (COUNT, SUM, AVG, MAX, MIN).
+RAID-Level:
+RAID 0 (Striping, 
+N
+N, schnell, 0 Redundanz).
+RAID 1 (Mirroring, 
+N
+/
+2
+N/2, 50 % Verlust, 1 Ausfall).
+RAID 5 (Parität, 
+N
+−
+1
+N−1, min. 3 Platten, 1 Ausfall).
+RAID 6 (Doppel-Parität, 
+N
+−
+2
+N−2, min. 4 Platten, 2 Ausfälle).
+RAID 10 (Mirror + Stripe, 
+N
+/
+2
+N/2, min. 4 Platten).
+In der App trainieren:
+Filter: LF 5: Software & SQL und LF 2: Arbeitsplatz & Hardware.
+Tag 19–20: Datenschutz (DSGVO) & Informationssicherheit (CIA, Backup)
+Schwerpunkte:
+Schutzziele (CIA-Triade): Confidentiality (Vertraulichkeit), Integrity (Integrität), Availability (Verfügbarkeit) + Authentizität.
+DSGVO Art. 5: Rechtmäßigkeit, Zweckbindung, Datenminimierung, Richtigkeit, Speicherbegrenzung, Integrität & Vertraulichkeit.
+TOMs (Technisch-organisatorische Maßnahmen): Zutritts-, Zugangs-, Zugriffs-, Weitergabe-, Eingabe-, Verfügbarkeits- und Trennungskontrolle.
+Backup-Strategien: Vollbackup, Differentiell (bezogen auf letztes Vollbackup), Inkrementell (bezogen auf letztes Backup).
+3-2-1-Regel: 3 Kopien, 2 verschiedene Medientypen, 1 Kopie außer Haus (Offsite).
+RPO (Recovery Point Objective - tolerierbarer Datenverlust) vs. RTO (Recovery Time Objective - tolerierbare Ausfallzeit).
+In der App trainieren:
+Filter: LF 4: Schutz & Sicherheit.
+Tag 21: Wochen-Check & Merkliste
+Alle bisher gespeicherten ⭐-Fragen in der Merkliste im Schnelldurchlauf wiederholen.
+📅 Woche 4: Prüfungssimulation, Meisterklasse & Feinschliff
+Warum Woche 4? Jetzt wird Prüfungsroutine aufgebaut, Angst abgebaut und das Zeitmanagement perfektioniert.
+
+Tag 22–24: IHK Meisterklasse (Schwere Aufgaben)
+Schwerpunkte:
+Bearbeite die komplexesten IHK-Szenarien mit mehreren Teilschritten.
+Kachel: 🔥 IHK Meisterklasse (Schwere Aufgaben).
+Trainiere das strukturierte Antworten nach IHK-Musterlösung (Gliederung in a, b, c).
+Tag 25–27: 90-Minuten Echtzeit-Prüfungssimulationen
+Schwerpunkte:
+Starte den Modus: ⏱️ 90-Min.-Simulation in der App.
+Schließe alle anderen Tabs, nimm dir Papier, Stift und einen nicht-programmierbaren Taschenrechner.
+Halte die 90 Minuten strikt ein.
+Danach: Gründliche Analyse der Fehler und Nachschlagen der Erklärungen.
+Tag 28–29: Die Kristallkugel & Schwachstellen-Fokus
+Kachel: 🔮 IHK Stuttgart Fokus (Kristallkugel).
+Nochmal gezielt alle Aufgaben bearbeiten, bei denen du in den Simulationen Punkte verloren hast.
+Tag 30 (Tag vor der Prüfung): Ruhe & Mentale Vorbereitung
+Nur noch leichte Wiederholung der Formelsammlung (max. 30 Minuten).
+Kein Stress mehr, früh schlafen gehen.
+Prüfungsmaterial bereitstellen: Taschenrechner, dokumentenechte Stifte (blau/schwarz), Geodreieck/Lineal, Ausweis/Einladung.
