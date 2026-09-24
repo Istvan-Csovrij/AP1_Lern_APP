@@ -4088,7 +4088,6 @@ ORDER BY gesamtumsatz_euro DESC;`;
                 isBawueFocus: true,
                 type: "open-text",
                 question: qText,
-                code: sqlCode,
                 musterloesung: `Musterlösung SQL-Statement:\n\n${sqlCode}\n\nErläuterung:\n- INNER JOIN über alle relevanten Tabellen verknüpft Kunden mit ihren Positionen.\n- WHERE filtert vor der Aggregation nach Datum (${year}) und Status (!= 'storniert').\n- GROUP BY gruppiert nach allen nicht-aggregierten Spalten des SELECTs.\n- HAVING filtert nach den aggregierten Bedingungen (COUNT(DISTINCT bestell_nr) >= ${minOrders} und SUM(...) > ${minRevenue}).\n- ORDER BY sortiert absteigend (DESC).`,
                 explanation: `INNER JOINs verknüpfen Tabellen. WHERE filtert Einzelzeilen vorab. GROUP BY fasst Kunden zusammen. HAVING filtert Aggregatwerte. ORDER BY sortiert.`
             });

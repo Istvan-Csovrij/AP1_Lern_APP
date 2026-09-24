@@ -7669,21 +7669,6 @@ WHERE Email IS NULL OR Email = '';
         topic: "🔥 Meisterklasse: Komplexe SQL-Multi-Table-Abfrage mit HAVING (LF 5)",
         type: "open-text",
         question: `🔥 Meisterklasse SQL-Datenbanken (LF 5):\nGegeben ist ein Datenbankschema für einen Cloud-Anbieter:\n- tbl_kunde (kunden_id [PK], nachname, firma, premium_status)\n- tbl_vertrag (vertrags_id [PK], kunden_id [FK], beginn_datum, ende_datum, status)\n- tbl_service_nutzung (nutzungs_id [PK], vertrags_id [FK], service_id [FK], verbrauchte_stunden, abrechnungs_monat)\n- tbl_service (service_id [PK], service_name, stundensatz_eur)\n\nAufgabenstellung:\nErstellen Sie ein ANSI-SQL-Query, das für das Jahr 2025 alle Kunden ermittelt, die:\n1. Mindestens 2 aktive Verträge (status = 'aktiv') besitzen.\n2. In Summe über alle genutzten Services im Jahr 2025 Kosten von über 10.000,00 EUR verursacht haben.\n3. Ausgegeben werden sollen: kunden_id, firma, Anzahl aktiver Verträge und die abrechenbare Gesamtsumme (gerundet auf 2 Dezimalstellen).\n4. Sortieren Sie das Ergebnis absteigend nach der Gesamtsumme.`,
-        code: `SELECT 
-    k.kunden_id,
-    k.firma,
-    COUNT(DISTINCT v.vertrags_id) AS anzahl_vertraege,
-    ROUND(SUM(sn.verbrauchte_stunden * s.stundensatz_eur), 2) AS gesamtbetrag_eur
-FROM tbl_kunde k
-INNER JOIN tbl_vertrag v ON k.kunden_id = v.kunden_id
-INNER JOIN tbl_service_nutzung sn ON v.vertrags_id = sn.vertrags_id
-INNER JOIN tbl_service s ON sn.service_id = s.service_id
-WHERE v.status = 'aktiv'
-  AND sn.abrechnungs_monat BETWEEN '2025-01' AND '2025-12'
-GROUP BY k.kunden_id, k.firma
-HAVING COUNT(DISTINCT v.vertrags_id) >= 2
-   AND SUM(sn.verbrauchte_stunden * s.stundensatz_eur) > 10000.00
-ORDER BY gesamtbetrag_eur DESC;`,
         musterloesung: `Musterlösung SQL-Statement:\n\nSELECT 
     k.kunden_id,
     k.firma,
