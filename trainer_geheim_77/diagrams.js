@@ -955,6 +955,193 @@ var VisualDiagrams = {
 </svg>`;
     },
 
+    // 7e. Netzplan Software-Rollout (8 Vorgänge, Dauer = 19 Werktage)
+    getRollout8NetzplanDiagramSvg: function() {
+        return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 380" width="100%" height="100%">
+    <defs>
+        <marker id="np8-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#dc2626" />
+        </marker>
+        <marker id="np8-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+            <path d="M 0 1 L 10 5 L 0 9 z" fill="#0284c7" />
+        </marker>
+    </defs>
+    <rect width="860" height="380" fill="#f8fafc" rx="8" />
+    <text x="430" y="24" font-family="sans-serif" font-size="14" font-weight="bold" fill="#1e3a8a" text-anchor="middle">DIN 69900 Netzplan: Software-Rollout (8 Vorgänge, Dauer = 19 Werktage)</text>
+
+    <!-- Column 1: A (Kick-Off) -->
+    <g transform="translate(25, 140)">
+        <rect width="115" height="68" fill="#fee2e2" stroke="#dc2626" stroke-width="2.5" rx="4" />
+        <line x1="0" y1="22.67" x2="115" y2="22.67" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="0" y1="45.33" x2="115" y2="45.33" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="38.33" y1="0" x2="38.33" y2="22.67" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="76.67" y1="0" x2="76.67" y2="22.67" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="38.33" y1="45.33" x2="38.33" y2="68" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="76.67" y1="45.33" x2="76.67" y2="68" stroke="#dc2626" stroke-width="1.2" />
+        <text x="19.17" y="15.87" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">0</text>
+        <text x="57.5" y="15.87" font-family="sans-serif" font-size="10.5" font-weight="bold" text-anchor="middle" fill="#991b1b">D:3</text>
+        <text x="95.83" y="15.87" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">3</text>
+        <text x="57.5" y="38.53" font-family="sans-serif" font-size="10" font-weight="bold" text-anchor="middle" fill="#991b1b">A: Kick-Off</text>
+        <text x="19.17" y="61.2" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">0</text>
+        <text x="57.5" y="61.2" font-family="sans-serif" font-size="9.5" font-weight="bold" text-anchor="middle" fill="#991b1b">GP:0</text>
+        <text x="95.83" y="61.2" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">3</text>
+    </g>
+
+    <!-- Column 2: B (Backend, Kritisch) & C (Schulungsunterlagen, Puffer) -->
+    <g transform="translate(180, 60)">
+        <rect width="115" height="68" fill="#fee2e2" stroke="#dc2626" stroke-width="2.5" rx="4" />
+        <line x1="0" y1="22.67" x2="115" y2="22.67" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="0" y1="45.33" x2="115" y2="45.33" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="38.33" y1="0" x2="38.33" y2="22.67" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="76.67" y1="0" x2="76.67" y2="22.67" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="38.33" y1="45.33" x2="38.33" y2="68" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="76.67" y1="45.33" x2="76.67" y2="68" stroke="#dc2626" stroke-width="1.2" />
+        <text x="19.17" y="15.87" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">3</text>
+        <text x="57.5" y="15.87" font-family="sans-serif" font-size="10.5" font-weight="bold" text-anchor="middle" fill="#991b1b">D:4</text>
+        <text x="95.83" y="15.87" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">7</text>
+        <text x="57.5" y="38.53" font-family="sans-serif" font-size="10" font-weight="bold" text-anchor="middle" fill="#991b1b">B: Backend</text>
+        <text x="19.17" y="61.2" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">3</text>
+        <text x="57.5" y="61.2" font-family="sans-serif" font-size="9.5" font-weight="bold" text-anchor="middle" fill="#991b1b">GP:0</text>
+        <text x="95.83" y="61.2" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">7</text>
+    </g>
+
+    <g transform="translate(180, 220)">
+        <rect width="115" height="68" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.5" rx="4" />
+        <line x1="0" y1="22.67" x2="115" y2="22.67" stroke="#0284c7" stroke-width="1.2" />
+        <line x1="0" y1="45.33" x2="115" y2="45.33" stroke="#0284c7" stroke-width="1.2" />
+        <line x1="38.33" y1="0" x2="38.33" y2="22.67" stroke="#0284c7" stroke-width="1.2" />
+        <line x1="76.67" y1="0" x2="76.67" y2="22.67" stroke="#0284c7" stroke-width="1.2" />
+        <line x1="38.33" y1="45.33" x2="38.33" y2="68" stroke="#0284c7" stroke-width="1.2" />
+        <line x1="76.67" y1="45.33" x2="76.67" y2="68" stroke="#0284c7" stroke-width="1.2" />
+        <text x="19.17" y="15.87" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#0369a1">3</text>
+        <text x="57.5" y="15.87" font-family="sans-serif" font-size="10.5" font-weight="bold" text-anchor="middle" fill="#0369a1">D:2</text>
+        <text x="95.83" y="15.87" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#0369a1">5</text>
+        <text x="57.5" y="38.53" font-family="sans-serif" font-size="10" font-weight="bold" text-anchor="middle" fill="#0369a1">C: Unterlagen</text>
+        <text x="19.17" y="61.2" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#0369a1">7</text>
+        <text x="57.5" y="61.2" font-family="sans-serif" font-size="9.5" font-weight="bold" text-anchor="middle" fill="#0369a1">GP:4</text>
+        <text x="95.83" y="61.2" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#0369a1">9</text>
+    </g>
+
+    <!-- Column 3: D (DB-Migration, Kritisch) & E (Key-User Schulung, Puffer) -->
+    <g transform="translate(335, 60)">
+        <rect width="115" height="68" fill="#fee2e2" stroke="#dc2626" stroke-width="2.5" rx="4" />
+        <line x1="0" y1="22.67" x2="115" y2="22.67" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="0" y1="45.33" x2="115" y2="45.33" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="38.33" y1="0" x2="38.33" y2="22.67" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="76.67" y1="0" x2="76.67" y2="22.67" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="38.33" y1="45.33" x2="38.33" y2="68" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="76.67" y1="45.33" x2="76.67" y2="68" stroke="#dc2626" stroke-width="1.2" />
+        <text x="19.17" y="15.87" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">7</text>
+        <text x="57.5" y="15.87" font-family="sans-serif" font-size="10.5" font-weight="bold" text-anchor="middle" fill="#991b1b">D:5</text>
+        <text x="95.83" y="15.87" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">12</text>
+        <text x="57.5" y="38.53" font-family="sans-serif" font-size="10" font-weight="bold" text-anchor="middle" fill="#991b1b">D: DB-Migr.</text>
+        <text x="19.17" y="61.2" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">7</text>
+        <text x="57.5" y="61.2" font-family="sans-serif" font-size="9.5" font-weight="bold" text-anchor="middle" fill="#991b1b">GP:0</text>
+        <text x="95.83" y="61.2" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">12</text>
+    </g>
+
+    <g transform="translate(335, 220)">
+        <rect width="115" height="68" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.5" rx="4" />
+        <line x1="0" y1="22.67" x2="115" y2="22.67" stroke="#0284c7" stroke-width="1.2" />
+        <line x1="0" y1="45.33" x2="115" y2="45.33" stroke="#0284c7" stroke-width="1.2" />
+        <line x1="38.33" y1="0" x2="38.33" y2="22.67" stroke="#0284c7" stroke-width="1.2" />
+        <line x1="76.67" y1="0" x2="76.67" y2="22.67" stroke="#0284c7" stroke-width="1.2" />
+        <line x1="38.33" y1="45.33" x2="38.33" y2="68" stroke="#0284c7" stroke-width="1.2" />
+        <line x1="76.67" y1="45.33" x2="76.67" y2="68" stroke="#0284c7" stroke-width="1.2" />
+        <text x="19.17" y="15.87" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#0369a1">5</text>
+        <text x="57.5" y="15.87" font-family="sans-serif" font-size="10.5" font-weight="bold" text-anchor="middle" fill="#0369a1">D:3</text>
+        <text x="95.83" y="15.87" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#0369a1">8</text>
+        <text x="57.5" y="38.53" font-family="sans-serif" font-size="10" font-weight="bold" text-anchor="middle" fill="#0369a1">E: Schulung</text>
+        <text x="19.17" y="61.2" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#0369a1">9</text>
+        <text x="57.5" y="61.2" font-family="sans-serif" font-size="9.5" font-weight="bold" text-anchor="middle" fill="#0369a1">GP:4</text>
+        <text x="95.83" y="61.2" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#0369a1">12</text>
+    </g>
+
+    <!-- Column 4: F (Integrationstest, Kritisch) & G (Handbuch, Puffer) -->
+    <g transform="translate(490, 60)">
+        <rect width="115" height="68" fill="#fee2e2" stroke="#dc2626" stroke-width="2.5" rx="4" />
+        <line x1="0" y1="22.67" x2="115" y2="22.67" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="0" y1="45.33" x2="115" y2="45.33" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="38.33" y1="0" x2="38.33" y2="22.67" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="76.67" y1="0" x2="76.67" y2="22.67" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="38.33" y1="45.33" x2="38.33" y2="68" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="76.67" y1="45.33" x2="76.67" y2="68" stroke="#dc2626" stroke-width="1.2" />
+        <text x="19.17" y="15.87" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">12</text>
+        <text x="57.5" y="15.87" font-family="sans-serif" font-size="10.5" font-weight="bold" text-anchor="middle" fill="#991b1b">D:4</text>
+        <text x="95.83" y="15.87" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">16</text>
+        <text x="57.5" y="38.53" font-family="sans-serif" font-size="9.5" font-weight="bold" text-anchor="middle" fill="#991b1b">F: Integrat.</text>
+        <text x="19.17" y="61.2" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">12</text>
+        <text x="57.5" y="61.2" font-family="sans-serif" font-size="9.5" font-weight="bold" text-anchor="middle" fill="#991b1b">GP:0</text>
+        <text x="95.83" y="61.2" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">16</text>
+    </g>
+
+    <g transform="translate(490, 220)">
+        <rect width="115" height="68" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.5" rx="4" />
+        <line x1="0" y1="22.67" x2="115" y2="22.67" stroke="#0284c7" stroke-width="1.2" />
+        <line x1="0" y1="45.33" x2="115" y2="45.33" stroke="#0284c7" stroke-width="1.2" />
+        <line x1="38.33" y1="0" x2="38.33" y2="22.67" stroke="#0284c7" stroke-width="1.2" />
+        <line x1="76.67" y1="0" x2="76.67" y2="22.67" stroke="#0284c7" stroke-width="1.2" />
+        <line x1="38.33" y1="45.33" x2="38.33" y2="68" stroke="#0284c7" stroke-width="1.2" />
+        <line x1="76.67" y1="45.33" x2="76.67" y2="68" stroke="#0284c7" stroke-width="1.2" />
+        <text x="19.17" y="15.87" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#0369a1">8</text>
+        <text x="57.5" y="15.87" font-family="sans-serif" font-size="10.5" font-weight="bold" text-anchor="middle" fill="#0369a1">D:2</text>
+        <text x="95.83" y="15.87" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#0369a1">10</text>
+        <text x="57.5" y="38.53" font-family="sans-serif" font-size="10" font-weight="bold" text-anchor="middle" fill="#0369a1">G: Handbuch</text>
+        <text x="19.17" y="61.2" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#0369a1">14</text>
+        <text x="57.5" y="61.2" font-family="sans-serif" font-size="9.5" font-weight="bold" text-anchor="middle" fill="#0369a1">GP:6</text>
+        <text x="95.83" y="61.2" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#0369a1">16</text>
+    </g>
+
+    <!-- Column 5: H (Go-Live, Kritisch) -->
+    <g transform="translate(645, 140)">
+        <rect width="115" height="68" fill="#fee2e2" stroke="#dc2626" stroke-width="2.5" rx="4" />
+        <line x1="0" y1="22.67" x2="115" y2="22.67" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="0" y1="45.33" x2="115" y2="45.33" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="38.33" y1="0" x2="38.33" y2="22.67" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="76.67" y1="0" x2="76.67" y2="22.67" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="38.33" y1="45.33" x2="38.33" y2="68" stroke="#dc2626" stroke-width="1.2" />
+        <line x1="76.67" y1="45.33" x2="76.67" y2="68" stroke="#dc2626" stroke-width="1.2" />
+        <text x="19.17" y="15.87" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">16</text>
+        <text x="57.5" y="15.87" font-family="sans-serif" font-size="10.5" font-weight="bold" text-anchor="middle" fill="#991b1b">D:3</text>
+        <text x="95.83" y="15.87" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">19</text>
+        <text x="57.5" y="38.53" font-family="sans-serif" font-size="10" font-weight="bold" text-anchor="middle" fill="#991b1b">H: Go-Live</text>
+        <text x="19.17" y="61.2" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">16</text>
+        <text x="57.5" y="61.2" font-family="sans-serif" font-size="9.5" font-weight="bold" text-anchor="middle" fill="#991b1b">GP:0</text>
+        <text x="95.83" y="61.2" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle" fill="#991b1b">19</text>
+    </g>
+
+    <!-- Arrows -->
+    <!-- A -> B (Critical Red) -->
+    <line x1="140" y1="160" x2="180" y2="94" stroke="#dc2626" stroke-width="2.5" marker-end="url(#np8-red)" />
+    <!-- A -> C (Blue) -->
+    <line x1="140" y1="188" x2="180" y2="254" stroke="#0284c7" stroke-width="1.8" marker-end="url(#np8-blue)" />
+
+    <!-- B -> D (Critical Red) -->
+    <line x1="295" y1="94" x2="335" y2="94" stroke="#dc2626" stroke-width="2.5" marker-end="url(#np8-red)" />
+    <!-- C -> E (Blue) -->
+    <line x1="295" y1="254" x2="335" y2="254" stroke="#0284c7" stroke-width="1.8" marker-end="url(#np8-blue)" />
+
+    <!-- D -> F (Critical Red) -->
+    <line x1="450" y1="94" x2="490" y2="94" stroke="#dc2626" stroke-width="2.5" marker-end="url(#np8-red)" />
+    <!-- E -> F (Blue diagonal up) -->
+    <line x1="450" y1="240" x2="490" y2="110" stroke="#0284c7" stroke-width="1.8" marker-end="url(#np8-blue)" />
+    <!-- E -> G (Blue horizontal) -->
+    <line x1="450" y1="254" x2="490" y2="254" stroke="#0284c7" stroke-width="1.8" marker-end="url(#np8-blue)" />
+
+    <!-- F -> H (Critical Red) -->
+    <line x1="605" y1="94" x2="645" y2="160" stroke="#dc2626" stroke-width="2.5" marker-end="url(#np8-red)" />
+    <!-- G -> H (Blue diagonal up) -->
+    <line x1="605" y1="254" x2="645" y2="188" stroke="#0284c7" stroke-width="1.8" marker-end="url(#np8-blue)" />
+
+    <!-- Legend Footer -->
+    <rect x="140" y="335" width="580" height="34" fill="#ffffff" stroke="#cbd5e1" stroke-width="1" rx="4" />
+    <circle cx="165" cy="352" r="6" fill="#fee2e2" stroke="#dc2626" stroke-width="2" />
+    <text x="180" y="356" font-family="sans-serif" font-size="11.5" font-weight="bold" fill="#991b1b">Kritischer Pfad: A ➔ B ➔ D ➔ F ➔ H (Dauer: 19 Tage, GP = 0)</text>
+    <circle cx="570" cy="352" r="6" fill="#e0f2fe" stroke="#0284c7" stroke-width="2" />
+    <text x="585" y="356" font-family="sans-serif" font-size="11.5" font-weight="bold" fill="#0369a1">Pufferpfad (GP > 0)</text>
+</svg>`;
+    },
+
     // 7b. Netzplan Client-Rollout (5 Vorgänge, Dauer = 12 Tage) - ID 267
     getRollout5NetzplanDiagramSvg: function() {
         return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 740 340" width="100%" height="100%">
@@ -2589,9 +2776,12 @@ var VisualDiagrams = {
             return VisualDiagrams.getBpmnDiagramSvg();
         }
         
-        // 7. Netzplan (ERP 9 Vorgänge, Client 5 Vorgänge, CAD 6 Vorgänge, V1..V4 4 Vorgänge oder Standard)
+        // 7. Netzplan (Software-Rollout 8 Vorgänge, ERP 9 Vorgänge, Client 5 Vorgänge, CAD 6 Vorgänge, V1..V4 4 Vorgänge oder Standard)
         if (/\b(netzplan|kritischer pfad|faz|gesamtpuffer|din 69900)\b/i.test(text)) {
-            if (text.includes("erp") || text.includes("9 vorgänge") || text.includes("vorgang a: kick-off") || text.includes("customizing") || text.includes("go-live")) {
+            if (text.includes("software-rollout") || text.includes("schulungsunterlagen") || text.includes("datenbank-migration") || text.includes("19 werktage") || (text.includes("8 vorgänge") && text.includes("rollout"))) {
+                return VisualDiagrams.getRollout8NetzplanDiagramSvg();
+            }
+            if (text.includes("erp") || text.includes("9 vorgänge") || text.includes("customizing") || text.includes("prozessanalyse") || text.includes("server-installation")) {
                 return VisualDiagrams.getErp9NetzplanDiagramSvg();
             }
             if (text.includes("client-rollout") || text.includes("images erstellen") || text.includes("clients clonen") || text.includes("5 vorgänge")) {

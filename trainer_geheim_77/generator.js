@@ -4023,7 +4023,9 @@ function generateDynamicQuestions(typeMode = "mix") {
                 type: "open-text",
                 question: qText,
                 musterloesung: mLoesung,
-                explanation: `Kritischer Pfad: A-B-D-F-H = 19 Tage. GP(C)=4, GP(E)=4, GP(G)=6. Verzögerung um 3 Tage verschiebt Projekttermin nicht.`
+                explanation: `Kritischer Pfad: A-B-D-F-H = 19 Tage. GP(C)=4, GP(E)=4, GP(G)=6. Verzögerung um 3 Tage verschiebt Projekttermin nicht.`,
+                solutionDiagramCaption: "Grafische Musterlösung: DIN 69900 Netzplan Software-Rollout (8 Vorgänge, 19 Werktage)",
+                solutionDiagramSvg: VisualDiagrams.getRollout8NetzplanDiagramSvg()
             });
         } else {
             dynamicQuestions.push({
@@ -4043,7 +4045,9 @@ function generateDynamicQuestions(typeMode = "mix") {
                     `Kritischer Pfad: A -> B -> D -> E -> H | Projektdauer: 18 Tage`
                 ],
                 correctAnswer: 0,
-                explanation: `Pfad A-B-D-F-H = 3+4+5+4+3 = 19 Tage (alle GP=0). Pfad A-C-E-F-H = 3+2+3+4+3 = 15 Tage (4 Tage Puffer).`
+                explanation: `Pfad A-B-D-F-H = 3+4+5+4+3 = 19 Tage (alle GP=0). Pfad A-C-E-F-H = 3+2+3+4+3 = 15 Tage (4 Tage Puffer).`,
+                solutionDiagramCaption: "Grafische Musterlösung: DIN 69900 Netzplan Software-Rollout (8 Vorgänge, 19 Werktage)",
+                solutionDiagramSvg: VisualDiagrams.getRollout8NetzplanDiagramSvg()
             });
         }
     }
