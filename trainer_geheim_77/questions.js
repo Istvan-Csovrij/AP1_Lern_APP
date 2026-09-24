@@ -383,6 +383,7 @@ var staticQuestions = [
     {
         id: 13,
         isBawueFocus: true,
+        isPseudocode: true,
         theme: "lf5",
         type: "text-input",
         question: "Gegeben ist folgendes Pseudocode-Segment. Welchen Wert hat die Variable 'erg' am Ende der Ausführung?",
@@ -393,6 +394,7 @@ var staticQuestions = [
     {
         id: 14,
         isBawueFocus: true,
+        isPseudocode: true,
         theme: "lf5",
         type: "text-input",
         question: "Gegeben ist folgende PIN-Prüfung als Pseudocode. Welche Ausgabe liefert das Programm bei der Eingabe '12A456'?",
@@ -4324,6 +4326,7 @@ WHERE Email IS NULL OR Email = '';
         difficulty: "hard",
         theme: "lf4",
         isBawueFocus: true,
+        isPseudocode: true,
         topic: "LF 4 - Algorithmen: Struktogramme & Pseudocode",
         type: "open-text",
         title: "Programmierung & Logik: Nassi-Shneiderman Struktogramme, Kontrollstrukturen & Pseudocode",
@@ -8279,6 +8282,7 @@ Initialer Zustand vor Schleifeneintritt:
     {
         id: 440,
         isBawueFocus: true,
+        isPseudocode: true,
         isHard: true,
         difficulty: "hard",
         theme: "lf5",
@@ -8743,5 +8747,826 @@ SELECT * FROM tbl_kunde
 WHERE name LIKE 'M___';
 (Hinweis: Der Unterstrich '_' steht für EXAKT EIN einzelnes Zeichen. 'M' gefolgt von 3 Unterstrichen = exakt 4 Zeichen).`,
         explanation: "UNION entfernt Duplikate (langsamer). UNION ALL behält alle Zeilen (schneller). LIKE '%' = beliebig viele Zeichen, LIKE '_' = exakt ein einzelnes Zeichen."
+    },
+    {
+        id: 451,
+        isBawueFocus: true,
+        isPseudocode: true,
+        theme: "pseudocode",
+        topic: "💻 Pseudocode LESEN: Trace-Tabelle / Schreibtischtest & Modulo (IHK-Klassiker)",
+        type: "open-text",
+        question: `IHK-Prüfungsaufgabe Algorithmenanalyse (LF 5 - Trace-Tabelle & Schreibtischtest):
+Gegeben ist der folgende Pseudocode zur Auswertung einer Zahlenreihe.
+Die Funktion wird mit folgendem Array aufgerufen:
+zahlenFeld = [14, 7, 22, 9, 3, 18], n = 6
+Hinweis: Die Indizierung beginnt bei 0 (zahlenFeld[0] = 14).
+
+Aufgaben:
+1. Erstellen Sie eine vollständige Trace-Tabelle (Schreibtischtest) für alle Schleifendurchläufe mit folgenden Spalten:
+   (Durchlauf, i, zahlenFeld[i], Bedingung (MOD 2 = 0), summeGerade, anzahlUngerade).
+2. Geben Sie die finalen Rückgabewerte der Funktion an.
+3. Was würde passieren, wenn die Schleifenbedingung auf 'SOLANGE i <= n MACHE' geändert wird? Begründen Sie das Laufzeitverhalten.`,
+        code: `FUNKTION berechneWerte(zahlenFeld, n)
+    summeGerade <- 0
+    anzahlUngerade <- 0
+    i <- 0
+    
+    SOLANGE i < n MACHE
+        WENN (zahlenFeld[i] MOD 2 = 0) DANN
+            summeGerade <- summeGerade + zahlenFeld[i]
+        SONST
+            anzahlUngerade <- anzahlUngerade + 1
+        ENDEWENN
+        i <- i + 1
+    ENDESOLANGE
+    
+    RÜCKGABE (summeGerade, anzahlUngerade)
+ENDEFUNKTION`,
+        musterloesung: `Musterlösung Trace-Tabelle & Schreibtischtest:
+
+1. Vollständige Trace-Tabelle:
+
+| Durchlauf | i | zahlenFeld[i] | Bedingung (MOD 2 = 0) | summeGerade | anzahlUngerade |
+|:---:|:---:|:---:|:---:|:---:|:---:|
+| Start | 0 | - | - | 0 | 0 |
+| 1 | 0 | 14 | 14 MOD 2 = 0 (WAHR) | 14 | 0 |
+| 2 | 1 | 7 | 7 MOD 2 = 1 (FALSCH) | 14 | 1 |
+| 3 | 2 | 22 | 22 MOD 2 = 0 (WAHR) | 36 | 1 |
+| 4 | 3 | 9 | 9 MOD 2 = 1 (FALSCH) | 36 | 2 |
+| 5 | 4 | 3 | 3 MOD 2 = 1 (FALSCH) | 36 | 3 |
+| 6 | 5 | 18 | 18 MOD 2 = 0 (WAHR) | 54 | 3 |
+| Abbruch | 6 | - | 6 < 6 ist FALSCH -> Schleife endet | 54 | 3 |
+
+2. Finale Rückgabewerte:
+- summeGerade = 54 (14 + 22 + 18 = 54)
+- anzahlUngerade = 3 (die Zahlen 7, 9 und 3)
+- Rückgabe: (54, 3)
+
+3. Auswirkung von 'i <= n' (Off-by-One Fehler):
+- Da n = 6 ist und das Array 6 Elemente besitzt, sind die gültigen Indizes 0 bis 5.
+- Bei 'i <= 6' würde die Schleife einen 7. Durchlauf mit i = 6 starten.
+- Der Zugriff 'zahlenFeld[6]' greift auf einen nicht existierenden Index zu.
+- Folge: Es kommt zu einem Laufzeitfehler (IndexOutOfBoundsException / Array Index Out of Range) bzw. zu unberechtigtem Speicherzugriff.`,
+        explanation: "Schreibtischtests erfordern tabellarische Verfolgung der Variablen pro Durchlauf. Modulo 2 prüft auf Geradzahligkeit. 'i <= n' führt bei 0-basierten Arrays unweigerlich zum Off-by-One-Fehler."
+    },
+    {
+        id: 452,
+        isBawueFocus: true,
+        isPseudocode: true,
+        theme: "pseudocode",
+        topic: "💻 Pseudocode LESEN: Binäre Suche (Halbierungsverfahren) & Schreibtischtest",
+        type: "open-text",
+        question: `IHK-Prüfungsaufgabe Suchalgorithmen (LF 5 - Binäre Suche):
+Gegeben ist ein aufsteigend sortiertes Array mit n = 10 Elementen:
+daten = [4, 9, 13, 17, 22, 28, 35, 41, 56, 70] (Indizes 0 bis 9).
+Die Funktion 'binaereSuche' wird mit suchwert = 41 aufgerufen.
+Hinweis: 'DIV' bezeichnet die ganzzahlige Division ohne Rest (z. B. 9 DIV 2 = 4).
+
+Aufgaben:
+1. Erstellen Sie eine Trace-Tabelle für den Suchablauf mit den Spalten:
+   (Schritt, links, rechts, mitte, daten[mitte], Vergleich / Aktion).
+2. Welcher Index wird von der Funktion zurückgegeben?
+3. Warum funktioniert die binäre Suche NUR auf vorsortierten Daten?
+4. Wie viele Vergleiche benötigt die binäre Suche im Worst-Case maximal bei einem Array mit 1.000 Elementen im Vergleich zur linearen Suche? Geben Sie die Zeitkomplexität in der O-Notation an.`,
+        code: `FUNKTION binaereSuche(daten, n, suchwert)
+    links <- 0
+    rechts <- n - 1
+    
+    SOLANGE links <= rechts MACHE
+        mitte <- (links + rechts) DIV 2
+        
+        WENN daten[mitte] = suchwert DANN
+            RÜCKGABE mitte
+        SONST WENN daten[mitte] < suchwert DANN
+            links <- mitte + 1
+        SONST
+            rechts <- mitte - 1
+        ENDEWENN
+    ENDESOLANGE
+    
+    RÜCKGABE -1
+ENDEFUNKTION`,
+        musterloesung: `Musterlösung Binäre Suche & Trace-Tabelle:
+
+1. Trace-Tabelle für suchwert = 41:
+
+| Schritt | links | rechts | mitte = (links+rechts) DIV 2 | daten[mitte] | Vergleich & Aktion |
+|:---:|:---:|:---:|:---:|:---:|:---|
+| 1 | 0 | 9 | (0 + 9) DIV 2 = 4 | 22 | 22 < 41 -> rechts weiter! links <- 4 + 1 = 5 |
+| 2 | 5 | 9 | (5 + 9) DIV 2 = 7 | 41 | 41 = 41 -> TREFFER! RÜCKGABE mitte (7) |
+
+2. Rückgabewert:
+- Der gesuchte Wert 41 befindet sich an Index 7. Rückgabewert: 7.
+- Es waren lediglich 2 Vergleiche notwendig!
+
+3. Warum zwingend vorsortiert?
+- Die binäre Suche basiert auf dem 'Teile-und-Herrsche'-Prinzip (Divide & Conquer). Ist das mittlere Element kleiner als der Suchwert, kann die gesamte linke Hälfte nur dann sicher verworfen werden, wenn alle Elemente links davon garantiert noch kleiner sind. Bei unsortierten Daten ist dieser logische Schluss unzulässig.
+
+4. Komplexitätsvergleich (1.000 Elemente):
+- Lineare Suche: O(N). Im Worst-Case müssen bis zu 1.000 Elemente verglichen werden.
+- Binäre Suche: O(log2 N) (logarithmischer Aufwand).
+  Da 2^10 = 1.024 ist, benötigt die binäre Suche bei 1.000 Elementen maximal ld(1.000) ≈ 10 Vergleiche!`,
+        explanation: "Binäre Suche halbiert in jedem Schritt den Suchraum: O(log N). Setzt strikt sortierte Daten voraus. Bei 1.000 Elementen genügen maximal 10 Vergleiche."
+    },
+    {
+        id: 453,
+        isBawueFocus: true,
+        isPseudocode: true,
+        theme: "pseudocode",
+        topic: "💻 Pseudocode LESEN: Debugging von Kontrollstrukturen & Grenzwert-Fehler",
+        type: "open-text",
+        question: `IHK-Prüfungsaufgabe Fehlersuche & Qualitätssicherung (LF 5):
+Ein Auszubildender hat oben stehenden Pseudocode zur Rabattberechnung programmiert.
+Vorgabe der Fachabteilung:
+- Bestellwert unter 100,00 EUR: 0% Rabatt
+- Bestellwert ab 100,00 EUR bis unter 500,00 EUR: 5% Rabatt
+- Bestellwert ab 500,00 EUR: 10% Rabatt
+
+Bei der Qualitätssicherung schlagen mehrere automatisierte Unit-Tests fehl.
+
+Aufgaben:
+1. Identifizieren Sie die zwei gravierenden logischen Fehler im Pseudocode.
+2. Nennen Sie für jeden Fehler einen konkreten Testwert (Bestellwert in EUR), der zu einem falschen Ergebnis führt, und begründen Sie das Fehlverhalten.
+3. Formulieren Sie die korrigierte Fallunterscheidung in sauber strukturiertem Pseudocode.`,
+        code: `FUNKTION berechneRabatt(bestellwert)
+    rabattSatz <- 0.0
+    
+    WENN bestellwert > 100 DANN
+        rabattSatz <- 0.05
+    SONST WENN bestellwert > 500 DANN
+        rabattSatz <- 0.10
+    SONST
+        rabattSatz <- 0.00
+    ENDEWENN
+    
+    rabattBetrag <- bestellwert * rabattSatz
+    RÜCKGABE rabattBetrag
+ENDEFUNKTION`,
+        musterloesung: `Musterlösung Logische Fehlersuche & Korrektur:
+
+1. Die zwei logischen Fehler:
+- Fehler 1 (Off-by-one / Grenzbedingung): Es wurde 'bestellwert > 100' verwendet statt '>= 100' (Vorgabe: 'AB 100 EUR').
+- Fehler 2 (Falsche Verzweigungs-Reihenfolge / Toter Code): Die erste Bedingung 'bestellwert > 100' ist auch für alle Werte über 500 wahr! Da die Bedingungen sequenziell von oben nach unten ausgewertet werden, springt das Programm bei einem Wert von z. B. 600 EUR in den ersten Zweig (5%) und verlässt die Verzweigung. Der Zweig '> 500' wird NIEMALS erreicht ('Dead Code').
+
+2. Konkrete Testwerte:
+- Testwert zu Fehler 1: bestellwert = 100.00 EUR.
+  * Erwartetes Ergebnis: 5,00 EUR Rabatt (5%).
+  * Tatsächliches Ergebnis: 0,00 EUR Rabatt (da 100 > 100 falsch ist).
+- Testwert zu Fehler 2: bestellwert = 600.00 EUR.
+  * Erwartetes Ergebnis: 60,00 EUR Rabatt (10%).
+  * Tatsächliches Ergebnis: 30,00 EUR Rabatt (5%), da 600 > 100 wahr ist.
+
+3. Korrigierter Pseudocode (Variante A: Von groß nach klein prüfen):
+WENN bestellwert >= 500 DANN
+    rabattSatz <- 0.10
+SONST WENN bestellwert >= 100 DANN
+    rabattSatz <- 0.05
+SONST
+    rabattSatz <- 0.00
+ENDEWENN
+
+(Variante B: Explizite Bereichsprüfung mit logischem UND):
+WENN bestellwert >= 100 UND bestellwert < 500 DANN
+    rabattSatz <- 0.05
+SONST WENN bestellwert >= 500 DANN
+    rabattSatz <- 0.10
+SONST
+    rabattSatz <- 0.00
+ENDEWENN`,
+        explanation: "Klassische IHK-Falle: Bei gestaffelten Bedingungen immer mit dem höchsten Schwellenwert beginnen oder Grenzen explizit mit 'UND' eingrenzen. Grenzwerte ('ab X') verlangen immer '>='."
+    },
+    {
+        id: 454,
+        isBawueFocus: true,
+        isPseudocode: true,
+        theme: "pseudocode",
+        topic: "💻 Pseudocode LESEN: Algorithmen-Erkennung & Euklidischer Algorithmus (ggT)",
+        type: "open-text",
+        question: `IHK-Prüfungsaufgabe Algorithmenanalyse (LF 5):
+Gegeben ist der folgende Pseudocode mit zwei ganzzahligen positiven Parametern a und b.
+
+Aufgaben:
+1. Führen Sie einen Schreibtischtest für den Aufruf 'berechneKennzahl(48, 18)' durch mit den Spalten:
+   (Durchlauf, a, b, rest = a MOD b, neues a, neues b).
+2. Welches fundamentale mathematisch-informatische Standardproblem wird durch diesen Algorithmus gelöst und wie heißt dieser berühmte Algorithmus?
+3. Welcher finale Rückgabewert wird für 'berechneKennzahl(48, 18)' geliefert?`,
+        code: `FUNKTION berechneKennzahl(a, b)
+    SOLANGE b != 0 MACHE
+        rest <- a MOD b
+        a <- b
+        b <- rest
+    ENDESOLANGE
+    RÜCKGABE a
+ENDEFUNKTION`,
+        musterloesung: `Musterlösung Algorithmen-Erkennung & Euklid:
+
+1. Schreibtischtest für berechneKennzahl(48, 18):
+
+| Durchlauf | a (vorher) | b (vorher) | rest = a MOD b | neues a (<- altes b) | neues b (<- rest) |
+|:---:|:---:|:---:|:---:|:---:|:---:|
+| Start | 48 | 18 | - | 48 | 18 |
+| 1 | 48 | 18 | 48 MOD 18 = 12 | 18 | 12 |
+| 2 | 18 | 12 | 18 MOD 12 = 6 | 12 | 6 |
+| 3 | 12 | 6 | 12 MOD 6 = 0 | 6 | 0 |
+| Abbruch | 6 | 0 | b = 0 (Bedingung b != 0 ist FALSCH) -> Schleife endet | - | - |
+
+2. Problem & Name des Algorithmus:
+- Problem: Berechnung des größten gemeinsamen Teilers (ggT) zweier natürlicher Zahlen.
+- Name: Euklidischer Algorithmus (moderne Divisions-/Modulo-Variante).
+
+3. Finaler Rückgabewert:
+- Die Funktion gibt die Variable 'a' zurück.
+- Ergebnis: 6 (da 6 der größte gemeinsame Teiler von 48 und 18 ist: 48 = 6 * 8, 18 = 6 * 3).`,
+        explanation: "Der Euklidische Algorithmus (ggT) per Modulo-Division ersetzt sukzessive (a, b) durch (b, a MOD b), bis b = 0 ist. Das verbleibende a ist der ggT."
+    },
+    {
+        id: 455,
+        isBawueFocus: true,
+        isPseudocode: true,
+        theme: "pseudocode",
+        topic: "💻 Pseudocode LESEN: Bubble-Sort Pass, Indizierung & Dreieckstausch",
+        type: "open-text",
+        question: `IHK-Prüfungsaufgabe Sortierverfahren (LF 5 - Bubble Sort):
+Gegeben ist ein unsortiertes Zahlenfeld mit n = 5 Elementen:
+feld = [35, 12, 68, 24, 15] (Indizes 0 bis 4).
+Die Funktion 'bubbleSortPass' führt den ersten vollständigen Durchlauf (Pass) von Bubble-Sort aus.
+
+Aufgaben:
+1. Warum lautet die Schleifenobergrenze 'n - 2' (also hier Index 3) und nicht 'n - 1'?
+2. Führen Sie den Schreibtischtest für alle Werte von i (0 bis 3) durch: Zeigen Sie die verglichenen Elemente, ob getauscht wird, und den Inhalt des Arrays nach jedem Tausch.
+3. Welchen Inhalt hat das Array nach Abschluss dieses ersten Durchlaufs? Welches Element befindet sich nun garantiert an seiner endgültigen Position?
+4. Welcher Wert wird für 'tauschAnzahl' zurückgegeben?`,
+        code: `FUNKTION bubbleSortPass(feld, n)
+    tauschAnzahl <- 0
+    FÜR i <- 0 BIS n - 2 SCHRITT 1 MACHE
+        WENN feld[i] > feld[i + 1] DANN
+            // Dreieckstausch
+            temp <- feld[i]
+            feld[i] <- feld[i + 1]
+            feld[i + 1] <- temp
+            tauschAnzahl <- tauschAnzahl + 1
+        ENDEWENN
+    ENDEFÜR
+    RÜCKGABE tauschAnzahl
+ENDEFUNKTION`,
+        musterloesung: `Musterlösung Bubble-Sort Pass & Dreieckstausch:
+
+1. Begründung der Schleifenobergrenze (n - 2):
+- Innerhalb der Schleife wird auf Nachbarelemente 'feld[i]' und 'feld[i + 1]' zugegriffen.
+- Bei n = 5 und einer Schleife bis 'n - 1' (Index 4) würde 'feld[4 + 1] = feld[5]' abgefragt. Da das Array nur bis Index 4 reicht, käme es zu einem IndexOutOfBounds-Fehler. Daher muss die Schleife bei n - 2 (Index 3) enden.
+
+2. Schreibtischtest für Durchlauf 1 (Start: [35, 12, 68, 24, 15]):
+- i = 0: Vergleich feld[0] (35) > feld[1] (12) -> WAHR.
+  -> Tausch 35 und 12. Array: [12, 35, 68, 24, 15], tauschAnzahl = 1.
+- i = 1: Vergleich feld[1] (35) > feld[2] (68) -> FALSCH.
+  -> Kein Tausch. Array: [12, 35, 68, 24, 15], tauschAnzahl = 1.
+- i = 2: Vergleich feld[2] (68) > feld[3] (24) -> WAHR.
+  -> Tausch 68 und 24. Array: [12, 35, 24, 68, 15], tauschAnzahl = 2.
+- i = 3: Vergleich feld[3] (68) > feld[4] (15) -> WAHR.
+  -> Tausch 68 und 15. Array: [12, 35, 24, 15, 68], tauschAnzahl = 3.
+
+3. Array nach Durchlauf 1:
+- Array-Inhalt: [12, 35, 24, 15, 68].
+- Garantiertes Element: Das größte Element des Arrays (68) 'blubbert' im 1. Durchlauf wie eine Blase ganz nach oben und steht garantiert an der letzten Position (Index 4).
+
+4. Rückgabewert:
+- tauschAnzahl = 3.`,
+        explanation: "Bubble-Sort vergleicht Nachbarelemente und tauscht via Dreieckstausch (temp). Nach Durchlauf 1 steht das größte Element garantiert am Ende. Obergrenze n-2 verhindert Indexüberlauf bei i+1."
+    },
+    {
+        id: 456,
+        isBawueFocus: true,
+        isPseudocode: true,
+        theme: "pseudocode",
+        topic: "💻 Pseudocode LESEN: Boolesche Flags & Frühzeitiger Abbruch (Schreibtischtest)",
+        type: "open-text",
+        question: `IHK-Prüfungsaufgabe Kontrollstrukturen & Flags (LF 5):
+Gegeben ist der folgende Pseudocode zur Überprüfung einer Messreihe.
+Testreihe A: werte = [2, 5, 8, 14, 21], anzahl = 5
+Testreihe B: werte = [3, 7, 7, 12, 19], anzahl = 5
+
+Aufgaben:
+1. Welche mathematische Eigenschaft der Messreihe wird durch diese Funktion überprüft?
+2. Welchen Rückgabewert (WAHR oder FALSCH) liefert die Funktion für Testreihe A?
+3. Welchen Rückgabewert liefert die Funktion für Testreihe B? Bei welchem Index i bricht die Schleife vorzeitig ab und warum?
+4. Welchen konkreten Performance-Vorteil bietet die Schleifenbedingung 'UND (istSteigend = WAHR)' gegenüber einer einfachen Zählschleife (FOR) ohne Abbruch?`,
+        code: `FUNKTION pruefeMonotonie(werte, anzahl)
+    istSteigend <- WAHR
+    i <- 0
+    
+    SOLANGE (i < anzahl - 1) UND (istSteigend = WAHR) MACHE
+        WENN werte[i] >= werte[i + 1] DANN
+            istSteigend <- FALSCH
+        ENDEWENN
+        i <- i + 1
+    ENDESOLANGE
+    
+    RÜCKGABE istSteigend
+ENDEFUNKTION`,
+        musterloesung: `Musterlösung Monotonieprüfung & Boolesche Flags:
+
+1. Überprüfte Eigenschaft:
+- Die Funktion prüft, ob die Zahlenreihe streng monoton steigend ist (jedes Element muss echt kleiner sein als sein Nachfolger: werte[i] < werte[i + 1]).
+
+2. Ergebnis Testreihe A ([2, 5, 8, 14, 21]):
+- Durchläufe:
+  * i=0: 2 >= 5 (Falsch)
+  * i=1: 5 >= 8 (Falsch)
+  * i=2: 8 >= 14 (Falsch)
+  * i=3: 14 >= 21 (Falsch)
+- Schleife endet regulär bei i = 4. 'istSteigend' bleibt WAHR.
+- Rückgabewert: WAHR.
+
+3. Ergebnis Testreihe B ([3, 7, 7, 12, 19]):
+- Durchläufe:
+  * i=0: 3 >= 7 (Falsch)
+  * i=1: 7 >= 7 (WAHR!) -> istSteigend wird auf FALSCH gesetzt; i wird auf 2 erhöht.
+- Vorzeitiger Abbruch: Vor Durchlauf 3 prüft die Schleife 'istSteigend = WAHR'. Da dies nun FALSCH ist, bricht die Schleife bei i = 2 sofort ab!
+- Rückgabewert: FALSCH.
+
+4. Performance-Vorteil ('Short-Circuit / Early-Exit'):
+- Ohne Abbruchbedingung würde eine Schleife immer alle n - 1 Vergleiche durchführen (z. B. bei 1.000.000 Elementen alle 1.000.000 Schritte).
+- Durch das boolesche Abbruchflag bricht die Schleife beim ERSTEN Verstoß sofort ab. Tritt der Verstoß am Anfang auf, benötigt die Funktion nur wenige Rechenoperationen statt Millionen unnötiger Prüfungen.`,
+        explanation: "Boolesche Flags in Verbindung mit SOLANGE ermöglichen vorzeitigen Abbruch ('Early Exit'). Sobald ein Gegenbeispiel gefunden ist, wird keine weitere Rechenzeit verschwendet."
+    },
+    {
+        id: 457,
+        isBawueFocus: true,
+        isPseudocode: true,
+        theme: "pseudocode",
+        topic: "💻 Pseudocode SCHREIBEN: Lineare Suche & Vorzeitiger Abbruch (IHK-Standard)",
+        type: "open-text",
+        question: `IHK-Prüfungsaufgabe Algorithmenentwicklung (LF 5 - Lineare Suche):
+Ein Warenwirtschaftssystem speichert Artikelnummern in einem eindimensionalen Array 'artikelListe' mit 'anzahl' Elementen (0-basierte Indizierung: 0 bis anzahl - 1).
+
+Aufgabenstellung:
+Schreiben Sie einen vollständigen Algorithmus in strukturiertem Pseudocode für folgende Funktion:
+sucheArtikel(artikelListe, anzahl, gesuchteId)
+
+Prüfungsanforderungen der IHK:
+1. Das Array wird von Index 0 bis anzahl - 1 sequenziell durchsucht.
+2. Sobald die 'gesuchteId' gefunden wird, soll der Index sofort zurückgegeben bzw. die Schleife vorzeitig beendet werden (Laufzeitoptimierung).
+3. Wird die Artikelnummer im gesamten Array nicht gefunden, soll der Rückgabewert -1 sein.
+4. Verwenden Sie einheitliche, saubere Schlüsselwörter (z. B. FUNKTION, SOLANGE / FÜR, WENN, DANN, SONST, RÜCKGABE).`,
+        musterloesung: `Musterlösung Lineare Suche in Pseudocode:
+
+Variante 1 (Klassisch mit vorzeitigem RETURN):
+FUNKTION sucheArtikel(artikelListe, anzahl, gesuchteId)
+    FÜR i <- 0 BIS anzahl - 1 SCHRITT 1 MACHE
+        WENN artikelListe[i] = gesuchteId DANN
+            RÜCKGABE i   // Sofortiger Abbruch und Rückgabe des Index bei Fund
+        ENDEWENN
+    ENDEFÜR
+    
+    RÜCKGABE -1          // Falls Schleife komplett ohne Fund durchlief
+ENDEFUNKTION
+
+
+Variante 2 (Mit SOLANGE-Schleife & boolescher Abbruchbedingung):
+FUNKTION sucheArtikel(artikelListe, anzahl, gesuchteId)
+    gefundenerIndex <- -1
+    i <- 0
+    
+    SOLANGE (i < anzahl) UND (gefundenerIndex = -1) MACHE
+        WENN artikelListe[i] = gesuchteId DANN
+            gefundenerIndex <- i
+        SONST
+            i <- i + 1
+        ENDEWENN
+    ENDESOLANGE
+    
+    RÜCKGABE gefundenerIndex
+ENDEFUNKTION
+
+Bewertungskriterien der IHK:
+- Korrekte Initialisierung (i = 0) und Schleifenbegrenzung (i < anzahl bzw. bis anzahl - 1).
+- Vorzeitiger Abbruch bei Fund (spart unnötige Schleifendurchläufe).
+- Korrekte Rückgabe von -1 als Fehlerwert bei Nicht-Auffinden.`,
+        explanation: "Lineare Suche: O(N). Bei Fund sofortiger Abbruch (Return i oder Flag), um keine ungenutzten Durchläufe zu verschwenden. Wenn nicht gefunden, Rückgabe von -1."
+    },
+    {
+        id: 458,
+        isBawueFocus: true,
+        isPseudocode: true,
+        theme: "pseudocode",
+        topic: "💻 Pseudocode SCHREIBEN: Extremwerte (Min/Max) & Mittelwert im Array",
+        type: "open-text",
+        question: `IHK-Prüfungsaufgabe Algorithmenentwurf (LF 5 - Statistische Kennzahlen):
+Ein Temperatur-Messfühler speichert stündlich erfasste Temperaturwerte eines Tages in einem Array 'temperaturen' der Länge 24 (Indizes 0 bis 23).
+
+Aufgabenstellung:
+Schreiben Sie einen vollständigen Algorithmus in Pseudocode, der folgende drei Kennzahlen berechnet und ausgibt:
+1. Die tiefste gemessene Temperatur (Minimum)
+2. Die höchste gemessene Temperatur (Maximum)
+3. Den arithmetischen Durchschnittswert aller 24 Temperaturmessungen
+
+Prüfungsvorgaben:
+- Es dürfen KEINE Bibliotheksfunktionen wie min(), max() oder avg() verwendet werden!
+- Achten Sie besonders auf die korrekte Initialisierung der Min- und Max-Variablen (typische IHK-Prüfungsfalle bei Minusgraden!).
+- Initialisieren und deklarieren Sie alle Variablen sauber.`,
+        musterloesung: `Musterlösung Min, Max und Durchschnitt in Pseudocode:
+
+ALGORITHMUS temperaturStatistik
+    // Initialisierung: Extremwerte MÜSSEN mit dem ersten Feldelement initialisiert werden!
+    // (Falle: Bei minTemp = 0 würde an einem Frosttag mit durchgehend negativen Werten
+    // fälschlicherweise 0 als Minimum übrig bleiben!)
+    minTemp <- temperaturen[0]
+    maxTemp <- temperaturen[0]
+    summe <- temperaturen[0]
+    
+    // Schleife ab Index 1 bis 23 (Index 0 wurde bereits berücksichtigt)
+    FÜR i <- 1 BIS 23 SCHRITT 1 MACHE
+        // Minimum prüfen
+        WENN temperaturen[i] < minTemp DANN
+            minTemp <- temperaturen[i]
+        ENDEWENN
+        
+        // Maximum prüfen
+        WENN temperaturen[i] > maxTemp DANN
+            maxTemp <- temperaturen[i]
+        ENDEWENN
+        
+        // Aufsummieren für den Durchschnitt
+        summe <- summe + temperaturen[i]
+    ENDEFÜR
+    
+    // Durchschnitt berechnen (Gleitkommadivision durch 24)
+    durchschnitt <- summe / 24.0
+    
+    // Ergebnisse ausgeben
+    AUSGABE "Minimaltemperatur: " + minTemp + " °C"
+    AUSGABE "Maximaltemperatur: " + maxTemp + " °C"
+    AUSGABE "Durchschnittstemperatur: " + durchschnitt + " °C"
+ENDE ALGORITHMUS
+
+Häufige IHK-Prüfungsfehler:
+1. 'minTemp = 0' oder 'maxTemp = 0': Führt bei ausschließlich negativen bzw. ausschließlich positiven Werten zu falschen Ergebnissen. Richtig ist immer 'temperaturen[0]'.
+2. Vergessen von Gleitkommateilung beim Durchschnitt (Ganzzahldivision würde Nachkommastellen abschneiden).`,
+        explanation: "Min und Max immer mit dem ersten Array-Element [0] initialisieren (nie mit 0, sonst Fehler bei Frostgraden). Schleife läuft dann ab Index 1 bis Länge - 1."
+    },
+    {
+        id: 459,
+        isBawueFocus: true,
+        isPseudocode: true,
+        theme: "pseudocode",
+        topic: "💻 Pseudocode SCHREIBEN: String-Validierung & Passwort-Sicherheitsrichtlinie",
+        type: "open-text",
+        question: `IHK-Prüfungsaufgabe Algorithmenentwicklung (LF 5 - Eingabe-Validierung):
+Für das Mitarbeiter-Portal eines IT-Unternehmens soll ein Kennwort gegen die unternehmensweite Sicherheitsrichtlinie geprüft werden.
+
+Schreiben Sie eine Funktion 'pruefePasswortSicherheit(passwort)' in strukturiertem Pseudocode.
+Die Richtlinie verlangt die Einhaltung ALLER 4 folgenden Kriterien:
+1. Mindestlänge: Mindestens 8 Zeichen.
+2. Großbuchstabe: Mindestens ein Großbuchstabe (A-Z).
+3. Ziffer: Mindestens eine Ziffer (0-9).
+4. Keine Leerzeichen: Das Kennwort darf kein Leerzeichen enthalten.
+
+Vorausgesetzte Hilfsfunktionen:
+- LAENGE(str): Gibt die Anzahl Zeichen zurück.
+- ZEICHEN_BEI(str, pos): Gibt das Zeichen an 0-basierter Position 'pos' zurück.
+- IST_GROSSBUCHSTABE(z): Liefert WAHR, wenn z ein Großbuchstabe ist, sonst FALSCH.
+- IST_ZIFFER(z): Liefert WAHR, wenn z eine Ziffer (0-9) ist, sonst FALSCH.
+
+Rückgabewert: Die Funktion liefert WAHR, wenn alle 4 Kriterien erfüllt sind, andernfalls FALSCH.`,
+        musterloesung: `Musterlösung Passwort-Validierung in Pseudocode:
+
+FUNKTION pruefePasswortSicherheit(passwort)
+    n <- LAENGE(passwort)
+    
+    // Kriterium 1: Mindestlänge prüfen
+    WENN n < 8 DANN
+        RÜCKGABE FALSCH
+    ENDEWENN
+    
+    // Flags für die weiteren Kriterien initialisieren
+    hatGross <- FALSCH
+    hatZiffer <- FALSCH
+    hatLeerzeichen <- FALSCH
+    
+    // Zeichen für Zeichen durchlaufen (0 bis n - 1)
+    FÜR i <- 0 BIS n - 1 SCHRITT 1 MACHE
+        z <- ZEICHEN_BEI(passwort, i)
+        
+        WENN IST_GROSSBUCHSTABE(z) = WAHR DANN
+            hatGross <- WAHR
+        ENDEWENN
+        
+        WENN IST_ZIFFER(z) = WAHR DANN
+            hatZiffer <- WAHR
+        ENDEWENN
+        
+        WENN z = " " DANN
+            hatLeerzeichen <- WAHR
+        ENDEWENN
+    ENDEFÜR
+    
+    // Gesamtauswertung aller Kriterien
+    WENN (hatGross = WAHR) UND (hatZiffer = WAHR) UND (hatLeerzeichen = FALSCH) DANN
+        RÜCKGABE WAHR
+    SONST
+        RÜCKGABE FALSCH
+    ENDEWENN
+ENDEFUNKTION
+
+Punkte-Kriterien der IHK:
+- Frühzeitige Längenprüfung spart unnötige Schleifendurchläufe.
+- Saubere Deklaration und Verwendung von Booleschen Flags.
+- Vollständige Prüfung jedes Zeichens ohne Abbruch bei Einzelfund (da Leerzeichen überall auftreten könnten).`,
+        explanation: "Validierungsalgorithmen nutzen boolesche Flags (hatGross, hatZiffer). Strings werden zeichenweise von 0 bis Länge-1 geprüft. Leerzeichen schließt Gültigkeit aus."
+    },
+    {
+        id: 460,
+        isBawueFocus: true,
+        isPseudocode: true,
+        theme: "pseudocode",
+        topic: "💻 Pseudocode SCHREIBEN: Gestaffelte Geschäftslogik & Rabattstaffeln",
+        type: "open-text",
+        question: `IHK-Prüfungsaufgabe Geschäftslogik & Verzweigungen (LF 5 / LF 6):
+Ein Online-Hardwarehändler berechnet für Bestellungen den Endpreis anhand folgender Rabatt- und Versandkostenregeln:
+
+1. Kundenrabatt (auf den reinen Warenwert):
+   - Warenwert unter 200,00 EUR: 0% Rabatt
+   - Warenwert von 200,00 bis unter 1.000,00 EUR: 5% Rabatt
+   - Warenwert ab 1.000,00 EUR: 10% Rabatt
+
+2. Versandkosten:
+   - Wenn 'istPremiumKunde' = WAHR: Immer 0,00 EUR Versandkosten.
+   - Wenn 'istPremiumKunde' = FALSCH:
+     * Ab 500,00 EUR rabattiertem Warenwert: Versandkostenfrei (0,00 EUR).
+     * Unter 500,00 EUR rabattiertem Warenwert: 5,90 EUR bei Paketgewicht <= 10 kg, sonst 12,90 EUR.
+
+Aufgabe:
+Formulieren Sie die Funktion 'berechneEndpreis(warenwert, istPremiumKunde, gewichtKg)' in sauber strukturiertem Pseudocode. Die Funktion soll den endgültigen Zahlbetrag (rabattierter Warenwert + Versandkosten) berechnen und zurückgeben.`,
+        musterloesung: `Musterlösung Geschäftslogik in Pseudocode:
+
+FUNKTION berechneEndpreis(warenwert, istPremiumKunde, gewichtKg)
+    // 1. Schritt: Rabattsatz bestimmen (von hoch nach niedrig prüfen!)
+    WENN warenwert >= 1000.00 DANN
+        rabattSatz <- 0.10
+    SONST WENN warenwert >= 200.00 DANN
+        rabattSatz <- 0.05
+    SONST
+        rabattSatz <- 0.00
+    ENDEWENN
+    
+    // Rabattierten Warenwert berechnen
+    rabattierterWert <- warenwert * (1.0 - rabattSatz)
+    
+    // 2. Schritt: Versandkosten ermitteln
+    versandkosten <- 0.00
+    
+    WENN istPremiumKunde = WAHR DANN
+        versandkosten <- 0.00
+    SONST
+        WENN rabattierterWert >= 500.00 DANN
+            versandkosten <- 0.00
+        SONST
+            WENN gewichtKg <= 10.0 DANN
+                versandkosten <- 5.90
+            SONST
+                versandkosten <- 12.90
+            ENDEWENN
+        ENDEWENN
+    ENDEWENN
+    
+    // 3. Schritt: Endbetrag berechnen und zurückgeben
+    endpreis <- rabattierterWert + versandkosten
+    RÜCKGABE endpreis
+ENDEFUNKTION
+
+IHK-Bewertungsschwerpunkte:
+- Korrekte Verschachtelung der IF-THEN-ELSE Verzweigungen.
+- Richtige Berechnungsgrundlage für die Versandkostenfreiheit (auf den *rabattierten* Wert).
+- Einhaltung aller Grenzwerte (>= statt >).`,
+        explanation: "Geschäftslogik erfordert sequenzielle Schritte: 1. Rabattsatz bestimmen, 2. Warenwert reduzieren, 3. Versandkosten anhand von Status, Wert und Gewicht ermitteln, 4. Endpreis summieren."
+    },
+    {
+        id: 461,
+        isBawueFocus: true,
+        isPseudocode: true,
+        theme: "pseudocode",
+        topic: "💻 Pseudocode SCHREIBEN: Datenbereinigung & Array-Filterung in Zielarray",
+        type: "open-text",
+        question: `IHK-Prüfungsaufgabe Datenverarbeitung & Arrays (LF 5):
+Eine Industrieanlage speichert Sensor-Messwerte in einem Array 'rohdaten' mit 'n' Gleitkommawerten (Index 0 bis n - 1).
+Aufgrund von Sensorstörungen treten immer wieder Ausreißer auf.
+
+Aufgabenstellung:
+Schreiben Sie die Funktion 'filtereGueltigeWerte(rohdaten, n, minGrenze, maxGrenze)' in Pseudocode.
+
+Anforderungen der Prüfer:
+1. Es soll ein neues Array 'bereinigteDaten' angelegt werden.
+2. Alle Werte aus 'rohdaten', die im geschlossenen Intervall [minGrenze, maxGrenze] liegen (also minGrenze <= wert <= maxGrenze), sollen in 'bereinigteDaten' übernommen werden.
+3. Führen Sie einen eigenen Index-Zähler für das Ziel-Array, damit die übernommenen Elemente lückenlos ab Index 0 abgespeichert werden.
+4. Geben Sie das gefilterte Array sowie die Anzahl der gültigen Werte zurück.`,
+        musterloesung: `Musterlösung Array-Filterung in Pseudocode:
+
+FUNKTION filtereGueltigeWerte(rohdaten, n, minGrenze, maxGrenze)
+    // Zielarray deklarieren
+    ARRAY bereinigteDaten
+    zielIndex <- 0  // Eigener Zähler für das Zielarray
+    
+    // Quellarray von 0 bis n - 1 durchlaufen
+    FÜR i <- 0 BIS n - 1 SCHRITT 1 MACHE
+        aktuellerWert <- rohdaten[i]
+        
+        // Prüfen, ob der Wert im Intervall liegt
+        WENN (aktuellerWert >= minGrenze) UND (aktuellerWert <= maxGrenze) DANN
+            bereinigteDaten[zielIndex] <- aktuellerWert
+            zielIndex <- zielIndex + 1  // Zielindex inkrementieren für das nächste Element
+        ENDEWENN
+    ENDEFÜR
+    
+    anzahlGueltig <- zielIndex
+    RÜCKGABE (bereinigteDaten, anzahlGueltig)
+ENDEFUNKTION
+
+Typischer IHK-Schülerfehler:
+- Verwendung desselben Index 'i' für Quell- und Zielarray ('bereinigteDaten[i] = rohdaten[i]'). Das führt zu Lücken (Null-Werten) im Zielarray! Ein separater 'zielIndex', der nur bei Treffern hochgezählt wird, ist zwingend erforderlich.`,
+        explanation: "Beim Filtern von Arrays in ein neues Array muss zwingend ein separater Zielindex hochgezählt werden, damit keine Null-Lücken entstehen."
+    },
+    {
+        id: 462,
+        isBawueFocus: true,
+        isPseudocode: true,
+        theme: "pseudocode",
+        topic: "💻 Pseudocode SCHREIBEN: In-Place Umkehrung & Zwei-Zeiger-Prinzip (Dreieckstausch)",
+        type: "open-text",
+        question: `IHK-Prüfungsaufgabe Algorithmen (LF 5 - In-Place Transformation):
+Ein Array 'daten' mit 'n' Elementen soll umgekehrt werden (z. B. wird aus [10, 20, 30, 40, 50] das Array [50, 40, 30, 20, 10]).
+
+Vorgabe der Prüfungskommission:
+Aus Speicherplatzgründen darf KEIN zweites Hilfsarray angelegt werden. Die Umkehrung muss direkt im bestehenden Array durch paarweises Vertauschen erfolgen ("In-Place").
+
+Aufgaben:
+1. Erläutern Sie das Prinzip des Dreieckstauschs zweier Variablen mit Hilfe einer temporären Hilfsvariable 'temp'.
+2. Formulieren Sie den vollständigen Algorithmus zur In-Place-Umkehrung in Pseudocode (z. B. mit zwei Zeigern 'links' und 'rechts' oder einer Schleife bis n DIV 2).
+3. Warum führt eine Schleife, die von 0 bis n - 1 läuft, zu einem logischen Fehler?`,
+        musterloesung: `Musterlösung In-Place Array-Umkehrung:
+
+1. Dreieckstausch (Variablentausch):
+temp <- a   // 1. Wert von a in Zwischenspeicher sichern
+a <- b      // 2. Wert von b in a schreiben (alter Wert von a wäre sonst verloren!)
+b <- temp   // 3. Gesicherten Originalwert von a in b schreiben
+
+2. Algorithmus (Variante mit Zwei-Zeiger-Prinzip / Two Pointers):
+FUNKTION umkehrenInPlace(daten, n)
+    links <- 0
+    rechts <- n - 1
+    
+    SOLANGE links < rechts MACHE
+        // Dreieckstausch der äußeren Elemente
+        temp <- daten[links]
+        daten[links] <- daten[rechts]
+        daten[rechts] <- temp
+        
+        // Zeiger aufeinander zubewegen
+        links <- links + 1
+        rechts <- rechts - 1
+    ENDESOLANGE
+    
+    RÜCKGABE daten
+ENDEFUNKTION
+
+(Alternative Variante mit Zählschleife):
+FUNKTION umkehrenInPlace(daten, n)
+    grenze <- (n DIV 2) - 1
+    FÜR i <- 0 BIS grenze SCHRITT 1 MACHE
+        partnerIndex <- n - 1 - i
+        temp <- daten[i]
+        daten[i] <- daten[partnerIndex]
+        daten[partnerIndex] <- temp
+    ENDEFÜR
+    RÜCKGABE daten
+ENDEFUNKTION
+
+3. Begründung zum Schleifenfehler (0 bis n - 1):
+- Läuft die Schleife bis n - 1, werden in der ersten Hälfte (0 bis n/2) alle Elemente getauscht. In der zweiten Hälfte (n/2 bis n-1) tauscht der Algorithmus dieselben Elemente jedoch ein ZWEITES MAL wieder zurück!
+- Ergebnis: Das Array befände sich am Ende wieder exakt im unberührten Originalzustand. Daher darf immer nur bis zur Mitte (n DIV 2) getauscht werden.`,
+        explanation: "In-Place Vertauschen erfordert Dreieckstausch über Hilfsvariable 'temp'. Die Schleife darf nur bis zur Mitte (n DIV 2) laufen, da sonst doppelt getauscht wird."
+    },
+    {
+        id: 463,
+        isBawueFocus: true,
+        isPseudocode: true,
+        theme: "pseudocode",
+        topic: "💻 Pseudocode SCHREIBEN: Transformation Struktogramm (DIN 66261) zu Pseudocode",
+        type: "open-text",
+        question: `IHK-Prüfungsaufgabe Entwurfsmuster & Transformation (LF 5 - DIN 66261):
+In der IHK-Abschlussprüfung wird regelmäßig verlangt, einen in einem Nassi-Shneiderman-Struktogramm modellierten Ablauf in Pseudocode zu überführen.
+
+Gegeben ist folgende Struktogramm-Spezifikation für einen Geldautomaten:
+1. EINGABE: abhebeBetrag, kontostand, dispolimit
+2. PRÜFUNG 1 (Ungültiger Betrag):
+   WENN (abhebeBetrag <= 0) ODER (abhebeBetrag MOD 10 != 0)
+   - DANN: AUSGABE "Ungültiger Betrag! Nur positive Vielfache von 10 EUR möglich."
+   - SONST: Führe PRÜFUNG 2 aus:
+3. PRÜFUNG 2 (Verfügungsrahmen):
+   WENN (kontostand + dispolimit >= abhebeBetrag)
+   - DANN:
+     kontostand <- kontostand - abhebeBetrag
+     AUSGABE "Auszahlung erfolgt: " + abhebeBetrag + " EUR"
+     AUSGABE "Neuer Kontostand: " + kontostand + " EUR"
+   - SONST:
+     AUSGABE "Auszahlung abgelehnt: Verfügungsrahmen überschritten!"
+
+Aufgabe:
+Übertragen Sie diesen Ablauf 1:1 in sauber strukturierten, eingerückten Pseudocode unter Verwendung exakter Schlüsselwörter (EINGABE, WENN, DANN, SONST, ENDEWENN, AUSGABE).`,
+        musterloesung: `Musterlösung Struktogramm zu Pseudocode Transformation:
+
+EINGABE abhebeBetrag
+EINGABE kontostand
+EINGABE dispolimit
+
+WENN (abhebeBetrag <= 0) ODER (abhebeBetrag MOD 10 != 0) DANN
+    AUSGABE "Ungültiger Betrag! Nur positive Vielfache von 10 EUR möglich."
+SONST
+    // Untergeordnete Verzweigung (Prüfung des Verfügungsrahmens)
+    WENN (kontostand + dispolimit >= abhebeBetrag) DANN
+        kontostand <- kontostand - abhebeBetrag
+        AUSGABE "Auszahlung erfolgt: " + abhebeBetrag + " EUR"
+        AUSGABE "Neuer Kontostand: " + kontostand + " EUR"
+    SONST
+        AUSGABE "Auszahlung abgelehnt: Verfügungsrahmen überschritten!"
+    ENDEWENN
+ENDEWENN
+
+Wichtige IHK-Formalien:
+- Jedes 'WENN' muss ein korrespondierendes 'ENDEWENN' besitzen.
+- Verschachtelungen müssen durch Einrückung (Indentation) optisch klar getrennt sein.
+- Operatoren wie 'MOD' und Vergleichsoperatoren ('>=', '!=') müssen eindeutig sein.`,
+        explanation: "DIN 66261 Struktogramme entsprechen 1:1 Kontrollstrukturen in Pseudocode. Jede Verzweigung schließt mit ENDEWENN ab; Einrückung sorgt für Lesbarkeit."
+    },
+    {
+        id: 464,
+        isBawueFocus: true,
+        isPseudocode: true,
+        theme: "pseudocode",
+        topic: "💻 Pseudocode LESEN & SCHREIBEN: Prüfziffernberechnung (Modulo-10 / EAN-13 Standard)",
+        type: "open-text",
+        question: `IHK-Prüfungsaufgabe Algorithmen (LF 4 / LF 5 - Prüfziffernverfahren):
+Im Handel werden Barcodes nach dem EAN-13 Standard verwendet. Die 13. Ziffer ist eine Prüfziffer zur Erkennung von Fehleingaben und Scan-Fehlern.
+
+Berechnungsverfahren für die ersten 12 Ziffern (Indizes 0 bis 11):
+1. Ziffern an geraden Indizes (0, 2, 4, 6, 8, 10) werden mit 1 multipliziert.
+2. Ziffern an ungeraden Indizes (1, 3, 5, 7, 9, 11) werden mit 3 multipliziert.
+3. Alle Produkte werden zu einer Gesamtsumme aufaddiert.
+4. Die Prüfziffer ist die Differenz der Summe zum nächsten Vielfachen von 10:
+   Formel: (10 - (gesamtsumme MOD 10)) MOD 10.
+
+Aufgaben:
+1. Schreiben Sie die Funktion 'berechneEanPruefziffer(ziffern)' in Pseudocode, wobei 'ziffern' ein Array mit genau 12 Ziffern ist.
+2. Berechnen Sie für die Ziffernfolge [4, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0] Schritt für Schritt die Gesamtsumme und die resultierende 13. Prüfziffer.`,
+        musterloesung: `Musterlösung EAN-13 Prüfziffernalgorithmus:
+
+1. Pseudocode für die Berechnung:
+FUNKTION berechneEanPruefziffer(ziffern)
+    summe <- 0
+    
+    FÜR i <- 0 BIS 11 SCHRITT 1 MACHE
+        WENN (i MOD 2 = 0) DANN
+            summe <- summe + (ziffern[i] * 1)
+        SONST
+            summe <- summe + (ziffern[i] * 3)
+        ENDEWENN
+    ENDEFÜR
+    
+    // Prüfziffer nach Modulo-10 Verfahren ermitteln
+    rest <- summe MOD 10
+    WENN rest = 0 DANN
+        pruefziffer <- 0
+    SONST
+        pruefziffer <- 10 - rest
+    ENDEWENN
+    
+    RÜCKGABE pruefziffer
+ENDEFUNKTION
+
+2. Schritt-für-Schritt-Handrechnung für [4, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0]:
+- Gerade Indizes (Gewichtung 1):
+  * i=0: 4 * 1 = 4
+  * i=2: 1 * 1 = 1
+  * i=4: 3 * 1 = 3
+  * i=6: 5 * 1 = 5
+  * i=8: 7 * 1 = 7
+  * i=10: 9 * 1 = 9
+  * Zwischensumme gerade = 4 + 1 + 3 + 5 + 7 + 9 = 29
+
+- Ungerade Indizes (Gewichtung 3):
+  * i=1: 0 * 3 = 0
+  * i=3: 2 * 3 = 6
+  * i=5: 4 * 3 = 12
+  * i=7: 6 * 3 = 18
+  * i=9: 8 * 3 = 24
+  * i=11: 0 * 3 = 0
+  * Zwischensumme ungerade = 0 + 6 + 12 + 18 + 24 + 0 = 60
+
+- Gesamtsumme = 29 + 60 = 89
+- Differenz zum nächsten Zehner:
+  * 89 MOD 10 = 9
+  * 10 - 9 = 1
+- Resultierende Prüfziffer: 1
+- Vollständiger EAN-13 Barcode: 4012345678901.`,
+        explanation: "EAN-13 gewichtet ungerade Indizes mit 3 und gerade mit 1. Prüfziffer ist die Ergänzung zum nächsten Vielfachen von 10: (10 - summe % 10) % 10."
     }
 ];

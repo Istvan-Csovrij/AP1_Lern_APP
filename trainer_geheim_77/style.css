@@ -285,6 +285,26 @@ header {
     color: white !important;
 }
 
+.highlight-pseudocode-btn {
+    border: 2px solid #10b981 !important;
+    background: linear-gradient(135deg, #ecfdf5, #d1fae5) !important;
+    color: #065f46 !important;
+}
+
+.highlight-pseudocode-btn:hover {
+    background: linear-gradient(135deg, #d1fae5, #a7f3d0) !important;
+}
+
+.highlight-pseudocode-btn.active {
+    background: linear-gradient(135deg, #10b981, #059669) !important;
+    color: white !important;
+    border-color: #059669 !important;
+}
+
+.highlight-pseudocode-btn.active i {
+    color: white !important;
+}
+
 /* Stats */
 .stats-grid {
     display: grid;

@@ -394,6 +394,28 @@ function filterQuestions(theme) {
                     q.question.toLowerCase().includes("leitungsverlust")
                 ))
             );
+        } else if (theme === "pseudocode" || theme === "code" || theme === "algorithmen") {
+            filteredQuestions = questions.filter(q => 
+                q.theme === "pseudocode" || 
+                q.isPseudocode === true || 
+                (q.topic && (
+                    q.topic.toLowerCase().includes("pseudocode") || 
+                    q.topic.toLowerCase().includes("schreibtischtest") || 
+                    q.topic.toLowerCase().includes("trace-tabelle") || 
+                    q.topic.toLowerCase().includes("trace tabelle") || 
+                    q.topic.toLowerCase().includes("suchverfahren") || 
+                    q.topic.toLowerCase().includes("binaere suche") || 
+                    q.topic.toLowerCase().includes("binäre suche") || 
+                    q.topic.toLowerCase().includes("bubble sort") || 
+                    q.topic.toLowerCase().includes("sortier")
+                )) ||
+                (q.question && (
+                    q.question.toLowerCase().includes("pseudocode") || 
+                    q.question.toLowerCase().includes("schreibtischtest") || 
+                    q.question.toLowerCase().includes("trace-tabelle") || 
+                    q.question.toLowerCase().includes("trace tabelle")
+                ))
+            );
         } else if (theme === "hard-mode" || theme === "hard") {
             filteredQuestions = questions.filter(q => 
                 q.isHard === true || 
@@ -664,10 +686,12 @@ function loadQuestion() {
         codeBlockContainer.style.display = "none";
     }
 
-    // Handle Diagram sketch helper banner
+    // Handle Diagram sketch helper banner or Pseudocode helper banner
     const diagBanner = document.getElementById("diagram-banner-container");
     if (diagBanner) {
         const isDiag = q.isDiagram === true || q.diagramType || q.theme === "diagrams" || (q.topic && (q.topic.toLowerCase().includes("diagramm") || q.topic.toLowerCase().includes("uml") || q.topic.toLowerCase().includes("erd") || q.topic.toLowerCase().includes("epk") || q.topic.toLowerCase().includes("bpmn") || q.topic.toLowerCase().includes("netzplan") || q.topic.toLowerCase().includes("struktogramm")));
+        const isPseudocode = q.isPseudocode === true || q.theme === "pseudocode" || (q.topic && (q.topic.toLowerCase().includes("pseudocode") || q.topic.toLowerCase().includes("schreibtischtest") || q.topic.toLowerCase().includes("trace-tabelle")));
+        
         if (isDiag) {
             const diagName = q.diagramType || (q.topic ? q.topic : "Diagramm / Modell");
             diagBanner.style.display = "block";
@@ -683,6 +707,25 @@ function loadQuestion() {
                         </a>
                         <button id="inline-quiz-wb-btn" class="btn" style="background: linear-gradient(135deg, #0891b2, #0284c7); color: white; padding: 0.35rem 0.75rem; font-size: 0.85rem; border-radius: 6px; border: none; cursor: pointer; font-weight: 600; display: inline-flex; align-items: center; gap: 0.35rem;">
                             <i class="fa-solid fa-palette"></i> Als Fenster
+                        </button>
+                    </div>
+                </div>
+            `;
+            const inlineBtn = document.getElementById("inline-quiz-wb-btn");
+            if (inlineBtn) {
+                inlineBtn.onclick = openWhiteboard;
+            }
+        } else if (isPseudocode) {
+            diagBanner.style.display = "block";
+            diagBanner.innerHTML = `
+                <div style="background: linear-gradient(135deg, #ecfdf5, #f0fdf4); border: 1px solid #10b981; border-radius: 8px; padding: 0.65rem 0.9rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem;">
+                    <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.88rem; color: #065f46;">
+                        <i class="fa-solid fa-code" style="color: #059669; font-size: 1.15rem;"></i>
+                        <span><strong>IHK Pseudocode-Training:</strong> Nutze Trace-Tabellen für Variablenwerte &amp; saubere IHK-Kontrollstrukturen (SOLANGE, FÜR, WENN-DANN)!</span>
+                    </div>
+                    <div style="display: flex; gap: 0.4rem; align-items: center;">
+                        <button id="inline-quiz-wb-btn" class="btn" style="background: linear-gradient(135deg, #10b981, #059669); color: white; padding: 0.35rem 0.75rem; font-size: 0.85rem; border-radius: 6px; border: none; cursor: pointer; font-weight: 600; display: inline-flex; align-items: center; gap: 0.35rem;">
+                            <i class="fa-solid fa-pen-ruler"></i> Zeichenboard / Notizen
                         </button>
                     </div>
                 </div>

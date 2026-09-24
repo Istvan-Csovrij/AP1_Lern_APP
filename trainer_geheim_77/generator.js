@@ -460,9 +460,11 @@ function generateDynamicQuestions(typeMode = "mix") {
         if (isOpen) {
             dynamicQuestions.push({
                 id: currentId++,
-                theme: "lf5",
+                theme: "pseudocode",
+                isPseudocode: true,
+                topic: "💻 Pseudocode LESEN: Schleifen-Tracing (LF 5)",
                 type: "open-text",
-                question: `Prüfungsaufgabe Algorithmen (LF 5): Bestimme den Endwert der Variable 'erg' am Ende dieses Pseudocode-Ablaufs und notiere deine Berechnungsschritte.`,
+                question: `Prüfungsaufgabe Algorithmen (LF 5 - Pseudocode Tracing): Bestimme den Endwert der Variable 'erg' am Ende dieses Pseudocode-Ablaufs und notiere deine Berechnungsschritte.`,
                 code: pCode,
                 musterloesung: `Ergebnis: ${erg}.\nBerechnungsschritte:\n${explanationStr}`,
                 explanation: explanationStr
@@ -470,9 +472,11 @@ function generateDynamicQuestions(typeMode = "mix") {
         } else {
             dynamicQuestions.push({
                 id: currentId++,
-                theme: "lf5",
+                theme: "pseudocode",
+                isPseudocode: true,
+                topic: "💻 Pseudocode LESEN: Schleifen-Tracing (LF 5)",
                 type: "text-input",
-                question: `Prüfungsaufgabe Algorithmen (LF 5): Welchen Wert hat die Variable 'erg' am Ende dieses Pseudocode-Ablaufs?`,
+                question: `Prüfungsaufgabe Algorithmen (LF 5 - Pseudocode Tracing): Welchen Wert hat die Variable 'erg' am Ende dieses Pseudocode-Ablaufs?`,
                 code: pCode,
                 correctAnswers: [erg.toString()],
                 explanation: explanationStr
@@ -4204,6 +4208,7 @@ ORDER BY gesamtumsatz_euro DESC;`;
             dynamicQuestions.push({
                 id: currentId++,
                 theme: "lf5",
+                isPseudocode: true,
                 topic: "🔥 Meisterklasse: Algorithmen, Trace-Tabelle & Komplexität O(n) (LF 5)",
                 isHard: true,
                 difficulty: "hard",
@@ -4218,6 +4223,7 @@ ORDER BY gesamtumsatz_euro DESC;`;
             dynamicQuestions.push({
                 id: currentId++,
                 theme: "lf5",
+                isPseudocode: true,
                 topic: "🔥 Meisterklasse: Algorithmen, Trace-Tabelle & Komplexität O(n) (LF 5)",
                 isHard: true,
                 difficulty: "hard",
