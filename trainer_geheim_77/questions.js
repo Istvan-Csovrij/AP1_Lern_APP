@@ -8364,5 +8364,384 @@ Bewertungskriterien (15 Punkte):
 - Korrekte Verminderung von anzUrlaubstage im True-Zweig (2 P)
 - Ausgabe nach Schleifenende (2 P)`,
         explanation: "Kopfgesteuerte Schleife (while anzUrlaubstage > 0), Benutzereingabe mit int(input(...)), Verzweigung if (anzUrlaubstage - tage >= 0) mit Subtraktion nur bei Genehmigung."
+    },
+    {
+        id: 441,
+        isBawueFocus: true,
+        isHard: true,
+        difficulty: "hard",
+        theme: "lf5",
+        isCalculation: false,
+        topic: "🗄️ SQL DDL: Tabelle nachträglich modifizieren (ALTER TABLE: Spalte & Fremdschlüssel)",
+        type: "open-text",
+        question: `IHK-Prüfungsaufgabe Datenbanktechnik (LF 5 - DDL Schema-Änderung):
+Gegeben sind die bestehenden Tabellen:
+Kunde (kunden_id [PK], vorname, nachname, stadt)
+Berater (berater_id [PK], berater_name, telefon)
+
+Aufgabenstellung:
+Das Datenbankschema soll im laufenden Betrieb angepasst werden. Formulieren Sie die vollständigen SQL-Befehle für folgende Anforderungen:
+1. Fügen Sie der Tabelle 'Kunde' eine neue Spalte 'email' hinzu (maximal 100 Zeichen, darf nicht leer sein [NOT NULL] und muss systemweit eindeutig sein [UNIQUE]).
+2. Fügen Sie der Tabelle 'Kunde' eine Spalte 'berater_id' (Datentyp INT) hinzu und deklarieren Sie diese nachträglich als Fremdschlüssel (FK), der auf 'Berater(berater_id)' verweist.`,
+        musterloesung: `Musterlösung ALTER TABLE:
+
+1. Neue Spalte 'email' hinzufügen:
+ALTER TABLE Kunde
+ADD COLUMN email VARCHAR(100) NOT NULL UNIQUE;
+
+(Hinweis: Das Schlüsselwort 'COLUMN' ist in Standard-SQL optional, z. B. 'ALTER TABLE Kunde ADD email VARCHAR(100) NOT NULL UNIQUE;' ist ebenfalls vollkommen korrekt.)
+
+2. Spalte 'berater_id' anlegen und als Fremdschlüssel verknüpfen:
+-- Schritt a: Spalte anlegen
+ALTER TABLE Kunde
+ADD COLUMN berater_id INT;
+
+-- Schritt b: Fremdschlüssel-Constraint definieren
+ALTER TABLE Kunde
+ADD CONSTRAINT fk_kunde_berater
+FOREIGN KEY (berater_id) REFERENCES Berater(berater_id);
+
+Typische IHK-Prüfungsfallen:
+- Falscher Befehl: Tabellenstrukturen werden immer mit 'ALTER TABLE' verändert, nicht mit 'UPDATE' (UPDATE ändert nur Datenzeilen!).
+- Fehlende Constraints: 'NOT NULL' und 'UNIQUE' müssen direkt bei der Spaltendefinition oder als Constraint angegeben werden.
+- Fremdschlüssel-Syntax: 'FOREIGN KEY (lokale_spalte) REFERENCES Zieltabelle(ziel_spalte)'.`,
+        explanation: "ALTER TABLE [Tabelle] ADD COLUMN [Spalte] [Datentyp] [Constraints]; Fremdschlüssel nachträglich mit ADD CONSTRAINT [Name] FOREIGN KEY (...) REFERENCES ... anlegen."
+    },
+    {
+        id: 442,
+        isBawueFocus: true,
+        isHard: true,
+        difficulty: "hard",
+        theme: "lf5",
+        isCalculation: false,
+        topic: "🗄️ SQL DML: Daten gezielt manipulieren & berechnen (UPDATE ... SET ... WHERE)",
+        type: "open-text",
+        question: `IHK-Prüfungsaufgabe Datenbanktechnik (LF 5 - DML UPDATE):
+Gegeben ist die Tabelle 'Artikel':
+Artikel (artikel_nr [PK], bezeichnung, kategorie, einkaufspreis, verkaufspreis, bestand, status)
+
+Aufgabenstellung:
+Aufgrund gestiegener Beschaffungskosten müssen die Verkaufspreise angepasst werden.
+Schreiben Sie ein syntaktisch einwandfreies SQL-Statement, das:
+1. Den Verkaufspreis aller Artikel der Kategorie 'Notebook' um 8,5 % erhöht (Verkaufspreis = alter Verkaufspreis * 1,085).
+2. Das Feld 'status' bei diesen Artikeln auf 'kalkuliert' setzt.
+3. Die Änderung NUR für Artikel durchführt, deren aktueller Lagerbestand größer als 0 ist.`,
+        musterloesung: `Musterlösung UPDATE-Statement:
+
+SQL-Befehl:
+UPDATE Artikel
+SET verkaufspreis = verkaufspreis * 1.085,
+    status = 'kalkuliert'
+WHERE kategorie = 'Notebook'
+  AND bestand > 0;
+
+(Optional mit Rundung: 'SET verkaufspreis = ROUND(verkaufspreis * 1.085, 2), ...')
+
+Wichtige Prüfungshinweise (100% Punktzahl):
+1. 'UPDATE [Tabelle]' leitet die Änderung ein (nicht 'CHANGE' oder 'MODIFY').
+2. Mehrere Zuweisungen im 'SET' werden durch Kommas getrennt, NICHT mit 'AND'! (Falsch: SET preis = ... AND status = ...).
+3. Bedingungen in der WHERE-Klausel werden mit 'AND' verknüpft (kategorie = 'Notebook' AND bestand > 0).
+4. Textwerte wie 'Notebook' und 'kalkuliert' müssen in einfachen Anführungszeichen stehen.
+5. Dezimaltrennzeichen in SQL ist immer der Punkt: 1.085 (kein Komma!).`,
+        explanation: "UPDATE [Tabelle] SET spalte1 = wert1, spalte2 = wert2 WHERE [Bedingungen]; Zuweisungen durch Komma trennen, niemals 'AND' im SET verwenden!"
+    },
+    {
+        id: 443,
+        isBawueFocus: true,
+        isHard: true,
+        difficulty: "hard",
+        theme: "lf5",
+        isCalculation: false,
+        topic: "🗄️ SQL DML: Datensätze einfügen mit Spaltenliste (INSERT INTO ... VALUES)",
+        type: "open-text",
+        question: `IHK-Prüfungsaufgabe Datenbanktechnik (LF 5 - DML INSERT):
+Gegeben ist das Datenbankschema:
+tbl_mitarbeiter (
+    mitarbeiter_id INT PRIMARY KEY,
+    vorname VARCHAR(30) NOT NULL,
+    nachname VARCHAR(40) NOT NULL,
+    eintrittsdatum DATE NOT NULL,
+    gehalt_brutto DECIMAL(8,2),
+    abteilungs_id INT
+)
+
+Aufgabenstellung:
+Ein neuer Mitarbeiter wird eingestellt:
+- ID: 1042
+- Name: Max Mustermann
+- Eintrittsdatum: 01.10.2025
+- Bruttogehalt: 3.850,00 EUR
+- Abteilung: 4
+
+Formulieren Sie den vollständigen SQL-Befehl zum Einfügen dieses Mitarbeiters unter expliziter Nennung aller Spaltennamen.`,
+        musterloesung: `Musterlösung INSERT INTO:
+
+SQL-Befehl:
+INSERT INTO tbl_mitarbeiter (mitarbeiter_id, vorname, nachname, eintrittsdatum, gehalt_brutto, abteilungs_id)
+VALUES (1042, 'Max', 'Mustermann', '2025-10-01', 3850.00, 4);
+
+Typische IHK-Prüfungsfallen:
+1. Datumsformat nach ISO-8601: In SQL immer 'JJJJ-MM-TT' in einfachen Quotes: '2025-10-01' (nicht deutsches Format 01.10.2025!).
+2. Zahlenwerte: Zahlen wie 1042, 3850.00 und 4 stehen OHNE Anführungszeichen. Dezimaltrennzeichen ist der Punkt (kein Tausendertrennzeichen).
+3. Spaltenliste: Die IHK verlangt in der Regel die explizite Spaltenliste nach dem Tabellennamen, damit die Abfrage auch bei späteren Schemaänderungen robust bleibt.`,
+        explanation: "INSERT INTO [Tabelle] (spalte1, spalte2, ...) VALUES (wert1, wert2, ...); Datum immer im Format 'YYYY-MM-DD', Zahlen ohne Quotes."
+    },
+    {
+        id: 444,
+        isBawueFocus: true,
+        isHard: true,
+        difficulty: "hard",
+        theme: "lf5",
+        isCalculation: false,
+        topic: "🗄️ SQL DQL: LEFT OUTER JOIN (Finden von Datensätzen ohne Verknüpfung)",
+        type: "open-text",
+        question: `IHK-Prüfungsaufgabe Datenbankabfragen (LF 5 - JOIN-Arten):
+Gegeben ist das Relationenmodell eines CRM-Systems:
+tbl_kunde (kunden_id [PK], firma, nachname, ort)
+tbl_bestellung (bestell_nr [PK], kunden_id [FK], bestell_datum, gesamtbetrag)
+
+Aufgabenstellung:
+Das Vertriebsteam möchte alle Kunden kontaktieren, die noch NIE eine Bestellung aufgegeben haben (Karteileichen).
+1. Schreiben Sie eine SQL-Abfrage, die alle Kunden (kunden_id, firma, nachname) ausgibt, zu denen KEINE Bestellung in der Tabelle 'tbl_bestellung' existiert.
+2. Begründen Sie kurz, warum für diese Anforderung ein INNER JOIN ungeeignet ist und welcher JOIN-Typ verwendet werden muss.`,
+        musterloesung: `Musterlösung LEFT JOIN Abfrage:
+
+1. SQL-Statement:
+SELECT k.kunden_id, k.firma, k.nachname
+FROM tbl_kunde k
+LEFT JOIN tbl_bestellung b ON k.kunden_id = b.kunden_id
+WHERE b.bestell_nr IS NULL;
+
+2. Fachliche Begründung (INNER JOIN vs. LEFT JOIN):
+- Ein INNER JOIN liefert ausschließlich die Schnittmenge beider Tabellen, also nur Kunden, bei denen mindestens ein passender Bestelldatensatz existiert. Kunden ohne Bestellung würden komplett herausgefiltert werden!
+- Ein LEFT JOIN (Left Outer Join) gibt hingegen ALLE Datensätze der linken Tabelle (tbl_kunde) aus – auch wenn kein passender Datensatz in der rechten Tabelle vorhanden ist.
+- Bei Kunden ohne Bestellung werden die Spalten von 'tbl_bestellung' mit NULL aufgefüllt. Über die Bedingung 'WHERE b.bestell_nr IS NULL' filtert man exakt diese Kunden heraus.`,
+        explanation: "LEFT JOIN verknüpft alle Zeilen der linken Tabelle. Wenn rechte_tabelle.PK IS NULL ist, existiert kein verknüpfter Datensatz. INNER JOIN liefert nur Treffer in beiden Tabellen."
+    },
+    {
+        id: 445,
+        isBawueFocus: true,
+        isHard: true,
+        difficulty: "hard",
+        theme: "lf5",
+        isCalculation: false,
+        topic: "🗄️ SQL DQL: Unterabfragen / Subqueries mit Aggregatfunktion (AVG)",
+        type: "open-text",
+        question: `IHK-Prüfungsaufgabe Datenbankabfragen (LF 5 - Subqueries):
+Gegeben ist die Tabelle:
+tbl_artikel (artikel_id [PK], bezeichnung, kategorie, preis_netto)
+
+Aufgabenstellung:
+1. Formulieren Sie eine SQL-Abfrage, die alle Artikel (artikel_id, bezeichnung, preis_netto) ausgibt, deren 'preis_netto' HÖHER ist als der durchschnittliche Netto-Preis ALLER Artikel der gesamten Tabelle.
+2. Erläutern Sie, warum folgende Abfrage zu einem Syntaxfehler führt:
+   SELECT artikel_id, bezeichnung, preis_netto
+   FROM tbl_artikel
+   WHERE preis_netto > AVG(preis_netto);`,
+        musterloesung: `Musterlösung Subquery mit AVG:
+
+1. Korrektes SQL-Statement (mit Unterabfrage):
+SELECT artikel_id, bezeichnung, preis_netto
+FROM tbl_artikel
+WHERE preis_netto > (SELECT AVG(preis_netto) FROM tbl_artikel);
+
+2. Erklärung des Syntaxfehlers:
+- Aggregatfunktionen wie AVG(), SUM(), COUNT(), MIN() und MAX() dürfen NIEMALS direkt in der WHERE-Klausel stehen!
+- Die WHERE-Klausel filtert Datensätze zeilenweise (Row-Level), BEVOR Aggregate über die Gesamttabelle berechnet werden können.
+- Um einen Einzelwert mit dem Tabellendurchschnitt zu vergleichen, MUSS der Durchschnitt zuerst über eine eigenständige Unterabfrage (Subquery in runden Klammern) berechnet werden.`,
+        explanation: "Aggregatfunktionen (AVG, SUM, COUNT) sind im WHERE verboten! Wertevergleiche mit Durchschnitten erfordern immer eine Unterabfrage: WHERE spalte > (SELECT AVG(spalte) FROM ...)."
+    },
+    {
+        id: 446,
+        isBawueFocus: true,
+        isHard: true,
+        difficulty: "hard",
+        theme: "lf5",
+        isCalculation: false,
+        topic: "🗄️ SQL DDL: Sichten erstellen (CREATE VIEW) & Datenschutz/Kapselung",
+        type: "open-text",
+        question: `IHK-Prüfungsaufgabe Datenbanksicherheit (LF 5 - Views):
+Gegeben ist die Tabelle:
+tbl_mitarbeiter (m_id, vorname, nachname, abteilung, gehalt, iban, telefon_dienst, email_dienst)
+
+Für das Intranet soll ein öffentliches Mitarbeiterverzeichnis bereitgestellt werden. Aus Gründen des Datenschutzes (DSGVO) dürfen sensible Personaldaten (Gehalt, private Bankverbindung IBAN) keinesfalls für alle Kollegen sichtbar sein.
+
+Aufgaben:
+1. Erstellen Sie eine SQL-Sicht (View) mit dem Namen 'view_telefonbuch', die nur m_id, Vorname, Nachname, Abteilung, geschäftliche Telefonnummer und dienstliche E-Mail bereitstellt.
+2. Nennen Sie zwei wesentliche Vorteile des Einsatzes von Views in relationalen Datenbanksystemen.`,
+        musterloesung: `Musterlösung CREATE VIEW:
+
+1. SQL-Befehl zur Erstellung der View:
+CREATE VIEW view_telefonbuch AS
+SELECT m_id, vorname, nachname, abteilung, telefon_dienst, email_dienst
+FROM tbl_mitarbeiter;
+
+2. Vorteile von Views (Sichten):
+- Datensicherheit & Zugriffskontrolle (Spaltenbasierte Berechtigung): Vertrauliche Spalten wie 'gehalt' und 'iban' werden vor unbefugten Nutzern verborgen. Mitarbeitern kann Leserecht nur auf die View statt auf die Basistabelle gewährt werden.
+- Abstraktion & Vereinfachung: Komplexe Abfragen (z. B. Joins über mehrere Tabellen) werden in einer Sicht gekapselt. Anwender können einfache SELECT-Abfragen auf die View ausführen (z. B. SELECT * FROM view_telefonbuch WHERE abteilung = 'IT').
+- Schutz vor Schemaänderungen: Ändert sich das interne Tabellendesign der Basistabelle, kann die View angepasst werden, ohne dass Client-Anwendungen geändert werden müssen.`,
+        explanation: "CREATE VIEW [ViewName] AS SELECT ... FROM ...; Views bieten Datensicherheit (Spaltenfilterung), Abstraktion komplexer Joins und Unabhängigkeit von physischen Tabellen."
+    },
+    {
+        id: 447,
+        isBawueFocus: true,
+        isHard: true,
+        difficulty: "hard",
+        theme: "lf5",
+        isCalculation: false,
+        topic: "⚡ Datenbank-Performance: Indexierung (CREATE INDEX, Vor- und Nachteile)",
+        type: "open-text",
+        question: `IHK-Prüfungsaufgabe Performance & Tuning (LF 5 - Indizes):
+In einer Datenbank mit über 2.000.000 Kundendatensätzen dauern Suchabfragen nach der Kundennummer, der E-Mail-Adresse und dem Nachnamen mehrere Sekunden.
+
+Aufgaben:
+1. Formulieren Sie den SQL-Befehl, um einen Index mit dem Namen 'idx_kunden_email' auf der Spalte 'email' der Tabelle 'tbl_kunde' anzulegen.
+2. Formulieren Sie den SQL-Befehl für einen zusammengesetzten Index 'idx_kunden_name' auf den Spalten 'nachname' und 'vorname'.
+3. Erläutern Sie je zwei wesentliche Vor- und Nachteile von Datenbank-Indizes (z. B. B-Tree-Index) im Produktivbetrieb.`,
+        musterloesung: `Musterlösung CREATE INDEX & Performance:
+
+1. Einfachen Index auf 'email' erstellen:
+CREATE INDEX idx_kunden_email
+ON tbl_kunde (email);
+
+2. Zusammengesetzten Index (Composite Index) erstellen:
+CREATE INDEX idx_kunden_name
+ON tbl_kunde (nachname, vorname);
+
+3. Vor- und Nachteile von Indizes:
+Vorteile:
+- Massive Beschleunigung von Lesezugriffen (SELECT-Abfragen mit WHERE-, JOIN-, ORDER BY- oder GROUP BY-Klauseln) durch B-Baum-Suche in O(log N) statt sequentiellem Full-Table-Scan in O(N).
+- Schnelle Durchsetzung von Eindeutigkeitsprüfungen bei UNIQUE-Indizes.
+
+Nachteile:
+- Verlangsamung von Schreibzugriffen (INSERT, UPDATE, DELETE): Bei jeder Datenänderung müssen nicht nur die Tabellendaten, sondern auch alle Indizes der Tabelle synchron aktualisiert und balanciert werden.
+- Zusätzlicher Speicherbedarf: Indizes werden permanent im Speicher (RAM und Festplatte) abgelegt. Zu viele Indizes blähen die Datenbank auf.`,
+        explanation: "CREATE INDEX [IndexName] ON [Tabelle] (spalte1, ...); Indizes beschleunigen SELECT/WHERE massiv, verlangsamen aber INSERT/UPDATE/DELETE und belegen zusätzlichen Speicherplatz."
+    },
+    {
+        id: 448,
+        isBawueFocus: true,
+        isHard: true,
+        difficulty: "hard",
+        theme: "lf5",
+        isCalculation: false,
+        topic: "🔒 Transaktionen & ACID-Prinzip (START TRANSACTION, COMMIT, ROLLBACK)",
+        type: "open-text",
+        question: `IHK-Prüfungsaufgabe Datenbanktransaktionen (LF 5 - ACID-Prinzip):
+Ein Bankkunde überweist 500,00 EUR von seinem Girokonto (Konto-Nr: 1001) auf das Sparkonto (Konto-Nr: 2002).
+Während der Ausführung stürzt der Datenbankserver nach dem Abbuchen des Betrags unerwartet ab.
+
+Aufgaben:
+1. Skizzieren Sie den Ablauf dieser Banküberweisung in SQL unter Verwendung von Transaktionsbefehlen (START TRANSACTION, COMMIT, ROLLBACK).
+2. Erläutern Sie die 4 Buchstaben des ACID-Prinzips und erklären Sie am Beispiel der Überweisung, was bei Nicht-Einhaltung der 'Atomarität' (Atomicity) passieren würde.`,
+        musterloesung: `Musterlösung Transaktionen & ACID-Prinzip:
+
+1. SQL-Transaktionsablauf:
+START TRANSACTION;
+
+-- Schritt 1: Geld von Konto 1001 abbuchen
+UPDATE tbl_konto 
+SET kontostand = kontostand - 500.00 
+WHERE konto_nr = 1001;
+
+-- Schritt 2: Geld auf Konto 2002 gutschreiben
+UPDATE tbl_konto 
+SET kontostand = kontostand + 500.00 
+WHERE konto_nr = 2002;
+
+-- Wenn beide Schritte erfolgreich waren:
+COMMIT;
+
+-- Bei Fehlern oder Systemabsturz während Schritt 1 oder 2:
+ROLLBACK;
+
+2. Das ACID-Prinzip:
+- A - Atomicity (Atomarität / Unteilbarkeit): Eine Transaktion wird ganz oder gar nicht ausgeführt ('Alles-oder-Nichts-Prinzip'). Wenn nach Schritt 1 ein Fehler auftritt, macht das ROLLBACK Schritt 1 rückgängig. Ohne Atomarität wäre das Geld vom Quellkonto abgebucht, aber nie auf dem Zielkonto angekommen (500 EUR wären spurlos verschwunden!).
+- C - Consistency (Konsistenz / Integrität): Die Datenbank wechselt von einem gültigen, konsistenten Zustand in einen neuen gültigen Zustand. Alle Integritätsregeln (z. B. Kontostand darf nicht unter Dispolimit fallen) bleiben gewahrt.
+- I - Isolation (Isolation): Gleichzeitige Transaktionen anderer Nutzer laufen so ab, als würden sie nacheinander ausgeführt. Kein anderer Nutzer sieht unvollständige Zwischenzustände.
+- D - Durability (Dauerhaftigkeit): Nach erfolgreichem COMMIT sind die Änderungen dauerhaft und überstehen auch Stromausfälle oder Serverabstürze (z. B. durch Transaction Log / WAL).`,
+        explanation: "ACID = Atomicity (Alles oder Nichts), Consistency (Integrität bleibt erhalten), Isolation (parallele Vorgänge stören sich nicht), Durability (dauerhaft nach COMMIT)."
+    },
+    {
+        id: 449,
+        isBawueFocus: true,
+        isHard: true,
+        difficulty: "hard",
+        theme: "lf5",
+        isCalculation: false,
+        topic: "🗄️ SQL Befehlsvergleich: TRUNCATE TABLE vs. DROP TABLE vs. DELETE FROM",
+        type: "open-text",
+        question: `IHK-Prüfungsaufgabe Datenbankverwaltung (LF 5 - DDL vs. DML):
+In SQL existieren drei verschiedene Befehle, um Daten oder Tabellen zu entfernen:
+- DELETE FROM [Tabelle]
+- TRUNCATE TABLE [Tabelle]
+- DROP TABLE [Tabelle]
+
+Aufgabenstellung:
+Vergleichen Sie diese drei Befehle anhand folgender 5 Kriterien:
+1. Zu welcher SQL-Kategorie gehört der Befehl (DDL oder DML)?
+2. Bleibt die Tabellenstruktur (Spaltendefinitionen) nach Ausführung erhalten?
+3. Ist eine selektive Filterung mittels WHERE-Klausel möglich?
+4. Kann der Befehl innerhalb einer Transaktion per ROLLBACK rückgängig gemacht werden?
+5. Wird ein automatischer Zähler (AUTO_INCREMENT) auf den Anfangswert zurückgesetzt?`,
+        musterloesung: `Musterlösung Vergleich TRUNCATE vs. DROP vs. DELETE:
+
+Vergleichstabelle:
+
+| Kriterium | DELETE FROM | TRUNCATE TABLE | DROP TABLE |
+|---|---|---|---|
+| 1. SQL-Kategorie | DML (Data Manipulation) | DDL (Data Definition) | DDL (Data Definition) |
+| 2. Tabellenstruktur bleibt erhalten? | JA (nur Datenzeilen werden gelöscht) | JA (Tabelle wird geleert) | NEIN (gesamte Tabelle & Struktur wird gelöscht) |
+| 3. WHERE-Klausel möglich? | JA (einzelne Zeilen löschbar) | NEIN (leert immer gesamte Tabelle) | NEIN |
+| 4. ROLLBACK möglich? | JA (vollständig transaktionssicher) | In vielen RDBMS NEIN (impliziter Commit) | In vielen RDBMS NEIN |
+| 5. AUTO_INCREMENT zurückgesetzt? | NEIN (Zähler läuft weiter) | JA (Zähler wird auf 1 zurückgesetzt) | Entfällt (Tabelle existiert nicht mehr) |
+| Ausführungsgeschwindigkeit | Langsam bei vielen Zeilen (zeilenweises Löschen + Logging) | Extrem schnell (deallokiert Datenblöcke) | Extrem schnell |
+
+Typische IHK-Prüfungsfalle:
+- TRUNCATE TABLE ist ein DDL-Befehl (kein DML!), der Datenblöcke auf Dateiebene freigibt, anstatt Zeile für Zeile zu löschen.`,
+        explanation: "DELETE = DML, zeilenweise mit WHERE, Rollback-fähig. TRUNCATE = DDL, leert Tabelle blitzschnell, setzt Auto-Increment zurück. DROP = DDL, vernichtet Tabelle samt Struktur."
+    },
+    {
+        id: 450,
+        isBawueFocus: true,
+        isHard: true,
+        difficulty: "hard",
+        theme: "lf5",
+        isCalculation: false,
+        topic: "🗄️ SQL DQL: Mengenoperatoren (UNION vs. UNION ALL) & Wildcards (LIKE '%_')",
+        type: "open-text",
+        question: `IHK-Prüfungsaufgabe Datenbankabfragen (LF 5 - Mengenoperatoren & Mustersuche):
+Gegeben sind zwei Adresstabellen:
+tbl_kunde (kunden_id, name, ort, land)
+tbl_lieferant (lieferanten_id, name, ort, land)
+
+Aufgabenstellung:
+1. Formulieren Sie eine SQL-Abfrage, die eine gemeinsame Liste aller Städtenamen (Spalte 'ort') aus beiden Tabellen erzeugt, wobei doppelte Städtenamen automatisch entfernt werden sollen.
+2. Erklären Sie den Unterschied zwischen 'UNION' und 'UNION ALL' bezüglich Duplikaten und Abfrage-Performance.
+3. Formulieren Sie eine Abfrage auf 'tbl_kunde', die alle Kunden findet, deren Nachname:
+   a) Mit 'Sch' beginnt und auf 'er' endet (z. B. Schneider, Schremser).
+   b) Genau 4 Buchstaben lang ist und mit 'M' beginnt (z. B. Marx, Mohr, Meier).`,
+        musterloesung: `Musterlösung UNION vs. UNION ALL & LIKE-Wildcards:
+
+1. Eindeutige Städte aus beiden Tabellen (UNION):
+SELECT ort FROM tbl_kunde
+UNION
+SELECT ort FROM tbl_lieferant
+ORDER BY ort;
+
+2. Unterschied UNION vs. UNION ALL:
+- UNION: Kombiniert die Ergebnismengen beider Abfragen und führt einen impliziten DISTINCT durch (Duplikate werden eliminiert). Dies erfordert einen internen Sortiervorgang und ist bei großen Datenmengen rechenintensiver.
+- UNION ALL: Hängt die Daten beider Abfragen einfach zusammen, OHNE Duplikate zu prüfen. Ist deutlich schneller, enthält aber doppelte Zeilen, wenn eine Stadt in beiden Tabellen vorkommt.
+
+3. Mustersuche mit LIKE:
+a) Beginnt mit 'Sch' und endet mit 'er':
+SELECT * FROM tbl_kunde
+WHERE name LIKE 'Sch%er';
+(Hinweis: '%' steht für beliebig viele Zeichen, auch 0 Zeichen).
+
+b) Genau 4 Buchstaben, beginnend mit 'M':
+SELECT * FROM tbl_kunde
+WHERE name LIKE 'M___';
+(Hinweis: Der Unterstrich '_' steht für EXAKT EIN einzelnes Zeichen. 'M' gefolgt von 3 Unterstrichen = exakt 4 Zeichen).`,
+        explanation: "UNION entfernt Duplikate (langsamer). UNION ALL behält alle Zeilen (schneller). LIKE '%' = beliebig viele Zeichen, LIKE '_' = exakt ein einzelnes Zeichen."
     }
 ];
