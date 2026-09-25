@@ -9568,5 +9568,151 @@ ENDEFUNKTION
 - Resultierende Prüfziffer: 1
 - Vollständiger EAN-13 Barcode: 4012345678901.`,
         explanation: "EAN-13 gewichtet ungerade Indizes mit 3 und gerade mit 1. Prüfziffer ist die Ergänzung zum nächsten Vielfachen von 10: (10 - summe % 10) % 10."
+    },
+    {
+        id: 465,
+        isBawueFocus: true,
+        isDiagram: true,
+        isCalculation: true,
+        theme: "diagrams",
+        topic: "📈 Kaufmännische Diagramme: A4 Amortisationsdauer (Projektkosten vs. Ersparnisse)",
+        diagramType: "Amortisationsdiagramm",
+        diagramTitle: "A4 Amortisationsdauer: Projektkosten und Ersparnisse",
+        diagramCaption: "Abbildung: Koordinatensystem mit Projektkosten (1.310 €), monatlichen Ersparnissen (200 €/Monat) und Amortisationspunkt bei 6,55 Monaten",
+        diagramSvg: VisualDiagrams.getAmortisationDiagramSvg(1310, 200, 10, 2000, "A4 Amortisationsdauer: Projektkosten und Ersparnisse"),
+        type: "open-text",
+        question: `IHK-Prüfungsaufgabe Wirtschaftlichkeitsrechnung (LF 1 / LF 6 - Amortisationsdiagramm):
+Für ein IT-Automatisierungsprojekt liegt das abgebildete Koordinatensystem-Diagramm ('A4 Amortisationsdauer: Projektkosten und Ersparnisse') vor.
+
+Aufgabenstellung:
+1. Erläutern Sie die Bedeutung der beiden Achsen (horizontale X-Achse und vertikale Y-Achse) sowie der beiden Funktionsgraphen (blaue waagerechte Gerade und rote ansteigende Gerade).
+2. Lesen Sie aus dem Diagramm die Höhe der einmaligen Projektkosten und die Höhe der kumulierten Ersparnisse nach genau 10 Monaten ab.
+3. Ermitteln Sie die monatliche Ersparnis des Projekts in Euro.
+4. Berechnen Sie die exakte statische Amortisationsdauer in Monaten (mit Formel und Rechenweg) und vergleichen Sie das Ergebnis mit dem markierten Schnittpunkt im Diagramm.
+5. Welche betriebswirtschaftliche Bedeutung haben die Flächenbereiche links bzw. rechts vom Schnittpunkt (Verlustzone vs. Gewinnzone)?`,
+        musterloesung: `Musterlösung A4 Amortisationsdauer (Projektkosten vs. Ersparnisse):
+
+1. Bedeutung der Achsen und Funktionsgraphen:
+- Horizontale X-Achse (Abszisse): Stellt die Zeit / Projektlaufzeit in MONATEN dar (hier: von Monat 0 bis Monat 10).
+- Vertikale Y-Achse (Ordinate): Stellt den Geldbetrag in EURO (€) dar (hier: von 0 € bis 2.000 €).
+- Blaue waagerechte Gerade ('Projektkosten'): Zeigt die einmaligen Investitionskosten des Projekts (Hardware, Software, Beratungskosten). Da diese Kosten einmalig zu Beginn anfallen und nicht monatlich steigen, verläuft der Graph horizontal konstant bei 1.310,00 €.
+- Rote ansteigende Gerade ('Ersparnisse'): Zeigt die kumulierten (aufsummierten) Einsparungen durch das Projekt über die Zeit. Sie beginnt bei (0 Monate, 0 €) und steigt linear an, da in jedem Monat derselbe Betrag eingespart wird.
+
+2. Ablesewerte aus dem Diagramm:
+- Einmalige Projektkosten: 1.310,00 € (blaue Linie liegt knapp über der 1.250-€-Gitterlinie).
+- Kumulierte Ersparnisse nach 10 Monaten: 2.000,00 € (Endpunkt der roten Linie bei X = 10, Y = 2.000 €).
+
+3. Ermittlung der monatlichen Ersparnis:
+- Formel: Monatliche Ersparnis = Kumulierte Ersparnis / Anzahl der Monate
+- Rechnung: 2.000,00 € / 10 Monate = 200,00 € pro Monat.
+
+4. Berechnung der statischen Amortisationsdauer:
+- Formel: Amortisationsdauer (in Monaten) = Projektkosten / Monatliche Ersparnis
+- Rechnung: 1.310,00 € / 200,00 €/Monat = 6,55 Monate.
+- Umrechnung in Tage: 0,55 Monate * 30 Tage ≈ 16,5 Tage (ca. 6 Monate und 17 Tage).
+- Vergleich mit Diagramm: Der Schnittpunkt der blauen Kostenlinie und der roten Ersparnislinie liegt optisch exakt zwischen Monat 6 und 7 bei 6,55 Monaten!
+
+5. Bedeutung der Zonen:
+- Links vom Schnittpunkt (Monat 0 bis 6,55): VERLUSTZONE / Investitionsphase. Die kumulierten Einsparungen sind noch geringer als die angefallenen Projektkosten. Das Projekt hat seine Kosten noch nicht eingespielt.
+- Rechts vom Schnittpunkt (ab Monat 6,56): GEWINNZONE / Reingewinn. Die Einsparungen übersteigen die Anschaffungskosten. Ab diesem Zeitpunkt erwirtschaftet das Projekt einen echten finanziellen Netto-Vorteil für das Unternehmen.`,
+        explanation: "Amortisationsdiagramme zeigen Investitionskosten (horizontal) vs. kumulierte Ersparnisse (linear steigend). Der Schnittpunkt markiert die Amortisationsdauer: Amortisation = Investition / Ersparnis pro Zeiteinheit."
+    },
+    {
+        id: 466,
+        isBawueFocus: true,
+        isDiagram: true,
+        isCalculation: true,
+        theme: "diagrams",
+        topic: "📈 Kaufmännische Diagramme: Break-Even-Point & Gewinnschwelle",
+        diagramType: "Break-Even-Diagramm",
+        diagramTitle: "Break-Even-Analyse (Gewinnschwellendiagramm)",
+        diagramCaption: "Abbildung: Gewinnschwellendiagramm mit Fixkosten (15.000 €), Gesamtkosten (blau), Erlöskurve (orange) und Break-Even-Point bei 600 Stück",
+        diagramSvg: VisualDiagrams.getBreakEvenDiagramSvg(),
+        type: "open-text",
+        question: `IHK-Prüfungsaufgabe Kosten- und Leistungsrechnung (LF 1 / LF 6 - Gewinnschwellenanalyse):
+Für ein neu entwickeltes Softwareprodukt liegt das abgebildete Break-Even-Diagramm (Gewinnschwellendiagramm) vor.
+
+Kalkulationsdaten:
+- Fixkosten (Entwicklung, Miete, Gehälter): K_fix = 15.000,00 €
+- Variable Kosten pro Lizenz (Support, Serverlast): k_var = 25,00 € / Stück
+- Verkaufspreis pro Lizenz: p = 50,00 € / Stück
+
+Aufgaben:
+1. Benennen Sie die drei eingezeichneten Funktionsgraphen (grau/gestrichelt, blau, orange) und den markierten Schnittpunkt.
+2. Berechnen Sie den Deckungsbeitrag pro Stück (db) in Euro.
+3. Berechnen Sie die Gewinnschwelle (Break-Even-Menge x_BEP in Stück) sowie den Break-Even-Umsatz in Euro.
+4. Erläutern Sie die Bedeutung der Verlustzone (links vom Schnittpunkt) und der Gewinnzone (rechts vom Schnittpunkt).`,
+        musterloesung: `Musterlösung Break-Even-Point & Gewinnschwelle:
+
+1. Bezeichnung der Funktionsgraphen und des Schnittpunkts:
+- Graue gestrichelte Gerade: Fixkosten K_fix = 15.000,00 € (verläuft mengenneutral horizontal).
+- Blaue Gerade: Gesamtkosten K(x) = K_fix + k_var * x (beginnt bei 15.000 € und steigt um 25 € pro Stück).
+- Orange Gerade: Umsatzerlöse E(x) = p * x (beginnt im Ursprung bei 0 € und steigt um 50 € pro Stück).
+- Grüner Schnittpunkt: Break-Even-Point (BEP) / Gewinnschwelle (Punkt, an dem Erlös = Gesamtkosten ist; Gewinn = 0).
+
+2. Deckungsbeitrag pro Stück (db):
+- Formel: db = p - k_var
+- Rechnung: 50,00 € - 25,00 € = 25,00 € pro Lizenz.
+- Bedeutung: Jede verkaufte Lizenz trägt 25,00 € zur Deckung der 15.000,00 € Fixkosten bei.
+
+3. Berechnung der Gewinnschwelle (Break-Even-Menge x_BEP):
+- Formel: x_BEP = K_fix / db = K_fix / (p - k_var)
+- Rechnung: 15.000,00 € / 25,00 €/Stück = 600 Stück.
+- Break-Even-Umsatz: 600 Stück * 50,00 €/Stück = 30.000,00 €.
+- Ergebnis: Ab dem 601. verkauften Exemplar erwirtschaftet das Unternehmen Gewinn!
+
+4. Verlustzone vs. Gewinnzone:
+- Verlustzone (x < 600 Stück): Die Gesamtkosten K(x) liegen über den Umsatzerlösen E(x). Der Erlös reicht noch nicht aus, um die gesamten Fixkosten zu decken.
+- Gewinnzone (x > 600 Stück): Die Umsatzerlöse liegen über den Gesamtkosten. Alle Fixkosten sind vollständig amortisiert, jede weitere Einheit erhöht den Betriebsgewinn um den Stückdeckungsbeitrag (25 €).`,
+        explanation: "Break-Even-Point: x_BEP = K_fix / (p - k_var). Deckungsbeitrag db = p - k_var. Am BEP schneiden sich Erlös- und Gesamtkostenkurve (Gewinn = 0)."
+    },
+    {
+        id: 467,
+        isBawueFocus: true,
+        isDiagram: true,
+        isCalculation: true,
+        theme: "diagrams",
+        topic: "📈 Kaufmännische Diagramme: Kostenvergleich Kauf vs. Cloud (Kritische Zeit)",
+        diagramType: "Kostenvergleichsdiagramm",
+        diagramTitle: "Kostenvergleich: Option A (Kauf On-Premises) vs. Option B (Cloud SaaS)",
+        diagramCaption: "Abbildung: Kostenvergleichsdiagramm mit Option A (Kauf 18.000 € + 300 €/Mon.) vs. Option B (Cloud 1.500 €/Mon.) und kritischer Zeit bei 15 Monaten",
+        diagramSvg: VisualDiagrams.getKostenvergleichDiagramSvg(),
+        type: "open-text",
+        question: `IHK-Prüfungsaufgabe Wirtschaftlichkeitsvergleich (LF 1 / LF 6 - Kritischer Kostenpunkt):
+Ein IT-Systemhaus prüft für einen Kunden die Einführung eines ERP-Systems. Zwei Optionen stehen zur Auswahl:
+- Option A (Kauf On-Premises): Einmalige Anschaffungskosten 18.000,00 €, monatliche Betriebs- und Wartungskosten 300,00 €.
+- Option B (Cloud-Miete SaaS): Einmalige Kosten 0,00 €, monatliche Abonnementgebühr 1.500,00 €.
+
+Aufgaben:
+1. Bestimmen Sie anhand des Diagramms und per mathematischer Gleichung den kritischen Zeitpunkt (in Monaten), an dem beide Optionen exakt gleich teuer sind.
+2. Ermitteln Sie die Gesamtkosten beider Optionen für eine Vertragslaufzeit von 12 Monaten. Welche Option ist günstiger und wie hoch ist der Kostenvorteil?
+3. Ermitteln Sie die Gesamtkosten beider Optionen für eine Vertragslaufzeit von 36 Monaten (3 Jahre). Welche Option ist günstiger und wie hoch ist der Kostenvorteil?
+4. Nennen Sie zwei qualitative (nicht-monetäre) Kriterien, die neben den Kosten für die Entscheidung zwischen On-Premises und Cloud eine Rolle spielen.`,
+        musterloesung: `Musterlösung Kostenvergleich Kauf vs. Cloud:
+
+1. Berechnung des kritischen Zeitpunkts (Gleichsetzen der Gesamtkostenfunktionen):
+- Kostenfunktion Option A (Kauf): K_A(m) = 18.000,00 € + 300,00 € * m
+- Kostenfunktion Option B (Cloud): K_B(m) = 0,00 € + 1.500,00 € * m
+- Gleichsetzen:
+  18.000 + 300 * m = 1.500 * m
+  18.000 = 1.200 * m
+  m_krit = 18.000 / 1.200 = 15 Monate.
+- Gesamtkosten bei 15 Monaten: 1.500 € * 15 = 22.500,00 €.
+- Ergebnis: Nach genau 15 Monaten schneiden sich beide Kostenkurven bei 22.500,00 €.
+
+2. Kostenvergleich bei 12 Monaten Laufzeit (m = 12):
+- Kosten Option A (Kauf): 18.000 € + 300 € * 12 = 18.000 € + 3.600 € = 21.600,00 €.
+- Kosten Option B (Cloud): 1.500 € * 12 = 18.000,00 €.
+- Entscheidung: Bei 12 Monaten ist Option B (Cloud) um 3.600,00 € günstiger (da 12 Monate vor dem Schnittpunkt von 15 Monaten liegt).
+
+3. Kostenvergleich bei 36 Monaten Laufzeit (m = 36):
+- Kosten Option A (Kauf): 18.000 € + 300 € * 36 = 18.000 € + 10.800 € = 28.800,00 €.
+- Kosten Option B (Cloud): 1.500 € * 36 = 54.000,00 €.
+- Entscheidung: Bei 36 Monaten ist Option A (Kauf) um 25.200,00 € günstiger! (54.000 € - 28.800 € = 25.200 €).
+
+4. Qualitative Entscheidungskriterien:
+- Für Cloud: Schnelle Bereitstellung (Time-to-Market), automatische Updates, keine eigene Serverwartung/Hardware-Verantwortung, hohe Skalierbarkeit nach oben/unten.
+- Für On-Premises: Vollständige Datenhoheit / Datenschutz (DSGVO), keine Abhängigkeit von Internetverbindung oder Drittanbietern (Vendor Lock-in), individuelle Anpassbarkeit an Schnittstellen.`,
+        explanation: "Kostenvergleich: K_A(x) = K_B(x) auflösen liefert den kritischen Punkt. Vor dem Schnittpunkt ist die Option mit geringeren Fixkosten günstiger, danach die mit geringeren variablen Kosten."
     }
 ];

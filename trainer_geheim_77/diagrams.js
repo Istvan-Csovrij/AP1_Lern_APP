@@ -1759,6 +1759,259 @@ var VisualDiagrams = {
         `;
     },
 
+    // 10b. Amortisationsdiagramm (Projektkosten vs. Ersparnisse / Break-Even-Dauer)
+    getAmortisationDiagramSvg: function(projektkosten = 1310, ersparnisMonat = 200, maxMonate = 10, maxBetrag = 2000, title = "A4 Amortisationsdauer: Projektkosten und Ersparnisse") {
+        const x0 = 85;
+        const y0 = 290;
+        const w = 530; // Pixel-Breite für die Monats-Achse
+        const h = 230; // Pixel-Höhe für den Betrag
+
+        const pxPerMonth = w / maxMonate;
+        const pxPerEuro = h / maxBetrag;
+
+        // Projektkosten Y-Koordinate (konstant 1310 €)
+        const yKosten = y0 - (projektkosten * pxPerEuro);
+
+        // Amortisationsmonat: 1310 / 200 = 6.55 Monate
+        const amortMonate = projektkosten / ersparnisMonat;
+        const xSchnitt = x0 + (amortMonate * pxPerMonth);
+        const ySchnitt = yKosten;
+
+        // Endpunkt Ersparnisse bei Monat 10: 10 * 200 = 2000 €
+        const yErsparnisEnd = y0 - (maxMonate * ersparnisMonat * pxPerEuro);
+
+        // Grid lines Y (Schritte à 250 €)
+        let gridY = "";
+        for (let b = 250; b <= maxBetrag; b += 250) {
+            const yPos = y0 - (b * pxPerEuro);
+            gridY += `
+            <text x="${x0 - 10}" y="${yPos + 4}" font-family="sans-serif" font-size="11" fill="#64748b" text-anchor="end">${b}</text>
+            <line x1="${x0}" y1="${yPos}" x2="${x0 + w}" y2="${yPos}" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="3,3" />`;
+        }
+
+        // Grid lines X (Schritte à 2 Monate)
+        let gridX = "";
+        for (let m = 0; m <= maxMonate; m += 2) {
+            const xPos = x0 + (m * pxPerMonth);
+            gridX += `
+            <text x="${xPos}" y="${y0 + 20}" font-family="sans-serif" font-size="11" fill="#475569" text-anchor="middle">${m}</text>
+            <line x1="${xPos}" y1="${y0}" x2="${xPos}" y2="${y0 - h}" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="3,3" />`;
+        }
+
+        return `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 360" width="100%" height="100%">
+            <defs>
+                <marker id="axis-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                    <polygon points="0,0 10,5 0,10" fill="#334155" />
+                </marker>
+            </defs>
+            <rect width="680" height="360" fill="#ffffff" rx="8" stroke="#cbd5e1" stroke-width="1" />
+            
+            <text x="340" y="26" font-family="sans-serif" font-size="15" font-weight="bold" fill="#0f172a" text-anchor="middle">${title}</text>
+            
+            <!-- Gitternetzlinien -->
+            ${gridY}
+            ${gridX}
+            
+            <!-- Zonen: Verlustzone (rot) & Gewinnzone (grün) -->
+            <polygon points="${x0},${yKosten} ${x0},${y0} ${xSchnitt},${ySchnitt}" fill="rgba(239, 68, 68, 0.08)" />
+            <text x="${x0 + (xSchnitt - x0) * 0.4}" y="${yKosten + 45}" font-family="sans-serif" font-size="11" font-weight="bold" fill="#dc2626">Verlustzone (Investition)</text>
+            
+            <polygon points="${xSchnitt},${ySchnitt} ${x0 + w},${yErsparnisEnd} ${x0 + w},${yKosten}" fill="rgba(34, 197, 94, 0.12)" />
+            <text x="${xSchnitt + (x0 + w - xSchnitt) * 0.4}" y="${yKosten - 20}" font-family="sans-serif" font-size="11" font-weight="bold" fill="#16a34a">Gewinnzone (Ersparnis)</text>
+
+            <!-- Achsen -->
+            <!-- Y-Achse -->
+            <line x1="${x0}" y1="${y0}" x2="${x0}" y2="${y0 - h - 15}" stroke="#334155" stroke-width="2" marker-end="url(#axis-arr)" />
+            <text x="25" y="${y0 - h / 2}" font-family="sans-serif" font-size="12" font-weight="bold" fill="#334155" text-anchor="middle" transform="rotate(-90 25 ${y0 - h / 2})">Betrag (€)</text>
+            
+            <!-- X-Achse -->
+            <line x1="${x0}" y1="${y0}" x2="${x0 + w + 20}" y2="${y0}" stroke="#334155" stroke-width="2" marker-end="url(#axis-arr)" />
+            <text x="${x0 + w / 2}" y="${y0 + 40}" font-family="sans-serif" font-size="12" font-weight="bold" fill="#334155" text-anchor="middle">Monate</text>
+            
+            <!-- 1. Blaue Linie: Projektkosten (horizontal konstant) -->
+            <line x1="${x0}" y1="${yKosten}" x2="${x0 + w}" y2="${yKosten}" stroke="#2563eb" stroke-width="3" />
+            
+            <!-- 2. Rote Linie: Kumulierte Ersparnisse (linear ansteigend) -->
+            <line x1="${x0}" y1="${y0}" x2="${x0 + w}" y2="${yErsparnisEnd}" stroke="#dc2626" stroke-width="3" />
+            
+            <!-- Schnittpunkt (Amortisationspunkt / Break-Even-Point) -->
+            <line x1="${xSchnitt}" y1="${ySchnitt}" x2="${xSchnitt}" y2="${y0}" stroke="#16a34a" stroke-width="1.8" stroke-dasharray="4,4" />
+            <line x1="${xSchnitt}" y1="${ySchnitt}" x2="${x0}" y2="${ySchnitt}" stroke="#16a34a" stroke-width="1.8" stroke-dasharray="4,4" />
+            
+            <circle cx="${xSchnitt}" cy="${ySchnitt}" r="6" fill="#16a34a" stroke="#ffffff" stroke-width="2" />
+            <circle cx="${xSchnitt}" cy="${ySchnitt}" r="11" fill="none" stroke="#16a34a" stroke-width="1.5" stroke-dasharray="2,2" />
+            
+            <!-- Hervorhebung auf X-Achse -->
+            <rect x="${xSchnitt - 38}" y="${y0 + 4}" width="76" height="20" fill="#16a34a" rx="4" />
+            <text x="${xSchnitt}" y="${y0 + 18}" font-family="sans-serif" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">${amortMonate.toFixed(2).replace('.', ',')} Mon.</text>
+            
+            <!-- Beschriftung des Schnittpunkts -->
+            <rect x="${xSchnitt - 130}" y="${ySchnitt - 35}" width="165" height="24" fill="#1e293b" rx="4" opacity="0.9" />
+            <text x="${xSchnitt - 48}" y="${ySchnitt - 19}" font-family="sans-serif" font-size="11" font-weight="bold" fill="#f8fafc" text-anchor="middle">🎯 Amortisation: ${amortMonate.toFixed(2).replace('.', ',')} Monate</text>
+
+            <!-- Legende Box oben links -->
+            <g transform="translate(${x0 + 15}, 40)">
+                <rect width="180" height="52" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2" rx="4" />
+                <line x1="12" y1="18" x2="35" y2="18" stroke="#2563eb" stroke-width="3" />
+                <text x="42" y="22" font-family="sans-serif" font-size="11" font-weight="600" fill="#1e293b">Projektkosten (${projektkosten.toLocaleString('de-DE')} €)</text>
+                <line x1="12" y1="36" x2="35" y2="36" stroke="#dc2626" stroke-width="3" />
+                <text x="42" y="40" font-family="sans-serif" font-size="11" font-weight="600" fill="#1e293b">Ersparnisse (${ersparnisMonat} € / Mon.)</text>
+            </g>
+        </svg>
+        `;
+    },
+
+    // 10c. Klassisches Break-Even-Diagramm (Gewinnschwellendiagramm mit Fixkosten, Gesamtkosten & Erlös)
+    getBreakEvenDiagramSvg: function() {
+        return `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 360" width="100%" height="100%">
+            <defs>
+                <marker id="bep-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                    <polygon points="0,0 10,5 0,10" fill="#334155" />
+                </marker>
+            </defs>
+            <rect width="680" height="360" fill="#ffffff" rx="8" stroke="#cbd5e1" stroke-width="1" />
+            <text x="340" y="26" font-family="sans-serif" font-size="15" font-weight="bold" fill="#0f172a" text-anchor="middle">Break-Even-Analyse (Gewinnschwellendiagramm)</text>
+            
+            <!-- Gitternetz -->
+            <line x1="90" y1="232.5" x2="610" y2="232.5" stroke="#f1f5f9" stroke-width="1" stroke-dasharray="3,3" />
+            <text x="80" y="236" font-family="sans-serif" font-size="10" fill="#64748b" text-anchor="end">12.500 €</text>
+            
+            <line x1="90" y1="175" x2="610" y2="175" stroke="#f1f5f9" stroke-width="1" stroke-dasharray="3,3" />
+            <text x="80" y="179" font-family="sans-serif" font-size="10" fill="#64748b" text-anchor="end">25.000 €</text>
+            
+            <line x1="90" y1="117.5" x2="610" y2="117.5" stroke="#f1f5f9" stroke-width="1" stroke-dasharray="3,3" />
+            <text x="80" y="121" font-family="sans-serif" font-size="10" fill="#64748b" text-anchor="end">37.500 €</text>
+
+            <line x1="90" y1="60" x2="610" y2="60" stroke="#f1f5f9" stroke-width="1" stroke-dasharray="3,3" />
+            <text x="80" y="64" font-family="sans-serif" font-size="10" fill="#64748b" text-anchor="end">50.000 €</text>
+
+            <!-- X Ticks: 200, 400, 600, 800, 1000 -->
+            <text x="90" y="308" font-family="sans-serif" font-size="10" fill="#64748b" text-anchor="middle">0</text>
+            <text x="194" y="308" font-family="sans-serif" font-size="10" fill="#64748b" text-anchor="middle">200</text>
+            <text x="298" y="308" font-family="sans-serif" font-size="10" fill="#64748b" text-anchor="middle">400</text>
+            <text x="402" y="308" font-family="sans-serif" font-size="11" font-weight="bold" fill="#16a34a" text-anchor="middle">600 (BEP)</text>
+            <text x="506" y="308" font-family="sans-serif" font-size="10" fill="#64748b" text-anchor="middle">800</text>
+            <text x="610" y="308" font-family="sans-serif" font-size="10" fill="#64748b" text-anchor="middle">1.000</text>
+
+            <!-- Zonen -->
+            <rect x="90" y="221" width="520" height="69" fill="rgba(148, 163, 184, 0.12)" />
+            <text x="160" y="255" font-family="sans-serif" font-size="11" fill="#475569" font-style="italic">Fixkostenblock (K_fix = 15.000 €)</text>
+
+            <polygon points="90,221 90,290 402,152" fill="rgba(239, 68, 68, 0.12)" />
+            <text x="220" y="210" font-family="sans-serif" font-size="11" font-weight="bold" fill="#dc2626">Verlustzone</text>
+
+            <polygon points="402,152 610,60 610,106" fill="rgba(34, 197, 94, 0.15)" />
+            <text x="500" y="90" font-family="sans-serif" font-size="11" font-weight="bold" fill="#16a34a">Gewinnzone</text>
+
+            <!-- Achsen -->
+            <line x1="90" y1="290" x2="90" y2="40" stroke="#334155" stroke-width="2" marker-end="url(#bep-arr)" />
+            <text x="25" y="165" font-family="sans-serif" font-size="12" font-weight="bold" fill="#334155" text-anchor="middle" transform="rotate(-90 25 165)">Kosten / Erlöse (€)</text>
+
+            <line x1="90" y1="290" x2="630" y2="290" stroke="#334155" stroke-width="2" marker-end="url(#bep-arr)" />
+            <text x="350" y="330" font-family="sans-serif" font-size="12" font-weight="bold" fill="#334155" text-anchor="middle">Menge x (Stück)</text>
+
+            <!-- 1. Fixkosten Kfix = 15.000 € -->
+            <line x1="90" y1="221" x2="610" y2="221" stroke="#64748b" stroke-width="2" stroke-dasharray="4,3" />
+            <text x="615" y="225" font-family="sans-serif" font-size="11" font-weight="bold" fill="#64748b">K_fix (15.000 €)</text>
+
+            <!-- 2. Gesamtkosten K(x) = 15.000 + 25*x -->
+            <line x1="90" y1="221" x2="610" y2="106" stroke="#2563eb" stroke-width="3" />
+            <text x="615" y="108" font-family="sans-serif" font-size="11" font-weight="bold" fill="#2563eb">K(x) Gesamtkosten</text>
+
+            <!-- 3. Erlöskurve E(x) = 50*x -->
+            <line x1="90" y1="290" x2="610" y2="60" stroke="#ea580c" stroke-width="3" />
+            <text x="615" y="62" font-family="sans-serif" font-size="11" font-weight="bold" fill="#ea580c">E(x) Umsatzerlös</text>
+
+            <!-- BEP Schnittpunkt bei x = 600 Stk., y = 30.000 € -->
+            <line x1="402" y1="152" x2="402" y2="290" stroke="#16a34a" stroke-width="1.8" stroke-dasharray="4,4" />
+            <line x1="402" y1="152" x2="90" y2="152" stroke="#16a34a" stroke-width="1.8" stroke-dasharray="4,4" />
+            <circle cx="402" cy="152" r="7" fill="#16a34a" stroke="#ffffff" stroke-width="2" />
+            
+            <rect x="300" y="125" width="200" height="24" fill="#0f172a" rx="4" opacity="0.9" />
+            <text x="400" y="141" font-family="sans-serif" font-size="11" font-weight="bold" fill="#f8fafc" text-anchor="middle">🎯 Break-Even-Point: 600 Stück (30.000 €)</text>
+            <text x="80" y="156" font-family="sans-serif" font-size="10" font-weight="bold" fill="#16a34a" text-anchor="end">30.000 €</text>
+
+            <!-- Formel-Hinweis Box unten -->
+            <rect x="100" y="338" width="500" height="18" fill="#f8fafc" />
+            <text x="350" y="350" font-family="sans-serif" font-size="10.5" fill="#475569" font-style="italic" text-anchor="middle">Gewinnschwelle: x_BEP = K_fix / (p - k_var) = 15.000 € / (50 € - 25 €) = 600 Stück</text>
+        </svg>
+        `;
+    },
+
+    // 10d. Kostenvergleichsrechnung (Kauf vs. Cloud-Miete / Make-or-Buy)
+    getKostenvergleichDiagramSvg: function() {
+        return `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 360" width="100%" height="100%">
+            <defs>
+                <marker id="kv-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                    <polygon points="0,0 10,5 0,10" fill="#334155" />
+                </marker>
+            </defs>
+            <rect width="680" height="360" fill="#ffffff" rx="8" stroke="#cbd5e1" stroke-width="1" />
+            <text x="340" y="26" font-family="sans-serif" font-size="15" font-weight="bold" fill="#0f172a" text-anchor="middle">Kostenvergleich: Option A (Kauf On-Premises) vs. Option B (Cloud SaaS)</text>
+            
+            <line x1="90" y1="290" x2="90" y2="40" stroke="#334155" stroke-width="2" marker-end="url(#kv-arr)" />
+            <text x="25" y="165" font-family="sans-serif" font-size="12" font-weight="bold" fill="#334155" text-anchor="middle" transform="rotate(-90 25 165)">Gesamtkosten (€)</text>
+
+            <line x1="90" y1="290" x2="630" y2="290" stroke="#334155" stroke-width="2" marker-end="url(#kv-arr)" />
+            <text x="350" y="328" font-family="sans-serif" font-size="12" font-weight="bold" fill="#334155" text-anchor="middle">Laufzeit in Monaten</text>
+
+            <!-- Ticks X: 0, 6, 12, 15 (kritisch), 18, 24 -->
+            <text x="90" y="306" font-family="sans-serif" font-size="10" fill="#64748b" text-anchor="middle">0</text>
+            <text x="220" y="306" font-family="sans-serif" font-size="10" fill="#64748b" text-anchor="middle">6</text>
+            <text x="350" y="306" font-family="sans-serif" font-size="10" fill="#64748b" text-anchor="middle">12</text>
+            <text x="415" y="306" font-family="sans-serif" font-size="11" font-weight="bold" fill="#7c3aed" text-anchor="middle">15 (Kritisch)</text>
+            <text x="480" y="306" font-family="sans-serif" font-size="10" fill="#64748b" text-anchor="middle">18</text>
+            <text x="610" y="306" font-family="sans-serif" font-size="10" fill="#64748b" text-anchor="middle">24</text>
+
+            <!-- Grid Y: 10.000, 20.000, 30.000 -->
+            <line x1="90" y1="226" x2="610" y2="226" stroke="#f1f5f9" stroke-width="1" stroke-dasharray="3,3" />
+            <text x="80" y="230" font-family="sans-serif" font-size="10" fill="#64748b" text-anchor="end">10.000 €</text>
+
+            <line x1="90" y1="162" x2="610" y2="162" stroke="#f1f5f9" stroke-width="1" stroke-dasharray="3,3" />
+            <text x="80" y="166" font-family="sans-serif" font-size="10" fill="#64748b" text-anchor="end">20.000 €</text>
+
+            <line x1="90" y1="98" x2="610" y2="98" stroke="#f1f5f9" stroke-width="1" stroke-dasharray="3,3" />
+            <text x="80" y="102" font-family="sans-serif" font-size="10" fill="#64748b" text-anchor="end">30.000 €</text>
+
+            <!-- Schattierung -->
+            <polygon points="90,290 90,175 415,146" fill="rgba(22, 163, 74, 0.08)" />
+            <text x="210" y="210" font-family="sans-serif" font-size="11" font-weight="bold" fill="#16a34a">Cloud günstiger (Monat 0 bis 15)</text>
+
+            <polygon points="415,146 610,60 610,129" fill="rgba(37, 99, 235, 0.10)" />
+            <text x="470" y="115" font-family="sans-serif" font-size="11" font-weight="bold" fill="#2563eb">Kauf günstiger (ab Monat 15)</text>
+
+            <!-- Option A: Kauf On-Premises -->
+            <line x1="90" y1="175" x2="610" y2="129" stroke="#2563eb" stroke-width="3" />
+            <text x="530" y="145" font-family="sans-serif" font-size="11" font-weight="bold" fill="#2563eb">Option A (Kauf)</text>
+
+            <!-- Option B: Cloud SaaS -->
+            <line x1="90" y1="290" x2="610" y2="60" stroke="#ea580c" stroke-width="3" />
+            <text x="530" y="55" font-family="sans-serif" font-size="11" font-weight="bold" fill="#ea580c">Option B (Cloud)</text>
+
+            <!-- Schnittpunkt bei 15 Monate, 22.500 € -->
+            <line x1="415" y1="146" x2="415" y2="290" stroke="#7c3aed" stroke-width="1.8" stroke-dasharray="4,4" />
+            <line x1="415" y1="146" x2="90" y2="146" stroke="#7c3aed" stroke-width="1.8" stroke-dasharray="4,4" />
+            <circle cx="415" cy="146" r="6" fill="#7c3aed" stroke="#ffffff" stroke-width="2" />
+            
+            <rect x="290" y="118" width="220" height="24" fill="#1e293b" rx="4" opacity="0.95" />
+            <text x="400" y="134" font-family="sans-serif" font-size="11" font-weight="bold" fill="#f8fafc" text-anchor="middle">⚖️ Kritische Zeit: 15 Monate (22.500 €)</text>
+            <text x="80" y="150" font-family="sans-serif" font-size="10" font-weight="bold" fill="#7c3aed" text-anchor="end">22.500 €</text>
+
+            <!-- Legende Box oben links -->
+            <g transform="translate(105, 42)">
+                <rect width="210" height="52" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.2" rx="4" />
+                <line x1="12" y1="18" x2="35" y2="18" stroke="#2563eb" stroke-width="3" />
+                <text x="42" y="22" font-family="sans-serif" font-size="10.5" font-weight="600" fill="#1e293b">Kauf: 18.000 € + 300 €/Mon.</text>
+                <line x1="12" y1="36" x2="35" y2="36" stroke="#ea580c" stroke-width="3" />
+                <text x="42" y="40" font-family="sans-serif" font-size="10.5" font-weight="600" fill="#1e293b">Cloud: 0 € + 1.500 €/Mon.</text>
+            </g>
+        </svg>
+        `;
+    },
+
     // 11. Relationales ERD- & Tabellenschema-Diagramm (Chen + Relationale Tabellen)
     getRelationalErdSvg: function(entA = "Server", entB = "Festplatte", rel = "enthält", card = "1:n", fkTable = "Festplatte", fkField = "FK_ServerID", reason = "Ein Server besitzt mehrere Festplatten, eine Festplatte ist fest in einem Server verbaut.") {
         const safeA = escapeDiagHtml(entA);
@@ -2818,6 +3071,21 @@ var VisualDiagrams = {
         // 10. Marktgleichgewicht
         if (text.includes("marktgleichgewicht") || text.includes("preisbildung") || text.includes("nachfrageüberhang")) {
             return VisualDiagrams.getMarktgleichgewichtSvg();
+        }
+
+        // 10b. Amortisationsdiagramm (Projektkosten vs. Ersparnisse / A4 Amortisationsdauer)
+        if (text.includes("amortisation") && (text.includes("diagramm") || text.includes("projektkosten") || text.includes("ersparnis") || text.includes("monate") || text.includes("achse") || text.includes("a4"))) {
+            return VisualDiagrams.getAmortisationDiagramSvg();
+        }
+
+        // 10c. Break-Even-Point & Gewinnschwellendiagramm
+        if (text.includes("break-even") || text.includes("gewinnschwelle")) {
+            return VisualDiagrams.getBreakEvenDiagramSvg();
+        }
+
+        // 10d. Kostenvergleichsrechnung (Kauf vs. Cloud)
+        if (text.includes("kostenvergleich") && (text.includes("diagramm") || text.includes("cloud") || text.includes("kritisch"))) {
+            return VisualDiagrams.getKostenvergleichDiagramSvg();
         }
 
         // 11. Handelskalkulation
