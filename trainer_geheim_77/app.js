@@ -394,6 +394,47 @@ function filterQuestions(theme) {
                     q.question.toLowerCase().includes("leitungsverlust")
                 ))
             );
+        } else if (theme === "zahlensysteme" || theme === "binary" || theme === "hex") {
+            filteredQuestions = questions.filter(q => 
+                q.theme === "zahlensysteme" || 
+                q.isZahlensysteme === true || 
+                (q.topic && (
+                    q.topic.toLowerCase().includes("zahlensystem") || 
+                    q.topic.toLowerCase().includes("hexadezimal") || 
+                    q.topic.toLowerCase().includes("hex") || 
+                    q.topic.toLowerCase().includes("binär") || 
+                    q.topic.toLowerCase().includes("dual") || 
+                    q.topic.toLowerCase().includes("zweierkomplement") || 
+                    q.topic.toLowerCase().includes("2er-komplement") || 
+                    q.topic.toLowerCase().includes("nibble") || 
+                    q.topic.toLowerCase().includes("kibibyte") || 
+                    q.topic.toLowerCase().includes("mebibyte") || 
+                    q.topic.toLowerCase().includes("gibibyte") || 
+                    q.topic.toLowerCase().includes("speicherberechnung") || 
+                    q.topic.toLowerCase().includes("speichereinheit") || 
+                    q.topic.toLowerCase().includes("dateneinheit") || 
+                    q.topic.toLowerCase().includes("übertragungsdauer") || 
+                    q.topic.toLowerCase().includes("datenvolumen") || 
+                    q.topic.toLowerCase().includes("bitweise")
+                )) ||
+                (q.question && (
+                    q.question.toLowerCase().includes("zahlensystem") || 
+                    q.question.toLowerCase().includes("hexadezimal") || 
+                    q.question.toLowerCase().includes("0x") || 
+                    q.question.toLowerCase().includes("binär") || 
+                    q.question.toLowerCase().includes("dualzahl") || 
+                    q.question.toLowerCase().includes("zweierkomplement") || 
+                    q.question.toLowerCase().includes("2er-komplement") || 
+                    q.question.toLowerCase().includes("nibble") || 
+                    q.question.toLowerCase().includes("kibibyte") || 
+                    q.question.toLowerCase().includes("mebibyte") || 
+                    q.question.toLowerCase().includes("gibibyte") || 
+                    q.question.toLowerCase().includes("tebibyte") || 
+                    q.question.toLowerCase().includes("mbit/s") || 
+                    q.question.toLowerCase().includes("gbit/s") || 
+                    q.question.toLowerCase().includes("bitweise")
+                ))
+            );
         } else if (theme === "pseudocode" || theme === "code" || theme === "algorithmen") {
             filteredQuestions = questions.filter(q => 
                 q.theme === "pseudocode" || 
@@ -1167,6 +1208,9 @@ function getThemeLabel(key) {
         "power-calc": "⚡ Strom, Leistung & Einheiten (LF 2/6)",
         power: "⚡ Strom, Leistung & Einheiten (LF 2/6)",
         strom: "⚡ Strom, Leistung & Einheiten (LF 2/6)",
+        zahlensysteme: "🔢 Zahlensysteme & Dateneinheiten (LF 2/3)",
+        binary: "🔢 Zahlensysteme & Dateneinheiten (LF 2/3)",
+        hex: "🔢 Zahlensysteme & Dateneinheiten (LF 2/3)",
         "hard-mode": "🔥 IHK Meisterklasse (Schwer)",
         hard: "🔥 IHK Meisterklasse (Schwer)"
     };

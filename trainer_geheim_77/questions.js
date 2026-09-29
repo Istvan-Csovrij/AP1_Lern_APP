@@ -9715,4 +9715,270 @@ Aufgaben:
 - Für On-Premises: Vollständige Datenhoheit / Datenschutz (DSGVO), keine Abhängigkeit von Internetverbindung oder Drittanbietern (Vendor Lock-in), individuelle Anpassbarkeit an Schnittstellen.`,
         explanation: "Kostenvergleich: K_A(x) = K_B(x) auflösen liefert den kritischen Punkt. Vor dem Schnittpunkt ist die Option mit geringeren Fixkosten günstiger, danach die mit geringeren variablen Kosten."
     }
+    ,
+    {
+        id: 468,
+        isHard: true,
+        difficulty: "hard",
+        isBawueFocus: true,
+        isCalculation: true,
+        isZahlensysteme: true,
+        theme: "lf2",
+        topic: "🔢 Zahlensysteme: Hexadezimal ↔ Binär mit 4-Bit-Nibble-Methode (8-4-2-1)",
+        type: "open-text",
+        question: `IHK-Prüfungsaufgabe Zahlensysteme (LF 2 / LF 3 - Hexadezimal & Dualsystem):
+In der Netzwerk- und Systemadministration begegnen Ihnen häufig Hexadezimalwerte (z. B. MAC-Adressen, IPv6-Präfixe, Speicherdumps oder Farbcodes).
+
+Gegeben ist der zweistellige Hexadezimalwert: 0xD7 (Basis 16).
+
+a) Rechnen Sie den Hexadezimalwert 0xD7 mithilfe der zeitsparenden 4-Bit-Nibble-Methode (8-4-2-1 Schema) direkt in eine 8-Bit-Dualzahl (Binärzahl) um. Notieren Sie die Zerlegung der beiden Halbbytes (Nibbles).
+b) Bestimmen Sie den dezimalen Wert der Zahl 0xD7 (Basis 10). Zeigen Sie den Rechenweg (über Stellenwertigkeiten der Basis 16 oder Basis 2).
+c) Erläutern Sie, warum in der Informatik und Netzwerktechnik sehr häufig das Hexadezimalsystem anstelle des Binärsystems verwendet wird.`,
+        musterloesung: `a) 4-Bit-Nibble-Methode (8-4-2-1 Schema):
+   Jedes Byte (8 Bit) besteht aus zwei 4-Bit-Halbbytes (Nibbles):
+   - Oberes Nibble 'D': 'D' entspricht dezimal 13.
+     13 = 8 + 4 + 1 -> Binär: 1101
+   - Unteres Nibble '7': '7' entspricht dezimal 7.
+     7 = 4 + 2 + 1 -> Binär: 0111
+   - Zusammengeführt ergibt 0xD7 als 8-Bit-Dualzahl: 1101 0111_2 (bzw. 11010111).
+
+b) Umrechnung in Dezimal (Basis 10):
+   - Weg 1 (über Hexadezimal-Stellenwerte 16^1 und 16^0):
+     D * 16^1 + 7 * 16^0 = 13 * 16 + 7 * 1 = 208 + 7 = 215_10.
+   - Weg 2 (über Binärstellen 128, 64, 32, 16, 8, 4, 2, 1):
+     128 + 64 + 0 + 16 + 0 + 4 + 2 + 1 = 215_10.
+
+c) Vorteile des Hexadezimalsystems:
+   - Kompaktheit & Lesbarkeit: 1 Hex-Ziffer fasst exakt 4 Binärstellen (1 Nibble) zusammen. Ein Byte benötigt nur 2 Hex-Ziffern statt 8 Bits.
+   - Fehlerminimierung: Menschen machen bei langen Bitketten (z.B. IPv6 mit 128 Bits oder MAC mit 48 Bits) viele Ablese- und Schreibfehler. Hexadezimal verkürzt IPv6 auf 32 Zeichen (z.B. 2001:0db8:...).
+   - Direkte, verlustfreie 1:1-Zuordnung zu Nibbles/Bytes ohne krumme Umrechnung.`,
+        explanation: "Die 4-Bit-Nibble-Methode ist der schnellste Prüfungstrick der IHK: Niemals Hex über Dezimal in Binär umrechnen! Stattdessen jede Hex-Ziffer isoliert in 4 Bits (8-4-2-1) zerlegen. D=13 (1101) und 7 (0111) -> 11010111_2."
+    },
+    {
+        id: 469,
+        isHard: true,
+        difficulty: "hard",
+        isBawueFocus: true,
+        isCalculation: true,
+        isZahlensysteme: true,
+        theme: "lf2",
+        topic: "🔢 Maschinenebene: 8-Bit Zweierkomplement für negative Zahlen & Wertebereich",
+        type: "open-text",
+        question: `IHK-Prüfungsaufgabe Maschinenebene (LF 2 / LF 5 - Zweierkomplement & Datentypen):
+Mikroprozessoren und Betriebssysteme speichern vorzeichenbehaftete Ganzzahlen (Signed Integers) im Zweierkomplement (2er-Komplement).
+
+a) Stellen Sie die negative Zahl -38 als 8-Bit-Zweierkomplement dar. Führen Sie alle 3 Schritte (Positiver Wert -> Einerkomplement/Invertieren -> Addition von 1) explizit auf.
+b) Bestimmen Sie den minimalen und maximalen dezimalen Wertebereich, der mit einer vorzeichenbehafteten 8-Bit-Ganzzahl (Signed Byte / int8) dargestellt werden kann. Erläutern Sie, warum der negative Bereich um 1 größer ist als der positive.
+c) Welche Rolle spielt das höchstwertige Bit (MSB, Most Significant Bit) bei vorzeichenbehafteten Binärzahlen?`,
+        musterloesung: `a) 3-Schritte-Verfahren für -38 im 8-Bit Zweierkomplement:
+   1. Schritt (Betrag positiv darstellen):
+      +38 = 32 + 4 + 2 -> 0010 0110_2
+   2. Schritt (Einerkomplement / Bits invertieren):
+      Alle Nullen werden zu Einsen, alle Einsen zu Nullen:
+      0010 0110 -> 1101 1001_2
+   3. Schritt (Addition von 1 auf das LSB):
+      1101 1001 + 1 = 1101 1010_2
+   Ergebnis: Die Zahl -38 lautet im 8-Bit Zweierkomplement 1101 1010 (Hex: 0xDA).
+
+b) Wertebereich einer 8-Bit Signed Ganzzahl (int8):
+   - Minimaler Wert: -128 (Binär: 1000 0000)
+   - Maximaler Wert: +127 (Binär: 0111 1111)
+   - Formel: von -2^(n-1) bis +2^(n-1) - 1, also von -2^7 (-128) bis +2^7 - 1 (+127).
+   - Begründung: Die Null (0000 0000) belegt eine Kombination im positiven Wertebereich (MSB = 0), weshalb positiv nur bis +127 gezählt werden kann, während es keine '-0' gibt und der negative Bereich bis -128 reicht.
+
+c) Bedeutung des MSB (Most Significant Bit, Bit 7):
+   - Das MSB dient als Vorzeichen-Bit (Sign Bit):
+     * MSB = 0 bedeutet: Zahl ist positiv (oder Null).
+     * MSB = 1 bedeutet: Zahl ist negativ.
+   - Im Zweierkomplement besitzt das MSB das negative Stellenwertgewicht: Bei 8-Bit hat Bit 7 das Gewicht -128 (-2^7).
+     Probe für 1101 1010: -128 + 64 + 16 + 8 + 2 = -38!`,
+        explanation: "Das 2er-Komplement ist die Standard-Darstellung negativer Zahlen im Computer: 1. Positiv notieren, 2. Bits invertieren (0<->1), 3. Eins addieren (+1). MSB=1 signalisiert negativ."
+    },
+    {
+        id: 470,
+        isHard: true,
+        difficulty: "hard",
+        isBawueFocus: true,
+        isCalculation: true,
+        isZahlensysteme: true,
+        theme: "lf2",
+        topic: "💾 Speicherberechnung Praxis: SSD-Kapazität (2 TB vs. 1,82 TiB) & Kundenreklamation",
+        type: "open-text",
+        question: `IHK-Prüfungsaufgabe Speicherberechnung & Kundenberatung (LF 1 / LF 2 - SI vs. IEC Präfixe):
+Ein Kunde kauft in Ihrem IT-Systemhaus eine neue NVMe-M.2-SSD mit einer vom Hersteller angegebenen Kapazität von 2 TB (Terabyte).
+Nach dem Einbau und der Initialisierung unter Microsoft Windows 11 reklamiert der Kunde verärgert:
+„Im Windows-Explorer werden mir nur 1,81 TiB (bzw. 1.862 GB) freier Speicherplatz angezeigt! Mir fehlen fast 180 GB! Die SSD ist defekt oder minderwertig.“
+
+a) Berechnen Sie die exakte Kapazität der SSD in GiB (Gibibyte) und in TiB (Tebibyte), ausgehend von der dezimalen Herstellerangabe (1 TB = 10^12 Byte). Runden Sie auf zwei Nachkommastellen.
+b) Formulieren Sie eine professionelle und kundenorientierte Erklärung (3-4 Sätze), mit der Sie dem Kunden die Diskrepanz zwischen Herstellerangabe und Windows-Anzeige verständlich machen, ohne Fachjargon vorauszusetzen.
+c) Erläutern Sie den Unterschied zwischen den SI-Präfixen (Dezimal) und den IEC-Präfixen (Binär) und nennen Sie den Beschluss der International Electrotechnical Commission (IEC) von 1998 zu den Zweierpotenzen.`,
+        musterloesung: `a) Mathematische Berechnung:
+   - Herstellerangabe (SI-Präfix, Basis 10):
+     2 TB = 2 * 10^12 Bytes = 2.000.000.000.000 Bytes.
+   - Umrechnung in GiB (IEC-Präfix, Basis 2: 1 GiB = 2^30 Bytes = 1.073.741.824 Bytes):
+     2.000.000.000.000 Bytes / 1.073.741.824 Bytes/GiB = 1.862,645... GiB ≈ 1.862,65 GiB.
+   - Umrechnung in TiB (1 TiB = 1.024 GiB = 2^40 Bytes = 1.099.511.627.776 Bytes):
+     1.862,645 GiB / 1.024 = 1,8189... TiB ≈ 1,82 TiB.
+   Ergebnis: Windows zeigt rechnerisch exakt 1.862 GiB bzw. 1,82 TiB an. Die SSD ist technisch absolut einwandfrei.
+
+b) Professionelle Kundenerklärung:
+   „Ihre neue SSD ist technisch einwandfrei und stellt Ihnen die vollen 2.000 Milliarden Bytes an Speicherplatz zur Verfügung. Der Unterschied in der Windows-Anzeige entsteht durch unterschiedliche Zählweisen: Speicherhersteller rechnen nach dem Dezimalsystem in glatten 1.000er-Schritten (1 TB = 1.000.000.000.000 Byte). Windows rechnet intern jedoch nach dem Binärsystem des Computers in 1.024er-Schritten (2^10). Durch diese 1.024er-Teilung (Gibibyte/Tebibyte) lautet derselbe physische Speicherwert in Windows 1,82 TiB – es fehlt Ihnen also kein einziges Byte physischer Speicher.“
+
+c) Unterschied SI vs. IEC:
+   - SI-Präfixe (Dezimalpräfixe): kB, MB, GB, TB basieren auf Potenzen von 10 (10^3, 10^6, 10^9, 10^12). Verwendung: Festplattenhersteller, Netzwerkbandbreiten (Mbit/s), Telekommunikation.
+   - IEC-Präfixe (Binärpräfixe, 1998 standardisiert): KiB, MiB, GiB, TiB basieren auf Potenzen von 2 (2^10 = 1.024, 2^20, 2^30, 2^40).
+   - Problem in der Praxis: Windows berechnet Kapazitäten binär (Basis 1.024), verwendet in der Anzeige historisch aber immer noch die SI-Kürzel 'KB, MB, GB' statt 'KiB, MiB, GiB', was regelmäßig zur Verwirrung der Anwender führt. macOS und Linux zeigen inzwischen korrekte SI-Werte (Basis 1.000) an.`,
+        explanation: "Klassiker in IHK-Prüfungen: Festplattenhersteller rechnen dezimal (10^12), Betriebssysteme binär (2^40 = 1024^4). Faktor: 10^12 / 1024^3 = ca. 931,32 GiB pro Terabyte. Bei 2 TB: 1862,65 GiB bzw. 1,82 TiB."
+    },
+    {
+        id: 471,
+        isHard: true,
+        difficulty: "hard",
+        isBawueFocus: true,
+        isCalculation: true,
+        isZahlensysteme: true,
+        theme: "lf2",
+        topic: "🔢 Zahlensysteme: Dezimalzahl in Dualzahl & Hexadezimal umrechnen (219 in Binär und Hex)",
+        type: "open-text",
+        question: `IHK-Prüfungsaufgabe Zahlensysteme (LF 2 / LF 5 - Dezimal, Binär & Hexadezimal):
+In einem Firmware-Protokoll eines Netzwerkgeräts wird der Statuswert 219 (Dezimalsystem, Basis 10) ausgegeben.
+
+a) Rechnen Sie die Dezimalzahl 219 in eine 8-Bit-Dualzahl (Binärzahl) um. Zeigen Sie Ihren Rechenweg entweder über das Restwertverfahren (wiederholte Division durch 2 mit Rest) ODER über die Stellenwertigkeitstabelle (128, 64, 32, 16, 8, 4, 2, 1).
+b) Konvertieren Sie die ermittelte Dualzahl in das Hexadezimalsystem (Basis 16).
+c) Prüfen Sie Ihr Hexadezimalergebnis durch Rückrechnung ins Dezimalsystem.`,
+        musterloesung: `a) Umrechnung 219_10 in Dualzahl:
+   - Weg 1 (Stellenwerttabelle):
+     * 219 >= 128? Ja -> Bit 7 = 1 (Rest: 219 - 128 = 91)
+     * 91 >= 64?   Ja -> Bit 6 = 1 (Rest: 91 - 64 = 27)
+     * 27 >= 32?   Nein -> Bit 5 = 0 (Rest: 27)
+     * 27 >= 16?   Ja -> Bit 4 = 1 (Rest: 27 - 16 = 11)
+     * 11 >= 8?    Ja -> Bit 3 = 1 (Rest: 11 - 8 = 3)
+     * 3 >= 4?     Nein -> Bit 2 = 0 (Rest: 3)
+     * 3 >= 2?     Ja -> Bit 1 = 1 (Rest: 3 - 2 = 1)
+     * 1 >= 1?     Ja -> Bit 0 = 1 (Rest: 0)
+     Ergebnis: 219_10 = 1101 1011_2.
+
+   - Weg 2 (Divisionsrestverfahren durch 2):
+     219 / 2 = 109 Rest 1 (LSB)
+     109 / 2 = 54  Rest 1
+      54 / 2 = 27  Rest 0
+      27 / 2 = 13  Rest 1
+      13 / 2 = 6   Rest 1
+       6 / 2 = 3   Rest 0
+       3 / 2 = 1   Rest 1
+       1 / 2 = 0   Rest 1 (MSB)
+     Von unten nach oben gelesen: 1101 1011_2.
+
+b) Konvertierung in Hexadezimal (4-Bit-Nibbles):
+   - Oberes Nibble: 1101_2 = 8 + 4 + 1 = 13_10 -> Hex 'D'
+   - Unteres Nibble: 1011_2 = 8 + 2 + 1 = 11_10 -> Hex 'B'
+   Ergebnis: 0xDB (bzw. DB_16).
+
+c) Probe / Rückrechnung:
+   D * 16^1 + B * 16^0 = 13 * 16 + 11 * 1 = 208 + 11 = 219_10 (Stimmt exakt!).`,
+        explanation: "Umrechnung Dezimal -> Binär geht am schnellsten per Stellenwerttabelle (128, 64, 32, 16, 8, 4, 2, 1). Für Hexadezimal teilt man die 8 Bits in zwei 4er-Nibbles (1101 = D, 1011 = B -> 0xDB)."
+    },
+    {
+        id: 472,
+        isHard: true,
+        difficulty: "hard",
+        isBawueFocus: true,
+        isCalculation: true,
+        isZahlensysteme: true,
+        theme: "lf3",
+        topic: "🚀 Bandbreite & Übertragungsdauer: Cloud-Backup mit Übertragungs-Overhead (Mbit/s vs MByte)",
+        type: "open-text",
+        question: `IHK-Prüfungsaufgabe Übertragungszeit & Datenrate (LF 3 / LF 6 - Bandbreitenberechnung):
+Ein mittelständisches Ingenieurbüro sichert jede Nacht ein komprimiertes CAD-Projektarchiv mit einer Dateigröße von 45 GByte (Gigabyte) in ein externes Cloud-Rechenzentrum.
+Der Internetanschluss verfügt über eine garantierte Upstream-Bandbreite von 100 Mbit/s (Megabit pro Sekunde).
+Durch Netzwerkprotokolle (TCP/IP-Header, TLS-Verschlüsselung, Bestätigungspakete) entsteht ein realistischer Protokoll-Overhead von 12 %, der zusätzlich über die Leitung übertragen werden muss.
+
+a) Rechnen Sie die Dateigröße von 45 GByte in Megabit (Mbit) um.
+b) Berechnen Sie das gesamte zu übertragende Datenvolumen in Mbit unter Berücksichtigung des 12 % Protokoll-Overheads.
+c) Berechnen Sie die Übertragungsdauer in Sekunden sowie in Stunden, Minuten und Sekunden.
+d) Um wie viel Uhr ist das Backup fertiggestellt, wenn der Übertragungsprozess pünktlich um 22:30 Uhr startet?`,
+        musterloesung: `a) Umrechnung Dateigröße in Mbit:
+   - 1 GByte = 1.000 MByte (nach SI/Netzwerkstandard)
+   - 45 GByte = 45.000 MByte
+   - Da 1 Byte = 8 Bit:
+     45.000 MByte * 8 Bit/Byte = 360.000 Mbit.
+
+b) Datenvolumen inklusive 12 % Overhead:
+   - Overhead-Faktor = 1 + 0,12 = 1,12
+   - Gesamtvolumen = 360.000 Mbit * 1,12 = 403.200 Mbit.
+
+c) Übertragungsdauer:
+   - Dauer t = Datenmenge / Bandbreite = 403.200 Mbit / 100 Mbit/s = 4.032 Sekunden.
+   - Umrechnung in Stunden, Minuten, Sekunden:
+     * 4.032 s / 3.600 s/h = 1 Stunde (Rest: 4.032 - 3.600 = 432 s)
+     * 432 s / 60 s/min = 7 Minuten (Rest: 432 - 420 = 12 s)
+   Ergebnis: Die Übertragung dauert exakt 1 Stunde, 7 Minuten und 12 Sekunden (4.032 s).
+
+d) Fertigstellungszeitpunkt:
+   - Start: 22:30:00 Uhr
+   - Dauer: + 01:07:12 Stunden
+   - Fertigstellung: 23:37:12 Uhr (um ca. 23:37 Uhr in derselben Nacht).`,
+        explanation: "Grundregel bei Datenübertragung: Dateigröße in Byte IMMER mit 8 multiplizieren, um Bit zu erhalten! Anschließend durch die Bandbreite in Bit/s teilen: t = (Größe in Byte * 8 * Overhead) / Bandbreite."
+    },
+    {
+        id: 473,
+        isHard: true,
+        difficulty: "hard",
+        isBawueFocus: true,
+        isCalculation: true,
+        isZahlensysteme: true,
+        theme: "lf5",
+        topic: "💻 Bitweise Logik-Operatoren (AND, OR, XOR, NOT) & Subnet-Maskierung / Status-Flags",
+        type: "open-text",
+        question: `IHK-Prüfungsaufgabe Bit-Operationen (LF 3 / LF 5 - Logische Verknüpfungen & Maskierung):
+Bitweise logische Operatoren (AND, OR, XOR, NOT) gehören zu den wichtigsten Grundlagen der Softwareentwicklung, Hardwaresteuerung und IP-Netzwerktechnik.
+
+Gegeben sind zwei 8-Bit-Registerinhalte:
+- Register A: 1100 1010 (Hex: 0xCA)
+- Register B: 1010 1100 (Hex: 0xAC)
+
+a) Führen Sie folgende bitweise Verknüpfungen durch und geben Sie das binäre und hexadezimale Ergebnis an:
+   1. A AND B
+   2. A OR B
+   3. A XOR B
+   4. NOT A (Invertierung aller Bits von A)
+b) Welcher bitweise Operator (AND, OR oder XOR) wird in Routern verwendet, um aus einer IPv4-Adresse (z. B. 192.168.10.75) und einer Subnetzmaske (z. B. 255.255.255.0) die Netzwerkadresse zu ermitteln? Begründen Sie kurz die Funktionsweise.
+c) Erläutern Sie, wie mit einer bitweisen XOR-Operation ein bestimmtes Bit (z. B. eine Kontroll-LED oder ein Prüfbit) gezielt umgeschaltet (getoggelt: 0 -> 1, 1 -> 0) werden kann.`,
+        musterloesung: `a) Bitweise Operationen:
+   1. A AND B (Nur wenn beide Bits 1 sind, ist das Ergebnis 1):
+        1100 1010 (A)
+      & 1010 1100 (B)
+      -----------
+      = 1000 1000_2 -> Hex: 0x88.
+
+   2. A OR B (Wenn mindestens ein Bit 1 ist, ist das Ergebnis 1):
+        1100 1010 (A)
+      | 1010 1100 (B)
+      -----------
+      = 1110 1110_2 -> Hex: 0xEE.
+
+   3. A XOR B (Exklusives ODER: Genau dann 1, wenn sich die Bits unterscheiden):
+        1100 1010 (A)
+      ^ 1010 1100 (B)
+      -----------
+      = 0110 0110_2 -> Hex: 0x66.
+
+   4. NOT A (Bitweise Verneinung aller 8 Bits):
+      ~ 1100 1010 (A)
+      -----------
+      = 0011 0101_2 -> Hex: 0x35.
+
+b) Einsatz beim Subnetting in Routern:
+   - Verwendeter Operator: Bitweises AND (UND-Verknüpfung).
+   - Begründung: IP-Adresse AND Subnetzmaske = Netzwerkadresse.
+     * Wo in der Subnetzmaske eine '1' steht (Netzwerkanteil), bleibt das Bit der IP unverändert (x AND 1 = x).
+     * Wo in der Subnetzmaske eine '0' steht (Hostanteil), wird das Bit genullt (x AND 0 = 0).
+     Dadurch werden alle Host-Bits abgeschnitten und die reine Netz-ID bleibt übrig.
+
+c) Togglen / Umschalten mit XOR:
+   - Gesetz: x XOR 1 = NOT x (wenn x=0 -> 0 XOR 1 = 1; wenn x=1 -> 1 XOR 1 = 0).
+   - Gesetz: x XOR 0 = x (das Bit bleibt unverändert).
+   - Durch Verknüpfung mit einer Bitmaske, die an der gewünschten Stelle eine '1' und überall sonst '0' hat, schaltet XOR genau dieses Zielbit um (Invertierung), während alle anderen Bits unberührt bleiben.`,
+        explanation: "Bit-Operatoren verstehen: AND filtert/maskiert Bits heraus (wie beim Subnetting IP & Maske), OR setzt Bits auf 1 (Flags aktivieren), XOR schaltet Bits um (Togglen) und NOT kehrt alle Bits um (wie beim 2er-Komplement Schritt 2)."
+    }
 ];
