@@ -613,6 +613,8 @@
                         <button class="stamp-btn" onclick="stampTemplate('actor_usecase')">👤 Akteur + Use-Case</button>
                         <button class="stamp-btn" onclick="stampTemplate('erd_entity')">🔲 ERD Entität + PK</button>
                         <button class="stamp-btn" onclick="stampTemplate('bpmn_gateway')">🔷 BPMN XOR Gateway</button>
+                        <button class="stamp-btn" onclick="stampTemplate('bpmn_pool')">🏊 BPMN Pool &amp; 2 Lanes</button>
+                        <button class="stamp-btn" onclick="stampTemplate('uml_activity')">⚡ UML-Aktivität (Fork/Join)</button>
                         <button class="stamp-btn" onclick="stampTemplate('epk_chain')">🔄 EPK Ereignis-Funktion</button>
                     </div>
                 </div>
@@ -660,6 +662,18 @@
                         <li><strong>Funktion:</strong> Abgerundetes Rechteck (Aktion: <em>"Auftrag prüfen"</em>).</li>
                         <li><strong>Regel:</strong> Immer abwechselnd! Nie Ereignis auf Ereignis.</li>
                         <li><strong>Konnektoren:</strong> Kreis mit <strong>AND (∧)</strong>, <strong>OR (∨)</strong>, <strong>XOR (X)</strong>.</li>
+                    </ul>
+                </div>
+
+                <!-- UML Aktivitätsdiagramm Guide -->
+                <div class="cheat-card">
+                    <h4><span>⚡ UML-Aktivitätsdiagramm</span> <span class="cheat-badge">LF 5 / AP1</span></h4>
+                    <ul style="padding-left: 1.1rem; font-size: 0.8rem;">
+                        <li><strong>Startknoten:</strong> Ausgefüllter schwarzer Kreis (●).</li>
+                        <li><strong>Aktion:</strong> Abgerundetes Rechteck (z. B. <em>"Pin prüfen"</em>).</li>
+                        <li><strong>Decision / Merge:</strong> Raute (◇) mit Guards in eckigen Klammern: <code>[Bedingung]</code>.</li>
+                        <li><strong>Fork / Join:</strong> Dicker schwarzer Balken (Parallelisierung &amp; Synchronisation).</li>
+                        <li><strong>Endknoten:</strong> Kreis mit ausgefülltem Kern (⦿).</li>
                     </ul>
                 </div>
 
@@ -1307,6 +1321,61 @@
                 ctx.fillText("X", gx - 8, gy + 8);
                 ctx.font = "11px sans-serif";
                 ctx.fillText("XOR-Entscheidung", gx - 45, gy + 56);
+            } else if (type === "bpmn_pool") {
+                // BPMN Pool with 2 Lanes
+                const pw = 280, ph = 160;
+                const px = cx - pw / 2, py = cy - ph / 2;
+                ctx.strokeRect(px, py, pw, ph);
+                // Pool header bar
+                ctx.strokeRect(px, py, 30, ph);
+                ctx.save();
+                ctx.translate(px + 18, py + ph / 2);
+                ctx.rotate(-Math.PI / 2);
+                ctx.font = "bold 11px sans-serif";
+                ctx.textAlign = "center";
+                ctx.fillText("Pool: IT-Service", 0, 0);
+                ctx.restore();
+
+                // Lane divider
+                ctx.beginPath();
+                ctx.setLineDash([4, 4]);
+                ctx.moveTo(px + 30, py + ph / 2);
+                ctx.lineTo(px + pw, py + ph / 2);
+                ctx.stroke();
+                ctx.setLineDash([]);
+
+                ctx.font = "10px sans-serif";
+                ctx.fillText("Lane: 1st-Level", px + 40, py + 20);
+                ctx.fillText("Lane: 2nd-Level", px + 40, py + ph / 2 + 20);
+            } else if (type === "uml_activity") {
+                // UML Activity with Initial node, Action, Fork bar, Join bar & Final node
+                const ax = cx, ay = cy - 60;
+                // Initial node
+                ctx.beginPath();
+                ctx.arc(ax, ay, 10, 0, Math.PI * 2);
+                ctx.fillStyle = "#0f172a";
+                ctx.fill();
+
+                // Action
+                drawShape(ax - 55, ay + 25, ax + 55, ay + 65, "roundrect", "#0284c7", 2);
+                ctx.font = "bold 10px sans-serif";
+                ctx.fillStyle = "#0369a1";
+                ctx.fillText("Aktion ausführen", ax - 42, ay + 48);
+
+                // Fork bar
+                ctx.fillStyle = "#0f172a";
+                ctx.fillRect(ax - 70, ay + 80, 140, 6);
+
+                // Join bar
+                ctx.fillRect(ax - 70, ay + 120, 140, 6);
+
+                // Final node
+                ctx.beginPath();
+                ctx.arc(ax, ay + 150, 12, 0, Math.PI * 2);
+                ctx.stroke();
+                ctx.beginPath();
+                ctx.arc(ax, ay + 150, 7, 0, Math.PI * 2);
+                ctx.fill();
             } else if (type === "epk_chain") {
                 // Event 1 (Hexagon) -> XOR -> Function
                 const ex = cx - 120, ey = cy;

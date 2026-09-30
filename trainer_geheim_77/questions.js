@@ -5037,7 +5037,8 @@ WHERE Email IS NULL OR Email = '';
                 "Eine Raute mit einem Stern/Fünfeck im Inneren (Event-based Gateway)."
         ],
         "correctAnswer": 0,
-        "solutionDiagramSvg": VisualDiagrams.getBpmnDiagramSvg(),
+        "diagramSvg": VisualDiagrams.getZahlungsmethodeBpmnSvg(),
+        "solutionDiagramSvg": VisualDiagrams.getZahlungsmethodeBpmnSvg(),
         "explanation": "BPMN Gateways: '+' = Parallel (AND, alle Pfade laufen gleichzeitig), 'X' oder leer = Exklusiv (XOR, genau ein Pfad), 'O' = Inklusiv (OR, einer oder mehrere Pfade), Fünfeck = Ereignisbasiert."
 },
     {
@@ -10450,5 +10451,154 @@ c) Relationales Tabellenschema:
    - AUFTRAGSPOSITION (AuftragsNr [PK, FK], PositionsNr [PK], ArtikelNr [FK], BestellteMenge, VereinbarterEinzelpreis, PositionsRabatt)
    - ARTIKEL (ArtikelNr [PK], Artikelbezeichnung, Katalogpreis, Lagerbestand, Mindestbestand, Steuersatz)`,
         explanation: "Absolute Standardaufgabe in AP1: n:m-Beziehungen müssen immer durch eine Zwischentabelle mit zusammengesetztem PK aufgelöst werden. Der historische Einzelpreis MUSS wegen Revisionssicherheit (GoBD) in der Auftragsposition gespeichert werden!"
+    }
+    ,
+    {
+        id: 481,
+        isHard: true,
+        difficulty: "hard",
+        isBawueFocus: true,
+        isDiagram: true,
+        theme: "diagrams",
+        topic: "⚙️ BPMN 2.0 Geschäftsprozess: Pools, Lanes, Nachrichtenflüsse & Gateways",
+        diagramType: "BPMN 2.0",
+        diagramTitle: "BPMN 2.0 Kollaborationsdiagramm: Störungsbehebung im IT-Service-Management (ITSM)",
+        diagramCaption: "Abbildung: BPMN 2.0 Kollaborationsmodell mit 2 Pools (Kunde & ITSM), 2 Lanes (1st-Level & 2nd-Level), Nachrichtenflüssen, XOR-Gateway und parallelem AND-Gateway",
+        diagramSvg: VisualDiagrams.getBpmnPoolLaneDiagramSvg(),
+        type: "open-text",
+        question: `IHK-Prüfungsaufgabe Geschäftsprozessmodellierung (LF 4 / LF 7 - BPMN 2.0 Kollaboration):
+Analysieren Sie das dargestellte BPMN-2.0-Diagramm zur Störungsbearbeitung und beantworten Sie folgende Fachfragen:
+
+a) Erläutern Sie den Unterschied zwischen einem Pool und einer Swimlane. Welche organisatorische Aussage treffen die dargestellten Pools und Lanes im Diagramm?
+b) Warum sind die Verbindungen zwischen dem Kunden-Pool und dem ITSM-Pool als gestrichelte Linien (Nachrichtenfluss / Message Flow) dargestellt? Welche fundamentale BPMN-Regel gilt für durchgezogene Sequenzflüsse (Sequence Flows) bezüglich Pool-Grenzen?
+c) Identifizieren Sie die beiden verwendeten Gateway-Typen (XOR ✕ und AND +) und beschreiben Sie deren jeweilige Funktionsweise im dargestellten Störungsbehebungsprozess.
+d) Im 2nd-Level Support wird ein paralleler AND-Split mit anschließendem AND-Join verwendet. Welche Konsequenz für den Prozessablauf hätte es, wenn einer der beiden parallelen Zweige ('Ersatzteil disponieren' oder 'Vor-Ort-Einsatz planen') im Fehlerfall nicht beendet werden könnte?`,
+        musterloesung: `a) Unterschied Pool vs. Swimlane:
+   - Pool: Repräsentiert eine eigenständige organisatorische Einheit, ein Unternehmen oder eine juristische Person (hier: Pool 1 = externer Kunde/Anwender, Pool 2 = IT-Systemhaus/Dienstleister). Jeder Pool besitzt seinen eigenen, unabhängigen Kontrollfluss.
+   - Swimlane: Unterteilt einen Pool intern in Abteilungen, Rollen oder Zuständigkeiten (hier: 1st-Level Support / Helpdesk vs. 2nd-Level Support / Fachabteilung).
+
+b) Nachrichtenfluss vs. Sequenzfluss & Poolgrenzen:
+   - Nachrichtenflüsse (Message Flows, gestrichelt mit offenem Pfeil) stellen den asynchronen Informations- oder Dokumentenaustausch zwischen getrennten Pools dar (z. B. Kunde meldet Störung, ITSM meldet erfolgreiche Behebung).
+   - Fundamentale BPMN-Regel: Durchgezogene Sequenzflüsse (Sequence Flows) dürfen NIEMALS die Grenzen eines Pools überschreiten! Innerhalb eines Pools (auch über Lanes hinweg) fließt der Sequenzfluss, zwischen verschiedenen Pools fließen ausschließlich Nachrichtenflüsse.
+
+c) Gateway-Typen und Funktionsweise:
+   1. Exklusives Gateway (XOR, Raute mit ✕):
+      Befindet sich im 1st-Level Support ('1st-Level lösbar?'). Es wählt anhand von Daten oder Bedingungen genau EINEN alternativen Pfad aus: Wenn Ja (direkt lösbar) -> Remote-Lösung; wenn Nein -> Weiterleitung an die 2nd-Level Lane.
+   2. Paralleles Gateway (AND, Raute mit +):
+      Befindet sich im 2nd-Level Support. Der AND-Split verzweigt gleichzeitig in BEIDE Zweige: 'Ersatzteil disponieren' UND 'Vor-Ort-Einsatz planen' laufen parallel ab.
+      Der AND-Join synchronisiert die Pfade: Er wartet zwingend, bis BEIDE Aktionen abgeschlossen sind, bevor der Techniker vor Ort entstören kann.
+
+d) Konsequenz bei Nichterfüllung eines Zweigs (Deadlock-Gefahr):
+   - Ein AND-Join wartet zwingend auf ein Token auf JEDER eingehenden Kante.
+   - Wenn ein Zweig nicht abgeschlossen wird, bleibt der Prozess am AND-Join dauerhaft hängen (Deadlock / Verklemmung). Die Folgeaktivität 'Hardware vor Ort austauschen' wird niemals aktiviert.`,
+        explanation: "BPMN 2.0 ist ein Kernstandard der IHK: Pools für eigenständige Partner (Austausch nur via gestrichelten Message Flows), Lanes für Rollen im selben Unternehmen (Sequenzfluss erlaubt), XOR (✕) für Entscheidungen, AND (+) für zwingende Parallelität."
+    },
+    {
+        id: 482,
+        isHard: true,
+        difficulty: "hard",
+        isBawueFocus: true,
+        isDiagram: true,
+        theme: "diagrams",
+        topic: "📊 UML 2.5 Aktivitätsdiagramm: Verzweigung (Decision/Guards) vs. Parallelisierung (Fork/Join)",
+        diagramType: "UML-Aktivitätsdiagramm",
+        diagramTitle: "UML 2.5 Aktivitätsdiagramm: Bestellprüfung & Parallele Auftragsabwicklung",
+        diagramCaption: "Abbildung: UML-Aktivitätsdiagramm mit Startknoten, Verzweigung (Raute mit Guards), Parallelisierung (Fork-Balken), Synchronisation (Join-Balken), Swimlanes und Endknoten",
+        diagramSvg: VisualDiagrams.getUmlAktivitaetsdiagrammSvg(),
+        type: "open-text",
+        question: `IHK-Prüfungsaufgabe UML-Verhaltensmodellierung (LF 5 - Aktivitätsdiagramm):
+Gegeben ist das abgebildete UML-2.5-Aktivitätsdiagramm zur Bestellabwicklung in einem Handelsunternehmen.
+Analysieren Sie das Modell und beantworten Sie folgende Aufgaben:
+
+a) Benennen Sie die fünf grafischen Notationselemente 1 bis 5 (ausgefüllter schwarzer Kreis, abgerundetes Rechteck, Raute mit [Bedingungen], dicker schwarzer horizontaler Balken, umrandeter Kreis mit schwarzem Punkt).
+b) Erläutern Sie den fundamentalen Unterschied zwischen einer Verzweigung (Decision Node, Raute) und einer Parallelisierung (Fork Node, dicker Balken).
+c) Wie werden die Bedingungen an den Kanten nach einem Decision Node fachsprachlich bezeichnet und welche logische Anforderung müssen diese Bedingungen zwingend erfüllen?
+d) Erklären Sie die Synchronisationssemantik des Join-Balkens vor der Aktion 'Ware versenden'. Wann genau wird der Kontrollfluss zur Versandaktion weitergeleitet?`,
+        musterloesung: `a) Die 5 Notationselemente des UML-Aktivitätsdiagramms:
+   1. Ausgefüllter schwarzer Kreis: Initial Node (Startknoten) - kennzeichnet den Eintrittspunkt der Aktivität.
+   2. Abgerundetes Rechteck: Action Node (Aktion) - stellt einen einzelnen, nicht weiter unterteilten Arbeitsschritt / Funktionsaufruf dar.
+   3. Raute mit [Bedingungen]: Decision Node (Entscheidungsknoten / Verzweigung) - spaltet den Kontrollfluss alternativ auf.
+   4. Dicker schwarzer horizontaler Balken: Fork Node (Gabelungsknoten / Parallelisierung) bzw. Join Node (Synchronisationsknoten).
+   5. Kreis mit ausgefülltem Punkt (Bullenauge): Activity Final Node (Aktivitätsendknoten) - beendet den gesamten Ablauf der Aktivität.
+
+b) Unterschied Decision Node vs. Fork Node:
+   - Decision Node (Raute): Exklusiver Alternativpfad. Es wird abhängig von der Bedingung genau EIN ausgehender Pfad betreten (Token wandert in genau eine Kante).
+   - Fork Node (Gabelungsbalken): Echte Parallelität / Nebenläufigkeit. Es wird auf ALLEN ausgehenden Kanten gleichzeitig ein Token erzeugt; alle nachfolgenden Aktionen laufen parallel bzw. in beliebiger Reihenfolge ab.
+
+c) Bezeichnung und Anforderung an Guards:
+   - Fachbegriff: Guard (Wächterausdruck / Ablaufbedingung), notiert in eckigen Klammern: [Bedingung].
+   - Logische Anforderung: Die Guards an einem Decision Node müssen:
+     1. Disjunkt (widerspruchsfrei) sein: Es darf niemals mehr als eine Bedingung gleichzeitig wahr sein.
+     2. Vollständig sein: Alle möglichen Fälle müssen abgedeckt sein (häufig mit einem [else]-Pfad abgesichert).
+
+d) Synchronisationssemantik am Join-Balken:
+   - Der Join-Knoten synchronisiert parallel laufende Zweige nach dem AND-Prinzip.
+   - Die nachfolgende Aktion 'Ware versenden' darf erst dann starten, wenn auf ALLEN eingehenden Kanten (sowohl aus 'Artikel kommissionieren' als auch aus 'Rechnung generieren') ein Token eingetroffen ist. Kommt auch nur ein Token nicht an, blockiert der Prozess.`,
+        explanation: "Das UML-Aktivitätsdiagramm beschreibt dynamische Abläufe: Raute = Entweder-Oder (Decision/Merge mit Guards), Dicker Balken = Gleichzeitig (Fork/Join). Swimlanes ordnen Aktionen Verantwortungsbereichen zu."
+    },
+    {
+        id: 483,
+        isHard: true,
+        difficulty: "hard",
+        isBawueFocus: true,
+        isDiagram: true,
+        theme: "diagrams",
+        topic: "🔄 Prozessmodellierung im IHK-Vergleich: BPMN 2.0 vs. UML-Aktivitätsdiagramm vs. EPK",
+        type: "open-text",
+        question: `IHK-Prüfungsaufgabe Modellierungsmethoden (LF 4 / LF 5 / LF 7 - Methodenvergleich):
+In der IHK-Abschlussprüfung werden drei unterschiedliche Diagrammtypen zur Modellierung von Abläufen und Prozessen eingesetzt:
+1. BPMN 2.0 (Business Process Model and Notation)
+2. UML-Aktivitätsdiagramm (Activity Diagram)
+3. EPK (Ereignisgesteuerte Prozesskette)
+
+a) Vergleichen Sie die drei Diagrammarten hinsichtlich ihres primären Einsatzzwecks in der IT- und betriebswirtschaftlichen Praxis.
+b) Stellen Sie tabellarisch gegenüber, welche Symbole in den drei Sprachen für folgende 3 Kernkonzepte verwendet werden:
+   - Arbeitsaufgabe / Funktionsschritt
+   - Startereignis / Startzustand
+   - Parallele Verzweigung (UND-Konnektor)
+c) Ein Softwarearchitekt möchte den internen Algorithmus einer Verschlüsselungsfunktion modellieren. Ein Prozessmanager möchte die firmenübergreifende Zusammenarbeit zwischen Lieferant, Spedition und Kunde modellieren. Welche Diagrammart wählen Sie jeweils und warum?`,
+        musterloesung: `a) Primärer Einsatzzweck in der Praxis:
+   - BPMN 2.0: Standard für Geschäftsprozesse und Workflow-Engines. Besonderer Fokus auf organisationsübergreifende Zusammenarbeit (externe Partner via Pools/Nachrichtenflüsse) und automatisierte Ausführung durch Process-Engines (z. B. Camunda).
+   - UML-Aktivitätsdiagramm: Standard in der Softwareentwicklung (OOP). Modellierung von internen Softwareabläufen, komplexen Algorithmen, Methodenlogik sowie Systeminteraktionen mit Objekt- und Datenflüssen.
+   - EPK (ARIS-Standard): Betriebswirtschaftliche Prozessorganisation, insbesondere im SAP- und ERP-Umfeld. Streng formalisierte Ereignis-Funktions-Folge (Ereignis stößt Funktion an, Funktion erzeugt Ereignis).
+
+b) Symbol-Vergleich:
+   +---------------------------+---------------------------------+---------------------------------+---------------------------------+
+   | Konzept                   | BPMN 2.0                        | UML-Aktivitätsdiagramm          | EPK                             |
+   +---------------------------+---------------------------------+---------------------------------+---------------------------------+
+   | Aufgabe / Schritt         | Task (abgerundetes Rechteck)    | Action (abgerundetes Rechteck)  | Funktion (abgerundetes Rechteck)|
+   | Start                     | Start-Event (dünner Kreis)      | Initial Node (schwarzer Kreis)  | Startereignis (Sechseck)        |
+   | Parallele Verzweigung     | Parallel Gateway (Raute mit +)  | Fork Node (dicker Balken)       | AND-Konnektor (Kreis mit ∧)     |
+   +---------------------------+---------------------------------+---------------------------------+---------------------------------+
+
+c) Methodenauswahl für die Szenarien:
+   1. Verschlüsselungsalgorithmus: UML-Aktivitätsdiagramm.
+      Begründung: Es handelt sich um interne System-/Programm-Logik auf Softwareebene. UML bietet dafür exzellente Konstrukte wie Datenspeicher, Pins, Objektknoten und Ausnahmebehandlungen (Exception Handler).
+   2. Firmenübergreifender Lieferprozess: BPMN 2.0.
+      Begründung: BPMN unterstützt Kollaborationsdiagramme mit mehreren Pools und gestrichelten Nachrichtenflüssen (Message Flows). Dadurch können getrennte Unternehmen unabhängig voneinander modelliert und ihr Nachrichtenaustausch exakt definiert werden.`,
+        explanation: "Der goldene IHK-Unterschied: BPMN für Business-Prozesse über Unternehmensgrenzen (Pools), UML-Aktivitätsdiagramm für Software-Algorithmen und Detail-Abläufe, EPK für ARIS/SAP-Ereignisketten."
+    },
+    {
+        id: 484,
+        isHard: false,
+        difficulty: "standard",
+        isBawueFocus: true,
+        isDiagram: true,
+        theme: "diagrams",
+        topic: "⚙️ BPMN 2.0 Gateway-Typen: Exklusiv (XOR), Parallel (AND) & Inklusiv (OR)",
+        diagramType: "BPMN 2.0",
+        diagramTitle: "BPMN 2.0 Gateways & Entscheidungen",
+        diagramCaption: "Abbildung: BPMN 2.0 Entscheidungsprozess mit Exklusivem Gateway (XOR)",
+        diagramSvg: VisualDiagrams.getZahlungsmethodeBpmnSvg(),
+        type: "multiple-choice",
+        question: "Welche Aussage zu den Gateway-Typen in BPMN 2.0 ist fachlich KORREKT?",
+        options: [
+            "Ein Exklusives Gateway (XOR, Raute mit ✕) aktiviert exakt einen alternativen Folgepfad, während ein Paralleles Gateway (AND, Raute mit +) alle ausgehenden Pfade gleichzeitig aktiviert.",
+            "Ein Inklusives Gateway (OR) darf nur maximal 2 ausgehende Pfade besitzen.",
+            "Bei einem Parallelen Gateway (AND) entscheidet eine Guard-Bedingung, welcher Pfad gewählt wird.",
+            "Ein Exklusives Gateway (XOR) synchronisiert mehrere parallele Pfade und wartet auf alle eingehenden Tokens."
+        ],
+        correctAnswer: 0,
+        explanation: "BPMN Gateways auf den Punkt: XOR (✕) = Entweder-Oder (genau 1 Pfad). AND (+) = Alle Pfade gleichzeitig (keine Bedingungen). OR (◯) = Ein oder mehrere Pfade können aktiv sein."
     }
 ];

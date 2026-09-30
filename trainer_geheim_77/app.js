@@ -283,8 +283,11 @@ function filterQuestions(theme) {
                     q.topic.toLowerCase().includes("erd") || 
                     q.topic.toLowerCase().includes("epk") || 
                     q.topic.toLowerCase().includes("bpmn") || 
+                    q.topic.toLowerCase().includes("aktivität") || 
+                    q.topic.toLowerCase().includes("aktivitaet") || 
+                    q.topic.toLowerCase().includes("activity") || 
                     q.topic.toLowerCase().includes("netzplan") || 
-                    q.topic.toLowerCase().includes("struktogramm") || 
+                    q.topic.toLowerCase().includes("struktogramm") || q.topic.toLowerCase().includes("aktivität") || q.topic.toLowerCase().includes("activity") || 
                     q.topic.toLowerCase().includes("pap") ||
                     q.topic.toLowerCase().includes("use-case") ||
                     q.topic.toLowerCase().includes("use case") ||

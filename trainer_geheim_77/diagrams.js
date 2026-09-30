@@ -3001,6 +3001,252 @@ var VisualDiagrams = {
         `;
     },
 
+    
+    // 5c. BPMN 2.0: Kollaborationsdiagramm mit Pools, Lanes & Nachrichtenflüssen
+    getBpmnPoolLaneDiagramSvg: function() {
+        return `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 480" width="100%" height="100%">
+            <defs>
+                <marker id="bpmn-seq-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                    <path d="M 0 1 L 10 5 L 0 9 z" fill="#1e293b" />
+                </marker>
+                <marker id="bpmn-msg-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+                    <path d="M 0 1 L 10 5 L 0 9 z" fill="#ffffff" stroke="#0284c7" stroke-width="1.5" />
+                </marker>
+                <marker id="bpmn-msg-start" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                    <circle cx="5" cy="5" r="3" fill="#ffffff" stroke="#0284c7" stroke-width="1.5" />
+                </marker>
+            </defs>
+            <rect width="900" height="480" fill="#f8fafc" rx="8" />
+
+            <!-- POOL 1: KUNDE -->
+            <rect x="30" y="25" width="840" height="110" fill="#ffffff" stroke="#334155" stroke-width="2" rx="4" />
+            <rect x="30" y="25" width="40" height="110" fill="#e2e8f0" stroke="#334155" stroke-width="2" />
+            <text x="50" y="80" font-family="sans-serif" font-size="13" font-weight="bold" fill="#1e293b" text-anchor="middle" transform="rotate(-90, 50, 80)">Pool: Anwender / Kunde</text>
+
+            <!-- Pool 1 Start Event -->
+            <circle cx="110" cy="80" r="18" fill="#dcfce7" stroke="#16a34a" stroke-width="2.5" />
+            <text x="110" y="115" font-family="sans-serif" font-size="10" font-weight="bold" fill="#166534" text-anchor="middle">Störung festgestellt</text>
+
+            <line x1="128" y1="80" x2="165" y2="80" stroke="#1e293b" stroke-width="2" marker-end="url(#bpmn-seq-arr)" />
+
+            <!-- Pool 1 Task -->
+            <rect x="165" y="55" width="135" height="50" fill="#f0f9ff" stroke="#0284c7" stroke-width="2" rx="6" />
+            <text x="232" y="84" font-family="sans-serif" font-size="11" font-weight="bold" fill="#0369a1" text-anchor="middle">Support-Ticket senden</text>
+
+            <!-- Pool 1 Task: Lösung bestätigen -->
+            <rect x="660" y="55" width="125" height="50" fill="#f0f9ff" stroke="#0284c7" stroke-width="2" rx="6" />
+            <text x="722" y="84" font-family="sans-serif" font-size="11" font-weight="bold" fill="#0369a1" text-anchor="middle">Lösung prüfen</text>
+
+            <!-- Pool 1 End Event -->
+            <line x1="785" y1="80" x2="815" y2="80" stroke="#1e293b" stroke-width="2" marker-end="url(#bpmn-seq-arr)" />
+            <circle cx="835" cy="80" r="18" fill="#fee2e2" stroke="#dc2626" stroke-width="3.5" />
+            <text x="835" y="115" font-family="sans-serif" font-size="10" font-weight="bold" fill="#991b1b" text-anchor="middle">Problem behoben</text>
+
+            <!-- NACHRICHTENFLÜSSE (POOL 1 <-> POOL 2) -->
+            <line x1="232" y1="105" x2="232" y2="200" stroke="#0284c7" stroke-width="1.8" stroke-dasharray="5,4" marker-start="url(#bpmn-msg-start)" marker-end="url(#bpmn-msg-arr)" />
+            <rect x="180" y="145" width="105" height="20" fill="#ffffff" stroke="#bae6fd" rx="3" />
+            <text x="232" y="159" font-family="sans-serif" font-size="10" font-weight="bold" fill="#0369a1" text-anchor="middle">Ticket-Meldung</text>
+
+            <line x1="722" y1="200" x2="722" y2="105" stroke="#0284c7" stroke-width="1.8" stroke-dasharray="5,4" marker-start="url(#bpmn-msg-start)" marker-end="url(#bpmn-msg-arr)" />
+            <rect x="670" y="145" width="105" height="20" fill="#ffffff" stroke="#bae6fd" rx="3" />
+            <text x="722" y="159" font-family="sans-serif" font-size="10" font-weight="bold" fill="#0369a1" text-anchor="middle">Status: Behoben</text>
+
+            <!-- POOL 2: IT-SYSTEMHAUS MIT 2 LANES -->
+            <rect x="30" y="195" width="840" height="255" fill="#ffffff" stroke="#334155" stroke-width="2" rx="4" />
+            <rect x="30" y="195" width="35" height="255" fill="#e2e8f0" stroke="#334155" stroke-width="2" />
+            <text x="48" y="322" font-family="sans-serif" font-size="13" font-weight="bold" fill="#1e293b" text-anchor="middle" transform="rotate(-90, 48, 322)">Pool: IT-Service-Management</text>
+
+            <!-- Lane 1: 1st-Level -->
+            <rect x="65" y="195" width="28" height="125" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.5" />
+            <text x="79" y="258" font-family="sans-serif" font-size="11" font-weight="bold" fill="#475569" text-anchor="middle" transform="rotate(-90, 79, 258)">Lane: 1st-Level</text>
+
+            <!-- Lane 2: 2nd-Level -->
+            <line x1="65" y1="320" x2="870" y2="320" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="6,4" />
+            <rect x="65" y="320" width="28" height="130" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.5" />
+            <text x="79" y="385" font-family="sans-serif" font-size="11" font-weight="bold" fill="#475569" text-anchor="middle" transform="rotate(-90, 79, 385)">Lane: 2nd-Level</text>
+
+            <!-- Lane 1 Inbound Message Start Event -->
+            <circle cx="130" cy="255" r="16" fill="#ffffff" stroke="#16a34a" stroke-width="2" />
+            <circle cx="130" cy="255" r="12" fill="#dcfce7" stroke="#16a34a" stroke-width="1" />
+            <path d="M 124 250 L 136 250 L 130 255 Z M 124 250 L 124 259 L 136 259 L 136 250" fill="none" stroke="#166534" stroke-width="1.2" />
+            <text x="130" y="285" font-family="sans-serif" font-size="9" font-weight="bold" fill="#166534" text-anchor="middle">Ticket empfangen</text>
+
+            <line x1="146" y1="255" x2="180" y2="255" stroke="#1e293b" stroke-width="2" marker-end="url(#bpmn-seq-arr)" />
+
+            <!-- Task: Qualifizieren -->
+            <rect x="180" y="230" width="125" height="50" fill="#ffffff" stroke="#0284c7" stroke-width="2" rx="6" />
+            <text x="242" y="254" font-family="sans-serif" font-size="11" font-weight="bold" fill="#0369a1" text-anchor="middle">Störung prüfen &amp;</text>
+            <text x="242" y="268" font-family="sans-serif" font-size="11" font-weight="bold" fill="#0369a1" text-anchor="middle">klassifizieren</text>
+
+            <line x1="305" y1="255" x2="340" y2="255" stroke="#1e293b" stroke-width="2" marker-end="url(#bpmn-seq-arr)" />
+
+            <!-- XOR Gateway 1 -->
+            <polygon points="360,235 380,255 360,275 340,255" fill="#fef3c7" stroke="#d97706" stroke-width="2" />
+            <text x="360" y="261" font-family="sans-serif" font-size="17" font-weight="bold" fill="#b45309" text-anchor="middle">✕</text>
+            <text x="360" y="222" font-family="sans-serif" font-size="10" font-weight="bold" fill="#b45309" text-anchor="middle">1st-Level lösbar?</text>
+
+            <!-- XOR Pfad Ja -->
+            <line x1="380" y1="255" x2="430" y2="255" stroke="#1e293b" stroke-width="2" marker-end="url(#bpmn-seq-arr)" />
+            <text x="400" y="247" font-family="sans-serif" font-size="10" font-weight="bold" fill="#16a34a">[Ja]</text>
+            <rect x="430" y="230" width="115" height="50" fill="#ffffff" stroke="#0284c7" stroke-width="2" rx="6" />
+            <text x="487" y="254" font-family="sans-serif" font-size="11" font-weight="bold" fill="#0369a1" text-anchor="middle">Remote-Lösung</text>
+            <text x="487" y="268" font-family="sans-serif" font-size="11" font-weight="bold" fill="#0369a1" text-anchor="middle">anwenden</text>
+
+            <!-- XOR Pfad Nein: Eskalation an 2nd-Level -->
+            <line x1="360" y1="275" x2="360" y2="385" stroke="#1e293b" stroke-width="2" />
+            <line x1="360" y1="385" x2="395" y2="385" stroke="#1e293b" stroke-width="2" marker-end="url(#bpmn-seq-arr)" />
+            <text x="368" y="305" font-family="sans-serif" font-size="10" font-weight="bold" fill="#dc2626">[Nein]</text>
+
+            <!-- AND Gateway Split in 2nd-Level -->
+            <polygon points="415,365 435,385 415,405 395,385" fill="#ecfeff" stroke="#0891b2" stroke-width="2" />
+            <text x="415" y="392" font-family="sans-serif" font-size="20" font-weight="bold" fill="#0e7490" text-anchor="middle">+</text>
+            <text x="415" y="355" font-family="sans-serif" font-size="10" font-weight="bold" fill="#0e7490" text-anchor="middle">Parallele Aktionen</text>
+
+            <!-- AND Zweig 1 -->
+            <line x1="415" y1="365" x2="415" y2="350" stroke="#1e293b" stroke-width="2" />
+            <line x1="415" y1="350" x2="465" y2="350" stroke="#1e293b" stroke-width="2" marker-end="url(#bpmn-seq-arr)" />
+            <rect x="465" y="330" width="130" height="42" fill="#ffffff" stroke="#0891b2" stroke-width="1.8" rx="6" />
+            <text x="530" y="355" font-family="sans-serif" font-size="10" font-weight="bold" fill="#0e7490" text-anchor="middle">Ersatzteil disponieren</text>
+
+            <!-- AND Zweig 2 -->
+            <line x1="415" y1="405" x2="415" y2="420" stroke="#1e293b" stroke-width="2" />
+            <line x1="415" y1="420" x2="465" y2="420" stroke="#1e293b" stroke-width="2" marker-end="url(#bpmn-seq-arr)" />
+            <rect x="465" y="400" width="130" height="42" fill="#ffffff" stroke="#0891b2" stroke-width="1.8" rx="6" />
+            <text x="530" y="425" font-family="sans-serif" font-size="10" font-weight="bold" fill="#0e7490" text-anchor="middle">Vor-Ort-Einsatz planen</text>
+
+            <!-- AND Gateway Join -->
+            <line x1="595" y1="350" x2="635" y2="350" stroke="#1e293b" stroke-width="2" />
+            <line x1="635" y1="350" x2="635" y2="365" stroke="#1e293b" stroke-width="2" />
+            <line x1="595" y1="420" x2="635" y2="420" stroke="#1e293b" stroke-width="2" />
+            <line x1="635" y1="420" x2="635" y2="405" stroke="#1e293b" stroke-width="2" />
+            <line x1="635" y1="385" x2="655" y2="385" stroke="#1e293b" stroke-width="2" marker-end="url(#bpmn-seq-arr)" />
+
+            <polygon points="675,365 695,385 675,405 655,385" fill="#ecfeff" stroke="#0891b2" stroke-width="2" />
+            <text x="675" y="392" font-family="sans-serif" font-size="20" font-weight="bold" fill="#0e7490" text-anchor="middle">+</text>
+
+            <!-- Task: Vor Ort entstören -->
+            <line x1="695" y1="385" x2="720" y2="385" stroke="#1e293b" stroke-width="2" marker-end="url(#bpmn-seq-arr)" />
+            <rect x="720" y="360" width="125" height="50" fill="#ffffff" stroke="#0891b2" stroke-width="2" rx="6" />
+            <text x="782" y="384" font-family="sans-serif" font-size="11" font-weight="bold" fill="#0e7490" text-anchor="middle">Hardware vor Ort</text>
+            <text x="782" y="398" font-family="sans-serif" font-size="11" font-weight="bold" fill="#0e7490" text-anchor="middle">austauschen</text>
+
+            <!-- Zusammenführung zur Lösung -->
+            <line x1="545" y1="255" x2="706" y2="255" stroke="#1e293b" stroke-width="2" />
+            <line x1="782" y1="360" x2="782" y2="255" stroke="#1e293b" stroke-width="2" />
+            <line x1="782" y1="255" x2="738" y2="255" stroke="#1e293b" stroke-width="2" />
+            <circle cx="722" cy="255" r="14" fill="#ffffff" stroke="#0284c7" stroke-width="2" />
+            <path d="M 716 250 L 728 250 L 722 255 Z M 716 250 L 716 259 L 728 259 L 728 250" fill="#0284c7" stroke="#0284c7" stroke-width="1.2" />
+
+            <circle cx="830" cy="255" r="16" fill="#fee2e2" stroke="#dc2626" stroke-width="3" />
+            <line x1="736" y1="255" x2="814" y2="255" stroke="#1e293b" stroke-width="2" marker-end="url(#bpmn-seq-arr)" />
+            <text x="830" y="285" font-family="sans-serif" font-size="9" font-weight="bold" fill="#991b1b" text-anchor="middle">Ticket gelöst</text>
+
+            <text x="450" y="470" font-family="sans-serif" font-size="12" font-style="italic" fill="#64748b" text-anchor="middle">BPMN 2.0: 2 Pools, Lanes (1st/2nd Level), gestrichelte Nachrichtenflüsse (Message Flow) &amp; Gateways (XOR ✕ / AND +)</text>
+        </svg>
+        `;
+    },
+
+    // 5d. UML 2.5: Aktivitätsdiagramm (Activity Diagram)
+    getUmlAktivitaetsdiagrammSvg: function() {
+        return `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 520" width="100%" height="100%">
+            <defs>
+                <marker id="act-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                    <path d="M 0 1 L 10 5 L 0 9 z" fill="#1e293b" />
+                </marker>
+            </defs>
+            <rect width="860" height="520" fill="#f8fafc" rx="8" />
+
+            <!-- Title -->
+            <text x="430" y="28" font-family="sans-serif" font-size="14" font-weight="bold" fill="#0f172a" text-anchor="middle">UML 2.5 Aktivitätsdiagramm: Bestellprüfung &amp; Parallele Auftragsabwicklung</text>
+            <text x="430" y="46" font-family="sans-serif" font-size="11" font-style="italic" fill="#64748b" text-anchor="middle">Mit Swimlanes, Verzweigung (Decision [Guards]), Parallelisierung (Fork) &amp; Synchronisation (Join)</text>
+
+            <!-- Partition 1: Kunde / Frontend (x: 40 to 320) -->
+            <rect x="40" y="60" width="280" height="430" fill="#ffffff" stroke="#94a3b8" stroke-width="1.5" />
+            <rect x="40" y="60" width="280" height="30" fill="#e0f2fe" stroke="#94a3b8" stroke-width="1.5" />
+            <text x="180" y="80" font-family="sans-serif" font-size="12" font-weight="bold" fill="#0369a1" text-anchor="middle">Partition: Kunde / Onlineshop</text>
+
+            <!-- Partition 2: ERP / Backend (x: 320 to 820) -->
+            <rect x="320" y="60" width="500" height="430" fill="#ffffff" stroke="#94a3b8" stroke-width="1.5" />
+            <rect x="320" y="60" width="500" height="30" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.5" />
+            <text x="570" y="80" font-family="sans-serif" font-size="12" font-weight="bold" fill="#334155" text-anchor="middle">Partition: ERP- &amp; Logistiksystem</text>
+
+            <!-- 1. Initial Node -->
+            <circle cx="180" cy="115" r="13" fill="#0f172a" stroke="#0f172a" stroke-width="1" />
+            <text x="180" y="142" font-family="sans-serif" font-size="10" font-weight="bold" fill="#334155" text-anchor="middle">Startknoten</text>
+
+            <line x1="180" y1="128" x2="180" y2="160" stroke="#1e293b" stroke-width="2" marker-end="url(#act-arr)" />
+
+            <!-- 2. Action: Bestellung aufgeben -->
+            <rect x="105" y="160" width="150" height="46" fill="#f0f9ff" stroke="#0284c7" stroke-width="2" rx="16" />
+            <text x="180" y="188" font-family="sans-serif" font-size="11" font-weight="bold" fill="#0369a1" text-anchor="middle">Bestellung aufgeben</text>
+
+            <!-- Flow to ERP -->
+            <line x1="255" y1="183" x2="380" y2="183" stroke="#1e293b" stroke-width="2" marker-end="url(#act-arr)" />
+
+            <!-- 3. Action: Bonitätsprüfung -->
+            <rect x="380" y="160" width="150" height="46" fill="#f8fafc" stroke="#475569" stroke-width="2" rx="16" />
+            <text x="455" y="183" font-family="sans-serif" font-size="11" font-weight="bold" fill="#1e293b" text-anchor="middle">Bonität &amp; Bestand</text>
+            <text x="455" y="196" font-family="sans-serif" font-size="10" fill="#475569" text-anchor="middle">automatisiert prüfen</text>
+
+            <line x1="455" y1="206" x2="455" y2="235" stroke="#1e293b" stroke-width="2" marker-end="url(#act-arr)" />
+
+            <!-- 4. Decision Node -->
+            <polygon points="455,235 480,255 455,275 430,255" fill="#fef3c7" stroke="#d97706" stroke-width="2" />
+            <text x="495" y="250" font-family="sans-serif" font-size="11" font-weight="bold" fill="#b45309">Decision Node</text>
+
+            <!-- Branch 1: [Prüfung fehlgeschlagen] -->
+            <line x1="430" y1="255" x2="270" y2="255" stroke="#1e293b" stroke-width="2" marker-end="url(#act-arr)" />
+            <text x="350" y="247" font-family="sans-serif" font-size="10" font-weight="bold" fill="#dc2626" text-anchor="middle">[Prüfung fehlgeschlagen]</text>
+
+            <rect x="115" y="235" width="155" height="42" fill="#fef2f2" stroke="#ef4444" stroke-width="1.8" rx="14" />
+            <text x="192" y="260" font-family="sans-serif" font-size="10" font-weight="bold" fill="#b91c1c" text-anchor="middle">Ablehnung mitteilen</text>
+
+            <line x1="192" y1="277" x2="192" y2="310" stroke="#1e293b" stroke-width="2" marker-end="url(#act-arr)" />
+            <circle cx="192" cy="325" r="14" fill="#ffffff" stroke="#dc2626" stroke-width="2" />
+            <circle cx="192" cy="325" r="8" fill="#dc2626" />
+            <text x="192" y="352" font-family="sans-serif" font-size="9" font-weight="bold" fill="#991b1b" text-anchor="middle">Ablauf beendet</text>
+
+            <!-- Branch 2: [Prüfung positiv] -->
+            <line x1="455" y1="275" x2="455" y2="305" stroke="#1e293b" stroke-width="2" marker-end="url(#act-arr)" />
+            <text x="465" y="293" font-family="sans-serif" font-size="10" font-weight="bold" fill="#16a34a">[Prüfung positiv]</text>
+
+            <!-- 5. FORK NODE -->
+            <rect x="360" y="305" width="380" height="8" fill="#0f172a" rx="3" />
+            <text x="748" y="313" font-family="sans-serif" font-size="10" font-weight="bold" fill="#0f172a">Fork (Gabelung)</text>
+
+            <!-- Parallel Branch A -->
+            <line x1="430" y1="313" x2="430" y2="340" stroke="#1e293b" stroke-width="2" marker-end="url(#act-arr)" />
+            <rect x="360" y="340" width="145" height="42" fill="#ecfdf5" stroke="#059669" stroke-width="1.8" rx="14" />
+            <text x="432" y="365" font-family="sans-serif" font-size="10" font-weight="bold" fill="#047857" text-anchor="middle">Artikel kommissionieren</text>
+
+            <!-- Parallel Branch B -->
+            <line x1="670" y1="313" x2="670" y2="340" stroke="#1e293b" stroke-width="2" marker-end="url(#act-arr)" />
+            <rect x="600" y="340" width="145" height="42" fill="#ecfeff" stroke="#0891b2" stroke-width="1.8" rx="14" />
+            <text x="672" y="365" font-family="sans-serif" font-size="10" font-weight="bold" fill="#0e7490" text-anchor="middle">Rechnung generieren</text>
+
+            <!-- 6. JOIN NODE -->
+            <line x1="430" y1="382" x2="430" y2="408" stroke="#1e293b" stroke-width="2" marker-end="url(#act-arr)" />
+            <line x1="670" y1="382" x2="670" y2="408" stroke="#1e293b" stroke-width="2" marker-end="url(#act-arr)" />
+
+            <rect x="360" y="408" width="380" height="8" fill="#0f172a" rx="3" />
+            <text x="748" y="416" font-family="sans-serif" font-size="10" font-weight="bold" fill="#0f172a">Join (Zusammenführung)</text>
+
+            <!-- After Join -> Versand -->
+            <line x1="550" y1="416" x2="550" y2="440" stroke="#1e293b" stroke-width="2" marker-end="url(#act-arr)" />
+            <rect x="475" y="440" width="150" height="42" fill="#f0f9ff" stroke="#0284c7" stroke-width="2" rx="14" />
+            <text x="550" y="465" font-family="sans-serif" font-size="11" font-weight="bold" fill="#0369a1" text-anchor="middle">Ware versenden</text>
+
+            <!-- Final Node -->
+            <line x1="625" y1="461" x2="675" y2="461" stroke="#1e293b" stroke-width="2" marker-end="url(#act-arr)" />
+            <circle cx="695" cy="461" r="14" fill="#ffffff" stroke="#0f172a" stroke-width="2" />
+            <circle cx="695" cy="461" r="8" fill="#0f172a" />
+            <text x="695" y="490" font-family="sans-serif" font-size="9" font-weight="bold" fill="#334155" text-anchor="middle">Activity Final</text>
+        </svg>
+        `;
+    },
+
     getAutoDiagramSvg: function(q) {
         if (!q) return null;
         // 1. Wenn die Frage bereits eine explizite grafische Musterlösung besitzt
@@ -3113,8 +3359,16 @@ var VisualDiagrams = {
         if (text.includes("zahlungsmethode") || text.includes("zahlungsart")) {
             return VisualDiagrams.getZahlungsmethodeBpmnSvg();
         }
+        if (text.includes("pool") || text.includes("nachrichtenfluss") || text.includes("message flow") || text.includes("itsm") || text.includes("1st-level") || text.includes("2nd-level")) {
+            return VisualDiagrams.getBpmnPoolLaneDiagramSvg();
+        }
         if (/\b(bpmn|swimlane|gateway|start-event|end-event)\b/i.test(text)) {
-            return VisualDiagrams.getBpmnDiagramSvg();
+            return VisualDiagrams.getBpmnPoolLaneDiagramSvg ? VisualDiagrams.getBpmnPoolLaneDiagramSvg() : VisualDiagrams.getBpmnDiagramSvg();
+        }
+        
+        // 6b. UML-Aktivitätsdiagramm
+        if (/\b(aktivitätsdiagramm|aktivitaetsdiagramm|activity diagram|action node|fork|join|decision node|merge node|initial node|final node)\b/i.test(text)) {
+            return VisualDiagrams.getUmlAktivitaetsdiagrammSvg();
         }
         
         // 7. Netzplan (Software-Rollout 8 Vorgänge, ERP 9 Vorgänge, Client 5 Vorgänge, CAD 6 Vorgänge, V1..V4 4 Vorgänge oder Standard)
