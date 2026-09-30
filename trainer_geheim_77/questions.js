@@ -9980,5 +9980,475 @@ c) Togglen / Umschalten mit XOR:
    - Gesetz: x XOR 0 = x (das Bit bleibt unverändert).
    - Durch Verknüpfung mit einer Bitmaske, die an der gewünschten Stelle eine '1' und überall sonst '0' hat, schaltet XOR genau dieses Zielbit um (Invertierung), während alle anderen Bits unberührt bleiben.`,
         explanation: "Bit-Operatoren verstehen: AND filtert/maskiert Bits heraus (wie beim Subnetting IP & Maske), OR setzt Bits auf 1 (Flags aktivieren), XOR schaltet Bits um (Togglen) und NOT kehrt alle Bits um (wie beim 2er-Komplement Schritt 2)."
+    },
+    {
+        id: 474,
+        isHard: true,
+        difficulty: "hard",
+        isBawueFocus: true,
+        theme: "lf1",
+        topic: "📜 IT-Normen & Standards: ISO/IEC 25010, ISO/IEC 27001, ISO 9241, DIN 66261 & DIN 66001",
+        type: "open-text",
+        question: `IHK-Prüfungsaufgabe Normen und Standards (LF 1 / LF 5 / LF 6 - Qualitäts- und Prozessmanagement):
+In der professionellen Anwendungsentwicklung und IT-Projektplanung spielen nationale und internationale Standards eine entscheidende Rolle für Qualität, Sicherheit und Rechtssicherheit.
+
+Bearbeiten Sie die folgenden Teilaufgaben zu den relevanten IT-Normen:
+
+a) ISO/IEC 25010 (Software-Produktqualität):
+   1. Nennen Sie vier der acht Hauptqualitätsmerkmale eines Softwareprodukts nach ISO/IEC 25010.
+   2. Ein Kunde beschwert sich: "Die neue Web-Applikation stürzt bei Spitzenlasten über 5.000 gleichzeitigen Benutzern ab und die Ladezeiten steigen auf über 12 Sekunden."
+      Welchem Qualitätsmerkmal nach ISO/IEC 25010 ist dieser Mangel primär zuzuordnen?
+
+b) ISO/IEC 27001 (Informationssicherheits-Managementsystem / ISMS):
+   1. Welche drei grundlegenden Schutzziele der Informationssicherheit (die sogenannte CIA-Triade) stehen im Mittelpunkt der ISO/IEC 27001?
+   2. Erläutern Sie kurz, welches Schutzziel verletzt wird, wenn ein Man-in-the-Middle-Angreifer eine Überweisungssumme unbemerkt im Datenstrom manipuliert.
+
+c) ISO 9241 (Ergonomie der Mensch-System-Interaktion):
+   Nennen Sie zwei Grundsätze der Dialoggestaltung nach DIN EN ISO 9241-110 und erläutern Sie diese anhand je eines Beispiels aus der Software-Entwicklung.
+
+d) DIN-Normen für Diagrammtypen:
+   Ordnen Sie den folgenden beiden Diagrammtypen die jeweils exakte DIN-Norm zu:
+   1. Programmablaufplan (PAP)
+   2. Nassi-Shneiderman-Diagramm (Struktogramm)`,
+        musterloesung: `a) ISO/IEC 25010 (Softwarequalität):
+   1. Vier Hauptmerkmale (nach ISO/IEC 25010 gibt es insgesamt 8):
+      - Funktionale Angemessenheit (Functional Suitability)
+      - Zuverlässigkeit (Reliability / Fehlertoleranz, Verfügbarkeit)
+      - Benutzbarkeit (Usability / Erlernbarkeit, Bedienbarkeit)
+      - Leistungseffizienz (Performance Efficiency / Zeitverhalten, Ressourcennutzung, Kapazität)
+      - Kompatibilität (Compatibility / Interoperabilität, Koexistenz)
+      - Sicherheit (Security / Vertraulichkeit, Integrität, Nichtabstreitbarkeit)
+      - Wartbarkeit (Maintainability / Modularität, Wiederverwendbarkeit, Analysierbarkeit, Testbarkeit)
+      - Übertragbarkeit (Portability / Anpassbarkeit, Installierbarkeit)
+      (Vier dieser Merkmale reichen für die volle Punktzahl).
+   2. Zuordnung des Mangels:
+      - Primäres Qualitätsmerkmal: Leistungseffizienz (Performance Efficiency), speziell die Teilmerkmale Zeitverhalten (Ladezeiten) und Kapazitätsgrenzen (Verhalten bei Spitzenlast).
+      - Auch als Zuverlässigkeit (Reliability / Verfügbarkeit) teilgewertet, da das System unter Last abstürzt.
+
+b) ISO/IEC 27001 (ISMS & CIA-Triade):
+   1. Die drei Schutzziele der Informationssicherheit:
+      - C = Confidentiality (Vertraulichkeit): Daten dürfen nur von autorisierten Personen eingesehen werden.
+      - I = Integrity (Integrität): Daten müssen korrekt, vollständig und vor unbemerkter Veränderung/Manipulation geschützt sein.
+      - A = Availability (Verfügbarkeit): Systeme und Daten müssen für berechtigte Benutzer zum geforderten Zeitpunkt zugänglich und funktionsfähig sein.
+   2. Verletztes Schutzziel beim Angreifer:
+      - Integrität (Integrity). Der Angreifer verändert die Daten (Geldbetrag/Empfänger) unbemerkt auf dem Übertragungsweg. Die Daten sind nicht mehr originalgetreu und unverfälscht.
+
+c) ISO 9241-110 (Grundsätze der Dialoggestaltung - zwei Beispiele):
+   1. Aufgabenangemessenheit:
+      - Definition: Der Dialog unterstützt den Benutzer bei der Erledigung seiner Aufgabe, ohne ihn mit unnötigen Schritten oder irrelevanten Informationen zu überlasten.
+      - Beispiel: Formularfelder mit sinnvollen Standardwerten vorbefüllen (z. B. heutiges Datum oder aktuelle Währung); automatische Pflichtfeldvalidierung.
+   2. Selbstbeschreibungsfähigkeit:
+      - Definition: Der Dialog ist für den Benutzer unmittelbar verständlich, indem stets erkennbar ist, wo er sich befindet, was von ihm erwartet wird und was das System gerade tut.
+      - Beispiel: Aussagekräftige Fehlermeldungen ("Bitte geben Sie eine gültige E-Mail-Adresse mit @ ein" statt "Error 400"), Tooltips bei Eingabefeldern, Ladebalken/Spinner bei längeren Operationen.
+   (Alternativ gültig: Steuerbarkeit, Erwartungskonformität, Fehlertoleranz, Lernförderlichkeit, Individualisierbarkeit).
+
+d) DIN-Normen Zuordnung:
+   1. Programmablaufplan (PAP): DIN 66001.
+   2. Nassi-Shneiderman-Diagramm (Struktogramm): DIN 66261.`,
+        explanation: "In der IHK-AP1 werden Normen häufig in Szenarien abgefragt: ISO 25010 für Softwarequalität, ISO 27001 für IT-Sicherheit (CIA), ISO 9241 für UI/UX-Ergonomie, DIN 66001 für PAP und DIN 66261 für Struktogramme."
+    },
+    {
+        id: 475,
+        isHard: true,
+        difficulty: "hard",
+        isBawueFocus: true,
+        theme: "lf1",
+        topic: "🏃 Agiles Projektmanagement: Scrum Framework (Rollen, Artefakte, Events) & Kanban",
+        type: "open-text",
+        question: `IHK-Prüfungsaufgabe Agiles Vorgehen (LF 1 - Scrum & Kanban):
+Ein Softwarehaus stellt seine Entwicklungsabteilung von einem traditionellen Wasserfallmodell auf agile Methoden um.
+
+Bearbeiten Sie die folgenden Fragestellungen zur praktischen Umsetzung:
+
+a) Scrum Rollen:
+   Beschreiben Sie für jede der drei Kernrollen in Scrum die Hauptverantwortung:
+   1. Product Owner (PO)
+   2. Scrum Master (SM)
+   3. Developers (Entwicklungsteam)
+
+b) Scrum Events & Artefakte:
+   1. Grenzen Sie das "Sprint Review" und die "Sprint Retrospektive" hinsichtlich Zielsetzung und Teilnehmerkreis präzise voneinander ab.
+   2. Was versteht man unter der "Definition of Done" (DoD) und wie unterscheidet sie sich von den "Akzeptanzkriterien" einer einzelnen User Story?
+   3. Beim "Planning Poker" schätzt das Team den Aufwand in Story Points anhand einer abgewandelten Fibonacci-Reihe (1, 2, 3, 5, 8, 13, 20...). Warum werden Story Points statt reiner Personenstunden geschätzt?
+
+c) Kanban:
+   1. Welches Kernprinzip von Kanban verhindert eine Überlastung der Entwickler und Staus im Arbeitsfluss?
+   2. Erläutern Sie das "Pull-Prinzip" im Unterschied zum klassischen "Push-Prinzip".`,
+        musterloesung: `a) Die 3 Scrum-Rollen und ihre Kernverantwortung:
+   1. Product Owner (PO):
+      - Verantwortlich für die Maximierung des geschäftlichen Werts (Business Value) des Produkts.
+      - Pflegt, priorisiert und verantwortet das Product Backlog (definiert WAS und in welcher Reihenfolge gebaut wird).
+      - Bildet die Schnittstelle zu Stakeholdern und Kunden.
+   2. Scrum Master (SM):
+      - Verantwortlich für die Einhaltung und das Verständnis des Scrum-Frameworks (Servant Leader / Coach).
+      - Beseitigt organisatorische und methodische Hindernisse (Impediments), die das Team blockieren.
+      - Schützt das Team vor Störungen von außen und fördert kontinuierliche Selbstorganisation.
+   3. Developers (Entwicklungsteam):
+      - Interdisziplinäres, selbstorganisiertes Team, das für die fachliche und technische Umsetzung des Sprint Backlogs in ein fertiges, nutzbares Inkrement verantwortlich ist.
+      - Entscheidet eigenverantwortlich über das WIE (Architektur, Code, Test) und schätzt den Aufwand der Aufgaben.
+
+b) Scrum Events & Artefakte:
+   1. Sprint Review vs. Sprint Retrospektive:
+      - Sprint Review:
+        * Fokus: Das WAS (das Produkt / Inkrement).
+        * Ziel: Das fertige Arbeitsergebnis wird vorgestellt und auf Funktionsfähigkeit geprüft. Feedback der Stakeholder wird eingeholt, um das Product Backlog anzupassen.
+        * Teilnehmer: Scrum-Team + externe Stakeholder / Kunden / Management.
+      - Sprint Retrospektive:
+        * Fokus: Das WIE (Zusammenarbeit, Prozesse, Werkzeuge, Teamklima).
+        * Ziel: Kontinuierliche Prozessverbesserung (Lessons Learned). Es werden konkrete Maßnahmen definiert, um die Zusammenarbeit im nächsten Sprint effektiver und angenehmer zu gestalten.
+        * Teilnehmer: Ausschließlich das Scrum-Team (Developers, Scrum Master, Product Owner).
+   2. Definition of Done (DoD) vs. Akzeptanzkriterien:
+      - DoD (Definition of Done): Eine allgemeingültige Qualitäts-Checkliste, die für JEDES Product Backlog Item im Projekt erfüllt sein muss (z. B. "Unit-Tests geschrieben", "Code-Review durchgeführt", "Dokumentation aktualisiert", "Auf Test-Server deployed").
+      - Akzeptanzkriterien: Spezifische, fachliche Bedingungen, die genau für eine EINZELNE User Story erfüllt sein müssen (z. B. "Passwort muss mindestens 8 Zeichen lang sein und eine Zahl enthalten").
+   3. Story Points statt Personenstunden:
+      - Story Points schätzen relative Komplexität, Unsicherheit und Aufwand im Vergleich zu anderen Aufgaben, nicht absolute Arbeitszeit.
+      - Begründung: Absolute Stunden variieren stark nach Erfahrung einzelner Entwickler (ein Senior braucht 2 Stunden, ein Junior 8 Stunden). Die relative Komplexität bleibt jedoch für beide gleich.
+      - Schützt vor unrealistischem Scheingenauigkeits-Druck und verhindert falsche Zusagen.
+
+c) Kanban:
+   1. WIP-Limits (Work-in-Progress-Limits):
+      - Begrenzen die maximale Anzahl an Aufgaben, die sich gleichzeitig in einer Bearbeitungsstufe (Spalte) befinden dürfen.
+      - Verhindert Multitasking, deckt Flaschenhälse (Bottlenecks) sofort auf und optimiert die Durchlaufzeit (Cycle Time).
+   2. Pull-Prinzip vs. Push-Prinzip:
+      - Push-Prinzip: Aufgaben werden Entwicklern von einem Vorgesetzten oder nach Plan "hineingedrückt" (zugewiesen), unabhängig davon, ob Kapazitäten frei sind. Führt zu Überlastung.
+      - Pull-Prinzip: Entwickler "ziehen" (pull) sich eine neue Aufgabe erst dann eigenverantwortlich aus der vorherigen Spalte, wenn sie ihre aktuelle Aufgabe abgeschlossen haben und das WIP-Limit Platz bietet.`,
+        explanation: "Klassiker in AP1: Trennung von Review (Produkt/Stakeholder) und Retrospektive (Team/Prozess), Rollen (PO = Wert, SM = Prozess, Dev = Umsetzung) und Kanban (WIP-Limits & Pull)."
+    },
+    {
+        id: 476,
+        isHard: true,
+        difficulty: "hard",
+        isBawueFocus: true,
+        theme: "lf5",
+        topic: "⚙️ Prozedurale Programmierung: Call-by-Value vs. Call-by-Reference, Scope & Rekursion",
+        type: "open-text",
+        question: `IHK-Prüfungsaufgabe Programmierung & Software-Architektur (LF 5 - Prozedurales Paradigma):
+Gegeben ist folgender Pseudocode / C-ähnlicher Programmablauf:
+
+\`\`\`c
+// Globaler Speicherbereich
+int globalCounter = 100;
+
+void berechne(int val, int *ref) {
+    val = val + 10;
+    *ref = *ref + 20;
+    globalCounter = globalCounter + 5;
+}
+
+int main() {
+    int a = 5;
+    int b = 10;
+    
+    berechne(a, &b);
+    
+    // Ausgabe nach Aufruf
+    print("a = ", a);
+    print("b = ", b);
+    print("globalCounter = ", globalCounter);
+    return 0;
+}
+\`\`\`
+
+Aufgaben:
+a) Wertanalyse der Variablen:
+   Welche Werte werden am Ende des Hauptprogramms für 'a', 'b' und 'globalCounter' ausgegeben?
+   Begründen Sie das Ergebnis für jede der drei Variablen anhand der verwendeten Übergabemechanismen (Call-by-Value vs. Call-by-Reference) bzw. des Scopes.
+
+b) Prozeduren vs. Funktionen:
+   Grenzen Sie die Begriffe "Prozedur" und "Funktion" im prozeduralen Programmierparadigma fachlich voneinander ab.
+
+c) Speicherbereiche Stack und Heap:
+   1. In welchem Speicherbereich (Stack oder Heap) werden lokale Variablen und Parameter während eines Funktionsaufrufs abgelegt?
+   2. Was geschieht mit diesem Speicherbereich, sobald die Funktion beendet wird (Return)?
+
+d) Rekursion:
+   1. Welche zwingende Bedingung (Abbruchkriterium) muss in jeder rekursiven Funktion vorhanden sein?
+   2. Welcher schwerwiegende Laufzeitfehler droht, wenn dieses Kriterium fehlerhaft implementiert ist oder die Rekursionstiefe zu groß wird?`,
+        musterloesung: `a) Ausgabe und Begründung:
+   - Ausgabe:
+     * a = 5
+     * b = 30
+     * globalCounter = 105
+   - Begründung:
+     1. Variable 'a' (Call-by-Value / Wertübergabe):
+        Beim Aufruf von 'berechne(a, &b)' wird der Wert von a (5) kopiert und der lokalen Parametervariablen 'val' zugewiesen. Die Modifikation 'val = val + 10' ändert nur die lokale Kopie auf dem Stack. Die Originalvariable 'a' in main() bleibt unverändert auf 5.
+     2. Variable 'b' (Call-by-Reference / Referenzübergabe via Zeiger/Adresse):
+        Es wird die Speicheradresse von b (&b) an den Zeiger '*ref' übergeben. Die Dereferenzierung '*ref = *ref + 20' schreibt direkt in den Speicherplatz der Originalvariable b. Daher ändert sich b von 10 auf 10 + 20 = 30.
+     3. Variable 'globalCounter' (Globaler Scope):
+        'globalCounter' ist außerhalb aller Funktionen deklariert und besitzt globale Gültigkeit und Lebensdauer. Die Prozedur greift direkt auf diese globale Variable zu und erhöht sie um 5 (von 100 auf 105).
+
+b) Prozedur vs. Funktion:
+   - Funktion: Ein modularer Programmblock, der Parameter entgegennimmt, Berechnungen ausführt und zwingend einen Rückgabewert an den Aufrufer zurückgibt (in Sprachen wie Java/C# mit einem definierten Datentyp wie int, string etc. und einem return-Statement).
+   - Prozedur: Führt eine Reihe von Befehlen oder Seiteneffekten aus, liefert jedoch KEINEN Rückgabewert an den Aufrufer zurück (Rückgabetyp 'void').
+
+c) Speicherbereiche:
+   1. Lokale Variablen und Funktionsparameter liegen auf dem STACK (Stapelspeicher / Call Stack Frame).
+   2. Freigabe: Sobald die Funktion beendet wird (return bzw. schließende geschweifte Klammer), wird der gesamte Stackframe automatisch abgeräumt (deallokiert). Die lokalen Variablen hören auf zu existieren.
+
+d) Rekursion:
+   1. Zwingende Bedingung:
+      Es MUSS eine Basisfall-Bedingung (Abbruchkriterium / Base Case) definiert sein, bei deren Eintreten die Funktion sich NICHT mehr selbst aufruft, sondern einen festen Wert zurückgibt.
+   2. Laufzeitfehler bei Endlosrekursion:
+      Stack Overflow (Stapelspeicherüberlauf). Jeder Funktionsaufruf belegt Speicher im Call Stack. Ohne Abbruch läuft der Stack-Speicher voll und das Programm stürzt mit einer Fehlermeldung (z. B. StackOverflowError) ab.`,
+        explanation: "Unterscheidung Call-by-Value (Kopie, Original unverändert) vs. Call-by-Reference (Adresse, Original wird geändert). Stack speichert lokale Frames (LIFO), Heap dynamische Objekte. Rekursion ohne Basisfall führt zu Stack Overflow."
+    },
+    {
+        id: 477,
+        isHard: true,
+        difficulty: "hard",
+        isBawueFocus: true,
+        theme: "lf5",
+        topic: "🧹 Software-Qualität: Refactoring-Techniken, Code Smells & Clean Code Prinzipien",
+        type: "open-text",
+        question: `IHK-Prüfungsaufgabe Software-Wartung (LF 5 - Refactoring & Clean Code):
+Im Rahmen eines Code-Audits soll ein bestehendes Software-Modul überarbeitet werden.
+
+Gegeben ist folgender fehlerhafter bzw. unsauberer Code-Ausschnitt:
+
+\`\`\`javascript
+function calc(d, t) {
+    if (t == 1) {
+        if (d > 100) {
+            return d * 0.90 * 1.19; // 10% Rabatt + MwSt
+        } else {
+            return d * 1.19;
+        }
+    } else if (t == 2) {
+        if (d > 100) {
+            return d * 0.80 * 1.19; // 20% Rabatt + MwSt
+        } else {
+            return d * 1.19;
+        }
+    } else {
+        return d * 1.19;
+    }
+}
+\`\`\`
+
+Aufgaben:
+a) Definition & Ziel von Refactoring:
+   1. Definieren Sie den Begriff "Refactoring" präzise.
+   2. Was MUSS während eines Refactorings unverändert bleiben?
+   3. Welche technische Vorbedingung muss zwingend erfüllt sein, um ein Refactoring sicher und ohne Regressionsfehler durchzuführen?
+
+b) Identifikation von Code Smells:
+   Nennen Sie mindestens drei verschiedene "Code Smells" (schlechte Programmiergewohnheiten), die im oben gezeigten Code-Ausschnitt vorhanden sind.
+
+c) Refactoring-Techniken & Clean Code:
+   1. Welche Refactoring-Maßnahme behebt die Verwendung von "1.19", "0.90" und "100"?
+   2. Wie können die tief verschachtelten if-else-Verzweigungen (Arrow-Anti-Pattern) durch moderne Programmiertechniken (z. B. Guard Clauses) aufgelöst werden?
+   3. Erläutern Sie die folgenden drei Clean-Code-Prinzipien kurz anhand je eines Satzes:
+      - DRY (Don't Repeat Yourself)
+      - KISS (Keep It Simple, Stupid)
+      - YAGNI (You Aren't Gonna Need It)`,
+        musterloesung: `a) Refactoring:
+   1. Definition:
+      Refactoring ist die gezielte Umstrukturierung und Verbesserung des internen Quellcodes von Software, um die Lesbarkeit, Verständlichkeit, Wartbarkeit und Erweiterbarkeit zu verbessern.
+   2. Was unverändert bleibt:
+      Das beobachtbare, externe funktionale Verhalten der Software darf sich durch ein Refactoring NICHT verändern (keine neuen Features, keine geänderten Rückgabewerte bei gleichen Eingaben).
+   3. Technische Vorbedingung:
+      Eine automatisierte Testsuite (insbesondere Unit-Tests) mit hoher Code-Abdeckung. Nur so kann nach jeder Änderung sofort nachgewiesen werden, dass alle bestehenden Funktionen weiterhin fehlerfrei arbeiten (keine Regression).
+
+b) Code Smells im vorliegenden Code:
+   1. Unleserliche / nichtssagende Bezeichner: Die Parameter 'calc(d, t)' lassen weder den Zweck der Funktion noch die Bedeutung der Parameter erkennen ('d' = bruttoPreis/betrag?, 't' = kundenTyp?).
+   2. Magic Numbers (Magische Zahlen): Feste, unbenannte Zahlenwerte im Code wie 1.19, 0.90, 0.80, 100, 1, 2 ohne Deklaration als benannte Konstanten oder Enums.
+   3. Duplizierter Code (Duplicate Code): Die Berechnung '* 1.19' bzw. die Rabattlogik wiederholt sich in fast jedem Zweig.
+   4. Tief verschachtelte Kontrollstrukturen (Arrow Anti-Pattern / Deep Nesting): Verschachtelte if-else-Blöcke erschweren den Lesefluss und die Testbarkeit.
+
+c) Refactoring-Techniken & Clean Code:
+   1. Replace Magic Number with Symbolic Constant (oder Enum):
+      Die Zahlen werden durch sprechende Konstanten ersetzt, z. B.:
+      const MWST_SATZ = 1.19;
+      const RABATT_SCHWELLE = 100.0;
+      const RABATT_STANDARD = 0.10;
+      const RABATT_PREMIUM = 0.20;
+   2. Auflösung durch Guard Clauses & Hilfsfunktionen:
+      Statt verschachtelter if-Bedingungen ermittelt eine kleine Hilfsfunktion zunächst nur den Rabattsatz für den Kundentyp und gibt bei ungültigen Eingaben frühzeitig zurück (Early Return). Am Ende wird die MwSt. zentral einmalig auf den rabattierten Betrag aufgeschlagen.
+   3. Clean-Code-Prinzipien:
+      - DRY (Don't Repeat Yourself): Jeder Wissensbestandteil oder Logikteil darf im gesamten System nur an einer einzigen, eindeutigen Stelle existieren (Vermeidung von Copy & Paste).
+      - KISS (Keep It Simple, Stupid): Wähle immer die einfachste, klarste Lösung für ein Problem, ohne unnötige Komplexität oder übertriebene Abstraktionen.
+      - YAGNI (You Aren't Gonna Need It): Implementiere Funktionen und Erweiterungen erst dann, wenn sie aktuell wirklich benötigt werden, und baue keinen Code auf Vorrat für denkbare zukünftige Eventualitäten.`,
+        explanation: "Refactoring verbessert die innere Struktur ohne das äußere Verhalten zu ändern. Wichtigste Smells: Magic Numbers (durch Konstanten ersetzen), Duplicate Code (DRY), Deep Nesting (Guard Clauses). Grundvoraussetzung sind automatisierte Unit-Tests!"
+    },
+    {
+        id: 478,
+        isHard: true,
+        difficulty: "hard",
+        isBawueFocus: true,
+        theme: "lf5",
+        topic: "🧪 Softwaretests: TDD (Red-Green-Refactor), Data-Driven Testing (DDT) & Testpyramide",
+        type: "open-text",
+        question: `IHK-Prüfungsaufgabe Testverfahren & Qualitätssicherung (LF 5 - Testautomatisierung):
+In modernen agilen Softwareprojekten sind strukturierte Testmethoden unverzichtbar.
+
+Bearbeiten Sie die folgenden Teilaufgaben zu TDD, DDT und Teststufen:
+
+a) Test-Driven Development (TDD):
+   1. Skizzieren Sie die drei Phasen des klassischen TDD-Zyklus ("Red - Green - Refactor") und beschreiben Sie kurz, was der Entwickler in jeder Phase tut.
+   2. Nennen Sie zwei entscheidende Vorteile, die TDD gegenüber dem traditionellen Testen erst NACH der Codierung bietet.
+
+b) Data-Driven Testing (DDT):
+   1. Erläutern Sie das Grundprinzip von "Data-Driven Testing" (DDT / datengetriebenes Testen).
+   2. Wie unterscheidet sich DDT von einem herkömmlichen statischen Unit-Test?
+   3. Nennen Sie eine typische Datenquelle, aus der Testdaten bei DDT geladen werden, und nennen Sie einen praktischen Anwendungsfall.
+
+c) Testpyramide & Teststufen (V-Modell):
+   1. Ordnen Sie die folgenden vier Testarten hierarchisch von der untersten Ebene (schnell, isoliert, häufig) bis zur obersten Ebene (langsam, ganzheitlich) der klassischen Testpyramide:
+      - Systemtest
+      - Unit-Test (Komponententest)
+      - Abnahmetest (User Acceptance Test / UAT)
+      - Integrationstest
+   2. Erläutern Sie den Unterschied zwischen einem "Black-Box-Test" und einem "White-Box-Test".`,
+        musterloesung: `a) Test-Driven Development (TDD):
+   1. Die 3 Phasen (Red - Green - Refactor):
+      - 1. RED (Rot): Der Entwickler schreibt einen neuen, kleinen Unit-Test für ein noch nicht implementiertes Feature. Dieser Test MUSS fehlschlagen (rot sein), da der Code noch nicht existiert.
+      - 2. GREEN (Grün): Der Entwickler schreibt so schnell und einfach wie möglich den minimal notwendigen Produktionscode, damit der Test erfolgreich durchläuft (grün wird).
+      - 3. REFACTOR (Überarbeiten): Der soeben geschriebene Code und die Tests werden aufgeräumt, optimiert und von Redundanzen befreit (Clean Code). Die Tests müssen dabei weiterhin grün bleiben.
+   2. Zwei Vorteile von TDD:
+      - Hohe Testabdeckung von Anfang an (100% des geschriebenen Codes ist durch Tests abgesichert).
+      - Bessere, modularere Softwarearchitektur (Code wird automatisch testbar und lose gekoppelt entworfen, da man die API aus Konsumentensicht zuerst designt).
+      - Höhere Entwickler-Sicherheit bei Refactorings und weniger Debugging-Zeit.
+
+b) Data-Driven Testing (DDT):
+   1. Grundprinzip:
+      Beim datengetriebenen Testen werden Testlogik und Testdaten strikt voneinander getrennt. Die Testmethode selbst ist ein parametrisiertes Skript, das in einer Schleife ausgeführt wird und seine Eingabewerte sowie die erwarteten Ausgabewerte aus einer externen Datentabelle bezieht.
+   2. Unterschied zum statischen Unit-Test:
+      - Statischer Unit-Test: Eingabewerte und erwartete Ergebnisse sind fest im Quellcode des Tests festverdrahtet (hardcoded). Für 10 Testfälle müssten 10 separate Testmethoden geschrieben werden.
+      - DDT: Es gibt nur EINE Testfunktion, die dynamisch für 10, 100 oder 1.000 Datensätze ausgeführt wird.
+   3. Datenquelle & Anwendungsfall:
+      - Datenquellen: CSV-Dateien, Excel-Tabellen, JSON-/XML-Dateien oder Datenbanktabellen.
+      - Anwendungsfall: Rabattstaffel- oder Steuerberechnungsprüfung. Eine Tabelle mit Grenzwerten (z. B. Umsatz: 0 €, 99 €, 100 €, 500 €, 1000 € und jeweiligem Rabattsatz) wird automatisiert abgetestet.
+
+c) Testpyramide & Testarten:
+   1. Hierarchie der Testpyramide (von unten nach oben):
+      1. Unit-Test (Komponententest - Basis, sehr viele, blitzschnell, isoliert)
+      2. Integrationstest (Zusammenspiel von Modulen, Schnittstellen, Datenbank)
+      3. Systemtest (Gesamtsystemprüfung inkl. UI und aller Services gegen die Spezifikation)
+      4. Abnahmetest / UAT (User Acceptance Test - oberste Ebene, Validierung durch Endbenutzer/Auftraggeber)
+   2. Black-Box-Test vs. White-Box-Test:
+      - Black-Box-Test: Der Tester kennt den inneren Quellcode nicht. Getestet wird rein anhand der Spezifikation (Eingabe rein -> erwartete Ausgabe prüfen, z. B. Äquivalenzklassenanalyse).
+      - White-Box-Test: Der Tester hat vollen Zugriff auf den Quellcode und nutzt dessen Struktur für gezielte Tests (z. B. Anweisungsüberdeckung, Zweigüberdeckung, Pfadüberdeckung).`,
+        explanation: "Kern-Themen für AP1: TDD folgt immer 'Red -> Green -> Refactor'. DDT trennt Testdaten (CSV/JSON) von der Testlogik. Testpyramide von unten nach oben: Unit -> Integration -> System -> Acceptance."
+    },
+    {
+        id: 479,
+        isHard: true,
+        difficulty: "hard",
+        isBawueFocus: true,
+        isDiagram: true,
+        theme: "diagrams",
+        topic: "🏢 Geschäftsprozesse: ERP-Systeme, Modul-Architektur & Order-to-Cash Prozess",
+        diagramType: "ERP-Prozessdiagramm",
+        diagramTitle: "ERP-Systemarchitektur & Order-to-Cash Kernprozess",
+        diagramCaption: "Abbildung: ERP-Systemarchitektur mit zentraler Datenbank (Single Source of Truth), Funktionsmodulen (SD, MM, FI, PP) und dem 6-stufigen Order-to-Cash Workflow",
+        diagramSvg: VisualDiagrams.getErpProcessDiagramSvg(),
+        type: "open-text",
+        question: `IHK-Prüfungsaufgabe ERP-Systeme & Geschäftsprozesse (LF 1 / LF 6 - Enterprise Resource Planning):
+Ein mittelständisches Industrieunternehmen nutzt zur Abwicklung seiner Geschäftsprozesse ein integriertes Standard-ERP-System. Betrachten Sie dazu das oben abgebildete ERP-Architektur- und Prozessdiagramm.
+
+Aufgaben:
+a) ERP-Grundlagen & Zentrale Datenbank:
+   1. Wofür steht das Akronym "ERP"?
+   2. Warum ist die zentrale, relationale Datenbank ("Single Source of Truth") das wichtigste architektonische Merkmal eines ERP-Systems gegenüber isolierten Einzellösungen (Insellösungen)? Nennen Sie zwei konkrete betriebswirtschaftliche oder technische Vorteile.
+
+b) ERP-Funktionsmodule:
+   Ordnen Sie den folgenden vier typischen Aufgaben das jeweils zuständige ERP-Modul (SD, MM, PP, FI/CO) zu:
+   1. Erfassung eines Kundenauftrags und Erstellung des Angebots.
+   2. Bestandsbuchung bei Wareneingang und Prüfung des Lager-Mindestbestands.
+   3. Erstellung von Fertigungsaufträgen auf Basis einer Material-Stückliste.
+   4. Verbuchung von Ausgangsrechnungen als Forderungen und Überwachung offener Posten.
+
+c) Der "Order-to-Cash" Prozess:
+   1. Bringen Sie die folgenden sechs Schritte des Order-to-Cash-Workflows in die chronologisch richtige Reihenfolge (von 1 bis 6):
+      - A: Warenausgang & Kommissionierung
+      - B: Kundenanfrage & Angebotserstellung
+      - C: Zahlungseingang & Buchungsausgleich
+      - D: Auftragserfassung & Verfügbarkeitsprüfung (ATP)
+      - E: Rechnungsstellung (Fakturierung)
+      - F: Warentransport & Lieferschein
+   2. Welche zwei ERP-Module arbeiten direkt zusammen, wenn bei der Auftragserfassung eine automatische Verfügbarkeitsprüfung (ATP - Available to Promise) durchgeführt wird?`,
+        musterloesung: `a) ERP-Grundlagen & Zentrale Datenbank:
+   1. Begriff:
+      ERP steht für "Enterprise Resource Planning" (Unternehmensressourcenplanung).
+   2. Vorteile der zentralen Datenbank ("Single Source of Truth"):
+      - Vermeidung von Datenredundanz und Dateninkonsistenz: Stammdaten (z. B. Kunden- oder Artikeldaten) werden nur an einer zentralen Stelle gepflegt. Änderungen sind für alle Abteilungen in Echtzeit wirksam.
+      - Nahtlose, bereichsübergreifende Geschäftsprozesse: Keine manuellen Schnittstellen oder doppelte Belegerfassung zwischen Vertrieb, Lager und Buchhaltung.
+      - Aussagekräftiges Echtzeit-Reporting: Geschäftsführung und Controlling erhalten fundierte Unternehmenskennzahlen ohne aufwändige manuelle Konsolidierung isolierter Datensilos.
+
+b) Zuordnung der ERP-Module:
+   1. Kundenauftrag & Angebot: SD (Sales & Distribution / Vertrieb).
+   2. Wareneingang & Mindestbestand: MM (Materials Management / Materialwirtschaft & Lager).
+   3. Fertigungsaufträge & Stücklisten: PP (Production Planning / Produktionsplanung).
+   4. Ausgangsrechnungen & Forderungen: FI/CO (Financial Accounting & Controlling / Finanzbuchhaltung).
+
+c) Der Order-to-Cash Workflow:
+   1. Chronologische Reihenfolge:
+      1. Schritt: B (Kundenanfrage & Angebotserstellung)
+      2. Schritt: D (Auftragserfassung & Verfügbarkeitsprüfung)
+      3. Schritt: A (Warenausgang & Kommissionierung im Lager)
+      4. Schritt: F (Warentransport & Lieferschein-Erstellung)
+      5. Schritt: E (Rechnungsstellung / Fakturierung)
+      6. Schritt: C (Zahlungseingang & Buchungsausgleich in der Finanzbuchhaltung)
+   2. Zusammenwirkende Module bei ATP (Available to Promise):
+      - Modul SD (Vertrieb / Sales): Nimmt den Auftrag entgegen.
+      - Modul MM (Materialwirtschaft / Lager): Prüft in Echtzeit die aktuellen physischen Lagerbestände und reservierten Kontingente, um verbindliche Liefertermine berechnen zu können.`,
+        explanation: "ERP verbindet alle Unternehmensbereiche über eine zentrale Datenbank (Single Source of Truth). Die Kernmodule lauten SD (Vertrieb), MM (Lager/Einkauf), PP (Produktion) und FI (Finanzen). Der Standardprozess heißt Order-to-Cash."
+    },
+    {
+        id: 480,
+        isHard: true,
+        difficulty: "hard",
+        isBawueFocus: true,
+        isDiagram: true,
+        theme: "lf5",
+        topic: "🗄️ Datenmodellierung: ERD & Relationales Schema für ein ERP-Auftragswesen",
+        diagramType: "ERD / Datenbankschema",
+        diagramTitle: "Relationales Schema Auftragswesen (Order-to-Cash)",
+        diagramCaption: "Abbildung: Auflösung einer n:m-Beziehung zwischen KUNDE, AUFTRAG, AUFTRAGSPOSITION und ARTIKEL mit zusammengesetztem Primärschlüssel",
+        type: "open-text",
+        question: `IHK-Prüfungsaufgabe Datenbankdesign (LF 5 - Relationales Datenschema für ERP):
+Für das Warenwirtschaftsmodul eines ERP-Systems soll das relationale Datenbankschema für die Auftragsabwicklung entworfen werden.
+
+Ausgangssituation:
+- Ein Kunde kann mehrere Aufträge erteilen. Jeder Auftrag gehört zu genau einem Kunden.
+- Ein Auftrag kann mehrere Artikel umfassen. Ein Artikel kann in mehreren Aufträgen bestellt werden.
+- Zu jeder bestellten Position müssen die Menge, ein eventueller Positionsrabatt sowie der vereinbarte Einzelpreis festgehalten werden.
+
+Aufgaben:
+a) Auflösung der n:m-Beziehung:
+   1. Warum kann die Beziehung zwischen den Entitäten AUFTRAG und ARTIKEL in einer relationalen Datenbank nicht direkt als 1:n-Beziehung modelliert werden?
+   2. Wie lautet der Name der Verknüpfungstabelle (Entitätstyp), die zur Auflösung der n:m-Beziehung eingeführt werden muss?
+   3. Definieren Sie den Primärschlüssel (Primary Key) und alle Fremdschlüssel (Foreign Keys) dieser Verknüpfungstabelle.
+
+b) Revisionssicherheit & Historische Preiskonstanz:
+   In der Tabelle ARTIKEL existiert bereits das Attribut 'Katalogpreis'.
+   Begründen Sie betriebswirtschaftlich und datentechnisch zwingend, warum in der Verknüpfungstabelle AUFTRAGSPOSITION dennoch ein eigenes Attribut 'VereinbarterEinzelpreis' (oder 'HistorischerPreis') gespeichert werden MUSS!
+
+c) Tabellenschema in Standardschreibweise:
+   Geben Sie das vollständige Tabellenschema für die vier Tabellen (KUNDE, AUFTRAG, AUFTRAGSPOSITION, ARTIKEL) in relationaler Schreibweise an.
+   Kennzeichnen Sie Primärschlüssel durch Unterstreichung oder [PK] und Fremdschlüssel durch [FK].`,
+        musterloesung: `a) Auflösung der n:m-Beziehung:
+   1. Begründung:
+      In einem relationalen Datenbanksystem kann ein Fremdschlüssel immer nur auf genau EINEN Datensatz der Elterntabelle verweisen (1:n). Da ein Auftrag viele Artikel enthält und ein Artikel in vielen Aufträgen vorkommen kann, würde eine direkte Verbindung zu Redundanzen, Mehrfachwerten in Feldern (Verletzung der 1. Normalform) oder unauflösbaren Zirkelbezügen führen.
+   2. Verknüpfungstabelle:
+      AUFTRAGSPOSITION (oder AUFTRAGS_DETAILS / ORDER_ITEM).
+   3. Schlüssel der Verknüpfungstabelle:
+      - Zusammengesetzter Primärschlüssel (Composite PK): (AuftragsNr, PositionsNr) - alternativ auch (AuftragsNr, ArtikelNr).
+      - Fremdschlüssel (FK):
+        * AuftragsNr [FK] -> verweist auf AUFTRAG(AuftragsNr)
+        * ArtikelNr [FK] -> verweist auf ARTIKEL(ArtikelNr)
+
+b) Revisionssicherheit & Historische Preiskonstanz:
+   - Zwingende Begründung:
+     Der Preis in der Tabelle ARTIKEL ist ein veränderlicher Stammdatenpreis (Katalogpreis/Listenpreis). Wenn ein Artikel nächstes Jahr im Preis von 50 € auf 70 € erhöht wird, würden bei einer dynamischen Abfrage über ArtikelNr rückwirkend ALLE alten Rechnungen und Aufträge der Vergangenheit plötzlich mit 70 € berechnet werden!
+   - Folge: Dies verstößt gegen die Grundsätze ordnungsmäßiger Buchführung (GoBD), verfälscht historische Umsatzauswertungen und führt zu falschen Nachdrucken von Rechnungen.
+   - Lösung: Der zum Zeitpunkt des Kaufs gültige tatsächliche Verkaufspreis muss als historischer Wert fest und unveränderlich in der AUFTRAGSPOSITION festgeschrieben werden.
+
+c) Relationales Tabellenschema:
+   - KUNDE (KundenNr [PK], Name, Vorname, Strasse, PLZ, Ort, EMail, Zahlungskondition)
+   - AUFTRAG (AuftragsNr [PK], Auftragsdatum, Status, KundenNr [FK])
+   - AUFTRAGSPOSITION (AuftragsNr [PK, FK], PositionsNr [PK], ArtikelNr [FK], BestellteMenge, VereinbarterEinzelpreis, PositionsRabatt)
+   - ARTIKEL (ArtikelNr [PK], Artikelbezeichnung, Katalogpreis, Lagerbestand, Mindestbestand, Steuersatz)`,
+        explanation: "Absolute Standardaufgabe in AP1: n:m-Beziehungen müssen immer durch eine Zwischentabelle mit zusammengesetztem PK aufgelöst werden. Der historische Einzelpreis MUSS wegen Revisionssicherheit (GoBD) in der Auftragsposition gespeichert werden!"
     }
 ];

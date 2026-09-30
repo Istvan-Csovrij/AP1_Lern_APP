@@ -2012,6 +2012,94 @@ var VisualDiagrams = {
         `;
     },
 
+    // 10e. ERP-System: Ganzheitlicher Geschäftsprozess & Modul-Architektur
+    getErpProcessDiagramSvg: function() {
+        return `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 360" width="100%" height="100%">
+            <defs>
+                <marker id="erp-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                    <polygon points="0,0 10,5 0,10" fill="#2563eb" />
+                </marker>
+                <marker id="erp-data-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+                    <polygon points="0,0 10,5 0,10" fill="#64748b" />
+                </marker>
+            </defs>
+            <rect width="680" height="360" fill="#f8fafc" rx="8" stroke="#cbd5e1" stroke-width="1" />
+            <text x="340" y="24" font-family="sans-serif" font-size="14" font-weight="bold" fill="#0f172a" text-anchor="middle">ERP-System: Integrierte Modul-Architektur &amp; Order-to-Cash Prozess</text>
+            
+            <!-- Zentrale ERP-Datenbank in der Mitte -->
+            <g transform="translate(265, 115)">
+                <!-- Zylinder / Datenbank -->
+                <path d="M 0 25 C 0 10, 150 10, 150 25 L 150 85 C 150 100, 0 100, 0 85 Z" fill="#e2e8f0" stroke="#475569" stroke-width="2" />
+                <ellipse cx="75" cy="25" rx="75" ry="15" fill="#f1f5f9" stroke="#475569" stroke-width="2" />
+                <text x="75" y="52" font-family="sans-serif" font-size="11" font-weight="bold" fill="#1e293b" text-anchor="middle">Zentrale ERP-Datenbank</text>
+                <text x="75" y="68" font-family="sans-serif" font-size="9.5" fill="#475569" text-anchor="middle">(Single Source of Truth)</text>
+                <text x="75" y="82" font-family="sans-serif" font-size="9" fill="#2563eb" font-weight="600" text-anchor="middle">Gemeinsame Datenbasis</text>
+            </g>
+
+            <!-- Modul 1: Vertrieb (Sales & Distribution / SD) - Oben Links -->
+            <g transform="translate(30, 45)">
+                <rect width="180" height="75" fill="#dbeafe" stroke="#2563eb" stroke-width="2" rx="6" />
+                <text x="90" y="20" font-family="sans-serif" font-size="12" font-weight="bold" fill="#1e3a8a" text-anchor="middle">1. Vertrieb (SD / Sales)</text>
+                <text x="90" y="38" font-family="sans-serif" font-size="10" fill="#1e40af" text-anchor="middle">• Kundenanfrage &amp; Angebot</text>
+                <text x="90" y="52" font-family="sans-serif" font-size="10" fill="#1e40af" text-anchor="middle">• Auftragserfassung</text>
+                <text x="90" y="66" font-family="sans-serif" font-size="9.5" font-weight="bold" fill="#2563eb" text-anchor="middle">➔ Löst Prüfprozess aus</text>
+            </g>
+
+            <!-- Modul 2: Lager / Materialwirtschaft (MM) - Oben Rechts -->
+            <g transform="translate(470, 45)">
+                <rect width="180" height="75" fill="#fef3c7" stroke="#d97706" stroke-width="2" rx="6" />
+                <text x="90" y="20" font-family="sans-serif" font-size="12" font-weight="bold" fill="#92400e" text-anchor="middle">2. Materialwirtschaft (MM)</text>
+                <text x="90" y="38" font-family="sans-serif" font-size="10" fill="#b45309" text-anchor="middle">• Verfügbarkeitsprüfung</text>
+                <text x="90" y="52" font-family="sans-serif" font-size="10" fill="#b45309" text-anchor="middle">• Kommissionierung / Packen</text>
+                <text x="90" y="66" font-family="sans-serif" font-size="9.5" font-weight="bold" fill="#d97706" text-anchor="middle">• Warenausgang buchen</text>
+            </g>
+
+            <!-- Modul 3: Finanzwesen (FI / Accounting) - Unten Rechts -->
+            <g transform="translate(470, 205)">
+                <rect width="180" height="75" fill="#dcfce7" stroke="#16a34a" stroke-width="2" rx="6" />
+                <text x="90" y="20" font-family="sans-serif" font-size="12" font-weight="bold" fill="#166534" text-anchor="middle">3. Finanzwesen (FI / CO)</text>
+                <text x="90" y="38" font-family="sans-serif" font-size="10" fill="#15803d" text-anchor="middle">• Fakturierung (Rechnung)</text>
+                <text x="90" y="52" font-family="sans-serif" font-size="10" fill="#15803d" text-anchor="middle">• Debitorenbuchhaltung</text>
+                <text x="90" y="66" font-family="sans-serif" font-size="9.5" font-weight="bold" fill="#16a34a" text-anchor="middle">• Zahlungseingang buchen</text>
+            </g>
+
+            <!-- Modul 4: Produktion / Beschaffung (PP / Eink.) - Unten Links -->
+            <g transform="translate(30, 205)">
+                <rect width="180" height="75" fill="#ede9fe" stroke="#7c3aed" stroke-width="2" rx="6" />
+                <text x="90" y="20" font-family="sans-serif" font-size="12" font-weight="bold" fill="#5b21b6" text-anchor="middle">4. Produktion &amp; Einkauf (PP)</text>
+                <text x="90" y="38" font-family="sans-serif" font-size="10" fill="#6d28d9" text-anchor="middle">• Fertigungsauftrag (Make)</text>
+                <text x="90" y="52" font-family="sans-serif" font-size="10" fill="#6d28d9" text-anchor="middle">• Bestellvorschlag an Lieferant</text>
+                <text x="90" y="66" font-family="sans-serif" font-size="9.5" font-weight="bold" fill="#7c3aed" text-anchor="middle">• Deckt Fehlbestände</text>
+            </g>
+
+            <!-- Prozesspfeile (Order-to-Cash Workflow im Uhrzeigersinn) -->
+            <!-- 1 -> 2 (Vertrieb zu Lager) -->
+            <line x1="210" y1="82" x2="460" y2="82" stroke="#2563eb" stroke-width="2.5" marker-end="url(#erp-arr)" />
+            <text x="335" y="74" font-family="sans-serif" font-size="10" font-weight="bold" fill="#2563eb" text-anchor="middle">1. Kundenauftrag übermitteln ➔</text>
+
+            <!-- 2 -> 3 (Lager zu Finanzen) -->
+            <line x1="560" y1="120" x2="560" y2="195" stroke="#2563eb" stroke-width="2.5" marker-end="url(#erp-arr)" />
+            <text x="615" y="160" font-family="sans-serif" font-size="10" font-weight="bold" fill="#2563eb" text-anchor="middle">2. Warenausgang ➔</text>
+
+            <!-- 3 -> 4 (Finanzen zu Abschluss) -->
+            <line x1="470" y1="245" x2="220" y2="245" stroke="#2563eb" stroke-width="2.5" marker-end="url(#erp-arr)" />
+            <text x="345" y="240" font-family="sans-serif" font-size="10" font-weight="bold" fill="#2563eb" text-anchor="middle">◄ 3. Rechnungsstellung &amp; Zahlungsabgleich</text>
+
+            <!-- Datenverbindungslinien zur Datenbank (gestrichelt) -->
+            <line x1="180" y1="120" x2="270" y2="140" stroke="#64748b" stroke-width="1.5" stroke-dasharray="3,3" />
+            <line x1="490" y1="120" x2="410" y2="140" stroke="#64748b" stroke-width="1.5" stroke-dasharray="3,3" />
+            <line x1="490" y1="205" x2="410" y2="185" stroke="#64748b" stroke-width="1.5" stroke-dasharray="3,3" />
+            <line x1="180" y1="205" x2="270" y2="185" stroke="#64748b" stroke-width="1.5" stroke-dasharray="3,3" />
+
+            <!-- Fußzeile / Nutzen -->
+            <rect x="30" y="300" width="620" height="42" fill="#ffffff" stroke="#cbd5e1" stroke-width="1" rx="4" />
+            <text x="340" y="318" font-family="sans-serif" font-size="10.5" font-weight="bold" fill="#0f172a" text-anchor="middle">IHK Kernnutzen ERP: Vermeidung von Datenredundanzen, abteilungsübergreifende Echtzeit-Transparenz,</text>
+            <text x="340" y="333" font-family="sans-serif" font-size="10" fill="#475569" text-anchor="middle">automatisierte Workflows und Beschleunigung der Durchlaufzeiten (Order-to-Cash Zyklus).</text>
+        </svg>
+        `;
+    },
+
     // 11. Relationales ERD- & Tabellenschema-Diagramm (Chen + Relationale Tabellen)
     getRelationalErdSvg: function(entA = "Server", entB = "Festplatte", rel = "enthält", card = "1:n", fkTable = "Festplatte", fkField = "FK_ServerID", reason = "Ein Server besitzt mehrere Festplatten, eine Festplatte ist fest in einem Server verbaut.") {
         const safeA = escapeDiagHtml(entA);
@@ -3086,6 +3174,11 @@ var VisualDiagrams = {
         // 10d. Kostenvergleichsrechnung (Kauf vs. Cloud)
         if (text.includes("kostenvergleich") && (text.includes("diagramm") || text.includes("cloud") || text.includes("kritisch"))) {
             return VisualDiagrams.getKostenvergleichDiagramSvg();
+        }
+
+        // 10e. ERP-System Prozessdiagramm & Order-to-Cash
+        if (text.includes("erp") || text.includes("order-to-cash")) {
+            return VisualDiagrams.getErpProcessDiagramSvg();
         }
 
         // 11. Handelskalkulation
