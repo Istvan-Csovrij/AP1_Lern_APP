@@ -2266,6 +2266,7 @@ var VisualDiagrams = {
         const isOneToOne = card === "1:1";
         const cleanFkTable = fkTable ? fkTable.replace(/\s*\(Zwischentabelle\)/i, "").trim() : safeB;
         const fkTag = isOneToOne ? " [UNIQUE]" : "";
+        const safeFkField = escapeDiagHtml(fkField || ("FK_" + attrA.pk.split(" ")[0]));
 
         return `
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 395" width="100%" height="100%">
