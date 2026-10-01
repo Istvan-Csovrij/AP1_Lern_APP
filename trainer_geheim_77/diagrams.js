@@ -2101,88 +2101,256 @@ var VisualDiagrams = {
     },
 
     // 11. Relationales ERD- & Tabellenschema-Diagramm (Chen + Relationale Tabellen)
+    // 11. Relationales ERD- & Tabellenschema-Diagramm (Chen + Relationale Tabellen)
     getRelationalErdSvg: function(entA = "Server", entB = "Festplatte", rel = "enthält", card = "1:n", fkTable = "Festplatte", fkField = "FK_ServerID", reason = "Ein Server besitzt mehrere Festplatten, eine Festplatte ist fest in einem Server verbaut.") {
         const safeA = escapeDiagHtml(entA);
         const safeB = escapeDiagHtml(entB);
         const safeRel = escapeDiagHtml(rel);
         const safeCard = escapeDiagHtml(card);
-        const safeFkTable = escapeDiagHtml(fkTable);
-        const safeFkField = escapeDiagHtml(fkField);
         const safeReason = escapeDiagHtml(reason);
 
+        // Attribut-Helper für praxisnahe Feldnamen
+        const getEntityAttributes = (entityName) => {
+            const e = entityName.toLowerCase();
+            if (e.includes("kunde")) return { pk: "KundenNr (int)", f1: "Name (VARCHAR)", f2: "Ort / PLZ (VARCHAR)", f3: "Email (VARCHAR)" };
+            if (e.includes("auftrag") && !e.includes("pos")) return { pk: "AuftragsNr (int)", f1: "AuftragsDatum (DATE)", f2: "Gesamtbetrag (DECIMAL)", f3: "Status (VARCHAR)" };
+            if (e.includes("artikel")) return { pk: "ArtikelNr (int)", f1: "ArtikelName (VARCHAR)", f2: "Katalogpreis (DECIMAL)", f3: "Lagerbestand (INT)" };
+            if (e.includes("bestellung")) return { pk: "BestellNr (int)", f1: "BestellDatum (DATE)", f2: "Gesamtbetrag (DECIMAL)", f3: "Status (VARCHAR)" };
+            if (e.includes("abteilung")) return { pk: "AbteilungsID (int)", f1: "AbteilungsName (VARCHAR)", f2: "Leiter (VARCHAR)", f3: "Kostenstelle (VARCHAR)" };
+            if (e.includes("mitarbeiter")) return { pk: "MitarbeiterID (int)", f1: "Nachname (VARCHAR)", f2: "Vorname (VARCHAR)", f3: "Gehalt (DECIMAL)" };
+            if (e.includes("projekt")) return { pk: "ProjektID (int)", f1: "ProjektTitel (VARCHAR)", f2: "Budget (DECIMAL)", f3: "StartDatum (DATE)" };
+            if (e.includes("entwickler")) return { pk: "EntwicklerID (int)", f1: "Name (VARCHAR)", f2: "Fachgebiet (VARCHAR)", f3: "Stundensatz (DECIMAL)" };
+            if (e.includes("rechnung") && !e.includes("pos")) return { pk: "RechnungsNr (int)", f1: "RechnungsDatum (DATE)", f2: "Zahlungsziel (INT)", f3: "BetragNetto (DECIMAL)" };
+            if (e.includes("position")) return { pk: "PositionsNr (int)", f1: "ArtikelMenge (INT)", f2: "Einzelpreis (DECIMAL)", f3: "Rabatt (DECIMAL)" };
+            if (e.includes("student")) return { pk: "MatrikelNr (int)", f1: "Name (VARCHAR)", f2: "Studiengang (VARCHAR)", f3: "Fachsemester (INT)" };
+            if (e.includes("vorlesung")) return { pk: "VorlesungsID (int)", f1: "Titel (VARCHAR)", f2: "Dozent (VARCHAR)", f3: "ECTS_Punkte (INT)" };
+            if (e.includes("server")) return { pk: "ServerID (int)", f1: "Hostname (VARCHAR)", f2: "IP_Adresse (VARCHAR)", f3: "Standort_Rack (VARCHAR)" };
+            if (e.includes("festplatte")) return { pk: "FestplattenID (int)", f1: "KapazitaetTiB (INT)", f2: "SerienNr (VARCHAR)", f3: "Typ_SSD_HDD (VARCHAR)" };
+            if (e.includes("lizenz") || e.includes("software")) return { pk: "LizenzKey (VARCHAR)", f1: "SoftwareName (VARCHAR)", f2: "LizenzTyp (VARCHAR)", f3: "GueltigBis (DATE)" };
+            if (e.includes("pc") || e.includes("arbeitsplatz")) return { pk: "PC_InventarNr (VARCHAR)", f1: "Modell (VARCHAR)", f2: "Betriebssystem (VARCHAR)", f3: "Raum (VARCHAR)" };
+            if (e.includes("dienstwagen")) return { pk: "DienstwagenID (int)", f1: "Kennzeichen (VARCHAR)", f2: "Modell (VARCHAR)", f3: "Kilometerstand (INT)" };
+            return { pk: `${entityName}_ID (int)`, f1: "Bezeichnung (VARCHAR)", f2: "Status (VARCHAR)", f3: "ErstelltAm (DATE)" };
+        };
+
+        const attrA = getEntityAttributes(entA);
+        const attrB = getEntityAttributes(entB);
+
+        // Fall 1: n:m BEZIEHUNG -> MUSS DREI TABELLEN DARSTELLEN!
+        if (card === "n:m") {
+            let cleanJunction = fkTable ? fkTable.replace(/\s*\(Zwischentabelle\)/i, "").trim() : `${safeA}_${safeB}`;
+            if (!cleanJunction || cleanJunction === safeA || cleanJunction === safeB) {
+                cleanJunction = `${safeA}_${safeB}`;
+            }
+
+            let fk1 = "FK_" + attrA.pk.split(" ")[0];
+            let fk2 = "FK_" + attrB.pk.split(" ")[0];
+
+            if (fkField && fkField.includes(" und ")) {
+                const parts = fkField.split(/\s+und\s+/i);
+                if (parts[0]) fk1 = parts[0].trim();
+                if (parts[1]) fk2 = parts[1].trim();
+            }
+
+            return `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 395" width="100%" height="100%">
+            <defs>
+                <marker id="erd-nm-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                    <path d="M 0 1 L 10 5 L 0 9 z" fill="#7c3aed" />
+                </marker>
+            </defs>
+            <rect width="760" height="395" fill="#f8fafc" rx="8" />
+            
+            <!-- SECTION 1: Chen ER-Diagramm (Oben) -->
+            <text x="380" y="24" font-family="sans-serif" font-size="13" font-weight="bold" fill="#1e3a8a" text-anchor="middle">1. Konzeptionelles Datenmodell (Chen ER-Notation: n:m)</text>
+            
+            <!-- Entität A -->
+            <rect x="50" y="40" width="160" height="42" fill="#dbeafe" stroke="#1d4ed8" stroke-width="2" rx="6" />
+            <text x="130" y="66" font-family="sans-serif" font-size="13.5" font-weight="bold" fill="#1e3a8a" text-anchor="middle">${safeA}</text>
+            <text x="225" y="58" font-family="sans-serif" font-size="14" font-weight="bold" fill="#dc2626">n</text>
+
+            <!-- Beziehung (Raute) -->
+            <polygon points="380,38 460,61 380,84 300,61" fill="#fef3c7" stroke="#d97706" stroke-width="2" />
+            <text x="380" y="65" font-family="sans-serif" font-size="12" font-weight="bold" fill="#92400e" text-anchor="middle">${safeRel}</text>
+
+            <!-- Entität B -->
+            <text x="535" y="58" font-family="sans-serif" font-size="14" font-weight="bold" fill="#dc2626">m</text>
+            <rect x="550" y="40" width="160" height="42" fill="#dbeafe" stroke="#1d4ed8" stroke-width="2" rx="6" />
+            <text x="630" y="66" font-family="sans-serif" font-size="13.5" font-weight="bold" fill="#1e3a8a" text-anchor="middle">${safeB}</text>
+
+            <!-- Verbindungslinien ERD -->
+            <line x1="210" y1="61" x2="300" y2="61" stroke="#475569" stroke-width="2" />
+            <line x1="460" y1="61" x2="550" y2="61" stroke="#475569" stroke-width="2" />
+
+            <!-- Trennlinie -->
+            <line x1="25" y1="98" x2="735" y2="98" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="4,4" />
+
+            <!-- SECTION 2: Relationales Datenbankschema mit 3 Tabellen (Unten) -->
+            <text x="380" y="118" font-family="sans-serif" font-size="13" font-weight="bold" fill="#0f766e" text-anchor="middle">2. Relationales Tabellenschema: Auflösung der n:m-Beziehung via Zwischentabelle</text>
+            
+            <!-- Tabelle 1: Entität A (Links) -->
+            <g transform="translate(25, 134)">
+                <rect width="215" height="175" fill="#ffffff" stroke="#1e3a8a" stroke-width="1.5" rx="4" />
+                <rect width="215" height="28" fill="#1e3a8a" rx="4" />
+                <text x="107" y="19" font-family="sans-serif" font-size="12.5" font-weight="bold" fill="#ffffff" text-anchor="middle">tbl_${safeA}</text>
+                
+                <rect x="6" y="34" width="203" height="22" fill="#fef9c3" stroke="#f59e0b" stroke-width="1" rx="3" />
+                <text x="12" y="49" font-family="monospace" font-size="10.5" font-weight="bold" fill="#854d0e">🔑 PK: ${attrA.pk}</text>
+                
+                <text x="12" y="76" font-family="monospace" font-size="10.5" fill="#334155">   ${attrA.f1}</text>
+                <text x="12" y="98" font-family="monospace" font-size="10.5" fill="#334155">   ${attrA.f2}</text>
+                <text x="12" y="120" font-family="monospace" font-size="10.5" fill="#334155">   ${attrA.f3}</text>
+                
+                <text x="107" y="160" font-family="sans-serif" font-size="10" font-weight="bold" fill="#1e40af" text-anchor="middle">Elterntabelle (1-Seite)</text>
+            </g>
+
+            <!-- Tabelle 2: ZWISCHENTABELLE (Mitte) -->
+            <g transform="translate(272, 134)">
+                <rect width="216" height="175" fill="#ffffff" stroke="#6d28d9" stroke-width="2" rx="4" />
+                <rect width="216" height="28" fill="#6d28d9" rx="4" />
+                <text x="108" y="19" font-family="sans-serif" font-size="12.5" font-weight="bold" fill="#ffffff" text-anchor="middle">tbl_${cleanJunction}</text>
+                
+                <!-- Subtitle Badge -->
+                <rect x="6" y="32" width="204" height="16" fill="#f3e8ff" rx="2" />
+                <text x="108" y="44" font-family="sans-serif" font-size="9.5" font-weight="bold" fill="#6d28d9" text-anchor="middle">⭐ Zwischentabelle (n:m-Auflösung)</text>
+                
+                <!-- FK 1 -->
+                <rect x="6" y="52" width="204" height="22" fill="#dcfce7" stroke="#16a34a" stroke-width="1.2" rx="3" />
+                <text x="10" y="67" font-family="monospace" font-size="10" font-weight="bold" fill="#166534">🔑🔗 PK,FK1: ${fk1}</text>
+                
+                <!-- FK 2 -->
+                <rect x="6" y="78" width="204" height="22" fill="#dcfce7" stroke="#16a34a" stroke-width="1.2" rx="3" />
+                <text x="10" y="93" font-family="monospace" font-size="10" font-weight="bold" fill="#166534">🔑🔗 PK,FK2: ${fk2}</text>
+                
+                <text x="10" y="118" font-family="monospace" font-size="10" fill="#334155">   ZuordnungsDatum (DATE)</text>
+                <text x="10" y="136" font-family="monospace" font-size="10" fill="#334155">   Status / Anmerkung</text>
+                
+                <text x="108" y="160" font-family="sans-serif" font-size="9" font-weight="bold" fill="#7c3aed" text-anchor="middle">✦ Verbund-PK (Composite Key)</text>
+            </g>
+
+            <!-- Tabelle 3: Entität B (Rechts) -->
+            <g transform="translate(520, 134)">
+                <rect width="215" height="175" fill="#ffffff" stroke="#047857" stroke-width="1.5" rx="4" />
+                <rect width="215" height="28" fill="#047857" rx="4" />
+                <text x="107" y="19" font-family="sans-serif" font-size="12.5" font-weight="bold" fill="#ffffff" text-anchor="middle">tbl_${safeB}</text>
+                
+                <rect x="6" y="34" width="203" height="22" fill="#fef9c3" stroke="#f59e0b" stroke-width="1" rx="3" />
+                <text x="12" y="49" font-family="monospace" font-size="10.5" font-weight="bold" fill="#854d0e">🔑 PK: ${attrB.pk}</text>
+                
+                <text x="12" y="76" font-family="monospace" font-size="10.5" fill="#334155">   ${attrB.f1}</text>
+                <text x="12" y="98" font-family="monospace" font-size="10.5" fill="#334155">   ${attrB.f2}</text>
+                <text x="12" y="120" font-family="monospace" font-size="10.5" fill="#334155">   ${attrB.f3}</text>
+                
+                <text x="107" y="160" font-family="sans-serif" font-size="10" font-weight="bold" fill="#047857" text-anchor="middle">Elterntabelle (1-Seite)</text>
+            </g>
+
+            <!-- Verbindungspfeile von A und B in die Zwischentabelle -->
+            <!-- Pfeil A -> Zwischentabelle FK1 -->
+            <path d="M 240 178 C 255 178, 258 196, 269 196" fill="none" stroke="#7c3aed" stroke-width="2" stroke-dasharray="4,3" marker-end="url(#erd-nm-arrow)" />
+            <text x="254" y="172" font-family="sans-serif" font-size="10" font-weight="bold" fill="#1e3a8a">1:n</text>
+
+            <!-- Pfeil B -> Zwischentabelle FK2 -->
+            <path d="M 520 178 C 505 178, 502 222, 491 222" fill="none" stroke="#7c3aed" stroke-width="2" stroke-dasharray="4,3" marker-end="url(#erd-nm-arrow)" />
+            <text x="503" y="172" font-family="sans-serif" font-size="10" font-weight="bold" fill="#047857">1:m</text>
+
+            <!-- Erkärungsbanner unten -->
+            <g transform="translate(25, 320)">
+                <rect width="710" height="58" fill="#faf5ff" stroke="#c084fc" stroke-width="1.5" rx="6" />
+                <text x="355" y="22" font-family="sans-serif" font-size="11" font-weight="bold" fill="#6b21a8" text-anchor="middle">🎯 IHK-Regel: Eine n:m-Beziehung kann relational NICHT direkt abgebildet werden!</text>
+                <text x="355" y="42" font-family="sans-serif" font-size="10.5" font-weight="bold" fill="#7e22ce" text-anchor="middle">Sie MUSS über eine 3. Tabelle ('tbl_${cleanJunction}') in zwei 1:n-Beziehungen aufgelöst werden (FK1 + FK2 bilden den Verbundschlüssel)!</text>
+            </g>
+        </svg>
+            `;
+        }
+
+        // Fall 2: 1:n und 1:1 BEZIEHUNGEN (2 Tabellen)
+        const isOneToOne = card === "1:1";
+        const cleanFkTable = fkTable ? fkTable.replace(/\s*\(Zwischentabelle\)/i, "").trim() : safeB;
+        const fkTag = isOneToOne ? " [UNIQUE]" : "";
+
         return `
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 370" width="100%" height="100%">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 395" width="100%" height="100%">
             <defs>
                 <marker id="erd-rel-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
                     <path d="M 0 1 L 10 5 L 0 9 z" fill="#16a34a" />
                 </marker>
             </defs>
-            <rect width="700" height="370" fill="#f8fafc" rx="8" />
+            <rect width="760" height="395" fill="#f8fafc" rx="8" />
             
             <!-- SECTION 1: Chen ER-Diagramm (Oben) -->
-            <text x="350" y="24" font-family="sans-serif" font-size="13" font-weight="bold" fill="#1e3a8a" text-anchor="middle">1. Konzeptionelles Datenmodell (Chen ER-Notation)</text>
+            <text x="380" y="24" font-family="sans-serif" font-size="13" font-weight="bold" fill="#1e3a8a" text-anchor="middle">1. Konzeptionelles Datenmodell (Chen ER-Notation: ${safeCard})</text>
             
             <!-- Entität A -->
-            <rect x="50" y="42" width="150" height="42" fill="#dbeafe" stroke="#1d4ed8" stroke-width="2" rx="6" />
-            <text x="125" y="68" font-family="sans-serif" font-size="14" font-weight="bold" fill="#1e3a8a" text-anchor="middle">${safeA}</text>
-            <text x="215" y="60" font-family="sans-serif" font-size="13" font-weight="bold" fill="#dc2626">${card === "1:n" ? "1" : (card === "n:m" ? "n" : "1")}</text>
+            <rect x="60" y="40" width="170" height="42" fill="#dbeafe" stroke="#1d4ed8" stroke-width="2" rx="6" />
+            <text x="145" y="66" font-family="sans-serif" font-size="13.5" font-weight="bold" fill="#1e3a8a" text-anchor="middle">${safeA}</text>
+            <text x="245" y="58" font-family="sans-serif" font-size="14" font-weight="bold" fill="#dc2626">1</text>
 
             <!-- Beziehung (Raute) -->
-            <polygon points="350,38 425,63 350,88 275,63" fill="#fef3c7" stroke="#d97706" stroke-width="2" />
-            <text x="350" y="67" font-family="sans-serif" font-size="12" font-weight="bold" fill="#92400e" text-anchor="middle">${safeRel}</text>
+            <polygon points="380,38 460,61 380,84 300,61" fill="#fef3c7" stroke="#d97706" stroke-width="2" />
+            <text x="380" y="65" font-family="sans-serif" font-size="12" font-weight="bold" fill="#92400e" text-anchor="middle">${safeRel}</text>
 
             <!-- Entität B -->
-            <text x="485" y="60" font-family="sans-serif" font-size="13" font-weight="bold" fill="#dc2626">${card === "1:n" ? "n" : (card === "n:m" ? "m" : "1")}</text>
-            <rect x="500" y="42" width="150" height="42" fill="#dbeafe" stroke="#1d4ed8" stroke-width="2" rx="6" />
-            <text x="575" y="68" font-family="sans-serif" font-size="14" font-weight="bold" fill="#1e3a8a" text-anchor="middle">${safeB}</text>
+            <text x="515" y="58" font-family="sans-serif" font-size="14" font-weight="bold" fill="#dc2626">${isOneToOne ? "1" : "n"}</text>
+            <rect x="530" y="40" width="170" height="42" fill="#dbeafe" stroke="#1d4ed8" stroke-width="2" rx="6" />
+            <text x="615" y="66" font-family="sans-serif" font-size="13.5" font-weight="bold" fill="#1e3a8a" text-anchor="middle">${safeB}</text>
 
             <!-- Verbindungslinien ERD -->
-            <line x1="200" y1="63" x2="275" y2="63" stroke="#475569" stroke-width="2" />
-            <line x1="425" y1="63" x2="500" y2="63" stroke="#475569" stroke-width="2" />
+            <line x1="230" y1="61" x2="300" y2="61" stroke="#475569" stroke-width="2" />
+            <line x1="460" y1="61" x2="530" y2="61" stroke="#475569" stroke-width="2" />
 
             <!-- Trennlinie -->
-            <line x1="30" y1="105" x2="670" y2="105" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="4,4" />
+            <line x1="25" y1="98" x2="735" y2="98" stroke="#cbd5e1" stroke-width="1.5" stroke-dasharray="4,4" />
 
-            <!-- SECTION 2: Relationales Datenbankschema / Tabellen (Unten) -->
-            <text x="350" y="126" font-family="sans-serif" font-size="13" font-weight="bold" fill="#0f766e" text-anchor="middle">2. Relationales Tabellenschema &amp; Fremdschlüssel-Platzierung</text>
+            <!-- SECTION 2: Relationales Datenbankschema (Unten) -->
+            <text x="380" y="118" font-family="sans-serif" font-size="13" font-weight="bold" fill="#0f766e" text-anchor="middle">2. Relationales Tabellenschema &amp; Fremdschlüssel-Platzierung</text>
             
-            <!-- Tabelle A -->
-            <g transform="translate(50, 142)">
-                <rect width="220" height="150" fill="#ffffff" stroke="#1e3a8a" stroke-width="1.5" rx="4" />
-                <rect width="220" height="28" fill="#1e3a8a" rx="4" />
-                <text x="110" y="19" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" text-anchor="middle">tbl_${safeA} (1-Seite)</text>
+            <!-- Tabelle A (1-Seite) -->
+            <g transform="translate(60, 134)">
+                <rect width="270" height="175" fill="#ffffff" stroke="#1e3a8a" stroke-width="1.5" rx="4" />
+                <rect width="270" height="28" fill="#1e3a8a" rx="4" />
+                <text x="135" y="19" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" text-anchor="middle">tbl_${safeA} (1-Seite / Elterntabelle)</text>
                 
-                <rect x="6" y="34" width="208" height="22" fill="#fef9c3" rx="3" />
-                <text x="12" y="49" font-family="monospace" font-size="11" font-weight="bold" fill="#854d0e">🔑 PK: ${safeA}_ID (int)</text>
-                <text x="12" y="74" font-family="monospace" font-size="11" fill="#334155">   Bezeichnung (VARCHAR)</text>
-                <text x="12" y="96" font-family="monospace" font-size="11" fill="#334155">   Standort (VARCHAR)</text>
-                <text x="12" y="118" font-family="monospace" font-size="11" fill="#334155">   ErstelltAm (DATE)</text>
+                <rect x="8" y="36" width="254" height="24" fill="#fef9c3" stroke="#f59e0b" stroke-width="1" rx="3" />
+                <text x="16" y="52" font-family="monospace" font-size="11" font-weight="bold" fill="#854d0e">🔑 PK: ${attrA.pk}</text>
+                
+                <text x="16" y="82" font-family="monospace" font-size="11" fill="#334155">   ${attrA.f1}</text>
+                <text x="16" y="106" font-family="monospace" font-size="11" fill="#334155">   ${attrA.f2}</text>
+                <text x="16" y="130" font-family="monospace" font-size="11" fill="#334155">   ${attrA.f3}</text>
+                
+                <text x="135" y="160" font-family="sans-serif" font-size="10.5" font-weight="bold" fill="#1e40af" text-anchor="middle">Primärschlüssel liefert Referenzwert</text>
             </g>
 
-            <!-- Tabelle B -->
-            <g transform="translate(430, 142)">
-                <rect width="220" height="150" fill="#ffffff" stroke="#047857" stroke-width="1.5" rx="4" />
-                <rect width="220" height="28" fill="#047857" rx="4" />
-                <text x="110" y="19" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" text-anchor="middle">tbl_${safeB} (n-Seite)</text>
+            <!-- Tabelle B (n-Seite oder 1-Seite bei 1:1) -->
+            <g transform="translate(430, 134)">
+                <rect width="270" height="175" fill="#ffffff" stroke="#047857" stroke-width="1.5" rx="4" />
+                <rect width="270" height="28" fill="#047857" rx="4" />
+                <text x="135" y="19" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" text-anchor="middle">tbl_${safeB} (${isOneToOne ? "1-Seite" : "n-Seite / Kindtabelle"})</text>
                 
-                <rect x="6" y="34" width="208" height="22" fill="#fef9c3" rx="3" />
-                <text x="12" y="49" font-family="monospace" font-size="11" font-weight="bold" fill="#854d0e">🔑 PK: ${safeB}_ID (int)</text>
-                <text x="12" y="74" font-family="monospace" font-size="11" fill="#334155">   Modell (VARCHAR)</text>
-                <text x="12" y="96" font-family="monospace" font-size="11" fill="#334155">   SerienNr (VARCHAR)</text>
+                <rect x="8" y="36" width="254" height="24" fill="#fef9c3" stroke="#f59e0b" stroke-width="1" rx="3" />
+                <text x="16" y="52" font-family="monospace" font-size="11" font-weight="bold" fill="#854d0e">🔑 PK: ${attrB.pk}</text>
+                
+                <text x="16" y="80" font-family="monospace" font-size="11" fill="#334155">   ${attrB.f1}</text>
+                <text x="16" y="102" font-family="monospace" font-size="11" fill="#334155">   ${attrB.f2}</text>
                 
                 <!-- Highlight FK Row -->
-                <rect x="6" y="105" width="208" height="24" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5" rx="3" />
-                <text x="12" y="122" font-family="monospace" font-size="11" font-weight="bold" fill="#166534">🔗 FK: ${safeFkField} (int)</text>
+                <rect x="8" y="115" width="254" height="26" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5" rx="3" />
+                <text x="14" y="132" font-family="monospace" font-size="11" font-weight="bold" fill="#166534">🔗 FK: ${safeFkField}${fkTag}</text>
+                
+                <text x="135" y="160" font-family="sans-serif" font-size="10.5" font-weight="bold" fill="#047857" text-anchor="middle">Fremdschlüssel referenziert tbl_${safeA}</text>
             </g>
 
             <!-- Verbindungspfeil vom PK A zum FK B -->
-            <path d="M 270 188 C 350 188, 350 258, 425 258" fill="none" stroke="#16a34a" stroke-width="2.5" stroke-dasharray="5,4" marker-end="url(#erd-rel-arrow)" />
+            <path d="M 330 182 C 385 182, 375 262, 427 262" fill="none" stroke="#16a34a" stroke-width="2.5" stroke-dasharray="5,4" marker-end="url(#erd-rel-arrow)" />
 
             <!-- Erkärungsbanner unten -->
-            <g transform="translate(50, 305)">
-                <rect width="600" height="50" fill="#f0fdf4" stroke="#86efac" stroke-width="1.5" rx="6" />
-                <text x="300" y="20" font-family="sans-serif" font-size="11" font-weight="bold" fill="#166534" text-anchor="middle">🎯 IHK-Regel: Bei ${safeCard}-Beziehung wandert der Primärschlüssel (PK) der 1-Seite ('${safeA}')</text>
-                <text x="300" y="38" font-family="sans-serif" font-size="11" font-weight="bold" fill="#047857" text-anchor="middle">als Fremdschlüssel (FK) in die Tabelle der n-Seite ('${safeFkTable}')!</text>
+            <g transform="translate(40, 320)">
+                <rect width="680" height="58" fill="${isOneToOne ? "#eff6ff" : "#f0fdf4"}" stroke="${isOneToOne ? "#93c5fd" : "#86efac"}" stroke-width="1.5" rx="6" />
+                ${isOneToOne ? `
+                <text x="340" y="22" font-family="sans-serif" font-size="11" font-weight="bold" fill="#1e40af" text-anchor="middle">🎯 IHK-Regel: Bei 1:1-Beziehung kann der Fremdschlüssel (FK) in einer der beiden Tabellen angelegt werden</text>
+                <text x="340" y="42" font-family="sans-serif" font-size="10.5" font-weight="bold" fill="#1d4ed8" text-anchor="middle">(mit UNIQUE-Constraint, um 1:1 zu erzwingen). In der Praxis meist in der abhängigen Tabelle ('${cleanFkTable}').</text>
+                ` : `
+                <text x="340" y="22" font-family="sans-serif" font-size="11" font-weight="bold" fill="#166534" text-anchor="middle">🎯 IHK-Regel: Bei 1:n-Beziehung wandert der Primärschlüssel (PK) der 1-Seite ('${safeA}')</text>
+                <text x="340" y="42" font-family="sans-serif" font-size="10.5" font-weight="bold" fill="#047857" text-anchor="middle">stets als Fremdschlüssel (FK) in die Tabelle der n-Seite ('${cleanFkTable}')!</text>
+                `}
             </g>
         </svg>
         `;
@@ -3298,14 +3466,36 @@ var VisualDiagrams = {
             let card = "1:n";
             let reason = "Ein Kunde erteilt mehrere Bestellungen.";
             
-            if (text.includes("abteilung") && text.includes("mitarbeiter")) { entA = "Abteilung"; entB = "Mitarbeiter"; rel = "beschäftigt"; card = "1:n"; reason = "Eine Abteilung beschäftigt viele Mitarbeiter."; }
+            if ((text.includes("lizenz") || text.includes("software")) && (text.includes("pc") || text.includes("arbeitsplatz"))) { entA = "SoftwareLizenz"; entB = "ArbeitsplatzPC"; rel = "ist installiert auf"; card = "n:m"; reason = "Volumenlizenzen können auf mehreren PCs installiert sein, ein PC hat mehrere Lizenzen (n:m)."; }
+            else if ((text.includes("auftrag") || text.includes("bestellung")) && text.includes("artikel")) { entA = "Auftrag"; entB = "Artikel"; rel = "umfasst"; card = "n:m"; reason = "Ein Auftrag umfasst mehrere Artikel, ein Artikel kommt in vielen Aufträgen vor (Zwischentabelle Auftragsposition)."; }
+            else if (text.includes("abteilung") && text.includes("mitarbeiter")) { entA = "Abteilung"; entB = "Mitarbeiter"; rel = "beschäftigt"; card = "1:n"; reason = "Eine Abteilung beschäftigt viele Mitarbeiter."; }
             else if (text.includes("projekt") && text.includes("entwickler")) { entA = "Projekt"; entB = "Entwickler"; rel = "arbeitet an"; card = "n:m"; reason = "Entwickler arbeiten an Projekten (n:m)."; }
             else if (text.includes("rechnung") && text.includes("position")) { entA = "Rechnung"; entB = "Rechnungsposition"; rel = "besteht aus"; card = "1:n"; reason = "Eine Rechnung enthält mehrere Positionen."; }
             else if (text.includes("student") && text.includes("vorlesung")) { entA = "Student"; entB = "Vorlesung"; rel = "besucht"; card = "n:m"; reason = "Studenten besuchen Vorlesungen (n:m)."; }
             else if (text.includes("mitarbeiter") && text.includes("dienstwagen")) { entA = "Mitarbeiter"; entB = "Dienstwagen"; rel = "besitzt fest"; card = "1:1"; reason = "Ein Mitarbeiter besitzt maximal 1 Dienstwagen."; }
             else if (text.includes("server") && text.includes("festplatte")) { entA = "Server"; entB = "Festplatte"; rel = "enthält"; card = "1:n"; reason = "Ein Server besitzt mehrere Festplatten (1:n)."; }
             
-            return VisualDiagrams.getRelationalErdSvg(entA, entB, rel, card, entB, "FK_" + entA + "ID", reason);
+            let fkTable = entB;
+            let fkField = "FK_" + entA + "ID";
+            if (card === "n:m") {
+                if (entA === "SoftwareLizenz" || entB === "ArbeitsplatzPC") {
+                    fkTable = "Lizenz_PC (Zwischentabelle)";
+                    fkField = "FK_LizenzKey und FK_PC_InventarNr";
+                } else if (entA === "Auftrag" || entB === "Artikel") {
+                    fkTable = "Auftragsposition (Zwischentabelle)";
+                    fkField = "FK_AuftragsNr und FK_ArtikelNr";
+                } else if (entA === "Projekt" || entB === "Entwickler") {
+                    fkTable = "Projekt_Entwickler (Zwischentabelle)";
+                    fkField = "FK_ProjektID und FK_EntwicklerID";
+                } else if (entA === "Student" || entB === "Vorlesung") {
+                    fkTable = "Student_Vorlesung (Zwischentabelle)";
+                    fkField = "FK_MatrikelNr und FK_VorlesungsID";
+                } else {
+                    fkTable = `${entA}_${entB} (Zwischentabelle)`;
+                    fkField = `FK_${entA}ID und FK_${entB}ID`;
+                }
+            }
+            return VisualDiagrams.getRelationalErdSvg(entA, entB, rel, card, fkTable, fkField, reason);
         }
         
         // 2. Chen ER-Diagramm (Konzeptionelles Datenmodell)

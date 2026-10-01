@@ -4348,23 +4348,29 @@ WHERE Email IS NULL OR Email = '';
                        "   d) Zählschleife (FOR): Ein Kasten mit linkem Balken und oberer Schleifenleiste: 'FÜR i = 1 BIS n SCHRITT 1'.\n\n" +
                        "2. Pseudocode für die Rabattberechnung (6 Punkte):\n" +
                        "```text\n" +
-                       "WENN status == 'premium' DANN\n" +
-                       "    WENN bestellwert >= 100 DANN\n" +
-                       "        rabattProzent = 0.10\n" +
+                       "SOLANGE nochArtikelImWarenkorb == WAHR WIEDERHOLE\n" +
+                       "    EINGABE status, bestellwert\n" +
+                       "    \n" +
+                       "    WENN status == 'premium' DANN\n" +
+                       "        WENN bestellwert >= 100 DANN\n" +
+                       "            rabattProzent = 0.10\n" +
+                       "        SONST\n" +
+                       "            rabattProzent = 0.05\n" +
+                       "        ENDE_WENN\n" +
                        "    SONST\n" +
-                       "        rabattProzent = 0.05\n" +
+                       "        WENN bestellwert >= 200 DANN\n" +
+                       "            rabattProzent = 0.05\n" +
+                       "        SONST\n" +
+                       "            rabattProzent = 0.00\n" +
+                       "        ENDE_WENN\n" +
                        "    ENDE_WENN\n" +
-                       "SONST\n" +
-                       "    WENN bestellwert >= 200 DANN\n" +
-                       "        rabattProzent = 0.05\n" +
-                       "    SONST\n" +
-                       "        rabattProzent = 0.00\n" +
-                       "    ENDE_WENN\n" +
-                       "ENDE_WENN\n" +
-                       "\n" +
-                       "rabattBetrag = bestellwert * rabattProzent\n" +
-                       "rechnungsbetrag = bestellwert - rabattBetrag\n" +
-                       "AUSGABE 'Rechnungsbetrag:', rechnungsbetrag\n" +
+                       "    \n" +
+                       "    rabattBetrag = bestellwert * rabattProzent\n" +
+                       "    rechnungsbetrag = bestellwert - rabattBetrag\n" +
+                       "    AUSGABE 'Bestellwert:', bestellwert, 'EUR'\n" +
+                       "    AUSGABE 'Rabatt:', rabattBetrag, 'EUR'\n" +
+                       "    AUSGABE 'Rechnungsbetrag:', rechnungsbetrag, 'EUR'\n" +
+                       "ENDE_SOLANGE\n" +
                        "```\n\n" +
                        "3. Fehleranalyse (3 Punkte):\n" +
                        "   - Es entsteht eine **Endlosschleife (Infinite Loop)**.\n" +
@@ -4924,7 +4930,7 @@ WHERE Email IS NULL OR Email = '';
                 "Eine n:m-Beziehung kann in relationalen Datenbanken nicht realisiert werden."
         ],
         "correctAnswer": 0,
-        "solutionDiagramSvg": VisualDiagrams.getErdDiagramSvg(),
+        "solutionDiagramSvg": VisualDiagrams.getRelationalErdSvg("Projekt", "Mitarbeiter", "arbeitet an", "n:m", "Projekt_Mitarbeiter (Zwischentabelle)", "FK_ProjektID und FK_MitarbeiterID", "Ein Mitarbeiter arbeitet an mehreren Projekten, ein Projekt hat mehrere Mitarbeiter (Zwischentabelle nötig)."),
         "explanation": "Um die 1. Normalform nicht zu verletzen (keine atomaren Listen/Wiederholungsgruppen), werden n:m-Beziehungen im relationalen Modell immer über eine Zwischentabelle (Assoziationstabelle) aufgelöst, die zwei 1:n-Beziehungen abbildet."
 },
     {
@@ -4943,7 +4949,7 @@ WHERE Email IS NULL OR Email = '';
                 "In einer separaten 1:1 Kopplungstabelle."
         ],
         "correctAnswer": 0,
-        "solutionDiagramSvg": VisualDiagrams.getErdDiagramSvg(),
+        "solutionDiagramSvg": VisualDiagrams.getRelationalErdSvg("Kunde", "Auftrag", "erteilt", "1:n", "Auftrag", "FK_KundenNr", "Ein Kunde erteilt mehrere Aufträge, jeder Auftrag gehört zu genau einem Kunden."),
         "explanation": "Bei einer 1:n Beziehung wandert der Primärschlüssel der 1-Seite (z. B. KundenNr) IMMER als Fremdschlüssel in die Tabelle der n-Seite (Auftrag), da jeder Auftrag genau einem Kunden zugeordnet ist."
 },
     {
@@ -10406,6 +10412,7 @@ c) Der Order-to-Cash Workflow:
         diagramType: "ERD / Datenbankschema",
         diagramTitle: "Relationales Schema Auftragswesen (Order-to-Cash)",
         diagramCaption: "Abbildung: Auflösung einer n:m-Beziehung zwischen KUNDE, AUFTRAG, AUFTRAGSPOSITION und ARTIKEL mit zusammengesetztem Primärschlüssel",
+        solutionDiagramSvg: VisualDiagrams.getRelationalErdSvg("Auftrag", "Artikel", "umfasst", "n:m", "Auftragsposition (Zwischentabelle)", "FK_AuftragsNr und FK_ArtikelNr", "Ein Auftrag umfasst mehrere Artikel, ein Artikel kommt in vielen Aufträgen vor (Zwischentabelle nötig)."),
         type: "open-text",
         question: `IHK-Prüfungsaufgabe Datenbankdesign (LF 5 - Relationales Datenschema für ERP):
 Für das Warenwirtschaftsmodul eines ERP-Systems soll das relationale Datenbankschema für die Auftragsabwicklung entworfen werden.

@@ -1205,7 +1205,8 @@ function generateDynamicQuestions(typeMode = "mix") {
         { entA: "Student", entB: "Vorlesung", card: "n:m", rel: "besucht", fkTable: "Student_Vorlesung (Zwischentabelle)", fkField: "FK_MatrikelNr und FK_VorlesungsID", reason: "Mehrere Studenten hören mehrere Vorlesungen (n:m Beziehung)." },
         { entA: "Mitarbeiter", entB: "Dienstwagen", card: "1:1", rel: "besitzt fest", fkTable: "Mitarbeiter oder Dienstwagen", fkField: "FK_DienstwagenID / FK_MitarbeiterID", reason: "Jedem Mitarbeiter ist höchstens ein Dienstwagen fest zugeordnet und umgekehrt." },
         { entA: "Server", entB: "Festplatte", card: "1:n", rel: "enthält", fkTable: "Festplatte", fkField: "FK_ServerID", reason: "Ein Server besitzt mehrere Festplatten, eine Festplatte ist fest in einem Server verbaut." },
-        { entA: "SoftwareLizenz", entB: "ArbeitsplatzPC", card: "n:m", rel: "ist installiert auf", fkTable: "Lizenz_PC (Zwischentabelle)", fkField: "FK_LizenzKey und FK_PC_InventarNr", reason: "Volumenlizenzen können auf mehreren PCs installiert sein, ein PC hat mehrere Lizenzen." }
+        { entA: "SoftwareLizenz", entB: "ArbeitsplatzPC", card: "n:m", rel: "ist installiert auf", fkTable: "Lizenz_PC (Zwischentabelle)", fkField: "FK_LizenzKey und FK_PC_InventarNr", reason: "Volumenlizenzen können auf mehreren PCs installiert sein, ein PC hat mehrere Lizenzen." },
+        { entA: "Auftrag", entB: "Artikel", card: "n:m", rel: "umfasst", fkTable: "Auftragsposition (Zwischentabelle)", fkField: "FK_AuftragsNr und FK_ArtikelNr", reason: "Ein Auftrag umfasst mehrere Artikel, ein Artikel kommt in mehreren Aufträgen vor (erfordert Zwischentabelle Auftragsposition)." }
     ];
 
     for (let i = 0; i < 25; i++) {
