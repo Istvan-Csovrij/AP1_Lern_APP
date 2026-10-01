@@ -7175,9 +7175,9 @@ WHERE Email IS NULL OR Email = '';
     "isCalculation": true,
     "isBawueFocus": true,
     "type": "open-text",
-    "question": "IHK-Prüfungsaufgabe (LF 1 / LF 6 - Materialbedarfs- & Verschnittkalkulation):\nFür die Netzwerkinstallation eines Bürogebäudes müssen 2.300 Meter Verlegekabel im Gebäude fest installiert werden. Der Betrieb kalkuliert mit 10 % Verschnitt von der einzukaufenden Kabelmenge.\n\nLagerbestandsdaten vor Projektstart:\n- Gesamter Lagerbestand: 2.400 Meter\n- Eiserner Bestand (Mindestbestand): 500 Meter\n- Werkstattbestand (in laufender Fertigung): 200 Meter\n- Vormerkbestand für andere Kundenprojekte: 400 Meter\n\nAufgaben:\n1. Ermitteln Sie die für das Projekt verfügbare Kabelmenge aus dem Lagerbestand. (2 Punkte)\n2. Berechnen Sie die einzukaufende Kabelmenge (inkl. 10 % Verschnitt 'im Hundert') in vollen Metern. (2 Punkte)\n3. Berechnen Sie die beim Lieferanten zu bestellende Kabelmenge. (2 Punkte)",
-    "musterloesung": "Musterlösung (6 Punkte):\n\n1. Verfügbare Lagermenge (2 Punkte):\n- Formel: Verfügbare Menge = Lagerbestand - Eiserner Bestand - Werkstattbestand - Vormerkbestand\n- Rechnung: 2.400 m - 500 m - 200 m - 400 m = 1.300 Meter\n\n2. Einzukaufende Kabelmenge (Rechnung 'im Hundert') (2 Punkte):\n- Da der Verschnitt 10 % von der Einkaufsmenge (100 %) ausmacht, entsprechen die benötigten 2.300 m genau 90 % der einzukaufenden Menge.\n- Formel: Einzukaufende Menge = Benötigte Menge / (100 % - Verschnittquote) = 2.300 m / 0,90\n- Rechnung: 2.300 / 0,90 = 2.555,555... Meter => aufgerundet: 2.556 Meter\n\n3. Tatsächliche Bestellmenge (2 Punkte):\n- Formel: Bestellmenge = Einzukaufende Menge - Verfügbare Lagermenge\n- Rechnung: 2.556 m - 1.300 m = 1.256 Meter.",
-    "explanation": "Verschnitt im Hundert: 2.300 / (1 - 0,10) = 2.556 m. Verfügbarer Lagerbestand: 2.400 - 500 - 200 - 400 = 1.300 m. Bestellmenge = 2.556 - 1.300 = 1.256 m."
+    "question": "IHK-Prüfungsaufgabe (LF 1 / LF 6 - Materialbedarfs- & Verschnittkalkulation):\nFür die Netzwerkinstallation eines Bürogebäudes müssen 2.300 Meter Verlegekabel im Gebäude fest installiert werden. Der Betrieb kalkuliert mit einem Verschnittzuschlag von 10 % bezogen auf den gesamten Brutto-Materialeinsatz (Rechnung im Hundert: 100 % Bruttobedarf - 10 % Verschnitt = 90 % Netto).\n\nLagerbestandsdaten vor Projektstart:\n- Gesamter Lagerbestand: 2.400 Meter\n- Eiserner Bestand (Mindestbestand): 500 Meter\n- Werkstattbestand (in laufender Fertigung): 200 Meter\n- Vormerkbestand für andere Kundenprojekte: 400 Meter\n\nAufgaben:\n1. Ermitteln Sie die für das Projekt verfügbare Kabelmenge aus dem Lagerbestand (verfügbarer Lagerbestand). (2 Punkte)\n2. Berechnen Sie den Bruttobedarf des Projekts (Gesamtbedarf inkl. 10 % Verschnitt 'im Hundert') in vollen Metern. (2 Punkte)\n3. Berechnen Sie die beim Lieferanten zu bestellende Kabelmenge (Bestellmenge / Fehlmenge). (2 Punkte)",
+    "musterloesung": "Musterlösung (6 Punkte mit vollständigem Rechenweg):\n\n1. Verfügbarer Lagerbestand (2 Punkte):\n- Formel: Verfügbarer Bestand = Lagerbestand - Eiserner Bestand - Werkstattbestand - Vormerkbestand\n- Begründung der Bestandsabzüge:\n  * Eiserner Bestand (Mindestbestand, 500 m): Dient als unverzichtbare Sicherheitsreserve gegen unvorhergesehene Lieferengpässe und darf im normalen Geschäftsbetrieb nicht angetastet werden.\n  * Werkstattbestand (200 m): Befindet sich bereits physisch in Bearbeitung in der Werkstatt/Fertigung.\n  * Vormerkbestand (400 m): Ist bereits fest und verbindlich für andere bestehende Kundenaufträge disponiert.\n- Rechnung: 2.400 m - 500 m - 200 m - 400 m = 1.300 Meter frei verfügbar.\n\n2. Bruttobedarf des Projekts (Rechnung 'im Hundert') (2 Punkte):\n- Begründung 'im Hundert': Der Verschnitt von 10 % bezieht sich auf den gesamten Brutto-Materialeinsatz (100 %). Die tatsächlich installierten 2.300 m Netto-Kabel stellen somit genau 90 % (100 % - 10 %) der Gesamteinsatzmenge dar.\n- Formel: Bruttobedarf = Netto-Bedarf / (1 - Verschnittquote) = 2.300 m / 0,90\n- Rechnung: 2.300 / 0,90 = 2.555,555... Meter => kaufmännisch aufgerundet auf volle Meter: 2.556 Meter Bruttobedarf.\n\n3. Erforderliche Bestellmenge beim Lieferanten (2 Punkte):\n- Begründung: Das Projekt benötigt insgesamt 2.556 m Kabel. Da 1.300 m aus dem freien Lagerbestand entnommen werden können, muss nur die verbleibende Fehlmenge beim Lieferanten bestellt werden.\n- Formel: Bestellmenge = Bruttobedarf - Verfügbarer Lagerbestand\n- Rechnung: 2.556 m - 1.300 m = 1.256 Meter.\n- Ergebnis: Es müssen genau 1.256 Meter Verlegekabel beim Lieferanten bestellt werden.",
+    "explanation": "1. Verfügbarer Lagerbestand = 2.400 m - 500 m (Mindest) - 200 m (Werkstatt) - 400 m (reserviert) = 1.300 m.\n2. Bruttobedarf (im Hundert): 2.300 m / 0,90 = 2.556 m.\n3. Bestellmenge beim Lieferanten = 2.556 m (Bruttobedarf) - 1.300 m (Lagerbestand) = 1.256 m."
 },
 {
     "id": 379,
@@ -7333,15 +7333,15 @@ WHERE Email IS NULL OR Email = '';
     "isCalculation": true,
     "isBawueFocus": true,
     "type": "multiple-choice",
-    "question": "Ein Installationsbetrieb benötigt 2.300 m Kabel und rechnet mit 10 % Verschnitt von der einzukaufenden Menge (Rechnung im Hundert). Welche Menge muss insgesamt beschafft werden?",
+    "question": "Ein Installationsbetrieb benötigt netto 2.300 m Verlegekabel und rechnet mit einem Verschnittzuschlag von 10 % bezogen auf den gesamten Brutto-Materialeinsatz (Rechnung im Hundert: 100 % Bruttobedarf - 10 % Verschnitt = 90 % Netto). Welcher Bruttobedarf muss für das Projekt kalkuliert werden?",
     "options": [
-        "2.556 Meter (Rechnung: 2.300 m / 0,90)",
-        "2.530 Meter (Rechnung: 2.300 m * 1,10)",
-        "2.300 Meter (Rechnung: ohne Verschnitt)",
-        "2.760 Meter (Rechnung: 2.300 m * 1,20)"
+        "2.556 Meter (Rechnung im Hundert: 2.300 m / 0,90)",
+        "2.530 Meter (Fehlerhafte Rechnung vom Hundert: 2.300 m * 1,10)",
+        "2.300 Meter (Reiner Netto-Installationsbedarf ohne Verschnitt)",
+        "2.760 Meter (Rechnung mit 20 % Zuschlag)"
     ],
     "correctAnswer": 0,
-    "explanation": "Bei 'Verschnitt von der Einkaufsmenge' handelt es sich um eine Prozentrechnung im Hundert: Einkaufsmenge (100 %) - 10 % Verschnitt = 90 % Nettomenge. 2.300 / 0,90 = 2.555,56 m ≈ 2.556 Meter."
+    "explanation": "Bei Verschnitt 'im Hundert' bildet der Bruttobedarf 100 %. Die 2.300 m Netto entsprechen 90 % (100 % - 10 %). Bruttobedarf = 2.300 m / 0,90 = 2.555,56 m ≈ 2.556 Meter (aufgerundet)."
 },
 {
     "id": 389,

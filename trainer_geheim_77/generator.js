@@ -3055,6 +3055,16 @@ function generateDynamicQuestions(typeMode = "mix") {
         const residualValue = Math.round((investSum * 0.065) / 1000) * 1000; // e.g. 16000 for 240k
         const totalLeasingCost = (years * 12 * monthlyRate) + residualValue;
 
+        let interestBreakdown = "";
+        let tempRest = investSum;
+        for (let y = 1; y <= years; y++) {
+            const zinsYear = tempRest * (interestRate / 100);
+            const rateYear = linearTilgung + zinsYear;
+            const endRest = tempRest - linearTilgung;
+            interestBreakdown += `     * Jahr ${y}: Restschuld zu Jahresbeginn ${tempRest.toLocaleString('de-DE')} EUR * ${interestRate.toFixed(1)} % = ${zinsYear.toLocaleString('de-DE')} EUR Zinsen | Tilgung: ${linearTilgung.toLocaleString('de-DE')} EUR | Rate: ${rateYear.toLocaleString('de-DE')} EUR (Restschuld Ende: ${endRest.toLocaleString('de-DE')} EUR)\n`;
+            tempRest -= linearTilgung;
+        }
+
         const diffSavings = Math.abs(totalLeasingCost - totalLoanCost);
         const isLoanCheaper = totalLoanCost < totalLeasingCost;
         const pctDiff = Math.round((diffSavings / (isLoanCheaper ? totalLoanCost : totalLeasingCost)) * 10000) / 100;
@@ -3068,9 +3078,9 @@ function generateDynamicQuestions(typeMode = "mix") {
                 isCalculation: true,
                 isBawueFocus: true,
                 type: "open-text",
-                question: `Prüfungsaufgabe Finanzierungsvergleich (LF 1 / LF 6):\nEin Unternehmen plant die Anschaffung von Maschinen im Wert von ${investSum.toLocaleString('de-DE')} EUR.\n\nAlternative 1: Abzahlungsdarlehen über ${years} Jahre mit linearer Tilgung zu ${interestRate.toFixed(1)} % p.a. auf die jeweilige Restschuld zu Jahresbeginn.\nAlternative 2: Leasingvertrag über ${years} Jahre (${years * 12} Monate) à ${monthlyRate.toLocaleString('de-DE')} EUR/Monat mit Übernahme zum Restwert von ${residualValue.toLocaleString('de-DE')} EUR.\n\nAufgaben:\n1. Berechnen Sie die Gesamtkosten des Abzahlungsdarlehens.\n2. Berechnen Sie die Gesamtkosten des Leasings.\n3. Welche Alternative ist wirtschaftlicher und wie hoch ist die prozentuale Abweichung?`,
-                musterloesung: `Musterlösung:\n1. Darlehen Gesamtzinsen = ${totalInterest.toLocaleString('de-DE')} EUR => Gesamtkosten Darlehen = ${totalLoanCost.toLocaleString('de-DE')} EUR.\n2. Gesamtkosten Leasing = (${years * 12} Monate * ${monthlyRate.toLocaleString('de-DE')} EUR) + ${residualValue.toLocaleString('de-DE')} EUR = ${totalLeasingCost.toLocaleString('de-DE')} EUR.\n3. Vergleich: Das ${isLoanCheaper ? 'Abzahlungsdarlehen' : 'Leasing'} ist um ${diffSavings.toLocaleString('de-DE')} EUR günstiger (Abweichung: ${pctDiff.toFixed(2)} %).`,
-                explanation: `Lineare Tilgung: ${linearTilgung.toLocaleString('de-DE')} EUR/Jahr. Zinsen sinken jährlich auf die Restschuld. Gesamtkosten: Darlehen = ${totalLoanCost.toLocaleString('de-DE')} EUR vs. Leasing = ${totalLeasingCost.toLocaleString('de-DE')} EUR.`
+                question: `Prüfungsaufgabe Finanzierungsvergleich (LF 1 / LF 6):\nEin Unternehmen plant die Anschaffung von Maschinen im Wert von ${investSum.toLocaleString('de-DE')} EUR.\n\nAlternative 1: Abzahlungsdarlehen über ${years} Jahre mit linearer Tilgung zu ${interestRate.toFixed(1)} % p.a. auf die jeweilige Restschuld zu Jahresbeginn.\nAlternative 2: Leasingvertrag über ${years} Jahre (${years * 12} Monate) à ${monthlyRate.toLocaleString('de-DE')} EUR/Monat mit Übernahme zum Restwert von ${residualValue.toLocaleString('de-DE')} EUR.\n\nAufgaben:\n1. Berechnen Sie die Gesamtkosten des Abzahlungsdarlehens (inkl. jährlicher Zinsaufstellung).\n2. Berechnen Sie die Gesamtkosten des Leasings.\n3. Welche Alternative ist wirtschaftlicher und wie hoch ist die prozentuale Mehrbelastung des teureren Angebots?`,
+                musterloesung: `Musterlösung mit vollständigem Rechenweg:\n1. Abzahlungsdarlehen (Lineare Tilgung = ${investSum.toLocaleString('de-DE')} EUR / ${years} Jahre = ${linearTilgung.toLocaleString('de-DE')} EUR/Jahr):\n   Jährliche Zinsberechnung auf die abnehmende Restschuld:\n${interestBreakdown}   => Gesamtzinsen über ${years} Jahre = ${totalInterest.toLocaleString('de-DE')} EUR\n   => Gesamtkosten Darlehen = Darlehensbetrag (${investSum.toLocaleString('de-DE')} EUR) + Gesamtzinsen (${totalInterest.toLocaleString('de-DE')} EUR) = ${totalLoanCost.toLocaleString('de-DE')} EUR.\n\n2. Gesamtkosten Leasing:\n   - Laufende Leasingraten: ${years * 12} Monate * ${monthlyRate.toLocaleString('de-DE')} EUR = ${(years * 12 * monthlyRate).toLocaleString('de-DE')} EUR\n   - Übernahme-Restwert am Laufzeitende: + ${residualValue.toLocaleString('de-DE')} EUR\n   => Gesamtkosten Leasing = ${(years * 12 * monthlyRate).toLocaleString('de-DE')} EUR + ${residualValue.toLocaleString('de-DE')} EUR = ${totalLeasingCost.toLocaleString('de-DE')} EUR.\n\n3. Wirtschaftlichkeitsvergleich:\n   - Ergebnis: Das ${isLoanCheaper ? 'Abzahlungsdarlehen' : 'Leasing'} ist um ${diffSavings.toLocaleString('de-DE')} EUR günstiger als das ${isLoanCheaper ? 'Leasing' : 'Abzahlungsdarlehen'}.\n   - Prozentuale Mehrbelastung: (${diffSavings.toLocaleString('de-DE')} EUR / ${(isLoanCheaper ? totalLoanCost : totalLeasingCost).toLocaleString('de-DE')} EUR) * 100 = ${pctDiff.toFixed(2)} %.`,
+                explanation: `Lineare Tilgung: ${linearTilgung.toLocaleString('de-DE')} EUR/Jahr. Zinsen sinken jährlich mit der Restschuld. Gesamtkosten Darlehen: ${totalLoanCost.toLocaleString('de-DE')} EUR vs. Leasing: ${totalLeasingCost.toLocaleString('de-DE')} EUR. Ersparnis: ${diffSavings.toLocaleString('de-DE')} EUR.`
             });
         } else {
             dynamicQuestions.push({
@@ -3160,8 +3170,8 @@ function generateDynamicQuestions(typeMode = "mix") {
         const reservedStock = 400;
 
         const availableStock = stock - ironStock - workStock - reservedStock;
-        const grossToPurchase = Math.ceil(netMeters / (1 - (wastePct / 100)));
-        const orderAmount = Math.max(0, grossToPurchase - availableStock);
+        const grossNeed = Math.ceil(netMeters / (1 - (wastePct / 100)));
+        const orderAmount = Math.max(0, grossNeed - availableStock);
 
         const isOpen = shouldBeOpenText();
         if (isOpen) {
@@ -3172,9 +3182,9 @@ function generateDynamicQuestions(typeMode = "mix") {
                 isCalculation: true,
                 isBawueFocus: true,
                 type: "open-text",
-                question: `Prüfungsaufgabe Materialbedarfsplanung (LF 1 / LF 6):\nFür ein Projekt werden netto ${netMeters} Meter Verlegekabel benötigt. Der Betrieb rechnet mit ${wastePct} % Verschnitt von der einzukaufenden Menge (Rechnung im Hundert).\nLagerbestand: ${stock} m, Mindestbestand (Eiserner Bestand): ${ironStock} m, Werkstattbestand: ${workStock} m, Vormerkbestand: ${reservedStock} m.\n\nAufgaben:\n1. Ermitteln Sie die für das Projekt verfügbare Lagermenge.\n2. Berechnen Sie die einzukaufende Menge (inkl. Verschnitt) in vollen Metern.\n3. Berechnen Sie die erforderliche Bestellmenge beim Lieferanten.`,
-                musterloesung: `Musterlösung:\n1. Verfügbare Menge = ${stock} m - ${ironStock} m - ${workStock} m - ${reservedStock} m = ${availableStock} Meter.\n2. Einzukaufende Menge (im Hundert) = ${netMeters} m / (1 - ${wastePct / 100}) = ${grossToPurchase} Meter.\n3. Bestellmenge = ${grossToPurchase} m - ${availableStock} m = ${orderAmount} Meter.`,
-                explanation: `Verschnitt im Hundert: Netto / (1 - ${wastePct}%) = ${netMeters} / ${1 - wastePct/100} = ${grossToPurchase} m. Verfügbar = ${availableStock} m. Bestellung = ${orderAmount} m.`
+                question: `Prüfungsaufgabe Materialbedarfsplanung (LF 1 / LF 6):\nFür ein Projekt werden netto ${netMeters} Meter Verlegekabel im Gebäude fest installiert. Der Betrieb kalkuliert mit einem Verschnittzuschlag von ${wastePct} % bezogen auf den gesamten Brutto-Materialeinsatz (Rechnung im Hundert).\n\nLagerbestandsdaten vor Projektstart:\n- Gesamter Lagerbestand: ${stock} m\n- Mindestbestand (Eiserner Bestand): ${ironStock} m\n- Werkstattbestand (in laufender Fertigung): ${workStock} m\n- Vormerkbestand für andere Kundenprojekte: ${reservedStock} m.\n\nAufgaben:\n1. Ermitteln Sie die für das Projekt verfügbare Lagermenge (verfügbarer Lagerbestand).\n2. Berechnen Sie den Bruttobedarf des Projekts (Gesamtbedarf inkl. Verschnitt 'im Hundert') in vollen Metern.\n3. Berechnen Sie die beim Lieferanten erforderliche Bestellmenge (einzukaufende Fehlmenge).`,
+                musterloesung: `Musterlösung mit vollständigem Rechenweg:\n\n1. Verfügbare Lagermenge (Verfügbarer Lagerbestand):\n- Formel: Verfügbare Menge = Lagerbestand - Mindestbestand - Werkstattbestand - Vormerkbestand\n- Begründung der Bestandsabzüge:\n  * Mindestbestand (${ironStock} m): Eiserne Notfallreserve gegen Lieferengpässe; darf im Normalbetrieb nicht angetastet werden.\n  * Werkstattbestand (${workStock} m): Befindet sich bereits intern in der Fertigung/Werkstatt in Verwendung.\n  * Vormerkbestand (${reservedStock} m): Ist bereits verbindlich für andere bestehende Kundenaufträge reserviert.\n- Rechnung: ${stock} m - ${ironStock} m - ${workStock} m - ${reservedStock} m = ${availableStock} Meter verfügbar.\n\n2. Bruttobedarf des Projekts (Rechnung 'im Hundert'):\n- Begründung 'im Hundert': Der Verschnitt von ${wastePct} % bezieht sich auf den gesamten Brutto-Materialeinsatz (100 %). Die tatsächlich verlegten ${netMeters} m Netto-Kabel entsprechen daher genau ${100 - wastePct} % (${(100 - wastePct) / 100}) des Bruttobedarfs.\n- Formel: Bruttobedarf = Netto-Bedarf / (1 - (Verschnittquote / 100)) = ${netMeters} m / ${(1 - wastePct / 100).toFixed(2)}\n- Rechnung: ${netMeters} / ${(1 - wastePct / 100).toFixed(2)} = ${(netMeters / (1 - wastePct / 100)).toFixed(2)} Meter\n- Ergebnis (aufgerundet auf volle Meter): ${grossNeed} Meter Bruttobedarf.\n\n3. Erforderliche Bestellmenge beim Lieferanten (einzukaufende Fehlmenge):\n- Begründung: Das Projekt benötigt insgesamt ${grossNeed} m Kabel (Bruttobedarf). Da ${availableStock} m aus dem Lager entnommen werden können, muss nur die verbleibende Fehlmenge beim Lieferanten bestellt werden.\n- Formel: Bestellmenge = Bruttobedarf - Verfügbare Lagermenge\n- Rechnung: ${grossNeed} m - ${availableStock} m = ${orderAmount} Meter.\n- Ergebnis: Es müssen ${orderAmount} Meter Kabel beim Lieferanten bestellt werden.`,
+                explanation: `1. Verfügbarer Lagerbestand: ${stock} - ${ironStock} - ${workStock} - ${reservedStock} = ${availableStock} m.\n2. Bruttobedarf im Hundert: ${netMeters} m / ${(1 - wastePct/100).toFixed(2)} = ${grossNeed} m.\n3. Bestellmenge Lieferant: ${grossNeed} m (Bruttobedarf) - ${availableStock} m (Lagerbestand) = ${orderAmount} m.`
             });
         } else {
             dynamicQuestions.push({
@@ -3184,15 +3194,15 @@ function generateDynamicQuestions(typeMode = "mix") {
                 isCalculation: true,
                 isBawueFocus: true,
                 type: "multiple-choice",
-                question: `Ein Betrieb benötigt ${netMeters} m Kabel mit ${wastePct} % Verschnitt von der Einkaufsmenge. Lagerbestand: ${stock} m, Mindestbestand: ${ironStock} m, Werkstatt: ${workStock} m, Vormerk: ${reservedStock} m.\n\nWelche Bestellmenge muss geordert werden?`,
+                question: `Ein Betrieb benötigt netto ${netMeters} m Verlegekabel für ein Projekt. Es wird mit einem Verschnittzuschlag von ${wastePct} % bezogen auf den gesamten Bruttoeinsatz kalkuliert (Rechnung im Hundert).\nLagerbestand: ${stock} m, Mindestbestand: ${ironStock} m, Werkstattbestand: ${workStock} m, Vormerkbestand: ${reservedStock} m.\n\nWelche Bestellmenge muss beim Lieferanten geordert werden?`,
                 options: [
-                    `${orderAmount} Meter (Einkauf: ${grossToPurchase} m, Verfügbar: ${availableStock} m)`,
-                    `${grossToPurchase} Meter (ohne Lagerverrechnung)`,
+                    `${orderAmount} Meter (Bruttobedarf: ${grossNeed} m abzüglich ${availableStock} m aus dem Lager)`,
+                    `${grossNeed} Meter (Bruttobedarf ohne Berücksichtigung des Lagerbestands)`,
                     `${orderAmount + 300} Meter`,
-                    `${Math.round(netMeters * (1 + wastePct / 100))} Meter`
+                    `${Math.round(netMeters * (1 + wastePct / 100))} Meter (Fehlerhafte Rechnung 'vom Hundert')`
                 ],
                 correctAnswer: 0,
-                explanation: `Einkaufsmenge = ${netMeters} / (1 - 0,${wastePct < 10 ? '0' + wastePct : wastePct}) = ${grossToPurchase} m. Verfügbar = ${stock} - ${ironStock} - ${workStock} - ${reservedStock} = ${availableStock} m. Bestellmenge = ${grossToPurchase} - ${availableStock} = ${orderAmount} m.`
+                explanation: `1. Verfügbarer Lagerbestand = ${stock} - ${ironStock} - ${workStock} - ${reservedStock} = ${availableStock} m.\n2. Bruttobedarf (im Hundert) = ${netMeters} / (1 - ${(wastePct/100).toFixed(2)}) = ${grossNeed} m.\n3. Bestellmenge = ${grossNeed} m - ${availableStock} m = ${orderAmount} m.`
             });
         }
     }
