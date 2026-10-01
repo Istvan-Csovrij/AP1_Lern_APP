@@ -38,13 +38,13 @@ function generateDynamicQuestions(typeMode = "mix") {
             let mLoesung = "";
             if (qType === 0) {
                 qText = `Prüfungsaufgabe Wirtschaftlichkeit (LF 6): Ein Unternehmen möchte für seine Mitarbeiter ${count} neue Monitore beschaffen. Angebot A kostet ${priceA} EUR pro Stück. Berechne die Gesamtkosten für Angebot A.`;
-                mLoesung = `${totalA} EUR. (Rechnung: ${count} Stück * ${priceA} EUR/Stück = ${totalA} EUR).`;
+                mLoesung = `Rechnung Angebot A:\n- Formel: Gesamtkosten = Bestellmenge * Stückpreis\n- Rechnung: ${count} Stück * ${priceA} € = ${totalA.toLocaleString('de-DE')} €\n- Ergebnis: Die Gesamtkosten für Angebot A betragen ${totalA.toLocaleString('de-DE')} €.`;
             } else if (qType === 1) {
                 qText = `Prüfungsaufgabe Wirtschaftlichkeit (LF 6): Ein Unternehmen möchte für seine Mitarbeiter ${count} neue Monitore beschaffen. Angebot B kostet ${priceB} EUR pro Stück. Berechne die Gesamtkosten für Angebot B.`;
-                mLoesung = `${totalB} EUR. (Rechnung: ${count} Stück * ${priceB} EUR/Stück = ${totalB} EUR).`;
+                mLoesung = `Rechnung Angebot B:\n- Formel: Gesamtkosten = Bestellmenge * Stückpreis\n- Rechnung: ${count} Stück * ${priceB} € = ${totalB.toLocaleString('de-DE')} €\n- Ergebnis: Die Gesamtkosten für Angebot B betragen ${totalB.toLocaleString('de-DE')} €.`;
             } else {
-                qText = `Prüfungsaufgabe Wirtschaftlichkeit (LF 6): Für die Anschaffung von ${count} neuen Monitoren liegen drei Angebote vor:\nAngebot A: ${priceA} EUR/Stück\nAngebot B: ${priceB} EUR/Stück\nAngebot C: ${priceC} EUR/Stück\n\nWelches Angebot hat die niedrigsten Gesamtanschaffungskosten und warum?`;
-                mLoesung = `Angebot C hat die niedrigsten Kosten (${totalC} EUR), da der Stückpreis mit ${priceC} EUR der geringste ist.`;
+                qText = `Prüfungsaufgabe Wirtschaftlichkeit (LF 6): Für die Anschaffung von ${count} neuen Monitoren liegen drei Angebote vor:\nAngebot A: ${priceA} EUR/Stück\nAngebot B: ${priceB} EUR/Stück\nAngebot C: ${priceC} EUR/Stück\n\nWelches Angebot hat die niedrigsten Gesamtanschaffungskosten und warum? Zeige den vollständigen rechnerischen Vergleich.`;
+                mLoesung = `Musterlösung Angebotsvergleich (${count} Monitore):\n\n1. Rechnerischer Vergleich aller Angebote:\n- Angebot A: ${count} Stück * ${priceA} € = ${totalA.toLocaleString('de-DE')} €\n- Angebot B: ${count} Stück * ${priceB} € = ${totalB.toLocaleString('de-DE')} €\n- Angebot C: ${count} Stück * ${priceC} € = ${totalC.toLocaleString('de-DE')} €\n\n2. Wirtschaftlichkeits-Entscheidung:\nAngebot C weist mit ${totalC.toLocaleString('de-DE')} € die geringsten Gesamtkosten auf (Ersparnis von ${(totalA - totalC).toLocaleString('de-DE')} € gegenüber Angebot A und ${(totalB - totalC).toLocaleString('de-DE')} € gegenüber Angebot B).`;
             }
 
             dynamicQuestions.push({
@@ -313,20 +313,20 @@ function generateDynamicQuestions(typeMode = "mix") {
         }
     }
 
-    // 3.2 OSI-Protokollzuordnungen
+    // 3.2 OSI-Protokollzuordnungen (mit detaillierter Schichten-Erklärung)
     const osiProtocols = [
-        { name: "HTTP", layer: "7", layerName: "Anwendungsschicht (Application Layer)" },
-        { name: "HTTPS", layer: "7", layerName: "Anwendungsschicht (Application Layer)" },
-        { name: "FTP", layer: "7", layerName: "Anwendungsschicht (Application Layer)" },
-        { name: "SMTP", layer: "7", layerName: "Anwendungsschicht (Application Layer)" },
-        { name: "DNS", layer: "7", layerName: "Anwendungsschicht (Application Layer)" },
-        { name: "TCP", layer: "4", layerName: "Transportschicht (Transport Layer)" },
-        { name: "UDP", layer: "4", layerName: "Transportschicht (Transport Layer)" },
-        { name: "IP", layer: "3", layerName: "Vermittlungsschicht (Network Layer)" },
-        { name: "ICMP", layer: "3", layerName: "Vermittlungsschicht (Network Layer)" },
-        { name: "ARP", layer: "2", layerName: "Sicherungsschicht (Data Link Layer)" },
-        { name: "Ethernet", layer: "2", layerName: "Sicherungsschicht (Data Link Layer)" },
-        { name: "DHCP", layer: "7", layerName: "Anwendungsschicht (Application Layer)" }
+        { name: "HTTP", layer: "7", layerName: "Anwendungsschicht (Application Layer)", pdu: "Daten", task: "Unverschlüsseltes Hypertext-Transfer-Protokoll (Port 80) zur Übertragung von Webseiten zwischen Webserver und Browser." },
+        { name: "HTTPS", layer: "7", layerName: "Anwendungsschicht (Application Layer)", pdu: "Daten", task: "Mit TLS/SSL verschlüsseltes Webprotokoll (Port 443) zur abhör- und manipulationssicheren Datenübertragung." },
+        { name: "FTP", layer: "7", layerName: "Anwendungsschicht (Application Layer)", pdu: "Daten", task: "Dateiübertragung zwischen Client und Server über getrennte Kontroll- (Port 21) und Datenverbindungen (Port 20)." },
+        { name: "SMTP", layer: "7", layerName: "Anwendungsschicht (Application Layer)", pdu: "Daten", task: "Zuverlässiger E-Mail-Transport zwischen Mail-Transfer-Agents (MTA) über Port 25 bzw. Submission über Port 587." },
+        { name: "DNS", layer: "7", layerName: "Anwendungsschicht (Application Layer)", pdu: "Daten", task: "Hierarchische Namensauflösung zur Übersetzung von menschenlesbaren FQDN-Domainnamen in IP-Adressen (Port 53)." },
+        { name: "TCP", layer: "4", layerName: "Transportschicht (Transport Layer)", pdu: "Segmente", task: "Verbindungsorientierter, verlässlicher End-to-End Transport mit 3-Wege-Handshake (SYN, SYN-ACK, ACK), Flusskontrolle und Fehlerkorrektur." },
+        { name: "UDP", layer: "4", layerName: "Transportschicht (Transport Layer)", pdu: "Datagramme", task: "Verbindungsloser, unbestätigter Transport mit minimalem Overhead für latenzkritische Echtzeitdienste (VoIP, DNS, Streaming)." },
+        { name: "IP (IPv4 / IPv6)", layer: "3", layerName: "Vermittlungsschicht (Network Layer)", pdu: "Pakete", task: "Logische weltweite Adressierung und Wegewahl (Routing) von Datenpaketen über Subnetzgrenzen hinweg." },
+        { name: "ICMP", layer: "3", layerName: "Vermittlungsschicht (Network Layer)", pdu: "Pakete", task: "Netzwerkdiagnose und Fehlermeldungen (z. B. Echo-Request/Reply bei Ping, Destination Unreachable, TTL expired)." },
+        { name: "ARP", layer: "2", layerName: "Sicherungsschicht (Data Link Layer)", pdu: "Frames (Rahmen)", task: "Auflösung von logischen IPv4-Adressen in physische MAC-Hardwareadressen im lokalen Subnetz mittels Broadcast." },
+        { name: "Ethernet (IEEE 802.3)", layer: "2", layerName: "Sicherungsschicht (Data Link Layer)", pdu: "Frames (Rahmen)", task: "Strukturierung der Bits in Rahmen (Frames), physische MAC-Adressierung und Fehlererkennung per CRC/FCS." },
+        { name: "DHCP", layer: "7", layerName: "Anwendungsschicht (Application Layer)", pdu: "Daten", task: "Automatische Zuweisung von IP-Konfigurationen (IP, Subnetzmaske, Standardgateway, DNS) über den 4-stufigen DORA-Prozess (Ports 67/68)." }
     ];
     for (let i = 0; i < 10; i++) {
         const proto = osiProtocols[Math.floor(Math.random() * osiProtocols.length)];
@@ -338,8 +338,8 @@ function generateDynamicQuestions(typeMode = "mix") {
                 id: currentId++,
                 theme: "lf3",
                 type: "open-text",
-                question: `Prüfungsaufgabe Netzwerk (LF 3): Auf welcher Schicht des OSI-Referenzmodells arbeitet das Netzwerkprotokoll "${proto.name}"? Nenne die Schicht-Nummer und den Schicht-Namen.`,
-                musterloesung: `Schicht ${proto.layer}: ${proto.layerName}`,
+                question: `Prüfungsaufgabe Netzwerk (LF 3): Gegeben ist das Netzwerkprotokoll "${proto.name}".\n\nAufgabe:\n1. Nenne die Schicht-Nummer und den offiziellen Schicht-Namen des OSI-Referenzmodells.\n2. Nenne die zugehörige Protokolldateneinheit (PDU).\n3. Beschreibe kurz die Hauptaufgabe des Protokolls.`,
+                musterloesung: `1. Schicht im OSI-Referenzmodell:\n   - Schicht ${proto.layer}: ${proto.layerName}\n\n2. Protokolldateneinheit (PDU):\n   - ${proto.pdu}\n\n3. Funktion & Hauptaufgabe von ${proto.name}:\n   - ${proto.task}`,
                 explanation: `Das Protokoll "${proto.name}" ist der Schicht ${proto.layer} (${proto.layerName}) des OSI-Referenzmodells zugeordnet.`
             });
         } else {
@@ -364,13 +364,38 @@ function generateDynamicQuestions(typeMode = "mix") {
     // LERNFELD 4: SCHUTZ & SICHERHEIT (lf4)
     // ==========================================
     
-    // 4.1 Malware-Klassifizierung
+    // 4.1 Malware-Klassifizierung (mit fundierter IHK-Lösung)
     const malwareTypes = [
-        { name: "Trojaner (Trojanisches Pferd)", desc: "tarnen sich als nützliche Software, öffnen im Hintergrund jedoch heimlich eine Hintertür (Backdoor) für Angreifer" },
-        { name: "Ransomware (Erpressersoftware)", desc: "verschlüsseln Benutzerdaten auf dem System und fordern Lösegeld für die Freigabe des Schlüssels" },
-        { name: "Spyware", desc: "spionieren Benutzerdaten und Aktivitäten heimlich aus (z.B. durch Mitprotokollieren von Tastatureingaben)" },
-        { name: "Computer-Wurm (Worm)", desc: "verbreiten sich selbstständig über Netzwerke und Sicherheitslücken, ohne ein Wirtsprogramm zu benötigen" },
-        { name: "Computer-Virus", desc: "benötigen zwingend ein Wirtsprogramm zur Ausbreitung und hängen sich an andere ausführbare Dateien an" }
+        { 
+            name: "Trojaner (Trojanisches Pferd)", 
+            desc: "tarnen sich als nützliche Software, öffnen im Hintergrund jedoch heimlich eine Hintertür (Backdoor) für Angreifer",
+            mechanism: "Wird durch Social Engineering verbreitet (z. B. scheinbare Treiber-Updates, gecrackte Software). Installiert Backdoors, RATs (Remote Access Trojans) oder lädt Spyware nach.",
+            defense: "Software nur aus verifizierten Quellen installieren, Benutzerkonten ohne administrative Rechte nutzen, Endpoint-Protection (EDR) mit Verhaltensanalyse."
+        },
+        { 
+            name: "Ransomware (Erpressersoftware / Krypto-Trojaner)", 
+            desc: "verschlüsseln Benutzerdaten auf dem System und fordern Lösegeld für die Freigabe des Schlüssels",
+            mechanism: "Verschlüsselt Dokumente, Datenbanken und Backups mit starker Kryptografie (AES-256 + RSA), löscht Volumeschattenkopien (VSS) und erpresst Lösegeld.",
+            defense: "Unveränderbare, getrennte Offline-Backups (Air-Gap / 3-2-1-1-0-Regel), Netzwerksegmentierung, zeitnahes Schließen von Sicherheitslücken."
+        },
+        { 
+            name: "Spyware / Keylogger", 
+            desc: "spionieren Benutzerdaten und Aktivitäten heimlich aus (z.B. durch Mitprotokollieren von Tastatureingaben)",
+            mechanism: "Klinkt sich in das Betriebssystem oder den Browser ein, zeichnet Tastatureingaben, Passwörter und Bankdaten auf und übermittelt sie an Angreifer.",
+            defense: "Einsatz von Multi-Faktor-Authentifizierung (MFA/2FA), Passwort-Manager, regelmäßige heuristische Virenprüfungen, Sensibilisierung."
+        },
+        { 
+            name: "Computer-Wurm (Worm)", 
+            desc: "verbreiten sich selbstständig über Netzwerke und Sicherheitslücken, ohne ein Wirtsprogramm zu benötigen",
+            mechanism: "Scannt eigenständig Netzwerke nach verwundbaren Diensten (z. B. SMB-Schwachstellen wie bei WannaCry) und infiziert Systeme ohne Benutzerinteraktion.",
+            defense: "Sofortiges Patchen bekannter Sicherheitslücken (Patch-Management), Schließen ungenutzter Netzwerk-Ports, interne Firewalls zwischen Netzen."
+        },
+        { 
+            name: "Computer-Virus", 
+            desc: "benötigen zwingend ein Wirtsprogramm zur Ausbreitung und hängen sich an andere ausführbare Dateien an",
+            mechanism: "Hängt Schadcode an existierende ausführbare Programme (.exe, .dll) oder Makros an. Wird erst aktiv, wenn das infizierte Wirtsprogramm gestartet wird.",
+            defense: "Deaktivierung automatischer Office-Makros, Virenscanner mit Echtzeitschutz und Dateisignatur-Überprüfung."
+        }
     ];
     for (let i = 0; i < 10; i++) {
         const mw = malwareTypes[Math.floor(Math.random() * malwareTypes.length)];
@@ -382,8 +407,8 @@ function generateDynamicQuestions(typeMode = "mix") {
                 id: currentId++,
                 theme: "lf4",
                 type: "open-text",
-                question: `Prüfungsaufgabe IT-Sicherheit (LF 4): Erläutere, welche Art von Malware der folgenden Beschreibung entspricht:\n"${mw.desc}"`,
-                musterloesung: mw.name,
+                question: `Prüfungsaufgabe IT-Sicherheit (LF 4): Gegeben ist folgende Schadsoftware-Charakteristik:\n"${mw.desc}"\n\nAufgabe:\n1. Benennen Sie die exakte Malware-Kategorie.\n2. Beschreiben Sie kurz die Funktions- und Ausbreitungsweise.\n3. Nennen Sie zwei wirksame Abwehrmaßnahmen nach BSI IT-Grundschutz.`,
+                musterloesung: `1. Malware-Kategorie:\n   ${mw.name}\n\n2. Funktions- & Ausbreitungsweise:\n   - ${mw.mechanism}\n\n3. Empfohlene Schutzmaßnahmen (BSI IT-Grundschutz):\n   - ${mw.defense}`,
                 explanation: `Der Beschreibung nach handelt es sich eindeutig um einen "${mw.name}".`
             });
         } else {
@@ -399,11 +424,26 @@ function generateDynamicQuestions(typeMode = "mix") {
         }
     }
 
-    // 4.2 IT-Sicherheitsziele
+    // 4.2 IT-Sicherheitsziele (CIA-Triade nach ISO/IEC 27001 mit fundierter IHK-Lösung)
     const securityGoals = [
-        { name: "Vertraulichkeit (Confidentiality)", desc: "Sicherstellung, dass Daten nur für autorisierte Personen zugänglich sind und unbefugtes Mitlesen verhindert wird" },
-        { name: "Integrität (Integrity)", desc: "Sicherstellung, dass Daten vollständig, korrekt und unversehrt bleiben und nicht unbemerkt manipuliert werden" },
-        { name: "Verfügbarkeit (Availability)", desc: "Sicherstellung, dass IT-Systeme, Dienste und Daten für berechtigte Benutzer zur vereinbarten Zeit betriebsbereit sind" }
+        { 
+            name: "Vertraulichkeit (Confidentiality)", 
+            desc: "Sicherstellung, dass Daten nur für autorisierte Personen zugänglich sind und unbefugtes Mitlesen verhindert wird",
+            measures: "Ende-zu-Ende-Verschlüsselung (z. B. TLS 1.3, AES-256), strenge Zugriffskontrollmodelle (Least Privilege, RBAC), Multi-Faktor-Authentifizierung (MFA), physischer Zutrittsschutz.",
+            threats: "Eavesdropping (Abhören im unverschlüsselten WLAN), Man-in-the-Middle-Angriffe, unbefugter Datenabfluss durch Insider oder Malware."
+        },
+        { 
+            name: "Integrität (Integrity)", 
+            desc: "Sicherstellung, dass Daten vollständig, korrekt und unversehrt bleiben und nicht unbemerkt manipuliert werden",
+            measures: "Kryptografische Prüfsummen / Hash-Werte (SHA-256), digitale Signaturen, Message Authentication Codes (MAC), Schreibschutz & Versionsverwaltung.",
+            threats: "Unbemerkte Datenmanipulation während der Übertragung oder im Ruhezustand, unautorisierte Datenbank-Updates, Sabotage."
+        },
+        { 
+            name: "Verfügbarkeit (Availability)", 
+            desc: "Sicherstellung, dass IT-Systeme, Dienste und Daten für berechtigte Benutzer zur vereinbarten Zeit betriebsbereit sind",
+            measures: "Redundante Systemkomponenten (RAID, Server-Cluster, duale Netzteile), USV-Anlagen, Notstrom, DDoS-Schutz, automatisierte Backups mit Desaster-Recovery-Plan.",
+            threats: "DDoS-Angriffe, Hardware-Defekte, Stromausfall, Ransomware-Verschlüsselung, Naturkatastrophen / Brände im Rechenzentrum."
+        }
     ];
     for (let i = 0; i < 10; i++) {
         const goal = securityGoals[Math.floor(Math.random() * securityGoals.length)];
@@ -415,8 +455,8 @@ function generateDynamicQuestions(typeMode = "mix") {
                 id: currentId++,
                 theme: "lf4",
                 type: "open-text",
-                question: `Prüfungsaufgabe IT-Sicherheit (LF 4): Welches IT-Sicherheitsziel (aus der CIA-Triade) beschreibt die:\n"${goal.desc}"?`,
-                musterloesung: goal.name,
+                question: `Prüfungsaufgabe IT-Sicherheit (LF 4): Gegeben ist folgende Definition eines IT-Schutzziels:\n"${goal.desc}"\n\nAufgabe:\n1. Benenne das Schutzziel aus der CIA-Triade (nach ISO/IEC 27001).\n2. Nenne zwei technische Schutzmaßnahmen zur Gewährleistung.\n3. Nenne eine typische Bedrohung, die dieses Schutzziel gefährdet.`,
+                musterloesung: `1. Identifiziertes Schutzziel (CIA-Triade):\n   ${goal.name}\n\n2. Technische Schutzmaßnahmen:\n   - ${goal.measures}\n\n3. Relevante Bedrohungen:\n   - ${goal.threats}`,
                 explanation: `Das beschriebene Schutzziel ist die "${goal.name}".`
             });
         } else {
@@ -623,8 +663,8 @@ function generateDynamicQuestions(typeMode = "mix") {
                 id: currentId++,
                 theme: "lf5",
                 type: "open-text",
-                question: `Prüfungsaufgabe ER-Modellierung (LF 18 / LF 5):\n${scenario.q}`,
-                musterloesung: scenario.options[scenario.answer],
+                question: `Prüfungsaufgabe ER-Modellierung (LF 18 / LF 5):\n${scenario.q}\n\nAufgabe:\n1. Bestimme die Kardinalität (1:1, 1:n oder n:m).\n2. Begründe die Entscheidung nach den Regeln des relationalen Datenbankentwurfs.`,
+                musterloesung: `1. Ermittelte Kardinalität:\n   ${scenario.options[scenario.answer]}\n\n2. Fachliche Begründung (IHK-Datenbanktheorie):\n   - ${scenario.exp}`,
                 explanation: scenario.exp
             });
         } else {
@@ -658,8 +698,8 @@ function generateDynamicQuestions(typeMode = "mix") {
                 id: currentId++,
                 theme: "lf5",
                 type: "open-text",
-                question: `Prüfungsaufgabe Datenbank-Design (LF 18): ${item.q}`,
-                musterloesung: item.options[item.answer],
+                question: `Prüfungsaufgabe Datenbank-Design (LF 18 / LF 5):\n${item.q}\n\nBenenne den Fachbegriff und erläutere kurz seine Bedeutung für die Datenkonsistenz.`,
+                musterloesung: `1. Fachbegriff / Antwort:\n   ${item.options[item.answer]}\n\n2. Fachliche Begründung & Relevanz für relationale Datenbanken:\n   - ${item.exp}`,
                 explanation: item.exp
             });
         } else {
@@ -1035,7 +1075,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                 theme: "lf6",
                 type: "open-text",
                 question: `Prüfungsaufgabe Englisch (Comprehension - LF 6):\n\nFachtext:\n"${item.text}"\n\nFrage dazu:\n${item.q}`,
-                musterloesung: item.options[item.answer],
+                musterloesung: `1. Richtige Antwort (Kernaussage):\n   ${item.options[item.answer]}\n\n2. Fachtext-Analyse & Begründung (mit deutscher Übersetzung):\n   - ${item.exp}`,
                 explanation: item.exp
             });
         } else {
