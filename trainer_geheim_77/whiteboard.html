@@ -789,6 +789,7 @@
                 <button class="t-btn" data-tool="classbox" title="UML-Klassenbox (3-zeilig: Name / Attribute / Methoden)"><i class="fa-solid fa-table-cells"></i><span>Klasse</span></button>
                 <button class="t-btn" data-tool="text" title="Text einfügen (Klick auf Board) (T)"><i class="fa-solid fa-font"></i><span>Text</span></button>
                 <button class="t-btn" data-tool="eraser" title="Radierer (E)"><i class="fa-solid fa-eraser"></i><span>Radierer</span></button>
+                <button class="t-btn" data-tool="hand" title="Verschieben / Pan (Leertaste gedrückt halten)"><i class="fa-solid fa-hand"></i><span>Verschieben</span></button>
             </div>
         </div>
 
@@ -835,6 +836,19 @@
                 </button>
                 <button class="t-btn" id="undo-btn" title="Rückgängig (Strg+Z)"><i class="fa-solid fa-rotate-left"></i><span>Undo</span></button>
                 <button class="t-btn" id="redo-btn" title="Wiederherstellen (Strg+Y)"><i class="fa-solid fa-rotate-right"></i><span>Redo</span></button>
+            </div>
+        </div>
+
+        <div class="separator"></div>
+
+        <!-- Zoom & Ansicht -->
+        <div class="tool-group">
+            <span class="group-label">Zoom &amp; Ansicht</span>
+            <div class="btn-row">
+                <button class="t-btn" id="zoom-out-btn" title="Verkleinern (Mausrad oder Strg + Minus)"><i class="fa-solid fa-magnifying-glass-minus"></i></button>
+                <button class="t-btn" id="zoom-reset-btn" title="Klick für 100% Reset" style="min-width: 52px; font-weight: 700; justify-content: center;"><span id="zoom-label">100%</span></button>
+                <button class="t-btn" id="zoom-in-btn" title="Vergrößern (Mausrad oder Strg + Plus)"><i class="fa-solid fa-magnifying-glass-plus"></i></button>
+                <button class="t-btn" id="zoom-fit-btn" title="Ganzes Diagramm einpassen"><i class="fa-solid fa-expand"></i> <span>Fit</span></button>
             </div>
         </div>
     </div>
@@ -1102,33 +1116,58 @@
     </div>
 
     <script>
+
         // ====================================================================
-        // IHK AP1 Standalone Whiteboard Engine (mit Undo/Redo & Diagramm-Galerie)
+        // IHK AP1 Standalone Whiteboard Engine (Master Canvas, Pan & Zoom)
         // ====================================================================
         const STORAGE_KEY = "ihk_ap1_whiteboard_data_v1";
         const STORAGE_SAVED_KEY = "ihk_ap1_saved_diagrams_v1";
         const STORAGE_ACTIVE_ID_KEY = "ihk_ap1_active_diagram_id";
         
-        let canvas = document.getElementById("canvas");
-        let ctx = canvas.getContext("2d", { willReadFrequently: true });
-        let container = document.getElementById("canvas-container");
-        let saveStatus = document.getElementById("save-status");
-        let saveStatusText = document.getElementById("save-status-text");
+        const canvas = document.getElementById("canvas");
+        const ctx = canvas.getContext("2d", { willReadFrequently: true });
+        const container = document.getElementById("canvas-container");
+        const saveStatus = document.getElementById("save-status");
+        const saveStatusText = document.getElementById("save-status-text");
+
+        // Master Canvas (Ultra HD Native Drawing Buffer: 3840 x 2400)
+        // Content lives permanently on this canvas, completely immune to viewport resizing / zooming!
+        const MASTER_WIDTH = 3840;
+        const MASTER_HEIGHT = 2400;
+        const masterCanvas = document.createElement("canvas");
+        masterCanvas.width = MASTER_WIDTH;
+        masterCanvas.height = MASTER_HEIGHT;
+        const masterCtx = masterCanvas.getContext("2d", { willReadFrequently: true });
+        window.masterCanvas = masterCanvas;
+        window.masterCtx = masterCtx;
+        window.getZoom = () => zoom;
+
+        // Viewport Camera State (Pan & Zoom)
+        let zoom = 1.0;
+        let panX = 0;
+        let panY = 0;
+        let isPanning = false;
+        let panStartX = 0;
+        let panStartY = 0;
+        let isSpacePressed = false;
 
         // Tool state
         let currentTool = "pen";
         let currentColor = "#1e293b";
         let currentSize = 4;
         let isDrawing = false;
-        let startX = 0;
-        let startY = 0;
-        let snapshot = null;
+        let startScreenX = 0;
+        let startScreenY = 0;
+        let startWorldX = 0;
+        let startWorldY = 0;
+        let lastWorldX = 0;
+        let lastWorldY = 0;
 
         // Active Diagram Identity
         let activeDiagramId = null;
         let activeDiagramTitle = null;
 
-        // Undo & Redo History (Canvas State snapshots)
+        // Undo & Redo History (Snapshots of masterCanvas)
         let undoStack = [];
         let redoStack = [];
         const MAX_HISTORY = 50;
@@ -1138,46 +1177,8 @@
         const gridLabels = ["Karo 20px", "Karo 40px", "Punkt-Raster", "Raster Aus"];
         let gridIdx = 0;
 
-        // Init Setup
-        window.addEventListener("DOMContentLoaded", () => {
-            initEvents();
-            resizeCanvas(false);
-            loadFromStorage();
-        });
-
-        function resizeCanvas(preserveContent) {
-            const rect = container.getBoundingClientRect();
-            if (rect.width <= 0 || rect.height <= 0) return;
-
-            let tempCanvas = null;
-            if (preserveContent && canvas.width > 0 && canvas.height > 0) {
-                tempCanvas = document.createElement("canvas");
-                tempCanvas.width = canvas.width;
-                tempCanvas.height = canvas.height;
-                const tempCtx = tempCanvas.getContext("2d");
-                tempCtx.drawImage(canvas, 0, 0);
-            }
-
-            const dpr = window.devicePixelRatio || 1;
-            canvas.width = rect.width * dpr;
-            canvas.height = rect.height * dpr;
-            ctx.scale(dpr, dpr);
-
-            if (tempCanvas) {
-                ctx.save();
-                ctx.setTransform(1, 0, 0, 1, 0, 0);
-                ctx.drawImage(tempCanvas, 0, 0, canvas.width, canvas.height);
-                ctx.restore();
-            } else if (undoStack.length === 0) {
-                pushHistory();
-            }
-        }
-
-        window.addEventListener("resize", () => {
-            resizeCanvas(true);
-        });
-
-        function getCoords(e) {
+        // Coordinates transformation
+        function getScreenCoords(e) {
             const rect = canvas.getBoundingClientRect();
             return {
                 x: e.clientX - rect.left,
@@ -1185,33 +1186,185 @@
             };
         }
 
-        function captureCanvasState() {
-            const copy = document.createElement("canvas");
-            copy.width = canvas.width;
-            copy.height = canvas.height;
-            const copyCtx = copy.getContext("2d");
-            copyCtx.drawImage(canvas, 0, 0);
-            return copy;
+        function screenToWorld(sx, sy) {
+            return {
+                x: (sx - panX) / zoom,
+                y: (sy - panY) / zoom
+            };
         }
 
-        function restoreCanvasState(stateCanvas) {
+        function worldToScreen(wx, wy) {
+            return {
+                x: wx * zoom + panX,
+                y: wy * zoom + panY
+            };
+        }
+
+        // Viewport Rendering Engine
+        function renderViewport() {
+            const dpr = window.devicePixelRatio || 1;
+            const rect = container.getBoundingClientRect();
+            if (rect.width <= 0 || rect.height <= 0) return;
+
+            const targetW = Math.round(rect.width * dpr);
+            const targetH = Math.round(rect.height * dpr);
+            if (canvas.width !== targetW || canvas.height !== targetH) {
+                canvas.width = targetW;
+                canvas.height = targetH;
+            }
+
             ctx.save();
             ctx.setTransform(1, 0, 0, 1, 0, 0);
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            if (stateCanvas) {
-                ctx.drawImage(stateCanvas, 0, 0, canvas.width, canvas.height);
-            }
+            
+            // Map physical canvas pixels to CSS pixel space
+            ctx.scale(dpr, dpr);
+
+            // Apply camera Pan & Zoom
+            ctx.translate(panX, panY);
+            ctx.scale(zoom, zoom);
+
+            // High quality image smoothing
+            ctx.imageSmoothingEnabled = true;
+            ctx.imageSmoothingQuality = "high";
+
+            // Draw pristine master canvas
+            ctx.drawImage(masterCanvas, 0, 0);
+
             ctx.restore();
+
+            updateGridBackground();
+            updateZoomUI();
+        }
+
+        function updateGridBackground() {
+            let baseStep = 20;
+            if (gridModes[gridIdx] === "grid-large") baseStep = 40;
+            else if (gridModes[gridIdx] === "grid-dots") baseStep = 24;
+            
+            const step = baseStep * zoom;
+            const offsetX = ((panX % step) + step) % step;
+            const offsetY = ((panY % step) + step) % step;
+            container.style.backgroundSize = `${step}px ${step}px`;
+            container.style.backgroundPosition = `${offsetX}px ${offsetY}px`;
+        }
+
+        function updateZoomUI() {
+            const label = document.getElementById("zoom-label");
+            if (label) {
+                label.innerText = `${Math.round(zoom * 100)}%`;
+            }
+        }
+
+        function setZoom(newZoom, centerX, centerY) {
+            const minZoom = 0.2;
+            const maxZoom = 4.0;
+            newZoom = Math.min(maxZoom, Math.max(minZoom, newZoom));
+            if (Math.abs(newZoom - zoom) < 0.001) return;
+
+            const rect = canvas.getBoundingClientRect();
+            const cx = centerX !== undefined ? centerX : rect.width / 2;
+            const cy = centerY !== undefined ? centerY : rect.height / 2;
+
+            panX = cx - (cx - panX) * (newZoom / zoom);
+            panY = cy - (cy - panY) * (newZoom / zoom);
+            zoom = newZoom;
+
+            renderViewport();
+        }
+
+        function zoomIn() {
+            setZoom(zoom * 1.25);
+        }
+
+        function zoomOut() {
+            setZoom(zoom / 1.25);
+        }
+
+        function zoomReset() {
+            zoom = 1.0;
+            panX = 0;
+            panY = 0;
+            renderViewport();
+            showToast("Zoom auf 100% zurückgesetzt");
+        }
+
+        function getDrawingBounds() {
+            try {
+                const w = masterCanvas.width;
+                const h = masterCanvas.height;
+                const data = masterCtx.getImageData(0, 0, w, h).data;
+                let minX = w, minY = h, maxX = 0, maxY = 0;
+                let found = false;
+
+                // Step 4 for performance
+                for (let y = 0; y < h; y += 4) {
+                    for (let x = 0; x < w; x += 4) {
+                        const alpha = data[(y * w + x) * 4 + 3];
+                        if (alpha > 10) {
+                            found = true;
+                            if (x < minX) minX = x;
+                            if (x > maxX) maxX = x;
+                            if (y < minY) minY = y;
+                            if (y > maxY) maxY = y;
+                        }
+                    }
+                }
+
+                if (!found) return null;
+                const pad = 50;
+                const rx = Math.max(0, minX - pad);
+                const ry = Math.max(0, minY - pad);
+                const rw = Math.min(w - rx, (maxX - minX) + pad * 2);
+                const rh = Math.min(h - ry, (maxY - minY) + pad * 2);
+                return { x: rx, y: ry, width: rw, height: rh };
+            } catch (e) {
+                return null;
+            }
+        }
+
+        function zoomToFit() {
+            const bounds = getDrawingBounds();
+            const rect = container.getBoundingClientRect();
+            if (!bounds || bounds.width < 10 || bounds.height < 10) {
+                zoomReset();
+                return;
+            }
+            const scaleX = (rect.width - 80) / bounds.width;
+            const scaleY = (rect.height - 80) / bounds.height;
+            zoom = Math.min(2.0, Math.max(0.25, Math.min(scaleX, scaleY)));
+            panX = (rect.width - bounds.width * zoom) / 2 - bounds.x * zoom;
+            panY = (rect.height - bounds.height * zoom) / 2 - bounds.y * zoom;
+            renderViewport();
+            showToast(`Ansicht eingepasst (${Math.round(zoom * 100)}%)`);
+        }
+
+        // History Management
+        function captureMasterState() {
+            const copy = document.createElement("canvas");
+            copy.width = masterCanvas.width;
+            copy.height = masterCanvas.height;
+            const copyCtx = copy.getContext("2d");
+            copyCtx.drawImage(masterCanvas, 0, 0);
+            return copy;
+        }
+
+        function restoreMasterState(stateCanvas) {
+            masterCtx.clearRect(0, 0, masterCanvas.width, masterCanvas.height);
+            if (stateCanvas) {
+                masterCtx.drawImage(stateCanvas, 0, 0);
+            }
+            renderViewport();
         }
 
         function pushHistory() {
             try {
-                const state = captureCanvasState();
+                const state = captureMasterState();
                 undoStack.push(state);
                 if (undoStack.length > MAX_HISTORY) {
                     undoStack.shift();
                 }
-                redoStack = []; // New action clears redo stack
+                redoStack = [];
                 updateHistoryButtons();
                 saveToStorageDebounced();
             } catch (err) {
@@ -1225,7 +1378,7 @@
                 redoStack.push(current);
                 const prev = undoStack[undoStack.length - 1];
                 if (prev) {
-                    restoreCanvasState(prev);
+                    restoreMasterState(prev);
                     updateHistoryButtons();
                     saveToStorageDebounced();
                     showToast(`Rückgängig gemacht (${undoStack.length - 1} übrig)`);
@@ -1233,7 +1386,7 @@
             } else if (undoStack.length === 1) {
                 const current = undoStack.pop();
                 redoStack.push(current);
-                restoreCanvasState(null);
+                restoreMasterState(null);
                 updateHistoryButtons();
                 saveToStorageDebounced();
                 showToast("Rückgängig: Leeres Board");
@@ -1246,7 +1399,7 @@
             if (redoStack.length > 0) {
                 const next = redoStack.pop();
                 undoStack.push(next);
-                restoreCanvasState(next);
+                restoreMasterState(next);
                 updateHistoryButtons();
                 saveToStorageDebounced();
                 showToast(`Wiederhergestellt (${redoStack.length} übrig)`);
@@ -1275,6 +1428,17 @@
             });
         }
 
+        // Init Setup
+        window.addEventListener("DOMContentLoaded", () => {
+            initEvents();
+            renderViewport();
+            loadFromStorage();
+        });
+
+        window.addEventListener("resize", () => {
+            renderViewport();
+        });
+
         // Mouse & Touch events
         function initEvents() {
             // Tool button clicks
@@ -1283,6 +1447,7 @@
                     document.querySelectorAll(".t-btn[data-tool]").forEach(b => b.classList.remove("active"));
                     btn.classList.add("active");
                     currentTool = btn.getAttribute("data-tool");
+                    container.style.cursor = currentTool === "hand" ? "grab" : "crosshair";
                 });
             });
 
@@ -1323,7 +1488,29 @@
                     container.classList.add(gridModes[gridIdx]);
                 }
                 gridLabel.innerText = gridLabels[gridIdx];
+                updateGridBackground();
             });
+
+            // Zoom buttons
+            const zoomOutBtn = document.getElementById("zoom-out-btn");
+            const zoomInBtn = document.getElementById("zoom-in-btn");
+            const zoomResetBtn = document.getElementById("zoom-reset-btn");
+            const zoomFitBtn = document.getElementById("zoom-fit-btn");
+
+            if (zoomOutBtn) zoomOutBtn.addEventListener("click", zoomOut);
+            if (zoomInBtn) zoomInBtn.addEventListener("click", zoomIn);
+            if (zoomResetBtn) zoomResetBtn.addEventListener("click", zoomReset);
+            if (zoomFitBtn) zoomFitBtn.addEventListener("click", zoomToFit);
+
+            // Mouse wheel zoom centered under cursor
+            container.addEventListener("wheel", (e) => {
+                e.preventDefault();
+                const rect = canvas.getBoundingClientRect();
+                const mouseX = e.clientX - rect.left;
+                const mouseY = e.clientY - rect.top;
+                const factor = e.deltaY < 0 ? 1.15 : 0.87;
+                setZoom(zoom * factor, mouseX, mouseY);
+            }, { passive: false });
 
             // Undo / Redo buttons (Header & Toolbar)
             document.getElementById("undo-btn").addEventListener("click", undo);
@@ -1398,24 +1585,70 @@
             window.addEventListener("mousemove", onDrawMove);
             window.addEventListener("mouseup", onDrawEnd);
 
-            // Canvas Draw Events (Touch)
-            canvas.addEventListener("touchstart", (e) => {
-                if (e.touches.length === 1) {
+            // Prevent context menu on right click when panning
+            canvas.addEventListener("contextmenu", (e) => {
+                if (isPanning || currentTool === "hand") {
                     e.preventDefault();
-                    onDrawStart(e.touches[0]);
+                }
+            });
+
+            // Canvas Draw Events (Touch)
+            let touchInitialDist = 0;
+            let touchInitialZoom = 1.0;
+            let touchCenter = { x: 0, y: 0 };
+
+            canvas.addEventListener("touchstart", (e) => {
+                if (e.touches.length === 2) {
+                    e.preventDefault();
+                    isDrawing = false;
+                    isPanning = false;
+                    const t1 = e.touches[0];
+                    const t2 = e.touches[1];
+                    touchInitialDist = Math.hypot(t2.clientX - t1.clientX, t2.clientY - t1.clientY);
+                    touchInitialZoom = zoom;
+                    const rect = canvas.getBoundingClientRect();
+                    touchCenter = {
+                        x: ((t1.clientX + t2.clientX) / 2) - rect.left,
+                        y: ((t1.clientY + t2.clientY) / 2) - rect.top
+                    };
+                } else if (e.touches.length === 1) {
+                    if (currentTool === "hand") {
+                        isPanning = true;
+                        panStartX = e.touches[0].clientX - panX;
+                        panStartY = e.touches[0].clientY - panY;
+                    } else {
+                        onDrawStart(e.touches[0]);
+                    }
                 }
             }, { passive: false });
 
             window.addEventListener("touchmove", (e) => {
-                if (isDrawing && e.touches.length === 1) {
+                if (e.touches.length === 2 && touchInitialDist > 0) {
+                    e.preventDefault();
+                    const t1 = e.touches[0];
+                    const t2 = e.touches[1];
+                    const dist = Math.hypot(t2.clientX - t1.clientX, t2.clientY - t1.clientY);
+                    const factor = dist / touchInitialDist;
+                    setZoom(touchInitialZoom * factor, touchCenter.x, touchCenter.y);
+                } else if (isPanning && e.touches.length === 1) {
+                    e.preventDefault();
+                    panX = e.touches[0].clientX - panStartX;
+                    panY = e.touches[0].clientY - panStartY;
+                    renderViewport();
+                } else if (isDrawing && e.touches.length === 1) {
                     e.preventDefault();
                     onDrawMove(e.touches[0]);
                 }
             }, { passive: false });
 
             window.addEventListener("touchend", (e) => {
-                if (isDrawing) {
-                    e.preventDefault();
+                if (e.touches.length < 2) {
+                    touchInitialDist = 0;
+                }
+                if (isPanning && e.touches.length === 0) {
+                    isPanning = false;
+                }
+                if (isDrawing && e.touches.length === 0) {
                     onDrawEnd(e);
                 }
             }, { passive: false });
@@ -1423,6 +1656,11 @@
             // Keyboard Shortcuts
             window.addEventListener("keydown", (e) => {
                 if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA" || e.target.tagName === "SELECT") return;
+
+                if (e.code === "Space" && !isSpacePressed) {
+                    isSpacePressed = true;
+                    container.style.cursor = "grab";
+                }
 
                 if (e.ctrlKey || e.metaKey) {
                     if (e.key.toLowerCase() === "z") {
@@ -1444,6 +1682,15 @@
                     } else if (e.key.toLowerCase() === "c") {
                         e.preventDefault();
                         copyToClipboard();
+                    } else if (e.key === "+" || e.key === "=") {
+                        e.preventDefault();
+                        zoomIn();
+                    } else if (e.key === "-") {
+                        e.preventDefault();
+                        zoomOut();
+                    } else if (e.key === "0") {
+                        e.preventDefault();
+                        zoomReset();
                     }
                 } else if (e.key === "Escape") {
                     closeSaveModal();
@@ -1466,6 +1713,15 @@
                     selectTool("text");
                 } else if (e.key.toLowerCase() === "e") {
                     selectTool("eraser");
+                } else if (e.key.toLowerCase() === "v" || e.key.toLowerCase() === "m") {
+                    selectTool("hand");
+                }
+            });
+
+            window.addEventListener("keyup", (e) => {
+                if (e.code === "Space") {
+                    isSpacePressed = false;
+                    container.style.cursor = currentTool === "hand" ? "grab" : "crosshair";
                 }
             });
         }
@@ -1476,117 +1732,158 @@
         }
 
         function onDrawStart(e) {
-            const coords = getCoords(e);
-            startX = coords.x;
-            startY = coords.y;
-            isDrawing = true;
+            // Pan with middle or right button, Space key, or Hand tool
+            if (e.button === 1 || e.button === 2 || isSpacePressed || currentTool === "hand") {
+                isPanning = true;
+                panStartX = e.clientX - panX;
+                panStartY = e.clientY - panY;
+                container.style.cursor = "grabbing";
+                return;
+            }
+
+            // Only left click draws
+            if (e.button !== undefined && e.button !== 0) return;
+
+            const screenPos = getScreenCoords(e);
+            startScreenX = screenPos.x;
+            startScreenY = screenPos.y;
+
+            const worldPos = screenToWorld(startScreenX, startScreenY);
+            startWorldX = worldPos.x;
+            startWorldY = worldPos.y;
+            lastWorldX = startWorldX;
+            lastWorldY = startWorldY;
 
             if (currentTool === "text") {
-                isDrawing = false;
                 const text = prompt("Gib den Beschriftungstext ein:", "");
                 if (text && text.trim()) {
-                    ctx.save();
-                    ctx.fillStyle = currentColor;
-                    ctx.font = `bold ${Math.max(14, currentSize * 3 + 10)}px sans-serif`;
-                    ctx.textBaseline = "top";
-                    ctx.fillText(text.trim(), startX, startY);
-                    ctx.restore();
+                    masterCtx.save();
+                    masterCtx.fillStyle = currentColor;
+                    masterCtx.font = `bold ${Math.max(14, currentSize * 3 + 10)}px sans-serif`;
+                    masterCtx.textBaseline = "top";
+                    masterCtx.fillText(text.trim(), startWorldX, startWorldY);
+                    masterCtx.restore();
+                    renderViewport();
                     pushHistory();
                 }
                 return;
             }
 
-            snapshot = captureCanvasState();
+            isDrawing = true;
 
             if (currentTool === "pen" || currentTool === "eraser" || currentTool === "highlighter") {
-                ctx.beginPath();
-                ctx.moveTo(startX, startY);
+                masterCtx.save();
+                if (currentTool === "pen") {
+                    masterCtx.strokeStyle = currentColor;
+                    masterCtx.lineWidth = currentSize;
+                    masterCtx.lineCap = "round";
+                    masterCtx.lineJoin = "round";
+                } else if (currentTool === "highlighter") {
+                    masterCtx.strokeStyle = currentColor;
+                    masterCtx.globalAlpha = 0.35;
+                    masterCtx.lineWidth = Math.max(16, currentSize * 4);
+                    masterCtx.lineCap = "square";
+                    masterCtx.lineJoin = "round";
+                } else if (currentTool === "eraser") {
+                    masterCtx.globalCompositeOperation = "destination-out";
+                    masterCtx.lineWidth = currentSize * 4 + 12;
+                    masterCtx.lineCap = "round";
+                    masterCtx.lineJoin = "round";
+                }
+                masterCtx.beginPath();
+                masterCtx.moveTo(startWorldX, startWorldY);
             }
         }
 
         function onDrawMove(e) {
-            if (!isDrawing) return;
-            const coords = getCoords(e);
-            const currX = coords.x;
-            const currY = coords.y;
+            if (isPanning) {
+                panX = e.clientX - panStartX;
+                panY = e.clientY - panStartY;
+                renderViewport();
+                return;
+            }
 
-            if (currentTool === "pen") {
-                ctx.save();
-                ctx.strokeStyle = currentColor;
-                ctx.lineWidth = currentSize;
-                ctx.lineCap = "round";
-                ctx.lineJoin = "round";
-                ctx.lineTo(currX, currY);
-                ctx.stroke();
-                ctx.restore();
-            } else if (currentTool === "highlighter") {
-                ctx.save();
-                ctx.strokeStyle = currentColor;
-                ctx.globalAlpha = 0.35;
-                ctx.lineWidth = Math.max(16, currentSize * 4);
-                ctx.lineCap = "square";
-                ctx.lineJoin = "round";
-                ctx.lineTo(currX, currY);
-                ctx.stroke();
-                ctx.restore();
-            } else if (currentTool === "eraser") {
-                ctx.save();
-                ctx.globalCompositeOperation = "destination-out";
-                ctx.lineWidth = currentSize * 4 + 12;
-                ctx.lineCap = "round";
-                ctx.lineJoin = "round";
-                ctx.lineTo(currX, currY);
-                ctx.stroke();
-                ctx.restore();
+            if (!isDrawing) return;
+
+            const screenPos = getScreenCoords(e);
+            const currScreenX = screenPos.x;
+            const currScreenY = screenPos.y;
+            const worldPos = screenToWorld(currScreenX, currScreenY);
+            const currWorldX = worldPos.x;
+            const currWorldY = worldPos.y;
+
+            if (currentTool === "pen" || currentTool === "highlighter" || currentTool === "eraser") {
+                masterCtx.lineTo(currWorldX, currWorldY);
+                masterCtx.stroke();
+                lastWorldX = currWorldX;
+                lastWorldY = currWorldY;
+                renderViewport();
             } else {
-                // Shape preview
-                if (snapshot) {
-                    restoreCanvasState(snapshot);
-                }
-                drawShape(startX, startY, currX, currY, currentTool, currentColor, currentSize);
+                // Shape preview:
+                // 1. Redraw crisp master canvas
+                renderViewport();
+                // 2. Draw live preview shape directly on visible ctx using screen coordinates
+                drawShape(startScreenX, startScreenY, currScreenX, currScreenY, currentTool, currentColor, currentSize * zoom, ctx);
             }
         }
 
         function onDrawEnd(e) {
+            if (isPanning) {
+                isPanning = false;
+                container.style.cursor = isSpacePressed || currentTool === "hand" ? "grab" : "crosshair";
+                return;
+            }
+
             if (!isDrawing) return;
             isDrawing = false;
-            snapshot = null;
-            pushHistory();
+
+            if (currentTool === "pen" || currentTool === "highlighter" || currentTool === "eraser") {
+                masterCtx.restore();
+                renderViewport();
+                pushHistory();
+            } else {
+                // Finalize shape onto masterCanvas in world coordinates
+                const screenPos = getScreenCoords(e);
+                const endWorld = screenToWorld(screenPos.x, screenPos.y);
+                drawShape(startWorldX, startWorldY, endWorld.x, endWorld.y, currentTool, currentColor, currentSize, masterCtx);
+                renderViewport();
+                pushHistory();
+            }
         }
 
-        function drawShape(x0, y0, x1, y1, tool, color, size) {
-            ctx.save();
-            ctx.strokeStyle = color;
-            ctx.fillStyle = color;
-            ctx.lineWidth = size;
-            ctx.lineCap = "round";
-            ctx.lineJoin = "round";
+        function drawShape(x0, y0, x1, y1, tool, color, size, targetCtx = masterCtx) {
+            targetCtx.save();
+            targetCtx.strokeStyle = color;
+            targetCtx.fillStyle = color;
+            targetCtx.lineWidth = size;
+            targetCtx.lineCap = "round";
+            targetCtx.lineJoin = "round";
 
             if (tool === "line") {
-                ctx.beginPath();
-                ctx.moveTo(x0, y0);
-                ctx.lineTo(x1, y1);
-                ctx.stroke();
+                targetCtx.beginPath();
+                targetCtx.moveTo(x0, y0);
+                targetCtx.lineTo(x1, y1);
+                targetCtx.stroke();
             } else if (tool === "arrow" || tool === "dasharrow") {
                 if (tool === "dasharrow") {
-                    ctx.setLineDash([7, 6]);
+                    targetCtx.setLineDash([7, 6]);
                 }
-                ctx.beginPath();
-                ctx.moveTo(x0, y0);
-                ctx.lineTo(x1, y1);
-                ctx.stroke();
+                targetCtx.beginPath();
+                targetCtx.moveTo(x0, y0);
+                targetCtx.lineTo(x1, y1);
+                targetCtx.stroke();
 
-                ctx.setLineDash([]);
+                targetCtx.setLineDash([]);
                 const angle = Math.atan2(y1 - y0, x1 - x0);
                 const headlen = Math.max(12, size * 3.5);
-                ctx.beginPath();
-                ctx.moveTo(x1, y1);
-                ctx.lineTo(x1 - headlen * Math.cos(angle - Math.PI / 6), y1 - headlen * Math.sin(angle - Math.PI / 6));
-                ctx.lineTo(x1 - headlen * Math.cos(angle + Math.PI / 6), y1 - headlen * Math.sin(angle + Math.PI / 6));
-                ctx.closePath();
-                ctx.fill();
+                targetCtx.beginPath();
+                targetCtx.moveTo(x1, y1);
+                targetCtx.lineTo(x1 - headlen * Math.cos(angle - Math.PI / 6), y1 - headlen * Math.sin(angle - Math.PI / 6));
+                targetCtx.lineTo(x1 - headlen * Math.cos(angle + Math.PI / 6), y1 - headlen * Math.sin(angle + Math.PI / 6));
+                targetCtx.closePath();
+                targetCtx.fill();
             } else if (tool === "rect") {
-                ctx.strokeRect(x0, y0, x1 - x0, y1 - y0);
+                targetCtx.strokeRect(x0, y0, x1 - x0, y1 - y0);
             } else if (tool === "roundrect") {
                 const w = x1 - x0;
                 const h = y1 - y0;
@@ -1595,27 +1892,27 @@
                 const rw = Math.abs(w);
                 const rh = Math.abs(h);
                 const rad = Math.min(16, rw / 2, rh / 2);
-                ctx.beginPath();
-                ctx.roundRect(rx, ry, rw, rh, rad);
-                ctx.stroke();
+                targetCtx.beginPath();
+                targetCtx.roundRect(rx, ry, rw, rh, rad);
+                targetCtx.stroke();
             } else if (tool === "ellipse") {
                 const rx = Math.abs(x1 - x0) / 2;
                 const ry = Math.abs(y1 - y0) / 2;
                 const cx = Math.min(x0, x1) + rx;
                 const cy = Math.min(y0, y1) + ry;
-                ctx.beginPath();
-                ctx.ellipse(cx, cy, Math.max(1, rx), Math.max(1, ry), 0, 0, 2 * Math.PI);
-                ctx.stroke();
+                targetCtx.beginPath();
+                targetCtx.ellipse(cx, cy, Math.max(1, rx), Math.max(1, ry), 0, 0, 2 * Math.PI);
+                targetCtx.stroke();
             } else if (tool === "diamond") {
                 const cx = (x0 + x1) / 2;
                 const cy = (y0 + y1) / 2;
-                ctx.beginPath();
-                ctx.moveTo(cx, y0);
-                ctx.lineTo(x1, cy);
-                ctx.lineTo(cx, y1);
-                ctx.lineTo(x0, cy);
-                ctx.closePath();
-                ctx.stroke();
+                targetCtx.beginPath();
+                targetCtx.moveTo(cx, y0);
+                targetCtx.lineTo(x1, cy);
+                targetCtx.lineTo(cx, y1);
+                targetCtx.lineTo(x0, cy);
+                targetCtx.closePath();
+                targetCtx.stroke();
             } else if (tool === "hexagon") {
                 const minX = Math.min(x0, x1);
                 const maxX = Math.max(x0, x1);
@@ -1625,15 +1922,15 @@
                 const h = maxY - minY;
                 const cut = w * 0.2;
 
-                ctx.beginPath();
-                ctx.moveTo(minX + cut, minY);
-                ctx.lineTo(maxX - cut, minY);
-                ctx.lineTo(maxX, minY + h / 2);
-                ctx.lineTo(maxX - cut, maxY);
-                ctx.lineTo(minX + cut, maxY);
-                ctx.lineTo(minX, minY + h / 2);
-                ctx.closePath();
-                ctx.stroke();
+                targetCtx.beginPath();
+                targetCtx.moveTo(minX + cut, minY);
+                targetCtx.lineTo(maxX - cut, minY);
+                targetCtx.lineTo(maxX, minY + h / 2);
+                targetCtx.lineTo(maxX - cut, maxY);
+                targetCtx.lineTo(minX + cut, maxY);
+                targetCtx.lineTo(minX, minY + h / 2);
+                targetCtx.closePath();
+                targetCtx.stroke();
             } else if (tool === "actor") {
                 const topY = Math.min(y0, y1);
                 const botY = Math.max(y0, y1);
@@ -1648,23 +1945,19 @@
                 const armsY = neckY + totalH * 0.12;
                 const armSpan = Math.max(totalH * 0.25, w / 2);
 
-                // Head
-                ctx.beginPath();
-                ctx.arc(midX, headCY, headR, 0, 2 * Math.PI);
-                ctx.stroke();
-                // Torso
-                ctx.beginPath();
-                ctx.moveTo(midX, neckY);
-                ctx.lineTo(midX, waistY);
-                // Arms
-                ctx.moveTo(midX - armSpan, armsY);
-                ctx.lineTo(midX + armSpan, armsY);
-                // Legs
-                ctx.moveTo(midX, waistY);
-                ctx.lineTo(midX - armSpan * 0.8, botY);
-                ctx.moveTo(midX, waistY);
-                ctx.lineTo(midX + armSpan * 0.8, botY);
-                ctx.stroke();
+                targetCtx.beginPath();
+                targetCtx.arc(midX, headCY, headR, 0, 2 * Math.PI);
+                targetCtx.stroke();
+                targetCtx.beginPath();
+                targetCtx.moveTo(midX, neckY);
+                targetCtx.lineTo(midX, waistY);
+                targetCtx.moveTo(midX - armSpan, armsY);
+                targetCtx.lineTo(midX + armSpan, armsY);
+                targetCtx.moveTo(midX, waistY);
+                targetCtx.lineTo(midX - armSpan * 0.8, botY);
+                targetCtx.moveTo(midX, waistY);
+                targetCtx.lineTo(midX + armSpan * 0.8, botY);
+                targetCtx.stroke();
             } else if (tool === "classbox") {
                 const minX = Math.min(x0, x1);
                 const minY = Math.min(y0, y1);
@@ -1673,213 +1966,192 @@
                 const hHeader = Math.max(25, h * 0.28);
                 const hAttr = Math.max(25, h * 0.36);
 
-                // Outer border
-                ctx.strokeRect(minX, minY, w, h);
-                // Separator 1 (under Name)
-                ctx.beginPath();
-                ctx.moveTo(minX, minY + hHeader);
-                ctx.lineTo(minX + w, minY + hHeader);
-                // Separator 2 (under Attributes)
-                ctx.moveTo(minX, minY + hHeader + hAttr);
-                ctx.lineTo(minX + w, minY + hHeader + hAttr);
-                ctx.stroke();
+                targetCtx.strokeRect(minX, minY, w, h);
+                targetCtx.beginPath();
+                targetCtx.moveTo(minX, minY + hHeader);
+                targetCtx.lineTo(minX + w, minY + hHeader);
+                targetCtx.moveTo(minX, minY + hHeader + hAttr);
+                targetCtx.lineTo(minX + w, minY + hHeader + hAttr);
+                targetCtx.stroke();
 
-                // Hint labels
-                ctx.save();
-                ctx.fillStyle = "#94a3b8";
-                ctx.font = "italic 11px sans-serif";
-                ctx.fillText("KlassenName", minX + 8, minY + 16);
-                ctx.fillText("- attribute: Typ", minX + 8, minY + hHeader + 16);
-                ctx.fillText("+ methoden(): Typ", minX + 8, minY + hHeader + hAttr + 16);
-                ctx.restore();
+                targetCtx.save();
+                targetCtx.fillStyle = "#94a3b8";
+                targetCtx.font = "italic 11px sans-serif";
+                targetCtx.fillText("KlassenName", minX + 8, minY + 16);
+                targetCtx.fillText("- attribute: Typ", minX + 8, minY + hHeader + 16);
+                targetCtx.fillText("+ methoden(): Typ", minX + 8, minY + hHeader + hAttr + 16);
+                targetCtx.restore();
             }
 
-            ctx.restore();
+            targetCtx.restore();
         }
 
         // ====================================================================
         // Stencils / Templates Stamper
         // ====================================================================
         function stampTemplate(type) {
-            const rect = canvas.getBoundingClientRect();
-            const cx = rect.width / 2;
-            const cy = rect.height / 2;
+            const center = screenToWorld(container.clientWidth / 2, container.clientHeight / 2);
+            const cx = center.x;
+            const cy = center.y;
 
-            ctx.save();
-            ctx.strokeStyle = "#1e293b";
-            ctx.fillStyle = "#1e293b";
-            ctx.lineWidth = 2;
+            masterCtx.save();
+            masterCtx.strokeStyle = "#1e293b";
+            masterCtx.fillStyle = "#1e293b";
+            masterCtx.lineWidth = 2;
 
             if (type === "uml_class") {
                 const w = 180, h = 130;
                 const x = cx - w / 2, y = cy - h / 2;
-                ctx.strokeRect(x, y, w, h);
-                ctx.beginPath();
-                ctx.moveTo(x, y + 35);
-                ctx.lineTo(x + w, y + 35);
-                ctx.moveTo(x, y + 80);
-                ctx.lineTo(x + w, y + 80);
-                ctx.stroke();
+                masterCtx.strokeRect(x, y, w, h);
+                masterCtx.beginPath();
+                masterCtx.moveTo(x, y + 35);
+                masterCtx.lineTo(x + w, y + 35);
+                masterCtx.moveTo(x, y + 80);
+                masterCtx.lineTo(x + w, y + 80);
+                masterCtx.stroke();
 
-                ctx.font = "bold 13px sans-serif";
-                ctx.fillText("Kunde", x + 10, y + 22);
-                ctx.font = "12px monospace";
-                ctx.fillText("- kundenNr: int", x + 10, y + 54);
-                ctx.fillText("- name: String", x + 10, y + 70);
-                ctx.fillText("+ getBestellungen()", x + 10, y + 102);
+                masterCtx.font = "bold 13px sans-serif";
+                masterCtx.fillText("Kunde", x + 10, y + 22);
+                masterCtx.font = "12px monospace";
+                masterCtx.fillText("- kundenNr: int", x + 10, y + 54);
+                masterCtx.fillText("- name: String", x + 10, y + 70);
+                masterCtx.fillText("+ getBestellungen()", x + 10, y + 102);
             } else if (type === "netzplan") {
                 const w = 180, h = 100;
                 const x = cx - w / 2, y = cy - h / 2;
-                ctx.strokeRect(x, y, w, h);
-                // Grid lines (3 rows, 3 cols)
-                ctx.beginPath();
-                ctx.moveTo(x, y + 33);
-                ctx.lineTo(x + w, y + 33);
-                ctx.moveTo(x, y + 66);
-                ctx.lineTo(x + w, y + 66);
-                ctx.moveTo(x + 60, y);
-                ctx.lineTo(x + 60, y + 33);
-                ctx.moveTo(x + 120, y);
-                ctx.lineTo(x + 120, y + 33);
-                ctx.moveTo(x + 60, y + 66);
-                ctx.lineTo(x + 60, y + h);
-                ctx.moveTo(x + 120, y + 66);
-                ctx.lineTo(x + 120, y + h);
-                ctx.stroke();
+                masterCtx.strokeRect(x, y, w, h);
+                masterCtx.beginPath();
+                masterCtx.moveTo(x, y + 33);
+                masterCtx.lineTo(x + w, y + 33);
+                masterCtx.moveTo(x, y + 66);
+                masterCtx.lineTo(x + w, y + 66);
+                masterCtx.moveTo(x + 60, y);
+                masterCtx.lineTo(x + 60, y + 33);
+                masterCtx.moveTo(x + 120, y);
+                masterCtx.lineTo(x + 120, y + 33);
+                masterCtx.moveTo(x + 60, y + 66);
+                masterCtx.lineTo(x + 60, y + h);
+                masterCtx.moveTo(x + 120, y + 66);
+                masterCtx.lineTo(x + 120, y + h);
+                masterCtx.stroke();
 
-                ctx.font = "11px sans-serif";
-                ctx.fillText("FAZ: 0", x + 8, y + 22);
-                ctx.fillText("D: 4", x + 75, y + 22);
-                ctx.fillText("FEZ: 4", x + 128, y + 22);
+                masterCtx.font = "11px sans-serif";
+                masterCtx.fillText("FAZ: 0", x + 8, y + 22);
+                masterCtx.fillText("D: 4", x + 75, y + 22);
+                masterCtx.fillText("FEZ: 4", x + 128, y + 22);
 
-                ctx.font = "bold 13px sans-serif";
-                ctx.fillText("V1: Planung", x + 25, y + 53);
+                masterCtx.font = "bold 13px sans-serif";
+                masterCtx.fillText("V1: Planung", x + 25, y + 53);
 
-                ctx.font = "11px sans-serif";
-                ctx.fillText("SAZ: 0", x + 8, y + 88);
-                ctx.fillText("GP: 0", x + 75, y + 88);
-                ctx.fillText("SEZ: 4", x + 128, y + 88);
+                masterCtx.font = "11px sans-serif";
+                masterCtx.fillText("SAZ: 0", x + 8, y + 88);
+                masterCtx.fillText("GP: 0", x + 75, y + 88);
+                masterCtx.fillText("SEZ: 4", x + 128, y + 88);
             } else if (type === "actor_usecase") {
-                // Actor on left, Oval on right, connecting line
                 const ax = cx - 110, ay = cy;
-                drawShape(ax - 20, ay - 40, ax + 20, ay + 40, "actor", "#1e293b", 2);
+                drawShape(ax - 20, ay - 40, ax + 20, ay + 40, "actor", "#1e293b", 2, masterCtx);
                 const ox = cx + 50, oy = cy;
-                drawShape(ox - 65, oy - 28, ox + 65, oy + 28, "ellipse", "#2563eb", 2);
-                // Connecting line
-                ctx.beginPath();
-                ctx.moveTo(ax + 20, ay);
-                ctx.lineTo(ox - 65, oy);
-                ctx.stroke();
+                drawShape(ox - 65, oy - 28, ox + 65, oy + 28, "ellipse", "#2563eb", 2, masterCtx);
+                masterCtx.beginPath();
+                masterCtx.moveTo(ax + 20, ay);
+                masterCtx.lineTo(ox - 65, oy);
+                masterCtx.stroke();
 
-                ctx.fillStyle = "#2563eb";
-                ctx.font = "bold 12px sans-serif";
-                ctx.fillText("Bestellung aufgeben", ox - 55, oy + 4);
-                ctx.fillStyle = "#1e293b";
-                ctx.fillText("Kunde", ax - 16, ay + 58);
+                masterCtx.fillStyle = "#2563eb";
+                masterCtx.font = "bold 12px sans-serif";
+                masterCtx.fillText("Bestellung aufgeben", ox - 55, oy + 4);
+                masterCtx.fillStyle = "#1e293b";
+                masterCtx.fillText("Kunde", ax - 16, ay + 58);
             } else if (type === "erd_entity") {
-                // Entity Box with PK Attribute
                 const ex = cx - 60, ey = cy - 25, ew = 120, eh = 50;
-                ctx.strokeRect(ex, ey, ew, eh);
-                ctx.font = "bold 13px sans-serif";
-                ctx.fillText("BESTELLUNG", ex + 14, ey + 30);
+                masterCtx.strokeRect(ex, ey, ew, eh);
+                masterCtx.font = "bold 13px sans-serif";
+                masterCtx.fillText("BESTELLUNG", ex + 14, ey + 30);
 
-                // PK Ellipse
                 const px = cx, py = cy - 80;
-                drawShape(px - 45, py - 20, px + 45, py + 20, "ellipse", "#0284c7", 2);
-                ctx.beginPath();
-                ctx.moveTo(cx, ey);
-                ctx.lineTo(px, py + 20);
-                ctx.stroke();
+                drawShape(px - 45, py - 20, px + 45, py + 20, "ellipse", "#0284c7", 2, masterCtx);
+                masterCtx.beginPath();
+                masterCtx.moveTo(cx, ey);
+                masterCtx.lineTo(px, py + 20);
+                masterCtx.stroke();
 
-                ctx.font = "12px sans-serif";
-                ctx.fillText("BestellNr (PK)", px - 35, py + 4);
-                ctx.beginPath();
-                ctx.moveTo(px - 35, py + 7);
-                ctx.lineTo(px + 35, py + 7);
-                ctx.stroke();
+                masterCtx.font = "12px sans-serif";
+                masterCtx.fillText("BestellNr (PK)", px - 35, py + 4);
+                masterCtx.beginPath();
+                masterCtx.moveTo(px - 35, py + 7);
+                masterCtx.lineTo(px + 35, py + 7);
+                masterCtx.stroke();
             } else if (type === "bpmn_gateway") {
                 const gx = cx, gy = cy;
-                drawShape(gx - 40, gy - 40, gx + 40, gy + 40, "diamond", "#0891b2", 2.5);
-                ctx.font = "bold 24px sans-serif";
-                ctx.fillStyle = "#0891b2";
-                ctx.fillText("X", gx - 8, gy + 8);
-                ctx.font = "11px sans-serif";
-                ctx.fillText("XOR-Entscheidung", gx - 45, gy + 56);
+                drawShape(gx - 40, gy - 40, gx + 40, gy + 40, "diamond", "#0891b2", 2.5, masterCtx);
+                masterCtx.font = "bold 24px sans-serif";
+                masterCtx.fillStyle = "#0891b2";
+                masterCtx.fillText("X", gx - 8, gy + 8);
+                masterCtx.font = "11px sans-serif";
+                masterCtx.fillText("XOR-Entscheidung", gx - 45, gy + 56);
             } else if (type === "bpmn_pool") {
-                // BPMN Pool with 2 Lanes
                 const pw = 280, ph = 160;
                 const px = cx - pw / 2, py = cy - ph / 2;
-                ctx.strokeRect(px, py, pw, ph);
-                // Pool header bar
-                ctx.strokeRect(px, py, 30, ph);
-                ctx.save();
-                ctx.translate(px + 18, py + ph / 2);
-                ctx.rotate(-Math.PI / 2);
-                ctx.font = "bold 11px sans-serif";
-                ctx.textAlign = "center";
-                ctx.fillText("Pool: IT-Service", 0, 0);
-                ctx.restore();
+                masterCtx.strokeRect(px, py, pw, ph);
+                masterCtx.strokeRect(px, py, 30, ph);
+                masterCtx.save();
+                masterCtx.translate(px + 18, py + ph / 2);
+                masterCtx.rotate(-Math.PI / 2);
+                masterCtx.font = "bold 11px sans-serif";
+                masterCtx.textAlign = "center";
+                masterCtx.fillText("Pool: IT-Service", 0, 0);
+                masterCtx.restore();
 
-                // Lane divider
-                ctx.beginPath();
-                ctx.setLineDash([4, 4]);
-                ctx.moveTo(px + 30, py + ph / 2);
-                ctx.lineTo(px + pw, py + ph / 2);
-                ctx.stroke();
-                ctx.setLineDash([]);
+                masterCtx.beginPath();
+                masterCtx.setLineDash([4, 4]);
+                masterCtx.moveTo(px + 30, py + ph / 2);
+                masterCtx.lineTo(px + pw, py + ph / 2);
+                masterCtx.stroke();
+                masterCtx.setLineDash([]);
 
-                ctx.font = "10px sans-serif";
-                ctx.fillText("Lane: 1st-Level", px + 40, py + 20);
-                ctx.fillText("Lane: 2nd-Level", px + 40, py + ph / 2 + 20);
+                masterCtx.font = "10px sans-serif";
+                masterCtx.fillText("Lane: 1st-Level", px + 40, py + 20);
+                masterCtx.fillText("Lane: 2nd-Level", px + 40, py + ph / 2 + 20);
             } else if (type === "uml_activity") {
-                // UML Activity with Initial node, Action, Fork bar, Join bar & Final node
                 const ax = cx, ay = cy - 60;
-                // Initial node
-                ctx.beginPath();
-                ctx.arc(ax, ay, 10, 0, Math.PI * 2);
-                ctx.fillStyle = "#0f172a";
-                ctx.fill();
+                masterCtx.beginPath();
+                masterCtx.arc(ax, ay, 10, 0, Math.PI * 2);
+                masterCtx.fillStyle = "#0f172a";
+                masterCtx.fill();
 
-                // Action
-                drawShape(ax - 55, ay + 25, ax + 55, ay + 65, "roundrect", "#0284c7", 2);
-                ctx.font = "bold 10px sans-serif";
-                ctx.fillStyle = "#0369a1";
-                ctx.fillText("Aktion ausführen", ax - 42, ay + 48);
+                drawShape(ax - 55, ay + 25, ax + 55, ay + 65, "roundrect", "#0284c7", 2, masterCtx);
+                masterCtx.font = "bold 10px sans-serif";
+                masterCtx.fillStyle = "#0369a1";
+                masterCtx.fillText("Aktion ausführen", ax - 42, ay + 48);
 
-                // Fork bar
-                ctx.fillStyle = "#0f172a";
-                ctx.fillRect(ax - 70, ay + 80, 140, 6);
+                masterCtx.fillStyle = "#0f172a";
+                masterCtx.fillRect(ax - 70, ay + 80, 140, 6);
+                masterCtx.fillRect(ax - 70, ay + 120, 140, 6);
 
-                // Join bar
-                ctx.fillRect(ax - 70, ay + 120, 140, 6);
-
-                // Final node
-                ctx.beginPath();
-                ctx.arc(ax, ay + 150, 12, 0, Math.PI * 2);
-                ctx.stroke();
-                ctx.beginPath();
-                ctx.arc(ax, ay + 150, 7, 0, Math.PI * 2);
-                ctx.fill();
+                masterCtx.beginPath();
+                masterCtx.arc(ax, ay + 150, 12, 0, Math.PI * 2);
+                masterCtx.stroke();
+                masterCtx.beginPath();
+                masterCtx.arc(ax, ay + 150, 7, 0, Math.PI * 2);
+                masterCtx.fill();
             } else if (type === "epk_chain") {
-                // Event 1 (Hexagon) -> XOR -> Function
                 const ex = cx - 120, ey = cy;
-                drawShape(ex - 45, ey - 22, ex + 45, ey + 22, "hexagon", "#ea580c", 2);
-                ctx.font = "10px sans-serif";
-                ctx.fillStyle = "#ea580c";
-                ctx.fillText("Auftrag erteilt", ex - 32, ey + 3);
+                drawShape(ex - 45, ey - 22, ex + 45, ey + 22, "hexagon", "#ea580c", 2, masterCtx);
+                masterCtx.font = "10px sans-serif";
+                masterCtx.fillStyle = "#ea580c";
+                masterCtx.fillText("Auftrag erteilt", ex - 32, ey + 3);
 
-                // Arrow
-                drawShape(ex + 45, ey, cx - 40, ey, "arrow", "#1e293b", 2);
+                drawShape(ex + 45, ey, cx - 40, ey, "arrow", "#1e293b", 2, masterCtx);
 
-                // Function (Roundrect)
                 const fx = cx + 30, fy = cy;
-                drawShape(fx - 45, fy - 22, fx + 45, fy + 22, "roundrect", "#16a34a", 2);
-                ctx.font = "10px sans-serif";
-                ctx.fillStyle = "#16a34a";
-                ctx.fillText("Auftrag prüfen", fx - 32, fy + 3);
+                drawShape(fx - 45, fy - 22, fx + 45, fy + 22, "roundrect", "#16a34a", 2, masterCtx);
+                masterCtx.font = "10px sans-serif";
+                masterCtx.fillStyle = "#16a34a";
+                masterCtx.fillText("Auftrag prüfen", fx - 32, fy + 3);
             }
 
-            ctx.restore();
+            masterCtx.restore();
+            renderViewport();
             pushHistory();
             document.getElementById("cheatsheet-drawer").classList.add("collapsed");
             showToast("Vorlage eingefügt");
@@ -1894,7 +2166,7 @@
             if (saveTimeout) clearTimeout(saveTimeout);
             saveTimeout = setTimeout(() => {
                 try {
-                    const dataUrl = canvas.toDataURL("image/png");
+                    const dataUrl = masterCanvas.toDataURL("image/png");
                     localStorage.setItem(STORAGE_KEY, dataUrl);
                     saveStatusText.innerText = "Gespeichert";
                 } catch (e) {
@@ -1905,7 +2177,6 @@
 
         function loadFromStorage() {
             try {
-                // Restore active diagram ID & Title if set
                 activeDiagramId = localStorage.getItem(STORAGE_ACTIVE_ID_KEY) || null;
                 if (activeDiagramId) {
                     const savedList = getSavedDiagrams();
@@ -1921,25 +2192,25 @@
                 if (saved) {
                     const img = new Image();
                     img.onload = () => {
-                        ctx.save();
-                        ctx.setTransform(1, 0, 0, 1, 0, 0);
-                        ctx.clearRect(0, 0, canvas.width, canvas.height);
-                        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-                        ctx.restore();
+                        masterCtx.clearRect(0, 0, masterCanvas.width, masterCanvas.height);
+                        masterCtx.drawImage(img, 0, 0);
 
-                        undoStack = [captureCanvasState()];
+                        undoStack = [captureMasterState()];
                         redoStack = [];
                         updateHistoryButtons();
+                        renderViewport();
                         showToast(activeDiagramTitle ? `"${activeDiagramTitle}" geladen` : "Vorherige Zeichnung geladen");
                     };
                     img.src = saved;
                 } else {
-                    undoStack = [captureCanvasState()];
+                    undoStack = [captureMasterState()];
                     redoStack = [];
                     updateHistoryButtons();
+                    renderViewport();
                 }
             } catch (e) {
                 console.error("loadFromStorage error:", e);
+                renderViewport();
             }
         }
 
@@ -1957,17 +2228,15 @@
                 localStorage.setItem(STORAGE_SAVED_KEY, JSON.stringify(list));
                 updateLibraryBadge();
             } catch (e) {
-                console.error("Could not save to localStorage:", e);
-                showToast("Speicher voll oder Fehler beim Speichern!");
+                console.error("setSavedDiagrams error:", e);
+                showToast("Speicherlimit erreicht! Lösche alte Diagramme.");
             }
         }
 
         function updateLibraryBadge() {
             const list = getSavedDiagrams();
-            const badge1 = document.getElementById("library-count-badge");
-            const badge2 = document.getElementById("library-modal-count-badge");
-            if (badge1) badge1.innerText = list.length;
-            if (badge2) badge2.innerText = `${list.length} Diagramme`;
+            const badge = document.getElementById("library-count-badge");
+            if (badge) badge.innerText = list.length;
         }
 
         function updateDiagramHeaderTitle(title) {
@@ -1975,7 +2244,7 @@
             const subEl = document.getElementById("header-diagram-subtitle");
             if (title) {
                 if (titleEl) titleEl.innerText = title;
-                if (subEl) subEl.innerText = "IHK AP1 Diagramm • Gespeichert in 'Meine Diagramme'";
+                if (subEl) subEl.innerText = "Gespeichertes IHK-Diagramm (wird automatisch synchronisiert)";
             } else {
                 if (titleEl) titleEl.innerText = "IHK AP1 Diagramm-Board";
                 if (subEl) subEl.innerText = "UML Use-Case & Klassen, ERD, EPK, BPMN & Netzpläne";
@@ -1989,8 +2258,19 @@
             const tCtx = thumbCanvas.getContext("2d");
             tCtx.fillStyle = "#ffffff";
             tCtx.fillRect(0, 0, 300, 180);
-            tCtx.drawImage(canvas, 0, 0, 300, 180);
-            return thumbCanvas.toDataURL("image/jpeg", 0.75);
+
+            const bounds = getDrawingBounds();
+            if (bounds && bounds.width > 10 && bounds.height > 10) {
+                const scale = Math.min(300 / bounds.width, 180 / bounds.height);
+                const dw = bounds.width * scale;
+                const dh = bounds.height * scale;
+                const dx = (300 - dw) / 2;
+                const dy = (180 - dh) / 2;
+                tCtx.drawImage(masterCanvas, bounds.x, bounds.y, bounds.width, bounds.height, dx, dy, dw, dh);
+            } else {
+                tCtx.drawImage(masterCanvas, 0, 0, 1200, 720, 0, 0, 300, 180);
+            }
+            return thumbCanvas.toDataURL("image/jpeg", 0.85);
         }
 
         // ====================================================================
@@ -1998,25 +2278,19 @@
         // ====================================================================
         function openSaveModal() {
             const modal = document.getElementById("save-modal");
-            const titleInput = document.getElementById("save-title-input");
-            const previewImg = document.getElementById("save-modal-preview-img");
+            const input = document.getElementById("save-title-input");
+            const catSelect = document.getElementById("save-category-select");
 
             if (activeDiagramTitle) {
-                titleInput.value = activeDiagramTitle;
+                input.value = activeDiagramTitle;
             } else {
-                const now = new Date();
-                const dateStr = now.toLocaleDateString("de-DE", { day: "2-digit", month: "2-digit", year: "numeric" });
-                titleInput.value = `Diagramm ${dateStr}`;
+                input.value = `Diagramm ${new Date().toLocaleDateString("de-DE")} ${new Date().toLocaleTimeString("de-DE", { hour: '2-digit', minute: '2-digit' })}`;
             }
-
-            try {
-                previewImg.src = createThumbnailDataUrl();
-            } catch (e) {}
 
             modal.classList.add("active");
             setTimeout(() => {
-                titleInput.focus();
-                titleInput.select();
+                input.focus();
+                input.select();
             }, 50);
         }
 
@@ -2025,56 +2299,68 @@
         }
 
         function confirmSave() {
-            const titleInput = document.getElementById("save-title-input");
+            const input = document.getElementById("save-title-input");
             const catSelect = document.getElementById("save-category-select");
-            const title = titleInput.value.trim() || "Unbenanntes Diagramm";
-            const category = catSelect.value || "struktogramm";
+            const title = input.value.trim() || "Unbenanntes Diagramm";
+            const category = catSelect.value || "allgemein";
 
             const list = getSavedDiagrams();
-            const nowIso = new Date().toISOString();
-            const thumbnail = createThumbnailDataUrl();
-            const fullData = canvas.toDataURL("image/png");
+            const pngData = masterCanvas.toDataURL("image/png");
+            const thumbData = createThumbnailDataUrl();
+            const now = new Date().toISOString();
 
-            let existingIdx = -1;
             if (activeDiagramId) {
-                existingIdx = list.findIndex(d => d.id === activeDiagramId);
-            }
-
-            if (existingIdx >= 0) {
-                list[existingIdx].title = title;
-                list[existingIdx].category = category;
-                list[existingIdx].updatedAt = nowIso;
-                list[existingIdx].thumbnail = thumbnail;
-                list[existingIdx].data = fullData;
+                const existingIndex = list.findIndex(d => d.id === activeDiagramId);
+                if (existingIndex !== -1) {
+                    list[existingIndex].title = title;
+                    list[existingIndex].category = category;
+                    list[existingIndex].data = pngData;
+                    list[existingIndex].thumbnail = thumbData;
+                    list[existingIndex].updatedAt = now;
+                    showToast(`"${title}" aktualisiert!`);
+                } else {
+                    const newEntry = {
+                        id: activeDiagramId,
+                        title,
+                        category,
+                        data: pngData,
+                        thumbnail: thumbData,
+                        createdAt: now,
+                        updatedAt: now
+                    };
+                    list.unshift(newEntry);
+                    showToast(`"${title}" gespeichert!`);
+                }
             } else {
-                const newId = "diag_" + Date.now();
+                const newId = "diag_" + Date.now() + "_" + Math.random().toString(36).substr(2, 5);
                 activeDiagramId = newId;
-                list.unshift({
+                const newEntry = {
                     id: newId,
-                    title: title,
-                    category: category,
-                    updatedAt: nowIso,
-                    thumbnail: thumbnail,
-                    data: fullData
-                });
+                    title,
+                    category,
+                    data: pngData,
+                    thumbnail: thumbData,
+                    createdAt: now,
+                    updatedAt: now
+                };
+                list.unshift(newEntry);
+                showToast(`"${title}" neu gespeichert!`);
             }
 
             setSavedDiagrams(list);
             activeDiagramTitle = title;
             localStorage.setItem(STORAGE_ACTIVE_ID_KEY, activeDiagramId);
-            localStorage.setItem(STORAGE_KEY, fullData);
+            localStorage.setItem(STORAGE_KEY, pngData);
             updateDiagramHeaderTitle(title);
             closeSaveModal();
-            showToast(`✅ "${title}" erfolgreich gespeichert!`);
         }
 
         // ====================================================================
         // Library Modal Functions
         // ====================================================================
         function openLibraryModal() {
-            const modal = document.getElementById("library-modal");
-            modal.classList.add("active");
             renderLibrary();
+            document.getElementById("library-modal").classList.add("active");
         }
 
         function closeLibraryModal() {
@@ -2083,68 +2369,63 @@
 
         function getCategoryLabel(cat) {
             const map = {
-                struktogramm: "Struktogramm (DIN 66261)",
-                pap: "PAP (DIN 66001)",
-                erd: "ERD Datenbank",
-                uml_class: "UML Klasse",
                 uml_usecase: "UML Use-Case",
-                uml_activity: "UML Aktivität",
-                bpmn: "BPMN Prozess",
-                epk: "EPK Kette",
-                netzplan: "Netzplan (DIN 69900)",
-                kaufmaennisch: "Kaufmännisch",
-                sonstiges: "Skizze / Notiz"
+                uml_class: "UML Klassen",
+                erd: "ER-Modell",
+                epk: "EPK-Prozess",
+                bpmn: "BPMN-Prozess",
+                netzplan: "Netzplan",
+                allgemein: "Allgemein"
             };
             return map[cat] || cat;
         }
 
         function renderLibrary() {
             const list = getSavedDiagrams();
-            const grid = document.getElementById("library-diagram-grid");
-            const emptyState = document.getElementById("library-empty-state");
-            const searchVal = (document.getElementById("library-search-input").value || "").toLowerCase().trim();
-            const catFilter = document.getElementById("library-filter-category").value;
-
-            updateLibraryBadge();
-            grid.innerHTML = "";
+            const grid = document.getElementById("library-grid");
+            const empty = document.getElementById("library-empty");
+            const query = (document.getElementById("library-search-input").value || "").toLowerCase().trim();
+            const filterCat = document.getElementById("library-filter-category").value;
 
             const filtered = list.filter(item => {
-                const matchSearch = item.title.toLowerCase().includes(searchVal);
-                const matchCat = (catFilter === "all" || item.category === catFilter);
-                return matchSearch && matchCat;
+                const matchesQuery = !query || item.title.toLowerCase().includes(query);
+                const matchesCat = filterCat === "all" || item.category === filterCat;
+                return matchesQuery && matchesCat;
             });
 
+            grid.innerHTML = "";
+
             if (filtered.length === 0) {
-                emptyState.style.display = "block";
+                empty.style.display = "block";
             } else {
-                emptyState.style.display = "none";
+                empty.style.display = "none";
                 filtered.forEach(diag => {
                     const card = document.createElement("div");
                     card.className = "diagram-card";
                     if (diag.id === activeDiagramId) {
                         card.style.borderColor = "#8b5cf6";
-                        card.style.boxShadow = "0 0 0 2px rgba(139, 92, 246, 0.4)";
+                        card.style.boxShadow = "0 0 0 2px #8b5cf6";
                     }
 
-                    const dateStr = new Date(diag.updatedAt).toLocaleDateString("de-DE", {
+                    const dateStr = new Date(diag.updatedAt || diag.createdAt).toLocaleDateString("de-DE", {
                         day: "2-digit", month: "2-digit", year: "numeric", hour: "2-digit", minute: "2-digit"
                     });
 
                     card.innerHTML = `
-                        <div class="diagram-card-thumb" onclick="loadDiagram('${diag.id}')" title="Klick zum Laden auf das Board">
+                        <div class="diagram-card-thumb" onclick="loadDiagram('${diag.id}')">
                             <img src="${diag.thumbnail || diag.data}" alt="${diag.title}">
                         </div>
                         <div class="diagram-card-body">
                             <div class="diagram-card-title" title="${diag.title}">${diag.title}</div>
                             <div class="diagram-card-meta">
-                                <span class="badge ${diag.id === activeDiagramId ? 'badge-purple' : ''}">${getCategoryLabel(diag.category)}</span>
+                                <span><i class="fa-solid fa-tag"></i> ${getCategoryLabel(diag.category)}</span>
                                 <span>${dateStr}</span>
                             </div>
                             <div class="diagram-card-actions">
                                 <button class="btn btn-primary" style="flex: 1; padding: 0.35rem 0.5rem; font-size: 0.78rem;" onclick="loadDiagram('${diag.id}')">
                                     <i class="fa-solid fa-folder-open"></i> Öffnen
                                 </button>
-                                <button class="btn" style="padding: 0.35rem 0.5rem; font-size: 0.78rem;" title="Als PNG herunterladen" onclick="downloadSavedDiagram('${diag.id}')">
+                                <button class="btn" style="padding: 0.35rem 0.5rem; font-size: 0.78rem;" title="Als Bild herunterladen" onclick="downloadSavedDiagram('${diag.id}')">
                                     <i class="fa-solid fa-download"></i>
                                 </button>
                                 <button class="btn" style="padding: 0.35rem 0.5rem; font-size: 0.78rem;" title="Umbenennen" onclick="renameDiagram('${diag.id}')">
@@ -2168,15 +2449,17 @@
 
             const img = new Image();
             img.onload = () => {
-                ctx.save();
-                ctx.setTransform(1, 0, 0, 1, 0, 0);
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-                ctx.restore();
+                masterCtx.clearRect(0, 0, masterCanvas.width, masterCanvas.height);
+                masterCtx.drawImage(img, 0, 0);
 
-                undoStack = [captureCanvasState()];
+                undoStack = [captureMasterState()];
                 redoStack = [];
                 updateHistoryButtons();
+                
+                zoom = 1.0;
+                panX = 0;
+                panY = 0;
+                renderViewport();
 
                 activeDiagramId = diag.id;
                 activeDiagramTitle = diag.title;
@@ -2258,21 +2541,25 @@
         function isCanvasBlank() {
             try {
                 const pixelBuffer = new Uint32Array(
-                    ctx.getImageData(0, 0, canvas.width, canvas.height).data.buffer
+                    masterCtx.getImageData(0, 0, masterCanvas.width, masterCanvas.height).data.buffer
                 );
                 return !pixelBuffer.some(color => color !== 0);
             } catch (e) {
                 return false;
             }
         }
+        window.isCanvasBlank = isCanvasBlank;
+        window.renderViewport = renderViewport;
+        window.drawShape = drawShape;
 
         function createNewBoard(skipConfirm) {
-            ctx.save();
-            ctx.setTransform(1, 0, 0, 1, 0, 0);
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.restore();
+            masterCtx.clearRect(0, 0, masterCanvas.width, masterCanvas.height);
+            zoom = 1.0;
+            panX = 0;
+            panY = 0;
+            renderViewport();
 
-            undoStack = [captureCanvasState()];
+            undoStack = [captureMasterState()];
             redoStack = [];
             updateHistoryButtons();
 
@@ -2332,9 +2619,10 @@
         }
 
         function exportPNG() {
+            const bounds = getDrawingBounds() || { x: 0, y: 0, width: Math.max(1200, container.clientWidth), height: Math.max(800, container.clientHeight) };
             const expCanvas = document.createElement("canvas");
-            expCanvas.width = canvas.width;
-            expCanvas.height = canvas.height;
+            expCanvas.width = bounds.width;
+            expCanvas.height = bounds.height;
             const expCtx = expCanvas.getContext("2d");
 
             // Fill solid white
@@ -2345,7 +2633,7 @@
             if (gridModes[gridIdx] !== "grid-off") {
                 expCtx.strokeStyle = "#e2e8f0";
                 expCtx.lineWidth = 1;
-                const step = (gridModes[gridIdx] === "grid-large" ? 40 : 20) * (window.devicePixelRatio || 1);
+                const step = (gridModes[gridIdx] === "grid-large" ? 40 : 20);
                 for (let x = 0; x < expCanvas.width; x += step) {
                     expCtx.beginPath();
                     expCtx.moveTo(x, 0);
@@ -2360,26 +2648,27 @@
                 }
             }
 
-            // Draw content
-            expCtx.drawImage(canvas, 0, 0);
+            // Draw content from masterCanvas in native crispness
+            expCtx.drawImage(masterCanvas, bounds.x, bounds.y, bounds.width, bounds.height, 0, 0, bounds.width, bounds.height);
 
             const a = document.createElement("a");
             const fileTitle = (activeDiagramTitle || "IHK_AP1_Diagramm").replace(/[^a-zA-Z0-9_-]/g, "_");
             a.download = `${fileTitle}_${new Date().toISOString().slice(0, 10)}.png`;
             a.href = expCanvas.toDataURL("image/png");
             a.click();
-            showToast("PNG-Download gestartet");
+            showToast("PNG-Download mit nativer Schärfe gestartet");
         }
 
         async function copyToClipboard() {
             try {
+                const bounds = getDrawingBounds() || { x: 0, y: 0, width: Math.max(1200, container.clientWidth), height: Math.max(800, container.clientHeight) };
                 const expCanvas = document.createElement("canvas");
-                expCanvas.width = canvas.width;
-                expCanvas.height = canvas.height;
+                expCanvas.width = bounds.width;
+                expCanvas.height = bounds.height;
                 const expCtx = expCanvas.getContext("2d");
                 expCtx.fillStyle = "#ffffff";
                 expCtx.fillRect(0, 0, expCanvas.width, expCanvas.height);
-                expCtx.drawImage(canvas, 0, 0);
+                expCtx.drawImage(masterCanvas, bounds.x, bounds.y, bounds.width, bounds.height, 0, 0, bounds.width, bounds.height);
 
                 expCanvas.toBlob(async (blob) => {
                     if (!blob) return;
@@ -2387,7 +2676,7 @@
                         await navigator.clipboard.write([
                             new ClipboardItem({ "image/png": blob })
                         ]);
-                        showToast("Skizze in die Zwischenablage kopiert! (Strg+V)");
+                        showToast("Skizze in nativer Schärfe kopiert! (Strg+V)");
                     } catch (err) {
                         showToast("Kopieren nicht unterstützt - nutze 'PNG Export'");
                     }
@@ -2406,6 +2695,7 @@
                 toast.classList.remove("show");
             }, 2500);
         }
+
     </script>
 </body>
 </html>

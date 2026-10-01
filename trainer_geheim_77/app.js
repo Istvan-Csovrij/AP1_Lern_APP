@@ -746,7 +746,7 @@ function loadQuestion() {
                         <span><strong>Diagramm-Aufgabe (${escapeHtml(diagName)}):</strong> Skizziere oder prüfe dein Modell im Zeichenboard!</span>
                     </div>
                     <div style="display: flex; gap: 0.4rem; align-items: center;">
-                        <a href="whiteboard.html?v=86" target="_blank" class="btn" style="background: white; color: #0891b2; border: 1px solid #0891b2; padding: 0.35rem 0.7rem; font-size: 0.85rem; border-radius: 6px; text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 0.35rem;">
+                        <a href="whiteboard.html?v=101" target="_blank" class="btn" style="background: white; color: #0891b2; border: 1px solid #0891b2; padding: 0.35rem 0.7rem; font-size: 0.85rem; border-radius: 6px; text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 0.35rem;">
                             <i class="fa-solid fa-up-right-from-square"></i> Im neuen Tab ↗
                         </a>
                         <button id="inline-quiz-wb-btn" class="btn" style="background: linear-gradient(135deg, #0891b2, #0284c7); color: white; padding: 0.35rem 0.75rem; font-size: 0.85rem; border-radius: 6px; border: none; cursor: pointer; font-weight: 600; display: inline-flex; align-items: center; gap: 0.35rem;">
@@ -1430,7 +1430,7 @@ function loadExamQuestion() {
                         <span><strong>Diagramm-Aufgabe (${escapeHtml(diagName)}):</strong> Skizziere deine Lösung auf dem Zeichenboard!</span>
                     </div>
                     <div style="display: flex; gap: 0.4rem; align-items: center;">
-                        <a href="whiteboard.html?v=86" target="_blank" class="btn" style="background: white; color: #0891b2; border: 1px solid #0891b2; padding: 0.35rem 0.7rem; font-size: 0.85rem; border-radius: 6px; text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 0.35rem;">
+                        <a href="whiteboard.html?v=101" target="_blank" class="btn" style="background: white; color: #0891b2; border: 1px solid #0891b2; padding: 0.35rem 0.7rem; font-size: 0.85rem; border-radius: 6px; text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 0.35rem;">
                             <i class="fa-solid fa-up-right-from-square"></i> Im neuen Tab ↗
                         </a>
                         <button id="inline-exam-wb-btn" class="btn" style="background: linear-gradient(135deg, #0891b2, #0284c7); color: white; padding: 0.35rem 0.75rem; font-size: 0.85rem; border-radius: 6px; border: none; cursor: pointer; font-weight: 600; display: inline-flex; align-items: center; gap: 0.35rem;">
@@ -1985,7 +1985,10 @@ function resizeWhiteboardCanvas(preserveContent) {
     wbCtx.scale(dpr, dpr);
 
     if (tempCanvas) {
-        wbCtx.drawImage(tempCanvas, 0, 0, rect.width, rect.height);
+        wbCtx.save();
+        wbCtx.setTransform(1, 0, 0, 1, 0, 0);
+        wbCtx.drawImage(tempCanvas, 0, 0);
+        wbCtx.restore();
     } else if (wbHistory.length === 0) {
         wbSaveHistory();
     }
