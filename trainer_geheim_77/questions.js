@@ -4968,7 +4968,8 @@ WHERE Email IS NULL OR Email = '';
                 "|| = Primärschlüssel, o< = Fremdschlüssel"
         ],
         "correctAnswer": 0,
-        "solutionDiagramSvg": VisualDiagrams.getErdDiagramSvg(),
+        "solutionDiagramSvg": VisualDiagrams.getCrowFootDiagramSvg(),
+        "solutionDiagramCaption": "Visuelle Musterlösung: Krähenfuß-Notation (Martin-Notation) mit den 4 Kardinalitätssymbolen",
         "explanation": "In der Krähenfuß-Notation bezeichnet '||' 'Exactly One' (Minimal- und Maximalkardinalität 1). 'o<' (Kreis = optional 0, Krähenfuß = many *) bezeichnet 'Zero or More' (0..*)."
 },
     {
@@ -4980,6 +4981,8 @@ WHERE Email IS NULL OR Email = '';
         "diagramType": "UML Aktivitätsdiagramm",
         "type": "multiple-choice",
         "question": "Was ist der fundamentale Unterschied zwischen einer **Raute (Decision / Verzweigung)** und einem **dicken Balken (Fork / Join / Synchronisationsbalken)** im UML-Aktivitätsdiagramm?",
+        "solutionDiagramSvg": VisualDiagrams.getUmlAktivitaetsdiagrammSvg(),
+        "solutionDiagramCaption": "Visuelle Musterlösung: UML-Aktivitätsdiagramm mit Verzweigung (Raute) und Synchronisationsbalken (Fork / Join)",
         "options": [
                 "Die Raute wählt genau EINEN alternativen Pfad basierend auf Bedingungen ([ja]/[nein]), während der Fork-Balken den Ablauf in MEHRERE parallele, gleichzeitig ablaufende Pfade aufspaltet (und der Join-Balken wartet, bis alle fertig sind).",
                 "Die Raute steht für parallele Threads, der Balken für IF-Bedingungen.",
@@ -5196,6 +5199,8 @@ WHERE Email IS NULL OR Email = '';
                 "16 Regeln (2^4)."
         ],
         "correctAnswer": 0,
+        "solutionDiagramSvg": VisualDiagrams.getEntscheidungstabelleSvg(),
+        "solutionDiagramCaption": "Visuelle Musterlösung: DIN 66241 Entscheidungstabelle mit 3 Bedingungen und 8 Regeln (2^3)",
         "explanation": "Bei n unabhängigen binären Bedingungen beträgt die Anzahl der theoretisch möglichen Kombinationen (Regelspalten) 2^n. Bei 3 Bedingungen sind es 2^3 = 8 Regeln."
 },
     {
@@ -7020,9 +7025,9 @@ WHERE Email IS NULL OR Email = '';
         "type": "open-text",
         "question": "IHK-Prüfungsaufgabe (Modellierung): Modellieren Sie ein konzeptionelles Datenmodell (ER-Modell in Chen-Notation) für ein Vertriebssystem:\n\n1. Entitäten: KUNDE, BESTELLUNG und ARTIKEL.\n2. Beziehungen: KUNDE 'erteilt' BESTELLUNG (1:n) und BESTELLUNG 'umfasst' ARTIKEL (n:m).\n3. Kennzeichnen Sie für jede Entität die Primärschlüssel-Attribute durch Unterstreichung.\n\nSkizziere dein ERD im Whiteboard und vergleiche mit der Musterlösung.",
         "solutionDiagramSvg": VisualDiagrams.getErdDiagramSvg(),
-        "solutionDiagramCaption": "Visuelle Musterlösung: ERD nach Chen mit 1:n und n:m Kardinalitäten sowie unterstrichenen Primärschlüsseln",
-        "musterloesung": "Musterlösung für das ER-Diagramm:\n\n- Entität KUNDE [Rechteck] mit Attributen (KundenNr [PK unterstrichen], Name, Ort)\n- Beziehung 'erteilt' [Raute] mit Kardinalität 1:n (1 Kunde -> n Bestellungen)\n- Entität BESTELLUNG [Rechteck] mit Attributen (BestellNr [PK unterstrichen], Datum)\n- Beziehung 'umfasst' [Raute] mit Kardinalität n:m und Beziehungsattribut 'Menge'\n- Entität ARTIKEL [Rechteck] mit Attributen (ArtikelNr [PK unterstrichen], Bezeichnung, Preis).",
-        "explanation": "ER-Modellierung nach Chen mit korrekter Notation für Entitäten, Attribute, Rauten für Beziehungen und Multiplizitäten."
+        "solutionDiagramCaption": "Visuelle Musterlösung: ERD nach Chen & Relationales Datenbankschema (4 Tabellen inkl. n:m Zwischentabelle)",
+        "musterloesung": "Musterlösung für das ER-Diagramm & Relationale Tabellenschema:\n\n1. Konzeptionelles Datenmodell (Chen-Notation: 3 Entitäten):\n- Entität KUNDE [Rechteck] mit Attributen (KundenNr [PK unterstrichen], Name, Ort)\n- Beziehung 'erteilt' [Raute] mit Kardinalität 1:n (1 Kunde -> n Bestellungen)\n- Entität BESTELLUNG [Rechteck] mit Attributen (BestellNr [PK unterstrichen], Datum)\n- Beziehung 'umfasst' [Raute] mit Kardinalität n:m und Beziehungsattribut 'Menge'\n- Entität ARTIKEL [Rechteck] mit Attributen (ArtikelNr [PK unterstrichen], Bezeichnung, Preis).\n\n2. Relationales Tabellenschema (4 Tabellen mit n:m-Auflösung):\n- tbl_Kunde (KundenNr [PK], Name, Ort)\n- tbl_Bestellung (BestellNr [PK], FK_KundenNr [FK], Datum)\n- tbl_Artikel (ArtikelNr [PK], Bezeichnung, Preis)\n- tbl_Bestellposition (FK_BestellNr [PK, FK], FK_ArtikelNr [PK, FK], Menge) als Zwischentabelle zur relationalen Auflösung der n:m-Beziehung.",
+        "explanation": "ER-Modellierung nach Chen (3 Entitäten, Rauten für Beziehungen) und regelkonforme Transformation in ein relationales Datenbankschema mit Verknüpfungstabelle."
     },
     {
         "id": 367,

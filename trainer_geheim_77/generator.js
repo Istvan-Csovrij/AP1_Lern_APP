@@ -2805,9 +2805,9 @@ function generateDynamicQuestions(typeMode = "mix") {
                 type: "open-text",
                 question: "Prüfungsaufgabe Datenbanken (ERD): Erstelle ein vollständiges Entity-Relationship-Diagramm in Chen-Notation für ein Handelssystem mit den Entitäten KUNDE, BESTELLUNG und ARTIKEL.\n\nVorgaben:\n- KUNDE erteilt BESTELLUNG (1:n)\n- BESTELLUNG umfasst ARTIKEL (n:m) mit Beziehungsattribut Menge\n- Unterstreiche alle Primärschlüssel-Attribute\n\nSkizziere das ERD im Whiteboard und überprüfe es mit der grafischen Musterlösung.",
                 solutionDiagramSvg: VisualDiagrams.getErdDiagramSvg(),
-                solutionDiagramCaption: "Visuelle Musterlösung: ERD in Chen-Notation",
-                musterloesung: "Musterlösung ERD (Chen):\n- Entitätstypen: Rechtecke KUNDE, BESTELLUNG, ARTIKEL.\n- Beziehungstypen: Rauten 'erteilt' (1:n) und 'umfasst' (n:m).\n- Attribute: Ellipsen, wobei Primärschlüssel (KundenNr, BestellNr, ArtikelNr) unterstrichen sind.\n- Beziehungsattribut 'Menge' an der Raute 'umfasst'.",
-                explanation: "Konzeptioneller Datenbankentwurf mit Entity-Relationship-Modellen (Chen-Notation)."
+                solutionDiagramCaption: "Visuelle Musterlösung: ERD in Chen-Notation & Relationales 4-Tabellen-Schema",
+                musterloesung: "Musterlösung ERD & Relationales Datenbankschema:\n\n1. Konzeptionelles Modell (Chen-Notation: 3 Entitäten):\n- Entitätstypen: Rechtecke KUNDE, BESTELLUNG, ARTIKEL.\n- Beziehungstypen: Rauten 'erteilt' (1:n) und 'umfasst' (n:m).\n- Attribute: Ellipsen, wobei Primärschlüssel (KundenNr, BestellNr, ArtikelNr) unterstrichen sind.\n- Beziehungsattribut: 'Menge' als Ellipse direkt an der Raute 'umfasst' angebunden.\n\n2. Relationales Tabellenschema (4 Tabellen):\n- tbl_Kunde (KundenNr [PK], Name, Ort)\n- tbl_Bestellung (BestellNr [PK], FK_KundenNr [FK], BestellDatum)\n- tbl_Artikel (ArtikelNr [PK], Bezeichnung, Preis)\n- tbl_Bestellposition (FK_BestellNr [PK, FK], FK_ArtikelNr [PK, FK], Menge)\n-> Die n:m Beziehung wird über die 4. Tabelle (Zwischentabelle tbl_Bestellposition) aufgelöst, deren Primärschlüssel ein zusammengesetzter Schlüssel aus beiden Fremdschlüsseln ist.",
+                explanation: "Konzeptioneller Datenbankentwurf mit Entity-Relationship-Modellen (Chen-Notation) und Überführung in relationale Datenbankschemata."
             });
         } else {
             dynamicQuestions.push({

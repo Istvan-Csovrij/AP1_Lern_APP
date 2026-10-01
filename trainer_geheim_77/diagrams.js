@@ -146,50 +146,414 @@ var VisualDiagrams = {
         `;
     },
 
-    // 3. ER-Diagramm (Entity-Relationship-Modell)
+    // 3. ER-Diagramm (Entity-Relationship-Modell nach Chen: KUNDE, BESTELLUNG, ARTIKEL & Relationales 4-Tabellen-Schema)
     getErdDiagramSvg: function() {
         return `
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 300" width="100%" height="100%">
-            <rect width="680" height="300" fill="#f8fafc" rx="8" />
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 520" width="100%" height="100%">
+            <defs>
+                <marker id="erd-fk-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                    <path d="M 0 1 L 10 5 L 0 9 z" fill="#2563eb" />
+                </marker>
+                <marker id="erd-fk-purple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                    <path d="M 0 1 L 10 5 L 0 9 z" fill="#7c3aed" />
+                </marker>
+            </defs>
+            <rect width="960" height="520" fill="#f8fafc" rx="8" />
             
-            <!-- Entität 1: KUNDE -->
-            <rect x="50" y="110" width="130" height="60" fill="#eff6ff" stroke="#2563eb" stroke-width="2.5" rx="4" />
-            <text x="115" y="145" font-family="sans-serif" font-size="15" font-weight="bold" text-anchor="middle" fill="#1e3a8a">KUNDE</text>
+            <!-- SECTION 1: KONZEPTIONELLES MODELL CHEN-NOTATION (3 ENTITAETEN, 2 RAUTEN) -->
+            <rect x="20" y="10" width="920" height="230" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5" rx="6" />
+            <rect x="20" y="10" width="920" height="26" fill="#eff6ff" rx="6" />
+            <text x="35" y="28" font-family="sans-serif" font-size="12" font-weight="bold" fill="#1e40af">1. KONZEPTIONELLES DATENMODELL (CHEN-NOTATION): KUNDE (1) -[erteilt]- (n) BESTELLUNG (n) -[umfasst]- (m) ARTIKEL</text>
+
+            <!-- ENTITAET 1: KUNDE -->
+            <line x1="55" y1="52" x2="80" y2="80" stroke="#94a3b8" stroke-width="1.5" />
+            <ellipse cx="50" cy="46" rx="42" ry="16" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5" />
+            <text x="50" y="50" font-family="sans-serif" font-size="10" font-weight="bold" text-decoration="underline" text-anchor="middle" fill="#0f172a">KundenNr (PK)</text>
+
+            <line x1="120" y1="56" x2="110" y2="80" stroke="#94a3b8" stroke-width="1.5" />
+            <ellipse cx="125" cy="46" rx="30" ry="16" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5" />
+            <text x="125" y="50" font-family="sans-serif" font-size="10.5" text-anchor="middle" fill="#0f172a">Name</text>
+
+            <line x1="165" y1="60" x2="140" y2="80" stroke="#94a3b8" stroke-width="1.5" />
+            <ellipse cx="178" cy="46" rx="26" ry="16" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5" />
+            <text x="178" y="50" font-family="sans-serif" font-size="10.5" text-anchor="middle" fill="#0f172a">Ort</text>
+
+            <!-- KUNDE Box -->
+            <rect x="50" y="80" width="115" height="50" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5" rx="5" />
+            <text x="107" y="110" font-family="sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#1e3a8a">KUNDE</text>
+
+            <!-- BEZIEHUNG 1: erteilt (1:n) -->
+            <line x1="165" y1="105" x2="230" y2="105" stroke="#1e293b" stroke-width="2" />
+            <text x="185" y="98" font-family="sans-serif" font-size="14" font-weight="bold" fill="#dc2626">1</text>
+
+            <polygon points="275,80 320,105 275,130 230,105" fill="#fef3c7" stroke="#d97706" stroke-width="2" />
+            <text x="275" y="110" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#92400e">erteilt</text>
+
+            <line x1="320" y1="105" x2="385" y2="105" stroke="#1e293b" stroke-width="2" />
+            <text x="365" y="98" font-family="sans-serif" font-size="14" font-weight="bold" fill="#dc2626">n</text>
+
+            <!-- ENTITAET 2: BESTELLUNG -->
+            <line x1="390" y1="56" x2="410" y2="80" stroke="#94a3b8" stroke-width="1.5" />
+            <ellipse cx="385" cy="46" rx="42" ry="16" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5" />
+            <text x="385" y="50" font-family="sans-serif" font-size="10" font-weight="bold" text-decoration="underline" text-anchor="middle" fill="#0f172a">BestellNr (PK)</text>
+
+            <line x1="455" y1="58" x2="455" y2="80" stroke="#94a3b8" stroke-width="1.5" />
+            <ellipse cx="455" cy="46" rx="34" ry="16" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5" />
+            <text x="455" y="50" font-family="sans-serif" font-size="10.5" text-anchor="middle" fill="#0f172a">Datum</text>
+
+            <line x1="515" y1="58" x2="495" y2="80" stroke="#94a3b8" stroke-width="1.5" />
+            <ellipse cx="522" cy="46" rx="32" ry="16" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5" />
+            <text x="522" y="50" font-family="sans-serif" font-size="10.5" text-anchor="middle" fill="#0f172a">Status</text>
+
+            <!-- BESTELLUNG Box -->
+            <rect x="385" y="80" width="130" height="50" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5" rx="5" />
+            <text x="450" y="110" font-family="sans-serif" font-size="13.5" font-weight="bold" text-anchor="middle" fill="#1e3a8a">BESTELLUNG</text>
+
+            <!-- BEZIEHUNG 2: umfasst (n:m) mit Beziehungsattribut MENGE -->
+            <line x1="515" y1="105" x2="585" y2="105" stroke="#1e293b" stroke-width="2" />
+            <text x="535" y="98" font-family="sans-serif" font-size="14" font-weight="bold" fill="#dc2626">n</text>
+
+            <!-- Beziehungsattribut Menge an Raute umfasst -->
+            <line x1="630" y1="80" x2="630" y2="58" stroke="#059669" stroke-width="1.5" />
+            <ellipse cx="630" cy="46" rx="35" ry="16" fill="#ecfdf5" stroke="#059669" stroke-width="2" />
+            <text x="630" y="50" font-family="sans-serif" font-size="10.5" font-weight="bold" fill="#065f46" text-anchor="middle">Menge</text>
+
+            <polygon points="630,80 675,105 630,130 585,105" fill="#fef3c7" stroke="#d97706" stroke-width="2" />
+            <text x="630" y="110" font-family="sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="#92400e">umfasst</text>
+
+            <line x1="675" y1="105" x2="745" y2="105" stroke="#1e293b" stroke-width="2" />
+            <text x="725" y="98" font-family="sans-serif" font-size="14" font-weight="bold" fill="#dc2626">m</text>
+
+            <!-- ENTITAET 3: ARTIKEL -->
+            <line x1="755" y1="58" x2="775" y2="80" stroke="#94a3b8" stroke-width="1.5" />
+            <ellipse cx="750" cy="46" rx="42" ry="16" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5" />
+            <text x="750" y="50" font-family="sans-serif" font-size="10" font-weight="bold" text-decoration="underline" text-anchor="middle" fill="#0f172a">ArtikelNr (PK)</text>
+
+            <line x1="820" y1="58" x2="815" y2="80" stroke="#94a3b8" stroke-width="1.5" />
+            <ellipse cx="825" cy="46" rx="38" ry="16" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5" />
+            <text x="825" y="50" font-family="sans-serif" font-size="10.5" text-anchor="middle" fill="#0f172a">Bezeichnung</text>
+
+            <line x1="885" y1="58" x2="860" y2="80" stroke="#94a3b8" stroke-width="1.5" />
+            <ellipse cx="895" cy="46" rx="30" ry="16" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5" />
+            <text x="895" y="50" font-family="sans-serif" font-size="10.5" text-anchor="middle" fill="#0f172a">Preis</text>
+
+            <!-- ARTIKEL Box -->
+            <rect x="745" y="80" width="125" height="50" fill="#dbeafe" stroke="#2563eb" stroke-width="2.5" rx="5" />
+            <text x="807" y="110" font-family="sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#1e3a8a">ARTIKEL</text>
+
+            <!-- Erklaerung Chen -->
+            <rect x="50" y="152" width="860" height="28" fill="#f8fafc" stroke="#e2e8f0" rx="4" />
+            <text x="480" y="171" font-family="sans-serif" font-size="11.5" fill="#475569" text-anchor="middle">Chen-Syntax: Rechtecke = Entitaeten | Rauten = Beziehungen (1:n, n:m) | Ovale = Attribute (unterstrichen = PK) | Gruen = Beziehungsattribut 'Menge' an Raute</text>
+
+            <!-- SECTION 2: RELATIONALE TABELLEN MIT 4 TABELLEN INKL. ZWISCHENTABELLE -->
+            <rect x="20" y="248" width="920" height="262" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5" rx="6" />
+            <rect x="20" y="248" width="920" height="26" fill="#f0fdf4" rx="6" />
+            <text x="35" y="266" font-family="sans-serif" font-size="12" font-weight="bold" fill="#166534">2. RELATIONALE DATENBANK-TABELLEN: 3 HAUPTTABELLEN + 1 ZWISCHENTABELLE ZUR N:M-AUFLOESUNG</text>
+
+            <!-- TABELLE 1: tbl_Kunde (Links) -->
+            <g transform="translate(35, 284)">
+                <rect width="185" height="155" fill="#ffffff" stroke="#2563eb" stroke-width="1.5" rx="4" />
+                <rect width="185" height="26" fill="#1e3a8a" rx="4" />
+                <text x="92" y="18" font-family="sans-serif" font-size="12" font-weight="bold" fill="#ffffff" text-anchor="middle">tbl_Kunde</text>
+                
+                <rect x="6" y="32" width="173" height="22" fill="#fef9c3" stroke="#f59e0b" stroke-width="1" rx="3" />
+                <text x="12" y="47" font-family="monospace" font-size="10.5" font-weight="bold" fill="#854d0e">PK: KundenNr (INT)</text>
+                
+                <text x="12" y="75" font-family="monospace" font-size="10.5" fill="#334155">   Name (VARCHAR)</text>
+                <text x="12" y="98" font-family="monospace" font-size="10.5" fill="#334155">   Ort (VARCHAR)</text>
+                <text x="12" y="121" font-family="monospace" font-size="10.5" fill="#334155">   Email (VARCHAR)</text>
+                <rect x="6" y="132" width="173" height="18" fill="#f8fafc" rx="2" />
+                <text x="92" y="145" font-family="sans-serif" font-size="9" fill="#64748b" text-anchor="middle">1-Seite der 1:n Beziehung</text>
+            </g>
+
+            <!-- 1:n FK Pfeil: tbl_Bestellung.FK_KundenNr -> tbl_Kunde.KundenNr -->
+            <path d="M 265 344 C 240 344, 235 316, 220 316" fill="none" stroke="#2563eb" stroke-width="2" marker-end="url(#erd-fk-arrow)" />
+            <rect x="228" y="320" width="36" height="14" fill="#ffffff" stroke="#2563eb" stroke-width="0.7" rx="2" />
+            <text x="246" y="331" font-family="sans-serif" font-size="8.5" font-weight="bold" fill="#2563eb" text-anchor="middle">1:n FK</text>
+
+            <!-- TABELLE 2: tbl_Bestellung (Mitte Links) -->
+            <g transform="translate(265, 284)">
+                <rect width="200" height="155" fill="#ffffff" stroke="#2563eb" stroke-width="1.5" rx="4" />
+                <rect width="200" height="26" fill="#1e3a8a" rx="4" />
+                <text x="100" y="18" font-family="sans-serif" font-size="12" font-weight="bold" fill="#ffffff" text-anchor="middle">tbl_Bestellung</text>
+                
+                <rect x="6" y="32" width="188" height="22" fill="#fef9c3" stroke="#f59e0b" stroke-width="1" rx="3" />
+                <text x="12" y="47" font-family="monospace" font-size="10.5" font-weight="bold" fill="#854d0e">PK: BestellNr (INT)</text>
+                
+                <rect x="6" y="58" width="188" height="22" fill="#eff6ff" stroke="#3b82f6" stroke-width="1" rx="3" />
+                <text x="12" y="73" font-family="monospace" font-size="10" font-weight="bold" fill="#1d4ed8">FK: FK_KundenNr (INT)</text>
+                
+                <text x="12" y="100" font-family="monospace" font-size="10.5" fill="#334155">   BestellDatum (DATE)</text>
+                <text x="12" y="122" font-family="monospace" font-size="10.5" fill="#334155">   Status (VARCHAR)</text>
+                <rect x="6" y="132" width="188" height="18" fill="#f8fafc" rx="2" />
+                <text x="100" y="145" font-family="sans-serif" font-size="9" fill="#64748b" text-anchor="middle">n-Seite (Kunde) | 1-Seite (Pos)</text>
+            </g>
+
+            <!-- n:m Aufloesung FK Pfeile -->
+            <path d="M 505 316 C 485 316, 480 316, 465 316" fill="none" stroke="#7c3aed" stroke-width="2" marker-end="url(#erd-fk-purple)" />
+            <path d="M 715 340 C 730 340, 735 316, 740 316" fill="none" stroke="#7c3aed" stroke-width="2" marker-end="url(#erd-fk-purple)" />
+
+            <!-- TABELLE 3: tbl_Bestellposition (Zwischentabelle / Assoziationstabelle n:m) -->
+            <g transform="translate(505, 284)">
+                <rect width="210" height="155" fill="#ffffff" stroke="#7c3aed" stroke-width="2" rx="4" />
+                <rect width="210" height="26" fill="#6d28d9" rx="4" />
+                <text x="105" y="18" font-family="sans-serif" font-size="11.5" font-weight="bold" fill="#ffffff" text-anchor="middle">tbl_Bestellposition (n:m)</text>
+                
+                <rect x="6" y="32" width="198" height="20" fill="#f3e8ff" stroke="#a855f7" stroke-width="1" rx="3" />
+                <text x="10" y="46" font-family="monospace" font-size="9.5" font-weight="bold" fill="#6b21a8">PK, FK: FK_BestellNr (INT)</text>
+                
+                <rect x="6" y="56" width="198" height="20" fill="#f3e8ff" stroke="#a855f7" stroke-width="1" rx="3" />
+                <text x="10" y="70" font-family="monospace" font-size="9.5" font-weight="bold" fill="#6b21a8">PK, FK: FK_ArtikelNr (INT)</text>
+                
+                <rect x="6" y="80" width="198" height="20" fill="#ecfdf5" stroke="#10b981" stroke-width="1" rx="3" />
+                <text x="10" y="94" font-family="monospace" font-size="9.5" font-weight="bold" fill="#065f46">   Menge (INT) [Bezieh.-Attr]</text>
+                
+                <text x="10" y="118" font-family="monospace" font-size="10" fill="#334155">   Einzelpreis (DECIMAL)</text>
+                <rect x="6" y="128" width="198" height="22" fill="#fdf4ff" stroke="#e879f9" stroke-width="1" rx="3" />
+                <text x="105" y="143" font-family="sans-serif" font-size="8.5" font-weight="bold" fill="#86198f" text-anchor="middle">Composite PK: (BestellNr + ArtikelNr)</text>
+            </g>
+
+            <!-- TABELLE 4: tbl_Artikel (Rechts) -->
+            <g transform="translate(740, 284)">
+                <rect width="185" height="155" fill="#ffffff" stroke="#2563eb" stroke-width="1.5" rx="4" />
+                <rect width="185" height="26" fill="#1e3a8a" rx="4" />
+                <text x="92" y="18" font-family="sans-serif" font-size="12" font-weight="bold" fill="#ffffff" text-anchor="middle">tbl_Artikel</text>
+                
+                <rect x="6" y="32" width="173" height="22" fill="#fef9c3" stroke="#f59e0b" stroke-width="1" rx="3" />
+                <text x="12" y="47" font-family="monospace" font-size="10.5" font-weight="bold" fill="#854d0e">PK: ArtikelNr (INT)</text>
+                
+                <text x="12" y="75" font-family="monospace" font-size="10.5" fill="#334155">   Bezeichnung (VARCHAR)</text>
+                <text x="12" y="98" font-family="monospace" font-size="10.5" fill="#334155">   Preis (DECIMAL)</text>
+                <text x="12" y="121" font-family="monospace" font-size="10.5" fill="#334155">   Lagerbestand (INT)</text>
+                <rect x="6" y="132" width="173" height="18" fill="#f8fafc" rx="2" />
+                <text x="92" y="145" font-family="sans-serif" font-size="9" fill="#64748b" text-anchor="middle">1-Seite (zu Position)</text>
+            </g>
+
+            <!-- Unterer Merkkasten -->
+            <rect x="35" y="450" width="890" height="48" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1" rx="4" />
+            <text x="480" y="468" font-family="sans-serif" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle">IHK-Transformationsregeln vom ER-Modell ins relationale Schema:</text>
+            <text x="480" y="486" font-family="sans-serif" font-size="10" fill="#475569" text-anchor="middle">1:n Beziehung: PK der 1-Seite (KundenNr) wandert als FK (FK_KundenNr) in die n-Seite (tbl_Bestellung). | n:m Beziehung: Erfordert IMMER eine Zwischentabelle (tbl_Bestellposition) mit zusammengesetztem PK aus beiden FKs + Beziehungsattribut (Menge).</text>
+        </svg>
+        `;
+    },
+
+    // 3a. Krähenfuß-Notation (Martin-Notation) im ERD
+    getCrowFootDiagramSvg: function() {
+        return `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 380" width="100%" height="100%">
+            <rect width="860" height="380" fill="#f8fafc" rx="8" />
             
-            <!-- Attribute KUNDE -->
-            <ellipse cx="60" cy="45" rx="50" ry="20" fill="#ffffff" stroke="#64748b" stroke-width="1.5" />
-            <text x="60" y="49" font-family="sans-serif" font-size="11" text-decoration="underline" font-weight="bold" text-anchor="middle" fill="#0f172a">KundenNr (PK)</text>
-            <line x1="80" y1="64" x2="95" y2="110" stroke="#94a3b8" stroke-width="1.5" />
+            <!-- Titel -->
+            <rect x="20" y="12" width="820" height="32" fill="#eff6ff" stroke="#bfdbfe" rx="6" />
+            <text x="430" y="33" font-family="sans-serif" font-size="13.5" font-weight="bold" fill="#1e3a8a" text-anchor="middle">Krähenfuß-Notation (Martin-Notation / IE-Notation) im ER-Diagramm</text>
+
+            <!-- Haupt-Beispiel: KUNDE || - - - - - - - o< BESTELLUNG -->
+            <rect x="40" y="65" width="200" height="120" fill="#ffffff" stroke="#2563eb" stroke-width="2" rx="6" />
+            <rect x="40" y="65" width="200" height="28" fill="#2563eb" rx="6" />
+            <text x="140" y="84" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" text-anchor="middle">KUNDE</text>
+            <text x="55" y="112" font-family="monospace" font-size="11" font-weight="bold" fill="#0f172a">PK: KundenNr (int)</text>
+            <text x="55" y="132" font-family="monospace" font-size="11" fill="#475569">   Name (varchar)</text>
+            <text x="55" y="152" font-family="monospace" font-size="11" fill="#475569">   Ort (varchar)</text>
+
+            <rect x="620" y="65" width="200" height="120" fill="#ffffff" stroke="#2563eb" stroke-width="2" rx="6" />
+            <rect x="620" y="65" width="200" height="28" fill="#2563eb" rx="6" />
+            <text x="720" y="84" font-family="sans-serif" font-size="13" font-weight="bold" fill="#ffffff" text-anchor="middle">BESTELLUNG</text>
+            <text x="635" y="112" font-family="monospace" font-size="11" font-weight="bold" fill="#0f172a">PK: BestellNr (int)</text>
+            <text x="635" y="132" font-family="monospace" font-size="11" font-weight="bold" fill="#2563eb">FK: FK_KundenNr</text>
+            <text x="635" y="152" font-family="monospace" font-size="11" fill="#475569">   Datum (date)</text>
+
+            <!-- Verbindungslinie -->
+            <line x1="240" y1="125" x2="620" y2="125" stroke="#1e293b" stroke-width="2.5" />
             
-            <ellipse cx="170" cy="45" rx="45" ry="20" fill="#ffffff" stroke="#64748b" stroke-width="1.5" />
-            <text x="170" y="49" font-family="sans-serif" font-size="12" text-anchor="middle" fill="#0f172a">Name</text>
-            <line x1="155" y1="64" x2="135" y2="110" stroke="#94a3b8" stroke-width="1.5" />
+            <!-- Symbol links: || (Genau eins / 1..1) -->
+            <line x1="270" y1="110" x2="270" y2="140" stroke="#dc2626" stroke-width="3" />
+            <line x1="282" y1="110" x2="282" y2="140" stroke="#dc2626" stroke-width="3" />
+            <rect x="250" y="148" width="80" height="22" fill="#fee2e2" stroke="#ef4444" rx="3" />
+            <text x="290" y="163" font-family="sans-serif" font-size="10" font-weight="bold" fill="#991b1b" text-anchor="middle">|| = Genau 1 (1..1)</text>
+
+            <!-- Beziehungsname -->
+            <rect x="395" y="113" width="70" height="24" fill="#fef3c7" stroke="#d97706" rx="4" />
+            <text x="430" y="129" font-family="sans-serif" font-size="11" font-weight="bold" fill="#92400e" text-anchor="middle">erteilt</text>
+
+            <!-- Symbol rechts: o< (Null bis viele / 0..*) -->
+            <circle cx="580" cy="125" r="8" fill="#ffffff" stroke="#16a34a" stroke-width="2.5" />
+            <line x1="595" y1="125" x2="620" y2="110" stroke="#16a34a" stroke-width="2.5" />
+            <line x1="595" y1="125" x2="620" y2="125" stroke="#16a34a" stroke-width="2.5" />
+            <line x1="595" y1="125" x2="620" y2="140" stroke="#16a34a" stroke-width="2.5" />
+            <rect x="540" y="148" width="90" height="22" fill="#dcfce7" stroke="#22c55e" rx="3" />
+            <text x="585" y="163" font-family="sans-serif" font-size="10" font-weight="bold" fill="#166534" text-anchor="middle">o&lt; = 0 bis viele (0..*)</text>
+
+            <!-- Legende der 4 Krähenfuß-Kardinalitäten -->
+            <rect x="30" y="200" width="800" height="165" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5" rx="6" />
+            <rect x="30" y="200" width="800" height="26" fill="#f1f5f9" rx="6" />
+            <text x="45" y="218" font-family="sans-serif" font-size="11.5" font-weight="bold" fill="#0f172a">ÜBERSICHT: DIE 4 KARDINALITÄTEN IN DER KRÄHENFUSS-NOTATION</text>
+
+            <!-- Symbol 1: Genau eins || -->
+            <g transform="translate(50, 238)">
+                <rect width="170" height="115" fill="#f8fafc" stroke="#e2e8f0" rx="4" />
+                <line x1="20" y1="35" x2="80" y2="35" stroke="#1e293b" stroke-width="2" />
+                <line x1="55" y1="20" x2="55" y2="50" stroke="#dc2626" stroke-width="3" />
+                <line x1="68" y1="20" x2="68" y2="50" stroke="#dc2626" stroke-width="3" />
+                <text x="85" y="75" font-family="sans-serif" font-size="12" font-weight="bold" fill="#0f172a" text-anchor="middle">|| (Genau eins)</text>
+                <text x="85" y="93" font-family="sans-serif" font-size="10" fill="#64748b" text-anchor="middle">Kardinalität: (1, 1)</text>
+                <text x="85" y="107" font-family="sans-serif" font-size="9.5" fill="#16a34a" text-anchor="middle">Pflicht, exakt ein Partner</text>
+            </g>
+
+            <!-- Symbol 2: Null oder eins o| -->
+            <g transform="translate(245, 238)">
+                <rect width="170" height="115" fill="#f8fafc" stroke="#e2e8f0" rx="4" />
+                <line x1="20" y1="35" x2="80" y2="35" stroke="#1e293b" stroke-width="2" />
+                <circle cx="52" cy="35" r="7" fill="#ffffff" stroke="#2563eb" stroke-width="2.5" />
+                <line x1="68" y1="20" x2="68" y2="50" stroke="#2563eb" stroke-width="3" />
+                <text x="85" y="75" font-family="sans-serif" font-size="12" font-weight="bold" fill="#0f172a" text-anchor="middle">o| (Null oder eins)</text>
+                <text x="85" y="93" font-family="sans-serif" font-size="10" fill="#64748b" text-anchor="middle">Kardinalität: (0, 1)</text>
+                <text x="85" y="107" font-family="sans-serif" font-size="9.5" fill="#0284c7" text-anchor="middle">Optional, maximal eins</text>
+            </g>
+
+            <!-- Symbol 3: Eins bis viele |< -->
+            <g transform="translate(440, 238)">
+                <rect width="170" height="115" fill="#f8fafc" stroke="#e2e8f0" rx="4" />
+                <line x1="20" y1="35" x2="80" y2="35" stroke="#1e293b" stroke-width="2" />
+                <line x1="48" y1="20" x2="48" y2="50" stroke="#9333ea" stroke-width="3" />
+                <line x1="60" y1="35" x2="80" y2="20" stroke="#9333ea" stroke-width="2.5" />
+                <line x1="60" y1="35" x2="80" y2="35" stroke="#9333ea" stroke-width="2.5" />
+                <line x1="60" y1="35" x2="80" y2="50" stroke="#9333ea" stroke-width="2.5" />
+                <text x="85" y="75" font-family="sans-serif" font-size="12" font-weight="bold" fill="#0f172a" text-anchor="middle">|&lt; (Eins bis viele)</text>
+                <text x="85" y="93" font-family="sans-serif" font-size="10" fill="#64748b" text-anchor="middle">Kardinalität: (1, n) / (1, *)</text>
+                <text x="85" y="107" font-family="sans-serif" font-size="9.5" fill="#7c3aed" text-anchor="middle">Pflicht, mindestens eins</text>
+            </g>
+
+            <!-- Symbol 4: Null bis viele o< -->
+            <g transform="translate(635, 238)">
+                <rect width="170" height="115" fill="#f8fafc" stroke="#e2e8f0" rx="4" />
+                <line x1="20" y1="35" x2="80" y2="35" stroke="#1e293b" stroke-width="2" />
+                <circle cx="48" cy="35" r="7" fill="#ffffff" stroke="#16a34a" stroke-width="2.5" />
+                <line x1="60" y1="35" x2="80" y2="20" stroke="#16a34a" stroke-width="2.5" />
+                <line x1="60" y1="35" x2="80" y2="35" stroke="#16a34a" stroke-width="2.5" />
+                <line x1="60" y1="35" x2="80" y2="50" stroke="#16a34a" stroke-width="2.5" />
+                <text x="85" y="75" font-family="sans-serif" font-size="12" font-weight="bold" fill="#0f172a" text-anchor="middle">o&lt; (Null bis viele)</text>
+                <text x="85" y="93" font-family="sans-serif" font-size="10" fill="#64748b" text-anchor="middle">Kardinalität: (0, n) / (0, *)</text>
+                <text x="85" y="107" font-family="sans-serif" font-size="9.5" fill="#16a34a" text-anchor="middle">Optional, beliebig viele</text>
+            </g>
+        </svg>
+        `;
+    },
+
+    // 3b. Entscheidungstabelle (DIN 66241) mit 3 Bedingungen und 8 Regeln (2^3)
+    getEntscheidungstabelleSvg: function() {
+        return `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 740 330" width="100%" height="100%">
+            <rect width="740" height="330" fill="#f8fafc" rx="8" />
             
-            <!-- Beziehung: erteilt (Raute) -->
-            <polygon points="290,140 340,105 390,140 340,175" fill="#fef3c7" stroke="#d97706" stroke-width="2.5" />
-            <text x="340" y="145" font-family="sans-serif" font-size="13" font-weight="bold" text-anchor="middle" fill="#92400e">erteilt</text>
-            
-            <!-- Kardinalitäten -->
-            <line x1="180" y1="140" x2="290" y2="140" stroke="#1e293b" stroke-width="2" />
-            <text x="210" y="132" font-family="sans-serif" font-size="15" font-weight="bold" fill="#dc2626">1</text>
-            
-            <line x1="390" y1="140" x2="500" y2="140" stroke="#1e293b" stroke-width="2" />
-            <text x="460" y="132" font-family="sans-serif" font-size="15" font-weight="bold" fill="#dc2626">n</text>
-            
-            <!-- Entität 2: BESTELLUNG -->
-            <rect x="500" y="110" width="140" height="60" fill="#eff6ff" stroke="#2563eb" stroke-width="2.5" rx="4" />
-            <text x="570" y="145" font-family="sans-serif" font-size="15" font-weight="bold" text-anchor="middle" fill="#1e3a8a">BESTELLUNG</text>
-            
-            <!-- Attribute BESTELLUNG -->
-            <ellipse cx="510" cy="45" rx="50" ry="20" fill="#ffffff" stroke="#64748b" stroke-width="1.5" />
-            <text x="510" y="49" font-family="sans-serif" font-size="11" text-decoration="underline" font-weight="bold" text-anchor="middle" fill="#0f172a">BestellNr (PK)</text>
-            <line x1="530" y1="64" x2="545" y2="110" stroke="#94a3b8" stroke-width="1.5" />
-            
-            <ellipse cx="615" cy="45" rx="45" ry="20" fill="#ffffff" stroke="#64748b" stroke-width="1.5" />
-            <text x="615" y="49" font-family="sans-serif" font-size="12" text-anchor="middle" fill="#0f172a">Datum</text>
-            <line x1="605" y1="64" x2="585" y2="110" stroke="#94a3b8" stroke-width="1.5" />
-            
-            <text x="340" y="250" font-family="sans-serif" font-size="13" font-weight="600" fill="#475569" text-anchor="middle">ER-Diagramm (Chen): Entitäten (Rechtecke), Attribute (Ovale) & 1:n Beziehung (Raute)</text>
+            <rect x="20" y="12" width="700" height="30" fill="#eff6ff" stroke="#bfdbfe" rx="5" />
+            <text x="370" y="32" font-family="sans-serif" font-size="13" font-weight="bold" fill="#1e3a8a" text-anchor="middle">Entscheidungstabelle (DIN 66241): 3 Bedingungen = 2^3 = 8 Regeln</text>
+
+            <g transform="translate(20, 52)">
+                <!-- Tabellenrahmen -->
+                <rect width="700" height="230" fill="#ffffff" stroke="#1e293b" stroke-width="2" rx="4" />
+                
+                <!-- Spalten: Beschreibung (220px) + 8 Regeln (je 60px) -->
+                <!-- Kopfzeile -->
+                <rect width="700" height="30" fill="#1e3a8a" rx="4" />
+                <text x="110" y="20" font-family="sans-serif" font-size="12" font-weight="bold" fill="#ffffff" text-anchor="middle">Bedingungen / Aktionen</text>
+                <text x="250" y="20" font-family="sans-serif" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">R1</text>
+                <text x="310" y="20" font-family="sans-serif" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">R2</text>
+                <text x="370" y="20" font-family="sans-serif" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">R3</text>
+                <text x="430" y="20" font-family="sans-serif" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">R4</text>
+                <text x="490" y="20" font-family="sans-serif" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">R5</text>
+                <text x="550" y="20" font-family="sans-serif" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">R6</text>
+                <text x="610" y="20" font-family="sans-serif" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">R7</text>
+                <text x="670" y="20" font-family="sans-serif" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">R8</text>
+
+                <!-- Zeile B1: Port bekannt? -->
+                <rect y="30" width="700" height="28" fill="#f8fafc" />
+                <text x="12" y="49" font-family="sans-serif" font-size="11.5" font-weight="600" fill="#0f172a">B1: Port autorisiert?</text>
+                <text x="250" y="49" font-family="sans-serif" font-size="12" font-weight="bold" fill="#16a34a" text-anchor="middle">J</text>
+                <text x="310" y="49" font-family="sans-serif" font-size="12" font-weight="bold" fill="#16a34a" text-anchor="middle">J</text>
+                <text x="370" y="49" font-family="sans-serif" font-size="12" font-weight="bold" fill="#16a34a" text-anchor="middle">J</text>
+                <text x="430" y="49" font-family="sans-serif" font-size="12" font-weight="bold" fill="#16a34a" text-anchor="middle">J</text>
+                <text x="490" y="49" font-family="sans-serif" font-size="12" font-weight="bold" fill="#dc2626" text-anchor="middle">N</text>
+                <text x="550" y="49" font-family="sans-serif" font-size="12" font-weight="bold" fill="#dc2626" text-anchor="middle">N</text>
+                <text x="610" y="49" font-family="sans-serif" font-size="12" font-weight="bold" fill="#dc2626" text-anchor="middle">N</text>
+                <text x="670" y="49" font-family="sans-serif" font-size="12" font-weight="bold" fill="#dc2626" text-anchor="middle">N</text>
+
+                <!-- Zeile B2: IP auf Whitelist? -->
+                <rect y="58" width="700" height="28" fill="#ffffff" />
+                <text x="12" y="77" font-family="sans-serif" font-size="11.5" font-weight="600" fill="#0f172a">B2: IP auf Whitelist?</text>
+                <text x="250" y="77" font-family="sans-serif" font-size="12" font-weight="bold" fill="#16a34a" text-anchor="middle">J</text>
+                <text x="310" y="77" font-family="sans-serif" font-size="12" font-weight="bold" fill="#16a34a" text-anchor="middle">J</text>
+                <text x="370" y="77" font-family="sans-serif" font-size="12" font-weight="bold" fill="#dc2626" text-anchor="middle">N</text>
+                <text x="430" y="77" font-family="sans-serif" font-size="12" font-weight="bold" fill="#dc2626" text-anchor="middle">N</text>
+                <text x="490" y="77" font-family="sans-serif" font-size="12" font-weight="bold" fill="#16a34a" text-anchor="middle">J</text>
+                <text x="550" y="77" font-family="sans-serif" font-size="12" font-weight="bold" fill="#16a34a" text-anchor="middle">J</text>
+                <text x="610" y="77" font-family="sans-serif" font-size="12" font-weight="bold" fill="#dc2626" text-anchor="middle">N</text>
+                <text x="670" y="77" font-family="sans-serif" font-size="12" font-weight="bold" fill="#dc2626" text-anchor="middle">N</text>
+
+                <!-- Zeile B3: Zertifikat gültig? -->
+                <rect y="86" width="700" height="28" fill="#f8fafc" />
+                <text x="12" y="105" font-family="sans-serif" font-size="11.5" font-weight="600" fill="#0f172a">B3: TLS-Zertifikat gültig?</text>
+                <text x="250" y="105" font-family="sans-serif" font-size="12" font-weight="bold" fill="#16a34a" text-anchor="middle">J</text>
+                <text x="310" y="105" font-family="sans-serif" font-size="12" font-weight="bold" fill="#dc2626" text-anchor="middle">N</text>
+                <text x="370" y="105" font-family="sans-serif" font-size="12" font-weight="bold" fill="#16a34a" text-anchor="middle">J</text>
+                <text x="430" y="105" font-family="sans-serif" font-size="12" font-weight="bold" fill="#dc2626" text-anchor="middle">N</text>
+                <text x="490" y="105" font-family="sans-serif" font-size="12" font-weight="bold" fill="#16a34a" text-anchor="middle">J</text>
+                <text x="550" y="105" font-family="sans-serif" font-size="12" font-weight="bold" fill="#dc2626" text-anchor="middle">N</text>
+                <text x="610" y="105" font-family="sans-serif" font-size="12" font-weight="bold" fill="#16a34a" text-anchor="middle">J</text>
+                <text x="670" y="105" font-family="sans-serif" font-size="12" font-weight="bold" fill="#dc2626" text-anchor="middle">N</text>
+
+                <!-- Trennbalken Aktionen -->
+                <line x1="0" y1="114" x2="700" y2="114" stroke="#0f172a" stroke-width="2.5" />
+                <rect y="115" width="700" height="24" fill="#e2e8f0" />
+                <text x="12" y="131" font-family="sans-serif" font-size="11" font-weight="bold" fill="#334155">AKTIONEN</text>
+
+                <!-- Aktion A1: Paket durchlassen -->
+                <rect y="139" width="700" height="28" fill="#f0fdf4" />
+                <text x="12" y="158" font-family="sans-serif" font-size="11.5" font-weight="bold" fill="#166534">A1: Paket erlauben (ALLOW)</text>
+                <text x="250" y="158" font-family="sans-serif" font-size="14" font-weight="bold" fill="#166534" text-anchor="middle">X</text>
+                <text x="310" y="158" font-family="sans-serif" font-size="12" fill="#94a3b8" text-anchor="middle">-</text>
+                <text x="370" y="158" font-family="sans-serif" font-size="12" fill="#94a3b8" text-anchor="middle">-</text>
+                <text x="430" y="158" font-family="sans-serif" font-size="12" fill="#94a3b8" text-anchor="middle">-</text>
+                <text x="490" y="158" font-family="sans-serif" font-size="12" fill="#94a3b8" text-anchor="middle">-</text>
+                <text x="550" y="158" font-family="sans-serif" font-size="12" fill="#94a3b8" text-anchor="middle">-</text>
+                <text x="610" y="158" font-family="sans-serif" font-size="12" fill="#94a3b8" text-anchor="middle">-</text>
+                <text x="670" y="158" font-family="sans-serif" font-size="12" fill="#94a3b8" text-anchor="middle">-</text>
+
+                <!-- Aktion A2: Paket blockieren -->
+                <rect y="167" width="700" height="28" fill="#fef2f2" />
+                <text x="12" y="186" font-family="sans-serif" font-size="11.5" font-weight="bold" fill="#991b1b">A2: Paket blockieren (DENY)</text>
+                <text x="250" y="186" font-family="sans-serif" font-size="12" fill="#94a3b8" text-anchor="middle">-</text>
+                <text x="310" y="186" font-family="sans-serif" font-size="14" font-weight="bold" fill="#dc2626" text-anchor="middle">X</text>
+                <text x="370" y="186" font-family="sans-serif" font-size="14" font-weight="bold" fill="#dc2626" text-anchor="middle">X</text>
+                <text x="430" y="186" font-family="sans-serif" font-size="14" font-weight="bold" fill="#dc2626" text-anchor="middle">X</text>
+                <text x="490" y="186" font-family="sans-serif" font-size="14" font-weight="bold" fill="#dc2626" text-anchor="middle">X</text>
+                <text x="550" y="186" font-family="sans-serif" font-size="14" font-weight="bold" fill="#dc2626" text-anchor="middle">X</text>
+                <text x="610" y="186" font-family="sans-serif" font-size="14" font-weight="bold" fill="#dc2626" text-anchor="middle">X</text>
+                <text x="670" y="186" font-family="sans-serif" font-size="14" font-weight="bold" fill="#dc2626" text-anchor="middle">X</text>
+
+                <!-- Aktion A3: Alarm im SIEM loggen -->
+                <rect y="195" width="700" height="28" fill="#ffffff" />
+                <text x="12" y="214" font-family="sans-serif" font-size="11" fill="#475569">A3: Security-Alarm loggen</text>
+                <text x="250" y="214" font-family="sans-serif" font-size="12" fill="#94a3b8" text-anchor="middle">-</text>
+                <text x="310" y="214" font-family="sans-serif" font-size="12" fill="#94a3b8" text-anchor="middle">-</text>
+                <text x="370" y="214" font-family="sans-serif" font-size="14" font-weight="bold" fill="#d97706" text-anchor="middle">X</text>
+                <text x="430" y="214" font-family="sans-serif" font-size="14" font-weight="bold" fill="#d97706" text-anchor="middle">X</text>
+                <text x="490" y="214" font-family="sans-serif" font-size="12" fill="#94a3b8" text-anchor="middle">-</text>
+                <text x="550" y="214" font-family="sans-serif" font-size="12" fill="#94a3b8" text-anchor="middle">-</text>
+                <text x="610" y="214" font-family="sans-serif" font-size="14" font-weight="bold" fill="#d97706" text-anchor="middle">X</text>
+                <text x="670" y="214" font-family="sans-serif" font-size="14" font-weight="bold" fill="#d97706" text-anchor="middle">X</text>
+
+                <!-- Vertikale Trennstriche -->
+                <line x1="220" y1="0" x2="220" y2="230" stroke="#1e293b" stroke-width="2" />
+                <line x1="280" y1="0" x2="280" y2="230" stroke="#cbd5e1" stroke-width="1" />
+                <line x1="340" y1="0" x2="340" y2="230" stroke="#cbd5e1" stroke-width="1" />
+                <line x1="400" y1="0" x2="400" y2="230" stroke="#cbd5e1" stroke-width="1" />
+                <line x1="460" y1="0" x2="460" y2="230" stroke="#cbd5e1" stroke-width="1" />
+                <line x1="520" y1="0" x2="520" y2="230" stroke="#cbd5e1" stroke-width="1" />
+                <line x1="580" y1="0" x2="580" y2="230" stroke="#cbd5e1" stroke-width="1" />
+                <line x1="640" y1="0" x2="640" y2="230" stroke="#cbd5e1" stroke-width="1" />
+            </g>
+
+            <text x="370" y="315" font-family="sans-serif" font-size="11" font-weight="600" fill="#475569" text-anchor="middle">Formel für Vollständigkeit: Anzahl Regeln = 2^(Anzahl Bedingungen) = 2^3 = 8 Spalten</text>
         </svg>
         `;
     },
