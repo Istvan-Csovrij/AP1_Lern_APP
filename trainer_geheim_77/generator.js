@@ -1,5 +1,5 @@
 // AP1 Dynamischer Aufgabengenerator (Vollständige Abdeckung aller 6 Lernfelder, der höheren Lernfelder bis LF 18 sowie englischer Fachaufgaben)
-// Erzeugt über 1.250 zufällige Prüfungsaufgaben aus allen relevanten Bereichen
+// Erzeugt über 1.250 zufällige Fachaufgaben aus allen relevanten Bereichen
 // Integriert eine 50%-Regelung für offene Baden-Württemberg-Aufgaben (open-text)
 
 var VisualDiagrams = (typeof window !== "undefined" && window.VisualDiagrams) ? window.VisualDiagrams : ((typeof VisualDiagrams !== "undefined") ? VisualDiagrams : {});
@@ -37,13 +37,13 @@ function generateDynamicQuestions(typeMode = "mix") {
             let qText = "";
             let mLoesung = "";
             if (qType === 0) {
-                qText = `Prüfungsaufgabe Wirtschaftlichkeit (LF 6): Ein Unternehmen möchte für seine Mitarbeiter ${count} neue Monitore beschaffen. Angebot A kostet ${priceA} EUR pro Stück. Berechne die Gesamtkosten für Angebot A.`;
+                qText = `Fachaufgabe Wirtschaftlichkeit (LF 6): Ein Unternehmen möchte für seine Mitarbeiter ${count} neue Monitore beschaffen. Angebot A kostet ${priceA} EUR pro Stück. Berechne die Gesamtkosten für Angebot A.`;
                 mLoesung = `Rechnung Angebot A:\n- Formel: Gesamtkosten = Bestellmenge * Stückpreis\n- Rechnung: ${count} Stück * ${priceA} € = ${totalA.toLocaleString('de-DE')} €\n- Ergebnis: Die Gesamtkosten für Angebot A betragen ${totalA.toLocaleString('de-DE')} €.`;
             } else if (qType === 1) {
-                qText = `Prüfungsaufgabe Wirtschaftlichkeit (LF 6): Ein Unternehmen möchte für seine Mitarbeiter ${count} neue Monitore beschaffen. Angebot B kostet ${priceB} EUR pro Stück. Berechne die Gesamtkosten für Angebot B.`;
+                qText = `Fachaufgabe Wirtschaftlichkeit (LF 6): Ein Unternehmen möchte für seine Mitarbeiter ${count} neue Monitore beschaffen. Angebot B kostet ${priceB} EUR pro Stück. Berechne die Gesamtkosten für Angebot B.`;
                 mLoesung = `Rechnung Angebot B:\n- Formel: Gesamtkosten = Bestellmenge * Stückpreis\n- Rechnung: ${count} Stück * ${priceB} € = ${totalB.toLocaleString('de-DE')} €\n- Ergebnis: Die Gesamtkosten für Angebot B betragen ${totalB.toLocaleString('de-DE')} €.`;
             } else {
-                qText = `Prüfungsaufgabe Wirtschaftlichkeit (LF 6): Für die Anschaffung von ${count} neuen Monitoren liegen drei Angebote vor:\nAngebot A: ${priceA} EUR/Stück\nAngebot B: ${priceB} EUR/Stück\nAngebot C: ${priceC} EUR/Stück\n\nWelches Angebot hat die niedrigsten Gesamtanschaffungskosten und warum? Zeige den vollständigen rechnerischen Vergleich.`;
+                qText = `Fachaufgabe Wirtschaftlichkeit (LF 6): Für die Anschaffung von ${count} neuen Monitoren liegen drei Angebote vor:\nAngebot A: ${priceA} EUR/Stück\nAngebot B: ${priceB} EUR/Stück\nAngebot C: ${priceC} EUR/Stück\n\nWelches Angebot hat die niedrigsten Gesamtanschaffungskosten und warum? Zeige den vollständigen rechnerischen Vergleich.`;
                 mLoesung = `Musterlösung Angebotsvergleich (${count} Monitore):\n\n1. Rechnerischer Vergleich aller Angebote:\n- Angebot A: ${count} Stück * ${priceA} € = ${totalA.toLocaleString('de-DE')} €\n- Angebot B: ${count} Stück * ${priceB} € = ${totalB.toLocaleString('de-DE')} €\n- Angebot C: ${count} Stück * ${priceC} € = ${totalC.toLocaleString('de-DE')} €\n\n2. Wirtschaftlichkeits-Entscheidung:\nAngebot C weist mit ${totalC.toLocaleString('de-DE')} € die geringsten Gesamtkosten auf (Ersparnis von ${(totalA - totalC).toLocaleString('de-DE')} € gegenüber Angebot A und ${(totalB - totalC).toLocaleString('de-DE')} € gegenüber Angebot B).`;
             }
 
@@ -62,7 +62,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                     id: currentId++,
                     theme: "lf6",
                     type: "text-input",
-                    question: `Prüfungsaufgabe Wirtschaftlichkeit (LF 6): Ein Unternehmen möchte für seine Mitarbeiter ${count} neue Monitore beschaffen.\nAngebot A kostet ${priceA} EUR pro Stück.\nBerechne die Gesamtkosten für Angebot A in EUR. (Gib nur die Zahl ein)`,
+                    question: `Fachaufgabe Wirtschaftlichkeit (LF 6): Ein Unternehmen möchte für seine Mitarbeiter ${count} neue Monitore beschaffen.\nAngebot A kostet ${priceA} EUR pro Stück.\nBerechne die Gesamtkosten für Angebot A in EUR. (Gib nur die Zahl ein)`,
                     correctAnswers: [totalA.toString()],
                     explanation: `Rechnung: ${count} Stück * ${priceA} EUR/Stück = ${totalA} EUR.`
                 });
@@ -71,7 +71,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                     id: currentId++,
                     theme: "lf6",
                     type: "text-input",
-                    question: `Prüfungsaufgabe Wirtschaftlichkeit (LF 6): Ein Unternehmen möchte für seine Mitarbeiter ${count} neue Monitore beschaffen.\nAngebot B (mit erweitertem Support) kostet ${priceB} EUR pro Stück.\nBerechne die Gesamtkosten für Angebot B in EUR. (Gib nur die Zahl ein)`,
+                    question: `Fachaufgabe Wirtschaftlichkeit (LF 6): Ein Unternehmen möchte für seine Mitarbeiter ${count} neue Monitore beschaffen.\nAngebot B (mit erweitertem Support) kostet ${priceB} EUR pro Stück.\nBerechne die Gesamtkosten für Angebot B in EUR. (Gib nur die Zahl ein)`,
                     correctAnswers: [totalB.toString()],
                     explanation: `Rechnung: ${count} Stück * ${priceB} EUR/Stück = ${totalB} EUR.`
                 });
@@ -80,7 +80,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                     id: currentId++,
                     theme: "lf6",
                     type: "multiple-choice",
-                    question: `Prüfungsaufgabe Wirtschaftlichkeit (LF 6): Für die Anschaffung von ${count} neuen Monitoren liegen drei Angebote vor:\nAngebot A: ${priceA} EUR/Stück (2 Jahre Garantie)\nAngebot B: ${priceB} EUR/Stück (5 Jahre Garantie)\nAngebot C: ${priceC} EUR/Stück (ohne DisplayPort-Kabel)\n\nWelches Angebot hat die niedrigsten Gesamtanschaffungskosten?`,
+                    question: `Fachaufgabe Wirtschaftlichkeit (LF 6): Für die Anschaffung von ${count} neuen Monitoren liegen drei Angebote vor:\nAngebot A: ${priceA} EUR/Stück (2 Jahre Garantie)\nAngebot B: ${priceB} EUR/Stück (5 Jahre Garantie)\nAngebot C: ${priceC} EUR/Stück (ohne DisplayPort-Kabel)\n\nWelches Angebot hat die niedrigsten Gesamtanschaffungskosten?`,
                     options: [
                         `Angebot A (Gesamt: ${totalA} EUR)`,
                         `Angebot B (Gesamt: ${totalB} EUR)`,
@@ -138,7 +138,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                     id: currentId++,
                     theme: "lf2",
                     type: "open-text",
-                    question: `Prüfungsaufgabe Hardware (LF 2): Ein Server soll mit einem RAID-${raid}-Verbund aus ${diskCount} Festplatten mit jeweils ${diskSize} TB Kapazität konfiguriert werden. Berechne die nutzbare Nettokapazität des Verbunds in TB und erkläre kurz deinen Rechenweg.`,
+                    question: `Fachaufgabe Hardware (LF 2): Ein Server soll mit einem RAID-${raid}-Verbund aus ${diskCount} Festplatten mit jeweils ${diskSize} TB Kapazität konfiguriert werden. Berechne die nutzbare Nettokapazität des Verbunds in TB und erkläre kurz deinen Rechenweg.`,
                     musterloesung: `Nettokapazität: ${netCapacity} TB. Rechenweg: ${explanation}`,
                     explanation: explanation
                 });
@@ -147,7 +147,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                     id: currentId++,
                     theme: "lf2",
                     type: "text-input",
-                    question: `Prüfungsaufgabe Hardware (LF 2): Ein Server soll mit einem RAID-${raid}-Verbund aus ${diskCount} Festplatten mit jeweils ${diskSize} TB Kapazität konfiguriert werden.\nWie hoch ist die nutzbare Nettokapazität des Verbunds in TB? (Gib nur die Zahl ein)`,
+                    question: `Fachaufgabe Hardware (LF 2): Ein Server soll mit einem RAID-${raid}-Verbund aus ${diskCount} Festplatten mit jeweils ${diskSize} TB Kapazität konfiguriert werden.\nWie hoch ist die nutzbare Nettokapazität des Verbunds in TB? (Gib nur die Zahl ein)`,
                     correctAnswers: [netCapacity.toString()],
                     explanation: explanation
                 });
@@ -172,7 +172,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                 id: currentId++,
                 theme: "lf2",
                 type: "open-text",
-                question: `Prüfungsaufgabe Hardware & OS (LF 2): Nenne die Windows 11 Edition, die primär für folgende Zielgruppe ausgelegt ist:\n"${targetEdition.target}".`,
+                question: `Fachaufgabe Hardware & OS (LF 2): Nenne die Windows 11 Edition, die primär für folgende Zielgruppe ausgelegt ist:\n"${targetEdition.target}".`,
                 musterloesung: targetEdition.name,
                 explanation: `Die Microsoft Windows 11 Editionen sind nach Zielgruppen gestaffelt. Für "${targetEdition.target}" ist ${targetEdition.name} die empfohlene Version.`
             });
@@ -181,7 +181,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                 id: currentId++,
                 theme: "lf2",
                 type: "multiple-choice",
-                question: `Prüfungsaufgabe Hardware & OS (LF 2): Welche Windows 11 Edition ist primär für folgende Zielgruppe ausgelegt: "${targetEdition.target}"?`,
+                question: `Fachaufgabe Hardware & OS (LF 2): Welche Windows 11 Edition ist primär für folgende Zielgruppe ausgelegt: "${targetEdition.target}"?`,
                 options: [targetEdition.name, ...wrongEditions],
                 correctAnswer: 0,
                 explanation: `Die Microsoft Windows 11 Editionen sind nach Zielgruppen gestaffelt. Für "${targetEdition.target}" ist ${targetEdition.name} die empfohlene Version.`
@@ -244,16 +244,16 @@ function generateDynamicQuestions(typeMode = "mix") {
             let qText = "";
             let mLoesung = "";
             if (qType === 0) {
-                qText = `Prüfungsaufgabe Netzwerk (LF 3): Gegeben ist die IP-Adresse ${baseIP} mit der Subnetzmaske ${m.maskStr} (/${m.slash}). Bestimme die Netzwerkadresse (Network ID).`;
+                qText = `Fachaufgabe Netzwerk (LF 3): Gegeben ist die IP-Adresse ${baseIP} mit der Subnetzmaske ${m.maskStr} (/${m.slash}). Bestimme die Netzwerkadresse (Network ID).`;
                 mLoesung = `Netzwerkadresse: ${netID}`;
             } else if (qType === 1) {
-                qText = `Prüfungsaufgabe Netzwerk (LF 3): Gegeben ist die IP-Adresse ${baseIP} mit der Subnetzmaske ${m.maskStr} (/${m.slash}). Bestimme die Broadcast-Adresse.`;
+                qText = `Fachaufgabe Netzwerk (LF 3): Gegeben ist die IP-Adresse ${baseIP} mit der Subnetzmaske ${m.maskStr} (/${m.slash}). Bestimme die Broadcast-Adresse.`;
                 mLoesung = `Broadcast-Adresse: ${broadcast}`;
             } else if (qType === 2) {
-                qText = `Prüfungsaufgabe Netzwerk (LF 3): Berechne die Anzahl der nutzbaren Host-IP-Adressen für ein Subnetz mit der Subnetzmaske ${m.maskStr} (/${m.slash}).`;
+                qText = `Fachaufgabe Netzwerk (LF 3): Berechne die Anzahl der nutzbaren Host-IP-Adressen für ein Subnetz mit der Subnetzmaske ${m.maskStr} (/${m.slash}).`;
                 mLoesung = `${hostsCount} Hosts.`;
             } else {
-                qText = `Prüfungsaufgabe Netzwerk (LF 3): Gegeben ist die IP-Adresse ${baseIP} mit der Subnetzmaske ${m.maskStr} (/${m.slash}). Bestimme den ersten und den letzten nutzbaren Hostbereich.`;
+                qText = `Fachaufgabe Netzwerk (LF 3): Gegeben ist die IP-Adresse ${baseIP} mit der Subnetzmaske ${m.maskStr} (/${m.slash}). Bestimme den ersten und den letzten nutzbaren Hostbereich.`;
                 mLoesung = `Erster Host: ${hostMin}, Letzter Host: ${hostMax}`;
             }
 
@@ -272,7 +272,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                     id: currentId++,
                     theme: "lf3",
                     type: "text-input",
-                    question: `Prüfungsaufgabe Netzwerk (LF 3): Gegeben ist die IP-Adresse ${baseIP} mit der Subnetzmaske ${m.maskStr} (/${m.slash}).\nBestimme die Netzwerkadresse (Network ID).`,
+                    question: `Fachaufgabe Netzwerk (LF 3): Gegeben ist die IP-Adresse ${baseIP} mit der Subnetzmaske ${m.maskStr} (/${m.slash}).\nBestimme die Netzwerkadresse (Network ID).`,
                     correctAnswers: [netID],
                     explanation: explanationStr
                 });
@@ -281,7 +281,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                     id: currentId++,
                     theme: "lf3",
                     type: "text-input",
-                    question: `Prüfungsaufgabe Netzwerk (LF 3): Gegeben ist die IP-Adresse ${baseIP} mit der Subnetzmaske ${m.maskStr} (/${m.slash}).\nBestimme die Broadcast-Adresse.`,
+                    question: `Fachaufgabe Netzwerk (LF 3): Gegeben ist die IP-Adresse ${baseIP} mit der Subnetzmaske ${m.maskStr} (/${m.slash}).\nBestimme die Broadcast-Adresse.`,
                     correctAnswers: [broadcast],
                     explanation: explanationStr
                 });
@@ -290,7 +290,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                     id: currentId++,
                     theme: "lf3",
                     type: "text-input",
-                    question: `Prüfungsaufgabe Netzwerk (LF 3): Wie viele nutzbare Host-IP-Adressen können in einem Subnetz mit der Subnetzmaske ${m.maskStr} (/${m.slash}) adressiert werden?`,
+                    question: `Fachaufgabe Netzwerk (LF 3): Wie viele nutzbare Host-IP-Adressen können in einem Subnetz mit der Subnetzmaske ${m.maskStr} (/${m.slash}) adressiert werden?`,
                     correctAnswers: [hostsCount.toString()],
                     explanation: explanationStr
                 });
@@ -299,7 +299,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                     id: currentId++,
                     theme: "lf3",
                     type: "multiple-choice",
-                    question: `Prüfungsaufgabe Netzwerk (LF 3): Welcher Host-Bereich ist für das Subnetz der IP-Adresse ${baseIP} /${m.slash} gültig?`,
+                    question: `Fachaufgabe Netzwerk (LF 3): Welcher Host-Bereich ist für das Subnetz der IP-Adresse ${baseIP} /${m.slash} gültig?`,
                     options: [
                         `192.168.${ip3}.0 bis 192.168.${ip3}.255`,
                         `${hostMin} bis ${hostMax}`,
@@ -338,7 +338,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                 id: currentId++,
                 theme: "lf3",
                 type: "open-text",
-                question: `Prüfungsaufgabe Netzwerk (LF 3): Gegeben ist das Netzwerkprotokoll "${proto.name}".\n\nAufgabe:\n1. Nenne die Schicht-Nummer und den offiziellen Schicht-Namen des OSI-Referenzmodells.\n2. Nenne die zugehörige Protokolldateneinheit (PDU).\n3. Beschreibe kurz die Hauptaufgabe des Protokolls.`,
+                question: `Fachaufgabe Netzwerk (LF 3): Gegeben ist das Netzwerkprotokoll "${proto.name}".\n\nAufgabe:\n1. Nenne die Schicht-Nummer und den offiziellen Schicht-Namen des OSI-Referenzmodells.\n2. Nenne die zugehörige Protokolldateneinheit (PDU).\n3. Beschreibe kurz die Hauptaufgabe des Protokolls.`,
                 musterloesung: `1. Schicht im OSI-Referenzmodell:\n   - Schicht ${proto.layer}: ${proto.layerName}\n\n2. Protokolldateneinheit (PDU):\n   - ${proto.pdu}\n\n3. Funktion & Hauptaufgabe von ${proto.name}:\n   - ${proto.task}`,
                 explanation: `Das Protokoll "${proto.name}" ist der Schicht ${proto.layer} (${proto.layerName}) des OSI-Referenzmodells zugeordnet.`
             });
@@ -347,7 +347,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                 id: currentId++,
                 theme: "lf3",
                 type: "multiple-choice",
-                question: `Prüfungsaufgabe Netzwerk (LF 3): Auf welcher Schicht des OSI-Referenzmodells arbeitet das Netzwerkprotokoll "${proto.name}"?`,
+                question: `Fachaufgabe Netzwerk (LF 3): Auf welcher Schicht des OSI-Referenzmodells arbeitet das Netzwerkprotokoll "${proto.name}"?`,
                 options: [
                     `Schicht ${proto.layer}: ${proto.layerName}`,
                     `${wrongLayers[0]}`,
@@ -407,7 +407,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                 id: currentId++,
                 theme: "lf4",
                 type: "open-text",
-                question: `Prüfungsaufgabe IT-Sicherheit (LF 4): Gegeben ist folgende Schadsoftware-Charakteristik:\n"${mw.desc}"\n\nAufgabe:\n1. Benennen Sie die exakte Malware-Kategorie.\n2. Beschreiben Sie kurz die Funktions- und Ausbreitungsweise.\n3. Nennen Sie zwei wirksame Abwehrmaßnahmen nach BSI IT-Grundschutz.`,
+                question: `Fachaufgabe IT-Sicherheit (LF 4): Gegeben ist folgende Schadsoftware-Charakteristik:\n"${mw.desc}"\n\nAufgabe:\n1. Benennen Sie die exakte Malware-Kategorie.\n2. Beschreiben Sie kurz die Funktions- und Ausbreitungsweise.\n3. Nennen Sie zwei wirksame Abwehrmaßnahmen nach BSI IT-Grundschutz.`,
                 musterloesung: `1. Malware-Kategorie:\n   ${mw.name}\n\n2. Funktions- & Ausbreitungsweise:\n   - ${mw.mechanism}\n\n3. Empfohlene Schutzmaßnahmen (BSI IT-Grundschutz):\n   - ${mw.defense}`,
                 explanation: `Der Beschreibung nach handelt es sich eindeutig um einen "${mw.name}".`
             });
@@ -416,7 +416,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                 id: currentId++,
                 theme: "lf4",
                 type: "multiple-choice",
-                question: `Prüfungsaufgabe IT-Sicherheit (LF 4): Welche Art von Malware entspricht der folgenden Beschreibung:\n"${mw.desc}"?`,
+                question: `Fachaufgabe IT-Sicherheit (LF 4): Welche Art von Malware entspricht der folgenden Beschreibung:\n"${mw.desc}"?`,
                 options: [mw.name, wrongMW[0], wrongMW[1], wrongMW[2]],
                 correctAnswer: 0,
                 explanation: `Der Beschreibung nach handelt es sich eindeutig um einen "${mw.name}".`
@@ -455,7 +455,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                 id: currentId++,
                 theme: "lf4",
                 type: "open-text",
-                question: `Prüfungsaufgabe IT-Sicherheit (LF 4): Gegeben ist folgende Definition eines IT-Schutzziels:\n"${goal.desc}"\n\nAufgabe:\n1. Benenne das Schutzziel aus der CIA-Triade (nach ISO/IEC 27001).\n2. Nenne zwei technische Schutzmaßnahmen zur Gewährleistung.\n3. Nenne eine typische Bedrohung, die dieses Schutzziel gefährdet.`,
+                question: `Fachaufgabe IT-Sicherheit (LF 4): Gegeben ist folgende Definition eines IT-Schutzziels:\n"${goal.desc}"\n\nAufgabe:\n1. Benenne das Schutzziel aus der CIA-Triade (nach ISO/IEC 27001).\n2. Nenne zwei technische Schutzmaßnahmen zur Gewährleistung.\n3. Nenne eine typische Bedrohung, die dieses Schutzziel gefährdet.`,
                 musterloesung: `1. Identifiziertes Schutzziel (CIA-Triade):\n   ${goal.name}\n\n2. Technische Schutzmaßnahmen:\n   - ${goal.measures}\n\n3. Relevante Bedrohungen:\n   - ${goal.threats}`,
                 explanation: `Das beschriebene Schutzziel ist die "${goal.name}".`
             });
@@ -464,7 +464,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                 id: currentId++,
                 theme: "lf4",
                 type: "multiple-choice",
-                question: `Prüfungsaufgabe IT-Sicherheit (LF 4): Welches IT-Sicherheitsziel (CIA-Triade) wird primär durch folgende Definition beschrieben:\n"${goal.desc}"?`,
+                question: `Fachaufgabe IT-Sicherheit (LF 4): Welches IT-Sicherheitsziel (CIA-Triade) wird primär durch folgende Definition beschrieben:\n"${goal.desc}"?`,
                 options: [goal.name, wrongGoals[0], wrongGoals[1]],
                 correctAnswer: 0,
                 explanation: `Das beschriebene Schutzziel ist die "${goal.name}".`
@@ -504,7 +504,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                 isPseudocode: true,
                 topic: "💻 Pseudocode LESEN: Schleifen-Tracing (LF 5)",
                 type: "open-text",
-                question: `Prüfungsaufgabe Algorithmen (LF 5 - Pseudocode Tracing): Bestimme den Endwert der Variable 'erg' am Ende dieses Pseudocode-Ablaufs und notiere deine Berechnungsschritte.`,
+                question: `Fachaufgabe Algorithmen (LF 5 - Pseudocode Tracing): Bestimme den Endwert der Variable 'erg' am Ende dieses Pseudocode-Ablaufs und notiere deine Berechnungsschritte.`,
                 code: pCode,
                 musterloesung: `Ergebnis: ${erg}.\nBerechnungsschritte:\n${explanationStr}`,
                 explanation: explanationStr
@@ -516,7 +516,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                 isPseudocode: true,
                 topic: "💻 Pseudocode LESEN: Schleifen-Tracing (LF 5)",
                 type: "text-input",
-                question: `Prüfungsaufgabe Algorithmen (LF 5 - Pseudocode Tracing): Welchen Wert hat die Variable 'erg' am Ende dieses Pseudocode-Ablaufs?`,
+                question: `Fachaufgabe Algorithmen (LF 5 - Pseudocode Tracing): Welchen Wert hat die Variable 'erg' am Ende dieses Pseudocode-Ablaufs?`,
                 code: pCode,
                 correctAnswers: [erg.toString()],
                 explanation: explanationStr
@@ -543,7 +543,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                 id: currentId++,
                 theme: "lf5",
                 type: "open-text",
-                question: `Prüfungsaufgabe Web-Entwicklung (LF 17): ${item.q}`,
+                question: `Fachaufgabe Web-Entwicklung (LF 17): ${item.q}`,
                 musterloesung: `Richtige Antwort: ${item.options[item.answer]}\n\nErklärung / Hintergrund: ${item.exp}`,
                 explanation: item.exp
             });
@@ -552,7 +552,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                 id: currentId++,
                 theme: "lf5",
                 type: "multiple-choice",
-                question: `Prüfungsaufgabe Web-Entwicklung (LF 17): ${item.q}`,
+                question: `Fachaufgabe Web-Entwicklung (LF 17): ${item.q}`,
                 options: item.options,
                 correctAnswer: item.answer,
                 explanation: item.exp
@@ -593,7 +593,7 @@ function generateDynamicQuestions(typeMode = "mix") {
         const scenario = sqlScenarios[Math.floor(Math.random() * sqlScenarios.length)];
         const isOpen = shouldBeOpenText();
         
-        const qText = `Prüfungsaufgabe SQL (LF 5 / LF 18):\n${scenario.tableDesc}\n\nAufgabe:\n${scenario.task}`;
+        const qText = `Fachaufgabe SQL (LF 5 / LF 18):\n${scenario.tableDesc}\n\nAufgabe:\n${scenario.task}`;
         
         if (isOpen) {
             dynamicQuestions.push({
@@ -663,7 +663,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                 id: currentId++,
                 theme: "lf5",
                 type: "open-text",
-                question: `Prüfungsaufgabe ER-Modellierung (LF 18 / LF 5):\n${scenario.q}\n\nAufgabe:\n1. Bestimme die Kardinalität (1:1, 1:n oder n:m).\n2. Begründe die Entscheidung nach den Regeln des relationalen Datenbankentwurfs.`,
+                question: `Fachaufgabe ER-Modellierung (LF 18 / LF 5):\n${scenario.q}\n\nAufgabe:\n1. Bestimme die Kardinalität (1:1, 1:n oder n:m).\n2. Begründe die Entscheidung nach den Regeln des relationalen Datenbankentwurfs.`,
                 musterloesung: `1. Ermittelte Kardinalität:\n   ${scenario.options[scenario.answer]}\n\n2. Fachliche Begründung (IHK-Datenbanktheorie):\n   - ${scenario.exp}`,
                 explanation: scenario.exp
             });
@@ -672,7 +672,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                 id: currentId++,
                 theme: "lf5",
                 type: "multiple-choice",
-                question: `Prüfungsaufgabe ER-Modellierung (LF 18 / LF 5):\n${scenario.q}`,
+                question: `Fachaufgabe ER-Modellierung (LF 18 / LF 5):\n${scenario.q}`,
                 options: scenario.options,
                 correctAnswer: scenario.answer,
                 explanation: scenario.exp
@@ -698,7 +698,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                 id: currentId++,
                 theme: "lf5",
                 type: "open-text",
-                question: `Prüfungsaufgabe Datenbank-Design (LF 18 / LF 5):\n${item.q}\n\nBenenne den Fachbegriff und erläutere kurz seine Bedeutung für die Datenkonsistenz.`,
+                question: `Fachaufgabe Datenbank-Design (LF 18 / LF 5):\n${item.q}\n\nBenenne den Fachbegriff und erläutere kurz seine Bedeutung für die Datenkonsistenz.`,
                 musterloesung: `1. Fachbegriff / Antwort:\n   ${item.options[item.answer]}\n\n2. Fachliche Begründung & Relevanz für relationale Datenbanken:\n   - ${item.exp}`,
                 explanation: item.exp
             });
@@ -707,7 +707,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                 id: currentId++,
                 theme: "lf5",
                 type: "multiple-choice",
-                question: `Prüfungsaufgabe Datenbank-Design (LF 18): ${item.q}`,
+                question: `Fachaufgabe Datenbank-Design (LF 18): ${item.q}`,
                 options: item.options,
                 correctAnswer: item.answer,
                 explanation: item.exp
@@ -733,7 +733,7 @@ function generateDynamicQuestions(typeMode = "mix") {
         
         if (qType === 0) {
             // Dezimal zu Binär
-            questionText = `Prüfungsaufgabe Zahlensysteme (LF 3): Rechne die Dezimalzahl ${num} in eine 8-Bit-Binärzahl um.`;
+            questionText = `Fachaufgabe Zahlensysteme (LF 3): Rechne die Dezimalzahl ${num} in eine 8-Bit-Binärzahl um.`;
             correctAnswersList = [binStr];
             mLoesung = binStr;
             
@@ -751,7 +751,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                 `Ergebnis: ${binStr}`;
         } else if (qType === 1) {
             // Binär zu Dezimal
-            questionText = `Prüfungsaufgabe Zahlensysteme (LF 3): Rechne die Binärzahl ${binStr} in eine Dezimalzahl um.`;
+            questionText = `Fachaufgabe Zahlensysteme (LF 3): Rechne die Binärzahl ${binStr} in eine Dezimalzahl um.`;
             correctAnswersList = [num.toString()];
             mLoesung = num.toString();
             
@@ -774,7 +774,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                 `   ${activeStellen.join(" + ")} = ${num}`;
         } else if (qType === 2) {
             // Dezimal zu Hexadezimal
-            questionText = `Prüfungsaufgabe Zahlensysteme (LF 3): Rechne die Dezimalzahl ${num} in eine Hexadezimalzahl um.`;
+            questionText = `Fachaufgabe Zahlensysteme (LF 3): Rechne die Dezimalzahl ${num} in eine Hexadezimalzahl um.`;
             correctAnswersList = [hexStr, "0x" + hexStr];
             mLoesung = hexStr;
             
@@ -797,7 +797,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                 `Ergebnis: ${hexStr}`;
         } else if (qType === 3) {
             // Hexadezimal zu Dezimal
-            questionText = `Prüfungsaufgabe Zahlensysteme (LF 3): Rechne die Hexadezimalzahl ${hexStr} in eine Dezimalzahl um.`;
+            questionText = `Fachaufgabe Zahlensysteme (LF 3): Rechne die Hexadezimalzahl ${hexStr} in eine Dezimalzahl um.`;
             correctAnswersList = [num.toString()];
             mLoesung = num.toString();
             
@@ -824,7 +824,7 @@ function generateDynamicQuestions(typeMode = "mix") {
             }
         } else if (qType === 4) {
             // Binär zu Hexadezimal
-            questionText = `Prüfungsaufgabe Zahlensysteme (LF 3): Rechne die Binärzahl ${binStr} in eine Hexadezimalzahl um.`;
+            questionText = `Fachaufgabe Zahlensysteme (LF 3): Rechne die Binärzahl ${binStr} in eine Hexadezimalzahl um.`;
             correctAnswersList = [hexStr, "0x" + hexStr];
             mLoesung = hexStr;
             
@@ -846,7 +846,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                 `   Ergebnis: ${hexStr}`;
         } else {
             // Hexadezimal zu Binär
-            questionText = `Prüfungsaufgabe Zahlensysteme (LF 3): Rechne die Hexadezimalzahl ${hexStr} in eine 8-Bit-Binärzahl um.`;
+            questionText = `Fachaufgabe Zahlensysteme (LF 3): Rechne die Hexadezimalzahl ${hexStr} in eine 8-Bit-Binärzahl um.`;
             correctAnswersList = [binStr];
             mLoesung = binStr;
             
@@ -901,7 +901,7 @@ function generateDynamicQuestions(typeMode = "mix") {
         const totalCosts = Math.round((kwh * priceEur) * 100) / 100; // Gerundet auf 2 Dezimalstellen
         
         const isOpen = shouldBeOpenText();
-        const qText = `Prüfungsaufgabe Energieeffizienz (LF 2): Ein Server hat eine durchschnittliche Leistungsaufnahme von ${powerWatts} Watt und läuft rund um die Uhr (24/7) für insgesamt ${days} Tage. Der Strompreis beträgt ${centPerKwh} Cent pro Kilowattstunde (kWh).\nBerechne die gesamten Stromkosten für diesen Zeitraum in EUR.`;
+        const qText = `Fachaufgabe Energieeffizienz (LF 2): Ein Server hat eine durchschnittliche Leistungsaufnahme von ${powerWatts} Watt und läuft rund um die Uhr (24/7) für insgesamt ${days} Tage. Der Strompreis beträgt ${centPerKwh} Cent pro Kilowattstunde (kWh).\nBerechne die gesamten Stromkosten für diesen Zeitraum in EUR.`;
         const explanationStr = `Herleitung:\n` +
             `1. Gesamtbetriebsstunden = 24 Std/Tag * ${days} Tage = ${24 * days} Stunden.\n` +
             `2. Energieverbrauch in Wh = ${powerWatts} Watt * ${24 * days} Std = ${powerWatts * 24 * days} Wh.\n` +
@@ -941,7 +941,7 @@ function generateDynamicQuestions(typeMode = "mix") {
         const totalGB = Math.round((totalBytes / 1000000000) * 100) / 100; // SI-Definition: 1 GB = 10^9 Bytes
         
         const isOpen = shouldBeOpenText();
-        const qText = `Prüfungsaufgabe Speicherplatz (LF 2): Eine IP-Überwachungskamera zeichnet Videodaten mit einer kontinuierlichen Bitrate von ${mbits} Mbit/s auf. Die Aufnahme läuft durchgehend für ${hours} Stunden.\nBerechne den benötigten Speicherplatz in Gigabyte (GB) unter der Annahme, dass 1 GB = 1.000.000.000 Bytes (Dezimalpräfix) entspricht.`;
+        const qText = `Fachaufgabe Speicherplatz (LF 2): Eine IP-Überwachungskamera zeichnet Videodaten mit einer kontinuierlichen Bitrate von ${mbits} Mbit/s auf. Die Aufnahme läuft durchgehend für ${hours} Stunden.\nBerechne den benötigten Speicherplatz in Gigabyte (GB) unter der Annahme, dass 1 GB = 1.000.000.000 Bytes (Dezimalpräfix) entspricht.`;
         const explanationStr = `Herleitung:\n` +
             `1. Datenmenge pro Sekunde = ${mbits} Mbit = ${mbits * 1000000} Bits.\n` +
             `2. Gesamtsekunden = ${hours} Stunden * 3600 Sek = ${hours * 3600} Sekunden.\n` +
@@ -984,7 +984,7 @@ function generateDynamicQuestions(typeMode = "mix") {
         const seconds = Math.round((totalBitsWithOverhead / speedBits) * 10) / 10; // Gerundet auf 1 Dezimalstelle
         
         const isOpen = shouldBeOpenText();
-        const qText = `Prüfungsaufgabe Netzwerk (LF 3): Eine Backup-Datei mit der Größe von ${fileGb} GB soll über ein Netzwerk mit einer Bruttobandbreite von ${speedMbit} Mbit/s übertragen werden. Durch die Protokolle entsteht ein Overhead von ${overheadPercent} %.\nBerechne die Übertragungszeit in Sekunden (1 GB = 10^9 Bytes, 1 Mbit = 10^6 Bits).`;
+        const qText = `Fachaufgabe Netzwerk (LF 3): Eine Backup-Datei mit der Größe von ${fileGb} GB soll über ein Netzwerk mit einer Bruttobandbreite von ${speedMbit} Mbit/s übertragen werden. Durch die Protokolle entsteht ein Overhead von ${overheadPercent} %.\nBerechne die Übertragungszeit in Sekunden (1 GB = 10^9 Bytes, 1 Mbit = 10^6 Bits).`;
         const explanationStr = `Herleitung:\n` +
             `1. Dateigröße in Bits = ${fileGb} * 10^9 Bytes * 8 Bits/Byte = ${fileBits} Bits.\n` +
             `2. Dateigröße inkl. ${overheadPercent}% Overhead = ${fileBits} * ${(1 + overheadPercent/100)} = ${totalBitsWithOverhead} Bits.\n` +
@@ -1074,7 +1074,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                 id: currentId++,
                 theme: "lf6",
                 type: "open-text",
-                question: `Prüfungsaufgabe Englisch (Comprehension - LF 6):\n\nFachtext:\n"${item.text}"\n\nFrage dazu:\n${item.q}`,
+                question: `Fachaufgabe Englisch (Comprehension - LF 6):\n\nFachtext:\n"${item.text}"\n\nFrage dazu:\n${item.q}`,
                 musterloesung: `1. Richtige Antwort (Kernaussage):\n   ${item.options[item.answer]}\n\n2. Fachtext-Analyse & Begründung (mit deutscher Übersetzung):\n   - ${item.exp}`,
                 explanation: item.exp
             });
@@ -1083,7 +1083,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                 id: currentId++,
                 theme: "lf6",
                 type: "multiple-choice",
-                question: `Prüfungsaufgabe Englisch (Comprehension - LF 6):\n\nFachtext:\n"${item.text}"\n\nFrage dazu:\n${item.q}`,
+                question: `Fachaufgabe Englisch (Comprehension - LF 6):\n\nFachtext:\n"${item.text}"\n\nFrage dazu:\n${item.q}`,
                 options: item.options,
                 correctAnswer: item.answer,
                 explanation: item.exp
@@ -1149,7 +1149,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                 theme: "lf1",
                 isBawueFocus: true,
                 type: "multiple-choice",
-                question: `Prüfungsaufgabe Vertragsrecht (LF 1 / WiSo):\n\nSachverhalt:\n"${item.desc}"\n\nUm welchen Vertragstyp handelt es sich hierbei?`,
+                question: `Fachaufgabe Vertragsrecht (LF 1 / WiSo):\n\nSachverhalt:\n"${item.desc}"\n\nUm welchen Vertragstyp handelt es sich hierbei?`,
                 options: shuffledOptions,
                 correctAnswer: correctIdx,
                 explanation: item.reason
@@ -1210,7 +1210,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                 theme: "lf1",
                 isBawueFocus: true,
                 type: "open-text",
-                question: `Prüfungsaufgabe Rechtskunde / BWL (IHK BaWü):\nBeurteilen und begründen Sie die folgende Aussage rechtlich/fachlich fundiert:\n"${tf.q.replace(/^Wahr oder Falsch:\s*/, '')}"`,
+                question: `Fachaufgabe Rechtskunde / BWL (BaWü Schwerpunkt):\nBeurteilen und begründen Sie die folgende Aussage rechtlich/fachlich fundiert:\n"${tf.q.replace(/^Wahr oder Falsch:\s*/, '')}"`,
                 musterloesung: `Bewertung: ${tf.isTrue ? 'Die Aussage ist WAHR / ZUTREFFEND.' : 'Die Aussage ist FALSCH / UNZUTREFFEND.'}\nBegründung: ${tf.exp}`,
                 explanation: tf.exp
             });
@@ -1266,7 +1266,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                     isBawueFocus: true,
                     diagramType: "ERD & Tabellenschema",
                     type: "open-text",
-                    question: `Prüfungsaufgabe ERD & Tabellenschema: Im Datenmodell eines IT-Systems besteht zwischen **${item.entA}** und **${item.entB}** die Beziehung **'${item.rel}'** (${item.card}).\n\nIn welcher Tabelle muss der Fremdschlüssel (Foreign Key) angelegt werden und wie lautet die datenbanktheoretische Begründung?`,
+                    question: `Fachaufgabe ERD & Tabellenschema: Im Datenmodell eines IT-Systems besteht zwischen **${item.entA}** und **${item.entB}** die Beziehung **'${item.rel}'** (${item.card}).\n\nIn welcher Tabelle muss der Fremdschlüssel (Foreign Key) angelegt werden und wie lautet die datenbanktheoretische Begründung?`,
                     solutionDiagramSvg: erdVisualSvg,
                     solutionDiagramCaption: `Relationales Tabellenschema mit Fremdschlüssel für: ${item.entA} ➔ ${item.entB} (${item.card})`,
                     musterloesung: `Fremdschlüssel-Platzierung: In der Tabelle '${item.fkTable}'.\n\nBegründung: ${item.reason}`,
@@ -1284,7 +1284,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                     diagramTitle: `Datenmodell: ${item.entA} & ${item.entB}`,
                     diagramCaption: `ERD & Relationales Datenbankschema (${item.card})`,
                     type: "multiple-choice",
-                    question: `Prüfungsaufgabe ERD & Relationenmodell: Gegeben ist die Beziehung '${item.entA}' ${item.rel} '${item.entB}' mit Kardinalität ${item.card}. Wo muss der Fremdschlüssel im Tabellenschema platziert werden?`,
+                    question: `Fachaufgabe ERD & Relationenmodell: Gegeben ist die Beziehung '${item.entA}' ${item.rel} '${item.entB}' mit Kardinalität ${item.card}. Wo muss der Fremdschlüssel im Tabellenschema platziert werden?`,
                     options: [
                         `In der Tabelle '${item.fkTable}' (${item.fkField})`,
                         `Ausschließlich in der Tabelle '${item.entA}'`,
@@ -1306,7 +1306,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                     isBawueFocus: true,
                     diagramType: "ERD",
                     type: "open-text",
-                    question: `Prüfungsaufgabe ERD-Modellierung: Bestimme die logische Kardinalität (1:1, 1:n oder n:m) für folgende Fachanforderung:\n"${item.entA} ${item.rel} ${item.entB}".\n\nBegründe deine Entscheidung aus Sicht des Datenbankentwurfs.`,
+                    question: `Fachaufgabe ERD-Modellierung: Bestimme die logische Kardinalität (1:1, 1:n oder n:m) für folgende Fachanforderung:\n"${item.entA} ${item.rel} ${item.entB}".\n\nBegründe deine Entscheidung aus Sicht des Datenbankentwurfs.`,
                     solutionDiagramSvg: erdVisualSvg,
                     solutionDiagramCaption: `Visuelles ER-Datenmodell: ${item.entA} ➔ ${item.entB} (${item.card})`,
                     musterloesung: `Kardinalität: ${item.card}\n\nBegründung: ${item.reason}`,
@@ -1325,7 +1325,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                     diagramSvg: erdVisualSvg,
                     diagramTitle: `Datenmodell: ${item.entA} & ${item.entB}`,
                     type: "multiple-choice",
-                    question: `Prüfungsaufgabe ERD: Welche Kardinalität beschreibt die Beziehung zwischen '${item.entA}' und '${item.entB}' (${item.reason})?`,
+                    question: `Fachaufgabe ERD: Welche Kardinalität beschreibt die Beziehung zwischen '${item.entA}' und '${item.entB}' (${item.reason})?`,
                     options: [
                         `${item.card} (Erklärung: ${item.reason})`,
                         item.card === "1:n" ? "n:m (Zwischentabelle)" : "1:n (Fremdschlüssel)",
@@ -1390,7 +1390,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                 solutionDiagramSvg: VisualDiagrams.getDynamic4NodeNetzplanSvg(dA, dB, dC, dD, fezD, criticalBranch),
                 solutionDiagramCaption: `Visuelle Musterlösung: DIN 69900 Netzplan (${fezD} Tage, Kritischer Pfad: ${criticalBranch})`,
                 code: `Vorgänge:\n- Vorgang A (Start): Dauer = ${dA} Tage\n- Vorgang B (Vorgänger A): Dauer = ${dB} Tage\n- Vorgang C (Vorgänger A): Dauer = ${dC} Tage\n- Vorgang D (Vorgänger B und C): Dauer = ${dD} Tage (Projektende)`,
-                question: `Prüfungsaufgabe Netzplantechnik: Gegeben ist ein IT-Projekt mit den 4 oben aufgeführten Vorgängen.\n\nAufgabe:\n1. Berechne den Frühesten Anfangs- und Endzeitpunkt (FAZ, FEZ) für alle Vorgänge.\n2. Berechne die Gesamtdauer des Projekts.\n3. Bestimme den Gesamtpuffer (GP) für Vorgang B und Vorgang C.\n4. Welcher Pfad bildet den Kritischen Pfad?`,
+                question: `Fachaufgabe Netzplantechnik: Gegeben ist ein IT-Projekt mit den 4 oben aufgeführten Vorgängen.\n\nAufgabe:\n1. Berechne den Frühesten Anfangs- und Endzeitpunkt (FAZ, FEZ) für alle Vorgänge.\n2. Berechne die Gesamtdauer des Projekts.\n3. Bestimme den Gesamtpuffer (GP) für Vorgang B und Vorgang C.\n4. Welcher Pfad bildet den Kritischen Pfad?`,
                 musterloesung: `1. Vorwärtsrechnung:\n- Vorgang A: FAZ = ${fazA}, FEZ = ${fezA}\n- Vorgang B: FAZ = ${fazB}, FEZ = ${fezB}\n- Vorgang C: FAZ = ${fazC}, FEZ = ${fezC}\n- Vorgang D: FAZ = max(${fezB}, ${fezC}) = ${fazD}, FEZ = ${fezD}\n\n2. Gesamtlaufzeit des Projekts: ${fezD} Tage.\n\n3. Gesamtpuffer (GP):\n- Vorgang B: GP = SAZ - FAZ = ${sazB} - ${fazB} = ${gpB} Tag(e)\n- Vorgang C: GP = SAZ - FAZ = ${sazC} - ${fazC} = ${gpC} Tag(e)\n\n4. Kritischer Pfad: ${criticalBranch} (Gesamtpuffer = 0).`,
                 explanation: `Vorwärtsrechnung ermittelt das Maximum der Vorgänger-FEZs. Der Pfad mit Gesamtpuffer = 0 ist der kritische Pfad.`
             });
@@ -1406,7 +1406,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                 solutionDiagramCaption: `Visuelle Musterlösung: DIN 69900 Netzplan (${fezD} Tage, Kritischer Pfad: ${criticalBranch})`,
                 type: "multiple-choice",
                 code: `Vorgänge:\n- A: Dauer = ${dA} Tage (Start)\n- B: Dauer = ${dB} Tage (nach A)\n- C: Dauer = ${dC} Tage (nach A)\n- D: Dauer = ${dD} Tage (nach B und C)`,
-                question: `Prüfungsaufgabe Netzplantechnik: Wie lange dauert das gesamte Projekt und welcher Pfad ist der Kritische Pfad?`,
+                question: `Fachaufgabe Netzplantechnik: Wie lange dauert das gesamte Projekt und welcher Pfad ist der Kritische Pfad?`,
                 options: [
                     `Gesamtdauer = ${fezD} Tage | Kritischer Pfad = ${criticalBranch}`,
                     `Gesamtdauer = ${dA + dB + dC + dD} Tage (einfache Summe aller Vorgänge)`,
@@ -1481,7 +1481,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                 type: "open-text",
                 solutionDiagramSvg: item.svg,
                 solutionDiagramCaption: `Grafische Musterlösung: ${item.title}`,
-                question: `Prüfungsaufgabe Modellierung (IHK BaWü - ${item.title}):\n${item.q}\n\nNennen und begründen Sie das passende Modellierungselement bzw. die Beziehung im Diagramm.`,
+                question: `Fachaufgabe Modellierung (BaWü Schwerpunkt - ${item.title}):\n${item.q}\n\nNennen und begründen Sie das passende Modellierungselement bzw. die Beziehung im Diagramm.`,
                 musterloesung: `Fachliche Lösung:\n- Modellierungselement / Beziehung: ${item.optA}\n- Begründung / Regel: ${item.exp}`,
                 explanation: item.exp
             });
@@ -1496,7 +1496,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                 type: "multiple-choice",
                 solutionDiagramSvg: item.svg,
                 solutionDiagramCaption: `Grafische Musterlösung: ${item.title}`,
-                question: `Prüfungsaufgabe Modellierung: ${item.q}`,
+                question: `Fachaufgabe Modellierung: ${item.q}`,
                 options: [
                     item.optA,
                     item.optB,
@@ -1535,7 +1535,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                 isCalculation: true,
                 isBawueFocus: true,
                 type: "open-text",
-                question: `Prüfungsaufgabe Energiekosten (LF 2 / WiSo): Ein Server hat eine durchschnittliche Leistungsaufnahme von ${watt} W im 24/7-Dauerbetrieb (365 Tage/Jahr).\nDer Strompreis beträgt ${pricePerKwh.toFixed(2)} € pro kWh.\n\nBerechne:\na) Den jährlichen Energieverbrauch in kWh.\nb) Die jährlichen Stromkosten in Euro.`,
+                question: `Fachaufgabe Energiekosten (LF 2 / WiSo): Ein Server hat eine durchschnittliche Leistungsaufnahme von ${watt} W im 24/7-Dauerbetrieb (365 Tage/Jahr).\nDer Strompreis beträgt ${pricePerKwh.toFixed(2)} € pro kWh.\n\nBerechne:\na) Den jährlichen Energieverbrauch in kWh.\nb) Die jährlichen Stromkosten in Euro.`,
                 musterloesung: `a) Jährlicher Energieverbrauch:\n- Formel: E = P * t = (${watt} W / 1.000 kW/W) * 24 h/Tag * 365 Tage = ${(watt/1000).toFixed(3)} kW * 8.760 h = ${kwhPerYear.toFixed(2)} kWh.\n\nb) Jährliche Stromkosten:\n- Kosten = ${kwhPerYear.toFixed(2)} kWh * ${pricePerKwh.toFixed(2)} €/kWh = ${costRounded} € pro Jahr.`,
                 explanation: `Energie E = P * t. Immer von Watt in Kilowatt umrechnen (durch 1.000 teilen) und mit 8.760 Jahresstunden multiplizieren.`
             });
@@ -1548,7 +1548,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                 isCalculation: true,
                 isBawueFocus: true,
                 type: "multiple-choice",
-                question: `Prüfungsaufgabe Energiekosten: Ein Switch verbraucht dauerhaft ${watt} W (24/7, 365 Tage/Jahr). Strompreis: ${pricePerKwh.toFixed(2)} €/kWh. Wie hoch sind die jährlichen Stromkosten?`,
+                question: `Fachaufgabe Energiekosten: Ein Switch verbraucht dauerhaft ${watt} W (24/7, 365 Tage/Jahr). Strompreis: ${pricePerKwh.toFixed(2)} €/kWh. Wie hoch sind die jährlichen Stromkosten?`,
                 options: [
                     `${costRounded} € pro Jahr`,
                     `${(costPerYear * 1.19).toFixed(2)} € pro Jahr`,
@@ -1584,7 +1584,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                 isCalculation: true,
                 isBawueFocus: true,
                 type: "open-text",
-                question: `Prüfungsaufgabe Handelskalkulation: Ein IT-Händler beschafft Server-Hardware:\n- Listeneinkaufspreis (LEP): ${lep.toFixed(2)} €\n- Lieferantenrabatt: ${rabattProzent} %\n- Lieferantenskonto: ${skontoProzent} %\n- Bezugskosten (Fracht/Verpackung): ${bezugskosten.toFixed(2)} €\n\nBerechne schrittweise den Bezugspreis (Einstandspreis).`,
+                question: `Fachaufgabe Handelskalkulation: Ein IT-Händler beschafft Server-Hardware:\n- Listeneinkaufspreis (LEP): ${lep.toFixed(2)} €\n- Lieferantenrabatt: ${rabattProzent} %\n- Lieferantenskonto: ${skontoProzent} %\n- Bezugskosten (Fracht/Verpackung): ${bezugskosten.toFixed(2)} €\n\nBerechne schrittweise den Bezugspreis (Einstandspreis).`,
                 musterloesung: `Kalkulationsschritte:\n  Listeneinkaufspreis (LEP): ${lep.toFixed(2)} €\n- Lieferantenrabatt (${rabattProzent} %): -${rabattBetrag.toFixed(2)} €\n= Zieleinkaufspreis (ZEP): ${zep.toFixed(2)} €\n- Lieferantenskonto (${skontoProzent} % von ${zep.toFixed(2)} €): -${skontoBetrag.toFixed(2)} €\n= Bareinkaufspreis (BEP): ${bep.toFixed(2)} €\n+ Bezugskosten: +${bezugskosten.toFixed(2)} €\n= Bezugspreis (Einstandspreis): ${einstandspreis.toFixed(2)} €.`,
                 explanation: `Reihenfolge: LEP - Rabatt = ZEP. ZEP - Skonto = BEP. BEP + Bezugskosten = Einstandspreis.`
             });
@@ -1596,7 +1596,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                 isCalculation: true,
                 isBawueFocus: true,
                 type: "multiple-choice",
-                question: `Prüfungsaufgabe Handelskalkulation: LEP = ${lep.toFixed(2)} €, Rabatt = ${rabattProzent} %, Skonto = ${skontoProzent} %, Bezugskosten = ${bezugskosten.toFixed(2)} €. Wie hoch ist der Bezugspreis (Einstandspreis)?`,
+                question: `Fachaufgabe Handelskalkulation: LEP = ${lep.toFixed(2)} €, Rabatt = ${rabattProzent} %, Skonto = ${skontoProzent} %, Bezugskosten = ${bezugskosten.toFixed(2)} €. Wie hoch ist der Bezugspreis (Einstandspreis)?`,
                 options: [
                     `${einstandspreis.toFixed(2)} €`,
                     `${(bep).toFixed(2)} € (ohne Bezugskosten)`,
@@ -1629,7 +1629,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                     isCalculation: true,
                     isBawueFocus: true,
                     type: "open-text",
-                    question: `Prüfungsaufgabe Zahlensysteme: Wandle die Dezimalzahl **${decVal}** in das Binärsystem (Dualzahl) und das Hexadezimalsystem um.`,
+                    question: `Fachaufgabe Zahlensysteme: Wandle die Dezimalzahl **${decVal}** in das Binärsystem (Dualzahl) und das Hexadezimalsystem um.`,
                     musterloesung: `Dezimalzahl: ${decVal}\n- Binär: ${binVal} (2)\n- Hexadezimal: ${hexVal} (16)\n- Oktal: ${octVal} (8)`,
                     explanation: `Binär durch fortlaufende Division durch 2 oder Summe von 2er-Potenzen. Hexadezimal durch 4-Bit-Nibbles.`
                 });
@@ -1641,7 +1641,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                     isCalculation: true,
                     isBawueFocus: true,
                     type: "multiple-choice",
-                    question: `Prüfungsaufgabe Zahlensysteme: Welcher Hexadezimalwert entspricht der Dezimalzahl ${decVal}?`,
+                    question: `Fachaufgabe Zahlensysteme: Welcher Hexadezimalwert entspricht der Dezimalzahl ${decVal}?`,
                     options: [
                         `${hexVal} (16) [Binär: ${binVal}]`,
                         `${(decVal + 1).toString(16).toUpperCase()} (16)`,
@@ -1662,7 +1662,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                     isCalculation: true,
                     isBawueFocus: true,
                     type: "open-text",
-                    question: `Prüfungsaufgabe Zahlensysteme: Wandle den Hexadezimalwert **${hexVal}** (Basis 16) mit vollständigem Rechenweg in eine Dezimalzahl um.`,
+                    question: `Fachaufgabe Zahlensysteme: Wandle den Hexadezimalwert **${hexVal}** (Basis 16) mit vollständigem Rechenweg in eine Dezimalzahl um.`,
                     musterloesung: `Rechenweg für Hexadezimal ${hexVal} (16):\n- Dezimalwert = ${decVal}\n- Dualzahl = ${binVal} (2)`,
                     explanation: `Hexadezimal ${hexVal} = ${decVal} im Dezimalsystem (Binär: ${binVal}).`
                 });
@@ -1674,7 +1674,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                     isCalculation: true,
                     isBawueFocus: true,
                     type: "multiple-choice",
-                    question: `Prüfungsaufgabe Zahlensysteme: Wandle den Hexadezimalwert ${hexVal} (16) in eine Dezimalzahl um.`,
+                    question: `Fachaufgabe Zahlensysteme: Wandle den Hexadezimalwert ${hexVal} (16) in eine Dezimalzahl um.`,
                     options: [
                         `${decVal}`,
                         `${decVal + 16}`,
@@ -1695,7 +1695,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                     isCalculation: true,
                     isBawueFocus: true,
                     type: "open-text",
-                    question: `Prüfungsaufgabe Zahlensysteme: Wandle die Binärzahl **${binVal}** (Basis 2) in das Hexadezimalsystem um (Nibble-Verfahren).`,
+                    question: `Fachaufgabe Zahlensysteme: Wandle die Binärzahl **${binVal}** (Basis 2) in das Hexadezimalsystem um (Nibble-Verfahren).`,
                     musterloesung: `Nibble-Gruppierung von ${binVal} (2):\n- Hexadezimalwert = ${hexVal} (16)\n- Dezimalwert = ${decVal}`,
                     explanation: `Binärzahl in 4er-Blöcke (Nibbles) aufteilen und in Hex-Ziffern umwandeln: ${binVal} (2) = ${hexVal} (16).`
                 });
@@ -1707,7 +1707,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                     isCalculation: true,
                     isBawueFocus: true,
                     type: "multiple-choice",
-                    question: `Prüfungsaufgabe Zahlensysteme: Wandle die Binärzahl ${binVal} (2) in das Hexadezimalsystem um.`,
+                    question: `Fachaufgabe Zahlensysteme: Wandle die Binärzahl ${binVal} (2) in das Hexadezimalsystem um.`,
                     options: [
                         `${hexVal} (16)`,
                         `${(decVal + 2).toString(16).toUpperCase()} (16)`,
@@ -1739,7 +1739,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                 isCalculation: true,
                 isBawueFocus: true,
                 type: "open-text",
-                question: `Prüfungsaufgabe Übertragungszeit: Ein Software-Update mit ${fileSizeGB} GB Dateigröße soll über eine Internetleitung mit ${speedMbit} Mbit/s heruntergeladen werden.\n\nBerechne die Übertragungszeit in Sekunden und Minuten (ohne Protokoll-Overhead).`,
+                question: `Fachaufgabe Übertragungszeit: Ein Software-Update mit ${fileSizeGB} GB Dateigröße soll über eine Internetleitung mit ${speedMbit} Mbit/s heruntergeladen werden.\n\nBerechne die Übertragungszeit in Sekunden und Minuten (ohne Protokoll-Overhead).`,
                 musterloesung: `Rechnung:\n1. Datenmenge in Megabit: ${fileSizeGB} GB * 8 Gbit/GB * 1.000 Mbit/Gbit = ${totalMbit} Mbit.\n2. Zeit in Sekunden: ${totalMbit} Mbit / ${speedMbit} Mbit/s = ${totalSeconds.toFixed(0)} Sekunden.\n3. Zeit in Minuten: ${totalSeconds.toFixed(0)} s / 60 s/min = ${minutes} Minuten.`,
                 explanation: `Immer Datenmenge in Bit umrechnen (Faktor 8) und Einheiten (Mbit/s vs GB) anpassen.`
             });
@@ -1751,7 +1751,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                 isCalculation: true,
                 isBawueFocus: true,
                 type: "multiple-choice",
-                question: `Prüfungsaufgabe Übertragungszeit: Dateigröße = ${fileSizeGB} GB, Bandbreite = ${speedMbit} Mbit/s. Wie lange dauert der Download rein rechnerisch?`,
+                question: `Fachaufgabe Übertragungszeit: Dateigröße = ${fileSizeGB} GB, Bandbreite = ${speedMbit} Mbit/s. Wie lange dauert der Download rein rechnerisch?`,
                 options: [
                     `${totalSeconds.toFixed(0)} Sekunden (${minutes} Minuten)`,
                     `${(totalSeconds * 8).toFixed(0)} Sekunden`,
@@ -1787,7 +1787,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                 isCalculation: true,
                 isBawueFocus: true,
                 type: "open-text",
-                question: `Prüfungsaufgabe Finanzierung: Eine Rechnung über ${rechnungBetrag.toFixed(2)} € bietet ${skontoPct} % Skonto bei Zahlung innerhalb von ${skontoTage} Tagen (oder 30 Tage netto).\nZur Skontonutzung wird ein Kontokorrentkredit für ${diffTage} Tage zu ${kreditZinsPct} % p.a. aufgenommen.\n\nBerechnen Sie:\n1. Die Skontoersparnis in €\n2. Die Kreditzinsen für ${diffTage} Tage in €\n3. Den finanziellen Reingewinn / Vorteil der Skontoausnutzung in €`,
+                question: `Fachaufgabe Finanzierung: Eine Rechnung über ${rechnungBetrag.toFixed(2)} € bietet ${skontoPct} % Skonto bei Zahlung innerhalb von ${skontoTage} Tagen (oder 30 Tage netto).\nZur Skontonutzung wird ein Kontokorrentkredit für ${diffTage} Tage zu ${kreditZinsPct} % p.a. aufgenommen.\n\nBerechnen Sie:\n1. Die Skontoersparnis in €\n2. Die Kreditzinsen für ${diffTage} Tage in €\n3. Den finanziellen Reingewinn / Vorteil der Skontoausnutzung in €`,
                 musterloesung: `Lösungsschritte:\n1. Skontoersparnis: ${rechnungBetrag.toFixed(2)} € * ${skontoPct} % = ${skontoErsparnis.toFixed(2)} €\n2. Überweisungsbetrag: ${rechnungBetrag.toFixed(2)} € - ${skontoErsparnis.toFixed(2)} € = ${ueberweisung.toFixed(2)} €\n3. Kreditzinsen für ${diffTage} Tage: (${ueberweisung.toFixed(2)} € * ${kreditZinsPct} * ${diffTage}) / 36.000 = ${kreditzinsen.toFixed(2)} €\n4. Finanzieller Vorteil (Reingewinn): ${skontoErsparnis.toFixed(2)} € - ${kreditzinsen.toFixed(2)} € = ${reingewinn.toFixed(2)} €`,
                 explanation: `Skontoersparnis = ${skontoErsparnis.toFixed(2)} €. Kreditzinsen = ${kreditzinsen.toFixed(2)} €. Vorteil = ${reingewinn.toFixed(2)} €.`
             });
@@ -1799,7 +1799,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                 isCalculation: true,
                 isBawueFocus: true,
                 type: "multiple-choice",
-                question: `Prüfungsaufgabe Finanzierung: Eine Rechnung über ${rechnungBetrag.toFixed(2)} € bietet ${skontoPct} % Skonto bei Zahlung innerhalb von ${skontoTage} Tagen (oder 30 Tage netto). Zur Skontonutzung wird ein Kontokorrentkredit für ${diffTage} Tage zu ${kreditZinsPct} % p.a. aufgenommen. Wie hoch ist der finanzielle Vorteil (Reingewinn)?`,
+                question: `Fachaufgabe Finanzierung: Eine Rechnung über ${rechnungBetrag.toFixed(2)} € bietet ${skontoPct} % Skonto bei Zahlung innerhalb von ${skontoTage} Tagen (oder 30 Tage netto). Zur Skontonutzung wird ein Kontokorrentkredit für ${diffTage} Tage zu ${kreditZinsPct} % p.a. aufgenommen. Wie hoch ist der finanzielle Vorteil (Reingewinn)?`,
                 options: [
                     `${reingewinn.toFixed(2)} € Ersparnis (Skonto ${skontoErsparnis.toFixed(2)} € minus ${kreditzinsen.toFixed(2)} € Zinsen)`,
                     `${skontoErsparnis.toFixed(2)} €`,
@@ -1828,7 +1828,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                 isCalculation: true,
                 isBawueFocus: true,
                 type: "open-text",
-                question: `Prüfungsaufgabe Wirtschaftlichkeit: Ein IT-Projekt verursacht einmalige Anschaffungskosten von ${invest.toFixed(2)} € und führt zu jährlichen Betriebskosteneinsparungen in Höhe von ${einsparungJahr.toFixed(2)} €.\n\nBerechnen Sie die statische Amortisationszeit in Jahren und Monaten (mit Formel und Rechenweg).`,
+                question: `Fachaufgabe Wirtschaftlichkeit: Ein IT-Projekt verursacht einmalige Anschaffungskosten von ${invest.toFixed(2)} € und führt zu jährlichen Betriebskosteneinsparungen in Höhe von ${einsparungJahr.toFixed(2)} €.\n\nBerechnen Sie die statische Amortisationszeit in Jahren und Monaten (mit Formel und Rechenweg).`,
                 musterloesung: `Rechenweg statische Amortisation:\n- Formel: Amortisationszeit = Anschaffungskosten / jährliche Einsparung\n- Rechnung: ${invest.toFixed(2)} € / ${einsparungJahr.toFixed(2)} €/Jahr = ${amortJahre} Jahre\n- In Monaten: ${amortJahre} * 12 = ${amortMonate} Monate\n- Ergebnis: ${amortJahre} Jahre (ca. ${amortMonate} Monate)`,
                 explanation: `Amortisationszeit = Anschaffungskosten / jährliche Einsparung = ${invest} € / ${einsparungJahr} € = ${amortJahre} Jahre.`
             });
@@ -1840,7 +1840,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                 isCalculation: true,
                 isBawueFocus: true,
                 type: "multiple-choice",
-                question: `Prüfungsaufgabe Wirtschaftlichkeit: Ein IT-Projekt kostet einmalig ${invest.toFixed(2)} € und spart pro Jahr ${einsparungJahr.toFixed(2)} € an Betriebskosten. Nach welcher Amortisationszeit hat sich die Investition bezahlt gemacht?`,
+                question: `Fachaufgabe Wirtschaftlichkeit: Ein IT-Projekt kostet einmalig ${invest.toFixed(2)} € und spart pro Jahr ${einsparungJahr.toFixed(2)} € an Betriebskosten. Nach welcher Amortisationszeit hat sich die Investition bezahlt gemacht?`,
                 options: [
                     `${amortJahre} Jahre (ca. ${amortMonate} Monate)`,
                     `${(invest / 12).toFixed(0)} Monate`,
@@ -1889,7 +1889,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                     isCalculation: true,
                     isBawueFocus: true,
                     type: "open-text",
-                    question: `Prüfungsaufgabe Handelskalkulation (IHK BaWü):\nEin Server kostet laut Katalog (Listeneinkaufspreis LEP) ${lep.toFixed(2)} €. Der Lieferant gewährt ${rabattPct} % Lieferantenrabatt.\n\nBerechnen Sie den Zieleinkaufspreis (ZEP) mit Rechenweg.`,
+                    question: `Fachaufgabe Handelskalkulation (BaWü Schwerpunkt):\nEin Server kostet laut Katalog (Listeneinkaufspreis LEP) ${lep.toFixed(2)} €. Der Lieferant gewährt ${rabattPct} % Lieferantenrabatt.\n\nBerechnen Sie den Zieleinkaufspreis (ZEP) mit Rechenweg.`,
                     musterloesung: `Rechenweg:\n- Listeneinkaufspreis (LEP): ${lep.toFixed(2)} €\n- Lieferantenrabatt (${rabattPct} %): - ${rabattBetrag.toFixed(2)} €\n= Zieleinkaufspreis (ZEP): ${zep.toFixed(2)} €`,
                     explanation: `ZEP = LEP (${lep.toFixed(2)} €) - ${rabattPct} % Rabatt (${rabattBetrag.toFixed(2)} €) = ${zep.toFixed(2)} €.`
                 });
@@ -1901,7 +1901,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                     isCalculation: true,
                     isBawueFocus: true,
                     type: "multiple-choice",
-                    question: `Prüfungsaufgabe Handelskalkulation: Ein Server kostet laut Katalog (Listeneinkaufspreis LEP) ${lep.toFixed(2)} €. Der Lieferant gewährt ${rabattPct} % Lieferantenrabatt. Wie hoch ist der Zieleinkaufspreis (ZEP)?`,
+                    question: `Fachaufgabe Handelskalkulation: Ein Server kostet laut Katalog (Listeneinkaufspreis LEP) ${lep.toFixed(2)} €. Der Lieferant gewährt ${rabattPct} % Lieferantenrabatt. Wie hoch ist der Zieleinkaufspreis (ZEP)?`,
                     options: [
                         `${zep.toFixed(2)} € (Rabattabzug: ${rabattBetrag.toFixed(2)} €)`,
                         `${(lep + rabattBetrag).toFixed(2)} €`,
@@ -1922,7 +1922,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                     isCalculation: true,
                     isBawueFocus: true,
                     type: "open-text",
-                    question: `Prüfungsaufgabe Handelskalkulation (IHK BaWü):\nDer Zieleinkaufspreis (ZEP) beträgt ${zep.toFixed(2)} €. Bei Zahlung innerhalb von 10 Tagen werden ${skontoPct} % Lieferantenskonto abgezogen.\n\nBerechnen Sie den Bareinkaufspreis (BEP) mit Rechenweg.`,
+                    question: `Fachaufgabe Handelskalkulation (BaWü Schwerpunkt):\nDer Zieleinkaufspreis (ZEP) beträgt ${zep.toFixed(2)} €. Bei Zahlung innerhalb von 10 Tagen werden ${skontoPct} % Lieferantenskonto abgezogen.\n\nBerechnen Sie den Bareinkaufspreis (BEP) mit Rechenweg.`,
                     musterloesung: `Rechenweg:\n- Zieleinkaufspreis (ZEP): ${zep.toFixed(2)} €\n- Lieferantenskonto (${skontoPct} %): - ${skontoBetrag.toFixed(2)} €\n= Bareinkaufspreis (BEP): ${bep.toFixed(2)} €`,
                     explanation: `BEP = ZEP (${zep.toFixed(2)} €) - ${skontoPct} % Skonto (${skontoBetrag.toFixed(2)} €) = ${bep.toFixed(2)} €.`
                 });
@@ -1934,7 +1934,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                     isCalculation: true,
                     isBawueFocus: true,
                     type: "multiple-choice",
-                    question: `Prüfungsaufgabe Handelskalkulation: Der Zieleinkaufspreis (ZEP) beträgt ${zep.toFixed(2)} €. Bei Zahlung innerhalb von 10 Tagen werden ${skontoPct} % Lieferantenskonto abgezogen. Wie hoch ist der Bareinkaufspreis (BEP)?`,
+                    question: `Fachaufgabe Handelskalkulation: Der Zieleinkaufspreis (ZEP) beträgt ${zep.toFixed(2)} €. Bei Zahlung innerhalb von 10 Tagen werden ${skontoPct} % Lieferantenskonto abgezogen. Wie hoch ist der Bareinkaufspreis (BEP)?`,
                     options: [
                         `${bep.toFixed(2)} € (Skontoersparnis: ${skontoBetrag.toFixed(2)} €)`,
                         `${(zep + skontoBetrag).toFixed(2)} €`,
@@ -1955,7 +1955,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                     isCalculation: true,
                     isBawueFocus: true,
                     type: "open-text",
-                    question: `Prüfungsaufgabe Handelskalkulation (IHK BaWü):\nDie Selbstkosten für ein IT-Produkt betragen ${selbstkosten.toFixed(2)} €. Das Systemhaus kalkuliert einen Gewinnzuschlag von ${gewinnPct} %.\n\nBerechnen Sie den Barverkaufspreis (BVP) mit Rechenweg.`,
+                    question: `Fachaufgabe Handelskalkulation (BaWü Schwerpunkt):\nDie Selbstkosten für ein IT-Produkt betragen ${selbstkosten.toFixed(2)} €. Das Systemhaus kalkuliert einen Gewinnzuschlag von ${gewinnPct} %.\n\nBerechnen Sie den Barverkaufspreis (BVP) mit Rechenweg.`,
                     musterloesung: `Rechenweg:\n- Selbstkosten: ${selbstkosten.toFixed(2)} €\n- Gewinnzuschlag (${gewinnPct} %): + ${gewinnBetrag.toFixed(2)} €\n= Barverkaufspreis (BVP): ${bvp.toFixed(2)} €`,
                     explanation: `BVP = Selbstkosten (${selbstkosten.toFixed(2)} €) + ${gewinnPct} % Gewinn (${gewinnBetrag.toFixed(2)} €) = ${bvp.toFixed(2)} €.`
                 });
@@ -1967,7 +1967,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                     isCalculation: true,
                     isBawueFocus: true,
                     type: "multiple-choice",
-                    question: `Prüfungsaufgabe Handelskalkulation: Die Selbstkosten für ein IT-Produkt betragen ${selbstkosten.toFixed(2)} €. Das Systemhaus kalkuliert einen Gewinnzuschlag von ${gewinnPct} %. Wie hoch ist der Barverkaufspreis (BVP)?`,
+                    question: `Fachaufgabe Handelskalkulation: Die Selbstkosten für ein IT-Produkt betragen ${selbstkosten.toFixed(2)} €. Das Systemhaus kalkuliert einen Gewinnzuschlag von ${gewinnPct} %. Wie hoch ist der Barverkaufspreis (BVP)?`,
                     options: [
                         `${bvp.toFixed(2)} € (Gewinn: ${gewinnBetrag.toFixed(2)} €)`,
                         `${(selbstkosten - gewinnBetrag).toFixed(2)} €`,
@@ -1988,7 +1988,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                     isCalculation: true,
                     isBawueFocus: true,
                     type: "open-text",
-                    question: `Prüfungsaufgabe Handelskalkulation (IHK BaWü):\nDer Barverkaufspreis (BVP) beträgt ${bvp.toFixed(2)} €. Dem Kunden werden ${skontoPct} % Kundenskonto gewährt.\n\nBerechnen Sie den Zielverkaufspreis (ZVP) unter Beachtung der Kalkulation im Hundert (mit Formel und Rechenweg).`,
+                    question: `Fachaufgabe Handelskalkulation (BaWü Schwerpunkt):\nDer Barverkaufspreis (BVP) beträgt ${bvp.toFixed(2)} €. Dem Kunden werden ${skontoPct} % Kundenskonto gewährt.\n\nBerechnen Sie den Zielverkaufspreis (ZVP) unter Beachtung der Kalkulation im Hundert (mit Formel und Rechenweg).`,
                     musterloesung: `Rechenweg (Kalkulation im Hundert):\n- Formel: ZVP = BVP / (1 - Kundenskonto % / 100)\n- Rechnung: ${bvp.toFixed(2)} € / ${(1 - skontoPct/100).toFixed(2)} = ${zvp.toFixed(2)} €\n- Ergebnis: ${zvp.toFixed(2)} €\n(Probe: ${zvp.toFixed(2)} € - ${skontoPct} % Skonto = ${bvp.toFixed(2)} €)`,
                     explanation: `ZVP = BVP / (1 - ${skontoPct}/100) = ${bvp.toFixed(2)} € / ${(1 - skontoPct/100).toFixed(2)} = ${zvp.toFixed(2)} €.`
                 });
@@ -2000,7 +2000,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                     isCalculation: true,
                     isBawueFocus: true,
                     type: "multiple-choice",
-                    question: `Prüfungsaufgabe Handelskalkulation: Der Barverkaufspreis (BVP) beträgt ${bvp.toFixed(2)} €. Dem Kunden werden ${skontoPct} % Kundenskonto gewährt. Welcher Zielverkaufspreis (ZVP) muss kalkuliert werden (Kalkulation im Hundert)?`,
+                    question: `Fachaufgabe Handelskalkulation: Der Barverkaufspreis (BVP) beträgt ${bvp.toFixed(2)} €. Dem Kunden werden ${skontoPct} % Kundenskonto gewährt. Welcher Zielverkaufspreis (ZVP) muss kalkuliert werden (Kalkulation im Hundert)?`,
                     options: [
                         `${zvp.toFixed(2)} € (Berechnung: ${bvp.toFixed(2)} € / ${(1 - skontoPct/100).toFixed(2)})`,
                         `${(bvp * (1 + skontoPct/100)).toFixed(2)} € (Vom Hundert - fehlerhaft)`,
@@ -2021,7 +2021,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                     isCalculation: true,
                     isBawueFocus: true,
                     type: "open-text",
-                    question: `Prüfungsaufgabe Handelskalkulation (IHK BaWü):\nDer Netto-Listenverkaufspreis (LVP) einer Softwarelizenz beträgt ${lvpNetto.toFixed(2)} €.\n\nBerechnen Sie den Brutto-Verkaufspreis inklusive 19 % Umsatzsteuer (mit Rechenweg).`,
+                    question: `Fachaufgabe Handelskalkulation (BaWü Schwerpunkt):\nDer Netto-Listenverkaufspreis (LVP) einer Softwarelizenz beträgt ${lvpNetto.toFixed(2)} €.\n\nBerechnen Sie den Brutto-Verkaufspreis inklusive 19 % Umsatzsteuer (mit Rechenweg).`,
                     musterloesung: `Rechenweg:\n- Netto-LVP: ${lvpNetto.toFixed(2)} €\n- Umsatzsteuer (19 %): + ${(lvpNetto * 0.19).toFixed(2)} €\n= Brutto-Verkaufspreis: ${lvpBrutto.toFixed(2)} € (oder ${lvpNetto.toFixed(2)} € * 1,19 = ${lvpBrutto.toFixed(2)} €)`,
                     explanation: `LVP brutto = LVP netto (${lvpNetto.toFixed(2)} €) * 1,19 = ${lvpBrutto.toFixed(2)} €.`
                 });
@@ -2033,7 +2033,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                     isCalculation: true,
                     isBawueFocus: true,
                     type: "multiple-choice",
-                    question: `Prüfungsaufgabe Handelskalkulation: Der Netto-Listenverkaufspreis (LVP) einer Softwarelizenz beträgt ${lvpNetto.toFixed(2)} €. Wie hoch ist der Brutto-Verkaufspreis für den Endverbraucher inklusive 19 % Umsatzsteuer?`,
+                    question: `Fachaufgabe Handelskalkulation: Der Netto-Listenverkaufspreis (LVP) einer Softwarelizenz beträgt ${lvpNetto.toFixed(2)} €. Wie hoch ist der Brutto-Verkaufspreis für den Endverbraucher inklusive 19 % Umsatzsteuer?`,
                     options: [
                         `${lvpBrutto.toFixed(2)} € (USt-Betrag: ${(lvpNetto * 0.19).toFixed(2)} €)`,
                         `${(lvpNetto / 1.19).toFixed(2)} €`,
@@ -2065,7 +2065,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                 isCalculation: true,
                 isBawueFocus: true,
                 type: "open-text",
-                question: `Prüfungsaufgabe Zinsrechnung: Ein IT-Systemhaus nimmt zur Finanzierung eines Großauftrags ein Darlehen von ${kapital.toFixed(2)} € für genau ${tage} Tage auf.\nDer Zinssatz beträgt ${zinssatz} % p.a. (kaufmännische Zinsmethode: 360 Tage/Jahr).\n\nBerechne die anfallenden Zinsen in Euro.`,
+                question: `Fachaufgabe Zinsrechnung: Ein IT-Systemhaus nimmt zur Finanzierung eines Großauftrags ein Darlehen von ${kapital.toFixed(2)} € für genau ${tage} Tage auf.\nDer Zinssatz beträgt ${zinssatz} % p.a. (kaufmännische Zinsmethode: 360 Tage/Jahr).\n\nBerechne die anfallenden Zinsen in Euro.`,
                 musterloesung: `Kaufmännische Zinsformel:\n- Formel: Z = (K * p * t) / (100 * 360) = (K * p * t) / 36.000\n- Rechnung: Z = (${kapital.toFixed(2)} € * ${zinssatz} * ${tage}) / 36.000 = ${zinsenRounded} € an Kreditzinsen.`,
                 explanation: `Zinsformel für Tageszinsen: Z = (Kapital * Zinssatz * Tage) / 36.000.`
             });
@@ -2077,7 +2077,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                 isCalculation: true,
                 isBawueFocus: true,
                 type: "multiple-choice",
-                question: `Prüfungsaufgabe Zinsrechnung: Kapital = ${kapital.toFixed(2)} €, Zinssatz = ${zinssatz} % p.a., Laufzeit = ${tage} Tage. Wie hoch sind die Zinsen nach der kaufmännischen Zinsmethode (360 Tage)?`,
+                question: `Fachaufgabe Zinsrechnung: Kapital = ${kapital.toFixed(2)} €, Zinssatz = ${zinssatz} % p.a., Laufzeit = ${tage} Tage. Wie hoch sind die Zinsen nach der kaufmännischen Zinsmethode (360 Tage)?`,
                 options: [
                     `${zinsenRounded} €`,
                     `${(zinsen * 1.2).toFixed(2)} €`,
@@ -2117,7 +2117,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                     isCalculation: true,
                     isBawueFocus: true,
                     type: "open-text",
-                    question: `Prüfungsaufgabe Handelskalkulation: Ein IT-Händler bezieht einen Switch zum Einstandspreis (Bezugspreis) von ${bezugspreis.toFixed(2)} € und verkauft ihn für ${lvpNetto.toFixed(2)} € netto (Listenverkaufspreis).\n\nBerechne den Kalkulationszuschlag in Prozent. (Gib die Formel und den Rechenweg an)`,
+                    question: `Fachaufgabe Handelskalkulation: Ein IT-Händler bezieht einen Switch zum Einstandspreis (Bezugspreis) von ${bezugspreis.toFixed(2)} € und verkauft ihn für ${lvpNetto.toFixed(2)} € netto (Listenverkaufspreis).\n\nBerechne den Kalkulationszuschlag in Prozent. (Gib die Formel und den Rechenweg an)`,
                     musterloesung: `Kalkulationszuschlag:\n- Formel: [(Listenverkaufspreis - Bezugspreis) / Bezugspreis] * 100\n- Differenz (Rohgewinn/Zuschlag in €): ${lvpNetto.toFixed(2)} € - ${bezugspreis.toFixed(2)} € = ${differenz.toFixed(2)} €\n- Rechnung: (${differenz.toFixed(2)} € / ${bezugspreis.toFixed(2)} €) * 100 = ${kalkZuschlag.toFixed(2)} %\n- Ergebnis: ${kalkZuschlag.toFixed(2)} %`,
                     explanation: `Der Kalkulationszuschlag bezieht sich immer auf den Bezugs-/Einstandspreis (Basis = 100 %).`
                 });
@@ -2150,7 +2150,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                     isCalculation: true,
                     isBawueFocus: true,
                     type: "open-text",
-                    question: `Prüfungsaufgabe Handelskalkulation: Ein IT-Fachhändler kauft Festplatten zu einem Bezugspreis von ${bezugspreis.toFixed(2)} € ein und setzt den Netto-Listenverkaufspreis auf ${lvpNetto.toFixed(2)} € fest.\n\nBerechne die Handelsspanne in Prozent.`,
+                    question: `Fachaufgabe Handelskalkulation: Ein IT-Fachhändler kauft Festplatten zu einem Bezugspreis von ${bezugspreis.toFixed(2)} € ein und setzt den Netto-Listenverkaufspreis auf ${lvpNetto.toFixed(2)} € fest.\n\nBerechne die Handelsspanne in Prozent.`,
                     musterloesung: `Handelsspanne:\n- Formel: [(Listenverkaufspreis - Bezugspreis) / Listenverkaufspreis] * 100\n- Differenz: ${lvpNetto.toFixed(2)} € - ${bezugspreis.toFixed(2)} € = ${differenz.toFixed(2)} €\n- Rechnung: (${differenz.toFixed(2)} € / ${lvpNetto.toFixed(2)} €) * 100 = ${handelsspanne.toFixed(2)} %\n- Ergebnis: ${handelsspanne.toFixed(2)} %`,
                     explanation: `Die Handelsspanne drückt die Marge im Verhältnis zum Netto-Verkaufspreis aus (Basis LVP = 100 %).`
                 });
@@ -2183,7 +2183,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                     isCalculation: true,
                     isBawueFocus: true,
                     type: "open-text",
-                    question: `Prüfungsaufgabe Kalkulation (IHK BaWü):\nEin IT-Artikel hat einen Bezugspreis von ${bezugspreis.toFixed(2)} € und soll für ${lvpNetto.toFixed(2)} € netto angeboten werden.\n\nBerechnen Sie den Kalkulationsfaktor (mit Formel und 4 Nachkommastellen).`,
+                    question: `Fachaufgabe Kalkulation (BaWü Schwerpunkt):\nEin IT-Artikel hat einen Bezugspreis von ${bezugspreis.toFixed(2)} € und soll für ${lvpNetto.toFixed(2)} € netto angeboten werden.\n\nBerechnen Sie den Kalkulationsfaktor (mit Formel und 4 Nachkommastellen).`,
                     musterloesung: `Rechenweg Kalkulationsfaktor:\n- Formel: Kalkulationsfaktor = Netto-Listenverkaufspreis / Bezugspreis\n- Rechnung: ${lvpNetto.toFixed(2)} € / ${bezugspreis.toFixed(2)} € = ${kalkFaktor.toFixed(4)}\n- Ergebnis: ${kalkFaktor.toFixed(4)}`,
                     explanation: `Kalkulationsfaktor = LVP / Bezugspreis = ${lvpNetto.toFixed(2)} € / ${bezugspreis.toFixed(2)} € = ${kalkFaktor.toFixed(4)}.`
                 });
@@ -2240,7 +2240,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                     isCalculation: true,
                     isBawueFocus: true,
                     type: "open-text",
-                    question: `Prüfungsaufgabe Preisbildung: Am Markt für SSD-Speicher stellt sich ein Gleichgewichtspreis von ${pGleich},00 € bei einer Gleichgewichtsmenge von ${qGleich} Stück ein.\n\nBerechne den gesamten Marktumsatz im Marktgleichgewicht.`,
+                    question: `Fachaufgabe Preisbildung: Am Markt für SSD-Speicher stellt sich ein Gleichgewichtspreis von ${pGleich},00 € bei einer Gleichgewichtsmenge von ${qGleich} Stück ein.\n\nBerechne den gesamten Marktumsatz im Marktgleichgewicht.`,
                     musterloesung: `Rechnung Marktumsatz:\n- Formel: Umsatz = Gleichgewichtspreis * Gleichgewichtsmenge\n- Rechnung: ${pGleich},00 € * ${qGleich} Stück = ${umsatz.toLocaleString('de-DE')} €\n- Ergebnis: ${umsatz.toLocaleString('de-DE')} €`,
                     explanation: `Im Marktgleichgewicht schneiden sich Angebots- und Nachfragekurve. Der Umsatz ist Preis * Menge.`
                 });
@@ -2273,7 +2273,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                     isCalculation: true,
                     isBawueFocus: true,
                     type: "open-text",
-                    question: `Prüfungsaufgabe Preisbildung & Marktüberhang (IHK BaWü):\nAuf einem Markt liegt der aktuelle Preis bei ${pNiedrig},00 € (unter dem Gleichgewichtspreis von ${pGleich},00 €).\nDie Anbieter bieten ${qAngebotNiedrig} Stück an, während die Kunden ${qNachfrageNiedrig} Stück nachfragen.\n\n1. Welche Marktsituation liegt vor (Käufer- oder Verkäufermarkt)?\n2. Wie hoch ist der Überhang in Stück?`,
+                    question: `Fachaufgabe Preisbildung & Marktüberhang (BaWü Schwerpunkt):\nAuf einem Markt liegt der aktuelle Preis bei ${pNiedrig},00 € (unter dem Gleichgewichtspreis von ${pGleich},00 €).\nDie Anbieter bieten ${qAngebotNiedrig} Stück an, während die Kunden ${qNachfrageNiedrig} Stück nachfragen.\n\n1. Welche Marktsituation liegt vor (Käufer- oder Verkäufermarkt)?\n2. Wie hoch ist der Überhang in Stück?`,
                     musterloesung: `Fachliche Lösung:\n1. Marktsituation: Nachfrageüberhang (Verkäufermarkt), da bei niedrigem Preis die Nachfrage das Angebot übersteigt.\n2. Überhang: ${qNachfrageNiedrig} Stück (Nachfrage) - ${qAngebotNiedrig} Stück (Angebot) = ${nachfrageUeberhang} Stück Nachfrageüberhang.`,
                     explanation: `Liegt der Preis unter dem Gleichgewichtspreis, ist die Nachfrage größer als das Angebot (Nachfrageüberhang -> Verkäufermarkt). Überhang = ${nachfrageUeberhang} Stück.`
                 });
@@ -2306,7 +2306,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                     isCalculation: true,
                     isBawueFocus: true,
                     type: "open-text",
-                    question: `Prüfungsaufgabe Preisbildung & Marktüberhang (IHK BaWü):\nAuf einem Markt liegt der aktuelle Preis bei ${pHoch},00 € (über dem Gleichgewichtspreis von ${pGleich},00 €).\nDie Hersteller bieten ${qAngebotHoch} Stück an, aber die Kunden fragen nur ${qNachfrageHoch} Stück nach.\n\n1. Welche Marktsituation liegt vor (Käufer- oder Verkäufermarkt)?\n2. Wie hoch ist der Überhang in Stück?`,
+                    question: `Fachaufgabe Preisbildung & Marktüberhang (BaWü Schwerpunkt):\nAuf einem Markt liegt der aktuelle Preis bei ${pHoch},00 € (über dem Gleichgewichtspreis von ${pGleich},00 €).\nDie Hersteller bieten ${qAngebotHoch} Stück an, aber die Kunden fragen nur ${qNachfrageHoch} Stück nach.\n\n1. Welche Marktsituation liegt vor (Käufer- oder Verkäufermarkt)?\n2. Wie hoch ist der Überhang in Stück?`,
                     musterloesung: `Fachliche Lösung:\n1. Marktsituation: Angebotsüberhang (Käufermarkt), da das Angebot die Nachfrage übersteigt.\n2. Überhang: ${qAngebotHoch} Stück (Angebot) - ${qNachfrageHoch} Stück (Nachfrage) = ${angebotsUeberhang} Stück Angebotsüberhang.`,
                     explanation: `Liegt der Preis über dem Gleichgewichtspreis, ist das Angebot größer als die Nachfrage (Angebotsüberhang -> Käufermarkt). Überhang = ${angebotsUeberhang} Stück.`
                 });
@@ -2357,7 +2357,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                 isCalculation: true,
                 isBawueFocus: true,
                 type: "open-text",
-                question: `Prüfungsaufgabe Wirtschaftlichkeit / TCO (LF 1 / LF 6): Ein Unternehmen plant die Beschaffung von ${serverCount} Servern über eine geplante Nutzungsdauer von ${jahre} Jahren.\n\nKostenpositionen:\n- Anschaffungspreis pro Server: 3.500,00 €\n- Stromkosten pro Server und Jahr: ${stromJahr / serverCount},00 €\n- Wartungs- und Supportvertrag pro Server und Jahr: ${wartungJahr / serverCount},00 €\n- Einmalige Administratorschulung: ${schulung},00 €\n- Fachgerechte Entsorgung pro Server am Ende des Lebenszyklus: ${entsorgung / serverCount},00 €\n\nAufgabe:\nBerechne die Total Cost of Ownership (TCO) für alle ${serverCount} Server über die gesamte Laufzeit von ${jahre} Jahren.`,
+                question: `Fachaufgabe Wirtschaftlichkeit / TCO (LF 1 / LF 6): Ein Unternehmen plant die Beschaffung von ${serverCount} Servern über eine geplante Nutzungsdauer von ${jahre} Jahren.\n\nKostenpositionen:\n- Anschaffungspreis pro Server: 3.500,00 €\n- Stromkosten pro Server und Jahr: ${stromJahr / serverCount},00 €\n- Wartungs- und Supportvertrag pro Server und Jahr: ${wartungJahr / serverCount},00 €\n- Einmalige Administratorschulung: ${schulung},00 €\n- Fachgerechte Entsorgung pro Server am Ende des Lebenszyklus: ${entsorgung / serverCount},00 €\n\nAufgabe:\nBerechne die Total Cost of Ownership (TCO) für alle ${serverCount} Server über die gesamte Laufzeit von ${jahre} Jahren.`,
                 musterloesung: `TCO-Berechnung:\n1. Einmalige Anschaffungskosten: ${serverCount} * 3.500 € = ${hwKauf.toLocaleString('de-DE')} €\n2. Laufende Betriebskosten (${jahre} Jahre):\n   - Strom: ${serverCount} * ${stromJahr / serverCount} € * ${jahre} Jahre = ${(stromJahr * jahre).toLocaleString('de-DE')} €\n   - Wartung/Support: ${serverCount} * ${wartungJahr / serverCount} € * ${jahre} Jahre = ${(wartungJahr * jahre).toLocaleString('de-DE')} €\n   - Schulung: ${schulung.toLocaleString('de-DE')} €\n   - Entsorgung: ${serverCount} * ${entsorgung / serverCount} € = ${entsorgung.toLocaleString('de-DE')} €\n3. TCO Gesamtkosten = ${hwKauf.toLocaleString('de-DE')} € + ${(betriebskosten).toLocaleString('de-DE')} € = ${tcoGesamt.toLocaleString('de-DE')} €`,
                 explanation: `TCO umfasst immer Anschaffung + sämtliche Betriebs-, Wartungs-, Schulungs- und Entsorgungskosten.`
             });
@@ -2384,7 +2384,7 @@ function generateDynamicQuestions(typeMode = "mix") {
 
     
     // ==========================================
-    // C.13 BUCHUNGSSÄTZE & FINANZBUCHHALTUNG (Winter Möbelbau & IT-Cases)
+    // C.13 BUCHUNGSSÄTZE & FINANZBUCHHALTUNG (Fallstudie Fertigung & IT-Cases)
     // ==========================================
     for (let i = 0; i < 20; i++) {
         const netValue = (Math.floor(Math.random() * 40) + 5) * 100; // 500 bis 4500 €
@@ -2404,7 +2404,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                     isCalculation: true,
                     isBawueFocus: true,
                     type: "open-text",
-                    question: `Prüfungsaufgabe Buchführung / WiSo: Unser Unternehmen kauft Rohstoffe / Fertigungsmaterial für ${netValue.toLocaleString('de-DE')},00 € netto zuzüglich 19 % Vorsteuer auf Ziel.\n\nBilde den vollständigen Buchungssatz mit Kontonummern (6000 AWR, 2600 VORST, 4400 VE) und Beträgen.`,
+                    question: `Fachaufgabe Buchführung / WiSo: Unser Unternehmen kauft Rohstoffe / Fertigungsmaterial für ${netValue.toLocaleString('de-DE')},00 € netto zuzüglich 19 % Vorsteuer auf Ziel.\n\nBilde den vollständigen Buchungssatz mit Kontonummern (6000 AWR, 2600 VORST, 4400 VE) und Beträgen.`,
                     musterloesung: `Buchungssatz:\n6000 AWR ${netValue.toLocaleString('de-DE')},00 €\n2600 VORST ${ust.toLocaleString('de-DE')} €\nan 4400 VE ${grossValue.toLocaleString('de-DE')} €`,
                     explanation: `Aufwand und Vorsteuer im Soll, Verbindlichkeiten im Haben.`
                 });
@@ -2437,7 +2437,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                     isCalculation: true,
                     isBawueFocus: true,
                     type: "open-text",
-                    question: `Prüfungsaufgabe Rechnungswesen (IHK BaWü):\nWir begleichen eine noch offene Lieferantenrechnung über ${grossValue.toLocaleString('de-DE')} € per Banküberweisung.\n\nBilden Sie den Buchungssatz (Soll an Haben mit Kontonummern/Kontennamen und Betrag).`,
+                    question: `Fachaufgabe Rechnungswesen (BaWü Schwerpunkt):\nWir begleichen eine noch offene Lieferantenrechnung über ${grossValue.toLocaleString('de-DE')} € per Banküberweisung.\n\nBilden Sie den Buchungssatz (Soll an Haben mit Kontonummern/Kontennamen und Betrag).`,
                     musterloesung: `Buchungssatz:\n4400 VE an 2800 BK ${grossValue.toLocaleString('de-DE')} €\n\nErklärung: Verbindlichkeiten aus Lieferungen und Leistungen nehmen im Soll ab, Bankkonto nimmt im Haben ab (Passiv-Aktiv-Minderung / Bilanzverkürzung).`,
                     explanation: `Verbindlichkeiten (4400 VE) nehmen im Soll ab, Bankkonto (2800 BK) nimmt im Haben ab.`
                 });
@@ -2470,7 +2470,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                     isCalculation: true,
                     isBawueFocus: true,
                     type: "open-text",
-                    question: `Prüfungsaufgabe Rechnungswesen (IHK BaWü):\nVerkauf einer gebrauchten Büroeinrichtung/BGA für ${netValue.toLocaleString('de-DE')},00 € netto (+ 19 % USt: ${ust.toLocaleString('de-DE')} €) per Banküberweisung.\n\nBilden Sie den vollständigen Buchungssatz mit Beträgen.`,
+                    question: `Fachaufgabe Rechnungswesen (BaWü Schwerpunkt):\nVerkauf einer gebrauchten Büroeinrichtung/BGA für ${netValue.toLocaleString('de-DE')},00 € netto (+ 19 % USt: ${ust.toLocaleString('de-DE')} €) per Banküberweisung.\n\nBilden Sie den vollständigen Buchungssatz mit Beträgen.`,
                     musterloesung: `Buchungssatz:\n2800 BK ${grossValue.toLocaleString('de-DE')} € an 0870 BGA ${netValue.toLocaleString('de-DE')},00 € und 4800 UST ${ust.toLocaleString('de-DE')} €\n\nErklärung: Bank im Soll mit Bruttobetrag, BGA im Haben mit Nettobetrag, Umsatzsteuer 4800 UST im Haben.`,
                     explanation: `Bank im Soll mit Bruttobetrag, BGA im Haben mit Nettobetrag, Umsatzsteuer 4800 UST im Haben.`
                 });
@@ -2503,7 +2503,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                     isCalculation: true,
                     isBawueFocus: true,
                     type: "open-text",
-                    question: `Prüfungsaufgabe Rechnungswesen (IHK BaWü):\nEin Kunde überweist den fälligen Rechnungsbetrag von ${grossValue.toLocaleString('de-DE')} € auf unser Bankkonto.\n\nBilden Sie den Buchungssatz (Soll an Haben mit Konten und Betrag).`,
+                    question: `Fachaufgabe Rechnungswesen (BaWü Schwerpunkt):\nEin Kunde überweist den fälligen Rechnungsbetrag von ${grossValue.toLocaleString('de-DE')} € auf unser Bankkonto.\n\nBilden Sie den Buchungssatz (Soll an Haben mit Konten und Betrag).`,
                     musterloesung: `Buchungssatz:\n2800 BK an 2400 FO ${grossValue.toLocaleString('de-DE')} €\n\nErklärung: Bank (2800 BK) nimmt im Soll zu, Forderungen aus Lieferungen und Leistungen (2400 FO) nehmen im Haben ab (Aktivtausch).`,
                     explanation: `Bank (2800 BK) nimmt im Soll zu, Forderungen (2400 FO) nehmen im Haben ab (Aktivtausch).`
                 });
@@ -2608,7 +2608,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                 isCalculation: true,
                 isBawueFocus: true,
                 type: "open-text",
-                question: `Prüfungsaufgabe Zahlensysteme (IHK BaWü):\nWandeln Sie die Hexadezimalzahl **${hexStr}** (Basis 16) schrittweise in das 16-Bit-Binärmuster (4er-Nibbles) um.`,
+                question: `Fachaufgabe Zahlensysteme (BaWü Schwerpunkt):\nWandeln Sie die Hexadezimalzahl **${hexStr}** (Basis 16) schrittweise in das 16-Bit-Binärmuster (4er-Nibbles) um.`,
                 musterloesung: `Nibble-Umwandlung von ${hexStr}:\n- Ziffer '${d1}' = ${hexToBinMap[d1]}\n- Ziffer '${d2}' = ${hexToBinMap[d2]}\n- Ziffer '${d3}' = ${hexToBinMap[d3]}\n- Ziffer '${d4}' = ${hexToBinMap[d4]}\n\nErgebnis: ${binCorrect}_2`,
                 explanation: `Jede Hex-Ziffer entspricht genau 4 Binärstellen (1 Nibble).`
             });
@@ -2634,7 +2634,7 @@ function generateDynamicQuestions(typeMode = "mix") {
     }
 
     // ==========================================
-    // C.16 EINKAUFSKALKULATION (Winter Möbelbau mit Rabatt, Skonto & Bezugskosten)
+    // C.16 EINKAUFSKALKULATION (Fallstudie Fertigung mit Rabatt, Skonto & Bezugskosten)
     // ==========================================
     for (let i = 0; i < 15; i++) {
         const stueck = (Math.floor(Math.random() * 10) + 1) * 100; // 100 bis 1000 Stück
@@ -2659,7 +2659,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                 isCalculation: true,
                 isBawueFocus: true,
                 type: "open-text",
-                question: `Prüfungsaufgabe Einkaufskalkulation (Winter Möbelbau):\nWir bestellen ${stueck} Bauteile zu einem Listenpreis von ${stueckPreis.toFixed(2)} € pro Stück.\nKonditionen des Lieferanten: ${rabattP} % Rabatt, ${skontoP} % Skonto, Lieferung frei Haus.\n\nBerechne schrittweise:\n1. Listeneinkaufspreis (LEP)\n2. Zieleinkaufspreis (ZEP)\n3. Bareinkaufspreis (BEP)\n4. Einstandspreis / Bezugspreis`,
+                question: `Fachaufgabe Einkaufskalkulation (Fallstudie Fertigung):\nWir bestellen ${stueck} Bauteile zu einem Listenpreis von ${stueckPreis.toFixed(2)} € pro Stück.\nKonditionen des Lieferanten: ${rabattP} % Rabatt, ${skontoP} % Skonto, Lieferung frei Haus.\n\nBerechne schrittweise:\n1. Listeneinkaufspreis (LEP)\n2. Zieleinkaufspreis (ZEP)\n3. Bareinkaufspreis (BEP)\n4. Einstandspreis / Bezugspreis`,
                 musterloesung: `Kalkulationsschema:\n1. LEP: ${stueck} Stück * ${stueckPreis.toFixed(2)} € = ${lep.toLocaleString('de-DE')},00 € (100 %)\n- ${rabattP} % Rabatt: -${rabattBetrag.toLocaleString('de-DE')} €\n= 2. ZEP: ${zep.toLocaleString('de-DE')} € (100 %)\n- ${skontoP} % Skonto: -${skontoBetrag.toLocaleString('de-DE')} €\n= 3. BEP: ${bep.toLocaleString('de-DE')} €\n+ 0,00 € Bezugskosten (frei Haus)\n= 4. Einstandspreis: ${einstandspreis.toLocaleString('de-DE')} €`,
                 explanation: `Einkaufskalkulation: LEP - Rabatt = ZEP; ZEP - Skonto = BEP; BEP + Bezugskosten = Einstandspreis.`
             });
@@ -2710,7 +2710,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                 diagramType: "UML Use-Case-Diagramm",
                 isBawueFocus: true,
                 type: "open-text",
-                question: `Prüfungsaufgabe UML (Modellierung): Erstelle für das '${sys.title}' ein vollständiges UML-Anwendungsfalldiagramm.\n\nVorgaben:\n- Primärer Akteur: '${sys.actor}'\n- Sekundäres Fremdsystem: '${sys.sub}'\n- Bette wesentliche Anwendungsfälle in die Systemgrenze ein.\n- Integriere eine zwingende <<include>>-Beziehung (z. B. Authentifizierung/Prüfung) und eine optionale <<extend>>-Beziehung.\n\nSkizziere dein Diagramm auf dem Whiteboard und vergleiche mit der grafischen Musterlösung.`,
+                question: `Fachaufgabe UML (Modellierung): Erstelle für das '${sys.title}' ein vollständiges UML-Anwendungsfalldiagramm.\n\nVorgaben:\n- Primärer Akteur: '${sys.actor}'\n- Sekundäres Fremdsystem: '${sys.sub}'\n- Bette wesentliche Anwendungsfälle in die Systemgrenze ein.\n- Integriere eine zwingende <<include>>-Beziehung (z. B. Authentifizierung/Prüfung) und eine optionale <<extend>>-Beziehung.\n\nSkizziere dein Diagramm auf dem Whiteboard und vergleiche mit der grafischen Musterlösung.`,
                 solutionDiagramSvg: VisualDiagrams.getUseCaseDiagramSvg(sys.title),
                 solutionDiagramCaption: `Grafische Referenz-Musterlösung für: ${sys.title}`,
                 musterloesung: `Musterlösung Use-Case-Diagramm (${sys.title}):\n- Systemgrenze als Rechteck mit Titel '${sys.title}'.\n- Akteur '${sys.actor}' links außerhalb der Systemgrenze mit Assoziationslinien zu den Kernanwendungsfällen.\n- Akteur '${sys.sub}' rechts außerhalb der Systemgrenze.\n- Gestrichelter Pfeil mit <<include>> für zwingende Teilabläufe.\n- Gestrichelter Pfeil mit <<extend>> für optionale Erweiterungen.`,
@@ -2753,7 +2753,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                 diagramType: "UML Klassendiagramm",
                 isBawueFocus: true,
                 type: "open-text",
-                question: "Prüfungsaufgabe UML (Klassendiagramm): Entwerfen Sie ein 3-teiliges UML-Klassendiagramm für die Entitäten 'Kunde', 'Bestellung' und 'Bestellposition'. Berücksichtigen Sie Attribute mit Datentypen, Methoden mit Rückgabetypen, Multiplizitäten (1 zu 1..*) sowie eine existenzabhängige Komposition (schwarze Raute).\n\nNutze das Whiteboard für deine Skizze und vergleiche deine Lösung mit der visuellen Musterlösung.",
+                question: "Fachaufgabe UML (Klassendiagramm): Entwerfen Sie ein 3-teiliges UML-Klassendiagramm für die Entitäten 'Kunde', 'Bestellung' und 'Bestellposition'. Berücksichtigen Sie Attribute mit Datentypen, Methoden mit Rückgabetypen, Multiplizitäten (1 zu 1..*) sowie eine existenzabhängige Komposition (schwarze Raute).\n\nNutze das Whiteboard für deine Skizze und vergleiche deine Lösung mit der visuellen Musterlösung.",
                 solutionDiagramSvg: VisualDiagrams.getClassDiagramSvg(),
                 solutionDiagramCaption: "Visuelle Musterlösung: UML-Klassendiagramm",
                 musterloesung: "Musterlösung:\n1. Dreigeteilte Klassenboxen (Name, Attribute, Methoden).\n2. Sichtbarkeiten: - für private Attribute, + für public Methoden.\n3. Komposition: Ausgefüllte Raute bei Bestellung zur Kennzeichnung der Lebenszeitbindung der Positionen.\n4. Multiplizitäten: 1 Kunde hat 0..* Bestellungen; 1 Bestellung hat 1..* Bestellpositionen.",
@@ -2803,7 +2803,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                 diagramType: "Entity-Relationship-Modell (ERD)",
                 isBawueFocus: true,
                 type: "open-text",
-                question: "Prüfungsaufgabe Datenbanken (ERD): Erstelle ein vollständiges Entity-Relationship-Diagramm in Chen-Notation für ein Handelssystem mit den Entitäten KUNDE, BESTELLUNG und ARTIKEL.\n\nVorgaben:\n- KUNDE erteilt BESTELLUNG (1:n)\n- BESTELLUNG umfasst ARTIKEL (n:m) mit Beziehungsattribut Menge\n- Unterstreiche alle Primärschlüssel-Attribute\n\nSkizziere das ERD im Whiteboard und überprüfe es mit der grafischen Musterlösung.",
+                question: "Fachaufgabe Datenbanken (ERD): Erstelle ein vollständiges Entity-Relationship-Diagramm in Chen-Notation für ein Handelssystem mit den Entitäten KUNDE, BESTELLUNG und ARTIKEL.\n\nVorgaben:\n- KUNDE erteilt BESTELLUNG (1:n)\n- BESTELLUNG umfasst ARTIKEL (n:m) mit Beziehungsattribut Menge\n- Unterstreiche alle Primärschlüssel-Attribute\n\nSkizziere das ERD im Whiteboard und überprüfe es mit der grafischen Musterlösung.",
                 solutionDiagramSvg: VisualDiagrams.getErdDiagramSvg(),
                 solutionDiagramCaption: "Visuelle Musterlösung: ERD in Chen-Notation & Relationales 4-Tabellen-Schema",
                 musterloesung: "Musterlösung ERD & Relationales Datenbankschema:\n\n1. Konzeptionelles Modell (Chen-Notation: 3 Entitäten):\n- Entitätstypen: Rechtecke KUNDE, BESTELLUNG, ARTIKEL.\n- Beziehungstypen: Rauten 'erteilt' (1:n) und 'umfasst' (n:m).\n- Attribute: Ellipsen, wobei Primärschlüssel (KundenNr, BestellNr, ArtikelNr) unterstrichen sind.\n- Beziehungsattribut: 'Menge' als Ellipse direkt an der Raute 'umfasst' angebunden.\n\n2. Relationales Tabellenschema (4 Tabellen):\n- tbl_Kunde (KundenNr [PK], Name, Ort)\n- tbl_Bestellung (BestellNr [PK], FK_KundenNr [FK], BestellDatum)\n- tbl_Artikel (ArtikelNr [PK], Bezeichnung, Preis)\n- tbl_Bestellposition (FK_BestellNr [PK, FK], FK_ArtikelNr [PK, FK], Menge)\n-> Die n:m Beziehung wird über die 4. Tabelle (Zwischentabelle tbl_Bestellposition) aufgelöst, deren Primärschlüssel ein zusammengesetzter Schlüssel aus beiden Fremdschlüsseln ist.",
@@ -2849,7 +2849,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                     diagramType: "Ereignisgesteuerte Prozesskette (EPK)",
                     isBawueFocus: true,
                     type: "open-text",
-                    question: "Prüfungsaufgabe Prozessmodellierung (EPK): Modellieren Sie eine EPK für den Prozess 'Kundenauftragsprüfung' mit den Elementen: Ereignis 'Kunde bestellt Ware' -> Funktion 'Bestellung prüfen' -> XOR-Verzweigung in 'Auftrag abgelehnt' bzw. 'Auftrag bestätigt' mit Folgeaktivitäten.\n\nSkizziere die EPK auf dem Whiteboard und vergleiche mit der visuellen Musterlösung.",
+                    question: "Fachaufgabe Prozessmodellierung (EPK): Modellieren Sie eine EPK für den Prozess 'Kundenauftragsprüfung' mit den Elementen: Ereignis 'Kunde bestellt Ware' -> Funktion 'Bestellung prüfen' -> XOR-Verzweigung in 'Auftrag abgelehnt' bzw. 'Auftrag bestätigt' mit Folgeaktivitäten.\n\nSkizziere die EPK auf dem Whiteboard und vergleiche mit der visuellen Musterlösung.",
                     solutionDiagramSvg: VisualDiagrams.getEpkDiagramSvg(),
                     solutionDiagramCaption: "Visuelle Musterlösung: EPK mit Ereignissen, Funktionen und XOR-Konnektor",
                     musterloesung: "Musterlösung EPK:\n- Strikter Wechsel zwischen Ereignissen (Sechseck) und Funktionen (abgerundetes Rechteck).\n- Konnektor XOR nach Funktion 'Bestellung prüfen'.\n- Zwei getrennte Pfade für Zusage/Rechnungserstellung und Ablehnung/Absage.",
@@ -2889,7 +2889,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                     diagramType: "BPMN 2.0",
                     isBawueFocus: true,
                     type: "open-text",
-                    question: "Prüfungsaufgabe Prozessmodellierung (BPMN 2.0): Zeichnen Sie ein standardkonformes BPMN 2.0 Diagramm für einen Warenversand-Prozess mit Start-Event, zwei Aufgaben (Tasks), einem exklusiven Gateway (XOR) und End-Event.\n\nSkizziere dein BPMN-Diagramm auf dem Whiteboard und vergleiche mit der Referenzgrafik.",
+                    question: "Fachaufgabe Prozessmodellierung (BPMN 2.0): Zeichnen Sie ein standardkonformes BPMN 2.0 Diagramm für einen Warenversand-Prozess mit Start-Event, zwei Aufgaben (Tasks), einem exklusiven Gateway (XOR) und End-Event.\n\nSkizziere dein BPMN-Diagramm auf dem Whiteboard und vergleiche mit der Referenzgrafik.",
                     solutionDiagramSvg: VisualDiagrams.getBpmnDiagramSvg(),
                     solutionDiagramCaption: "Visuelle Musterlösung: BPMN 2.0 Standarddiagramm",
                     musterloesung: "Musterlösung BPMN 2.0:\n- Start-Event: Grüner dünner Kreis mit Prozessstart\n- Tasks: Abgerundete Rechtecke mit Aktivitäten\n- Exclusive Gateway: Raute mit 'X' für datenbasierte Entscheidung (exklusiver Pfad)\n- End-Event: Roter dicker Kreis zur Beendigung des Prozesses.",
@@ -2933,7 +2933,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                 diagramType: "Netzplan (DIN 69900)",
                 isBawueFocus: true,
                 type: "open-text",
-                question: "Prüfungsaufgabe Projektmanagement (Netzplan nach DIN 69900):\nGegeben ist ein Projektnetzplan mit Vorgängen V1 (4 Tage), V2 (6 Tage), V3 (2 Tage) und V4 (8 Tage).\n\nBerechnen Sie:\n1. Früheste Termine (FAZ, FEZ)\n2. Späteste Termine (SAZ, SEZ)\n3. Gesamtpuffer (GP) und Freier Puffer (FP) für jeden Vorgang\n4. Den Kritischen Pfad und die Gesamtdauer.\n\nSkizziere den Netzplan im Whiteboard und überprüfe ihn mit der visuellen Musterlösung.",
+                question: "Fachaufgabe Projektmanagement (Netzplan nach DIN 69900):\nGegeben ist ein Projektnetzplan mit Vorgängen V1 (4 Tage), V2 (6 Tage), V3 (2 Tage) und V4 (8 Tage).\n\nBerechnen Sie:\n1. Früheste Termine (FAZ, FEZ)\n2. Späteste Termine (SAZ, SEZ)\n3. Gesamtpuffer (GP) und Freier Puffer (FP) für jeden Vorgang\n4. Den Kritischen Pfad und die Gesamtdauer.\n\nSkizziere den Netzplan im Whiteboard und überprüfe ihn mit der visuellen Musterlösung.",
                 solutionDiagramSvg: VisualDiagrams.getV1V4NetzplanDiagramSvg(),
                 solutionDiagramCaption: "Visuelle Musterlösung: DIN 69900 Netzplan mit 7-Felder-Knoten",
                 musterloesung: "Musterlösung Netzplan:\n- V1 (D=4): FAZ=0, FEZ=4, SAZ=0, SEZ=4, GP=0, FP=0 (Kritisch)\n- V2 (D=6): FAZ=4, FEZ=10, SAZ=4, SEZ=10, GP=0, FP=0 (Kritisch)\n- V3 (D=2): FAZ=4, FEZ=6, SAZ=8, SEZ=10, GP=4, FP=4\n- V4 (D=8): FAZ=10, FEZ=18, SAZ=10, SEZ=18, GP=0, FP=0 (Kritisch)\n- Gesamtdauer: 18 Tage. Kritischer Pfad: V1 -> V2 -> V4.",
@@ -2994,7 +2994,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                 isCalculation: true,
                 isBawueFocus: true,
                 type: "open-text",
-                question: `Prüfungsaufgabe Stundensatzkalkulation (LF 1 / LF 6):\nEin Unternehmen prüft den Einsatz eines internen IT-Mitarbeiters im Vergleich zu einem externen Dienstleister (${externRate.toFixed(2)} EUR/h).\n\nKalkulationsdaten:\n- Kalenderarbeitstage pro Jahr: ${calDays} Tage\n- Jahresurlaub: ${vacation} Tage\n- Krankheitstage: ${sickDays} Tage\n- Feiertage auf Arbeitstagen: ${holidays} Tage\n- Tägliche Arbeitszeit: ${dailyHours} Stunden\n- Jahrespersonalkosten: ${yearlyCost.toLocaleString('de-DE')} EUR\n\nAufgaben:\n1. Berechnen Sie die produktiven Jahresstunden.\n2. Berechnen Sie den internen Stundensatz (auf 2 Nachkommastellen genau).\n3. Geben Sie an, welche Option wirtschaftlicher ist.`,
+                question: `Fachaufgabe Stundensatzkalkulation (LF 1 / LF 6):\nEin Unternehmen prüft den Einsatz eines internen IT-Mitarbeiters im Vergleich zu einem externen Dienstleister (${externRate.toFixed(2)} EUR/h).\n\nKalkulationsdaten:\n- Kalenderarbeitstage pro Jahr: ${calDays} Tage\n- Jahresurlaub: ${vacation} Tage\n- Krankheitstage: ${sickDays} Tage\n- Feiertage auf Arbeitstagen: ${holidays} Tage\n- Tägliche Arbeitszeit: ${dailyHours} Stunden\n- Jahrespersonalkosten: ${yearlyCost.toLocaleString('de-DE')} EUR\n\nAufgaben:\n1. Berechnen Sie die produktiven Jahresstunden.\n2. Berechnen Sie den internen Stundensatz (auf 2 Nachkommastellen genau).\n3. Geben Sie an, welche Option wirtschaftlicher ist.`,
                 musterloesung: `Musterlösung:\n1. Produktive Tage = ${calDays} - ${vacation} - ${sickDays} - ${holidays} = ${prodDays} Tage.\n   Produktive Stunden = ${prodDays} * ${dailyHours} h = ${prodHours.toLocaleString('de-DE')} Stunden/Jahr.\n2. Interner Stundensatz = ${yearlyCost.toLocaleString('de-DE')} EUR / ${prodHours.toLocaleString('de-DE')} h = ${hourRate.toFixed(2)} EUR/h.\n3. Wirtschaftlichkeit: ${isInternalCheaper ? `Der interne Mitarbeiter (${hourRate.toFixed(2)} EUR/h) ist um ${diffRate.toFixed(2)} EUR/h günstiger als der externe Berater (${externRate.toFixed(2)} EUR/h).` : `Der externe Berater (${externRate.toFixed(2)} EUR/h) ist um ${diffRate.toFixed(2)} EUR/h günstiger als der interne Mitarbeiter (${hourRate.toFixed(2)} EUR/h).`}`,
                 explanation: `Berechnung: Jahreskosten / ([Kalendertage - Urlaub - Krankheit - Feiertage] * tägliche Arbeitszeit) = ${yearlyCost} / (${prodDays} * ${dailyHours}) = ${hourRate.toFixed(2)} EUR/h.`
             });
@@ -3047,7 +3047,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                 isCalculation: true,
                 isBawueFocus: true,
                 type: "open-text",
-                question: `Prüfungsaufgabe USV-Berechnung (LF 2 / LF 6):\nEine USV-Anlage sichert ${serverCount} Server mit je ${serverWatt} Watt Netzteilen unter Volllast ab.\nDie USV verfügt über ${batteryCount} Akkus mit je ${batteryAh} Ah bei einer Spannung von ${voltage} V (Verluste vernachlässigt, 100% Entladung).\n\nBerechnen Sie:\n1. Die Gesamtleistung P in Watt.\n2. Die gesamte gespeicherte Energie W in Wh.\n3. Die theoretische Überbrückungszeit in Stunden und Minuten (auf volle Minuten abgerundet).`,
+                question: `Fachaufgabe USV-Berechnung (LF 2 / LF 6):\nEine USV-Anlage sichert ${serverCount} Server mit je ${serverWatt} Watt Netzteilen unter Volllast ab.\nDie USV verfügt über ${batteryCount} Akkus mit je ${batteryAh} Ah bei einer Spannung von ${voltage} V (Verluste vernachlässigt, 100% Entladung).\n\nBerechnen Sie:\n1. Die Gesamtleistung P in Watt.\n2. Die gesamte gespeicherte Energie W in Wh.\n3. Die theoretische Überbrückungszeit in Stunden und Minuten (auf volle Minuten abgerundet).`,
                 musterloesung: `Musterlösung:\n1. Gesamtleistung P = ${serverCount} Server * ${serverWatt} W = ${totalPowerW} Watt.\n2. Gespeicherte Energie W = ${batteryCount} Akkus * ${batteryAh} Ah * ${voltage} V = ${totalEnergyWh} Wh.\n3. Überbrückungszeit t = W / P = ${totalEnergyWh} Wh / ${totalPowerW} W = ${timeHoursExact.toFixed(3)} Stunden = ${hours} Stunden und ${minutes} Minuten.`,
                 explanation: `Formel: P = Server * Watt; W = Akkus * Ah * Volt; t = W / P. Zeit = ${hours} Std. und ${minutes} Min.`
             });
@@ -3119,7 +3119,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                 isCalculation: true,
                 isBawueFocus: true,
                 type: "open-text",
-                question: `Prüfungsaufgabe Finanzierungsvergleich (LF 1 / LF 6):\nEin Unternehmen plant die Anschaffung von Maschinen im Wert von ${investSum.toLocaleString('de-DE')} EUR.\n\nAlternative 1: Abzahlungsdarlehen über ${years} Jahre mit linearer Tilgung zu ${interestRate.toFixed(1)} % p.a. auf die jeweilige Restschuld zu Jahresbeginn.\nAlternative 2: Leasingvertrag über ${years} Jahre (${years * 12} Monate) à ${monthlyRate.toLocaleString('de-DE')} EUR/Monat mit Übernahme zum Restwert von ${residualValue.toLocaleString('de-DE')} EUR.\n\nAufgaben:\n1. Berechnen Sie die Gesamtkosten des Abzahlungsdarlehens (inkl. jährlicher Zinsaufstellung).\n2. Berechnen Sie die Gesamtkosten des Leasings.\n3. Welche Alternative ist wirtschaftlicher und wie hoch ist die prozentuale Mehrbelastung des teureren Angebots?`,
+                question: `Fachaufgabe Finanzierungsvergleich (LF 1 / LF 6):\nEin Unternehmen plant die Anschaffung von Maschinen im Wert von ${investSum.toLocaleString('de-DE')} EUR.\n\nAlternative 1: Abzahlungsdarlehen über ${years} Jahre mit linearer Tilgung zu ${interestRate.toFixed(1)} % p.a. auf die jeweilige Restschuld zu Jahresbeginn.\nAlternative 2: Leasingvertrag über ${years} Jahre (${years * 12} Monate) à ${monthlyRate.toLocaleString('de-DE')} EUR/Monat mit Übernahme zum Restwert von ${residualValue.toLocaleString('de-DE')} EUR.\n\nAufgaben:\n1. Berechnen Sie die Gesamtkosten des Abzahlungsdarlehens (inkl. jährlicher Zinsaufstellung).\n2. Berechnen Sie die Gesamtkosten des Leasings.\n3. Welche Alternative ist wirtschaftlicher und wie hoch ist die prozentuale Mehrbelastung des teureren Angebots?`,
                 musterloesung: `Musterlösung mit vollständigem Rechenweg:\n1. Abzahlungsdarlehen (Lineare Tilgung = ${investSum.toLocaleString('de-DE')} EUR / ${years} Jahre = ${linearTilgung.toLocaleString('de-DE')} EUR/Jahr):\n   Jährliche Zinsberechnung auf die abnehmende Restschuld:\n${interestBreakdown}   => Gesamtzinsen über ${years} Jahre = ${totalInterest.toLocaleString('de-DE')} EUR\n   => Gesamtkosten Darlehen = Darlehensbetrag (${investSum.toLocaleString('de-DE')} EUR) + Gesamtzinsen (${totalInterest.toLocaleString('de-DE')} EUR) = ${totalLoanCost.toLocaleString('de-DE')} EUR.\n\n2. Gesamtkosten Leasing:\n   - Laufende Leasingraten: ${years * 12} Monate * ${monthlyRate.toLocaleString('de-DE')} EUR = ${(years * 12 * monthlyRate).toLocaleString('de-DE')} EUR\n   - Übernahme-Restwert am Laufzeitende: + ${residualValue.toLocaleString('de-DE')} EUR\n   => Gesamtkosten Leasing = ${(years * 12 * monthlyRate).toLocaleString('de-DE')} EUR + ${residualValue.toLocaleString('de-DE')} EUR = ${totalLeasingCost.toLocaleString('de-DE')} EUR.\n\n3. Wirtschaftlichkeitsvergleich:\n   - Ergebnis: Das ${isLoanCheaper ? 'Abzahlungsdarlehen' : 'Leasing'} ist um ${diffSavings.toLocaleString('de-DE')} EUR günstiger als das ${isLoanCheaper ? 'Leasing' : 'Abzahlungsdarlehen'}.\n   - Prozentuale Mehrbelastung: (${diffSavings.toLocaleString('de-DE')} EUR / ${(isLoanCheaper ? totalLoanCost : totalLeasingCost).toLocaleString('de-DE')} EUR) * 100 = ${pctDiff.toFixed(2)} %.`,
                 explanation: `Lineare Tilgung: ${linearTilgung.toLocaleString('de-DE')} EUR/Jahr. Zinsen sinken jährlich mit der Restschuld. Gesamtkosten Darlehen: ${totalLoanCost.toLocaleString('de-DE')} EUR vs. Leasing: ${totalLeasingCost.toLocaleString('de-DE')} EUR. Ersparnis: ${diffSavings.toLocaleString('de-DE')} EUR.`
             });
@@ -3176,7 +3176,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                 isCalculation: true,
                 isBawueFocus: true,
                 type: "open-text",
-                question: `Prüfungsaufgabe Bildverarbeitung (LF 2 / LF 4):\nIn einer Fertigung laufen Anlagen ${hours} h/Tag bei ${partsPerHour} Teilen/h.\n2/3 der Teile werden beidseitig (2 Scans) und 1/3 einseitig (1 Scan) erfasst.\nScanparameter: ${widthCm} cm x ${heightCm} cm, ${dpi} dpi x ${dpi} dpi, Farbtiefe 24 Bit unkomprimiert (1 Inch = 2,54 cm).\n\nAufgaben:\n1. Ermitteln Sie die Gesamtzahl der Scans pro Tag.\n2. Berechnen Sie das tägliche unkomprimierte Speichervolumen in vollen GiB (Binärpräfix).`,
+                question: `Fachaufgabe Bildverarbeitung (LF 2 / LF 4):\nIn einer Fertigung laufen Anlagen ${hours} h/Tag bei ${partsPerHour} Teilen/h.\n2/3 der Teile werden beidseitig (2 Scans) und 1/3 einseitig (1 Scan) erfasst.\nScanparameter: ${widthCm} cm x ${heightCm} cm, ${dpi} dpi x ${dpi} dpi, Farbtiefe 24 Bit unkomprimiert (1 Inch = 2,54 cm).\n\nAufgaben:\n1. Ermitteln Sie die Gesamtzahl der Scans pro Tag.\n2. Berechnen Sie das tägliche unkomprimierte Speichervolumen in vollen GiB (Binärpräfix).`,
                 musterloesung: `Musterlösung:\n1. Gefertigte Teile = ${hours} h * ${partsPerHour} Teile/h = ${totalParts} Teile.\n   Scans = (${doubleScans} * 2) + (${singleScans} * 1) = ${totalScans} Scans/Tag.\n2. Pixel pro Bild = (${widthCm} / 2,54 * ${dpi}) * (${heightCm} / 2,54 * ${dpi}) ≈ ${pixelW} * ${pixelH} = ${(pixelW * pixelH).toLocaleString('de-DE')} Pixel.\n   Dateigröße pro Bild = ${(pixelW * pixelH).toLocaleString('de-DE')} * 3 Bytes ≈ ${(bytesPerScan / 1000000).toFixed(2)} MB.\n   Tagesvolumen = ${totalScans} * ${bytesPerScan} Bytes = ${totalBytes.toLocaleString('de-DE')} Bytes => ${gibRounded} GiB (genau: ${totalGiB} GiB).`,
                 explanation: `Scans pro Tag: ${totalScans}. Pixel: ${pixelW} x ${pixelH}. Pro Scan: ${(bytesPerScan / (1024*1024)).toFixed(1)} MiB. Tagesbedarf: ${gibRounded} GiB.`
             });
@@ -3223,7 +3223,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                 isCalculation: true,
                 isBawueFocus: true,
                 type: "open-text",
-                question: `Prüfungsaufgabe Materialbedarfsplanung (LF 1 / LF 6):\nFür ein Projekt werden netto ${netMeters} Meter Verlegekabel im Gebäude fest installiert. Der Betrieb kalkuliert mit einem Verschnittzuschlag von ${wastePct} % bezogen auf den gesamten Brutto-Materialeinsatz (Rechnung im Hundert).\n\nLagerbestandsdaten vor Projektstart:\n- Gesamter Lagerbestand: ${stock} m\n- Mindestbestand (Eiserner Bestand): ${ironStock} m\n- Werkstattbestand (in laufender Fertigung): ${workStock} m\n- Vormerkbestand für andere Kundenprojekte: ${reservedStock} m.\n\nAufgaben:\n1. Ermitteln Sie die für das Projekt verfügbare Lagermenge (verfügbarer Lagerbestand).\n2. Berechnen Sie den Bruttobedarf des Projekts (Gesamtbedarf inkl. Verschnitt 'im Hundert') in vollen Metern.\n3. Berechnen Sie die beim Lieferanten erforderliche Bestellmenge (einzukaufende Fehlmenge).`,
+                question: `Fachaufgabe Materialbedarfsplanung (LF 1 / LF 6):\nFür ein Projekt werden netto ${netMeters} Meter Verlegekabel im Gebäude fest installiert. Der Betrieb kalkuliert mit einem Verschnittzuschlag von ${wastePct} % bezogen auf den gesamten Brutto-Materialeinsatz (Rechnung im Hundert).\n\nLagerbestandsdaten vor Projektstart:\n- Gesamter Lagerbestand: ${stock} m\n- Mindestbestand (Eiserner Bestand): ${ironStock} m\n- Werkstattbestand (in laufender Fertigung): ${workStock} m\n- Vormerkbestand für andere Kundenprojekte: ${reservedStock} m.\n\nAufgaben:\n1. Ermitteln Sie die für das Projekt verfügbare Lagermenge (verfügbarer Lagerbestand).\n2. Berechnen Sie den Bruttobedarf des Projekts (Gesamtbedarf inkl. Verschnitt 'im Hundert') in vollen Metern.\n3. Berechnen Sie die beim Lieferanten erforderliche Bestellmenge (einzukaufende Fehlmenge).`,
                 musterloesung: `Musterlösung mit vollständigem Rechenweg:\n\n1. Verfügbare Lagermenge (Verfügbarer Lagerbestand):\n- Formel: Verfügbare Menge = Lagerbestand - Mindestbestand - Werkstattbestand - Vormerkbestand\n- Begründung der Bestandsabzüge:\n  * Mindestbestand (${ironStock} m): Eiserne Notfallreserve gegen Lieferengpässe; darf im Normalbetrieb nicht angetastet werden.\n  * Werkstattbestand (${workStock} m): Befindet sich bereits intern in der Fertigung/Werkstatt in Verwendung.\n  * Vormerkbestand (${reservedStock} m): Ist bereits verbindlich für andere bestehende Kundenaufträge reserviert.\n- Rechnung: ${stock} m - ${ironStock} m - ${workStock} m - ${reservedStock} m = ${availableStock} Meter verfügbar.\n\n2. Bruttobedarf des Projekts (Rechnung 'im Hundert'):\n- Begründung 'im Hundert': Der Verschnitt von ${wastePct} % bezieht sich auf den gesamten Brutto-Materialeinsatz (100 %). Die tatsächlich verlegten ${netMeters} m Netto-Kabel entsprechen daher genau ${100 - wastePct} % (${(100 - wastePct) / 100}) des Bruttobedarfs.\n- Formel: Bruttobedarf = Netto-Bedarf / (1 - (Verschnittquote / 100)) = ${netMeters} m / ${(1 - wastePct / 100).toFixed(2)}\n- Rechnung: ${netMeters} / ${(1 - wastePct / 100).toFixed(2)} = ${(netMeters / (1 - wastePct / 100)).toFixed(2)} Meter\n- Ergebnis (aufgerundet auf volle Meter): ${grossNeed} Meter Bruttobedarf.\n\n3. Erforderliche Bestellmenge beim Lieferanten (einzukaufende Fehlmenge):\n- Begründung: Das Projekt benötigt insgesamt ${grossNeed} m Kabel (Bruttobedarf). Da ${availableStock} m aus dem Lager entnommen werden können, muss nur die verbleibende Fehlmenge beim Lieferanten bestellt werden.\n- Formel: Bestellmenge = Bruttobedarf - Verfügbare Lagermenge\n- Rechnung: ${grossNeed} m - ${availableStock} m = ${orderAmount} Meter.\n- Ergebnis: Es müssen ${orderAmount} Meter Kabel beim Lieferanten bestellt werden.`,
                 explanation: `1. Verfügbarer Lagerbestand: ${stock} - ${ironStock} - ${workStock} - ${reservedStock} = ${availableStock} m.\n2. Bruttobedarf im Hundert: ${netMeters} m / ${(1 - wastePct/100).toFixed(2)} = ${grossNeed} m.\n3. Bestellmenge Lieferant: ${grossNeed} m (Bruttobedarf) - ${availableStock} m (Lagerbestand) = ${orderAmount} m.`
             });
@@ -3266,7 +3266,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                 isCalculation: true,
                 isBawueFocus: true,
                 type: "open-text",
-                question: `Prüfungsaufgabe WAN-Bandbreitenanalyse (LF 3):\nEin Standortanschluss soll für folgende Anforderungen ausgelegt werden:\n- ${calls} parallele VoIP-Gespräche mit mindestens ${kbitPerCall} kbit/s pro Verbindung.\n- Kontinuierlicher Datenabgleich mit der Firmenzentrale: mindestens ${syncMbit} Mbit/s.\n\nErmitteln Sie die erforderliche symmetrische Gesamtbandbreite des Internetanschlusses in Mbit/s.`,
+                question: `Fachaufgabe WAN-Bandbreitenanalyse (LF 3):\nEin Standortanschluss soll für folgende Anforderungen ausgelegt werden:\n- ${calls} parallele VoIP-Gespräche mit mindestens ${kbitPerCall} kbit/s pro Verbindung.\n- Kontinuierlicher Datenabgleich mit der Firmenzentrale: mindestens ${syncMbit} Mbit/s.\n\nErmitteln Sie die erforderliche symmetrische Gesamtbandbreite des Internetanschlusses in Mbit/s.`,
                 musterloesung: `Musterlösung:\n1. Bandbreite VoIP = ${calls} * ${kbitPerCall} kbit/s = ${calls * kbitPerCall} kbit/s = ${voipMbit.toFixed(1)} Mbit/s.\n2. Bandbreite Datenabgleich = ${syncMbit} Mbit/s.\n3. Symmetrische Gesamtbandbreite = ${voipMbit.toFixed(1)} Mbit/s + ${syncMbit} Mbit/s = ${totalMbit.toFixed(1)} Mbit/s.`,
                 explanation: `VoIP: ${calls} * 100 kbit/s = ${voipMbit} Mbit/s. Daten: ${syncMbit} Mbit/s. Gesamt: ${totalMbit} Mbit/s.`
             });
@@ -3320,7 +3320,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                 isCalculation: true,
                 isBawueFocus: true,
                 type: "open-text",
-                question: `Prüfungsaufgabe Handelskalkulation (LF 6):\nKalkulieren Sie für einen Hardware-Artikel den Barverkaufspreis (BVP) anhand folgender Angaben:\n- Listeneinkaufspreis (LEP): ${lep.toFixed(2)} EUR\n- Lieferantenrabatt: ${lRabattPct} %\n- Lieferantenskonto: ${lSkontoPct} %\n- Bezugskosten: ${bezugskosten.toFixed(2)} EUR\n- Handlungskostenzuschlag (HKZ): ${hkzPct} %\n- Gewinnzuschlag: ${gewinnPct} %\n\nErmitteln Sie Bezugspreis, Selbstkosten und Barverkaufspreis (BVP) mit vollständigem Rechenweg.`,
+                question: `Fachaufgabe Handelskalkulation (LF 6):\nKalkulieren Sie für einen Hardware-Artikel den Barverkaufspreis (BVP) anhand folgender Angaben:\n- Listeneinkaufspreis (LEP): ${lep.toFixed(2)} EUR\n- Lieferantenrabatt: ${lRabattPct} %\n- Lieferantenskonto: ${lSkontoPct} %\n- Bezugskosten: ${bezugskosten.toFixed(2)} EUR\n- Handlungskostenzuschlag (HKZ): ${hkzPct} %\n- Gewinnzuschlag: ${gewinnPct} %\n\nErmitteln Sie Bezugspreis, Selbstkosten und Barverkaufspreis (BVP) mit vollständigem Rechenweg.`,
                 musterloesung: `Musterlösung:\n1. LEP = ${lep.toFixed(2)} EUR - ${lRabattPct}% Rabatt (${(lep * lRabattPct / 100).toFixed(2)} EUR) = ZEP: ${zep.toFixed(2)} EUR.\n2. ZEP - ${lSkontoPct}% Skonto (${(zep * lSkontoPct / 100).toFixed(2)} EUR) = BEP: ${bep.toFixed(2)} EUR.\n3. BEP + Bezugskosten (${bezugskosten.toFixed(2)} EUR) = Bezugspreis: ${bezugspreis.toFixed(2)} EUR.\n4. Bezugspreis + ${hkzPct}% HKZ (${handlungskosten.toFixed(2)} EUR) = Selbstkosten: ${selbstkosten.toFixed(2)} EUR.\n5. Selbstkosten + ${gewinnPct}% Gewinn (${gewinn.toFixed(2)} EUR) = Barverkaufspreis (BVP): ${bvp.toFixed(2)} EUR.`,
                 explanation: `Vorwärtskalkulation: LEP (${lep} EUR) -> Rabatt (${lRabattPct}%) -> Skonto (${lSkontoPct}%) -> Bezugskosten (${bezugskosten} EUR) = Bezugspreis (${bezugspreis.toFixed(2)} EUR) -> HKZ (${hkzPct}%) = Selbstkosten (${selbstkosten.toFixed(2)} EUR) -> Gewinn (${gewinnPct}%) = BVP (${bvp.toFixed(2)} EUR).`
             });
@@ -3363,7 +3363,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                 isCalculation: true,
                 isBawueFocus: true,
                 type: "open-text",
-                question: `Prüfungsaufgabe Kennzahlen der Handelskalkulation (LF 6):\nFür einen Artikel beträgt der Bezugspreis ${bezugspreis.toFixed(2)} EUR und der Netto-Listenverkaufspreis ${nettoLvp.toFixed(2)} EUR.\n\nBerechnen Sie:\n1. Den Kalkulationszuschlag in %\n2. Den Kalkulationsfaktor\n3. Die Handelsspanne in %`,
+                question: `Fachaufgabe Kennzahlen der Handelskalkulation (LF 6):\nFür einen Artikel beträgt der Bezugspreis ${bezugspreis.toFixed(2)} EUR und der Netto-Listenverkaufspreis ${nettoLvp.toFixed(2)} EUR.\n\nBerechnen Sie:\n1. Den Kalkulationszuschlag in %\n2. Den Kalkulationsfaktor\n3. Die Handelsspanne in %`,
                 musterloesung: `Musterlösung:\n1. Kalkulationszuschlag = ((${nettoLvp} EUR - ${bezugspreis} EUR) / ${bezugspreis} EUR) * 100 = ${markupPct.toFixed(1)} %.\n2. Kalkulationsfaktor = ${nettoLvp} EUR / ${bezugspreis} EUR = ${kalkFaktor.toFixed(2)}.\n3. Handelsspanne = ((${nettoLvp} EUR - ${bezugspreis} EUR) / ${nettoLvp} EUR) * 100 = ${handelsspanne.toFixed(1)} %.`,
                 explanation: `Kalkulationszuschlag = Diff/Bezugspreis = ${markupPct}%. Handelsspanne = Diff/Netto-LVP = ${handelsspanne}%. Kalkulationsfaktor = ${kalkFaktor}.`
             });
@@ -3416,7 +3416,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                 isCalculation: true,
                 isBawueFocus: true,
                 type: "open-text",
-                question: `Prüfungsaufgabe Speicherhardware (LF 2):\nEin Speicher-Server wird mit ${diskCount} Festplatten à ${diskSizeTiB} TiB in einem RAID ${raidType}-Verbund aufgebaut.\n\n1. Berechnen Sie die nutzbare Netto-Speicherkapazität in TiB.\n2. Wie viele Festplatten dürfen maximal gleichzeitig ausfallen, ohne dass es zu Datenverlust kommt?`,
+                question: `Fachaufgabe Speicherhardware (LF 2):\nEin Speicher-Server wird mit ${diskCount} Festplatten à ${diskSizeTiB} TiB in einem RAID ${raidType}-Verbund aufgebaut.\n\n1. Berechnen Sie die nutzbare Netto-Speicherkapazität in TiB.\n2. Wie viele Festplatten dürfen maximal gleichzeitig ausfallen, ohne dass es zu Datenverlust kommt?`,
                 musterloesung: `Musterlösung:\n1. Netto-Speicherkapazität RAID ${raidType}: ${raidType === 5 ? `(n - 1) * Kapazität = (${diskCount} - 1) * ${diskSizeTiB} TiB = ${netCapacity} TiB.` : raidType === 6 ? `(n - 2) * Kapazität = (${diskCount} - 2) * ${diskSizeTiB} TiB = ${netCapacity} TiB.` : `(n / 2) * Kapazität = (${diskCount} / 2) * ${diskSizeTiB} TiB = ${netCapacity} TiB.`}\n2. Ausfallsicherheit: Es darf / dürfen ${faultTolerance} ausfallen.`,
                 explanation: `Formel RAID ${raidType}: ${raidType === 5 ? '(n-1)*C' : raidType === 6 ? '(n-2)*C' : '(n/2)*C'}. Netto = ${netCapacity} TiB.`
             });
@@ -3460,7 +3460,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                 isCalculation: true,
                 isBawueFocus: true,
                 type: "open-text",
-                question: `Prüfungsaufgabe Elektrotechnik (LF 2):\nEin IT-Gerät wird an einer Spannung von ${u} V betrieben. Dabei wird eine Stromstärke von ${i_amp} A gemessen.\n\nBerechnen Sie:\n1. Den elektrischen Widerstand R in Ohm.\n2. Die elektrische Leistung P in Watt.\n3. Die verbrauchte elektrische Energie W in Wh bei einer Betriebsdauer von ${hours} Stunden.`,
+                question: `Fachaufgabe Elektrotechnik (LF 2):\nEin IT-Gerät wird an einer Spannung von ${u} V betrieben. Dabei wird eine Stromstärke von ${i_amp} A gemessen.\n\nBerechnen Sie:\n1. Den elektrischen Widerstand R in Ohm.\n2. Die elektrische Leistung P in Watt.\n3. Die verbrauchte elektrische Energie W in Wh bei einer Betriebsdauer von ${hours} Stunden.`,
                 musterloesung: `Musterlösung:\n1. Widerstand R = U / I = ${u} V / ${i_amp} A = ${r} Ohm (Ω).\n2. Leistung P = U * I = ${u} V * ${i_amp} A = ${p} Watt (W).\n3. Energie W = P * t = ${p} W * ${hours} h = ${energyWh} Wh (Wattstunden).`,
                 explanation: `R = U / I = ${r} Ω. P = U * I = ${p} W. W = P * t = ${energyWh} Wh.`
             });
@@ -3504,7 +3504,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                 isCalculation: true,
                 isBawueFocus: true,
                 type: "open-text",
-                question: `Prüfungsaufgabe Subnetting (LF 3):\nEin Netzwerk-Segment erhält die CIDR-Präfixlänge /${prefix}.\n\n1. Ermitteln Sie die zugehörige Subnetzmaske in dotted-decimal Notation.\n2. Berechnen Sie die maximale Anzahl an nutzbaren Host-IP-Adressen in diesem Subnetz.`,
+                question: `Fachaufgabe Subnetting (LF 3):\nEin Netzwerk-Segment erhält die CIDR-Präfixlänge /${prefix}.\n\n1. Ermitteln Sie die zugehörige Subnetzmaske in dotted-decimal Notation.\n2. Berechnen Sie die maximale Anzahl an nutzbaren Host-IP-Adressen in diesem Subnetz.`,
                 musterloesung: `Musterlösung:\n1. Subnetzmaske: ${fullMask} (Präfix /${prefix} = ${prefix} gesetzte Einsen-Bits).\n2. Host-Bits = 32 - ${prefix} = ${hostBits} Bits => 2^${hostBits} = ${totalIps} IP-Adressen gesamt.\n   Nutzbare Hosts = ${totalIps} - 2 (abzüglich Netz-ID und Broadcast-Adresse) = ${usableHosts} Host-Adressen.`,
                 explanation: `/${prefix} -> Host-Bits: ${hostBits} -> 2^${hostBits} - 2 = ${usableHosts} nutzbare Host-IPs. Subnetzmaske: ${fullMask}.`
             });
@@ -3531,7 +3531,7 @@ function generateDynamicQuestions(typeMode = "mix") {
 
     
     // ============================================================================
-    // 🔥 MEISTERKLASSE: SCHWERE PRÜFUNGSAUFGABEN (IHK HARDCORE / PROFI-NIVEAU)
+    // 🔥 MEISTERKLASSE: SCHWERE FACHAUFGABEN (IHK HARDCORE / PROFI-NIVEAU)
     // ============================================================================
 
     // MC1: Mehrstufige VLSM-Subnetzplanung (LF 3 / Rechnen / Schwer)
@@ -3548,7 +3548,7 @@ function generateDynamicQuestions(typeMode = "mix") {
         const netC = `172.${netBaseB}.3.0/26 (Maske: 255.255.255.192) -> Erste Host-IP: 172.${netBaseB}.3.1, Letzte Host-IP: 172.${netBaseB}.3.62, Broadcast: 172.${netBaseB}.3.63 (Kapazität: 62 nutzbare Hosts)`;
         const netD = `172.${netBaseB}.3.64/30 (Maske: 255.255.255.252) -> Erste Host-IP: 172.${netBaseB}.3.65, Letzte Host-IP: 172.${netBaseB}.3.66, Broadcast: 172.${netBaseB}.3.67 (Kapazität: 2 nutzbare Hosts)`;
 
-        const qText = `🔥 Meisterklasse Prüfungsaufgabe VLSM (LF 3):\nEin Unternehmen erhält den Adressblock ${baseNet} zugewiesen. Für eine Standortvernetzung müssen vier Teilnetze mit Variable Length Subnet Masking (VLSM) ohne Adressverschwendung gebildet werden:\n- Subnetz A (Produktion): ${abtA_hosts} Hosts benötigt\n- Subnetz B (Verwaltung): ${abtB_hosts} Hosts benötigt\n- Subnetz C (Server / DMZ): ${abtC_hosts} Hosts benötigt\n- Subnetz D (Point-to-Point WAN-Link): ${abtD_hosts} Hosts benötigt\n\nErmittle für alle vier Subnetze:\n1. Das jeweilige Subnetz-Präfix (CIDR) und die Subnetzmaske in Dotted-Decimal-Notation.\n2. Die Netz-ID, den ersten nutzbaren Host, den letzten nutzbaren Host und die Broadcast-Adresse.`;
+        const qText = `🔥 Meisterklasse Fachaufgabe VLSM (LF 3):\nEin Unternehmen erhält den Adressblock ${baseNet} zugewiesen. Für eine Standortvernetzung müssen vier Teilnetze mit Variable Length Subnet Masking (VLSM) ohne Adressverschwendung gebildet werden:\n- Subnetz A (Produktion): ${abtA_hosts} Hosts benötigt\n- Subnetz B (Verwaltung): ${abtB_hosts} Hosts benötigt\n- Subnetz C (Server / DMZ): ${abtC_hosts} Hosts benötigt\n- Subnetz D (Point-to-Point WAN-Link): ${abtD_hosts} Hosts benötigt\n\nErmittle für alle vier Subnetze:\n1. Das jeweilige Subnetz-Präfix (CIDR) und die Subnetzmaske in Dotted-Decimal-Notation.\n2. Die Netz-ID, den ersten nutzbaren Host, den letzten nutzbaren Host und die Broadcast-Adresse.`;
 
         const mLoesung = `Musterlösung VLSM-Subnetzplanung:\nSortierung nach Hostbedarf (absteigend):\n\n1. Subnetz A (${abtA_hosts} Hosts):\n   - Benötigte Adressen: ${abtA_hosts} + 2 = ${abtA_hosts + 2} -> Nächste Zweierpotenz = 512 (2^9) -> 9 Host-Bits, 23 Netz-Bits (/23).\n   - ${netA}\n\n2. Subnetz B (${abtB_hosts} Hosts):\n   - Benötigte Adressen: ${abtB_hosts} + 2 = ${abtB_hosts + 2} -> 2^8 = 256 Adressen -> 8 Host-Bits (/24).\n   - ${netB}\n\n3. Subnetz C (${abtC_hosts} Hosts):\n   - Benötigte Adressen: ${abtC_hosts} + 2 = ${abtC_hosts + 2} -> 2^6 = 64 Adressen -> 6 Host-Bits (/26).\n   - ${netC}\n\n4. Subnetz D (${abtD_hosts} Hosts WAN):\n   - Benötigte Adressen: 2 + 2 = 4 -> 2^2 = 4 Adressen -> 2 Host-Bits (/30).\n   - ${netD}`;
 
