@@ -23,12 +23,21 @@ let stats = {
     total: 0
 };
 
-// Exam & Simulation State
+// Exam & Simulation State (DIN-A4 Booklet & 100-Punkte Prüfungen)
 let isExamActive = false;
 let isSimulationMode = false;
-let examQuestions = [];
-let examAnswers = [];
-let examCurrentIndex = 0;
+let activeExamSet = null;
+let examCurrentPage = 0; // 0: Deckblatt, 1: 1. Aufgabe, 2: 2. Aufgabe, 3: 3. Aufgabe, 4: 4. Aufgabe
+let examCandidateInfo = {
+    name: "Mustermann, Max",
+    prueflingsnummer: "1202-74910",
+    beruf: "Fachinformatiker/-in",
+    ihk: "IHK Region Südwest",
+    termin: "Abschlussprüfung Teil 1"
+};
+let examAnswersData = {}; // Store text for lines, math grids, and table cells
+let examScores = {}; // Store points for subtasks
+let isExamSubmitted = false;
 let examTimerInterval = null;
 let examSecondsRemaining = 90 * 60;
 let examSecondsElapsed = 0;
@@ -104,24 +113,46 @@ document.addEventListener("DOMContentLoaded", () => {
             resumeQuizBtn.addEventListener("click", resumeNormalQuizRound);
         }
 
-        // Exam Mode Buttons
+        // Exam Mode Buttons & Selectors
         const examModeBtn = document.getElementById("exam-mode-btn");
         const simulationModeBtn = document.getElementById("simulation-mode-btn");
-        const examPrevBtn = document.getElementById("exam-prev-btn");
-        const examSkipBtn = document.getElementById("exam-skip-btn");
-        const examNextBtn = document.getElementById("exam-next-btn");
+        const sidebarExamSetSelect = document.getElementById("sidebar-exam-set-select");
+        const bookletExamSelect = document.getElementById("booklet-exam-select");
+        const examPrevPageBtn = document.getElementById("exam-prev-page-btn");
+        const examNextPageBtn = document.getElementById("exam-next-page-btn");
         const examExitBtn = document.getElementById("exam-exit-btn");
         const examSubmitBtn = document.getElementById("exam-submit-btn");
+        const examWhiteboardBtn = document.getElementById("exam-whiteboard-btn");
         const resultsBackBtn = document.getElementById("results-back-btn");
 
         if (examModeBtn) examModeBtn.addEventListener("click", () => startExamMode(false));
         if (simulationModeBtn) simulationModeBtn.addEventListener("click", () => startExamMode(true));
-        if (examPrevBtn) examPrevBtn.addEventListener("click", loadPrevExamQuestion);
-        if (examSkipBtn) examSkipBtn.addEventListener("click", skipExamQuestion);
-        if (examNextBtn) examNextBtn.addEventListener("click", saveAndNextExamQuestion);
+        if (sidebarExamSetSelect) {
+            sidebarExamSetSelect.addEventListener("change", (e) => {
+                if (bookletExamSelect) bookletExamSelect.value = e.target.value;
+            });
+        }
+        if (bookletExamSelect) {
+            bookletExamSelect.addEventListener("change", (e) => {
+                if (sidebarExamSetSelect) sidebarExamSetSelect.value = e.target.value;
+                switchActiveExamSet(e.target.value);
+            });
+        }
+        if (examPrevPageBtn) examPrevPageBtn.addEventListener("click", () => changeExamPage(examCurrentPage - 1));
+        if (examNextPageBtn) examNextPageBtn.addEventListener("click", () => changeExamPage(examCurrentPage + 1));
         if (examExitBtn) examExitBtn.addEventListener("click", exitExamMode);
         if (examSubmitBtn) examSubmitBtn.addEventListener("click", submitExam);
+        if (examWhiteboardBtn) examWhiteboardBtn.addEventListener("click", openWhiteboard);
         if (resultsBackBtn) resultsBackBtn.addEventListener("click", showMainQuizMode);
+
+        // Tab pills click listeners
+        const tabPills = document.querySelectorAll("#booklet-tab-pills .exam-tab-btn");
+        tabPills.forEach(btn => {
+            btn.addEventListener("click", () => {
+                const targetPage = parseInt(btn.getAttribute("data-page"), 10);
+                changeExamPage(targetPage);
+            });
+        });
         
         if (typeSelect) {
             typeSelect.addEventListener("change", () => {
@@ -1250,12 +1281,12 @@ function formatQuestionText(text) {
     return formatted;
 }
 
-// ==================== EXAM MODE LOGIC ====================
+// ==================== EXAM MODE LOGIC (1:1 DIN-A4 PRÜFUNGSBOGEN) ====================
 
-// Starts the exam or simulation
+// Starts the authentic 100-point exam or 90-min simulation
 function startExamMode(simulation) {
     if (isExamActive) {
-        if (!confirm("Du befindest dich bereits in einer Prüfung. Möchtest du diese abbrechen und eine neue starten?")) {
+        if (!confirm("Du befindest dich bereits in einer Prüfung. Möchtest du diese abbrechen und neu starten?")) {
             return;
         }
         clearInterval(examTimerInterval);
@@ -1263,394 +1294,608 @@ function startExamMode(simulation) {
 
     isExamActive = true;
     isSimulationMode = simulation;
-    examCurrentIndex = 0;
-    
-    // Select questions based on selected typeMode (e.g. for Baden-Württemberg open-text exams)
-    const chosenMode = typeSelect ? typeSelect.value : "mix";
-    const isHardExam = difficultySelect && difficultySelect.value === "hard";
-    
-    // Core pool: Real exam questions (id >= 157)
-    let coreExamPool = staticQuestions.filter(q => q.id >= 157 && (chosenMode !== "open" || q.type === "open-text"));
-    if (isHardExam) {
-        coreExamPool = coreExamPool.filter(q => q.isHard || q.difficulty === "hard" || (q.topic && q.topic.includes("Meisterklasse")) || (q.question && q.question.includes("Meisterklasse")));
-    }
-    
-    // Other pools: static questions and dynamic generators
-    let otherStaticPool = [];
-    let dynamicPool = [];
-    
-    if (chosenMode === "open") {
-        otherStaticPool = staticQuestions.filter(q => q.id < 157 && q.type === "open-text");
-        dynamicPool = generateDynamicQuestions("open");
-    } else if (chosenMode === "standard") {
-        otherStaticPool = staticQuestions.filter(q => q.id < 157 && q.type !== "open-text");
-        dynamicPool = generateDynamicQuestions("standard");
-    } else {
-        otherStaticPool = staticQuestions.filter(q => q.id < 157);
-        dynamicPool = generateDynamicQuestions("mix");
+    isExamSubmitted = false;
+    examCurrentPage = 0; // Start on Deckblatt
+
+    // Determine chosen exam set from sidebar dropdown
+    const sidebarSelect = document.getElementById("sidebar-exam-set-select");
+    const chosenSetId = sidebarSelect ? sidebarSelect.value : "exam_1";
+
+    loadExamSetById(chosenSetId);
+
+    // Reset user answers and scores for this attempt
+    examAnswersData = {};
+    examScores = {};
+
+    // Synchronize booklet selector dropdown
+    const bookletSelect = document.getElementById("booklet-exam-select");
+    if (bookletSelect) {
+        bookletSelect.value = chosenSetId;
     }
 
-    if (isHardExam) {
-        otherStaticPool = otherStaticPool.filter(q => q.isHard || q.difficulty === "hard" || (q.topic && q.topic.includes("Meisterklasse")) || (q.question && q.question.includes("Meisterklasse")));
-        dynamicPool = dynamicPool.filter(q => q.isHard || q.difficulty === "hard" || (q.topic && q.topic.includes("Meisterklasse")) || (q.question && q.question.includes("Meisterklasse")));
-    }
-    
-    // Mix and shuffle
-    shuffleArray(coreExamPool);
-    shuffleArray(otherStaticPool);
-    shuffleArray(dynamicPool);
-
-    // Target: 25 questions total
-    // Select 15 questions from core exam questions (real ones) and 10 from others to ensure a solid and varied test!
-    let selected = [];
-    
-    // Grab up to 15 real exam questions
-    selected.push(...coreExamPool.slice(0, 15));
-    
-    // Grab remaining 10 from static and dynamic pools
-    let countNeeded = 25 - selected.length;
-    let mixedOthers = [...otherStaticPool, ...dynamicPool];
-    shuffleArray(mixedOthers);
-    selected.push(...mixedOthers.slice(0, countNeeded));
-    
-    shuffleArray(selected); // shuffle the final selection so they are distributed randomly
-    if (chosenMode === "open") {
-        selected = selected.filter(q => q.type === "open-text");
-    }
-    examQuestions = selected;
-
-    // Initialize answer sheet
-    examAnswers = new Array(examQuestions.length).fill(null).map(() => ({
-        userAnswer: "",
-        selectedIndex: null,
-        isSkipped: false,
-        isCorrect: false,
-        isSelfGraded: false
-    }));
-
-    // Setup UI view
+    // Setup view containers
     document.querySelector(".container").classList.add("exam-mode-active");
     document.querySelectorAll(".sidebar").forEach(s => s.style.display = "none");
     document.querySelector(".quiz-area").style.display = "none";
     document.getElementById("exam-area").style.display = "flex";
-    document.getElementById("exam-results-area").style.display = "none";
+    const resArea = document.getElementById("exam-results-area");
+    if (resArea) resArea.style.display = "none";
 
-    // Setup Mode Info & Title
-    const titleEl = document.getElementById("exam-mode-title");
+    // Setup Timer
     const timerContainer = document.getElementById("exam-timer-container");
-    
+    const timerEl = document.getElementById("exam-timer");
+
     if (simulation) {
-        titleEl.textContent = "IHK-Prüfungssimulation";
-        timerContainer.style.display = "flex";
-        
-        // Reset timer to 90 minutes
+        if (timerContainer) timerContainer.style.display = "flex";
         examSecondsRemaining = 90 * 60;
         examSecondsElapsed = 0;
-        document.getElementById("exam-timer").textContent = formatExamTime(examSecondsRemaining);
-        
+        if (timerEl) timerEl.textContent = formatExamTime(examSecondsRemaining);
+
         examTimerInterval = setInterval(() => {
             examSecondsRemaining--;
             examSecondsElapsed++;
-            document.getElementById("exam-timer").textContent = formatExamTime(examSecondsRemaining);
-            
+            if (timerEl) timerEl.textContent = formatExamTime(examSecondsRemaining);
+
             if (examSecondsRemaining <= 0) {
                 clearInterval(examTimerInterval);
-                alert("Die Zeit ist abgelaufen! Deine Prüfung wird automatisch abgegeben.");
+                alert("Die Prüfungszeit von 90 Minuten ist abgelaufen! Deine Prüfung wird nun automatisch abgegeben.");
                 submitExam();
             }
         }, 1000);
     } else {
-        titleEl.textContent = "IHK-Übungsmodus";
-        timerContainer.style.display = "none";
+        if (timerContainer) timerContainer.style.display = "none";
         examSecondsElapsed = 0;
         examTimerInterval = setInterval(() => {
             examSecondsElapsed++;
         }, 1000);
     }
 
-    loadExamQuestion();
+    // Render page 0 (Deckblatt)
+    renderCurrentExamPage();
 }
 
-// Formats seconds into MM:SS
-function formatExamTime(totalSeconds) {
-    const minutes = Math.floor(totalSeconds / 60);
-    const seconds = totalSeconds % 60;
-    return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+// Loads an exam set by ID
+function loadExamSetById(setId) {
+    if (typeof EXAM_SETS === "undefined" || !EXAM_SETS.length) {
+        console.error("EXAM_SETS not loaded!");
+        return;
+    }
+
+    if (setId === "exam_random" && typeof generateDynamicFullExam === "function") {
+        activeExamSet = generateDynamicFullExam();
+    } else {
+        const found = EXAM_SETS.find(e => e.id === setId);
+        activeExamSet = found ? JSON.parse(JSON.stringify(found)) : JSON.parse(JSON.stringify(EXAM_SETS[0]));
+    }
 }
 
-// Loads current exam question
-function loadExamQuestion() {
-    const q = examQuestions[examCurrentIndex];
-    const ans = examAnswers[examCurrentIndex];
+// Switches exam set from the booklet dropdown
+function switchActiveExamSet(setId) {
+    if (!confirm("Möchtest du zu diesem Prüfungssatz wechseln? Deine aktuellen Eingaben in dieser Prüfung werden zurückgesetzt.")) {
+        const bookletSelect = document.getElementById("booklet-exam-select");
+        if (bookletSelect && activeExamSet) bookletSelect.value = activeExamSet.id;
+        return;
+    }
 
-    // Header updates
-    document.getElementById("exam-question-theme").textContent = getThemeLabel(q.theme);
-    document.getElementById("exam-question-number").textContent = `Aufgabe ${examCurrentIndex + 1} von ${examQuestions.length}`;
-    document.getElementById("exam-question-text").innerHTML = formatQuestionText(q.question);
+    loadExamSetById(setId);
+    examAnswersData = {};
+    examScores = {};
+    isExamSubmitted = false;
+    examCurrentPage = 0;
+    renderCurrentExamPage();
+}
 
-    // Handle Visual Diagram Graphic (SVG) in Exam Mode
-    const examDiagContainer = document.getElementById("exam-diagram-visual-container");
-    if (examDiagContainer) {
-        if (q.diagramSvg) {
-            examDiagContainer.innerHTML = `
-                <div class="svg-diagram-wrapper">
-                    <span class="diagram-header-badge"><i class="fa-solid fa-image"></i> ${escapeHtml(q.diagramTitle || "Referenzdiagramm / Modell")}</span>
-                    ${q.diagramSvg}
-                    ${q.diagramCaption ? `<div class="diagram-caption">${escapeHtml(q.diagramCaption)}</div>` : ''}
-                </div>
-            `;
-            examDiagContainer.style.display = "flex";
+// Changes page (0 = Deckblatt, 1..4 = Aufgaben)
+function changeExamPage(targetPage) {
+    if (targetPage < 0 || targetPage > 4) return;
+    examCurrentPage = targetPage;
+    renderCurrentExamPage();
+}
+
+// Renders either Deckblatt (0) or one of the 4 Tasks (1..4)
+function renderCurrentExamPage() {
+    if (!activeExamSet) return;
+
+    // Update tab button active states
+    const tabs = document.querySelectorAll("#booklet-tab-pills .exam-tab-btn");
+    tabs.forEach(btn => {
+        const p = parseInt(btn.getAttribute("data-page"), 10);
+        if (p === examCurrentPage) {
+            btn.classList.add("active");
         } else {
-            examDiagContainer.innerHTML = "";
-            examDiagContainer.style.display = "none";
+            btn.classList.remove("active");
         }
-    }
-
-    // Handle code block
-    const codeBlock = document.getElementById("exam-code-block-container");
-    const codeEl = document.getElementById("exam-question-code");
-    if (q.code) {
-        codeEl.textContent = q.code;
-        codeBlock.style.display = "block";
-    } else {
-        codeBlock.style.display = "none";
-    }
-
-    // Handle Exam Diagram helper banner
-    const examDiagBanner = document.getElementById("exam-diagram-banner-container");
-    if (examDiagBanner) {
-        const isDiag = q.isDiagram === true || q.diagramType || q.theme === "diagrams" || (q.topic && (q.topic.toLowerCase().includes("diagramm") || q.topic.toLowerCase().includes("uml") || q.topic.toLowerCase().includes("erd") || q.topic.toLowerCase().includes("epk") || q.topic.toLowerCase().includes("bpmn") || q.topic.toLowerCase().includes("netzplan") || q.topic.toLowerCase().includes("struktogramm")));
-        if (isDiag) {
-            const diagName = q.diagramType || (q.topic ? q.topic : "Diagramm / Modell");
-            examDiagBanner.style.display = "block";
-            examDiagBanner.innerHTML = `
-                <div style="background: linear-gradient(135deg, #f0fdf4, #ecfeff); border: 1px solid #06b6d4; border-radius: 8px; padding: 0.65rem 0.9rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem;">
-                    <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.88rem; color: #0e7490;">
-                        <i class="fa-solid fa-pen-ruler" style="color: #0891b2; font-size: 1.15rem;"></i>
-                        <span><strong>Diagramm-Aufgabe (${escapeHtml(diagName)}):</strong> Skizziere deine Lösung auf dem Zeichenboard!</span>
-                    </div>
-                    <div style="display: flex; gap: 0.4rem; align-items: center;">
-                        <a href="whiteboard.html?v=101" target="_blank" class="btn" style="background: white; color: #0891b2; border: 1px solid #0891b2; padding: 0.35rem 0.7rem; font-size: 0.85rem; border-radius: 6px; text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 0.35rem;">
-                            <i class="fa-solid fa-up-right-from-square"></i> Im neuen Tab ↗
-                        </a>
-                        <button id="inline-exam-wb-btn" class="btn" style="background: linear-gradient(135deg, #0891b2, #0284c7); color: white; padding: 0.35rem 0.75rem; font-size: 0.85rem; border-radius: 6px; border: none; cursor: pointer; font-weight: 600; display: inline-flex; align-items: center; gap: 0.35rem;">
-                            <i class="fa-solid fa-palette"></i> Als Fenster
-                        </button>
-                    </div>
-                </div>
-            `;
-            const inlineExamBtn = document.getElementById("inline-exam-wb-btn");
-            if (inlineExamBtn) {
-                inlineExamBtn.onclick = openWhiteboard;
-            }
-        } else {
-            examDiagBanner.style.display = "none";
-            examDiagBanner.innerHTML = "";
-        }
-    }
-
-    // Prev Button
-    const prevBtn = document.getElementById("exam-prev-btn");
-    prevBtn.disabled = examCurrentIndex === 0;
-    prevBtn.style.opacity = examCurrentIndex === 0 ? "0.5" : "1";
-    prevBtn.style.cursor = examCurrentIndex === 0 ? "not-allowed" : "pointer";
-
-    // Skip Button styling
-    const skipBtn = document.getElementById("exam-skip-btn");
-    if (ans.isSkipped) {
-        skipBtn.style.backgroundColor = "#e53e3e";
-        skipBtn.style.color = "white";
-    } else {
-        skipBtn.style.backgroundColor = "#a0aec0";
-        skipBtn.style.color = "white";
-    }
-
-    // Render Answers
-    const answersContainer = document.getElementById("exam-answers-container");
-    answersContainer.innerHTML = "";
-
-    if (q.type === "multiple-choice" || q.type === "true-false") {
-        q.options.forEach((opt, idx) => {
-            const btn = document.createElement("button");
-            btn.className = "answer-option";
-            if (ans.selectedIndex === idx) {
-                btn.classList.add("selected");
-                btn.style.borderColor = "#3182ce";
-                btn.style.backgroundColor = "#ebf8ff";
-                btn.innerHTML = `<span class="opt-marker"><i class="fa-solid fa-circle-dot" style="color: #3182ce;"></i></span> ${escapeHtml(opt)}`;
-            } else {
-                btn.innerHTML = `<span class="opt-marker"><i class="fa-regular fa-circle"></i></span> ${escapeHtml(opt)}`;
-            }
-            
-            btn.onclick = () => {
-                const allOpts = answersContainer.querySelectorAll(".answer-option");
-                allOpts.forEach(o => {
-                    o.classList.remove("selected");
-                    o.style.borderColor = "";
-                    o.style.backgroundColor = "";
-                    o.querySelector(".opt-marker").innerHTML = '<i class="fa-regular fa-circle"></i>';
-                });
-                btn.classList.add("selected");
-                btn.style.borderColor = "#3182ce";
-                btn.style.backgroundColor = "#ebf8ff";
-                btn.querySelector(".opt-marker").innerHTML = '<i class="fa-solid fa-circle-dot" style="color: #3182ce;"></i>';
-                ans.selectedIndex = idx;
-                ans.isSkipped = false;
-                renderExamQuestionGrid();
-            };
-            
-            answersContainer.appendChild(btn);
-        });
-    } else if (q.type === "text-input") {
-        const inputContainer = document.createElement("div");
-        inputContainer.className = "text-answer-container";
-        
-        const input = document.createElement("input");
-        input.type = "text";
-        input.className = "text-input";
-        input.placeholder = "Gib deine Antwort hier ein...";
-        input.value = ans.userAnswer;
-        
-        input.oninput = () => {
-            ans.userAnswer = input.value.trim();
-            ans.isSkipped = false;
-            renderExamQuestionGrid();
-        };
-        
-        inputContainer.appendChild(input);
-        answersContainer.appendChild(inputContainer);
-    } else if (q.type === "open-text") {
-        const inputContainer = document.createElement("div");
-        inputContainer.className = "text-answer-container";
-        
-        const textarea = document.createElement("textarea");
-        textarea.className = "text-input open-textarea";
-        textarea.placeholder = "Schreibe deine handschriftliche Antwort bzw. Lösungsansatz hier...";
-        textarea.value = ans.userAnswer;
-        
-        textarea.oninput = () => {
-            ans.userAnswer = textarea.value.trim();
-            ans.isSkipped = false;
-            renderExamQuestionGrid();
-        };
-        
-        inputContainer.appendChild(textarea);
-        answersContainer.appendChild(inputContainer);
-    }
-
-    renderExamQuestionGrid();
-}
-
-// Navigates to previous question
-function loadPrevExamQuestion() {
-    if (examCurrentIndex > 0) {
-        examCurrentIndex--;
-        loadExamQuestion();
-    }
-}
-
-// Skips the current question
-function skipExamQuestion() {
-    const ans = examAnswers[examCurrentIndex];
-    ans.isSkipped = true;
-    ans.selectedIndex = null;
-    ans.userAnswer = "";
-    
-    goToNextExamOrWrap();
-}
-
-// Saves answer and proceeds
-function saveAndNextExamQuestion() {
-    const q = examQuestions[examCurrentIndex];
-    const ans = examAnswers[examCurrentIndex];
-
-    // Check if answered
-    let hasAnswered = false;
-    if (q.type === "multiple-choice" || q.type === "true-false") {
-        hasAnswered = ans.selectedIndex !== null;
-    } else {
-        hasAnswered = ans.userAnswer.length > 0;
-    }
-
-    if (!hasAnswered) {
-        ans.isSkipped = true;
-    } else {
-        ans.isSkipped = false;
-    }
-
-    goToNextExamOrWrap();
-}
-
-// Helper to progress index
-function goToNextExamOrWrap() {
-    if (examCurrentIndex < examQuestions.length - 1) {
-        examCurrentIndex++;
-        loadExamQuestion();
-    } else {
-        alert("Du hast das Ende der Fragen erreicht! Klicke unten auf 'Prüfung abgeben & auswerten', um das Testergebnis zu sehen.");
-    }
-}
-
-// Renders the Grid at the bottom of Exam Card
-function renderExamQuestionGrid() {
-    const gridContainer = document.getElementById("exam-question-grid");
-    if (!gridContainer || examQuestions.length === 0) return;
-    gridContainer.innerHTML = "";
-
-    examQuestions.forEach((q, idx) => {
-        const item = document.createElement("button");
-        item.className = "grid-item";
-        item.textContent = idx + 1;
-        item.style.width = "2.2rem";
-        item.style.height = "2.2rem";
-        item.style.borderRadius = "6px";
-        item.style.border = "none";
-        item.style.fontSize = "0.95rem";
-        item.style.fontWeight = "bold";
-        item.style.cursor = "pointer";
-        item.style.display = "flex";
-        item.style.alignItems = "center";
-        item.style.justifyContent = "center";
-        item.style.transition = "all 0.2s";
-
-        const ans = examAnswers[idx];
-        const isActive = idx === examCurrentIndex;
-        
-        let hasAnswer = false;
-        if (q.type === "multiple-choice" || q.type === "true-false") {
-            hasAnswer = ans.selectedIndex !== null;
-        } else {
-            hasAnswer = ans.userAnswer.length > 0;
-        }
-
-        if (isActive) {
-            item.style.boxShadow = "0 0 0 3px #0f766e"; // Green active ring
-        }
-
-        if (ans.isSkipped) {
-            item.style.backgroundColor = "#feb2b2"; // Red for skipped
-            item.style.color = "#9b2c2c";
-            item.style.border = "2px solid #e53e3e";
-        } else if (hasAnswer) {
-            item.style.backgroundColor = "#319795"; // Dark green for answered
-            item.style.color = "white";
-        } else {
-            item.style.backgroundColor = "#edf2f7"; // Light grey for untouched
-            item.style.color = "#4a5568";
-        }
-
-        item.onclick = () => {
-            examCurrentIndex = idx;
-            loadExamQuestion();
-        };
-
-        gridContainer.appendChild(item);
     });
+
+    // Update page indicator text
+    const indicator = document.getElementById("exam-page-indicator");
+    const prevBtn = document.getElementById("exam-prev-page-btn");
+    const nextBtn = document.getElementById("exam-next-page-btn");
+
+    if (prevBtn) {
+        prevBtn.disabled = examCurrentPage === 0;
+        prevBtn.style.opacity = examCurrentPage === 0 ? "0.5" : "1";
+    }
+
+    if (nextBtn) {
+        nextBtn.disabled = examCurrentPage === 4;
+        nextBtn.style.opacity = examCurrentPage === 4 ? "0.5" : "1";
+    }
+
+    if (indicator) {
+        const pageLabels = [
+            "Seite 1 von 5 (Deckblatt)",
+            "Seite 2 von 5 (1. Aufgabe - 25 Punkte)",
+            "Seite 3 von 5 (2. Aufgabe - 25 Punkte)",
+            "Seite 4 von 5 (3. Aufgabe - 25 Punkte)",
+            "Seite 5 von 5 (4. Aufgabe - 25 Punkte)"
+        ];
+        indicator.textContent = pageLabels[examCurrentPage];
+    }
+
+    const container = document.getElementById("exam-paper-container");
+    if (!container) return;
+
+    if (examCurrentPage === 0) {
+        renderDeckblatt(container);
+    } else {
+        renderTaskPage(container, examCurrentPage);
+    }
+
+    // Scroll to top of exam paper sheet smoothly
+    container.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
-// Exit and abort the exam
+// Renders the official Deckblatt (Page 0)
+function renderDeckblatt(container) {
+    const scores = calculateExamScoresSummary();
+
+    let stampHtml = "";
+    if (isExamSubmitted) {
+        const stampClass = scores.isPassed ? "ihk-stamp-pass" : "ihk-stamp-fail";
+        const stampText = scores.isPassed ? "✓ BESTANDEN (IHK)" : "✗ NICHT BESTANDEN";
+        stampHtml = `
+            <div style="text-align: center; margin: 15px 0;">
+                <div class="ihk-stamp ${stampClass}">${stampText}</div>
+                <div style="font-size: 1.1rem; font-weight: bold; color: ${scores.isPassed ? '#15803d' : '#b91c1c'}; margin-top: 4px;">
+                    Gesamtergebnis: ${scores.totalPoints} von 100 Punkten (Note ${scores.gradeNum} • ${scores.gradeText})
+                </div>
+            </div>
+        `;
+    }
+
+    container.innerHTML = `
+        <div class="exam-paper-sheet">
+            <!-- Header bar -->
+            <div class="exam-paper-header">
+                <span>Abschlussprüfung Teil 1 • IT-Berufe</span>
+                <span>Termin: ${escapeHtml(examCandidateInfo.termin)}</span>
+                <span>Prüfungszeit: 90 Minuten</span>
+            </div>
+
+            <!-- Main Sheet Body -->
+            <div class="exam-sheet-content" style="padding-right: 0;">
+                <!-- Kopfleiste (Candidate details) -->
+                <div class="deckblatt-header-box">
+                    <div class="deckblatt-grid">
+                        <div class="deckblatt-field">
+                            <label>Name, Vorname des Prüflings</label>
+                            <input type="text" id="cand-name" value="${escapeHtml(examCandidateInfo.name)}" oninput="examCandidateInfo.name = this.value">
+                        </div>
+                        <div class="deckblatt-field">
+                            <label>Prüflingsnummer</label>
+                            <input type="text" id="cand-id" value="${escapeHtml(examCandidateInfo.prueflingsnummer)}" oninput="examCandidateInfo.prueflingsnummer = this.value">
+                        </div>
+                        <div class="deckblatt-field">
+                            <label>Berufs-Nr. / Bereich</label>
+                            <input type="text" value="1202 / 64" readonly style="background:#f1f5f9;">
+                        </div>
+                        <div class="deckblatt-field">
+                            <label>Ausbildungsberuf</label>
+                            <input type="text" id="cand-beruf" value="${escapeHtml(examCandidateInfo.beruf)}" oninput="examCandidateInfo.beruf = this.value">
+                        </div>
+                        <div class="deckblatt-field" style="grid-column: span 2;">
+                            <label>Zuständige Industrie- und Handelskammer</label>
+                            <input type="text" id="cand-ihk" value="${escapeHtml(examCandidateInfo.ihk)}" oninput="examCandidateInfo.ihk = this.value">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Exam Title Area -->
+                <div class="deckblatt-title-area">
+                    <div style="font-size: 0.95rem; font-weight: bold; text-transform: uppercase; color: #475569; letter-spacing: 0.05em; margin-bottom: 4px;">
+                        Gemeinsame Prüfungsaufgaben der Industrie- und Handelskammern
+                    </div>
+                    <div class="deckblatt-exam-title">Abschlussprüfung Teil 1 (AP1)</div>
+                    <div class="deckblatt-exam-subtitle">Einrichten eines IT-gestützten Arbeitsplatzes</div>
+                    <div style="font-size: 1.05rem; font-weight: 700; color: #0284c7; margin-top: 6px;">
+                        ${escapeHtml(activeExamSet.title)}
+                    </div>
+                </div>
+
+                ${stampHtml}
+
+                <!-- Two-column info boxes -->
+                <div class="deckblatt-columns">
+                    <!-- Scope box (Left) -->
+                    <div class="deckblatt-scope-box">
+                        <h4><i class="fa-solid fa-list-check"></i> Prüfungsumfang</h4>
+                        <ul>
+                            <li><strong>4 gebundene / ungebundene Aufgaben</strong></li>
+                            <li><strong>Bearbeitungszeit: 90 Minuten</strong></li>
+                            <li><strong>Gesamtpunktzahl: 100 Punkte</strong></li>
+                            <li>Jede der 4 Aufgaben wird mit maximal 25 Punkten bewertet.</li>
+                            <li><strong>Erlaubte Hilfsmittel:</strong> IT-Handbuch / Tabellenbuch, netzunabhängiger, nicht programmierbarer Taschenrechner.</li>
+                        </ul>
+
+                        <div style="margin-top: 15px; padding: 10px; background: #e0f2fe; border: 1px solid #7dd3fc; border-radius: 4px; font-size: 0.85rem;">
+                            <strong>IHK-Notenschlüssel:</strong><br>
+                            100 – 92 Pkt: Note 1 (sehr gut)<br>
+                            &lt; 92 – 81 Pkt: Note 2 (gut)<br>
+                            &lt; 81 – 67 Pkt: Note 3 (befriedigend)<br>
+                            &lt; 67 – 50 Pkt: Note 4 (ausreichend)<br>
+                            &lt; 50 – 30 Pkt: Note 5 (mangelhaft)<br>
+                            &lt; 30 – 0 Pkt: Note 6 (ungenügend)
+                        </div>
+                    </div>
+
+                    <!-- Instructions box (Right) -->
+                    <div class="deckblatt-instructions-box">
+                        <h4><i class="fa-solid fa-triangle-exclamation"></i> Amtliche Bearbeitungshinweise</h4>
+                        <ol>
+                            <li>Prüfen Sie diesen Prüfungssatz vor Beginn auf Vollständigkeit (Deckblatt und Aufgaben 1 bis 4).</li>
+                            <li>Tragen Sie Ihren Namen und Ihre Prüflingsnummer oben in die Kopfleiste ein.</li>
+                            <li>Lösungen sind handschriftlich auf den vorgegebenen Linien oder in den Tabellen einzutragen.</li>
+                            <li>Für Berechnungen ist das dafür vorgesehene 5-mm-Rechengitter (Kästchen) zu nutzen. Rechenwege müssen nachvollziehbar sein.</li>
+                            <li>Werden mehr Angaben gemacht als ausdrücklich verlangt (z. B. 4 statt 2 Gründe), werden ausschließlich die ersten verlangten Angaben bewertet.</li>
+                            <li>Nicht zutreffende Tabellenfelder sind mit einem Schrägstrich (/) zu sperren.</li>
+                            <li>Bei Diagrammen sind standardisierte Notationen (UML, EPK, BPMN 2.0, DIN 69900) zu verwenden.</li>
+                            <li>Der rechte Rand (Korrekturrand) ist für die Korrektur bestimmt und darf nicht beschrieben werden.</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <!-- Official Evaluation Table (Bewertungsfeld) -->
+                <div style="margin-top: 14px;">
+                    <div style="font-weight: bold; font-size: 0.95rem; margin-bottom: 4px; text-transform: uppercase;">
+                        Bewertung durch den Prüfungsausschuss (Ergebnisübersicht):
+                    </div>
+                    <table class="deckblatt-eval-table">
+                        <thead>
+                            <tr>
+                                <th style="text-align: left;">Prüfungsaufgabe</th>
+                                <th>Höchstpunktzahl</th>
+                                <th>Erreichte Punkte</th>
+                                <th>Korrektor-Paraphe</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="label-col">1. Aufgabe: ${escapeHtml(activeExamSet.tasks[0].title.split(':')[1] || activeExamSet.tasks[0].title)}</td>
+                                <td>25</td>
+                                <td style="font-weight: bold; font-size: 1.05rem; color: #dc2626;">${scores.taskPoints[0]}</td>
+                                <td style="color: #64748b; font-style: italic;">${isExamSubmitted ? 'gez. IHK' : ''}</td>
+                            </tr>
+                            <tr>
+                                <td class="label-col">2. Aufgabe: ${escapeHtml(activeExamSet.tasks[1].title.split(':')[1] || activeExamSet.tasks[1].title)}</td>
+                                <td>25</td>
+                                <td style="font-weight: bold; font-size: 1.05rem; color: #dc2626;">${scores.taskPoints[1]}</td>
+                                <td style="color: #64748b; font-style: italic;">${isExamSubmitted ? 'gez. IHK' : ''}</td>
+                            </tr>
+                            <tr>
+                                <td class="label-col">3. Aufgabe: ${escapeHtml(activeExamSet.tasks[2].title.split(':')[1] || activeExamSet.tasks[2].title)}</td>
+                                <td>25</td>
+                                <td style="font-weight: bold; font-size: 1.05rem; color: #dc2626;">${scores.taskPoints[2]}</td>
+                                <td style="color: #64748b; font-style: italic;">${isExamSubmitted ? 'gez. IHK' : ''}</td>
+                            </tr>
+                            <tr>
+                                <td class="label-col">4. Aufgabe: ${escapeHtml(activeExamSet.tasks[3].title.split(':')[1] || activeExamSet.tasks[3].title)}</td>
+                                <td>25</td>
+                                <td style="font-weight: bold; font-size: 1.05rem; color: #dc2626;">${scores.taskPoints[3]}</td>
+                                <td style="color: #64748b; font-style: italic;">${isExamSubmitted ? 'gez. IHK' : ''}</td>
+                            </tr>
+                            <tr class="total-row">
+                                <td class="label-col">Gesamtpunktzahl / Endnote:</td>
+                                <td>100</td>
+                                <td style="color: #dc2626; font-size: 1.15rem;">${scores.totalPoints} Punkte</td>
+                                <td><strong>Note: ${isExamSubmitted ? scores.gradeNum + ' (' + scores.gradeText + ')' : '—'}</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Start Action Button -->
+                <div style="text-align: center; margin-top: 24px;">
+                    <button class="btn btn-primary" onclick="changeExamPage(1)" style="font-size: 1.05rem; padding: 0.75rem 1.6rem; font-weight: bold; display: inline-flex; align-items: center; gap: 0.5rem; box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3);">
+                        <i class="fa-solid fa-play"></i> Mit 1. Aufgabe (25 Punkte) beginnen →
+                    </button>
+                </div>
+            </div>
+
+            <!-- Page Footer -->
+            <div class="exam-paper-footer">
+                <span>ZPA IT AP1 Modellbogen</span>
+                <span>Deckblatt (Seite 1 von 5)</span>
+                <span>Weiterblättern zur 1. Aufgabe →</span>
+            </div>
+        </div>
+    `;
+}
+
+// Renders an authentic Task Page (1..4)
+function renderTaskPage(container, pageIndex) {
+    const task = activeExamSet.tasks[pageIndex - 1];
+    if (!task) return;
+
+    // Check if Ausgangssituation should be displayed (on page 1 or always if applicable)
+    let ausgangssituationHtml = "";
+    if (pageIndex === 1 && activeExamSet.ausgangssituation) {
+        ausgangssituationHtml = `
+            <div class="exam-ausgangssituation-frame">
+                <div class="exam-ausgangssituation-title">
+                    Die Aufgaben 1 bis 4 beziehen sich auf die folgende Ausgangssituation:
+                </div>
+                <div class="exam-ausgangssituation-body">
+                    ${escapeHtml(activeExamSet.ausgangssituation)}
+                </div>
+            </div>
+        `;
+    }
+
+    // Build Subtasks HTML & Korrekturrand HTML
+    let subtasksHtml = "";
+    let korrekturrandHtml = "";
+
+    task.subtasks.forEach(sub => {
+        // Saved response
+        const userVal = examAnswersData[sub.id] || "";
+        const earnedPts = examScores[sub.id] !== undefined ? examScores[sub.id] : (isExamSubmitted ? 0 : "");
+
+        // Korrekturrand Item
+        const shortLabel = sub.label.split(')')[0] + ')';
+        korrekturrandHtml += `
+            <div class="exam-korrekturrand-item">
+                <span class="exam-korrekturrand-pts">${shortLabel} [ / ${sub.points} P ]</span>
+                <div class="exam-korrekturrand-box">
+                    <input type="number" min="0" max="${sub.points}" class="exam-korrekturrand-input" 
+                           value="${earnedPts}" 
+                           placeholder="${sub.points}"
+                           onchange="updateSubtaskScore('${sub.id}', this.value, ${sub.points})">
+                </div>
+            </div>
+        `;
+
+        // Stencil banner
+        let stencilHtml = "";
+        if (sub.stencil) {
+            stencilHtml = `<div class="exam-stencil-banner">[ ${escapeHtml(sub.stencil)} ]</div>`;
+        }
+
+        // SVG Illustration
+        let svgHtml = "";
+        if (sub.svgIllustration) {
+            svgHtml = `<div style="margin: 10px 0;">${sub.svgIllustration}</div>`;
+        }
+
+        // Input element according to type
+        let inputHtml = "";
+        if (sub.type === "lines") {
+            const lines = sub.linesCount || 4;
+            const heightPx = lines * 28;
+            inputHtml = `
+                <div class="exam-ruled-lines-wrapper" style="height: ${heightPx}px;">
+                    <textarea class="exam-ruled-textarea" 
+                              style="height: ${heightPx}px;" 
+                              placeholder="Antwort hier formulieren..." 
+                              oninput="saveSubtaskAnswer('${sub.id}', this.value)">${escapeHtml(userVal)}</textarea>
+                </div>
+            `;
+        } else if (sub.type === "math-grid") {
+            const rows = (sub.gridConfig && sub.gridConfig.rows) ? sub.gridConfig.rows : 6;
+            const heightPx = rows * 20 + 20;
+            inputHtml = `
+                <div class="exam-math-grid-wrapper" style="height: ${heightPx}px;">
+                    <textarea class="exam-math-textarea" 
+                              style="height: ${heightPx}px;"
+                              placeholder="Rechenweg und Ergebnis hier eintragen (1 Kästchen = 1 Zeichen)..." 
+                              oninput="saveSubtaskAnswer('${sub.id}', this.value)">${escapeHtml(userVal)}</textarea>
+                </div>
+            `;
+        } else if (sub.type === "table" && sub.tableConfig) {
+            let thead = "<tr>";
+            sub.tableConfig.headers.forEach(h => {
+                thead += `<th>${escapeHtml(h)}</th>`;
+            });
+            thead += "</tr>";
+
+            let tbody = "";
+            sub.tableConfig.rows.forEach((row, rIdx) => {
+                tbody += "<tr>";
+                row.forEach((cell, cIdx) => {
+                    const cellKey = `${sub.id}_tbl_${rIdx}_${cIdx}`;
+                    const savedCell = examAnswersData[cellKey] !== undefined ? examAnswersData[cellKey] : cell;
+                    if (cell === "/" || savedCell === "/") {
+                        tbody += `<td class="diagonal-slash" style="text-align: center; font-weight: bold;">/</td>`;
+                    } else if (cIdx === 0) {
+                        tbody += `<td style="font-weight: bold; background: #f8fafc;">${escapeHtml(savedCell)}</td>`;
+                    } else {
+                        tbody += `
+                            <td>
+                                <input type="text" class="exam-table-input" 
+                                       value="${escapeHtml(savedCell)}" 
+                                       oninput="saveSubtaskAnswer('${cellKey}', this.value)">
+                            </td>
+                        `;
+                    }
+                });
+                tbody += "</tr>";
+            });
+
+            inputHtml = `
+                <table class="exam-din-table">
+                    <thead>${thead}</thead>
+                    <tbody>${tbody}</tbody>
+                </table>
+            `;
+        }
+
+        // Model Solution Box if submitted
+        let solutionHtml = "";
+        if (isExamSubmitted && sub.solution) {
+            solutionHtml = `
+                <div class="exam-solution-box">
+                    <h5><i class="fa-solid fa-circle-check"></i> Musterlösung &amp; Bewertungshinweise (${sub.points} Punkte):</h5>
+                    <div class="exam-solution-body" style="white-space: pre-line;">${escapeHtml(sub.solution)}</div>
+                    <div style="margin-top: 8px; display: flex; align-items: center; justify-content: space-between; border-top: 1px dashed #86efac; padding-top: 6px;">
+                        <span style="font-size: 0.82rem; font-weight: 700; color: #15803d;">Punkte für Teilaufgabe im Korrekturrand vergeben:</span>
+                        <div style="display: flex; gap: 4px;">
+                            <button class="btn btn-secondary" style="padding: 2px 8px; font-size: 0.8rem;" onclick="updateSubtaskScore('${sub.id}', 0, ${sub.points})">0 Pkt</button>
+                            <button class="btn btn-secondary" style="padding: 2px 8px; font-size: 0.8rem;" onclick="updateSubtaskScore('${sub.id}', Math.round(${sub.points}/2), ${sub.points})">Halbe Pkt</button>
+                            <button class="btn btn-primary" style="padding: 2px 8px; font-size: 0.8rem;" onclick="updateSubtaskScore('${sub.id}', ${sub.points}, ${sub.points})">Volle ${sub.points} Pkt</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        subtasksHtml += `
+            <div class="exam-subtask-container">
+                <div class="exam-subtask-title-row">
+                    <div class="exam-subtask-text">
+                        <strong>${escapeHtml(sub.label)}</strong>
+                    </div>
+                    <div class="exam-subtask-points">${sub.points} Punkte</div>
+                </div>
+                <div style="font-size: 0.93rem; line-height: 1.5; color: #000; margin-bottom: 6px; white-space: pre-line;">
+                    ${escapeHtml(sub.text)}
+                </div>
+                ${stencilHtml}
+                ${svgHtml}
+                ${inputHtml}
+                ${solutionHtml}
+            </div>
+        `;
+    });
+
+    container.innerHTML = `
+        <div class="exam-paper-sheet">
+            <!-- Header bar -->
+            <div class="exam-paper-header">
+                <span>Prüfungssimulation AP1 • Fachinformatiker/-in</span>
+                <span>${task.title.split(':')[0]}</span>
+                <span>Seite ${pageIndex + 1} von 5</span>
+            </div>
+
+            <!-- Sheet Main (Two Columns) -->
+            <div class="exam-sheet-main">
+                <!-- Left Content Column -->
+                <div class="exam-sheet-content">
+                    ${ausgangssituationHtml}
+                    <h3 class="exam-task-header">${escapeHtml(task.title)}</h3>
+                    ${subtasksHtml}
+                </div>
+
+                <!-- Right Korrekturrand Column -->
+                <div class="exam-korrekturrand">
+                    <div class="exam-korrekturrand-title">Korrekturrand</div>
+                    ${korrekturrandHtml}
+                </div>
+            </div>
+
+            <!-- Page Footer -->
+            <div class="exam-paper-footer">
+                <span>ZPA IT AP1 • ${escapeHtml(activeExamSet.title.split(':')[0])}</span>
+                <span>${pageIndex < 4 ? 'Fortsetzung ' + (pageIndex + 1) + '. Aufgabe →' : 'Ende der Prüfungsaufgaben'}</span>
+            </div>
+        </div>
+    `;
+}
+
+// Saves a subtask's user answer in memory
+function saveSubtaskAnswer(key, value) {
+    examAnswersData[key] = value;
+}
+
+// Updates a subtask score in memory and re-evaluates
+function updateSubtaskScore(subId, pointsStr, maxPoints) {
+    let p = parseFloat(pointsStr);
+    if (isNaN(p) || p < 0) p = 0;
+    if (p > maxPoints) p = maxPoints;
+
+    examScores[subId] = p;
+
+    // Update input field if present on current page
+    const inp = document.querySelector(`input[data-subid="${subId}"]`);
+    if (inp) inp.value = p;
+}
+
+// Calculates scores across all 4 tasks
+function calculateExamScoresSummary() {
+    if (!activeExamSet) return { taskPoints: [0,0,0,0], totalPoints: 0, gradeNum: 6, gradeText: "ungenügend", isPassed: false };
+
+    let taskPoints = [0, 0, 0, 0];
+
+    activeExamSet.tasks.forEach((task, tIdx) => {
+        let taskSum = 0;
+        task.subtasks.forEach(sub => {
+            if (examScores[sub.id] !== undefined) {
+                taskSum += examScores[sub.id];
+            }
+        });
+        taskPoints[tIdx] = Math.round(taskSum * 10) / 10;
+    });
+
+    const total = Math.round(taskPoints.reduce((a, b) => a + b, 0) * 10) / 10;
+
+    let gradeNum = 6;
+    let gradeText = "ungenügend";
+
+    if (total >= 92) {
+        gradeNum = 1; gradeText = "sehr gut";
+    } else if (total >= 81) {
+        gradeNum = 2; gradeText = "gut";
+    } else if (total >= 67) {
+        gradeNum = 3; gradeText = "befriedigend";
+    } else if (total >= 50) {
+        gradeNum = 4; gradeText = "ausreichend";
+    } else if (total >= 30) {
+        gradeNum = 5; gradeText = "mangelhaft";
+    } else {
+        gradeNum = 6; gradeText = "ungenügend";
+    }
+
+    return {
+        taskPoints: taskPoints,
+        totalPoints: total,
+        gradeNum: gradeNum,
+        gradeText: gradeText,
+        isPassed: total >= 50
+    };
+}
+
+// Submits the exam, stamps the Deckblatt and displays evaluation
+function submitExam() {
+    clearInterval(examTimerInterval);
+    isExamSubmitted = true;
+
+    // Calculate score
+    const res = calculateExamScoresSummary();
+
+    // Switch to Deckblatt to display stamp and scores
+    examCurrentPage = 0;
+    renderCurrentExamPage();
+
+    // Alert user
+    const msg = res.isPassed
+        ? `🎉 Herzlichen Glückwunsch! Du hast die Prüfung BESTANDEN!\n\nGesamtergebnis: ${res.totalPoints} von 100 Punkten\nIHK-Note: Note ${res.gradeNum} (${res.gradeText})\n\nDein amtliches Deckblatt wurde abgestempelt. Du kannst nun durch die Aufgaben 1 bis 4 blättern, um die detaillierten Musterlösungen einzusehen und die Punkte im Korrekturrand anzupassen.`
+        : `Die Prüfung wurde ausgewertet.\n\nGesamtergebnis: ${res.totalPoints} von 100 Punkten\nIHK-Note: Note ${res.gradeNum} (${res.gradeText})\n\nDu benötigst mindestens 50 Punkte zum Bestehen. Blättere durch die Aufgaben 1 bis 4, vergleiche deine Antworten mit den Musterlösungen und passe deine Punkte im Korrekturrand an.`;
+
+    alert(msg);
+}
+
+// Exits exam mode
 function exitExamMode() {
-    if (confirm("Möchtest du die aktuelle Prüfung wirklich abbrechen? Deine Antworten gehen dabei verloren.")) {
+    if (confirm("Möchtest du den Prüfungsmodus wirklich beenden? Dein Fortschritt in diesem Durchgang geht dabei verloren.")) {
         clearInterval(examTimerInterval);
         showMainQuizMode();
     }
@@ -1666,168 +1911,16 @@ function showMainQuizMode() {
     document.querySelectorAll(".sidebar").forEach(s => s.style.display = "");
     document.querySelector(".quiz-area").style.display = "block";
     document.getElementById("exam-area").style.display = "none";
-    document.getElementById("exam-results-area").style.display = "none";
-    
+    const resArea = document.getElementById("exam-results-area");
+    if (resArea) resArea.style.display = "none";
+
     // Reload normal quiz state
-    filterQuestions(currentTheme);
-}
-
-// Submits the exam and calculates the score
-function submitExam() {
-    clearInterval(examTimerInterval);
-
-    // Auto-calculate objective questions
-    examQuestions.forEach((q, idx) => {
-        const ans = examAnswers[idx];
-        
-        if (q.type === "multiple-choice" || q.type === "true-false") {
-            ans.isCorrect = ans.selectedIndex === q.correctAnswer;
-            ans.isSelfGraded = true;
-        } else if (q.type === "text-input") {
-            const normalizedUser = ans.userAnswer.toLowerCase().replace(/\s+/g, "");
-            ans.isCorrect = q.correctAnswers.some(correct => 
-                correct.toLowerCase().replace(/\s+/g, "") === normalizedUser
-            );
-            ans.isSelfGraded = true;
-        } else if (q.type === "open-text") {
-            // Open text starts as incorrect/unmarked, requires self-grading
-            ans.isCorrect = false;
-            ans.isSelfGraded = false;
-        }
-    });
-
-    renderExamResults();
-}
-
-// Renders the Results view
-function renderExamResults() {
-    document.getElementById("exam-area").style.display = "none";
-    const resultsArea = document.getElementById("exam-results-area");
-    resultsArea.style.display = "flex";
-
-    // Calculate score
-    calculateExamScores();
-
-    // Time spent
-    const minutesElapsed = Math.floor(examSecondsElapsed / 60);
-    const secondsElapsed = examSecondsElapsed % 60;
-    const timeSpentStr = `Bearbeitungszeit: ${minutesElapsed} Minute(n) und ${secondsElapsed} Sekunde(n).`;
-    document.getElementById("results-time-spent").textContent = timeSpentStr;
-}
-
-// Recalculates points and displays them in results
-function calculateExamScores() {
-    let totalQuestions = examQuestions.length;
-    let correctCount = examAnswers.filter(ans => ans.isCorrect).length;
-    let percent = totalQuestions > 0 ? Math.round((correctCount / totalQuestions) * 100) : 0;
-
-    const badge = document.getElementById("results-badge");
-    if (percent >= 51) {
-        badge.textContent = "BESTANDEN 🎉";
-        badge.style.backgroundColor = "#48bb78";
-    } else {
-        badge.textContent = "NICHT BESTANDEN ❌";
-        badge.style.backgroundColor = "#e53e3e";
+    if (typeof filterQuestions === "function" && typeof currentTheme !== "undefined") {
+        filterQuestions(currentTheme);
     }
-
-    document.getElementById("results-score-title").textContent = `Du hast ${percent}% erreicht`;
-    document.getElementById("results-points-label").textContent = `${correctCount} von ${totalQuestions} Aufgaben richtig bewertet (51% benötigt)`;
-    document.getElementById("results-progress").style.width = `${percent}%`;
-
-    // Render detailed list
-    const resultsList = document.getElementById("results-list");
-    resultsList.innerHTML = "";
-
-    examQuestions.forEach((q, idx) => {
-        const ans = examAnswers[idx];
-        const item = document.createElement("div");
-        item.className = "card";
-        item.style.borderLeft = ans.isCorrect ? "6px solid #48bb78" : "6px solid #e53e3e";
-        item.style.marginBottom = "1rem";
-        item.style.padding = "1rem";
-
-        let userAnsText = "";
-        let correctAnsText = "";
-        
-        if (q.type === "multiple-choice" || q.type === "true-false") {
-            userAnsText = ans.selectedIndex !== null ? q.options[ans.selectedIndex] : "(Keine Antwort)";
-            correctAnsText = q.options[q.correctAnswer];
-        } else if (q.type === "text-input") {
-            userAnsText = ans.userAnswer || "(Keine Antwort)";
-            correctAnsText = q.correctAnswers.join(" oder ");
-        } else {
-            userAnsText = ans.userAnswer || "(Keine Antwort)";
-            correctAnsText = q.musterloesung || q.correctAnswer || "";
-        }
-
-        let selfGradingHTML = "";
-        if (q.type === "open-text") {
-            selfGradingHTML = `
-                <div style="margin-top: 1rem; padding-top: 0.75rem; border-top: 1px dashed #e2e8f0; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem;">
-                    <span style="font-weight: 600; font-size: 0.9rem; color: #718096;">Bewerte deine Antwort:</span>
-                    <div style="display: flex; gap: 0.5rem;">
-                        <button class="btn" style="background-color: ${ans.isCorrect ? '#38a169' : '#e2e8f0'}; color: ${ans.isCorrect ? 'white' : '#4a5568'}; font-weight: bold; font-size: 0.85rem; padding: 0.4rem 0.8rem; border: none; cursor: pointer;" onclick="gradeExamOpenQuestion(${idx}, true)">
-                            <i class="fa-solid fa-check"></i> Richtig
-                        </button>
-                        <button class="btn" style="background-color: ${(!ans.isCorrect && ans.isSelfGraded) ? '#e53e3e' : '#e2e8f0'}; color: ${(!ans.isCorrect && ans.isSelfGraded) ? 'white' : '#4a5568'}; font-weight: bold; font-size: 0.85rem; padding: 0.4rem 0.8rem; border: none; cursor: pointer;" onclick="gradeExamOpenQuestion(${idx}, false)">
-                            <i class="fa-solid fa-xmark"></i> Falsch
-                        </button>
-                    </div>
-                </div>
-            `;
-        }
-
-        const solSvg = (typeof VisualDiagrams !== "undefined" && VisualDiagrams.getAutoDiagramSvg) 
-            ? VisualDiagrams.getAutoDiagramSvg(q) 
-            : (q.solutionDiagramSvg || (q.isDiagram ? q.diagramSvg : null));
-        const diagSvgHTML = solSvg ? `
-            <div class="svg-diagram-wrapper" style="margin-top: 0.75rem; border-color: #86efac; background: #f0fdf4;">
-                <span class="solution-diagram-badge"><i class="fa-solid fa-circle-check"></i> Musterlösung (Grafisches Diagramm / Tabellenschema):</span>
-                ${solSvg}
-                ${q.solutionDiagramCaption ? `<div class="diagram-caption">${escapeHtml(q.solutionDiagramCaption)}</div>` : ''}
-            </div>
-        ` : '';
-
-        item.innerHTML = `
-            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem;">
-                <span class="badge" style="background-color: #4a5568; margin-bottom: 0;">Aufgabe ${idx + 1} (${getThemeLabel(q.theme)})</span>
-                <span style="font-weight: bold; color: ${ans.isCorrect ? '#38a169' : '#e53e3e'};">
-                    ${ans.isCorrect ? '<i class="fa-solid fa-check-double"></i> 1 Punkt' : '<i class="fa-solid fa-xmark"></i> 0 Punkte'}
-                </span>
-            </div>
-            <h4 style="margin: 0.5rem 0; font-size: 1.05rem; line-height: 1.5;">${formatQuestionText(q.question)}</h4>
-            ${q.code ? `<pre style="background: #f7fafc; padding: 0.50rem; border-radius: 6px; font-size: 0.85rem; border: 1px solid #e2e8f0; margin: 0.5rem 0;"><code style="font-family: monospace;">${escapeHtml(q.code)}</code></pre>` : ''}
-            <div style="margin-top: 0.75rem; font-size: 0.95rem; line-height: 1.45;">
-                <div style="margin-bottom: 0.5rem;">
-                    <strong>Deine Antwort:</strong> <span style="font-style: italic; color: #2d3748;">${escapeHtml(userAnsText).replace(/\n/g, "<br>")}</span>
-                </div>
-                <div>
-                    <strong>Musterlösung:</strong> <span style="color: #2b6cb0;">${escapeHtml(correctAnsText).replace(/\n/g, "<br>")}</span>
-                </div>
-                ${diagSvgHTML}
-                ${q.explanation ? `<div style="margin-top: 0.5rem; font-size: 0.85rem; color: #718096; background-color: #f7fafc; padding: 0.5rem; border-radius: 4px; border-left: 2px solid #3182ce;">
-                    <strong>Erklärung:</strong> ${escapeHtml(q.explanation).replace(/\n/g, "<br>")}
-                </div>` : ''}
-            </div>
-            ${selfGradingHTML}
-        `;
-
-        resultsList.appendChild(item);
-    });
-}
-
-// User-triggered self-grading helper
-function gradeExamOpenQuestion(idx, isCorrect) {
-    const ans = examAnswers[idx];
-    ans.isCorrect = isCorrect;
-    ans.isSelfGraded = true; // Mark as self graded to style the button
-    calculateExamScores(); // Refresh scores dynamically
 }
 
 
-// ============================================================================
-// Interactive Diagram Whiteboard Canvas Engine
-// ============================================================================
 let wbCanvas = null;
 let wbCtx = null;
 let wbWrapper = null;
