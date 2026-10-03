@@ -359,18 +359,55 @@ var EXAM_SETS = [
                         stencil: "PROJEKTMANAGEMENT / SMART-TABELLE",
                         text: "Für das Projekt 'Kundenportal' wurden Ziele formuliert. Ordnen Sie die Kriterien der SMART-Methode den folgenden Beschreibungen zu.",
                         tableConfig: {
-                            type: "matching",
-                            targetCol: 0,
-                            options: ["S - Spezifisch", "M - Messbar", "A - Akzeptiert", "R - Realistisch", "T - Terminiert"],
-                            headers: ["SMART-Kriterium", "Bedeutung / Anforderung", "Projektbeispiel"],
-                            rows: [
-                                ["A - Akzeptiert", "Ziel muss von den Stakeholdern und Teammitgliedern getragen werden", "Freigabe der Anforderungen durch Vertrieb und Entwicklerteam"],
-                                ["S - Spezifisch", "Ziel muss eindeutig, konkret und präzise formuliert sein", "Kundenportal mit REST-API für Heizungs- und Lichtsteuerung"],
-                                ["T - Terminiert", "Feste zeitliche Zielvorgabe mit Deadline", "Abschluss des Rollouts bis zum 30. November 2026"],
-                                ["M - Messbar", "Zielerreichung muss quantitativ oder qualitativ prüfbar sein", "Antwortzeit der API liegt bei 99 % der Anfragen unter 200 ms"],
-                                ["R - Realistisch", "Ziel muss mit verfügbaren Ressourcen machbar sein", "Umsetzung mit bestehendem Team von 3 Entwicklern in 4 Monaten"]
-                            ]
-                        },
+                                                        "type": "matching",
+                                                        "targetCol": 0,
+                                                        "options": [
+                                                                                    "S - Spezifisch",
+                                                                                    "M - Messbar",
+                                                                                    "A - Akzeptiert",
+                                                                                    "R - Realistisch",
+                                                                                    "T - Terminiert"
+                                                        ],
+                                                        "headers": [
+                                                                                    "SMART-Kriterium",
+                                                                                    "Bedeutung / Anforderung",
+                                                                                    "Projektbeispiel"
+                                                        ],
+                                                        "rows": [
+                                                                                    [
+                                                                                                                "",
+                                                                                                                "Ziel muss von den Stakeholdern und Teammitgliedern getragen werden",
+                                                                                                                "Freigabe der Anforderungen durch Vertrieb und Entwicklerteam"
+                                                                                    ],
+                                                                                    [
+                                                                                                                "",
+                                                                                                                "Ziel muss eindeutig, konkret und präzise formuliert sein",
+                                                                                                                "Kundenportal mit REST-API für Heizungs- und Lichtsteuerung"
+                                                                                    ],
+                                                                                    [
+                                                                                                                "",
+                                                                                                                "Feste zeitliche Zielvorgabe mit Deadline",
+                                                                                                                "Abschluss des Rollouts bis zum 30. November 2026"
+                                                                                    ],
+                                                                                    [
+                                                                                                                "",
+                                                                                                                "Zielerreichung muss quantitativ oder qualitativ prüfbar sein",
+                                                                                                                "Antwortzeit der API liegt bei 99 % der Anfragen unter 200 ms"
+                                                                                    ],
+                                                                                    [
+                                                                                                                "",
+                                                                                                                "Ziel muss mit verfügbaren Ressourcen machbar sein",
+                                                                                                                "Umsetzung mit bestehendem Team von 3 Entwicklern in 4 Monaten"
+                                                                                    ]
+                                                        ],
+                                                        "solutions": {
+                                                                                    "0_0": "A - Akzeptiert",
+                                                                                    "1_0": "S - Spezifisch",
+                                                                                    "2_0": "T - Terminiert",
+                                                                                    "3_0": "M - Messbar",
+                                                                                    "4_0": "R - Realistisch"
+                                                        }
+                            },
                         solution: "S = Spezifisch (eindeutig/präzise), M = Messbar (metrische Kenngrößen wie Reaktionszeit/Zahlen), A = Akzeptiert/Attraktiv (Zustimmung aller Beteiligten), R = Realistisch (machbar), T = Terminiert (konkreter Stichtag)."
                     },
                     {
@@ -390,17 +427,44 @@ var EXAM_SETS = [
                         stencil: "WIRTSCHAFTLICHKEIT / KOSTENVERGLEICH",
                         text: "Für das Authentifizierungsmodul soll entschieden werden, ob eine Eigenentwicklung (Make) oder der Zukauf eines Cloud-Services (Buy) wirtschaftlicher ist. Ergänzen Sie die folgende Vergleichstabelle. In nicht zutreffenden Feldern ist ein Schrägstrich (/) einzutragen.",
                         tableConfig: {
-                            type: "fill",
-                            staticCols: [0],
-                            headers: ["Kostenart", "Eigenentwicklung (Make)", "Cloud-Dienst (Buy)"],
-                            rows: [
-                                ["Einmalige Entwicklungskosten", "12.000,00 EUR", "/"],
-                                ["Einrichtung & Schulung", "1.500,00 EUR", "2.000,00 EUR"],
-                                ["Monatliche Lizenz-/Servicekosten", "/", "350,00 EUR / Monat"],
-                                ["Jährliche Wartung & Updates (intern)", "2.400,00 EUR / Jahr", "/"],
-                                ["Gesamtkosten nach 3 Jahren (36 Monate)", "20.700,00 EUR", "14.600,00 EUR"]
-                            ]
-                        },
+                                                        "type": "fill",
+                                                        "headers": [
+                                                                                    "Kostenart",
+                                                                                    "Eigenentwicklung (Make)",
+                                                                                    "Cloud-Dienst (Buy)"
+                                                        ],
+                                                        "rows": [
+                                                                                    [
+                                                                                                                "Einmalige Entwicklungskosten",
+                                                                                                                "12.000,00 EUR",
+                                                                                                                "/"
+                                                                                    ],
+                                                                                    [
+                                                                                                                "Einrichtung & Schulung",
+                                                                                                                "1.500,00 EUR",
+                                                                                                                "2.000,00 EUR"
+                                                                                    ],
+                                                                                    [
+                                                                                                                "Monatliche Lizenz-/Servicekosten",
+                                                                                                                "/",
+                                                                                                                "350,00 EUR / Monat"
+                                                                                    ],
+                                                                                    [
+                                                                                                                "Jährliche Wartung & Updates (intern)",
+                                                                                                                "2.400,00 EUR / Jahr",
+                                                                                                                "/"
+                                                                                    ],
+                                                                                    [
+                                                                                                                "Gesamtkosten nach 3 Jahren (36 Monate)",
+                                                                                                                "",
+                                                                                                                ""
+                                                                                    ]
+                                                        ],
+                                                        "solutions": {
+                                                                                    "4_1": "20.700,00 EUR",
+                                                                                    "4_2": "14.600,00 EUR"
+                                                        }
+                            },
                         solution: "Kosten Make: 12.000 + 1.500 + (3 * 2.400) = 20.700 EUR.\nKosten Buy: 0 + 2.000 + (36 * 350) = 14.600 EUR.\nErgebnis: Der Cloud-Dienst ist nach 3 Jahren um 6.100 EUR günstiger. Felder ohne Kosten mit '/' markieren!"
                     },
                     {
@@ -469,17 +533,63 @@ var EXAM_SETS = [
                         stencil: "OSI-REFERENZMODELL / FEHLERSUCHE",
                         text: "Vervollständigen Sie die folgende Tabelle zur strukturierten Netzwerkdiagnose von Schicht 7 bis Schicht 1.",
                         tableConfig: {
-                            type: "fill",
-                            staticCols: [0],
-                            headers: ["OSI-Schicht", "Protokoll / Dienst", "Diagnosebefehl / Test", "Erwartetes Normalergebnis"],
-                            rows: [
-                                ["7 - Anwendung (Application)", "HTTPS / HTTP", "Aufruf von https://portal.novotech.de im Browser", "Webseite lädt fehlerfrei mit gültigem TLS-Zertifikat"],
-                                ["7 - Anwendung (Application)", "DNS", "nslookup portal.novotech.de", "IP-Adresse des Webservers wird korrekt aufgelöst"],
-                                ["3 - Vermittlung (Network)", "ICMP / IPv6", "ping -6 2001:db8::10", "4 Antworten erhalten, Paketverlust = 0 %"],
-                                ["2 - Sicherung (Data Link)", "Ethernet", "Sichtprüfung Link-LED an Netzwerkkarte/Switch", "Grüne LED leuchtet dauerhaft, gelbe LED blinkt bei Datenverkehr"],
-                                ["1 - Bitübertragung (Physical)", "Kupferkabel", "Kabeltester (Durchgangsprüfer)", "Alle 8 Adernpaare 1:1 durchgängig ohne Unterbrechung"]
-                            ]
-                        },
+                                                        "type": "matching",
+                                                        "targetCol": 0,
+                                                        "options": [
+                                                                                    "7 - Anwendung (Application)",
+                                                                                    "6 - Darstellung (Presentation)",
+                                                                                    "5 - Sitzung (Session)",
+                                                                                    "4 - Transport (Transport)",
+                                                                                    "3 - Vermittlung (Network)",
+                                                                                    "2 - Sicherung (Data Link)",
+                                                                                    "1 - Bitübertragung (Physical)"
+                                                        ],
+                                                        "headers": [
+                                                                                    "OSI-Schicht",
+                                                                                    "Protokoll / Dienst",
+                                                                                    "Diagnosebefehl / Test",
+                                                                                    "Erwartetes Normalergebnis"
+                                                        ],
+                                                        "rows": [
+                                                                                    [
+                                                                                                                "",
+                                                                                                                "HTTPS / HTTP",
+                                                                                                                "Aufruf von https://portal.novotech.de im Browser",
+                                                                                                                "Webseite lädt fehlerfrei mit gültigem TLS-Zertifikat"
+                                                                                    ],
+                                                                                    [
+                                                                                                                "",
+                                                                                                                "DNS",
+                                                                                                                "nslookup portal.novotech.de",
+                                                                                                                "IP-Adresse des Webservers wird korrekt aufgelöst"
+                                                                                    ],
+                                                                                    [
+                                                                                                                "",
+                                                                                                                "ICMP / IPv6",
+                                                                                                                "ping -6 2001:db8::10",
+                                                                                                                "4 Antworten erhalten, Paketverlust = 0 %"
+                                                                                    ],
+                                                                                    [
+                                                                                                                "",
+                                                                                                                "Ethernet",
+                                                                                                                "Sichtprüfung Link-LED an Netzwerkkarte/Switch",
+                                                                                                                "Grüne LED leuchtet dauerhaft, gelbe LED blinkt bei Datenverkehr"
+                                                                                    ],
+                                                                                    [
+                                                                                                                "",
+                                                                                                                "Kupferkabel",
+                                                                                                                "Kabeltester (Durchgangsprüfer)",
+                                                                                                                "Alle 8 Adernpaare 1:1 durchgängig ohne Unterbrechung"
+                                                                                    ]
+                                                        ],
+                                                        "solutions": {
+                                                                                    "0_0": "7 - Anwendung (Application)",
+                                                                                    "1_0": "7 - Anwendung (Application)",
+                                                                                    "2_0": "3 - Vermittlung (Network)",
+                                                                                    "3_0": "2 - Sicherung (Data Link)",
+                                                                                    "4_0": "1 - Bitübertragung (Physical)"
+                                                        }
+                            },
                         solution: "Schichten von oben nach unten: Layer 7 (HTTPS/DNS), Layer 3 (IP/ICMP ping), Layer 2 (Ethernet Link-LED/MAC), Layer 1 (Kabel/RJ45)."
                     }
                 ]
@@ -499,17 +609,59 @@ var EXAM_SETS = [
                         stencil: "BSI IT-GRUNDSCHUTZ / SCHUTZBEDARF",
                         text: "Bestimmen Sie für die folgenden drei Informations- und Systembereiche der Novo-Tech Solutions OHG den Schutzbedarf (normal, hoch, sehr hoch) bezüglich der Grundwerte Vertraulichkeit (V), Integrität (I) und Verfügbarkeit (A) und begründen Sie jeweils kurz.",
                         tableConfig: {
-                            type: "matching",
-                            targetCols: [1, 2, 3],
-                            staticCols: [0, 4],
-                            options: ["normal", "hoch", "sehr hoch"],
-                            headers: ["Anwendungsbereich", "V", "I", "A", "Begründung"],
-                            rows: [
-                                ["Kundenstammdaten & Zahlungsdaten", "sehr hoch", "hoch", "normal", "Verstoß gegen DSGVO führt zu hohen Bußgeldern und erheblichem Reputationsverlust bei Datenleck"],
-                                ["Smart-Home Firmware-Repository", "hoch", "sehr hoch", "hoch", "Manipulierte Firmware (fehlende Integrität) kann Geräte beim Kunden kompromittieren oder zerstören"],
-                                ["Öffentliche Marketing-Website", "normal", "normal", "normal", "Keine vertraulichen Daten; kurzer Ausfall verursacht nur geringfügigen wirtschaftlichen Schaden"]
-                            ]
-                        },
+                                                        "type": "matching",
+                                                        "targetCols": [
+                                                                                    1,
+                                                                                    2,
+                                                                                    3
+                                                        ],
+                                                        "options": [
+                                                                                    "normal",
+                                                                                    "hoch",
+                                                                                    "sehr hoch"
+                                                        ],
+                                                        "headers": [
+                                                                                    "Anwendungsbereich",
+                                                                                    "V",
+                                                                                    "I",
+                                                                                    "A",
+                                                                                    "Begründung"
+                                                        ],
+                                                        "rows": [
+                                                                                    [
+                                                                                                                "Kundenstammdaten & Zahlungsdaten",
+                                                                                                                "",
+                                                                                                                "",
+                                                                                                                "",
+                                                                                                                "Verstoß gegen DSGVO führt zu hohen Bußgeldern und erheblichem Reputationsverlust bei Datenleck"
+                                                                                    ],
+                                                                                    [
+                                                                                                                "Smart-Home Firmware-Repository",
+                                                                                                                "",
+                                                                                                                "",
+                                                                                                                "",
+                                                                                                                "Manipulierte Firmware (fehlende Integrität) kann Geräte beim Kunden kompromittieren oder zerstören"
+                                                                                    ],
+                                                                                    [
+                                                                                                                "Öffentliche Marketing-Website",
+                                                                                                                "",
+                                                                                                                "",
+                                                                                                                "",
+                                                                                                                "Keine vertraulichen Daten; kurzer Ausfall verursacht nur geringfügigen wirtschaftlichen Schaden"
+                                                                                    ]
+                                                        ],
+                                                        "solutions": {
+                                                                                    "0_1": "sehr hoch",
+                                                                                    "0_2": "hoch",
+                                                                                    "0_3": "normal",
+                                                                                    "1_1": "hoch",
+                                                                                    "1_2": "sehr hoch",
+                                                                                    "1_3": "hoch",
+                                                                                    "2_1": "normal",
+                                                                                    "2_2": "normal",
+                                                                                    "2_3": "normal"
+                                                        }
+                            },
                         solution: "Kundendaten: Vertraulichkeit sehr hoch (DSGVO Art. 83 Bußgelder). Firmware: Integrität sehr hoch (Schutz vor Malware/Backdoors). Marketing: alle Werte normal."
                     },
                     {
@@ -539,17 +691,58 @@ var EXAM_SETS = [
                         stencil: "SOFTWARETEST / SCHREIBTISCHTEST",
                         text: "Gegeben ist folgender Python-Code zur Filterung unzulässiger Sensorwerte:\n\nwerte = [18, -4, 25, 32, -1]\ngueltig = []\nfor w in werte:\n    if w >= 0 and w <= 30:\n        gueltig.append(w)\n\nFühren Sie den Schreibtischtest durch und tragen Sie die Werte in jeder Iteration in die Trace-Tabelle ein.",
                         tableConfig: {
-                            type: "fill",
-                            staticCols: [0, 1],
-                            headers: ["Iteration", "Variable w", "Bedingung (w >= 0 and w <= 30)", "Inhalt der Liste gueltig"],
-                            rows: [
-                                ["1", "18", "True (18 >= 0 und 18 <= 30)", "[18]"],
-                                ["2", "-4", "False (-4 < 0)", "[18]"],
-                                ["3", "25", "True (25 >= 0 und 25 <= 30)", "[18, 25]"],
-                                ["4", "32", "False (32 > 30)", "[18, 25]"],
-                                ["5", "-1", "False (-1 < 0)", "[18, 25]"]
-                            ]
-                        },
+                                                        "type": "fill",
+                                                        "headers": [
+                                                                                    "Iteration",
+                                                                                    "Variable w",
+                                                                                    "Bedingung (w >= 0 and w <= 30)",
+                                                                                    "Inhalt der Liste gueltig"
+                                                        ],
+                                                        "rows": [
+                                                                                    [
+                                                                                                                "1",
+                                                                                                                "18",
+                                                                                                                "",
+                                                                                                                ""
+                                                                                    ],
+                                                                                    [
+                                                                                                                "2",
+                                                                                                                "-4",
+                                                                                                                "",
+                                                                                                                ""
+                                                                                    ],
+                                                                                    [
+                                                                                                                "3",
+                                                                                                                "25",
+                                                                                                                "",
+                                                                                                                ""
+                                                                                    ],
+                                                                                    [
+                                                                                                                "4",
+                                                                                                                "32",
+                                                                                                                "",
+                                                                                                                ""
+                                                                                    ],
+                                                                                    [
+                                                                                                                "5",
+                                                                                                                "-1",
+                                                                                                                "",
+                                                                                                                ""
+                                                                                    ]
+                                                        ],
+                                                        "solutions": {
+                                                                                    "0_2": "True (18 >= 0 und 18 <= 30)",
+                                                                                    "0_3": "[18]",
+                                                                                    "1_2": "False (-4 < 0)",
+                                                                                    "1_3": "[18]",
+                                                                                    "2_2": "True (25 >= 0 und 25 <= 30)",
+                                                                                    "2_3": "[18, 25]",
+                                                                                    "3_2": "False (32 > 30)",
+                                                                                    "3_3": "[18, 25]",
+                                                                                    "4_2": "False (-1 < 0)",
+                                                                                    "4_3": "[18, 25]"
+                                                        }
+                            },
                         solution: "Nach 5 Schleifendurchläufen enthält die Liste 'gueltig' exakt die zwei Werte [18, 25]. Negative Zahlen und Werte über 30 werden herausgefiltert."
                     },
                     {
@@ -704,16 +897,54 @@ var EXAM_SETS = [
                         stencil: "NETZWERKDIAGNOSE / FEHLERTABELLE",
                         text: "Vervollständigen Sie die Diagnosetabelle für vier gemeldete Verbindungsprobleme.",
                         tableConfig: {
-                            type: "fill",
-                            staticCols: [0],
-                            headers: ["Fehlerbild", "Wahrscheinliche Ursache", "Diagnosetest", "Korrekturmaßnahme"],
-                            rows: [
-                                ["Kamera 04 erhält keine IP-Adresse", "DHCP-Pool im VLAN 10 erschöpft oder falsches VLAN am Port", "Prüfung Switchport-VLAN und DHCP-Server-Leases", "Switchport fest auf VLAN 10 konfigurieren bzw. DHCP-Scope vergrößern"],
-                                ["Kamera 09 ist pingbar, Videostream bricht aber alle 30 s ab", "Duplex-Mismatch (Halbduplex/Vollduplex) oder MTU-Problem", "Prüfung Interface-Counters auf CRC-Fehler und Collisions", "Port und Kamera fest auf 1000BASE-T Full-Duplex einstellen"],
-                                ["Videomanagement kann Kamera 12 per IP erreichen, aber nicht per Hostnamen", "DNS-Eintrag fehlt oder fehlerhafter DNS-Suffix", "nslookup kamera12.logipharma.local", "Statischen A-Record im internen DNS-Server nachtragen"],
-                                ["Switch meldet 'Port disabled due to err-disable'", "Loop / Schleife im Netzwerk oder BPDU-Guard ausgelöst", "Show log / Spanning-Tree Prüfung am Switch", "Schleife entfernen und Port mit 'shutdown / no shutdown' reaktivieren"]
-                            ]
-                        },
+                                                        "type": "fill",
+                                                        "headers": [
+                                                                                    "Fehlerbild",
+                                                                                    "Wahrscheinliche Ursache",
+                                                                                    "Diagnosetest",
+                                                                                    "Korrekturmaßnahme"
+                                                        ],
+                                                        "rows": [
+                                                                                    [
+                                                                                                                "Kamera 04 erhält keine IP-Adresse",
+                                                                                                                "",
+                                                                                                                "",
+                                                                                                                ""
+                                                                                    ],
+                                                                                    [
+                                                                                                                "Kamera 09 ist pingbar, Videostream bricht aber alle 30 s ab",
+                                                                                                                "",
+                                                                                                                "",
+                                                                                                                ""
+                                                                                    ],
+                                                                                    [
+                                                                                                                "Videomanagement kann Kamera 12 per IP erreichen, aber nicht per Hostnamen",
+                                                                                                                "",
+                                                                                                                "",
+                                                                                                                ""
+                                                                                    ],
+                                                                                    [
+                                                                                                                "Switch meldet 'Port disabled due to err-disable'",
+                                                                                                                "",
+                                                                                                                "",
+                                                                                                                ""
+                                                                                    ]
+                                                        ],
+                                                        "solutions": {
+                                                                                    "0_1": "DHCP-Pool im VLAN 10 erschöpft oder falsches VLAN am Port",
+                                                                                    "0_2": "Prüfung Switchport-VLAN und DHCP-Server-Leases",
+                                                                                    "0_3": "Switchport fest auf VLAN 10 konfigurieren bzw. DHCP-Scope vergrößern",
+                                                                                    "1_1": "Duplex-Mismatch (Halbduplex/Vollduplex) oder MTU-Problem",
+                                                                                    "1_2": "Prüfung Interface-Counters auf CRC-Fehler und Collisions",
+                                                                                    "1_3": "Port und Kamera fest auf 1000BASE-T Full-Duplex einstellen",
+                                                                                    "2_1": "DNS-Eintrag fehlt oder fehlerhafter DNS-Suffix",
+                                                                                    "2_2": "nslookup kamera12.logipharma.local",
+                                                                                    "2_3": "Statischen A-Record im internen DNS-Server nachtragen",
+                                                                                    "3_1": "Loop / Schleife im Netzwerk oder BPDU-Guard ausgelöst",
+                                                                                    "3_2": "Show log / Spanning-Tree Prüfung am Switch",
+                                                                                    "3_3": "Schleife entfernen und Port mit 'shutdown / no shutdown' reaktivieren"
+                                                        }
+                            },
                         solution: "Klassische Netzwerkfehler: VLAN-Fehlkonfiguration, Duplex-Mismatch mit Paketverlust, DNS-Auflösungsfehler, Spanning-Tree Loop Protection."
                     },
                     {
@@ -871,27 +1102,105 @@ var EXAM_SETS = [
                         stencil: "HANDELSKALKULATION (VORWÄRTSKALKULATION)",
                         text: "Für den Verkauf der Kassen-Scan-Stifte (Pos. 01) soll der Bruttoverkaufspreis (BVP) ermittelt werden. Berechnen Sie das Kalkulationsschema mit folgenden Werten:\nListeneinkaufspreis: 60,00 EUR, Lieferantenrabatt: 10 %, Lieferantenskonto: 2 %, Bezugskosten: 2,00 EUR/Stück, Handlungskostenzuschlag: 40 %, Gewinnzuschlag: 25 %, Kundenskonto: 2 %, Kundenrabatt: 5 %, Umsatzsteuer: 19 %.",
                         tableConfig: {
-                            type: "fill",
-                            staticCols: [0],
-                            headers: ["Kalkulationsstufe", "Rechenweg / Prozentsatz", "Betrag je Stück"],
-                            rows: [
-                                ["Listeneinkaufspreis (LEP)", "Vorgabe", "60,00 EUR"],
-                                ["- Lieferantenrabatt", "- 10 % von 60,00 EUR", "- 6,00 EUR"],
-                                ["= Zieleinkaufspreis (ZEP)", "= 60,00 - 6,00", "= 54,00 EUR"],
-                                ["- Lieferantenskonto", "- 2 % von 54,00 EUR", "- 1,08 EUR"],
-                                ["= Bareinkaufspreis (BEP)", "= 54,00 - 1,08", "= 52,92 EUR"],
-                                ["+ Bezugskosten", "+ Fracht / Verpackung", "+ 2,00 EUR"],
-                                ["= Bezugspreis (Einstandspreis)", "= 52,92 + 2,00", "= 54,92 EUR"],
-                                ["+ Handlungskosten", "+ 40 % von 54,92 EUR", "+ 21,97 EUR"],
-                                ["= Selbstkostenpreis (SKP)", "= 54,92 + 21,97", "= 76,89 EUR"],
-                                ["+ Gewinnzuschlag", "+ 25 % von 76,89 EUR", "+ 19,22 EUR"],
-                                ["= Barverkaufspreis (BVP_netto)", "= 76,89 + 19,22", "= 96,11 EUR"],
-                                ["+ Kundenskonto & Kundenrabatt (im Hundert)", "Kalkulatorischer Aufschlag", "+ 7,52 EUR"],
-                                ["= Nettoverkaufspreis / Listenverkaufspreis", "Netto", "= 103,63 EUR"],
-                                ["+ Umsatzsteuer (19 %)", "+ 19 % von 103,63 EUR", "+ 19,69 EUR"],
-                                ["= Bruttoverkaufspreis (BVP)", "Endkundenpreis inkl. USt", "= 123,32 EUR"]
-                            ]
-                        },
+    "type": "fill",
+    "headers": [
+        "Kalkulationsstufe",
+        "Rechenweg / Prozentsatz",
+        "Betrag je Stück"
+    ],
+    "rows": [
+        [
+            "Listeneinkaufspreis (LEP)",
+            "Vorgabe",
+            "60,00 EUR"
+        ],
+        [
+            "- Lieferantenrabatt",
+            "- 10 % vom LEP",
+            ""
+        ],
+        [
+            "= Zieleinkaufspreis (ZEP)",
+            "LEP - Rabatt",
+            ""
+        ],
+        [
+            "- Lieferantenskonto",
+            "- 2 % vom ZEP",
+            ""
+        ],
+        [
+            "= Bareinkaufspreis (BEP)",
+            "ZEP - Skonto",
+            ""
+        ],
+        [
+            "+ Bezugskosten",
+            "+ Fracht / Verpackung",
+            "+ 2,00 EUR"
+        ],
+        [
+            "= Bezugspreis (Einstandspreis)",
+            "BEP + Bezugskosten",
+            ""
+        ],
+        [
+            "+ Handlungskosten",
+            "+ 40 % vom Bezugspreis",
+            ""
+        ],
+        [
+            "= Selbstkostenpreis (SKP)",
+            "Bezugspreis + Handlungskosten",
+            ""
+        ],
+        [
+            "+ Gewinnzuschlag",
+            "+ 25 % vom SKP",
+            ""
+        ],
+        [
+            "= Barverkaufspreis (BVP_netto)",
+            "SKP + Gewinn",
+            ""
+        ],
+        [
+            "+ Kundenskonto & Kundenrabatt (im Hundert)",
+            "Kalkulatorischer Aufschlag",
+            ""
+        ],
+        [
+            "= Nettoverkaufspreis / Listenverkaufspreis",
+            "Netto",
+            ""
+        ],
+        [
+            "+ Umsatzsteuer (19 %)",
+            "+ 19 % vom Netto",
+            ""
+        ],
+        [
+            "= Bruttoverkaufspreis (BVP)",
+            "Endkundenpreis inkl. USt",
+            ""
+        ]
+    ],
+    "solutions": {
+        "1_2": "- 6,00 EUR",
+        "2_2": "= 54,00 EUR",
+        "3_2": "- 1,08 EUR",
+        "4_2": "= 52,92 EUR",
+        "6_2": "= 54,92 EUR",
+        "7_2": "+ 21,97 EUR",
+        "8_2": "= 76,89 EUR",
+        "9_2": "+ 19,22 EUR",
+        "10_2": "= 96,11 EUR",
+        "11_2": "+ 7,52 EUR",
+        "12_2": "= 103,63 EUR",
+        "13_2": "+ 19,69 EUR",
+        "14_2": "= 123,32 EUR"
+    }
+},
                         solution: "Klassisches Kalkulationsschema nach Prüfungsstandard: LEP ➔ ZEP ➔ BEP ➔ Einstandspreis ➔ SKP ➔ BVP (Netto) ➔ ZVP ➔ LVP (Netto) ➔ BVP (Brutto inkl. USt)."
                     }
                 ]
@@ -1057,18 +1366,138 @@ var EXAM_SETS = [
                         stencil: "DIN 69900 NETZPLANTECHNIK / KNOTENBERECHNUNG",
                         text: "Für das Digitalisierungsprojekt liegt folgende Vorgangsliste vor:\n• Vorgang A: Ist-Analyse Kanzlei (Dauer: 4 Tage, Vorgänger: keine)\n• Vorgang B: Server-Beschaffung (Dauer: 6 Tage, Vorgänger: A)\n• Vorgang C: Software-Customizing (Dauer: 8 Tage, Vorgänger: A)\n• Vorgang D: Verkabelung & Netzwerk (Dauer: 3 Tage, Vorgänger: B)\n• Vorgang E: Datenmigration Altdaten (Dauer: 5 Tage, Vorgänger: B, C)\n• Vorgang F: Schulung Anwälte & Rollout (Dauer: 4 Tage, Vorgänger: D, E)\n\nFühren Sie die Vorwärtsrechnung (FAZ, FEZ) und Rückwärtsrechnung (SAZ, SEZ) durch, berechnen Sie den Gesamtpuffer (GP) und freien Puffer (FP) und ermitteln Sie den Kritischen Pfad.",
                         tableConfig: {
-                            type: "fill",
-                            staticCols: [0, 1, 2],
-                            headers: ["Vorgang", "Dauer", "Vorgänger", "FAZ", "FEZ", "SAZ", "SEZ", "GP", "FP", "Kritisch?"],
-                            rows: [
-                                ["A (Ist-Analyse)", "4", "-", "0", "4", "0", "4", "0", "0", "JA (Kritisch)"],
-                                ["B (Server-Beschaffung)", "6", "A", "4", "10", "6", "12", "2", "0", "Nein"],
-                                ["C (Software-Customizing)", "8", "A", "4", "12", "4", "12", "0", "0", "JA (Kritisch)"],
-                                ["D (Verkabelung)", "3", "B", "10", "13", "14", "17", "4", "4", "Nein"],
-                                ["E (Datenmigration)", "5", "B, C", "12", "17", "12", "17", "0", "0", "JA (Kritisch)"],
-                                ["F (Schulung & Rollout)", "4", "D, E", "17", "21", "17", "21", "0", "0", "JA (Kritisch)"]
-                            ]
-                        },
+                                                        "type": "fill",
+                                                        "headers": [
+                                                                                    "Vorgang",
+                                                                                    "Dauer",
+                                                                                    "Vorgänger",
+                                                                                    "FAZ",
+                                                                                    "FEZ",
+                                                                                    "SAZ",
+                                                                                    "SEZ",
+                                                                                    "GP",
+                                                                                    "FP",
+                                                                                    "Kritisch?"
+                                                        ],
+                                                        "rows": [
+                                                                                    [
+                                                                                                                "A (Ist-Analyse)",
+                                                                                                                "4",
+                                                                                                                "-",
+                                                                                                                "",
+                                                                                                                "",
+                                                                                                                "",
+                                                                                                                "",
+                                                                                                                "",
+                                                                                                                "",
+                                                                                                                ""
+                                                                                    ],
+                                                                                    [
+                                                                                                                "B (Server-Beschaffung)",
+                                                                                                                "6",
+                                                                                                                "A",
+                                                                                                                "",
+                                                                                                                "",
+                                                                                                                "",
+                                                                                                                "",
+                                                                                                                "",
+                                                                                                                "",
+                                                                                                                ""
+                                                                                    ],
+                                                                                    [
+                                                                                                                "C (Software-Customizing)",
+                                                                                                                "8",
+                                                                                                                "A",
+                                                                                                                "",
+                                                                                                                "",
+                                                                                                                "",
+                                                                                                                "",
+                                                                                                                "",
+                                                                                                                "",
+                                                                                                                ""
+                                                                                    ],
+                                                                                    [
+                                                                                                                "D (Verkabelung)",
+                                                                                                                "3",
+                                                                                                                "B",
+                                                                                                                "",
+                                                                                                                "",
+                                                                                                                "",
+                                                                                                                "",
+                                                                                                                "",
+                                                                                                                "",
+                                                                                                                ""
+                                                                                    ],
+                                                                                    [
+                                                                                                                "E (Datenmigration)",
+                                                                                                                "5",
+                                                                                                                "B, C",
+                                                                                                                "",
+                                                                                                                "",
+                                                                                                                "",
+                                                                                                                "",
+                                                                                                                "",
+                                                                                                                "",
+                                                                                                                ""
+                                                                                    ],
+                                                                                    [
+                                                                                                                "F (Schulung & Rollout)",
+                                                                                                                "4",
+                                                                                                                "D, E",
+                                                                                                                "",
+                                                                                                                "",
+                                                                                                                "",
+                                                                                                                "",
+                                                                                                                "",
+                                                                                                                "",
+                                                                                                                ""
+                                                                                    ]
+                                                        ],
+                                                        "solutions": {
+                                                                                    "0_3": "0",
+                                                                                    "0_4": "4",
+                                                                                    "0_5": "0",
+                                                                                    "0_6": "4",
+                                                                                    "0_7": "0",
+                                                                                    "0_8": "0",
+                                                                                    "0_9": "JA (Kritisch)",
+                                                                                    "1_3": "4",
+                                                                                    "1_4": "10",
+                                                                                    "1_5": "6",
+                                                                                    "1_6": "12",
+                                                                                    "1_7": "2",
+                                                                                    "1_8": "0",
+                                                                                    "1_9": "Nein",
+                                                                                    "2_3": "4",
+                                                                                    "2_4": "12",
+                                                                                    "2_5": "4",
+                                                                                    "2_6": "12",
+                                                                                    "2_7": "0",
+                                                                                    "2_8": "0",
+                                                                                    "2_9": "JA (Kritisch)",
+                                                                                    "3_3": "10",
+                                                                                    "3_4": "13",
+                                                                                    "3_5": "14",
+                                                                                    "3_6": "17",
+                                                                                    "3_7": "4",
+                                                                                    "3_8": "4",
+                                                                                    "3_9": "Nein",
+                                                                                    "4_3": "12",
+                                                                                    "4_4": "17",
+                                                                                    "4_5": "12",
+                                                                                    "4_6": "17",
+                                                                                    "4_7": "0",
+                                                                                    "4_8": "0",
+                                                                                    "4_9": "JA (Kritisch)",
+                                                                                    "5_3": "17",
+                                                                                    "5_4": "21",
+                                                                                    "5_5": "17",
+                                                                                    "5_6": "21",
+                                                                                    "5_7": "0",
+                                                                                    "5_8": "0",
+                                                                                    "5_9": "JA (Kritisch)"
+                                                        }
+                            },
                         solution: "Gesamtdauer des Projekts = 21 Tage.\nKritischer Pfad (alle Vorgänge mit GP = 0 und FP = 0): A ➔ C ➔ E ➔ F.\nVorwärtsrechnung: FEZ = FAZ + D; FAZ = max(FEZ aller Vorgänger).\nRückwärtsrechnung: SAZ = SEZ - D; SEZ = min(SAZ aller Nachfolger).\nGesamtpuffer GP = SAZ - FAZ (oder SEZ - FEZ).\nFreier Puffer FP = min(FAZ aller direkten Nachfolger) - FEZ."
                     },
                     {
@@ -1136,16 +1565,54 @@ var EXAM_SETS = [
                         stencil: "LIZENZMANAGEMENT / IT-RECHT",
                         text: "Für 40 Kanzleiarbeitsplätze werden Office-Lizenzen benötigt. Vergleichen Sie die drei Lizenzierungsmodelle OEM/SB, Volumenlizenzvertrag und SaaS (Cloud-Abonnement).",
                         tableConfig: {
-                            type: "fill",
-                            staticCols: [0],
-                            headers: ["Kriterium", "OEM / System Builder", "Klassische Volumenlizenz", "SaaS (z. B. M365 Cloud)"],
-                            rows: [
-                                ["Zahlungsmodell", "Einmalkauf (Capex)", "Einmalkauf mit Software Assurance", "Laufende monatliche/jährliche Miete (Opex)"],
-                                ["Hardware-Bindung", "An das Erstgerät gebunden (in DE übertragbar)", "Frei auf beliebigen Geräten installierbar", "Benutzerbezogen (z. B. bis zu 5 Geräte pro User)"],
-                                ["Zentrale Verwaltung", "Sehr aufwendig (einzelne Lizenzkeys)", "Einfach über KMS / MAK-Server", "Zentral über Cloud-Admin-Portal"],
-                                ["Recht auf Vorversionen (Downgrade)", "In der Regel nicht enthalten", "Vollständiges Downgrade-Recht", "Immer Zugriff auf aktuellste Version"]
-                            ]
-                        },
+                                                        "type": "fill",
+                                                        "headers": [
+                                                                                    "Kriterium",
+                                                                                    "OEM / System Builder",
+                                                                                    "Klassische Volumenlizenz",
+                                                                                    "SaaS (z. B. M365 Cloud)"
+                                                        ],
+                                                        "rows": [
+                                                                                    [
+                                                                                                                "Zahlungsmodell",
+                                                                                                                "",
+                                                                                                                "",
+                                                                                                                ""
+                                                                                    ],
+                                                                                    [
+                                                                                                                "Hardware-Bindung",
+                                                                                                                "",
+                                                                                                                "",
+                                                                                                                ""
+                                                                                    ],
+                                                                                    [
+                                                                                                                "Zentrale Verwaltung",
+                                                                                                                "",
+                                                                                                                "",
+                                                                                                                ""
+                                                                                    ],
+                                                                                    [
+                                                                                                                "Recht auf Vorversionen (Downgrade)",
+                                                                                                                "",
+                                                                                                                "",
+                                                                                                                ""
+                                                                                    ]
+                                                        ],
+                                                        "solutions": {
+                                                                                    "0_1": "Einmalkauf (Capex)",
+                                                                                    "0_2": "Einmalkauf mit Software Assurance",
+                                                                                    "0_3": "Laufende monatliche/jährliche Miete (Opex)",
+                                                                                    "1_1": "An das Erstgerät gebunden (in DE übertragbar)",
+                                                                                    "1_2": "Frei auf beliebigen Geräten installierbar",
+                                                                                    "1_3": "Benutzerbezogen (z. B. bis zu 5 Geräte pro User)",
+                                                                                    "2_1": "Sehr aufwendig (einzelne Lizenzkeys)",
+                                                                                    "2_2": "Einfach über KMS / MAK-Server",
+                                                                                    "2_3": "Zentral über Cloud-Admin-Portal",
+                                                                                    "3_1": "In der Regel nicht enthalten",
+                                                                                    "3_2": "Vollständiges Downgrade-Recht",
+                                                                                    "3_3": "Immer Zugriff auf aktuellste Version"
+                                                        }
+                            },
                         solution: "Volumenlizenzen bieten zentrale Aktivierung via KMS/MAK. SaaS ist flexibel skalierbar bei laufenden Betriebskosten (Opex). OEM ist günstig, aber unübersichtlich im Lizenzmanagement."
                     },
                     {
@@ -1263,16 +1730,54 @@ var EXAM_SETS = [
                         stencil: "ZAHLUNGSVERFAHREN / RISIKOANALYSE",
                         text: "Vergleichen Sie die vier Online-Zahlungsmethoden hinsichtlich Ausfallrisiko für den Händler und Käuferakzeptanz.",
                         tableConfig: {
-                            type: "fill",
-                            staticCols: [0],
-                            headers: ["Zahlungsart", "Ausfallrisiko (Händler)", "Transaktionsgebühr", "Käuferakzeptanz in DE"],
-                            rows: [
-                                ["Kauf auf Rechnung", "Sehr hoch (Zahlungsverzug/Betrug)", "Gering bis mittel", "Sehr hoch (beliebteste Zahlart)"],
-                                ["SEPA-Lastschrift", "Mittel (Rücklastschrift 8 Wochen möglich)", "Sehr gering (< 0,5 %)", "Hoch"],
-                                ["Kreditkarte (3D-Secure)", "Gering (Haftungsumkehr bei 3DS)", "Mittel (1,5 - 2,5 %)", "Hoch / International unverzichtbar"],
-                                ["PayPal / Wallet", "Sehr gering (Verkäuferschutz)", "Hoch (2 - 3 %)", "Sehr hoch"]
-                            ]
-                        },
+                                                        "type": "fill",
+                                                        "headers": [
+                                                                                    "Zahlungsart",
+                                                                                    "Ausfallrisiko (Händler)",
+                                                                                    "Transaktionsgebühr",
+                                                                                    "Käuferakzeptanz in DE"
+                                                        ],
+                                                        "rows": [
+                                                                                    [
+                                                                                                                "Kauf auf Rechnung",
+                                                                                                                "",
+                                                                                                                "",
+                                                                                                                ""
+                                                                                    ],
+                                                                                    [
+                                                                                                                "SEPA-Lastschrift",
+                                                                                                                "",
+                                                                                                                "",
+                                                                                                                ""
+                                                                                    ],
+                                                                                    [
+                                                                                                                "Kreditkarte (3D-Secure)",
+                                                                                                                "",
+                                                                                                                "",
+                                                                                                                ""
+                                                                                    ],
+                                                                                    [
+                                                                                                                "PayPal / Wallet",
+                                                                                                                "",
+                                                                                                                "",
+                                                                                                                ""
+                                                                                    ]
+                                                        ],
+                                                        "solutions": {
+                                                                                    "0_1": "Sehr hoch (Zahlungsverzug/Betrug)",
+                                                                                    "0_2": "Gering bis mittel",
+                                                                                    "0_3": "Sehr hoch (beliebteste Zahlart)",
+                                                                                    "1_1": "Mittel (Rücklastschrift 8 Wochen möglich)",
+                                                                                    "1_2": "Sehr gering (< 0,5 %)",
+                                                                                    "1_3": "Hoch",
+                                                                                    "2_1": "Gering (Haftungsumkehr bei 3DS)",
+                                                                                    "2_2": "Mittel (1,5 - 2,5 %)",
+                                                                                    "2_3": "Hoch / International unverzichtbar",
+                                                                                    "3_1": "Sehr gering (Verkäuferschutz)",
+                                                                                    "3_2": "Hoch (2 - 3 %)",
+                                                                                    "3_3": "Sehr hoch"
+                                                        }
+                            },
                         solution: "Rechnungskauf hat höchstes Risiko, ist aber kundenfreundlichst. SEPA birgt Rücklastschriftrisiko. Wallets/3DS bieten hohe Sicherheit bei höheren Transaktionsgebühren."
                     }
                 ]
@@ -1334,16 +1839,41 @@ var EXAM_SETS = [
                         stencil: "WEB-SECURITY / OWASP TOP 10",
                         text: "Ordnen Sie die drei folgenden Sicherheitslücken ihren Ursachen und konkreten Gegenmaßnahmen zu.",
                         tableConfig: {
-                            type: "matching",
-                            targetCol: 0,
-                            options: ["SQL-Injection (SQLi)", "Cross-Site Scripting (XSS)", "Cross-Site Request Forgery (CSRF)"],
-                            headers: ["Schwachstelle", "Funktionsweise des Angriffs", "Konkrete Schutzmaßnahme"],
-                            rows: [
-                                ["Cross-Site Scripting (XSS)", "Einschleusen von bösartigem JavaScript in Webseiten, das im Browser anderer Nutzer ausgeführt wird", "Kontextsensitives HTML-Output-Encoding & Content Security Policy (CSP)"],
-                                ["Cross-Site Request Forgery (CSRF)", "Opfer wird verleitet, ungewollt eine authentifizierte Aktion auf einer fremden Website auszuführen", "Einsatz von kryptografischen Anti-CSRF-Tokens & SameSite-Cookie-Attribut"],
-                                ["SQL-Injection (SQLi)", "Einschleusen von SQL-Befehlen über ungeprüfte Eingabefelder zur Manipulation der Datenbank", "Verwendung von Prepared Statements (parametrisierten Queries) und ORM"]
-                            ]
-                        },
+                                                        "type": "matching",
+                                                        "targetCol": 0,
+                                                        "options": [
+                                                                                    "SQL-Injection (SQLi)",
+                                                                                    "Cross-Site Scripting (XSS)",
+                                                                                    "Cross-Site Request Forgery (CSRF)"
+                                                        ],
+                                                        "headers": [
+                                                                                    "Schwachstelle",
+                                                                                    "Funktionsweise des Angriffs",
+                                                                                    "Konkrete Schutzmaßnahme"
+                                                        ],
+                                                        "rows": [
+                                                                                    [
+                                                                                                                "",
+                                                                                                                "Einschleusen von bösartigem JavaScript in Webseiten, das im Browser anderer Nutzer ausgeführt wird",
+                                                                                                                "Kontextsensitives HTML-Output-Encoding & Content Security Policy (CSP)"
+                                                                                    ],
+                                                                                    [
+                                                                                                                "",
+                                                                                                                "Opfer wird verleitet, ungewollt eine authentifizierte Aktion auf einer fremden Website auszuführen",
+                                                                                                                "Einsatz von kryptografischen Anti-CSRF-Tokens & SameSite-Cookie-Attribut"
+                                                                                    ],
+                                                                                    [
+                                                                                                                "",
+                                                                                                                "Einschleusen von SQL-Befehlen über ungeprüfte Eingabefelder zur Manipulation der Datenbank",
+                                                                                                                "Verwendung von Prepared Statements (parametrisierten Queries) und ORM"
+                                                                                    ]
+                                                        ],
+                                                        "solutions": {
+                                                                                    "0_0": "Cross-Site Scripting (XSS)",
+                                                                                    "1_0": "Cross-Site Request Forgery (CSRF)",
+                                                                                    "2_0": "SQL-Injection (SQLi)"
+                                                        }
+                            },
                         solution: "SQLi wird durch strikte Trennung von Code und Daten (Prepared Statements) gelöst. XSS durch Escaping/Encoding aller Nutzereingaben. CSRF durch Einmal-Tokens pro Formularübertragung."
                     },
                     {
@@ -1483,16 +2013,54 @@ var EXAM_SETS = [
                         stencil: "VIRTUALISIERUNG / ARCHITEKTURVERGLEICH",
                         text: "Vergleichen Sie die drei Virtualisierungsansätze hinsichtlich Architektur, Overhead und Bootzeit.",
                         tableConfig: {
-                            type: "fill",
-                            staticCols: [0],
-                            headers: ["Kriterium", "Typ-1 Hypervisor (Bare-Metal)", "Typ-2 Hypervisor (Hosted)", "Container (z. B. Docker)"],
-                            rows: [
-                                ["Architektur-Ebene", "Läuft direkt auf der physischen Server-Hardware", "Läuft als Anwendung auf einem Host-Betriebssystem", "Teilt sich den Host-OS-Kernel via Namespaces/cgroups"],
-                                ["Betriebssystem-Overhead", "Vollständiges Gast-Betriebssystem je VM", "Sehr hoch (Host-OS + Gast-OS)", "Minimal (nur Applikation + Abhängigkeiten)"],
-                                ["Startzeit", "Minuten (voller OS-Boot)", "Minuten", "Sekundenbruchteile bis wenige Sekunden"],
-                                ["Beispielsoftware", "VMware ESXi, Proxmox VE, Hyper-V", "Oracle VirtualBox, VMware Workstation", "Docker, Podman, containerd"]
-                            ]
-                        },
+                                                        "type": "fill",
+                                                        "headers": [
+                                                                                    "Kriterium",
+                                                                                    "Typ-1 Hypervisor (Bare-Metal)",
+                                                                                    "Typ-2 Hypervisor (Hosted)",
+                                                                                    "Container (z. B. Docker)"
+                                                        ],
+                                                        "rows": [
+                                                                                    [
+                                                                                                                "Architektur-Ebene",
+                                                                                                                "",
+                                                                                                                "",
+                                                                                                                ""
+                                                                                    ],
+                                                                                    [
+                                                                                                                "Betriebssystem-Overhead",
+                                                                                                                "",
+                                                                                                                "",
+                                                                                                                ""
+                                                                                    ],
+                                                                                    [
+                                                                                                                "Startzeit",
+                                                                                                                "",
+                                                                                                                "",
+                                                                                                                ""
+                                                                                    ],
+                                                                                    [
+                                                                                                                "Beispielsoftware",
+                                                                                                                "",
+                                                                                                                "",
+                                                                                                                ""
+                                                                                    ]
+                                                        ],
+                                                        "solutions": {
+                                                                                    "0_1": "Läuft direkt auf der physischen Server-Hardware",
+                                                                                    "0_2": "Läuft als Anwendung auf einem Host-Betriebssystem",
+                                                                                    "0_3": "Teilt sich den Host-OS-Kernel via Namespaces/cgroups",
+                                                                                    "1_1": "Vollständiges Gast-Betriebssystem je VM",
+                                                                                    "1_2": "Sehr hoch (Host-OS + Gast-OS)",
+                                                                                    "1_3": "Minimal (nur Applikation + Abhängigkeiten)",
+                                                                                    "2_1": "Minuten (voller OS-Boot)",
+                                                                                    "2_2": "Minuten",
+                                                                                    "2_3": "Sekundenbruchteile bis wenige Sekunden",
+                                                                                    "3_1": "VMware ESXi, Proxmox VE, Hyper-V",
+                                                                                    "3_2": "Oracle VirtualBox, VMware Workstation",
+                                                                                    "3_3": "Docker, Podman, containerd"
+                                                        }
+                            },
                         solution: "Typ-1 läuft bare-metal mit minimalem Overhead für Serverbetrieb. Typ-2 läuft auf Desktop-Betriebssystemen. Container teilen den Kernel und starten in Millisekunden."
                     },
                     {
@@ -1602,16 +2170,63 @@ var EXAM_SETS = [
                         stencil: "API-DESIGN / REST-ARCHITEKTUR",
                         text: "Für das Cloud-Management soll eine REST-API bereitgestellt werden. Ergänzen Sie die folgende Tabelle mit HTTP-Methode, Pfad und passendem HTTP-Statuscode.",
                         tableConfig: {
-                            type: "fill",
-                            staticCols: [0],
-                            headers: ["Aktion", "HTTP-Methode", "Ressourcen-URI", "Erfolgs-Statuscode", "Fehler-Statuscode"],
-                            rows: [
-                                ["Alle Instanzen eines Projekts abrufen", "GET", "/api/v1/projekte/42/instanzen", "200 OK", "404 Not Found"],
-                                ["Neue VM-Instanz provisionieren", "POST", "/api/v1/instanzen", "201 Created", "400 Bad Request"],
-                                ["Spezifische Instanz löschen (Terminieren)", "DELETE", "/api/v1/instanzen/89", "204 No Content", "404 Not Found"],
-                                ["Instanztyp verändern (Resize)", "PATCH / PUT", "/api/v1/instanzen/89", "200 OK", "409 Conflict"]
-                            ]
-                        },
+                                                        "type": "fill",
+                                                        "headers": [
+                                                                                    "Aktion",
+                                                                                    "HTTP-Methode",
+                                                                                    "Ressourcen-URI",
+                                                                                    "Erfolgs-Statuscode",
+                                                                                    "Fehler-Statuscode"
+                                                        ],
+                                                        "rows": [
+                                                                                    [
+                                                                                                                "Alle Instanzen eines Projekts abrufen",
+                                                                                                                "",
+                                                                                                                "",
+                                                                                                                "",
+                                                                                                                ""
+                                                                                    ],
+                                                                                    [
+                                                                                                                "Neue VM-Instanz provisionieren",
+                                                                                                                "",
+                                                                                                                "",
+                                                                                                                "",
+                                                                                                                ""
+                                                                                    ],
+                                                                                    [
+                                                                                                                "Spezifische Instanz löschen (Terminieren)",
+                                                                                                                "",
+                                                                                                                "",
+                                                                                                                "",
+                                                                                                                ""
+                                                                                    ],
+                                                                                    [
+                                                                                                                "Instanztyp verändern (Resize)",
+                                                                                                                "",
+                                                                                                                "",
+                                                                                                                "",
+                                                                                                                ""
+                                                                                    ]
+                                                        ],
+                                                        "solutions": {
+                                                                                    "0_1": "GET",
+                                                                                    "0_2": "/api/v1/projekte/42/instanzen",
+                                                                                    "0_3": "200 OK",
+                                                                                    "0_4": "404 Not Found",
+                                                                                    "1_1": "POST",
+                                                                                    "1_2": "/api/v1/instanzen",
+                                                                                    "1_3": "201 Created",
+                                                                                    "1_4": "400 Bad Request",
+                                                                                    "2_1": "DELETE",
+                                                                                    "2_2": "/api/v1/instanzen/89",
+                                                                                    "2_3": "204 No Content",
+                                                                                    "2_4": "404 Not Found",
+                                                                                    "3_1": "PATCH / PUT",
+                                                                                    "3_2": "/api/v1/instanzen/89",
+                                                                                    "3_3": "200 OK",
+                                                                                    "3_4": "409 Conflict"
+                                                        }
+                            },
                         solution: "GET für idempotentes Lesen (200), POST für Erstellen (201), DELETE für Löschen (204/200), PUT/PATCH für Updates (200)."
                     }
                 ]
@@ -1661,17 +2276,70 @@ var EXAM_SETS = [
                         stencil: "ENTSCHEIDUNGSTECHNIK / NUTZWERTANALYSE",
                         text: "Für eine neue Schweißzelle stehen zwei Industrieroboter zur Auswahl. Berechnen Sie die Gesamtpunktwerte und ermitteln Sie den wirtschaftlichsten Roboter nach Nutzwertanalyse (Punkte von 1 bis 10).",
                         tableConfig: {
-                            type: "fill",
-                            staticCols: [0, 1, 2, 4],
-                            headers: ["Kriterium", "Gewichtung", "Roboter A (Punkte)", "Roboter A (Teilnutzwert)", "Roboter B (Punkte)", "Roboter B (Teilnutzwert)"],
-                            rows: [
-                                ["Wiederholgenauigkeit / Präzision", "30 %", "9", "2,7", "8", "2,4"],
-                                ["Zykluszeit / Taktzeit", "25 %", "7", "1,75", "9", "2,25"],
-                                ["Schnittstellen (PROFINET, OPC UA)", "25 %", "9", "2,25", "6", "1,5"],
-                                ["Energieeffizienz", "20 %", "6", "1,2", "8", "1,6"],
-                                ["Gesamtnutzwert", "100 %", "-", "7,90", "-", "7,75"]
-                            ]
-                        },
+                                                        "type": "fill",
+                                                        "headers": [
+                                                                                    "Kriterium",
+                                                                                    "Gewichtung",
+                                                                                    "Roboter A (Punkte)",
+                                                                                    "Roboter A (Teilnutzwert)",
+                                                                                    "Roboter B (Punkte)",
+                                                                                    "Roboter B (Teilnutzwert)"
+                                                        ],
+                                                        "rows": [
+                                                                                    [
+                                                                                                                "Wiederholgenauigkeit / Präzision",
+                                                                                                                "30 %",
+                                                                                                                "9",
+                                                                                                                "",
+                                                                                                                "8",
+                                                                                                                ""
+                                                                                    ],
+                                                                                    [
+                                                                                                                "Zykluszeit / Taktzeit",
+                                                                                                                "25 %",
+                                                                                                                "7",
+                                                                                                                "",
+                                                                                                                "9",
+                                                                                                                ""
+                                                                                    ],
+                                                                                    [
+                                                                                                                "Schnittstellen (PROFINET, OPC UA)",
+                                                                                                                "25 %",
+                                                                                                                "9",
+                                                                                                                "",
+                                                                                                                "6",
+                                                                                                                ""
+                                                                                    ],
+                                                                                    [
+                                                                                                                "Energieeffizienz",
+                                                                                                                "20 %",
+                                                                                                                "6",
+                                                                                                                "",
+                                                                                                                "8",
+                                                                                                                ""
+                                                                                    ],
+                                                                                    [
+                                                                                                                "Gesamtnutzwert",
+                                                                                                                "100 %",
+                                                                                                                "-",
+                                                                                                                "",
+                                                                                                                "-",
+                                                                                                                ""
+                                                                                    ]
+                                                        ],
+                                                        "solutions": {
+                                                                                    "0_3": "2,7",
+                                                                                    "0_5": "2,4",
+                                                                                    "1_3": "1,75",
+                                                                                    "1_5": "2,25",
+                                                                                    "2_3": "2,25",
+                                                                                    "2_5": "1,5",
+                                                                                    "3_3": "1,2",
+                                                                                    "3_5": "1,6",
+                                                                                    "4_3": "7,90",
+                                                                                    "4_5": "7,75"
+                                                        }
+                            },
                         solution: "Roboter A erreicht 7,90 Nutzwertpunkte, Roboter B 7,75 Punkte. Roboter A ist aufgrund überlegener Präzision und offener Industriestandards (OPC UA) die wirtschaftlichere Wahl."
                     }
                 ]
@@ -1819,17 +2487,48 @@ var EXAM_SETS = [
                         stencil: "GESUNDHEITS-IT / TELEMATIKINFRASTRUKTUR",
                         text: "Ordnen Sie den Kernkomponenten der Telematikinfrastruktur ihre jeweilige Funktion zu.",
                         tableConfig: {
-                            type: "matching",
-                            targetCol: 0,
-                            options: ["eHealth-Konnektor", "eGK (elektr. Gesundheitskarte)", "SMC-B (Praxisausweis)", "HBA (Heilberufsausweis)"],
-                            headers: ["Komponente", "Bedeutung / Typ", "Aufgabe im System"],
-                            rows: [
-                                ["SMC-B (Praxisausweis)", "Institutionskarte (Smartcard im Lesegerät)", "Authentifiziert die Klinik/Praxis zweifelsfrei gegenüber der Telematikinfrastruktur"],
-                                ["eHealth-Konnektor", "Sicherheits-Gateway (Hardware/Software)", "Baut ein gesichertes VPN zur Telematikinfrastruktur auf und wickelt Krypto-Operationen ab"],
-                                ["HBA (Heilberufsausweis)", "Personengebundene Smartcard des Arztes", "Ermöglicht die qualifizierte elektronische Signatur (QES) für e-Rezepte und eAU"],
-                                ["eGK (elektr. Gesundheitskarte)", "Patientenkarte (Smartcard)", "Speichert Stammdaten, Notfalldaten (NFD) und den elektronischen Medikationsplan (eMP)"]
-                            ]
-                        },
+                                                        "type": "matching",
+                                                        "targetCol": 0,
+                                                        "options": [
+                                                                                    "eHealth-Konnektor",
+                                                                                    "eGK (elektr. Gesundheitskarte)",
+                                                                                    "SMC-B (Praxisausweis)",
+                                                                                    "HBA (Heilberufsausweis)"
+                                                        ],
+                                                        "headers": [
+                                                                                    "Komponente",
+                                                                                    "Bedeutung / Typ",
+                                                                                    "Aufgabe im System"
+                                                        ],
+                                                        "rows": [
+                                                                                    [
+                                                                                                                "",
+                                                                                                                "Institutionskarte (Smartcard im Lesegerät)",
+                                                                                                                "Authentifiziert die Klinik/Praxis zweifelsfrei gegenüber der Telematikinfrastruktur"
+                                                                                    ],
+                                                                                    [
+                                                                                                                "",
+                                                                                                                "Sicherheits-Gateway (Hardware/Software)",
+                                                                                                                "Baut ein gesichertes VPN zur Telematikinfrastruktur auf und wickelt Krypto-Operationen ab"
+                                                                                    ],
+                                                                                    [
+                                                                                                                "",
+                                                                                                                "Personengebundene Smartcard des Arztes",
+                                                                                                                "Ermöglicht die qualifizierte elektronische Signatur (QES) für e-Rezepte und eAU"
+                                                                                    ],
+                                                                                    [
+                                                                                                                "",
+                                                                                                                "Patientenkarte (Smartcard)",
+                                                                                                                "Speichert Stammdaten, Notfalldaten (NFD) und den elektronischen Medikationsplan (eMP)"
+                                                                                    ]
+                                                        ],
+                                                        "solutions": {
+                                                                                    "0_0": "SMC-B (Praxisausweis)",
+                                                                                    "1_0": "eHealth-Konnektor",
+                                                                                    "2_0": "HBA (Heilberufsausweis)",
+                                                                                    "3_0": "eGK (elektr. Gesundheitskarte)"
+                                                        }
+                            },
                         solution: "Konnektor als VPN-Router; SMC-B als Betriebsstättenausweis; HBA als digitaler Arztausweis mit Signaturfunktion (QES); eGK als Patientenkarte."
                     },
                     {
@@ -1937,18 +2636,48 @@ var EXAM_SETS = [
                         stencil: "IT-SICHERHEITSMANAGEMENT / TOMS",
                         text: "Ordnen Sie die folgenden vier Schutzmaßnahmen der passenden Kontrollart nach Art. 32 DSGVO zu.",
                         tableConfig: {
-                            type: "matching",
-                            targetCol: 1,
-                            staticCols: [0, 2],
-                            options: ["Zutrittskontrolle", "Zugriffskontrolle", "Benutzer-/Zugangskontrolle", "Verfügbarkeitskontrolle"],
-                            headers: ["Maßnahme im Krankenhaus", "Kontrollart nach Art. 32 DSGVO", "Sicherheitsziel"],
-                            rows: [
-                                ["Mitarbeiter können in der Patientenakte nur Patienten der eigenen Station einsehen", "Zugriffskontrolle", "Verhindert unbefugtes Lesen, Verändern oder Löschen von Daten"],
-                                ["Tägliche verschlüsselte Datensicherung auf WORM-Speicher (Immutability)", "Verfügbarkeitskontrolle", "Schützt vor Datenverlust und Ransomware"],
-                                ["Zugang zu Serverräumen nur mit elektronischem Transponder und Protokollierung", "Zutrittskontrolle", "Verhindert physischen Zugang unbefugter Personen"],
-                                ["Automatische Bildschirmsperre nach 2 Minuten Inaktivität auf Stations-PCs", "Benutzer-/Zugangskontrolle", "Verhindert unbefugte Nutzung unbeaufsichtigter Terminals"]
-                            ]
-                        },
+                                                        "type": "matching",
+                                                        "targetCol": 1,
+                                                        "options": [
+                                                                                    "Zutrittskontrolle",
+                                                                                    "Zugriffskontrolle",
+                                                                                    "Benutzer-/Zugangskontrolle",
+                                                                                    "Verfügbarkeitskontrolle"
+                                                        ],
+                                                        "headers": [
+                                                                                    "Maßnahme im Krankenhaus",
+                                                                                    "Kontrollart nach Art. 32 DSGVO",
+                                                                                    "Sicherheitsziel"
+                                                        ],
+                                                        "rows": [
+                                                                                    [
+                                                                                                                "Mitarbeiter können in der Patientenakte nur Patienten der eigenen Station einsehen",
+                                                                                                                "",
+                                                                                                                "Verhindert unbefugtes Lesen, Verändern oder Löschen von Daten"
+                                                                                    ],
+                                                                                    [
+                                                                                                                "Tägliche verschlüsselte Datensicherung auf WORM-Speicher (Immutability)",
+                                                                                                                "",
+                                                                                                                "Schützt vor Datenverlust und Ransomware"
+                                                                                    ],
+                                                                                    [
+                                                                                                                "Zugang zu Serverräumen nur mit elektronischem Transponder und Protokollierung",
+                                                                                                                "",
+                                                                                                                "Verhindert physischen Zugang unbefugter Personen"
+                                                                                    ],
+                                                                                    [
+                                                                                                                "Automatische Bildschirmsperre nach 2 Minuten Inaktivität auf Stations-PCs",
+                                                                                                                "",
+                                                                                                                "Verhindert unbefugte Nutzung unbeaufsichtigter Terminals"
+                                                                                    ]
+                                                        ],
+                                                        "solutions": {
+                                                                                    "0_1": "Zugriffskontrolle",
+                                                                                    "1_1": "Verfügbarkeitskontrolle",
+                                                                                    "2_1": "Zutrittskontrolle",
+                                                                                    "3_1": "Benutzer-/Zugangskontrolle"
+                                                        }
+                            },
                         solution: "Zutrittskontrolle (physisch); Zugriffskontrolle (logische Berechtigung); Zugangskontrolle (Login/Screensaver); Verfügbarkeitskontrolle (Backup)."
                     },
                     {
@@ -2036,18 +2765,47 @@ var EXAM_SETS = [
                         stencil: "IT-SICHERHEIT / 2-FAKTOR-AUTHENTIFIZIERUNG",
                         text: "Ordnen Sie die folgenden vier Authentifizierungsmerkmale den drei zulässigen Faktoren (Wissen, Besitz, Inhärenz) nach PSD2 zu.",
                         tableConfig: {
-                            type: "matching",
-                            targetCol: 1,
-                            staticCols: [0, 2],
-                            options: ["Wissen (Wissen)", "Besitz (Haben)", "Inhärenz (Sein)"],
-                            headers: ["Authentifizierungsmerkmal", "Faktorkategorie (Wissen / Besitz / Inhärenz)", "Begründung"],
-                            rows: [
-                                ["Persönliche Online-Banking PIN", "Wissen (Wissen)", "Geheime Information, die nur dem Prüfling bekannt ist"],
-                                ["Fingerabdruck-Scan über Smartphone-Sensor", "Inhärenz (Sein)", "Biometrisches Körpereigenmerkmal des Nutzers"],
-                                ["FIDO2 Hardware-Sicherheitsschlüssel (USB)", "Besitz (Haben)", "Physischer kryptografischer Token im Besitz des Nutzers"],
-                                ["Push-TAN Empfang auf registrierter Banking-App", "Besitz (Haben)", "Bindung an ein physisches, kryptografisch registriertes Endgerät"]
-                            ]
-                        },
+                                                        "type": "matching",
+                                                        "targetCol": 1,
+                                                        "options": [
+                                                                                    "Wissen (Wissen)",
+                                                                                    "Besitz (Haben)",
+                                                                                    "Inhärenz (Sein)"
+                                                        ],
+                                                        "headers": [
+                                                                                    "Authentifizierungsmerkmal",
+                                                                                    "Faktorkategorie (Wissen / Besitz / Inhärenz)",
+                                                                                    "Begründung"
+                                                        ],
+                                                        "rows": [
+                                                                                    [
+                                                                                                                "Persönliche Online-Banking PIN",
+                                                                                                                "",
+                                                                                                                "Geheime Information, die nur dem Prüfling bekannt ist"
+                                                                                    ],
+                                                                                    [
+                                                                                                                "Fingerabdruck-Scan über Smartphone-Sensor",
+                                                                                                                "",
+                                                                                                                "Biometrisches Körpereigenmerkmal des Nutzers"
+                                                                                    ],
+                                                                                    [
+                                                                                                                "FIDO2 Hardware-Sicherheitsschlüssel (USB)",
+                                                                                                                "",
+                                                                                                                "Physischer kryptografischer Token im Besitz des Nutzers"
+                                                                                    ],
+                                                                                    [
+                                                                                                                "Push-TAN Empfang auf registrierter Banking-App",
+                                                                                                                "",
+                                                                                                                "Bindung an ein physisches, kryptografisch registriertes Endgerät"
+                                                                                    ]
+                                                        ],
+                                                        "solutions": {
+                                                                                    "0_1": "Wissen (Wissen)",
+                                                                                    "1_1": "Inhärenz (Sein)",
+                                                                                    "2_1": "Besitz (Haben)",
+                                                                                    "3_1": "Besitz (Haben)"
+                                                        }
+                            },
                         solution: "Fingerabdruck = Inhärenz; Push-TAN-App = Besitz; Online-Banking PIN = Wissen; FIDO2-USB = Besitz."
                     },
                     {
@@ -2162,16 +2920,41 @@ var EXAM_SETS = [
                         stencil: "AWARENESS / ANGRIFFSMETHODEN & ABWEHR",
                         text: "Ordnen Sie die Angriffsarten der passenden Definition und Schutzmaßnahme zu.",
                         tableConfig: {
-                            type: "matching",
-                            targetCol: 0,
-                            options: ["CEO Fraud (Chef-Masche)", "Spear-Phishing", "Vishing (Voice Phishing)"],
-                            headers: ["Angriffsmethode", "Definition", "Effektive Abwehrmaßnahme"],
-                            rows: [
-                                ["Spear-Phishing", "Gezielte, personalisierte E-Mails an Administratoren mit schadhaftem Anhang", "E-Mail-Sandbox, Signaturprüfung und regelmäßige Awareness-Schulungen"],
-                                ["Vishing (Voice Phishing)", "Telefonanrufe angeblicher IT-Techniker zur Abfrage von Passwörtern oder TANs", "Grundsätzliches Verbot der telefonischen Herausgabe von Zugangsdaten"],
-                                ["CEO Fraud (Chef-Masche)", "Kriminelle geben sich als Vorstand aus und fordern Mitarbeiter zu eiligen Eilüberweisungen auf", "Strikte Einhaltung des Vier-Augen-Prinzips und telefonische Rückversicherung"]
-                            ]
-                        },
+                                                        "type": "matching",
+                                                        "targetCol": 0,
+                                                        "options": [
+                                                                                    "CEO Fraud (Chef-Masche)",
+                                                                                    "Spear-Phishing",
+                                                                                    "Vishing (Voice Phishing)"
+                                                        ],
+                                                        "headers": [
+                                                                                    "Angriffsmethode",
+                                                                                    "Definition",
+                                                                                    "Effektive Abwehrmaßnahme"
+                                                        ],
+                                                        "rows": [
+                                                                                    [
+                                                                                                                "",
+                                                                                                                "Gezielte, personalisierte E-Mails an Administratoren mit schadhaftem Anhang",
+                                                                                                                "E-Mail-Sandbox, Signaturprüfung und regelmäßige Awareness-Schulungen"
+                                                                                    ],
+                                                                                    [
+                                                                                                                "",
+                                                                                                                "Telefonanrufe angeblicher IT-Techniker zur Abfrage von Passwörtern oder TANs",
+                                                                                                                "Grundsätzliches Verbot der telefonischen Herausgabe von Zugangsdaten"
+                                                                                    ],
+                                                                                    [
+                                                                                                                "",
+                                                                                                                "Kriminelle geben sich als Vorstand aus und fordern Mitarbeiter zu eiligen Eilüberweisungen auf",
+                                                                                                                "Strikte Einhaltung des Vier-Augen-Prinzips und telefonische Rückversicherung"
+                                                                                    ]
+                                                        ],
+                                                        "solutions": {
+                                                                                    "0_0": "Spear-Phishing",
+                                                                                    "1_0": "Vishing (Voice Phishing)",
+                                                                                    "2_0": "CEO Fraud (Chef-Masche)"
+                                                        }
+                            },
                         solution: "CEO Fraud: Vorstandsvortäuschung -> Vier-Augen-Prinzip; Spear-Phishing: zielgerichtete Mail -> Sandbox & Schulung; Vishing: Telefonbetrug -> Weitergabeverbot."
                     }
                 ]
@@ -2249,16 +3032,41 @@ var EXAM_SETS = [
                         stencil: "SICHERHEITSNORMEN / ISO 26262 ASIL",
                         text: "Ordnen Sie die drei Risikoparameter zur Bestimmung des ASIL-Levels (Automotive Safety Integrity Level A bis D) ihrer Bedeutung zu.",
                         tableConfig: {
-                            type: "matching",
-                            targetCol: 0,
-                            options: ["Schadensausmaß (Severity)", "Expositionswahrscheinlichkeit", "Beherrschbarkeit (Controllability)"],
-                            headers: ["Parameter", "Kürzel", "Bedeutung im automobilen Umfeld"],
-                            rows: [
-                                ["Expositionswahrscheinlichkeit", "E (E0 bis E4)", "Häufigkeit der Fahrsituation, in der die Gefahr auftritt"],
-                                ["Beherrschbarkeit (Controllability)", "C (C0 bis C3)", "Fähigkeit des Fahrers, die Gefahrensituation rechtzeitig abzuwenden"],
-                                ["Schadensausmaß (Severity)", "S (S0 bis S3)", "Schwere möglicher Verletzungen für Insassen oder Passanten"]
-                            ]
-                        },
+                                                        "type": "matching",
+                                                        "targetCol": 0,
+                                                        "options": [
+                                                                                    "Schadensausmaß (Severity)",
+                                                                                    "Expositionswahrscheinlichkeit",
+                                                                                    "Beherrschbarkeit (Controllability)"
+                                                        ],
+                                                        "headers": [
+                                                                                    "Parameter",
+                                                                                    "Kürzel",
+                                                                                    "Bedeutung im automobilen Umfeld"
+                                                        ],
+                                                        "rows": [
+                                                                                    [
+                                                                                                                "",
+                                                                                                                "E (E0 bis E4)",
+                                                                                                                "Häufigkeit der Fahrsituation, in der die Gefahr auftritt"
+                                                                                    ],
+                                                                                    [
+                                                                                                                "",
+                                                                                                                "C (C0 bis C3)",
+                                                                                                                "Fähigkeit des Fahrers, die Gefahrensituation rechtzeitig abzuwenden"
+                                                                                    ],
+                                                                                    [
+                                                                                                                "",
+                                                                                                                "S (S0 bis S3)",
+                                                                                                                "Schwere möglicher Verletzungen für Insassen oder Passanten"
+                                                                                    ]
+                                                        ],
+                                                        "solutions": {
+                                                                                    "0_0": "Expositionswahrscheinlichkeit",
+                                                                                    "1_0": "Beherrschbarkeit (Controllability)",
+                                                                                    "2_0": "Schadensausmaß (Severity)"
+                                                        }
+                            },
                         solution: "Severity (S) = Verletzungsschwere; Exposure (E) = Häufigkeit; Controllability (C) = Beherrschbarkeit durch Fahrer."
                     },
                     {
@@ -2363,16 +3171,41 @@ var EXAM_SETS = [
                         stencil: "CYBERSECURITY / ISO 21434 TARA",
                         text: "Ordnen Sie die Bedrohungsszenarien der passenden Schutzmaßnahme im Fahrzeug zu.",
                         tableConfig: {
-                            type: "matching",
-                            targetCol: 0,
-                            options: ["Unberechtigter Zugriff über OBD-II Diagnosebuchse", "Replay-Attacke auf Funkschlüssel (Keyless Go)", "Einschleusen gefälschter Sensordaten ins Bordnetz"],
-                            headers: ["Angriffsvektor", "Mögliche Auswirkung", "Gegenmaßnahme"],
-                            rows: [
-                                ["Replay-Attacke auf Funkschlüssel (Keyless Go)", "Unbefugtes Entriegeln und Starten des Fahrzeugs", "Rolling Codes und Ultra-Wideband (UWB) Time-of-Flight Distanzmessung"],
-                                ["Einschleusen gefälschter Sensordaten ins Bordnetz", "Fehlauslösung von Notbrems- oder Lenkassistenten", "SecOC (Secure Onboard Communication / CMAC Authentifizierung)"],
-                                ["Unberechtigter Zugriff über OBD-II Diagnosebuchse", "Einspielen modifizierter Steuergerätesoftware", "Secure Gateway (SGW) mit Challenge-Response-Authentifizierung"]
-                            ]
-                        },
+                                                        "type": "matching",
+                                                        "targetCol": 0,
+                                                        "options": [
+                                                                                    "Unberechtigter Zugriff über OBD-II Diagnosebuchse",
+                                                                                    "Replay-Attacke auf Funkschlüssel (Keyless Go)",
+                                                                                    "Einschleusen gefälschter Sensordaten ins Bordnetz"
+                                                        ],
+                                                        "headers": [
+                                                                                    "Angriffsvektor",
+                                                                                    "Mögliche Auswirkung",
+                                                                                    "Gegenmaßnahme"
+                                                        ],
+                                                        "rows": [
+                                                                                    [
+                                                                                                                "",
+                                                                                                                "Unbefugtes Entriegeln und Starten des Fahrzeugs",
+                                                                                                                "Rolling Codes und Ultra-Wideband (UWB) Time-of-Flight Distanzmessung"
+                                                                                    ],
+                                                                                    [
+                                                                                                                "",
+                                                                                                                "Fehlauslösung von Notbrems- oder Lenkassistenten",
+                                                                                                                "SecOC (Secure Onboard Communication / CMAC Authentifizierung)"
+                                                                                    ],
+                                                                                    [
+                                                                                                                "",
+                                                                                                                "Einspielen modifizierter Steuergerätesoftware",
+                                                                                                                "Secure Gateway (SGW) mit Challenge-Response-Authentifizierung"
+                                                                                    ]
+                                                        ],
+                                                        "solutions": {
+                                                                                    "0_0": "Replay-Attacke auf Funkschlüssel (Keyless Go)",
+                                                                                    "1_0": "Einschleusen gefälschter Sensordaten ins Bordnetz",
+                                                                                    "2_0": "Unberechtigter Zugriff über OBD-II Diagnosebuchse"
+                                                        }
+                            },
                         solution: "OBD-II -> Secure Gateway; Keyless Go Replay -> UWB ToF / Rolling Code; Gefälschte Sensordaten -> SecOC mit CMAC."
                     },
                     {
@@ -2517,18 +3350,48 @@ var EXAM_SETS = [
                         stencil: "ACCESSIBILITY / WCAG & BITV KRITERIEN",
                         text: "Ordnen Sie die Barrierefreiheitsanforderungen dem passenden WCAG-Prinzip (Wahrnehmbar, Bedienbar, Verständlich, Robust) zu.",
                         tableConfig: {
-                            type: "matching",
-                            targetCol: 1,
-                            staticCols: [0, 2],
-                            options: ["Wahrnehmbar", "Bedienbar", "Verständlich", "Robust"],
-                            headers: ["Anforderung an das E-Learning Portal", "WCAG-Prinzip", "Konkrete technische Umsetzung"],
-                            rows: [
-                                ["Komplette Navigation ohne Maus nur per Tabulatortaste", "Bedienbar", "Sichtbare Tastatur-Fokusindikatoren (`:focus`)"],
-                                ["Sauberes semantisches HTML für Screenreader & Braillezeilen", "Robust", "WAI-ARIA Rollen und standardkonforme HTML5-Tags"],
-                                ["Grafiken und Diagramme mit Textalternativen versehen", "Wahrnehmbar", "HTML `alt`-Attribute für Screenreader"],
-                                ["Gleichbleibende Menüstruktur und verständliche Fehlermeldungen", "Verständlich", "Konsistente Bezeichner und klare Fehlertexte"]
-                            ]
-                        },
+                                                        "type": "matching",
+                                                        "targetCol": 1,
+                                                        "options": [
+                                                                                    "Wahrnehmbar",
+                                                                                    "Bedienbar",
+                                                                                    "Verständlich",
+                                                                                    "Robust"
+                                                        ],
+                                                        "headers": [
+                                                                                    "Anforderung an das E-Learning Portal",
+                                                                                    "WCAG-Prinzip",
+                                                                                    "Konkrete technische Umsetzung"
+                                                        ],
+                                                        "rows": [
+                                                                                    [
+                                                                                                                "Komplette Navigation ohne Maus nur per Tabulatortaste",
+                                                                                                                "",
+                                                                                                                "Sichtbare Tastatur-Fokusindikatoren (`:focus`)"
+                                                                                    ],
+                                                                                    [
+                                                                                                                "Sauberes semantisches HTML für Screenreader & Braillezeilen",
+                                                                                                                "",
+                                                                                                                "WAI-ARIA Rollen und standardkonforme HTML5-Tags"
+                                                                                    ],
+                                                                                    [
+                                                                                                                "Grafiken und Diagramme mit Textalternativen versehen",
+                                                                                                                "",
+                                                                                                                "HTML `alt`-Attribute für Screenreader"
+                                                                                    ],
+                                                                                    [
+                                                                                                                "Gleichbleibende Menüstruktur und verständliche Fehlermeldungen",
+                                                                                                                "",
+                                                                                                                "Konsistente Bezeichner und klare Fehlertexte"
+                                                                                    ]
+                                                        ],
+                                                        "solutions": {
+                                                                                    "0_1": "Bedienbar",
+                                                                                    "1_1": "Robust",
+                                                                                    "2_1": "Wahrnehmbar",
+                                                                                    "3_1": "Verständlich"
+                                                        }
+                            },
                         solution: "Grafiken/Alt -> Wahrnehmbar; Tastatursteuerung -> Bedienbar; Menüstruktur -> Verständlich; Semantisches HTML -> Robust."
                     },
                     {
@@ -2586,17 +3449,41 @@ var EXAM_SETS = [
                         stencil: "DATENMANAGEMENT / AUFBEWAHRUNGSFRISTEN",
                         text: "Ordnen Sie den Datenkategorien die passende rechtliche Aufbewahrungs- bzw. Löschfrist zu.",
                         tableConfig: {
-                            type: "matching",
-                            targetCol: 1,
-                            staticCols: [0, 2],
-                            options: ["Bis zu 50 Jahre", "2 Jahre nach Abschluss", "Max. 6 Monate nach Absage"],
-                            headers: ["Datenkategorie", "Gesetzliche Frist", "Rechtsgrundlage / Begründung"],
-                            rows: [
-                                ["Bewerbungsunterlagen abgelehnter Dozenten", "Max. 6 Monate nach Absage", "Schutz vor Klagen nach dem Allgemeinen Gleichbehandlungsgesetz (AGG)"],
-                                ["Abschlusszeugnisse und Prüfungsbescheide", "Bis zu 50 Jahre", "Nachweisbarkeit beruflicher Qualifikationen im Renten-/Berufsleben"],
-                                ["Bewertete Klausurarbeiten von Absolventen", "2 Jahre nach Abschluss", "Anfechtungs- und Klagefristen im Prüfungsrecht"]
-                            ]
-                        },
+                                                        "type": "matching",
+                                                        "targetCol": 1,
+                                                        "options": [
+                                                                                    "Bis zu 50 Jahre",
+                                                                                    "2 Jahre nach Abschluss",
+                                                                                    "Max. 6 Monate nach Absage"
+                                                        ],
+                                                        "headers": [
+                                                                                    "Datenkategorie",
+                                                                                    "Gesetzliche Frist",
+                                                                                    "Rechtsgrundlage / Begründung"
+                                                        ],
+                                                        "rows": [
+                                                                                    [
+                                                                                                                "Bewerbungsunterlagen abgelehnter Dozenten",
+                                                                                                                "",
+                                                                                                                "Schutz vor Klagen nach dem Allgemeinen Gleichbehandlungsgesetz (AGG)"
+                                                                                    ],
+                                                                                    [
+                                                                                                                "Abschlusszeugnisse und Prüfungsbescheide",
+                                                                                                                "",
+                                                                                                                "Nachweisbarkeit beruflicher Qualifikationen im Renten-/Berufsleben"
+                                                                                    ],
+                                                                                    [
+                                                                                                                "Bewertete Klausurarbeiten von Absolventen",
+                                                                                                                "",
+                                                                                                                "Anfechtungs- und Klagefristen im Prüfungsrecht"
+                                                                                    ]
+                                                        ],
+                                                        "solutions": {
+                                                                                    "0_1": "Max. 6 Monate nach Absage",
+                                                                                    "1_1": "Bis zu 50 Jahre",
+                                                                                    "2_1": "2 Jahre nach Abschluss"
+                                                        }
+                            },
                         solution: "Zeugnisse -> bis 50 Jahre; Klausuren -> 2 Jahre (Klagefrist); Bewerberdaten -> max. 6 Monate (AGG)."
                     }
                 ]
@@ -2674,17 +3561,40 @@ var EXAM_SETS = [
                         stencil: "ENERGIEWIRTSCHAFTSRECHT / MSBG PFLICHTROLLOUT",
                         text: "Entscheiden Sie für die drei Kundenprofile, ob ein gesetzlicher Pflichteinbau eines intelligenten Messsystems (iMSys) nach dem MsbG vorliegt.",
                         tableConfig: {
-                            type: "matching",
-                            targetCol: 1,
-                            staticCols: [0, 2],
-                            options: ["Ja (Pflicht)", "Nein (Optional)"],
-                            headers: ["Kundenprofil", "Pflichteinbau iMSys? (Ja/Nein)", "Begründung nach MsbG"],
-                            rows: [
-                                ["Einfamilienhaus mit PV-Anlage mit 12 kWp Nennleistung", "Ja (Pflicht)", "Erzeugungsanlage hat mehr als 7 kW installierte Leistung"],
-                                ["Single-Wohnung mit Jahresverbrauch von 1.800 kWh", "Nein (Optional)", "Verbrauch unter 6.000 kWh (nur moderne Messeinrichtung mME vorgeschrieben)"],
-                                ["Privathaushalt mit Jahresverbrauch von 8.500 kWh", "Ja (Pflicht)", "Jahresstromverbrauch liegt über dem Schwellenwert von 6.000 kWh"]
-                            ]
-                        },
+                                                        "type": "matching",
+                                                        "targetCol": 1,
+                                                        "options": [
+                                                                                    "Ja (Pflicht)",
+                                                                                    "Nein (Optional)"
+                                                        ],
+                                                        "headers": [
+                                                                                    "Kundenprofil",
+                                                                                    "Pflichteinbau iMSys? (Ja/Nein)",
+                                                                                    "Begründung nach MsbG"
+                                                        ],
+                                                        "rows": [
+                                                                                    [
+                                                                                                                "Einfamilienhaus mit PV-Anlage mit 12 kWp Nennleistung",
+                                                                                                                "",
+                                                                                                                "Erzeugungsanlage hat mehr als 7 kW installierte Leistung"
+                                                                                    ],
+                                                                                    [
+                                                                                                                "Single-Wohnung mit Jahresverbrauch von 1.800 kWh",
+                                                                                                                "",
+                                                                                                                "Verbrauch unter 6.000 kWh (nur moderne Messeinrichtung mME vorgeschrieben)"
+                                                                                    ],
+                                                                                    [
+                                                                                                                "Privathaushalt mit Jahresverbrauch von 8.500 kWh",
+                                                                                                                "",
+                                                                                                                "Jahresstromverbrauch liegt über dem Schwellenwert von 6.000 kWh"
+                                                                                    ]
+                                                        ],
+                                                        "solutions": {
+                                                                                    "0_1": "Ja (Pflicht)",
+                                                                                    "1_1": "Nein (Optional)",
+                                                                                    "2_1": "Ja (Pflicht)"
+                                                        }
+                            },
                         solution: "8.500 kWh -> Ja (>6.000 kWh); 12 kWp PV -> Ja (>7 kW); 1.800 kWh -> Nein (unter Schwellenwert)."
                     },
                     {
@@ -2752,15 +3662,38 @@ var EXAM_SETS = [
                         stencil: "PROTOKOLLE / FERNWIRKTECHNIK",
                         text: "Vergleichen Sie die beiden Industrieprotokolle hinsichtlich ihrer typischen Eigenschaften.",
                         tableConfig: {
-                            type: "fill",
-                            staticCols: [0],
-                            headers: ["Eigenschaft", "Modbus TCP", "IEC 60870-5-104"],
-                            rows: [
-                                ["Typisches Einsatzgebiet", "Lokale Gebäude- und Fabrikautomation", "Weitverkehrs-Fernwirktechnik für Strom- und Gasnetze"],
-                                ["Zeitstempel-Übertragung", "Standardmäßig nicht im Protokoll enthalten", "Hochpräzise Zeitstempelung (Millisekunden) an der Messstelle"],
-                                ["Ereignisorientierte Meldung", "Nein (zyklisches Polling durch Master)", "Ja (Spontane Ereignisübertragung bei Statusänderung)"]
-                            ]
-                        },
+                                                        "type": "fill",
+                                                        "headers": [
+                                                                                    "Eigenschaft",
+                                                                                    "Modbus TCP",
+                                                                                    "IEC 60870-5-104"
+                                                        ],
+                                                        "rows": [
+                                                                                    [
+                                                                                                                "Typisches Einsatzgebiet",
+                                                                                                                "",
+                                                                                                                ""
+                                                                                    ],
+                                                                                    [
+                                                                                                                "Zeitstempel-Übertragung",
+                                                                                                                "",
+                                                                                                                ""
+                                                                                    ],
+                                                                                    [
+                                                                                                                "Ereignisorientierte Meldung",
+                                                                                                                "",
+                                                                                                                ""
+                                                                                    ]
+                                                        ],
+                                                        "solutions": {
+                                                                                    "0_1": "Lokale Gebäude- und Fabrikautomation",
+                                                                                    "0_2": "Weitverkehrs-Fernwirktechnik für Strom- und Gasnetze",
+                                                                                    "1_1": "Standardmäßig nicht im Protokoll enthalten",
+                                                                                    "1_2": "Hochpräzise Zeitstempelung (Millisekunden) an der Messstelle",
+                                                                                    "2_1": "Nein (zyklisches Polling durch Master)",
+                                                                                    "2_2": "Ja (Spontane Ereignisübertragung bei Statusänderung)"
+                                                        }
+                            },
                         solution: "Modbus TCP: lokal, kein Zeitstempel, zyklisches Polling. IEC 104: Fernwirknetz, präziser Zeitstempel, spontane Ereignisübertragung."
                     }
                 ]
@@ -2798,16 +3731,41 @@ var EXAM_SETS = [
                         stencil: "INFRASTRUKTURSCHUTZ / ZUTRITTSKONTROLLE",
                         text: "Ordnen Sie die Schutzmaßnahmen den drei Sicherheitszonen eines Umspannwerks zu.",
                         tableConfig: {
-                            type: "matching",
-                            targetCol: 0,
-                            options: ["Zone 1: Freigelände", "Zone 2: Betriebsgebäude", "Zone 3: Serverrack-Schränke"],
-                            headers: ["Zone", "Bereich", "Erforderliche Schutzmaßnahme"],
-                            rows: [
-                                ["Zone 2: Betriebsgebäude", "Relais- und Steuerungsräume", "Einbruchmeldeanlage (VdS Klasse C) und elektronische Transponder-Schließung"],
-                                ["Zone 3: Serverrack-Schränke", "Fernwirk- und SCADA-Switches", "Zwei-Faktor-Zugang (PIN + Transponder) und Vereinzelungsschleuse"],
-                                ["Zone 1: Freigelände", "Außenareal des Umspannwerks", "2 Meter Übersteigschutz-Zaun, Videoüberwachung mit KI-Zaunüberwachung und Flutlicht"]
-                            ]
-                        },
+                                                        "type": "matching",
+                                                        "targetCol": 0,
+                                                        "options": [
+                                                                                    "Zone 1: Freigelände",
+                                                                                    "Zone 2: Betriebsgebäude",
+                                                                                    "Zone 3: Serverrack-Schränke"
+                                                        ],
+                                                        "headers": [
+                                                                                    "Zone",
+                                                                                    "Bereich",
+                                                                                    "Erforderliche Schutzmaßnahme"
+                                                        ],
+                                                        "rows": [
+                                                                                    [
+                                                                                                                "",
+                                                                                                                "Relais- und Steuerungsräume",
+                                                                                                                "Einbruchmeldeanlage (VdS Klasse C) und elektronische Transponder-Schließung"
+                                                                                    ],
+                                                                                    [
+                                                                                                                "",
+                                                                                                                "Fernwirk- und SCADA-Switches",
+                                                                                                                "Zwei-Faktor-Zugang (PIN + Transponder) und Vereinzelungsschleuse"
+                                                                                    ],
+                                                                                    [
+                                                                                                                "",
+                                                                                                                "Außenareal des Umspannwerks",
+                                                                                                                "2 Meter Übersteigschutz-Zaun, Videoüberwachung mit KI-Zaunüberwachung und Flutlicht"
+                                                                                    ]
+                                                        ],
+                                                        "solutions": {
+                                                                                    "0_0": "Zone 2: Betriebsgebäude",
+                                                                                    "1_0": "Zone 3: Serverrack-Schränke",
+                                                                                    "2_0": "Zone 1: Freigelände"
+                                                        }
+                            },
                         solution: "Zone 1: Zaun & Kamera; Zone 2: Einbruchmelder & Transponder; Zone 3: 2FA-Schranktürschloss & Vereinzelung."
                     },
                     {
@@ -2895,17 +3853,48 @@ var EXAM_SETS = [
                         stencil: "SOFTWARE-QUALITÄT / DO-178C DESIGN ASSURANCE",
                         text: "Ordnen Sie die fünf DAL-Stufen (Design Assurance Levels) der Auswirkung eines Softwarefehlers zu.",
                         tableConfig: {
-                            type: "matching",
-                            targetCol: 0,
-                            options: ["DAL A", "DAL B", "DAL C", "DAL D/E"],
-                            headers: ["DAL-Level", "Kategorie", "Mögliche Auswirkung eines Softwareausfalls"],
-                            rows: [
-                                ["DAL C", "Erheblich (Major)", "Erhöhte Arbeitsbelastung der Piloten, Reduzierung der Sicherheitsmargen"],
-                                ["DAL A", "Katastrophal (Catastrophic)", "Totalverlust des Flugzeugs und/oder tödliche Verletzungen aller Insassen"],
-                                ["DAL D/E", "Geringfügig / Keine Auswirkung", "Unbequemlichkeit für Passagiere (z. B. Ausfall des In-Flight-Entertainments)"],
-                                ["DAL B", "Gefährlich (Hazardous)", "Schwere Beeinträchtigung der Flugsicherheit, schwere Verletzungen"]
-                            ]
-                        },
+                                                        "type": "matching",
+                                                        "targetCol": 0,
+                                                        "options": [
+                                                                                    "DAL A",
+                                                                                    "DAL B",
+                                                                                    "DAL C",
+                                                                                    "DAL D/E"
+                                                        ],
+                                                        "headers": [
+                                                                                    "DAL-Level",
+                                                                                    "Kategorie",
+                                                                                    "Mögliche Auswirkung eines Softwareausfalls"
+                                                        ],
+                                                        "rows": [
+                                                                                    [
+                                                                                                                "",
+                                                                                                                "Erheblich (Major)",
+                                                                                                                "Erhöhte Arbeitsbelastung der Piloten, Reduzierung der Sicherheitsmargen"
+                                                                                    ],
+                                                                                    [
+                                                                                                                "",
+                                                                                                                "Katastrophal (Catastrophic)",
+                                                                                                                "Totalverlust des Flugzeugs und/oder tödliche Verletzungen aller Insassen"
+                                                                                    ],
+                                                                                    [
+                                                                                                                "",
+                                                                                                                "Geringfügig / Keine Auswirkung",
+                                                                                                                "Unbequemlichkeit für Passagiere (z. B. Ausfall des In-Flight-Entertainments)"
+                                                                                    ],
+                                                                                    [
+                                                                                                                "",
+                                                                                                                "Gefährlich (Hazardous)",
+                                                                                                                "Schwere Beeinträchtigung der Flugsicherheit, schwere Verletzungen"
+                                                                                    ]
+                                                        ],
+                                                        "solutions": {
+                                                                                    "0_0": "DAL C",
+                                                                                    "1_0": "DAL A",
+                                                                                    "2_0": "DAL D/E",
+                                                                                    "3_0": "DAL B"
+                                                        }
+                            },
                         solution: "DAL A -> Katastrophal (Absturz); DAL B -> Gefährlich; DAL C -> Erheblich; DAL D/E -> Geringfügig/Entertainment."
                     },
                     {
@@ -3010,16 +3999,41 @@ var EXAM_SETS = [
                         stencil: "ORGANISATION / PRIVILEGED ACCESS MANAGEMENT",
                         text: "Ordnen Sie die Sicherheitsmaßnahmen gegen Innentäter den Zielen zu.",
                         tableConfig: {
-                            type: "matching",
-                            targetCol: 0,
-                            options: ["Vier-Augen-Prinzip (Dual Control)", "Session Recording / Audit Logging", "Sicherheitsüberprüfung nach LuftSiG"],
-                            headers: ["Maßnahme", "Schutzwirkung gegen Innentäter", "Konkretes Beispiel"],
-                            rows: [
-                                ["Session Recording / Audit Logging", "Vollständige Beweissicherung und Abschreckung", "Aufzeichnung aller SSH- und RDP-Sitzungen auf Bastion-Hosts"],
-                                ["Sicherheitsüberprüfung nach LuftSiG", "Präventive Zuverlässigkeitsprüfung vor Einstellung", "Überprüfung durch Verfassungsschutz und Bundeskriminalamt nach § 7 LuftSiG"],
-                                ["Vier-Augen-Prinzip (Dual Control)", "Verhindert eigenmächtige Manipulationen durch Einzelpersonen", "Kritische Konfigurationsänderungen erfordern Bestätigung eines zweiten Admins"]
-                            ]
-                        },
+                                                        "type": "matching",
+                                                        "targetCol": 0,
+                                                        "options": [
+                                                                                    "Vier-Augen-Prinzip (Dual Control)",
+                                                                                    "Session Recording / Audit Logging",
+                                                                                    "Sicherheitsüberprüfung nach LuftSiG"
+                                                        ],
+                                                        "headers": [
+                                                                                    "Maßnahme",
+                                                                                    "Schutzwirkung gegen Innentäter",
+                                                                                    "Konkretes Beispiel"
+                                                        ],
+                                                        "rows": [
+                                                                                    [
+                                                                                                                "",
+                                                                                                                "Vollständige Beweissicherung und Abschreckung",
+                                                                                                                "Aufzeichnung aller SSH- und RDP-Sitzungen auf Bastion-Hosts"
+                                                                                    ],
+                                                                                    [
+                                                                                                                "",
+                                                                                                                "Präventive Zuverlässigkeitsprüfung vor Einstellung",
+                                                                                                                "Überprüfung durch Verfassungsschutz und Bundeskriminalamt nach § 7 LuftSiG"
+                                                                                    ],
+                                                                                    [
+                                                                                                                "",
+                                                                                                                "Verhindert eigenmächtige Manipulationen durch Einzelpersonen",
+                                                                                                                "Kritische Konfigurationsänderungen erfordern Bestätigung eines zweiten Admins"
+                                                                                    ]
+                                                        ],
+                                                        "solutions": {
+                                                                                    "0_0": "Session Recording / Audit Logging",
+                                                                                    "1_0": "Sicherheitsüberprüfung nach LuftSiG",
+                                                                                    "2_0": "Vier-Augen-Prinzip (Dual Control)"
+                                                        }
+                            },
                         solution: "Vier-Augen -> Verhinderung Alleingang; Session Recording -> Beweisbarkeit; Zuverlässigkeitsüberprüfung -> präventive Eignungsprüfung."
                     },
                     {
@@ -3174,16 +4188,41 @@ var EXAM_SETS = [
                         stencil: "CONTENT FILTERING / DNS-SCHUTZ",
                         text: "Ordnen Sie die Schutzziele der passenden Netzwerkmaßnahme im Gäste-WLAN zu.",
                         tableConfig: {
-                            type: "matching",
-                            targetCol: 0,
-                            options: ["Jugendschutz (Blockieren jugendgefährdender Seiten)", "Schutz vor Botnetzen und Phishing", "Verhinderung von Filesharing-Abmahnungen"],
-                            headers: ["Schutzziel", "Netzwerk-Technologie", "Wirkungsweise"],
-                            rows: [
-                                ["Schutz vor Botnetzen und Phishing", "DNSBL (DNS Blacklists) & Threat Intelligence", "Bekannte Malware-Command&Control-Server werden verworfen"],
-                                ["Verhinderung von Filesharing-Abmahnungen", "Port- und Protokollsperren auf der Firewall", "Blockieren typischer BitTorrent/P2P-Ports und Layer-7-Traffic"],
-                                ["Jugendschutz (Blockieren jugendgefährdender Seiten)", "DNS-Filterung (z. B. CleanBrowsing / AdGuard Family)", "Domains auf BPjM-Index werden auf eine Stoppseite umgeleitet"]
-                            ]
-                        },
+                                                        "type": "matching",
+                                                        "targetCol": 0,
+                                                        "options": [
+                                                                                    "Jugendschutz (Blockieren jugendgefährdender Seiten)",
+                                                                                    "Schutz vor Botnetzen und Phishing",
+                                                                                    "Verhinderung von Filesharing-Abmahnungen"
+                                                        ],
+                                                        "headers": [
+                                                                                    "Schutzziel",
+                                                                                    "Netzwerk-Technologie",
+                                                                                    "Wirkungsweise"
+                                                        ],
+                                                        "rows": [
+                                                                                    [
+                                                                                                                "",
+                                                                                                                "DNSBL (DNS Blacklists) & Threat Intelligence",
+                                                                                                                "Bekannte Malware-Command&Control-Server werden verworfen"
+                                                                                    ],
+                                                                                    [
+                                                                                                                "",
+                                                                                                                "Port- und Protokollsperren auf der Firewall",
+                                                                                                                "Blockieren typischer BitTorrent/P2P-Ports und Layer-7-Traffic"
+                                                                                    ],
+                                                                                    [
+                                                                                                                "",
+                                                                                                                "DNS-Filterung (z. B. CleanBrowsing / AdGuard Family)",
+                                                                                                                "Domains auf BPjM-Index werden auf eine Stoppseite umgeleitet"
+                                                                                    ]
+                                                        ],
+                                                        "solutions": {
+                                                                                    "0_0": "Schutz vor Botnetzen und Phishing",
+                                                                                    "1_0": "Verhinderung von Filesharing-Abmahnungen",
+                                                                                    "2_0": "Jugendschutz (Blockieren jugendgefährdender Seiten)"
+                                                        }
+                            },
                         solution: "Jugendschutz -> DNS-Filterung; Botnetze -> DNSBL; Filesharing -> Port-/L7-Sperren."
                     }
                 ]
@@ -3221,17 +4260,41 @@ var EXAM_SETS = [
                         stencil: "DATENSCHUTZ / VERBOTENE VIDEOZONEN",
                         text: "Beurteilen Sie die Zulässigkeit der Kameraüberwachung in den folgenden Hotelbereichen.",
                         tableConfig: {
-                            type: "matching",
-                            targetCol: 1,
-                            staticCols: [0, 2],
-                            options: ["Absolut unzulässig", "Unzulässig", "Zulässig"],
-                            headers: ["Hotelbereich", "Zulässigkeit (Zulässig / Unzulässig)", "Rechtliche Begründung"],
-                            rows: [
-                                ["Arbeitsplätze der Rezeptionsmitarbeiter", "Unzulässig", "Dauerhafte Verhaltens- und Leistungsüberwachung der Beschäftigten"],
-                                ["Tiefgarageneinfahrt und Parkdecks", "Zulässig", "Berechtigtes Interesse zur Verhinderung von Kfz-Diebstählen und Parkremplern"],
-                                ["Wellness- und Saunabereich / Umkleiden", "Absolut unzulässig", "Schwerer Eingriff in die Intimsphäre (§ 201a StGB / Art. 8 EMRK)"]
-                            ]
-                        },
+                                                        "type": "matching",
+                                                        "targetCol": 1,
+                                                        "options": [
+                                                                                    "Absolut unzulässig",
+                                                                                    "Unzulässig",
+                                                                                    "Zulässig"
+                                                        ],
+                                                        "headers": [
+                                                                                    "Hotelbereich",
+                                                                                    "Zulässigkeit (Zulässig / Unzulässig)",
+                                                                                    "Rechtliche Begründung"
+                                                        ],
+                                                        "rows": [
+                                                                                    [
+                                                                                                                "Arbeitsplätze der Rezeptionsmitarbeiter",
+                                                                                                                "",
+                                                                                                                "Dauerhafte Verhaltens- und Leistungsüberwachung der Beschäftigten"
+                                                                                    ],
+                                                                                    [
+                                                                                                                "Tiefgarageneinfahrt und Parkdecks",
+                                                                                                                "",
+                                                                                                                "Berechtigtes Interesse zur Verhinderung von Kfz-Diebstählen und Parkremplern"
+                                                                                    ],
+                                                                                    [
+                                                                                                                "Wellness- und Saunabereich / Umkleiden",
+                                                                                                                "",
+                                                                                                                "Schwerer Eingriff in die Intimsphäre (§ 201a StGB / Art. 8 EMRK)"
+                                                                                    ]
+                                                        ],
+                                                        "solutions": {
+                                                                                    "0_1": "Unzulässig",
+                                                                                    "1_1": "Zulässig",
+                                                                                    "2_1": "Absolut unzulässig"
+                                                        }
+                            },
                         solution: "Sauna -> Absolut unzulässig; Rezeption dauerhaft -> Unzulässig; Tiefgarage -> Zulässig."
                     },
                     {
@@ -3366,15 +4429,38 @@ var EXAM_SETS = [
                         stencil: "HARDWARE-SPEZIFIKATION / IP-SCHUTZARTEN",
                         text: "Schlüsseln Sie die beiden Kennziffern der Schutzarten IP65 und IP67 auf.",
                         tableConfig: {
-                            type: "fill",
-                            staticCols: [0],
-                            headers: ["Schutzart", "1. Ziffer (Berührungs- & Fremdkörperschutz)", "2. Ziffer (Wasserschutz)"],
-                            rows: [
-                                ["IP65 (z. B. Terminal-Gehäuse)", "6: Vollständig staubdicht, vollständiger Berührungsschutz", "5: Schutz gegen Strahlwasser (Düse) aus beliebigem Winkel"],
-                                ["IP67 (z. B. Wägezellen in Grube)", "6: Vollständig staubdicht, vollständiger Berührungsschutz", "7: Schutz gegen zeitweiliges Untertauchen in Wasser (1 Meter / 30 Min.)"],
-                                ["IP69K (z. B. Schüttungssensoren)", "6: Vollständig staubdicht, vollständiger Berührungsschutz", "9K: Schutz gegen Wasser bei Hochdruck- und Dampfstrahlreinigung"]
-                            ]
-                        },
+                                                        "type": "fill",
+                                                        "headers": [
+                                                                                    "Schutzart",
+                                                                                    "1. Ziffer (Berührungs- & Fremdkörperschutz)",
+                                                                                    "2. Ziffer (Wasserschutz)"
+                                                        ],
+                                                        "rows": [
+                                                                                    [
+                                                                                                                "IP65 (z. B. Terminal-Gehäuse)",
+                                                                                                                "",
+                                                                                                                ""
+                                                                                    ],
+                                                                                    [
+                                                                                                                "IP67 (z. B. Wägezellen in Grube)",
+                                                                                                                "",
+                                                                                                                ""
+                                                                                    ],
+                                                                                    [
+                                                                                                                "IP69K (z. B. Schüttungssensoren)",
+                                                                                                                "",
+                                                                                                                ""
+                                                                                    ]
+                                                        ],
+                                                        "solutions": {
+                                                                                    "0_1": "6: Vollständig staubdicht, vollständiger Berührungsschutz",
+                                                                                    "0_2": "5: Schutz gegen Strahlwasser (Düse) aus beliebigem Winkel",
+                                                                                    "1_1": "6: Vollständig staubdicht, vollständiger Berührungsschutz",
+                                                                                    "1_2": "7: Schutz gegen zeitweiliges Untertauchen in Wasser (1 Meter / 30 Min.)",
+                                                                                    "2_1": "6: Vollständig staubdicht, vollständiger Berührungsschutz",
+                                                                                    "2_2": "9K: Schutz gegen Wasser bei Hochdruck- und Dampfstrahlreinigung"
+                                                        }
+                            },
                         solution: "1. Ziffer 6 = staubdicht; 2. Ziffer 5 = Strahlwasser; 7 = zeitweiliges Untertauchen; 9K = Hochdruck-/Dampfstrahl."
                     },
                     {
@@ -3422,20 +4508,62 @@ var EXAM_SETS = [
                         stencil: "NOTFALLMANAGEMENT / BSI INCIDENT RESPONSE PHASEN",
                         text: "Bringen Sie die sechs Phasen des Incident-Response-Prozesses nach BSI in die korrekte chronologische Reihenfolge.",
                         tableConfig: {
-                            type: "matching",
-                            targetCol: 1,
-                            staticCols: [0, 2],
-                            options: ["Vorbereitung (Preparation)", "Erkennung & Analyse (Identification)", "Eindämmung (Containment)", "Beseitigung (Eradication)", "Wiederherstellung (Recovery)", "Nachbereitung (Lessons Learned)"],
-                            headers: ["Schritt", "Phase nach BSI", "Kernaktivität im Unternehmen"],
-                            rows: [
-                                ["4. Phase", "Beseitigung (Eradication)", "Malware, bösartige Konten und Backdoors vollständig entfernen"],
-                                ["1. Phase", "Vorbereitung (Preparation)", "Notfallpläne erstellen, Rollen definieren, Offline-Backups pflegen"],
-                                ["5. Phase", "Wiederherstellung (Recovery)", "Systeme aus sauberen Backups schrittweise hochfahren und testen"],
-                                ["2. Phase", "Erkennung & Analyse (Identification)", "Sicherheitsvorfall identifizieren, Schadsoftware analysieren, Scope bestimmen"],
-                                ["6. Phase", "Nachbereitung (Lessons Learned)", "Vorfall dokumentieren, Schwachstellen schließen, Maßnahmen optimieren"],
-                                ["3. Phase", "Eindämmung (Containment)", "Infizierte Systeme vom Netz trennen, Ausbreitung stoppen"]
-                            ]
-                        },
+                                                        "type": "matching",
+                                                        "targetCol": 1,
+                                                        "options": [
+                                                                                    "Vorbereitung (Preparation)",
+                                                                                    "Erkennung & Analyse (Identification)",
+                                                                                    "Eindämmung (Containment)",
+                                                                                    "Beseitigung (Eradication)",
+                                                                                    "Wiederherstellung (Recovery)",
+                                                                                    "Nachbereitung (Lessons Learned)"
+                                                        ],
+                                                        "headers": [
+                                                                                    "Schritt",
+                                                                                    "Phase nach BSI",
+                                                                                    "Kernaktivität im Unternehmen"
+                                                        ],
+                                                        "rows": [
+                                                                                    [
+                                                                                                                "4. Phase",
+                                                                                                                "",
+                                                                                                                "Malware, bösartige Konten und Backdoors vollständig entfernen"
+                                                                                    ],
+                                                                                    [
+                                                                                                                "1. Phase",
+                                                                                                                "",
+                                                                                                                "Notfallpläne erstellen, Rollen definieren, Offline-Backups pflegen"
+                                                                                    ],
+                                                                                    [
+                                                                                                                "5. Phase",
+                                                                                                                "",
+                                                                                                                "Systeme aus sauberen Backups schrittweise hochfahren und testen"
+                                                                                    ],
+                                                                                    [
+                                                                                                                "2. Phase",
+                                                                                                                "",
+                                                                                                                "Sicherheitsvorfall identifizieren, Schadsoftware analysieren, Scope bestimmen"
+                                                                                    ],
+                                                                                    [
+                                                                                                                "6. Phase",
+                                                                                                                "",
+                                                                                                                "Vorfall dokumentieren, Schwachstellen schließen, Maßnahmen optimieren"
+                                                                                    ],
+                                                                                    [
+                                                                                                                "3. Phase",
+                                                                                                                "",
+                                                                                                                "Infizierte Systeme vom Netz trennen, Ausbreitung stoppen"
+                                                                                    ]
+                                                        ],
+                                                        "solutions": {
+                                                                                    "0_1": "Beseitigung (Eradication)",
+                                                                                    "1_1": "Vorbereitung (Preparation)",
+                                                                                    "2_1": "Wiederherstellung (Recovery)",
+                                                                                    "3_1": "Erkennung & Analyse (Identification)",
+                                                                                    "4_1": "Nachbereitung (Lessons Learned)",
+                                                                                    "5_1": "Eindämmung (Containment)"
+                                                        }
+                            },
                         solution: "1. Vorbereitung -> 2. Identifikation -> 3. Eindämmung -> 4. Beseitigung -> 5. Wiederherstellung -> 6. Lessons Learned."
                     },
                     {
@@ -3533,17 +4661,41 @@ var EXAM_SETS = [
                         stencil: "VERGABERECHT / EVB-IT VERTRAGSTYPEN",
                         text: "Ordnen Sie die behördlichen IT-Beschaffungen dem passenden EVB-IT Vertragstyp zu.",
                         tableConfig: {
-                            type: "matching",
-                            targetCol: 1,
-                            staticCols: [0, 2],
-                            options: ["EVB-IT Kauf", "EVB-IT Erstellung", "EVB-IT Dienstleistung"],
-                            headers: ["Beschaffungsmaßnahme", "Zutreffender EVB-IT Vertragstyp", "Rechtlicher Schwerpunkt"],
-                            rows: [
-                                ["Entwicklung eines individuellen Online-Bauantrags-Fachverfahrens", "EVB-IT Erstellung", "Werkvertragsrecht (§ 631 BGB) mit Abnahme nach Pflichtenheft"],
-                                ["Beratung und Unterstützung bei der BSI-Grundschutz-Zertifizierung", "EVB-IT Dienstleistung", "Dienstvertragsrecht (§ 611 BGB) auf Stundenbasis ohne Erfolgsgarantie"],
-                                ["Kauf von 300 Standard-Büro-PCs mit Vor-Ort-Garantie", "EVB-IT Kauf", "Kaufrecht (§ 433 BGB) mit Mängelhaftung und Hardware-Garantie"]
-                            ]
-                        },
+                                                        "type": "matching",
+                                                        "targetCol": 1,
+                                                        "options": [
+                                                                                    "EVB-IT Kauf",
+                                                                                    "EVB-IT Erstellung",
+                                                                                    "EVB-IT Dienstleistung"
+                                                        ],
+                                                        "headers": [
+                                                                                    "Beschaffungsmaßnahme",
+                                                                                    "Zutreffender EVB-IT Vertragstyp",
+                                                                                    "Rechtlicher Schwerpunkt"
+                                                        ],
+                                                        "rows": [
+                                                                                    [
+                                                                                                                "Entwicklung eines individuellen Online-Bauantrags-Fachverfahrens",
+                                                                                                                "",
+                                                                                                                "Werkvertragsrecht (§ 631 BGB) mit Abnahme nach Pflichtenheft"
+                                                                                    ],
+                                                                                    [
+                                                                                                                "Beratung und Unterstützung bei der BSI-Grundschutz-Zertifizierung",
+                                                                                                                "",
+                                                                                                                "Dienstvertragsrecht (§ 611 BGB) auf Stundenbasis ohne Erfolgsgarantie"
+                                                                                    ],
+                                                                                    [
+                                                                                                                "Kauf von 300 Standard-Büro-PCs mit Vor-Ort-Garantie",
+                                                                                                                "",
+                                                                                                                "Kaufrecht (§ 433 BGB) mit Mängelhaftung und Hardware-Garantie"
+                                                                                    ]
+                                                        ],
+                                                        "solutions": {
+                                                                                    "0_1": "EVB-IT Erstellung",
+                                                                                    "1_1": "EVB-IT Dienstleistung",
+                                                                                    "2_1": "EVB-IT Kauf"
+                                                        }
+                            },
                         solution: "PC-Hardware -> EVB-IT Kauf; Softwareentwicklung -> EVB-IT Erstellung (Werkvertrag); Beratung -> EVB-IT Dienstleistung."
                     },
                     {
@@ -3611,15 +4763,38 @@ var EXAM_SETS = [
                         stencil: "IPV6-MIGRATION / TRANSITIONSTECHNIKEN",
                         text: "Vergleichen Sie die beiden Übergangstechniken bei der IPv6-Einführung.",
                         tableConfig: {
-                            type: "fill",
-                            staticCols: [0],
-                            headers: ["Kriterium", "Dual-Stack", "NAT64 / DNS64"],
-                            rows: [
-                                ["Funktionsprinzip", "Gleichzeitiger Parallelbetrieb von IPv4 und IPv6 auf allen Routern und Hosts", "Reines IPv6-Netzwerk greift über Gateway-Übersetzer auf IPv4-Server zu"],
-                                ["IPv4-Adressbedarf", "Benötigt weiterhin auf jedem Endgerät eine IPv4-Adresse", "Keine IPv4-Adressen an Endgeräten notwendig (spart IPv4-Pool)"],
-                                ["Komplexität", "Geringe Protokollübersetzung, aber doppelter Administrationsaufwand", "Zentralisiertes Übersetzungsgateway, Inkompatibilität bei IPv4-Literalen"]
-                            ]
-                        },
+                                                        "type": "fill",
+                                                        "headers": [
+                                                                                    "Kriterium",
+                                                                                    "Dual-Stack",
+                                                                                    "NAT64 / DNS64"
+                                                        ],
+                                                        "rows": [
+                                                                                    [
+                                                                                                                "Funktionsprinzip",
+                                                                                                                "",
+                                                                                                                ""
+                                                                                    ],
+                                                                                    [
+                                                                                                                "IPv4-Adressbedarf",
+                                                                                                                "",
+                                                                                                                ""
+                                                                                    ],
+                                                                                    [
+                                                                                                                "Komplexität",
+                                                                                                                "",
+                                                                                                                ""
+                                                                                    ]
+                                                        ],
+                                                        "solutions": {
+                                                                                    "0_1": "Gleichzeitiger Parallelbetrieb von IPv4 und IPv6 auf allen Routern und Hosts",
+                                                                                    "0_2": "Reines IPv6-Netzwerk greift über Gateway-Übersetzer auf IPv4-Server zu",
+                                                                                    "1_1": "Benötigt weiterhin auf jedem Endgerät eine IPv4-Adresse",
+                                                                                    "1_2": "Keine IPv4-Adressen an Endgeräten notwendig (spart IPv4-Pool)",
+                                                                                    "2_1": "Geringe Protokollübersetzung, aber doppelter Administrationsaufwand",
+                                                                                    "2_2": "Zentralisiertes Übersetzungsgateway, Inkompatibilität bei IPv4-Literalen"
+                                                        }
+                            },
                         solution: "Dual-Stack: Parallelbetrieb, hoher IPv4-Bedarf; NAT64: Reines IPv6-Netz mit Übersetzung, spart IPv4-Adressen."
                     }
                 ]
@@ -3657,16 +4832,41 @@ var EXAM_SETS = [
                         stencil: "BCM / BSI 200-4 NOTFALLDOKUMENTATION",
                         text: "Ordnen Sie die Dokumenttypen des Business Continuity Managements (BCM) ihren Aufgaben zu.",
                         tableConfig: {
-                            type: "matching",
-                            targetCol: 0,
-                            options: ["Geschäftsfortführungsplan (BCP)", "Wiederanlaufplan (DRP)", "Krisenstabs-Alarmierungsplan"],
-                            headers: ["Dokumenttyp", "Verwendungszweck", "Typischer Inhalt"],
-                            rows: [
-                                ["Wiederanlaufplan (DRP)", "Schrittweises Wiederhochfahren der IT-Infrastruktur", "Reihenfolge des Bootens: Active Directory -> DNS -> Datenbanken -> Apps"],
-                                ["Krisenstabs-Alarmierungsplan", "Unverzügliche Einberufung der Entscheidungsträger", "Notfallkontakte, Stellvertreterregelungen, Lagezentrum-Einwahl"],
-                                ["Geschäftsfortführungsplan (BCP)", "Sicherstellung der kritischen Kernprozesse im Notbetrieb", "Ausweicharbeitsplätze, manuelle Notfallformulare, Minimalpersonal"]
-                            ]
-                        },
+                                                        "type": "matching",
+                                                        "targetCol": 0,
+                                                        "options": [
+                                                                                    "Geschäftsfortführungsplan (BCP)",
+                                                                                    "Wiederanlaufplan (DRP)",
+                                                                                    "Krisenstabs-Alarmierungsplan"
+                                                        ],
+                                                        "headers": [
+                                                                                    "Dokumenttyp",
+                                                                                    "Verwendungszweck",
+                                                                                    "Typischer Inhalt"
+                                                        ],
+                                                        "rows": [
+                                                                                    [
+                                                                                                                "",
+                                                                                                                "Schrittweises Wiederhochfahren der IT-Infrastruktur",
+                                                                                                                "Reihenfolge des Bootens: Active Directory -> DNS -> Datenbanken -> Apps"
+                                                                                    ],
+                                                                                    [
+                                                                                                                "",
+                                                                                                                "Unverzügliche Einberufung der Entscheidungsträger",
+                                                                                                                "Notfallkontakte, Stellvertreterregelungen, Lagezentrum-Einwahl"
+                                                                                    ],
+                                                                                    [
+                                                                                                                "",
+                                                                                                                "Sicherstellung der kritischen Kernprozesse im Notbetrieb",
+                                                                                                                "Ausweicharbeitsplätze, manuelle Notfallformulare, Minimalpersonal"
+                                                                                    ]
+                                                        ],
+                                                        "solutions": {
+                                                                                    "0_0": "Wiederanlaufplan (DRP)",
+                                                                                    "1_0": "Krisenstabs-Alarmierungsplan",
+                                                                                    "2_0": "Geschäftsfortführungsplan (BCP)"
+                                                        }
+                            },
                         solution: "BCP -> Kernprozesse im Notbetrieb; DRP -> IT-Wiederanlauf-Reihenfolge; Alarmierungsplan -> Krisenstab-Einberufung."
                     },
                     {

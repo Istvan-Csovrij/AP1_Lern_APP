@@ -1716,27 +1716,9 @@ function renderTaskPage(container, pageIndex) {
             `;
         } else if (sub.type === "table" && sub.tableConfig) {
             const cfg = sub.tableConfig;
-            const isMatching = cfg.type === "matching" || 
-                               (cfg.targetCol !== undefined) ||
-                               (cfg.targetCols !== undefined) ||
-                               (cfg.options && cfg.options.length > 0) ||
-                               (sub.text && (sub.text.toLowerCase().includes("ordnen sie") || sub.text.toLowerCase().includes("zuordnen") || sub.text.toLowerCase().includes("bringen sie")));
-            
+            const isMatching = cfg.type === "matching";
             const targetCols = cfg.targetCols || (cfg.targetCol !== undefined ? [cfg.targetCol] : (isMatching ? [0] : []));
-            const staticCols = cfg.staticCols || (cfg.targetCols ? [0] : (isMatching ? [] : [0]));
-
-            // Options pool for matching
-            let options = cfg.options || [];
-            if (isMatching && (!options || options.length === 0)) {
-                const set = new Set();
-                const primaryCol = targetCols[0] !== undefined ? targetCols[0] : 0;
-                cfg.rows.forEach(r => {
-                    if (r[primaryCol] && r[primaryCol] !== "/") {
-                        set.add(r[primaryCol].trim());
-                    }
-                });
-                options = Array.from(set);
-            }
+            const options = cfg.options || [];
 
             // Headers
             let thead = "<tr>";
@@ -1750,13 +1732,18 @@ function renderTaskPage(container, pageIndex) {
                 tbody += "<tr>";
                 row.forEach((cell, cIdx) => {
                     const cellKey = `${sub.id}_tbl_${rIdx}_${cIdx}`;
-                    const expectedVal = (cell || "").trim();
-                    const isSlash = expectedVal === "/";
+                    const solKey = `${rIdx}_${cIdx}`;
+                    const expectedVal = (cfg.solutions && cfg.solutions[solKey] !== undefined)
+                                        ? cfg.solutions[solKey].trim()
+                                        : (cell || "").trim();
+                    const isSlash = cell === "/" || expectedVal === "/";
+                    const isMatchingTarget = isMatching && targetCols.includes(cIdx);
+                    const isBlankInput = !isMatching && cell === "";
 
                     if (isSlash) {
                         tbody += `<td class="diagonal-slash" style="text-align: center; font-weight: bold;">/</td>`;
-                    } else if (targetCols.includes(cIdx)) {
-                        // Dropdown selection cell
+                    } else if (isMatchingTarget) {
+                        // Dropdown selection cell (starts empty on -- Bitte zuordnen --)
                         const userVal = examAnswersData[cellKey] !== undefined ? examAnswersData[cellKey] : "";
                         const colOptions = (cfg.colOptions && cfg.colOptions[cIdx]) ? cfg.colOptions[cIdx] : options;
                         
@@ -1784,18 +1771,9 @@ function renderTaskPage(container, pageIndex) {
 
                         tbody += `<td class="${tdClass}" style="min-width: 170px;">${selectHtml}${evalHtml}</td>`;
 
-                    } else if (staticCols.includes(cIdx) || (isMatching && !targetCols.includes(cIdx))) {
-                        // Readable static text cell
-                        const isHeaderCol = cIdx === 0 && !isMatching;
-                        const cellStyle = isHeaderCol ? "font-weight: 600; background: #f8fafc; color: #1e293b;" : "";
-                        tbody += `
-                            <td style="${cellStyle}">
-                                <div class="exam-table-cell-text">${escapeHtml(cell)}</div>
-                            </td>
-                        `;
-                    } else {
-                        // Editable text input cell (for calculation/fill-in tables)
-                        // Starts empty before submission unless user already entered a value
+                    } else if (isBlankInput) {
+                        // Editable text input cell for blanks to be calculated by student
+                        // Starts completely empty before submission
                         const userVal = examAnswersData[cellKey] !== undefined ? examAnswersData[cellKey] : "";
                         
                         let evalHtml = "";
@@ -1822,6 +1800,15 @@ function renderTaskPage(container, pageIndex) {
                                        oninput="saveSubtaskAnswer('${cellKey}', this.value)"
                                        ${isExamSubmitted ? "readonly" : ""}>
                                 ${evalHtml}
+                            </td>
+                        `;
+                    } else {
+                        // Given value / readable static prompt text
+                        const isHeaderCol = cIdx === 0;
+                        const cellStyle = isHeaderCol ? "font-weight: 600; background: #f8fafc; color: #1e293b;" : "background: #fafafa; color: #1e293b;";
+                        tbody += `
+                            <td style="${cellStyle}">
+                                <div class="exam-table-cell-text">${escapeHtml(cell)}</div>
                             </td>
                         `;
                     }
