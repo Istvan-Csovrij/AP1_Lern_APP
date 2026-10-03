@@ -1187,7 +1187,782 @@ var EXAM_SETS = [
                 ]
             }
         ]
+    },
+
+    // ----------------------------------------------------------------------
+    // PRÜFUNG 5: E-Commerce Plattform, Bezahlsysteme & Cyber-Security
+    // ----------------------------------------------------------------------
+    {
+        id: "exam_5",
+        title: "Prüfung 5: E-Commerce Plattform, Bezahlsysteme & Cyber-Security",
+        badge: "100 Punkte • 90 Min.",
+        subtitle: "Abschlussprüfung Teil 1 • IT-Berufe • ApexShop Handels-GmbH",
+        ausgangssituation: "Sie sind Fachinformatiker in der IT-Abteilung der ApexShop Handels-GmbH. Das Unternehmen betreibt einen hochfrequentierten B2C-Onlineshop für Unterhaltungselektronik und erweitert seine Plattform um neue internationale Bezahldienste, höchste IT-Sicherheitsstandards und automatisierte Lager- und Rechnungsabläufe.",
+        tasks: [
+            {
+                number: 1,
+                title: "1. Aufgabe: Payment Service Provider, Zahlungsstörungen & Handelskalkulation",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "5_1_a",
+                        label: "a) Payment Service Provider (PSP) & PCI-DSS",
+                        points: 7,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "E-COMMERCE / BEZAHLDIENSTE (PCI-DSS)",
+                        text: "Für den Onlineshop soll die Kreditkartenzahlung angebunden werden.\naa) Nennen Sie zwei Vorteile der Einbindung eines Payment Service Providers (PSP) im Vergleich zur direkten Abwicklung über ein eigenes Händlerkonto (3 Punkte).\nab) Erläutern Sie, warum Onlineshops nach dem PCI-DSS Sicherheitsstandard keine sensiblen Authentifizierungsdaten (wie den 3-stelligen CVV/CVC-Code) nach der Autorisierung auf eigenen Servern speichern dürfen (4 Punkte).",
+                        solution: "aa) Vorteile PSP:\n1. Geringerer eigener PCI-DSS-Zertifizierungsaufwand (SAQ A statt SAQ D), da sensible Kartendaten direkt über gesicherte iFrames/Hosted Payment Pages des Providers laufen.\n2. Mehrere Zahlungsarten (Kreditkarte, Apple Pay, PayPal, Klarna) über eine einzige standardisierte Schnittstelle (API).\nab) PCI-DSS Vorgabe:\nDer CVC/CVV-Sicherheitscode dient ausschließlich der Verifikation beim Zahlungsvorgang ('Besitz der Karte'). Bei einer Speicherung auf Servern würde ein Cyberangriff oder Datenleck ausreichen, um vollständige, missbrauchsfähige Kartensätze zu stehlen. Daher ist die dauerhafte Speicherung der Prüfziffer strikt verboten."
+                    },
+                    {
+                        id: "5_1_b",
+                        label: "b) Kaufvertragsstörungen: Zahlungsverzug nach BGB",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "WIRTSCHAFTSRECHT / BGB ZAHLUNGSVERZUG",
+                        text: "Ein gewerblicher Kunde zahlt eine fällige Rechnung nicht.\nba) Erläutern Sie, wann ein Kunde ohne vorherige Mahnung nach § 286 BGB automatisch in Verzug gerät (3 Punkte).\nbb) Berechnen Sie die Höhe des gesetzlichen Verzugszinssatzes bei einem Rechtsgeschäft zwischen zwei Unternehmen (B2B) und nennen Sie die zusätzliche gesetzliche Pauschale nach § 288 Abs. 5 BGB (3 Punkte).",
+                        solution: "ba) Automatischer Verzug ohne Mahnung:\n1. Wenn für die Leistung eine Zeit nach dem Kalender bestimmt ist (§ 286 Abs. 2 Nr. 1 BGB).\n2. Spätestens 30 Tage nach Fälligkeit und Zugang einer Rechnung (bei Verbrauchern nur mit ausdrücklichem Hinweis auf der Rechnung).\nbb) B2B-Verzugszinsen:\n• Verzugszinssatz = Basiszinssatz der EZB + 9 Prozentpunkte (bei Verbrauchern B2C: Basiszinssatz + 5 Prozentpunkte).\n• Gesetzliche Verzugspauschale für Entschädigung von Beitreibungskosten = 40,00 EUR (§ 288 Abs. 5 BGB)."
+                    },
+                    {
+                        id: "5_1_c",
+                        label: "c) Handelskalkulation: Rückwärtskalkulation im 5-mm-Rechengitter",
+                        points: 8,
+                        type: "math-grid",
+                        gridConfig: { cols: 26, rows: 6 },
+                        stencil: "HANDELSKALKULATION (RÜCKWÄRTSRECHNUNG)",
+                        text: "Ein Premium-Kopfhörer soll im Onlineshop zu einem maximalen Bruttoverkaufspreis von 238,00 EUR (inkl. 19 % USt) angeboten werden. Berechnen Sie im Rechengitter den maximal zulässigen Listeneinkaufspreis (LEP):\n• Umsatzsteuer: 19 %\n• Kundenrabatt: 10 %\n• Kundenskonto: 2 %\n• Gewinnzuschlag: 25 %\n• Handlungskostenzuschlag: 30 %\n• Bezugskosten: 4,00 EUR\n• Lieferantenskonto: 2 %\n• Lieferantenrabatt: 15 %",
+                        solution: "Rückwärtskalkulation:\n1. BVP (Brutto) = 238,00 EUR.\n2. Nettoverkaufspreis (ZVP) = 238,00 / 1,19 = 200,00 EUR.\n3. Barverkaufspreis = 200,00 * (1 - 0,10) * (1 - 0,02) -> Im Hundert: ZVP = 200 € / (1 + 0,10 + 0,02...)\n   Barverkaufspreis = 200 * 0,90 * 0,98 = 176,40 EUR.\n4. Selbstkostenpreis = 176,40 / 1,25 = 141,12 EUR.\n5. Bezugspreis (Einstand) = 141,12 / 1,30 = 108,55 EUR.\n6. Bareinkaufspreis = 108,55 - 4,00 = 104,55 EUR.\n7. Zieleinkaufspreis = 104,55 / 0,98 = 106,68 EUR.\n8. Max. Listeneinkaufspreis (LEP) = 106,68 / 0,85 = 125,51 EUR."
+                    },
+                    {
+                        id: "5_1_d",
+                        label: "d) Vergleich von E-Commerce Zahlungsverfahren",
+                        points: 4,
+                        type: "table",
+                        stencil: "ZAHLUNGSVERFAHREN / RISIKOANALYSE",
+                        text: "Vergleichen Sie die vier Online-Zahlungsmethoden hinsichtlich Ausfallrisiko für den Händler und Käuferakzeptanz.",
+                        tableConfig: {
+                            headers: ["Zahlungsart", "Ausfallrisiko (Händler)", "Transaktionsgebühr", "Käuferakzeptanz in DE"],
+                            rows: [
+                                ["Kauf auf Rechnung", "Sehr hoch (Zahlungsverzug/Betrug)", "Gering bis mittel", "Sehr hoch (beliebteste Zahlart)"],
+                                ["SEPA-Lastschrift", "Mittel (Rücklastschrift 8 Wochen möglich)", "Sehr gering (< 0,5 %)", "Hoch"],
+                                ["Kreditkarte (3D-Secure)", "Gering (Haftungsumkehr bei 3DS)", "Mittel (1,5 - 2,5 %)", "Hoch / International unverzichtbar"],
+                                ["PayPal / Wallet", "Sehr gering (Verkäuferschutz)", "Hoch (2 - 3 %)", "Sehr hoch"]
+                            ]
+                        },
+                        solution: "Rechnungskauf hat höchstes Risiko, ist aber kundenfreundlichst. SEPA birgt Rücklastschriftrisiko. Wallets/3DS bieten hohe Sicherheit bei höheren Transaktionsgebühren."
+                    }
+                ]
+            },
+            {
+                number: 2,
+                title: "2. Aufgabe: Webserver-Dimensionierung, Load Balancing & Hochverfügbarkeit",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "5_2_a",
+                        label: "a) Server-Kapazitätsberechnung im 5-mm-Rechengitter",
+                        points: 7,
+                        type: "math-grid",
+                        gridConfig: { cols: 26, rows: 6 },
+                        stencil: "BANDBREITEN- UND KAPAZITÄTSBERECHNUNG",
+                        text: "Für eine Verkaufsaktion wird mit 15.000 gleichzeitigen Nutzern (Concurrent Users) gerechnet. Jeder Nutzer ruft im Schnitt alle 6 Sekunden eine Seite auf (durchschnittliche Seitengröße komprimiert: 250 kByte). Zur Vermeidung von Engpässen ist ein Sicherheitszuschlag von 25 % einzukalkulieren.\nBerechnen Sie im Rechengitter:\n1. Die Anzahl der Seitenaufrufe (Requests) pro Sekunde\n2. Die benötigte Bandbreite in Megabit pro Sekunde (Mbit/s).",
+                        solution: "Berechnung:\n1. Requests pro Sekunde = 15.000 Nutzer / 6 Sekunden = 2.500 Requests/s.\n2. Datenvolumen pro Sekunde = 2.500 * 250 kByte = 625.000 kByte/s = 625 MByte/s.\n3. In Bit umrechnen: 625 MByte/s * 8 = 5.000 Mbit/s (5 Gbit/s).\n4. Mit 25 % Sicherheitszuschlag: 5.000 * 1,25 = 6.250 Mbit/s (ca. 6,25 Gbit/s)."
+                    },
+                    {
+                        id: "5_2_b",
+                        label: "b) Load-Balancing: Algorithmen & Session-Persistence",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 5,
+                        text: "Vor die Webserver wird ein HAProxy-Load-Balancer geschaltet.\nba) Unterscheiden Sie die Verteilungsalgorithmen 'Round Robin' und 'Least Connections' (3 Punkte).\nbb) Erläutern Sie, warum für den Warenkorb im Onlineshop 'Sticky Sessions' (Session-Affinity via Cookie) oder ein zentraler Session-Cache (z. B. Redis) erforderlich sind (3 Punkte).",
+                        solution: "ba) Algorithmen:\n• Round Robin: Anfragen werden zyklisch der Reihe nach auf alle Backend-Server verteilt (1, 2, 3, 1, 2...). Ignoriert unterschiedliche Serverauslastungen.\n• Least Connections: Leitet neue Anfragen dynamisch an den Server mit den aktuell wenigsten aktiven TCP-/HTTP-Verbindungen weiter (optimal bei unterschiedlich rechenintensiven Anfragen).\nbb) Sticky Sessions / Redis:\nWenn der Nutzer auf Server A Artikel in den Warenkorb legt, und der nächste Request auf Server B landet, wäre der Warenkorb ohne zentrale Session leer. Sticky Sessions binden den Client per Cookie an Server A. Ein zentraler Cache (Redis) speichert Sessions serverunabhängig."
+                    },
+                    {
+                        id: "5_2_c",
+                        label: "c) RAID 10 vs. RAID 5 für transaktionale SQL-Datenbanken",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 4,
+                        text: "Für das Datenbanksystem stehen 4 Enterprise-SSDs à 2 TB zur Verfügung.\nVergleichen Sie RAID 5 und RAID 10 hinsichtlich Schreibperformance ('Write Penalty') und nutzbarer Kapazität und begründen Sie, warum für relationale Datenbanken RAID 10 gewählt wird.",
+                        solution: "RAID 5: Nutzbar = (n-1)*2 TB = 6 TB. Write Penalty von 4 (2 Lese- und 2 Schreibzugriffe pro Paritäts-Update). Bei hoher Schreiblast bricht die I/O-Performance ein.\nRAID 10 (1+0): Nutzbar = (n/2)*2 TB = 4 TB. Write Penalty von nur 2 (parallele Spiegelung). Höchste IOPS-Performance und schnellster Rebuild ohne Rechenaufwand für Paritätsdaten. Ideal für transaktionale OLTP-Datenbanken."
+                    },
+                    {
+                        id: "5_2_d",
+                        label: "d) TLS 1.3 & Perfect Forward Secrecy (PFS)",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 4,
+                        text: "Der Webserver wird auf TLS 1.3 konfiguriert. Erläutern Sie das Sicherheitsprinzip 'Perfect Forward Secrecy' (PFS) und welchen Schutz es bietet, falls der private Schlüssel des Webservers zu einem späteren Zeitpunkt kompromittiert wird.",
+                        solution: "Prinzip: Bei PFS wird für jede Sitzung ein temporärer, ephemerer Sitzungsschlüssel ausgehandelt (z. B. via ECDHE - Elliptic Curve Diffie-Hellman Ephemeral). Dieser Schlüssel wird nach Sitzungsende verworfen.\nSchutzwirkung: Sollte ein Angreifer Jahre später den privaten Langzeit-Schlüssel des Servers stehlen, kann er damit dennoch keine in der Vergangenheit mitgeschnittenen verschlüsselten Datenströme entschlüsseln."
+                    }
+                ]
+            },
+            {
+                number: 3,
+                title: "3. Aufgabe: Cyber-Security, OWASP Top 10 & Datenschutz",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "5_3_a",
+                        label: "a) OWASP Top 10: Schwachstellenanalyse",
+                        points: 8,
+                        type: "table",
+                        stencil: "WEB-SECURITY / OWASP TOP 10",
+                        text: "Ordnen Sie die drei folgenden Sicherheitslücken ihren Ursachen und konkreten Gegenmaßnahmen zu.",
+                        tableConfig: {
+                            headers: ["Schwachstelle", "Funktionsweise des Angriffs", "Konkrete Schutzmaßnahme"],
+                            rows: [
+                                ["SQL-Injection (SQLi)", "Einschleusen von SQL-Befehlen über ungeprüfte Eingabefelder zur Manipulation der Datenbank", "Verwendung von Prepared Statements (parametrisierten Queries) und ORM"],
+                                ["Cross-Site Scripting (XSS)", "Einschleusen von bösartigem JavaScript in Webseiten, das im Browser anderer Nutzer ausgeführt wird", "Kontextsensitives HTML-Output-Encoding & Content Security Policy (CSP)"],
+                                ["Cross-Site Request Forgery (CSRF)", "Opfer wird verleitet, ungewollt eine authentifizierte Aktion auf einer fremden Website auszuführen", "Einsatz von kryptografischen Anti-CSRF-Tokens & SameSite-Cookie-Attribut"]
+                            ]
+                        },
+                        solution: "SQLi wird durch strikte Trennung von Code und Daten (Prepared Statements) gelöst. XSS durch Escaping/Encoding aller Nutzereingaben. CSRF durch Einmal-Tokens pro Formularübertragung."
+                    },
+                    {
+                        id: "5_3_b",
+                        label: "b) DSGVO & Cookie-Consent (TDDDG)",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 4,
+                        text: "Auf der Shop-Website soll ein Consent-Management-Banner (Cookie-Banner) implementiert werden.\nUnterscheiden Sie technisch notwendige Cookies von zustimmungspflichtigen Tracking-Cookies und nennen Sie zwei zwingende rechtliche Vorgaben für ein wirksames Einwilligungsbanner nach DSGVO und TDDDG.",
+                        solution: "Technisch notwendig: Cookies, die für den Betrieb des Dienstes zwingend erforderlich sind (z. B. Warenkorb-Cookie, Session-ID, CSRF-Token). Erfordern kein Opt-in.\nTracking-Cookies: Werbe- und Analyse-Cookies (z. B. Google Analytics, Facebook Pixel) erfordern vorherige informierte und freiwillige Einwilligung (Opt-in).\nVorgaben Banner: 1. Keine vorangekreuzten Kästchen (Opt-in Pflicht). 2. Schaltfläche 'Ablehnen' muss genauso leicht erreichbar und auffällig sein wie 'Alle Akzeptieren'."
+                    },
+                    {
+                        id: "5_3_c",
+                        label: "c) Zwei-Faktor-Authentifizierung (2FA) mit TOTP",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 4,
+                        text: "Für das Administratorportal des Shops wird 2FA vorgeschrieben.\nNennen Sie die drei klassischen Authentifizierungsfaktoren und erklären Sie die technische Funktionsweise von TOTP (Time-based One-Time Password nach RFC 6238) unter Verwendung von Shared Secret und Unix-Timestamp.",
+                        solution: "Faktoren:\n1. Wissen (Passwort, PIN)\n2. Besitz (Smartphone, Authenticator-App, Hardware-Token)\n3. Inhärenz (Biometrie: Fingerabdruck, Face-ID)\nTOTP Funktionsweise: Server und App teilen sich ein geheimes Shared Secret (z. B. per QR-Code ausgetauscht). Aus dem aktuellen Unix-Zeitstempel (geteilt durch 30 Sekunden) und dem Secret wird mittels HMAC-SHA1 ein 6-stelliger Code errechnet, der für 30 Sekunden gültig ist."
+                    },
+                    {
+                        id: "5_3_d",
+                        label: "d) DDoS-Schutzmechanismen (Distributed Denial of Service)",
+                        points: 5,
+                        type: "lines",
+                        linesCount: 4,
+                        text: "Ein Konkurrent droht mit einer DDoS-Attacke auf den Onlineshop. Beschreiben Sie den Unterschied zwischen einem volumetrischen Angriff (z. B. SYN-Flood auf Layer 4) und einem Applikationsangriff (z. B. HTTP-Flood auf Layer 7) sowie je eine Gegenmaßnahme.",
+                        solution: "Layer 4 (SYN-Flood): Überflutet Server mit TCP-SYN-Paketen, ohne den 3-Way-Handshake zu vollenden; Server-Verbindungstabellen laufen voll. Gegenmaßnahme: SYN-Cookies, Stateful Firewall.\nLayer 7 (HTTP-Flood): Generiert tausende legitime, aber rechenintensive GET/POST-Anfragen (z. B. Suchanfragen in der Produktdatenbank), die CPU und DB überlasten. Gegenmaßnahme: Web Application Firewall (WAF), Rate-Limiting, Bot-Challenge (CAPTCHA)."
+                    }
+                ]
+            },
+            {
+                number: 4,
+                title: "4. Aufgabe: E-Commerce Datenbank, SQL & Rabatt-Algorithmus",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "5_4_a",
+                        label: "a) Relationales Datenbankmodell für E-Commerce (3NF)",
+                        points: 9,
+                        type: "lines",
+                        linesCount: 7,
+                        stencil: "DATENBANKMODELLIERUNG / 3NF",
+                        text: "Modellieren Sie die Tabellen für den Shop in 3. Normalform:\nEin Kunde kann mehrere Bestellungen aufgeben. Eine Bestellung umfasst mehrere Artikel mit individueller Bestellmenge und historischem Kaufpreis. Eine Bestellung kann optional genau einen Rabattgutschein einlösen.\nGeben Sie Tabellennamen, Primär- (PK) und Fremdschlüssel (FK) an.",
+                        solution: "• tbl_kunde (Kunde_ID [PK], Email, Vorname, Nachname, Strasse, PLZ, Ort)\n• tbl_gutschein (Gutschein_Code [PK], Rabatt_Prozent, Gueltig_Bis, Mindestbestellwert_EUR)\n• tbl_bestellung (Bestell_ID [PK], Kunde_ID [FK], Gutschein_Code [FK], Bestelldatum, Status, Gesamt_Netto_EUR)\n• tbl_artikel (Artikel_ID [PK], Bezeichnung, Aktueller_UVP_EUR, Lagerbestand, USt_Satz)\n• tbl_bestellposition (Pos_ID [PK], Bestell_ID [FK], Artikel_ID [FK], Menge, Einzelpreis_EUR)"
+                    },
+                    {
+                        id: "5_4_b",
+                        label: "b) SQL: Umsatzreporting & Ladenhüter-Analyse",
+                        points: 8,
+                        type: "lines",
+                        linesCount: 6,
+                        stencil: "SQL-QUERIES / REPORTING",
+                        text: "Formulieren Sie syntaktisch korrekte SQL-Befehle:\nba) Ermitteln Sie die Top 5 Kunden (Kunde_ID, Nachname, Gesamtumsatz) mit dem höchsten kumulierten Umsatz aus bezahlten Bestellungen (`Status = 'bezahlt'`). Sortieren Sie absteigend (5 Punkte).\nbb) Selektieren Sie alle Artikel (Artikel_ID, Bezeichnung), die im gesamten Jahr 2025 noch kein einziges Mal bestellt wurden (3 Punkte).",
+                        solution: "ba)\nSELECT k.Kunde_ID, k.Nachname, SUM(b.Gesamt_Netto_EUR) AS Gesamtumsatz\nFROM tbl_kunde k\nJOIN tbl_bestellung b ON k.Kunde_ID = b.Kunde_ID\nWHERE b.Status = 'bezahlt'\nGROUP BY k.Kunde_ID, k.Nachname\nORDER BY Gesamtumsatz DESC\nLIMIT 5;\n\nbb)\nSELECT a.Artikel_ID, a.Bezeichnung\nFROM tbl_artikel a\nLEFT JOIN tbl_bestellposition bp ON a.Artikel_ID = bp.Artikel_ID\nLEFT JOIN tbl_bestellung b ON bp.Bestell_ID = b.Bestell_ID AND YEAR(b.Bestelldatum) = 2025\nWHERE bp.Pos_ID IS NULL;"
+                    },
+                    {
+                        id: "5_4_c",
+                        label: "c) Algorithmus: Warenkorb-Rabattberechnung",
+                        points: 8,
+                        type: "lines",
+                        linesCount: 6,
+                        stencil: "ALGORITHMUS / WARENKORB-LOGIK",
+                        text: "Schreiben Sie einen Pseudocode für die Funktion `berechne_endbetrag(warenkorb_wert, gutschein_code)`:\n• Bei einem Warenkorbwert ab 100 EUR wird automatisch ein Versandkostenrabatt von 5,00 EUR gewährt (unter 100 EUR fallen 5,00 EUR Versand an).\n• Ist ein Gutschein 'RABATT10' übergeben und liegt der Warenkorbwert über 50 EUR, werden 10 % vom Warenkorbwert abgezogen.\n• Der Endbetrag darf nie unter 0 EUR fallen.",
+                        solution: "FUNCTION berechne_endbetrag(warenkorb_wert, gutschein_code):\n    IF warenkorb_wert >= 100 THEN\n        versand = 0.0\n    ELSE\n        versand = 5.0\n    END IF\n    \n    rabatt = 0.0\n    IF gutschein_code == 'RABATT10' AND warenkorb_wert >= 50 THEN\n        rabatt = warenkorb_wert * 0.10\n    END IF\n    \n    endbetrag = (warenkorb_wert - rabatt) + versand\n    IF endbetrag < 0 THEN\n        endbetrag = 0.0\n    END IF\n    \n    RETURN endbetrag\nEND FUNCTION"
+                    }
+                ]
+            }
+        ]
+    },
+
+    // ----------------------------------------------------------------------
+    // PRÜFUNG 6: Cloud-Migration, RZ-Effizienz & Containerisierung
+    // ----------------------------------------------------------------------
+    {
+        id: "exam_6",
+        title: "Prüfung 6: Cloud-Migration, RZ-Effizienz & Containerisierung",
+        badge: "100 Punkte • 90 Min.",
+        subtitle: "Abschlussprüfung Teil 1 • IT-Berufe • AeroCloud Systems GmbH",
+        ausgangssituation: "Sie arbeiten bei der AeroCloud Systems GmbH, einem Managed Service Provider für Unternehmenskunden. Für einen mittelständischen Automobilzulieferer soll die veraltete On-Premise-Infrastruktur in eine moderne Hybrid-Cloud überführt werden. Sie analysieren die RZ-Energieeffizienz, planen die Container-Infrastruktur und richten sichere Standortverbindungen ein.",
+        tasks: [
+            {
+                number: 1,
+                title: "1. Aufgabe: Rechenzentrumseffizienz (PUE/DCiE), USV & Klimatisierung",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "6_1_a",
+                        label: "a) PUE & DCiE Berechnung im 5-mm-Rechengitter",
+                        points: 8,
+                        type: "math-grid",
+                        gridConfig: { cols: 26, rows: 6 },
+                        stencil: "RECHENZENTRUM / ENERGIEEFFIZIENZ (PUE & DCIE)",
+                        text: "Ein Firmenrechenzentrum hat eine Gesamtleistungsaufnahme von 400 kW. Davon entfallen 250 kW direkt auf die IT-Infrastruktur (Server, Storage, Netzwerk). Der Rest wird für Kühlung, USV-Verluste und Beleuchtung verbraucht.\nBerechnen Sie im Rechengitter:\n1. Den PUE-Wert (Power Usage Effectiveness)\n2. Den DCiE-Wert (Data Center Infrastructure Efficiency) in Prozent\n3. Die jährlichen Gesamtstromkosten bei einem Strompreis von 0,30 EUR/kWh (8.760 Jahresstunden).",
+                        solution: "Berechnung:\n1. PUE = Gesamtleistung / IT-Leistung = 400 kW / 250 kW = 1,60.\n2. DCiE = (IT-Leistung / Gesamtleistung) * 100 % = (250 / 400) * 100 % = 62,5 %.\n   (Hinweis: DCiE = 1 / PUE = 1 / 1,6 = 0,625 = 62,5 %)\n3. Jährlicher Energieverbrauch = 400 kW * 8.760 h = 3.504.000 kWh.\n   Stromkosten = 3.504.000 kWh * 0,30 EUR/kWh = 1.051.200,00 EUR pro Jahr."
+                    },
+                    {
+                        id: "6_1_b",
+                        label: "b) Server-Abwärme & Klimatisierungsleistung (BTU/h)",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 4,
+                        text: "Die 250 kW IT-Leistung werden nahezu vollständig in thermische Energie (Abwärme) umgewandelt. Berechnen Sie die abzuführende Wärmeleistung in BTU/h (1 kW ≈ 3.412 BTU/h) und erläutern Sie das Prinzip der Kaltgang-/Warmgang-Einhausung zur Effizienzsteigerung.",
+                        solution: "Kühlleistung = 250 kW * 3.412 BTU/(h*kW) = 853.000 BTU/h.\nKaltgang-/Warmgang-Einhausung:\nServerracks werden 'Face-to-Face' aufgestellt. Der Gang vor den Servern (Kaltgang) wird baulich eingehaust (mit Türen und Deckenpaneelen). Die kalte Zuluft aus dem Doppelboden strömt gezielt durch die Server ins hintere warme Areal (Warmgang). Dies verhindert Luftkurzschlüsse und erlaubt höhere Vorlauftemperaturen der Klimaanlage."
+                    },
+                    {
+                        id: "6_1_c",
+                        label: "c) Notstromaggregat (NEA) & Tankberechnung",
+                        points: 6,
+                        type: "math-grid",
+                        gridConfig: { cols: 26, rows: 6 },
+                        stencil: "NOTSTROMVERSORGUNG / DIESELTANK",
+                        text: "Ein Notstromdiesel verbraucht bei 75 % Teillast 55 Liter Diesel pro Stunde. Das Rechenzentrum muss eine Mindestüberbrückungszeit von 36 Stunden netzunabhängig sicherstellen. Zur Sicherheit ist eine Reserve von 15 % auf das Tankvolumen aufzuschlagen.\nBerechnen Sie im Rechengitter das erforderliche Mindest-Tankvolumen in Litern.",
+                        solution: "Rechnung:\nGrundbedarf = 55 Liter/h * 36 h = 1.980 Liter.\nMit 15 % Reserve = 1.980 Liter * 1,15 = 2.277 Liter.\nErforderliches Mindest-Tankvolumen: 2.277 Liter."
+                    },
+                    {
+                        id: "6_1_d",
+                        label: "d) Brandschutz im Rechenzentrum: Gaslöschung",
+                        points: 5,
+                        type: "lines",
+                        linesCount: 4,
+                        text: "In modernen Serverräumen werden Gaslöschanlagen (z. B. mit Stickstoff, Argon oder chemischen Löschgasen wie Novec 1230) anstelle von Wasser-Sprinklern eingesetzt. Erläutern Sie die Wirkungsweise der Sauerstoffverdrängung bzw. Wärmeabsorption und zwei Personenschutzmaßnahmen vor dem Auslösen.",
+                        solution: "Wirkungsweise: Inertgase (Stickstoff/Argon) verdrängen den Sauerstoffanteil in der Raumluft von ca. 21 % auf unter 13-14 %, sodass Flammen ersticken, ohne Hardware durch Löschmittelrückstände oder Kurzschlüsse zu zerstören.\nPersonenschutzmaßnahmen: 1. Akustische und optische Vorwarnung (Hupe und Blitzleuchte mit Verzögerung von 30-60 Sekunden zur Evakuierung). 2. Automatische Abschaltung der Lüftungsanlage und Druckentlastungsklappen."
+                    }
+                ]
+            },
+            {
+                number: 2,
+                title: "2. Aufgabe: Virtualisierung, Docker-Container & Kubernetes",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "6_2_a",
+                        label: "a) Hypervisor Typ 1 vs. Typ 2 vs. Container",
+                        points: 8,
+                        type: "table",
+                        stencil: "VIRTUALISIERUNG / ARCHITEKTURVERGLEICH",
+                        text: "Vergleichen Sie die drei Virtualisierungsansätze hinsichtlich Architektur, Overhead und Bootzeit.",
+                        tableConfig: {
+                            headers: ["Kriterium", "Typ-1 Hypervisor (Bare-Metal)", "Typ-2 Hypervisor (Hosted)", "Container (z. B. Docker)"],
+                            rows: [
+                                ["Architektur-Ebene", "Läuft direkt auf der physischen Server-Hardware", "Läuft als Anwendung auf einem Host-Betriebssystem", "Teilt sich den Host-OS-Kernel via Namespaces/cgroups"],
+                                ["Betriebssystem-Overhead", "Vollständiges Gast-Betriebssystem je VM", "Sehr hoch (Host-OS + Gast-OS)", "Minimal (nur Applikation + Abhängigkeiten)"],
+                                ["Startzeit", "Minuten (voller OS-Boot)", "Minuten", "Sekundenbruchteile bis wenige Sekunden"],
+                                ["Beispielsoftware", "VMware ESXi, Proxmox VE, Hyper-V", "Oracle VirtualBox, VMware Workstation", "Docker, Podman, containerd"]
+                            ]
+                        },
+                        solution: "Typ-1 läuft bare-metal mit minimalem Overhead für Serverbetrieb. Typ-2 läuft auf Desktop-Betriebssystemen. Container teilen den Kernel und starten in Millisekunden."
+                    },
+                    {
+                        id: "6_2_b",
+                        label: "b) Kubernetes Kernkomponenten (Pods & Services)",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 4,
+                        text: "In der Cloud werden Microservices mit Kubernetes (K8s) orchestriert. Erläutern Sie die Begriffe 'Pod', 'Deployment' und 'Service' (ClusterIP vs. LoadBalancer).",
+                        solution: "• Pod: Kleinste deploybare Einheit in Kubernetes, kapselt einen oder mehrere eng zusammenarbeitende Container (Shared Storage & Network).\n• Deployment: Deklariert den gewünschten Soll-Zustand (Replica-Count, Updates via Rolling Update, Self-Healing bei Pod-Absturz).\n• Service: Stellt eine persistente IP-Adresse und DNS-Namen für ephemere Pods bereit. ClusterIP = nur intern im Cluster erreichbar; LoadBalancer = provisioniert eine externe Cloud-IP."
+                    },
+                    {
+                        id: "6_2_c",
+                        label: "c) Cloud-Servicemodelle: IaaS vs. PaaS vs. SaaS",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 4,
+                        text: "Erläutern Sie anhand des 'Shared Responsibility Models' die Aufgabenteilung zwischen Cloud-Provider und Kunde bei den drei Servicemodellen IaaS, PaaS und SaaS.",
+                        solution: "• IaaS (z. B. AWS EC2, Azure VMs): Provider stellt Hardware, Virtualisierung und Rechenzentrum bereit. Kunde verwaltet OS, Patches, Middleware und Applikation.\n• PaaS (z. B. Heroku, Azure App Service): Provider verwaltet zusätzlich Betriebssystem, Runtime und Datenbank. Kunde liefert nur den Applikationscode und Daten.\n• SaaS (z. B. M365, Salesforce): Provider betreibt das schlüsselfertige Gesamtsystem inkl. Software. Kunde verwaltet lediglich Benutzerkonten und Konfiguration."
+                    },
+                    {
+                        id: "6_2_d",
+                        label: "d) Cloud-Kostenoptimierung: CAPEX vs. OPEX",
+                        points: 5,
+                        type: "lines",
+                        linesCount: 4,
+                        text: "Vergleichen Sie CAPEX (Capital Expenditures) und OPEX (Operational Expenditures) im Kontext der Cloud-Migration und nennen Sie zwei typische Kostenfallen in der Public Cloud.",
+                        solution: "CAPEX: Einmalige hohe Investitionen in physische Hardware (Server, Switches, Lizenzen) mit mehrjähriger Abschreibung.\nOPEX: Laufende variable Betriebskosten ('Pay-as-you-go'), die flexibel an den tatsächlichen Verbrauch angepasst und direkt steuerlich geltend gemacht werden können.\nKostenfallen: 1. Unkontrollierte 'Egress Traffic'-Kosten (Kosten für Datenexport aus der Cloud ins Internet). 2. Ungenutzte 'Zombie-Ressourcen' (laufende Testinstanzen, unattached EBS-Volumes)."
+                    }
+                ]
+            },
+            {
+                number: 3,
+                title: "3. Aufgabe: Standortvernetzung via VPN, BSI IT-Grundschutz & SLA",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "6_3_a",
+                        label: "a) IPsec VPN: Tunnel-Modus vs. Transport-Modus",
+                        points: 8,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "NETZWERKTECHNIK / IPSEC-VPN",
+                        text: "Zur Anbindung zweier Firmenstandorte wird ein IPsec-Site-to-Site-VPN eingerichtet.\naa) Erläutern Sie den Unterschied zwischen dem IPsec-Tunnel-Modus und dem Transport-Modus bezüglich des IP-Headers (4 Punkte).\nab) Nennen Sie die Aufgaben der beiden IPsec-Protokolle ESP (Encapsulating Security Payload) und AH (Authentication Header) (4 Punkte).",
+                        solution: "aa) Tunnel- vs. Transport-Modus:\n• Tunnel-Modus: Das gesamte originale IP-Paket (inkl. Original-Header) wird verschlüsselt und in einen komplett neuen äußeren IP-Header gepackt. Standard für Gateway-to-Gateway (Router-Kopplung).\n• Transport-Modus: Nur die Payload (Nutzlast) wird verschlüsselt; der originale IP-Header bleibt sichtbar. Eingesetzt für Host-to-Host Verbindungen.\nab) Protokolle:\n• ESP (IP-Protokoll 50): Bietet Vertraulichkeit (Verschlüsselung) sowie Datenintegrität und Authentizität.\n• AH (IP-Protokoll 51): Bietet nur Datenintegrität und Ursprungsauthentizität, aber KEINE Verschlüsselung."
+                    },
+                    {
+                        id: "6_3_b",
+                        label: "b) Service Level Agreement (SLA): Verfügbarkeitsberechnung",
+                        points: 6,
+                        type: "math-grid",
+                        gridConfig: { cols: 26, rows: 6 },
+                        stencil: "SERVICE LEVEL MANAGEMENT / VERFÜGBARKEIT",
+                        text: "Ein Cloud-Service garantiert eine Verfügbarkeit von 99,9 % pro Jahr (8.760 Stunden).\nBerechnen Sie im Rechengitter die maximal zulässige Ausfallzeit (Downtime) in Stunden, Minuten und Sekunden pro Jahr.",
+                        solution: "Berechnung:\nVerfügbarkeit = 99,9 % ➔ Ausfallquote = 0,1 % = 0,001.\nMaximale Ausfallzeit = 8.760 h * 0,001 = 8,76 Stunden.\nIn Minuten: 0,76 h * 60 min/h = 45,6 Minuten.\nIn Sekunden: 0,6 min * 60 s/min = 36 Sekunden.\nZulässige Downtime: 8 Stunden, 45 Minuten und 36 Sekunden pro Jahr."
+                    },
+                    {
+                        id: "6_3_c",
+                        label: "c) WireGuard vs. OpenVPN / IPsec",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 4,
+                        text: "Für mobile Clients wird WireGuard als moderne VPN-Alternative diskutiert. Nennen Sie zwei Vorteile von WireGuard im Vergleich zu traditionellen OpenVPN- oder IPsec-Lösungen.",
+                        solution: "1. Schlanker Code & hohe Sicherheit: WireGuard hat nur ca. 4.000 Zeilen Quellcode (OpenVPN/IPsec: über 100.000 Zeilen), was Sicherheitsaudits und Fehlerbehebungen massiv vereinfacht.\n2. Bessere Performance & Akkulaufzeit: Läuft direkt als Linux-Kernelmodul mit modernen Krypto-Primitiven (ChaCha20, Curve25519), bietet höheren Datendurchsatz, geringere Latenz und nahtloses Roaming bei Netzwechsel (z. B. WLAN zu LTE)."
+                    },
+                    {
+                        id: "6_3_d",
+                        label: "d) IT-Notfallhandbuch nach BSI Standard 200-4",
+                        points: 5,
+                        type: "lines",
+                        linesCount: 4,
+                        text: "Beschreiben Sie den Inhalt eines betrieblichen IT-Notfallhandbuchs (Kriterien für Krisenstab-Einberufung, Notfall-Kommunikationskanäle, Wiederanlaufpläne).",
+                        solution: "Inhalte:\n1. Kriterien zur Einstufung eines Sicherheitsvorfalls als Notfall (Schadensausmaß, Ausfallzeit).\n2. Alarmierungspläne mit Kontaktdaten des Krisenstabs und externer Partner (Out-of-Band Kommunikation bei Totalausfall).\n3. Detaillierte Wiederanlauf- und Wiederherstellungspläne (Runbooks) mit Schritt-für-Schritt-Anweisungen zur Systemwiederherstellung in definierter Reihenfolge."
+                    }
+                ]
+            },
+            {
+                number: 4,
+                title: "4. Aufgabe: Cloud-Ressourcen-Datenbank, SQL & REST-API",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "6_4_a",
+                        label: "a) Relationales Schema für Cloud-Instanzen (3NF)",
+                        points: 9,
+                        type: "lines",
+                        linesCount: 7,
+                        stencil: "DATENBANKMODELLIERUNG / HYBRID-CLOUD",
+                        text: "Entwerfen Sie ein relationales Schema in 3NF für ein Cloud-Verwaltungsportal:\nEin Kunde kann mehrere Projekte verwalten. Zu einem Projekt gehören mehrere virtuelle Maschinen (Instanzen). Jede Instanz basiert auf genau einem Betriebssystem-Image und besitzt genau einen Instanztyp (vCPUs, RAM-Größe, Stundensatz).\nGeben Sie die Tabellen mit Primär- und Fremdschlüsseln an.",
+                        solution: "• tbl_kunde (Kunde_ID [PK], Firmenname, Ansprechpartner, Rechnungs_Email)\n• tbl_projekt (Projekt_ID [PK], Kunde_ID [FK], Projektname, Kostenstelle)\n• tbl_instanztyp (Typ_ID [PK], Typ_Bezeichnung, vCPUs, RAM_GB, Preis_pro_Stunde_EUR)\n• tbl_image (Image_ID [PK], Image_Name, OS_Familie, Version)\n• tbl_instanz (Instanz_ID [PK], Projekt_ID [FK], Typ_ID [FK], Image_ID [FK], Hostname, Status, Startzeitpunkt)"
+                    },
+                    {
+                        id: "6_4_b",
+                        label: "b) SQL: Monatliche Kostenabrechnung der Cloud-Instanzen",
+                        points: 8,
+                        type: "lines",
+                        linesCount: 6,
+                        stencil: "SQL-QUERIES / COST-MANAGEMENT",
+                        text: "Formulieren Sie die SQL-Abfragen:\nba) Berechnen Sie für jede Instanz (Hostname, Firmenname des Kunden) die gelaufenen Stunden im Monat März 2026 sowie die aufgelaufenen Gesamtkosten (Laufzeit in h * Stundensatz) (5 Punkte).\nbb) Ermitteln Sie alle Projekte, die im laufenden Monat Kosten von über 5.000,00 EUR verursacht haben (3 Punkte).",
+                        solution: "ba)\nSELECT i.Hostname, k.Firmenname, \n       TIMESTAMPDIFF(HOUR, i.Startzeitpunkt, CURRENT_TIMESTAMP) AS Laufzeit_h,\n       TIMESTAMPDIFF(HOUR, i.Startzeitpunkt, CURRENT_TIMESTAMP) * t.Preis_pro_Stunde_EUR AS Kosten_EUR\nFROM tbl_instanz i\nJOIN tbl_instanztyp t ON i.Typ_ID = t.Typ_ID\nJOIN tbl_projekt p ON i.Projekt_ID = p.Projekt_ID\nJOIN tbl_kunde k ON p.Kunde_ID = k.Kunde_ID;\n\nbb)\nSELECT p.Projekt_ID, p.Projektname, SUM(TIMESTAMPDIFF(HOUR, i.Startzeitpunkt, CURRENT_TIMESTAMP) * t.Preis_pro_Stunde_EUR) AS Gesamtprojekt_Kosten\nFROM tbl_projekt p\nJOIN tbl_instanz i ON p.Projekt_ID = i.Projekt_ID\nJOIN tbl_instanztyp t ON i.Typ_ID = t.Typ_ID\nGROUP BY p.Projekt_ID, p.Projektname\nHAVING Gesamtprojekt_Kosten > 5000;"
+                    },
+                    {
+                        id: "6_4_c",
+                        label: "c) RESTful API: Konzeption von Cloud-Endpunkten",
+                        points: 8,
+                        type: "table",
+                        stencil: "API-DESIGN / REST-ARCHITEKTUR",
+                        text: "Für das Cloud-Management soll eine REST-API bereitgestellt werden. Ergänzen Sie die folgende Tabelle mit HTTP-Methode, Pfad und passendem HTTP-Statuscode.",
+                        tableConfig: {
+                            headers: ["Aktion", "HTTP-Methode", "Ressourcen-URI", "Erfolgs-Statuscode", "Fehler-Statuscode"],
+                            rows: [
+                                ["Alle Instanzen eines Projekts abrufen", "GET", "/api/v1/projekte/42/instanzen", "200 OK", "404 Not Found"],
+                                ["Neue VM-Instanz provisionieren", "POST", "/api/v1/instanzen", "201 Created", "400 Bad Request"],
+                                ["Spezifische Instanz löschen (Terminieren)", "DELETE", "/api/v1/instanzen/89", "204 No Content", "404 Not Found"],
+                                ["Instanztyp verändern (Resize)", "PATCH / PUT", "/api/v1/instanzen/89", "200 OK", "409 Conflict"]
+                            ]
+                        },
+                        solution: "GET für idempotentes Lesen (200), POST für Erstellen (201), DELETE für Löschen (204/200), PUT/PATCH für Updates (200)."
+                    }
+                ]
+            }
+        ]
+    },
+
+    // ----------------------------------------------------------------------
+    // PRÜFUNG 7: Smart Factory, IoT-Sensorik & Industrie 4.0
+    // ----------------------------------------------------------------------
+    {
+        id: "exam_7",
+        title: "Prüfung 7: Smart Factory, IoT-Sensorik & Industrie 4.0",
+        badge: "100 Punkte • 90 Min.",
+        subtitle: "Abschlussprüfung Teil 1 • IT-Berufe • InnoTech Fertigungstechnik AG",
+        ausgangssituation: "Sie sind in der IT-Abteilung der InnoTech Fertigungstechnik AG tätig, einem modernen Automobilzulieferer mit robotergestützter Fließfertigung. Für ein Industrie-4.0-Projekt werden Sensoren vernetzt, speicherprogrammierbare Steuerungen (SPS) über MQTT angebunden und Fertigungsprozesse nach BPMN modelliert.",
+        tasks: [
+            {
+                number: 1,
+                title: "1. Aufgabe: BPMN 2.0 Geschäftsprozessmodellierung & ITIL Service Management",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "7_1_a",
+                        label: "a) BPMN 2.0 Kollaborationsdiagramm für Fertigungsprozess",
+                        points: 10,
+                        type: "lines",
+                        linesCount: 6,
+                        stencil: "PROZESSMODELLIERUNG / BPMN 2.0",
+                        text: "Modellieren Sie den Ablauf eines automatisierten Materialnachschubprozesses als BPMN 2.0 Kollaborationsdiagramm:\n• Pool 1: 'Produktionslinie' mit Lane 'Montage-Roboter'.\n• Pool 2: 'Zentrales Logistiksystem'.\n• Ablauf: Roboter stellt Materialmangel fest (Startereignis) und sendet Materialanforderung per Message Flow an das Logistiksystem. Das Logistiksystem prüft die Verfügbarkeit (XOR-Gateway). Ist Material da, wird ein fahrerloses Transportsystem (AGV) disponiert. Ist kein Material da, wird eine Eilbestellung beim Lieferanten ausgelöst.",
+                        solution: "BPMN 2.0 Struktur:\n• Zwei getrennte Pools: 'Produktionslinie' und 'Zentrales Logistiksystem'.\n• Kommunikation zwischen den Pools ausschließlich über gestrichelte Nachrichtenflüsse (Message Flows) mit offenen Pfeilspitzen.\n• Im Pool Logistiksystem: Empfangendes Nachrichten-Startereignis ➔ Task 'Lagerbestand prüfen' ➔ Exklusives Gateway (XOR):\n  - Pfad 1: [Bestand >= Anforderung] ➔ Task 'FTS/AGV Fahrauftrag erstellen' ➔ Endereignis.\n  - Pfad 2: [Bestand < Anforderung] ➔ Task 'Eilbestellung generieren' ➔ Task 'Lieferant benachrichtigen' ➔ Endereignis."
+                    },
+                    {
+                        id: "7_1_b",
+                        label: "b) ITIL 4: Incident Management vs. Problem Management",
+                        points: 8,
+                        type: "lines",
+                        linesCount: 5,
+                        text: "An einer Fertigungslinie bricht die Netzwerkverbindung zur speicherprogrammierbaren Steuerung (SPS) alle 2 Stunden ab. Der Schichtleiter startet den Switch jedes Mal neu (Dauer: 2 Minuten).\nUnterscheiden Sie das Vorgehen des Incident Managements vom Problem Management und erklären Sie die Begriffe 'Workaround' und 'Known Error Database' (KEDB).",
+                        solution: "• Incident Management: Ziel ist die schnellstmögliche Wiederherstellung des normalen Betriebs. Der Switch-Neustart durch den Schichtleiter ist ein klassischer temporärer 'Workaround' (Symptombekämpfung).\n• Problem Management: Ziel ist die Identifikation der zugrundeliegenden Ursache (Root Cause Analysis, z. B. Speicherleck in der Switch-Firmware oder IP-Adresskonflikt), um wiederkehrende Störungen dauerhaft zu verhindern.\n• KEDB (Known Error Database): Zentrale Wissensdatenbank, in der bekannte Fehler, ihre Ursachen und dokumentierte Workarounds hinterlegt sind."
+                    },
+                    {
+                        id: "7_1_c",
+                        label: "c) Nutzwertanalyse zur Roboterauswahl",
+                        points: 7,
+                        type: "table",
+                        stencil: "ENTSCHEIDUNGSTECHNIK / NUTZWERTANALYSE",
+                        text: "Für eine neue Schweißzelle stehen zwei Industrieroboter zur Auswahl. Berechnen Sie die Gesamtpunktwerte und ermitteln Sie den wirtschaftlichsten Roboter nach Nutzwertanalyse (Punkte von 1 bis 10).",
+                        tableConfig: {
+                            headers: ["Kriterium", "Gewichtung", "Roboter A (Punkte)", "Roboter A (Teilnutzwert)", "Roboter B (Punkte)", "Roboter B (Teilnutzwert)"],
+                            rows: [
+                                ["Wiederholgenauigkeit / Präzision", "30 %", "9", "2,7", "8", "2,4"],
+                                ["Zykluszeit / Taktzeit", "25 %", "7", "1,75", "9", "2,25"],
+                                ["Schnittstellen (PROFINET, OPC UA)", "25 %", "9", "2,25", "6", "1,5"],
+                                ["Energieeffizienz", "20 %", "6", "1,2", "8", "1,6"],
+                                ["Gesamtnutzwert", "100 %", "-", "7,90", "-", "7,75"]
+                            ]
+                        },
+                        solution: "Roboter A erreicht 7,90 Nutzwertpunkte, Roboter B 7,75 Punkte. Roboter A ist aufgrund überlegener Präzision und offener Industriestandards (OPC UA) die wirtschaftlichere Wahl."
+                    }
+                ]
+            },
+            {
+                number: 2,
+                title: "2. Aufgabe: IoT-Netzwerke, MQTT & IPv6-Autokonfiguration",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "7_2_a",
+                        label: "a) MQTT-Protokoll: Publish / Subscribe & QoS-Level",
+                        points: 8,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "IOT-PROTOKOLLE / MQTT ARCHITEKTUR",
+                        text: "Zur Überwachung von 500 Schwingungssensoren wird das MQTT-Protokoll eingesetzt.\naa) Erläutern Sie die Rollen von Publisher, Broker und Subscriber sowie das Topic-Konzept (4 Punkte).\nab) Unterscheiden Sie die drei Quality of Service Stufen: QoS 0, QoS 1 und QoS 2 (4 Punkte).",
+                        solution: "aa) MQTT-Architektur:\n• Publisher: Sendet Telemetriedaten (Payload) zu einem bestimmten Thema ('Topic', z. B. 'halle1/maschine3/vibration') an den Broker.\n• Broker: Zentrale Serverinstanz; empfängt Nachrichten und leitet sie an alle Clients weiter, die das jeweilige Topic abonniert haben.\n• Subscriber: Abonniert Topics (auch mit Wildcards like '+' oder '#') und empfängt die Daten.\nab) QoS-Level:\n• QoS 0 (At most once / Fire and Forget): Nachricht wird maximal einmal ohne Empfangsbestätigung gesendet; Paketverlust möglich.\n• QoS 1 (At least once): Nachricht wird mindestens einmal zugestellt; Empfang wird mit PUBACK bestätigt (Duplikate möglich).\n• QoS 2 (Exactly once): Aufwendiger 4-Wege-Handshake (PUBREC, PUBREL, PUBCOMP); garantiert, dass jede Nachricht exakt einmal ankommt."
+                    },
+                    {
+                        id: "7_2_b",
+                        label: "b) IPv6 Autokonfiguration: SLAAC vs. DHCPv6",
+                        points: 8,
+                        type: "lines",
+                        linesCount: 5,
+                        text: "In der Fabrikhalle erhalten Sensoren IPv6-Adressen.\nba) Erläutern Sie den Ablauf von SLAAC (Stateless Address Autoconfiguration) unter Verwendung von Router Solicitations (RS) und Router Advertisements (RA) (4 Punkte).\nbb) Erläutern Sie das EUI-64-Verfahren zur Generierung der Interface-ID aus der 48-Bit-MAC-Adresse des Sensors (4 Punkte).",
+                        solution: "ba) SLAAC Ablauf:\n1. Sensor sendet eine ICMPv6 Router Solicitation (RS) per Multicast an alle Router (ff02::2).\n2. Der Router antwortet mit einem Router Advertisement (RA, ff02::1), das das globale 64-Bit-Netzwerkpräfix enthält.\n3. Der Sensor kombiniert das Präfix mit seiner 64-Bit Interface-ID und prüft die Eindeutigkeit mittels DAD (Duplicate Address Detection).\nbb) EUI-64 Verfahren:\n1. Die 48-Bit-MAC-Adresse wird in der Mitte geteilt.\n2. In der Mitte wird die 16-Bit-Konstante 0xFFFE eingefügt.\n3. Das Universal/Local-Bit (7. Bit des ersten Bytes) wird invertiert."
+                    },
+                    {
+                        id: "7_2_c",
+                        label: "c) OT- vs. IT-Sicherheit & Purdue-Referenzmodell",
+                        points: 9,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "INDUSTRIESICHERHEIT / PURDUE-MODELL",
+                        text: "Zur Absicherung der Fertigung wird das Netzwerk nach dem Purdue-Modell (IEC 62443) segmentiert.\nErläutern Sie, warum Steuerungsnetzwerke (OT) niemals direkt mit der Unternehmens-IT verbunden werden dürfen, und welche Aufgaben eine industrielle DMZ (IDMZ) übernimmt.",
+                        solution: "OT vs. IT Unterschiede:\n• IT priorisiert Vertraulichkeit (CIA). OT priorisiert strikt Verfügbarkeit, Safety (Leib und Leben) und Echtzeitfähigkeit (Latenz im Millisekundenbereich).\n• Ein Ransomware-Befall der Büro-IT darf niemals physische Maschinenbewegungen manipulieren oder Notabschaltungen lahmlegen.\nAufgaben IDMZ (Industrial DMZ):\n• Vollständige logische und physische Trennung von Level 3 (Operations/MES) und Level 4 (Enterprise/ERP).\n• Es existieren keine direkten gerouteten Verbindungen. Datenaustausch erfolgt ausschließlich über Proxy-Dienste, Bastion Hosts oder Datendioden in der IDMZ."
+                    }
+                ]
+            },
+            {
+                number: 3,
+                title: "3. Aufgabe: Investitions- & Amortisationsrechnung im Rechengitter",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "7_3_a",
+                        label: "a) Statische Amortisationsrechnung im 5-mm-Rechengitter",
+                        points: 8,
+                        type: "math-grid",
+                        gridConfig: { cols: 26, rows: 6 },
+                        stencil: "INVESTITIONSRECHNUNG / AMORTISATIONSZEIT",
+                        text: "Für eine optische KI-Qualitätskontrolle soll eine Inspektionsanlage für 140.000,00 EUR angeschafft werden. Die jährlichen Wartungs- und Softwarekosten betragen 12.000,00 EUR. Durch die Vermeidung von Ausschuss und Reklamationen werden jährlich 52.000,00 EUR eingespart.\nBerechnen Sie im Rechengitter:\n1. Den jährlichen Netto-Rückfluss (Einsparung - Kosten)\n2. Die statische Amortisationszeit in Jahren und Monaten.",
+                        solution: "Rechnung:\n1. Jährlicher Netto-Rückfluss = 52.000 EUR - 12.000 EUR = 40.000 EUR / Jahr.\n2. Amortisationszeit = Anschaffungskosten / jährlicher Rückfluss\n   Amortisationszeit = 140.000 EUR / 40.000 EUR/Jahr = 3,5 Jahre.\n   0,5 Jahre = 6 Monate.\nErgebnis: Die Investition amortisiert sich nach genau 3 Jahren und 6 Monaten."
+                    },
+                    {
+                        id: "7_3_b",
+                        label: "b) Kapitalwertmethode / Dynamische Investitionsrechnung",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 4,
+                        text: "Erläutern Sie den Unterschied zwischen der statischen Amortisationsrechnung und der dynamischen Kapitalwertmethode (Net Present Value - NPV) und warum zukünftige Zahlungsströme abgezinst (diskontiert) werden müssen.",
+                        solution: "Unterschied:\nDie statische Methode vernachlässigt den Zeitwert des Geldes und Zinseszinseffekte; alle Einnahmen werden gleich gewichtet.\nDie dynamische Kapitalwertmethode zinst künftige Einzahlungen mit einem Kalkulationszinssatz auf den Zeitpunkt t=0 ab (Barwert). Grund: Ein Euro heute ist mehr wert als ein Euro in 5 Jahren, da er heute angelegt werden und Zinsen erwirtschaften könnte (Opportunitätskosten und Inflation)."
+                    },
+                    {
+                        id: "7_3_c",
+                        label: "c) Industrial Ethernet: Redundante Ringtopologie (MRP)",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 4,
+                        text: "In der Fabrikation werden Switches im Ring nach dem Media Redundancy Protocol (MRP, IEC 62439-2) verbunden. Erläutern Sie die Aufgaben des Media Redundancy Managers (MRM) und warum Spanning Tree (STP/RSTP) in zeitkritischen Fertigungsumgebungen ungeeignet ist.",
+                        solution: "MRP-Funktionsweise: Der Ring-Manager (MRM) blockiert im Normalbetrieb einen Port, um Loops zu verhindern. Bei Leitungsunterbrechung öffnet der MRM den blockierten Port in unter 10-20 ms (garantierte Umschaltzeit).\nRSTP ungeeignet: Spanning Tree benötigt im Fehlerfall 1 bis 3 Sekunden zur Rekonfiguration. Bei Fertigungslinien mit 10 ms Zykluszeit führt dies zum Not-Stopp der gesamten Anlage."
+                    },
+                    {
+                        id: "7_3_d",
+                        label: "d) Maschinensicherheit & Not-Aus (Safety vs. Security)",
+                        points: 5,
+                        type: "lines",
+                        linesCount: 4,
+                        text: "Unterscheiden Sie im industriellen Umfeld die Begriffe 'Safety' (funktionale Sicherheit) und 'Security' (Informationssicherheit) und erläutern Sie, warum Safety-Funktionen (wie ein NOT-AUS-Taster) über festverdrahtete Sicherheitsrelais oder sichere Feldbusse (z. B. PROFIsafe) geführt werden.",
+                        solution: "Safety: Schutz von Mensch, Gesundheit und Umwelt VOR Fehlfunktionen der Maschine (z. B. Quetschgefahr, Not-Aus).\nSecurity: Schutz der Maschine und Daten VOR Angriffen von außen (z. B. Malware, Spionage).\nSicherheitsrelais/PROFIsafe: Werden redundant (zweikanalig) ausgelegt. Bei Drahtbruch, Kurzschluss oder CPU-Ausfall fällt das System zwingend in den stromlosen, sicheren Zustand zurück (Fail-Safe-Prinzip)."
+                    }
+                ]
+            },
+            {
+                number: 4,
+                title: "4. Aufgabe: Zeitreihendatenbank, SQL & Grenzüberwachungs-Algorithmus",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "7_4_a",
+                        label: "a) Relationales Datenbankmodell für Telemetrie (3NF)",
+                        points: 8,
+                        type: "lines",
+                        linesCount: 6,
+                        stencil: "DATENBANKMODELLIERUNG / ZEITREIHEN",
+                        text: "Modellieren Sie die Tabellen für die Schwingungs- und Temperaturüberwachung in 3NF:\nJede Maschine besitzt mehrere Sensoren unterschiedlicher Messgrößen. Jeder Sensor liefert sekündlich Messwerte mit Zeitstempel. Bei Schwellenwertüberschreitung wird ein Alarm protokolliert.\nGeben Sie die Tabellen an.",
+                        solution: "• tbl_maschine (Maschine_ID [PK], Bezeichnung, Standort_Halle, Baujahr)\n• tbl_sensortyp (Typ_ID [PK], Messgroesse, Einheit, Max_Grenzwert, Min_Grenzwert)\n• tbl_sensor (Sensor_ID [PK], Maschine_ID [FK], Typ_ID [FK], Einbauposition, Kalibrierdatum)\n• tbl_messwert (Messwert_ID [PK], Sensor_ID [FK], Zeitstempel, Messwert_Numerisch)\n• tbl_alarm (Alarm_ID [PK], Sensor_ID [FK], Ausloese_Zeitpunkt, Alarm_Stufe, Quittiert_Von)"
+                    },
+                    {
+                        id: "7_4_b",
+                        label: "b) SQL: Durchschnittswerte & Schwellenwert-Alarme",
+                        points: 8,
+                        type: "lines",
+                        linesCount: 6,
+                        stencil: "SQL-QUERIES / AGGREGATION",
+                        text: "Formulieren Sie SQL-Abfragen:\nba) Ermitteln Sie für Maschine 'M-104' die Durchschnittstemperatur sowie den Höchstwert aller Temperatursensoren im Zeitfenster der letzten 12 Stunden (5 Punkte).\nbb) Selektieren Sie alle Sensoren (Sensor_ID, Maschine_ID), die in den letzten 7 Tagen mehr als 10 unquittierte Alarme erzeugt haben (3 Punkte).",
+                        solution: "ba)\nSELECT s.Sensor_ID, AVG(m.Messwert_Numerisch) AS Durchschnitt_Temp, MAX(m.Messwert_Numerisch) AS Max_Temp\nFROM tbl_sensor s\nJOIN tbl_sensortyp t ON s.Typ_ID = t.Typ_ID\nJOIN tbl_messwert m ON s.Sensor_ID = m.Sensor_ID\nWHERE s.Maschine_ID = 'M-104' \n  AND t.Messgroesse = 'Temperatur'\n  AND m.Zeitstempel >= NOW() - INTERVAL 12 HOUR\nGROUP BY s.Sensor_ID;\n\nbb)\nSELECT s.Sensor_ID, s.Maschine_ID, COUNT(a.Alarm_ID) AS Anzahl_Alarme\nFROM tbl_sensor s\nJOIN tbl_alarm a ON s.Sensor_ID = a.Sensor_ID\nWHERE a.Quittiert_Von IS NULL \n  AND a.Ausloese_Zeitpunkt >= NOW() - INTERVAL 7 DAY\nGROUP BY s.Sensor_ID, s.Maschine_ID\nHAVING Anzahl_Alarme > 10;"
+                    },
+                    {
+                        id: "7_4_c",
+                        label: "c) Struktogramm nach DIN 66261: Überlastungsabschaltung",
+                        points: 9,
+                        type: "lines",
+                        linesCount: 6,
+                        stencil: "STRUKTOGRAMM (DIN 66261) / STEUERUNGSLOGIK",
+                        text: "Entwerfen Sie ein Struktogramm (oder strukturierten Pseudocode) für die Funktion `pruefe_temperatur(aktuelle_temp, grenzwert_warnung, grenzwert_notstopp)`:\n• Liegt die Temperatur unter dem Warnwert, läuft die Maschine im Normalbetrieb (Lüfterstufe 1).\n• Liegt die Temperatur zwischen Warnwert und Notstopp-Wert, wird eine Warnmeldung im Dashboard angezeigt und die Lüfterstufe auf Stufe 2 geschaltet.\n• Erreicht oder überschreitet die Temperatur den Notstopp-Wert, wird die Maschine sofort stromlos geschaltet (Not-Aus), ein optisches Warnsignal aktiviert und ein Eintrag ins Notfallprotokoll geschrieben.",
+                        solution: "Pseudocode:\nIF aktuelle_temp < grenzwert_warnung THEN\n    SET luefter_stufe = 1\n    SET status = 'NORMAL'\nELSE\n    IF aktuelle_temp < grenzwert_notstopp THEN\n        SET luefter_stufe = 2\n        OUTPUT 'WARNUNG: Erhöhte Temperatur an Maschine!'\n        SENDE_DASHBOARD_ALARM('WARNUNG')\n    ELSE\n        SCHALTE_MASCHINE_STROMLOS() // Not-Aus\n        AKTIVIERE_WARNKORONALEUCHTE('ROT')\n        SCHREIBE_NOTFALLPROTOKOLL('NOT-AUS durch Übertemperatur: ' + aktuelle_temp)\n        ALARM_SCHICHTLEITER_SMS()\n    END IF\nEND IF"
+                    }
+                ]
+            }
+        ]
+    },
+
+    // ----------------------------------------------------------------------
+    // PRÜFUNG 8: Medizintechnik & Telematikinfrastruktur
+    // ----------------------------------------------------------------------
+    {
+        id: "exam_8",
+        title: "Prüfung 8: Medizintechnik & Telematikinfrastruktur",
+        badge: "100 Punkte • 90 Min.",
+        subtitle: "Abschlussprüfung Teil 1 • IT-Berufe • MediCare Kliniken Verbund GmbH",
+        ausgangssituation: "Sie unterstützen die IT-Abteilung der MediCare Kliniken Verbund GmbH. Für die Anbindung medizinischer Versorgungszentren (MVZ) an die bundesweite Telematikinfrastruktur (TI) werden Konnektoren eingerichtet, der Schutz von Patientendaten nach Art. 9 DSGVO sichergestellt und bildgebende Diagnosesysteme über VLANs angebunden.",
+        tasks: [
+            {
+                number: 1,
+                title: "1. Aufgabe: Telematikinfrastruktur (TI), eGK & Elektronische Patientenakte",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "8_1_a",
+                        label: "a) Kernkomponenten der Telematikinfrastruktur",
+                        points: 8,
+                        type: "table",
+                        stencil: "GESUNDHEITS-IT / TELEMATIKINFRASTRUKTUR",
+                        text: "Ordnen Sie den Kernkomponenten der Telematikinfrastruktur ihre jeweilige Funktion zu.",
+                        tableConfig: {
+                            headers: ["Komponente", "Bedeutung / Typ", "Aufgabe im System"],
+                            rows: [
+                                ["eHealth-Konnektor", "Sicherheits-Gateway (Hardware/Software)", "Baut ein gesichertes VPN zur Telematikinfrastruktur auf und wickelt Krypto-Operationen ab"],
+                                ["eGK (elektr. Gesundheitskarte)", "Patientenkarte (Smartcard)", "Speichert Stammdaten, Notfalldaten (NFD) und den elektronischen Medikationsplan (eMP)"],
+                                ["SMC-B (Praxisausweis)", "Institutionskarte (Smartcard im Lesegerät)", "Authentifiziert die Klinik/Praxis zweifelsfrei gegenüber der Telematikinfrastruktur"],
+                                ["HBA (Heilberufsausweis)", "Personengebundene Smartcard des Arztes", "Ermöglicht die qualifizierte elektronische Signatur (QES) für e-Rezepte und eAU"]
+                            ]
+                        },
+                        solution: "Konnektor als VPN-Router; SMC-B als Betriebsstättenausweis; HBA als digitaler Arztausweis mit Signaturfunktion (QES); eGK als Patientenkarte."
+                    },
+                    {
+                        id: "8_1_b",
+                        label: "b) KIM (Kommunikation im Medizinwesen) vs. Standard-E-Mail",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 4,
+                        text: "Arztbriefe und Befunde dürfen nicht über unverschlüsselte Standard-E-Mails übertragen werden. Erläutern Sie die Funktionsweise des KIM-Dienstes (Ende-zu-Ende-Verschlüsselung, Adressbuch, QES) und dessen Sicherheitsvorteile.",
+                        solution: "Funktionsweise KIM:\n• Basiert auf Standard-E-Mail-Technologien (SMTP/POP3/IMAP), erzwingt jedoch zwingende Ende-zu-Ende-Verschlüsselung nach S/MIME.\n• Schlüssel stammen direkt aus dem zentralen TI-Verzeichnisdienst (VZD), wodurch Man-in-the-Middle-Angriffe ausgeschlossen sind.\n• Ermöglicht die qualifizierte elektronische Signatur (QES) mit dem HBA, die juristisch der handschriftlichen Unterschrift eines Arztes gleichgestellt ist (§ 126a BGB)."
+                    },
+                    {
+                        id: "8_1_c",
+                        label: "c) Elektronische Patientenakte (ePA) & Patientensouveränität",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 4,
+                        text: "Seit 2025 gilt das 'Opt-out'-Modell für die elektronische Patientenakte (ePA für alle). Erläutern Sie das Prinzip der Patientensouveränität und wie Patienten festlegen können, welche Ärzte auf welche Befunde zugreifen dürfen.",
+                        solution: "Patientensouveränität bedeutet, dass der Patient die vollständige Kontrolle über seine Gesundheitsdaten behält:\n• Kann der ePA jederzeit widersprechen (Opt-out).\n• Kann über eine Smartphone-App oder Ombudsstelle feingranular festlegen, welche Praxis oder welches Krankenhaus welche Dokumente (z. B. Psychotherapiebefunde verbergen) einsehen darf.\n• Jeder Zugriff wird protokolliert und ist für den Patienten transparent nachvollziehbar."
+                    },
+                    {
+                        id: "8_1_d",
+                        label: "d) Störungsbehebung im Praxis-LAN",
+                        points: 5,
+                        type: "lines",
+                        linesCount: 4,
+                        text: "Das eHealth-Kartenterminal kann keine Verbindung zum Konnektor aufbauen. Beschreiben Sie eine strukturierte Fehlersuche (IP-Konfiguration, TLS-Zertifikate, Pairing zwischen Terminal und Konnektor).",
+                        solution: "Fehlersuche:\n1. Physisch & Link: Sichtprüfung Netzwerkkabel und Link-LED am Switch.\n2. IP & Routing: Ping vom Konnektor auf die IP des Kartenterminals zur Prüfung der Netzwerkerreichbarkeit.\n3. Pairing & Zertifikate: Prüfung, ob das Terminal im Konnektor autorisiert ist (Pairing-Schlüssel übereinstimmend) und ob das Zertifikat des Terminals noch gültig ist.\n4. Port-Prüfung: Sicherstellen, dass Port 9812 (SICCT) bzw. 443 in der internen Firewall nicht blockiert wird."
+                    }
+                ]
+            },
+            {
+                number: 2,
+                title: "2. Aufgabe: Medizintechnik-Hardware, USV & DICOM/PACS",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "8_2_a",
+                        label: "a) USV-Notstromdimensionierung im 5-mm-Rechengitter",
+                        points: 8,
+                        type: "math-grid",
+                        gridConfig: { cols: 26, rows: 6 },
+                        stencil: "ELEKTROTECHNIK / OP-NOTSTROMVERSORGUNG",
+                        text: "Die Monitore und Überwachungsgeräte im Aufwachraum verbrauchen eine Wirkleistung von P = 1.200 W bei einem Leistungsfaktor von cos φ = 0,8. Die geplante USV soll bei einem Stromausfall eine Überbrückungszeit von mindestens 20 Minuten bei einem Wirkungsgrad von η = 85 % sicherstellen.\nBerechnen Sie im Rechengitter:\n1. Die erforderliche Mindest-Scheinleistung S (in VA)\n2. Den Energiebedarf der USV-Batterie in Wattstunden (Wh).",
+                        solution: "Berechnung:\n1. Scheinleistung S = P / cos φ = 1.200 W / 0,8 = 1.500 VA (1,5 kVA).\n2. Überbrückungszeit t = 20 min = 20/60 h = 1/3 h ≈ 0,333 h.\n   Nutzenergie am Gerät = 1.200 W * (1/3) h = 400 Wh.\n   Batterieenergie = Nutzenergie / Wirkungsgrad = 400 Wh / 0,85 = 470,59 Wh."
+                    },
+                    {
+                        id: "8_2_b",
+                        label: "b) DICOM-Standard und PACS-Archivierung",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 4,
+                        text: "Röntgen- und MRT-Aufnahmen werden im DICOM-Format in einem PACS-System gespeichert.\naa) Erläutern Sie, welche zwei wesentlichen Bestandteile eine DICOM-Datei enthält (3 Punkte).\nab) Nennen Sie die gesetzliche Aufbewahrungsfrist für Röntgenbilder nach dem Strahlenschutzgesetz (StrlSchG) (3 Punkte).",
+                        solution: "aa) DICOM-Bestandteile:\nEine DICOM-Datei enthält in einer gemeinsamen Datei sowohl die Rohbilddaten (Pixeldaten unkomprimiert oder verlustfrei komprimiert) als auch umfangreiche Metadaten im Header (Patienten-ID, Name, Geburtsdatum, Aufnahmezeitpunkt, Geräteeinstellungen, kV, mA, Schichtdicke).\nab) Aufbewahrungsfrist:\nNach § 85 StrlSchG müssen Röntgenbilder von Erwachsenen mindestens 10 Jahre nach der letzten Untersuchung aufbewahrt werden. Bei Minderjährigen bis zur Vollendung des 28. Lebensjahres (maximal 30 Jahre)."
+                    },
+                    {
+                        id: "8_2_c",
+                        label: "c) Netzwerktrennung im Kliniknetz (VLAN-Segmentierung)",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 4,
+                        text: "Beschreiben Sie, wie medizintechnische Großgeräte (MRT, CT), Verwaltungs-PCs und das öffentliche Patienten-WLAN netzwerktechnisch voneinander isoliert werden müssen, um Ausfälle durch Schadsoftware (z. B. Ransomware) zu verhindern.",
+                        solution: "1. Strikte VLAN-Trennung:\n• VLAN 10: Medizintechnik (MRT/CT/Labor) – isoliert ohne Internetzugriff.\n• VLAN 20: KIS (Krankenhausinformationssystem) & Verwaltungs-PCs.\n• VLAN 30: TI & Konnektor.\n• VLAN 40: Patienten-/Gäste-WLAN.\n2. Firewall-Routing (Micro-Segmentation):\nKein direkter Datenverkehr von VLAN 40 oder 20 ins Medizintechnik-Netz. Zugriffe auf PACS nur über definierte DICOM-Ports (Port 104) mit Source-MAC-Filterung."
+                    },
+                    {
+                        id: "8_2_d",
+                        label: "d) Elektromagnetische Verträglichkeit (EMV) & Galvanische Trennung",
+                        points: 5,
+                        type: "lines",
+                        linesCount: 4,
+                        text: "Im OP-Bereich werden Netzwerkkabel in der Nähe starker Hochfrequenz-Chirurgiegeräte (HF-Skalpelle) verlegt. Erläutern Sie, warum Lichtwellenleiter (LWL) oder Netzwerk-Isolatoren (Galvanische Trennung nach EN 60601-1) eingesetzt werden müssen.",
+                        solution: "Lichtwellenleiter übertragen Daten optisch (Photonen) und sind physikalisch absolut unempfindlich gegenüber elektromagnetischen Störfeldern (keine Induktion von Störströmen).\nNetzwerk-Isolatoren (nach EN 60601-1): Unterbrechen die galvanische Kupferverbindung (Potenzialtrennung bis zu 4 kV) und schützen Patienten und medizinische Geräte vor lebensgefährlichen Berührungsspannungen und Kriechströmen über das Ethernet-Kabel."
+                    }
+                ]
+            },
+            {
+                number: 3,
+                title: "3. Aufgabe: DSGVO Art. 9, IT-Sicherheitsgesetz & NIS-2",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "8_3_a",
+                        label: "a) DSGVO Art. 9: Besondere Kategorien von Daten & § 203 StGB",
+                        points: 8,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "DATENSCHUTZRECHT / ART. 9 DSGVO & KRITIS",
+                        text: "Gesundheitsdaten unterliegen dem strengsten Datenschutzregime.\naa) Erläutern Sie, warum für die Verarbeitung von Patientendaten im Krankenhaus keine formelle schriftliche Einwilligung erforderlich ist, wenn ein Behandlungsvertrag vorliegt (Art. 9 Abs. 2 lit. h DSGVO) (4 Punkte).\nab) Welche strafrechtlichen Konsequenzen drohen IT-Mitarbeitern bei unbefugter Weitergabe von Patientendaten nach § 203 StGB (Verletzung von Privatgeheimnissen)? (4 Punkte).",
+                        solution: "aa) Ausnahme Art. 9 Abs. 2 lit. h DSGVO:\nDie Verarbeitung ist für Zwecke der medizinischen Diagnostik, der Versorgung oder Behandlung im Gesundheitsbereich oder für die Verwaltung von Systemen des Gesundheitswesens zulässig, sofern sie durch medizinisches Fachpersonal erfolgt, das dem Berufsgeheimnis unterliegt. Eine explizite Einwilligung für jeden Behandlungsschritt würde den Krankenhausnotfallbetrieb blockieren.\nab) § 203 StGB:\nFreiheitsstrafe bis zu einem Jahr oder Geldstrafe. Auch IT-Dienstleister und IT-Mitarbeiter im Krankenhaus sind seit der Gesetzesreform vollwertig als 'Berufsgeheimnisträger / mitwirkende Personen' strafrechtlich verpflichtet."
+                    },
+                    {
+                        id: "8_3_b",
+                        label: "b) NIS-2-Richtlinie & KRITIS für Krankenhäuser",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 4,
+                        text: "Krankenhäuser mit mehr als 30.000 vollstationären Fällen pro Jahr gelten in Deutschland als 'Kritische Infrastruktur' (KRITIS) nach dem BSI-KAG.\nNennen Sie zwei gesetzliche Pflichten nach § 8a BSIG (z. B. Meldepflichten, Nachweispflichten).",
+                        solution: "Gesetzliche Pflichten:\n1. Meldepflicht an das BSI: Erhebliche Störungen der IT-Systeme und Sicherheitsvorfälle müssen unverzüglich (Erstmeldung binnen 24 Stunden) an das Bundesamt für Sicherheit in der Informationstechnik gemeldet werden.\n2. Audit- und Nachweispflicht: Alle 2 Jahre muss dem BSI die Einhaltung des 'Stands der Technik' durch Sicherheitsaudits (z. B. nach branchenspezifischem Sicherheitsstandard B3S Medizinische Versorgung) nachgewiesen werden."
+                    },
+                    {
+                        id: "8_3_c",
+                        label: "c) Technische und organisatorische Maßnahmen (TOMs) im Klinikalltag",
+                        points: 6,
+                        type: "table",
+                        stencil: "IT-SICHERHEITSMANAGEMENT / TOMS",
+                        text: "Ordnen Sie die folgenden vier Schutzmaßnahmen der passenden Kontrollart nach Art. 32 DSGVO zu.",
+                        tableConfig: {
+                            headers: ["Maßnahme im Krankenhaus", "Kontrollart nach Art. 32 DSGVO", "Sicherheitsziel"],
+                            rows: [
+                                ["Zugang zu Serverräumen nur mit elektronischem Transponder und Protokollierung", "Zutrittskontrolle", "Verhindert physischen Zugang unbefugter Personen"],
+                                ["Mitarbeiter können in der Patientenakte nur Patienten der eigenen Station einsehen", "Zugriffskontrolle", "Verhindert unbefugtes Lesen, Verändern oder Löschen von Daten"],
+                                ["Automatische Bildschirmsperre nach 2 Minuten Inaktivität auf Stations-PCs", "Benutzer-/Zugangskontrolle", "Verhindert unbefugte Nutzung unbeaufsichtigter Terminals"],
+                                ["Tägliche verschlüsselte Datensicherung auf WORM-Speicher (Immutability)", "Verfügbarkeitskontrolle", "Schützt vor Datenverlust und Ransomware"]
+                            ]
+                        },
+                        solution: "Zutrittskontrolle (physisch); Zugriffskontrolle (logische Berechtigung); Zugangskontrolle (Login/Screensaver); Verfügbarkeitskontrolle (Backup)."
+                    },
+                    {
+                        id: "8_3_d",
+                        label: "d) Notfallbetrieb bei Ransomware-Angriff",
+                        points: 5,
+                        type: "lines",
+                        linesCount: 4,
+                        text: "Nach einem Ransomware-Befall fällt das Krankenhausinformationssystem (KIS) komplett aus. Erläutern Sie das Konzept des 'analogen Notfallbetriebs' (Rückfall auf Papierkurven) und wie IT-Systeme nach der Bereinigung schrittweise wieder hochgefahren werden.",
+                        solution: "Analoger Notfallbetrieb:\nAusgabe vorbereiteter Papier-Notfallmappen (Papier-Patientenkurven, manuelle Rezeptblöcke, Labor-Anforderungsscheine), um den Patientenbetrieb ohne Strom-/Netzwerkabhängigkeit aufrechtzuerhalten.\nWiederanlauf:\n1. Forensische Sicherung und Isolation des Netzes.\n2. Wiederherstellung aus sauberen, geprüften Offline-Backups (zuerst Active Directory, dann DNS/Netzwerk, dann KIS-Datenbank).\n3. Schrittweises Wiederhochfahren Station für Station nach erfolgreichem Integritätstest."
+                    }
+                ]
+            },
+            {
+                number: 4,
+                title: "4. Aufgabe: Patienten- und Fallakten-Datenbank, SQL & Triage-Algorithmus",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "8_4_a",
+                        label: "a) Relationales Klinik-Datenbankschema (3NF)",
+                        points: 9,
+                        type: "lines",
+                        linesCount: 7,
+                        stencil: "DATENBANKMODELLIERUNG / KLINIK-KIS",
+                        text: "Modellieren Sie die Kerntabellen eines Krankenhausinformationssystems (KIS) in 3NF:\nEin Patient hat Stammdaten. Ein Patient kann mehrere stationäre Aufenthalte (Fälle) haben. Jeder Fall ist einer Station zugeordnet. Während eines Falls werden mehrere medizinische Diagnosen (ICD-10-Codes) und Leistungen durch Ärzte erfasst.\nGeben Sie das Schema mit PK und FK an.",
+                        solution: "• tbl_patient (Patienten_ID [PK], Nachname, Vorname, Geburtsdatum, Versichertennummer, Krankenkasse)\n• tbl_station (Station_ID [PK], Stationsname, Fachbereich, Bettenanzahl_Max)\n• tbl_fall (Fall_ID [PK], Patienten_ID [FK], Station_ID [FK], Aufnahme_Datum, Entlass_Datum, Fall_Typ)\n• tbl_diagnose (Diagnose_ID [PK], Fall_ID [FK], ICD10_Code, Diagnose_Text, Diagnose_Datum)\n• tbl_leistung (Leistung_ID [PK], Fall_ID [FK], OPS_Code, Leistungs_Text, Durchfuehrender_Arzt, Kosten_EUR)"
+                    },
+                    {
+                        id: "8_4_b",
+                        label: "b) SQL: Bettenbelegung & Liegedauer-Auswertung",
+                        points: 8,
+                        type: "lines",
+                        linesCount: 6,
+                        stencil: "SQL-QUERIES / BETTENMANAGEMENT",
+                        text: "Formulieren Sie die SQL-Befehle:\nba) Ermitteln Sie für jede Station (Stationsname, Fachbereich) die aktuelle Anzahl belegter Betten (`Entlass_Datum IS NULL`) sowie die freie Bettenkapazität (`Bettenanzahl_Max - belegte Betten`) (5 Punkte).\nbb) Berechnen Sie die durchschnittliche Verweildauer (in Tagen) aller im ersten Quartal 2026 entlassenen Patienten (3 Punkte).",
+                        solution: "ba)\nSELECT s.Stationsname, s.Fachbereich, s.Bettenanzahl_Max,\n       COUNT(f.Fall_ID) AS Belegte_Betten,\n       s.Bettenanzahl_Max - COUNT(f.Fall_ID) AS Freie_Betten\nFROM tbl_station s\nLEFT JOIN tbl_fall f ON s.Station_ID = f.Station_ID AND f.Entlass_Datum IS NULL\nGROUP BY s.Station_ID, s.Stationsname, s.Fachbereich, s.Bettenanzahl_Max;\n\nbb)\nSELECT AVG(DATEDIFF(f.Entlass_Datum, f.Aufnahme_Datum)) AS Durchschnittliche_Liegedauer_Tage\nFROM tbl_fall f\nWHERE f.Entlass_Datum BETWEEN '2026-01-01' AND '2026-03-31';"
+                    },
+                    {
+                        id: "8_4_c",
+                        label: "c) Algorithmus: Manchester-Triage-System (MTS)",
+                        points: 8,
+                        type: "lines",
+                        linesCount: 6,
+                        stencil: "ALGORITHMUS / TRIAGE-EINSTUFUNG",
+                        text: "Entwerfen Sie einen Pseudocode zur Dringlichkeitseinstufung in der Notaufnahme:\n• Parameter: `vital_bedroht` (bool), `schmerz_skala` (1-10), `atemnot` (bool).\n• Stufe 1 (ROT / Sofort): Wenn `vital_bedroht == true`.\n• Stufe 2 (ORANGE / Sehr dringend, max. 10 Min.): Wenn `atemnot == true` oder `schmerz_skala >= 8`.\n• Stufe 3 (GELB / Dringend, max. 30 Min.): Wenn `schmerz_skala >= 5`.\n• Stufe 4 (GRÜN / Normal, max. 90 Min.): In allen übrigen Fällen.\nDie Funktion `ermittle_triage(vital_bedroht, schmerz_skala, atemnot)` gibt die Stufe ('ROT', 'ORANGE', 'GELB', 'GRÜN') zurück.",
+                        solution: "FUNCTION ermittle_triage(vital_bedroht, schmerz_skala, atemnot):\n    IF vital_bedroht == TRUE THEN\n        RETURN 'ROT (Sofortige ärztliche Behandlung)'\n    ELSE IF atemnot == TRUE OR schmerz_skala >= 8 THEN\n        RETURN 'ORANGE (Sehr dringend - max. 10 Minuten)'\n    ELSE IF schmerz_skala >= 5 THEN\n        RETURN 'GELB (Dringend - max. 30 Minuten)'\n    ELSE\n        RETURN 'GRÜN (Normal - max. 90 Minuten)'\n    END IF\nEND FUNCTION"
+                    }
+                ]
+            }
+        ]
     }
+
 ];
 
 // Helper to get all exam sets
