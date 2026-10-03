@@ -1962,6 +1962,1667 @@ var EXAM_SETS = [
             }
         ]
     }
+,
+
+    // ----------------------------------------------------------------------
+    // PRÜFUNG 9: FinTech-Banking & Mobile Payment (FinNova Bank AG)
+    // ----------------------------------------------------------------------
+    {
+        id: "exam_9",
+        title: "Prüfung 9: FinTech-Banking, PSD2 & Mobile Payment",
+        badge: "100 Punkte • 90 Min.",
+        subtitle: "Abschlussprüfung Teil 1 • IT-Berufe • FinNova Bank AG",
+        ausgangssituation: "Sie sind IT-Fachinformatiker bei der FinNova Bank AG, einer innovativen Direktbank mit Fokus auf Mobile Banking und Echtzeit-Zahlungsverkehr. Die Bank modernisiert ihre Kernbankenschnittstellen nach PSD2, implementiert biometrische 2-Faktor-Authentifizierungen und rüstet ihre Rechenzentren auf Hochverfügbarkeit um.",
+        tasks: [
+            {
+                number: 1,
+                title: "1. Aufgabe: PSD2-Schnittstellen, 2-Faktor-Authentifizierung & Zinskalkulation",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "9_1_a",
+                        label: "a) PSD2 (Payment Services Directive 2) & Open Banking",
+                        points: 7,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "BANKENREGULIERUNG / PSD2 & APIS",
+                        text: "Die PSD2 verpflichtet Banken zur Bereitstellung offener Schnittstellen (Open Banking APIs).\naa) Unterscheiden Sie die Rollen eines Kontoinformationsdienstes (KID / AISP) und eines Zahlungsauslösedienstes (ZAD / PISP) (4 Punkte).\nab) Nennen Sie den Grund, warum 'Screen Scraping' unter PSD2 durch gesicherte REST-APIs abgelöst wurde (3 Punkte).",
+                        solution: "aa) Rollen nach PSD2:\n• Kontoinformationsdienst (KID / AISP): Liest Kontodaten (Kontostand, Umsatzhistorie) verschiedener Banken aus und bereitet diese für den Nutzer auf (z. B. Multibanking-Apps). Löst selbst keine Zahlungen aus.\n• Zahlungsauslösedienst (ZAD / PISP): Initiiert im Auftrag des Zahlers Überweisungen direkt vom Bankkonto des Kunden an den Händler (z. B. Sofortüberweisung, giropay), ohne dass eine Kreditkarte erforderlich ist.\nab) Ablösung von Screen Scraping:\nBeim Screen Scraping musste der Kunde seine sensiblen Online-Banking-Zugangsdaten (PIN/Passwort) an Drittanbieter weitergeben. Offizielle REST-APIs nutzen moderne OAuth2/Token-Verfahren, bei denen Passwörter niemals offengelegt werden und Zugriffsrechte granular autorisiert werden."
+                    },
+                    {
+                        id: "9_1_b",
+                        label: "b) Starke Kundenauthentifizierung (SCA / 2FA)",
+                        points: 6,
+                        type: "table",
+                        stencil: "IT-SICHERHEIT / 2-FAKTOR-AUTHENTIFIZIERUNG",
+                        text: "Ordnen Sie die folgenden vier Authentifizierungsmerkmale den drei zulässigen Faktoren (Wissen, Besitz, Inhärenz) nach PSD2 zu.",
+                        tableConfig: {
+                            headers: ["Authentifizierungsmerkmal", "Faktorkategorie (Wissen / Besitz / Inhärenz)", "Begründung"],
+                            rows: [
+                                ["Fingerabdruck-Scan über Smartphone-Sensor", "Inhärenz (Sein)", "Biometrisches Körpereigenmerkmal des Nutzers"],
+                                ["Push-TAN Empfang auf registrierter Banking-App", "Besitz (Haben)", "Bindung an ein physisches, kryptografisch registriertes Endgerät"],
+                                ["Persönliche Online-Banking PIN", "Wissen (Wissen)", "Geheime Information, die nur dem Prüfling bekannt ist"],
+                                ["FIDO2 Hardware-Sicherheitsschlüssel (USB)", "Besitz (Haben)", "Physischer kryptografischer Token im Besitz des Nutzers"]
+                            ]
+                        },
+                        solution: "Fingerabdruck = Inhärenz; Push-TAN-App = Besitz; Online-Banking PIN = Wissen; FIDO2-USB = Besitz."
+                    },
+                    {
+                        id: "9_1_c",
+                        label: "c) Zins- und Tilgungsrechnung im 5-mm-Rechengitter",
+                        points: 8,
+                        type: "math-grid",
+                        gridConfig: { cols: 26, rows: 6 },
+                        stencil: "FINANZMATHEMATIK / EFFEKTIVZINS & KREDIT",
+                        text: "Ein Firmenkunde nimmt zur Anschaffung von Serverhardware einen Ratenkredit über 60.000,00 EUR auf:\n• Zinssatz: 4,5 % p. a. (dekursiv)\n• Laufzeit: 3 Jahre\n• Vereinbarte jährliche Tilgung: Gleichbleibend 20.000,00 EUR zum Jahresende\nBerechnen Sie im Rechengitter für jedes der 3 Jahre den Zinsbetrag, die Gesamtrate (Zins + Tilgung) und den gesamten Zinsaufwand über die Gesamtlaufzeit.",
+                        solution: "Zinsberechnung:\nJahr 1: Restschuld zu Beginn = 60.000 €\n• Zinsen Jahr 1: 60.000 € * 0,045 = 2.700,00 €\n• Annuität / Rate 1: 20.000 € + 2.700 € = 22.700,00 €\n• Restschuld Ende Jahr 1 = 40.000 €\n\nJahr 2: Restschuld = 40.000 €\n• Zinsen Jahr 2: 40.000 € * 0,045 = 1.800,00 €\n• Annuität / Rate 2: 20.000 € + 1.800 € = 21.800,00 €\n• Restschuld Ende Jahr 2 = 20.000 €\n\nJahr 3: Restschuld = 20.000 €\n• Zinsen Jahr 3: 20.000 € * 0,045 = 900,00 €\n• Annuität / Rate 3: 20.000 € + 900 € = 20.900,00 €\n• Restschuld Ende Jahr 3 = 0,00 €\n\nGesamter Zinsaufwand: 2.700 + 1.800 + 900 = 5.400,00 EUR."
+                    },
+                    {
+                        id: "9_1_d",
+                        label: "d) Verbraucherwiderrufsrecht bei Online-Krediten",
+                        points: 4,
+                        type: "lines",
+                        linesCount: 3,
+                        stencil: "WIRTSCHAFTSRECHT / BGB WIDERRUF",
+                        text: "Ein Verbraucher schließt den Kreditvertrag online über das Smartphone ab. Nennen Sie die gesetzliche Widerrufsfrist nach § 495 i. V. m. § 355 BGB und die Voraussetzung für deren Beginn.",
+                        solution: "Gesetzliche Widerrufsfrist: 14 Tage.\nVoraussetzung für Fristbeginn: Erhalt einer ordnungsgemäßen, deutlichen Widerrufsbelehrung sowie sämtlicher gesetzlicher Pflichtangaben nach § 492 Abs. 2 BGB auf einem dauerhaften Datenträger."
+                    }
+                ]
+            },
+            {
+                number: 2,
+                title: "2. Aufgabe: Hochverfügbarkeit, SAN-Storage & Ausfallmetriken",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "9_2_a",
+                        label: "a) SAN-Technologien: Fibre Channel vs. iSCSI",
+                        points: 7,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "STORAGE-SYSTEME / SAN & PROTOKOLLE",
+                        text: "Für das Kernbankensystem wird ein dediziertes Storage Area Network (SAN) aufgebaut.\naa) Erläutern Sie zwei technische Vorzüge von Fibre Channel (FC) gegenüber herkömmlichem iSCSI über Gigabit-Ethernet (4 Punkte).\nab) Nennen Sie die Funktion von 'Multipathing' bei SAN-Hostbusadaptern (HBA) (3 Punkte).",
+                        solution: "aa) Vorteile Fibre Channel:\n1. Deterministische Übertragung mit extrem geringer Latenz und verlustfreiem Protokollfluss (Lossless Flow Control per Buffer Credits).\n2. Keine TCP/IP-Protokoll-Overheads, Entlastung der Server-CPUs durch hardwarebeschleunigte HBAs.\nab) Multipathing:\nMultipathing etabliert mehrere physische redundante Pfade zwischen Host (Server) und Storage-Controller. Bei Ausfall eines Kabels, Switches oder HBA-Ports schaltet der I/O-Treiber verzögerungsfrei auf den Alternativpfad um (Failover) und verteilt die Last im Normalbetrieb (Load Balancing)."
+                    },
+                    {
+                        id: "9_2_b",
+                        label: "b) Hochverfügbarkeits-Berechnung ('Five Nines')",
+                        points: 8,
+                        type: "lines",
+                        linesCount: 6,
+                        stencil: "SLA / HOCHVERFÜGBARKEIT & DOWNTIME",
+                        text: "Die Bank vereinbart für das Online-Banking eine garantierte Verfügbarkeit von 99,99 % (Vier Neunen), für den Zahlungsverkehrstransit 99,999 % (Fünf Neunen).\nBerechnen Sie jeweils die maximal zulässige Ausfallzeit pro Nicht-Schaltjahr (365 Tage = 8.760 Stunden) in Minuten und Sekunden.",
+                        solution: "Jahresstunden = 365 * 24 = 8.760 Stunden = 525.600 Minuten.\n\n1. Bei 99,99 % Verfügbarkeit:\n• Zulässige Ausfallquote = 0,01 %\n• Maximale Downtime = 525.600 Min * 0,0001 = 52,56 Minuten (= 52 Min 33,6 Sek).\n\n2. Bei 99,999 % Verfügbarkeit:\n• Zulässige Ausfallquote = 0,001 %\n• Maximale Downtime = 525.600 Min * 0,00001 = 5,256 Minuten (= 5 Min 15,4 Sek)."
+                    },
+                    {
+                        id: "9_2_c",
+                        label: "c) Ausfallmetriken: MTBF, MTTR & Availability",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 4,
+                        stencil: "QUALITÄTSMANAGEMENT / MTBF & MTTR",
+                        text: "Definieren Sie die Kennzahlen MTBF (Mean Time Between Failures) und MTTR (Mean Time to Repair) und geben Sie die mathematische Formel zur Berechnung der Verfügbarkeit (A) an.",
+                        solution: "• MTBF: Mittlere Betriebsdauer zwischen zwei aufeinanderfolgenden Systemausfällen (Zuverlässigkeit).\n• MTTR: Mittlere Dauer zur Fehlerbehebung und Wiederherstellung des Normalbetriebs (Reparierbarkeit).\n• Formel Verfügbarkeit: A = MTBF / (MTBF + MTTR)."
+                    },
+                    {
+                        id: "9_2_d",
+                        label: "d) Active/Active- vs. Active/Passive-Cluster",
+                        points: 4,
+                        type: "lines",
+                        linesCount: 3,
+                        stencil: "SERVERCLUSTER / FAILOVER-STRATEGIEN",
+                        text: "Vergleichen Sie Active/Active- und Active/Passive-Cluster hinsichtlich Ressourcenauslastung und Ausfallverhalten.",
+                        solution: "• Active/Active: Beide Nodes verarbeiten zeitgleich produktive Anfragen (optimale Auslastung). Fällt ein Node aus, übernimmt der verbleibende die Last (Performance sinkt ggf. auf 50 %).\n• Active/Passive: Nur der primäre Node arbeitet, der Standby-Node läuft leer mit. Beim Ausfall muss erst umgeschaltet werden (Failover-Verzögerung), aber volle Kapazität bleibt erhalten."
+                    }
+                ]
+            },
+            {
+                number: 3,
+                title: "3. Aufgabe: IT-Sicherheit nach BAIT, Zero-Trust & Man-in-the-Middle",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "9_3_a",
+                        label: "a) BAIT (Bankaufsichtliche Anforderungen an die IT)",
+                        points: 7,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "COMPLIANCE / BAFIN & BAIT",
+                        text: "Die Bundesanstalt für Finanzdienstleistungsaufsicht (BaFin) regelt die IT-Sicherheit von Banken über die BAIT.\naa) Erläutern Sie das geforderte 'Need-to-know'- und 'Least-Privilege'-Prinzip bei der Benutzerberechtigungsvergabe (4 Punkte).\nab) Nennen Sie zwei Pflichten bei Auslagerungen (IT-Outsourcing an Cloud-Provider) nach § 25b KWG (3 Punkte).",
+                        solution: "aa) Berechtigungsprinzipien:\n• Least Privilege: Benutzer erhalten ausschließlich die minimal notwendigen Rechte, die zwingend zur Erfüllung ihrer Arbeitsaufgaben erforderlich sind.\n• Need-to-know: Zugriff auf sensible Kundendaten erhält nur, wer ein sachlich begründetes dienstliches Erfordernis hat (kein anlassloser Datenzugriff).\nab) Pflichten bei IT-Outsourcing (§ 25b KWG):\n1. Umfassende Risikoanalyse und Eignungsprüfung des Dienstleisters vor Vertragsschluss.\n2. Uneingeschränkte Informations-, Audit- und Prüfungsrechte der Bank und der BaFin beim Dienstleister."
+                    },
+                    {
+                        id: "9_3_b",
+                        label: "b) Zero-Trust-Architektur im Bankennetz",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 4,
+                        stencil: "NETZWERKSICHERHEIT / ZERO TRUST",
+                        text: "Die Bank wechselt vom klassischen Perimeter-Sicherheitsmodell ('harte Schale, weicher Kern') zu einer Zero-Trust-Architektur.\nErläutern Sie das Kernprinzip 'Never trust, always verify' anhand von zwei konkreten Schutzmaßnahmen.",
+                        solution: "Kernprinzip 'Never trust, always verify':\nEs wird keinem Gerät, Nutzer oder Dienst automatisch vertraut – auch nicht innerhalb des internen Firmennetzes. Jede einzelne Anfrage muss authentifiziert, autorisiert und verschlüsselt sein.\nKonkrete Maßnahmen:\n1. Mikrosegmentierung des Netzes (jeder Service/jede Datenbank befindet sich in einer isolierten Zone mit individueller Firewall-Regelung).\n2. Kontinuierliche Verifikation: Dynamische Zugriffskontrolle unter Einbeziehung von Gerätestatus (Health-Check, Patch-Stand) und Verhaltensanalyse (Anomalieerkennung)."
+                    },
+                    {
+                        id: "9_3_c",
+                        label: "c) Man-in-the-Middle (MitM) & SSL-Pinning",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 4,
+                        stencil: "KRYPTOGRAFIE / CERTIFICATE PINNING",
+                        text: "Angreifer versuchen, den Datenverkehr zwischen der Mobile-Banking-App und den Bankservern abzufangen.\naa) Beschreiben Sie das Angriffsszenario eines Man-in-the-Middle-Angriffs über ein bösartiges öffentliches WLAN (3 Punkte).\nab) Erläutern Sie, wie 'Certificate Pinning' (SSL-Pinning) in der Banking-App diesen Angriff verhindert (3 Punkte).",
+                        solution: "aa) MitM-Angriff im WLAN:\nDer Angreifer manipuliert den Datenstrom (z. B. durch ARP-Spoofing oder DNS-Spoofing) und schaltet sich als Vermittler zwischen Smartphone und Server. Mit einem gefälschten Zertifikat versucht er, die TLS-Verschlüsselung aufzubrechen und Zugangsdaten im Klartext mitzulesen.\nab) Schutz durch Certificate Pinning:\nIn der App wird der kryptografische Fingerabdruck (Public Key oder Hash) des echten Bankzertifikats fest einprogrammiert ('gepinnt'). Präsentiert ein gefälschtes TLS-Zertifikat im WLAN eine andere Signatur, bricht die App die Verbindung sofort ab – selbst wenn das bösartige Zertifikat im Betriebssystem als vertrauenswürdig hinterlegt wurde."
+                    },
+                    {
+                        id: "9_3_d",
+                        label: "d) Schutz vor Phishing & Social Engineering",
+                        points: 6,
+                        type: "table",
+                        stencil: "AWARENESS / ANGRIFFSMETHODEN & ABWEHR",
+                        text: "Ordnen Sie die Angriffsarten der passenden Definition und Schutzmaßnahme zu.",
+                        tableConfig: {
+                            headers: ["Angriffsmethode", "Definition", "Effektive Abwehrmaßnahme"],
+                            rows: [
+                                ["CEO Fraud (Chef-Masche)", "Kriminelle geben sich als Vorstand aus und fordern Mitarbeiter zu eiligen Eilüberweisungen auf", "Strikte Einhaltung des Vier-Augen-Prinzips und telefonische Rückversicherung"],
+                                ["Spear-Phishing", "Gezielte, personalisierte E-Mails an Administratoren mit schadhaftem Anhang", "E-Mail-Sandbox, Signaturprüfung und regelmäßige Awareness-Schulungen"],
+                                ["Vishing (Voice Phishing)", "Telefonanrufe angeblicher IT-Techniker zur Abfrage von Passwörtern oder TANs", "Grundsätzliches Verbot der telefonischen Herausgabe von Zugangsdaten"]
+                            ]
+                        },
+                        solution: "CEO Fraud: Vorstandsvortäuschung -> Vier-Augen-Prinzip; Spear-Phishing: zielgerichtete Mail -> Sandbox & Schulung; Vishing: Telefonbetrug -> Weitergabeverbot."
+                    }
+                ]
+            },
+            {
+                number: 4,
+                title: "4. Aufgabe: Kernbanken-Datenbank (3NF), SQL & IBAN-Prüfziffern-Algorithmus",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "9_4_a",
+                        label: "a) Relationales Banken-Datenbankschema (3NF)",
+                        points: 8,
+                        type: "lines",
+                        linesCount: 6,
+                        stencil: "DATENBANKMODELLIERUNG / KERNBANKENSYSTEM",
+                        text: "Modellieren Sie die Kerntabellen eines Bankensystems in 3NF:\nEin Kunde besitzt Stammdaten. Ein Kunde kann mehrere Konten führen. Jedes Konto hat eine eindeutige IBAN, einen Kontotyp und einen Saldo. Zu jedem Konto werden Transaktionen (Buchungen) erfasst mit Buchungs-ID, Absender-IBAN, Empfänger-IBAN, Betrag, Zeitstempel und Verwendungszweck.\nGeben Sie das Schema mit PK und FK an.",
+                        solution: "• tbl_kunde (Kunden_ID [PK], Nachname, Vorname, Geburtsdatum, Strasse, PLZ, Ort, Identifikationsstatus)\n• tbl_konto (IBAN [PK], Kunden_ID [FK], Kontotyp, Waehrung, Saldo_EUR, Dispolimit, Eroeffnungsdatum)\n• tbl_transaktion (Transaktions_ID [PK], Quell_IBAN [FK], Ziel_IBAN, Betrag_EUR, Buchungsdatum, Wertstellung, Verwendungszweck, Status)"
+                    },
+                    {
+                        id: "9_4_b",
+                        label: "b) SQL-Analysen: Geldwäsche-Prüfung nach GwG",
+                        points: 8,
+                        type: "lines",
+                        linesCount: 6,
+                        stencil: "SQL-QUERIES / COMPLIANCE & GWG",
+                        text: "Formulieren Sie die SQL-Statements:\nba) Ermitteln Sie alle Kunden (Kunden_ID, Nachname, Vorname) und deren Transaktionen, bei denen eine Einzelüberweisung 10.000,00 EUR überschreitet (`Betrag_EUR >= 10000`), sortiert nach Betrag absteigend (5 Punkte).\nbb) Berechnen Sie die Summe aller Einzahlungen und Auszahlungen je Konto für den Monat Februar 2026 (3 Punkte).",
+                        solution: "ba)\nSELECT k.Kunden_ID, k.Nachname, k.Vorname, t.Transaktions_ID, t.Quell_IBAN, t.Ziel_IBAN, t.Betrag_EUR, t.Buchungsdatum\nFROM tbl_kunde k\nJOIN tbl_konto ko ON k.Kunden_ID = ko.Kunden_ID\nJOIN tbl_transaktion t ON ko.IBAN = t.Quell_IBAN\nWHERE t.Betrag_EUR >= 10000.00\nORDER BY t.Betrag_EUR DESC;\n\nbb)\nSELECT ko.IBAN, SUM(t.Betrag_EUR) AS Gesamtvolumen_EUR, COUNT(t.Transaktions_ID) AS Anzahl_Transaktionen\nFROM tbl_konto ko\nJOIN tbl_transaktion t ON ko.IBAN = t.Quell_IBAN\nWHERE t.Buchungsdatum BETWEEN '2026-02-01 00:00:00' AND '2026-02-28 23:59:59'\nGROUP BY ko.IBAN;"
+                    },
+                    {
+                        id: "9_4_c",
+                        label: "c) Algorithmus: IBAN-Prüfziffernvalidierung nach ISO 7064 (MOD 97-10)",
+                        points: 9,
+                        type: "lines",
+                        linesCount: 7,
+                        stencil: "ALGORITHMEN / ISO 7064 MODULO-97",
+                        text: "Beschreiben Sie den mathematischen Prüfalgorithmus nach ISO 7064 zur Validierung einer 22-stelligen deutschen IBAN (DE pp bbbb bbbb kkkk kkkk kk) und erstellen Sie den Pseudocode für die Funktion `pruefe_iban(iban)`:\n1. Verschiebung der ersten 4 Zeichen ans Ende.\n2. Ersetzung von Buchstaben durch Ziffern (A=10 .. Z=35).\n3. Berechnung des Rests bei Division durch 97 (muss genau 1 ergeben).",
+                        solution: "Ablauf:\n1. Verschiebe Länderkennung und Prüfziffer ans Ende (z. B. 'DE21' -> '...DE21').\n2. Ersetze 'D' durch '13' und 'E' durch '14'.\n3. Berechne BigInteger(iban_ziffern) MOD 97. Ist das Ergebnis 1, ist die IBAN formal gültig.\n\nPseudocode:\nFUNCTION pruefe_iban(iban_str):\n    iban_clean = REMOVE_SPACES(UPPERCASE(iban_str))\n    IF LENGTH(iban_clean) != 22 THEN RETURN FALSE\n    \n    // 1. Erste 4 Zeichen ans Ende stellen\n    umgestellt = SUBSTRING(iban_clean, 4) + SUBSTRING(iban_clean, 0, 4)\n    \n    // 2. Buchstaben in Ziffern umwandeln\n    ziffern_str = ''\n    FOR EACH zeichen IN umgestellt:\n        IF IS_DIGIT(zeichen) THEN\n            ziffern_str = ziffern_str + zeichen\n        ELSE\n            ziffern_str = ziffern_str + STRING(ASCII(zeichen) - 55) // A -> 65-55 = 10\n        END IF\n    END FOR\n    \n    // 3. Modulo 97 berechnen\n    rest = BIG_INT_MOD(ziffern_str, 97)\n    RETURN (rest == 1)\nEND FUNCTION"
+                    }
+                ]
+            }
+        ]
+    },
+
+    // ----------------------------------------------------------------------
+    // PRÜFUNG 10: Automobil-Zulieferer & Automotive Ethernet (VeloDrive SE)
+    // ----------------------------------------------------------------------
+    {
+        id: "exam_10",
+        title: "Prüfung 10: Automotive Ethernet, Sensorik & Industrielle Fertigung",
+        badge: "100 Punkte • 90 Min.",
+        subtitle: "Abschlussprüfung Teil 1 • IT-Berufe • VeloDrive Automotive SE",
+        ausgangssituation: "Sie arbeiten in der Entwicklungs-IT der VeloDrive Automotive SE. Das Unternehmen fertigt LiDAR-, Radar- und Kamerasysteme für autonomes Fahren. Für die neue Fahrzeuggeneration wird das Bordnetz von klassischen Feldbussen auf hochperformantes Automotive Ethernet umgestellt und strenge funktionale Sicherheitsanforderungen nach ISO 26262 und TISAX umgesetzt.",
+        tasks: [
+            {
+                number: 1,
+                title: "1. Aufgabe: Automotive Ethernet, CAN-Bus & Break-Even-Kalkulation",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "10_1_a",
+                        label: "a) Automotive Ethernet (100BASE-T1) vs. CAN-FD",
+                        points: 7,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "AUTOMOTIVE NETWORKS / BROADR-REACH",
+                        text: "Für Fahrerassistenzsysteme reicht die Bandbreite des CAN-Bus nicht mehr aus.\naa) Erläutern Sie zwei physikalische Besonderheiten von 100BASE-T1 (Single Twisted Pair Ethernet) im Kfz (4 Punkte).\nab) Nennen Sie die maximale Nutzdatenrate von CAN-FD im Vergleich zu 100BASE-T1 (3 Punkte).",
+                        solution: "aa) Besonderheiten 100BASE-T1:\n1. Unshielded Single Twisted Pair (UTP): Verwendet nur ein einziges verdrilltes Kupferaderpaar für Vollduplex (spart Gewicht und Kosten im Kabelbaum).\n2. Spezielle PAM-3 Signalmodulation zur Einhaltung strenger automobiler EMV-Grenzwerte (Elektromagnetische Verträglichkeit) gegen Funkstörungen.\nab) Bandbreitenvergleich:\n• CAN-FD: Bis zu 5 bis maximal 8 Mbit/s (Nutzdatenfeld bis 64 Byte).\n• 100BASE-T1: 100 Mbit/s Vollduplex (faktor > 12 höher, ideal für unkomprimierte Sensordaten)."
+                    },
+                    {
+                        id: "10_1_b",
+                        label: "b) Funktionale Sicherheit nach ISO 26262 (ASIL)",
+                        points: 6,
+                        type: "table",
+                        stencil: "SICHERHEITSNORMEN / ISO 26262 ASIL",
+                        text: "Ordnen Sie die drei Risikoparameter zur Bestimmung des ASIL-Levels (Automotive Safety Integrity Level A bis D) ihrer Bedeutung zu.",
+                        tableConfig: {
+                            headers: ["Parameter", "Kürzel", "Bedeutung im automobilen Umfeld"],
+                            rows: [
+                                ["Schadensausmaß (Severity)", "S (S0 bis S3)", "Schwere möglicher Verletzungen für Insassen oder Passanten"],
+                                ["Expositionswahrscheinlichkeit", "E (E0 bis E4)", "Häufigkeit der Fahrsituation, in der die Gefahr auftritt"],
+                                ["Beherrschbarkeit (Controllability)", "C (C0 bis C3)", "Fähigkeit des Fahrers, die Gefahrensituation rechtzeitig abzuwenden"]
+                            ]
+                        },
+                        solution: "Severity (S) = Verletzungsschwere; Exposure (E) = Häufigkeit; Controllability (C) = Beherrschbarkeit durch Fahrer."
+                    },
+                    {
+                        id: "10_1_c",
+                        label: "c) Break-Even-Analyse (Gewinnschwelle) im 5-mm-Rechengitter",
+                        points: 8,
+                        type: "math-grid",
+                        gridConfig: { cols: 26, rows: 6 },
+                        stencil: "KOSTENRECHNUNG / BREAK-EVEN-ANALYSE",
+                        text: "Für eine neue SMD-Bestückungslinie für Radarsensoren fallen an:\n• Fixkosten pro Jahr: 480.000,00 EUR\n• Variable Kosten pro Sensor: 35,00 EUR\n• Geplanter Nettoverkaufspreis pro Sensor: 75,00 EUR\nBerechnen Sie im Rechengitter:\n1. Den Deckungsbeitrag pro Stück (db).\n2. Die Gewinnschwellenmenge (Break-Even-Point x_BEP in Stück).\n3. Den Mindest-Jahresumsatz an der Gewinnschwelle.",
+                        solution: "Rechenweg:\n1. Deckungsbeitrag pro Stück:\n   db = p - kv = 75,00 € - 35,00 € = 40,00 EUR/Stück\n\n2. Break-Even-Menge (Gewinnschwelle):\n   x_BEP = K_fix / db = 480.000 € / 40,00 € = 12.000 Stück\n\n3. Break-Even-Umsatz:\n   U_BEP = x_BEP * p = 12.000 * 75,00 € = 900.000,00 EUR."
+                    },
+                    {
+                        id: "10_1_d",
+                        label: "d) Just-in-Time (JIT) vs. Just-in-Sequence (JIS)",
+                        points: 4,
+                        type: "lines",
+                        linesCount: 3,
+                        stencil: "FERTIGUNGSLOGISTIK / JIT & JIS",
+                        text: "Erklären Sie den Unterschied zwischen Just-in-Time (JIT) und Just-in-Sequence (JIS) bei der Anlieferung von Baugruppen ans Montageband.",
+                        solution: "• JIT: Bauteile werden genau zu dem Zeitpunkt ans Band geliefert, an dem sie montiert werden (reduziert Lagerkosten).\n• JIS: Bauteile werden nicht nur pünktlich geliefert, sondern zusätzlich exakt in der Reihenfolge (Sequenz) vorsortiert auf Trägern angeliefert, in der die Fahrzeuge das Band durchlaufen (z. B. fahrzeugspezifische Kabelsätze nach Wagenfarbe/Ausstattung)."
+                    }
+                ]
+            },
+            {
+                number: 2,
+                title: "2. Aufgabe: Switch-Redundanz (RSTP), Latenz & TSN (Time-Sensitive Networking)",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "10_2_a",
+                        label: "a) Time-Sensitive Networking (TSN / IEEE 802.1Qbv)",
+                        points: 7,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "TSN / ECHTZEIT-ETHERNET",
+                        text: "Klassisches Ethernet ist nicht deterministisch.\naa) Erläutern Sie, warum 'Best-Effort'-Ethernet für sicherheitskritische Steuerungssignale (Drive-by-Wire) ungeeignet ist (3 Punkte).\nab) Beschreiben Sie das Funktionsprinzip des Time-Aware Shapers (TAS / IEEE 802.1Qbv) bei TSN (4 Punkte).",
+                        solution: "aa) Unzulänglichkeit von Best-Effort:\nKlassisches Ethernet garantiert keine festen Zustellzeiten (Latenzen) und keinen jitterfreien Durchsatz. Bei hohem Netzwerktraffic können Frames in Switch-Puffern verworfen oder unvorhersehbar verzögert werden, was bei Lenk- oder Bremsbefehlen zu Unfällen führen würde.\nab) Funktionsprinzip Time-Aware Shaper (IEEE 802.1Qbv):\nDer Datenverkehr wird in zyklische Zeitschlitze (Time Slots) unterteilt. Sicherheitskritische Steuerframes erhalten exklusive Zeitschlitze, in denen alle anderen Puffer-Warteschlangen blockiert werden. Dadurch wird eine garantierte, deterministische Zustellung mit Latenzen im Mikrosekundenbereich gewährleistet."
+                    },
+                    {
+                        id: "10_2_b",
+                        label: "b) Rapid Spanning Tree Protocol (RSTP / IEEE 802.1w)",
+                        points: 7,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "NETZWERKTOPOLOGIE / RSTP REDUNDANZ",
+                        text: "In der Fabrikhalle sind Switches in einer redundanten Ringtopologie verbunden.\naa) Welche Gefahr droht bei redundanten Verbindungen ohne STP/RSTP? (3 Punkte)\nab) Nennen Sie drei Port-Rollen von RSTP (4 Punkte).",
+                        solution: "aa) Gefahr: Broadcast-Storm (Netzwerkschleife / Loop). Broadcast-Frames kreisen endlos im Ring, verstopfen die Bandbreite und führen zur Blockade aller Switches und zum Zusammenbruch des Netzes.\nab) RSTP Port-Rollen:\n1. Root Port (bester Pfad zur Root Bridge)\n2. Designated Port (weiterleitender Port für das jeweilige LAN-Segment)\n3. Alternate / Backup Port (blockierter Ersatzpfad, der bei Link-Ausfall sofort aktiv wird)."
+                    },
+                    {
+                        id: "10_2_c",
+                        label: "c) Bandbreitenberechnung für 4 LiDAR-Sensoren",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 4,
+                        stencil: "DATENRATE / SENSORFUSION",
+                        text: "Ein Fahrzeug besitzt 4 hochauflösende LiDAR-Sensoren. Jeder Sensor erzeugt 1,5 Millionen 3D-Messpunkte pro Sekunde. Jeder Punkt besteht aus X, Y, Z (je 32-Bit Float) und Reflexionswert (8-Bit Integer).\nBerechnen Sie den erforderlichen Netto-Datenstrom aller 4 Sensoren in Mbit/s (Megabit pro Sekunde).",
+                        solution: "Berechnung:\n• Bytes pro Messpunkt: (3 * 4 Byte) + 1 Byte = 13 Byte = 104 Bit.\n• Datenrate 1 Sensor: 1.500.000 Punkte/s * 104 Bit = 156.000.000 Bit/s = 156 Mbit/s.\n• Gesamtdatenrate für 4 Sensoren: 4 * 156 Mbit/s = 624 Mbit/s."
+                    },
+                    {
+                        id: "10_2_d",
+                        label: "d) Glasfaser-Optik (POF - Polymer Optical Fiber) im Kfz",
+                        points: 5,
+                        type: "lines",
+                        linesCount: 3,
+                        stencil: "PHYSIKALISCHE MEDIEN / POF",
+                        text: "Nennen Sie zwei entscheidende Vorteile von optischen Polymerfasern (POF) gegenüber Kupferleitungen im Automobilbau.",
+                        solution: "1. Vollständige Unempfindlichkeit gegenüber elektromagnetischen Störfeldern (EMV-Festigkeit z. B. neben Hochvoltkabeln von Elektroantrieben).\n2. Deutliche Gewichtseinsparung und Vermeidung von Erdschleifen (Potentialtrennung)."
+                    }
+                ]
+            },
+            {
+                number: 3,
+                title: "3. Aufgabe: TISAX-Zertifizierung, OTA-Updates & Cyber Security nach ISO 21434",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "10_3_a",
+                        label: "a) TISAX (Trusted Information Security Assessment Exchange)",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 4,
+                        stencil: "AUTOMOTIVE COMPLIANCE / TISAX",
+                        text: "Als Zulieferer muss VeloDrive ein TISAX-Label auf Assessment Level 3 (Sehr hoher Schutzbedarf) vorweisen.\naa) Auf welchem internationalen Sicherheitsstandard basiert der VDA-ISA-Fragenkatalog? (2 Punkte)\nab) Nennen Sie zwei typische Prüfbereiche bei TISAX (z. B. Prototypenschutz) (4 Punkte).",
+                        solution: "aa) Basisnorm: ISO/IEC 27001 (Informationssicherheits-Managementsystem ISMS).\nab) Typische TISAX-Prüfbereiche:\n1. Prototypenschutz (physischer und organisatorischer Schutz vor Wirtschaftsspionage bei ungetarnten Erprobungsträgern und CAD-Modellen).\n2. Anbindung Dritter / Lieferantenmanagement und Datenschutz im Entwicklungsnetz."
+                    },
+                    {
+                        id: "10_3_b",
+                        label: "b) Over-the-Air (OTA) Firmware-Updates nach UNECE R156",
+                        points: 7,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "SOFTWARE-MANAGEMENT / UNECE R156",
+                        text: "Steuergeräte im Fahrzeug erhalten Sicherheitsupdates 'Over-the-Air'.\naa) Nennen Sie zwei kryptografische Mechanismen, mit denen die Integrität und Authentizität eines Firmware-Pakets vor dem Flashen geprüft wird (4 Punkte).\nab) Erläutern Sie das 'A/B-Partitionierungs'-Konzept (Dual-Boot) bei Steuergeräten (3 Punkte).",
+                        solution: "aa) Schutzmechanismen:\n1. Asymmetrische digitale Signatur (z. B. ECDSA mit sicher im Hardware Security Module / HSM abgelegtem Public Key).\n2. Kryptografischer Hashwert (z. B. SHA-256 / SHA-512) zur Integritätsprüfung.\nab) A/B-Partitionierung:\nDas Steuergerät besitzt zwei getrennte Speicherbereiche. Während Partition A das laufende System ausführt, wird das Update im Hintergrund auf Partition B installiert und verifiziert. Schlägt das Update fehl, bleibt Partition A unverändert aktiv (automatischer Rollback, verhindert 'bricking')."
+                    },
+                    {
+                        id: "10_3_c",
+                        label: "c) Bedrohungsanalyse (TARA) nach ISO/SAE 21434",
+                        points: 6,
+                        type: "table",
+                        stencil: "CYBERSECURITY / ISO 21434 TARA",
+                        text: "Ordnen Sie die Bedrohungsszenarien der passenden Schutzmaßnahme im Fahrzeug zu.",
+                        tableConfig: {
+                            headers: ["Angriffsvektor", "Mögliche Auswirkung", "Gegenmaßnahme"],
+                            rows: [
+                                ["Unberechtigter Zugriff über OBD-II Diagnosebuchse", "Einspielen modifizierter Steuergerätesoftware", "Secure Gateway (SGW) mit Challenge-Response-Authentifizierung"],
+                                ["Replay-Attacke auf Funkschlüssel (Keyless Go)", "Unbefugtes Entriegeln und Starten des Fahrzeugs", "Rolling Codes und Ultra-Wideband (UWB) Time-of-Flight Distanzmessung"],
+                                ["Einschleusen gefälschter Sensordaten ins Bordnetz", "Fehlauslösung von Notbrems- oder Lenkassistenten", "SecOC (Secure Onboard Communication / CMAC Authentifizierung)"]
+                            ]
+                        },
+                        solution: "OBD-II -> Secure Gateway; Keyless Go Replay -> UWB ToF / Rolling Code; Gefälschte Sensordaten -> SecOC mit CMAC."
+                    },
+                    {
+                        id: "10_3_d",
+                        label: "d) Hardware Security Module (HSM) im Kfz-Mikrocontroller",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 4,
+                        stencil: "HARDWARE-SICHERHEIT / HSM & SECURE BOOT",
+                        text: "Moderne Automotive-Mikrocontroller verfügen über ein isoliertes Hardware Security Module (HSM). Beschreiben Sie die Rolle des HSM beim 'Secure Boot' des Motorsteuergeräts.",
+                        solution: "Das HSM besitzt einen eigenen geschützten Prozessorkern und manipulationssicheren Schlüsselspeicher. Beim Einschalten des Steuergeräts startet zuerst das HSM und überprüft die digitale Signatur des Bootloaders und der Firmware, bevor der Hauptprozessor freigegeben wird. Wurde der Code manipuliert, verweigert das Steuergerät den Start."
+                    }
+                ]
+            },
+            {
+                number: 4,
+                title: "4. Aufgabe: Telemetrie-Datenbank (3NF), SQL & Notbrems-Algorithmus",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "10_4_a",
+                        label: "a) Relationales Telemetrie-Datenbankschema (3NF)",
+                        points: 8,
+                        type: "lines",
+                        linesCount: 6,
+                        stencil: "DATENBANKMODELLIERUNG / VEHICLE TELEMETRY",
+                        text: "Modellieren Sie die Kerntabellen für ein Entwicklungs-Telemetriesystem in 3NF:\nEin Erprobungsfahrzeug hat eine FIN (Fahrzeug-Identifizierungsnummer), Modellbezeichnung und Softwarestand. In jedem Fahrzeug sind mehrere Steuergeräte (ECU) verbaut. Während Testfahrten werden Diagnosefehlercodes (DTC nach ISO 15031) mit Zeitstempel, Umgebungsdaten (Geschwindigkeit, Außentemperatur) und Schweregrad protokolliert.\nGeben Sie das Schema mit PK und FK an.",
+                        solution: "• tbl_fahrzeug (FIN [PK], Modell, Baujahr, Software_Gesamtstand, Testteam)\n• tbl_ecu (ECU_ID [PK], FIN [FK], Bezeichner, Hardware_Version, Firmware_Version, Bus_Adresse)\n• tbl_dtc_katalog (DTC_Code [PK], Beschreibung, ISO_Schweregrad, Standard_Massnahme)\n• tbl_fehlerprotokoll (Protokoll_ID [PK], ECU_ID [FK], DTC_Code [FK], Zeitstempel, Geschwindigkeit_kmh, Aussentemperatur_C, Kilometerstand)"
+                    },
+                    {
+                        id: "10_4_b",
+                        label: "b) SQL-Auswertungen für Erprobungsfahrten",
+                        points: 8,
+                        type: "lines",
+                        linesCount: 6,
+                        stencil: "SQL-QUERIES / TESTDATEN-ANALYSE",
+                        text: "Formulieren Sie die SQL-Statements:\nba) Ermitteln Sie für jedes Fahrzeug (FIN, Modell) die Gesamtzahl aufgetretener Fehler (DTCs), gruppiert nach FIN und absteigend sortiert (5 Punkte).\nbb) Finden Sie alle Fehlerprotokolle mit kritischem Schweregrad ('CRITICAL'), die bei einer Außentemperatur von unter 0 °C (`Aussentemperatur_C < 0`) registriert wurden (3 Punkte).",
+                        solution: "ba)\nSELECT f.FIN, f.Modell, COUNT(p.Protokoll_ID) AS Anzahl_Fehler\nFROM tbl_fahrzeug f\nJOIN tbl_ecu e ON f.FIN = e.FIN\nJOIN tbl_fehlerprotokoll p ON e.ECU_ID = p.ECU_ID\nGROUP BY f.FIN, f.Modell\nORDER BY Anzahl_Fehler DESC;\n\nbb)\nSELECT p.Protokoll_ID, p.Zeitstempel, p.DTC_Code, d.Beschreibung, p.Aussentemperatur_C, p.Geschwindigkeit_kmh\nFROM tbl_fehlerprotokoll p\nJOIN tbl_dtc_katalog d ON p.DTC_Code = d.DTC_Code\nWHERE d.ISO_Schweregrad = 'CRITICAL' AND p.Aussentemperatur_C < 0\nORDER BY p.Zeitstempel DESC;"
+                    },
+                    {
+                        id: "10_4_c",
+                        label: "c) Algorithmus: Notbremsassistent (Autonomous Emergency Braking - AEB)",
+                        points: 9,
+                        type: "lines",
+                        linesCount: 7,
+                        stencil: "ALGORITHMEN / NOTBREMSASSISTENT (AEB)",
+                        text: "Entwickeln Sie einen Algorithmus zur Ansteuerung des Notbremssystems:\n• Parameter: `distanz_m` (float, Abstand zum Hindernis in Metern), `v_rel_kmh` (float, relative Annäherungsgeschwindigkeit in km/h), `fahrer_bremst` (bool).\n• Time-to-Collision (TTC in Sekunden): Formel TTC = distanz_m / (v_rel_kmh / 3.6).\n• Wenn TTC > 2.5 Sekunden: Status 'FREIE_FAHRT' (keine Aktion).\n• Wenn TTC <= 2.5 und TTC > 1.2: Status 'WARNUNG' (akustisches und optisches Warnsignal im Head-Up Display).\n• Wenn TTC <= 1.2: Wenn `fahrer_bremst == true`, Bremskraftverstärkung 'MAX_BOOST', andernfalls autonome Vollbremsung 'NOTBREMSUNG_AKTIV'.\nGeben Sie den Pseudocode an.",
+                        solution: "FUNCTION berechne_notbremsung(distanz_m, v_rel_kmh, fahrer_bremst):\n    IF v_rel_kmh <= 0 THEN\n        RETURN 'FREIE_FAHRT' // Keine Annäherung\n    END IF\n    \n    v_rel_ms = v_rel_kmh / 3.6\n    ttc = distanz_m / v_rel_ms\n    \n    IF ttc > 2.5 THEN\n        RETURN 'FREIE_FAHRT'\n    ELSE IF ttc > 1.2 THEN\n        RETURN 'WARNUNG_AKUSTISCH_OPTISCH'\n    ELSE\n        IF fahrer_bremst == TRUE THEN\n            RETURN 'BREMSKRAFT_MAX_BOOST'\n        ELSE\n            RETURN 'NOTBREMSUNG_AUTONOM_AKTIV'\n        END IF\n    END IF\nEND FUNCTION"
+                    }
+                ]
+            }
+        ]
+    },
+
+    // ----------------------------------------------------------------------
+    // PRÜFUNG 11: Bildungsträger & E-Learning Plattform (EduCampus gGmbH)
+    // ----------------------------------------------------------------------
+    {
+        id: "exam_11",
+        title: "Prüfung 11: E-Learning, Großraum-WLAN & Bildungsrecht",
+        badge: "100 Punkte • 90 Min.",
+        subtitle: "Abschlussprüfung Teil 1 • IT-Berufe • EduCampus Akademie gGmbH",
+        ausgangssituation: "Sie unterstützen die IT der EduCampus Akademie gGmbH. Der Bildungsträger betreibt Lernplattformen (LMS), Campus-Netzwerke mit Großraum-WLAN und digitale Prüfungssysteme für über 5.000 Auszubildende und Studierende. Aktuell steht der Ausbau auf Wi-Fi 6, barrierefreie Plattformen und datenschutzkonforme Prüfungssoftware an.",
+        tasks: [
+            {
+                number: 1,
+                title: "1. Aufgabe: LMS-Systeme, Urheberrecht im Unterricht & Deckungsbeitragsrechnung",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "11_1_a",
+                        label: "a) LMS-Standards: SCORM vs. xAPI (Tin Can)",
+                        points: 7,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "E-LEARNING / SCORM & XAPI STANDARDS",
+                        text: "Für das LMS sollen interaktive Lernmodule angebunden werden.\naa) Erläutern Sie die Kernaufgabe des SCORM-Standards (3 Punkte).\nab) Nennen Sie zwei Vorteile des moderneren xAPI-Standards gegenüber klassischem SCORM (4 Punkte).",
+                        solution: "aa) SCORM-Standard:\nSCORM definiert standardisierte Schnittstellen für die Kommunikation zwischen Web-Lerninhalten und dem LMS, sodass Kursbausteine herstellerunabhängig importiert, gestartet und Bearbeitungsstatus/Testergebnisse rückgemeldet werden können.\nab) Vorteile xAPI:\n1. Mobiles und Offline-Lernen: Lernaktivitäten können außerhalb des LMS (z. B. native Apps, Simulationen, Virtual Reality) erfasst und nachträglich über ein Learning Record Store (LRS) synchronisiert werden.\n2. Granulare Datenverfolgung über einfache Activity-Statements ('Actor - Verb - Object', z. B. 'Max hat Video an Minute 04:12 pausiert')."
+                    },
+                    {
+                        id: "11_1_b",
+                        label: "b) Urheberrecht in Bildung & Lehre (§ 60a UrhG)",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 4,
+                        stencil: "RECHT / URHEBERRECHTLICHE SCHRANKEN",
+                        text: "Ein Dozent möchte ein urheberrechtlich geschütztes Fachbuch digital im LMS für seine Kursteilnehmer bereitstellen.\nErläutern Sie die Schrankenregelung des § 60a UrhG (Zulässiger Umfang in Prozent, Empfängerkreis).",
+                        solution: "Bestimmungen nach § 60a UrhG:\n1. Zulässiger Umfang: Bis zu 15 % eines veröffentlichten Werkes dürfen digital zur Veranschaulichung im Unterricht zur Verfügung gestellt werden (vollständige Werke sind nur bei vergriffenen Werken oder kleinen Werken wie Abbildungen/Gedichten zulässig).\n2. Empfängerkreis: Der Zugriff muss passwortgeschützt und strikt auf die Teilnehmer der jeweiligen Lehrveranstaltung beschränkt sein."
+                    },
+                    {
+                        id: "11_1_c",
+                        label: "c) Deckungsbeitragsrechnung für IT-Zertifikatskurse im 5-mm-Rechengitter",
+                        points: 8,
+                        type: "math-grid",
+                        gridConfig: { cols: 26, rows: 6 },
+                        stencil: "KOSTENRECHNUNG / KURS-KALKULATION",
+                        text: "Für einen 5-tägigen Vorbereitungskurs zur IT-Zertifizierung kalkuliert die Akademie:\n• Fixe Raum- und Dozentenhonorarkosten pro Kurs: 3.600,00 EUR\n• Variable Kosten pro Teilnehmer (Prüfungsvoucher, Lehrmaterial): 300,00 EUR\n• Teilnahmegebühr pro Person: 750,00 EUR\nBerechnen Sie im Rechengitter:\n1. Den Stückdeckungsbeitrag pro Teilnehmer.\n2. Die Mindestteilnehmerzahl zur Kostendeckung (Break-Even).\n3. Den Gewinn bei einer vollen Gruppe von 16 Teilnehmern.",
+                        solution: "Berechnung im Rechengitter:\n1. Deckungsbeitrag pro Teilnehmer:\n   db = 750,00 € - 300,00 € = 450,00 EUR\n\n2. Mindestteilnehmerzahl (Break-Even):\n   x_BEP = K_fix / db = 3.600,00 € / 450,00 € = 8 Teilnehmer\n\n3. Gewinn bei 16 Teilnehmern:\n   Gesamterlöse = 16 * 750,00 € = 12.000,00 €\n   Gesamtkosten = 3.600,00 € + (16 * 300,00 €) = 3.600 € + 4.800 € = 8.400,00 €\n   Gewinn = 12.000,00 € - 8.400,00 € = 3.600,00 EUR\n   (Alternativ: (16 - 8) * 450 € = 3.600,00 EUR)."
+                    },
+                    {
+                        id: "11_1_d",
+                        label: "d) Gemeinnützigkeit & Umsatzsteuerfreiheit (§ 4 Nr. 21 UStG)",
+                        points: 4,
+                        type: "lines",
+                        linesCount: 3,
+                        stencil: "STEUERRECHT / UMSATZSTEUER BEI BILDUNG",
+                        text: "Erläutern Sie, unter welcher Voraussetzung Bildungsleistungen einer Akademie von der 19 % Umsatzsteuer nach § 4 Nr. 21 UStG befreit sind.",
+                        solution: "Voraussetzung: Vorliegen einer behördlichen Bescheinigung der zuständigen Landesbehörde, dass die Bildungsmaßnahme ordnungsgemäß auf einen Beruf oder eine vor einer juristischen Person des öffentlichen Rechts (z. B. IHK) abzulegende Prüfung vorbereitet."
+                    }
+                ]
+            },
+            {
+                number: 2,
+                title: "2. Aufgabe: Großraum-WLAN (Wi-Fi 6), DHCP-Lease & Barrierefreiheit (BITV)",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "11_2_a",
+                        label: "a) Wi-Fi 6 (IEEE 802.11ax) im Hörsaal-Einsatz",
+                        points: 7,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "WLAN-TECHNIK / 802.11AX HIGH DENSITY",
+                        text: "In einem Hörsaal mit 400 Studierenden bricht das bisherige WLAN regelmäßig ein.\naa) Erläutern Sie, wie OFDMA (Orthogonal Frequency-Division Multiple Access) bei Wi-Fi 6 die Latenz bei vielen gleichzeitigen Geräten verringert (4 Punkte).\nab) Nennen Sie den Vorteil von BSS Coloring in dichten WLAN-Umgebungen (3 Punkte).",
+                        solution: "aa) OFDMA-Prinzip:\nOFDMA teilt einen Funkkanal in viele kleine Unterträger (Resource Units / RUs) auf. Dadurch kann ein Access Point in einem einzigen Übertragungszyklus zeitgleich mit dutzenden Endgeräten Daten austauschen, anstatt jedes Gerät nacheinander abzuarbeiten. Das reduziert Latenz und Kollisionen bei hoher Client-Dichte drastisch.\nab) BSS Coloring:\nJedem WLAN-Netzwerk (BSS) wird eine Ziffer (Farbe) zugewiesen. Empfängt ein Client ein Signal auf demselben Kanal mit anderer Farbe, erkennt er es als fremdes Nachbarnetz und kann zeitgleich senden (Spatial Reuse), was die Gesamtkapazität vervielfacht."
+                    },
+                    {
+                        id: "11_2_b",
+                        label: "b) DHCP-Scope Dimensionierung & Lease Time Optimierung",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 4,
+                        stencil: "NETZWERKDIENSTE / DHCP-LEASES",
+                        text: "Für das Campus-WLAN steht das Subnetz 172.20.0.0/21 zur Verfügung.\naa) Wie viele nutzbare Host-IP-Adressen bietet ein /21 Subnetz? (3 Punkte)\nab) Warum sollte die DHCP Lease Time in einem Campus-Gastnetzwerk auf z. B. 2 Stunden statt 7 Tage eingestellt werden? (3 Punkte).",
+                        solution: "aa) Adressanzahl /21:\nHostbits = 32 - 21 = 11 Bits. Gesamte Adressen = 2^11 = 2.048 Adressen.\nNutzbare Host-IPs = 2.048 - 2 (Netz-ID und Broadcast) = 2.046 nutzbare IP-Adressen.\nab) Lease-Time Optimierung:\nBei hoher Fluktuation (Studierende kommen, bleiben 90 Minuten und gehen) blockieren verlassene Geräte bei langer Lease Time tagelang IP-Adressen im DHCP-Pool. Eine kurze Lease Time (z. B. 2 Stunden) gibt verwaiste IPs schnell wieder für neue Besucher frei und verhindert Adress-Erschöpfung (DHCP Pool Depletion)."
+                    },
+                    {
+                        id: "11_2_c",
+                        label: "c) Barrierefreiheit digitaler Lerninhalte (BITV 2.0 / WCAG 2.1)",
+                        points: 6,
+                        type: "table",
+                        stencil: "ACCESSIBILITY / WCAG & BITV KRITERIEN",
+                        text: "Ordnen Sie die Barrierefreiheitsanforderungen dem passenden WCAG-Prinzip (Wahrnehmbar, Bedienbar, Verständlich, Robust) zu.",
+                        tableConfig: {
+                            headers: ["Anforderung an das E-Learning Portal", "WCAG-Prinzip", "Konkrete technische Umsetzung"],
+                            rows: [
+                                ["Grafiken und Diagramme mit Textalternativen versehen", "Wahrnehmbar", "HTML `alt`-Attribute für Screenreader"],
+                                ["Komplette Navigation ohne Maus nur per Tabulatortaste", "Bedienbar", "Sichtbare Tastatur-Fokusindikatoren (`:focus`)"],
+                                ["Gleichbleibende Menüstruktur und verständliche Fehlermeldungen", "Verständlich", "Konsistente Bezeichner und klare Fehlertexte"],
+                                ["Sauberes semantisches HTML für Screenreader & Braillezeilen", "Robust", "WAI-ARIA Rollen und standardkonforme HTML5-Tags"]
+                            ]
+                        },
+                        solution: "Grafiken/Alt -> Wahrnehmbar; Tastatursteuerung -> Bedienbar; Menüstruktur -> Verständlich; Semantisches HTML -> Robust."
+                    },
+                    {
+                        id: "11_2_d",
+                        label: "d) 2,4 GHz vs. 5 GHz Frequenzband-Verteilung",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 4,
+                        stencil: "FUNKTECHNIK / SPEKTRUMSANALYSE",
+                        text: "Vergleichen Sie das 2,4 GHz und das 5 GHz Frequenzband hinsichtlich Dämpfung durch Wände, Kanalanzahl und Anfälligkeit für Fremdstörer (z. B. Mikrowellen, Bluetooth).",
+                        solution: "• 2,4 GHz: Höhere Reichweite und bessere Wanddurchdringung, aber nur 3 überlappungsfreie Kanäle (1, 6, 11) und starke Störungen durch Bluetooth/Mikrowellen.\n• 5 GHz: Geringere Reichweite durch höhere Dämpfung, dafür bis zu 19 überlappungsfreie Kanäle, höhere Kanalbandbreiten (40/80/160 MHz) und kaum Störungen durch Haushaltsgeräte."
+                    }
+                ]
+            },
+            {
+                number: 3,
+                title: "3. Aufgabe: DSGVO bei Online-Klausuren & Auftragsverarbeitung",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "11_3_a",
+                        label: "a) Online-Proctoring (Videoüberwachung bei Klausuren) & DSGVO",
+                        points: 7,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "DATENSCHUTZ / E-PRÜFUNGEN & ART. 6 DSGVO",
+                        text: "Die Akademie plant automatisiertes 'Online-Proctoring' (KI-gestützte Webcam-Überwachung der Blickrichtung und Raumscans der Wohnung während einer Online-Prüfung).\naa) Erläutern Sie, warum eine solche Maßnahme datenschutzrechtlich hochgradig bedenklich ist (Verhältnismäßigkeit / Art. 5 DSGVO) (4 Punkte).\nab) Welche mildere, datenschutzfreundlichere Prüfungsform (Privacy by Design) könnte alternativ gewählt werden? (3 Punkte).",
+                        solution: "aa) Datenschutzrechtliche Bedenken:\nEingriff in das Grundrecht auf informationelle Selbstbestimmung und die Unverletzlichkeit der Wohnung (Art. 13 GG). Die dauerhafte biometrische Verhaltensüberwachung und Aufzeichnung des Privatraums verstößt gegen das Prinzip der Datenminimierung und Verhältnismäßigkeit, insbesondere wenn der Prüfling mangels zumutbarer Alternativen keine echte Freiwilligkeit bei der Einwilligung hat.\nab) Mildere Alternativen:\n• Open-Book-Klausuren (Transferaufgaben statt reiner Wissensabfrage, bei denen Hilfsmittel erlaubt sind).\n• Präsenzprüfungen in autorisierten Testzentren oder mündliche Fachgespräche per Video."
+                    },
+                    {
+                        id: "11_3_b",
+                        label: "b) Auftragsverarbeitungsvertrag (AVV nach Art. 28 DSGVO)",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 4,
+                        stencil: "COMPLIANCE / ART. 28 DSGVO AVV",
+                        text: "Für das LMS wird ein Cloud-Hosting-Dienstleister in Frankfurt beauftragt. Nennen Sie drei zwingende Mindestinhalte, die nach Art. 28 Abs. 3 DSGVO im Auftragsverarbeitungsvertrag geregelt sein müssen.",
+                        solution: "Zwingende Mindestinhalte nach Art. 28 Abs. 3 DSGVO:\n1. Gegenstand, Dauer, Art und Zweck der Datenverarbeitung sowie Kategorien betroffener Personen.\n2. Strenge Weisungsgebundenheit des Auftragsverarbeiters (Verarbeitung nur auf dokumentierte Weisung des Verantwortlichen).\n3. Verpflichtung zur Gewährleistung technischer und organisatorischer Maßnahmen (TOMs) nach Art. 32 DSGVO.\n(Weitere: Unterstützung bei Betroffenenrechten, Rückgabe/Löschung nach Vertragsende, Duldung von Audits)."
+                    },
+                    {
+                        id: "11_3_c",
+                        label: "c) Datenübermittlung in Drittstaaten (Schrems II / EU-US Data Privacy Framework)",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 4,
+                        stencil: "INTERNATIONALER DATENTRANSFER / DRITTSTAATEN",
+                        text: "Ein Videokonferenzdienst hat Server in den USA. Erläutern Sie, unter welchen Bedingungen personenbezogene Daten von Dozenten und Schülern gemäß Art. 45 ff. DSGVO legal in die USA übermittelt werden dürfen.",
+                        solution: "Bedingungen für legalen US-Datentransfer:\n1. Angemessenheitsbeschluss der EU-Kommission: Das US-Unternehmen muss nach dem 'EU-U.S. Data Privacy Framework' (DPF) zertifiziert sein.\n2. Fehlt die DPF-Zertifizierung: Abschluss von EU-Standardvertragsklauseln (SCCs) inklusive eines 'Transfer Impact Assessments' (TIA) und zusätzlicher technischer Garantien (z. B. Ende-zu-Ende-Verschlüsselung mit Schlüsseln nur in der EU)."
+                    },
+                    {
+                        id: "11_3_d",
+                        label: "d) Löschkonzept nach Art. 17 DSGVO",
+                        points: 6,
+                        type: "table",
+                        stencil: "DATENMANAGEMENT / AUFBEWAHRUNGSFRISTEN",
+                        text: "Ordnen Sie den Datenkategorien die passende rechtliche Aufbewahrungs- bzw. Löschfrist zu.",
+                        tableConfig: {
+                            headers: ["Datenkategorie", "Gesetzliche Frist", "Rechtsgrundlage / Begründung"],
+                            rows: [
+                                ["Abschlusszeugnisse und Prüfungsbescheide", "Bis zu 50 Jahre", "Nachweisbarkeit beruflicher Qualifikationen im Renten-/Berufsleben"],
+                                ["Bewertete Klausurarbeiten von Absolventen", "2 Jahre nach Abschluss", "Anfechtungs- und Klagefristen im Prüfungsrecht"],
+                                ["Bewerbungsunterlagen abgelehnter Dozenten", "Max. 6 Monate nach Absage", "Schutz vor Klagen nach dem Allgemeinen Gleichbehandlungsgesetz (AGG)"]
+                            ]
+                        },
+                        solution: "Zeugnisse -> bis 50 Jahre; Klausuren -> 2 Jahre (Klagefrist); Bewerberdaten -> max. 6 Monate (AGG)."
+                    }
+                ]
+            },
+            {
+                number: 4,
+                title: "4. Aufgabe: Kurs- und Notendatenbank (3NF), SQL & IHK-Notenberechnungs-Algorithmus",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "11_4_a",
+                        label: "a) Relationales Campus-Datenbankschema (3NF)",
+                        points: 8,
+                        type: "lines",
+                        linesCount: 6,
+                        stencil: "DATENBANKMODELLIERUNG / CAMPUS-LMS",
+                        text: "Modellieren Sie die Datenbank eines Prüfungssystems in 3NF:\nEin Teilnehmer hat Stammdaten. Ein Kurs wird von einem Dozenten geleitet und hat ein Start-/Enddatum. Ein Teilnehmer kann in mehreren Kursen eingeschrieben sein. In jedem Kurs werden mehrere Prüfungsleistungen (Klausur, Projektarbeit) abgelegt, für die jeweils Punkte (0-100) vergeben werden.\nGeben Sie das Schema mit PK und FK an.",
+                        solution: "• tbl_dozent (Dozenten_ID [PK], Nachname, Vorname, Mail, Fachgebiet)\n• tbl_kurs (Kurs_ID [PK], Dozenten_ID [FK], Kursname, Startdatum, Enddatum, Max_Plaetze)\n• tbl_teilnehmer (Teilnehmer_ID [PK], Nachname, Vorname, Geburtsdatum, Matrikelnummer, Mail)\n• tbl_einschreibung (Einschreib_ID [PK], Kurs_ID [FK], Teilnehmer_ID [FK], Status, Anmeldedatum)\n• tbl_pruefungsleistung (Leistungs_ID [PK], Einschreib_ID [FK], Leistungs_Typ, Erreichte_Punkte, Bewertungsdatum)"
+                    },
+                    {
+                        id: "11_4_b",
+                        label: "b) SQL: Kursstatistiken & Notenspiegel",
+                        points: 8,
+                        type: "lines",
+                        linesCount: 6,
+                        stencil: "SQL-QUERIES / NOTENSTATISTIK",
+                        text: "Formulieren Sie die SQL-Statements:\nba) Berechnen Sie für jeden Kurs (Kurs_ID, Kursname) den Notendurchschnitt (durchschnittlich erreichte Punkte) und die Anzahl abgelegter Prüfungen (`COUNT`), sortiert nach Durchschnitt absteigend (5 Punkte).\nbb) Ermitteln Sie alle Teilnehmer, die in einer Abschlussklausur weniger als 50 Punkte erreicht haben ('Nicht bestanden') (3 Punkte).",
+                        solution: "ba)\nSELECT k.Kurs_ID, k.Kursname, \n       ROUND(AVG(p.Erreichte_Punkte), 1) AS Durchschnitt_Punkte,\n       COUNT(p.Leistungs_ID) AS Anzahl_Pruefungen\nFROM tbl_kurs k\nJOIN tbl_einschreibung e ON k.Kurs_ID = e.Kurs_ID\nJOIN tbl_pruefungsleistung p ON e.Einschreib_ID = p.Einschreib_ID\nGROUP BY k.Kurs_ID, k.Kursname\nORDER BY Durchschnitt_Punkte DESC;\n\nbb)\nSELECT t.Matrikelnummer, t.Nachname, t.Vorname, k.Kursname, p.Erreichte_Punkte\nFROM tbl_teilnehmer t\nJOIN tbl_einschreibung e ON t.Teilnehmer_ID = e.Teilnehmer_ID\nJOIN tbl_kurs k ON e.Kurs_ID = k.Kurs_ID\nJOIN tbl_pruefungsleistung p ON e.Einschreib_ID = p.Einschreib_ID\nWHERE p.Erreichte_Punkte < 50\nORDER BY p.Erreichte_Punkte ASC;"
+                    },
+                    {
+                        id: "11_4_c",
+                        label: "c) Algorithmus: IHK-Notenberechnung nach 100-Punkte-Schlüssel",
+                        points: 9,
+                        type: "lines",
+                        linesCount: 7,
+                        stencil: "ALGORITHMEN / IHK-NOTENSCHLÜSSEL",
+                        text: "Entwerfen Sie eine Funktion `berechne_ihk_note(punkte)` in Pseudocode, die aus einer erreichten Punktzahl (0,0 bis 100,0) die IHK-Note (1 bis 6) und den Text ermittelt:\n• Punkte >= 92: Note 1 ('sehr gut')\n• Punkte >= 81 und < 92: Note 2 ('gut')\n• Punkte >= 67 und < 81: Note 3 ('befriedigend')\n• Punkte >= 50 und < 67: Note 4 ('ausreichend' - bestanden)\n• Punkte >= 30 und < 50: Note 5 ('mangelhaft' - nicht bestanden)\n• Punkte < 30: Note 6 ('ungenügend' - nicht bestanden)\nPrüfen Sie Eingaben auf Gültigkeit (< 0 oder > 100 -> Fehler).",
+                        solution: "FUNCTION berechne_ihk_note(punkte):\n    IF punkte < 0 OR punkte > 100 THEN\n        RETURN 'FEHLER: Ungültige Punktzahl'\n    END IF\n    \n    // Kaufmännische Rundung auf ganze Punkte\n    gerundete_punkte = ROUND(punkte)\n    \n    IF gerundete_punkte >= 92 THEN\n        RETURN 'Note 1 (sehr gut) - Bestanden'\n    ELSE IF gerundete_punkte >= 81 THEN\n        RETURN 'Note 2 (gut) - Bestanden'\n    ELSE IF gerundete_punkte >= 67 THEN\n        RETURN 'Note 3 (befriedigend) - Bestanden'\n    ELSE IF gerundete_punkte >= 50 THEN\n        RETURN 'Note 4 (ausreichend) - Bestanden'\n    ELSE IF gerundete_punkte >= 30 THEN\n        RETURN 'Note 5 (mangelhaft) - Nicht bestanden'\n    ELSE\n        RETURN 'Note 6 (ungenügend) - Nicht bestanden'\n    END IF\nEND FUNCTION"
+                    }
+                ]
+            }
+        ]
+    },
+
+    // ----------------------------------------------------------------------
+    // PRÜFUNG 12: Energieversorger & Smart Grid (GreenEnergy Stadtwerke AG)
+    // ----------------------------------------------------------------------
+    {
+        id: "exam_12",
+        title: "Prüfung 12: Smart Grid, LoRaWAN & Kritische Energie-Infrastruktur",
+        badge: "100 Punkte • 90 Min.",
+        subtitle: "Abschlussprüfung Teil 1 • IT-Berufe • GreenEnergy Stadtwerke AG",
+        ausgangssituation: "Sie arbeiten in der Leittechnik-IT der GreenEnergy Stadtwerke AG. Das Versorgungsunternehmen modernisiert seine Strom- und Wassernetze zu einem intelligenten Smart Grid. Über Smart Meter Gateways (BSI TR-03109) und LoRaWAN-Sensornetze werden Erzeuger- und Verbrauchsdaten in Echtzeit erfasst, Netze gesteuert und höchste KRITIS-Schutzstandards erfüllt.",
+        tasks: [
+            {
+                number: 1,
+                title: "1. Aufgabe: Smart Meter Gateway (BSI TR-03109) & Wirtschaftlichkeitsrechnung",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "12_1_a",
+                        label: "a) Smart Meter Gateway (SMGW) Netzarchitektur",
+                        points: 7,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "KRITIS / SMART METER DREI-NETZE-MODELL",
+                        text: "Das SMGW trennt nach BSI TR-03109 strikt drei Netzwerkbereiche.\naa) Erläutern Sie die Aufgaben des LMN (Local Metrological Network) und des WAN (Wide Area Network) (4 Punkte).\nab) Nennen Sie die Funktion der CLS-Schnittstelle (Controllable Local System) im HAN (3 Punkte).",
+                        solution: "aa) Netzwerktrennung:\n• LMN (Local Metrological Network): Sichere Verbindung zu den physikalischen Strom-, Gas- oder Wasserzählern im Haus (drahtgebunden via M-Bus oder Funk-M-Bus mit AES-128).\n• WAN (Wide Area Network): Verschlüsselter TLS-Tunnel über LTE oder Breitband-Powerline (BPL) zum Smart-Meter-Gateway-Administrator (GWA) im Rechenzentrum des Versorgers.\nab) CLS-Schnittstelle im HAN:\nErmöglicht das sichere Schalten und Steuern von steuerbaren Verbrauchseinrichtungen (z. B. Drosselung von Wärmepumpen oder Wallboxen nach § 14a EnWG) sowie Erzeugern (Solarwechselrichter) bei drohender Netzüberlastung."
+                    },
+                    {
+                        id: "12_1_b",
+                        label: "b) Messstellenbetriebsgesetz (MsbG) Pflichteinbau",
+                        points: 6,
+                        type: "table",
+                        stencil: "ENERGIEWIRTSCHAFTSRECHT / MSBG PFLICHTROLLOUT",
+                        text: "Entscheiden Sie für die drei Kundenprofile, ob ein gesetzlicher Pflichteinbau eines intelligenten Messsystems (iMSys) nach dem MsbG vorliegt.",
+                        tableConfig: {
+                            headers: ["Kundenprofil", "Pflichteinbau iMSys? (Ja/Nein)", "Begründung nach MsbG"],
+                            rows: [
+                                ["Privathaushalt mit Jahresverbrauch von 8.500 kWh", "Ja (Pflicht)", "Jahresstromverbrauch liegt über dem Schwellenwert von 6.000 kWh"],
+                                ["Einfamilienhaus mit PV-Anlage mit 12 kWp Nennleistung", "Ja (Pflicht)", "Erzeugungsanlage hat mehr als 7 kW installierte Leistung"],
+                                ["Single-Wohnung mit Jahresverbrauch von 1.800 kWh", "Nein (Optional)", "Verbrauch unter 6.000 kWh (nur moderne Messeinrichtung mME vorgeschrieben)"]
+                            ]
+                        },
+                        solution: "8.500 kWh -> Ja (>6.000 kWh); 12 kWp PV -> Ja (>7 kW); 1.800 kWh -> Nein (unter Schwellenwert)."
+                    },
+                    {
+                        id: "12_1_c",
+                        label: "c) Stromgestehungskosten & ROI-Kalkulation im 5-mm-Rechengitter",
+                        points: 8,
+                        type: "math-grid",
+                        gridConfig: { cols: 26, rows: 6 },
+                        stencil: "INVESTITIONSRECHNUNG / PV-PARK AMORTISATION",
+                        text: "Für eine Freiflächen-Photovoltaikanlage der Stadtwerke:\n• Anschaffungskosten: 240.000,00 EUR\n• Jährliche Stromerzeugung: 300.000 kWh\n• Einspeisevergütung / Markterlös: 0,08 EUR pro kWh\n• Jährliche Betriebskosten (Wartung, Pacht): 4.000,00 EUR\nBerechnen Sie im Rechengitter:\n1. Den jährlichen Bruttoerlös.\n2. Den jährlichen Netto-Rückfluss (Cashflow).\n3. Die statische Amortisationsdauer in Jahren.",
+                        solution: "Berechnung im Rechengitter:\n1. Jährlicher Erlös:\n   300.000 kWh * 0,08 €/kWh = 24.000,00 EUR pro Jahr\n\n2. Jährlicher Netto-Rückfluss (Cashflow):\n   Cashflow = 24.000,00 € - 4.000,00 € = 20.000,00 EUR pro Jahr\n\n3. Statische Amortisationszeit:\n   Amortisationsdauer = Investitionskosten / Cashflow\n   Amortisationsdauer = 240.000,00 € / 20.000,00 € = 12,0 Jahre."
+                    },
+                    {
+                        id: "12_1_d",
+                        label: "d) § 14a EnWG Steuerung steuerbarer Verbraucher",
+                        points: 4,
+                        type: "lines",
+                        linesCount: 3,
+                        stencil: "ENERGIEWIRTSCHAFT / NETZENGPASS-MANAGEMENT",
+                        text: "Erläutern Sie das Ziel der Neuregelung des § 14a EnWG für Betreiber von privaten Wallboxen und Wärmepumpen bei drohender Netzüberlastung.",
+                        solution: "Der Netzbetreiber darf bei akuter lokaler Überlastung des Stromnetzes die Leistungsaufnahme von steuerbaren Großverbrauchern (Wallbox, Wärmepumpe) vorübergehend auf einen Mindestwert (in der Regel 4,2 kW) dimmen ('Spitzenglättung'), anstatt den Anschluss komplett abzuschalten. Als Gegenleistung erhält der Verbraucher reduzierte Netzentgelte."
+                    }
+                ]
+            },
+            {
+                number: 2,
+                title: "2. Aufgabe: LoRaWAN-Sensorik, Duty Cycle & SCADA-Netzwerke",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "12_2_a",
+                        label: "a) LoRaWAN vs. Narrowband-IoT (NB-IoT)",
+                        points: 7,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "LPWAN / FUNKNETZE IM ENERGIESEKTOR",
+                        text: "Zur Überwachung von Grundwasserpegeln und Fernwärmeleitungen wird ein LPWAN (Low Power Wide Area Network) aufgebaut.\naa) Erläutern Sie zwei Vorteile des lizenzfreien LoRaWAN gegenüber dem zellularen NB-IoT (4 Punkte).\nab) Nennen Sie die Bedeutung des Spreading Factors (SF7 bis SF12) bei LoRaWAN (3 Punkte).",
+                        solution: "aa) Vorteile LoRaWAN gegenüber NB-IoT:\n1. Unabhängigkeit von Mobilfunkprovidern: Stadtwerke können eigene Gateways errichten und betreiben (keine laufenden SIM-Karten-/Vertragskosten).\n2. Extrem geringer Energieverbrauch: Sensoren können bis zu 10 Jahre mit einer internen Batterie autark ohne Netzanschluss arbeiten.\nab) Spreading Factor (SF):\nDer SF bestimmt das Verhältnis zwischen Symbolrate und Chiprate. Ein höherer SF (z. B. SF12) erhöht die Signalreichweite und Gebäudedurchdringung bei schlechtem Empfang, verringert jedoch die Übertragungsdatenrate und erhöht die Sendezeit (Time-on-Air)."
+                    },
+                    {
+                        id: "12_2_b",
+                        label: "b) Gesetzliche Duty-Cycle-Beschränkung im 868-MHz-Band",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 4,
+                        stencil: "REGULIERUNG / BNETZA DUTY CYCLE",
+                        text: "Im europäischen 868-MHz-Band gilt für LoRaWAN ein gesetzlicher Duty Cycle von 1 %.\naa) Berechnen Sie die maximal zulässige Sendezeit eines Sensors pro Stunde in Sekunden (3 Punkte).\nab) Welche Konsequenz hat es für das Übertragungsprotokoll, wenn ein Sensor diese Grenze überschreitet? (3 Punkte).",
+                        solution: "aa) Maximale Sendezeit:\n1 Stunde = 3.600 Sekunden.\n1 % von 3.600 s = 36 Sekunden maximale Sendezeit (Time-on-Air) pro Stunde.\nab) Konsequenz:\nDer LoRaWAN-Stack des Sensors schaltet in eine Zwangssendepause (Back-off). Er darf erst wieder senden, wenn das rollierende 1-Stunden-Budget unterschritten ist. Häufige Bestätigungsnachrichten (ACKs) und Downlink-Kommandos müssen daher minimiert werden."
+                    },
+                    {
+                        id: "12_2_c",
+                        label: "c) SCADA-Netzwerke & Daten-Dioden (Hardware-Einbahnstraße)",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 4,
+                        stencil: "KRITIS-LEITTECHNIK / DATA DIODES",
+                        text: "Messdaten aus der Leitwarte (SCADA) sollen zur Analyse an ein Enterprise-Netzwerk übertragen werden. Erläutern Sie, wie eine optische 'Datendiode' (Data Diode) die Leittechnik physikalisch vor Cyberangriffen schützt.",
+                        solution: "Eine Datendiode erzwingt durch physikalische Hardware (eine LED/Sender auf der einen Seite und ein Fotodetektor/Empfänger auf der anderen Seite ohne Rückkanal-Faser) eine strikte Einbahnstraßen-Kommunikation. Daten können aus dem hochsicheren SCADA-Netz nach außen fließen, aber kein einziges Bit (weder Angriffe noch Steuerbefehle) kann physikalisch in umgekehrter Richtung eindringen."
+                    },
+                    {
+                        id: "12_2_d",
+                        label: "d) IEC 60870-5-104 vs. Modbus TCP",
+                        points: 6,
+                        type: "table",
+                        stencil: "PROTOKOLLE / FERNWIRKTECHNIK",
+                        text: "Vergleichen Sie die beiden Industrieprotokolle hinsichtlich ihrer typischen Eigenschaften.",
+                        tableConfig: {
+                            headers: ["Eigenschaft", "Modbus TCP", "IEC 60870-5-104"],
+                            rows: [
+                                ["Typisches Einsatzgebiet", "Lokale Gebäude- und Fabrikautomation", "Weitverkehrs-Fernwirktechnik für Strom- und Gasnetze"],
+                                ["Zeitstempel-Übertragung", "Standardmäßig nicht im Protokoll enthalten", "Hochpräzise Zeitstempelung (Millisekunden) an der Messstelle"],
+                                ["Ereignisorientierte Meldung", "Nein (zyklisches Polling durch Master)", "Ja (Spontane Ereignisübertragung bei Statusänderung)"]
+                            ]
+                        },
+                        solution: "Modbus TCP: lokal, kein Zeitstempel, zyklisches Polling. IEC 104: Fernwirknetz, präziser Zeitstempel, spontane Ereignisübertragung."
+                    }
+                ]
+            },
+            {
+                number: 3,
+                title: "3. Aufgabe: KRITIS-Sicherheit nach BSI IT-Grundschutz & Notstromkonzept",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "12_3_a",
+                        label: "a) IT-Sicherheitskatalog der Bundesnetzagentur (§ 11 Abs. 1a EnWG)",
+                        points: 7,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "COMPLIANCE / ENWG IT-SICHERHEITSKATALOG",
+                        text: "Als Energieversorger unterliegen die Stadtwerke dem IT-Sicherheitskatalog der BNetzA.\naa) Welche Zertifizierung nach ISO/IEC ist für den Betrieb von Stromnetzen gesetzlich zwingend vorgeschrieben? (3 Punkte)\nab) Nennen Sie zwei Aufgaben des vorgeschriebenen IT-Sicherheitsbeauftragten (ISB) (4 Punkte).",
+                        solution: "aa) Pflichtzertifizierung: Zertifizierung eines Informationssicherheits-Managementsystems (ISMS) nach ISO/IEC 27001.\nab) Aufgaben des ISB:\n1. Erstellung, Pflege und Durchsetzung der organisationsweiten Informationssicherheits-Leitlinie und Sicherheitskonzepte.\n2. Unabhängige Berichterstattung direkt an die Geschäftsführung sowie Koordination von Sicherheitsvorfällen und BSI-Audits."
+                    },
+                    {
+                        id: "12_3_b",
+                        label: "b) Notstrom- und Schwarzstartkonzept",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 4,
+                        stencil: "BUSINESS CONTINUITY / SCHWARZSTARTFÄHIGKEIT",
+                        text: "Nach einem überregionalen Blackout muss die Leitstelle autark hochfahren können.\naa) Was versteht man unter 'Schwarzstartfähigkeit' eines Netzes? (3 Punkte)\nab) Welche zwei technischen Systeme stellen die Stromversorgung der Leitstellen-IT bei Netzausfall sicher? (3 Punkte).",
+                        solution: "aa) Schwarzstartfähigkeit:\nDie Fähigkeit einer Erzeugungsanlage (z. B. Gasturbine oder Wasserkraftwerk), ohne fremde elektrische Energie aus dem Verbundnetz eigenständig aus dem Stillstand hochzufahren und ein Inselnetz aufzubauen.\nab) Notstromsysteme der Leitstelle:\n1. Unterbrechungsfreie Stromversorgung (USV mit Akkus): Fängt Netzwischer und Spannungseinbrüche ohne Millisekunde Unterbrechung ab.\n2. Diesel-Notstromaggregat (NEA): Startet nach 10-15 Sekunden und übernimmt die dauerhafte Energieversorgung über mehrere Tage."
+                    },
+                    {
+                        id: "12_3_c",
+                        label: "c) Physische Sicherung von Umspannwerken (Zutrittskontrolle)",
+                        points: 6,
+                        type: "table",
+                        stencil: "INFRASTRUKTURSCHUTZ / ZUTRITTSKONTROLLE",
+                        text: "Ordnen Sie die Schutzmaßnahmen den drei Sicherheitszonen eines Umspannwerks zu.",
+                        tableConfig: {
+                            headers: ["Zone", "Bereich", "Erforderliche Schutzmaßnahme"],
+                            rows: [
+                                ["Zone 1: Freigelände", "Außenareal des Umspannwerks", "2 Meter Übersteigschutz-Zaun, Videoüberwachung mit KI-Zaunüberwachung und Flutlicht"],
+                                ["Zone 2: Betriebsgebäude", "Relais- und Steuerungsräume", "Einbruchmeldeanlage (VdS Klasse C) und elektronische Transponder-Schließung"],
+                                ["Zone 3: Serverrack-Schränke", "Fernwirk- und SCADA-Switches", "Zwei-Faktor-Zugang (PIN + Transponder) und Vereinzelungsschleuse"]
+                            ]
+                        },
+                        solution: "Zone 1: Zaun & Kamera; Zone 2: Einbruchmelder & Transponder; Zone 3: 2FA-Schranktürschloss & Vereinzelung."
+                    },
+                    {
+                        id: "12_3_d",
+                        label: "d) IT-Forensik bei Sabotage-Angriffen",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 4,
+                        stencil: "INCIDENT RESPONSE / FORENSIK",
+                        text: "Ein Fernwirk-Gateway sendet unautorisierte Steuerbefehle. Nennen Sie zwei Sofortmaßnahmen zur Schadenseindämmung und forensischen Beweissicherung nach BSI IT-Grundschutz.",
+                        solution: "Sofortmaßnahmen:\n1. Isolation des betroffenen Geräts vom Netz (Netzwerkkabel ziehen oder Port blockieren, aber Gerät keinesfalls ausschalten/neustarten, um RAM-Daten zu erhalten).\n2. Erstellung eines forensischen Speicherabbilds (RAM-Dump) und einer bitgenauen Kopie (Forensic Image) der Speichermedien vor Beginn der Untersuchung."
+                    }
+                ]
+            },
+            {
+                number: 4,
+                title: "4. Aufgabe: Zählerstands-Datenbank (3NF), SQL & Dynamischer Stromtarif-Algorithmus",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "12_4_a",
+                        label: "a) Relationales Smart-Meter-Datenbankschema (3NF)",
+                        points: 8,
+                        type: "lines",
+                        linesCount: 6,
+                        stencil: "DATENBANKMODELLIERUNG / METER DATA MANAGEMENT",
+                        text: "Modellieren Sie die Datenbank für ein Meter-Data-Management-System (MDM) in 3NF:\nEin Kunde hat Stammdaten. An einer Verbrauchsstelle (Marktlokation / MaLo) ist genau ein Zähler verbaut. Jeder Zähler hat eine Zählernummer und einen Zählertyp. Zähler erfassen Zählerstände (15-Minuten-Lastgang) mit Zeitstempel, Wirkleistung_kW, Zählerstand_kWh und Qualitätsstatus.\nGeben Sie das Schema mit PK und FK an.",
+                        solution: "• tbl_kunde (Kunden_ID [PK], Nachname, Vorname, Mail, Strasse, PLZ, Ort)\n• tbl_marktlokation (MaLo_ID [PK], Kunden_ID [FK], Anschlussadresse, Netzebene, Zuleitung_Max_A)\n• tbl_zaehler (Zaehler_ID [PK], MaLo_ID [FK], Zaehlernummer, Zaehlertyp, Einbaudatum, Letichte_Eichung)\n• tbl_messwert (Messwert_ID [PK], Zaehler_ID [FK], Zeitstempel, Wirkleistung_kW, Zaehlerstand_kWh, Status_Flag)"
+                    },
+                    {
+                        id: "12_4_b",
+                        label: "b) SQL: Spitzenlast-Analyse zur Netzentlastung",
+                        points: 8,
+                        type: "lines",
+                        linesCount: 6,
+                        stencil: "SQL-QUERIES / LASTGANG-AUSWERTUNG",
+                        text: "Formulieren Sie die SQL-Statements:\nba) Ermitteln Sie für einen Zähler (`Zaehler_ID = 'Z-10492'`) die maximale Wirkleistung (`MAX(Wirkleistung_kW)`) und den durchschnittlichen Verbrauch pro Tag im Januar 2026 (5 Punkte).\nbb) Finden Sie alle Zähler, deren aktuelle Wirkleistung über 22 kW liegt (potenzieller Betrieb ungedrosselter Schnellladestationen) (3 Punkte).",
+                        solution: "ba)\nSELECT DATE(Zeitstempel) AS Messtag,\n       MAX(Wirkleistung_kW) AS Spitzenlast_kW,\n       ROUND(AVG(Wirkleistung_kW), 2) AS Durchschnitt_kW,\n       MAX(Zaehlerstand_kWh) - MIN(Zaehlerstand_kWh) AS Tagesverbrauch_kWh\nFROM tbl_messwert\nWHERE Zaehler_ID = 'Z-10492'\n  AND Zeitstempel BETWEEN '2026-01-01 00:00:00' AND '2026-01-31 23:59:59'\nGROUP BY DATE(Zeitstempel)\nORDER BY Messtag ASC;\n\nbb)\nSELECT z.Zaehler_ID, z.Zaehlernummer, m.Zeitstempel, m.Wirkleistung_kW, ml.Anschlussadresse\nFROM tbl_zaehler z\nJOIN tbl_marktlokation ml ON z.MaLo_ID = ml.MaLo_ID\nJOIN tbl_messwert m ON z.Zaehler_ID = m.Zaehler_ID\nWHERE m.Wirkleistung_kW > 22.0\n  AND m.Zeitstempel >= NOW() - INTERVAL 15 MINUTE;"
+                    },
+                    {
+                        id: "12_4_c",
+                        label: "c) Algorithmus: Dynamische Tarifabrechnung nach Börsenstrompreis (EPEX Spot)",
+                        points: 9,
+                        type: "lines",
+                        linesCount: 7,
+                        stencil: "ALGORITHMEN / DYNAMISCHE TARIFE",
+                        text: "Ein dynamischer Stromtarif berechnet die Kosten eines 15-Minuten-Verbrauchsintervalls nach dem Börsenstrompreis der Strombörse EPEX Spot:\n• Formel Arbeitspreis: `preis_cent_kwh = boersenpreis_eur_mwh / 10 + netzentgelte_cent + steuern_cent`\n• Wenn der Börsenpreis negativ ist (`boersenpreis_eur_mwh < 0`), wird der Börsenpreis zu 0 gesetzt (keine Negativvergütung).\n• Verbrauchte kWh im Intervall = `(wirkleistung_kw * 15) / 60`.\n• Kosten im Intervall = `verbrauchte_kwh * (preis_cent_kwh / 100)`.\nErstellen Sie den Pseudocode für die Funktion `berechne_intervall_kosten(...)`.",
+                        solution: "FUNCTION berechne_intervall_kosten(wirkleistung_kw, boersenpreis_eur_mwh, netzentgelte_cent, steuern_cent):\n    // 1. Negativpreisschutz\n    effektiver_boersenpreis = boersenpreis_eur_mwh\n    IF effektiver_boersenpreis < 0 THEN\n        effektiver_boersenpreis = 0.0\n    END IF\n    \n    // 2. Preis pro kWh berechnen (1 EUR/MWh = 0,1 Cent/kWh)\n    arbeitspreis_cent_kwh = (effektiver_boersenpreis / 10.0) + netzentgelte_cent + steuern_cent\n    \n    // 3. Verbrauchte Energie im 15-Minuten-Slot in kWh\n    // 15 Minuten = 0,25 Stunden\n    intervall_kwh = wirkleistung_kw * 0.25\n    \n    // 4. Kosten in Euro berechnen (Cent / 100)\n    kosten_eur = intervall_kwh * (arbeitspreis_cent_kwh / 100.0)\n    \n    RETURN ROUND(kosten_eur, 4) // Auf 4 Nachkommastellen runden\nEND FUNCTION"
+                    }
+                ]
+            }
+        ]
+    },
+
+    // ----------------------------------------------------------------------
+    // PRÜFUNG 13: Luft- und Raumfahrt / Flugsicherung (AeroNav Systems GmbH)
+    // ----------------------------------------------------------------------
+    {
+        id: "exam_13",
+        title: "Prüfung 13: Flugsicherung, Radar-Netzwerke & Georedundanz",
+        badge: "100 Punkte • 90 Min.",
+        subtitle: "Abschlussprüfung Teil 1 • IT-Berufe • AeroNav Systems GmbH",
+        ausgangssituation: "Sie arbeiten als IT-Systemintegrator bei der AeroNav Systems GmbH, einem Dienstleister für zivile Flugsicherungstechnik und Flughafen-Infrastruktur. Sie betreuen hochverfügbare Radar-Datennetzwerke, georedundante Kontrollzentren, ADS-B Transponderdaten und unterliegen strengsten Zulassungskriterien nach DO-178C und ICAO-Richtlinien.",
+        tasks: [
+            {
+                number: 1,
+                title: "1. Aufgabe: Radar-Sensorik, ADS-B & Leitungsdimensionierung",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "13_1_a",
+                        label: "a) Primärradar (PSR) vs. Sekundärradar (SSR / ADS-B)",
+                        points: 7,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "AVIONIK / RADAR-TECHNOLOGIEN",
+                        text: "In der Flugsicherung werden Primär- und Sekundärradare kombiniert.\naa) Erläutern Sie den Unterschied zwischen Primär- und Sekundärradar (4 Punkte).\nab) Nennen Sie zwei Vorteile von ADS-B (Automatic Dependent Surveillance-Broadcast) (3 Punkte).",
+                        solution: "aa) Unterschied:\n• Primärradar (PSR): Sendet elektromagnetische Impulse aus und misst das passive Echo, das vom Rumpf des Luftfahrzeugs reflektiert wird (Positionsbestimmung auch ohne Mitarbeit des Ziels).\n• Sekundärradar (SSR): Sendet Abfragesignale (Interrogation). Der Transponder im Flugzeug antwortet aktiv mit Identifikationscode (Squawk), Flughöhe und Telemetriedaten.\nab) Vorteile ADS-B:\n1. Höhere Positionsgenauigkeit durch Übertragung präziser GPS-Satellitennavigationsdaten direkt aus dem Flugzeug.\n2. Geringere Infrastrukturkosten, da bodenseitig einfache omnidirektionale Empfänger statt rotierender Schwerlastantennen ausreichen."
+                    },
+                    {
+                        id: "13_1_b",
+                        label: "b) Software-Zulassung nach RTCA DO-178C (DAL A bis E)",
+                        points: 6,
+                        type: "table",
+                        stencil: "SOFTWARE-QUALITÄT / DO-178C DESIGN ASSURANCE",
+                        text: "Ordnen Sie die fünf DAL-Stufen (Design Assurance Levels) der Auswirkung eines Softwarefehlers zu.",
+                        tableConfig: {
+                            headers: ["DAL-Level", "Kategorie", "Mögliche Auswirkung eines Softwareausfalls"],
+                            rows: [
+                                ["DAL A", "Katastrophal (Catastrophic)", "Totalverlust des Flugzeugs und/oder tödliche Verletzungen aller Insassen"],
+                                ["DAL B", "Gefährlich (Hazardous)", "Schwere Beeinträchtigung der Flugsicherheit, schwere Verletzungen"],
+                                ["DAL C", "Erheblich (Major)", "Erhöhte Arbeitsbelastung der Piloten, Reduzierung der Sicherheitsmargen"],
+                                ["DAL D/E", "Geringfügig / Keine Auswirkung", "Unbequemlichkeit für Passagiere (z. B. Ausfall des In-Flight-Entertainments)"]
+                            ]
+                        },
+                        solution: "DAL A -> Katastrophal (Absturz); DAL B -> Gefährlich; DAL C -> Erheblich; DAL D/E -> Geringfügig/Entertainment."
+                    },
+                    {
+                        id: "13_1_c",
+                        label: "c) Leitungs- und Bandbreitenkalkulation im 5-mm-Rechengitter",
+                        points: 8,
+                        type: "math-grid",
+                        gridConfig: { cols: 26, rows: 6 },
+                        stencil: "TELEKOMMUNIKATION / LEITUNGSMIETKOSTEN",
+                        text: "Ein Flugsicherungszentrum bindet drei abgesetzte Radaranlagen an:\n• Datenrate pro Radar: 128 kbit/s (Vollduplex)\n• Redundanz: Jede Station benötigt zwei getrennte Glasfaser-Mietleitungen über unterschiedliche Carrier (Trassen-Redundanz).\n• Monatliche Mietkosten Carrier A: 450,00 EUR pro Leitung\n• Monatliche Mietkosten Carrier B: 520,00 EUR pro Leitung\n• Einmalige Bereitstellung pro Leitung: 1.200,00 EUR (einmalig für alle 6 Leitungen)\nBerechnen Sie im Rechengitter die gesamten Leitungskosten für die ersten 3 Betriebsjahre (36 Monate).",
+                        solution: "Berechnung im Rechengitter:\n1. Anzahl Leitungen:\n   3 Radare * 2 Carrier = 6 Leitungen insgesamt (3 von Carrier A, 3 von Carrier B).\n\n2. Einmalige Bereitstellungskosten:\n   6 Leitungen * 1.200,00 € = 7.200,00 EUR\n\n3. Monatliche laufende Kosten:\n   Carrier A: 3 Leitungen * 450,00 € = 1.350,00 €/Monat\n   Carrier B: 3 Leitungen * 520,00 € = 1.560,00 €/Monat\n   Summe pro Monat = 1.350,00 € + 1.560,00 € = 2.910,00 EUR/Monat\n\n4. Laufende Kosten über 36 Monate:\n   36 Monate * 2.910,00 € = 104.760,00 EUR\n\n5. Gesamtkosten über 3 Jahre:\n   7.200,00 € + 104.760,00 € = 111.960,00 EUR."
+                    },
+                    {
+                        id: "13_1_d",
+                        label: "d) Gewährleistung vs. Garantie bei Luftfahrtkomponenten",
+                        points: 4,
+                        type: "lines",
+                        linesCount: 3,
+                        stencil: "WIRTSCHAFTSRECHT / BGB MÄNGELRECHTE",
+                        text: "Unterscheiden Sie gesetzliche Gewährleistung (Mängelhaftung nach BGB) und vertragliche Herstellergarantie bei Server-Baugruppen.",
+                        solution: "• Gewährleistung: Gesetzliche Pflicht des Verkäufers (24 Monate ab Übergabe), dass die Ware zum Zeitpunkt des Gefahrenübergangs frei von Sachmängeln war.\n• Garantie: Freiwillige vertragliche Zusicherung des Herstellers über die Haltbarkeit oder Funktionsfähigkeit über einen festgelegten Zeitraum, unabhängig vom Zustand bei Übergabe."
+                    }
+                ]
+            },
+            {
+                number: 2,
+                title: "2. Aufgabe: Georedundanz, PTP-Zeitsynchronisation (IEEE 1588) & BGP",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "13_2_a",
+                        label: "a) Precision Time Protocol (PTP / IEEE 1588) vs. NTP",
+                        points: 7,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "ZEITSYNCHRONISATION / IEEE 1588 PTP",
+                        text: "Für Multilaterations-Systeme (Berechnung der Flugzeugposition aus Signal-Laufzeitunterschieden) ist Mikrosekunden-Präzision erforderlich.\naa) Erläutern Sie, warum herkömmliches NTP (Network Time Protocol) dafür nicht ausreicht (3 Punkte).\nab) Wie erreicht PTP (IEEE 1588) Genauigkeiten im Sub-Mikrosekundenbereich? (4 Punkte).",
+                        solution: "aa) Unzulänglichkeit von NTP:\nNTP arbeitet auf Software- und Anwendungsebene über UDP/IP. Variable Verarbeitungszeiten im Betriebssystem-Stack, Queuing-Jitter in Standard-Switches und asymmetrische Leitungslaufzeiten führen zu Abweichungen von 1 bis 10 Millisekunden – viel zu ungenau für Laufzeitortung (Lichtgeschwindigkeit = 300 m pro Mikrosekunde).\nab) Funktionsweise PTP (IEEE 1588):\nPTP nutzt Hardware-Timestamping direkt auf der PHY-Ebene der Netzwerkkarte beim Ein- und Austritt des Ethernet-Frames. Spezialisierte 'Transparent Clocks' (PTP-Switches) messen und kompensieren zudem die exakte Verweildauer des Pakets im Switch (Residence Time), wodurch Sub-Mikrosekunden-Genauigkeit garantiert wird."
+                    },
+                    {
+                        id: "13_2_b",
+                        label: "b) Georedundante RZ-Kopplung (DWDM)",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 4,
+                        stencil: "OPTISCHE NETZE / DWDM & RZ-KOPPLUNG",
+                        text: "Zwei Kontrollzentren in 80 km Entfernung werden über Dark-Fiber und DWDM (Dense Wavelength Division Multiplexing) gekoppelt.\nErläutern Sie das Funktionsprinzip von DWDM und nennen Sie den Grund für den Einsatz gegenüber Standard-Ethernet-LWL.",
+                        solution: "Funktionsprinzip DWDM:\nÜber ein einziges Glasfaserpaar werden viele unterschiedliche optische Lichtwellenlängen (Farben) zeitgleich moduliert und übertragen (Multiplexing). Dadurch können über eine einzige Faser Dutzende getrennte 100G- oder 400G-Kanäle ohne gegenseitige Beeinflussung betrieben werden, was enorme Mietkosten für zusätzliche Fasern spart."
+                    },
+                    {
+                        id: "13_2_c",
+                        label: "c) Border Gateway Protocol (BGP / Autonomous Systems)",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 4,
+                        stencil: "ROUTING / BGP & EXTERNAL GATEWAYS",
+                        text: "Die Kontrollzentren betreiben ein eigenes Autonomes System (AS). Erläutern Sie den Unterschied zwischen iBGP (Interior BGP) und eBGP (Exterior BGP) sowie den Begriff 'AS-Path'.",
+                        solution: "• iBGP: Routing-Informationsaustausch zwischen BGP-Routern innerhalb desselben Autonomen Systems.\n• eBGP: Routing zwischen unterschiedlichen Autonomen Systemen (z. B. Verbindung zum Flugsicherungsnachbarland).\n• AS-Path: Liste aller Autonomen Systeme, die ein IP-Paket durchqueren muss, um das Zielnetz zu erreichen; dient als Metrik und Schleifenverhinderung (Loop Prevention)."
+                    },
+                    {
+                        id: "13_2_d",
+                        label: "d) Netzwerklatenz & RTT (Round Trip Time)",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 4,
+                        stencil: "PHYSIK DER LEITUNG / LICHTGESCHWINDIGKEIT IN GLAS",
+                        text: "Die Signalausbreitungsgeschwindigkeit in Quarzglas beträgt ca. 200.000 km/s. Berechnen Sie die theoretische minimale Round-Trip-Time (RTT) für eine Glasfaser-Direktverbindung über 100 km Trassenlänge.",
+                        solution: "Berechnung RTT:\n• Einfache Strecke = 100 km.\n• Gesamtweg hin und zurück = 2 * 100 km = 200 km.\n• Laufzeit RTT = Weg / Geschwindigkeit = 200 km / 200.000 km/s = 0,001 Sekunden = 1,0 Millisekunde (ms)."
+                    }
+                ]
+            },
+            {
+                number: 3,
+                title: "3. Aufgabe: IT-Sicherheit nach ICAO Annex 17, Air-Gaps & Notfallwiederanlauf",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "13_3_a",
+                        label: "a) Physische Netztrennung (Air-Gap) & Übergabepunkte",
+                        points: 7,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "CYBER DEFENSE / AIR-GAP & TRANSFERKNOTEN",
+                        text: "Flugsicherungsnetze sind komplett vom öffentlichen Internet isoliert (Air-Gap).\naa) Erläutern Sie die Schutzwirkung eines Air-Gaps (3 Punkte).\nab) Wie können Software-Patches und Wetterdaten dennoch kontrolliert und sicher in das isolierte Netz eingespielt werden? (4 Punkte).",
+                        solution: "aa) Schutzwirkung Air-Gap:\nKeine physische oder logische Netzwerkverbindung zur Außenwelt. Direkte Cyberangriffe, Port-Scans, DDoS oder automatisierte Ransomware-Verbreitung über das Internet sind technisch unmöglich.\nab) Kontrollierter Datentransfer:\nÜber dedizierte Transfer-Schleusen ('Data Kiosks' / Schleusen-Stationen). Externe Datenmedien (speziell freigegebene USB-Sticks) werden vor der Einspielung auf isolierten Schleusen-PCs mit mehreren Virenscannern geprüft, signiert und nur über strikt reglementierte Schnittstellen manuell eingespielt."
+                    },
+                    {
+                        id: "13_3_b",
+                        label: "b) Notfall-Parameter: RTO (Recovery Time Objective) vs. RPO",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 4,
+                        stencil: "DISASTER RECOVERY / RTO & RPO",
+                        text: "Für das Flugplandaten-System gilt: RTO = 0 Sekunden, RPO = 0 Sekunden.\nDefinieren Sie RTO und RPO und erläutern Sie, welche Architektur erforderlich ist, um beides auf 0 zu halten.",
+                        solution: "• RTO (Recovery Time Objective): Maximal tolerierbare Zeitspanne, bis ein ausgefallenes System wieder voll betriebsbereit ist.\n• RPO (Recovery Point Objective): Maximal tolerierbarer Zeitraum, für den Daten bei einem Vorfall verloren gehen dürfen.\n• Architektur für RTO=0 / RPO=0: Synchron gespiegelte Aktiv/Aktiv-Cluster an zwei getrennten Standorten mit 'Zero-Data-Loss'-Datenbanken und unterbrechungsfreiem automatischem Failover."
+                    },
+                    {
+                        id: "13_3_c",
+                        label: "c) Schutz vor Insider-Bedrohungen (Vier-Augen-Prinzip)",
+                        points: 6,
+                        type: "table",
+                        stencil: "ORGANISATION / PRIVILEGED ACCESS MANAGEMENT",
+                        text: "Ordnen Sie die Sicherheitsmaßnahmen gegen Innentäter den Zielen zu.",
+                        tableConfig: {
+                            headers: ["Maßnahme", "Schutzwirkung gegen Innentäter", "Konkretes Beispiel"],
+                            rows: [
+                                ["Vier-Augen-Prinzip (Dual Control)", "Verhindert eigenmächtige Manipulationen durch Einzelpersonen", "Kritische Konfigurationsänderungen erfordern Bestätigung eines zweiten Admins"],
+                                ["Session Recording / Audit Logging", "Vollständige Beweissicherung und Abschreckung", "Aufzeichnung aller SSH- und RDP-Sitzungen auf Bastion-Hosts"],
+                                ["Sicherheitsüberprüfung nach LuftSiG", "Präventive Zuverlässigkeitsprüfung vor Einstellung", "Überprüfung durch Verfassungsschutz und Bundeskriminalamt nach § 7 LuftSiG"]
+                            ]
+                        },
+                        solution: "Vier-Augen -> Verhinderung Alleingang; Session Recording -> Beweisbarkeit; Zuverlässigkeitsüberprüfung -> präventive Eignungsprüfung."
+                    },
+                    {
+                        id: "13_3_d",
+                        label: "d) Notstromversorgung für Radaranlagen (USV + Diesel)",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 4,
+                        stencil: "NOTFALLKONZEPT / ANLAGENSICHERHEIT",
+                        text: "Eine Radarstation auf einem Berggipfel verbraucht durchschnittlich 18 kW elektrische Leistung. Die Akkus der USV haben eine Nutzkapazität von 36 kWh. Berechnen Sie die reine USV-Überbrückungszeit in Stunden und Minuten.",
+                        solution: "Berechnung Autonomiezeit:\nt = Kapazität / Leistung = 36 kWh / 18 kW = 2,0 Stunden (= 2 Stunden 0 Minuten / 120 Minuten)."
+                    }
+                ]
+            },
+            {
+                number: 4,
+                title: "4. Aufgabe: Flugplan-Datenbank (3NF), SQL & Kollisionswarnungs-Algorithmus (TCAS)",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "13_4_a",
+                        label: "a) Relationales Flugsicherungs-Datenbankschema (3NF)",
+                        points: 8,
+                        type: "lines",
+                        linesCount: 6,
+                        stencil: "DATENBANKMODELLIERUNG / FLIGHT MANAGEMENT",
+                        text: "Modellieren Sie die Datenbank für ein Flugüberwachungssystem in 3NF:\nEin Flugzeug besitzt eine ICAO24-Adresse (Hex-Code), Kennzeichen und Flugzeugtyp. Ein Flug hat eine Flugnummer, Startflughafen, Zielflughafen und geplanten Abflug. Während des Flugs erfassen Radare Tracking-Plots mit Zeitstempel, Position (Breitengrad, Längengrad), Flughöhe (Flight Level in 100 ft) und Groundspeed (Knoten).\nGeben Sie das Schema mit PK und FK an.",
+                        solution: "• tbl_flugzeug (ICAO24 [PK], Kennzeichen, Flugzeugtyp, Betreibergesellschaft, MTOW_Tonnen)\n• tbl_flug (Flug_ID [PK], ICAO24 [FK], Rufzeichen, Start_ICAO, Ziel_ICAO, Plan_Abflug, Status)\n• tbl_radar (Radar_ID [PK], Stationsname, Breitengrad_Radar, Laengengrad_Radar, Reichweite_NM)\n• tbl_track_plot (Plot_ID [PK], Flug_ID [FK], Radar_ID [FK], Zeitstempel, Latitude, Longitude, Altitude_FL, Speed_Kts)"
+                    },
+                    {
+                        id: "13_4_b",
+                        label: "b) SQL: Verspätungsanalyse & Luftraumüberwachung",
+                        points: 8,
+                        type: "lines",
+                        linesCount: 6,
+                        stencil: "SQL-QUERIES / LUFTRAUMANALYSE",
+                        text: "Formulieren Sie die SQL-Statements:\nba) Ermitteln Sie alle Flüge (Rufzeichen, Start, Ziel), die sich aktuell in einer Flughöhe von unter 10.000 Fuß (`Altitude_FL < 100`) mit einer Geschwindigkeit von über 250 Knoten bewegen (Verletzung der Standard-Geschwindigkeitsbegrenzung) (5 Punkte).\nbb) Berechnen Sie die Anzahl registrierter Radarplots je Radarstation für den gestrigen Tag (3 Punkte).",
+                        solution: "ba)\nSELECT f.Rufzeichen, f.Start_ICAO, f.Ziel_ICAO, p.Altitude_FL, p.Speed_Kts, p.Zeitstempel\nFROM tbl_flug f\nJOIN tbl_track_plot p ON f.Flug_ID = p.Flug_ID\nWHERE p.Altitude_FL < 100 \n  AND p.Speed_Kts > 250\n  AND p.Zeitstempel >= NOW() - INTERVAL 10 MINUTE\nORDER BY p.Speed_Kts DESC;\n\nbb)\nSELECT r.Radar_ID, r.Stationsname, COUNT(p.Plot_ID) AS Anzahl_Plots\nFROM tbl_radar r\nLEFT JOIN tbl_track_plot p ON r.Radar_ID = p.Radar_ID AND DATE(p.Zeitstempel) = CURDATE() - INTERVAL 1 DAY\nGROUP BY r.Radar_ID, r.Stationsname\nORDER BY Anzahl_Plots DESC;"
+                    },
+                    {
+                        id: "13_4_c",
+                        label: "c) Algorithmus: Kollisionserkennung (TCAS II Resolution Advisory)",
+                        points: 9,
+                        type: "lines",
+                        linesCount: 7,
+                        stencil: "ALGORITHMEN / KOLLISIONSWARNUNG TCAS",
+                        text: "Entwerfen Sie einen Algorithmus für ein Antikollisionssystem (TCAS):\n• Parameter: `vertikale_distanz_ft` (Differenz der Flughöhen in Fuß), `horizontale_distanz_nm` (Abstand in Nautischen Meilen), `tau_sekunden` (Berechnete Zeit bis zum nächsten Annäherungspunkt CPA).\n• Stufe 1 (Entwarnung): Wenn `horizontale_distanz_nm > 5.0` oder `vertikale_distanz_ft > 1000`: Rückgabe 'CLEAR_OF_CONFLICT'.\n• Stufe 2 (Traffic Advisory - TA): Wenn `tau_sekunden <= 45` und `tau_sekunden > 25`: Rückgabe 'TRAFFIC_ALERT' (Suchhinweis an Piloten).\n• Stufe 3 (Resolution Advisory - RA): Wenn `tau_sekunden <= 25` und `vertikale_distanz_ft <= 600`: Rückgabe 'AVOIDANCE_CLIMB_DESCEND' (Automatisches Ausweichkommando).\nErstellen Sie den Pseudocode.",
+                        solution: "FUNCTION berechne_tcas_status(vertikale_distanz_ft, horizontale_distanz_nm, tau_sekunden):\n    // Sicherheitsabstand gewahrt?\n    IF horizontale_distanz_nm > 5.0 OR vertikale_distanz_ft > 1000 THEN\n        RETURN 'CLEAR_OF_CONFLICT'\n    END IF\n    \n    // Akute Kollisionsgefahr prüfen\n    IF tau_sekunden <= 25 AND vertikale_distanz_ft <= 600 THEN\n        RETURN 'RESOLUTION_ADVISORY (SOFORTIGE AUSWEICHEMPFEHLUNG: STEIGEN / SINKEN)'\n    ELSE IF tau_sekunden <= 45 THEN\n        RETURN 'TRAFFIC_ADVISORY (ACHTUNG: VERKEHR BEOBACHTEN)'\n    ELSE\n        RETURN 'PROXIMITY_ALERT'\n    END IF\nEND FUNCTION"
+                    }
+                ]
+            }
+        ]
+    },
+
+    // ----------------------------------------------------------------------
+    // PRÜFUNG 14: Hotelkette & Hospitality IoT (GrandPalace Hotel Group SE)
+    // ----------------------------------------------------------------------
+    {
+        id: "exam_14",
+        title: "Prüfung 14: Hospitality IoT, Gäste-WLAN & Zahlungsverkehr",
+        badge: "100 Punkte • 90 Min.",
+        subtitle: "Abschlussprüfung Teil 1 • IT-Berufe • GrandPalace Hotel Group SE",
+        ausgangssituation: "Sie sind Fachinformatiker in der IT-Abteilung der europaweit tätigen GrandPalace Hotel Group SE. Die Hotelkette rüstet 40 Hotels auf digitale Schließsysteme per Smartphone (BLE/NFC), isolierte Gäste-WLAN-Architekturen mit Captive Portals und PCI-DSS-konforme Zahlungsterminals an Rezeption und Gastronomie um.",
+        tasks: [
+            {
+                number: 1,
+                title: "1. Aufgabe: Digitaler Zimmerschlüssel (BLE/NFC), Hotelvertrag & RevPAR",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "14_1_a",
+                        label: "a) Smart-Key Schließsysteme: BLE vs. RFID/NFC",
+                        points: 7,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "SMART HOTEL / BLE & NFC SCHLIESSSYSTEME",
+                        text: "Hoteltüren sollen per Smartphone oder Zimmerkarte geöffnet werden können.\naa) Vergleichen Sie Bluetooth Low Energy (BLE) und NFC hinsichtlich Reichweite und Nutzerinteraktion (4 Punkte).\nab) Nennen Sie zwei Sicherheitsanforderungen an den kryptografischen Key-Exchange bei mobilen Zimmerschlüsseln (3 Punkte).",
+                        solution: "aa) Vergleich BLE vs. NFC:\n• BLE: Reichweite bis zu 10 Meter. Ermöglicht kontaktloses Entriegeln bereits beim Annähern an die Zimmertür ('Hands-free / Walk-in').\n• NFC: Nahbereichskommunikation mit maximal 4 cm Reichweite. Erfordert aktives Vorhalten des Smartphones oder der RFID-Karte direkt an den Türknaufleser.\nab) Sicherheitsanforderungen Key-Exchange:\n1. Zeitlich begrenzte Gültigkeit (Time-based Token / Ephemeral Keys, der Schlüssel verfällt automatisch zur Check-out-Uhrzeit).\n2. Ende-zu-Ende-Verschlüsselung mit gegenseitiger Authentifizierung (Mutual Authentication zwischen Hotelschloss und App), um Replay-Angriffe auszuschließen."
+                    },
+                    {
+                        id: "14_1_b",
+                        label: "b) Beherbergungsvertrag & Gastwirtshaftung nach § 701 BGB",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 4,
+                        stencil: "WIRTSCHAFTSRECHT / BGB BEHERBERGUNGSVERTRAG",
+                        text: "Ein Gast bucht verbindlich für 4 Nächte ein Zimmer und reist ohne Stornierung nicht an ('No-Show').\naa) Um welchen Vertragstyp nach BGB handelt es sich beim Hotelaufnahmevertrag? (2 Punkte)\nab) Welchen Anteil des Zimmerpreises darf das Hotel nach ständiger Rechtsprechung bei Nichtanreise als Schadensersatz in Rechnung stellen? (4 Punkte).",
+                        solution: "aa) Vertragstyp: Gemischter Vertrag mit schwerpunktmäßig mietvertraglichen Elementen (§ 535 BGB), ergänzt um Dienst- und Werkvertragsanteile.\nab) Vergütungsanspruch bei No-Show:\nDer Gast schuldet den vereinbarten Zimmerpreis abzüglich ersparter Aufwendungen des Hotels (z. B. nicht verbrauchtes Frühstück, Wäsche, Strom). Nach ständiger Rechtsprechung sind üblich:\n• Bei Übernachtung mit Frühstück: 80 % des Zimmerpreises (20 % ersparte Aufwendungen).\n• Bei reiner Übernachtung: 90 % des Zimmerpreises (10 % ersparte Aufwendungen)."
+                    },
+                    {
+                        id: "14_1_c",
+                        label: "c) Kennzahlenrechnung: RevPAR & Auslastung im 5-mm-Rechengitter",
+                        points: 8,
+                        type: "math-grid",
+                        gridConfig: { cols: 26, rows: 6 },
+                        stencil: "HOTEL-CONTROLLING / REVPAR & BELEGUNG",
+                        text: "Ein Hotel verfügt über 120 Zimmer:\n• Im Monat Juni (30 Tage) wurden 2.700 Zimmernächte gebucht.\n• Der durchschnittliche Zimmerpreis (ADR - Average Daily Rate) der verkauften Zimmer lag bei 110,00 EUR netto.\nBerechnen Sie im Rechengitter:\n1. Die Gesamtkapazität verfügbarer Zimmernächte im Juni.\n2. Den Auslastungsgrad (Belegungsquote) in Prozent.\n3. Den RevPAR (Revenue per Available Room = Netto-Logisumsatz geteilt durch Gesamtzimmerkapazität).",
+                        solution: "Berechnung im Rechengitter:\n1. Gesamtkapazität verfügbarer Zimmer:\n   120 Zimmer * 30 Tage = 3.600 verfügbare Zimmernächte\n\n2. Belegungsquote (Auslastungsgrad):\n   Auslastung = (2.700 / 3.600) * 100 = 75,0 %\n\n3. Logisumsatz gesamt:\n   2.700 Zimmer * 110,00 € = 297.000,00 EUR\n\n4. RevPAR (Revenue per Available Room):\n   RevPAR = Gesamtumsatz / Gesamtkapazität = 297.000,00 € / 3.600 = 82,50 EUR\n   (Alternativ: Auslastung * ADR = 0,75 * 110,00 € = 82,50 EUR)."
+                    },
+                    {
+                        id: "14_1_d",
+                        label: "d) Digitale Meldepflicht nach Bundesmeldegesetz (BMG)",
+                        points: 4,
+                        type: "lines",
+                        linesCount: 3,
+                        stencil: "MELDERECHT / § 29 BMG MELDESCHEIN",
+                        text: "Erläutern Sie die Voraussetzungen für das 'papierlose digitale Meldescheinverfahren' nach § 29, 30 BMG bei ausländischen Hotelgästen.",
+                        solution: "Voraussetzungen:\nElektronische Erfassung der Meldedaten vor oder bei Anreise und Verifikation der Identität des Gastes durch sichere elektronische Verfahren (z. B. eID-Funktion des Personalausweises, qualifizierte elektronische Signatur oder bankbestätigte 2FA-Zahlungsauthentifizierung)."
+                    }
+                ]
+            },
+            {
+                number: 2,
+                title: "2. Aufgabe: Gäste-WLAN, Captive Portal & Bandbreiten-Management (QoS)",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "14_2_a",
+                        label: "a) Captive Portal & Client-Isolation im Gäste-WLAN",
+                        points: 7,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "GÄSTE-NETZWERKE / CLIENT ISOLATION",
+                        text: "Hotelgäste erhalten kostenlosen WLAN-Zugang.\naa) Erläutern Sie das Funktionsprinzip eines Captive Portals (HTTP Redirect & MAC-Freischaltung) (4 Punkte).\nab) Warum ist die Aktivierung von 'Client Isolation' im Gäste-WLAN zwingend erforderlich? (3 Punkte).",
+                        solution: "aa) Funktionsprinzip Captive Portal:\nUnangemeldete Clients werden bei ihrem ersten Webseitenaufruf per HTTP-Redirect (Port 80/443) auf eine interne Login-Seite des Controllers umgeleitet. Nach Akzeptieren der AGBs schaltet die Firewall die MAC-Adresse des Geräts für den Internetzugang frei.\nab) Client Isolation:\nVerhindert die direkte Kommunikation zwischen WLAN-Geräten untereinander (Layer-2-Isolation). Gäste können sich nicht gegenseitig ausspionieren, fremde Laptops scannen oder Schadsoftware über Windows-Freigaben verbreiten."
+                    },
+                    {
+                        id: "14_2_b",
+                        label: "b) Bandbreitenbegrenzung & Quality of Service (QoS / Traffic Shaping)",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 4,
+                        stencil: "BANDBREITEN-MANAGEMENT / TRAFFIC SHAPING",
+                        text: "Das Hotel verfügt über einen 1 Gbit/s Glasfaseranschluss.\nBeschreiben Sie, wie mittels 'Per-User Bandwidth Limiting' und Priorisierung (QoS) verhindert wird, dass einzelne Gäste durch Videostreams die Hotel-Geschäftsprozesse (Kassensysteme, Telefonie) lahmen.",
+                        solution: "1. Traffic Shaping / Per-User Rate Limiting: Jedem Gastgerät wird dynamisch eine Maximalbandbreite zugewiesen (z. B. 25 Mbit/s Down / 5 Mbit/s Up).\n2. DSCP-Priorisierung (QoS): Geschäftskritische Systeme (VoIP-Telefonie, Rezeptions-PMS, Kartenzahlungsterminals) erhalten in separaten VLANs höchste Prioritätswarteschlangen (Strict Priority Queueing), sodass Gäste-Downloads nachrangig gedrosselt werden."
+                    },
+                    {
+                        id: "14_2_c",
+                        label: "c) Haftungsprivileg für WLAN-Betreiber (§ 8 TMG / TKG)",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 4,
+                        stencil: "RECHT / STÖRERHAFTUNG & TMG",
+                        text: "Ein Hotelgast begeht über das Hotel-WLAN eine Urheberrechtsverletzung (Filesharing). Erläutern Sie die rechtliche Lage des Hotelbetreibers bezüglich Abmahnkosten und Schadenersatz nach Abschaffung der Störerhaftung (§ 8 Abs. 3 TMG).",
+                        solution: "Rechtslage:\nDer Hotelbetreiber als Anbieter von öffentlichem Internetzugang haftet nicht auf Schadensersatz oder Abmahnkosten für Rechtsverletzungen seiner Gäste (Abschaffung der Störerhaftung). Rechteinhaber können lediglich verlangen, dass der Betreiber zumutbare Sperrmaßnahmen ergreift (z. B. Port-Sperre für Filesharing-Dienste oder DNS-Sperren), um künftige Wiederholungen zu unterbinden."
+                    },
+                    {
+                        id: "14_2_d",
+                        label: "d) DNS-Filterung & Jugendschutz",
+                        points: 6,
+                        type: "table",
+                        stencil: "CONTENT FILTERING / DNS-SCHUTZ",
+                        text: "Ordnen Sie die Schutzziele der passenden Netzwerkmaßnahme im Gäste-WLAN zu.",
+                        tableConfig: {
+                            headers: ["Schutzziel", "Netzwerk-Technologie", "Wirkungsweise"],
+                            rows: [
+                                ["Jugendschutz (Blockieren jugendgefährdender Seiten)", "DNS-Filterung (z. B. CleanBrowsing / AdGuard Family)", "Domains auf BPjM-Index werden auf eine Stoppseite umgeleitet"],
+                                ["Schutz vor Botnetzen und Phishing", "DNSBL (DNS Blacklists) & Threat Intelligence", "Bekannte Malware-Command&Control-Server werden verworfen"],
+                                ["Verhinderung von Filesharing-Abmahnungen", "Port- und Protokollsperren auf der Firewall", "Blockieren typischer BitTorrent/P2P-Ports und Layer-7-Traffic"]
+                            ]
+                        },
+                        solution: "Jugendschutz -> DNS-Filterung; Botnetze -> DNSBL; Filesharing -> Port-/L7-Sperren."
+                    }
+                ]
+            },
+            {
+                number: 3,
+                title: "3. Aufgabe: PCI-DSS an Hotel-Terminals & DSGVO bei Videoüberwachung",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "14_3_a",
+                        label: "a) PCI-DSS Vorgaben am Point of Sale (POS)",
+                        points: 7,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "BEZAHLVERKEHR / PCI-DSS AM POS",
+                        text: "Kreditkartenzahlungen erfolgen an mobilen WLAN-Terminals im Restaurant und stationär an der Rezeption.\naa) Erläutern Sie die Anforderung 'Point-to-Point Encryption' (P2PE) bei Bezahlterminals (4 Punkte).\nab) Welche physische Prüfpflicht gilt nach PCI-DSS Anforderung 9.9 für Kassenpersonal bezüglich Skimming? (3 Punkte).",
+                        solution: "aa) P2PE (Point-to-Point Encryption):\nKartendaten werden unmittelbar beim Einstecken oder Auflegen im gesicherten Chip des Terminals verschlüsselt und erst beim Acquirer/Zahlungsdienstleister wieder entschlüsselt. Das Hotelnetzwerk und die Kassensoftware übertragen nur unlesbare Chiffrierdaten, wodurch der Scope für PCI-DSS-Audits drastisch sinkt.\nab) Physische Skimming-Prüfung (PCI-DSS 9.9):\nDas Personal muss eine Inventarliste aller Terminals (Seriennummern) führen und die Geräte täglich visuell auf Manipulationen (z. B. aufgesteckte Skimmer, gefälschte Tastaturen, unautorisierte Siegelbrüche) prüfen und dokumentieren."
+                    },
+                    {
+                        id: "14_3_b",
+                        label: "b) DSGVO Videoüberwachung in öffentlich zugänglichen Hotelbereichen",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 4,
+                        stencil: "DATENSCHUTZ / ART. 6 DSGVO VIDEOÜBERWACHUNG",
+                        text: "Das Hotel überwacht Eingangsbereich, Rezeption und Tiefgarage mit Videokameras.\naa) Welche Rechtsgrundlage nach DSGVO kommt für diese Videoüberwachung in Betracht? (2 Punkte)\nab) Nennen Sie zwei gesetzliche Voraussetzungen (Hinweisschild, Speicherfrist) nach Art. 13 DSGVO (4 Punkte).",
+                        solution: "aa) Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO (Berechtigtes Interesse des Hotels zur Wahrung des Hausrechts und zum Schutz vor Diebstahl/Vandalismus).\nab) Gesetzliche Voraussetzungen:\n1. Transparenzpflicht: Gut sichtbare Hinweisschilder vor Betreten des überwachten Bereichs (mit Piktogramm, Verantwortlichem, Zweck und Kontaktdaten des Datenschutzbeauftragten).\n2. Speicherbegrenzung: Aufnahmen müssen unverzüglich gelöscht werden, sobald sie nicht mehr benötigt werden (Regelfrist: 48 bis maximal 72 Stunden, es sei denn, ein konkreter Vorfall wird polizeilich verfolgt)."
+                    },
+                    {
+                        id: "14_3_c",
+                        label: "c) Tabuzonen für Videoüberwachung",
+                        points: 6,
+                        type: "table",
+                        stencil: "DATENSCHUTZ / VERBOTENE VIDEOZONEN",
+                        text: "Beurteilen Sie die Zulässigkeit der Kameraüberwachung in den folgenden Hotelbereichen.",
+                        tableConfig: {
+                            headers: ["Hotelbereich", "Zulässigkeit (Zulässig / Unzulässig)", "Rechtliche Begründung"],
+                            rows: [
+                                ["Wellness- und Saunabereich / Umkleiden", "Absolut unzulässig", "Schwerer Eingriff in die Intimsphäre (§ 201a StGB / Art. 8 EMRK)"],
+                                ["Arbeitsplätze der Rezeptionsmitarbeiter", "Unzulässig", "Dauerhafte Verhaltens- und Leistungsüberwachung der Beschäftigten"],
+                                ["Tiefgarageneinfahrt und Parkdecks", "Zulässig", "Berechtigtes Interesse zur Verhinderung von Kfz-Diebstählen und Parkremplern"]
+                            ]
+                        },
+                        solution: "Sauna -> Absolut unzulässig; Rezeption dauerhaft -> Unzulässig; Tiefgarage -> Zulässig."
+                    },
+                    {
+                        id: "14_3_d",
+                        label: "d) IT-Sicherheit bei Smart-TVs auf Hotelzimmern",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 4,
+                        stencil: "IOT-SICHERHEIT / HOTEL-INFOTAINMENT",
+                        text: "Gäste können sich auf Smart-TVs im Zimmer mit ihren privaten Streaming-Accounts (Netflix, Prime) anmelden. Welche automatische IT-Sicherheitsfunktion muss beim Check-out des Gastes zwingend ausgeführt werden?",
+                        solution: "Automatisierter Account-Reset (Wipe): Bei Auslösen des Check-outs im PMS muss das Managementsystem per API einen vollständigen Werksreset der Nutzerdaten auf dem jeweiligen TV-Gerät durchführen (Löschen aller Login-Tokens, Cookies, Verläufe und Streaming-Apps), um Missbrauch durch den Nachfolgegast zu verhindern."
+                    }
+                ]
+            },
+            {
+                number: 4,
+                title: "4. Aufgabe: Property Management System (3NF), SQL & Zimmerzuteilungs-Algorithmus",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "14_4_a",
+                        label: "a) Relationales Hotel-Datenbankschema (3NF)",
+                        points: 8,
+                        type: "lines",
+                        linesCount: 6,
+                        stencil: "DATENBANKMODELLIERUNG / HOTEL-PMS",
+                        text: "Modellieren Sie die Datenbank für ein Hotel-Property-Management-System (PMS) in 3NF:\nEin Gast hat Stammdaten. Ein Zimmer hat eine Zimmernummer, Etage, Zimmerkategorie (Standard, Deluxe, Suite) und einen Reinigungsstatus. Ein Gast kann Reservierungen für einen bestimmten Zeitraum (Anreise, Abreise) vornehmen. Zu jeder Buchung wird das zugewiesene Zimmer und der Gesamtpreis erfasst.\nGeben Sie das Schema mit PK und FK an.",
+                        solution: "• tbl_gast (Gast_ID [PK], Nachname, Vorname, Mail, Telefon, Land, VIP_Status)\n• tbl_zimmer_kategorie (Kategorie_ID [PK], Bezeichner, Basispreis_EUR, Bettenanzahl)\n• tbl_zimmer (Zimmer_Nr [PK], Kategorie_ID [FK], Etage, Reinigungsstatus, Ist_Gesperrt)\n• tbl_reservierung (Reservierungs_ID [PK], Gast_ID [FK], Buchungsdatum, Anreise_Datum, Abreise_Datum, Status)\n• tbl_buchungs_position (Positions_ID [PK], Reservierungs_ID [FK], Zimmer_Nr [FK], Preis_EUR)"
+                    },
+                    {
+                        id: "14_4_b",
+                        label: "b) SQL: Belegungsstatistik & Housekeeping-Status",
+                        points: 8,
+                        type: "lines",
+                        linesCount: 6,
+                        stencil: "SQL-QUERIES / HOUSEKEEPING & UMSATZ",
+                        text: "Formulieren Sie die SQL-Statements:\nba) Ermitteln Sie alle Zimmer (Zimmer_Nr, Etage), die heute belegt sind (`CURDATE() BETWEEN r.Anreise_Datum AND r.Abreise_Datum`), aber deren Reinigungsstatus noch auf 'DIRTY' steht (5 Punkte).\nbb) Berechnen Sie den Gesamtumsatz je Zimmerkategorie für das erste Quartal 2026 (3 Punkte).",
+                        solution: "ba)\nSELECT z.Zimmer_Nr, z.Etage, z.Reinigungsstatus, g.Nachname, r.Anreise_Datum, r.Abreise_Datum\nFROM tbl_zimmer z\nJOIN tbl_buchungs_position bp ON z.Zimmer_Nr = bp.Zimmer_Nr\nJOIN tbl_reservierung r ON bp.Reservierungs_ID = r.Reservierungs_ID\nJOIN tbl_gast g ON r.Gast_ID = g.Gast_ID\nWHERE CURDATE() >= r.Anreise_Datum AND CURDATE() < r.Abreise_Datum\n  AND z.Reinigungsstatus = 'DIRTY'\nORDER BY z.Etage, z.Zimmer_Nr;\n\nbb)\nSELECT zk.Bezeichner AS Kategorie, SUM(bp.Preis_EUR) AS Gesamtumsatz_EUR\nFROM tbl_zimmer_kategorie zk\nJOIN tbl_zimmer z ON zk.Kategorie_ID = z.Kategorie_ID\nJOIN tbl_buchungs_position bp ON z.Zimmer_Nr = bp.Zimmer_Nr\nJOIN tbl_reservierung r ON bp.Reservierungs_ID = r.Reservierungs_ID\nWHERE r.Anreise_Datum BETWEEN '2026-01-01' AND '2026-03-31'\nGROUP BY zk.Kategorie_ID, zk.Bezeichner\nORDER BY Gesamtumsatz_EUR DESC;"
+                    },
+                    {
+                        id: "14_4_c",
+                        label: "c) Algorithmus: Automatische Zimmerzuteilung beim Check-in",
+                        points: 9,
+                        type: "lines",
+                        linesCount: 7,
+                        stencil: "ALGORITHMEN / ZIMMERZUTEILUNG & UPGRADE",
+                        text: "Entwerfen Sie einen Algorithmus für die automatisierte Zimmerzuteilung beim Check-in:\n• Parameter: `gast_vip` (bool), `gebuchte_kategorie_id` (int), `freie_zimmer_liste` (Array von Zimmer-Objekten mit `nr`, `kategorie_id`, `status`).\n• Ein Zimmer kann nur zugewiesen werden, wenn `status == 'CLEAN_INSPECTED'`.\n• Suche zuerst ein freies, sauberes Zimmer in der gebuchten Kategorie.\n• Wenn keines frei ist und `gast_vip == true`: Suche nach einem kostenlosen Upgrade in der nächsthöheren Kategorie (`gebuchte_kategorie_id + 1`).\n• Gibt die `Zimmer_Nr` zurück oder den Fehlercode 'KEIN_ZIMMER_VERFUEGBAR'.\nErstellen Sie den Pseudocode.",
+                        solution: "FUNCTION weise_zimmer_zu(gast_vip, gebuchte_kategorie_id, freie_zimmer_liste):\n    // 1. Suche in gebuchter Kategorie\n    FOR EACH zimmer IN freie_zimmer_liste:\n        IF zimmer.kategorie_id == gebuchte_kategorie_id AND zimmer.status == 'CLEAN_INSPECTED' THEN\n            zimmer.status = 'OCCUPIED'\n            RETURN zimmer.nr\n        END IF\n    END FOR\n    \n    // 2. VIP-Upgrade prüfen\n    IF gast_vip == TRUE THEN\n        upgrade_kategorie = gebuchte_kategorie_id + 1\n        FOR EACH zimmer IN freie_zimmer_liste:\n            IF zimmer.kategorie_id == upgrade_kategorie AND zimmer.status == 'CLEAN_INSPECTED' THEN\n                zimmer.status = 'OCCUPIED_VIP_UPGRADE'\n                RETURN zimmer.nr\n            END IF\n        END FOR\n    END IF\n    \n    RETURN 'KEIN_ZIMMER_VERFUEGBAR'\nEND FUNCTION"
+                    }
+                ]
+            }
+        ]
+    },
+
+    // ----------------------------------------------------------------------
+    // PRÜFUNG 15: Entsorgungswirtschaft & Kreislaufwirtschaft (EcoRecycle GmbH)
+    // ----------------------------------------------------------------------
+    {
+        id: "exam_15",
+        title: "Prüfung 15: Fuhrpark-Telematik, RFID & Kreislaufwirtschaft",
+        badge: "100 Punkte • 90 Min.",
+        subtitle: "Abschlussprüfung Teil 1 • IT-Berufe • EcoRecycle Umwelttechnik GmbH",
+        ausgangssituation: "Sie sind IT-Fachinformatiker bei der EcoRecycle Umwelttechnik GmbH, einem zertifizierten Entsorgungsfachbetrieb. Das Unternehmen digitalisiert seine Entsorgungslogistik mit 80 Müllfahrzeugen über CAN-Bus-Telematik, RFID-Behälteridentifikation und automatisierte Wiegestationen nach dem Kreislaufwirtschaftsgesetz (KrWG).",
+        tasks: [
+            {
+                number: 1,
+                title: "1. Aufgabe: Telematik, RFID-Schüttung & Fuhrpark-TCO-Kalkulation",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "15_1_a",
+                        label: "a) RFID-Mülltonnenerkennung (LF-Transponder / 134,2 kHz)",
+                        points: 7,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "AUTOMATISIERUNG / RFID-SCHÜTTUNG",
+                        text: "An den Entsorgungsfahrzeugen erfassen RFID-Antennen an der Schüttung die Mülltonnen beim Einhängen.\naa) Warum werden für Mülltonnen bevorzugt LF-Transponder (Low Frequency 134,2 kHz) anstelle von UHF-Transpondern (868 MHz) eingesetzt? (4 Punkte).\nab) Nennen Sie zwei Daten, die auf dem Chip der Mülltonne gespeichert sind (3 Punkte).",
+                        solution: "aa) Vorteile LF (134,2 kHz) an der Schüttung:\n1. Unempfindlichkeit gegenüber Feuchtigkeit und Schmutz (UHF wird durch nasse Abfälle und Wasser stark gedämpft).\n2. Präzise, kurze Lesereichweite von ca. 10-30 cm: Verhindert, dass benachbarte, noch auf dem Bürgersteig stehende Mülltonnen fälschlicherweise miterfasst werden (kein 'Stray Reading').\nab) Gespeicherte Daten:\n1. Eindeutige Transponder-ID (UID) verknüpft mit dem Kunden-/Objektkonto.\n2. Behältertyp/-volumen (z. B. 120-Liter-Restmüll) und Fraktionscode."
+                    },
+                    {
+                        id: "15_1_b",
+                        label: "b) FMS-Schnittstelle (Fleet Management System) & CAN-Bus",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 4,
+                        stencil: "FUHRPARK-IT / FMS STANDARD & CAN",
+                        text: "Der Telematik-Bordcomputer greift auf Fahrzeugdaten über die genormte FMS-Schnittstelle zu.\naa) Welcher Schutzfunktion dient die FMS-Schnittstelle gegenüber einem direkten Anschluss an den fahrzeugeigenen Antriebs-CAN-Bus? (3 Punkte)\nab) Nennen Sie zwei Messwerte, die über FMS ausgelesen werden (3 Punkte).",
+                        solution: "aa) Schutzfunktion FMS-Gateway:\nEntkoppelt das fahrzeugkritische Bordnetz (Motor, Bremsen) galvanisch und datentechnisch vom Telematiksystem. Das Gateway lässt Daten nur in eine Richtung (Read-Only) durch, sodass Fehler im Telematikgerät niemals das Fahrverhalten stören können.\nab) Messwerte:\nKraftstoffverbrauch, Kilometerstand, Motordrehzahl, Achslast/Gesamtgewicht, Betriebsstunden der Nebenabtriebe (Schüttung/Presse)."
+                    },
+                    {
+                        id: "15_1_c",
+                        label: "c) Fuhrpark-TCO-Vergleich (Diesel vs. E-LKW) im 5-mm-Rechengitter",
+                        points: 8,
+                        type: "math-grid",
+                        gridConfig: { cols: 26, rows: 6 },
+                        stencil: "INVESTITIONSRECHNUNG / TOTAL COST OF OWNERSHIP",
+                        text: "Vergleich zweier Entsorgungsfahrzeuge über eine Laufzeit von 5 Jahren (150.000 km Gesamtlaufleistung):\n• Diesel-LKW: Anschaffung 220.000 EUR; Verbrauch 40 Liter/100 km zu 1,60 EUR/Liter; Wartung: 30.000 EUR.\n• E-LKW: Anschaffung 340.000 EUR abzgl. 80.000 EUR staatlicher Zuschuss; Verbrauch 110 kWh/100 km zu 0,30 EUR/kWh; Wartung: 15.000 EUR.\nBerechnen Sie im Rechengitter die Gesamtbetriebskosten (TCO) beider Fahrzeuge und ermitteln Sie den Kostenvorteil.",
+                        solution: "Berechnung im Rechengitter (150.000 km = 1.500 Einheiten à 100 km):\n\n1. Diesel-LKW:\n• Anschaffung = 220.000,00 €\n• Kraftstoffkosten: 1.500 * 40 l * 1,60 €/l = 96.000,00 €\n• Wartungskosten = 30.000,00 €\n• TCO Diesel = 220.000 + 96.000 + 30.000 = 346.000,00 EUR\n\n2. Elektro-LKW:\n• Netto-Anschaffung = 340.000,00 € - 80.000,00 € = 260.000,00 €\n• Stromkosten: 1.500 * 110 kWh * 0,30 €/kWh = 49.500,00 €\n• Wartungskosten = 15.000,00 €\n• TCO Elektro = 260.000 + 49.500 + 15.000 = 324.500,00 EUR\n\n3. Kostenvorteil:\n   346.000,00 € - 324.500,00 € = 21.500,00 EUR Ersparnis zugunsten des E-LKW."
+                    },
+                    {
+                        id: "15_1_d",
+                        label: "d) Gesetzliche Nachweispflicht nach KrWG & eANV",
+                        points: 4,
+                        type: "lines",
+                        linesCount: 3,
+                        stencil: "UMWELTRECHT / ELEKTRONISCHES NACHWEISVERFAHREN",
+                        text: "Erläutern Sie den Zweck des elektronischen Abfallnachweisverfahrens (eANV) mit qualifizierter elektronischer Signatur (QES) bei gefährlichen Abfällen.",
+                        solution: "Zweck des eANV:\nLückenlose, manipulationssichere und behördlich nachvollziehbare Dokumentation des Entsorgungswegs von Sonderabfällen (gefährliche Abfälle) vom Abfallerzeuger über den Beförderer bis zur Entsorgungsanlage mittels digital signierter Entsorgungs- und Begleitscheine."
+                    }
+                ]
+            },
+            {
+                number: 2,
+                title: "2. Aufgabe: Industrielle Wiegetechnik (RS-485/Modbus), IP-Schutzarten & Ethernet",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "15_2_a",
+                        label: "a) Serielle Busanbindung (RS-485 / Modbus RTU)",
+                        points: 7,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "FELDBUSSE / RS-485 DIFFERENZSIGNAL",
+                        text: "Fahrzeugwaagen werden über RS-485 an die Erfassungs-PCs angebunden.\naa) Erläutern Sie, warum RS-485 mit symmetrischer Signalübertragung (Differenzspannung) weitaus störsicherer ist als RS-232 (4 Punkte).\nab) Nennen Sie die maximale Leitungslänge von RS-485 und den Zweck von Abschlusswiderständen (Terminatoren) (3 Punkte).",
+                        solution: "aa) Symmetrische Signalübertragung bei RS-485:\nRS-485 überträgt das Signal über zwei Adern (A und B) als Spannungsdifferenz (U_A - U_B). Elektromagnetische Störungen wirken auf beide Adern gleichermaßen ein (Gleichtaktstörung). Da der Empfänger nur die Differenz auswertet, heben sich Störspannungen vollständig auf.\nab) Leitungslänge & Terminatoren:\n• Maximale Leitungslänge: Bis zu 1.200 Meter.\n• Abschlusswiderstand (120 Ohm an beiden Bus-Enden): Verhindert Signalreflexionen an den offenen Leitungsenden, die zu Bitfehlern führen würden."
+                    },
+                    {
+                        id: "15_2_b",
+                        label: "b) Schutzarten nach DIN EN 60529 (IP-Codes)",
+                        points: 6,
+                        type: "table",
+                        stencil: "HARDWARE-SPEZIFIKATION / IP-SCHUTZARTEN",
+                        text: "Schlüsseln Sie die beiden Kennziffern der Schutzarten IP65 und IP67 auf.",
+                        tableConfig: {
+                            headers: ["Schutzart", "1. Ziffer (Berührungs- & Fremdkörperschutz)", "2. Ziffer (Wasserschutz)"],
+                            rows: [
+                                ["IP65 (z. B. Terminal-Gehäuse)", "6: Vollständig staubdicht, vollständiger Berührungsschutz", "5: Schutz gegen Strahlwasser (Düse) aus beliebigem Winkel"],
+                                ["IP67 (z. B. Wägezellen in Grube)", "6: Vollständig staubdicht, vollständiger Berührungsschutz", "7: Schutz gegen zeitweiliges Untertauchen in Wasser (1 Meter / 30 Min.)"],
+                                ["IP69K (z. B. Schüttungssensoren)", "6: Vollständig staubdicht, vollständiger Berührungsschutz", "9K: Schutz gegen Wasser bei Hochdruck- und Dampfstrahlreinigung"]
+                            ]
+                        },
+                        solution: "1. Ziffer 6 = staubdicht; 2. Ziffer 5 = Strahlwasser; 7 = zeitweiliges Untertauchen; 9K = Hochdruck-/Dampfstrahl."
+                    },
+                    {
+                        id: "15_2_c",
+                        label: "c) M12-Industrie-Steckverbinder vs. RJ45",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 4,
+                        stencil: "INDUSTRIE-VERKABELUNG / M12 INDUSTRIAL ETHERNET",
+                        text: "An den Entsorgungs-LKW und Sortieranlagen wird Industrial Ethernet über schraubbare M12-D-Code- und X-Code-Stecker statt RJ45 eingesetzt. Nennen Sie zwei Gründe für diese Entscheidung.",
+                        solution: "Gründe für M12:\n1. Hohe mechanische Rüttel- und Vibrationsfestigkeit durch Schraubarretierung (RJ45-Plastikrastnasen brechen bei Erschütterungen im LKW schnell ab).\n2. Schutzart IP67 im gesteckten Zustand (wasser- und staubdicht, korrosionsfest gegen Schmutz und Reinigungsmittel)."
+                    },
+                    {
+                        id: "15_2_d",
+                        label: "d) Gigabit Ethernet über Kupfer (1000BASE-T)",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 4,
+                        stencil: "ETHERNET / 1000BASE-T STANDARDS",
+                        text: "Wie viele Adernpaare nutzt 1000BASE-T (Gigabit Ethernet) im Vergleich zu 100BASE-TX (Fast Ethernet) und welches Modulationsverfahren kommt zum Einsatz?",
+                        solution: "• Adernpaare: 1000BASE-T nutzt alle 4 verdrillten Adernpaare (8 Adern) zeitgleich im Vollduplexbetrieb (Fast Ethernet 100BASE-TX nutzt nur 2 Paare).\n• Modulation: PAM-5 (Pulsamplitudenmodulation mit 5 Spannungspegeln) mit hybrider Echokompensation."
+                    }
+                ]
+            },
+            {
+                number: 3,
+                title: "3. Aufgabe: IT-Sicherheit an Waageterminals & Incident Response bei Ransomware",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "15_3_a",
+                        label: "a) Absicherung von Selbstbedienungs-Waageterminals (Kiosk-Modus)",
+                        points: 7,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "ENDPOINT SECURITY / KIOSK-MODE & HARDENING",
+                        text: "LKW-Fahrer wiegen ihre Fahrzeuge an Outdoor-Touch-Terminals selbständig ein.\naa) Erläutern Sie das Sicherheitskonzept des 'Kiosk-Modus' unter Windows/Linux (4 Punkte).\nab) Nennen Sie zwei Maßnahmen zur USB-Port-Sicherheit an öffentlich zugänglichen Terminals (3 Punkte).",
+                        solution: "aa) Kiosk-Modus:\nDas Betriebssystem startet ausschließlich eine einzige dedizierte Anwendung (die Waagen-App). Desktop-Oberfläche, Startmenü, Tastenkombinationen (Strg+Alt+Entf, Alt+Tab, Windows-Taste) und Dateimanager sind gesperrt, sodass Nutzer das System nicht verlassen oder manipulieren können.\nab) USB-Port-Sicherheit:\n1. Physische Blockade ungenutzter Buchsen mit mechanischen USB-Port-Schlössern.\n2. Deaktivierung von USB-Speichermedien per Gruppenrichtlinie (GPO) oder Endpoint-Protection-Software."
+                    },
+                    {
+                        id: "15_3_b",
+                        label: "b) Ransomware-Befall & Incident-Response-Phasen nach BSI",
+                        points: 6,
+                        type: "table",
+                        stencil: "NOTFALLMANAGEMENT / BSI INCIDENT RESPONSE PHASEN",
+                        text: "Bringen Sie die sechs Phasen des Incident-Response-Prozesses nach BSI in die korrekte chronologische Reihenfolge.",
+                        tableConfig: {
+                            headers: ["Schritt", "Phase nach BSI", "Kernaktivität im Unternehmen"],
+                            rows: [
+                                ["1. Phase", "Vorbereitung (Preparation)", "Notfallpläne erstellen, Rollen definieren, Offline-Backups pflegen"],
+                                ["2. Phase", "Erkennung & Analyse (Identification)", "Sicherheitsvorfall identifizieren, Schadsoftware analysieren, Scope bestimmen"],
+                                ["3. Phase", "Eindämmung (Containment)", "Infizierte Systeme vom Netz trennen, Ausbreitung stoppen"],
+                                ["4. Phase", "Beseitigung (Eradication)", "Malware, bösartige Konten und Backdoors vollständig entfernen"],
+                                ["5. Phase", "Wiederherstellung (Recovery)", "Systeme aus sauberen Backups schrittweise hochfahren und testen"],
+                                ["6. Phase", "Nachbereitung (Lessons Learned)", "Vorfall dokumentieren, Schwachstellen schließen, Maßnahmen optimieren"]
+                            ]
+                        },
+                        solution: "1. Vorbereitung -> 2. Identifikation -> 3. Eindämmung -> 4. Beseitigung -> 5. Wiederherstellung -> 6. Lessons Learned."
+                    },
+                    {
+                        id: "15_3_c",
+                        label: "c) 3-2-1-1-0 Backup-Regel gegen Ransomware",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 4,
+                        stencil: "DATENSICHERUNG / IMMUTABLE BACKUPS",
+                        text: "Erläutern Sie die moderne '3-2-1-1-0'-Datensicherungsregel (insbesondere die Ziffern 1, 1 und 0).",
+                        solution: "• 3: Mindestens 3 Kopien der Daten anfertigen.\n• 2: Auf mindestens 2 verschiedenen Medientypen speichern (z. B. NAS und Tape/Cloud).\n• 1: Mindestens 1 Kopie an einem externen, räumlich getrennten Standort lagern (Offsite).\n• 1: Mindestens 1 Kopie unveränderlich (Immutable / WORM) oder offline (Air-Gapped) vorhalten (Schutz vor Ransomware-Verschlüsselung).\n• 0: 0 Fehler bei regelmäßigen automatisierten Wiederherstellungstests (Recovery Verification)."
+                    },
+                    {
+                        id: "15_3_d",
+                        label: "d) IT-Sicherheitsunterweisung der Mitarbeiter",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 4,
+                        stencil: "AWARENESS / SCHULUNG NACH DSGVO ART. 32",
+                        text: "Nennen Sie zwei verpflichtende Themen einer jährlichen IT-Sicherheitsunterweisung für Disponenten und Verwaltungspersonal.",
+                        solution: "1. Erkennung von Phishing-Mails, bösartigen Links und gefährlichen E-Mail-Anhängen (Rechnungsbetrug).\n2. Passwort-Hygiene (Nutzung starker Passwörter, Verbot der Weitergabe, Einsatz von 2FA) und sicherer Umgang mit Wechseldatenträgern."
+                    }
+                ]
+            },
+            {
+                number: 4,
+                title: "4. Aufgabe: Wägeschein-Datenbank (3NF), SQL & Tourenoptimierungs-Algorithmus",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "15_4_a",
+                        label: "a) Relationales Entsorgungs-Datenbankschema (3NF)",
+                        points: 8,
+                        type: "lines",
+                        linesCount: 6,
+                        stencil: "DATENBANKMODELLIERUNG / ABFALLWIRTSCHAFT & AVV",
+                        text: "Modellieren Sie die Datenbank eines Entsorgungsfachbetriebs in 3NF:\nEin Erzeuger (Kunde) hat Stammdaten. Abfälle werden durch einen 6-stelligen AVV-Schlüssel (Abfallverzeichnis-Verordnung) mit Bezeichnung und Gefährlichkeitsstatus klassifiziert. Ein Wiegeschein dokumentiert eine Wägung mit LKW-Kennzeichen, Erstwägung (brutto), Zweitwägung (tara), Netto-Gewicht, Datum und Entsorgungspreis pro Tonne.\nGeben Sie das Schema mit PK und FK an.",
+                        solution: "• tbl_kunde (Kunden_ID [PK], Firmenname, Strasse, PLZ, Ort, Erzeugernummer)\n• tbl_avv_katalog (AVV_Code [PK], Abfallbezeichnung, Ist_Gefaehrlich, Standardpreis_Tonne_EUR)\n• tbl_fahrzeug (Kennzeichen [PK], Leergewicht_kg, Nutzlast_kg, Fahrzeugtyp)\n• tbl_wiegeschein (Wiegeschein_ID [PK], Kunden_ID [FK], AVV_Code [FK], Kennzeichen [FK], Wiegedatum, Bruttogewicht_kg, Taragewicht_kg, Nettogewicht_kg, Gesamtbetrag_EUR)"
+                    },
+                    {
+                        id: "15_4_b",
+                        label: "b) SQL: Mengenbilanz & Tonnage-Auswertung",
+                        points: 8,
+                        type: "lines",
+                        linesCount: 6,
+                        stencil: "SQL-QUERIES / ENTSORGUNGSBILANZ",
+                        text: "Formulieren Sie die SQL-Statements:\nba) Ermitteln Sie für jede Abfallart (AVV_Code, Abfallbezeichnung) die Gesamttonnage (Summe Nettogewicht in Tonnen: `SUM(Nettogewicht_kg) / 1000`) im Jahr 2026, sortiert nach Tonnage absteigend (5 Punkte).\nbb) Finden Sie alle Wiegescheine von gefährlichen Abfällen (`Ist_Gefaehrlich = true`), bei denen das Nettogewicht 10 Tonnen (10.000 kg) überschreitet (3 Punkte).",
+                        solution: "ba)\nSELECT a.AVV_Code, a.Abfallbezeichnung,\n       ROUND(SUM(w.Nettogewicht_kg) / 1000.0, 2) AS Gesamtmenge_Tonnen,\n       COUNT(w.Wiegeschein_ID) AS Anzahl_Wiegungen\nFROM tbl_avv_katalog a\nJOIN tbl_wiegeschein w ON a.AVV_Code = w.AVV_Code\nWHERE w.Wiegedatum BETWEEN '2026-01-01' AND '2026-12-31'\nGROUP BY a.AVV_Code, a.Abfallbezeichnung\nORDER BY Gesamtmenge_Tonnen DESC;\n\nbb)\nSELECT w.Wiegeschein_ID, w.Wiegedatum, k.Firmenname, a.Abfallbezeichnung, w.Nettogewicht_kg\nFROM tbl_wiegeschein w\nJOIN tbl_avv_katalog a ON w.AVV_Code = a.AVV_Code\nJOIN tbl_kunde k ON w.Kunden_ID = k.Kunden_ID\nWHERE a.Ist_Gefaehrlich = TRUE AND w.Nettogewicht_kg >= 10000\nORDER BY w.Nettogewicht_kg DESC;"
+                    },
+                    {
+                        id: "15_4_c",
+                        label: "c) Algorithmus: Tourenoptimierung nach der Nearest-Neighbor-Heuristik",
+                        points: 9,
+                        type: "lines",
+                        linesCount: 7,
+                        stencil: "ALGORITHMEN / TOURENPLANUNG (TSP)",
+                        text: "Ein Entsorgungs-LKW soll mehrere Container-Standorte anfahren. Entwerfen Sie eine vereinfachte Nearest-Neighbor-Heuristik zur Ermittlung der Sammelroute:\n• Parameter: `start_depot` (Koordinaten), `abhol_liste` (Array unbesuchter Standorte).\n• Beginne beim `start_depot`.\n• Suche in jedem Schritt den Standort aus `abhol_liste`, der die geringste euklidische Distanz zum aktuellen Standort hat.\n• Füge den Standort zur `route` hinzu, entferne ihn aus `abhol_liste` und setze ihn als neuen aktuellen Standort.\n• Wiederhole, bis `abhol_liste` leer ist, und füge am Ende die Rückfahrt zum `start_depot` an.\nGeben Sie den Pseudocode an.",
+                        solution: "FUNCTION optimiere_tour(start_depot, abhol_liste):\n    route = EMPTY_LIST()\n    aktueller_punkt = start_depot\n    route.APPEND(aktueller_punkt)\n    \n    WHILE LENGTH(abhol_liste) > 0:\n        min_distanz = 999999.0\n        naechster_kandidat = NULL\n        kandidat_index = -1\n        \n        FOR i = 0 TO LENGTH(abhol_liste) - 1:\n            standort = abhol_liste[i]\n            distanz = BERECHNE_DISTANZ(aktueller_punkt, standort)\n            IF distanz < min_distanz THEN\n                min_distanz = distanz\n                naechster_kandidat = standort\n                kandidat_index = i\n            END IF\n        END FOR\n        \n        route.APPEND(naechster_kandidat)\n        aktueller_punkt = naechster_kandidat\n        abhol_liste.REMOVE_AT(kandidat_index)\n    END WHILE\n    \n    // Rückfahrt zum Betriebshof\n    route.APPEND(start_depot)\n    RETURN route\nEND FUNCTION"
+                    }
+                ]
+            }
+        ]
+    },
+
+    // ----------------------------------------------------------------------
+    // PRÜFUNG 16: Öffentliche Verwaltung & E-Government (Landesamt IT)
+    // ----------------------------------------------------------------------
+    {
+        id: "exam_16",
+        title: "Prüfung 16: E-Government (OZG), BundID & IT-Grundschutz",
+        badge: "100 Punkte • 90 Min.",
+        subtitle: "Abschlussprüfung Teil 1 • IT-Berufe • Landesamt für Digitalisierung & IT",
+        ausgangssituation: "Sie sind Fachinformatiker im Landesamt für Digitalisierung, Breitband und IT. Die Behörde setzt das Onlinezugangsgesetz (OZG 2.0) um und migriert Verwaltungsleistungen auf die BundID / DeutschlandID, implementiert das Behördennetzwerk nach BSI-Standards und bindet Fachverfahren über den XZuFi-Standard an.",
+        tasks: [
+            {
+                number: 1,
+                title: "1. Aufgabe: Onlinezugangsgesetz (OZG), EVB-IT & WiBe-Kalkulation",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "16_1_a",
+                        label: "a) OZG 2.0 & 'Once-Only'-Prinzip",
+                        points: 7,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "E-GOVERNMENT / OZG 2.0 & ONCE-ONLY",
+                        text: "Das OZG verpflichtet Verwaltungen, Verwaltungsleistungen digital bereitzustellen.\naa) Erläutern Sie das 'Once-Only'-Prinzip bei digitalen Bürgeranträgen (4 Punkte).\nab) Nennen Sie zwei Authentifizierungsstufen der BundID (z. B. Substanziell, Hoch) und die zugehörigen Identifikationsmittel (3 Punkte).",
+                        solution: "aa) Once-Only-Prinzip:\nBürger und Unternehmen müssen Nachweise und Daten (z. B. Geburtsurkunde, Meldebescheinigung, Handelsregisterauszug), die dem Staat bereits bei einer anderen Behörde vorliegen, nicht erneut einreichen. Mit Zustimmung des Bürgers ruft das Fachverfahren die Daten digital direkt aus den Registern ab (Registermodernisierung).\nab) BundID Vertrauensniveaus:\n• Substanziell: ELSTER-Zertifikat (für Steuer- und Unternehmensdienste).\n• Hoch: Online-Ausweisfunktion (eID) des Personalausweises oder elektronischen Aufenthaltstitels mit PIN über die AusweisApp."
+                    },
+                    {
+                        id: "16_1_b",
+                        label: "b) Öffentliches IT-Vergaberecht: EVB-IT Verträge",
+                        points: 6,
+                        type: "table",
+                        stencil: "VERGABERECHT / EVB-IT VERTRAGSTYPEN",
+                        text: "Ordnen Sie die behördlichen IT-Beschaffungen dem passenden EVB-IT Vertragstyp zu.",
+                        tableConfig: {
+                            headers: ["Beschaffungsmaßnahme", "Zutreffender EVB-IT Vertragstyp", "Rechtlicher Schwerpunkt"],
+                            rows: [
+                                ["Kauf von 300 Standard-Büro-PCs mit Vor-Ort-Garantie", "EVB-IT Kauf", "Kaufrecht (§ 433 BGB) mit Mängelhaftung und Hardware-Garantie"],
+                                ["Entwicklung eines individuellen Online-Bauantrags-Fachverfahrens", "EVB-IT Erstellung", "Werkvertragsrecht (§ 631 BGB) mit Abnahme nach Pflichtenheft"],
+                                ["Beratung und Unterstützung bei der BSI-Grundschutz-Zertifizierung", "EVB-IT Dienstleistung", "Dienstvertragsrecht (§ 611 BGB) auf Stundenbasis ohne Erfolgsgarantie"]
+                            ]
+                        },
+                        solution: "PC-Hardware -> EVB-IT Kauf; Softwareentwicklung -> EVB-IT Erstellung (Werkvertrag); Beratung -> EVB-IT Dienstleistung."
+                    },
+                    {
+                        id: "16_1_c",
+                        label: "c) Wirtschaftlichkeitsrechnung (WiBe 5.0) im 5-mm-Rechengitter",
+                        points: 8,
+                        type: "math-grid",
+                        gridConfig: { cols: 26, rows: 6 },
+                        stencil: "WIBE 5.0 / VERWALTUNGS-WIRTSCHAFTLICHKEIT",
+                        text: "Für die Digitalisierung des Wohngeldantrags:\n• Einmalige Entwicklung und Einführung: 180.000,00 EUR\n• Jährliche Betriebskosten des Portals: 20.000,00 EUR\n• Jährliche Personaleinsparung durch automatische Dunkelverarbeitung: 60.000,00 EUR\nBerechnen Sie im Rechengitter für einen Betrachtungszeitraum von 5 Jahren:\n1. Die jährliche Netto-Ersparnis.\n2. Die kumulierte Gesamtersparnis über 5 Jahre.\n3. Die statische Amortisationsdauer in Jahren.",
+                        solution: "Berechnung im Rechengitter:\n1. Jährliche Netto-Einsparung:\n   60.000,00 € (Personaleinsparung) - 20.000,00 € (Betriebskosten) = 40.000,00 EUR pro Jahr\n\n2. Kumulierte Gesamtersparnis über 5 Jahre:\n   Einsparungen: 5 Jahre * 40.000,00 € = 200.000,00 €\n   Abzüglich einmalige Einführung = 200.000,00 € - 180.000,00 € = 20.000,00 EUR Reingewinn nach 5 Jahren.\n\n3. Statische Amortisationszeit:\n   Amortisationszeit = Einmalkosten / jährliche Netto-Ersparnis\n   Amortisationszeit = 180.000,00 € / 40.000,00 € = 4,5 Jahre."
+                    },
+                    {
+                        id: "16_1_d",
+                        label: "d) IT-Sicherheitsgesetz & Pflicht zur Barrierefreiheit",
+                        points: 4,
+                        type: "lines",
+                        linesCount: 3,
+                        stencil: "VERWALTUNGSVORSCHRIFTEN / BGG & BITV 2.0",
+                        text: "Erläutern Sie die gesetzliche Pflicht öffentlicher Stellen nach dem Behindertengleichstellungsgesetz (BGG) bezüglich der Veröffentlichung einer 'Erklärung zur Barrierefreiheit'.",
+                        solution: "Öffentliche Stellen müssen auf jeder behördlichen Website und App eine ständig aktualisierte Erklärung zur Barrierefreiheit veröffentlichen, die detailliert auflistet, welche Teile der Website noch nicht voll barrierefrei sind, warum dies der Fall ist (wirtschaftliche Unzumutbarkeit) und einen Feedback-Mechanismus für Bürger bereitstellen."
+                    }
+                ]
+            },
+            {
+                number: 2,
+                title: "2. Aufgabe: Behördennetze (NdB), DNSSEC & IPv6-Migrationskonzept",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "16_2_a",
+                        label: "a) Netze des Bundes (NdB / IVBB) & Sicherheitszonen",
+                        points: 7,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "BEHÖRDENNETZE / NDB & BSI-ZONEN",
+                        text: "Das Landesamt ist an das Regierungsnetz 'Netze des Bundes' (NdB) angebunden.\naa) Nennen Sie den Hauptzweck des NdB im Vergleich zum öffentlichen Internet (3 Punkte).\nab) Erläutern Sie das Drei-Zonen-Modell (Interne Zone, DMZ, Externe Zone) an Behörden-Gateways (4 Punkte).",
+                        solution: "aa) Zweck NdB:\nEin geschlossenes, vom öffentlichen Internet physisch und logisch getrenntes IP-Netzwerk für die verschlüsselte, hochverfügbare Kommunikation zwischen Bundes-, Landes- und Kommunalbehörden mit zentralen Sicherheitsgateways.\nab) Drei-Zonen-Modell:\n• Externe Zone (Untrusted): Öffentliches Internet bzw. offene Zugänge.\n• Demilitarisierte Zone (DMZ): Isoliertes Zwischennetzwerk für öffentlich erreichbare Dienste (z. B. Bürger-Webportale, Mail-Relays), geschützt durch Außen- und Innen-Firewalls.\n• Interne Zone (Trusted): Hochsicherer Bereich für Fachverfahren, Datenbanken und Mitarbeiter-Arbeitsplätze, der niemals direkt aus dem Internet erreichbar ist."
+                    },
+                    {
+                        id: "16_2_b",
+                        label: "b) DNSSEC (Domain Name System Security Extensions)",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 4,
+                        stencil: "INTERNETPROTOKOLLE / DNSSEC INTEGRITÄT",
+                        text: "Zur Absicherung der behördlichen Domains (.bayern.de, .bund.de) wird DNSSEC eingeführt.\naa) Welche Angriffsart (z. B. DNS-Spoofing / Cache Poisoning) wird durch DNSSEC verhindert? (3 Punkte)\nab) Welche zwei kryptografischen Record-Typen (z. B. RRSIG, DNSKEY, DS) spielen bei DNSSEC eine zentrale Rolle? (3 Punkte).",
+                        solution: "aa) Schutzwirkung:\nDNSSEC verhindert DNS-Cache-Poisoning und DNS-Spoofing. Angreifer können DNS-Antworten nicht manipulieren, um Bürger auf gefälschte Phishing-Seiten staatlicher Portale umzuleiten.\nab) Record-Typen:\n• RRSIG (Resource Record Signature): Digitale kryptografische Signatur über eine Gruppe von DNS-Einträgen (RRSet).\n• DNSKEY: Enthält den öffentlichen Schlüssel der Zone zur Verifikation der RRSIG-Signaturen.\n• DS (Delegation Signer): Hashwert des DNSKEY der Subzone, der in der Elternzone hinterlegt ist (Aufbau der Chain of Trust bis zur Root-Zone)."
+                    },
+                    {
+                        id: "16_2_c",
+                        label: "c) IPv6-Adressaufbau & Prefix-Kalkulation",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 4,
+                        stencil: "NETZWERKTECHNIK / IPV6 SUBNETTING",
+                        text: "Das Landesamt erhält das offizielle Behörden-Präfix `2001:db8:1200::/48`.\naa) Wie viele Bits stehen der Behörde zur Bildung eigener interner Subnetze zur Verfügung, wenn jedes Subnetz ein Standard `/64` sein soll? (3 Punkte)\nab) Wie viele `/64` Subnetze können damit gebildet werden? (3 Punkte).",
+                        solution: "aa) Verfügbare Subnetz-Bits:\nSubnetz-Bits = 64 - 48 = 16 Bits.\nab) Anzahl der /64 Subnetze:\n2^16 = 65.536 eigenständige /64-Subnetze."
+                    },
+                    {
+                        id: "16_2_d",
+                        label: "d) Dual-Stack vs. NAT64/DNS64 Migrationsstrategie",
+                        points: 6,
+                        type: "table",
+                        stencil: "IPV6-MIGRATION / TRANSITIONSTECHNIKEN",
+                        text: "Vergleichen Sie die beiden Übergangstechniken bei der IPv6-Einführung.",
+                        tableConfig: {
+                            headers: ["Kriterium", "Dual-Stack", "NAT64 / DNS64"],
+                            rows: [
+                                ["Funktionsprinzip", "Gleichzeitiger Parallelbetrieb von IPv4 und IPv6 auf allen Routern und Hosts", "Reines IPv6-Netzwerk greift über Gateway-Übersetzer auf IPv4-Server zu"],
+                                ["IPv4-Adressbedarf", "Benötigt weiterhin auf jedem Endgerät eine IPv4-Adresse", "Keine IPv4-Adressen an Endgeräten notwendig (spart IPv4-Pool)"],
+                                ["Komplexität", "Geringe Protokollübersetzung, aber doppelter Administrationsaufwand", "Zentralisiertes Übersetzungsgateway, Inkompatibilität bei IPv4-Literalen"]
+                            ]
+                        },
+                        solution: "Dual-Stack: Parallelbetrieb, hoher IPv4-Bedarf; NAT64: Reines IPv6-Netz mit Übersetzung, spart IPv4-Adressen."
+                    }
+                ]
+            },
+            {
+                number: 3,
+                title: "3. Aufgabe: BSI IT-Grundschutz, Notfallmanagement & Informationsfreiheit",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "16_3_a",
+                        label: "a) BSI IT-Grundschutz Vorgehensweise (BSI-Standard 200-2)",
+                        points: 7,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "BSI STANDARDS / IT-GRUNDSCHUTZ BSI 200-2",
+                        text: "Die Behörde führt eine IT-Grundschutz-Modellierung nach BSI-Standard 200-2 durch.\naa) Erläutern Sie die Schritte: Strukturanalyse, Schutzbedarfsfeststellung und Modellierung mit Grundschutz-Bausteinen (4 Punkte).\nab) Was unterscheidet die 'Basis-Absicherung' von der 'Standard-Absicherung'? (3 Punkte).",
+                        solution: "aa) Schritte nach BSI 200-2:\n1. Strukturanalyse: Vollständige Erfassung aller IT-Systeme, Netze, Räume, Anwendungen und Geschäftsprozesse.\n2. Schutzbedarfsfeststellung: Zuweisung des Schutzbedarfs (Normal, Hoch, Sehr hoch) bezüglich Vertraulichkeit, Integrität und Verfügbarkeit.\n3. Modellierung: Zuordnung relevanter IT-Grundschutz-Bausteine aus dem IT-Grundschutz-Kompendium (z. B. SYS.1.1 Server, APP.3.1 Webanwendungen) und Ermittlung von Sicherheitsanforderungen.\nab) Basis- vs. Standard-Absicherung:\n• Basis-Absicherung: Schnelle Umsetzung elementarer Basisanforderungen zum grundlegenden Überlebensschutz gegen Massenangriffe.\n• Standard-Absicherung: Vollständige Erfüllung aller Standard- und Kernanforderungen mit Zertifizierungseignung (ISO 27001 auf Basis von IT-Grundschutz)."
+                    },
+                    {
+                        id: "16_3_b",
+                        label: "b) Informationsfreiheitsgesetz (IFG) vs. Datenschutz (DSGVO)",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 4,
+                        stencil: "VERWALTUNGSRECHT / IFG VS. DATENSCHUTZ",
+                        text: "Ein Bürger stellt nach dem Informationsfreiheitsgesetz (IFG) einen Antrag auf Einsicht in Behördenakten. Erläutern Sie das Spannungsverhältnis zwischen dem Jedermann-Auskunftsrecht nach IFG und dem Schutz personenbezogener Daten Dritter nach DSGVO.",
+                        solution: "Spannungsverhältnis:\nDas IFG gewährt grundsätzlich jedermann freien Zugang zu amtlichen Informationen der Verwaltung ohne Nachweis eines berechtigten Interesses. Stehen in den Akten jedoch personenbezogene Daten Dritter (z. B. Namen, Notizen von Sachbearbeitern oder Antragstellern), greift der Schutz nach DSGVO: Diese Daten müssen vor der Herausgabe geschwärzt/anonymisiert werden, es sei denn, die betroffene Person willigt ein oder das Gesetz überwiegt ausnahmsweise."
+                    },
+                    {
+                        id: "16_3_c",
+                        label: "c) Notfallhandbuch nach BSI-Standard 200-4",
+                        points: 6,
+                        type: "table",
+                        stencil: "BCM / BSI 200-4 NOTFALLDOKUMENTATION",
+                        text: "Ordnen Sie die Dokumenttypen des Business Continuity Managements (BCM) ihren Aufgaben zu.",
+                        tableConfig: {
+                            headers: ["Dokumenttyp", "Verwendungszweck", "Typischer Inhalt"],
+                            rows: [
+                                ["Geschäftsfortführungsplan (BCP)", "Sicherstellung der kritischen Kernprozesse im Notbetrieb", "Ausweicharbeitsplätze, manuelle Notfallformulare, Minimalpersonal"],
+                                ["Wiederanlaufplan (DRP)", "Schrittweises Wiederhochfahren der IT-Infrastruktur", "Reihenfolge des Bootens: Active Directory -> DNS -> Datenbanken -> Apps"],
+                                ["Krisenstabs-Alarmierungsplan", "Unverzügliche Einberufung der Entscheidungsträger", "Notfallkontakte, Stellvertreterregelungen, Lagezentrum-Einwahl"]
+                            ]
+                        },
+                        solution: "BCP -> Kernprozesse im Notbetrieb; DRP -> IT-Wiederanlauf-Reihenfolge; Alarmierungsplan -> Krisenstab-Einberufung."
+                    },
+                    {
+                        id: "16_3_d",
+                        label: "d) E-Mail-Verschlüsselung in der Verwaltung (S/MIME & PGP)",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 4,
+                        stencil: "KRYPTOGRAFIE / BEHÖRDEN-MAIL S/MIME",
+                        text: "Bürger und Behörden tauschen Bescheide per E-Mail aus. Warum verlangt die Verwaltung hierfür in der Regel X.509-Zertifikate (S/MIME) anstelle von OpenPGP?",
+                        solution: "S/MIME basiert auf einer hierarchischen Vertrauensinfrastruktur (PKI) mit offiziellen, staatlich akkreditierten Zertifizierungsstellen (Root-CAs wie der V-PKI des Bundes), die die Identität behördlich validieren. OpenPGP nutzt ein dezentrales 'Web of Trust', das für automatisierte, rechtsverbindliche Verwaltungsprozesse und Zertifikats-Widerrufslisten (CRLs/OCSP) organisatorisch schwer steuerbar ist."
+                    }
+                ]
+            },
+            {
+                number: 4,
+                title: "4. Aufgabe: Antrags- und Bürgerdatenbank (3NF), SQL & Berechtigungs-Prüfungsalgorithmus",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "16_4_a",
+                        label: "a) Relationales OZG-Antragsdatenbankschema (3NF)",
+                        points: 8,
+                        type: "lines",
+                        linesCount: 6,
+                        stencil: "DATENBANKMODELLIERUNG / OZG-PORTALVERBUND",
+                        text: "Modellieren Sie die Datenbank für ein kommunales OZG-Bürgerportal in 3NF:\nEin Bürger hat Stammdaten und eine eindeutige Steuer-ID / bPK (bereichsspezifisches Personenkennzeichen). Ein Leistungskatalog (Leika / XZuFi) listet alle Verwaltungsdienstleistungen auf. Ein Bürger reicht digitale Anträge ein, die einem Sachbearbeiter zur Bearbeitung zugewiesen werden. Zu jedem Antrag existiert ein Antragsstatus und ein Bescheiddatum.\nGeben Sie das Schema mit PK und FK an.",
+                        solution: "• tbl_buerger (Buerger_ID [PK], Steuer_ID, Nachname, Vorname, Geburtsdatum, Mail, Strasse, PLZ, Ort)\n• tbl_leika_leistung (Leika_ID [PK], Leistungsname, Zustaendiges_Amt, Bearbeitungsfrist_Tage, Gebuehr_EUR)\n• tbl_sachbearbeiter (Sachbearbeiter_ID [PK], Nachname, Vorname, Amtsbezeichnung, Dienstmail)\n• tbl_antrag (Antrag_ID [PK], Buerger_ID [FK], Leika_ID [FK], Sachbearbeiter_ID [FK], Eingangsdatum, Status, Bescheiddatum, Bescheid_Ergebnis)"
+                    },
+                    {
+                        id: "16_4_b",
+                        label: "b) SQL: Fristüberwachung & Amtsauswertung",
+                        points: 8,
+                        type: "lines",
+                        linesCount: 6,
+                        stencil: "SQL-QUERIES / VERWALTUNGSCONTROLLING",
+                        text: "Formulieren Sie die SQL-Statements:\nba) Ermitteln Sie alle offenen Anträge (`Status = 'IN_BEARBEITUNG'`), deren Eingang länger zurückliegt als die zulässige Frist der Leistung (`DATEDIFF(CURDATE(), Eingangsdatum) > Bearbeitungsfrist_Tage`) (5 Punkte).\nbb) Berechnen Sie die Gesamteinnahmen aus Antragsgebühren (`SUM(Gebuehr_EUR)`) je zuständigem Amt für das Jahr 2026 (3 Punkte).",
+                        solution: "ba)\nSELECT a.Antrag_ID, b.Nachname, b.Vorname, l.Leistungsname, a.Eingangsdatum, \n       DATEDIFF(CURDATE(), a.Eingangsdatum) AS Tage_in_Bearbeitung, \n       l.Bearbeitungsfrist_Tage, s.Nachname AS Sachbearbeiter\nFROM tbl_antrag a\nJOIN tbl_buerger b ON a.Buerger_ID = b.Buerger_ID\nJOIN tbl_leika_leistung l ON a.Leika_ID = l.Leika_ID\nLEFT JOIN tbl_sachbearbeiter s ON a.Sachbearbeiter_ID = s.Sachbearbeiter_ID\nWHERE a.Status = 'IN_BEARBEITUNG'\n  AND DATEDIFF(CURDATE(), a.Eingangsdatum) > l.Bearbeitungsfrist_Tage\nORDER BY Tage_in_Bearbeitung DESC;\n\nbb)\nSELECT l.Zustaendiges_Amt, COUNT(a.Antrag_ID) AS Anzahl_Antraege, SUM(l.Gebuehr_EUR) AS Gesamteinnahmen_EUR\nFROM tbl_leika_leistung l\nJOIN tbl_antrag a ON l.Leika_ID = a.Leika_ID\nWHERE a.Eingangsdatum BETWEEN '2026-01-01' AND '2026-12-31'\n  AND a.Status = 'BESCHIEDEN'\nGROUP BY l.Zustaendiges_Amt\nORDER BY Gesamteinnahmen_EUR DESC;"
+                    },
+                    {
+                        id: "16_4_c",
+                        label: "c) Algorithmus: Automatisierte Vorprüfung von Antragsberechtigungen",
+                        points: 9,
+                        type: "lines",
+                        linesCount: 7,
+                        stencil: "ALGORITHMEN / DUNKELVERARBEITUNG IN BEHÖRDEN",
+                        text: "Entwerfen Sie einen Algorithmus für die automatisierte Vorprüfung (Dunkelverarbeitung) eines Wohngeldantrags:\n• Parameter: `haushaltseinkommen_eur` (float), `miete_eur` (float), `haushaltsmitglieder` (int), `schufa_negativmerkmale` (bool), `mindesteinkommen_vorhanden` (bool).\n• Bedingung 1: Wenn `mindesteinkommen_vorhanden == false`, Rückgabe 'ABLEHNUNG_UNTERDECKUNG' (Verweis auf Bürgergeld).\n• Bedingung 2: Berechne Pro-Kopf-Einkommen = `haushaltseinkommen_eur / haushaltsmitglieder`. Wenn Pro-Kopf-Einkommen > 1.800 EUR: Rückgabe 'ABLEHNUNG_EINKOMMENSGRENZE'.\n• Bedingung 3: Mietbelastungsquote = `miete_eur / haushaltseinkommen_eur`. Wenn Quote >= 0.35 und `schufa_negativmerkmale == false`: Rückgabe 'BEWILLIGUNG_AUTOMATISCH'.\n• In allen übrigen Grenzfällen: Rückgabe 'MANUELLE_PRUEFUNG_SACHBEARBEITER'.\nErstellen Sie den Pseudocode.",
+                        solution: "FUNCTION pruefe_wohngeld_antrag(haushaltseinkommen_eur, miete_eur, haushaltsmitglieder, schufa_negativmerkmale, mindesteinkommen_vorhanden):\n    // 1. Plausibilitätsprüfung Existenzminimum\n    IF mindesteinkommen_vorhanden == FALSE THEN\n        RETURN 'ABLEHNUNG_UNTERDECKUNG (Zuständigkeit Jobcenter / Bürgergeld)'\n    END IF\n    \n    IF haushaltsmitglieder <= 0 THEN\n        RETURN 'FEHLER: Ungültige Personenzahl'\n    END IF\n    \n    // 2. Einkommensgrenze prüfen\n    pro_kopf_einkommen = haushaltseinkommen_eur / haushaltsmitglieder\n    IF pro_kopf_einkommen > 1800.0 THEN\n        RETURN 'ABLEHNUNG_EINKOMMENSGRENZE_UEBERSCHRITTEN'\n    END IF\n    \n    // 3. Mietbelastung berechnen\n    IF haushaltseinkommen_eur > 0 THEN\n        mietquote = miete_eur / haushaltseinkommen_eur\n    ELSE\n        mietquote = 1.0\n    END IF\n    \n    // 4. Automatische Bewilligung vs. manuelle Prüfung\n    IF mietquote >= 0.35 AND schufa_negativmerkmale == FALSE THEN\n        RETURN 'BEWILLIGUNG_AUTOMATISCH (Hohe Mietlast, Nachweise schlüssig)'\n    ELSE\n        RETURN 'MANUELLE_PRUEFUNG_SACHBEARBEITER (Grenzfall / Einzelprüfung erforderlich)'\n    END IF\nEND FUNCTION"
+                    }
+                ]
+            }
+        ]
+    }
 
 ];
 

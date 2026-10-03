@@ -14,8 +14,8 @@
             <h1><i class="fa-solid fa-graduation-cap"></i> AP1 Prüfungstrainer</h1>
             <p>Vorbereitung auf die IHK-Abschlussprüfung Teil 1 (Fachinformatiker)</p>
             <div style="margin-top: 0.85rem; display: flex; justify-content: center; gap: 0.75rem; flex-wrap: wrap;">
-                <button class="header-exam-btn" id="header-exam-overview-btn" title="Katalog aller 8 vollwertigen IHK-Prüfungen anzeigen & auswählen">
-                    <i class="fa-solid fa-book-bookmark"></i> 📚 Alle 8 Prüfungen vergleichen &amp; auswählen (800 Pkt)
+                <button class="header-exam-btn" id="header-exam-overview-btn" title="Katalog aller 16 vollwertigen IHK-Prüfungen anzeigen & auswählen">
+                    <i class="fa-solid fa-book-bookmark"></i> 📚 Alle 16 Prüfungen vergleichen &amp; auswählen (1.600 Pkt)
                 </button>
             </div>
         </div>
@@ -212,7 +212,7 @@
             <!-- IHK-Prüfungsmodus Card -->
             <div class="card exam-card" style="border: 2px solid #10b981; box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.1);">
                 <h3 style="color: #047857; margin-bottom: 0.4rem; font-size: 1.1rem;"><i class="fa-solid fa-file-signature"></i> IHK-Prüfungsmodus</h3>
-                <p style="font-size: 0.88rem; color: var(--text-light); margin-bottom: 0.6rem; line-height: 1.35;">Trainiere 8 vollwertige 100-Punkte-Prüfungen im 1:1 amtlichen Bogen-Design.</p>
+                <p style="font-size: 0.88rem; color: var(--text-light); margin-bottom: 0.6rem; line-height: 1.35;">Trainiere 16 vollwertige 100-Punkte-Prüfungen im 1:1 amtlichen Bogen-Design.</p>
                 
                 <div class="control-group" style="display: flex; flex-direction: column; gap: 0.3rem; margin-bottom: 0.75rem;">
                     <label for="sidebar-exam-set-select" style="font-size: 0.82rem; color: #047857; font-weight: 700;">Prüfungssatz wählen (100 Pkt):</label>
@@ -225,12 +225,20 @@
                         <option value="exam_6">📋 Prüfung 6: Cloud-Migration &amp; RZ-Effizienz</option>
                         <option value="exam_7">📋 Prüfung 7: Smart Factory &amp; IoT-Sensorik</option>
                         <option value="exam_8">📋 Prüfung 8: Medizintechnik &amp; Telematik (TI)</option>
+                        <option value="exam_9">📋 Prüfung 9: FinTech-Banking &amp; PSD2</option>
+                        <option value="exam_10">📋 Prüfung 10: Automotive Ethernet &amp; Sensorik</option>
+                        <option value="exam_11">📋 Prüfung 11: E-Learning, Campus &amp; WLAN</option>
+                        <option value="exam_12">📋 Prüfung 12: Smart Grid, LoRaWAN &amp; Energie</option>
+                        <option value="exam_13">📋 Prüfung 13: Flugsicherung &amp; Georedundanz</option>
+                        <option value="exam_14">📋 Prüfung 14: Hotelkette &amp; Hospitality IoT</option>
+                        <option value="exam_15">📋 Prüfung 15: Entsorgung &amp; Fuhrpark-Telematik</option>
+                        <option value="exam_16">📋 Prüfung 16: E-Government &amp; BundID</option>
                         <option value="exam_random">🎲 Dynamische 100-Punkte Zufallsprüfung</option>
                     </select>
                 </div>
 
                 <button class="btn btn-full" id="open-exam-overview-sidebar-btn" style="background: #ecfdf5; border: 1.5px solid #10b981; color: #047857; font-weight: 700; font-size: 0.88rem; padding: 0.55rem; display: flex; align-items: center; justify-content: center; gap: 0.45rem; width: 100%; border-radius: var(--radius); cursor: pointer; margin-bottom: 0.6rem; transition: all 0.2s;">
-                    <i class="fa-solid fa-layer-group"></i> 📚 Alle 8 Prüfungen vergleichen &amp; wählen
+                    <i class="fa-solid fa-layer-group"></i> 📚 Alle 16 Prüfungen vergleichen &amp; wählen
                 </button>
 
                 <div style="display: flex; flex-direction: column; gap: 0.5rem;">
@@ -289,10 +297,18 @@
                             <option value="exam_6">Prüfung 6: Cloud &amp; RZ-Effizienz</option>
                             <option value="exam_7">Prüfung 7: Smart Factory &amp; IoT</option>
                             <option value="exam_8">Prüfung 8: Medizintechnik &amp; TI</option>
+                            <option value="exam_9">Prüfung 9: FinTech &amp; PSD2</option>
+                            <option value="exam_10">Prüfung 10: Automotive &amp; Sensorik</option>
+                            <option value="exam_11">Prüfung 11: E-Learning &amp; WLAN</option>
+                            <option value="exam_12">Prüfung 12: Smart Grid &amp; Energie</option>
+                            <option value="exam_13">Prüfung 13: Flugsicherung &amp; Radar</option>
+                            <option value="exam_14">Prüfung 14: Hotelkette &amp; Hospitality</option>
+                            <option value="exam_15">Prüfung 15: Entsorgung &amp; Telematik</option>
+                            <option value="exam_16">Prüfung 16: E-Government &amp; BundID</option>
                             <option value="exam_random">🎲 Dynamische Zufallsprüfung</option>
                         </select>
-                        <button class="btn btn-secondary" id="booklet-overview-btn" title="Katalog aller 8 Prüfungen anzeigen" style="padding: 0.38rem 0.65rem; font-size: 0.85rem; display: flex; align-items: center; gap: 0.35rem; border-radius: 6px; border: 1.5px solid #10b981; color: #047857; background: #ecfdf5; cursor: pointer; white-space: nowrap; font-weight: 600;">
-                            <i class="fa-solid fa-layer-group"></i> <span>Übersicht (8)</span>
+                        <button class="btn btn-secondary" id="booklet-overview-btn" title="Katalog aller 16 Prüfungen anzeigen" style="padding: 0.38rem 0.65rem; font-size: 0.85rem; display: flex; align-items: center; gap: 0.35rem; border-radius: 6px; border: 1.5px solid #10b981; color: #047857; background: #ecfdf5; cursor: pointer; white-space: nowrap; font-weight: 600;">
+                            <i class="fa-solid fa-layer-group"></i> <span>Übersicht (16)</span>
                         </button>
                         <div class="exam-tabs-pills" id="booklet-tab-pills">
                             <button class="exam-tab-btn active" data-page="0">📄 Deckblatt</button>
@@ -504,7 +520,7 @@
                     <div>
                         <h3 style="margin: 0; font-size: 1.2rem; color: #065f46; display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
                             IHK-Prüfungsübersicht &amp; Klausuren-Katalog
-                            <span id="exam-catalog-counter-badge" style="font-size: 0.78rem; background: #dcfce7; color: #15803d; padding: 2px 8px; border-radius: 9999px; border: 1px solid #86efac; font-weight: 700;">8 Prüfungen verfügbar</span>
+                            <span id="exam-catalog-counter-badge" style="font-size: 0.78rem; background: #dcfce7; color: #15803d; padding: 2px 8px; border-radius: 9999px; border: 1px solid #86efac; font-weight: 700;">16 Prüfungen verfügbar</span>
                         </h3>
                         <p style="margin: 0; font-size: 0.82rem; color: #64748b;">Wähle eine Prüfung zur 1:1 amtlichen Bearbeitung im Klausurbogen oder starte die 90-Minuten-Echtzeitsimulation.</p>
                     </div>
@@ -518,10 +534,10 @@
             <div class="exam-catalog-stat-bar">
                 <div class="exam-catalog-stats">
                     <div class="exam-catalog-stat-pill">
-                        <i class="fa-solid fa-file-signature" style="color: #10b981;"></i> <strong>8 Vollprüfungen</strong> (je 4 Aufgaben à 25 Pkt)
+                        <i class="fa-solid fa-file-signature" style="color: #10b981;"></i> <strong>16 Vollprüfungen</strong> (je 4 Aufgaben à 25 Pkt)
                     </div>
                     <div class="exam-catalog-stat-pill">
-                        <i class="fa-solid fa-trophy" style="color: #f59e0b;"></i> <strong>800 Gesamtpunkte</strong> Prüfungsstoff
+                        <i class="fa-solid fa-trophy" style="color: #f59e0b;"></i> <strong>1.600 Gesamtpunkte</strong> Prüfungsstoff
                     </div>
                     <div class="exam-catalog-stat-pill">
                         <i class="fa-solid fa-stopwatch" style="color: #3b82f6;"></i> <strong>90 Min. Prüfungszeit</strong> (oder frei)
