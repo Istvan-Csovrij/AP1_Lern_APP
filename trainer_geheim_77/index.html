@@ -12,9 +12,9 @@
     <header>
         <div class="header-container" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
             <h1><i class="fa-solid fa-graduation-cap"></i> AP1 Prüfungstrainer</h1>
-            <p>Vorbereitung auf die IHK-Abschlussprüfung Teil 1 (Fachinformatiker)</p>
+            <p>Vorbereitung auf die Abschlussprüfung Teil 1 (Fachinformatiker • nach IHK-Standard)</p>
             <div style="margin-top: 0.85rem; display: flex; justify-content: center; gap: 0.75rem; flex-wrap: wrap;">
-                <button class="header-exam-btn" id="header-exam-overview-btn" title="Katalog aller 16 vollwertigen IHK-Prüfungen anzeigen & auswählen">
+                <button class="header-exam-btn" id="header-exam-overview-btn" title="Katalog aller 16 Prüfungen (nach Prüfungsstandard) anzeigen & auswählen">
                     <i class="fa-solid fa-book-bookmark"></i> 📚 Alle 16 Prüfungen vergleichen &amp; auswählen (1.600 Pkt)
                 </button>
             </div>
@@ -56,7 +56,7 @@
                         <i class="fa-solid fa-wand-magic-sparkles" style="color: #8b5cf6;"></i> 🔮 Baden-Württemberg Fokus (Schwerpunktthemen)
                     </button>
                     <button class="filter-btn highlight-hard-btn" data-theme="hard-mode" id="hard-mode-btn" style="border: 2px solid #ef4444; background: linear-gradient(135deg, #fef2f2, #fee2e2); color: #b91c1c; font-weight: bold; margin-top: 0.5rem; text-align: left; display: flex; align-items: center; gap: 0.5rem;">
-                        <i class="fa-solid fa-fire-flame-curved" style="color: #ef4444;"></i> 🔥 IHK Meisterklasse (Schwere Aufgaben)
+                        <i class="fa-solid fa-fire-flame-curved" style="color: #ef4444;"></i> 🔥 Prüfungs-Meisterklasse (Schwere Aufgaben)
                     </button>
                     <button class="filter-btn" data-theme="favorites" id="favorites-filter-btn" style="border: 2px solid #ffc107; font-weight: bold; margin-top: 0.5rem;">
                         <i class="fa-solid fa-star" style="color: #ffc107; margin-right: 0.25rem;"></i> Merkliste ⭐
@@ -171,7 +171,7 @@
                     <select id="question-difficulty-select" class="select-input" style="width: 100%; padding: 0.55rem 0.75rem; border: 2px solid var(--border-color); border-radius: var(--radius); font-size: 0.9rem; color: var(--text-color); background-color: white; outline: none; transition: var(--transition); cursor: pointer;">
                         <option value="all">Alle Schwierigkeitsgrade</option>
                         <option value="hard">🔥 Nur schwere Aufgaben (Meisterklasse)</option>
-                        <option value="standard">Prüfungsstandard (IHK Basis)</option>
+                        <option value="standard">Prüfungsstandard (Basis)</option>
                     </select>
                 </div>
                 <button class="btn btn-primary btn-full" id="regenerate-btn" style="margin-top: 0.75rem; padding: 0.6rem; font-size: 0.9rem;">
@@ -211,8 +211,8 @@
 
             <!-- IHK-Prüfungsmodus Card -->
             <div class="card exam-card" style="border: 2px solid #10b981; box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.1);">
-                <h3 style="color: #047857; margin-bottom: 0.4rem; font-size: 1.1rem;"><i class="fa-solid fa-file-signature"></i> IHK-Prüfungsmodus</h3>
-                <p style="font-size: 0.88rem; color: var(--text-light); margin-bottom: 0.6rem; line-height: 1.35;">Trainiere 16 vollwertige 100-Punkte-Prüfungen im 1:1 amtlichen Bogen-Design.</p>
+                <h3 style="color: #047857; margin-bottom: 0.4rem; font-size: 1.1rem;"><i class="fa-solid fa-file-signature"></i> Prüfungssimulation (IHK-orientiert)</h3>
+                <p style="font-size: 0.88rem; color: var(--text-light); margin-bottom: 0.6rem; line-height: 1.35;">Trainiere 16 vollwertige 100-Punkte-Prüfungen nach bundesweitem Kammer-Standard.</p>
                 
                 <div class="control-group" style="display: flex; flex-direction: column; gap: 0.3rem; margin-bottom: 0.75rem;">
                     <label for="sidebar-exam-set-select" style="font-size: 0.82rem; color: #047857; font-weight: 700;">Prüfungssatz wählen (100 Pkt):</label>
@@ -519,10 +519,10 @@
                     </div>
                     <div>
                         <h3 style="margin: 0; font-size: 1.2rem; color: #065f46; display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
-                            IHK-Prüfungsübersicht &amp; Klausuren-Katalog
+                            Prüfungsübersicht &amp; Klausuren-Katalog (Kammer-Standard)
                             <span id="exam-catalog-counter-badge" style="font-size: 0.78rem; background: #dcfce7; color: #15803d; padding: 2px 8px; border-radius: 9999px; border: 1px solid #86efac; font-weight: 700;">16 Prüfungen verfügbar</span>
                         </h3>
-                        <p style="margin: 0; font-size: 0.82rem; color: #64748b;">Wähle eine Prüfung zur 1:1 amtlichen Bearbeitung im Klausurbogen oder starte die 90-Minuten-Echtzeitsimulation.</p>
+                        <p style="margin: 0; font-size: 0.82rem; color: #64748b;">Wähle eine Prüfung zur Bearbeitung im Klausurbogen nach IHK-Schema oder starte die 90-Minuten-Echtzeitsimulation.</p>
                     </div>
                 </div>
                 <div style="display: flex; align-items: center; gap: 0.5rem;">
@@ -563,6 +563,9 @@
 
     <footer>
         <p>&copy; 2026 AP1 Prüfungstrainer - Entwickelt von Istvan Csovrij</p>
+        <p style="font-size: 0.78rem; color: #94a3b8; max-width: 800px; margin: 0.4rem auto 0 auto; line-height: 1.35;">
+            Hinweis: Unabhängige Lern- und Prüfungssimulation nach dem bundesweiten AP1-Standard (IHK-orientiert). Alle Aufgabenszenarien, Modellfirmen und Daten sind fiktiv und urheberrechtlich eigenständig erstellt. Keine offizielle Prüfung oder Publikation einer Kammer oder des DIHK.
+        </p>
     </footer>
 
     <!-- Load diagram library, exam datasets, questions, generator and application logic -->

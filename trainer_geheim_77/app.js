@@ -32,8 +32,8 @@ let examCandidateInfo = {
     name: "Mustermann, Max",
     prueflingsnummer: "1202-74910",
     beruf: "Fachinformatiker/-in",
-    ihk: "IHK Region Südwest",
-    termin: "Abschlussprüfung Teil 1"
+    ihk: "Kammerbezirk Südwest",
+    termin: "Prüfungssimulation AP1"
 };
 let examAnswersData = {}; // Store text for lines, math grids, and table cells
 let examScores = {}; // Store points for subtasks
@@ -797,7 +797,7 @@ function loadQuestion() {
                 <div style="background: linear-gradient(135deg, #ecfdf5, #f0fdf4); border: 1px solid #10b981; border-radius: 8px; padding: 0.65rem 0.9rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem;">
                     <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.88rem; color: #065f46;">
                         <i class="fa-solid fa-code" style="color: #059669; font-size: 1.15rem;"></i>
-                        <span><strong>IHK Pseudocode-Training:</strong> Nutze Trace-Tabellen für Variablenwerte &amp; saubere IHK-Kontrollstrukturen (SOLANGE, FÜR, WENN-DANN)!</span>
+                        <span><strong>Pseudocode-Training:</strong> Nutze Trace-Tabellen für Variablenwerte &amp; saubere Kontrollstrukturen nach Prüfungsstandard (SOLANGE, FÜR, WENN-DANN)!</span>
                     </div>
                     <div style="display: flex; gap: 0.4rem; align-items: center;">
                         <button id="inline-quiz-wb-btn" class="btn" style="background: linear-gradient(135deg, #10b981, #059669); color: white; padding: 0.35rem 0.75rem; font-size: 0.85rem; border-radius: 6px; border: none; cursor: pointer; font-weight: 600; display: inline-flex; align-items: center; gap: 0.35rem;">
@@ -1235,7 +1235,7 @@ function getThemeLabel(key) {
         lf6: "LF 6: Services & WiSo",
         wiso: "WiSo: Wirtschafts- & Sozialkunde",
         "bawue-special": "BW Spezial: IT-Systeme & Prozesse",
-        "bawue-focus": "🔮 IHK Stuttgart Fokus",
+        "bawue-focus": "🔮 Prüfungsfokus BaWü",
         diagrams: "📐 Diagramme & Modellierung",
         "diagram-training": "📐 Diagramme & Modellierung",
         calculations: "🧮 Rechnen & Handelskalkulation",
@@ -1246,8 +1246,8 @@ function getThemeLabel(key) {
         zahlensysteme: "🔢 Zahlensysteme & Dateneinheiten (LF 2/3)",
         binary: "🔢 Zahlensysteme & Dateneinheiten (LF 2/3)",
         hex: "🔢 Zahlensysteme & Dateneinheiten (LF 2/3)",
-        "hard-mode": "🔥 IHK Meisterklasse (Schwer)",
-        hard: "🔥 IHK Meisterklasse (Schwer)"
+        "hard-mode": "🔥 Prüfungsschwerpunkte (Schwer)",
+        hard: "🔥 Prüfungsschwerpunkte (Schwer)"
     };
     return labels[key] || key;
 }
@@ -1455,7 +1455,7 @@ function renderDeckblatt(container) {
     let stampHtml = "";
     if (isExamSubmitted) {
         const stampClass = scores.isPassed ? "ihk-stamp-pass" : "ihk-stamp-fail";
-        const stampText = scores.isPassed ? "✓ BESTANDEN (IHK)" : "✗ NICHT BESTANDEN";
+        const stampText = scores.isPassed ? "✓ BESTANDEN (Simuliert)" : "✗ NICHT BESTANDEN";
         stampHtml = `
             <div style="text-align: center; margin: 15px 0;">
                 <div class="ihk-stamp ${stampClass}">${stampText}</div>
@@ -1470,7 +1470,7 @@ function renderDeckblatt(container) {
         <div class="exam-paper-sheet">
             <!-- Header bar -->
             <div class="exam-paper-header">
-                <span>Abschlussprüfung Teil 1 • IT-Berufe</span>
+                <span>Abschlussprüfung Teil 1 • IT-Berufe (Simulation)</span>
                 <span>Termin: ${escapeHtml(examCandidateInfo.termin)}</span>
                 <span>Prüfungszeit: 90 Minuten</span>
             </div>
@@ -1497,7 +1497,7 @@ function renderDeckblatt(container) {
                             <input type="text" id="cand-beruf" value="${escapeHtml(examCandidateInfo.beruf)}" oninput="examCandidateInfo.beruf = this.value">
                         </div>
                         <div class="deckblatt-field" style="grid-column: span 2;">
-                            <label>Zuständige Industrie- und Handelskammer</label>
+                            <label>Zuständige Kammer / Prüfungsbezirk</label>
                             <input type="text" id="cand-ihk" value="${escapeHtml(examCandidateInfo.ihk)}" oninput="examCandidateInfo.ihk = this.value">
                         </div>
                     </div>
@@ -1505,10 +1505,10 @@ function renderDeckblatt(container) {
 
                 <!-- Exam Title Area -->
                 <div class="deckblatt-title-area">
-                    <div style="font-size: 0.95rem; font-weight: bold; text-transform: uppercase; color: #475569; letter-spacing: 0.05em; margin-bottom: 4px;">
-                        Gemeinsame Prüfungsaufgaben der Industrie- und Handelskammern
+                    <div style="font-size: 0.88rem; font-weight: bold; text-transform: uppercase; color: #475569; letter-spacing: 0.04em; margin-bottom: 4px;">
+                        Übungsaufgaben nach bundesweitem AP1-Prüfungsstandard (IHK-orientiert)
                     </div>
-                    <div class="deckblatt-exam-title">Abschlussprüfung Teil 1 (AP1)</div>
+                    <div class="deckblatt-exam-title">Abschlussprüfung Teil 1 (AP1) • Simulation</div>
                     <div class="deckblatt-exam-subtitle">Einrichten eines IT-gestützten Arbeitsplatzes</div>
                     <div style="font-size: 1.05rem; font-weight: 700; color: #0284c7; margin-top: 6px;">
                         ${escapeHtml(activeExamSet.title)}
@@ -1539,7 +1539,7 @@ function renderDeckblatt(container) {
                         </ul>
 
                         <div style="margin-top: 15px; padding: 10px; background: #e0f2fe; border: 1px solid #7dd3fc; border-radius: 4px; font-size: 0.85rem;">
-                            <strong>IHK-Notenschlüssel:</strong><br>
+                            <strong>100-Punkte-Notenschlüssel (Kammer-Standard):</strong><br>
                             100 – 92 Pkt: Note 1 (sehr gut)<br>
                             &lt; 92 – 81 Pkt: Note 2 (gut)<br>
                             &lt; 81 – 67 Pkt: Note 3 (befriedigend)<br>
@@ -1584,25 +1584,25 @@ function renderDeckblatt(container) {
                                 <td class="label-col">1. Aufgabe: ${escapeHtml(activeExamSet.tasks[0].title.split(':')[1] || activeExamSet.tasks[0].title)}</td>
                                 <td>25</td>
                                 <td style="font-weight: bold; font-size: 1.05rem; color: #dc2626;">${scores.taskPoints[0]}</td>
-                                <td style="color: #64748b; font-style: italic;">${isExamSubmitted ? 'gez. IHK' : ''}</td>
+                                <td style="color: #64748b; font-style: italic;">${isExamSubmitted ? 'gez. Prüfer' : ''}</td>
                             </tr>
                             <tr>
                                 <td class="label-col">2. Aufgabe: ${escapeHtml(activeExamSet.tasks[1].title.split(':')[1] || activeExamSet.tasks[1].title)}</td>
                                 <td>25</td>
                                 <td style="font-weight: bold; font-size: 1.05rem; color: #dc2626;">${scores.taskPoints[1]}</td>
-                                <td style="color: #64748b; font-style: italic;">${isExamSubmitted ? 'gez. IHK' : ''}</td>
+                                <td style="color: #64748b; font-style: italic;">${isExamSubmitted ? 'gez. Prüfer' : ''}</td>
                             </tr>
                             <tr>
                                 <td class="label-col">3. Aufgabe: ${escapeHtml(activeExamSet.tasks[2].title.split(':')[1] || activeExamSet.tasks[2].title)}</td>
                                 <td>25</td>
                                 <td style="font-weight: bold; font-size: 1.05rem; color: #dc2626;">${scores.taskPoints[2]}</td>
-                                <td style="color: #64748b; font-style: italic;">${isExamSubmitted ? 'gez. IHK' : ''}</td>
+                                <td style="color: #64748b; font-style: italic;">${isExamSubmitted ? 'gez. Prüfer' : ''}</td>
                             </tr>
                             <tr>
                                 <td class="label-col">4. Aufgabe: ${escapeHtml(activeExamSet.tasks[3].title.split(':')[1] || activeExamSet.tasks[3].title)}</td>
                                 <td>25</td>
                                 <td style="font-weight: bold; font-size: 1.05rem; color: #dc2626;">${scores.taskPoints[3]}</td>
-                                <td style="color: #64748b; font-style: italic;">${isExamSubmitted ? 'gez. IHK' : ''}</td>
+                                <td style="color: #64748b; font-style: italic;">${isExamSubmitted ? 'gez. Prüfer' : ''}</td>
                             </tr>
                             <tr class="total-row">
                                 <td class="label-col">Gesamtpunktzahl / Endnote:</td>
@@ -1619,12 +1619,15 @@ function renderDeckblatt(container) {
                     <button class="btn btn-primary" onclick="changeExamPage(1)" style="font-size: 1.05rem; padding: 0.75rem 1.6rem; font-weight: bold; display: inline-flex; align-items: center; gap: 0.5rem; box-shadow: 0 4px 10px rgba(16, 185, 129, 0.3);">
                         <i class="fa-solid fa-play"></i> Mit 1. Aufgabe (25 Punkte) beginnen →
                     </button>
+                    <div style="text-align: center; margin-top: 10px; font-size: 0.72rem; color: #64748b; font-style: italic;">
+                        Unabhängige Prüfungssimulation zur Prüfungsvorbereitung • Fiktive Modellunternehmen nach bundesweitem IHK-Prüfungsschema
+                    </div>
                 </div>
             </div>
 
             <!-- Page Footer -->
             <div class="exam-paper-footer">
-                <span>ZPA IT AP1 Modellbogen</span>
+                <span>AP1-Prüfungssimulation • IT-Berufe (Kammer-Standard)</span>
                 <span>Deckblatt (Seite 1 von 5)</span>
                 <span>Weiterblättern zur 1. Aufgabe →</span>
             </div>
@@ -1814,7 +1817,7 @@ function renderTaskPage(container, pageIndex) {
 
             <!-- Page Footer -->
             <div class="exam-paper-footer">
-                <span>ZPA IT AP1 • ${escapeHtml(activeExamSet.title.split(':')[0])}</span>
+                <span>AP1-Prüfungssimulation • ${escapeHtml(activeExamSet.title.split(':')[0])}</span>
                 <span>${pageIndex < 4 ? 'Fortsetzung ' + (pageIndex + 1) + '. Aufgabe →' : 'Ende der Prüfungsaufgaben'}</span>
             </div>
         </div>
@@ -1897,8 +1900,8 @@ function submitExam() {
 
     // Alert user
     const msg = res.isPassed
-        ? `🎉 Herzlichen Glückwunsch! Du hast die Prüfung BESTANDEN!\n\nGesamtergebnis: ${res.totalPoints} von 100 Punkten\nIHK-Note: Note ${res.gradeNum} (${res.gradeText})\n\nDein amtliches Deckblatt wurde abgestempelt. Du kannst nun durch die Aufgaben 1 bis 4 blättern, um die detaillierten Musterlösungen einzusehen und die Punkte im Korrekturrand anzupassen.`
-        : `Die Prüfung wurde ausgewertet.\n\nGesamtergebnis: ${res.totalPoints} von 100 Punkten\nIHK-Note: Note ${res.gradeNum} (${res.gradeText})\n\nDu benötigst mindestens 50 Punkte zum Bestehen. Blättere durch die Aufgaben 1 bis 4, vergleiche deine Antworten mit den Musterlösungen und passe deine Punkte im Korrekturrand an.`;
+        ? `🎉 Herzlichen Glückwunsch! Du hast die Prüfung BESTANDEN!\n\nGesamtergebnis: ${res.totalPoints} von 100 Punkten\nPrüfungsnote: Note ${res.gradeNum} (${res.gradeText})\n\nDein Deckblatt wurde ausgewertet. Du kannst nun durch die Aufgaben 1 bis 4 blättern, um die detaillierten Musterlösungen einzusehen und die Punkte im Korrekturrand anzupassen.`
+        : `Die Prüfung wurde ausgewertet.\n\nGesamtergebnis: ${res.totalPoints} von 100 Punkten\nPrüfungsnote: Note ${res.gradeNum} (${res.gradeText})\n\nDu benötigst mindestens 50 Punkte zum Bestehen. Blättere durch die Aufgaben 1 bis 4, vergleiche deine Antworten mit den Musterlösungen und passe deine Punkte im Korrekturrand an.`;
 
     alert(msg);
 }
@@ -2366,13 +2369,13 @@ function wbExportPNG() {
     expCtx.drawImage(wbCanvas, 0, 0);
 
     const link = document.createElement("a");
-    link.download = `IHK_AP1_Diagramm_Skizze_${new Date().toISOString().slice(0, 10)}.png`;
+    link.download = `AP1_Diagramm_Skizze_${new Date().toISOString().slice(0, 10)}.png`;
     link.href = exportCanvas.toDataURL("image/png");
     link.click();
 }
 
 // ==========================================================================
-// IHK Rechen- & Einheiten-Trainer Modal & Sidebar Quick-Tools
+// Rechen- & Einheiten-Trainer Modal & Sidebar Quick-Tools
 // ==========================================================================
 function initRechentrainer() {
     const modal = document.getElementById("rechentrainer-modal");
@@ -2425,7 +2428,7 @@ function initRechentrainer() {
 }
 
 // ==========================================================================
-// IHK-Prüfungsübersicht & Klausuren-Katalog Modal Logic
+// Prüfungsübersicht & Klausuren-Katalog Modal Logic
 // ==========================================================================
 function initExamOverview() {
     const modal = document.getElementById("exam-overview-modal");
@@ -2510,7 +2513,7 @@ function renderExamCatalog(filterText = "") {
 
         // Extract company from subtitle
         const companyParts = (exam.subtitle || "").split("•");
-        const companyName = companyParts.length > 2 ? companyParts[2].trim() : "IHK-Prüfungsbetrieb";
+        const companyName = companyParts.length > 2 ? companyParts[2].trim() : "Modellunternehmen";
 
         html += `
             <div class="exam-catalog-card ${isActive ? 'active' : ''}">

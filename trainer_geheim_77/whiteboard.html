@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IHK AP1 Zeichenboard &amp; Diagramm-Trainer</title>
+    <title>AP1 Zeichenboard &amp; Diagramm-Trainer (Prüfungsstandard)</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -717,7 +717,7 @@
         <div class="header-title-group">
             <div class="header-icon"><i class="fa-solid fa-pen-ruler"></i></div>
             <div class="header-text">
-                <h1 id="header-diagram-title">IHK AP1 Diagramm-Board</h1>
+                <h1 id="header-diagram-title">AP1 Diagramm-Board</h1>
                 <p id="header-diagram-subtitle">UML Use-Case &amp; Klassen, ERD, EPK, BPMN &amp; Netzpläne</p>
             </div>
             <div class="autosave-badge" id="save-status" title="Zeichnung wird automatisch im Browser gesichert">
@@ -751,7 +751,7 @@
             <div class="separator" style="height: 22px;"></div>
 
             <!-- Cheatsheet & Export -->
-            <button class="btn" id="cheatsheet-toggle-btn" title="IHK Notationen, Symbole &amp; Stempel einblenden">
+            <button class="btn" id="cheatsheet-toggle-btn" title="Prüfungs-Notationen, Symbole &amp; Stempel einblenden">
                 <i class="fa-solid fa-book-open" style="color: #8b5cf6;"></i> <span class="btn-label">Vorlagen</span>
             </button>
             <button class="btn" id="copy-clipboard-btn" title="Skizze in Zwischenablage kopieren (Strg+C)">
@@ -876,7 +876,7 @@
         <!-- Cheatsheet Drawer -->
         <aside class="cheatsheet-drawer collapsed" id="cheatsheet-drawer">
             <div class="drawer-header">
-                <h3><i class="fa-solid fa-lightbulb" style="color: #eab308;"></i> IHK Notationen &amp; Stempel</h3>
+                <h3><i class="fa-solid fa-lightbulb" style="color: #eab308;"></i> Prüfungs-Notationen &amp; Stempel</h3>
                 <button class="btn" id="close-drawer-btn" style="border: none; padding: 0.2rem 0.5rem; font-size: 1.2rem; cursor: pointer;">&times;</button>
             </div>
             <div class="drawer-content">
@@ -1131,7 +1131,7 @@
 
     <script>
         // ====================================================================
-        // IHK AP1 Object-Oriented Whiteboard Engine (Vektorbasiert & Bewegbar)
+        // AP1 Object-Oriented Whiteboard Engine (Vektorbasiert & Bewegbar)
         // ====================================================================
         const STORAGE_KEY = "ihk_ap1_whiteboard_data_v1";
         const STORAGE_ELEMENTS_KEY = "ihk_ap1_whiteboard_elements_v1";
@@ -2673,9 +2673,9 @@
             const subEl = document.getElementById("header-diagram-subtitle");
             if (title) {
                 if (titleEl) titleEl.innerText = title;
-                if (subEl) subEl.innerText = "Gespeichertes IHK-Diagramm (wird automatisch synchronisiert)";
+                if (subEl) subEl.innerText = "Gespeichertes Diagramm (wird automatisch synchronisiert)";
             } else {
-                if (titleEl) titleEl.innerText = "IHK AP1 Diagramm-Board";
+                if (titleEl) titleEl.innerText = "AP1 Diagramm-Board";
                 if (subEl) subEl.innerText = "UML Use-Case & Klassen, ERD, EPK, BPMN & Netzpläne";
             }
         }
@@ -3040,7 +3040,7 @@
             const list = getSavedDiagrams();
             const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(list, null, 2));
             const a = document.createElement("a");
-            a.download = `IHK_AP1_Diagramme_Backup_${new Date().toISOString().slice(0, 10)}.json`;
+            a.download = `AP1_Diagramme_Backup_${new Date().toISOString().slice(0, 10)}.json`;
             a.href = dataStr;
             a.click();
             showToast("Backup aller Diagramme exportiert!");
@@ -3114,7 +3114,7 @@
             expCtx.restore();
 
             const a = document.createElement("a");
-            const fileTitle = (activeDiagramTitle || "IHK_AP1_Diagramm").replace(/[^a-zA-Z0-9_-]/g, "_");
+            const fileTitle = (activeDiagramTitle || "AP1_Diagramm").replace(/[^a-zA-Z0-9_-]/g, "_");
             a.download = `${fileTitle}_${new Date().toISOString().slice(0, 10)}.png`;
             a.href = expCanvas.toDataURL("image/png");
             a.click();

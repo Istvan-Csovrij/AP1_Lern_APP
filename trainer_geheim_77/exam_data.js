@@ -1,7 +1,7 @@
 // ==========================================================================
 // AP1 VOLLPRÜFUNGEN - 4 VOLLSTÄNDIGE 100-PUNKTE-PRÜFUNGSSÄTZE (AUFGABE 1-4)
 // Pädagogisch aufbereitete, 100% urheberrechtskonforme Prüfungsbögen
-// Entspricht exakt dem amtlichen 1:1 IHK-Prüfungsbogen-Design
+// Entspricht dem 1:1 Prüfungsbogen-Design nach bundesweitem AP1-Standard (IHK-orientiert)
 // ==========================================================================
 
 var ExamSvgs = {
@@ -875,7 +875,7 @@ var EXAM_SETS = [
                                 ["= Bruttoverkaufspreis (BVP)", "Endkundenpreis inkl. USt", "= 123,32 EUR"]
                             ]
                         },
-                        solution: "Klassisches Kalkulationsschema nach IHK: LEP ➔ ZEP ➔ BEP ➔ Einstandspreis ➔ SKP ➔ BVP (Netto) ➔ ZVP ➔ LVP (Netto) ➔ BVP (Brutto inkl. USt)."
+                        solution: "Klassisches Kalkulationsschema nach Prüfungsstandard: LEP ➔ ZEP ➔ BEP ➔ Einstandspreis ➔ SKP ➔ BVP (Netto) ➔ ZVP ➔ LVP (Netto) ➔ BVP (Brutto inkl. USt)."
                     }
                 ]
             },
@@ -2428,7 +2428,7 @@ var EXAM_SETS = [
                         linesCount: 3,
                         stencil: "STEUERRECHT / UMSATZSTEUER BEI BILDUNG",
                         text: "Erläutern Sie, unter welcher Voraussetzung Bildungsleistungen einer Akademie von der 19 % Umsatzsteuer nach § 4 Nr. 21 UStG befreit sind.",
-                        solution: "Voraussetzung: Vorliegen einer behördlichen Bescheinigung der zuständigen Landesbehörde, dass die Bildungsmaßnahme ordnungsgemäß auf einen Beruf oder eine vor einer juristischen Person des öffentlichen Rechts (z. B. IHK) abzulegende Prüfung vorbereitet."
+                        solution: "Voraussetzung: Vorliegen einer behördlichen Bescheinigung der zuständigen Landesbehörde, dass die Bildungsmaßnahme ordnungsgemäß auf einen Beruf oder eine vor einer juristischen Person des öffentlichen Rechts (z. B. zuständige Kammer) abzulegende Prüfung vorbereitet."
                     }
                 ]
             },
@@ -2543,7 +2543,7 @@ var EXAM_SETS = [
             },
             {
                 number: 4,
-                title: "4. Aufgabe: Kurs- und Notendatenbank (3NF), SQL & IHK-Notenberechnungs-Algorithmus",
+                title: "4. Aufgabe: Kurs- und Notendatenbank (3NF), SQL & Notenberechnungs-Algorithmus",
                 totalPoints: 25,
                 subtasks: [
                     {
@@ -2568,13 +2568,13 @@ var EXAM_SETS = [
                     },
                     {
                         id: "11_4_c",
-                        label: "c) Algorithmus: IHK-Notenberechnung nach 100-Punkte-Schlüssel",
+                        label: "c) Algorithmus: Notenberechnung nach 100-Punkte-Schlüssel (Kammer-Standard)",
                         points: 9,
                         type: "lines",
                         linesCount: 7,
-                        stencil: "ALGORITHMEN / IHK-NOTENSCHLÜSSEL",
-                        text: "Entwerfen Sie eine Funktion `berechne_ihk_note(punkte)` in Pseudocode, die aus einer erreichten Punktzahl (0,0 bis 100,0) die IHK-Note (1 bis 6) und den Text ermittelt:\n• Punkte >= 92: Note 1 ('sehr gut')\n• Punkte >= 81 und < 92: Note 2 ('gut')\n• Punkte >= 67 und < 81: Note 3 ('befriedigend')\n• Punkte >= 50 und < 67: Note 4 ('ausreichend' - bestanden)\n• Punkte >= 30 und < 50: Note 5 ('mangelhaft' - nicht bestanden)\n• Punkte < 30: Note 6 ('ungenügend' - nicht bestanden)\nPrüfen Sie Eingaben auf Gültigkeit (< 0 oder > 100 -> Fehler).",
-                        solution: "FUNCTION berechne_ihk_note(punkte):\n    IF punkte < 0 OR punkte > 100 THEN\n        RETURN 'FEHLER: Ungültige Punktzahl'\n    END IF\n    \n    // Kaufmännische Rundung auf ganze Punkte\n    gerundete_punkte = ROUND(punkte)\n    \n    IF gerundete_punkte >= 92 THEN\n        RETURN 'Note 1 (sehr gut) - Bestanden'\n    ELSE IF gerundete_punkte >= 81 THEN\n        RETURN 'Note 2 (gut) - Bestanden'\n    ELSE IF gerundete_punkte >= 67 THEN\n        RETURN 'Note 3 (befriedigend) - Bestanden'\n    ELSE IF gerundete_punkte >= 50 THEN\n        RETURN 'Note 4 (ausreichend) - Bestanden'\n    ELSE IF gerundete_punkte >= 30 THEN\n        RETURN 'Note 5 (mangelhaft) - Nicht bestanden'\n    ELSE\n        RETURN 'Note 6 (ungenügend) - Nicht bestanden'\n    END IF\nEND FUNCTION"
+                        stencil: "ALGORITHMEN / 100-PUNKTE-NOTENSCHLÜSSEL",
+                        text: "Entwerfen Sie eine Funktion `berechne_note(punkte)` in Pseudocode, die aus einer erreichten Punktzahl (0,0 bis 100,0) die Note (1 bis 6) und den Text nach dem bundesweiten 100-Punkte-Schlüssel ermittelt:\n• Punkte >= 92: Note 1 ('sehr gut')\n• Punkte >= 81 und < 92: Note 2 ('gut')\n• Punkte >= 67 und < 81: Note 3 ('befriedigend')\n• Punkte >= 50 und < 67: Note 4 ('ausreichend' - bestanden)\n• Punkte >= 30 und < 50: Note 5 ('mangelhaft' - nicht bestanden)\n• Punkte < 30: Note 6 ('ungenügend' - nicht bestanden)\nPrüfen Sie Eingaben auf Gültigkeit (< 0 oder > 100 -> Fehler).",
+                        solution: "FUNCTION berechne_note(punkte):\n    IF punkte < 0 OR punkte > 100 THEN\n        RETURN 'FEHLER: Ungültige Punktzahl'\n    END IF\n    \n    // Kaufmännische Rundung auf ganze Punkte\n    gerundete_punkte = ROUND(punkte)\n    \n    IF gerundete_punkte >= 92 THEN\n        RETURN 'Note 1 (sehr gut) - Bestanden'\n    ELSE IF gerundete_punkte >= 81 THEN\n        RETURN 'Note 2 (gut) - Bestanden'\n    ELSE IF gerundete_punkte >= 67 THEN\n        RETURN 'Note 3 (befriedigend) - Bestanden'\n    ELSE IF gerundete_punkte >= 50 THEN\n        RETURN 'Note 4 (ausreichend) - Bestanden'\n    ELSE IF gerundete_punkte >= 30 THEN\n        RETURN 'Note 5 (mangelhaft) - Nicht bestanden'\n    ELSE\n        RETURN 'Note 6 (ungenügend) - Nicht bestanden'\n    END IF\nEND FUNCTION"
                     }
                 ]
             }
