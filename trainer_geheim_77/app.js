@@ -1715,28 +1715,113 @@ function renderTaskPage(container, pageIndex) {
                 </div>
             `;
         } else if (sub.type === "table" && sub.tableConfig) {
+            const cfg = sub.tableConfig;
+            const isMatching = cfg.type === "matching" || 
+                               (cfg.targetCol !== undefined) ||
+                               (cfg.targetCols !== undefined) ||
+                               (cfg.options && cfg.options.length > 0) ||
+                               (sub.text && (sub.text.toLowerCase().includes("ordnen sie") || sub.text.toLowerCase().includes("zuordnen") || sub.text.toLowerCase().includes("bringen sie")));
+            
+            const targetCols = cfg.targetCols || (cfg.targetCol !== undefined ? [cfg.targetCol] : (isMatching ? [0] : []));
+            const staticCols = cfg.staticCols || (cfg.targetCols ? [0] : (isMatching ? [] : [0]));
+
+            // Options pool for matching
+            let options = cfg.options || [];
+            if (isMatching && (!options || options.length === 0)) {
+                const set = new Set();
+                const primaryCol = targetCols[0] !== undefined ? targetCols[0] : 0;
+                cfg.rows.forEach(r => {
+                    if (r[primaryCol] && r[primaryCol] !== "/") {
+                        set.add(r[primaryCol].trim());
+                    }
+                });
+                options = Array.from(set);
+            }
+
+            // Headers
             let thead = "<tr>";
-            sub.tableConfig.headers.forEach(h => {
+            cfg.headers.forEach(h => {
                 thead += `<th>${escapeHtml(h)}</th>`;
             });
             thead += "</tr>";
 
             let tbody = "";
-            sub.tableConfig.rows.forEach((row, rIdx) => {
+            cfg.rows.forEach((row, rIdx) => {
                 tbody += "<tr>";
                 row.forEach((cell, cIdx) => {
                     const cellKey = `${sub.id}_tbl_${rIdx}_${cIdx}`;
-                    const savedCell = examAnswersData[cellKey] !== undefined ? examAnswersData[cellKey] : cell;
-                    if (cell === "/" || savedCell === "/") {
+                    const expectedVal = (cell || "").trim();
+                    const isSlash = expectedVal === "/";
+
+                    if (isSlash) {
                         tbody += `<td class="diagonal-slash" style="text-align: center; font-weight: bold;">/</td>`;
-                    } else if (cIdx === 0) {
-                        tbody += `<td style="font-weight: bold; background: #f8fafc;">${escapeHtml(savedCell)}</td>`;
-                    } else {
+                    } else if (targetCols.includes(cIdx)) {
+                        // Dropdown selection cell
+                        const userVal = examAnswersData[cellKey] !== undefined ? examAnswersData[cellKey] : "";
+                        const colOptions = (cfg.colOptions && cfg.colOptions[cIdx]) ? cfg.colOptions[cIdx] : options;
+                        
+                        let selectHtml = `<select class="exam-table-select" data-sub-id="${sub.id}" data-row-idx="${rIdx}" data-col-idx="${cIdx}" id="${cellKey}" onchange="saveSubtaskAnswer('${cellKey}', this.value)" ${isExamSubmitted ? "disabled" : ""}>`;
+                        selectHtml += `<option value="">-- Bitte zuordnen --</option>`;
+                        colOptions.forEach(opt => {
+                            const sel = userVal === opt ? "selected" : "";
+                            selectHtml += `<option value="${escapeHtml(opt)}" ${sel}>${escapeHtml(opt)}</option>`;
+                        });
+                        selectHtml += `</select>`;
+
+                        // Submission feedback
+                        let evalHtml = "";
+                        let tdClass = "";
+                        if (isExamSubmitted) {
+                            tdClass = "cell-evaluated ";
+                            if (userVal === expectedVal) {
+                                tdClass += "cell-correct";
+                                evalHtml = `<span class="cell-correct-check"><i class="fa-solid fa-check"></i> Richtig</span>`;
+                            } else {
+                                tdClass += "cell-incorrect";
+                                evalHtml = `<span class="cell-solution-hint">Lösung: ${escapeHtml(expectedVal)}</span>`;
+                            }
+                        }
+
+                        tbody += `<td class="${tdClass}" style="min-width: 170px;">${selectHtml}${evalHtml}</td>`;
+
+                    } else if (staticCols.includes(cIdx) || (isMatching && !targetCols.includes(cIdx))) {
+                        // Readable static text cell
+                        const isHeaderCol = cIdx === 0 && !isMatching;
+                        const cellStyle = isHeaderCol ? "font-weight: 600; background: #f8fafc; color: #1e293b;" : "";
                         tbody += `
-                            <td>
+                            <td style="${cellStyle}">
+                                <div class="exam-table-cell-text">${escapeHtml(cell)}</div>
+                            </td>
+                        `;
+                    } else {
+                        // Editable text input cell (for calculation/fill-in tables)
+                        // Starts empty before submission unless user already entered a value
+                        const userVal = examAnswersData[cellKey] !== undefined ? examAnswersData[cellKey] : "";
+                        
+                        let evalHtml = "";
+                        let tdClass = "";
+                        if (isExamSubmitted) {
+                            tdClass = "cell-evaluated ";
+                            const userNorm = userVal.trim().toLowerCase().replace(/[\s\.,€\/]/g, '');
+                            const expectedNorm = expectedVal.toLowerCase().replace(/[\s\.,€\/]/g, '');
+                            if (userNorm && (userNorm === expectedNorm || expectedNorm.includes(userNorm))) {
+                                tdClass += "cell-correct";
+                                evalHtml = `<span class="cell-correct-check"><i class="fa-solid fa-check"></i> Korrekt</span>`;
+                            } else {
+                                tdClass += "cell-incorrect";
+                                evalHtml = `<span class="cell-solution-hint">Musterlösung: ${escapeHtml(expectedVal)}</span>`;
+                            }
+                        }
+
+                        tbody += `
+                            <td class="${tdClass}">
                                 <input type="text" class="exam-table-input" 
-                                       value="${escapeHtml(savedCell)}" 
-                                       oninput="saveSubtaskAnswer('${cellKey}', this.value)">
+                                       id="${cellKey}"
+                                       value="${escapeHtml(userVal)}" 
+                                       placeholder="Eintragen..." 
+                                       oninput="saveSubtaskAnswer('${cellKey}', this.value)"
+                                       ${isExamSubmitted ? "readonly" : ""}>
+                                ${evalHtml}
                             </td>
                         `;
                     }
@@ -1744,11 +1829,42 @@ function renderTaskPage(container, pageIndex) {
                 tbody += "</tr>";
             });
 
+            // Options Pool Box for matching tasks
+            let optionsPoolHtml = "";
+            if (isMatching && options.length > 0) {
+                let badgesHtml = "";
+                options.forEach((opt, oIdx) => {
+                    const parts = opt.split(/[-–:]/);
+                    const keyBadge = parts.length > 1 ? parts[0].trim() : `${oIdx + 1}`;
+                    const labelText = parts.length > 1 ? parts.slice(1).join('-').trim() : opt;
+                    badgesHtml += `
+                        <button type="button" class="option-badge" onclick="fillNextMatchingDropdown('${sub.id}', '${escapeHtml(opt).replace(/'/g, "\\'")}')" title="Klicken, um '${escapeHtml(opt)}' in das nächste freie Tabellenfeld einzutragen">
+                            <span class="badge-key">${escapeHtml(keyBadge)}</span>
+                            <span>${escapeHtml(labelText)}</span>
+                        </button>
+                    `;
+                });
+
+                optionsPoolHtml = `
+                    <div class="exam-table-options-pool">
+                        <div class="options-pool-header">
+                            <i class="fa-solid fa-list-check"></i>
+                            <span>Verfügbare Optionen zur Zuordnung:</span>
+                            <span class="options-pool-hint">(Klicken Sie auf eine Option oder wählen Sie im Dropdown)</span>
+                        </div>
+                        <div class="options-pool-badges">
+                            ${badgesHtml}
+                        </div>
+                    </div>
+                `;
+            }
+
             inputHtml = `
                 <table class="exam-din-table">
                     <thead>${thead}</thead>
                     <tbody>${tbody}</tbody>
                 </table>
+                ${optionsPoolHtml}
             `;
         }
 
@@ -1828,6 +1944,41 @@ function renderTaskPage(container, pageIndex) {
 function saveSubtaskAnswer(key, value) {
     examAnswersData[key] = value;
 }
+
+// Helper for matching tables: assigns selected option to active or next empty dropdown
+function fillNextMatchingDropdown(subId, val) {
+    if (isExamSubmitted) return;
+    const selects = document.querySelectorAll(`select[data-sub-id="${subId}"]`);
+    if (!selects || selects.length === 0) return;
+    
+    let target = null;
+    if (document.activeElement && document.activeElement.matches && document.activeElement.matches(`select[data-sub-id="${subId}"]`)) {
+        target = document.activeElement;
+    } else {
+        for (const sel of selects) {
+            if (!sel.value) {
+                target = sel;
+                break;
+            }
+        }
+    }
+    if (!target) {
+        target = selects[0];
+    }
+    if (target) {
+        target.value = val;
+        // Trigger save
+        const cellKey = target.id;
+        if (cellKey) {
+            saveSubtaskAnswer(cellKey, val);
+        }
+        target.dispatchEvent(new Event('change'));
+        target.style.backgroundColor = '#dcfce7';
+        setTimeout(() => { target.style.backgroundColor = ''; }, 350);
+    }
+}
+window.fillNextMatchingDropdown = fillNextMatchingDropdown;
+window.saveSubtaskAnswer = saveSubtaskAnswer;
 
 // Updates a subtask score in memory and re-evaluates
 function updateSubtaskScore(subId, pointsStr, maxPoints) {
