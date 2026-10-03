@@ -97,6 +97,7 @@ document.addEventListener("DOMContentLoaded", () => {
         filterQuestions("all");
         initWhiteboard();
         initRechentrainer();
+        initExamOverview();
         
         resetStatsBtn.addEventListener("click", resetStats);
         nextBtn.addEventListener("click", loadNextQuestion);
@@ -1284,8 +1285,8 @@ function formatQuestionText(text) {
 // ==================== EXAM MODE LOGIC (1:1 DIN-A4 PRÜFUNGSBOGEN) ====================
 
 // Starts the authentic 100-point exam or 90-min simulation
-function startExamMode(simulation) {
-    if (isExamActive) {
+function startExamMode(simulation, forcedSetId) {
+    if (isExamActive && !isExamSubmitted && !forcedSetId) {
         if (!confirm("Du befindest dich bereits in einer Prüfung. Möchtest du diese abbrechen und neu starten?")) {
             return;
         }
@@ -1297,9 +1298,9 @@ function startExamMode(simulation) {
     isExamSubmitted = false;
     examCurrentPage = 0; // Start on Deckblatt
 
-    // Determine chosen exam set from sidebar dropdown
+    // Determine chosen exam set from parameter or sidebar dropdown
     const sidebarSelect = document.getElementById("sidebar-exam-set-select");
-    const chosenSetId = sidebarSelect ? sidebarSelect.value : "exam_1";
+    const chosenSetId = forcedSetId || (sidebarSelect ? sidebarSelect.value : "exam_1");
 
     loadExamSetById(chosenSetId);
 
@@ -1307,7 +1308,8 @@ function startExamMode(simulation) {
     examAnswersData = {};
     examScores = {};
 
-    // Synchronize booklet selector dropdown
+    // Synchronize booklet selector dropdown and sidebar dropdown
+    if (sidebarSelect) sidebarSelect.value = chosenSetId;
     const bookletSelect = document.getElementById("booklet-exam-select");
     if (bookletSelect) {
         bookletSelect.value = chosenSetId;
@@ -1510,6 +1512,11 @@ function renderDeckblatt(container) {
                     <div class="deckblatt-exam-subtitle">Einrichten eines IT-gestützten Arbeitsplatzes</div>
                     <div style="font-size: 1.05rem; font-weight: 700; color: #0284c7; margin-top: 6px;">
                         ${escapeHtml(activeExamSet.title)}
+                    </div>
+                    <div style="margin-top: 10px;">
+                        <button type="button" onclick="openExamOverviewModal()" style="background: #f0fdf4; border: 1.5px solid #10b981; color: #047857; font-weight: 700; font-size: 0.84rem; padding: 5px 14px; border-radius: 6px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s; box-shadow: 0 1px 3px rgba(16, 185, 129, 0.15);">
+                            <i class="fa-solid fa-layer-group"></i> 📚 Alle 8 Prüfungen ansehen &amp; wechseln
+                        </button>
                     </div>
                 </div>
 
@@ -2413,3 +2420,214 @@ function initRechentrainer() {
         updateSideTime();
     }
 }
+
+// ==========================================================================
+// IHK-Prüfungsübersicht & Klausuren-Katalog Modal Logic
+// ==========================================================================
+function initExamOverview() {
+    const modal = document.getElementById("exam-overview-modal");
+    const openHeaderBtn = document.getElementById("header-exam-overview-btn");
+    const openSidebarBtn = document.getElementById("open-exam-overview-sidebar-btn");
+    const openBookletBtn = document.getElementById("booklet-overview-btn");
+    const closeBtn = document.getElementById("close-exam-overview-btn");
+    const backdrop = document.getElementById("exam-overview-backdrop");
+    const searchInput = document.getElementById("exam-catalog-search-input");
+
+    if (openHeaderBtn) openHeaderBtn.addEventListener("click", openExamOverviewModal);
+    if (openSidebarBtn) openSidebarBtn.addEventListener("click", openExamOverviewModal);
+    if (openBookletBtn) openBookletBtn.addEventListener("click", openExamOverviewModal);
+    if (closeBtn) closeBtn.addEventListener("click", closeExamOverviewModal);
+    if (backdrop) backdrop.addEventListener("click", closeExamOverviewModal);
+
+    if (searchInput) {
+        searchInput.addEventListener("input", (e) => {
+            renderExamCatalog(e.target.value);
+        });
+    }
+
+    window.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && modal && modal.style.display !== "none") {
+            closeExamOverviewModal();
+        }
+    });
+}
+
+function openExamOverviewModal() {
+    const modal = document.getElementById("exam-overview-modal");
+    if (!modal) return;
+    modal.style.display = "flex";
+    const searchInput = document.getElementById("exam-catalog-search-input");
+    if (searchInput) searchInput.value = "";
+    renderExamCatalog("");
+}
+
+function closeExamOverviewModal() {
+    const modal = document.getElementById("exam-overview-modal");
+    if (modal) modal.style.display = "none";
+}
+
+function renderExamCatalog(filterText = "") {
+    const grid = document.getElementById("exam-catalog-grid");
+    const counterBadge = document.getElementById("exam-catalog-counter-badge");
+    if (!grid) return;
+
+    if (typeof EXAM_SETS === "undefined" || !EXAM_SETS.length) {
+        grid.innerHTML = `<div style="grid-column: 1 / -1; text-align: center; padding: 2rem; color: #ef4444;">Keine Prüfungssätze geladen.</div>`;
+        return;
+    }
+
+    if (counterBadge) {
+        counterBadge.textContent = `${EXAM_SETS.length} Prüfungen verfügbar`;
+    }
+
+    const q = (filterText || "").toLowerCase().trim();
+    let html = "";
+
+    // Render cards for each exam set in EXAM_SETS
+    EXAM_SETS.forEach((exam, index) => {
+        const titleMatch = (exam.title || "").toLowerCase().includes(q);
+        const scenarioMatch = (exam.ausgangssituation || "").toLowerCase().includes(q);
+        const subtitleMatch = (exam.subtitle || "").toLowerCase().includes(q);
+        const taskMatch = (exam.tasks || []).some(t => 
+            (t.title || "").toLowerCase().includes(q) ||
+            (t.subtasks || []).some(st => (st.text || "").toLowerCase().includes(q) || (st.stencil || "").toLowerCase().includes(q))
+        );
+
+        if (q && !titleMatch && !scenarioMatch && !subtitleMatch && !taskMatch) {
+            return; // Filter out if no match
+        }
+
+        const isActive = activeExamSet && activeExamSet.id === exam.id && isExamActive;
+        const examNum = index + 1;
+
+        // Truncate scenario for preview
+        const scenarioSnippet = exam.ausgangssituation 
+            ? (exam.ausgangssituation.length > 130 ? exam.ausgangssituation.substring(0, 127) + "..." : exam.ausgangssituation)
+            : "";
+
+        // Extract company from subtitle
+        const companyParts = (exam.subtitle || "").split("•");
+        const companyName = companyParts.length > 2 ? companyParts[2].trim() : "IHK-Prüfungsbetrieb";
+
+        html += `
+            <div class="exam-catalog-card ${isActive ? 'active' : ''}">
+                <div class="exam-catalog-card-header">
+                    <div style="display: flex; align-items: center; gap: 0.4rem;">
+                        <span class="exam-catalog-badge exam-badge-standard">PRÜFUNG ${examNum}</span>
+                        ${isActive ? '<span style="background: #10b981; color: white; padding: 2px 7px; border-radius: 4px; font-size: 0.72rem; font-weight: 700;"><i class="fa-solid fa-check"></i> Aktuell geladen</span>' : ''}
+                    </div>
+                    <span class="exam-badge-pts"><i class="fa-solid fa-stopwatch"></i> 100 P • 90 Min.</span>
+                </div>
+
+                <div class="exam-card-title">${escapeHtml(exam.title)}</div>
+                <div class="exam-card-company"><i class="fa-solid fa-building"></i> ${escapeHtml(companyName)}</div>
+                ${scenarioSnippet ? `<div class="exam-card-scenario">${escapeHtml(scenarioSnippet)}</div>` : ''}
+
+                <div class="exam-catalog-tasks">
+                    ${(exam.tasks || []).map(t => `
+                        <div class="exam-catalog-task-item">
+                            <span class="exam-task-num">${t.number}.</span>
+                            <span class="exam-task-title">${escapeHtml(t.title.replace(/^\\d+\\.\\s*Aufgabe:\\s*/i, ''))}</span>
+                            <span class="exam-task-pts">${t.totalPoints || 25} P</span>
+                        </div>
+                    `).join('')}
+                </div>
+
+                <div class="exam-catalog-actions">
+                    <button class="btn btn-catalog-practice" onclick="selectExamFromOverview('${exam.id}', false)">
+                        <i class="fa-solid fa-book-open"></i> Übungsprüfung
+                    </button>
+                    <button class="btn btn-catalog-simulation" onclick="selectExamFromOverview('${exam.id}', true)">
+                        <i class="fa-solid fa-stopwatch"></i> 90-Min.-Simulation
+                    </button>
+                </div>
+            </div>
+        `;
+    });
+
+    // Special card: Dynamische Zufallsprüfung
+    const randomMatches = !q || "dynamische zufallsprüfung random simulation 100 punkte mix".includes(q);
+    if (randomMatches) {
+        const isRandomActive = activeExamSet && activeExamSet.id.startsWith("exam_random") && isExamActive;
+        html += `
+            <div class="exam-catalog-card ${isRandomActive ? 'active' : ''}" style="border: 2px dashed #8b5cf6; background: linear-gradient(180deg, #faf5ff 0%, #ffffff 40%);">
+                <div class="exam-catalog-card-header">
+                    <div style="display: flex; align-items: center; gap: 0.4rem;">
+                        <span class="exam-catalog-badge exam-badge-random">🎲 ZUFALLSPRÜFUNG</span>
+                        ${isRandomActive ? '<span style="background: #8b5cf6; color: white; padding: 2px 7px; border-radius: 4px; font-size: 0.72rem; font-weight: 700;"><i class="fa-solid fa-check"></i> Aktuell geladen</span>' : ''}
+                    </div>
+                    <span class="exam-badge-pts" style="background: #f5f3ff; color: #6d28d9; border-color: #ddd6fe;"><i class="fa-solid fa-bolt"></i> 100 P • Unendlich</span>
+                </div>
+
+                <div class="exam-card-title" style="color: #6d28d9;">🎲 Dynamische 100-Punkte Zufalls-Vollprüfung</div>
+                <div class="exam-card-company" style="color: #7c3aed;"><i class="fa-solid fa-shuffle"></i> Dynamischer Aufgabenpool (${EXAM_SETS.length} Prüfungssätze)</div>
+                <div class="exam-card-scenario" style="border-left-color: #a855f7; background: #faf5ff;">
+                    Kombiniert bei jedem Start 4 vollwertige Aufgaben à 25 Punkte zufällig aus dem Aufgabenpool aller ${EXAM_SETS.length} Prüfungssätze. Keine Prüfung gleicht der anderen!
+                </div>
+
+                <div class="exam-catalog-tasks">
+                    <div class="exam-catalog-task-item">
+                        <span class="exam-task-num" style="color: #7c3aed;">1.</span>
+                        <span class="exam-task-title">Zufällige 1. Aufgabe (z. B. Subnetting, PUE, BGB oder Netzplan)</span>
+                        <span class="exam-task-pts">25 P</span>
+                    </div>
+                    <div class="exam-catalog-task-item">
+                        <span class="exam-task-num" style="color: #7c3aed;">2.</span>
+                        <span class="exam-task-title">Zufällige 2. Aufgabe (z. B. RAID, Hypervisor, PoE oder MQTT)</span>
+                        <span class="exam-task-pts">25 P</span>
+                    </div>
+                    <div class="exam-catalog-task-item">
+                        <span class="exam-task-num" style="color: #7c3aed;">3.</span>
+                        <span class="exam-task-title">Zufällige 3. Aufgabe (z. B. VPN, OWASP, ITIL, DSGVO oder TOMs)</span>
+                        <span class="exam-task-pts">25 P</span>
+                    </div>
+                    <div class="exam-catalog-task-item">
+                        <span class="exam-task-num" style="color: #7c3aed;">4.</span>
+                        <span class="exam-task-title">Zufällige 4. Aufgabe (3NF-Datenbank, SQL & Programmier-Algorithmus)</span>
+                        <span class="exam-task-pts">25 P</span>
+                    </div>
+                </div>
+
+                <div class="exam-catalog-actions">
+                    <button class="btn" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed); color: white;" onclick="selectExamFromOverview('exam_random', false)">
+                        <i class="fa-solid fa-dice"></i> Zufallsprüfung öffnen
+                    </button>
+                    <button class="btn" style="background: linear-gradient(135deg, #3b82f6, #1d4ed8); color: white;" onclick="selectExamFromOverview('exam_random', true)">
+                        <i class="fa-solid fa-stopwatch"></i> 90-Min.-Simulation
+                    </button>
+                </div>
+            </div>
+        `;
+    }
+
+    if (!html) {
+        html = `
+            <div style="grid-column: 1 / -1; text-align: center; padding: 3rem 1rem; color: #64748b;">
+                <i class="fa-solid fa-magnifying-glass" style="font-size: 2rem; margin-bottom: 0.75rem; color: #cbd5e1;"></i>
+                <div style="font-size: 1.1rem; font-weight: 700; color: #334155;">Keine Prüfung zum Suchbegriff "${escapeHtml(q)}" gefunden</div>
+                <div style="font-size: 0.88rem; margin-top: 0.35rem;">Probiere es mit Begriffen wie <em>Netzplan, Subnetting, Cloud, DSGVO, SQL, Kalkulation, RAID</em>.</div>
+            </div>
+        `;
+    }
+
+    grid.innerHTML = html;
+}
+
+function selectExamFromOverview(examId, isSimulation) {
+    closeExamOverviewModal();
+    if (isExamActive && !isExamSubmitted) {
+        if (!confirm("Möchtest du zur gewählten Prüfung wechseln? Deine aktuellen Eingaben in der laufenden Prüfung werden zurückgesetzt.")) {
+            return;
+        }
+        clearInterval(examTimerInterval);
+    }
+
+    startExamMode(isSimulation, examId);
+}
+
+// Global exposure for onclick handlers
+window.openExamOverviewModal = openExamOverviewModal;
+window.closeExamOverviewModal = closeExamOverviewModal;
+window.selectExamFromOverview = selectExamFromOverview;
+window.renderExamCatalog = renderExamCatalog;
+
