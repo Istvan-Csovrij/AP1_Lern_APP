@@ -55,7 +55,8 @@
             align-items: center;
             gap: 0.65rem;
             min-width: 0;
-            flex-shrink: 0;
+            max-width: 100%;
+            flex-wrap: wrap;
         }
 
         .header-icon {
@@ -94,7 +95,7 @@
             align-items: center;
             gap: 0.35rem;
             flex-wrap: wrap;
-            flex-shrink: 0;
+            max-width: 100%;
         }
 
         .btn {
@@ -170,20 +171,51 @@
             border-bottom: 1px solid var(--border);
             padding: 0.35rem 0.75rem;
             display: flex;
-            align-items: center;
-            gap: 0.45rem 0.75rem;
-            flex-wrap: wrap; /* Zeilenumbruch auf Bildschirmbreite */
-            overflow: visible; /* Kein horizontales Scrollen mehr */
+            flex-direction: column;
+            gap: 0.35rem;
+            overflow: visible;
             flex-shrink: 0;
             z-index: 10;
             width: 100%;
+            box-sizing: border-box;
+        }
+
+        .toolbar-tools-row {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            flex-wrap: wrap;
+            width: 100%;
+            max-width: 100%;
+        }
+
+        .tools-btn-row {
+            display: flex;
+            align-items: center;
+            gap: 0.22rem;
+            flex-wrap: wrap;
+            flex: 1 1 auto;
+            min-width: 0;
+            max-width: 100%;
+        }
+
+        .toolbar-settings-row {
+            display: flex;
+            align-items: center;
+            gap: 0.45rem 0.75rem;
+            flex-wrap: wrap;
+            width: 100%;
+            max-width: 100%;
+            padding-top: 0.28rem;
+            border-top: 1px solid #e2e8f0;
         }
 
         .tool-group {
             display: flex;
             flex-direction: column;
             gap: 0.15rem;
-            flex-shrink: 0;
+            min-width: 0;
+            max-width: 100%;
         }
 
         .group-label {
@@ -193,6 +225,7 @@
             color: var(--text-light);
             letter-spacing: 0.04em;
             line-height: 1;
+            white-space: nowrap;
         }
 
         .btn-row {
@@ -200,6 +233,7 @@
             align-items: center;
             gap: 0.22rem;
             flex-wrap: wrap;
+            max-width: 100%;
         }
 
         .t-btn {
@@ -716,6 +750,44 @@
             cursor: not-allowed !important;
             pointer-events: none;
         }
+
+        /* Responsive Media Queries */
+        @media (max-width: 1100px) {
+            .t-btn {
+                padding: 0.25rem 0.42rem;
+                font-size: 0.75rem;
+                gap: 0.22rem;
+            }
+            .header-text p {
+                max-width: 280px;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .header-text p {
+                display: none;
+            }
+            .header-actions {
+                gap: 0.25rem;
+            }
+            .btn {
+                padding: 0.28rem 0.5rem;
+                font-size: 0.76rem;
+            }
+        }
+
+        @media (max-width: 720px) {
+            .btn .btn-label {
+                display: none;
+            }
+            .t-btn {
+                padding: 0.22rem 0.35rem;
+                font-size: 0.72rem;
+            }
+            .separator {
+                display: none;
+            }
+        }
     </style>
 </head>
 <body>
@@ -779,10 +851,10 @@
 
     <!-- Toolbar -->
     <div class="toolbar">
-        <!-- Tools -->
-        <div class="tool-group">
+        <!-- Row 1: Tools (Werkzeuge) -->
+        <div class="toolbar-tools-row">
             <span class="group-label">Werkzeuge</span>
-            <div class="btn-row">
+            <div class="btn-row tools-btn-row">
                 <button class="t-btn active" data-tool="select" title="Auswählen &amp; Bewegen (Objekte anklicken und frei verschieben) (V)"><i class="fa-solid fa-arrow-pointer"></i><span>Auswählen</span></button>
                 <button class="t-btn" data-tool="pen" title="Freihand-Stift (P)"><i class="fa-solid fa-pen"></i><span>Stift</span></button>
                 <button class="t-btn" data-tool="highlighter" title="Textmarker (H)"><i class="fa-solid fa-highlighter"></i><span>Marker</span></button>
@@ -800,77 +872,78 @@
                 <button class="t-btn" data-tool="eraser" title="Radierer (E)"><i class="fa-solid fa-eraser"></i><span>Radierer</span></button>
                 <button class="t-btn" data-tool="hand" title="Verschieben / Pan (Leertaste gedrückt halten)"><i class="fa-solid fa-hand"></i><span>Verschieben</span></button>
             </div>
-        </div>
 
-        <!-- Objekt-Aktionen (erscheint bei Auswahl) -->
-        <div class="tool-group" id="selection-actions-group" style="display: none;">
-            <span class="group-label" style="color: #2563eb;">Objekt</span>
-            <div class="btn-row">
-                <button class="t-btn" id="duplicate-selected-btn" title="Objekt duplizieren (Strg + D)">
-                    <i class="fa-solid fa-clone" style="color: #2563eb;"></i> <span>Duplizieren</span>
-                </button>
-                <button class="t-btn btn-danger" id="delete-selected-btn" title="Objekt löschen (Entf / Backspace)">
-                    <i class="fa-solid fa-trash-can"></i> <span>Löschen</span>
-                </button>
+            <!-- Objekt-Aktionen (erscheint bei Auswahl) -->
+            <div class="tool-group" id="selection-actions-group" style="display: none;">
+                <span class="group-label" style="color: #2563eb;">Objekt</span>
+                <div class="btn-row">
+                    <button class="t-btn" id="duplicate-selected-btn" title="Objekt duplizieren (Strg + D)">
+                        <i class="fa-solid fa-clone" style="color: #2563eb;"></i> <span>Duplizieren</span>
+                    </button>
+                    <button class="t-btn btn-danger" id="delete-selected-btn" title="Objekt löschen (Entf / Backspace)">
+                        <i class="fa-solid fa-trash-can"></i> <span>Löschen</span>
+                    </button>
+                </div>
             </div>
         </div>
 
-        <div class="separator"></div>
-
-        <!-- Colors -->
-        <div class="tool-group">
-            <span class="group-label">Farbe</span>
-            <div class="color-palette">
-                <button class="c-btn active" data-color="#1e293b" style="background-color: #1e293b;" title="Schwarz/Anthrazit"></button>
-                <button class="c-btn" data-color="#2563eb" style="background-color: #2563eb;" title="Blau"></button>
-                <button class="c-btn" data-color="#dc2626" style="background-color: #dc2626;" title="Rot"></button>
-                <button class="c-btn" data-color="#16a34a" style="background-color: #16a34a;" title="Grün"></button>
-                <button class="c-btn" data-color="#9333ea" style="background-color: #9333ea;" title="Lila / Use-Case"></button>
-                <button class="c-btn" data-color="#ea580c" style="background-color: #ea580c;" title="Orange / EPK"></button>
-                <button class="c-btn" data-color="#0891b2" style="background-color: #0891b2;" title="Türkis / BPMN"></button>
-                <button class="c-btn" data-color="#ca8a04" style="background-color: #ca8a04;" title="Gold/Gelb"></button>
-                <input type="color" id="custom-color-picker" class="custom-color-input" title="Eigene Farbe wählen" value="#475569">
+        <!-- Row 2: Styling, Settings & Zoom -->
+        <div class="toolbar-settings-row">
+            <!-- Colors -->
+            <div class="tool-group">
+                <span class="group-label">Farbe</span>
+                <div class="color-palette">
+                    <button class="c-btn active" data-color="#1e293b" style="background-color: #1e293b;" title="Schwarz/Anthrazit"></button>
+                    <button class="c-btn" data-color="#2563eb" style="background-color: #2563eb;" title="Blau"></button>
+                    <button class="c-btn" data-color="#dc2626" style="background-color: #dc2626;" title="Rot"></button>
+                    <button class="c-btn" data-color="#16a34a" style="background-color: #16a34a;" title="Grün"></button>
+                    <button class="c-btn" data-color="#9333ea" style="background-color: #9333ea;" title="Lila / Use-Case"></button>
+                    <button class="c-btn" data-color="#ea580c" style="background-color: #ea580c;" title="Orange / EPK"></button>
+                    <button class="c-btn" data-color="#0891b2" style="background-color: #0891b2;" title="Türkis / BPMN"></button>
+                    <button class="c-btn" data-color="#ca8a04" style="background-color: #ca8a04;" title="Gold/Gelb"></button>
+                    <input type="color" id="custom-color-picker" class="custom-color-input" title="Eigene Farbe wählen" value="#475569">
+                </div>
             </div>
-        </div>
 
-        <div class="separator"></div>
+            <div class="separator"></div>
 
-        <!-- Size -->
-        <div class="tool-group">
-            <span class="group-label">Stärke</span>
-            <div class="size-selector">
-                <button class="s-btn" data-size="1" title="1px (Fein)">1px</button>
-                <button class="s-btn" data-size="2" title="2px">2px</button>
-                <button class="s-btn active" data-size="4" title="4px (Standard)">4px</button>
-                <button class="s-btn" data-size="8" title="8px (Fett)">8px</button>
-                <button class="s-btn" data-size="16" title="16px (Marker)">16px</button>
+            <!-- Size -->
+            <div class="tool-group">
+                <span class="group-label">Stärke</span>
+                <div class="size-selector">
+                    <button class="s-btn" data-size="1" title="1px (Fein)">1px</button>
+                    <button class="s-btn" data-size="2" title="2px">2px</button>
+                    <button class="s-btn active" data-size="4" title="4px (Standard)">4px</button>
+                    <button class="s-btn" data-size="8" title="8px (Fett)">8px</button>
+                    <button class="s-btn" data-size="16" title="16px (Marker)">16px</button>
+                </div>
             </div>
-        </div>
 
-        <div class="separator"></div>
+            <div class="separator"></div>
 
-        <!-- Grid & History -->
-        <div class="tool-group">
-            <span class="group-label">Optionen</span>
-            <div class="btn-row">
-                <button class="t-btn" id="grid-mode-btn" title="Raster umschalten (Klein / Groß / Punkte / Aus)">
-                    <i class="fa-solid fa-border-all"></i> <span id="grid-mode-label">Karo 20px</span>
-                </button>
-                <button class="t-btn" id="undo-btn" title="Rückgängig (Strg+Z)"><i class="fa-solid fa-rotate-left"></i><span>Undo</span></button>
-                <button class="t-btn" id="redo-btn" title="Wiederherstellen (Strg+Y)"><i class="fa-solid fa-rotate-right"></i><span>Redo</span></button>
+            <!-- Grid & History -->
+            <div class="tool-group">
+                <span class="group-label">Optionen</span>
+                <div class="btn-row">
+                    <button class="t-btn" id="grid-mode-btn" title="Raster umschalten (Klein / Groß / Punkte / Aus)">
+                        <i class="fa-solid fa-border-all"></i> <span id="grid-mode-label">Karo 20px</span>
+                    </button>
+                    <button class="t-btn" id="undo-btn" title="Rückgängig (Strg+Z)"><i class="fa-solid fa-rotate-left"></i><span>Undo</span></button>
+                    <button class="t-btn" id="redo-btn" title="Wiederherstellen (Strg+Y)"><i class="fa-solid fa-rotate-right"></i><span>Redo</span></button>
+                </div>
             </div>
-        </div>
 
-        <div class="separator"></div>
+            <div class="separator"></div>
 
-        <!-- Zoom & Ansicht -->
-        <div class="tool-group">
-            <span class="group-label">Zoom &amp; Ansicht</span>
-            <div class="btn-row">
-                <button class="t-btn" id="zoom-out-btn" title="Verkleinern (Mausrad oder Strg + Minus)"><i class="fa-solid fa-magnifying-glass-minus"></i></button>
-                <button class="t-btn" id="zoom-reset-btn" title="Klick für 100% Reset" style="min-width: 52px; font-weight: 700; justify-content: center;"><span id="zoom-label">100%</span></button>
-                <button class="t-btn" id="zoom-in-btn" title="Vergrößern (Mausrad oder Strg + Plus)"><i class="fa-solid fa-magnifying-glass-plus"></i></button>
-                <button class="t-btn" id="zoom-fit-btn" title="Ganzes Diagramm einpassen"><i class="fa-solid fa-expand"></i> <span>Fit</span></button>
+            <!-- Zoom & Ansicht -->
+            <div class="tool-group">
+                <span class="group-label">Zoom &amp; Ansicht</span>
+                <div class="btn-row">
+                    <button class="t-btn" id="zoom-out-btn" title="Verkleinern (Mausrad oder Strg + Minus)"><i class="fa-solid fa-magnifying-glass-minus"></i></button>
+                    <button class="t-btn" id="zoom-reset-btn" title="Klick für 100% Reset" style="min-width: 52px; font-weight: 700; justify-content: center;"><span id="zoom-label">100%</span></button>
+                    <button class="t-btn" id="zoom-in-btn" title="Vergrößern (Mausrad oder Strg + Plus)"><i class="fa-solid fa-magnifying-glass-plus"></i></button>
+                    <button class="t-btn" id="zoom-fit-btn" title="Ganzes Diagramm einpassen"><i class="fa-solid fa-expand"></i> <span>Fit</span></button>
+                </div>
             </div>
         </div>
     </div>
@@ -1923,6 +1996,13 @@
         window.addEventListener("resize", () => {
             renderViewport();
         });
+
+        if (window.ResizeObserver && container) {
+            const containerObserver = new ResizeObserver(() => {
+                renderViewport();
+            });
+            containerObserver.observe(container);
+        }
 
         // Mouse & Touch events
         function initEvents() {
