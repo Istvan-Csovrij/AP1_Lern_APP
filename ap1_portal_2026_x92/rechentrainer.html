@@ -256,6 +256,18 @@
           <button onclick="selectMiniTopic('ipv6_kuerzung')" class="topic-pill px-3.5 py-2 text-sm font-semibold rounded-xl border border-teal-400 bg-teal-50 hover:bg-teal-100 text-teal-900 transition-all" data-topic="ipv6_kuerzung">
             ✂️ IPv6: RFC 5952 Kurzform
           </button>
+          <button onclick="selectMiniTopic('ipv6_vorteile')" class="topic-pill px-3.5 py-2 text-sm font-semibold rounded-xl border border-violet-400 bg-violet-50 hover:bg-violet-100 text-violet-900 transition-all" data-topic="ipv6_vorteile">
+            💡 IPv6: 1. Vorteile vs. IPv4
+          </button>
+          <button onclick="selectMiniTopic('ipv6_gateway_config')" class="topic-pill px-3.5 py-2 text-sm font-semibold rounded-xl border border-violet-400 bg-violet-50 hover:bg-violet-100 text-violet-900 transition-all" data-topic="ipv6_gateway_config">
+            ⚙️ IPv6: 5. Manuell &amp; Gateway
+          </button>
+          <button onclick="selectMiniTopic('ipv6_reachability')" class="topic-pill px-3.5 py-2 text-sm font-semibold rounded-xl border border-violet-400 bg-violet-50 hover:bg-violet-100 text-violet-900 transition-all" data-topic="ipv6_reachability">
+            🔍 IPv6: 6. Erreichbarkeit &amp; NDP
+          </button>
+          <button onclick="selectMiniTopic('ipv6_linklocal_explain')" class="topic-pill px-3.5 py-2 text-sm font-semibold rounded-xl border border-violet-400 bg-violet-50 hover:bg-violet-100 text-violet-900 transition-all" data-topic="ipv6_linklocal_explain">
+            🔗 IPv6: 7. Link-Local (fe80::)
+          </button>
         </div>
       </div>
 
@@ -1846,6 +1858,143 @@
 
       </div>
 
+      <!-- 🎯 IHK-PRÜFUNGSFOKUS: DIE 7 KERN-THEMEN AUS BISHERIGEN PRÜFUNGEN -->
+      <div class="bg-gradient-to-br from-slate-900 via-slate-800 to-indigo-950 text-white border-2 border-indigo-500/40 rounded-2xl p-6 sm:p-8 shadow-xl space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-indigo-400/30 pb-4">
+          <div>
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/20 border border-indigo-400/40 text-indigo-300 font-bold text-xs uppercase tracking-wider">
+              <span>🎯</span> IHK-Prüfungskatalog AP1
+            </div>
+            <h3 class="text-2xl font-black text-white mt-2">
+              Was wurde in den bisherigen Prüfungen konkret abgefragt?
+            </h3>
+            <p class="text-xs sm:text-sm text-indigo-200 mt-1">
+              Die 7 Schwerpunkte aus den echten IHK-Prüfungen – inklusive Musterlösungen, Befehlen &amp; Prüfungsfallen.
+            </p>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="jumpToMiniTopic('ipv6_vorteile')" class="px-3.5 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs transition-all shadow flex items-center gap-1.5">
+              <span>⚡</span> Zu den Aufgaben
+            </button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <!-- 1. Vorteile -->
+          <div class="p-5 bg-white/5 border border-white/10 rounded-xl space-y-2.5 hover:border-indigo-400/50 transition-all">
+            <div class="flex items-center gap-2">
+              <span class="w-6 h-6 rounded-full bg-indigo-500 text-white font-bold text-xs flex items-center justify-center">1</span>
+              <h4 class="font-bold text-sm text-indigo-300">Vorteile gegenüber IPv4</h4>
+            </div>
+            <div class="text-xs text-slate-300 space-y-1.5 leading-relaxed">
+              <div>• <strong>Riesiger Adressraum (128 Bit):</strong> Ca. 3,4 × 10³⁸ Adressen. Kein NAT/PAT mehr nötig; echte Ende-zu-Ende-Verbindung.</div>
+              <div>• <strong>Kein Broadcast:</strong> Ersetzt durch ressourcenschonendes Multicast &amp; Anycast (kein Netzwerk-Spam).</div>
+              <div>• <strong>SLAAC-Autokonfiguration:</strong> Plug-&amp;-Play ohne zwingenden DHCP-Server.</div>
+              <div>• <strong>Fester Header (40 Byte):</strong> Schnellere Paketverarbeitung im Router, keine Header-Checksumme (L2 &amp; L4 prüfen).</div>
+              <div>• <strong>IPsec integriert:</strong> Standardmäßig für Verschlüsselung &amp; Authentifizierung vorgesehen.</div>
+            </div>
+          </div>
+
+          <!-- 2. Notation -->
+          <div class="p-5 bg-white/5 border border-white/10 rounded-xl space-y-2.5 hover:border-teal-400/50 transition-all">
+            <div class="flex items-center gap-2">
+              <span class="w-6 h-6 rounded-full bg-teal-500 text-white font-bold text-xs flex items-center justify-center">2</span>
+              <h4 class="font-bold text-sm text-teal-300">Notation der Adressen</h4>
+            </div>
+            <div class="text-xs text-slate-300 space-y-1.5 leading-relaxed">
+              <div>• <strong>Aufbau:</strong> 8 Blöcke (Hextets) à 4 Hexadezimalziffern (16 Bit je Block, gesamt 128 Bit).</div>
+              <div>• <strong>Regel 1 (RFC 5952):</strong> Führende Nullen in jedem Block weglassen (<code>:0db8:</code> ➔ <code>:db8:</code>).</div>
+              <div>• <strong>Regel 2:</strong> Längste zusammenhängende Folge von Null-Blöcken genau 1× durch <code>::</code> ersetzen.</div>
+              <div>• <strong>Regel 3:</strong> <code>::</code> darf nie 2× in einer Adresse vorkommen (Mehrdeutigkeit!).</div>
+              <div>• <strong>Regel 4:</strong> Hex-Buchstaben klein schreiben (a–f).</div>
+            </div>
+          </div>
+
+          <!-- 3. Präfix, Subnet-ID & Interface-ID -->
+          <div class="p-5 bg-white/5 border border-white/10 rounded-xl space-y-2.5 hover:border-sky-400/50 transition-all">
+            <div class="flex items-center gap-2">
+              <span class="w-6 h-6 rounded-full bg-sky-500 text-white font-bold text-xs flex items-center justify-center">3</span>
+              <h4 class="font-bold text-sm text-sky-300">Präfix, Subnet-ID &amp; IID</h4>
+            </div>
+            <div class="text-xs text-slate-300 space-y-1.5 leading-relaxed">
+              <div>• <strong>Global Routing Prefix (z. B. /48):</strong> Vom Provider/RIR vergeben (z. B. 48 Bit).</div>
+              <div>• <strong>Subnet-ID (16 Bit):</strong> Bit 49 bis 64. Ermöglicht <code>2¹⁶ = 65.536</code> interne Netze für Kunden.</div>
+              <div>• <strong>Interface-ID (64 Bit):</strong> Bit 65 bis 128. Host-Teil, generiert via EUI-64 (Bit 7 invertiert + FFFE), Privacy Extensions oder manuell.</div>
+            </div>
+          </div>
+
+          <!-- 4. Anzahl möglicher Subnets -->
+          <div class="p-5 bg-white/5 border border-white/10 rounded-xl space-y-2.5 hover:border-amber-400/50 transition-all">
+            <div class="flex items-center gap-2">
+              <span class="w-6 h-6 rounded-full bg-amber-500 text-white font-bold text-xs flex items-center justify-center">4</span>
+              <h4 class="font-bold text-sm text-amber-300">Anzahl möglicher Subnets</h4>
+            </div>
+            <div class="text-xs text-slate-300 space-y-1.5 leading-relaxed">
+              <div>• <strong>Formel:</strong> <code>2^(Zielpräfix - Basispräfix)</code> (Standard-Ziel: /64).</div>
+              <div>• <strong>/48 Zuweisung:</strong> <code>64 - 48 = 16 Bits</code> ➔ <strong>65.536 Subnetze</strong>.</div>
+              <div>• <strong>/56 Zuweisung:</strong> <code>64 - 56 = 8 Bits</code> ➔ <strong>256 Subnetze</strong>.</div>
+              <div>• <strong>/60 Zuweisung:</strong> <code>64 - 60 = 4 Bits</code> ➔ <strong>16 Subnetze</strong>.</div>
+              <div>• Jedes /64 Subnetz fasst <code>2⁶⁴ ≈ 1,84 × 10¹⁹</code> Adressen.</div>
+            </div>
+          </div>
+
+          <!-- 5. Adressen manuell vergeben & Gateway -->
+          <div class="p-5 bg-white/5 border border-white/10 rounded-xl space-y-2.5 hover:border-emerald-400/50 transition-all">
+            <div class="flex items-center gap-2">
+              <span class="w-6 h-6 rounded-full bg-emerald-500 text-white font-bold text-xs flex items-center justify-center">5</span>
+              <h4 class="font-bold text-sm text-emerald-300">Manuell vergeben &amp; Gateway</h4>
+            </div>
+            <div class="text-xs text-slate-300 space-y-1.5 leading-relaxed">
+              <div>• <strong>Präfixlänge:</strong> Im OS wird <code>64</code> eingetragen (keine Dotted-Maske!).</div>
+              <div>• <strong>Default Gateway:</strong> Entweder Router-GUA (<code>2001:db8:1::1</code>) ODER Link-Local (<code>fe80::1</code>) des Router-Interfaces.</div>
+              <div>• <strong>Windows:</strong> <code>netsh interface ipv6 add address "Ethernet" 2001:db8:1::10/64</code></div>
+              <div>• <strong>Linux:</strong> <code>ip -6 addr add 2001:db8:1::10/64 dev eth0</code> &amp; <code>ip -6 route add default via 2001:db8:1::1</code></div>
+            </div>
+          </div>
+
+          <!-- 6. Erreichbarkeit im Netzwerk prüfen -->
+          <div class="p-5 bg-white/5 border border-white/10 rounded-xl space-y-2.5 hover:border-purple-400/50 transition-all">
+            <div class="flex items-center gap-2">
+              <span class="w-6 h-6 rounded-full bg-purple-500 text-white font-bold text-xs flex items-center justify-center">6</span>
+              <h4 class="font-bold text-sm text-purple-300">Erreichbarkeit prüfen (NDP &amp; Ping)</h4>
+            </div>
+            <div class="text-xs text-slate-300 space-y-1.5 leading-relaxed">
+              <div>• <strong>Ping:</strong> <code>ping -6 2001:db8:1::1</code> oder <code>ping 2001:...</code></div>
+              <div>• <strong>Link-Local Ping (Falle!):</strong> Verlangt Scope-ID / Interface-Index: <code>ping fe80::1%12</code> (Win) bzw. <code>ping -6 fe80::1%eth0</code> (Linux).</div>
+              <div>• <strong>ARP-Ersatz:</strong> IPv6 hat <strong>kein ARP</strong>! Stattdessen <strong>NDP (Neighbor Discovery Protocol)</strong> via ICMPv6.</div>
+              <div>• <strong>Neighbor Cache:</strong> <code>netsh interface ipv6 show neighbors</code> oder <code>ip -6 neigh</code>.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 7. Link-Local Spotlight -->
+        <div class="p-5 bg-gradient-to-r from-blue-900/60 to-indigo-900/60 border border-blue-400/40 rounded-xl space-y-2.5">
+          <div class="flex items-center gap-2">
+            <span class="w-6 h-6 rounded-full bg-blue-500 text-white font-bold text-xs flex items-center justify-center">7</span>
+            <h4 class="font-bold text-base text-blue-200">Link-Local-Adressen erkennen und erklären (fe80::/10)</h4>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 text-xs text-slate-200 pt-1">
+            <div class="p-3 bg-black/30 rounded-lg border border-white/5">
+              <strong class="text-blue-300 block mb-1">Erkennungsmerkmal</strong>
+              Beginnt IMMER mit <code>fe80::/10</code> (Binär <code>1111 1110 10...</code>). Typisch: <code>fe80::...</code>
+            </div>
+            <div class="p-3 bg-black/30 rounded-lg border border-white/5">
+              <strong class="text-amber-300 block mb-1">Gültigkeitsbereich (Scope)</strong>
+              Gilt <strong>NUR auf dem lokalen Link</strong> (Kabel/WLAN-Segment). Router leiten Pakete <strong>niemals</strong> weiter!
+            </div>
+            <div class="p-3 bg-black/30 rounded-lg border border-white/5">
+              <strong class="text-emerald-300 block mb-1">Automatische Erzeugung</strong>
+              Wird auf JEDEM IPv6-Interface sofort automatisch generiert (via EUI-64 oder Random), völlig ohne DHCP oder Router.
+            </div>
+            <div class="p-3 bg-black/30 rounded-lg border border-white/5">
+              <strong class="text-purple-300 block mb-1">Prüfungsfalle Internet</strong>
+              "Warum erreicht PC mit fe80:: kein Google?" ➔ Weil Link-Local nicht internet- und routingfähig ist!
+            </div>
+          </div>
+        </div>
+
+      </div>
+
     </div>
 
   </div>
@@ -3111,6 +3260,202 @@
           hint: "Führende Nullen weg, längste zusammenhängende Folge von Nullen genau 1x mit :: ersetzen.",
           explanation: `Richtig! Normgerechte Kurzform nach RFC 5952: <strong>${sc.short}</strong>.`
         };
+      },
+
+      // 40. IPV6: 1. VORTEILE GEGENÜBER IPV4 (IHK-PRÜFUNG)
+      ipv6_vorteile: function() {
+        const questions = [
+          {
+            q: "Wie viele Bits umfasst eine IPv6-Adresse im Vergleich zu den 32 Bits von IPv4?",
+            unit: "Bit (Zahl)",
+            expected: "128",
+            altExpected: ["128", "128 BITS", "128 BIT", "128BIT"],
+            isText: true,
+            hint: "128 Bit (entspricht 16 Byte)",
+            expl: "Richtig! IPv6 nutzt <strong>128 Bit</strong> Adresslänge (32 Hex-Ziffern) im Vergleich zu 32 Bit bei IPv4."
+          },
+          {
+            q: "Welche Übertragungsart (Adressierungsart) aus IPv4 existiert in IPv6 <strong>nicht mehr</strong>, sondern wurde vollständig durch Multicast ersetzt?",
+            unit: "Übertragungsart (z. B. Broadcast)",
+            expected: "Broadcast",
+            altExpected: ["BROADCAST", "RUNDRUF", "BROADCAST-ADRESSE"],
+            isText: true,
+            hint: "In IPv6 gibt es keinen Rundruf an alle Knoten (Broadcast) mehr.",
+            expl: "Richtig! <strong>Broadcast</strong> wurde in IPv6 ersatzlos gestrichen und durch gezielte <strong>Multicast</strong>-Gruppen ersetzt."
+          },
+          {
+            q: "Welches Verfahren ermöglicht bei IPv6 die zustandslose automatische Konfiguration von IP-Adressen ohne DHCP-Server (Akronym)?",
+            unit: "Verfahren (Akronym)",
+            expected: "SLAAC",
+            altExpected: ["SLAAC", "STATELESS ADDRESS AUTOCONFIGURATION"],
+            isText: true,
+            hint: "Stateless Address Autoconfiguration (SLAAC)",
+            expl: "Richtig! <strong>SLAAC</strong> (Stateless Address Autoconfiguration) via ICMPv6 Router Advertisements."
+          },
+          {
+            q: "Wie groß ist der feste IPv6-Basis-Header in Byte (ohne Extension Header)?",
+            unit: "Byte (Zahl)",
+            expected: "40",
+            altExpected: ["40", "40 BYTE", "40 BYTES", "40BYTE"],
+            isText: true,
+            hint: "Der IPv6-Basisheader ist fest 40 Byte groß (keine variable IHL wie bei IPv4).",
+            expl: "Richtig! Der Basis-Header ist fest <strong>40 Byte</strong> lang, was die Router-Verarbeitung massiv beschleunigt."
+          }
+        ];
+        const sc = questions[Math.floor(Math.random() * questions.length)];
+        return {
+          topic: "ipv6_vorteile",
+          badge: "💡 IPv6 Vorteile",
+          title: "IHK-Prüfungsfokus 1: Vorteile von IPv6 gegenüber IPv4",
+          question: `${sc.q}`,
+          unit: sc.unit,
+          expected: sc.expected,
+          altExpected: sc.altExpected || [],
+          isText: true,
+          hint: sc.hint,
+          explanation: sc.expl
+        };
+      },
+
+      // 41. IPV6: 5. MANUELLE KONFIGURATION & DEFAULT GATEWAY
+      ipv6_gateway_config: function() {
+        const scenarios = [
+          {
+            type: "prefix",
+            q: "In den Netzwerkeinstellungen eines Windows- oder Linux-Servers soll das Subnetz <strong>2001:db8:acad:10::/64</strong> manuell konfiguriert werden.<br><br>Welcher Wert muss im Feld <strong>'Subnetzpräfixlänge'</strong> eingetragen werden?",
+            unit: "Präfixlänge (Zahl)",
+            expected: 64,
+            altExpected: ["64", "/64"],
+            isText: true,
+            hint: "Die Standardpräfixlänge für Host-Subnetze ist 64.",
+            expl: "Richtig! Bei IPv6 wird keine Dotted-Subnetzmaske eingetragen, sondern die reine Präfixlänge <strong>64</strong>."
+          },
+          {
+            type: "gateway",
+            q: "Ein Client-PC erhält im Firmennetz die IPv6 <code>2001:db8:100:1::50/64</code>.<br>Die Schnittstelle des Routers hat die GUA <code>2001:db8:100:1::1</code>.<br><br>Welche Adresse wird als <strong>Standardgateway (Default Gateway)</strong> eingetragen?",
+            unit: "IPv6-Adresse",
+            expected: "2001:db8:100:1::1",
+            altExpected: ["2001:DB8:100:1::1", "2001:0DB8:0100:0001:0000:0000:0000:0001"],
+            isText: true,
+            hint: "Die IP-Adresse des zuständigen Router-Interfaces in diesem Subnetz.",
+            expl: "Richtig! Das Standardgateway ist das Router-Interface <strong>2001:db8:100:1::1</strong> (alternativ oft die Link-Local-Adresse fe80::1)."
+          },
+          {
+            type: "cmd",
+            q: "Mit welchem Linux-Befehl weist man der Schnittstelle <code>eth0</code> die statische IPv6 <code>2001:db8:1::10/64</code> zu?<br><span class=\"text-xs text-slate-500\">(Format: ip -6 addr add &lt;IP/Präfix&gt; dev eth0)</span>",
+            unit: "Befehl",
+            expected: "ip -6 addr add 2001:db8:1::10/64 dev eth0",
+            altExpected: ["IP -6 ADDR ADD 2001:DB8:1::10/64 DEV ETH0", "ip -6 a a 2001:db8:1::10/64 dev eth0", "ip addr add 2001:db8:1::10/64 dev eth0"],
+            isText: true,
+            hint: "ip -6 addr add 2001:db8:1::10/64 dev eth0",
+            expl: "Richtig! Der Befehl lautet <code>ip -6 addr add 2001:db8:1::10/64 dev eth0</code>."
+          }
+        ];
+        const sc = scenarios[Math.floor(Math.random() * scenarios.length)];
+        return {
+          topic: "ipv6_gateway_config",
+          badge: "⚙️ IPv6 Konfig",
+          title: "IHK-Prüfungsfokus 5: Adressen manuell vergeben & Gateway",
+          question: sc.q,
+          unit: sc.unit,
+          expected: sc.expected,
+          altExpected: sc.altExpected || [],
+          isText: true,
+          hint: sc.hint,
+          explanation: sc.expl
+        };
+      },
+
+      // 42. IPV6: 6. ERREICHBARKEIT IM NETZWERK PRÜFEN (PING, NDP)
+      ipv6_reachability: function() {
+        const scenarios = [
+          {
+            q: "Welches Protokoll auf Basis von ICMPv6 ersetzt bei IPv6 die Funktion des Address Resolution Protocol (ARP) zur Ermittlung von MAC-Adressen (Akronym)?",
+            unit: "Protokoll (Akronym)",
+            expected: "NDP",
+            altExpected: ["NDP", "NEIGHBOR DISCOVERY PROTOCOL", "NEIGHBOR DISCOVERY"],
+            isText: true,
+            hint: "Neighbor Discovery Protocol (NDP)",
+            expl: "Richtig! <strong>NDP (Neighbor Discovery Protocol)</strong> ersetzt ARP und arbeitet mit ICMPv6 Neighbor Solicitations / Advertisements."
+          },
+          {
+            q: "Ein Administrator will unter Windows die Link-Local-Adresse <code>fe80::1</code> über das Interface mit der Index-ID <code>12</code> anpingen.<br><br>Wie lautet die vollständige Zieladresse im Ping-Befehl (mit angehängter Scope-ID)?",
+            unit: "Adresse mit Scope-ID (z. B. fe80::1%12)",
+            expected: "fe80::1%12",
+            altExpected: ["FE80::1%12", "FE80::1% 12", "PING FE80::1%12"],
+            isText: true,
+            hint: "Scope-ID wird mit Prozentzeichen angehängt: fe80::1%12",
+            expl: "Richtig! Bei Link-Local ist die Scope-ID Pflicht: <strong>fe80::1%12</strong>, da der Stack sonst nicht weiß, über welche Schnittstelle gesendet werden soll."
+          },
+          {
+            q: "Welches Protokoll der Netzwerkschicht wird für <code>ping -6</code>, Echo Request / Echo Reply und Router Advertisements genutzt?",
+            unit: "Protokoll",
+            expected: "ICMPv6",
+            altExpected: ["ICMPV6", "ICMP-V6", "ICMP V6", "ICMP"],
+            isText: true,
+            hint: "Internet Control Message Protocol Version 6 (ICMPv6)",
+            expl: "Richtig! <strong>ICMPv6</strong> ist das fundamentale Diagnose- und Steuerprotokoll für IPv6."
+          }
+        ];
+        const sc = scenarios[Math.floor(Math.random() * scenarios.length)];
+        return {
+          topic: "ipv6_reachability",
+          badge: "🔍 IPv6 Diagnose",
+          title: "IHK-Prüfungsfokus 6: Erreichbarkeit prüfen & NDP",
+          question: sc.q,
+          unit: sc.unit,
+          expected: sc.expected,
+          altExpected: sc.altExpected || [],
+          isText: true,
+          hint: sc.hint,
+          explanation: sc.expl
+        };
+      },
+
+      // 43. IPV6: 7. LINK-LOCAL-ADRESSEN ERKENNEN & ERKLÄREN
+      ipv6_linklocal_explain: function() {
+        const scenarios = [
+          {
+            q: "Mit welchem Präfix (Präfixbereich) beginnen Link-Local-Adressen bei IPv6 immer (z. B. fe80::/10)?",
+            unit: "Präfix (z. B. fe80::/10)",
+            expected: "fe80::/10",
+            altExpected: ["FE80::/10", "FE80::", "FE80", "FE80::/64"],
+            isText: true,
+            hint: "Präfix: fe80::/10 (Binär 1111 1110 10...)",
+            expl: "Richtig! Link-Local-Adressen beginnen immer mit <strong>fe80::/10</strong>."
+          },
+          {
+            q: "Dürfen IP-Pakete mit einer Link-Local-Absender- oder Zieladresse (fe80::...) von einem Router in das Internet oder ein Nachbarsubnetz weitergeleitet werden? (Antwort: Ja oder Nein)",
+            unit: "Ja / Nein",
+            expected: "Nein",
+            altExpected: ["NEIN", "NO"],
+            isText: true,
+            hint: "Link-Local-Pakete sind strikt auf das lokale Netzwerksegment beschränkt und nicht routingfähig.",
+            expl: "Richtig! <strong>Nein</strong> – Link-Local-Adressen sind nicht routingfähig und werden von Routern an Schnittstellengrenzen verworfen."
+          },
+          {
+            q: "Welchem IPv4-Mechanismus entspricht die automatische Generierung von IPv6 Link-Local-Adressen am ehesten (169.254.0.0/16)?",
+            unit: "IPv4-Mechanismus (Akronym)",
+            expected: "APIPA",
+            altExpected: ["APIPA", "ZEROCONF", "LINK LOCAL", "AUTO-IP"],
+            isText: true,
+            hint: "Automatic Private IP Addressing (APIPA, 169.254.x.x)",
+            expl: "Richtig! <strong>APIPA</strong> (169.254.0.0/16) ist das funktionale IPv4-Pendant, allerdings ist Link-Local bei IPv6 immer aktiv und Pflicht."
+          }
+        ];
+        const sc = scenarios[Math.floor(Math.random() * scenarios.length)];
+        return {
+          topic: "ipv6_linklocal_explain",
+          badge: "🔗 Link-Local",
+          title: "IHK-Prüfungsfokus 7: Link-Local-Adressen (fe80::/10)",
+          question: sc.q,
+          unit: sc.unit,
+          expected: sc.expected,
+          altExpected: sc.altExpected || [],
+          isText: true,
+          hint: sc.hint,
+          explanation: sc.expl
+        };
       }
     };
 
@@ -3213,8 +3558,9 @@
       }
 
       const diff = Math.abs(val - currentTask.expected);
+      const tol = (currentTask.tolerance !== undefined) ? currentTask.tolerance : 0.05;
 
-      if (diff <= currentTask.tolerance) {
+      if (diff <= tol) {
         score.correct++;
         score.streak++;
         updateScoreUI();
