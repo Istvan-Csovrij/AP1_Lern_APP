@@ -87,7 +87,7 @@
           <span>🔢</span> Formeln &amp; Rechner: Zahlensysteme (Hex, Binär &amp; KiB)
         </button>
         <button onclick="switchTab('ipv6')" id="tab-btn-ipv6" class="tab-btn px-5 py-3 text-base font-medium rounded-t-lg border-b-2 border-transparent text-slate-600 hover:text-slate-900 transition-all flex items-center gap-2">
-          <span>🌐</span> Formeln &amp; Rechner: IPv6 &amp; Subnetting
+          <span>🌐</span> Formeln &amp; Rechner: IPv4 &amp; IPv6 Subnetting
         </button>
       </div>
     </div>
@@ -217,8 +217,34 @@
           <button onclick="selectMiniTopic('transfer_time')" class="topic-pill px-3.5 py-2 text-sm font-semibold rounded-xl border border-cyan-400 bg-cyan-50 hover:bg-cyan-100 text-cyan-900 transition-all" data-topic="transfer_time">
             🚀 Downloadzeit (Byte × 8 / Mbit/s)
           </button>
+          <!-- IPv4 Subnetting (AP1 / AP2 Lernfeld 3) -->
+          <button onclick="selectMiniTopic('ipv4_usable_hosts')" class="topic-pill px-3.5 py-2 text-sm font-semibold rounded-xl border border-sky-400 bg-sky-50 hover:bg-sky-100 text-sky-900 transition-all" data-topic="ipv4_usable_hosts">
+            🌐 IPv4: Nutzbare Hosts (2^h - 2)
+          </button>
+          <button onclick="selectMiniTopic('ipv4_cidr_to_mask')" class="topic-pill px-3.5 py-2 text-sm font-semibold rounded-xl border border-sky-400 bg-sky-50 hover:bg-sky-100 text-sky-900 transition-all" data-topic="ipv4_cidr_to_mask">
+            🌐 IPv4: CIDR ➔ Subnetzmaske
+          </button>
+          <button onclick="selectMiniTopic('ipv4_mask_to_cidr')" class="topic-pill px-3.5 py-2 text-sm font-semibold rounded-xl border border-sky-400 bg-sky-50 hover:bg-sky-100 text-sky-900 transition-all" data-topic="ipv4_mask_to_cidr">
+            🌐 IPv4: Subnetzmaske ➔ CIDR
+          </button>
+          <button onclick="selectMiniTopic('ipv4_block_size')" class="topic-pill px-3.5 py-2 text-sm font-semibold rounded-xl border border-sky-400 bg-sky-50 hover:bg-sky-100 text-sky-900 transition-all" data-topic="ipv4_block_size">
+            🌐 IPv4: Blockgröße (256 - Maske)
+          </button>
+          <button onclick="selectMiniTopic('ipv4_subnets_needed')" class="topic-pill px-3.5 py-2 text-sm font-semibold rounded-xl border border-sky-400 bg-sky-50 hover:bg-sky-100 text-sky-900 transition-all" data-topic="ipv4_subnets_needed">
+            🌐 IPv4: Benötigte Subnetzbits (2^s)
+          </button>
+          <button onclick="selectMiniTopic('ipv4_network_id')" class="topic-pill px-3.5 py-2 text-sm font-semibold rounded-xl border border-blue-400 bg-blue-50 hover:bg-blue-100 text-blue-900 transition-all" data-topic="ipv4_network_id">
+            🌐 IPv4: Netzadresse finden
+          </button>
+          <button onclick="selectMiniTopic('ipv4_broadcast')" class="topic-pill px-3.5 py-2 text-sm font-semibold rounded-xl border border-blue-400 bg-blue-50 hover:bg-blue-100 text-blue-900 transition-all" data-topic="ipv4_broadcast">
+            🌐 IPv4: Broadcast-Adresse finden
+          </button>
+          <button onclick="selectMiniTopic('ipv4_first_last')" class="topic-pill px-3.5 py-2 text-sm font-semibold rounded-xl border border-blue-400 bg-blue-50 hover:bg-blue-100 text-blue-900 transition-all" data-topic="ipv4_first_last">
+            🌐 IPv4: Erste &amp; Letzte Host-IP
+          </button>
+
           <!-- IPv6 (AP1 Lernfeld 3) -->
-          <button onclick="selectMiniTopic('ipv6_subnets')" class="topic-pill px-3.5 py-2 text-sm font-semibold rounded-xl border border-blue-400 bg-blue-50 hover:bg-blue-100 text-blue-900 transition-all" data-topic="ipv6_subnets">
+          <button onclick="selectMiniTopic('ipv6_subnets')" class="topic-pill px-3.5 py-2 text-sm font-semibold rounded-xl border border-indigo-400 bg-indigo-50 hover:bg-indigo-100 text-indigo-900 transition-all" data-topic="ipv6_subnets">
             🌐 IPv6: Subnetze (2^(64 - Präfix))
           </button>
           <button onclick="selectMiniTopic('ipv6_eui64')" class="topic-pill px-3.5 py-2 text-sm font-semibold rounded-xl border border-indigo-400 bg-indigo-50 hover:bg-indigo-100 text-indigo-900 transition-all" data-topic="ipv6_eui64">
@@ -226,6 +252,9 @@
           </button>
           <button onclick="selectMiniTopic('ipv6_prefix_bits')" class="topic-pill px-3.5 py-2 text-sm font-semibold rounded-xl border border-teal-400 bg-teal-50 hover:bg-teal-100 text-teal-900 transition-all" data-topic="ipv6_prefix_bits">
             🔢 IPv6: Host- &amp; Subnetz-Bits
+          </button>
+          <button onclick="selectMiniTopic('ipv6_kuerzung')" class="topic-pill px-3.5 py-2 text-sm font-semibold rounded-xl border border-teal-400 bg-teal-50 hover:bg-teal-100 text-teal-900 transition-all" data-topic="ipv6_kuerzung">
+            ✂️ IPv6: RFC 5952 Kurzform
           </button>
         </div>
       </div>
@@ -1228,32 +1257,251 @@
     <!-- ========================================================================= -->
     <div id="tab-content-ipv6" class="tab-pane hidden space-y-6">
 
-      <!-- Header Banner IPv6 -->
-      <div class="bg-gradient-to-r from-blue-900 to-indigo-900 text-white rounded-2xl p-6 sm:p-8 shadow-sm">
+      <!-- Header Banner IPv4 & IPv6 -->
+      <div class="bg-gradient-to-r from-slate-900 via-blue-950 to-indigo-950 text-white rounded-2xl p-6 sm:p-8 shadow-sm">
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
             <div class="flex items-center gap-2 mb-2">
-              <span class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-blue-500/20 text-blue-200 border border-blue-400/30">
-                Lernfeld 3: Netzwerke &amp; Clients (AP1 Pflichtstoff)
+              <span class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-sky-500/20 text-sky-200 border border-sky-400/30">
+                Lernfeld 3: Netzwerke &amp; Clients (AP1 &amp; AP2 Kammer-Standard)
               </span>
-              <span class="text-xs text-blue-200 font-semibold">128 Bit Adressraum • RFC 5952 • EUI-64</span>
+              <span class="text-xs text-blue-200 font-semibold">IPv4 (CIDR /24 bis /30) • IPv6 (128 Bit, EUI-64)</span>
             </div>
             <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight">
-              🌐 IPv6-Adressierung, Subnetting &amp; EUI-64
+              🌐 IPv4 &amp; IPv6 Subnetting, Adressierung &amp; Netzberechnungen
             </h2>
-            <p class="text-sm text-blue-100 mt-1 max-w-3xl">
-              Alles, was die IHK in der AP1 zu IPv6 abfragt: Kürzungsregeln nach RFC 5952, Subnetz-Kalkulation (2<sup>ΔPräfix</sup>), EUI-64 Bitinversion und Adresstypen (fe80, fd00, 2000, ff00).
+            <p class="text-sm text-slate-200 mt-1 max-w-3xl">
+              Alles, was die IHK zu IP-Netzen abfragt: <strong>IPv4-Subnetting</strong> mit Blockgröße (256-Maske), Netz-ID, Broadcast, nutzbaren Hosts (2<sup>h</sup>-2) sowie <strong>IPv6-Subnetting</strong> (2<sup>ΔPräfix</sup>), RFC 5952 Kürzungsregeln und EUI-64.
             </p>
           </div>
-          <div class="flex items-center gap-2">
-            <button onclick="jumpToMiniTopic('ipv6_subnets')" class="px-4 py-2.5 rounded-xl bg-blue-500 hover:bg-blue-400 text-white font-bold text-sm transition-all shadow-sm flex items-center gap-2">
-              <span>🎯</span> Zu den IPv6 Mini-Aufgaben
+          <div class="flex flex-col sm:flex-row items-center gap-2">
+            <button onclick="jumpToMiniTopic('ipv4_usable_hosts')" class="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-sky-500 hover:bg-sky-400 text-white font-bold text-sm transition-all shadow-sm flex items-center justify-center gap-2">
+              <span>🎯</span> Zu den IPv4-Aufgaben
+            </button>
+            <button onclick="jumpToMiniTopic('ipv6_subnets')" class="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-sm transition-all shadow-sm flex items-center justify-center gap-2">
+              <span>🎯</span> Zu den IPv6-Aufgaben
             </button>
           </div>
         </div>
       </div>
 
-      <!-- RECHNER 1: IPV6 SUBNETTING & PRÄFIX-KALKULATOR -->
+      <!-- ========================================================================= -->
+      <!-- RECHNER 0: INTERAKTIVER IPV4 SUBNETTING & CIDR SCHNELLRECHNER             -->
+      <!-- ========================================================================= -->
+      <div class="bg-white border-2 border-sky-400 rounded-2xl p-6 sm:p-8 shadow-sm space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-200 pb-4">
+          <div>
+            <span class="text-xs font-bold uppercase tracking-wider text-sky-700 bg-sky-100 px-2.5 py-1 rounded-md border border-sky-300">
+              Interaktiver Rechner 1: IPv4
+            </span>
+            <h3 class="text-xl font-bold text-slate-900 mt-1">
+              📊 IPv4-Subnetting &amp; CIDR Schnellkalkulator
+            </h3>
+          </div>
+          <div class="text-xs text-slate-500 font-mono bg-slate-100 px-3 py-1.5 rounded-lg border border-slate-200">
+            Formel: 2^(32 - CIDR) - 2 Hosts • Blockgröße = 256 - Maske
+          </div>
+        </div>
+
+        <!-- Controls -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-2">
+            <label class="block text-xs font-bold uppercase tracking-wider text-slate-700">
+              1. Beliebige IPv4-Adresse eingeben:
+            </label>
+            <input type="text" id="ipv4-input" value="192.168.10.142" oninput="calcIpv4Subnet()" class="w-full p-2.5 rounded-lg border border-slate-300 font-mono font-bold text-slate-800 text-base focus:border-sky-500 focus:outline-none">
+            <div class="flex flex-wrap gap-1.5 pt-1">
+              <button onclick="setIpv4Preset('192.168.10.142', 26)" class="px-2 py-1 text-xs font-semibold rounded bg-slate-200 hover:bg-slate-300 text-slate-700">192.168.10.142 /26</button>
+              <button onclick="setIpv4Preset('172.16.5.75', 27)" class="px-2 py-1 text-xs font-semibold rounded bg-slate-200 hover:bg-slate-300 text-slate-700">172.16.5.75 /27</button>
+              <button onclick="setIpv4Preset('10.0.1.205', 28)" class="px-2 py-1 text-xs font-semibold rounded bg-slate-200 hover:bg-slate-300 text-slate-700">10.0.1.205 /28</button>
+              <button onclick="setIpv4Preset('192.168.0.5', 30)" class="px-2 py-1 text-xs font-semibold rounded bg-slate-200 hover:bg-slate-300 text-slate-700">192.168.0.5 /30</button>
+            </div>
+          </div>
+
+          <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-2">
+            <label class="block text-xs font-bold uppercase tracking-wider text-slate-700">
+              2. Subnetzmaske / CIDR-Präfix wählen:
+            </label>
+            <select id="ipv4-cidr-select" onchange="calcIpv4Subnet()" class="w-full p-2.5 rounded-lg border border-slate-300 font-bold bg-white text-slate-800 text-sm">
+              <option value="24">/24 — 255.255.255.0 (254 nutzbare Hosts)</option>
+              <option value="25">/25 — 255.255.255.128 (126 nutzbare Hosts)</option>
+              <option value="26" selected>/26 — 255.255.255.192 (62 nutzbare Hosts • IHK-Klassiker)</option>
+              <option value="27">/27 — 255.255.255.224 (30 nutzbare Hosts)</option>
+              <option value="28">/28 — 255.255.255.240 (14 nutzbare Hosts)</option>
+              <option value="29">/29 — 255.255.255.248 (6 nutzbare Hosts)</option>
+              <option value="30">/30 — 255.255.255.252 (2 nutzbare Hosts • Point-to-Point WAN)</option>
+              <option value="23">/23 — 255.255.254.0 (510 nutzbare Hosts)</option>
+              <option value="22">/22 — 255.255.252.0 (1.022 nutzbare Hosts)</option>
+            </select>
+            <div class="text-xs text-slate-500" id="ipv4-mask-bin">
+              Maske binär: <code class="text-sky-700 font-bold">11111111.11111111.11111111.11000000</code>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4 KPI Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 font-mono text-sm">
+          <div class="p-4 bg-blue-50 border border-blue-200 rounded-xl text-center">
+            <div class="text-xs font-bold uppercase text-blue-700">Netzwerkadresse (Netz-ID)</div>
+            <div class="text-xl font-black text-blue-900 mt-1" id="ipv4-res-net">192.168.10.128</div>
+            <div class="text-[11px] text-blue-600 mt-1">Untere Grenze (reserviert)</div>
+          </div>
+          <div class="p-4 bg-amber-50 border border-amber-200 rounded-xl text-center">
+            <div class="text-xs font-bold uppercase text-amber-700">Broadcast-Adresse</div>
+            <div class="text-xl font-black text-amber-900 mt-1" id="ipv4-res-bc">192.168.10.191</div>
+            <div class="text-[11px] text-amber-700 mt-1">Obere Grenze (Rundruf)</div>
+          </div>
+          <div class="p-4 bg-emerald-50 border border-emerald-200 rounded-xl text-center">
+            <div class="text-xs font-bold uppercase text-emerald-700">Nutzbarer Host-Bereich</div>
+            <div class="text-sm font-black text-emerald-900 mt-1" id="ipv4-res-range">.129 bis .190</div>
+            <div class="text-[11px] text-emerald-600 mt-1" id="ipv4-res-range-full">192.168.10.129 – 192.168.10.190</div>
+          </div>
+          <div class="p-4 bg-purple-50 border border-purple-200 rounded-xl text-center">
+            <div class="text-xs font-bold uppercase text-purple-700">Nutzbare Hosts (2^h - 2)</div>
+            <div class="text-2xl font-black text-purple-900 mt-1" id="ipv4-res-hosts">62 Hosts</div>
+            <div class="text-[11px] text-purple-600 mt-1" id="ipv4-res-hosts-calc">2^6 - 2 = 64 - 2 = 62</div>
+          </div>
+        </div>
+
+        <!-- IHK Rechenweg & Magic Number Erklärung -->
+        <div class="p-5 bg-slate-900 text-white rounded-xl space-y-3 font-mono text-xs">
+          <div class="font-bold text-sky-300 flex items-center justify-between">
+            <span>📝 IHK-Lösungsweg: Blockgröße ("Magic Number") Schritt-für-Schritt</span>
+            <span class="text-slate-400">Prüfungsstandard AP1 / AP2</span>
+          </div>
+          <div class="text-slate-200 leading-relaxed space-y-1.5" id="ipv4-calc-steps">
+            <div>1. Host-Bits bestimmen: <strong>32 - 26 = 6 Bits</strong> (Host-Anteil).</div>
+            <div>2. Blockgröße im 4. Oktett: <strong>256 - 192 = 64</strong> (Schrittweite der Subnetze).</div>
+            <div>3. Subnetze aufzählen: <strong>.0, .64, .128, .192...</strong> Die IP .142 fällt in das Netz ab <strong>192.168.10.128</strong>.</div>
+            <div>4. Broadcast: Letzte Adresse vor dem nächsten Netz (.192 - 1) = <strong>192.168.10.191</strong>.</div>
+            <div>5. Nutzbare Hosts: Von Netz-ID + 1 bis Broadcast - 1: <strong>192.168.10.129 bis 192.168.10.190</strong> (62 Hosts).</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- IPV4 IHK-SPICKZETTEL TABELLE (/24 bis /30) -->
+      <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-4">
+        <div class="flex items-center justify-between border-b border-slate-200 pb-3">
+          <div class="flex items-center gap-2">
+            <span class="text-lg">📋</span>
+            <h4 class="font-bold text-slate-900">Der ultimative IHK IPv4-Subnetting-Spickzettel (/24 bis /30)</h4>
+          </div>
+          <button onclick="jumpToMiniTopic('ipv4_usable_hosts')" class="text-xs font-bold text-sky-600 hover:text-sky-800 bg-sky-50 px-3 py-1.5 rounded-lg border border-sky-200">
+            🎯 Mini-Aufgaben hierzu üben
+          </button>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full text-xs text-left text-slate-700">
+            <thead class="bg-slate-100 text-slate-900 font-bold uppercase">
+              <tr>
+                <th class="p-2.5 rounded-l">CIDR</th>
+                <th class="p-2.5">Subnetzmaske</th>
+                <th class="p-2.5">4. Oktett binär</th>
+                <th class="p-2.5">Blockgröße (256-Maske)</th>
+                <th class="p-2.5">Gesamt IPs (2^h)</th>
+                <th class="p-2.5">Nutzbare Hosts (2^h - 2)</th>
+                <th class="p-2.5 rounded-r">Typischer IHK-Einsatzzweck</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100 font-mono">
+              <tr>
+                <td class="p-2 font-bold text-sky-700">/24</td>
+                <td class="p-2 font-semibold">255.255.255.0</td>
+                <td class="p-2">00000000</td>
+                <td class="p-2 font-bold text-indigo-700">256</td>
+                <td class="p-2">256</td>
+                <td class="p-2 font-bold text-emerald-700">254</td>
+                <td class="p-2 font-sans">Klassisches Standard-Büronetzwerk</td>
+              </tr>
+              <tr>
+                <td class="p-2 font-bold text-sky-700">/25</td>
+                <td class="p-2 font-semibold">255.255.255.128</td>
+                <td class="p-2">10000000</td>
+                <td class="p-2 font-bold text-indigo-700">128</td>
+                <td class="p-2">128</td>
+                <td class="p-2 font-bold text-emerald-700">126</td>
+                <td class="p-2 font-sans">Halbiertes /24 Netz (2 Abteilungen)</td>
+              </tr>
+              <tr class="bg-sky-50/50">
+                <td class="p-2 font-bold text-sky-700">/26</td>
+                <td class="p-2 font-semibold">255.255.255.192</td>
+                <td class="p-2">11000000</td>
+                <td class="p-2 font-bold text-indigo-700">64</td>
+                <td class="p-2">64</td>
+                <td class="p-2 font-bold text-emerald-700">62</td>
+                <td class="p-2 font-sans font-semibold text-sky-900">IHK-Liebling: 4 Subnetze à 62 Rechner</td>
+              </tr>
+              <tr>
+                <td class="p-2 font-bold text-sky-700">/27</td>
+                <td class="p-2 font-semibold">255.255.255.224</td>
+                <td class="p-2">11100000</td>
+                <td class="p-2 font-bold text-indigo-700">32</td>
+                <td class="p-2">32</td>
+                <td class="p-2 font-bold text-emerald-700">30</td>
+                <td class="p-2 font-sans">8 Subnetze à 30 Rechner</td>
+              </tr>
+              <tr class="bg-sky-50/50">
+                <td class="p-2 font-bold text-sky-700">/28</td>
+                <td class="p-2 font-semibold">255.255.255.240</td>
+                <td class="p-2">11110000</td>
+                <td class="p-2 font-bold text-indigo-700">16</td>
+                <td class="p-2">16</td>
+                <td class="p-2 font-bold text-emerald-700">14</td>
+                <td class="p-2 font-sans">Server-VLANs / DMZ (14 nutzbare Server)</td>
+              </tr>
+              <tr>
+                <td class="p-2 font-bold text-sky-700">/29</td>
+                <td class="p-2 font-semibold">255.255.255.248</td>
+                <td class="p-2">11111000</td>
+                <td class="p-2 font-bold text-indigo-700">8</td>
+                <td class="p-2">8</td>
+                <td class="p-2 font-bold text-emerald-700">6</td>
+                <td class="p-2 font-sans">Öffentlicher Router-Pool (6 öffentliche IPs)</td>
+              </tr>
+              <tr class="bg-amber-50/50">
+                <td class="p-2 font-bold text-sky-700">/30</td>
+                <td class="p-2 font-semibold">255.255.255.252</td>
+                <td class="p-2">11111100</td>
+                <td class="p-2 font-bold text-indigo-700">4</td>
+                <td class="p-2">4</td>
+                <td class="p-2 font-bold text-emerald-700">2</td>
+                <td class="p-2 font-sans font-semibold text-amber-900">Punkt-zu-Punkt Transfernetz (genau 2 Router-Ports!)</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- PRIVATE VS. ÖFFENTLICHE IP-ADRESSEN (RFC 1918) -->
+      <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-4">
+        <div class="flex items-center gap-2 border-b border-slate-200 pb-3">
+          <span class="text-lg">🛡️</span>
+          <h4 class="font-bold text-slate-900">Private IP-Bereiche nach RFC 1918 &amp; Spezial-Adressen</h4>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+          <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl space-y-1">
+            <div class="font-bold text-slate-900">Klasse A (Großunternehmen)</div>
+            <div class="font-mono text-sky-700 font-bold">10.0.0.0 – 10.255.255.255</div>
+            <div class="text-slate-500">Präfix: <code>10.0.0.0/8</code> (16,7 Mio. Hosts)</div>
+          </div>
+          <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl space-y-1">
+            <div class="font-bold text-slate-900">Klasse B (Mittelstand / Campus)</div>
+            <div class="font-mono text-sky-700 font-bold">172.16.0.0 – 172.31.255.255</div>
+            <div class="text-slate-500">Präfix: <code>172.16.0.0/12</code> (1 Mio. Hosts)</div>
+          </div>
+          <div class="p-3 bg-slate-50 border border-slate-200 rounded-xl space-y-1">
+            <div class="font-bold text-slate-900">Klasse C (Heim- &amp; Büronetze)</div>
+            <div class="font-mono text-sky-700 font-bold">192.168.0.0 – 192.168.255.255</div>
+            <div class="text-slate-500">Präfix: <code>192.168.0.0/16</code> (65.536 Hosts)</div>
+          </div>
+        </div>
+        <div class="p-3 bg-amber-50 border border-amber-200 rounded-xl text-xs flex flex-wrap gap-4 text-amber-950">
+          <div><strong>APIPA / Zeroconf (DHCP-Ausfall):</strong> <code class="font-bold text-amber-900">169.254.0.0/16</code></div>
+          <div><strong>Loopback (Localhost):</strong> <code class="font-bold text-amber-900">127.0.0.1 (/8)</code></div>
+        </div>
+      </div>
+
+      <!-- RECHNER 2: IPV6 SUBNETTING & PRÄFIX-KALKULATOR -->
       <div class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm space-y-6">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-200 pb-4">
           <div>
@@ -2616,6 +2864,253 @@
           hint: sc.hint,
           explanation: `Richtig! ${sc.expl}`
         };
+      },
+
+      // 31. IPV4: NUTZBARE HOSTS (2^(32 - CIDR) - 2)
+      ipv4_usable_hosts: function() {
+        const scenarios = [
+          { cidr: 24, hosts: 254, mask: "255.255.255.0", h: 8 },
+          { cidr: 25, hosts: 126, mask: "255.255.255.128", h: 7 },
+          { cidr: 26, hosts: 62, mask: "255.255.255.192", h: 6 },
+          { cidr: 27, hosts: 30, mask: "255.255.255.224", h: 5 },
+          { cidr: 28, hosts: 14, mask: "255.255.255.240", h: 4 },
+          { cidr: 29, hosts: 6, mask: "255.255.255.248", h: 3 },
+          { cidr: 30, hosts: 2, mask: "255.255.255.252", h: 2 },
+          { cidr: 23, hosts: 510, mask: "255.255.254.0", h: 9 },
+          { cidr: 22, hosts: 1022, mask: "255.255.252.0", h: 10 }
+        ];
+        const sc = scenarios[Math.floor(Math.random() * scenarios.length)];
+
+        return {
+          topic: "ipv4_usable_hosts",
+          badge: "🌐 IPv4 Subnetting",
+          title: `Nutzbare Hosts für ein /${sc.cidr}-Netz berechnen`,
+          question: `Ein Netzwerkadministrator richtet ein Subnetz mit dem Präfix <strong>/${sc.cidr}</strong> (Subnetzmaske <strong>${sc.mask}</strong>) ein.<br><br>Wie viele <strong>nutzbare Host-IP-Adressen</strong> für Endgeräte stehen in diesem Subnetz zur Verfügung?<br><em>(Hinweis: Netzadresse und Broadcast-Adresse abziehen!)</em>`,
+          unit: "nutzbare Hosts",
+          expected: sc.hosts,
+          tolerance: 0,
+          hint: `Hostbits h = 32 - ${sc.cidr} = ${sc.h} Bits. Nutzbare Hosts = 2^${sc.h} - 2 = ${Math.pow(2, sc.h)} - 2 = ${sc.hosts}`,
+          explanation: `Richtig! Rechenweg:<br>` +
+            `1. Host-Bits: 32 Bit - ${sc.cidr} Bit = <strong>${sc.h} Bits</strong>.<br>` +
+            `2. Gesamte Adressen: 2<sup>${sc.h}</sup> = <strong>${Math.pow(2, sc.h)} IP-Adressen</strong>.<br>` +
+            `3. Nutzbare Hosts: 2<sup>${sc.h}</sup> - 2 = <strong>${sc.hosts} Hosts</strong> (Netzadresse und Broadcast werden abgezogen).`
+        };
+      },
+
+      // 32. IPV4: CIDR ZU SUBNETZMASKE
+      ipv4_cidr_to_mask: function() {
+        const scenarios = [
+          { cidr: 25, lastOctet: 128, full: "255.255.255.128", bits: "10000000" },
+          { cidr: 26, lastOctet: 192, full: "255.255.255.192", bits: "11000000" },
+          { cidr: 27, lastOctet: 224, full: "255.255.255.224", bits: "11100000" },
+          { cidr: 28, lastOctet: 240, full: "255.255.255.240", bits: "11110000" },
+          { cidr: 29, lastOctet: 248, full: "255.255.255.248", bits: "11111000" },
+          { cidr: 30, lastOctet: 252, full: "255.255.255.252", bits: "11111100" }
+        ];
+        const sc = scenarios[Math.floor(Math.random() * scenarios.length)];
+
+        return {
+          topic: "ipv4_cidr_to_mask",
+          badge: "🌐 IPv4 Maske",
+          isText: true,
+          title: `Subnetzmaske aus CIDR /${sc.cidr} ermitteln`,
+          question: `Ein Netzwerk besitzt die CIDR-Präfixlänge <strong>/${sc.cidr}</strong>.<br><br>Wie lautet der Dezimalwert des <strong>vierten Oktetts</strong> der Subnetzmaske (255.255.255.<strong>X</strong>)?<br><em>(Oder gib die vollständige Maske wie 255.255.255.X ein)</em>`,
+          unit: "Dezimalwert (oder 255.255.255.X)",
+          expected: String(sc.lastOctet),
+          altExpected: [sc.full, String(sc.lastOctet)],
+          hint: `/${sc.cidr} bedeutet im 4. Oktett: ${sc.cidr - 24} gesetzte Bits = binär ${sc.bits} = ${sc.lastOctet}`,
+          explanation: `Richtig! <strong>/${sc.cidr}</strong> hat ${sc.cidr - 24} Subnetzbits im 4. Oktett: <code>${sc.bits}</code><sub>2</sub> = <strong>${sc.lastOctet}</strong>. Vollständige Maske: <strong>${sc.full}</strong>.`
+        };
+      },
+
+      // 33. IPV4: SUBNETZMASKE ZU CIDR
+      ipv4_mask_to_cidr: function() {
+        const scenarios = [
+          { mask: "255.255.255.0", cidr: 24, last: 0 },
+          { mask: "255.255.255.128", cidr: 25, last: 128 },
+          { mask: "255.255.255.192", cidr: 26, last: 192 },
+          { mask: "255.255.255.224", cidr: 27, last: 224 },
+          { mask: "255.255.255.240", cidr: 28, last: 240 },
+          { mask: "255.255.255.248", cidr: 29, last: 248 },
+          { mask: "255.255.255.252", cidr: 30, last: 252 },
+          { mask: "255.255.254.0", cidr: 23, last: 0 }
+        ];
+        const sc = scenarios[Math.floor(Math.random() * scenarios.length)];
+
+        return {
+          topic: "ipv4_mask_to_cidr",
+          badge: "🌐 IPv4 CIDR-Präfix",
+          isText: true,
+          title: `CIDR-Präfix aus Subnetzmaske ${sc.mask} bestimmen`,
+          question: `In einer Netzwerkkonfiguration ist die Subnetzmaske <strong>${sc.mask}</strong> hinterlegt.<br><br>Wie lautet die zugehörige <strong>CIDR-Präfixlänge</strong> (z. B. 24, 26 oder 27)?`,
+          unit: "CIDR-Präfix (z.B. 26 oder /26)",
+          expected: String(sc.cidr),
+          altExpected: ["/" + sc.cidr, String(sc.cidr)],
+          hint: `Zähle die Anzahl der gesetzten 1-Bits in der Maske: 24 Bits + gesetzte Bits im Oktett = ?`,
+          explanation: `Richtig! Die Subnetzmaske <strong>${sc.mask}</strong> besitzt genau <strong>${sc.cidr}</strong> gesetzte Netzwerk-Bits (Präfix: <strong>/${sc.cidr}</strong>).`
+        };
+      },
+
+      // 34. IPV4: BLOCKGRÖSSE / SCHRITTWEITE (256 - MASKE)
+      ipv4_block_size: function() {
+        const scenarios = [
+          { mask: "255.255.255.128", last: 128, block: 128 },
+          { mask: "255.255.255.192", last: 192, block: 64 },
+          { mask: "255.255.255.224", last: 224, block: 32 },
+          { mask: "255.255.255.240", last: 240, block: 16 },
+          { mask: "255.255.255.248", last: 248, block: 8 },
+          { mask: "255.255.255.252", last: 252, block: 4 }
+        ];
+        const sc = scenarios[Math.floor(Math.random() * scenarios.length)];
+
+        return {
+          topic: "ipv4_block_size",
+          badge: "🌐 IPv4 Blockgröße",
+          title: `Blockgröße / Schrittweite für Maske ${sc.mask} ermitteln`,
+          question: `Für die Subnetzmaske <strong>${sc.mask}</strong> soll die <strong>Blockgröße (Magic Number / Schrittweite)</strong> für das vierte Oktett bestimmt werden.<br><br>Formel: <code>Blockgröße = 256 - Masken-Oktett</code><br><br>Wie groß ist die <strong>Blockgröße</strong>?`,
+          unit: "Schrittweite / Blockgröße",
+          expected: sc.block,
+          tolerance: 0,
+          hint: `256 - ${sc.last} = ?`,
+          explanation: `Richtig! <code>Blockgröße = 256 - ${sc.last} = <strong>${sc.block}</strong></code>. Die Subnetze beginnen in Schritten von ${sc.block} (.0, .${sc.block}, .${sc.block * 2}...).`
+        };
+      },
+
+      // 35. IPV4: BENÖTIGTE SUBNETZBITS (2^s >= N)
+      ipv4_subnets_needed: function() {
+        const scenarios = [
+          { needed: 5, s: 3, possible: 8 },
+          { needed: 6, s: 3, possible: 8 },
+          { needed: 10, s: 4, possible: 16 },
+          { needed: 12, s: 4, possible: 16 },
+          { needed: 14, s: 4, possible: 16 },
+          { needed: 20, s: 5, possible: 32 },
+          { needed: 25, s: 5, possible: 32 },
+          { needed: 50, s: 6, possible: 64 }
+        ];
+        const sc = scenarios[Math.floor(Math.random() * scenarios.length)];
+
+        return {
+          topic: "ipv4_subnets_needed",
+          badge: "🌐 IPv4 Subnetz-Bits",
+          title: `Benötigte Subnetz-Bits für ${sc.needed} Netze berechnen`,
+          question: `Ein IT-Planer soll ein vorhandenes Netzwerk so unterteilen, dass mindestens <strong>${sc.needed} eigenständige Subnetze</strong> für verschiedene Abteilungen entstehen.<br><br>Formel: <code>2^s ≥ Anzahl Netze</code><br><br>Wie viele <strong>Subnetz-Bits (s)</strong> müssen mindestens geliehen werden?`,
+          unit: "Bits (s)",
+          expected: sc.s,
+          tolerance: 0,
+          hint: `2^${sc.s - 1} = ${Math.pow(2, sc.s - 1)} (zu wenig) | 2^${sc.s} = ${sc.possible} (genug für ${sc.needed})`,
+          explanation: `Richtig! 2<sup>${sc.s}</sup> = <strong>${sc.possible} Subnetze</strong> (ausreichend für ${sc.needed} Netze). 2<sup>${sc.s - 1}</sup> = ${Math.pow(2, sc.s - 1)} wäre zu wenig. Es werden mindestens <strong>${sc.s} Subnetz-Bits</strong> benötigt.`
+        };
+      },
+
+      // 36. IPV4: NETZWERKADRESSE FINDEN (NETZ-ID)
+      ipv4_network_id: function() {
+        const scenarios = [
+          { ip: "192.168.10.142", cidr: 26, mask: "255.255.255.192", block: 64, net: "192.168.10.128", bc: "192.168.10.191" },
+          { ip: "172.16.5.75", cidr: 27, mask: "255.255.255.224", block: 32, net: "172.16.5.64", bc: "172.16.5.95" },
+          { ip: "10.0.1.205", cidr: 28, mask: "255.255.255.240", block: 16, net: "10.0.1.200", bc: "10.0.1.207" },
+          { ip: "192.168.1.35", cidr: 27, mask: "255.255.255.224", block: 32, net: "192.168.1.32", bc: "192.168.1.63" },
+          { ip: "192.168.0.5", cidr: 30, mask: "255.255.255.252", block: 4, net: "192.168.0.4", bc: "192.168.0.7" },
+          { ip: "192.168.100.210", cidr: 26, mask: "255.255.255.192", block: 64, net: "192.168.100.192", bc: "192.168.100.255" }
+        ];
+        const sc = scenarios[Math.floor(Math.random() * scenarios.length)];
+
+        return {
+          topic: "ipv4_network_id",
+          badge: "🌐 IPv4 Netzadresse",
+          isText: true,
+          title: `Netzwerkadresse für ${sc.ip}/${sc.cidr} bestimmen`,
+          question: `Ein Client-Rechner hat die IPv4-Adresse <strong>${sc.ip}</strong> mit der Maske <strong>/${sc.cidr}</strong> (${sc.mask}).<br><br>Wie lautet die <strong>Netzwerkadresse (Netz-ID)</strong> dieses Subnetzes?`,
+          unit: "Netzwerkadresse (z. B. 192.168.1.0)",
+          expected: sc.net,
+          hint: `Blockgröße = 256 - ${parseInt(sc.mask.split('.')[3], 10)} = ${sc.block}. Vielfache von ${sc.block} suchen, die unter ${sc.ip.split('.')[3]} liegen.`,
+          explanation: `Richtig! Rechenweg:<br>` +
+            `1. Blockgröße im 4. Oktett: 256 - ${sc.mask.split('.')[3]} = <strong>${sc.block}</strong>.<br>` +
+            `2. Subnetze: .0, .${sc.block}, .${sc.block * 2}, .${sc.block * 3}...<br>` +
+            `3. Das letzte Oktett <strong>${sc.ip.split('.')[3]}</strong> fällt in das Intervall ab <strong>${sc.net.split('.')[3]}</strong>.<br>` +
+            `4. Netzwerkadresse: <strong>${sc.net}</strong>.`
+        };
+      },
+
+      // 37. IPV4: BROADCAST-ADRESSE FINDEN
+      ipv4_broadcast: function() {
+        const scenarios = [
+          { ip: "192.168.10.142", cidr: 26, mask: "255.255.255.192", block: 64, net: "192.168.10.128", bc: "192.168.10.191" },
+          { ip: "172.16.5.75", cidr: 27, mask: "255.255.255.224", block: 32, net: "172.16.5.64", bc: "172.16.5.95" },
+          { ip: "10.0.1.205", cidr: 28, mask: "255.255.255.240", block: 16, net: "10.0.1.200", bc: "10.0.1.207" },
+          { ip: "192.168.1.35", cidr: 27, mask: "255.255.255.224", block: 32, net: "192.168.1.32", bc: "192.168.1.63" },
+          { ip: "192.168.0.5", cidr: 30, mask: "255.255.255.252", block: 4, net: "192.168.0.4", bc: "192.168.0.7" }
+        ];
+        const sc = scenarios[Math.floor(Math.random() * scenarios.length)];
+        const nextNetOctet = parseInt(sc.net.split('.')[3], 10) + sc.block;
+
+        return {
+          topic: "ipv4_broadcast",
+          badge: "🌐 IPv4 Broadcast",
+          isText: true,
+          title: `Broadcast-Adresse für ${sc.ip}/${sc.cidr} ermitteln`,
+          question: `Ein Server im Rechenzentrum besitzt die IP-Adresse <strong>${sc.ip}</strong> mit dem Präfix <strong>/${sc.cidr}</strong> (${sc.mask}).<br><br>Wie lautet die <strong>Broadcast-Adresse</strong> dieses Subnetzes?`,
+          unit: "Broadcast-Adresse (z. B. 192.168.1.255)",
+          expected: sc.bc,
+          hint: `Netzadresse ist ${sc.net}. Nächstes Subnetz startet bei .${nextNetOctet}. Broadcast = nächstes Netz minus 1 = ${sc.bc}`,
+          explanation: `Richtig! Rechenweg:<br>` +
+            `1. Netzadresse: <strong>${sc.net}</strong> (Blockgröße: ${sc.block}).<br>` +
+            `2. Nächstes Subnetz: .${nextNetOctet}.<br>` +
+            `3. Broadcast-Adresse ist die letzte Adresse vor dem nächsten Netz (.${nextNetOctet} - 1): <strong>${sc.bc}</strong>.`
+        };
+      },
+
+      // 38. IPV4: ERSTE & LETZTE NUTZBARE HOST-IP
+      ipv4_first_last: function() {
+        const scenarios = [
+          { ip: "192.168.10.142", cidr: 26, net: "192.168.10.128", bc: "192.168.10.191", first: "192.168.10.129", last: "192.168.10.190" },
+          { ip: "172.16.5.75", cidr: 27, net: "172.16.5.64", bc: "172.16.5.95", first: "172.16.5.65", last: "172.16.5.94" },
+          { ip: "10.0.1.205", cidr: 28, net: "10.0.1.200", bc: "10.0.1.207", first: "10.0.1.201", last: "10.0.1.206" },
+          { ip: "192.168.0.5", cidr: 30, net: "192.168.0.4", bc: "192.168.0.7", first: "192.168.0.5", last: "192.168.0.6" }
+        ];
+        const sc = scenarios[Math.floor(Math.random() * scenarios.length)];
+        const askLast = Math.random() > 0.5;
+        const targetType = askLast ? "letzte" : "erste";
+        const targetAns = askLast ? sc.last : sc.first;
+
+        return {
+          topic: "ipv4_first_last",
+          badge: "🌐 IPv4 Host-Bereich",
+          isText: true,
+          title: `${targetType.charAt(0).toUpperCase() + targetType.slice(1)} nutzbare Host-IP für /${sc.cidr}`,
+          question: `Gegeben ist das Subnetz mit der Netzadresse <strong>${sc.net}/${sc.cidr}</strong> (Broadcast: ${sc.bc}).<br><br>Wie lautet die <strong>${targetType} nutzbare Host-IP-Adresse</strong> in diesem Subnetz?`,
+          unit: "IP-Adresse",
+          expected: targetAns,
+          hint: askLast ? `Letzte nutzbare IP = Broadcast (${sc.bc}) minus 1` : `Erste nutzbare IP = Netzadresse (${sc.net}) plus 1`,
+          explanation: `Richtig! In einem Subnetz gilt:<br>` +
+            `• Erste nutzbare IP = Netz-ID + 1: <strong>${sc.first}</strong><br>` +
+            `• Letzte nutzbare IP = Broadcast - 1: <strong>${sc.last}</strong><br>` +
+            `Gesuchtes Ergebnis: <strong>${targetAns}</strong>.`
+        };
+      },
+
+      // 39. IPV6: KÜRZUNGSREGELN NACH RFC 5952
+      ipv6_kuerzung: function() {
+        const scenarios = [
+          { full: "2001:0db8:0000:0000:0000:0000:1428:57ab", short: "2001:db8::1428:57ab" },
+          { full: "fe80:0000:0000:0000:020c:29ff:fe4b:8c91", short: "fe80::20c:29ff:fe4b:8c91" },
+          { full: "2001:0db8:0000:0042:0000:0000:0000:0001", short: "2001:db8:0:42::1" },
+          { full: "0000:0000:0000:0000:0000:0000:0000:0001", short: "::1" },
+          { full: "2001:0db8:0000:0000:0042:0000:0000:0001", short: "2001:db8::42:0:0:1" }
+        ];
+        const sc = scenarios[Math.floor(Math.random() * scenarios.length)];
+
+        return {
+          topic: "ipv6_kuerzung",
+          badge: "✂️ IPv6 RFC 5952",
+          isText: true,
+          title: "IPv6-Adresse normgerecht nach RFC 5952 kürzen",
+          question: `Gegeben ist die unkomprimierte IPv6-Adresse:<br><code>${sc.full}</code><br><br>Wende die offiziellen Kürzungsregeln nach RFC 5952 an (führende Nullen streichen, längste Nullfolge mit '::' komprimieren).<br><br>Wie lautet die <strong>gekürzte Schreibweise</strong>?`,
+          unit: "IPv6-Kurzform (z. B. 2001:db8::1)",
+          expected: sc.short,
+          hint: "Führende Nullen weg, längste zusammenhängende Folge von Nullen genau 1x mit :: ersetzen.",
+          explanation: `Richtig! Normgerechte Kurzform nach RFC 5952: <strong>${sc.short}</strong>.`
+        };
       }
     };
 
@@ -2970,6 +3465,94 @@
     }
 
     // =========================================================================
+    // IPV4 SUBNET CALCULATOR
+    // =========================================================================
+    function setIpv4Preset(ip, cidr) {
+      const ipInp = document.getElementById('ipv4-input');
+      const cidrSel = document.getElementById('ipv4-cidr-select');
+      if (ipInp) ipInp.value = ip;
+      if (cidrSel) cidrSel.value = String(cidr);
+      calcIpv4Subnet();
+    }
+
+    function calcIpv4Subnet() {
+      const ipVal = (document.getElementById('ipv4-input')?.value || '192.168.10.142').trim();
+      const cidr = parseInt(document.getElementById('ipv4-cidr-select')?.value || '26', 10);
+      const parts = ipVal.split('.').map(p => parseInt(p, 10));
+      if (parts.length !== 4 || parts.some(p => isNaN(p) || p < 0 || p > 255)) return;
+
+      const hostBits = 32 - cidr;
+      const totalIps = Math.pow(2, hostBits);
+      const usableHosts = cidr >= 31 ? (cidr === 31 ? 2 : 1) : Math.max(0, totalIps - 2);
+
+      let maskInt = 0;
+      if (hostBits < 32) {
+        maskInt = ((0xFFFFFFFF << hostBits) >>> 0);
+      }
+      const m1 = (maskInt >>> 24) & 255;
+      const m2 = (maskInt >>> 16) & 255;
+      const m3 = (maskInt >>> 8) & 255;
+      const m4 = maskInt & 255;
+      const maskStr = `${m1}.${m2}.${m3}.${m4}`;
+
+      const ipInt = (((parts[0] << 24) >>> 0) + ((parts[1] << 16) >>> 0) + ((parts[2] << 8) >>> 0) + parts[3]) >>> 0;
+      const netInt = (ipInt & maskInt) >>> 0;
+      const bcInt = (netInt | ((~maskInt) >>> 0)) >>> 0;
+
+      const n1 = (netInt >>> 24) & 255;
+      const n2 = (netInt >>> 16) & 255;
+      const n3 = (netInt >>> 8) & 255;
+      const n4 = netInt & 255;
+      const netStr = `${n1}.${n2}.${n3}.${n4}`;
+
+      const b1 = (bcInt >>> 24) & 255;
+      const b2 = (bcInt >>> 16) & 255;
+      const b3 = (bcInt >>> 8) & 255;
+      const b4 = bcInt & 255;
+      const bcStr = `${b1}.${b2}.${b3}.${b4}`;
+
+      const firstInt = (netInt + 1) >>> 0;
+      const lastInt = (bcInt - 1) >>> 0;
+      const firstStr = `${(firstInt >>> 24) & 255}.${(firstInt >>> 16) & 255}.${(firstInt >>> 8) & 255}.${firstInt & 255}`;
+      const lastStr = `${(lastInt >>> 24) & 255}.${(lastInt >>> 16) & 255}.${(lastInt >>> 8) & 255}.${lastInt & 255}`;
+
+      const blockSize = cidr >= 24 ? 256 - m4 : 256 - m3;
+      const relevantOctet = cidr >= 24 ? '4. Oktett' : '3. Oktett';
+      const relevantMask = cidr >= 24 ? m4 : m3;
+
+      const maskBinEl = document.getElementById('ipv4-mask-bin');
+      if (maskBinEl) {
+        maskBinEl.innerHTML = `Maske: <span class="font-bold text-sky-700">${maskStr}</span> | Binär: <code class="text-sky-700 font-bold">${m1.toString(2).padStart(8,'0')}.${m2.toString(2).padStart(8,'0')}.${m3.toString(2).padStart(8,'0')}.${m4.toString(2).padStart(8,'0')}</code>`;
+      }
+      const netEl = document.getElementById('ipv4-res-net');
+      if (netEl) netEl.innerText = netStr;
+
+      const bcEl = document.getElementById('ipv4-res-bc');
+      if (bcEl) bcEl.innerText = bcStr;
+
+      const rangeEl = document.getElementById('ipv4-res-range');
+      if (rangeEl) rangeEl.innerText = (cidr >= 24) ? `.${n4 + 1} bis .${b4 - 1}` : `${firstStr} bis ${lastStr}`;
+
+      const rangeFullEl = document.getElementById('ipv4-res-range-full');
+      if (rangeFullEl) rangeFullEl.innerText = `${firstStr} – ${lastStr}`;
+
+      const hostsEl = document.getElementById('ipv4-res-hosts');
+      if (hostsEl) hostsEl.innerText = `${usableHosts.toLocaleString('de-DE')} Hosts`;
+
+      const hostsCalcEl = document.getElementById('ipv4-res-hosts-calc');
+      if (hostsCalcEl) hostsCalcEl.innerText = `2^${hostBits} - 2 = ${totalIps} - 2 = ${usableHosts.toLocaleString('de-DE')}`;
+
+      const stepsEl = document.getElementById('ipv4-calc-steps');
+      if (stepsEl) {
+        stepsEl.innerHTML = `<div>1. Host-Bits bestimmen: <strong>32 - ${cidr} = ${hostBits} Bits</strong>.</div>` +
+          `<div>2. Blockgröße im ${relevantOctet}: <strong>256 - ${relevantMask} = ${blockSize}</strong> (Schrittweite).</div>` +
+          `<div>3. Subnetz-Bereich: IP <strong>${ipVal}</strong> gehört zur Netzadresse <strong>${netStr}</strong>.</div>` +
+          `<div>4. Broadcast: Letzte Adresse vor nächstem Netz = <strong>${bcStr}</strong>.</div>` +
+          `<div>5. Nutzbare Hosts: <strong>${firstStr} bis ${lastStr}</strong> (${usableHosts.toLocaleString('de-DE')} Hosts).</div>`;
+      }
+    }
+
+    // =========================================================================
     // IPV6 SUBNET CALCULATOR
     // =========================================================================
     function calcIpv6Subnet() {
@@ -3194,6 +3777,7 @@
       calcPwr('U');
       calcRzEffizienz();
       updateConverterFromDec(215);
+      calcIpv4Subnet();
       calcIpv6Subnet();
       calcEui64();
       calcIpv6Compress();
