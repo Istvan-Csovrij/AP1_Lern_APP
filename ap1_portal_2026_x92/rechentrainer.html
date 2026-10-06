@@ -3,6 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <title>Rechen- & Einheiten-Trainer • AP1 & AP2</title>
+  <script>
+    (function() {
+      const TARGET_HASH = "158a323a7ba44870f23d96f1516dd70aa48e9a72db4ebb026b0a89e212a208ab";
+      const AUTH_KEY = "ap1_portal_auth_token";
+      if (window.parent !== window || localStorage.getItem(AUTH_KEY) === TARGET_HASH || sessionStorage.getItem(AUTH_KEY) === TARGET_HASH) {
+        return;
+      }
+      window.location.replace("index.html");
+    })();
+  </script>
   <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
   <style>
     :root {

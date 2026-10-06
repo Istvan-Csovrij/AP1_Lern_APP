@@ -5,6 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AP1 Zeichenboard &amp; Diagramm-Trainer (Prüfungsstandard)</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+      (function() {
+        const TARGET_HASH = "158a323a7ba44870f23d96f1516dd70aa48e9a72db4ebb026b0a89e212a208ab";
+        const AUTH_KEY = "ap1_portal_auth_token";
+        if (window.parent !== window || localStorage.getItem(AUTH_KEY) === TARGET_HASH || sessionStorage.getItem(AUTH_KEY) === TARGET_HASH) {
+          return;
+        }
+        window.location.replace("index.html");
+      })();
+    </script>
     <style>
         :root {
             --primary: #8b5cf6;

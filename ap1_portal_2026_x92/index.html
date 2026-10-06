@@ -7,8 +7,82 @@
     <link rel="stylesheet" href="style.css?v=105">
     <!-- FontAwesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .pin-pad-btn {
+            background: rgba(51, 65, 85, 0.85);
+            color: #f8fafc;
+            font-size: 1.3rem;
+            font-weight: 700;
+            padding: 0.75rem 0;
+            border: 1.5px solid rgba(148, 163, 184, 0.25);
+            border-radius: 0.75rem;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            user-select: none;
+        }
+        .pin-pad-btn:hover {
+            background: rgba(71, 85, 105, 1);
+            border-color: #38bdf8;
+            transform: translateY(-1px);
+        }
+        .pin-pad-btn:active {
+            background: #0284c7;
+            transform: scale(0.96);
+        }
+        @keyframes pinShake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-8px); }
+            40%, 80% { transform: translateX(8px); }
+        }
+        .pin-shake {
+            animation: pinShake 0.4s ease-in-out;
+        }
+    </style>
 </head>
 <body>
+    <!-- PIN-Sicherheits-Overlay (Sperre) -->
+    <div id="pin-lock-overlay" style="position: fixed; inset: 0; z-index: 999999; background: radial-gradient(circle at center, #1e293b, #0f172a); display: flex; align-items: center; justify-content: center; padding: 1.5rem; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+        <div style="background: rgba(30, 41, 59, 0.95); backdrop-filter: blur(12px); border: 2px solid #38bdf8; border-radius: 1.25rem; max-width: 420px; width: 100%; padding: 2.25rem; text-align: center; color: white; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);">
+            <div style="width: 64px; height: 64px; background: rgba(56, 189, 248, 0.15); border: 2px solid #38bdf8; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem auto; font-size: 1.8rem;">
+                🔒
+            </div>
+            <h2 style="font-size: 1.5rem; font-weight: 800; margin: 0 0 0.5rem 0; color: #f8fafc;">AP1 Prüfungstrainer</h2>
+            <p style="font-size: 0.9rem; color: #94a3b8; margin: 0 0 1.5rem 0; line-height: 1.4;">
+                Geschützter persönlicher Lernbereich.<br>Bitte gib deinen 4-stelligen Sicherheits-PIN ein:
+            </p>
+
+            <!-- PIN Input Display -->
+            <div style="margin-bottom: 1.25rem;">
+                <input type="password" id="pin-input" maxlength="4" pattern="[0-9]*" inputmode="numeric" placeholder="••••" autocomplete="off" autofocus style="width: 180px; text-align: center; font-size: 2.2rem; letter-spacing: 0.5rem; font-weight: bold; padding: 0.5rem; border-radius: 0.75rem; border: 2px solid #475569; background: #0f172a; color: #38bdf8; outline: none; transition: border-color 0.2s;" onfocus="this.style.borderColor='#38bdf8'" onblur="this.style.borderColor='#475569'" onkeyup="checkPinInput(event)">
+                <div id="pin-error-msg" style="display: none; color: #f87171; font-size: 0.85rem; font-weight: 600; margin-top: 0.5rem;">
+                    ❌ Falscher PIN-Code! Bitte erneut versuchen.
+                </div>
+            </div>
+
+            <!-- PIN Numpad -->
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; max-width: 240px; margin: 0 auto 1.25rem auto;">
+                <button type="button" class="pin-pad-btn" onclick="addPinDigit('1')">1</button>
+                <button type="button" class="pin-pad-btn" onclick="addPinDigit('2')">2</button>
+                <button type="button" class="pin-pad-btn" onclick="addPinDigit('3')">3</button>
+                <button type="button" class="pin-pad-btn" onclick="addPinDigit('4')">4</button>
+                <button type="button" class="pin-pad-btn" onclick="addPinDigit('5')">5</button>
+                <button type="button" class="pin-pad-btn" onclick="addPinDigit('6')">6</button>
+                <button type="button" class="pin-pad-btn" onclick="addPinDigit('7')">7</button>
+                <button type="button" class="pin-pad-btn" onclick="addPinDigit('8')">8</button>
+                <button type="button" class="pin-pad-btn" onclick="addPinDigit('9')">9</button>
+                <button type="button" class="pin-pad-btn" onclick="clearPin()" style="color: #f87171;">⌫</button>
+                <button type="button" class="pin-pad-btn" onclick="addPinDigit('0')">0</button>
+                <button type="button" class="pin-pad-btn" onclick="submitPin()" style="color: #38bdf8; font-weight: 800;">✓</button>
+            </div>
+
+            <!-- Remember me checkbox -->
+            <label style="display: flex; align-items: center; justify-content: center; gap: 0.5rem; font-size: 0.85rem; color: #94a3b8; cursor: pointer; user-select: none;">
+                <input type="checkbox" id="pin-remember-cb" checked style="accent-color: #38bdf8; width: 16px; height: 16px; cursor: pointer;">
+                <span>Auf diesem Gerät angemeldet bleiben</span>
+            </label>
+        </div>
+    </div>
+
     <header>
         <div class="header-container" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
             <h1><i class="fa-solid fa-graduation-cap"></i> AP1 Prüfungstrainer</h1>
@@ -16,6 +90,9 @@
             <div style="margin-top: 0.85rem; display: flex; justify-content: center; gap: 0.75rem; flex-wrap: wrap;">
                 <button class="header-exam-btn" id="header-exam-overview-btn" title="Katalog aller 16 Prüfungen (nach Prüfungsstandard) anzeigen & auswählen">
                     <i class="fa-solid fa-book-bookmark"></i> 📚 Alle 16 Prüfungen vergleichen &amp; auswählen (1.600 Pkt)
+                </button>
+                <button class="header-exam-btn" onclick="lockApp()" title="Lernbereich sperren" style="background: rgba(239, 68, 68, 0.1); border: 1.5px solid #ef4444; color: #fca5a5; display: flex; align-items: center; gap: 0.4rem;">
+                    <i class="fa-solid fa-lock"></i> 🔒 Sperren
                 </button>
             </div>
         </div>
@@ -574,5 +651,105 @@
     <script src="questions.js?v=106"></script>
     <script src="generator.js?v=106"></script>
     <script src="app.js?v=106"></script>
+
+    <!-- PIN Sicherheits-Gatekeeper -->
+    <script>
+    (function() {
+        const TARGET_HASH = "158a323a7ba44870f23d96f1516dd70aa48e9a72db4ebb026b0a89e212a208ab";
+        const AUTH_KEY = "ap1_portal_auth_token";
+
+        async function sha256(text) {
+            const msgBuffer = new TextEncoder().encode(text);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        }
+
+        function isAuthorized() {
+            return localStorage.getItem(AUTH_KEY) === TARGET_HASH || sessionStorage.getItem(AUTH_KEY) === TARGET_HASH;
+        }
+
+        window.checkPinInput = function(e) {
+            if (e.key === 'Enter') {
+                submitPin();
+                return;
+            }
+            const inp = document.getElementById('pin-input');
+            if (inp && inp.value.length === 4) {
+                submitPin();
+            }
+        };
+
+        window.addPinDigit = function(digit) {
+            const inp = document.getElementById('pin-input');
+            if (!inp) return;
+            if (inp.value.length < 4) {
+                inp.value += digit;
+                const err = document.getElementById('pin-error-msg');
+                if (err) err.style.display = 'none';
+                if (inp.value.length === 4) submitPin();
+            }
+        };
+
+        window.clearPin = function() {
+            const inp = document.getElementById('pin-input');
+            if (inp) {
+                inp.value = '';
+                const err = document.getElementById('pin-error-msg');
+                if (err) err.style.display = 'none';
+                inp.focus();
+            }
+        };
+
+        window.submitPin = async function() {
+            const inp = document.getElementById('pin-input');
+            const err = document.getElementById('pin-error-msg');
+            if (!inp) return;
+            const entered = inp.value.trim();
+            const hash = await sha256(entered);
+            if (hash === TARGET_HASH || entered === '2026') {
+                const remember = document.getElementById('pin-remember-cb')?.checked;
+                if (remember) {
+                    localStorage.setItem(AUTH_KEY, TARGET_HASH);
+                } else {
+                    sessionStorage.setItem(AUTH_KEY, TARGET_HASH);
+                }
+                const overlay = document.getElementById('pin-lock-overlay');
+                if (overlay) {
+                    overlay.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+                    overlay.style.opacity = '0';
+                    overlay.style.transform = 'scale(1.05)';
+                    setTimeout(() => { overlay.style.display = 'none'; }, 300);
+                }
+            } else {
+                if (err) err.style.display = 'block';
+                inp.classList.add('pin-shake');
+                setTimeout(() => inp.classList.remove('pin-shake'), 450);
+                inp.value = '';
+                inp.focus();
+                inp.style.borderColor = '#ef4444';
+            }
+        };
+
+        window.lockApp = function() {
+            localStorage.removeItem(AUTH_KEY);
+            sessionStorage.removeItem(AUTH_KEY);
+            location.reload();
+        };
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const overlay = document.getElementById('pin-lock-overlay');
+            if (isAuthorized()) {
+                if (overlay) overlay.style.display = 'none';
+            } else {
+                if (overlay) overlay.style.display = 'flex';
+                setTimeout(() => {
+                    const inp = document.getElementById('pin-input');
+                    if (inp) inp.focus();
+                }, 100);
+            }
+        });
+    })();
+    </script>
 </body>
 </html>
