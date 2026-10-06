@@ -423,10 +423,40 @@ function generateDynamicQuestions(typeMode = "mix") {
             ],
             correctIdx: 0,
             expl: "Link-Local-Pakete gelten nur auf dem lokalen physischen Link. Router leiten sie niemals weiter."
+        },
+        // 8. Adresstyp-Erkennung anhand Anfangsbuchstaben (fd, fe80, 2/3, ff, ::1)
+        {
+            topic: 8,
+            q: "Fachaufgabe Netzwerk (LF 3): In einem Netzwerkplan stehen folgende drei Adressen:\nA: fd00:cafe:1::10\nB: 2001:db8:85a3::1\nC: fe80::1ff:fe00:3a60\naa) Identifizieren Sie jeweils den Adresstyp (ULA, GUA oder Link-Local) anhand der Anfangszeichen.\nab) Welcher dieser Adressen ist weltweit im Internet routingfähig?",
+            solution: "aa) Identifikation anhand der Anfangszeichen:\n• Adresse A (beginnt mit 'fd') -> Unique Local Address (ULA, fc00::/7) für das private Unternehmensnetz.\n• Adresse B (beginnt mit '2') -> Global Unicast Address (GUA, 2000::/3) für weltweiten Internetverkehr.\n• Adresse C (beginnt mit 'fe80') -> Link-Local Address (LLA, fe80::/10) nur für den lokalen Link.\nab) Weltweit routingfähig: Ausschließlich Adresse B (GUA: 2001:db8:85a3::1).",
+            mcQuestion: "Anhand welcher Merkmale erkennt man eine IPv6 Unique Local Address (ULA) gegenüber einer Global Unicast Address (GUA)?",
+            mcOptions: [
+                "ULA beginnt mit den Hex-Zeichen 'fd' (oder 'fc', Präfix fc00::/7), während GUA im Internet mit '2' oder '3' (Präfix 2000::/3) beginnt.",
+                "ULA beginnt mit 'fe80::/10', während GUA mit 'ff00::/8' beginnt.",
+                "ULA hat immer 64 Bit Gesamtlänge, während GUA 128 Bit lang ist.",
+                "ULA erfordert immer eine Scope-ID wie %12, während GUA keine benötigt."
+            ],
+            correctIdx: 0,
+            expl: "ULA (privat/Intranet) beginnt mit 'fd' bzw. 'fc' (fc00::/7). GUA (öffentlich/Internet) beginnt aktuell mit einer '2' oder '3' (2000::/3)."
+        },
+        // 9. Übertragungsarten (Cast-Typen): Unicast, Multicast, Anycast, Wegfall Broadcast
+        {
+            topic: 9,
+            q: "Fachaufgabe Netzwerk (LF 3): Erläutern Sie die Übertragungsarten (Cast-Typen) in IPv6:\naa) Welche drei Cast-Typen werden in IPv6 offiziell verwendet?\nab) Welche bekannte Übertragungsart aus IPv4 existiert in IPv6 NICHT mehr und wodurch wurde sie ersetzt?",
+            solution: "aa) Die drei IPv6-Cast-Typen:\n1. Unicast: 1:1 Punkt-zu-Punkt-Kommunikation von einem Absender zu einem eindeutigen Empfänger.\n2. Multicast: 1:n Gruppenkommunikation (Präfix ff00::/8) an alle abonnierten Mitglieder einer Multicast-Gruppe.\n3. Anycast: 1:nächstgelegene Kommunikation an die topologisch nächste Schnittstelle aus einer Gruppe identischer Adressen.\nab) Broadcast (Rundruf an alle Teilnehmer im Subnetz) wurde in IPv6 ersatzlos gestrichen und vollständig durch zielgerichtetes Multicast ersetzt.",
+            mcQuestion: "Welche Übertragungsart (Cast-Typ) aus IPv4 existiert in IPv6 definitiv NICHT mehr?",
+            mcOptions: [
+                "Broadcast (wurde vollständig durch Multicast und Anycast ersetzt)",
+                "Unicast (1:1 Punkt-zu-Punkt)",
+                "Anycast (1:nächstgelegener)",
+                "Multicast (1:n Gruppe)"
+            ],
+            correctIdx: 0,
+            expl: "In IPv6 gibt es keinen Broadcast mehr! Alle früheren Broadcast-Funktionen (wie ARP, Router Discovery) laufen über zielgerichtetes Multicast (z. B. ff02::1)."
         }
     ];
 
-    for (let i = 0; i < 28; i++) {
+    for (let i = 0; i < 36; i++) {
         const sc = ipv6Scenarios[i % ipv6Scenarios.length];
         const isOpen = shouldBeOpenText();
 

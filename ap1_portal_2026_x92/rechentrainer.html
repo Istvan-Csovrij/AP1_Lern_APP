@@ -244,6 +244,18 @@
           </button>
 
           <!-- IPv6 (AP1 Lernfeld 3) -->
+          <button onclick="selectMiniTopic('ipv6_identify_type')" class="topic-pill px-3.5 py-2 text-sm font-semibold rounded-xl border border-indigo-400 bg-indigo-50 hover:bg-indigo-100 text-indigo-900 transition-all" data-topic="ipv6_identify_type">
+            🏷️ IPv6: Adresstyp erkennen (fe80, fd, 2/3, ff, ::1)
+          </button>
+          <button onclick="selectMiniTopic('ipv6_prefix_rules')" class="topic-pill px-3.5 py-2 text-sm font-semibold rounded-xl border border-indigo-400 bg-indigo-50 hover:bg-indigo-100 text-indigo-900 transition-all" data-topic="ipv6_prefix_rules">
+            🧩 IPv6: Präfix-Erkennung (fe80::/10, fc00::/7, 2000::/3...)
+          </button>
+          <button onclick="selectMiniTopic('ipv6_cast_types')" class="topic-pill px-3.5 py-2 text-sm font-semibold rounded-xl border border-indigo-400 bg-indigo-50 hover:bg-indigo-100 text-indigo-900 transition-all" data-topic="ipv6_cast_types">
+            📡 IPv6: Cast-Arten (Unicast, Multicast, Anycast)
+          </button>
+          <button onclick="selectMiniTopic('ipv6_scope_routing')" class="topic-pill px-3.5 py-2 text-sm font-semibold rounded-xl border border-indigo-400 bg-indigo-50 hover:bg-indigo-100 text-indigo-900 transition-all" data-topic="ipv6_scope_routing">
+            🌍 IPv6: Scope &amp; Routing (Internet, LAN, Link)
+          </button>
           <button onclick="selectMiniTopic('ipv6_subnets')" class="topic-pill px-3.5 py-2 text-sm font-semibold rounded-xl border border-indigo-400 bg-indigo-50 hover:bg-indigo-100 text-indigo-900 transition-all" data-topic="ipv6_subnets">
             🌐 IPv6: Subnetze (2^(64 - Präfix))
           </button>
@@ -1513,12 +1525,164 @@
         </div>
       </div>
 
+      <!-- ========================================================================= -->
+      <!-- RECHNER 1b: INTERAKTIVER IPV6-ADRESSTYP-INSPEKTOR & PRÄFIX-ERKENNER         -->
+      <!-- ========================================================================= -->
+      <div class="bg-white border-2 border-indigo-400 rounded-2xl p-6 sm:p-8 shadow-sm space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-200 pb-4">
+          <div>
+            <span class="text-xs font-bold uppercase tracking-wider text-indigo-700 bg-indigo-100 px-2.5 py-1 rounded-md border border-indigo-300">
+              Interaktiver Rechner &amp; Schnell-Inspektor
+            </span>
+            <h3 class="text-xl font-bold text-slate-900 mt-1">
+              🏷️ IPv6-Adresstyp-Inspektor: Erkennen, Identifizieren &amp; Zuordnen
+            </h3>
+          </div>
+          <div class="text-xs text-slate-500 font-mono bg-slate-100 px-3 py-1.5 rounded-lg border border-slate-200">
+            Regel: Beginnt mit 2/3 (GUA) • fd/fc (ULA) • fe80 (Link-Local) • ff (Multicast) • ::1 (Loopback)
+          </div>
+        </div>
+
+        <!-- Input & Presets -->
+        <div class="space-y-3">
+          <label class="block text-xs font-bold uppercase tracking-wider text-slate-700">
+            Beliebige IPv6-Adresse eingeben oder Schnell-Prüffall wählen:
+          </label>
+          <div class="flex flex-col sm:flex-row gap-3">
+            <input type="text" id="ipv6-inspect-input" value="2001:0db8:85a3::8a2e:370:7334" oninput="inspectIpv6Address()" class="flex-1 p-3 rounded-xl border-2 border-indigo-300 font-mono text-base font-bold text-slate-800 focus:border-indigo-600 focus:outline-none" placeholder="z. B. 2001:db8::1 oder fe80::1 oder fd00::42">
+          </div>
+          <div class="flex flex-wrap gap-1.5 pt-1">
+            <button onclick="setInspectIpv6('2001:0db8:85a3::8a2e:370:7334')" class="px-2.5 py-1 text-xs font-semibold rounded-lg bg-emerald-100 hover:bg-emerald-200 text-emerald-900 border border-emerald-300">🌐 2001:db8... (GUA / 2...)</button>
+            <button onclick="setInspectIpv6('2a00:1450:4001:828::200e')" class="px-2.5 py-1 text-xs font-semibold rounded-lg bg-emerald-100 hover:bg-emerald-200 text-emerald-900 border border-emerald-300">🌐 2a00:1450... (Google GUA)</button>
+            <button onclick="setInspectIpv6('fd00:abcd:1234::1')" class="px-2.5 py-1 text-xs font-semibold rounded-lg bg-purple-100 hover:bg-purple-200 text-purple-900 border border-purple-300">🏢 fd00:abcd... (ULA Intranet)</button>
+            <button onclick="setInspectIpv6('fc00::42')" class="px-2.5 py-1 text-xs font-semibold rounded-lg bg-purple-100 hover:bg-purple-200 text-purple-900 border border-purple-300">🏢 fc00::42 (ULA Reserviert)</button>
+            <button onclick="setInspectIpv6('fe80::20c:29ff:fe4b:8c91')" class="px-2.5 py-1 text-xs font-semibold rounded-lg bg-amber-100 hover:bg-amber-200 text-amber-900 border border-amber-300">🔗 fe80::20c... (Link-Local)</button>
+            <button onclick="setInspectIpv6('ff02::1')" class="px-2.5 py-1 text-xs font-semibold rounded-lg bg-rose-100 hover:bg-rose-200 text-rose-900 border border-rose-300">📢 ff02::1 (Multicast All-Nodes)</button>
+            <button onclick="setInspectIpv6('ff02::2')" class="px-2.5 py-1 text-xs font-semibold rounded-lg bg-rose-100 hover:bg-rose-200 text-rose-900 border border-rose-300">📡 ff02::2 (Multicast All-Routers)</button>
+            <button onclick="setInspectIpv6('::1')" class="px-2.5 py-1 text-xs font-semibold rounded-lg bg-slate-200 hover:bg-slate-300 text-slate-800 border border-slate-400">💻 ::1 (Loopback)</button>
+          </div>
+        </div>
+
+        <!-- Live Analysis Cards Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 font-sans">
+          <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl">
+            <div class="text-xs font-bold uppercase text-slate-500">Erkannter Adresstyp</div>
+            <div class="text-lg font-black text-slate-900 mt-1" id="inspect-res-type">Global Unicast (GUA)</div>
+            <div class="mt-2"><span id="inspect-type-badge" class="px-2.5 py-1 rounded-full text-[11px] font-bold border uppercase tracking-wider bg-emerald-100 text-emerald-800 border-emerald-300">Global Unicast</span></div>
+          </div>
+          <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl">
+            <div class="text-xs font-bold uppercase text-slate-500">Präfix / Adressbereich</div>
+            <div class="text-lg font-mono font-black text-indigo-700 mt-1" id="inspect-res-prefix">2000::/3</div>
+            <div class="text-xs text-slate-500 mt-1">Offizieller IETF-Bereich</div>
+          </div>
+          <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl">
+            <div class="text-xs font-bold uppercase text-slate-500">Cast-Art (Übertragung)</div>
+            <div class="text-lg font-black text-sky-800 mt-1" id="inspect-res-cast">Unicast (1:1)</div>
+            <div class="text-xs text-sky-600 mt-1">Broadcast existiert in IPv6 NICHT</div>
+          </div>
+          <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl">
+            <div class="text-xs font-bold uppercase text-slate-500">Funktionales IPv4-Pendant</div>
+            <div class="text-base font-bold text-amber-900 mt-1" id="inspect-res-pendant">Öffentliche IP-Adresse</div>
+            <div class="text-xs text-amber-700 mt-1">Vergleichbare Rolle in IPv4</div>
+          </div>
+        </div>
+
+        <!-- Scope & Detailed Explanation -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="p-4 bg-slate-900 text-white rounded-xl space-y-2">
+            <div class="text-xs font-bold uppercase tracking-wider text-slate-400">Gültigkeitsbereich (Scope) &amp; Routingfähigkeit:</div>
+            <div class="text-sm font-semibold text-emerald-300" id="inspect-res-scope">Weltweit (Globales Internet)</div>
+            <div class="text-xs text-slate-300 leading-relaxed" id="inspect-res-routing">
+              Weltweit geroutet! Wird über das gesamte Internet hinweg geroutet. Ermöglicht direkte End-to-End-Konnektivität ohne NAT.
+            </div>
+          </div>
+          <div class="p-4 bg-indigo-50 border border-indigo-200 rounded-xl space-y-2">
+            <div class="text-xs font-bold uppercase tracking-wider text-indigo-800">IHK-Erkennungsregel &amp; Spickzettel-Tipp:</div>
+            <div class="text-xs text-indigo-950 leading-relaxed" id="inspect-res-expl">
+              Beginnt aktuell immer mit einer 2 oder 3 (Binär 001). Jeder Host weltweit erhält damit eine weltweit eindeutige, direkt erreichbare IP-Adresse.
+            </div>
+          </div>
+        </div>
+
+        <!-- IHK Schnell-Identifikation Tabelle -->
+        <div class="p-5 bg-gradient-to-r from-slate-50 to-indigo-50/40 border border-indigo-200 rounded-xl space-y-3">
+          <div class="font-bold text-slate-900 text-sm flex items-center gap-2">
+            <span>⚡</span>
+            <span>IHK-Prüfungs-Spickzettel: Wie erkenne ich sofort den Adresstyp an den ersten Zeichen?</span>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-xs text-left bg-white border border-slate-200 rounded-lg shadow-sm">
+              <thead class="bg-slate-100 text-slate-800 font-bold uppercase">
+                <tr>
+                  <th class="p-2.5 border-b">Beginnt mit...</th>
+                  <th class="p-2.5 border-b">Offizielles Präfix</th>
+                  <th class="p-2.5 border-b">Adresstyp</th>
+                  <th class="p-2.5 border-b">Cast-Art</th>
+                  <th class="p-2.5 border-b">Gültigkeit &amp; Routing</th>
+                  <th class="p-2.5 border-b">IPv4-Vergleich</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100 font-sans text-slate-700">
+                <tr class="hover:bg-slate-50">
+                  <td class="p-2.5 font-mono font-bold text-emerald-700">2... oder 3...</td>
+                  <td class="p-2.5 font-mono font-semibold">2000::/3</td>
+                  <td class="p-2.5 font-bold text-emerald-800">Global Unicast (GUA)</td>
+                  <td class="p-2.5">Unicast (1:1)</td>
+                  <td class="p-2.5">🌍 Weltweit im Internet routingfähig (Ende-zu-Ende, kein NAT)</td>
+                  <td class="p-2.5 font-mono">Öffentliche IP</td>
+                </tr>
+                <tr class="hover:bg-slate-50">
+                  <td class="p-2.5 font-mono font-bold text-purple-700">fd... (oder fc...)</td>
+                  <td class="p-2.5 font-mono font-semibold">fc00::/7 (fd00::/8)</td>
+                  <td class="p-2.5 font-bold text-purple-800">Unique Local (ULA)</td>
+                  <td class="p-2.5">Unicast (1:1)</td>
+                  <td class="p-2.5">🏢 Nur internes Firmennetz/Intranet (im Internet verworfen)</td>
+                  <td class="p-2.5 font-mono">RFC 1918 (192.168.x.x, 10.x.x.x)</td>
+                </tr>
+                <tr class="hover:bg-slate-50">
+                  <td class="p-2.5 font-mono font-bold text-amber-700">fe80... (fe8 bis feb)</td>
+                  <td class="p-2.5 font-mono font-semibold">fe80::/10</td>
+                  <td class="p-2.5 font-bold text-amber-800">Link-Local Address (LLA)</td>
+                  <td class="p-2.5">Unicast (1:1)</td>
+                  <td class="p-2.5">🔗 Nur lokales Layer-2-Segment! Router verwerfen Pakete IMMER (Drop). Ping erfordert %Scope-ID!</td>
+                  <td class="p-2.5 font-mono">APIPA (169.254.x.x)</td>
+                </tr>
+                <tr class="hover:bg-slate-50">
+                  <td class="p-2.5 font-mono font-bold text-rose-700">ff...</td>
+                  <td class="p-2.5 font-mono font-semibold">ff00::/8</td>
+                  <td class="p-2.5 font-bold text-rose-800">Multicast</td>
+                  <td class="p-2.5 font-bold text-rose-700">Multicast (1:n)</td>
+                  <td class="p-2.5">📢 An definierte Gruppe (z.B. ff02::1 alle Hosts, ff02::2 alle Router). Ersetzt Broadcast!</td>
+                  <td class="p-2.5 font-mono">Broadcast (255.255.255.255)</td>
+                </tr>
+                <tr class="hover:bg-slate-50">
+                  <td class="p-2.5 font-mono font-bold text-slate-700">::1</td>
+                  <td class="p-2.5 font-mono font-semibold">::1/128</td>
+                  <td class="p-2.5 font-bold text-slate-800">Loopback</td>
+                  <td class="p-2.5">Unicast (virtuell)</td>
+                  <td class="p-2.5">💻 Nur lokaler Rechner/Stack (verlässt Rechner nie)</td>
+                  <td class="p-2.5 font-mono">127.0.0.1 (Localhost)</td>
+                </tr>
+                <tr class="hover:bg-slate-50">
+                  <td class="p-2.5 font-mono font-bold text-slate-500">::</td>
+                  <td class="p-2.5 font-mono font-semibold">::/128</td>
+                  <td class="p-2.5 font-bold text-slate-600">Unspecified</td>
+                  <td class="p-2.5">Spezialadresse</td>
+                  <td class="p-2.5">⚙️ Unbekannt/Vorübergehend (z.B. bei DAD-Prüfung oder Default-Route ::/0)</td>
+                  <td class="p-2.5 font-mono">0.0.0.0</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
       <!-- RECHNER 2: IPV6 SUBNETTING & PRÄFIX-KALKULATOR -->
       <div class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm space-y-6">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-200 pb-4">
           <div>
             <span class="text-xs font-bold uppercase tracking-wider text-blue-600 bg-blue-50 px-2.5 py-1 rounded-md border border-blue-200">
-              Interaktiver Rechner 1
+              Interaktiver Rechner 2
             </span>
             <h3 class="text-xl font-bold text-slate-900 mt-1">
               📊 IPv6-Subnetting-Kalkulator (Wie viele /64 Subnetze?)
@@ -3456,6 +3620,326 @@
           hint: sc.hint,
           explanation: sc.expl
         };
+      },
+
+      // 44. IPV6: ADRESSTYP ERKENNEN (2/3 -> GUA, fd/fc -> ULA, fe80 -> Link-Local, ff -> Multicast, ::1 -> Loopback)
+      ipv6_identify_type: function() {
+        const scenarios = [
+          {
+            ip: "2001:0db8:85a3::8a2e:370:7334",
+            start: "2001 (beginnt mit 2)",
+            prefix: "2000::/3",
+            type: "GUA",
+            name: "Global Unicast (GUA)",
+            alts: ["GUA", "GLOBAL UNICAST", "GLOBALUNICAST", "GLOBAL", "ÖFFENTLICH", "OEFFENTLICH", "GLOBAL UNICAST ADDRESS"],
+            hint: "Beginnt mit '2001' (2... oder 3...) -> Global Unicast (GUA).",
+            expl: "Adressen, die mit <strong>2</strong> oder <strong>3</strong> beginnen (Präfix <strong>2000::/3</strong>), sind <strong>Global Unicast Adressen (GUA)</strong> für das öffentliche Internet."
+          },
+          {
+            ip: "2a00:1450:4001:828::200e",
+            start: "2a00 (beginnt mit 2)",
+            prefix: "2000::/3",
+            type: "GUA",
+            name: "Global Unicast (GUA)",
+            alts: ["GUA", "GLOBAL UNICAST", "GLOBALUNICAST", "GLOBAL", "ÖFFENTLICH", "OEFFENTLICH"],
+            hint: "Beginnt mit '2a00' (2... oder 3...) -> Global Unicast (GUA).",
+            expl: "Beginnt mit <strong>2</strong> -> Gehört zum Präfixbereich <strong>2000::/3</strong> (Global Unicast / öffentlich im Internet geroutet)."
+          },
+          {
+            ip: "fd12:3456:789a:1::42",
+            start: "fd12 (beginnt mit fd)",
+            prefix: "fc00::/7 (fd00::/8)",
+            type: "ULA",
+            name: "Unique Local (ULA)",
+            alts: ["ULA", "UNIQUE LOCAL", "UNIQUELOCAL", "UNIQUE LOCAL ADDRESS", "PRIVAT", "FC00::/7", "FD00::/8"],
+            hint: "Beginnt mit 'fd' (fc00::/7) -> Unique Local Address (ULA) für private Netze.",
+            expl: "Adressen mit <strong>fd</strong> am Anfang gehören zu <strong>fc00::/7</strong> und sind <strong>Unique Local Adressen (ULA)</strong>. Sie entsprechen den privaten IPv4-Adressen nach RFC 1918."
+          },
+          {
+            ip: "fd00:abcd:1234::1",
+            start: "fd00 (beginnt mit fd)",
+            prefix: "fc00::/7",
+            type: "ULA",
+            name: "Unique Local (ULA)",
+            alts: ["ULA", "UNIQUE LOCAL", "UNIQUELOCAL", "PRIVAT", "FC00::/7"],
+            hint: "Beginnt mit 'fd' -> Unique Local Address (ULA).",
+            expl: "Beginnt mit <strong>fd</strong> -> <strong>Unique Local Address (ULA)</strong>, nur im lokalen Unternehmensnetz routingfähig."
+          },
+          {
+            ip: "fc00::5",
+            start: "fc00 (beginnt mit fc)",
+            prefix: "fc00::/7",
+            type: "ULA",
+            name: "Unique Local (ULA)",
+            alts: ["ULA", "UNIQUE LOCAL", "UNIQUELOCAL", "PRIVAT"],
+            hint: "Beginnt mit 'fc' -> Unique Local Address (ULA, fc00::/7).",
+            expl: "Gehört zu <strong>fc00::/7</strong> -> <strong>Unique Local Address (ULA)</strong>."
+          },
+          {
+            ip: "fe80::1ff:fe00:3a60",
+            start: "fe80",
+            prefix: "fe80::/10",
+            type: "Link-Local",
+            name: "Link-Local (LLA)",
+            alts: ["LINK-LOCAL", "LINKLOCAL", "LLA", "LINK LOCAL", "LOKAL", "LINK-LOKAL", "LINK LOKAL", "FE80", "FE80::/10"],
+            hint: "Beginnt mit 'fe80' -> Link-Local Address (fe80::/10).",
+            expl: "Beginnt mit <strong>fe80</strong> -> <strong>Link-Local-Adresse (LLA)</strong>. Gilt strikt nur auf dem lokalen Link und wird von Routern NIEMALS weitergeleitet."
+          },
+          {
+            ip: "fe80::20c:29ff:fe4b:8c91",
+            start: "fe80",
+            prefix: "fe80::/10",
+            type: "Link-Local",
+            name: "Link-Local (LLA)",
+            alts: ["LINK-LOCAL", "LINKLOCAL", "LLA", "LINK LOCAL", "LOKAL", "LINK-LOKAL", "FE80"],
+            hint: "Beginnt mit 'fe80' -> Link-Local.",
+            expl: "Beginnt mit <strong>fe80</strong> -> <strong>Link-Local-Adresse</strong>. Automatisch generiert (z. B. via EUI-64 mit FFFE in der Mitte)."
+          },
+          {
+            ip: "ff02::1",
+            start: "ff02 (beginnt mit ff)",
+            prefix: "ff00::/8",
+            type: "Multicast",
+            name: "Multicast (All-Nodes)",
+            alts: ["MULTICAST", "MC", "MULTI-CAST", "ALL NODES", "FF00::/8"],
+            hint: "Beginnt mit 'ff' -> Multicast-Adresse.",
+            expl: "Beginnt mit <strong>ff</strong> -> <strong>Multicast-Adresse</strong> (1:n). <code>ff02::1</code> adressiert alle Knoten im Subnetz."
+          },
+          {
+            ip: "ff02::2",
+            start: "ff02 (beginnt mit ff)",
+            prefix: "ff00::/8",
+            type: "Multicast",
+            name: "Multicast (All-Routers)",
+            alts: ["MULTICAST", "MC", "MULTI-CAST", "ALL ROUTERS", "FF00::/8"],
+            hint: "Beginnt mit 'ff' -> Multicast-Adresse an alle Router.",
+            expl: "Beginnt mit <strong>ff</strong> -> <strong>Multicast</strong>. <code>ff02::2</code> erreicht alle lokalen IPv6-Router."
+          },
+          {
+            ip: "::1",
+            start: "::1",
+            prefix: "::1/128",
+            type: "Loopback",
+            name: "Loopback (Localhost)",
+            alts: ["LOOPBACK", "LOCALHOST", "LOCAL HOST", "LOOPBACK-ADRESSE", "::1/128", "127.0.0.1"],
+            hint: "::1 ist die Loopback-Adresse des lokalen Hosts.",
+            expl: "<strong>::1</strong> (vollständig 0000:...:0001) ist die <strong>Loopback-Adresse</strong> zur internen Stack-Prüfung."
+          }
+        ];
+        const sc = scenarios[Math.floor(Math.random() * scenarios.length)];
+        return {
+          topic: "ipv6_identify_type",
+          badge: "🏷️ Typ erkennen",
+          isText: true,
+          title: `IPv6-Adresstyp bestimmen: ${sc.ip}`,
+          question: `Gegeben ist die folgende IPv6-Adresse:<br><code class="text-base font-bold text-indigo-700 bg-indigo-50 px-2 py-0.5 rounded border border-indigo-200">${sc.ip}</code><br><br>Welcher <strong>IPv6-Adresstyp</strong> liegt hier vor?<br><br><span class="text-xs text-slate-600 bg-slate-100 p-2 rounded block">Mögliche Eingaben: <strong>GUA</strong> (Global Unicast), <strong>ULA</strong> (Unique Local), <strong>Link-Local</strong>, <strong>Multicast</strong> oder <strong>Loopback</strong></span>`,
+          unit: "Adresstyp (z. B. GUA, ULA, Link-Local...)",
+          expected: sc.type,
+          altExpected: sc.alts,
+          hint: sc.hint,
+          explanation: `Richtig! ${sc.expl}`
+        };
+      },
+
+      // 45. IPV6: PRÄFIX-ERKENNUNG & REGELN
+      ipv6_prefix_rules: function() {
+        const scenarios = [
+          {
+            q: "Mit welchem <strong>Präfix inklusive Präfixlänge</strong> beginnen alle <strong>Link-Local-Adressen</strong> in IPv6? (z. B. fe80::/10)",
+            unit: "Präfix (z. B. fe80::/10)",
+            expected: "fe80::/10",
+            alts: ["FE80::/10", "FE80::", "FE80", "FE80/10", "FE80::/64"],
+            hint: "fe80::/10",
+            expl: "Link-Local-Adressen beginnen immer mit dem Präfix <strong>fe80::/10</strong>."
+          },
+          {
+            q: "Mit welchem offiziellen <strong>Präfix</strong> nach RFC 4193 werden <strong>Unique Local Addresses (ULA)</strong> definiert? (z. B. fc00::/7)",
+            unit: "Präfix (z. B. fc00::/7)",
+            expected: "fc00::/7",
+            alts: ["FC00::/7", "FC00", "FC00::", "FC00/7", "FD00::/8", "FD00", "FD00::"],
+            hint: "fc00::/7 (in der Praxis fast immer fd00::/8)",
+            expl: "Unique Local Addresses (ULA) sind im Bereich <strong>fc00::/7</strong> definiert."
+          },
+          {
+            q: "Mit welchen <strong>zwei Hex-Zeichen</strong> (Anfangskennung) beginnen praktisch alle in Firmennetzen genutzten <strong>Unique Local Addresses (ULA)</strong>? (z. B. fd oder fc)",
+            unit: "Hex-Anfang (z. B. fd)",
+            expected: "fd",
+            alts: ["FD", "0XFD", "FD00", "FC", "0XFC"],
+            hint: "fd (Global-Bit = 1 gesetzt)",
+            expl: "Praktisch alle ULA-Netze beginnen mit <strong>fd</strong> (RFC 4193 schreibt bei lokal generierten Netzen Bit 8 = 1 vor)."
+          },
+          {
+            q: "In welchem <strong>Präfixbereich</strong> liegen alle weltweit im Internet routingfähigen <strong>Global Unicast Adressen (GUA)</strong>? (z. B. 2000::/3)",
+            unit: "Präfix (z. B. 2000::/3)",
+            expected: "2000::/3",
+            alts: ["2000::/3", "2000::", "2000", "2000/3"],
+            hint: "2000::/3 (umfasst Adressen von 2000:: bis 3fff:ffff:...)",
+            expl: "Der öffentliche Internet-Adressbereich für GUA ist <strong>2000::/3</strong>."
+          },
+          {
+            q: "Mit welchen <strong>zwei Anfangsziffern (erstes Hexadezimalzeichen)</strong> beginnen derzeit alle öffentlich vergebenen IPv6-Internetadressen (GUA)?",
+            unit: "Anfangsziffer (z. B. 2)",
+            expected: "2",
+            alts: ["2", "3", "2 ODER 3", "2/3", "2, 3", "2 UND 3", "2000", "2 BZW 3"],
+            hint: "2 (oder 3), da der Bereich 2000::/3 die Werte 2000 bis 3fff abdeckt.",
+            expl: "Im Bereich 2000::/3 beginnen alle Adressen mit <strong>2</strong> (oder 3), z. B. <code>2001:...</code> oder <code>2a00:...</code>."
+          },
+          {
+            q: "Mit welchem <strong>Präfix</strong> beginnen alle <strong>Multicast-Adressen</strong> in IPv6? (z. B. ff00::/8)",
+            unit: "Präfix (z. B. ff00::/8)",
+            expected: "ff00::/8",
+            alts: ["FF00::/8", "FF00::", "FF00", "FF00/8", "FF", "0XFF"],
+            hint: "ff00::/8 (alle ersten 8 Bit auf 1 gesetzt)",
+            expl: "Alle Multicast-Adressen beginnen mit <strong>ff00::/8</strong> (erstes Byte immer <code>ff</code>)."
+          },
+          {
+            q: "Wie lautet die <strong>Loopback-Adresse</strong> in IPv6 in der normgerechten, vollständig gekürzten Kurzform nach RFC 5952?",
+            unit: "Adresse (z. B. ::1)",
+            expected: "::1",
+            alts: ["::1", "::1/128", "0::1", ":1"],
+            hint: "::1",
+            expl: "Die Loopback-Adresse lautet <strong>::1</strong> (entspricht 127.0.0.1 in IPv4)."
+          }
+        ];
+        const sc = scenarios[Math.floor(Math.random() * scenarios.length)];
+        return {
+          topic: "ipv6_prefix_rules",
+          badge: "🧩 Präfix-Regeln",
+          isText: true,
+          title: "IPv6-Präfixe & Kennungen zuordnen",
+          question: sc.q,
+          unit: sc.unit,
+          expected: sc.expected,
+          altExpected: sc.alts,
+          hint: sc.hint,
+          explanation: `Richtig! ${sc.expl}`
+        };
+      },
+
+      // 46. IPV6: CAST-ARTEN (UNICAST, MULTICAST, ANYCAST, KEIN BROADCAST)
+      ipv6_cast_types: function() {
+        const scenarios = [
+          {
+            q: "Welche Übertragungsart adressiert <strong>genau eine einzelne Schnittstelle</strong> (Punkt-zu-Punkt / 1:1)?",
+            unit: "Cast-Art (z. B. Unicast)",
+            expected: "Unicast",
+            alts: ["UNICAST", "1:1", "EINZELRUF", "PTP"],
+            hint: "Unicast (1:1)",
+            expl: "<strong>Unicast</strong> bezeichnet die direkte 1:1-Kommunikation von einem Absender zu einem Empfänger."
+          },
+          {
+            q: "Welche Übertragungsart sendet Datenpakete an eine <strong>Gruppe von Empfängern</strong> (1:n) und ersetzt in IPv6 den Broadcast vollständig?",
+            unit: "Cast-Art (z. B. Multicast)",
+            expected: "Multicast",
+            alts: ["MULTICAST", "1:N", "GRUPPENRUF", "MULTI-CAST"],
+            hint: "Multicast (1:n, beginnt mit ff00::/8)",
+            expl: "<strong>Multicast</strong> (1:n) erreicht alle Mitglieder einer Gruppe und ersetzt in IPv6 den veralteten Broadcast."
+          },
+          {
+            q: "Welche Übertragungsart sendet ein Datenpaket an die Schnittstelle, die dem Absender <strong>topologisch am nächsten</strong> liegt (1:nächstgelegene aus n)?",
+            unit: "Cast-Art (z. B. Anycast)",
+            expected: "Anycast",
+            alts: ["ANYCAST", "1:NÄCHSTE", "1:NAECHSTE", "1:NEAREST", "ANY-CAST"],
+            hint: "Anycast (1:nächstgelegene Schnittstelle einer Gruppe)",
+            expl: "<strong>Anycast</strong> leitet Pakete an den topologisch nächstgelegenen Server weiter (z. B. DNS Root Server, CDNs)."
+          },
+          {
+            q: "Existiert die Übertragungsart <strong>Broadcast (Rundruf an ausnahmslos alle Geräte)</strong> in IPv6 noch? (Antwort: Ja oder Nein)",
+            unit: "Ja / Nein",
+            expected: "Nein",
+            alts: ["NEIN", "NO", "NICHT MEHR", "GIBT ES NICHT"],
+            hint: "In IPv6 gibt es KEINEN Broadcast mehr.",
+            expl: "<strong>Nein</strong> – Broadcast existiert in IPv6 nicht mehr! Stattdessen wird zielgerichtetes Multicast genutzt, um Broadcast-Stürme zu verhindern."
+          },
+          {
+            q: "Über welche reservierte Link-Local-Multicast-Adresse werden <strong>alle IPv6-Knoten (All Nodes)</strong> im lokalen Subnetz angesprochen?",
+            unit: "Multicast-Adresse (z. B. ff02::1)",
+            expected: "ff02::1",
+            alts: ["FF02::1", "FF02:0:0:0:0:0:0:1", "FF02::1/128"],
+            hint: "ff02::1",
+            expl: "<strong>ff02::1</strong> erreicht alle IPv6-fähigen Knoten auf der lokalen Verbindungsebene (All-Nodes Multicast)."
+          },
+          {
+            q: "Über welche reservierte Link-Local-Multicast-Adresse werden <strong>alle IPv6-Router (All Routers)</strong> im lokalen Subnetz angesprochen?",
+            unit: "Multicast-Adresse (z. B. ff02::2)",
+            expected: "ff02::2",
+            alts: ["FF02::2", "FF02:0:0:0:0:0:0:2", "FF02::2/128"],
+            hint: "ff02::2",
+            expl: "<strong>ff02::2</strong> erreicht alle Router im lokalen Link (All-Routers Multicast, z. B. für Router Solicitations)."
+          }
+        ];
+        const sc = scenarios[Math.floor(Math.random() * scenarios.length)];
+        return {
+          topic: "ipv6_cast_types",
+          badge: "📡 Cast-Arten",
+          isText: true,
+          title: "IPv6-Übertragungsarten (Cast) beherrschen",
+          question: sc.q,
+          unit: sc.unit,
+          expected: sc.expected,
+          altExpected: sc.alts,
+          hint: sc.hint,
+          explanation: `Richtig! ${sc.expl}`
+        };
+      },
+
+      // 47. IPV6: SCOPES & ROUTING-GRENZEN
+      ipv6_scope_routing: function() {
+        const scenarios = [
+          {
+            q: "Welcher IPv6-Adresstyp (<strong>GUA</strong>, <strong>ULA</strong> oder <strong>Link-Local</strong>) ist weltweit über alle Internet-Router hinweg routingfähig?",
+            unit: "Adresstyp (z. B. GUA)",
+            expected: "GUA",
+            alts: ["GUA", "GLOBAL UNICAST", "GLOBALUNICAST", "GLOBAL", "ÖFFENTLICH", "OEFFENTLICH", "GLOBAL UNICAST ADDRESS"],
+            hint: "GUA (Global Unicast Address, 2000::/3)",
+            expl: "Nur <strong>GUA (Global Unicast Address)</strong> besitzt weltweiten Scope und wird über alle Internet-Router hinweg weitergeleitet."
+          },
+          {
+            q: "Welcher IPv6-Adresstyp (<strong>GUA</strong>, <strong>ULA</strong> oder <strong>Link-Local</strong>) darf nur innerhalb einer Organisation (Intranet / VPN) geroutet werden und wird im Internet verworfen?",
+            unit: "Adresstyp (z. B. ULA)",
+            expected: "ULA",
+            alts: ["ULA", "UNIQUE LOCAL", "UNIQUELOCAL", "UNIQUE LOCAL ADDRESS", "PRIVAT", "FC00::/7"],
+            hint: "ULA (Unique Local Address, fc00::/7 bzw. fd00::/8)",
+            expl: "<strong>ULA (Unique Local Address)</strong> ist das Gegenstück zu privaten IPv4-Adressen und wird an Internet-Grenzen verworfen."
+          },
+          {
+            q: "Welcher IPv6-Adresstyp (<strong>GUA</strong>, <strong>ULA</strong> oder <strong>Link-Local</strong>) darf von Routern unter keinen Umständen weitergeleitet werden und bleibt strikt auf das lokale Segment beschränkt?",
+            unit: "Adresstyp (z. B. Link-Local)",
+            expected: "Link-Local",
+            alts: ["LINK-LOCAL", "LINKLOCAL", "LLA", "LINK LOCAL", "FE80", "FE80::/10"],
+            hint: "Link-Local (fe80::/10)",
+            expl: "<strong>Link-Local (fe80::/10)</strong> gilt nur auf dem lokalen physischen Link und wird von Routern NIEMALS weitergeleitet."
+          },
+          {
+            q: "Wie verhält sich ein Standard-Router, wenn er ein IPv6-Paket mit der Quell- oder Zieladresse <code>fe80::20c:29ff:fe4b:8c91</code> empfängt und es in ein anderes Subnetz weiterleiten soll? (Antwort: <strong>Verwerfen</strong> oder <strong>Weiterleiten</strong>)",
+            unit: "Verhalten (Verwerfen / Weiterleiten)",
+            expected: "Verwerfen",
+            alts: ["VERWERFEN", "DROP", "DROPPED", "BLOCKIEREN", "NICHT WEITERLEITEN", "VERWIRFT"],
+            hint: "Verwerfen (Drop). Link-Local-Pakete dürfen Router niemals passieren.",
+            expl: "Der Router muss das Paket <strong>verwerfen (drop)</strong>, da Link-Local-Pakete (fe80::/10) strikt nicht routingfähig sind."
+          },
+          {
+            q: "Ein Ping auf eine Link-Local-Adresse <code>ping fe80::1</code> schlägt fehl. Welcher Parameter muss mit einem Prozentzeichen angehängt werden (z. B. fe80::1%12), um die Schnittstelle eindeutig zu bestimmen?",
+            unit: "Parameter (z. B. Scope-ID)",
+            expected: "Scope-ID",
+            alts: ["SCOPE-ID", "SCOPE ID", "ZONEN-INDEX", "ZONE-ID", "SCOPE", "INTERFACE-INDEX", "INTERFACE ID", "INDEX", "%"],
+            hint: "Scope-ID (oder Zonen-Index, z. B. %12 unter Windows oder %eth0 unter Linux)",
+            expl: "Bei Link-Local ist die <strong>Scope-ID (Zonen-Index)</strong> zwingend erforderlich, da dieselbe Adresse fe80:: auf mehreren Netzwerkkarten existieren kann."
+          }
+        ];
+        const sc = scenarios[Math.floor(Math.random() * scenarios.length)];
+        return {
+          topic: "ipv6_scope_routing",
+          badge: "🌍 Scope & Routing",
+          isText: true,
+          title: "IPv6-Gültigkeitsbereiche & Routerverhalten",
+          question: sc.q,
+          unit: sc.unit,
+          expected: sc.expected,
+          altExpected: sc.alts,
+          hint: sc.hint,
+          explanation: `Richtig! ${sc.expl}`
+        };
       }
     };
 
@@ -4116,6 +4600,138 @@
       }
     }
 
+    // =========================================================================
+    // IPV6 ADDRESS TYPE INSPECTOR & PRÄFIX-ERKENNER
+    // =========================================================================
+    function setInspectIpv6(ip) {
+      const inp = document.getElementById('ipv6-inspect-input');
+      if (inp) {
+        inp.value = ip;
+        inspectIpv6Address();
+      }
+    }
+
+    function inspectIpv6Address() {
+      const inputEl = document.getElementById('ipv6-inspect-input');
+      if (!inputEl) return;
+      const raw = inputEl.value.trim().toLowerCase();
+      const addrOnly = raw.split('/')[0].trim();
+
+      let prefix = "";
+      let type = "";
+      let cast = "Unicast (1:1)";
+      let scope = "";
+      let routing = "";
+      let pendant = "";
+      let badgeColor = "bg-emerald-100 text-emerald-800 border-emerald-300";
+      let explanation = "";
+
+      if (!addrOnly) {
+        prefix = "—";
+        type = "Bitte IPv6 eingeben";
+        cast = "—";
+        scope = "—";
+        routing = "Bitte eine gültige IPv6-Adresse in das Eingabefeld eintragen.";
+        pendant = "—";
+        badgeColor = "bg-slate-100 text-slate-700 border-slate-300";
+        explanation = "Tippe eine Adresse wie <code>2001:db8::1</code>, <code>fd00::1</code>, <code>fe80::1</code> oder <code>ff02::1</code> ein.";
+      } else if (addrOnly === '::1' || addrOnly === '0:0:0:0:0:0:0:1' || (addrOnly.endsWith('::1') && !addrOnly.startsWith('2') && !addrOnly.startsWith('3') && !addrOnly.startsWith('f'))) {
+        prefix = "::1/128";
+        type = "Loopback (Localhost)";
+        cast = "Unicast (virtuell)";
+        scope = "Nur lokaler Host (Rechner-intern)";
+        routing = "Wird <strong>niemals</strong> über eine physische Netzwerkschnittstelle übertragen. Testet den lokalen TCP/IP-Stack.";
+        pendant = "127.0.0.1 (Localhost)";
+        badgeColor = "bg-slate-100 text-slate-800 border-slate-300";
+        explanation = "<strong>Erkennungsregel:</strong> Vollständig gekürzte Schreibweise von <code>0000:0000:0000:0000:0000:0000:0000:0001</code>. Dient der internen Stack-Diagnose (z. B. <code>ping ::1</code>).";
+      } else if (addrOnly === '::' || addrOnly === '0:0:0:0:0:0:0:0') {
+        prefix = "::/128";
+        type = "Unspecified (Unbestimmte Adresse)";
+        cast = "Spezialadresse";
+        scope = "Software-intern";
+        routing = "Darf niemals als Zieladresse geroutet werden. Dient z. B. als Quelladresse während DAD (Duplicate Address Detection) vor der IP-Zuweisung.";
+        pendant = "0.0.0.0 (IPv4 Default)";
+        badgeColor = "bg-slate-100 text-slate-800 border-slate-300";
+        explanation = "<strong>Erkennungsregel:</strong> Adresse besteht aus rein 128 Null-Bits (<code>::</code>). Als Default-Route wird <code>::/0</code> verwendet (entspricht <code>0.0.0.0/0</code>).";
+      } else if (addrOnly.startsWith('fe8') || addrOnly.startsWith('fe9') || addrOnly.startsWith('fea') || addrOnly.startsWith('feb')) {
+        prefix = "fe80::/10 (fe80... bis febf...)";
+        type = "Link-Local Address (LLA)";
+        cast = "Unicast (1:1)";
+        scope = "Nur lokales Segment (Link / Layer 2)";
+        routing = "<strong>NICHT routingfähig!</strong> Router verwerfen (drop) Pakete mit Link-Local-Adressen IMMER an Schnittstellengrenzen. Beim Pingen ist zwingend eine Scope-ID (z. B. <code>%12</code> oder <code>%eth0</code>) nötig!";
+        pendant = "APIPA (169.254.0.0/16 / Zeroconf)";
+        badgeColor = "bg-amber-100 text-amber-800 border-amber-300";
+        explanation = "<strong>Erkennungsregel:</strong> Beginnt immer mit <code>fe80</code> (Binär <code>1111 1110 10...</code>). Wird auf JEDEM IPv6-Interface automatisch generiert (EUI-64 oder Random) und ist zwingend für NDP, SLAAC und lokale Router-Kommunikation erforderlich.";
+      } else if (addrOnly.startsWith('fd') || addrOnly.startsWith('fc')) {
+        const isFd = addrOnly.startsWith('fd');
+        prefix = isFd ? "fd00::/8 (Global-Bit = 1)" : "fc00::/7 (fc00::/8 reserviert)";
+        type = "Unique Local Address (ULA)";
+        cast = "Unicast (1:1)";
+        scope = "Privates Unternehmensnetzwerk (Intranet / VPN)";
+        routing = "<strong>Nur intern im Unternehmen geroutet!</strong> Innerhalb der eigenen Organisation frei über Router hinweg routingfähig, wird aber im weltweiten öffentlichen Internet an Border-Routern verworfen.";
+        pendant = "RFC 1918 (192.168.0.0/16, 10.0.0.0/8)";
+        badgeColor = "bg-purple-100 text-purple-800 border-purple-300";
+        explanation = "<strong>Erkennungsregel:</strong> Beginnt in der Praxis immer mit <code>fd</code> (selten <code>fc</code>). Entspricht den privaten IPv4-Adressen. Für weltweiten Internetzugriff wird Dual-Stack (mit paralleler GUA) oder ein Proxy benötigt.";
+      } else if (addrOnly.startsWith('ff')) {
+        prefix = "ff00::/8 (ff00:: bis ffff:...)";
+        type = "Multicast Address";
+        cast = "Multicast (1:n)";
+        let scopeName = "Global / variabel";
+        if (addrOnly.startsWith('ff01')) scopeName = "Interface-Local (ff01::/16)";
+        else if (addrOnly.startsWith('ff02')) scopeName = "Link-Local (ff02::/16)";
+        else if (addrOnly.startsWith('ff05')) scopeName = "Site-Local (ff05::/16)";
+        else if (addrOnly.startsWith('ff0e')) scopeName = "Global Multicast (ff0e::/16)";
+        scope = scopeName;
+        routing = "Wird an alle Mitglieder der abonnierten Multicast-Gruppe zugestellt. <strong>Ersetzt in IPv6 vollständig den Broadcast!</strong>";
+        pendant = "Broadcast (255.255.255.255) & IPv4 Multicast (224.0.0.0/4)";
+        badgeColor = "bg-rose-100 text-rose-800 border-rose-300";
+        let groupNote = "";
+        if (addrOnly.startsWith('ff02::1')) groupNote = "<br>• <code>ff02::1</code> = <strong>All-Nodes</strong> (alle IPv6-Geräte im lokalen Link)";
+        else if (addrOnly.startsWith('ff02::2')) groupNote = "<br>• <code>ff02::2</code> = <strong>All-Routers</strong> (alle IPv6-Router im lokalen Link)";
+        else if (addrOnly.startsWith('ff02::1:ff')) groupNote = "<br>• <code>ff02::1:ff...</code> = <strong>Solicited-Node Multicast</strong> (für NDP-Adressauflösung statt ARP)";
+        explanation = "<strong>Erkennungsregel:</strong> Beginnt immer mit <code>ff</code> (alle ersten 8 Bits gesetzt). In IPv6 gibt es keinen Broadcast mehr!" + groupNote;
+      } else if (addrOnly.startsWith('2') || addrOnly.startsWith('3')) {
+        prefix = "2000::/3 (2000:: bis 3fff:ffff:...)";
+        type = "Global Unicast Address (GUA)";
+        cast = "Unicast (1:1)";
+        scope = "Weltweit (Globales Internet)";
+        routing = "<strong>Weltweit routingfähig!</strong> Wird über alle Provider und Internet-Router weltweit transportiert. Ermöglicht echte Ende-zu-Ende-Kommunikation ohne NAT.";
+        pendant = "Öffentliche IPv4-Adresse";
+        badgeColor = "bg-emerald-100 text-emerald-800 border-emerald-300";
+        explanation = "<strong>Erkennungsregel:</strong> Beginnt aktuell immer mit einer <code>2</code> (z. B. <code>2001:...</code>, <code>2a00:...</code>) oder zukünftig <code>3</code> (Binär <code>001</code>). Jeder Rechner weltweit erhält damit eine global eindeutige IP.";
+      } else {
+        prefix = "Unbekannt / Reserviert";
+        type = "Spezielle oder reservierte IPv6-Adresse";
+        cast = "Unspezifiziert";
+        scope = "Spezialbereich";
+        routing = "Fällt nicht in die gängigen Standardkategorien der AP1.";
+        pendant = "Nicht zugeordnet";
+        badgeColor = "bg-slate-100 text-slate-800 border-slate-300";
+        explanation = "Diese Adresse fällt außerhalb der regulären IHK-Prüfungsbereiche (2000::/3, fe80::/10, fc00::/7, ff00::/8, ::1).";
+      }
+
+      const elPrefix = document.getElementById('inspect-res-prefix');
+      const elType = document.getElementById('inspect-res-type');
+      const elCast = document.getElementById('inspect-res-cast');
+      const elScope = document.getElementById('inspect-res-scope');
+      const elRouting = document.getElementById('inspect-res-routing');
+      const elPendant = document.getElementById('inspect-res-pendant');
+      const elExpl = document.getElementById('inspect-res-expl');
+      const badge = document.getElementById('inspect-type-badge');
+
+      if (elPrefix) elPrefix.innerText = prefix;
+      if (elType) elType.innerText = type;
+      if (elCast) elCast.innerText = cast;
+      if (elScope) elScope.innerText = scope;
+      if (elRouting) elRouting.innerHTML = routing;
+      if (elPendant) elPendant.innerText = pendant;
+      if (elExpl) elExpl.innerHTML = explanation;
+      if (badge) {
+        badge.className = `px-2.5 py-1 rounded-full text-[11px] font-bold border uppercase tracking-wider ${badgeColor}`;
+        badge.innerText = type;
+      }
+    }
+
     window.addEventListener('DOMContentLoaded', () => {
       generateMiniTask();
       calcPower('S');
@@ -4127,6 +4743,7 @@
       calcIpv6Subnet();
       calcEui64();
       calcIpv6Compress();
+      inspectIpv6Address();
     });
   </script>
 </body>

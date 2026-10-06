@@ -10837,5 +10837,98 @@ c) Methodenauswahl für die Szenarien:
         question: "Fachaufgabe Netzwerk (LF 3): Ein neu eingerichteter Client meldet 'Kein Internetzugriff'. Der Befehl 'ipconfig' zeigt lediglich die Adresse 'fe80::4a2b:67ff:fe89:1234%11'.\naa) Um welchen Adresstyp handelt es sich und wie ist diese Adresse entstanden?\nab) Begründen Sie, warum der Client damit keine Verbindung ins weltweite Internet aufbauen kann.",
         musterloesung: "aa) Adresstyp & Entstehung:\nEs handelt sich um eine Link-Local-Adresse (fe80::/10). Sie wurde beim Starten des Netzwerk-Interfaces vollautomatisch vom Betriebssystem generiert (z. B. via EUI-64 aus der MAC-Adresse).\nab) Begründung für fehlenden Internetzugriff:\nLink-Local-Adressen haben einen lokalen Verbindungsgültigkeitsbereich (Link-Local Scope) und sind strikt nicht routingfähig. Router verwerfen Pakete mit Link-Local-Absender- oder Zieladressen an ihren Schnittstellengrenzen. Um das Internet zu erreichen, benötigt der Client eine Global Unicast Adresse (2000::/3), die typischerweise über SLAAC (Router Advertisement) oder DHCPv6 bezogen wird.",
         explanation: "Klassisches IHK-Szenario zur Diagnose von Verbindungsproblemen und Adresstyp-Zuordnung."
+    },
+    // Adresstyp-Erkennung & Identifikation (fe80, fd/fc, 2/3, ff, ::1)
+    {
+        id: 499,
+        isHard: false,
+        difficulty: "standard",
+        isBawueFocus: true,
+        theme: "lf3",
+        topic: "🏷️ IPv6 Adresstyp-Erkennung: Präfixe & Anfangskennungen",
+        type: "multiple-choice",
+        question: "Anhand welcher Anfangskennung (erste Hex-Ziffern) lässt sich eine Unique Local Address (ULA) in einem internen Firmennetzwerk sofort zweifelsfrei identifizieren?",
+        options: [
+            "Sie beginnt mit 'fd' (bzw. 'fc', Präfix fc00::/7).",
+            "Sie beginnt mit 'fe80' (Präfix fe80::/10).",
+            "Sie beginnt mit '2' oder '3' (Präfix 2000::/3).",
+            "Sie beginnt mit 'ff' (Präfix ff00::/8)."
+        ],
+        correctAnswer: 0,
+        explanation: "Erkennungsregeln für die IHK-Prüfung:\n• Beginnt mit '2' oder '3' (2000::/3) -> Global Unicast (GUA, weltweit im Internet routingfähig)\n• Beginnt mit 'fd' oder 'fc' (fc00::/7) -> Unique Local (ULA, privates Firmennetz/Intranet, RFC 1918 Pendant)\n• Beginnt mit 'fe80' (fe80::/10) -> Link-Local (LLA, nur lokales Kabel/Segment, nie geroutet)\n• Beginnt mit 'ff' (ff00::/8) -> Multicast (Gruppenruf, Ersatz für Broadcast)\n• '::1' (::1/128) -> Loopback (Localhost)."
+    },
+    {
+        id: 500,
+        isHard: true,
+        difficulty: "hard",
+        isBawueFocus: true,
+        theme: "lf3",
+        topic: "🏷️ IPv6 Adresstyp-Identifikation: IHK-Fachaufgabe Zuordnung & Begründung",
+        type: "open-text",
+        question: "Fachaufgabe Netzwerk (LF 3): In der Dokumentation eines Enterprise-Netzwerks finden Sie folgende fünf IPv6-Adressen:\n1. 2001:db8:acad:10::50\n2. fd00:cafe:1234::1\n3. fe80::20c:29ff:fe4b:8c91\n4. ff02::1\n5. ::1\n\naa) Ordnen Sie jeder Adresse ihren offiziellen IPv6-Adresstyp zu.\nab) Erläutern Sie für jede Adresse kurz das Erkennungsmerkmal (Prefix / Anfang) und den Gültigkeitsbereich (Scope / Routing).",
+        musterloesung: "aa) & ab) Zuordnung und Begründung:\n\n1. 2001:db8:acad:10::50 -> Global Unicast Address (GUA)\n• Erkennung: Beginnt mit '2001' (liegt im Bereich 2000::/3; beginnt mit 2 oder 3).\n• Scope & Routing: Globales Internet; weltweit routingfähig ohne NAT.\n\n2. fd00:cafe:1234::1 -> Unique Local Address (ULA)\n• Erkennung: Beginnt mit 'fd' (Bereich fc00::/7; ULA für private Netze).\n• Scope & Routing: Organisationsintern (Intranet/VPN); wird an Unternehmensgrenzen verworfen (nicht im Internet geroutet; IPv4-RFC-1918-Pendant).\n\n3. fe80::20c:29ff:fe4b:8c91 -> Link-Local Address (LLA)\n• Erkennung: Beginnt mit 'fe80' (Bereich fe80::/10; EUI-64 mit FFFE).\n• Scope & Routing: Nur lokales Layer-2-Segment (Link-Local); wird von Routern NIEMALS weitergeleitet (dropped).\n\n4. ff02::1 -> Multicast Address (All-Nodes)\n• Erkennung: Beginnt mit 'ff' (ff00::/8; '02' kennzeichnet Link-Local Scope).\n• Scope & Routing: Erreicht alle Knoten im lokalen Subnetz (1:n Gruppenruf; ersetzt den Broadcast).\n\n5. ::1 -> Loopback Address\n• Erkennung: Besteht nur aus Nullen und endet auf 1 (::1/128).\n• Scope & Routing: Nur der lokale Host; verlässt den Rechner nie (entspricht 127.0.0.1).",
+        explanation: "Zentrale Kernaufgabe für das Erkennen und Verstehen aller IPv6-Adresstypen in der IHK AP1."
+    },
+    // Übertragungsarten (Cast-Typen) in IPv6
+    {
+        id: 501,
+        isHard: false,
+        difficulty: "standard",
+        isBawueFocus: true,
+        theme: "lf3",
+        topic: "📡 IPv6 Übertragungsarten: Unicast, Multicast, Anycast & Wegfall Broadcast",
+        type: "multiple-choice",
+        question: "Welche Aussage zu den Übertragungsarten (Cast-Typen) in IPv6 ist fachlich KORREKT?",
+        options: [
+            "IPv6 unterstützt Unicast (1:1), Multicast (1:n) und Anycast (1:nächstgelegener aus n) – Broadcast existiert in IPv6 NICHT mehr.",
+            "IPv6 verwendet weiterhin Broadcast für ARP-Abfragen an alle Knoten.",
+            "IPv6 ersetzt Unicast vollständig durch Anycast zur Bandbreitenersparnis.",
+            "IPv6 erlaubt Multicast ausschließlich im weltweiten Internet, nicht jedoch im lokalen LAN."
+        ],
+        correctAnswer: 0,
+        explanation: "Die drei offiziellen IPv6-Übertragungsarten:\n• Unicast: 1 Absender an genau 1 Empfänger (1:1)\n• Multicast: 1 Absender an eine definierte Gruppe (1:n, Präfix ff00::/8)\n• Anycast: 1 Absender an den topologisch nächstgelegenen Knoten einer Gruppe (1:nächstgelegener aus n)\nBroadcast (Rundruf an alle) wurde in IPv6 ersatzlos gestrichen!"
+    },
+    {
+        id: 502,
+        isHard: true,
+        difficulty: "hard",
+        isBawueFocus: true,
+        theme: "lf3",
+        topic: "📡 IPv6 Cast-Typen: Fachaufgabe Anycast vs. Multicast vs. Broadcast-Wegfall",
+        type: "open-text",
+        question: "Fachaufgabe Netzwerk (LF 3): Ein Netzwerktechniker erklärt dem Auszubildenden die Übertragungsarten in IPv6.\naa) Erläutern Sie das Funktionsprinzip von IPv6-Anycast und nennen Sie einen praxisnahen Einsatzzweck.\nab) Begründen Sie, warum der vollständige Verzicht auf Broadcasts in IPv6 die Gesamtperformance und Stabilität im Switch-Netzwerk spürbar erhöht.",
+        musterloesung: "aa) IPv6-Anycast & Einsatzzweck:\n• Funktionsprinzip: Mehrere Server/Router an verschiedenen Standorten erhalten dieselbe Anycast-Adresse. Ein sendender Client wird vom Routingprotokoll (z. B. BGP oder OSPF) automatisch zu dem Server geleitet, der topologisch über die kürzeste Route erreichbar ist (1:nächstgelegener).\n• Praxis-Einsatzzweck: DNS Root Server, Content Delivery Networks (CDNs) oder redundante Default Gateways.\n\nab) Begründung für Performancegewinn durch Wegfall von Broadcasts:\n• In IPv4 zwang jeder Broadcast (z. B. ARP-Requests, NetBIOS) AUSNAHMSLOS JEDEN Rechner im Subnetz dazu, einen Hardware-Interrupt auszulösen und das Paket bis zur Schicht 3 hochzureichen, selbst wenn er gar nicht gemeint war.\n• In IPv6 werden stattdessen zielgerichtete Multicast-Gruppen verwendet (z. B. ff02::1:ff... Solicited-Node Multicast). Netzwerkkarten filtern irrelevante Pakete bereits hardwareseitig auf Schicht 2 heraus. Dadurch werden CPU-Last auf Endgeräten minimiert und 'Broadcast-Stürme' verhindert.",
+        explanation: "Wichtiges Verständnis für Netzwerk-Architektur und den Performance-Vorteil von IPv6 gegenüber IPv4."
+    },
+    // Scopes & Koexistenz von Adressen
+    {
+        id: 503,
+        isHard: false,
+        difficulty: "standard",
+        isBawueFocus: true,
+        theme: "lf3",
+        topic: "🌍 IPv6 Gültigkeitsbereiche: Scopes & Routerverhalten",
+        type: "multiple-choice",
+        question: "Welche Aussage beschreibt das Verhalten eines Routers bei IPv6-Paketen mit einer Link-Local-Zieladresse (fe80::...)?",
+        options: [
+            "Der Router verwirft das Paket sofort, da Link-Local-Adressen niemals an Schnittstellengrenzen weitergeleitet werden dürfen.",
+            "Der Router führt Network Address Translation (NAT) durch und leitet das Paket ins Internet weiter.",
+            "Der Router fragt via NDP nach der WAN-MAC-Adresse des Providers und leitet es weiter.",
+            "Der Router leitet das Paket weiter, sofern der Client eine gültige ULA-Adresse besitzt."
+        ],
+        correctAnswer: 0,
+        explanation: "Link-Local-Pakete (fe80::/10) haben strikt Link-Local Scope. Router dürfen diese Pakete NIEMALS über das lokale Netzwerksegment hinaus routen, sondern verwerfen sie an der Schnittstelle (Drop)."
+    },
+    {
+        id: 504,
+        isHard: true,
+        difficulty: "hard",
+        isBawueFocus: true,
+        theme: "lf3",
+        topic: "🌍 IPv6 Multi-Homing & Scope-ID: Koexistenz auf einem Interface",
+        type: "open-text",
+        question: "Fachaufgabe Netzwerk (LF 3): Auf einem Windows-Server zeigt der Befehl 'ipconfig' für eine einzige Netzwerkkarte gleichzeitig folgende drei IPv6-Adressen an:\n• fe80::1a2b:3cff:fe4d:5e6f%12\n• fd00:10:20::100\n• 2001:db8:10:20::100\n\naa) Erläutern Sie, warum es in IPv6 normal und beabsichtigt ist, dass eine Schnittstelle mehrere IP-Adressen besitzt.\nab) Welchem Zweck dient jeweils die konkrete Adresse?\nac) Was bedeutet das Suffix '%12' bei der fe80-Adresse und warum ist es unverzichtbar?",
+        musterloesung: "aa) Multi-Homing / Mehrere Adressen pro Schnittstelle:\nIn IPv6 ist die gleichzeitige Nutzung mehrerer Adressen unterschiedlicher Gültigkeitsbereiche (Scopes) Standardarchitektur. Es entfällt die Notwendigkeit von IPv4-NAT-Tricks, da für jeden Kommunikationszweck die passende Adressart gewählt wird.\n\nab) Zweck der drei Adressen:\n1. fe80::... (Link-Local): Zwingend nötig für die lokale Infrastruktur-Kommunikation auf Schicht 2 (Router Solicitations, NDP-Nachbarschaftserkennung, DHCPv6, Gateway-Verbindung).\n2. fd00:... (Unique Local): Dient der organisationsinternen Kommunikation (Intranet, interne Datenbanken, Active Directory), unabhängig von der Verfügbarkeit des Internetanschlusses.\n3. 2001:... (Global Unicast): Dient der weltweiten Kommunikation über das öffentliche Internet ohne Adressübersetzung.\n\nac) Bedeutung des Suffix '%12':\n• '%12' ist die Scope-ID (der Zonen-Index) der lokalen Schnittstelle.\n• Da jede Netzwerkkarte eines Rechners ein eigenes fe80::/10-Netz besitzt, ist eine Link-Local-Adresse ohne Angabe der Schnittstelle mehrdeutig. Das Betriebssystem benötigt die Scope-ID, um zu wissen, über welchen physischen Adapter das Paket gesendet werden muss.",
+        explanation: "Prüfungsfokus auf Multi-Addressing und Scope-ID in heterogenen Unternehmensnetzen."
     }
 ];
