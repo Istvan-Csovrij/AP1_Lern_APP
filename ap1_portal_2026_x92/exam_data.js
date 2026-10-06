@@ -4948,6 +4948,234 @@ var EXAM_SETS = [
                 ]
             }
         ]
+    },
+
+    // ----------------------------------------------------------------------
+    // PRÜFUNG 17: Enterprise Campus, IPv6-Dual-Stack-Migration & Netzwerksicherheit
+    // ----------------------------------------------------------------------
+    {
+        id: "exam_17",
+        title: "Prüfung 17: Enterprise Campus, IPv6-Dual-Stack-Migration & Netzwerksicherheit",
+        badge: "100 Punkte • 90 Min.",
+        subtitle: "Abschlussprüfung Teil 1 • IT-Berufe • DataNova Systems AG",
+        ausgangssituation: "Sie sind als Fachinformatiker bei der DataNova Systems AG angestellt, einem Dienstleister für Rechenzentrums- und Cloud-Infrastrukturen. Im Rahmen eines unternehmensweiten Modernisierungsprojekts soll das Campus-Netzwerk auf einen zukunftssicheren Dual-Stack-Betrieb mit nativer IPv6-Adressierung migriert werden. Ihr Projektteam ist für die IP-Planung, Subnetz-Kalkulation, manuelle Konfiguration der Server- und Routing-Schnittstellen, Diagnose und Überprüfung der Netzwerkerreichbarkeit sowie die Absicherung gegen typische Konfigurations- und Protokollfehler verantwortlich.",
+        tasks: [
+            // Aufgabe 1 (25 Pkt)
+            {
+                number: 1,
+                title: "1. Aufgabe: Projektinitiierung, Wirtschaftlichkeit & Anforderungsanalyse",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "17_1_a",
+                        label: "a) Lastenheft vs. Pflichtenheft bei der Netzwerkmigration",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "PROJEKTMANAGEMENT / LASTENHEFT VS. PFLICHTENHEFT",
+                        text: "Vor Beginn der Migration werden Lastenheft und Pflichtenheft erstellt.\naa) Erläutern Sie, wer das Lastenheft erstellt und welchen zentralen Inhalt es hat (3 Punkte).\nab) Beschreiben Sie den Zweck des Pflichtenhefts und nennen Sie zwei typische Bestandteile (3 Punkte).",
+                        solution: "aa) Lastenheft:\n• Ersteller: Der Auftraggeber (Kunde / Geschäftsleitung).\n• Inhalt: Gesamtheit aller Anforderungen, WAS und WOFÜR das Zielsystem realisiert werden soll (fachliche Anforderungen, Rahmenbedingungen, Terminvorgaben).\nab) Pflichtenheft:\n• Zweck: Erläutert, WIE der Auftragnehmer (Projektteam/Dienstleister) die Anforderungen des Lastenhefts konkret technisch umsetzt.\n• Bestandteile: Technisches Feinkonzept, Migrationsplan, Schnittstellenbeschreibungen, Testpläne, Meilensteine."
+                    },
+                    {
+                        id: "17_1_b",
+                        label: "b) Wirtschaftlichkeitsvergleich (Amortisationszeit)",
+                        points: 7,
+                        type: "math-grid",
+                        gridConfig: { cols: 26, rows: 6 },
+                        stencil: "WIRTSCHAFTLICHKEIT / AMORTISATIONSRECHNUNG",
+                        text: "Die Anschaffung neuer IPv6-fähiger Core-Router und Managed Switches erfordert eine Gesamtinvestition von 48.000,00 € netto.\nDurch effizienteres hardwarebasiertes Routing, Wegfall von NAT-Gateways und reduzierte Wartungsverträge sinken die jährlichen Betriebskosten von bisher 32.000,00 € auf 18.000,00 €.\nBerechnen Sie im Rechengitter die jährliche Kostenersparnis sowie die statische Amortisationszeit der Investition in Jahren und Monaten.",
+                        solution: "1. Jährliche Kosteneinsparung:\nErsparnis = 32.000,00 € - 18.000,00 € = 14.000,00 € / Jahr.\n\n2. Statische Amortisationszeit:\nAmortisation = Anschaffungskosten / jährliche Ersparnis\nAmortisation = 48.000,00 € / 14.000,00 € = 3,4286 Jahre.\n\n3. Umrechnung des Nachkommateils in Monate:\n0,4286 Jahre * 12 Monate = 5,14 Monate (aufgerundet 6 Monate).\nErgebnis: Die Investition amortisiert sich nach 3 Jahren und ca. 5 bis 6 Monaten."
+                    },
+                    {
+                        id: "17_1_c",
+                        label: "c) Vorgehensmodell Scrum: Rollen & Artefakte",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 4,
+                        stencil: "AGILES VORGEHEN / SCRUM ROLLEN",
+                        text: "Die Umstellung wird in 2-wöchigen Sprints nach Scrum durchgeführt.\naa) Erläutern Sie die Aufgaben des Product Owners im Migrationsprojekt (3 Punkte).\nab) Nennen Sie die Funktion des Sprint Backlogs (3 Punkte).",
+                        solution: "aa) Product Owner:\nVerantwortet den maximalen Wert des Produkts/Ergebnisses. Erstellt, pflegt und priorisiert das Product Backlog und entscheidet über Akzeptanzkriterien der umzusetzenden Anforderungen.\nab) Sprint Backlog:\nEnthält die für den aktuellen Sprint ausgewählten Backlog-Items (User Stories) inklusive des detaillierten Umsetzungsplans des Entwicklungsteams. Es visualisiert den Fortschritt während des laufenden Sprints."
+                    },
+                    {
+                        id: "17_1_d",
+                        label: "d) DSGVO & Privacy Extensions (RFC 4941)",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 4,
+                        stencil: "DATENSCHUTZ / IPV6 PRIVACY EXTENSIONS",
+                        text: "Bei der automatischen EUI-64-Generierung bleibt die physische MAC-Adresse des Clients dauerhaft in der IPv6-Adresse sichtbar.\naa) Warum stellt dies ein datenschutzrechtliches Risiko nach DSGVO dar? (3 Punkte)\nab) Wie lösen die 'Privacy Extensions' nach RFC 4941 dieses Problem? (3 Punkte).",
+                        solution: "aa) Datenschutzrisiko:\nDa die MAC-Adresse weltweit eindeutig an die Hardware gebunden ist, ermöglicht eine unveränderte EUI-64-Interface-ID das websiteübergreifende Tracking des Nutzers und die Erstellung von Bewegungsprofilen, was personenbezogene Daten nach Art. 4 DSGVO darstellt.\nab) Privacy Extensions (RFC 4941):\nErzeugen in regelmäßigen Zeitabständen (z. B. täglich) pseudozufällige, wechselnde temporäre Interface-IDs für ausgehende Verbindungen. Dadurch kann die Adresse keinem dauerhaften Gerät zugeordnet werden."
+                    }
+                ]
+            },
+
+            // Aufgabe 2 (25 Pkt) - DER IPV6-SCHWERPUNKT AUS DER IHK-FOLIE!
+            {
+                number: 2,
+                title: "2. Aufgabe: IHK-Schwerpunkt IPv6-Adressierung, Konfiguration & Netzwerkdiagnose",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "17_2_a",
+                        label: "a) Vorteile von IPv6 gegenüber IPv4 (IHK-Thema 1)",
+                        points: 4,
+                        type: "lines",
+                        linesCount: 4,
+                        stencil: "NETZWERKTECHNIK / IPV6 VORTEILE",
+                        text: "Nennen und erläutern Sie zwei gravierende technische Vorteile von IPv6 gegenüber dem Vorgängerprotokoll IPv4 im Kontext moderner Unternehmensnetze.",
+                        solution: "1. Riesiger Adressraum (128 Bit statt 32 Bit / ca. 3,4 * 10^38 Adressen):\nBeseitigt den Adressmangel. Kein NAT (Network Address Translation) mehr nötig; Wiederherstellung echter Ende-zu-Ende-Verbindung.\n2. Wegfall von Broadcasts / Effizienteres Multicast:\nIPv6 kennt keine Broadcasts mehr. Stattdessen werden Multicast-Gruppen genutzt, was Switches und nicht beteiligte Hosts massiv entlastet.\n(Alternativ: Fester 40-Byte-Header für schnelles Routing; SLAAC-Autokonfiguration; integrierte IPsec-Unterstützung)."
+                    },
+                    {
+                        id: "17_2_b",
+                        label: "b) Notation & Kürzungsregeln nach RFC 5952 (IHK-Thema 2)",
+                        points: 4,
+                        type: "lines",
+                        linesCount: 4,
+                        stencil: "IPV6-NOTATION / RFC 5952 KÜRZUNG",
+                        text: "Gegeben ist die unkomprimierte IPv6-Adresse eines Webservers:\n2001:0db8:0000:0000:0042:0000:0000:0001\naa) Kürzen Sie diese Adresse normgerecht nach RFC 5952 (2 Punkte).\nab) Begründen Sie, warum das Symbol '::' in einer IPv6-Adresse nur genau einmal vorkommen darf (2 Punkte).",
+                        solution: "aa) Gekürzte Adresse nach RFC 5952:\n2001:db8::42:0:0:1\n(Erklärung: Führende Nullen gestrichen; bei zwei gleich langen Null-Folgen à 2 Blöcken muss nach RFC 5952 die ERSTE Folge mit :: komprimiert werden; Ziffern klein geschrieben).\nab) Begründung für genau ein '::':\nDas Symbol :: steht für eine variable Anzahl aufeinanderfolgender Null-Blöcke. Würde :: mehrmals vorkommen, wäre die Rekonstruktion der ursprünglichen 8 Blöcke mathematisch mehrdeutig."
+                    },
+                    {
+                        id: "17_2_c",
+                        label: "c) Präfix, Subnet-ID & EUI-64 Interface-ID ermitteln (IHK-Thema 3)",
+                        points: 5,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "ADRESSSTRUKTUR / PRÄFIX & EUI-64",
+                        text: "Der Provider weist der DataNova Systems AG das Präfix 2001:db8:acad::/48 zu. Für das Rechenzentrum wird das Subnetz mit der Subnet-ID 0010 reserviert.\nEin Server in diesem Subnetz besitzt die MAC-Adresse 00:1A:2B:3C:4D:5E.\naa) Geben Sie das vollständige /64-Subnetzpräfix dieses Netzes an (2 Punkte).\nab) Ermitteln Sie über den EUI-64-Algorithmus (Einfügen von FF:FE und Invertierung des 7. Bits) die 64-Bit Interface-ID (3 Punkte).",
+                        solution: "aa) Vollständiges /64-Subnetzpräfix:\n2001:db8:acad:10::/64 (oder 2001:0db8:acad:0010::/64).\n\nab) EUI-64 Interface-ID:\n1. MAC in der Mitte teilen: 00:1A:2B und 3C:4D:5E.\n2. FF:FE in die Mitte einfügen: 001A:2BFF:FE3C:4D5E.\n3. Invertierung des 7. Bits (U/L-Bit) des ersten Bytes (00 hex = 0000 0000 binär -> Bit 7 invertiert = 0000 0010 binär = 02 hex).\nInterface-ID: 021a:2bff:fe3c:4d5e (bzw. vollständige IP: 2001:db8:acad:10:21a:2bff:fe3c:4d5e)."
+                    },
+                    {
+                        id: "17_2_d",
+                        label: "d) Anzahl möglicher Subnetze ermitteln (IHK-Thema 4)",
+                        points: 4,
+                        type: "math-grid",
+                        gridConfig: { cols: 26, rows: 5 },
+                        stencil: "SUBNET-KALKULATION / PRÄFIXLÄNGE",
+                        text: "DataNova hat vom Provider ein /48 Zuweisungs-Präfix erhalten. Nach RFC 4291 müssen alle Endgeräte-Subnetze eine feste Präfixlänge von /64 aufweisen.\nBerechnen Sie im Rechengitter:\naa) Die Anzahl der verfügbaren Subnetz-Bits.\nab) Die Gesamtzahl der intern bildbaren /64-Subnetze.",
+                        solution: "aa) Verfügbare Subnetz-Bits:\nSubnetz-Bits (s) = Zielpräfix - Basispräfix\ns = 64 - 48 = 16 Bits.\n\nab) Anzahl der /64-Subnetze:\nAnzahl = 2^s = 2^16 = 65.536 eigenständige /64-Subnetze."
+                    },
+                    {
+                        id: "17_2_e",
+                        label: "e) Manuelle Konfiguration & Default Gateway (IHK-Thema 5)",
+                        points: 4,
+                        type: "lines",
+                        linesCount: 4,
+                        stencil: "CLIENT-KONFIGURATION & DEFAULT GATEWAY",
+                        text: "Ein Linux-Datenbankserver soll im Subnetz 2001:db8:acad:10::/64 mit der statischen Host-Adresse ::50 konfiguriert werden. Der Router hat an diesem Interface die IP 2001:db8:acad:10::1 sowie die Link-Local-IP fe80::1.\naa) Welcher Wert wird in Konfigurationsdialogen für die Subnetzmaske bzw. Subnetzpräfixlänge eingetragen? (1 Punkt)\nab) Welche zwei Adressen kommen alternativ als Default Gateway in Betracht? (2 Punkte)\nac) Wie lautet der Linux-Befehl zur Vergabe der IP an eth0? (1 Punkt).",
+                        solution: "aa) Subnetzpräfixlänge:\n64 (keine Dotted-Decimal-Maske!).\nab) Mögliche Default Gateways:\n1. Die Global Unicast Adresse des Routers: 2001:db8:acad:10::1\n2. Die Link-Local-Adresse des Router-Interfaces: fe80::1\nac) Linux-Befehl:\nip -6 addr add 2001:db8:acad:10::50/64 dev eth0"
+                    },
+                    {
+                        id: "17_2_f",
+                        label: "f) Erreichbarkeit prüfen & Link-Local-Eigenschaften (IHK-Themen 6 & 7)",
+                        points: 4,
+                        type: "lines",
+                        linesCount: 4,
+                        stencil: "NETZWERKDIAGNOSE / NDP & LINK-LOCAL SCOPE",
+                        text: "Ein Techniker testet die Verbindung mit dem Befehl 'ping fe80::1' unter Windows. Der Befehl meldet 'Zielhost nicht erreichbar'. Zudem schlägt 'arp -a' fehl.\naa) Warum scheitert der Ping auf eine Link-Local-Adresse ohne Angabe der Scope-ID / Interface-Index? (2 Punkte)\nab) Welches Protokoll ersetzt bei IPv6 das veraltete ARP zur Ermittlung der MAC-Adresse? (1 Punkt)\nac) Warum kann ein Host mit reiner Link-Local-Adresse (fe80::) nicht ins Internet geroutet werden? (1 Punkt).",
+                        solution: "aa) Ursache für Ping-Fehler bei Link-Local:\nLink-Local-Adressen (fe80::) existieren auf JEDER physischen Schnittstelle identisch. Ohne Angabe der Scope-ID (z. B. fe80::1%12) kann das Betriebssystem nicht ermitteln, über welche physische Netzwerkhälfte/NIC das ICMPv6-Echo-Paket gesendet werden soll.\nab) Ersatz für ARP:\nNDP (Neighbor Discovery Protocol) auf Basis von ICMPv6 (Neighbor Solicitations / Advertisements).\nac) Keine Weiterleitung ins Internet:\nLink-Local-Adressen (fe80::/10) haben lokalen Link-Scope und sind nicht routingfähig. Router verwerfen Link-Local-Pakete strikt an Schnittstellengrenzen."
+                    }
+                ]
+            },
+
+            // Aufgabe 3 (25 Pkt)
+            {
+                number: 3,
+                title: "3. Aufgabe: RZ-Effizienz, USV-Autonomie & Akku-Dimensionierung",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "17_3_a",
+                        label: "a) RZ-Energieeffizienz (PUE & DCiE)",
+                        points: 7,
+                        type: "math-grid",
+                        gridConfig: { cols: 26, rows: 6 },
+                        stencil: "RZ-EFFIZIENZ / PUE & DCIE",
+                        text: "Ein Rechenzentrum verbraucht im Jahr insgesamt 4.800.000 kWh elektrische Gesamtenergie. Die IT-Hardware (Server, Storage, Netzwerk) nimmt davon 3.200.000 kWh auf.\naa) Berechnen Sie den PUE-Wert (Power Usage Effectiveness).\nab) Berechnen Sie den DCiE-Wert (Data Center infrastructure Efficiency) in Prozent.",
+                        solution: "aa) PUE-Berechnung:\nPUE = Gesamtenergie / IT-Energie\nPUE = 4.800.000 kWh / 3.200.000 kWh = 1,50.\n\nab) DCiE-Berechnung:\nDCiE = 1 / PUE * 100 % = (3.200.000 / 4.800.000) * 100 % = 66,67 %."
+                    },
+                    {
+                        id: "17_3_b",
+                        label: "b) Scheinleistung & Wirkleistung (USV-Dimensionierung)",
+                        points: 6,
+                        type: "math-grid",
+                        gridConfig: { cols: 26, rows: 5 },
+                        stencil: "ELEKTROTECHNIK / SCHEINLEISTUNG S = P / cos phi",
+                        text: "Ein Server-Rack hat eine summierte Wirkleistung von P = 14,4 kW bei einem Leistungsfaktor von cos φ = 0,90.\nBerechnen Sie im Rechengitter die erforderliche minimale Scheinleistung S der USV-Anlage in kVA.",
+                        solution: "Formel:\nS = P / cos φ\nS = 14,4 kW / 0,90 = 16,0 kVA.\nDie USV muss mindestens für 16,0 kVA Scheinleistung ausgelegt sein."
+                    },
+                    {
+                        id: "17_3_c",
+                        label: "c) USV-Klassifizierung nach DIN EN 62040-3",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 4,
+                        stencil: "USV-KLASSEN / VFI (ONLINE)",
+                        text: "Für das Rechenzentrum wird eine VFI-USV (Online-Dauerwandler) ausgewählt.\naa) Wofür steht die Abkürzung 'VFI'? (3 Punkte)\nab) Nennen Sie den wesentlichen Vorteil gegenüber VFD- und VI-Systemen bei Netzausfall (Umschaltzeit) (3 Punkte).",
+                        solution: "aa) VFI:\nVoltage and Frequency Independent (Spannung und Frequenz unabhängig vom Netz).\nab) Vorteil:\nUmschaltzeit beträgt 0 Millisekunden (unterbrechungsfrei). Der Wechselrichter versorgt die Last kontinuierlich aus dem DC-Zwischenkreis, wodurch keinerlei Netzrückwirkungen, Oberwellen oder Spannungseinbrüche an den Servern ankommen."
+                    },
+                    {
+                        id: "17_3_d",
+                        label: "d) Akku-Kapazitätsberechnung (Ah)",
+                        points: 6,
+                        type: "math-grid",
+                        gridConfig: { cols: 26, rows: 6 },
+                        stencil: "AKKU-DIMENSIONIERUNG / C = W / (U * eta * DoD)",
+                        text: "Eine USV-Batteriebank mit einer Nennspannung von U = 48 V soll bei einem Netzausfall 20 Minuten lang eine Wirkleistung von P = 7.200 W bereitstellen.\nDer Wirkungsgrad des Wechselrichters beträgt η = 90 % (0,90). Die maximale Entladetiefe der Akkus darf DoD = 80 % (0,80) nicht überschreiten.\nBerechnen Sie im Rechengitter die erforderliche Batteriekapazität C in Amperestunden (Ah).",
+                        solution: "1. Energiebedarf W:\nW = P * t = 7.200 W * (20 min / 60 h) = 7.200 W * 0,3333 h = 2.400 Wh.\n\n2. Bereitgestellte Energie unter Berücksichtigung von Wirkungsgrad und DoD:\nW_eff = U * C * η * DoD\nC = W / (U * η * DoD)\nC = 2.400 Wh / (48 V * 0,90 * 0,80) = 2.400 / 34,56 = 69,44 Ah.\n\nErgebnis: Es werden mindestens 69,44 Ah (Handelsüblich: 70 Ah bis 80 Ah) Batteriekapazität benötigt."
+                    }
+                ]
+            },
+
+            // Aufgabe 4 (25 Pkt)
+            {
+                number: 4,
+                title: "4. Aufgabe: Cyber-Security, IT-Grundschutz & Firewall-Architektur",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "17_4_a",
+                        label: "a) BSI IT-Grundschutz: Die drei Grundwerte der Informationssicherheit",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 4,
+                        stencil: "IT-SICHERHEIT / CIA-TRIADE",
+                        text: "Nennen und definieren Sie die drei klassischen Grundwerte der Informationssicherheit nach BSI IT-Grundschutz (CIA-Triade).",
+                        solution: "1. Vertraulichkeit (Confidentiality):\nDaten dürfen nur von autorisierten Personen eingesehen bzw. ausgelesen werden (Schutz vor unberechtigter Offenlegung, z. B. durch Verschlüsselung).\n2. Integrität (Integrity):\nDaten und Systeme müssen vor unbemerkter, unautorisierter Veränderung oder Manipulation geschützt sein (Korrektheit und Vollständigkeit, z. B. durch Prüfsummen/Hashes).\n3. Verfügbarkeit (Availability):\nDienste, Systeme und Daten müssen für berechtigte Benutzer zum geforderten Zeitpunkt ordnungsgemäß zugänglich und betriebsbereit sein (z. B. durch Redundanz, USV, Backup)."
+                    },
+                    {
+                        id: "17_4_b",
+                        label: "b) IPv6-Sicherheitsrisiken: RA-Spoofing & Rogue Router",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 4,
+                        stencil: "IPV6-SICHERHEIT / RA GUARD",
+                        text: "In einem IPv6-Netzwerk sendet ein kompromittierter Client gefälschte Router Advertisements (RA-Spoofing).\naa) Welche Auswirkung hat ein 'Rogue Router' auf die Clients im LAN (Man-in-the-Middle)? (3 Punkte)\nab) Welche Switch-Sicherheitsfunktion (z. B. IPv6 RA Guard) verhindert diesen Angriff? (3 Punkte).",
+                        solution: "aa) Auswirkung:\nClients akzeptieren das gefälschte Router Advertisement und konfigurieren den Angreifer als ihr Default Gateway. Der Angreifer kann den gesamten ausgehenden Datenverkehr abfangen, mitlesen, manipulieren oder verwerfen (Man-in-the-Middle / Denial of Service).\nab) Schutzfunktion:\nIPv6 RA Guard (RFC 6105) auf den Access-Switches. Der Switch prüft eingehende RA-Pakete und verwirft sie an allen Ports, die nicht explizit als vertrauenswürdige Uplink-Ports zu autorisierten Routern konfiguriert sind."
+                    },
+                    {
+                        id: "17_4_c",
+                        label: "c) Next-Generation Firewall (NGFW) vs. Paketfilter",
+                        points: 7,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "FIREWALL-ARCHITEKTUR / PACKET FILTER VS. NGFW",
+                        text: "Vergleichen Sie herkömmliche zustandslose/zustandsbehaftete Paketfilter (Layer 3/4) mit einer Next-Generation Firewall (Layer 7).\nNennen Sie zwei entscheidende Sicherheitsfunktionen, die nur eine NGFW leisten kann.",
+                        solution: "Vergleich:\nPaketfilter prüfen nur IP-Header und Ports (Layer 3 & 4), wissen jedoch nicht, welche Nutzdaten in den Paketen übertragen werden.\nExklusive NGFW-Funktionen (Layer 7):\n1. Deep Packet Inspection (DPI) & Applikationserkennung: Erkennt Anwendungen unabhängig vom Port (z. B. erkennt Tor, BitTorrent oder Webanwendungen selbst auf Port 443).\n2. SSL/TLS-Inspection (Entschlüsselung): Entschlüsselt eingehenden und ausgehenden HTTPS-Verkehr zur Untersuchung auf verborgene Malware und Exploits.\n(Alternativ: Integriertes IPS/IDS, Sandbox-Analyse von Datei-Downloads, Antivirus-Scanning im Datenstrom)."
+                    },
+                    {
+                        id: "17_4_d",
+                        label: "d) Backup-Strategie nach der 3-2-1-1-0-Regel",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 4,
+                        stencil: "DATENSICHERUNG / 3-2-1-1-0 REGEL",
+                        text: "Zum Schutz vor Ransomware-Angriffen wird das Backup-Konzept auf die 3-2-1-1-0-Regel modernisiert.\nErläutern Sie die Bedeutung der einzelnen Ziffern dieser Regel.",
+                        solution: "• 3 Kopien der Daten insgesamt (1 Produktivdaten + 2 Backups).\n• 2 verschiedene Speichermedientypen (z. B. Festplatten-SAN und LTO-Bandlaufwerk oder Cloud).\n• 1 Kopie an einem externen, räumlich getrennten Standort (Offsite, Schutz vor Brand/Hochwasser).\n• 1 Kopie offline / unveränderbar (Immutable / Air-Gapped, Schutz vor Ransomware-Verschlüsselung).\n• 0 Fehler bei der regelmäßigen Wiederherstellungsprüfung (Automatisierte Recovery-Tests ohne Fehler)."
+                    }
+                ]
+            }
+        ]
     }
 
 ];

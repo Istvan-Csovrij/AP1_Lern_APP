@@ -10617,5 +10617,225 @@ c) Methodenauswahl für die Szenarien:
         ],
         correctAnswer: 0,
         explanation: "BPMN Gateways auf den Punkt: XOR (✕) = Entweder-Oder (genau 1 Pfad). AND (+) = Alle Pfade gleichzeitig (keine Bedingungen). OR (◯) = Ein oder mehrere Pfade können aktiv sein."
+    },
+    // =========================================================================
+    // DIE 7 IHK-PRÜFUNGSFOKUS-THEMEN IPV6 (LF 3 - STATISCHE PRÜFUNGSFRAGEN)
+    // =========================================================================
+    // Thema 1: Vorteile von IPv6 gegenüber IPv4
+    {
+        id: 485,
+        isHard: false,
+        difficulty: "standard",
+        isBawueFocus: true,
+        theme: "lf3",
+        topic: "🌐 IPv6 Vorteile: Adressraum, Multicast & SLAAC",
+        type: "multiple-choice",
+        question: "Welche Aussage beschreibt einen wesentlichen technischen Vorteil von IPv6 gegenüber IPv4?",
+        options: [
+            "IPv6 ersetzt den ressourcenintensiven Broadcast vollständig durch Multicast und Anycast und beseitigt Adressknappheit durch 128-Bit-Adressierung.",
+            "IPv6 führt zwingend NAT (Network Address Translation) für alle privaten Endgeräte ein.",
+            "IPv6 verwendet variable Headergrößen zwischen 20 und 60 Byte zur Reduktion von Latenzen.",
+            "IPv6 erfordert zwingend einen Stateful DHCPv6-Server für jede Adressvergabe."
+        ],
+        correctAnswer: 0,
+        explanation: "Vorteile IPv6: 128 Bit Adressraum (kein NAT mehr zwingend nötig), kein Broadcast mehr (ersetzt durch Multicast/Anycast), SLAAC Autokonfiguration und fester 40-Byte Header für schnelles Hardware-Routing."
+    },
+    {
+        id: 486,
+        isHard: true,
+        difficulty: "hard",
+        isBawueFocus: true,
+        theme: "lf3",
+        topic: "🌐 IPv6 Vorteile: IHK-Fachaufgabe Vergleich mit IPv4",
+        type: "open-text",
+        question: "Fachaufgabe Netzwerk (LF 3): Ein Unternehmen plant die Umstellung von IPv4 auf IPv6. Nennen Sie drei konkrete technische Vorteile von IPv6 und begründen Sie jeweils kurz den Nutzen für das Unternehmensnetzwerk.",
+        musterloesung: "1. Riesiger Adressraum (128 Bit / ca. 3,4 * 10^38 Adressen):\nKein Adressmangel mehr. NAT/PAT ist nicht mehr zwingend erforderlich, wodurch echte Ende-zu-Ende-Verbindungen wiederhergestellt werden (wichtig für VoIP, Peer-to-Peer, VPN).\n2. Wegfall von Broadcasts (ersetzt durch Multicast & Anycast):\nPakete belasten nur noch Hosts, die der jeweiligen Multicast-Gruppe beigetreten sind. Switches und nicht beteiligte Clients werden vor unnötiger Interrupt-Last geschützt.\n3. SLAAC Autokonfiguration (Stateless Address Autoconfiguration):\nEndgeräte können sich über ICMPv6 Router Advertisements selbstständig konfigurieren, ohne dass ein dedizierter DHCP-Server betrieben werden muss.\n(Alternativ: Fester 40-Byte-Header beschleunigt Router-Verarbeitung; integrierte IPsec-Unterstützung).",
+        explanation: "Typische IHK-Musterlösung für 6-8 Punkte in Baden-Württemberg und bundesweit."
+    },
+    // Thema 2: Notation & RFC 5952 Kürzungsregeln
+    {
+        id: 487,
+        isHard: false,
+        difficulty: "standard",
+        isBawueFocus: true,
+        theme: "lf3",
+        topic: "✂️ IPv6 Notation: RFC 5952 Kürzungsregeln",
+        type: "multiple-choice",
+        question: "Wie lautet die normgerecht gekürzte Schreibweise der IPv6-Adresse 2001:0db8:0000:0000:0000:0000:1428:57ab nach RFC 5952?",
+        options: [
+            "2001:db8::1428:57ab",
+            "2001:0db8::1428:57ab",
+            "2001:db8:0:0:0:0:1428:57ab",
+            "2001:db8::0::1428:57ab"
+        ],
+        correctAnswer: 0,
+        explanation: "Nach RFC 5952 MÜSSEN führende Nullen pro Block gestrichen werden (0db8 -> db8) und die längste zusammenhängende Null-Block-Sequenz MUSS durch '::' ersetzt werden. Das Symbol '::' darf nie doppelt vorkommen!"
+    },
+    {
+        id: 488,
+        isHard: true,
+        difficulty: "hard",
+        isBawueFocus: true,
+        theme: "lf3",
+        topic: "✂️ IPv6 Notation: Begründung für genau einmal '::'",
+        type: "open-text",
+        question: "Fachaufgabe Netzwerk (LF 3): Gegeben ist die IPv6-Adresse 2001:0db8:0000:0042:0000:0000:0000:0001.\naa) Kürzen Sie die Adresse normgerecht nach RFC 5952.\nab) Begründen Sie, warum das Symbol '::' in einer IPv6-Adresse nur genau EINMAL vorkommen darf.",
+        musterloesung: "aa) Gekürzte Adresse: 2001:db8:0:42::1\n(Führende Nullen weg; die längere Null-Folge mit 3 Blöcken am Ende wird mit :: komprimiert, der einzelne Null-Block bleibt als :0: stehen).\nab) Begründung:\nDas Symbol '::' steht für eine variable Anzahl aufeinanderfolgender Null-Blöcke. Würde '::' mehrfach in einer Adresse verwendet (z. B. 2001::42::1), könnte kein Router und kein Betriebssystem eindeutig rekonstruieren, wie viele Null-Blöcke an welcher Position fehlen, da die Gesamtzahl von 8 Blöcken mathematisch mehrdeutig aufteilbar wäre.",
+        explanation: "RFC 5952 schreibt strikt vor: Maximal ein '::' pro Adresse, immer die längste Nullfolge wählen."
+    },
+    // Thema 3: Network-Prefix, Subnet-ID & EUI-64 Interface-ID
+    {
+        id: 489,
+        isHard: false,
+        difficulty: "standard",
+        isBawueFocus: true,
+        theme: "lf3",
+        topic: "🔢 IPv6 Adressstruktur: Global Routing Prefix, Subnet-ID, Interface-ID",
+        type: "multiple-choice",
+        question: "Ein ISP weist einem Kunden das Global Routing Prefix 2001:db8:1234::/48 zu. Das interne Firmennetz verwendet /64-Subnetze. Wie viele Bits stehen dem Kunden für die Subnet-ID zur Verfügung?",
+        options: [
+            "16 Bits (ermöglicht 65.536 Subnetze)",
+            "8 Bits (ermöglicht 256 Subnetze)",
+            "64 Bits (entspricht der Interface-ID)",
+            "32 Bits (ermöglicht 4,29 Mrd. Subnetze)"
+        ],
+        correctAnswer: 0,
+        explanation: "Zielpräfix 64 - Basispräfix 48 = 16 Subnetz-Bits. 2^16 = 65.536 eigenständige /64-Subnetze."
+    },
+    {
+        id: 490,
+        isHard: true,
+        difficulty: "hard",
+        isBawueFocus: true,
+        theme: "lf3",
+        topic: "🔄 IPv6 EUI-64: MAC-Umwandlung & Bit-Flip",
+        type: "open-text",
+        question: "Fachaufgabe Netzwerk (LF 3): Ein Client besitzt die 48-Bit MAC-Adresse 00:1A:2B:3C:4D:5E. Erläutern Sie das EUI-64-Verfahren und bestimmen Sie die daraus resultierende 64-Bit Interface-ID.",
+        musterloesung: "1. MAC-Adresse in zwei 24-Bit-Hälften teilen: 00:1A:2B (OUI) und 3C:4D:5E (NIC).\n2. Den 16-Bit-Hexwert 'FF:FE' in der Mitte einfügen: 001A:2BFF:FE3C:4D5E.\n3. Das 7. Bit (Universal/Local Bit, U/L-Bit) des ersten Bytes invertieren:\nErstes Byte: 0x00 = 0000 0000 binär.\nBit 7 invertiert: 0000 0010 binär = 0x02 hex.\nErgebnis Interface-ID: 021a:2bff:fe3c:4d5e (bzw. Link-Local: fe80::21a:2bff:fe3c:4d5e).",
+        explanation: "EUI-64 ist der Standard-Algorithmus nach IEEE und RFC 4291 zur Ableitung einer Interface-ID aus einer MAC-Adresse."
+    },
+    // Thema 4: Anzahl möglicher Subnetze
+    {
+        id: 491,
+        isHard: false,
+        difficulty: "standard",
+        isBawueFocus: true,
+        theme: "lf3",
+        topic: "📊 IPv6 Subnetz-Kalkulation: Zuweisung /56 auf /64",
+        type: "multiple-choice",
+        question: "Ein KMU erhält vom Internet-Service-Provider ein /56 IPv6-Zuweisungspräfix. Wie viele interne /64-Subnetze können daraus gebildet werden?",
+        options: [
+            "256 Subnetze (2^8)",
+            "16 Subnetze (2^4)",
+            "4.096 Subnetze (2^12)",
+            "65.536 Subnetze (2^16)"
+        ],
+        correctAnswer: 0,
+        explanation: "Subnetz-Bits: 64 - 56 = 8 Bits. Anzahl Subnetze: 2^8 = 256 Subnetze."
+    },
+    {
+        id: 492,
+        isHard: true,
+        difficulty: "hard",
+        isBawueFocus: true,
+        theme: "lf3",
+        topic: "📊 IPv6 Subnetz-Kalkulation: /48 vs. /60 Rechenaufgabe",
+        type: "open-text",
+        question: "Fachaufgabe Netzwerk (LF 3): Gegeben sind zwei verschiedene Provider-Zuweisungen:\nFall A: Ein Enterprise-Kunde erhält ein /48-Präfix.\nFall B: Ein Home-Office-Kunde erhält ein /60-Präfix.\nBerechnen Sie für beide Fälle die Anzahl der bildbaren internen /64-Subnetze inklusive Rechenweg.",
+        musterloesung: "Fall A (/48 Zuweisung):\nSubnetz-Bits: s = 64 - 48 = 16 Bits.\nAnzahl Subnetze = 2^16 = 65.536 /64-Subnetze.\n\nFall B (/60 Zuweisung):\nSubnetz-Bits: s = 64 - 60 = 4 Bits.\nAnzahl Subnetze = 2^4 = 16 /64-Subnetze.",
+        explanation: "Formel nach IHK-Standard: 2^(Zielpräfix - Basispräfix)."
+    },
+    // Thema 5: Adressen manuell vergeben und Gateway konfigurieren
+    {
+        id: 493,
+        isHard: false,
+        difficulty: "standard",
+        isBawueFocus: true,
+        theme: "lf3",
+        topic: "⚙️ IPv6 Manuelle Konfiguration: Subnetzpräfixlänge",
+        type: "multiple-choice",
+        question: "Ein Administrator konfiguriert einen Windows- oder Linux-Server manuell mit der IPv6-Adresse 2001:db8:acad:10::50 im Subnetz 2001:db8:acad:10::/64. Welcher Wert muss für die Subnetzmaske bzw. Subnetzpräfixlänge eingetragen werden?",
+        options: [
+            "64 (die numerische Präfixlänge)",
+            "255.255.255.0 (Standard-Subnetzmaske)",
+            "ffff:ffff:ffff:ffff:0000:0000:0000:0000",
+            "/128 (für einzelne Host-Adressen)"
+        ],
+        correctAnswer: 0,
+        explanation: "Bei IPv6 wird im Dialog 'Subnetzpräfixlänge' die reine Zahl 64 eingetragen. Es gibt keine Dotted-Decimal-Masken mehr!"
+    },
+    {
+        id: 494,
+        isHard: true,
+        difficulty: "hard",
+        isBawueFocus: true,
+        theme: "lf3",
+        topic: "⚙️ IPv6 Konfiguration: Default Gateway & CLI-Befehl",
+        type: "open-text",
+        question: "Fachaufgabe Netzwerk (LF 3): Ein Linux-Datenbankserver soll im Subnetz 2001:db8:50:1::/64 mit der IP 2001:db8:50:1::100 konfiguriert werden. Das Router-Interface hat die IP 2001:db8:50:1::1 sowie die Link-Local fe80::1.\naa) Welche zwei Adressen kommen alternativ als Default Gateway infrage?\nab) Geben Sie den genauen Linux-Befehl (iproute2) an, um der Schnittstelle eth0 die IP mit Präfix zuzuweisen.",
+        musterloesung: "aa) Mögliche Default Gateways:\n1. Die Global Unicast Adresse des Routers: 2001:db8:50:1::1\n2. Die Link-Local-Adresse des Router-Interfaces: fe80::1\nab) Linux-Befehl:\nip -6 addr add 2001:db8:50:1::100/64 dev eth0",
+        explanation: "Typische Prüfungsaufgabe zur statischen Interface-Konfiguration unter Linux und Windows."
+    },
+    // Thema 6: Erreichbarkeit im Netzwerk prüfen
+    {
+        id: 495,
+        isHard: false,
+        difficulty: "standard",
+        isBawueFocus: true,
+        theme: "lf3",
+        topic: "🔍 IPv6 Diagnose: Ping auf Link-Local & Scope-ID",
+        type: "multiple-choice",
+        question: "Warum schlägt der Befehl 'ping fe80::1' unter Windows oder Linux ohne weitere Parameter häufig fehl?",
+        options: [
+            "Weil bei Link-Local-Adressen die Scope-ID (Interface-Index) angegeben werden muss (z. B. fe80::1%12), da jede Schnittstelle denselben Adressbereich fe80:: nutzt.",
+            "Weil Link-Local-Adressen grundsätzlich keine ICMPv6 Echo-Requests beantworten dürfen.",
+            "Weil vor jedem Ping zwingend der ARP-Cache mit 'arp -d' geleert werden muss.",
+            "Weil fe80::1 eine geschützte Multicast-Adresse ist, die nicht gepingt werden kann."
+        ],
+        correctAnswer: 0,
+        explanation: "Link-Local-Adressen sind auf allen Schnittstellen lokal gültig. Der Kernel weiß ohne Scope-ID (%eth0 oder %12) nicht, über welche physische NIC das Paket gesendet werden soll."
+    },
+    {
+        id: 496,
+        isHard: true,
+        difficulty: "hard",
+        isBawueFocus: true,
+        theme: "lf3",
+        topic: "🔍 IPv6 Diagnose: NDP vs. ARP & Neighbor Cache",
+        type: "open-text",
+        question: "Fachaufgabe Netzwerk (LF 3): Ein Administrator möchte die Zuordnung zwischen MAC-Adresse und IPv6-Adresse im lokalen Netz prüfen. Er führt den Befehl 'arp -a' aus, erhält aber keine IPv6-Einträge.\naa) Erläutern Sie, warum 'arp -a' bei IPv6 nicht funktioniert und welches Protokoll ARP ersetzt.\nab) Mit welchen Befehlen kann die Nachbarschaftstabelle (Neighbor Cache) unter Windows bzw. Linux angezeigt werden?",
+        musterloesung: "aa) Ursache & Ersatzprotokoll:\nIPv6 verwendet kein Address Resolution Protocol (ARP) mehr, da ARP auf Broadcasts basiert. ARP wurde durch das Neighbor Discovery Protocol (NDP) auf Basis von ICMPv6 ersetzt (Neighbor Solicitations und Neighbor Advertisements über Multicast).\nab) Befehle zur Anzeige des Neighbor Cache:\n• Windows: 'netsh interface ipv6 show neighbors' oder PowerShell 'Get-NetNeighbor'\n• Linux: 'ip -6 neigh' (oder 'ip neigh show').",
+        explanation: "NDP ist einer der wichtigsten Prüfungsstandards bei IPv6-Diagnoseaufgaben."
+    },
+    // Thema 7: Link-Local-Adressen erkennen und erklären
+    {
+        id: 497,
+        isHard: false,
+        difficulty: "standard",
+        isBawueFocus: true,
+        theme: "lf3",
+        topic: "🔗 IPv6 Link-Local: Präfix fe80::/10 & Scope",
+        type: "multiple-choice",
+        question: "Welche Aussage zu IPv6 Link-Local-Adressen (fe80::/10) ist fachlich KORREKT?",
+        options: [
+            "Sie werden auf jeder IPv6-Schnittstelle automatisch generiert, sind nur im lokalen Link-Segment gültig und werden von Routern niemals weitergeleitet.",
+            "Sie werden von Internet-Routern weltweit geroutet und dienen als Ersatz für öffentliche IPv4-Adressen.",
+            "Sie erfordern zwingend einen DHCPv6-Server zur Adressvergabe.",
+            "Sie sind identisch mit Unique Local Addresses (fc00::/7) und werden im Intranet über Router hinweg geroutet."
+        ],
+        correctAnswer: 0,
+        explanation: "Link-Local (fe80::/10) ist nicht routingfähig. Router verwerfen fe80::-Pakete an Schnittstellengrenzen."
+    },
+    {
+        id: 498,
+        isHard: true,
+        difficulty: "hard",
+        isBawueFocus: true,
+        theme: "lf3",
+        topic: "🔗 IPv6 Link-Local: Fehleranalyse Internetzugriff",
+        type: "open-text",
+        question: "Fachaufgabe Netzwerk (LF 3): Ein neu eingerichteter Client meldet 'Kein Internetzugriff'. Der Befehl 'ipconfig' zeigt lediglich die Adresse 'fe80::4a2b:67ff:fe89:1234%11'.\naa) Um welchen Adresstyp handelt es sich und wie ist diese Adresse entstanden?\nab) Begründen Sie, warum der Client damit keine Verbindung ins weltweite Internet aufbauen kann.",
+        musterloesung: "aa) Adresstyp & Entstehung:\nEs handelt sich um eine Link-Local-Adresse (fe80::/10). Sie wurde beim Starten des Netzwerk-Interfaces vollautomatisch vom Betriebssystem generiert (z. B. via EUI-64 aus der MAC-Adresse).\nab) Begründung für fehlenden Internetzugriff:\nLink-Local-Adressen haben einen lokalen Verbindungsgültigkeitsbereich (Link-Local Scope) und sind strikt nicht routingfähig. Router verwerfen Pakete mit Link-Local-Absender- oder Zieladressen an ihren Schnittstellengrenzen. Um das Internet zu erreichen, benötigt der Client eine Global Unicast Adresse (2000::/3), die typischerweise über SLAAC (Router Advertisement) oder DHCPv6 bezogen wird.",
+        explanation: "Klassisches IHK-Szenario zur Diagnose von Verbindungsproblemen und Adresstyp-Zuordnung."
     }
 ];

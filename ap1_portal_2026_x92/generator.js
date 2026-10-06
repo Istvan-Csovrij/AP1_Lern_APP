@@ -313,6 +313,146 @@ function generateDynamicQuestions(typeMode = "mix") {
         }
     }
 
+    // ==========================================
+    // 3.1b IPV6 ADRESSIERUNG, SUBNETTING & DIE 7 IHK-PRÜFUNGSFOKUS-THEMEN (LF 3)
+    // ==========================================
+    const ipv6Scenarios = [
+        // 1. Vorteile
+        {
+            topic: 1,
+            q: "Fachaufgabe Netzwerk (LF 3): Nennen Sie drei gravierende technische Vorteile von IPv6 gegenüber dem Vorgänger IPv4 im Kontext moderner Unternehmensnetze.",
+            solution: "1. Riesiger Adressraum (128 Bit statt 32 Bit / ca. 3,4 × 10³⁸ Adressen) – kein NAT/PAT mehr zwingend nötig, echte Ende-zu-Ende-Verbindung.\n2. Wegfall von Broadcasts: Ersetzt durch ressourcenschonendes Multicast und Anycast, wodurch Switches und nicht beteiligte Hosts entlastet werden.\n3. SLAAC (Stateless Address Autoconfiguration): Clients konfigurieren ihre IP-Adresse automatisch ohne zwingenden DHCP-Server.\n(Alternativ: Fester 40-Byte-Header für schnelles Routing ohne Prüfsumme; integrierter IPsec-Support).",
+            mcQuestion: "Welche Aussage zu den Vorteilen von IPv6 gegenüber IPv4 ist technisch KORREKT?",
+            mcOptions: [
+                "IPv6 nutzt 128-Bit-Adressen und ersetzt den ressourcenintensiven Broadcast vollständig durch Multicast und Anycast.",
+                "IPv6 führt zwingend NAT ein, um private Netze vor dem öffentlichen Internet abzuschirmen.",
+                "IPv6 vergrößert den Header auf variable 60 bis 120 Byte mit redundanten Prüfsummen.",
+                "IPv6 erlaubt keine automatische IP-Zuweisung ohne einen dedizierten DHCPv6-Server."
+            ],
+            correctIdx: 0,
+            expl: "IPv6 besitzt 128 Bit Adresslänge. Broadcast existiert nicht mehr, stattdessen wird zielgerichtetes Multicast genutzt. Fester 40-Byte-Header beschleunigt das Routing."
+        },
+        // 2. Notation & Kürzungsregeln
+        {
+            topic: 2,
+            full: "2001:0db8:0000:0000:0042:0000:0000:0001",
+            short: "2001:db8::42:0:0:1",
+            q: "Fachaufgabe Netzwerk (LF 3): Kürzen Sie die folgende IPv6-Adresse normgerecht nach RFC 5952:\n2001:0db8:0000:0000:0042:0000:0000:0001\nBegründen Sie, warum das Symbol '::' nur genau einmal vorkommen darf.",
+            solution: "Gekürzte Adresse: 2001:db8::42:0:0:1\nRegeln: Führende Nullen pro Block gestrichen. Bei zwei gleich langen Nullfolgen (jeweils 2 Blöcke) MUSS die erste Folge mit '::' gekürzt werden.\nBegründung für einmaliges '::': Das Symbol '::' ersetzt eine variable Anzahl von Null-Blöcken. Bei mehrmaligem Auftreten wäre die Anzahl der Nullen je Block mathematisch mehrdeutig.",
+            mcQuestion: "Wie lautet die normgerechte Kurzform der Adresse 2001:0db8:0000:0000:0042:0000:0000:0001 nach RFC 5952?",
+            mcOptions: [
+                "2001:db8::42:0:0:1",
+                "2001:db8::42::1",
+                "2001:0db8::42:0:0:1",
+                "2001:db8:0:0:42::1"
+            ],
+            correctIdx: 0,
+            expl: "Führende Nullen weg; bei gleich langen Folgen wird die erste Folge komprimiert; '::' darf nie zweimal vorkommen!"
+        },
+        // 3. Prefix, Subnet-ID, Interface-ID
+        {
+            topic: 3,
+            q: "Fachaufgabe Netzwerk (LF 3): Ein ISP weist einem Unternehmen das Global Routing Prefix 2001:db8:acad::/48 zu. Das interne Endgeräte-Netzwerk nutzt die Standard-Präfixlänge /64.\nErmitteln Sie die Bitlängen für: Global Routing Prefix, Subnet-ID und Interface-ID.",
+            solution: "1. Global Routing Prefix: 48 Bits (Bit 1 bis 48, vom Provider zugewiesen).\n2. Subnet-ID: 16 Bits (Bit 49 bis 64, Zielpräfix 64 minus Basispräfix 48 = 16 Bits -> 65.536 Firmen-Subnetze).\n3. Interface-ID (Host-Anteil): 64 Bits (Bit 65 bis 128, 128 minus 64 = 64 Bits).",
+            mcQuestion: "Wie viele Bits umfasst die Subnet-ID bei einer Providerzuweisung von /48 und einer internen Subnetzgröße von /64?",
+            mcOptions: [
+                "16 Bits (ermöglicht 65.536 Subnetze)",
+                "8 Bits (ermöglicht 256 Subnetze)",
+                "32 Bits (ermöglicht 4,29 Mrd. Subnetze)",
+                "64 Bits (entspricht der Interface-ID)"
+            ],
+            correctIdx: 0,
+            expl: "64 Bits Zielpräfix - 48 Bits Basispräfix = 16 Subnetz-Bits. 2^16 = 65.536 Subnetze."
+        },
+        // 4. Anzahl möglicher Subnetze
+        {
+            topic: 4,
+            q: "Fachaufgabe Netzwerk (LF 3): Ein Internet-Provider weist einem Geschäftskunden ein /56-Präfix zu. Für die Abteilungen werden interne /64-Subnetze gebildet.\nBerechnen Sie die Anzahl der Subnetz-Bits und die Gesamtzahl der daraus bildbaren /64-Subnetze.",
+            solution: "Subnetz-Bits: 64 - 56 = 8 Bits.\nAnzahl der /64-Subnetze: 2^8 = 256 eigenständige Subnetze.",
+            mcQuestion: "Wie viele standardmäßige /64-Subnetze können aus einem /56 Provider-Präfix gebildet werden?",
+            mcOptions: [
+                "256 Subnetze (2^8)",
+                "16 Subnetze (2^4)",
+                "65.536 Subnetze (2^16)",
+                "4.096 Subnetze (2^12)"
+            ],
+            correctIdx: 0,
+            expl: "Formel: 2^(64 - 56) = 2^8 = 256 Subnetze."
+        },
+        // 5. Manuell vergeben & Gateway
+        {
+            topic: 5,
+            q: "Fachaufgabe Netzwerk (LF 3): Ein Linux-Server soll im Subnetz 2001:db8:10:20::/64 manuell konfiguriert werden. Der zuständige Router hat an diesem Interface die IP 2001:db8:10:20::1 und fe80::1.\naa) Welcher Wert wird als Subnetzpräfixlänge eingetragen?\nab) Welche Adressen kommen als Default Gateway infrage?",
+            solution: "aa) Subnetzpräfixlänge: 64 (keine Dotted-Decimal-Maske wie 255.255.255.0!).\nab) Default Gateway: Entweder die Global Unicast IP des Routers (2001:db8:10:20::1) oder die Link-Local-Adresse (fe80::1).",
+            mcQuestion: "Was wird bei der manuellen Netzwerkkonfiguration eines IPv6-Clients im Feld 'Subnetzpräfixlänge' typischerweise eingetragen?",
+            mcOptions: [
+                "Die Zahl 64 (für /64 Standard-Subnetze)",
+                "Die Subnetzmaske 255.255.255.0",
+                "Die IP-Adresse des DNS-Servers",
+                "Die MAC-Adresse des Routers"
+            ],
+            correctIdx: 0,
+            expl: "Bei IPv6 wird keine Dotted-Subnetzmaske eingetragen, sondern die numerische Präfixlänge (Standard für LAN: 64)."
+        },
+        // 6. Erreichbarkeit & NDP
+        {
+            topic: 6,
+            q: "Fachaufgabe Netzwerk (LF 3): Ein Administrator möchte die Link-Local-Adresse fe80::1 testen. Der Befehl 'ping fe80::1' scheitert mit der Meldung 'Zielhost nicht erreichbar'.\naa) Warum scheitert dieser Befehl und wie muss er korrigiert werden?\nab) Welches Protokoll ersetzt bei IPv6 das veraltete ARP zur Ermittlung der MAC-Adresse?",
+            solution: "aa) Ursache & Korrektur: Link-Local-Adressen (fe80::) existieren auf jeder Schnittstelle identisch. Es muss zwingend die Scope-ID (Interface-Index) angegeben werden, z. B. 'ping fe80::1%12' (Windows) bzw. 'ping -6 fe80::1%eth0' (Linux), damit das OS die physikalische Schnittstelle zuordnen kann.\nab) ARP-Ersatz: NDP (Neighbor Discovery Protocol) auf Basis von ICMPv6.",
+            mcQuestion: "Welches Protokoll ersetzt bei IPv6 das bisherige Address Resolution Protocol (ARP) zur Auflösung von IP- in MAC-Adressen?",
+            mcOptions: [
+                "NDP (Neighbor Discovery Protocol via ICMPv6)",
+                "DHCPv6 Snooping",
+                "IGMPv3 (Internet Group Management Protocol)",
+                "DNSSEC (Domain Name System Security Extensions)"
+            ],
+            correctIdx: 0,
+            expl: "NDP (Neighbor Discovery Protocol) nutzt ICMPv6 Neighbor Solicitations und Neighbor Advertisements anstelle von ARP-Broadcasts."
+        },
+        // 7. Link-Local erkennen & erklären
+        {
+            topic: 7,
+            q: "Fachaufgabe Netzwerk (LF 3): Ein PC hat nach dem Hochfahren die Adresse fe80::1234:56ff:fe78:9abc zugewiesen.\naa) Um welchen IPv6-Adresstyp handelt es sich und woran erkennt man ihn?\nab) Warum kann dieser PC über diese Adresse keine Websites im Internet aufrufen?",
+            solution: "aa) Adresstyp: Link-Local-Adresse (Präfix fe80::/10).\nab) Begründung: Link-Local-Adressen haben lokalen Scope und sind strikt nicht routingfähig. Router verwerfen Pakete mit fe80::-Adressen an Schnittstellengrenzen und leiten sie niemals in andere Subnetze oder ins Internet weiter.",
+            mcQuestion: "Dürfen IP-Pakete mit einer Link-Local-Adresse (Präfix fe80::/10) von einem Router in das Internet weitergeleitet werden?",
+            mcOptions: [
+                "Nein, Link-Local-Adressen sind nicht routingfähig und werden von Routern an Schnittstellengrenzen verworfen.",
+                "Ja, sofern im Router NAT64 aktiviert ist.",
+                "Ja, da fe80:: dem öffentlichen Adressraum nach RFC 4291 angehört.",
+                "Nur dann, wenn der Zielserver IPv6-Anycast unterstützt."
+            ],
+            correctIdx: 0,
+            expl: "Link-Local-Pakete gelten nur auf dem lokalen physischen Link. Router leiten sie niemals weiter."
+        }
+    ];
+
+    for (let i = 0; i < 28; i++) {
+        const sc = ipv6Scenarios[i % ipv6Scenarios.length];
+        const isOpen = shouldBeOpenText();
+
+        if (isOpen) {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "lf3",
+                type: "open-text",
+                isBawueFocus: true,
+                question: sc.q,
+                musterloesung: sc.solution,
+                explanation: sc.expl
+            });
+        } else {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "lf3",
+                type: "multiple-choice",
+                question: sc.mcQuestion,
+                options: sc.mcOptions,
+                correctAnswer: sc.correctIdx,
+                explanation: sc.expl
+            });
+        }
+    }
+
     // 3.2 OSI-Protokollzuordnungen (mit detaillierter Schichten-Erklärung)
     const osiProtocols = [
         { name: "HTTP", layer: "7", layerName: "Anwendungsschicht (Application Layer)", pdu: "Daten", task: "Unverschlüsseltes Hypertext-Transfer-Protokoll (Port 80) zur Übertragung von Webseiten zwischen Webserver und Browser." },
