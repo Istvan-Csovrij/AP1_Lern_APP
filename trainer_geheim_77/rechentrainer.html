@@ -76,6 +76,9 @@
         <button onclick="switchTab('zahlensysteme')" id="tab-btn-zahlensysteme" class="tab-btn px-5 py-3 text-base font-medium rounded-t-lg border-b-2 border-transparent text-slate-600 hover:text-slate-900 transition-all flex items-center gap-2">
           <span>🔢</span> Formeln &amp; Rechner: Zahlensysteme (Hex, Binär &amp; KiB)
         </button>
+        <button onclick="switchTab('ipv6')" id="tab-btn-ipv6" class="tab-btn px-5 py-3 text-base font-medium rounded-t-lg border-b-2 border-transparent text-slate-600 hover:text-slate-900 transition-all flex items-center gap-2">
+          <span>🌐</span> Formeln &amp; Rechner: IPv6 &amp; Subnetting
+        </button>
       </div>
     </div>
 
@@ -203,6 +206,16 @@
           </button>
           <button onclick="selectMiniTopic('transfer_time')" class="topic-pill px-3.5 py-2 text-sm font-semibold rounded-xl border border-cyan-400 bg-cyan-50 hover:bg-cyan-100 text-cyan-900 transition-all" data-topic="transfer_time">
             🚀 Downloadzeit (Byte × 8 / Mbit/s)
+          </button>
+          <!-- IPv6 (AP1 Lernfeld 3) -->
+          <button onclick="selectMiniTopic('ipv6_subnets')" class="topic-pill px-3.5 py-2 text-sm font-semibold rounded-xl border border-blue-400 bg-blue-50 hover:bg-blue-100 text-blue-900 transition-all" data-topic="ipv6_subnets">
+            🌐 IPv6: Subnetze (2^(64 - Präfix))
+          </button>
+          <button onclick="selectMiniTopic('ipv6_eui64')" class="topic-pill px-3.5 py-2 text-sm font-semibold rounded-xl border border-indigo-400 bg-indigo-50 hover:bg-indigo-100 text-indigo-900 transition-all" data-topic="ipv6_eui64">
+            🔄 IPv6: EUI-64 Bit-Flip (7. Bit)
+          </button>
+          <button onclick="selectMiniTopic('ipv6_prefix_bits')" class="topic-pill px-3.5 py-2 text-sm font-semibold rounded-xl border border-teal-400 bg-teal-50 hover:bg-teal-100 text-teal-900 transition-all" data-topic="ipv6_prefix_bits">
+            🔢 IPv6: Host- &amp; Subnetz-Bits
           </button>
         </div>
       </div>
@@ -1200,6 +1213,383 @@
 
     </div>
 
+    <!-- ========================================================================= -->
+    <!-- TAB: IPV6 & SUBNETTING RECHNER & FORMELN (LF 3 / AP1 & AP2)               -->
+    <!-- ========================================================================= -->
+    <div id="tab-content-ipv6" class="tab-pane hidden space-y-6">
+
+      <!-- Header Banner IPv6 -->
+      <div class="bg-gradient-to-r from-blue-900 to-indigo-900 text-white rounded-2xl p-6 sm:p-8 shadow-sm">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <div class="flex items-center gap-2 mb-2">
+              <span class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-blue-500/20 text-blue-200 border border-blue-400/30">
+                Lernfeld 3: Netzwerke &amp; Clients (AP1 Pflichtstoff)
+              </span>
+              <span class="text-xs text-blue-200 font-semibold">128 Bit Adressraum • RFC 5952 • EUI-64</span>
+            </div>
+            <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight">
+              🌐 IPv6-Adressierung, Subnetting &amp; EUI-64
+            </h2>
+            <p class="text-sm text-blue-100 mt-1 max-w-3xl">
+              Alles, was die IHK in der AP1 zu IPv6 abfragt: Kürzungsregeln nach RFC 5952, Subnetz-Kalkulation (2<sup>ΔPräfix</sup>), EUI-64 Bitinversion und Adresstypen (fe80, fd00, 2000, ff00).
+            </p>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="jumpToMiniTopic('ipv6_subnets')" class="px-4 py-2.5 rounded-xl bg-blue-500 hover:bg-blue-400 text-white font-bold text-sm transition-all shadow-sm flex items-center gap-2">
+              <span>🎯</span> Zu den IPv6 Mini-Aufgaben
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- RECHNER 1: IPV6 SUBNETTING & PRÄFIX-KALKULATOR -->
+      <div class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-200 pb-4">
+          <div>
+            <span class="text-xs font-bold uppercase tracking-wider text-blue-600 bg-blue-50 px-2.5 py-1 rounded-md border border-blue-200">
+              Interaktiver Rechner 1
+            </span>
+            <h3 class="text-xl font-bold text-slate-900 mt-1">
+              📊 IPv6-Subnetting-Kalkulator (Wie viele /64 Subnetze?)
+            </h3>
+          </div>
+          <div class="text-xs text-slate-500 font-mono bg-slate-100 px-3 py-1.5 rounded-lg border border-slate-200">
+            Formel: 2<sup>(Zielpräfix - Basispräfix)</sup>
+          </div>
+        </div>
+
+        <!-- Controls -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-2">
+            <label class="block text-xs font-bold uppercase tracking-wider text-slate-700">
+              1. Zuweisungs-Präfix des Providers:
+            </label>
+            <select id="ipv6-base-prefix" onchange="calcIpv6Subnet()" class="w-full p-2.5 rounded-lg border border-slate-300 font-bold bg-white text-slate-800 text-sm">
+              <option value="48" selected>/48 — Großunternehmen / Enterprise (Standard: 65.536 Subnetze)</option>
+              <option value="52">/52 — Campus / Größerer Mittelstand (4.096 Subnetze)</option>
+              <option value="56">/56 — KMU / Standard-Business-Kunde (256 Subnetze)</option>
+              <option value="60">/60 — Zweigstelle / Home-Office (16 Subnetze)</option>
+            </select>
+            <div class="text-xs text-slate-500">
+              Beispiel-Netz: <code class="font-bold text-blue-700" id="ipv6-example-net">2001:0db8:1234::/48</code>
+            </div>
+          </div>
+
+          <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-2">
+            <label class="block text-xs font-bold uppercase tracking-wider text-slate-700">
+              2. Gewünschte interne Subnetz-Größe:
+            </label>
+            <select id="ipv6-target-prefix" onchange="calcIpv6Subnet()" class="w-full p-2.5 rounded-lg border border-slate-300 font-bold bg-white text-slate-800 text-sm">
+              <option value="64" selected>/64 — IHK-Standard (Pflicht für SLAAC &amp; Router-Advertisements)</option>
+              <option value="60">/60 — Zusammenfassung für Abteilungen</option>
+              <option value="56">/56 — Übergreifendes Standort-Subnetz</option>
+            </select>
+            <div class="text-xs text-slate-500">
+              Hinweis: Für Endgeräte-Netze schreibt RFC 4291 immer <span class="font-bold text-slate-700">/64</span> vor!
+            </div>
+          </div>
+        </div>
+
+        <!-- Result Box -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="p-4 bg-blue-50 border border-blue-200 rounded-xl text-center">
+            <div class="text-xs font-bold uppercase text-blue-700">Subnetz-Bits (s)</div>
+            <div class="text-2xl font-black text-blue-900 mt-1" id="ipv6-res-bits">16 Bits</div>
+            <div class="text-xs text-blue-600 mt-1" id="ipv6-res-bits-calc">64 - 48 = 16</div>
+          </div>
+          <div class="p-4 bg-emerald-50 border border-emerald-200 rounded-xl text-center">
+            <div class="text-xs font-bold uppercase text-emerald-700">Anzahl Subnetze</div>
+            <div class="text-2xl font-black text-emerald-900 mt-1" id="ipv6-res-subnets">65.536</div>
+            <div class="text-xs text-emerald-600 mt-1" id="ipv6-res-subnets-calc">2^16 = 65.536 Subnetze</div>
+          </div>
+          <div class="p-4 bg-purple-50 border border-purple-200 rounded-xl text-center">
+            <div class="text-xs font-bold uppercase text-purple-700">Host-Bits (Interface ID)</div>
+            <div class="text-2xl font-black text-purple-900 mt-1" id="ipv6-res-hostbits">64 Bits</div>
+            <div class="text-xs text-purple-600 mt-1">128 - Zielpräfix</div>
+          </div>
+          <div class="p-4 bg-amber-50 border border-amber-200 rounded-xl text-center">
+            <div class="text-xs font-bold uppercase text-amber-700">Adressen pro Subnetz</div>
+            <div class="text-xl font-black text-amber-900 mt-1" id="ipv6-res-hosts">~ 1,84 × 10¹⁹</div>
+            <div class="text-xs text-amber-700 mt-1">2^64 (Trillionen)</div>
+          </div>
+        </div>
+
+        <!-- Visual Bit Bar -->
+        <div class="p-4 bg-slate-900 text-white rounded-xl space-y-3 font-mono text-xs">
+          <div class="font-bold text-slate-300 flex items-center justify-between">
+            <span>Aufbau der 128-Bit IPv6-Adresse im gewählten Schema:</span>
+            <span class="text-slate-400 text-xs">Gesamt: 128 Bit</span>
+          </div>
+          <div class="grid grid-cols-12 gap-1 text-center font-bold">
+            <div class="col-span-5 bg-blue-600 text-white p-2 rounded" id="ipv6-bar-prefix">
+              Routing-Präfix (/48)<br><span class="text-[10px] text-blue-200 font-normal">48 Bit (Provider)</span>
+            </div>
+            <div class="col-span-2 bg-emerald-600 text-white p-2 rounded" id="ipv6-bar-subnet">
+              Subnetz-ID<br><span class="text-[10px] text-emerald-200 font-normal">16 Bit (Kunde)</span>
+            </div>
+            <div class="col-span-5 bg-purple-600 text-white p-2 rounded" id="ipv6-bar-host">
+              Interface-ID / Host-Teil<br><span class="text-[10px] text-purple-200 font-normal">64 Bit (Geräte)</span>
+            </div>
+          </div>
+          <div class="text-slate-300 text-xs leading-relaxed pt-1" id="ipv6-subnet-examples">
+            <strong>Subnetz-Beispiele:</strong><br>
+            • Subnetz 0: <code>2001:0db8:1234:<strong>0000</strong>::/64</code><br>
+            • Subnetz 1: <code>2001:0db8:1234:<strong>0001</strong>::/64</code><br>
+            • Subnetz 2: <code>2001:0db8:1234:<strong>0002</strong>::/64</code><br>
+            • Letztes Subnetz: <code>2001:0db8:1234:<strong>ffff</strong>::/64</code>
+          </div>
+        </div>
+      </div>
+
+      <!-- RECHNER 2: INTERAKTIVER EUI-64 ALGORITHMUS (SCHRITT-FÜR-SCHRITT) -->
+      <div class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-200 pb-4">
+          <div>
+            <span class="text-xs font-bold uppercase tracking-wider text-indigo-600 bg-indigo-50 px-2.5 py-1 rounded-md border border-indigo-200">
+              Interaktiver Rechner 2
+            </span>
+            <h3 class="text-xl font-bold text-slate-900 mt-1">
+              🔄 EUI-64 Algorithmus: MAC-Adresse zu Interface-ID &amp; Link-Local
+            </h3>
+          </div>
+          <div class="text-xs text-slate-500 font-mono bg-slate-100 px-3 py-1.5 rounded-lg border border-slate-200">
+            1. 'FF:FE' in der Mitte • 2. 7. Bit invertieren
+          </div>
+        </div>
+
+        <div class="space-y-3">
+          <label class="block text-xs font-bold uppercase tracking-wider text-slate-700">
+            Eingabe der 48-Bit MAC-Adresse (IEEE 802):
+          </label>
+          <div class="flex flex-col sm:flex-row gap-3">
+            <input type="text" id="eui-mac-input" value="00:1A:2B:3C:4D:5E" oninput="calcEui64()" class="flex-1 p-3 rounded-xl border-2 border-indigo-300 font-mono text-base font-bold text-slate-800 uppercase focus:border-indigo-600 focus:outline-none" placeholder="z. B. 00:1A:2B:3C:4D:5E">
+            <button onclick="setEuiMac('00:1A:2B:3C:4D:5E')" class="px-3 py-2 text-xs font-bold rounded-lg border border-slate-300 bg-slate-100 hover:bg-slate-200">Preset 1 (00:1A...)</button>
+            <button onclick="setEuiMac('18:66:DA:12:34:56')" class="px-3 py-2 text-xs font-bold rounded-lg border border-slate-300 bg-slate-100 hover:bg-slate-200">Preset 2 (18:66...)</button>
+            <button onclick="setEuiMac('B4:2E:99:AA:BB:CC')" class="px-3 py-2 text-xs font-bold rounded-lg border border-slate-300 bg-slate-100 hover:bg-slate-200">Preset 3 (B4:2E...)</button>
+            <button onclick="setEuiMac('08:00:27:A1:B2:C3')" class="px-3 py-2 text-xs font-bold rounded-lg border border-slate-300 bg-slate-100 hover:bg-slate-200">Preset 4 (08:00...)</button>
+          </div>
+        </div>
+
+        <!-- 4-Schritte Visualisierung -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <!-- Schritt 1 & 2 -->
+          <div class="p-5 bg-slate-50 border border-slate-200 rounded-xl space-y-3">
+            <div class="font-bold text-slate-900 text-sm flex items-center gap-2">
+              <span class="w-6 h-6 rounded-full bg-indigo-600 text-white flex items-center justify-center text-xs font-bold">1</span>
+              Schritt 1: MAC-Adresse in der Mitte teilen
+            </div>
+            <div class="p-3 bg-white border border-slate-200 rounded-lg font-mono text-sm text-slate-700 flex justify-between">
+              <span>Hälfte 1 (OUI): <strong class="text-blue-700" id="eui-half1">00:1A:2B</strong></span>
+              <span>Hälfte 2 (NIC): <strong class="text-blue-700" id="eui-half2">3C:4D:5E</strong></span>
+            </div>
+
+            <div class="font-bold text-slate-900 text-sm flex items-center gap-2 pt-2">
+              <span class="w-6 h-6 rounded-full bg-indigo-600 text-white flex items-center justify-center text-xs font-bold">2</span>
+              Schritt 2: 16 Bit 0xFFFE in die Mitte einfügen
+            </div>
+            <div class="p-3 bg-white border border-slate-200 rounded-lg font-mono text-sm text-slate-700">
+              <span id="eui-inserted">001A:2B<span class="bg-amber-100 text-amber-800 font-bold px-1 rounded">FF:FE</span>3C:4D5E</span>
+              <div class="text-xs text-slate-500 mt-1">48 Bit MAC + 16 Bit FFFE = 64 Bit EUI-64</div>
+            </div>
+          </div>
+
+          <!-- Schritt 3: Bit Flip -->
+          <div class="p-5 bg-slate-50 border border-slate-200 rounded-xl space-y-3">
+            <div class="font-bold text-slate-900 text-sm flex items-center gap-2">
+              <span class="w-6 h-6 rounded-full bg-indigo-600 text-white flex items-center justify-center text-xs font-bold">3</span>
+              Schritt 3: 7. Bit (U/L-Bit) des 1. Bytes invertieren
+            </div>
+            
+            <div class="p-3 bg-white border border-slate-200 rounded-lg font-mono text-xs space-y-2">
+              <div class="flex justify-between items-center">
+                <span>1. Byte Original:</span>
+                <strong class="text-sm text-slate-800" id="eui-b1-orig-hex">0x00</strong>
+              </div>
+              <div class="grid grid-cols-8 gap-1 text-center font-bold" id="eui-orig-bits-row">
+                <!-- 8 bits -->
+              </div>
+              <div class="text-[10px] text-slate-500 flex justify-between px-1">
+                <span>Bit 0 (MSB)</span>
+                <span class="text-rose-600 font-bold">▲ Bit 7 (U/L-Bit)</span>
+                <span>Bit 7 (LSB)</span>
+              </div>
+
+              <div class="border-t border-slate-200 pt-2 flex justify-between items-center">
+                <span>1. Byte nach Invertierung:</span>
+                <strong class="text-sm text-emerald-700" id="eui-b1-flip-hex">0x02</strong>
+              </div>
+              <div class="grid grid-cols-8 gap-1 text-center font-bold" id="eui-flip-bits-row">
+                <!-- 8 bits flipped -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Resultat Box -->
+        <div class="p-5 bg-indigo-900 text-white rounded-xl space-y-3">
+          <div class="font-bold text-indigo-200 text-sm flex items-center gap-2">
+            <span class="w-6 h-6 rounded-full bg-indigo-500 text-white flex items-center justify-center text-xs font-bold">4</span>
+            Schritt 4: Resultierende EUI-64 Interface-ID &amp; Link-Local-Adresse
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3 font-mono text-sm">
+            <div class="p-3 bg-indigo-950/70 border border-indigo-700/50 rounded-lg">
+              <div class="text-xs text-indigo-300 font-bold uppercase">64-Bit EUI-64 Interface-ID:</div>
+              <div class="text-base font-bold text-emerald-300 mt-1" id="eui-res-iid">021a:2bff:fe3c:4d5e</div>
+            </div>
+            <div class="p-3 bg-indigo-950/70 border border-indigo-700/50 rounded-lg">
+              <div class="text-xs text-indigo-300 font-bold uppercase">Link-Local IPv6-Adresse (fe80::/64):</div>
+              <div class="text-base font-bold text-amber-300 mt-1" id="eui-res-linklocal">fe80::21a:2bff:fe3c:4d5e</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RECHNER 3: RFC 5952 KÜRZUNGSREGELN & ADRESSTYPEN -->
+      <div class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-200 pb-4">
+          <div>
+            <span class="text-xs font-bold uppercase tracking-wider text-teal-600 bg-teal-50 px-2.5 py-1 rounded-md border border-teal-200">
+              Interaktiver Rechner 3
+            </span>
+            <h3 class="text-xl font-bold text-slate-900 mt-1">
+              ✂️ RFC 5952 Kürzungs- &amp; Validierungsrechner
+            </h3>
+          </div>
+          <div class="text-xs text-slate-500 font-mono bg-slate-100 px-3 py-1.5 rounded-lg border border-slate-200">
+            Führende Nullen weg • Längste Nullfolge = :: (nur 1x!)
+          </div>
+        </div>
+
+        <div class="space-y-3">
+          <label class="block text-xs font-bold uppercase tracking-wider text-slate-700">
+            IPv6-Adresse eingeben oder Prüfungsfall wählen:
+          </label>
+          <div class="flex flex-col sm:flex-row gap-3">
+            <input type="text" id="ipv6-comp-input" value="2001:0db8:0000:0000:0000:0000:1428:57ab" oninput="calcIpv6Compress()" class="flex-1 p-3 rounded-xl border-2 border-teal-300 font-mono text-base font-bold text-slate-800 focus:border-teal-600 focus:outline-none" placeholder="z. B. 2001:0db8:0000:0000:0000:0000:1428:57ab">
+            <button onclick="setCompIpv6('2001:0db8:0000:0000:0000:0000:1428:57ab')" class="px-3 py-2 text-xs font-bold rounded-lg border border-slate-300 bg-slate-100 hover:bg-slate-200">Test 1 (GUA 4 Nullen)</button>
+            <button onclick="setCompIpv6('fe80:0000:0000:0000:020c:29ff:fe4b:8c91')" class="px-3 py-2 text-xs font-bold rounded-lg border border-slate-300 bg-slate-100 hover:bg-slate-200">Test 2 (Link-Local)</button>
+            <button onclick="setCompIpv6('2001:0db8:0000:0042:0000:0000:0000:0001')" class="px-3 py-2 text-xs font-bold rounded-lg border border-slate-300 bg-slate-100 hover:bg-slate-200">Test 3 (2 Nullfolgen)</button>
+            <button onclick="setCompIpv6('0000:0000:0000:0000:0000:0000:0000:0001')" class="px-3 py-2 text-xs font-bold rounded-lg border border-slate-300 bg-slate-100 hover:bg-slate-200">Test 4 (Loopback ::1)</button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 font-mono text-sm">
+          <div class="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-2">
+            <div class="text-xs font-bold uppercase text-slate-500">Unkomprimiert (8 Blöcke à 4 Hex-Ziffern):</div>
+            <div class="text-sm font-bold text-slate-800 break-all" id="ipv6-full-view">2001:0db8:0000:0000:0000:0000:1428:57ab</div>
+            <div class="text-xs text-slate-500">Genau 8 Blöcke = 128 Bit</div>
+          </div>
+          <div class="p-4 bg-teal-50 border border-teal-200 rounded-xl space-y-2">
+            <div class="text-xs font-bold uppercase text-teal-800">RFC 5952 Gekürzte Kurzform:</div>
+            <div class="text-base font-black text-teal-900 break-all" id="ipv6-short-view">2001:db8::1428:57ab</div>
+            <div class="text-xs text-teal-700 font-semibold" id="ipv6-type-badge">Global Unicast (GUA)</div>
+          </div>
+        </div>
+
+        <!-- Regel-Erklärung Box -->
+        <div class="p-4 bg-amber-50 border border-amber-200 rounded-xl text-xs space-y-2 text-amber-950">
+          <div class="font-bold text-amber-900 text-sm">Die 4 verbindlichen Kürzungsregeln nach RFC 5952:</div>
+          <ul class="list-disc list-inside space-y-1">
+            <li><strong>Regel 1 (Führende Nullen):</strong> In jedem 16-Bit-Block MÜSSEN führende Nullen weggelassen werden (aus <code>0db8</code> wird <code>db8</code>, aus <code>0001</code> wird <code>1</code>). Eine einzelne Null bleibt <code>0</code>.</li>
+            <li><strong>Regel 2 (Nullerfolge komprimieren):</strong> Die längste Folge aufeinanderfolgender Null-Blöcke (mindestens 2 Blöcke) MUSS durch <code>::</code> ersetzt werden.</li>
+            <li><strong>Regel 3 (Genau einmal ::):</strong> Das Symbol <code>::</code> darf in einer Adresse nur genau <strong>EINMAL</strong> vorkommen, da sonst die Anzahl der Blöcke mehrdeutig wäre!</li>
+            <li><strong>Regel 4 (Gleich lange Folgen &amp; Kleinbuchstaben):</strong> Sind zwei Nullfolgen gleich lang, MUSS die erste Folge gekürzt werden. Hex-Ziffern immer klein schreiben (a-f).</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- THEORIE & FORMELSAMMLUNG: IPV6 KAMMER-KOMPAKTWISSEN -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        
+        <!-- Adresstypen Matrix -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-4">
+          <div class="flex items-center gap-2 border-b border-slate-200 pb-3">
+            <span class="text-lg">🏷️</span>
+            <h4 class="font-bold text-slate-900">Alle IPv6-Adresstypen auf einen Blick (AP1-Standard)</h4>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-xs text-left text-slate-700">
+              <thead class="bg-slate-100 text-slate-900 font-bold uppercase">
+                <tr>
+                  <th class="p-2 rounded-l">Präfix</th>
+                  <th class="p-2">Typ</th>
+                  <th class="p-2">Scope / Routing</th>
+                  <th class="p-2 rounded-r">IPv4-Pendant</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100 font-mono">
+                <tr>
+                  <td class="p-2 font-bold text-blue-700">fe80::/10</td>
+                  <td class="p-2 font-sans font-semibold">Link-Local</td>
+                  <td class="p-2 font-sans">Nur lokaler Link (nicht geroutet)</td>
+                  <td class="p-2 font-sans">APIPA (169.254.x.x)</td>
+                </tr>
+                <tr>
+                  <td class="p-2 font-bold text-emerald-700">2000::/3</td>
+                  <td class="p-2 font-sans font-semibold">Global Unicast (GUA)</td>
+                  <td class="p-2 font-sans">Global im Internet geroutet</td>
+                  <td class="p-2 font-sans">Öffentliche IP</td>
+                </tr>
+                <tr>
+                  <td class="p-2 font-bold text-purple-700">fc00::/7 (fd00::/8)</td>
+                  <td class="p-2 font-sans font-semibold">Unique Local (ULA)</td>
+                  <td class="p-2 font-sans">Nur im Intranet geroutet</td>
+                  <td class="p-2 font-sans">RFC 1918 (192.168.x.x)</td>
+                </tr>
+                <tr>
+                  <td class="p-2 font-bold text-amber-700">ff00::/8</td>
+                  <td class="p-2 font-sans font-semibold">Multicast</td>
+                  <td class="p-2 font-sans">An Multicast-Gruppe (Ersatz für Broadcast!)</td>
+                  <td class="p-2 font-sans">Broadcast (255.255...)</td>
+                </tr>
+                <tr>
+                  <td class="p-2 font-bold text-slate-700">::1/128</td>
+                  <td class="p-2 font-sans font-semibold">Loopback</td>
+                  <td class="p-2 font-sans">Eigener Rechner (Host)</td>
+                  <td class="p-2 font-sans">127.0.0.1</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="text-xs text-rose-700 bg-rose-50 p-2.5 rounded-lg border border-rose-200">
+            ⚠️ <strong>Prüfungsfalle:</strong> In IPv6 gibt es <strong>KEINEN Broadcast</strong> mehr! Alles wird durch zielgerichtetes Multicast gelöst (z.B. <code>ff02::1</code> für alle Knoten, <code>ff02::2</code> für alle Router).
+          </div>
+        </div>
+
+        <!-- Autokonfig & Migration -->
+        <div class="bg-white border border-slate-200 rounded-2xl p-6 shadow-sm space-y-4">
+          <div class="flex items-center gap-2 border-b border-slate-200 pb-3">
+            <span class="text-lg">⚙️</span>
+            <h4 class="font-bold text-slate-900">Autokonfiguration (SLAAC) &amp; Migration (DS-Lite)</h4>
+          </div>
+          <div class="space-y-3 text-xs leading-relaxed text-slate-700">
+            <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
+              <strong class="text-slate-900 text-sm">1. SLAAC (Stateless Address Autoconfiguration)</strong>
+              <div>• Client fragt Router mit <strong>Router Solicitation (RS, ff02::2)</strong> via ICMPv6 an.</div>
+              <div>• Router antwortet mit <strong>Router Advertisement (RA, ff02::1)</strong> inklusive Präfix (/64).</div>
+              <div>• Client baut Interface-ID selbst (EUI-64 oder Privacy Extensions / RFC 4941).</div>
+              <div>• <strong>DAD (Duplicate Address Detection)</strong> prüft vor Inbetriebnahme auf IP-Kollisionen.</div>
+            </div>
+
+            <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
+              <strong class="text-slate-900 text-sm">2. DHCPv6: Stateless vs. Stateful</strong>
+              <div>• <strong>Stateless DHCPv6:</strong> IP-Adresse kommt via SLAAC; DHCP liefert nur Optionen (DNS, Domain-Liste).</div>
+              <div>• <strong>Stateful DHCPv6:</strong> Wie IPv4-DHCP – Server weist konkrete Adressen zu und verwaltet Leases.</div>
+            </div>
+
+            <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
+              <strong class="text-slate-900 text-sm">3. Dual-Stack vs. DS-Lite (Dual-Stack Lite)</strong>
+              <div>• <strong>Dual-Stack:</strong> Rechner/Router hat echte öffentliche IPv4- UND echte öffentliche IPv6-Adresse.</div>
+              <div>• <strong>DS-Lite:</strong> Kunde hat NUR native IPv6-Adresse. IPv4 wird im Router (B4) gekapselt und über Provider-Gateway (AFTR / CGNAT) getunnelt. Eingehende IPv4-Portweiterleitungen scheitern!</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
   </div>
 
   <script>
@@ -2113,6 +2503,109 @@
             (sc.overhead > 0 ? `2. Mit ${sc.overhead} % Overhead: ${mbit} × ${(1 + sc.overhead/100).toFixed(2)} = ${totalMbit} Mbit<br>` : '') +
             `3. Dauer: ${totalMbit} Mbit / ${sc.mbit_s} Mbit/s = <strong>${sc.s} Sekunden</strong>.`
         };
+      },
+
+      // 28. IPV6: SUBNETZ-BERECHNUNG (2^(64 - Präfix))
+      ipv6_subnets: function() {
+        const scenarios = [
+          { prefix: 48, subnets: 65536, name: "/48 Firmenanschluss (Standard)" },
+          { prefix: 56, subnets: 256, name: "/56 Business-Anschluss" },
+          { prefix: 60, subnets: 16, name: "/60 Filial-Anschluss" },
+          { prefix: 52, subnets: 4096, name: "/52 Campus-Netz" },
+          { prefix: 62, subnets: 4, name: "/62 Kleines Transfernetz" }
+        ];
+        const sc = scenarios[Math.floor(Math.random() * scenarios.length)];
+        const bits = 64 - sc.prefix;
+
+        return {
+          topic: "ipv6_subnets",
+          badge: "🌐 IPv6 Subnetting",
+          title: `Anzahl der /64-Subnetze aus einem /${sc.prefix}-Präfix ermitteln`,
+          question: `Ein Unternehmen erhält vom Provider das IPv6-Netzwerkpräfix <strong>2001:db8:a000::/${sc.prefix}</strong> (${sc.name}).<br><br>Für interne LAN-Segmente sollen standardkonforme <strong>/64-Subnetze</strong> eingerichtet werden.<br><br>Wie viele <strong>/64-Subnetze</strong> können aus diesem Präfix maximal gebildet werden?`,
+          unit: "Subnetze",
+          expected: sc.subnets,
+          tolerance: 0,
+          hint: `Subnetz-Bits = 64 - ${sc.prefix} = ${bits} Bits. Anzahl Subnetze = 2^${bits}`,
+          explanation: `Richtig! Rechenweg:<br>` +
+            `1. Subnetz-Bits: 64 Bit - ${sc.prefix} Bit = <strong>${bits} Bits</strong>.<br>` +
+            `2. Anzahl Subnetze: 2<sup>${bits}</sup> = <strong>${sc.subnets.toLocaleString('de-DE')} Subnetze</strong>.`
+        };
+      },
+
+      // 29. IPV6: EUI-64 7. BIT INVERTIEREN (U/L BIT-FLIP)
+      ipv6_eui64: function() {
+        const scenarios = [
+          { mac: "00:1A:2B:3C:4D:5E", origHex: "00", origBin: "00000000", flippedHex: "02", flippedBin: "00000010" },
+          { mac: "18:66:DA:12:34:56", origHex: "18", origBin: "00011000", flippedHex: "1A", flippedBin: "00011010" },
+          { mac: "B4:2E:99:AA:BB:CC", origHex: "B4", origBin: "10110100", flippedHex: "B6", flippedBin: "10110110" },
+          { mac: "08:00:27:A1:B2:C3", origHex: "08", origBin: "00001000", flippedHex: "0A", flippedBin: "00001010" },
+          { mac: "02:42:AC:11:00:02", origHex: "02", origBin: "00000010", flippedHex: "00", flippedBin: "00000000" },
+          { mac: "52:54:00:12:34:56", origHex: "52", origBin: "01010010", flippedHex: "50", flippedBin: "01010000" }
+        ];
+        const sc = scenarios[Math.floor(Math.random() * scenarios.length)];
+
+        return {
+          topic: "ipv6_eui64",
+          badge: "🔄 EUI-64 Bit-Flip",
+          isText: true,
+          title: `EUI-64 Algorithmus: 7. Bit (U/L-Bit) des 1. Bytes invertieren`,
+          question: `Gegeben ist die physikalische MAC-Adresse <strong>${sc.mac}</strong>.<br><br>Im modifizierten EUI-64 Verfahren wird das <strong>7. Bit (Universal/Local-Bit) des ersten Bytes (0x${sc.origHex})</strong> invertiert.<br><br>Wie lautet das erste Byte im <strong>zweistelligen Hexadezimalformat</strong> nach der Bit-Inversion?`,
+          unit: "Hex-Wert (z.B. 02 oder 1A)",
+          expected: sc.flippedHex,
+          altExpected: [sc.flippedHex.toLowerCase(), "0x" + sc.flippedHex, "0x" + sc.flippedHex.toLowerCase()],
+          hint: `1. Byte 0x${sc.origHex} binär = ${sc.origBin}. Das 7. Bit (2. Bit von links bzw. 2^1 Stelle) invertieren -> ${sc.flippedBin} -> hex?`,
+          explanation: `Richtig! Rechenweg:<br>` +
+            `1. Erstes Byte <strong>0x${sc.origHex}</strong> binär: <code>${sc.origBin.slice(0,4)} ${sc.origBin.slice(4)}</code><br>` +
+            `2. 7. Bit (Universal/Local-Bit, 2. Bit von links) invertieren: <code>${sc.flippedBin.slice(0,4)} ${sc.flippedBin.slice(4)}</code><br>` +
+            `3. Hex-Wert nach Invertierung: <strong>0x${sc.flippedHex}</strong>.`
+        };
+      },
+
+      // 30. IPV6: PRÄFIX- & HOST-BITS BERECHNUNG
+      ipv6_prefix_bits: function() {
+        const types = [
+          {
+            q: "Wie viele <strong>Bits</strong> umfasst eine vollständige <strong>IPv6-Adresse</strong> insgesamt?",
+            ans: 128,
+            hint: "8 Blöcke à 16 Bit = ?",
+            expl: "Eine IPv6-Adresse besteht aus 128 Bit (aufgeteilt in 8 Blöcke à 16 Bit / 4 Hex-Ziffern).",
+            unit: "Bits"
+          },
+          {
+            q: "Wie viele <strong>Host- / Interface-Bits</strong> verbleiben bei einem standardmäßigen <strong>/64-Subnetz</strong>?",
+            ans: 64,
+            hint: "Gesamtbits (128) - Präfixlänge (64) = ?",
+            expl: "Host-Bits = 128 Bit - 64 Bit = 64 Bits (Standardgröße der EUI-64 Interface-ID).",
+            unit: "Bits"
+          },
+          {
+            q: "Ein Kunde erhält vom Provider ein <strong>/56-Präfix</strong>. Wie viele <strong>Bits</strong> stehen für die Bildung von /64-Subnetz-IDs zur Verfügung?",
+            ans: 8,
+            hint: "Ziel-Präfix (64) - Provider-Präfix (56) = ?",
+            expl: "Subnetz-Bits = 64 Bit - 56 Bit = 8 Bits (ergibt 2^8 = 256 Subnetze).",
+            unit: "Bits"
+          },
+          {
+            q: "Ein Großunternehmen erhält ein <strong>/48-Präfix</strong>. Wie viele <strong>Bits</strong> stehen für die Bildung von /64-Subnetz-IDs zur Verfügung?",
+            ans: 16,
+            hint: "Ziel-Präfix (64) - Provider-Präfix (48) = ?",
+            expl: "Subnetz-Bits = 64 Bit - 48 Bit = 16 Bits (ergibt 2^16 = 65.536 Subnetze).",
+            unit: "Bits"
+          }
+        ];
+        const sc = types[Math.floor(Math.random() * types.length)];
+
+        return {
+          topic: "ipv6_prefix_bits",
+          badge: "🔢 IPv6 Bits & Maske",
+          title: "IPv6 Adressstruktur & Bit-Längen bestimmen",
+          question: `${sc.q}`,
+          unit: sc.unit,
+          expected: sc.ans,
+          tolerance: 0,
+          hint: sc.hint,
+          explanation: `Richtig! ${sc.expl}`
+        };
       }
     };
 
@@ -2466,6 +2959,224 @@
       updateConverterFromDec(v);
     }
 
+    // =========================================================================
+    // IPV6 SUBNET CALCULATOR
+    // =========================================================================
+    function calcIpv6Subnet() {
+      const baseEl = document.getElementById('ipv6-base-prefix');
+      const targetEl = document.getElementById('ipv6-target-prefix');
+      if (!baseEl || !targetEl) return;
+
+      const base = parseInt(baseEl.value, 10);
+      let target = parseInt(targetEl.value, 10);
+      if (target < base) {
+        target = base;
+        targetEl.value = String(base);
+      }
+
+      const subnetBits = target - base;
+      const subnets = Math.pow(2, subnetBits);
+      const hostBits = 128 - target;
+
+      const resBits = document.getElementById('ipv6-res-bits');
+      const resBitsCalc = document.getElementById('ipv6-res-bits-calc');
+      const resSubnets = document.getElementById('ipv6-res-subnets');
+      const resSubnetsCalc = document.getElementById('ipv6-res-subnets-calc');
+      const resHostbits = document.getElementById('ipv6-res-hostbits');
+      const resHosts = document.getElementById('ipv6-res-hosts');
+      const barPrefix = document.getElementById('ipv6-bar-prefix');
+      const barSubnet = document.getElementById('ipv6-bar-subnet');
+      const barHost = document.getElementById('ipv6-bar-host');
+      const exampleNet = document.getElementById('ipv6-example-net');
+
+      if (resBits) resBits.innerText = subnetBits + ' Bits';
+      if (resBitsCalc) resBitsCalc.innerText = `${target} - ${base} = ${subnetBits}`;
+      if (resSubnets) resSubnets.innerText = subnets.toLocaleString('de-DE');
+      if (resSubnetsCalc) resSubnetsCalc.innerText = `2^${subnetBits} = ${subnets.toLocaleString('de-DE')} Subnetze`;
+      if (resHostbits) resHostbits.innerText = hostBits + ' Bits';
+      if (resHosts) {
+        resHosts.innerText = hostBits === 64 ? '~ 1,84 × 10¹⁹' : (hostBits > 64 ? '> 1,84 × 10¹⁹' : Math.pow(2, hostBits).toLocaleString('de-DE'));
+      }
+
+      if (exampleNet) exampleNet.innerText = `2001:0db8:1234::/${base}`;
+      if (barPrefix) barPrefix.innerHTML = `Routing-Präfix (/${base})<br><span class="text-[10px] text-blue-200 font-normal">${base} Bit</span>`;
+      if (barSubnet) barSubnet.innerHTML = `Subnetz-ID<br><span class="text-[10px] text-emerald-200 font-normal">${subnetBits} Bit</span>`;
+      if (barHost) barHost.innerHTML = `Interface-ID<br><span class="text-[10px] text-purple-200 font-normal">${hostBits} Bit</span>`;
+    }
+
+    // =========================================================================
+    // EUI-64 CALCULATOR
+    // =========================================================================
+    function setEuiMac(mac) {
+      const inp = document.getElementById('eui-mac-input');
+      if (inp) {
+        inp.value = mac;
+        calcEui64();
+      }
+    }
+
+    function calcEui64() {
+      const inp = document.getElementById('eui-mac-input');
+      if (!inp) return;
+      let raw = inp.value.trim().replace(/[:-]/g, '').toUpperCase();
+      if (raw.length < 12) {
+        raw = raw.padEnd(12, '0');
+      } else if (raw.length > 12) {
+        raw = raw.slice(0, 12);
+      }
+
+      const h1 = raw.slice(0, 6);
+      const h2 = raw.slice(6, 12);
+      const h1Formatted = `${h1.slice(0,2)}:${h1.slice(2,4)}:${h1.slice(4,6)}`;
+      const h2Formatted = `${h2.slice(0,2)}:${h2.slice(2,4)}:${h2.slice(4,6)}`;
+
+      const half1El = document.getElementById('eui-half1');
+      const half2El = document.getElementById('eui-half2');
+      const insEl = document.getElementById('eui-inserted');
+      if (half1El) half1El.innerText = h1Formatted;
+      if (half2El) half2El.innerText = h2Formatted;
+      if (insEl) insEl.innerHTML = `${h1.slice(0,4)}:${h1.slice(4,6)}<span class="bg-amber-100 text-amber-800 font-bold px-1 rounded">FF:FE</span>${h2.slice(0,2)}:${h2.slice(2,6)}`;
+
+      // Byte 1 Bit-Flip
+      const byte1Hex = raw.slice(0, 2);
+      const byte1Val = parseInt(byte1Hex, 16) || 0;
+      const byte1Bin = byte1Val.toString(2).padStart(8, '0');
+
+      // Flip 7th bit (index 1 from left: 0-indexed MSB is 0, bit 7 in IEEE 802 is 2nd bit from MSB)
+      const flippedVal = byte1Val ^ 0x02;
+      const flippedHex = flippedVal.toString(16).padStart(2, '0').toUpperCase();
+      const flippedBin = flippedVal.toString(2).padStart(8, '0');
+
+      const origHexEl = document.getElementById('eui-b1-orig-hex');
+      const flipHexEl = document.getElementById('eui-b1-flip-hex');
+      if (origHexEl) origHexEl.innerText = `0x${byte1Hex} (${byte1Val} dez)`;
+      if (flipHexEl) flipHexEl.innerText = `0x${flippedHex} (${flippedVal} dez)`;
+
+      const origRow = document.getElementById('eui-orig-bits-row');
+      const flipRow = document.getElementById('eui-flip-bits-row');
+      if (origRow) {
+        origRow.innerHTML = byte1Bin.split('').map((b, idx) => {
+          const isUlb = idx === 1; // 7th bit from left (index 1)
+          return `<div class="p-1 rounded ${isUlb ? 'bg-rose-500 text-white border-2 border-rose-300' : 'bg-slate-200 text-slate-700'}">${b}</div>`;
+        }).join('');
+      }
+      if (flipRow) {
+        flipRow.innerHTML = flippedBin.split('').map((b, idx) => {
+          const isUlb = idx === 1;
+          return `<div class="p-1 rounded ${isUlb ? 'bg-emerald-600 text-white border-2 border-emerald-300' : 'bg-slate-200 text-slate-700'}">${b}</div>`;
+        }).join('');
+      }
+
+      // Resulting Interface ID: [flippedHex + raw[2..4]] : [raw[4..6] + "ff"] : ["fe" + raw[6..8]] : [raw[8..12]]
+      const iid = `${flippedHex.toLowerCase()}${raw.slice(2,4).toLowerCase()}:${raw.slice(4,6).toLowerCase()}ff:fe${raw.slice(6,8).toLowerCase()}:${raw.slice(8,12).toLowerCase()}`;
+      const resIid = document.getElementById('eui-res-iid');
+      const resLl = document.getElementById('eui-res-linklocal');
+      if (resIid) resIid.innerText = iid;
+      if (resLl) {
+        let firstBlock = `${flippedHex.toLowerCase()}${raw.slice(2,4).toLowerCase()}`.replace(/^0+/, '');
+        if (!firstBlock) firstBlock = '0';
+        resLl.innerText = `fe80::${firstBlock}:${raw.slice(4,6).toLowerCase()}ff:fe${raw.slice(6,8).toLowerCase()}:${raw.slice(8,12).toLowerCase()}`;
+      }
+    }
+
+    // =========================================================================
+    // IPV6 COMPRESSION CHECKER
+    // =========================================================================
+    function setCompIpv6(ip) {
+      const inp = document.getElementById('ipv6-comp-input');
+      if (inp) {
+        inp.value = ip;
+        calcIpv6Compress();
+      }
+    }
+
+    function calcIpv6Compress() {
+      const inp = document.getElementById('ipv6-comp-input');
+      if (!inp) return;
+      const raw = inp.value.trim().toLowerCase();
+
+      // Expansion to 8 blocks
+      let blocks = [];
+      if (raw.includes('::')) {
+        const parts = raw.split('::');
+        const left = parts[0] ? parts[0].split(':') : [];
+        const right = parts[1] ? parts[1].split(':') : [];
+        const missing = 8 - (left.length + right.length);
+        const middle = Array(Math.max(0, missing)).fill('0');
+        blocks = [...left, ...middle, ...right];
+      } else {
+        blocks = raw.split(':');
+      }
+
+      while (blocks.length < 8) blocks.push('0');
+      if (blocks.length > 8) blocks = blocks.slice(0, 8);
+
+      const expanded = blocks.map(b => b.padStart(4, '0')).join(':');
+      const fullView = document.getElementById('ipv6-full-view');
+      if (fullView) fullView.innerText = expanded;
+
+      // RFC 5952 Compression:
+      // 1. strip leading zeros in each block
+      const stripped = blocks.map(b => {
+        const s = b.replace(/^0+/, '');
+        return s === '' ? '0' : s;
+      });
+
+      // 2. find longest run of consecutive '0' blocks
+      let bestStart = -1;
+      let bestLen = 0;
+      let curStart = -1;
+      let curLen = 0;
+
+      for (let i = 0; i < stripped.length; i++) {
+        if (stripped[i] === '0') {
+          if (curStart === -1) {
+            curStart = i;
+            curLen = 1;
+          } else {
+            curLen++;
+          }
+          if (curLen > bestLen && curLen >= 2) {
+            bestLen = curLen;
+            bestStart = curStart;
+          }
+        } else {
+          curStart = -1;
+          curLen = 0;
+        }
+      }
+
+      let shortStr = '';
+      if (bestLen >= 2) {
+        const left = stripped.slice(0, bestStart).join(':');
+        const right = stripped.slice(bestStart + bestLen).join(':');
+        shortStr = `${left}::${right}`;
+      } else {
+        shortStr = stripped.join(':');
+      }
+
+      const shortView = document.getElementById('ipv6-short-view');
+      if (shortView) shortView.innerText = shortStr;
+
+      // Type Badge
+      const typeBadge = document.getElementById('ipv6-type-badge');
+      if (typeBadge) {
+        if (shortStr === '::1' || expanded === '0000:0000:0000:0000:0000:0000:0000:0001') {
+          typeBadge.innerText = 'Loopback-Adresse (::1/128)';
+        } else if (expanded.startsWith('fe80:')) {
+          typeBadge.innerText = 'Link-Local Unicast (fe80::/10)';
+        } else if (expanded.startsWith('fc') || expanded.startsWith('fd')) {
+          typeBadge.innerText = 'Unique Local Address / ULA (fc00::/7)';
+        } else if (expanded.startsWith('ff')) {
+          typeBadge.innerText = 'Multicast-Adresse (ff00::/8)';
+        } else if (expanded.startsWith('2') || expanded.startsWith('3')) {
+          typeBadge.innerText = 'Global Unicast / GUA (2000::/3)';
+        } else {
+          typeBadge.innerText = 'Spezielle / Reservierte IPv6-Adresse';
+        }
+      }
+    }
+
     window.addEventListener('DOMContentLoaded', () => {
       generateMiniTask();
       calcPower('S');
@@ -2473,6 +3184,9 @@
       calcPwr('U');
       calcRzEffizienz();
       updateConverterFromDec(215);
+      calcIpv6Subnet();
+      calcEui64();
+      calcIpv6Compress();
     });
   </script>
 </body>

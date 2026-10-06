@@ -147,9 +147,111 @@ var VisualDiagrams = {
     },
 
     // 3. ER-Diagramm (Entity-Relationship-Modell nach Chen: KUNDE, BESTELLUNG, ARTIKEL & Relationales 4-Tabellen-Schema)
-    getErdDiagramSvg: function() {
+    getErdDiagramSvg: function(showRelationalTables = true) {
+        const height = showRelationalTables ? 520 : 220;
+        const viewBox = showRelationalTables ? "0 0 960 520" : "0 0 960 220";
+
+        const relationalSection = showRelationalTables ? `
+            <!-- SECTION 2: RELATIONALE TABELLEN MIT 4 TABELLEN INKL. ZWISCHENTABELLE -->
+            <rect x="20" y="248" width="920" height="262" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5" rx="6" />
+            <rect x="20" y="248" width="920" height="26" fill="#f0fdf4" rx="6" />
+            <text x="35" y="266" font-family="sans-serif" font-size="12" font-weight="bold" fill="#15803d">2. LOGISCHES TABELLENSCHEMA: 4 TABELLEN (AUFLÖSUNG DER n:m-BEZIEHUNG DURCH ZWISCHENTABELLE 'tbl_Bestellposition')</text>
+
+            <!-- TABELLE 1: tbl_Kunde (1-Seite) -->
+            <g transform="translate(40, 285)">
+                <rect width="185" height="155" fill="#ffffff" stroke="#2563eb" stroke-width="2" rx="4" />
+                <rect width="185" height="26" fill="#2563eb" rx="4" />
+                <text x="92" y="18" font-family="sans-serif" font-size="12" font-weight="bold" fill="#ffffff" text-anchor="middle">tbl_Kunde</text>
+                
+                <rect x="6" y="32" width="173" height="22" fill="#fef9c3" stroke="#f59e0b" stroke-width="1" rx="3" />
+                <text x="12" y="47" font-family="monospace" font-size="10.5" font-weight="bold" fill="#854d0e">PK: KundenNr (INT)</text>
+                
+                <text x="12" y="75" font-family="monospace" font-size="10.5" fill="#334155">   Name (VARCHAR)</text>
+                <text x="12" y="98" font-family="monospace" font-size="10.5" fill="#334155">   Ort (VARCHAR)</text>
+                <text x="12" y="121" font-family="monospace" font-size="10.5" fill="#334155">   Strasse (VARCHAR)</text>
+                <rect x="6" y="132" width="173" height="18" fill="#f8fafc" rx="2" />
+                <text x="92" y="145" font-family="sans-serif" font-size="9" fill="#64748b" text-anchor="middle">1-Seite (zu Bestellung)</text>
+            </g>
+
+            <!-- RELATIONSPFEIL 1: tbl_Kunde (1) -> tbl_Bestellung (n) -->
+            <path d="M 225 330 C 245 330 245 330 260 330" fill="none" stroke="#2563eb" stroke-width="2" marker-end="url(#erd-fk-arrow)" />
+            <rect x="230" y="318" width="24" height="16" fill="#eff6ff" stroke="#2563eb" stroke-width="1" rx="2" />
+            <text x="242" y="330" font-family="sans-serif" font-size="9.5" font-weight="bold" fill="#1e40af" text-anchor="middle">1:n</text>
+
+            <!-- TABELLE 2: tbl_Bestellung (n-Seite zu Kunde, 1-Seite zu Position) -->
+            <g transform="translate(265, 285)">
+                <rect width="195" height="155" fill="#ffffff" stroke="#2563eb" stroke-width="2" rx="4" />
+                <rect width="195" height="26" fill="#2563eb" rx="4" />
+                <text x="97" y="18" font-family="sans-serif" font-size="12" font-weight="bold" fill="#ffffff" text-anchor="middle">tbl_Bestellung</text>
+                
+                <rect x="6" y="32" width="183" height="22" fill="#fef9c3" stroke="#f59e0b" stroke-width="1" rx="3" />
+                <text x="12" y="47" font-family="monospace" font-size="10.5" font-weight="bold" fill="#854d0e">PK: BestellNr (INT)</text>
+                
+                <rect x="6" y="58" width="183" height="22" fill="#eff6ff" stroke="#3b82f6" stroke-width="1" rx="3" />
+                <text x="12" y="73" font-family="monospace" font-size="10.5" font-weight="bold" fill="#1d4ed8">FK: FK_KundenNr (INT)</text>
+                
+                <text x="12" y="102" font-family="monospace" font-size="10.5" fill="#334155">   BestellDatum (DATE)</text>
+                <text x="12" y="123" font-family="monospace" font-size="10.5" fill="#334155">   Status (VARCHAR)</text>
+                <rect x="6" y="132" width="183" height="18" fill="#f8fafc" rx="2" />
+                <text x="97" y="145" font-family="sans-serif" font-size="9" fill="#64748b" text-anchor="middle">n-Seite (Kunde) | 1-Seite (Pos)</text>
+            </g>
+
+            <!-- RELATIONSPFEIL 2: tbl_Bestellung (1) -> tbl_Bestellposition (n) -->
+            <path d="M 460 330 C 480 330 480 330 495 330" fill="none" stroke="#2563eb" stroke-width="2" marker-end="url(#erd-fk-arrow)" />
+            <rect x="465" y="318" width="24" height="16" fill="#eff6ff" stroke="#2563eb" stroke-width="1" rx="2" />
+            <text x="477" y="330" font-family="sans-serif" font-size="9.5" font-weight="bold" fill="#1e40af" text-anchor="middle">1:n</text>
+
+            <!-- TABELLE 3: tbl_Bestellposition (ZWISCHENTABELLE FUER n:m AUFLOESUNG) -->
+            <g transform="translate(500, 280)">
+                <rect width="215" height="165" fill="#f0fdf4" stroke="#16a34a" stroke-width="2.5" rx="5" />
+                <rect width="215" height="28" fill="#15803d" rx="4" />
+                <text x="107" y="19" font-family="sans-serif" font-size="12" font-weight="bold" fill="#ffffff" text-anchor="middle">tbl_Bestellposition (Zwischentab.)</text>
+                
+                <!-- Zusammengesetzter Primärschlüssel (Composite Key) -->
+                <rect x="6" y="34" width="203" height="22" fill="#fef08a" stroke="#ca8a04" stroke-width="1.2" rx="3" />
+                <text x="10" y="49" font-family="monospace" font-size="10" font-weight="bold" fill="#713f12">PK+FK: FK_BestellNr (INT)</text>
+                
+                <rect x="6" y="60" width="203" height="22" fill="#fef08a" stroke="#ca8a04" stroke-width="1.2" rx="3" />
+                <text x="10" y="75" font-family="monospace" font-size="10" font-weight="bold" fill="#713f12">PK+FK: FK_ArtikelNr (INT)</text>
+                
+                <!-- Beziehungsattribut Menge -->
+                <rect x="6" y="86" width="203" height="22" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5" rx="3" />
+                <text x="10" y="101" font-family="monospace" font-size="10" font-weight="bold" fill="#14532d">Attr:  Menge (INT)</text>
+                
+                <text x="10" y="125" font-family="monospace" font-size="10" fill="#334155">       Einzelpreis (DECIMAL)</text>
+                <rect x="6" y="137" width="203" height="22" fill="#dcfce7" rx="2" />
+                <text x="107" y="152" font-family="sans-serif" font-size="9.5" font-weight="bold" fill="#15803d" text-anchor="middle">★ Löst n:m auf (Composite PK)</text>
+            </g>
+
+            <!-- RELATIONSPFEIL 3: tbl_Artikel (1) -> tbl_Bestellposition (n) -->
+            <path d="M 740 330 C 725 330 725 330 720 330" fill="none" stroke="#7c3aed" stroke-width="2" marker-end="url(#erd-fk-purple)" />
+            <rect x="720" y="318" width="24" height="16" fill="#f5f3ff" stroke="#7c3aed" stroke-width="1" rx="2" />
+            <text x="732" y="330" font-family="sans-serif" font-size="9.5" font-weight="bold" fill="#5b21b6" text-anchor="middle">n:1</text>
+
+            <!-- TABELLE 4: tbl_Artikel (1-Seite zu Position) -->
+            <g transform="translate(745, 285)">
+                <rect width="185" height="155" fill="#ffffff" stroke="#7c3aed" stroke-width="2" rx="4" />
+                <rect width="185" height="26" fill="#7c3aed" rx="4" />
+                <text x="92" y="18" font-family="sans-serif" font-size="12" font-weight="bold" fill="#ffffff" text-anchor="middle">tbl_Artikel</text>
+                
+                <rect x="6" y="32" width="173" height="22" fill="#fef9c3" stroke="#f59e0b" stroke-width="1" rx="3" />
+                <text x="12" y="47" font-family="monospace" font-size="10.5" font-weight="bold" fill="#854d0e">PK: ArtikelNr (INT)</text>
+                
+                <text x="12" y="75" font-family="monospace" font-size="10.5" fill="#334155">   Bezeichnung (VARCHAR)</text>
+                <text x="12" y="98" font-family="monospace" font-size="10.5" fill="#334155">   Preis (DECIMAL)</text>
+                <text x="12" y="121" font-family="monospace" font-size="10.5" fill="#334155">   Lagerbestand (INT)</text>
+                <rect x="6" y="132" width="173" height="18" fill="#f8fafc" rx="2" />
+                <text x="92" y="145" font-family="sans-serif" font-size="9" fill="#64748b" text-anchor="middle">1-Seite (zu Position)</text>
+            </g>
+
+            <!-- Unterer Merkkasten -->
+            <rect x="35" y="450" width="890" height="48" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1" rx="4" />
+            <text x="480" y="468" font-family="sans-serif" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle">IHK-Transformationsregeln vom ER-Modell ins relationale Schema:</text>
+            <text x="480" y="486" font-family="sans-serif" font-size="10" fill="#475569" text-anchor="middle">1:n Beziehung: PK der 1-Seite (KundenNr) wandert als FK (FK_KundenNr) in die n-Seite (tbl_Bestellung). | n:m Beziehung: Erfordert IMMER eine Zwischentabelle (tbl_Bestellposition) mit zusammengesetztem PK aus beiden FKs + Beziehungsattribut (Menge).</text>
+        ` : ``;
+
         return `
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 520" width="100%" height="100%">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="${viewBox}" width="100%" height="${height}">
             <defs>
                 <marker id="erd-fk-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
                     <path d="M 0 1 L 10 5 L 0 9 z" fill="#2563eb" />
@@ -158,17 +260,17 @@ var VisualDiagrams = {
                     <path d="M 0 1 L 10 5 L 0 9 z" fill="#7c3aed" />
                 </marker>
             </defs>
-            <rect width="960" height="520" fill="#f8fafc" rx="8" />
+            <rect width="960" height="${height}" fill="#f8fafc" rx="8" />
             
             <!-- SECTION 1: KONZEPTIONELLES MODELL CHEN-NOTATION (3 ENTITAETEN, 2 RAUTEN) -->
-            <rect x="20" y="10" width="920" height="230" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5" rx="6" />
+            <rect x="20" y="10" width="920" height="195" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5" rx="6" />
             <rect x="20" y="10" width="920" height="26" fill="#eff6ff" rx="6" />
-            <text x="35" y="28" font-family="sans-serif" font-size="12" font-weight="bold" fill="#1e40af">1. KONZEPTIONELLES DATENMODELL (CHEN-NOTATION): KUNDE (1) -[erteilt]- (n) BESTELLUNG (n) -[umfasst]- (m) ARTIKEL</text>
+            <text x="35" y="28" font-family="sans-serif" font-size="12" font-weight="bold" fill="#1e40af">KONZEPTIONELLES DATENMODELL (CHEN-NOTATION): KUNDE (1) -[erteilt]- (n) BESTELLUNG (n) -[umfasst]- (m) ARTIKEL</text>
 
             <!-- ENTITAET 1: KUNDE -->
             <line x1="55" y1="52" x2="80" y2="80" stroke="#94a3b8" stroke-width="1.5" />
             <ellipse cx="50" cy="46" rx="42" ry="16" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5" />
-            <text x="50" y="50" font-family="sans-serif" font-size="10" font-weight="bold" text-decoration="underline" text-anchor="middle" fill="#0f172a">KundenNr (PK)</text>
+            <text x="50" y="50" font-family="sans-serif" font-size="10.5" font-weight="bold" text-decoration="underline" text-anchor="middle" fill="#0f172a">KundenNr</text>
 
             <line x1="120" y1="56" x2="110" y2="80" stroke="#94a3b8" stroke-width="1.5" />
             <ellipse cx="125" cy="46" rx="30" ry="16" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5" />
@@ -195,7 +297,7 @@ var VisualDiagrams = {
             <!-- ENTITAET 2: BESTELLUNG -->
             <line x1="390" y1="56" x2="410" y2="80" stroke="#94a3b8" stroke-width="1.5" />
             <ellipse cx="385" cy="46" rx="42" ry="16" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5" />
-            <text x="385" y="50" font-family="sans-serif" font-size="10" font-weight="bold" text-decoration="underline" text-anchor="middle" fill="#0f172a">BestellNr (PK)</text>
+            <text x="385" y="50" font-family="sans-serif" font-size="10.5" font-weight="bold" text-decoration="underline" text-anchor="middle" fill="#0f172a">BestellNr</text>
 
             <line x1="455" y1="58" x2="455" y2="80" stroke="#94a3b8" stroke-width="1.5" />
             <ellipse cx="455" cy="46" rx="34" ry="16" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5" />
@@ -227,7 +329,7 @@ var VisualDiagrams = {
             <!-- ENTITAET 3: ARTIKEL -->
             <line x1="755" y1="58" x2="775" y2="80" stroke="#94a3b8" stroke-width="1.5" />
             <ellipse cx="750" cy="46" rx="42" ry="16" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5" />
-            <text x="750" y="50" font-family="sans-serif" font-size="10" font-weight="bold" text-decoration="underline" text-anchor="middle" fill="#0f172a">ArtikelNr (PK)</text>
+            <text x="750" y="50" font-family="sans-serif" font-size="10.5" font-weight="bold" text-decoration="underline" text-anchor="middle" fill="#0f172a">ArtikelNr</text>
 
             <line x1="820" y1="58" x2="815" y2="80" stroke="#94a3b8" stroke-width="1.5" />
             <ellipse cx="825" cy="46" rx="38" ry="16" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5" />
@@ -242,97 +344,10 @@ var VisualDiagrams = {
             <text x="807" y="110" font-family="sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#1e3a8a">ARTIKEL</text>
 
             <!-- Erklaerung Chen -->
-            <rect x="50" y="152" width="860" height="28" fill="#f8fafc" stroke="#e2e8f0" rx="4" />
-            <text x="480" y="171" font-family="sans-serif" font-size="11.5" fill="#475569" text-anchor="middle">Chen-Syntax: Rechtecke = Entitaeten | Rauten = Beziehungen (1:n, n:m) | Ovale = Attribute (unterstrichen = PK) | Gruen = Beziehungsattribut 'Menge' an Raute</text>
+            <rect x="50" y="148" width="860" height="26" fill="#f8fafc" stroke="#e2e8f0" rx="4" />
+            <text x="480" y="165" font-family="sans-serif" font-size="11" fill="#475569" text-anchor="middle">Chen-Syntax: Rechtecke = Entitaeten | Rauten = Beziehungen (1:n, n:m) | Ovale = Attribute (unterstrichen = Primärschlüssel)</text>
 
-            <!-- SECTION 2: RELATIONALE TABELLEN MIT 4 TABELLEN INKL. ZWISCHENTABELLE -->
-            <rect x="20" y="248" width="920" height="262" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5" rx="6" />
-            <rect x="20" y="248" width="920" height="26" fill="#f0fdf4" rx="6" />
-            <text x="35" y="266" font-family="sans-serif" font-size="12" font-weight="bold" fill="#166534">2. RELATIONALE DATENBANK-TABELLEN: 3 HAUPTTABELLEN + 1 ZWISCHENTABELLE ZUR N:M-AUFLOESUNG</text>
-
-            <!-- TABELLE 1: tbl_Kunde (Links) -->
-            <g transform="translate(35, 284)">
-                <rect width="185" height="155" fill="#ffffff" stroke="#2563eb" stroke-width="1.5" rx="4" />
-                <rect width="185" height="26" fill="#1e3a8a" rx="4" />
-                <text x="92" y="18" font-family="sans-serif" font-size="12" font-weight="bold" fill="#ffffff" text-anchor="middle">tbl_Kunde</text>
-                
-                <rect x="6" y="32" width="173" height="22" fill="#fef9c3" stroke="#f59e0b" stroke-width="1" rx="3" />
-                <text x="12" y="47" font-family="monospace" font-size="10.5" font-weight="bold" fill="#854d0e">PK: KundenNr (INT)</text>
-                
-                <text x="12" y="75" font-family="monospace" font-size="10.5" fill="#334155">   Name (VARCHAR)</text>
-                <text x="12" y="98" font-family="monospace" font-size="10.5" fill="#334155">   Ort (VARCHAR)</text>
-                <text x="12" y="121" font-family="monospace" font-size="10.5" fill="#334155">   Email (VARCHAR)</text>
-                <rect x="6" y="132" width="173" height="18" fill="#f8fafc" rx="2" />
-                <text x="92" y="145" font-family="sans-serif" font-size="9" fill="#64748b" text-anchor="middle">1-Seite der 1:n Beziehung</text>
-            </g>
-
-            <!-- 1:n FK Pfeil: tbl_Bestellung.FK_KundenNr -> tbl_Kunde.KundenNr -->
-            <path d="M 265 344 C 240 344, 235 316, 220 316" fill="none" stroke="#2563eb" stroke-width="2" marker-end="url(#erd-fk-arrow)" />
-            <rect x="228" y="320" width="36" height="14" fill="#ffffff" stroke="#2563eb" stroke-width="0.7" rx="2" />
-            <text x="246" y="331" font-family="sans-serif" font-size="8.5" font-weight="bold" fill="#2563eb" text-anchor="middle">1:n FK</text>
-
-            <!-- TABELLE 2: tbl_Bestellung (Mitte Links) -->
-            <g transform="translate(265, 284)">
-                <rect width="200" height="155" fill="#ffffff" stroke="#2563eb" stroke-width="1.5" rx="4" />
-                <rect width="200" height="26" fill="#1e3a8a" rx="4" />
-                <text x="100" y="18" font-family="sans-serif" font-size="12" font-weight="bold" fill="#ffffff" text-anchor="middle">tbl_Bestellung</text>
-                
-                <rect x="6" y="32" width="188" height="22" fill="#fef9c3" stroke="#f59e0b" stroke-width="1" rx="3" />
-                <text x="12" y="47" font-family="monospace" font-size="10.5" font-weight="bold" fill="#854d0e">PK: BestellNr (INT)</text>
-                
-                <rect x="6" y="58" width="188" height="22" fill="#eff6ff" stroke="#3b82f6" stroke-width="1" rx="3" />
-                <text x="12" y="73" font-family="monospace" font-size="10" font-weight="bold" fill="#1d4ed8">FK: FK_KundenNr (INT)</text>
-                
-                <text x="12" y="100" font-family="monospace" font-size="10.5" fill="#334155">   BestellDatum (DATE)</text>
-                <text x="12" y="122" font-family="monospace" font-size="10.5" fill="#334155">   Status (VARCHAR)</text>
-                <rect x="6" y="132" width="188" height="18" fill="#f8fafc" rx="2" />
-                <text x="100" y="145" font-family="sans-serif" font-size="9" fill="#64748b" text-anchor="middle">n-Seite (Kunde) | 1-Seite (Pos)</text>
-            </g>
-
-            <!-- n:m Aufloesung FK Pfeile -->
-            <path d="M 505 316 C 485 316, 480 316, 465 316" fill="none" stroke="#7c3aed" stroke-width="2" marker-end="url(#erd-fk-purple)" />
-            <path d="M 715 340 C 730 340, 735 316, 740 316" fill="none" stroke="#7c3aed" stroke-width="2" marker-end="url(#erd-fk-purple)" />
-
-            <!-- TABELLE 3: tbl_Bestellposition (Zwischentabelle / Assoziationstabelle n:m) -->
-            <g transform="translate(505, 284)">
-                <rect width="210" height="155" fill="#ffffff" stroke="#7c3aed" stroke-width="2" rx="4" />
-                <rect width="210" height="26" fill="#6d28d9" rx="4" />
-                <text x="105" y="18" font-family="sans-serif" font-size="11.5" font-weight="bold" fill="#ffffff" text-anchor="middle">tbl_Bestellposition (n:m)</text>
-                
-                <rect x="6" y="32" width="198" height="20" fill="#f3e8ff" stroke="#a855f7" stroke-width="1" rx="3" />
-                <text x="10" y="46" font-family="monospace" font-size="9.5" font-weight="bold" fill="#6b21a8">PK, FK: FK_BestellNr (INT)</text>
-                
-                <rect x="6" y="56" width="198" height="20" fill="#f3e8ff" stroke="#a855f7" stroke-width="1" rx="3" />
-                <text x="10" y="70" font-family="monospace" font-size="9.5" font-weight="bold" fill="#6b21a8">PK, FK: FK_ArtikelNr (INT)</text>
-                
-                <rect x="6" y="80" width="198" height="20" fill="#ecfdf5" stroke="#10b981" stroke-width="1" rx="3" />
-                <text x="10" y="94" font-family="monospace" font-size="9.5" font-weight="bold" fill="#065f46">   Menge (INT) [Bezieh.-Attr]</text>
-                
-                <text x="10" y="118" font-family="monospace" font-size="10" fill="#334155">   Einzelpreis (DECIMAL)</text>
-                <rect x="6" y="128" width="198" height="22" fill="#fdf4ff" stroke="#e879f9" stroke-width="1" rx="3" />
-                <text x="105" y="143" font-family="sans-serif" font-size="8.5" font-weight="bold" fill="#86198f" text-anchor="middle">Composite PK: (BestellNr + ArtikelNr)</text>
-            </g>
-
-            <!-- TABELLE 4: tbl_Artikel (Rechts) -->
-            <g transform="translate(740, 284)">
-                <rect width="185" height="155" fill="#ffffff" stroke="#2563eb" stroke-width="1.5" rx="4" />
-                <rect width="185" height="26" fill="#1e3a8a" rx="4" />
-                <text x="92" y="18" font-family="sans-serif" font-size="12" font-weight="bold" fill="#ffffff" text-anchor="middle">tbl_Artikel</text>
-                
-                <rect x="6" y="32" width="173" height="22" fill="#fef9c3" stroke="#f59e0b" stroke-width="1" rx="3" />
-                <text x="12" y="47" font-family="monospace" font-size="10.5" font-weight="bold" fill="#854d0e">PK: ArtikelNr (INT)</text>
-                
-                <text x="12" y="75" font-family="monospace" font-size="10.5" fill="#334155">   Bezeichnung (VARCHAR)</text>
-                <text x="12" y="98" font-family="monospace" font-size="10.5" fill="#334155">   Preis (DECIMAL)</text>
-                <text x="12" y="121" font-family="monospace" font-size="10.5" fill="#334155">   Lagerbestand (INT)</text>
-                <rect x="6" y="132" width="173" height="18" fill="#f8fafc" rx="2" />
-                <text x="92" y="145" font-family="sans-serif" font-size="9" fill="#64748b" text-anchor="middle">1-Seite (zu Position)</text>
-            </g>
-
-            <!-- Unterer Merkkasten -->
-            <rect x="35" y="450" width="890" height="48" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1" rx="4" />
-            <text x="480" y="468" font-family="sans-serif" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle">IHK-Transformationsregeln vom ER-Modell ins relationale Schema:</text>
-            <text x="480" y="486" font-family="sans-serif" font-size="10" fill="#475569" text-anchor="middle">1:n Beziehung: PK der 1-Seite (KundenNr) wandert als FK (FK_KundenNr) in die n-Seite (tbl_Bestellung). | n:m Beziehung: Erfordert IMMER eine Zwischentabelle (tbl_Bestellposition) mit zusammengesetztem PK aus beiden FKs + Beziehungsattribut (Menge).</text>
+            ${relationalSection}
         </svg>
         `;
     },
@@ -2006,7 +2021,14 @@ var VisualDiagrams = {
     },
 
     // 9. Marktpreisbildung
-    getMarktgleichgewichtSvg: function() {
+    getMarktgleichgewichtSvg: function(isSolution = false) {
+        const areaLabel = isSolution 
+            ? "◄ Nachfrageüberhang bei 20 €: 400 Stück (600 - 200) ►"
+            : "◄ Bereich bei 20 € (Angebot 200 vs. Nachfrage 600) ►";
+        const footerLabel = isSolution
+            ? "Preisbildung: Gleichgewichtspreis = 40 €, Marktumsatz = 40 € * 400 = 16.000 €"
+            : "Volkswirtschaftliches Marktmodell: Preisbildung durch Angebot und Nachfrage";
+
         return `
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 340" width="100%" height="100%">
             <rect width="680" height="340" fill="#f8fafc" rx="8" />
@@ -2045,9 +2067,9 @@ var VisualDiagrams = {
             <text x="365" y="155" font-family="sans-serif" font-size="13" font-weight="bold" fill="#dc2626">G (40 €, 400 Stk.)</text>
             
             <line x1="210" y1="220" x2="490" y2="220" stroke="#dc2626" stroke-width="3" />
-            <text x="350" y="212" font-family="sans-serif" font-size="11" font-weight="bold" fill="#dc2626" text-anchor="middle">◄ Nachfrageüberhang bei 20 €: 400 Stück (600 - 200) ►</text>
+            <text x="350" y="212" font-family="sans-serif" font-size="11" font-weight="bold" fill="#dc2626" text-anchor="middle">${areaLabel}</text>
             
-            <text x="350" y="328" font-family="sans-serif" font-size="12" font-style="italic" fill="#475569" text-anchor="middle">Preisbildung: Gleichgewichtspreis = 40 €, Marktumsatz = 40 € * 400 = 16.000 €</text>
+            <text x="350" y="328" font-family="sans-serif" font-size="12" font-style="italic" fill="#475569" text-anchor="middle">${footerLabel}</text>
         </svg>
         `;
     },
@@ -2124,7 +2146,7 @@ var VisualDiagrams = {
     },
 
     // 10b. Amortisationsdiagramm (Projektkosten vs. Ersparnisse / Break-Even-Dauer)
-    getAmortisationDiagramSvg: function(projektkosten = 1310, ersparnisMonat = 200, maxMonate = 10, maxBetrag = 2000, title = "A4 Amortisationsdauer: Projektkosten und Ersparnisse") {
+    getAmortisationDiagramSvg: function(projektkosten = 1310, ersparnisMonat = 200, maxMonate = 10, maxBetrag = 2000, title = "A4 Amortisationsdauer: Projektkosten und Ersparnisse", isSolution = false) {
         const x0 = 85;
         const y0 = 290;
         const w = 530; // Pixel-Breite für die Monats-Achse
@@ -2161,6 +2183,18 @@ var VisualDiagrams = {
             <text x="${xPos}" y="${y0 + 20}" font-family="sans-serif" font-size="11" fill="#475569" text-anchor="middle">${m}</text>
             <line x1="${xPos}" y1="${y0}" x2="${xPos}" y2="${y0 - h}" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="3,3" />`;
         }
+
+        const pointText = isSolution 
+            ? `🎯 Amortisation: ${amortMonate.toFixed(2).replace('.', ',')} Monate`
+            : `🎯 Schnittpunkt S`;
+        const xBadge = isSolution
+            ? `<rect x="${xSchnitt - 38}" y="${y0 + 4}" width="76" height="20" fill="#16a34a" rx="4" />
+               <text x="${xSchnitt}" y="${y0 + 18}" font-family="sans-serif" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">${amortMonate.toFixed(2).replace('.', ',')} Mon.</text>`
+            : `<text x="${xSchnitt}" y="${y0 + 18}" font-family="sans-serif" font-size="11" font-weight="bold" fill="#16a34a" text-anchor="middle">S</text>`;
+
+        const legendErsparnis = isSolution
+            ? `Ersparnisse (${ersparnisMonat} € / Mon.)`
+            : `Ersparnisse (kumuliert)`;
 
         return `
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 360" width="100%" height="100%">
@@ -2207,12 +2241,11 @@ var VisualDiagrams = {
             <circle cx="${xSchnitt}" cy="${ySchnitt}" r="11" fill="none" stroke="#16a34a" stroke-width="1.5" stroke-dasharray="2,2" />
             
             <!-- Hervorhebung auf X-Achse -->
-            <rect x="${xSchnitt - 38}" y="${y0 + 4}" width="76" height="20" fill="#16a34a" rx="4" />
-            <text x="${xSchnitt}" y="${y0 + 18}" font-family="sans-serif" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">${amortMonate.toFixed(2).replace('.', ',')} Mon.</text>
+            ${xBadge}
             
             <!-- Beschriftung des Schnittpunkts -->
             <rect x="${xSchnitt - 130}" y="${ySchnitt - 35}" width="165" height="24" fill="#1e293b" rx="4" opacity="0.9" />
-            <text x="${xSchnitt - 48}" y="${ySchnitt - 19}" font-family="sans-serif" font-size="11" font-weight="bold" fill="#f8fafc" text-anchor="middle">🎯 Amortisation: ${amortMonate.toFixed(2).replace('.', ',')} Monate</text>
+            <text x="${xSchnitt - 48}" y="${ySchnitt - 19}" font-family="sans-serif" font-size="11" font-weight="bold" fill="#f8fafc" text-anchor="middle">${pointText}</text>
 
             <!-- Legende Box oben links -->
             <g transform="translate(${x0 + 15}, 40)">
@@ -2220,14 +2253,32 @@ var VisualDiagrams = {
                 <line x1="12" y1="18" x2="35" y2="18" stroke="#2563eb" stroke-width="3" />
                 <text x="42" y="22" font-family="sans-serif" font-size="11" font-weight="600" fill="#1e293b">Projektkosten (${projektkosten.toLocaleString('de-DE')} €)</text>
                 <line x1="12" y1="36" x2="35" y2="36" stroke="#dc2626" stroke-width="3" />
-                <text x="42" y="40" font-family="sans-serif" font-size="11" font-weight="600" fill="#1e293b">Ersparnisse (${ersparnisMonat} € / Mon.)</text>
+                <text x="42" y="40" font-family="sans-serif" font-size="11" font-weight="600" fill="#1e293b">${legendErsparnis}</text>
             </g>
         </svg>
         `;
     },
 
     // 10c. Klassisches Break-Even-Diagramm (Gewinnschwellendiagramm mit Fixkosten, Gesamtkosten & Erlös)
-    getBreakEvenDiagramSvg: function() {
+    // 10c. Klassisches Break-Even-Diagramm (Gewinnschwellendiagramm mit Fixkosten, Gesamtkosten & Erlös)
+    getBreakEvenDiagramSvg: function(isSolution = false) {
+        const xTick600 = isSolution
+            ? `<text x="402" y="308" font-family="sans-serif" font-size="11" font-weight="bold" fill="#16a34a" text-anchor="middle">600 (BEP)</text>`
+            : `<text x="402" y="308" font-family="sans-serif" font-size="10" fill="#64748b" text-anchor="middle">600</text>`;
+
+        const bepPointLabel = isSolution
+            ? `🎯 Break-Even-Point: 600 Stück (30.000 €)`
+            : `🎯 Schnittpunkt S`;
+
+        const labelGraphA = isSolution ? "K_fix (15.000 €)" : "Graph A";
+        const labelGraphB = isSolution ? "K(x) Gesamtkosten" : "Graph B";
+        const labelGraphC = isSolution ? "E(x) Umsatzerlös" : "Graph C";
+        const fixBlockText = isSolution ? "Fixkostenblock (K_fix = 15.000 €)" : "Kostenblock (15.000 €)";
+
+        const bottomFormula = isSolution
+            ? "Gewinnschwelle: x_BEP = K_fix / (p - k_var) = 15.000 € / (50 € - 25 €) = 600 Stück"
+            : "Gewinnschwellenanalyse: Bestimmen Sie die Funktionsgraphen und berechnen Sie die Gewinnschwelle.";
+
         return `
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 360" width="100%" height="100%">
             <defs>
@@ -2255,13 +2306,13 @@ var VisualDiagrams = {
             <text x="90" y="308" font-family="sans-serif" font-size="10" fill="#64748b" text-anchor="middle">0</text>
             <text x="194" y="308" font-family="sans-serif" font-size="10" fill="#64748b" text-anchor="middle">200</text>
             <text x="298" y="308" font-family="sans-serif" font-size="10" fill="#64748b" text-anchor="middle">400</text>
-            <text x="402" y="308" font-family="sans-serif" font-size="11" font-weight="bold" fill="#16a34a" text-anchor="middle">600 (BEP)</text>
+            ${xTick600}
             <text x="506" y="308" font-family="sans-serif" font-size="10" fill="#64748b" text-anchor="middle">800</text>
             <text x="610" y="308" font-family="sans-serif" font-size="10" fill="#64748b" text-anchor="middle">1.000</text>
 
             <!-- Zonen -->
             <rect x="90" y="221" width="520" height="69" fill="rgba(148, 163, 184, 0.12)" />
-            <text x="160" y="255" font-family="sans-serif" font-size="11" fill="#475569" font-style="italic">Fixkostenblock (K_fix = 15.000 €)</text>
+            <text x="160" y="255" font-family="sans-serif" font-size="11" fill="#475569" font-style="italic">${fixBlockText}</text>
 
             <polygon points="90,221 90,290 402,152" fill="rgba(239, 68, 68, 0.12)" />
             <text x="220" y="210" font-family="sans-serif" font-size="11" font-weight="bold" fill="#dc2626">Verlustzone</text>
@@ -2278,15 +2329,15 @@ var VisualDiagrams = {
 
             <!-- 1. Fixkosten Kfix = 15.000 € -->
             <line x1="90" y1="221" x2="610" y2="221" stroke="#64748b" stroke-width="2" stroke-dasharray="4,3" />
-            <text x="615" y="225" font-family="sans-serif" font-size="11" font-weight="bold" fill="#64748b">K_fix (15.000 €)</text>
+            <text x="615" y="225" font-family="sans-serif" font-size="11" font-weight="bold" fill="#64748b">${labelGraphA}</text>
 
             <!-- 2. Gesamtkosten K(x) = 15.000 + 25*x -->
             <line x1="90" y1="221" x2="610" y2="106" stroke="#2563eb" stroke-width="3" />
-            <text x="615" y="108" font-family="sans-serif" font-size="11" font-weight="bold" fill="#2563eb">K(x) Gesamtkosten</text>
+            <text x="615" y="108" font-family="sans-serif" font-size="11" font-weight="bold" fill="#2563eb">${labelGraphB}</text>
 
             <!-- 3. Erlöskurve E(x) = 50*x -->
             <line x1="90" y1="290" x2="610" y2="60" stroke="#ea580c" stroke-width="3" />
-            <text x="615" y="62" font-family="sans-serif" font-size="11" font-weight="bold" fill="#ea580c">E(x) Umsatzerlös</text>
+            <text x="615" y="62" font-family="sans-serif" font-size="11" font-weight="bold" fill="#ea580c">${labelGraphC}</text>
 
             <!-- BEP Schnittpunkt bei x = 600 Stk., y = 30.000 € -->
             <line x1="402" y1="152" x2="402" y2="290" stroke="#16a34a" stroke-width="1.8" stroke-dasharray="4,4" />
@@ -2294,18 +2345,33 @@ var VisualDiagrams = {
             <circle cx="402" cy="152" r="7" fill="#16a34a" stroke="#ffffff" stroke-width="2" />
             
             <rect x="300" y="125" width="200" height="24" fill="#0f172a" rx="4" opacity="0.9" />
-            <text x="400" y="141" font-family="sans-serif" font-size="11" font-weight="bold" fill="#f8fafc" text-anchor="middle">🎯 Break-Even-Point: 600 Stück (30.000 €)</text>
+            <text x="400" y="141" font-family="sans-serif" font-size="11" font-weight="bold" fill="#f8fafc" text-anchor="middle">${bepPointLabel}</text>
             <text x="80" y="156" font-family="sans-serif" font-size="10" font-weight="bold" fill="#16a34a" text-anchor="end">30.000 €</text>
 
             <!-- Formel-Hinweis Box unten -->
-            <rect x="100" y="338" width="500" height="18" fill="#f8fafc" />
-            <text x="350" y="350" font-family="sans-serif" font-size="10.5" fill="#475569" font-style="italic" text-anchor="middle">Gewinnschwelle: x_BEP = K_fix / (p - k_var) = 15.000 € / (50 € - 25 €) = 600 Stück</text>
+            <rect x="50" y="338" width="580" height="18" fill="#f8fafc" />
+            <text x="340" y="350" font-family="sans-serif" font-size="10.5" fill="#475569" font-style="italic" text-anchor="middle">${bottomFormula}</text>
         </svg>
         `;
     },
 
     // 10d. Kostenvergleichsrechnung (Kauf vs. Cloud-Miete / Make-or-Buy)
-    getKostenvergleichDiagramSvg: function() {
+    getKostenvergleichDiagramSvg: function(isSolution = false) {
+        const xTick15 = isSolution
+            ? `<text x="415" y="306" font-family="sans-serif" font-size="11" font-weight="bold" fill="#7c3aed" text-anchor="middle">15 (Kritisch)</text>`
+            : `<text x="415" y="306" font-family="sans-serif" font-size="10" fill="#64748b" text-anchor="middle">15</text>`;
+
+        const kvPointLabel = isSolution
+            ? `⚖️ Kritische Zeit: 15 Monate (22.500 €)`
+            : `⚖️ Schnittpunkt S`;
+
+        const shadedArea1 = isSolution
+            ? "Cloud günstiger (Monat 0 bis 15)"
+            : "Bereich 1 (Monat 0 bis 15)";
+        const shadedArea2 = isSolution
+            ? "Kauf günstiger (ab Monat 15)"
+            : "Bereich 2 (ab Monat 15)";
+
         return `
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 360" width="100%" height="100%">
             <defs>
@@ -2322,11 +2388,11 @@ var VisualDiagrams = {
             <line x1="90" y1="290" x2="630" y2="290" stroke="#334155" stroke-width="2" marker-end="url(#kv-arr)" />
             <text x="350" y="328" font-family="sans-serif" font-size="12" font-weight="bold" fill="#334155" text-anchor="middle">Laufzeit in Monaten</text>
 
-            <!-- Ticks X: 0, 6, 12, 15 (kritisch), 18, 24 -->
+            <!-- Ticks X: 0, 6, 12, 15, 18, 24 -->
             <text x="90" y="306" font-family="sans-serif" font-size="10" fill="#64748b" text-anchor="middle">0</text>
             <text x="220" y="306" font-family="sans-serif" font-size="10" fill="#64748b" text-anchor="middle">6</text>
             <text x="350" y="306" font-family="sans-serif" font-size="10" fill="#64748b" text-anchor="middle">12</text>
-            <text x="415" y="306" font-family="sans-serif" font-size="11" font-weight="bold" fill="#7c3aed" text-anchor="middle">15 (Kritisch)</text>
+            ${xTick15}
             <text x="480" y="306" font-family="sans-serif" font-size="10" fill="#64748b" text-anchor="middle">18</text>
             <text x="610" y="306" font-family="sans-serif" font-size="10" fill="#64748b" text-anchor="middle">24</text>
 
@@ -2342,10 +2408,10 @@ var VisualDiagrams = {
 
             <!-- Schattierung -->
             <polygon points="90,290 90,175 415,146" fill="rgba(22, 163, 74, 0.08)" />
-            <text x="210" y="210" font-family="sans-serif" font-size="11" font-weight="bold" fill="#16a34a">Cloud günstiger (Monat 0 bis 15)</text>
+            <text x="210" y="210" font-family="sans-serif" font-size="11" font-weight="bold" fill="#16a34a">${shadedArea1}</text>
 
             <polygon points="415,146 610,60 610,129" fill="rgba(37, 99, 235, 0.10)" />
-            <text x="470" y="115" font-family="sans-serif" font-size="11" font-weight="bold" fill="#2563eb">Kauf günstiger (ab Monat 15)</text>
+            <text x="470" y="115" font-family="sans-serif" font-size="11" font-weight="bold" fill="#2563eb">${shadedArea2}</text>
 
             <!-- Option A: Kauf On-Premises -->
             <line x1="90" y1="175" x2="610" y2="129" stroke="#2563eb" stroke-width="3" />
@@ -2361,7 +2427,7 @@ var VisualDiagrams = {
             <circle cx="415" cy="146" r="6" fill="#7c3aed" stroke="#ffffff" stroke-width="2" />
             
             <rect x="290" y="118" width="220" height="24" fill="#1e293b" rx="4" opacity="0.95" />
-            <text x="400" y="134" font-family="sans-serif" font-size="11" font-weight="bold" fill="#f8fafc" text-anchor="middle">⚖️ Kritische Zeit: 15 Monate (22.500 €)</text>
+            <text x="400" y="134" font-family="sans-serif" font-size="11" font-weight="bold" fill="#f8fafc" text-anchor="middle">${kvPointLabel}</text>
             <text x="80" y="150" font-family="sans-serif" font-size="10" font-weight="bold" fill="#7c3aed" text-anchor="end">22.500 €</text>
 
             <!-- Legende Box oben links -->

@@ -6,7 +6,26 @@
 
 var ExamSvgs = {
     // RJ45 Connector comparison (Intact latch vs broken latch)
-    getRJ45ComparisonSvg: function() {
+    // RJ45 Connector comparison (Intact latch vs broken latch)
+    getRJ45ComparisonSvg: function(isSolution = false) {
+        const title1 = isSolution ? "Stecker 1: Intaktes Patchkabel (Einwandfrei)" : "Stecker 1: Referenzkabel";
+        const title2 = isSolution ? "Stecker 2: Beschädigtes Patchkabel (Fehlerursache)" : "Stecker 2: Vor-Ort-Kabel (Prüfling)";
+        const titleColor1 = isSolution ? "#047857" : "#1e293b";
+        const titleColor2 = isSolution ? "#b91c1c" : "#1e293b";
+
+        const annotation1 = isSolution ? `
+                <!-- Hinweispfeil -->
+                <line x1="240" y1="22" x2="290" y2="22" stroke="#059669" stroke-width="1.5"/>
+                <text x="298" y="26" font-size="11" font-weight="bold" fill="#047857">✓ Intakte Rastnase (Federmechanismus arretiert fest in Datendose)</text>
+        ` : ``;
+
+        const annotation2 = isSolution ? `
+                <!-- Hinweispfeil -->
+                <line x1="200" y1="36" x2="290" y2="36" stroke="#dc2626" stroke-width="1.5"/>
+                <circle cx="180" cy="40" r="10" fill="none" stroke="#dc2626" stroke-width="2" stroke-dasharray="2 2"/>
+                <text x="298" y="40" font-size="11" font-weight="bold" fill="#b91c1c">✗ Rastnase komplett abgebrochen! (Kein mechanischer Halt, Rutscht heraus)</text>
+        ` : ``;
+
         return `
         <svg viewBox="0 0 700 240" width="100%" height="240" xmlns="http://www.w3.org/2000/svg" style="background:#f8fafc; border:1px solid #cbd5e1; border-radius:6px; font-family:sans-serif;">
             <!-- Background & Title -->
@@ -15,7 +34,7 @@ var ExamSvgs = {
             
             <!-- Stecker 1: Intakter Stecker mit Verriegelungsnase -->
             <g transform="translate(40, 45)">
-                <text x="0" y="16" font-size="12" font-weight="bold" fill="#047857">Stecker 1: Intaktes Patchkabel (Einwandfrei)</text>
+                <text x="0" y="16" font-size="12" font-weight="bold" fill="${titleColor1}">${title1}</text>
                 <!-- Boot / Knickschutztülle -->
                 <path d="M 80 40 Q 110 35 150 48 L 150 72 Q 110 85 80 80 Z" fill="#94a3b8" stroke="#475569" stroke-width="1.5"/>
                 <!-- Kabelstrang -->
@@ -38,15 +57,12 @@ var ExamSvgs = {
                 
                 <!-- Knickschutz-Überwölbung -->
                 <path d="M 125 43 Q 145 28 165 43" fill="none" stroke="#64748b" stroke-width="3"/>
-                
-                <!-- Hinweispfeil -->
-                <line x1="240" y1="22" x2="290" y2="22" stroke="#059669" stroke-width="1.5"/>
-                <text x="298" y="26" font-size="11" font-weight="bold" fill="#047857">✓ Intakte Rastnase (Federmechanismus arretiert fest in Datendose)</text>
+                ${annotation1}
             </g>
 
             <!-- Stecker 2: Beschädigter Stecker mit abgebrochener Rastnase -->
             <g transform="translate(40, 135)">
-                <text x="0" y="16" font-size="12" font-weight="bold" fill="#b91c1c">Stecker 2: Beschädigtes Patchkabel (Fehlerursache)</text>
+                <text x="0" y="16" font-size="12" font-weight="bold" fill="${titleColor2}">${title2}</text>
                 <!-- Boot / Knickschutztülle -->
                 <path d="M 80 40 Q 110 35 150 48 L 150 72 Q 110 85 80 80 Z" fill="#94a3b8" stroke="#475569" stroke-width="1.5"/>
                 <!-- Kabelstrang -->
@@ -61,14 +77,10 @@ var ExamSvgs = {
                 <rect x="210" y="47" width="12" height="26" fill="#eab308" stroke="#ca8a04" stroke-width="1"/>
                 
                 <!-- ABGEBROCHENE RASTNASE (Nur Stummel vorhanden) -->
-                <path d="M 170 44 L 178 40 L 176 38 L 168 42 Z" fill="#ef4444" stroke="#b91c1c" stroke-width="1.5"/>
+                <path d="M 170 44 L 178 40 L 176 38 L 168 42 Z" fill="#64748b" stroke="#334155" stroke-width="1.5"/>
                 <!-- Bruchstelle gezackt -->
-                <path d="M 178 40 L 180 38 L 182 41 L 184 39" fill="none" stroke="#dc2626" stroke-width="2"/>
-                
-                <!-- Hinweispfeil -->
-                <line x1="200" y1="36" x2="290" y2="36" stroke="#dc2626" stroke-width="1.5"/>
-                <circle cx="180" cy="40" r="10" fill="none" stroke="#dc2626" stroke-width="2" stroke-dasharray="2 2"/>
-                <text x="298" y="40" font-size="11" font-weight="bold" fill="#b91c1c">✗ Rastnase komplett abgebrochen! (Kein mechanischer Halt, Rutscht heraus)</text>
+                <path d="M 178 40 L 180 38 L 182 41 L 184 39" fill="none" stroke="#64748b" stroke-width="2"/>
+                ${annotation2}
             </g>
         </svg>
         `;
@@ -285,7 +297,27 @@ var ExamSvgs = {
     },
 
     // Asymmetric Encryption diagram (Public/Private Key)
-    getAsymmetricEncryptionSvg: function() {
+    getAsymmetricEncryptionSvg: function(isSolution = false) {
+        const encText = isSolution ? `
+            <text x="300" y="78" font-size="11" font-weight="bold" text-anchor="middle" fill="#92400e">Verschlüsselung</text>
+            <text x="300" y="96" font-size="10" text-anchor="middle" fill="#b45309">mit ÖFFENTLICHEM</text>
+            <text x="300" y="112" font-size="10" font-weight="bold" text-anchor="middle" fill="#b45309">Schlüssel des Mandanten 🔑</text>
+        ` : `
+            <text x="300" y="78" font-size="11" font-weight="bold" text-anchor="middle" fill="#92400e">Verschlüsselung</text>
+            <text x="300" y="98" font-size="11" font-weight="bold" text-anchor="middle" fill="#b45309">Schlüssel: [ ? ] 🔑</text>
+        `;
+
+        const decText = isSolution ? `
+            <text x="550" y="70" font-size="12" font-weight="bold" text-anchor="middle" fill="#065f46">Empfänger (Mandant)</text>
+            <text x="550" y="92" font-size="10" text-anchor="middle" fill="#047857">Entschlüsselung nur mit</text>
+            <text x="550" y="108" font-size="11" font-weight="bold" text-anchor="middle" fill="#047857">PRIVATEM Schlüssel 🗝️</text>
+            <text x="550" y="128" font-size="10" text-anchor="middle" fill="#15803d">➔ Klartext hergestellt</text>
+        ` : `
+            <text x="550" y="70" font-size="12" font-weight="bold" text-anchor="middle" fill="#065f46">Empfänger (Mandant)</text>
+            <text x="550" y="94" font-size="11" font-weight="bold" text-anchor="middle" fill="#047857">Entschlüsselung mit:</text>
+            <text x="550" y="114" font-size="11" font-weight="bold" text-anchor="middle" fill="#047857">Schlüssel: [ ? ] 🗝️</text>
+        `;
+
         return `
         <svg viewBox="0 0 680 180" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" style="background:#ffffff; border:1px solid #000; font-family:'Segoe UI', sans-serif;">
             <text x="16" y="22" font-size="12" font-weight="bold" fill="#000000">Asymmetrisches Kryptoverfahren: Vertrauliche Übertragung (Anwalt ➔ Mandant)</text>
@@ -296,14 +328,12 @@ var ExamSvgs = {
             <text x="85" y="95" font-size="11" text-anchor="middle" fill="#334155">Klartext-Dokument</text>
             <text x="85" y="115" font-size="10" font-style="italic" text-anchor="middle" fill="#64748b">"Vertrag.pdf"</text>
             
-            <!-- Arrow 1: Encryption with Receiver's Public Key -->
+            <!-- Arrow 1: Encryption -->
             <line x1="150" y1="95" x2="230" y2="95" stroke="#000" stroke-width="2"/>
             
             <!-- Encryption Box -->
             <rect x="230" y="55" width="140" height="80" fill="#fef3c7" stroke="#d97706" stroke-width="1.5" rx="4"/>
-            <text x="300" y="78" font-size="11" font-weight="bold" text-anchor="middle" fill="#92400e">Verschlüsselung</text>
-            <text x="300" y="96" font-size="10" text-anchor="middle" fill="#b45309">mit ÖFFENTLICHEM</text>
-            <text x="300" y="112" font-size="10" font-weight="bold" text-anchor="middle" fill="#b45309">Schlüssel des Mandanten 🔑</text>
+            ${encText}
 
             <!-- Arrow 2: Ciphertext transmission -->
             <line x1="370" y1="95" x2="450" y2="95" stroke="#000" stroke-width="2"/>
@@ -311,10 +341,7 @@ var ExamSvgs = {
 
             <!-- Decryption Box & Receiver -->
             <rect x="450" y="45" width="200" height="100" fill="#ecfdf5" stroke="#059669" stroke-width="1.5" rx="4"/>
-            <text x="550" y="70" font-size="12" font-weight="bold" text-anchor="middle" fill="#065f46">Empfänger (Mandant)</text>
-            <text x="550" y="92" font-size="10" text-anchor="middle" fill="#047857">Entschlüsselung nur mit</text>
-            <text x="550" y="108" font-size="11" font-weight="bold" text-anchor="middle" fill="#047857">PRIVATEM Schlüssel 🗝️</text>
-            <text x="550" y="128" font-size="10" text-anchor="middle" fill="#15803d">➔ Klartext hergestellt</text>
+            ${decText}
         </svg>
         `;
     }
@@ -511,7 +538,8 @@ var EXAM_SETS = [
                         points: 4,
                         type: "lines",
                         linesCount: 4,
-                        svgIllustration: ExamSvgs.getRJ45ComparisonSvg(),
+                        svgIllustration: ExamSvgs.getRJ45ComparisonSvg(false),
+                        solutionSvgIllustration: ExamSvgs.getRJ45ComparisonSvg(true),
                         stencil: "HARDWARE-DIAGNOSE / RJ45-VERBINDUNG",
                         text: "Sie führen eine Sichtprüfung des RJ45-Patchkabels durch (siehe Abbildung).\nBenennen Sie die an Stecker 2 sichtbare mechanische Beschädigung und erläutern Sie, welche Auswirkungen dieser Defekt im laufenden Bürobetrieb auf die Netzwerkverbindung hat.",
                         solution: "Beschädigung: Die Rastnase (Halteclip / Verriegelungslasche) des RJ45-Steckers ist abgebrochen.\nAuswirkungen: Der Stecker arretiert nicht mehr fest in der Datendose/Patchpanel. Bereits minimale Erschütterungen oder Kabelzug führen zum Herausrutschen des Steckers, was sporadische Verbindungsabbrüche, Paketverluste oder vollständigen Netzwerkausfall verursacht."
@@ -1525,7 +1553,8 @@ var EXAM_SETS = [
                         points: 12,
                         type: "lines",
                         linesCount: 6,
-                        svgIllustration: ExamSvgs.getAsymmetricEncryptionSvg(),
+                        svgIllustration: ExamSvgs.getAsymmetricEncryptionSvg(false),
+                        solutionSvgIllustration: ExamSvgs.getAsymmetricEncryptionSvg(true),
                         stencil: "KRYPTOGRAFIE / ASYMMETRISCHE VERSCHLÜSSELUNG",
                         text: "Ein Anwalt möchte einem Mandanten vertrauliche Vertragsentwürfe per E-Mail senden (siehe Abbildung).\naa) Erläutern Sie Schritt für Schritt, welcher Schlüssel zur Verschlüsselung und welcher zur Entschlüsselung verwendet werden muss, damit nur der Mandant die Nachricht lesen kann (6 Punkte).\nab) Unterscheiden Sie das asymmetrische Verfahren von der symmetrischen Verschlüsselung (z. B. AES) hinsichtlich Geschwindigkeit und Schlüsselverteilung (6 Punkte).",
                         solution: "aa) Ablauf der Vertraulichkeitsverschlüsselung:\n1. Der Anwalt verschlüsselt das Dokument mit dem ÖFFENTLICHEN Schlüssel (Public Key) des Mandanten.\n2. Die verschlüsselte Datei (Chiffrat) wird über das unsichere Internet übertragen.\n3. Nur der Mandant kann die Datei mit seinem streng geheimen PRIVATEN Schlüssel (Private Key) entschlüsseln. Selbst der Anwalt kann das Chiffrat nach dem Verschlüsseln nicht mehr öffnen.\n\nab) Vergleich:\n• Symmetrisch (z. B. AES-256): Ein einziger geheimer Schlüssel für Verschlüsselung und Entschlüsselung. Extrem schnell, aber schwieriges Problem der sicheren Schlüsselübergabe (Key Exchange).\n• Asymmetrisch (z. B. RSA, ECC): Schlüsselpaar (Public/Private). Löst das Schlüsselverteilungsproblem elegant, ist rechnerisch jedoch ca. 1.000-mal langsamer als symmetrische Chiffren.\nPraxis (Hybride Verschlüsselung): Der symmetrische Sitzungsschlüssel wird asymmetrisch ausgetauscht, die Nutzdaten dann symmetrisch verschlüsselt."

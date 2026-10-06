@@ -1861,6 +1861,7 @@ function renderTaskPage(container, pageIndex) {
             solutionHtml = `
                 <div class="exam-solution-box">
                     <h5><i class="fa-solid fa-circle-check"></i> Musterlösung &amp; Bewertungshinweise (${sub.points} Punkte):</h5>
+                    ${sub.solutionSvgIllustration ? `<div style="margin: 12px 0;">${sub.solutionSvgIllustration}</div>` : ""}
                     <div class="exam-solution-body" style="white-space: pre-line;">${escapeHtml(sub.solution)}</div>
                     <div style="margin-top: 8px; display: flex; align-items: center; justify-content: space-between; border-top: 1px dashed #86efac; padding-top: 6px;">
                         <span style="font-size: 0.82rem; font-weight: 700; color: #15803d;">Punkte für Teilaufgabe im Korrekturrand vergeben:</span>

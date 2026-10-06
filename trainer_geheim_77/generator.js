@@ -1280,9 +1280,8 @@ function generateDynamicQuestions(typeMode = "mix") {
                     isDiagram: true,
                     isBawueFocus: true,
                     diagramType: "ERD & Tabellenschema",
-                    diagramSvg: erdVisualSvg,
-                    diagramTitle: `Datenmodell: ${item.entA} & ${item.entB}`,
-                    diagramCaption: `ERD & Relationales Datenbankschema (${item.card})`,
+                    solutionDiagramSvg: erdVisualSvg,
+                    solutionDiagramCaption: `Relationales Tabellenschema mit Fremdschlüssel für: ${item.entA} ➔ ${item.entB} (${item.card})`,
                     type: "multiple-choice",
                     question: `Fachaufgabe ERD & Relationenmodell: Gegeben ist die Beziehung '${item.entA}' ${item.rel} '${item.entB}' mit Kardinalität ${item.card}. Wo muss der Fremdschlüssel im Tabellenschema platziert werden?`,
                     options: [
@@ -1322,18 +1321,13 @@ function generateDynamicQuestions(typeMode = "mix") {
                     isDiagram: true,
                     isBawueFocus: true,
                     diagramType: "ERD",
-                    diagramSvg: erdVisualSvg,
-                    diagramTitle: `Datenmodell: ${item.entA} & ${item.entB}`,
+                    solutionDiagramSvg: erdVisualSvg,
+                    solutionDiagramCaption: `Visuelles ER-Datenmodell: ${item.entA} ➔ ${item.entB} (${item.card})`,
                     type: "multiple-choice",
-                    question: `Fachaufgabe ERD: Welche Kardinalität beschreibt die Beziehung zwischen '${item.entA}' und '${item.entB}' (${item.reason})?`,
-                    options: [
-                        `${item.card} (Erklärung: ${item.reason})`,
-                        item.card === "1:n" ? "n:m (Zwischentabelle)" : "1:n (Fremdschlüssel)",
-                        item.card === "1:1" ? "n:m (Mehrfachbezug)" : "1:1 (Identitätsbezug)",
-                        "Keine relationale Beziehung möglich"
-                    ],
-                    correctAnswer: 0,
-                    explanation: item.reason
+                    question: `Fachaufgabe ERD: Welche Kardinalität beschreibt die Beziehung zwischen '${item.entA}' und '${item.entB}' bei folgender Anforderung:\n"${item.reason}"?`,
+                    options: optList,
+                    correctAnswer: correctIdx,
+                    explanation: `Kardinalität ${item.card}: ${item.reason}`
                 });
             }
         }
@@ -2821,7 +2815,8 @@ function generateDynamicQuestions(typeMode = "mix") {
                 question: "Betrachte das abgebildete Datenmodell in Chen-Notation. Wie wird die n:m Beziehung zwischen 'BESTELLUNG' und 'ARTIKEL' bei der Überführung in ein relationales Datenbankschema aufgelöst?",
                 diagramTitle: "Entity-Relationship-Modell (ERD)",
                 diagramCaption: "Abbildung: Chen-Notation mit Entitäten (Rechtecke), Beziehungen (Rauten) und Attributen (Ellipsen)",
-                diagramSvg: VisualDiagrams.getErdDiagramSvg(),
+                diagramSvg: VisualDiagrams.getErdDiagramSvg(false),
+                solutionDiagramSvg: VisualDiagrams.getErdDiagramSvg(true),
                 options: [
                     "Durch Erzeugung einer Zwischentabelle / Verknüpfungstabelle (z. B. 'Bestellposition') mit den Fremdschlüsseln BestellNr und ArtikelNr sowie dem Attribut Menge.",
                     "Indem die ArtikelNr direkt als Fremdschlüssel in die Tabelle BESTELLUNG eingetragen wird.",
@@ -4428,6 +4423,393 @@ ORDER BY gesamtumsatz_euro DESC;`;
                 ],
                 correctAnswer: 0,
                 explanation: `Individualsoftware = Werkvertrag (Erfolg geschuldet). Der Auftragnehmer hat das Recht zur zweiten Andienung (Nacherfüllung vor Rücktritt).`
+            });
+        }
+    }
+
+    // =========================================================================
+    // MC16: IPv6 Kürzungsregeln nach RFC 5952 (LF 3 / AP1 Pflichtstoff)
+    // =========================================================================
+    const ipv6CompressCases = [
+        {
+            full: "2001:0db8:0000:0000:0000:0000:1428:57ab",
+            short: "2001:db8::1428:57ab",
+            distractors: ["2001:db8:0:0:0:0:1428:57ab", "2001:db8::1428:57ab::", "2001:0db8::1428:57ab"],
+            desc: "Führende Nullen in Blöcken weglassen und die längste Kette von Null-Blöcken einmalig durch :: ersetzen."
+        },
+        {
+            full: "fe80:0000:0000:0000:020c:29ff:fe4b:8c91",
+            short: "fe80::20c:29ff:fe4b:8c91",
+            distractors: ["fe80:0:0:0:20c:29ff:fe4b:8c91", "fe80::020c:29ff:fe4b:8c91", "fe80::20c:29ff:fe4b:8c91::"],
+            desc: "4 aufeinanderfolgende Nullblöcke werden zu :: komprimiert, führende Null bei 020c entfällt."
+        },
+        {
+            full: "2001:0db8:0000:0042:0000:0000:0000:0001",
+            short: "2001:db8:0:42::1",
+            distractors: ["2001:db8::42::1", "2001:db8::42:0:0:0:1", "2001:0db8:0:42::1"],
+            desc: "Nur die längste Nullfolge (die 3 Nullblöcke am Ende) darf mit :: ersetzt werden! Die einzelne Null davor bleibt als :0: stehen, da :: nur genau 1-mal pro Adresse erlaubt ist!"
+        },
+        {
+            full: "2001:0db8:0000:0000:0042:0000:0000:0001",
+            short: "2001:db8::42:0:0:1",
+            distractors: ["2001:db8::42::1", "2001:db8:0:0:42::1", "2001:0db8::42::1"],
+            desc: "Bei gleich langen Nullfolgen (hier jeweils zwei Blöcke) wird nach RFC 5952 die ERSTE Nullfolge durch :: komprimiert. :: darf niemals mehrfach vorkommen!"
+        },
+        {
+            full: "0000:0000:0000:0000:0000:0000:0000:0001",
+            short: "::1",
+            distractors: ["0::1", "::0001", "0:0:0:0:0:0:0:1"],
+            desc: "Loopback-Adresse: Alle sieben führenden 0-Blöcke werden zu :: komprimiert, der letzte Block wird zu 1."
+        }
+    ];
+
+    for (let i = 0; i < 15; i++) {
+        const c = ipv6CompressCases[i % ipv6CompressCases.length];
+        const qText = `🌐 IPv6-Adressierung & Kürzungsregeln nach RFC 5952 (LF 3):\n\nEin Administrator richtet ein neues Interface ein. Im Logfile wird folgende unkomprimierte IPv6-Adresse angezeigt:\n${c.full}\n\nAufgabe:\nWenden Sie die offiziellen IPv6-Kürzungsregeln (RFC 5952) korrekt an:\n1. Führende Nullen innerhalb eines 16-Bit-Blocks.\n2. Mehrfache aufeinanderfolgende Blöcke aus Nullen (Verwendung von '::').\n\nWie lautet die normgerecht gekürzte Schreibweise?`;
+
+        const mLoesung = `Musterlösung IPv6-Kürzung:\n\nNormgerechte Kurzform: ${c.short}\n\nRegeln nach RFC 5952:\n1. Führende Nullen in jedem Hexadezimalblock werden weggelassen (z. B. "0db8" -> "db8", "0001" -> "1"). Eine Zahl, die nur aus Nullen besteht, bleibt als einzelne "0" erhalten, wenn sie nicht durch "::" ersetzt wird.\n2. Die längste zusammenhängende Folge von Blöcken mit ausschließlich Nullen wird durch "::" (Doppel-Doppelpunkt) ersetzt.\n3. WICHTIG: "::" darf in einer IPv6-Adresse nur genau EINMAL vorkommen, da die Eindeutigkeit der Blockanzahl (insgesamt 8 Blöcke à 16 Bit = 128 Bit) sonst nicht mehr rekonstruierbar wäre!\n4. Bei gleich langen Nullfolgen wird die erste Folge komprimiert. Hex-Ziffern werden in Kleinbuchstaben geschrieben.`;
+
+        const isOpen = shouldBeOpenText();
+        if (isOpen) {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "lf3",
+                topic: "🌐 IPv6: Kürzungsregeln nach RFC 5952 (LF 3)",
+                isHard: false,
+                difficulty: "medium",
+                isBawueFocus: true,
+                type: "open-text",
+                question: qText,
+                musterloesung: mLoesung,
+                explanation: `Normgerechte Form: ${c.short}. ${c.desc}`
+            });
+        } else {
+            const opts = [c.short, ...c.distractors];
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "lf3",
+                topic: "🌐 IPv6: Kürzungsregeln nach RFC 5952 (LF 3)",
+                isHard: false,
+                difficulty: "medium",
+                isBawueFocus: true,
+                type: "multiple-choice",
+                question: qText + `\n\nWelche komprimierte Adresse ist RFC-5952-konform?`,
+                options: opts,
+                correctAnswer: 0,
+                explanation: `Richtig: "${c.short}". Begründung: ${c.desc}`
+            });
+        }
+    }
+
+    // =========================================================================
+    // MC17: IPv6 EUI-64 Verfahren (MAC-Adresse zu Interface-ID) (LF 3 / IHK-Klassiker)
+    // =========================================================================
+    const eui64Cases = [
+        {
+            mac: "00:1A:2B:3C:4D:5E",
+            firstByteOriginal: "00",
+            firstByteBinOrig: "0000 0000",
+            firstByteFlipped: "02",
+            firstByteBinFlipped: "0000 0010",
+            interfaceId: "021a:2bff:fe3c:4d5e",
+            linkLocal: "fe80::21a:2bff:fe3c:4d5e"
+        },
+        {
+            mac: "18:66:DA:12:34:56",
+            firstByteOriginal: "18",
+            firstByteBinOrig: "0001 1000",
+            firstByteFlipped: "1a",
+            firstByteBinFlipped: "0001 1010",
+            interfaceId: "1a66:daff:fe12:3456",
+            linkLocal: "fe80::1a66:daff:fe12:3456"
+        },
+        {
+            mac: "B4:2E:99:AA:BB:CC",
+            firstByteOriginal: "B4",
+            firstByteBinOrig: "1011 0100",
+            firstByteFlipped: "b6",
+            firstByteBinFlipped: "1011 0110",
+            interfaceId: "b62e:99ff:feaa:bbcc",
+            linkLocal: "fe80::b62e:99ff:feaa:bbcc"
+        },
+        {
+            mac: "08:00:27:A1:B2:C3",
+            firstByteOriginal: "08",
+            firstByteBinOrig: "0000 1000",
+            firstByteFlipped: "0a",
+            firstByteBinFlipped: "0000 1010",
+            interfaceId: "0a00:27ff:fea1:b2c3",
+            linkLocal: "fe80::a00:27ff:fea1:b2c3"
+        }
+    ];
+
+    for (let i = 0; i < 15; i++) {
+        const e = eui64Cases[i % eui64Cases.length];
+        const qText = `🌐 IPv6 EUI-64 Algorithmus & Interface-ID (LF 3):\n\nEin Netzwerk-Interface besitzt die MAC-Adresse (IEEE 802 48-Bit):\n${e.mac}\n\nFür die Stateless Address Autoconfiguration (SLAAC) soll aus dieser MAC-Adresse eine 64-Bit Interface-ID nach dem modifizierten EUI-64-Format und die zugehörige Link-Local-Adresse (Präfix fe80::/64) generiert werden.\n\nAufgaben:\n1. Beschreiben Sie die beiden Schritte zur Erzeugung der 64-Bit EUI-64 Interface-ID aus der 48-Bit MAC-Adresse.\n2. Welches Bit wird invertiert (Name und Position)? Welcher Wert ergibt sich für das erste Byte (${e.firstByteOriginal})?\n3. Geben Sie die resultierende Link-Local IPv6-Adresse an.`;
+
+        const mLoesung = `Musterlösung EUI-64 Verfahren:\n\n1. Schritt 1 (Einfügen von FF:FE):\n- Die 48-Bit MAC-Adresse (${e.mac}) wird in der Mitte geteilt: ${e.mac.slice(0, 8)} und ${e.mac.slice(9)}.\n- In die Mitte werden die 16 Bits 0xFF, 0xFE (FF:FE) eingefügt -> 64 Bit.\n\n2. Schritt 2 (Universal/Local Bit invertieren):\n- Das 7. Bit des ersten Bytes (U/L-Bit, Universal/Local) wird invertiert.\n- Erstes Byte: 0x${e.firstByteOriginal} = binär ${e.firstByteBinOrig}\n- 7. Bit (von links gezählt, Bit-Index 1 bei 0-basierter Zählung von MSB zu LSB) invertiert -> binär ${e.firstByteBinFlipped} = 0x${e.firstByteFlipped}.\n- Das Bit signalisiert bei IPv6, dass es sich um eine universell verwaltete EUI-64 Kennung handelt.\n\n3. Resultierende Interface-ID & Link-Local-Adresse:\n- Interface-ID: ${e.interfaceId}\n- Vollständige Link-Local-Adresse: ${e.linkLocal}`;
+
+        const isOpen = shouldBeOpenText();
+        if (isOpen) {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "lf3",
+                topic: "🌐 IPv6: EUI-64 Algorithmus & Interface-ID (LF 3)",
+                isHard: true,
+                difficulty: "hard",
+                isBawueFocus: true,
+                type: "open-text",
+                question: qText,
+                musterloesung: mLoesung,
+                explanation: `EUI-64: 'FF:FE' in der Mitte einfügen und 7. Bit (U/L-Bit) des 1. Bytes invertieren: aus 0x${e.firstByteOriginal} wird 0x${e.firstByteFlipped}. Link-Local: ${e.linkLocal}.`
+            });
+        } else {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "lf3",
+                topic: "🌐 IPv6: EUI-64 Algorithmus & Interface-ID (LF 3)",
+                isHard: true,
+                difficulty: "hard",
+                isBawueFocus: true,
+                type: "multiple-choice",
+                question: qText + `\n\nWelche Link-Local-Adresse und Modifikation ist korrekt?`,
+                options: [
+                    `${e.linkLocal} | In der Mitte 'FF:FE' eingefügt, 7. Bit des 1. Bytes invertiert (0x${e.firstByteOriginal} ➔ 0x${e.firstByteFlipped})`,
+                    `fe80::${e.mac.toLowerCase().replace(/:/g, '')} | MAC-Adresse unverändert übernommen`,
+                    `fe80::${e.firstByteOriginal}${e.mac.slice(3).toLowerCase().replace(/:/g, '')}ff:fe | 'FF:FE' am Ende angehängt`,
+                    `fe80::${e.firstByteOriginal}1a:2bff:fe3c:4d5e | 'FF:FE' in der Mitte, aber U/L-Bit NICHT invertiert`
+                ],
+                correctAnswer: 0,
+                explanation: `Richtig: ${e.linkLocal}. EUI-64 fügt 'FF:FE' in der Mitte ein und invertiert das 7. Bit (U/L-Bit) im 1. Byte (0x${e.firstByteOriginal} -> 0x${e.firstByteFlipped}).`
+            });
+        }
+    }
+
+    // =========================================================================
+    // MC18: IPv6 Subnetting & Präfix-Berechnung (LF 3 / AP1 Pflichtstoff)
+    // =========================================================================
+    const subnetCases = [
+        {
+            assignedPrefix: "2001:0db8:1234::/48",
+            targetPrefix: "/64",
+            prefixDiff: 16,
+            numSubnets: 65536,
+            desc: "Unternehmens-Standardpräfix /48"
+        },
+        {
+            assignedPrefix: "2001:0db8:abcd:1000::/56",
+            targetPrefix: "/64",
+            prefixDiff: 8,
+            numSubnets: 256,
+            desc: "Mittelstands-Präfix /56"
+        },
+        {
+            assignedPrefix: "2001:0db8:fe10:a000::/60",
+            targetPrefix: "/64",
+            prefixDiff: 4,
+            numSubnets: 16,
+            desc: "Zweigstellen-Präfix /60"
+        },
+        {
+            assignedPrefix: "2001:0db8:5555::/52",
+            targetPrefix: "/64",
+            prefixDiff: 12,
+            numSubnets: 4096,
+            desc: "Campus-Präfix /52"
+        }
+    ];
+
+    for (let i = 0; i < 15; i++) {
+        const s = subnetCases[i % subnetCases.length];
+        const qText = `🌐 IPv6-Subnetting & Präfix-Kalkulation (LF 3):\n\nEin Internet Service Provider (ISP) weist einem Kunden folgendes IPv6-Netzwerkpräfix zu:\n${s.assignedPrefix} (${s.desc})\n\nFür die interne Netzwerkstrukturierung sollen ausschließlich standardkonforme Subnetze mit einer Präfixlänge von ${s.targetPrefix} gebildet werden (Standardgröße für IPv6-Subnetze mit SLAAC).\n\nAufgaben:\n1. Wie viele Bits stehen dem Kunden für das Subnetting zur Verfügung?\n2. Wie viele eigenständige ${s.targetPrefix}-Subnetze kann der Kunde maximal bilden? (Geben Sie die Berechnungsformel und das Ergebnis an).\n3. Wie viele Adressen stehen in einem einzelnen ${s.targetPrefix}-Subnetz theoretisch zur Verfügung?`;
+
+        const mLoesung = `Musterlösung IPv6-Subnetting:\n\n1. Subnetz-Bits:\n- Zielpräfix: ${s.targetPrefix} (64 Bit)\n- Zugewiesenes Präfix: /${64 - s.prefixDiff} (${64 - s.prefixDiff} Bit)\n- Subnetz-Bits = 64 - ${64 - s.prefixDiff} = ${s.prefixDiff} Bits.\n\n2. Anzahl möglicher Subnetze:\n- Formel: 2^(Subnetz-Bits) = 2^${s.prefixDiff}\n- 2^${s.prefixDiff} = ${s.numSubnets.toLocaleString('de-DE')} Subnetze!\n\n3. Adressen pro Subnetz:\n- Interface-ID: 128 Bit - 64 Bit = 64 Bit für Hosts.\n- 2^64 = 18.446.744.073.709.551.616 Adressen (ca. 18,4 Trillionen Adressen pro Subnetz).`;
+
+        const isOpen = shouldBeOpenText();
+        if (isOpen) {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "lf3",
+                topic: "🌐 IPv6: Subnetting & Präfix-Berechnung (LF 3)",
+                isHard: false,
+                difficulty: "medium",
+                isBawueFocus: true,
+                type: "open-text",
+                question: qText,
+                musterloesung: mLoesung,
+                explanation: `Subnetz-Bits = 64 - ${64 - s.prefixDiff} = ${s.prefixDiff} Bits. Mögliche Subnetze = 2^${s.prefixDiff} = ${s.numSubnets.toLocaleString('de-DE')} Subnetze.`
+            });
+        } else {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "lf3",
+                topic: "🌐 IPv6: Subnetting & Präfix-Berechnung (LF 3)",
+                isHard: false,
+                difficulty: "medium",
+                isBawueFocus: true,
+                type: "multiple-choice",
+                question: qText + `\n\nWie viele ${s.targetPrefix}-Subnetze können gebildet werden?`,
+                options: [
+                    `${s.numSubnets.toLocaleString('de-DE')} Subnetze (Formel: 2^${s.prefixDiff} = 2^(64 - ${64 - s.prefixDiff}))`,
+                    `${(s.numSubnets / 2).toLocaleString('de-DE')} Subnetze (Formel: 2^${s.prefixDiff - 1})`,
+                    `${(s.prefixDiff * 100).toLocaleString('de-DE')} Subnetze (Formel: ${s.prefixDiff} × 100)`,
+                    `1.024 Subnetze (fester IHK-Standardwert)`
+                ],
+                correctAnswer: 0,
+                explanation: `Richtig: 2^${s.prefixDiff} = ${s.numSubnets.toLocaleString('de-DE')} Subnetze. Der Subnetz-Bereich umfasst 64 - ${64 - s.prefixDiff} = ${s.prefixDiff} Bits.`
+            });
+        }
+    }
+
+    // =========================================================================
+    // MC19: IPv6 Adresstypen, Scopes & Präfixe (Link-Local, ULA, GUA, Multicast)
+    // =========================================================================
+    const scopeQuestions = [
+        {
+            title: "Link-Local-Adresse (fe80::/10)",
+            addr: "fe80::1ff:fe23:4567",
+            type: "Link-Local Unicast",
+            scope: "Nur im lokalen Netzsegment / Link gültig (nicht routingfähig über Router hinweg)",
+            ipv4Equiv: "APIPA (169.254.0.0/16)",
+            distractors: ["Global Unicast (öffentlich im Internet routingfähig)", "Unique Local Address (privat im Firmennetz routingfähig)", "Multicast-Adresse"]
+        },
+        {
+            title: "Unique Local Address (ULA: fc00::/7 bzw. fd00::/8)",
+            addr: "fd12:3456:789a:1::10",
+            type: "Unique Local Unicast (ULA)",
+            scope: "Privat im Intranet / Unternehmensnetz routingfähig, aber NICHT im öffentlichen Internet routingfähig",
+            ipv4Equiv: "Private IPv4-Adressen (RFC 1918: 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16)",
+            distractors: ["Link-Local (nur auf dem physikalischen Kabel gültig)", "Global Unicast (weltweit öffentlich)", "Anycast-Adresse für Root-Nameserver"]
+        },
+        {
+            title: "Global Unicast Address (GUA: 2000::/3)",
+            addr: "2a00:1450:4001:828::200e",
+            type: "Global Unicast (GUA)",
+            scope: "Weltweit eindeutig und im globalen Internet öffentlich routingfähig",
+            ipv4Equiv: "Öffentliche IPv4-Adresse",
+            distractors: ["Unique Local (nur im Intranet gültig)", "Link-Local (nicht routingfähig)", "Multicast Gruppe"]
+        },
+        {
+            title: "Multicast-Adresse (ff00::/8)",
+            addr: "ff02::1",
+            type: "Multicast (All-Nodes Link-Local)",
+            scope: "Erreicht alle IPv6-Knoten im lokalen Segment. Ersetzt das veraltete IPv4-Broadcast-Konzept!",
+            ipv4Equiv: "IPv4-Broadcast (255.255.255.255), allerdings zielgerichteter",
+            distractors: ["Loopback-Adresse", "Global Unicast", "Anycast-Präfix"]
+        }
+    ];
+
+    for (let i = 0; i < 15; i++) {
+        const sq = scopeQuestions[i % scopeQuestions.length];
+        const qText = `🌐 IPv6 Adresstypen & Gültigkeitsbereiche (Scopes) (LF 3):\n\nIn der Routingtabelle und Interface-Konfiguration eines Firmenrechners taucht folgende IPv6-Adresse auf:\n${sq.addr}\n\nAufgaben:\n1. Welchem IPv6-Adresstyp gehört diese Adresse an?\n2. Welchen Gültigkeitsbereich (Scope) und welche Routingfähigkeit besitzt sie?\n3. Welchem IPv4-Konzept entspricht dieser Adresstyp?`;
+
+        const mLoesung = `Musterlösung IPv6 Adresstyp:\n\n1. Adresstyp: ${sq.type}\n2. Gültigkeitsbereich / Routingfähigkeit: ${sq.scope}\n3. IPv4-Entsprechung: ${sq.ipv4Equiv}\n\nWichtige IPv6-Präfixe im Überblick:\n- fe80::/10 ➔ Link-Local (nicht geroutet, automatische Kommunikation im Segment)\n- fc00::/7 (fd00::/8) ➔ Unique Local Address (ULA, privat im Unternehmen geroutet)\n- 2000::/3 ➔ Global Unicast (GUA, weltweit öffentlich geroutet)\n- ff00::/8 ➔ Multicast (Ersatz für Broadcast! Broadcast existiert in IPv6 NICHT mehr)\n- ::1/128 ➔ Loopback (entspricht 127.0.0.1)\n- ::/128 ➔ Unspecified (entspricht 0.0.0.0)`;
+
+        const isOpen = shouldBeOpenText();
+        if (isOpen) {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "lf3",
+                topic: "🌐 IPv6: Adresstypen, Scopes & Präfixe (LF 3)",
+                isHard: false,
+                difficulty: "medium",
+                isBawueFocus: true,
+                type: "open-text",
+                question: qText,
+                musterloesung: mLoesung,
+                explanation: `Adresse ${sq.addr} ist ${sq.type}. Scope: ${sq.scope}. Entspricht: ${sq.ipv4Equiv}.`
+            });
+        } else {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "lf3",
+                topic: "🌐 IPv6: Adresstypen, Scopes & Präfixe (LF 3)",
+                isHard: false,
+                difficulty: "medium",
+                isBawueFocus: true,
+                type: "multiple-choice",
+                question: qText + `\n\nWelche Klassifizierung ist korrekt?`,
+                options: [
+                    `${sq.type} | ${sq.scope}`,
+                    `${sq.distractors[0]}`,
+                    `${sq.distractors[1]}`,
+                    `${sq.distractors[2]}`
+                ],
+                correctAnswer: 0,
+                explanation: `Richtig: ${sq.type}. Gültigkeit: ${sq.scope}.`
+            });
+        }
+    }
+
+    // =========================================================================
+    // MC20: IPv6 Autokonfiguration (SLAAC, DHCPv6) & Migration (DS-Lite)
+    // =========================================================================
+    const autoConfTopics = [
+        {
+            title: "SLAAC (Stateless Address Autoconfiguration)",
+            q: "Wie funktioniert SLAAC (Stateless Address Autoconfiguration) und welche ICMPv6-Nachrichten werden verwendet?",
+            ans: "Der Client sendet eine Router Solicitation (RS, ff02::2). Der Router antwortet mit Router Advertisement (RA, ff02::1), das das Netzwerk-Präfix (z.B. /64) enthält. Der Client bildet seine Interface-ID eigenständig (EUI-64 oder Privacy Extensions / RFC 4941) und prüft per DAD (Duplicate Address Detection), ob die Adresse frei ist.",
+            distractors: [
+                "Der Client bezieht IP, Subnetzmaske und Gateway von einem zentralen DHCPv6-Server, der einen Adress-Lease in einer Datenbank speichert.",
+                "Der Client nutzt ARP-Broadcasts, um eine freie IP-Adresse im lokalen Netz zu finden.",
+                "Der Client generiert eine zufällige IPv4-Adresse und tunnelt diese über einen B4-Router."
+            ]
+        },
+        {
+            title: "DS-Lite (Dual-Stack Lite) vs. Dual-Stack",
+            q: "Was kennzeichnet Dual-Stack Lite (DS-Lite) bei Breitbandanschlüssen im Vergleich zu echtem Dual-Stack?",
+            ans: "Beim echten Dual-Stack erhält der Router sowohl eine öffentliche IPv4- als auch eine öffentliche IPv6-Adresse. Bei DS-Lite erhält der Router NUR eine IPv6-Adresse; IPv4-Pakete werden im Heimnetz gekapselt (B4-Element) und über das IPv6-Netzwerk des Providers zu einem Carrier-Grade-NAT-Gateway (AFTR) getunnelt. Eingehende IPv4-Portweiterleitungen (z.B. für Heimserver) funktionieren bei DS-Lite nicht ohne Weiteres!",
+            distractors: [
+                "Bei DS-Lite erhält der Router zwei echte öffentliche IPv4-Adressen und keine IPv6-Adresse.",
+                "DS-Lite ist eine reine VPN-Technologie für Home-Office-Arbeitsplätze nach IPsec-Standard.",
+                "Bei echtem Dual-Stack werden alle IPv6-Pakete in IPv4-Pakete gekapselt."
+            ]
+        },
+        {
+            title: "Stateless vs. Stateful DHCPv6",
+            q: "Worin liegt der Unterschied zwischen Stateless DHCPv6 und Stateful DHCPv6?",
+            ans: "Stateless DHCPv6: Die IP-Adresse wird per SLAAC gebildet; der DHCPv6-Server liefert nur Zusatzinformationen wie DNS-Server-Adressen oder Domain-Search-Lists (keine Lease-Verwaltung). Stateful DHCPv6: Der DHCPv6-Server weist wie bei IPv4 konkrete IP-Adressen zu und verwaltet diese in einem Lease-Pool.",
+            distractors: [
+                "Stateless DHCPv6 vergibt statische IP-Adressen, Stateful vergibt nur dynamische IPv4-Adressen.",
+                "Stateful DHCPv6 benötigt keinen Router, während Stateless DHCPv6 zwingend einen DNS-Server ersetzt.",
+                "Es gibt bei IPv6 kein DHCP mehr, da ausschließlich SLAAC zulässig ist."
+            ]
+        }
+    ];
+
+    for (let i = 0; i < 15; i++) {
+        const at = autoConfTopics[i % autoConfTopics.length];
+        const qText = `🌐 IPv6-Konfiguration & Übergangstechniken (LF 3):\n\nThema: ${at.title}\n\nFrage:\n${at.q}`;
+
+        const mLoesung = `Musterlösung ${at.title}:\n\n${at.ans}\n\nKernpunkte für die AP1-Prüfung:\n- SLAAC = Stateless (Router Advertisements via ICMPv6, DAD-Prüfung, Privacy Extensions gegen Tracking).\n- DHCPv6 Stateless = Adressen via SLAAC, Optionen (DNS) via DHCPv6.\n- DHCPv6 Stateful = Adressen & Optionen komplett vom Server (wie klassisches IPv4-DHCP).\n- DS-Lite = Reine IPv6-Anbindung beim Provider, IPv4 getunnelt über Carrier-Grade-NAT (AFTR).`;
+
+        const isOpen = shouldBeOpenText();
+        if (isOpen) {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "lf3",
+                topic: `🌐 IPv6: ${at.title} (LF 3)`,
+                isHard: false,
+                difficulty: "medium",
+                isBawueFocus: true,
+                type: "open-text",
+                question: qText,
+                musterloesung: mLoesung,
+                explanation: at.ans
+            });
+        } else {
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "lf3",
+                topic: `🌐 IPv6: ${at.title} (LF 3)`,
+                isHard: false,
+                difficulty: "medium",
+                isBawueFocus: true,
+                type: "multiple-choice",
+                question: qText,
+                options: [at.ans, ...at.distractors],
+                correctAnswer: 0,
+                explanation: `Richtig: ${at.ans}`
             });
         }
     }

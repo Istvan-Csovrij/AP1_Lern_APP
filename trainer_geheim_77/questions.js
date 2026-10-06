@@ -6797,7 +6797,8 @@ WHERE Email IS NULL OR Email = '';
         "question": "Betrachte das abgebildete Entity-Relationship-Diagramm (ERD nach Chen). Welche Bedeutung haben die unterstrichenen Attribute in den Ellipsen (z. B. 'KundenNr', 'BestellNr', 'ArtikelNr')?",
         "diagramTitle": "Visualisierung 3: Konzeptionelles Datenmodell",
         "diagramCaption": "Abbildung: ERD in Chen-Notation mit Entitätstypen, Beziehungstypen und Kardinalitäten (1:n und n:m)",
-        "diagramSvg": VisualDiagrams.getErdDiagramSvg(),
+        "diagramSvg": VisualDiagrams.getErdDiagramSvg(false),
+        "solutionDiagramSvg": VisualDiagrams.getErdDiagramSvg(true),
         "options": [
             "Primärschlüssel-Attribute (eindeutige Identifikationsmerkmale der Entität)",
             "Fremdschlüssel-Attribute zur Tabellenverknüpfung",
@@ -6943,8 +6944,9 @@ WHERE Email IS NULL OR Email = '';
         "type": "multiple-choice",
         "question": "Betrachte das abgebildete Preisbildungsdiagramm. Welcher Zustand liegt im markierten roten Bereich (Preis = 20,00 €, Nachfrage = 600 Stk., Angebot = 200 Stk.) vor?",
         "diagramTitle": "Visualisierung 9: Volkswirtschaftliches Marktmodell",
-        "diagramCaption": "Abbildung: Koordinatensystem mit Angebot, Nachfrage, Marktgleichgewicht G (40 €, 400 Stk.) und Nachfrageüberhang",
-        "diagramSvg": VisualDiagrams.getMarktgleichgewichtSvg(),
+        "diagramCaption": "Abbildung: Koordinatensystem mit Angebot, Nachfrage und Marktgleichgewicht G (40 €, 400 Stk.)",
+        "diagramSvg": VisualDiagrams.getMarktgleichgewichtSvg(false),
+        "solutionDiagramSvg": VisualDiagrams.getMarktgleichgewichtSvg(true),
         "options": [
             "Nachfrageüberhang von 400 Stück (600 Nachfrage - 200 Angebot) -> Verkäufermarkt mit Aufwärtsdruck auf die Preise.",
             "Angebotsüberhang von 400 Stück -> Käufermarkt mit Abwärtsdruck auf die Preise.",
@@ -9590,8 +9592,9 @@ ENDEFUNKTION
         topic: "📈 Kaufmännische Diagramme: A4 Amortisationsdauer (Projektkosten vs. Ersparnisse)",
         diagramType: "Amortisationsdiagramm",
         diagramTitle: "A4 Amortisationsdauer: Projektkosten und Ersparnisse",
-        diagramCaption: "Abbildung: Koordinatensystem mit Projektkosten (1.310 €), monatlichen Ersparnissen (200 €/Monat) und Amortisationspunkt bei 6,55 Monaten",
-        diagramSvg: VisualDiagrams.getAmortisationDiagramSvg(1310, 200, 10, 2000, "A4 Amortisationsdauer: Projektkosten und Ersparnisse"),
+        diagramCaption: "Abbildung: Koordinatensystem mit Projektkosten (Investition) und kumulierter Ersparniskurve",
+        diagramSvg: VisualDiagrams.getAmortisationDiagramSvg(1310, 200, 10, 2000, "A4 Amortisationsdauer: Projektkosten und Ersparnisse", false),
+        solutionDiagramSvg: VisualDiagrams.getAmortisationDiagramSvg(1310, 200, 10, 2000, "A4 Amortisationsdauer: Projektkosten und Ersparnisse", true),
         type: "open-text",
         question: `Praxisaufgabe Wirtschaftlichkeitsrechnung (LF 1 / LF 6 - Amortisationsdiagramm):
 Für ein IT-Automatisierungsprojekt liegt das abgebildete Koordinatensystem-Diagramm ('A4 Amortisationsdauer: Projektkosten und Ersparnisse') vor.
@@ -9638,8 +9641,9 @@ Aufgabenstellung:
         topic: "📈 Kaufmännische Diagramme: Break-Even-Point & Gewinnschwelle",
         diagramType: "Break-Even-Diagramm",
         diagramTitle: "Break-Even-Analyse (Gewinnschwellendiagramm)",
-        diagramCaption: "Abbildung: Gewinnschwellendiagramm mit Fixkosten (15.000 €), Gesamtkosten (blau), Erlöskurve (orange) und Break-Even-Point bei 600 Stück",
-        diagramSvg: VisualDiagrams.getBreakEvenDiagramSvg(),
+        diagramCaption: "Abbildung: Koordinatensystem mit Fixkosten, Gesamtkosten und Umsatzerlöskurve",
+        diagramSvg: VisualDiagrams.getBreakEvenDiagramSvg(false),
+        solutionDiagramSvg: VisualDiagrams.getBreakEvenDiagramSvg(true),
         type: "open-text",
         question: `Praxisaufgabe Kosten- und Leistungsrechnung (LF 1 / LF 6 - Gewinnschwellenanalyse):
 Für ein neu entwickeltes Softwareprodukt liegt das abgebildete Break-Even-Diagramm (Gewinnschwellendiagramm) vor.
@@ -9687,8 +9691,9 @@ Aufgaben:
         topic: "📈 Kaufmännische Diagramme: Kostenvergleich Kauf vs. Cloud (Kritische Zeit)",
         diagramType: "Kostenvergleichsdiagramm",
         diagramTitle: "Kostenvergleich: Option A (Kauf On-Premises) vs. Option B (Cloud SaaS)",
-        diagramCaption: "Abbildung: Kostenvergleichsdiagramm mit Option A (Kauf 18.000 € + 300 €/Mon.) vs. Option B (Cloud 1.500 €/Mon.) und kritischer Zeit bei 15 Monaten",
-        diagramSvg: VisualDiagrams.getKostenvergleichDiagramSvg(),
+        diagramCaption: "Abbildung: Kostenverlauf für Option A (Kauf On-Premises) und Option B (Cloud SaaS)",
+        diagramSvg: VisualDiagrams.getKostenvergleichDiagramSvg(false),
+        solutionDiagramSvg: VisualDiagrams.getKostenvergleichDiagramSvg(true),
         type: "open-text",
         question: `Praxisaufgabe Wirtschaftlichkeitsvergleich (LF 1 / LF 6 - Kritischer Kostenpunkt):
 Ein IT-Systemhaus prüft für einen Kunden die Einführung eines ERP-Systems. Zwei Optionen stehen zur Auswahl:
