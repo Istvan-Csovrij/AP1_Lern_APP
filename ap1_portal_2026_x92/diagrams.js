@@ -5012,6 +5012,181 @@ var VisualDiagrams = {
         `;
     },
 
+    // 10. Code-Review: Trouble-Ticket Durchschnittswert (IHK Original)
+    getCodeReviewTroubleTicketSvg: function() {
+        return `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 620" width="100%" height="100%">
+            <rect width="960" height="620" fill="#f8fafc" rx="10" />
+            <text x="480" y="32" font-family="sans-serif" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">IHK Code-Review: Fehleranalyse &amp; Korrektur (Trouble-Ticket Durchschnittswert)</text>
+
+            <!-- LEFT: Fehlerhafter Code -->
+            <g transform="translate(30, 50)">
+                <rect width="435" height="420" fill="#fef2f2" stroke="#ef4444" stroke-width="2" rx="8" />
+                <rect width="435" height="38" fill="#fee2e2" stroke="#ef4444" stroke-width="1.5" rx="8" />
+                <text x="217" y="25" font-family="sans-serif" font-size="13" font-weight="bold" fill="#991b1b" text-anchor="middle">❌ FEHLERHAFTER CODE (Eingabe: 4, 2, 8, 1)</text>
+
+                <!-- Code Block -->
+                <rect x="15" y="55" width="405" height="230" fill="#ffffff" stroke="#fca5a5" stroke-width="1" rx="6" />
+                
+                <!-- Line 1: int durchschnittswert -->
+                <rect x="20" y="65" width="395" height="26" fill="#fee2e2" rx="4" />
+                <text x="30" y="83" font-family="Consolas, monospace" font-size="12" font-weight="bold" fill="#dc2626">int durchschnittswert = 0;</text>
+                <text x="250" y="83" font-family="sans-serif" font-size="11" fill="#b91c1c">◀ 1. Falscher Typ (int)</text>
+
+                <!-- Line 2: int summe -->
+                <rect x="20" y="95" width="395" height="26" fill="#fee2e2" rx="4" />
+                <text x="30" y="113" font-family="Consolas, monospace" font-size="12" font-weight="bold" fill="#dc2626">int summe = 0;</text>
+                <text x="250" y="113" font-family="sans-serif" font-size="11" fill="#b91c1c">◀ 2. Falscher Typ (int)</text>
+
+                <!-- Line 3: for loop starting at 1 -->
+                <rect x="20" y="125" width="395" height="26" fill="#fecaca" stroke="#dc2626" stroke-width="1.2" rx="4" />
+                <text x="30" y="143" font-family="Consolas, monospace" font-size="12" font-weight="bold" fill="#991b1b">for(int i = 1; i &lt; daten.Length; i++)</text>
+                <text x="30" y="162" font-family="sans-serif" font-size="10.5" font-weight="bold" fill="#b91c1c">   ▲ Startet bei i = 1 ➔ daten[0] (=4) wird IGNORIERT!</text>
+
+                <!-- Loop body -->
+                <text x="30" y="185" font-family="Consolas, monospace" font-size="12" fill="#334155">{</text>
+                <text x="50" y="205" font-family="Consolas, monospace" font-size="12" fill="#334155">summe = summe + daten[i];</text>
+                <text x="30" y="225" font-family="Consolas, monospace" font-size="12" fill="#334155">}</text>
+
+                <!-- Division line -->
+                <rect x="20" y="235" width="395" height="42" fill="#fecaca" stroke="#dc2626" stroke-width="1.2" rx="4" />
+                <text x="30" y="253" font-family="Consolas, monospace" font-size="12" font-weight="bold" fill="#991b1b">durchschnittswert = summe / daten.Length;</text>
+                <text x="30" y="270" font-family="sans-serif" font-size="10" font-weight="bold" fill="#b91c1c">   ▲ Integer-Division: 11 / 4 = 2 (Nachkommastellen abgeschnitten!)</text>
+
+                <!-- Auswertung box -->
+                <rect x="15" y="300" width="405" height="105" fill="#ffffff" stroke="#ef4444" stroke-width="1.5" rx="6" />
+                <text x="25" y="322" font-family="sans-serif" font-size="12" font-weight="bold" fill="#991b1b">Laufzeitanalyse mit Array [4, 2, 8, 1]:</text>
+                <text x="25" y="342" font-family="sans-serif" font-size="11.5" fill="#475569">• daten[0] = 4 wird übersprungen (Schleife beginnt bei i=1)</text>
+                <text x="25" y="360" font-family="sans-serif" font-size="11.5" fill="#475569">• summe = 2 + 8 + 1 = <tspan font-weight="bold" fill="#dc2626">11</tspan> (statt 15)</text>
+                <text x="25" y="378" font-family="sans-serif" font-size="11.5" fill="#475569">• Ganzzahldivision: 11 / 4 = <tspan font-weight="bold" fill="#dc2626">2</tspan> (Rest 3 verworfen!)</text>
+                <text x="25" y="396" font-family="sans-serif" font-size="11.5" font-weight="bold" fill="#b91c1c">➔ Ergebnis: 2 (FALSCH! Erwartet war 3.75)</text>
+            </g>
+
+            <!-- RIGHT: Korrigierter Code -->
+            <g transform="translate(495, 50)">
+                <rect width="435" height="420" fill="#f0fdf4" stroke="#16a34a" stroke-width="2" rx="8" />
+                <rect width="435" height="38" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5" rx="8" />
+                <text x="217" y="25" font-family="sans-serif" font-size="13" font-weight="bold" fill="#166534" text-anchor="middle">✅ KORRIGIERTER CODE (IHK-Musterlösung)</text>
+
+                <!-- Code Block -->
+                <rect x="15" y="55" width="405" height="230" fill="#ffffff" stroke="#86efac" stroke-width="1" rx="6" />
+                
+                <!-- Line 1: double durchschnittswert -->
+                <rect x="20" y="65" width="395" height="26" fill="#dcfce7" rx="4" />
+                <text x="30" y="83" font-family="Consolas, monospace" font-size="12" font-weight="bold" fill="#15803d">double durchschnittswert = 0.0;</text>
+                <text x="265" y="83" font-family="sans-serif" font-size="11" font-weight="bold" fill="#15803d">✔ double für Kommazahl</text>
+
+                <!-- Line 2: double summe -->
+                <rect x="20" y="95" width="395" height="26" fill="#dcfce7" rx="4" />
+                <text x="30" y="113" font-family="Consolas, monospace" font-size="12" font-weight="bold" fill="#15803d">double summe = 0.0;</text>
+                <text x="265" y="113" font-family="sans-serif" font-size="11" font-weight="bold" fill="#15803d">✔ Gleitkomma-Summe</text>
+
+                <!-- Line 3: for loop starting at 0 -->
+                <rect x="20" y="125" width="395" height="26" fill="#bbf7d0" stroke="#16a34a" stroke-width="1.2" rx="4" />
+                <text x="30" y="143" font-family="Consolas, monospace" font-size="12" font-weight="bold" fill="#14532d">for(int i = 0; i &lt; daten.Length; i++)</text>
+                <text x="30" y="162" font-family="sans-serif" font-size="10.5" font-weight="bold" fill="#15803d">   ✔ Startet bei i = 0 (alle 4 Elemente einbezogen!)</text>
+
+                <!-- Loop body -->
+                <text x="30" y="185" font-family="Consolas, monospace" font-size="12" fill="#334155">{</text>
+                <text x="50" y="205" font-family="Consolas, monospace" font-size="12" fill="#334155">summe = summe + daten[i];</text>
+                <text x="30" y="225" font-family="Consolas, monospace" font-size="12" fill="#334155">}</text>
+
+                <!-- Division line -->
+                <rect x="20" y="235" width="395" height="42" fill="#dcfce7" stroke="#16a34a" stroke-width="1.2" rx="4" />
+                <text x="30" y="253" font-family="Consolas, monospace" font-size="12" font-weight="bold" fill="#15803d">durchschnittswert = summe / daten.Length;</text>
+                <text x="30" y="270" font-family="sans-serif" font-size="10" font-weight="bold" fill="#15803d">   ✔ Fließkommadivision: 15.0 / 4 = 3.75</text>
+
+                <!-- Auswertung box -->
+                <rect x="15" y="300" width="405" height="105" fill="#ffffff" stroke="#16a34a" stroke-width="1.5" rx="6" />
+                <text x="25" y="322" font-family="sans-serif" font-size="12" font-weight="bold" fill="#166534">Korrektes Rechenergebnis:</text>
+                <text x="25" y="342" font-family="sans-serif" font-size="11.5" fill="#475569">• Alle Indizes: 0, 1, 2, 3 werden erfasst</text>
+                <text x="25" y="360" font-family="sans-serif" font-size="11.5" fill="#475569">• summe = 4 + 2 + 8 + 1 = <tspan font-weight="bold" fill="#15803d">15.0</tspan></text>
+                <text x="25" y="378" font-family="sans-serif" font-size="11.5" fill="#475569">• Fließkommadivision: 15.0 / 4 = <tspan font-weight="bold" fill="#15803d">3.75</tspan></text>
+                <text x="25" y="396" font-family="sans-serif" font-size="11.5" font-weight="bold" fill="#15803d">➔ Ergebnis: 3.75 (EXAKT WIE GEFORDERT!)</text>
+            </g>
+
+            <!-- BOTTOM: IHK Prüfungs-Schlüsselkriterien -->
+            <g transform="translate(30, 485)">
+                <rect width="900" height="115" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.8" rx="8" />
+                <text x="20" y="24" font-family="sans-serif" font-size="12.5" font-weight="bold" fill="#1e40af">🎯 Die 3 goldenen IHK-Prüfungsregeln bei Code-Reviews (AP1):</text>
+                <text x="20" y="48" font-family="sans-serif" font-size="11.5" fill="#1e3a8a">1. <tspan font-weight="bold">Zero-Based Indexing:</tspan> Arrays beginnen in C#, Java, JavaScript und Python bei Index 0. Schleife bis &lt; Length oder &lt;= Length - 1.</text>
+                <text x="20" y="70" font-family="sans-serif" font-size="11.5" fill="#1e3a8a">2. <tspan font-weight="bold">Integer Truncation vermeiden:</tspan> Ganzzahl / Ganzzahl schneidet Kommastellen strikt ab. Mindestens ein Operand muss double sein (oder expliziter Typecast (double)summe).</text>
+                <text x="20" y="92" font-family="sans-serif" font-size="11.5" fill="#1e3a8a">3. <tspan font-weight="bold">Ziel-Datentyp:</tspan> Die Ergebnisvariable für einen mathematischen Durchschnitt muss stets einen Gleitkommatyp (double oder float) besitzen.</text>
+            </g>
+        </svg>
+        `;
+    },
+
+    // 11. DIN 66261 Nassi-Shneiderman Struktogramm: SucheMAC Lineare Suche (IHK Original)
+    getMacSucheStruktogrammSvg: function() {
+        return `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 620" width="100%" height="100%">
+            <rect width="860" height="620" fill="#f8fafc" rx="10" />
+            <text x="430" y="30" font-family="sans-serif" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">DIN 66261 Nassi-Shneiderman Struktogramm: SucheMAC (Lineare Suche)</text>
+            <text x="430" y="50" font-family="sans-serif" font-size="12" fill="#64748b" text-anchor="middle">IHK Originalaufgabe IT 3 Software-Entwicklung (Systemhaus KG, 16 Punkte)</text>
+
+            <!-- Main Struktogramm Outer Box -->
+            <g transform="translate(60, 70)">
+                <rect width="740" height="430" fill="#ffffff" stroke="#0f172a" stroke-width="2.5" />
+
+                <!-- 1. Funktionssignatur / Kopfblock -->
+                <rect x="0" y="0" width="740" height="45" fill="#f1f5f9" stroke="#0f172a" stroke-width="1.8" />
+                <text x="20" y="27" font-family="Consolas, monospace" font-size="13.5" font-weight="bold" fill="#0f172a">Methode SucheMAC (Eingabe: string[] macAdressen, string gesucht) ➔ Rückgabe: bool</text>
+
+                <!-- 2. Zählschleife: L-förmiger Rahmen -->
+                <!-- Schleifenkopf horizontal -->
+                <rect x="0" y="45" width="740" height="40" fill="#fef3c7" stroke="#0f172a" stroke-width="1.8" />
+                <text x="20" y="70" font-family="sans-serif" font-size="13" font-weight="bold" fill="#92400e">FÜR i = 0 BIS (Länge von macAdressen - 1) SCHRITT 1</text>
+                <text x="490" y="70" font-family="sans-serif" font-size="11.5" font-style="italic" fill="#b45309">(Alternativ: FÜR JEDES mac IN macAdressen)</text>
+
+                <!-- Linker L-Steg (Schleifenkörper) -->
+                <rect x="0" y="85" width="40" height="240" fill="#fef3c7" stroke="#0f172a" stroke-width="1.8" />
+                
+                <!-- Schleifen-Innenbereich (x von 40 bis 740, Breite 700) -->
+                <g transform="translate(40, 85)">
+                    <!-- Verzweigung: Dreieck -->
+                    <polygon points="0,0 700,0 350,70" fill="#e0f2fe" stroke="#0f172a" stroke-width="1.8" />
+                    <text x="350" y="32" font-family="Consolas, monospace" font-size="13" font-weight="bold" fill="#0369a1" text-anchor="middle">macAdressen[i] == gesucht ?</text>
+                    <text x="45" y="55" font-family="sans-serif" font-size="13" font-weight="bold" fill="#16a34a">JA</text>
+                    <text x="655" y="55" font-family="sans-serif" font-size="13" font-weight="bold" fill="#dc2626">NEIN</text>
+
+                    <!-- Vertikale Trennlinie unter der Dreiecksspitze -->
+                    <line x1="350" y1="70" x2="350" y2="240" stroke="#0f172a" stroke-width="1.8" />
+
+                    <!-- JA-Pfad (links, Breite 350): Treffer gefunden! -->
+                    <rect x="0" y="70" width="350" height="85" fill="#dcfce7" stroke="#0f172a" stroke-width="1" />
+                    <text x="25" y="105" font-family="Consolas, monospace" font-size="13" font-weight="bold" fill="#15803d">RÜCKGABE true</text>
+                    <text x="25" y="128" font-family="sans-serif" font-size="11.5" font-weight="bold" fill="#166534">(Methode sofort beenden / Early Exit)</text>
+
+                    <rect x="0" y="155" width="350" height="85" fill="#f0fdf4" stroke="#0f172a" stroke-width="1" />
+                    <text x="25" y="195" font-family="sans-serif" font-size="11.5" fill="#166534">• Treffer garantiert vorhanden</text>
+                    <text x="25" y="215" font-family="sans-serif" font-size="11.5" fill="#166534">• Keine weiteren Prüfungen nötig</text>
+
+                    <!-- NEIN-Pfad (rechts, Breite 350): Kein Treffer bei diesem Element -->
+                    <rect x="350" y="70" width="350" height="170" fill="#f8fafc" stroke="#0f172a" stroke-width="1" />
+                    <line x1="350" y1="240" x2="700" y2="70" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4,4" />
+                    <text x="430" y="145" font-family="sans-serif" font-size="12" font-style="italic" fill="#64748b">Keine Aktion</text>
+                    <text x="430" y="168" font-family="sans-serif" font-size="11.5" fill="#475569">(Nächster Schleifendurchlauf i++)</text>
+                </g>
+
+                <!-- 3. Nach der Schleife (vollständige Breite 740): Wenn gesamte Schleife ohne Treffer durchlief -->
+                <rect x="0" y="325" width="740" height="105" fill="#fee2e2" stroke="#0f172a" stroke-width="1.8" />
+                <text x="30" y="360" font-family="Consolas, monospace" font-size="14" font-weight="bold" fill="#991b1b">RÜCKGABE false</text>
+                <text x="30" y="385" font-family="sans-serif" font-size="12" font-weight="bold" fill="#b91c1c">(Gesamtes Array wurde vollständig durchsucht, Adresse nicht gefunden!)</text>
+                <text x="30" y="408" font-family="sans-serif" font-size="11" fill="#475569">Methode beenden.</text>
+            </g>
+
+            <!-- Warning / IHK Trap Box -->
+            <g transform="translate(60, 515)">
+                <rect width="740" height="85" fill="#fffbeb" stroke="#f59e0b" stroke-width="1.8" rx="8" />
+                <text x="20" y="24" font-family="sans-serif" font-size="12" font-weight="bold" fill="#b45309">⚠️ Häufigste IHK-Prüfungsfalle bei Suchalgorithmen:</text>
+                <text x="20" y="46" font-family="sans-serif" font-size="11.5" fill="#92400e">Viele Prüflinge tragen im NEIN-Ast der Schleife fälschlicherweise ein: <tspan font-weight="bold" fill="#dc2626">"RÜCKGABE false"</tspan>.</text>
+                <text x="20" y="66" font-family="sans-serif" font-size="11.5" fill="#78350f">➔ Folge: Stimmt das ERSTE Element nicht überein, bricht das Programm sofort mit false ab und prüft die restlichen Computer nie! 'false' gehört immer erst <tspan font-weight="bold">NACH</tspan> das Schleifenende!</text>
+            </g>
+        </svg>
+        `;
+    },
+
     getAutoDiagramSvg: function(q) {
         if (!q) return null;
         // 1. Wenn die Frage bereits eine explizite grafische Musterlösung besitzt
@@ -5057,6 +5232,16 @@ var VisualDiagrams = {
         const topic = (q.topic || "").toLowerCase();
         const question = (q.question || "").toLowerCase();
         const text = topic + " " + question;
+
+        // Trouble-Ticket Code-Review & Bugfixing (IHK Original)
+        if (text.includes("trouble-ticket") || (text.includes("code-review") && text.includes("durchschnitt"))) {
+            return VisualDiagrams.getCodeReviewTroubleTicketSvg();
+        }
+
+        // SucheMAC Lineare Suche Struktogramm (IHK Original)
+        if (text.includes("suchemac") || (text.includes("mac-adresse") && (text.includes("such") || text.includes("struktogramm")))) {
+            return VisualDiagrams.getMacSucheStruktogrammSvg();
+        }
 
         // EVA-Event GmbH / Jukebox-Soft Klassendiagramm (IHK Original)
         if (text.includes("eva-event") || text.includes("jukebox-soft") || (text.includes("tournee") && text.includes("veranstaltung"))) {

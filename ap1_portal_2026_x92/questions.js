@@ -12435,6 +12435,222 @@ c) Pfeilrichtungen & Extension Point:
         correctAnswer: 0,
         solutionDiagramSvg: VisualDiagrams.getUmlIncludeExtendCheatSheetSvg(),
         explanation: "Erweiterungsbeziehung <<extend>>: Der Pfeil zeigt vom erweiternden Use-Case ZUM Basisfall ('Persönliche Übergabe' ──<<extend>>──▶ 'Transport')."
+    },
+    {
+        id: 550,
+        isHard: true,
+        difficulty: "hard",
+        isBawueFocus: true,
+        isPseudocode: true,
+        theme: "pseudocode",
+        topic: "💻 IHK Originalaufgabe: Code-Review & Bugfixing – Trouble-Ticket Durchschnittswert (6 Punkte)",
+        type: "open-text",
+        question: `IHK Original-Prüfungsaufgabe (IT 5 Programmierung, 6 Punkte):
+Eine Auswerteroutine des Trouble-Ticket-Systems erzeugt seltsame Werte. In einem Code-Review müssen Sie den folgenden Codeausschnitt analysieren:
+
+int durchschnittswert = 0;
+int summe = 0;
+
+for(int i = 1; i < daten.Length; i++)
+{
+    summe = summe + daten[i];
+}
+
+durchschnittswert = summe / daten.Length;
+return durchschnittswert;
+
+Testfall & Beobachtung im System:
+- Folgende Werte wurden für das Integer-Array daten verwendet (Eingabe): 4, 2, 8, 1
+- Die Variable durchschnittswert erhält den fragwürdigen Wert (Ausgabe): 2
+- Logik: Die Aufgabe des Codes ist, den exakten Durchschnitt als Kommazahl zu berechnen. Für die Berechnung werden die Werte im Array daten verwendet.
+
+Aufgaben:
+a) Analysieren Sie das Fehlverhalten: Warum liefert der Algorithmus für die Eingabe [4, 2, 8, 1] exakt den falschen Wert 2 statt des mathematisch korrekten Werts 3.75? Nennen Sie die beiden mathematisch/technischen Rechenfehler im Detail.
+b) Korrigieren Sie die fehlerhaften Codezeilen, sodass die Routine für beliebige Arrays den mathematisch exakten Durchschnittswert mit Nachkommastellen berechnet und zurückgibt.`,
+        musterloesung: `Musterlösung IHK Code-Review (IT 5 Trouble-Ticket):
+
+a) Ursachenanalyse der fehlerhaften Ausgabe (2 statt 3.75):
+1. Off-by-One Indexfehler (Erstes Array-Element ignoriert):
+   - In C#, Java und gängigen Sprachen beginnt die Array-Indizierung bei 0 (Zero-Based Indexing).
+   - Die Schleife 'for(int i = 1; i < daten.Length; i++)' startet bei Index 1.
+   - Dadurch wird daten[0] (= 4) komplett ignoriert!
+   - Es werden nur die Indizes 1, 2 und 3 aufsummiert: summe = 2 + 8 + 1 = 11 (statt korrekterweise 15).
+2. Ganzzahlarithmetik / Integer-Division (Abschneiden der Nachkommastellen):
+   - 'summe' (11) und 'daten.Length' (4) sind beide Ganzzahlen (int).
+   - Die Division 'summe / daten.Length' (11 / 4) ist eine Ganzzahldivision.
+   - Dabei wird der Nachkommaanteil (.75) abgeschnitten und das Ergebnis ist 2.
+3. Falscher Ergebnisdatentyp:
+   - 'durchschnittswert' ist als int deklariert und kann prinzipiell keine Kommazahlen speichern.
+
+b) Korrigierter Quellcode (Lösungsvorlage 13):
+double durchschnittswert = 0.0;
+double summe = 0.0;
+
+for (int i = 0; i < daten.Length; i++)
+{
+    summe = summe + daten[i];
+}
+
+durchschnittswert = summe / daten.Length;
+return durchschnittswert;
+
+Alternative Korrektur der Division bei 'int summe':
+durchschnittswert = (double) summe / daten.Length;
+
+Kernaspekte für volle Punktzahl laut IHK:
+• durchschnittswert: Datentyp int durch Fließkommazahl (double/float) ersetzen.
+• summe: Als double deklarieren oder Typecast (double), damit Fließkommadivision stattfindet.
+• Schleifenindex: Start bei i = 0 statt i = 1.`,
+        solutionDiagramSvg: VisualDiagrams.getCodeReviewTroubleTicketSvg(),
+        explanation: "Klassisches IHK-Code-Review: 0-basierte Indizierung (i=0) und Vermeidung von Integer-Division durch Gleitkommatypen (double)."
+    },
+    {
+        id: 551,
+        isHard: false,
+        difficulty: "standard",
+        isBawueFocus: true,
+        isPseudocode: true,
+        theme: "pseudocode",
+        topic: "💻 IHK Multiple-Choice: Typische Bug-Muster im Code-Review (Off-by-One & Integer-Division)",
+        type: "multiple-choice",
+        question: "Ein Programmierer berechnet den Durchschnitt eines Integer-Arrays daten = [4, 2, 8, 1] mit folgendem Code:\n\nint summe = 0;\nfor(int i = 1; i < daten.Length; i++) {\n    summe += daten[i];\n}\nint avg = summe / daten.Length;\n\nWelcher Wert steht danach in avg und warum?",
+        options: [
+            "2, weil das erste Element daten[0] (=4) durch den Schleifenstart bei i=1 ignoriert wird (summe = 11) und die Integer-Division 11 / 4 alle Nachkommastellen abschneidet.",
+            "3.75, da moderne Compiler Divisionen automatisch auf Fließkomma runden.",
+            "3, weil die Division kaufmännisch aufgerundet wird.",
+            "0, da der Schleifenzähler einen Überlauf erzeugt."
+        ],
+        correctAnswer: 0,
+        solutionDiagramSvg: VisualDiagrams.getCodeReviewTroubleTicketSvg(),
+        explanation: "Doppelter Fehler: Index 0 wird übersprungen (Summe = 11) und 11 / 4 schneidet Nachkommastellen ganzzahlig zu 2 ab."
+    },
+    {
+        id: 552,
+        isHard: true,
+        difficulty: "hard",
+        isBawueFocus: true,
+        isPseudocode: true,
+        theme: "pseudocode",
+        topic: "💻 IHK Originalaufgabe: Algorithmenentwurf SucheMAC – Lineare Suche (Systemhaus KG, 16 Punkte)",
+        type: "open-text",
+        question: `IHK Original-Prüfungsaufgabe (IT 3 Software-Entwicklung, 16 Punkte):
+Die Software auf den ausgelieferten Computern wird weiterhin von den Mitarbeitenden der Systemhaus KG verwaltet. Hierfür steht eine Software zur Verfügung. Sie erhalten den Auftrag, ein Modul dieser Software zu erweitern.
+
+Im Pflichtenheft finden Sie folgende Beschreibung der Logik:
+„...Die Suche nach einem Computer soll in diesem Modul über die MAC-Adresse möglich sein. Die Methode SucheMAC erhält als Übergabeparameter ein Array mit MAC-Adressen, das durchsucht werden soll. Der zweite Parameter ist die MAC-Adresse, die gefunden werden soll. Als Rückgabewert soll true zurückgegeben werden, wenn die gesuchte Adresse im Array vorhanden ist, andernfalls false.“
+
+Signatur der Methode:
+static bool SucheMAC(string[] macAdressen, string gesucht)
+
+Aufgaben:
+a) Erstellen Sie die Suchlogik. Entscheiden Sie sich für eine der folgenden Darstellungen:
+   - Im Unterricht gelernte Programmiersprache (z. B. C#, Java, Python)
+   - Detaillierter Pseudocode
+   - Nassi-Shneiderman Struktogramm (DIN 66261)
+   - Programmablaufplan (DIN 66001).
+b) Erläutern Sie die vier IHK-Bewertungsschwerpunkte für die Bewertung dieser Aufgabe:
+   1. Zugriff auf Array
+   2. Schleifenkonstrukt
+   3. Vergleich
+   4. Rückgabewerte und -Pfade (Early Exit vs. Schleifenabschluss).
+c) Warum darf die Anweisung 'return false' keinesfalls in einem 'else'-Zweig innerhalb der Schleife platziert werden?`,
+        musterloesung: `Musterlösung IHK IT 3 SucheMAC (16 Punkte):
+
+a) Implementierungsmöglichkeiten:
+
+Alternative 1: C# / Java mit foreach-Schleife (Sehr elegant & lesbar):
+static bool SucheMAC(string[] macAdressen, string gesucht)
+{
+    foreach (string mac in macAdressen)
+    {
+        if (mac == gesucht)
+        {
+            return true; // Sofortiger Abbruch bei Fund (Early Exit)
+        }
+    }
+    return false; // Erst NACH vollständigem Durchlauf aller Elemente
+}
+
+Alternative 2: Klassische for-Zählschleife mit Indizierung:
+static bool SucheMAC(string[] macAdressen, string gesucht)
+{
+    for (int i = 0; i < macAdressen.Length; i++)
+    {
+        if (macAdressen[i] == gesucht)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+Alternative 3: Detaillierter DIN-konformer Pseudocode:
+FUNKTION SucheMAC(macAdressen: ARRAY VON ZEICHENKETTE, gesucht: ZEICHENKETTE) ➔ WAHRHEITSWERT
+    FÜR i = 0 BIS LÄNGE(macAdressen) - 1 SCHRITT 1
+        WENN macAdressen[i] == gesucht DANN
+            RÜCKGABE wahr // Treffer ➔ sofortiges Verlassen
+        ENDE WENN
+    ENDE FÜR
+    RÜCKGABE falsch // Array komplett geprüft, keine Übereinstimmung
+ENDE FUNKTION
+
+b) Die vier IHK-Bewertungsschwerpunkte:
+1. Zugriff auf Array: Korrekte Indizierung mit [i] oder Element-Iteration ohne Überlauf.
+2. Schleife: Vollständige Iteration (Start bei 0 bis Length - 1) oder foreach.
+3. Vergleich: Exakter Vergleichsoperator (== bzw. .Equals) zwischen Element und Suchbegriff.
+4. Rückgabewerte & Rückgabepfade:
+   - 'return true' sofort beim ersten Treffer (bricht Schleife vorzeitig ab, spart Rechenzeit).
+   - 'return false' zwingend NACH dem Ende der Schleife, wenn alle Elemente ohne Treffer durchsucht wurden.
+
+c) Die IHK-Prüfungsfalle mit 'else return false':
+Wenn im Schleifenkörper folgendes notiert wird:
+WENN mac == gesucht DANN return true SONST return false ENDE WENN
+➔ Fataler Logikfehler: Wenn das allererste Element im Array NICHT übereinstimmt, springt der Code sofort in den else-Zweig und gibt 'false' zurück.
+➔ Die Methode terminiert nach genau 1 Prüfung! Alle weiteren Elemente (Positionen 1 bis n-1) werden niemals geprüft. Das führt zu 0 Punkten für den Rückgabepfad!`,
+        solutionDiagramSvg: VisualDiagrams.getMacSucheStruktogrammSvg(),
+        explanation: "Lineare Suche: Bei Fund sofort 'return true' (Early Exit), bei Nicht-Fund 'return false' zwingend erst NACH der Schleife."
+    },
+    {
+        id: 553,
+        isHard: false,
+        difficulty: "standard",
+        isBawueFocus: true,
+        isPseudocode: true,
+        theme: "pseudocode",
+        topic: "💻 IHK Multiple-Choice: Die 'Else-Return'-Falle bei Suchalgorithmen",
+        type: "multiple-choice",
+        question: "Ein Auszubildender programmiert eine lineare Suche über ein Array mit n Elementen:\n\nfor (int i = 0; i < arr.Length; i++) {\n    if (arr[i] == gesucht) {\n        return true;\n    } else {\n        return false;\n    }\n}\n\nWarum führt dieser Code zu einem gravierenden Fehler in der Praxis?",
+        options: [
+            "Er prüft nur das allererste Element: Wenn arr[0] != gesucht ist, beendet die Methode sofort mit false, ohne die restlichen Elemente zu prüfen.",
+            "Es entsteht eine Endlosschleife, weil der else-Zweig die Schleife zurücksetzt.",
+            "Der Code kompiliert nicht, weil return nicht in einer if-Verzweigung stehen darf.",
+            "Die Methode gibt immer true zurück, weil der if-Zweig Vorrang hat."
+        ],
+        correctAnswer: 0,
+        solutionDiagramSvg: VisualDiagrams.getMacSucheStruktogrammSvg(),
+        explanation: "Klassischer Anfängerfehler: 'return false' im else-Zweig beendet die gesamte Methode bereits beim ersten ungleichen Element."
+    },
+    {
+        id: 554,
+        isHard: false,
+        difficulty: "standard",
+        isBawueFocus: true,
+        isPseudocode: true,
+        isDiagram: true,
+        diagramType: "Nassi-Shneiderman Struktogramm",
+        theme: "pseudocode",
+        topic: "💻 IHK Fachaufgabe: Nassi-Shneiderman Struktogramm zur MAC-Adress-Suche (DIN 66261)",
+        type: "multiple-choice",
+        question: "Wie wird die lineare Suche nach einer MAC-Adresse in einem Nassi-Shneiderman Struktogramm (DIN 66261) normgerecht modelliert?",
+        options: [
+            "Eine Zählschleife mit L-förmigem Rahmen für 'FÜR i = 0 BIS Länge - 1'; darin ein Dreiecks-Verzweigungsblock mit 'RÜCKGABE true' im JA-Pfad und leerer Aktion im NEIN-Pfad; sowie erst NACH dem gesamten Schleifenblock ein Block 'RÜCKGABE false'.",
+            "Ein Dreieck über die gesamte Breite mit 'RÜCKGABE false' im NEIN-Ast innerhalb der Schleife.",
+            "Ein Kreis mit zwei Transitionen [gesucht == true] und [gesucht == false].",
+            "Ein Parallelisierungsbalken (AND-Fork), der beide Pfade parallel ausführt."
+        ],
+        correctAnswer: 0,
+        solutionDiagramSvg: VisualDiagrams.getMacSucheStruktogrammSvg(),
+        explanation: "DIN 66261 Struktogramm: Zählschleife als L-Rahmen, Dreieck für Verzweigung (JA = true, NEIN = leer), und false erst im Nachfolgeblock nach der Schleife."
     }
 
 ];
