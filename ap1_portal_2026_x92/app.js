@@ -306,108 +306,120 @@ function filterQuestions(theme) {
             }
         } else if (theme === "diagrams" || theme === "diagram-training") {
             filteredQuestions = questions.filter(q => {
-                const isSubnet = (q.topic && q.topic.toLowerCase().includes("subnetz")) || 
-                                 (q.question && (q.question.toLowerCase().includes("subnetz") || q.question.toLowerCase().includes("vlsm")));
-                if (isSubnet && !q.isDiagram) return false;
+                const topicLower = (q.topic || "").toLowerCase();
+                const dtLower = (q.diagramType || "").toLowerCase();
+                const qLower = (q.question || "").toLowerCase();
+
+                // Strict exclusion: Calculations, power/units, number systems without explicit diagram
                 if ((q.isCalculation || q.isPowerCalc || q.isZahlensysteme) && !q.isDiagram) return false;
 
-                return q.theme === "diagrams" || 
-                    q.isDiagram === true || 
-                    (q.diagramType && q.diagramType.length > 0) ||
-                    (q.topic && (
-                        q.topic.toLowerCase().includes("diagramm") || 
-                        q.topic.toLowerCase().includes("uml") || 
-                        q.topic.toLowerCase().includes("erd") || 
-                        q.topic.toLowerCase().includes("epk") || 
-                        q.topic.toLowerCase().includes("bpmn") || 
-                        q.topic.toLowerCase().includes("aktivität") || 
-                        q.topic.toLowerCase().includes("aktivitaet") || 
-                        q.topic.toLowerCase().includes("activity") || 
-                        (/\bnetzplan\b/i.test(q.topic) || /\bnetzplantechnik\b/i.test(q.topic)) || 
-                        q.topic.toLowerCase().includes("struktogramm") || 
-                        q.topic.toLowerCase().includes("pap") ||
-                        q.topic.toLowerCase().includes("use-case") ||
-                        q.topic.toLowerCase().includes("use case") ||
-                        q.topic.toLowerCase().includes("klassendiagramm") ||
-                        q.topic.toLowerCase().includes("entscheidungstabelle")
-                    )) ||
-                    (q.question && (
-                        q.question.toLowerCase().includes("use-case") ||
-                        q.question.toLowerCase().includes("klassendiagramm") ||
-                        q.question.toLowerCase().includes("erd") ||
-                        q.question.toLowerCase().includes("entity-relationship") ||
-                        q.question.toLowerCase().includes("kardinalität") ||
-                        q.question.toLowerCase().includes("epk") ||
-                        q.question.toLowerCase().includes("bpmn") ||
-                        (/\bnetzplan\b/i.test(q.question) || /\bnetzplantechnik\b/i.test(q.question)) ||
-                        q.question.toLowerCase().includes("kritischer pfad") ||
-                        q.question.toLowerCase().includes("struktogramm") ||
-                        q.question.toLowerCase().includes("entscheidungstabelle")
-                    ));
+                // Strict exclusion: Subnetting / VLSM tasks without explicit diagram
+                if ((topicLower.includes("subnetz") || topicLower.includes("vlsm") || qLower.includes("subnetz") || qLower.includes("vlsm")) && !q.isDiagram) return false;
+
+                // Strict exclusion: Meisterklasse non-diagram tasks (SQL, USV, Handelskalkulation, etc.)
+                if (topicLower.includes("meisterklasse") && !topicLower.includes("netzplan") && !q.isDiagram && !dtLower) return false;
+
+                // Direct diagram theme or explicit diagram flag or diagramType
+                if (q.theme === "diagrams" || q.isDiagram === true || (dtLower && dtLower.length > 0)) {
+                    return true;
+                }
+
+                // Explicit diagram keywords in topic
+                return topicLower.includes("diagramm") ||
+                       topicLower.includes("uml") ||
+                       topicLower.includes("erd") ||
+                       topicLower.includes("entity-relationship") ||
+                       topicLower.includes("epk") ||
+                       topicLower.includes("bpmn") ||
+                       topicLower.includes("aktivität") ||
+                       topicLower.includes("aktivitaet") ||
+                       topicLower.includes("activity") ||
+                       topicLower.includes("netzplan") ||
+                       topicLower.includes("struktogramm") ||
+                       topicLower.includes("pap") ||
+                       topicLower.includes("use-case") ||
+                       topicLower.includes("use case") ||
+                       topicLower.includes("anwendungsfall") ||
+                       topicLower.includes("klassendiagramm") ||
+                       topicLower.includes("entscheidungstabelle");
             });
         } else if (theme === "uml-class" || theme === "klassendiagramm") {
-            filteredQuestions = questions.filter(q => 
-                (q.diagramType && q.diagramType.toLowerCase().includes("klasse")) ||
-                (q.topic && q.topic.toLowerCase().includes("klasse")) ||
-                (q.question && (
-                    q.question.toLowerCase().includes("klassendiagramm") ||
-                    q.question.toLowerCase().includes("komposition") ||
-                    q.question.toLowerCase().includes("aggregation") ||
-                    q.question.toLowerCase().includes("vererbung") ||
-                    q.question.toLowerCase().includes("sichtbarkeitsmodifizierer") ||
-                    q.question.toLowerCase().includes("multiplizität")
-                ))
-            );
+            filteredQuestions = questions.filter(q => {
+                const topicLower = (q.topic || "").toLowerCase();
+                const dtLower = (q.diagramType || "").toLowerCase();
+                const qLower = (q.question || "").toLowerCase();
+
+                // Strict exclusion: Calculations, subnetting, non-class Meisterklasse
+                if ((q.isCalculation || q.isPowerCalc || q.isZahlensysteme) && !q.isDiagram) return false;
+                if ((topicLower.includes("subnetz") || topicLower.includes("vlsm") || qLower.includes("subnetz") || qLower.includes("vlsm")) && !q.isDiagram) return false;
+                if (topicLower.includes("meisterklasse") && !topicLower.includes("klassendiagramm") && !dtLower.includes("klasse")) return false;
+
+                if (dtLower.includes("klasse") || dtLower.includes("class")) return true;
+                if (topicLower.includes("klassendiagramm") || topicLower.includes("uml klassendiagramm")) return true;
+                if (topicLower.includes("beziehungstypen") && topicLower.includes("tabelle")) return true;
+                if (topicLower.includes("kardinalität") && topicLower.includes("e-commerce")) return true;
+                if (topicLower.includes("sichtbarkeitsmodifizierer")) return true;
+
+                return false;
+            });
         } else if (theme === "uml-usecase" || theme === "usecase") {
-            filteredQuestions = questions.filter(q => 
-                (q.diagramType && (q.diagramType.toLowerCase().includes("use-case") || q.diagramType.toLowerCase().includes("use case") || q.diagramType.toLowerCase().includes("anwendungsfall"))) ||
-                (q.topic && (q.topic.toLowerCase().includes("use-case") || q.topic.toLowerCase().includes("use case") || q.topic.toLowerCase().includes("anwendungsfall"))) ||
-                (q.question && (
-                    q.question.toLowerCase().includes("use-case") ||
-                    q.question.toLowerCase().includes("anwendungsfalldiagramm") ||
-                    q.question.toLowerCase().includes("<<include>>") ||
-                    q.question.toLowerCase().includes("<<extend>>") ||
-                    q.question.toLowerCase().includes("systemgrenze")
-                ))
-            );
+            filteredQuestions = questions.filter(q => {
+                const topicLower = (q.topic || "").toLowerCase();
+                const dtLower = (q.diagramType || "").toLowerCase();
+
+                if (q.isCalculation || q.isPowerCalc || q.isZahlensysteme) return false;
+
+                if (dtLower.includes("use-case") || dtLower.includes("use case") || dtLower.includes("anwendungsfall")) return true;
+                if (topicLower.includes("use-case") || topicLower.includes("use case") || topicLower.includes("anwendungsfall")) return true;
+
+                return false;
+            });
         } else if (theme === "uml-activity" || theme === "aktivitaet") {
-            filteredQuestions = questions.filter(q => 
-                (q.diagramType && (q.diagramType.toLowerCase().includes("aktivität") || q.diagramType.toLowerCase().includes("aktivitaet") || q.diagramType.toLowerCase().includes("activity"))) ||
-                (q.topic && (q.topic.toLowerCase().includes("aktivität") || q.topic.toLowerCase().includes("aktivitaet") || q.topic.toLowerCase().includes("activity"))) ||
-                (q.question && (
-                    q.question.toLowerCase().includes("aktivitätsdiagramm") ||
-                    q.question.toLowerCase().includes("decision") ||
-                    q.question.toLowerCase().includes("fork") ||
-                    q.question.toLowerCase().includes("join") ||
-                    q.question.toLowerCase().includes("swimlane") ||
-                    q.question.toLowerCase().includes("partition")
-                ))
-            );
+            filteredQuestions = questions.filter(q => {
+                const topicLower = (q.topic || "").toLowerCase();
+                const dtLower = (q.diagramType || "").toLowerCase();
+
+                if (q.isCalculation || q.isPowerCalc || q.isZahlensysteme) return false;
+
+                // Explicit exclusion: Class, state, sequence
+                if (dtLower.includes("klasse") || dtLower.includes("zustand") || dtLower.includes("sequenz") || dtLower.includes("state") || dtLower.includes("sequence")) return false;
+
+                if (dtLower.includes("aktivit") || dtLower.includes("activity")) return true;
+                if (topicLower.includes("aktivitätsdiagramm") || topicLower.includes("aktivitaetsdiagramm")) return true;
+                if (topicLower.includes("prozessmodellierung im ihk-vergleich")) return true;
+
+                return false;
+            });
         } else if (theme === "uml-state" || theme === "zustand") {
-            filteredQuestions = questions.filter(q => 
-                (q.diagramType && (q.diagramType.toLowerCase().includes("zustand") || q.diagramType.toLowerCase().includes("state"))) ||
-                (q.topic && (q.topic.toLowerCase().includes("zustand") || q.topic.toLowerCase().includes("state"))) ||
-                (q.question && (
-                    q.question.toLowerCase().includes("zustandsdiagramm") ||
-                    q.question.toLowerCase().includes("state machine") ||
-                    q.question.toLowerCase().includes("transition") ||
-                    q.question.toLowerCase().includes("guard") ||
-                    q.question.toLowerCase().includes("wächterbedingung")
-                ))
-            );
+            filteredQuestions = questions.filter(q => {
+                const topicLower = (q.topic || "").toLowerCase();
+                const dtLower = (q.diagramType || "").toLowerCase();
+
+                if (q.isCalculation || q.isPowerCalc || q.isZahlensysteme) return false;
+
+                // Explicit exclusion: Activity, class, sequence
+                if (dtLower.includes("aktivit") || dtLower.includes("activity") || dtLower.includes("klasse") || dtLower.includes("sequenz")) return false;
+
+                if (dtLower.includes("zustand") || dtLower.includes("state")) return true;
+                if (topicLower.includes("zustandsdiagramm") || topicLower.includes("state machine")) return true;
+
+                return false;
+            });
         } else if (theme === "uml-sequence" || theme === "sequenz") {
-            filteredQuestions = questions.filter(q => 
-                (q.diagramType && (q.diagramType.toLowerCase().includes("sequenz") || q.diagramType.toLowerCase().includes("sequence"))) ||
-                (q.topic && (q.topic.toLowerCase().includes("sequenz") || q.topic.toLowerCase().includes("sequence"))) ||
-                (q.question && (
-                    q.question.toLowerCase().includes("sequenzdiagramm") ||
-                    q.question.toLowerCase().includes("lebenslinie") ||
-                    q.question.toLowerCase().includes("synchron") ||
-                    q.question.toLowerCase().includes("asynchron") ||
-                    q.question.toLowerCase().includes("aktivierungsbalken") ||
-                    q.question.toLowerCase().includes("rückgabenachricht")
-                ))
-            );
+            filteredQuestions = questions.filter(q => {
+                const topicLower = (q.topic || "").toLowerCase();
+                const dtLower = (q.diagramType || "").toLowerCase();
+
+                if (q.isCalculation || q.isPowerCalc || q.isZahlensysteme) return false;
+
+                // Explicit exclusion: Activity, class, state
+                if (dtLower.includes("aktivit") || dtLower.includes("activity") || dtLower.includes("klasse") || dtLower.includes("zustand")) return false;
+
+                if (dtLower.includes("sequenz") || dtLower.includes("sequence")) return true;
+                if (topicLower.includes("sequenzdiagramm") || topicLower.includes("lebenslinie")) return true;
+
+                return false;
+            });
         } else if (theme === "calculations" || theme === "rechnen") {
             filteredQuestions = questions.filter(q => 
                 q.theme === "calculations" || 
