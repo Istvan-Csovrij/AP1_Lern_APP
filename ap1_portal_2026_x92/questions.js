@@ -12742,7 +12742,7 @@ d) Rückmeldungen an den Anwender:
         theme: "diagrams",
         topic: "⏱️ IHK Originalaufgabe: Sequenzdiagramm PixelPic AG – Onlineshop & dynamische Objekterzeugung",
         type: "open-text",
-        question: "Die X&Y IT GmbH verwendet die Unified Modeling Language (UML) zur Dokumentation. Der Ablauf einer Online-Bestellung im Webshop der PixelPic AG soll in einem UML-Sequenzdiagramm dargestellt werden.
+        question: `Die X&Y IT GmbH verwendet die Unified Modeling Language (UML) zur Dokumentation. Der Ablauf einer Online-Bestellung im Webshop der PixelPic AG soll in einem UML-Sequenzdiagramm dargestellt werden.
 
 Ablaufbeschreibung:
 1. Kunde ruft die Startseite mit dem Angebot des Shops auf.
@@ -12766,7 +12766,7 @@ Aufgabenstellung:
 a) Welche vier Lebenslinien sind für dieses Sequenzdiagramm anzulegen?
 b) Erläutern Sie die normgerechte UML-Notation für die dynamische Erzeugung von Objekten (Produktvorlage und Auftragsbestätigung). Wo beginnen deren Lebenslinien?
 c) Wie wird der Prüfvorgang pruefung() an der Lebenslinie ':Shop' dargestellt?
-d) Unterscheiden Sie die graphische Darstellung von synchronen Nachrichten und Antwortnachrichten in diesem Diagramm.",
+d) Unterscheiden Sie die graphische Darstellung von synchronen Nachrichten und Antwortnachrichten in diesem Diagramm.`,
         musterloesung: `Musterlösung IHK Sequenzdiagramm PixelPic AG Onlineshop:
 
 a) Die vier Lebenslinien (von links nach rechts):
@@ -12823,7 +12823,7 @@ d) Synchroner Methodenaufruf vs. Antwortnachricht:
         theme: "diagrams",
         topic: "🔀 IHK Originalaufgabe: Transformation EPK zu UML-Aktivitätsdiagramm (dLine AG Auftragsbearbeitung)",
         type: "open-text",
-        question: "Der Informatikkaufmann der dLine AG hat die Bearbeitung eines Kundenauftrags in einer Ereignisgesteuerten Prozesskette (EPK) dokumentiert.
+        question: `Der Informatikkaufmann der dLine AG hat die Bearbeitung eines Kundenauftrags in einer Ereignisgesteuerten Prozesskette (EPK) dokumentiert.
 Diese enthält Ereignisse (Sechsecke, z. B. 'Auftrag eingegangen'), Funktionen (abgerundete Rechtecke, z. B. 'Auftrag prüfen'), Organisationseinheiten (Ellipsen für Verkauf, Versand, Buchhaltung) sowie logische Konnektoren (XOR und AND).
 
 Im Rahmen der Systemumstellung soll dieser Prozess in ein UML 2.5 Aktivitätsdiagramm überführt werden.
@@ -12832,7 +12832,7 @@ Aufgabenstellung:
 a) Wie werden die Organisationseinheiten (Verkauf, Versand, Buchhaltung) der EPK in einem UML-Aktivitätsdiagramm abgebildet?
 b) Was geschieht mit den Zwischenereignissen der EPK (z. B. 'Auftrag ist geprüft') bei der Überführung in das UML-Aktivitätsdiagramm?
 c) Wie werden die EPK-Funktionen (z. B. 'Bonität prüfen', 'Ware versenden') in UML modelliert?
-d) Erläutern Sie die Übersetzung der logischen EPK-Verknüpfungen XOR und AND in UML 2.5 Symbole.",
+d) Erläutern Sie die Übersetzung der logischen EPK-Verknüpfungen XOR und AND in UML 2.5 Symbole.`,
         musterloesung: `Musterlösung IHK Transformation EPK zu UML-Aktivitätsdiagramm (dLine AG):
 
 a) Abbildung der Organisationseinheiten (Zuständigkeiten):
@@ -12870,7 +12870,7 @@ d) Abbildung der logischen Konnektoren:
         theme: "diagrams",
         topic: "🎯 IHK Originalaufgabe: Use-Case-Diagramm Ferienhausvermietung (B&G GmbH & Immo-IT)",
         type: "open-text",
-        question: "Die B&G GmbH vermietet exklusive Ferienhäuser. Die Immo-IT GmbH soll dazu eine Webanwendung entwickeln, über die im Internet Ferienhäuser angeboten und gebucht werden können.
+        question: `Die B&G GmbH vermietet exklusive Ferienhäuser. Die Immo-IT GmbH soll dazu eine Webanwendung entwickeln, über die im Internet Ferienhäuser angeboten und gebucht werden können.
 
 Das System soll folgende Kernfunktionalitäten abbilden:
 - Ein Vermieter stellt ein Ferienhaus ein
@@ -12883,7 +12883,7 @@ Aufgabenstellung:
 a) Bestimmen Sie die Systemgrenze sowie die primären Akteure des Anwendungsfalldiagramms.
 b) Nennen Sie alle zu modellierenden Use Cases (Anwendungsfälle) und ordnen Sie diese den Akteuren über Assoziationslinien zu.
 c) Erläutern Sie, warum Use Cases immer aus Sicht des Nutzers im Aktivitätsstil (Substantiv + Verb im Infinitiv) formuliert werden.
-d) Warum dürfen Akteure niemals innerhalb des Systemgrenzen-Rechtecks gezeichnet werden?",
+d) Warum dürfen Akteure niemals innerhalb des Systemgrenzen-Rechtecks gezeichnet werden?`,
         musterloesung: `Musterlösung IHK Use-Case-Diagramm Ferienhausvermietung (B&G GmbH & Immo-IT):
 
 a) Systemgrenze und Akteure:
