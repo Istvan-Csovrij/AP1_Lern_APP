@@ -4238,6 +4238,412 @@ var VisualDiagrams = {
         `;
     },
 
+    getUmlBeziehungenTabellenSvg: function() {
+        return `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 760" width="100%" height="100%">
+            <defs>
+                <marker id="tab-gen-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+                    <polygon points="0,1 10,5 0,9" fill="#ffffff" stroke="#0f172a" stroke-width="1.6" />
+                </marker>
+            </defs>
+            <rect width="960" height="760" fill="#f8fafc" rx="8" />
+
+            <!-- Title -->
+            <text x="480" y="30" font-family="sans-serif" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">IHK-Prüfungsaufgabe: UML-Klassendiagramm Beziehungstypen &amp; Begründungen</text>
+            <text x="480" y="52" font-family="sans-serif" font-size="11.5" font-style="italic" fill="#64748b" text-anchor="middle">Musterlösung für die Prüfungs-Tabelle: Komposition (◆), Generalisierung (▷), Aggregation (◇) &amp; Assoziation (—)</text>
+
+            <!-- Table Outer Frame -->
+            <rect x="30" y="70" width="900" height="660" fill="#ffffff" stroke="#0f172a" stroke-width="2" rx="4" />
+
+            <!-- Table Header -->
+            <rect x="30" y="70" width="900" height="42" fill="#e2e8f0" stroke="#0f172a" stroke-width="1.5" />
+            <line x1="250" y1="70" x2="250" y2="730" stroke="#0f172a" stroke-width="1.5" />
+            <line x1="410" y1="70" x2="410" y2="730" stroke="#0f172a" stroke-width="1.5" />
+            <line x1="640" y1="70" x2="640" y2="730" stroke="#0f172a" stroke-width="1.5" />
+
+            <text x="140" y="96" font-family="sans-serif" font-size="13" font-weight="bold" fill="#0f172a" text-anchor="middle">Beschreibung</text>
+            <text x="330" y="96" font-family="sans-serif" font-size="13" font-weight="bold" fill="#0f172a" text-anchor="middle">Beziehungstyp</text>
+            <text x="525" y="96" font-family="sans-serif" font-size="13" font-weight="bold" fill="#0f172a" text-anchor="middle">Klassendiagramm</text>
+            <text x="785" y="96" font-family="sans-serif" font-size="13" font-weight="bold" fill="#0f172a" text-anchor="middle">Begründung</text>
+
+            <!-- Row 1: Immobilie / Wohnungen (Komposition) -->
+            <line x1="30" y1="260" x2="930" y2="260" stroke="#0f172a" stroke-width="1.5" />
+
+            <!-- Col 1 -->
+            <text x="45" y="160" font-family="sans-serif" font-size="12" font-weight="600" fill="#0f172a">Eine Immobilie be-</text>
+            <text x="45" y="180" font-family="sans-serif" font-size="12" font-weight="600" fill="#0f172a">steht aus mehreren</text>
+            <text x="45" y="200" font-family="sans-serif" font-size="12" font-weight="600" fill="#0f172a">Wohnungen.</text>
+
+            <!-- Col 2 -->
+            <rect x="265" y="150" width="130" height="34" fill="#fee2e2" stroke="#dc2626" rx="6" />
+            <text x="330" y="172" font-family="sans-serif" font-size="13" font-weight="bold" fill="#991b1b" text-anchor="middle">Komposition</text>
+            <text x="330" y="202" font-family="sans-serif" font-size="10" fill="#64748b" text-anchor="middle">(starke Teil-Ganzes)</text>
+
+            <!-- Col 3: Visual UML Class -->
+            <rect x="425" y="145" width="80" height="34" fill="#f8fafc" stroke="#334155" stroke-width="1.5" rx="3" />
+            <text x="465" y="166" font-family="sans-serif" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle">Immobilie</text>
+
+            <!-- Composition Diamond & Line -->
+            <polygon points="505,162 515,155 525,162 515,169" fill="#0f172a" stroke="#0f172a" stroke-width="1.5" />
+            <line x1="525" y1="162" x2="560" y2="162" stroke="#0f172a" stroke-width="2" />
+
+            <rect x="560" y="145" width="70" height="34" fill="#f8fafc" stroke="#334155" stroke-width="1.5" rx="3" />
+            <text x="595" y="166" font-family="sans-serif" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle">Wohnung</text>
+
+            <rect x="435" y="195" width="180" height="20" fill="#fef2f2" stroke="#f87171" rx="4" />
+            <text x="525" y="209" font-family="sans-serif" font-size="10" font-weight="bold" fill="#dc2626" text-anchor="middle">◆ Schwarze Raute am Ganzen</text>
+
+            <!-- Col 4: Reason -->
+            <text x="655" y="145" font-family="sans-serif" font-size="11" font-weight="bold" fill="#0f172a">Existenzabhängigkeit:</text>
+            <text x="655" y="165" font-family="sans-serif" font-size="11" fill="#334155">• Eine Wohnung kann ohne die</text>
+            <text x="655" y="183" font-family="sans-serif" font-size="11" fill="#334155">  Immobilie physisch &amp; logisch</text>
+            <text x="655" y="201" font-family="sans-serif" font-size="11" fill="#334155">  nicht existieren.</text>
+            <text x="655" y="221" font-family="sans-serif" font-size="11" fill="#334155">• Wird die Immobilie abgerissen/</text>
+            <text x="655" y="239" font-family="sans-serif" font-size="11" fill="#334155">  gelöscht, erlöschen alle Wohnungen.</text>
+
+            <!-- Row 2: Bewohner / Mieter / Eigentümer (Generalisierung) -->
+            <line x1="30" y1="440" x2="930" y2="440" stroke="#0f172a" stroke-width="1.5" />
+
+            <!-- Col 1 -->
+            <text x="45" y="325" font-family="sans-serif" font-size="12" font-weight="600" fill="#0f172a">Bewohner können</text>
+            <text x="45" y="345" font-family="sans-serif" font-size="12" font-weight="600" fill="#0f172a">entweder Mieter oder</text>
+            <text x="45" y="365" font-family="sans-serif" font-size="12" font-weight="600" fill="#0f172a">Eigentümer sein.</text>
+
+            <!-- Col 2 -->
+            <rect x="260" y="320" width="140" height="34" fill="#eff6ff" stroke="#2563eb" rx="6" />
+            <text x="330" y="342" font-family="sans-serif" font-size="13" font-weight="bold" fill="#1e40af" text-anchor="middle">Generalisierung</text>
+            <text x="330" y="372" font-family="sans-serif" font-size="10" fill="#64748b" text-anchor="middle">(Vererbung / IS-A)</text>
+
+            <!-- Col 3: Visual UML Class -->
+            <rect x="480" y="280" width="80" height="30" fill="#f8fafc" stroke="#334155" stroke-width="1.5" rx="3" />
+            <text x="520" y="300" font-family="sans-serif" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle">Bewohner</text>
+
+            <!-- Generalization Arrow pointing up to Bewohner -->
+            <line x1="455" y1="365" x2="520" y2="310" stroke="#0f172a" stroke-width="1.8" marker-end="url(#tab-gen-arr)" />
+            <line x1="585" y1="365" x2="520" y2="310" stroke="#0f172a" stroke-width="1.8" />
+
+            <rect x="420" y="365" width="70" height="30" fill="#f8fafc" stroke="#334155" stroke-width="1.5" rx="3" />
+            <text x="455" y="384" font-family="sans-serif" font-size="10.5" font-weight="bold" fill="#0f172a" text-anchor="middle">Mieter</text>
+
+            <rect x="550" y="365" width="80" height="30" fill="#f8fafc" stroke="#334155" stroke-width="1.5" rx="3" />
+            <text x="590" y="384" font-family="sans-serif" font-size="10.5" font-weight="bold" fill="#0f172a" text-anchor="middle">Eigentümer</text>
+
+            <rect x="435" y="408" width="180" height="20" fill="#eff6ff" stroke="#60a5fa" rx="4" />
+            <text x="525" y="422" font-family="sans-serif" font-size="10" font-weight="bold" fill="#2563eb" text-anchor="middle">▷ Weißes Dreieck zur Oberklasse</text>
+
+            <!-- Col 4: Reason -->
+            <text x="655" y="310" font-family="sans-serif" font-size="11" font-weight="bold" fill="#0f172a">„Ist-ein“-Beziehung (IS-A):</text>
+            <text x="655" y="330" font-family="sans-serif" font-size="11" fill="#334155">• Bewohner ist die gemeinsame</text>
+            <text x="655" y="348" font-family="sans-serif" font-size="11" fill="#334155">  Basisklasse (Generalisierung).</text>
+            <text x="655" y="368" font-family="sans-serif" font-size="11" fill="#334155">• Mieter und Eigentümer sind</text>
+            <text x="655" y="386" font-family="sans-serif" font-size="11" fill="#334155">  Spezialisierungen und erben alle</text>
+            <text x="655" y="404" font-family="sans-serif" font-size="11" fill="#334155">  Eigenschaften des Bewohners.</text>
+
+            <!-- Row 3: Mietervereinigung / Mieter (Aggregation) -->
+            <line x1="30" y1="590" x2="930" y2="590" stroke="#0f172a" stroke-width="1.5" />
+
+            <!-- Col 1 -->
+            <text x="45" y="490" font-family="sans-serif" font-size="12" font-weight="600" fill="#0f172a">In einer Mietervereini-</text>
+            <text x="45" y="510" font-family="sans-serif" font-size="12" font-weight="600" fill="#0f172a">gung gibt es mehrere</text>
+            <text x="45" y="530" font-family="sans-serif" font-size="12" font-weight="600" fill="#0f172a">Mieter.</text>
+
+            <!-- Col 2 -->
+            <rect x="265" y="485" width="130" height="34" fill="#fefce8" stroke="#ca8a04" rx="6" />
+            <text x="330" y="507" font-family="sans-serif" font-size="13" font-weight="bold" fill="#a16207" text-anchor="middle">Aggregation</text>
+            <text x="330" y="537" font-family="sans-serif" font-size="10" fill="#64748b" text-anchor="middle">(schwache Teil-Ganzes)</text>
+
+            <!-- Col 3: Visual UML Class -->
+            <rect x="420" y="480" width="95" height="34" fill="#f8fafc" stroke="#334155" stroke-width="1.5" rx="3" />
+            <text x="467" y="501" font-family="sans-serif" font-size="9.5" font-weight="bold" fill="#0f172a" text-anchor="middle">Mietervereinigung</text>
+
+            <!-- Aggregation Diamond & Line -->
+            <polygon points="515,497 525,490 535,497 525,504" fill="#ffffff" stroke="#0f172a" stroke-width="1.8" />
+            <line x1="535" y1="497" x2="570" y2="497" stroke="#0f172a" stroke-width="2" />
+
+            <rect x="570" y="480" width="60" height="34" fill="#f8fafc" stroke="#334155" stroke-width="1.5" rx="3" />
+            <text x="600" y="501" font-family="sans-serif" font-size="10.5" font-weight="bold" fill="#0f172a" text-anchor="middle">Mieter</text>
+
+            <rect x="435" y="535" width="180" height="20" fill="#fefce8" stroke="#facc15" rx="4" />
+            <text x="525" y="549" font-family="sans-serif" font-size="10" font-weight="bold" fill="#ca8a04" text-anchor="middle">◇ Weiße Raute am Ganzen</text>
+
+            <!-- Col 4: Reason -->
+            <text x="655" y="475" font-family="sans-serif" font-size="11" font-weight="bold" fill="#0f172a">KEINE Existenzabhängigkeit:</text>
+            <text x="655" y="495" font-family="sans-serif" font-size="11" fill="#334155">• Ein Mieter ist zwar Mitglied der</text>
+            <text x="655" y="513" font-family="sans-serif" font-size="11" fill="#334155">  Vereinigung („hat-ein“), existiert</text>
+            <text x="655" y="531" font-family="sans-serif" font-size="11" fill="#334155">  aber eigenständig weiter.</text>
+            <text x="655" y="551" font-family="sans-serif" font-size="11" fill="#334155">• Löst sich der Verein auf, existiert</text>
+            <text x="655" y="569" font-family="sans-serif" font-size="11" fill="#334155">  die Person des Mieters fort.</text>
+
+            <!-- Row 4: Bonus Row (Assoziation) -->
+            <!-- Col 1 -->
+            <text x="45" y="635" font-family="sans-serif" font-size="12" font-weight="600" fill="#0f172a">Ein Arzt behandelt</text>
+            <text x="45" y="655" font-family="sans-serif" font-size="12" font-weight="600" fill="#0f172a">Patienten / Kunde bucht</text>
+            <text x="45" y="675" font-family="sans-serif" font-size="12" font-weight="600" fill="#0f172a">Dienstleistung.</text>
+
+            <!-- Col 2 -->
+            <rect x="265" y="630" width="130" height="34" fill="#f1f5f9" stroke="#64748b" rx="6" />
+            <text x="330" y="652" font-family="sans-serif" font-size="13" font-weight="bold" fill="#334155" text-anchor="middle">Assoziation</text>
+            <text x="330" y="682" font-family="sans-serif" font-size="10" fill="#64748b" text-anchor="middle">(Beziehung / Kennt-ein)</text>
+
+            <!-- Col 3: Visual UML Class -->
+            <rect x="430" y="625" width="70" height="34" fill="#f8fafc" stroke="#334155" stroke-width="1.5" rx="3" />
+            <text x="465" y="646" font-family="sans-serif" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle">Arzt</text>
+
+            <line x1="500" y1="642" x2="560" y2="642" stroke="#0f172a" stroke-width="2" />
+
+            <rect x="560" y="625" width="70" height="34" fill="#f8fafc" stroke="#334155" stroke-width="1.5" rx="3" />
+            <text x="595" y="646" font-family="sans-serif" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle">Patient</text>
+
+            <rect x="435" y="680" width="180" height="20" fill="#f1f5f9" stroke="#cbd5e1" rx="4" />
+            <text x="525" y="694" font-family="sans-serif" font-size="10" font-weight="bold" fill="#475569" text-anchor="middle">— Einfache Linie (keine Raute)</text>
+
+            <!-- Col 4: Reason -->
+            <text x="655" y="625" font-family="sans-serif" font-size="11" font-weight="bold" fill="#0f172a">Allgemeine Verknüpfung:</text>
+            <text x="655" y="645" font-family="sans-serif" font-size="11" fill="#334155">• Zwei autonome Objekte stehen</text>
+            <text x="655" y="663" font-family="sans-serif" font-size="11" fill="#334155">  in einer Nutzungsbeziehung.</text>
+            <text x="655" y="683" font-family="sans-serif" font-size="11" fill="#334155">• Keine Teil-Ganzes-Struktur und</text>
+            <text x="655" y="701" font-family="sans-serif" font-size="11" fill="#334155">  keine Vererbung vorhanden.</text>
+        </svg>
+        `;
+    },
+
+    getUmlKardinalitaetenCheatSheetSvg: function() {
+        return `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 700" width="100%" height="100%">
+            <rect width="960" height="700" fill="#f8fafc" rx="8" />
+
+            <!-- Title -->
+            <text x="480" y="30" font-family="sans-serif" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">UML-Klassendiagramm: Multiplizitäten / Kardinalitäten im IHK-Standard</text>
+            <text x="480" y="52" font-family="sans-serif" font-size="11.5" font-style="italic" fill="#64748b" text-anchor="middle">Wie liest man Kardinalitäten (1, 0..1, 1..*, 0..*) und typische IHK-Prüfungsbeispiele</text>
+
+            <!-- Top Section: Definitionen & Leseregel -->
+            <rect x="30" y="70" width="900" height="150" fill="#ffffff" stroke="#0284c7" stroke-width="2" rx="8" />
+            <rect x="30" y="70" width="900" height="32" fill="#e0f2fe" rx="8" />
+            <text x="480" y="92" font-family="sans-serif" font-size="13" font-weight="bold" fill="#0369a1" text-anchor="middle">1. Die goldene IHK-Leseregel für Kardinalitäten</text>
+
+            <text x="50" y="130" font-family="sans-serif" font-size="12" font-weight="bold" fill="#0f172a">Leserichtung von links nach rechts (A ──── B):</text>
+            <text x="50" y="150" font-family="sans-serif" font-size="11.5" fill="#334155">„Betrachte genau EIN Exemplar der Klasse A: Wie viele Exemplare der Klasse B gehören mindestens und höchstens dazu?“</text>
+            <text x="50" y="168" font-family="sans-serif" font-size="11.5" font-weight="bold" fill="#0284c7">➔ Die Antwort (z. B. 0..*) steht IMMER an der gegenüberliegenden Klasse B!</text>
+
+            <text x="50" y="195" font-family="sans-serif" font-size="11.5" fill="#334155"><tspan font-weight="bold" fill="#0f172a">Rückrichtung (B ──── A):</tspan> „Betrachte genau EIN Exemplar der Klasse B: Zu wie vielen Exemplaren der Klasse A gehört es?“ ➔ Antwort steht an Klasse A!</text>
+
+            <!-- Middle Section: Notationen Tabelle -->
+            <rect x="30" y="235" width="900" height="155" fill="#ffffff" stroke="#94a3b8" stroke-width="1.5" rx="8" />
+            <rect x="30" y="235" width="900" height="28" fill="#f1f5f9" rx="8" />
+            <text x="480" y="254" font-family="sans-serif" font-size="12" font-weight="bold" fill="#334155" text-anchor="middle">2. Die standardisierten UML-Multiplizitäten im Vergleich</text>
+
+            <!-- 5 Badges -->
+            <rect x="45" y="275" width="165" height="100" fill="#f0fdf4" stroke="#16a34a" rx="6" />
+            <text x="127" y="300" font-family="sans-serif" font-size="16" font-weight="bold" fill="#15803d" text-anchor="middle">1</text>
+            <text x="127" y="320" font-family="sans-serif" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle">Genau eins</text>
+            <text x="127" y="340" font-family="sans-serif" font-size="9.5" fill="#475569" text-anchor="middle">Zwingend vorhanden.</text>
+            <text x="127" y="355" font-family="sans-serif" font-size="9.5" fill="#475569" text-anchor="middle">Bsp.: Jedes Auto hat 1 FIN.</text>
+
+            <rect x="220" y="275" width="165" height="100" fill="#eff6ff" stroke="#2563eb" rx="6" />
+            <text x="302" y="300" font-family="sans-serif" font-size="16" font-weight="bold" fill="#1d4ed8" text-anchor="middle">0..1</text>
+            <text x="302" y="320" font-family="sans-serif" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle">Null oder eins</text>
+            <text x="302" y="340" font-family="sans-serif" font-size="9.5" fill="#475569" text-anchor="middle">Optional / Maximal 1.</text>
+            <text x="302" y="355" font-family="sans-serif" font-size="9.5" fill="#475569" text-anchor="middle">Bsp.: Dienstwagen für Chef.</text>
+
+            <rect x="395" y="275" width="165" height="100" fill="#faf5ff" stroke="#9333ea" rx="6" />
+            <text x="477" y="300" font-family="sans-serif" font-size="16" font-weight="bold" fill="#7e22ce" text-anchor="middle">0..*  bzw.  *</text>
+            <text x="477" y="320" font-family="sans-serif" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle">Beliebig viele</text>
+            <text x="477" y="340" font-family="sans-serif" font-size="9.5" fill="#475569" text-anchor="middle">Null bis unendlich.</text>
+            <text x="477" y="355" font-family="sans-serif" font-size="9.5" fill="#475569" text-anchor="middle">Bsp.: Kunde hat 0..* Käufe.</text>
+
+            <rect x="570" y="275" width="165" height="100" fill="#fef2f2" stroke="#dc2626" rx="6" />
+            <text x="652" y="300" font-family="sans-serif" font-size="16" font-weight="bold" fill="#b91c1c" text-anchor="middle">1..*</text>
+            <text x="652" y="320" font-family="sans-serif" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle">Mindestens eins</text>
+            <text x="652" y="340" font-family="sans-serif" font-size="9.5" fill="#475569" text-anchor="middle">Eins bis unendlich.</text>
+            <text x="652" y="355" font-family="sans-serif" font-size="9.5" fill="#475569" text-anchor="middle">Bsp.: Auftrag hat 1..* Posten.</text>
+
+            <rect x="745" y="275" width="170" height="100" fill="#fff7ed" stroke="#ea580c" rx="6" />
+            <text x="830" y="300" font-family="sans-serif" font-size="16" font-weight="bold" fill="#c2410c" text-anchor="middle">2..4  /  4..5</text>
+            <text x="830" y="320" font-family="sans-serif" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle">Fester Bereich</text>
+            <text x="830" y="340" font-family="sans-serif" font-size="9.5" fill="#475569" text-anchor="middle">Min..Max Grenzen.</text>
+            <text x="830" y="355" font-family="sans-serif" font-size="9.5" fill="#475569" text-anchor="middle">Bsp.: PKW hat 4..5 Räder.</text>
+
+            <!-- Bottom Section: 4 IHK Praxis-Beispiele -->
+            <rect x="30" y="405" width="900" height="280" fill="#ffffff" stroke="#10b981" stroke-width="2" rx="8" />
+            <rect x="30" y="405" width="900" height="28" fill="#ecfdf5" rx="8" />
+            <text x="480" y="424" font-family="sans-serif" font-size="12" font-weight="bold" fill="#047857" text-anchor="middle">3. Vier typische IHK-Prüfungsmuster visualisiert</text>
+
+            <!-- Ex 1: Kunde - Bestellung (1 : 0..*) -->
+            <rect x="50" y="445" width="80" height="32" fill="#f8fafc" stroke="#334155" rx="3" />
+            <text x="90" y="465" font-family="sans-serif" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle">Kunde</text>
+
+            <text x="140" y="456" font-family="sans-serif" font-size="11" font-weight="bold" fill="#0284c7">1</text>
+            <line x1="130" y1="461" x2="310" y2="461" stroke="#0f172a" stroke-width="2" />
+            <text x="300" y="456" font-family="sans-serif" font-size="11" font-weight="bold" fill="#0284c7">0..*</text>
+
+            <rect x="310" y="445" width="90" height="32" fill="#f8fafc" stroke="#334155" rx="3" />
+            <text x="355" y="465" font-family="sans-serif" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle">Bestellung</text>
+
+            <text x="420" y="465" font-family="sans-serif" font-size="10.5" fill="#334155">1 Kunde hat 0 bis n Bestellungen; jede Bestellung gehört zu genau 1 Kunden.</text>
+
+            <!-- Ex 2: Bestellung - Bestellposition (1 ◆: 1..*) -->
+            <rect x="50" y="505" width="90" height="32" fill="#f8fafc" stroke="#334155" rx="3" />
+            <text x="95" y="525" font-family="sans-serif" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle">Bestellung</text>
+
+            <polygon points="140,521 148,515 156,521 148,527" fill="#0f172a" stroke="#0f172a" />
+            <text x="165" y="516" font-family="sans-serif" font-size="11" font-weight="bold" fill="#dc2626">1</text>
+            <line x1="156" y1="521" x2="310" y2="521" stroke="#0f172a" stroke-width="2" />
+            <text x="300" y="516" font-family="sans-serif" font-size="11" font-weight="bold" fill="#dc2626">1..*</text>
+
+            <rect x="310" y="505" width="100" height="32" fill="#f8fafc" stroke="#334155" rx="3" />
+            <text x="360" y="525" font-family="sans-serif" font-size="10.5" font-weight="bold" fill="#0f172a" text-anchor="middle">Bestellposition</text>
+
+            <text x="420" y="525" font-family="sans-serif" font-size="10.5" fill="#334155">Komposition: Bestellung hat mind. 1 Position; ohne Bestellung existiert keine Position.</text>
+
+            <!-- Ex 3: PKW - Rad (1 ◆: 4..5) -->
+            <rect x="50" y="565" width="80" height="32" fill="#f8fafc" stroke="#334155" rx="3" />
+            <text x="90" y="585" font-family="sans-serif" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle">PKW</text>
+
+            <polygon points="130,581 138,575 146,581 138,587" fill="#0f172a" stroke="#0f172a" />
+            <text x="155" y="576" font-family="sans-serif" font-size="11" font-weight="bold" fill="#ea580c">1</text>
+            <line x1="146" y1="581" x2="310" y2="581" stroke="#0f172a" stroke-width="2" />
+            <text x="290" y="576" font-family="sans-serif" font-size="11" font-weight="bold" fill="#ea580c">4..5</text>
+
+            <rect x="310" y="565" width="80" height="32" fill="#f8fafc" stroke="#334155" rx="3" />
+            <text x="350" y="585" font-family="sans-serif" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle">Reifen</text>
+
+            <text x="420" y="585" font-family="sans-serif" font-size="10.5" fill="#334155">Komposition mit Bereich: Genau 4 Räder (oder 5 mit Reserverad).</text>
+
+            <!-- Ex 4: Student - Vorlesung (0..* : 1..*) -->
+            <rect x="50" y="625" width="80" height="32" fill="#f8fafc" stroke="#334155" rx="3" />
+            <text x="90" y="645" font-family="sans-serif" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle">Student</text>
+
+            <text x="140" y="636" font-family="sans-serif" font-size="11" font-weight="bold" fill="#9333ea">0..*</text>
+            <line x1="130" y1="641" x2="310" y2="641" stroke="#0f172a" stroke-width="2" />
+            <text x="295" y="636" font-family="sans-serif" font-size="11" font-weight="bold" fill="#9333ea">1..*</text>
+
+            <rect x="310" y="625" width="90" height="32" fill="#f8fafc" stroke="#334155" rx="3" />
+            <text x="355" y="645" font-family="sans-serif" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle">Vorlesung</text>
+
+            <text x="420" y="645" font-family="sans-serif" font-size="10.5" fill="#334155">n:m Assoziation: Vorlesung braucht mind. 1 Student (1..*); Student belegt 0..* Vorlesungen.</text>
+        </svg>
+        `;
+    },
+
+    getUmlIncludeExtendCheatSheetSvg: function() {
+        return `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 700" width="100%" height="100%">
+            <defs>
+                <marker id="inc-che-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                    <path d="M 0 1 L 10 5 L 0 9 z" fill="#0284c7" />
+                </marker>
+                <marker id="ext-che-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                    <path d="M 0 1 L 10 5 L 0 9 z" fill="#ea580c" />
+                </marker>
+                <marker id="gen-che-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+                    <polygon points="0,1 10,5 0,9" fill="#ffffff" stroke="#0f172a" stroke-width="1.6" />
+                </marker>
+            </defs>
+            <rect width="960" height="700" fill="#f8fafc" rx="8" />
+
+            <!-- Title -->
+            <text x="480" y="30" font-family="sans-serif" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">UML Use-Case-Diagramm: &lt;&lt;include&gt;&gt; vs. &lt;&lt;extend&gt;&gt; Leitfaden</text>
+            <text x="480" y="52" font-family="sans-serif" font-size="11.5" font-style="italic" fill="#64748b" text-anchor="middle">Pfeilrichtungen, Signalwörter und typische IHK-Prüfungsfallen im direkten Vergleich</text>
+
+            <!-- Box 1: <<include>> (Left, width: 435) -->
+            <rect x="30" y="70" width="435" height="420" fill="#ffffff" stroke="#0284c7" stroke-width="2" rx="8" />
+            <rect x="30" y="70" width="435" height="34" fill="#e0f2fe" rx="8" />
+            <text x="247" y="93" font-family="sans-serif" font-size="14" font-weight="bold" fill="#0369a1" text-anchor="middle">&lt;&lt;include&gt;&gt; (Zwingende Einbindung)</text>
+
+            <!-- Visual diagram -->
+            <ellipse cx="140" cy="150" rx="90" ry="24" fill="#f0f9ff" stroke="#0284c7" stroke-width="2" />
+            <text x="140" y="154" font-family="sans-serif" font-size="11" font-weight="bold" fill="#0369a1" text-anchor="middle">Geld abheben</text>
+            <text x="140" y="185" font-family="sans-serif" font-size="9.5" fill="#64748b" text-anchor="middle">(Basis-Use-Case)</text>
+
+            <!-- Include Arrow: from Basis to Sub -->
+            <line x1="230" y1="150" x2="330" y2="150" stroke="#0284c7" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#inc-che-arr)" />
+            <rect x="235" y="130" width="85" height="18" fill="#ffffff" stroke="#0284c7" rx="3" />
+            <text x="277" y="143" font-family="sans-serif" font-size="10" font-weight="bold" fill="#0284c7" text-anchor="middle">&lt;&lt;include&gt;&gt;</text>
+
+            <ellipse cx="380" cy="150" rx="75" ry="24" fill="#f0fdf4" stroke="#16a34a" stroke-width="2" />
+            <text x="380" y="154" font-family="sans-serif" font-size="10.5" font-weight="bold" fill="#15803d" text-anchor="middle">PIN prüfen</text>
+            <text x="380" y="185" font-family="sans-serif" font-size="9.5" fill="#64748b" text-anchor="middle">(Unter-Use-Case)</text>
+
+            <!-- Key Facts include -->
+            <rect x="45" y="210" width="405" height="260" fill="#f8fafc" stroke="#e2e8f0" rx="6" />
+            <text x="60" y="235" font-family="sans-serif" font-size="12" font-weight="bold" fill="#0369a1">Bedeutung (MUSS-Beziehung):</text>
+            <text x="60" y="255" font-family="sans-serif" font-size="11" fill="#334155">• Der Unter-Use-Case wird IMMER zwingend mit ausgeführt.</text>
+            <text x="60" y="273" font-family="sans-serif" font-size="11" fill="#334155">• Der Basisfall kann ohne ihn nicht erfolgreich enden.</text>
+
+            <text x="60" y="305" font-family="sans-serif" font-size="12" font-weight="bold" fill="#0369a1">Pfeilrichtung (Exakte IHK-Regel):</text>
+            <text x="60" y="325" font-family="sans-serif" font-size="11" font-weight="bold" fill="#0f172a">VOM Aufrufer ZUM Unter-Use-Case! (A ──▶ B)</text>
+            <text x="60" y="343" font-family="sans-serif" font-size="10.5" fill="#64748b">(Gleich wie ein Methodenaufruf im Code: basis.callSub())</text>
+
+            <text x="60" y="375" font-family="sans-serif" font-size="12" font-weight="bold" fill="#0369a1">Typische Signalwörter in IHK-Texten:</text>
+            <text x="60" y="395" font-family="sans-serif" font-size="11" font-weight="600" fill="#dc2626">• „immer“, „zwingend erforderlich“, „setzt voraus“,</text>
+            <text x="60" y="413" font-family="sans-serif" font-size="11" font-weight="600" fill="#dc2626">• „muss vor jedem Schritt autorisiert werden“,</text>
+            <text x="60" y="431" font-family="sans-serif" font-size="11" font-weight="600" fill="#dc2626">• „bindet den Login-Prozess fest ein“.</text>
+
+            <!-- Box 2: <<extend>> (Right, width: 435) -->
+            <rect x="495" y="70" width="435" height="420" fill="#ffffff" stroke="#ea580c" stroke-width="2" rx="8" />
+            <rect x="495" y="70" width="435" height="34" fill="#fff7ed" rx="8" />
+            <text x="712" y="93" font-family="sans-serif" font-size="14" font-weight="bold" fill="#c2410c" text-anchor="middle">&lt;&lt;extend&gt;&gt; (Optionale Erweiterung)</text>
+
+            <!-- Visual diagram -->
+            <ellipse cx="820" cy="150" rx="95" ry="24" fill="#fff7ed" stroke="#ea580c" stroke-width="2" />
+            <text x="820" y="154" font-family="sans-serif" font-size="10.5" font-weight="bold" fill="#c2410c" text-anchor="middle">Quittung drucken</text>
+            <text x="820" y="185" font-family="sans-serif" font-size="9.5" fill="#64748b" text-anchor="middle">(Erweiterungs-UC)</text>
+
+            <!-- Extend Arrow: from Extension TO Basis -->
+            <line x1="725" y1="150" x2="625" y2="150" stroke="#ea580c" stroke-width="2" stroke-dasharray="5,3" marker-end="url(#ext-che-arr)" />
+            <rect x="635" y="130" width="85" height="18" fill="#ffffff" stroke="#ea580c" rx="3" />
+            <text x="677" y="143" font-family="sans-serif" font-size="10" font-weight="bold" fill="#ea580c" text-anchor="middle">&lt;&lt;extend&gt;&gt;</text>
+
+            <ellipse cx="560" cy="150" rx="60" ry="24" fill="#f0f9ff" stroke="#0284c7" stroke-width="2" />
+            <text x="560" y="154" font-family="sans-serif" font-size="10.5" font-weight="bold" fill="#0369a1" text-anchor="middle">Geld abheben</text>
+            <text x="560" y="185" font-family="sans-serif" font-size="9.5" fill="#64748b" text-anchor="middle">(Basis-Use-Case)</text>
+
+            <!-- Key Facts extend -->
+            <rect x="510" y="210" width="405" height="260" fill="#f8fafc" stroke="#e2e8f0" rx="6" />
+            <text x="525" y="235" font-family="sans-serif" font-size="12" font-weight="bold" fill="#c2410c">Bedeutung (KANN-Beziehung):</text>
+            <text x="525" y="255" font-family="sans-serif" font-size="11" fill="#334155">• Der Erweiterungs-Fall läuft NUR UNTER BEDINGUNG ab.</text>
+            <text x="525" y="273" font-family="sans-serif" font-size="11" fill="#334155">• Der Basisfall ist autark und kennt die Erweiterung oft gar nicht.</text>
+
+            <text x="525" y="305" font-family="sans-serif" font-size="12" font-weight="bold" fill="#c2410c">Pfeilrichtung (Häufigster IHK-Fehler!):</text>
+            <text x="525" y="325" font-family="sans-serif" font-size="11" font-weight="bold" fill="#dc2626">VOM erweiternden Case ZUM Basis-Use-Case! (B ──▶ A)</text>
+            <text x="525" y="343" font-family="sans-serif" font-size="10.5" fill="#64748b">(Der Pfeil zeigt auf den Use-Case, der erweitert wird!)</text>
+
+            <text x="525" y="375" font-family="sans-serif" font-size="12" font-weight="bold" fill="#c2410c">Typische Signalwörter in IHK-Texten:</text>
+            <text x="525" y="395" font-family="sans-serif" font-size="11" font-weight="600" fill="#b45309">• „optional“, „auf Wunsch“, „bei Bedarf“,</text>
+            <text x="525" y="413" font-family="sans-serif" font-size="11" font-weight="600" fill="#b45309">• „im Fehlerfall / falls Guthaben nicht ausreicht“,</text>
+            <text x="525" y="431" font-family="sans-serif" font-size="11" font-weight="600" fill="#b45309">• „Erstanmeldung (falls noch kein Zugang existiert)“.</text>
+
+            <!-- Bottom Section: Generalisierung von Akteuren -->
+            <rect x="30" y="510" width="900" height="165" fill="#ffffff" stroke="#9333ea" stroke-width="2" rx="8" />
+            <rect x="30" y="510" width="900" height="28" fill="#faf5ff" rx="8" />
+            <text x="480" y="529" font-family="sans-serif" font-size="12" font-weight="bold" fill="#7e22ce" text-anchor="middle">Akteurs-Generalisierung im Use-Case-Diagramm (z. B. Premiumnutzer ──▷ Nutzer)</text>
+
+            <circle cx="120" cy="580" r="12" fill="#ffffff" stroke="#0f172a" stroke-width="1.8" />
+            <line x1="120" y1="592" x2="120" y2="625" stroke="#0f172a" stroke-width="1.8" />
+            <line x1="100" y1="604" x2="140" y2="604" stroke="#0f172a" stroke-width="1.8" />
+            <line x1="120" y1="625" x2="105" y2="650" stroke="#0f172a" stroke-width="1.8" />
+            <line x1="120" y1="625" x2="135" y2="650" stroke="#0f172a" stroke-width="1.8" />
+            <text x="120" y="668" font-family="sans-serif" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle">Nutzer (Standard)</text>
+
+            <!-- Generalization Arrow -->
+            <line x1="260" y1="615" x2="160" y2="615" stroke="#0f172a" stroke-width="2" marker-end="url(#gen-che-arr)" />
+            <text x="210" y="605" font-family="sans-serif" font-size="10" font-style="italic" fill="#64748b" text-anchor="middle">Generalisierung</text>
+
+            <circle cx="310" cy="580" r="12" fill="#ffffff" stroke="#0f172a" stroke-width="1.8" />
+            <line x1="310" y1="592" x2="310" y2="625" stroke="#0f172a" stroke-width="1.8" />
+            <line x1="290" y1="604" x2="330" y2="604" stroke="#0f172a" stroke-width="1.8" />
+            <line x1="310" y1="625" x2="295" y2="650" stroke="#0f172a" stroke-width="1.8" />
+            <line x1="310" y1="625" x2="325" y2="650" stroke="#0f172a" stroke-width="1.8" />
+            <text x="310" y="668" font-family="sans-serif" font-size="11" font-weight="bold" fill="#7e22ce" text-anchor="middle">Premiumnutzer</text>
+
+            <text x="390" y="580" font-family="sans-serif" font-size="11.5" font-weight="bold" fill="#0f172a">Vererbung von Berechtigungen:</text>
+            <text x="390" y="602" font-family="sans-serif" font-size="11" fill="#334155">• Der spezialisierte Akteur 'Premiumnutzer' erbt automatisch alle Use-Case-Assoziationen des 'Nutzers'.</text>
+            <text x="390" y="622" font-family="sans-serif" font-size="11" fill="#334155">• Er benötigt im Diagramm KEINE doppelten Linien zu den Standardfunktionen.</text>
+            <text x="390" y="642" font-family="sans-serif" font-size="11" font-weight="600" fill="#7e22ce">➔ Symbol: Durchgezogene Linie mit geschlossener, weißer Dreiecksspitze (▷) zum Basis-Akteur!</text>
+        </svg>
+        `;
+    },
+
     getAutoDiagramSvg: function(q) {
         if (!q) return null;
         // 1. Wenn die Frage bereits eine explizite grafische Musterlösung besitzt
@@ -4283,6 +4689,21 @@ var VisualDiagrams = {
         const topic = (q.topic || "").toLowerCase();
         const question = (q.question || "").toLowerCase();
         const text = topic + " " + question;
+
+        // IHK Original Tabellenaufgabe: Beziehungstypen & Begründungen (Immobilie/Wohnung, Bewohner/Mieter, Mietervereinigung)
+        if (text.includes("immobilie") || text.includes("mietervereinigung") || text.includes("wohnungen") || (text.includes("beziehungstyp") && text.includes("begründung") && text.includes("tabelle"))) {
+            return VisualDiagrams.getUmlBeziehungenTabellenSvg();
+        }
+
+        // UML Kardinalitäten & Multiplizitäten Leitfaden
+        if ((text.includes("kardinalit") || text.includes("multiplizit") || text.includes("1..*") || text.includes("0..*")) && (text.includes("klasse") || text.includes("klassendiagramm"))) {
+            return VisualDiagrams.getUmlKardinalitaetenCheatSheetSvg();
+        }
+
+        // UML Use-Case: <<include>> vs. <<extend>> Cheat-Sheet
+        if (text.includes("include") && text.includes("extend") && (text.includes("use-case") || text.includes("anwendungsfall") || text.includes("pfeilrichtung"))) {
+            return VisualDiagrams.getUmlIncludeExtendCheatSheetSvg();
+        }
 
         // Eren-Michi Terminvergabe Aktivitätsdiagramm (IHK Original)
         if (text.includes("eren-michi") || text.includes("terminvergabe") || (text.includes("termin") && text.includes("meisterbetrieb"))) {

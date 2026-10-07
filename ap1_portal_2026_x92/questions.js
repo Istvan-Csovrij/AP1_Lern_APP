@@ -11636,5 +11636,415 @@ c) Funktionsweise des Time Events (after(15min)):
         correctAnswer: 0,
         solutionDiagramSvg: VisualDiagrams.getZustandsdiagrammSvg(),
         explanation: "UML 2.x Standard-Syntax: Trigger [Guard] / Action. Der Trigger ist das auslösende Event, der Guard ist die boolesche Bedingung, und die Action ist das Verhalten, das beim Übergang ausgeführt wird."
+    },
+    {
+        id: 530,
+        isHard: true,
+        difficulty: "hard",
+        isBawueFocus: true,
+        theme: "diagrams",
+        diagramType: "UML Klassendiagramm",
+        isDiagram: true,
+        topic: "📐 IHK Originalaufgabe: UML Klassendiagramm – Beziehungstypen & Begründung (Tabelle)",
+        type: "open-text",
+        question: `IHK Original-Prüfungsaufgabe (AP1 Modellierung):
+Im Rahmen eines Immobilien- und Hausverwaltungssystems werden die fachlichen Sachverhalte analysiert und in einem UML-Klassendiagramm modelliert.
+
+Vervollständigen Sie die Tabelle für die folgenden drei Aussagen:
+1. "Eine Immobilie besteht aus mehreren Wohnungen."
+2. "Bewohner können entweder Mieter oder Eigentümer sein."
+3. "In einer Mietervereinigung gibt es mehrere Mieter."
+
+Aufgaben:
+a) Nennen Sie für jede der drei Aussagen den exakten UML-Beziehungstyp (Fachbegriff).
+b) Beschreiben Sie für jede Beziehung das zugehörige UML-Grafiksymbol (Art der Verbindungslinie, Raute oder Dreieck, Füllung) und an welchem Klassen-Ende es platziert wird.
+c) Begründen Sie für jede Zuordnung ausführlich die Entscheidung anhand der Kriterien:
+   - Teil-Ganzes-Beziehung (Aggregation vs. Komposition)
+   - Existenzabhängigkeit / Lebenszyklus (Cascade Delete)
+   - Vererbungslogik / Generalisierung ("Ist-Ein"-Beziehung).`,
+        musterloesung: `Musterlösung: IHK-Tabelle UML-Beziehungstypen:
+
+1. "Eine Immobilie besteht aus mehreren Wohnungen."
+• Beziehungstyp: Komposition (starke Teil-Ganzes-Beziehung / Composition)
+• UML-Symbol: Ausgefüllte, schwarze Raute (◆) an der Klasse 'Immobilie' (am Ganzen); durchgezogene Verbindungslinie zur Klasse 'Wohnung'.
+• Begründung:
+  - Strenge Existenzabhängigkeit (Lebenszyklus-Kopplung).
+  - Eine Wohnung kann ohne die übergeordnete Immobilie (das Gebäude) physisch und fachlich nicht eigenständig existieren.
+  - Wird die Immobilie abgerissen bzw. gelöscht (Cascade Delete), werden zwangsläufig auch alle Wohnungen dieser Immobilie vernichtet.
+  - Eine Wohnung gehört zu genau einer Immobilie.
+
+2. "Bewohner können entweder Mieter oder Eigentümer sein."
+• Beziehungstyp: Generalisierung / Spezialisierung bzw. Vererbung (Generalization / Inheritance)
+• UML-Symbol: Durchgezogene Linie mit einer geschlossenen, nicht ausgefüllten (weißen) Dreiecksspitze (▷) an der Oberklasse 'Bewohner'.
+• Begründung:
+  - Klassische "Ist-Ein"-Beziehung (IS-A). Sowohl Mieter als auch Eigentümer sind spezialisierte Unterarten eines Bewohners.
+  - Die Unterklassen 'Mieter' und 'Eigentümer' erben alle gemeinsamen Attribute und Methoden der Basisklasse 'Bewohner' (z. B. vorname, nachname, telefonnummer) und ergänzen eigene spezifische Attribute (z. B. 'mietvertragNr' bzw. 'grundbuchBlattNr').
+  - Keine Teil-Ganzes-Beziehung, sondern eine taxonomische Klassenhierarchie.
+
+3. "In einer Mietervereinigung gibt es mehrere Mieter."
+• Beziehungstyp: Aggregation (schwache Teil-Ganzes-Beziehung / Shared Aggregation)
+• UML-Symbol: Nicht ausgefüllte, weiße Raute (◇) an der Klasse 'Mietervereinigung' (am Ganzen); durchgezogene Linie zur Klasse 'Mieter'.
+• Begründung:
+  - Schwache Teil-Ganzes-Beziehung ohne Existenzabhängigkeit.
+  - Ein Mieter ist zwar Mitglied der Vereinigung ("hat ein"), existiert aber völlig autonom weiter, wenn die Mietervereinigung aufgelöst oder gelöscht wird.
+  - Ein Mieter kann potenziell mehreren Vereingungen angehören oder austreten, ohne dass seine Personen-Instanz vernichtet wird.
+
+Golden Rule für die IHK:
+Die Raute (egal ob schwarz ◆ oder weiß ◇) sitzt IMMER am Ganzen (Kompositum/Aggregat), NIEMALS am Teil!`,
+        solutionDiagramSvg: VisualDiagrams.getUmlBeziehungenTabellenSvg(),
+        explanation: "Original IHK-Klassendiagramm-Prüfungsaufgabe zur Unterscheidung von Komposition (◆), Generalisierung (▷) und Aggregation (◇)."
+    },
+    {
+        id: 531,
+        isHard: false,
+        difficulty: "standard",
+        isBawueFocus: true,
+        theme: "diagrams",
+        diagramType: "UML Klassendiagramm",
+        isDiagram: true,
+        topic: "📐 IHK Multiple-Choice: UML Beziehungstypen (Komposition vs. Aggregation vs. Generalisierung)",
+        type: "multiple-choice",
+        question: "Welche Zuordnungen entsprechen den offiziellen IHK-Prüfungskriterien für: 1. 'Immobilie besteht aus Wohnungen', 2. 'Bewohner können Mieter oder Eigentümer sein', 3. 'In einer Mietervereinigung gibt es mehrere Mieter'?",
+        options: [
+            "1. Komposition (◆ schwarze Raute an Immobilie), 2. Generalisierung (▷ weißes Dreieck an Bewohner), 3. Aggregation (◇ weiße Raute an Mietervereinigung).",
+            "1. Aggregation (◇ an Wohnung), 2. Assoziation (— an Bewohner), 3. Komposition (◆ an Mieter).",
+            "1. Generalisierung (▷ an Immobilie), 2. Komposition (◆ an Bewohner), 3. Assoziation (— an Mietervereinigung).",
+            "1. Dependency (gestrichelter Pfeil), 2. Aggregation (◇ an Mieter), 3. Generalisierung (▷ an Mietervereinigung)."
+        ],
+        correctAnswer: 0,
+        solutionDiagramSvg: VisualDiagrams.getUmlBeziehungenTabellenSvg(),
+        explanation: "Immobilie/Wohnung = Komposition (Existenzabhängigkeit, ◆ am Ganzen). Bewohner/Mieter = Generalisierung (IS-A, ▷ an Oberklasse). Mietervereinigung/Mieter = Aggregation (unabhängige Existenz, ◇ am Ganzen)."
+    },
+    {
+        id: 532,
+        isHard: true,
+        difficulty: "hard",
+        isBawueFocus: true,
+        theme: "diagrams",
+        diagramType: "UML Klassendiagramm",
+        isDiagram: true,
+        topic: "📐 IHK Meisterklasse: Klassendiagramm-Kardinalitäten & Leserichtung im E-Commerce",
+        type: "open-text",
+        question: `IHK Fachaufgabe Klassendiagramm – Multiplizitäten / Kardinalitäten (AP1):
+In einem E-Commerce-Warenwirtschaftssystem modellieren Sie die Beziehungen zwischen vier Kernklassen:
+- Klasse 'Kunde'
+- Klasse 'Bestellung'
+- Klasse 'Bestellposition'
+- Klasse 'Artikel'
+
+Fachliche Geschäftsregeln:
+1. Ein Kunde kann sich registrieren, ohne direkt etwas zu kaufen. Er kann im Laufe der Zeit beliebig viele Bestellungen aufgeben. Jede Bestellung muss zwingend genau einem registrierten Kunden zugeordnet sein.
+2. Eine Bestellung muss zwingend mindestens eine Position enthalten, kann aber beliebig viele Positionen umfassen. Jede Bestellposition gehört fest zu genau einer Bestellung; wird die Bestellung gelöscht, werden auch deren Positionen gelöscht.
+3. Jede Bestellposition bezieht sich auf genau ein konkretes Produkt (Artikel). Ein Artikel im Sortiment kann in vielen verschiedenen Bestellpositionen bestellt werden oder noch gar nicht bestellt worden sein.
+4. Ein Kunde besitzt eine Standard-Rechnungsadresse (Pflicht: genau 1) und optional maximal eine abweichende Lieferadresse.
+
+Aufgaben:
+a) Erläutern Sie die "Goldene IHK-Leseregel" für Multiplizitäten: An welchem Ende der Verbindungslinie wird der Multiplizitätswert für eine Entität eingetragen?
+b) Geben Sie für die drei Beziehungen die exakten Multiplizitäten (an beiden Enden) und den passenden Beziehungstyp (Assoziation / Aggregation / Komposition) an:
+   - Kunde <-----> Bestellung
+   - Bestellung <-----> Bestellposition
+   - Bestellposition <-----> Artikel
+c) Erläutern Sie anhand Regel 4 den genauen Bedeutungsunterschied zwischen den Multiplizitäten "1" und "0..1".`,
+        musterloesung: `Musterlösung: Multiplizitäten & Leserichtung im Klassendiagramm:
+
+a) Die Goldene IHK-Leseregel für Kardinalitäten:
+• Frage: 'Wie viele Instanzen von B können mit GENAU EINER Instanz von A verknüpft sein?'
+• Antwort / Zahl steht am ENDE bei B (gegenüberliegende Seite)!
+• Umgekehrt: 'Wie viele Instanzen von A gehören zu GENAU EINER Instanz von B?' -> Zahl steht am ENDE bei A!
+• Typischer Prüfungsfehler: Viele Prüflinge tragen die Zahl an der Klasse ein, über die sie gerade sprechen, statt am Zielende der Assoziation.
+
+b) Beziehungen und Multiplizitäten:
+
+1. Kunde <-----> Bestellung:
+• Typ: Unidirektionale oder bidirektionale Assoziation (durchgezogene Linie —).
+• Multiplizität am Kunden: 1 (Jede Bestellung gehört zu genau einem Kunden).
+• Multiplizität an Bestellung: 0..* bzw. * (Ein Kunde hat 0 oder beliebig viele Bestellungen).
+• Notation: Kunde (1) ──────── (0..*) Bestellung
+
+2. Bestellung <-----> Bestellposition:
+• Typ: Komposition (ausgefüllte schwarze Raute ◆ an der Klasse 'Bestellung').
+• Multiplizität an Bestellung: 1 (Jede Position gehört zu genau einer Bestellung).
+• Multiplizität an Bestellposition: 1..* (Eine Bestellung hat mindestens 1, maximal viele Positionen).
+• Begründung: Starke Existenzabhängigkeit (Cascade Delete) – ohne Bestellung existiert keine Bestellposition.
+• Notation: Bestellung (1) ◆─────── (1..*) Bestellposition
+
+3. Bestellposition <-----> Artikel:
+• Typ: Gerichtete Assoziation (Pfeil von Bestellposition nach Artikel ──▶).
+• Multiplizität an Bestellposition: 0..* bzw. * (Ein Artikel kann in 0 oder beliebig vielen Positionen vorkommen).
+• Multiplizität an Artikel: 1 (Jede Bestellposition referenziert genau 1 Artikel).
+• Notation: Bestellposition (0..*) ──────▶ (1) Artikel
+
+c) Bedeutungsunterschied "1" vs. "0..1":
+• Multiplizität "1" (oder 1..1):
+  - Obligatorisch / Zwingend erforderlich (Muss-Beziehung).
+  - Genau ein verknüpftes Objekt muss existieren. (NULL-Werte im Fremdschlüssel verboten).
+  - Bsp.: Rechnungsadresse ist Pflichtbestandteil für steuerkonforme Rechnungen.
+• Multiplizität "0..1":
+  - Fakultativ / Optional (Kann-Beziehung).
+  - Maximal ein Objekt; die Assoziation darf leer (NULL) sein.
+  - Bsp.: Abweichende Lieferadresse wird nur ausgefüllt, wenn das Paket an eine Packstation oder Firma gehen soll.`,
+        solutionDiagramSvg: VisualDiagrams.getUmlKardinalitaetenCheatSheetSvg(),
+        explanation: "Kardinalitäten-Meisterklasse: Leserichtung, Notationen (1, 0..1, 1..*, 0..*) und Existenzabhängigkeiten im E-Commerce-Datenmodell."
+    },
+    {
+        id: 533,
+        isHard: false,
+        difficulty: "standard",
+        isBawueFocus: true,
+        theme: "diagrams",
+        diagramType: "UML Klassendiagramm",
+        isDiagram: true,
+        topic: "📐 IHK Multiple-Choice: Kardinalitäten-Leseregel & Notationen (0..1, 1..*, 0..*)",
+        type: "multiple-choice",
+        question: "Ein Kunde kann 0 bis beliebig viele Bestellungen tätigen. Jede Bestellung gehört zu genau einem Kunden. An welchen Positionen im UML-Klassendiagramm müssen die Multiplizitäten '1' und '0..*' notiert werden?",
+        options: [
+            "Die '1' steht an der Klasse 'Kunde' und '0..*' (oder '*') steht an der Klasse 'Bestellung'.",
+            "Die '0..*' steht an der Klasse 'Kunde' und die '1' an der Klasse 'Bestellung'.",
+            "Beide Multiplizitäten ('1..*') stehen zusammen in der Mitte der Verbindungslinie.",
+            "Multiplizitäten dürfen in UML nur im Klassenkopf neben dem Klassennamen notiert werden."
+        ],
+        correctAnswer: 0,
+        solutionDiagramSvg: VisualDiagrams.getUmlKardinalitaetenCheatSheetSvg(),
+        explanation: "Leseregel: Für 1 Kunde betrachtet man, wie viele Bestellungen er hat -> '0..*' steht bei Bestellung. Für 1 Bestellung betrachtet man, wie viele Kunden sie hat -> '1' steht bei Kunde."
+    },
+    {
+        id: 534,
+        isHard: true,
+        difficulty: "hard",
+        isBawueFocus: true,
+        theme: "diagrams",
+        diagramType: "UML Use-Case-Diagramm",
+        isDiagram: true,
+        topic: "📐 IHK Use-Case: <<include>> vs. <<extend>> & Pfeilrichtung (Geldautomat / Bank-Portal)",
+        type: "open-text",
+        question: `IHK Fachaufgabe Use-Case-Diagramm (AP1):
+In einem Anwendungsfalldiagramm für einen Geldautomaten (ATM) soll der zentrale Geschäftsprozess "Bargeld abheben" modelliert werden. Dazu gibt es folgende Teilprozesse:
+1. "PIN verifizieren": Muss bei jeder Abhebung ausnahmslos durchlaufen werden.
+2. "Quittung drucken": Wird nur ausgeführt, wenn der Kunde am Bildschirm die Option "Beleg anfordern" gewählt hat.
+3. "Dispokredit-Warnung anzeigen": Wird nur eingeblendet, wenn das Konto durch die Abhebung ins Minus gerät.
+
+Aufgaben:
+a) Erläutern Sie den fundamentalen Unterschied zwischen einer <<include>>- und einer <<extend>>-Beziehung hinsichtlich Verbindlichkeit (obligatorisch vs. fakultativ) und Ausführungsfluss.
+b) Beschreiben Sie die exakten Pfeilrichtungen beider Stereotypen. Welcher Pfeil zeigt warum in welche Richtung? Warum ist die Pfeilrichtung bei <<extend>> die häufigste Fehlerquelle in IHK-Prüfungen?
+c) Ordnen Sie die drei Teilprozesse ("PIN verifizieren", "Quittung drucken", "Dispokredit-Warnung anzeigen") dem Basis-Use-Case "Bargeld abheben" mit dem passenden Stereotyp, der korrekten Pfeilrichtung und eventuellen Bedingungen (Extension Point) zu.`,
+        musterloesung: `Musterlösung: <<include>> vs. <<extend>> im Use-Case-Diagramm:
+
+a) Fundamentaler Unterschied:
+• <<include>> (Einschluss / Mandatory):
+  - Obligatorisch: Der eingebundene Use-Case wird IMMER zwingend durchlaufen, wenn der Basis-Use-Case ausgeführt wird.
+  - Ziel: Vermeidung von Redundanz / Wiederverwendung gemeinsamer Logik (z. B. Authentifizierung).
+  - Der Basis-Use-Case kennt den Include-Use-Case und ruft ihn aktiv auf.
+• <<extend>> (Erweiterung / Optional):
+  - Fakultativ / Bedingt: Der Erweiterungs-Use-Case wird NUR DANN ausgeführt, wenn ein bestimmter Zustand eintritt (Extension Point mit Bedingung / Guard).
+  - Der Basis-Use-Case ist vollständig eigenständig lauffähig und weiß im Normalfall nichts von der Erweiterung.
+
+b) Pfeilrichtungen & Die IHK-Prüfungsfalle:
+• <<include>>: Gestrichelter Pfeil vom Basis-Use-Case ZUM eingeschlossenen Use-Case:
+  [Basis: Bargeld abheben] --------<<include>>--------> [PIN verifizieren]
+  (Aufrufrichtung: Der Basisfall ruft den Hilfsfall auf).
+
+• <<extend>>: Gestrichelter Pfeil vom erweiternden Use-Case ZUM Basis-Use-Case:
+  [Erweiterung: Quittung drucken] --------<<extend>>--------> [Basis: Bargeld abheben]
+  (Achtung: Pfeil zeigt ZURÜCK zur Basis!).
+
+• Die Prüfungsfalle bei <<extend>>:
+  - Intuitiver Denkfehler: Viele Prüflinge denken an die zeitliche Abfolge ('Zuerst Geld abheben, DANN Quittung drucken') und zeichnen fälschlicherweise den Pfeil zur Quittung -> 0 Punkte!
+  - UML-Metamodell-Regel: Die Beziehung beschreibt keine zeitliche Abfolge (Workflow), sondern eine Modifikation. Das Element 'Quittung drucken' erweitert die Basisfunktionalität, daher dockt der Pfeil am Basisfall an. Pfeil zeigt IMMER vom erweiternden Subfall zum Basisfall!
+
+c) Zuordnung der ATM-Teilprozesse:
+1. "PIN verifizieren":
+   - Beziehung: <<include>>
+   - Pfeil: [Bargeld abheben] ----<<include>>----> [PIN verifizieren]
+   - Begründung: Zwingend erforderlich für jede Transaktion.
+
+2. "Quittung drucken":
+   - Beziehung: <<extend>>
+   - Pfeil: [Quittung drucken] ----<<extend>>----> [Bargeld abheben]
+   - Extension Point: Belegdruck [Bedingung: Kunde wünscht Beleg]
+
+3. "Dispokredit-Warnung anzeigen":
+   - Beziehung: <<extend>>
+   - Pfeil: [Dispokredit-Warnung anzeigen] ----<<extend>>----> [Bargeld abheben]
+   - Extension Point: Kontostandprüfung [Bedingung: Kontostand < 0].`,
+        solutionDiagramSvg: VisualDiagrams.getUmlIncludeExtendCheatSheetSvg(),
+        explanation: "Standard-IHK-Prüfungsschwerpunkt Use-Case: <<include>> (Pflicht, Pfeil Basis -> Teil) vs. <<extend>> (optional bei Extension Point, Pfeil Teil -> Basis!)."
+    },
+    {
+        id: 535,
+        isHard: false,
+        difficulty: "standard",
+        isBawueFocus: true,
+        theme: "diagrams",
+        diagramType: "UML Use-Case-Diagramm",
+        isDiagram: true,
+        topic: "📐 IHK Multiple-Choice: <<extend>> Pfeilrichtung & Extension Point",
+        type: "multiple-choice",
+        question: "Ein Webshop-Kunde schließt eine Bestellung ab ('Bestellung aufgeben'). Wenn er Erstkunde ist, soll optional ein Begrüßungsrabatt von 10% gutgeschrieben werden ('Begrüßungsrabatt gewähren'). Wie wird diese Beziehung korrekt modelliert?",
+        options: [
+            "Gestrichelte Linie mit Pfeil von 'Begrüßungsrabatt gewähren' ZU 'Bestellung aufgeben' mit Stereotyp <<extend>> und Extension Point / Bedingung [Erstkunde == true].",
+            "Gestrichelte Linie mit Pfeil von 'Bestellung aufgeben' ZU 'Begrüßungsrabatt gewähren' mit Stereotyp <<include>>.",
+            "Durchgezogene Linie mit gefüllter Raute ◆ an 'Bestellung aufgeben'.",
+            "Durchgezogene Linie mit weißem Dreieck ▷ an 'Begrüßungsrabatt gewähren'."
+        ],
+        correctAnswer: 0,
+        solutionDiagramSvg: VisualDiagrams.getUmlIncludeExtendCheatSheetSvg(),
+        explanation: "Bei <<extend>> zeigt der Pfeil vom erweiternden Use-Case ZUM Basisfall zurück (Erweiterung ──<<extend>>──▶ Basis). Er wird nur unter der Bedingung [Erstkunde] am Extension Point aktiviert."
+    },
+    {
+        id: 536,
+        isHard: true,
+        difficulty: "hard",
+        isBawueFocus: true,
+        theme: "diagrams",
+        diagramType: "UML Klassendiagramm",
+        isDiagram: true,
+        topic: "📐 IHK Klassendiagramm: Komposition vs. Aggregation – Der Zerstörungs- & Existenz-Test",
+        type: "open-text",
+        question: `IHK Fachaufgabe Klassendiagramm (AP1):
+In vielen Prüfungen müssen Modellierer zwischen zwei Arten von Teil-Ganzes-Beziehungen (Aggregation vs. Komposition) unterscheiden.
+
+Gegeben sind vier Klassen-Paare:
+Paar 1: PKW <-----> Motor
+Paar 2: Rechnung <-----> Rechnungsposition
+Paar 3: Abteilung <-----> Mitarbeiter
+Paar 4: Buch <-----> Buchseite
+
+Aufgaben:
+a) Formulieren Sie die "Zerstörungs- und Lebenszyklus-Faustregel" (Cascade Delete), mit der man in einer IHK-Prüfung zweifelsfrei zwischen Komposition (◆) und Aggregation (◇) unterscheidet.
+b) Bestimmen Sie für alle vier Paare:
+   - Welcher Beziehungstyp liegt vor (Komposition oder Aggregation)?
+   - Welches UML-Grafiksymbol wird verwendet (schwarze oder weiße Raute)?
+   - An welcher Klasse befindet sich die Raute?
+   - Begründen Sie die Entscheidung kurz anhand des Lebenszyklus.
+c) Was besagt die Multiplizitätsregel bezüglich des Ganzen bei einer Komposition? (Darf ein Teil bei einer Komposition gleichzeitig zu mehreren Ganzen gehören?)`,
+        musterloesung: `Musterlösung: Komposition vs. Aggregation (Zerstörungstest):
+
+a) Die Zerstörungs-Faustregel (Lebenszyklus / Cascade Delete):
+• Frage: 'Wenn das übergeordnete Ganze vernichtet/gelöscht wird – kann der Teil dann fachlich sinnvoll eigenständig weiterexistieren?'
+  - NEIN (Teil verliert seine Existenzberechtigung / stirbt mit): KOMPOSITION (◆ gefüllte Raute).
+  - JA (Teil existiert eigenständig weiter oder kann neu zugeordnet werden): AGGREGATION (◇ ungefüllte weiße Raute).
+
+b) Analyse der 4 Paare:
+
+• Paar 1: PKW <-----> Motor
+  - Typ: Aggregation (◇ weiße Raute am PKW).
+  - Begründung: Ein Motor kann ausgebaut, generalüberholt, gelagert oder in ein anderes Fahrzeug eingebaut werden. Wird das Auto verschrottet, kann der Motor weiterleben.
+
+• Paar 2: Rechnung <-----> Rechnungsposition
+  - Typ: Komposition (◆ schwarze Raute an Rechnung).
+  - Begründung: Eine einzelne Rechnungsposition ("2x Tastatur 50€") existiert nur als unteilbarer Bestandteil genau dieser Rechnung. Wird die Rechnung storniert/gelöscht, ist die Rechnungsposition gegenstandslos.
+
+• Paar 3: Abteilung <-----> Mitarbeiter
+  - Typ: Aggregation (◇ weiße Raute an Abteilung).
+  - Begründung: Wird eine Abteilung im Unternehmen aufgelöst (z. B. 'Marketing 2'), werden die Mitarbeiter nicht entlassen oder gelöscht, sondern anderen Abteilungen zugewiesen. Sie existieren unabhängig fort.
+
+• Paar 4: Buch <-----> Buchseite
+  - Typ: Komposition (◆ schwarze Raute an Buch).
+  - Begründung: Eine Buchseite ist physisch und inhaltlich fest an das Exemplar des Buches gebunden. Wird das Buch vernichtet, existiert die Seite nicht als autonomes Objekt.
+
+c) Multiplizitätsregel bei Komposition:
+• Bei einer Komposition MUSS die Multiplizität auf der Seite des Ganzen zwingend 1 (oder maximal 0..1) sein.
+• Ein Teil darf niemals gleichzeitig zu mehreren Ganzen gehören (Exklusivität / ungeteilter Besitz). Ein Teil hat genau ein besitzendes Ganzes.`,
+        solutionDiagramSvg: VisualDiagrams.getUmlBeziehungenTabellenSvg(),
+        explanation: "Komposition vs. Aggregation: Existenzabhängigkeit (Cascade Delete), Rauten-Regel (immer am Ganzen) und Multiplizitäts-Exklusivität."
+    },
+    {
+        id: 537,
+        isHard: false,
+        difficulty: "standard",
+        isBawueFocus: true,
+        theme: "diagrams",
+        diagramType: "UML Klassendiagramm",
+        isDiagram: true,
+        topic: "📐 IHK Multiple-Choice: Rauten-Platzierung bei Aggregation & Komposition",
+        type: "multiple-choice",
+        question: "An welchem Ende der Assoziationslinie befindet sich im UML-Klassendiagramm die Raute (egal ob gefüllte Kompositionsraute ◆ oder ungefüllte Aggregationsraute ◇)?",
+        options: [
+            "Immer am Ganzen (Aggregat bzw. Kompositum), niemals an den enthaltenen Teilen.",
+            "Immer am Teil (Komponente), um anzuzeigen, dass es hineingesteckt wird.",
+            "In der Mitte der Linie mit Pfeilen in beide Richtungen.",
+            "An der Oberklasse bei Vererbungsbeziehungen."
+        ],
+        correctAnswer: 0,
+        solutionDiagramSvg: VisualDiagrams.getUmlBeziehungenTabellenSvg(),
+        explanation: "Goldene UML-Regel: Die Raute sitzt ausnahmslos auf der Seite des GANZEN (dem Besitzer). Bsp.: Gebäude ◆—— Raum (Raute am Gebäude, da das Gebäude das Ganze ist)."
+    },
+    {
+        id: 538,
+        isHard: true,
+        difficulty: "hard",
+        isBawueFocus: true,
+        theme: "diagrams",
+        diagramType: "UML Klassendiagramm",
+        isDiagram: true,
+        topic: "📐 IHK Klassendiagramm: Assoziationsklassen & Auflösung von n:m-Beziehungen",
+        type: "open-text",
+        question: `IHK Fachaufgabe Klassendiagramm & Datenbanküberführung (AP1):
+In einem Krankenhaus-Informationssystem existiert eine Beziehung zwischen Ärzten und Patienten:
+- Ein Arzt behandelt im Laufe der Zeit viele Patienten (0..*).
+- Ein Patient wird während seines Aufenthalts von mehreren Fachärzten behandelt (1..*).
+
+Problemstellung:
+Zu jeder konkreten Behandlung müssen medizinische Daten erfasst werden:
+- behandlungsDatum (Date)
+- diagnose (String)
+- abrechnungsBetrag (double)
+
+Aufgaben:
+a) Erläutern Sie, warum diese Attribute (behandlungsDatum, diagnose) weder direkt in der Klasse 'Arzt' noch in der Klasse 'Patient' sinnvoll abgelegt werden können.
+b) Beschreiben Sie, wie dieser Sachverhalt im UML-Klassendiagramm modelliert wird (Fachbegriff und grafische Darstellung).
+c) Erläutern Sie, wie diese Beziehung in ein relationales Datenbankschema (RDBMS / 3. Normalform) überführt wird:
+   - Name der Zwischentabelle
+   - Primärschlüssel (Primary Key)
+   - Fremdschlüssel (Foreign Keys).`,
+        musterloesung: `Musterlösung: Assoziationsklasse & n:m-Auflösung:
+
+a) Problem der direkten Attribut-Ablage bei n:m:
+• Attribute gehören zum VORGANG der Verknüpfung beider Objekte, nicht zu einem einzelnen Objekt:
+  - Bei Ablage in 'Arzt': Ein Arzt hat viele Patienten – welches Datum oder welche Diagnose zu welchem Patienten gehört, wäre ohne Listen/Wiederholgruppen nicht speicherbar (Verletzung der 1. Normalform).
+  - Bei Ablage in 'Patient': Ein Patient hat mehrere Behandlungen von verschiedenen Ärzten – es entstünden Mehrfachzeilen oder Redundanzen.
+• Fazit: Die Attribute charakterisieren die Beziehung selbst.
+
+b) Modellierung im UML-Klassendiagramm:
+• Fachbegriff: Assoziationsklasse (Association Class).
+• Grafische Darstellung:
+  - Zwischen den Klassen 'Arzt' und 'Patient' wird eine normale Assoziationslinie mit den Kardinalitäten 0..* und 1..* gezogen.
+  - Die Assoziationsklasse (z. B. 'Behandlung') wird als separates Klassenrechteck mit den Attributen (- behandlungsDatum: Date, - diagnose: String, - abrechnungsBetrag: double) gezeichnet.
+  - Von der Mitte der Assoziationslinie führt eine GESTRICHELTE LINIE direkt zur Assoziationsklasse.
+
+c) Überführung in relationales Datenbankschema (RDBMS):
+• n:m-Beziehungen können in relationalen Datenbanken nicht direkt abgebildet werden und müssen durch eine Zwischentabelle (Koppeltabelle) aufgelöst werden:
+  - Tabellenname: tbl_behandlung
+  - Fremdschlüssel:
+    * arzt_id (FK -> referenziert tbl_arzt.arzt_id)
+    * patient_id (FK -> referenziert tbl_patient.patient_id)
+  - Eigene Nutzdaten-Spalten: behandlungs_datum, diagnose, abrechnungs_betrag
+  - Primärschlüssel (PK):
+    * Entweder zusammengesetzter Primärschlüssel aus (arzt_id, patient_id, behandlungs_datum)
+    * Oder ein künstlicher/surrogater Primärschlüssel: behandlung_id (INT AUTO_INCREMENT PK) mit Fremdschlüsseln als Foreign Keys.`,
+        solutionDiagramSvg: VisualDiagrams.getUmlKardinalitaetenCheatSheetSvg(),
+        explanation: "Assoziationsklassen verbinden n:m Beziehungen mit Beziehungsattributen und werden im RDBMS als Junction Table (Koppeltabelle) aufgelöst."
+    },
+    {
+        id: 539,
+        isHard: false,
+        difficulty: "standard",
+        isBawueFocus: true,
+        theme: "diagrams",
+        diagramType: "UML Klassendiagramm",
+        isDiagram: true,
+        topic: "📐 IHK Multiple-Choice: UML Sichtbarkeitsmodifizierer (+, -, #, ~)",
+        type: "multiple-choice",
+        question: "Welche Bedeutung haben die Sichtbarkeitsmodifizierer (Visibility Modifiers) vor Attributen und Methoden in einem UML-Klassendiagramm?",
+        options: [
+            "+ = public (öffentlich, überall sichtbar), - = private (nur in eigener Klasse sichtbar), # = protected (in eigener Klasse und Unterklassen sichtbar), ~ = package (im selben Paket sichtbar).",
+            "+ = private, - = public, # = static, ~ = abstract.",
+            "+ = optional, - = Pflichtfeld, # = Primärschlüssel, ~ = Fremdschlüssel.",
+            "+ = Erhöhung, - = Verringerung, # = Hashtable, ~ = Destruktor."
+        ],
+        correctAnswer: 0,
+        solutionDiagramSvg: VisualDiagrams.getUmlBeziehungenTabellenSvg(),
+        explanation: "Offizieller UML 2.x Standard: '+' steht für public, '-' für private (Geheimnisprinzip/Kapselung), '#' für protected (Vererbung), '~' für package visibility."
     }
+
 ];

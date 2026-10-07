@@ -1289,6 +1289,9 @@
             </div>
             <div class="modal-toolbar" style="gap: 0.4rem; flex-wrap: wrap;">
                 <button class="btn btn-sm exercise-tab-btn active" data-diag="class" onclick="switchExerciseTab('class')">🏛️ Klassendiagramm</button>
+                <button class="btn btn-sm exercise-tab-btn" data-diag="uml_beziehungen" onclick="switchExerciseTab('uml_beziehungen')">💎 IHK Tabelle: Beziehungen</button>
+                <button class="btn btn-sm exercise-tab-btn" data-diag="uml_kardinalitaeten" onclick="switchExerciseTab('uml_kardinalitaeten')">🔢 IHK Kardinalitäten</button>
+                <button class="btn btn-sm exercise-tab-btn" data-diag="uml_include_extend" onclick="switchExerciseTab('uml_include_extend')">🎯 IHK &lt;&lt;include&gt;&gt; vs &lt;&lt;extend&gt;&gt;</button>
                 <button class="btn btn-sm exercise-tab-btn" data-diag="usecase" onclick="switchExerciseTab('usecase')">🎯 Use-Case (Smart-Home)</button>
                 <button class="btn btn-sm exercise-tab-btn" data-diag="usecase_faq" onclick="switchExerciseTab('usecase_faq')">🎯 IHK: FAQ GmbH Statistik</button>
                 <button class="btn btn-sm exercise-tab-btn" data-diag="activity_erenmichi" onclick="switchExerciseTab('activity_erenmichi')">⚡ IHK: Eren-Michi KFZ</button>
@@ -1315,7 +1318,7 @@
     </div>
 
     <!-- External Visual Diagram Generator Library for Solutions -->
-    <script src="diagrams.js?v=112"></script>
+    <script src="diagrams.js?v=113"></script>
     <script>
         // ====================================================================
         // AP1 Object-Oriented Whiteboard Engine (Vektorbasiert & Bewegbar)
@@ -3485,6 +3488,48 @@
                 keyRules: "Generalisierung = Durchgezogene Linie mit geschlossener weißer Dreiecksspitze. Komposition = Schwarze Raute (Existenzabhängigkeit). Sichtbarkeiten: '+' public, '-' private, '#' protected.",
                 stencil: "uml_class",
                 getSvg: () => (typeof VisualDiagrams !== "undefined" && VisualDiagrams.getClassDiagramSvg) ? VisualDiagrams.getClassDiagramSvg() : ""
+            },
+            uml_beziehungen: {
+                title: "IHK Originalaufgabe: UML Klassendiagramm – Beziehungstypen (Tabelle)",
+                badge: "IHK Original / AP1",
+                scenario: "Original IHK-Prüfungsaufgabe (Immobilie/Wohnung, Bewohner/Mieter, Mietervereinigung/Mieter) zur Zuordnung und fachlichen Begründung von UML-Beziehungstypen.",
+                tasks: [
+                    "Aussage 1: 'Eine Immobilie besteht aus mehreren Wohnungen.' ➔ Komposition (◆). Starke Teil-Ganzes-Beziehung mit Lebenszyklus-Kopplung (Cascade Delete: Wird die Immobilie vernichtet, sterben die Wohnungen mit).",
+                    "Aussage 2: 'Bewohner können entweder Mieter oder Eigentümer sein.' ➔ Generalisierung / Vererbung (▷). Taxonomische 'Ist-Ein'-Beziehung (IS-A); Mieter und Eigentümer erben Attribute/Methoden von Bewohner.",
+                    "Aussage 3: 'In einer Mietervereinigung gibt es mehrere Mieter.' ➔ Aggregation (◇). Schwache Teil-Ganzes-Beziehung ohne Existenzabhängigkeit; Mieter existieren unabhängig von der Vereinigung fort.",
+                    "Rauten-Platzierungsregel: Die Raute (egal ob schwarz ◆ oder weiß ◇) befindet sich IMMER am Ganzen (Aggregat/Kompositum), NIEMALS am Teil!"
+                ],
+                keyRules: "Komposition (◆) = Schwarze Raute am Ganzen, kaskadierendes Löschen. Aggregation (◇) = Weiße Raute am Ganzen, unabhängige Existenz. Generalisierung (▷) = Geschlossenes weißes Dreieck an der Oberklasse.",
+                stencil: "uml_class",
+                getSvg: () => (typeof VisualDiagrams !== "undefined" && VisualDiagrams.getUmlBeziehungenTabellenSvg) ? VisualDiagrams.getUmlBeziehungenTabellenSvg() : ""
+            },
+            uml_kardinalitaeten: {
+                title: "IHK Meisterklasse: Kardinalitäten & Leserichtung im Klassendiagramm",
+                badge: "IHK Kernwissen / AP1",
+                scenario: "Präzises Lesen und Notieren von Multiplizitäten nach den IHK-Bewertungskriterien im E-Commerce-System (Kunde, Bestellung, Bestellposition, Artikel).",
+                tasks: [
+                    "Goldene IHK-Leseregel: Um die Multiplizität an Klasse B zu bestimmen, fragt man: 'Mit wie vielen Instanzen von B kann GENAU EINE Instanz von A verknüpft sein?' Das Ergebnis steht am ZIELENDE bei B!",
+                    "Notationen einprägen: '1' (genau eins / Muss), '0..1' (optional höchstens eins / Kann), '0..*' bzw. '*' (beliebig viele, auch keines), '1..*' (mindestens eins, unbeschränkt viele Pflichtbestandteile).",
+                    "Modellieren Sie: Kunde (1) ──────── (0..*) Bestellung (1) ◆──────── (1..*) Bestellposition (0..*) ──────▶ (1) Artikel.",
+                    "Kompositions-Bedingung: Auf der Seite des Ganzen bei einer Komposition steht zwingend Multiplizität 1 (exklusiver Besitz)."
+                ],
+                keyRules: "Leserichtung beachten: Für 1 Kunde stehen die Bestellungs-Zahlen bei Bestellung! '0..1' erlaubt NULL (optional); '1' erzwingt genau ein Objekt.",
+                stencil: "uml_class",
+                getSvg: () => (typeof VisualDiagrams !== "undefined" && VisualDiagrams.getUmlKardinalitaetenCheatSheetSvg) ? VisualDiagrams.getUmlKardinalitaetenCheatSheetSvg() : ""
+            },
+            uml_include_extend: {
+                title: "IHK Kernwissen: Use-Case-Diagramm <<include>> vs. <<extend>>",
+                badge: "IHK Kernkompetenz / AP1",
+                scenario: "Gegenüberstellung von obligatorischen und bedingten Use-Case-Beziehungen mit IHK-Prüfungsfokus auf die Pfeilrichtung.",
+                tasks: [
+                    "&lt;&lt;include&gt;&gt; (Einschluss): Der Hilfs-Use-Case wird ZWINGEND IMMER ausgeführt. Der Pfeil zeigt vom Basisfall ZUM Hilfsfall: Basis ──&lt;&lt;include&gt;&gt;──▶ Hilfsfall.",
+                    "&lt;&lt;extend&gt;&gt; (Erweiterung): Der Erweiterungs-Use-Case wird NUR UNTER BEDINGUNG an einem definierten Extension Point ausgeführt.",
+                    "IHK-Prüfungsfalle bei &lt;&lt;extend&gt;&gt;: Der Pfeil zeigt ZURÜCK ZUM BASISFALL (Erweiterung ──&lt;&lt;extend&gt;&gt;──▶ Basis)! Keinesfalls in Ausführungsrichtung denken!",
+                    "Akteurs-Generalisierung: Spezialisierter Akteur (z. B. Premiumnutzer) erbt alle Use-Case-Verbindungen des Basis-Akteurs (Nutzer) über ein geschlossenes weißes Dreieck (▷)."
+                ],
+                keyRules: "<<include>> = Pflicht, Pfeil Basis ──▶ Hilfsfall. <<extend>> = Optional bei Bedingung, Pfeil zeigt ZURÜCK zur Basis (Erweiterung ──▶ Basis).",
+                stencil: "actor_usecase",
+                getSvg: () => (typeof VisualDiagrams !== "undefined" && VisualDiagrams.getUmlIncludeExtendCheatSheetSvg) ? VisualDiagrams.getUmlIncludeExtendCheatSheetSvg() : ""
             },
             usecase: {
                 title: "2. UML-Use-Case-Diagramm: Smart-Home Zutritts- & Alarmsystem",
