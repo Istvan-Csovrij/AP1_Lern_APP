@@ -12045,6 +12045,396 @@ c) Überführung in relationales Datenbankschema (RDBMS):
         correctAnswer: 0,
         solutionDiagramSvg: VisualDiagrams.getUmlBeziehungenTabellenSvg(),
         explanation: "Offizieller UML 2.x Standard: '+' steht für public, '-' für private (Geheimnisprinzip/Kapselung), '#' für protected (Vererbung), '~' für package visibility."
+    },
+    {
+        id: 540,
+        isHard: true,
+        difficulty: "hard",
+        isBawueFocus: true,
+        theme: "diagrams",
+        diagramType: "UML Klassendiagramm",
+        isDiagram: true,
+        topic: "🏛️ IHK Originalaufgabe: UML Klassendiagramm EVA-Event GmbH & Tourneen (Jukebox-Soft)",
+        type: "open-text",
+        question: `IHK Original-Prüfungsaufgabe (Klassendiagramm / AP1 Modellierung):
+Die Jukebox-Soft GbR erhält von der EVA-Event GmbH folgende Beschreibung für die Durchführung von Tourneen:
+- Eine Tournee besteht aus mehreren Veranstaltungen.
+- Es wird zwischen mehreren Veranstaltungsarten unterschieden (Open-Air, Halle, Club).
+- Veranstaltungen finden in einer Location statt.
+- Für jede Veranstaltung müssen unterschiedliche Mitarbeiter*innen eingesetzt werden (Security, Catering, Sanitäter, Mitarbeiter für die Technik).
+
+Aufgaben:
+a) Nennen Sie alle Klassen und deren Modellierungsrolle (Basisklasse, Subklasse, Assoziierte Klasse).
+b) Bestimmen Sie die Beziehungstypen und Multiplizitäten zwischen:
+   - 'Tournee' und 'Veranstaltung'
+   - 'Veranstaltung' und 'Location'
+   - 'Veranstaltung' und 'Mitarbeiter'
+c) Erläutern Sie die beiden Vererbungshierarchien (Generalisierung ▷):
+   - Oberklasse 'Veranstaltung' mit ihren Subklassen
+   - Oberklasse 'Mitarbeiter' mit ihren Einsatzrollen.`,
+        musterloesung: `Musterlösung: UML-Klassendiagramm Tourneen & Veranstaltungen (EVA-Event GmbH):
+
+a) Klassen & Modellierungsrollen:
+• Kern-Entitäten:
+  - Tournee (Oberstes Organisationselement / Ganzes der Komposition)
+  - Veranstaltung (Zentrales Event-Objekt)
+  - Location (Veranstaltungsort)
+  - Mitarbeiter (Basisklasse für Personalressourcen)
+• Subklassen von Veranstaltung (Veranstaltungsarten):
+  - Hallenveranstaltung (z. B. sitzplaetze, buehnenFlaecheM2)
+  - Open-Air Veranstaltung (z. B. witterungsschutz, ausweichTermin)
+  - Club Veranstaltung (z. B. minAlter, djs)
+• Subklassen von Mitarbeiter (Spezialisierte Rollen):
+  - Catering (z. B. hygienePass: boolean)
+  - Sanitäter (z. B. ersthelferStufe: String)
+  - Mitarbeiter Technik (z. B. fachbereich: String)
+  - Security (z. B. sachkunde34a: boolean)
+
+b) Beziehungstypen & Multiplizitäten:
+1. Tournee <-----> Veranstaltung:
+• Beziehungstyp: Komposition (ausgefüllte schwarze Raute ◆ an Klasse Tournee).
+• Multiplizität: Tournee (1) ◆─────── (*) bzw. (1..*) Veranstaltung.
+• Begründung: Starke Teil-Ganzes-Beziehung mit Existenzabhängigkeit (Cascade Delete). Eine Tournee besteht aus ihren Veranstaltungen; wird die Tournee storniert, entfallen deren Tournee-Veranstaltungen.
+
+2. Veranstaltung <-----> Location:
+• Beziehungstyp: Gerichtete oder ungerichtete Assoziation (durchgezogene Linie —).
+• Multiplizität: Veranstaltung (1..*) ─────── (1) Location.
+• Begründung: Jede Veranstaltung findet an genau 1 Location statt. Eine Location kann nacheinander für viele verschiedene Veranstaltungen gebucht werden.
+
+3. Veranstaltung <-----> Mitarbeiter:
+• Beziehungstyp: Assoziation (durchgezogene Linie —).
+• Multiplizität: Veranstaltung (1..*) ─────── (1..*) Mitarbeiter (n:m Beziehung).
+• Begründung: Zu einer Veranstaltung werden mehrere Mitarbeiter eingesetzt; ein Mitarbeiter kann im Laufe der Zeit bei vielen Veranstaltungen mitwirken.
+
+c) Vererbungshierarchien (Generalisierung / Vererbung ▷):
+• Verbindung: Durchgezogene Linie mit einer geschlossenen, nicht ausgefüllten (weißen) Dreiecksspitze (▷) an der jeweiligen Basisklasse.
+• Hierarchie 1: 'Hallenveranstaltung', 'Open-Air Veranstaltung' und 'Club Veranstaltung' erben die Basisattribute (datum, bezeichnung, vorschriften) von der Basisklasse 'Veranstaltung'.
+• Hierarchie 2: 'Catering', 'Sanitäter', 'Mitarbeiter Technik' und 'Security' erben gemeinsame Personalattribute (mitarbeiterId, name, vorname) von der Basisklasse 'Mitarbeiter'.`,
+        solutionDiagramSvg: VisualDiagrams.getEvaEventKlassendiagrammSvg(),
+        explanation: "Original IHK-Klassendiagramm: Komposition zwischen Tournee und Veranstaltung, zweifache Generalisierung für Veranstaltungsarten und Mitarbeiter sowie Assoziation zu Location."
+    },
+    {
+        id: 541,
+        isHard: false,
+        difficulty: "standard",
+        isBawueFocus: true,
+        theme: "diagrams",
+        diagramType: "UML Klassendiagramm",
+        isDiagram: true,
+        topic: "🏛️ IHK Multiple-Choice: EVA-Event Klassendiagramm – Beziehung zwischen Tournee und Veranstaltung",
+        type: "multiple-choice",
+        question: "Welche Beziehung und welches UML-Symbol modelliert die Anforderung 'Eine Tournee besteht aus mehreren Veranstaltungen' in der IHK-Aufgabe EVA-Event GmbH korrekt?",
+        options: [
+            "Komposition mit ausgefüllter schwarzer Raute (◆) an der Klasse Tournee und Multiplizität 1 am Ganzen sowie * bzw. 1..* an Veranstaltung.",
+            "Aggregation mit ungefüllter weißer Raute (◇) an der Klasse Veranstaltung und Multiplizität 1..* an Tournee.",
+            "Generalisierung mit weißem Dreieck (▷) an der Klasse Tournee, da eine Veranstaltung von Tournee erbt.",
+            "Gestrichelte Dependenz-Linie <<use>> von Veranstaltung zu Tournee."
+        ],
+        correctAnswer: 0,
+        solutionDiagramSvg: VisualDiagrams.getEvaEventKlassendiagrammSvg(),
+        explanation: "Komposition = Schwarze Raute am Ganzen (Tournee). Eine Veranstaltung gehört fest zu dieser Tournee und teilt deren Lebenszyklus. Multiplizität am Ganzen ist 1."
+    },
+    {
+        id: 542,
+        isHard: true,
+        difficulty: "hard",
+        isBawueFocus: true,
+        theme: "diagrams",
+        diagramType: "UML Aktivitätsdiagramm",
+        isDiagram: true,
+        topic: "🔀 IHK Originalaufgabe: Aktivitätsdiagramm Kurierfahrt mit 4 Swimlanes (RADL-BLITZ GmbH)",
+        type: "open-text",
+        question: `IHK Original-Prüfungsaufgabe (Aktivitätsdiagramm / AP1 Modellierung):
+Die Öko-Soft GmbH hat für eine Kurierfahrt der RADL-BLITZ GmbH folgende Tätigkeiten ermittelt:
+- Die Zentrale erfasst Auftragsdaten des Kunden (Kundendaten, Abhol-/Zieladresse, Leistung).
+- Die Zentrale leitet den Auftrag an einen Kurier weiter.
+- Der Kurier erfasst bei Abholung die genauen Auftragsdaten und übermittelt diese an die Zentrale.
+- Der Kurier führt die Fahrt durch.
+- Die Zentrale gleicht die vom Kurier gesendeten Auftragsdaten mit den bei Auftragserteilung erfassten Auftragsdaten ab, während der Kurier den Auftrag durchführt.
+- Der Kurier liefert die Sendung ab und lässt sich gegebenenfalls die persönliche Übergabe quittieren.
+- Der Kurier meldet den Abschluss der Kurierfahrt.
+- Die Zentrale erstellt die Rechnung.
+
+Schema-Vorgabe: Vier Swimlanes (Auftraggeber | Zentrale | Kurier | Empfänger).
+
+Aufgaben:
+a) Erläutern Sie den Zweck von Swimlanes (Partitionen) und nennen Sie die Verantwortungsbereiche der 4 Rollen.
+b) Erläutern Sie die Modellierung der Nebenläufigkeit:
+   - An welcher Stelle wird ein FORK-Balken (Verzweigung) benötigt?
+   - Welche zwei Aktionen laufen parallel ab?
+   - Welche Funktion erfüllt der JOIN-Balken vor der Rechnungserstellung?
+c) Wie wird der Teilschritt 'gegebenenfalls persönliche Übergabe quittieren' modelliert (Knotenart, Guards, beteiligte Partitionen)?`,
+        musterloesung: `Musterlösung: UML-Aktivitätsdiagramm Kurierfahrt RADL-BLITZ GmbH:
+
+a) Zweck von Swimlanes (Partitionen):
+• Swimlanes ordnen Aktionen klar den organisatorischen Einheiten, Systemen oder Akteuren zu, die für deren Ausführung zuständig sind:
+  - Auftraggeber: Startet den Gesamtprozess mit der 'Auftragserteilung an Kurierdienst'.
+  - Zentrale: Datenverarbeitung (Erfassung, Weitergabe, Datenabgleich, Rechnungserstellung).
+  - Kurier: Physische Durchführung (Paketübernahme, Ist-Datenerfassung, Kurierfahrt, Auslieferung, Abschlussmeldung).
+  - Empfänger: Interagiert nur bei persönlicher Übergabe durch Entgegennahme und Quittierung.
+
+b) Nebenläufigkeit / Parallelität (FORK & JOIN):
+• FORK Node (dicker horizontaler Synchronisationsbalken):
+  - Wird nach der Aktion 'Erfassung & Übermittlung tatsächlicher Daten' platziert.
+  - Spaltet den Kontrollfluss in zwei gleichzeitig aktive Threads auf:
+    1. Pfad in Swimlane Zentrale: 'Abgleich der Auftrags- und Sendungsdaten'.
+    2. Pfad in Swimlane Kurier: 'Kurierfahrt' -> 'Auslieferung'.
+• JOIN Node (Synchronisationsbalken vor Rechnungserstellung):
+  - Barriere: Wartet zwingend darauf, dass BEIDE Threads abgeschlossen sind (der Datenabgleich der Zentrale UND die Abschlussmeldung des Kuriers).
+  - Erst wenn beide Tokens eingetroffen sind, schaltet der Kontrollfluss zur 'Rechnungserstellung' weiter.
+
+c) Modellierung der Quittierung:
+• Decision Node (Verzweigungsraute mit XOR-Semantik) nach 'Auslieferung' in Swimlane Kurier:
+  - Zweig 1 mit Guard [persönliche Übergabe gewünscht]: Kontrollfluss wechselt in Swimlane Empfänger zur Aktion 'Entgegennahme und Quittierung des Empfangs' und führt danach zur 'Meldung des Abschlusses' im Kurier.
+  - Zweig 2 mit Guard [ohne persönliche Übergabe]: Kontrollfluss führt direkt zur 'Meldung des Abschlusses' in Swimlane Kurier.`,
+        solutionDiagramSvg: VisualDiagrams.getRadlBlitzAktivitaetsdiagrammSvg(),
+        explanation: "Original IHK-Aktivitätsdiagramm RADL-BLITZ: 4 Swimlanes, Synchronisationsbalken (FORK & JOIN) für parallelen Datenabgleich und Decision-Verzweigung für Quittierung."
+    },
+    {
+        id: 543,
+        isHard: false,
+        difficulty: "standard",
+        isBawueFocus: true,
+        theme: "diagrams",
+        diagramType: "UML Aktivitätsdiagramm",
+        isDiagram: true,
+        topic: "🔀 IHK Multiple-Choice: RADL-BLITZ Kurierfahrt – Nebenläufigkeit mit FORK & JOIN",
+        type: "multiple-choice",
+        question: "Welche Aussage beschreibt die Modellierung des parallelen Kontrollflusses in der IHK-Aufgabe RADL-BLITZ GmbH nach UML 2.x Standard exakt?",
+        options: [
+            "Ein dicker Balken (FORK) spaltet nach Datenübermittlung in 'Abgleich der Daten' (Zentrale) und 'Kurierfahrt' (Kurier) auf; ein zweiter Balken (JOIN) synchronisiert beide Pfade vor der Rechnungserstellung.",
+            "Eine Decision-Raute verzweigt alternativ mit Guards [Zentrale] vs. [Kurier], sodass nur einer von beiden Pfaden aktiv ist.",
+            "Eine gestrichelte Pfeillinie <<extend>> verbindet Zentrale und Kurier.",
+            "Es wird ein Aktivitätsendknoten nach der Kurierfahrt gesetzt, der einen neuen Prozess in der Zentrale triggert."
+        ],
+        correctAnswer: 0,
+        solutionDiagramSvg: VisualDiagrams.getRadlBlitzAktivitaetsdiagrammSvg(),
+        explanation: "FORK = Kontrollfluss-Aufspaltung in parallele Threads (AND-Verzweigung). JOIN = Synchronisationsbarriere, die wartet, bis alle parallelen Flüsse eingetroffen sind."
+    },
+    {
+        id: 544,
+        isHard: true,
+        difficulty: "hard",
+        isBawueFocus: true,
+        theme: "diagrams",
+        diagramType: "UML Zustandsdiagramm",
+        isDiagram: true,
+        topic: "🔄 IHK Originalaufgabe: Zustandsdiagramm Immobilienverkauf (B&G GmbH)",
+        type: "open-text",
+        question: `IHK Original-Prüfungsaufgabe (Zustandsdiagramm / AP1 Modellierung):
+Die B&G GmbH verkauft Immobilien. Eine Verkaufsimmobilie kann folgende Zustände haben:
+• Wenn sie zum Verkauf freigegeben wurde, steht sie zur Verfügung.
+• Für zur Verfügung stehende Immobilien können Anfragen entgegengenommen werden. Die Immobilie ist damit angefragt.
+• Für angefragte Immobilien können weitere Anfragen erfolgen.
+• Zur Verfügung stehende oder angefragte Immobilien können reserviert werden (nur eine Reservierung ist möglich). Die Immobilie ist dann reserviert.
+• Reservierte Immobilien können verkauft werden.
+• Mit dem Unterschreiben des Verkaufsvertrags wird der Endzustand erreicht.
+
+Hinweise:
+• Auf jede Anfrage wird Informationsmaterial verschickt.
+• Anfragen bleiben bei einer Reservierung bestehen.
+• Bei einer Reservierung wird eine Reservierungsbestätigung verschickt.
+• Reservierungen können zurückgenommen werden.
+
+Aufgaben:
+a) Nennen Sie alle stabilen Zustände sowie den Pseudozustand und den Endknoten.
+b) Formulieren Sie die Transitionen (Trigger / Action und Guards) für:
+   - Erste Anfrage und Folgeanfragen
+   - Reservierung
+   - Rücknahme der Reservierung (achten Sie auf die Fallunterscheidung bezüglich bestehender Anfragen!)
+   - Verkauf.
+c) Erläutern Sie, warum für Folgeanfragen eine Selbst-Transition (Self-Transition) an welchem Zustand modelliert werden muss.`,
+        musterloesung: `Musterlösung: UML-Zustandsdiagramm Verkaufsimmobilie (B&G GmbH):
+
+a) Zustände:
+• Startknoten (Pseudozustand): Ausgefüllter schwarzer Kreis (●) mit Transition '/ zum Verkauf freigegeben'.
+• Stabile Zustände (abgerundete Rechtecke):
+  1. Zur Verfügung stehend
+  2. angefragt
+  3. reserviert
+  4. verkauft
+• Endknoten (Final State): Bullauge (⦿).
+
+b) Transitionen (UML-Syntax Trigger [Guard] / Action):
+• Initialer Übergang:
+  ● ---- / zum Verkauf freigegeben ----> [Zur Verfügung stehend]
+• Erste Anfrage:
+  [Zur Verfügung stehend] ---- Anfrage / Infomaterial verschicken ----> [angefragt]
+• Folgeanfragen (Selbst-Transition an 'angefragt'):
+  [angefragt] ---- Anfrage / Infomaterial verschicken ----> [angefragt] (Schleife)
+• Reservierung:
+  - Von 'Zur Verfügung stehend': Reservieren / Reservierungsbestätigung schicken ----> [reserviert]
+  - Von 'angefragt': Reservieren / Reservierungsbestätigung schicken ----> [reserviert]
+• Rücknahme der Reservierung (IHK-Prüfungsschwerpunkt Guards):
+  - Fall A (Anfragen vorhanden):
+    [reserviert] ---- Reservierung zurücknehmen [Anfragen > 0] ----> [angefragt]
+  - Fall B (Keine Anfragen vorhanden):
+    [reserviert] ---- Reservierung zurücknehmen [Anfragen == 0] ----> [Zur Verfügung stehend]
+• Verkauf & Abschluss:
+  [reserviert] ---- Verkaufen [Vertrag unterzeichnen] ----> [verkauft] ----> ⦿
+
+c) Selbst-Transition an 'angefragt':
+• Zweck: Wenn eine Immobilie bereits angefragt ist, wechselt sie bei einer 2., 3. oder weiteren Kundenanfrage nicht in einen neuen Zustand, sondern verbleibt im Zustand 'angefragt'.
+• Dennoch muss bei jeder Anfrage die Aktion 'Infomaterial verschicken' ausgeführt werden. Die Selbst-Transition startet am Zustand 'angefragt' und mündet wieder in denselben Zustand.`,
+        solutionDiagramSvg: VisualDiagrams.getImmobilienVerkaufZustandsdiagrammSvg(),
+        explanation: "Original IHK-Zustandsdiagramm B&G GmbH: Lebenszyklus von Immobilien, Selbst-Transitionen, Trigger/Action-Syntax und disjunkte Guards bei Reservierungsrücknahme."
+    },
+    {
+        id: 545,
+        isHard: false,
+        difficulty: "standard",
+        isBawueFocus: true,
+        theme: "diagrams",
+        diagramType: "UML Zustandsdiagramm",
+        isDiagram: true,
+        topic: "🔄 IHK Multiple-Choice: B&G Zustandsdiagramm – Rücknahme der Reservierung mit Guards",
+        type: "multiple-choice",
+        question: "In der IHK-Aufgabe B&G GmbH kann eine Reservierung zurückgenommen werden. Welche Guards (Wächterbedingungen) steuern die beiden alternativen Rücksprung-Transitionen?",
+        options: [
+            "[Anfragen > 0] führt zurück in 'angefragt' und [Anfragen == 0] führt zurück in 'Zur Verfügung stehend'.",
+            "[Kunde zahlt] führt zu 'verkauft' und [Kunde zahlt nicht] führt zum Endknoten.",
+            "[Vorkasse] führt zu 'reserviert' und [Rechnung] führt zu 'angefragt'.",
+            "[Timeout] führt zu 'Zur Verfügung stehend' ohne Bedingung."
+        ],
+        correctAnswer: 0,
+        solutionDiagramSvg: VisualDiagrams.getImmobilienVerkaufZustandsdiagrammSvg(),
+        explanation: "Disjunkte Wächterbedingungen in eckigen Klammern: Hat die Immobilie noch Interessenten ([Anfragen > 0]), wird sie wieder 'angefragt'. Gab es keine weiteren Interessenten ([Anfragen == 0]), steht sie wieder frei 'Zur Verfügung'."
+    },
+    {
+        id: 546,
+        isHard: true,
+        difficulty: "hard",
+        isBawueFocus: true,
+        theme: "diagrams",
+        diagramType: "UML Aktivitätsdiagramm",
+        isDiagram: true,
+        topic: "🔀 IHK Originalaufgabe: Aktivitätsdiagramm Auftragsabwicklung Reederei (LaLuSe GmbH)",
+        type: "open-text",
+        question: `IHK Original-Prüfungsaufgabe (Aktivitätsdiagramm / AP1 Modellierung):
+Für die Auftragsabwicklung der Reederei LaLuSe GmbH soll ein UML-Aktivitätsdiagramm erstellt werden:
+1. Bei der Reederei geht eine Kundenanfrage ein -> Angebot wird an Kunden verschickt -> Kundenauftrag geht ein.
+2. Die Reederei prüft die Bonität des Kunden.
+3. Fall A (Keine Bonität): Reederei erstellt Angebot mit Zahlungsziel Vorkasse. Nimmt der Kunde an und leistet Vorkasse, führt die Reederei den Auftrag mit Verladung, Transport und Auslieferung vollständig durch.
+4. Fall B (Bonität gegeben): Reederei nimmt Auftrag an. Parallel zu Verladung und Transport werden Teilrechnungen erstellt und der Zahlungseingang geprüft.
+   - Bei abschließendem Zahlungseingang wird die Ware zur Auslieferung freigegeben.
+   - Bei fehlendem Zahlungseingang wird die Ware als Sicherheit festgehalten.
+
+Aufgaben:
+a) Skizzieren Sie die Partitionen (Swimlanes: Kunde | Reederei).
+b) Beschreiben Sie die Modellierung der Bonitäts-Verzweigung (Knotentyp & Guards).
+c) Erläutern Sie die Nebenläufigkeit bei positiver Bonität: FORK-Balken, die beiden parallelen Zweige, der JOIN-Balken und die anschließende Entscheidung (Ware freigeben vs. als Sicherheit festhalten).`,
+        musterloesung: `Musterlösung: UML-Aktivitätsdiagramm Reederei LaLuSe GmbH:
+
+a) Swimlanes (Partitionen):
+• Linke Swimlane: 'Kunde' (Anfrage stellen, Auftrag erteilen, Angebot annehmen, Rechnung zahlen).
+• Rechte Swimlane: 'Reederei' (Angebot erstellen, Bonität prüfen, Verladung, Transport, Abrechnung, Auslieferung).
+
+b) Bonitäts-Verzweigung:
+• Decision Node (Raute) nach 'Bonität prüfen' in Swimlane Reederei:
+  - Guard [nicht ok] / [keine Bonität]: 'Angebot mit Vorkasse' -> Kunde nimmt an -> Rechnung erstellen -> Kunde zahlt -> Zahlungseingang feststellen -> Verladen -> Transportieren -> Ausliefern -> Endknoten (⦿).
+  - Guard [ok] / [Bonität vorhanden]: 'Auftrag annehmen' -> führt in den FORK-Balken.
+
+c) Nebenläufigkeit & Sicherheitsprüfung (FORK / JOIN):
+• FORK Node (Synchronisationsbalken):
+  - Zweig 1 (Logistik): 'Verladen' -> 'Transportieren'.
+  - Zweig 2 (Finanzen): 'Teilrechnungen erstellen und Zahlungseingang prüfen'.
+• JOIN Node (Synchronisationsbalken):
+  - Wartet, bis sowohl Transport als auch Zahlungsprüfung abgeschlossen sind.
+• Decision Node nach JOIN ('Vollständigkeit der Zahlung prüfen'):
+  - Guard [ok] / [Zahlung eingegangen]: 'Ausliefern' -> Endknoten (⦿).
+  - Guard [nicht ok] / [Zahlung fehlt]: 'Ware als Sicherheit festhalten' -> Endknoten (⦿).`,
+        solutionDiagramSvg: VisualDiagrams.getActivityDecisionVsForkComparisonSvg(),
+        explanation: "Original IHK-Aktivitätsdiagramm LaLuSe GmbH: Swimlanes Kunde/Reederei, Bonitätsprüfung mit Vorkasse-Zweig und parallele Rechnungsstellung/Transport mit FORK/JOIN."
+    },
+    {
+        id: 547,
+        isHard: false,
+        difficulty: "standard",
+        isBawueFocus: true,
+        theme: "diagrams",
+        diagramType: "UML Aktivitätsdiagramm",
+        isDiagram: true,
+        topic: "🔀 IHK Multiple-Choice: LaLuSe Reederei – Ware als Sicherheit festhalten",
+        type: "multiple-choice",
+        question: "Welchen Zweck erfüllt der JOIN-Balken im Aktivitätsdiagramm der Reederei LaLuSe GmbH vor der Auslieferungsentscheidung?",
+        options: [
+            "Er synchronisiert die parallelen Stränge 'Transportieren' und 'Teilrechnungen/Zahlungseingang prüfen', sodass die Ware erst nach erfolgter Zahlungsprüfung ausgeliefert oder als Sicherheit einbehalten wird.",
+            "Er beendet den gesamten Prozess sofort und löscht alle offenen Posten in der Datenbank.",
+            "Er ersetzt die Bonitätsprüfung des Kunden zu Beginn des Prozesses.",
+            "Er dient als Rücksprungmarke (Merge Node) im Falle eines fehlerhaften Angebots."
+        ],
+        correctAnswer: 0,
+        solutionDiagramSvg: VisualDiagrams.getActivityDecisionVsForkComparisonSvg(),
+        explanation: "Der JOIN-Knoten stellt sicher, dass physischer Transport und kaufmännische Zahlungsprüfung abgeschlossen sind, bevor entschieden wird, ob die Ware ausgeliefert oder einbehalten wird."
+    },
+    {
+        id: 548,
+        isHard: true,
+        difficulty: "hard",
+        isBawueFocus: true,
+        theme: "diagrams",
+        diagramType: "UML Use-Case-Diagramm",
+        isDiagram: true,
+        topic: "🎯 IHK Originalaufgabe: Use-Case-Diagramm Kurierdienst (Öko-Soft GmbH)",
+        type: "open-text",
+        question: `IHK Original-Prüfungsaufgabe (Use-Case-Diagramm / AP1 Modellierung):
+Für das Kuriersystem der RADL-BLITZ GmbH (Öko-Soft GmbH) soll das Anwendungsfalldiagramm erstellt werden:
+- Akteure: Kurierdienst, Auftraggeber, Empfänger.
+- Zentraler Use Case: 'Transport'.
+- Beim Transport müssen stets zwingend die 'Datenerfassung' und die 'Rechnungserstellung' durchgeführt werden.
+- Auf Wunsch kann eine 'Persönliche Übergabe' (mit Quittierung durch den Empfänger) erfolgen.
+
+Aufgaben:
+a) Erläutern Sie die Zuordnung der Akteure zu den Anwendungsfällen.
+b) Begründen Sie die Wahl der Stereotypen (<<include>> vs. <<extend>>):
+   - Für 'Datenerfassung' und 'Rechnungserstellung'
+   - Für 'Persönliche Übergabe'.
+c) Geben Sie für alle Beziehungen die exakten Pfeilrichtungen an und erklären Sie die Einbindung des Extension Points.`,
+        musterloesung: `Musterlösung: UML-Use-Case-Diagramm Kurierdienst (Öko-Soft GmbH):
+
+a) Akteure & Assoziationen:
+• Akteur 'Kurierdienst' (links): Verbunden mit Basis-Use-Case 'Transport'.
+• Akteur 'Auftraggeber' (rechts oben): Verbunden mit Basis-Use-Case 'Transport'.
+• Akteur 'Empfänger' (rechts unten): Verbunden mit Use-Case 'Persönliche Übergabe'.
+
+b) Stereotypen & Begründung:
+• <<include>> (Pflicht / Mandatory):
+  - Verwendet für: 'Datenerfassung' und 'Rechnungserstellung'.
+  - Begründung: Jeder Transport erfordert ohne Ausnahme eine Datenerfassung und eine Rechnungsstellung. Der Basisfall ruft diese Teilfälle zwingend auf.
+• <<extend>> (Optional / Fakultativ):
+  - Verwendet für: 'Persönliche Übergabe'.
+  - Begründung: Eine persönliche Übergabe findet nur statt, wenn der Auftraggeber dies explizit wünscht (Bedingung am Extension Point). Ohne diese Option wird die Sendung regulär zugestellt.
+
+c) Pfeilrichtungen & Extension Point:
+• <<include>>: Gestrichelter Pfeil vom Basis-Use-Case ZUM Unterfall:
+  - [Transport] --------<<include>>--------> [Datenerfassung]
+  - [Transport] --------<<include>>--------> [Rechnungserstellung]
+• <<extend>> (Prüfungsfalle Pfeilrichtung): Gestrichelter Pfeil vom Erweiterungsfall ZUM Basis-Use-Case:
+  - [Persönliche Übergabe] --------<<extend>>--------> [Transport]
+  - Notiz am Pfeil: Extension Point [pers. Übergabe gewünscht].`,
+        solutionDiagramSvg: VisualDiagrams.getUmlIncludeExtendCheatSheetSvg(),
+        explanation: "Original IHK-Use-Case Kurierdienst: <<include>> für Datenerfassung & Rechnungserstellung (Basis -> Teil) und <<extend>> für persönliche Übergabe (Teil -> Basis)."
+    },
+    {
+        id: 549,
+        isHard: false,
+        difficulty: "standard",
+        isBawueFocus: true,
+        theme: "diagrams",
+        diagramType: "UML Use-Case-Diagramm",
+        isDiagram: true,
+        topic: "🎯 IHK Multiple-Choice: Kurierdienst Use-Case – Einbindung von persönlicher Übergabe",
+        type: "multiple-choice",
+        question: "Wie wird der Use Case 'Persönliche Übergabe' in der IHK-Aufgabe RADL-BLITZ GmbH fachlich korrekt modelliert?",
+        options: [
+            "Gestrichelte Pfeillinie von 'Persönliche Übergabe' ZU 'Transport' mit Stereotyp <<extend>> (Bedingung: pers. Übergabe gewünscht) und Assoziationslinie zum Akteur 'Empfänger'.",
+            "Gestrichelte Pfeillinie von 'Transport' ZU 'Persönliche Übergabe' mit Stereotyp <<include>>.",
+            "Durchgezogene Linie mit weißem Dreieck an 'Transport' (Generalisierung).",
+            "Durchgezogene Linie mit gefüllter Raute ◆ an 'Empfänger'."
+        ],
+        correctAnswer: 0,
+        solutionDiagramSvg: VisualDiagrams.getUmlIncludeExtendCheatSheetSvg(),
+        explanation: "Erweiterungsbeziehung <<extend>>: Der Pfeil zeigt vom erweiternden Use-Case ZUM Basisfall ('Persönliche Übergabe' ──<<extend>>──▶ 'Transport')."
     }
 
 ];

@@ -1289,8 +1289,11 @@
             </div>
             <div class="modal-toolbar" style="gap: 0.4rem; flex-wrap: wrap;">
                 <button class="btn btn-sm exercise-tab-btn active" data-diag="class" onclick="switchExerciseTab('class')">🏛️ Klassendiagramm</button>
+                <button class="btn btn-sm exercise-tab-btn" data-diag="eva_event" onclick="switchExerciseTab('eva_event')">🏛️ IHK: EVA-Event Tourneen</button>
                 <button class="btn btn-sm exercise-tab-btn" data-diag="uml_beziehungen" onclick="switchExerciseTab('uml_beziehungen')">💎 IHK Tabelle: Beziehungen</button>
                 <button class="btn btn-sm exercise-tab-btn" data-diag="uml_kardinalitaeten" onclick="switchExerciseTab('uml_kardinalitaeten')">🔢 IHK Kardinalitäten</button>
+                <button class="btn btn-sm exercise-tab-btn" data-diag="radl_blitz" onclick="switchExerciseTab('radl_blitz')">🔀 IHK: RADL-BLITZ 4 Swimlanes</button>
+                <button class="btn btn-sm exercise-tab-btn" data-diag="bg_immobilien" onclick="switchExerciseTab('bg_immobilien')">🔄 IHK: B&amp;G Immobilienverkauf</button>
                 <button class="btn btn-sm exercise-tab-btn" data-diag="uml_include_extend" onclick="switchExerciseTab('uml_include_extend')">🎯 IHK &lt;&lt;include&gt;&gt; vs &lt;&lt;extend&gt;&gt;</button>
                 <button class="btn btn-sm exercise-tab-btn" data-diag="usecase" onclick="switchExerciseTab('usecase')">🎯 Use-Case (Smart-Home)</button>
                 <button class="btn btn-sm exercise-tab-btn" data-diag="usecase_faq" onclick="switchExerciseTab('usecase_faq')">🎯 IHK: FAQ GmbH Statistik</button>
@@ -1318,7 +1321,7 @@
     </div>
 
     <!-- External Visual Diagram Generator Library for Solutions -->
-    <script src="diagrams.js?v=113"></script>
+    <script src="diagrams.js?v=114"></script>
     <script>
         // ====================================================================
         // AP1 Object-Oriented Whiteboard Engine (Vektorbasiert & Bewegbar)
@@ -3488,6 +3491,52 @@
                 keyRules: "Generalisierung = Durchgezogene Linie mit geschlossener weißer Dreiecksspitze. Komposition = Schwarze Raute (Existenzabhängigkeit). Sichtbarkeiten: '+' public, '-' private, '#' protected.",
                 stencil: "uml_class",
                 getSvg: () => (typeof VisualDiagrams !== "undefined" && VisualDiagrams.getClassDiagramSvg) ? VisualDiagrams.getClassDiagramSvg() : ""
+            },
+            eva_event: {
+                title: "IHK Originalaufgabe: Klassendiagramm Tourneen & Veranstaltungen (EVA-Event GmbH)",
+                badge: "IHK Original / LF 8 / AP1",
+                scenario: "Die Jukebox-Soft GbR modelliert für die EVA-Event GmbH Tourneen mit Veranstaltungen (Halle, Open-Air, Club), Locations und Mitarbeitern (Catering, Sanitäter, Technik, Security).",
+                tasks: [
+                    "Modellieren Sie die Komposition: Eine <code>Tournee</code> (1) besteht aus Veranstaltungen (<code>*</code>) (ausgefüllte schwarze Raute ◆ an Tournee).",
+                    "Erstellen Sie die Generalisierung für Veranstaltungsarten: <code>Hallenveranstaltung</code>, <code>Open-Air Veranstaltung</code> und <code>Club Veranstaltung</code> erben per weißem Dreieck (▷) von <code>Veranstaltung</code>.",
+                    "Modellieren Sie die Assoziation: <code>Veranstaltung</code> (1..*) findet in einer <code>Location</code> (1) statt.",
+                    "Modellieren Sie den Personaleinsatz: <code>Veranstaltung</code> (1..*) ist mit <code>Mitarbeiter</code> (1..*) verknüpft (n:m Beziehung).",
+                    "Erstellen Sie die zweite Generalisierung: <code>Catering</code>, <code>Sanitäter</code>, <code>Mitarbeiter Technik</code> und <code>Security</code> erben per weißem Dreieck (▷) von <code>Mitarbeiter</code>."
+                ],
+                keyRules: "Komposition (◆) = Schwarze Raute am Ganzen (Tournee). Generalisierung (▷) = Geschlossenes weißes Dreieck an der Oberklasse (Veranstaltung bzw. Mitarbeiter). Multiplizitäten korrekt zuordnen.",
+                stencil: "uml_class",
+                getSvg: () => (typeof VisualDiagrams !== "undefined" && VisualDiagrams.getEvaEventKlassendiagrammSvg) ? VisualDiagrams.getEvaEventKlassendiagrammSvg() : ""
+            },
+            radl_blitz: {
+                title: "IHK Originalaufgabe: Aktivitätsdiagramm Kurierfahrt mit 4 Swimlanes (RADL-BLITZ GmbH)",
+                badge: "IHK Original / LF 5 / AP1",
+                scenario: "Die Öko-Soft GmbH modelliert für die RADL-BLITZ GmbH den Ablauf einer Kurierfahrt über vier Partitionen mit parallelem Datenabgleich.",
+                tasks: [
+                    "Modellieren Sie 4 Swimlanes: <code>Auftraggeber</code>, <code>Zentrale</code>, <code>Kurier</code> und <code>Empfänger</code>.",
+                    "Startknoten (●) in Auftraggeber -> 'Auftragserteilung' -> Zentrale: 'Erfassung der Daten' -> 'Weitergabe an Kurier' -> Kurier: 'Übernahme der Sendung' -> 'Erfassung tatsächlicher Daten'.",
+                    "Setzen Sie einen FORK-Balken: Spaltet auf in a) Zentrale: 'Abgleich der Daten' und b) Kurier: 'Kurierfahrt' -> 'Auslieferung'.",
+                    "Decision-Raute in Kurier: [pers. Übergabe gewünscht] führt zum Empfänger ('Quittierung des Empfangs') und zurück zum Kurier; [ohne pers. Übergabe] führt direkt zur 'Meldung des Abschlusses'.",
+                    "Setzen Sie einen JOIN-Balken vor der 'Rechnungserstellung' in der Zentrale und beenden Sie mit dem Aktivitätsendknoten (⦿)."
+                ],
+                keyRules: "FORK = Parallelität (Datenabgleich während der Fahrt). JOIN = Wartet auf beide Zweige vor der Rechnungserstellung. Decision-Raute für Quittierung.",
+                stencil: "uml_activity",
+                getSvg: () => (typeof VisualDiagrams !== "undefined" && VisualDiagrams.getRadlBlitzAktivitaetsdiagrammSvg) ? VisualDiagrams.getRadlBlitzAktivitaetsdiagrammSvg() : ""
+            },
+            bg_immobilien: {
+                title: "IHK Originalaufgabe: Zustandsdiagramm Immobilienverkauf (B&G GmbH)",
+                badge: "IHK Original / LF 5 / AP1",
+                scenario: "Die B&G GmbH überwacht den Lebenszyklus von Verkaufsimmobilien mit Anfragen, Reservierungen, Rücknahmen und Verkauf.",
+                tasks: [
+                    "Modellieren Sie den Startknoten (●) mit Übergang <code>/ zum Verkauf freigegeben</code> in den Zustand <code>Zur Verfügung stehend</code>.",
+                    "Modellieren Sie den Übergang <code>Anfrage / Infomaterial verschicken</code> in den Zustand <code>angefragt</code>.",
+                    "Fügen Sie eine Selbst-Transition an <code>angefragt</code> ein: <code>Anfrage / Infomaterial verschicken</code> (für weitere Interessenten).",
+                    "Modellieren Sie den Übergang zu <code>reserviert</code>: <code>Reservieren / Reservierungsbestätigung schicken</code>.",
+                    "Modellieren Sie die beiden Rücknahme-Transitionen mit disjunkten Guards: <code>Reservierung zurücknehmen [Anfragen &gt; 0]</code> führt zurück zu <code>angefragt</code>; <code>Reservierung zurücknehmen [Anfragen == 0]</code> führt zurück zu <code>Zur Verfügung stehend</code>.",
+                    "Modellieren Sie den Übergang zu <code>verkauft</code>: <code>Verkaufen [Vertrag unterzeichnen]</code> und von dort in den Endknoten (⦿)."
+                ],
+                keyRules: "Syntax: Trigger [Guard] / Action. Disjunkte Guards [Anfragen > 0] vs. [Anfragen == 0] bei Stornierung. Selbst-Transition für mehrfache Anfragen.",
+                stencil: "uml_state",
+                getSvg: () => (typeof VisualDiagrams !== "undefined" && VisualDiagrams.getImmobilienVerkaufZustandsdiagrammSvg) ? VisualDiagrams.getImmobilienVerkaufZustandsdiagrammSvg() : ""
             },
             uml_beziehungen: {
                 title: "IHK Originalaufgabe: UML Klassendiagramm – Beziehungstypen (Tabelle)",

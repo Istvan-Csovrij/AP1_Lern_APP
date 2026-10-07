@@ -4644,6 +4644,374 @@ var VisualDiagrams = {
         `;
     },
 
+
+    getEvaEventKlassendiagrammSvg: function() {
+        return `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 640" width="100%" height="100%">
+            <defs>
+                <marker id="eva-gen-arr" markerWidth="14" markerHeight="14" refX="13" refY="7" orient="auto">
+                    <polygon points="1,1 13,7 1,13" fill="#ffffff" stroke="#0f172a" stroke-width="1.8" />
+                </marker>
+                <marker id="eva-comp-arr" markerWidth="16" markerHeight="12" refX="1" refY="6" orient="auto">
+                    <polygon points="1,6 8,1 15,6 8,11" fill="#0f172a" stroke="#0f172a" stroke-width="1.5" />
+                </marker>
+            </defs>
+
+            <!-- Background & Title Banner -->
+            <rect width="960" height="640" fill="#f8fafc" rx="10" />
+            <rect x="0" y="0" width="960" height="46" fill="#0f172a" rx="10" />
+            <text x="480" y="28" font-family="sans-serif" font-size="14" font-weight="bold" fill="#ffffff" text-anchor="middle">
+                UML-Klassendiagramm: Tourneen &amp; Veranstaltungen (EVA-Event GmbH / Jukebox-Soft GbR)
+            </text>
+
+            <!-- 1. Superclass Sub-Types: Veranstaltungen (Top Row) -->
+            <!-- Subclass 1: Hallenveranstaltung -->
+            <rect x="50" y="65" width="220" height="65" fill="#ffffff" stroke="#0284c7" stroke-width="1.8" rx="4" />
+            <rect x="50" y="65" width="220" height="24" fill="#f0f9ff" rx="4" />
+            <text x="160" y="81" font-family="sans-serif" font-size="11.5" font-weight="bold" fill="#0369a1" text-anchor="middle">Hallenveranstaltung</text>
+            <line x1="50" y1="89" x2="270" y2="89" stroke="#0284c7" stroke-width="1.2" />
+            <text x="60" y="105" font-family="monospace" font-size="9.5" fill="#334155">- sitzplaetze: int</text>
+            <text x="60" y="119" font-family="monospace" font-size="9.5" fill="#334155">- buehnenFlaecheM2: double</text>
+
+            <!-- Subclass 2: Open-Air Veranstaltung -->
+            <rect x="370" y="65" width="220" height="65" fill="#ffffff" stroke="#0284c7" stroke-width="1.8" rx="4" />
+            <rect x="370" y="65" width="220" height="24" fill="#f0f9ff" rx="4" />
+            <text x="480" y="81" font-family="sans-serif" font-size="11.5" font-weight="bold" fill="#0369a1" text-anchor="middle">Open-Air Veranstaltung</text>
+            <line x1="370" y1="89" x2="590" y2="89" stroke="#0284c7" stroke-width="1.2" />
+            <text x="380" y="105" font-family="monospace" font-size="9.5" fill="#334155">- witterungsschutz: boolean</text>
+            <text x="380" y="119" font-family="monospace" font-size="9.5" fill="#334155">- ausweichTermin: Date</text>
+
+            <!-- Subclass 3: Club Veranstaltung -->
+            <rect x="690" y="65" width="220" height="65" fill="#ffffff" stroke="#0284c7" stroke-width="1.8" rx="4" />
+            <rect x="690" y="65" width="220" height="24" fill="#f0f9ff" rx="4" />
+            <text x="800" y="81" font-family="sans-serif" font-size="11.5" font-weight="bold" fill="#0369a1" text-anchor="middle">Club Veranstaltung</text>
+            <line x1="690" y1="89" x2="910" y2="89" stroke="#0284c7" stroke-width="1.2" />
+            <text x="700" y="105" font-family="monospace" font-size="9.5" fill="#334155">- minAlter: int</text>
+            <text x="700" y="119" font-family="monospace" font-size="9.5" fill="#334155">- djs: String</text>
+
+            <!-- Vererbungslinien von Subklassen zur Oberklasse Veranstaltung -->
+            <line x1="160" y1="130" x2="160" y2="155" stroke="#0f172a" stroke-width="1.5" />
+            <line x1="480" y1="130" x2="480" y2="155" stroke="#0f172a" stroke-width="1.5" />
+            <line x1="800" y1="130" x2="800" y2="155" stroke="#0f172a" stroke-width="1.5" />
+            <line x1="160" y1="155" x2="800" y2="155" stroke="#0f172a" stroke-width="1.5" />
+            <line x1="480" y1="155" x2="480" y2="195" stroke="#0f172a" stroke-width="1.8" marker-end="url(#eva-gen-arr)" />
+
+            <!-- 2. Kern-Klassen (Center Row) -->
+            <!-- Klasse Tournee (Ganzes der Komposition) -->
+            <rect x="30" y="210" width="190" height="85" fill="#ffffff" stroke="#0f172a" stroke-width="1.8" rx="4" />
+            <rect x="30" y="210" width="190" height="24" fill="#f1f5f9" rx="4" />
+            <text x="125" y="226" font-family="sans-serif" font-size="12" font-weight="bold" fill="#0f172a" text-anchor="middle">Tournee</text>
+            <line x1="30" y1="234" x2="220" y2="234" stroke="#0f172a" stroke-width="1.2" />
+            <text x="40" y="250" font-family="monospace" font-size="10" fill="#334155">- tourneeId: int</text>
+            <text x="40" y="266" font-family="monospace" font-size="10" fill="#334155">- titel: String</text>
+            <text x="40" y="282" font-family="monospace" font-size="10" fill="#334155">- jahr: int</text>
+
+            <!-- Klasse Veranstaltung (Zentrales Element) -->
+            <rect x="320" y="210" width="320" height="90" fill="#ffffff" stroke="#2563eb" stroke-width="2.2" rx="6" />
+            <rect x="320" y="210" width="320" height="26" fill="#eff6ff" rx="6" />
+            <text x="480" y="227" font-family="sans-serif" font-size="13" font-weight="bold" fill="#1d4ed8" text-anchor="middle">Veranstaltung</text>
+            <line x1="320" y1="236" x2="640" y2="236" stroke="#2563eb" stroke-width="1.2" />
+            <text x="330" y="253" font-family="monospace" font-size="10" fill="#1e293b">- veranstaltungsId: int</text>
+            <text x="330" y="269" font-family="monospace" font-size="10" fill="#1e293b">- datum: Date</text>
+            <text x="330" y="285" font-family="monospace" font-size="10" fill="#1e293b">- bezeichnung: String</text>
+
+            <!-- Klasse Location -->
+            <rect x="750" y="210" width="180" height="85" fill="#ffffff" stroke="#0f172a" stroke-width="1.8" rx="4" />
+            <rect x="750" y="210" width="180" height="24" fill="#f1f5f9" rx="4" />
+            <text x="840" y="226" font-family="sans-serif" font-size="12" font-weight="bold" fill="#0f172a" text-anchor="middle">Location</text>
+            <line x1="750" y1="234" x2="930" y2="234" stroke="#0f172a" stroke-width="1.2" />
+            <text x="760" y="250" font-family="monospace" font-size="10" fill="#334155">- name: String</text>
+            <text x="760" y="266" font-family="monospace" font-size="10" fill="#334155">- adresse: String</text>
+            <text x="760" y="282" font-family="monospace" font-size="10" fill="#334155">- maxKapazitaet: int</text>
+
+            <!-- Beziehungen Mitte: Komposition Tournee ◆── * Veranstaltung -->
+            <line x1="220" y1="250" x2="320" y2="250" stroke="#0f172a" stroke-width="2" marker-start="url(#eva-comp-arr)" />
+            <text x="240" y="243" font-family="sans-serif" font-size="11" font-weight="bold" fill="#0f172a">1</text>
+            <text x="305" y="243" font-family="sans-serif" font-size="11" font-weight="bold" fill="#0f172a">*</text>
+
+            <!-- Beziehung Veranstaltung 1..* ── 1 Location -->
+            <line x1="640" y1="250" x2="750" y2="250" stroke="#0f172a" stroke-width="1.8" />
+            <text x="650" y="243" font-family="sans-serif" font-size="11" font-weight="bold" fill="#0f172a">1..*</text>
+            <text x="735" y="243" font-family="sans-serif" font-size="11" font-weight="bold" fill="#0f172a">1</text>
+
+            <!-- Beziehung Veranstaltung 1..* ── 1..* Mitarbeiter (Vertical n:m) -->
+            <line x1="480" y1="300" x2="480" y2="355" stroke="#0f172a" stroke-width="1.8" />
+            <text x="490" y="318" font-family="sans-serif" font-size="11" font-weight="bold" fill="#0f172a">1..*</text>
+            <text x="490" y="348" font-family="sans-serif" font-size="11" font-weight="bold" fill="#0f172a">1..*</text>
+
+            <!-- Klasse Mitarbeiter (Oberklasse der Rollen) -->
+            <rect x="320" y="355" width="320" height="75" fill="#ffffff" stroke="#7c3aed" stroke-width="2" rx="6" />
+            <rect x="320" y="355" width="320" height="24" fill="#faf5ff" rx="6" />
+            <text x="480" y="371" font-family="sans-serif" font-size="12.5" font-weight="bold" fill="#6d28d9" text-anchor="middle">Mitarbeiter</text>
+            <line x1="320" y1="379" x2="640" y2="379" stroke="#7c3aed" stroke-width="1.2" />
+            <text x="330" y="396" font-family="monospace" font-size="10" fill="#334155">- mitarbeiterId: int</text>
+            <text x="330" y="412" font-family="monospace" font-size="10" fill="#334155">- name: String, vorname: String</text>
+
+            <!-- Vererbung Mitarbeiter zu Spezialisierungen (Bottom Row) -->
+            <line x1="480" y1="430" x2="480" y2="455" stroke="#0f172a" stroke-width="1.8" marker-start="url(#eva-gen-arr)" />
+            <line x1="125" y1="455" x2="835" y2="455" stroke="#0f172a" stroke-width="1.5" />
+            <line x1="125" y1="455" x2="125" y2="480" stroke="#0f172a" stroke-width="1.5" />
+            <line x1="360" y1="455" x2="360" y2="480" stroke="#0f172a" stroke-width="1.5" />
+            <line x1="600" y1="455" x2="600" y2="480" stroke="#0f172a" stroke-width="1.5" />
+            <line x1="835" y1="455" x2="835" y2="480" stroke="#0f172a" stroke-width="1.5" />
+
+            <!-- Subklasse 1: Catering -->
+            <rect x="30" y="480" width="190" height="60" fill="#ffffff" stroke="#7c3aed" stroke-width="1.5" rx="4" />
+            <rect x="30" y="480" width="190" height="22" fill="#faf5ff" rx="4" />
+            <text x="125" y="495" font-family="sans-serif" font-size="11" font-weight="bold" fill="#6d28d9" text-anchor="middle">Catering</text>
+            <line x1="30" y1="502" x2="220" y2="502" stroke="#7c3aed" stroke-width="1" />
+            <text x="38" y="520" font-family="monospace" font-size="9" fill="#334155">- hygienePass: boolean</text>
+
+            <!-- Subklasse 2: Sanitäter -->
+            <rect x="265" y="480" width="190" height="60" fill="#ffffff" stroke="#7c3aed" stroke-width="1.5" rx="4" />
+            <rect x="265" y="480" width="190" height="22" fill="#faf5ff" rx="4" />
+            <text x="360" y="495" font-family="sans-serif" font-size="11" font-weight="bold" fill="#6d28d9" text-anchor="middle">Sanitäter</text>
+            <line x1="265" y1="502" x2="455" y2="502" stroke="#7c3aed" stroke-width="1" />
+            <text x="273" y="520" font-family="monospace" font-size="9" fill="#334155">- ersthelferStufe: String</text>
+
+            <!-- Subklasse 3: Mitarbeiter Technik -->
+            <rect x="500" y="480" width="200" height="60" fill="#ffffff" stroke="#7c3aed" stroke-width="1.5" rx="4" />
+            <rect x="500" y="480" width="200" height="22" fill="#faf5ff" rx="4" />
+            <text x="600" y="495" font-family="sans-serif" font-size="11" font-weight="bold" fill="#6d28d9" text-anchor="middle">Mitarbeiter Technik</text>
+            <line x1="500" y1="502" x2="700" y2="502" stroke="#7c3aed" stroke-width="1" />
+            <text x="508" y="520" font-family="monospace" font-size="9" fill="#334155">- fachbereich: String</text>
+
+            <!-- Subklasse 4: Security -->
+            <rect x="740" y="480" width="190" height="60" fill="#ffffff" stroke="#7c3aed" stroke-width="1.5" rx="4" />
+            <rect x="740" y="480" width="190" height="22" fill="#faf5ff" rx="4" />
+            <text x="835" y="495" font-family="sans-serif" font-size="11" font-weight="bold" fill="#6d28d9" text-anchor="middle">Security</text>
+            <line x1="740" y1="502" x2="930" y2="502" stroke="#7c3aed" stroke-width="1" />
+            <text x="748" y="520" font-family="monospace" font-size="9" fill="#334155">- sachkunde34a: boolean</text>
+
+            <!-- Bottom IHK Legend -->
+            <rect x="30" y="565" width="900" height="60" fill="#f1f5f9" stroke="#cbd5e1" rx="6" />
+            <text x="45" y="585" font-family="sans-serif" font-size="11" font-weight="bold" fill="#0f172a">IHK Prüfungsmerkmale der Modellierung:</text>
+            <text x="45" y="603" font-family="sans-serif" font-size="10.5" fill="#334155">1. Komposition (◆): Eine Tournee besteht aus Veranstaltungen (Lebenszykluskopplung). Multiplizität 1 am Ganzen, * am Teil.</text>
+            <text x="45" y="618" font-family="sans-serif" font-size="10.5" fill="#334155">2. Zweifache Generalisierung (▷): Veranstaltungsarten erben von Veranstaltung; Einsatzrollen erben von Mitarbeiter.</text>
+        </svg>
+        `;
+    },
+
+    getRadlBlitzAktivitaetsdiagrammSvg: function() {
+        return `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 760" width="100%" height="100%">
+            <defs>
+                <marker id="rb-flow-arr" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+                    <polygon points="1,1 7,4 1,7" fill="#0f172a" />
+                </marker>
+            </defs>
+
+            <!-- Header Banner -->
+            <rect width="960" height="760" fill="#f8fafc" rx="10" />
+            <rect x="0" y="0" width="960" height="42" fill="#0f172a" rx="10" />
+            <text x="480" y="26" font-family="sans-serif" font-size="14" font-weight="bold" fill="#ffffff" text-anchor="middle">
+                UML-Aktivitätsdiagramm mit 4 Swimlanes: Kurierfahrt (RADL-BLITZ GmbH &amp; Öko-Soft GmbH)
+            </text>
+
+            <!-- 4 Swimlanes Headers -->
+            <!-- Lane 1: Auftraggeber (w: 220) -->
+            <rect x="25" y="50" width="220" height="32" fill="#e2e8f0" stroke="#94a3b8" />
+            <text x="135" y="71" font-family="sans-serif" font-size="12" font-weight="bold" fill="#1e293b" text-anchor="middle">Auftraggeber</text>
+            <line x1="245" y1="50" x2="245" y2="745" stroke="#94a3b8" stroke-dasharray="4,4" />
+
+            <!-- Lane 2: Zentrale (w: 235) -->
+            <rect x="245" y="50" width="235" height="32" fill="#e0f2fe" stroke="#38bdf8" />
+            <text x="362" y="71" font-family="sans-serif" font-size="12" font-weight="bold" fill="#0369a1" text-anchor="middle">Zentrale</text>
+            <line x1="480" y1="50" x2="480" y2="745" stroke="#94a3b8" stroke-dasharray="4,4" />
+
+            <!-- Lane 3: Kurier (w: 235) -->
+            <rect x="480" y="50" width="235" height="32" fill="#fef3c7" stroke="#fbbf24" />
+            <text x="597" y="71" font-family="sans-serif" font-size="12" font-weight="bold" fill="#92400e" text-anchor="middle">Kurier</text>
+            <line x1="715" y1="50" x2="715" y2="745" stroke="#94a3b8" stroke-dasharray="4,4" />
+
+            <!-- Lane 4: Empfänger (w: 220) -->
+            <rect x="715" y="50" width="220" height="32" fill="#dcfce7" stroke="#4ade80" />
+            <text x="825" y="71" font-family="sans-serif" font-size="12" font-weight="bold" fill="#166534" text-anchor="middle">Empfänger</text>
+
+            <!-- Outer Bounds -->
+            <rect x="25" y="50" width="910" height="695" fill="none" stroke="#94a3b8" stroke-width="1.5" />
+
+            <!-- Flow Elements -->
+            <!-- Startknoten in Auftraggeber -->
+            <circle cx="135" cy="105" r="10" fill="#0f172a" />
+            <line x1="135" y1="115" x2="135" y2="135" stroke="#0f172a" stroke-width="1.8" marker-end="url(#rb-flow-arr)" />
+
+            <!-- Action 1: Auftragserteilung -->
+            <rect x="45" y="135" width="180" height="42" fill="#ffffff" stroke="#0f172a" stroke-width="1.5" rx="10" />
+            <text x="135" y="153" font-family="sans-serif" font-size="10.5" font-weight="600" fill="#0f172a" text-anchor="middle">Auftragserteilung an</text>
+            <text x="135" y="167" font-family="sans-serif" font-size="10.5" font-weight="600" fill="#0f172a" text-anchor="middle">Kurierdienst</text>
+
+            <!-- Transition to Zentrale: Erfassung der Daten -->
+            <path d="M 225 156 L 362 156 L 362 195" fill="none" stroke="#0f172a" stroke-width="1.8" marker-end="url(#rb-flow-arr)" />
+            <rect x="272" y="195" width="180" height="42" fill="#ffffff" stroke="#0284c7" stroke-width="1.5" rx="10" />
+            <text x="362" y="213" font-family="sans-serif" font-size="10" font-weight="600" fill="#0369a1" text-anchor="middle">Erfassung der Daten</text>
+            <text x="362" y="227" font-family="sans-serif" font-size="10" font-weight="600" fill="#0369a1" text-anchor="middle">des Kundenauftrags</text>
+
+            <!-- Action: Weitergabe an Kurier -->
+            <line x1="362" y1="237" x2="362" y2="257" stroke="#0f172a" stroke-width="1.8" marker-end="url(#rb-flow-arr)" />
+            <rect x="272" y="257" width="180" height="42" fill="#ffffff" stroke="#0284c7" stroke-width="1.5" rx="10" />
+            <text x="362" y="275" font-family="sans-serif" font-size="10" font-weight="600" fill="#0369a1" text-anchor="middle">Weitergabe des Auftrags</text>
+            <text x="362" y="289" font-family="sans-serif" font-size="10" font-weight="600" fill="#0369a1" text-anchor="middle">an einen Kurier</text>
+
+            <!-- Transition to Kurier: Übernahme der Sendung -->
+            <path d="M 452 278 L 597 278 L 597 310" fill="none" stroke="#0f172a" stroke-width="1.8" marker-end="url(#rb-flow-arr)" />
+            <rect x="507" y="310" width="180" height="38" fill="#ffffff" stroke="#d97706" stroke-width="1.5" rx="10" />
+            <text x="597" y="333" font-family="sans-serif" font-size="10" font-weight="600" fill="#b45309" text-anchor="middle">Übernahme der Sendung</text>
+
+            <!-- Action: Erfassung & Übermittlung Sendungsdaten -->
+            <line x1="597" y1="348" x2="597" y2="368" stroke="#0f172a" stroke-width="1.8" marker-end="url(#rb-flow-arr)" />
+            <rect x="507" y="368" width="180" height="42" fill="#ffffff" stroke="#d97706" stroke-width="1.5" rx="10" />
+            <text x="597" y="386" font-family="sans-serif" font-size="9.5" font-weight="600" fill="#b45309" text-anchor="middle">Erfassung &amp; Übermittlung</text>
+            <text x="597" y="400" font-family="sans-serif" font-size="9.5" font-weight="600" fill="#b45309" text-anchor="middle">tatsächlicher Daten</text>
+
+            <!-- FORK Node (Parallelität / Balken) -->
+            <line x1="597" y1="410" x2="597" y2="425" stroke="#0f172a" stroke-width="1.8" marker-end="url(#rb-flow-arr)" />
+            <rect x="330" y="425" width="300" height="7" fill="#0f172a" rx="2" />
+            <text x="640" y="432" font-family="sans-serif" font-size="9" font-style="italic" fill="#64748b">FORK (Nebenläufigkeit)</text>
+
+            <!-- Branch 1 (Zentrale): Abgleich Auftragsdaten -->
+            <path d="M 362 432 L 362 470" fill="none" stroke="#0f172a" stroke-width="1.8" marker-end="url(#rb-flow-arr)" />
+            <rect x="272" y="470" width="180" height="42" fill="#ffffff" stroke="#0284c7" stroke-width="1.5" rx="10" />
+            <text x="362" y="488" font-family="sans-serif" font-size="10" font-weight="600" fill="#0369a1" text-anchor="middle">Abgleich der Auftrags-</text>
+            <text x="362" y="502" font-family="sans-serif" font-size="10" font-weight="600" fill="#0369a1" text-anchor="middle">und Sendungsdaten</text>
+
+            <!-- Branch 2 (Kurier): Kurierfahrt -->
+            <path d="M 597 432 L 597 455" fill="none" stroke="#0f172a" stroke-width="1.8" marker-end="url(#rb-flow-arr)" />
+            <rect x="522" y="455" width="150" height="34" fill="#ffffff" stroke="#d97706" stroke-width="1.5" rx="10" />
+            <text x="597" y="476" font-family="sans-serif" font-size="10.5" font-weight="600" fill="#b45309" text-anchor="middle">Kurierfahrt</text>
+
+            <!-- Kurier Auslieferung -->
+            <line x1="597" y1="489" x2="597" y2="505" stroke="#0f172a" stroke-width="1.8" marker-end="url(#rb-flow-arr)" />
+            <rect x="522" y="505" width="150" height="34" fill="#ffffff" stroke="#d97706" stroke-width="1.5" rx="10" />
+            <text x="597" y="526" font-family="sans-serif" font-size="10.5" font-weight="600" fill="#b45309" text-anchor="middle">Auslieferung</text>
+
+            <!-- Decision Node (Raute) in Kurier -->
+            <line x1="597" y1="539" x2="597" y2="555" stroke="#0f172a" stroke-width="1.8" marker-end="url(#rb-flow-arr)" />
+            <polygon points="597,555 617,570 597,585 577,570" fill="#ffffff" stroke="#0f172a" stroke-width="1.8" />
+
+            <!-- Decision Path A: [Pers. Übergabe] -> Empfänger -->
+            <path d="M 617 570 L 735 570 L 735 585" fill="none" stroke="#0f172a" stroke-width="1.8" marker-end="url(#rb-flow-arr)" />
+            <text x="660" y="563" font-family="sans-serif" font-size="8.5" font-weight="bold" fill="#0f172a">[Pers. Übergabe]</text>
+            <rect x="735" y="585" width="180" height="42" fill="#ffffff" stroke="#16a34a" stroke-width="1.5" rx="10" />
+            <text x="825" y="603" font-family="sans-serif" font-size="9.5" font-weight="600" fill="#15803d" text-anchor="middle">Entgegennahme und</text>
+            <text x="825" y="617" font-family="sans-serif" font-size="9.5" font-weight="600" fill="#15803d" text-anchor="middle">Quittierung Empfang</text>
+
+            <!-- From Empfänger to Kurier Abschlussmeldung -->
+            <path d="M 825 627 L 825 645 L 687 645" fill="none" stroke="#0f172a" stroke-width="1.8" marker-end="url(#rb-flow-arr)" />
+
+            <!-- Decision Path B: [Ohne pers. Übergabe] -->
+            <path d="M 577 570 L 545 570 L 545 628 L 597 628" fill="none" stroke="#0f172a" stroke-width="1.8" marker-end="url(#rb-flow-arr)" />
+            <text x="495" y="583" font-family="sans-serif" font-size="8.5" font-weight="bold" fill="#0f172a">[Ohne pers. Üb.]</text>
+
+            <!-- Meldung des Abschlusses in Kurier -->
+            <rect x="507" y="628" width="180" height="34" fill="#ffffff" stroke="#d97706" stroke-width="1.5" rx="10" />
+            <text x="597" y="649" font-family="sans-serif" font-size="10" font-weight="600" fill="#b45309" text-anchor="middle">Meldung des Abschlusses</text>
+
+            <!-- JOIN Node (Balken) across Zentrale & Kurier -->
+            <path d="M 362 512 L 362 678" fill="none" stroke="#0f172a" stroke-width="1.8" marker-end="url(#rb-flow-arr)" />
+            <path d="M 597 662 L 597 678" fill="none" stroke="#0f172a" stroke-width="1.8" marker-end="url(#rb-flow-arr)" />
+            <rect x="330" y="678" width="300" height="7" fill="#0f172a" rx="2" />
+            <text x="640" y="685" font-family="sans-serif" font-size="9" font-style="italic" fill="#64748b">JOIN (Synchronisation)</text>
+
+            <!-- Rechnungserstellung in Zentrale -->
+            <path d="M 362 685 L 362 705" fill="none" stroke="#0f172a" stroke-width="1.8" marker-end="url(#rb-flow-arr)" />
+            <rect x="282" y="705" width="160" height="32" fill="#ffffff" stroke="#0284c7" stroke-width="1.5" rx="8" />
+            <text x="362" y="725" font-family="sans-serif" font-size="10" font-weight="bold" fill="#0369a1" text-anchor="middle">Rechnungserstellung</text>
+
+            <!-- Endknoten -->
+            <path d="M 362 737 L 362 748" fill="none" stroke="#0f172a" stroke-width="1.8" />
+            <circle cx="362" cy="748" r="7" fill="#0f172a" stroke="#0f172a" stroke-width="2" />
+            <circle cx="362" cy="748" r="4" fill="#ffffff" />
+            <circle cx="362" cy="748" r="3" fill="#0f172a" />
+        </svg>
+        `;
+    },
+
+    getImmobilienVerkaufZustandsdiagrammSvg: function() {
+        return `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 560" width="100%" height="100%">
+            <defs>
+                <marker id="imm-st-arr" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto">
+                    <polygon points="1,1 8,4.5 1,8" fill="#0f172a" />
+                </marker>
+            </defs>
+
+            <!-- Outer Canvas & Title -->
+            <rect width="960" height="560" fill="#f8fafc" rx="10" />
+            <rect x="0" y="0" width="960" height="42" fill="#0f172a" rx="10" />
+            <text x="480" y="26" font-family="sans-serif" font-size="14" font-weight="bold" fill="#ffffff" text-anchor="middle">
+                UML-Zustandsdiagramm: Verkaufsimmobilie Lebenszyklus (B&amp;G GmbH)
+            </text>
+
+            <!-- Frame Label: Immobilie -->
+            <rect x="25" y="55" width="120" height="26" fill="#f1f5f9" stroke="#94a3b8" />
+            <text x="85" y="72" font-family="sans-serif" font-size="11" font-weight="bold" fill="#334155" text-anchor="middle">Immobilie</text>
+            <rect x="25" y="55" width="910" height="485" fill="none" stroke="#94a3b8" stroke-width="1.5" />
+
+            <!-- Startknoten (Initial State) -->
+            <circle cx="150" cy="110" r="10" fill="#0f172a" />
+            <text x="170" y="114" font-family="monospace" font-size="10.5" fill="#475569">/ zum Verkauf freigegeben</text>
+            <line x1="150" y1="120" x2="150" y2="160" stroke="#0f172a" stroke-width="1.8" marker-end="url(#imm-st-arr)" />
+
+            <!-- State 1: Zur Verfügung stehend -->
+            <rect x="50" y="160" width="200" height="65" fill="#ffffff" stroke="#0284c7" stroke-width="2" rx="12" />
+            <text x="150" y="188" font-family="sans-serif" font-size="12" font-weight="bold" fill="#0369a1" text-anchor="middle">Zur Verfügung</text>
+            <text x="150" y="206" font-family="sans-serif" font-size="12" font-weight="bold" fill="#0369a1" text-anchor="middle">stehend</text>
+
+            <!-- Transition: Anfrage / Infomaterial verschicken -->
+            <line x1="250" y1="185" x2="420" y2="185" stroke="#0f172a" stroke-width="1.8" marker-end="url(#imm-st-arr)" />
+            <text x="335" y="170" font-family="sans-serif" font-size="10" font-weight="bold" fill="#0f172a" text-anchor="middle">Anfrage /</text>
+            <text x="335" y="183" font-family="sans-serif" font-size="9.5" fill="#475569" text-anchor="middle">Infomaterial verschicken</text>
+
+            <!-- State 2: angefragt -->
+            <rect x="420" y="160" width="180" height="65" fill="#ffffff" stroke="#7c3aed" stroke-width="2" rx="12" />
+            <text x="510" y="198" font-family="sans-serif" font-size="13" font-weight="bold" fill="#6d28d9" text-anchor="middle">angefragt</text>
+
+            <!-- Self-transition on angefragt: weitere Anfrage -->
+            <path d="M 540 160 C 540 110, 640 110, 600 160" fill="none" stroke="#0f172a" stroke-width="1.8" marker-end="url(#imm-st-arr)" />
+            <text x="640" y="125" font-family="sans-serif" font-size="10" font-weight="bold" fill="#0f172a">Anfrage /</text>
+            <text x="640" y="139" font-family="sans-serif" font-size="9.5" fill="#475569">Infomaterial verschicken</text>
+
+            <!-- Transition from angefragt down to reserviert -->
+            <line x1="530" y1="225" x2="530" y2="300" stroke="#0f172a" stroke-width="1.8" marker-end="url(#imm-st-arr)" />
+            <text x="540" y="255" font-family="sans-serif" font-size="10" font-weight="bold" fill="#0f172a">Reservieren /</text>
+            <text x="540" y="270" font-family="sans-serif" font-size="9" fill="#475569">Reservierungsbestätigung schicken</text>
+
+            <!-- Direct Transition from Zur Verfügung stehend down to reserviert -->
+            <path d="M 150 225 L 150 325 L 420 325" fill="none" stroke="#0f172a" stroke-width="1.8" marker-end="url(#imm-st-arr)" />
+            <text x="260" y="315" font-family="sans-serif" font-size="9.5" font-weight="bold" fill="#0f172a" text-anchor="middle">Reservieren / Reservierungsbestätigung schicken</text>
+
+            <!-- State 3: reserviert -->
+            <rect x="420" y="300" width="180" height="65" fill="#ffffff" stroke="#ea580c" stroke-width="2" rx="12" />
+            <text x="510" y="338" font-family="sans-serif" font-size="13" font-weight="bold" fill="#c2410c" text-anchor="middle">reserviert</text>
+
+            <!-- Reverse Transition: Reservierung zurücknehmen [Anfragen > 0] back to angefragt -->
+            <path d="M 450 300 L 450 225" fill="none" stroke="#0f172a" stroke-width="1.8" marker-end="url(#imm-st-arr)" />
+            <text x="365" y="258" font-family="sans-serif" font-size="9.5" font-weight="bold" fill="#dc2626">Reservierung zurücknehmen</text>
+            <text x="365" y="272" font-family="sans-serif" font-size="9.5" font-weight="bold" fill="#b91c1c">[Anfragen &gt; 0]</text>
+
+            <!-- Reverse Transition: Reservierung zurücknehmen [Anfragen == 0] back to Zur Verfügung stehend -->
+            <path d="M 420 345 L 75 345 L 75 225" fill="none" stroke="#0f172a" stroke-width="1.8" marker-end="url(#imm-st-arr)" />
+            <text x="180" y="360" font-family="sans-serif" font-size="9.5" font-weight="bold" fill="#dc2626">Reservierung zurücknehmen [Anfragen == 0]</text>
+
+            <!-- Transition: Verkaufen [Vertrag unterzeichnen] -->
+            <line x1="510" y1="365" x2="510" y2="430" stroke="#0f172a" stroke-width="1.8" marker-end="url(#imm-st-arr)" />
+            <text x="520" y="395" font-family="sans-serif" font-size="10" font-weight="bold" fill="#0f172a">Verkaufen</text>
+            <text x="520" y="409" font-family="sans-serif" font-size="9.5" fill="#15803d">[Vertrag unterzeichnen]</text>
+
+            <!-- State 4: verkauft -->
+            <rect x="420" y="430" width="180" height="55" fill="#ffffff" stroke="#16a34a" stroke-width="2.2" rx="12" />
+            <text x="510" y="463" font-family="sans-serif" font-size="13" font-weight="bold" fill="#15803d" text-anchor="middle">verkauft</text>
+
+            <!-- Final State (Bullauge) -->
+            <line x1="600" y1="457" x2="720" y2="457" stroke="#0f172a" stroke-width="1.8" marker-end="url(#imm-st-arr)" />
+            <circle cx="735" cy="457" r="10" fill="#ffffff" stroke="#0f172a" stroke-width="1.8" />
+            <circle cx="735" cy="457" r="6" fill="#0f172a" />
+            <text x="760" y="461" font-family="sans-serif" font-size="11" fill="#475569">Endzustand</text>
+        </svg>
+        `;
+    },
+
     getAutoDiagramSvg: function(q) {
         if (!q) return null;
         // 1. Wenn die Frage bereits eine explizite grafische Musterlösung besitzt
@@ -4690,7 +5058,22 @@ var VisualDiagrams = {
         const question = (q.question || "").toLowerCase();
         const text = topic + " " + question;
 
-        // IHK Original Tabellenaufgabe: Beziehungstypen & Begründungen (Immobilie/Wohnung, Bewohner/Mieter, Mietervereinigung)
+        // EVA-Event GmbH / Jukebox-Soft Klassendiagramm (IHK Original)
+        if (text.includes("eva-event") || text.includes("jukebox-soft") || (text.includes("tournee") && text.includes("veranstaltung"))) {
+            return VisualDiagrams.getEvaEventKlassendiagrammSvg();
+        }
+
+        // RADL-BLITZ GmbH Kurierfahrt Aktivitätsdiagramm (IHK Original)
+        if (text.includes("radl-blitz") || (text.includes("kurier") && text.includes("zentrale") && text.includes("abgleich"))) {
+            return VisualDiagrams.getRadlBlitzAktivitaetsdiagrammSvg();
+        }
+
+        // B&G GmbH Immobilienverkauf Zustandsdiagramm (IHK Original)
+        if (text.includes("b&g gmbh") || (text.includes("verkaufsimmobilie") && text.includes("reserviert") && text.includes("angefragt"))) {
+            return VisualDiagrams.getImmobilienVerkaufZustandsdiagrammSvg();
+        }
+
+                // IHK Original Tabellenaufgabe: Beziehungstypen & Begründungen (Immobilie/Wohnung, Bewohner/Mieter, Mietervereinigung)
         if (text.includes("immobilie") || text.includes("mietervereinigung") || text.includes("wohnungen") || (text.includes("beziehungstyp") && text.includes("begründung") && text.includes("tabelle"))) {
             return VisualDiagrams.getUmlBeziehungenTabellenSvg();
         }

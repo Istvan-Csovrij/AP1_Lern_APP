@@ -832,6 +832,7 @@ function loadQuestion() {
 
     // Handle Diagram sketch helper banner or Pseudocode helper banner
     const diagBanner = document.getElementById("diagram-banner-container");
+    if (diagBanner) {
         const isSubnet = (q.topic && q.topic.toLowerCase().includes("subnetz")) || 
                          (q.question && (q.question.toLowerCase().includes("subnetz") || q.question.toLowerCase().includes("vlsm")));
         const isPureCalc = (q.isCalculation || q.isPowerCalc || q.isZahlensysteme) && !q.isDiagram;
