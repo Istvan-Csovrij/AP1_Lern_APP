@@ -1583,21 +1583,12 @@ function generateDynamicQuestions(typeMode = "mix") {
         }
     }
 
-    // D.3 Dynamische UML Klassendiagramm- & Use-Case-Generatoren
+    // D.3 Dynamische UML & BPMN Diagramm-Generatoren (Die 5 AP1 Kern-Diagramme)
     const umlPatterns = [
-        { 
-            title: "UML Use-Case: <<include>> vs <<extend>>", 
-            q: "Im Use-Case-Diagramm eines Geldautomaten: Beim Use-Case 'Geld abheben' wird zwingend 'PIN prüfen' aufgerufen. Welche Beziehung liegt vor?", 
-            optA: "<<include>> mit Pfeil auf 'PIN prüfen'", 
-            optB: "<<extend>> mit Pfeil auf 'Geld abheben'", 
-            optC: "Generalisierung", 
-            optD: "Komposition", 
-            correct: 0, 
-            exp: "Zwingend erforderlich = <<include>>. Pfeil zeigt auf den aufgerufenen Use-Case.",
-            svg: VisualDiagrams.getGeldautomatUseCaseSvg()
-        },
+        // 1. UML Klassendiagramm
         { 
             title: "UML Klassendiagramm: Komposition", 
+            diagType: "UML Klassendiagramm",
             q: "In einem Ticketsystem enthält eine Klasse 'Ticket' mehrere Objekte der Klasse 'TicketHistorienEintrag'. Wird ein Ticket gelöscht, müssen alle Historieneinträge ebenfalls unwiderruflich gelöscht werden. Welche Beziehung liegt vor?", 
             optA: "Komposition (ausgefüllte schwarze Raute an 'Ticket')", 
             optB: "Aggregation (weiße Raute)", 
@@ -1609,6 +1600,7 @@ function generateDynamicQuestions(typeMode = "mix") {
         },
         { 
             title: "UML Klassendiagramm: Aggregation", 
+            diagType: "UML Klassendiagramm",
             q: "In einer Schulungssoftware: Die Klasse 'Kurs' enthält mehrere 'Teilnehmer'. Wird ein Kurs beendet/gelöscht, bleiben die Teilnehmer weiterhin im System gespeichert. Welche Beziehung liegt vor?", 
             optA: "Aggregation (leere weiße Raute an 'Kurs')", 
             optB: "Komposition (schwarze Raute)", 
@@ -1619,7 +1611,181 @@ function generateDynamicQuestions(typeMode = "mix") {
             svg: VisualDiagrams.getKursTeilnehmerAggregationSvg()
         },
         { 
+            title: "UML Klassendiagramm: Vererbung vs. Realisierung", 
+            diagType: "UML Klassendiagramm",
+            q: "Wie wird die Vererbungsbeziehung (Generalisierung, z. B. 'PKW erbt von Fahrzeug') im UML-Klassendiagramm normgerecht dargestellt?", 
+            optA: "Durchgezogene Linie mit geschlossener, nicht ausgefüllter (weißer) Dreiecksspitze zur Oberklasse", 
+            optB: "Gestrichelte Linie mit Pfeilspitze zur Unterklasse", 
+            optC: "Durchgezogene Linie mit gefüllter schwarzer Raute", 
+            optD: "Gestrichelte Linie mit offener Pfeilspitze", 
+            correct: 0, 
+            exp: "Vererbung (Generalisierung) = durchgezogene Linie mit geschlossener weißer Dreiecksspitze. Ein Interface (Realisierung) verwendet dieselbe Dreiecksspitze, jedoch mit gestrichelter Linie.",
+            svg: VisualDiagrams.getGeraetVererbungSvg()
+        },
+        { 
+            title: "UML Klassendiagramm: Sichtbarkeitsmodifizierer", 
+            diagType: "UML Klassendiagramm",
+            q: "Ein Attribut soll in der eigenen Klasse sowie in allen davon abgeleiteten Unterklassen sichtbar sein, nicht jedoch für externe Klassen. Welches Symbol kennzeichnet diese Sichtbarkeit (protected) in UML?", 
+            optA: "# (Raute / Hash für protected)", 
+            optB: "- (Minus für private)", 
+            optC: "+ (Plus für public)", 
+            optD: "~ (Tilde für package/default)", 
+            correct: 0, 
+            exp: "UML-Sichtbarkeiten: '+' = public, '-' = private, '#' = protected, '~' = package.",
+            svg: VisualDiagrams.getClassDiagramSvg()
+        },
+        // 2. UML Use-Case-Diagramm
+        { 
+            title: "UML Use-Case: <<include>> Beziehung", 
+            diagType: "UML Use-Case-Diagramm",
+            q: "Im Use-Case-Diagramm eines Geldautomaten: Beim Use-Case 'Geld abheben' wird zwingend jedes Mal 'PIN prüfen' aufgerufen. Welche Beziehung und Pfeilrichtung ist korrekt?", 
+            optA: "<<include>> mit gestricheltem Pfeil von 'Geld abheben' auf 'PIN prüfen'", 
+            optB: "<<extend>> mit Pfeil von 'PIN prüfen' auf 'Geld abheben'", 
+            optC: "<<include>> mit Pfeil von 'PIN prüfen' auf 'Geld abheben'", 
+            optD: "Generalisierung vom Geldautomaten zum Kunden", 
+            correct: 0, 
+            exp: "Zwingende Einbindung = <<include>>. Der Pfeil zeigt immer vom aufrufenden Basis-Use-Case zum eingebundenen Unter-Use-Case.",
+            svg: VisualDiagrams.getGeldautomatUseCaseSvg()
+        },
+        { 
+            title: "UML Use-Case: <<extend>> Erweiterung", 
+            diagType: "UML Use-Case-Diagramm",
+            q: "Im Online-Shop kann der Kunde bei der Bestellung optional einen Gutscheincode einlösen ('Gutschein einlösen' erweitert 'Bestellung abschließen' nur bei Vorhandensein eines Codes). Welche Beziehung liegt vor und wohin zeigt der Pfeil?", 
+            optA: "<<extend>> mit gestricheltem Pfeil vom erweiternden Use-Case 'Gutschein einlösen' auf 'Bestellung abschließen'", 
+            optB: "<<include>> mit Pfeil von 'Bestellung abschließen' auf 'Gutschein einlösen'", 
+            optC: "<<extend>> mit Pfeil von 'Bestellung abschließen' auf 'Gutschein einlösen'", 
+            optD: "Assoziation zwischen den Use-Cases", 
+            correct: 0, 
+            exp: "Optionale Erweiterung = <<extend>>. Merkhilfe: Der Pfeil zeigt immer ZURÜCK zum Basis-Use-Case, den er erweitert!",
+            svg: VisualDiagrams.getUseCaseDiagramSvg()
+        },
+        { 
+            title: "UML Use-Case: Akteure & Systemgrenze", 
+            diagType: "UML Use-Case-Diagramm",
+            q: "Wo werden Akteure (Benutzer, Fremdsysteme, Sensoren) in einem UML-Use-Case-Diagramm platziert?", 
+            optA: "Stets außerhalb des Systemgrenzen-Rechtecks (Akteure interagieren von außen mit dem System)", 
+            optB: "Immer innerhalb des Systemgrenzen-Rechtecks neben den Ellipsen", 
+            optC: "Akteure dürfen nur menschliche Benutzer sein, niemals Software oder Hardware", 
+            optD: "Akteure werden nur in Tabellenform unter dem Diagramm aufgeführt", 
+            correct: 0, 
+            exp: "Akteure stehen IMMER außerhalb des Systemrechtecks. Sie repräsentieren Rollen, können auch Schnittstellen, Fremdsysteme oder Hardware sein.",
+            svg: VisualDiagrams.getUseCaseDiagramSvg()
+        },
+        // 3. UML Aktivitätsdiagramm
+        { 
+            title: "UML Aktivitätsdiagramm: Decision vs. Fork/Join", 
+            diagType: "UML Aktivitätsdiagramm",
+            q: "Im Aktivitätsdiagramm soll sich ein Ablauf nach einer Prüfung 'Zahlung ok?' in ZWEI alternative Zweige aufspalten (ja oder nein). Welches Symbol ist normgerecht?", 
+            optA: "Eine Verzweigungsraute (Decision Node) mit Guard-Bedingungen in eckigen Klammern [ja] / [nein]", 
+            optB: "Ein dicker schwarzer Synchronisationsbalken (Fork Node)", 
+            optC: "Ein ausgefüllter schwarzer Kreis mit Rand", 
+            optD: "Ein abgerundetes Rechteck mit zwei Ausgängen", 
+            correct: 0, 
+            exp: "Raute (Decision) = Entweder-Oder Verzweigung nach Bedingung (Guard). Dicker Balken (Fork) = Echte Nebenläufigkeit (beide Zweige laufen parallel).",
+            svg: VisualDiagrams.getUmlAktivitaetsdiagrammSvg()
+        },
+        { 
+            title: "UML Aktivitätsdiagramm: Partitionen (Swimlanes)", 
+            diagType: "UML Aktivitätsdiagramm",
+            q: "Wozu dienen Partitionen ('Swimlanes') in einem UML-Aktivitätsdiagramm?", 
+            optA: "Zur organisatorischen Zuordnung von Aktionen zu Rollen, Abteilungen oder Systemkomponenten", 
+            optB: "Zur Darstellung von Datenklassen und deren Attributen", 
+            optC: "Zur Begrenzung der maximalen Ausführungszeit eines Vorgangs", 
+            optD: "Zur Definition von Datenbank-Tabellenstrukturen", 
+            correct: 0, 
+            exp: "Swimlanes (Verantwortungsbereiche) teilen das Aktivitätsdiagramm vertikal oder horizontal in Bereiche ein (z. B. Kunde, Vertrieb, Lager).",
+            svg: VisualDiagrams.getUmlAktivitaetsdiagrammSvg()
+        },
+        { 
+            title: "UML Aktivitätsdiagramm: Fork & Join", 
+            diagType: "UML Aktivitätsdiagramm",
+            q: "Nach einem Online-Kauf sollen parallel 'Rechnung per E-Mail senden' und 'Paket im Lager packen' ablaufen. Vor dem Schritt 'Kunde informieren' müssen BEIDE Zweige beendet sein. Welche Elemente verbinden die Abläufe?", 
+            optA: "Gabelung (Fork) zur Aufspaltung in parallele Stränge und Vereinigung (Join) als Synchronisationsbalken zum Warten auf beide Stränge", 
+            optB: "Zwei XOR-Rauten ohne Bedingungen", 
+            optC: "Ablaufendknoten (Kreis mit X)", 
+            optD: "Assoziationslinien mit Kardinalität 1:n", 
+            correct: 0, 
+            exp: "Fork (Gabelung) startet parallele Kontrollflüsse; Join (Synchronisation) führt sie zusammen und wartet, bis alle eintreffenden Flüsse abgeschlossen sind.",
+            svg: VisualDiagrams.getUmlAktivitaetsdiagrammSvg()
+        },
+        // 4. UML Zustandsdiagramm
+        { 
+            title: "UML Zustandsdiagramm: Transitions-Syntax", 
+            diagType: "UML Zustandsdiagramm",
+            q: "Wie lautet die standardisierte UML-Syntax für die Beschriftung einer Transition (Zustandsübergang)?", 
+            optA: "Ereignis [Wächterbedingung] / Aktion (Trigger [Guard] / Action)", 
+            optB: "Aktion (Parameter) : Rückgabetyp [Ereignis]", 
+            optC: "<<include>> Bedingung {Zeitstempel}", 
+            optD: "Startzustand --> Endzustand [Kardinalität]", 
+            correct: 0, 
+            exp: "UML-Standard für Transitionen: 'Trigger [Guard] / Action'. Ereignis löst aus, Wächterbedingung (Guard) muss wahr sein, Aktion wird beim Übergang ausgeführt.",
+            svg: VisualDiagrams.getZustandsdiagrammSvg()
+        },
+        { 
+            title: "UML Zustandsdiagramm: Interne Aktivitäten", 
+            diagType: "UML Zustandsdiagramm",
+            q: "In einem Zustand können vordefinierte Standardaktionen hinterlegt sein. Welche Kennzeichnung führt eine Aktion kontinuierlich aus, solange der Zustand aktiv ist?", 
+            optA: "do / (laufende Daueraktivität)", 
+            optB: "entry / (wird nur einmalig beim Betreten ausgeführt)", 
+            optC: "exit / (wird einmalig beim Verlassen ausgeführt)", 
+            optD: "loop / (führt eine Zählschleife aus)", 
+            correct: 0, 
+            exp: "'entry /' = beim Eintreten, 'do /' = während des Verweilens im Zustand (unterbrechbar), 'exit /' = beim Verlassen des Zustands.",
+            svg: VisualDiagrams.getZustandsdiagrammSvg()
+        },
+        { 
+            title: "UML Zustandsdiagramm: Start- vs. Endzustand", 
+            diagType: "UML Zustandsdiagramm",
+            q: "Wie werden Start- und Endzustand in einem UML-Zustandsdiagramm grafisch dargestellt?", 
+            optA: "Startzustand: ausgefüllter schwarzer Kreis; Endzustand: Kreis mit zentriertem ausgefülltem Innenkreis (Bulls-Eye)", 
+            optB: "Startzustand: Quadrat; Endzustand: Raute", 
+            optC: "Startzustand: weißer Kreis; Endzustand: schwarzes Rechteck", 
+            optD: "Beide werden durch eine Doppelraute dargestellt", 
+            correct: 0, 
+            exp: "Startzustand = schwarzer Vollkreis (●). Endzustand = Doppelkreis / Kreis mit gefülltem Kreis (◉). Zustände selbst sind abgerundete Rechtecke.",
+            svg: VisualDiagrams.getZustandsdiagrammSvg()
+        },
+        // 5. UML Sequenzdiagramm
+        { 
+            title: "UML Sequenzdiagramm: Synchrone vs. Asynchrone Aufrufe", 
+            diagType: "UML Sequenzdiagramm",
+            q: "Wie unterscheidet sich ein synchroner Methodenaufruf von einer asynchronen Nachricht im UML-Sequenzdiagramm?", 
+            optA: "Synchron: durchgezogene Linie mit gefülltem Pfeilkopf (▶); Asynchron: durchgezogene Linie mit offener Pfeilspitze (→)", 
+            optB: "Synchron: gestrichelte Linie; Asynchron: durchgezogene Linie", 
+            optC: "Synchron: gelber Pfeil; Asynchron: blauer Pfeil", 
+            optD: "Im Sequenzdiagramm gibt es nur synchrone Nachrichten", 
+            correct: 0, 
+            exp: "Synchron = gefüllter Pfeilkopf (Aufrufer wartet/blockiert bis Antwort). Asynchron = offene Pfeilspitze (Aufrufer arbeitet parallel weiter). Antwort/Return = gestrichelte Linie mit offenem Pfeil (<--).",
+            svg: VisualDiagrams.getSequenzdiagrammSvg()
+        },
+        { 
+            title: "UML Sequenzdiagramm: Kombinierte Fragmente (alt / opt / loop)", 
+            diagType: "UML Sequenzdiagramm",
+            q: "Im Sequenzdiagramm soll ein Interaktionsblock nur dann ausgeführt werden, falls eine Bedingung wahr ist (einseitige Bedingung ohne else-Zweig). Welcher Fragment-Operator wird verwendet?", 
+            optA: "opt (Optional - entspricht einer if-Verzweigung ohne else)", 
+            optB: "alt (Alternative - entspricht if-then-else mit getrennten Bereichen)", 
+            optC: "loop (Schleife - wiederholte Ausführung)", 
+            optD: "par (Parallele Ausführung)", 
+            correct: 0, 
+            exp: "'opt' = Optionale Ausführung (einfaches if). 'alt' = Alternative Ausführung mit mehreren Operanden (if-else). 'loop' = Schleife. 'par' = Nebenläufig/parallel.",
+            svg: VisualDiagrams.getSequenzdiagrammSvg()
+        },
+        { 
+            title: "UML Sequenzdiagramm: Lebenslinie & Aktivierungsbalken", 
+            diagType: "UML Sequenzdiagramm",
+            q: "Was symbolisiert der schmale vertikale Balken ('Activation Bar' / Fokus der Steuerung) auf der gestrichelten Lebenslinie eines Objekts im Sequenzdiagramm?", 
+            optA: "Die Zeitspanne, in der das Objekt aktiv ist und einen Methodenaufruf abarbeitet", 
+            optB: "Den Speicherverbrauch des Objekts im RAM", 
+            optC: "Die Übertragungsgeschwindigkeit der Netzwerkverbindung", 
+            optD: "Einen Systemabsturz oder Ausnahmefehler", 
+            correct: 0, 
+            exp: "Der Aktivierungsbalken (Rechteck auf der Lebenslinie) zeigt den Ausführungsfokus – die Zeit, während der das Objekt aktiv eine Operation ausführt oder auf ein untergeordnetes Ergebnis wartet.",
+            svg: VisualDiagrams.getSequenzdiagrammSvg()
+        },
+        // 6. BPMN 2.0 (Vergleich)
+        { 
             title: "BPMN 2.0: Exklusives vs Paralleles Gateway", 
+            diagType: "BPMN 2.0",
             q: "In einem BPMN-Prozess sollen nach der Prüfung 'Zahlungsmethode' entweder 'Kreditkartenzahlung' ODER 'Rechnungskauf' durchlaufen werden. Welches Symbol wird verwendet?", 
             optA: "Exklusives Gateway (Raute mit 'X')", 
             optB: "Paralleles Gateway (Raute mit '+')", 
@@ -1631,7 +1797,7 @@ function generateDynamicQuestions(typeMode = "mix") {
         }
     ];
 
-    for (let i = 0; i < 15; i++) {
+    for (let i = 0; i < 35; i++) {
         const item = umlPatterns[Math.floor(Math.random() * umlPatterns.length)];
         const isOpen = shouldBeOpenText();
         if (isOpen) {
@@ -1641,7 +1807,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                 topic: item.title,
                 isDiagram: true,
                 isBawueFocus: true,
-                diagramType: "UML / BPMN",
+                diagramType: item.diagType || "UML-Diagramm",
                 type: "open-text",
                 solutionDiagramSvg: item.svg,
                 solutionDiagramCaption: `Grafische Musterlösung: ${item.title}`,
@@ -1656,7 +1822,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                 topic: item.title,
                 isDiagram: true,
                 isBawueFocus: true,
-                diagramType: "UML / BPMN",
+                diagramType: item.diagType || "UML-Diagramm",
                 type: "multiple-choice",
                 solutionDiagramSvg: item.svg,
                 solutionDiagramCaption: `Grafische Musterlösung: ${item.title}`,

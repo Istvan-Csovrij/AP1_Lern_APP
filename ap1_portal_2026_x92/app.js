@@ -340,6 +340,69 @@ function filterQuestions(theme) {
                     q.question.toLowerCase().includes("entscheidungstabelle")
                 ))
             );
+        } else if (theme === "uml-class" || theme === "klassendiagramm") {
+            filteredQuestions = questions.filter(q => 
+                (q.diagramType && q.diagramType.toLowerCase().includes("klasse")) ||
+                (q.topic && q.topic.toLowerCase().includes("klasse")) ||
+                (q.question && (
+                    q.question.toLowerCase().includes("klassendiagramm") ||
+                    q.question.toLowerCase().includes("komposition") ||
+                    q.question.toLowerCase().includes("aggregation") ||
+                    q.question.toLowerCase().includes("vererbung") ||
+                    q.question.toLowerCase().includes("sichtbarkeitsmodifizierer") ||
+                    q.question.toLowerCase().includes("multiplizität")
+                ))
+            );
+        } else if (theme === "uml-usecase" || theme === "usecase") {
+            filteredQuestions = questions.filter(q => 
+                (q.diagramType && (q.diagramType.toLowerCase().includes("use-case") || q.diagramType.toLowerCase().includes("use case") || q.diagramType.toLowerCase().includes("anwendungsfall"))) ||
+                (q.topic && (q.topic.toLowerCase().includes("use-case") || q.topic.toLowerCase().includes("use case") || q.topic.toLowerCase().includes("anwendungsfall"))) ||
+                (q.question && (
+                    q.question.toLowerCase().includes("use-case") ||
+                    q.question.toLowerCase().includes("anwendungsfalldiagramm") ||
+                    q.question.toLowerCase().includes("<<include>>") ||
+                    q.question.toLowerCase().includes("<<extend>>") ||
+                    q.question.toLowerCase().includes("systemgrenze")
+                ))
+            );
+        } else if (theme === "uml-activity" || theme === "aktivitaet") {
+            filteredQuestions = questions.filter(q => 
+                (q.diagramType && (q.diagramType.toLowerCase().includes("aktivität") || q.diagramType.toLowerCase().includes("aktivitaet") || q.diagramType.toLowerCase().includes("activity"))) ||
+                (q.topic && (q.topic.toLowerCase().includes("aktivität") || q.topic.toLowerCase().includes("aktivitaet") || q.topic.toLowerCase().includes("activity"))) ||
+                (q.question && (
+                    q.question.toLowerCase().includes("aktivitätsdiagramm") ||
+                    q.question.toLowerCase().includes("decision") ||
+                    q.question.toLowerCase().includes("fork") ||
+                    q.question.toLowerCase().includes("join") ||
+                    q.question.toLowerCase().includes("swimlane") ||
+                    q.question.toLowerCase().includes("partition")
+                ))
+            );
+        } else if (theme === "uml-state" || theme === "zustand") {
+            filteredQuestions = questions.filter(q => 
+                (q.diagramType && (q.diagramType.toLowerCase().includes("zustand") || q.diagramType.toLowerCase().includes("state"))) ||
+                (q.topic && (q.topic.toLowerCase().includes("zustand") || q.topic.toLowerCase().includes("state"))) ||
+                (q.question && (
+                    q.question.toLowerCase().includes("zustandsdiagramm") ||
+                    q.question.toLowerCase().includes("state machine") ||
+                    q.question.toLowerCase().includes("transition") ||
+                    q.question.toLowerCase().includes("guard") ||
+                    q.question.toLowerCase().includes("wächterbedingung")
+                ))
+            );
+        } else if (theme === "uml-sequence" || theme === "sequenz") {
+            filteredQuestions = questions.filter(q => 
+                (q.diagramType && (q.diagramType.toLowerCase().includes("sequenz") || q.diagramType.toLowerCase().includes("sequence"))) ||
+                (q.topic && (q.topic.toLowerCase().includes("sequenz") || q.topic.toLowerCase().includes("sequence"))) ||
+                (q.question && (
+                    q.question.toLowerCase().includes("sequenzdiagramm") ||
+                    q.question.toLowerCase().includes("lebenslinie") ||
+                    q.question.toLowerCase().includes("synchron") ||
+                    q.question.toLowerCase().includes("asynchron") ||
+                    q.question.toLowerCase().includes("aktivierungsbalken") ||
+                    q.question.toLowerCase().includes("rückgabenachricht")
+                ))
+            );
         } else if (theme === "calculations" || theme === "rechnen") {
             filteredQuestions = questions.filter(q => 
                 q.theme === "calculations" || 
@@ -1238,6 +1301,11 @@ function getThemeLabel(key) {
         "bawue-focus": "🔮 Prüfungsfokus BaWü",
         diagrams: "📐 Diagramme & Modellierung",
         "diagram-training": "📐 Diagramme & Modellierung",
+        "uml-class": "🏛️ UML Klassendiagramm",
+        "uml-usecase": "🎯 UML Use-Case-Diagramm",
+        "uml-activity": "🔀 UML Aktivitätsdiagramm",
+        "uml-state": "🔄 UML Zustandsdiagramm",
+        "uml-sequence": "⚡ UML Sequenzdiagramm",
         calculations: "🧮 Rechnen & Handelskalkulation",
         rechnen: "🧮 Rechnen & Handelskalkulation",
         "power-calc": "⚡ Strom, Leistung & Einheiten (LF 2/6)",

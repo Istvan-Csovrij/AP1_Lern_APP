@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AP1 Prüfungstrainer - Fachinformatiker</title>
-    <link rel="stylesheet" href="style.css?v=105">
+    <link rel="stylesheet" href="style.css?v=110">
     <!-- FontAwesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -115,8 +115,17 @@
                     <button class="filter-btn" data-theme="lf5">LF 5: Software & SQL</button>
                     <button class="filter-btn" data-theme="lf6">LF 6: Services & WiSo</button>
                     <button class="filter-btn highlight-diagram-btn" data-theme="diagrams" id="diagrams-filter-btn" style="border: 2px solid #06b6d4; background: linear-gradient(135deg, #ecfeff, #cffafe); color: #0891b2; font-weight: bold; margin-top: 0.5rem; text-align: left; display: flex; align-items: center; gap: 0.5rem;">
-                        <i class="fa-solid fa-diagram-project" style="color: #0891b2;"></i> 📐 Diagramme & Modellierung (AP1)
+                        <i class="fa-solid fa-diagram-project" style="color: #0891b2;"></i> 📐 Diagramme &amp; Modellierung (AP1)
                     </button>
+                    <!-- Schnell-Filter für die 5 UML-Diagrammtypen -->
+                    <div style="display: flex; flex-wrap: wrap; gap: 0.35rem; padding: 0.35rem 0.4rem; background: #f0fdfa; border-radius: 8px; border: 1px dashed #5eead4; margin-top: 0.25rem; margin-bottom: 0.25rem;">
+                        <span style="width: 100%; font-size: 0.72rem; font-weight: 700; color: #0f766e; text-transform: uppercase; letter-spacing: 0.05em;">Die 5 UML-Diagramme:</span>
+                        <button class="filter-btn" data-theme="uml-class" style="font-size: 0.76rem; padding: 0.2rem 0.45rem; border-radius: 6px; border: 1px solid #0891b2; background: #ffffff; color: #0e7490; font-weight: 600;">🏛️ Klassen</button>
+                        <button class="filter-btn" data-theme="uml-usecase" style="font-size: 0.76rem; padding: 0.2rem 0.45rem; border-radius: 6px; border: 1px solid #0891b2; background: #ffffff; color: #0e7490; font-weight: 600;">🎯 Use-Case</button>
+                        <button class="filter-btn" data-theme="uml-activity" style="font-size: 0.76rem; padding: 0.2rem 0.45rem; border-radius: 6px; border: 1px solid #0891b2; background: #ffffff; color: #0e7490; font-weight: 600;">🔀 Aktivität</button>
+                        <button class="filter-btn" data-theme="uml-state" style="font-size: 0.76rem; padding: 0.2rem 0.45rem; border-radius: 6px; border: 1px solid #0891b2; background: #ffffff; color: #0e7490; font-weight: 600;">🔄 Zustand</button>
+                        <button class="filter-btn" data-theme="uml-sequence" style="font-size: 0.76rem; padding: 0.2rem 0.45rem; border-radius: 6px; border: 1px solid #0891b2; background: #ffffff; color: #0e7490; font-weight: 600;">⚡ Sequenz</button>
+                    </div>
                     <button class="filter-btn highlight-calc-btn" data-theme="calculations" id="calculations-filter-btn" style="border: 2px solid #f59e0b; background: linear-gradient(135deg, #fffbeb, #fef3c7); color: #b45309; font-weight: bold; margin-top: 0.5rem; text-align: left; display: flex; align-items: center; gap: 0.5rem;">
                         <i class="fa-solid fa-calculator" style="color: #d97706;"></i> 🧮 Rechnen & Handelskalkulation (AP1)
                     </button>
@@ -146,7 +155,7 @@
                 <h3 style="color: #6d28d9; margin-bottom: 0.5rem;"><i class="fa-solid fa-pen-ruler"></i> Diagramm-Board</h3>
                 <p style="font-size: 0.85rem; color: var(--text-light); margin-bottom: 0.75rem; line-height: 1.35;">Zeichne &amp; skizziere Use-Case, Klassendiagramme, ERD, EPK, BPMN oder Netzpläne.</p>
                 <div style="display: flex; flex-direction: column; gap: 0.4rem;">
-                    <a href="whiteboard.html?v=104" target="_blank" class="btn btn-full" style="background: linear-gradient(135deg, #8b5cf6, #6d28d9); color: white; justify-content: center; font-weight: bold; border: none; font-size: 0.92rem; display: flex; align-items: center; gap: 0.45rem; width: 100%; text-decoration: none; padding: 0.5rem;">
+                    <a href="whiteboard.html?v=110" target="_blank" class="btn btn-full" style="background: linear-gradient(135deg, #8b5cf6, #6d28d9); color: white; justify-content: center; font-weight: bold; border: none; font-size: 0.92rem; display: flex; align-items: center; gap: 0.45rem; width: 100%; text-decoration: none; padding: 0.5rem;">
                         <i class="fa-solid fa-up-right-from-square"></i> In neuem Tab öffnen ↗
                     </a>
                     <button class="btn btn-full btn-secondary" id="open-whiteboard-sidebar-btn" style="border: 1px solid #8b5cf6; color: #6d28d9; background: #f5f3ff; justify-content: center; font-weight: 600; font-size: 0.85rem; display: flex; align-items: center; gap: 0.4rem; width: 100%; padding: 0.4rem;">
@@ -165,7 +174,7 @@
                         <span class="question-number" id="question-number">Frage 0 von 0</span>
                     </div>
                     <div style="display: flex; align-items: center; gap: 0.35rem;">
-                        <a href="whiteboard.html?v=104" target="_blank" class="btn btn-secondary" title="Zeichenboard in neuem Tab öffnen (für Splitscreen)" style="padding: 0.35rem 0.6rem; font-size: 0.85rem; display: flex; align-items: center; gap: 0.3rem; border-radius: 6px; border: 1px solid #8b5cf6; color: #6d28d9; background: #ffffff; text-decoration: none; font-weight: 600;">
+                        <a href="whiteboard.html?v=110" target="_blank" class="btn btn-secondary" title="Zeichenboard in neuem Tab öffnen (für Splitscreen)" style="padding: 0.35rem 0.6rem; font-size: 0.85rem; display: flex; align-items: center; gap: 0.3rem; border-radius: 6px; border: 1px solid #8b5cf6; color: #6d28d9; background: #ffffff; text-decoration: none; font-weight: 600;">
                             <i class="fa-solid fa-up-right-from-square"></i> <span>Tab ↗</span>
                         </a>
                         <button class="btn btn-secondary" id="quiz-whiteboard-btn" title="Diagramm-Zeichenboard als Fenster öffnen" style="padding: 0.35rem 0.65rem; font-size: 0.85rem; display: flex; align-items: center; gap: 0.35rem; border-radius: 6px; border: 1px solid #8b5cf6; color: #6d28d9; background: #f5f3ff;">
@@ -474,7 +483,7 @@
                     </div>
                 </div>
                 <div style="display: flex; align-items: center; gap: 0.5rem;">
-                    <a href="whiteboard.html?v=104" target="_blank" class="wb-action-btn" style="color: #6d28d9; border: 1px solid #ddd6fe; background: #f5f3ff; text-decoration: none;" title="Zeichenboard in neuem Tab öffnen (für Splitscreen)">
+                    <a href="whiteboard.html?v=110" target="_blank" class="wb-action-btn" style="color: #6d28d9; border: 1px solid #ddd6fe; background: #f5f3ff; text-decoration: none;" title="Zeichenboard in neuem Tab öffnen (für Splitscreen)">
                         <i class="fa-solid fa-up-right-from-square"></i> <span class="wb-btn-label">Im neuen Tab ↗</span>
                     </a>
                     <button id="wb-download-btn" class="wb-action-btn" title="Skizze als PNG herunterladen">
@@ -573,14 +582,14 @@
                     </div>
                 </div>
                 <div style="display: flex; align-items: center; gap: 0.5rem;">
-                    <a href="rechentrainer.html?v=109" target="_blank" class="wb-action-btn" style="color: #0369a1; border: 1px solid #bae6fd; background: #e0f2fe; text-decoration: none; padding: 0.35rem 0.75rem; border-radius: 6px; font-size: 0.85rem; display: flex; align-items: center; gap: 0.35rem; font-weight: 600;">
+                    <a href="rechentrainer.html?v=110" target="_blank" class="wb-action-btn" style="color: #0369a1; border: 1px solid #bae6fd; background: #e0f2fe; text-decoration: none; padding: 0.35rem 0.75rem; border-radius: 6px; font-size: 0.85rem; display: flex; align-items: center; gap: 0.35rem; font-weight: 600;">
                         <i class="fa-solid fa-up-right-from-square"></i> <span>Im neuen Tab öffnen</span>
                     </a>
                     <button id="close-rechentrainer-btn" class="wb-close-btn" style="color: #64748b; background: none; border: none; font-size: 1.8rem; cursor: pointer; line-height: 1; padding: 0 0.5rem;" title="Schließen">&times;</button>
                 </div>
             </div>
             <div style="flex: 1; width: 100%; height: 100%; overflow: hidden;">
-                <iframe src="rechentrainer.html?v=109" style="width: 100%; height: 100%; border: none;"></iframe>
+                <iframe src="rechentrainer.html?v=110" style="width: 100%; height: 100%; border: none;"></iframe>
             </div>
         </div>
     </div>
@@ -646,11 +655,11 @@
     </footer>
 
     <!-- Load diagram library, exam datasets, questions, generator and application logic -->
-    <script src="diagrams.js?v=109"></script>
-    <script src="exam_data.js?v=109"></script>
-    <script src="questions.js?v=109"></script>
-    <script src="generator.js?v=109"></script>
-    <script src="app.js?v=109"></script>
+    <script src="diagrams.js?v=110"></script>
+    <script src="exam_data.js?v=110"></script>
+    <script src="questions.js?v=110"></script>
+    <script src="generator.js?v=110"></script>
+    <script src="app.js?v=110"></script>
 
     <!-- PIN Sicherheits-Gatekeeper -->
     <script>

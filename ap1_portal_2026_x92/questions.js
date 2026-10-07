@@ -10930,5 +10930,318 @@ c) Methodenauswahl für die Szenarien:
         question: "Fachaufgabe Netzwerk (LF 3): Auf einem Windows-Server zeigt der Befehl 'ipconfig' für eine einzige Netzwerkkarte gleichzeitig folgende drei IPv6-Adressen an:\n• fe80::1a2b:3cff:fe4d:5e6f%12\n• fd00:10:20::100\n• 2001:db8:10:20::100\n\naa) Erläutern Sie, warum es in IPv6 normal und beabsichtigt ist, dass eine Schnittstelle mehrere IP-Adressen besitzt.\nab) Welchem Zweck dient jeweils die konkrete Adresse?\nac) Was bedeutet das Suffix '%12' bei der fe80-Adresse und warum ist es unverzichtbar?",
         musterloesung: "aa) Multi-Homing / Mehrere Adressen pro Schnittstelle:\nIn IPv6 ist die gleichzeitige Nutzung mehrerer Adressen unterschiedlicher Gültigkeitsbereiche (Scopes) Standardarchitektur. Es entfällt die Notwendigkeit von IPv4-NAT-Tricks, da für jeden Kommunikationszweck die passende Adressart gewählt wird.\n\nab) Zweck der drei Adressen:\n1. fe80::... (Link-Local): Zwingend nötig für die lokale Infrastruktur-Kommunikation auf Schicht 2 (Router Solicitations, NDP-Nachbarschaftserkennung, DHCPv6, Gateway-Verbindung).\n2. fd00:... (Unique Local): Dient der organisationsinternen Kommunikation (Intranet, interne Datenbanken, Active Directory), unabhängig von der Verfügbarkeit des Internetanschlusses.\n3. 2001:... (Global Unicast): Dient der weltweiten Kommunikation über das öffentliche Internet ohne Adressübersetzung.\n\nac) Bedeutung des Suffix '%12':\n• '%12' ist die Scope-ID (der Zonen-Index) der lokalen Schnittstelle.\n• Da jede Netzwerkkarte eines Rechners ein eigenes fe80::/10-Netz besitzt, ist eine Link-Local-Adresse ohne Angabe der Schnittstelle mehrdeutig. Das Betriebssystem benötigt die Scope-ID, um zu wissen, über welchen physischen Adapter das Paket gesendet werden muss.",
         explanation: "Prüfungsfokus auf Multi-Addressing und Scope-ID in heterogenen Unternehmensnetzen."
+    },
+    // =========================================================================
+    // DIE 5 UML-DIAGRAMMTHEMEN (AP1 PRÜFUNGSFOKUS)
+    // 1. Klassendiagramm (Struktur)
+    // 2. Use-Case-Diagramm (Verhalten)
+    // 3. Aktivitätsdiagramm (Verhalten)
+    // 4. Zustandsdiagramm (Verhalten)
+    // 5. Sequenzdiagramm (Interaktion)
+    // =========================================================================
+
+    // --- 1. UML KLASSENDIAGRAMM (STRUKTURDIAGRAMM) ---
+    {
+        id: 505,
+        isHard: false,
+        difficulty: "standard",
+        isBawueFocus: true,
+        theme: "diagrams",
+        diagramType: "UML Klassendiagramm",
+        isDiagram: true,
+        topic: "🗂️ UML Klassendiagramm: Vererbung, Realisierung & Schnittstellen",
+        type: "multiple-choice",
+        question: "Wie werden Generalisierung (Vererbung / 'ist-ein') und Schnittstellen-Realisierung ('implementiert') in einem UML-Klassendiagramm normgerecht dargestellt?",
+        options: [
+            "Generalisierung: Durchgezogene Linie mit hohlem (weißem) Dreieck zur Oberklasse; Realisierung: Gestrichelte Linie mit hohlem Dreieck zum Interface <<interface>>.",
+            "Generalisierung: Gestrichelte Linie mit Pfeil; Realisierung: Durchgezogene Linie mit schwarzer Raute.",
+            "Beide Beziehungen werden immer durch einfache Pfeile ohne Dreiecksspitze dargestellt.",
+            "Generalisierung: Hohle Raute; Realisierung: Gefüllte schwarze Raute."
+        ],
+        correctAnswer: 0,
+        diagramSvg: VisualDiagrams.getGeraetVererbungSvg(),
+        solutionDiagramSvg: VisualDiagrams.getGeraetVererbungSvg(),
+        explanation: "UML-Standardregeln für Klassendiagramme:\n• Generalisierung/Vererbung: Durchgezogene Linie mit geschlossenem, weißem Dreieck ◁ (zeigt immer auf die Oberklasse/Superclass).\n• Realisierung (Interface): Gestrichelte Linie mit demselben weißen Dreieck zur Schnittstelle <<interface>>.\n• Aggregation: Weiße, leere Raute ◇ (Besitzerklasse).\n• Komposition: Schwarze, ausgefüllte Raute ◆ (Besitzerklasse)."
+    },
+    {
+        id: 506,
+        isHard: false,
+        difficulty: "standard",
+        isBawueFocus: true,
+        theme: "diagrams",
+        diagramType: "UML Klassendiagramm",
+        isDiagram: true,
+        topic: "🗂️ UML Klassendiagramm: Komposition vs. Aggregation & Multiplizitäten",
+        type: "multiple-choice",
+        question: "Ein Ticket-System modelliert die Beziehung zwischen `Ticket` und `TicketHistorienEintrag`. Wird ein Ticket gelöscht, müssen alle zugehörigen Historieneinträge ebenfalls unwiderruflich gelöscht werden. Welche Beziehung und Multiplizität ist korrekt?",
+        options: [
+            "Komposition (ausgefüllte schwarze Raute ◆ an der Klasse Ticket, Multiplizität 1 zu 0..* bzw. 1..* an TicketHistorienEintrag).",
+            "Aggregation (leere weiße Raute ◇ an TicketHistorienEintrag, Multiplizität * zu 1).",
+            "Generalisierung (weißes Dreieck an Ticket).",
+            "Abhängigkeit (gestrichelter Pfeil ohne Raute)."
+        ],
+        correctAnswer: 0,
+        diagramSvg: VisualDiagrams.getTicketKompositionSvg(),
+        solutionDiagramSvg: VisualDiagrams.getTicketKompositionSvg(),
+        explanation: "Komposition (◆): Strenge existenzielle Abhängigkeit (Teil-Ganzes-Beziehung). Stirbt das Ganze (Ticket), sterben auch alle Teile (Historieneinträge). Die Raute steht stets an der übergeordneten Besitzerklasse (Ticket). Multiplizität: Ein Ticket besitzt 0..* oder 1..* Einträge."
+    },
+    {
+        id: 507,
+        isHard: true,
+        difficulty: "hard",
+        isBawueFocus: true,
+        theme: "diagrams",
+        diagramType: "UML Klassendiagramm",
+        isDiagram: true,
+        topic: "🗂️ UML Klassendiagramm: Fachaufgabe Bibliotheksverwaltung & OOP-Kapselung",
+        type: "open-text",
+        question: "Fachaufgabe Software-Engineering (LF 5 / AP1): Ein Ausleihsystem für eine Bibliothek soll objektorientiert modelliert werden.\nGegeben sind folgende fachliche Anforderungen:\n- Die Basisklasse `Medium` besitzt die privaten Attribute `mediumID: String`, `titel: String`, `istVerliehen: Boolean` sowie die öffentlichen Methoden `ausleihen(): Boolean` und `zurueckgeben(): void`.\n- Die spezialisierten Klassen `Buch` (zusätzliches Attribut: `isbn: String`, `seitenanzahl: Integer`) und `DVD` (zusätzliches Attribut: `laufzeitMin: Integer`, `fsk: Integer`) erben von `Medium`.\n- Ein `Kunde` (Attribute: `kundenNr: Integer`, `name: String`) kann mehrere `Ausleihe`-Vorgänge tätigen (Multiplizität 1 zu 0..*).\n- Eine `Ausleihe` enthält zwingend mindestens ein bis beliebig viele Medien (Multiplizität 1 zu 1..*) als Aggregation.\n\nAufgaben:\naa) Skizzieren Sie den dreiteiligen Aufbau der Klasse `Medium` inklusive der normgerechten Sichtbarkeitsmodifikatoren (+, -).\nab) Erläutern Sie die Beziehung zwischen `Medium` und den Klassen `Buch` und `DVD` und wie diese grafisch dargestellt wird.\nac) Begründen Sie, warum die Attribute als `private (-)` und die Zugriffsmethoden als `public (+)` deklariert werden (OOP-Prinzip).",
+        musterloesung: "aa) Dreiteiliger Aufbau der Klasse 'Medium':\n┌──────────────────────────────────────────────┐\n│ Medium                                       │\n├──────────────────────────────────────────────┤\n│ - mediumID: String                           │\n│ - titel: String                              │\n│ - istVerliehen: Boolean                      │\n├──────────────────────────────────────────────┤\n│ + ausleihen(): Boolean                       │\n│ + zurueckgeben(): void                       │\n└──────────────────────────────────────────────┘\n\nab) Beziehung zwischen Medium, Buch und DVD:\n• Es handelt sich um eine Generalisierung / Vererbung ('Ist-ein'-Beziehung). Ein Buch IST EIN Medium, eine DVD IST EIN Medium.\n• Grafische Darstellung: Durchgezogene Linie von 'Buch' bzw. 'DVD' hin zur Oberklasse 'Medium' mit einer geschlossenen, hohlen (weißen) Dreiecksspitze an 'Medium'.\n\nac) Begründung für private Attribute und public Methoden (Kapselung / Encapsulation):\n• Datenkapselung (Information Hiding) schützt die internen Objektzustände vor direktem, unkontrolliertem Lese- und Schreibzugriff von außen.\n• Validierung und Konsistenz: Der Zustand (z. B. 'istVerliehen') kann nur über die Methoden 'ausleihen()' und 'zurueckgeben()' verändert werden, wodurch inkonsistente Zustände (z. B. doppelte Ausleihe) programmgesteuert verhindert werden.\n• Wartbarkeit und Entkopplung: Die interne Implementierung kann geändert werden, ohne dass aufrufender Code angepasst werden muss.",
+        solutionDiagramSvg: VisualDiagrams.getClassDiagramSvg(),
+        explanation: "Zentrale IHK-Musteraufgabe für UML-Klassendiagramme: 3-Teilung, Vererbung mit weißem Dreieck, Sichtbarkeitsmodifikatoren (+, -, #) und Kapselung."
+    },
+
+    // --- 2. UML USE-CASE-DIAGRAMM (VERHALTENSDIAGRAMM) ---
+    {
+        id: 508,
+        isHard: false,
+        difficulty: "standard",
+        isBawueFocus: true,
+        theme: "diagrams",
+        diagramType: "UML Use-Case-Diagramm",
+        isDiagram: true,
+        topic: "👤 UML Use-Case: <<include>> vs. <<extend>> Pfeilrichtung & Logik",
+        type: "multiple-choice",
+        question: "In einem Online-Shop wird modelliert: Bei 'Warenkorb bezahlen' muss immer 'Zahlungsdaten prüfen' ausgeführt werden. Bei 'Bestellung abschließen' kann optional 'Rabattcode einlösen' gewählt werden. Welche Beziehungen und Pfeilrichtungen sind korrekt?",
+        options: [
+            "Warenkorb bezahlen --<<include>>--> Zahlungsdaten prüfen; Rabattcode einlösen --<<extend>>--> Bestellung abschließen.",
+            "Zahlungsdaten prüfen --<<include>>--> Warenkorb bezahlen; Bestellung abschließen --<<extend>>--> Rabattcode einlösen.",
+            "Warenkorb bezahlen --<<extend>>--> Zahlungsdaten prüfen; Rabattcode einlösen --<<include>>--> Bestellung abschließen.",
+            "Beide Beziehungen zeigen immer vom Akteur auf den jeweiligen Use-Case."
+        ],
+        correctAnswer: 0,
+        diagramSvg: VisualDiagrams.getUseCaseDiagramSvg("Online-Shop Bestellsystem"),
+        solutionDiagramSvg: VisualDiagrams.getUseCaseDiagramSvg("Online-Shop Bestellsystem"),
+        explanation: "IHK-Grundregel für Pfeilrichtungen im Use-Case-Diagramm:\n• <<include>> (Pflicht / zwingend): Der Pfeil zeigt VOM Basis-Use-Case ('Warenkorb bezahlen') HIN zum inkludierten Use-Case ('Zahlungsdaten prüfen'). Merksatz: Der Basisfall schließt den Teilfall ein.\n• <<extend>> (Optional / bedingt): Der Pfeil zeigt VOM erweiternden Use-Case ('Rabattcode einlösen') AUF den Basis-Use-Case ('Bestellung abschließen'). Merksatz: Der Sonderfall erweitert den Normalfall."
+    },
+    {
+        id: 509,
+        isHard: false,
+        difficulty: "standard",
+        isBawueFocus: true,
+        theme: "diagrams",
+        diagramType: "UML Use-Case-Diagramm",
+        isDiagram: true,
+        topic: "👤 UML Use-Case: Akteure, Systemgrenze & Assoziationen",
+        type: "multiple-choice",
+        question: "Welche Aussage zu Akteuren und der Systemgrenze in einem UML-Use-Case-Diagramm ist fachlich KORREKT?",
+        options: [
+            "Akteure stehen IMMER außerhalb der Systemgrenze; sie können Menschen, Benutzerrollen oder externe Fremdsysteme/APIs sein.",
+            "Akteure müssen innerhalb der Systemgrenze gezeichnet werden, da sie Teil der Software sind.",
+            "Use-Cases (Ellipsen) dürfen sich außerhalb der Systemgrenze befinden, wenn sie optional sind.",
+            "Externe Zahlungsgateways (wie PayPal oder Kreditkartenschnittstellen) dürfen niemals als Akteure dargestellt werden."
+        ],
+        correctAnswer: 0,
+        diagramSvg: VisualDiagrams.getGeldautomatUseCaseSvg(),
+        solutionDiagramSvg: VisualDiagrams.getGeldautomatUseCaseSvg(),
+        explanation: "Regeln für Use-Case-Diagramme:\n• Akteure (Strichmännchen oder Rechtecke mit <<actor>>) stehen stets AUSSERHALB der Systemgrenze, da sie mit dem System interagieren (Rollen, Nachbarsysteme, Hardware).\n• Die Systemgrenze (großes Rechteck mit Systemnamen) umschließt alle Use-Cases (Ellipsen), die von der zu entwickelnden Anwendung bereitgestellt werden."
+    },
+    {
+        id: 510,
+        isHard: true,
+        difficulty: "hard",
+        isBawueFocus: true,
+        theme: "diagrams",
+        diagramType: "UML Use-Case-Diagramm",
+        isDiagram: true,
+        topic: "👤 UML Use-Case: Fachaufgabe Smart-Home Alarm- & Zutrittssystem",
+        type: "open-text",
+        question: "Fachaufgabe Modellierung (LF 5 / LF 7 / AP1): Für ein vernetztes Firmengebäude soll das Zutritts- und Alarmsystem als UML-Use-Case-Diagramm konzipiert werden.\nAnforderungen:\n1. Akteure: `Mitarbeiter`, `Sicherheitsdienst`, `Brandmelde-Sensor` (Hardware-Akteur).\n2. Der Mitarbeiter führt den Use-Case `Tür via RFID öffnen` aus.\n3. Beim Öffnen der Tür muss zwingend immer der Use-Case `Zutrittsberechtigung prüfen` ausgeführt werden.\n4. Falls die Tür nach Feierabend geöffnet wird, kann optional der Use-Case `Alarm auf lautlos schalten (Feierabendmodus)` aufgerufen werden.\n5. Bei Auslösung des Use-Cases `Einbruch melden` durch den Mitarbeiter oder `Feuer melden` durch den Brandmelde-Sensor muss zwingend der Use-Case `Notrufzentrale benachrichtigen` aufgerufen werden.\n\nAufgaben:\naa) Bestimmen Sie alle Use-Cases und ordnen Sie die Beziehungen (Assoziation, <<include>>, <<extend>>) eindeutig zu.\nab) Zeichnen/beschreiben Sie die exakten Pfeilrichtungen für die <<include>>- und <<extend>>-Beziehungen.\nac) Begründen Sie, warum der Brandmelde-Sensor als Akteur modelliert werden darf, obwohl er kein Mensch ist.",
+        musterloesung: "aa) & ab) Zuordnung und Pfeilrichtungen:\n\n1. Assoziationen (durchgezogene Linie zwischen Akteur und Use-Case):\n• Mitarbeiter ── 'Tür via RFID öffnen'\n• Mitarbeiter ── 'Einbruch melden'\n• Brandmelde-Sensor ── 'Feuer melden'\n• Sicherheitsdienst ── 'Notrufzentrale benachrichtigen'\n\n2. <<include>>-Beziehungen (Pfeil gestrichelt vom Basis-Case zum Pflicht-Case):\n• 'Tür via RFID öffnen' ──<<include>>──> 'Zutrittsberechtigung prüfen'\n• 'Einbruch melden' ──<<include>>──> 'Notrufzentrale benachrichtigen'\n• 'Feuer melden' ──<<include>>──> 'Notrufzentrale benachrichtigen'\n\n3. <<extend>>-Beziehung (Pfeil gestrichelt vom Erweiterungs-Case zum Basis-Case):\n• 'Alarm auf lautlos schalten' ──<<extend>>──> 'Tür via RFID öffnen'\n  (Bedingung / Extension Point: 'nach Feierabend / Wochenende')\n\nac) Begründung für Sensor als Akteur:\nEin Akteur in UML repräsentiert eine Rolle, die mit dem System interagiert und Daten austauscht. Neben menschlichen Benutzern können Akteure auch externe Softwaresysteme, Cloud-Dienste oder physische Hardwaregeräte (Sensoren, Aktoren) sein, die autonome Ereignisse im System auslösen.",
+        solutionDiagramSvg: VisualDiagrams.getUseCaseDiagramSvg("Smart-Home Alarmsystem"),
+        explanation: "Klassische IHK-Prüfungsaufgabe zur Beziehungsunterscheidung: Assoziation, include (Pflicht), extend (Option) und technische Akteure."
+    },
+
+    // --- 3. UML AKTIVITÄTSDIAGRAMM (VERHALTENSDIAGRAMM) ---
+    {
+        id: 511,
+        isHard: false,
+        difficulty: "standard",
+        isBawueFocus: true,
+        theme: "diagrams",
+        diagramType: "UML Aktivitätsdiagramm",
+        isDiagram: true,
+        topic: "⚡ UML Aktivitätsdiagramm: Decision/Merge vs. Fork/Join",
+        type: "multiple-choice",
+        question: "Worin liegt im UML-Aktivitätsdiagramm der elementare Unterschied zwischen einer Verzweigung (Decision Node / Raute) und einer Parallelisierung (Fork Node / dicker Balken)?",
+        options: [
+            "Decision Node (Raute): Genau EIN Pfad wird anhand von Guard-Bedingungen gewählt; Fork Node (Balken): ALLE ausgehenden Pfade werden gleichzeitig (nebenläufig) gestartet.",
+            "Decision Node startet mehrere Threads parallel; Fork Node beendet die Aktivität.",
+            "Decision Node darf nur am Ende vorkommen; Fork Node nur am Start.",
+            "Decision Node verbindet Klassen; Fork Node verbindet Akteure."
+        ],
+        correctAnswer: 0,
+        diagramSvg: VisualDiagrams.getUmlAktivitaetsdiagrammSvg(),
+        solutionDiagramSvg: VisualDiagrams.getUmlAktivitaetsdiagrammSvg(),
+        explanation: "Elemente des UML-Aktivitätsdiagramms:\n• Decision/Merge (Raute ◇): Verzweigung mit Wächterbedingungen [Guard]. Es wird exklusiv genau ein Pfad weiterverfolgt (XOR-Semantik).\n• Fork/Join (dicker Balken ▬): Fork spaltet einen Kontrollfluss in mehrere parallele (nebenläufige) Pfade auf. Join wartet, bis ALLE eingehenden Pfade abgeschlossen sind, bevor es weitergeht (AND-Synchronisation)."
+    },
+    {
+        id: 512,
+        isHard: false,
+        difficulty: "standard",
+        isBawueFocus: true,
+        theme: "diagrams",
+        diagramType: "UML Aktivitätsdiagramm",
+        isDiagram: true,
+        topic: "⚡ UML Aktivitätsdiagramm: Partitionen (Swimlanes) & Symbole",
+        type: "multiple-choice",
+        question: "Welche grafischen Symbole repräsentieren im UML 2.5 Aktivitätsdiagramm den Startknoten, den Endknoten der gesamten Aktivität und Partitionen (Swimlanes)?",
+        options: [
+            "Startknoten = Ausgefüllter schwarzer Kreis (●); Endknoten = Ausgefüllter Kreis mit Kreisumrandung (Bullauge ⦿); Swimlanes = Vertikale/horizontale Spalten für Rollen/Abteilungen.",
+            "Startknoten = Grünes Dreieck; Endknoten = Rotes Quadrat; Swimlanes = Rauten.",
+            "Startknoten = Ellipse; Endknoten = Sechseck; Swimlanes = Gestrichelte Linien.",
+            "Startknoten = Doppelkreis; Endknoten = Kreuz; Swimlanes = Rechtecke ohne Text."
+        ],
+        correctAnswer: 0,
+        diagramSvg: VisualDiagrams.getUmlAktivitaetsdiagrammSvg(),
+        solutionDiagramSvg: VisualDiagrams.getUmlAktivitaetsdiagrammSvg(),
+        explanation: "Symbole nach UML 2.5 Standard:\n• Startknoten (Initial Node): Ausgefüllter Kreis ●\n• Endknoten (Activity Final Node): Kreis mit gefülltem inneren Kreis ⦿ (beendet die gesamte Aktivität)\n• Ablauf-Endknoten (Flow Final Node): Kreis mit 'X' ⊗ (beendet nur diesen einen Pfad)\n• Partitionen (Swimlanes): Spalten oder Zeilen zur Zuweisung von Aktivitäten an ausführende Rollen/Systeme."
+    },
+    {
+        id: 513,
+        isHard: true,
+        difficulty: "hard",
+        isBawueFocus: true,
+        theme: "diagrams",
+        diagramType: "UML Aktivitätsdiagramm",
+        isDiagram: true,
+        topic: "⚡ UML Aktivitätsdiagramm: Fachaufgabe Retouren- & Erstattungsprozess",
+        type: "open-text",
+        question: "Fachaufgabe Prozessmodellierung (LF 5 / AP1): Ein Onlinehändler automatisiert die Bearbeitung eingehender Warenrücksendungen (Retouren). Modellieren Sie den Ablauf als UML-Aktivitätsdiagramm mit folgenden Schritten:\n1. Start des Prozesses nach Eintreffen des Pakets.\n2. Aktion: `Retourenpaket scannen & Lieferschein prüfen`.\n3. Verzweigung (Decision Node): Ist die Ware unbeschädigt?\n   - Falls Nein (`[beschädigt]`): Aktion `Schadensbericht erstellen & Kunden informieren` -> Endknoten.\n   - Falls Ja (`[einwandfrei]`): Weiter zu Schritt 4.\n4. Parallelisierung (Fork Node): Nach Prüfung der Ware müssen zwei Schritte parallel erfolgen:\n   - Pfad A: Aktion `Artikel im Lagerbestand wieder einbuchen`.\n   - Pfad B: Aktion `Gutschrift erstellen & Rücküberweisung anstoßen`.\n5. Synchronisation (Join Node): Warten, bis sowohl Lagerbestand eingebucht als auch die Rücküberweisung angestoßen wurde.\n6. Abschluss-Aktion: `Retouren-Status auf 'Abgeschlossen' setzen`.\n7. Regulärer Endknoten (Activity Final).\n\nAufgaben:\naa) Benennen Sie die Kontrollknoten (Decision, Merge, Fork, Join) und deren Funktion in diesem Szenario.\nab) Erläutern Sie, warum an Schritt 5 zwingend ein Join Node (Synchronisationsbalken) und kein Merge Node (Raute) eingesetzt werden muss.\nac) Beschreiben Sie die Funktion von Guard-Bedingungen an Verzweigungen.",
+        musterloesung: "aa) Kontrollknoten und Funktionen:\n1. Decision Node (Raute ◇): Prüft Zustand der Ware mit Guards '[einwandfrei]' und '[beschädigt]'. Schlägt genau einen der beiden Pfade ein.\n2. Fork Node (dicker Balken ▬): Teilt den Kontrollfluss nach erfolgreicher Prüfung in zwei parallele Ausführungspfade (Lagereinbuchung und Rücküberweisung).\n3. Join Node (dicker Balken ▬): Führt die beiden parallelen Pfade wieder zusammen und wartet, bis BEIDE Pfade beendet sind.\n\nab) Begründung für Join Node statt Merge Node:\n• Ein Join Node synchronisiert parallele Abläufe (AND-Logik). Er gibt den Kontrollfluss erst dann an die nächste Aktion weiter, wenn auf ALLEN eingehenden Kanten ein Kontroll-Token eingetroffen ist (sowohl Lagereinbuchung als auch Zahlung erfolgt).\n• Ein Merge Node (Raute) hat hingegen OR/XOR-Semantik: Er würde bereits beim ersten eintreffenden Token sofort weiterlaufen und bei Eintreffen des zweiten Tokens die Folgeaktion ein zweites Mal ausführen (Token-Verdopplung / Race Condition).\n\nac) Funktion von Guard-Bedingungen:\n• Guards stehen in eckigen Klammern '[Bedingung]' an den ausgehenden Kanten einer Decision Node.\n• Sie sind boolesche Ausdrücke (wahr/falsch), die sich gegenseitig ausschließen müssen, um deterministisches Verhalten zu garantieren.",
+        solutionDiagramSvg: VisualDiagrams.getUmlAktivitaetsdiagrammSvg(),
+        explanation: "Zentraler IHK-Prüfungsfokus: Der exakte Unterschied zwischen Decision/Merge (XOR) und Fork/Join (AND) im Aktivitätsdiagramm."
+    },
+
+    // --- 4. UML ZUSTANDSDIAGRAMM (STATE MACHINE - VERHALTENSDIAGRAMM) ---
+    {
+        id: 514,
+        isHard: false,
+        difficulty: "standard",
+        isBawueFocus: true,
+        theme: "diagrams",
+        diagramType: "UML Zustandsdiagramm",
+        isDiagram: true,
+        topic: "🔄 UML Zustandsdiagramm: Transitions-Syntax Trigger [Guard] / Action",
+        type: "multiple-choice",
+        question: "An einer Transition zwischen zwei Zuständen steht die Beschriftung:\n`abgabeFristAbgelaufen [Punkte < 50] / markiereNichtBestanden()`\nWelche Bedeutung haben die drei Bestandteile nach UML-Standard?",
+        options: [
+            "`abgabeFristAbgelaufen` = Trigger (auslösendes Ereignis); `[Punkte < 50]` = Guard (boolesche Wächterbedingung); `/ markiereNichtBestanden()` = Action (ausgeführter Effekt).",
+            "`abgabeFristAbgelaufen` = Methodenname; `[Punkte < 50]` = Übergabeparameter; `/ markiereNichtBestanden()` = Rückgabetyp.",
+            "`abgabeFristAbgelaufen` = Startzustand; `[Punkte < 50]` = Folgezustand; `/ markiereNichtBestanden()` = Endzustand.",
+            "`abgabeFristAbgelaufen` = Attribut; `[Punkte < 50]` = Multiplizität; `/ markiereNichtBestanden()` = Schnittstelle."
+        ],
+        correctAnswer: 0,
+        diagramSvg: VisualDiagrams.getZustandsdiagrammSvg(),
+        solutionDiagramSvg: VisualDiagrams.getZustandsdiagrammSvg(),
+        explanation: "Standard-Transitions-Syntax im UML-Zustandsdiagramm:\n`Ereignis (Trigger) [Wächterbedingung / Guard] / Aktion (Effekt)`\n• Trigger: Das Ereignis, das den Zustandswechsel anstößt (z. B. Timeout, Benutzereingabe).\n• Guard [in eckigen Klammern]: Boolesche Bedingung, die zum Zeitpunkt des Ereignisses wahr sein muss.\n• Action / nach Schrägstrich: Ein kurzer, nicht unterbrechbarer Vorgang, der während des Übergangs ausgeführt wird."
+    },
+    {
+        id: 515,
+        isHard: false,
+        difficulty: "standard",
+        isBawueFocus: true,
+        theme: "diagrams",
+        diagramType: "UML Zustandsdiagramm",
+        isDiagram: true,
+        topic: "🔄 UML Zustandsdiagramm: Interne Aktivitäten entry, do, exit",
+        type: "multiple-choice",
+        question: "In einem UML-Zustand `Wiedergabe` stehen die internen Aktivitäten:\n`entry / aktiviereAudioTreiber()`\n`do / spieleStream()`\n`exit / speichereZeitstempel()`\nWann werden diese Operationen ausgeführt?",
+        options: [
+            "`entry`: Genau einmal beim Eintritt in den Zustand; `do`: Kontinuierlich während des Verbleibs im Zustand (unterbrechbar); `exit`: Genau einmal beim Verlassen des Zustands.",
+            "`entry`: Nur beim Start der Software; `do`: Wenn ein Fehler auftritt; `exit`: Beim Herunterfahren des PCs.",
+            "`entry`: Vor der Kompilierung; `do`: Während des Routings; `exit`: Nach der Datenbankabfrage.",
+            "Alle drei Operationen werden gleichzeitig beim Verlassen des Zustands ausgeführt."
+        ],
+        correctAnswer: 0,
+        diagramSvg: VisualDiagrams.getZustandsdiagrammSvg(),
+        solutionDiagramSvg: VisualDiagrams.getZustandsdiagrammSvg(),
+        explanation: "Interne Zustandsaktivitäten in UML State Machines:\n• entry / Aktion: Wird unmittelbar und unteilbar beim Betreten des Zustands ausgeführt.\n• do / Aktivität: Eine länger andauernde Arbeit, die läuft, solange das Objekt in diesem Zustand verweilt. Sie wird abgebrochen, sobald eine ausgehende Transition feuert.\n• exit / Aktion: Wird zwingend ausgeführt, wenn der Zustand verlassen wird."
+    },
+    {
+        id: 516,
+        isHard: true,
+        difficulty: "hard",
+        isBawueFocus: true,
+        theme: "diagrams",
+        diagramType: "UML Zustandsdiagramm",
+        isDiagram: true,
+        topic: "🔄 UML Zustandsdiagramm: Fachaufgabe IT-Incident-Lifecycle & SLA-Monitoring",
+        type: "open-text",
+        question: "Fachaufgabe Software & Service (LF 5 / LF 6 / AP1): Ein Ticketsystem soll den Lebenszyklus eines IT-Störungstickets (Incident) über ein UML-Zustandsdiagramm abbilden.\nAnforderungen:\n1. Startzustand: Ein Ticket wird neu erfasst und geht in den Zustand `Offen`.\n2. Aus `Offen` wechselt das Ticket in `In Bearbeitung`, wenn das Ereignis `supportMitarbeiterWeistZu` eintrifft und die Wächterbedingung `[SLA_Frist_Gueltig]` wahr ist. Dabei wird die Aktion `startBearbeitungsTimer()` ausgeführt.\n3. Aus `In Bearbeitung` kann das Ticket in `Wartet auf Kunde` wechseln durch das Ereignis `rueckfrageGestellt`.\n4. Aus `Wartet auf Kunde` führt das Ereignis `kundeAntwortet` zurück zu `In Bearbeitung`.\n5. Erfolgt im Zustand `Wartet auf Kunde` innerhalb von 14 Tagen keine Antwort (`timeout14Tage`), wechselt das Ticket automatisch mit der Aktion `sendeAutoSchliessungsMail()` in den Zustand `Geschlossen`.\n6. Aus `In Bearbeitung` wechselt das Ticket nach erfolgreicher Lösung mit `stoerungBehoben` in den Zustand `Gelöst`.\n7. Aus `Gelöst` wechselt das Ticket nach Kundenbestätigung (`kundeBestaetigt`) in den Zustand `Geschlossen` und erreicht den Endzustand.\n\nAufgaben:\naa) Listen Sie alle Zustände des Tickets auf und geben Sie an, welche Zustände stabil sind.\nab) Formulieren Sie die vollständige Transitions-Syntax für den Übergang von `Offen` nach `In Bearbeitung`.\nac) Erläutern Sie die Funktionsweise des automatischen Timeouts bei `Wartet auf Kunde` nach `Geschlossen`.\nad) Welches Symbol kennzeichnet den Startzustand und welches den Endzustand?",
+        musterloesung: "aa) Zustände des Tickets:\n• Startknoten (Pseudozustand)\n• Offen (stabiler Zustand)\n• In Bearbeitung (stabiler Zustand)\n• Wartet auf Kunde (stabiler Zustand)\n• Gelöst (stabiler Zustand)\n• Geschlossen (stabiler Zustand)\n• Endzustand (Final State)\n\nab) Transitions-Syntax für 'Offen' -> 'In Bearbeitung':\n`supportMitarbeiterWeistZu [SLA_Frist_Gueltig] / startBearbeitungsTimer()`\n• Trigger: supportMitarbeiterWeistZu\n• Guard: [SLA_Frist_Gueltig]\n• Action: / startBearbeitungsTimer()\n\nac) Funktionsweise des Timeouts:\n• Es handelt sich um einen zeitgesteuerten Trigger (Time Event, z. B. `after(14 days)` oder `timeout14Tage`).\n• Wenn das Objekt 14 Tage ununterbrochen im Zustand 'Wartet auf Kunde' verbleibt, feuert die Transition automatisch ohne menschliche Benutzerinteraktion, führt die Aktion `sendeAutoSchliessungsMail()` aus und überführt das Ticket in 'Geschlossen'.\n\nad) Start- und Endzustand Symbole:\n• Startzustand: Ausgefüllter schwarzer Kreis (●).\n• Endzustand: Weißer Kreis mit ausgefülltem schwarzem Kern (Bullauge / Stopp-Symbol ⦿).",
+        solutionDiagramSvg: VisualDiagrams.getZustandsdiagrammSvg(),
+        explanation: "Typische IHK-Aufgabe für Zustandsmodelle: Zeitgesteuerte Events (Timeouts), Transitions-Syntax und vollständiger Lebenszyklus."
+    },
+
+    // --- 5. UML SEQUENZDIAGRAMM (INTERAKTIONSDIAGRAMM / VERHALTENSDIAGRAMM) ---
+    {
+        id: 517,
+        isHard: false,
+        difficulty: "standard",
+        isBawueFocus: true,
+        theme: "diagrams",
+        diagramType: "UML Sequenzdiagramm",
+        isDiagram: true,
+        topic: "⏱️ UML Sequenzdiagramm: Synchrone, Asynchrone & Antwortnachrichten",
+        type: "multiple-choice",
+        question: "Wie unterscheiden sich die Pfeildarstellungen für synchrone Aufrufe, asynchrone Aufrufe und Rückgabe-Antworten in einem UML-Sequenzdiagramm?",
+        options: [
+            "Synchron = Durchgezogene Linie mit ausgefüllter Dreiecksspitze (▶); Asynchron = Durchgezogene Linie mit offener Pfeilspitze (→); Rückgabe = Gestrichelte Linie mit offener Pfeilspitze (<--).",
+            "Synchron = Gestrichelte Linie; Asynchron = Durchgezogene Linie; Rückgabe = Raute.",
+            "Synchron = Doppelpfeil; Asynchron = Kreis; Rückgabe = Punktlinie.",
+            "Alle Nachrichten in Sequenzdiagrammen müssen zwingend identisch als einfache Pfeile dargestellt werden."
+        ],
+        correctAnswer: 0,
+        diagramSvg: VisualDiagrams.getSequenzdiagrammSvg(),
+        solutionDiagramSvg: VisualDiagrams.getSequenzdiagrammSvg(),
+        explanation: "UML-Nachrichtentypen im Sequenzdiagramm:\n• Synchroner Aufruf (durchgezogen, gefülltes Dreieck ▶): Der Aufrufer blockiert und wartet, bis die aufgerufene Methode die Verarbeitung beendet hat.\n• Asynchroner Aufruf (durchgezogen, offene Spitze →): Der Aufrufer sendet die Nachricht und arbeitet sofort weiter (Non-Blocking / z. B. Message Queue, Event-Bus).\n• Antwortnachricht / Return (gestrichelt, offene Spitze <--): Rückgabe des Kontrollflusses und optional von Ergebnisdaten an den Aufrufer."
+    },
+    {
+        id: 518,
+        isHard: false,
+        difficulty: "standard",
+        isBawueFocus: true,
+        theme: "diagrams",
+        diagramType: "UML Sequenzdiagramm",
+        isDiagram: true,
+        topic: "⏱️ UML Sequenzdiagramm: Kombinierte Fragmente (alt, opt, loop, par)",
+        type: "multiple-choice",
+        question: "Welche Bedeutung haben die Interaktionsoperatoren `alt`, `opt`, `loop` und `par` in kombinierten Fragmenten eines UML 2.x Sequenzdiagramms?",
+        options: [
+            "`alt` = Alternative (if-else, genau ein Pfad); `opt` = Optional (if ohne else); `loop` = Wiederholung (Schleife); `par` = Parallele/nebenläufige Ausführung.",
+            "`alt` = Alter des Objekts; `opt` = Optimierung; `loop` = Absturz; `par` = Parameter.",
+            "`alt` = Altes System; `opt` = Optionaler Akteur; `loop` = Endlosschleife; `par` = Partition.",
+            "`alt` = Abbruch; `opt` = Optionstaste; `loop` = Rekursion; `par` = Parität."
+        ],
+        correctAnswer: 0,
+        diagramSvg: VisualDiagrams.getSequenzdiagrammSvg(),
+        solutionDiagramSvg: VisualDiagrams.getSequenzdiagrammSvg(),
+        explanation: "Kombinierte Fragmente (Combined Fragments) in UML 2.x:\n• alt (Alternatives): Entspricht einem 'if-then-else'. Die Operanden sind durch gestrichelte Linien getrennt, jeder Bereich hat einen Guard in eckigen Klammern [Bedingung].\n• opt (Option): Entspricht einem einfachen 'if'. Der Block wird nur ausgeführt, wenn der Guard wahr ist.\n• loop: Wiederholt die eingeschlossenen Nachrichten, solange die Schleifenbedingung wahr ist oder für eine feste Anzahl [min, max].\n• par (Parallel): Beide Interaktionsblöcke werden parallel/nebenläufig ausgeführt."
+    },
+    {
+        id: 519,
+        isHard: true,
+        difficulty: "hard",
+        isBawueFocus: true,
+        theme: "diagrams",
+        diagramType: "UML Sequenzdiagramm",
+        isDiagram: true,
+        topic: "⏱️ UML Sequenzdiagramm: Fachaufgabe Zwei-Faktor-Authentifizierung (2FA)",
+        type: "open-text",
+        question: "Fachaufgabe IT-Sicherheit & Software (LF 4 / LF 5 / AP1): Ein sicheres Login-Verfahren mit Zwei-Faktor-Authentifizierung (2FA) soll in einem UML-Sequenzdiagramm modelliert werden.\nBeteiligte Lebenslinien (Objekte/Komponenten):\n- `:Benutzer` (Akteur / Client)\n- `:WebFrontend`\n- `:AuthServer`\n- `:SmsGateway` (externer Dienst)\n- `:UserDB`\n\nAblaufschritte:\n1. Der Benutzer sendet synchron `login(benutzername, passwort)` an das `:WebFrontend`.\n2. Das `:WebFrontend` leitet die Anfrage synchron an den `:AuthServer` weiter: `verifyCredentials(user, pw)`.\n3. Der `:AuthServer` fragt synchron die `:UserDB` an: `findUser(user)` und erhält als Antwort die gehashten Benutzerdaten zurück.\n4. Bei erfolgreicher Verifizierung erzeugt der `:AuthServer` ein Einmalkennwort (OTP) und sendet asynchron eine Nachricht an das `:SmsGateway`: `sendOtpSms(handynummer, otpCode)`.\n5. Der `:AuthServer` antwortet dem `:WebFrontend` mit `status: 2fa_erforderlich`, und das `:WebFrontend` zeigt dem Benutzer die Eingabemaske an.\n6. Der Benutzer gibt das per SMS empfangene OTP ein: `submitOtp(otpCode)` (synchron an `:WebFrontend`).\n7. Das `:WebFrontend` validiert den Code beim `:AuthServer`: `validateOtp(otpCode)`.\n8. Nach erfolgreicher Validierung liefert der `:AuthServer` ein Session-Token zurück, und das `:WebFrontend` meldet dem Benutzer `loginErfolgreich(token)`.\n\nAufgaben:\naa) Erläutern Sie, wie die zeitliche Dimension in einem Sequenzdiagramm verläuft.\nab) Begründen Sie, warum der Methodenaufruf `sendOtpSms` an das `:SmsGateway` als ASYNCHRONER Aufruf modelliert werden sollte, während die Passwortüberprüfung synchron erfolgt.\nac) Welche grafische Bedeutung hat der schmale vertikale Balken auf der gestrichelten Lebenslinie (Execution Occurrence / Aktivierungsbalken)?\nad) Wie wird die alternative Verzweigung (z. B. Passwort falsch oder OTP ungültig) in einem modernen UML-Sequenzdiagramm abgebildet?",
+        musterloesung: "aa) Zeitliche Dimension:\n• In einem UML-Sequenzdiagramm verläuft die Zeit streng linear von OBEN nach UNTEN entlang der vertikalen Lebenslinien.\n• Nachrichten weiter oben finden chronologisch vor Nachrichten weiter unten statt.\n\nab) Begründung für asynchronen Aufruf bei SMS-Gateway:\n• Das Versenden einer SMS über externe Mobilfunkbetreiber kann mehrere Sekunden dauern oder Latenzen aufweisen.\n• Bei einem asynchronen Aufruf (offene Pfeilspitze) blockiert der AuthServer nicht. Er stößt den Versand an und kann sofort die HTTP-Antwort '2fa_erforderlich' an das WebFrontend zurückgeben, ohne auf die Auslieferungsbestätigung des Netzbetreibers zu warten.\n• Die Passwortprüfung gegen die lokale Datenbank MUSS hingegen synchron sein, da das System ohne das Ergebnis nicht entscheiden kann, ob überhaupt ein OTP versendet werden darf.\n\nac) Bedeutung des Aktivierungsbalkens (Execution Specification):\n• Der schmale Kasten auf der Lebenslinie zeigt den Zeitraum an, in dem die jeweilige Komponente aktiv Rechenzeit beansprucht (im Fokus der Kontrolle ist / Code ausführt).\n\nad) Modellierung alternativer Pfade (Fehlerfall):\n• Über ein kombiniertes Fragment mit dem Operator 'alt' (Alternatives).\n• Der Kasten umfasst die relevanten Lebenslinien und ist durch eine gestrichelte Horizontallinie in zwei Operanden getrennt: [OTP korrekt] im oberen Bereich und [else / OTP falsch] im unteren Bereich mit Fehlermeldung.",
+        solutionDiagramSvg: VisualDiagrams.getSequenzdiagrammSvg(),
+        explanation: "Prüfungsrelevante Modellierungsaufgabe für Sequenzdiagramme: Synchrone vs. asynchrone Aufrufe, Lebenslinien, Antwortpfeile und kombinierte Fragmente (alt/opt)."
     }
 ];

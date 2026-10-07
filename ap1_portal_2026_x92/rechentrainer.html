@@ -280,6 +280,23 @@
           <button onclick="selectMiniTopic('ipv6_linklocal_explain')" class="topic-pill px-3.5 py-2 text-sm font-semibold rounded-xl border border-violet-400 bg-violet-50 hover:bg-violet-100 text-violet-900 transition-all" data-topic="ipv6_linklocal_explain">
             🔗 IPv6: 7. Link-Local (fe80::)
           </button>
+
+          <!-- UML & Diagramme (AP1 Kern-Modellierung) -->
+          <button onclick="selectMiniTopic('uml_class')" class="topic-pill px-3.5 py-2 text-sm font-semibold rounded-xl border border-emerald-500 bg-emerald-50 hover:bg-emerald-100 text-emerald-900 transition-all" data-topic="uml_class">
+            🏛️ UML: Klassendiagramm (Beziehungen &amp; Sichtbarkeiten)
+          </button>
+          <button onclick="selectMiniTopic('uml_usecase')" class="topic-pill px-3.5 py-2 text-sm font-semibold rounded-xl border border-emerald-500 bg-emerald-50 hover:bg-emerald-100 text-emerald-900 transition-all" data-topic="uml_usecase">
+            🎯 UML: Use-Case (include, extend, Akteure)
+          </button>
+          <button onclick="selectMiniTopic('uml_activity')" class="topic-pill px-3.5 py-2 text-sm font-semibold rounded-xl border border-emerald-500 bg-emerald-50 hover:bg-emerald-100 text-emerald-900 transition-all" data-topic="uml_activity">
+            🔀 UML: Aktivitätsdiagramm (Decision vs. Fork/Join)
+          </button>
+          <button onclick="selectMiniTopic('uml_state')" class="topic-pill px-3.5 py-2 text-sm font-semibold rounded-xl border border-emerald-500 bg-emerald-50 hover:bg-emerald-100 text-emerald-900 transition-all" data-topic="uml_state">
+            🔄 UML: Zustandsdiagramm (Trigger, Guard, Action)
+          </button>
+          <button onclick="selectMiniTopic('uml_sequence')" class="topic-pill px-3.5 py-2 text-sm font-semibold rounded-xl border border-emerald-500 bg-emerald-50 hover:bg-emerald-100 text-emerald-900 transition-all" data-topic="uml_sequence">
+            ⚡ UML: Sequenzdiagramm (Synchron, Asynchron, Return)
+          </button>
         </div>
       </div>
 
@@ -3939,6 +3956,317 @@
           altExpected: sc.alts,
           hint: sc.hint,
           explanation: `Richtig! ${sc.expl}`
+        };
+      },
+
+      // 46. UML: KLASSENDIAGRAMM (Beziehungen, Sichtbarkeiten, Multiplizitäten)
+      uml_class: function() {
+        const scenarios = [
+          {
+            q: "Wie lautet der Fachbegriff für die strengste Form der Assoziation in UML, bei der die Teilexistenz existenziell vom Ganzen abhängt ('stirbt mit dem Ganzen')?",
+            unit: "Beziehungsart (z. B. Komposition, Aggregation...)",
+            expected: "Komposition",
+            alts: ["KOMPOSITION", "COMPOSITION", "EXISTENZABHÄNGIGKEIT"],
+            hint: "Gefüllte schwarze Raute an der Seite des Ganzen.",
+            expl: "Bei der <strong>Komposition</strong> (schwarze Raute) kann das Teilobjekt ohne das Ganze nicht existieren (z. B. Haus und Raum, Ticket und Ticket-Historie)."
+          },
+          {
+            q: "Wie lautet der Fachbegriff für eine 'Hat-ein'-Beziehung, bei der die Teilexistenz auch dann weiterbesteht, wenn das Ganze gelöscht wird (schwache Bindung)?",
+            unit: "Beziehungsart (z. B. Aggregation...)",
+            expected: "Aggregation",
+            alts: ["AGGREGATION", "SCHWACHE ASSOZIATION"],
+            hint: "Leere (weiße) Raute an der Seite des Ganzen.",
+            expl: "Bei der <strong>Aggregation</strong> (weiße Raute) existieren die Teile unabhängig vom Ganzen weiter (z. B. Kurs und Teilnehmer, PC und Monitor)."
+          },
+          {
+            q: "Welches Sichtbarkeitszeichen in UML kennzeichnet den Zugriffsmodifizierer <strong>protected</strong> (nur in der eigenen Klasse und Subklassen sichtbar)?",
+            unit: "Symbol (+, -, # oder ~)",
+            expected: "#",
+            alts: ["#", "PROTECTED", "RAUTE", "HASH"],
+            hint: "'+' = public, '-' = private, '#' = protected, '~' = package.",
+            expl: "Das Zeichen <strong>#</strong> steht in UML für <strong>protected</strong>. Minus '-' bedeutet private, Plus '+' public."
+          },
+          {
+            q: "Welches Sichtbarkeitszeichen in UML kennzeichnet den Zugriffsmodifizierer <strong>private</strong> (nur in der eigenen Klasse sichtbar)?",
+            unit: "Symbol (+, -, # oder ~)",
+            expected: "-",
+            alts: ["-", "PRIVATE", "MINUS"],
+            hint: "Minuszeichen",
+            expl: "Das Zeichen <strong>-</strong> (Minus) steht in UML für <strong>private</strong> (Kapselung)."
+          },
+          {
+            q: "Wie lautet der UML-Fachbegriff für die Vererbungsbeziehung ('ist-ein'-Beziehung, dargestellt durch eine geschlossene weiße Dreiecksspitze)?",
+            unit: "UML-Fachbegriff (z. B. Generalisierung...)",
+            expected: "Generalisierung",
+            alts: ["GENERALISIERUNG", "VERERBUNG", "INHERITANCE"],
+            hint: "Generalisierung / Vererbung",
+            expl: "Die <strong>Generalisierung</strong> (Vererbung) verbindet eine Unterklasse mit ihrer Oberklasse durch eine durchgezogene Linie mit weißer Dreiecksspitze."
+          },
+          {
+            q: "Eine Kundenklasse kann 0 bis beliebig viele Aufträge besitzen. Wie lautet diese Multiplizität im UML-Klassendiagramm?",
+            unit: "Multiplizität (z. B. 0..*)",
+            expected: "0..*",
+            alts: ["0..*", "0..N", "*", "0..BELIEBIG"],
+            hint: "0..* oder *",
+            expl: "<strong>0..*</strong> (oder *) bedeutet: mindestens null, maximal beliebig viele Aufträge."
+          }
+        ];
+        const sc = scenarios[Math.floor(Math.random() * scenarios.length)];
+        return {
+          topic: "uml_class",
+          badge: "🏛️ Klassendiagramm",
+          isText: true,
+          title: "UML-Klassendiagramm: Konzepte & Notationen",
+          question: sc.q,
+          unit: sc.unit,
+          expected: sc.expected,
+          altExpected: sc.alts,
+          hint: sc.hint,
+          explanation: sc.expl
+        };
+      },
+
+      // 47. UML: USE-CASE-DIAGRAMM (include, extend, Akteure, Systemgrenze)
+      uml_usecase: function() {
+        const scenarios = [
+          {
+            q: "Wenn ein Use-Case zwingend und in jedem Ausführungsfall einen anderen Unter-Use-Case aufruft: Welcher UML-Stereotyp wird verwendet?",
+            unit: "Stereotyp (z. B. <<include>> oder <<extend>>)",
+            expected: "include",
+            alts: ["INCLUDE", "<<INCLUDE>>", "<INCLUDE>", "INCLUDES"],
+            hint: "Zwingend erforderlich = include. Pfeil zeigt auf den aufgerufenen Anwendungsfall.",
+            expl: "<strong>&lt;&lt;include&gt;&gt;</strong> kennzeichnet eine zwingende Einbindung. Der Pfeil zeigt zum aufgerufenen Anwendungsfall."
+          },
+          {
+            q: "Wenn ein Use-Case einen Basisfall nur optional oder unter bestimmten Bedingungen erweitert: Welcher Stereotyp liegt vor?",
+            unit: "Stereotyp (z. B. <<extend>>...)",
+            expected: "extend",
+            alts: ["EXTEND", "<<EXTEND>>", "<EXTEND>", "EXTENDS"],
+            hint: "Optionale Erweiterung an Extension Points = extend.",
+            expl: "<strong>&lt;&lt;extend&gt;&gt;</strong> kennzeichnet eine optionale Erweiterung. Wichtig: Der Pfeil zeigt zurück zum Basis-Use-Case!"
+          },
+          {
+            q: "Wohin zeigt die Pfeilspitze bei einer <strong>&lt;&lt;extend&gt;&gt;</strong>-Beziehung im Use-Case-Diagramm? (Zum Basisfall oder zum Erweiterungsfall?)",
+            unit: "Ziel der Pfeilspitze",
+            expected: "Basisfall",
+            alts: ["BASISFALL", "BASIS USE CASE", "BASIS-USE-CASE", "ZUM BASISFALL", "BASIS"],
+            hint: "Der Pfeil zeigt immer zum erweiterten Basis-Use-Case.",
+            expl: "Bei <strong>&lt;&lt;extend&gt;&gt;</strong> zeigt der Pfeil immer zum <strong>Basisfall</strong>, da dieser erweitert wird."
+          },
+          {
+            q: "Dürfen Akteure (Benutzer, Fremdsysteme, Sensoren) innerhalb der Systemgrenze gezeichnet werden? (Antwort: Ja oder Nein)",
+            unit: "Ja / Nein",
+            expected: "Nein",
+            alts: ["NEIN", "NO"],
+            hint: "Akteure stehen prinzipiell außerhalb der Systemgrenze.",
+            expl: "<strong>Nein</strong>: Akteure befinden sich immer <strong>außerhalb</strong> der Systemgrenze, da sie von außen mit dem System interagieren."
+          },
+          {
+            q: "Welches grafische Symbol grenzt im Use-Case-Diagramm die Systembestandteile von der Umwelt/den Akteuren ab?",
+            unit: "Symbolform (z. B. Rechteck...)",
+            expected: "Rechteck",
+            alts: ["RECHTECK", "SYSTEMGRENZE", "SYSTEMRAHMEN", "KASTEN"],
+            hint: "Ein Rechteck mit Systemnamen oben.",
+            expl: "Ein großes <strong>Rechteck</strong> (Systemgrenze) schirmt das System ab. Alle Anwendungsfall-Ellipsen liegen darin, alle Akteure außerhalb."
+          }
+        ];
+        const sc = scenarios[Math.floor(Math.random() * scenarios.length)];
+        return {
+          topic: "uml_usecase",
+          badge: "🎯 Use-Case",
+          isText: true,
+          title: "UML-Use-Case-Diagramm: Anwendungsfall-Modellierung",
+          question: sc.q,
+          unit: sc.unit,
+          expected: sc.expected,
+          altExpected: sc.alts,
+          hint: sc.hint,
+          explanation: sc.expl
+        };
+      },
+
+      // 48. UML: AKTIVITÄTSDIAGRAMM (Decision vs. Fork/Join, Swimlanes)
+      uml_activity: function() {
+        const scenarios = [
+          {
+            q: "Welches Symbol stellt im Aktivitätsdiagramm eine <strong>Verzweigung</strong> (Entweder-Oder nach Guard-Bedingung) dar?",
+            unit: "Symbolform (z. B. Raute, Balken...)",
+            expected: "Raute",
+            alts: ["RAUTE", "DECISION", "DECISION NODE", "RHOMBUS", "VERZWEIGUNG"],
+            hint: "Raute (Decision Node).",
+            expl: "Eine <strong>Raute</strong> (Decision Node) spaltet den Ablauf in genau einen von mehreren alternativen Wegen auf."
+          },
+          {
+            q: "Welches Symbol spaltet im Aktivitätsdiagramm einen Kontrollfluss in <strong>parallele, gleichzeitig laufende Stränge</strong> auf?",
+            unit: "Symbolform (z. B. Balken, Raute...)",
+            expected: "Balken",
+            alts: ["BALKEN", "FORK", "SYNCHRONISATIONSBALKEN", "SYNCHRONISATION", "GABELUNG", "DICKE LINIE"],
+            hint: "Dicker schwarzer Balken (Fork / Gabelung).",
+            expl: "Ein <strong>dicker Balken</strong> (Fork / Gabelung) erzeugt echte Nebenläufigkeit (parallele Threads)."
+          },
+          {
+            q: "Wie heißt das Gegenstück zum Fork-Balken, das wartet, bis alle parallelen Stränge beendet sind und sie wieder zu einem Strom synchronisiert?",
+            unit: "UML-Fachbegriff (z. B. Join...)",
+            expected: "Join",
+            alts: ["JOIN", "VEREINIGUNG", "SYNCHRONISATION", "JOIN-KNOTEN"],
+            hint: "Join (Vereinigung / Synchronisation).",
+            expl: "Ein <strong>Join</strong> (Synchronisationsbalken) führt parallele Abläufe zusammen. Er leitet den Kontrollfluss erst weiter, wenn ALLE eintreffenden Stränge angekommen sind."
+          },
+          {
+            q: "Wie werden vertikale oder horizontale Verantwortungsbereiche für Rollen und Abteilungen im Aktivitätsdiagramm genannt?",
+            unit: "Fachbegriff (z. B. Swimlanes, Partitionen...)",
+            expected: "Swimlanes",
+            alts: ["SWIMLANES", "SWIMLANE", "PARTITIONEN", "PARTITION", "SCHWIMMBAHNEN", "BAHNEN"],
+            hint: "Swimlanes oder Partitionen.",
+            expl: "<strong>Swimlanes</strong> (oder Partitionen) ordnen Aktionen klar den ausführenden Organisationseinheiten (z. B. Kunde, ERP, Lager) zu."
+          },
+          {
+            q: "Wie wird der Aktivitätsendknoten grafisch dargestellt?",
+            unit: "Symbol (z. B. Bulls-Eye, Doppelkreis...)",
+            expected: "Bulls-Eye",
+            alts: ["BULLS-EYE", "BULLSEYE", "DOPPELKREIS", "KREIS MIT PUNKT", "KREIS MIT GEFÜLLTEM KREIS", "ENDKNOTEN"],
+            hint: "Kreis mit innenliegendem ausgefülltem schwarzem Kreis (Zielscheibe).",
+            expl: "Der Aktivitätsendknoten wird als Kreis mit gefülltem Innenkreis (<strong>Bulls-Eye</strong>) dargestellt und beendet die gesamte Aktivität."
+          }
+        ];
+        const sc = scenarios[Math.floor(Math.random() * scenarios.length)];
+        return {
+          topic: "uml_activity",
+          badge: "🔀 Aktivitätsdiagramm",
+          isText: true,
+          title: "UML-Aktivitätsdiagramm: Ablauf- & Prozessmodellierung",
+          question: sc.q,
+          unit: sc.unit,
+          expected: sc.expected,
+          altExpected: sc.alts,
+          hint: sc.hint,
+          explanation: sc.expl
+        };
+      },
+
+      // 49. UML: ZUSTANDSDIAGRAMM (Trigger, Guard, Action, Entry, Do, Exit)
+      uml_state: function() {
+        const scenarios = [
+          {
+            q: "In welcher normgerechten UML-Reihenfolge werden die drei Bestandteile einer Transitionsbeschriftung notiert?<br><em>Format: Auslöser [Bedingung] / Wirkung</em>",
+            unit: "Syntax (z. B. Trigger [Guard] / Action)",
+            expected: "Trigger [Guard] / Action",
+            alts: ["TRIGGER [GUARD] / ACTION", "EREIGNIS [GUARD] / ACTION", "EREIGNIS [BEDINGUNG] / AKTION", "TRIGGER [GUARD] / WIRKUNG", "TRIGGER[GUARD]/ACTION"],
+            hint: "Trigger [Guard] / Action (bzw. Ereignis [Bedingung] / Aktion)",
+            expl: "Standard-Syntax für UML-Transitionen: <strong>Trigger [Guard] / Action</strong> (Ereignis [Bedingung] / Aktion)."
+          },
+          {
+            q: "Welches Schlüsselwort leitet in einem Zustand eine kontinuierliche Daueraktivität ein, die während des Verweilens ausgeführt wird?",
+            unit: "Schlüsselwort (z. B. do, entry, exit...)",
+            expected: "do",
+            alts: ["DO", "DO/", "DO /"],
+            hint: "'entry' = beim Eintreten, 'do' = währenddessen, 'exit' = beim Verlassen.",
+            expl: "<strong>do /</strong> kennzeichnet eine unterbrechbare Daueraktivität während des Zustands."
+          },
+          {
+            q: "Welches Schlüsselwort führt eine Aktion genau einmal unmittelbar beim <strong>Betreten</strong> eines Zustands aus?",
+            unit: "Schlüsselwort (z. B. entry...)",
+            expected: "entry",
+            alts: ["ENTRY", "ENTRY/", "ENTRY /"],
+            hint: "entry /",
+            expl: "<strong>entry /</strong> führt die Initialisierungsaktion beim Betreten des Zustands aus."
+          },
+          {
+            q: "Welche Klammern umschließen im Zustandsdiagramm die Wächterbedingung (Guard), die wahr sein muss, damit die Transition feuert?",
+            unit: "Klammerart (z. B. eckige Klammern [ ]...)",
+            expected: "eckige Klammern",
+            alts: ["ECKIGE KLAMMERN", "[ ]", "[]", "ECKLAMMERN", "ECKIGE"],
+            hint: "[Guard]",
+            expl: "Wächterbedingungen (Guards) stehen ausnahmslos in <strong>eckigen Klammern [ ]</strong>."
+          },
+          {
+            q: "Welche grafische Form repräsentiert einen einfachen Zustand im UML-Zustandsdiagramm?",
+            unit: "Symbolform (z. B. abgerundetes Rechteck...)",
+            expected: "abgerundetes Rechteck",
+            alts: ["ABGERUNDETES RECHTECK", "RECHTECK MIT RUNDEN ECKEN", "ABGERUNDET", "RECHTECK"],
+            hint: "Rechteck mit abgerundeten Ecken.",
+            expl: "Zustände werden als <strong>abgerundete Rechtecke</strong> dargestellt, optional zweigeteilt mit Zustandsname oben und internen Aktivitäten unten."
+          }
+        ];
+        const sc = scenarios[Math.floor(Math.random() * scenarios.length)];
+        return {
+          topic: "uml_state",
+          badge: "🔄 Zustandsdiagramm",
+          isText: true,
+          title: "UML-Zustandsdiagramm: State Machine & Transitionen",
+          question: sc.q,
+          unit: sc.unit,
+          expected: sc.expected,
+          altExpected: sc.alts,
+          hint: sc.hint,
+          explanation: sc.expl
+        };
+      },
+
+      // 50. UML: SEQUENZDIAGRAMM (Synchron, Asynchron, Return, Fragmente)
+      uml_sequence: function() {
+        const scenarios = [
+          {
+            q: "Mit welcher Pfeilart wird ein <strong>synchroner Methodenaufruf</strong> (Aufrufer wartet/blockiert bis Antwort) im Sequenzdiagramm dargestellt?",
+            unit: "Pfeilart (z. B. gefüllter Pfeil...)",
+            expected: "gefüllter Pfeil",
+            alts: ["GEFÜLLTER PFEIL", "GEFUELLTER PFEIL", "GEFÜLLTE PFEILSPITZE", "DURCHGEZOGEN MIT DREIECK", "SOLID", "SCHWARZER PFEIL"],
+            hint: "Durchgezogene Linie mit gefülltem schwarzem Dreieck / Pfeilkopf.",
+            expl: "Ein <strong>synchroner Aufruf</strong> wird mit einer durchgezogenen Linie und <strong>gefüllter Dreieckspfeilspitze (▶)</strong> gezeichnet."
+          },
+          {
+            q: "Mit welcher Pfeilart wird eine <strong>asynchrone Nachricht</strong> (Aufrufer arbeitet sofort weiter) dargestellt?",
+            unit: "Pfeilart (z. B. offener Pfeil...)",
+            expected: "offener Pfeil",
+            alts: ["OFFENER PFEIL", "OFFENE PFEILSPITZE", "DURCHGEZOGEN MIT OFFENEM PFEIL", "OPEN ARROW", "LINIENPFEIL"],
+            hint: "Durchgezogene Linie mit offener Pfeilspitze (→).",
+            expl: "Eine <strong>asynchrone Nachricht</strong> verwendet eine durchgezogene Linie mit einer <strong>offenen Pfeilspitze (→)</strong>."
+          },
+          {
+            q: "Mit welchem Linientyp wird die <strong>Antwort- / Rückgabenachricht (Return)</strong> im Sequenzdiagramm gezeichnet?",
+            unit: "Linientyp (z. B. gestrichelt...)",
+            expected: "gestrichelt",
+            alts: ["GESTRICHELT", "GESTRICHELTE LINIE", "DASHED", "GESTRICHELTER PFEIL"],
+            hint: "Gestrichelte Linie mit offener Pfeilspitze (<--).",
+            expl: "Rückgabenachrichten (Return) werden als <strong>gestrichelte Linie</strong> mit offener Pfeilspitze zurück zum Aufrufer gezeichnet."
+          },
+          {
+            q: "Welches kombinierte Fragment wird für eine Fallunterscheidung mit mehreren Alternativen (If-Else) verwendet?",
+            unit: "Fragment-Operator (z. B. alt, opt, loop...)",
+            expected: "alt",
+            alts: ["ALT", "ALTERNATIVE"],
+            hint: "'alt' (Alternative mit gestrichelter Trennlinie zwischen den Zweigen).",
+            expl: "Der Fragment-Operator <strong>alt</strong> (Alternative) modelliert If-Else-Entscheidungen mit getrennten Operanden-Bereichen."
+          },
+          {
+            q: "Welches kombinierte Fragment wird für eine optionale Ausführung (einfaches If ohne Else-Zweig) verwendet?",
+            unit: "Fragment-Operator (z. B. opt...)",
+            expected: "opt",
+            alts: ["OPT", "OPTIONAL"],
+            hint: "'opt' (Optional).",
+            expl: "Der Fragment-Operator <strong>opt</strong> (Optional) wird ausgeführt, wenn die Bedingung zutrifft; andernfalls wird der Block übersprungen."
+          },
+          {
+            q: "Wie heißt der vertikale schmale Balken auf der Lebenslinie, der die Dauer der Ausführung einer Operation repräsentiert?",
+            unit: "Fachbegriff (z. B. Aktivierungsbalken...)",
+            expected: "Aktivierungsbalken",
+            alts: ["AKTIVIERUNGSBALKEN", "ACTIVATION BAR", "FOKUS DER STEUERUNG", "AUSFÜHRUNGSFOKUS", "ACTIVATION"],
+            hint: "Aktivierungsbalken (Activation Bar / Fokus der Steuerung).",
+            expl: "Der <strong>Aktivierungsbalken</strong> zeigt visuell an, welches Objekt zu welchem Zeitpunkt aktiv Code ausführt."
+          }
+        ];
+        const sc = scenarios[Math.floor(Math.random() * scenarios.length)];
+        return {
+          topic: "uml_sequence",
+          badge: "⚡ Sequenzdiagramm",
+          isText: true,
+          title: "UML-Sequenzdiagramm: Interaktionsmodellierung",
+          question: sc.q,
+          unit: sc.unit,
+          expected: sc.expected,
+          altExpected: sc.alts,
+          hint: sc.hint,
+          explanation: sc.expl
         };
       }
     };

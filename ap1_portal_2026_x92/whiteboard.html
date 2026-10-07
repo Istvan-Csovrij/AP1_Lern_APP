@@ -572,6 +572,21 @@
             max-width: 860px;
             height: 82vh;
         }
+        .exercise-tab-btn.active {
+            background: #0284c7 !important;
+            color: #ffffff !important;
+            border-color: #0284c7 !important;
+            font-weight: 700;
+        }
+        .exercise-svg-container {
+            max-width: 100%;
+            overflow-x: auto;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            background: #f8fafc;
+            padding: 0.5rem;
+            margin-top: 0.75rem;
+        }
         .modal-overlay.active .modal-box {
             transform: scale(1);
         }
@@ -840,7 +855,10 @@
 
             <div class="separator" style="height: 22px;"></div>
 
-            <!-- Cheatsheet & Export -->
+            <!-- Exercises, Cheatsheet & Export -->
+            <button class="btn" id="uml-exercises-btn" title="IHK-UML-Aufgaben &amp; Musterlösungen öffnen" style="border: 2px solid #0284c7; background: #f0f9ff; color: #0284c7; font-weight: 700;">
+                <i class="fa-solid fa-graduation-cap" style="color: #0284c7;"></i> <span class="btn-label">IHK-Übungen</span>
+            </button>
             <button class="btn" id="cheatsheet-toggle-btn" title="Prüfungs-Notationen, Symbole &amp; Stempel einblenden">
                 <i class="fa-solid fa-book-open" style="color: #8b5cf6;"></i> <span class="btn-label">Vorlagen</span>
             </button>
@@ -983,6 +1001,8 @@
                         <button class="stamp-btn" onclick="stampTemplate('bpmn_gateway')">🔷 BPMN XOR Gateway</button>
                         <button class="stamp-btn" onclick="stampTemplate('bpmn_pool')">🏊 BPMN Pool &amp; 2 Lanes</button>
                         <button class="stamp-btn" onclick="stampTemplate('uml_activity')">⚡ UML-Aktivität (Fork/Join)</button>
+                        <button class="stamp-btn" onclick="stampTemplate('uml_sequence')">⚡ UML-Sequenz (Lifelines)</button>
+                        <button class="stamp-btn" onclick="stampTemplate('uml_state')">🔄 UML-Zustand (State Machine)</button>
                         <button class="stamp-btn" onclick="stampTemplate('epk_chain')">🔄 EPK Ereignis-Funktion</button>
                     </div>
                 </div>
@@ -1008,6 +1028,43 @@
                         <li><strong>Vererbung:</strong> Durchgezogene Linie mit <em>geschlossenem, weißem Dreieck</em> zur Superklasse.</li>
                         <li><strong>Komposition:</strong> <em>Ausgefüllte schwarze Raute</em> beim Ganzen (strenge Existenzabhängigkeit, z.B. Bestellung ↔ Positionen).</li>
                         <li><strong>Aggregation:</strong> <em>Hohle weiße Raute</em> (schwächere "hat-ein"-Beziehung).</li>
+                    </ul>
+                </div>
+
+                <!-- UML Sequenzdiagramm Guide -->
+                <div class="cheat-card">
+                    <h4><span>⚡ UML Sequenzdiagramm</span> <span class="cheat-badge">LF 5 / AP1</span></h4>
+                    <ul style="padding-left: 1.1rem; font-size: 0.8rem;">
+                        <li><strong>Lebenslinie:</strong> Gestrichelte vertikale Linie ab Kopf-Rechteck <code>:Instanz</code>.</li>
+                        <li><strong>Synchroner Aufruf:</strong> Durchgezogene Linie mit <em>gefülltem Dreieckspfeil</em> (▶). Sender blockiert.</li>
+                        <li><strong>Asynchroner Aufruf:</strong> Durchgezogene Linie mit <em>offener Pfeilspitze</em> (→). Sender arbeitet weiter.</li>
+                        <li><strong>Antwort / Return:</strong> Gestrichelte Linie mit offener Pfeilspitze (<code>&lt;--</code>).</li>
+                        <li><strong>Aktivierungsbalken:</strong> Schmaler Kasten auf Lebenslinie (Fokus der Steuerung).</li>
+                        <li><strong>Fragmente:</strong> <code>alt</code> (If-Else Alternative), <code>opt</code> (Option/If), <code>loop</code> (Schleife), <code>par</code> (Parallel).</li>
+                    </ul>
+                </div>
+
+                <!-- UML Zustandsdiagramm Guide -->
+                <div class="cheat-card">
+                    <h4><span>🔄 UML Zustandsdiagramm</span> <span class="cheat-badge">LF 5 / AP1</span></h4>
+                    <ul style="padding-left: 1.1rem; font-size: 0.8rem;">
+                        <li><strong>Zustand:</strong> Abgerundetes Rechteck mit Zustandsname.</li>
+                        <li><strong>Start- &amp; Endzustand:</strong> Start: Vollkreis (●), End: Doppelkreis mit Kern (⦿).</li>
+                        <li><strong>Transitionssyntax:</strong> <code>Trigger [Guard] / Action</code> (Ereignis [Bedingung] / Wirkung).</li>
+                        <li><strong>Interne Aktionen:</strong> <code>entry /</code> (beim Betreten), <code>do /</code> (Daueraktion), <code>exit /</code> (beim Verlassen).</li>
+                    </ul>
+                </div>
+
+                <!-- UML Aktivitätsdiagramm Guide -->
+                <div class="cheat-card">
+                    <h4><span>⚡ UML-Aktivitätsdiagramm</span> <span class="cheat-badge">LF 5 / AP1</span></h4>
+                    <ul style="padding-left: 1.1rem; font-size: 0.8rem;">
+                        <li><strong>Startknoten:</strong> Ausgefüllter schwarzer Kreis (●).</li>
+                        <li><strong>Aktion:</strong> Abgerundetes Rechteck (z. B. <em>"Pin prüfen"</em>).</li>
+                        <li><strong>Decision / Merge:</strong> Raute (◇) mit Guards in eckigen Klammern: <code>[Bedingung]</code>.</li>
+                        <li><strong>Fork / Join:</strong> Dicker schwarzer Balken (Parallelisierung &amp; Synchronisation).</li>
+                        <li><strong>Swimlanes:</strong> Partitionen zur Zuweisung an Rollen / Abteilungen.</li>
+                        <li><strong>Endknoten:</strong> Kreis mit ausgefülltem Kern (⦿).</li>
                     </ul>
                 </div>
 
@@ -1220,6 +1277,42 @@
         </div>
     </div>
 
+    <!-- 4. IHK UML Exercises & Solutions Modal -->
+    <div class="modal-overlay" id="uml-exercises-modal">
+        <div class="modal-box modal-box-large" style="height: 86vh;">
+            <div class="modal-header">
+                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                    <h3><i class="fa-solid fa-graduation-cap" style="color: #0284c7;"></i> IHK Prüfungs-Aufgaben &amp; Lösungen: Die 5 Diagramme</h3>
+                    <span class="badge" style="background: #e0f2fe; color: #0369a1; font-weight: 700;">AP1 Modellierung</span>
+                </div>
+                <button class="modal-close-btn" id="close-exercises-modal-btn">&times;</button>
+            </div>
+            <div class="modal-toolbar" style="gap: 0.4rem; flex-wrap: wrap;">
+                <button class="btn btn-sm exercise-tab-btn active" data-diag="class" onclick="switchExerciseTab('class')">🏛️ Klassendiagramm</button>
+                <button class="btn btn-sm exercise-tab-btn" data-diag="usecase" onclick="switchExerciseTab('usecase')">🎯 Use-Case</button>
+                <button class="btn btn-sm exercise-tab-btn" data-diag="activity" onclick="switchExerciseTab('activity')">🔀 Aktivitätsdiagramm</button>
+                <button class="btn btn-sm exercise-tab-btn" data-diag="state" onclick="switchExerciseTab('state')">🔄 Zustandsdiagramm</button>
+                <button class="btn btn-sm exercise-tab-btn" data-diag="sequence" onclick="switchExerciseTab('sequence')">⚡ Sequenzdiagramm</button>
+            </div>
+            <div class="modal-body" id="exercise-content-container" style="padding: 1.25rem; overflow-y: auto;">
+                <!-- Content is rendered via JS -->
+            </div>
+            <div class="modal-footer" style="justify-content: space-between; flex-wrap: wrap; gap: 0.5rem;">
+                <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                    <button class="btn btn-sm" id="toggle-solution-btn" onclick="toggleExerciseSolution()" style="background: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0; font-weight: 700;">
+                        <i class="fa-solid fa-eye"></i> Musterlösung (SVG) anzeigen
+                    </button>
+                    <button class="btn btn-sm" onclick="stampCurrentExerciseStencil()" style="background: #faf5ff; color: #6d28d9; border: 1px solid #ddd6fe; font-weight: 600;">
+                        <i class="fa-solid fa-stamp"></i> Passenden Stempel einfügen
+                    </button>
+                </div>
+                <button class="btn btn-primary" id="close-exercises-bottom-btn" onclick="closeUmlExercisesModal()">Schließen &amp; Zeichnen</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- External Visual Diagram Generator Library for Solutions -->
+    <script src="diagrams.js?v=110"></script>
     <script>
         // ====================================================================
         // AP1 Object-Oriented Whiteboard Engine (Vektorbasiert & Bewegbar)
@@ -1354,6 +1447,8 @@
                 if (el.stencilType === 'bpmn_gateway') return { x: el.x - 50, y: el.y - 50, w: 100, h: 110 };
                 if (el.stencilType === 'bpmn_pool') return { x: el.x - 140, y: el.y - 80, w: 280, h: 160 };
                 if (el.stencilType === 'uml_activity') return { x: el.x - 70, y: el.y - 70, w: 140, h: 235 };
+                if (el.stencilType === 'uml_sequence') return { x: el.x - 130, y: el.y - 90, w: 260, h: 190 };
+                if (el.stencilType === 'uml_state') return { x: el.x - 120, y: el.y - 75, w: 270, h: 150 };
                 if (el.stencilType === 'epk_chain') return { x: el.x - 165, y: el.y - 25, w: 245, h: 50 };
                 return { x: el.x - 50, y: el.y - 50, w: 100, h: 100 };
             }
@@ -1741,6 +1836,114 @@
                 targetCtx.stroke();
                 targetCtx.beginPath();
                 targetCtx.arc(ax, ay + 150, 7, 0, Math.PI * 2);
+                targetCtx.fill();
+            } else if (el.stencilType === "uml_sequence") {
+                const x1 = cx - 80, x2 = cx, x3 = cx + 80;
+                const topY = cy - 75, bottomY = cy + 85;
+
+                // 3 Lifeline Header boxes
+                renderElement(targetCtx, { type: 'rect', x: x1 - 32, y: topY, w: 64, h: 26, color: '#2563eb', size: 1.5 });
+                renderElement(targetCtx, { type: 'rect', x: x2 - 32, y: topY, w: 64, h: 26, color: '#0284c7', size: 1.5 });
+                renderElement(targetCtx, { type: 'rect', x: x3 - 32, y: topY, w: 64, h: 26, color: '#0f766e', size: 1.5 });
+
+                targetCtx.font = "bold 10px sans-serif";
+                targetCtx.fillStyle = "#2563eb";
+                targetCtx.fillText(":User", x1 - 14, topY + 17);
+                targetCtx.fillStyle = "#0284c7";
+                targetCtx.fillText(":API", x2 - 12, topY + 17);
+                targetCtx.fillStyle = "#0f766e";
+                targetCtx.fillText(":DB", x3 - 10, topY + 17);
+
+                // Dashed Lifelines
+                targetCtx.save();
+                targetCtx.setLineDash([4, 4]);
+                targetCtx.strokeStyle = "#94a3b8";
+                targetCtx.lineWidth = 1.5;
+                targetCtx.beginPath();
+                targetCtx.moveTo(x1, topY + 26); targetCtx.lineTo(x1, bottomY);
+                targetCtx.moveTo(x2, topY + 26); targetCtx.lineTo(x2, bottomY);
+                targetCtx.moveTo(x3, topY + 26); targetCtx.lineTo(x3, bottomY);
+                targetCtx.stroke();
+                targetCtx.restore();
+
+                // Activation Bars
+                targetCtx.fillStyle = "#ffffff";
+                targetCtx.strokeStyle = "#1e293b";
+                targetCtx.lineWidth = 1.5;
+                targetCtx.fillRect(x1 - 5, cy - 35, 10, 95); targetCtx.strokeRect(x1 - 5, cy - 35, 10, 95);
+                targetCtx.fillRect(x2 - 5, cy - 30, 10, 75); targetCtx.strokeRect(x2 - 5, cy - 30, 10, 75);
+                targetCtx.fillRect(x3 - 5, cy - 10, 10, 35); targetCtx.strokeRect(x3 - 5, cy - 10, 10, 35);
+
+                // Synchronous Call: User -> API: login()
+                renderElement(targetCtx, { type: 'arrow', x1: x1 + 5, y1: cy - 25, x2: x2 - 5, y2: cy - 25, color: '#1e293b', size: 2 });
+                targetCtx.font = "9px sans-serif";
+                targetCtx.fillStyle = "#0f172a";
+                targetCtx.fillText("1: login(usr, pwd)", x1 + 10, cy - 30);
+
+                // Synchronous Call: API -> DB: verify()
+                renderElement(targetCtx, { type: 'arrow', x1: x2 + 5, y1: cy - 5, x2: x3 - 5, y2: cy - 5, color: '#1e293b', size: 2 });
+                targetCtx.fillText("2: verify()", x2 + 10, cy - 10);
+
+                // Return: DB --> API (gestrichelt)
+                renderElement(targetCtx, { type: 'dasharrow', x1: x3 - 5, y1: cy + 20, x2: x2 + 5, y2: cy + 20, color: '#64748b', size: 1.5 });
+                targetCtx.fillStyle = "#64748b";
+                targetCtx.fillText("3: true", x2 + 15, cy + 15);
+
+                // Return: API --> User (gestrichelt)
+                renderElement(targetCtx, { type: 'dasharrow', x1: x2 - 5, y1: cy + 45, x2: x1 + 5, y2: cy + 45, color: '#16a34a', size: 1.5 });
+                targetCtx.fillStyle = "#16a34a";
+                targetCtx.fillText("4: 200 OK (Token)", x1 + 10, cy + 40);
+            } else if (el.stencilType === "uml_state") {
+                const sx = cx - 100, sy = cy;
+                
+                // Start Node (●)
+                targetCtx.beginPath();
+                targetCtx.arc(sx, sy, 8, 0, Math.PI * 2);
+                targetCtx.fillStyle = "#0f172a";
+                targetCtx.fill();
+
+                // Arrow to State 1
+                renderElement(targetCtx, { type: 'arrow', x1: sx + 8, y1: sy, x2: cx - 60, y2: sy, color: '#1e293b', size: 2 });
+
+                // State 1: Neu
+                const s1w = 65, s1h = 42;
+                renderElement(targetCtx, { type: 'roundrect', x: cx - 60, y: sy - s1h / 2, w: s1w, h: s1h, color: '#0284c7', size: 2 });
+                targetCtx.font = "bold 10px sans-serif";
+                targetCtx.fillStyle = "#0284c7";
+                targetCtx.fillText("Neu", cx - 48, sy - 6);
+                targetCtx.font = "8px monospace";
+                targetCtx.fillStyle = "#64748b";
+                targetCtx.fillText("entry/ log()", cx - 56, sy + 10);
+
+                // Transition with Guard & Action: s1 -> s2
+                renderElement(targetCtx, { type: 'arrow', x1: cx + 5, y1: sy, x2: cx + 45, y2: sy, color: '#1e293b', size: 2 });
+                targetCtx.font = "8px sans-serif";
+                targetCtx.fillStyle = "#b45309";
+                targetCtx.fillText("start [ok] / notify", cx - 30, sy - 26);
+
+                // State 2: Aktiv
+                const s2w = 65, s2h = 42;
+                renderElement(targetCtx, { type: 'roundrect', x: cx + 45, y: sy - s2h / 2, w: s2w, h: s2h, color: '#16a34a', size: 2 });
+                targetCtx.font = "bold 10px sans-serif";
+                targetCtx.fillStyle = "#16a34a";
+                targetCtx.fillText("Aktiv", cx + 60, sy - 6);
+                targetCtx.font = "8px monospace";
+                targetCtx.fillStyle = "#64748b";
+                targetCtx.fillText("do/ process()", cx + 49, sy + 10);
+
+                // Arrow to End Node
+                renderElement(targetCtx, { type: 'arrow', x1: cx + 110, y1: sy, x2: cx + 130, y2: sy, color: '#1e293b', size: 2 });
+
+                // End Node (⦿)
+                const ex = cx + 140, ey = sy;
+                targetCtx.beginPath();
+                targetCtx.arc(ex, ey, 10, 0, Math.PI * 2);
+                targetCtx.strokeStyle = "#0f172a";
+                targetCtx.lineWidth = 2;
+                targetCtx.stroke();
+                targetCtx.beginPath();
+                targetCtx.arc(ex, ey, 5, 0, Math.PI * 2);
+                targetCtx.fillStyle = "#0f172a";
                 targetCtx.fill();
             } else if (el.stencilType === "epk_chain") {
                 const ex = cx - 120, ey = cy;
@@ -3253,12 +3456,189 @@
         function showToast(msg) {
             const toast = document.getElementById("toast");
             const toastText = document.getElementById("toast-text");
-            toastText.innerText = msg;
-            toast.classList.add("show");
-            setTimeout(() => {
-                toast.classList.remove("show");
-            }, 2500);
+            if (toast && toastText) {
+                toastText.innerText = msg;
+                toast.classList.add("show");
+                setTimeout(() => {
+                    toast.classList.remove("show");
+                }, 2500);
+            }
         }
+
+        // ====================================================================
+        // IHK UML Exercises & Solutions Engine
+        // ====================================================================
+        const UML_EXERCISES = {
+            class: {
+                title: "1. UML-Klassendiagramm: Bibliotheksverwaltung & Medienkatalog",
+                badge: "LF 8 / AP1",
+                scenario: "Eine Stadtbibliothek modernisiert ihre Software zur Erfassung von Medien, Kunden und Ausleihvorgängen.",
+                tasks: [
+                    "Modellieren Sie die Oberklasse <code>Medium</code> mit Attributen <code>- titel: String</code>, <code>- inventarNr: int</code>, <code>- istAusgeliehen: boolean</code> und Methoden <code>+ ausleihen(): boolean</code>, <code>+ zurueckgeben(): void</code>.",
+                    "Modellieren Sie die abgeleiteten Klassen <code>Buch</code> (<code>- isbn: String</code>, <code>- seiten: int</code>) und <code>DVD</code> (<code>- spieldauerMin: int</code>, <code>- fsk: int</code>), die per Generalisierung (durchgezogene Linie mit weißer Dreiecksspitze) von <code>Medium</code> erben.",
+                    "Erstellen Sie die Klasse <code>Kunde</code> (<code>- kundenNr: int</code>, <code>- name: String</code>) sowie die Verbindungsklasse <code>Ausleihe</code> (<code>- leihDatum: Date</code>, <code>- rueckgabeFrist: Date</code>).",
+                    "Tragen Sie die Multiplizitäten ein: Ein <code>Kunde</code> tätigt <code>0..*</code> Ausleihen; jede <code>Ausleihe</code> bezieht sich auf genau <code>1</code> Medium."
+                ],
+                keyRules: "Generalisierung = Durchgezogene Linie mit geschlossener weißer Dreiecksspitze. Komposition = Schwarze Raute (Existenzabhängigkeit). Sichtbarkeiten: '+' public, '-' private, '#' protected.",
+                stencil: "uml_class",
+                getSvg: () => (typeof VisualDiagrams !== "undefined" && VisualDiagrams.getClassDiagramSvg) ? VisualDiagrams.getClassDiagramSvg() : ""
+            },
+            usecase: {
+                title: "2. UML-Use-Case-Diagramm: Smart-Home Zutritts- & Alarmsystem",
+                badge: "LF 7 / AP1",
+                scenario: "Ein vernetztes Gebäude besitzt digitale Zutrittskontrolle, Alarmsensoren und Anbindung an einen Sicherheitsdienst.",
+                tasks: [
+                    "Zeichnen Sie ein Systemgrenzen-Rechteck mit der Beschriftung 'Smart-Home Sicherheitssystem'.",
+                    "Platzieren Sie den primären Akteur 'Bewohner' links außerhalb des Systems und die 'Sicherheitsleitstelle' rechts außerhalb des Systems. Modellieren Sie 'Rauch- & Bewegungssensoren' als externen Hardware-Akteur.",
+                    "Modellieren Sie Use-Cases als Ellipsen: 'PIN eingeben', 'PIN verifizieren', 'Alarmanlage scharf schalten', 'Einbruchsalarm melden'.",
+                    "Modellieren Sie die zwingende Beziehung: 'PIN eingeben' bindet stets 'PIN verifizieren' ein (<code>&lt;&lt;include&gt;&gt;</code>; Pfeil zeigt auf 'PIN verifizieren').",
+                    "Modellieren Sie die optionale Erweiterung: Nach 3 Fehlversuchen wird 'Notfallsperre aktivieren' aufgerufen (<code>&lt;&lt;extend&gt;&gt;</code>; Pfeil zeigt ZURÜCK auf 'PIN eingeben')."
+                ],
+                keyRules: "<<include>>: Zwingend erforderlich; Pfeil zeigt auf Unter-Use-Case. <<extend>>: Optional bei Bedingung; Pfeil zeigt ZURÜCK auf Basis-Use-Case!",
+                stencil: "actor_usecase",
+                getSvg: () => (typeof VisualDiagrams !== "undefined" && VisualDiagrams.getUseCaseDiagramSvg) ? VisualDiagrams.getUseCaseDiagramSvg("Smart-Home Alarmsystem") : ""
+            },
+            activity: {
+                title: "3. UML-Aktivitätsdiagramm: E-Commerce Retourenabwicklung & Parallelisierung",
+                badge: "LF 5 / AP1",
+                scenario: "Ein Onlinehändler wickelt Retouren ab. Der Prozess erfordert das Zusammenspiel von Kunde, Logistiklager und Buchhaltung.",
+                tasks: [
+                    "Erstellen Sie 3 Swimlanes (Partitionen): 'Kunde', 'Lager / Wareneingang' und 'Finanzbuchhaltung'.",
+                    "Setzen Sie den Startknoten (●) beim Kunden. Der Kunde meldet eine Retoure an und sendet das Paket ab.",
+                    "Im Lager wird die Ware geprüft. Nutzen Sie eine Decision-Raute: [Ware intakt] vs. [Ware beschädigt].",
+                    "Bei beschädigter Ware: Ablehnungsbescheid an Kunden senden und Prozess mit Ablaufendknoten (⊗) beenden.",
+                    "Bei intakter Ware: Setzen Sie einen Fork-Balken (Synchronisationsbalken). Verzweigen Sie parallel in: a) 'Artikel ins Lager buchen' (Lager) und b) 'Rückerstattung anweisen' (Buchhaltung).",
+                    "Führen Sie beide Pfade in einem Join-Balken zusammen, versenden Sie eine Abschluss-E-Mail und beenden Sie mit dem Aktivitätsendknoten (⦿)."
+                ],
+                keyRules: "Raute = Entweder-Oder Verzweigung (Decision Node). Dicker Balken = Nebenläufigkeit (Fork / Join). Swimlanes ordnen Verantwortungen zu.",
+                stencil: "uml_activity",
+                getSvg: () => (typeof VisualDiagrams !== "undefined" && VisualDiagrams.getUmlAktivitaetsdiagrammSvg) ? VisualDiagrams.getUmlAktivitaetsdiagrammSvg() : ""
+            },
+            state: {
+                title: "4. UML-Zustandsdiagramm: ITIL Incident Support-Ticket Lifecycle",
+                badge: "LF 5 / AP1",
+                scenario: "Ein IT-Service-Desk überwacht Störungsmeldungen. Tickets durchlaufen definierte Zustände mit SLA-Zeitüberwachung.",
+                tasks: [
+                    "Modellieren Sie den Startknoten (●) und den ersten Zustand 'Neu'. Fügen Sie die interne Aktion <code>entry / ticketIdVergeben()</code> ein.",
+                    "Modellieren Sie die Transition zum Zustand 'In Bearbeitung': <code>zuweisen(agent) [SLA_aktiv] / timerStarten()</code>.",
+                    "Modellieren Sie den Übergang zu 'Warten auf Kunde' mit <code>rueckfrageStellen() / slaPausieren()</code> und die Rück-Transition mit <code>antwortErhalten() / slaFortsetzen()</code>.",
+                    "Modellieren Sie den Übergang zu 'Gelöst' mit <code>loesungBestaetigen() / kundenBenachrichtigen()</code>.",
+                    "Modellieren Sie einen Timeout: Bleibt das Ticket 14 Tage lang im Zustand 'Gelöst', wechselt es über <code>timeout [14 Tage verstrichen] / archivieren()</code> in den Endzustand 'Geschlossen' (⦿)."
+                ],
+                keyRules: "UML-Syntax: Trigger [Guard] / Action. Interne Aktionen: 'entry /' (Eintritt), 'do /' (Daueraktivität), 'exit /' (Verlassen).",
+                stencil: "uml_state",
+                getSvg: () => (typeof VisualDiagrams !== "undefined" && VisualDiagrams.getZustandsdiagrammSvg) ? VisualDiagrams.getZustandsdiagrammSvg() : ""
+            },
+            sequence: {
+                title: "5. UML-Sequenzdiagramm: 2FA Zwei-Faktor-Authentifizierung",
+                badge: "LF 5 / AP1",
+                scenario: "Ein Sicherheitslogin fordert nach Passworteingabe einen SMS-Sicherheitscode zur Bestätigung an.",
+                tasks: [
+                    "Modellieren Sie vier Lebenslinien: <code>:Benutzer</code>, <code>:WebFrontend</code>, <code>:AuthServer</code>, <code>:SmsGateway</code>.",
+                    "Der Benutzer ruft synchron <code>login(user, pass)</code> am Frontend auf (durchgezogene Linie, gefüllter schwarzer Pfeilkopf ▶).",
+                    "Das Frontend leitet synchron <code>checkCredentials()</code> an den AuthServer weiter.",
+                    "Der AuthServer generiert einen OTP-Code und sendet eine asynchrone Nachricht <code>sendSms(phone, otp)</code> an das SmsGateway (durchgezogene Linie, offene Pfeilspitze →).",
+                    "Der Benutzer gibt den Code ein: synchroner Aufruf <code>verifyOtp(code)</code> -> AuthServer liefert über eine gestrichelte Return-Linie (<code>&lt;--</code>) das Session-Token zurück."
+                ],
+                keyRules: "Synchroner Aufruf = Gefüllte Pfeilspitze (▶). Asynchrone Nachricht = Offene Pfeilspitze (→). Antwort/Return = Gestrichelte Linie (<--). Aktivierungsbalken = Fokus der Steuerung.",
+                stencil: "uml_sequence",
+                getSvg: () => (typeof VisualDiagrams !== "undefined" && VisualDiagrams.getSequenzdiagrammSvg) ? VisualDiagrams.getSequenzdiagrammSvg() : ""
+            }
+        };
+
+        let currentExerciseTab = 'class';
+        let isSolutionVisible = false;
+
+        function openUmlExercisesModal() {
+            document.getElementById("uml-exercises-modal").classList.add("active");
+            renderExerciseContent();
+        }
+
+        function closeUmlExercisesModal() {
+            document.getElementById("uml-exercises-modal").classList.remove("active");
+        }
+
+        function switchExerciseTab(tab) {
+            currentExerciseTab = tab;
+            isSolutionVisible = false;
+            document.querySelectorAll(".exercise-tab-btn").forEach(btn => {
+                if (btn.getAttribute("data-diag") === tab) {
+                    btn.classList.add("active");
+                } else {
+                    btn.classList.remove("active");
+                }
+            });
+            renderExerciseContent();
+        }
+
+        function toggleExerciseSolution() {
+            isSolutionVisible = !isSolutionVisible;
+            renderExerciseContent();
+        }
+
+        function stampCurrentExerciseStencil() {
+            const ex = UML_EXERCISES[currentExerciseTab];
+            if (ex && ex.stencil) {
+                closeUmlExercisesModal();
+                stampTemplate(ex.stencil);
+            }
+        }
+
+        function renderExerciseContent() {
+            const ex = UML_EXERCISES[currentExerciseTab];
+            if (!ex) return;
+            const container = document.getElementById("exercise-content-container");
+            const toggleBtn = document.getElementById("toggle-solution-btn");
+            if (toggleBtn) {
+                toggleBtn.innerHTML = isSolutionVisible 
+                    ? `<i class="fa-solid fa-eye-slash"></i> Musterlösung ausblenden` 
+                    : `<i class="fa-solid fa-eye"></i> Musterlösung (SVG) anzeigen`;
+            }
+
+            let html = `
+                <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1.15rem; margin-bottom: 1rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem; flex-wrap: wrap; gap: 0.35rem;">
+                        <h4 style="font-size: 1.05rem; font-weight: 700; color: #0f172a; margin: 0;">${ex.title}</h4>
+                        <span class="badge" style="background: #e2e8f0; color: #334155; font-size: 0.75rem;">${ex.badge}</span>
+                    </div>
+                    <p style="font-size: 0.88rem; color: #475569; margin-bottom: 0.75rem; line-height: 1.45;">
+                        <strong>Szenario:</strong> ${ex.scenario}
+                    </p>
+                    <div style="margin-bottom: 0.75rem;">
+                        <strong style="font-size: 0.85rem; color: #1e293b;">Aufgaben &amp; Modellierungsanforderungen:</strong>
+                        <ol style="margin-top: 0.35rem; padding-left: 1.3rem; font-size: 0.85rem; color: #334155; line-height: 1.5;">
+                            ${ex.tasks.map(t => `<li style="margin-bottom: 0.35rem;">${t}</li>`).join('')}
+                        </ol>
+                    </div>
+                    <div style="background: #eff6ff; border-left: 3px solid #3b82f6; padding: 0.5rem 0.75rem; border-radius: 4px; font-size: 0.8rem; color: #1e40af;">
+                        <i class="fa-solid fa-circle-info"></i> <strong>IHK-Prüfungsregel:</strong> ${ex.keyRules}
+                    </div>
+                </div>
+            `;
+
+            if (isSolutionVisible) {
+                const svg = ex.getSvg();
+                html += `
+                    <div class="exercise-svg-container" style="border: 2px solid #86efac; background: #f0fdf4;">
+                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem;">
+                            <strong style="color: #166534; font-size: 0.9rem;"><i class="fa-solid fa-circle-check"></i> Grafische Musterlösung (Normgerechtes Diagramm):</strong>
+                            <span style="font-size: 0.75rem; color: #15803d; font-family: monospace;">SVG-Vektoransicht</span>
+                        </div>
+                        <div style="background: white; border-radius: 6px; padding: 0.75rem; display: flex; justify-content: center; overflow-x: auto;">
+                            ${svg || '<p style="color: #64748b;">Diagramm wird geladen...</p>'}
+                        </div>
+                    </div>
+                `;
+            }
+
+            container.innerHTML = html;
+        }
+
+        // Attach modal listeners
+        const umlExercisesBtn = document.getElementById("uml-exercises-btn");
+        if (umlExercisesBtn) umlExercisesBtn.addEventListener("click", openUmlExercisesModal);
+        const closeExercisesModalBtn = document.getElementById("close-exercises-modal-btn");
+        if (closeExercisesModalBtn) closeExercisesModalBtn.addEventListener("click", closeUmlExercisesModal);
 
         // Test helpers attached to window
         window.whiteboardElements = elements;
