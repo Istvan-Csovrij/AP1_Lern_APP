@@ -5187,6 +5187,375 @@ var VisualDiagrams = {
         `;
     },
 
+    // 2i. UML-Sequenzdiagramm: Stornierungsvorgang Buchungsverwaltung (alt-Fragment, IHK Original)
+    getBuchungsverwaltungSequenzdiagrammSvg: function() {
+        return `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 640" width="100%" height="100%">
+            <defs>
+                <marker id="bv-sync-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                    <path d="M 0 1 L 10 5 L 0 9 z" fill="#0f172a" />
+                </marker>
+                <marker id="bv-ret-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                    <path d="M 0 1 L 10 5 L 0 9" fill="none" stroke="#0f172a" stroke-width="1.8" />
+                </marker>
+            </defs>
+            <rect width="880" height="640" fill="#f8fafc" rx="10" />
+            <text x="440" y="30" font-family="sans-serif" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">UML 2.5 Sequenzdiagramm: Stornierungsvorgang Buchungsverwaltung</text>
+            <text x="440" y="50" font-family="sans-serif" font-size="12" fill="#64748b" text-anchor="middle">IHK Original-Prüfungsaufgabe (mit kombiniertem alt-Fragment)</text>
+
+            <!-- Caller Actor Line (Left) -->
+            <line x1="120" y1="80" x2="120" y2="570" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="6,6" />
+            <rect x="50" y="70" width="140" height="36" fill="#f1f5f9" stroke="#475569" stroke-width="1.8" rx="6" />
+            <text x="120" y="93" font-family="sans-serif" font-size="12.5" font-weight="bold" fill="#0f172a" text-anchor="middle">:Anwender / UI</text>
+
+            <!-- :Buchungsverwaltung Lifeline -->
+            <rect x="420" y="70" width="220" height="36" fill="#e0f2fe" stroke="#0284c7" stroke-width="2" rx="6" />
+            <text x="530" y="93" font-family="Consolas, monospace" font-size="13" font-weight="bold" fill="#0369a1" text-anchor="middle">:Buchungsverwaltung</text>
+            <line x1="530" y1="106" x2="530" y2="570" stroke="#0284c7" stroke-width="1.5" stroke-dasharray="6,6" />
+
+            <!-- Activation Bar on :Buchungsverwaltung -->
+            <rect x="522" y="130" width="16" height="410" fill="#ffffff" stroke="#0f172a" stroke-width="1.8" />
+
+            <!-- 1. stornieren(Buchungsnummer) -->
+            <line x1="120" y1="135" x2="520" y2="135" stroke="#0f172a" stroke-width="1.8" marker-end="url(#bv-sync-arr)" />
+            <text x="320" y="127" font-family="Consolas, monospace" font-size="12" font-weight="bold" fill="#0f172a" text-anchor="middle">stornieren(buchungsNr)</text>
+
+            <!-- 2. Self-call: getBuchung(buchungsNr) -->
+            <path d="M 538 155 L 610 155 L 610 185 L 538 185" fill="none" stroke="#0f172a" stroke-width="1.8" marker-end="url(#bv-sync-arr)" />
+            <text x="620" y="174" font-family="Consolas, monospace" font-size="11.5" fill="#0f172a">getBuchung(buchungsNr)</text>
+
+            <!-- 3. alt Fragment Box -->
+            <g transform="translate(160, 205)">
+                <rect width="660" height="315" fill="#ffffff" fill-opacity="0.85" stroke="#0f172a" stroke-width="2" />
+                
+                <!-- alt Tag Header -->
+                <polygon points="0,0 70,0 70,22 56,28 0,28" fill="#f1f5f9" stroke="#0f172a" stroke-width="1.5" />
+                <text x="18" y="19" font-family="sans-serif" font-size="13" font-weight="bold" fill="#0f172a">alt</text>
+
+                <!-- Condition 1: [Buchung vorhanden] -->
+                <text x="85" y="24" font-family="sans-serif" font-size="12" font-weight="bold" fill="#15803d">[Buchung vorhanden]</text>
+
+                <!-- Inside alt: ermittleStornogebühr -->
+                <path d="M 378 40 L 450 40 L 450 65 L 378 65" fill="none" stroke="#0f172a" stroke-width="1.6" marker-end="url(#bv-sync-arr)" />
+                <text x="460" y="57" font-family="Consolas, monospace" font-size="11" fill="#0f172a">ermittleStornogebühr(buchung)</text>
+
+                <!-- Inside alt: erstelleRechnung -->
+                <path d="M 378 85 L 450 85 L 450 110 L 378 110" fill="none" stroke="#0f172a" stroke-width="1.6" marker-end="url(#bv-sync-arr)" />
+                <text x="460" y="102" font-family="Consolas, monospace" font-size="11" fill="#0f172a">erstelleRechnung(buchung, stornogebühr)</text>
+
+                <!-- Inside alt: löscheBuchung -->
+                <path d="M 378 130 L 450 130 L 450 155 L 378 155" fill="none" stroke="#0f172a" stroke-width="1.6" marker-end="url(#bv-sync-arr)" />
+                <text x="460" y="147" font-family="Consolas, monospace" font-size="11" fill="#0f172a">löscheBuchung(buchungsNr)</text>
+
+                <!-- Return: Meldung Buchung gelöscht -->
+                <line x1="362" y1="180" x2="-40" y2="180" stroke="#0f172a" stroke-width="1.6" stroke-dasharray="5,5" marker-end="url(#bv-ret-arr)" />
+                <text x="160" y="173" font-family="sans-serif" font-size="11.5" font-weight="bold" fill="#15803d" text-anchor="middle">Meldung: "Buchung gelöscht"</text>
+
+                <!-- Dashed Divider Line for [else] -->
+                <line x1="0" y1="210" x2="660" y2="210" stroke="#64748b" stroke-width="1.8" stroke-dasharray="6,4" />
+
+                <!-- Condition 2: [else] / [keine Buchung vorhanden] -->
+                <text x="85" y="235" font-family="sans-serif" font-size="12" font-weight="bold" fill="#dc2626">[else] (Buchung nicht vorhanden)</text>
+
+                <!-- Return in else branch: Meldung keine Buchung vorhanden -->
+                <line x1="362" y1="270" x2="-40" y2="270" stroke="#0f172a" stroke-width="1.6" stroke-dasharray="5,5" marker-end="url(#bv-ret-arr)" />
+                <text x="160" y="263" font-family="sans-serif" font-size="11.5" font-weight="bold" fill="#dc2626" text-anchor="middle">Meldung: "keine Buchung vorhanden"</text>
+            </g>
+
+            <!-- Bottom Explanation Box -->
+            <g transform="translate(60, 555)">
+                <rect width="760" height="65" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.5" rx="6" />
+                <text x="15" y="22" font-family="sans-serif" font-size="11.5" font-weight="bold" fill="#1e40af">💡 IHK-Prüfungskriterien für Sequenzdiagramme mit Bedingungen:</text>
+                <text x="15" y="42" font-family="sans-serif" font-size="11" fill="#1e3a8a">• Fragment alt (Alternative) trennt sich gegenseitig ausschließende Pfade mit gestrichelter Trennlinie.</text>
+                <text x="15" y="57" font-family="sans-serif" font-size="11" fill="#1e3a8a">• Methodenaufrufe auf derselben Klasse sind Selbstaufrufe. Antwortnachrichten sind gestrichelt.</text>
+            </g>
+        </svg>
+        `;
+    },
+
+    // 2j. UML-Sequenzdiagramm: PixelPic AG Onlineshop (create, bild, pruefung, IHK Original)
+    getPixelPicOnlineshopSequenzdiagrammSvg: function() {
+        return `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 720" width="100%" height="100%">
+            <defs>
+                <marker id="px-sync-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                    <path d="M 0 1 L 10 5 L 0 9 z" fill="#0f172a" />
+                </marker>
+                <marker id="px-ret-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                    <path d="M 0 1 L 10 5 L 0 9" fill="none" stroke="#0f172a" stroke-width="1.8" />
+                </marker>
+            </defs>
+            <rect width="960" height="720" fill="#f8fafc" rx="10" />
+            <text x="480" y="30" font-family="sans-serif" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">UML Sequenzdiagramm: PixelPic AG Onlineshop (Bestellprozess &amp; create)</text>
+            <text x="480" y="50" font-family="sans-serif" font-size="12" fill="#64748b" text-anchor="middle">IHK Original-Prüfungsaufgabe (Dynamische Objekterzeugung &amp; Selbstaufruf)</text>
+
+            <!-- Lifelines -->
+            <!-- 1. :Kunde -->
+            <rect x="60" y="70" width="120" height="36" fill="#f1f5f9" stroke="#0f172a" stroke-width="1.8" rx="6" />
+            <text x="120" y="93" font-family="Consolas, monospace" font-size="13" font-weight="bold" fill="#0f172a" text-anchor="middle">:Kunde</text>
+            <line x1="120" y1="106" x2="120" y2="640" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6,6" />
+
+            <!-- 2. :Shop -->
+            <rect x="300" y="70" width="120" height="36" fill="#e0f2fe" stroke="#0284c7" stroke-width="2" rx="6" />
+            <text x="360" y="93" font-family="Consolas, monospace" font-size="13" font-weight="bold" fill="#0369a1" text-anchor="middle">:Shop</text>
+            <line x1="360" y1="106" x2="360" y2="640" stroke="#0284c7" stroke-width="1.5" stroke-dasharray="6,6" />
+
+            <!-- 3. :Produktvorlage (dynamisch erzeugt) -->
+            <line x1="600" y1="210" x2="600" y2="640" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6,6" />
+            <rect x="530" y="195" width="140" height="36" fill="#fef3c7" stroke="#b45309" stroke-width="1.8" rx="6" />
+            <text x="600" y="218" font-family="Consolas, monospace" font-size="12" font-weight="bold" fill="#92400e" text-anchor="middle">:Produktvorlage</text>
+
+            <!-- 4. :Auftragsbestaetigung (dynamisch erzeugt) -->
+            <line x1="820" y1="520" x2="820" y2="640" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6,6" />
+            <rect x="730" y="505" width="180" height="36" fill="#dcfce7" stroke="#16a34a" stroke-width="1.8" rx="6" />
+            <text x="820" y="528" font-family="Consolas, monospace" font-size="11.5" font-weight="bold" fill="#15803d" text-anchor="middle">:Auftragsbestaetigung</text>
+
+            <!-- Activation Bars -->
+            <rect x="113" y="115" width="14" height="40" fill="#ffffff" stroke="#0f172a" stroke-width="1.5" />
+            <rect x="353" y="125" width="14" height="40" fill="#ffffff" stroke="#0f172a" stroke-width="1.5" />
+
+            <!-- 1. Zeige Startseite -->
+            <line x1="120" y1="125" x2="353" y2="125" stroke="#0f172a" stroke-width="1.8" marker-end="url(#px-sync-arr)" />
+            <text x="236" y="118" font-family="sans-serif" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle">Zeige Startseite</text>
+
+            <!-- Response: Startseite -->
+            <line x1="353" y1="150" x2="127" y2="150" stroke="#0f172a" stroke-width="1.6" stroke-dasharray="5,5" marker-end="url(#px-ret-arr)" />
+            <text x="236" y="144" font-family="sans-serif" font-size="10.5" fill="#475569" text-anchor="middle">Startseite (Foto, Poster)</text>
+
+            <!-- 2. "meine Wahl" -->
+            <rect x="113" y="170" width="14" height="40" fill="#ffffff" stroke="#0f172a" stroke-width="1.5" />
+            <rect x="353" y="175" width="14" height="385" fill="#ffffff" stroke="#0f172a" stroke-width="1.5" />
+
+            <line x1="120" y1="175" x2="353" y2="175" stroke="#0f172a" stroke-width="1.8" marker-end="url(#px-sync-arr)" />
+            <text x="236" y="168" font-family="sans-serif" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle">"meine Wahl" (Produktart)</text>
+
+            <!-- Erzeugungsnachricht: create() to :Produktvorlage header -->
+            <line x1="367" y1="212" x2="528" y2="212" stroke="#0f172a" stroke-width="1.8" stroke-dasharray="6,4" marker-end="url(#px-sync-arr)" />
+            <text x="445" y="204" font-family="Consolas, monospace" font-size="11.5" font-weight="bold" fill="#b45309" text-anchor="middle">&lt;&lt;create&gt;&gt; create()</text>
+
+            <!-- Response to Kunde: Leere Produktvorlage -->
+            <line x1="353" y1="230" x2="120" y2="230" stroke="#0f172a" stroke-width="1.6" stroke-dasharray="5,5" marker-end="url(#px-ret-arr)" />
+            <text x="236" y="224" font-family="sans-serif" font-size="10.5" fill="#475569" text-anchor="middle">Leere Produktvorlage (Upload-Aufforderung)</text>
+
+            <!-- 3. Kunde lädt Bild hoch -->
+            <line x1="120" y1="260" x2="353" y2="260" stroke="#0f172a" stroke-width="1.8" marker-end="url(#px-sync-arr)" />
+            <text x="236" y="253" font-family="sans-serif" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle">Bild (Upload)</text>
+
+            <!-- Shop übergibt Bild an Produktvorlage: bild() -->
+            <rect x="593" y="270" width="14" height="45" fill="#ffffff" stroke="#0f172a" stroke-width="1.5" />
+            <line x1="367" y1="270" x2="593" y2="270" stroke="#0f172a" stroke-width="1.8" marker-end="url(#px-sync-arr)" />
+            <text x="480" y="263" font-family="Consolas, monospace" font-size="11.5" font-weight="bold" fill="#0f172a" text-anchor="middle">bild(bildDaten)</text>
+
+            <!-- Return from Produktvorlage: "Bild eingefügt" -->
+            <line x1="593" y1="300" x2="367" y2="300" stroke="#0f172a" stroke-width="1.6" stroke-dasharray="5,5" marker-end="url(#px-ret-arr)" />
+            <text x="480" y="294" font-family="sans-serif" font-size="10.5" fill="#475569" text-anchor="middle">"Bild ist eingefügt"</text>
+
+            <!-- Response to Kunde: Fertige Produktvorlage + Adressaufforderung -->
+            <line x1="353" y1="320" x2="120" y2="320" stroke="#0f172a" stroke-width="1.6" stroke-dasharray="5,5" marker-end="url(#px-ret-arr)" />
+            <text x="236" y="314" font-family="sans-serif" font-size="10.5" fill="#475569" text-anchor="middle">Fertige Produktvorlage (Eingabeaufforderung)</text>
+
+            <!-- 4. Kunde übermittelt Kundendaten -->
+            <line x1="120" y1="350" x2="353" y2="350" stroke="#0f172a" stroke-width="1.8" marker-end="url(#px-sync-arr)" />
+            <text x="236" y="343" font-family="sans-serif" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle">Kundendaten (Adress- &amp; Zahlungsdaten)</text>
+
+            <!-- Self-call: pruefung() on Shop -->
+            <path d="M 367 365 L 435 365 L 435 395 L 367 395" fill="none" stroke="#0f172a" stroke-width="1.8" marker-end="url(#px-sync-arr)" />
+            <text x="445" y="384" font-family="Consolas, monospace" font-size="11.5" font-weight="bold" fill="#0f172a">pruefung()</text>
+
+            <!-- Return from self-call: "Daten o.k." -->
+            <line x1="367" y1="410" x2="353" y2="410" stroke="#0f172a" stroke-width="1.5" stroke-dasharray="4,4" marker-end="url(#px-ret-arr)" />
+            <text x="445" y="412" font-family="sans-serif" font-size="10.5" fill="#15803d">"Daten o. k."</text>
+
+            <!-- Shop informiert Kunden: "Zur Annahme bereit" -->
+            <line x1="353" y1="430" x2="120" y2="430" stroke="#0f172a" stroke-width="1.6" stroke-dasharray="5,5" marker-end="url(#px-ret-arr)" />
+            <text x="236" y="424" font-family="sans-serif" font-size="10.5" fill="#475569" text-anchor="middle">"Zur Annahme bereit"</text>
+
+            <!-- 5. Kunde erteilt Auftrag -->
+            <line x1="120" y1="460" x2="353" y2="460" stroke="#0f172a" stroke-width="1.8" marker-end="url(#px-sync-arr)" />
+            <text x="236" y="453" font-family="sans-serif" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle">"Auftrag" (Bestätigung)</text>
+
+            <!-- Erzeugungsnachricht: create() to :Auftragsbestaetigung -->
+            <line x1="367" y1="522" x2="728" y2="522" stroke="#0f172a" stroke-width="1.8" stroke-dasharray="6,4" marker-end="url(#px-sync-arr)" />
+            <text x="545" y="515" font-family="Consolas, monospace" font-size="11.5" font-weight="bold" fill="#15803d" text-anchor="middle">&lt;&lt;create&gt;&gt; create()</text>
+
+            <!-- Shop verschickt E-Mail an Kunden -->
+            <line x1="353" y1="550" x2="120" y2="550" stroke="#0f172a" stroke-width="1.8" stroke-dasharray="5,5" marker-end="url(#px-ret-arr)" />
+            <text x="236" y="543" font-family="sans-serif" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle">E-Mail (Auftragsbestätigung)</text>
+
+            <!-- Footer Rules -->
+            <g transform="translate(60, 650)">
+                <rect width="840" height="55" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5" rx="6" />
+                <text x="15" y="22" font-family="sans-serif" font-size="11.5" font-weight="bold" fill="#15803d">🎯 IHK-Kernregeln bei PixelPic AG (AP1):</text>
+                <text x="15" y="40" font-family="sans-serif" font-size="11" fill="#166534">1. Objekterzeugung: Der Pfeil für create() zielt direkt auf das Rechteck des neuen Objekts. 2. Antwortnachrichten: Gestrichelt mit offener Pfeilspitze.</text>
+            </g>
+        </svg>
+        `;
+    },
+
+    // 2k. EPK zu UML-Aktivitätsdiagramm Transformation (dLine AG Auftragsbearbeitung)
+    getEpkToAktivitaetTransformationSvg: function() {
+        return `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 620" width="100%" height="100%">
+            <rect width="960" height="620" fill="#f8fafc" rx="10" />
+            <text x="480" y="30" font-family="sans-serif" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">IHK Transformation: EPK (Ereignisgesteuert) ➔ UML-Aktivitätsdiagramm (dLine AG)</text>
+            <text x="480" y="50" font-family="sans-serif" font-size="12" fill="#64748b" text-anchor="middle">Gegenüberstellung der Notationselemente (Ereignisse, Funktionen, Gateways &amp; Swimlanes)</text>
+
+            <!-- LEFT BOX: EPK Notationsprinzip -->
+            <g transform="translate(40, 70)">
+                <rect width="420" height="450" fill="#ffffff" stroke="#94a3b8" stroke-width="2" rx="8" />
+                <rect width="420" height="36" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.5" rx="8" />
+                <text x="210" y="24" font-family="sans-serif" font-size="13" font-weight="bold" fill="#334155" text-anchor="middle">EPK (Ereignisgesteuerte Prozesskette)</text>
+
+                <!-- 1. Ereignis (Sechseck) -->
+                <polygon points="40,65 140,65 155,85 140,105 40,105 25,85" fill="#fef08a" stroke="#ca8a04" stroke-width="1.5" />
+                <text x="90" y="89" font-family="sans-serif" font-size="10.5" font-weight="bold" fill="#854d0e" text-anchor="middle">Ereignis</text>
+                <text x="175" y="82" font-family="sans-serif" font-size="11.5" font-weight="bold" fill="#0f172a">Ereignis (Sechseck/Hexagon):</text>
+                <text x="175" y="98" font-family="sans-serif" font-size="10.5" fill="#475569">Zustand ("Auftrag ist erfasst")</text>
+
+                <!-- 2. Funktion (Abgerundetes Rechteck) -->
+                <rect x="30" y="130" width="120" height="40" fill="#bbf7d0" stroke="#16a34a" stroke-width="1.5" rx="8" />
+                <text x="90" y="155" font-family="sans-serif" font-size="11" font-weight="bold" fill="#14532d" text-anchor="middle">Funktion</text>
+                <text x="175" y="147" font-family="sans-serif" font-size="11.5" font-weight="bold" fill="#0f172a">Funktion (abgerundetes Rechteck):</text>
+                <text x="175" y="163" font-family="sans-serif" font-size="10.5" fill="#475569">Aktivität / Verb ("Auftrag erfassen")</text>
+
+                <!-- 3. Organisationseinheit (Ellipse) -->
+                <ellipse cx="90" cy="220" rx="60" ry="20" fill="#fed7aa" stroke="#ea580c" stroke-width="1.5" />
+                <text x="90" y="224" font-family="sans-serif" font-size="11" font-weight="bold" fill="#9a3412" text-anchor="middle">Verkauf</text>
+                <text x="175" y="215" font-family="sans-serif" font-size="11.5" font-weight="bold" fill="#0f172a">Organisationseinheit (Ellipse):</text>
+                <text x="175" y="231" font-family="sans-serif" font-size="10.5" fill="#475569">Wer führt aus? (Verkauf, Versand)</text>
+
+                <!-- 4. Konnektoren XOR & AND -->
+                <circle cx="90" cy="290" r="18" fill="#ffffff" stroke="#0f172a" stroke-width="1.8" />
+                <text x="90" y="295" font-family="sans-serif" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle">XOR</text>
+                <text x="175" y="285" font-family="sans-serif" font-size="11.5" font-weight="bold" fill="#0f172a">Konnektoren (Kreise):</text>
+                <text x="175" y="301" font-family="sans-serif" font-size="10.5" fill="#475569">XOR (Exklusiv-Oder), AND (Und)</text>
+
+                <!-- Flow Rule Box -->
+                <rect x="20" y="340" width="380" height="90" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.2" rx="6" />
+                <text x="30" y="362" font-family="sans-serif" font-size="11" font-weight="bold" fill="#0f172a">EPK-Regeln in der IHK:</text>
+                <text x="30" y="380" font-family="sans-serif" font-size="10.5" fill="#475569">• Strikter Wechsel: Ereignis ➔ Funktion ➔ Ereignis</text>
+                <text x="30" y="398" font-family="sans-serif" font-size="10.5" fill="#475569">• Nach Konnektoren folgen immer Ereignisse</text>
+                <text x="30" y="416" font-family="sans-serif" font-size="10.5" fill="#475569">• Start und Ende sind zwingend Ereignisse</text>
+            </g>
+
+            <!-- RIGHT BOX: UML-Aktivitätsdiagramm Äquivalent -->
+            <g transform="translate(500, 70)">
+                <rect width="420" height="450" fill="#ffffff" stroke="#0284c7" stroke-width="2" rx="8" />
+                <rect width="420" height="36" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.5" rx="8" />
+                <text x="210" y="24" font-family="sans-serif" font-size="13" font-weight="bold" fill="#0369a1" text-anchor="middle">UML 2.5 Aktivitätsdiagramm (Zielnotation)</text>
+
+                <!-- 1. Ereignis entfällt / wird zu Kontrollfluss -->
+                <circle cx="90" cy="85" r="12" fill="#0f172a" />
+                <text x="175" y="82" font-family="sans-serif" font-size="11.5" font-weight="bold" fill="#0f172a">Startknoten / Kanten (Kantenfluss):</text>
+                <text x="175" y="98" font-family="sans-serif" font-size="10.5" fill="#475569">Ereignisse entfallen als eigene Kästen!</text>
+
+                <!-- 2. Aktion / Aktivität -->
+                <rect x="30" y="130" width="120" height="40" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.8" rx="10" />
+                <text x="90" y="155" font-family="sans-serif" font-size="11" font-weight="bold" fill="#0369a1" text-anchor="middle">Aktion</text>
+                <text x="175" y="147" font-family="sans-serif" font-size="11.5" font-weight="bold" fill="#0f172a">Aktion (abgerundetes Rechteck):</text>
+                <text x="175" y="163" font-family="sans-serif" font-size="10.5" fill="#475569">Entspricht 1:1 der EPK-Funktion</text>
+
+                <!-- 3. Partition / Swimlane -->
+                <rect x="35" y="200" width="110" height="38" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5" stroke-dasharray="4,3" />
+                <text x="90" y="224" font-family="sans-serif" font-size="11" font-weight="bold" fill="#166534" text-anchor="middle">Swimlane: Verkauf</text>
+                <text x="175" y="215" font-family="sans-serif" font-size="11.5" font-weight="bold" fill="#0f172a">Swimlane / Partition (Spalten):</text>
+                <text x="175" y="231" font-family="sans-serif" font-size="10.5" fill="#475569">Ersetzt die Ellipsen der EPK</text>
+
+                <!-- 4. Decision-Raute & Fork-Balken -->
+                <polygon points="90,265 115,290 90,315 65,290" fill="#fef3c7" stroke="#b45309" stroke-width="1.5" />
+                <text x="175" y="278" font-family="sans-serif" font-size="11.5" font-weight="bold" fill="#0f172a">Decision / Merge (Raute ♢):</text>
+                <text x="175" y="294" font-family="sans-serif" font-size="10.5" fill="#475569">Ersetzt das EPK-XOR</text>
+                <text x="175" y="310" font-family="sans-serif" font-size="10.5" font-weight="bold" fill="#0369a1">Fork / Join (dicker schwarzer Balken):</text>
+                <text x="175" y="324" font-family="sans-serif" font-size="10.5" fill="#475569">Ersetzt das EPK-AND (Parallelität)</text>
+
+                <!-- Flow Rule Box -->
+                <rect x="20" y="340" width="380" height="90" fill="#f0f9ff" stroke="#bae6fd" stroke-width="1.2" rx="6" />
+                <text x="30" y="362" font-family="sans-serif" font-size="11" font-weight="bold" fill="#0369a1">Transformations-Leitfaden:</text>
+                <text x="30" y="380" font-family="sans-serif" font-size="10.5" fill="#475569">1. Spalten / Swimlanes für Verkauf, Versand, Buchhaltung</text>
+                <text x="30" y="398" font-family="sans-serif" font-size="10.5" fill="#475569">2. EPK-Funktionen werden Aktionen in den Swimlanes</text>
+                <text x="30" y="416" font-family="sans-serif" font-size="10.5" fill="#475569">3. XOR-Konnektor wird Decision-Raute mit [Guards]</text>
+            </g>
+
+            <!-- Bottom summary -->
+            <g transform="translate(40, 535)">
+                <rect width="880" height="65" fill="#f8fafc" stroke="#64748b" stroke-width="1.5" rx="6" />
+                <text x="20" y="24" font-family="sans-serif" font-size="12" font-weight="bold" fill="#0f172a">📌 IHK-Zusammenfassung der Transformation dLine AG:</text>
+                <text x="20" y="44" font-family="sans-serif" font-size="11" fill="#334155">• In UML werden die Zwischenzustände (Sechsecke wie "Auftrag ist erfasst") NICHT gezeichnet, sondern durch gerichtete Pfeile dargestellt.</text>
+                <text x="20" y="58" font-family="sans-serif" font-size="11" fill="#334155">• Parallele Zweige (AND in EPK) erfordern in UML Synchronisationsbalken (FORK zum Starten, JOIN zum Zusammenführen).</text>
+            </g>
+        </svg>
+        `;
+    },
+
+    // 2l. UML Use-Case-Diagramm: Ferienhausvermietung (B&G GmbH & Immo-IT)
+    getFerienhausUseCaseSvg: function() {
+        return `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 460" width="100%" height="100%">
+            <defs>
+                <marker id="uc-fh-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                    <path d="M 0 1 L 10 5 L 0 9 z" fill="#0284c7" />
+                </marker>
+                <marker id="uc-fh-dash" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                    <path d="M 0 1 L 10 5 L 0 9 z" fill="#7c3aed" />
+                </marker>
+            </defs>
+            <rect width="880" height="460" fill="#f8fafc" rx="10" />
+            <text x="440" y="30" font-family="sans-serif" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">UML 2.5 Use-Case-Diagramm: Ferienhausvermietung (B&amp;G GmbH / Immo-IT)</text>
+            <text x="440" y="50" font-family="sans-serif" font-size="12" fill="#64748b" text-anchor="middle">IHK Original-Prüfungsaufgabe (Akteure Vermieter &amp; Kunde, Systemgrenze &amp; Anwendungsfälle)</text>
+
+            <!-- System Border -->
+            <rect x="220" y="70" width="440" height="360" fill="#ffffff" stroke="#0284c7" stroke-width="2" stroke-dasharray="6,4" rx="8" />
+            <text x="240" y="95" font-family="sans-serif" font-size="13" font-weight="bold" fill="#0369a1">System: Immo-IT Ferienhaus-Portal</text>
+
+            <!-- Actor Left: Kunde -->
+            <g transform="translate(80, 160)">
+                <circle cx="30" cy="20" r="14" fill="#f1f5f9" stroke="#1e293b" stroke-width="2.2" />
+                <line x1="30" y1="34" x2="30" y2="75" stroke="#1e293b" stroke-width="2.2" />
+                <line x1="10" y1="48" x2="50" y2="48" stroke="#1e293b" stroke-width="2.2" />
+                <line x1="30" y1="75" x2="12" y2="115" stroke="#1e293b" stroke-width="2.2" />
+                <line x1="30" y1="75" x2="48" y2="115" stroke="#1e293b" stroke-width="2.2" />
+                <text x="30" y="135" font-family="sans-serif" font-size="13" font-weight="bold" fill="#0f172a" text-anchor="middle">Kunde</text>
+            </g>
+
+            <!-- Actor Right: Vermieter -->
+            <g transform="translate(740, 160)">
+                <circle cx="30" cy="20" r="14" fill="#f1f5f9" stroke="#1e293b" stroke-width="2.2" />
+                <line x1="30" y1="34" x2="30" y2="75" stroke="#1e293b" stroke-width="2.2" />
+                <line x1="10" y1="48" x2="50" y2="48" stroke="#1e293b" stroke-width="2.2" />
+                <line x1="30" y1="75" x2="12" y2="115" stroke="#1e293b" stroke-width="2.2" />
+                <line x1="30" y1="75" x2="48" y2="115" stroke="#1e293b" stroke-width="2.2" />
+                <text x="30" y="135" font-family="sans-serif" font-size="13" font-weight="bold" fill="#0f172a" text-anchor="middle">Vermieter</text>
+            </g>
+
+            <!-- Use Cases Inside System -->
+            <!-- UC 1: Ferienhaus einstellen (Vermieter) -->
+            <ellipse cx="440" cy="125" rx="115" ry="24" fill="#fef3c7" stroke="#d97706" stroke-width="2" />
+            <text x="440" y="130" font-family="sans-serif" font-size="12" font-weight="bold" fill="#b45309" text-anchor="middle">Ferienhaus einstellen</text>
+            <line x1="740" y1="200" x2="555" y2="130" stroke="#475569" stroke-width="1.8" />
+
+            <!-- UC 2: Ferienhaus suchen (Kunde) -->
+            <ellipse cx="440" cy="195" rx="110" ry="24" fill="#e0f2fe" stroke="#0284c7" stroke-width="2" />
+            <text x="440" y="200" font-family="sans-serif" font-size="12" font-weight="bold" fill="#0369a1" text-anchor="middle">Ferienhaus suchen</text>
+            <line x1="140" y1="200" x2="330" y2="195" stroke="#475569" stroke-width="1.8" />
+
+            <!-- UC 3: Verfügbarkeit prüfen (Kunde) -->
+            <ellipse cx="440" cy="265" rx="120" ry="24" fill="#e0f2fe" stroke="#0284c7" stroke-width="2" />
+            <text x="440" y="270" font-family="sans-serif" font-size="12" font-weight="bold" fill="#0369a1" text-anchor="middle">Verfügbarkeit prüfen</text>
+            <line x1="140" y1="215" x2="320" y2="265" stroke="#475569" stroke-width="1.8" />
+
+            <!-- UC 4: Reservierungsauftrag stellen (Kunde) -->
+            <ellipse cx="440" cy="335" rx="130" ry="25" fill="#ede9fe" stroke="#7c3aed" stroke-width="2" />
+            <text x="440" y="339" font-family="sans-serif" font-size="12" font-weight="bold" fill="#6d28d9" text-anchor="middle">Reservierungsauftrag stellen</text>
+            <line x1="140" y1="230" x2="310" y2="335" stroke="#475569" stroke-width="1.8" />
+
+            <!-- UC 5: Reservieren & Bestätigung verschicken (Vermieter) -->
+            <ellipse cx="440" cy="400" rx="145" ry="24" fill="#dcfce7" stroke="#16a34a" stroke-width="2" />
+            <text x="440" y="404" font-family="sans-serif" font-size="11.5" font-weight="bold" fill="#15803d" text-anchor="middle">Reservieren &amp; Bestätigung senden</text>
+            <line x1="740" y1="220" x2="585" y2="400" stroke="#475569" stroke-width="1.8" />
+        </svg>
+        `;
+    },
+
     getAutoDiagramSvg: function(q) {
         if (!q) return null;
         // 1. Wenn die Frage bereits eine explizite grafische Musterlösung besitzt
@@ -5233,6 +5602,26 @@ var VisualDiagrams = {
         const question = (q.question || "").toLowerCase();
         const text = topic + " " + question;
 
+        // Sequenzdiagramm Buchungsverwaltung (IHK Original)
+        if (text.includes("buchungsverwaltung") || text.includes("stornierungsvorgang") || (text.includes("stornieren") && text.includes("getbuchung"))) {
+            return VisualDiagrams.getBuchungsverwaltungSequenzdiagrammSvg();
+        }
+
+        // Sequenzdiagramm PixelPic AG Onlineshop (IHK Original)
+        if (text.includes("pixelpic") || text.includes("auftragsbestaetigung") || (text.includes("produktvorlage") && text.includes("onlineshop"))) {
+            return VisualDiagrams.getPixelPicOnlineshopSequenzdiagrammSvg();
+        }
+
+        // Transformation EPK zu UML-Aktivitätsdiagramm (dLine AG)
+        if (text.includes("dline") || (text.includes("epk") && text.includes("transformation") && (text.includes("aktivit") || text.includes("swimlane")))) {
+            return VisualDiagrams.getEpkToAktivitaetTransformationSvg();
+        }
+
+        // Use-Case Ferienhausvermietung (B&G GmbH & Immo-IT)
+        if (text.includes("ferienhaus") || (text.includes("immo-it") && text.includes("b&g")) || (text.includes("ferienhäuser") && text.includes("vermieter"))) {
+            return VisualDiagrams.getFerienhausUseCaseSvg();
+        }
+
         // Trouble-Ticket Code-Review & Bugfixing (IHK Original)
         if (text.includes("trouble-ticket") || (text.includes("code-review") && text.includes("durchschnitt"))) {
             return VisualDiagrams.getCodeReviewTroubleTicketSvg();
@@ -5254,7 +5643,7 @@ var VisualDiagrams = {
         }
 
         // B&G GmbH Immobilienverkauf Zustandsdiagramm (IHK Original)
-        if (text.includes("b&g gmbh") || (text.includes("verkaufsimmobilie") && text.includes("reserviert") && text.includes("angefragt"))) {
+        if ((text.includes("b&g gmbh") && !text.includes("ferienhaus")) || (text.includes("verkaufsimmobilie") && text.includes("reserviert") && text.includes("angefragt"))) {
             return VisualDiagrams.getImmobilienVerkaufZustandsdiagrammSvg();
         }
 

@@ -12652,5 +12652,267 @@ WENN mac == gesucht DANN return true SONST return false ENDE WENN
         solutionDiagramSvg: VisualDiagrams.getMacSucheStruktogrammSvg(),
         explanation: "DIN 66261 Struktogramm: Zählschleife als L-Rahmen, Dreieck für Verzweigung (JA = true, NEIN = leer), und false erst im Nachfolgeblock nach der Schleife."
     }
+    ,
+    {
+        id: 555,
+        isHard: false,
+        difficulty: "standard",
+        isBawueFocus: true,
+        isDiagram: true,
+        diagramType: "UML 2.5 Sequenzdiagramm",
+        theme: "diagrams",
+        topic: "⏱️ IHK Originalaufgabe: Sequenzdiagramm Buchungsverwaltung & Stornierung (alt-Fragment)",
+        type: "open-text",
+        question: `Im Rahmen der Modernisierung einer Internetpräsenz zur Verwaltung von Gerätebuchungen soll die Klasse 'Buchungsverwaltung' um einen Stornierungsvorgang erweitert und dokumentiert werden.
+
+Der Ablauf wird wie folgt fachlich beschrieben:
+1. Der Vorgang wird durch den Aufruf der Methode stornieren(buchungsNr) durch das Anwender-Interface / den Benutzer eingeleitet.
+2. Es erfolgt eine Überprüfung, ob eine entsprechende Buchung vorliegt (Methode getBuchung(buchungsNr)).
+3. Liegt eine Buchung vor:
+   - Die Stornogebühren werden ermittelt (Methode ermittleStornogebühr(buchung)).
+   - Die Stornorechnung wird erstellt (Methode erstelleRechnung(buchung, stornogebühr)).
+   - Die Buchung wird gelöscht (Methode löscheBuchung(buchungsNr)).
+   - Der Anwender erhält die Bestätigungsmeldung "Buchung gelöscht".
+4. Sollte die Buchung nicht vorhanden sein:
+   - Der Anwender wird darüber mit der Meldung "keine Buchung vorhanden" informiert.
+
+Aufgabenstellung:
+a) Erläutern Sie die Struktur des Sequenzdiagramms: Welche Lebenslinien (Lifelines) und welche Aufrufe sind erforderlich?
+b) Wie werden die Methoden getBuchung(), ermittleStornogebühr(), erstelleRechnung() und löscheBuchung() an der Klasse Buchungsverwaltung UML-konform dargestellt?
+c) Wie wird die Fallunterscheidung (Buchung vorhanden vs. nicht vorhanden) in UML 2.5 normgerecht modelliert?
+d) Mit welchem Notationssymbol werden die beiden Rückmeldungen an den Anwender gezeichnet?`,
+        musterloesung: `Musterlösung IHK Sequenzdiagramm Buchungsverwaltung (Stornierung):
+
+a) Struktur des Sequenzdiagramms:
+- Lebenslinien:
+  1. ':Anwender' bzw. ':UI' (Akteur / Schnittstelle links)
+  2. ':Buchungsverwaltung' (Klasseninstanz mit vertikalem Aktivierungsbalken / Ausführungsfokus)
+- Initialer Aufruf:
+  Synchrone Nachricht 'stornieren(buchungsNr)' vom Anwender an ':Buchungsverwaltung' (durchgezogene Linie mit gefüllter Pfeilspitze).
+
+b) Modellierung der internen Methoden:
+- Alle vier Methoden (getBuchung, ermittleStornogebühr, erstelleRechnung, löscheBuchung) werden auf derselben Instanz ':Buchungsverwaltung' aufgerufen.
+- Sie werden daher als Selbstaufrufe (Reflexivnachrichten / Self-Calls) modelliert:
+  Ein rechteckiger Pfeilbogen, der vom Aktivierungsbalken der ':Buchungsverwaltung' ausgeht und wieder auf denselben Aktivierungsbalken zurückführt (oder auf einen geschachtelten Fokusbalken).
+
+c) Modellierung der Fallunterscheidung (UML 2.5 kombiniertes Fragment):
+- Es muss ein kombiniertes Fragment mit dem Operator 'alt' (Alternative) verwendet werden.
+- Das Rechteck umschließt den gesamten bedingten Ablauf.
+- Im linken oberen Pentagramm/Rechteck steht der Operator 'alt'.
+- Oberer Operand: Wächterbedingung (Guard) '[Buchung vorhanden]'.
+  Enthält die drei Selbstaufrufe (ermittleStornogebühr, erstelleRechnung, löscheBuchung) und die Antwort 'Buchung gelöscht'.
+- Horizontale gestrichelte Trennlinie trennt die beiden Operanden.
+- Unterer Operand: Wächterbedingung '[else]' bzw. '[Buchung nicht vorhanden]'.
+  Enthält die direkte Antwort 'keine Buchung vorhanden'.
+
+d) Rückmeldungen an den Anwender:
+- Antwortnachrichten (Reply / Return Messages) werden als gestrichelte Linien mit offener Pfeilspitze (<--) von ':Buchungsverwaltung' nach links zum ':Anwender' gezeichnet.
+- Text: "Buchung gelöscht" (im Erfolgszweig) bzw. "keine Buchung vorhanden" (im Fehlerzweig).`,
+        solutionDiagramSvg: VisualDiagrams.getBuchungsverwaltungSequenzdiagrammSvg(),
+        explanation: "IHK-Kernkompetenz Sequenzdiagramm: Verzweigungen erfordern das 'alt'-Fragment mit gestrichelter Trennlinie; klasseninterne Logik wird als Selbstaufruf (Self-Call) gezeichnet."
+    },
+    {
+        id: 556,
+        isHard: false,
+        difficulty: "standard",
+        isBawueFocus: true,
+        isDiagram: true,
+        diagramType: "UML 2.5 Sequenzdiagramm",
+        theme: "diagrams",
+        topic: "⏱️ IHK Multiple-Choice: Sequenzdiagramm alt- vs. opt-Fragmente & Selbstaufrufe",
+        type: "multiple-choice",
+        question: "In einem UML 2.5 Sequenzdiagramm soll ein Buchungsstornierungsvorgang modelliert werden: Liegt eine Buchung vor, wird sie berechnet und gelöscht; andernfalls wird eine Fehlermeldung ausgegeben. Welches kombinierte Fragment und welches Element für methodeninterne Aufrufe müssen normgerecht verwendet werden?",
+        options: [
+            "Ein kombiniertes Fragment vom Typ 'alt' mit zwei Operanden (Bedingungen [Buchung vorhanden] und [else]), getrennt durch eine gestrichelte Linie; die internen Methodenaufrufe der Klasse werden als Selbstaufrufe (Reflexivnachrichten) an die eigene Lebenslinie modelliert.",
+            "Ein Fragment vom Typ 'opt' mit zwei parallelen Durchläufen sowie ein Erzeugungspfeil '<<create>>'.",
+            "Ein Fragment vom Typ 'loop' mit Wiederholungsbedingung und asynchronen Signalen mit offener Spitze.",
+            "Ein 'par'-Fragment mit Synchronisationsbalken und zwei Zustandsübergängen."
+        ],
+        correctAnswer: 0,
+        solutionDiagramSvg: VisualDiagrams.getBuchungsverwaltungSequenzdiagrammSvg(),
+        explanation: "UML 2.5 Standard: 'alt' modelliert sich gegenseitig ausschließende Zweige (if-else), getrennt durch eine gestrichelte Linie. Methoden auf derselben Instanz sind Selbstaufrufe."
+    },
+    {
+        id: 557,
+        isHard: false,
+        difficulty: "standard",
+        isBawueFocus: true,
+        isDiagram: true,
+        diagramType: "UML 2.5 Sequenzdiagramm",
+        theme: "diagrams",
+        topic: "⏱️ IHK Originalaufgabe: Sequenzdiagramm PixelPic AG – Onlineshop & dynamische Objekterzeugung",
+        type: "open-text",
+        question: "Die X&Y IT GmbH verwendet die Unified Modeling Language (UML) zur Dokumentation. Der Ablauf einer Online-Bestellung im Webshop der PixelPic AG soll in einem UML-Sequenzdiagramm dargestellt werden.
+
+Ablaufbeschreibung:
+1. Kunde ruft die Startseite mit dem Angebot des Shops auf.
+2. Shop zeigt dem Kunden die Startseite mit den zur Wahl stehenden Produktarten (Foto, Poster).
+3. Kunde teilt dem Shop seine Produktwahl mit ("meine Wahl").
+4. Shop erstellt ein Produktvorlagen-Objekt (Aufruf der Funktion create() der Klasse Produktvorlage).
+5. Shop zeigt dem Kunden auf einer HTML-Seite die leere Produktvorlage und fordert zum Upload des Bildes auf.
+6. Kunde lädt das Bild hoch.
+7. Shop übergibt das Bild an die Produktvorlage (Aufruf der Funktion bild(bildDaten) des Produktvorlagen-Objekts).
+8. Produktvorlage meldet dem Shop "Bild ist eingefügt".
+9. Shop zeigt dem Kunden die fertige Produktvorlage und fordert zur Eingabe der Adress- und Zahlungsdaten auf.
+10. Kunde übermittelt die Kundendaten.
+11. Shop ruft seine eigene Funktion pruefung() zur Datenprüfung auf.
+12. Funktion pruefung() gibt "Daten o.k." zurück. (Der Fehlerfall wird nicht betrachtet).
+13. Shop teilt dem Kunden mit, dass er zur Annahme des Auftrags bereit ist.
+14. Kunde erteilt den Auftrag.
+15. Shop erstellt ein Auftragsbestätigungs-Objekt mit create() der Klasse Auftragsbestaetigung.
+16. Shop verschickt die Auftragsbestätigung per E-Mail an den Kunden.
+
+Aufgabenstellung:
+a) Welche vier Lebenslinien sind für dieses Sequenzdiagramm anzulegen?
+b) Erläutern Sie die normgerechte UML-Notation für die dynamische Erzeugung von Objekten (Produktvorlage und Auftragsbestätigung). Wo beginnen deren Lebenslinien?
+c) Wie wird der Prüfvorgang pruefung() an der Lebenslinie ':Shop' dargestellt?
+d) Unterscheiden Sie die graphische Darstellung von synchronen Nachrichten und Antwortnachrichten in diesem Diagramm.",
+        musterloesung: `Musterlösung IHK Sequenzdiagramm PixelPic AG Onlineshop:
+
+a) Die vier Lebenslinien (von links nach rechts):
+1. ':Kunde' (Akteur / Benutzer)
+2. ':Shop' (Zentrales Webshop-Steuerungsobjekt)
+3. ':Produktvorlage' (Dynamisch zur Laufzeit erzeugte Instanz)
+4. ':Auftragsbestaetigung' (Dynamisch zur Laufzeit erzeugte Instanz)
+
+b) Dynamische Objekterzeugung (create):
+- Notationsregel: Der Pfeil für die Erzeugungsnachricht (beschriftet mit '<<create>>' oder 'create()') zielt DIREKT auf den Kopf-Kasten des neu erzeugten Objekts (nicht auf eine bereits bestehende Lebenslinie!).
+- Lebenslinie: Die gestrichelte Lebenslinie von ':Produktvorlage' und ':Auftragsbestaetigung' existiert erst AB dem Zeitpunkt ihrer Erzeugung. Oberhalb des Kastens existiert keine Lebenslinie!
+
+c) Darstellung der internen Prüfung (pruefung()):
+- Da der Shop seine eigene Logik ausführt, handelt es sich um einen Selbstaufruf (Self-Call).
+- Ein Pfeil führt vom Aktivierungsbalken des Shops im rechten Winkel heraus und auf denselben Shop-Aktivierungsbalken zurück (Aufruf 'pruefung()').
+- Der Rückgabewert "Daten o.k." wird als gestrichelte Antwortnachlinie mit offener Pfeilspitze zurück zum Hauptbalken geführt.
+
+d) Synchroner Methodenaufruf vs. Antwortnachricht:
+- Synchroner Methodenaufruf (z. B. 'bild(bildDaten)', 'stornieren()'):
+  ➔ Durchgezogene Linie mit VOLL AUSGEFÜLLTER Dreiecksspitze (▶).
+- Antwortnachricht / Return (z. B. "Bild ist eingefügt", "Startseite", "Zur Annahme bereit"):
+  ➔ GESTRICHELTE Linie mit OFFENER Pfeilspitze (-->).`,
+        solutionDiagramSvg: VisualDiagrams.getPixelPicOnlineshopSequenzdiagrammSvg(),
+        explanation: "Dynamische Objekterzeugung: Erzeugungspfeil '<<create>>' zielt direkt auf das Objekt-Rechteck; Lebenslinie beginnt erst dort."
+    },
+    {
+        id: 558,
+        isHard: false,
+        difficulty: "standard",
+        isBawueFocus: true,
+        isDiagram: true,
+        diagramType: "UML 2.5 Sequenzdiagramm",
+        theme: "diagrams",
+        topic: "⏱️ IHK Fachaufgabe: Sequenzdiagramm Pfeilnotationen & Lebenslinien-Zerstörung",
+        type: "multiple-choice",
+        question: "Welche Aussage beschreibt die normgerechten Pfeil- und Lebenslinien-Notationen in einem UML 2.5 Sequenzdiagramm exakt nach IHK-Bewertungsmaßstab?",
+        options: [
+            "Synchrone Aufrufe besitzen eine durchgezogene Linie mit gefüllter Dreiecksspitze (▶); Antwortnachrichten sind gestrichelt mit offener Pfeilspitze (-->); Objekterzeugungen zeigen direkt auf das Kopf-Rechteck des neuen Objekts; und die Zerstörung einer Lebenslinie wird durch ein großes 'X' (Destruction Occurrence) am Linienende markiert.",
+            "Asynchrone Aufrufe haben eine gestrichelte Linie mit weißer Dreiecksspitze; Antwortnachrichten haben durchgezogene Doppellinien.",
+            "Objekterzeugungen werden immer durch eine schwarze Raute am Lebenslinien-Anfang dargestellt.",
+            "Synchrone Aufrufe besitzen eine offene Pfeilspitze ohne Aktivierungsbalken, da der Aufrufer sofort ohne Blockierung weiterläuft."
+        ],
+        correctAnswer: 0,
+        solutionDiagramSvg: VisualDiagrams.getPixelPicOnlineshopSequenzdiagrammSvg(),
+        explanation: "UML 2.5 Sequenzdiagramm: Synchron = durchgezogen + gefüllte Dreiecksspitze; Antwort = gestrichelt + offene Spitze; Erzeugung = create() auf Kasten; Zerstörung = großes 'X'."
+    },
+    {
+        id: 559,
+        isHard: false,
+        difficulty: "standard",
+        isBawueFocus: true,
+        isDiagram: true,
+        diagramType: "UML 2.5 Aktivitätsdiagramm",
+        theme: "diagrams",
+        topic: "🔀 IHK Originalaufgabe: Transformation EPK zu UML-Aktivitätsdiagramm (dLine AG Auftragsbearbeitung)",
+        type: "open-text",
+        question: "Der Informatikkaufmann der dLine AG hat die Bearbeitung eines Kundenauftrags in einer Ereignisgesteuerten Prozesskette (EPK) dokumentiert.
+Diese enthält Ereignisse (Sechsecke, z. B. 'Auftrag eingegangen'), Funktionen (abgerundete Rechtecke, z. B. 'Auftrag prüfen'), Organisationseinheiten (Ellipsen für Verkauf, Versand, Buchhaltung) sowie logische Konnektoren (XOR und AND).
+
+Im Rahmen der Systemumstellung soll dieser Prozess in ein UML 2.5 Aktivitätsdiagramm überführt werden.
+
+Aufgabenstellung:
+a) Wie werden die Organisationseinheiten (Verkauf, Versand, Buchhaltung) der EPK in einem UML-Aktivitätsdiagramm abgebildet?
+b) Was geschieht mit den Zwischenereignissen der EPK (z. B. 'Auftrag ist geprüft') bei der Überführung in das UML-Aktivitätsdiagramm?
+c) Wie werden die EPK-Funktionen (z. B. 'Bonität prüfen', 'Ware versenden') in UML modelliert?
+d) Erläutern Sie die Übersetzung der logischen EPK-Verknüpfungen XOR und AND in UML 2.5 Symbole.",
+        musterloesung: `Musterlösung IHK Transformation EPK zu UML-Aktivitätsdiagramm (dLine AG):
+
+a) Abbildung der Organisationseinheiten (Zuständigkeiten):
+- Werden in UML 2.5 als Swimlanes (Aktivitätenbereiche / Partitionen) dargestellt.
+- Das Diagramm wird in vertikale oder horizontale Spalten unterteilt (z. B. Spalte 'Verkauf', Spalte 'Versand', Spalte 'Buchhaltung').
+- Jede Aktion wird in die Spalte der zuständigen Abteilung platziert.
+
+b) Behandlung der EPK-Ereignisse:
+- In der UML-Aktivitätsdiagramm-Notation existieren keine Sechsecke für Zwischenereignisse.
+- Ereignisse wie "Auftrag ist geprüft" oder "Ware ist verpackt" entfallen als eigene Knoten!
+- Sie werden durch den gerichteten Kontrollfluss (Pfeillinien / Control Flow Edges) zwischen den Aktionen repräsentiert.
+- Das Start-Ereignis wird durch den UML-Startknoten (ausgefüllter schwarzer Kreis ⚫) und das End-Ereignis durch den Endknoten (Kreis mit ausgefülltem Innenpunkt / Bullenauge ⦿) dargestellt.
+
+c) Abbildung der EPK-Funktionen:
+- EPK-Funktionen drücken Tätigkeiten aus und entsprechen 1:1 den UML-Aktionen (Actions).
+- Sie werden als Rechtecke mit abgerundeten Ecken gezeichnet und in die jeweilige Swimlane gesetzt.
+
+d) Abbildung der logischen Konnektoren:
+- EPK-XOR (Entweder-Oder-Verzweigung):
+  ➔ Wird in UML als Verzweigungsraute (Decision Node ♢) mit Wächterbedingungen in eckigen Klammern (z. B. [Bonität ok] und [else]) dargestellt.
+  ➔ Die Zusammenführung erfolgt über eine Zusammenführungsraute (Merge Node ♢).
+- EPK-AND (Parallele Ausführung):
+  ➔ Wird in UML als Synchronisationsbalken (Fork Node: dicker schwarzer horizontaler oder vertikaler Balken) dargestellt, der sich in parallele Kontrollflüsse teilt.
+  ➔ Das Zusammenführen der parallelen Zweige erfordert einen Synchronisations-Join-Balken (Join Node), an dem alle Zweige eintreffen müssen, bevor es weitergeht.`,
+        solutionDiagramSvg: VisualDiagrams.getEpkToAktivitaetTransformationSvg(),
+        explanation: "Transformation EPK ➔ UML-Aktivitätsdiagramm: Organisationseinheiten = Swimlanes; Funktionen = Aktionen; Zwischenereignisse entfallen; XOR = Raute; AND = Balken (Fork/Join)."
+    },
+    {
+        id: 560,
+        isHard: false,
+        difficulty: "standard",
+        isBawueFocus: true,
+        isDiagram: true,
+        diagramType: "UML 2.5 Anwendungsfalldiagramm",
+        theme: "diagrams",
+        topic: "🎯 IHK Originalaufgabe: Use-Case-Diagramm Ferienhausvermietung (B&G GmbH & Immo-IT)",
+        type: "open-text",
+        question: "Die B&G GmbH vermietet exklusive Ferienhäuser. Die Immo-IT GmbH soll dazu eine Webanwendung entwickeln, über die im Internet Ferienhäuser angeboten und gebucht werden können.
+
+Das System soll folgende Kernfunktionalitäten abbilden:
+- Ein Vermieter stellt ein Ferienhaus ein
+- Ein Kunde sucht ein Ferienhaus
+- Ein Kunde prüft die Verfügbarkeit eines ausgewählten Ferienhauses
+- Ein Kunde stellt einen Reservierungsauftrag und gibt alle erforderlichen Daten ein
+- Ein Vermieter reserviert das Ferienhaus und verschickt eine Reservierungsbestätigung an den Kunden
+
+Aufgabenstellung:
+a) Bestimmen Sie die Systemgrenze sowie die primären Akteure des Anwendungsfalldiagramms.
+b) Nennen Sie alle zu modellierenden Use Cases (Anwendungsfälle) und ordnen Sie diese den Akteuren über Assoziationslinien zu.
+c) Erläutern Sie, warum Use Cases immer aus Sicht des Nutzers im Aktivitätsstil (Substantiv + Verb im Infinitiv) formuliert werden.
+d) Warum dürfen Akteure niemals innerhalb des Systemgrenzen-Rechtecks gezeichnet werden?",
+        musterloesung: `Musterlösung IHK Use-Case-Diagramm Ferienhausvermietung (B&G GmbH & Immo-IT):
+
+a) Systemgrenze und Akteure:
+- Systemgrenze: 'Immo-IT Ferienhaus-Portal' (dargestellt als großes Rechteck mit Systemnamen oben links).
+- Akteure (Strichmännchen außerhalb des Rahmens):
+  1. 'Kunde' (externer Interessent / Buchender)
+  2. 'Vermieter' (Anbieter / Eigentümer der Ferienhäuser)
+
+b) Anwendungsfälle (Ovale innerhalb des Systemrahmens) & Zuordnung:
+1. 'Ferienhaus einstellen'
+   ➔ Assoziation (durchgezogene Linie) zu: Vermieter
+2. 'Ferienhaus suchen'
+   ➔ Assoziation zu: Kunde
+3. 'Verfügbarkeit prüfen'
+   ➔ Assoziation zu: Kunde
+4. 'Reservierungsauftrag stellen'
+   ➔ Assoziation zu: Kunde
+5. 'Reservieren & Bestätigung verschicken'
+   ➔ Assoziation zu: Vermieter
+
+c) Formulierung von Use Cases:
+- Anwendungsfälle beschreiben fachliche Interaktionsziele, mit denen ein Akteur einen messbaren Mehrwert erzielt.
+- Sie werden als 'Substantiv + Verb im Infinitiv' formuliert ('Ferienhaus suchen', 'Verfügbarkeit prüfen'), um klar zu verdeutlichen, WAS das System leistet, ohne technische Implementierungsdetails (wie Datenbankabfragen, Maskenlayouts oder Klicks) vorwegzunehmen.
+
+d) Platzierung der Akteure außerhalb der Systemgrenze:
+- Die Systemgrenze umfasst ausschließlich die Software-Komponenten und Funktionalitäten, die im Rahmen des Projekts entwickelt werden.
+- Akteure sind externe Benutzer, Personenrollen oder Fremdsysteme, die von außen mit dem System interagieren, aber selbst NICHT Teil des Softwaresystems sind. Ein Akteur im Rechteck wäre ein Verstoß gegen die UML 2.5 Spezifikation.`,
+        solutionDiagramSvg: VisualDiagrams.getFerienhausUseCaseSvg(),
+        explanation: "UML 2.5 Use-Case-Diagramm: Akteure stehen immer außerhalb der Systemgrenze; Anwendungsfälle sind Ovale im Infinitiv; Verbindungen sind einfache Assoziationslinien."
+    }
 
 ];
