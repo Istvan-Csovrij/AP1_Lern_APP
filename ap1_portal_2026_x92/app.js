@@ -305,41 +305,46 @@ function filterQuestions(theme) {
                 filteredQuestions = questions.filter(q => q.type === "open-text");
             }
         } else if (theme === "diagrams" || theme === "diagram-training") {
-            filteredQuestions = questions.filter(q => 
-                q.theme === "diagrams" || 
-                q.isDiagram === true || 
-                (q.diagramType && q.diagramType.length > 0) ||
-                (q.topic && (
-                    q.topic.toLowerCase().includes("diagramm") || 
-                    q.topic.toLowerCase().includes("uml") || 
-                    q.topic.toLowerCase().includes("erd") || 
-                    q.topic.toLowerCase().includes("epk") || 
-                    q.topic.toLowerCase().includes("bpmn") || 
-                    q.topic.toLowerCase().includes("aktivität") || 
-                    q.topic.toLowerCase().includes("aktivitaet") || 
-                    q.topic.toLowerCase().includes("activity") || 
-                    q.topic.toLowerCase().includes("netzplan") || 
-                    q.topic.toLowerCase().includes("struktogramm") || q.topic.toLowerCase().includes("aktivität") || q.topic.toLowerCase().includes("activity") || 
-                    q.topic.toLowerCase().includes("pap") ||
-                    q.topic.toLowerCase().includes("use-case") ||
-                    q.topic.toLowerCase().includes("use case") ||
-                    q.topic.toLowerCase().includes("klassendiagramm") ||
-                    q.topic.toLowerCase().includes("entscheidungstabelle")
-                )) ||
-                (q.question && (
-                    q.question.toLowerCase().includes("use-case") ||
-                    q.question.toLowerCase().includes("klassendiagramm") ||
-                    q.question.toLowerCase().includes("erd") ||
-                    q.question.toLowerCase().includes("entity-relationship") ||
-                    q.question.toLowerCase().includes("kardinalität") ||
-                    q.question.toLowerCase().includes("epk") ||
-                    q.question.toLowerCase().includes("bpmn") ||
-                    q.question.toLowerCase().includes("netzplan") ||
-                    q.question.toLowerCase().includes("kritischer pfad") ||
-                    q.question.toLowerCase().includes("struktogramm") ||
-                    q.question.toLowerCase().includes("entscheidungstabelle")
-                ))
-            );
+            filteredQuestions = questions.filter(q => {
+                const isSubnet = (q.topic && q.topic.toLowerCase().includes("subnetz")) || 
+                                 (q.question && (q.question.toLowerCase().includes("subnetz") || q.question.toLowerCase().includes("vlsm")));
+                if (isSubnet && !q.isDiagram) return false;
+                if ((q.isCalculation || q.isPowerCalc || q.isZahlensysteme) && !q.isDiagram) return false;
+
+                return q.theme === "diagrams" || 
+                    q.isDiagram === true || 
+                    (q.diagramType && q.diagramType.length > 0) ||
+                    (q.topic && (
+                        q.topic.toLowerCase().includes("diagramm") || 
+                        q.topic.toLowerCase().includes("uml") || 
+                        q.topic.toLowerCase().includes("erd") || 
+                        q.topic.toLowerCase().includes("epk") || 
+                        q.topic.toLowerCase().includes("bpmn") || 
+                        q.topic.toLowerCase().includes("aktivität") || 
+                        q.topic.toLowerCase().includes("aktivitaet") || 
+                        q.topic.toLowerCase().includes("activity") || 
+                        (/\bnetzplan\b/i.test(q.topic) || /\bnetzplantechnik\b/i.test(q.topic)) || 
+                        q.topic.toLowerCase().includes("struktogramm") || 
+                        q.topic.toLowerCase().includes("pap") ||
+                        q.topic.toLowerCase().includes("use-case") ||
+                        q.topic.toLowerCase().includes("use case") ||
+                        q.topic.toLowerCase().includes("klassendiagramm") ||
+                        q.topic.toLowerCase().includes("entscheidungstabelle")
+                    )) ||
+                    (q.question && (
+                        q.question.toLowerCase().includes("use-case") ||
+                        q.question.toLowerCase().includes("klassendiagramm") ||
+                        q.question.toLowerCase().includes("erd") ||
+                        q.question.toLowerCase().includes("entity-relationship") ||
+                        q.question.toLowerCase().includes("kardinalität") ||
+                        q.question.toLowerCase().includes("epk") ||
+                        q.question.toLowerCase().includes("bpmn") ||
+                        (/\bnetzplan\b/i.test(q.question) || /\bnetzplantechnik\b/i.test(q.question)) ||
+                        q.question.toLowerCase().includes("kritischer pfad") ||
+                        q.question.toLowerCase().includes("struktogramm") ||
+                        q.question.toLowerCase().includes("entscheidungstabelle")
+                    ));
+            });
         } else if (theme === "uml-class" || theme === "klassendiagramm") {
             filteredQuestions = questions.filter(q => 
                 (q.diagramType && q.diagramType.toLowerCase().includes("klasse")) ||
@@ -827,8 +832,24 @@ function loadQuestion() {
 
     // Handle Diagram sketch helper banner or Pseudocode helper banner
     const diagBanner = document.getElementById("diagram-banner-container");
-    if (diagBanner) {
-        const isDiag = q.isDiagram === true || q.diagramType || q.theme === "diagrams" || (q.topic && (q.topic.toLowerCase().includes("diagramm") || q.topic.toLowerCase().includes("uml") || q.topic.toLowerCase().includes("erd") || q.topic.toLowerCase().includes("epk") || q.topic.toLowerCase().includes("bpmn") || q.topic.toLowerCase().includes("netzplan") || q.topic.toLowerCase().includes("struktogramm")));
+        const isSubnet = (q.topic && q.topic.toLowerCase().includes("subnetz")) || 
+                         (q.question && (q.question.toLowerCase().includes("subnetz") || q.question.toLowerCase().includes("vlsm")));
+        const isPureCalc = (q.isCalculation || q.isPowerCalc || q.isZahlensysteme) && !q.isDiagram;
+        
+        const isDiag = !isPureCalc && !isSubnet && (
+            q.isDiagram === true || 
+            (q.diagramType && q.diagramType.length > 0) || 
+            q.theme === "diagrams" || 
+            (q.topic && (
+                q.topic.toLowerCase().includes("diagramm") || 
+                q.topic.toLowerCase().includes("uml") || 
+                q.topic.toLowerCase().includes("erd") || 
+                q.topic.toLowerCase().includes("epk") || 
+                q.topic.toLowerCase().includes("bpmn") || 
+                (/\bnetzplan\b/i.test(q.topic) || /\bnetzplantechnik\b/i.test(q.topic)) || 
+                q.topic.toLowerCase().includes("struktogramm")
+            ))
+        );
         const isPseudocode = q.isPseudocode === true || q.theme === "pseudocode" || (q.topic && (q.topic.toLowerCase().includes("pseudocode") || q.topic.toLowerCase().includes("schreibtischtest") || q.topic.toLowerCase().includes("trace-tabelle")));
         
         if (isDiag) {

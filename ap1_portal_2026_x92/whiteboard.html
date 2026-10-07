@@ -1289,8 +1289,11 @@
             </div>
             <div class="modal-toolbar" style="gap: 0.4rem; flex-wrap: wrap;">
                 <button class="btn btn-sm exercise-tab-btn active" data-diag="class" onclick="switchExerciseTab('class')">🏛️ Klassendiagramm</button>
-                <button class="btn btn-sm exercise-tab-btn" data-diag="usecase" onclick="switchExerciseTab('usecase')">🎯 Use-Case</button>
-                <button class="btn btn-sm exercise-tab-btn" data-diag="activity" onclick="switchExerciseTab('activity')">🔀 Aktivitätsdiagramm</button>
+                <button class="btn btn-sm exercise-tab-btn" data-diag="usecase" onclick="switchExerciseTab('usecase')">🎯 Use-Case (Smart-Home)</button>
+                <button class="btn btn-sm exercise-tab-btn" data-diag="usecase_faq" onclick="switchExerciseTab('usecase_faq')">🎯 IHK: FAQ GmbH Statistik</button>
+                <button class="btn btn-sm exercise-tab-btn" data-diag="activity_erenmichi" onclick="switchExerciseTab('activity_erenmichi')">⚡ IHK: Eren-Michi KFZ</button>
+                <button class="btn btn-sm exercise-tab-btn" data-diag="activity" onclick="switchExerciseTab('activity')">🔀 Retoure &amp; Parallelität</button>
+                <button class="btn btn-sm exercise-tab-btn" data-diag="activity_comp" onclick="switchExerciseTab('activity_comp')">⚡ Decision vs. Fork</button>
                 <button class="btn btn-sm exercise-tab-btn" data-diag="state" onclick="switchExerciseTab('state')">🔄 Zustandsdiagramm</button>
                 <button class="btn btn-sm exercise-tab-btn" data-diag="sequence" onclick="switchExerciseTab('sequence')">⚡ Sequenzdiagramm</button>
             </div>
@@ -1312,7 +1315,7 @@
     </div>
 
     <!-- External Visual Diagram Generator Library for Solutions -->
-    <script src="diagrams.js?v=110"></script>
+    <script src="diagrams.js?v=112"></script>
     <script>
         // ====================================================================
         // AP1 Object-Oriented Whiteboard Engine (Vektorbasiert & Bewegbar)
@@ -3497,6 +3500,54 @@
                 keyRules: "<<include>>: Zwingend erforderlich; Pfeil zeigt auf Unter-Use-Case. <<extend>>: Optional bei Bedingung; Pfeil zeigt ZURÜCK auf Basis-Use-Case!",
                 stencil: "actor_usecase",
                 getSvg: () => (typeof VisualDiagrams !== "undefined" && VisualDiagrams.getUseCaseDiagramSvg) ? VisualDiagrams.getUseCaseDiagramSvg("Smart-Home Alarmsystem") : ""
+            },
+            usecase_faq: {
+                title: "IHK Originalaufgabe: Use-Case-Diagramm Software „Statistikabfragen“ (Soft GmbH für FAQ GmbH)",
+                badge: "IHK Original / LF 7 / AP1",
+                scenario: "Die Soft GmbH entwickelt für die FAQ GmbH die Software „Statistikabfragen“. Nutzer greifen auf Standardstatistiken zu. Premiumnutzer benötigen einen Login (mit Erstanmeldung per <<extend>>) für Premiumstatistiken. Admins rufen Admin-Tools (mit Login per <<include>>) und Standardstatistiken ab.",
+                tasks: [
+                    "Zeichnen Sie ein Systemgrenzen-Rechteck mit der Aufschrift 'Statistikabfragen'.",
+                    "Platzieren Sie links die Akteure <code>Nutzer</code> (oben) und <code>Premiumnutzer</code> (unten). Verbinden Sie <code>Premiumnutzer</code> über eine Generalisierung (weiße geschlossene Pfeilspitze) mit <code>Nutzer</code>.",
+                    "Platzieren Sie rechts den Akteur <code>Admin</code>.",
+                    "Modellieren Sie die Use-Cases als Ellipsen: 'Standardstatistiken abrufen', 'Premiumstatistiken abrufen', 'Admin-Tools abrufen', 'Login durchführen' und 'Erstanmeldung durchführen'.",
+                    "Verbinden Sie 'Premiumstatistiken abrufen' und 'Admin-Tools abrufen' per <code>&lt;&lt;include&gt;&gt;</code> mit 'Login durchführen' (Pfeil zeigt auf 'Login durchführen').",
+                    "Verbinden Sie 'Erstanmeldung durchführen' per <code>&lt;&lt;extend&gt;&gt;</code> mit 'Login durchführen' (Pfeil zeigt ZUM Basis-Use-Case 'Login durchführen' mit Bedingung [Login-Daten fehlen])."
+                ],
+                keyRules: "<<include>>: Zwingend erforderlich; Pfeil zeigt auf Unter-Use-Case. <<extend>>: Optional bei Bedingung; Pfeil zeigt ZURÜCK auf Basis-Use-Case! Premiumnutzer erbt Rechte von Nutzer.",
+                stencil: "actor_usecase",
+                getSvg: () => (typeof VisualDiagrams !== "undefined" && VisualDiagrams.getFaqStatistikabfragenUseCaseSvg) ? VisualDiagrams.getFaqStatistikabfragenUseCaseSvg() : ""
+            },
+            activity_erenmichi: {
+                title: "IHK Originalaufgabe: Aktivitätsdiagramm Terminvergabe (KFZ-Meisterbetrieb Eren-Michi)",
+                badge: "IHK Original / LF 5 / AP1",
+                scenario: "Der KFZ-Meisterbetrieb Eren-Michi beschafft ein neues System zur Online-Terminvergabe. Ein Kunde ruft die Webseite auf, wählt Terminarten, Termine im ersten freien Monat und bucht. Bei Konflikt greift eine Fehlermeldung mit Rücksprung; bei Erfolg wird die Buchung parallel abgeschlossen und bestätigt.",
+                tasks: [
+                    "Modellieren Sie zwei vertikale Swimlanes (Partitionen): 'Anwender' (links) und 'Terminvergabesystem' (rechts).",
+                    "Startknoten (●) in Anwender -> 'Aufruf Terminreservierung' -> Kontrollfluss wechselt zu Element 1 ('Anzeige aller verfügbaren Terminarten') im System.",
+                    "Von Element 1 Kontrollfluss zu Element 2 ('Gewünschte Terminart auswählen') in Anwender -> Kontrollfluss zur Merge-Raute im System.",
+                    "Nach Merge-Raute: Element 3 ('Ersten freien Termin suchen') -> Element 5 ('Freie Termine & Monat anzeigen') -> Element 4 ('Freien Termin auswählen') in Anwender -> Element 6 ('Termin buchen bzw. blockieren') im System.",
+                    "Decision-Raute nach Element 6 mit Guard 7 [Termin nicht mehr verfügbar] -> Element 8 ('Fehlermeldung anzeigen') -> Rücksprung in Merge-Raute vor Element 3.",
+                    "Guard 9 [Termin noch verfügbar] führt in Fork-Balken (Parallelität). Dieser spaltet auf in: Element 10 ('Buchungsinformation an Kunden senden') und Element 11 ('Buchungsprozess abschließen').",
+                    "Beide Pfade münden in Join-Balken (Synchronisation) und enden am Aktivitätsendknoten (⦿)."
+                ],
+                keyRules: "Swimlanes trennen Rollen. Decision-Raute (XOR mit Guards) für Verfügbarkeitsprüfung. Fork-Balken (AND) für parallele Kundenbenachrichtigung und Buchung.",
+                stencil: "uml_activity",
+                getSvg: () => (typeof VisualDiagrams !== "undefined" && VisualDiagrams.getErenMichiTerminvergabeAktivitaetSvg) ? VisualDiagrams.getErenMichiTerminvergabeAktivitaetSvg() : ""
+            },
+            activity_comp: {
+                title: "IHK-Konzept: Decision & Merge (Raute) vs. Fork & Join (Balken) & Swimlanes",
+                badge: "IHK Kernwissen / AP1",
+                scenario: "Gegenüberstellung von alternativen Verzweigungen (Entweder-Oder / XOR) und echter Nebenläufigkeit (Parallelität / AND) sowie Verantwortungszuordnung über Schwimmbahnen.",
+                tasks: [
+                    "Verzweigung (Decision Node): 1 Eingang, 2+ Ausgänge mit Guards z. B. [Daten sind nicht okay] vs. [Daten sind ok]. Genau EIN Pfad wird aktiv.",
+                    "Zusammenführung (Merge Node): Führt alternative Pfade zusammen. Wartet NICHT auf andere Zweige; Token läuft sofort weiter.",
+                    "Fork Node (Splitting): Dicker Balken; spaltet Kontrollfluss in nebenläufige parallele Threads auf (KEINE Guards).",
+                    "Join Node (Synchronisation): Dicker Balken; wartet als Synchronisationsbarriere, bis ALLE parallelen Pfade eingetroffen sind.",
+                    "Schwimmbahnen (Swimlanes): Ordnen Aktionen Verantwortungsbereichen (z. B. Anwender vs. System) zu."
+                ],
+                keyRules: "Raute = XOR (Entweder-Oder) mit Guards. Dicker Balken = AND (Gleichzeitigkeit) ohne Guards. Join-Knoten blockiert, bis alle parallelen Flüsse eintreffen.",
+                stencil: "uml_activity",
+                getSvg: () => (typeof VisualDiagrams !== "undefined" && VisualDiagrams.getActivityDecisionVsForkComparisonSvg) ? VisualDiagrams.getActivityDecisionVsForkComparisonSvg() : ""
             },
             activity: {
                 title: "3. UML-Aktivitätsdiagramm: E-Commerce Retourenabwicklung & Parallelisierung",

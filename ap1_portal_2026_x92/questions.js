@@ -11243,5 +11243,398 @@ c) Methodenauswahl für die Szenarien:
         musterloesung: "aa) Zeitliche Dimension:\n• In einem UML-Sequenzdiagramm verläuft die Zeit streng linear von OBEN nach UNTEN entlang der vertikalen Lebenslinien.\n• Nachrichten weiter oben finden chronologisch vor Nachrichten weiter unten statt.\n\nab) Begründung für asynchronen Aufruf bei SMS-Gateway:\n• Das Versenden einer SMS über externe Mobilfunkbetreiber kann mehrere Sekunden dauern oder Latenzen aufweisen.\n• Bei einem asynchronen Aufruf (offene Pfeilspitze) blockiert der AuthServer nicht. Er stößt den Versand an und kann sofort die HTTP-Antwort '2fa_erforderlich' an das WebFrontend zurückgeben, ohne auf die Auslieferungsbestätigung des Netzbetreibers zu warten.\n• Die Passwortprüfung gegen die lokale Datenbank MUSS hingegen synchron sein, da das System ohne das Ergebnis nicht entscheiden kann, ob überhaupt ein OTP versendet werden darf.\n\nac) Bedeutung des Aktivierungsbalkens (Execution Specification):\n• Der schmale Kasten auf der Lebenslinie zeigt den Zeitraum an, in dem die jeweilige Komponente aktiv Rechenzeit beansprucht (im Fokus der Kontrolle ist / Code ausführt).\n\nad) Modellierung alternativer Pfade (Fehlerfall):\n• Über ein kombiniertes Fragment mit dem Operator 'alt' (Alternatives).\n• Der Kasten umfasst die relevanten Lebenslinien und ist durch eine gestrichelte Horizontallinie in zwei Operanden getrennt: [OTP korrekt] im oberen Bereich und [else / OTP falsch] im unteren Bereich mit Fehlermeldung.",
         solutionDiagramSvg: VisualDiagrams.getSequenzdiagrammSvg(),
         explanation: "Prüfungsrelevante Modellierungsaufgabe für Sequenzdiagramme: Synchrone vs. asynchrone Aufrufe, Lebenslinien, Antwortpfeile und kombinierte Fragmente (alt/opt)."
+    },
+    {
+        id: 520,
+        isHard: true,
+        difficulty: "hard",
+        isBawueFocus: true,
+        theme: "diagrams",
+        diagramType: "UML Aktivitätsdiagramm",
+        isDiagram: true,
+        topic: "⚡ IHK Originalaufgabe: Aktivitätsdiagramm KFZ-Meisterbetrieb Eren-Michi (11 Elemente & Swimlanes)",
+        type: "open-text",
+        question: `IHK Original-Prüfungsaufgabe (Aktivitätsdiagramm):
+Neben dem Marketing muss auch die Kommunikation mit dem Kunden bei der Terminvereinbarung verbessert werden. Der KFZ-Meisterbetrieb Eren-Michi hat hierfür ein neues System zur Terminvergabe beschafft.
+Um dieses neue System zu konfigurieren, wollen Sie sich zunächst einen Überblick über den bereits bestehenden Prozess zur Terminvergabe verschaffen.
+
+Im bisher verwendeten System zur Terminvergabe ist folgender Ablauf hinterlegt:
+• Ein Kunde ruft die Terminreservierung auf der Webseite auf, anschließend erhält der Kunde eine Anzeige zu allen verfügbaren Terminarten. Jetzt kann er die gewünschte Terminart auswählen.
+• Die Webseite zeigt anschließend den Monat, in dem der erste freie Termin liegt, mit allen freien Terminen im dargestellten Zeitraum an.
+• Der Kunde kann nun einen freien Termin auswählen. Direkt im Anschluss versucht das Buchungssystem den Termin zu buchen bzw. zu blockieren.
+• Wenn der Termin noch verfügbar ist, kann dieser abschließend gebucht werden und der Kunde erhält eine diesbezügliche Information. Direkt im Anschluss ist der Buchungsprozess beendet.
+• Sollte der gewünschte Termin inzwischen nicht mehr verfügbar sein, erhält der Kunde eine Fehlermeldung und es wird erneut der erste freie Termin gesucht, um diesen anschließend anzuzeigen.
+
+Aufgaben:
+1. Ordnen Sie den 11 nummerierten Elementen (1 bis 11) im Aktivitätsdiagramm die korrekte fachliche Bezeichnung bzw. Guard-Bedingung zu.
+2. Begründen Sie, warum das Aktivitätsdiagramm in zwei Partitionen (Schwimmbahnen / Swimlanes) unterteilt ist.
+3. Erläutern Sie den fundamentalen Unterschied zwischen:
+   a) Der Raute nach Element 6 (Verzweigung / Decision Node) mit den Guards 7 und 9.
+   b) Dem dicken horizontalen Balken vor den Elementen 10 und 11 (Parallelisierung / Fork Node).`,
+        musterloesung: `1. Beschriftung der 11 Elemente des Aktivitätsdiagramms:
+• Element 1 (Terminvergabesystem): Anzeige aller verfügbaren Terminarten (oder: Verfügbare Terminarten anzeigen)
+• Element 2 (Anwender): Gewünschte Terminart auswählen (oder: Terminart auswählen)
+• Element 3 (Terminvergabesystem): Ersten freien Termin suchen / ermitteln
+• Element 4 (Anwender): Freien Termin auswählen
+• Element 5 (Terminvergabesystem): Freie Termine und ersten freien Monat anzeigen (oder: Monat & freie Termine anzeigen)
+• Element 6 (Terminvergabesystem): Termin buchen bzw. blockieren (oder: Reservierungsversuch starten)
+• Element 7 (Guard-Bedingung an Verzweigung): [Termin nicht mehr verfügbar] (oder: [nicht verfügbar])
+• Element 8 (Terminvergabesystem): Fehlermeldung anzeigen (Fehlerbehandlung; danach Rücksprung in den Merge-Knoten vor Element 3 zur erneuten Terminsuche)
+• Element 9 (Guard-Bedingung an Verzweigung): [Termin noch verfügbar] (oder: [verfügbar])
+• Element 10 (Terminvergabesystem): Buchungsinformation an Kunden senden (Kundenbenachrichtigung / Bestätigung)
+• Element 11 (Terminvergabesystem): Buchungsprozess abschließen / Termin fest buchen
+(Hinweis: Da 10 und 11 parallel nach dem Fork-Balken liegen, ist auch die vertauschte Zuordnung 10=Buchung abschließen, 11=Buchungsinformation senden nach IHK-Standard vollkommen richtig).
+
+2. Zweck der Swimlanes (Partitionen):
+• Schwimmbahnen weisen Aktionen eindeutig den jeweiligen Akteuren bzw. Systemen (Verantwortungsbereichen) zu.
+• Hier: 'Anwender' führt Benutzerinteraktionen auf der Webseite aus (Terminart & Termin wählen), während 'Terminvergabesystem' die serverseitige Geschäftslogik, Verfügbarkeitsprüfungen und E-Mail-Benachrichtigungen abwickelt.
+
+3. Unterschied Verzweigung (Decision Raute) vs. Parallelisierung (Fork Balken):
+• Decision Node (Raute): Exklusive Verzweigung (XOR). Es wird GENAU EIN Pfad ausgewählt, abhängig davon, welcher Guard [Termin verfügbar] oder [Termin nicht mehr verfügbar] zutrifft.
+• Fork Node (dicker Balken): Echte Nebenläufigkeit / Parallelität (AND). Beide ausgehenden Pfade (10 und 11) werden GLEICHZEITIG / unabhängig voneinander ausgeführt und münden in den Join-Balken (Synchronisation), bevor der Prozess am Endknoten endet.`,
+        diagramSvg: VisualDiagrams.getErenMichiTerminvergabeAktivitaetSvg(),
+        solutionDiagramSvg: VisualDiagrams.getErenMichiTerminvergabeAktivitaetSvg(),
+        explanation: "Original IHK-Prüfungsaufgabe für Aktivitätsdiagramme: Swimlanes (Anwender vs. System), 11 Prozesselemente, Rücksprungschleife bei Terminkonflikt und Fork/Join-Synchronisation."
+    },
+    {
+        id: 521,
+        isHard: false,
+        difficulty: "standard",
+        isBawueFocus: true,
+        theme: "diagrams",
+        diagramType: "UML Aktivitätsdiagramm",
+        isDiagram: true,
+        topic: "⚡ IHK Originalaufgabe: Aktivitätsdiagramm Eren-Michi - Elemente 7, 8, 9, 10 & 11",
+        type: "multiple-choice",
+        question: "Im Aktivitätsdiagramm des KFZ-Meisterbetriebs Eren-Michi teilt sich der Kontrollfluss nach der Raute (Decision Node) auf. Welche Zuordnung zu den Elementen 7, 8, 9 und den Balken vor 10/11 ist korrekt?",
+        options: [
+            "Element 7 ist der Guard [Termin nicht mehr verfügbar] und führt zur Fehlermeldung (8); Element 9 ist der Guard [Termin noch verfügbar] und führt in einen Fork-Balken, der die Aktionen 10 (Kundeninfo senden) und 11 (Buchung abschließen) parallel startet.",
+            "Element 7 ist ein Startknoten; Element 9 ist eine Datenbank; der Balken vor 10/11 ist eine Raute.",
+            "Element 7 und 9 sind parallele Prozesse; der Balken bedeutet ein erzwungenes System-Rollback.",
+            "Element 8 führt zum sofortigen Programmabsturz; Element 10 und 11 müssen zwingend sequenziell über eine for-Schleife laufen."
+        ],
+        correctAnswer: 0,
+        diagramSvg: VisualDiagrams.getErenMichiTerminvergabeAktivitaetSvg(),
+        solutionDiagramSvg: VisualDiagrams.getErenMichiTerminvergabeAktivitaetSvg(),
+        explanation: "Die Raute prüft über Guards [Bedingungen], ob der Termin noch frei ist. Bei Konflikt wird die Fehlermeldung (8) angezeigt und zurückgesprungen. Bei Erfolg splittert der Fork-Balken den Fluss in zwei parallele Stränge: Bestätigung senden (10) und Termin buchen (11)."
+    },
+    {
+        id: 522,
+        isHard: true,
+        difficulty: "hard",
+        isBawueFocus: true,
+        theme: "diagrams",
+        diagramType: "UML Use-Case-Diagramm",
+        isDiagram: true,
+        topic: "👤 IHK Originalaufgabe: UML Use-Case Statistikabfragen FAQ GmbH (Soft GmbH)",
+        type: "open-text",
+        question: `IHK Original-Prüfungsaufgabe (UML-Anwendungsfalldiagramm):
+Die Soft GmbH wurde von der FAQ GmbH mit der Entwicklung einer Software beauftragt, die den Kunden der FAQ GmbH einen Onlinezugang zu statistischen Daten ermöglicht. Folgende Anforderungen an die Software „Statistikabfragen“ liegen vor:
+• Jeder Nutzer des Onlineangebotes der FAQ GmbH kann Standardstatistiken abrufen.
+• Ein Premiumnutzer kann zusätzlich Premiumstatistiken abrufen. Dazu ist ein Login erforderlich. Falls die Login-Daten nicht vorliegen (z.B. Erstanmeldung), muss dieser Nutzer die erforderlichen Daten eingeben.
+• Ein Admin kann verschiedene Admin-Tools abrufen. Auch dazu ist ein Login erforderlich. Ein Admin kann nur Standardstatistiken abrufen.
+
+Erstellen Sie anhand der vorliegenden Daten ein UML-Anwendungsfalldiagramm.
+Geben Sie die vollständige Fachspezifikation an:
+a) Welche Akteure (Actors) existieren und wie stehen sie zueinander in Beziehung?
+b) Welche Anwendungsfälle (Use-Cases) befinden sich innerhalb der Systemgrenze?
+c) Welche Assoziationen bestehen zwischen Akteuren und Anwendungsfällen?
+d) Welche <<include>>- und <<extend>>-Beziehungen müssen modelliert werden? Geben Sie für jede Beziehung die genaue Pfeilrichtung und die Begründung an.`,
+        musterloesung: `Musterlösung IHK-Prüfungsaufgabe Software „Statistikabfragen“:
+
+a) Akteure (außerhalb der Systemgrenze):
+• 'Nutzer' (Standardkunde): Basis-Akteur.
+• 'Premiumnutzer': Spezialisierter Akteur. Erbt per Generalisierung (durchgezogene Linie mit weißer geschlossener Pfeilspitze) vom Akteur 'Nutzer' ODER besitzt separate Assoziationen zu Standard- und Premiumstatistiken. Durch die Generalisierung erbt er automatisch das Recht, Standardstatistiken abzurufen.
+• 'Admin': Eigenständiger Akteur (Systemverwalter). Er kann Admin-Tools sowie (ausdrücklich laut Anforderung) nur Standardstatistiken abrufen.
+
+b) Anwendungsfälle (Ellipsen innerhalb der Systemgrenze „Statistikabfragen“):
+1. 'Standardstatistiken abrufen'
+2. 'Premiumstatistiken abrufen'
+3. 'Admin-Tools abrufen'
+4. 'Login durchführen' (Authentifizierung)
+5. 'Erstanmeldung durchführen' (bzw. 'Zugangsdaten eingeben')
+
+c) Assoziationen (durchgezogene Linien zwischen Akteur und Use-Case):
+• 'Nutzer' — 'Standardstatistiken abrufen'
+• 'Premiumnutzer' — 'Premiumstatistiken abrufen' (und Zugriff auf Standardstatistiken über Vererbung vom Nutzer)
+• 'Admin' — 'Admin-Tools abrufen'
+• 'Admin' — 'Standardstatistiken abrufen'
+
+d) Beziehungen zwischen Anwendungsfällen:
+1. <<include>> (zwingend erforderlich, Pfeil zeigt ZUM Unter-Use-Case 'Login durchführen'):
+   • 'Premiumstatistiken abrufen' ----<<include>>----> 'Login durchführen'
+   • 'Admin-Tools abrufen' ----<<include>>----> 'Login durchführen'
+   Begründung: Beide Aktionen setzen laut Text zwingend einen erfolgreichen Login voraus. Der Use-Case wird immer vollständig mit ausgeführt.
+2. <<extend>> (optionale bedingte Erweiterung, Pfeil zeigt VOM erweiternden Use-Case ZUM Basisfall 'Login durchführen'):
+   • 'Erstanmeldung durchführen' ----<<extend>>----> 'Login durchführen' (mit Extension-Point / Bedingung: [Login-Daten liegen nicht vor / Erstanmeldung])
+   Begründung: Nur falls der Nutzer noch keine Zugangsdaten hat, erweitert dieser Anwendungsfall den normalen Login-Vorgang um die Eingabe der Erstanmeldedaten.`,
+        diagramSvg: VisualDiagrams.getFaqStatistikabfragenUseCaseSvg(),
+        solutionDiagramSvg: VisualDiagrams.getFaqStatistikabfragenUseCaseSvg(),
+        explanation: "Original IHK-Prüfungsaufgabe: Systemgrenze, Akteurs-Generalisierung (Premiumnutzer erbt von Nutzer), Unterscheidung von <<include>> (zwingend erforderlich) und <<extend>> (optional bei Vorbedingung)."
+    },
+    {
+        id: 523,
+        isHard: false,
+        difficulty: "standard",
+        isBawueFocus: true,
+        theme: "diagrams",
+        diagramType: "UML Use-Case-Diagramm",
+        isDiagram: true,
+        topic: "👤 IHK Originalaufgabe: Use-Case FAQ GmbH - Beziehungen, <<include>> & <<extend>>",
+        type: "multiple-choice",
+        question: "In der IHK-Aufgabe 'Statistikabfragen' der FAQ GmbH müssen 'Premiumstatistiken abrufen', 'Admin-Tools abrufen', 'Login durchführen' und 'Erstanmeldung durchführen' miteinander verknüpft werden. Welche Beziehung und Pfeilrichtung ist nach UML-Standard korrekt?",
+        options: [
+            "'Premiumstatistiken abrufen' und 'Admin-Tools abrufen' binden 'Login durchführen' per <<include>> ein (Pfeil zeigt auf 'Login'); 'Erstanmeldung durchführen' erweitert 'Login durchführen' per <<extend>> (Pfeil zeigt ZUM Basis-Use-Case 'Login').",
+            "Alle Beziehungen werden als durchgezogene Vererbungspfeile ohne Stereotyp dargestellt.",
+            "'Login durchführen' zeigt mit <<include>> auf 'Premiumstatistiken abrufen' und 'Erstanmeldung' zeigt mit Assoziation auf 'Admin'.",
+            "<<extend>> ist immer zwingend erforderlich und <<include>> ist rein optional bei Systemfehlern."
+        ],
+        correctAnswer: 0,
+        diagramSvg: VisualDiagrams.getFaqStatistikabfragenUseCaseSvg(),
+        solutionDiagramSvg: VisualDiagrams.getFaqStatistikabfragenUseCaseSvg(),
+        explanation: "UML-Regel: Bei <<include>> zeigt der Pfeil vom Aufrufer zum eingebundenen Unter-Use-Case (Login). Bei <<extend>> zeigt der Pfeil vom erweiternden Use-Case (Erstanmeldung) zurück auf den Basis-Use-Case (Login), da der Basisfall die Erweiterung im Normalfall nicht kennen muss."
+    },
+    {
+        id: 524,
+        isHard: true,
+        difficulty: "hard",
+        isBawueFocus: true,
+        theme: "diagrams",
+        diagramType: "UML Aktivitätsdiagramm",
+        isDiagram: true,
+        topic: "⚡ IHK Fachaufgabe: Decision & Merge (Raute) vs. Fork & Join (Balken) & Swimlanes",
+        type: "open-text",
+        question: `IHK-Kernwissen Aktivitätsdiagramm (AP1):
+In Prüfungen werden Aktivitätsdiagramme häufig zur Modellierung von Geschäfts- und Softwareprozessen eingesetzt. Dabei wird streng zwischen Alternativen und Parallelitäten unterschieden.
+
+Beantworten Sie folgende Fachfragen:
+a) Erläutern Sie die Symbole und die Arbeitsweise von:
+   - Verzweigung (Decision Node) und Zusammenführung (Merge Node)
+   - Synchronisationsbalken zur Aufspaltung (Fork Node) und Synchronisation (Join Node).
+b) Woran erkennt man an den ausgehenden Pfeilen, ob es sich um eine Raute (Decision) oder einen Balken (Fork) handeln MUSS?
+c) Was geschieht an einem Join-Knoten, wenn der Kontrollfluss des linken Zweigs bereits eintrifft, der rechte Zweig aber noch 10 Sekunden Berechnungszeit benötigt?
+d) Wozu dienen Schwimmbahnen (Swimlanes / Partitionen) und wie beeinflussen Pfeile, die eine Bahngrenze überschreiten, die Ausführung?`,
+        musterloesung: `Musterlösung: Decision/Merge vs. Fork/Join & Swimlanes:
+
+a) Symbole und Arbeitsweise:
+• Raute (Decision & Merge):
+  - Decision Node: Hat 1 Eingang und 2 oder mehr Ausgänge. Jeder Ausgang besitzt eine Guard-Bedingung in eckigen Klammern [Bedingung]. Es wird EXKLUSIV genau ein Pfad durchlaufen (Entweder-Oder / XOR).
+  - Merge Node: Führt mehrere alternative Pfade wieder zu einem Kontrollfluss zusammen (1 Ausgang). Er wartet NICHT auf andere Zweige; sobald ein Kontrollfluss eintrifft, läuft der Prozess sofort weiter.
+• Dicker Balken (Fork & Join):
+  - Fork Node (Parallelität / Splitting): Hat 1 Eingang und 2 oder mehr Ausgänge. Teilt einen Kontrollfluss in mehrere GLEICHZEITIG (nebenläufig) ablaufende Flüsse auf (AND).
+  - Join Node (Synchronisation): Führt parallele Kontrollflüsse zusammen. Hat 2 oder mehr Eingänge und 1 Ausgang.
+
+b) Erkennungsmerkmal (Guards):
+• Raute (Decision): MUSS Guards in eckigen Klammern [Bedingung 1], [Bedingung 2] an den ausgehenden Pfeilen haben, da eine logische Bedingung geprüft wird.
+• Balken (Fork): Besitzt KEINE Guards an den Ausgängen, weil BEIDE (oder alle) Stränge zwingend parallel ausgeführt werden.
+
+c) Verhalten am Join-Knoten:
+• Der Join-Knoten blockiert (Synchronisationsbarriere). Der eintreffende Kontrollfluss des linken Zweigs muss solange pausieren / warten, bis AUCH der rechte Zweig abgeschlossen ist und sein Token am Join-Knoten abliefert. Erst wenn ALLE eingehenden Kanten aktiv sind, wird der ausgehende Pfeil aktiviert.
+
+d) Schwimmbahnen (Swimlanes):
+• Swimlanes teilen das Diagramm optisch und fachlich in Partitionen ein (z. B. Kunde, Webserver, ERP, Lager, Buchhaltung).
+• Wechselt ein Kontrollflusspfeil von einer Swimlane in eine andere, bedeutet dies eine Übergabe der Prozessverantwortung bzw. eine System-Schnittstellenkommunikation (z. B. Netzwerk-Request, API-Call, physische Übergabe).`,
+        diagramSvg: VisualDiagrams.getActivityDecisionVsForkComparisonSvg(),
+        solutionDiagramSvg: VisualDiagrams.getActivityDecisionVsForkComparisonSvg(),
+        explanation: "Fundamentales IHK-Prüfungswissen: Decision/Merge (XOR mit Raute) vs. Fork/Join (AND mit dickem Balken) und Verantwortlichkeitszuweisung durch Schwimmbahnen."
+    },
+    {
+        id: 525,
+        isHard: false,
+        difficulty: "standard",
+        isBawueFocus: true,
+        theme: "diagrams",
+        diagramType: "UML Aktivitätsdiagramm",
+        isDiagram: true,
+        topic: "⚡ IHK Grundlagen: Aktivitätsdiagramm Notationselemente (Raute vs. Balken vs. Endknoten)",
+        type: "multiple-choice",
+        question: "Welche Aussage zu den Notationselementen eines UML-Aktivitätsdiagramms ist fachlich VOLLKOMMEN KORREKT?",
+        options: [
+            "Eine Raute (Decision) erfordert Guards [Bedingungen] und wählt genau einen Pfad; ein dicker Balken (Fork) spaltet in nebenläufige Pfade auf; ein Join-Balken wartet zwingend auf das Eintreffen aller parallelen Pfade.",
+            "Ein dicker Balken prüft Bedingungen mit Guards; eine Raute führt immer alle Pfade gleichzeitig aus.",
+            "Am Join-Knoten wird der schnellste Pfad weitergeleitet, während der langsamere Pfad abgebrochen wird.",
+            "Swimlanes dürfen nur für Hardware-Server verwendet werden, menschliche Anwender sind in UML verboten."
+        ],
+        correctAnswer: 0,
+        diagramSvg: VisualDiagrams.getActivityDecisionVsForkComparisonSvg(),
+        solutionDiagramSvg: VisualDiagrams.getActivityDecisionVsForkComparisonSvg(),
+        explanation: "Decision = XOR mit Guards; Fork = AND (Parallelisierung ohne Guards); Join = Synchronisation (Warten auf alle); Activity Final = Beendet den gesamten Ablauf."
+    },
+    {
+        id: 526,
+        isHard: true,
+        difficulty: "hard",
+        isBawueFocus: true,
+        theme: "diagrams",
+        diagramType: "UML Klassendiagramm",
+        isDiagram: true,
+        topic: "🏛️ IHK Fachaufgabe Klassendiagramm: KFZ-Werkstatt Datenmodell (Eren-Michi)",
+        type: "open-text",
+        question: `IHK Fachaufgabe Klassendiagramm (AP1):
+Für das IT-System des KFZ-Meisterbetriebs Eren-Michi (aus der Terminvergabe-Aufgabe) soll nun das objektorientierte Datenmodell als UML-Klassendiagramm konzipiert werden.
+
+Gegebene Geschäftsanforderungen:
+1. Klasse 'Kunde': Attribute kundenNr: int, name: String, telefon: String, email: String. Ein Kunde kann mehrere Fahrzeuge besitzen (0..*), jedes Fahrzeug ist genau einem Kunden zugeordnet (1).
+2. Klasse 'Fahrzeug': Attribute kennzeichen: String, fin: String, marke: String, modell: String.
+3. Ein Fahrzeug besteht aus fest montierten 'Reifen': Jedes Fahrzeug besitzt genau 4 bis 5 Reifen (inkl. Reserverad). Wird das Fahrzeug aus dem System gelöscht, werden auch seine Reifen-Datensätze gelöscht.
+4. Ein Kunde bucht 'Termin'e (0..*). Ein Termin hat ein datum: Date, eine uhrzeit: String und einen status: String. Jeder Termin ist genau einer 'Terminart' (z. B. Inspektion, HU/AU, Radwechsel) zugeordnet (1).
+5. Zu jedem durchgeführten Termin wird genau eine 'Rechnung' generiert (0..1).
+
+Aufgaben:
+a) Erstellen Sie eine strukturierte Klassenübersicht mit Attributen, geeigneten Datentypen und Sichtbarkeiten (- privat, + öffentlich).
+b) Bestimmen Sie alle Multiplizitäten zwischen den Klassen.
+c) Erläutern Sie den Unterschied zwischen der Beziehung 'Fahrzeug' <-> 'Reifen' (Komposition) und der Beziehung 'Kunde' <-> 'Fahrzeug' (normale Assoziation / Aggregation).`,
+        musterloesung: `Musterlösung: UML-Klassendiagramm KFZ-Meisterbetrieb Eren-Michi:
+
+a) Klassenmodell & Sichtbarkeiten:
+• Klasse Kunde:
+  - kundenNr: int
+  - name: String
+  - telefon: String
+  - email: String
+  + bucheTermin(art: Terminart, datum: Date): Termin
+  + getFahrzeuge(): List<Fahrzeug>
+
+• Klasse Fahrzeug:
+  - kennzeichen: String
+  - fin: String
+  - marke: String
+  - modell: String
+  + getReifen(): List<Reifen>
+
+• Klasse Reifen:
+  - reifenId: int
+  - dimension: String
+  - profilTiefeMm: double
+  - hersteller: String
+
+• Klasse Termin:
+  - terminId: int
+  - datum: Date
+  - uhrzeit: String
+  - status: String
+  + stornieren(): boolean
+  + abschliessen(): void
+
+• Klasse Terminart:
+  - artId: int
+  - bezeichnung: String
+  - standardDauerMinuten: int
+  - basisPreis: double
+
+• Klasse Rechnung:
+  - rechnungsNr: int
+  - rechnungsDatum: Date
+  - gesamtBetrag: double
+  - istBezahlt: boolean
+  + drucken(): void
+
+b) Multiplizitäten & Beziehungen:
+• Kunde (1) <----> (0..*) Fahrzeug (Assoziation: Ein Kunde hat 0 bis n Fahrzeuge; jedes Fahrzeug gehört genau 1 Kunden).
+• Fahrzeug (1) ◆----> (4..5) Reifen (Komposition: schwarze gefüllte Raute am Fahrzeug. Ein Fahrzeug besitzt 4 oder 5 Reifen).
+• Kunde (1) <----> (0..*) Termin (Assoziation: Ein Kunde bucht 0 bis viele Termine).
+• Termin (0..*) <----> (1) Terminart (Assoziation: Jeder Termin hat genau 1 Terminart; eine Terminart kann bei vielen Terminen verwendet werden).
+• Termin (1) <----> (0..1) Rechnung (1-zu-1-Beziehung: Zu einem Termin entsteht maximal 1 Rechnung; eine Rechnung bezieht sich auf genau 1 Termin).
+
+c) Komposition vs. Assoziation/Aggregation:
+• Komposition (Fahrzeug - Reifen, schwarze Raute ◆):
+  - Strenge Existenzabhängigkeit (Teil-Ganzes-Beziehung).
+  - Stirbt das Ganze (Fahrzeug wird gelöscht), sterben auch die Teile (Reifen existieren nicht losgelöst im System).
+• Assoziation (Kunde - Fahrzeug):
+  - Lose Kopplung. Wenn ein Kunde sein Konto kündigt oder stirbt, existiert das Fahrzeug physisch und im Register weiter (z. B. Halterwechsel). Es liegt keine Existenzvernichtung vor.`,
+        solutionDiagramSvg: VisualDiagrams.getClassDiagramSvg(),
+        explanation: "Praxisorientierte Klassendiagramm-Modellierung der Werkstatt-Domäne mit Komposition (Existenzabhängigkeit), 1:n Assoziationen und Multiplizitäten."
+    },
+    {
+        id: 527,
+        isHard: false,
+        difficulty: "standard",
+        isBawueFocus: true,
+        theme: "diagrams",
+        diagramType: "UML Klassendiagramm",
+        isDiagram: true,
+        topic: "🏛️ IHK Klassendiagramm Eren-Michi: Multiplizitäten & Komposition",
+        type: "multiple-choice",
+        question: "Im Klassendiagramm für die KFZ-Werkstatt Eren-Michi besitzt ein Fahrzeug fest zugeordnete Räder/Reifen, die bei Löschung des Fahrzeugs ebenfalls vernichtet werden. Welches UML-Beziehungselement und welche Multiplizität muss verwendet werden?",
+        options: [
+            "Komposition mit ausgefüllter schwarzer Raute (◆) auf der Seite der Klasse Fahrzeug und Multiplizität 4..5 bei Reifen.",
+            "Generalisierung mit weißem Dreieck auf der Seite von Reifen und Multiplizität *.",
+            "Gestrichelte Dependenz-Linie ohne Kardinalität.",
+            "Aggregation mit weißer Raute auf der Seite von Reifen und Multiplizität 1 am Fahrzeug."
+        ],
+        correctAnswer: 0,
+        solutionDiagramSvg: VisualDiagrams.getClassDiagramSvg(),
+        explanation: "Komposition = Schwarze Raute am Ganzen (Fahrzeug). Existenzabhängigkeit: Wird das Fahrzeug gelöscht, werden auch seine Reifen-Instanzen vernichtet. Multiplizität am Reifen ist 4..5."
+    },
+    {
+        id: 528,
+        isHard: true,
+        difficulty: "hard",
+        isBawueFocus: true,
+        theme: "diagrams",
+        diagramType: "UML Zustandsdiagramm",
+        isDiagram: true,
+        topic: "🔄 IHK Fachaufgabe Zustandsdiagramm: Lebenszyklus eines Werkstatt-Termins (Eren-Michi)",
+        type: "open-text",
+        question: `IHK Fachaufgabe Zustandsdiagramm (AP1):
+Im Terminvergabesystem von KFZ-Meisterbetrieb Eren-Michi durchläuft eine Terminbuchung von der ersten Kundeninteraktion bis zur Rechnungsstellung einen definierten Lebenszyklus.
+
+Fachlicher Ablauf:
+1. Nach Start des Reservierungsvorgangs wechselt das System in den Zustand 'TerminAusgewaehlt'.
+2. Wenn der Anwender auf 'Reservieren' klickt und der Termin verfügbar ist ([terminVerfuegbar == true]), wechselt das Objekt in den Zustand 'Blockiert'. Dabei wird ein 15-Minuten-Reservierungstimer gestartet (/ startTimer(15min)).
+3. Bleibt der Anwender 15 Minuten inaktiv (Time Event: after(15min)), feuert ein automatischer Timeout und der Termin wechselt in 'Verfallen' (Freigabe des Termins) und danach in den Endzustand.
+4. Schließt der Anwender die Buchung vor Ablauf der 15 Minuten erfolgreich ab (kaufBestaetigt), wechselt der Termin in 'Gebucht' und eine Bestätigungsmail wird gesendet (/ sendeBestaetigung()).
+5. Am Tag des Werkstattaufenthalts wechselt der Termin bei Annahme des Fahrzeugs in 'In Bearbeitung' und nach Fertigstellung der Reparatur in 'Abgeschlossen'.
+
+Aufgaben:
+a) Nennen Sie alle stabilen Zustände sowie den Pseudozustand (Startknoten) und den Endknoten.
+b) Formulieren Sie die vollständige 3-teilige UML-Syntax für den Übergang von 'TerminAusgewaehlt' nach 'Blockiert':
+   Trigger [Guard] / Action.
+c) Erläutern Sie die Funktionsweise des Timeouts after(15min) und warum dies im Online-Buchungsprozess essenziell ist.`,
+        musterloesung: `Musterlösung: UML-Zustandsdiagramm Werkstatt-Termin:
+
+a) Zustände:
+• Startknoten: Pseudozustand (ausgefüllter schwarzer Kreis ●)
+• Stabile Zustände (abgerundete Rechtecke):
+  - TerminAusgewaehlt
+  - Blockiert (vorübergehend reserviert)
+  - Gebucht (verbindlich bestätigt)
+  - In Bearbeitung (Fahrzeug in der Werkstatt)
+  - Abgeschlossen (Reparatur erledigt, abgerechnet)
+  - Verfallen / Storniert (Abbruchzustand)
+• Endknoten: Final State (Bullauge / schwarzer Punkt in Kreis ⦿)
+
+b) Transitions-Syntax für den Übergang:
+terminAuswaehlen [terminVerfuegbar] / startReservierungsTimer(15min)
+• Trigger (Ereignis): terminAuswaehlen (Benutzer klickt auf Termin)
+• Guard (Wächter-Bedingung in eckigen Klammern): [terminVerfuegbar] (Prüfung gegen Datenbank)
+• Action (Aktion nach dem Schrägstrich): / startReservierungsTimer(15min)
+
+c) Funktionsweise des Time Events (after(15min)):
+• Ein Time Event reagiert auf das Verstreichen einer Zeitspanne seit Eintritt in den Zustand 'Blockiert'.
+• Essenz: Wenn ein Kunde den Buchungsprozess abbricht oder das Browserfenster schließt, darf der Termin nicht dauerhaft blockiert bleiben. Nach 15 Minuten feuert die Transition automatisch ohne Benutzeraktion, gibt den Termin in der Datenbank wieder für andere Kunden frei und beendet die Sitzung.`,
+        solutionDiagramSvg: VisualDiagrams.getZustandsdiagrammSvg(),
+        explanation: "Zustandsmodellierung für Buchungssysteme: Time Events (after), Transitions-Syntax (Trigger [Guard] / Action) und stabiler Lebenszyklus."
+    },
+    {
+        id: 529,
+        isHard: false,
+        difficulty: "standard",
+        isBawueFocus: true,
+        theme: "diagrams",
+        diagramType: "UML Zustandsdiagramm",
+        isDiagram: true,
+        topic: "🔄 IHK Zustandsdiagramm: Transitions-Syntax Trigger [Guard] / Action",
+        type: "multiple-choice",
+        question: "Wie lautet die standardisierte UML-Syntax für eine Transition (Zustandsübergang) in einem UML-Zustandsdiagramm?",
+        options: [
+            "Trigger [Guard] / Action (Ereignis, optionale Bedingung in eckigen Klammern, auszuführende Aktion nach Schrägstrich).",
+            "Action / Trigger <Guard> (Aktion zuerst, dann Ereignis, Bedingung in spitzen Klammern).",
+            "Guard (Trigger) : Action (Bedingung zuerst mit Doppelpunkt).",
+            "State1 -> State2 = Result (Mathematische Gleichung)."
+        ],
+        correctAnswer: 0,
+        solutionDiagramSvg: VisualDiagrams.getZustandsdiagrammSvg(),
+        explanation: "UML 2.x Standard-Syntax: Trigger [Guard] / Action. Der Trigger ist das auslösende Event, der Guard ist die boolesche Bedingung, und die Action ist das Verhalten, das beim Übergang ausgeführt wird."
     }
 ];

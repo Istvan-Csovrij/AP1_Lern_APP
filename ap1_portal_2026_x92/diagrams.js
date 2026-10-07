@@ -3846,6 +3846,398 @@ var VisualDiagrams = {
         `;
     },
 
+    getErenMichiTerminvergabeAktivitaetSvg: function() {
+        return `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 880" width="100%" height="100%">
+            <defs>
+                <marker id="eren-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                    <path d="M 0 1 L 10 5 L 0 9 z" fill="#1e293b" />
+                </marker>
+                <marker id="eren-arr-err" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                    <path d="M 0 1 L 10 5 L 0 9 z" fill="#dc2626" />
+                </marker>
+            </defs>
+            <rect width="920" height="880" fill="#f8fafc" rx="8" />
+
+            <!-- Header -->
+            <text x="460" y="28" font-family="sans-serif" font-size="15" font-weight="bold" fill="#0f172a" text-anchor="middle">UML-Aktivitätsdiagramm: Prozess zur Terminvergabe (KFZ-Meisterbetrieb Eren-Michi)</text>
+            <text x="460" y="48" font-family="sans-serif" font-size="11" font-style="italic" fill="#64748b" text-anchor="middle">IHK-Originalaufgabe: Vollständige Beschriftung der 11 Elemente mit Partitionen (Swimlanes), Verzweigung &amp; Parallelisierung</text>
+
+            <!-- Swimlane 1: Anwender (x: 40 to 320) -->
+            <rect x="40" y="65" width="280" height="790" fill="#ffffff" stroke="#94a3b8" stroke-width="1.5" />
+            <rect x="40" y="65" width="280" height="32" fill="#eff6ff" stroke="#94a3b8" stroke-width="1.5" />
+            <text x="180" y="87" font-family="sans-serif" font-size="13" font-weight="bold" fill="#1d4ed8" text-anchor="middle">Anwender</text>
+
+            <!-- Swimlane 2: Terminvergabesystem (x: 320 to 880) -->
+            <rect x="320" y="65" width="560" height="790" fill="#ffffff" stroke="#94a3b8" stroke-width="1.5" />
+            <rect x="320" y="65" width="560" height="32" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.5" />
+            <text x="600" y="87" font-family="sans-serif" font-size="13" font-weight="bold" fill="#334155" text-anchor="middle">Terminvergabesystem</text>
+
+            <!-- Initial Node (Startknoten) in Anwender -->
+            <circle cx="180" cy="120" r="13" fill="#0f172a" stroke="#0f172a" stroke-width="1" />
+            <text x="180" y="145" font-family="sans-serif" font-size="10" font-weight="bold" fill="#334155" text-anchor="middle">Startknoten</text>
+            <line x1="180" y1="133" x2="180" y2="165" stroke="#1e293b" stroke-width="2" marker-end="url(#eren-arr)" />
+
+            <!-- Initial Action: Aufruf Terminreservierung (Anwender) -->
+            <rect x="95" y="165" width="170" height="42" fill="#f1f5f9" stroke="#64748b" stroke-width="1.8" rx="16" />
+            <text x="180" y="191" font-family="sans-serif" font-size="11" font-weight="bold" fill="#1e293b" text-anchor="middle">Aufruf Terminreservierung</text>
+
+            <!-- Transition to Element 1 (System) -->
+            <line x1="265" y1="186" x2="420" y2="186" stroke="#1e293b" stroke-width="2" marker-end="url(#eren-arr)" />
+
+            <!-- Element 1: Anzeige aller verfügbaren Terminarten (System) -->
+            <rect x="420" y="162" width="340" height="48" fill="#f0f9ff" stroke="#0284c7" stroke-width="2" rx="18" />
+            <rect x="426" y="172" width="28" height="20" fill="#0284c7" rx="4" />
+            <text x="440" y="186" font-family="sans-serif" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">1</text>
+            <text x="590" y="191" font-family="sans-serif" font-size="12" font-weight="bold" fill="#0369a1" text-anchor="middle">Anzeige aller verfügbaren Terminarten</text>
+
+            <!-- Transition from 1 to 2 (Anwender) -->
+            <path d="M 420 195 L 300 195 L 300 245 L 265 245" fill="none" stroke="#1e293b" stroke-width="2" marker-end="url(#eren-arr)" />
+
+            <!-- Element 2: Gewünschte Terminart auswählen (Anwender) -->
+            <rect x="75" y="225" width="190" height="48" fill="#eff6ff" stroke="#2563eb" stroke-width="2" rx="18" />
+            <rect x="81" y="235" width="28" height="20" fill="#2563eb" rx="4" />
+            <text x="95" y="249" font-family="sans-serif" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">2</text>
+            <text x="180" y="248" font-family="sans-serif" font-size="11" font-weight="bold" fill="#1e40af" text-anchor="middle">Gewünschte Terminart</text>
+            <text x="180" y="262" font-family="sans-serif" font-size="10" font-weight="bold" fill="#1e40af" text-anchor="middle">auswählen</text>
+
+            <!-- Transition from 2 to Merge Node -->
+            <path d="M 265 255 L 535 255 L 535 285" fill="none" stroke="#1e293b" stroke-width="2" marker-end="url(#eren-arr)" />
+
+            <!-- Merge Node (Zusammenführung Raute) -->
+            <polygon points="535,285 555,302 535,320 515,302" fill="#fef3c7" stroke="#d97706" stroke-width="2" />
+            <text x="570" y="306" font-family="sans-serif" font-size="10" font-weight="bold" fill="#b45309">Merge-Knoten (Zusammenführung)</text>
+
+            <!-- Transition from Merge to 3 -->
+            <line x1="535" y1="320" x2="535" y2="340" stroke="#1e293b" stroke-width="2" marker-end="url(#eren-arr)" />
+
+            <!-- Element 3: Ersten freien Termin suchen (System) -->
+            <rect x="385" y="340" width="300" height="48" fill="#f0f9ff" stroke="#0284c7" stroke-width="2" rx="18" />
+            <rect x="391" y="350" width="28" height="20" fill="#0284c7" rx="4" />
+            <text x="405" y="364" font-family="sans-serif" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">3</text>
+            <text x="545" y="369" font-family="sans-serif" font-size="12" font-weight="bold" fill="#0369a1" text-anchor="middle">Ersten freien Termin suchen</text>
+
+            <!-- Transition from 3 to 5 -->
+            <line x1="535" y1="388" x2="535" y2="415" stroke="#1e293b" stroke-width="2" marker-end="url(#eren-arr)" />
+
+            <!-- Element 5: Freie Termine (und Monat) anzeigen (System) -->
+            <rect x="385" y="415" width="300" height="48" fill="#f0f9ff" stroke="#0284c7" stroke-width="2" rx="18" />
+            <rect x="391" y="425" width="28" height="20" fill="#0284c7" rx="4" />
+            <text x="405" y="439" font-family="sans-serif" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">5</text>
+            <text x="545" y="444" font-family="sans-serif" font-size="12" font-weight="bold" fill="#0369a1" text-anchor="middle">Freie Termine &amp; Monat anzeigen</text>
+
+            <!-- Transition from 5 to 4 (Anwender) -->
+            <path d="M 385 439 L 265 439" fill="none" stroke="#1e293b" stroke-width="2" marker-end="url(#eren-arr)" />
+
+            <!-- Element 4: Freien Termin auswählen (Anwender) -->
+            <rect x="75" y="415" width="190" height="48" fill="#eff6ff" stroke="#2563eb" stroke-width="2" rx="18" />
+            <rect x="81" y="425" width="28" height="20" fill="#2563eb" rx="4" />
+            <text x="95" y="439" font-family="sans-serif" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">4</text>
+            <text x="180" y="444" font-family="sans-serif" font-size="11" font-weight="bold" fill="#1e40af" text-anchor="middle">Freien Termin auswählen</text>
+
+            <!-- Transition from 4 to 6 (System) -->
+            <path d="M 180 463 L 180 500 L 385 500" fill="none" stroke="#1e293b" stroke-width="2" marker-end="url(#eren-arr)" />
+
+            <!-- Element 6: Termin buchen bzw. blockieren (System) -->
+            <rect x="385" y="480" width="300" height="48" fill="#f0f9ff" stroke="#0284c7" stroke-width="2" rx="18" />
+            <rect x="391" y="490" width="28" height="20" fill="#0284c7" rx="4" />
+            <text x="405" y="504" font-family="sans-serif" font-size="11" font-weight="bold" fill="#ffffff" text-anchor="middle">6</text>
+            <text x="545" y="509" font-family="sans-serif" font-size="12" font-weight="bold" fill="#0369a1" text-anchor="middle">Termin buchen bzw. blockieren</text>
+
+            <!-- Transition from 6 to Decision Node -->
+            <line x1="535" y1="528" x2="535" y2="550" stroke="#1e293b" stroke-width="2" marker-end="url(#eren-arr)" />
+
+            <!-- Decision Node (Verzweigung Raute) -->
+            <polygon points="535,550 555,568 535,586 515,568" fill="#fef3c7" stroke="#d97706" stroke-width="2" />
+            <text x="445" y="562" font-family="sans-serif" font-size="10" font-weight="bold" fill="#b45309">Decision (Verzweigung)</text>
+
+            <!-- Branch to Element 8 with Guard 7 [Termin nicht mehr verfügbar] -->
+            <line x1="555" y1="568" x2="710" y2="568" stroke="#dc2626" stroke-width="2" marker-end="url(#eren-arr-err)" />
+            <!-- Element 7 (Guard) -->
+            <rect x="560" y="546" width="145" height="18" fill="#fee2e2" stroke="#dc2626" rx="4" />
+            <text x="632" y="559" font-family="sans-serif" font-size="9" font-weight="bold" fill="#991b1b" text-anchor="middle">7: [Termin nicht mehr verfügbar]</text>
+
+            <!-- Element 8: Fehlermeldung anzeigen (System) -->
+            <rect x="710" y="545" width="160" height="46" fill="#fef2f2" stroke="#dc2626" stroke-width="2" rx="16" />
+            <rect x="715" y="555" width="24" height="18" fill="#dc2626" rx="4" />
+            <text x="727" y="568" font-family="sans-serif" font-size="10" font-weight="bold" fill="#ffffff" text-anchor="middle">8</text>
+            <text x="795" y="566" font-family="sans-serif" font-size="10" font-weight="bold" fill="#991b1b" text-anchor="middle">Fehlermeldung</text>
+            <text x="795" y="580" font-family="sans-serif" font-size="10" font-weight="bold" fill="#991b1b" text-anchor="middle">anzeigen</text>
+
+            <!-- Loop back from 8 to Merge Node (above 3) -->
+            <path d="M 830 545 L 830 302 L 555 302" fill="none" stroke="#dc2626" stroke-width="2" stroke-dasharray="4,3" marker-end="url(#eren-arr-err)" />
+            <text x="835" y="420" font-family="sans-serif" font-size="9.5" font-weight="bold" fill="#dc2626" transform="rotate(90, 835, 420)">Rücksprung: erneute Suche nach freiem Termin</text>
+
+            <!-- Branch down to Fork Bar with Guard 9 [Termin verfügbar] -->
+            <line x1="535" y1="586" x2="535" y2="640" stroke="#16a34a" stroke-width="2" marker-end="url(#eren-arr)" />
+            <!-- Element 9 (Guard) -->
+            <rect x="460" y="600" width="150" height="20" fill="#dcfce7" stroke="#16a34a" rx="4" />
+            <text x="535" y="614" font-family="sans-serif" font-size="10" font-weight="bold" fill="#15803d" text-anchor="middle">9: [Termin noch verfügbar]</text>
+
+            <!-- Fork Bar (Synchronisationsbalken / Parallelität) -->
+            <rect x="380" y="640" width="310" height="8" fill="#0f172a" rx="3" />
+            <text x="700" y="647" font-family="sans-serif" font-size="10" font-weight="bold" fill="#0f172a">Fork (Parallelität / Splitting)</text>
+
+            <!-- Parallel branches from Fork -->
+            <line x1="440" y1="648" x2="440" y2="675" stroke="#1e293b" stroke-width="2" marker-end="url(#eren-arr)" />
+            <line x1="620" y1="648" x2="620" y2="675" stroke="#1e293b" stroke-width="2" marker-end="url(#eren-arr)" />
+
+            <!-- Element 10: Buchungsinformation an Kunden senden (System) -->
+            <rect x="350" y="675" width="180" height="52" fill="#f0fdf4" stroke="#16a34a" stroke-width="2" rx="16" />
+            <rect x="355" y="685" width="24" height="18" fill="#16a34a" rx="4" />
+            <text x="367" y="698" font-family="sans-serif" font-size="10" font-weight="bold" fill="#ffffff" text-anchor="middle">10</text>
+            <text x="445" y="696" font-family="sans-serif" font-size="10.5" font-weight="bold" fill="#14532d" text-anchor="middle">Buchungsinformation</text>
+            <text x="445" y="711" font-family="sans-serif" font-size="10.5" font-weight="bold" fill="#14532d" text-anchor="middle">an Kunden senden</text>
+
+            <!-- Element 11: Buchungsprozess abschließen / Termin fest buchen (System) -->
+            <rect x="545" y="675" width="180" height="52" fill="#f0fdf4" stroke="#16a34a" stroke-width="2" rx="16" />
+            <rect x="550" y="685" width="24" height="18" fill="#16a34a" rx="4" />
+            <text x="562" y="698" font-family="sans-serif" font-size="10" font-weight="bold" fill="#ffffff" text-anchor="middle">11</text>
+            <text x="640" y="696" font-family="sans-serif" font-size="10.5" font-weight="bold" fill="#14532d" text-anchor="middle">Buchungsprozess</text>
+            <text x="640" y="711" font-family="sans-serif" font-size="10.5" font-weight="bold" fill="#14532d" text-anchor="middle">abschließen (gebucht)</text>
+
+            <!-- Branches to Join Bar -->
+            <line x1="440" y1="727" x2="440" y2="755" stroke="#1e293b" stroke-width="2" marker-end="url(#eren-arr)" />
+            <line x1="620" y1="727" x2="620" y2="755" stroke="#1e293b" stroke-width="2" marker-end="url(#eren-arr)" />
+
+            <!-- Join Bar (Synchronisationsbalken / Zusammenführung) -->
+            <rect x="380" y="755" width="310" height="8" fill="#0f172a" rx="3" />
+            <text x="700" y="762" font-family="sans-serif" font-size="10" font-weight="bold" fill="#0f172a">Join (Synchronisation)</text>
+
+            <!-- From Join to Activity Final Node -->
+            <line x1="535" y1="763" x2="535" y2="800" stroke="#1e293b" stroke-width="2" marker-end="url(#eren-arr)" />
+
+            <!-- Activity Final Node (⦿) -->
+            <circle cx="535" cy="815" r="14" fill="#ffffff" stroke="#0f172a" stroke-width="2" />
+            <circle cx="535" cy="815" r="8" fill="#0f172a" />
+            <text x="535" y="845" font-family="sans-serif" font-size="10" font-weight="bold" fill="#334155" text-anchor="middle">Ablauf beendet (Activity Final)</text>
+        </svg>
+        `;
+    },
+
+    getFaqStatistikabfragenUseCaseSvg: function() {
+        return `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 620" width="100%" height="100%">
+            <defs>
+                <marker id="uc-gen-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+                    <polygon points="0,1 10,5 0,9" fill="#ffffff" stroke="#0f172a" stroke-width="1.5" />
+                </marker>
+                <marker id="uc-inc-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                    <path d="M 0 1 L 10 5 L 0 9 z" fill="#0369a1" />
+                </marker>
+                <marker id="uc-ext-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                    <path d="M 0 1 L 10 5 L 0 9 z" fill="#b45309" />
+                </marker>
+            </defs>
+            <rect width="920" height="620" fill="#f8fafc" rx="8" />
+
+            <!-- Title -->
+            <text x="460" y="28" font-family="sans-serif" font-size="15" font-weight="bold" fill="#0f172a" text-anchor="middle">UML-Anwendungsfalldiagramm: Software „Statistikabfragen“ (Soft GmbH für FAQ GmbH)</text>
+            <text x="460" y="48" font-family="sans-serif" font-size="11" font-style="italic" fill="#64748b" text-anchor="middle">IHK-Originalaufgabe: Akteure, Systemgrenze, Standard-/Premiumabfragen, &lt;&lt;include&gt;&gt; &amp; &lt;&lt;extend&gt;&gt;</text>
+
+            <!-- System Boundary -->
+            <rect x="230" y="65" width="480" height="535" fill="#ffffff" stroke="#0284c7" stroke-width="2" rx="6" />
+            <rect x="230" y="65" width="480" height="30" fill="#e0f2fe" rx="6" />
+            <text x="470" y="85" font-family="sans-serif" font-size="12" font-weight="bold" fill="#0369a1" text-anchor="middle">Systemgrenze: „Statistikabfragen“ (FAQ GmbH)</text>
+
+            <!-- Actor 1: Nutzer (Standardnutzer, links oben) -->
+            <circle cx="100" cy="130" r="14" fill="#ffffff" stroke="#0f172a" stroke-width="2" />
+            <line x1="100" y1="144" x2="100" y2="185" stroke="#0f172a" stroke-width="2" />
+            <line x1="75" y1="158" x2="125" y2="158" stroke="#0f172a" stroke-width="2" />
+            <line x1="100" y1="185" x2="80" y2="220" stroke="#0f172a" stroke-width="2" />
+            <line x1="100" y1="185" x2="120" y2="220" stroke="#0f172a" stroke-width="2" />
+            <text x="100" y="240" font-family="sans-serif" font-size="12" font-weight="bold" fill="#0f172a" text-anchor="middle">Nutzer</text>
+            <text x="100" y="254" font-family="sans-serif" font-size="10" fill="#64748b" text-anchor="middle">(Standardkunde)</text>
+
+            <!-- Actor 2: Premiumnutzer (links unten) -->
+            <circle cx="100" cy="380" r="14" fill="#ffffff" stroke="#0f172a" stroke-width="2" />
+            <line x1="100" y1="394" x2="100" y2="435" stroke="#0f172a" stroke-width="2" />
+            <line x1="75" y1="408" x2="125" y2="408" stroke="#0f172a" stroke-width="2" />
+            <line x1="100" y1="435" x2="80" y2="470" stroke="#0f172a" stroke-width="2" />
+            <line x1="100" y1="435" x2="120" y2="470" stroke="#0f172a" stroke-width="2" />
+            <text x="100" y="490" font-family="sans-serif" font-size="12" font-weight="bold" fill="#0f172a" text-anchor="middle">Premiumnutzer</text>
+            <text x="100" y="504" font-family="sans-serif" font-size="10" fill="#64748b" text-anchor="middle">(erweiterter Zugang)</text>
+
+            <!-- Generalization Actor: Premiumnutzer -> Nutzer -->
+            <line x1="100" y1="360" x2="100" y2="265" stroke="#0f172a" stroke-width="1.8" marker-end="url(#uc-gen-arr)" />
+            <text x="140" y="315" font-family="sans-serif" font-size="9.5" font-style="italic" fill="#475569">Generalisierung</text>
+
+            <!-- Actor 3: Admin (rechts Mitte) -->
+            <circle cx="820" cy="220" r="14" fill="#ffffff" stroke="#0f172a" stroke-width="2" />
+            <line x1="820" y1="234" x2="820" y2="275" stroke="#0f172a" stroke-width="2" />
+            <line x1="795" y1="248" x2="845" y2="248" stroke="#0f172a" stroke-width="2" />
+            <line x1="820" y1="275" x2="800" y2="310" stroke="#0f172a" stroke-width="2" />
+            <line x1="820" y1="275" x2="840" y2="310" stroke="#0f172a" stroke-width="2" />
+            <text x="820" y="330" font-family="sans-serif" font-size="12" font-weight="bold" fill="#0f172a" text-anchor="middle">Admin</text>
+            <text x="820" y="344" font-family="sans-serif" font-size="10" fill="#64748b" text-anchor="middle">(Systemverwalter)</text>
+
+            <!-- UC 1: Standardstatistiken abrufen -->
+            <ellipse cx="470" cy="130" rx="140" ry="26" fill="#f0f9ff" stroke="#0284c7" stroke-width="2" />
+            <text x="470" y="134" font-family="sans-serif" font-size="11.5" font-weight="bold" fill="#0369a1" text-anchor="middle">Standardstatistiken abrufen</text>
+
+            <!-- Associations to UC 1 -->
+            <line x1="125" y1="160" x2="330" y2="135" stroke="#1e293b" stroke-width="1.5" />
+            <line x1="795" y1="245" x2="610" y2="140" stroke="#1e293b" stroke-width="1.5" />
+
+            <!-- UC 2: Premiumstatistiken abrufen -->
+            <ellipse cx="470" cy="235" rx="140" ry="26" fill="#f0fdf4" stroke="#16a34a" stroke-width="2" />
+            <text x="470" y="239" font-family="sans-serif" font-size="11.5" font-weight="bold" fill="#15803d" text-anchor="middle">Premiumstatistiken abrufen</text>
+
+            <!-- Association Premiumnutzer -> UC 2 -->
+            <line x1="125" y1="410" x2="340" y2="245" stroke="#1e293b" stroke-width="1.5" />
+
+            <!-- UC 3: Admin-Tools abrufen -->
+            <ellipse cx="470" cy="340" rx="140" ry="26" fill="#faf5ff" stroke="#9333ea" stroke-width="2" />
+            <text x="470" y="344" font-family="sans-serif" font-size="11.5" font-weight="bold" fill="#7e22ce" text-anchor="middle">Admin-Tools abrufen</text>
+
+            <!-- Association Admin -> UC 3 -->
+            <line x1="795" y1="260" x2="610" y2="340" stroke="#1e293b" stroke-width="1.5" />
+
+            <!-- UC 4: Login durchführen -->
+            <ellipse cx="470" cy="445" rx="130" ry="26" fill="#fefce8" stroke="#ca8a04" stroke-width="2" />
+            <text x="470" y="449" font-family="sans-serif" font-size="12" font-weight="bold" fill="#a16207" text-anchor="middle">Login durchführen</text>
+
+            <!-- UC 2 --<<include>>--> UC 4 -->
+            <line x1="420" y1="261" x2="420" y2="419" stroke="#0369a1" stroke-width="1.8" stroke-dasharray="5,3" marker-end="url(#uc-inc-arr)" />
+            <rect x="360" y="330" width="85" height="18" fill="#ffffff" stroke="#0369a1" rx="3" />
+            <text x="402" y="343" font-family="sans-serif" font-size="10" font-weight="bold" fill="#0369a1" text-anchor="middle">&lt;&lt;include&gt;&gt;</text>
+
+            <!-- UC 3 --<<include>>--> UC 4 -->
+            <line x1="520" y1="366" x2="520" y2="419" stroke="#0369a1" stroke-width="1.8" stroke-dasharray="5,3" marker-end="url(#uc-inc-arr)" />
+            <rect x="525" y="385" width="85" height="18" fill="#ffffff" stroke="#0369a1" rx="3" />
+            <text x="567" y="398" font-family="sans-serif" font-size="10" font-weight="bold" fill="#0369a1" text-anchor="middle">&lt;&lt;include&gt;&gt;</text>
+
+            <!-- UC 5: Erstanmeldung durchführen / Zugangsdaten eingeben -->
+            <ellipse cx="470" cy="545" rx="160" ry="26" fill="#fff7ed" stroke="#ea580c" stroke-width="2" />
+            <text x="470" y="549" font-family="sans-serif" font-size="11" font-weight="bold" fill="#c2410c" text-anchor="middle">Erstanmeldung durchführen (Daten eingeben)</text>
+
+            <!-- UC 5 --<<extend>>--> UC 4 (Pfeil zeigt ZUM Basis-Use-Case UC 4!) -->
+            <line x1="470" y1="519" x2="470" y2="471" stroke="#b45309" stroke-width="1.8" stroke-dasharray="5,3" marker-end="url(#uc-ext-arr)" />
+            <rect x="420" y="488" width="100" height="18" fill="#ffffff" stroke="#b45309" rx="3" />
+            <text x="470" y="501" font-family="sans-serif" font-size="9.5" font-weight="bold" fill="#b45309" text-anchor="middle">&lt;&lt;extend&gt;&gt;</text>
+            <text x="590" y="501" font-family="sans-serif" font-size="9" font-style="italic" fill="#78350f">[Bedingung: Login-Daten fehlen]</text>
+        </svg>
+        `;
+    },
+
+    getActivityDecisionVsForkComparisonSvg: function() {
+        return `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 640" width="100%" height="100%">
+            <defs>
+                <marker id="comp-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                    <path d="M 0 1 L 10 5 L 0 9 z" fill="#1e293b" />
+                </marker>
+            </defs>
+            <rect width="920" height="640" fill="#f8fafc" rx="8" />
+
+            <!-- Title -->
+            <text x="460" y="30" font-family="sans-serif" font-size="16" font-weight="bold" fill="#0f172a" text-anchor="middle">UML 2.5 Aktivitätsdiagramm: Verzweigung (Raute) vs. Parallelität (Balken)</text>
+            <text x="460" y="50" font-family="sans-serif" font-size="11.5" font-style="italic" fill="#64748b" text-anchor="middle">IHK-Kernwissen: Decision / Merge (Entweder-Oder) gegenüber Fork / Join (Gleichzeitigkeit) &amp; Swimlanes</text>
+
+            <!-- Left Box: Decision / Merge -->
+            <rect x="30" y="70" width="415" height="400" fill="#ffffff" stroke="#3b82f6" stroke-width="2" rx="8" />
+            <rect x="30" y="70" width="415" height="34" fill="#eff6ff" rx="8" />
+            <text x="237" y="93" font-family="sans-serif" font-size="13" font-weight="bold" fill="#1d4ed8" text-anchor="middle">1. Verzweigung &amp; Zusammenführung (Raute)</text>
+
+            <!-- Activity top -->
+            <circle cx="237" cy="130" r="11" fill="#0f172a" />
+            <line x1="237" y1="141" x2="237" y2="160" stroke="#1e293b" stroke-width="2" marker-end="url(#comp-arr)" />
+            <rect x="172" y="160" width="130" height="38" fill="#f1f5f9" stroke="#64748b" stroke-width="1.8" rx="14" />
+            <text x="237" y="184" font-family="sans-serif" font-size="11" font-weight="bold" fill="#1e293b" text-anchor="middle">Aktivität A</text>
+
+            <line x1="237" y1="198" x2="237" y2="225" stroke="#1e293b" stroke-width="2" marker-end="url(#comp-arr)" />
+
+            <!-- Decision Diamond -->
+            <polygon points="237,225 257,242 237,260 217,242" fill="#fef3c7" stroke="#d97706" stroke-width="2" />
+            <text x="268" y="246" font-family="sans-serif" font-size="10.5" font-weight="bold" fill="#b45309">Verzweigung (Decision)</text>
+
+            <!-- Branch Left: [Daten sind nicht ok] -->
+            <line x1="217" y1="242" x2="115" y2="242" stroke="#dc2626" stroke-width="2" />
+            <line x1="115" y1="242" x2="115" y2="280" stroke="#dc2626" stroke-width="2" marker-end="url(#comp-arr)" />
+            <text x="145" y="235" font-family="sans-serif" font-size="9" font-weight="bold" fill="#dc2626">[Daten nicht ok]</text>
+            <rect x="55" y="280" width="120" height="36" fill="#fef2f2" stroke="#dc2626" stroke-width="1.8" rx="12" />
+            <text x="115" y="302" font-family="sans-serif" font-size="10" font-weight="bold" fill="#991b1b" text-anchor="middle">Korrekturpfad</text>
+
+            <!-- Branch Right: [Daten sind ok] -->
+            <line x1="257" y1="242" x2="355" y2="242" stroke="#16a34a" stroke-width="2" />
+            <line x1="355" y1="242" x2="355" y2="280" stroke="#16a34a" stroke-width="2" marker-end="url(#comp-arr)" />
+            <text x="325" y="235" font-family="sans-serif" font-size="9" font-weight="bold" fill="#16a34a">[Daten ok]</text>
+            <rect x="295" y="280" width="120" height="36" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.8" rx="12" />
+            <text x="355" y="302" font-family="sans-serif" font-size="10" font-weight="bold" fill="#14532d" text-anchor="middle">Regelpfad</text>
+
+            <!-- Merge Diamond -->
+            <line x1="115" y1="316" x2="115" y2="355" stroke="#1e293b" stroke-width="2" />
+            <line x1="115" y1="355" x2="217" y2="355" stroke="#1e293b" stroke-width="2" marker-end="url(#comp-arr)" />
+            <line x1="355" y1="316" x2="355" y2="355" stroke="#1e293b" stroke-width="2" />
+            <line x1="355" y1="355" x2="257" y2="355" stroke="#1e293b" stroke-width="2" marker-end="url(#comp-arr)" />
+
+            <polygon points="237,338 257,355 237,372 217,355" fill="#fef3c7" stroke="#d97706" stroke-width="2" />
+            <text x="268" y="360" font-family="sans-serif" font-size="10.5" font-weight="bold" fill="#b45309">Zusammenführung (Merge)</text>
+
+            <line x1="237" y1="372" x2="237" y2="400" stroke="#1e293b" stroke-width="2" marker-end="url(#comp-arr)" />
+            <rect x="172" y="400" width="130" height="38" fill="#f1f5f9" stroke="#64748b" stroke-width="1.8" rx="14" />
+            <text x="237" y="424" font-family="sans-serif" font-size="11" font-weight="bold" fill="#1e293b" text-anchor="middle">Folgeaktivität</text>
+            <text x="237" y="456" font-family="sans-serif" font-size="10" font-style="italic" fill="#2563eb" text-anchor="middle">Nur GENAU EIN Pfad wird ausgeführt!</text>
+
+            <!-- Right Box: Fork / Join -->
+            <rect x="475" y="70" width="415" height="400" fill="#ffffff" stroke="#10b981" stroke-width="2" rx="8" />
+            <rect x="475" y="70" width="415" height="34" fill="#ecfdf5" rx="8" />
+            <text x="682" y="93" font-family="sans-serif" font-size="13" font-weight="bold" fill="#047857" text-anchor="middle">2. Parallelität &amp; Synchronisation (Balken)</text>
+
+            <circle cx="682" cy="130" r="11" fill="#0f172a" />
+            <line x1="682" y1="141" x2="682" y2="160" stroke="#1e293b" stroke-width="2" marker-end="url(#comp-arr)" />
+            <rect x="617" y="160" width="130" height="38" fill="#f1f5f9" stroke="#64748b" stroke-width="1.8" rx="14" />
+            <text x="682" y="184" font-family="sans-serif" font-size="11" font-weight="bold" fill="#1e293b" text-anchor="middle">Aktivität B</text>
+
+            <line x1="682" y1="198" x2="682" y2="230" stroke="#1e293b" stroke-width="2" marker-end="url(#comp-arr)" />
+
+            <!-- Fork Bar -->
+            <rect x="545" y="230" width="275" height="8" fill="#0f172a" rx="3" />
+            <text x="828" y="237" font-family="sans-serif" font-size="10.5" font-weight="bold" fill="#0f172a">Fork (Splitting)</text>
+
+            <!-- Parallel Paths -->
+            <line x1="590" y1="238" x2="590" y2="280" stroke="#1e293b" stroke-width="2" marker-end="url(#comp-arr)" />
+            <line x1="775" y1="238" x2="775" y2="280" stroke="#1e293b" stroke-width="2" marker-end="url(#comp-arr)" />
+
+            <rect x="525" y="280" width="130" height="38" fill="#f0fdf4" stroke="#10b981" stroke-width="1.8" rx="14" />
+            <text x="590" y="303" font-family="sans-serif" font-size="10.5" font-weight="bold" fill="#047857" text-anchor="middle">Parallel-Aktion 1</text>
+
+            <rect x="710" y="280" width="130" height="38" fill="#f0fdf4" stroke="#10b981" stroke-width="1.8" rx="14" />
+            <text x="775" y="303" font-family="sans-serif" font-size="10.5" font-weight="bold" fill="#047857" text-anchor="middle">Parallel-Aktion 2</text>
+
+            <!-- Join Bar -->
+            <line x1="590" y1="318" x2="590" y2="355" stroke="#1e293b" stroke-width="2" marker-end="url(#comp-arr)" />
+            <line x1="775" y1="318" x2="775" y2="355" stroke="#1e293b" stroke-width="2" marker-end="url(#comp-arr)" />
+
+            <rect x="545" y="355" width="275" height="8" fill="#0f172a" rx="3" />
+            <text x="828" y="362" font-family="sans-serif" font-size="10.5" font-weight="bold" fill="#0f172a">Join (Synchronisation)</text>
+
+            <line x1="682" y1="363" x2="682" y2="400" stroke="#1e293b" stroke-width="2" marker-end="url(#comp-arr)" />
+            <rect x="617" y="400" width="130" height="38" fill="#f1f5f9" stroke="#64748b" stroke-width="1.8" rx="14" />
+            <text x="682" y="424" font-family="sans-serif" font-size="11" font-weight="bold" fill="#1e293b" text-anchor="middle">Folgeaktivität</text>
+            <text x="682" y="456" font-family="sans-serif" font-size="10" font-style="italic" fill="#047857" text-anchor="middle">BEIDE Pfade laufen GLEICHZEITIG ab!</text>
+
+            <!-- Bottom: Swimlanes Summary -->
+            <rect x="30" y="485" width="860" height="140" fill="#ffffff" stroke="#94a3b8" stroke-width="1.5" rx="8" />
+            <rect x="30" y="485" width="860" height="28" fill="#f1f5f9" rx="8" />
+            <text x="460" y="504" font-family="sans-serif" font-size="12" font-weight="bold" fill="#334155" text-anchor="middle">3. Swimlanes (Schwimmbahnen / Partitionen) – Wer macht was?</text>
+
+            <!-- Swimlanes illustration -->
+            <rect x="50" y="520" width="370" height="90" fill="#eff6ff" stroke="#93c5fd" rx="4" />
+            <text x="235" y="538" font-family="sans-serif" font-size="11" font-weight="bold" fill="#1d4ed8" text-anchor="middle">Bahn 1: Anwender / Kunde</text>
+            <rect x="155" y="552" width="160" height="32" fill="#ffffff" stroke="#2563eb" rx="10" />
+            <text x="235" y="572" font-family="sans-serif" font-size="10" font-weight="bold" fill="#1e40af" text-anchor="middle">Terminart auswählen</text>
+
+            <path d="M 315 568 L 565 568" stroke="#1e293b" stroke-width="2" marker-end="url(#comp-arr)" />
+
+            <rect x="490" y="520" width="380" height="90" fill="#f8fafc" stroke="#cbd5e1" rx="4" />
+            <text x="680" y="538" font-family="sans-serif" font-size="11" font-weight="bold" fill="#334155" text-anchor="middle">Bahn 2: System / Backend</text>
+            <rect x="575" y="552" width="210" height="32" fill="#ffffff" stroke="#475569" rx="10" />
+            <text x="680" y="572" font-family="sans-serif" font-size="10" font-weight="bold" fill="#1e293b" text-anchor="middle">Freie Termine ermitteln</text>
+        </svg>
+        `;
+    },
+
     getAutoDiagramSvg: function(q) {
         if (!q) return null;
         // 1. Wenn die Frage bereits eine explizite grafische Musterlösung besitzt
@@ -3857,10 +4249,16 @@ var VisualDiagrams = {
             return q.diagramSvg;
         }
         
-        // 3. Strikte Prüfung: Reine Theorie-/Textaufgaben (z. B. ID 214, 222, 224, 378, 409) erhalten KEIN generisches Auto-Diagramm
+        // 3. Strikte Prüfung: Reine Theorie-/Textaufgaben erhalten KEIN generisches Auto-Diagramm
         if (q.id === 214 || q.id === 222 || q.id === 224 || q.id === 378 || q.id === 409) {
             return null;
         }
+
+        // Subnetz-Berechnungen (z. B. VLSM Multi-Subnetzplanung) oder reine Rechnen-/WiSo-Aufgaben ausschließen!
+        const isSubnet = (q.topic && q.topic.toLowerCase().includes("subnetz")) || 
+                         (q.question && (q.question.toLowerCase().includes("subnetz") || q.question.toLowerCase().includes("vlsm")));
+        if (isSubnet && !q.isDiagram) return null;
+        if ((q.isCalculation || q.isPowerCalc || q.isZahlensysteme) && !q.isDiagram) return null;
 
         const isExplicitDiagramTask = q.isDiagram === true || 
                                       q.theme === "diagrams" || 
@@ -3871,7 +4269,7 @@ var VisualDiagrams = {
                                           q.topic.toLowerCase().includes("erd") || 
                                           q.topic.toLowerCase().includes("epk") || 
                                           q.topic.toLowerCase().includes("bpmn") || 
-                                          q.topic.toLowerCase().includes("netzplan") || 
+                                          (/\bnetzplan\b/i.test(q.topic) || /\bnetzplantechnik\b/i.test(q.topic)) || 
                                           q.topic.toLowerCase().includes("struktogramm") || 
                                           q.topic.toLowerCase().includes("organigramm") ||
                                           q.topic.toLowerCase().includes("modellierung") ||
@@ -3885,6 +4283,21 @@ var VisualDiagrams = {
         const topic = (q.topic || "").toLowerCase();
         const question = (q.question || "").toLowerCase();
         const text = topic + " " + question;
+
+        // Eren-Michi Terminvergabe Aktivitätsdiagramm (IHK Original)
+        if (text.includes("eren-michi") || text.includes("terminvergabe") || (text.includes("termin") && text.includes("meisterbetrieb"))) {
+            return VisualDiagrams.getErenMichiTerminvergabeAktivitaetSvg();
+        }
+
+        // FAQ GmbH / Soft GmbH Statistikabfragen Use-Case (IHK Original)
+        if (text.includes("faq gmbh") || text.includes("soft gmbh") || (text.includes("statistikabfragen") && text.includes("premiumnutzer"))) {
+            return VisualDiagrams.getFaqStatistikabfragenUseCaseSvg();
+        }
+
+        // Decision vs. Fork / Join Vergleich
+        if ((text.includes("decision") && text.includes("fork")) || (text.includes("verzweigung") && text.includes("parallelität") && text.includes("raute"))) {
+            return VisualDiagrams.getActivityDecisionVsForkComparisonSvg();
+        }
         
         // 1. Relationales Tabellenschema & Fremdschlüssel & ERD Fallstudien
         if (text.includes("ticketsystem") || (text.includes("ticket") && (text.includes("statuskommentar") || (text.includes("mitarbeiter") && text.includes("support"))))) {
