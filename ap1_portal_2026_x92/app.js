@@ -287,6 +287,29 @@ function filterQuestions(theme) {
         if (starBtn) starBtn.style.display = "inline-flex";
         if (theme === "all") {
             filteredQuestions = [...questions];
+        } else if (theme === "it-arbeitsplatz" || theme === "arbeitsplatz") {
+            filteredQuestions = questions.filter(q => {
+                if (q.theme === "it-arbeitsplatz" || q.isItArbeitsplatz === true) return true;
+                const topicLower = (q.topic || "").toLowerCase();
+                const qLower = (q.question || "").toLowerCase();
+                const text = topicLower + " " + qLower;
+                return text.includes("arbeitsplatz") || 
+                       text.includes("it-gestützten arbeitsplatz") || 
+                       text.includes("ergonomie") || 
+                       text.includes("dockingstation") || 
+                       text.includes("arbeitsplatzrechner") || 
+                       text.includes("büroarbeitsplatz") || 
+                       text.includes("bildschirmarbeitsverordnung") || 
+                       text.includes("din en iso 9241") || 
+                       text.includes("rollout") || 
+                       text.includes("tertiärverkabelung") || 
+                       text.includes("etagenverteiler") || 
+                       (text.includes("client") && (text.includes("netzwerk") || text.includes("patchfeld") || text.includes("einbind"))) || 
+                       (text.includes("patchkabel") && text.includes("dose")) || 
+                       (text.includes("hardware") && text.includes("kaufvertrag")) || 
+                       text.includes("werklieferungsvertrag") || 
+                       (text.includes("usv") && text.includes("arbeitsplatz"));
+            });
         } else if (theme === "bawue-focus") {
             // When selecting BaWü focus, automatically set mode to open-text and reload questions
             if (typeSelect && typeSelect.value !== "open") {
@@ -1324,6 +1347,8 @@ function resetStats() {
 // Translate theme keys to Labels
 function getThemeLabel(key) {
     const labels = {
+        "it-arbeitsplatz": "🎯 AP1: Einrichten eines IT-gestützten Arbeitsplatzes",
+        arbeitsplatz: "🎯 AP1: Einrichten eines IT-gestützten Arbeitsplatzes",
         lf1: "LF 1: Unternehmen & Markt",
         lf2: "LF 2: Arbeitsplatz & Hardware",
         lf3: "LF 3: Netzwerke & Protokolle",

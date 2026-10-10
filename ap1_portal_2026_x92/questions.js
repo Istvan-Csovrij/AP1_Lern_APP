@@ -12914,5 +12914,282 @@ d) Platzierung der Akteure außerhalb der Systemgrenze:
         solutionDiagramSvg: VisualDiagrams.getFerienhausUseCaseSvg(),
         explanation: "UML 2.5 Use-Case-Diagramm: Akteure stehen immer außerhalb der Systemgrenze; Anwendungsfälle sind Ovale im Infinitiv; Verbindungen sind einfache Assoziationslinien."
     }
+    ,
+    {
+        id: 561,
+        isHard: false,
+        difficulty: "standard",
+        isBawueFocus: true,
+        isItArbeitsplatz: true,
+        isDiagram: true,
+        diagramType: "IT-Arbeitsplatz Architektur",
+        theme: "it-arbeitsplatz",
+        topic: "🖥️ IHK Originalaufgabe: Ganzheitliche Planung & Ergonomie eines modernen IT-Arbeitsplatzes (Dual-4K, TB4 & TCO)",
+        type: "open-text",
+        question: `Für 20 Software-Entwickler und Sachbearbeiter an einem Standort in Stuttgart soll ein moderner, ergonomischer und zukunftssicherer IT-gestützter Arbeitsplatz eingerichtet werden.
+Jeder Arbeitsplatz besteht aus einem Notebook (8 Kerne, 32 GB RAM, 1 TB NVMe SSD, TPM 2.0), zwei 27-Zoll 4K-Monitoren (3840x2160, IPS-Panel, reflexionsarm), einer Thunderbolt-4 Dockingstation sowie einem elektrisch höhenverstellbaren Schreibtisch.
+
+Aufgabenstellung:
+a) Nennen Sie vier verbindliche ergonomische Vorgaben für die Einrichtung dieses Bildschirmarbeitsplatzes gemäß Arbeitsstättenverordnung (ArbStättV) und DIN EN ISO 9241 bezüglich Beleuchtung, Sehabstand, Monitoranordnung und Reflexionsfreiheit.
+b) Erläutern Sie das 'Ein-Kabel-Prinzip' der Thunderbolt-4 Dockingstation. Welche drei elementaren Signaltypen bzw. Funktionen werden gleichzeitig über dieses einzige USB-C/TB4-Kabel zwischen Notebook und Dock übertragen?
+c) Das Notebook benötigt unter Volllast 85 Watt Ladeleistung. Die Dockingstation besitzt ein 135-Watt-Netzteil und liefert bis zu 100 Watt Power Delivery (USB-PD). Erläutern Sie, warum das Dockingstation-Netzteil eine höhere Leistung (135 W) aufweisen muss als die maximale Abgabe an das Notebook (100 W).
+d) Ein kompletter Arbeitsplatz (Notebook, 2 Monitore, Dock, Tastatur, Maus) nimmt im Betrieb durchschnittlich eine elektrische Leistung von 120 Watt auf.
+Berechnen Sie die jährlichen Stromkosten für alle 20 Arbeitsplätze bei 220 Arbeitstagen pro Jahr, durchschnittlich 8,5 Stunden Betriebszeit pro Tag und einem Strompreis von 0,38 EUR pro kWh. Der Rechenweg ist anzugeben.`,
+        musterloesung: `Musterlösung IHK Einrichten eines IT-gestützten Arbeitsplatzes (Planung & Ergonomie):
+
+a) Ergonomische Vorgaben nach ArbStättV & DIN EN ISO 9241:
+1. Beleuchtungsstärke: Am Bildschirmarbeitsplatz müssen mindestens 500 Lux Beleuchtungsstärke gewährleistet sein.
+2. Sehabstand: Bei 27-Zoll-Bildschirmen empfiehlt sich ein Sehabstand von 60 bis 80 cm.
+3. Blickwinkel / Kopfneigung: Die oberste Bildschirmzeile sollte sich maximal auf oder leicht unterhalb der horizontalen Augenhöhe befinden (Blick leicht nach unten geneigt, Kopfneigung 15° bis 20° zur Entlastung der Nackenmuskulatur).
+4. Reflexionsfreiheit / Aufstellung: Monitore müssen reflexionsarm (matte Entspiegelung) sein und im 90°-Winkel (parallel) zum Fenster aufgestellt werden, um Blendung und störende Reflexionen zu vermeiden.
+
+b) Ein-Kabel-Prinzip der Thunderbolt-4 Dockingstation:
+Über ein einziges Thunderbolt-4 Kabel (USB Type-C Stecker mit bis zu 40 Gbit/s Bandbreite) werden gleichzeitig übertragen:
+1. Videosignale: Parallele Ansteuerung beider 4K-Monitore (DisplayPort 1.4 / HDMI-Tunneling via PCIe/DisplayPort Alt Mode).
+2. Datenübertragung: Gigabit-Ethernet / 2.5 GbE Netzwerkschnittstelle, USB-Daten für Peripherie (Maus, Tastatur, Headset, externe Speichermedien).
+3. Stromversorgung (USB Power Delivery / USB-PD): Bidirektionale Ladeleistung (bis zu 100 Watt) zur kontinuierlichen Stromversorgung und Ladung des Notebook-Akkus ohne separates Netzteil.
+
+c) Notwendigkeit des 135-Watt-Netzteils am Dock:
+Das Dockingstation-Netzteil muss neben den bis zu 100 Watt USB-Power-Delivery für das Notebook auch die Eigenleistung der Dockingstation versorgen:
+- Eigenverbrauch des Thunderbolt-4 Controller-Chips und Netzwerk-Chips.
+- Stromversorgung der angeschlossenen USB-Peripherie (USB 3.2 Ports liefern typischerweise jeweils 4,5 W bis 7,5 W bzw. bis zu 15 W für Ladeports).
+- Interne Wandler- und Verlustleistungen (Wirkungsgrad).
+100 W (Notebook-PD) + 35 W (Dock-Eigenbedarf & Peripherie) = 135 Watt Gesamtbudget.
+
+d) Berechnung der jährlichen Stromkosten für 20 Arbeitsplätze:
+1. Leistung pro Arbeitsplatz: 120 W = 0,120 kW
+2. Betriebsstunden pro Jahr: 220 Tage * 8,5 h/Tag = 1.870 Betriebsstunden
+3. Energieverbrauch pro Arbeitsplatz: 0,120 kW * 1.870 h = 224,4 kWh/Jahr
+4. Stromkosten pro Arbeitsplatz: 224,4 kWh * 0,38 EUR/kWh = 85,272 EUR/Jahr
+5. Gesamtkosten für alle 20 Arbeitsplätze: 20 * 85,272 EUR = 1.705,44 EUR pro Jahr.`,
+        solutionDiagramSvg: VisualDiagrams.getItArbeitsplatzArchitekturSvg(),
+        explanation: "Ergonomie nach ArbStättV, TB4-Signalarchitektur und Stromkosten-Berechnungen sind fundamentale Prüfungsschwerpunkte für den IT-gestützten Arbeitsplatz."
+    },
+    {
+        id: 562,
+        isHard: false,
+        difficulty: "standard",
+        isBawueFocus: true,
+        isItArbeitsplatz: true,
+        isDiagram: true,
+        diagramType: "IT-Arbeitsplatz Netzwerk-Sicherheit",
+        theme: "it-arbeitsplatz",
+        topic: "🔒 IHK Originalaufgabe: Netzwerkintegration & Port-Security (IEEE 802.1X, VLAN & BitLocker/MFA)",
+        type: "open-text",
+        question: `Der neu eingerichtete IT-Arbeitsplatz soll in das Unternehmensnetzwerk integriert und nach modernsten IT-Sicherheitsstandards abgesichert werden.
+Am Arbeitsplatz steht ein VoIP-Telefon mit integriertem 2-Port-Switch, an dessen zweitem Port die Dockingstation des Notebooks angeschlossen wird.
+
+Aufgabenstellung:
+a) Erläutern Sie die Konfiguration des Switchports für die gemeinsame Nutzung von PC und VoIP-Telefon:
+   - Welches VLAN wird dem PC zugewiesen und wie wird der Datenverkehr übertragen (tagged oder untagged)?
+   - Welches VLAN wird dem Telefon zugewiesen und warum muss der Sprachverkehr zwingend getaggt (802.1Q) übertragen werden?
+b) Zur Absicherung der Wand-Datendosen gegen unbefugte Fremdgeräte wird portbasierte Netzwerkzugangskontrolle nach IEEE 802.1X eingeführt.
+   - Nennen Sie die drei beteiligten Rollen/Komponenten im 802.1X-Standard.
+   - Was geschieht am Switchport, wenn ein privates Notebook ohne passendes Zertifikat eingesteckt wird?
+c) Erläutern Sie das Sicherheitskonzept für mobile Arbeitsplatz-Geräte:
+   1. Warum schützt ein einfaches Windows-Benutzerpasswort die Daten auf der NVMe-SSD bei einem Diebstahl des Notebooks nicht ausreichend?
+   2. Wie stellt die Kombination aus TPM 2.0 (Trusted Platform Module) und BitLocker-Vollverschlüsselung den Schutz der vertraulichen Daten sicher?
+   3. Welche drei Faktoren unterscheidet man bei der Multifaktor-Authentifizierung (MFA)?`,
+        musterloesung: `Musterlösung IHK IT-Arbeitsplatz Netzwerkintegration & Sicherheit:
+
+a) Switchport-Konfiguration mit Voice- und Data-VLAN:
+- Datenverkehr des PCs (Dockingstation):
+  ➔ Client-VLAN (z. B. VLAN 10), wird als 'untagged' (Access-VLAN / Native VLAN) übertragen, da die Netzwerkkarte des PCs Standard-Frames ohne 802.1Q-Header sendet.
+- Sprachverkehr des VoIP-Telefons:
+  ➔ Voice-VLAN (z. B. VLAN 20), wird als 'tagged' (mit IEEE 802.1Q VLAN-Tag) übertragen.
+  ➔ Begründung: Der Tag ermöglicht Priorisierung (Quality of Service / CoS nach IEEE 802.1p), wodurch Sprachpakete vor Datenpaketen bevorzugt weitergeleitet werden, um Jitter, Latenz und Aussetzer zu verhindern.
+
+b) Portbasierte Netzwerkauthentifizierung nach IEEE 802.1X:
+- Die drei Rollen:
+  1. Supplicant: Der Arbeitsplatz-Client (Notebook mit 802.1X-Dienst und EAP-TLS Clientzertifikat).
+  2. Authenticator: Der Managed Switch (hält den Port zunächst bis zur erfolgreichen Prüfung im blockierten Zustand).
+  3. Authentication Server: Der RADIUS-Server (z. B. Microsoft NPS / FreeRADIUS, der das Zertifikat gegen Active Directory validiert).
+- Verhalten bei Fremdgerät ohne Zertifikat:
+  ➔ Der Authenticator lässt keinen Zugriff auf das interne Unternehmensnetzwerk zu.
+  ➔ Der Port wird entweder komplett deaktiviert (Port-Security Shutdown) oder automatisch in ein isoliertes Gast-/Quarantäne-VLAN mit alleinigem Internetzugriff verschoben.
+
+c) Endgerätesicherheit mit TPM 2.0, BitLocker & MFA:
+1. Schwachstelle reines Benutzerpasswort:
+   Wird das Notebook gestohlen, kann ein Angreifer die NVMe-SSD ausbauen und an einem anderen PC auslesen oder von einem Linux-Live-USB-Stick booten. Das Windows-Passwort schützt nur das laufende Betriebssystem, nicht die unverschlüsselten Rohdaten auf dem Speichermedium!
+2. Schutz durch TPM 2.0 & BitLocker:
+   BitLocker verschlüsselt die gesamte SSD auf Sektorebene (AES-256). Der Verschlüsselungsschlüssel wird im hardwarebasierten Sicherheitschip (TPM 2.0) geschützt. Das TPM gibt den Schlüssel beim Booten nur frei, wenn die Bootdateien und Firmware unverändert sind (Platform Configuration Registers / Secure Boot). Bei Ausbau der SSD oder Manipulation bleibt der Speicher vollständig unlesbar.
+3. Die drei Faktoren der MFA:
+   - Wissen (z. B. Passwort, PIN)
+   - Besitz (z. B. FIDO2-Hardware-Token, Smartphone mit Authenticator-App, Smartcard)
+   - Inhärenz / Biometrie (z. B. Fingerabdruck, Gesichtserkennung/Windows Hello).`,
+        solutionDiagramSvg: VisualDiagrams.getItArbeitsplatzArchitekturSvg(),
+        explanation: "802.1X Port-Security, VLAN-Trennung (Voice/Data) und BitLocker mit TPM 2.0 gehören zum unverzichtbaren Standardwissen der AP1."
+    },
+    {
+        id: 563,
+        isHard: false,
+        difficulty: "standard",
+        isBawueFocus: true,
+        isItArbeitsplatz: true,
+        isCalculation: true,
+        theme: "it-arbeitsplatz",
+        topic: "⚡ IHK Fachaufgabe: USV-Dimensionierung & Netzteil-Wirkungsgrad am Arbeitsplatz",
+        type: "multiple-choice",
+        question: "An einem CAD-Arbeitsplatzrechner mit angeschlossener USV (Unterbrechungsfreie Stromversorgung) werden im Volllastbetrieb folgende Werte gemessen:
+
+- Aufgenommene Wirkleistung P = 360 Watt
+- Leistungsfaktor cos φ = 0,75
+- Wirkungsgrad der USV im Batteriebetrieb η = 80 %
+- Nennspannung des internen Akkumulators U = 12 Volt
+
+Welche elektrische Scheinleistung S muss die USV mindestens bereitstellen können, und welche theoretische Mindestkapazität C (in Amperestunden, Ah) muss der 12V-Akku besitzen, um den Arbeitsplatz bei einem Stromausfall für genau 15 Minuten (0,25 h) unterbrechungsfrei mit Energie zu versorgen?",
+        options: [
+            "Scheinleistung S = 480 VA; Mindestkapazität C = 9,38 Ah (rechnerisch bei einer Batterieleistung von 450 W).",
+            "Scheinleistung S = 270 VA; Mindestkapazität C = 7,50 Ah.",
+            "Scheinleistung S = 360 VA; Mindestkapazität C = 5,00 Ah.",
+            "Scheinleistung S = 540 VA; Mindestkapazität C = 15,00 Ah."
+        ],
+        correctAnswer: 0,
+        solutionDiagramSvg: VisualDiagrams.getItArbeitsplatzArchitekturSvg(),
+        explanation: "Scheinleistung: S = P / cos φ = 360 W / 0,75 = 480 VA. Batterieleistung: P_batt = P / η = 360 W / 0,80 = 450 W. Batteriestrom: I = P_batt / U = 450 W / 12 V = 37,5 A. Kapazität für 15 Min (0,25 h): C = I * t = 37,5 A * 0,25 h = 9,375 Ah ≈ 9,38 Ah."
+    },
+    {
+        id: 564,
+        isHard: false,
+        difficulty: "standard",
+        isBawueFocus: true,
+        isItArbeitsplatz: true,
+        theme: "it-arbeitsplatz",
+        topic: "💻 IHK Originalaufgabe: Automatisierter Arbeitsplatz-Rollout (PXE, WDS/MDT, Sysprep) & SQL-Inventur (3NF)",
+        type: "open-text",
+        question: `Um 50 neue Arbeitsplatz-Computer für eine Schulungsumgebung effizient einzurichten, soll die Betriebssysteminstallation automatisiert über das Netzwerk erfolgen. Anschließend werden die Geräte in einer relationalen Asset-Management-Datenbank erfasst.
+
+Aufgabenstellung:
+a) Erläutern Sie den typischen Rollout-Workflow und bringen Sie folgende Schritte in die richtige chronologische Reihenfolge:
+   - Rollout des Betriebssystems per PXE-Netzwerkboot auf die 50 Ziel-Rechner (WDS/MDT)
+   - Manuelle Grundinstallation eines Referenz-Computers mit Betriebssystem, Treibern und Standardsoftware
+   - Generalisierung des Referenz-Systems mit dem Befehl 'sysprep.exe /generalize /oobe /shutdown'
+   - Erfassen (Capture) des generalisierten Images in eine WIM-Imagedatei
+   Welche zentrale Aufgabe hat der Parameter '/generalize' bei Sysprep?
+b) Welche beiden DHCP-Optionen (DHCP Options) müssen im Netzwerk konfiguriert sein, damit ein neuer PC beim Einschalten per PXE booten kann?
+c) Ein Auszubildender schlägt folgende unnormalisierte Inventartabelle vor:
+   Arbeitsplatz(InventarNr, Modell, CPU, RAM_GB, MacAdresse, RaumNr, RaumBezeichnung, MitarbeiterNr, Nachname, SoftwareName, LizenzKey)
+   1. Begründen Sie anhand von zwei Beispielen, warum dieser Entwurf gegen die 3. Normalform (3NF) verstößt.
+   2. Überführen Sie die Struktur in ein sauberes Tabellenschema in 3NF (Angabe der Tabellennamen, Primärschlüssel PK und Fremdschlüssel FK).`,
+        musterloesung: `Musterlösung IHK Arbeitsplatz-Rollout & Datenbank-Normalisierung:
+
+a) Rollout-Workflow und Sysprep:
+- Chronologische Reihenfolge:
+  1. Manuelle Grundinstallation eines Referenz-Computers mit OS, Treibern und Software.
+  2. Generalisierung des Referenz-Systems mit 'sysprep.exe /generalize /oobe /shutdown'.
+  3. Erfassen (Capture) des generalisierten Images in eine WIM-Imagedatei (z. B. install.wim).
+  4. Rollout des Betriebssystems per PXE-Netzwerkboot auf die 50 Ziel-Rechner.
+- Funktion von Sysprep '/generalize':
+  Entfernt alle systemspezifischen Identifikationsmerkmale (insbesondere die Security ID / SID, Treiber-Hardwarebindungen, Computernamen und Ereignisprotokolle). Ohne Sysprep hätten alle 50 geklonten PCs identische SIDs, was zu schweren Sicherheits- und Replikationskonflikten in der Active-Directory-Domäne führen würde.
+
+b) DHCP-Optionen für PXE-Boot:
+1. DHCP Option 66 (Next-Server / Boot Server Host Name): Gibt die IP-Adresse oder den FQDN des WDS-/PXE-Servers an, von dem das Boot-Image bezogen wird.
+2. DHCP Option 67 (Bootfile Name): Gibt den relativen Pfad der Netzwerk-Bootdatei an (z. B. 'boot\x64\wdsnbp.com' für Legacy BIOS bzw. 'boot\x64\wdsmgfw.efi' für modernes UEFI).
+
+c) Datenbank-Normalisierung in die 3. Normalform (3NF):
+1. Verstöße gegen 3NF:
+   - RaumBezeichnung hängt funktional voll von RaumNr ab, nicht von InventarNr (transitive Abhängigkeit).
+   - Nachname hängt von MitarbeiterNr ab, nicht von InventarNr (transitive Abhängigkeit).
+   - Ein Arbeitsplatz kann mehrere Software-Lizenzen besitzen (Wiederholungsgruppen / n:m Beziehung), was zu Redundanzen und Update-Anomalien führt.
+2. Relationales Tabellenschema in 3. Normalform (3NF):
+   - Raum(RaumNr [PK], RaumBezeichnung)
+   - Mitarbeiter(MitarbeiterNr [PK], Nachname, FK_RaumNr)
+   - Geraet(InventarNr [PK], Modell, CPU, RAM_GB, MacAdresse, FK_MitarbeiterNr)
+   - Software(SoftwareID [PK], SoftwareName)
+   - Geraet_Software_Lizenz(FK_InventarNr, FK_SoftwareID, LizenzKey) [Zusammengesetzter PK aus FK_InventarNr und FK_SoftwareID].`,
+        solutionDiagramSvg: VisualDiagrams.getItArbeitsplatzArchitekturSvg(),
+        explanation: "Automatisierter Rollout (PXE, WDS, Sysprep) und Asset-Management-Datenbanken in 3NF verknüpfen LF 2, LF 3 und LF 5 zu einem ganzheitlichen Prüfungsszenario."
+    },
+    {
+        id: 565,
+        isHard: false,
+        difficulty: "standard",
+        isBawueFocus: true,
+        isItArbeitsplatz: true,
+        isCalculation: true,
+        theme: "it-arbeitsplatz",
+        topic: "🧮 IHK Originalaufgabe: Kaufmännische Beschaffung & Vertragsrecht (Werklieferungsvertrag § 650 BGB & Handelskalkulation)",
+        type: "open-text",
+        question: `Ihr IT-Systemhaus rüstet für ein Ingenieurbüro 25 identische IT-Arbeitsplätze komplett schlüsselfertig aus (Lieferung der Hardware, ergonomische Montage, Verkabelung, Einbindung ins Netzwerk und Abnahmetest).
+
+Aufgabenstellung:
+a) Vertragsrechtliche Einordnung:
+   - Welcher Vertragstyp liegt nach BGB vor und warum?
+   - Unterscheiden Sie die Begriffe gesetzliche Gewährleistung (Sachmängelhaftung) und Garantie.
+b) Kaufmännische Handelskalkulation (pro Arbeitsplatz):
+   Kalkulieren Sie den Netto- und Brutto-Listenverkaufspreis für einen Arbeitsplatz anhand folgender Konditionen:
+   - Listeneinkaufspreis Hardware (LEP): 1.400,00 EUR
+   - Lieferantenrabatt: 15 %
+   - Lieferantenskonto: 2 %
+   - Bezugskosten (Fracht/Versicherung): 14,00 EUR
+   - Handlungskostenzuschlag (HKZ): 30 %
+   - Gewinnzuschlag: 12 %
+   - Kundenskonto (im Hundert): 2 %
+   - Kundenrabatt (im Hundert): 10 %
+   - Umsatzsteuer: 19 %
+   Führen Sie die Vorwärtskalkulation mit allen Zwischenstufen (ZEP, BEP, Bezugspreis, Selbstkosten, BVP, ZVP, Netto-LVP, Brutto-LVP) durch.
+c) Gesamt-Auftragsvolumen:
+   Berechnen Sie den Gesamtrechnungsbetrag brutto für alle 25 Arbeitsplätze, wenn der Kunde die Rechnung innerhalb der Skontofrist unter Abzug von 2 % Skonto bezahlt.`,
+        musterloesung: `Musterlösung IHK Kaufmännische Beschaffung & Handelskalkulation:
+
+a) Vertragsrecht:
+- Vertragstyp: Werklieferungsvertrag nach § 650 BGB.
+  Begründung: Es werden bewegliche Sachen geliefert (Kaufrechtselement), die jedoch individuell montiert, vernetzt und als betriebsbereiter Arbeitsplatz schlüsselfertig übergeben werden (Werkvertragselement: geschuldet wird der funktionierende Gesamterfolg).
+- Gewährleistung vs. Garantie:
+  - Gesetzliche Gewährleistung (Sachmängelhaftung nach § 437 BGB): Gesetzlich vorgeschrieben, Dauer 24 Monate ab Übergabe. Haftet für Mängel, die bereits zum Zeitpunkt des Gefahrübergangs (der Übergabe) vorhanden waren.
+  - Garantie: Eine rein freiwillige vertragliche Zusicherung des Herstellers oder Händlers (z. B. 3 Jahre Vor-Ort-Garantie). Gilt unabhängig von der gesetzlichen Sachmängelhaftung für die Funktionsfähigkeit während der Garantiezeit.
+
+b) Vollständige Vorwärtskalkulation (pro Arbeitsplatz):
+1. Listeneinkaufspreis (LEP): 1.400,00 EUR
+   - Lieferantenrabatt (15 % von 1.400 EUR): - 210,00 EUR
+   = Zieleinkaufspreis (ZEP): 1.190,00 EUR
+   - Lieferantenskonto (2 % von 1.190 EUR): - 23,80 EUR
+   = Bareinkaufspreis (BEP): 1.166,20 EUR
+   + Bezugskosten: + 14,00 EUR
+   = Bezugspreis (Einstandspreis): 1.180,20 EUR
+
+2. + Handlungskosten (30 % von 1.180,20 EUR): + 354,06 EUR
+   = Selbstkosten: 1.534,26 EUR
+   + Gewinnzuschlag (12 % von 1.534,26 EUR): + 184,11 EUR
+   = Barverkaufspreis (BVP): 1.718,37 EUR
+
+3. + Kundenskonto (2 % im Hundert: 1.718,37 / 0,98 * 0,02): + 35,07 EUR
+   = Zielverkaufspreis (ZVP): 1.753,44 EUR
+   + Kundenrabatt (10 % im Hundert: 1.753,44 / 0,90 * 0,10): + 194,83 EUR
+   = Netto-Listenverkaufspreis (LVP): 1.948,27 EUR
+
+4. + Umsatzsteuer (19 % von 1.948,27 EUR): + 370,17 EUR
+   = Brutto-Listenverkaufspreis (Brutto-LVP): 2.318,44 EUR
+
+c) Gesamtrechnungsbetrag für 25 Arbeitsplätze:
+- Rechnungsbetrag netto nach 10 % Rabatt (= 25 * ZVP): 25 * 1.753,44 EUR = 43.836,00 EUR
+- Rechnungsbetrag brutto (inkl. 19 % USt): 43.836,00 EUR * 1,19 = 52.164,84 EUR
+- Skontoabzug 2 % (2 % von 52.164,84 EUR): - 1.043,30 EUR
+- Tatsächlicher Überweisungsbetrag: 51.121,54 EUR.`,
+        solutionDiagramSvg: VisualDiagrams.getKalkulationTreeSvg(),
+        explanation: "Werklieferungsvertrag (§ 650 BGB) und Handelskalkulation 'im Hundert' (Kundenrabatt & Kundenskonto) sind absolute Pflichtaufgaben der IHK."
+    },
+    {
+        id: 566,
+        isHard: false,
+        difficulty: "standard",
+        isBawueFocus: true,
+        isItArbeitsplatz: true,
+        theme: "it-arbeitsplatz",
+        topic: "🛠️ IHK Multiple-Choice: First-Level-Troubleshooting am Arbeitsplatz (RJ45, APIPA & SLA)",
+        type: "multiple-choice",
+        question: "Ein Mitarbeiter meldet über das IT-Ticketsystem, dass sein frisch eingerichteter Arbeitsplatzrechner nach dem Einstecken an der Datendose keine Netzwerk- und Internetverbindung aufbauen kann. Der Befehl 'ipconfig' auf dem Client zeigt die IPv4-Adresse '169.254.12.84' mit der Subnetzmaske '255.255.0.0' an.
+
+Welche Diagnose und Erstmaßnahme nach IHK-Standard ist fachlich korrekt?",
+        options: [
+            "Es liegt eine APIPA-Adresse (Automatic Private IP Addressing) vor. Der Client konnte den DHCP-Server nicht erreichen (z. B. wegen defektem Patchkabel mit abgebrochener Rastnase, ungestecktem Switchport oder falschem VLAN). Erste Maßnahme: Physikalische Link-LEDs an der Netzwerkkarte/Dose prüfen und Patchkabel austauschen.",
+            "Die IP-Adresse 169.254.x.x ist eine offizielle öffentliche Firmen-IP; der DNS-Server muss lediglich per 'ipconfig /flushdns' neu gestartet werden.",
+            "Es liegt ein IP-Adresskonflikt mit einem zweiten Rechner vor; der Rechner muss sofort aus der Domäne entfernt werden.",
+            "Die Subnetzmaske 255.255.0.0 ist falsch und muss manuell auf 255.255.255.255 geändert werden, damit Routing funktioniert."
+        ],
+        correctAnswer: 0,
+        solutionDiagramSvg: VisualDiagrams.getItArbeitsplatzArchitekturSvg(),
+        explanation: "169.254.0.0/16 ist der standardisierte APIPA-Bereich. Weist Windows sich eine solche Adresse selbst zu, schlug der DHCP-Handshake (DHCP-Discover) fehl. Häufigste Ursachen: Defektes Patchkabel (Rastnase abgebrochen), kein Link oder falsches VLAN."
+    }
 
 ];

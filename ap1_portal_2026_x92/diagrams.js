@@ -5556,6 +5556,201 @@ var VisualDiagrams = {
         `;
     },
 
+    // 2m. IT-gestützter Arbeitsplatz Architektur (Ganzheitlicher IHK AP1 Prüfungsbereich)
+    getItArbeitsplatzArchitekturSvg: function() {
+        return `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 660" width="100%" height="100%">
+            <defs>
+                <marker id="ap-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                    <path d="M 0 1 L 10 5 L 0 9 z" fill="#1e293b" />
+                </marker>
+                <marker id="ap-blue-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                    <path d="M 0 1 L 10 5 L 0 9 z" fill="#2563eb" />
+                </marker>
+                <marker id="ap-green-arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+                    <path d="M 0 1 L 10 5 L 0 9 z" fill="#16a34a" />
+                </marker>
+            </defs>
+            <rect width="980" height="660" fill="#f8fafc" rx="10" />
+
+            <!-- Title Header -->
+            <rect x="30" y="20" width="920" height="60" fill="#eff6ff" stroke="#3b82f6" stroke-width="2" rx="8" />
+            <text x="490" y="46" font-family="sans-serif" font-size="16" font-weight="bold" fill="#1d4ed8" text-anchor="middle">IHK Prüfungsbereich AP1: Einrichten eines IT-gestützten Arbeitsplatzes</text>
+            <text x="490" y="66" font-family="sans-serif" font-size="12" fill="#1e40af" text-anchor="middle">Ganzheitliche Architektur: Ergonomie, Hardware &amp; Dock, Tertiärverkabelung, 802.1X/VLAN, Rollout &amp; Sicherheit</text>
+
+            <!-- SECTION 1: DER ARBEITSPLATZ (Links) -->
+            <g transform="translate(30, 95)">
+                <rect width="460" height="390" fill="#ffffff" stroke="#0284c7" stroke-width="2" rx="8" />
+                <rect width="460" height="32" fill="#e0f2fe" rx="8" />
+                <text x="230" y="22" font-family="sans-serif" font-size="13" font-weight="bold" fill="#0369a1" text-anchor="middle">1. IT-Arbeitsplatz (Hardware, Ergonomie &amp; Sicherheit)</text>
+
+                <!-- Ergonomie Box -->
+                <rect x="20" y="45" width="420" height="65" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.2" rx="6" />
+                <text x="30" y="65" font-family="sans-serif" font-size="11.5" font-weight="bold" fill="#15803d">Ergonomische Normen (ArbStättV / DIN EN ISO 9241):</text>
+                <text x="30" y="82" font-family="sans-serif" font-size="10.5" fill="#166534">• Beleuchtung min. 500 Lux, reflexionsarme matte Bildschirme</text>
+                <text x="30" y="98" font-family="sans-serif" font-size="10.5" fill="#166534">• Sehabstand 50–80 cm, Blick leicht nach unten (Kopfneigung 15–20°)</text>
+
+                <!-- Dual 4K Displays -->
+                <g transform="translate(35, 125)">
+                    <rect x="0" y="0" width="120" height="75" fill="#0f172a" stroke="#334155" stroke-width="2" rx="4" />
+                    <rect x="5" y="5" width="110" height="60" fill="#38bdf8" rx="2" />
+                    <text x="60" y="40" font-family="sans-serif" font-size="10" font-weight="bold" fill="#0f172a" text-anchor="middle">Monitor 1 (4K)</text>
+                    <rect x="50" y="75" width="20" height="15" fill="#64748b" />
+                    <rect x="35" y="90" width="50" height="5" fill="#475569" rx="2" />
+                </g>
+                <g transform="translate(170, 125)">
+                    <rect x="0" y="0" width="120" height="75" fill="#0f172a" stroke="#334155" stroke-width="2" rx="4" />
+                    <rect x="5" y="5" width="110" height="60" fill="#38bdf8" rx="2" />
+                    <text x="60" y="40" font-family="sans-serif" font-size="10" font-weight="bold" fill="#0f172a" text-anchor="middle">Monitor 2 (4K)</text>
+                    <rect x="50" y="75" width="20" height="15" fill="#64748b" />
+                    <rect x="35" y="90" width="50" height="5" fill="#475569" rx="2" />
+                </g>
+
+                <!-- Thunderbolt 4 Docking Station -->
+                <g transform="translate(310, 135)">
+                    <rect x="0" y="0" width="130" height="70" fill="#1e293b" stroke="#0f172a" stroke-width="1.8" rx="6" />
+                    <text x="65" y="22" font-family="sans-serif" font-size="10" font-weight="bold" fill="#f8fafc" text-anchor="middle">TB4 Dockingstation</text>
+                    <text x="65" y="40" font-family="sans-serif" font-size="9" fill="#94a3b8" text-anchor="middle">100W USB-C Power Deliv.</text>
+                    <text x="65" y="55" font-family="sans-serif" font-size="9" fill="#38bdf8" text-anchor="middle">2x DP 1.4 / 1x 2.5 GbE</text>
+                </g>
+
+                <!-- Connecting Lines to Dock -->
+                <path d="M 155 160 L 310 160" fill="none" stroke="#0284c7" stroke-width="1.8" stroke-dasharray="3,3" />
+                <path d="M 290 160 L 310 160" fill="none" stroke="#0284c7" stroke-width="1.8" stroke-dasharray="3,3" />
+
+                <!-- Notebook / Client PC with Security -->
+                <g transform="translate(40, 240)">
+                    <rect width="240" height="80" fill="#f8fafc" stroke="#475569" stroke-width="1.8" rx="6" />
+                    <text x="15" y="22" font-family="sans-serif" font-size="11.5" font-weight="bold" fill="#0f172a">Arbeitsplatz-Client / Notebook:</text>
+                    <text x="15" y="40" font-family="sans-serif" font-size="10.5" fill="#334155">• CPU 8 Cores / 32 GB DDR5 RAM / 1 TB NVMe</text>
+                    <text x="15" y="57" font-family="sans-serif" font-size="10.5" fill="#2563eb">• TPM 2.0 &amp; BitLocker-Vollverschlüsselung</text>
+                    <text x="15" y="72" font-family="sans-serif" font-size="10.5" fill="#15803d">• FIDO2 Hardware-Token / MFA-Login</text>
+                </g>
+
+                <!-- Cable from Notebook to Dock -->
+                <path d="M 280 270 L 375 270 L 375 205" fill="none" stroke="#2563eb" stroke-width="2.5" />
+                <text x="335" y="260" font-family="sans-serif" font-size="9" font-weight="bold" fill="#2563eb">USB-C / TB4 (1 Kabel)</text>
+
+                <!-- USV am Arbeitsplatz -->
+                <g transform="translate(300, 240)">
+                    <rect width="140" height="80" fill="#fefce8" stroke="#ca8a04" stroke-width="1.5" rx="6" />
+                    <text x="10" y="20" font-family="sans-serif" font-size="10.5" font-weight="bold" fill="#854d0e">USV (Line-Interactive):</text>
+                    <text x="10" y="38" font-family="sans-serif" font-size="9.5" fill="#a16207">• 650 VA / 390 Watt</text>
+                    <text x="10" y="54" font-family="sans-serif" font-size="9.5" fill="#a16207">• Autonomiezeit 12 Min.</text>
+                    <text x="10" y="70" font-family="sans-serif" font-size="9.5" fill="#a16207">• Schutz vor Brownouts</text>
+                </g>
+
+                <!-- Datendose RJ45 -->
+                <g transform="translate(340, 335)">
+                    <rect width="100" height="42" fill="#e2e8f0" stroke="#475569" stroke-width="1.8" rx="4" />
+                    <text x="50" y="20" font-family="sans-serif" font-size="10" font-weight="bold" fill="#0f172a" text-anchor="middle">Datendose (TA)</text>
+                    <text x="50" y="34" font-family="sans-serif" font-size="9" fill="#475569" text-anchor="middle">2x RJ45 Cat.6A</text>
+                </g>
+                <!-- Patch cable from Dock to Datendose -->
+                <path d="M 390 205 L 390 335" fill="none" stroke="#059669" stroke-width="2" />
+                <text x="345" y="315" font-family="sans-serif" font-size="9" font-weight="bold" fill="#059669">Cat.6A (max. 5m)</text>
+            </g>
+
+            <!-- SECTION 2: VERKABELUNG & INFRASTRUKTUR (Rechts) -->
+            <g transform="translate(510, 95)">
+                <rect width="440" height="390" fill="#ffffff" stroke="#4f46e5" stroke-width="2" rx="8" />
+                <rect width="440" height="32" fill="#e0e7ff" rx="8" />
+                <text x="220" y="22" font-family="sans-serif" font-size="13" font-weight="bold" fill="#3730a3" text-anchor="middle">2. Tertiärverkabelung, Switch &amp; Rollout</text>
+
+                <!-- Tertiärverkabelung Box -->
+                <g transform="translate(20, 45)">
+                    <rect width="400" height="55" fill="#f5f3ff" stroke="#7c3aed" stroke-width="1.2" rx="6" />
+                    <text x="15" y="20" font-family="sans-serif" font-size="11" font-weight="bold" fill="#5b21b6">Strukturierte Verkabelung (EN 50173 Tertiärbereich):</text>
+                    <text x="15" y="36" font-family="sans-serif" font-size="10" fill="#6d28d9">• Festes Verlegekabel (S/FTP Cat.7): max. 90 m (Dose bis Patchfeld)</text>
+                    <text x="15" y="49" font-family="sans-serif" font-size="10" fill="#6d28d9">• Patchkabel an beiden Enden: max. 10 m ➔ Kanal-Gesamtlänge max. 100 m</text>
+                </g>
+
+                <!-- Patchpanel & Managed Switch im Etagenverteiler -->
+                <g transform="translate(20, 115)">
+                    <rect width="400" height="110" fill="#0f172a" stroke="#1e293b" stroke-width="2" rx="6" />
+                    <text x="20" y="22" font-family="sans-serif" font-size="11.5" font-weight="bold" fill="#38bdf8">Etagenverteiler (EV): 19-Zoll Rack</text>
+
+                    <!-- Patchpanel -->
+                    <rect x="20" y="32" width="360" height="24" fill="#334155" stroke="#64748b" rx="2" />
+                    <text x="30" y="48" font-family="monospace" font-size="10" fill="#f8fafc">Patchfeld Cat.6A (Ports 1-24) mit LSA-Leiste &amp; Schirmung</text>
+
+                    <!-- Managed Switch -->
+                    <rect x="20" y="65" width="360" height="35" fill="#1e293b" stroke="#38bdf8" stroke-width="1.5" rx="2" />
+                    <text x="30" y="80" font-family="monospace" font-size="10" font-weight="bold" fill="#38bdf8">Managed Gigabit Switch (Layer 2/3)</text>
+                    <text x="30" y="94" font-family="sans-serif" font-size="9" fill="#94a3b8">• IEEE 802.1X (Network Access Control / RADIUS) • 802.1Q VLAN 10 (Client)</text>
+                </g>
+
+                <!-- Rollout & Management Server (WDS / DHCP / SQL) -->
+                <g transform="translate(20, 240)">
+                    <rect width="400" height="135" fill="#f8fafc" stroke="#64748b" stroke-width="1.5" rx="6" />
+                    <text x="15" y="22" font-family="sans-serif" font-size="11.5" font-weight="bold" fill="#0f172a">3. Automatisierter Rollout &amp; Verwaltung:</text>
+
+                    <rect x="15" y="32" width="180" height="42" fill="#eff6ff" stroke="#3b82f6" rx="4" />
+                    <text x="25" y="48" font-family="sans-serif" font-size="10" font-weight="bold" fill="#1d4ed8">PXE / WDS / MDT:</text>
+                    <text x="25" y="64" font-family="sans-serif" font-size="9" fill="#2563eb">Automatisches OS-Image</text>
+
+                    <rect x="205" y="32" width="180" height="42" fill="#ecfdf5" stroke="#10b981" rx="4" />
+                    <text x="215" y="48" font-family="sans-serif" font-size="10" font-weight="bold" fill="#047857">DHCP &amp; DNS:</text>
+                    <text x="215" y="64" font-family="sans-serif" font-size="9" fill="#059669">Scope, Lease-Time &amp; GW</text>
+
+                    <rect x="15" y="82" width="370" height="44" fill="#fef3c7" stroke="#d97706" rx="4" />
+                    <text x="25" y="98" font-family="sans-serif" font-size="10" font-weight="bold" fill="#b45309">Asset-Management / SQL-Datenbank (3NF):</text>
+                    <text x="25" y="114" font-family="sans-serif" font-size="9" fill="#92400e">Tabellen: Geraet, Lizenz, Mitarbeiter, Raum mit Primär- &amp; Fremdschlüsseln</text>
+                </g>
+            </g>
+
+            <!-- HORIZONTAL LINK ARROW: Tertiärkabel zwischen Arbeitsplatz und EV -->
+            <path d="M 440 355 L 530 355 L 530 180 L 550 180" fill="none" stroke="#4f46e5" stroke-width="3" marker-end="url(#ap-blue-arr)" />
+            <text x="485" y="345" font-family="sans-serif" font-size="9.5" font-weight="bold" fill="#4f46e5" text-anchor="middle">Cat.7 Verlegekabel (max. 90 m)</text>
+
+            <!-- BOTTOM EXAM SUMMARY BAR -->
+            <g transform="translate(30, 500)">
+                <rect width="920" height="140" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.8" rx="8" />
+                <rect width="920" height="30" fill="#f1f5f9" rx="8" />
+                <text x="460" y="20" font-family="sans-serif" font-size="12" font-weight="bold" fill="#0f172a" text-anchor="middle">📋 IHK AP1 Prüfungskompass: Die 6 Säulen für "Einrichten eines IT-gestützten Arbeitsplatzes"</text>
+
+                <!-- 6 Pillars in columns -->
+                <g transform="translate(20, 42)">
+                    <text x="0" y="14" font-family="sans-serif" font-size="11" font-weight="bold" fill="#0284c7">1. Hardware &amp; Ergonomie</text>
+                    <text x="0" y="30" font-family="sans-serif" font-size="10" fill="#475569">• CPU, RAM, NVMe, TB4 Dock</text>
+                    <text x="0" y="45" font-family="sans-serif" font-size="10" fill="#475569">• ArbStättV &amp; DIN EN ISO 9241</text>
+                    <text x="0" y="60" font-family="sans-serif" font-size="10" fill="#475569">• USB-C Power Budget &amp; Displays</text>
+                </g>
+                <g transform="translate(175, 42)">
+                    <text x="0" y="14" font-family="sans-serif" font-size="11" font-weight="bold" fill="#4f46e5">2. Netzwerkintegration</text>
+                    <text x="0" y="30" font-family="sans-serif" font-size="10" fill="#475569">• Struktur. Verkabelung EN 50173</text>
+                    <text x="0" y="45" font-family="sans-serif" font-size="10" fill="#475569">• IPv4-Subnetting / VLSM &amp; IPv6</text>
+                    <text x="0" y="60" font-family="sans-serif" font-size="10" fill="#475569">• 802.1Q VLAN &amp; 802.1X NAC</text>
+                </g>
+                <g transform="translate(330, 42)">
+                    <text x="0" y="14" font-family="sans-serif" font-size="11" font-weight="bold" fill="#166534">3. IT-Sicherheit &amp; USV</text>
+                    <text x="0" y="30" font-family="sans-serif" font-size="10" fill="#475569">• BitLocker, TPM 2.0 &amp; FIDO2</text>
+                    <text x="0" y="45" font-family="sans-serif" font-size="10" fill="#475569">• Schutzziele (CIA), Backup 3-2-1</text>
+                    <text x="0" y="60" font-family="sans-serif" font-size="10" fill="#475569">• USV-Leistungsdreieck &amp; Akku</text>
+                </g>
+                <g transform="translate(485, 42)">
+                    <text x="0" y="14" font-family="sans-serif" font-size="11" font-weight="bold" fill="#d97706">4. Kaufmännisch &amp; Recht</text>
+                    <text x="0" y="30" font-family="sans-serif" font-size="10" fill="#475569">• Handelskalkulation (LEP ➔ LVP)</text>
+                    <text x="0" y="45" font-family="sans-serif" font-size="10" fill="#475569">• Werklieferungsvertrag § 650 BGB</text>
+                    <text x="0" y="60" font-family="sans-serif" font-size="10" fill="#475569">• TCO &amp; Stromkostenberechnung</text>
+                </g>
+                <g transform="translate(640, 42)">
+                    <text x="0" y="14" font-family="sans-serif" font-size="11" font-weight="bold" fill="#059669">5. Rollout &amp; Software</text>
+                    <text x="0" y="30" font-family="sans-serif" font-size="10" fill="#475569">• PXE, WDS, Sysprep &amp; Imaging</text>
+                    <text x="0" y="45" font-family="sans-serif" font-size="10" fill="#475569">• SQL-Datenbanken (3NF)</text>
+                    <text x="0" y="60" font-family="sans-serif" font-size="10" fill="#475569">• Skripte &amp; DIN-Struktogramme</text>
+                </g>
+                <g transform="translate(785, 42)">
+                    <text x="0" y="14" font-family="sans-serif" font-size="11" font-weight="bold" fill="#dc2626">6. Service &amp; Support</text>
+                    <text x="0" y="30" font-family="sans-serif" font-size="10" fill="#475569">• Störungsbehebung (RJ45, APIPA)</text>
+                    <text x="0" y="45" font-family="sans-serif" font-size="10" fill="#475569">• Trouble-Ticket &amp; SLA</text>
+                    <text x="0" y="60" font-family="sans-serif" font-size="10" fill="#475569">• First- / Second-Level-Support</text>
+                </g>
+            </g>
+        </svg>
+        `;
+    },
+
     getAutoDiagramSvg: function(q) {
         if (!q) return null;
         // 1. Wenn die Frage bereits eine explizite grafische Musterlösung besitzt
@@ -5591,7 +5786,8 @@ var VisualDiagrams = {
                                           q.topic.toLowerCase().includes("struktogramm") || 
                                           q.topic.toLowerCase().includes("organigramm") ||
                                           q.topic.toLowerCase().includes("modellierung") ||
-                                          q.topic.toLowerCase().includes("relationales schema")
+                                          q.topic.toLowerCase().includes("relationales schema") ||
+                                          q.topic.toLowerCase().includes("arbeitsplatz")
                                       ));
 
         if (!isExplicitDiagramTask) {
@@ -5601,6 +5797,11 @@ var VisualDiagrams = {
         const topic = (q.topic || "").toLowerCase();
         const question = (q.question || "").toLowerCase();
         const text = topic + " " + question;
+
+        // IT-gestützter Arbeitsplatz Architektur (Ganzheitlicher IHK Prüfungsbereich)
+        if (text.includes("it-gestützten arbeitsplatz") || text.includes("arbeitsplatz-architektur") || (text.includes("arbeitsplatz") && (text.includes("tertiärverkabelung") || text.includes("etagenverteiler") || text.includes("dockingstation") || text.includes("dual-monitor") || text.includes("ergonomie") || text.includes("ganzheitlich")))) {
+            return VisualDiagrams.getItArbeitsplatzArchitekturSvg();
+        }
 
         // Sequenzdiagramm Buchungsverwaltung (IHK Original)
         if (text.includes("buchungsverwaltung") || text.includes("stornierungsvorgang") || (text.includes("stornieren") && text.includes("getbuchung"))) {
