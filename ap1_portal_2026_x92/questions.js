@@ -13030,14 +13030,14 @@ c) Endgerätesicherheit mit TPM 2.0, BitLocker & MFA:
         theme: "it-arbeitsplatz",
         topic: "⚡ IHK Fachaufgabe: USV-Dimensionierung & Netzteil-Wirkungsgrad am Arbeitsplatz",
         type: "multiple-choice",
-        question: "An einem CAD-Arbeitsplatzrechner mit angeschlossener USV (Unterbrechungsfreie Stromversorgung) werden im Volllastbetrieb folgende Werte gemessen:
+        question: `An einem CAD-Arbeitsplatzrechner mit angeschlossener USV (Unterbrechungsfreie Stromversorgung) werden im Volllastbetrieb folgende Werte gemessen:
 
 - Aufgenommene Wirkleistung P = 360 Watt
 - Leistungsfaktor cos φ = 0,75
 - Wirkungsgrad der USV im Batteriebetrieb η = 80 %
 - Nennspannung des internen Akkumulators U = 12 Volt
 
-Welche elektrische Scheinleistung S muss die USV mindestens bereitstellen können, und welche theoretische Mindestkapazität C (in Amperestunden, Ah) muss der 12V-Akku besitzen, um den Arbeitsplatz bei einem Stromausfall für genau 15 Minuten (0,25 h) unterbrechungsfrei mit Energie zu versorgen?",
+Welche elektrische Scheinleistung S muss die USV mindestens bereitstellen können, und welche theoretische Mindestkapazität C (in Amperestunden, Ah) muss der 12V-Akku besitzen, um den Arbeitsplatz bei einem Stromausfall für genau 15 Minuten (0,25 h) unterbrechungsfrei mit Energie zu versorgen?`,
         options: [
             "Scheinleistung S = 480 VA; Mindestkapazität C = 9,38 Ah (rechnerisch bei einer Batterieleistung von 450 W).",
             "Scheinleistung S = 270 VA; Mindestkapazität C = 7,50 Ah.",
@@ -13178,9 +13178,9 @@ c) Gesamtrechnungsbetrag für 25 Arbeitsplätze:
         theme: "it-arbeitsplatz",
         topic: "🛠️ IHK Multiple-Choice: First-Level-Troubleshooting am Arbeitsplatz (RJ45, APIPA & SLA)",
         type: "multiple-choice",
-        question: "Ein Mitarbeiter meldet über das IT-Ticketsystem, dass sein frisch eingerichteter Arbeitsplatzrechner nach dem Einstecken an der Datendose keine Netzwerk- und Internetverbindung aufbauen kann. Der Befehl 'ipconfig' auf dem Client zeigt die IPv4-Adresse '169.254.12.84' mit der Subnetzmaske '255.255.0.0' an.
+        question: `Ein Mitarbeiter meldet über das IT-Ticketsystem, dass sein frisch eingerichteter Arbeitsplatzrechner nach dem Einstecken an der Datendose keine Netzwerk- und Internetverbindung aufbauen kann. Der Befehl 'ipconfig' auf dem Client zeigt die IPv4-Adresse '169.254.12.84' mit der Subnetzmaske '255.255.0.0' an.
 
-Welche Diagnose und Erstmaßnahme nach IHK-Standard ist fachlich korrekt?",
+Welche Diagnose und Erstmaßnahme nach IHK-Standard ist fachlich korrekt?`,
         options: [
             "Es liegt eine APIPA-Adresse (Automatic Private IP Addressing) vor. Der Client konnte den DHCP-Server nicht erreichen (z. B. wegen defektem Patchkabel mit abgebrochener Rastnase, ungestecktem Switchport oder falschem VLAN). Erste Maßnahme: Physikalische Link-LEDs an der Netzwerkkarte/Dose prüfen und Patchkabel austauschen.",
             "Die IP-Adresse 169.254.x.x ist eine offizielle öffentliche Firmen-IP; der DNS-Server muss lediglich per 'ipconfig /flushdns' neu gestartet werden.",
