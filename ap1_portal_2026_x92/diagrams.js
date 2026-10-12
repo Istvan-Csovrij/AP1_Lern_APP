@@ -6079,7 +6079,250 @@ var VisualDiagrams = {
             return VisualDiagrams.getPapDiagramSvg();
         }
 
+        // 15. Baden-Württemberg FA 230: Organigramm & IPv6-Netzwerkplan
+        if (/\b(organigramm|aufbauorganisation|einliniensystem|stabliniensystem|spartenorganisation|stellenart)\b/i.test(text)) {
+            return VisualDiagrams.getFa230OrganigrammSvg();
+        }
+        if ((text.includes("ipv6") && (text.includes("admin-pc") || text.includes("ab.1001") || text.includes("2301::"))) || text.includes("netzwerkplan")) {
+            return VisualDiagrams.getFa230NetzwerkplanSvg();
+        }
+
         return null;
+    },
+
+    getFa230OrganigrammSvg: function() {
+        return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 480" width="100%" height="auto" style="max-width: 860px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+  <defs>
+    <linearGradient id="orgBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f8fafc"/>
+    </linearGradient>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="115%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect width="860" height="480" fill="url(#orgBg)" rx="10" stroke="#cbd5e1" stroke-width="1.5"/>
+
+  <!-- Title Header -->
+  <rect x="0" y="0" width="860" height="46" fill="#0f172a" rx="10"/>
+  <rect x="0" y="36" width="860" height="10" fill="#0f172a"/>
+  <text x="25" y="29" fill="#f8fafc" font-size="15" font-weight="700">SoftTech Solutions GmbH • Anlage 1: Organigramm der Aufbauorganisation</text>
+  <rect x="710" y="11" width="135" height="24" fill="#3b82f6" rx="12"/>
+  <text x="777" y="27" fill="#ffffff" font-size="11" font-weight="700" text-anchor="middle">IHK FA 230 / IT 1</text>
+
+  <!-- Connection Lines (Hierarchie & Stäbe) -->
+  <!-- GF to Stäbe horizontal -->
+  <line x1="230" y1="95" x2="630" y2="95" stroke="#94a3b8" stroke-width="2.5" stroke-dasharray="4,4"/>
+  <!-- GF vertical trunk down -->
+  <line x1="430" y1="125" x2="430" y2="185" stroke="#334155" stroke-width="2.5"/>
+  <!-- Main horizontal line for 1. Ebene -->
+  <line x1="110" y1="185" x2="750" y2="185" stroke="#334155" stroke-width="2.5"/>
+  <!-- Drops to 1. Ebene boxes -->
+  <line x1="110" y1="185" x2="110" y2="215" stroke="#334155" stroke-width="2.5"/>
+  <line x1="320" y1="185" x2="320" y2="215" stroke="#334155" stroke-width="2.5"/>
+  <line x1="535" y1="185" x2="535" y2="215" stroke="#334155" stroke-width="2.5"/>
+  <line x1="750" y1="185" x2="750" y2="215" stroke="#334155" stroke-width="2.5"/>
+
+  <!-- Drops from Verkauf to Sparten -->
+  <line x1="320" y1="275" x2="320" y2="315" stroke="#ea580c" stroke-width="2.5"/>
+  <line x1="210" y1="315" x2="430" y2="315" stroke="#ea580c" stroke-width="2.5"/>
+  <line x1="210" y1="315" x2="210" y2="345" stroke="#ea580c" stroke-width="2.5"/>
+  <line x1="320" y1="315" x2="320" y2="345" stroke="#ea580c" stroke-width="2.5"/>
+  <line x1="430" y1="315" x2="430" y2="345" stroke="#ea580c" stroke-width="2.5"/>
+
+  <!-- TOP BOX: Geschäftsführung (Instanz) -->
+  <g filter="url(#shadow)">
+    <rect x="330" y="65" width="200" height="60" rx="8" fill="#1e293b" stroke="#0f172a" stroke-width="2"/>
+    <text x="430" y="93" fill="#ffffff" font-size="14" font-weight="700" text-anchor="middle">Geschäftsführung</text>
+    <text x="430" y="112" fill="#94a3b8" font-size="11" text-anchor="middle">Oberste Leitungsinstanz</text>
+  </g>
+
+  <!-- STABSSTELLEN (beratend, ovale Kanten) -->
+  <!-- Stab 1: Öffentlichkeitsarbeit -->
+  <g filter="url(#shadow)">
+    <rect x="75" y="70" width="155" height="50" rx="25" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2"/>
+    <text x="152" y="92" fill="#6d28d9" font-size="11.5" font-weight="700" text-anchor="middle">Öffentlichkeitsarbeit</text>
+    <text x="152" y="108" fill="#8b5cf6" font-size="10" font-weight="600" text-anchor="middle">[Stabsstelle • PR]</text>
+  </g>
+
+  <!-- Stab 2: Rechtsabteilung -->
+  <g filter="url(#shadow)">
+    <rect x="630" y="70" width="155" height="50" rx="25" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2"/>
+    <text x="707" y="92" fill="#6d28d9" font-size="11.5" font-weight="700" text-anchor="middle">Rechtsabteilung</text>
+    <text x="707" y="108" fill="#8b5cf6" font-size="10" font-weight="600" text-anchor="middle">[Stabsstelle • Legal]</text>
+  </g>
+
+  <!-- 1. HIERARCHIEEBENE (Linienstellen) -->
+  <!-- 1. Einkauf -->
+  <g filter="url(#shadow)">
+    <rect x="30" y="215" width="160" height="60" rx="6" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+    <text x="110" y="242" fill="#1e40af" font-size="13" font-weight="700" text-anchor="middle">Einkauf</text>
+    <text x="110" y="260" fill="#64748b" font-size="11" text-anchor="middle">Beschaffung &amp; Lager</text>
+  </g>
+
+  <!-- 2. Verkauf (Spartenleitung) -->
+  <g filter="url(#shadow)">
+    <rect x="235" y="215" width="170" height="60" rx="6" fill="#fff7ed" stroke="#ea580c" stroke-width="2.5"/>
+    <text x="320" y="242" fill="#c2410c" font-size="13" font-weight="700" text-anchor="middle">Verkauf / Vertrieb</text>
+    <text x="320" y="260" fill="#ea580c" font-size="10.5" font-weight="600" text-anchor="middle">[Spartenorganisation]</text>
+  </g>
+
+  <!-- 3. Fertigung -->
+  <g filter="url(#shadow)">
+    <rect x="455" y="215" width="160" height="60" rx="6" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+    <text x="535" y="242" fill="#1e40af" font-size="13" font-weight="700" text-anchor="middle">Fertigung</text>
+    <text x="535" y="260" fill="#64748b" font-size="11" text-anchor="middle">Hardware &amp; Montage</text>
+  </g>
+
+  <!-- 4. IT-Services & Verwaltung -->
+  <g filter="url(#shadow)">
+    <rect x="665" y="215" width="170" height="60" rx="6" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+    <text x="750" y="242" fill="#1e40af" font-size="13" font-weight="700" text-anchor="middle">IT-Services / Verw.</text>
+    <text x="750" y="260" fill="#64748b" font-size="11" text-anchor="middle">IT-Betrieb &amp; Personal</text>
+  </g>
+
+  <!-- 2. EBENE UNTER VERKAUF (Sparten / Kundengruppen) -->
+  <!-- Sparte 1: Privatkunden -->
+  <g filter="url(#shadow)">
+    <rect x="150" y="345" width="120" height="52" rx="6" fill="#fffbeb" stroke="#d97706" stroke-width="1.8"/>
+    <text x="210" y="368" fill="#92400e" font-size="11" font-weight="700" text-anchor="middle">Privatkunden</text>
+    <text x="210" y="385" fill="#b45309" font-size="9.5" text-anchor="middle">Sparte B2C</text>
+  </g>
+
+  <!-- Sparte 2: Gewerbekunden -->
+  <g filter="url(#shadow)">
+    <rect x="260" y="345" width="120" height="52" rx="6" fill="#fffbeb" stroke="#d97706" stroke-width="1.8"/>
+    <text x="320" y="368" fill="#92400e" font-size="11" font-weight="700" text-anchor="middle">Gewerbekunden</text>
+    <text x="320" y="385" fill="#b45309" font-size="9.5" text-anchor="middle">Sparte B2B</text>
+  </g>
+
+  <!-- Sparte 3: Behörden -->
+  <g filter="url(#shadow)">
+    <rect x="370" y="345" width="120" height="52" rx="6" fill="#fffbeb" stroke="#d97706" stroke-width="1.8"/>
+    <text x="430" y="368" fill="#92400e" font-size="11" font-weight="700" text-anchor="middle">Behörden</text>
+    <text x="430" y="385" fill="#b45309" font-size="9.5" text-anchor="middle">Sparte Public / Gov</text>
+  </g>
+
+  <!-- LEGEND FOOTER -->
+  <rect x="15" y="420" width="830" height="48" fill="#f1f5f9" rx="6" stroke="#e2e8f0"/>
+  <circle cx="35" cy="444" r="7" fill="#1e293b"/>
+  <text x="48" y="448" fill="#334155" font-size="10.5" font-weight="600">Leitungsinstanz</text>
+
+  <rect x="155" y="437" width="16" height="14" rx="7" fill="#f5f3ff" stroke="#7c3aed" stroke-width="1.5"/>
+  <text x="177" y="448" fill="#334155" font-size="10.5" font-weight="600">Stabsstelle (beratend, ohne Weisung)</text>
+
+  <rect x="410" y="437" width="14" height="14" rx="3" fill="#eff6ff" stroke="#2563eb" stroke-width="1.5"/>
+  <text x="430" y="448" fill="#334155" font-size="10.5" font-weight="600">Linienstelle (Einliniensystem)</text>
+
+  <rect x="625" y="437" width="14" height="14" rx="3" fill="#fffbeb" stroke="#d97706" stroke-width="1.5"/>
+  <text x="645" y="448" fill="#334155" font-size="10.5" font-weight="600">Sparte (Kundengruppenorientiert)</text>
+</svg>`;
+    },
+
+    getFa230NetzwerkplanSvg: function() {
+        return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 480" width="100%" height="auto" style="max-width: 860px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+  <defs>
+    <linearGradient id="netBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f8fafc"/>
+    </linearGradient>
+    <filter id="netShadow" x="-5%" y="-5%" width="110%" height="115%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <rect width="860" height="480" fill="url(#netBg)" rx="10" stroke="#cbd5e1" stroke-width="1.5"/>
+
+  <!-- Title Header -->
+  <rect x="0" y="0" width="860" height="46" fill="#0f172a" rx="10"/>
+  <rect x="0" y="36" width="860" height="10" fill="#0f172a"/>
+  <text x="25" y="29" fill="#f8fafc" font-size="15" font-weight="700">SoftTech Solutions GmbH • Anlage 2: Netzwerkplan &amp; IPv6-Adressierung</text>
+  <rect x="710" y="11" width="135" height="24" fill="#10b981" rx="12"/>
+  <text x="777" y="27" fill="#ffffff" font-size="11" font-weight="700" text-anchor="middle">IHK FA 230 / IT 3</text>
+
+  <!-- Network Cables -->
+  <!-- Router to Switch -->
+  <line x1="200" y1="125" x2="430" y2="230" stroke="#0ea5e9" stroke-width="3"/>
+  <!-- DNS to Switch -->
+  <line x1="200" y1="335" x2="430" y2="230" stroke="#6366f1" stroke-width="3"/>
+  <!-- Switch to Admin-PC -->
+  <line x1="430" y1="270" x2="430" y2="350" stroke="#f59e0b" stroke-width="3.5"/>
+  <!-- Switch to Access Point -->
+  <line x1="480" y1="230" x2="680" y2="230" stroke="#ec4899" stroke-width="3" stroke-dasharray="6,4"/>
+
+  <!-- Port Labels on Switch -->
+  <circle cx="395" cy="210" r="11" fill="#0284c7"/>
+  <text x="395" y="214" fill="#ffffff" font-size="10" font-weight="700" text-anchor="middle">P1</text>
+
+  <circle cx="395" cy="250" r="11" fill="#4f46e5"/>
+  <text x="395" y="254" fill="#ffffff" font-size="10" font-weight="700" text-anchor="middle">P2</text>
+
+  <circle cx="430" cy="272" r="11" fill="#d97706"/>
+  <text x="430" y="276" fill="#ffffff" font-size="10" font-weight="700" text-anchor="middle">P3</text>
+
+  <circle cx="485" cy="230" r="11" fill="#db2777"/>
+  <text x="485" y="234" fill="#ffffff" font-size="10" font-weight="700" text-anchor="middle">P4</text>
+
+  <!-- DEVICE 1: ROUTER / GATEWAY (Top Left) -->
+  <g filter="url(#netShadow)">
+    <rect x="40" y="80" width="220" height="90" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+    <rect x="52" y="92" width="28" height="28" rx="4" fill="#dcfce7" stroke="#16a34a"/>
+    <text x="66" y="111" fill="#15803d" font-size="15" text-anchor="middle">🌐</text>
+    <text x="90" y="104" fill="#14532d" font-size="13" font-weight="700">Router / Gateway (R-01)</text>
+    <text x="90" y="122" fill="#166534" font-size="11" font-weight="600">Standard-Gateway für LAN</text>
+    <line x1="52" y1="130" x2="245" y2="130" stroke="#bbf7d0" stroke-width="1"/>
+    <text x="52" y="146" fill="#0f172a" font-size="10.5" font-family="monospace">IPv6 Link-Local: fe80::1</text>
+    <text x="52" y="160" fill="#475569" font-size="10" font-family="monospace">Präfix: 2001:db8:ea:2301::/64</text>
+  </g>
+
+  <!-- DEVICE 2: DNS-SERVER (Bottom Left) -->
+  <g filter="url(#netShadow)">
+    <rect x="40" y="290" width="220" height="90" rx="8" fill="#eef2ff" stroke="#4f46e5" stroke-width="2"/>
+    <rect x="52" y="302" width="28" height="28" rx="4" fill="#e0e7ff" stroke="#4f46e5"/>
+    <text x="66" y="321" fill="#3730a3" font-size="15" text-anchor="middle">🖥️</text>
+    <text x="90" y="314" fill="#312e81" font-size="13" font-weight="700">DNS-Server (DNS-01)</text>
+    <text x="90" y="332" fill="#3730a3" font-size="11" font-weight="600">Lokaler Nameserver</text>
+    <line x1="52" y1="340" x2="245" y2="340" stroke="#c7d2fe" stroke-width="1"/>
+    <text x="52" y="356" fill="#0f172a" font-size="10.5" font-family="monospace">IPv6 Link-Local: fe80::d</text>
+    <text x="52" y="370" fill="#475569" font-size="10" font-family="monospace">Dienst: Bind9 / Active Directory</text>
+  </g>
+
+  <!-- CENTER: CORE SWITCH -->
+  <g filter="url(#netShadow)">
+    <rect x="360" y="180" width="140" height="90" rx="8" fill="#1e293b" stroke="#0f172a" stroke-width="2"/>
+    <text x="430" y="206" fill="#f8fafc" font-size="13" font-weight="700" text-anchor="middle">Gigabit-Switch</text>
+    <text x="430" y="224" fill="#94a3b8" font-size="10" text-anchor="middle">VLAN 10 (Admin) • 20 (WLAN)</text>
+    <rect x="380" y="235" width="100" height="24" rx="4" fill="#0f172a"/>
+    <text x="430" y="251" fill="#38bdf8" font-size="10" font-weight="700" text-anchor="middle">Subnetz: ::2301::/64</text>
+  </g>
+
+  <!-- TARGET DEVICE: ADMIN-PC (Bottom Center) -->
+  <g filter="url(#netShadow)">
+    <rect x="320" y="350" width="240" height="95" rx="8" fill="#fffbeb" stroke="#d97706" stroke-width="2.5"/>
+    <rect x="332" y="362" width="28" height="28" rx="4" fill="#fef3c7" stroke="#d97706"/>
+    <text x="346" y="381" fill="#b45309" font-size="15" text-anchor="middle">💻</text>
+    <text x="370" y="375" fill="#78350f" font-size="13" font-weight="700">Admin-PC [Zielgerät]</text>
+    <text x="370" y="392" fill="#b45309" font-size="11" font-weight="700">Ident-Nummer: AB.1001</text>
+    <line x1="332" y1="400" x2="545" y2="400" stroke="#fde68a" stroke-width="1"/>
+    <text x="332" y="416" fill="#b45309" font-size="10.5" font-family="monospace" font-weight="700">Ziel: 2001:db8:ea:2301::ab:1001/64</text>
+    <text x="332" y="432" fill="#78350f" font-size="9.5">GW: fe80::1 • DNS: fe80::d</text>
+  </g>
+
+  <!-- DEVICE 3: WLAN ACCESS POINT (Right) -->
+  <g filter="url(#netShadow)">
+    <rect x="620" y="180" width="210" height="100" rx="8" fill="#fdf2f8" stroke="#db2777" stroke-width="2"/>
+    <rect x="632" y="192" width="28" height="28" rx="4" fill="#fce7f3" stroke="#db2777"/>
+    <text x="646" y="211" fill="#be185d" font-size="15" text-anchor="middle">📡</text>
+    <text x="670" y="205" fill="#831843" font-size="13" font-weight="700">Access Point (AP-01)</text>
+    <text x="670" y="222" fill="#9d174d" font-size="10.5" font-weight="600">Gast-WLAN (VLAN 20)</text>
+    <line x1="632" y1="230" x2="815" y2="230" stroke="#fbcfe8" stroke-width="1"/>
+    <text x="632" y="246" fill="#0f172a" font-size="10">⚡ Strom: PoE (IEEE 802.3at)</text>
+    <text x="632" y="260" fill="#0f172a" font-size="10">📶 Funk: Wi-Fi 6 (802.11ax)</text>
+    <text x="632" y="274" fill="#be185d" font-size="9.5" font-weight="600">Isoliertes Gast-Subnetz</text>
+  </g>
+</svg>`;
     }
 
 };

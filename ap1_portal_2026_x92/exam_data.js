@@ -6603,6 +6603,308 @@ var EXAM_SETS = [
             }
         ]
     }
+,
+    // =========================================================================
+    // PRÜFUNG 22: ORIGINAL BADEN-WÜRTTEMBERG SOMMER 2026 (SOFTTECH SOLUTIONS GMBH - FA 230)
+    // =========================================================================
+    {
+        id: "exam_22",
+        title: "Prüfung 22: Original Baden-Württemberg Sommer 2026 (SoftTech Solutions GmbH – FA 230)",
+        badge: "100 Punkte • 90 Min.",
+        subtitle: "Abschlussprüfung Teil 1 • IT-Berufe (Baden-Württemberg) • SoftTech Solutions GmbH",
+        ausgangssituation: "Sie sind Mitarbeiter der SoftTech Solutions GmbH in Stuttgart, einem mittelständischen IT-Systemhaus und Hardware-Fertiger mit angeschlossenem Vertrieb. Das Unternehmen strukturiert seine IT-Infrastruktur sowie betriebliche Kernprozesse neu. Zu Ihren Aufgaben gehören die Analyse der Aufbauorganisation, kaufmännische Handelskalkulationen für Kundenangebote, die Gewährleistung hoher Datenverfügbarkeit (Storage/RAID, USV, Backup-Konzepte nach 3-2-1), Netzwerkkonfigurationen im Dual-Stack IPv6-Umfeld und sichere WLAN-Konzepte. Ferner unterstützen Sie die Softwareentwicklung bei der Datenbereinigung exportierter ERP-Transaktionsdaten (bestpos.csv) sowie den Datenbankadministrator beim Entwurf eines relationalen 3NF-Datenmodells und komplexer SQL-Abfragen.",
+        tasks: [
+            // Aufgabe 1 (16 Pkt)
+            {
+                number: 1,
+                title: "1. Aufgabe: IT 1 – Aufbauorganisation (16 Punkte)",
+                totalPoints: 16,
+                subtasks: [
+                    {
+                        id: "22_1_a",
+                        label: "1.1 Organisationsformen im Organigramm identifizieren",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 6,
+                        stencil: "AUFBAUORGANISATION / SYSTEME & SPARTEN",
+                        svgIllustration: VisualDiagrams.getFa230OrganigrammSvg(),
+                        text: "Analysieren Sie das Organigramm der SoftTech Solutions GmbH in Anlage 1.\nNennen und begründen Sie drei unterschiedliche Organisationsstrukturen bzw. Gestaltungsformen der Aufbauorganisation, die im Organigramm zur Anwendung kommen (jeweils 2 Punkte).",
+                        solution: "1. Einliniensystem (2 Punkte):\nJede untergeordnete Stelle (z. B. Einkauf, Verkauf, Fertigung) hat genau einen direkten Weisungsgeber (Geschäftsführung). Dienstwege verlaufen streng hierarchisch von oben nach unten (Einheit der Auftragserteilung).\n\n2. Stabliniensystem (2 Punkte):\nDer Geschäftsleitung sind beratende Stabsstellen (Öffentlichkeitsarbeit / PR, Rechtsabteilung) beigeordnet. Diese unterstützen und entlasten die Führung, besitzen jedoch gegenüber den Fachbereichen keinerlei Weisungsbefugnis.\n\n3. Divisionale Organisation / Spartenorganisation nach Kundengruppen (2 Punkte):\nDer Fachbereich 'Verkauf' ist nach Marktsegmenten / Zielgruppen untergliedert: Sparte Privatkunden (B2C), Sparte Gewerbekunden (B2B) und Sparte Behörden (öffentlicher Sektor)."
+                    },
+                    {
+                        id: "22_1_b",
+                        label: "1.2 Stellenarten im Organigramm unterscheiden und zuordnen",
+                        points: 6,
+                        type: "table",
+                        stencil: "STELLENARTEN IM ORGANIGRAMM",
+                        text: "Im Organigramm sind verschiedene Arten von Stellen dargestellt.\nNennen Sie drei unterschiedliche Stellenarten und ordnen Sie jeder Stellenart ein konkretes Beispiel aus dem Organigramm der SoftTech Solutions GmbH sowie deren Kernmerkmal zu (jeweils 2 Punkte).",
+                        tableConfig: {
+                            type: "matching",
+                            headers: ["Stellenart", "Konkretes Beispiel aus Organigramm", "Befugnis & Merkmal"],
+                            targetCols: [1, 2],
+                            options: [
+                                "Geschäftsführung (Leitungsinstanz)",
+                                "Rechtsabteilung oder Öffentlichkeitsarbeit",
+                                "Einkauf, Fertigung oder Verkauf Privatkunden",
+                                "Volle fachliche & disziplinarische Weisungsbefugnis",
+                                "Beratende Funktion, Entscheidungsvorbereitung, KEINE Weisungsbefugnis",
+                                "Ausführung operativer Fachaufgaben, keine Untergebenen"
+                            ],
+                            rows: [
+                                ["Leitungsstelle (Instanz)", "", ""],
+                                ["Stabsstelle", "", ""],
+                                ["Ausführungsstelle (Linienstelle)", "", ""]
+                            ],
+                            solutions: {
+                                "0_1": "Geschäftsführung (Leitungsinstanz)",
+                                "0_2": "Volle fachliche & disziplinarische Weisungsbefugnis",
+                                "1_1": "Rechtsabteilung oder Öffentlichkeitsarbeit",
+                                "1_2": "Beratende Funktion, Entscheidungsvorbereitung, KEINE Weisungsbefugnis",
+                                "2_1": "Einkauf, Fertigung oder Verkauf Privatkunden",
+                                "2_2": "Ausführung operativer Fachaufgaben, keine Untergebenen"
+                            }
+                        },
+                        solution: "• Leitungsstelle (Instanz): Geschäftsführung (bzw. Abteilungsleitung); besitzt Entscheidungs- und Weisungsbefugnis.\n• Stabsstelle: Rechtsabteilung oder Öffentlichkeitsarbeit; besitzt beratende Funktion ohne Anordnungsbefugnis.\n• Ausführungsstelle: Einkauf, Fertigung oder Verkauf Privatkunden; führt operative Fachaufgaben weisungsgebunden aus."
+                    },
+                    {
+                        id: "22_1_c",
+                        label: "1.3 Vor- und Nachteil der Aufbauorganisation für SoftTech",
+                        points: 4,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "BEWERTUNG DER AUFBAUORGANISATION",
+                        text: "Beurteilen Sie die dargestellte Organisationsstruktur der SoftTech Solutions GmbH kritisch.\nNennen und erläutern Sie jeweils einen wesentlichen Vor- und Nachteil dieser Struktur für das Unternehmen (jeweils 2 Punkte).",
+                        solution: "• Vorteil (2 Punkte):\nKlare Kompetenz- und Verantwortungsabgrenzung sowie transparente Dienstwege durch das Einliniensystem. Die Geschäftsleitung wird durch spezialisierte Stabsstellen (Recht, PR) fachlich entlastet, ohne dass Fachabteilungen verwirrt werden.\n\n• Nachteil (2 Punkte):\nGefahr von Stab-Linien-Konflikten (Stabsstellen besitzen informelle Macht ohne formelle Verantwortung, was zu Reibungsverlusten mit den Linienleitern führen kann); zudem können lange und schwerfällige Informations- und Instanzenwege bei dynamischen Marktanforderungen zu Verzögerungen führen."
+                    }
+                ]
+            },
+
+            // Aufgabe 2 (14 Pkt)
+            {
+                number: 2,
+                title: "2. Aufgabe: IT 2 – Handelskalkulation (14 Punkte)",
+                totalPoints: 14,
+                subtasks: [
+                    {
+                        id: "22_2_a",
+                        label: "2.1 Rückwärtskalkulation: BVP 1.000,00 € zum Listeneinkaufspreis",
+                        points: 10,
+                        type: "table",
+                        stencil: "RÜCKWÄRTSKALKULATION IM HUNDERT",
+                        text: "Die SoftTech Solutions GmbH kalkuliert ein Serversystem für einen Behördenkunden. Aus Wettbewerbsgründen ist der Barverkaufspreis (BVP) netto auf exakt 1.000,00 € festgesetzt.\nKalkulationsdaten:\n• Gewinnzuschlag: 5,00 % (bezogen auf Selbstkosten)\n• Handlungskostenzuschlag (HKZ): 20,00 % (bezogen auf Bezugspreis)\n• Bezugskosten: 25,00 € (pauschal)\n• Liefererskonto: 3,00 % (bezogen auf Zieleinkaufspreis)\n• Liefererrabatt: 10,00 % (bezogen auf Listeneinkaufspreis)\n\nFühren Sie die Rückwärtskalkulation in der folgenden Kalkulationstabelle durch und tragen Sie die fehlenden Beträge in Euro ein (auf 2 Nachkommastellen genau).",
+                        tableConfig: {
+                            headers: ["Kalkulationsschritt", "Rechenansatz / Prozentsatz", "Betrag in €"],
+                            rows: [
+                                ["Barverkaufspreis (BVP)", "105 %", "1.000,00"],
+                                ["- Gewinn (5 % Gewinnzuschlag)", "5 % im Hundert (1.000,00 × 5 / 105)", ""],
+                                ["= Selbstkosten (SK)", "100 % (= 120 % von Bezugspreis)", ""],
+                                ["- Handlungskosten (20 % HKZ)", "20 % im Hundert (952,38 × 20 / 120)", ""],
+                                ["= Bezugspreis (Einstandspreis)", "100 %", ""],
+                                ["- Bezugskosten", "pauschal abgezogen", "25,00"],
+                                ["= Bareinkaufspreis (BEP)", "97 % vom ZEP", ""],
+                                ["+ Liefererskonto (3 %)", "3 % im Hundert (768,65 / 97 × 3)", ""],
+                                ["= Zieleinkaufspreis (ZEP)", "100 % (= 90 % vom LEP)", ""],
+                                ["+ Liefererrabatt (10 %)", "10 % im Hundert (792,42 / 90 × 10)", ""],
+                                ["= Listeneinkaufspreis (LEP)", "100 %", ""]
+                            ],
+                            solutions: {
+                                "1_2": "47,62",
+                                "2_2": "952,38",
+                                "3_2": "158,73",
+                                "4_2": "793,65",
+                                "6_2": "768,65",
+                                "7_2": "23,77",
+                                "8_2": "792,42",
+                                "9_2": "88,05",
+                                "10_2": "880,47"
+                            }
+                        },
+                        solution: "Schritt-für-Schritt-Rückwärtskalkulation:\n1. BVP = 1.000,00 € entspricht 105 % der Selbstkosten (SK).\n   Gewinn (5 %): 1.000,00 € × 5 / 105 = 47,62 €.\n   Selbstkosten: 1.000,00 € - 47,62 € = 952,38 €.\n\n2. SK = 952,38 € entspricht 120 % des Bezugspreises (da 20 % HKZ).\n   Handlungskosten: 952,38 € × 20 / 120 = 158,73 €.\n   Bezugspreis: 952,38 € - 158,73 € = 793,65 €.\n\n3. Bezugskosten abziehen:\n   Bareinkaufspreis (BEP): 793,65 € - 25,00 € = 768,65 €.\n\n4. BEP = 768,65 € entspricht 97 % des Zieleinkaufspreises (ZEP, da 3 % Skonto abgezogen wurden).\n   ZEP: 768,65 € / 0,97 = 792,42 €.\n   Liefererskonto: 792,42 € - 768,65 € = 23,77 €.\n\n5. ZEP = 792,42 € entspricht 90 % des Listeneinkaufspreises (LEP, da 10 % Rabatt abgezogen wurden).\n   LEP: 792,42 € / 0,90 = 880,47 €.\n   Liefererrabatt: 880,47 € - 792,42 € = 88,05 €.\n\nEndergebnis: Der Listeneinkaufspreis (LEP) beträgt exakt 880,47 €."
+                    },
+                    {
+                        id: "22_2_b",
+                        label: "2.2 Betriebswirtschaftlicher Vergleich: Skonto vs. Rabatt",
+                        points: 4,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "RABATT VS. SKONTO UNTERSCHIED",
+                        text: "Erläutern Sie den Unterschied zwischen Liefererrabatt und Liefererskonto aus betriebswirtschaftlicher Sicht.\nGehen Sie dabei auf Gewährungsgrund, Zeitpunkt des Abzugs und den wirtschaftlichen Zweck des Lieferanten ein (4 Punkte).",
+                        solution: "• Liefererrabatt (2 Punkte):\nKaufmännischer Preisnachlass auf den Listenpreis, der sofort bei Vertragsabschluss bzw. Rechnungsstellung gewährt wird. Gründe sind z. B. große Bestellmengen (Mengenrabatt), Kundentreue, Sonderaktionen oder Produkteinführungen. Er ist nicht an ein Zahlungsverhalten gebunden.\n\n• Liefererskonto (2 Punkte):\nFinanzieller Nachlass (Zinsvergütung/Liquiditätsanreiz), der nachträglich vom Rechnungsbetrag abgezogen werden darf, wenn die Begleichung der Rechnung innerhalb einer vereinbarten kurzen Frist (Skontofrist, z. B. binnen 10 Tagen statt 30 Tagen Zahlungsziel) erfolgt. Ziel des Lieferanten ist die schnellere Beschaffung von Liquidität und die Vermeidung von Mahnwesen/Kreditausfall."
+                    }
+                ]
+            },
+
+            // Aufgabe 3 (30 Pkt)
+            {
+                number: 3,
+                title: "3. Aufgabe: IT 3 – Datenverfügbarkeit, Netzwerkkonfiguration & WLAN (30 Punkte)",
+                totalPoints: 30,
+                subtasks: [
+                    {
+                        id: "22_3_a",
+                        label: "3.1 Verfügbarkeitsklasse 3 (99,9%) – Maximale Ausfallzeit pro Jahr",
+                        points: 3,
+                        type: "math-grid",
+                        stencil: "VERFÜGBARKEITSRECHNUNG (SLA)",
+                        text: "Das Rechenzentrum der SoftTech garantiert im SLA eine Verfügbarkeitsklasse 3 (99,9 % Verfügbarkeit bezogen auf ein Standardjahr mit 365 Tagen = 525.600 Minuten).\nBerechnen Sie die maximal zulässige ungeplante Ausfallzeit pro Jahr in Minuten (3 Punkte).",
+                        solution: "Gegeben:\nGesamtzeit pro Jahr = 365 Tage × 24 Stunden/Tag × 60 Min./Stunde = 525.600 Minuten\nVerfügbarkeit = 99,9 % = 0,999\nZulässige Ausfallquote = 100 % - 99,9 % = 0,1 % = 0,001\n\nBerechnung:\nAusfallzeit = 525.600 Minuten × 0,001 = 525,6 Minuten pro Jahr.\n\n(Zur Information: 525,6 Minuten entsprechen 8 Stunden, 45 Minuten und 36 Sekunden Ausfallzeit pro Jahr)."
+                    },
+                    {
+                        id: "22_3_b",
+                        label: "3.2 Technische Maßnahmen zur Erhöhung der Datenverfügbarkeit",
+                        points: 3,
+                        type: "lines",
+                        linesCount: 4,
+                        stencil: "HIGH AVAILABILITY MASSNAHMEN",
+                        text: "Neben der Festplattenredundanz (RAID) sind weitere Vorkehrungen erforderlich, um Hochverfügbarkeit im IT-Betrieb sicherzustellen.\nNennen Sie drei konkrete technische oder infrastrukturelle Maßnahmen zur Erhöhung der Daten- und Systemverfügbarkeit (3 Punkte).",
+                        solution: "1. Unterbrechungsfreie Stromversorgung (USV) und Notstromaggregat zur Absicherung gegen Stromausfälle und Netzschwankungen.\n2. Server-Clustering / High Availability (HA) / Failover-Cluster mit automatischem Failover bei Serverausfall.\n3. Redundante Netzwerkanbindungen (Dual-Homing, redundante Switches mit VRRP/LACP, zweiter Internet-Uplink über redundante Carrier)."
+                    },
+                    {
+                        id: "22_3_c",
+                        label: "3.3.1 Nutzkapazität: RAID 5 vs. RAID 10 bei 6x 20 TB Festplatten",
+                        points: 5,
+                        type: "math-grid",
+                        stencil: "RAID KAPAZITÄTSBERECHNUNG",
+                        text: "Ein Speicher-Array wird mit 6 Festplatten zu je 20 TB Bruttokapazität bestückt.\nBerechnen Sie die jeweilige nutzbare Speicherkapazität in Terabyte (TB) für:\na) RAID 5 (2,5 Punkte)\nb) RAID 10 (2,5 Punkte)",
+                        solution: "Gegeben: n = 6 Festplatten, Kapazität = 20 TB pro Platte.\nBruttogesamtvolumen = 6 × 20 TB = 120 TB.\n\na) RAID 5:\nFormel: (n - 1) × Einzelkapazität\n= (6 - 1) × 20 TB = 5 × 20 TB = 100 TB Nutzkapazität (1 Platte = 20 TB für Paritätsdaten reserviert).\n\nb) RAID 10 (Striping über Spiegelpaare):\nFormel: (n / 2) × Einzelkapazität\n= (6 / 2) × 20 TB = 3 × 20 TB = 60 TB Nutzkapazität (50 % für Spiegelung gebunden)."
+                    },
+                    {
+                        id: "22_3_d",
+                        label: "3.3.2 Verfügbarkeit & Rebuild-Vorteil von RAID 10 gegenüber RAID 5",
+                        points: 4,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "RAID 10 VS RAID 5 VORTEILE",
+                        text: "Obwohl RAID 10 bei 6 Platten 40 TB weniger Nutzkapazität als RAID 5 bietet, wird für datenbankintensive Systeme RAID 10 gewählt.\nBegründen Sie diese Entscheidung anhand von zwei technischen Vorteilen hinsichtlich Ausfallsicherheit und Rebuild-Verhalten (4 Punkte).",
+                        solution: "1. Rebuild-Performance & I/O-Last (2 Punkte):\nBeim Rebuild einer defekten Platte muss RAID 10 nur die Daten der gespiegelten Partnerplatte 1:1 kopieren (reines Lesen/Schreiben ohne Rechenaufwand). Bei RAID 5 müssen alle verbleibenden 5 Platten komplett gelesen und unter hoher CPU- und I/O-Last die XOR-Paritäten neu berechnet werden. Dies führt zu massiven Performance-Einbrüchen und verlängert das kritische Rebuild-Zeitfenster erheblich.\n\n2. Höhere Ausfalltoleranz (2 Punkte):\nRAID 5 verkraftet den Ausfall von maximal genau einer Platte. Fällt während des tagelangen Rebuilds eine zweite Platte aus (z. B. durch URE – Unrecoverable Read Error), ist das gesamte Array verloren. Bei RAID 10 können bis zu 3 Festplatten gleichzeitig ausfallen (solange nicht beide Platten desselben Spiegelpaares betroffen sind)."
+                    },
+                    {
+                        id: "22_3_e",
+                        label: "3.3.3 Stellungnahme: 'RAID ersetzt Backup'",
+                        points: 3,
+                        type: "lines",
+                        linesCount: 4,
+                        stencil: "RAID VS. BACKUP ABGRENZUNG",
+                        text: "Ein Kollege behauptet im Projektmeeting: 'Weil wir durch RAID 10 und Snapshot-Replikation hochverfügbar aufgestellt sind, können wir auf das tägliche Backup auf externe Medien verzichten.'\nNehmen Sie fachlich fundiert zu dieser Aussage Stellung (3 Punkte).",
+                        solution: "Die Aussage ist fachlich falsch und gefährlich fahrlässig!\nEin RAID-Verbund dient ausschließlich der Ausfallsicherheit (Hochverfügbarkeit) gegen physische Hardwaredefekte von Festplatten. Es schützt in keiner Weise vor logischen Datenverlusten:\n• Versehentliches oder böswilliges Löschen / Überschreiben von Daten,\n• Infektion durch Ransomware oder Schadsoftware (Verschlüsselung wird sofort auf alle Platten gespiegelt),\n• Software- und Datenbankfehler (logische Korruption),\n• Physische Katastrophen am Standort (Brand, Diebstahl, Wasserschaden, Blitzschlag).\nEin separates, medien- und ortsgetrenntes Backup ist zwingend unverzichtbar."
+                    },
+                    {
+                        id: "22_3_f",
+                        label: "3.3.4 Das 3-2-1-Backup-Konzept für SoftTech",
+                        points: 3,
+                        type: "lines",
+                        linesCount: 4,
+                        stencil: "3-2-1-BACKUP-STRATEGIE",
+                        text: "Beschreiben Sie die drei Grundregeln des etablierten 3-2-1-Backup-Prinzips für die SoftTech Solutions GmbH (3 Punkte).",
+                        solution: "• 3 Kopien: Die Daten müssen in mindestens drei Exemplaren existieren (1x Produktivdaten/Original + 2x Backups/Kopien).\n• 2 Speichermedien: Die Sicherungen müssen auf mindestens zwei unterschiedlichen Medientechnologien gespeichert sein (z. B. lokales Festplatten-Storage/NAS und LTO-Magnetband oder Cloud-Speicher), um hersteller- oder medientypische Serienfehler auszuschließen.\n• 1 Offsite-Kopie: Mindestens eine Sicherungskopie muss räumlich getrennt (außer Haus / georedundant / Brandschutzabschnitt / Cloud) gelagert werden, geschützt vor Vor-Ort-Katastrophen (Brand, Einbruch, Hochwasser)."
+                    },
+                    {
+                        id: "22_3_g",
+                        label: "3.4 IPv6-Adressierung des Admin-PCs (Anlage 2)",
+                        points: 4,
+                        type: "table",
+                        stencil: "IPV6-KONFIGURATION ADMIN-PC",
+                        svgIllustration: VisualDiagrams.getFa230NetzwerkplanSvg(),
+                        text: "Konfigurieren Sie den Admin-PC 'AB.1001' im Subnetz der SoftTech Solutions GmbH gemäß Netzwerkplan in Anlage 2.\nVorgaben:\n• Subnetz-Präfix: 2001:0db8:00ea:2301::/64\n• Standard-Gateway: Router mit Link-Local-Adresse fe80::1\n• DNS-Server: Lokaler Server mit Link-Local-Adresse fe80::d\n• Host-Teil (Interface-ID) des Admin-PCs lautet: AB.1001\n\nTragen Sie die kürzeste gültige RFC-Schreibweise der IPv6-Adresse, Präfixlänge sowie Gateway und DNS in die Konfigurationstabelle ein.",
+                        tableConfig: {
+                            headers: ["Netzwerk-Parameter", "IPv6-Konfiguration (Kürzeste gültige Schreibweise)"],
+                            rows: [
+                                ["IPv6-Adresse Admin-PC", ""],
+                                ["Präfixlänge", ""],
+                                ["Standard-Gateway", ""],
+                                ["Bevorzugter DNS-Server", ""]
+                            ],
+                            solutions: {
+                                "0_1": "2001:db8:ea:2301::ab:1001",
+                                "1_1": "/64",
+                                "2_1": "fe80::1",
+                                "3_1": "fe80::d"
+                            }
+                        },
+                        solution: "1. IPv6-Adresse Admin-PC:\nUngekürzt: 2001:0db8:00ea:2301:0000:0000:00ab:1001\nKürzeste Schreibweise nach RFC 5952: 2001:db8:ea:2301::ab:1001\n(Führende Nullen pro Block weggelassen, längste Folge von 16-Bit-Nullblöcken durch '::' ersetzt, Hexadezimalbuchstaben kleingeschrieben).\n2. Präfixlänge: /64 (64 Netzwerkbits, 64 Hostbits).\n3. Standard-Gateway: fe80::1\n4. Bevorzugter DNS-Server: fe80::d"
+                    },
+                    {
+                        id: "22_3_h",
+                        label: "3.5 WLAN-Segmentierung, Standard & PoE-Versorgung",
+                        points: 5,
+                        type: "lines",
+                        linesCount: 6,
+                        stencil: "WLAN ARCHITEKTUR & POE",
+                        text: "Im Gebäude der SoftTech wird ein neues WLAN eingerichtet.\na) Begründen Sie, warum das Gast-WLAN in einem separaten Subnetz (VLAN) betrieben werden muss (2 Punkte).\nb) Nennen Sie den aktuellen Wi-Fi-Standard (IEEE-Norm und Marketingbezeichnung) für zukunftssichere Neuinstallationen (1,5 Punkte).\nc) Erläutern Sie, wie moderne Access Points standardmäßig mit elektrischer Energie versorgt werden und nennen Sie die IEEE-Bezeichnung (1,5 Punkte).",
+                        solution: "a) Gast-WLAN-Segmentierung (2 Punkte):\nAus Sicherheitsgründen (Zero Trust / logische Netzwerktrennung). Externe Gäste dürfen keinen Zugriff auf sensible interne Unternehmensressourcen (Server, Datenbanken, ERP, NAS) erhalten. Zudem verhindert das separate VLAN die Ausbreitung von Broadcast-Traffic und Malware/Netzwerkangriffen aus fremden Gastgeräten in das interne LAN.\n\nb) Aktueller Wi-Fi-Standard (1,5 Punkte):\nIEEE 802.11ax (Marketingbezeichnung: Wi-Fi 6 bzw. Wi-Fi 6E mit 6 GHz) oder IEEE 802.11be (Wi-Fi 7 / Extremely High Throughput).\n\nc) Stromversorgung über das Datenkabel (1,5 Punkte):\nPower over Ethernet (PoE) gemäß IEEE 802.3af (PoE bis 15,4 W), IEEE 802.3at (PoE+ bis 30 W) oder IEEE 802.3bt (4PPoE bis 90 W). Dies ermöglicht den Betrieb ohne separate Steckdosen oder Netzteile an Decken und Wänden."
+                    }
+                ]
+            },
+
+            // Aufgabe 4 (20 Pkt)
+            {
+                number: 4,
+                title: "4. Aufgabe: IT 4 – Softwareentwicklung (20 Punkte)",
+                totalPoints: 20,
+                subtasks: [
+                    {
+                        id: "22_4_a",
+                        label: "4.1 Algorithmus: CSV-Prüfung auf fehlenden Preis (pruefeFehlendenPreis)",
+                        points: 20,
+                        type: "lines",
+                        linesCount: 15,
+                        stencil: "ALGORITHMUS CSV-PARSING & VALIDIERUNG",
+                        text: "Aus dem Warenwirtschaftssystem wird die Exportdatei bestpos.csv mit Bestelldaten bereitgestellt. Jede Zeile stellt einen Datensatz dar, wobei die Werte durch Semikolons (;) getrennt sind.\nDateiaufbau (Kopfzeile in Zeile 0):\nBestellID;Bestelldatum;ArtikelID;Artikelbezeichnung;Menge;Preis;Hersteller;HerstellerID\nBeispielzeilen:\n1001;2026-03-01;ART-101;Tastatur USB;2;29.99;LogiTech;H-01\n1002;2026-03-02;ART-205;Servergehäuse 2HE;1;;RackMaster;H-04\n\nAufgabe:\nEntwickeln Sie eine Funktion bzw. Methode pruefeFehlendenPreis(daten, gesuchteArtikelID), die ein String-Array daten (Zeilen der CSV) und die gesuchte gesuchteArtikelID als Parameter übernimmt.\nDie Methode soll prüfen, ob bei dem angegebenen Artikel der Preis fehlt (leere Zeichenkette \"\", nur Leerzeichen oder String \"NULL\").\nAnforderungen:\n1. Kopfzeile (Index 0) überspringen.\n2. Jede Datenzeile anhand des Trennzeichens ';' in Felder zerlegen.\n3. Prüfen, ob die Spalte ArtikelID (Index 2) mit der übergebenen gesuchteArtikelID übereinstimmt.\n4. Falls ja: Prüfen, ob das Preisfeld (Index 5) leer ist, nur Whitespace enthält oder gleich \"NULL\" ist.\n5. Bei fehlendem Preis soll die Funktion sofort den Wahrheitswert true (Gefunden: fehlender Preis) zurückgeben.\n6. Wurde die gesamte Datei ohne Beanstandung durchlaufen (oder ist der Artikel gar nicht vorhanden), soll false zurückgegeben werden.\n\nFormulieren Sie den Algorithmus in Pseudocode oder einer gängigen Programmiersprache (z. B. Java, Python, C#, JavaScript).",
+                        solution: "Musterlösung in Pseudocode / Python / Java:\n\n// Java- / C#-Stil:\npublic boolean pruefeFehlendenPreis(String[] daten, String gesuchteArtikelID) {\n    if (daten == null || daten.length <= 1) {\n        return false;\n    }\n    \n    // Zeile 0 ist der Header, daher ab Index 1 starten\n    for (int i = 1; i < daten.length; i++) {\n        String zeile = daten[i].trim();\n        if (zeile.isEmpty()) continue;\n        \n        String[] spalten = zeile.split(\";\", -1);\n        if (spalten.length >= 6) {\n            String artikelID = spalten[2].trim();\n            \n            if (artikelID.equalsIgnoreCase(gesuchteArtikelID.trim())) {\n                String preis = spalten[5].trim();\n                if (preis.isEmpty() || preis.equalsIgnoreCase(\"NULL\")) {\n                    return true; // Fehlender Preis gefunden!\n                }\n            }\n        }\n    }\n    return false; // Kein fehlerhafter Datensatz für diesen Artikel gefunden\n}\n\n// Python-Äquivalent:\ndef pruefeFehlendenPreis(daten: list[str], gesuchteArtikelID: str) -> bool:\n    for zeile in daten[1:]: # Header überspringen\n        zeile = zeile.strip()\n        if not zeile:\n            continue\n        spalten = zeile.split(';')\n        if len(spalten) >= 6:\n            if spalten[2].strip() == gesuchteArtikelID.strip():\n                preis = spalten[5].strip()\n                if preis == '' or preis.upper() == 'NULL':\n                    return True\n    return False"
+                    }
+                ]
+            },
+
+            // Aufgabe 5 (20 Pkt)
+            {
+                number: 5,
+                title: "5. Aufgabe: IT 5 – Datenbanken & Relationenmodell (20 Punkte)",
+                totalPoints: 20,
+                subtasks: [
+                    {
+                        id: "22_5_a",
+                        label: "5.1 Relationales Datenmodell in 3. Normalform (3NF) aus bestpos.csv",
+                        points: 10,
+                        type: "lines",
+                        linesCount: 10,
+                        stencil: "DATENMODELLIERUNG 3NF AUS CSV",
+                        text: "Die CSV-Datei bestpos.csv enthält folgende Attribute:\nBestellID, Bestelldatum, ArtikelID, Artikelbezeichnung, Menge, Preis, Hersteller, HerstellerID.\n\nBetriebliche Zusammenhänge:\n• Ein Hersteller (HerstellerID) hat einen Namen (Hersteller).\n• Ein Artikel (ArtikelID) hat eine Bezeichnung (Artikelbezeichnung), einen Standard-Einzelpreis (Preis) und wird von genau einem Hersteller gefertigt.\n• Eine Bestellung (BestellID) wird an einem bestimmten Bestelldatum ausgelöst.\n• In einer Bestellung können mehrere Artikel in einer bestimmten Menge bestellt werden; ein Artikel kann in vielen Bestellungen auftauchen (n:m-Beziehung).\n\nAufgabe:\nÜberführen Sie diese Struktur in ein relationales Datenmodell in der 3. Normalform (3NF).\nGeben Sie für alle Tabellen den Tabellennamen sowie alle Attribute an. Kennzeichnen Sie Primärschlüssel (PK) eindeutig durch Unterstreichung und Fremdschlüssel (FK) durch Kennzeichnung [FK] (10 Punkte).",
+                        solution: "Relationales Datenmodell in 3. Normalform (3NF):\n\n1. Tabelle: Hersteller\n• HerstellerID (PK)\n• Hersteller (Herstellername)\n(Beseitigung der transitiven Abhängigkeit: ArtikelID -> HerstellerID -> Hersteller)\n\n2. Tabelle: Artikel\n• ArtikelID (PK)\n• Artikelbezeichnung\n• Preis\n• HerstellerID [FK -> Hersteller.HerstellerID]\n\n3. Tabelle: Bestellung\n• BestellID (PK)\n• Bestelldatum\n\n4. Tabelle: Bestellposition (Auflösung der n:m-Beziehung)\n• BestellID [FK -> Bestellung.BestellID] (zusammengesetzter PK)\n• ArtikelID [FK -> Artikel.ArtikelID] (zusammengesetzter PK)\n• Menge"
+                    },
+                    {
+                        id: "22_5_b",
+                        label: "5.2.1 SQL-Abfrage: Kunden nach Ort filtern und sortieren",
+                        points: 4,
+                        type: "lines",
+                        linesCount: 3,
+                        stencil: "SQL SELECT WHERE ORDER BY",
+                        text: "Für eine Marketingaktion sollen Kunden ermittelt werden.\nFormulieren Sie eine SQL-Abfrage, die alle Namen (Name) aus der Tabelle Kunde ausgibt, bei denen Ortnr den Wert 2 hat. Die Ausgabe soll alphabetisch absteigend nach dem Namen sortiert sein (4 Punkte).",
+                        solution: "SELECT Name\nFROM Kunde\nWHERE Ortnr = 2\nORDER BY Name DESC;"
+                    },
+                    {
+                        id: "22_5_c",
+                        label: "5.2.2 SQL-Abfrage: Gesamtanzahl aller Kunden ermitteln",
+                        points: 3,
+                        type: "lines",
+                        linesCount: 3,
+                        stencil: "SQL AGGREGATFUNKTION COUNT",
+                        text: "Formulieren Sie eine SQL-Abfrage, welche die Gesamtzahl aller Datensätze in der Tabelle Kunde ermittelt und das Ergebnis unter dem Alias AnzahlKunden ausgibt (3 Punkte).",
+                        solution: "SELECT COUNT(*) AS AnzahlKunden\nFROM Kunde;"
+                    },
+                    {
+                        id: "22_5_d",
+                        label: "5.2.3 SQL-Abfrage: Kunden ohne E-Mail-Adresse identifizieren",
+                        points: 3,
+                        type: "lines",
+                        linesCount: 3,
+                        stencil: "SQL NULL-WERT & LEERSTRING PRÜFUNG",
+                        text: "Für den DSGVO-Audit sollen alle Kunden gefunden werden, für die keine E-Mail-Adresse hinterlegt ist (Email ist NULL oder leerer String).\nFormulieren Sie die entsprechende SQL-Abfrage (3 Punkte).",
+                        solution: "SELECT *\nFROM Kunde\nWHERE Email IS NULL OR Email = '';"
+                    }
+                ]
+            }
+        ]
+    }
 
 ];
 
@@ -6613,10 +6915,11 @@ function getAvailableExamSets() {
 
 // Generates a dynamic 100-point balanced random exam (Aufgabe 1 to 4 à 25 points)
 function generateDynamicFullExam() {
-    const task1Pool = EXAM_SETS.map(e => e.tasks[0]);
-    const task2Pool = EXAM_SETS.map(e => e.tasks[1]);
-    const task3Pool = EXAM_SETS.map(e => e.tasks[2]);
-    const task4Pool = EXAM_SETS.map(e => e.tasks[3]);
+    const standardExams = EXAM_SETS.filter(e => e.tasks && e.tasks.length === 4 && (e.tasks[0].totalPoints === 25 || e.tasks[0].totalPoints === undefined));
+    const task1Pool = standardExams.map(e => e.tasks[0]);
+    const task2Pool = standardExams.map(e => e.tasks[1]);
+    const task3Pool = standardExams.map(e => e.tasks[2]);
+    const task4Pool = standardExams.map(e => e.tasks[3]);
 
     const randomChoice = arr => arr[Math.floor(Math.random() * arr.length)];
 

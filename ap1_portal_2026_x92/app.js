@@ -146,14 +146,17 @@ document.addEventListener("DOMContentLoaded", () => {
         if (examWhiteboardBtn) examWhiteboardBtn.addEventListener("click", openWhiteboard);
         if (resultsBackBtn) resultsBackBtn.addEventListener("click", showMainQuizMode);
 
-        // Tab pills click listeners
-        const tabPills = document.querySelectorAll("#booklet-tab-pills .exam-tab-btn");
-        tabPills.forEach(btn => {
-            btn.addEventListener("click", () => {
-                const targetPage = parseInt(btn.getAttribute("data-page"), 10);
-                changeExamPage(targetPage);
+        // Tab pills click listeners (delegated for dynamic task counts)
+        const tabPillsContainer = document.getElementById("booklet-tab-pills");
+        if (tabPillsContainer) {
+            tabPillsContainer.addEventListener("click", (e) => {
+                const btn = e.target.closest(".exam-tab-btn");
+                if (btn) {
+                    const targetPage = parseInt(btn.getAttribute("data-page"), 10);
+                    changeExamPage(targetPage);
+                }
             });
-        });
+        }
         
         if (typeSelect) {
             typeSelect.addEventListener("change", () => {
@@ -1514,29 +1517,42 @@ function switchActiveExamSet(setId) {
     renderCurrentExamPage();
 }
 
-// Changes page (0 = Deckblatt, 1..4 = Aufgaben)
+// Dynamically updates the booklet tab pill buttons for any number of tasks
+function updateBookletTabs() {
+    const pillContainer = document.getElementById("booklet-tab-pills");
+    if (!pillContainer || !activeExamSet) return;
+
+    const numTasks = activeExamSet.tasks ? activeExamSet.tasks.length : 4;
+    let html = `<button class="exam-tab-btn ${examCurrentPage === 0 ? 'active' : ''}" data-page="0"><i class="fa-solid fa-file-contract"></i> Deckblatt</button>`;
+
+    for (let i = 1; i <= numTasks; i++) {
+        const t = activeExamSet.tasks[i - 1];
+        const pts = t ? (t.totalPoints || t.maxPoints || 25) : 25;
+        html += `<button class="exam-tab-btn ${examCurrentPage === i ? 'active' : ''}" data-page="${i}"><i class="fa-solid fa-pen-clip"></i> ${i}. Aufgabe (${pts} P.)</button>`;
+    }
+
+    pillContainer.innerHTML = html;
+}
+
+// Changes page (0 = Deckblatt, 1..N = Aufgaben)
 function changeExamPage(targetPage) {
-    if (targetPage < 0 || targetPage > 4) return;
+    const maxPage = activeExamSet && activeExamSet.tasks ? activeExamSet.tasks.length : 4;
+    if (targetPage < 0 || targetPage > maxPage) return;
     examCurrentPage = targetPage;
     renderCurrentExamPage();
 }
 
-// Renders either Deckblatt (0) or one of the 4 Tasks (1..4)
+// Renders either Deckblatt (0) or one of the Tasks (1..N)
 function renderCurrentExamPage() {
     if (!activeExamSet) return;
 
-    // Update tab button active states
-    const tabs = document.querySelectorAll("#booklet-tab-pills .exam-tab-btn");
-    tabs.forEach(btn => {
-        const p = parseInt(btn.getAttribute("data-page"), 10);
-        if (p === examCurrentPage) {
-            btn.classList.add("active");
-        } else {
-            btn.classList.remove("active");
-        }
-    });
+    const numTasks = activeExamSet.tasks ? activeExamSet.tasks.length : 4;
+    const totalPages = numTasks + 1;
 
-    // Update page indicator text
+    // Dynamically rebuild and update tab button active states
+    updateBookletTabs();
+
+    // Update page indicator text & navigation buttons
     const indicator = document.getElementById("exam-page-indicator");
     const prevBtn = document.getElementById("exam-prev-page-btn");
     const nextBtn = document.getElementById("exam-next-page-btn");
@@ -1547,19 +1563,18 @@ function renderCurrentExamPage() {
     }
 
     if (nextBtn) {
-        nextBtn.disabled = examCurrentPage === 4;
-        nextBtn.style.opacity = examCurrentPage === 4 ? "0.5" : "1";
+        nextBtn.disabled = examCurrentPage === numTasks;
+        nextBtn.style.opacity = examCurrentPage === numTasks ? "0.5" : "1";
     }
 
     if (indicator) {
-        const pageLabels = [
-            "Seite 1 von 5 (Deckblatt)",
-            "Seite 2 von 5 (1. Aufgabe - 25 Punkte)",
-            "Seite 3 von 5 (2. Aufgabe - 25 Punkte)",
-            "Seite 4 von 5 (3. Aufgabe - 25 Punkte)",
-            "Seite 5 von 5 (4. Aufgabe - 25 Punkte)"
-        ];
-        indicator.textContent = pageLabels[examCurrentPage];
+        if (examCurrentPage === 0) {
+            indicator.textContent = `Seite 1 von ${totalPages} (Deckblatt)`;
+        } else {
+            const curTask = activeExamSet.tasks[examCurrentPage - 1];
+            const pts = curTask ? (curTask.totalPoints || curTask.maxPoints || 25) : 25;
+            indicator.textContent = `Seite ${examCurrentPage + 1} von ${totalPages} (${examCurrentPage}. Aufgabe - ${pts} Punkte)`;
+        }
     }
 
     const container = document.getElementById("exam-paper-container");
@@ -1658,10 +1673,10 @@ function renderDeckblatt(container) {
                     <div class="deckblatt-scope-box">
                         <h4><i class="fa-solid fa-list-check"></i> Prüfungsumfang</h4>
                         <ul>
-                            <li><strong>4 gebundene / ungebundene Aufgaben</strong></li>
+                            <li><strong>${activeExamSet.tasks ? activeExamSet.tasks.length : 4} gebundene / ungebundene Aufgaben</strong></li>
                             <li><strong>Bearbeitungszeit: 90 Minuten</strong></li>
                             <li><strong>Gesamtpunktzahl: 100 Punkte</strong></li>
-                            <li>Jede der 4 Aufgaben wird mit maximal 25 Punkten bewertet.</li>
+                            <li>Die Aufgaben werden gemäß amtlichem Prüfungsschlüssel bewertet (insgesamt 100 Punkte).</li>
                             <li><strong>Erlaubte Hilfsmittel:</strong> IT-Handbuch / Tabellenbuch, netzunabhängiger, nicht programmierbarer Taschenrechner.</li>
                         </ul>
 
@@ -1707,30 +1722,18 @@ function renderDeckblatt(container) {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td class="label-col">1. Aufgabe: ${escapeHtml(activeExamSet.tasks[0].title.split(':')[1] || activeExamSet.tasks[0].title)}</td>
-                                <td>25</td>
-                                <td style="font-weight: bold; font-size: 1.05rem; color: #dc2626;">${scores.taskPoints[0]}</td>
-                                <td style="color: #64748b; font-style: italic;">${isExamSubmitted ? 'gez. Prüfer' : ''}</td>
-                            </tr>
-                            <tr>
-                                <td class="label-col">2. Aufgabe: ${escapeHtml(activeExamSet.tasks[1].title.split(':')[1] || activeExamSet.tasks[1].title)}</td>
-                                <td>25</td>
-                                <td style="font-weight: bold; font-size: 1.05rem; color: #dc2626;">${scores.taskPoints[1]}</td>
-                                <td style="color: #64748b; font-style: italic;">${isExamSubmitted ? 'gez. Prüfer' : ''}</td>
-                            </tr>
-                            <tr>
-                                <td class="label-col">3. Aufgabe: ${escapeHtml(activeExamSet.tasks[2].title.split(':')[1] || activeExamSet.tasks[2].title)}</td>
-                                <td>25</td>
-                                <td style="font-weight: bold; font-size: 1.05rem; color: #dc2626;">${scores.taskPoints[2]}</td>
-                                <td style="color: #64748b; font-style: italic;">${isExamSubmitted ? 'gez. Prüfer' : ''}</td>
-                            </tr>
-                            <tr>
-                                <td class="label-col">4. Aufgabe: ${escapeHtml(activeExamSet.tasks[3].title.split(':')[1] || activeExamSet.tasks[3].title)}</td>
-                                <td>25</td>
-                                <td style="font-weight: bold; font-size: 1.05rem; color: #dc2626;">${scores.taskPoints[3]}</td>
-                                <td style="color: #64748b; font-style: italic;">${isExamSubmitted ? 'gez. Prüfer' : ''}</td>
-                            </tr>
+                            ${activeExamSet.tasks.map((t, idx) => {
+                                const pts = t.totalPoints || t.maxPoints || 25;
+                                const titleStr = t.title || '';
+                                const label = titleStr.includes(':') ? titleStr.split(':')[1].trim() : titleStr;
+                                const scoreVal = (scores.taskPoints && scores.taskPoints[idx] !== undefined) ? scores.taskPoints[idx] : 0;
+                                return `<tr>
+                                    <td class="label-col">${idx + 1}. Aufgabe: ${escapeHtml(label)}</td>
+                                    <td>${pts}</td>
+                                    <td style="font-weight: bold; font-size: 1.05rem; color: #dc2626;">${scoreVal}</td>
+                                    <td style="color: #64748b; font-style: italic;">${isExamSubmitted ? 'gez. Prüfer' : ''}</td>
+                                </tr>`;
+                            }).join('')}
                             <tr class="total-row">
                                 <td class="label-col">Gesamtpunktzahl / Endnote:</td>
                                 <td>100</td>
@@ -1773,7 +1776,7 @@ function renderTaskPage(container, pageIndex) {
         ausgangssituationHtml = `
             <div class="exam-ausgangssituation-frame">
                 <div class="exam-ausgangssituation-title">
-                    Die Aufgaben 1 bis 4 beziehen sich auf die folgende Ausgangssituation:
+                    Die Aufgaben 1 bis ${activeExamSet.tasks ? activeExamSet.tasks.length : 4} beziehen sich auf die folgende Ausgangssituation:
                 </div>
                 <div class="exam-ausgangssituation-body">
                     ${escapeHtml(activeExamSet.ausgangssituation)}
@@ -2108,11 +2111,12 @@ function updateSubtaskScore(subId, pointsStr, maxPoints) {
     if (inp) inp.value = p;
 }
 
-// Calculates scores across all 4 tasks
+// Calculates scores across all tasks (dynamic task count)
 function calculateExamScoresSummary() {
-    if (!activeExamSet) return { taskPoints: [0,0,0,0], totalPoints: 0, gradeNum: 6, gradeText: "ungenügend", isPassed: false };
+    const numTasks = activeExamSet && activeExamSet.tasks ? activeExamSet.tasks.length : 4;
+    if (!activeExamSet) return { taskPoints: new Array(numTasks).fill(0), totalPoints: 0, gradeNum: 6, gradeText: "ungenügend", isPassed: false };
 
-    let taskPoints = [0, 0, 0, 0];
+    let taskPoints = new Array(numTasks).fill(0);
 
     activeExamSet.tasks.forEach((task, tIdx) => {
         let taskSum = 0;

@@ -13190,6 +13190,213 @@ Welche Diagnose und Erstmaßnahme nach IHK-Standard ist fachlich korrekt?`,
         correctAnswer: 0,
         solutionDiagramSvg: VisualDiagrams.getItArbeitsplatzArchitekturSvg(),
         explanation: "169.254.0.0/16 ist der standardisierte APIPA-Bereich. Weist Windows sich eine solche Adresse selbst zu, schlug der DHCP-Handshake (DHCP-Discover) fehl. Häufigste Ursachen: Defektes Patchkabel (Rastnase abgebrochen), kein Link oder falsches VLAN."
+    },
+    // =========================================================================
+    // BADEN-WÜRTTEMBERG FA 230 (SOMMER 2026 ORIGINALPRÜFUNG) EINZELFRAGEN
+    // =========================================================================
+    {
+        id: 567,
+        isHard: false,
+        difficulty: "standard",
+        isBawueFocus: true,
+        isItArbeitsplatz: true,
+        theme: "it-arbeitsplatz",
+        topic: "🏢 IHK Baden-Württemberg FA 230: Aufbauorganisation, Stabliniensystem & Sparten",
+        type: "multiple-choice",
+        question: `Das IT-Systemhaus SoftTech Solutions GmbH gliedert seine Organisation nach folgendem Prinzip:
+Der Geschäftsführung sind direkt die Stabsstellen 'Rechtsabteilung' und 'Öffentlichkeitsarbeit' zugeordnet. Darunter befinden sich die Fachbereiche Einkauf, Verkauf, Fertigung und IT-Services. Der Fachbereich 'Verkauf' ist wiederum in die Sparten 'Privatkunden', 'Gewerbekunden' und 'Behörden' gegliedert.
+
+Welche Aussage zu den Merkmalen dieser Organisationsform ist nach IHK-Standard fachlich korrekt?`,
+        options: [
+            "Es handelt sich um ein Stabliniensystem mit divisionaler Spartenorganisation im Vertrieb. Die Stabsstellen (Recht, PR) unterstützen die Geschäftsleitung beratend und besitzen gegenüber den operativen Fachabteilungen keinerlei Weisungsbefugnis; der Vertrieb ist objekt- bzw. kundengruppenorientiert gegliedert.",
+            "Es handelt sich um eine reine Matrixorganisation. Die Stabsstellen sind den Fachbereichen fachlich direkt weisungsbefugt, während die Geschäftsführung nur noch disziplinarische Verantwortung trägt.",
+            "Das Mehrliniensystem (Funktionsmeistersystem) führt dazu, dass jeder Mitarbeiter im Vertrieb zwei gleichberechtigte Vorgesetzte hat, um Doppelunterstellungen zu fördern.",
+            "Die Gliederung des Vertriebs in Privat-, Gewerbe- und Behördenkunden stellt eine funktionale Organisation nach Verrichtungen dar."
+        ],
+        correctAnswer: 0,
+        solutionDiagramSvg: VisualDiagrams.getFa230OrganigrammSvg(),
+        explanation: "Ein Stabliniensystem entlastet die Instanz durch beratende Stäbe ohne Weisungsbefugnis. Die Unterteilung nach Privat-, Gewerbe- und Behördenkunden ist eine divisionale Spartenorganisation nach Marktsegmenten / Kundengruppen."
+    },
+    {
+        id: 568,
+        isHard: true,
+        difficulty: "hard",
+        isBawueFocus: true,
+        isItArbeitsplatz: true,
+        theme: "power-calc",
+        topic: "💶 IHK Baden-Württemberg FA 230: Handelskalkulation – Rückwärtskalkulation vom BVP zum LEP",
+        type: "open-math",
+        question: `Für ein Behördenprojekt der SoftTech Solutions GmbH ist der Barverkaufspreis (BVP) netto auf exakt 1.000,00 € festgelegt.
+Kalkulationsdaten:
+• Gewinnzuschlag: 5,00 % (auf Selbstkosten)
+• Handlungskostenzuschlag (HKZ): 20,00 % (auf Bezugspreis)
+• Bezugskosten: 25,00 € (pauschal)
+• Liefererskonto: 3,00 % (auf Zieleinkaufspreis)
+• Liefererrabatt: 10,00 % (auf Listeneinkaufspreis)
+
+Berechnen Sie mittels Rückwärtskalkulation (Rechnen 'im Hundert') den Listeneinkaufspreis (LEP) in Euro (kaufmännisch gerundet auf 2 Nachkommastellen).`,
+        sampleSolution: `Schritt-für-Schritt-Rückwärtskalkulation:
+1. BVP = 1.000,00 € entspricht 105 % der Selbstkosten (SK).
+   Gewinn (5 %): 1.000,00 € × 5 / 105 = 47,62 €
+   Selbstkosten: 1.000,00 € - 47,62 € = 952,38 €
+
+2. SK = 952,38 € entspricht 120 % des Bezugspreises (da 20 % HKZ).
+   Handlungskosten: 952,38 € × 20 / 120 = 158,73 €
+   Bezugspreis (Einstandspreis): 952,38 € - 158,73 € = 793,65 €
+
+3. Bareinkaufspreis (BEP):
+   793,65 € - 25,00 € Bezugskosten = 768,65 €
+
+4. BEP = 768,65 € entspricht 97 % des Zieleinkaufspreises (ZEP, da 3 % Skonto abgezogen wurden).
+   ZEP: 768,65 € / 0,97 = 792,42 €
+   Liefererskonto: 792,42 € - 768,65 € = 23,77 €
+
+5. ZEP = 792,42 € entspricht 90 % des Listeneinkaufspreises (LEP, da 10 % Rabatt abgezogen wurden).
+   LEP: 792,42 € / 0,90 = 880,47 €
+   Liefererrabatt: 880,47 € - 792,42 € = 88,05 €
+
+Endergebnis: Der Listeneinkaufspreis (LEP) beträgt 880,47 €.`,
+        solutionDiagramSvg: VisualDiagrams.getKalkulationTreeSvg(),
+        explanation: "Bei der Rückwärtskalkulation wird stets 'im Hundert' gerechnet: BVP = 105 % von SK, SK = 120 % von Bezugspreis, BEP = 97 % von ZEP, ZEP = 90 % von LEP."
+    },
+    {
+        id: 569,
+        isHard: false,
+        difficulty: "standard",
+        isBawueFocus: true,
+        isItArbeitsplatz: true,
+        theme: "it-arbeitsplatz",
+        topic: "💾 IHK Baden-Württemberg FA 230: Storage-Verfügbarkeit, RAID 5/10 & 3-2-1-Backup",
+        type: "multiple-choice",
+        question: `Für das Storage-System der SoftTech Solutions GmbH stehen 6 Enterprise-Festplatten zu je 20 TB zur Verfügung. Zudem garantiert das SLA Verfügbarkeitsklasse 3 (99,9 % Verfügbarkeit über 365 Tage = 525.600 Minuten).
+
+Welche Kombination von Kennzahlen und Konzepten ist fachlich und rechnerisch korrekt?`,
+        options: [
+            "Max. ungeplante Ausfallzeit/Jahr = 525,6 Minuten; Nutzkapazität RAID 5 = 100 TB ((6-1) × 20 TB); Nutzkapazität RAID 10 = 60 TB ((6/2) × 20 TB); RAID ersetzt niemals ein Backup (3-2-1-Regel: 3 Kopien, 2 Medientypen, 1 Offsite-Kopie).",
+            "Max. ungeplante Ausfallzeit/Jahr = 52,56 Minuten; Nutzkapazität RAID 5 = 120 TB; Nutzkapazität RAID 10 = 100 TB; RAID 10 schützt vor Ransomware, weshalb kein Offline-Backup nötig ist.",
+            "Max. ungeplante Ausfallzeit/Jahr = 5.256 Minuten; Nutzkapazität RAID 5 = 80 TB; Nutzkapazität RAID 10 = 40 TB; 3-2-1 bedeutet 3 Clouds, 2 NAS-Systeme und 1 Festplatte.",
+            "Max. ungeplante Ausfallzeit/Jahr = 87,6 Minuten; Nutzkapazität RAID 5 = 60 TB; Nutzkapazität RAID 10 = 100 TB; RAID schützt vor versehentlichem Löschen."
+        ],
+        correctAnswer: 0,
+        solutionDiagramSvg: VisualDiagrams.getStorageVirtualizationSvg(),
+        explanation: "525.600 Min. * 0,001 = 525,6 Min. Ausfallzeit/Jahr. RAID 5 hat n-1 Platten Nutzkapazität (100 TB), RAID 10 hat n/2 (60 TB). RAID bietet Hardware-Ausfallsicherheit, schützt aber nicht vor logischen Fehlern oder Malware."
+    },
+    {
+        id: 570,
+        isHard: false,
+        difficulty: "standard",
+        isBawueFocus: true,
+        isItArbeitsplatz: true,
+        theme: "lf3",
+        topic: "🌐 IHK Baden-Württemberg FA 230: IPv6-Konfiguration des Admin-PCs (RFC 5952)",
+        type: "multiple-choice",
+        question: `Im Netzwerk der SoftTech Solutions GmbH (Anlage 2) soll der Admin-PC im Subnetz '2001:0db8:00ea:2301::/64' manuell konfiguriert werden.
+Vorgaben:
+• Die Host-Identifikationsnummer (Interface-ID) lautet 'AB.1001'.
+• Das Standard-Gateway ist der Router R-01 mit der Link-Local-Adresse 'fe80::1'.
+• Der bevorzugte DNS-Server hat die Link-Local-Adresse 'fe80::d'.
+
+Welche Zeile stellt die normgerechte, kürzeste Schreibweise nach RFC 5952 dar?`,
+        options: [
+            "IPv6-Adresse: 2001:db8:ea:2301::ab:1001/64 | Gateway: fe80::1 | DNS: fe80::d",
+            "IPv6-Adresse: 2001:0db8:ea:2301:0:0:ab:1001/64 | Gateway: 192.168.1.1 | DNS: 8.8.8.8",
+            "IPv6-Adresse: 2001:db8:ea:2301::ab.1001/64 | Gateway: fe80::0001 | DNS: fe80::000d",
+            "IPv6-Adresse: 2001::db8::ea::2301::ab::1001/64 | Gateway: fe80::1 | DNS: fe80::d"
+        ],
+        correctAnswer: 0,
+        solutionDiagramSvg: VisualDiagrams.getFa230NetzwerkplanSvg(),
+        explanation: "Nach RFC 5952 werden führende Nullen pro Block weggelassen ('0db8' -> 'db8', '00ea' -> 'ea'), die längste zusammenhängende Folge von 16-Bit-Nullblöcken wird durch genau ein Doppel-Doppelpunkt '::' ersetzt, und Hexadezimalbuchstaben werden kleingeschrieben ('ab'). Der Host-Teil 'AB.1001' wird als Hex-Hextet 'ab:1001' notiert."
+    },
+    {
+        id: 571,
+        isHard: true,
+        difficulty: "hard",
+        isBawueFocus: true,
+        isItArbeitsplatz: true,
+        theme: "pseudocode",
+        topic: "💻 IHK Baden-Württemberg FA 230: Algorithmus CSV-Validierung (pruefeFehlendenPreis)",
+        type: "open-text",
+        question: `Eine CSV-Datei 'bestpos.csv' enthält Bestelldaten mit Semikolon als Trennzeichen:
+Header (Zeile 0): BestellID;Bestelldatum;ArtikelID;Artikelbezeichnung;Menge;Preis;Hersteller;HerstellerID
+Beispiel: 1002;2026-03-02;ART-205;Servergehäuse 2HE;1;;RackMaster;H-04
+
+Schreiben Sie eine Methode 'pruefeFehlendenPreis(daten, gesuchteArtikelID) -> Boolean' in Pseudocode oder einer Programmiersprache, die das String-Array durchläuft, die Kopfzeile überspringt und prüft, ob bei der angegebenen ArtikelID (Index 2) das Preisfeld (Index 5) leer (""), Whitespace oder "NULL" ist. Falls ja, soll sofort true zurückgegeben werden, sonst false.`,
+        sampleSolution: `Musterlösung in Java / C# / Python:
+
+// Java-Lösung:
+public boolean pruefeFehlendenPreis(String[] daten, String gesuchteArtikelID) {
+    if (daten == null || daten.length <= 1) return false;
+    
+    // Kopfzeile (Index 0) überspringen
+    for (int i = 1; i < daten.length; i++) {
+        String zeile = daten[i].trim();
+        if (zeile.isEmpty()) continue;
+        
+        String[] spalten = zeile.split(";", -1);
+        if (spalten.length >= 6) {
+            String artikelID = spalten[2].trim();
+            if (artikelID.equalsIgnoreCase(gesuchteArtikelID.trim())) {
+                String preis = spalten[5].trim();
+                if (preis.isEmpty() || preis.equalsIgnoreCase("NULL")) {
+                    return true; // Fehlender Preis gefunden
+                }
+            }
+        }
+    }
+    return false;
+}
+
+# Python-Lösung:
+def pruefeFehlendenPreis(daten: list[str], gesuchteArtikelID: str) -> bool:
+    for zeile in daten[1:]: # Header überspringen
+        zeile = zeile.strip()
+        if not zeile:
+            continue
+        spalten = zeile.split(';')
+        if len(spalten) >= 6:
+            if spalten[2].strip() == gesuchteArtikelID.strip():
+                preis = spalten[5].strip()
+                if preis == "" or preis.upper() == "NULL":
+                    return True
+    return False`,
+        solutionDiagramSvg: VisualDiagrams.getPapDiagramSvg(),
+        explanation: "Wesentliche Prüfungskriterien der IHK: 1. Überspringen des Headers (Loop ab Index 1); 2. Korrektes Trennen mit split(';'); 3. Spaltenindizes 2 (ArtikelID) und 5 (Preis); 4. Robuste Prüfung auf leere Zeichenkette oder 'NULL'; 5. Vorzeitiger Abbruch mit true."
+    },
+    {
+        id: 572,
+        isHard: false,
+        difficulty: "standard",
+        isBawueFocus: true,
+        isItArbeitsplatz: true,
+        theme: "lf4",
+        topic: "🗄️ IHK Baden-Württemberg FA 230: 3NF-Relationenmodell aus CSV & SQL-Abfragen",
+        type: "open-text",
+        question: `Die Attribute aus 'bestpos.csv' lauten:
+BestellID, Bestelldatum, ArtikelID, Artikelbezeichnung, Menge, Preis, Hersteller, HerstellerID.
+
+a) Überführen Sie diese Daten in ein relationales Modell in der 3. Normalform (3NF). Geben Sie Tabellennamen, Attribute sowie Primärschlüssel (PK) und Fremdschlüssel (FK) an.
+b) Geben Sie eine SQL-Abfrage an, die alle Namen (Name) aus der Tabelle Kunde ausgibt, bei denen Ortnr = 2 ist, absteigend sortiert nach Name.
+c) Geben Sie eine SQL-Abfrage an, die alle Kunden ausgibt, für die keine E-Mail-Adresse hinterlegt ist.`,
+        sampleSolution: `a) Relationales 3NF-Schema:
+1. Hersteller (HerstellerID [PK], Herstellername)
+2. Artikel (ArtikelID [PK], Artikelbezeichnung, Preis, HerstellerID [FK])
+3. Bestellung (BestellID [PK], Bestelldatum)
+4. Bestellposition (BestellID [PK, FK], ArtikelID [PK, FK], Menge)
+
+(Erläuterung: Hersteller beseitigt transitive Abhängigkeit ArtikelID -> HerstellerID -> Hersteller. Bestellposition löst die n:m-Beziehung auf.)
+
+b) SQL-Abfrage 1:
+SELECT Name
+FROM Kunde
+WHERE Ortnr = 2
+ORDER BY Name DESC;
+
+c) SQL-Abfrage 2:
+SELECT *
+FROM Kunde
+WHERE Email IS NULL OR Email = '';`,
+        solutionDiagramSvg: VisualDiagrams.getCrowFootDiagramSvg(),
+        explanation: "3NF fordert: 1NF (atomare Werte), 2NF (vollständige funktionale Abhängigkeit vom PK) und 3NF (keine transitiven Abhängigkeiten vom PK). NULL-Werte in SQL müssen mit 'IS NULL' abgefragt werden."
     }
 
 ];
