@@ -1642,7 +1642,7 @@ function renderDeckblatt(container) {
                     </div>
                     <div style="margin-top: 10px; display: flex; gap: 8px; justify-content: center; flex-wrap: wrap;">
                         <button type="button" onclick="openExamOverviewModal()" style="background: #f0fdf4; border: 1.5px solid #10b981; color: #047857; font-weight: 700; font-size: 0.84rem; padding: 5px 14px; border-radius: 6px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s; box-shadow: 0 1px 3px rgba(16, 185, 129, 0.15);">
-                            <i class="fa-solid fa-layer-group"></i> 📚 Alle 16 Prüfungen ansehen &amp; wechseln
+                            <i class="fa-solid fa-layer-group"></i> 📚 Alle ${typeof EXAM_SETS !== 'undefined' ? EXAM_SETS.length : 21} Prüfungen ansehen &amp; wechseln
                         </button>
                         <button type="button" onclick="exitExamMode()" style="background: #fef2f2; border: 1.5px solid #ef4444; color: #b91c1c; font-weight: 700; font-size: 0.84rem; padding: 5px 14px; border-radius: 6px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s; box-shadow: 0 1px 3px rgba(239, 68, 68, 0.15);">
                             <i class="fa-solid fa-house"></i> 🏠 Zurück zur Hauptseite

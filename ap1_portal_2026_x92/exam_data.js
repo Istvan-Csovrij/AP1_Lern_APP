@@ -5178,6 +5178,1432 @@ var EXAM_SETS = [
         ]
     }
 
+,
+    // ----------------------------------------------------------------------
+    // PRÜFUNG 18: IT-Arbeitsplatz I – Steuerkanzlei & Finanzberatung
+    // Thema: Einrichten eines IT-gestützten Arbeitsplatzes (Dual-4K, TB4-Docking & TCO)
+    // ----------------------------------------------------------------------
+    {
+        id: "exam_18",
+        title: "Prüfung 18: IT-Arbeitsplatz I – Steuerkanzlei (Modern Workplace, Dual-4K & TCO)",
+        badge: "100 Punkte • 90 Min.",
+        subtitle: "Abschlussprüfung Teil 1 • IT-Berufe • FinTax Consulting Partners mbB",
+        ausgangssituation: "Sie sind als Fachinformatiker bei der FinTax Consulting Partners mbB in Stuttgart angestellt, einer Kanzlei für Steuerberatung und Wirtschaftsprüfung mit 30 Beratern und Sachbearbeitern. Für die Kanzleiräume werden 30 vollwertige IT-Arbeitsplätze eingerichtet und modernisiert. Kernanforderungen sind ein produktives Dual-4K-Display-Setup, Thunderbolt-4-Dockingstations mit Ein-Kabel-Lösung (USB Power Delivery), Einhaltung ergonomischer Vorgaben nach ArbStättV und DIN EN ISO 9241, eine strukturierte Tertiärverkabelung nach DIN EN 50173 mit 802.1X Port-Security, unterbrechungsfreie Stromversorgung (USV) für kritische Beratungsplätze sowie eine kaufmännische Handelskalkulation und TCO-Lebenszyklusrechnung.",
+        tasks: [
+            // Aufgabe 1 (25 Pkt)
+            {
+                number: 1,
+                title: "1. Aufgabe: Hardware-Auslegung, Dockingstation & ArbStättV/DIN EN ISO 9241",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "18_1_a",
+                        label: "a) Ergonomische Gestaltung des Bildschirmarbeitsplatzes nach ArbStättV & DIN EN ISO 9241",
+                        points: 7,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "ERGONOMIE / ARBSTÄTTV & DIN EN ISO 9241",
+                        text: "Für die 30 Kanzleiarbeitsplätze sollen Bildschirmarbeitsplätze gemäß Arbeitsstättenverordnung (ArbStättV) und DIN EN ISO 9241 ergonomisch eingerichtet werden.\nNennen Sie vier verbindliche Vorgaben bezüglich:\n1. Mindestbeleuchtungsstärke am Arbeitsplatz\n2. Empfohlener Sehabstand bei 27-Zoll-Displays\n3. Monitoranordnung und vertikaler Blickwinkel\n4. Aufstellung des Arbeitsplatzes im Verhältnis zu Fenstern und Lichtquellen.",
+                        solution: "1. Mindestbeleuchtungsstärke: Am Bildschirmarbeitsplatz müssen mindestens 500 Lux Beleuchtungsstärke (DIN EN 12464-1) gewährleistet sein.\n2. Sehabstand: Bei 27-Zoll-Monitoren beträgt der ergonomisch empfohlene Sehabstand 60 bis 80 cm.\n3. Monitoranordnung & Blickwinkel: Die oberste Bildschirmzeile sollte sich maximal auf oder leicht unterhalb der horizontalen Augenhöhe befinden (Blick leicht nach unten geneigt, Kopfneigung 15° bis 20° zur Entlastung der Nackenmuskulatur).\n4. Aufstellung zum Fenster: Die Blickrichtung muss parallel zur Fensterfront verlaufen (90°-Winkel zwischen Fenster und Monitorachse), um Direktblendung und störende Reflexionen auf der Bildschirmoberfläche zu vermeiden."
+                    },
+                    {
+                        id: "18_1_b",
+                        label: "b) Thunderbolt 4 Ein-Kabel-Prinzip & Schnittstellentechnik",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "SCHNITTSTELLENTECHNIK / THUNDERBOLT 4 EIN-KABEL-PRINZIP",
+                        text: "Jeder Arbeitsplatz erhält eine Thunderbolt-4 Dockingstation.\naa) Erläutern Sie das 'Ein-Kabel-Prinzip' und nennen Sie die drei unterschiedlichen Signaltypen bzw. Übertragungsfunktionen, die gleichzeitig über das TB4-Kabel übertragen werden (3 Punkte).\nab) Nennen Sie die maximale theoretische Brutto-Datenübertragungsrate von Thunderbolt 4 und erläutern Sie den Begriff 'Daisy Chaining' (3 Punkte).",
+                        solution: "aa) Ein-Kabel-Prinzip:\nÜber ein einziges USB-C-Kabel mit Thunderbolt 4 werden gleichzeitig übertragen:\n1. Videosignale: Parallele Ansteuerung zweier 4K-Monitore bei 60 Hz via DisplayPort Alt Mode / DisplayPort 1.4 mit DSC.\n2. Datenkommunikation: Gigabit/2.5GbE-Ethernet, USB-Peripherie (Tastatur, Maus, Headset, Webcam, Kartenleser).\n3. Stromversorgung (USB Power Delivery): Bidirektionales Laden des Notebooks mit bis zu 100 Watt Ladeleistung ohne separates Netzteil.\nab) Datenübertragungsrate & Daisy Chaining:\n• Datenrate: Bis zu 40 Gbit/s bidirektionale Bruttobandbreite (PCIe-Daten mit mindestens 32 Gbit/s garantiert).\n• Daisy Chaining: Reihenschaltung mehrerer Thunderbolt-kompatibler Endgeräte hintereinander an einem einzigen Port ohne separaten Hub."
+                    },
+                    {
+                        id: "18_1_c",
+                        label: "c) Leistungsbudget & Dimensionierung des Dockingstation-Netzteils",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "LEISTUNGSBUDGET / USB POWER DELIVERY",
+                        text: "Die gewählte Dockingstation liefert per USB Power Delivery (USB-PD) maximal 100 Watt an das angeschlossene Berater-Notebook. Das mitgelieferte externe Netzteil der Dockingstation besitzt jedoch eine Nennleistung von 135 Watt.\nErläutern Sie, warum das Netzteil der Dockingstation zwingend eine höhere Leistung (135 W) aufweisen muss als die maximale Leistungsabgabe an das Notebook (100 W). Nennen Sie drei konkrete Verbraucher bzw. Verlustfaktoren.",
+                        solution: "Begründung der 135-Watt-Dimensionierung:\nDas Dockingstation-Netzteil muss neben dem Ladestrom für das Notebook auch den gesamten Eigen- und Peripheriebedarf der Dockingstation decken:\n1. Interne Elektronik der Dockingstation: Controller-Chipsätze (TB4 Host Controller, DisplayPort-Demux, PCIe-Switch, Ethernet-PHY) benötigen 10 bis 15 Watt Eigenleistung.\n2. Stromversorgung der angeschlossenen USB-Peripherie: USB-A- und USB-C-Downstream-Ports müssen angeschlossene Geräte versorgen (z. B. Smartphone-Schnellladen mit 15 W, USB-A-Ports mit 4,5 bis 7,5 W, externe Speichermedien).\n3. Wandler- und Abwärmeverluste: Interne DC-DC-Spannungswandler im Dock haben einen Wirkungsgrad < 100 % und erzeugen Verlustleistung in Form von Abwärme."
+                    },
+                    {
+                        id: "18_1_d",
+                        label: "d) Monitor- & Display-Technologien Zuordnung",
+                        points: 6,
+                        type: "table",
+                        stencil: "MONITOR- & HARDWARE-VERGLEICH",
+                        text: "Ordnen Sie die Display- und Übertragungstechnologien den jeweiligen Fachbeschreibungen zu.",
+                        tableConfig: {
+                            type: "matching",
+                            targetCol: 0,
+                            options: [
+                                "IPS-Panel",
+                                "DisplayPort 1.4 (DSC)",
+                                "USB-PD Profile",
+                                "Blaulichtfilter (TÜV)"
+                            ],
+                            headers: [
+                                "Technologie",
+                                "Technische Eigenschaft / Funktion",
+                                "Nutzen am Kanzlei-Arbeitsplatz"
+                            ],
+                            rows: [
+                                [
+                                    "",
+                                    "Hohe Blickwinkelstabilität (178°) und präzise Farbwiedergabe ohne Farbverfälschung",
+                                    "Ergonomisches Ablesen von Bilanzen auch bei schräger Blickachse"
+                                ],
+                                [
+                                    "",
+                                    "Visuell verlustfreie Datenkompression für hochauflösende Multi-Monitor-Setups",
+                                    "Gleichzeitiger Betrieb von zwei 4K-Monitoren bei 60 Hz über limitierte Bandbreite"
+                                ],
+                                [
+                                    "",
+                                    "Verhandlung von Spannung (5V-20V) und Stromstärke (bis 5A) per CC-Leitung",
+                                    "Sichere Schnellladung des Notebooks mit exakt passendem Leistungsprofil"
+                                ],
+                                [
+                                    "",
+                                    "Reduzierung kurzwelliger hochenergetischer Lichtanteile im 415-455 nm Spektrum",
+                                    "Vorbeugung von Augenermüdung und Schutz des Biorhythmus bei Bildschirmarbeit"
+                                ]
+                            ],
+                            solutions: {
+                                "row_0_col_0": "IPS-Panel",
+                                "row_1_col_0": "DisplayPort 1.4 (DSC)",
+                                "row_2_col_0": "USB-PD Profile",
+                                "row_3_col_0": "Blaulichtfilter (TÜV)"
+                            }
+                        },
+                        solution: "• IPS-Panel: 178° Blickwinkelstabilität für ermüdungsfreies Arbeiten.\n• DisplayPort 1.4 (DSC): Dual-4K @ 60Hz über gemeinsame Bandbreite.\n• USB-PD: Automatisches Handshake-Aushandeln der Ladespannung.\n• Blaulichtfilter: Schutz der Augen vor Überanstrengung."
+                    }
+                ]
+            },
+
+            // Aufgabe 2 (25 Pkt)
+            {
+                number: 2,
+                title: "2. Aufgabe: Strukturierte Tertiärverkabelung, Messung & 802.1X Port-Security",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "18_2_a",
+                        label: "a) Strukturierte Verkabelung nach DIN EN 50173 & Längenrestriktionen",
+                        points: 7,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "STRUKTURIERTE VERKABELUNG / DIN EN 50173",
+                        text: "Die Kanzleiräume werden nach DIN EN 50173 strukturiert verkabelt.\naa) Beschreiben Sie die maximal zulässigen Leitungslängen im Tertiärbereich (Horizontalverkabelung) für den Permanent Link und den Channel Link (Channel) (4 Punkte).\nab) Erläutern Sie den Unterschied zwischen der Kontaktbelegung nach TIA-568A und TIA-568B und warum innerhalb einer Liegenschaft eine einheitliche Norm zwingend eingehalten werden muss (3 Punkte).",
+                        solution: "aa) Leitungslängen im Tertiärbereich (DIN EN 50173):\n• Permanent Link (feste Verlegestrecke vom Patchfeld im Etagenverteiler bis zur Anschlussdose am Arbeitsplatz): Maximal 90 Meter starres Verlegekabel (z. B. Cat.7 S/FTP).\n• Channel Link (gesamte Übertragungsstrecke inklusive aller flexiblen Patchkabel): Maximal 100 Meter. Typische Aufteilung: max. 5 m Patchkabel im Verteilerschrank + 90 m Verlegekabel + max. 5 m Geräteanschlusskabel am Arbeitsplatz (bzw. max. 10 m flexible Patchkabel gesamt).\nab) TIA-568A vs. TIA-568B:\n• Unterschied: Bei TIA-568A und TIA-568B sind die Aderpaare 2 (Orange/Weiß-Orange) und 3 (Grün/Weiß-Grün) an den Pins 1, 2 und 3, 6 vertauscht. Pins 4, 5 (Blau) und 7, 8 (Braun) sind identisch.\n• Einheitlichkeit: Wird an einem Ende nach 568A und am anderen Ende nach 568B aufgelegt, entsteht ein Crossover-Kabel. Innerhalb einer Gebäudeinfrastruktur muss einheitlich gearbeitet werden, um Fehlfunktionen und Verwirrung bei Erweiterungen auszuschließen."
+                    },
+                    {
+                        id: "18_2_b",
+                        label: "b) Messtechnische Abnahmeprüfung (Cat.6A / 10GBase-T Zertifizierung)",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "MESSVERFAHREN / ZERTIFIZIERUNG CAT.6A",
+                        text: "Nach der Installation führt das IT-Team eine Zertifizierungsmessung mit einem Feldmesstester durch.\nErläutern Sie die folgenden drei Messparameter und deren Bedeutung für eine fehlerfreie Gigabit/10G-Datenübertragung:\n1. NEXT (Near-End Crosstalk / Nahnebensprechen)\n2. Return Loss (Rückflussdämpfung)\n3. Wiremap (Verdrahtungsplan / Split Pair)",
+                        solution: "1. NEXT (Near-End Crosstalk): Misst das Übersprechen (elektromagnetische Einstreuung) von einem sendenden Aderpaar auf ein benachbartes empfangendes Aderpaar am nahen Leitungsende. Hohe NEXT-Werte (in dB) bedeuten geringe Störungen und hohe Signalqualität.\n2. Return Loss (Rückflussdämpfung): Misst den Anteil des Signals, der aufgrund von Impedanz-Ungleichheiten (Wellenwiderstandssprüngen durch Knicke, schlechte Crimpung oder mangelhafte Schirmkontaktierung) zur Signalquelle zurückreflektiert wird. Hohe dB-Werte bedeuten geringe Reflexion.\n3. Wiremap (Verdrahtungsplan): Prüft die korrekte Adernzuordnung (Durchgang, Vertauschungen, Kurzschlüsse und Split Pairs). Ein 'Split Pair' (aufgetrenntes Paar) entsteht, wenn Hin- und Rückleiter verschiedener Aderpaare kombiniert werden – der Gleichstrom-Durchgangstest ist erfolgreich, aber durch fehlende Verdrillung bricht das Signal bei HF-Nutzung zusammen."
+                    },
+                    {
+                        id: "18_2_c",
+                        label: "c) Port-Security via IEEE 802.1X Netzwerk-Zugangskontrolle",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "PORT-SECURITY / IEEE 802.1X AUTHENTIFIZIERUNG",
+                        text: "Um zu verhindern, dass unbefugte Dritte fremde Geräte an den Netzwerkdosen der Kanzlei anschließen, wird IEEE 802.1X an den Managed Switches implementiert.\naa) Nennen und beschreiben Sie die drei beteiligten Komponenten bzw. Rollen im IEEE 802.1X-Ablauf (3 Punkte).\nab) Welches Protokoll wird zwischen Client und Authenticator übertragen, und welcher Server fungiert typischerweise als Authentication Server in Windows-Domänen? (3 Punkte).",
+                        solution: "aa) Die drei Komponenten nach IEEE 802.1X:\n1. Supplicant: Das Endgerät (Notebook des Beraters) bzw. der 802.1X-Dienst im Betriebssystem, der Netzzugang anfordert und Zertifikate/Credentials liefert.\n2. Authenticator: Der Netzwerk-Switch, der den physischen Port bis zur erfolgreichen Authentifizierung gesperrt hält und EAP-Nachrichten an den Server weiterleitet.\n3. Authentication Server: Der zentrale Sicherheits-Server (RADIUS/NPS), der die Anmeldedaten gegen die Benutzerdatenbank verifiziert und dem Switch Freigabe oder Abweisung signalisiert.\nab) Protokolle & Server:\n• Protokoll: EAP (Extensible Authentication Protocol), gekapselt über LAN als EAPoL (EAP over LAN) zwischen Supplicant und Switch, und RADIUS zwischen Switch und Authentication Server (z. B. mit EAP-TLS).\n• Server: Microsoft NPS (Network Policy Server) / RADIUS-Server mit Anbindung an Active Directory Domain Services (AD DS)."
+                    },
+                    {
+                        id: "18_2_d",
+                        label: "d) Zuordnung von Netzwerkkomponenten & Steckverbindern",
+                        points: 6,
+                        type: "table",
+                        stencil: "NETZWERK-KOMPONENTEN MATCHING",
+                        text: "Ordnen Sie die passiven und aktiven Netzwerkkomponenten den Funktionen zu.",
+                        tableConfig: {
+                            type: "matching",
+                            targetCol: 0,
+                            options: [
+                                "RJ45 Cat.6A Keystone Modul",
+                                "Patchfeld (Patch Panel)",
+                                "PoE+ Switch (IEEE 802.3at)",
+                                "S/FTP Verlegekabel Cat.7"
+                            ],
+                            headers: [
+                                "Komponente",
+                                "Funktionsbeschreibung",
+                                "Norm / Spezifikation"
+                            ],
+                            rows: [
+                                [
+                                    "",
+                                    "Werkzeuglos montierbare Buchse zur Aufnahme des starren Installationskabels in der Datendose",
+                                    "Übertragung bis 500 MHz für 10GBASE-T"
+                                ],
+                                [
+                                    "",
+                                    "Zentrales Rangierfeld zur flexiblen Verbindung starrer Verlegekabel mit Switchports",
+                                    "19-Zoll Einschub mit LSA-Leisten oder Keystone-Rahmen"
+                                ],
+                                [
+                                    "",
+                                    "Liefert bis zu 30 Watt elektrische Leistung pro Port über das Datenkabel",
+                                    "Stromversorgung für IP-Telefone, APs & Kameras"
+                                ],
+                                [
+                                    "",
+                                    "Paarweise Folienschirmung (FTP) plus Gesamtdrahtgeflecht (S) gegen Alien Crosstalk",
+                                    "Frequenzen bis 600/1000 MHz im Tertiärbereich"
+                                ]
+                            ],
+                            solutions: {
+                                "row_0_col_0": "RJ45 Cat.6A Keystone Modul",
+                                "row_1_col_0": "Patchfeld (Patch Panel)",
+                                "row_2_col_0": "PoE+ Switch (IEEE 802.3at)",
+                                "row_3_col_0": "S/FTP Verlegekabel Cat.7"
+                            }
+                        },
+                        solution: "• Keystone Modul: Modulare Cat.6A Buchse für Anschlussdosen.\n• Patchfeld: Rangierfeld zur Port-Verbindung.\n• PoE+ Switch: Daten und bis zu 30W Strom pro Port.\n• S/FTP Cat.7: Doppelt geschirmtes Verlegekabel bis 1000 MHz."
+                    }
+                ]
+            },
+
+            // Aufgabe 3 (25 Pkt)
+            {
+                number: 3,
+                title: "3. Aufgabe: Elektrische Auslegung, USV-Berechnung & Schutzklassen",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "18_3_a",
+                        label: "a) USV-Dimensionierung & Batteriekapazität für Kanzlei-Arbeitsplätze",
+                        points: 8,
+                        type: "math-grid",
+                        gridConfig: { cols: 26, rows: 8 },
+                        stencil: "ELEKTROTECHNIK / USV-DIMENSIONIERUNG",
+                        text: "Für 5 kritische Beraterplätze soll eine zentrale USV im Kanzlei-Verteiler dimensioniert werden. Die gemessenen Parameter aller 5 Arbeitsplätze zusammen betragen:\n- Gesamte aufgenommene Wirkleistung P = 600 Watt\n- Leistungsfaktor cos φ = 0,80\n- Wirkungsgrad der USV im Inverter-/Batteriebetrieb η = 85 %\n- Nennspannung des internen Batterieblocks U = 24 Volt (2x 12V in Reihe)\nBerechnen Sie im Rechengitter:\n1. Die erforderliche Scheinleistung S der USV in Voltampere (VA).\n2. Die von den Batterien abzugebende elektrische Leistung P_batt in Watt.\n3. Den Entladestrom I_batt in Ampere.\n4. Die rechnerische Mindestkapazität C des 24V-Akkublocks in Amperestunden (Ah), um alle 5 Plätze bei Stromausfall für genau 20 Minuten (1/3 Stunde) unterbrechungsfrei zu versorgen.",
+                        solution: "1. Scheinleistung S:\nS = P / cos φ = 600 W / 0,80 = 750 VA.\n(Die USV muss mindestens 750 VA, in der Praxis mind. 1.000 VA Nennleistung haben.)\n\n2. Batterieleistung P_batt:\nP_batt = P / η = 600 W / 0,85 = 705,88 Watt.\n\n3. Batteriestrom I_batt:\nI_batt = P_batt / U = 705,88 W / 24 V = 29,41 Ampere.\n\n4. Mindestkapazität C für 20 Minuten (t = 20 / 60 h = 0,333 h):\nC = I_batt * t = 29,41 A * (20 / 60) h = 9,80 Ah.\nErgebnis: Der 24V-Batterieblock benötigt eine Mindestkapazität von 9,80 Ah (z. B. 2x 12V / 10 Ah oder 12 Ah AGM-Akkus)."
+                    },
+                    {
+                        id: "18_3_b",
+                        label: "b) USV-Klassifizierung nach DIN EN 62040-3 (VFD vs. VI vs. VFI)",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "USV-KLASSIFIZIERUNG / IEC 62040-3",
+                        text: "USVs werden nach DIN EN 62040-3 in die Topologien VFD, VI und VFI eingeteilt.\naa) Erläutern Sie das Funktionsprinzip einer Online-USV (VFI / Doppelwandler) und nennen Sie deren Umschaltzeit bei Netzausfall (3 Punkte).\nab) Warum ist eine VFI-USV für Server und empfindliche Kanzlei-Infrastruktur einer VFD-USV zwingend vorzuziehen? (3 Punkte).",
+                        solution: "aa) Funktionsprinzip VFI (Voltage and Frequency Independent / Dauerwandler):\nDer eingehende Wechselstrom wird kontinuierlich in Gleichstrom gleichgerichtet, der permanent die Batterie puffert und gleichzeitig einen Wechselrichter speist, welcher eine völlig neue, saubere Sinusspannung für die Verbraucher erzeugt.\n• Umschaltzeit: 0 ms (unterbrechungsfrei), da der Inverter bereits permanent den Verbraucher versorgt.\nab) Begründung für VFI:\nEine VFD-USV (Off-Line) schaltet erst nach 4 bis 10 ms auf Batterie um, was bei Netzteilen zu Spannungseinbrüchen oder Reboots führen kann. Zudem filtert nur VFI alle Netzstörungen (Spannungsspitzen, Oberwellen, Frequenzschwankungen) vollständig heraus."
+                    },
+                    {
+                        id: "18_3_c",
+                        label: "c) Elektrische Schutzklassen & DGUV Vorschrift 3",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "ELEKTRISCHE SICHERHEIT / SCHUTZKLASSEN & DGUV V3",
+                        text: "aa) Unterscheiden Sie die elektrischen Schutzklassen I (Schutzerdung) und II (Schutzisolierung) anhand ihrer Schutzmaßnahme und des Netzsteckers (Schuko vs. Eurostecker) (3 Punkte).\nab) Welche gesetzliche Pflicht regelt die DGUV Vorschrift 3 hinsichtlich der IT-Arbeitsplätze und welche Prüffrist gilt typischerweise für ortsveränderliche elektrische Betriebsmittel im Büro? (3 Punkte).",
+                        solution: "aa) Schutzklasse I vs. II:\n• Schutzklasse I: Schutz durch Erdung (Schutzleiter PE). Metallgehäuse sind mit dem Schutzerdungsleiter verbunden. Bei Körperschluss löst die Sicherung / der RCD aus. Typischer Stecker: 3-poliger Schuko-Stecker (Typ F) oder Kaltgerätestecker C13/C14.\n• Schutzklasse II: Schutz durch doppelte oder verstärkte Isolierung (kein Schutzleiter erforderlich). Gehäuse steht unter keinen Umständen unter Spannung. Typischer Stecker: 2-poliger Eurostecker oder Konturenstecker (z. B. Notebook-Netzteile).\nab) DGUV Vorschrift 3:\n• Pflicht: Wiederkehrende sicherheitstechnische Prüfung aller ortsveränderlichen elektrischen Betriebsmittel zur Vermeidung von Stromunfällen und Bränden (Messung von Schutzleiterwiderstand, Isolationswiderstand, Berührungsstrom).\n• Prüffrist: Im Bürobereich bei geringer Fehlerquote typischerweise alle 2 Jahre (bzw. 1 Jahr bei höherer Beanspruchung)."
+                    },
+                    {
+                        id: "18_3_d",
+                        label: "d) Brandschutz- und Kabelkennzeichnungen im Bürogebäude",
+                        points: 5,
+                        type: "table",
+                        stencil: "BRANDSCHUTZ & ELEKTRO-KENNZEICHNUNG",
+                        text: "Ordnen Sie die Brandschutzbegriffe den Sicherheitsanforderungen zu.",
+                        tableConfig: {
+                            type: "matching",
+                            targetCol: 0,
+                            options: [
+                                "LSZH (Low Smoke Zero Halogen)",
+                                "Brandabschottung (S90)",
+                                "Fehlerstromschutzschalter (RCD 30mA)",
+                                "E30 Funktionserhalt"
+                            ],
+                            headers: [
+                                "Sicherheitsbegriff",
+                                "Brandschutz- / Sicherheitswirkung",
+                                "Einsatzort am IT-Arbeitsplatz"
+                            ],
+                            rows: [
+                                [
+                                    "",
+                                    "Kabelmantel setzt im Brandfall keine giftigen und korrosiven Halogengase (wie Salzsäure) frei",
+                                    "Verlegekabel in Zwischendecken und Fluchtwegen"
+                                ],
+                                [
+                                    "",
+                                    "Verhindert den Durchtritt von Feuer und Rauch durch Wand- und Deckendurchbrüche für 90 Min.",
+                                    "Kabeldurchführungen zwischen Serverraum und Flur"
+                                ],
+                                [
+                                    "",
+                                    "Schützt Menschen vor lebensgefährlichem elektrischem Schlag durch Auslösung bei Differenzstrom",
+                                    "Vorgeschrieben für alle Steckdosenstromkreise bis 32 A"
+                                ],
+                                [
+                                    "",
+                                    "Garantiert elektrische Spannungsversorgung von Sicherheitsanlagen für mindestens 30 Minuten",
+                                    "Zuleitungen zu Brandmeldeanlagen und Notbeleuchtung"
+                                ]
+                            ],
+                            solutions: {
+                                "row_0_col_0": "LSZH (Low Smoke Zero Halogen)",
+                                "row_1_col_0": "Brandabschottung (S90)",
+                                "row_2_col_0": "Fehlerstromschutzschalter (RCD 30mA)",
+                                "row_3_col_0": "E30 Funktionserhalt"
+                            }
+                        },
+                        solution: "• LSZH: Halogenfreie, raucharme Kabel verhindern Erstickungs- und Korrosionsschäden.\n• S90 Abschottung: Brandschutzbarriere zwischen Brandabschnitten.\n• RCD 30mA: Personenschutz vor Berührungsspannung.\n• E30: Erhalt der elektrischen Funktion im Vollbrand."
+                    }
+                ]
+            },
+
+            // Aufgabe 4 (25 Pkt)
+            {
+                number: 4,
+                title: "4. Aufgabe: Kaufmännische Beschaffung, Kalkulation & TCO-Lebenszyklus",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "18_4_a",
+                        label: "a) Kaufmännische Handelskalkulation (Vorwärtskalkulation im Hundert)",
+                        points: 8,
+                        type: "math-grid",
+                        gridConfig: { cols: 26, rows: 9 },
+                        stencil: "HANDELSKALKULATION / VORWÄRTSKALKULATION",
+                        text: "Kalkulieren Sie den Netto- und Brutto-Listenverkaufspreis für einen Kanzlei-Arbeitsplatz anhand folgender Konditionen:\n- Listeneinkaufspreis Hardware (LEP): 1.600,00 EUR\n- Lieferantenrabatt: 10 %\n- Lieferantenskonto: 2 %\n- Bezugskosten (Fracht/Versicherung): 20,00 EUR\n- Handlungskostenzuschlag (HKZ): 25 %\n- Gewinnzuschlag: 15 %\n- Kundenskonto (im Hundert): 2 %\n- Kundenrabatt (im Hundert): 10 %\n- Umsatzsteuer: 19 %\nFühren Sie die Vorwärtskalkulation mit allen Zwischenstufen im Rechengitter durch.",
+                        solution: "1. Listeneinkaufspreis (LEP): 1.600,00 €\n- Lieferantenrabatt (10 % von 1.600 €): - 160,00 €\n= Zieleinkaufspreis (ZEP): 1.440,00 €\n- Lieferantenskonto (2 % von 1.440 €): - 28,80 €\n= Bareinkaufspreis (BEP): 1.411,20 €\n+ Bezugskosten: + 20,00 €\n= Bezugspreis (Einstandspreis): 1.431,20 €\n\n2. + Handlungskosten (25 % von 1.431,20 €): + 357,80 €\n= Selbstkosten: 1.789,00 €\n+ Gewinnzuschlag (15 % von 1.789,00 €): + 268,35 €\n= Barverkaufspreis (BVP): 2.057,35 €\n\n3. + Kundenskonto (2 % im Hundert: 2.057,35 € / 0,98 * 0,02): + 41,99 €\n= Zielverkaufspreis (ZVP): 2.099,34 €\n+ Kundenrabatt (10 % im Hundert: 2.099,34 € / 0,90 * 0,10): + 233,26 €\n= Netto-Listenverkaufspreis (LVP): 2.332,60 €\n\n4. + Umsatzsteuer (19 % von 2.332,60 €): + 443,19 €\n= Brutto-Listenverkaufspreis (Brutto-LVP): 2.775,79 €."
+                    },
+                    {
+                        id: "18_4_b",
+                        label: "b) Vertragsrecht nach BGB: Werklieferungsvertrag & Mängelrüge nach HGB",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "VERTRAGSRECHT / § 650 BGB & HGB",
+                        text: "aa) Das Systemhaus liefert die Hardware, montiert die Halterungen, führt die Tertiärverkabelung durch und übergibt die 30 Plätze betriebsbereit nach Abnahmetest. Welcher Vertragstyp liegt nach BGB vor und warum? (3 Punkte).\nab) Welcher Unterschied besteht zwischen einem Handelskauf nach § 377 HGB (B2B) und einem Verbrauchsgüterkauf nach § 474 BGB hinsichtlich der Mängelrügefrist? (3 Punkte).",
+                        solution: "aa) Vertragstyp:\nWerklieferungsvertrag nach § 650 BGB.\nBegründung: Es werden bewegliche Sachen (Hardware/Monitore) geliefert, die jedoch durch individuelle Montage, Verkabelung und betriebsbereite Einrichtung zu einem funktionierenden Gesamterfolg (Werkleistung) zusammengeführt und formell abgenommen werden.\nab) Mängelrüge (§ 377 HGB vs. BGB):\n• Handelskauf (B2B nach § 377 HGB): Beide Vertragsparteien sind Kaufleute. Der Käufer hat die Ware unverzüglich nach Erhalt zu untersuchen und erkennbare Mängel unverzüglich anzuzeigen (Rügepflicht). Andernfalls gilt die Ware als genehmigt und Gewährleistungsansprüche erlöschen!\n• Verbrauchsgüterkauf (B2C nach § 474 BGB): Verbraucher unterliegen keiner unverzüglichen Rügepflicht. Gewährleistungsansprüche bleiben 24 Monate erhalten."
+                    },
+                    {
+                        id: "18_4_c",
+                        label: "c) TCO-Berechnung: Jährliche Energiekosten im Betrieb und Standby",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "TCO-RECHNUNG / STROMKOSTEN & LEBENSZYKLUS",
+                        text: "Ein Kanzlei-Arbeitsplatz verbraucht im Durchschnitt 110 Watt während der Nutzungszeit und 4 Watt im Standby/Nachtbetrieb.\nBerechnen Sie für alle 30 Arbeitsplätze:\naa) Die jährlichen Stromkosten während der Betriebszeit bei 220 Arbeitstagen, 8,5 Stunden Betriebszeit/Tag und einem Strompreis von 0,38 €/kWh (3 Punkte).\nab) Die jährlichen Standby-Kosten bei 15,5 h Nachtbetrieb an den 220 Arbeitstagen + 24 h an den 145 Wochenend-/Feiertagen (3 Punkte).",
+                        solution: "aa) Betriebszeit Stromkosten (30 Arbeitsplätze):\n• Energieverbrauch pro Tag: 30 * 110 W * 8,5 h = 28.050 Wh = 28,05 kWh/Tag.\n• Verbrauch pro Jahr (220 Tage): 28,05 kWh * 220 Tage = 6.171 kWh/Jahr.\n• Kosten: 6.171 kWh * 0,38 €/kWh = 2.344,98 €/Jahr.\n\nab) Standby Stromkosten (30 Arbeitsplätze à 4 W):\n• Standby-Stunden pro Jahr: (220 Tage * 15,5 h) + (145 Tage * 24 h) = 3.410 h + 3.480 h = 6.890 Stunden.\n• Energieverbrauch Standby: 30 * 4 W * 6.890 h = 826.800 Wh = 826,8 kWh/Jahr.\n• Kosten Standby: 826,8 kWh * 0,38 €/kWh = 314,18 €/Jahr.\n• Gesamtstromkosten: 2.344,98 € + 314,18 € = 2.659,16 €/Jahr."
+                    },
+                    {
+                        id: "18_4_d",
+                        label: "d) Gesetzliche Gewährleistung vs. Garantie vs. SLA",
+                        points: 5,
+                        type: "table",
+                        stencil: "GEWÄHRLEISTUNG VS. GARANTIE",
+                        text: "Unterscheiden Sie die rechtlichen Haftungs- und Serviceformen.",
+                        tableConfig: {
+                            type: "matching",
+                            targetCol: 0,
+                            options: [
+                                "Gesetzliche Sachmängelhaftung (Gewährleistung)",
+                                "Herstellergarantie",
+                                "Kulanz",
+                                "Service Level Agreement (SLA)"
+                            ],
+                            headers: [
+                                "Rechtsbegriff",
+                                "Rechtliche Grundlage / Verbindlichkeit",
+                                "Dauer & Besonderheit"
+                            ],
+                            rows: [
+                                [
+                                    "",
+                                    "Gesetzlicher Anspruch gegen den Verkäufer (§ 437 BGB); Beweislastumkehr nach 12 Monaten",
+                                    "24 Monate ab Gefahrübergang (Übergabe)"
+                                ],
+                                [
+                                    "",
+                                    "Freiwillige vertragliche Zusicherung des Herstellers bezüglich Funktionsfähigkeit",
+                                    "Dauer und Bedingungen frei bestimmbar (z. B. 36 Monate Vor-Ort-Austausch)"
+                                ],
+                                [
+                                    "",
+                                    "Freiwilliges Entgegenkommen ohne rechtliche Verpflichtung nach Ablauf aller Fristen",
+                                    "Einzelfallentscheidung des Händlers"
+                                ],
+                                [
+                                    "",
+                                    "Vertraglich vereinbarte Servicegüte mit definierten Reaktions- und Wiederherstellungszeiten",
+                                    "Gilt während der vereinbarten Vertragslaufzeit (z. B. 4h Entstörung)"
+                                ]
+                            ],
+                            solutions: {
+                                "row_0_col_0": "Gesetzliche Sachmängelhaftung (Gewährleistung)",
+                                "row_1_col_0": "Herstellergarantie",
+                                "row_2_col_0": "Kulanz",
+                                "row_3_col_0": "Service Level Agreement (SLA)"
+                            }
+                        },
+                        solution: "• Gewährleistung: Gesetzlich 24 Monate gegen den Händler.\n• Garantie: Freiwillig vertraglich vom Hersteller.\n• Kulanz: Freiwillige Leistung ohne Rechtsanspruch.\n• SLA: Verbindliche vertragliche Reaktions- und Entstörzeiten."
+                    }
+                ]
+            }
+        ]
+    },
+
+    // ----------------------------------------------------------------------
+    // PRÜFUNG 19: IT-Arbeitsplatz II – Kreativagentur & Desk-Sharing
+    // Thema: Einrichten eines IT-gestützten Arbeitsplatzes (Mobilität, 802.1Q & Zero-Trust)
+    // ----------------------------------------------------------------------
+    {
+        id: "exam_19",
+        title: "Prüfung 19: IT-Arbeitsplatz II – Kreativagentur (Desk-Sharing, 802.1Q & Zero-Trust)",
+        badge: "100 Punkte • 90 Min.",
+        subtitle: "Abschlussprüfung Teil 1 • IT-Berufe • PixelForge Digital Media GmbH",
+        ausgangssituation: "Sie betreuen als Fachinformatiker die IT-Infrastruktur der PixelForge Digital Media GmbH in Karlsruhe. Die Agentur führt ein Desk-Sharing-Modell für 40 Mitarbeiter ein (Grafikdesigner, Webentwickler, Projektmanager). Jeder Arbeitsplatz verfügt über elektromotorisch höhenverstellbare Steh-Sitz-Tische, universelle USB-C/Thunderbolt-Docking, VoIP-Telefone mit integriertem Gigabit-Switch, Monitore mit Hardware-Farbraumabdeckung (sRGB/DCI-P3) sowie zentral verwaltete Netzwerktrennung nach IEEE 802.1Q, BitLocker mit TPM 2.0 und ein relationales IT-Asset-Management-Datenbankschema in der 3. Normalform (3NF).",
+        tasks: [
+            // Aufgabe 1 (25 Pkt)
+            {
+                number: 1,
+                title: "1. Aufgabe: Desk-Sharing, Farbräume & Dynamische Ergonomie",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "19_1_a",
+                        label: "a) Dynamischer Steh-Sitz-Arbeitsplatz nach DGUV Regel 115-401",
+                        points: 7,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "ERGONOMIE / DGUV REGEL 115-401 DYNAMISCHES ARBEITEN",
+                        text: "Die Agentur rüstet die 40 Plätze mit elektromotorisch höhenverstellbaren Steh-Sitz-Tischen aus.\naa) Beschreiben Sie die '60-30-10-Regel' des dynamischen Arbeitens nach DGUV Regel 115-401 (4 Punkte).\nab) Nennen Sie den normgerechten Verstellbereich eines Steh-Sitz-Tisches nach DIN EN 527-1 und erläutern Sie zwei gesundheitliche Vorteile des regelmäßigen Wechsels (3 Punkte).",
+                        solution: "aa) 60-30-10-Regel nach DGUV:\n• 60 % Dynamisches Sitzen (häufiger Wechsel der Sitzhaltung auf ergonomischem Bürostuhl).\n• 30 % Stehendes Arbeiten (am hochgefahrenen Steh-Sitz-Tisch).\n• 10 % Gezielte Bewegung (kurze Gehpausen, Treppensteigen, Besprechungen im Stehen).\nab) Verstellbereich & Vorteile (DIN EN 527-1):\n• Verstellbereich: Stufenlos von mindestens 65 cm (Sitzposition für kleinere Personen) bis mindestens 125 cm (Stehposition für Personen bis 1,95 m Körpergröße).\n• Gesundheitliche Vorteile: Entlastung der Bandscheiben und Wirbelsäule, Anregung von Herz-Kreislauf-System und Durchblutung, Verringerung von Muskelverspannungen im Schulter-Nacken-Bereich."
+                    },
+                    {
+                        id: "19_1_b",
+                        label: "b) Farbverbindlichkeit am Bildschirmarbeitsplatz (sRGB vs. Adobe RGB & 10-Bit)",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "DISPLAY-TECHNOLOGIE / FARBRÄUME & KALIBRIERUNG",
+                        text: "Für Grafik- und Mediengestalter ist Farbverbindlichkeit am Bildschirmarbeitsplatz entscheidend.\naa) Vergleichen Sie die Farbräume sRGB, Adobe RGB und DCI-P3 hinsichtlich ihres Einsatzbereichs und Farbumfangs (3 Punkte).\nab) Erläutern Sie den Unterschied zwischen 8-Bit und 10-Bit Farbtiefe und beschreiben Sie den Vorgang der Hardwarekalibrierung mittels Kolorimeter (3 Punkte).",
+                        solution: "aa) Farbräume:\n• sRGB: Standard-Farbraum für Web-Inhalte, Standard-Office und Endgeräte-Monitore (kleinster der drei Farbräume).\n• Adobe RGB: Entwickelt für professionelle Druckvorstufe (CMYK-Farbraumabdeckung, insbesondere tiefes Grün und Cyan).\n• DCI-P3: Kinostandard und moderner Standard für digitale Videoproduktion, HDR und Mobilgeräte (ca. 25 % größer als sRGB, sattere Rot- und Grüntöne).\nab) Farbtiefe & Hardwarekalibrierung:\n• Farbtiefe: 8-Bit pro Kanal = 256 Stufen pro Farbkanal = 16,7 Millionen Farben; 10-Bit pro Kanal = 1.024 Stufen pro Kanal = 1,07 Milliarden Farben (verhindert Banding / Farbabrisse bei feinen Farbverläufen).\n• Hardwarekalibrierung: Ein Kolorimeter (Messsensor) misst Farbfelder auf dem Display. Korrekturwerte werden direkt in der internen Look-Up-Table (14- oder 16-Bit LUT) des Monitors gespeichert, statt in der Grafikkarten-LUT des Betriebssystems."
+                    },
+                    {
+                        id: "19_1_c",
+                        label: "c) Datenraten-Berechnung & Display Stream Compression (DSC)",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "BANDBREITEN-ANALYSE / DISPLAY STREAM COMPRESSION (DSC)",
+                        text: "aa) Berechnen Sie die unkomprimierte Datenrate für ein 4K-Videosignal (3840 x 2160 Pixel, 60 Hz Bildwiederholrate, 24 Bit Farbtiefe / 8-Bit RGB) in Gbit/s (ohne Austastlücken) (3 Punkte).\nab) Warum reicht die Bandbreite eines USB-C-Kabels mit 2 DisplayPort-Lanes (DP 1.4 HBR3 = 12,96 Gbit/s netto) für Dual-4K @ 60Hz nur bei Nutzung von Display Stream Compression (DSC)? (3 Punkte).",
+                        solution: "aa) Unkomprimierte 4K-Datenrate:\n• Pixel pro Bild: 3.840 * 2.160 = 8.294.400 Pixel.\n• Bits pro Sekunde: 8.294.400 Pixel * 24 Bit * 60 1/s = 11.943.936.000 Bit/s ≈ 11,94 Gbit/s (mit ca. 20 % Austastlücke / Blanking Overhead ca. 14,25 Gbit/s).\nab) DSC (Display Stream Compression):\nZwei 4K-Monitore benötigen unkomprimiert ca. 24 bis 28 Gbit/s Bandbreite. Stehen bei USB-C durch gleichzeitige USB 3.0-Datenübertragung nur 2 DP-Lanes zur Verfügung (ca. 12,96 Gbit/s), ermöglicht DSC eine visuell verlustfreie Kompression im Verhältnis bis zu 3:1, sodass beide Monitore flüssig mit 60 Hz betrieben werden können."
+                    },
+                    {
+                        id: "19_1_d",
+                        label: "d) Hardware-Schnittstellen und Videostandards",
+                        points: 6,
+                        type: "table",
+                        stencil: "HARDWARE-SCHNITTSTELLEN VERGLEICH",
+                        text: "Ordnen Sie die Schnittstellen und Kabelstandards den Spezifikationen zu.",
+                        tableConfig: {
+                            type: "matching",
+                            targetCol: 0,
+                            options: [
+                                "USB-C mit E-Marker Chip",
+                                "DisplayPort 1.4 (HBR3)",
+                                "HDMI 2.1 FRL",
+                                "Active Optical Cable (AOC)"
+                            ],
+                            headers: [
+                                "Schnittstellenstandard",
+                                "Maximale Bandbreite / Funktion",
+                                "Einsatzbereich"
+                            ],
+                            rows: [
+                                [
+                                    "",
+                                    "Integriertes IC zur Authentifizierung von 100W/240W Ladeleistung und 40 Gbit/s Datenrate",
+                                    "Verbindet Notebook mit Dockingstation"
+                                ],
+                                [
+                                    "",
+                                    "32,4 Gbit/s Brutto, unterstützt MST (Multi Stream Transport) und DSC",
+                                    "Kaskadierung mehrerer Monitore (Daisy-Chaining)"
+                                ],
+                                [
+                                    "",
+                                    "Bis zu 48 Gbit/s Bandbreite für 4K @ 120Hz oder 8K @ 60Hz mit dynamischem HDR",
+                                    "Präsentationsbildschirm im Konferenzraum"
+                                ],
+                                [
+                                    "",
+                                    "Integrierte optische Wandler für verlustfreie Übertragung über 5 bis 30 Meter",
+                                    "Lange Signalwege zwischen Medientechnik-Rack und Beamer"
+                                ]
+                            ],
+                            solutions: {
+                                "row_0_col_0": "USB-C mit E-Marker Chip",
+                                "row_1_col_0": "DisplayPort 1.4 (HBR3)",
+                                "row_2_col_0": "HDMI 2.1 FRL",
+                                "row_3_col_0": "Active Optical Cable (AOC)"
+                            }
+                        },
+                        solution: "• E-Marker USB-C: Sicheres 100W+ Laden und High-Speed-Daten.\n• DisplayPort 1.4: MST Daisy Chaining für Monitore.\n• HDMI 2.1: 48 Gbit/s für Präsentationsmonitore.\n• AOC Kabel: Optische Wandlung für lange Strecken."
+                    }
+                ]
+            },
+
+            // Aufgabe 2 (25 Pkt)
+            {
+                number: 2,
+                title: "2. Aufgabe: Netzwerk-Segmentierung, VLAN 802.1Q & IPv4-Subnetting",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "19_2_a",
+                        label: "a) IPv4-Subnetting (VLSM) für 4 logische Netzbereiche",
+                        points: 8,
+                        type: "math-grid",
+                        gridConfig: { cols: 26, rows: 8 },
+                        stencil: "IPV4-SUBNETTING / VLSM-BERECHNUNG",
+                        text: "Das Firmennetzwerk erhält den Adressbereich 192.168.100.0/24. Teilen Sie den Bereich mittels VLSM in 4 Subnetze auf:\n1. Subnetz 1: Grafik-Clients (mindestens 50 Hosts)\n2. Subnetz 2: Voice-VoIP (mindestens 45 Hosts)\n3. Subnetz 3: Gäste-WLAN (mindestens 25 Hosts)\n4. Subnetz 4: IT-Management (mindestens 10 Hosts)\nGeben Sie für jedes Subnetz die Netzwerkadresse, Subnetzmaske (Dezimal & CIDR), erste und letzte nutzbare Host-IP sowie die Broadcast-Adresse an.",
+                        solution: "1. Subnetz 1 (Grafik-Clients, mind. 50 Hosts -> /26, 62 nutzbare Hosts):\n• Netzadresse: 192.168.100.0/26\n• Subnetzmaske: 255.255.255.192\n• Nutzbare Hosts: 192.168.100.1 bis 192.168.100.62\n• Broadcast: 192.168.100.63\n\n2. Subnetz 2 (Voice-VoIP, mind. 45 Hosts -> /26, 62 nutzbare Hosts):\n• Netzadresse: 192.168.100.64/26\n• Subnetzmaske: 255.255.255.192\n• Nutzbare Hosts: 192.168.100.65 bis 192.168.100.126\n• Broadcast: 192.168.100.127\n\n3. Subnetz 3 (Gäste-WLAN, mind. 25 Hosts -> /27, 30 nutzbare Hosts):\n• Netzadresse: 192.168.100.128/27\n• Subnetzmaske: 255.255.255.224\n• Nutzbare Hosts: 192.168.100.129 bis 192.168.100.158\n• Broadcast: 192.168.100.159\n\n4. Subnetz 4 (IT-Management, mind. 10 Hosts -> /28, 14 nutzbare Hosts):\n• Netzadresse: 192.168.100.160/28\n• Subnetzmaske: 255.255.255.240\n• Nutzbare Hosts: 192.168.100.161 bis 192.168.100.174\n• Broadcast: 192.168.100.175."
+                    },
+                    {
+                        id: "19_2_b",
+                        label: "b) IEEE 802.1Q VLAN-Tagging am Arbeitsplatz mit VoIP-Telefon",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "VLAN-TAGGING / IEEE 802.1Q AM VOIP-TELEFON",
+                        text: "Am Arbeitsplatz wird nur eine Netzwerkdose genutzt. Das Kabel führt in das VoIP-Telefon; der Arbeitsplatzrechner ist am internen Switch-Port des Telefons angeschlossen.\naa) Erläutern Sie, wie Switch und VoIP-Telefon sicherstellen, dass Sprachdaten (VoIP) und Client-Daten getrennt und priorisiert übertragen werden (Voice VLAN tagged vs. Data VLAN untagged) (3 Punkte).\nab) Welche Information fügt das 802.1Q-VLAN-Tag dem Ethernet-Frame hinzu und wie viele Bits umfasst die VLAN-ID? (3 Punkte).",
+                        solution: "aa) Trennung von Voice und Data am Telefon:\n• Der Switchport ist als Hybrid-/Trunk-Port konfiguriert.\n• Das IP-Telefon markiert seine eigenen Sprachpakete mit einem 802.1Q-Tag (Voice-VLAN, z. B. VLAN 20) und setzt das 802.1p CoS-Prioritätsbit (Class of Service 5) für priorisiertes VoIP-QoS.\n• Vom PC empfangene Datenpakete leitet das Telefon ohne Tag (untagged) im nativen Data-VLAN (z. B. VLAN 10) an den Switch weiter.\nab) 802.1Q-Tag Aufbau:\n• Das 802.1Q-Tag ist 4 Byte groß und wird zwischen Quell-MAC und EtherType eingefügt.\n• Es enthält den TPID (0x8100), das 3-Bit Priority Code Point (PCP/CoS), das 1-Bit DEI und die 12-Bit VLAN-ID (Wertebereich 1 bis 4.094)."
+                    },
+                    {
+                        id: "19_2_c",
+                        label: "c) DHCP-Relay-Agent (IP-Helper-Address) bei VLAN-Trennung",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "DHCP-RELAY-AGENT / IP-HELPER-ADDRESS",
+                        text: "Die Clients im Data-VLAN und die IP-Telefone im Voice-VLAN befinden sich in getrennten Broadcast-Domänen. Der DHCP-Server steht zentral im Server-VLAN.\naa) Warum erreicht die Broadcast-Anfrage (DHCP-Discover) den DHCP-Server standardmäßig nicht? (3 Punkte).\nab) Wie löst ein Layer-3-Switch bzw. Router mit 'DHCP-Relay-Agent' (IP-Helper-Address) dieses Problem? (3 Punkte).",
+                        solution: "aa) Problem des DHCP-Broadcasts:\nDHCP-Discover wird als lokaler Broadcast (255.255.255.255) versendet. Router und Layer-3-Switches leiten Broadcast-Pakete standardmäßig nicht über Netzwerkgrenzen (VLANs) weiter, um Broadcast-Stürme zu verhindern.\nab) Lösung durch DHCP-Relay-Agent:\nAuf dem VLAN-SVI-Interface des Routers/Switches wird eine 'IP-Helper-Address' konfiguriert. Der Relay-Agent fängt den DHCP-Broadcast ab, wandelt ihn in ein Unicast-UDP-Paket um, trägt im Feld 'giaddr' (Gateway IP Address) die IP-Adresse des jeweiligen Subnetzes ein und sendet es gezielt an den DHCP-Server. Der DHCP-Server erkennt anhand von 'giaddr', aus welchem Pool er eine IP vergeben muss."
+                    },
+                    {
+                        id: "19_2_d",
+                        label: "d) Analyse typischer Netzwerkfehler am Arbeitsplatz",
+                        points: 5,
+                        type: "table",
+                        stencil: "NETZWERKFEHLER FEHLERSUCHE",
+                        text: "Ordnen Sie die Fehlerbeschreibungen den technischen Ursachen zu.",
+                        tableConfig: {
+                            type: "matching",
+                            targetCol: 0,
+                            options: [
+                                "Duplex Mismatch",
+                                "Broadcast Storm",
+                                "MTU Mismatch",
+                                "VLAN Leaking / Fehlkonfiguration"
+                            ],
+                            headers: [
+                                "Fehlerbild",
+                                "Technische Ursache",
+                                "Auswirkung am Client-Arbeitsplatz"
+                            ],
+                            rows: [
+                                [
+                                    "",
+                                    "Eine Seite auf Vollduplex (Full-Duplex), die Gegenstelle auf Autonegotiation/Halbduplex",
+                                    "Massive Spätkollisionen (Late Collisions), extrem langsame Übertragung trotz Gigabit-Link"
+                                ],
+                                [
+                                    "",
+                                    "Netzwerkschleife ohne Spanning Tree Protocol (STP) flutet den Switch",
+                                    "Netzwerk bricht vollständig zusammen, Link-LEDs flackern dauerhaft, keine IP-Erreichbarkeit"
+                                ],
+                                [
+                                    "",
+                                    "Paketgröße überschreitet maximal erlaubte Frame-Größe bei gesetztem Don't-Fragment (DF)-Bit",
+                                    "Kleine Pings funktionieren, aber Laden großer Webseiten und Dateiübertragungen friert ein"
+                                ],
+                                [
+                                    "",
+                                    "Switchport ist dem falschen Port-VLAN zugewiesen oder PVID fehlt",
+                                    "Client erhält IP-Adresse aus falschem Subnetz und kann interne Abteilungsressourcen nicht erreichen"
+                                ]
+                            ],
+                            solutions: {
+                                "row_0_col_0": "Duplex Mismatch",
+                                "row_1_col_0": "Broadcast Storm",
+                                "row_2_col_0": "MTU Mismatch",
+                                "row_3_col_0": "VLAN Leaking / Fehlkonfiguration"
+                            }
+                        },
+                        solution: "• Duplex Mismatch: Late Collisions und drastischer Bandbreitenverlust.\n• Broadcast Storm: Netzwerkkollaps durch Switching-Loops ohne STP.\n• MTU Mismatch: Paketverlust bei großen Paketen (Path MTU Black Hole).\n• VLAN Fehlkonfiguration: Isolierung oder falsches Adresssegment."
+                    }
+                ]
+            },
+
+            // Aufgabe 3 (25 Pkt)
+            {
+                number: 3,
+                title: "3. Aufgabe: Endgerätesicherheit, BitLocker, TPM 2.0 & Zero-Trust",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "19_3_a",
+                        label: "a) BitLocker-Laufwerksverschlüsselung & Trusted Platform Module (TPM 2.0)",
+                        points: 7,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "FESTPLATTENVERSCHLÜSSELUNG / TPM 2.0 & BITLOCKER",
+                        text: "Alle mobilen Arbeitsplatz-Notebooks werden mit BitLocker verschlüsselt.\naa) Erläutern Sie das Zusammenspiel zwischen BitLocker und dem TPM 2.0-Sicherheitschip beim Systemstart (Platform Configuration Registers / PCRs) (4 Punkte).\nab) Wo wird der 48-stellige BitLocker-Wiederherstellungsschlüssel in einer Unternehmensinfrastruktur gesichert, und in welchem Fall wird er vom System zwingend abgefragt? (3 Punkte).",
+                        solution: "aa) BitLocker & TPM 2.0:\n• Der TPM-Chip speichert kryptografische Schlüssel sicher in Hardware.\n• Beim Booten misst das System die Integrität von Firmware (UEFI), Bootloader und Boot-Konfiguration und speichert die Hashwerte in den Platform Configuration Registers (PCRs).\n• Stimmen die aktuellen Hashwerte mit den Sollwerten überein (Integrität bestätigt), gibt das TPM den Volume Master Key (VMK) frei und Windows startet transparent ohne Passworteingabe.\nab) Wiederherstellungsschlüssel:\n• Sicherung: Wird automatisch verschlüsselt im Active Directory (AD DS) oder in Microsoft Entra ID (Azure AD) des Benutzer- bzw. Computerkontos hinterlegt.\n• Abfrage: Wird erzwungen, wenn die Boot-Integrität verletzt wurde (z. B. BIOS-Update, Ausbau der SSD in fremden PC, veränderte Bootreihenfolge oder Ausfall des TPM)."
+                    },
+                    {
+                        id: "19_3_b",
+                        label: "b) Multi-Faktor-Authentifizierung (MFA): Methoden & Phishing-Resistenz",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "AUTHENTIFIZIERUNG / MULTI-FAKTOR-METHODEN (MFA)",
+                        text: "aa) Nennen und beschreiben Sie die drei klassischen Authentifizierungsfaktoren (Kategorien) mit je einem konkreten Praxisbeispiel für IT-Arbeitsplätze (3 Punkte).\nab) Warum stuft das BSI hardwarebasierte FIDO2/WebAuthn-Sicherheitsschlüssel als phishing-resistent ein, während SMS-TANs und simple Push-Benachrichtigungen als unsicher gelten? (3 Punkte).",
+                        solution: "aa) Die 3 MFA-Faktoren:\n1. Wissen: Etwas, das der Nutzer weiß (z. B. Passwort, PIN, Sicherheitsfrage).\n2. Besitz: Etwas, das der Nutzer besitzt (z. B. FIDO2-USB-Stick, Smartcard, TOTP-Authenticator-App auf Smartphone).\n3. Inhärenz (Biometrie): Etwas, das der Nutzer ist (z. B. Fingerabdruck, Windows Hello Gesichtserkennung, Iris-Scan).\nab) Phishing-Resistenz von FIDO2:\nFIDO2/WebAuthn nutzt asymmetrische Kryptografie und bindet den Login kryptografisch an den genauen Domainnamen (Origin) der Website. Selbst wenn ein Nutzer auf eine gefälschte Phishing-Webseite gelockt wird, antwortet der FIDO2-Stick nur für die echte Domain. SMS-TANs können durch SIM-Swapping abgefangen und Push-MFA durch MFA-Fatigue-Angriffe (Müdigkeitsangriffe) überwunden werden."
+                    },
+                    {
+                        id: "19_3_c",
+                        label: "c) Zero-Trust-Sicherheitsarchitektur am hybriden Arbeitsplatz",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "SICHERHEITSARCHITEKTUR / ZERO-TRUST-PRINZIPIEN",
+                        text: "Die Agentur stellt von einer klassischen perimeterbasierten Sicherheit auf eine Zero-Trust-Architektur um.\naa) Nennen und erläutern Sie die drei Kernprinzipien des Zero-Trust-Modells nach NIST SP 800-207 (3 Punkte).\nab) Beschreiben Sie das Konzept des 'Conditional Access' (Bedingter Zugriff) anhand von zwei Kriterien (3 Punkte).",
+                        solution: "aa) Die 3 Zero-Trust-Prinzipien:\n1. Never Trust, Always Verify: Jeder Zugriffsversuch wird explizit authentifiziert und autorisiert, unabhängig davon, ob er aus dem internen LAN oder extern erfolgt.\n2. Least Privilege Access: Benutzer und Dienste erhalten immer nur die minimal notwendigen Berechtigungen (Just-in-Time & Just-Enough-Access).\n3. Assume Breach: Es wird von einer bestehenden Kompromittierung ausgegangen; Netzwerke werden mikrosegmentiert und alle Datenflüsse durchgängig verschlüsselt.\nab) Conditional Access:\nBedingter Zugriff bewertet vor jeder Ressourcenfreigabe dynamische Richtlinien:\n• Gerätezustand: Ist das Notebook 'Compliant' (aktueller Patchstand, aktiviertes BitLocker, EDR aktiv)?\n• Benutzer- & Standortrisiko: Erfolgt der Login von einem bekannten Standort oder liegt eine unmögliche Reisezeit (Impossible Travel) vor?"
+                    },
+                    {
+                        id: "19_3_d",
+                        label: "d) Notfallmaßnahmen bei Geräteverlust / Diebstahl eines Notebooks",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "GERÄTEVERLUST / MDM REMOTE WIPE",
+                        text: "Ein Mitarbeiter meldet den Diebstahl seines Arbeitsplatz-Notebooks auf einer Dienstreise.\nBeschreiben Sie die vier sofortigen technischen und organisatorischen Schritte des IT-Notfallplans gemäß DSGVO.",
+                        solution: "Sofortmaßnahmen bei Geräteverlust (Notfallplan):\n1. Sperrung und Remote Wipe (Fernlöschung): Auslösen eines sofortigen 'Wipe'-Befehls über das Mobile Device Management (MDM / Microsoft Intune), um bei nächster Netzverbindung alle Unternehmensdaten und Schlüssel zu löschen.\n2. Account-Sperre & Session-Revocation: Sofortiges Zurücksetzen des Domänen-/Cloud-Kennworts und Widerruf aller aktiven Login-Tokens (Revoke Sessions / Refresh Tokens) in Microsoft Entra ID.\n3. Zertifikatssperre: Aufnahme des gerätespezifischen 802.1X- und VPN-Zertifikats in die Zertifikatssperrliste (CRL / Certificate Revocation List) der Unternehmens-PKI.\n4. DSGVO-Meldung: Prüfung einer Meldepflicht an die Datenschutzaufsichtsbehörde nach Art. 33 DSGVO innerhalb von 72 Stunden (durch BitLocker-Verschlüsselung besteht in der Regel kein hohes Risiko für Betroffene, Dokumentation im internen Verarbeitungsverzeichnis ist dennoch Pflicht)."
+                    }
+                ]
+            },
+
+            // Aufgabe 4 (25 Pkt)
+            {
+                number: 4,
+                title: "4. Aufgabe: IT-Asset-Management-Datenbank (3NF) & SQL-Abfragen",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "19_4_a",
+                        label: "a) Relationale Normalisierung (1NF bis 3NF) der Asset-Erfassung",
+                        points: 8,
+                        type: "lines",
+                        linesCount: 6,
+                        stencil: "DATENBANK-NORMALISIERUNG / 1NF BIS 3NF",
+                        text: "Die IT-Abteilung erfasste Rechner bisher in einer unstrukturierten Tabelle:\nAsset_Tabelle (InventarNr, RechnerModell, CPU, RAM_GB, Seriennummer, RaumNr, RaumName, MitarbeiterNr, Nachname, SoftwareIDs, SoftwareNamen)\nÜberführen Sie diese Tabelle in ein relationales Datenbankschema in der 3. Normalform (3NF).\nGeben Sie die resultierenden Tabellen mit Primärschlüsseln [PK] und Fremdschlüsseln [FK] an und begründen Sie die Schritte von 1NF bis 3NF.",
+                        solution: "Begründung der Normalisierungsschritte:\n• 1NF (Atomarität): Aufspaltung von Wiederholungsgruppen (mehrere SoftwareIDs/Namen in einem Feld werden eliminiert).\n• 2NF (Volle funktionale Abhängigkeit): Nicht-Schlüsselattribute müssen voll vom Primärschlüssel abhängen (Software hängt nicht von InventarNr ab -> eigene Tabelle Software und n:m Verknüpfungstabelle).\n• 3NF (Keine transitiven Abhängigkeiten): RaumName hängt von RaumNr ab, Nachname von MitarbeiterNr -> Auslagerung in Raum und Mitarbeiter.\n\nResultierendes Tabellenschema in 3NF:\n1. Raum(RaumNr [PK], RaumName)\n2. Mitarbeiter(MitarbeiterNr [PK], Nachname, FK_RaumNr)\n3. Geraet(InventarNr [PK], RechnerModell, CPU, RAM_GB, Seriennummer, FK_MitarbeiterNr)\n4. Software(SoftwareID [PK], SoftwareName)\n5. Geraet_Software(FK_InventarNr, FK_SoftwareID, LizenzKey) [Zusammengesetzter PK aus FK_InventarNr und FK_SoftwareID]."
+                    },
+                    {
+                        id: "19_4_b",
+                        label: "b) SQL-Abfrage: Auslaufende Hardware-Garantien ermitteln",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "SQL-ABFRAGE / GARANTIEABLAUF & ASSETS",
+                        text: "Formulieren Sie eine SQL-Abfrage (SELECT), die alle Geräte auflistet, deren Garantie (GarantieEnde) zwischen dem heutigen Tag ('2026-10-12') und den nächsten 90 Tagen ('2027-01-10') abläuft.\nAusgegeben werden sollen: InventarNr, RechnerModell, GarantieEnde, Nachname des Mitarbeiters und RaumName. Die Ausgabe ist aufsteigend nach GarantieEnde zu sortieren.",
+                        solution: "SQL-Statement:\nSELECT g.InventarNr, g.RechnerModell, g.GarantieEnde, m.Nachname, r.RaumName\nFROM Geraet g\nINNER JOIN Mitarbeiter m ON g.FK_MitarbeiterNr = m.MitarbeiterNr\nINNER JOIN Raum r ON m.FK_RaumNr = r.RaumNr\nWHERE g.GarantieEnde BETWEEN '2026-10-12' AND '2027-01-10'\nORDER BY g.GarantieEnde ASC;"
+                    },
+                    {
+                        id: "19_4_c",
+                        label: "c) Software-Lizenzmodelle beim Desk-Sharing",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "SOFTWARE-LIZENZIERUNG / FLOATING VS. NAMED USER",
+                        text: "aa) Unterscheiden Sie die Lizenzmodelle 'Named-User-Lizenz' und 'Concurrent-User-Lizenz' (Floating License) (3 Punkte).\nab) Warum bietet eine Concurrent-User-Lizenz bei einem Desk-Sharing-Modell mit 40 Mitarbeitern und 25 physischen Arbeitsplätzen ein enormes Einsparpotenzial? (3 Punkte).",
+                        solution: "aa) Named-User vs. Concurrent-User:\n• Named-User-Lizenz: Lizenz ist personengebunden an einen namentlich benannten Benutzer zugewiesen. Nur dieser darf die Software starten, unabhängig davon, an welchem Rechner er arbeitet.\n• Concurrent-User-Lizenz (Floating License): Ein zentraler Lizenzserver verwaltet einen Pool von Lizenzen. Jeder Mitarbeiter im Netzwerk kann die Software starten, solange die maximale Anzahl gleichzeitiger Zugriffe (Concurrency Limit) nicht überschritten ist.\nab) Kostenvorteil bei Desk-Sharing:\nDa nie alle 40 Mitarbeiter gleichzeitig im Büro sind (z. B. Homeoffice, Teilzeit, Urlaub, Außendienst), müssen nicht 40 teure Lizenzen gekauft werden, sondern nur beispielsweise 20 bis 25 Concurrent-Lizenzen für die tatsächlich gleichzeitig arbeitenden Personen. Dies reduziert die Lizenzkosten um 35 % bis 50 %."
+                    },
+                    {
+                        id: "19_4_d",
+                        label: "d) SQL-Integritätsbedingungen & Constraints",
+                        points: 5,
+                        type: "table",
+                        stencil: "SQL-INTEGRITÄTSBEDINGUNGEN",
+                        text: "Ordnen Sie die SQL-Constraints den Beschreibungen zu.",
+                        tableConfig: {
+                            type: "matching",
+                            targetCol: 0,
+                            options: [
+                                "PRIMARY KEY",
+                                "FOREIGN KEY",
+                                "NOT NULL",
+                                "UNIQUE",
+                                "CHECK"
+                            ],
+                            headers: [
+                                "Constraint",
+                                "Wirkungsweise in relationalen Datenbanken",
+                                "Beispiel im Asset-Schema"
+                            ],
+                            rows: [
+                                [
+                                    "",
+                                    "Eindeutiger Identifikator für jeden Datensatz, darf niemals NULL sein",
+                                    "InventarNr in Tabelle Geraet"
+                                ],
+                                [
+                                    "",
+                                    "Referenzielle Integrität zu einem Schlüssel einer übergeordneten Elterntabelle",
+                                    "FK_MitarbeiterNr in Tabelle Geraet verweist auf Mitarbeiter"
+                                ],
+                                [
+                                    "",
+                                    "Erzwingt, dass ein Attributwert zwingend befüllt sein muss",
+                                    "Seriennummer oder Nachname darf nicht leer gelassen werden"
+                                ],
+                                [
+                                    "",
+                                    "Definiert eine Bedingung / Wertebereichsprüfung für erlaubte Eingaben",
+                                    "RAM_GB IN (8, 16, 32, 64) oder Anschaffungspreis > 0"
+                                ]
+                            ],
+                            solutions: {
+                                "row_0_col_0": "PRIMARY KEY",
+                                "row_1_col_0": "FOREIGN KEY",
+                                "row_2_col_0": "NOT NULL",
+                                "row_3_col_0": "CHECK"
+                            }
+                        },
+                        solution: "• PRIMARY KEY: Eindeutige Zeilenidentifikation.\n• FOREIGN KEY: Referenzielle Integrität zwischen Tabellen.\n• NOT NULL: Pflichtfeld ohne NULL-Werte.\n• CHECK: Logische Wertebereichsprüfung."
+                    }
+                ]
+            }
+        ]
+    },
+
+    // ----------------------------------------------------------------------
+    // PRÜFUNG 20: IT-Arbeitsplatz III – CAD- & Engineering-Workstation
+    // Thema: Einrichten eines IT-gestützten Arbeitsplatzes (High-Performance, USV & GPO)
+    // ----------------------------------------------------------------------
+    {
+        id: "exam_20",
+        title: "Prüfung 20: IT-Arbeitsplatz III – CAD-Workstation (High-Performance, USV & GPO)",
+        badge: "100 Punkte • 90 Min.",
+        subtitle: "Abschlussprüfung Teil 1 • IT-Berufe • AeroTech Motion Engineering AG",
+        ausgangssituation: "Sie sind bei der AeroTech Motion Engineering AG in Mannheim im IT-Infrastruktur-Team tätig. Für 20 Konstruktionsingenieure werden Hochleistungs-Workstations für 3D-CAD-Konstruktion, Finite-Elemente-Simulation (FEM) und Strömungsberechnungen beschafft. Die Arbeitsplätze verlangen nach ECC-Speicherarchitektur, redundanten PCIe 4.0 NVMe-SSDs im Hardware-RAID 1, ISV-zertifizierten Workstation-Grafikkarten, Online-USV (VFI-Topologie), zentraler Härtung über Active Directory Gruppenrichtlinien (GPOs) sowie einer kaufmännischen Wirtschaftlichkeitsrechnung (Leasing vs. Kauf) und ordnungsgemäßer Altdatenentsorgung nach DIN 66399 und ElektroG.",
+        tasks: [
+            // Aufgabe 1 (25 Pkt)
+            {
+                number: 1,
+                title: "1. Aufgabe: Workstation-Hardwarearchitektur, ECC-RAM & RAID",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "20_1_a",
+                        label: "a) Hauptspeicher: ECC-RAM (Error-Correcting Code) vs. Non-ECC",
+                        points: 7,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "HAUPTSPEICHER / ECC-RAM ARCHITEKTUR",
+                        text: "Die CAD-Workstations werden mit 64 GB DDR5 ECC-RAM ausgestattet.\naa) Erläutern Sie die Funktionsweise von ECC-RAM hinsichtlich Single-Bit-Fehlern und Multi-Bit-Fehlern (Hamming-Code) (4 Punkte).\nab) Warum ist ECC-RAM bei tagelangen FEM-Berechnungen und CAD-Simulationen unverzichtbar? (3 Punkte).",
+                        solution: "aa) Funktionsweise von ECC-RAM:\n• ECC-Module besitzen zusätzliche Speicherchips für Prüfsummen (Paritäts-/Prüfbits nach dem Hamming-Code-Verfahren).\n• Single-Bit-Fehler (durch kosmische Strahlung oder Spannungsschwankungen gekipptes Bit) werden im laufenden Betrieb in Echtzeit erkannt und automatisch korrigiert (On-the-Fly Correction), ohne dass das System abstürzt.\n• Multi-Bit-Fehler werden zuverlässig erkannt; das System löst eine kontrollierte Ausnahme aus, um Datenkorruption zu verhindern.\nab) Bedeutung für CAD/FEM-Simulationen:\nKippt bei Non-ECC-RAM während einer 48-stündigen Belastungssimulation ein einziges Bit im Hauptspeicher, führt dies zu einem Bluescreen (Crash) oder zu unbemerkten Rechenfehlern (Silent Data Corruption) in Konstruktionsdaten, was fatale statische Fehlberechnungen zur Folge haben kann."
+                    },
+                    {
+                        id: "20_1_b",
+                        label: "b) Massenspeicher: NVMe PCIe 4.0 im RAID 1 (Spiegelung)",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "MASSENSPEICHER / NVME RAID 1 SPIEGELUNG",
+                        text: "Jede Workstation besitzt zwei identische 2 TB NVMe PCIe 4.0 SSDs im RAID 1-Verbund.\naa) Erläutern Sie Nutzkapazität, Ausfallsicherheit und Lese-/Schreibverhalten eines RAID 1 (3 Punkte).\nab) Welcher gravierende Unterschied besteht zwischen RAID 1-Ausfallsicherheit und einem echten Backup? (3 Punkte).",
+                        solution: "aa) RAID 1 Eigenschaften:\n• Nutzkapazität: 50 % der Gesamtkapazität (bei 2x 2 TB stehen exakt 2 TB Nutzkapazität zur Verfügung).\n• Ausfallsicherheit: Vollständige Redundanz; fällt eine SSD durch Defekt aus, läuft das System ohne Datenverlust und ohne Unterbrechung auf der verbleibenden SSD weiter.\n• Performance: Verdoppelte Lesegeschwindigkeit (paralleles Lesen beider SSDs); Schreibgeschwindigkeit entspricht einer einzelnen SSD (Daten müssen auf beide Medien geschrieben werden).\nab) RAID vs. Backup:\nEin RAID schützt ausschließlich vor Hardwareausfällen. Werden Dateien versehentlich gelöscht, durch Ransomware verschlüsselt oder durch Softwarefehler beschädigt, wird dieser Fehler sofort synchron auf die zweite SSD gespiegelt. Nur ein externes, versionsbasiertes Backup stellt gelöschte Daten wieder her."
+                    },
+                    {
+                        id: "20_1_c",
+                        label: "c) Professionelle Workstation-GPU vs. Consumer-Gaming-GPU",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "GRAFIKKARTEN / ISV-ZERTIFIZIERUNG & WORKSTATION-GPU",
+                        text: "Für 3D-CAD werden Nvidia RTX Pro Grafikkarten statt herkömmlicher Geforce Gaming-Grafikkarten eingesetzt.\nNennen und erläutern Sie drei technische und qualitative Unterscheidungsmerkmale professioneller Workstation-GPUs.",
+                        solution: "Unterschiede Workstation-GPU vs. Consumer-GPU:\n1. ISV-Zertifizierung (Independent Software Vendor): Spezielle Treiber werden in enger Zusammenarbeit mit CAD-Herstellern (Siemens NX, Dassault SolidWorks/CATIA, Autodesk) zertifiziert. Dies garantiert 100 % Darstellungsgenauigkeit ohne Darstellungsglitches und maximale Stabilität.\n2. ECC-Grafikspeicher (ECC-VRAM): Verhindert Speicherbit-Fehler im Videospeicher bei tagelangen Render- und GPU-Berechnungen.\n3. Höhere FP64-Doppelgenauigkeit & Langzeitsupport: Optimiert für hochpräzise Fließkommaberechnungen mit 64-Bit Genauigkeit, garantierte Treiberverfügbarkeit und Hardware-Ersatzteilversorgung über 3 bis 5 Jahre."
+                    },
+                    {
+                        id: "20_1_d",
+                        label: "d) Bussysteme und Schnittstellen der Workstation",
+                        points: 6,
+                        type: "table",
+                        stencil: "HARDWARE-SCHNITTSTELLEN & BUSSE",
+                        text: "Ordnen Sie die Schnittstellen den Spezifikationen zu.",
+                        tableConfig: {
+                            type: "matching",
+                            targetCol: 0,
+                            options: [
+                                "PCIe 5.0 x16 Slot",
+                                "M.2 NVMe PCIe 4.0 x4",
+                                "10GBASE-T (RJ45)",
+                                "DisplayPort 2.1 UHBR20"
+                            ],
+                            headers: [
+                                "Schnittstelle",
+                                "Theoretische Datenrate",
+                                "Komponente / Einsatzzweck"
+                            ],
+                            rows: [
+                                [
+                                    "",
+                                    "Bis zu 64 GB/s bidirektionale Bandbreite",
+                                    "Steckplatz für High-End Workstation-Grafikkarte"
+                                ],
+                                [
+                                    "",
+                                    "Bis zu ca. 7.500 MB/s Leserate pro Modul",
+                                    "Kompakte Solid-State-Disks für Betriebssystem und CAD-Projektdateien"
+                                ],
+                                [
+                                    "",
+                                    "10 Gbit/s über Kupfer-Verkabelung (Cat.6A)",
+                                    "Ultraschneller Zugriff auf das zentrale CAD-Netzlaufwerk (NAS/SAN)"
+                                ],
+                                [
+                                    "",
+                                    "Bis zu 80 Gbit/s Bruttobandbreite",
+                                    "Ansteuerung von 8K-Displays oder Dual-4K bei 120 Hz ohne Kompression"
+                                ]
+                            ],
+                            solutions: {
+                                "row_0_col_0": "PCIe 5.0 x16 Slot",
+                                "row_1_col_0": "M.2 NVMe PCIe 4.0 x4",
+                                "row_2_col_0": "10GBASE-T (RJ45)",
+                                "row_3_col_0": "DisplayPort 2.1 UHBR20"
+                            }
+                        },
+                        solution: "• PCIe 5.0 x16: 64 GB/s für GPU.\n• M.2 NVMe x4: Highspeed-Flash bis 7.500 MB/s.\n• 10GBASE-T: 10 Gbit/s Netzanbindung.\n• DP 2.1: Bis 80 Gbit/s für hochauflösende Displays."
+                    }
+                ]
+            },
+
+            // Aufgabe 2 (25 Pkt)
+            {
+                number: 2,
+                title: "2. Aufgabe: Domänenintegration, Gruppenrichtlinien (GPO) & Härtung",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "20_2_a",
+                        label: "a) Arbeitsplatz-Härtung über Active Directory Gruppenrichtlinien (GPO)",
+                        points: 7,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "ARBEITSPLATZ-HÄRTUNG / ACTIVE DIRECTORY GPO",
+                        text: "Zum Schutz geistigen Eigentums (CAD-Konstruktionspläne) werden die Workstations zentral per GPO gehärtet.\nNennen und begründen Sie drei administrative Sicherheitsrichtlinien, die auf die Computer-Organizational-Unit (OU) 'CAD-Workstations' angewendet werden.",
+                        solution: "Drei GPO-Sicherheitsrichtlinien:\n1. Sperrung von USB-Wechseldatenträgern (Removable Storage Devices Deny Read/Write): Verhindert den unberechtigten Abfluss streng vertraulicher CAD-Konstruktionsdaten (Data Loss Prevention) sowie das Einschleppen von Schadsoftware per USB-Stick.\n2. Automatische Bildschirmsperre nach 5 Minuten Inaktivität: Schützt den Rechner vor unbefugtem Zugriff bei Abwesenheit des Konstrukteurs am Arbeitsplatz.\n3. Erzwingen der BitLocker-Verschlüsselung mit Key-Escrow im Active Directory: Stellt sicher, dass alle lokalen Datenträger verschlüsselt sind und Wiederherstellungsschlüssel automatisch im AD hinterlegt werden."
+                    },
+                    {
+                        id: "20_2_b",
+                        label: "b) GPO-Vererbungshierarchie (LSDOU) & Konfliktlösung",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "GPO-VERERBUNG / LSDOU-HIERARCHIE",
+                        text: "aa) Beschreiben Sie die Auswertungsreihenfolge von Gruppenrichtlinien nach der LSDOU-Regel und nennen Sie das Grundprinzip bei Richtlinienkonflikten (3 Punkte).\nab) Erläutern Sie die Wirkungsweise der Optionen 'Erzwungen' (Enforced) und 'Vererbung blockieren' (Block Inheritance) (3 Punkte).",
+                        solution: "aa) LSDOU-Reihenfolge & Konfliktlösung:\n• Reihenfolge: 1. Local (lokale Richtlinie) -> 2. Site (Standort) -> 3. Domain (Domäne) -> 4. OU (Organizational Unit, von oberster bis unterster OU).\n• Konfliktregel: 'Der Letzte gewinnt' (Last Writer Wins). Eine Richtlinie auf untergeordneter OU-Ebene überschreibt Einstellungen übergeordneter Ebenen.\nab) Enforced vs. Block Inheritance:\n• Vererbung blockieren: Verhindert, dass übergeordnete Richtlinien (z. B. der Domäne) auf die OU angewendet werden.\n• Erzwungen (Enforced): Überstimmt 'Vererbung blockieren' und erzwingt die Anwendung der übergeordneten Richtlinie verbindlich nach unten."
+                    },
+                    {
+                        id: "20_2_c",
+                        label: "c) Kennwortsicherheit: Microsoft Local Administrator Password Solution (LAPS)",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "ADMIN-PASSWÖRTER / MICROSOFT LAPS",
+                        text: "aa) Warum stellt ein einheitliches Kennwort für das lokale Administrator-Konto auf allen 20 Workstations ein extremes Sicherheitsrisiko dar (Lateral Movement) (3 Punkte).\nab) Wie löst Microsoft LAPS (bzw. Windows LAPS) dieses Risiko technisch? (3 Punkte).",
+                        solution: "aa) Risiko einheitlicher lokaler Admin-Passwörter (Lateral Movement):\nWird ein einzelner Rechner kompromittiert und der Passwort-Hash des lokalen Administrators extrahiert (Pass-the-Hash-Angriff), können Angreifer mit demselben Kennwort sofort auf alle anderen 19 Workstations im Netzwerk zugreifen und sich lateral im Unternehmen ausbreiten.\nab) Technische Lösung durch LAPS:\nLAPS generiert für jeden einzelnen Client automatisch ein hochkomplexes, pseudozufälliges individuelles Kennwort für das lokale Administrator-Konto, speichert dieses verschlüsselt im Active Directory / Entra ID und rotiert (ändert) das Kennwort automatisch in festgelegten Intervallen (z. B. alle 30 Tage)."
+                    },
+                    {
+                        id: "20_2_d",
+                        label: "d) Windows-Administrationswerkzeuge & Konsolenbefehle",
+                        points: 6,
+                        type: "table",
+                        stencil: "ADMIN-TOOLS & BEFEHLE",
+                        text: "Ordnen Sie die Administrationswerkzeuge den Einsatzzwecken zu.",
+                        tableConfig: {
+                            type: "matching",
+                            targetCol: 0,
+                            options: [
+                                "gpupdate /force",
+                                "gpresult /r",
+                                "eventvwr.msc (Ereignisanzeige)",
+                                "secpol.msc (Lokale Sicherheitsrichtlinie)"
+                            ],
+                            headers: [
+                                "Befehl / Werkzeug",
+                                "Administrative Funktion",
+                                "Typischer Diagnoseanlass"
+                            ],
+                            rows: [
+                                [
+                                    "",
+                                    "Erzwingt die sofortige Neuübernahme aller Computer- und Benutzergruppenrichtlinien",
+                                    "Neue Sicherheitsrichtlinie soll ohne PC-Neustart sofort aktiv werden"
+                                ],
+                                [
+                                    "",
+                                    "Erzeugt einen detaillierten Textbericht über alle auf den Client angewendeten GPOs",
+                                    "Überprüfung, warum eine Richtlinie nicht greift (Filterung / Vererbung)"
+                                ],
+                                [
+                                    "",
+                                    "Zentrales Protokollierungstool für System-, Anwendungs- und Sicherheits-Logs",
+                                    "Fehlersuche bei Bluescreens, Treiberabstürzen oder fehlerhaften Anmeldeversuchen"
+                                ],
+                                [
+                                    "",
+                                    "Verwaltung lokaler Sicherheitseinstellungen wie Kennwortrichtlinien und Überwachung",
+                                    "Konfiguration von Sicherheitsrichtlinien auf Standalone-Rechnern ohne Domäne"
+                                ]
+                            ],
+                            solutions: {
+                                "row_0_col_0": "gpupdate /force",
+                                "row_1_col_0": "gpresult /r",
+                                "row_2_col_0": "eventvwr.msc (Ereignisanzeige)",
+                                "row_3_col_0": "secpol.msc (Lokale Sicherheitsrichtlinie)"
+                            }
+                        },
+                        solution: "• gpupdate /force: Sofortige GPO-Aktualisierung.\n• gpresult /r: GPO-Ergebnisbericht für Diagnose.\n• eventvwr: System- und Sicherheitsereignisprotokolle.\n• secpol: Lokale Richtlinienverwaltung."
+                    }
+                ]
+            },
+
+            // Aufgabe 3 (25 Pkt)
+            {
+                number: 3,
+                title: "3. Aufgabe: USV-Dimensionierung & Elektrische Netzqualität (Online-VFI)",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "20_3_a",
+                        label: "a) USV-Berechnung für CAD-Workstation (Scheinleistung & Batteriekapazität)",
+                        points: 8,
+                        type: "math-grid",
+                        gridConfig: { cols: 26, rows: 8 },
+                        stencil: "USV-AUSLEGUNG / CAD-WORKSTATION",
+                        text: "Eine Hochleistungs-Workstation mit zwei 32-Zoll Monitoren nimmt unter Volllast folgende Werte auf:\n- Aufgenommene Wirkleistung P = 650 Watt\n- Leistungsfaktor cos φ = 0,80\n- Wirkungsgrad der USV im Batteriebetrieb η = 82 %\n- Nennspannung des Batteriepakets U = 36 Volt (3x 12V AGM-Batterien in Reihe)\nBerechnen Sie im Rechengitter:\n1. Die erforderliche Mindest-Scheinleistung S der USV in Voltampere (VA).\n2. Die notwendige Batterieleistung P_batt in Watt.\n3. Den Entladestrom I_batt in Ampere.\n4. Die Mindestkapazität C des 36V-Akkupakets in Amperestunden (Ah) für 15 Minuten (0,25 h) Autonomiezeit.",
+                        solution: "1. Scheinleistung S:\nS = P / cos φ = 650 W / 0,80 = 812,5 VA.\n(Es muss mindestens eine 1.000 VA USV gewählt werden.)\n\n2. Batterieleistung P_batt:\nP_batt = P / η = 650 W / 0,82 = 792,68 Watt.\n\n3. Batteriestrom I_batt:\nI_batt = P_batt / U = 792,68 W / 36 V = 22,02 Ampere.\n\n4. Mindestkapazität C für 15 Minuten (t = 0,25 h):\nC = I_batt * t = 22,02 A * 0,25 h = 5,505 Ah ≈ 5,51 Ah.\nErgebnis: Das Akkupaket benötigt eine Nennkapazität von mindestens 5,5 Ah (z. B. 3x 12V / 7,2 Ah Standardakkus)."
+                    },
+                    {
+                        id: "20_3_b",
+                        label: "b) Technische Vorteile der Online-USV (VFI / Dauerwandler)",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "NETZQUALITÄT / VFI DOPPELWANDLER",
+                        text: "aa) Warum weist eine VFI-USV bauartbedingt eine Umschaltzeit von exakt 0,0 Millisekunden auf? (3 Punkte).\nab) Nennen Sie zwei typische Netzstörungen neben dem totalen Stromausfall, vor denen eine VFI-USV die CAD-Workstations zuverlässig schützt (3 Punkte).",
+                        solution: "aa) Umschaltzeit 0 ms:\nBei der VFI-Topologie (Dauerwandler) wird die Last permanent über den internen Wechselrichter mit erzeugter Sinusspannung versorgt. Fällt der Netzstrom aus, liefert der Gleichstrom-Zwischenkreis unterbrechungsfrei Energie aus dem Akku weiter. Es gibt keinen mechanischen Relaisschalter.\nab) Netzstörungen:\n1. Transiente Überspannungen und Spikes (z. B. durch Blitzeinschläge oder Schaltvorgänge großer Industriemaschinen).\n2. Oberwellen / Harmonische Verzerrungen (THD) und Frequenzschwankungen, die Schaltnetzteile überhitzen und abstürzen lassen."
+                    },
+                    {
+                        id: "20_3_c",
+                        label: "c) Einschaltströme & Leitungsschutzschalter (Charakteristik B vs. C)",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "ELEKTROTECHNIK / EINSCHALTSTROM & LEITUNGSSCHUTZ",
+                        text: "Mehrere Workstation-Netzteile lösen beim gleichzeitigen Einschalten an einer Steckdosenleiste den Leitungsschutzschalter aus.\naa) Erläutern Sie das Phänomen des 'Einschaltstroms' (Inrush Current) bei Schaltnetzteilen (3 Punkte).\nab) Vergleichen Sie Leitungsschutzschalter der Auslösecharakteristik B (Standard Haushalt/Büro) und Charakteristik C bezüglich ihres magnetischen Kurzschlussauslösers (3 Punkte).",
+                        solution: "aa) Einschaltstrom (Inrush Current):\nBeim Einschalten sind die internen Primär-Elektrolytkondensatoren der Schaltnetzteile völlig entladen und wirken für wenige Millisekunden wie ein Kurzschluss. Der Strom kann kurzzeitig das 10- bis 20-Fache des normalen Nennstroms erreichen.\nab) Charakteristik B vs. C:\n• Charakteristik B: Löst beim 3- bis 5-Fachen des Nennstroms unverzögert magnetisch aus. Für induktive oder kapazitive Lasten oft zu empfindlich.\n• Charakteristik C: Löst erst beim 5- bis 10-Fachen des Nennstroms magnetisch aus. Sie toleriert hohe Einschaltstromspitzen von Netzteilen und Motoren, ohne Fehlauslösungen zu verursachen."
+                    },
+                    {
+                        id: "20_3_d",
+                        label: "d) Abwärme & Dimensionierung der Raumklimatisierung",
+                        points: 5,
+                        type: "lines",
+                        linesCount: 4,
+                        stencil: "KLIMATISIERUNG / ABWÄRME AM ARBEITSPLATZ",
+                        text: "Im Konstruktionsbüro stehen 20 CAD-Workstations mit je 650 W Leistungsaufnahme unter Last.\nBerechnen Sie die gesamte thermische Verlustleistung in Kilowatt (kW) bei gleichzeitigem Volllastbetrieb und begründen Sie, warum 1 Watt elektrische Aufnahmeleistung näherungsweise 1 Watt thermischer Abwärme entspricht.",
+                        solution: "Berechnung & Begründung:\n• Elektrische Leistungsaufnahme gesamt: 20 Workstations * 650 W = 13.000 Watt = 13 kW.\n• Thermische Verlustleistung: 13 kW Kälteleistung erforderlich.\n• Begründung: Nach dem Ersten Hauptsatz der Thermodynamik (Energieerhaltungssatz) wird die gesamte von Computern aufgenommene elektrische Energie vollständig in Wärme umgewandelt (Rechner verrichten keine mechanische Arbeit nach außen, alle Lüfter, CPUs, GPUs und Netzteile dissipieren die Energie zu 100 % in Raumwärme)."
+                    }
+                ]
+            },
+
+            // Aufgabe 4 (25 Pkt)
+            {
+                number: 4,
+                title: "4. Aufgabe: IT-Leasing, Amortisation & Entsorgung nach ElektroG",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "20_4_a",
+                        label: "a) Wirtschaftlichkeitsvergleich: Barkauf vs. IT-Leasing",
+                        points: 8,
+                        type: "math-grid",
+                        gridConfig: { cols: 26, rows: 8 },
+                        stencil: "WIRTSCHAFTLICHKEIT / LEASING VS. KAUF",
+                        text: "Für 20 Workstations stehen zwei Finanzierungsoptionen zur Wahl:\nOption A (Barkauf): Anschaffungskosten 3.200,00 EUR netto pro Workstation. Lineare Abschreibung (AfA) über 3 Jahre (36 Monate).\nOption B (IT-Leasing): Monatliche Leasingrate 1.950,00 EUR netto für alle 20 Workstations zusammen, Vertragslaufzeit 36 Monate.\nBerechnen Sie im Rechengitter:\n1. Die gesamten Anschaffungskosten bei Barkauf (netto).\n2. Den jährlichen Abschreibungsbetrag (AfA) bei Barkauf.\n3. Die Gesamtkosten des Leasings über 36 Monate (netto).\n4. Den absoluten Mehrpreis des Leasings und erläutern Sie einen betriebswirtschaftlichen Vorteil von Leasing bezüglich Liquidität.",
+                        solution: "1. Anschaffungskosten Barkauf (netto):\n20 Workstations * 3.200,00 € = 64.000,00 € netto.\n\n2. Jährliche AfA-Abschreibung:\n64.000,00 € / 3 Jahre = 21.333,33 € pro Jahr.\n\n3. Gesamtkosten Leasing (netto):\n1.950,00 € / Monat * 36 Monate = 70.200,00 € netto.\n\n4. Mehrpreis & Liquiditätsvorteil:\n• Absoluter Mehrpreis: 70.200,00 € - 64.000,00 € = 6.200,00 €.\n• Vorteil: Schont die Liquidität des Unternehmens (kein hoher Mittelabfluss von 64.000 € zu Beginn). Leasingraten sind sofort in voller Höhe als Betriebsausgaben steuermindernd absetzbar (Pay-as-you-earn-Effekt)."
+                    },
+                    {
+                        id: "20_4_b",
+                        label: "b) Vertragsformen des IT-Leasings (Operate- vs. Finance-Leasing)",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "LEASINGFORMEN / OPERATE VS. FINANCE LEASING",
+                        text: "Unterscheiden Sie 'Operate-Leasing' und 'Finance-Leasing' hinsichtlich:\n1. Vertragslaufzeit im Verhältnis zur wirtschaftlichen Nutzungsdauer\n2. Zurechnung des wirtschaftlichen Eigentums und Bilanzierung\n3. Rückgabe oder Kaufoption nach Vertragsende.",
+                        solution: "Vergleich Operate- vs. Finance-Leasing:\n1. Laufzeit: Operate-Leasing hat typischerweise kurze Laufzeiten (deutlich kürzer als die betriebsgewöhnliche Nutzungsdauer) mit Kündigungsmöglichkeit; Finance-Leasing läuft über eine feste Grundmietzeit (oft 75-90 % der Nutzungsdauer) ohne vorzeitige Kündigungsmöglichkeit.\n2. Bilanzierung: Beim Operate-Leasing verbleibt das Wirtschaftsgut in der Bilanz des Leasinggebers (bilanzneutral beim Leasingnehmer); beim Finance-Leasing wird es häufig dem Leasingnehmer zugerechnet.\n3. Vertragsende: Operate-Leasing zielt auf Rückgabe und Technologie-Austausch (Refresh) ab; Finance-Leasing bietet meist eine Kaufoption zum Restwert oder automatischen Eigentumsübergang."
+                    },
+                    {
+                        id: "20_4_c",
+                        label: "c) Sichere Altdatenvernichtung nach DIN 66399 (SSDs & HDDs)",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "DATENVERNICHTUNG / DIN 66399 & CRYPTO ERASE",
+                        text: "Beim Austausch alter Workstations müssen ausgemusterte NVMe-SSDs datenschutzkonform nach DIN 66399 entsorgt werden.\naa) Warum reicht einfaches Formatieren oder Überschreiben mit Nullen bei Flash-Speichern (SSDs) im Gegensatz zu Magnetfestplatten nicht aus? (3 Punkte).\nab) Nennen Sie zwei anerkannte Methoden zur sicheren Datenvernichtung auf SSDs (3 Punkte).",
+                        solution: "aa) Besonderheit von SSDs (Flash-Speicher):\nSSDs nutzen Wear-Leveling-Algorithmen und besitzen Over-Provisioning-Bereiche (versteckte Reserveblöcke) sowie defekte reallozierte Blöcke. Ein logisches Überschreiben des Betriebssystems erreicht diese physischen Speicherzellen nicht. Datenreste verbleiben lesbar im Flash-NAND.\nab) Sichere Löschmethoden für SSDs:\n1. ATA/NVMe Secure Erase / Cryptographic Erase: Der interne Hardware-Verschlüsselungsschlüssel des SSD-Controllers wird unwiderruflich gelöscht/überschrieben (Sanitize Crypto Scramble), wodurch alle Daten in Millisekunden unlesbarer Chiffretext werden.\n2. Mechanische Zerstörung (DIN 66399 Stufe E-4 / E-5): Physisches Schreddern der Platine in Partikelgrößen unter 30 mm² oder thermisches Einschmelzen."
+                    },
+                    {
+                        id: "20_4_d",
+                        label: "d) Gesetzliche Entsorgungsvorschriften (ElektroG & WEEE)",
+                        points: 5,
+                        type: "table",
+                        stencil: "RECYCLING & ELEKTROG RECHT",
+                        text: "Ordnen Sie die gesetzlichen Umwelt- und Recyclingbegriffe zu.",
+                        tableConfig: {
+                            type: "matching",
+                            targetCol: 0,
+                            options: [
+                                "ElektroG / WEEE-Richtlinie",
+                                "RoHS-Richtlinie",
+                                "Batteriegesetz (BattG)",
+                                "Kreislaufwirtschaftsgesetz (KrWG)"
+                            ],
+                            headers: [
+                                "Gesetz / Richtlinie",
+                                "Gesetzlicher Regelungsinhalt",
+                                "Praxisanwendung bei IT-Arbeitsplätzen"
+                            ],
+                            rows: [
+                                [
+                                    "",
+                                    "Regelt die Rücknahme, Verwertung und schadstofffreie Entsorgung von Elektroaltgeräten",
+                                    "Kostenlose Rückgabe alter Monitore und PCs an den Hersteller/Händler (Mülltonnen-Symbol)"
+                                ],
+                                [
+                                    "",
+                                    "Beschränkung gefährlicher Stoffe (Blei, Quecksilber, Cadmium) in Elektrogeräten",
+                                    "Zertifizierung von bleifreien Lötverbindungen auf PC-Mainboards"
+                                ],
+                                [
+                                    "",
+                                    "Rücknahme- und Entsorgungspflicht für verbrauchte Batterien und Akkumulatoren",
+                                    "Fachgerechte Entsorgung von USV-Bleiakkus und Notebook-Lithium-Ionen-Akkus"
+                                ],
+                                [
+                                    "",
+                                    "Förderung der Kreislaufwirtschaft und 5-stufige Abfallhierarchie (Vermeidung vor Verwertung)",
+                                    "Refurbishment und Wiederaufbereitung noch funktionsfähiger Bürorechner"
+                                ]
+                            ],
+                            solutions: {
+                                "row_0_col_0": "ElektroG / WEEE-Richtlinie",
+                                "row_1_col_0": "RoHS-Richtlinie",
+                                "row_2_col_0": "Batteriegesetz (BattG)",
+                                "row_3_col_0": "Kreislaufwirtschaftsgesetz (KrWG)"
+                            }
+                        },
+                        solution: "• ElektroG/WEEE: Rücknahme und Recycling von IT-Geräten.\n• RoHS: Verbot giftiger Schwermetalle.\n• BattG: Getrennte Entsorgung von USV- und Notebook-Akkus.\n• KrWG: 5-stufige Abfallhierarchie zur Müllvermeidung."
+                    }
+                ]
+            }
+        ]
+    },
+
+    // ----------------------------------------------------------------------
+    // PRÜFUNG 21: IT-Arbeitsplatz IV – Automatisierter Rollout & First-Level-Service
+    // Thema: Einrichten eines IT-gestützten Arbeitsplatzes (PXE, Hygiene & Troubleshooting)
+    // ----------------------------------------------------------------------
+    {
+        id: "exam_21",
+        title: "Prüfung 21: IT-Arbeitsplatz IV – Rollout & Support (Zero-Touch, Hygiene & SLA)",
+        badge: "100 Punkte • 90 Min.",
+        subtitle: "Abschlussprüfung Teil 1 • IT-Berufe • St. Antonius Klinikverbund gGmbH",
+        ausgangssituation: "Sie sind im IT-Support des St. Antonius Klinikverbunds in Heilbronn tätig. Im Zuge eines Klinikneubaus werden 80 stationsgebundene Arbeitsplätze auf Pflege- und Funktionsstationen eingerichtet. Die Arbeitsplätze bestehen aus lüfterlosen Medical-PCs (IP65-Front, desinfektionsmittelbeständig), Barcode- und Chipkartenlesern sowie Touch-Monitoren. Die Bereitstellung erfolgt automatisiert via PXE/MDT. Sie sind für die Rollout-Automatisierung, Einhaltung medizinischer Normen, SLA-konformes Incident-Management und systematisches First-Level-Troubleshooting verantwortlich.",
+        tasks: [
+            // Aufgabe 1 (25 Pkt)
+            {
+                number: 1,
+                title: "1. Aufgabe: Automatisierter Zero-Touch-Rollout (PXE, WDS & Sysprep)",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "21_1_a",
+                        label: "a) Ablauf des PXE-Netzwerkboots & DHCP-Optionen",
+                        points: 7,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "NETZWERKBOOT / PXE PHASEN & DHCP-OPTIONEN",
+                        text: "Für den Massen-Rollout der 80 Rechner wird PXE-Boot (Preboot Execution Environment) genutzt.\naa) Beschreiben Sie die Schritte des PXE-Bootvorgangs vom Einschalten bis zum Start des Windows PE (4 Punkte).\nab) Nennen Sie die Funktionen der DHCP-Optionen 66 und 67 beim UEFI-Netzwerkboot (3 Punkte).",
+                        solution: "aa) Ablauf des PXE-Netzwerkboots:\n1. Einschalten & DHCP-Discover: Der PXE-ROM-Code der Netzwerkkarte sendet einen DHCP-Discover-Broadcast mit PXE-Client-Kennung.\n2. DHCP-Offer & Konfiguration: Der DHCP-Server antwortet mit einer IP-Adresse und liefert DHCP Option 66 (Boot-Server IP) und Option 67 (Boot-Dateipfad).\n3. TFTP-Download: Der Client kontaktiert den Boot-Server per TFTP und lädt den Network Bootstrap Program (NBP / bootmgfw.efi) in den Arbeitsspeicher.\n4. Start von Windows PE: Der Bootloader lädt das WinPE-WIM-Image herunter und startet die automatisierte MDT/WDS-Tasksequenz.\nab) DHCP-Optionen 66 und 67:\n• Option 66 (Next Server): IP-Adresse oder Hostname des TFTP/WDS-Bereitstellungsservers.\n• Option 67 (Bootfile Name): Relativer Pfad zur EFI-Bootdatei (z. B. 'boot\\x64\\wdsmgfw.efi')."
+                    },
+                    {
+                        id: "21_1_b",
+                        label: "b) Image-Generalisierung mit Sysprep (/generalize)",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "IMAGE-GENERALISIERUNG / SYSPREP /GENERALIZE",
+                        text: "Vor dem Erfassen (Capture) des Referenz-Images wird der Befehl 'sysprep /generalize /oobe /shutdown' ausgeführt.\naa) Welche systemspezifischen Daten werden durch den Parameter '/generalize' entfernt? (3 Punkte).\nab) Warum führt das Klonen eines Windows-Betriebssystems ohne Sysprep zu schweren Fehlfunktionen in einer Active-Directory-Domäne? (3 Punkte).",
+                        solution: "aa) Wirkung von Sysprep /generalize:\n• Entfernt die eindeutige Security Identifier (SID) der Windows-Installation.\n• Bereinigt systemspezifische Treiber und Hardware-Registrierungsschlüssel.\n• Setzt den Aktivierungs- und Lizenzierungsstatus zurück und löscht Ereignisprotokolle.\nab) Problem identischer SIDs im Active Directory:\nWerden Rechner ohne Generalisierung geklont, besitzen alle 80 Rechner dieselbe Maschinen-SID. Das Active Directory identifiziert Computerobjekte anhand ihrer SID. Identische SIDs führen zu Authentifizierungsfehlern, Zugriffskonflikten bei Dateifreigaben, fehlerhaften Gruppenrichtlinien und permanenten Domänenvertrauensbrüchen."
+                    },
+                    {
+                        id: "21_1_c",
+                        label: "c) Dateibasiertes WIM-Format vs. sektorbasiertes Klonen",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "IMAGE-FORMAT / WIM VS. KLONEN",
+                        text: "Vergleichen Sie das Windows Imaging Format (WIM) mit klassischem sektorbasiertem Klonen (z. B. Clonezilla/Ghost) anhand von drei technischen Vorteilen.",
+                        solution: "Vorteile des WIM-Formats gegenüber sektorbasiertem Klonen:\n1. Hardware-Unabhängigkeit (HAL-Unabhängigkeit): WIM ist ein dateibasiertes Image. Es kann auf beliebigen Festplattengrößen und Partitionslayouts wiederhergestellt werden, ohne an eine feste Sektorgeometrie gebunden zu sein.\n2. Single-Instance Storage (Deduplizierung): Enthält ein WIM-Archiv mehrere Windows-Editionen, werden identische Dateien physikalisch nur einmal im Archiv gespeichert, was massiv Speicherplatz spart.\n3. Offline-Servicing (DISM): Treiber, Windows-Updates und Sprachpakete können direkt in das Offline-WIM-Image injiziert werden, ohne das Betriebssystem booten zu müssen."
+                    },
+                    {
+                        id: "21_1_d",
+                        label: "d) Werkzeuge der Windows-Bereitstellung",
+                        points: 6,
+                        type: "table",
+                        stencil: "ROLLOUT-WERKZEUGE MATCHING",
+                        text: "Ordnen Sie die Rollout-Werkzeuge den Funktionen zu.",
+                        tableConfig: {
+                            type: "matching",
+                            targetCol: 0,
+                            options: [
+                                "MDT (Microsoft Deployment Toolkit)",
+                                "WDS (Windows Deployment Services)",
+                                "DISM.exe (Deployment Image Servicing)",
+                                "USMT (User State Migration Tool)"
+                            ],
+                            headers: [
+                                "Rollout-Werkzeug",
+                                "Hauptaufgabe im Bereitstellungsprozess",
+                                "Typischer Anwendungsfall"
+                            ],
+                            rows: [
+                                [
+                                    "",
+                                    "Ablaufsteuerung über Tasksequenzen (Treiberinjektion, Softwareinstallation, Domänenbeitritt)",
+                                    "Automatisierter Zero-Touch-Rollout der 80 Stations-PCs"
+                                ],
+                                [
+                                    "",
+                                    "Server-Rolle zur Bereitstellung des PXE-Netzwerkboot-Dienstes und TFTP-Downloads",
+                                    "Zentrales Verteilen von Boot-Images (WinPE) im Subnetz"
+                                ],
+                                [
+                                    "",
+                                    "Kommandozeilentool zur Bearbeitung von Offline-WIM-Dateien (Treiber, Updates)",
+                                    "Integration von Netzwerkkartentreibern in das Boot-Image"
+                                ],
+                                [
+                                    "",
+                                    "Skriptbasierte Migration von Benutzerprofilen, Dokumenten und Programmeinstellungen",
+                                    "Übernahme von Nutzerdaten beim Rechnertausch"
+                                ]
+                            ],
+                            solutions: {
+                                "row_0_col_0": "MDT (Microsoft Deployment Toolkit)",
+                                "row_1_col_0": "WDS (Windows Deployment Services)",
+                                "row_2_col_0": "DISM.exe (Deployment Image Servicing)",
+                                "row_3_col_0": "USMT (User State Migration Tool)"
+                            }
+                        },
+                        solution: "• MDT: Tasksequenzen für OS-Deployment.\n• WDS: PXE- und TFTP-Serverrolle.\n• DISM: Offline-WIM Imagebearbeitung.\n• USMT: Migration von Benutzerprofilen."
+                    }
+                ]
+            },
+
+            // Aufgabe 2 (25 Pkt)
+            {
+                number: 2,
+                title: "2. Aufgabe: Medizinische IT-Arbeitsplatzanforderungen & Patientenschutz",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "21_2_a",
+                        label: "a) Galvanische Trennung nach DIN EN 60601-1 (Netzwerkisolator)",
+                        points: 7,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "PATIENTENSCHUTZ / DIN EN 60601-1 NETZWERKISOLATOR",
+                        text: "Die Stationsrechner stehen teilweise in Patientenumgebung (Patientenumkreis 1,5 Meter).\naa) Warum muss die Ethernet-Netzwerkverbindung in der Patientenumgebung über einen medizinischen Netzwerkisolator galvanisch getrennt werden? (4 Punkte).\nab) Welche Mindestprüfspannung (dielektrische Festigkeit) verlangt DIN EN 60601-1 typischerweise für solche Isolatoren? (3 Punkte).",
+                        solution: "aa) Zweck des Netzwerkisolators (DIN EN 60601-1):\nÜber die Kupferverkabelung und den Schirm (GND) können gefährliche Ableitströme oder Potentialdifferenzen zwischen verschiedenen Gebäudeteilen und Etagenverschaltungen verschleppt werden. Berührt ein Patient oder Pfleger gleichzeitig den PC/das Netzwerkkabel und ein geerdetes medizinisches Gerät, kann ein lebensgefährlicher Strom durch das Herz fließen (Gefahr von Kammerflimmern). Der Isolator unterbricht die galvanische Verbindung vollständig.\nab) Prüfspannung:\nMedizinische Netzwerkisolatoren verlangen eine dielektrische Festigkeit von mindestens 4.000 Volt (4 kV AC) bzw. 5,6 kV DC zur Einhaltung von zwei Schutzmaßnahmen zum Patientenschutz (2 MOPP / Means of Patient Protection)."
+                    },
+                    {
+                        id: "21_2_b",
+                        label: "b) IP-Schutzarten (IP65) & Desinfektionsmittelbeständigkeit",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "IP-SCHUTZARTEN / IP65 & HYGIENE-DESINFEKTION",
+                        text: "Die Medical-PCs besitzen eine geschlossene Front nach Schutzart IP65 und sind lüfterlos gebaut.\naa) Erläutern Sie die Bedeutung der beiden Ziffern '6' und '5' der Schutzart IP65 nach DIN EN 60529 (3 Punkte).\nab) Warum sind herkömmliche Büro-PCs mit Lüftern auf Krankenhausstationen hygienisch unzulässig? (3 Punkte).",
+                        solution: "aa) Schutzart IP65 (DIN EN 60529):\n• Erste Ziffer 6: Vollständiger Schutz gegen Berührung und vollständiger Schutz gegen das Eindringen von Staub (staubdicht).\n• Zweite Ziffer 5: Schutz gegen Strahlwasser (Düse) aus beliebigem Winkel gegen das Gehäuse.\nab) Hygienische Unzulässigkeit von Lüftern:\nLüfter saugen Keime, Bakterien und Stäube an, verwirbeln diese in der Raumluft und blasen sie unkontrolliert aus. Zudem setzen sich Keime im Geräteinneren ab, wo sie nicht durch Wischdesinfektion abgetötet werden können. Lüfterlose PCs mit glatter, spaltfreier Front erlauben eine lückenlose Wischdesinfektion mit aggressiven Desinfektionsmitteln."
+                    },
+                    {
+                        id: "21_2_c",
+                        label: "c) Notstrom- und Netzhierarchie im Krankenhaus (AV, SV & ZSV)",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "STROMVERSORGUNG / AV, SV & ZSV IM KRANKENHAUS",
+                        text: "Krankenhäuser unterteilen das Stromnetz in AV (Allgemeine Versorgung), SV (Sicherheitsversorgung mit Dieselgenerator) und ZSV (Zusätzliche Sicherheitsversorgung / USV).\naa) Warum reicht das Umschalten auf die SV mit Dieselaggregat (Umschaltzeit bis zu 15 Sekunden) für IT-Arbeitsplätze und Patientendatenbanken nicht aus? (3 Punkte).\nab) Welche Stromart liefert das ZSV-Netz und wie wird es technisch realisiert? (3 Punkte).",
+                        solution: "aa) Notwendigkeit der ZSV (unterbrechungsfrei):\nDieselgeneratoren der SV benötigen 10 bis 15 Sekunden, um anzulaufen und sich mit dem Netz zu synchronisieren. In dieser stromlosen Zeit stürzen alle Computer, Switche und Server ab. Datenverluste bei laufender Dokumentation oder Beatmungsüberwachung wären lebensgefährlich.\nab) ZSV Realisierung:\nZSV liefert eine unterbrechungsfreie Stromversorgung (Umschaltzeit 0 ms). Sie wird durch zentrale batteriegestützte Online-USV-Anlagen realisiert, die den Stromausfall sofort überbrücken, bis der Notstromdiesel die Last stabil übernimmt."
+                    },
+                    {
+                        id: "21_2_d",
+                        label: "d) Zuordnung von IP-Schutzarten nach DIN EN 60529",
+                        points: 6,
+                        type: "table",
+                        stencil: "SCHUTZARTEN & NORMEN",
+                        text: "Ordnen Sie die IP-Schutzgrade den Schutzwirkungen zu.",
+                        tableConfig: {
+                            type: "matching",
+                            targetCol: 0,
+                            options: [
+                                "IP20",
+                                "IP54",
+                                "IP65",
+                                "IP68"
+                            ],
+                            headers: [
+                                "Schutzart",
+                                "Berührungs- & Fremdkörperschutz",
+                                "Wasserschutz / Einsatzort"
+                            ],
+                            rows: [
+                                [
+                                    "",
+                                    "Schutz gegen Fremdkörper >= 12,5 mm (z. B. Finger)",
+                                    "Kein Wasserschutz; Standard für trockene Büroräume"
+                                ],
+                                [
+                                    "",
+                                    "Staubgeschützt (staubgeschützte Menge)",
+                                    "Schutz gegen allseitiges Spritzwasser; Werkstattbereich"
+                                ],
+                                [
+                                    "",
+                                    "Vollständig staubdicht",
+                                    "Schutz gegen Strahlwasser; Klinik-Wischdesinfektion"
+                                ],
+                                [
+                                    "",
+                                    "Vollständig staubdicht",
+                                    "Schutz gegen dauerndes Untertauchen; Außenbereich/Sensoren"
+                                ]
+                            ],
+                            solutions: {
+                                "row_0_col_0": "IP20",
+                                "row_1_col_0": "IP54",
+                                "row_2_col_0": "IP65",
+                                "row_3_col_0": "IP68"
+                            }
+                        },
+                        solution: "• IP20: Standard-Büro (Fingergeschützt, kein Wasser).\n• IP54: Spritzwassergeschützt.\n• IP65: Staubdicht und strahlwassergeschützt (Medical-PC).\n• IP68: Dauerhaftes Untertauchen im Wasser."
+                    }
+                ]
+            },
+
+            // Aufgabe 3 (25 Pkt)
+            {
+                number: 3,
+                title: "3. Aufgabe: IT-Service-Management nach ITIL & SLA-Kennzahlen",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "21_3_a",
+                        label: "a) ITIL 4 Service-Management: Incident vs. Problem Management",
+                        points: 8,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "ITIL 4 / INCIDENT VS. PROBLEM MANAGEMENT",
+                        text: "aa) Unterscheiden Sie die ITIL-Begriffe 'Incident' (Störung) und 'Problem' anhand ihrer Zielsetzung (4 Punkte).\nab) Erläutern Sie die Priorisierungsmatrix eines IT-Service-Tickets anhand der Kriterien 'Auswirkung' (Impact) und 'Dringlichkeit' (Urgency) (4 Punkte).",
+                        solution: "aa) Incident vs. Problem:\n• Incident (Störung): Eine ungeplante Unterbrechung oder Qualitätsminderung eines IT-Services. Ziel des Incident Managements ist die schnellstmögliche Wiederherstellung des Normalbetriebs (z. B. durch Workaround oder Geräteaustausch).\n• Problem: Die zugrunde liegende, unbekannte Ursache eines oder mehrerer Incidents. Ziel des Problem Managements ist die Identifikation der Ursache (Root Cause Analysis) und die dauerhafte Fehlerbeseitigung, um Wiederholungen zu verhindern.\nab) Priorisierungsmatrix:\nDie Priorität ergibt sich aus der Verknüpfung zweier Dimensionen:\n• Auswirkung (Impact): Wie stark ist das Geschäft betroffen (z. B. betrifft es 1 Rechner oder die gesamte Notaufnahme)?\n• Dringlichkeit (Urgency): Wie schnell verlangt die Störung eine Lösung (z. B. akute Lebensgefahr vs. administrative Routineaufgabe)?\nHohe Auswirkung + Hohe Dringlichkeit = Kritische Priorität 1 (P1-Ticket mit sofortiger Eskalation)."
+                    },
+                    {
+                        id: "21_3_b",
+                        label: "b) Zuverlässigkeits- & Verfügbarkeitsberechnung (MTBF, MTTR & SLA)",
+                        points: 6,
+                        type: "math-grid",
+                        gridConfig: { cols: 26, rows: 8 },
+                        stencil: "ZUVERLÄSSIGKEIT / MTBF & MTTR BERECHNUNG",
+                        text: "Ein kritischer Stations-PC läuft im Dauerbetrieb (30 Tage im Monat à 24 Stunden = 720 Stunden Gesamtzeit).\nIm letzten Monat traten 3 Störungen auf mit folgenden Ausfallzeiten:\n- Störung 1: 45 Minuten\n- Störung 2: 30 Minuten\n- Störung 3: 105 Minuten\nBerechnen Sie im Rechengitter:\n1. Die gesamte Ausfallzeit (Downtime) in Stunden.\n2. Die tatsächliche Betriebszeit (Uptime) in Stunden.\n3. Die mittlere Reparaturzeit MTTR (Mean Time to Repair) in Stunden.\n4. Die mittlere Zeit zwischen zwei Ausfällen MTBF (Mean Time Between Failures) in Stunden.\n5. Die prozentuale Verfügbarkeit des Arbeitsplatzes auf 3 Nachkommastellen.",
+                        solution: "1. Gesamte Ausfallzeit (Downtime):\n45 Min + 30 Min + 105 Min = 180 Minuten = 3,0 Stunden.\n\n2. Tatsächliche Betriebszeit (Uptime):\n720 Stunden - 3 Stunden = 717,0 Stunden.\n\n3. MTTR (Mean Time to Repair):\nMTTR = Gesamtausfallzeit / Anzahl der Fehler = 3,0 h / 3 = 1,0 Stunde (60 Minuten).\n\n4. MTBF (Mean Time Between Failures):\nMTBF = Betriebszeit / Anzahl der Fehler = 717,0 h / 3 = 239,0 Stunden.\n\n5. Prozentuale Verfügbarkeit A:\nA = (Uptime / Gesamtzeit) * 100 % = (717 / 720) * 100 % = 99,583 %."
+                    },
+                    {
+                        id: "21_3_c",
+                        label: "c) Service Level Agreement (SLA), OLA und Underpinning Contract",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "SERVICE LEVEL AGREEMENTS / SLA, OLA & UC",
+                        text: "aa) Unterscheiden Sie im SLA die Begriffe 'Reaktionszeit' und 'Wiederherstellungszeit' (Resolution Time) (3 Punkte).\nab) Erläutern Sie den Unterschied zwischen einem internen OLA (Operational Level Agreement) und einem externen Underpinning Contract (UC) (3 Punkte).",
+                        solution: "aa) Reaktionszeit vs. Wiederherstellungszeit:\n• Reaktionszeit (Response Time): Die vertraglich garantierte Zeitspanne zwischen dem Eingang des Tickets beim Helpdesk und der ersten qualifizierten Bearbeitung durch einen Techniker.\n• Wiederherstellungszeit (Resolution Time): Die maximale Zeitspanne ab Ticketeingang, bis der IT-Service wieder vollständig funktionstüchtig zur Verfügung steht.\nab) OLA vs. Underpinning Contract:\n• OLA (Operational Level Agreement): Vereinbarung zwischen der IT-Organisation und einer internen Fachabteilung (z. B. zwischen First-Level-Helpdesk und internem Netzwerk-Team).\n• Underpinning Contract (UC): Rechtlich bindender Vertrag zwischen der IT-Organisation und einem externen Drittdienstleister (z. B. Hardware-Wartungsvertrag mit dem PC-Hersteller)."
+                    },
+                    {
+                        id: "21_3_d",
+                        label: "d) IT-Support-Ebenen & Change Management Zuordnung",
+                        points: 5,
+                        type: "table",
+                        stencil: "SUPPORT-LEVEL MATCHING",
+                        text: "Ordnen Sie die Rollen den Zuständigkeiten im IT-Betrieb zu.",
+                        tableConfig: {
+                            type: "matching",
+                            targetCol: 0,
+                            options: [
+                                "First-Level-Support (Service Desk)",
+                                "Second-Level-Support",
+                                "Third-Level-Support (Hersteller / R&D)",
+                                "Change Advisory Board (CAB)"
+                            ],
+                            headers: [
+                                "Support-Ebene / Gremium",
+                                "Kernkompetenz & Aufgabenbereich",
+                                "Typisches Szenario"
+                            ],
+                            rows: [
+                                [
+                                    "",
+                                    "Zentraler Ansprechpartner (SPOC), Aufnahme, Klassifizierung und Lösung bekannter Standardfehler",
+                                    "Passwort-Reset oder Tausch eines defekten Barcodescanners"
+                                ],
+                                [
+                                    "",
+                                    "Tiefere technische Fehleranalyse vor Ort, Konfiguration von Switchen und Betriebssystemen",
+                                    "Diagnose von APIPA-Netzwerkfehlern oder defekten Treiber-Paketen"
+                                ],
+                                [
+                                    "",
+                                    "Spezialistenunterstützung bei Firmware-Bugs, Quellcodefehlern und komplexen Hardwaredefekten",
+                                    "Hersteller analysiert Kernel-Crash-Dump des Medical-PC-Mainboards"
+                                ],
+                                [
+                                    "",
+                                    "Gremium zur Bewertung von Risiken, Auswirkungen und Freigabe geplanter IT-Änderungen",
+                                    "Entscheidung über das unternehmensweite Rollout eines neuen Windows-Builds"
+                                ]
+                            ],
+                            solutions: {
+                                "row_0_col_0": "First-Level-Support (Service Desk)",
+                                "row_1_col_0": "Second-Level-Support",
+                                "row_2_col_0": "Third-Level-Support (Hersteller / R&D)",
+                                "row_3_col_0": "Change Advisory Board (CAB)"
+                            }
+                        },
+                        solution: "• 1st Level: Single Point of Contact für Standardstörungen.\n• 2nd Level: Erweiterte Hard- und Softwareanalyse vor Ort.\n• 3rd Level: Hersteller-Spezialisten bei Systemfehlern.\n• CAB: Risikoanalyse und Freigabe von IT-Changes."
+                    }
+                ]
+            },
+
+            // Aufgabe 4 (25 Pkt)
+            {
+                number: 4,
+                title: "4. Aufgabe: Systematische Fehlerdiagnose & Netzwerk-Troubleshooting",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "21_4_a",
+                        label: "a) Systematischer Bottom-Up-Diagnosepfad nach OSI-Schichtenmodell",
+                        points: 8,
+                        type: "lines",
+                        linesCount: 6,
+                        stencil: "TROUBLESHOOTING / BOTTOM-UP OSI DIAGNOSEPFAD",
+                        text: "Ein Rechner auf Station 3 hat keine Netzwerk- und KIS-Verbindung (Krankenhaus-Informationssystem).\nBeschreiben Sie den systematischen 'Bottom-Up'-Diagnosepfad über die Schichten 1 bis 7 anhand von 4 konkreten Prüfschritten und Befehlen.",
+                        solution: "Bottom-Up-Diagnosepfad:\n1. Schicht 1 (Physical Layer): Prüfung der physikalischen Verbindung. Leuchten die Link-LEDs an der Netzwerkkarte und der Datendose? Prüfung des Patchkabels auf Knicke oder abgebrochene Rastnase.\n2. Schicht 2 (Data Link Layer): Switchport-Status überprüfen. Zeigt der Port 'Link Up' oder wurde er durch Port-Security in 'err-disable' versetzt?\n3. Schicht 3 (Network Layer): 'ipconfig /all' ausführen. Hat der Rechner eine gültige IP oder eine APIPA-Adresse (169.254.x.x)? Anschließend stufenweiser Ping-Test:\n   • ping 127.0.0.1 (Loopback, prüft lokalen TCP/IP-Stack)\n   • ping <eigene IP> (prüft Netzwerkadapter)\n   • ping <Standard-Gateway> (prüft Verbindung zum lokalen Router)\n4. Schicht 7 (Application Layer / DNS): 'nslookup <kis-server.intern>' zur Überprüfung der DNS-Namensauflösung und Test des Web-/KIS-Dienstes."
+                    },
+                    {
+                        id: "21_4_b",
+                        label: "b) APIPA-Fehleranalyse (169.254.88.19 mit Subnetzmaske 255.255.0.0)",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "APIPA-FEHLER / 169.254.X.X URSACHEN",
+                        text: "Der Befehl 'ipconfig' liefert die IP-Adresse 169.254.88.19 mit der Subnetzmaske 255.255.0.0.\naa) Erläutern Sie das Zustandekommen einer APIPA-Adresse (Automatic Private IP Addressing) (3 Punkte).\nab) Nennen Sie drei konkrete Ursachen in der Infrastruktur, warum der Rechner diese Adresse zugewiesen hat (3 Punkte).",
+                        solution: "aa) Zustandekommen von APIPA:\nDer Windows-Client ist auf dynamische IP-Konfiguration per DHCP eingestellt. Er sendet beim Start mehrere DHCP-Discover-Broadcasts aus. Erhält er innerhalb des Timeouts keine Antwort (DHCP-Offer), weist sich das Betriebssystem selbstständig eine pseudozufällige IPv4-Adresse aus dem IANA-Reservierungsbereich 169.254.0.0/16 zu.\nab) Drei typische Ursachen:\n1. Unterbrochene physische Verbindung: Defektes Patchkabel (Rastnase abgebrochen), lockerer Stecker oder defekte Datendose.\n2. VLAN- oder Switchport-Problem: Der Switchport ist dem falschen VLAN zugewiesen, auf dem kein DHCP-Relay-Agent eingerichtet ist, oder der Port ist administrativ deaktiviert.\n3. DHCP-Server ausgefallen oder Scope voll: Der zentrale DHCP-Serverdienst läuft nicht oder alle IP-Adressen im DHCP-Pool sind restlos erschöpft."
+                    },
+                    {
+                        id: "21_4_c",
+                        label: "c) Switchport-Sperre durch Port-Security (Status err-disable)",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "SWITCHPORT-SICHERHEIT / ERR-DISABLE REAKTIVIERUNG",
+                        text: "Nachdem ein Pfleger ein privates Notebook an die Wanddose gesteckt hat, erlischt der Link. Der Switchport meldet im Log: 'PM-4-ERR_DISABLE: psecure-violation error detected on Gi1/0/12, putting Gi1/0/12 in err-disable state'.\naa) Erläutern Sie, warum der Switchport in den Zustand 'err-disable' gewechselt ist (3 Punkte).\nab) Wie reaktiviert der Administrator den Port über die Switch-Konsole fachgerecht? (3 Punkte).",
+                        solution: "aa) Ursache von err-disable:\nAuf dem Switchport ist Port-Security mit dem Violation-Modus 'Shutdown' (Standard) aktiviert. Der Switch erlaubt nur autorisierte MAC-Adressen (z. B. den Medical-PC). Sobald ein fremdes Gerät mit unbekannter MAC-Adresse Pakete sendet, löst die Sicherheitsverletzung aus: Der Switch schaltet den physischen Port zum Schutz vor unbefugtem Netzwerkzugriff sofort ab und sperrt ihn dauerhaft.\nab) Reaktivierung an der Konsole:\n1. Unerlaubtes Gerät abstecken und autorisierten PC wieder anschließen.\n2. Auf dem Switchport die Befehle ausführen:\n   Switch(config)# interface GigabitEthernet 1/0/12\n   Switch(config-if)# shutdown\n   Switch(config-if)# no shutdown\n(Durch das manuelle 'shutdown' gefolgt von 'no shutdown' wird der Port aus dem Fehlerzustand zurückgesetzt und reinitialisiert)."
+                    },
+                    {
+                        id: "21_4_d",
+                        label: "d) Zuordnung von Windows-Netzwerk-Diagnosebefehlen",
+                        points: 5,
+                        type: "table",
+                        stencil: "DIAGNOSE-BEFEHLE WINDOWS",
+                        text: "Ordnen Sie die Diagnosebefehle ihren Analysezielen zu.",
+                        tableConfig: {
+                            type: "matching",
+                            targetCol: 0,
+                            options: [
+                                "ipconfig /release && ipconfig /renew",
+                                "arp -a",
+                                "netstat -ano",
+                                "pathping <Ziel-IP>"
+                            ],
+                            headers: [
+                                "Kommandozeilen-Befehl",
+                                "Wirkungsweise im Betriebssystem",
+                                "Diagnosezweck"
+                            ],
+                            rows: [
+                                [
+                                    "",
+                                    "Gibt die aktuelle DHCP-Lease frei und fordert eine neue IP-Konfiguration vom Server an",
+                                    "Beheben von IP-Konflikten oder fehlerhaften DHCP-Optionen"
+                                ],
+                                [
+                                    "",
+                                    "Zeigt die Zuordnungstabelle von IPv4-Adressen zu physischen MAC-Adressen an",
+                                    "Überprüfung, ob das Standard-Gateway auf Layer 2 erreichbar ist"
+                                ],
+                                [
+                                    "",
+                                    "Listet alle aktiven TCP/UDP-Verbindungen, offenen Listening-Ports und Prozess-IDs auf",
+                                    "Erkennen von Portkonflikten oder unbefugten Netzwerkverbindungen"
+                                ],
+                                [
+                                    "",
+                                    "Kombiniert Ping und Traceroute mit mehrminütiger Messung von Paketverlusten je Router-Hop",
+                                    "Exaktes Lokalisieren von Leitungsüberlastungen oder Packet Loss im WAN"
+                                ]
+                            ],
+                            solutions: {
+                                "row_0_col_0": "ipconfig /release && ipconfig /renew",
+                                "row_1_col_0": "arp -a",
+                                "row_2_col_0": "netstat -ano",
+                                "row_3_col_0": "pathping <Ziel-IP>"
+                            }
+                        },
+                        solution: "• ipconfig /renew: Frische DHCP-Adresse anfordern.\n• arp -a: Auflösung von IP zu MAC prüfen.\n• netstat -ano: Offene Ports und Verbindungen prüfen.\n• pathping: Hop-genaue Messung von Latenz und Paketverlust."
+                    }
+                ]
+            }
+        ]
+    }
+
 ];
 
 // Helper to get all exam sets
