@@ -3650,7 +3650,12 @@
             name: "Global Unicast (GUA)",
             alts: ["GUA", "GLOBAL UNICAST", "GLOBALUNICAST", "GLOBAL", "ÖFFENTLICH", "OEFFENTLICH", "GLOBAL UNICAST ADDRESS"],
             hint: "Beginnt mit '2001' (2... oder 3...) -> Global Unicast (GUA).",
-            expl: "Adressen, die mit <strong>2</strong> oder <strong>3</strong> beginnen (Präfix <strong>2000::/3</strong>), sind <strong>Global Unicast Adressen (GUA)</strong> für das öffentliche Internet."
+            expl: "Adressen, die mit <strong>2</strong> oder <strong>3</strong> beginnen (Präfix <strong>2000::/3</strong>), sind <strong>Global Unicast Adressen (GUA)</strong> für das öffentliche Internet.",
+            wasWarumWofuer: {
+              was: "Global Unicast Address (GUA) – weltweit eindeutige, öffentlich geroutete IPv6-Adresse.",
+              warum: "Beginnt mit '2001' (liegt im offiziellen IANA-Bereich 2000::/3, binär 001...).",
+              wofuer: "Für weltweite, direkte Ende-zu-Ende-Kommunikation im öffentlichen Internet (entspricht öffentlichen IPv4-Adressen, aber ohne NAT)."
+            }
           },
           {
             ip: "2a00:1450:4001:828::200e",
@@ -3660,7 +3665,12 @@
             name: "Global Unicast (GUA)",
             alts: ["GUA", "GLOBAL UNICAST", "GLOBALUNICAST", "GLOBAL", "ÖFFENTLICH", "OEFFENTLICH"],
             hint: "Beginnt mit '2a00' (2... oder 3...) -> Global Unicast (GUA).",
-            expl: "Beginnt mit <strong>2</strong> -> Gehört zum Präfixbereich <strong>2000::/3</strong> (Global Unicast / öffentlich im Internet geroutet)."
+            expl: "Beginnt mit <strong>2</strong> -> Gehört zum Präfixbereich <strong>2000::/3</strong> (Global Unicast / öffentlich im Internet geroutet).",
+            wasWarumWofuer: {
+              was: "Global Unicast Address (GUA) – öffentliche Serveradresse (z. B. Google Web-/DNS-Dienste).",
+              warum: "Beginnt mit '2a00' (Hex '2' am Anfang = Teil des Präfixes 2000::/3).",
+              wofuer: "Öffentliche Erreichbarkeit von Webservern, Cloud-Instanzen und Internetdiensten."
+            }
           },
           {
             ip: "fd12:3456:789a:1::42",
@@ -3670,7 +3680,12 @@
             name: "Unique Local (ULA)",
             alts: ["ULA", "UNIQUE LOCAL", "UNIQUELOCAL", "UNIQUE LOCAL ADDRESS", "PRIVAT", "FC00::/7", "FD00::/8"],
             hint: "Beginnt mit 'fd' (fc00::/7) -> Unique Local Address (ULA) für private Netze.",
-            expl: "Adressen mit <strong>fd</strong> am Anfang gehören zu <strong>fc00::/7</strong> und sind <strong>Unique Local Adressen (ULA)</strong>. Sie entsprechen den privaten IPv4-Adressen nach RFC 1918."
+            expl: "Adressen mit <strong>fd</strong> am Anfang gehören zu <strong>fc00::/7</strong> und sind <strong>Unique Local Adressen (ULA)</strong>. Sie entsprechen den privaten IPv4-Adressen nach RFC 1918.",
+            wasWarumWofuer: {
+              was: "Unique Local Address (ULA) – private, firmeninterne IPv6-Adresse.",
+              warum: "Beginnt mit 'fd' (offizielles RFC 4193 Präfix fc00::/7 mit gesetztem Local-Bit = fd00::/8).",
+              wofuer: "Für interne Firmennetzwerke und LANs (entspricht privaten IPv4-Adressen wie 192.168.x.x oder 10.x.x.x), wird im weltweiten Internet nicht geroutet."
+            }
           },
           {
             ip: "fd00:abcd:1234::1",
@@ -3680,7 +3695,12 @@
             name: "Unique Local (ULA)",
             alts: ["ULA", "UNIQUE LOCAL", "UNIQUELOCAL", "PRIVAT", "FC00::/7"],
             hint: "Beginnt mit 'fd' -> Unique Local Address (ULA).",
-            expl: "Beginnt mit <strong>fd</strong> -> <strong>Unique Local Address (ULA)</strong>, nur im lokalen Unternehmensnetz routingfähig."
+            expl: "Beginnt mit <strong>fd</strong> -> <strong>Unique Local Address (ULA)</strong>, nur im lokalen Unternehmensnetz routingfähig.",
+            wasWarumWofuer: {
+              was: "Unique Local Address (ULA) – private Standort- und Gateway-Adresse.",
+              warum: "Beginnt mit 'fd' -> privater ULA-Präfixbereich.",
+              wofuer: "Standortvernetzung und Zugriff auf firmeninterne Datenbanken/Server ohne Internet-Exposition."
+            }
           },
           {
             ip: "fc00::5",
@@ -3690,7 +3710,12 @@
             name: "Unique Local (ULA)",
             alts: ["ULA", "UNIQUE LOCAL", "UNIQUELOCAL", "PRIVAT"],
             hint: "Beginnt mit 'fc' -> Unique Local Address (ULA, fc00::/7).",
-            expl: "Gehört zu <strong>fc00::/7</strong> -> <strong>Unique Local Address (ULA)</strong>."
+            expl: "Gehört zu <strong>fc00::/7</strong> -> <strong>Unique Local Address (ULA)</strong>.",
+            wasWarumWofuer: {
+              was: "Unique Local Address (ULA) – Basis-Präfix nach RFC 4193.",
+              warum: "Präfix fc00::/7 reserviert 1/128 des gesamten IPv6-Adressraums für private Zwecke.",
+              wofuer: "Geschlossene Test- und Labornetzwerke sowie isolierte Industrieanlagen."
+            }
           },
           {
             ip: "fe80::1ff:fe00:3a60",
@@ -3700,7 +3725,12 @@
             name: "Link-Local (LLA)",
             alts: ["LINK-LOCAL", "LINKLOCAL", "LLA", "LINK LOCAL", "LOKAL", "LINK-LOKAL", "LINK LOKAL", "FE80", "FE80::/10"],
             hint: "Beginnt mit 'fe80' -> Link-Local Address (fe80::/10).",
-            expl: "Beginnt mit <strong>fe80</strong> -> <strong>Link-Local-Adresse (LLA)</strong>. Gilt strikt nur auf dem lokalen Link und wird von Routern NIEMALS weitergeleitet."
+            expl: "Beginnt mit <strong>fe80</strong> -> <strong>Link-Local-Adresse (LLA)</strong>. Gilt strikt nur auf dem lokalen Link und wird von Routern NIEMALS weitergeleitet.",
+            wasWarumWofuer: {
+              was: "Link-Local Address (LLA) – verbindungslokale Adresse, existiert automatisch auf jedem IPv6-Interface.",
+              warum: "Beginnt ausnahmslos mit 'fe80::/10' (Bereich fe80:: bis febf::).",
+              wofuer: "Kommunikation ausschließlich auf demselben Kabel/Switch (wird von Routern niemals weitergeleitet!). Dient als Standard-Gateway und für Neighbor Discovery (NDP)."
+            }
           },
           {
             ip: "fe80::20c:29ff:fe4b:8c91",
@@ -3710,7 +3740,12 @@
             name: "Link-Local (LLA)",
             alts: ["LINK-LOCAL", "LINKLOCAL", "LLA", "LINK LOCAL", "LOKAL", "LINK-LOKAL", "FE80"],
             hint: "Beginnt mit 'fe80' -> Link-Local.",
-            expl: "Beginnt mit <strong>fe80</strong> -> <strong>Link-Local-Adresse</strong>. Automatisch generiert (z. B. via EUI-64 mit FFFE in der Mitte)."
+            expl: "Beginnt mit <strong>fe80</strong> -> <strong>Link-Local-Adresse</strong>. Automatisch generiert (z. B. via EUI-64 mit FFFE in der Mitte).",
+            wasWarumWofuer: {
+              was: "Link-Local Address (LLA) per EUI-64 – automatisch aus der MAC-Adresse gebildet (Erkennbar am 'ff:fe' in der Interface-ID).",
+              warum: "Beginnt mit 'fe80' -> fe80::/10.",
+              wofuer: "Automatische Erstkonfiguration, Router-Suche (RS/RA) und Adressierung benachbarter Hosts."
+            }
           },
           {
             ip: "ff02::1",
@@ -3718,9 +3753,14 @@
             prefix: "ff00::/8",
             type: "Multicast",
             name: "Multicast (All-Nodes)",
-            alts: ["MULTICAST", "MC", "MULTI-CAST", "ALL NODES", "FF00::/8"],
+            alts: ["MULTICAST", "MC", "MULTI-CAST", "ALL NODES", "FF00::/8", "ALL-NODES"],
             hint: "Beginnt mit 'ff' -> Multicast-Adresse.",
-            expl: "Beginnt mit <strong>ff</strong> -> <strong>Multicast-Adresse</strong> (1:n). <code>ff02::1</code> adressiert alle Knoten im Subnetz."
+            expl: "Beginnt mit <strong>ff</strong> -> <strong>Multicast-Adresse</strong> (1:n). <code>ff02::1</code> adressiert alle Knoten im Subnetz.",
+            wasWarumWofuer: {
+              was: "All-Nodes Multicast-Adresse (Link-Local Scope) – adressiert alle IPv6-Knoten im lokalen Subnetz.",
+              warum: "Beginnt mit 'ff' (ff00::/8 steht für Multicast). '02' ist der Link-Local Scope (nur lokales Segment), '::1' steht für alle Knoten.",
+              wofuer: "Ersetzt den alten IPv4-Broadcast (255.255.255.255)! Erreicht alle aktiven IPv6-Geräte im lokalen Netz gleichzeitig (z. B. für Router Advertisements vom Router an alle Clients)."
+            }
           },
           {
             ip: "ff02::2",
@@ -3728,9 +3768,14 @@
             prefix: "ff00::/8",
             type: "Multicast",
             name: "Multicast (All-Routers)",
-            alts: ["MULTICAST", "MC", "MULTI-CAST", "ALL ROUTERS", "FF00::/8"],
+            alts: ["MULTICAST", "MC", "MULTI-CAST", "ALL ROUTERS", "FF00::/8", "ALL-ROUTERS"],
             hint: "Beginnt mit 'ff' -> Multicast-Adresse an alle Router.",
-            expl: "Beginnt mit <strong>ff</strong> -> <strong>Multicast</strong>. <code>ff02::2</code> erreicht alle lokalen IPv6-Router."
+            expl: "Beginnt mit <strong>ff</strong> -> <strong>Multicast</strong>. <code>ff02::2</code> erreicht alle lokalen IPv6-Router.",
+            wasWarumWofuer: {
+              was: "All-Routers Multicast-Adresse (Link-Local Scope) – adressiert alle IPv6-Router im lokalen Subnetz.",
+              warum: "Beginnt mit 'ff' -> Multicast. '::2' ist die reservierte Gruppe aller Router.",
+              wofuer: "Clients senden Router Solicitations (RS, ICMPv6 Typ 133) an ff02::2, um sofort von allen Routern das /64-Netzpräfix für SLAAC abzurufen."
+            }
           },
           {
             ip: "::1",
@@ -3740,7 +3785,12 @@
             name: "Loopback (Localhost)",
             alts: ["LOOPBACK", "LOCALHOST", "LOCAL HOST", "LOOPBACK-ADRESSE", "::1/128", "127.0.0.1"],
             hint: "::1 ist die Loopback-Adresse des lokalen Hosts.",
-            expl: "<strong>::1</strong> (vollständig 0000:...:0001) ist die <strong>Loopback-Adresse</strong> zur internen Stack-Prüfung."
+            expl: "<strong>::1</strong> (vollständig 0000:...:0001) ist die <strong>Loopback-Adresse</strong> zur internen Stack-Prüfung.",
+            wasWarumWofuer: {
+              was: "Loopback-Adresse (entspricht vollständig 0000:0000:0000:0000:0000:0000:0000:0001 bzw. ::1/128).",
+              warum: "Fest reservierte Spezialadresse nach RFC 4291.",
+              wofuer: "Interner Selbsttest des lokalen TCP/IP-Netzwerk-Stacks (Localhost). Testet, ob Netzwerkkarte und Treiber intern reagieren (entspricht IPv4 127.0.0.1)."
+            }
           }
         ];
         const sc = scenarios[Math.floor(Math.random() * scenarios.length)];
@@ -3754,6 +3804,7 @@
           expected: sc.type,
           altExpected: sc.alts,
           hint: sc.hint,
+          wasWarumWofuer: sc.wasWarumWofuer,
           explanation: `Richtig! ${sc.expl}`
         };
       },
@@ -4310,6 +4361,16 @@
       document.getElementById('mini-next-container').classList.add('hidden');
     }
 
+    function formatWasWarumWofuer(www) {
+      if (!www) return '';
+      return `<div class="mt-2.5 text-left bg-white/95 p-3 rounded-xl border border-slate-200 text-xs text-slate-800 space-y-1.5 shadow-xs">
+        <div class="font-bold text-slate-500 uppercase tracking-wider text-[10px]">💡 IHK-Musterlösung &amp; Merksatz:</div>
+        <div class="flex items-start gap-1.5"><span class="px-1.5 py-0.5 rounded bg-sky-100 text-sky-800 font-bold text-[10px] shrink-0">📌 WAS</span> <span>${www.was}</span></div>
+        <div class="flex items-start gap-1.5"><span class="px-1.5 py-0.5 rounded bg-amber-100 text-amber-800 font-bold text-[10px] shrink-0">🔍 WARUM</span> <span>${www.warum}</span></div>
+        <div class="flex items-start gap-1.5"><span class="px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold text-[10px] shrink-0">🎯 WOFÜR</span> <span>${www.wofuer}</span></div>
+      </div>`;
+    }
+
     function checkMiniTask() {
       const input = document.getElementById('mini-input');
       const rawUser = input.value.trim();
@@ -4336,7 +4397,8 @@
           score.correct++;
           score.streak++;
           updateScoreUI();
-          showMiniFeedback('🎉 Hervorragend! Das ist absolut richtig!', currentTask.explanation, 'success', true);
+          const detail = (currentTask.explanation || '') + formatWasWarumWofuer(currentTask.wasWarumWofuer);
+          showMiniFeedback('🎉 Hervorragend! Das ist absolut richtig!', detail, 'success', true);
           if (feedbackRetryBtn) feedbackRetryBtn.classList.add('hidden');
           if (bottomRetryBtn) bottomRetryBtn.classList.add('hidden');
           if (bottomNextBtn) bottomNextBtn.className = 'px-7 py-3 rounded-xl bg-emerald-600 text-white font-bold text-base hover:bg-emerald-700 transition-all flex items-center gap-2 shadow-sm';
@@ -4346,9 +4408,10 @@
           score.wrong++;
           score.streak = 0;
           updateScoreUI();
+          const errDetail = `Erwartet: <strong>${currentTask.expected}</strong> (${currentTask.unit}).<br><span class="inline-block mt-1">Lösungsweg: <code class="bg-white/90 px-2 py-0.5 rounded border border-rose-200 font-bold">${currentTask.hint}</code></span>` + formatWasWarumWofuer(currentTask.wasWarumWofuer);
           showMiniFeedback(
             '❌ Leider nicht ganz richtig.',
-            `Erwartet: <strong>${currentTask.expected}</strong> (${currentTask.unit}).<br><span class="inline-block mt-1">Lösungsweg: <code class="bg-white/90 px-2 py-0.5 rounded border border-rose-200 font-bold">${currentTask.hint}</code></span>`,
+            errDetail,
             'error',
             true
           );
@@ -4377,7 +4440,8 @@
         score.streak++;
         updateScoreUI();
 
-        showMiniFeedback('🎉 Hervorragend! Das ist absolut richtig!', currentTask.explanation, 'success', true);
+        const numSuccessDetail = (currentTask.explanation || '') + formatWasWarumWofuer(currentTask.wasWarumWofuer);
+        showMiniFeedback('🎉 Hervorragend! Das ist absolut richtig!', numSuccessDetail, 'success', true);
         
         if (feedbackRetryBtn) feedbackRetryBtn.classList.add('hidden');
         if (bottomRetryBtn) bottomRetryBtn.classList.add('hidden');
@@ -4393,9 +4457,10 @@
         score.streak = 0;
         updateScoreUI();
 
+        const numErrDetail = `Erwartet: ca. <strong>${currentTask.expected} ${currentTask.unit}</strong>.<br><span class="inline-block mt-1">Formel / Rechenweg: <code class="bg-white/90 px-2 py-0.5 rounded border border-rose-200 font-bold">${currentTask.hint}</code></span>` + formatWasWarumWofuer(currentTask.wasWarumWofuer);
         showMiniFeedback(
           '❌ Leider nicht ganz richtig.',
-          `Erwartet: ca. <strong>${currentTask.expected} ${currentTask.unit}</strong>.<br><span class="inline-block mt-1">Formel / Rechenweg: <code class="bg-white/90 px-2 py-0.5 rounded border border-rose-200 font-bold">${currentTask.hint}</code></span>`,
+          numErrDetail,
           'error',
           true
         );
