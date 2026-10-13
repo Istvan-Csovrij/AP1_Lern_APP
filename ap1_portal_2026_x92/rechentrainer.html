@@ -42,7 +42,7 @@
             <span class="px-3 py-1 rounded-full text-sm font-semibold bg-sky-500/10 text-sky-600 border border-sky-500/20">
               Prüfungsvorbereitung AP1 &amp; AP2 (Kammer-Standard)
             </span>
-            <span class="text-sm text-slate-500 font-semibold text-emerald-700">Version 2.3 (RZ-Effizienz: PUE &amp; DCiE, Elektrotechnik &amp; Leistung)</span>
+            <span class="text-sm font-semibold text-emerald-700">Version 2.4 (Universelle WAS-WARUM-WOFÜR Mustererklärungen)</span>
           </div>
           <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">Rechen- &amp; Einheiten-Trainer (AP1 / AP2)</h1>
           <p class="text-base text-slate-600 mt-1.5">
@@ -3114,6 +3114,11 @@
           expected: sc.subnets,
           tolerance: 0,
           hint: `Subnetz-Bits = 64 - ${sc.prefix} = ${bits} Bits. Anzahl Subnetze = 2^${bits}`,
+          wasWarumWofuer: {
+            was: `${sc.subnets.toLocaleString('de-DE')} Subnetze (2^${bits} = ${sc.subnets}).`,
+            warum: `Subnetz-Bits s = 64 - ${sc.prefix} = ${bits} Bits. Jedes Bit verdoppelt die Anzahl der Subnetze (2^${bits}).`,
+            wofuer: "Planung der internen Netzwerkarchitektur und VLAN-Struktur in Unternehmen."
+          },
           explanation: `Richtig! Rechenweg:<br>` +
             `1. Subnetz-Bits: 64 Bit - ${sc.prefix} Bit = <strong>${bits} Bits</strong>.<br>` +
             `2. Anzahl Subnetze: 2<sup>${bits}</sup> = <strong>${sc.subnets.toLocaleString('de-DE')} Subnetze</strong>.`
@@ -3142,6 +3147,11 @@
           expected: sc.flippedHex,
           altExpected: [sc.flippedHex.toLowerCase(), "0x" + sc.flippedHex, "0x" + sc.flippedHex.toLowerCase()],
           hint: `1. Byte 0x${sc.origHex} binär = ${sc.origBin}. Das 7. Bit (2. Bit von links bzw. 2^1 Stelle) invertieren -> ${sc.flippedBin} -> hex?`,
+          wasWarumWofuer: {
+            was: `0x${sc.flippedHex} (nach Invertierung des U/L-Bits).`,
+            warum: `0x${sc.origHex} binär: ${sc.origBin}. Das 7. Bit (2. Bit von links) invertiert ergibt ${sc.flippedBin} = 0x${sc.flippedHex}.`,
+            wofuer: "Automatische Bildung der 64-Bit Interface-ID (SLAAC) aus der 48-Bit MAC-Adresse (mit FFFE in der Mitte)."
+          },
           explanation: `Richtig! Rechenweg:<br>` +
             `1. Erstes Byte <strong>0x${sc.origHex}</strong> binär: <code>${sc.origBin.slice(0,4)} ${sc.origBin.slice(4)}</code><br>` +
             `2. 7. Bit (Universal/Local-Bit, 2. Bit von links) invertieren: <code>${sc.flippedBin.slice(0,4)} ${sc.flippedBin.slice(4)}</code><br>` +
@@ -3157,28 +3167,48 @@
             ans: 128,
             hint: "8 Blöcke à 16 Bit = ?",
             expl: "Eine IPv6-Adresse besteht aus 128 Bit (aufgeteilt in 8 Blöcke à 16 Bit / 4 Hex-Ziffern).",
-            unit: "Bits"
+            unit: "Bits",
+            www: {
+              was: "128 Bits (16 Bytes).",
+              warum: "8 Blöcke (Hextets) mit je 16 Bit = 128 Bit.",
+              wofuer: "Gigantischer Adressraum für weltweite Ende-zu-Ende-Adressierung ohne NAT."
+            }
           },
           {
             q: "Wie viele <strong>Host- / Interface-Bits</strong> verbleiben bei einem standardmäßigen <strong>/64-Subnetz</strong>?",
             ans: 64,
             hint: "Gesamtbits (128) - Präfixlänge (64) = ?",
             expl: "Host-Bits = 128 Bit - 64 Bit = 64 Bits (Standardgröße der EUI-64 Interface-ID).",
-            unit: "Bits"
+            unit: "Bits",
+            www: {
+              was: "64 Bits Interface-ID.",
+              warum: "128 Gesamt-Bits minus 64 Präfix-Bits = 64 Interface-Bits.",
+              wofuer: "Standard für SLAAC und Host-Schnittstellen (2^64 mögliche Adressen pro Subnetz)."
+            }
           },
           {
             q: "Ein Kunde erhält vom Provider ein <strong>/56-Präfix</strong>. Wie viele <strong>Bits</strong> stehen für die Bildung von /64-Subnetz-IDs zur Verfügung?",
             ans: 8,
             hint: "Ziel-Präfix (64) - Provider-Präfix (56) = ?",
             expl: "Subnetz-Bits = 64 Bit - 56 Bit = 8 Bits (ergibt 2^8 = 256 Subnetze).",
-            unit: "Bits"
+            unit: "Bits",
+            www: {
+              was: "8 Bits (für 256 /64-Subnetze).",
+              warum: "64 Bit Standard-Subnetz minus 56 Bit Provider-Präfix = 8 Bits (2^8 = 256).",
+              wofuer: "Segmentierung kleiner bis mittlerer Unternehmensstandorte in Subnetze/VLANs."
+            }
           },
           {
             q: "Ein Großunternehmen erhält ein <strong>/48-Präfix</strong>. Wie viele <strong>Bits</strong> stehen für die Bildung von /64-Subnetz-IDs zur Verfügung?",
             ans: 16,
             hint: "Ziel-Präfix (64) - Provider-Präfix (48) = ?",
             expl: "Subnetz-Bits = 64 Bit - 48 Bit = 16 Bits (ergibt 2^16 = 65.536 Subnetze).",
-            unit: "Bits"
+            unit: "Bits",
+            www: {
+              was: "16 Bits (für 65.536 /64-Subnetze).",
+              warum: "64 Bit Standard-Subnetz minus 48 Bit Firmen-Präfix = 16 Bits (2^16 = 65.536).",
+              wofuer: "Enterprise-Netzwerkarchitektur für weltweite Konzerne und Campus-Standorte."
+            }
           }
         ];
         const sc = types[Math.floor(Math.random() * types.length)];
@@ -3192,6 +3222,7 @@
           expected: sc.ans,
           tolerance: 0,
           hint: sc.hint,
+          wasWarumWofuer: sc.www,
           explanation: `Richtig! ${sc.expl}`
         };
       },
@@ -3422,11 +3453,11 @@
       // 39. IPV6: KÜRZUNGSREGELN NACH RFC 5952
       ipv6_kuerzung: function() {
         const scenarios = [
-          { full: "2001:0db8:0000:0000:0000:0000:1428:57ab", short: "2001:db8::1428:57ab" },
-          { full: "fe80:0000:0000:0000:020c:29ff:fe4b:8c91", short: "fe80::20c:29ff:fe4b:8c91" },
-          { full: "2001:0db8:0000:0042:0000:0000:0000:0001", short: "2001:db8:0:42::1" },
-          { full: "0000:0000:0000:0000:0000:0000:0000:0001", short: "::1" },
-          { full: "2001:0db8:0000:0000:0042:0000:0000:0001", short: "2001:db8::42:0:0:1" }
+          { full: "2001:0db8:0000:0000:0000:0000:1428:57ab", short: "2001:db8::1428:57ab", rule: "Führende Nullen '0db8' -> 'db8' gestrichen und die längste Nullfolge von 4 Hextets durch '::' ersetzt." },
+          { full: "fe80:0000:0000:0000:020c:29ff:fe4b:8c91", short: "fe80::20c:29ff:fe4b:8c91", rule: "Die 3 aufeinanderfolgenden Null-Blöcke durch '::' komprimiert und '020c' zu '20c' gekürzt." },
+          { full: "2001:0db8:0000:0042:0000:0000:0000:0001", short: "2001:db8:0:42::1", rule: "Die längere Nullfolge (3 Blöcke am Ende) wird mit '::' gekürzt; der einzelne Nullblock bleibt als '0' stehen." },
+          { full: "0000:0000:0000:0000:0000:0000:0000:0001", short: "::1", rule: "Alle führenden 7 Null-Blöcke durch '::' ersetzt, '0001' wird zu '1' (Loopback-Adresse)." },
+          { full: "2001:0db8:0000:0000:0042:0000:0000:0001", short: "2001:db8::42:0:0:1", rule: "Bei zwei gleich langen Nullfolgen wird nach RFC 5952 immer die ERSTE Folge mit '::' komprimiert." }
         ];
         const sc = scenarios[Math.floor(Math.random() * scenarios.length)];
 
@@ -3439,6 +3470,11 @@
           unit: "IPv6-Kurzform (z. B. 2001:db8::1)",
           expected: sc.short,
           hint: "Führende Nullen weg, längste zusammenhängende Folge von Nullen genau 1x mit :: ersetzen.",
+          wasWarumWofuer: {
+            was: `${sc.short} (Normgerechte Kurzform nach RFC 5952).`,
+            warum: sc.rule,
+            wofuer: "Einheitliche Darstellung von IPv6-Adressen in Konfigurationsdateien, DNS-Einträgen und Logfiles ohne Missverständnisse."
+          },
           explanation: `Richtig! Normgerechte Kurzform nach RFC 5952: <strong>${sc.short}</strong>.`
         };
       },
@@ -3453,7 +3489,12 @@
             altExpected: ["128", "128 BITS", "128 BIT", "128BIT"],
             isText: true,
             hint: "128 Bit (entspricht 16 Byte)",
-            expl: "Richtig! IPv6 nutzt <strong>128 Bit</strong> Adresslänge (32 Hex-Ziffern) im Vergleich zu 32 Bit bei IPv4."
+            expl: "Richtig! IPv6 nutzt <strong>128 Bit</strong> Adresslänge (32 Hex-Ziffern) im Vergleich zu 32 Bit bei IPv4.",
+            wasWarumWofuer: {
+              was: "128 Bit Adresslänge (entspricht 16 Byte bzw. 32 Hex-Ziffern).",
+              warum: "Bietet 2^128 ≈ 3,4 × 10^38 eindeutige Adressen, wodurch der Adressmangel von IPv4 (nur 2^32 ≈ 4,3 Mrd.) dauerhaft gelöst ist.",
+              wofuer: "Direkte Ende-zu-Ende-Verbindung für jedes Gerät im Internet ohne NAT (Network Address Translation)."
+            }
           },
           {
             q: "Welche Übertragungsart (Adressierungsart) aus IPv4 existiert in IPv6 <strong>nicht mehr</strong>, sondern wurde vollständig durch Multicast ersetzt?",
@@ -3462,7 +3503,12 @@
             altExpected: ["BROADCAST", "RUNDRUF", "BROADCAST-ADRESSE"],
             isText: true,
             hint: "In IPv6 gibt es keinen Rundruf an alle Knoten (Broadcast) mehr.",
-            expl: "Richtig! <strong>Broadcast</strong> wurde in IPv6 ersatzlos gestrichen und durch gezielte <strong>Multicast</strong>-Gruppen ersetzt."
+            expl: "Richtig! <strong>Broadcast</strong> wurde in IPv6 ersatzlos gestrichen und durch gezielte <strong>Multicast</strong>-Gruppen ersetzt.",
+            wasWarumWofuer: {
+              was: "Broadcast (Rundruf an alle Knoten).",
+              warum: "Broadcasts erzeugten in IPv4 unnötige Last auf allen Netzwerkgeräten (Broadcast-Stürme); Multicast adressiert nur interessierte Stationen.",
+              wofuer: "Schonung der Bandbreite und CPU-Ressourcen in Unternehmensnetzen und Rechenzentren."
+            }
           },
           {
             q: "Welches Verfahren ermöglicht bei IPv6 die zustandslose automatische Konfiguration von IP-Adressen ohne DHCP-Server (Akronym)?",
@@ -3471,7 +3517,12 @@
             altExpected: ["SLAAC", "STATELESS ADDRESS AUTOCONFIGURATION"],
             isText: true,
             hint: "Stateless Address Autoconfiguration (SLAAC)",
-            expl: "Richtig! <strong>SLAAC</strong> (Stateless Address Autoconfiguration) via ICMPv6 Router Advertisements."
+            expl: "Richtig! <strong>SLAAC</strong> (Stateless Address Autoconfiguration) via ICMPv6 Router Advertisements.",
+            wasWarumWofuer: {
+              was: "SLAAC (Stateless Address Autoconfiguration, RFC 4862).",
+              warum: "Der Client fordert per Router Solicitation (RS) Router Advertisements (RA) an und bildet seine Adresse selbstständig aus dem /64-Präfix.",
+              wofuer: "Echtes Plug-and-Play im Netzwerk ohne die Notwendigkeit eines zentralen DHCPv6-Servers."
+            }
           },
           {
             q: "Wie groß ist der feste IPv6-Basis-Header in Byte (ohne Extension Header)?",
@@ -3480,7 +3531,12 @@
             altExpected: ["40", "40 BYTE", "40 BYTES", "40BYTE"],
             isText: true,
             hint: "Der IPv6-Basisheader ist fest 40 Byte groß (keine variable IHL wie bei IPv4).",
-            expl: "Richtig! Der Basis-Header ist fest <strong>40 Byte</strong> lang, was die Router-Verarbeitung massiv beschleunigt."
+            expl: "Richtig! Der Basis-Header ist fest <strong>40 Byte</strong> lang, was die Router-Verarbeitung massiv beschleunigt.",
+            wasWarumWofuer: {
+              was: "40 Byte fester Basis-Header.",
+              warum: "Im Gegensatz zu IPv4 (variabel 20–60 Byte mit Prüfsumme) ist das Format fixiert und enthält keine Header-Prüfsumme mehr.",
+              wofuer: "Hochperformante Hardware-Verarbeitung (Wire-Speed Routing) auf Core-Routern."
+            }
           }
         ];
         const sc = questions[Math.floor(Math.random() * questions.length)];
@@ -3494,6 +3550,7 @@
           altExpected: sc.altExpected || [],
           isText: true,
           hint: sc.hint,
+          wasWarumWofuer: sc.wasWarumWofuer,
           explanation: sc.expl
         };
       },
@@ -3509,7 +3566,12 @@
             altExpected: ["64", "/64"],
             isText: true,
             hint: "Die Standardpräfixlänge für Host-Subnetze ist 64.",
-            expl: "Richtig! Bei IPv6 wird keine Dotted-Subnetzmaske eingetragen, sondern die reine Präfixlänge <strong>64</strong>."
+            expl: "Richtig! Bei IPv6 wird keine Dotted-Subnetzmaske eingetragen, sondern die reine Präfixlänge <strong>64</strong>.",
+            wasWarumWofuer: {
+              was: "Präfixlänge 64 (für /64-Subnetze).",
+              warum: "IPv6-Adressen bestehen aus 64 Bit Netzwerkpräfix und 64 Bit Interface-ID. Subnetzmasken wie 255.255.255.0 gibt es nicht mehr.",
+              wofuer: "Standard-Segmentierung für alle LANs, WLANs und DMZs in IPv6."
+            }
           },
           {
             type: "gateway",
@@ -3519,7 +3581,12 @@
             altExpected: ["2001:DB8:100:1::1", "2001:0DB8:0100:0001:0000:0000:0000:0001"],
             isText: true,
             hint: "Die IP-Adresse des zuständigen Router-Interfaces in diesem Subnetz.",
-            expl: "Richtig! Das Standardgateway ist das Router-Interface <strong>2001:db8:100:1::1</strong> (alternativ oft die Link-Local-Adresse fe80::1)."
+            expl: "Richtig! Das Standardgateway ist das Router-Interface <strong>2001:db8:100:1::1</strong> (alternativ oft die Link-Local-Adresse fe80::1).",
+            wasWarumWofuer: {
+              was: "2001:db8:100:1::1 (oder fe80::1 des Routers).",
+              warum: "Das Standardgateway muss immer im selben Subnetz wie der Host liegen und leitet Pakete in Fremdnetze weiter.",
+              wofuer: "Zugriff auf das Internet und externe Unternehmensstandorte."
+            }
           },
           {
             type: "cmd",
@@ -3529,7 +3596,12 @@
             altExpected: ["IP -6 ADDR ADD 2001:DB8:1::10/64 DEV ETH0", "ip -6 a a 2001:db8:1::10/64 dev eth0", "ip addr add 2001:db8:1::10/64 dev eth0"],
             isText: true,
             hint: "ip -6 addr add 2001:db8:1::10/64 dev eth0",
-            expl: "Richtig! Der Befehl lautet <code>ip -6 addr add 2001:db8:1::10/64 dev eth0</code>."
+            expl: "Richtig! Der Befehl lautet <code>ip -6 addr add 2001:db8:1::10/64 dev eth0</code>.",
+            wasWarumWofuer: {
+              was: "ip -6 addr add 2001:db8:1::10/64 dev eth0",
+              warum: "Standard-Kommando des iproute2-Pakets unter Linux für IPv6-Schnittstellenkonfiguration.",
+              wofuer: "Manuelle Netzwerkkonfiguration auf Servern ohne GUI oder in Deployment-Skripten."
+            }
           }
         ];
         const sc = scenarios[Math.floor(Math.random() * scenarios.length)];
@@ -3543,6 +3615,7 @@
           altExpected: sc.altExpected || [],
           isText: true,
           hint: sc.hint,
+          wasWarumWofuer: sc.wasWarumWofuer,
           explanation: sc.expl
         };
       },
@@ -3557,7 +3630,12 @@
             altExpected: ["NDP", "NEIGHBOR DISCOVERY PROTOCOL", "NEIGHBOR DISCOVERY"],
             isText: true,
             hint: "Neighbor Discovery Protocol (NDP)",
-            expl: "Richtig! <strong>NDP (Neighbor Discovery Protocol)</strong> ersetzt ARP und arbeitet mit ICMPv6 Neighbor Solicitations / Advertisements."
+            expl: "Richtig! <strong>NDP (Neighbor Discovery Protocol)</strong> ersetzt ARP und arbeitet mit ICMPv6 Neighbor Solicitations / Advertisements.",
+            wasWarumWofuer: {
+              was: "NDP (Neighbor Discovery Protocol, RFC 4861).",
+              warum: "Nutzt ICMPv6-Multicast statt veralteter IPv4-Broadcasts für die MAC-Adressermittlung und Router-Erkennung.",
+              wofuer: "Auflösung IP -> MAC, Duplicate Address Detection (DAD) und dynamische Autokonfiguration."
+            }
           },
           {
             q: "Ein Administrator will unter Windows die Link-Local-Adresse <code>fe80::1</code> über das Interface mit der Index-ID <code>12</code> anpingen.<br><br>Wie lautet die vollständige Zieladresse im Ping-Befehl (mit angehängter Scope-ID)?",
@@ -3566,7 +3644,12 @@
             altExpected: ["FE80::1%12", "FE80::1% 12", "PING FE80::1%12"],
             isText: true,
             hint: "Scope-ID wird mit Prozentzeichen angehängt: fe80::1%12",
-            expl: "Richtig! Bei Link-Local ist die Scope-ID Pflicht: <strong>fe80::1%12</strong>, da der Stack sonst nicht weiß, über welche Schnittstelle gesendet werden soll."
+            expl: "Richtig! Bei Link-Local ist die Scope-ID Pflicht: <strong>fe80::1%12</strong>, da der Stack sonst nicht weiß, über welche Schnittstelle gesendet werden soll.",
+            wasWarumWofuer: {
+              was: "fe80::1%12 (Adresse mit Zonenindex/Scope-ID).",
+              warum: "Link-Local-Adressen sind nur verbindungslokal gültig. Ohne '%12' kann das OS nicht wissen, über welchen physikalischen Adapter das Paket raus muss.",
+              wofuer: "Netzwerkdiagnose und Switch/Router-Erreichbarkeitstest im lokalen Segment."
+            }
           },
           {
             q: "Welches Protokoll der Netzwerkschicht wird für <code>ping -6</code>, Echo Request / Echo Reply und Router Advertisements genutzt?",
@@ -3575,7 +3658,12 @@
             altExpected: ["ICMPV6", "ICMP-V6", "ICMP V6", "ICMP"],
             isText: true,
             hint: "Internet Control Message Protocol Version 6 (ICMPv6)",
-            expl: "Richtig! <strong>ICMPv6</strong> ist das fundamentale Diagnose- und Steuerprotokoll für IPv6."
+            expl: "Richtig! <strong>ICMPv6</strong> ist das fundamentale Diagnose- und Steuerprotokoll für IPv6.",
+            wasWarumWofuer: {
+              was: "ICMPv6 (Internet Control Message Protocol for IPv6, RFC 4443).",
+              warum: "Ist in IPv6 unverzichtbar für Steuerungs-, Fehler- und Diagnosefunktionen (inkl. Ping und NDP).",
+              wofuer: "Ping-Tests, MTU Path Discovery und Neighbor Discovery im Netzwerk."
+            }
           }
         ];
         const sc = scenarios[Math.floor(Math.random() * scenarios.length)];
@@ -3589,6 +3677,7 @@
           altExpected: sc.altExpected || [],
           isText: true,
           hint: sc.hint,
+          wasWarumWofuer: sc.wasWarumWofuer,
           explanation: sc.expl
         };
       },
@@ -3603,7 +3692,12 @@
             altExpected: ["FE80::/10", "FE80::", "FE80", "FE80::/64"],
             isText: true,
             hint: "Präfix: fe80::/10 (Binär 1111 1110 10...)",
-            expl: "Richtig! Link-Local-Adressen beginnen immer mit <strong>fe80::/10</strong>."
+            expl: "Richtig! Link-Local-Adressen beginnen immer mit <strong>fe80::/10</strong>.",
+            wasWarumWofuer: {
+              was: "fe80::/10 (Link-Local Adressbereich).",
+              warum: "Fest reservierter Adressbereich nach RFC 4291 für link-lokale Kommunikation.",
+              wofuer: "Wird automatisch auf jedem aktiven IPv6-Interface generiert und dient als Basis für alle lokalen Steuerprotokolle."
+            }
           },
           {
             q: "Dürfen IP-Pakete mit einer Link-Local-Absender- oder Zieladresse (fe80::...) von einem Router in das Internet oder ein Nachbarsubnetz weitergeleitet werden? (Antwort: Ja oder Nein)",
@@ -3612,7 +3706,12 @@
             altExpected: ["NEIN", "NO"],
             isText: true,
             hint: "Link-Local-Pakete sind strikt auf das lokale Netzwerksegment beschränkt und nicht routingfähig.",
-            expl: "Richtig! <strong>Nein</strong> – Link-Local-Adressen sind nicht routingfähig und werden von Routern an Schnittstellengrenzen verworfen."
+            expl: "Richtig! <strong>Nein</strong> – Link-Local-Adressen sind nicht routingfähig und werden von Routern an Schnittstellengrenzen verworfen.",
+            wasWarumWofuer: {
+              was: "Nein (nicht routingfähig).",
+              warum: "Pakete mit fe80-Adressen besitzen nur 'Link Scope' und dürfen Routergrenzen niemals überschreiten.",
+              wofuer: "Gewährleistet, dass lokaler Administrations- und Signalisierungsverkehr strikt im LAN-Segment bleibt."
+            }
           },
           {
             q: "Welchem IPv4-Mechanismus entspricht die automatische Generierung von IPv6 Link-Local-Adressen am ehesten (169.254.0.0/16)?",
@@ -3621,7 +3720,12 @@
             altExpected: ["APIPA", "ZEROCONF", "LINK LOCAL", "AUTO-IP"],
             isText: true,
             hint: "Automatic Private IP Addressing (APIPA, 169.254.x.x)",
-            expl: "Richtig! <strong>APIPA</strong> (169.254.0.0/16) ist das funktionale IPv4-Pendant, allerdings ist Link-Local bei IPv6 immer aktiv und Pflicht."
+            expl: "Richtig! <strong>APIPA</strong> (169.254.0.0/16) ist das funktionale IPv4-Pendant, allerdings ist Link-Local bei IPv6 immer aktiv und Pflicht.",
+            wasWarumWofuer: {
+              was: "APIPA (Automatic Private IP Addressing, 169.254.0.0/16).",
+              warum: "Beide Mechanismen erzeugen ohne DHCP-Server selbstständig Adressen für das lokale Netzsegment.",
+              wofuer: "Automatische Ausfallsicherheit und Adressierung vor bzw. neben dem Bezug einer globalen IP."
+            }
           }
         ];
         const sc = scenarios[Math.floor(Math.random() * scenarios.length)];
@@ -3635,6 +3739,7 @@
           altExpected: sc.altExpected || [],
           isText: true,
           hint: sc.hint,
+          wasWarumWofuer: sc.wasWarumWofuer,
           explanation: sc.expl
         };
       },
@@ -3818,7 +3923,12 @@
             expected: "fe80::/10",
             alts: ["FE80::/10", "FE80::", "FE80", "FE80/10", "FE80::/64"],
             hint: "fe80::/10",
-            expl: "Link-Local-Adressen beginnen immer mit dem Präfix <strong>fe80::/10</strong>."
+            expl: "Link-Local-Adressen beginnen immer mit dem Präfix <strong>fe80::/10</strong>.",
+            wasWarumWofuer: {
+              was: "fe80::/10 (Link-Local Unicast Präfix).",
+              warum: "Die ersten 10 Bits sind fest auf 1111 1110 10... definiert (Bereich fe80:: bis febf::).",
+              wofuer: "Automatische Grundkommunikation im lokalen LAN-Segment, Router-Suche und Neighbor Discovery (NDP)."
+            }
           },
           {
             q: "Mit welchem offiziellen <strong>Präfix</strong> nach RFC 4193 werden <strong>Unique Local Addresses (ULA)</strong> definiert? (z. B. fc00::/7)",
@@ -3826,7 +3936,12 @@
             expected: "fc00::/7",
             alts: ["FC00::/7", "FC00", "FC00::", "FC00/7", "FD00::/8", "FD00", "FD00::"],
             hint: "fc00::/7 (in der Praxis fast immer fd00::/8)",
-            expl: "Unique Local Addresses (ULA) sind im Bereich <strong>fc00::/7</strong> definiert."
+            expl: "Unique Local Addresses (ULA) sind im Bereich <strong>fc00::/7</strong> definiert.",
+            wasWarumWofuer: {
+              was: "fc00::/7 (Unique Local Address Präfixbereich).",
+              warum: "RFC 4193 reserviert die ersten 7 Bits (1111 110) als privates IPv6-Äquivalent zu RFC 1918.",
+              wofuer: "Interne Firmennetzwerke ohne weltweite Internet-Routing-Abhängigkeit."
+            }
           },
           {
             q: "Mit welchen <strong>zwei Hex-Zeichen</strong> (Anfangskennung) beginnen praktisch alle in Firmennetzen genutzten <strong>Unique Local Addresses (ULA)</strong>? (z. B. fd oder fc)",
@@ -3834,7 +3949,12 @@
             expected: "fd",
             alts: ["FD", "0XFD", "FD00", "FC", "0XFC"],
             hint: "fd (Global-Bit = 1 gesetzt)",
-            expl: "Praktisch alle ULA-Netze beginnen mit <strong>fd</strong> (RFC 4193 schreibt bei lokal generierten Netzen Bit 8 = 1 vor)."
+            expl: "Praktisch alle ULA-Netze beginnen mit <strong>fd</strong> (RFC 4193 schreibt bei lokal generierten Netzen Bit 8 = 1 vor).",
+            wasWarumWofuer: {
+              was: "fd (fd00::/8).",
+              warum: "Bei lokal selbst generierten ULA-Präfixen muss das 8. Bit (L-Bit) = 1 sein (1111 1101 = 0xfd). 'fc' wäre zentral registriert (derzeit nicht genutzt).",
+              wofuer: "Praktischer Einsatz in lokalen Firmennetzen und Active-Directory-Infrastrukturen."
+            }
           },
           {
             q: "In welchem <strong>Präfixbereich</strong> liegen alle weltweit im Internet routingfähigen <strong>Global Unicast Adressen (GUA)</strong>? (z. B. 2000::/3)",
@@ -3842,7 +3962,12 @@
             expected: "2000::/3",
             alts: ["2000::/3", "2000::", "2000", "2000/3"],
             hint: "2000::/3 (umfasst Adressen von 2000:: bis 3fff:ffff:...)",
-            expl: "Der öffentliche Internet-Adressbereich für GUA ist <strong>2000::/3</strong>."
+            expl: "Der öffentliche Internet-Adressbereich für GUA ist <strong>2000::/3</strong>.",
+            wasWarumWofuer: {
+              was: "2000::/3 (Global Unicast Address Bereich).",
+              warum: "Die ersten 3 Bits sind 001 (Bereich 2000:: bis 3fff:ffff:...). Macht 1/8 des gesamten IPv6-Adressraums aus.",
+              wofuer: "Weltweit geroutete Internetverbindungen für Server, Unternehmen und Endkunden."
+            }
           },
           {
             q: "Mit welchen <strong>zwei Anfangsziffern (erstes Hexadezimalzeichen)</strong> beginnen derzeit alle öffentlich vergebenen IPv6-Internetadressen (GUA)?",
@@ -3850,7 +3975,12 @@
             expected: "2",
             alts: ["2", "3", "2 ODER 3", "2/3", "2, 3", "2 UND 3", "2000", "2 BZW 3"],
             hint: "2 (oder 3), da der Bereich 2000::/3 die Werte 2000 bis 3fff abdeckt.",
-            expl: "Im Bereich 2000::/3 beginnen alle Adressen mit <strong>2</strong> (oder 3), z. B. <code>2001:...</code> oder <code>2a00:...</code>."
+            expl: "Im Bereich 2000::/3 beginnen alle Adressen mit <strong>2</strong> (oder 3), z. B. <code>2001:...</code> oder <code>2a00:...</code>.",
+            wasWarumWofuer: {
+              was: "2 (oder 3).",
+              warum: "Binär 0010 = Hex 2 und 0011 = Hex 3 im Präfix 2000::/3.",
+              wofuer: "Sofortige visuelle Erkennung öffentlicher Internet-IPs bei Support & Firewall-Analysen."
+            }
           },
           {
             q: "Mit welchem <strong>Präfix</strong> beginnen alle <strong>Multicast-Adressen</strong> in IPv6? (z. B. ff00::/8)",
@@ -3858,7 +3988,12 @@
             expected: "ff00::/8",
             alts: ["FF00::/8", "FF00::", "FF00", "FF00/8", "FF", "0XFF"],
             hint: "ff00::/8 (alle ersten 8 Bit auf 1 gesetzt)",
-            expl: "Alle Multicast-Adressen beginnen mit <strong>ff00::/8</strong> (erstes Byte immer <code>ff</code>)."
+            expl: "Alle Multicast-Adressen beginnen mit <strong>ff00::/8</strong> (erstes Byte immer <code>ff</code>).",
+            wasWarumWofuer: {
+              was: "ff00::/8 (Multicast Präfix).",
+              warum: "Die ersten 8 Bits sind 1111 1111 (Hex 0xff), gefolgt von 4 Bit Flags und 4 Bit Scope.",
+              wofuer: "Zielgerichtete Gruppenkommunikation (1:n) anstelle von Broadcasts."
+            }
           },
           {
             q: "Wie lautet die <strong>Loopback-Adresse</strong> in IPv6 in der normgerechten, vollständig gekürzten Kurzform nach RFC 5952?",
@@ -3866,7 +4001,12 @@
             expected: "::1",
             alts: ["::1", "::1/128", "0::1", ":1"],
             hint: "::1",
-            expl: "Die Loopback-Adresse lautet <strong>::1</strong> (entspricht 127.0.0.1 in IPv4)."
+            expl: "Die Loopback-Adresse lautet <strong>::1</strong> (entspricht 127.0.0.1 in IPv4).",
+            wasWarumWofuer: {
+              was: "::1 (bzw. ::1/128).",
+              warum: "127 Nullen gefolgt von einer 1 (0000:...:0001), gemäß RFC 5952 auf ::1 komprimiert.",
+              wofuer: "Lokaler Loopback-Test (Localhost) des eigenen TCP/IP-Stacks."
+            }
           }
         ];
         const sc = scenarios[Math.floor(Math.random() * scenarios.length)];
@@ -3880,6 +4020,7 @@
           expected: sc.expected,
           altExpected: sc.alts,
           hint: sc.hint,
+          wasWarumWofuer: sc.wasWarumWofuer,
           explanation: `Richtig! ${sc.expl}`
         };
       },
@@ -3893,7 +4034,12 @@
             expected: "Unicast",
             alts: ["UNICAST", "1:1", "EINZELRUF", "PTP"],
             hint: "Unicast (1:1)",
-            expl: "<strong>Unicast</strong> bezeichnet die direkte 1:1-Kommunikation von einem Absender zu einem Empfänger."
+            expl: "<strong>Unicast</strong> bezeichnet die direkte 1:1-Kommunikation von einem Absender zu einem Empfänger.",
+            wasWarumWofuer: {
+              was: "Unicast (1:1 Übertragung).",
+              warum: "Ein Paket wird exakt an eine einzige Ziel-Schnittstelle gesendet.",
+              wofuer: "Standard-Verbindungen im Netzwerk (Surfen, Datei-Download, Mailabruf, SSH)."
+            }
           },
           {
             q: "Welche Übertragungsart sendet Datenpakete an eine <strong>Gruppe von Empfängern</strong> (1:n) und ersetzt in IPv6 den Broadcast vollständig?",
@@ -3901,7 +4047,12 @@
             expected: "Multicast",
             alts: ["MULTICAST", "1:N", "GRUPPENRUF", "MULTI-CAST"],
             hint: "Multicast (1:n, beginnt mit ff00::/8)",
-            expl: "<strong>Multicast</strong> (1:n) erreicht alle Mitglieder einer Gruppe und ersetzt in IPv6 den veralteten Broadcast."
+            expl: "<strong>Multicast</strong> (1:n) erreicht alle Mitglieder einer Gruppe und ersetzt in IPv6 den veralteten Broadcast.",
+            wasWarumWofuer: {
+              was: "Multicast (1:n Übertragung, Präfix ff00::/8).",
+              warum: "Nur registrierte Gruppenmitglieder empfangen und verarbeiten die Pakete; alle anderen Hosts ignorieren sie schon auf Switch/Hardware-Ebene.",
+              wofuer: "Ersetzt den störenden IPv4-Broadcast (Router Solicitations, All-Nodes, Streaming)."
+            }
           },
           {
             q: "Welche Übertragungsart sendet ein Datenpaket an die Schnittstelle, die dem Absender <strong>topologisch am nächsten</strong> liegt (1:nächstgelegene aus n)?",
@@ -3909,7 +4060,12 @@
             expected: "Anycast",
             alts: ["ANYCAST", "1:NÄCHSTE", "1:NAECHSTE", "1:NEAREST", "ANY-CAST"],
             hint: "Anycast (1:nächstgelegene Schnittstelle einer Gruppe)",
-            expl: "<strong>Anycast</strong> leitet Pakete an den topologisch nächstgelegenen Server weiter (z. B. DNS Root Server, CDNs)."
+            expl: "<strong>Anycast</strong> leitet Pakete an den topologisch nächstgelegenen Server weiter (z. B. DNS Root Server, CDNs).",
+            wasWarumWofuer: {
+              was: "Anycast (1:nächstgelegene Schnittstelle).",
+              warum: "Dieselbe IP-Adresse ist auf mehreren weltweit verteilten Servern konfiguriert; das Routing-Protokoll (BGP) schickt das Paket über den kürzesten Hop-Pfad.",
+              wofuer: "Ausfallsichere und extrem latenzarme DNS-Root-Server und Content Delivery Networks (CDNs)."
+            }
           },
           {
             q: "Existiert die Übertragungsart <strong>Broadcast (Rundruf an ausnahmslos alle Geräte)</strong> in IPv6 noch? (Antwort: Ja oder Nein)",
@@ -3917,7 +4073,12 @@
             expected: "Nein",
             alts: ["NEIN", "NO", "NICHT MEHR", "GIBT ES NICHT"],
             hint: "In IPv6 gibt es KEINEN Broadcast mehr.",
-            expl: "<strong>Nein</strong> – Broadcast existiert in IPv6 nicht mehr! Stattdessen wird zielgerichtetes Multicast genutzt, um Broadcast-Stürme zu verhindern."
+            expl: "<strong>Nein</strong> – Broadcast existiert in IPv6 nicht mehr! Stattdessen wird zielgerichtetes Multicast genutzt, um Broadcast-Stürme zu verhindern.",
+            wasWarumWofuer: {
+              was: "Nein (Broadcast existiert in IPv6 nicht mehr).",
+              warum: "IPv4-Broadcasts störten alle Geräte im LAN und verursachten hohe CPU-Last und Broadcast-Stürme.",
+              wofuer: "Optimale Energie- und Netzwerkeffizienz in modernen LANs und Rechenzentren."
+            }
           },
           {
             q: "Über welche reservierte Link-Local-Multicast-Adresse werden <strong>alle IPv6-Knoten (All Nodes)</strong> im lokalen Subnetz angesprochen?",
@@ -3925,7 +4086,12 @@
             expected: "ff02::1",
             alts: ["FF02::1", "FF02:0:0:0:0:0:0:1", "FF02::1/128"],
             hint: "ff02::1",
-            expl: "<strong>ff02::1</strong> erreicht alle IPv6-fähigen Knoten auf der lokalen Verbindungsebene (All-Nodes Multicast)."
+            expl: "<strong>ff02::1</strong> erreicht alle IPv6-fähigen Knoten auf der lokalen Verbindungsebene (All-Nodes Multicast).",
+            wasWarumWofuer: {
+              was: "ff02::1 (All-Nodes Multicast Adresse).",
+              warum: "Link-Local-Multicast (Scope 0x2 = Link), Gruppen-ID 0x1 steht für alle Knoten auf diesem physischen Segment.",
+              wofuer: "Ersetzt den lokalen IPv4-Broadcast 255.255.255.255 für systemweite Router Advertisements."
+            }
           },
           {
             q: "Über welche reservierte Link-Local-Multicast-Adresse werden <strong>alle IPv6-Router (All Routers)</strong> im lokalen Subnetz angesprochen?",
@@ -3933,7 +4099,12 @@
             expected: "ff02::2",
             alts: ["FF02::2", "FF02:0:0:0:0:0:0:2", "FF02::2/128"],
             hint: "ff02::2",
-            expl: "<strong>ff02::2</strong> erreicht alle Router im lokalen Link (All-Routers Multicast, z. B. für Router Solicitations)."
+            expl: "<strong>ff02::2</strong> erreicht alle Router im lokalen Link (All-Routers Multicast, z. B. für Router Solicitations).",
+            wasWarumWofuer: {
+              was: "ff02::2 (All-Routers Multicast Adresse).",
+              warum: "Link-Local-Multicast, Gruppen-ID 0x2 steht für alle Router auf dem lokalen Link.",
+              wofuer: "Clients senden Router Solicitations (RS, ICMPv6 Typ 133) an ff02::2, um sofort IP-Präfixe abzurufen."
+            }
           }
         ];
         const sc = scenarios[Math.floor(Math.random() * scenarios.length)];
@@ -3947,6 +4118,7 @@
           expected: sc.expected,
           altExpected: sc.alts,
           hint: sc.hint,
+          wasWarumWofuer: sc.wasWarumWofuer,
           explanation: `Richtig! ${sc.expl}`
         };
       },
@@ -3960,15 +4132,25 @@
             expected: "GUA",
             alts: ["GUA", "GLOBAL UNICAST", "GLOBALUNICAST", "GLOBAL", "ÖFFENTLICH", "OEFFENTLICH", "GLOBAL UNICAST ADDRESS"],
             hint: "GUA (Global Unicast Address, 2000::/3)",
-            expl: "Nur <strong>GUA (Global Unicast Address)</strong> besitzt weltweiten Scope und wird über alle Internet-Router hinweg weitergeleitet."
+            expl: "Nur <strong>GUA (Global Unicast Address)</strong> besitzt weltweiten Scope und wird über alle Internet-Router hinweg weitergeleitet.",
+            wasWarumWofuer: {
+              was: "GUA (Global Unicast Address, Präfixbereich 2000::/3).",
+              warum: "GUAs sind weltweit eindeutige öffentliche Adressen mit 'Global Scope'. Sie werden von allen Internet-Routern ohne Adressübersetzung (NAT) weitergeleitet.",
+              wofuer: "Öffentliche Web-, Mail- und Cloud-Dienste sowie direkte weltweite Ende-zu-Ende-Kommunikation."
+            }
           },
           {
             q: "Welcher IPv6-Adresstyp (<strong>GUA</strong>, <strong>ULA</strong> oder <strong>Link-Local</strong>) darf nur innerhalb einer Organisation (Intranet / VPN) geroutet werden und wird im Internet verworfen?",
             unit: "Adresstyp (z. B. ULA)",
             expected: "ULA",
-            alts: ["ULA", "UNIQUE LOCAL", "UNIQUELOCAL", "UNIQUE LOCAL ADDRESS", "PRIVAT", "FC00::/7"],
+            alts: ["ULA", "UNIQUE LOCAL", "UNIQUELOCAL", "UNIQUE LOCAL ADDRESS", "PRIVAT", "FC00::/7", "FD00::/8"],
             hint: "ULA (Unique Local Address, fc00::/7 bzw. fd00::/8)",
-            expl: "<strong>ULA (Unique Local Address)</strong> ist das Gegenstück zu privaten IPv4-Adressen und wird an Internet-Grenzen verworfen."
+            expl: "<strong>ULA (Unique Local Address)</strong> ist das Gegenstück zu privaten IPv4-Adressen und wird an Internet-Grenzen verworfen.",
+            wasWarumWofuer: {
+              was: "ULA (Unique Local Address, Präfix fc00::/7 bzw. fd00::/8).",
+              warum: "ULAs dürfen innerhalb eines Unternehmensnetzwerks (über interne Subnetze und VPNs hinweg) beliebig geroutet werden, werden aber von Internet-Border-Routern strikt geblockt/verworfen (im Gegensatz dazu darf Link-Local fe80::/10 nicht einmal intern geroutet werden!).",
+              wofuer: "Interne Standortvernetzung, Active Directory, Domain Controller, Firmendrucker, Datenbanken und Managementschnittstellen ohne Internet-Exposition."
+            }
           },
           {
             q: "Welcher IPv6-Adresstyp (<strong>GUA</strong>, <strong>ULA</strong> oder <strong>Link-Local</strong>) darf von Routern unter keinen Umständen weitergeleitet werden und bleibt strikt auf das lokale Segment beschränkt?",
@@ -3976,7 +4158,12 @@
             expected: "Link-Local",
             alts: ["LINK-LOCAL", "LINKLOCAL", "LLA", "LINK LOCAL", "FE80", "FE80::/10"],
             hint: "Link-Local (fe80::/10)",
-            expl: "<strong>Link-Local (fe80::/10)</strong> gilt nur auf dem lokalen physischen Link und wird von Routern NIEMALS weitergeleitet."
+            expl: "<strong>Link-Local (fe80::/10)</strong> gilt nur auf dem lokalen physischen Link und wird von Routern NIEMALS weitergeleitet.",
+            wasWarumWofuer: {
+              was: "Link-Local Address (LLA, Präfix fe80::/10).",
+              warum: "Link-Local-Pakete haben strikt 'Link Scope'. Laut RFC 4291 dürfen Router fe80-Pakete niemals über eine Schnittstellengrenze weiterleiten (sie werden gedroppt).",
+              wofuer: "Lokale Kommunikation auf demselben physischen Kabel/WLAN, Neighbor Discovery (NDP), Router Solicitations/Advertisements und Next-Hop-Gateway-Adressierung."
+            }
           },
           {
             q: "Wie verhält sich ein Standard-Router, wenn er ein IPv6-Paket mit der Quell- oder Zieladresse <code>fe80::20c:29ff:fe4b:8c91</code> empfängt und es in ein anderes Subnetz weiterleiten soll? (Antwort: <strong>Verwerfen</strong> oder <strong>Weiterleiten</strong>)",
@@ -3984,7 +4171,12 @@
             expected: "Verwerfen",
             alts: ["VERWERFEN", "DROP", "DROPPED", "BLOCKIEREN", "NICHT WEITERLEITEN", "VERWIRFT"],
             hint: "Verwerfen (Drop). Link-Local-Pakete dürfen Router niemals passieren.",
-            expl: "Der Router muss das Paket <strong>verwerfen (drop)</strong>, da Link-Local-Pakete (fe80::/10) strikt nicht routingfähig sind."
+            expl: "Der Router muss das Paket <strong>verwerfen (drop)</strong>, da Link-Local-Pakete (fe80::/10) strikt nicht routingfähig sind.",
+            wasWarumWofuer: {
+              was: "Verwerfen (Drop / Paket blockieren).",
+              warum: "Adressen aus dem Präfixbereich fe80::/10 sind nicht routingfähig. Ein Router darf Link-Local-Pakete niemals in ein anderes Subnetz routen.",
+              wofuer: "Schützt vor Datenlecks von link-lokalem Steuerungsverkehr (NDP, DAD) in Nachbarnetze oder das öffentliche Internet."
+            }
           },
           {
             q: "Ein Ping auf eine Link-Local-Adresse <code>ping fe80::1</code> schlägt fehl. Welcher Parameter muss mit einem Prozentzeichen angehängt werden (z. B. fe80::1%12), um die Schnittstelle eindeutig zu bestimmen?",
@@ -3992,7 +4184,12 @@
             expected: "Scope-ID",
             alts: ["SCOPE-ID", "SCOPE ID", "ZONEN-INDEX", "ZONE-ID", "SCOPE", "INTERFACE-INDEX", "INTERFACE ID", "INDEX", "%"],
             hint: "Scope-ID (oder Zonen-Index, z. B. %12 unter Windows oder %eth0 unter Linux)",
-            expl: "Bei Link-Local ist die <strong>Scope-ID (Zonen-Index)</strong> zwingend erforderlich, da dieselbe Adresse fe80:: auf mehreren Netzwerkkarten existieren kann."
+            expl: "Bei Link-Local ist die <strong>Scope-ID (Zonen-Index)</strong> zwingend erforderlich, da dieselbe Adresse fe80:: auf mehreren Netzwerkkarten existieren kann.",
+            wasWarumWofuer: {
+              was: "Scope-ID (Zonen-Index / Schnittstellen-Index, z. B. fe80::1%12).",
+              warum: "Da fe80:: auf jeder Netzwerkkante vorkommen kann, muss das Betriebssystem wissen, über welches physikalische Interface das Paket gesendet werden soll.",
+              wofuer: "Eindeutige Adressierung bei Ping oder SSH auf link-lokale IP-Adressen (z. B. 'ping fe80::1%12' unter Windows oder '%eth0' unter Linux)."
+            }
           }
         ];
         const sc = scenarios[Math.floor(Math.random() * scenarios.length)];
@@ -4006,6 +4203,7 @@
           expected: sc.expected,
           altExpected: sc.alts,
           hint: sc.hint,
+          wasWarumWofuer: sc.wasWarumWofuer,
           explanation: `Richtig! ${sc.expl}`
         };
       },
@@ -4019,7 +4217,12 @@
             expected: "Komposition",
             alts: ["KOMPOSITION", "COMPOSITION", "EXISTENZABHÄNGIGKEIT"],
             hint: "Gefüllte schwarze Raute an der Seite des Ganzen.",
-            expl: "Bei der <strong>Komposition</strong> (schwarze Raute) kann das Teilobjekt ohne das Ganze nicht existieren (z. B. Haus und Raum, Ticket und Ticket-Historie)."
+            expl: "Bei der <strong>Komposition</strong> (schwarze Raute) kann das Teilobjekt ohne das Ganze nicht existieren (z. B. Haus und Raum, Ticket und Ticket-Historie).",
+            wasWarumWofuer: {
+              was: "Komposition (strenge Assoziation mit gefüllter schwarzer Raute).",
+              warum: "Existenzabhängigkeit: Wird das übergeordnete Objekt gelöscht, werden die Teilobjekte unwiderruflich mitgelöscht.",
+              wofuer: "Modellierung lebenswichtiger Ganzes-Teile-Abhängigkeiten in Datenmodellen und OOP."
+            }
           },
           {
             q: "Wie lautet der Fachbegriff für eine 'Hat-ein'-Beziehung, bei der die Teilexistenz auch dann weiterbesteht, wenn das Ganze gelöscht wird (schwache Bindung)?",
@@ -4027,7 +4230,12 @@
             expected: "Aggregation",
             alts: ["AGGREGATION", "SCHWACHE ASSOZIATION"],
             hint: "Leere (weiße) Raute an der Seite des Ganzen.",
-            expl: "Bei der <strong>Aggregation</strong> (weiße Raute) existieren die Teile unabhängig vom Ganzen weiter (z. B. Kurs und Teilnehmer, PC und Monitor)."
+            expl: "Bei der <strong>Aggregation</strong> (weiße Raute) existieren die Teile unabhängig vom Ganzen weiter (z. B. Kurs und Teilnehmer, PC und Monitor).",
+            wasWarumWofuer: {
+              was: "Aggregation (schwache Assoziation mit leerer weißer Raute).",
+              warum: "Existenzunabhängigkeit: Das Teil existiert eigenständig weiter, auch wenn das Ganze vernichtet wird.",
+              wofuer: "Modellierung loser Kopplungen und wiederverwendbarer Komponenten."
+            }
           },
           {
             q: "Welches Sichtbarkeitszeichen in UML kennzeichnet den Zugriffsmodifizierer <strong>protected</strong> (nur in der eigenen Klasse und Subklassen sichtbar)?",
@@ -4035,7 +4243,12 @@
             expected: "#",
             alts: ["#", "PROTECTED", "RAUTE", "HASH"],
             hint: "'+' = public, '-' = private, '#' = protected, '~' = package.",
-            expl: "Das Zeichen <strong>#</strong> steht in UML für <strong>protected</strong>. Minus '-' bedeutet private, Plus '+' public."
+            expl: "Das Zeichen <strong>#</strong> steht in UML für <strong>protected</strong>. Minus '-' bedeutet private, Plus '+' public.",
+            wasWarumWofuer: {
+              was: "# (Sichtbarkeitsmodifizierer: protected).",
+              warum: "Ermöglicht Vererbung: Sichtbar für die definierende Klasse sowie alle abgeleiteten Kindklassen.",
+              wofuer: "Sichere Kapselung bei Vererbungshierarchien in Java, C++ und C#."
+            }
           },
           {
             q: "Welches Sichtbarkeitszeichen in UML kennzeichnet den Zugriffsmodifizierer <strong>private</strong> (nur in der eigenen Klasse sichtbar)?",
@@ -4043,7 +4256,12 @@
             expected: "-",
             alts: ["-", "PRIVATE", "MINUS"],
             hint: "Minuszeichen",
-            expl: "Das Zeichen <strong>-</strong> (Minus) steht in UML für <strong>private</strong> (Kapselung)."
+            expl: "Das Zeichen <strong>-</strong> (Minus) steht in UML für <strong>private</strong> (Kapselung).",
+            wasWarumWofuer: {
+              was: "- (Sichtbarkeitsmodifizierer: private).",
+              warum: "Strengste Geheimhaltung (Information Hiding): Kein Zugriff von außerhalb der eigenen Klasse.",
+              wofuer: "Schutz interner Member-Variablen und Realisierung von Getter/Setter-Methoden."
+            }
           },
           {
             q: "Wie lautet der UML-Fachbegriff für die Vererbungsbeziehung ('ist-ein'-Beziehung, dargestellt durch eine geschlossene weiße Dreiecksspitze)?",
@@ -4051,7 +4269,12 @@
             expected: "Generalisierung",
             alts: ["GENERALISIERUNG", "VERERBUNG", "INHERITANCE"],
             hint: "Generalisierung / Vererbung",
-            expl: "Die <strong>Generalisierung</strong> (Vererbung) verbindet eine Unterklasse mit ihrer Oberklasse durch eine durchgezogene Linie mit weißer Dreiecksspitze."
+            expl: "Die <strong>Generalisierung</strong> (Vererbung) verbindet eine Unterklasse mit ihrer Oberklasse durch eine durchgezogene Linie mit weißer Dreiecksspitze.",
+            wasWarumWofuer: {
+              was: "Generalisierung (Vererbungsbeziehung).",
+              warum: "'Ist-ein'-Beziehung: Unterklasse erbt Eigenschaften und Verhalten von der verallgemeinerten Oberklasse.",
+              wofuer: "Code-Wiederverwendung und polymorphes Design in objektorientierten Systemen."
+            }
           },
           {
             q: "Eine Kundenklasse kann 0 bis beliebig viele Aufträge besitzen. Wie lautet diese Multiplizität im UML-Klassendiagramm?",
@@ -4059,7 +4282,12 @@
             expected: "0..*",
             alts: ["0..*", "0..N", "*", "0..BELIEBIG"],
             hint: "0..* oder *",
-            expl: "<strong>0..*</strong> (oder *) bedeutet: mindestens null, maximal beliebig viele Aufträge."
+            expl: "<strong>0..*</strong> (oder *) bedeutet: mindestens null, maximal beliebig viele Aufträge.",
+            wasWarumWofuer: {
+              was: "0..* (Multiplizitätsbereich von 0 bis unendlich).",
+              warum: "Untergrenze 0 (optionaler Auftrag) bis Obergrenze * (beliebig viele Aufträge).",
+              wofuer: "Exakte quantitative Modellierung von Beziehungen und Datenbankschemata."
+            }
           }
         ];
         const sc = scenarios[Math.floor(Math.random() * scenarios.length)];
@@ -4073,6 +4301,7 @@
           expected: sc.expected,
           altExpected: sc.alts,
           hint: sc.hint,
+          wasWarumWofuer: sc.wasWarumWofuer,
           explanation: sc.expl
         };
       },
@@ -4361,14 +4590,40 @@
       document.getElementById('mini-next-container').classList.add('hidden');
     }
 
-    function formatWasWarumWofuer(www) {
-      if (!www) return '';
-      return `<div class="mt-2.5 text-left bg-white/95 p-3 rounded-xl border border-slate-200 text-xs text-slate-800 space-y-1.5 shadow-xs">
-        <div class="font-bold text-slate-500 uppercase tracking-wider text-[10px]">💡 IHK-Musterlösung &amp; Merksatz:</div>
-        <div class="flex items-start gap-1.5"><span class="px-1.5 py-0.5 rounded bg-sky-100 text-sky-800 font-bold text-[10px] shrink-0">📌 WAS</span> <span>${www.was}</span></div>
-        <div class="flex items-start gap-1.5"><span class="px-1.5 py-0.5 rounded bg-amber-100 text-amber-800 font-bold text-[10px] shrink-0">🔍 WARUM</span> <span>${www.warum}</span></div>
-        <div class="flex items-start gap-1.5"><span class="px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-800 font-bold text-[10px] shrink-0">🎯 WOFÜR</span> <span>${www.wofuer}</span></div>
-      </div>`;
+    function formatWasWarumWofuer(taskOrWww) {
+      if (!taskOrWww) return '';
+      let www = taskOrWww.wasWarumWofuer ? taskOrWww.wasWarumWofuer : (taskOrWww.was ? taskOrWww : null);
+      if (www && www.was && www.warum && www.wofuer) {
+        return `<div class="mt-3 text-left bg-white/95 p-3.5 rounded-xl border border-slate-200 text-xs text-slate-800 space-y-2 shadow-xs">
+          <div class="font-bold text-slate-500 uppercase tracking-wider text-[11px] flex items-center gap-1.5 pb-1 border-b border-slate-100">
+            <span>💡 IHK-MUSTERLÖSUNG &amp; MERKSATZ:</span>
+          </div>
+          <div class="flex items-start gap-2"><span class="px-2 py-0.5 rounded-md bg-sky-100 text-sky-800 font-bold text-[10px] shrink-0">📌 WAS</span> <span class="leading-relaxed font-semibold text-slate-900">${www.was}</span></div>
+          <div class="flex items-start gap-2"><span class="px-2 py-0.5 rounded-md bg-amber-100 text-amber-800 font-bold text-[10px] shrink-0">🔍 WARUM</span> <span class="leading-relaxed text-slate-800">${www.warum}</span></div>
+          <div class="flex items-start gap-2"><span class="px-2 py-0.5 rounded-md bg-emerald-100 text-emerald-800 font-bold text-[10px] shrink-0">🎯 WOFÜR</span> <span class="leading-relaxed text-slate-800">${www.wofuer}</span></div>
+        </div>`;
+      }
+      
+      // Universeller pedagogischer Fallback für jede Aufgabe ohne explizites wasWarumWofuer
+      const task = taskOrWww;
+      const expl = task.explanation || '';
+      const hint = task.hint || '';
+      const expVal = task.expected !== undefined ? task.expected : '';
+      const unitVal = task.unit ? ` (${task.unit})` : '';
+      const titleVal = task.badge ? `${task.badge} &bull; ${task.title || ''}` : (task.title || 'AP1-Prüfungsstandard');
+
+      if (expl || hint || expVal) {
+        const cleanExpl = expl.replace(/^Richtig!\s*/i, '').trim();
+        return `<div class="mt-3 text-left bg-white/95 p-3.5 rounded-xl border border-slate-200 text-xs text-slate-800 space-y-2 shadow-xs">
+          <div class="font-bold text-slate-500 uppercase tracking-wider text-[11px] flex items-center gap-1.5 pb-1 border-b border-slate-100">
+            <span>💡 IHK-MUSTERLÖSUNG &amp; MERKSATZ:</span>
+          </div>
+          <div class="flex items-start gap-2"><span class="px-2 py-0.5 rounded-md bg-sky-100 text-sky-800 font-bold text-[10px] shrink-0">📌 WAS</span> <span class="leading-relaxed font-semibold text-slate-900">${expVal}${unitVal}</span></div>
+          <div class="flex items-start gap-2"><span class="px-2 py-0.5 rounded-md bg-amber-100 text-amber-800 font-bold text-[10px] shrink-0">🔍 WARUM</span> <span class="leading-relaxed text-slate-800">${cleanExpl || hint}</span></div>
+          <div class="flex items-start gap-2"><span class="px-2 py-0.5 rounded-md bg-emerald-100 text-emerald-800 font-bold text-[10px] shrink-0">🎯 WOFÜR</span> <span class="leading-relaxed text-slate-800">IHK-Standardlösung für: <em>${titleVal}</em>.</span></div>
+        </div>`;
+      }
+      return '';
     }
 
     function checkMiniTask() {
@@ -4397,7 +4652,7 @@
           score.correct++;
           score.streak++;
           updateScoreUI();
-          const detail = (currentTask.explanation || '') + formatWasWarumWofuer(currentTask.wasWarumWofuer);
+          const detail = formatWasWarumWofuer(currentTask);
           showMiniFeedback('🎉 Hervorragend! Das ist absolut richtig!', detail, 'success', true);
           if (feedbackRetryBtn) feedbackRetryBtn.classList.add('hidden');
           if (bottomRetryBtn) bottomRetryBtn.classList.add('hidden');
@@ -4408,7 +4663,7 @@
           score.wrong++;
           score.streak = 0;
           updateScoreUI();
-          const errDetail = `Erwartet: <strong>${currentTask.expected}</strong> (${currentTask.unit}).<br><span class="inline-block mt-1">Lösungsweg: <code class="bg-white/90 px-2 py-0.5 rounded border border-rose-200 font-bold">${currentTask.hint}</code></span>` + formatWasWarumWofuer(currentTask.wasWarumWofuer);
+          const errDetail = `Erwartet: <strong>${currentTask.expected}</strong> (${currentTask.unit}).<br><span class="inline-block mt-1">Lösungsweg: <code class="bg-white/90 px-2 py-0.5 rounded border border-rose-200 font-bold">${currentTask.hint}</code></span>` + formatWasWarumWofuer(currentTask);
           showMiniFeedback(
             '❌ Leider nicht ganz richtig.',
             errDetail,
@@ -4440,7 +4695,7 @@
         score.streak++;
         updateScoreUI();
 
-        const numSuccessDetail = (currentTask.explanation || '') + formatWasWarumWofuer(currentTask.wasWarumWofuer);
+        const numSuccessDetail = formatWasWarumWofuer(currentTask);
         showMiniFeedback('🎉 Hervorragend! Das ist absolut richtig!', numSuccessDetail, 'success', true);
         
         if (feedbackRetryBtn) feedbackRetryBtn.classList.add('hidden');
@@ -4457,7 +4712,7 @@
         score.streak = 0;
         updateScoreUI();
 
-        const numErrDetail = `Erwartet: ca. <strong>${currentTask.expected} ${currentTask.unit}</strong>.<br><span class="inline-block mt-1">Formel / Rechenweg: <code class="bg-white/90 px-2 py-0.5 rounded border border-rose-200 font-bold">${currentTask.hint}</code></span>` + formatWasWarumWofuer(currentTask.wasWarumWofuer);
+        const numErrDetail = `Erwartet: ca. <strong>${currentTask.expected} ${currentTask.unit}</strong>.<br><span class="inline-block mt-1">Formel / Rechenweg: <code class="bg-white/90 px-2 py-0.5 rounded border border-rose-200 font-bold">${currentTask.hint}</code></span>` + formatWasWarumWofuer(currentTask);
         showMiniFeedback(
           '❌ Leider nicht ganz richtig.',
           numErrDetail,
