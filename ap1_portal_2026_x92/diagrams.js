@@ -6079,6 +6079,11 @@ var VisualDiagrams = {
             return VisualDiagrams.getPapDiagramSvg();
         }
 
+        // 15c. IPv6 Subnetting & Standortplanung (/48 auf /52 und /64, Havelholz, Zweierpotenzen 2^Δ)
+        if (/\b(standortplanung|havelholz|\/52|zweierpotenz|pr[aä]fixl[aä]ngen|2\^12|4096|2a01|3001)\b/i.test(text) || (text.includes("ipv6") && (text.includes("standort") || text.includes("/52") || text.includes("65536")))) {
+            return VisualDiagrams.getIpv6SubnettingDiagramSvg();
+        }
+
         // 15b. IPv6 Adressarchitektur (48 Bit Global Prefix, 16 Bit Subnet-ID, 64 Bit Interface-ID)
         if (/\b(interface-id|netzpr[aä]fix|subnetz-id|globale[s]? r?pr[aä]fix|globales routing-pr[aä]fix)\b/i.test(text) || (text.includes("ipv6") && (text.includes("48 bit") || text.includes("/48") || text.includes("acad")))) {
             return VisualDiagrams.getIpv6StructureDiagramSvg();
@@ -6223,6 +6228,122 @@ var VisualDiagrams = {
 
   <rect x="625" y="437" width="14" height="14" rx="3" fill="#fffbeb" stroke="#d97706" stroke-width="1.5"/>
   <text x="645" y="448" fill="#334155" font-size="10.5" font-weight="600">Sparte (Kundengruppenorientiert)</text>
+</svg>`;
+    },
+
+    getIpv6SubnettingDiagramSvg: function() {
+        return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 440" width="100%" height="auto" style="max-width: 880px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+  <defs>
+    <linearGradient id="subBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f8fafc"/>
+    </linearGradient>
+    <filter id="subShadow" x="-5%" y="-5%" width="110%" height="115%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <rect width="880" height="440" fill="url(#subBg)" rx="10" stroke="#cbd5e1" stroke-width="1.5"/>
+
+  <!-- Title Header -->
+  <rect x="0" y="0" width="880" height="46" fill="#0f172a" rx="10"/>
+  <rect x="0" y="36" width="880" height="10" fill="#0f172a"/>
+  <text x="25" y="29" fill="#f8fafc" font-size="15" font-weight="700">IHK IPv6 Subnetting &amp; Standortplanung (/48 auf /52 und /64)</text>
+  <rect x="710" y="11" width="150" height="24" fill="#0284c7" rx="12"/>
+  <text x="785" y="27" fill="#ffffff" font-size="11" font-weight="700" text-anchor="middle">Nibble-Grenzen (4 Bit)</text>
+
+  <!-- TOP SECTION: DIE NIBBLE-AUFTEILUNG DES 4. BLOCKS -->
+  <g transform="translate(30, 65)">
+    <!-- Block 1-3 Box (/48) -->
+    <rect x="0" y="0" width="310" height="60" rx="6" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+    <text x="155" y="25" fill="#15803d" font-size="13" font-weight="700" text-anchor="middle" font-family="monospace">2001 : 0db8 : 00c3</text>
+    <text x="155" y="45" fill="#166534" font-size="11" font-weight="600" text-anchor="middle">Basis-Präfix /48 (3 Hextets = 48 Bit)</text>
+    
+    <text x="320" y="35" fill="#64748b" font-size="20" font-weight="bold">:</text>
+
+    <!-- Block 4: Aufgeteilt in 4 Bits (Standort) und 12 Bits (Subnetze) -->
+    <!-- Bit 49-52: 1 Hex-Ziffer (Standort /52) -->
+    <rect x="335" y="0" width="105" height="60" rx="6" fill="#eff6ff" stroke="#2563eb" stroke-width="2.5"/>
+    <text x="387" y="25" fill="#1d4ed8" font-size="15" font-weight="700" text-anchor="middle" font-family="monospace">X</text>
+    <text x="387" y="45" fill="#1e40af" font-size="10" font-weight="700" text-anchor="middle">Bit 49-52 (/52)</text>
+    <text x="387" y="55" fill="#2563eb" font-size="8.5" text-anchor="middle">1 Hex-Ziffer</text>
+
+    <!-- Bit 53-64: 3 Hex-Ziffern (/64) -->
+    <rect x="445" y="0" width="135" height="60" rx="6" fill="#fef3c7" stroke="#d97706" stroke-width="2"/>
+    <text x="512" y="25" fill="#b45309" font-size="14" font-weight="700" text-anchor="middle" font-family="monospace">Y Y Y</text>
+    <text x="512" y="45" fill="#92400e" font-size="10" font-weight="600" text-anchor="middle">Bit 53-64 (/64)</text>
+    <text x="512" y="55" fill="#b45309" font-size="8.5" text-anchor="middle">3 Hex-Ziffern</text>
+
+    <text x="590" y="35" fill="#64748b" font-size="20" font-weight="bold">:: /64</text>
+
+    <!-- Interface-ID / Host -->
+    <rect x="640" y="0" width="180" height="60" rx="6" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.5"/>
+    <text x="730" y="25" fill="#475569" font-size="12" font-weight="700" text-anchor="middle" font-family="monospace">Interface-ID</text>
+    <text x="730" y="45" fill="#64748b" font-size="10" text-anchor="middle">64 Bit Hostanteil</text>
+  </g>
+
+  <!-- FORMEL-BOXEN (CENTER) -->
+  <g transform="translate(30, 140)">
+    <rect x="0" y="0" width="395" height="75" rx="6" fill="#f0f9ff" stroke="#0ea5e9" stroke-width="1.8"/>
+    <text x="15" y="24" fill="#0369a1" font-size="12" font-weight="700">1. Anzahl Standortblöcke (/52 aus /48):</text>
+    <text x="15" y="44" fill="#0c4a6e" font-size="13" font-family="monospace" font-weight="700">Δ Bits = 52 - 48 = 4 Bits</text>
+    <text x="15" y="63" fill="#0284c7" font-size="12" font-weight="700">Anzahl = 2^4 = 16 Standorte (0 bis f hex)</text>
+
+    <rect x="425" y="0" width="395" height="75" rx="6" fill="#fefce8" stroke="#ca8a04" stroke-width="1.8"/>
+    <text x="440" y="24" fill="#854d0e" font-size="12" font-weight="700">2. /64-Subnetze je Standortblock (/52):</text>
+    <text x="440" y="44" fill="#713f12" font-size="13" font-family="monospace" font-weight="700">Δ Bits = 64 - 52 = 12 Bits</text>
+    <text x="440" y="63" fill="#ca8a04" font-size="12" font-weight="700">Anzahl = 2^12 = 4.096 Subnetze (000 bis fff hex)</text>
+  </g>
+
+  <!-- STANDORT-ÜBERSICHT & ZUORDNUNG (BOTTOM) -->
+  <g transform="translate(30, 230)">
+    <rect x="0" y="0" width="820" height="190" rx="6" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+
+    <text x="20" y="24" fill="#0f172a" font-size="13" font-weight="700">Standort-Übersicht &amp; Adressbereiche (Havelholz GmbH):</text>
+
+    <!-- Standort 1 -->
+    <rect x="20" y="38" width="185" height="135" rx="5" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.2"/>
+    <rect x="20" y="38" width="185" height="24" rx="5" fill="#0284c7"/>
+    <text x="112" y="54" fill="#ffffff" font-size="11" font-weight="700" text-anchor="middle">1. Zentrale (Hex 0)</text>
+    <text x="28" y="78" fill="#0369a1" font-size="10" font-weight="700">Präfix:</text>
+    <text x="28" y="93" fill="#0f172a" font-size="9.5" font-family="monospace">...:c3:0000::/52</text>
+    <text x="28" y="112" fill="#64748b" font-size="9.5">Bereich 4. Block:</text>
+    <text x="28" y="127" fill="#0f172a" font-size="9" font-family="monospace">0000 bis 0fff</text>
+    <text x="28" y="148" fill="#16a34a" font-size="9" font-weight="600">4.096 /64-Subnetze</text>
+
+    <!-- Standort 2 -->
+    <rect x="220" y="38" width="185" height="135" rx="5" fill="#f8fafc" stroke="#3b82f6" stroke-width="1.8"/>
+    <rect x="220" y="38" width="185" height="24" rx="5" fill="#2563eb"/>
+    <text x="312" y="54" fill="#ffffff" font-size="11" font-weight="700" text-anchor="middle">2. Lager (Hex 1)</text>
+    <text x="228" y="78" fill="#1d4ed8" font-size="10" font-weight="700">Präfix:</text>
+    <text x="228" y="93" fill="#0f172a" font-size="9.5" font-family="monospace">...:c3:1000::/52</text>
+    <text x="228" y="112" fill="#64748b" font-size="9.5">Erste / Letzte Adresse:</text>
+    <text x="228" y="127" fill="#0f172a" font-size="8.5" font-family="monospace">...:1000::</text>
+    <text x="228" y="140" fill="#0f172a" font-size="8" font-family="monospace">...:1fff:ffff:ffff:ffff:ffff</text>
+    <text x="228" y="160" fill="#2563eb" font-size="9" font-weight="700">Bereich: 1000 - 1fff</text>
+
+    <!-- Standort 3 -->
+    <rect x="420" y="38" width="185" height="135" rx="5" fill="#fef2f2" stroke="#ef4444" stroke-width="1.8"/>
+    <rect x="420" y="38" width="185" height="24" rx="5" fill="#dc2626"/>
+    <text x="512" y="54" fill="#ffffff" font-size="11" font-weight="700" text-anchor="middle">3. Werkstatt (Hex 2)</text>
+    <text x="428" y="78" fill="#b91c1c" font-size="10" font-weight="700">Präfix:</text>
+    <text x="428" y="93" fill="#0f172a" font-size="9.5" font-family="monospace">...:c3:2000::/52</text>
+    <text x="428" y="112" fill="#64748b" font-size="9.5">Prüfadresse (Aufgabe 5):</text>
+    <text x="428" y="127" fill="#b91c1c" font-size="8.5" font-family="monospace" font-weight="700">...:c3:2a01::5</text>
+    <text x="428" y="145" fill="#15803d" font-size="9" font-weight="700">✓ Passt in 2000-2fff!</text>
+    <text x="428" y="160" fill="#64748b" font-size="8.5">(Beginnt mit 2 hex)</text>
+
+    <!-- Standort 4 -->
+    <rect x="620" y="38" width="185" height="135" rx="5" fill="#fdf4ff" stroke="#c026d3" stroke-width="1.8"/>
+    <rect x="620" y="38" width="185" height="24" rx="5" fill="#a21caf"/>
+    <text x="712" y="54" fill="#ffffff" font-size="11" font-weight="700" text-anchor="middle">4. Außenstelle (Hex 3)</text>
+    <text x="628" y="78" fill="#86198f" font-size="10" font-weight="700">Präfix:</text>
+    <text x="628" y="93" fill="#0f172a" font-size="9.5" font-family="monospace">...:c3:3000::/52</text>
+    <text x="628" y="112" fill="#64748b" font-size="9.5">Prüfadresse (Aufgabe 5):</text>
+    <text x="628" y="127" fill="#86198f" font-size="8.5" font-family="monospace" font-weight="700">...:c3:3001::5</text>
+    <text x="628" y="145" fill="#15803d" font-size="9" font-weight="700">✓ Passt in 3000-3fff!</text>
+    <text x="628" y="160" fill="#64748b" font-size="8.5">(Beginnt mit 3 hex)</text>
+  </g>
 </svg>`;
     },
 

@@ -13486,5 +13486,116 @@ Ermitteln Sie tabellarisch folgende Werte und beantworten Sie die Zusatzfragen:
    - Ergebnis: Ursprüngliche MAC-Adresse lautet: 00:1A:2B:3C:4D:5E.`,
         solutionDiagramSvg: VisualDiagrams.getIpv6StructureDiagramSvg(),
         explanation: "Das EUI-64-Verfahren teilt eine 48-Bit-MAC-Adresse in zwei Hälften (OUI und NIC), fügt FF:FE in die Mitte ein und invertiert das 7. Bit (U/L-Bit). Bei der Rückrechnung wird dies exakt umgekehrt durchgeführt."
+    },
+    // =========================================================================
+    // IHK STANDORTPLANUNG, PRÄFIXLÄNGEN & SUBSET-BERECHNUNG (/48 auf /52 & /64)
+    // =========================================================================
+    {
+        id: 575,
+        isHard: false,
+        difficulty: "standard",
+        isBawueFocus: true,
+        isItArbeitsplatz: true,
+        theme: "lf3",
+        topic: "📊 IHK-Aufgabe: IPv6 Präfixlängen, Subnetzmengen & Zweierpotenzen (2^Δ)",
+        type: "multiple-choice",
+        question: `In der IHK-Abschlussprüfung gilt für die Berechnung von IPv6-Subnetzen und Adressmengen die grundlegende Formel:
+Anzahl = 2^(Differenz der Präfixlänge)
+
+Berechnen Sie folgende vier typische Prüfungsfragen:
+1. Wie viele Adressen umfasst ein /64-Netz?
+2. Wie viele /64-Netze passen in ein vom ISP zugewiesenes /56-Präfix?
+3. Wie viele /56-Netze passen in ein /48-Präfix?
+4. Wie viele /48-Netze passen in einen /32-Provider-Block?
+
+Welche Zeile enthält alle vier korrekten Ergebnisse?`,
+        options: [
+            "1. 2^64 (ca. 18,45 Trillionen Adressen) | 2. 2^(64-56) = 2^8 = 256 Netze | 3. 2^(56-48) = 2^8 = 256 Netze | 4. 2^(48-32) = 2^16 = 65.536 Netze",
+            "1. 2^32 (ca. 4,29 Mrd. Adressen) | 2. 2^16 = 65.536 Netze | 3. 2^16 = 65.536 Netze | 4. 2^8 = 256 Netze",
+            "1. 2^64 (ca. 18,45 Trillionen Adressen) | 2. 2^4 = 16 Netze | 3. 2^4 = 16 Netze | 4. 2^8 = 256 Netze",
+            "1. 2^128 (Gesamter Adressraum) | 2. 56 Netze | 3. 48 Netze | 4. 32 Netze"
+        ],
+        correctAnswer: 0,
+        solutionDiagramSvg: VisualDiagrams.getIpv6SubnettingDiagramSvg(),
+        explanation: `Die Subnetz-Berechnung in IPv6 basiert stets auf Zweierpotenzen der Bit-Differenz:
+• 1. /64-Netz: 128 Bit - 64 Bit = 64 Hostbits -> 2^64 = ca. 18.446.744.073.709.551.616 Adressen (ca. 18,45 Trillionen).
+• 2. /64-Netze in /56: 64 - 56 = 8 Bits -> 2^8 = 256 Subnetze.
+• 3. /56-Netze in /48: 56 - 48 = 8 Bits -> 2^8 = 256 Subnetze.
+• 4. /48-Netze in /32: 48 - 32 = 16 Bits -> 2^16 = 65.536 Firmennetze.`
+    },
+    {
+        id: 576,
+        isHard: true,
+        difficulty: "hard",
+        isBawueFocus: true,
+        isItArbeitsplatz: true,
+        theme: "lf3",
+        topic: "🏢 IHK-Aufgabe Standortplanung: /48-Netz in /52-Blöcke & Adressbereiche (Havelholz GmbH)",
+        type: "open-text",
+        question: `Die Havelholz GmbH erhält vom Provider das IPv6-Präfix 2001:db8:c3::/48. Das Netz soll für verschiedene Unternehmensstandorte in /52-Blöcke aufgeteilt werden.
+
+Bearbeiten Sie die Teilaufgaben:
+a) Wie viele /52-Standortblöcke sind möglich, und wie viele /64-Subnetze enthält jeder einzelne /52-Block?
+b) Ergänzen Sie die /52-Präfixe der ersten vier Standorte:
+   • Standort 1 (Zentrale)
+   • Standort 2 (Lager)
+   • Standort 3 (Werkstatt)
+   • Standort 4 (Außenstelle)
+c) Geben Sie für Standort 2 die erste und die letzte Adresse des Blocks an.`,
+        sampleSolution: `Musterlösung nach IHK-Standard:
+
+a) Berechnung der Block- und Subnetzmengen:
+1. Anzahl der /52-Standortblöcke aus einem /48-Präfix:
+   Differenz: 52 - 48 = 4 Bits.
+   Anzahl = 2^4 = 16 verschiedene Standortblöcke!
+2. Anzahl der /64-Subnetze je /52-Standortblock:
+   Differenz: 64 - 52 = 12 Bits.
+   Anzahl = 2^12 = 4.096 eigenständige /64-Subnetze je Standort!
+   (Kontrolle: 16 Standorte * 4.096 Subnetze = 65.536 = 2^16 Subnetze).
+
+b) Präfixe der ersten vier Standorte:
+Da 4 Bits genau einer Hexadezimalziffer (Nibble) entsprechen, wird die erste Ziffer des 4. Blocks schrittweise um 1 hex erhöht (0 bis 3):
+• 1. Standort (Zentrale): 2001:db8:c3:0000::/52 (bzw. 2001:db8:c3::/52)
+• 2. Standort (Lager): 2001:db8:c3:1000::/52
+• 3. Standort (Werkstatt): 2001:db8:c3:2000::/52
+• 4. Standort (Außenstelle): 2001:db8:c3:3000::/52
+
+c) Erste und letzte Adresse für Standort 2 (Präfix 2001:db8:c3:1000::/52):
+• Der 4. Block hat die feste Ziffer '1' an den Bits 49-52. Die restlichen 12 Bits laufen von '000' bis 'fff':
+  Bereich des 4. Blocks: 1000 bis 1fff.
+• Erste Adresse: 2001:db8:c3:1000:: (Netzwerk-Präfix / Anycast) bzw. 2001:db8:c3:1000::1 (erste Hostadresse)
+• Letzte Adresse: 2001:db8:c3:1fff:ffff:ffff:ffff:ffff`,
+        solutionDiagramSvg: VisualDiagrams.getIpv6SubnettingDiagramSvg(),
+        explanation: "4 Bits entsprechen exakt 1 Nibble (1 Hex-Zeichen). Bei einer Teilung von /48 auf /52 ändert sich genau die erste Ziffer des vierten Hextets von 0, 1, 2, ... bis f."
+    },
+    {
+        id: 577,
+        isHard: false,
+        difficulty: "standard",
+        isBawueFocus: true,
+        isItArbeitsplatz: true,
+        theme: "lf3",
+        topic: "🔍 IHK-Aufgabe Standortzuordnung: Adressen anhand des /52-Präfixes prüfen & begründen",
+        type: "multiple-choice",
+        question: `Die Havelholz GmbH verwendet für ihre Standorte folgende /52-Präfixe:
+• Standort 1 (Zentrale): 2001:db8:c3:0000::/52 (Bereich 0000 bis 0fff)
+• Standort 2 (Lager): 2001:db8:c3:1000::/52 (Bereich 1000 bis 1fff)
+• Standort 3 (Werkstatt): 2001:db8:c3:2000::/52 (Bereich 2000 bis 2fff)
+• Standort 4 (Außenstelle): 2001:db8:c3:3000::/52 (Bereich 3000 bis 3fff)
+
+Prüfen Sie, zu welchem Standort die beiden folgenden Adressen gehören, und wählen Sie die fachlich korrekte Zuordnung mit Begründung:
+Adresse A: 2001:db8:c3:2a01::5
+Adresse B: 2001:db8:c3:3001::5`,
+        options: [
+            "Adresse A gehört zu Standort 3 (Werkstatt), da der 4. Block '2a01' mit '2' hex beginnt und im Bereich 2000 bis 2fff liegt. Adresse B gehört zu Standort 4 (Außenstelle), da der 4. Block '3001' mit '3' hex beginnt und im Bereich 3000 bis 3fff liegt.",
+            "Adresse A gehört zu Standort 2 (Lager) wegen '2a01'; Adresse B gehört zu Standort 3 (Werkstatt) wegen '3001'.",
+            "Beide Adressen gehören zur Zentrale (Standort 1), da alle Adressen unter dem Basis-Präfix 2001:db8:c3::/48 geroutet werden.",
+            "Adresse A ist ungültig, da der Buchstabe 'a' in IPv6-Adressen nicht vorkommen darf; Adresse B gehört zu Standort 1."
+        ],
+        correctAnswer: 0,
+        solutionDiagramSvg: VisualDiagrams.getIpv6SubnettingDiagramSvg(),
+        explanation: `Bei einem /52-Präfix bestimmen die ersten 4 Bits des vierten Hextets (das erste Hex-Zeichen) den Standort:
+• '2a01' beginnt mit '2' -> liegt zwischen 2000 und 2fff -> Standort 3 (Werkstatt).
+• '3001' beginnt mit '3' -> liegt zwischen 3000 und 3fff -> Standort 4 (Außenstelle).`
     }
 ];
