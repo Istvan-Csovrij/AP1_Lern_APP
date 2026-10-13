@@ -6104,6 +6104,9 @@ var VisualDiagrams = {
         if (/\b(storage|raid\s*5|raid\s*10|verfügbarkeit|ausfallzeit|3-2-1)\b/i.test(text) && (text.includes("525") || text.includes("20 tb") || text.includes("softtech"))) {
             return VisualDiagrams.getStorageVirtualizationSvg();
         }
+        if (/\b(algorithmus|pseudocode|suchlogik|lineare suche|binäre suche|extremwert|schwellenwert|indexoutofbound)\b/i.test(text)) {
+            return VisualDiagrams.getAlgorithmPatternsSvg();
+        }
 
         return null;
     },
@@ -6264,6 +6267,116 @@ var VisualDiagrams = {
       <text x="48" y="54" fill="#075985" font-size="9.5">Rechenzentrum oder gesicherte Cloud)</text>
       <text x="48" y="68" fill="#0369a1" font-size="9.5" font-weight="700">🔒 WORM / Immutability gegen Ransomware</text>
     </g>
+  </g>
+</svg>`;
+    },
+
+    getAlgorithmPatternsSvg: function() {
+        return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 540" width="100%" height="auto" style="max-width: 920px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+  <defs>
+    <linearGradient id="algoBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f8fafc"/>
+    </linearGradient>
+    <filter id="algoShadow" x="-5%" y="-5%" width="110%" height="115%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <rect width="920" height="540" fill="url(#algoBg)" rx="10" stroke="#cbd5e1" stroke-width="1.5"/>
+
+  <!-- Title Header -->
+  <rect x="0" y="0" width="920" height="46" fill="#0f172a" rx="10"/>
+  <rect x="0" y="36" width="920" height="10" fill="#0f172a"/>
+  <text x="25" y="29" fill="#f8fafc" font-size="15" font-weight="700">IHK Algorithmen- &amp; Pseudocode-Muster • Code-Review &amp; Suchverfahren</text>
+  <rect x="730" y="11" width="165" height="24" fill="#3b82f6" rx="12"/>
+  <text x="812" y="27" fill="#ffffff" font-size="11" font-weight="700" text-anchor="middle">IHK AP1 Core-Logik</text>
+
+  <!-- CARD 1: Lineare Suche & Sentinel (Top Left) -->
+  <g filter="url(#algoShadow)">
+    <rect x="25" y="65" width="420" height="215" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+    <rect x="25" y="65" width="420" height="34" rx="8" fill="#eff6ff"/>
+    <rect x="25" y="91" width="420" height="8" fill="#eff6ff"/>
+    <text x="40" y="87" fill="#1d4ed8" font-size="13" font-weight="700">1. Lineare Suche &amp; Sentinel (-1 / bool)</text>
+
+    <rect x="40" y="108" width="390" height="100" rx="6" fill="#0f172a"/>
+    <text x="52" y="126" fill="#38bdf8" font-size="10.5" font-family="monospace">for (int i = 0; i &lt; arr.Length; i++) {</text>
+    <text x="68" y="144" fill="#f8fafc" font-size="10.5" font-family="monospace">if (arr[i] == gesucht) return i; // Treffer sofort!</text>
+    <text x="52" y="162" fill="#38bdf8" font-size="10.5" font-family="monospace">}</text>
+    <text x="52" y="180" fill="#10b981" font-size="10.5" font-family="monospace" font-weight="700">return -1; // Erst NACH Schleife! (Kein Treffer)</text>
+    <text x="52" y="196" fill="#94a3b8" font-size="9.5" font-family="monospace">// Bei bool: 'return true' in if, 'return false' am Ende</text>
+
+    <text x="40" y="232" fill="#dc2626" font-size="10.5" font-weight="700">⚠️ IHK-Falle: 'return false' niemals in 'else' der Schleife!</text>
+    <text x="40" y="248" fill="#475569" font-size="9.5">Sonst bricht die Suche sofort beim 1. ungleichen Element ab!</text>
+    <text x="40" y="264" fill="#0369a1" font-size="9.5" font-weight="600">Laufzeit: O(n) • Funktioniert auch bei unsortierten Daten.</text>
+  </g>
+
+  <!-- CARD 2: Extremwert- & Schwellenwert-Suche (Top Right) -->
+  <g filter="url(#algoShadow)">
+    <rect x="475" y="65" width="420" height="215" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+    <rect x="475" y="65" width="420" height="34" rx="8" fill="#fef3c7"/>
+    <rect x="475" y="91" width="420" height="8" fill="#fef3c7"/>
+    <text x="490" y="87" fill="#b45309" font-size="13" font-weight="700">2. Min/Max-Suche &amp; Schwellenwert-Zähler</text>
+
+    <rect x="490" y="108" width="390" height="100" rx="6" fill="#0f172a"/>
+    <text x="502" y="126" fill="#f59e0b" font-size="10.5" font-family="monospace">int max = arr[0]; int count = 0;</text>
+    <text x="502" y="144" fill="#38bdf8" font-size="10.5" font-family="monospace">for (int i = 1; i &lt; arr.Length; i++) {</text>
+    <text x="518" y="162" fill="#f8fafc" font-size="10.5" font-family="monospace">if (arr[i] &gt; max) max = arr[i]; // Neuer Höchstwert</text>
+    <text x="518" y="180" fill="#f8fafc" font-size="10.5" font-family="monospace">if (arr[i] &gt; 150) count++;     // SLA-Überschreitung</text>
+    <text x="502" y="198" fill="#38bdf8" font-size="10.5" font-family="monospace">}</text>
+
+    <text x="490" y="232" fill="#d97706" font-size="10.5" font-weight="700">⚠️ IHK-Falle: max mit arr[0] initialisieren, NICHT mit 0!</text>
+    <text x="490" y="248" fill="#475569" font-size="9.5">Wenn alle Werte negativ wären, bliebe 0 fälschlicherweise das Max.</text>
+    <text x="490" y="264" fill="#b45309" font-size="9.5" font-weight="600">Start bei i = 1 spart 1 überflüssigen Vergleich mit sich selbst.</text>
+  </g>
+
+  <!-- CARD 3: Die 4 häufigsten Code-Review Bugs (Bottom Left) -->
+  <g filter="url(#algoShadow)">
+    <rect x="25" y="295" width="420" height="225" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+    <rect x="25" y="295" width="420" height="34" rx="8" fill="#fef2f2"/>
+    <rect x="25" y="321" width="420" height="8" fill="#fef2f2"/>
+    <text x="40" y="317" fill="#dc2626" font-size="13" font-weight="700">3. IHK Code-Review: Typische Bug-Muster</text>
+
+    <!-- Bug 1 -->
+    <rect x="40" y="338" width="390" height="38" rx="4" fill="#fff1f2" stroke="#fecdd3" stroke-width="1"/>
+    <text x="50" y="353" fill="#be123c" font-size="10.5" font-weight="700">❌ Off-by-One oben: i &lt;= arr.Length</text>
+    <text x="50" y="367" fill="#475569" font-size="9.5">Letzter Index ist Length - 1! &lt;= wirft IndexOutOfRangeException!</text>
+
+    <!-- Bug 2 -->
+    <rect x="40" y="382" width="390" height="38" rx="4" fill="#fff1f2" stroke="#fecdd3" stroke-width="1"/>
+    <text x="50" y="397" fill="#be123c" font-size="10.5" font-weight="700">❌ Off-by-One unten: int i = 1</text>
+    <text x="50" y="411" fill="#475569" font-size="9.5">Ignoriert das 1. Element bei Index 0! Richtig: int i = 0</text>
+
+    <!-- Bug 3 -->
+    <rect x="40" y="426" width="390" height="38" rx="4" fill="#fff1f2" stroke="#fecdd3" stroke-width="1"/>
+    <text x="50" y="441" fill="#be123c" font-size="10.5" font-weight="700">❌ Integer-Division: int summe / int length</text>
+    <text x="50" y="455" fill="#475569" font-size="9.5">Schneidet Nachkommastellen ab! Richtig: (double) summe / length</text>
+
+    <!-- Bug 4 -->
+    <rect x="40" y="470" width="390" height="38" rx="4" fill="#fff1f2" stroke="#fecdd3" stroke-width="1"/>
+    <text x="50" y="485" fill="#be123c" font-size="10.5" font-weight="700">❌ Logik-Operator: if (c == ' ' &amp;&amp; c == '_')</text>
+    <text x="50" y="499" fill="#475569" font-size="9.5">Ein Zeichen kann nie zwei Werte zugleich haben! Richtig: || (OR)</text>
+  </g>
+
+  <!-- CARD 4: Binäre Suche / Binary Search (Bottom Right) -->
+  <g filter="url(#algoShadow)">
+    <rect x="475" y="295" width="420" height="225" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+    <rect x="475" y="295" width="420" height="34" rx="8" fill="#f0fdf4"/>
+    <rect x="475" y="321" width="420" height="8" fill="#f0fdf4"/>
+    <text x="490" y="317" fill="#15803d" font-size="13" font-weight="700">4. Binäre Suche (Intervallhalbierung)</text>
+
+    <rect x="490" y="338" width="390" height="95" rx="6" fill="#0f172a"/>
+    <text x="502" y="356" fill="#4ade80" font-size="10.5" font-family="monospace">int li = 0, re = arr.Length - 1;</text>
+    <text x="502" y="374" fill="#38bdf8" font-size="10.5" font-family="monospace">while (li &lt;= re) {</text>
+    <text x="518" y="392" fill="#f8fafc" font-size="10.5" font-family="monospace">int mi = (li + re) / 2;</text>
+    <text x="518" y="410" fill="#f8fafc" font-size="10.5" font-family="monospace">if (arr[mi] == x) return mi; // Treffer!</text>
+    <text x="518" y="424" fill="#94a3b8" font-size="9.5" font-family="monospace">if (arr[mi] &lt; x) li = mi + 1; else re = mi - 1;</text>
+    <text x="502" y="438" fill="#38bdf8" font-size="10" font-family="monospace">} return -1;</text>
+
+    <text x="490" y="456" fill="#15803d" font-size="10.5" font-weight="700">⚡ Zwingende Voraussetzung: Array MUSS sortiert sein!</text>
+    <text x="490" y="472" fill="#047857" font-size="10" font-weight="600">Laufzeit: O(log n) • Extrem effizient für große Datenmengen</text>
+    <text x="490" y="488" fill="#475569" font-size="9.5">Vergleich bei 1.000.000 Elementen:</text>
+    <text x="490" y="504" fill="#0f172a" font-size="9.5" font-weight="600">• Lineare Suche: max. 1.000.000 Schritte | • Binär: max. 20 Schritte!</text>
   </g>
 </svg>`;
     },

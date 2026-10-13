@@ -13677,5 +13677,293 @@ c) DAD (Duplicate Address Detection) bei SLAAC:
 • Reaktion bei Kollision: Erkennt der Host durch eine Antwort auf seine DAD-Nachricht (Neighbor Solicitation an die Solicited-Node Multicast-Adresse), dass die IP bereits vergeben ist, darf er die Adresse NICHT aktivieren. Bei Privacy Extensions generiert er eine neue temporäre Zufalls-ID; bei EUI-64 muss die Konfiguration abgebrochen und ein Administrator alarmiert bzw. auf manuell/DHCPv6 ausgewichen werden.`,
         solutionDiagramSvg: VisualDiagrams.getIpv6AutoconfigDiagramSvg(),
         explanation: "Klassische Transferaufgabe der IHK: M-Flag (Managed -> stateful IP), O-Flag (Other -> stateless DNS), DAD vor Aktivierung der IP zwingend vorgeschrieben."
+    },
+    // =========================================================================
+    // IHK VERTIEFUNG PROGRAMMIERUNG & PSEUDOCODE: ALGORITHMEN, CODE-REVIEW & BUGFIXING
+    // =========================================================================
+    {
+        id: 580,
+        isHard: true,
+        difficulty: "hard",
+        isBawueFocus: true,
+        isPseudocode: true,
+        theme: "pseudocode",
+        topic: "💻 IHK Code-Review: IndexOutOfRangeException & Boolesche Logik-Operatoren (Hostname-Validierung)",
+        type: "open-text",
+        question: `Im Rahmen der Qualitätssicherung eines Bereitstellungstools analysieren Sie die folgende Methode zur Hostname-Validierung:
+
+bool istGueltig = true;
+
+// Schleife zur Zeichenprüfung:
+for (int i = 0; i <= hostname.Length; i++)
+{
+    // Verbotene Zeichen: Leerzeichen (' '), Unterstrich ('_') und Schrägstrich ('/')
+    if (hostname[i] == ' ' && hostname[i] == '_' && hostname[i] == '/')
+    {
+        istGueltig = false;
+    }
+}
+
+// Längenbeschränkung: Maximal 15 Zeichen erlaubt
+if (hostname.Length > 15)
+{
+    istGueltig = false;
+}
+
+return istGueltig;
+
+Testfall & Systembeobachtung:
+Bei Ausführung mit dem ungültigen Test-Hostnamen "SRV 01_PROD" (enthält Leerzeichen und Unterstrich) stürzt das Programm mit einer 'IndexOutOfRangeException' ab. Zuvor meldete ein Test mit "SRV 01", dass die if-Bedingung niemals auslöst.
+
+Aufgaben:
+a) Analysieren Sie den Absturz: Warum führt die Schleifenbedingung 'i <= hostname.Length' zwingend zu einem Laufzeitfehler? Erläutern Sie das Off-by-One-Problem am oberen Index-Rand.
+b) Analysieren Sie die Verzweigung: Warum kann der Ausdruck '(hostname[i] == \\' \\' && hostname[i] == \\'_\\' && hostname[i] == \\'/\\')' NIEMALS true werden? Nennen Sie die korrekte logische Verknüpfung.
+c) Schreiben Sie den fehlerfreien, korrigierten Code (in C#, Java, Python oder DIN-Pseudocode).`,
+        musterloesung: `Musterlösung IHK Code-Review (Hostname-Validierung):
+
+a) Ursache der IndexOutOfRangeException (Off-by-One am oberen Indexrand):
+• Zero-Based Indexing: In C#, Java, JavaScript und Python beginnt die Indizierung bei 0. Ein String mit der Länge n (z. B. 11 Zeichen) besitzt die gültigen Indizes 0 bis n - 1 (Index 0 bis 10).
+• Fehler in Schleifenbedingung: Die Bedingung 'i <= hostname.Length' führt dazu, dass im letzten Schleifendurchlauf der Index i = hostname.Length erreicht wird.
+• Zugriff 'hostname[hostname.Length]' greift auf das Zeichen hinter dem String-Ende zu und wirft unweigerlich eine IndexOutOfRangeException (oder StringIndexOutOfBoundsException).
+• Korrektur: Die Bedingung muss 'i < hostname.Length' lauten (oder 'i <= hostname.Length - 1').
+
+b) Ursache des logischen Fehlers (Boolesches UND statt ODER):
+• Logischer Operator '&&' (Konjunktion/AND): Die Bedingung verlangt, dass die Variable 'hostname[i]' ZUGLEICH den Wert ' ' UND '_' UND '/' annimmt.
+• Da eine einzelne Speicherstelle (char) zu einem gegebenen Zeitpunkt exakt ein einziges Zeichen repräsentiert, ist dieser Ausdruck IMMER false (Kontradiktion).
+• Korrektur: Die Bedingungen müssen disjunktiv mit '||' (logisches ODER) verknüpft werden:
+  if (hostname[i] == ' ' || hostname[i] == '_' || hostname[i] == '/')
+
+c) Korrigierter Quellcode:
+bool istGueltig = true;
+
+if (hostname == null || hostname.Length == 0 || hostname.Length > 15)
+{
+    return false;
+}
+
+for (int i = 0; i < hostname.Length; i++)
+{
+    char c = hostname[i];
+    if (c == ' ' || c == '_' || c == '/')
+    {
+        istGueltig = false;
+        break; // Optimierung: Sofortiger Abbruch bei Fund
+    }
+}
+
+return istGueltig;`,
+        solutionDiagramSvg: VisualDiagrams.getAlgorithmPatternsSvg(),
+        explanation: "Häufige IHK-Prüfungsfallen: 1. 'i <= Length' greift über das Array-Ende hinaus. 2. Logisches '&&' statt '||' bei Zeichenvergleichen führt zu toter Logik."
+    },
+    {
+        id: 581,
+        isHard: false,
+        difficulty: "standard",
+        isBawueFocus: true,
+        isPseudocode: true,
+        theme: "pseudocode",
+        topic: "💻 IHK Multiple-Choice: Array-Grenzüberlauf & Exception-Verhalten",
+        type: "multiple-choice",
+        question: `Ein Programmierer initialisiert ein Array mit 5 Ganzzahlen:
+int[] werte = new int[5];
+
+for (int i = 0; i <= werte.Length; i++)
+{
+    werte[i] = 10;
+}
+
+Welche Aussage beschreibt das Verhalten dieses Programms zur Laufzeit fachlich zutreffend?`,
+        options: [
+            "Die Schleife bricht beim Durchlauf i = 5 mit einer 'IndexOutOfRangeException' (bzw. ArrayIndexOutOfBoundsException) ab, da gültige Indizes nur von 0 bis 4 reichen.",
+            "Das Array wird automatisch dynamisch um ein 6. Element erweitert und alle 6 Werte auf 10 gesetzt.",
+            "Die Schleife wird 5 Mal ausgeführt und terminiert regulär ohne Fehler.",
+            "Der Compiler meldet bereits vor der Programmausführung einen Syntaxfehler in der for-Zeile."
+        ],
+        correctAnswer: 0,
+        solutionDiagramSvg: VisualDiagrams.getAlgorithmPatternsSvg(),
+        explanation: "Bei 'new int[5]' existieren die Indizes 0, 1, 2, 3, 4. Die Schleife läuft bis i = 5 und wirft beim Versuch, werte[5] zu beschreiben, eine IndexOutOfRangeException."
+    },
+    {
+        id: 582,
+        isHard: true,
+        difficulty: "hard",
+        isBawueFocus: true,
+        isPseudocode: true,
+        theme: "pseudocode",
+        topic: "💻 IHK Algorithmenentwurf: Extremwert-Suche (Maximum) & Schwellenwert-Zähler (12 Punkte)",
+        type: "open-text",
+        question: `In einem IT-Monitoring-System werden die Ping-Laufzeiten von 24 Servern (in Millisekunden) im Array 'int[] latenzen' gespeichert.
+Sie erhalten den Auftrag, ein Auswertemodul mit folgender Logik zu implementieren:
+1. Ermitteln Sie die maximale aufgetretene Latenz im Array (Variable 'maxLatenz').
+2. Ermitteln Sie die Anzahl der Server, deren Latenz die kritische SLA-Schwelle von 150 ms überschreitet (Variable 'kritischeServerCount').
+3. Als Rückgabewert soll ein Ergebnis bereitgestellt oder beide Werte ausgegeben werden.
+
+Aufgaben:
+a) Erstellen Sie den Algorithmus in Pseudocode, Nassi-Shneiderman Struktogramm oder einer gängigen Programmiersprache (C#, Java, Python).
+b) Warum ist die Initialisierung 'int maxLatenz = 0;' in der Praxis fehleranfällig, und warum sollte 'maxLatenz = latenzen[0];' gewählt werden?
+c) Bei welchem Index sollte die for-Schleife beginnen, wenn 'maxLatenz = latenzen[0];' initialisiert wurde?`,
+        musterloesung: `Musterlösung IHK Algorithmenentwurf (Extremwert & SLA-Zähler):
+
+a) Implementierung:
+
+Variante 1: C# / Java
+public static void AnalysiereLatenzen(int[] latenzen, out int maxLatenz, out int kritischeServerCount)
+{
+    maxLatenz = latenzen[0];
+    kritischeServerCount = 0;
+
+    for (int i = 0; i < latenzen.Length; i++)
+    {
+        // 1. Höchstwert aktualisieren
+        if (latenzen[i] > maxLatenz)
+        {
+            maxLatenz = latenzen[i];
+        }
+
+        // 2. Schwellenwert prüfen (SLA > 150 ms)
+        if (latenzen[i] > 150)
+        {
+            kritischeServerCount++;
+        }
+    }
+}
+
+Variante 2: DIN-konformer Pseudocode
+FUNKTION AnalysiereLatenzen(latenzen: ARRAY VON GANZZAHL)
+    maxLatenz = latenzen[0]
+    kritischeServerCount = 0
+
+    FÜR i = 0 BIS LÄNGE(latenzen) - 1 SCHRITT 1
+        WENN latenzen[i] > maxLatenz DANN
+            maxLatenz = latenzen[i]
+        ENDE WENN
+
+        WENN latenzen[i] > 150 DANN
+            kritischeServerCount = kritischeServerCount + 1
+        ENDE WENN
+    ENDE FÜR
+
+    RÜCKGABE maxLatenz, kritischeServerCount
+ENDE FUNKTION
+
+b) Warum 'maxLatenz = latenzen[0]' statt 0:
+• Wenn alle Werte im Array negativ wären (oder bei Kennzahlen wie Temperatur/Dämpfung in dBm mit Werten unter 0), würde 'maxLatenz = 0' fälschlicherweise 0 als Maximum ausgeben, obwohl 0 gar nicht im Datensatz vorkommt.
+• Durch Initialisierung mit dem ersten tatsächlichen Element ist garantiert, dass das Maximum immer ein realer Messwert aus dem Array ist.
+
+c) Schleifenstart:
+• Wenn 'maxLatenz = latenzen[0]' gesetzt wurde, kann die for-Schleife für die Max-Suche bei Index 'i = 1' beginnen (da der Vergleich von latenzen[0] mit sich selbst redundant ist).
+• Achtung: Da im selben Durchlauf auch der Zähler für 'latenzen[i] > 150' läuft, muss entweder bei 'i = 0' gestartet werden (einfacher und sicherer) oder 'latenzen[0] > 150' muss vor der Schleife gesondert geprüft werden.`,
+        solutionDiagramSvg: VisualDiagrams.getAlgorithmPatternsSvg(),
+        explanation: "Klassisches IHK-Algorithmenmuster: Extremwert immer mit erstem Array-Element initialisieren und Inkrement-Zähler für Schwellenwert."
+    },
+    {
+        id: 583,
+        isHard: false,
+        difficulty: "standard",
+        isBawueFocus: true,
+        isPseudocode: true,
+        theme: "pseudocode",
+        topic: "💻 IHK Multiple-Choice: Lineare Suche mit Index-Rückgabe (FindIndex & Sentinel -1)",
+        type: "multiple-choice",
+        question: `Eine Methode soll ein Array 'artikelNummern' durchsuchen.
+Vorgaben der Fachabteilung:
+• Wird der gesuchte Artikel gefunden, soll dessen 0-basierter Index zurückgegeben werden.
+• Wird der Artikel nicht gefunden, soll der Standard-Sentinel-Wert -1 zurückgegeben werden.
+
+Welcher Pseudocode implementiert diese Logik syntaktisch und semantisch einwandfrei?`,
+        options: [
+            "FÜR i = 0 BIS LÄNGE(arr) - 1:\n    WENN arr[i] == gesucht DANN RÜCKGABE i\nENDE FÜR\nRÜCKGABE -1",
+            "FÜR i = 0 BIS LÄNGE(arr) - 1:\n    WENN arr[i] == gesucht DANN RÜCKGABE i\n    SONST RÜCKGABE -1\nENDE FÜR",
+            "FÜR i = 1 BIS LÄNGE(arr):\n    WENN arr[i] == gesucht DANN RÜCKGABE i\nENDE FÜR\nRÜCKGABE 0",
+            "WÄHREND (arr[i] != gesucht) TUE i = i + 1; RÜCKGABE i;"
+        ],
+        correctAnswer: 0,
+        solutionDiagramSvg: VisualDiagrams.getAlgorithmPatternsSvg(),
+        explanation: "Exakter Standard: Sofortige Rückgabe des Index i bei Treffer (Early Exit). Die Rückgabe von -1 (Sentinel für nicht gefunden) darf erst NACH dem Ende der Schleife stehen."
+    },
+    {
+        id: 584,
+        isHard: true,
+        difficulty: "hard",
+        isBawueFocus: true,
+        isPseudocode: true,
+        theme: "pseudocode",
+        topic: "💻 IHK Algorithmenentwurf: Array-Filterung & Datenstrukturen (Gefährliche Ports, 10 Punkte)",
+        type: "open-text",
+        question: `An einer Firewall wird ein Portscan durchgeführt. Ein Array 'int[] offenePorts' enthält alle aufgedeckten offenen TCP-Ports eines Webservers (z. B. [21, 22, 23, 80, 443, 8080]).
+Sie sollen eine Funktion 'FiltereUnsicherePorts' entwickeln, die alle unverschlüsselten Klartext-Ports (Port 21 = FTP, Port 23 = Telnet, Port 80 = HTTP) aus dem Eingabe-Array herausfiltert und in einer neuen Sammlung zurückgibt.
+
+Aufgaben:
+a) Formulieren Sie den Filter-Algorithmus in Pseudocode oder C#/Java/Python.
+b) Erläutern Sie die Problematik von statischen Arrays fester Länge gegenüber dynamischen Listen (z. B. List<int> in C# / ArrayList in Java) bei Filteroperationen.
+c) Wie müsste das Problem gelöst werden, wenn laut Vorgabe AUSSCHLIESSLICH statische Arrays ohne dynamische Listen verwendet werden dürfen (Zwei-Pass-Verfahren)?`,
+        musterloesung: `Musterlösung IHK Algorithmenentwurf (Array-Filterung):
+
+a) Implementierung:
+
+Variante mit dynamischer Liste (C# / Java):
+public static List<int> FiltereUnsicherePorts(int[] offenePorts)
+{
+    List<int> unsichere = new List<int>();
+
+    foreach (int port in offenePorts)
+    {
+        if (port == 21 || port == 23 || port == 80)
+        {
+            unsichere.Add(port);
+        }
+    }
+
+    return unsichere;
+}
+
+Variante in DIN-Pseudocode:
+FUNKTION FiltereUnsicherePorts(offenePorts: ARRAY VON GANZZAHL) ➔ LISTE VON GANZZAHL
+    ergebnisListe = NEUE LISTE()
+    FÜR i = 0 BIS LÄNGE(offenePorts) - 1
+        p = offenePorts[i]
+        WENN p == 21 ODER p == 23 ODER p == 80 DANN
+            ergebnisListe.HINZUFÜGEN(p)
+        ENDE WENN
+    ENDE FÜR
+    RÜCKGABE ergebnisListe
+ENDE FUNKTION
+
+b) Statische Arrays vs. Dynamische Listen bei Filteroperationen:
+• Problem statischer Arrays: Bei der Deklaration muss die exakte Größe im Voraus feststehen (z. B. 'new int[n]'). Vor dem Filtern ist jedoch unbekannt, wie viele Treffer das Array tatsächlich enthalten wird.
+• Dynamische Listen: Passen ihre Kapazität automatisch zur Laufzeit an (.Add() / .append()), sodass beliebig viele gefundene Elemente aufgenommen werden können.
+
+c) Zwei-Pass-Verfahren bei ausschließlicher Nutzung statischer Arrays:
+• 1. Durchlauf (Zählen):
+  Die Schleife zählt zunächst nur, wie viele Treffer die Bedingung erfüllen (trefferCount++).
+• Instanziierung:
+  Ein neues Ziel-Array wird mit der exakt gezählten Größe erstellt: 'int[] ergebnis = new int[trefferCount];'.
+• 2. Durchlauf (Befüllen):
+  In einem zweiten Schleifendurchlauf werden die Treffer über einen separaten Ziel-Index (zielIdx++) in das neue Array kopiert.`,
+        solutionDiagramSvg: VisualDiagrams.getAlgorithmPatternsSvg(),
+        explanation: "Zentrales IHK-Konzept: Arrays haben statische feste Größen; Filterung erfordert dynamische Sammlungen (List) oder ein 2-Pass-Verfahren mit Vorab-Zählung."
+    },
+    {
+        id: 585,
+        isHard: false,
+        difficulty: "standard",
+        isBawueFocus: true,
+        isPseudocode: true,
+        theme: "pseudocode",
+        topic: "💻 IHK Multiple-Choice: Binäre Suche (Binary Search) vs. Lineare Suche",
+        type: "multiple-choice",
+        question: `Ein Unternehmen verwaltet ein Array mit 1.000.000 (einer Million) Kundennummern.
+Ein Entwickler vergleicht die 'Lineare Suche' mit der 'Binären Suche' (Binary Search / Intervallhalbierung).
+
+Welche Aussage über Voraussetzungen und Effizienz ist fachlich korrekt?`,
+        options: [
+            "Die binäre Suche erfordert zwingend ein sortiertes Array. Sie halbiert in jedem Schritt den Suchbereich und benötigt bei 1.000.000 Elementen im Worst Case maximal ca. 20 Vergleiche (O(log n)), während die lineare Suche im Worst Case 1.000.000 Vergleiche (O(n)) benötigt.",
+            "Die lineare Suche ist immer schneller als die binäre Suche, da sie auf jedem beliebigen Array ohne vorherige Sortierung in O(1) arbeitet.",
+            "Die binäre Suche funktioniert auf unsortierten Arrays identisch schnell wie auf sortierten Arrays.",
+            "Die binäre Suche benötigt bei 1.000.000 Elementen genau 500.000 Schritte, da sie das Array immer in zwei Hälften teilt."
+        ],
+        correctAnswer: 0,
+        solutionDiagramSvg: VisualDiagrams.getAlgorithmPatternsSvg(),
+        explanation: "Binäre Suche: Benötigt sortierte Daten, teilt den Bereich schrittweise durch 2 -> log2(1.000.000) ≈ 19,93 -> maximal 20 Schritte im Worst Case!"
     }
 ];
