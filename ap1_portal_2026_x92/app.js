@@ -203,16 +203,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Initialize active questions from static list and dynamic generator
 function initQuestions(typeMode) {
-    const dynamicQs = generateDynamicQuestions(typeMode);
+    const dynamicQs = typeof generateDynamicQuestions === "function" ? generateDynamicQuestions(typeMode) : [];
+    const sourceQuestions = (typeof staticQuestions !== "undefined" && Array.isArray(staticQuestions)) ? staticQuestions : [];
     
     // Filter the static list based on chosen mode
     let filteredStatic = [];
     if (typeMode === "open") {
-        filteredStatic = staticQuestions.filter(q => q.type === "open-text");
+        filteredStatic = sourceQuestions.filter(q => q.type === "open-text");
     } else if (typeMode === "standard") {
-        filteredStatic = staticQuestions.filter(q => q.type !== "open-text");
+        filteredStatic = sourceQuestions.filter(q => q.type !== "open-text");
     } else {
-        filteredStatic = [...staticQuestions];
+        filteredStatic = [...sourceQuestions];
     }
     
     questions = [...filteredStatic, ...dynamicQs];

@@ -13278,7 +13278,7 @@ Welche Kombination von Kennzahlen und Konzepten ist fachlich und rechnerisch kor
             "Max. ungeplante Ausfallzeit/Jahr = 87,6 Minuten; Nutzkapazität RAID 5 = 60 TB; Nutzkapazität RAID 10 = 100 TB; RAID schützt vor versehentlichem Löschen."
         ],
         correctAnswer: 0,
-        solutionDiagramSvg: VisualDiagrams.getStorageVirtualizationSvg(),
+        solutionDiagramSvg: (typeof VisualDiagrams !== "undefined" && typeof VisualDiagrams.getStorageVirtualizationSvg === "function") ? VisualDiagrams.getStorageVirtualizationSvg() : "",
         explanation: "525.600 Min. * 0,001 = 525,6 Min. Ausfallzeit/Jahr. RAID 5 hat n-1 Platten Nutzkapazität (100 TB), RAID 10 hat n/2 (60 TB). RAID bietet Hardware-Ausfallsicherheit, schützt aber nicht vor logischen Fehlern oder Malware."
     },
     {

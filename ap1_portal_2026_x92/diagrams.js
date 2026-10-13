@@ -6101,8 +6101,171 @@ var VisualDiagrams = {
         if ((text.includes("ipv6") && (text.includes("admin-pc") || text.includes("ab.1001") || text.includes("2301::"))) || text.includes("netzwerkplan")) {
             return VisualDiagrams.getFa230NetzwerkplanSvg();
         }
+        if (/\b(storage|raid\s*5|raid\s*10|verfügbarkeit|ausfallzeit|3-2-1)\b/i.test(text) && (text.includes("525") || text.includes("20 tb") || text.includes("softtech"))) {
+            return VisualDiagrams.getStorageVirtualizationSvg();
+        }
 
         return null;
+    },
+
+    getStorageVirtualizationSvg: function() {
+        return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 460" width="100%" height="auto" style="max-width: 880px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+  <defs>
+    <linearGradient id="stBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f8fafc"/>
+    </linearGradient>
+    <filter id="stShadow" x="-5%" y="-5%" width="110%" height="115%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <rect width="880" height="460" fill="url(#stBg)" rx="10" stroke="#cbd5e1" stroke-width="1.5"/>
+
+  <!-- Title Header -->
+  <rect x="0" y="0" width="880" height="46" fill="#0f172a" rx="10"/>
+  <rect x="0" y="36" width="880" height="10" fill="#0f172a"/>
+  <text x="25" y="29" fill="#f8fafc" font-size="15" font-weight="700">SoftTech Solutions GmbH • Storage-Architektur &amp; Verfügbarkeit</text>
+  <rect x="730" y="11" width="135" height="24" fill="#10b981" rx="12"/>
+  <text x="797" y="27" fill="#ffffff" font-size="11" font-weight="700" text-anchor="middle">IHK FA 230 / IT 2</text>
+
+  <!-- PANEL 1: Disks & RAID (Left) -->
+  <g filter="url(#stShadow)">
+    <rect x="25" y="65" width="265" height="375" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+    <rect x="25" y="65" width="265" height="36" rx="8" fill="#f1f5f9"/>
+    <rect x="25" y="93" width="265" height="8" fill="#f1f5f9"/>
+    <text x="40" y="88" fill="#0f172a" font-size="13" font-weight="700">1. Disks &amp; RAID (120 TB Brutto)</text>
+
+    <!-- 6 HDDs in Rack -->
+    <rect x="40" y="112" width="235" height="82" rx="6" fill="#0f172a"/>
+    <text x="50" y="128" fill="#94a3b8" font-size="10" font-weight="700">6 × 20 TB Enterprise HDDs (Hot-Swap)</text>
+    
+    <!-- HDD items -->
+    <rect x="50" y="136" width="32" height="48" rx="3" fill="#1e293b" stroke="#38bdf8" stroke-width="1"/>
+    <text x="66" y="156" fill="#f8fafc" font-size="9" text-anchor="middle">HDD 1</text>
+    <text x="66" y="172" fill="#38bdf8" font-size="8.5" text-anchor="middle" font-weight="700">20 TB</text>
+
+    <rect x="88" y="136" width="32" height="48" rx="3" fill="#1e293b" stroke="#38bdf8" stroke-width="1"/>
+    <text x="104" y="156" fill="#f8fafc" font-size="9" text-anchor="middle">HDD 2</text>
+    <text x="104" y="172" fill="#38bdf8" font-size="8.5" text-anchor="middle" font-weight="700">20 TB</text>
+
+    <rect x="126" y="136" width="32" height="48" rx="3" fill="#1e293b" stroke="#38bdf8" stroke-width="1"/>
+    <text x="142" y="156" fill="#f8fafc" font-size="9" text-anchor="middle">HDD 3</text>
+    <text x="142" y="172" fill="#38bdf8" font-size="8.5" text-anchor="middle" font-weight="700">20 TB</text>
+
+    <rect x="164" y="136" width="32" height="48" rx="3" fill="#1e293b" stroke="#38bdf8" stroke-width="1"/>
+    <text x="180" y="156" fill="#f8fafc" font-size="9" text-anchor="middle">HDD 4</text>
+    <text x="180" y="172" fill="#38bdf8" font-size="8.5" text-anchor="middle" font-weight="700">20 TB</text>
+
+    <rect x="202" y="136" width="32" height="48" rx="3" fill="#1e293b" stroke="#38bdf8" stroke-width="1"/>
+    <text x="218" y="156" fill="#f8fafc" font-size="9" text-anchor="middle">HDD 5</text>
+    <text x="218" y="172" fill="#38bdf8" font-size="8.5" text-anchor="middle" font-weight="700">20 TB</text>
+
+    <rect x="240" y="136" width="32" height="48" rx="3" fill="#1e293b" stroke="#38bdf8" stroke-width="1"/>
+    <text x="256" y="156" fill="#f8fafc" font-size="9" text-anchor="middle">HDD 6</text>
+    <text x="256" y="172" fill="#38bdf8" font-size="8.5" text-anchor="middle" font-weight="700">20 TB</text>
+
+    <!-- RAID 5 Card -->
+    <rect x="40" y="206" width="235" height="104" rx="6" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.5"/>
+    <text x="52" y="225" fill="#1d4ed8" font-size="12" font-weight="700">RAID 5 (Striping + Parität)</text>
+    <text x="52" y="244" fill="#0f172a" font-size="11">Formel: (n - 1) × Kapazität</text>
+    <text x="52" y="261" fill="#1e293b" font-size="11" font-weight="600">(6 - 1) × 20 TB = <tspan fill="#2563eb" font-weight="700">100 TB Netto</tspan></text>
+    <text x="52" y="278" fill="#475569" font-size="10">Parität: 1 Platte redundant verteilt</text>
+    <text x="52" y="295" fill="#475569" font-size="10">Schreib-Penalty: 4 I/Os pro Write</text>
+
+    <!-- RAID 10 Card -->
+    <rect x="40" y="320" width="235" height="106" rx="6" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+    <text x="52" y="339" fill="#15803d" font-size="12" font-weight="700">RAID 10 (Striped Mirrors)</text>
+    <text x="52" y="358" fill="#0f172a" font-size="11">Formel: (n / 2) × Kapazität</text>
+    <text x="52" y="375" fill="#1e293b" font-size="11" font-weight="600">(6 / 2) × 20 TB = <tspan fill="#16a34a" font-weight="700">60 TB Netto</tspan></text>
+    <text x="52" y="392" fill="#475569" font-size="10">Spiegelung + Striping (50% Overhead)</text>
+    <text x="52" y="409" fill="#475569" font-size="10">Höchste Performance &amp; schneller Rebuild</text>
+  </g>
+
+  <!-- PANEL 2: SLA & Verfügbarkeit (Center) -->
+  <g filter="url(#stShadow)">
+    <rect x="305" y="65" width="270" height="375" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+    <rect x="305" y="65" width="270" height="36" rx="8" fill="#f1f5f9"/>
+    <rect x="305" y="93" width="270" height="8" fill="#f1f5f9"/>
+    <text x="320" y="88" fill="#0f172a" font-size="13" font-weight="700">2. SLA Verfügbarkeitsklasse 3</text>
+
+    <!-- SLA Calculation Box -->
+    <rect x="320" y="112" width="240" height="135" rx="6" fill="#fffbeb" stroke="#d97706" stroke-width="1.5"/>
+    <text x="332" y="132" fill="#b45309" font-size="12" font-weight="700">SLA: 99,9 % Verfügbarkeit</text>
+    
+    <text x="332" y="153" fill="#475569" font-size="10.5">Jahresbasis (365 Tage):</text>
+    <text x="332" y="169" fill="#0f172a" font-size="11" font-family="monospace">365 × 24 × 60 = 525.600 min</text>
+    
+    <line x1="332" y1="178" x2="548" y2="178" stroke="#fde68a" stroke-width="1"/>
+    
+    <text x="332" y="196" fill="#475569" font-size="10.5">Erlaubte Ausfallzeit (0,1 %):</text>
+    <text x="332" y="213" fill="#b45309" font-size="12" font-weight="700" font-family="monospace">525.600 min × 0,001</text>
+    <text x="332" y="233" fill="#92400e" font-size="14" font-weight="800">= 525,6 Minuten / Jahr</text>
+
+    <!-- Key Metrics Card -->
+    <rect x="320" y="258" width="240" height="168" rx="6" fill="#f8fafc" stroke="#e2e8f0" stroke-width="1.5"/>
+    <text x="332" y="278" fill="#0f172a" font-size="11.5" font-weight="700">Wichtige SLA-Kennzahlen:</text>
+    
+    <circle cx="340" cy="298" r="4" fill="#3b82f6"/>
+    <text x="352" y="302" fill="#0f172a" font-size="10.5" font-weight="600">525,6 min ≈ 8,76 Stunden</text>
+    <text x="352" y="316" fill="#64748b" font-size="9.5">Max. ungeplante Downtime pro Jahr</text>
+
+    <circle cx="340" cy="336" r="4" fill="#10b981"/>
+    <text x="352" y="340" fill="#0f172a" font-size="10.5" font-weight="600">MTBF (Mean Time Between Failures)</text>
+    <text x="352" y="354" fill="#64748b" font-size="9.5">Mittlere Betriebsdauer zwischen Fehlern</text>
+
+    <circle cx="340" cy="374" r="4" fill="#f59e0b"/>
+    <text x="352" y="378" fill="#0f172a" font-size="10.5" font-weight="600">MTTR (Mean Time To Repair)</text>
+    <text x="352" y="392" fill="#64748b" font-size="9.5">Mittlere Wiederherstellungsdauer</text>
+
+    <circle cx="340" cy="410" r="4" fill="#6366f1"/>
+    <text x="352" y="414" fill="#0f172a" font-size="10.5" font-weight="600">RPO / RTO Definitionen</text>
+  </g>
+
+  <!-- PANEL 3: 3-2-1-Backup-Regel (Right) -->
+  <g filter="url(#stShadow)">
+    <rect x="590" y="65" width="265" height="375" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+    <rect x="590" y="65" width="265" height="36" rx="8" fill="#f1f5f9"/>
+    <rect x="590" y="93" width="265" height="8" fill="#f1f5f9"/>
+    <text x="605" y="88" fill="#0f172a" font-size="13" font-weight="700">3. Die 3-2-1 Backup-Regel</text>
+
+    <!-- Golden Rule Warning -->
+    <rect x="605" y="112" width="235" height="44" rx="6" fill="#fef2f2" stroke="#ef4444" stroke-width="1.5"/>
+    <text x="618" y="130" fill="#b91c1c" font-size="11" font-weight="700">⚠️ RAID ist KEIN Backup!</text>
+    <text x="618" y="145" fill="#7f1d1d" font-size="9.5">Schützt vor Plattendefekt, nicht vor Löschung/Malware</text>
+
+    <!-- 3 Copies -->
+    <g transform="translate(605, 166)">
+      <rect width="235" height="62" rx="6" fill="#f5f3ff" stroke="#8b5cf6" stroke-width="1.5"/>
+      <circle cx="24" cy="31" r="14" fill="#7c3aed"/>
+      <text x="24" y="36" fill="#ffffff" font-size="13" font-weight="800" text-anchor="middle">3</text>
+      <text x="48" y="26" fill="#5b21b6" font-size="11.5" font-weight="700">Kopien aller Daten</text>
+      <text x="48" y="42" fill="#4c1d95" font-size="9.5">1x Produktivsystem (Live-Daten)</text>
+      <text x="48" y="55" fill="#6d28d9" font-size="9.5">+ 2x getrennte Backup-Stände</text>
+    </g>
+
+    <!-- 2 Media Types -->
+    <g transform="translate(605, 238)">
+      <rect width="235" height="62" rx="6" fill="#ecfdf5" stroke="#10b981" stroke-width="1.5"/>
+      <circle cx="24" cy="31" r="14" fill="#059669"/>
+      <text x="24" y="36" fill="#ffffff" font-size="13" font-weight="800" text-anchor="middle">2</text>
+      <text x="48" y="26" fill="#065f46" font-size="11.5" font-weight="700">Verschiedene Medientypen</text>
+      <text x="48" y="42" fill="#047857" font-size="9.5">z. B. lokales Disk-Storage / NAS</text>
+      <text x="48" y="55" fill="#065f46" font-size="9.5">+ LTO-Magnetband oder Cloud-S3</text>
+    </g>
+
+    <!-- 1 Offsite Copy -->
+    <g transform="translate(605, 310)">
+      <rect width="235" height="74" rx="6" fill="#eff6ff" stroke="#0284c7" stroke-width="1.5"/>
+      <circle cx="24" cy="37" r="14" fill="#0284c7"/>
+      <text x="24" y="42" fill="#ffffff" font-size="13" font-weight="800" text-anchor="middle">1</text>
+      <text x="48" y="25" fill="#0369a1" font-size="11.5" font-weight="700">Offsite / Externe Kopie</text>
+      <text x="48" y="41" fill="#075985" font-size="9.5">Räumlich getrennt (anderer Brandabschnitt /</text>
+      <text x="48" y="54" fill="#075985" font-size="9.5">Rechenzentrum oder gesicherte Cloud)</text>
+      <text x="48" y="68" fill="#0369a1" font-size="9.5" font-weight="700">🔒 WORM / Immutability gegen Ransomware</text>
+    </g>
+  </g>
+</svg>`;
     },
 
     getFa230OrganigrammSvg: function() {
