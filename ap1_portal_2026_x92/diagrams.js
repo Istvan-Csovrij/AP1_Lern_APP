@@ -6079,6 +6079,11 @@ var VisualDiagrams = {
             return VisualDiagrams.getPapDiagramSvg();
         }
 
+        // 15b. IPv6 Adressarchitektur (48 Bit Global Prefix, 16 Bit Subnet-ID, 64 Bit Interface-ID)
+        if (/\b(interface-id|netzpr[aä]fix|subnetz-id|globale[s]? r?pr[aä]fix|globales routing-pr[aä]fix)\b/i.test(text) || (text.includes("ipv6") && (text.includes("48 bit") || text.includes("/48") || text.includes("acad")))) {
+            return VisualDiagrams.getIpv6StructureDiagramSvg();
+        }
+
         // 15. Baden-Württemberg FA 230: Organigramm & IPv6-Netzwerkplan
         if (/\b(organigramm|aufbauorganisation|einliniensystem|stabliniensystem|spartenorganisation|stellenart)\b/i.test(text)) {
             return VisualDiagrams.getFa230OrganigrammSvg();
@@ -6218,6 +6223,149 @@ var VisualDiagrams = {
 
   <rect x="625" y="437" width="14" height="14" rx="3" fill="#fffbeb" stroke="#d97706" stroke-width="1.5"/>
   <text x="645" y="448" fill="#334155" font-size="10.5" font-weight="600">Sparte (Kundengruppenorientiert)</text>
+</svg>`;
+    },
+
+    getIpv6StructureDiagramSvg: function() {
+        return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 860 380" width="100%" height="auto" style="max-width: 860px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+  <defs>
+    <linearGradient id="ipv6Bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f8fafc"/>
+    </linearGradient>
+    <filter id="boxShadow" x="-5%" y="-5%" width="110%" height="115%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect width="860" height="380" fill="url(#ipv6Bg)" rx="10" stroke="#cbd5e1" stroke-width="1.5"/>
+
+  <!-- Title Header -->
+  <rect x="0" y="0" width="860" height="46" fill="#0f172a" rx="10"/>
+  <rect x="0" y="36" width="860" height="10" fill="#0f172a"/>
+  <text x="25" y="29" fill="#f8fafc" font-size="15" font-weight="700">IHK IPv6 Adressarchitektur: 48 Bit + 16 Bit + 64 Bit = 128 Bit</text>
+  <rect x="710" y="11" width="135" height="24" fill="#0284c7" rx="12"/>
+  <text x="777" y="27" fill="#ffffff" font-size="11" font-weight="700" text-anchor="middle">RFC 4291 / IHK AP1</text>
+
+  <!-- ADDRESS BLOCKS (8 Hextets) -->
+  <!-- Block 1: 2001 -->
+  <g transform="translate(30, 65)">
+    <rect x="0" y="0" width="90" height="48" rx="6" fill="#ecfdf5" stroke="#10b981" stroke-width="2"/>
+    <text x="45" y="26" fill="#065f46" font-size="14" font-weight="700" text-anchor="middle" font-family="monospace">2001</text>
+    <text x="45" y="42" fill="#047857" font-size="9.5" text-anchor="middle">Bit 1-16</text>
+  </g>
+  <text x="125" y="94" fill="#64748b" font-size="18" font-weight="bold">:</text>
+
+  <!-- Block 2: 0db8 -->
+  <g transform="translate(133, 65)">
+    <rect x="0" y="0" width="90" height="48" rx="6" fill="#ecfdf5" stroke="#10b981" stroke-width="2"/>
+    <text x="45" y="26" fill="#065f46" font-size="14" font-weight="700" text-anchor="middle" font-family="monospace">0db8</text>
+    <text x="45" y="42" fill="#047857" font-size="9.5" text-anchor="middle">Bit 17-32</text>
+  </g>
+  <text x="228" y="94" fill="#64748b" font-size="18" font-weight="bold">:</text>
+
+  <!-- Block 3: acad -->
+  <g transform="translate(236, 65)">
+    <rect x="0" y="0" width="90" height="48" rx="6" fill="#ecfdf5" stroke="#10b981" stroke-width="2"/>
+    <text x="45" y="26" fill="#065f46" font-size="14" font-weight="700" text-anchor="middle" font-family="monospace">acad</text>
+    <text x="45" y="42" fill="#047857" font-size="9.5" text-anchor="middle">Bit 33-48</text>
+  </g>
+  <text x="331" y="94" fill="#64748b" font-size="18" font-weight="bold">:</text>
+
+  <!-- Block 4: 0012 -->
+  <g transform="translate(339, 65)">
+    <rect x="0" y="0" width="85" height="48" rx="6" fill="#eff6ff" stroke="#3b82f6" stroke-width="2"/>
+    <text x="42" y="26" fill="#1e40af" font-size="14" font-weight="700" text-anchor="middle" font-family="monospace">0012</text>
+    <text x="42" y="42" fill="#2563eb" font-size="9.5" text-anchor="middle">Bit 49-64</text>
+  </g>
+  <text x="429" y="94" fill="#64748b" font-size="18" font-weight="bold">:</text>
+
+  <!-- Block 5: a5b3 -->
+  <g transform="translate(437, 65)">
+    <rect x="0" y="0" width="90" height="48" rx="6" fill="#fff7ed" stroke="#f97316" stroke-width="2"/>
+    <text x="45" y="26" fill="#9a3412" font-size="14" font-weight="700" text-anchor="middle" font-family="monospace">a5b3</text>
+    <text x="45" y="42" fill="#ea580c" font-size="9.5" text-anchor="middle">Bit 65-80</text>
+  </g>
+  <text x="532" y="94" fill="#64748b" font-size="18" font-weight="bold">:</text>
+
+  <!-- Block 6: 9cff -->
+  <g transform="translate(540, 65)">
+    <rect x="0" y="0" width="90" height="48" rx="6" fill="#fff7ed" stroke="#f97316" stroke-width="2"/>
+    <text x="45" y="26" fill="#9a3412" font-size="14" font-weight="700" text-anchor="middle" font-family="monospace">9cff</text>
+    <text x="45" y="42" fill="#ea580c" font-size="9.5" text-anchor="middle">Bit 81-96</text>
+  </g>
+  <text x="635" y="94" fill="#64748b" font-size="18" font-weight="bold">:</text>
+
+  <!-- Block 7: fe21 -->
+  <g transform="translate(643, 65)">
+    <rect x="0" y="0" width="90" height="48" rx="6" fill="#fff7ed" stroke="#f97316" stroke-width="2"/>
+    <text x="45" y="26" fill="#9a3412" font-size="14" font-weight="700" text-anchor="middle" font-family="monospace">fe21</text>
+    <text x="45" y="42" fill="#ea580c" font-size="9.5" text-anchor="middle">Bit 97-112</text>
+  </g>
+  <text x="738" y="94" fill="#64748b" font-size="18" font-weight="bold">:</text>
+
+  <!-- Block 8: 44c0 -->
+  <g transform="translate(746, 65)">
+    <rect x="0" y="0" width="85" height="48" rx="6" fill="#fff7ed" stroke="#f97316" stroke-width="2"/>
+    <text x="42" y="26" fill="#9a3412" font-size="14" font-weight="700" text-anchor="middle" font-family="monospace">44c0</text>
+    <text x="42" y="42" fill="#ea580c" font-size="9.5" text-anchor="middle">Bit 113-128</text>
+  </g>
+
+  <!-- LAYER 2: LOGISCHE AUFTEILUNG (Klammern & Erklärungsboxen) -->
+  <!-- 1. Globales Routing-Präfix (/48) -->
+  <g transform="translate(30, 130)">
+    <rect x="0" y="0" width="296" height="85" rx="6" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.8"/>
+    <text x="148" y="22" fill="#14532d" font-size="12" font-weight="700" text-anchor="middle">1. Globales Routing-Präfix (48 Bit)</text>
+    <text x="148" y="40" fill="#15803d" font-size="11" font-weight="600" text-anchor="middle">Vom ISP / Provider zugeteilt</text>
+    <line x1="15" y1="50" x2="280" y2="50" stroke="#bbf7d0" stroke-width="1"/>
+    <text x="148" y="68" fill="#0f172a" font-size="12.5" font-weight="700" text-anchor="middle" font-family="monospace">2001:db8:acad::/48</text>
+  </g>
+
+  <!-- 2. Subnetz-ID (16 Bit) -->
+  <g transform="translate(339, 130)">
+    <rect x="0" y="0" width="85" height="85" rx="6" fill="#eff6ff" stroke="#2563eb" stroke-width="1.8"/>
+    <text x="42" y="20" fill="#1e3a8a" font-size="10.5" font-weight="700" text-anchor="middle">Subnetz-ID</text>
+    <text x="42" y="36" fill="#2563eb" font-size="9.5" font-weight="600" text-anchor="middle">16 Bit</text>
+    <line x1="8" y1="46" x2="77" y2="46" stroke="#bfdbfe" stroke-width="1"/>
+    <text x="42" y="62" fill="#0f172a" font-size="13" font-weight="700" text-anchor="middle" font-family="monospace">12</text>
+    <text x="42" y="76" fill="#64748b" font-size="8.5" text-anchor="middle">(= 0012 hex)</text>
+  </g>
+
+  <!-- 3. Interface-ID (64 Bit) -->
+  <g transform="translate(437, 130)">
+    <rect x="0" y="0" width="394" height="85" rx="6" fill="#fff7ed" stroke="#ea580c" stroke-width="1.8"/>
+    <text x="197" y="22" fill="#7c2d12" font-size="12" font-weight="700" text-anchor="middle">3. Interface-ID / Host-Anteil (64 Bit)</text>
+    <text x="197" y="40" fill="#c2410c" font-size="11" font-weight="600" text-anchor="middle">Client-Adresse (SLAAC / EUI-64 mit ff:fe / Manuell / DHCPv6)</text>
+    <line x1="20" y1="50" x2="374" y2="50" stroke="#fed7aa" stroke-width="1"/>
+    <text x="197" y="68" fill="#0f172a" font-size="12.5" font-weight="700" text-anchor="middle" font-family="monospace">a5b3:9cff:fe21:44c0</text>
+  </g>
+
+  <!-- LAYER 3: GESAMTES NETZPRÄFIX (/64) -->
+  <g transform="translate(30, 230)">
+    <rect x="0" y="0" width="394" height="60" rx="6" fill="#faf5ff" stroke="#9333ea" stroke-width="2"/>
+    <text x="197" y="22" fill="#581c87" font-size="12" font-weight="700" text-anchor="middle">2. Netzpräfix des LANs (/64) = Globales Präfix + Subnetz-ID</text>
+    <text x="197" y="44" fill="#6b21a8" font-size="13" font-weight="700" text-anchor="middle" font-family="monospace">2001:db8:acad:12::/64</text>
+  </g>
+
+  <!-- SUMMARY INFO BOX (BOTTOM RIGHT) -->
+  <g transform="translate(437, 230)">
+    <rect x="0" y="0" width="394" height="135" rx="6" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.5"/>
+    <text x="15" y="22" fill="#0f172a" font-size="12" font-weight="700">💡 IHK-Prüfungsformel &amp; Subnetz-Berechnung:</text>
+    <text x="15" y="44" fill="#334155" font-size="11.5">• Gesamtlänge IPv6 = 128 Bit (8 Gruppen à 16 Bit / 4 Hex-Zeichen)</text>
+    <text x="15" y="64" fill="#334155" font-size="11.5">• Subnetz-Bits = 64 Bit (LAN) - 48 Bit (Provider) = 16 Bit</text>
+    <text x="15" y="84" fill="#15803d" font-size="11.5" font-weight="600">• Mögliche Subnetze = 2^16 = 65.536 eigenständige /64-Netze!</text>
+    <text x="15" y="104" fill="#c2410c" font-size="11.5" font-weight="600">• Hosts pro Subnetz = 2^64 = 18,44 Trillionen Adressen!</text>
+    <text x="15" y="122" fill="#475569" font-size="10.5">Kein Broadcast mehr in IPv6 – Ersetzt durch gezielten Multicast!</text>
+  </g>
+
+  <!-- BOTTOM LEGEND BOX (BOTTOM LEFT) -->
+  <g transform="translate(30, 305)">
+    <rect x="0" y="0" width="394" height="60" rx="6" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1.5"/>
+    <text x="15" y="20" fill="#0f172a" font-size="11" font-weight="700">Ergebnistabelle der IHK-Aufgabe:</text>
+    <text x="15" y="37" fill="#334155" font-size="10.5">• Netzpräfix (/64): 2001:db8:acad:12::/64</text>
+    <text x="15" y="52" fill="#334155" font-size="10.5">• Interface-ID: a5b3:9cff:fe21:44c0 | Subnetz-ID: 12</text>
+  </g>
 </svg>`;
     },
 

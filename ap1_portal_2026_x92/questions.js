@@ -13397,6 +13397,94 @@ FROM Kunde
 WHERE Email IS NULL OR Email = '';`,
         solutionDiagramSvg: VisualDiagrams.getCrowFootDiagramSvg(),
         explanation: "3NF fordert: 1NF (atomare Werte), 2NF (vollständige funktionale Abhängigkeit vom PK) und 3NF (keine transitiven Abhängigkeiten vom PK). NULL-Werte in SQL müssen mit 'IS NULL' abgefragt werden."
-    }
+    },
+    // =========================================================================
+    // SPEZIELLE IHK IPv6-ADRESSARCHITEKTUR & PRÄFIX-AUFGABEN (EXAKT WIE IM SCREENSHOT)
+    // =========================================================================
+    {
+        id: 573,
+        isHard: false,
+        difficulty: "standard",
+        isBawueFocus: true,
+        isItArbeitsplatz: true,
+        theme: "lf3",
+        topic: "🌐 IHK-Prüfungsaufgabe IPv6: Netzpräfix (/64), Subnetz-ID & Interface-ID",
+        type: "multiple-choice",
+        question: `Ein Client hat die IPv6-Adresse:
+2001:db8:acad:12:a5b3:9cff:fe21:44c0/64
 
+Das Unternehmen hat von seinem Provider ein /48-Präfix erhalten.
+Die Struktur einer IPv6-Adresse gliedert sich in:
+• 48 Bit Globales Routing-Präfix (Bits 1 bis 48)
+• 16 Bit Subnetz-ID (Bits 49 bis 64)
+• 64 Bit Interface-ID (Bits 65 bis 128)
+Gesamtlänge: 48 + 16 + 64 = 128 Bit.
+
+Welche Zeile enthält die exakten Prüfungsergebnisse für die gesuchten Adressbestandteile?`,
+        options: [
+            "Netzpräfix (/64): 2001:db8:acad:12::/64 | Interface-ID: a5b3:9cff:fe21:44c0 | Subnetz-ID (Bits 49 bis 64): 12 (hex) | Globales Routing-Präfix (/48): 2001:db8:acad::/48",
+            "Netzpräfix (/64): 2001:db8:acad::/64 | Interface-ID: 12:a5b3:9cff:fe21 | Subnetz-ID (Bits 49 bis 64): acad | Globales Routing-Präfix (/48): 2001:db8::/48",
+            "Netzpräfix (/64): 2001:db8:acad:12:a5b3::/64 | Interface-ID: 9cff:fe21:44c0 | Subnetz-ID (Bits 49 bis 64): a5b3 | Globales Routing-Präfix (/48): 2001:db8:acad:12::/48",
+            "Netzpräfix (/64): fe80::12/64 | Interface-ID: 2001:db8:acad | Subnetz-ID (Bits 49 bis 64): 44c0 | Globales Routing-Präfix (/48): 2001::/48"
+        ],
+        correctAnswer: 0,
+        solutionDiagramSvg: VisualDiagrams.getIpv6StructureDiagramSvg(),
+        explanation: `Schritt-für-Schritt-Aufschlüsselung der 128-Bit IPv6-Adresse:
+1. Globales Routing-Präfix (erste 48 Bit = 3 Blöcke à 16 Bit):
+   Blöcke 1 bis 3: 2001:db8:acad -> 2001:db8:acad::/48 (vom Provider/ISP zugeteilt).
+2. Subnetz-ID (Bits 49 bis 64 = 4. Block à 16 Bit):
+   Block 4: 12 (bzw. 0012 hex) -> internes Subnetz des Unternehmens (1 von 65.536 möglichen /64-Subnetzen).
+3. Netzpräfix (/64):
+   Kombination aus Global-Präfix und Subnetz-ID (die ersten 64 Bit): 2001:db8:acad:12::/64.
+4. Interface-ID (Bits 65 bis 128 = hintere 64 Bit / 4 Blöcke):
+   Blöcke 5 bis 8: a5b3:9cff:fe21:44c0 (eindeutiger Host-Anteil des Clients, erkennbar an der EUI-64 Injektion 'ff:fe').`
+    },
+    {
+        id: 574,
+        isHard: true,
+        difficulty: "hard",
+        isBawueFocus: true,
+        isItArbeitsplatz: true,
+        theme: "lf3",
+        topic: "🌐 IHK-Prüfungsaufgabe IPv6: Subnetting (/48 auf /64) & EUI-64 MAC-Rückrechnung",
+        type: "open-text",
+        question: `Ein Server im Rechenzentrum hat die IPv6-Adresse:
+2001:0db8:004a:0007:021a:2bff:fe3c:4d5e/64
+Der ISP hat dem Unternehmen das globale Routing-Präfix 2001:db8:4a::/48 zugeteilt.
+
+Ermitteln Sie tabellarisch folgende Werte und beantworten Sie die Zusatzfragen:
+1. Globales Routing-Präfix (/48) in kürzester Schreibweise
+2. Subnetz-ID (Bits 49 bis 64) in Hexadezimal
+3. Netzpräfix des lokalen Subnetzes (/64)
+4. Interface-ID (Host-Anteil)
+5. Wie viele eigenständige /64-Subnetze kann das Unternehmen aus dem zugewiesenen /48-Präfix bilden?
+6. Aus welcher 48-Bit-MAC-Adresse wurde die Interface-ID per EUI-64 gebildet?`,
+        sampleSolution: `Musterlösung nach IHK-Standard:
+
+1. Globales Routing-Präfix (/48):
+   2001:db8:4a::/48 (Blöcke 1-3)
+
+2. Subnetz-ID (Bits 49 bis 64):
+   7 (bzw. 0007 hex)
+
+3. Netzpräfix des lokalen Subnetzes (/64):
+   2001:db8:4a:7::/64 (Blöcke 1-4)
+
+4. Interface-ID (64 Bit):
+   021a:2bff:fe3c:4d5e (Blöcke 5-8)
+
+5. Anzahl der möglichen /64-Subnetze:
+   Differenz der Präfixlängen: 64 Bit - 48 Bit = 16 Subnetz-Bits.
+   Anzahl = 2^16 = 65.536 eigenständige /64-Subnetze!
+
+6. Rückrechnung auf die ursprüngliche MAC-Adresse:
+   - Interface-ID: 021a:2bff:fe3c:4d5e
+   - Schritt 1: Das in der Mitte eingefügte FFFE (Bits 24-39) entfernen -> 021a:2b und 3c:4d5e.
+   - Schritt 2: Das 7. Bit (Universal/Local-Bit) des ersten Bytes invertieren:
+     Erstes Byte = 02 hex = 0000 0010 binär.
+     7. Bit invertieren -> 0000 0000 binär = 00 hex.
+   - Ergebnis: Ursprüngliche MAC-Adresse lautet: 00:1A:2B:3C:4D:5E.`,
+        solutionDiagramSvg: VisualDiagrams.getIpv6StructureDiagramSvg(),
+        explanation: "Das EUI-64-Verfahren teilt eine 48-Bit-MAC-Adresse in zwei Hälften (OUI und NIC), fügt FF:FE in die Mitte ein und invertiert das 7. Bit (U/L-Bit). Bei der Rückrechnung wird dies exakt umgekehrt durchgeführt."
+    }
 ];
