@@ -6079,6 +6079,11 @@ var VisualDiagrams = {
             return VisualDiagrams.getPapDiagramSvg();
         }
 
+        // 15d. IPv6 Adresskonfigurationsbegriffe (SLAAC, NDP, DAD, Router Advertisement, DHCPv6)
+        if (/\b(slaac|ndp|dad|router advertisement|stateful|stateless dhcp|m-flag|o-flag|neighbor discovery|duplicate address)\b/i.test(text) || (text.includes("begriffe der adresskonfiguration") || (text.includes("ipv6") && (text.includes("dad") || text.includes("slaac") || text.includes("ra"))))) {
+            return VisualDiagrams.getIpv6AutoconfigDiagramSvg();
+        }
+
         // 15c. IPv6 Subnetting & Standortplanung (/48 auf /52 und /64, Havelholz, Zweierpotenzen 2^Δ)
         if (/\b(standortplanung|havelholz|\/52|zweierpotenz|pr[aä]fixl[aä]ngen|2\^12|4096|2a01|3001)\b/i.test(text) || (text.includes("ipv6") && (text.includes("standort") || text.includes("/52") || text.includes("65536")))) {
             return VisualDiagrams.getIpv6SubnettingDiagramSvg();
@@ -6228,6 +6233,128 @@ var VisualDiagrams = {
 
   <rect x="625" y="437" width="14" height="14" rx="3" fill="#fffbeb" stroke="#d97706" stroke-width="1.5"/>
   <text x="645" y="448" fill="#334155" font-size="10.5" font-weight="600">Sparte (Kundengruppenorientiert)</text>
+</svg>`;
+    },
+
+    getIpv6AutoconfigDiagramSvg: function() {
+        return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 460" width="100%" height="auto" style="max-width: 880px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+  <defs>
+    <linearGradient id="protoBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f8fafc"/>
+    </linearGradient>
+    <filter id="pShadow" x="-5%" y="-5%" width="110%" height="115%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.08"/>
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#0284c7"/>
+    </marker>
+    <marker id="arrowGreen" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#16a34a"/>
+    </marker>
+    <marker id="arrowPurple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#9333ea"/>
+    </marker>
+  </defs>
+
+  <rect width="880" height="460" fill="url(#protoBg)" rx="10" stroke="#cbd5e1" stroke-width="1.5"/>
+
+  <!-- Title Header -->
+  <rect x="0" y="0" width="880" height="46" fill="#0f172a" rx="10"/>
+  <rect x="0" y="36" width="880" height="10" fill="#0f172a"/>
+  <text x="25" y="29" fill="#f8fafc" font-size="15" font-weight="700">IHK IPv6 Adresskonfiguration: SLAAC, NDP, DAD, RA &amp; DHCPv6</text>
+  <rect x="710" y="11" width="150" height="24" fill="#10b981" rx="12"/>
+  <text x="785" y="27" fill="#ffffff" font-size="11" font-weight="700" text-anchor="middle">5 Punkte IHK-Matching</text>
+
+  <!-- PROTOKOL-ABLAUF DIAGRAMM -->
+  <!-- 1. HOST / CLIENT (Left) -->
+  <g transform="translate(35, 75)" filter="url(#pShadow)">
+    <rect x="0" y="0" width="160" height="150" rx="8" fill="#eff6ff" stroke="#3b82f6" stroke-width="2"/>
+    <text x="80" y="30" fill="#1d4ed8" font-size="14" font-weight="700" text-anchor="middle">💻 IPv6-Client</text>
+    <text x="80" y="48" fill="#2563eb" font-size="11" text-anchor="middle">(Host / Endgerät)</text>
+    <line x1="15" y1="58" x2="145" y2="58" stroke="#bfdbfe" stroke-width="1"/>
+    <text x="15" y="78" fill="#1e40af" font-size="10.5" font-weight="600">• Generiert Interface-ID</text>
+    <text x="15" y="96" fill="#1e40af" font-size="10.5" font-weight="600">• Sendet RS / NS</text>
+    <text x="15" y="114" fill="#1e40af" font-size="10.5" font-weight="600">• Führt DAD durch</text>
+    <rect x="15" y="123" width="130" height="18" rx="3" fill="#dbeafe"/>
+    <text x="80" y="136" fill="#1d4ed8" font-size="9.5" font-weight="700" text-anchor="middle">Link-Local: fe80::/10</text>
+  </g>
+
+  <!-- 2. ROUTER / GATEWAY (Center Top) -->
+  <g transform="translate(360, 75)" filter="url(#pShadow)">
+    <rect x="0" y="0" width="180" height="150" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+    <text x="90" y="30" fill="#15803d" font-size="14" font-weight="700" text-anchor="middle">🌐 Standard-Router</text>
+    <text x="90" y="48" fill="#166534" font-size="11" text-anchor="middle">(Gateway / RA-Sender)</text>
+    <line x1="15" y1="58" x2="165" y2="58" stroke="#bbf7d0" stroke-width="1"/>
+    <text x="15" y="78" fill="#14532d" font-size="10.5" font-weight="700">Router Advertisement</text>
+    <text x="15" y="94" fill="#166534" font-size="10">• Sendet /64-Präfix</text>
+    <text x="15" y="110" fill="#166534" font-size="10">• Teilt Gateway mit</text>
+    <rect x="15" y="120" width="150" height="20" rx="3" fill="#dcfce7"/>
+    <text x="90" y="134" fill="#15803d" font-size="9.5" font-weight="700" text-anchor="middle">ICMPv6 Type 134 (RA)</text>
+  </g>
+
+  <!-- 3. DHCPv6 SERVER (Right) -->
+  <g transform="translate(685, 75)" filter="url(#pShadow)">
+    <rect x="0" y="0" width="160" height="150" rx="8" fill="#faf5ff" stroke="#9333ea" stroke-width="2"/>
+    <text x="80" y="30" fill="#7e22ce" font-size="14" font-weight="700" text-anchor="middle">🗄️ DHCPv6-Server</text>
+    <text x="80" y="48" fill="#6b21a8" font-size="11" text-anchor="middle">(Stateful Management)</text>
+    <line x1="15" y1="58" x2="145" y2="58" stroke="#e9d5ff" stroke-width="1"/>
+    <text x="15" y="78" fill="#581c87" font-size="10.5" font-weight="700">Zentrale Adressvergabe</text>
+    <text x="15" y="94" fill="#6b21a8" font-size="10">• Speichert Leases</text>
+    <text x="15" y="110" fill="#6b21a8" font-size="10">• Liefert DNS &amp; Domain</text>
+    <rect x="15" y="120" width="130" height="20" rx="3" fill="#f3e8ff"/>
+    <text x="80" y="134" fill="#7e22ce" font-size="9.5" font-weight="700" text-anchor="middle">Stateful Database</text>
+  </g>
+
+  <!-- MESSAGES / ARROWS -->
+  <!-- Router Advertisement Arrow (Center to Left) -->
+  <path d="M 360 125 L 205 125" stroke="#16a34a" stroke-width="2.5" marker-end="url(#arrowGreen)"/>
+  <rect x="220" y="105" width="125" height="18" rx="3" fill="#dcfce7" stroke="#16a34a" stroke-width="1"/>
+  <text x="282" y="118" fill="#15803d" font-size="9.5" font-weight="700" text-anchor="middle">Router Advertisement</text>
+
+  <!-- DHCPv6 Lease Arrow (Right to Left) -->
+  <path d="M 685 175 L 205 175" stroke="#9333ea" stroke-width="2" stroke-dasharray="5,4" marker-end="url(#arrowPurple)"/>
+  <rect x="375" y="165" width="150" height="18" rx="3" fill="#f3e8ff" stroke="#9333ea" stroke-width="1"/>
+  <text x="450" y="178" fill="#7e22ce" font-size="9" font-weight="700" text-anchor="middle">DHCPv6 Zuweisung &amp; Leases</text>
+
+  <!-- MATCHING LÖSUNGSTABELLE (BOTTOM) -->
+  <g transform="translate(35, 245)">
+    <rect x="0" y="0" width="810" height="195" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+
+    <rect x="0" y="0" width="810" height="32" rx="8" fill="#1e293b"/>
+    <rect x="0" y="24" width="810" height="8" fill="#1e293b"/>
+    <text x="20" y="21" fill="#f8fafc" font-size="12" font-weight="700">Offizielle IHK-Zuordnung (Aufgabe 6 – 5 Punkte):</text>
+
+    <!-- Row 1: SLAAC -> E -->
+    <text x="20" y="54" fill="#0284c7" font-size="12" font-weight="700" font-family="monospace">1. SLAAC</text>
+    <rect x="190" y="40" width="28" height="20" rx="3" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.5"/>
+    <text x="204" y="55" fill="#0369a1" font-size="12" font-weight="700" text-anchor="middle">E</text>
+    <text x="230" y="54" fill="#334155" font-size="11.5">Der Host bildet seine Adresse selbst aus Präfix und Interface-ID (autonom ohne Server).</text>
+
+    <!-- Row 2: NDP -> D -->
+    <text x="20" y="84" fill="#0284c7" font-size="12" font-weight="700" font-family="monospace">2. NDP</text>
+    <rect x="190" y="70" width="28" height="20" rx="3" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.5"/>
+    <text x="204" y="85" fill="#0369a1" font-size="12" font-weight="700" text-anchor="middle">D</text>
+    <text x="230" y="84" fill="#334155" font-size="11.5">Ersetzt ARP und ermittelt die MAC-Adressen benachbarter Geräte (über ICMPv6 Multicast).</text>
+
+    <!-- Row 3: DAD -> B -->
+    <text x="20" y="114" fill="#0284c7" font-size="12" font-weight="700" font-family="monospace">3. DAD</text>
+    <rect x="190" y="100" width="28" height="20" rx="3" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.5"/>
+    <text x="204" y="115" fill="#0369a1" font-size="12" font-weight="700" text-anchor="middle">B</text>
+    <text x="230" y="114" fill="#334155" font-size="11.5">Prüft, ob eine Adresse im lokalen Netz bereits verwendet wird (Duplicate Address Detection).</text>
+
+    <!-- Row 4: Router Advertisement -> C -->
+    <text x="20" y="144" fill="#0284c7" font-size="11" font-weight="700" font-family="monospace">4. Router Advert.</text>
+    <rect x="190" y="130" width="28" height="20" rx="3" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.5"/>
+    <text x="204" y="145" fill="#0369a1" font-size="12" font-weight="700" text-anchor="middle">C</text>
+    <text x="230" y="144" fill="#334155" font-size="11.5">Ein Router teilt den Hosts das Präfix und das Standard-Gateway mit (periodisch / auf Anfrage).</text>
+
+    <!-- Row 5: DHCPv6 (stateful) -> A -->
+    <text x="20" y="174" fill="#0284c7" font-size="11" font-weight="700" font-family="monospace">5. DHCPv6 (stateful)</text>
+    <rect x="190" y="160" width="28" height="20" rx="3" fill="#e0f2fe" stroke="#0284c7" stroke-width="1.5"/>
+    <text x="204" y="175" fill="#0369a1" font-size="12" font-weight="700" text-anchor="middle">A</text>
+    <text x="230" y="174" fill="#334155" font-size="11.5">Ein Server vergibt Adressen zentral und speichert die Zuweisungen (Leases in Datenbank).</text>
+  </g>
 </svg>`;
     },
 

@@ -13597,5 +13597,85 @@ Adresse B: 2001:db8:c3:3001::5`,
         explanation: `Bei einem /52-Präfix bestimmen die ersten 4 Bits des vierten Hextets (das erste Hex-Zeichen) den Standort:
 • '2a01' beginnt mit '2' -> liegt zwischen 2000 und 2fff -> Standort 3 (Werkstatt).
 • '3001' beginnt mit '3' -> liegt zwischen 3000 und 3fff -> Standort 4 (Außenstelle).`
+    },
+    // =========================================================================
+    // IHK BEGRIFFE DER ADRESSKONFIGURATION (SLAAC, NDP, DAD, RA & DHCPv6)
+    // =========================================================================
+    {
+        id: 578,
+        isHard: false,
+        difficulty: "standard",
+        isBawueFocus: true,
+        isItArbeitsplatz: true,
+        theme: "lf3",
+        topic: "⚙️ IHK-Matching: IPv6 Begriffe der Adresskonfiguration (SLAAC, NDP, DAD, RA & DHCPv6)",
+        type: "multiple-choice",
+        question: `In der IHK-Abschlussprüfung Teil 1 (Netzwerktechnik) werden die Mechanismen der IPv6-Adresskonfiguration und Nachbarschaftserkennung abgefragt.
+
+Ordnen Sie jedem Begriff (1 bis 5) die zutreffende Funktionsbeschreibung (A bis E) zu:
+Begriffe:
+1. SLAAC (Stateless Address Autoconfiguration)
+2. NDP (Neighbor Discovery Protocol)
+3. DAD (Duplicate Address Detection)
+4. Router Advertisement (RA)
+5. DHCPv6 (stateful)
+
+Beschreibungen:
+A) Ein Server vergibt Adressen zentral und speichert die Zuweisungen.
+B) Prüft, ob eine Adresse im lokalen Netz bereits verwendet wird.
+C) Ein Router teilt den Hosts das Präfix und das Standard-Gateway mit.
+D) Ersetzt ARP und ermittelt die MAC-Adressen benachbarter Geräte.
+E) Der Host bildet seine Adresse selbst aus Präfix und Interface-ID.
+
+Welche Zuordnung ist fachlich korrekt?`,
+        options: [
+            "1 -> E | 2 -> D | 3 -> B | 4 -> C | 5 -> A",
+            "1 -> A | 2 -> B | 3 -> C | 4 -> D | 5 -> E",
+            "1 -> E | 2 -> B | 3 -> D | 4 -> C | 5 -> A",
+            "1 -> C | 2 -> D | 3 -> B | 4 -> E | 5 -> A"
+        ],
+        correctAnswer: 0,
+        solutionDiagramSvg: VisualDiagrams.getIpv6AutoconfigDiagramSvg(),
+        explanation: `Exakte IHK-Musterlösung:
+• 1. SLAAC -> E: Der Host bildet seine Adresse selbst aus dem empfangenen /64-Präfix und seiner selbst generierten 64-Bit Interface-ID (EUI-64 oder Privacy Extensions), ohne dass ein Server Zustände speichert.
+• 2. NDP -> D: Ersetzt ARP im IPv6-Umfeld und ermittelt MAC-Adressen von Nachbarn über ICMPv6 Neighbor Solicitation (NS) und Neighbor Advertisement (NA).
+• 3. DAD -> B: 'Duplicate Address Detection' prüft vor der Adressaktivierung per Solicited-Node Multicast, ob die Adresse bereits von einem anderen Gerät im lokalen Link genutzt wird.
+• 4. Router Advertisement -> C: ICMPv6 Type 134 Nachricht vom Router an 'ff02::1' (All-Nodes), die das Netzpräfix, MTU und Standard-Gateway mitteilt.
+• 5. DHCPv6 (stateful) -> A: Ein zentraler DHCP-Server weist konkrete IPv6-Adressen zu und speichert diese Leases in einer internen Datenbank.`
+    },
+    {
+        id: 579,
+        isHard: true,
+        difficulty: "hard",
+        isBawueFocus: true,
+        isItArbeitsplatz: true,
+        theme: "lf3",
+        topic: "⚙️ IHK-Vertiefung IPv6: SLAAC vs. DHCPv6 (stateless/stateful), M- und O-Flags & DAD",
+        type: "open-text",
+        question: `Im Unternehmensnetzwerk soll die IPv6-Adressvergabe für 200 Clients geplant werden. Der Netzwerkadministrator analysiert die Unterschiede zwischen SLAAC, stateless DHCPv6 und stateful DHCPv6.
+
+Beantworten Sie folgende Prüfungsfragen:
+a) Erläutern Sie den Unterschied zwischen stateless DHCPv6 und stateful DHCPv6 hinsichtlich der vergebenen Parameter und der Speicherung auf dem Server.
+b) Welche Bedeutung haben das M-Flag (Managed Address Configuration) und das O-Flag (Other Configuration) in den Router Advertisements (RA)?
+c) Warum ist das DAD-Verfahren (Duplicate Address Detection) bei SLAAC zwingend erforderlich, und was unternimmt der Host, falls eine Adresskollision erkannt wird?`,
+        sampleSolution: `Musterlösung nach IHK-Standard:
+
+a) Unterschied Stateless vs. Stateful DHCPv6:
+• Stateless DHCPv6:
+  Der Client generiert seine IPv6-Adresse selbst via SLAAC (Router Advertisement liefert das /64-Präfix). Der DHCPv6-Server wird lediglich kontaktiert, um zusätzliche Netzwerkparameter wie DNS-Server-Adressen, Domain-Search-Lists und NTP-Server abzufragen. Der Server speichert KEINE Zustände (keine Leases, keine IP-Tabellen).
+• Stateful DHCPv6:
+  Der DHCPv6-Server weist dem Client eine konkrete IPv6-Adresse (IA_NA) zu und verwaltet die Zuweisungen (Leases) mit Ablaufzeiten in einer Datenbank (wie bei klassischem IPv4-DHCP).
+
+b) Bedeutung der RA-Flags:
+• M-Flag (Managed Address Configuration Flag, Bit 1):
+  Wenn M=1 (gesetzt), weist der Router die Clients an, ihre IP-Adresse über einen stateful DHCPv6-Server zu beziehen (SLAAC für die IP ist deaktiviert).
+• O-Flag (Other Stateful Configuration Flag, Bit 2):
+  Wenn O=1 (und M=0), weist der Router die Clients an, SLAAC für die IP-Adresse zu nutzen, jedoch stateless DHCPv6 für 'andere' Parameter (z. B. DNS-Server) zu kontaktieren.
+
+c) DAD (Duplicate Address Detection) bei SLAAC:
+• Notwendigkeit: Da bei SLAAC kein zentraler Server die Eindeutigkeit überwacht, muss der Client vor der Inbetriebnahme selbst sicherstellen, dass die generierte Interface-ID nicht doppelt im lokalen Netz existiert (z. B. bei identischen Algorithmen oder MAC-Klonen).
+• Reaktion bei Kollision: Erkennt der Host durch eine Antwort auf seine DAD-Nachricht (Neighbor Solicitation an die Solicited-Node Multicast-Adresse), dass die IP bereits vergeben ist, darf er die Adresse NICHT aktivieren. Bei Privacy Extensions generiert er eine neue temporäre Zufalls-ID; bei EUI-64 muss die Konfiguration abgebrochen und ein Administrator alarmiert bzw. auf manuell/DHCPv6 ausgewichen werden.`,
+        solutionDiagramSvg: VisualDiagrams.getIpv6AutoconfigDiagramSvg(),
+        explanation: "Klassische Transferaufgabe der IHK: M-Flag (Managed -> stateful IP), O-Flag (Other -> stateless DNS), DAD vor Aktivierung der IP zwingend vorgeschrieben."
     }
 ];
