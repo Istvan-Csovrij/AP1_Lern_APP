@@ -1452,13 +1452,27 @@ function formatQuestionText(text) {
 
 // ==================== EXAM MODE LOGIC (1:1 DIN-A4 PRÜFUNGSBOGEN) ====================
 
+// Helper to format seconds into mm:ss
+function formatExamTime(totalSeconds) {
+    if (isNaN(totalSeconds) || totalSeconds < 0) totalSeconds = 0;
+    const mins = Math.floor(totalSeconds / 60);
+    const secs = totalSeconds % 60;
+    const padMins = mins < 10 ? "0" + mins : String(mins);
+    const padSecs = secs < 10 ? "0" + secs : String(secs);
+    return `${padMins}:${padSecs}`;
+}
+
 // Starts the authentic 100-point exam or 90-min simulation
 function startExamMode(simulation, forcedSetId) {
     if (isExamActive && !isExamSubmitted && !forcedSetId) {
         if (!confirm("Du befindest dich bereits in einer Prüfung. Möchtest du diese abbrechen und neu starten?")) {
             return;
         }
+    }
+
+    if (examTimerInterval) {
         clearInterval(examTimerInterval);
+        examTimerInterval = null;
     }
 
     isExamActive = true;
@@ -1493,18 +1507,28 @@ function startExamMode(simulation, forcedSetId) {
 
     // Setup Timer
     const timerContainer = document.getElementById("exam-timer-container");
-    const timerEl = document.getElementById("exam-timer");
 
     if (simulation) {
-        if (timerContainer) timerContainer.style.display = "flex";
         examSecondsRemaining = 90 * 60;
         examSecondsElapsed = 0;
-        if (timerEl) timerEl.textContent = formatExamTime(examSecondsRemaining);
+        if (timerContainer) {
+            timerContainer.style.display = "flex";
+            timerContainer.style.background = "#450a0a";
+            timerContainer.style.borderColor = "#ef4444";
+            timerContainer.style.color = "#fca5a5";
+            timerContainer.innerHTML = `<i class="fa-solid fa-stopwatch fa-spin" style="color: #f87171;"></i> <span id="exam-timer">${formatExamTime(examSecondsRemaining)}</span> <span style="font-size: 0.72rem; text-transform: uppercase; background: #ef4444; color: white; padding: 0.1rem 0.4rem; border-radius: 4px; font-family: sans-serif; font-weight: 700; margin-left: 0.25rem;">Simulation</span>`;
+        }
 
         examTimerInterval = setInterval(() => {
             examSecondsRemaining--;
             examSecondsElapsed++;
-            if (timerEl) timerEl.textContent = formatExamTime(examSecondsRemaining);
+            const tEl = document.getElementById("exam-timer");
+            if (tEl) tEl.textContent = formatExamTime(examSecondsRemaining);
+
+            if (examSecondsRemaining <= 600 && timerContainer) {
+                timerContainer.style.borderColor = "#f59e0b";
+                timerContainer.style.color = "#fef08a";
+            }
 
             if (examSecondsRemaining <= 0) {
                 clearInterval(examTimerInterval);
@@ -1513,10 +1537,19 @@ function startExamMode(simulation, forcedSetId) {
             }
         }, 1000);
     } else {
-        if (timerContainer) timerContainer.style.display = "none";
         examSecondsElapsed = 0;
+        if (timerContainer) {
+            timerContainer.style.display = "flex";
+            timerContainer.style.background = "#0f172a";
+            timerContainer.style.borderColor = "#38bdf8";
+            timerContainer.style.color = "#bae6fd";
+            timerContainer.innerHTML = `<i class="fa-solid fa-clock" style="color: #38bdf8;"></i> <span id="exam-timer">${formatExamTime(0)}</span> <span style="font-size: 0.72rem; text-transform: uppercase; background: #0284c7; color: white; padding: 0.1rem 0.4rem; border-radius: 4px; font-family: sans-serif; font-weight: 700; margin-left: 0.25rem;">Übung</span>`;
+        }
+
         examTimerInterval = setInterval(() => {
             examSecondsElapsed++;
+            const tEl = document.getElementById("exam-timer");
+            if (tEl) tEl.textContent = formatExamTime(examSecondsElapsed);
         }, 1000);
     }
 
