@@ -427,6 +427,9 @@
                         <div id="exam-timer-container" class="exam-timer-badge" style="display: none;">
                             <i class="fa-solid fa-clock-rotate-left fa-spin"></i> <span id="exam-timer">90:00</span>
                         </div>
+                        <button class="btn" id="exam-pause-btn" title="Prüfung pausieren / fortsetzen" style="display: none; padding: 0.35rem 0.65rem; font-size: 0.85rem; align-items: center; gap: 0.35rem; border-radius: 6px; border: 1.5px solid #f59e0b; color: #b45309; background: #fffbeb; font-weight: 600; cursor: pointer;">
+                            <i class="fa-solid fa-pause"></i> <span id="exam-pause-btn-text">Pause</span>
+                        </button>
                         <button class="btn btn-secondary" id="exam-whiteboard-btn" title="Diagramm-Zeichenboard als Fenster öffnen" style="padding: 0.35rem 0.65rem; font-size: 0.85rem; display: flex; align-items: center; gap: 0.35rem; border-radius: 6px; border: 1px solid #8b5cf6; color: #6d28d9; background: #f5f3ff;">
                             <i class="fa-solid fa-pen-ruler"></i> <span style="font-weight: 600;">Skizzenblatt</span>
                         </button>
@@ -435,6 +438,22 @@
                         </button>
                         <button class="btn" id="exam-exit-btn" style="background: #450a0a; border: 1.5px solid #ef4444; color: #fca5a5; font-size: 0.85rem; padding: 0.4rem 0.75rem; border-radius: 6px; cursor: pointer; display: flex; align-items: center; gap: 0.4rem; font-weight: 700;" title="Prüfung beenden und zur Hauptseite zurückkehren">
                             <i class="fa-solid fa-house"></i> <span>Zur Hauptseite</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Exam Pause Overlay Modal -->
+                <div id="exam-pause-overlay" style="display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.78); backdrop-filter: blur(5px); z-index: 99999; align-items: center; justify-content: center;">
+                    <div style="background: white; border-radius: 14px; padding: 2.2rem 2rem; max-width: 440px; width: 90%; text-align: center; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); border: 2px solid #f59e0b;">
+                        <div style="width: 64px; height: 64px; border-radius: 50%; background: #fef3c7; color: #d97706; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.2rem; font-size: 1.8rem;">
+                            <i class="fa-solid fa-pause"></i>
+                        </div>
+                        <h3 style="margin-bottom: 0.5rem; color: #0f172a; font-size: 1.35rem; font-weight: 700;">Prüfung pausiert</h3>
+                        <p style="color: #64748b; font-size: 0.95rem; margin-bottom: 1.5rem; line-height: 1.5;">
+                            Die Prüfungszeit wurde angehalten. Nimm dir einen Moment Zeit! Klicke auf <strong>Fortsetzen</strong>, um direkt an der aktuellen Stelle weiterzuarbeiten.
+                        </p>
+                        <button id="exam-resume-modal-btn" class="btn" style="background: linear-gradient(135deg, #10b981, #059669); color: white; font-weight: bold; font-size: 1rem; padding: 0.7rem 1.6rem; border-radius: 8px; border: none; cursor: pointer; display: inline-flex; align-items: center; gap: 0.5rem; box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.3);">
+                            <i class="fa-solid fa-play"></i> Prüfung fortsetzen
                         </button>
                     </div>
                 </div>

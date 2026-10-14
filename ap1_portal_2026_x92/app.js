@@ -41,6 +41,7 @@ let isExamSubmitted = false;
 let examTimerInterval = null;
 let examSecondsRemaining = 90 * 60;
 let examSecondsElapsed = 0;
+let isExamPaused = false;
 
 // DOM Elements
 const questionThemeEl = document.getElementById("question-theme");
@@ -145,6 +146,11 @@ document.addEventListener("DOMContentLoaded", () => {
         if (examSubmitBtn) examSubmitBtn.addEventListener("click", submitExam);
         if (examWhiteboardBtn) examWhiteboardBtn.addEventListener("click", openWhiteboard);
         if (resultsBackBtn) resultsBackBtn.addEventListener("click", showMainQuizMode);
+
+        const examPauseBtn = document.getElementById("exam-pause-btn");
+        const examResumeModalBtn = document.getElementById("exam-resume-modal-btn");
+        if (examPauseBtn) examPauseBtn.addEventListener("click", toggleExamPause);
+        if (examResumeModalBtn) examResumeModalBtn.addEventListener("click", toggleExamPause);
 
         // Tab pills click listeners (delegated for dynamic task counts)
         const tabPillsContainer = document.getElementById("booklet-tab-pills");
@@ -1505,8 +1511,20 @@ function startExamMode(simulation, forcedSetId) {
     const resArea = document.getElementById("exam-results-area");
     if (resArea) resArea.style.display = "none";
 
-    // Setup Timer
+    // Setup Timer & Pause
     const timerContainer = document.getElementById("exam-timer-container");
+    const pauseBtn = document.getElementById("exam-pause-btn");
+    const pauseOverlay = document.getElementById("exam-pause-overlay");
+
+    isExamPaused = false;
+    if (pauseOverlay) pauseOverlay.style.display = "none";
+    if (pauseBtn) {
+        pauseBtn.style.display = "inline-flex";
+        pauseBtn.style.background = "#fffbeb";
+        pauseBtn.style.borderColor = "#f59e0b";
+        pauseBtn.style.color = "#b45309";
+        pauseBtn.innerHTML = `<i class="fa-solid fa-pause"></i> <span id="exam-pause-btn-text">Pause</span>`;
+    }
 
     if (simulation) {
         examSecondsRemaining = 90 * 60;
@@ -1516,10 +1534,12 @@ function startExamMode(simulation, forcedSetId) {
             timerContainer.style.background = "#450a0a";
             timerContainer.style.borderColor = "#ef4444";
             timerContainer.style.color = "#fca5a5";
+            timerContainer.style.opacity = "1";
             timerContainer.innerHTML = `<i class="fa-solid fa-stopwatch fa-spin" style="color: #f87171;"></i> <span id="exam-timer">${formatExamTime(examSecondsRemaining)}</span> <span style="font-size: 0.72rem; text-transform: uppercase; background: #ef4444; color: white; padding: 0.1rem 0.4rem; border-radius: 4px; font-family: sans-serif; font-weight: 700; margin-left: 0.25rem;">Simulation</span>`;
         }
 
         examTimerInterval = setInterval(() => {
+            if (isExamPaused) return;
             examSecondsRemaining--;
             examSecondsElapsed++;
             const tEl = document.getElementById("exam-timer");
@@ -1532,6 +1552,7 @@ function startExamMode(simulation, forcedSetId) {
 
             if (examSecondsRemaining <= 0) {
                 clearInterval(examTimerInterval);
+                examTimerInterval = null;
                 alert("Die Prüfungszeit von 90 Minuten ist abgelaufen! Deine Prüfung wird nun automatisch abgegeben.");
                 submitExam();
             }
@@ -1543,10 +1564,12 @@ function startExamMode(simulation, forcedSetId) {
             timerContainer.style.background = "#0f172a";
             timerContainer.style.borderColor = "#38bdf8";
             timerContainer.style.color = "#bae6fd";
+            timerContainer.style.opacity = "1";
             timerContainer.innerHTML = `<i class="fa-solid fa-clock" style="color: #38bdf8;"></i> <span id="exam-timer">${formatExamTime(0)}</span> <span style="font-size: 0.72rem; text-transform: uppercase; background: #0284c7; color: white; padding: 0.1rem 0.4rem; border-radius: 4px; font-family: sans-serif; font-weight: 700; margin-left: 0.25rem;">Übung</span>`;
         }
 
         examTimerInterval = setInterval(() => {
+            if (isExamPaused) return;
             examSecondsElapsed++;
             const tEl = document.getElementById("exam-timer");
             if (tEl) tEl.textContent = formatExamTime(examSecondsElapsed);
@@ -1555,6 +1578,45 @@ function startExamMode(simulation, forcedSetId) {
 
     // Render page 0 (Deckblatt)
     renderCurrentExamPage();
+}
+
+// Pauses or resumes the active exam timer and displays the pause overlay
+function toggleExamPause() {
+    if (!isExamActive || isExamSubmitted) return;
+
+    isExamPaused = !isExamPaused;
+
+    const pauseBtn = document.getElementById("exam-pause-btn");
+    const pauseOverlay = document.getElementById("exam-pause-overlay");
+    const timerContainer = document.getElementById("exam-timer-container");
+
+    if (isExamPaused) {
+        if (pauseBtn) {
+            pauseBtn.style.background = "#ecfdf5";
+            pauseBtn.style.borderColor = "#10b981";
+            pauseBtn.style.color = "#047857";
+            pauseBtn.innerHTML = `<i class="fa-solid fa-play"></i> <span id="exam-pause-btn-text">Fortsetzen</span>`;
+        }
+        if (pauseOverlay) {
+            pauseOverlay.style.display = "flex";
+        }
+        if (timerContainer) {
+            timerContainer.style.opacity = "0.65";
+        }
+    } else {
+        if (pauseBtn) {
+            pauseBtn.style.background = "#fffbeb";
+            pauseBtn.style.borderColor = "#f59e0b";
+            pauseBtn.style.color = "#b45309";
+            pauseBtn.innerHTML = `<i class="fa-solid fa-pause"></i> <span id="exam-pause-btn-text">Pause</span>`;
+        }
+        if (pauseOverlay) {
+            pauseOverlay.style.display = "none";
+        }
+        if (timerContainer) {
+            timerContainer.style.opacity = "1";
+        }
+    }
 }
 
 // Loads an exam set by ID
@@ -1578,6 +1640,10 @@ function switchActiveExamSet(setId) {
         const bookletSelect = document.getElementById("booklet-exam-select");
         if (bookletSelect && activeExamSet) bookletSelect.value = activeExamSet.id;
         return;
+    }
+
+    if (isExamPaused) {
+        toggleExamPause();
     }
 
     loadExamSetById(setId);
@@ -2230,7 +2296,14 @@ function calculateExamScoresSummary() {
 // Submits the exam, stamps the Deckblatt and displays evaluation
 function submitExam() {
     clearInterval(examTimerInterval);
+    examTimerInterval = null;
     isExamSubmitted = true;
+    isExamPaused = false;
+
+    const pauseBtn = document.getElementById("exam-pause-btn");
+    if (pauseBtn) pauseBtn.style.display = "none";
+    const pauseOverlay = document.getElementById("exam-pause-overlay");
+    if (pauseOverlay) pauseOverlay.style.display = "none";
 
     // Calculate score
     const res = calculateExamScoresSummary();
@@ -2251,6 +2324,7 @@ function submitExam() {
 function exitExamMode() {
     if (confirm("Möchtest du den Prüfungsmodus wirklich beenden? Dein Fortschritt in diesem Durchgang geht dabei verloren.")) {
         clearInterval(examTimerInterval);
+        examTimerInterval = null;
         showMainQuizMode();
     }
 }
@@ -2259,7 +2333,14 @@ function exitExamMode() {
 function showMainQuizMode() {
     isExamActive = false;
     isSimulationMode = false;
+    isExamPaused = false;
     clearInterval(examTimerInterval);
+    examTimerInterval = null;
+
+    const pauseBtn = document.getElementById("exam-pause-btn");
+    if (pauseBtn) pauseBtn.style.display = "none";
+    const pauseOverlay = document.getElementById("exam-pause-overlay");
+    if (pauseOverlay) pauseOverlay.style.display = "none";
 
     document.querySelector(".container").classList.remove("exam-mode-active");
     document.querySelectorAll(".sidebar").forEach(s => s.style.display = "");
