@@ -7616,6 +7616,7 @@ WHERE Email IS NULL OR Email = '';
         isHard: true,
         difficulty: "hard",
         isCalculation: true,
+        isSubnetting: true,
         theme: "lf3",
         topic: "🔥 Meisterklasse: 5-Stufige VLSM Multi-Subnetzplanung (LF 3)",
         type: "open-text",
@@ -8026,6 +8027,7 @@ Ermitteln Sie die global scope unicast Adresse (GUA) des Computers nach dem modi
         isBawueFocus: true,
         isHard: true,
         difficulty: "hard",
+        isSubnetting: true,
         theme: "lf4",
         isCalculation: true,
         topic: "🌐 IPv4 Subnetting: Hostanzahl, Netzwerkadresse, Broadcastadresse & Router-IP",
@@ -10689,6 +10691,7 @@ c) Methodenauswahl für die Szenarien:
         isHard: false,
         difficulty: "standard",
         isBawueFocus: true,
+        isSubnetting: true,
         theme: "lf3",
         topic: "🔢 IPv6 Adressstruktur: Global Routing Prefix, Subnet-ID, Interface-ID",
         type: "multiple-choice",
@@ -10707,6 +10710,7 @@ c) Methodenauswahl für die Szenarien:
         isHard: true,
         difficulty: "hard",
         isBawueFocus: true,
+        isSubnetting: true,
         theme: "lf3",
         topic: "🔄 IPv6 EUI-64: MAC-Umwandlung & Bit-Flip",
         type: "open-text",
@@ -10720,6 +10724,7 @@ c) Methodenauswahl für die Szenarien:
         isHard: false,
         difficulty: "standard",
         isBawueFocus: true,
+        isSubnetting: true,
         theme: "lf3",
         topic: "📊 IPv6 Subnetz-Kalkulation: Zuweisung /56 auf /64",
         type: "multiple-choice",
@@ -10738,6 +10743,7 @@ c) Methodenauswahl für die Szenarien:
         isHard: true,
         difficulty: "hard",
         isBawueFocus: true,
+        isSubnetting: true,
         theme: "lf3",
         topic: "📊 IPv6 Subnetz-Kalkulation: /48 vs. /60 Rechenaufgabe",
         type: "open-text",
@@ -13407,6 +13413,7 @@ WHERE Email IS NULL OR Email = '';`,
         difficulty: "standard",
         isBawueFocus: true,
         isItArbeitsplatz: true,
+        isSubnetting: true,
         theme: "lf3",
         topic: "🌐 IHK-Prüfungsaufgabe IPv6: Netzpräfix (/64), Subnetz-ID & Interface-ID",
         type: "multiple-choice",
@@ -13445,6 +13452,7 @@ Welche Zeile enthält die exakten Prüfungsergebnisse für die gesuchten Adressb
         difficulty: "hard",
         isBawueFocus: true,
         isItArbeitsplatz: true,
+        isSubnetting: true,
         theme: "lf3",
         topic: "🌐 IHK-Prüfungsaufgabe IPv6: Subnetting (/48 auf /64) & EUI-64 MAC-Rückrechnung",
         type: "open-text",
@@ -13496,6 +13504,7 @@ Ermitteln Sie tabellarisch folgende Werte und beantworten Sie die Zusatzfragen:
         difficulty: "standard",
         isBawueFocus: true,
         isItArbeitsplatz: true,
+        isSubnetting: true,
         theme: "lf3",
         topic: "📊 IHK-Aufgabe: IPv6 Präfixlängen, Subnetzmengen & Zweierpotenzen (2^Δ)",
         type: "multiple-choice",
@@ -13529,6 +13538,7 @@ Welche Zeile enthält alle vier korrekten Ergebnisse?`,
         difficulty: "hard",
         isBawueFocus: true,
         isItArbeitsplatz: true,
+        isSubnetting: true,
         theme: "lf3",
         topic: "🏢 IHK-Aufgabe Standortplanung: /48-Netz in /52-Blöcke & Adressbereiche (Havelholz GmbH)",
         type: "open-text",
@@ -14733,5 +14743,775 @@ Wie viele **/64-Subnetze** kann das Unternehmen aus diesem /48-Netz bilden?`,
         correctAnswer: 0,
         solutionDiagramSvg: VisualDiagrams.getNetworkTopologySvg(),
         explanation: "Von /48 bis /64 stehen genau 16 Bits (64 - 48 = 16) für das Subnetz zur Verfügung (das gesamte 4. Hextet). 2^16 = 65.536 vollwertige /64-Subnetze!"
+    },
+    {
+        id: 601,
+        isHard: false,
+        difficulty: "standard",
+        theme: "subnetting",
+        isSubnetting: true,
+        isBawueFocus: true,
+        topic: "🌐 IPv6-Prüfungsaufgabe 2: Netzpräfix (/64), Interface-ID & Subnetz-ID",
+        type: "open-text",
+        title: "Aufgabe 2: Präfix und Interface-ID (Tabelle ausfüllen)",
+        question: `**Aufgabe 2: Präfix und Interface-ID (4 Punkte)**
+
+Ein Client im Firmennetzwerk hat folgende IPv6-Adresse konfiguriert:
+\`2001:db8:acad:12:a5b3:9cff:fe21:44c0/64\`
+
+Das Unternehmen hat vom Provider ein **/48-Präfix** erhalten.
+
+> **Gedankenstütze (Aufteilung einer IPv6-Adresse):**
+> • 48 Bit Globales Routing-Präfix
+> • 16 Bit Subnetz-ID
+> • 64 Bit Interface-ID (Host-Anteil)
+> (48 + 16 + 64 = 128 Bit)
+
+**Ergänzen Sie die folgende Tabelle:**
+\`\`\`text
++------------------------------+---------------------------------------+
+| Gesucht                      | Ergebnis                              |
++------------------------------+---------------------------------------+
+| Netzpräfix (/64)             |                                       |
+| Interface-ID                 |                                       |
+| Subnetz-ID (Bits 49 bis 64)  |                                       |
+| Globales Routing-Präfix (/48)|                                       |
++------------------------------+---------------------------------------+
+\`\`\``,
+        musterloesung: `Musterlösung Aufgabe 2 (Präfix und Interface-ID):
+
+1. Netzpräfix (/64):
+   2001:db8:acad:12::/64
+   (Die ersten 64 Bit bzw. ersten 4 Hextette inklusive Subnetz-ID).
+
+2. Interface-ID (64 Bit Host-Anteil):
+   a5b3:9cff:fe21:44c0
+   (Die hinteren 64 Bit bzw. letzten 4 Hextette des Clients; erkennbar am EUI-64-Injektionsmuster 'ff:fe').
+
+3. Subnetz-ID (Bits 49 bis 64):
+   12 (hex) bzw. 0012
+   (Das 4. Hextet, das dem Unternehmen zur internen Subnetzbildung dient).
+
+4. Globales Routing-Präfix (/48):
+   2001:db8:acad::/48
+   (Die ersten 48 Bit bzw. ersten 3 Hextette, die vom Provider fest zugewiesen wurden).
+
+Vollständige Tabelle:
++------------------------------+---------------------------------------+
+| Gesucht                      | Ergebnis                              |
++------------------------------+---------------------------------------+
+| Netzpräfix (/64)             | 2001:db8:acad:12::/64                 |
+| Interface-ID                 | a5b3:9cff:fe21:44c0                   |
+| Subnetz-ID (Bits 49 bis 64)  | 12 (bzw. 0012)                        |
+| Globales Routing-Präfix (/48)| 2001:db8:acad::/48                    |
++------------------------------+---------------------------------------+`,
+        correctAnswer: `- Netzpräfix (/64): 2001:db8:acad:12::/64
+- Interface-ID: a5b3:9cff:fe21:44c0
+- Subnetz-ID (Bits 49 bis 64): 12 (hex) bzw. 0012
+- Globales Routing-Präfix (/48): 2001:db8:acad::/48`,
+        solutionDiagramSvg: VisualDiagrams.getNetworkTopologySvg(),
+        explanation: "Standard-Gliederung einer IPv6-Global-Unicast-Adresse: 48 Bit Global Routing Prefix (Provider) + 16 Bit Subnet-ID (internes Subnetz) + 64 Bit Interface-ID (Client/Host).",
+        points: 4
+    },
+    {
+        id: 602,
+        isHard: false,
+        difficulty: "standard",
+        theme: "subnetting",
+        isSubnetting: true,
+        isBawueFocus: true,
+        topic: "🌐 IPv6-Prüfungsaufgabe 3: Präfixlängen & Subnetzmengen (Formel: 2^Δ)",
+        type: "open-text",
+        title: "Aufgabe 3: Präfixlängen (Anzahl = 2^(Differenz der Präfixlänge))",
+        question: `**Aufgabe 3: Präfixlängen (4 Punkte)**
+
+Formel laut IHK: **Anzahl = 2^(Differenz der Präfixlänge)**
+
+Geben Sie die Ergebnisse als Zweierpotenz und, wo sinnvoll, als Dezimalzahl an:
+
+\`\`\`text
++------------------------------------+---------------------------------------+
+| Frage                              | Ergebnis (Zweierpotenz & Zahl)        |
++------------------------------------+---------------------------------------+
+| Wie viele Adressen umfasst ein /64?|                                       |
+| Wie viele /64-Netze passen in /56? |                                       |
+| Wie viele /56-Netze passen in /48? |                                       |
+| Wie viele /48-Netze passen in /32? |                                       |
+| Wie viele /64-Netze passen in /48? |                                       |
++------------------------------------+---------------------------------------+
+\`\`\``,
+        musterloesung: `Musterlösung Aufgabe 3 (Präfixlängen & Subnetzmengen):
+
+1. Wie viele Adressen umfasst ein /64-Netz?
+   - Differenz: 128 Bit - 64 Bit = 64 Host-Bits.
+   - Ergebnis: 2^64 = ca. 18,45 Trillionen Adressen (exakt: 18.446.744.073.709.551.616).
+
+2. Wie viele /64-Netze passen in ein /56?
+   - Differenz: 64 - 56 = 8 Subnetz-Bits.
+   - Ergebnis: 2^8 = 256 /64-Subnetze.
+
+3. Wie viele /56-Netze passen in ein /48?
+   - Differenz: 56 - 48 = 8 Bits.
+   - Ergebnis: 2^8 = 256 /56-Netze.
+
+4. Wie viele /48-Netze passen in ein /32?
+   - Differenz: 48 - 32 = 16 Bits.
+   - Ergebnis: 2^16 = 65.536 /48-Kundennetze.
+
+5. Wie viele /64-Netze passen direkt in ein /48?
+   - Differenz: 64 - 48 = 16 Bits.
+   - Ergebnis: 2^16 = 65.536 /64-Subnetze.
+
+Vollständige Tabelle:
++------------------------------------+---------------------------------------+
+| Frage                              | Ergebnis (Zweierpotenz & Zahl)        |
++------------------------------------+---------------------------------------+
+| Wie viele Adressen umfasst ein /64?| 2^64 = ca. 18,48 Trillionen Adressen   |
+| Wie viele /64-Netze passen in /56? | 2^(64-56) = 2^8 = 256 Subnetze        |
+| Wie viele /56-Netze passen in /48? | 2^(56-48) = 2^8 = 256 Netze           |
+| Wie viele /48-Netze passen in /32? | 2^(48-32) = 2^16 = 65.536 Netze       |
+| Wie viele /64-Netze passen in /48? | 2^(64-48) = 2^16 = 65.536 Subnetze    |
++------------------------------------+---------------------------------------+`,
+        correctAnswer: `1. /64-Adressen: 2^64 = ca. 18,48 Trillionen
+2. /64 in /56: 2^8 = 256 Netze
+3. /56 in /48: 2^8 = 256 Netze
+4. /48 in /32: 2^16 = 65.536 Netze
+5. /64 in /48: 2^16 = 65.536 Netze`,
+        solutionDiagramSvg: VisualDiagrams.getNetworkTopologySvg(),
+        explanation: "Bei IPv6 gilt immer: Die Anzahl der Subnetze bzw. Adressen ist 2 hoch (neue Präfixlänge - alte Präfixlänge).",
+        points: 4
+    },
+    {
+        id: 603,
+        isHard: true,
+        difficulty: "hard",
+        theme: "subnetting",
+        isSubnetting: true,
+        isBawueFocus: true,
+        topic: "🌐 IPv6-Prüfungsaufgabe 4: Standortplanung & Adressbereiche mit FFFF (Havelholz GmbH)",
+        type: "open-text",
+        title: "Aufgabe 4: Standortplanung & Hex-Bereiche mit FFFF (2001:db8:c3::/48 in /52-Blöcke)",
+        question: `**Aufgabe 4: Standortplanung (8 Punkte)**
+
+Die Havelholz GmbH erhält vom Provider das Präfix \`2001:db8:c3::/48\`.
+Das Netz soll in **/52-Blöcke** für die verschiedenen Unternehmensstandorte aufgeteilt werden.
+
+**a) Block- und Subnetzmengen (2 Punkte):**
+1. Wie viele **/52-Blöcke** sind aus dem /48-Präfix möglich?
+2. Wie viele **/64-Subnetze** enthält jeder einzelne /52-Block?
+*(Notieren Sie Ihre Rechenschritte mit Zweierpotenzen)*
+
+**b) Präfixe der Standorte (4 Punkte):**
+Ergänzen Sie die /52-Präfixe der ersten vier Standorte:
+\`\`\`text
++--------------------+---------------------------------------+
+| Standort           | Präfix (/52)                          |
++--------------------+---------------------------------------+
+| 1 Zentrale         | 2001:db8:c3:0000::/52                 |
+| 2 Lager            |                                       |
+| 3 Werkstatt        |                                       |
+| 4 Außenstelle      |                                       |
++--------------------+---------------------------------------+
+\`\`\`
+
+**c) Adressbereich Standort 2 (2 Punkte):**
+Geben Sie für **Standort 2 (Lager)** die **erste und die letzte Adresse des Blocks** an.`,
+        musterloesung: `Musterlösung Aufgabe 4 (Standortplanung & FFFF-Blockgrenzen):
+
+a) Berechnung:
+1. Anzahl /52-Blöcke:
+   - 52 - 48 = 4 Bits für die Standortbildung.
+   - 2^4 = 16 verschiedene /52-Standortblöcke möglich.
+2. Anzahl /64-Subnetze je /52-Block:
+   - 64 - 52 = 12 Bits für Subnetze.
+   - 2^12 = 4.096 /64-Subnetze je Standortblock.
+   (Kontrolle: 16 * 4.096 = 65.536 = 2^16).
+
+b) Präfixe der Standorte:
+Da 4 Bits genau einem Hex-Zeichen (Nibble) entsprechen, erhöht sich die erste Ziffer des vierten Hextets jeweils um 1:
++--------------------+---------------------------------------+
+| Standort           | Präfix (/52)                          |
++--------------------+---------------------------------------+
+| 1 Zentrale         | 2001:db8:c3:0000::/52 (2001:db8:c3::/52)|
+| 2 Lager            | 2001:db8:c3:1000::/52                 |
+| 3 Werkstatt        | 2001:db8:c3:2000::/52                 |
+| 4 Außenstelle      | 2001:db8:c3:3000::/52                 |
++--------------------+---------------------------------------+
+
+c) Erste und letzte Adresse für Standort 2 (2001:db8:c3:1000::/52):
+- Der Block beginnt bei '1000' und endet bei '1fff'.
+- Erste Adresse: 2001:db8:c3:1000:: (Netz-Präfix / Anycast) bzw. 2001:db8:c3:1000::1 (erste Hostadresse)
+- Letzte Adresse des Blocks: 2001:db8:c3:1fff:ffff:ffff:ffff:ffff
+  (Alle Hostbits und Subnetzbits des Blocks auf binär 1 gesetzt = hex ffff:ffff:ffff:ffff:ffff).`,
+        correctAnswer: `a) 1. 2^(52-48) = 2^4 = 16 Blöcke | 2. 2^(64-52) = 2^12 = 4.096 Subnetze
+b) 1. Zentrale: 2001:db8:c3:0000::/52 (2001:db8:c3::/52)
+   2. Lager: 2001:db8:c3:1000::/52
+   3. Werkstatt: 2001:db8:c3:2000::/52
+   4. Außenstelle: 2001:db8:c3:3000::/52
+c) Standort 2:
+   - Erste Adresse: 2001:db8:c3:1000::
+   - Letzte Adresse: 2001:db8:c3:1fff:ffff:ffff:ffff:ffff`,
+        solutionDiagramSvg: VisualDiagrams.getNetworkTopologySvg(),
+        explanation: "Ein /52-Präfix belegt 4 Bits des vierten Hextets (Bits 49-52). Das erste Hex-Zeichen ist fest (0, 1, 2, ...), die restlichen 12 Bits variieren von 000 bis fff, gefolgt von den 64 Hostbits bis ffff:ffff:ffff:ffff.",
+        points: 8
+    },
+    {
+        id: 604,
+        isHard: false,
+        difficulty: "standard",
+        theme: "subnetting",
+        isSubnetting: true,
+        isBawueFocus: true,
+        topic: "🌐 IPv6-Prüfungsaufgabe 5: Zuordnung prüfen (Standortanalyse & Hex-Bereiche)",
+        type: "open-text",
+        title: "Aufgabe 5: Zuordnung prüfen (Standortbestimmung aus IPv6-Adresse)",
+        question: `**Aufgabe 5: Zuordnung prüfen (4 Punkte)**
+
+Prüfen Sie, zu welchem Standort aus Aufgabe 4 (Havelholz GmbH) die folgenden IPv6-Adressen gehören.
+Begründen Sie Ihre Entscheidung jeweils kurz anhand des vierten Hextets.
+
+Zur Erinnerung:
+• Standort 1 (Zentrale): \`2001:db8:c3:0000::/52\` (Bereich: 0000 bis 0fff)
+• Standort 2 (Lager): \`2001:db8:c3:1000::/52\` (Bereich: 1000 bis 1fff)
+• Standort 3 (Werkstatt): \`2001:db8:c3:2000::/52\` (Bereich: 2000 bis 2fff)
+• Standort 4 (Außenstelle): \`2001:db8:c3:3000::/52\` (Bereich: 3000 bis 3fff)
+
+\`\`\`text
++--------------------------+-------------------------------------------------+
+| Adresse                  | Standort und Begründung                         |
++--------------------------+-------------------------------------------------+
+| 2001:db8:c3:2a01::5      |                                                 |
+| 2001:db8:c3:3001::5      |                                                 |
+| 2001:db8:c3:00fa::10     |                                                 |
+| 2001:db8:c3:1ff0:beef::1 |                                                 |
++--------------------------+-------------------------------------------------+
+\`\`\``,
+        musterloesung: `Musterlösung Aufgabe 5 (Zuordnung prüfen):
+
+1. Adresse: 2001:db8:c3:2a01::5
+   - Standort: Standort 3 (Werkstatt)
+   - Begründung: Das vierte Hextet lautet '2a01'. Der /52-Block von Standort 3 umfasst den hexadezimalen Bereich von '2000' bis '2fff'. Da '2a01' in diesem Intervall liegt, gehört die Adresse zwingend zu Standort 3.
+
+2. Adresse: 2001:db8:c3:3001::5
+   - Standort: Standort 4 (Außenstelle)
+   - Begründung: Das vierte Hextet lautet '3001'. Der /52-Block von Standort 4 deckt den Bereich von '3000' bis '3fff' ab. '3001' liegt in diesem Intervall.
+
+3. Adresse: 2001:db8:c3:00fa::10
+   - Standort: Standort 1 (Zentrale)
+   - Begründung: Das vierte Hextet '00fa' (ungekürzt) liegt im Intervall '0000' bis '0fff'.
+
+4. Adresse: 2001:db8:c3:1ff0:beef::1
+   - Standort: Standort 2 (Lager)
+   - Begründung: Das vierte Hextet '1ff0' liegt im Intervall '1000' bis '1fff'.
+
+Vollständige Tabelle:
++--------------------------+-------------------------------------------------+
+| Adresse                  | Standort und Begründung                         |
++--------------------------+-------------------------------------------------+
+| 2001:db8:c3:2a01::5      | Standort 3 (Werkstatt): 2a01 liegt in 2000-2fff |
+| 2001:db8:c3:3001::5      | Standort 4 (Außenstelle): 3001 liegt in 3000-3fff|
+| 2001:db8:c3:00fa::10     | Standort 1 (Zentrale): 00fa liegt in 0000-0fff  |
+| 2001:db8:c3:1ff0:beef::1 | Standort 2 (Lager): 1ff0 liegt in 1000-1fff     |
++--------------------------+-------------------------------------------------+`,
+        correctAnswer: `1. 2001:db8:c3:2a01::5 -> Standort 3 (Werkstatt), da 2a01 im Bereich 2000 bis 2fff liegt.
+2. 2001:db8:c3:3001::5 -> Standort 4 (Außenstelle), da 3001 im Bereich 3000 bis 3fff liegt.
+3. 2001:db8:c3:00fa::10 -> Standort 1 (Zentrale), da 00fa im Bereich 0000 bis 0fff liegt.
+4. 2001:db8:c3:1ff0:beef::1 -> Standort 2 (Lager), da 1ff0 im Bereich 1000 bis 1fff liegt.`,
+        solutionDiagramSvg: VisualDiagrams.getNetworkTopologySvg(),
+        explanation: "Durch das /52-Präfix ist das oberste Nibble des 4. Hextets das Kennzeichen des Standorts: 0 = Zentrale, 1 = Lager, 2 = Werkstatt, 3 = Außenstelle.",
+        points: 4
+    },
+    {
+        id: 605,
+        isHard: true,
+        difficulty: "hard",
+        theme: "subnetting",
+        isSubnetting: true,
+        isBawueFocus: true,
+        topic: "🌐 IPv6 Adressraum & Grundlagen: Maximale Hostanzahl (/64), FFFF-Bereiche & Warum kein Broadcast existiert",
+        type: "open-text",
+        title: "IPv6 Grundlagen: /64 Adressgröße, FFFF-Grenzen & Multicast statt Broadcast",
+        question: `In IPv6-Netzwerken ist das Standard-Präfix für Endgeräte-LANs immer **/64**.
+
+Beantworten Sie folgende vier IHK-Prüfungsfragen:
+
+1. **Maximale Adressgröße in /64 (2 Punkte):**
+   Wie viele IPv6-Adressen umfasst ein einzelnes /64-Subnetz? Warum rechnet man bei IPv6 in der Praxis **nicht** wie bei IPv4 mit der Formel \`2^n - 2\`?
+
+2. **Abschaffung des Broadcasts (3 Punkte):**
+   Warum gibt es bei IPv6 keine Broadcast-Adresse (wie \`255.255.255.255\` in IPv4)? Welches Verfahren ersetzt den Broadcast und welche beiden Multicast-Adressen ersetzen den Rundruf an alle Geräte bzw. alle Router?
+
+3. **Höchste Adresse eines Subnetzes (FFFF...FFFF) (3 Punkte):**
+   Gegeben ist das Subnetz \`2001:db8:feed:beef::/64\`.
+   a) Wie lautet die **höchste Adresse** dieses Subnetzes, bei der alle 64 Hostbits auf binär 1 gesetzt sind?
+   b) Warum darf diese Adresse in der Praxis nicht für reguläre Clients verwendet werden (Subnet-Router Anycast bzw. Reservierung)?`,
+        musterloesung: `Musterlösung (IPv6 Adressraum, FFFF-Grenzen & Multicast):
+
+1. Maximale Adressgröße in /64:
+   - 128 Bit Gesamt - 64 Bit Präfix = 64 Bit Hostanteil (Interface-ID).
+   - Anzahl: 2^64 = ca. 18,45 Trillionen Adressen (18.446.744.073.709.551.616).
+   - Warum kein 'Minus 2': Bei IPv4 werden Netzadresse und Broadcastadresse abgezogen. Bei IPv6 gibt es keinen Broadcast! Praktisch alle 2^64 Adressen können theoretisch genutzt werden (lediglich ::0 ist als Subnet-Router Anycast reserviert).
+
+2. Abschaffung von Broadcast:
+   - Problem bei IPv4-Broadcast: Ein Broadcast zwingt jede Netzwerkkarte und jede CPU im gesamten Broadcast-Bereich dazu, das Datenpaket zu verarbeiten, was Bandbreite und CPU-Leistung verschwendet (z. B. bei ARP-Stürmen).
+   - IPv6-Lösung: Ersetzung durch gezieltes **Multicast** (nur interessierte Knoten verarbeiten das Paket; Switches filtern via MLD Snooping).
+   - Ersetzende Multicast-Adressen:
+     * \`ff02::1\`: All-Nodes-Multicast (an alle IPv6-Geräte im lokalen Link).
+     * \`ff02::2\`: All-Routers-Multicast (an alle Router im lokalen Link).
+
+3. Höchste Adresse & FFFF:
+   a) Höchste Adresse: \`2001:db8:feed:beef:ffff:ffff:ffff:ffff\`
+      (Alle 64 Bits der Interface-ID auf 1 = 16 Hex-Zeichen 'f').
+   b) Reservierung: Die Adresse mit lauter Einsen (ffff:ffff:ffff:ffff) ist laut RFC 2526 als 'Subnet Anycast Address' reserviert. Die Adresse mit lauter Nullen (::0) ist die 'Subnet-Router Anycast'-Adresse.`,
+        correctAnswer: `1. 2^64 = ca. 18,48 Trillionen Adressen. Kein Broadcast-Abzug nötig, da kein Broadcast existiert.
+2. Broadcast durch Multicast ersetzt (schont Netzwerkressourcen).
+   - An alle Hosts: ff02::1
+   - An alle Router: ff02::2
+3. a) Höchste Adresse: 2001:db8:feed:beef:ffff:ffff:ffff:ffff
+   b) Laut RFC als Anycast-Adresse reserviert.`,
+        solutionDiagramSvg: VisualDiagrams.getNetworkTopologySvg(),
+        explanation: "Kernwissen IPv6: /64 hat 2^64 Adressen. Broadcast existiert nicht mehr, stattdessen Multicast (ff02::1 für alle Hosts, ff02::2 für Router). Höchste Hostadresse endet auf ffff:ffff:ffff:ffff.",
+        points: 8
+    },
+    {
+        id: 606,
+        isHard: true,
+        difficulty: "hard",
+        theme: "subnetting",
+        isSubnetting: true,
+        isBawueFocus: true,
+        topic: "🌐 IPv4 VLSM: Bedarfsgerechte Aufteilung (Netz 10.50.0.0/21 über mehrere Oktette)",
+        type: "open-text",
+        title: "IPv4 VLSM: Bedarfsgerechte Aufteilung eines /21-Netzes (600, 250, 120, 50, 2 Hosts)",
+        question: `Ein Unternehmen erhält für seinen neuen Campus das IPv4-Netz \`10.50.0.0/21\`.
+Folgende Abteilungen müssen bedarfsgerecht per VLSM adressiert werden:
+
+1. **IT & Softwareentwicklung:** 600 Hosts
+2. **Verwaltung & Finanzen:** 250 Hosts
+3. **Kundensupport:** 120 Hosts
+4. **Logistik:** 50 Hosts
+5. **Point-to-Point Routerlink:** 2 Hosts
+
+> **IHK-Regel:** Immer mit dem größten Subnetz beginnen!
+
+**Erstellen Sie die vollständige VLSM-Tabelle:**
+\`\`\`text
++---------------------+-------+----------------------+---------------------------------+---------------+
+| Abteilung           | Hosts | Netzadresse / Präfix | Hostbereich                     | Broadcast     |
++---------------------+-------+----------------------+---------------------------------+---------------+
+| IT & Entwicklung    | 600   |                      |                                 |               |
+| Verwaltung          | 250   |                      |                                 |               |
+| Support             | 120   |                      |                                 |               |
+| Logistik            | 50    |                      |                                 |               |
+| Router-Link         | 2     |                      |                                 |               |
++---------------------+-------+----------------------+---------------------------------+---------------+
+\`\`\``,
+        musterloesung: `Musterlösung IPv4 VLSM (10.50.0.0/21):
+
+Rechenschritte (absteigend nach Hostbedarf):
+
+1. IT & Entwicklung (600 Hosts):
+   - Benötigt: 600 + 2 = 602 -> Nächste Zweierpotenz: 2^10 = 1024 Adressen.
+   - Host-Bits = 10 -> Präfix: 32 - 10 = /22 (Maske 255.255.252.0). Blockgröße im 3. Oktett = 4.
+   - Netzadresse: 10.50.0.0/22
+   - Hostbereich: 10.50.0.1 bis 10.50.3.254 (1.022 nutzbare Hosts)
+   - Broadcast: 10.50.3.255
+   - Nächste freie Adresse: 10.50.4.0!
+
+2. Verwaltung (250 Hosts):
+   - Benötigt: 250 + 2 = 252 -> Nächste Zweierpotenz: 2^8 = 256 Adressen.
+   - Host-Bits = 8 -> Präfix: 32 - 8 = /24 (Maske 255.255.255.0).
+   - Netzadresse: 10.50.4.0/24
+   - Hostbereich: 10.50.4.1 bis 10.50.4.254 (254 nutzbare Hosts)
+   - Broadcast: 10.50.4.255
+   - Nächste freie Adresse: 10.50.5.0!
+
+3. Support (120 Hosts):
+   - Benötigt: 120 + 2 = 122 -> Nächste Zweierpotenz: 2^7 = 128 Adressen.
+   - Host-Bits = 7 -> Präfix: 32 - 7 = /25 (Maske 255.255.255.128).
+   - Netzadresse: 10.50.5.0/25
+   - Hostbereich: 10.50.5.1 bis 10.50.5.126 (126 nutzbare Hosts)
+   - Broadcast: 10.50.5.127
+   - Nächste freie Adresse: 10.50.5.128!
+
+4. Logistik (50 Hosts):
+   - Benötigt: 50 + 2 = 52 -> Nächste Zweierpotenz: 2^6 = 64 Adressen.
+   - Host-Bits = 6 -> Präfix: 32 - 6 = /26 (Maske 255.255.255.192).
+   - Netzadresse: 10.50.5.128/26
+   - Hostbereich: 10.50.5.129 bis 10.50.5.190 (62 nutzbare Hosts)
+   - Broadcast: 10.50.5.191
+   - Nächste freie Adresse: 10.50.5.192!
+
+5. Router-Link (2 Hosts):
+   - Benötigt: 2 + 2 = 4 -> Nächste Zweierpotenz: 2^2 = 4 Adressen.
+   - Host-Bits = 2 -> Präfix: 32 - 2 = /30 (Maske 255.255.255.252).
+   - Netzadresse: 10.50.5.192/30
+   - Hostbereich: 10.50.5.193 bis 10.50.5.194 (2 nutzbare Hosts)
+   - Broadcast: 10.50.5.195
+
+Vollständige Tabelle:
++---------------------+-------+----------------------+---------------------------------+---------------+
+| Abteilung           | Hosts | Netzadresse / Präfix | Hostbereich                     | Broadcast     |
++---------------------+-------+----------------------+---------------------------------+---------------+
+| IT & Entwicklung    | 600   | 10.50.0.0/22         | 10.50.0.1 bis 10.50.3.254       | 10.50.3.255   |
+| Verwaltung          | 250   | 10.50.4.0/24         | 10.50.4.1 bis 10.50.4.254       | 10.50.4.255   |
+| Support             | 120   | 10.50.5.0/25         | 10.50.5.1 bis 10.50.5.126       | 10.50.5.127   |
+| Logistik            | 50    | 10.50.5.128/26       | 10.50.5.129 bis 10.50.5.190     | 10.50.5.191   |
+| Router-Link         | 2     | 10.50.5.192/30       | 10.50.5.193 bis 10.50.5.194     | 10.50.5.195   |
++---------------------+-------+----------------------+---------------------------------+---------------+`,
+        correctAnswer: `1. IT (600): 10.50.0.0/22 | 10.50.0.1 - 10.50.3.254 | Broadcast: 10.50.3.255
+2. Verwaltung (250): 10.50.4.0/24 | 10.50.4.1 - 10.50.4.254 | Broadcast: 10.50.4.255
+3. Support (120): 10.50.5.0/25 | 10.50.5.1 - 10.50.5.126 | Broadcast: 10.50.5.127
+4. Logistik (50): 10.50.5.128/26 | 10.50.5.129 - 10.50.5.190 | Broadcast: 10.50.5.191
+5. Router (2): 10.50.5.192/30 | 10.50.5.193 - 10.50.5.194 | Broadcast: 10.50.5.195`,
+        solutionDiagramSvg: VisualDiagrams.getNetworkTopologySvg(),
+        explanation: "600 Hosts benötigen einen /22-Block (1.024 Adressen über die Oktette 10.50.0.0 bis 10.50.3.255). Danach folgt nahtlos 10.50.4.0/24 für 250 Hosts.",
+        points: 10
+    },
+    {
+        id: 607,
+        isHard: true,
+        difficulty: "hard",
+        theme: "subnetting",
+        isSubnetting: true,
+        isBawueFocus: true,
+        topic: "🌐 IPv4 Subnetting: Gleich große Subnetze über Oktettgrenze (/22 in 8 Subnetze à /25)",
+        type: "open-text",
+        title: "Gleich große Subnetze: /22 Basisnetz in 8 gleich große Teilnetze aufteilen",
+        question: `Ein Schulungszentrum teilt das Netzwerk \`172.18.0.0/22\` in genau **8 gleich große Subnetze** für 8 Schulungsräume auf.
+
+**a) Berechnungen:**
+1. Wie viele Subnetz-Bits werden benötigt?
+2. Wie lautet das **neue Präfix**?
+3. Wie lautet die **neue Subnetzmaske** in Dezimalpunkt-Notation?
+4. Wie viele **nutzbare Hosts** können pro Schulungsraum maximal angeschlossen werden?
+
+**b) Tabellarische Aufteilung:**
+Geben Sie für die ersten vier Subnetze (Raum 1 bis Raum 4) jeweils die **Netzadresse**, den **Hostbereich** und die **Broadcast-Adresse** an.`,
+        musterloesung: `Musterlösung (Gleich große Subnetze aus 172.18.0.0/22):
+
+a) Berechnungen:
+1. Subnetz-Bits: 2^n >= 8 -> n = 3 Bits.
+2. Neues Präfix: /22 + 3 = /25.
+3. Subnetzmaske: 255.255.255.128 (im 4. Oktett ist 1 Bit gesetzt = 128).
+4. Nutzbare Hosts:
+   - Hostbits = 32 - 25 = 7 Bits.
+   - Formel: 2^7 - 2 = 128 - 2 = 126 nutzbare Hosts pro Subnetz.
+
+b) Tabelle der ersten 4 Subnetze (Schrittweite: alle 128 Adressen):
+- Raum 1: Netz 172.18.0.0/25 | Host: 172.18.0.1 - 172.18.0.126 | Broadcast: 172.18.0.127
+- Raum 2: Netz 172.18.0.128/25 | Host: 172.18.0.129 - 172.18.0.254 | Broadcast: 172.18.0.255
+- Raum 3: Netz 172.18.1.0/25 | Host: 172.18.1.1 - 172.18.1.126 | Broadcast: 172.18.1.127
+- Raum 4: Netz 172.18.1.128/25 | Host: 172.18.1.129 - 172.18.1.254 | Broadcast: 172.18.1.255
+
+(Die Räume 5 bis 8 belegen dann analog 172.18.2.0/25 bis 172.18.3.128/25).`,
+        correctAnswer: `a) 1. 3 Bits | 2. /25 | 3. 255.255.255.128 | 4. 2^7 - 2 = 126 Hosts
+b) Raum 1: 172.18.0.0/25 | 172.18.0.1 - 172.18.0.126 | Broadcast: 172.18.0.127
+   Raum 2: 172.18.0.128/25 | 172.18.0.129 - 172.18.0.254 | Broadcast: 172.18.0.255
+   Raum 3: 172.18.1.0/25 | 172.18.1.1 - 172.18.1.126 | Broadcast: 172.18.1.127
+   Raum 4: 172.18.1.128/25 | 172.18.1.129 - 172.18.1.254 | Broadcast: 172.18.1.255`,
+        solutionDiagramSvg: VisualDiagrams.getNetworkTopologySvg(),
+        explanation: "Für 8 Subnetze werden 3 Bits geliehen (2^3 = 8). Aus /22 wird /25 mit Maske 255.255.255.128 und je 126 Hosts pro Raum.",
+        points: 8
+    },
+    {
+        id: 608,
+        isHard: false,
+        difficulty: "standard",
+        theme: "subnetting",
+        isSubnetting: true,
+        isBawueFocus: true,
+        topic: "🌐 IPv6 Notation & Kürzungsregeln nach RFC 5952",
+        type: "open-text",
+        title: "IPv6 Kürzungsregeln: Führende Nullen, Doppelpunkt-Regel (::) & Fehleranalyse",
+        question: `Wenden Sie die offiziellen Kürzungsregeln nach **RFC 5952** auf folgende IPv6-Adressen an:
+
+1. \`2001:0db8:0000:0000:0000:0000:0000:0001\`
+2. \`fe80:0000:0000:0000:02a0:ffff:fe12:3456\`
+3. \`2001:0db8:0000:0042:0000:0000:0000:0001\`
+4. \`0000:0000:0000:0000:0000:0000:0000:0000\`
+
+**Zusatzfragen:**
+a) Warum darf die Abkürzung \`::\` in einer IPv6-Adresse **exakt nur ein einziges Mal** vorkommen?
+b) Warum ist die Schreibweise \`2001:db8:1::2::3\` syntaktisch ungültig?`,
+        musterloesung: `Musterlösung (IPv6 Kürzungsregeln RFC 5952):
+
+Kürzungen:
+1. \`2001:0db8:0000:0000:0000:0000:0000:0001\`
+   -> \`2001:db8::1\`
+2. \`fe80:0000:0000:0000:02a0:ffff:fe12:3456\`
+   -> \`fe80::2a0:ffff:fe12:3456\`
+3. \`2001:0db8:0000:0042:0000:0000:0000:0001\`
+   -> \`2001:db8:0:42::1\` (Laut RFC 5952 wird die LÄNGERE Nullfolge komprimiert; hier 3 Null-Blöcke am Ende!).
+4. \`0000:0000:0000:0000:0000:0000:0000:0000\`
+   -> \`::\` (Die Unspecified Address).
+
+Antworten auf Zusatzfragen:
+a) Warum '::' nur einmal:
+   '::' ersetzt eine variable Anzahl von aufeinanderfolgenden 16-Bit-Nullblöcken. Würde '::' mehrfach verwendet, wäre die genaue Anzahl der Nullen an den jeweiligen Stellen uneindeutig und die 128-Bit-Adresse ließe sich nicht mehr mathematisch exakt rekonstruieren.
+b) Ungültigkeit von '2001:db8:1::2::3':
+   Es ist unklar, wie viele Nullblöcke an der ersten und wie viele an der zweiten Stelle stehen (z. B. 2 und 2 Nullen, 3 und 1, oder 1 und 3). Deshalb strikt unzulässig!`,
+        correctAnswer: `1. 2001:db8::1
+2. fe80::2a0:ffff:fe12:3456
+3. 2001:db8:0:42::1 (längste Nullfolge wird gekürzt)
+4. :: (Unspecified Address)
+a) Eindeutigkeit: Bei mehrmaligem '::' ist nicht rekonstruierbar, wie viele Nullen wo fehlen.
+b) 2001:db8:1::2::3 ist mehrdeutig und verstößt gegen RFC 5952.`,
+        solutionDiagramSvg: VisualDiagrams.getNetworkTopologySvg(),
+        explanation: "RFC 5952: Führende Nullen pro Block weglassen. Die längste zusammenhängende Reihe von 0000-Blöcken durch genau ein '::' ersetzen.",
+        points: 6
+    },
+    {
+        id: 609,
+        isHard: true,
+        difficulty: "hard",
+        theme: "subnetting",
+        isSubnetting: true,
+        isBawueFocus: true,
+        topic: "🌐 IPv6 EUI-64 Hin- und Rückrechnung: MAC-Adresse zu Interface-ID & Invertierung Bit 7",
+        type: "open-text",
+        title: "IPv6 EUI-64: Modifizierte Interface-ID berechnen & MAC zurückgewinnen",
+        question: `Das modifizierte EUI-64-Format dient bei SLAAC (Stateless Address Autoconfiguration) zur automatischen Generierung der 64-Bit Interface-ID aus einer 48-Bit MAC-Adresse.
+
+**Teil 1: MAC zu EUI-64 (4 Punkte)**
+Gegeben ist die MAC-Adresse: \`00:1A:2B:3C:4D:5E\`
+a) Welche hexadezimale 16-Bit-Konstante wird exakt in der Mitte der MAC-Adresse eingefügt?
+b) Welches Bit wird invertiert (Name und Bitposition)? Zeigen Sie die Umrechnung des ersten Bytes \`00\` in Binär und das Ergebnis in Hex.
+c) Geben Sie die fertige **64-Bit EUI-64 Interface-ID** sowie die resultierende **Link-Local-Adresse** (\`fe80::/64\`) an.
+
+**Teil 2: EUI-64 Rückrechnung zur MAC-Adresse (4 Punkte)**
+Auf einem Router wird im Neighbor Cache folgende Interface-ID eines Clients gelistet:
+\`0220:4aff:fe88:99aa\`
+Rekonstruieren Sie Schritt für Schritt die ursprüngliche **48-Bit-MAC-Adresse** des Netzwerkadapters.`,
+        musterloesung: `Musterlösung (EUI-64 Hin- und Rückrechnung):
+
+Teil 1:
+a) Eingefügte Konstante: FFFE (bzw. FF:FE) in der Mitte zwischen OUI (erste 3 Byte) und NIC-Spezifischem Teil (letzte 3 Byte).
+b) Bit-Invertierung:
+   - Invertiert wird das 7. Bit (von links gezählt) des ersten Bytes = das 'Universal/Local (U/L) Bit'.
+   - Erstes Byte = 00 hex = 0000 0000 binär.
+   - 7. Bit invertieren -> 0000 0010 binär = 02 hex.
+c) Resultierende Adressen:
+   - Interface-ID: 021a:2bff:fe3c:4d5e
+   - Link-Local IPv6-Adresse: fe80::21a:2bff:fe3c:4d5e/64
+
+Teil 2: Rückrechnung von 0220:4aff:fe88:99aa auf die MAC:
+- Schritt 1: 'ff:fe' aus der Mitte entfernen:
+  0220:4a und 88:99aa -> 02:20:4A und 88:99:AA.
+- Schritt 2: Erstes Byte (02 hex) zurück-invertieren:
+  02 hex = 0000 0010 binär.
+  7. Bit zurück invertieren: 0000 0000 binär = 00 hex.
+- Ergebnis: MAC-Adresse lautet: 00:20:4A:88:99:AA.`,
+        correctAnswer: `Teil 1:
+a) FF:FE (FFFE)
+b) 7. Bit (Universal/Local Bit). 00 hex = 0000 0000 -> 0000 0010 = 02 hex.
+c) Interface-ID: 021a:2bff:fe3c:4d5e | Link-Local: fe80::21a:2bff:fe3c:4d5e/64
+
+Teil 2:
+1. FFFE entfernen: 02:20:4A:... und ...88:99:AA
+2. 02 hex -> Bit 7 invertieren = 00 hex.
+Ursprüngliche MAC: 00:20:4A:88:99:AA`,
+        solutionDiagramSvg: VisualDiagrams.getNetworkTopologySvg(),
+        explanation: "EUI-64 Algorithmus: OUI (3 Byte) + FF:FE + NIC (3 Byte) und Invertierung des 7. Bits (U/L-Bit) im ersten Byte. Bei Rückrechnung exakt spiegelverkehrt.",
+        points: 8
+    },
+    {
+        id: 610,
+        isHard: false,
+        difficulty: "standard",
+        theme: "subnetting",
+        isSubnetting: true,
+        isBawueFocus: true,
+        topic: "🌐 IPv4 Subnetting über Oktettgrenzen: Schrittweite & Blockgröße im 3. Oktett",
+        type: "open-text",
+        title: "IPv4 Subnetting über Oktettgrenzen: Blockgröße & Schrittweite im 3. Oktett (/21)",
+        question: `Ein Netzwerkadministrator erhält das Subnetz \`172.24.0.0/21\`.
+
+**Aufgaben:**
+1. Ermitteln Sie die **Subnetzmaske** in Dezimalpunkt-Notation.
+2. In welchem Oktett (1., 2., 3. oder 4.) entscheidet sich die Subnetz-Grenze?
+3. Wie lautet die **Blockgröße / Schrittweite** in diesem Oktett?
+4. Wie viele **nutzbare Hosts** können in diesem Subnetz maximal adressiert werden?
+5. Geben Sie die **Netzadresse**, den **Hostbereich** (erster bis letzter Host) und die **Broadcast-Adresse** an.`,
+        musterloesung: `Musterlösung (172.24.0.0/21):
+
+1. Subnetzmaske:
+   - 21 gesetzte Bits: 8 + 8 + 5 + 0.
+   - 3. Oktett: 128 + 64 + 32 + 16 + 8 = 248.
+   - Subnetzmaske: 255.255.248.0
+
+2. Oktett der Grenze:
+   - Das 3. Oktett (Bits 17 bis 24).
+
+3. Blockgröße / Schrittweite im 3. Oktett:
+   - 256 - 248 = 8 (bzw. 2^(8-5) = 2^3 = 8).
+
+4. Nutzbare Hosts:
+   - Hostbits: 32 - 21 = 11 Bits.
+   - Formel: 2^11 - 2 = 2.048 - 2 = 2.046 nutzbare Hosts.
+
+5. Vollständige Adressdaten:
+   - Netzadresse: 172.24.0.0
+   - Erster nutzbarer Host: 172.24.0.1
+   - Letzter nutzbarer Host: 172.24.7.254
+   - Broadcast-Adresse: 172.24.7.255
+   (Das nächste Subnetz würde bei 172.24.8.0 beginnen!).`,
+        correctAnswer: `1. Subnetzmaske: 255.255.248.0
+2. 3. Oktett
+3. Blockgröße: 8 (256 - 248 = 8)
+4. Nutzbare Hosts: 2^11 - 2 = 2.046 Hosts
+5. Netzadresse: 172.24.0.0 | Erster Host: 172.24.0.1 | Letzter Host: 172.24.7.254 | Broadcast: 172.24.7.255`,
+        solutionDiagramSvg: VisualDiagrams.getNetworkTopologySvg(),
+        explanation: "Bei /21 liegen 5 Subnetz-Bits im 3. Oktett (Maske 255.255.248.0). Die Schrittweite im 3. Oktett beträgt 256 - 248 = 8. Der Broadcast endet bei 172.24.7.255.",
+        points: 6
+    },
+    {
+        id: 611,
+        isHard: false,
+        difficulty: "standard",
+        theme: "subnetting",
+        isSubnetting: true,
+        isBawueFocus: true,
+        topic: "🌐 IHK Multiple-Choice: IPv6 Adresstypen & Kennungen (GUA, ULA, Link-Local, Multicast)",
+        type: "multiple-choice",
+        question: `Welche Zuordnung zwischen dem IPv6-Adresstyp und dem zugehörigen Präfix ist fachlich und prüfungsrelevant **vollständig korrekt**?`,
+        options: [
+            "Global Unicast (GUA) = 2000::/3 | Unique Local (ULA) = fc00::/7 (bzw. fd00::/8) | Link-Local = fe80::/10 | Multicast = ff00::/8 | Loopback = ::1/128",
+            "Global Unicast (GUA) = fe80::/10 | Unique Local (ULA) = 2000::/3 | Link-Local = ff00::/8 | Multicast = fc00::/7 | Loopback = 127.0.0.1",
+            "Global Unicast (GUA) = ff00::/8 | Unique Local (ULA) = fe80::/10 | Link-Local = 2000::/3 | Multicast = fd00::/8 | Loopback = ::/0",
+            "Global Unicast (GUA) = 192.168.0.0/16 | Unique Local (ULA) = 10.0.0.0/8 | Link-Local = 169.254.0.0/16 | Multicast = 224.0.0.0/4 | Loopback = ::1"
+        ],
+        correctAnswer: 0,
+        solutionDiagramSvg: VisualDiagrams.getNetworkTopologySvg(),
+        explanation: "Grundwissen IPv6-Präfixe: 2000::/3 (Global Unicast), fc00::/7 bzw. fd00::/8 (ULA Intranet), fe80::/10 (Link-Local), ff00::/8 (Multicast), ::1/128 (Loopback)."
+    },
+    {
+        id: 612,
+        isHard: false,
+        difficulty: "standard",
+        theme: "subnetting",
+        isSubnetting: true,
+        isBawueFocus: true,
+        topic: "🌐 IHK Multiple-Choice: Subnetzberechnung /52-Block in /64-Subnetze",
+        type: "multiple-choice",
+        question: `Ein Unternehmen reserviert für eine Außenstelle den Adressblock \`2001:db8:cafe:2000::/52\`.
+Alle LAN-Segmente der Außenstelle sollen als Standard-\`/64\`-Subnetze betrieben werden.
+
+Wie viele **/64-Subnetze** können in diesem /52-Block exakt gebildet werden?`,
+        options: [
+            "4.096 Subnetze (2^(64 - 52) = 2^12 = 4.096)",
+            "256 Subnetze (2^(64 - 56) = 2^8 = 256)",
+            "16 Subnetze (2^(52 - 48) = 2^4 = 16)",
+            "65.536 Subnetze (2^16 = 65.536)"
+        ],
+        correctAnswer: 0,
+        solutionDiagramSvg: VisualDiagrams.getNetworkTopologySvg(),
+        explanation: "Differenz der Präfixlängen: 64 - 52 = 12 Bits. 2^12 = 4.096 Subnetze à /64."
+    },
+    {
+        id: 613,
+        isHard: false,
+        difficulty: "standard",
+        theme: "subnetting",
+        isSubnetting: true,
+        isBawueFocus: true,
+        topic: "🌐 IHK Multiple-Choice: VLSM-Grundregeln & Warum immer größter Bedarf zuerst",
+        type: "multiple-choice",
+        question: `Warum schreibt die IHK bei VLSM-Aufgaben (Variable Length Subnet Masking) verbindlich vor:
+**'Immer mit dem größten Subnetz beginnen!'**?`,
+        options: [
+            "Weil größere Subnetze zwingend an Bit-Grenzen ausgerichtet sein müssen (Bit-Alignment), die Vielfache ihrer Blockgröße sind. Ein kleineres Netz am Anfang würde den Adressraum fragmentieren, sodass das große Netz nicht mehr lückenlos hineinpasst.",
+            "Weil Router Pakete nur dann weiterleiten können, wenn die Subnetzmasken in der Routingtabelle streng absteigend sortiert sind.",
+            "Weil das Betriebssystem Windows sonst keine IP-Adressen per DHCP an die Clients verteilen kann.",
+            "Weil bei VLSM immer nur maximal 3 Subnetze gebildet werden dürfen."
+        ],
+        correctAnswer: 0,
+        solutionDiagramSvg: VisualDiagrams.getNetworkTopologySvg(),
+        explanation: "Bit-Alignment: Ein /23-Netz (Blockgröße 512) muss auf einer durch 512 teilbaren Adresse beginnen (z. B. 172.16.8.0). Beginnt man mit einem /28-Netz (172.16.8.0/28), kann das /23-Netz erst wieder bei 172.16.10.0 starten, was Adresslücken erzeugt."
+    },
+    {
+        id: 614,
+        isHard: false,
+        difficulty: "standard",
+        theme: "subnetting",
+        isSubnetting: true,
+        isBawueFocus: true,
+        topic: "🌐 IPv4 VLSM im /24-Klassenbereich: 120, 60, 30 und 2 Hosts",
+        type: "open-text",
+        title: "IPv4 VLSM im /24-Netz: 120, 60, 30 und 2 Hosts aufteilen",
+        question: `Ein Start-up erhält das Netz \`192.168.100.0/24\`.
+Folgende 4 Bereiche sollen lückenlos per VLSM aufgeteilt werden:
+
+1. **Entwicklung:** 120 Hosts
+2. **Vertrieb:** 60 Hosts
+3. **Verwaltung:** 30 Hosts
+4. **Router-Transfer:** 2 Hosts
+
+**Ergänzen Sie die VLSM-Tabelle:**
+\`\`\`text
++-------------------+-------+----------------------+---------------------------------+---------------+
+| Bereich           | Hosts | Netzadresse / Präfix | Hostbereich                     | Broadcast     |
++-------------------+-------+----------------------+---------------------------------+---------------+
+| Entwicklung       | 120   |                      |                                 |               |
+| Vertrieb          | 60    |                      |                                 |               |
+| Verwaltung        | 30    |                      |                                 |               |
+| Router-Transfer   | 2     |                      |                                 |               |
++-------------------+-------+----------------------+---------------------------------+---------------+
+\`\`\``,
+        musterloesung: `Musterlösung VLSM (192.168.100.0/24):
+
+1. Entwicklung (120 Hosts):
+   - Benötigt: 120 + 2 = 122 -> 2^7 = 128 Adressen.
+   - Präfix: 32 - 7 = /25 (Maske 255.255.255.128).
+   - Netz: 192.168.100.0/25 | Host: 192.168.100.1 - 192.168.100.126 | Broadcast: 192.168.100.127
+   - Nächste Adresse: 192.168.100.128!
+
+2. Vertrieb (60 Hosts):
+   - Benötigt: 60 + 2 = 62 -> 2^6 = 64 Adressen.
+   - Präfix: 32 - 6 = /26 (Maske 255.255.255.192).
+   - Netz: 192.168.100.128/26 | Host: 192.168.100.129 - 192.168.100.190 | Broadcast: 192.168.100.191
+   - Nächste Adresse: 192.168.100.192!
+
+3. Verwaltung (30 Hosts):
+   - Benötigt: 30 + 2 = 32 -> 2^5 = 32 Adressen.
+   - Präfix: 32 - 5 = /27 (Maske 255.255.255.224).
+   - Netz: 192.168.100.192/27 | Host: 192.168.100.193 - 192.168.100.222 | Broadcast: 192.168.100.223
+   - Nächste Adresse: 192.168.100.224!
+
+4. Router-Transfer (2 Hosts):
+   - Benötigt: 2 + 2 = 4 -> 2^2 = 4 Adressen.
+   - Präfix: 32 - 2 = /30 (Maske 255.255.255.252).
+   - Netz: 192.168.100.224/30 | Host: 192.168.100.225 - 192.168.100.226 | Broadcast: 192.168.100.227
+
+Freie Reserve: 192.168.100.228 bis .255 (28 freie IP-Adressen).`,
+        correctAnswer: `1. Entwicklung (120): 192.168.100.0/25 | 192.168.100.1 - .126 | Broadcast: .127
+2. Vertrieb (60): 192.168.100.128/26 | 192.168.100.129 - .190 | Broadcast: .191
+3. Verwaltung (30): 192.168.100.192/27 | 192.168.100.193 - .222 | Broadcast: .223
+4. Router (2): 192.168.100.224/30 | 192.168.100.225 - .226 | Broadcast: .227`,
+        solutionDiagramSvg: VisualDiagrams.getNetworkTopologySvg(),
+        explanation: "Perfektes VLSM-Beispiel: /25 (128 Adressen) + /26 (64 Adressen) + /27 (32 Adressen) + /30 (4 Adressen) schmiegen sich lückenlos aneinander.",
+        points: 8
+    },
+    {
+        id: 615,
+        isHard: false,
+        difficulty: "standard",
+        theme: "subnetting",
+        isSubnetting: true,
+        isBawueFocus: true,
+        topic: "🌐 IHK Multiple-Choice: IPv6 Adressbereich & Höchste Adresse mit FFFF",
+        type: "multiple-choice",
+        question: `Ein Administrator vergibt im LAN das Subnetz \`2001:db8:a00:10::/64\`.
+
+Welche ist die **allerletzte hexadezimale Adresse** dieses 64-Bit-Subnetzes?`,
+        options: [
+            "2001:db8:a00:10:ffff:ffff:ffff:ffff",
+            "2001:db8:a00:10::255.255.255.255",
+            "2001:db8:a00:10:ffff:ffff:ffff:fffe",
+            "2001:db8:a00:11::0"
+        ],
+        correctAnswer: 0,
+        solutionDiagramSvg: VisualDiagrams.getNetworkTopologySvg(),
+        explanation: "Bei einem /64-Subnetz sind die ersten 64 Bit fest. Die hinteren 64 Bit (Interface-ID) laufen von 0000:0000:0000:0000 bis ffff:ffff:ffff:ffff."
     }
 ];

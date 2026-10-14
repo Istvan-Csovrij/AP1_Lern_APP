@@ -605,24 +605,11 @@ function filterQuestions(theme) {
                 q.isSubnetting === true || 
                 (q.topic && (
                     q.topic.toLowerCase().includes("subnet") || 
-                    q.topic.toLowerCase().includes("ipv4") || 
-                    q.topic.toLowerCase().includes("ipv6") || 
                     q.topic.toLowerCase().includes("vlsm") || 
                     q.topic.toLowerCase().includes("cidr") || 
-                    q.topic.toLowerCase().includes("netzadresse") || 
-                    q.topic.toLowerCase().includes("broadcast") || 
                     q.topic.toLowerCase().includes("standortplanung") || 
-                    q.topic.toLowerCase().includes("link-local") || 
+                    q.topic.toLowerCase().includes("präfixlänge") || 
                     q.topic.toLowerCase().includes("eui-64")
-                )) ||
-                (q.question && (
-                    q.question.toLowerCase().includes("gleich große subnetze") || 
-                    q.question.toLowerCase().includes("bedarfsgerechte aufteilung") || 
-                    q.question.toLowerCase().includes("vlsm") || 
-                    q.question.toLowerCase().includes("subnetz") || 
-                    q.question.toLowerCase().includes("subnetting") || 
-                    q.question.toLowerCase().includes("255.255.") || 
-                    (q.question.toLowerCase().includes("nutzbare hosts") && q.question.toLowerCase().includes("präfix"))
                 ))
             );
         } else if (theme === "hard-mode" || theme === "hard") {
@@ -671,8 +658,8 @@ function filterQuestions(theme) {
     // Shuffle the filtered questions to make it dynamic
     shuffleArray(filteredQuestions);
     
-    // Limit to exactly 30 questions per round (only if not in favorites mode to let them practice all favorites)
-    if (theme !== "favorites" && filteredQuestions.length > 30) {
+    // Limit to exactly 30 questions per round (only if not in favorites or subnetting mode to let them practice all questions)
+    if (theme !== "favorites" && theme !== "subnetting" && filteredQuestions.length > 30) {
         filteredQuestions = filteredQuestions.slice(0, 30);
     }
     
