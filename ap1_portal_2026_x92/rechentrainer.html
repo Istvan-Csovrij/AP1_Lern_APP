@@ -42,7 +42,7 @@
             <span class="px-3 py-1 rounded-full text-sm font-semibold bg-sky-500/10 text-sky-600 border border-sky-500/20">
               Prüfungsvorbereitung AP1 &amp; AP2 (Kammer-Standard)
             </span>
-            <span class="text-sm font-semibold text-emerald-700">Version 2.4 (Universelle WAS-WARUM-WOFÜR Mustererklärungen)</span>
+            <span class="text-sm font-semibold text-emerald-700">Version 2.5 (Farbtiefe, Inch/DPI, Video-Bitrate &amp; FPS)</span>
           </div>
           <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">Rechen- &amp; Einheiten-Trainer (AP1 / AP2)</h1>
           <p class="text-base text-slate-600 mt-1.5">
@@ -216,6 +216,17 @@
           </button>
           <button onclick="selectMiniTopic('transfer_time')" class="topic-pill px-3.5 py-2 text-sm font-semibold rounded-xl border border-cyan-400 bg-cyan-50 hover:bg-cyan-100 text-cyan-900 transition-all" data-topic="transfer_time">
             🚀 Downloadzeit (Byte × 8 / Mbit/s)
+          </button>
+
+          <!-- Medien- & Bilddaten (Farbtiefe, Inch/DPI, Video & FPS) -->
+          <button onclick="selectMiniTopic('media_image_size')" class="topic-pill px-3.5 py-2 text-sm font-semibold rounded-xl border border-fuchsia-400 bg-fuchsia-50 hover:bg-fuchsia-100 text-fuchsia-900 transition-all" data-topic="media_image_size">
+            🖼️ Bildgröße (Pixel &amp; Farbtiefe ➔ Dateigröße)
+          </button>
+          <button onclick="selectMiniTopic('media_dpi_inch')" class="topic-pill px-3.5 py-2 text-sm font-semibold rounded-xl border border-fuchsia-400 bg-fuchsia-50 hover:bg-fuchsia-100 text-fuchsia-900 transition-all" data-topic="media_dpi_inch">
+            📐 Scan &amp; Druck (cm ➔ Inch [2,54 cm] ➔ DPI ➔ MB)
+          </button>
+          <button onclick="selectMiniTopic('media_video_bitrate')" class="topic-pill px-3.5 py-2 text-sm font-semibold rounded-xl border border-fuchsia-400 bg-fuchsia-50 hover:bg-fuchsia-100 text-fuchsia-900 transition-all" data-topic="media_video_bitrate">
+            🎬 Video &amp; FPS (Auflösung ➔ FPS ➔ Datenrate &amp; Speicher)
           </button>
           <!-- IPv4 Subnetting (AP1 / AP2 Lernfeld 3) -->
           <button onclick="selectMiniTopic('ipv4_usable_hosts')" class="topic-pill px-3.5 py-2 text-sm font-semibold rounded-xl border border-sky-400 bg-sky-50 hover:bg-sky-100 text-sky-900 transition-all" data-topic="ipv4_usable_hosts">
@@ -1292,6 +1303,31 @@
             <div>1. Dateigröße in Bit: 500 MByte × 8 = <strong>4.000 Mbit</strong></div>
             <div>2. Dauer: 4.000 Mbit / 50 Mbit/s = <strong>80 Sekunden</strong> (1 Min 20 Sek).</div>
             <div>3. Bei 10% Protokoll-Overhead: 80 s × 1,10 = <strong>88 Sekunden</strong>.</div>
+          </div>
+        </div>
+
+        <!-- TRICK 5: MEDIENBERECHNUNG (PIXEL, INCH 2,54 cm, FARBTIEFE, VIDEO & FPS) -->
+        <div class="bg-white border-2 border-fuchsia-400 rounded-2xl p-6 sm:p-7 shadow-sm space-y-4">
+          <div class="flex items-center gap-2">
+            <span class="p-2 rounded-xl bg-fuchsia-100 text-fuchsia-700 text-xl font-bold">🖼️</span>
+            <h3 class="text-lg font-bold text-slate-900">Trick 5: Bild-, Scan- &amp; Video-Berechnungen (LF 2 &amp; LF 4)</h3>
+          </div>
+          <p class="text-sm text-slate-600 leading-relaxed">
+            Standard-Fallen in IHK-Prüfungen: Inch in cm umrechnen (<strong>1 Inch = 2,54 cm</strong>), Farbtiefe (Bit ➔ Byte durch 8) und Video-FPS:
+          </p>
+
+          <div class="p-4 bg-fuchsia-50 border border-fuchsia-200 rounded-xl space-y-2 text-xs font-mono text-fuchsia-950">
+            <div class="font-bold text-fuchsia-900 text-sm">Kernformeln der Medienberechnung</div>
+            <div class="p-2 bg-white rounded border border-fuchsia-300 space-y-1">
+              <div><strong>1. Inch-Umrechnung:</strong> <code>Inch = Zentimeter / 2,54</code> (z. B. 50,80 cm / 2,54 = 20 Inch)</div>
+              <div><strong>2. Pixelanzahl:</strong> <code>Pixel = Inch × DPI</code> (z. B. 20 Inch × 400 DPI = 8.000 Pixel)</div>
+              <div><strong>3. Unkomprimiertes Bild:</strong> <code>Dateigröße (Byte) = Pixel_gesamt × (Farbtiefe_Bit / 8)</code></div>
+              <div><strong>4. Video-Bitrate (Bit/s):</strong> <code>Breite × Höhe × Farbtiefe (Bit) × FPS</code></div>
+              <div><strong>5. Speicherkapazität (Byte):</strong> <code>(Bitrate in Bit/s / 8) × Sekunden × Anzahl Kameras</code></div>
+            </div>
+            <div class="text-[11px] text-fuchsia-800 pt-1">
+              <strong>Farbtiefen-Tabelle:</strong> 1 Bit = Monochrom (2 Farben) | 8 Bit = 1 Byte (256 Farben) | 16 Bit = 2 Byte (High Color) | 24 Bit = 3 Byte (True Color RGB) | 32 Bit = 4 Byte (RGBA mit Transparenz).
+            </div>
           </div>
         </div>
 
@@ -4709,6 +4745,273 @@
           altExpected: sc.alts,
           hint: sc.hint,
           explanation: sc.expl
+        };
+      },
+
+      // 51. MEDIEN: BILDGRÖSSE, FARBTIEFE & DATEIGRÖSSE (LF 2 / LF 4)
+      media_image_size: function() {
+        const scenarios = [
+          {
+            q: "Wie viele <strong>Byte pro Pixel</strong> werden im unkomprimierten Speicher bei einer Farbtiefe von <strong>24 Bit</strong> (True Color / RGB) benötigt?",
+            unit: "Byte pro Pixel",
+            expected: 3,
+            tolerance: 0,
+            hint: "Byte = Bit / 8 = 24 / 8",
+            expl: "Bei 24 Bit Farbtiefe entfallen je 8 Bit auf Rot, Grün und Blau: 24 Bit / 8 = <strong>3 Byte pro Pixel</strong>.",
+            was: "3 Byte pro Pixel.",
+            warum: "1 Byte = 8 Bit. 24 Bit geteilt durch 8 Bit/Byte ergibt genau 3 Byte Speicherbedarf pro Pixel.",
+            wofuer: "IHK-Basisrechnung für Bildspeicher und unkomprimierte Frames in LF 2."
+          },
+          {
+            q: "Eine Grafikanwendung arbeitet mit <strong>32 Bit Farbtiefe</strong> (RGBA: Rot, Grün, Blau + Alpha-Kanal für Transparenz).<br><br>Wie viele <strong>Byte Speicherplatz</strong> belegt ein einzelner Bildpunkt (Pixel)?",
+            unit: "Byte pro Pixel",
+            expected: 4,
+            tolerance: 0,
+            hint: "Byte = Bit / 8 = 32 / 8",
+            expl: "32 Bit / 8 = <strong>4 Byte pro Pixel</strong> (je 1 Byte für R, G, B und Alpha-Transparenz).",
+            was: "4 Byte pro Pixel.",
+            warum: "32 Bit / 8 Bit pro Byte = 4 Byte. Das zusätzliche 4. Byte dient dem Alpha-Kanal (Transparenzstufen 0-255).",
+            wofuer: "Prüfungsfragen zu Grafikkarten, Kamerasystemen und PNG/RGBA-Bildpuffern."
+          },
+          {
+            q: "Ein unkomprimiertes Bild hat eine Auflösung von <strong>1.024 × 768 Pixel</strong> und eine Farbtiefe von <strong>16 Bit</strong> (High Color = 2 Byte pro Pixel).<br><br>Berechne die unkomprimierte Dateigröße in <strong>MiB (Mebibyte)</strong>:",
+            unit: "MiB",
+            expected: 1.5,
+            tolerance: 0.05,
+            hint: "(1024 × 768 × 2 Byte) / 1024 / 1024 = 1.572.864 / 1.048.576",
+            expl: "Pixel: 1.024 × 768 = 786.432. Datenmenge: 786.432 × 2 Byte = 1.572.864 Byte. In MiB: 1.572.864 / 1024 / 1024 = <strong>1,5 MiB</strong>.",
+            was: "1,5 MiB.",
+            warum: "1024 × 768 × 2 Byte = 1.572.864 Byte. Geteilt durch 1.048.576 (1024²) ergibt exakt 1,5 MiB.",
+            wofuer: "Exakte IEC-Binärpräfix-Berechnung (MiB mit Faktor 1024) in der IHK AP1."
+          },
+          {
+            q: "Ein unkomprimierter Screenshot im Bitmap-Format hat eine Auflösung von <strong>1.280 × 1.024 Pixel</strong> und eine Farbtiefe von <strong>32 Bit</strong> (4 Byte pro Pixel).<br><br>Berechne die Dateigröße in <strong>MiB (Mebibyte)</strong>:",
+            unit: "MiB",
+            expected: 5,
+            tolerance: 0.05,
+            hint: "(1280 × 1024 × 4) / 1024 / 1024",
+            expl: "1.280 × 1.024 = 1.310.720 Pixel. Gesamtgröße: 1.310.720 × 4 Byte = 5.242.880 Byte. 5.242.880 / 1024 / 1024 = <strong>5 MiB</strong>.",
+            was: "5 MiB.",
+            warum: "1.280 × 1.024 × 4 Byte = 5.242.880 Byte. Geteilt durch 1024² (1.048.576) ergibt glatt 5 MiB.",
+            wofuer: "Arbeitsspeicher- und Framebuffer-Kalkulation für Monitore und Grafikkarten."
+          },
+          {
+            q: "Ein monochromes Graustufenbild mit <strong>800 × 600 Pixel</strong> verwendet eine Farbtiefe von <strong>8 Bit</strong> (256 Graustufen = 1 Byte pro Pixel).<br><br>Wie viele <strong>Kilobyte (KB, dezimal mit Faktor 1000)</strong> beträgt die Dateigröße?",
+            unit: "KB (dezimal)",
+            expected: 480,
+            tolerance: 5,
+            hint: "800 × 600 × 1 Byte = 480.000 Byte. In KB (/ 1000) = 480 KB",
+            expl: "800 × 600 = 480.000 Pixel × 1 Byte = 480.000 Byte. Geteilt durch 1.000 = <strong>480 KB</strong>.",
+            was: "480 KB.",
+            warum: "8 Bit entsprechen 1 Byte. 480.000 Pixel × 1 Byte = 480.000 Byte = 480 KB (bzw. 468,75 KiB binär).",
+            wofuer: "Dimensionierung von Scan- und Speichergrößen im Dokumentenmanagement."
+          },
+          {
+            q: "Ein unkomprimiertes Full-HD-Standbild (<strong>1.920 × 1.080 Pixel</strong>) wird mit <strong>24 Bit Farbtiefe</strong> (RGB) gespeichert.<br><br>Berechne die Bildgröße in <strong>MByte (dezimal, MB = 1.000.000 Byte)</strong> auf 2 Nachkommastellen genau:",
+            unit: "MB (dezimal)",
+            expected: 6.22,
+            tolerance: 0.1,
+            hint: "1920 × 1080 × 3 Byte = 6.220.800 Byte. In MB (/ 1.000.000) = 6,22 MB",
+            expl: "1.920 × 1.080 = 2.073.600 Pixel. 2.073.600 × 3 Byte = 6.220.800 Byte = <strong>6,22 MB</strong> (bzw. 5,93 MiB).",
+            was: "6,22 MB.",
+            warum: "2.073.600 Pixel × 3 Byte pro Pixel = 6.220.800 Byte = ca. 6,22 MB.",
+            wofuer: "IHK-Berechnungen von unkomprimierten RAW-Bildern und Video-Einzelbildern."
+          }
+        ];
+        const sc = scenarios[Math.floor(Math.random() * scenarios.length)];
+        return {
+          topic: "media_image_size",
+          badge: "🖼️ Bildgröße & Farbtiefe",
+          title: "Unkomprimierte Bildgröße berechnen (Pixel × Farbtiefe)",
+          question: sc.q,
+          unit: sc.unit,
+          expected: sc.expected,
+          tolerance: sc.tolerance,
+          hint: sc.hint,
+          wasWarumWofuer: {
+            was: sc.was,
+            warum: sc.warum,
+            wofuer: sc.wofuer
+          },
+          explanation: `Richtig! ${sc.expl}`
+        };
+      },
+
+      // 52. MEDIEN: SCAN & DRUCK (CM ➔ INCH [2,54 CM] ➔ DPI ➔ PIXEL & MB)
+      media_dpi_inch: function() {
+        const scenarios = [
+          {
+            q: "Wie lautet der exakte international genormte Umrechnungswert von <strong>1 Inch (Zoll) in Zentimeter (cm)</strong>?",
+            unit: "cm",
+            expected: 2.54,
+            tolerance: 0.01,
+            hint: "1 Inch = genau 2,54 cm = 25,4 mm",
+            expl: "<strong>1 Inch (Zoll) = genau 2,54 cm</strong> (bzw. 25,4 mm). Dieser Wert ist die feste Umrechnungskonstante in allen IHK-Prüfungsaufgaben.",
+            was: "2,54 cm.",
+            warum: "1 Inch (in) ist seit dem internationalen Abkommen von 1959 verbindlich auf exakt 25,4 mm = 2,54 cm festgelegt.",
+            wofuer: "Grundlegende IHK-Formel für alle DPI- und Scanner-Berechnungen (1 Inch = 2,54 cm)."
+          },
+          {
+            q: "Eine Scanfläche hat eine Breite von <strong>50,80 cm</strong>.<br><br>Wie viele <strong>Inch (Zoll)</strong> beträgt die Breite (1 Inch = 2,54 cm)?",
+            unit: "Inch",
+            expected: 20,
+            tolerance: 0.05,
+            hint: "Inch = cm / 2,54 = 50,80 / 2,54",
+            expl: "50,80 cm / 2,54 cm = <strong>20 Inch</strong>.",
+            was: "20 Inch.",
+            warum: "50,80 cm geteilt durch 2,54 cm/Inch ergibt exakt 20 Inch. IHK-Aufgaben verwenden stets Zahlen, die glatte Inches ergeben.",
+            wofuer: "IHK AP1 Frage 3399 (Produktionslinie mit 50,80 cm Scanfläche)."
+          },
+          {
+            q: "Eine Dokumentenvorlage hat eine Länge von <strong>30,48 cm</strong>.<br><br>Wie viele <strong>Inch (Zoll)</strong> entspricht diese Länge (1 Inch = 2,54 cm)?",
+            unit: "Inch",
+            expected: 12,
+            tolerance: 0.05,
+            hint: "Inch = cm / 2,54 = 30,48 / 2,54",
+            expl: "30,48 cm / 2,54 cm = <strong>12 Inch</strong>.",
+            was: "12 Inch.",
+            warum: "30,48 cm / 2,54 = 12 Inch (entspricht ca. DIN-A4-Höhe / 12 Zoll).",
+            wofuer: "IHK AP1 Frage 3399 (Scan-Länge von 30,48 cm)."
+          },
+          {
+            q: "Ein Foto mit einer Breite von <strong>15,24 cm</strong> wird mit einer Auflösung von <strong>300 dpi (Dots per Inch)</strong> eingescannt (1 Inch = 2,54 cm).<br><br>Wie viele <strong>Pixel</strong> beträgt die Breite des digitalen Bildes?",
+            unit: "Pixel",
+            expected: 1800,
+            tolerance: 5,
+            hint: "Breite in Inch: 15,24 / 2,54 = 6 Inch. Pixel = 6 × 300 dpi",
+            expl: "1. Breite in Inch: 15,24 cm / 2,54 cm = 6 Inch.<br>2. Pixelanzahl: 6 Inch × 300 dpi = <strong>1.800 Pixel</strong>.",
+            was: "1.800 Pixel.",
+            warum: "15,24 cm / 2,54 = 6 Inch. 6 Inch × 300 dpi = 1.800 Bildpunkte in der Breite.",
+            wofuer: "Exakte Auflösungsbestimmung für Scanner, Druckvorstufe und Fotoarchivierung."
+          },
+          {
+            q: "Eine Vorlage mit den Maßen <strong>10,16 cm × 15,24 cm</strong> wird mit <strong>300 dpi</strong> gescannt (1 Inch = 2,54 cm).<br><br>Wie viele <strong>Gesamtpixel (in Millionen / Megapixel)</strong> hat das Bild?",
+            unit: "Megapixel (MP)",
+            expected: 2.16,
+            tolerance: 0.05,
+            hint: "10,16/2,54 = 4 Inch (1200 px), 15,24/2,54 = 6 Inch (1800 px). Gesamt: 1200 × 1800 = 2.160.000 px = 2,16 MP",
+            expl: "Breite: 10,16 / 2,54 = 4 Inch ➔ 4 × 300 = 1.200 Pixel.<br>Höhe: 15,24 / 2,54 = 6 Inch ➔ 6 × 300 = 1.800 Pixel.<br>Gesamt: 1.200 × 1.800 = 2.160.000 Pixel = <strong>2,16 Megapixel</strong>.",
+            was: "2,16 Megapixel (2.160.000 Pixel).",
+            warum: "Pixel_gesamt = (Breite_in_Inch × DPI) × (Höhe_in_Inch × DPI). 4 × 300 = 1200; 6 × 300 = 1800. 1200 × 1800 = 2,16 MP.",
+            wofuer: "Kameraberechnung und Speicherbedarf im Prüfungs-LF 2 und LF 4."
+          },
+          {
+            q: "Eine Scanfläche von <strong>50,80 cm × 30,48 cm</strong> (20 Inch × 12 Inch) wird mit <strong>400 dpi</strong> und einer Farbtiefe von <strong>16 Bit (2 Byte)</strong> erfasst (1 Inch = 2,54 cm).<br><br>Berechne die Dateigröße pro Scan in <strong>MiB (Mebibyte)</strong> auf 2 Nachkommastellen genau:",
+            unit: "MiB",
+            expected: 73.24,
+            tolerance: 0.2,
+            hint: "Pixel: (20×400) × (12×400) = 8000 × 4800 = 38.400.000. Byte: 38.400.000 × 2 = 76.800.000. In MiB: 76.800.000 / 1024 / 1024",
+            expl: "1. Pixel: (20 × 400) × (12 × 400) = 8.000 × 4.800 = 38.400.000 Pixel.<br>2. Byte: 38.400.000 × 2 Byte = 76.800.000 Byte.<br>3. MiB: 76.800.000 / (1024 × 1024) = <strong>73,24 MiB</strong>.",
+            was: "73,24 MiB.",
+            warum: "Breite: 20 Inch × 400 = 8.000 px. Höhe: 12 Inch × 400 = 4.800 px. 38,4 Mio Pixel × 2 Byte = 76,8 MB / 1024² = 73,24 MiB.",
+            wofuer: "IHK-Abschlussprüfung Frage 3399 (Original-Prüfungsaufgabe zur Qualitätskontrolle)."
+          }
+        ];
+        const sc = scenarios[Math.floor(Math.random() * scenarios.length)];
+        return {
+          topic: "media_dpi_inch",
+          badge: "📐 Scan & Druck (DPI / Inch)",
+          title: "Scan- & Druckauflösung berechnen (cm ➔ Inch ➔ DPI)",
+          question: sc.q,
+          unit: sc.unit,
+          expected: sc.expected,
+          tolerance: sc.tolerance,
+          hint: sc.hint,
+          wasWarumWofuer: {
+            was: sc.was,
+            warum: sc.warum,
+            wofuer: sc.wofuer
+          },
+          explanation: `Richtig! ${sc.expl}`
+        };
+      },
+
+      // 53. MEDIEN: VIDEO, FPS & ÜBERTRAGUNGSRATE (LF 2 / LF 3 / LF 4)
+      media_video_bitrate: function() {
+        const scenarios = [
+          {
+            q: "Wie viele <strong>Einzelbilder pro Sekunde</strong> werden bei einer Videoübertragung mit <strong>60 FPS (Frames per Second)</strong> übermittelt?",
+            unit: "Bilder pro Sekunde",
+            expected: 60,
+            tolerance: 0,
+            hint: "FPS = Frames per Second = Bilder pro Sekunde",
+            expl: "FPS steht für <strong>Frames per Second (Bilder pro Sekunde)</strong>. 60 FPS bedeuten exakt 60 übertragene Einzelbilder in jeder Sekunde.",
+            was: "60 Bilder pro Sekunde.",
+            warum: "FPS (Frames per Second) ist das Standardmaß für die Bildwiederholfrequenz in Video- und Überwachungssystemen.",
+            wofuer: "Grundverständnis für Bandbreiten- und Speicherplatzkalkulation bei Kameras und Streams."
+          },
+          {
+            q: "Wie viele <strong>Millisekunden (ms)</strong> wird ein einzelnes Frame bei einer Bildrate von <strong>50 FPS</strong> auf dem Monitor dargestellt?",
+            unit: "ms (Millisekunden)",
+            expected: 20,
+            tolerance: 0.1,
+            hint: "Dauer = 1000 ms / 50 FPS",
+            expl: "1 Sekunde = 1.000 Millisekunden. Dauer pro Frame: 1.000 ms / 50 FPS = <strong>20 ms</strong>.",
+            was: "20 Millisekunden.",
+            warum: "1000 ms / 50 Bilder = 20 ms Anzeigedauer pro Bild.",
+            wofuer: "Latenz- und Bildwiederholungsberechnungen in Video- und Gaming-Systemen."
+          },
+          {
+            q: "Ein unkomprimierter Video-Stream läuft in <strong>Full HD (1.920 × 1.080 Pixel)</strong> mit <strong>30 FPS</strong> und einer Farbtiefe von <strong>24 Bit</strong>.<br><br>Berechne die erforderliche unkomprimierte Übertragungsrate in <strong>Mbit/s (dezimal, auf volle Mbit/s gerundet)</strong>:",
+            unit: "Mbit/s",
+            expected: 1493,
+            tolerance: 2,
+            hint: "Pixel/s = 1920 × 1080 × 30 = 62.208.000. Bit/s = 62.208.000 × 24 = 1.492.992.000 Bit/s. In Mbit/s (/ 1.000.000) = 1.492,992 Mbit/s ➔ 1493 Mbit/s",
+            expl: "1. Pixel pro Sekunde: 1.920 × 1.080 × 30 FPS = 62.208.000 Pixel/s.<br>2. Datenrate: 62.208.000 × 24 Bit = 1.492.992.000 Bit/s.<br>3. In Mbit/s (dezimal): 1.492.992.000 / 1.000.000 = 1.492,992 Mbit/s ➔ <strong>1.493 Mbit/s</strong> (bzw. ca. 1,49 Gbit/s).",
+            was: "1.493 Mbit/s (unkomprimiert).",
+            warum: "Breite × Höhe × FPS × Farbtiefe in Bit = 1920 × 1080 × 30 × 24 Bit = 1.492.992.000 Bit/s = 1.493 Mbit/s.",
+            wofuer: "IHK AP1 Frage 3553 (Überwachungskameras & Bandbreite)."
+          },
+          {
+            q: "Der Full-HD-Videostream aus der vorherigen Aufgabe (1.493 Mbit/s unkomprimiert) wird mit einem modernen Codec auf <strong>30 % der Datenmenge komprimiert</strong>.<br><br>Wie hoch ist die neue komprimierte Datenübertragungsrate in <strong>Mbit/s (auf volle Mbit/s aufgerundet)</strong>?",
+            unit: "Mbit/s",
+            expected: 448,
+            tolerance: 2,
+            hint: "1492,992 Mbit/s × 0,30 = 447,8976 Mbit/s ➔ aufgerundet 448 Mbit/s",
+            expl: "1.492,992 Mbit/s × 0,30 = 447,8976 Mbit/s. Aufgerundet auf volle Mbit/s: <strong>448 Mbit/s</strong>.",
+            was: "448 Mbit/s.",
+            warum: "1492,992 Mbit/s × 30 % = 447,8976 Mbit/s. Kaufmännisch bzw. ganzzahlig aufgerundet ergibt 448 Mbit/s.",
+            wofuer: "IHK AP1 Frage 3553 (Bandbreitenberechnung bei Kamerasystemen)."
+          },
+          {
+            q: "Eine Überwachungskamera erzeugt einen komprimierten Videostream mit einer konstanten Bitrate von <strong>8 Mbit/s</strong>.<br><br>Wie viele <strong>Megabyte (MByte)</strong> Speicherplatz werden für eine <strong>1-stündige Aufnahme (3.600 Sekunden)</strong> benötigt?",
+            unit: "MByte",
+            expected: 3600,
+            tolerance: 10,
+            hint: "Bit in 1 Stunde: 8 Mbit/s × 3600 s = 28.800 Mbit. In MByte (/ 8): 28.800 / 8 = 3.600 MByte",
+            expl: "1. Gesamt-Mbit: 8 Mbit/s × 3.600 s = 28.800 Mbit.<br>2. In MByte (geteilt durch 8): 28.800 Mbit / 8 = <strong>3.600 MByte</strong> (= 3,6 GB dezimal).",
+            was: "3.600 MByte (3,6 GB).",
+            warum: "8 Mbit/s geteilt durch 8 Bit/Byte = 1 MByte/s. 1 MByte/s × 3.600 Sekunden = 3.600 MByte pro Stunde.",
+            wofuer: "Dimensionierung von Videoüberwachungs-Festplatten (NVR / SAN) in LF 4."
+          },
+          {
+            q: "Eine Überwachungskamera im Serverraum speichert jede Minute 1 Bild im Format <strong>800 × 600 Pixel</strong> bei <strong>32 Bit Farbtiefe (4 Byte)</strong> und <strong>1:10 Kompression</strong>.<br><br>Wie viele <strong>Kilobyte (KB)</strong> Speicherplatz belegt genau <strong>ein einzelnes komprimiertes Bild</strong>?",
+            unit: "KB (dezimal)",
+            expected: 192,
+            tolerance: 2,
+            hint: "Unkomprimiert: 800 × 600 × 4 Byte = 1.920.000 Byte. Komprimiert 1:10 = 192.000 Byte. In KB (/ 1000) = 192 KB",
+            expl: "1. Unkomprimiert: 800 × 600 × 4 Byte = 1.920.000 Byte.<br>2. Mit Kompression 1:10: 1.920.000 / 10 = 192.000 Byte.<br>3. In KB (dezimal): 192.000 / 1.000 = <strong>192 KB</strong> (bzw. 187,5 KiB).",
+            was: "192 KB pro Bild.",
+            warum: "800 × 600 × 4 Byte = 1.920.000 Byte / 10 = 192.000 Byte = 192 KB.",
+            wofuer: "IHK AP1 Frage 2120 (Speicherplatzberechnung Kamera)."
+          }
+        ];
+        const sc = scenarios[Math.floor(Math.random() * scenarios.length)];
+        return {
+          topic: "media_video_bitrate",
+          badge: "🎬 Video & FPS Übertragung",
+          title: "Video-Datenrate & Übertragungskapazität (Auflösung ➔ FPS ➔ Mbit/s)",
+          question: sc.q,
+          unit: sc.unit,
+          expected: sc.expected,
+          tolerance: sc.tolerance,
+          hint: sc.hint,
+          wasWarumWofuer: {
+            was: sc.was,
+            warum: sc.warum,
+            wofuer: sc.wofuer
+          },
+          explanation: `Richtig! ${sc.expl}`
         };
       }
     };
