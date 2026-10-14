@@ -599,6 +599,32 @@ function filterQuestions(theme) {
                     q.question.toLowerCase().includes("trace tabelle")
                 ))
             );
+        } else if (theme === "subnetting" || theme === "ipv4-ipv6" || theme === "subnet") {
+            filteredQuestions = questions.filter(q => 
+                q.theme === "subnetting" || 
+                q.isSubnetting === true || 
+                (q.topic && (
+                    q.topic.toLowerCase().includes("subnet") || 
+                    q.topic.toLowerCase().includes("ipv4") || 
+                    q.topic.toLowerCase().includes("ipv6") || 
+                    q.topic.toLowerCase().includes("vlsm") || 
+                    q.topic.toLowerCase().includes("cidr") || 
+                    q.topic.toLowerCase().includes("netzadresse") || 
+                    q.topic.toLowerCase().includes("broadcast") || 
+                    q.topic.toLowerCase().includes("standortplanung") || 
+                    q.topic.toLowerCase().includes("link-local") || 
+                    q.topic.toLowerCase().includes("eui-64")
+                )) ||
+                (q.question && (
+                    q.question.toLowerCase().includes("gleich große subnetze") || 
+                    q.question.toLowerCase().includes("bedarfsgerechte aufteilung") || 
+                    q.question.toLowerCase().includes("vlsm") || 
+                    q.question.toLowerCase().includes("subnetz") || 
+                    q.question.toLowerCase().includes("subnetting") || 
+                    q.question.toLowerCase().includes("255.255.") || 
+                    (q.question.toLowerCase().includes("nutzbare hosts") && q.question.toLowerCase().includes("präfix"))
+                ))
+            );
         } else if (theme === "hard-mode" || theme === "hard") {
             filteredQuestions = questions.filter(q => 
                 q.isHard === true || 
@@ -872,8 +898,10 @@ function loadQuestion() {
     // Handle Diagram sketch helper banner or Pseudocode helper banner
     const diagBanner = document.getElementById("diagram-banner-container");
     if (diagBanner) {
-        const isSubnet = (q.topic && q.topic.toLowerCase().includes("subnetz")) || 
-                         (q.question && (q.question.toLowerCase().includes("subnetz") || q.question.toLowerCase().includes("vlsm")));
+        const isSubnet = q.isSubnetting === true || 
+                         q.theme === "subnetting" ||
+                         (q.topic && (q.topic.toLowerCase().includes("subnet") || q.topic.toLowerCase().includes("vlsm") || q.topic.toLowerCase().includes("ipv6") || q.topic.toLowerCase().includes("ipv4"))) || 
+                         (q.question && (q.question.toLowerCase().includes("subnetz") || q.question.toLowerCase().includes("subnetting") || q.question.toLowerCase().includes("vlsm")));
         const isPureCalc = (q.isCalculation || q.isPowerCalc || q.isZahlensysteme) && !q.isDiagram;
         
         const isDiag = !isPureCalc && !isSubnet && (
@@ -926,6 +954,25 @@ function loadQuestion() {
                     <div style="display: flex; gap: 0.4rem; align-items: center;">
                         <button id="inline-quiz-wb-btn" class="btn" style="background: linear-gradient(135deg, #10b981, #059669); color: white; padding: 0.35rem 0.75rem; font-size: 0.85rem; border-radius: 6px; border: none; cursor: pointer; font-weight: 600; display: inline-flex; align-items: center; gap: 0.35rem;">
                             <i class="fa-solid fa-pen-ruler"></i> Zeichenboard / Notizen
+                        </button>
+                    </div>
+                </div>
+            `;
+            const inlineBtn = document.getElementById("inline-quiz-wb-btn");
+            if (inlineBtn) {
+                inlineBtn.onclick = openWhiteboard;
+            }
+        } else if (isSubnet) {
+            diagBanner.style.display = "block";
+            diagBanner.innerHTML = `
+                <div style="background: linear-gradient(135deg, #eff6ff, #f0fdf4); border: 1px solid #3b82f6; border-radius: 8px; padding: 0.65rem 0.9rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem;">
+                    <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.88rem; color: #1e40af;">
+                        <i class="fa-solid fa-network-wired" style="color: #2563eb; font-size: 1.15rem;"></i>
+                        <span><strong>Subnetting &amp; VLSM Praxis:</strong> Starte bei VLSM immer mit dem größten Subnetz! Formel: 2<sup>n</sup> - 2 &ge; Hosts. Blockgröße = 256 - Masken-Oktett.</span>
+                    </div>
+                    <div style="display: flex; gap: 0.4rem; align-items: center;">
+                        <button id="inline-quiz-wb-btn" class="btn" style="background: linear-gradient(135deg, #2563eb, #1d4ed8); color: white; padding: 0.35rem 0.75rem; font-size: 0.85rem; border-radius: 6px; border: none; cursor: pointer; font-weight: 600; display: inline-flex; align-items: center; gap: 0.35rem;">
+                            <i class="fa-solid fa-pen-ruler"></i> Notizen / Rechentabelle
                         </button>
                     </div>
                 </div>
@@ -1377,6 +1424,9 @@ function getThemeLabel(key) {
         zahlensysteme: "🔢 Zahlensysteme & Dateneinheiten (LF 2/3)",
         binary: "🔢 Zahlensysteme & Dateneinheiten (LF 2/3)",
         hex: "🔢 Zahlensysteme & Dateneinheiten (LF 2/3)",
+        subnetting: "🌐 IPv4 & IPv6 Subnetting (Gleich groß & VLSM)",
+        "ipv4-ipv6": "🌐 IPv4 & IPv6 Subnetting (Gleich groß & VLSM)",
+        pseudocode: "💻 Pseudocode: Lesen & Schreiben (AP1)",
         "hard-mode": "🔥 Prüfungsschwerpunkte (Schwer)",
         hard: "🔥 Prüfungsschwerpunkte (Schwer)"
     };

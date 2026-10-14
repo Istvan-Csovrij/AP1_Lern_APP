@@ -14224,5 +14224,514 @@ Welche Übersetzung gibt die Bedeutung aller vier Begriffe korrekt wieder?`,
         correctAnswer: 0,
         solutionDiagramSvg: VisualDiagrams.getNetworkTopologySvg(),
         explanation: "Deprecated (veraltet), Decommissioning (Außerbetriebnahme), SPoF (Schwachstelle) und Tamper-evident (manipulationserkennend) sind fundamentale Fachbegriffe in Sicherheitsrichtlinien."
+    },
+    {
+        id: 591,
+        isHard: true,
+        difficulty: "standard",
+        theme: "subnetting",
+        isSubnetting: true,
+        isBawueFocus: true,
+        topic: "🌐 IPv4 Subnetting: Gleich große Subnetze (Aufgabe 1: 4 Subnetze aus /24)",
+        type: "open-text",
+        title: "Aufgabe 1: Gleich große Subnetze (192.168.40.0/24 in 4 Teilnetze)",
+        question: `**Aufgabe 1: Gleich große Subnetze (8 Punkte)**
+
+Für das neue Gebäude steht das Netz \`192.168.40.0/24\` zur Verfügung. Es soll in **4 gleich große Subnetze** aufgeteilt werden.
+
+**a) Neues Präfix & Subnetzmaske:**
+- Neues Präfix: /___
+- Subnetzmaske in Dezimalpunkt-Notation: _________________
+
+**b) Ergänzen Sie die Subnetz-Tabelle:**
+\`\`\`text
++-------------+------------------+--------------+--------------+---------------+
+| Abteilung   | Netzadresse      | erster Host  | letzter Host | Broadcast     |
++-------------+------------------+--------------+--------------+---------------+
+| Verwaltung  | 192.168.40.0     | .1           |              |               |
+| Produktion  | 192.168.40.64    |              |              |               |
+| Lager       |                  |              |              |               |
+| Gäste-WLAN  |                  |              |              |               |
++-------------+------------------+--------------+--------------+---------------+
+\`\`\`
+
+**c) Nutzbare Hosts:**
+Wie viele nutzbare Hosts stehen pro Subnetz zur Verfügung? (Formel und Zahl angeben)`,
+        musterloesung: `Musterlösung Aufgabe 1 (Gleich große Subnetze):
+
+a) Präfix und Subnetzmaske (2 Punkte):
+- Für 4 gleich große Subnetze werden 2 Subnetz-Bits aus dem Hostteil geborgt (2^2 = 4).
+- Neues Präfix: 24 + 2 = /26
+- Subnetzmaske: 255.255.255.192 (gesetzte Bits im 4. Oktett: 128 + 64 = 192).
+- Blockgröße / Schrittweite: 256 - 192 = 64 Adressen pro Subnetz.
+
+b) Vollständige Subnetz-Tabelle (4 Punkte):
++-------------+--------------------+----------------+----------------+----------------+
+| Abteilung   | Netzadresse/Präfix | erster Host    | letzter Host   | Broadcast      |
++-------------+--------------------+----------------+----------------+----------------+
+| Verwaltung  | 192.168.40.0/26    | 192.168.40.1   | 192.168.40.62  | 192.168.40.63  |
+| Produktion  | 192.168.40.64/26   | 192.168.40.65  | 192.168.40.126 | 192.168.40.127 |
+| Lager       | 192.168.40.128/26  | 192.168.40.129 | 192.168.40.190 | 192.168.40.191 |
+| Gäste-WLAN  | 192.168.40.192/26  | 192.168.40.193 | 192.168.40.254 | 192.168.40.255 |
++-------------+--------------------+----------------+----------------+----------------+
+
+c) Nutzbare Hosts pro Subnetz (2 Punkte):
+- Verbleibende Host-Bits: 32 - 26 = 6 Bits.
+- Formel: 2^h - 2 = 2^6 - 2 = 64 - 2 = 62 nutzbare Hosts pro Subnetz.
+- Hinweis: 2 Adressen pro Subnetz sind nicht als Host-IP nutzbar (Netzadresse und Broadcast-Adresse).`,
+        correctAnswer: `a) Neues Präfix: /26 | Subnetzmaske: 255.255.255.192 (Blockgröße 64).
+b) Tabelle:
+- Verwaltung: 192.168.40.0/26 | .1 bis .62 | Broadcast: 192.168.40.63
+- Produktion: 192.168.40.64/26 | .65 bis .126 | Broadcast: 192.168.40.127
+- Lager: 192.168.40.128/26 | .129 bis .190 | Broadcast: 192.168.40.191
+- Gäste-WLAN: 192.168.40.192/26 | .193 bis .254 | Broadcast: 192.168.40.255
+c) Nutzbare Hosts: 2^6 - 2 = 62 Hosts pro Subnetz.`,
+        solutionDiagramSvg: VisualDiagrams.getNetworkTopologySvg(),
+        explanation: "Klassische IHK-Prüfungsaufgabe zu gleich großen Subnetzen: 4 Netze benötigen 2 Subnetz-Bits -> /24 wird zu /26 mit 62 nutzbaren Hosts pro Teilnetz.",
+        points: 8
+    },
+    {
+        id: 592,
+        isHard: true,
+        difficulty: "hard",
+        theme: "subnetting",
+        isSubnetting: true,
+        isBawueFocus: true,
+        topic: "🌐 IPv4 VLSM: Bedarfsgerechte Aufteilung (Aufgabe 2: 172.16.8.0/22)",
+        type: "open-text",
+        title: "Aufgabe 2: Bedarfsgerechte Aufteilung mit VLSM (172.16.8.0/22)",
+        question: `**Aufgabe 2: Bedarfsgerechte Aufteilung (VLSM) (10 Punkte)**
+
+Die Zentrale erhält das Netz \`172.16.8.0/22\`. Teilen Sie es bedarfsgerecht auf und **beginnen Sie mit dem größten Bedarf**.
+
+> **IHK-Hinweis:**
+> Bei VLSM-Aufgaben immer mit dem größten Subnetz beginnen. Sonst entstehen Lücken und die Netze passen nicht mehr sauber in den Adressblock. Rechenwege werden bewertet, notieren Sie Ihre Zwischenschritte.
+
+**Ergänzen Sie die VLSM-Tabelle:**
+\`\`\`text
++-----------------+-------+----------------------+---------------------------------+---------------+
+| Abteilung       | Hosts | Netzadresse / Präfix | Hostbereich                     | Broadcast     |
++-----------------+-------+----------------------+---------------------------------+---------------+
+| Produktion      | 300   |                      |                                 |               |
+| Verwaltung      | 100   |                      |                                 |               |
+| Lager           | 50    |                      |                                 |               |
+| Server          | 10    |                      |                                 |               |
+| Router-Verbind. | 2     |                      |                                 |               |
++-----------------+-------+----------------------+---------------------------------+---------------+
+\`\`\``,
+        musterloesung: `Musterlösung Aufgabe 2 (Bedarfsgerechte Aufteilung mit VLSM):
+
+Rechenweg & Dimensionierung (immer absteigend nach Hostbedarf!):
+
+1. Ausgangsnetz:
+- 172.16.8.0/22 umfasst 1024 IP-Adressen (172.16.8.0 bis 172.16.11.255).
+
+2. Produktion (300 Hosts) - Größter Bedarf:
+- Benötigt: 300 + 2 = 302 Adressen -> Nächste Zweierpotenz: 2^9 = 512 Adressen.
+- Host-Bits = 9 -> Präfix: 32 - 9 = /23 (Subnetzmaske 255.255.254.0).
+- Netzadresse / Präfix: 172.16.8.0/23
+- Hostbereich: 172.16.8.1 bis 172.16.9.254 (510 nutzbare Hosts)
+- Broadcast: 172.16.9.255
+- Nächste freie Adresse: 172.16.10.0!
+
+3. Verwaltung (100 Hosts):
+- Benötigt: 100 + 2 = 102 Adressen -> Nächste Zweierpotenz: 2^7 = 128 Adressen.
+- Host-Bits = 7 -> Präfix: 32 - 7 = /25 (Subnetzmaske 255.255.255.128).
+- Netzadresse / Präfix: 172.16.10.0/25
+- Hostbereich: 172.16.10.1 bis 172.16.10.126 (126 nutzbare Hosts)
+- Broadcast: 172.16.10.127
+- Nächste freie Adresse: 172.16.10.128!
+
+4. Lager (50 Hosts):
+- Benötigt: 50 + 2 = 52 Adressen -> Nächste Zweierpotenz: 2^6 = 64 Adressen.
+- Host-Bits = 6 -> Präfix: 32 - 6 = /26 (Subnetzmaske 255.255.255.192).
+- Netzadresse / Präfix: 172.16.10.128/26
+- Hostbereich: 172.16.10.129 bis 172.16.10.190 (62 nutzbare Hosts)
+- Broadcast: 172.16.10.191
+- Nächste freie Adresse: 172.16.10.192!
+
+5. Server (10 Hosts):
+- Benötigt: 10 + 2 = 12 Adressen -> Nächste Zweierpotenz: 2^4 = 16 Adressen.
+- Host-Bits = 4 -> Präfix: 32 - 4 = /28 (Subnetzmaske 255.255.255.240).
+- Netzadresse / Präfix: 172.16.10.192/28
+- Hostbereich: 172.16.10.193 bis 172.16.10.206 (14 nutzbare Hosts)
+- Broadcast: 172.16.10.207
+- Nächste freie Adresse: 172.16.10.208!
+
+6. Router-Verbindung (2 Hosts):
+- Benötigt: 2 + 2 = 4 Adressen -> Nächste Zweierpotenz: 2^2 = 4 Adressen.
+- Host-Bits = 2 -> Präfix: 32 - 2 = /30 (Subnetzmaske 255.255.255.252).
+- Netzadresse / Präfix: 172.16.10.208/30
+- Hostbereich: 172.16.10.209 bis 172.16.10.210 (2 nutzbare Hosts)
+- Broadcast: 172.16.10.211
+
+Vollständige Tabelle:
++-----------------+-------+----------------------+---------------------------------+---------------+
+| Abteilung       | Hosts | Netzadresse / Präfix | Hostbereich                     | Broadcast     |
++-----------------+-------+----------------------+---------------------------------+---------------+
+| Produktion      | 300   | 172.16.8.0/23        | 172.16.8.1 bis 172.16.9.254     | 172.16.9.255  |
+| Verwaltung      | 100   | 172.16.10.0/25       | 172.16.10.1 bis 172.16.10.126   | 172.16.10.127 |
+| Lager           | 50    | 172.16.10.128/26     | 172.16.10.129 bis 172.16.10.190 | 172.16.10.191 |
+| Server          | 10    | 172.16.10.192/28     | 172.16.10.193 bis 172.16.10.206 | 172.16.10.207 |
+| Router-Verbind. | 2     | 172.16.10.208/30     | 172.16.10.209 bis 172.16.10.210 | 172.16.10.211 |
++-----------------+-------+----------------------+---------------------------------+---------------+
+
+Freie Reserve: 172.16.10.212 bis 172.16.10.255 (44 Adressen) sowie der komplette Block 172.16.11.0/24 (256 Adressen) stehen als Puffer bereit.`,
+        correctAnswer: `1. Produktion (300 Hosts): 172.16.8.0/23 | Hostbereich: 172.16.8.1 - 172.16.9.254 | Broadcast: 172.16.9.255
+2. Verwaltung (100 Hosts): 172.16.10.0/25 | Hostbereich: 172.16.10.1 - 172.16.10.126 | Broadcast: 172.16.10.127
+3. Lager (50 Hosts): 172.16.10.128/26 | Hostbereich: 172.16.10.129 - 172.16.10.190 | Broadcast: 172.16.10.191
+4. Server (10 Hosts): 172.16.10.192/28 | Hostbereich: 172.16.10.193 - 172.16.10.206 | Broadcast: 172.16.10.207
+5. Router (2 Hosts): 172.16.10.208/30 | Hostbereich: 172.16.10.209 - 172.16.10.210 | Broadcast: 172.16.10.211`,
+        solutionDiagramSvg: VisualDiagrams.getNetworkTopologySvg(),
+        explanation: "Goldene VLSM-Regel: Sortierung immer absteigend nach Hostbedarf. 300 Hosts benötigen 512er-Block (/23), gefolgt von 128er (/25), 64er (/26), 16er (/28) und 4er (/30).",
+        points: 10
+    },
+    {
+        id: 593,
+        isHard: false,
+        difficulty: "standard",
+        theme: "subnetting",
+        isSubnetting: true,
+        isBawueFocus: true,
+        topic: "🌐 IPv4 Subnetting: 8 gleich große Subnetze aus /24 (192.168.10.0/24)",
+        type: "open-text",
+        title: "Gleich große Subnetze: 8 Teilnetze aus einem /24-Netz bilden",
+        question: `Ein IT-Dienstleister teilt das Netz \`192.168.10.0/24\` in **8 gleich große Subnetze** auf.
+
+1. **Präfix & Subnetzmaske (2 Punkte):**
+   - Wie lautet das neue CIDR-Präfix?
+   - Wie lautet die Subnetzmaske in Dezimalschreibweise?
+
+2. **Blockgröße & Nutzbare Hosts (2 Punkte):**
+   - Wie groß ist die Schrittweite (Blockgröße) zwischen den Subnetzen?
+   - Wie viele nutzbare Host-Adressen stehen in jedem der 8 Subnetze zur Verfügung?
+
+3. **Subnetz-Übersicht (4 Punkte):**
+   Geben Sie für **Subnetz 1**, **Subnetz 4** und **Subnetz 8** jeweils Netzadresse, ersten Host, letzten Host und Broadcast an.`,
+        musterloesung: `1. Präfix & Subnetzmaske (2 Punkte):
+- Für 8 Subnetze werden 3 Subnetz-Bits benötigt (2^3 = 8).
+- Neues Präfix: 24 + 3 = /27
+- Subnetzmaske: 255.255.255.224 (gesetzte Bits: 128 + 64 + 32 = 224).
+
+2. Blockgröße & Nutzbare Hosts (2 Punkte):
+- Blockgröße: 256 - 224 = 32 Adressen pro Subnetz.
+- Nutzbare Hosts: 2^(32-27) - 2 = 2^5 - 2 = 32 - 2 = 30 nutzbare Hosts pro Subnetz.
+
+3. Subnetze (4 Punkte):
+- Subnetz 1:
+  * Netzadresse: 192.168.10.0/27
+  * Erster Host: 192.168.10.1
+  * Letzter Host: 192.168.10.30
+  * Broadcast: 192.168.10.31
+- Subnetz 4 (Start bei 3 * 32 = 96):
+  * Netzadresse: 192.168.10.96/27
+  * Erster Host: 192.168.10.97
+  * Letzter Host: 192.168.10.126
+  * Broadcast: 192.168.10.127
+- Subnetz 8 (Start bei 7 * 32 = 224):
+  * Netzadresse: 192.168.10.224/27
+  * Erster Host: 192.168.10.225
+  * Letzter Host: 192.168.10.254
+  * Broadcast: 192.168.10.255`,
+        correctAnswer: `1. Präfix: /27 | Subnetzmaske: 255.255.255.224
+2. Blockgröße: 32 Adressen | Nutzbare Hosts: 30 Hosts
+3. Subnetz 1: 192.168.10.0/27 (.1 bis .30, BC .31) | Subnetz 4: 192.168.10.96/27 (.97 bis .126, BC .127) | Subnetz 8: 192.168.10.224/27 (.225 bis .254, BC .255)`,
+        explanation: "Bei 8 Subnetzen werden 3 Bits geborgt -> 2^3 = 8 Subnetze à 32 Adressen mit je 30 nutzbaren Hosts.",
+        points: 8
+    },
+    {
+        id: 594,
+        isHard: true,
+        difficulty: "hard",
+        theme: "subnetting",
+        isSubnetting: true,
+        isBawueFocus: true,
+        topic: "🌐 IPv4 VLSM: Bedarfsgerechte Aufteilung eines /24-Netzes (192.168.1.0/24)",
+        type: "open-text",
+        title: "VLSM-Planung für Firmennetz: Schulung, Büro, Support, DMZ & WAN",
+        question: `Gegeben ist das Netzwerk \`192.168.1.0/24\`.
+Teilen Sie das Netz mit Variable Length Subnet Masking (VLSM) für folgende Bereiche optimal und ohne Adresslücken auf:
+- Bereich A (Schulungsraum): 55 Hosts
+- Bereich B (Büroarbeitsplätze): 26 Hosts
+- Bereich C (IT-Support): 12 Hosts
+- Bereich D (DMZ-Webserver): 5 Hosts
+- Bereich E (Router-Transfernetz): 2 Hosts
+
+Geben Sie für alle 5 Bereiche Netzadresse mit Präfix, ersten Host, letzten Host und Broadcast an.`,
+        musterloesung: `VLSM-Musterlösung für 192.168.1.0/24:
+
+1. Bereich A (Schulung, 55 Hosts):
+- Benötigt 57 Adressen -> 2^6 = 64er Block -> /26 (Maske 255.255.255.192).
+- Netz: 192.168.1.0/26
+- Erster Host: 192.168.1.1
+- Letzter Host: 192.168.1.62
+- Broadcast: 192.168.1.63 (Kapazität: 62 Hosts)
+
+2. Bereich B (Büro, 26 Hosts):
+- Benötigt 28 Adressen -> 2^5 = 32er Block -> /27 (Maske 255.255.255.224).
+- Netz: 192.168.1.64/27
+- Erster Host: 192.168.1.65
+- Letzter Host: 192.168.1.94
+- Broadcast: 192.168.1.95 (Kapazität: 30 Hosts)
+
+3. Bereich C (Support, 12 Hosts):
+- Benötigt 14 Adressen -> 2^4 = 16er Block -> /28 (Maske 255.255.255.240).
+- Netz: 192.168.1.96/28
+- Erster Host: 192.168.1.97
+- Letzter Host: 192.168.1.110
+- Broadcast: 192.168.1.111 (Kapazität: 14 Hosts)
+
+4. Bereich D (DMZ, 5 Hosts):
+- Benötigt 7 Adressen -> 2^3 = 8er Block -> /29 (Maske 255.255.255.248).
+- Netz: 192.168.1.112/29
+- Erster Host: 192.168.1.113
+- Letzter Host: 192.168.1.118
+- Broadcast: 192.168.1.119 (Kapazität: 6 Hosts)
+
+5. Bereich E (WAN, 2 Hosts):
+- Benötigt 4 Adressen -> 2^2 = 4er Block -> /30 (Maske 255.255.255.252).
+- Netz: 192.168.1.120/30
+- Erster Host: 192.168.1.121
+- Letzter Host: 192.168.1.122
+- Broadcast: 192.168.1.123 (Kapazität: 2 Hosts)
+
+Freier Adressraum: 192.168.1.124 bis 192.168.1.255 (insgesamt noch 132 freie Adressen).`,
+        correctAnswer: `1. Schulung (55): 192.168.1.0/26 (.1 - .62, BC .63)
+2. Büro (26): 192.168.1.64/27 (.65 - .94, BC .95)
+3. Support (12): 192.168.1.96/28 (.97 - .110, BC .111)
+4. DMZ (5): 192.168.1.112/29 (.113 - .118, BC .119)
+5. WAN (2): 192.168.1.120/30 (.121 - .122, BC .123)`,
+        solutionDiagramSvg: VisualDiagrams.getNetworkTopologySvg(),
+        explanation: "VLSM-Bedarfsaufteilung im /24-Netz: Stufenweise Halbierung (/26, /27, /28, /29, /30) spart mehr als die Hälfte der Adressen als Reserve.",
+        points: 10
+    },
+    {
+        id: 595,
+        isHard: true,
+        difficulty: "hard",
+        theme: "subnetting",
+        isSubnetting: true,
+        isBawueFocus: true,
+        topic: "🌐 IPv4 Subnetting über Oktettgrenzen: /23 Netz in 4 gleich große Subnetze",
+        type: "open-text",
+        title: "Subnetting über Oktettgrenzen (10.10.0.0/23 in 4 Subnetze)",
+        question: `Ein Unternehmen erhält das Klasse-A-Präfix \`10.10.0.0/23\`.
+Dieses Netz soll in genau **4 gleich große Subnetze** aufgeteilt werden.
+
+1. Ermitteln Sie das neue CIDR-Präfix und die Subnetzmaske in Dezimalpunkt-Notation.
+2. Bestimmen Sie für jedes der 4 Subnetze:
+   - Die Netzadresse
+   - Den ersten nutzbaren Host
+   - Den letzten nutzbaren Host
+   - Die Broadcast-Adresse
+3. Wie viele nutzbare Hosts stehen pro Subnetz zur Verfügung?`,
+        musterloesung: `1. Präfix & Subnetzmaske:
+- Ausgangspräfix: /23 (umfasst 512 Adressen: 10.10.0.0 bis 10.10.1.255).
+- 4 Subnetze erfordern 2 zusätzliche Bits: 23 + 2 = /25
+- Subnetzmaske: 255.255.255.128
+
+2. Die 4 Subnetze (Schrittweite 128 im 4. Oktett):
+- Subnetz 1:
+  * Netzadresse: 10.10.0.0/25
+  * Erster Host: 10.10.0.1
+  * Letzter Host: 10.10.0.126
+  * Broadcast: 10.10.0.127
+- Subnetz 2:
+  * Netzadresse: 10.10.0.128/25
+  * Erster Host: 10.10.0.129
+  * Letzter Host: 10.10.0.254
+  * Broadcast: 10.10.0.255
+- Subnetz 3 (Wechsel ins nächste /24-Oktett 10.10.1.x!):
+  * Netzadresse: 10.10.1.0/25
+  * Erster Host: 10.10.1.1
+  * Letzter Host: 10.10.1.126
+  * Broadcast: 10.10.1.127
+- Subnetz 4:
+  * Netzadresse: 10.10.1.128/25
+  * Erster Host: 10.10.1.129
+  * Letzter Host: 10.10.1.254
+  * Broadcast: 10.10.1.255
+
+3. Nutzbare Hosts:
+- 2^(32 - 25) - 2 = 2^7 - 2 = 128 - 2 = 126 nutzbare Hosts pro Subnetz.`,
+        correctAnswer: `1. Präfix: /25 | Maske: 255.255.255.128
+2. Subnetze:
+- SN 1: 10.10.0.0/25 (.1 bis .126, BC .127)
+- SN 2: 10.10.0.128/25 (.129 bis .254, BC .255)
+- SN 3: 10.10.1.0/25 (.1 bis .126, BC .127)
+- SN 4: 10.10.1.128/25 (.129 bis .254, BC .255)
+3. Nutzbare Hosts: 126 Hosts pro Subnetz.`,
+        explanation: "Achtung bei /23: Das Netz erstreckt sich über zwei dritte Oktette (0 und 1). Bei 4 Subnetzen à /25 liegen zwei Netze in 10.10.0.x und zwei in 10.10.1.x.",
+        points: 8
+    },
+    {
+        id: 596,
+        isHard: true,
+        difficulty: "hard",
+        theme: "subnetting",
+        isSubnetting: true,
+        isBawueFocus: true,
+        topic: "🌐 IPv6 Standort-Subnetting: /48 Basisnetz in /52 Standort-Präfixe",
+        type: "open-text",
+        title: "IPv6-Standortplanung: /48 Basisnetz in /52 Standortblöcke aufteilen",
+        question: `Ein multinationales Unternehmen erhält vom RIPE NCC das globale IPv6-Präfix \`2001:db8:c300::/48\`.
+Für vier Unternehmensstandorte sollen **Standort-Blöcke der Größe /52** gebildet werden.
+
+1. **Subnetz-Bits & Blockanzahl (2 Punkte):**
+   Wie viele Bits stehen für die Standortbildung zur Verfügung und wie viele /52-Blöcke können maximal aus dem /48 gebildet werden?
+
+2. **Standort-Zuweisungstabelle (4 Punkte):**
+   Ergänzen Sie die /52-Präfixe und den hexadezimalen Bereich des 4. Hextets für:
+   - Standort 1 (Zentrale Berlin)
+   - Standort 2 (Werk Stuttgart)
+   - Standort 3 (Logistik Hamburg)
+   - Standort 4 (Niederlassung München)
+
+3. **Standard-Gateway (2 Punkte):**
+   Wie lautet die empfohlene erste Host-Adresse (Standard-Gateway) im Standort 1?`,
+        musterloesung: `1. Subnetz-Bits & Anzahl der /52-Blöcke (2 Punkte):
+- Subnetz-Bits: 52 - 48 = 4 Bits.
+- Anzahl Blöcke: 2^4 = 16 Standort-Blöcke (/52) aus einem /48-Netz.
+
+2. Standort-Tabelle (4 Punkte):
+Da 4 Bits geborgt werden, bestimmt das erste Hex-Zeichen des 4. Hextets (Bits 49 bis 52) den Standort:
+- Standort 1 (Berlin):
+  * /52-Präfix: 2001:db8:c300:0000::/52 (bzw. 2001:db8:c300::/52)
+  * Bereich 4. Hextet: 0000 bis 0fff (umfasst 4.096 /64-Subnetze!)
+- Standort 2 (Stuttgart):
+  * /52-Präfix: 2001:db8:c300:1000::/52
+  * Bereich 4. Hextet: 1000 bis 1fff
+- Standort 3 (Hamburg):
+  * /52-Präfix: 2001:db8:c300:2000::/52
+  * Bereich 4. Hextet: 2000 bis 2fff
+- Standort 4 (München):
+  * /52-Präfix: 2001:db8:c300:3000::/52
+  * Bereich 4. Hextet: 3000 bis 3fff
+
+3. Erstes Standard-Gateway in Standort 1 (2 Punkte):
+- 2001:db8:c300:0000::1 (Kurzform: 2001:db8:c300::1).`,
+        correctAnswer: `1. 4 Bits (52 - 48 = 4) -> 2^4 = 16 Standortblöcke.
+2. Standort-Präfixe:
+- Standort 1: 2001:db8:c300:0000::/52 (Bereich 0000-0fff)
+- Standort 2: 2001:db8:c300:1000::/52 (Bereich 1000-1fff)
+- Standort 3: 2001:db8:c300:2000::/52 (Bereich 2000-2fff)
+- Standort 4: 2001:db8:c300:3000::/52 (Bereich 3000-3fff)
+3. Gateway: 2001:db8:c300::1`,
+        explanation: "IHK-Abschlussprüfungsaufgabe zu IPv6-Standortplanung: Eine /52-Präfixlänge nutzt 4 Bits des 4. Hextets (Ziffern 0 bis f), sodass jeder Standort genau 4096 /64-LANs erhält.",
+        points: 8
+    },
+    {
+        id: 597,
+        isHard: true,
+        difficulty: "hard",
+        theme: "subnetting",
+        isSubnetting: true,
+        isBawueFocus: true,
+        topic: "🌐 IPv6 LAN-Subnetting: /56 Firmenpräfix in /64 Subnetze aufteilen",
+        type: "open-text",
+        title: "IPv6-Subnetting: /56 Kundenpräfix in /64 Standard-Subnetze aufteilen",
+        question: `Ein Firmenkunde erhält von seinem Internet-Provider das IPv6-Präfix \`2001:db8:cafe:1000::/56\`.
+Das lokale Netzwerk soll in standardisierte **/64-Subnetze** aufgeteilt werden.
+
+1. **Subnetz-Kapazität (2 Punkte):**
+   Wie viele /64-Subnetze können maximal aus diesem /56-Präfix gebildet werden?
+
+2. **Zuweisung lokaler Teilnetze (4 Punkte):**
+   Vergeben Sie fortlaufende /64-Subnetze für folgende 4 Abteilungsnetze:
+   - LAN 1: Verwaltung
+   - LAN 2: Produktion & Industrie 4.0
+   - LAN 3: VoIP-Telefonie
+   - LAN 4: Gäste-WLAN
+
+3. **EUI-64 Verfahren (2 Punkte):**
+   Warum ist es im IPv6-Design zwingend erforderlich, dass Endgeräte-Subnetze genau die Präfixlänge **/64** besitzen?`,
+        musterloesung: `1. Subnetz-Kapazität (2 Punkte):
+- Subnetz-Bits: 64 - 56 = 8 Bits.
+- Anzahl /64-Subnetze: 2^8 = 256 Subnetze.
+
+2. Zuweisung der /64-Subnetze (4 Punkte):
+Das 4. Hextet lautet '10xx':
+- LAN 1 (Verwaltung): 2001:db8:cafe:1001::/64
+- LAN 2 (Produktion): 2001:db8:cafe:1002::/64
+- LAN 3 (VoIP): 2001:db8:cafe:1003::/64
+- LAN 4 (Gäste-WLAN): 2001:db8:cafe:1004::/64
+
+3. Warum zwingend /64 für Endgeräte? (2 Punkte):
+- SLAAC (Stateless Address Autoconfiguration): Die automatische Adresskonfiguration ohne DHCPv6 setzt nach RFC 4862 zwingend eine 64-Bit-Interface-ID (z. B. erzeugt via EUI-64 aus der MAC-Adresse) voraus.
+- Bei abweichenden Präfixlängen (z. B. /70 oder /80) bricht die automatische SLAAC-Funktionalität vieler Betriebssysteme (Windows, Linux, Android) vollständig ab.`,
+        correctAnswer: `1. 2^(64 - 56) = 2^8 = 256 /64-Subnetze.
+2. Subnetze:
+- LAN 1: 2001:db8:cafe:1001::/64
+- LAN 2: 2001:db8:cafe:1002::/64
+- LAN 3: 2001:db8:cafe:1003::/64
+- LAN 4: 2001:db8:cafe:1004::/64
+3. Grund: SLAAC (Stateless Address Autoconfiguration) benötigt zwingend eine 64-Bit-Interface-ID für die automatische Adressvergabe.`,
+        explanation: "IPv6-Endgeräte-Netze haben immer /64, da SLAAC und Privacy Extensions auf exakt 64 Host-Bits (Interface-ID) basieren.",
+        points: 8
+    },
+    {
+        id: 598,
+        isHard: false,
+        difficulty: "standard",
+        theme: "subnetting",
+        isSubnetting: true,
+        isBawueFocus: true,
+        topic: "🌐 IHK Multiple-Choice: VLSM-Grundregeln & Adressierungsreihenfolge",
+        type: "multiple-choice",
+        question: `Warum MUSS bei der bedarfsgerechten Subnetzaufteilung (VLSM – Variable Length Subnet Masking) zwingend mit dem **größten Subnetz (höchster Hostbedarf)** begonnen werden?`,
+        options: [
+            "Größere Subnetze benötigen eine kleinere Präfixlänge und müssen an ganzzahligen Vielfachen ihrer Blockgröße ausgerichtet werden (Bit-Alignment). Beginnt man mit kleinen Netzen, entstehen Adresslücken oder große Netze überlappen unzulässig.",
+            "Weil Router bei VLSM immer nur die erste IP-Adresse des kleinsten Netzes als Standard-Gateway akzeptieren.",
+            "Weil das IPv4-Protokoll bei VLSM die Subnetzmasken nach aufsteigender Bitanzahl im ARP-Cache sortiert.",
+            "Weil die IHK Punkte abzieht, wenn man alphabetisch nach Abteilungsnamen sortiert, selbst wenn keine Adressüberlappung vorliegt."
+        ],
+        correctAnswer: 0,
+        solutionDiagramSvg: VisualDiagrams.getNetworkTopologySvg(),
+        explanation: "Goldene VLSM-Regel: Ein 512er-Block (/23) kann nur auf Adressen beginnen, deren drittes Oktett gerade ist. Beginnt man mit kleinen Blöcken, wird das Alignment zerstört und es entstehen unbrauchbare Lücken."
+    },
+    {
+        id: 599,
+        isHard: false,
+        difficulty: "standard",
+        theme: "subnetting",
+        isSubnetting: true,
+        isBawueFocus: true,
+        topic: "🌐 IHK Multiple-Choice: Subnetzmaske & Hostanzahl bei CIDR /22",
+        type: "multiple-choice",
+        question: `Ein Netzwerkadministrator erhält für eine Unternehmenszentrale das Netz \`172.16.8.0/22\`.
+
+Wie lauten die **Subnetzmaske in Dezimalschreibweise** und die Anzahl der **maximal nutzbaren Host-Adressen** in diesem ungeteilten Netzwerk?`,
+        options: [
+            "Subnetzmaske: 255.255.252.0 | Nutzbare Hosts: 1.022 (2^10 - 2)",
+            "Subnetzmaske: 255.255.254.0 | Nutzbare Hosts: 510 (2^9 - 2)",
+            "Subnetzmaske: 255.255.248.0 | Nutzbare Hosts: 2.046 (2^11 - 2)",
+            "Subnetzmaske: 255.255.255.192 | Nutzbare Hosts: 62 (2^6 - 2)"
+        ],
+        correctAnswer: 0,
+        solutionDiagramSvg: VisualDiagrams.getNetworkTopologySvg(),
+        explanation: "/22 bedeutet 22 gesetzte Bits: 11111111.11111111.11111100.00000000 = 255.255.252.0. Verbleibende Host-Bits: 32 - 22 = 10 Bits -> 2^10 - 2 = 1024 - 2 = 1.022 nutzbare Hosts."
+    },
+    {
+        id: 600,
+        isHard: false,
+        difficulty: "standard",
+        theme: "subnetting",
+        isSubnetting: true,
+        isBawueFocus: true,
+        topic: "🌐 IHK Multiple-Choice: IPv6 Präfix-Rechnung (/48 auf /64)",
+        type: "multiple-choice",
+        question: `Ein Unternehmen erhält vom Provider ein IPv6-Präfix mit der Länge **/48** (z. B. \`2001:db8:1234::/48\`).
+Alle internen LANs werden als Standard-**/64-Subnetze** betrieben.
+
+Wie viele **/64-Subnetze** kann das Unternehmen aus diesem /48-Netz bilden?`,
+        options: [
+            "65.536 Subnetze (2^(64 - 48) = 2^16 = 65.536)",
+            "256 Subnetze (2^(64 - 56) = 2^8 = 256)",
+            "4.096 Subnetze (2^12 = 4.096)",
+            "16 Subnetze (2^4 = 16)"
+        ],
+        correctAnswer: 0,
+        solutionDiagramSvg: VisualDiagrams.getNetworkTopologySvg(),
+        explanation: "Von /48 bis /64 stehen genau 16 Bits (64 - 48 = 16) für das Subnetz zur Verfügung (das gesamte 4. Hextet). 2^16 = 65.536 vollwertige /64-Subnetze!"
     }
 ];
