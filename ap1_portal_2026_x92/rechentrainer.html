@@ -280,6 +280,12 @@
           <button onclick="selectMiniTopic('ipv6_linklocal_explain')" class="topic-pill px-3.5 py-2 text-sm font-semibold rounded-xl border border-violet-400 bg-violet-50 hover:bg-violet-100 text-violet-900 transition-all" data-topic="ipv6_linklocal_explain">
             🔗 IPv6: 7. Link-Local (fe80::)
           </button>
+          <button onclick="selectMiniTopic('ipv6_standort_prefix')" class="topic-pill px-3.5 py-2 text-sm font-semibold rounded-xl border border-blue-500 bg-blue-50 hover:bg-blue-100 text-blue-900 transition-all" data-topic="ipv6_standort_prefix">
+            🏢 IPv6: Standortplanung (/48 ➔ /52 Blöcke &amp; Präfixe)
+          </button>
+          <button onclick="selectMiniTopic('ipv6_standort_zuordnung')" class="topic-pill px-3.5 py-2 text-sm font-semibold rounded-xl border border-blue-500 bg-blue-50 hover:bg-blue-100 text-blue-900 transition-all" data-topic="ipv6_standort_zuordnung">
+            🔍 IPv6: Standort-Zuordnung prüfen (z. B. 2a01::5)
+          </button>
 
           <!-- UML & Diagramme (AP1 Kern-Modellierung) -->
           <button onclick="selectMiniTopic('uml_class')" class="topic-pill px-3.5 py-2 text-sm font-semibold rounded-xl border border-emerald-500 bg-emerald-50 hover:bg-emerald-100 text-emerald-900 transition-all" data-topic="uml_class">
@@ -4204,6 +4210,162 @@
           altExpected: sc.alts,
           hint: sc.hint,
           wasWarumWofuer: sc.wasWarumWofuer,
+          explanation: `Richtig! ${sc.expl}`
+        };
+      },
+
+      // 48. IPV6: STANDORTPLANUNG & PRÄFIX-VERGABE (/48 AUF /52)
+      ipv6_standort_prefix: function() {
+        const scenarios = [
+          {
+            q: "Ein Unternehmen erhält vom Provider das Basis-Netz <code>2001:db8:c3::/48</code>. Für die Standorte werden <strong>/52-Blöcke</strong> gebildet.<br><br>Wie viele <strong>/52-Standortblöcke</strong> können maximal aus diesem /48-Netz gebildet werden?",
+            unit: "Anzahl Blöcke (Zahl)",
+            expected: "16",
+            alts: ["16", "16 BLÖCKE", "16 BLOECKE", "16 STANDORTE"],
+            hint: "Formel: 2^(Zielpräfix - Basispräfix) = 2^(52 - 48) = 2^4 = 16.",
+            wasWarumWofuer: {
+              was: "16 /52-Standortblöcke (2^4 = 16).",
+              warum: "Differenz: 52 Bit - 48 Bit = 4 geliehene Bits im 4. Hextet. Mit 4 Bits lassen sich 2^4 = 16 verschiedene Hex-Werte (0 bis f) bilden.",
+              wofuer: "IHK-Standortplanung für Filialnetze und eigenständige Firmenstandorte."
+            },
+            expl: "Aus einem /48-Netz lassen sich genau <strong>16 Blöcke à /52</strong> bilden (2<sup>52-48</sup> = 2<sup>4</sup> = 16)."
+          },
+          {
+            q: "Ein /52-Standortblock (z. B. <code>2001:db8:c3:1000::/52</code>) soll intern in standardkonforme <strong>/64-Subnetze</strong> unterteilt werden.<br><br>Wie viele <strong>/64-Subnetze</strong> enthält jeder einzelne /52-Block?",
+            unit: "Anzahl Subnetze (Zahl)",
+            expected: "4096",
+            alts: ["4096", "4.096", "4096 SUBNETZE", "2^12"],
+            hint: "Formel: 2^(64 - 52) = 2^12 = 4096.",
+            wasWarumWofuer: {
+              was: "4.096 /64-Subnetze je Standortblock.",
+              warum: "Differenz: 64 Bit - 52 Bit = 12 Subnetz-Bits. 2^12 = 4.096 Subnetze (Hex-Bereich von 000 bis fff).",
+              wofuer: "Interne VLAN-Strukturierung (Verwaltung, Produktion, Gäste-WLAN, DMZ, Serverraum) pro Standort."
+            },
+            expl: "Jeder /52-Block enthält <strong>4.096 /64-Subnetze</strong> (2<sup>64-52</sup> = 2<sup>12</sup> = 4.096)."
+          },
+          {
+            q: "Das Basisnetz lautet <code>2001:db8:c3::/48</code>. Es werden /52-Blöcke gebildet. Standort 1 (Zentrale) hat <code>2001:db8:c3:0000::/52</code>.<br><br>Wie lautet das vollständige <strong>/52-Präfix für Standort 2 (Lager)</strong>?",
+            unit: "Präfix (z. B. 2001:db8:c3:1000::/52)",
+            expected: "2001:db8:c3:1000::/52",
+            alts: ["2001:DB8:C3:1000::/52", "2001:0DB8:00C3:1000::/52", "2001:DB8:C3:1000::", "2001:db8:c3:1000::/52"],
+            hint: "Schrittweite der ersten Ziffer im 4. Hextet ist 1 (0 -> 1 -> 2 -> 3): 2001:db8:c3:1000::/52",
+            wasWarumWofuer: {
+              was: "2001:db8:c3:1000::/52 (Präfix für Standort 2).",
+              warum: "Ein /52 belegt 4 Bits des 4. Hextets (genau 1 Hex-Ziffer). Standort 1 nutzt Hex 0 (0000), Standort 2 nutzt Hex 1 (1000).",
+              wofuer: "Saubere hierarchische Netzstruktur nach IHK-Standard."
+            },
+            expl: "Standort 2 erhält das Präfix <strong>2001:db8:c3:1000::/52</strong>."
+          },
+          {
+            q: "Das Basisnetz lautet <code>2001:db8:c3::/48</code> (/52-Blöcke). Standort 1 hat <code>:0000::/52</code>, Standort 2 hat <code>:1000::/52</code>.<br><br>Wie lautet das vollständige <strong>/52-Präfix für Standort 3 (Werkstatt)</strong>?",
+            unit: "Präfix (z. B. 2001:db8:c3:2000::/52)",
+            expected: "2001:db8:c3:2000::/52",
+            alts: ["2001:DB8:C3:2000::/52", "2001:0DB8:00C3:2000::/52", "2001:DB8:C3:2000::"],
+            hint: "Erste Ziffer des 4. Hextets ist 2: 2001:db8:c3:2000::/52",
+            wasWarumWofuer: {
+              was: "2001:db8:c3:2000::/52 (Präfix für Standort 3).",
+              warum: "Die 3. Zählstufe (Index 2) bei 4-Bit-Schrittweite lautet 2000 im 4. Hextet.",
+              wofuer: "Eindeutige Zuordnung des Werkstatt-Standorts im Routing-Table."
+            },
+            expl: "Standort 3 erhält das Präfix <strong>2001:db8:c3:2000::/52</strong>."
+          },
+          {
+            q: "Wie lautet die <strong>letzte Adresse des Blocks</strong> für Standort 2 mit dem Präfix <code>2001:db8:c3:1000::/52</code> (vollständig gekürzt mit ffff)?",
+            unit: "Letzte IP-Adresse",
+            expected: "2001:db8:c3:1fff:ffff:ffff:ffff:ffff",
+            alts: ["2001:DB8:C3:1FFF:FFFF:FFFF:FFFF:FFFF", "2001:0DB8:00C3:1FFF:FFFF:FFFF:FFFF:FFFF"],
+            hint: "Das 4. Hextet reicht von 1000 bis 1fff; alle folgenden Hextets stehen auf ffff.",
+            wasWarumWofuer: {
+              was: "2001:db8:c3:1fff:ffff:ffff:ffff:ffff (Letzte Adresse des Blocks).",
+              warum: "Die ersten 52 Bits sind fest (1000 binär 0001). Alle verbleibenden 76 Bits (ab Bit 53) auf 1 gesetzt ergeben :1fff:ffff:ffff:ffff:ffff.",
+              wofuer: "Ermittlung des Adressraum-Endes zur Kollisionsvermeidung bei Nachbarblöcken."
+            },
+            expl: "Die letzte Adresse lautet <strong>2001:db8:c3:1fff:ffff:ffff:ffff:ffff</strong>."
+          }
+        ];
+        const sc = scenarios[Math.floor(Math.random() * scenarios.length)];
+        return {
+          topic: "ipv6_standort_prefix",
+          badge: "🏢 Standortplanung",
+          isText: true,
+          title: "IPv6-Standortplanung & Blockberechnung (/48 ➔ /52)",
+          question: sc.q,
+          unit: sc.unit,
+          expected: sc.expected,
+          altExpected: sc.alts,
+          hint: sc.hint,
+          wasWarumWofuer: sc.wasWarumWofuer,
+          explanation: sc.expl
+        };
+      },
+
+      // 49. IPV6: STANDORT-ZUORDNUNG PRÜFEN (AUFGABE 5)
+      ipv6_standort_zuordnung: function() {
+        const scenarios = [
+          {
+            ip: "2001:db8:c3:2a01::5",
+            standort: "Werkstatt",
+            standortNum: "Standort 3",
+            alts: ["WERKSTATT", "STANDORT 3", "STANDORT 3 (WERKSTATT)", "STANDORT 3: WERKSTATT", "3", "STANDORT 3 WERKSTATT"],
+            hexBlock: "2a01",
+            firstDigit: "2",
+            range: "2000 bis 2fff",
+            expl: "Das 4. Hextet <code>2a01</code> beginnt mit der Ziffer <strong>2</strong> und liegt somit im Bereich <strong>2000 bis 2fff</strong> (Standort 3: Werkstatt)."
+          },
+          {
+            ip: "2001:db8:c3:3001::5",
+            standort: "Außenstelle",
+            standortNum: "Standort 4",
+            alts: ["AUSSENSTELLE", "STANDORT 4", "AUßENSTELLE", "STANDORT 4 (AUSSENSTELLE)", "STANDORT 4: AUSSENSTELLE", "4", "STANDORT 4 AUSSENSTELLE"],
+            hexBlock: "3001",
+            firstDigit: "3",
+            range: "3000 bis 3fff",
+            expl: "Das 4. Hextet <code>3001</code> beginnt mit der Ziffer <strong>3</strong> und liegt somit im Bereich <strong>3000 bis 3fff</strong> (Standort 4: Außenstelle)."
+          },
+          {
+            ip: "2001:db8:c3:1042::20",
+            standort: "Lager",
+            standortNum: "Standort 2",
+            alts: ["LAGER", "STANDORT 2", "STANDORT 2 (LAGER)", "STANDORT 2: LAGER", "2", "STANDORT 2 LAGER"],
+            hexBlock: "1042",
+            firstDigit: "1",
+            range: "1000 bis 1fff",
+            expl: "Das 4. Hextet <code>1042</code> beginnt mit der Ziffer <strong>1</strong> und liegt somit im Bereich <strong>1000 bis 1fff</strong> (Standort 2: Lager)."
+          },
+          {
+            ip: "2001:db8:c3:00ff::1",
+            standort: "Zentrale",
+            standortNum: "Standort 1",
+            alts: ["ZENTRALE", "STANDORT 1", "STANDORT 1 (ZENTRALE)", "STANDORT 1: ZENTRALE", "1", "STANDORT 1 ZENTRALE"],
+            hexBlock: "00ff",
+            firstDigit: "0",
+            range: "0000 bis 0fff",
+            expl: "Das 4. Hextet <code>00ff</code> beginnt mit der Ziffer <strong>0</strong> und liegt somit im Bereich <strong>0000 bis 0fff</strong> (Standort 1: Zentrale)."
+          }
+        ];
+        const sc = scenarios[Math.floor(Math.random() * scenarios.length)];
+        return {
+          topic: "ipv6_standort_zuordnung",
+          badge: "🔍 Standort-Prüfung",
+          isText: true,
+          title: `IPv6-Adresse einem Standort zuordnen: ${sc.ip}`,
+          question: `Gegeben sind die /52-Standortpräfixe der Havelholz GmbH:<br>` +
+            `• <strong>Standort 1 (Zentrale):</strong> <code>2001:db8:c3:0000::/52</code> (Bereich 0000–0fff)<br>` +
+            `• <strong>Standort 2 (Lager):</strong> <code>2001:db8:c3:1000::/52</code> (Bereich 1000–1fff)<br>` +
+            `• <strong>Standort 3 (Werkstatt):</strong> <code>2001:db8:c3:2000::/52</code> (Bereich 2000–2fff)<br>` +
+            `• <strong>Standort 4 (Außenstelle):</strong> <code>2001:db8:c3:3000::/52</code> (Bereich 3000–3fff)<br><br>` +
+            `Zu welchem <strong>Standort</strong> gehört die folgende IP-Adresse?<br>` +
+            `<code class="text-base font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded border border-blue-200">${sc.ip}</code><br><br>` +
+            `<span class="text-xs text-slate-500">Mögliche Eingabe: <strong>Zentrale</strong>, <strong>Lager</strong>, <strong>Werkstatt</strong> oder <strong>Außenstelle</strong> (bzw. Standort 1, 2, 3 oder 4)</span>`,
+          unit: "Standortname (z. B. Werkstatt)",
+          expected: sc.standort,
+          altExpected: sc.alts,
+          hint: `Betrachte das 4. Hextet '${sc.hexBlock}'. Die erste Ziffer '${sc.firstDigit}' bestimmt den Bereich ${sc.range}.`,
+          wasWarumWofuer: {
+            was: `${sc.standort} (${sc.standortNum}).`,
+            warum: `Das 4. Hextet lautet '${sc.hexBlock}'. Da die erste Hex-Ziffer '${sc.firstDigit}' ist, liegt die Adresse im Block ${sc.range}, der fest dem Standort ${sc.standort} zugewiesen ist.`,
+            wofuer: "IHK-Prüfungsaufgabe 5: Schnelle Fehlerdiagnose und Firewall-/Routing-Zuordnung anhand von IPv6-Logdateien."
+          },
           explanation: `Richtig! ${sc.expl}`
         };
       },
