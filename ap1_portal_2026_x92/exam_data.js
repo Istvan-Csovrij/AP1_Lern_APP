@@ -882,12 +882,12 @@ var EXAM_SETS = [
                     },
                     {
                         id: "2_1_d",
-                        label: "d) IT-Sicherheit: 'No default passwords' Richtlinie",
+                        label: "d) Fachenglisch & IT-Sicherheit: 'No default passwords' Richtlinie (Original-IHK-Form)",
                         points: 6,
                         type: "lines",
-                        linesCount: 4,
-                        text: "Die IT-Sicherheitsrichtlinie verlangt, dass IP-Kameras keine werkseitigen Standardpasswörter (wie 'admin/admin') verwenden dürfen. Erläutern Sie zwei Sicherheitsrisiken durch Standardpasswörter und zwei Maßnahmen für ein sicheres Passwort- und Gerätemanagement.",
-                        solution: "Risiken: 1. Automatisierte Angriffe durch IoT-Botnetze (wie Mirai), die Standard-Zugangsdaten im Netz scannen. 2. Unbefugte Einsicht in Sicherheitsaufnahmen oder Missbrauch der Kameras als Spionage-Werkzeug.\nMaßnahmen: 1. Erzwungene Passwortänderung bei der Ersteinrichtung (Mindestlänge 12 Zeichen, Komplexität). 2. Zentrales Credential-Management (z. B. Passwort-Tresor) und Isolierung der Kameras in einem separaten Management-VLAN ohne direkten Internetzugriff."
+                        linesCount: 5,
+                        text: "In der englischsprachigen Herstellerspezifikation der Kameras steht folgender Sicherheitshinweis:\n'Security specification: The camera firmware enforces a strict \"no default passwords\" policy. Factory pre-set credentials (such as admin/admin) are disabled by default. During initial setup, the installer is prompted to define a unique, complex passphrase before any network services become accessible.'\n\n1. Übersetzen und erklären Sie sinngemäß auf Deutsch, was diese Richtlinie vorschreibt (2 Punkte).\n2. Erläutern Sie zwei Sicherheitsrisiken, die durch werkseitige Standardpasswörter entstehen (2 Punkte).\n3. Welche praktische Konsequenz ergibt sich für den Administrator bei Verlust dieses individuellen Kennworts? (2 Punkte).",
+                        solution: "1. Übersetzung / Kernaussage: Die Firmware erzwingt eine strikte Richtlinie ohne Standardpasswörter. Werkseitige Zugangsdaten (wie admin/admin) sind standardmäßig deaktiviert. Bei der Ersteinrichtung muss der Techniker/Administrator zwingend ein individuelles, komplexes Passwort vergeben, bevor Netzwerkdienste freigeschaltet werden.\n2. Risiken durch Standardpasswörter: 1. Automatisierte Angriffe durch IoT-Botnetze (wie Mirai), die Standard-Zugangsdaten im Netz scannen. 2. Unbefugte Einsicht in Sicherheitsaufnahmen oder Missbrauch der Kameras als Spionage-Werkzeug.\n3. Konsequenz bei Passwortverlust: Da es kein werkseitiges Hintertür- oder Standardpasswort gibt, kann das Gerät nicht einfach per Standardzugang reaktiviert werden. Es ist zwingend ein physischer Hardware-Reset (Werksreset über Reset-Taster am Gerät) mit komplettem Neueinrichtungsaufwand erforderlich."
                     }
                 ]
             },

@@ -42,7 +42,7 @@
             <span class="px-3 py-1 rounded-full text-sm font-semibold bg-sky-500/10 text-sky-600 border border-sky-500/20">
               Prüfungsvorbereitung AP1 &amp; AP2 (Kammer-Standard)
             </span>
-            <span class="text-sm font-semibold text-emerald-700">Version 2.5 (Farbtiefe, Inch/DPI, Video-Bitrate &amp; FPS)</span>
+            <span class="text-sm font-semibold text-emerald-700">Version 2.6 (Fachenglisch: Fachbegriffe, Logs &amp; Übersetzungen)</span>
           </div>
           <h1 class="text-2xl sm:text-3xl font-bold tracking-tight text-slate-900">Rechen- &amp; Einheiten-Trainer (AP1 / AP2)</h1>
           <p class="text-base text-slate-600 mt-1.5">
@@ -313,6 +313,14 @@
           </button>
           <button onclick="selectMiniTopic('uml_sequence')" class="topic-pill px-3.5 py-2 text-sm font-semibold rounded-xl border border-emerald-500 bg-emerald-50 hover:bg-emerald-100 text-emerald-900 transition-all" data-topic="uml_sequence">
             ⚡ UML: Sequenzdiagramm (Synchron, Asynchron, Return)
+          </button>
+
+          <!-- Fachenglisch (IHK-Vokabular, Logs & Übersetzungen) -->
+          <button onclick="selectMiniTopic('english_vocab')" class="topic-pill px-3.5 py-2 text-sm font-semibold rounded-xl border border-rose-400 bg-rose-50 hover:bg-rose-100 text-rose-900 transition-all" data-topic="english_vocab">
+            🇬🇧 Fachenglisch: 1. Fachbegriffe (Englisch ➔ Deutsch)
+          </button>
+          <button onclick="selectMiniTopic('english_logs')" class="topic-pill px-3.5 py-2 text-sm font-semibold rounded-xl border border-rose-400 bg-rose-50 hover:bg-rose-100 text-rose-900 transition-all" data-topic="english_logs">
+            🇬🇧 Fachenglisch: 2. Fehlermeldungen &amp; Logs
           </button>
         </div>
       </div>
@@ -1327,6 +1335,40 @@
             </div>
             <div class="text-[11px] text-fuchsia-800 pt-1">
               <strong>Farbtiefen-Tabelle:</strong> 1 Bit = Monochrom (2 Farben) | 8 Bit = 1 Byte (256 Farben) | 16 Bit = 2 Byte (High Color) | 24 Bit = 3 Byte (True Color RGB) | 32 Bit = 4 Byte (RGBA mit Transparenz).
+            </div>
+          </div>
+        </div>
+
+        <!-- TRICK 6: FACHENGLISCH (DIE WICHTIGSTEN IHK-BEGRIFFE & LOGS) -->
+        <div class="bg-white border-2 border-rose-400 rounded-2xl p-6 sm:p-7 shadow-sm space-y-4">
+          <div class="flex items-center gap-2">
+            <span class="p-2 rounded-xl bg-rose-100 text-rose-700 text-xl font-bold">🇬🇧</span>
+            <h3 class="text-lg font-bold text-slate-900">Trick 6: Fachenglisch &amp; Log-Analysen (LF 1 – LF 4)</h3>
+          </div>
+          <p class="text-sm text-slate-600 leading-relaxed">
+            In der IHK-Prüfung werden englische Datenblätter, Logs und Spezifikationen vorgelegt, die sinngemäß auf Deutsch übersetzt und erklärt werden müssen:
+          </p>
+
+          <div class="p-4 bg-rose-50 border border-rose-200 rounded-xl space-y-3 text-xs font-mono text-rose-950">
+            <div class="font-bold text-rose-900 text-sm">Häufigste IHK-Prüfungsvokabeln</div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-[11px] font-sans">
+              <div class="p-2 bg-white rounded border border-rose-200">
+                <strong>Throughput:</strong> Tatsächlicher Datendurchsatz<br>
+                <strong>Latency:</strong> Signal-/Paketverzögerung<br>
+                <strong>Redundancy:</strong> Ausfallsicherheit / Mehrfachauslegung<br>
+                <strong>Eavesdropping:</strong> Unbefugtes Abhören / Sniffing<br>
+                <strong>Failover:</strong> Automatische Ersatz-Umschaltung
+              </div>
+              <div class="p-2 bg-white rounded border border-rose-200">
+                <strong>Deprecated:</strong> Veraltet / missbilligt (bald entfernt)<br>
+                <strong>Decommissioning:</strong> Geordnete Außerbetriebnahme<br>
+                <strong>SPoF:</strong> Einzelschwachstelle (Single Point of Failure)<br>
+                <strong>Tamper-evident:</strong> Manipulationserkennend (Siegel)<br>
+                <strong>Provisioning:</strong> Bereitstellung von Ressourcen
+              </div>
+            </div>
+            <div class="p-2 bg-white rounded border border-rose-300 text-[11px]">
+              <strong>Typische Log-Fehler:</strong> <code>Connection timed out</code> = Zeitüberschreitung • <code>Permission denied</code> = Zugriff verweigert • <code>Disk quota exceeded</code> = Speicherkontingent erschöpft • <code>Connection refused</code> = Dienst lauscht nicht auf Ziel-Port • <code>Out of Memory (OOM)</code> = RAM erschöpft (Kernel beendet Prozess).
             </div>
           </div>
         </div>
@@ -5012,6 +5054,228 @@
             wofuer: sc.wofuer
           },
           explanation: `Richtig! ${sc.expl}`
+        };
+      },
+
+      // 54. FACHENGLISCH: FACHBEGRIFFE & ÜBERSETZUNG (ENGLISCH ➔ DEUTSCH)
+      english_vocab: function() {
+        const terms = [
+          {
+            en: "Throughput",
+            de: "Datendurchsatz",
+            alts: ["DURCHSATZ", "DATENDURCHSATZ", "NETTO-DURCHSATZ", "ÜBERTRAGUNGSRATE", "TRANSFERRATE"],
+            hint: "Tatsächliche Nutzdatenmenge pro Zeiteinheit (z. B. Mbit/s).",
+            expl: "<strong>Throughput (Datendurchsatz)</strong> bezeichnet die tatsächlich übertragene Nutzdatenmenge pro Zeiteinheit im Netzwerk.",
+            was: "Datendurchsatz (Throughput).",
+            warum: "Unterscheidet sich von der theoretischen Bandbreite (Bandwidth), da Protokoll-Overhead, Latenz und Paketverluste den realen Durchsatz mindern.",
+            wofuer: "IHK-Prüfungsstandard bei der Leistungsbewertung von Switches, WLAN-Access-Points und Internetanschlüssen."
+          },
+          {
+            en: "Latency",
+            de: "Latenz",
+            alts: ["LATENZ", "LATENZZEIT", "VERZÖGERUNG", "PAKETLAUFZEIT", "VERZÖGERUNGSZEIT", "PING-ZEIT"],
+            hint: "Verzögerungszeit / Signallaufzeit eines Pakets (in ms).",
+            expl: "<strong>Latency (Latenz / Verzögerungszeit)</strong> beschreibt die Dauer, die ein Datenpaket von der Quelle zum Ziel benötigt.",
+            was: "Latenz / Verzögerungszeit.",
+            warum: "Hohe Latenzzeiten führen zu spürbaren Verzögerungen bei Echtzeitanwendungen (VoIP, Videokonferenzen, Gaming), selbst wenn die Bandbreite groß ist.",
+            wofuer: "IHK-Fehlerdiagnose bei VoIP-Störungen und Cloud-Performance-Analysen."
+          },
+          {
+            en: "Redundancy",
+            de: "Redundanz",
+            alts: ["REDUNDANZ", "AUSFALLSICHERHEIT", "MEHRFACHAUSLEGUNG", "DOPPELUNG"],
+            hint: "Mehrfache Vorhaltung von Komponenten zur Ausfallsicherheit.",
+            expl: "<strong>Redundancy (Redundanz)</strong> ist das gezielte Vorhalten zusätzlicher, funktionsgleicher Komponenten (z. B. doppelte Netzteile, RAID, USV), um Ausfälle abzufedern.",
+            was: "Redundanz (Ausfallsicherheit).",
+            warum: "Fällt eine primäre Komponente aus, übernimmt die redundante Komponente ohne Betriebsunterbrechung.",
+            wofuer: "Hochverfügbarkeits-Konzepte (High Availability) und Rechenzentrums-Planung in LF 2 und LF 3."
+          },
+          {
+            en: "Deprecated",
+            de: "Veraltet",
+            alts: ["VERALTET", "MISSBILLIGT", "ÜBERHOLT", "ABGEKÜNDIGT", "DEPRECATED"],
+            hint: "Funktion/Befehl soll nicht mehr verwendet werden und wird bald entfernt.",
+            expl: "<strong>Deprecated (veraltet / missbilligt)</strong> kennzeichnet Protokolle, Befehle oder Software-APIs, die aus Sicherheits- oder Modernisierungsgründen nicht mehr genutzt werden sollten und in künftigen Versionen gelöscht werden.",
+            was: "Veraltet / missbilligt.",
+            warum: "Software-Entwickler und Administratoren werden frühzeitig gewarnt, auf moderne Nachfolgefunktionen umzustellen (z. B. TLS 1.0/1.1 oder MD5).",
+            wofuer: "Sicherheits-Audits, Migrationsprojekte und API-Lifecycle-Management."
+          },
+          {
+            en: "Decommissioning",
+            de: "Außerbetriebnahme",
+            alts: ["AUSSERBETRIEBNAHME", "AUßERBETRIEBNAHME", "STILLLEGUNG", "ABSCHALTUNG", "ENTSORGUNG"],
+            hint: "Geordnetes Abschalten, Datenlöschen und Entsorgen von Altsystemen.",
+            expl: "<strong>Decommissioning (Außerbetriebnahme / Stilllegung)</strong> beschreibt den formalen Prozess, ein IT-System sicher abzuschalten, Daten zertifiziert zu löschen und die Hardware umweltgerecht zu entsorgen.",
+            was: "Außerbetriebnahme / Stilllegung.",
+            warum: "Verhindert Sicherheitslücken durch verwaiste Server ('Zombies') und stellt DSGVO-konforme Datenvernichtung sicher.",
+            wofuer: "ITIL-Service-Transition und IT-Asset-Management (ITAM)."
+          },
+          {
+            en: "Single Point of Failure",
+            de: "Schwachstelle",
+            alts: ["SCHWACHSTELLE", "EINZELSCHWACHSTELLE", "SPOF", "EINZELNER AUSFALLPUNKT", "AUSFALLPUNKT"],
+            hint: "Einzelne Komponente, deren Ausfall das Gesamtsystem lahmlegt.",
+            expl: "Ein <strong>Single Point of Failure (SPoF / Einzelschwachstelle)</strong> ist ein Bestandteil eines Systems, dessen Versagen unweigerlich den Ausfall des Gesamtsystems zur Folge hat.",
+            was: "Einzelschwachstelle / Single Point of Failure.",
+            warum: "Zur Beseitigung eines SPoF müssen redundante Pfade oder Backup-Systeme implementiert werden.",
+            wofuer: "Risikoanalyse und BSI IT-Grundschutz (Baustein Hochverfügbarkeit)."
+          },
+          {
+            en: "Eavesdropping",
+            de: "Abhören",
+            alts: ["ABHÖREN", "ABHOEREN", "MITHÖREN", "MITHOEREN", "LAUSCHEN", "SNIFFING", "SPIONAGE"],
+            hint: "Unbefugtes Abfangen oder Mitlesen von Netzwerkdaten.",
+            expl: "<strong>Eavesdropping (Abhören / Mithören)</strong> ist ein passiver Angriff, bei dem Datenverkehr unbemerkt abgefangen und mitgelesen wird (z. B. durch Sniffer im unverschlüsselten WLAN).",
+            was: "Abhören / Sniffing.",
+            warum: "Verletzt das Schutzziel Vertraulichkeit. Abhilfe schafft durchgängige Ende-zu-Ende-Verschlüsselung (z. B. TLS, IPsec).",
+            wofuer: "Schutzbedarfsanalyse und Bedrohungsmodellierung in LF 4."
+          },
+          {
+            en: "Tamper-proof",
+            de: "Manipulationssicher",
+            alts: ["MANIPULATIONSSICHER", "MANIPULATIONSGESCHÜTZT", "FÄLSCHUNGSSICHER", "MANIPULATIONSSCHUTZ"],
+            hint: "Gegen unbefugte Eingriffe oder Veränderungen geschützt.",
+            expl: "<strong>Tamper-proof (manipulationssicher)</strong> bzw. <strong>Tamper-evident (manipulationserkennend)</strong> kennzeichnet Systeme oder Siegel, die physische oder digitale Veränderungsversuche verhindern oder unübersehbar anzeigen.",
+            was: "Manipulationssicher / Fälschungssicher.",
+            warum: "Gewährleistet das Schutzziel Integrität bei Hardware-Tokens, Smartcards und Revisions-Logs.",
+            wofuer: "Physische Sicherheit (LF 2) und Revisionssicherheit von Protokolldaten."
+          },
+          {
+            en: "Failover",
+            de: "Ausfallumschaltung",
+            alts: ["AUSFALLUMSCHALTUNG", "UMSCHALTUNG", "ERSATZUMSCHALTUNG", "NOTUMSCHALTUNG", "FAILOVER"],
+            hint: "Automatisches Umschalten auf ein redundantes Ersatzsystem bei Störung.",
+            expl: "<strong>Failover (Ausfallumschaltung)</strong> ist der automatisierte Wechsel des Betriebs auf ein Reservesystem oder einen sekundären Server bei Ausfall der primären Komponente.",
+            was: "Ausfallumschaltung / Ersatzumschaltung.",
+            warum: "Minimiert Ausfallzeiten (Downtime) und ermöglicht Hochverfügbarkeit ohne menschliches Eingreifen.",
+            wofuer: "Cluster-Konfigurationen, Routing-Protokolle (VRRP, CARP) und Datenbank-Replikation."
+          },
+          {
+            en: "Payload",
+            de: "Nutzdaten",
+            alts: ["NUTZDATEN", "NUTZLAST", "PAYLOAD"],
+            hint: "Die eigentlichen Benutzerdaten eines Pakets (ohne Header/Trailer).",
+            expl: "<strong>Payload (Nutzdaten)</strong> bezeichnet den eigentlichen Informationsgehalt eines Datenpakets, abzüglich der Transport- und Steuerdaten (Header und Trailer).",
+            was: "Nutzdaten (Payload).",
+            warum: "Im TCP/IP-Stack wird die Nutzdatenlast Schicht für Schicht gekapselt (Encapsulation).",
+            wofuer: "Protokollanalyse mit Wireshark und MTU-Berechnungen in LF 3."
+          }
+        ];
+        const sc = terms[Math.floor(Math.random() * terms.length)];
+        return {
+          topic: "english_vocab",
+          badge: "🇬🇧 Fachenglisch Vokabeln",
+          isText: true,
+          title: `Fachbegriff übersetzen: '${sc.en}'`,
+          question: `Wie lautet die korrekte deutsche Übersetzung bzw. der Fachbegriff für den englischen IT-Begriff:<br><br>` +
+            `<div class="text-center my-3"><span class="text-2xl font-black text-rose-700 bg-rose-50 border-2 border-rose-300 px-5 py-2 rounded-xl inline-block shadow-xs">${sc.en}</span></div>` +
+            `Trage die deutsche Übersetzung oder die fachliche Bedeutung ein:`,
+          unit: "Deutscher Fachbegriff",
+          expected: sc.de,
+          altExpected: sc.alts,
+          hint: sc.hint,
+          wasWarumWofuer: {
+            was: sc.was,
+            warum: sc.warum,
+            wofuer: sc.wofuer
+          },
+          explanation: `Richtig! ${sc.expl}`
+        };
+      },
+
+      // 55. FACHENGLISCH: FEHLERMELDUNGEN & SYSTEM-LOGS ANALYSIEREN
+      english_logs: function() {
+        const logs = [
+          {
+            log: "CRITICAL: Connection to 10.0.0.1:443 timed out after 30000ms",
+            expected: "Zeitüberschreitung",
+            alts: ["ZEITÜBERSCHREITUNG", "ZEITUEBERSCHREITUNG", "TIMEOUT", "VERBINDUNGSZEITÜBERSCHREITUNG", "CONNECTION TIMEOUT"],
+            cause: "Der Server oder die Firewall hat innerhalb von 30 Sekunden nicht auf die Verbindungsanfrage geantwortet.",
+            hint: "Verbindungs-Zeitüberschreitung (Timeout).",
+            was: "Zeitüberschreitung (Connection timed out).",
+            warum: "Der TCP-Syn-Handshake wurde nicht rechtzeitig mit einem SYN-ACK beantwortet (Paketverlust, Host offline oder Firewall droppt stumm).",
+            wofuer: "Netzwerk-Troubleshooting in LF 3 (Ping, Traceroute, Firewall-Prüfung)."
+          },
+          {
+            log: "ERROR: [Errno 13] Permission denied: '/var/www/uploads/avatar.png'",
+            expected: "Zugriff verweigert",
+            alts: ["ZUGRIFF VERWEIGERT", "KEINE BERECHTIGUNG", "BERECHTIGUNGSFEHLER", "PERMISSION DENIED", "ZUGRIFFSRECHT FEHLT", "KEINE RECHTE"],
+            cause: "Der Prozess (z. B. www-data) besitzt keine ausreichenden Schreib-/Leserechte auf die Zieldatei oder das Verzeichnis.",
+            hint: "Zugriff verweigert / Fehlende Dateiberechtigungen.",
+            was: "Zugriff verweigert (Permission denied).",
+            warum: "Dateisystem-Berechtigungen (chmod / chown unter Linux oder NTFS-ACLs unter Windows) untersagen dem ausführenden Benutzer den Zugriff.",
+            wofuer: "Server-Administration und Webserver-Konfiguration in LF 4."
+          },
+          {
+            log: "ERROR: Failed to write dump: Disk quota exceeded (errno 122)",
+            expected: "Speicherkontingent überschritten",
+            alts: ["SPEICHERKONTINGENT ÜBERSCHRITTEN", "KONTINGENT ÜBERSCHRITTEN", "QUOTA ÜBERSCHRITTEN", "DISK QUOTA EXCEEDED", "BENUTZERKONTINGENT ÜBERSCHRITTEN"],
+            cause: "Das zugewiesene Speicherlimit (Quota) für diesen Benutzer wurde erreicht.",
+            hint: "Speicherplatzkontingent (Disk Quota) überschritten.",
+            was: "Speicherkontingent überschritten (Disk quota exceeded).",
+            warum: "Auf der Partition kann noch freier physischer Speicherplatz sein, aber die administrative Begrenzung für den Benutzer ist erschöpft.",
+            wofuer: "Speicherplatzverwaltung, Multi-User-Systeme und Backup-Strategien."
+          },
+          {
+            log: "WARNING: Temporary failure in name resolution / Name or service not known",
+            expected: "DNS-Fehler",
+            alts: ["DNS-FEHLER", "DNS FEHLER", "NAMENSRESERVERFEHLER", "DNS-AUFLÖSUNGSFEHLER", "NAMENSBEZUG FEHLGESCHLAGEN", "NAME OR SERVICE NOT KNOWN", "DNS-PROBLEM"],
+            cause: "Der DNS-Server ist nicht erreichbar oder kann den Hostnamen nicht in eine IP-Adresse auflösen.",
+            hint: "DNS-Namensauflösungsfehler (Domain Name System).",
+            was: "DNS-Namensauflösungsfehler.",
+            warum: "Fehlende Verbindung zum konfigurierten Nameserver oder ungültiger Domainname in /etc/resolv.conf.",
+            wofuer: "Prüfungsstandardfrage zu Netzwerk-Clients und Internetzugang (LF 3)."
+          },
+          {
+            log: "FATAL: [Errno 111] Connection refused on 127.0.0.1:3306",
+            expected: "Verbindung abgelehnt",
+            alts: ["VERBINDUNG ABGELEHNT", "CONNECTION REFUSED", "PORT GESCHLOSSEN", "DIENST LÄUFT NICHT", "DIENST NICHT GESTARTET"],
+            cause: "Der Zielrechner ist erreichbar, aber auf Port 3306 (MySQL) lauscht kein aktiver Dienst.",
+            hint: "Verbindung aktiv abgelehnt (Dienst läuft nicht).",
+            was: "Verbindung abgelehnt (Connection refused).",
+            warum: "Der Zielhost sendet sofort ein TCP-RST (Reset) zurück, weil auf dem angegebenen Port kein Daemon lauscht.",
+            wofuer: "Dienstüberwachung (Systemd, Docker) und Datenbankanbindung."
+          },
+          {
+            log: "HTTP 429 Too Many Requests: Rate limit exceeded. Retry-After: 60",
+            expected: "Anfragelimit überschritten",
+            alts: ["ANFRAGELIMIT ÜBERSCHRITTEN", "RATE LIMIT EXCEEDED", "ZU VIELE ANFRAGEN", "RATE-LIMIT ÜBERSCHRITTEN", "LIMIT ERREICHT"],
+            cause: "Der Client hat in einem kurzen Zeitfenster mehr API-Aufrufe gesendet, als der Server erlaubt.",
+            hint: "Anfrage-Obergrenze (Rate Limit) überschritten (HTTP 429).",
+            was: "Anfragelimit überschritten (Rate limit exceeded).",
+            warum: "Schutzmechanismus von Web-APIs gegen Denial-of-Service (DoS) und Überlastung. Der Client muss warten (Retry-After).",
+            wofuer: "Web-Services, Cloud-APIs und REST-Schnittstellen in LF 5."
+          },
+          {
+            log: "SEC_ERROR_EXPIRED_CERTIFICATE: Peer's Certificate has expired",
+            expected: "Zertifikat abgelaufen",
+            alts: ["ZERTIFIKAT ABGELAUFEN", "SSL-ZERTIFIKAT ABGELAUFEN", "TLS-ZERTIFIKAT ABGELAUFEN", "EXPIRED CERTIFICATE", "ZERTIFIKATSABLAUF"],
+            cause: "Das TLS/SSL-Sicherheitszertifikat des Webservers hat sein Gültigkeitsdatum überschritten.",
+            hint: "TLS/SSL-Zertifikat ist abgelaufen.",
+            was: "Zertifikat abgelaufen (Certificate expired).",
+            warum: "Jedes Zertifikat besitzt ein festes Ablaufdatum ('Valid To'). Nach Ablauf stufen Browser die Verbindung als unsicher ein.",
+            wofuer: "PKI-Zertifikatsverwaltung und HTTPS-Sicherheit in LF 4."
+          }
+        ];
+        const sc = logs[Math.floor(Math.random() * logs.length)];
+        return {
+          topic: "english_logs",
+          badge: "🇬🇧 Fachenglisch Logs",
+          isText: true,
+          title: "Logfile-Fehlermeldung analysieren & übersetzen",
+          question: `In einem englischsprachigen Server-Logfile finden Sie folgenden Fehlereintrag:<br><br>` +
+            `<pre class="bg-slate-900 text-rose-300 p-3 rounded-xl font-mono text-xs overflow-x-auto border border-slate-700 shadow-inner">${sc.log}</pre><br>` +
+            `Was ist die <strong>deutsche Bezeichnung des Fehlers</strong> bzw. was bedeutet diese Meldung sinngemäß?`,
+          unit: "Fehlerursache auf Deutsch",
+          expected: sc.expected,
+          altExpected: sc.alts,
+          hint: sc.hint,
+          wasWarumWofuer: {
+            was: sc.was,
+            warum: sc.warum,
+            wofuer: sc.wofuer
+          },
+          explanation: `Richtig! ${sc.cause}`
         };
       }
     };

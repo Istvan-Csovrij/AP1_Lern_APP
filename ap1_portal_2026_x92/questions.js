@@ -13965,5 +13965,264 @@ Welche Aussage über Voraussetzungen und Effizienz ist fachlich korrekt?`,
         correctAnswer: 0,
         solutionDiagramSvg: VisualDiagrams.getAlgorithmPatternsSvg(),
         explanation: "Binäre Suche: Benötigt sortierte Daten, teilt den Bereich schrittweise durch 2 -> log2(1.000.000) ≈ 19,93 -> maximal 20 Schritte im Worst Case!"
+    },
+    {
+        id: 586,
+        isHard: true,
+        difficulty: "hard",
+        theme: "lf3",
+        isBawueFocus: true,
+        topic: "🇬🇧 Fachenglisch: Analyse eines englischen Switch-Datenblatts (Datasheet Comprehension)",
+        type: "open-text",
+        title: "Fachenglisch: Analyse eines technischen Datenblatts (PoE+ Switch & SFP+ Uplinks)",
+        question: `Ein Netzwerkadministrator wählt für ein neues Firmengebäude einen Switch aus und analysiert das englischsprachige Original-Datenblatt:
+
+\`\`\`text
+Model: Enterprise-Edge 24P-PoE
+- Switching Capacity: 128 Gbps
+- Forwarding Rate: 95.23 Mpps (64-byte packets)
+- Port Density: 24x 10/100/1000BASE-T PoE+ (IEEE 802.3at, max 30.0 W per port, power budget: 370 W)
+- Uplink Interfaces: 4x 10G SFP+ slots
+- Mean Time Between Failures (MTBF): 185,000 hours at 25 °C
+- Features: Port Isolation, 802.1Q VLAN Tagging (up to 4094 VLANs), Jumbo Frame support (up to 9216 bytes)
+- Power Supply: Redundant dual hot-swappable AC power supplies
+\`\`\`
+
+Beantworten Sie folgende IHK-Prüfungsfragen auf Deutsch:
+
+1. **Übersetzung von Fachbegriffen (4 Punkte):**
+   Übersetzen und erklären Sie folgende vier englische Fachbegriffe aus dem Datenblatt ins Deutsche:
+   a) *Port Density*
+   b) *Forwarding Rate*
+   c) *Mean Time Between Failures (MTBF)*
+   d) *Hot-swappable*
+
+2. **PoE-Leistungsbudget prüfen (4 Punkte):**
+   Die Planung sieht vor, an 14 Ports jeweils eine PTZ-Kamera mit maximaler PoE+ Leistungsaufnahme (25,5 W am Endgerät) anzuschließen.
+   Berechnen Sie den Gesamtleistungsbedarf und beurteilen Sie anhand des *power budget* (370 W), ob der Switch ausreicht.
+
+3. **Sicherheitsfeature: Port Isolation (3 Punkte):**
+   Erklären Sie auf Deutsch den Zweck von *Port Isolation* in einem Gäste-WLAN bzw. IoT-Netzwerk.
+
+4. **Netzwerkoptimierung: Jumbo Frames (4 Punkte):**
+   Was versteht man unter *Jumbo Frames* (9216 Bytes) und welchen Vorteil bieten sie bei Backups und SAN-Speichern gegenüber Standard-Ethernet-Frames (1518 Bytes)?`,
+        musterloesung: `1. Übersetzung & Erklärung der Fachbegriffe (4 Punkte):
+a) Port Density (Portdichte): Die Anzahl der physisch zur Verfügung stehenden Netzwerkanschlüsse pro Höheneinheit (hier 24 Gigabit-Kupferports).
+b) Forwarding Rate (Weiterleitungsrate): Die Anzahl der Datenpakete, die der Switch pro Sekunde verarbeiten und weiterleiten kann (hier 95,23 Millionen Pakete pro Sekunde bei 64-Byte-Paketen).
+c) Mean Time Between Failures / MTBF (Mittlere Betriebsdauer zwischen Ausfällen): Die statistische Zuverlässigkeitskennzahl für die durchschnittliche störungsfreie Betriebszeit der Hardware (hier 185.000 Stunden ≈ ca. 21 Jahre bei 25 °C).
+d) Hot-swappable (im laufenden Betrieb austauschbar): Netzteile oder Module können bei einem Defekt im laufenden Serverbetrieb ohne Abschalten oder Neustart des Switches ausgetauscht werden.
+
+2. PoE-Leistungsbudget (4 Punkte):
+- Leistungsbedarf: 14 Kameras * 25,5 W = 357 W.
+- Beurteilung: Das Gesamt-PoE-Budget des Switches beträgt 370 W.
+- Da 357 W <= 370 W ist, reicht das Budget knapp aus (370 W - 357 W = 13 W Reserve). Hinweis: Werden Leitungsverluste oder Kabelwiderstände (bis zu 30 W Portleistung) eingerechnet (14 * 30 W = 420 W), wäre das Budget überlastet.
+
+3. Port Isolation (3 Punkte):
+- Zweck: Verhindert die direkte Kommunikation zwischen Geräten, die am selben Switch im selben VLAN angeschlossen sind (Client Isolation / Private VLAN).
+- Nutzen: Schützt Gäste oder IoT-Sensoren davor, sich gegenseitig anzugreifen oder Datenverkehr mitzulauschen; Datenpakete dürfen nur zum Uplink-Router/Gateway weitergeleitet werden.
+
+4. Jumbo Frames (4 Punkte):
+- Definition: Ethernet-Frames mit einer Nutzlast (MTU) von deutlich mehr als 1500 Bytes (hier bis zu 9216 Bytes gegenüber Standard-Frames mit 1518 Bytes Gesamtgröße).
+- Vorteil: Deutlich verringerter Protokoll-Overhead (weniger Header-Daten) und massive Entlastung der CPU bei Speicher- und Backup-Transfers (z. B. iSCSI, NFS), da für dieselbe Datenmenge ca. sechsmal weniger Einzelpakete verarbeitet und bestätigt werden müssen.`,
+        correctAnswer: `1. Übersetzung & Erklärung der Fachbegriffe:
+a) Port Density (Portdichte): 24 Ports auf 1 HE.
+b) Forwarding Rate: Weiterleitungsrate in Paketen/Sekunde (95,23 Mpps).
+c) MTBF: Mittlere Zeit zwischen Ausfällen (185.000 Std.).
+d) Hot-swappable: Austausch im laufenden Betrieb ohne Neustart.
+
+2. PoE-Leistungsbudget:
+14 * 25,5 W = 357 W. Bei 370 W Budget reicht es knapp für die Kameras aus.
+
+3. Port Isolation:
+Unterbindet Kommunikation zwischen Clients im selben Subnetz (z.B. Gäste-WLAN, IoT).
+
+4. Jumbo Frames:
+Größere MTU (bis 9216 Byte). Reduziert CPU-Last und Header-Overhead bei großen Datenmengen (SAN/NAS/Backup).`,
+        explanation: "Fachenglische Datenblätter (Datasheets) mit MTBF, PoE-Budgets, Forwarding Rates und Port Isolation sind typische IHK-Prüfungsinhalte in Baden-Württemberg und bundesweit.",
+        points: 15
+    },
+    {
+        id: 587,
+        isHard: true,
+        difficulty: "hard",
+        theme: "lf4",
+        isBawueFocus: true,
+        topic: "🇬🇧 Fachenglisch: Technische Fehleranalyse & Incident Response (Crash Dump & Logs)",
+        type: "open-text",
+        title: "Fachenglisch: Fehlerdiagnose anhand englischer System-Logs (OOM, Quota, Connection Refused)",
+        question: `Ein Web- und Datenbanksystem meldet einen plötzlichen Dienstausfall. Im englischsprachigen Incident-Management-System und in den Systemprotokollen finden Sie folgende Auszüge:
+
+\`\`\`text
+Log-Auszug A (/var/log/syslog):
+kernel: Out of Memory: Kill process 2841 (mysqld) score 852 or sacrifice child
+kernel: Killed process 2841 (mysqld) total-vm:8342152kB, anon-rss:6291456kB, file-rss:0kB
+
+Log-Auszug B (/var/log/nginx/error.log):
+web-app[3120]: CRITICAL: Database connection failed: [Errno 111] Connection refused to 127.0.0.1:3306
+web-app[3120]: HTTP 500 Internal Server Error returned to client 192.168.1.50
+
+Log-Auszug C (/var/log/cron.log):
+backup-daemon[4510]: ERROR: Failed to write daily dump to /mnt/backup/db_daily.sql.gz: Disk quota exceeded (errno 122)
+\`\`\`
+
+Beantworten Sie folgende IHK-Fragen auf Deutsch:
+
+1. **Analyse Log-Auszug A (OOM Killer) (4 Punkte):**
+   Übersetzen Sie die Kernaussage von Auszug A ins Deutsche. Was ist der Linux *OOM Killer (Out of Memory)* und warum hat das Betriebssystem den Prozess \`mysqld\` zwangsweise beendet?
+
+2. **Kausalzusammenhang zu Log-Auszug B (4 Punkte):**
+   Erklären Sie den direkten technischen Zusammenhang zwischen dem Ereignis in Auszug A und der Fehlermeldung \`[Errno 111] Connection refused to 127.0.0.1:3306\` in Auszug B.
+
+3. **Übersetzung & Abgrenzung Log-Auszug C (4 Punkte):**
+   Übersetzen Sie die Meldung \`Disk quota exceeded (errno 122)\` ins Deutsche und erklären Sie den Unterschied zu der Fehlermeldung \`No space left on device\`.
+
+4. **Nachhaltige Abhilfemaßnahmen (3 Punkte):**
+   Nennen Sie jeweils eine geeignete Maßnahme, um den Speicherengpass aus Auszug A und den Fehler aus Auszug C dauerhaft zu beheben.`,
+        musterloesung: `1. Analyse Log-Auszug A (OOM Killer) (4 Punkte):
+- Übersetzung: "Nicht genügend Arbeitsspeicher (Out of Memory): Beende Prozess 2841 (mysqld) mit Score 852..."
+- Erklärung: Wenn dem Linux-Kernel der physische RAM und der Swap-Speicher vollständig ausgehen, greift der automatische Schutzmechanismus "OOM Killer" ein. Um einen Totalabsturz des gesamten Systems (Kernel Panic) zu verhindern, beendet der OOM Killer gezielt den Prozess, der den meisten Arbeitsspeicher belegt (höchster badness score) – hier den MySQL-Datenbankserver.
+
+2. Kausalzusammenhang zu Auszug B (4 Punkte):
+- Port 3306 ist der Standard-TCP-Port des MySQL-Datenbankdienstes.
+- Da der Prozess \`mysqld\` in Auszug A vom Kernel getötet wurde, läuft der Dienst nicht mehr und lauscht (listen) nicht mehr auf Port 3306.
+- Die Web-Applikation erhält bei ihrem Verbindungsversuch sofort die Rückmeldung \`Connection refused\` (Verbindung abgelehnt), da kein Serverprozess den TCP-Handshake annimmt. Die Web-App stürzt daraufhin mit HTTP 500 ab.
+
+3. Log-Auszug C: Disk Quota exceeded vs. No space left on device (4 Punkte):
+- Übersetzung: "Festplatten-Kontingent / Speicherplatzbegrenzung überschritten".
+- Unterschied: 
+  * "Disk quota exceeded": Für den konkreten Benutzer oder die Gruppe ist eine administrative Begrenzung (z. B. max. 50 GB) konfiguriert, die erreicht wurde, obwohl auf der physischen Festplatte noch freier Speicherplatz vorhanden sein kann.
+  * "No space left on device": Die physische Partition oder Festplatte ist hardwareseitig zu 100 % voll.
+
+4. Nachhaltige Abhilfemaßnahmen (3 Punkte):
+- Für Auszug A (RAM-Mangel): 
+  1. MySQL-Puffer (z. B. \`innodb_buffer_pool_size\`) im Config-File begrenzen, damit MySQL nicht den gesamten RAM reserviert.
+  2. Physischen Arbeitsspeicher (RAM) des Servers erweitern oder Swap-Speicher vergrößern.
+- Für Auszug C (Quota):
+  1. Speicher-Quota für den Backup-Benutzer im System erhöhen (z. B. via \`edquota\`).
+  2. Altes Backup-Rotationsverfahren einrichten (z. B. Dumps nach 7 Tagen automatisch löschen).`,
+        correctAnswer: `1. OOM Killer:
+Kernel beendet mysqld wegen RAM-Vollbelegung (Out of Memory), um Systemabsturz zu verhindern.
+
+2. Connection refused (Port 3306):
+Da mysqld getötet wurde, lauscht kein Prozess mehr auf Port 3306. Webanwendung kann DB nicht erreichen.
+
+3. Disk quota exceeded vs. No space left:
+Disk quota = Benutzerkontingent erschöpft (Partition hat evtl. noch Platz).
+No space left = Physische Festplatte/Partition ist zu 100 % voll.
+
+4. Maßnahmen:
+Auszug A: RAM aufrüsten / innodb_buffer_pool_size drosseln.
+Auszug C: Quota erhöhen / automatische Bereinigung alter Backups (Logrotation).`,
+        explanation: "Das Verstehen englischer System-Logs, Return-Codes (Errno 111, Errno 122) und Linux-Fehlermeldungen gehört zu den Standardaufgaben von Fachinformatikern.",
+        points: 15
+    },
+    {
+        id: 588,
+        isHard: true,
+        difficulty: "hard",
+        theme: "lf1",
+        isBawueFocus: true,
+        topic: "🇬🇧 Fachenglisch: Service Level Agreement (SLA) & Software-Lizenzbedingungen",
+        type: "open-text",
+        title: "Fachenglisch: Analyse von Service Level Agreements (SLA) & Open-Source-Lizenzen (GPLv3)",
+        question: `Ein IT-Dienstleister verhandelt für seinen Kunden einen Cloud-Datenbankvertrag und prüft die englischsprachigen Lizenz- und Service-Level-Bedingungen:
+
+\`\`\`text
+Section 4.1 Service Availability & SLA:
+"Provider guarantees a Monthly Uptime Percentage of at least 99.9% for the production database cluster, excluding Scheduled Maintenance Windows announced at least 48 hours in advance.
+- Recovery Time Objective (RTO): 2 hours.
+- Recovery Point Objective (RPO): 15 minutes."
+
+Section 8.3 Open Source Compliance & Licensing:
+"The platform incorporates components licensed under the GNU General Public License version 3 (GPLv3). If the licensee distributes or conveys a modified derivative work based on these components, the complete corresponding source code must be made available to recipients under the terms of this license without additional restrictions ('Copyleft principle')."
+\`\`\`
+
+Beantworten Sie folgende IHK-Prüfungsfragen auf Deutsch:
+
+1. **RTO vs. RPO (4 Punkte):**
+   Übersetzen und erklären Sie den Unterschied zwischen **RTO (Recovery Time Objective)** und **RPO (Recovery Point Objective)** im Notfallkonzept.
+
+2. **Downtime-Berechnung (4 Punkte):**
+   Berechnen Sie für einen Kalendermonat mit genau 30 Tagen (720 Stunden) die maximal zulässige ungeplante Ausfallzeit (Downtime) in **Minuten** bei einer vertraglichen Verfügbarkeit von 99,9 %.
+
+3. **GPLv3 Copyleft-Prinzip (4 Punkte):**
+   Erklären Sie auf Deutsch, was das sogenannte **Copyleft-Prinzip** der GPLv3 für ein Unternehmen bedeutet, das den Quellcode modifiziert und an Kunden ausliefert.
+
+4. **Wartungsfenster 'Scheduled Maintenance' (3 Punkte):**
+   Welche praktische Auswirkung hat die Formulierung *'excluding Scheduled Maintenance Windows'* auf die tatsächliche Nicht-Erreichbarkeit des Systems für Endnutzer?`,
+        musterloesung: `1. RTO vs. RPO (4 Punkte):
+- RTO (Recovery Time Objective / Wiederherstellungszeit): Die maximal tolerierbare Zeitspanne, die nach einem Schadenseintrag vergehen darf, bis die IT-Dienste wieder betriebsbereit und funktionsfähig sind (hier: max. 2 Stunden).
+- RPO (Recovery Point Objective / Wiederherstellungspunkt): Der maximal tolerierbare Datenverlust, ausgedrückt als Zeitspanne zwischen dem letzten konsistenten Backup/Datenstand und dem Ausfallzeitpunkt (hier: max. 15 Minuten Datenverlust).
+
+2. Berechnung der Ausfallzeit (Downtime) bei 99,9 % (4 Punkte):
+- Gesamte Monatsminuten: 30 Tage * 24 Stunden/Tag * 60 Minuten/Stunde = 43.200 Minuten.
+- Erlaubte Ausfallquote: 100 % - 99,9 % = 0,1 % = 0,001.
+- Maximale Ausfallzeit: 43.200 Minuten * 0,001 = 43,2 Minuten pro Monat (bzw. 43 Minuten und 12 Sekunden).
+
+3. Copyleft-Prinzip der GPLv3 (4 Punkte):
+- Definition: Das "Virale Prinzip" von Lizenzen wie der GPLv3.
+- Konsequenz: Wer eine unter der GPLv3 stehende Software modifiziert und das resultierende Produkt (Derivative Work) weiterverbreitet (distributes/conveys), ist rechtlich verpflichtet, den vollständigen Quellcode der eigenen Änderungen ebenfalls unter der freien GPLv3-Lizenz offenzulegen. Proprietäre Geheimhaltung des Codes ist in diesem Fall unzulässig.
+
+4. Scheduled Maintenance Windows (3 Punkte):
+- Bedeutung: Geplante, vorab angekündigte Wartungszeiten (z. B. Sonntag nachts für Server-Updates) zählen vertraglich NICHT als Ausfallzeit (Downtime).
+- Auswirkung: Das System kann für Nutzer faktisch mehrere Stunden im Monat nicht erreichbar sein, ohne dass der Cloud-Provider gegen das SLA von 99,9 % verstößt oder Strafzahlungen (Service Credits) leisten muss.`,
+        correctAnswer: `1. RTO & RPO:
+- RTO = Maximale Wiederherstellungszeit bis zur Wiederinbetriebnahme (2 Std.).
+- RPO = Maximaler tolerierter Datenverlust im Katastrophenfall (15 Min.).
+
+2. Ausfallzeit bei 99,9 %:
+30 Tage * 24 h * 60 min = 43.200 min.
+43.200 min * 0,1 % = 43,2 Minuten Downtime pro Monat.
+
+3. Copyleft der GPLv3:
+Weitergabe modifizierter Software verpflichtet zur Offenlegung des eigenen Quellcodes unter identischer Lizenz.
+
+4. Scheduled Maintenance:
+Geplante Wartungsfenster werden aus der SLA-Berechnung herausgerechnet (keine Vertragsstrafe bei Nichtverfügbarkeit).`,
+        explanation: "SLA-Berechnungen (Downtime in Minuten), RTO/RPO und Open-Source-Lizenzrecht (Copyleft, GPL) gehören zu den Kerninhalten von LF 1 und LF 4.",
+        points: 15
+    },
+    {
+        id: 589,
+        isHard: false,
+        difficulty: "standard",
+        theme: "lf3",
+        isBawueFocus: true,
+        topic: "🇬🇧 Fachenglisch IHK-Glossar: Fachbegriffe-Übersetzung (Netzwerk & Performance)",
+        type: "multiple-choice",
+        question: `In englischsprachigen IT-Spezifikationen tauchen regelmäßig grundlegende Fachbegriffe auf.
+
+Welche Auswahl ordnet die vier Begriffe **Throughput**, **Latency**, **Redundancy** und **Eavesdropping** fachlich und übersetzungstechnisch korrekt zu?`,
+        options: [
+            "Throughput = Tatsächlicher Datendurchsatz; Latency = Signal-/Paketverzögerung; Redundancy = Mehrfachauslegung zur Ausfallsicherheit; Eavesdropping = Unbefugtes Abhören/Mithören von Netzwerkverkehr.",
+            "Throughput = Übertragungsabbruch; Latency = Bandbreiten-Obergrenze; Redundancy = Datenkompression; Eavesdropping = Blockierung durch Paketfilter.",
+            "Throughput = Taktfrequenz des Prozessors; Latency = Anzahl der Signalverstärker; Redundancy = Backup-Archivierung auf Band; Eavesdropping = DNS-Auflösung.",
+            "Throughput = Festplatten-Drehzahl; Latency = Speicherkapazität; Redundancy = Datenlöschung; Eavesdropping = Vergabe von IP-Adressen via DHCP."
+        ],
+        correctAnswer: 0,
+        solutionDiagramSvg: VisualDiagrams.getNetworkTopologySvg(),
+        explanation: "Throughput (Durchsatz), Latency (Latenz), Redundancy (Redundanz) und Eavesdropping (Abhören/Sniffing) sind absolute IHK-Grundbegriffe im Fachenglisch."
+    },
+    {
+        id: 590,
+        isHard: false,
+        difficulty: "standard",
+        theme: "lf2",
+        isBawueFocus: true,
+        topic: "🇬🇧 Fachenglisch IHK-Glossar: Fachbegriffe-Übersetzung (Lifecycle, Security & System)",
+        type: "multiple-choice",
+        question: `In einem englischsprachigen IT-Handbuch lesen Sie:
+'The legacy authentication method is **deprecated** and scheduled for **decommissioning**. It introduces a **Single Point of Failure (SPoF)** and lacks **tamper-evident** logging.'
+
+Welche Übersetzung gibt die Bedeutung aller vier Begriffe korrekt wieder?`,
+        options: [
+            "deprecated = Veraltet/missbilligt (soll nicht mehr verwendet werden); decommissioning = Geordnete Außerbetriebnahme; Single Point of Failure = Einzelne Schwachstelle (Ausfall legt Gesamtsystem lahm); tamper-evident = Manipulationserkennend (Eingriffe hinterlassen Spuren).",
+            "deprecated = Streng vertraulich; decommissioning = Automatische Softwareverteilung; Single Point of Failure = Höchste Redundanzstufe; tamper-evident = Wasserdichtes Gehäuse.",
+            "deprecated = Neu freigegeben; decommissioning = Inbetriebnahme beim Kunden; Single Point of Failure = Zentrale Firewall; tamper-evident = Virengeschützt.",
+            "deprecated = Kostenpflichtig lizenziert; decommissioning = Einspielen von Updates; Single Point of Failure = Multipath-Routing; tamper-evident = Passwortgeschützt."
+        ],
+        correctAnswer: 0,
+        solutionDiagramSvg: VisualDiagrams.getNetworkTopologySvg(),
+        explanation: "Deprecated (veraltet), Decommissioning (Außerbetriebnahme), SPoF (Schwachstelle) und Tamper-evident (manipulationserkennend) sind fundamentale Fachbegriffe in Sicherheitsrichtlinien."
     }
 ];
