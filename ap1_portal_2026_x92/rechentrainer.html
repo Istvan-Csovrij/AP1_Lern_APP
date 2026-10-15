@@ -5858,6 +5858,44 @@
       if (barPrefix) barPrefix.innerHTML = `Routing-Präfix (/${base})<br><span class="text-[10px] text-blue-200 font-normal">${base} Bit</span>`;
       if (barSubnet) barSubnet.innerHTML = `Subnetz-ID<br><span class="text-[10px] text-emerald-200 font-normal">${subnetBits} Bit</span>`;
       if (barHost) barHost.innerHTML = `Interface-ID<br><span class="text-[10px] text-purple-200 font-normal">${hostBits} Bit</span>`;
+
+      const exEl = document.getElementById('ipv6-subnet-examples');
+      if (exEl) {
+        if (base === 48 && target === 64) {
+          exEl.innerHTML = `
+            <strong>IHK-Subnetz-Beispiele (/48 in /64 - Havelholz GmbH):</strong><br>
+            • 1. Subnetz: <code>2001:db8:4a00:<strong>0</strong>::/64</code> (bzw. <code>2001:db8:4a00::/64</code>)<br>
+            • 2. Subnetz: <code>2001:db8:4a00:<strong>1</strong>::/64</code><br>
+            • 3. Subnetz: <code>2001:db8:4a00:<strong>2</strong>::/64</code><br>
+            • Letztes Subnetz: <code>2001:db8:4a00:<strong>ffff</strong>::/64</code><br>
+            <span class="text-emerald-300 text-[11px]">💡 Die ersten drei Blöcke (2001:db8:4a00) bleiben fest! Bei /64 gehört auch das vierte Hextet vollständig zum Netzpräfix dazu.</span>
+          `;
+        } else if (base === 48 && target === 56) {
+          exEl.innerHTML = `
+            <strong>IHK-Standort-Beispiele (/48 in /56 Standorte - Havelholz GmbH):</strong><br>
+            • 1. Standort: <code>2001:db8:4a00:<strong>0</strong>::/56</code> (oder <code>2001:db8:4a00::/56</code>)<br>
+            • 2. Standort: <code class="text-amber-300 font-bold">2001:db8:4a00:100::/56</code> (⚠️ WARUM 100? Weil 8 Bits im 4. Block = 0100 hex, gekürzt 100!)<br>
+            • 3. Standort: <code>2001:db8:4a00:<strong>200</strong>::/56</code><br>
+            • Letzter (256.) Standort: <code>2001:db8:4a00:<strong>ff00</strong>::/56</code><br>
+            <span class="text-amber-200 text-[11px]">💡 56 - 48 = 8 Bits (= 2 Hex-Ziffern). Das 4. Hextet zählt in 100er-Schritten hoch: 0000, 0100 (100), 0200 (200), ... bis ff00!</span>
+          `;
+        } else if (base === 48 && target === 52) {
+          exEl.innerHTML = `
+            <strong>IHK-Standort-Beispiele (/48 in /52 Standorte):</strong><br>
+            • 1. Standort: <code>2001:db8:4a00:<strong>0</strong>::/52</code><br>
+            • 2. Standort: <code class="text-amber-300 font-bold">2001:db8:4a00:1000::/52</code> (⚠️ WARUM 1000? Weil 4 Bits = 1 Hex-Ziffer = 1000 hex!)<br>
+            • 3. Standort: <code>2001:db8:4a00:<strong>2000</strong>::/52</code><br>
+            • Letzter (16.) Standort: <code>2001:db8:4a00:<strong>f000</strong>::/52</code><br>
+            <span class="text-amber-200 text-[11px]">💡 52 - 48 = 4 Bits (= 1 Hex-Ziffer/Nibble). Schrittweite 1000 hex: 0000, 1000, 2000, ... bis f000!</span>
+          `;
+        } else {
+          exEl.innerHTML = `
+            <strong>Subnetz-Beispiele (/${base} in /${target}):</strong><br>
+            • 1. Subnetz: <code>2001:db8:4a00::/${target}</code><br>
+            • Gesamt: <strong>${subnets.toLocaleString('de-DE')}</strong> Subnetze mit je <strong>${resHosts ? resHosts.innerText : ''}</strong> Adressen.
+          `;
+        }
+      }
     }
 
     // =========================================================================

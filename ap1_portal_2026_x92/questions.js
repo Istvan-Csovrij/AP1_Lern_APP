@@ -15862,5 +15862,186 @@ c) Behebung:
         solutionDiagramSvg: VisualDiagrams.getAddressClassificationDiagramSvg(),
         explanation: "169.254.0.0/16 signalisiert immer: DHCP fehlgeschlagen. Der Rechner kann nur noch andere Rechner im selben physischen Switch-Segment erreichen, die ebenfalls APIPA nutzen.",
         points: 6
+    },
+    {
+        id: 623,
+        isHard: true,
+        difficulty: "standard",
+        theme: "subnetting",
+        isSubnetting: true,
+        isBawueFocus: true,
+        isItArbeitsplatz: true,
+        topic: "🌐 Aufgabe 8: IPv6-Subnetting (/48 Basisnetz in /64 Subnetze & /56 Standorte)",
+        type: "open-text",
+        title: "Aufgabe 8: IPv6-Subnetting (6 Punkte)",
+        question: `**Aufgabe 8: IPv6-Subnetting (6 Punkte)**
+
+Die Havelholz GmbH erhält vom Provider das Präfix \`2001:db8:4a00::/48\`.
+
+Bearbeiten Sie die Teilaufgaben:
+
+**a) /64-Subnetze (2 Punkte):**
+Wie viele **/64-Subnetze** sind aus diesem /48-Zuweisungspräfix insgesamt möglich?
+*(Geben Sie Ihre Rechnung mit Bit-Differenz und Zweierpotenz an)*
+
+**b) Erste drei /64-Subnetze (2 Punkte):**
+Nennen Sie die **ersten drei /64-Subnetze** der Havelholz GmbH.
+*(Beachten Sie die IHK-Regel: Die ersten drei Blöcke bleiben fest; bei /64 gehört der vierte Block vollständig zum Netzpräfix dazu!)*
+
+**c) Standort-Aufteilung in /56 (2 Punkte):**
+Jeder Unternehmensstandort soll ein **/56-Präfix** erhalten.
+1. Wie viele **Standorte** sind möglich?
+2. Wie lautet das **vollständige Präfix des zweiten Standorts**?
+
+---
+
+**d) IHK-Transfer & Vertiefung (Zusatzpunkte zur Prüfungssicherheit):**
+1. Wie viele **/64-Subnetze** kann jeder einzelne der Standorte in seinem /56-Block einrichten?
+2. Wie lautet die **allerletzte Adresse des Blocks für den zweiten Standort**?`,
+        sampleSolution: `Musterlösung nach IHK-Standard:
+
+a) Anzahl der möglichen /64-Subnetze aus /48 (2 Punkte):
+- Bit-Differenz: 64 - 48 = 16 Subnetz-Bits.
+- Formel: 2^16 = 65.536 mögliche /64-Subnetze!
+- Rechnung: 64 - 48 = 16 -> 2^16 = 65.536 Subnetze.
+
+b) Die ersten drei /64-Subnetze (2 Punkte):
+Da ein /48-Präfix aus den ersten 3 Hextets (3 * 16 = 48 Bit) besteht (2001:db8:4a00), ist das vierte Hextet die 16-Bit-Subnetz-ID. Es zählt ab 0 hoch:
+1. Subnetz: 2001:db8:4a00:0::/64 (bzw. 2001:db8:4a00::/64 nach RFC 5952)
+2. Subnetz: 2001:db8:4a00:1::/64
+3. Subnetz: 2001:db8:4a00:2::/64
+(Hinweis: Die ersten drei Blöcke '2001:db8:4a00' bleiben unverändert fest!).
+
+c) Aufteilung in /56-Standortblöcke (2 Punkte):
+1. Anzahl möglicher Standorte:
+   - Bit-Differenz: 56 - 48 = 8 Subnetz-Bits für Standorte.
+   - 2^8 = 256 verschiedene Standorte möglich!
+2. Präfix des zweiten Standorts:
+   - 8 Bits entsprechen genau 2 Hex-Ziffern im 4. Block (16 Bit).
+   - Die Bits 49–56 sind die vorderen beiden Ziffern des vierten Hextets:
+     • 1. Standort (Index 0 = 00 hex): 2001:db8:4a00:0000::/56 -> gekürzt: 2001:db8:4a00::/56 (oder 2001:db8:4a00:0::/56)
+     • 2. Standort (Index 1 = 01 hex): Die vorderen 8 Bits sind 01, die hinteren 8 Bits bleiben 00 -> hexadezimal: 0100.
+       Nach RFC 5952 entfällt die führende Null -> 100!
+       -> Präfix des 2. Standorts: 2001:db8:4a00:100::/56!
+     • 3. Standort (Index 2 = 02 hex): 0200 -> 2001:db8:4a00:200::/56
+     • 4. Standort (Index 3 = 03 hex): 0300 -> 2001:db8:4a00:300::/56
+
+d) Transfer & Vertiefung:
+1. Anzahl /64-Subnetze je /56-Standort:
+   - Bit-Differenz: 64 - 56 = 8 Bits -> 2^8 = 256 eigenständige /64-Subnetze je Standort!
+   - Kontrolle: 256 Standorte * 256 Subnetze = 65.536 Subnetze (= 2^16).
+2. Letzte Adresse für Standort 2 (2001:db8:4a00:100::/56):
+   - Im 4. Block sind die vorderen 8 Bits fest '01', die hinteren 8 Bits laufen von '00' bis 'ff' -> 01ff (gekürzt: 1ff).
+   - Die restlichen 64 Host-Bits stehen auf ffff:ffff:ffff:ffff:
+   -> Letzte Adresse: 2001:db8:4a00:1ff:ffff:ffff:ffff:ffff`,
+        correctAnswer: `a) 64 - 48 = 16 Bits -> 2^16 = 65.536 Subnetze.
+b) 1. 2001:db8:4a00:0::/64 (oder 2001:db8:4a00::/64)
+   2. 2001:db8:4a00:1::/64
+   3. 2001:db8:4a00:2::/64
+c) 1. 56 - 48 = 8 Bits -> 2^8 = 256 Standorte.
+   2. Präfix des 2. Standorts: 2001:db8:4a00:100::/56 (weil 0100 hex = 100).
+d) 1. 2^(64-56) = 2^8 = 256 /64-Subnetze je Standort.
+   2. Letzte Adresse: 2001:db8:4a00:1ff:ffff:ffff:ffff:ffff`,
+        solutionDiagramSvg: VisualDiagrams.getIpv6SubnettingDiagramSvg ? VisualDiagrams.getIpv6SubnettingDiagramSvg() : "",
+        explanation: "WARUM '100::/56'? Weil /56 nach 8 Bits des vierten Hextets teilt. Der Index 1 ergibt binär 0000 0001 gefolgt von acht Nullen 0000 0000 = hex 0100. Führende Null weggelassen = 100!",
+        points: 6
+    },
+    {
+        id: 624,
+        isHard: false,
+        difficulty: "standard",
+        theme: "subnetting",
+        isSubnetting: true,
+        isBawueFocus: true,
+        topic: "🌐 IHK Multiple-Choice: IPv6 /56-Standortpräfix & Hex-Nibble-Schrittweite",
+        type: "multiple-choice",
+        question: `Die Havelholz GmbH erhält das Provider-Präfix \`2001:db8:4a00::/48\` und teilt es für ihre Niederlassungen in **/56-Blöcke** auf.
+
+Wie lautet das offizielle Präfix für den **zweiten Standort** nach RFC 5952 Kürzungsregeln und warum?`,
+        options: [
+            "2001:db8:4a00:100::/56 (Die 8 Subnetzbits belegen die ersten beiden Hex-Ziffern des vierten Hextets; 01 gefolgt von 00 ergibt 0100 hex, gekürzt 100)",
+            "2001:db8:4a00:1::/56 (Die Zahl 1 wird einfach in den vierten Block geschrieben)",
+            "2001:db8:4a01::/56 (Die Zahl 1 wird in das dritte Hextet anstelle von 4a00 eingetragen)",
+            "2001:db8:4a00:0056::/56 (Die Zahl 56 der Präfixlänge wird als Hextet notiert)"
+        ],
+        correctAnswer: 0,
+        solutionDiagramSvg: VisualDiagrams.getIpv6SubnettingDiagramSvg ? VisualDiagrams.getIpv6SubnettingDiagramSvg() : "",
+        explanation: "Typische IHK-Prüfungsfalle: /56 bedeutet, dass 8 Bits (2 Hexadezimalziffern) des 16-Bit-Blocks für die Standorte genutzt werden. Der 2. Standort hat den Zähler 1 an den Bits 49–56. Zusammen mit den verbleibenden 8 Nullen des Blocks (Bits 57–64) lautet der Block '0100' hex, gekürzt '100'."
+    },
+    {
+        id: 625,
+        isHard: false,
+        difficulty: "standard",
+        theme: "subnetting",
+        isSubnetting: true,
+        isBawueFocus: true,
+        topic: "🌐 IHK Multiple-Choice: IPv6 /48 Präfix zu /64 LAN-Subnetzen (Formel: 2^Δ)",
+        type: "multiple-choice",
+        question: `Ein Internet-Service-Provider (ISP) weist einem Firmenkunden das Basisnetz \`2001:db8:4a00::/48\` zu. Das Unternehmen möchte ausschließlich standardkonforme **/64-Subnetze** für seine Endgeräte-VLANs nutzen.
+
+Wie viele **/64-Subnetze** können maximal gebildet werden?`,
+        options: [
+            "65.536 Subnetze (Differenz: 64 - 48 = 16 Bits -> 2^16 = 65.536)",
+            "256 Subnetze (Differenz: 64 - 56 = 8 Bits -> 2^8 = 256)",
+            "4.096 Subnetze (Differenz: 64 - 52 = 12 Bits -> 2^12 = 4.096)",
+            "16 Subnetze (Differenz: 52 - 48 = 4 Bits -> 2^4 = 16)"
+        ],
+        correctAnswer: 0,
+        solutionDiagramSvg: VisualDiagrams.getIpv6SubnettingDiagramSvg ? VisualDiagrams.getIpv6SubnettingDiagramSvg() : "",
+        explanation: "Formel für Subnetzmengen bei IPv6: 2^(Zielpräfix - Basispräfix) = 2^(64 - 48) = 2^16 = 65.536 Subnetze. Da bei IPv6 keine Netz- oder Broadcastadresse abgezogen wird, stehen alle 65.536 Subnetze uneingeschränkt zur Verfügung."
+    },
+    {
+        id: 626,
+        isHard: true,
+        difficulty: "hard",
+        theme: "subnetting",
+        isSubnetting: true,
+        isBawueFocus: true,
+        topic: "🌐 IPv6 Standort-Subnetting: /48 in /56 Standorte & /60 Abteilungen",
+        type: "open-text",
+        title: "IHK-Komplexaufgabe: Mehrstufige IPv6-Präfix-Hierarchie (/48 -> /56 -> /60 -> /64)",
+        question: `Ein Konzern erhält das Präfix \`2001:db8:8800::/48\`.
+Die Netzwerkarchitektur sieht eine dreistufige Hierarchie vor:
+1. Ebene: Aufteilung des /48-Netzes in **/56-Großstandorte**.
+2. Ebene: Aufteilung jedes Standorts in **/60-Abteilungsblöcke**.
+3. Ebene: Aufteilung jeder Abteilung in **/64-Endgeräte-Subnetze**.
+
+**Berechnen Sie:**
+a) Wie viele Großstandorte (/56) können gebildet werden?
+b) Wie viele Abteilungsblöcke (/60) enthält jeder einzelne Standort?
+c) Wie viele /64-Subnetze stehen jeder einzelnen Abteilung zur Verfügung?
+d) Geben Sie für Standort 3 das /56-Präfix sowie für Abteilung 2 dieses Standorts das /60-Präfix an.`,
+        sampleSolution: `Musterlösung nach IHK-Standard:
+
+a) Großstandorte (/56 aus /48):
+- 56 - 48 = 8 Bits -> 2^8 = 256 Standorte.
+
+b) Abteilungsblöcke (/60 aus /56):
+- 60 - 56 = 4 Bits (exakt 1 Nibble) -> 2^4 = 16 Abteilungen je Standort.
+
+c) /64-Subnetze je Abteilung (/64 aus /60):
+- 64 - 60 = 4 Bits (exakt 1 Nibble) -> 2^4 = 16 Subnetze je Abteilung.
+(Kontrolle: 256 Standorte * 16 Abteilungen * 16 Subnetze = 65.536 = 2^16 Subnetze).
+
+d) Präfixe für Standort 3 & Abteilung 2:
+1. Standort 3 (/56):
+   - Standort 1: 00 -> 2001:db8:8800:0000::/56 (2001:db8:8800::/56)
+   - Standort 2: 01 -> 2001:db8:8800:0100::/56 (2001:db8:8800:100::/56)
+   - Standort 3: 02 -> 2001:db8:8800:0200::/56 (2001:db8:8800:200::/56)
+   -> Präfix Standort 3: 2001:db8:8800:200::/56
+
+2. Abteilung 2 von Standort 3 (/60):
+   - Der Block 2001:db8:8800:0200::/56 hat die festen Bits 49–56 ('02').
+   - Die nächste Hex-Ziffer (Bits 57–60) bestimmt die Abteilung (0 bis f):
+     • Abteilung 1 (Index 0): 0200::/60 -> 2001:db8:8800:200::/60
+     • Abteilung 2 (Index 1): 0210::/60 -> 2001:db8:8800:210::/60
+   -> Präfix Abteilung 2: 2001:db8:8800:210::/60`,
+        correctAnswer: `a) 2^(56-48) = 2^8 = 256 Standorte.
+b) 2^(60-56) = 2^4 = 16 Abteilungsblöcke.
+c) 2^(64-60) = 2^4 = 16 /64-Subnetze.
+d) Standort 3: 2001:db8:8800:200::/56 | Abteilung 2: 2001:db8:8800:210::/60`,
+        solutionDiagramSvg: VisualDiagrams.getIpv6SubnettingDiagramSvg ? VisualDiagrams.getIpv6SubnettingDiagramSvg() : "",
+        explanation: "Hierarchisches IPv6-Subnetting: /48 -> /56 nutzt Bits 49-56 (Schrittweite 100 hex), /56 -> /60 nutzt Bits 57-60 (Schrittweite 10 hex), /60 -> /64 nutzt Bits 61-64 (Schrittweite 1 hex).",
+        points: 8
     }
 ];
