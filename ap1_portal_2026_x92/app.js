@@ -605,7 +605,7 @@ function filterQuestions(theme) {
                     q.question.toLowerCase().includes("trace tabelle")
                 ))
             );
-        } else if (theme === "subnetting" || theme === "ipv4-ipv6" || theme === "subnet") {
+        } else if (theme === "subnetting" || theme === "ipv4-ipv6" || theme === "subnet" || theme === "ip-adressierung") {
             filteredQuestions = questions.filter(q => 
                 q.theme === "subnetting" || 
                 q.isSubnetting === true || 
@@ -614,8 +614,14 @@ function filterQuestions(theme) {
                     q.topic.toLowerCase().includes("vlsm") || 
                     q.topic.toLowerCase().includes("cidr") || 
                     q.topic.toLowerCase().includes("standortplanung") || 
-                    q.topic.toLowerCase().includes("präfixlänge") || 
-                    q.topic.toLowerCase().includes("eui-64")
+                    q.topic.toLowerCase().includes("präfix") || 
+                    q.topic.toLowerCase().includes("praefix") || 
+                    q.topic.toLowerCase().includes("eui-64") || 
+                    q.topic.toLowerCase().includes("ipv4") || 
+                    q.topic.toLowerCase().includes("ipv6") || 
+                    q.topic.toLowerCase().includes("adressklassifizierung") || 
+                    q.topic.toLowerCase().includes("adressbereich") || 
+                    q.topic.toLowerCase().includes("apipa")
                 ))
             );
         } else if (theme === "hard-mode" || theme === "hard") {

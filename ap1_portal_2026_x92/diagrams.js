@@ -6995,6 +6995,99 @@ var VisualDiagrams = {
     <text x="632" y="274" fill="#be185d" font-size="9.5" font-weight="600">Isoliertes Gast-Subnetz</text>
   </g>
 </svg>`;
+    },
+
+    getAddressClassificationDiagramSvg() {
+        return `<svg viewBox="0 0 920 460" xmlns="http://www.w3.org/2000/svg" style="background:#0f172a; border-radius:12px; font-family:'Segoe UI',system-ui,sans-serif; width:100%; height:auto;">
+  <defs>
+    <linearGradient id="gradIpv4" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1e293b"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+    <filter id="cardGlow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+
+  <!-- TITLE HEADER -->
+  <rect x="20" y="16" width="880" height="48" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+  <text x="40" y="46" fill="#38bdf8" font-size="16" font-weight="800">🌐 IHK-Prüfungsfokus: Adressklassifizierung &amp; Routing (IPv4 vs. IPv6)</text>
+  <text x="880" y="45" fill="#94a3b8" font-size="12" font-weight="600" text-anchor="end">RFC 1918 • RFC 3927 • RFC 4291 • RFC 4193</text>
+
+  <!-- LEFT BOX: IPv4 KLASSIFIZIERUNG -->
+  <g transform="translate(20, 76)" filter="url(#cardGlow)">
+    <rect x="0" y="0" width="425" height="270" rx="10" fill="#1e293b" stroke="#0284c7" stroke-width="2"/>
+    <rect x="0" y="0" width="425" height="36" rx="10" fill="#0284c7"/>
+    <text x="16" y="24" fill="#ffffff" font-size="14" font-weight="800">IPv4 ADRESSBEREICHE</text>
+    <text x="410" y="23" fill="#bae6fd" font-size="11" font-weight="600" text-anchor="end">32 Bit (4 Oktette)</text>
+
+    <!-- ROW 1: PRIVAT RFC 1918 -->
+    <rect x="12" y="48" width="401" height="52" rx="6" fill="#064e3b" stroke="#059669" stroke-width="1.2"/>
+    <text x="24" y="68" fill="#34d399" font-size="12" font-weight="700">🔒 PRIVAT (RFC 1918) - Nicht im Internet geroutet</text>
+    <text x="24" y="88" fill="#ecfdf5" font-size="11" font-family="monospace">10.0.0.0/8 | 172.16.0.0 - 172.31.255.255 | 192.168.0.0/16</text>
+
+    <!-- ROW 2: ÖFFENTLICH & FALLE -->
+    <rect x="12" y="106" width="401" height="50" rx="6" fill="#451a03" stroke="#d97706" stroke-width="1.2"/>
+    <text x="24" y="125" fill="#fbbf24" font-size="12" font-weight="700">🌍 ÖFFENTLICH - Weltweit im Internet geroutet</text>
+    <text x="24" y="144" fill="#fef3c7" font-size="11" font-family="monospace">8.8.8.8 • 1.1.1.1 • <tspan fill="#f87171" font-weight="800">172.32.1.1 (!)</tspan> • <tspan fill="#f87171" font-weight="800">192.169.0.1 (!)</tspan></text>
+
+    <!-- ROW 3: APIPA & LOOPBACK -->
+    <rect x="12" y="162" width="195" height="46" rx="6" fill="#1e1b4b" stroke="#6366f1" stroke-width="1.2"/>
+    <text x="22" y="180" fill="#a5b4fc" font-size="11" font-weight="700">⚠️ APIPA (Link-Local)</text>
+    <text x="22" y="196" fill="#e0e7ff" font-size="10.5" font-family="monospace">169.254.0.0/16 (RFC 3927)</text>
+
+    <rect x="218" y="162" width="195" height="46" rx="6" fill="#1e1b4b" stroke="#8b5cf6" stroke-width="1.2"/>
+    <text x="228" y="180" fill="#c4b5fd" font-size="11" font-weight="700">🔄 LOOPBACK / LOCALHOST</text>
+    <text x="228" y="196" fill="#ede9fe" font-size="10.5" font-family="monospace">127.0.0.1 (127.0.0.0/8)</text>
+
+    <!-- ROW 4: ROUTER & NAT HINWEIS -->
+    <rect x="12" y="214" width="401" height="46" rx="6" fill="#0f172a" stroke="#38bdf8" stroke-dasharray="3,3" stroke-width="1.2"/>
+    <text x="24" y="232" fill="#38bdf8" font-size="11" font-weight="700">🔀 Benötigen Router (Layer-3) zur Kommunikation:</text>
+    <text x="24" y="248" fill="#94a3b8" font-size="10">Private IPs brauchen NAT/PAT für das Internet. APIPA/Loopback nie geroutet!</text>
+  </g>
+
+  <!-- RIGHT BOX: IPv6 KLASSIFIZIERUNG -->
+  <g transform="translate(475, 76)" filter="url(#cardGlow)">
+    <rect x="0" y="0" width="425" height="270" rx="10" fill="#1e293b" stroke="#8b5cf6" stroke-width="2"/>
+    <rect x="0" y="0" width="425" height="36" rx="10" fill="#8b5cf6"/>
+    <text x="16" y="24" fill="#ffffff" font-size="14" font-weight="800">IPv6 ADRESSTYPEN &amp; SCOPES</text>
+    <text x="410" y="23" fill="#ede9fe" font-size="11" font-weight="600" text-anchor="end">128 Bit (8 Hextets)</text>
+
+    <!-- ROW 1: GUA -->
+    <rect x="12" y="48" width="401" height="50" rx="6" fill="#1e1b4b" stroke="#7c3aed" stroke-width="1.2"/>
+    <text x="24" y="67" fill="#a78bfa" font-size="12" font-weight="700">🌐 GUA (Global Unicast) - Weltweit routingfähig</text>
+    <text x="24" y="85" fill="#f5f3ff" font-size="11" font-family="monospace">2000::/3 (z. B. 2001:db8... / 2a00:1450...)</text>
+
+    <!-- ROW 2: ULA -->
+    <rect x="12" y="104" width="401" height="50" rx="6" fill="#064e3b" stroke="#10b981" stroke-width="1.2"/>
+    <text x="24" y="123" fill="#34d399" font-size="12" font-weight="700">🏢 ULA (Unique Local) - Privates Firmennetz</text>
+    <text x="24" y="141" fill="#ecfdf5" font-size="11" font-family="monospace">fc00::/7 (Praxis: fd00::/8, z. B. fd00:cafe:1::1)</text>
+
+    <!-- ROW 3: LINK-LOCAL & MULTICAST -->
+    <rect x="12" y="160" width="195" height="48" rx="6" fill="#312e81" stroke="#4f46e5" stroke-width="1.2"/>
+    <text x="22" y="178" fill="#818cf8" font-size="11" font-weight="700">🔗 LINK-LOCAL (Nur Link)</text>
+    <text x="22" y="196" fill="#e0e7ff" font-size="10.5" font-family="monospace">fe80::/10 (fe80::1)</text>
+
+    <rect x="218" y="160" width="195" height="48" rx="6" fill="#4c0519" stroke="#e11d48" stroke-width="1.2"/>
+    <text x="228" y="178" fill="#fb7185" font-size="11" font-weight="700">📢 MULTICAST (ff00::/8)</text>
+    <text x="228" y="196" fill="#ffe4e6" font-size="10.5" font-family="monospace">ff02::1 (Nodes) • ff02::2</text>
+
+    <!-- ROW 4: LOOPBACK & SPECIAL -->
+    <rect x="12" y="214" width="401" height="46" rx="6" fill="#0f172a" stroke="#a855f7" stroke-dasharray="3,3" stroke-width="1.2"/>
+    <text x="24" y="232" fill="#c084fc" font-size="11" font-weight="700">💻 Loopback: ::1/128 • Unspecified: ::/128</text>
+    <text x="24" y="248" fill="#94a3b8" font-size="10">Link-Local (fe80::) wird NIEMALS über Router geroutet! Kein Broadcast.</text>
+  </g>
+
+  <!-- BOTTOM COMPARISON FOOTER -->
+  <rect x="20" y="360" width="880" height="84" rx="8" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+  <text x="40" y="386" fill="#f59e0b" font-size="13" font-weight="700">⚡ PRÜFUNGS-MERKSATZ (IHK-Klausur-Falle):</text>
+  <text x="40" y="408" fill="#e2e8f0" font-size="12">1. 172.16.0.0 bis 172.31.255.255 ist PRIVAT. Jede Adresse ab 172.32.0.0 ist ÖFFENTLICH!</text>
+  <text x="40" y="428" fill="#cbd5e1" font-size="12">2. IPv4-APIPA (169.254.x.x) entspricht in IPv6 der Link-Local-Adresse (fe80::/10) - beide verlassen niemals das lokale Subnetz.</text>
+</svg>`;
+    },
+
+    getNetworkTopologySvg() {
+        return this.getAddressClassificationDiagramSvg();
     }
 
 };

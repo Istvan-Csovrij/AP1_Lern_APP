@@ -1627,6 +1627,62 @@
       </div>
 
       <!-- ========================================================================= -->
+      <!-- RECHNER: INTERAKTIVER ADRESSKLASSIFIZIERUNGS-TESTER (IPv4 & IPv6)         -->
+      <!-- ========================================================================= -->
+      <div class="bg-white border-2 border-amber-400 rounded-2xl p-6 sm:p-8 shadow-sm space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-200 pb-4">
+          <div>
+            <span class="text-xs font-bold uppercase tracking-wider text-amber-800 bg-amber-100 px-2.5 py-1 rounded-md border border-amber-300">
+              IHK-Prüfungsklassiker: Aufgabe 5
+            </span>
+            <h3 class="text-xl font-bold text-slate-900 mt-1">
+              🎯 Interaktiver Adressklassifizierungs-Tester (IPv4 &amp; IPv6)
+            </h3>
+          </div>
+          <div class="text-xs text-slate-600 font-mono bg-slate-100 px-3 py-1.5 rounded-lg border border-slate-200">
+            Kategorien: Privat (RFC 1918) • Öffentlich • APIPA • Loopback • GUA • ULA • Link-Local
+          </div>
+        </div>
+
+        <!-- Input & Quick Presets -->
+        <div class="space-y-3">
+          <label class="block text-xs font-bold uppercase tracking-wider text-slate-700">
+            IP-Adresse eingeben oder IHK-Prüfungsbeispiel wählen:
+          </label>
+          <div class="flex flex-col sm:flex-row gap-2">
+            <input type="text" id="ip-classify-input" value="172.32.1.1" oninput="classifyIpAddress()"
+              placeholder="z. B. 10.4.3.2, 172.32.1.1, 192.168.0.1, 169.254.10.5, fe80::1 ..."
+              class="w-full px-4 py-2.5 rounded-xl border-2 border-slate-300 focus:border-amber-500 font-mono text-sm shadow-sm transition-all outline-none">
+            <button onclick="classifyIpAddress()" class="px-5 py-2.5 bg-amber-500 hover:bg-amber-600 text-white font-bold text-sm rounded-xl transition-all shadow-sm flex items-center justify-center gap-1.5 shrink-0">
+              <span>🔍</span> Prüfen
+            </button>
+          </div>
+
+          <!-- Presets from Exam Sheets -->
+          <div class="flex flex-wrap items-center gap-1.5 pt-1 text-xs">
+            <span class="text-slate-500 font-semibold mr-1">IHK-Presets:</span>
+            <button onclick="setClassifyIp('10.4.3.2')" class="px-2.5 py-1 bg-slate-100 hover:bg-slate-200 border border-slate-300 rounded-md font-mono text-slate-700">10.4.3.2 (Privat)</button>
+            <button onclick="setClassifyIp('172.32.1.1')" class="px-2.5 py-1 bg-rose-50 hover:bg-rose-100 border border-rose-300 rounded-md font-mono text-rose-700 font-bold">172.32.1.1 (⚠️ Falle!)</button>
+            <button onclick="setClassifyIp('192.168.0.1')" class="px-2.5 py-1 bg-slate-100 hover:bg-slate-200 border border-slate-300 rounded-md font-mono text-slate-700">192.168.0.1 (Privat)</button>
+            <button onclick="setClassifyIp('169.254.10.5')" class="px-2.5 py-1 bg-amber-50 hover:bg-amber-100 border border-amber-300 rounded-md font-mono text-amber-800">169.254.10.5 (APIPA)</button>
+            <button onclick="setClassifyIp('127.0.0.1')" class="px-2.5 py-1 bg-slate-100 hover:bg-slate-200 border border-slate-300 rounded-md font-mono text-slate-700">127.0.0.1 (Loopback)</button>
+            <button onclick="setClassifyIp('8.8.8.8')" class="px-2.5 py-1 bg-blue-50 hover:bg-blue-100 border border-blue-300 rounded-md font-mono text-blue-700 font-bold">8.8.8.8 (Öffentlich)</button>
+            <button onclick="setClassifyIp('192.169.1.1')" class="px-2.5 py-1 bg-rose-50 hover:bg-rose-100 border border-rose-300 rounded-md font-mono text-rose-700">192.169.1.1 (⚠️ Falle!)</button>
+            <button onclick="setClassifyIp('100.64.0.1')" class="px-2.5 py-1 bg-purple-50 hover:bg-purple-100 border border-purple-300 rounded-md font-mono text-purple-700">100.64.0.1 (CGNAT)</button>
+            <button onclick="setClassifyIp('fe80::1')" class="px-2.5 py-1 bg-indigo-50 hover:bg-indigo-100 border border-indigo-300 rounded-md font-mono text-indigo-700">fe80::1 (Link-Local)</button>
+            <button onclick="setClassifyIp('fd00:abcd::1')" class="px-2.5 py-1 bg-emerald-50 hover:bg-emerald-100 border border-emerald-300 rounded-md font-mono text-emerald-700">fd00:... (ULA)</button>
+            <button onclick="setClassifyIp('2a00:1450:4001::200e')" class="px-2.5 py-1 bg-sky-50 hover:bg-sky-100 border border-sky-300 rounded-md font-mono text-sky-700">2a00:... (GUA)</button>
+          </div>
+        </div>
+
+        <!-- Result Display Card -->
+        <div id="ip-classify-result" class="bg-slate-50 border border-slate-200 rounded-xl p-5 space-y-4">
+          <!-- Dynamically filled by classifyIpAddress() -->
+        </div>
+      </div>
+
+
+      <!-- ========================================================================= -->
       <!-- RECHNER 1b: INTERAKTIVER IPV6-ADRESSTYP-INSPEKTOR & PRÄFIX-ERKENNER         -->
       <!-- ========================================================================= -->
       <div class="bg-white border-2 border-indigo-400 rounded-2xl p-6 sm:p-8 shadow-sm space-y-6">
@@ -5984,8 +6040,188 @@
       const inp = document.getElementById('ipv6-inspect-input');
       if (inp) {
         inp.value = ip;
-        inspectIpv6Address();
+        inspectIpv6Address(); classifyIpAddress();
       }
+    }
+
+    
+    function setClassifyIp(ip) {
+      const el = document.getElementById('ip-classify-input');
+      if (el) {
+        el.value = ip;
+        classifyIpAddress();
+      }
+    }
+
+    function classifyIpAddress() {
+      const inputEl = document.getElementById('ip-classify-input');
+      const resEl = document.getElementById('ip-classify-result');
+      if (!inputEl || !resEl) return;
+
+      const raw = inputEl.value.trim();
+      if (!raw) {
+        resEl.innerHTML = '<div class="text-slate-500 text-sm">Bitte gib eine IP-Adresse oben ein oder wähle eines der IHK-Presets.</div>';
+        return;
+      }
+
+      // Check if IPv6 (contains colons)
+      if (raw.includes(':')) {
+        const lower = raw.toLowerCase().split('/')[0].trim();
+        let cat = "Global Unicast (GUA)", badge = "bg-sky-100 text-sky-800 border-sky-300";
+        let rfc = "RFC 4291 / RFC 3587", router = "Ja, weltweit im Internet routingfähig (Layer 3).";
+        let trap = "";
+        let explanation = "Beginnt mit dem binären Präfix 001 (Bereich 2000::/3). Öffentliche Adresse im weltweiten Internet.";
+
+        if (lower === '::1' || lower === '0:0:0:0:0:0:0:1') {
+          cat = "Loopback (Localhost)";
+          badge = "bg-purple-100 text-purple-800 border-purple-300";
+          rfc = "RFC 4291 (::1/128)";
+          router = "NEIN! Wird von Routern NIEMALS weitergeleitet (verlässt den lokalen Rechner nicht).";
+          explanation = "Entspricht 127.0.0.1 in IPv4. Dient dem Test des internen TCP/IP-Stacks.";
+        } else if (lower.startsWith('fe80') || lower.startsWith('fe8') || lower.startsWith('fe9') || lower.startsWith('fea') || lower.startsWith('feb')) {
+          cat = "Link-Local Unicast";
+          badge = "bg-indigo-100 text-indigo-800 border-indigo-300";
+          rfc = "RFC 4291 (fe80::/10)";
+          router = "NEIN! Wird von Routern NIEMALS weitergeleitet. Bleibt rein im lokalen Link/VLAN.";
+          explanation = "Wird auf jedem IPv6-Interface automatisch erzeugt. Entspricht der IPv4-APIPA (169.254.x.x), ist aber für NDP, Router Advertisements und Autokonfiguration zwingend erforderlich.";
+        } else if (lower.startsWith('fc') || lower.startsWith('fd')) {
+          cat = "Unique Local Address (ULA / Privat)";
+          badge = "bg-emerald-100 text-emerald-800 border-emerald-300";
+          rfc = "RFC 4193 (fc00::/7, Praxis: fd00::/8)";
+          router = "Nur firmenintern! Wird über firmeninterne Router/VPN geroutet, aber NICHT ins öffentliche Internet.";
+          explanation = "Entspricht den privaten IPv4-Adressen nach RFC 1918 (10.x, 172.16-31.x, 192.168.x).";
+        } else if (lower.startsWith('ff')) {
+          cat = "Multicast";
+          badge = "bg-rose-100 text-rose-800 border-rose-300";
+          rfc = "RFC 4291 (ff00::/8)";
+          router = "Je nach Scope (ff02::1 ist Link-Local Scope = verlässt lokales Netz nicht).";
+          explanation = "Ersetzt den Broadcast in IPv6! ff02::1 adressiert alle Knoten im Subnetz, ff02::2 alle Router.";
+        } else if (lower.startsWith('2001:db8')) {
+          cat = "Dokumentation & Schulung";
+          badge = "bg-amber-100 text-amber-800 border-amber-300";
+          rfc = "RFC 3849 (2001:db8::/32)";
+          router = "NEIN (im weltweiten BGP-Internet gefiltert / nicht geroutet).";
+          explanation = "Offiziell reservierter Präfix für Fachbücher, Prüfungsaufgaben und Dokumentationen.";
+        }
+
+        renderResult(raw, "IPv6 (128 Bit)", cat, badge, rfc, router, trap, explanation);
+        return;
+      }
+
+      // Check IPv4
+      const parts = raw.split('.').map(p => parseInt(p, 10));
+      if (parts.length !== 4 || parts.some(p => isNaN(p) || p < 0 || p > 255)) {
+        resEl.innerHTML = '<div class="text-rose-600 text-sm font-semibold">⚠️ Ungültiges IPv4-Format. Bitte 4 Oktette zwischen 0 und 255 eingeben (z. B. 10.4.3.2).</div>';
+        return;
+      }
+
+      const [o1, o2, o3, o4] = parts;
+      let cat = "Öffentlich", badge = "bg-blue-100 text-blue-800 border-blue-300";
+      let rfc = "Global Internet (Routbar)", router = "Ja, weltweit über Layer-3-Router geroutet.";
+      let trap = "";
+      let explanation = "Weltweit eindeutige, öffentlich registrierte IP-Adresse.";
+
+      if (o1 === 10) {
+        cat = "Privat (Klasse A)";
+        badge = "bg-emerald-100 text-emerald-800 border-emerald-300";
+        rfc = "RFC 1918 (10.0.0.0/8)";
+        router = "Benötigt Router mit NAT/PAT zur Kommunikation mit dem Internet.";
+        explanation = "Privater Adressbereich für Großunternehmen (10.0.0.0 bis 10.255.255.255). Wird im Internet nicht geroutet.";
+      } else if (o1 === 172 && o2 >= 16 && o2 <= 31) {
+        cat = "Privat (Klasse B)";
+        badge = "bg-emerald-100 text-emerald-800 border-emerald-300";
+        rfc = "RFC 1918 (172.16.0.0/12)";
+        router = "Benötigt Router mit NAT/PAT zur Kommunikation mit dem Internet.";
+        explanation = "Privater Adressbereich für mittlere bis große Netze (172.16.0.0 bis 172.31.255.255, 16 Netze à /16).";
+      } else if (o1 === 172 && (o2 < 16 || o2 >= 32)) {
+        cat = "Öffentlich (IHK-PRÜFUNGSFALLE!)";
+        badge = "bg-rose-100 text-rose-800 border-rose-300";
+        rfc = "Öffentlicher IP-Adressraum";
+        router = "Ja, reguläres weltweites Layer-3-Routing.";
+        trap = `⚠️ <strong>ACHTUNG IHK-FALLE:</strong> Viele Prüflinge halten <code>${raw}</code> fälschlicherweise für privat! Der private RFC 1918 Bereich beginnt erst bei <strong>172.16</strong> und endet strikt bei <strong>172.31.255.255</strong>. Ab <strong>172.32</strong> sind alle Adressen öffentlich!`;
+        explanation = `Da das 2. Oktett (${o2}) außerhalb von 16–31 liegt, ist diese IP-Adresse weltweit öffentlich und im Internet routingfähig.`;
+      } else if (o1 === 192 && o2 === 168) {
+        cat = "Privat (Klasse C)";
+        badge = "bg-emerald-100 text-emerald-800 border-emerald-300";
+        rfc = "RFC 1918 (192.168.0.0/16)";
+        router = "Benötigt Router mit NAT/PAT zur Kommunikation mit dem Internet.";
+        explanation = "Privater Standard-Bereich für SOHO, Heimnetzwerke und kleinere Büros (192.168.0.0 bis 192.168.255.255).";
+      } else if (o1 === 192 && o2 !== 168) {
+        cat = "Öffentlich (IHK-PRÜFUNGSFALLE!)";
+        badge = "bg-rose-100 text-rose-800 border-rose-300";
+        rfc = "Öffentlicher IP-Adressraum";
+        router = "Ja, reguläres weltweites Layer-3-Routing.";
+        trap = `⚠️ <strong>ACHTUNG IHK-FALLE:</strong> Nur <code>192.168.x.x</code> ist privat! <code>${raw}</code> (mit ${o2} statt 168) ist eine reguläre öffentliche Internet-IP!`;
+        explanation = `Nur 192.168.0.0/16 ist privat nach RFC 1918. 192.169.x.x etc. sind öffentlich.`;
+      } else if (o1 === 169 && o2 === 254) {
+        cat = "APIPA / Link-Local";
+        badge = "bg-amber-100 text-amber-900 border-amber-300";
+        rfc = "RFC 3927 (169.254.0.0/16)";
+        router = "NEIN! Wird von Routern NIEMALS weitergeleitet (verlässt das lokale Switch-Segment nicht).";
+        explanation = "Automatic Private IP Addressing (Zeroconf). Weist sich das Betriebssystem selbst zu, wenn der DHCP-Client nach Timeout keine Antwort vom DHCP-Server erhält.";
+      } else if (o1 === 127) {
+        cat = "Loopback / Localhost";
+        badge = "bg-purple-100 text-purple-800 border-purple-300";
+        rfc = "RFC 1122 (127.0.0.0/8)";
+        router = "NEIN! Bleibt rein intern im Betriebssystem-Stack des Hosts, geht nicht einmal aufs Kabel.";
+        explanation = "Prüft die interne Funktion des lokalen TCP/IP-Stacks (z. B. <code>ping 127.0.0.1</code>).";
+      } else if (o1 === 100 && o2 >= 64 && o2 <= 127) {
+        cat = "Carrier-Grade NAT (CGNAT)";
+        badge = "bg-fuchsia-100 text-fuchsia-800 border-fuchsia-300";
+        rfc = "RFC 6598 (100.64.0.0/10)";
+        router = "Provider-intern geroutet mit NAT ins Internet.";
+        explanation = "Shared Address Space für Internet-Service-Provider (DSL/Kabel/Glasfaser/Mobilfunk), um IPv4-Adressknappheit zu überbrücken.";
+      } else if (o1 >= 224 && o1 <= 239) {
+        cat = "Multicast (Klasse D)";
+        badge = "bg-pink-100 text-pink-800 border-pink-300";
+        rfc = "RFC 1112 (224.0.0.0 bis 239.255.255.255)";
+        router = "Erfordert spezielle Multicast-Routing-Protokolle (PIM, IGMP).";
+        explanation = "Punkt-zu-Mehrpunkt-Kommunikation an eine Hostgruppe (z. B. 224.0.0.1 alle Systeme, 224.0.0.2 alle Router).";
+      }
+
+      renderResult(raw, "IPv4 (32 Bit)", cat, badge, rfc, router, trap, explanation);
+    }
+
+    function renderResult(ip, proto, cat, badge, rfc, router, trap, explanation) {
+      const resEl = document.getElementById('ip-classify-result');
+      if (!resEl) return;
+
+      let trapHtml = "";
+      if (trap) {
+        trapHtml = `<div class="p-3 bg-rose-50 border-2 border-rose-300 rounded-xl text-xs text-rose-950 font-medium">${trap}</div>`;
+      }
+
+      resEl.innerHTML = `
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-200 pb-3">
+          <div class="flex items-center gap-2.5">
+            <span class="font-mono text-base font-extrabold text-slate-900">${ip}</span>
+            <span class="text-xs px-2.5 py-0.5 rounded-full font-bold border ${badge}">${cat}</span>
+          </div>
+          <span class="text-xs font-semibold text-slate-500 font-mono">${proto}</span>
+        </div>
+
+        ${trapHtml}
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+          <div class="p-3 bg-white border border-slate-200 rounded-xl space-y-1.5">
+            <div class="font-bold text-slate-800 flex items-center gap-1.5">
+              <span>📋</span> Standard &amp; RFC-Grundlage:
+            </div>
+            <div class="font-mono text-slate-700 font-semibold">${rfc}</div>
+            <div class="text-slate-600 leading-relaxed">${explanation}</div>
+          </div>
+
+          <div class="p-3 bg-white border border-slate-200 rounded-xl space-y-1.5">
+            <div class="font-bold text-slate-800 flex items-center gap-1.5">
+              <span>🔀</span> Router- &amp; Layer-3-Verhalten:
+            </div>
+            <div class="font-medium text-slate-900">${router}</div>
+            <div class="text-slate-500 text-[11px] leading-relaxed">
+              <strong>IHK-Merksatz:</strong> Private Netze benötigen NAT/PAT für das Internet. APIPA und Loopback verlassen niemals das lokale System bzw. Switch-Segment.
+            </div>
+          </div>
+        </div>
+      `;
     }
 
     function inspectIpv6Address() {
@@ -6120,7 +6356,7 @@
       calcIpv6Subnet();
       calcEui64();
       calcIpv6Compress();
-      inspectIpv6Address();
+      inspectIpv6Address(); classifyIpAddress();
     });
   </script>
 </body>

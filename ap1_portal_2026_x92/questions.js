@@ -15513,5 +15513,354 @@ Welche ist die **allerletzte hexadezimale Adresse** dieses 64-Bit-Subnetzes?`,
         correctAnswer: 0,
         solutionDiagramSvg: VisualDiagrams.getNetworkTopologySvg(),
         explanation: "Bei einem /64-Subnetz sind die ersten 64 Bit fest. Die hinteren 64 Bit (Interface-ID) laufen von 0000:0000:0000:0000 bis ffff:ffff:ffff:ffff."
+    },
+    {
+        id: 616,
+        isHard: false,
+        difficulty: "standard",
+        theme: "subnetting",
+        isSubnetting: true,
+        isBawueFocus: true,
+        isItArbeitsplatz: true,
+        topic: "🌐 Aufgabe 5: Adressklassifizierung (IPv4 & IPv6 Adressbereiche & Layer-3 Routing)",
+        type: "open-text",
+        title: "Aufgabe 5: Adressklassifizierung (6 Punkte)",
+        question: `**Aufgabe 5: Adressklassifizierung (6 Punkte)**
+
+**Teil A: IPv4-Klassifizierung**
+Ordnen Sie jede der folgenden IPv4-Adressen genau einem Bereich zu:
+**privat**, **öffentlich**, **Loopback** oder **APIPA (Link-Local)**:
+
+\`\`\`text
++---------------------+-------------------------------------------------------+
+| Adresse             | Zuordnung (privat / öffentlich / Loopback / APIPA)    |
++---------------------+-------------------------------------------------------+
+| 10.4.3.2            |                                                       |
+| 172.32.1.1          |                                                       |
+| 192.168.0.1         |                                                       |
+| 169.254.10.5        |                                                       |
+| 127.0.0.1           |                                                       |
+| 8.8.8.8             |                                                       |
++---------------------+-------------------------------------------------------+
+\`\`\`
+
+**Zusatzfrage zur Kommunikation:**
+Welche der oben genannten Adressen benötigen zwingend einen **Router bzw. ein Layer-3-Gerät** (ggf. mit NAT/PAT), um mit Gegenstellen außerhalb ihres eigenen Subnetzes bzw. im weltweiten Internet zu kommunizieren? Welche Adressen werden von Routern **grundsätzlich niemals** weitergeleitet?
+
+---
+
+**Teil B: IPv6-Klassifizierung (IHK-Transfer)**
+Ordnen Sie die folgenden IPv6-Adressen ihrem Adresstyp zu:
+(**Global Unicast (GUA)**, **Unique Local (ULA)**, **Link-Local**, **Multicast** oder **Loopback**):
+1. \`2a00:1450:4001:830::200e\`
+2. \`fd00:abcd:1234:1::1\`
+3. \`fe80::1\`
+4. \`ff02::1\`
+5. \`::1\`
+6. \`2001:db8:acad::1\``,
+        sampleSolution: `Musterlösung nach IHK-Standard:
+
+Teil A: IPv4-Zuordnungstabelle (6 Punkte):
++---------------------+-------------------------------------------------------+
+| Adresse             | Zuordnung & Begründung nach RFC-Standards             |
++---------------------+-------------------------------------------------------+
+| 10.4.3.2            | Privat (RFC 1918, Klasse-A-Bereich: 10.0.0.0/8)       |
+| 172.32.1.1          | Öffentlich (RFC 1918 reicht nur bis 172.31.255.255!) |
+| 192.168.0.1         | Privat (RFC 1918, Klasse-C-Bereich: 192.168.0.0/16)   |
+| 169.254.10.5        | APIPA / Link-Local (RFC 3927, autom. Selbstvergabe)   |
+| 127.0.0.1           | Loopback / Localhost (RFC 1122, interner TCP/IP-Stack)|
+| 8.8.8.8             | Öffentlich (Weltweit routingfähig, Google DNS)        |
++---------------------+-------------------------------------------------------+
+
+Zusatzfrage Router / Layer 3:
+1. Router / Layer-3-Bedarf:
+   - Private IP-Adressen (10.4.3.2 und 192.168.0.1) benötigen einen Router mit NAT/PAT (Network Address Translation), um mit Systemen im öffentlichen Internet zu kommunizieren.
+   - Öffentliche IP-Adressen (8.8.8.8 und 172.32.1.1) benötigen normales Routing über Layer-3-Gateways zur Paketvermittlung.
+2. Niemals geroutet:
+   - APIPA (169.254.10.5): Ist auf den lokalen Link beschränkt und wird von Routern verworfen!
+   - Loopback (127.0.0.1): Bleibt rein intern im Betriebssystem-Stack des Hosts, verlässt nicht einmal die Netzwerkkarte.
+
+Teil B: IPv6-Klassifizierung:
+1. 2a00:1450:4001:830::200e -> Global Unicast (GUA, weltweit routbar, 2000::/3)
+2. fd00:abcd:1234:1::1 -> Unique Local Address (ULA, firmenintern privat, fc00::/7 bzw. fd00::/8)
+3. fe80::1 -> Link-Local (nur lokales Link-Segment, fe80::/10, niemals geroutet!)
+4. ff02::1 -> Multicast (All-Nodes Scope Link-Local, ff00::/8, ersetzt Broadcast)
+5. ::1 -> Loopback (::1/128, interner Stack)
+6. 2001:db8:acad::1 -> Dokumentation / GUA (RFC 3849, nicht im öffentlichen Internet geroutet)`,
+        correctAnswer: `Teil A:
+10.4.3.2 = Privat (RFC 1918)
+172.32.1.1 = Öffentlich (Achtung: Privat ist nur 172.16.0.0 - 172.31.255.255!)
+192.168.0.1 = Privat (RFC 1918)
+169.254.10.5 = APIPA (Link-Local)
+127.0.0.1 = Loopback
+8.8.8.8 = Öffentlich
+
+Router / Layer 3:
+- Private IPs (10.x, 192.168.x) benötigen Router mit NAT für das Internet.
+- Öffentliche IPs (8.8.8.8, 172.32.x) werden über Router vermittelt.
+- APIPA (169.254.x) und Loopback (127.0.0.1) werden NIEMALS über Router weitergeleitet.
+
+Teil B (IPv6):
+- 2a00:... = GUA (Global Unicast, öffentlich)
+- fd00:... = ULA (Unique Local, privat)
+- fe80::1 = Link-Local
+- ff02::1 = Multicast
+- ::1 = Loopback
+- 2001:db8:... = Dokumentation`,
+        solutionDiagramSvg: VisualDiagrams.getAddressClassificationDiagramSvg(),
+        explanation: "Klassische IHK-Prüfungsfalle: 172.32.1.1 ist ÖFFENTLICH, da der private B-Bereich exakt bei 172.31.255.255 endet. APIPA und Loopback verlassen niemals den lokalen Rechner bzw. das lokale Netzsegment.",
+        points: 6
+    },
+    {
+        id: 617,
+        isHard: true,
+        difficulty: "hard",
+        theme: "subnetting",
+        isSubnetting: true,
+        isBawueFocus: true,
+        isItArbeitsplatz: true,
+        topic: "🌐 IPv4 Adressklassifizierung: Fallstricke & Sonderbereiche (RFC 1918, CGNAT, Multicast)",
+        type: "open-text",
+        title: "Aufgabe: Vertiefende Adressklassifizierung & IHK-Grenzbereiche (8 Punkte)",
+        question: `**Prüfungsaufgabe: Adressklassifizierung mit Grenzwerten & Sonderbereichen (8 Punkte)**
+
+Klassifizieren Sie jede der folgenden IPv4-Adressen in die Kategorie:
+**Privat (RFC 1918)**, **Öffentlich**, **APIPA / Link-Local**, **Loopback**, **CGNAT (Carrier-Grade NAT)** oder **Multicast**:
+
+\`\`\`text
++-----------------------+-------------------------------------------------------------+
+| IPv4-Adresse          | Kategorie                                                   |
++-----------------------+-------------------------------------------------------------+
+| 172.16.0.1            |                                                             |
+| 172.31.255.254        |                                                             |
+| 172.15.200.1          |                                                             |
+| 192.169.10.1          |                                                             |
+| 100.64.0.50           |                                                             |
+| 224.0.0.1             |                                                             |
+| 169.254.1.100         |                                                             |
+| 127.0.1.1             |                                                             |
++-----------------------+-------------------------------------------------------------+
+\`\`\`
+
+**Begründen Sie insbesondere:**
+1. Warum \`172.15.200.1\` und \`192.169.10.1\` öffentlich sind, obwohl sie den privaten Adressen ähneln.
+2. Welche Funktion die Adresse \`100.64.0.50\` (RFC 6598) im Netz von Internet-Service-Providern (DS-Lite / Mobilfunk) erfüllt.`,
+        sampleSolution: `Musterlösung nach IHK-Standard:
+
++-----------------------+-------------------------------------------------------------+
+| IPv4-Adresse          | Kategorie & Begründung                                      |
++-----------------------+-------------------------------------------------------------+
+| 172.16.0.1            | Privat (Erste nutzbare Hostadresse im Block 172.16.0.0/12)  |
+| 172.31.255.254        | Privat (Letzte nutzbare Hostadresse im Block 172.16.0.0/12) |
+| 172.15.200.1          | Öffentlich (Liegt vor Beginn des RFC 1918 Bereichs ab .16!) |
+| 192.169.10.1          | Öffentlich (RFC 1918 umfasst nur 192.168.0.0/16, nicht .169)|
+| 100.64.0.50           | CGNAT (Carrier-Grade NAT, Shared Address Space RFC 6598)    |
+| 224.0.0.1             | Multicast (Klasse D: 224.0.0.0 bis 239.255.255.255)         |
+| 169.254.1.100         | APIPA / Link-Local (RFC 3927, Auto-IP bei fehlendem DHCP)   |
+| 127.0.1.1             | Loopback (Gesamter Block 127.0.0.0/8 dient als Loopback)    |
++-----------------------+-------------------------------------------------------------+
+
+Begründungen:
+1. Prüfungsfallen 172.15.x.x und 192.169.x.x:
+   - Der private Klasse-B-Bereich umfasst strikt 172.16.0.0 bis 172.31.255.255 (/12). Alles darunter (172.0.0.0 bis 172.15.255.255) und darüber (ab 172.32.0.0) ist weltweit öffentlich!
+   - 192.168.0.0/16 deckt nur 192.168.0.0 bis 192.168.255.255 ab. Das zweite Oktett '169' liegt außerhalb.
+2. Carrier-Grade NAT (CGNAT, 100.64.0.0/10):
+   - Ermöglicht es Providern, tausende Kunden (z.B. FTTH, Kabel, LTE/5G) über einen einzigen öffentlichen IPv4-Pool zu bündeln, ohne mit den privaten Heimnetzen der Kunden (192.168.x.x) in Adresskonflikte zu geraten.`,
+        correctAnswer: `Zuordnung:
+172.16.0.1 = Privat
+172.31.255.254 = Privat
+172.15.200.1 = Öffentlich (vor 172.16!)
+192.169.10.1 = Öffentlich (169 statt 168!)
+100.64.0.50 = CGNAT (RFC 6598)
+224.0.0.1 = Multicast
+169.254.1.100 = APIPA
+127.0.1.1 = Loopback (127.0.0.0/8)`,
+        solutionDiagramSvg: VisualDiagrams.getAddressClassificationDiagramSvg(),
+        explanation: "172.16.0.0/12 umfasst 16 durchgehende /16-Netze (172.16 bis 172.31). 172.15 und 172.32 sind typische IHK-Fallen. Der gesamte Bereich 127.0.0.0/8 ist Loopback, nicht nur 127.0.0.1.",
+        points: 8
+    },
+    {
+        id: 618,
+        isHard: true,
+        difficulty: "standard",
+        theme: "subnetting",
+        isSubnetting: true,
+        isBawueFocus: true,
+        topic: "🌐 IPv6 Adressklassifizierung & Routingfähigkeit: GUA vs. ULA vs. Link-Local vs. Multicast",
+        type: "open-text",
+        title: "Aufgabe: IPv6-Adressbereiche, Scopes & Routerverhalten (8 Punkte)",
+        question: `**Prüfungsaufgabe: IPv6 Adresstypen & Routingfähigkeit (8 Punkte)**
+
+Ein Netzwerkplaner überprüft die Adresskonfiguration auf einem Layer-3-Core-Switch.
+Er findet folgende sechs IPv6-Adressen vor:
+
+1. \`2001:db8:acad:10::1/64\`
+2. \`2a00:1450:4001:820::2004/64\`
+3. \`fd00:10:20:30::cafe/64\`
+4. \`fe80::250:56ff:fe9c:12ab/64\`
+5. \`ff02::2\`
+6. \`::1/128\`
+
+**Beantworten Sie die folgenden IHK-Fragen:**
+a) Nennen Sie für jede Adresse den genauen **Adresstyp** (GUA, ULA, Link-Local, Multicast, Loopback oder Dokumentation).
+b) Geben Sie für jede Adresse an, ob sie **über einen IPv6-Router ins Internet geroutet werden darf** (Ja / Nein / Nur firmenintern).
+c) Erklären Sie, warum das Interface-Präfix \`fe80::/10\` auf jedem aktivierten IPv6-Interface zwingend automatisch vorhanden ist und welche Protokolle darauf basieren.`,
+        sampleSolution: `Musterlösung nach IHK-Standard:
+
+a) & b) Adresstypen & Routingfähigkeit:
+1. 2001:db8:acad:10::1/64
+   - Adresstyp: Dokumentation / Testnetz (RFC 3849, aus dem 2000::/3 Bereich)
+   - Routing: Nein (vom IANA-Standard für Schulungs-/Dokumentationszwecke reserviert, darf im globalen BGP-Internet nicht geroutet werden).
+2. 2a00:1450:4001:820::2004/64
+   - Adresstyp: Global Unicast Address (GUA, global eindeutige öffentliche IPv6-Adresse).
+   - Routing: Ja (weltweit uneingeschränkt im Internet routingfähig).
+3. fd00:10:20:30::cafe/64
+   - Adresstyp: Unique Local Address (ULA, RFC 4193, privater IPv6-Adressraum).
+   - Routing: Nur firmenintern (wird zwischen Unternehmensstandorten/VPN geroutet, aber an Internet-Border-Routern verworfen).
+4. fe80::250:56ff:fe9c:12ab/64
+   - Adresstyp: Link-Local Unicast Address (fe80::/10, RFC 4291).
+   - Routing: Nein (wird von Routern NIEMALS über das lokale Netzwerksegment/VLAN weitergeleitet).
+5. ff02::2
+   - Adresstyp: Multicast Address (All-Routers Scope 2 = Link-Local).
+   - Routing: Nein (nur an alle Router auf demselben lokalen Link gerichtet).
+6. ::1/128
+   - Adresstyp: Loopback-Adresse (RFC 4291).
+   - Routing: Nein (rein lokaler Host-Stack).
+
+c) Bedeutung von Link-Local (fe80::):
+- Jede IPv6-Netzwerkkarte generiert automatisch sofort beim Hochfahren eine Link-Local-Adresse (fe80::...), selbst wenn noch kein DHCPv6- oder Router-Advertisement-Server erreichbar ist.
+- Auf Link-Local basieren alle essentiellen IPv6-Basismechanismen:
+  1. Neighbor Discovery Protocol (NDP): Ersetzt ARP zur MAC-Ermittlung und Router-Erkennung (Router Solicitation / Advertisement).
+  2. Stateless Address Autoconfiguration (SLAAC): Zuweisung globaler Präfixe.
+  3. Routing-Protokolle (OSPFv3, BGP-Next-Hop): Router tauschen Routingtabellen über ihre Link-Local-Adressen aus.`,
+        correctAnswer: `a) & b):
+1. 2001:db8:... = Doku (Nicht öffentlich routbar)
+2. 2a00:... = GUA (Ja, weltweit routbar)
+3. fd00:... = ULA (Nur intern geroutet)
+4. fe80:... = Link-Local (Niemals geroutet)
+5. ff02::2 = Multicast All-Routers (Link-Scope)
+6. ::1 = Loopback (Rein lokaler Stack)
+
+c) fe80:: ist Pflicht für NDP (Neighbor Discovery / Ersatz für ARP), SLAAC und Router Advertisements.`,
+        solutionDiagramSvg: VisualDiagrams.getAddressClassificationDiagramSvg(),
+        explanation: "GUA (2000::/3) ist das öffentliche Internet, ULA (fc00::/7 bzw. fd00::/8) ist das Firmenintranet, und Link-Local (fe80::/10) ist der unentbehrliche Basiskommunikationskanal jedes LAN-Segments.",
+        points: 8
+    },
+    {
+        id: 619,
+        isHard: false,
+        difficulty: "standard",
+        theme: "subnetting",
+        isSubnetting: true,
+        isBawueFocus: true,
+        topic: "🌐 IHK Multiple-Choice: IPv4 Adressklassifizierung & RFC 1918 Prüfungsfallen",
+        type: "multiple-choice",
+        question: `Ein IT-Support-Mitarbeiter soll die Adresskonfiguration an einem Kunden-Router analysieren.
+
+Welche der folgenden vier IPv4-Adressen ist **ÖFFENTLICH** und im Internet weltweit routingfähig?`,
+        options: [
+            "172.32.1.1 (Liegt oberhalb von 172.31.255.255 und ist somit öffentlich)",
+            "10.4.3.2 (Privat nach RFC 1918 Klasse A)",
+            "172.25.10.1 (Privat nach RFC 1918 Klasse B: 172.16.0.0 bis 172.31.255.255)",
+            "169.254.10.5 (APIPA / Link-Local nach RFC 3927)"
+        ],
+        correctAnswer: 0,
+        solutionDiagramSvg: VisualDiagrams.getAddressClassificationDiagramSvg(),
+        explanation: "172.32.1.1 ist ÖFFENTLICH! Der private Adressbereich der Klasse B (RFC 1918) erstreckt sich nur von 172.16.0.0 bis 172.31.255.255 (/12). Ab 172.32.0.0 sind alle Adressen reguläre öffentliche IP-Adressen."
+    },
+    {
+        id: 620,
+        isHard: false,
+        difficulty: "standard",
+        theme: "subnetting",
+        isSubnetting: true,
+        isBawueFocus: true,
+        topic: "🌐 IHK Multiple-Choice: IPv6 Adressklassifizierung (GUA, ULA, Link-Local, Multicast)",
+        type: "multiple-choice",
+        question: `Ein Auszubildender sieht auf einem Server die IPv6-Adresse \`fd00:abcd:1234::1\`.
+
+Um welche Art von IPv6-Adresse handelt es sich und wie verhält sich ein Internet-Router bei Datenpaketen mit dieser Zieladresse?`,
+        options: [
+            "Es handelt sich um eine Unique Local Address (ULA, privat). Der Internet-Router verwirft diese Pakete und routet sie NICHT ins öffentliche Internet.",
+            "Es handelt sich um eine Link-Local-Adresse (fe80). Der Switch blockiert alle Pakete.",
+            "Es handelt sich um eine Global Unicast Address (GUA). Sie wird weltweit über jeden Provider geroutet.",
+            "Es handelt sich um eine Multicast-Adresse. Das Paket wird an alle Rechner im Rechenzentrum gesendet."
+        ],
+        correctAnswer: 0,
+        solutionDiagramSvg: VisualDiagrams.getAddressClassificationDiagramSvg(),
+        explanation: "ULA (Unique Local Address) beginnt mit fc00::/7 (in der Praxis immer mit fd... durch das gesetzte L-Bit). Sie ist das IPv6-Äquivalent zu den privaten IPv4-Adressen (RFC 1918) und wird im öffentlichen Internet niemals geroutet."
+    },
+    {
+        id: 621,
+        isHard: false,
+        difficulty: "standard",
+        theme: "subnetting",
+        isSubnetting: true,
+        isBawueFocus: true,
+        topic: "🌐 IHK Multiple-Choice: Router & Layer-3 Weiterleitung bei IPv4 & IPv6 Adressen",
+        type: "multiple-choice",
+        question: `Welche Aussage zur **Weiterleitung (Routing auf Layer 3)** von IPv4- und IPv6-Adressen ist fachlich **vollständig KORREKT**?`,
+        options: [
+            "Private IPv4-Adressen (RFC 1918) können nur mit NAT/PAT ins Internet geroutet werden; IPv4-APIPA (169.254.x.x) und IPv6-Link-Local (fe80::) werden von Routern niemals weitergeleitet.",
+            "APIPA-Adressen (169.254.x.x) werden von Routern normal weitergeleitet, wenn der DNS-Server aktiv ist.",
+            "IPv6-Link-Local-Adressen (fe80::) sind weltweit im Internet routingfähig, solange ein Default Gateway eingetragen ist.",
+            "Private IPv4-Adressen wie 10.4.3.2 können ohne jede Übersetzung (NAT) direkt weltweit über das Internet kommunizieren."
+        ],
+        correctAnswer: 0,
+        solutionDiagramSvg: VisualDiagrams.getAddressClassificationDiagramSvg(),
+        explanation: "APIPA (169.254.0.0/16) und Link-Local (fe80::/10) sind strikt an den lokalen Link gebunden – Router verwerfen diese Pakete immer. Private IP-Adressen benötigen NAT/PAT, um über das Internet übertragen zu werden."
+    },
+    {
+        id: 622,
+        isHard: true,
+        difficulty: "standard",
+        theme: "subnetting",
+        isSubnetting: true,
+        isBawueFocus: true,
+        isItArbeitsplatz: true,
+        topic: "🌐 IHK-Prüfungsaufgabe: Diagnose von IP-Adressierungsproblemen (APIPA & Subnetzkonflikte)",
+        type: "open-text",
+        title: "Fehleranalyse am Arbeitsplatz: APIPA 169.254.x.x & Default Gateway (6 Punkte)",
+        question: `Ein Sachbearbeiter in der Buchhaltung meldet: *„Ich habe keinen Zugriff mehr auf das Internet und kann auch das Firmen-Netzlaufwerk nicht öffnen!“*
+
+Die Befehlsausgabe von \`ipconfig /all\` auf dem PC zeigt folgende Werte:
+- IPv4-Adresse: \`169.254.88.19\`
+- Subnetzmaske: \`255.255.0.0\`
+- Standardgateway: *(leer)*
+- DNS-Server: *(leer)*
+
+**Beantworten Sie die Prüfungsfragen:**
+a) Was bedeutet die IP-Adresse \`169.254.88.19\` und welcher Systemdienst ist fehlgeschlagen?
+b) Nennen Sie **drei mögliche technische Ursachen** für dieses Fehlerbild im Firmennetz.
+c) Beschreiben Sie die **stufenweise Vorgehensweise zur Behebung und Diagnose** des Fehlers durch den IT-Support.`,
+        sampleSolution: `Musterlösung nach IHK-Standard:
+
+a) Bedeutung der IP-Adresse & Ausfall (2 Punkte):
+- Es handelt sich um eine APIPA-Adresse (Automatic Private IP Addressing, RFC 3927) aus dem Bereich 169.254.0.0/16.
+- Der Client ist für dynamische IP-Vergabe (DHCP) konfiguriert, konnte jedoch innerhalb des Timeouts keine Verbindung zu einem DHCP-Server aufbauen (DHCP-Discover blieb unbeantwortet).
+- Windows weist sich daraufhin selbst eine zufällige IP aus 169.254.x.x zu. Da kein Standardgateway und kein DNS-Server vergeben werden, ist keine Kommunikation außerhalb des lokalen Segments möglich.
+
+b) Drei technische Ursachen (2 Punkte):
+1. Physikalische Verbindung / Layer 1 unterbrochen: Patchkabel ausgesteckt, defekt oder Dose am Patchfeld nicht gepatcht (Link-LED an Netzwerkkarte ist aus).
+2. Falsches VLAN konfiguriert: Der Switchport wurde versehentlich auf ein VLAN ohne aktiven DHCP-Server oder DHCP-Relay (IP Helper) konfiguriert.
+3. DHCP-Server ausgefallen oder Adresspool (Scope) erschöpft: Der zentrale DHCP-Server antwortet nicht mehr oder alle Leases im Subnetz sind belegt.
+
+c) Stufenweise Fehlerbehebung & Diagnose (2 Punkte):
+1. Layer 1 (Hardware): Prüfen der Link-LEDs an PC-Netzwerkkarte und Switchport; Patchkabel austauschen bzw. fest einstecken.
+2. CLI-Diagnose: Am PC \`ipconfig /release\` gefolgt von \`ipconfig /renew\` ausführen, um eine neue Lease anzufordern.
+3. Switchport-Prüfung: VLAN-Zugehörigkeit und Port-Status (admin up / line up, 802.1X Authentifizierung) auf dem Switch prüfen.
+4. DHCP-Dienst prüfen: DHCP-Server auf Funktionsfähigkeit und freie Adressen im Scope überprüfen.`,
+        correctAnswer: `a) APIPA-Adresse (169.254.x.x) -> DHCP-Server nicht erreichbar / Timeout.
+b) Ursachen:
+   1. Kabel lose/defekt (Layer 1)
+   2. Falsches VLAN / Switchport-Fehler
+   3. DHCP-Server ausgefallen oder Adresspool voll.
+c) Behebung:
+   1. Link-LED & Kabel prüfen
+   2. ipconfig /renew
+   3. Switchport & DHCP-Scope kontrollieren.`,
+        solutionDiagramSvg: VisualDiagrams.getAddressClassificationDiagramSvg(),
+        explanation: "169.254.0.0/16 signalisiert immer: DHCP fehlgeschlagen. Der Rechner kann nur noch andere Rechner im selben physischen Switch-Segment erreichen, die ebenfalls APIPA nutzen.",
+        points: 6
     }
 ];

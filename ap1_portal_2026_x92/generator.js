@@ -5150,5 +5150,100 @@ ORDER BY gesamtumsatz_euro DESC;`;
         }
     }
 
+
+    // =========================================================================
+    // MC21: IPv4 & IPv6 Adressklassifizierung (Privat, Öffentlich, APIPA, Loopback, GUA, ULA, Link-Local)
+    // =========================================================================
+    for (let i = 0; i < 15; i++) {
+        const testOctetA = Math.floor(Math.random() * 200) + 1;
+        const testOctetB = Math.floor(Math.random() * 200) + 1;
+        const hexVal = (Math.floor(Math.random() * 0xe000) + 0x1000).toString(16);
+
+        const v4Items = [
+            { addr: `10.${testOctetA}.${testOctetB}.2`, cat: "Privat", desc: "RFC 1918 (10.0.0.0/8)" },
+            { addr: `172.32.${testOctetA}.1`, cat: "Öffentlich", desc: "Achtung Falle! Privat ist nur 172.16.0.0 - 172.31.255.255, 172.32 ist öffentlich!" },
+            { addr: `192.168.${testOctetB}.1`, cat: "Privat", desc: "RFC 1918 (192.168.0.0/16)" },
+            { addr: `169.254.${testOctetA}.${testOctetB}`, cat: "APIPA (Link-Local)", desc: "RFC 3927 (automatische Selbstvergabe bei DHCP-Fehler)" },
+            { addr: "127.0.0.1", cat: "Loopback", desc: "RFC 1122 (127.0.0.0/8 für internen TCP/IP-Stack)" },
+            { addr: "8.8.8.8", cat: "Öffentlich", desc: "Google Public DNS (weltweit öffentlich geroutet)" }
+        ];
+
+        const v6Items = [
+            { addr: `2a00:1450:4001:${hexVal}::200e`, cat: "Global Unicast (GUA)", desc: "Öffentlich im weltweiten Internet geroutet (2000::/3)" },
+            { addr: `fd00:abcd:${hexVal}::1`, cat: "Unique Local (ULA)", desc: "Privater Adressbereich für Firmennetzwerke (fc00::/7 bzw. fd00::/8)" },
+            { addr: "fe80::1", cat: "Link-Local", desc: "fe80::/10 (nur auf dem lokalen Link gültig, niemals von Routern weitergeleitet)" },
+            { addr: "ff02::1", cat: "Multicast", desc: "ff00::/8 (All-Nodes Scope auf lokalem Link)" },
+            { addr: "::1", cat: "Loopback", desc: "::1/128 (Localhost / interner TCP/IP-Stack)" },
+            { addr: `2001:db8:${hexVal}::10`, cat: "Dokumentation", desc: "RFC 3849 (für Handbücher/Schulungen, nicht im Internet geroutet)" }
+        ];
+
+        const isOpen = shouldBeOpenText();
+        if (isOpen) {
+            const qText = `**Aufgabe: Adressklassifizierung & Routing (IPv4 & IPv6)**\n\n` +
+                `Ordnen Sie jede der folgenden IPv4- und IPv6-Adressen dem korrekten Bereich zu\n` +
+                `(**privat**, **öffentlich**, **Loopback**, **APIPA / Link-Local**, **GUA**, **ULA** oder **Multicast**):\n\n` +
+                `\`\`\`text\n` +
+                `+-----------------------------+------------------------------------------------+\n` +
+                `| Adresse                     | Zuordnung & Gültigkeitsbereich                 |\n` +
+                `+-----------------------------+------------------------------------------------+\n` +
+                v4Items.map(item => `| ${item.addr.padEnd(27)} |                                                |`).join("\n") + "\n" +
+                v6Items.slice(0, 3).map(item => `| ${item.addr.padEnd(27)} |                                                |`).join("\n") + "\n" +
+                `+-----------------------------+------------------------------------------------+\n` +
+                `\`\`\`\n\n` +
+                `**Zusatzfrage zur Layer-3-Kommunikation:**\n` +
+                `Welche dieser Adressen benötigen zwingend einen Router (Layer-3-Gerät mit NAT/PAT) zur Kommunikation ins Internet, und welche Adressen dürfen von Routern **niemals** weitergeleitet werden?`;
+
+            const mLoesung = `Musterlösung Adressklassifizierung:\n\n` +
+                `1. IPv4-Klassifizierung:\n` +
+                v4Items.map(item => `• ${item.addr}: ${item.cat} (${item.desc})`).join("\n") + "\n\n" +
+                `2. IPv6-Klassifizierung:\n` +
+                v6Items.slice(0, 3).map(item => `• ${item.addr}: ${item.cat} (${item.desc})`).join("\n") + "\n\n" +
+                `3. Router / Layer-3-Bedarf:\n` +
+                `- Private IPv4-Adressen (${v4Items[0].addr}, ${v4Items[2].addr}) benötigen einen Router mit NAT/PAT für das Internet.\n` +
+                `- APIPA (${v4Items[3].addr}), Loopback (${v4Items[4].addr}) und IPv6 Link-Local (${v6Items[2].addr}) werden von Routern NIEMALS weitergeleitet (verlassen das lokale Subnetz nicht).`;
+
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "subnetting",
+                topic: "🌐 Aufgabe 5: Adressklassifizierung (IPv4 & IPv6 Adressbereiche & Routing)",
+                isSubnetting: true,
+                isHard: false,
+                difficulty: "standard",
+                isBawueFocus: true,
+                isItArbeitsplatz: true,
+                type: "open-text",
+                question: qText,
+                musterloesung: mLoesung,
+                correctAnswer: v4Items.map(it => `${it.addr}: ${it.cat}`).join(" | "),
+                solutionDiagramSvg: VisualDiagrams.getAddressClassificationDiagramSvg ? VisualDiagrams.getAddressClassificationDiagramSvg() : "",
+                explanation: "172.32.x.x ist öffentlich (RFC 1918 reicht nur bis 172.31.255.255). APIPA und Loopback werden von Routern niemals geroutet.",
+                points: 6
+            });
+        } else {
+            // MC Variant
+            const picked = v4Items[1]; // the tricky public one or APIPA
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "subnetting",
+                topic: "🌐 IHK Multiple-Choice: IPv4 & IPv6 Adressklassifizierung",
+                isSubnetting: true,
+                isHard: false,
+                difficulty: "standard",
+                isBawueFocus: true,
+                type: "multiple-choice",
+                question: `Welche Aussage zur Klassifizierung der IP-Adresse \`${picked.addr}\` ist fachlich KORREKT?`,
+                options: [
+                    `Es handelt sich um eine ÖFFENTLICHE IP-Adresse, da der private Bereich 172.16.0.0/12 exakt bei 172.31.255.255 endet.`,
+                    `Es handelt sich um eine private IP-Adresse der Klasse B (RFC 1918).`,
+                    `Es handelt sich um eine APIPA-Adresse (Link-Local).`,
+                    `Es handelt sich um eine Loopback-Adresse.`
+                ],
+                correctAnswer: 0,
+                solutionDiagramSvg: VisualDiagrams.getAddressClassificationDiagramSvg ? VisualDiagrams.getAddressClassificationDiagramSvg() : "",
+                explanation: `172.32.x.x ist ÖFFENTLICH! Der private Bereich nach RFC 1918 umfasst nur 172.16.0.0 bis 172.31.255.255.`
+            });
+        }
+    }
+
     return dynamicQuestions;
 }
