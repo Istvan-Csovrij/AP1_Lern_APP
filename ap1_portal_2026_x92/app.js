@@ -1405,6 +1405,8 @@ function getThemeLabel(key) {
         lf4: "LF 4: Schutz & Sicherheit",
         lf5: "LF 5: Software & SQL",
         lf6: "LF 6: Services & WiSo",
+        lf7: "🤖 LF 7: Cyber-physische Systeme (CPS & IoT)",
+        cps: "🤖 LF 7: Cyber-physische Systeme (CPS & IoT)",
         wiso: "WiSo: Wirtschafts- & Sozialkunde",
         "bawue-special": "BW Spezial: IT-Systeme & Prozesse",
         "bawue-focus": "🔮 Prüfungsfokus BaWü",

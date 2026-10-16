@@ -627,6 +627,276 @@ var staticQuestions = [
         musterloesung: "Der Käufer muss die gelieferte Ware unverzüglich nach der Ablieferung untersuchen und, wenn sich ein Mangel zeigt, dem Verkäufer unverzüglich Anzeige machen (Rügepflicht).",
         explanation: "Beim B2B-Kauf (zweiseitiger Handelskauf) gilt die Rügepflicht nach § 377 HGB. Unterlässt der Käufer die unverzügliche Untersuchung und Rüge, gilt die Ware als genehmigt, es sei denn, der Mangel war nicht erkennbar."
     },
+
+    // === LERNFELD 7: CYBER-PHYSISCHE SYSTEME (lf7) ===
+    {
+        id: 701,
+        isBawueFocus: true,
+        theme: "lf7",
+        type: "multiple-choice",
+        question: "Was versteht man unter einem 'Cyber-physischen System' (CPS)?",
+        options: [
+            "Ein rein softwarebasiertes KI-Modell zur Simulation von Cloud-Netzwerken.",
+            "Die enge Verknüpfung von physischen/mechanischen Komponenten mit informationstechnischen (Cyber-) Systemen und Netzwerken über Sensoren und Aktoren.",
+            "Ein Antiviren-Programm, das physische USB-Sticks vor Schadsoftware schützt.",
+            "Ein Rechenzentrum, das durch physische Wachdienste vor Einbruch gesichert ist."
+        ],
+        correctAnswer: 1,
+        explanation: "Ein Cyber-physisches System (CPS) verbindet die reale physische Welt (Maschinen, Gebäude, Fahrzeuge) über Sensoren (Datenerfassung) und Aktoren (Ausführung) eng mit der digitalen Welt (Software, Algorithmen, Datennetze)."
+    },
+    {
+        id: 702,
+        isBawueFocus: true,
+        theme: "lf7",
+        type: "multiple-choice",
+        question: "Welche der folgenden Komponenten in einer Fertigungsstraße fungiert als Aktor (Aktuator)?",
+        options: [
+            "Ein optischer Infrarot-Abstandssensor zur Objekterkennung",
+            "Ein PT100-Widerstandsthermometer zur Temperaturüberwachung",
+            "Ein elektrisches Magnetventil, das den Zulauf von Kühlflüssigkeit regelt",
+            "Ein Dehnungsmessstreifen zur Erfassung mechanischer Materialspannung"
+        ],
+        correctAnswer: 2,
+        explanation: "Sensoren erfassen physikalische Messgrößen und wandeln sie in elektrische Signale um. Aktoren setzen elektrische Steuerbefehle in mechanische Bewegungen oder physikalische Wirkungen um (z. B. Magnetventil öffnen/schließen, Motor starten, Relais schalten)."
+    },
+    {
+        id: 703,
+        isBawueFocus: true,
+        theme: "lf7",
+        type: "multiple-choice",
+        question: "Welche Hauptaufgabe hat ein Sensor in einem industriellen IoT-System?",
+        options: [
+            "Er führt mechanische Stellbewegungen anhand digitaler Steuerbefehle aus.",
+            "Er erfasst physikalische Umgebungs- oder Prozessdaten und wandelt sie in elektrische bzw. digitale Signale um.",
+            "Er speichert Prozessdaten dauerhaft in einer relationalen SQL-Datenbank.",
+            "Er fungiert als zentraler Vermittlungsserver für MQTT-Nachrichten."
+        ],
+        correctAnswer: 1,
+        explanation: "Sensoren sind die Sinnesorgane eines CPS. Sie nehmen physikalische Größen (Druck, Temperatur, Feuchtigkeit, Licht, Drehzahl) auf und transformieren sie in vom Rechner verarbeitbare elektrische bzw. digitale Signale."
+    },
+    {
+        id: 704,
+        isBawueFocus: true,
+        theme: "lf7",
+        type: "text-input",
+        question: "Wie lautet die international gebräuchliche englische Abkürzung für einen Einplatinencomputer (z. B. Raspberry Pi), der einen vollwertigen Computer samt CPU, RAM und Anschlüssen auf einer einzigen Leiterplatte darstellt? (3 Buchstaben)",
+        correctAnswers: ["SBC", "sbc"],
+        explanation: "SBC steht für 'Single Board Computer' (Einplatinencomputer). Bekannte Beispiele sind der Raspberry Pi oder BeagleBone."
+    },
+    {
+        id: 705,
+        isBawueFocus: true,
+        theme: "lf7",
+        type: "multiple-choice",
+        question: "Für eine zeitkritische Not-Aus-Abschaltung soll ein Steuerungsbauteil gewählt werden. Warum wird hierfür in der Regel ein Mikrocontroller (MCU, z. B. ESP32, STM32) gegenüber einem Single Board Computer (SBC wie Raspberry Pi mit Standard-Linux) bevorzugt?",
+        options: [
+            "Weil Mikrocontroller einen größeren Arbeitsspeicher und grafische Benutzeroberflächen besitzen.",
+            "Weil Mikrocontroller ohne schwerfälliges Betriebssystem ('Bare Metal') deterministisches Echtzeitverhalten garantieren und sofort nach dem Einschalten betriebsbereit sind.",
+            "Weil Standard-Linux auf einem Raspberry Pi resistenter gegen physische Stromausfälle ist.",
+            "Weil Mikrocontroller standardmäßig zwingend über WLAN mit der Cloud verbunden sein müssen."
+        ],
+        correctAnswer: 1,
+        explanation: "Mikrocontroller arbeiten deterministisch (vorhersagbare Ausführungszeiten im Mikrosekundenbereich ohne OS-Jitter oder Hintergrunddienste), booten in Millisekunden und sind ideal für harte Echtzeitanforderungen und Sicherheitsabschaltungen."
+    },
+    {
+        id: 706,
+        isBawueFocus: true,
+        theme: "lf7",
+        type: "multiple-choice",
+        question: "Nach welchem Architekturmuster arbeitet das im Internet of Things (IoT) weit verbreitete Netzwerkprotokoll MQTT?",
+        options: [
+            "Peer-to-Peer (P2P)",
+            "Client-Server mit synchronen RESTful HTTP-Requests",
+            "Publish-Subscribe über einen zentralen Broker",
+            "Master-Slave über einen physischen Feldbus"
+        ],
+        correctAnswer: 2,
+        explanation: "MQTT nutzt das Publish-Subscribe-Muster. Geräte (Publisher) senden Sensordaten zu bestimmten Themen (Topics) an einen zentralen Broker. Andere Geräte (Subscriber) abonnieren diese Topics und erhalten die Daten automatisch."
+    },
+    {
+        id: 707,
+        isBawueFocus: true,
+        theme: "lf7",
+        type: "multiple-choice",
+        question: "Ein IoT-Temperatursensor sendet Telemetriedaten mit MQTT Quality of Service Level 1 (QoS 1). Welche Zustellgarantie gilt hierbei?",
+        options: [
+            "Die Nachricht wird maximal einmal ohne Empfangsbestätigung versendet (Fire & Forget).",
+            "Die Nachricht wird garantiert mindestens einmal zugestellt; bei Verbindungsstörungen können jedoch Dubletten entstehen.",
+            "Die Nachricht wird garantiert genau einmal ohne jegliche Duplikate über einen 4-Wege-Handshake zugestellt.",
+            "Die Nachricht wird nur versendet, wenn mindestens 3 Subscriber online sind."
+        ],
+        correctAnswer: 1,
+        explanation: "QoS 0 = At most once (maximal einmal, ohne Bestätigung), QoS 1 = At least once (mindestens einmal, mit PUBACK-Bestätigung, Dubletten möglich), QoS 2 = Exactly once (genau einmal, kein Verlust, keine Dubletten)."
+    },
+    {
+        id: 708,
+        isBawueFocus: true,
+        theme: "lf7",
+        type: "text-input",
+        question: "Welche MQTT QoS-Stufe (Quality of Service) garantiert durch einen vierstufigen Handshake, dass eine Steuernachricht absolut genau einmal ('Exactly once') beim Empfänger ankommt? (Ziffer 0, 1 oder 2)",
+        correctAnswers: ["2", "QoS 2", "QoS2"],
+        explanation: "QoS 2 (Exactly once) ist die höchste und sicherste Stufe in MQTT. Sie verhindert Doppelübertragungen zuverlässig, erfordert aber den höchsten Protokollaufwand."
+    },
+    {
+        id: 709,
+        isBawueFocus: true,
+        theme: "lf7",
+        type: "multiple-choice",
+        question: "Warum gilt OPC UA (Open Platform Communications Unified Architecture) als Schlüsselstandard für cyber-physische Systeme in der industriellen Fertigung (Industrie 4.0)?",
+        options: [
+            "Weil es proprietär nur auf Microsoft Windows Steuerungen läuft.",
+            "Weil es plattform- und herstellerunabhängig ist, ein semantisches Objekt- und Informationsmodell bietet und moderne Sicherheitsmechanismen (Zertifikate, TLS-Verschlüsselung) integriert hat.",
+            "Weil es Funkwellen verstärkt und Kabelverbindungen in der Fabrik komplett überflüssig macht.",
+            "Weil es relationale SQL-Datenbanken ablöst."
+        ],
+        correctAnswer: 1,
+        explanation: "OPC UA ist der herstellerübergreifende Industriestandard für M2M-Kommunikation. Es vereint semantische Datenbeschreibungen mit nativer Ende-zu-Ende-Sicherheit (Security by Design)."
+    },
+    {
+        id: 710,
+        isBawueFocus: true,
+        theme: "lf7",
+        type: "multiple-choice",
+        question: "In einer computergesteuerten Serverraum-Klimaanlage misst ein Temperatursensor 26 °C. Der gewünschte Zielwert liegt bei 20 °C. Wie werden diese beiden Werte in der Regelungstechnik fachlich korrekt bezeichnet?",
+        options: [
+            "26 °C ist die Stellgröße, 20 °C ist die Störgröße.",
+            "26 °C ist der Istwert, 20 °C ist der Sollwert.",
+            "26 °C ist die Führungsgröße, 20 °C ist die Regelstrecke.",
+            "26 °C ist der Sollwert, 20 °C ist der Istwert."
+        ],
+        correctAnswer: 1,
+        explanation: "Der Istwert (Regelgröße) ist der vom Sensor aktuell gemessene Zustand (26 °C). Der Sollwert (Führungsgröße) ist der vorgegebene Sollzustand (20 °C). Die Differenz ist die Regelabweichung (hier +6 °C)."
+    },
+    {
+        id: 711,
+        isBawueFocus: true,
+        theme: "lf7",
+        type: "text-input",
+        question: "Wie nennt man in der Regelungstechnik die Ausgangsgröße des Reglers (z. B. Öffnungsgrad eines Heizungsventils in Prozent oder Drehzahl eines Lüfters), mit der der Aktor die Regelstrecke beeinflusst? (Begriff mit 10 Buchstaben)",
+        correctAnswers: ["Stellgröße", "Stellgroesse"],
+        explanation: "Die Stellgröße (Manipulated Variable) wird vom Regler berechnet und an den Aktor übergeben, um die Regelabweichung auszugleichen."
+    },
+    {
+        id: 712,
+        isBawueFocus: true,
+        theme: "lf7",
+        type: "multiple-choice",
+        question: "In industriellen CPS wird streng zwischen 'Safety' und 'Security' unterschieden. Welche Aussage trifft die Definition exakt?",
+        options: [
+            "Safety meint den Schutz vor Hackerangriffen; Security meint den Schutz vor physischem Diebstahl von Hardware.",
+            "Safety (Funktionale Sicherheit) schützt Mensch und Umwelt vor Gefahren durch Fehlfunktionen der Maschine; Security (IT-Sicherheit) schützt das IT-System vor böswilligen Angriffen und Manipulationen von außen.",
+            "Safety gilt nur für Büroarbeitsplätze, Security gilt ausschließlich für Cloud-Server.",
+            "Beide Begriffe bedeuten im deutschen Prüfungsrecht dasselbe und können synonym verwendet werden."
+        ],
+        correctAnswer: 1,
+        explanation: "Safety = Schutz von Mensch & Umwelt vor der Maschine (z. B. Not-Aus, Schutzzaun, CE). Security = Schutz des Systems vor Angriffen (z. B. Hacking, Malware, Spionage)."
+    },
+    {
+        id: 713,
+        isBawueFocus: true,
+        theme: "lf7",
+        type: "multiple-choice",
+        question: "Was kennzeichnet ein Steuerungssystem mit 'harter Echtzeitfähigkeit' (Hard Real-Time)?",
+        options: [
+            "Die Datenübertragung erfolgt immer mit mindestens 1 Gbit/s Übertragungsrate.",
+            "Das Einhalten definierter Fristen (Deadlines) ist absolut zwingend; eine verspätete Antwort gilt als vollständiges Systemversagen und kann zu schweren Schäden oder Gefahr für Menschenleben führen.",
+            "Das System darf niemals mit einem Rechnernetzwerk verbunden werden.",
+            "Die CPU läuft ununterbrochen unter maximaler 100% Volllast."
+        ],
+        correctAnswer: 1,
+        explanation: "Bei harter Echtzeit führt jede Fristüberschreitung zur Katastrophe (z. B. Airbag-Steuerung, Schutzkäfig-Not-Aus). Bei weicher Echtzeit mindert eine Verzögerung lediglich die Qualität (z. B. Video-Streaming)."
+    },
+    {
+        id: 714,
+        isBawueFocus: true,
+        theme: "lf7",
+        type: "multiple-choice",
+        question: "Welches Konzept beschreibt der Begriff 'Digitaler Zwilling' (Digital Twin) in der Industrie 4.0?",
+        options: [
+            "Ein identischer zweiter Backup-Server, der bei Ausfall des primären Servers einspringt.",
+            "Ein virtuelles, datengestütztes Software-Abbild eines physischen Objekts oder Prozesses, das kontinuierlich mit realen Betriebsdaten synchronisiert wird.",
+            "Ein USB-Dongle zur zweifachen Lizenzaktivierung einer SPS-Programmiersoftware.",
+            "Ein Mitarbeiter, der als Stellvertreter des Produktionsleiters benannt ist."
+        ],
+        correctAnswer: 1,
+        explanation: "Ein digitaler Zwilling bildet reale Anlagen und Prozesse digital ab. Er ermöglicht virtuelle Inbetriebnahme, Simulationen, Stresstests und Prognosen auf Basis von Live-Sensordaten."
+    },
+    {
+        id: 715,
+        isBawueFocus: true,
+        theme: "lf7",
+        type: "multiple-choice",
+        question: "Welchen wesentlichen Vorteil bietet 'Predictive Maintenance' (vorausschauende Instandhaltung) gegenüber der klassischen reaktiven Wartung?",
+        options: [
+            "Es müssen überhaupt keine Ersatzteile mehr gelagert oder bestellt werden.",
+            "Durch kontinuierliche Analyse von Sensordaten (z. B. Vibration, Temperatur, Schmiermittelqualität) wird der optimale Wartungszeitpunkt prognostiziert, bevor es zu teuren ungeplanten Stillständen kommt.",
+            "Maschinen werden prinzipiell immer pauschal nach exakt 1.000 Betriebsstunden komplett ausgetauscht.",
+            "Es spart jegliche Dokumentationspflicht nach Qualitätsstandards ein."
+        ],
+        correctAnswer: 1,
+        explanation: "Predictive Maintenance nutzt Maschinendaten und Vorhersagemodelle, um Verschleiß im Voraus zu erkennen. Wartungen finden genau dann statt, wenn nötig – das spart Kosten und verhindert ungeplante Ausfälle."
+    },
+    {
+        id: 716,
+        isBawueFocus: true,
+        theme: "lf7",
+        type: "multiple-choice",
+        question: "Ein Landwirtschaftsbetrieb möchte Bodenfeuchtesensoren auf weitläufigen Feldern (mehrere Quadratkilometer) betreiben. Die Sensoren laufen über Batterie und senden alle 30 Minuten kleine Datenpakete. Welcher Funkstandard ist hierfür am besten geeignet?",
+        options: [
+            "WLAN (Wi-Fi 6)",
+            "Bluetooth Classic",
+            "LoRaWAN (Long Range Wide Area Network)",
+            "NFC (Near Field Communication)"
+        ],
+        correctAnswer: 2,
+        explanation: "LoRaWAN bietet bis zu 10–15 km Reichweite, durchdringt dichte Vegetation und verbraucht so wenig Energie, dass kleine Sensor-Knoten viele Jahre mit einer Batterie autark arbeiten können."
+    },
+    {
+        id: 717,
+        isBawueFocus: true,
+        theme: "lf7",
+        type: "multiple-choice",
+        question: "Warum werden in modernen CPS zeitkritische Analysen oft per 'Edge Computing' (direkt vor Ort an der Maschine) statt rein in der Cloud durchgeführt?",
+        options: [
+            "Weil Speicherplatz in der Cloud grundsätzlich teurer ist als lokale Datenträger.",
+            "Zur Minimierung von Latenzzeiten, Entlastung der Internetbandbreite und Aufrechterhaltung des autonomen Betriebs selbst bei Netzausfall.",
+            "Weil Cloud-Anbieter keine Zertifizierung für Produktionsbetriebe besitzen.",
+            "Weil Edge-Geräte grundsätzlich keine Stromversorgung benötigen."
+        ],
+        correctAnswer: 1,
+        explanation: "Edge Computing verarbeitet Daten direkt an der Entstehungsquelle. Das eliminiert Netzwerkverzögerungen (Latenz), schont Bandbreite und schützt sensible Betriebsdaten vor dem Verlassen des Werks."
+    },
+    {
+        id: 718,
+        isBawueFocus: true,
+        theme: "lf7",
+        type: "text-input",
+        question: "Welches modulare elektronische Steuerungssystem mit zyklischem Programmablauf (EVA-Prinzip) bildet das industrielle Rückgrat automatisierter Anlagen? (Deutsche Abkürzung mit 3 Buchstaben)",
+        correctAnswers: ["SPS", "sps"],
+        explanation: "SPS steht für 'Speicherprogrammierbare Steuerung' (englisch PLC). Sie liest zyklisch Eingänge ein, verarbeitet das Anwenderprogramm und setzt die Ausgänge für die Aktoren."
+    },
+    {
+        id: 719,
+        isHard: true,
+        difficulty: "hard",
+        isBawueFocus: true,
+        theme: "lf7",
+        type: "open-text",
+        question: "Fachaufgabe Regelungstechnik (LF 7): Ein cyber-physisches System regelt die Luftfeuchtigkeit in einem automatisierten Gewächshaus. Erläutere anhand dieses Szenarios die 5 Bestandteile des geschlossenen Regelkreises: Istwert, Sollwert, Regler, Stellgröße und Aktor.",
+        musterloesung: "1. Istwert: Die vom Feuchtigkeitssensor aktuell gemessene Luftfeuchtigkeit (z. B. 48% rF).\n2. Sollwert: Der vorgegebene Zielwert der Steuerung (z. B. 70% rF).\n3. Regler: Die Steuerungseinheit (Mikrocontroller/SPS), die Istwert und Sollwert vergleicht und die Regelabweichung ermittelt.\n4. Stellgröße: Das berechnete Steuersignal des Reglers (z. B. 'Magnetventil für 15 Sekunden öffnen' oder PWM-Signal 80%).\n5. Aktor: Das physische Magnetventil bzw. die Sprühdüse, die den Sprühnebel erzeugt und so die Luftfeuchtigkeit physisch anhebt.",
+        explanation: "Ein geschlossener Regelkreis überwacht die Regelgröße kontinuierlich über Sensoren (Rückkopplung), vergleicht sie mit der Führungsgröße und steuert Aktoren an, um Abweichungen auszuregeln."
+    },
+    {
+        id: 720,
+        isHard: true,
+        difficulty: "hard",
+        isBawueFocus: true,
+        theme: "lf7",
+        type: "open-text",
+        question: "Fachaufgabe IT-Sicherheit in CPS (LF 7): Bei der Vernetzung von industriellen Produktionsanlagen (OT) mit dem Firmennetzwerk (IT) entstehen erhebliche Sicherheitsrisiken. Nenne 3 konkrete Maßnahmen zur Absicherung cyber-physischer Systeme nach dem Defense-in-Depth-Prinzip.",
+        musterloesung: "1. Netzwerksegmentierung & Zonen: Physische und logische Trennung von IT- und OT-Netzen durch industrielle Firewalls und eine Demilitarisierte Zone (DMZ) gemäß Norm IEC 62443.\n2. Zugriffskontrolle & Multi-Faktor-Authentifizierung (MFA): Absicherung von Wartungszugängen; keine Standardpasswörter auf SPS/Sensoren; Fernwartung nur über dedizierte VPN-Tunnel mit MFA.\n3. Verschlüsselte & authentifizierte Protokolle: Nutzung sicherer Industrieprotokolle (z. B. OPC UA mit X.509-Zertifikaten und TLS-Verschlüsselung; MQTTS) sowie Deaktivierung unsicherer Klartextdienste (z. B. Telnet, ungesichertes HTTP).",
+        explanation: "Industrie-4.0-Sicherheit (OT-Security) erfordert Zonentrennung, granulare Zugriffskontrollen und verschlüsselte Protokolle, um Sabotage und Produktionsausfälle zu verhindern."
+    },
     {
         id: 48,
         isHard: true,
