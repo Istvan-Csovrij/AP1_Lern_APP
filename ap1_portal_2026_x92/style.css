@@ -2443,3 +2443,91 @@ footer {
         max-height: none;
     }
 }
+
+
+/* Interactive Resizer Divider between Split Panes */
+.exam-split-resizer {
+    width: 18px;
+    height: calc(100vh - 120px);
+    max-height: 980px;
+    background: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 6px;
+    cursor: col-resize;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    user-select: none;
+    touch-action: none;
+    transition: background 0.15s, border-color 0.15s, box-shadow 0.15s;
+    box-sizing: border-box;
+    z-index: 10;
+    flex-shrink: 0;
+}
+
+.exam-split-resizer:hover,
+.exam-split-resizer.dragging {
+    background: #0284c7 !important;
+    border-color: #38bdf8 !important;
+    box-shadow: 0 0 14px rgba(56, 189, 248, 0.7) !important;
+}
+
+.resizer-grip {
+    width: 4px;
+    height: 32px;
+    background: #64748b;
+    border-radius: 2px;
+    transition: background 0.15s;
+}
+
+.exam-split-resizer:hover .resizer-grip,
+.exam-split-resizer.dragging .resizer-grip {
+    background: #ffffff;
+}
+
+.resizer-preset-btn {
+    width: 16px;
+    height: 16px;
+    border-radius: 3px;
+    border: 1px solid #475569;
+    background: #0f172a;
+    color: #94a3b8;
+    font-size: 0.65rem;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.15s;
+    padding: 0;
+}
+.resizer-preset-btn:hover {
+    background: #38bdf8;
+    color: #0f172a;
+    border-color: #38bdf8;
+}
+
+/* Ratio buttons in top navbar */
+.split-ratio-btn {
+    background: #1e293b;
+    color: #cbd5e1;
+    border: 1px solid #475569;
+    padding: 2px 7px;
+    font-size: 0.75rem;
+    border-radius: 4px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+.split-ratio-btn:hover {
+    background: #38bdf8;
+    color: #0f172a;
+    border-color: #38bdf8;
+}
+.split-ratio-btn.active {
+    background: #0284c7;
+    color: #ffffff;
+    border-color: #38bdf8;
+}

@@ -1689,6 +1689,112 @@ function changeExamPage(targetPage) {
 
 // Renders either Deckblatt (0) or one of the Tasks (1..N)
 let isExamSplitView = true;
+let splitRatio = parseFloat(localStorage.getItem("ap1_split_ratio")) || 50; // percentage for left pane
+
+function applySplitRatio(ratio) {
+    const leftPane = document.getElementById("exam-split-task-pane");
+    const rightPane = document.getElementById("exam-split-attachments-pane");
+    if (!leftPane || !rightPane) return;
+
+    // Resizer is ~18px wide
+    leftPane.style.flex = `0 0 calc(${ratio}% - 9px)`;
+    leftPane.style.maxWidth = `calc(${ratio}% - 9px)`;
+    leftPane.style.width = `calc(${ratio}% - 9px)`;
+    
+    rightPane.style.flex = `0 0 calc(${100 - ratio}% - 9px)`;
+    rightPane.style.maxWidth = `calc(${100 - ratio}% - 9px)`;
+    rightPane.style.width = `calc(${100 - ratio}% - 9px)`;
+
+    // Update active state on ratio buttons
+    document.querySelectorAll(".split-ratio-btn").forEach(btn => {
+        const text = btn.textContent.trim();
+        if ((ratio <= 40 && text === "35:65") ||
+            (ratio > 40 && ratio < 60 && text === "50:50") ||
+            (ratio >= 60 && text === "65:35")) {
+            btn.classList.add("active");
+        } else {
+            btn.classList.remove("active");
+        }
+    });
+}
+
+function setSplitRatioPreset(ratio) {
+    splitRatio = ratio;
+    applySplitRatio(splitRatio);
+    localStorage.setItem("ap1_split_ratio", splitRatio);
+}
+window.setSplitRatioPreset = setSplitRatioPreset;
+
+function initSplitResizer() {
+    const resizer = document.getElementById("exam-split-resizer");
+    const wrapper = document.querySelector(".exam-split-wrapper");
+    if (!resizer || !wrapper) return;
+
+    applySplitRatio(splitRatio);
+
+    let isDragging = false;
+
+    const onMouseDown = (e) => {
+        isDragging = true;
+        document.body.style.cursor = "col-resize";
+        document.body.style.userSelect = "none";
+        resizer.classList.add("dragging");
+    };
+
+    const onMouseMove = (e) => {
+        if (!isDragging) return;
+        const rect = wrapper.getBoundingClientRect();
+        const offsetX = e.clientX - rect.left;
+        let percentage = (offsetX / rect.width) * 100;
+        
+        // Clamp between 20% and 80%
+        if (percentage < 20) percentage = 20;
+        if (percentage > 80) percentage = 80;
+
+        splitRatio = Math.round(percentage * 10) / 10;
+        applySplitRatio(splitRatio);
+    };
+
+    const onMouseUp = () => {
+        if (isDragging) {
+            isDragging = false;
+            document.body.style.cursor = "";
+            document.body.style.userSelect = "";
+            resizer.classList.remove("dragging");
+            localStorage.setItem("ap1_split_ratio", splitRatio);
+        }
+    };
+
+    resizer.onmousedown = onMouseDown;
+    document.onmousemove = onMouseMove;
+    document.onmouseup = onMouseUp;
+
+    // Touch support
+    resizer.ontouchstart = (e) => {
+        isDragging = true;
+        resizer.classList.add("dragging");
+    };
+
+    document.ontouchmove = (e) => {
+        if (!isDragging || !e.touches || !e.touches[0]) return;
+        const rect = wrapper.getBoundingClientRect();
+        const offsetX = e.touches[0].clientX - rect.left;
+        let percentage = (offsetX / rect.width) * 100;
+        if (percentage < 20) percentage = 20;
+        if (percentage > 80) percentage = 80;
+        splitRatio = Math.round(percentage * 10) / 10;
+        applySplitRatio(splitRatio);
+    };
+
+    document.ontouchend = () => {
+        if (isDragging) {
+            isDragging = false;
+            resizer.classList.remove("dragging");
+            localStorage.setItem("ap1_split_ratio", splitRatio);
+        }
+    };
+}
+
 
 function toggleExamSplitView() {
     isExamSplitView = !isExamSplitView;
@@ -1763,6 +1869,15 @@ function renderCurrentExamPage() {
                 <!-- Left Pane: Authentic Task / Sheet (Separately scrollable) -->
                 <div class="exam-split-col exam-task-col" id="exam-split-task-pane"></div>
 
+                <!-- Draggable Resizer Bar (Breite frei verstellbar) -->
+                <div class="exam-split-resizer" id="exam-split-resizer" title="Breite frei verstellen: Mit der Maus nach links oder rechts ziehen">
+                    <button type="button" class="resizer-preset-btn" onclick="event.stopPropagation(); setSplitRatioPreset(35)" title="Aufgabe 35% / Anlagen 65%">◧</button>
+                    <div class="resizer-grip"></div>
+                    <button type="button" class="resizer-preset-btn" onclick="event.stopPropagation(); setSplitRatioPreset(50)" title="Gleichmäßig 50% / 50%">▥</button>
+                    <div class="resizer-grip"></div>
+                    <button type="button" class="resizer-preset-btn" onclick="event.stopPropagation(); setSplitRatioPreset(65)" title="Aufgabe 65% / Anlagen 35%">◨</button>
+                </div>
+
                 <!-- Right Pane: Authentic Anlageblätter / Attachments (Separately scrollable) -->
                 <div class="exam-split-col exam-attachments-col" id="exam-split-attachments-pane"></div>
             </div>
@@ -1783,6 +1898,8 @@ function renderCurrentExamPage() {
 
         if (taskPane) taskPane.scrollTop = 0;
         if (attPane) attPane.scrollTop = 0;
+
+        initSplitResizer();
     } else {
         if (deskContainer) deskContainer.classList.remove("split-mode");
         if (bookletNavbar) bookletNavbar.classList.remove("split-mode");

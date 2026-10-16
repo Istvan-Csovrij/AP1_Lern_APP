@@ -479,7 +479,13 @@
                         <button class="btn btn-secondary" id="exam-whiteboard-btn" title="Diagramm-Zeichenboard als Fenster öffnen" style="padding: 0.35rem 0.65rem; font-size: 0.85rem; display: flex; align-items: center; gap: 0.35rem; border-radius: 6px; border: 1px solid #8b5cf6; color: #6d28d9; background: #f5f3ff;">
                             <i class="fa-solid fa-pen-ruler"></i> <span style="font-weight: 600;">Skizzenblatt</span>
                         </button>
-                                                <button class="btn" id="exam-split-toggle-btn" onclick="toggleExamSplitView()" title="Split-View: Aufgabe und Anlageblätter nebeneinander anzeigen mit separatem Scrollen" style="padding: 0.35rem 0.65rem; font-size: 0.85rem; display: flex; align-items: center; gap: 0.35rem; border-radius: 6px; border: 1.5px solid #0284c7; color: #0369a1; background: #f0f9ff; font-weight: 700; cursor: pointer;">
+                                                <div class="split-ratio-controls" id="split-ratio-controls" style="display: inline-flex; align-items: center; gap: 3px; background: #0f172a; padding: 2px 4px; border-radius: 6px; border: 1.5px solid #38bdf8;">
+                            <span style="font-size: 0.72rem; color: #94a3b8; font-weight: 700; padding: 0 3px;">Breite:</span>
+                            <button type="button" class="split-ratio-btn" onclick="setSplitRatioPreset(35)" title="Aufgabe schmaler (35%), Anlageblätter breiter (65%)">35:65</button>
+                            <button type="button" class="split-ratio-btn active" onclick="setSplitRatioPreset(50)" title="Gleichmäßig (50% / 50%)">50:50</button>
+                            <button type="button" class="split-ratio-btn" onclick="setSplitRatioPreset(65)" title="Aufgabe breiter (65%), Anlageblätter schmaler (35%)">65:35</button>
+                        </div>
+                        <button class="btn" id="exam-split-toggle-btn" onclick="toggleExamSplitView()" title="Split-View: Aufgabe und Anlageblätter nebeneinander anzeigen mit separatem Scrollen" style="padding: 0.35rem 0.65rem; font-size: 0.85rem; display: flex; align-items: center; gap: 0.35rem; border-radius: 6px; border: 1.5px solid #0284c7; color: #0369a1; background: #f0f9ff; font-weight: 700; cursor: pointer;">
                             <i class="fa-solid fa-table-columns"></i> <span id="exam-split-toggle-text">Split-View (Nebeneinander)</span>
                         </button>
                         <button class="btn" id="exam-submit-btn" style="background-color: #10b981; color: white; font-weight: bold; font-size: 0.92rem; border: none; padding: 0.45rem 0.85rem; display: flex; align-items: center; gap: 0.4rem; border-radius: 6px; cursor: pointer;">
@@ -1444,13 +1450,13 @@ ORDER BY gesamtumsatz DESC;</pre>
     </div>
 
 
-    <script src="diagrams.js?v=129"></script>
-    <script src="exam_data.js?v=129"></script>
-    <script src="questions.js?v=129"></script>
-    <script src="generator.js?v=129"></script>
-    <script src="ap2_bridge.js?v=129"></script>
-    <script src="exam_attachments.js?v=129"></script>
-    <script src="app.js?v=129"></script>
+    <script src="diagrams.js?v=130"></script>
+    <script src="exam_data.js?v=130"></script>
+    <script src="questions.js?v=130"></script>
+    <script src="generator.js?v=130"></script>
+    <script src="ap2_bridge.js?v=130"></script>
+    <script src="exam_attachments.js?v=130"></script>
+    <script src="app.js?v=130"></script>
 
     <!-- PIN Sicherheits-Gatekeeper -->
     <script>
