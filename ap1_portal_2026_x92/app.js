@@ -1512,6 +1512,7 @@ function startExamMode(simulation, forcedSetId) {
     }
 
     // Setup view containers
+    document.body.classList.add("exam-mode-active-body");
     document.querySelector(".container").classList.add("exam-mode-active");
     document.querySelectorAll(".sidebar").forEach(s => s.style.display = "none");
     document.querySelector(".quiz-area").style.display = "none";
@@ -1700,10 +1701,12 @@ function applySplitRatio(ratio) {
     leftPane.style.flex = `0 0 calc(${ratio}% - 12px)`;
     leftPane.style.maxWidth = `calc(${ratio}% - 12px)`;
     leftPane.style.width = `calc(${ratio}% - 12px)`;
+    leftPane.style.minWidth = "0";
     
     rightPane.style.flex = `0 0 calc(${100 - ratio}% - 12px)`;
     rightPane.style.maxWidth = `calc(${100 - ratio}% - 12px)`;
     rightPane.style.width = `calc(${100 - ratio}% - 12px)`;
+    rightPane.style.minWidth = "0";
 
     // Update active state on ratio buttons
     document.querySelectorAll(".split-ratio-btn").forEach(btn => {
@@ -1755,9 +1758,9 @@ function initSplitResizer() {
         const offsetX = e.clientX - rect.left;
         let percentage = (offsetX / rect.width) * 100;
         
-        // Clamp between 15% and 85%
-        if (percentage < 15) percentage = 15;
-        if (percentage > 85) percentage = 85;
+        // Clamp between 20% and 80%
+        if (percentage < 20) percentage = 20;
+        if (percentage > 80) percentage = 80;
 
         splitRatio = Math.round(percentage * 10) / 10;
         applySplitRatio(splitRatio);
@@ -2560,6 +2563,7 @@ function showMainQuizMode() {
     const pauseOverlay = document.getElementById("exam-pause-overlay");
     if (pauseOverlay) pauseOverlay.style.display = "none";
 
+    document.body.classList.remove("exam-mode-active-body");
     document.querySelector(".container").classList.remove("exam-mode-active");
     document.querySelectorAll(".sidebar").forEach(s => s.style.display = "");
     document.querySelector(".quiz-area").style.display = "block";

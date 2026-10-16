@@ -91,15 +91,27 @@ header {
     width: 100%;
 }
 
+/* Full width, stretch-aligned layout for Exam Mode (never clips left or right) */
 .container.exam-mode-active {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    max-width: 98vw !important;
-    width: 98vw !important;
-    margin: 0.75rem auto !important;
-    padding: 0 0.5rem !important;
-    box-sizing: border-box;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    justify-content: flex-start !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    margin: 0.5rem 0 !important;
+    padding: 0 8px !important;
+    box-sizing: border-box !important;
+}
+
+/* Exam Mode Top Blue Header expands to 100% of sheet width without blank edges */
+body.exam-mode-active-body header {
+    padding: 1.25rem 1rem !important;
+}
+body.exam-mode-active-body .header-container {
+    max-width: 100% !important;
+    padding: 0 0.75rem !important;
+    box-sizing: border-box !important;
 }
 
 @media (max-width: 1200px) and (min-width: 950px) {
@@ -691,10 +703,11 @@ footer {
     background-color: #dc2626;
 }
 
-/* Centered 1-column layout for Exam Mode */
+/* Exam Mode Container Full Stretch Alignment */
 .container.exam-mode-active {
     grid-template-columns: 1fr;
-    justify-items: center;
+    justify-items: stretch;
+    align-items: stretch;
 }
 
 /* Highlight BaWü Focus Filter Button */
@@ -1113,16 +1126,40 @@ footer {
    ========================================================================== */
 
 /* Dark desk background behind the physical white exam sheets */
+.exam-area {
+    display: flex;
+    flex-direction: column;
+    width: 100% !important;
+    max-width: 100% !important;
+    align-items: stretch !important;
+    box-sizing: border-box !important;
+    margin: 0 0 1.5rem 0 !important;
+}
+
 .exam-desk-container {
-    width: 100%;
+    width: 100% !important;
+    max-width: 100% !important;
     background: #0f172a;
-    padding: 1.5rem 1rem 3rem 1rem;
+    padding: 1.25rem 0.75rem 2.5rem 0.75rem;
     border-radius: 12px;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 1.5rem;
+    align-items: stretch !important;
+    gap: 1.25rem;
+}
+
+#exam-paper-container {
+    width: 100% !important;
+    max-width: 100% !important;
+    display: flex !important;
+    align-items: stretch !important;
+    justify-content: flex-start !important;
+    box-sizing: border-box !important;
+}
+
+.exam-desk-container:not(.split-mode) .exam-paper-sheet {
+    margin: 0 auto !important;
 }
 
 /* Top Sticky Exam Booklet Navbar */
@@ -1783,9 +1820,12 @@ footer {
 
 .deckblatt-columns {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 14px;
-    margin-bottom: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px;
+    margin-bottom: 18px;
+    min-width: 0;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .deckblatt-scope-box {
@@ -2252,26 +2292,26 @@ footer {
    DUAL-PANE SPLIT-VIEW: AUFGABE & ANLAGEBLÄTTER NEBENEINANDER (SEPARAT SCROLLBAR)
    ========================================================================== */
 .exam-split-wrapper {
-    display: flex;
-    flex-direction: row;
-    align-items: stretch;
-    justify-content: stretch;
-    gap: 0;
-    width: 100%;
-    max-width: 100%;
-    box-sizing: border-box;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: stretch !important;
+    justify-content: flex-start !important;
+    gap: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
 }
 
 .exam-split-col {
     flex: 1 1 50%;
-    min-width: 280px;
-    max-width: none !important;
+    min-width: 0 !important; /* CRITICAL: Enables shrinking to any ratio without overflowing parent */
+    max-width: 100%;
     height: calc(100vh - 120px);
     max-height: 980px;
     overflow-y: auto;
-    overflow-x: hidden;
+    overflow-x: auto; /* Internal horizontal scroll ensures wide tables/code never clip */
     padding: 0 4px;
-    box-sizing: border-box;
+    box-sizing: border-box !important;
     scrollbar-width: thin;
     scrollbar-color: #38bdf8 #1e293b;
     word-break: break-word;
@@ -2629,7 +2669,10 @@ footer {
 .exam-desk-container.split-mode {
     max-width: 100% !important;
     width: 100% !important;
-    padding: 1rem 0.75rem !important;
+    align-items: stretch !important;
+    padding: 0.75rem 0.5rem !important;
+    margin: 0 !important;
+    box-sizing: border-box !important;
 }
 .exam-booklet-navbar.split-mode {
     max-width: 100% !important;
@@ -2644,17 +2687,24 @@ footer {
 .exam-split-wrapper {
     width: 100% !important;
     max-width: 100% !important;
+    align-items: stretch !important;
+    justify-content: flex-start !important;
     gap: 0 !important;
+    box-sizing: border-box !important;
 }
 
-/* Ensure inner DIN-A4 sheets expand to 100% of column width when user widens them */
+/* Ensure inner DIN-A4 sheets expand to 100% of column width when user widens them without bursting */
 .exam-split-col .exam-paper-sheet {
     max-width: 100% !important;
     width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
 }
 .exam-split-col .attachment-sheet {
     max-width: 100% !important;
     width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
 }
 
 /* Close [X] button on attachment header */
@@ -2881,6 +2931,10 @@ footer {
     border: 2px solid #000000;
     margin-bottom: 14px;
     background: #ffffff;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    box-sizing: border-box;
 }
 
 .ihk-db-table-header {
