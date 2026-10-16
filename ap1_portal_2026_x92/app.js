@@ -1688,6 +1688,30 @@ function changeExamPage(targetPage) {
 }
 
 // Renders either Deckblatt (0) or one of the Tasks (1..N)
+let isExamSplitView = true;
+
+function toggleExamSplitView() {
+    isExamSplitView = !isExamSplitView;
+    const btnText = document.getElementById("exam-split-toggle-text");
+    if (btnText) {
+        btnText.textContent = isExamSplitView ? "Split-View (Nebeneinander)" : "Einspaltig (Zentriert)";
+    }
+    const btn = document.getElementById("exam-split-toggle-btn");
+    if (btn) {
+        if (isExamSplitView) {
+            btn.style.background = "#f0f9ff";
+            btn.style.borderColor = "#0284c7";
+            btn.style.color = "#0369a1";
+        } else {
+            btn.style.background = "#f1f5f9";
+            btn.style.borderColor = "#94a3b8";
+            btn.style.color = "#475569";
+        }
+    }
+    renderCurrentExamPage();
+}
+window.toggleExamSplitView = toggleExamSplitView;
+
 function renderCurrentExamPage() {
     if (!activeExamSet) return;
 
@@ -1725,14 +1749,53 @@ function renderCurrentExamPage() {
     const container = document.getElementById("exam-paper-container");
     if (!container) return;
 
-    if (examCurrentPage === 0) {
-        renderDeckblatt(container);
-    } else {
-        renderTaskPage(container, examCurrentPage);
-    }
+    const deskContainer = document.querySelector(".exam-desk-container");
+    const bookletNavbar = document.querySelector(".exam-booklet-navbar");
+    const bottomBar = document.getElementById("exam-prev-page-btn") ? document.getElementById("exam-prev-page-btn").parentElement : null;
 
-    // Scroll to top of exam paper sheet smoothly
-    container.scrollIntoView({ behavior: "smooth", block: "start" });
+    if (isExamSplitView) {
+        if (deskContainer) deskContainer.classList.add("split-mode");
+        if (bookletNavbar) bookletNavbar.classList.add("split-mode");
+        if (bottomBar) bottomBar.classList.add("split-mode");
+
+        container.innerHTML = `
+            <div class="exam-split-wrapper">
+                <!-- Left Pane: Authentic Task / Sheet (Separately scrollable) -->
+                <div class="exam-split-col exam-task-col" id="exam-split-task-pane"></div>
+
+                <!-- Right Pane: Authentic Anlageblätter / Attachments (Separately scrollable) -->
+                <div class="exam-split-col exam-attachments-col" id="exam-split-attachments-pane"></div>
+            </div>
+        `;
+
+        const taskPane = document.getElementById("exam-split-task-pane");
+        const attPane = document.getElementById("exam-split-attachments-pane");
+
+        if (examCurrentPage === 0) {
+            renderDeckblatt(taskPane);
+        } else {
+            renderTaskPage(taskPane, examCurrentPage);
+        }
+
+        if (typeof ExamAttachments !== "undefined" && attPane) {
+            attPane.innerHTML = ExamAttachments.renderAttachmentsForPage(activeExamSet, examCurrentPage);
+        }
+
+        if (taskPane) taskPane.scrollTop = 0;
+        if (attPane) attPane.scrollTop = 0;
+    } else {
+        if (deskContainer) deskContainer.classList.remove("split-mode");
+        if (bookletNavbar) bookletNavbar.classList.remove("split-mode");
+        if (bottomBar) bottomBar.classList.remove("split-mode");
+
+        if (examCurrentPage === 0) {
+            renderDeckblatt(container);
+        } else {
+            renderTaskPage(container, examCurrentPage);
+        }
+
+        container.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
 }
 
 // Renders the official Deckblatt (Page 0)

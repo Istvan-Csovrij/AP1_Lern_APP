@@ -479,6 +479,9 @@
                         <button class="btn btn-secondary" id="exam-whiteboard-btn" title="Diagramm-Zeichenboard als Fenster öffnen" style="padding: 0.35rem 0.65rem; font-size: 0.85rem; display: flex; align-items: center; gap: 0.35rem; border-radius: 6px; border: 1px solid #8b5cf6; color: #6d28d9; background: #f5f3ff;">
                             <i class="fa-solid fa-pen-ruler"></i> <span style="font-weight: 600;">Skizzenblatt</span>
                         </button>
+                                                <button class="btn" id="exam-split-toggle-btn" onclick="toggleExamSplitView()" title="Split-View: Aufgabe und Anlageblätter nebeneinander anzeigen mit separatem Scrollen" style="padding: 0.35rem 0.65rem; font-size: 0.85rem; display: flex; align-items: center; gap: 0.35rem; border-radius: 6px; border: 1.5px solid #0284c7; color: #0369a1; background: #f0f9ff; font-weight: 700; cursor: pointer;">
+                            <i class="fa-solid fa-table-columns"></i> <span id="exam-split-toggle-text">Split-View (Nebeneinander)</span>
+                        </button>
                         <button class="btn" id="exam-submit-btn" style="background-color: #10b981; color: white; font-weight: bold; font-size: 0.92rem; border: none; padding: 0.45rem 0.85rem; display: flex; align-items: center; gap: 0.4rem; border-radius: 6px; cursor: pointer;">
                             <i class="fa-solid fa-paper-plane"></i> Prüfung abgeben (100 Pkt)
                         </button>
@@ -1441,12 +1444,13 @@ ORDER BY gesamtumsatz DESC;</pre>
     </div>
 
 
-    <script src="diagrams.js?v=128"></script>
-    <script src="exam_data.js?v=128"></script>
-    <script src="questions.js?v=128"></script>
-    <script src="generator.js?v=128"></script>
-    <script src="ap2_bridge.js?v=128"></script>
-    <script src="app.js?v=128"></script>
+    <script src="diagrams.js?v=129"></script>
+    <script src="exam_data.js?v=129"></script>
+    <script src="questions.js?v=129"></script>
+    <script src="generator.js?v=129"></script>
+    <script src="ap2_bridge.js?v=129"></script>
+    <script src="exam_attachments.js?v=129"></script>
+    <script src="app.js?v=129"></script>
 
     <!-- PIN Sicherheits-Gatekeeper -->
     <script>
