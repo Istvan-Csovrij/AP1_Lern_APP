@@ -6906,6 +6906,292 @@ var EXAM_SETS = [
         ]
     }
 
+
+    // ======================================================================
+    // PRÜFUNG 23: ORIGINAL BADEN-WÜRTTEMBERG (IBBW MUSTERPRÜFUNG)
+    // Modellunternehmen: DarSys GmbH (Webdesign Durlach) & Systemhaus KG
+    // Fachthemen: IT 1 Arbeitsmittelbeschaffung (Nutzwertanalyse, Angebot, Kaufvertrag),
+    //             IT 2 Netzkonfiguration (Dual-Stack IPv4/IPv6, Switch-IP, OSI-Fehler, EMV/Klimaanlage),
+    //             IT 3 Zeiterfassung (BSI-Schutzbedarfsanalyse, XML, Datenbankschema PK/FK, 1:n)
+    // Vollständige Integration aller Original-Anlageblätter 1 bis 12
+    // ======================================================================
+    {
+        id: "exam_23",
+        title: "Prüfung 23: Original BaWü IBBW (DarSys GmbH – IT 1 bis IT 3)",
+        badge: "100 Punkte • 90 Min.",
+        subtitle: "Abschlussprüfung Teil 1 • IT-Berufe (Baden-Württemberg) • DarSys GmbH & Systemhaus KG",
+        ausgangssituation: "Das Systemhaus KG berät Geschäftskunden bei Fragen rund um die Themen Digitalisierung, IT-Infrastruktur und IT-Sicherheit. Ihnen liegt eine Anfrage Ihrer langjährigen Kundin Frau Evelin Schreiber der Firma DarSys GmbH vor. Das Webdesign-Unternehmen baut seinen Standort in Karlsruhe-Durlach um 15 Arbeitsplätze aus und beauftragt Sie, diese mit PCs auszustatten sowie die sich daraus ergebenden netzwerk- und sicherheitstechnischen Aufgaben zu bearbeiten. Sie führen eine Nutzwertanalyse durch, erstellen ein kaufmännisches Angebot, konfigurieren das Dual-Stack IPv4/IPv6-Netzwerk, analysieren EMV-Störungen der Verkabelung durch eine Klimaanlage und konzipieren ein sicheres Zeiterfassungssystem samt BSI-Schutzbedarfsanalyse und relationaler Datenbankstruktur.",
+        tasks: [
+            // Aufgabe 1: IT 1 Arbeitsmittelbeschaffung (30 Punkte)
+            {
+                number: 1,
+                title: "1. Aufgabe: IT 1 – Arbeitsmittelbeschaffung (30 Punkte)",
+                totalPoints: 30,
+                subtasks: [
+                    {
+                        id: "23_1_a",
+                        label: "1.1 Nutzwertanalyse & begründete Auswahlentscheidung (Anlage 1, 2 und 7)",
+                        points: 17,
+                        type: "table",
+                        stencil: "NUTZWERTANALYSE / PC-AUSWAHL",
+                        text: `Die Kundin Frau Schreiber (DarSys GmbH) bittet um die Ausstattung von 15 Grafikdesign-Arbeitsplätzen (Anlage 1). Ihnen liegen drei Rechnerangebote aus dem Sortiment des Systemhauses vor (Anlage 2).
+
+📎 ANLAGE 1 (Auszug Kunden-E-Mail Frau Schreiber):
+"Die benötigten Arbeitsplatzrechner werden primär für Grafikdesign-Anwendungen verwendet. Für unsere Grafikdesign-Anwendungen wird eine leistungsstarke Grafikkarte und mindestens 32 GB Arbeitsspeicher benötigt. Die Rohdaten der Anwendungen sind recht groß, daher ist ein möglichst schneller Speicher von 500 GB notwendig (SSD/M.2). Auch der Prozessor sollte über genügend Leistung verfügen. Als Budget stehen 15.000,00 € netto zur Verfügung (nicht voll auszuschöpfen). Aufgrund des Großraumbüros ist zusätzlich auf geringe Lärmentwicklung der Geräte zu achten. Ebenso ist unser Unternehmen einer GreenIT-Initiative beigetreten (hohe Energieeffizienz des Netzteils)."
+
+📎 ANLAGE 2 (Produktsortiment des Systemhauses KG):
+• PC 1 (550,00 €): 4-Kern 3,6 GHz, OnBoard-Grafik, 16 GB DDR4-2666, 1 TB HDD, Netzteil 180W (92% Effizienz), Lüfter 38 dB(A), Energy Star 6.1.
+• PC 2 (850,00 €): 4-Kern 4,2 GHz, PCIe 3.0 x16 (6 GB GDDR6), 32 GB DDR4-2666, 512 GB M.2 NVMe SSD, Netzteil 450W (80 Plus Gold), Lüfter leise 25 dB(A).
+• PC 3 (1.000,00 €): 8-Kern 3,0 GHz, PCIe 4.0 x16 (8 GB GDDR6), 64 GB DDR4-2666, 512 GB PCIe SSD, Netzteil 600W (nur 75% Wirkungsgrad), Lüfter laut 45 dB(A).
+
+Aufgabe:
+Führen Sie auf Grundlage des Vorgabeblatts Anlage 7 die Nutzwertanalyse durch. Tragen Sie für die Entscheidungskriterien die Gewichtungen in % sowie die Punkte (1–5) und gewichteten Punkte ein. Begründen Sie anschließend Ihre Auswahlentscheidung (17 Punkte).`,
+                        tableConfig: {
+                            headers: ["Entscheidungskriterium", "Gewichtung in %", "Pkt PC1 (1-5)", "Gewichtet PC1", "Pkt PC2 (1-5)", "Gewichtet PC2", "Pkt PC3 (1-5)", "Gewichtet PC3"],
+                            rows: [
+                                ["Leistung (Grafikkarte, RAM >=32GB, M.2 SSD, CPU)", "40 %", "1", "40", "4", "160", "5", "200"],
+                                ["Lärm / Lautstärke im Großraumbüro (dB(A))", "25 %", "3", "75", "5", "125", "1", "25"],
+                                ["Ökologie / Energieeffizienz (Netzteil 80 Plus / Wirkungsgrad)", "25 %", "5", "125", "4", "100", "1", "25"],
+                                ["Preis / Wirtschaftlichkeit (Budget <= 1.000 €)", "10 %", "5", "50", "4", "40", "3", "30"],
+                                ["GESAMTSUMME NUTZWERT", "100 %", "", "290", "", "425", "", "280"]
+                            ],
+                            solutions: {
+                                "4_3": "290",
+                                "4_5": "425",
+                                "4_7": "280"
+                            }
+                        },
+                        solution: "Auswahlentscheidung & Begründung:\nDer PC 2 erfüllt alle Kundenanforderungen vollständig und erzielt mit 425 Punkten den mit Abstand höchsten Nutzwert. Daher ist dieser der Kundin zu empfehlen.\n\nBegründung im Detail:\n1. PC 1 scheidet aufgrund harter K.O.-Kriterien aus: Er besitzt keine dedizierte Grafikkarte (nur OnBoard), nur 16 GB RAM (gefordert: >= 32 GB) und eine langsame HDD statt der zwingend geforderten M.2-SSD.\n2. PC 3 ist zwar sehr leistungsstark, scheidet aber praktisch aus, da er mit 45 dB(A) im Großraumbüro viel zu laut ist und mit nur 75 % Netzteil-Wirkungsgrad den Vorgaben der GreenIT-Initiative widerspricht.\n3. PC 2 erfüllt alle Kriterien optimal: Dedizierte 6 GB GDDR6-Grafikkarte, 32 GB RAM, 512 GB M.2 NVMe SSD, flüsterleiser Betrieb mit nur 25 dB(A), 80 Plus Gold Zertifizierung und mit 850 € netto liegt er perfekt im Kundenbudget."
+                    },
+                    {
+                        id: "23_1_b",
+                        label: "1.2 Angebotserstellung für DarSys GmbH nach DIN 5008 (Anlage 8)",
+                        points: 7,
+                        type: "table",
+                        stencil: "KAUFMÄNNISCHES ANGEBOT / BERECHNUNG",
+                        text: `Erstellen Sie das verbindliche Angebot für Frau Schreiber (DarSys GmbH, Standort Durlach) über 15 Arbeitsplätze auf Basis von PC 2.
+Aus der Preisliste der Zusatzprodukte (Anlage 2):
+• Lizenz für Windows 10 Pro 64-Bit: 110,00 € netto je Rechner
+• Installation und betriebsbereiter Aufbau vor Ort: 40,00 € netto je Rechner
+
+Vervollständigen Sie die Angebotstabelle auf dem Vorgabeblatt Anlage 8 mit Mengen, Einzel- und Gesamtpreisen (7 Punkte).`,
+                        tableConfig: {
+                            headers: ["Pos.", "Artikelbezeichnung & Leistung", "Menge", "Einzelpreis netto", "Gesamtpreis netto"],
+                            rows: [
+                                ["1", "Arbeitsplatzrechner PC 2 (4-Kern 4,2 GHz, 32 GB RAM, 512 GB SSD, 6 GB GPU)", "15", "850,00 €", "12.750,00 €"],
+                                ["2", "Betriebssystem-Lizenz Microsoft Windows 10 Pro 64-Bit", "15", "110,00 €", "1.650,00 €"],
+                                ["3", "Dienstleistung: Installation des Betriebssystems und Aufbau vor Ort", "15", "40,00 €", "600,00 €"],
+                                ["", "Gesamtpreis netto", "", "", "15.000,00 €"],
+                                ["", "Zzgl. 19 % Umsatzsteuer (MwSt.)", "", "", "2.850,00 €"],
+                                ["", "Gesamtbetrag brutto", "", "", "17.850,00 €"]
+                            ],
+                            solutions: {
+                                "0_2": "15", "0_4": "12.750,00 €",
+                                "1_2": "15", "1_4": "1.650,00 €",
+                                "2_2": "15", "2_4": "600,00 €",
+                                "3_4": "15.000,00 €",
+                                "4_4": "2.850,00 €",
+                                "5_4": "17.850,00 €"
+                            }
+                        },
+                        solution: "Musterkalkulation Angebot (Anlage 8):\n• Pos 1: 15 × 850,00 € = 12.750,00 €\n• Pos 2: 15 × 110,00 € = 1.650,00 €\n• Pos 3: 15 × 40,00 € = 600,00 €\n• Gesamtpreis netto: 15.000,00 € (schöpft das Budget punktgenau aus!)\n• 19 % MwSt.: 15.000,00 € × 0,19 = 2.850,00 €\n• Gesamtbetrag brutto: 17.850,00 €\n• Konditionen: Lieferung in 3-4 Wochen, 2 % Skonto bei Zahlung innerhalb von 14 Tagen."
+                    },
+                    {
+                        id: "23_1_c",
+                        label: "1.3 Kaufvertragsrecht: Zustandekommen & Rechtsverbindlichkeit",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 6,
+                        stencil: "BGB / HGB KAUFVERTRAGSRECHT",
+                        text: "Ein Mitarbeiter Ihrer Einkaufsabteilung möchte die 15 Rechner sofort beim Vorlieferanten bestellen, da aus seiner Sicht durch die Kundenanfrage und das abgegebene Angebot bereits ein rechtsverbindlicher Kaufvertrag zustande gekommen sei.\nErläutern Sie Ihrem Kollegen die Rechtslage nach BGB/HGB: Ist der Kaufvertrag bereits wirksam zustande gekommen und darf die Bestellung ausgelöst werden? (6 Punkte)",
+                        solution: "Rechtliche Würdigung nach §§ 433 ff. BGB und §§ 373 ff. HGB (Zweiseitiger Handelskauf):\n1. Es liegt noch KEIN wirksamer Kaufvertrag vor!\n2. Ein Kaufvertrag kommt erst durch zwei übereinstimmende Willenserklärungen zustande: Antrag (Angebot) und Annahme (Bestellung).\n3. Die ursprüngliche E-Mail von Frau Schreiber war lediglich eine unverbindliche Anfrage (Aufforderung zur Abgabe eines Angebots / Invitatio ad offerendum).\n4. Unser abgegebenes Angebot ist die erste rechtlich bindende Willenserklärung (Antrag). Ein Kaufvertrag entsteht erst, wenn die DarSys GmbH dieses Angebot rechtzeitig und ohne Änderungen annimmt (Auftragserteilung).\n5. Da die Annahmeerklärung der Kundin noch aussteht, darf der Einkauf die Ware noch nicht beim Lieferanten verbindlich ordern."
+                    }
+                ]
+            },
+
+            // Aufgabe 2: IT 2 Netzkonfiguration (30 Punkte)
+            {
+                number: 2,
+                title: "2. Aufgabe: IT 2 – Netzkonfiguration & Fehlersuche (30 Punkte)",
+                totalPoints: 30,
+                subtasks: [
+                    {
+                        id: "23_2_a",
+                        label: "2.1 Dual-Stack Adresstabelle IPv4 / IPv6 (Anlage 3 und 9)",
+                        points: 13.5,
+                        type: "table",
+                        stencil: "DUAL-STACK ADRESSTABELLE (IPv4 & IPv6)",
+                        svgIllustration: VisualDiagrams.getDarSysNetzwerkplanSvg(),
+                        text: `Die Firma DarSys GmbH stellt ihr Netzwerk auf Dual-Stack um (Anlage 3). Alle Netzwerk- und Hostanteile der IPv4- und IPv6-Adressen sind fortlaufend nummeriert.
+Regel: Der binäre Wert des dezimalen Host-Teils der IPv4-Adresse ist mit dem binären Wert des hexadezimalen Host-Teils der IPv6-Adresse im letzten Byte identisch!
+
+Beispiele aus dem Netzwerkplan:
+• Computer Nr. 1: IPv4 = 192.168.3.51 (51 dez = 33 hex) ➔ IPv6 = 2003:f3:700:6c00:9::33 /64
+• Computer Nr. 30: IPv4 = 192.168.3.80 (80 dez = 50 hex) ➔ IPv6 = 2003:f3:700:6c00:9::50 /64
+
+Aufgabe:
+Vervollständigen Sie die Adresstabelle (Anlage 9) für die neu zu beschaffenden Arbeitsplatzrechner Computer Nr. 31 und Computer Nr. 45 in gekürzter und ungekürzter Schreibweise (13,5 Punkte).`,
+                        tableConfig: {
+                            headers: ["Device & Interface", "IP-Adresse", "Default Gateway", "Netzwerkadresse / Präfix", "Broadcast-Adresse"],
+                            rows: [
+                                ["Computer Nr. 31 (NIC IPv4)", "192.168.3.81 /24", "192.168.3.2", "192.168.3.0", "192.168.3.255"],
+                                ["Computer Nr. 31 (NIC IPv6 gekürzt)", "2003:f3:700:6c00:9::51 /64", "fe80::1", "2003:f3:700:6c00::/64", "/"],
+                                ["Computer Nr. 31 (NIC IPv6 ungekürzt)", "2003:00f3:0700:6c00:0009:0000:0000:0051 /64", "fe80:0000:0000:0000:0000:0000:0000:0001", "2003:00f3:0700:6c00:0000:0000:0000:0000 /64", "/"],
+                                ["Computer Nr. 45 (NIC IPv4)", "192.168.3.95 /24", "192.168.3.2", "192.168.3.0", "192.168.3.255"],
+                                ["Computer Nr. 45 (NIC IPv6 gekürzt)", "2003:f3:700:6c00:9::5f /64", "fe80::1", "2003:f3:700:6c00::/64", "/"],
+                                ["Computer Nr. 45 (NIC IPv6 ungekürzt)", "2003:00f3:0700:6c00:0009:0000:0000:005f /64", "fe80:0000:0000:0000:0000:0000:0000:0001", "2003:00f3:0700:6c00:0000:0000:0000:0000 /64", "/"]
+                            ],
+                            solutions: {
+                                "0_2": "192.168.3.2", "0_3": "192.168.3.0", "0_4": "192.168.3.255",
+                                "1_1": "2003:f3:700:6c00:9::51 /64", "1_2": "fe80::1", "1_3": "2003:f3:700:6c00::/64",
+                                "2_1": "2003:00f3:0700:6c00:0009:0000:0000:0051 /64",
+                                "3_2": "192.168.3.2", "3_3": "192.168.3.0", "3_4": "192.168.3.255",
+                                "4_1": "2003:f3:700:6c00:9::5f /64", "4_2": "fe80::1", "4_3": "2003:f3:700:6c00::/64",
+                                "5_1": "2003:00f3:0700:6c00:0009:0000:0000:005f /64"
+                            }
+                        },
+                        solution: "Musterlösung Adresstabelle (Anlage 9):\n• Computer 31: Host-Byte IPv4 = 81 dezimal. Umrechnung in Hexadezimal: 81 / 16 = 5 Rest 1 ➔ 51 hex. Gekürzt: 2003:f3:700:6c00:9::51 /64. Ungekürzt: 2003:00f3:0700:6c00:0009:0000:0000:0051 /64.\n• Computer 45: Host-Byte IPv4 = 95 dezimal. Umrechnung in Hexadezimal: 95 / 16 = 5 Rest 15 (f) ➔ 5f hex. Gekürzt: 2003:f3:700:6c00:9::5f /64. Ungekürzt: 2003:00f3:0700:6c00:0009:0000:0000:005f /64.\n• Default Gateway IPv4: 192.168.3.2 (Router-Interface).\n• Default Gateway IPv6: fe80::1 (Link-Local-Adresse des Routers).\n• IPv6 kennt keine Broadcast-Adresse (daher diagonal durchstreichen oder / eintragen)."
+                    },
+                    {
+                        id: "23_2_b",
+                        label: "2.2 Switch Management-IP: Zweck & Begründung",
+                        points: 3,
+                        type: "lines",
+                        linesCount: 4,
+                        stencil: "MANAGED SWITCH / REMOTE MANAGEMENT",
+                        text: "Im Netzwerkplan (Anlage 3) verfügen die Managed Switches 1, 2 und 3 über eigene IP-Adressen (z. B. Switch 1 = 192.168.3.3 /24). Erläutern Sie, warum einem Switch eine IP-Adresse zugewiesen wurde (3 Punkte).",
+                        solution: "Begründung für die Switch-IP:\nMit Hilfe der IP-Adresse kann der Managed Switch remote über das Netzwerk konfiguriert, administriert und überwacht werden (z. B. per SSH, Webinterface HTTPS oder SNMP-Monitoring).\nOhne eine eigene IP-Adresse müsste der Netzwerkadministrator immer vor Ort physisch mit einem Konsolenkabel (RS-232/USB) direkt am Gerät arbeiten."
+                    },
+                    {
+                        id: "23_2_c",
+                        label: "2.3 Fehlersuche im OSI-Schichtenmodell",
+                        points: 9,
+                        type: "table",
+                        stencil: "OSI-FEHLERDIAGNOSE / BROWSER-FEHLER",
+                        text: `Ein Mitarbeiter der DarSys GmbH erhält im Browser die Fehlermeldung:
+"Seite wurde nicht gefunden – Die Verbindung mit dem Server www.google.de schlug fehl. Überprüfen Sie die Netzwerkverbindung..."
+
+Nennen Sie drei Ursachen für diese Fehlermeldung, die sich auf drei unterschiedliche Schichten des OSI-Schichtenmodells beziehen, und beschreiben Sie jeweils ein Verfahren/Befehl zur Fehlererkennung (9 Punkte).`,
+                        tableConfig: {
+                            headers: ["OSI-Schicht", "Mögliche Fehlerursache", "Verfahren / Befehl zur Diagnose"],
+                            rows: [
+                                ["Schicht 1 (Physical Layer)", "Netzwerkkabel nicht eingesteckt, Wackelkontakt oder Patchkabel defekt", "Link-LED an Netzwerkkarte/Switch prüfen, Kabeltester oder Kabel austauschen"],
+                                ["Schicht 3 (Network Layer)", "Default Gateway falsch konfiguriert oder IP-Adresse im falschen Subnetz", "Befehl 'ipconfig /all', Ping auf Default Gateway (192.168.3.2) oder Loopback (127.0.0.1)"],
+                                ["Schicht 7 (Application Layer)", "DNS-Server ausgefallen oder falscher DNS-Server im Client eingetragen", "Befehl 'nslookup www.google.de', Ping direkt auf externe IP (z. B. 8.8.8.8)"]
+                            ],
+                            solutions: {
+                                "0_0": "Schicht 1 (Physical Layer)",
+                                "1_0": "Schicht 3 (Network Layer)",
+                                "2_0": "Schicht 7 (Application Layer)"
+                            }
+                        },
+                        solution: "Mögliche Ursachen und Diagnoseverfahren auf 3 OSI-Schichten:\n• Layer 1 (Bitübertragungsschicht): Kabel lose, Buchse/Dose beschädigt ➔ Link-LEDs prüfen, physischen Leitungsprüfer nutzen.\n• Layer 3 (Vermittlungsschicht): Gateway oder Subnetzmaske falsch ➔ 'ipconfig /all', Ping auf Gateway (192.168.3.2).\n• Layer 7 (Anwendungsschicht): DNS-Dienst antwortet nicht ➔ 'nslookup www.google.de' oder Browser-Proxyeinstellungen prüfen."
+                    },
+                    {
+                        id: "23_2_d",
+                        label: "2.4 EMV-Kabelstörung durch Klimaanlage & E-Mail an Kundin (Anlage 4 und 10)",
+                        points: 4.5,
+                        type: "lines",
+                        linesCount: 8,
+                        stencil: "EMV-KABELSTÖRUNG / S/FTP EMPFEHLUNG",
+                        text: `Einige Beschäftigte beklagen sich, dass immer beim Anlaufen der Klimaanlage das Netzwerk in einigen Büros extrem langsam wird oder abbricht. Dort wurden vor wenigen Jahren Netzwerkleitungen des Typs ECOLAN Cat.5e U/UTP (Anlage 4) verlegt.
+Verfassen Sie auf dem Vorgabeblatt Anlage 10 eine fachliche E-Mail an Frau Schreiber, in der Sie die physikalische Ursache der Störung erklären und konkrete technische Abhilfemaßnahmen empfehlen (4,5 Punkte).`,
+                        solution: "Mustertext E-Mail an Frau Schreiber (Anlage 10):\nSehr geehrte Frau Schreiber,\n\ndie Ursache der sporadischen Netzwerkstörungen liegt in der fehlenden Schirmung der damals verlegten Netzwerkkabel. Laut Datenblatt handelt es sich um ungeschirmte U/UTP-Leitungen (weder Paarschirmung noch Gesamtschirmung).\nBeim Einschalten und Betrieb der Klimaanlage erzeugen deren elektrische Motoren und Kompressoren starke elektromagnetische Wechselfelder (EMV-Störstrahlung). Diese induzieren Störspannungen in die ungeschirmten Netzwerkleitungen, was zu massiven Paketverlusten und CRC-Prüfsummenfehlern führt.\n\nEmpfohlene Maßnahmen:\n1. Zeitnaher Austausch der Leitungen gegen hochwertige, doppelt geschirmte Cat.6a- oder Cat.7-Kabel (Typ S/FTP mit Geflecht- und Folienpaarschirmung).\n2. Räumliche Trennung: Netzwerkleitungen dürfen nicht parallel in demselben Kabelkanal wie 230V/400V-Stromleitungen der Klimaanlage verlegt werden (Mindestabstand einhalten).\n3. Überprüfung der Klimaanlage auf Einhaltung der gesetzlichen EMV-Grenzwerte.\n\nMit freundlichen Grüßen\nIhr Systemhaus KG"
+                    }
+                ]
+            },
+
+            // Aufgabe 3: IT 3 Zeiterfassungssystem (30 Punkte)
+            {
+                number: 3,
+                title: "3. Aufgabe: IT 3 – Zeiterfassungssystem, BSI-Schutzbedarf & Datenbank (30 Punkte)",
+                totalPoints: 30,
+                subtasks: [
+                    {
+                        id: "23_3_a",
+                        label: "3.1 BSI-Schutzbedarfsanalyse für Zeiterfassungsdaten (Anlage 5, 6 und 11)",
+                        points: 14,
+                        type: "table",
+                        stencil: "BSI IT-GRUNDSCHUTZ / SCHUTZBEDARFSANALYSE",
+                        text: `Das Systemhaus bietet ein Zeiterfassungssystem an. Bei Netzausfall werden die Arbeitszeiten lokal in einer unverschlüsselten XML-Datei im Benutzerprofil zwischengespeichert (Anlage 6).
+Führen Sie anhand des BSI-Kriterienkatalogs (Anlage 5) eine Schutzbedarfsanalyse für die Schutzziele Vertraulichkeit, Verfügbarkeit und Integrität durch. Begründen Sie Ihre Einstufung (Anlage 11) (14 Punkte).`,
+                        tableConfig: {
+                            headers: ["Schutzziel", "Schutzbedarfskategorie", "Fachliche Begründung nach BSI IT-Grundschutz"],
+                            rows: [
+                                ["Vertraulichkeit", "Vertraulich", "Kommt-/Geht-Zeiten und Personal-IDs sind personenbezogene Mitarbeiterdaten. Eine unbefugte Einsicht ermöglicht Verhaltens- und Leistungskontrollen und verletzt das Recht auf informationelle Selbstbestimmung."],
+                                ["Verfügbarkeit", "Normal", "Bei Ausfall des Zeiterfassungssystems kann temporär auf manuelle Zeiterfassung (Stundenzettel / E-Mail an Vorgesetzten) ausgewichen werden. Die eigentliche Geschäftstätigkeit der DarSys GmbH wird nicht unmittelbar gefährdet."],
+                                ["Integrität", "Normale bis erhöhte Anforderung", "Fehlerhafte Buchungen können am Monatsende vor der Gehaltsabrechnung durch Mitarbeiter oder HR manuell kontrolliert und korrigiert werden. Eine Manipulation führt nicht zu irreparablen Schäden."]
+                            ],
+                            solutions: {
+                                "0_1": "Vertraulich",
+                                "1_1": "Normal",
+                                "2_1": "Normale bis erhöhte Anforderung"
+                            }
+                        },
+                        solution: "Musterlösung Schutzbedarfsanalyse (Anlage 11):\n• Vertraulichkeit: 'Vertraulich'. Begründung: Arbeitszeiten, Personalnummer und Anwesenheiten stellen schützenswerte personenbezogene Daten nach DSGVO dar. Ein unberechtigter Zugriff verletzt Persönlichkeitsrechte.\n• Verfügbarkeit: 'Normal' (Wiederanlaufzeit 72h tolerierbar). Begründung: Ein temporärer Ausfall der Zeiterfassung bedroht nicht die Existenz des Webdesign-Büros; Zeiten können nachträglich per Hand nachgetragen werden.\n• Integrität: 'Normal' (oder 'Erhöht'). Begründung: Falsche Zeitstempel können nachträglich über Storno-/Korrekturbuchungen berichtigt werden."
+                    },
+                    {
+                        id: "23_3_b",
+                        label: "3.2 Relationales Datenbankschema für Arbeitszeiterfassung (Anlage 6 und 12.1)",
+                        points: 10,
+                        type: "table",
+                        stencil: "RELATIONALES DATENBANKSCHEMA / PK & FK",
+                        text: `Die Daten der XML-Datei (Anlage 6: UserAccount mit persid, vorname, nachname, lastUpdate und LogEntry mit id, Type, Time, Host) sollen in eine relationale Datenbank überführt werden.
+Ermitteln Sie die beiden Tabellen tblUserAccount und tblLogEntry auf dem Vorgabeblatt Anlage 12.1. Geben Sie jeweils Spaltenname, Datentyp und Schlüsselart (PK / FK) an (10 Punkte).`,
+                        tableConfig: {
+                            headers: ["Tabelle", "Spaltenname", "Datentyp", "Schlüsselart (PK / FK)"],
+                            rows: [
+                                ["tblUserAccount", "persid", "INT", "PK (Primary Key)"],
+                                ["tblUserAccount", "vorname", "VARCHAR(45)", ""],
+                                ["tblUserAccount", "nachname", "VARCHAR(45)", ""],
+                                ["tblUserAccount", "lastUpdate", "DATETIME", ""],
+                                ["tblLogEntry", "id", "INT", "PK (Primary Key)"],
+                                ["tblLogEntry", "type", "VARCHAR(20) / ENUM", ""],
+                                ["tblLogEntry", "time", "DATETIME", ""],
+                                ["tblLogEntry", "host", "VARCHAR(15)", ""],
+                                ["tblLogEntry", "persid", "INT", "FK (Foreign Key)"]
+                            ],
+                            solutions: {
+                                "0_3": "PK (Primary Key)",
+                                "4_3": "PK (Primary Key)",
+                                "8_3": "FK (Foreign Key)"
+                            }
+                        },
+                        solution: "Musterlösung Tabellenentwurf (Anlage 12.1):\n1. Tabelle tblUserAccount:\n• persid: INT ➔ PK\n• vorname: VARCHAR(45)\n• nachname: VARCHAR(45)\n• lastUpdate: DATETIME\n\n2. Tabelle tblLogEntry:\n• id: INT ➔ PK\n• type: VARCHAR(20) (oder ENUM 'kommt','geht')\n• time: DATETIME\n• host: VARCHAR(15)\n• persid: INT ➔ FK (verweist auf tblUserAccount.persid)\n\nDer Fremdschlüssel persid stellt die referenzielle Integrität sicher."
+                    },
+                    {
+                        id: "23_3_c",
+                        label: "3.3 Kardinalität & Beziehungsbegründung (Anlage 12.2)",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "KARDINALITÄTEN / 1:N BEZIEHUNG",
+                        text: "Geben Sie an, welches Beziehungsmuster zwischen UserAccount und LogEntry besteht (1:1, 1:n oder m:n). Begründen Sie Ihre Antwort fachlich (6 Punkte).",
+                        solution: "Musterlösung (Anlage 12.2):\nAuswahl: Eine 1:n-Beziehung (Eins-zu-Mehreren).\n\nBegründung:\n• Ein Benutzer (UserAccount) erzeugt im Laufe der Zeit viele Zeiterfassungseinträge (LogEntries für Kommen, Gehen, Pausen).\n• Jeder einzelne LogEntry gehört jedoch immer zu genau einem einzigen Mitarbeiter (identifiziert durch den Fremdschlüssel persid).\n• Daher liegt formal und fachlich eine klassische 1:n-Beziehung vor."
+                    }
+                ]
+            },
+
+            // Aufgabe 4: IT 4 Form, Dokumentenführung & Gesamteindruck (10 Punkte)
+            {
+                number: 4,
+                title: "4. Aufgabe: IT 4 – Dokumentenführung, Form & Gesamteindruck (10 Punkte)",
+                totalPoints: 10,
+                subtasks: [
+                    {
+                        id: "23_4_a",
+                        label: "4.1 Einhaltung formaler Kriterien & Fachterminologie",
+                        points: 10,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "BEWERTUNG DURCH PRÜFUNGSAUSSCHUSS",
+                        text: "Die Bewertung dieses Prüfungsteils erfolgt durch den Prüfungsausschuss anhand der formalen Qualität der Bearbeitung:\n• Einhaltung der DIN 5008 bei der kaufmännischen Angebotserstellung (Anlage 8)\n• Präzise und fehlerfreie Verwendung der IT-Fachterminologie (IPv4/IPv6, Schichtenmodell, EMV-Richtlinien, BSI-Schutzbedarf)\n• Nachvollziehbare und saubere Rechenwege bei der Nutzwertanalyse und Handelskalkulation\n• Vollständigkeit aller Vorgabeblätter (Anlagen 7, 8, 9, 10, 11, 12.1, 12.2).",
+                        solution: "Bewertungskriterien des IHK-Prüfungsausschusses:\n• 10 Punkte: Vollständige und fehlerfreie Ausarbeitung aller Vorgabeblätter unter Einhaltung kaufmännischer und technischer Normen.\n• Punkteabzüge erfolgen bei unvollständigen Einheiten, unleserlicher Schrift, fehlender kaufmännischer Rundung oder Vermischung von IPv4- und IPv6-Notationen."
+                    }
+                ]
+            }
+        ]
+    },
 ];
 
 // Helper to get all exam sets

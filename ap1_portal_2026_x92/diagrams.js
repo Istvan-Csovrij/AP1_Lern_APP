@@ -7086,6 +7086,188 @@ var VisualDiagrams = {
 </svg>`;
     },
 
+    
+    // ==========================================================================
+    // ANLAGE 3: LOGISCHER NETZWERKPLAN DARSYS GMBH (DUAL-STACK IPv4 / IPv6)
+    // Original IBBW Baden-Württemberg Abschlussprüfung Teil 1
+    // ==========================================================================
+    getDarSysNetzwerkplanSvg: function() {
+        return `
+        <svg viewBox="0 0 920 380" width="100%" height="380" xmlns="http://www.w3.org/2000/svg" style="background:#f8fafc; border:1.5px solid #cbd5e1; border-radius:8px; font-family:sans-serif; box-shadow:0 4px 6px -1px rgba(0,0,0,0.06);">
+            <!-- Title Bar -->
+            <rect x="0" y="0" width="920" height="34" fill="#0f172a" rx="8" />
+            <rect x="0" y="26" width="920" height="8" fill="#0f172a" />
+            <text x="16" y="22" font-size="13" font-weight="bold" fill="#38bdf8">📎 Anlage 3: Logischer Netzwerkplan der DarSys GmbH (Dual-Stack IPv4 / IPv6)</text>
+            <text x="895" y="22" font-size="11" font-weight="bold" fill="#94a3b8" text-anchor="end">IBBW BaWü AP1 Standard</text>
+
+            <!-- Grid & Connection lines -->
+            <!-- Backbone: Internet -> ISP Router -> Firewall -> Router -> Switch 1 -->
+            <line x1="85" y1="85" x2="140" y2="85" stroke="#334155" stroke-width="3" />
+            <line x1="190" y1="85" x2="245" y2="85" stroke="#334155" stroke-width="3" />
+            <line x1="285" y1="85" x2="335" y2="85" stroke="#334155" stroke-width="3" />
+            <line x1="395" y1="85" x2="455" y2="85" stroke="#334155" stroke-width="3.5" />
+
+            <!-- Switch 1 to Servers -->
+            <line x1="480" y1="105" x2="420" y2="185" stroke="#475569" stroke-width="2" />
+            <line x1="510" y1="105" x2="520" y2="185" stroke="#475569" stroke-width="2" />
+
+            <!-- Switch 1 to Switch 2 -->
+            <line x1="535" y1="85" x2="620" y2="85" stroke="#0284c7" stroke-width="3.5" />
+
+            <!-- Switch 1 to Switch 3 (Trunk) -->
+            <line x1="500" y1="105" x2="500" y2="245" stroke="#0284c7" stroke-width="3" />
+            <line x1="500" y1="245" x2="620" y2="245" stroke="#0284c7" stroke-width="3" />
+
+            <!-- Switch 2 to Printers and Computers 1..30 -->
+            <line x1="680" y1="75" x2="745" y2="45" stroke="#475569" stroke-width="2" />
+            <line x1="685" y1="82" x2="745" y2="95" stroke="#475569" stroke-width="2" />
+            <line x1="685" y1="88" x2="745" y2="145" stroke="#475569" stroke-width="2" />
+            <line x1="680" y1="95" x2="745" y2="195" stroke="#475569" stroke-width="2" />
+
+            <!-- Switch 3 to New Computers 31..45 -->
+            <line x1="635" y1="265" x2="570" y2="310" stroke="#059669" stroke-width="2.5" />
+            <line x1="655" y1="265" x2="655" y2="310" stroke="#059669" stroke-width="2.5" />
+            <line x1="675" y1="265" x2="740" y2="310" stroke="#059669" stroke-width="2.5" />
+
+            <!-- Internet Cloud -->
+            <g transform="translate(35, 60)">
+                <ellipse cx="25" cy="25" rx="30" ry="18" fill="#e0f2fe" stroke="#0284c7" stroke-width="2" />
+                <ellipse cx="45" cy="20" rx="22" ry="15" fill="#e0f2fe" stroke="#0284c7" stroke-width="2" />
+                <ellipse cx="15" cy="25" rx="18" ry="14" fill="#e0f2fe" stroke="#0284c7" stroke-width="2" />
+                <text x="25" y="29" font-size="11" font-weight="bold" fill="#0369a1" text-anchor="middle">Internet</text>
+            </g>
+
+            <!-- ISP Router -->
+            <g transform="translate(140, 62)">
+                <ellipse cx="24" cy="23" rx="24" ry="14" fill="#0284c7" stroke="#0369a1" stroke-width="1.5" />
+                <text x="24" y="27" font-size="10" font-weight="bold" fill="#ffffff" text-anchor="middle">ISP-R</text>
+                <text x="24" y="48" font-size="10" font-weight="bold" fill="#334155" text-anchor="middle">Router ISP</text>
+            </g>
+
+            <!-- Firewall (Brick Pattern) -->
+            <g transform="translate(245, 50)">
+                <rect width="36" height="70" fill="#dc2626" rx="4" stroke="#991b1b" stroke-width="1.5" />
+                <!-- Brick lines -->
+                <line x1="0" y1="14" x2="36" y2="14" stroke="#ffffff" stroke-width="1.2" />
+                <line x1="0" y1="28" x2="36" y2="28" stroke="#ffffff" stroke-width="1.2" />
+                <line x1="0" y1="42" x2="36" y2="42" stroke="#ffffff" stroke-width="1.2" />
+                <line x1="0" y1="56" x2="36" y2="56" stroke="#ffffff" stroke-width="1.2" />
+                <text x="18" y="82" font-size="10.5" font-weight="bold" fill="#991b1b" text-anchor="middle">Firewall</text>
+            </g>
+
+            <!-- Router (Gateway) -->
+            <g transform="translate(335, 62)">
+                <ellipse cx="28" cy="23" rx="28" ry="15" fill="#0284c7" stroke="#0c4a6e" stroke-width="2" />
+                <!-- 4 arrows inside router -->
+                <path d="M 20 23 L 36 23 M 32 19 L 36 23 L 32 27 M 28 15 L 28 31 M 24 19 L 28 15 L 32 19" stroke="#ffffff" stroke-width="1.5" fill="none" />
+                <text x="28" y="-4" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle">Router (Gateway)</text>
+                <text x="28" y="49" font-size="10" font-family="monospace" font-weight="bold" fill="#0369a1" text-anchor="middle">192.168.3.2 /24</text>
+                <text x="28" y="62" font-size="9.5" font-family="monospace" fill="#64748b" text-anchor="middle">fe80::1 /64</text>
+            </g>
+
+            <!-- Managed Switch 1 -->
+            <g transform="translate(455, 68)">
+                <rect width="78" height="34" fill="#0ea5e9" stroke="#0369a1" stroke-width="2" rx="4" />
+                <rect x="6" y="8" width="66" height="6" fill="#0f172a" rx="1" />
+                <text x="39" y="-6" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle">Managed Switch 1</text>
+                <text x="39" y="27" font-size="9" font-family="monospace" font-weight="bold" fill="#ffffff" text-anchor="middle">192.168.3.3 /24</text>
+            </g>
+
+            <!-- DNS Server -->
+            <g transform="translate(385, 185)">
+                <rect width="52" height="48" fill="#e2e8f0" stroke="#475569" stroke-width="1.5" rx="3" />
+                <rect x="6" y="8" width="40" height="4" fill="#64748b" />
+                <rect x="6" y="16" width="40" height="4" fill="#64748b" />
+                <circle cx="12" cy="36" r="3" fill="#10b981" />
+                <text x="26" y="62" font-size="10" font-weight="bold" fill="#1e293b" text-anchor="middle">DNS-Server</text>
+                <text x="26" y="74" font-size="9" font-family="monospace" fill="#0284c7" text-anchor="middle">192.168.3.21 /24</text>
+            </g>
+
+            <!-- File Server -->
+            <g transform="translate(490, 185)">
+                <rect width="52" height="48" fill="#e2e8f0" stroke="#475569" stroke-width="1.5" rx="3" />
+                <rect x="6" y="8" width="40" height="4" fill="#64748b" />
+                <rect x="6" y="16" width="40" height="4" fill="#64748b" />
+                <circle cx="12" cy="36" r="3" fill="#10b981" />
+                <text x="26" y="62" font-size="10" font-weight="bold" fill="#1e293b" text-anchor="middle">Datei-Server</text>
+                <text x="26" y="74" font-size="9" font-family="monospace" fill="#0284c7" text-anchor="middle">192.168.3.22 /24</text>
+            </g>
+
+            <!-- Managed Switch 2 -->
+            <g transform="translate(620, 68)">
+                <rect width="78" height="34" fill="#0ea5e9" stroke="#0369a1" stroke-width="2" rx="4" />
+                <rect x="6" y="8" width="66" height="6" fill="#0f172a" rx="1" />
+                <text x="39" y="-6" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle">Managed Switch 2</text>
+                <text x="39" y="27" font-size="9" font-family="monospace" font-weight="bold" fill="#ffffff" text-anchor="middle">192.168.3.4 /24</text>
+            </g>
+
+            <!-- Printer 1 -->
+            <g transform="translate(745, 30)">
+                <rect width="28" height="20" fill="#cbd5e1" stroke="#475569" rx="2" />
+                <text x="36" y="10" font-size="10" font-weight="bold" fill="#1e293b">Netzwerkdrucker Nr. 1</text>
+                <text x="36" y="22" font-size="9" font-family="monospace" fill="#0284c7">192.168.3.31 /24</text>
+                <text x="36" y="32" font-size="8.5" font-family="monospace" fill="#64748b">2003:f3:700:6c00:9::1f /64</text>
+            </g>
+
+            <!-- Printer 2 -->
+            <g transform="translate(745, 80)">
+                <rect width="28" height="20" fill="#cbd5e1" stroke="#475569" rx="2" />
+                <text x="36" y="10" font-size="10" font-weight="bold" fill="#1e293b">Netzwerkdrucker Nr. 2</text>
+                <text x="36" y="22" font-size="9" font-family="monospace" fill="#0284c7">192.168.3.32 /24</text>
+                <text x="36" y="32" font-size="8.5" font-family="monospace" fill="#64748b">2003:f3:700:6c00:9::20 /64</text>
+            </g>
+
+            <!-- Computer 1 -->
+            <g transform="translate(745, 130)">
+                <rect width="24" height="18" fill="#e2e8f0" stroke="#334155" rx="2" />
+                <text x="36" y="10" font-size="10" font-weight="bold" fill="#1e293b">Computer Nr. 1</text>
+                <text x="36" y="22" font-size="9" font-family="monospace" fill="#0284c7">192.168.3.51 /24</text>
+                <text x="36" y="32" font-size="8.5" font-family="monospace" fill="#64748b">2003:f3:700:6c00:9::33 /64</text>
+            </g>
+
+            <text x="757" y="172" font-size="16" font-weight="bold" fill="#94a3b8">⋮</text>
+
+            <!-- Computer 30 -->
+            <g transform="translate(745, 180)">
+                <rect width="24" height="18" fill="#e2e8f0" stroke="#334155" rx="2" />
+                <text x="36" y="10" font-size="10" font-weight="bold" fill="#1e293b">Computer Nr. 30</text>
+                <text x="36" y="22" font-size="9" font-family="monospace" fill="#0284c7">192.168.3.80 /24</text>
+                <text x="36" y="32" font-size="8.5" font-family="monospace" fill="#64748b">2003:f3:700:6c00:9::50 /64</text>
+            </g>
+
+            <!-- Managed Switch 3 -->
+            <g transform="translate(620, 228)">
+                <rect width="78" height="34" fill="#0ea5e9" stroke="#0369a1" stroke-width="2" rx="4" />
+                <rect x="6" y="8" width="66" height="6" fill="#0f172a" rx="1" />
+                <text x="39" y="-6" font-size="11" font-weight="bold" fill="#0f172a" text-anchor="middle">Managed Switch 3</text>
+                <text x="39" y="27" font-size="9" font-family="monospace" font-weight="bold" fill="#ffffff" text-anchor="middle">192.168.3.5 /24</text>
+            </g>
+
+            <!-- Group Frame for NEW Computers 31..45 -->
+            <rect x="500" y="295" width="405" height="75" fill="#f0fdf4" stroke="#10b981" stroke-width="1.8" stroke-dasharray="4,3" rx="6" />
+            <text x="515" y="312" font-size="11" font-weight="bold" fill="#047857">✨ Neu zu beschaffende Computer (IP-Adresse in aufsteigender Reihenfolge):</text>
+
+            <!-- Computer 31 -->
+            <g transform="translate(515, 320)">
+                <rect width="24" height="18" fill="#d1fae5" stroke="#059669" stroke-width="1.5" rx="2" />
+                <text x="32" y="10" font-size="10.5" font-weight="bold" fill="#065f46">Computer Nr. 31 (Prüfungsaufgabe)</text>
+                <text x="32" y="22" font-size="9.5" font-family="monospace" font-weight="bold" fill="#0284c7">192.168.3.81 /24</text>
+                <text x="32" y="33" font-size="8.5" font-family="monospace" fill="#b91c1c">[ ? IPv6 in Adresstabelle ermitteln ? ]</text>
+            </g>
+
+            <text x="735" y="340" font-size="14" font-weight="bold" fill="#059669">⋯</text>
+
+            <!-- Computer 45 -->
+            <g transform="translate(755, 320)">
+                <rect width="24" height="18" fill="#d1fae5" stroke="#059669" stroke-width="1.5" rx="2" />
+                <text x="32" y="10" font-size="10.5" font-weight="bold" fill="#065f46">Computer Nr. 45 (Prüfungsaufgabe)</text>
+                <text x="32" y="22" font-size="9.5" font-family="monospace" font-weight="bold" fill="#0284c7">192.168.3.95 /24</text>
+                <text x="32" y="33" font-size="8.5" font-family="monospace" fill="#b91c1c">[ ? IPv6 in Adresstabelle ermitteln ? ]</text>
+            </g>
+        </svg>
+        `;
+    },
+
     getNetworkTopologySvg() {
         return this.getAddressClassificationDiagramSvg();
     }
