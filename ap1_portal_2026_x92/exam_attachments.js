@@ -148,60 +148,62 @@ const ExamAttachments = {
                                 Die Systemhaus KG hat folgende 3 PC-Systeme in ihrem aktuellen Lieferprogramm:
                             </p>
 
-                            <table class="att-spec-table">
-                                <thead>
-                                    <tr>
-                                        <th>Merkmal / Kriterium</th>
-                                        <th>PC 1 (OfficeBasic Pro)</th>
-                                        <th style="background: #e0f2fe; color: #0369a1;">PC 2 (CreativeStation Work)</th>
-                                        <th>PC 3 (PerformancePro Extreme)</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td><strong>Prozessor (CPU)</strong></td>
-                                        <td>AMD Ryzen 5 5600G<br><span class="ko-badge">6 Kerne / 12 Threads (K.O.)</span></td>
-                                        <td style="background: #f0fdf4;"><strong>Intel Core i7-13700</strong><br>16 Kerne (8P+8E) / 24 Threads</td>
-                                        <td>AMD Ryzen 9 7900X<br>12 Kerne / 24 Threads</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Arbeitsspeicher (RAM)</strong></td>
-                                        <td>16 GB DDR4-3200<br><span class="ko-badge">Nur 16 GB (K.O.)</span></td>
-                                        <td style="background: #f0fdf4;"><strong>32 GB DDR5-5600</strong></td>
-                                        <td>32 GB DDR5-6000</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Grafikkarte (GPU)</strong></td>
-                                        <td>AMD Radeon Graphics<br><span class="ko-badge">Onboard-GPU (K.O.)</span></td>
-                                        <td style="background: #f0fdf4;"><strong>NVIDIA GeForce RTX 4060</strong><br>8 GB GDDR6 dediziert</td>
-                                        <td>AMD Radeon RX 7700 XT<br>12 GB GDDR6 dediziert</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Speichermedium</strong></td>
-                                        <td>2 TB HDD 7200 RPM<br><span class="ko-badge">Keine SSD / nur HDD (K.O.)</span></td>
-                                        <td style="background: #f0fdf4;"><strong>1 TB M.2 NVMe PCIe 4.0 SSD</strong><br>7.000 MB/s Leserate</td>
-                                        <td>2 TB M.2 NVMe PCIe 4.0 SSD</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Lautstärke Volllast</strong></td>
-                                        <td>30 dB(A)</td>
-                                        <td style="background: #f0fdf4;"><strong>28 dB(A)</strong> (Silent-Cooler)</td>
-                                        <td>45 dB(A)<br><span class="ko-badge">&gt; 38 dB(A) viel zu laut (K.O.)</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Netzteil-Effizienz</strong></td>
-                                        <td>80 PLUS Bronze (82%)</td>
-                                        <td style="background: #f0fdf4;"><strong>80 PLUS Gold (90% Wirkungsgrad)</strong></td>
-                                        <td>750W Standard-Netzteil<br><span class="ko-badge">75% Wirkungsgrad &lt; 85% (K.O.)</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Einkaufspreis / Stück</strong></td>
-                                        <td>520,00 € Netto</td>
-                                        <td style="background: #f0fdf4;"><strong>850,00 € Netto</strong></td>
-                                        <td>940,00 € Netto</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <div class="att-spec-table-wrap">
+                                <table class="att-spec-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Merkmal / Kriterium</th>
+                                            <th>PC 1 (OfficeBasic Pro)</th>
+                                            <th style="background: #e0f2fe; color: #0369a1;">PC 2 (CreativeStation Work)</th>
+                                            <th>PC 3 (PerformancePro Extreme)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>Prozessor (CPU)</strong></td>
+                                            <td>AMD Ryzen 5 5600G<br><span class="ko-badge">6 Kerne / 12 Threads (K.O.)</span></td>
+                                            <td style="background: #f0fdf4;"><strong>Intel Core i7-13700</strong><br>16 Kerne (8P+8E) / 24 Threads</td>
+                                            <td>AMD Ryzen 9 7900X<br>12 Kerne / 24 Threads</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Arbeitsspeicher (RAM)</strong></td>
+                                            <td>16 GB DDR4-3200<br><span class="ko-badge">Nur 16 GB (K.O.)</span></td>
+                                            <td style="background: #f0fdf4;"><strong>32 GB DDR5-5600</strong></td>
+                                            <td>32 GB DDR5-6000</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Grafikkarte (GPU)</strong></td>
+                                            <td>AMD Radeon Graphics<br><span class="ko-badge">Onboard-GPU (K.O.)</span></td>
+                                            <td style="background: #f0fdf4;"><strong>NVIDIA GeForce RTX 4060</strong><br>8 GB GDDR6 dediziert</td>
+                                            <td>AMD Radeon RX 7700 XT<br>12 GB GDDR6 dediziert</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Speichermedium</strong></td>
+                                            <td>2 TB HDD 7200 RPM<br><span class="ko-badge">Keine SSD / nur HDD (K.O.)</span></td>
+                                            <td style="background: #f0fdf4;"><strong>1 TB M.2 NVMe PCIe 4.0 SSD</strong><br>7.000 MB/s Leserate</td>
+                                            <td>2 TB M.2 NVMe PCIe 4.0 SSD</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Lautstärke Volllast</strong></td>
+                                            <td>30 dB(A)</td>
+                                            <td style="background: #f0fdf4;"><strong>28 dB(A)</strong> (Silent-Cooler)</td>
+                                            <td>45 dB(A)<br><span class="ko-badge">&gt; 38 dB(A) viel zu laut (K.O.)</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Netzteil-Effizienz</strong></td>
+                                            <td>80 PLUS Bronze (82%)</td>
+                                            <td style="background: #f0fdf4;"><strong>80 PLUS Gold (90% Wirkungsgrad)</strong></td>
+                                            <td>750W Standard-Netzteil<br><span class="ko-badge">75% Wirkungsgrad &lt; 85% (K.O.)</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Einkaufspreis / Stück</strong></td>
+                                            <td>520,00 € Netto</td>
+                                            <td style="background: #f0fdf4;"><strong>850,00 € Netto</strong></td>
+                                            <td>940,00 € Netto</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
 
                             <div style="margin-top: 0.75rem; font-size: 0.82rem; color: #475569; background: #f8fafc; padding: 0.5rem 0.75rem; border-radius: 6px; border: 1px solid #e2e8f0;">
                                 <strong>Kaufmännische Konditionen:</strong> Betriebssystemlizenz Windows 10 Pro: 110,00 € Netto je Arbeitsplatz &bull; Vor-Ort-Montage/Installation: 40,00 € Netto je Arbeitsplatz.

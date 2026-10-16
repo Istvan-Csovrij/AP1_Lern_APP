@@ -1696,14 +1696,14 @@ function applySplitRatio(ratio) {
     const rightPane = document.getElementById("exam-split-attachments-pane");
     if (!leftPane || !rightPane) return;
 
-    // Resizer is ~18px wide
-    leftPane.style.flex = `0 0 calc(${ratio}% - 9px)`;
-    leftPane.style.maxWidth = `calc(${ratio}% - 9px)`;
-    leftPane.style.width = `calc(${ratio}% - 9px)`;
+    // Resizer is 16px wide + 8px total margins = 24px footprint
+    leftPane.style.flex = `0 0 calc(${ratio}% - 12px)`;
+    leftPane.style.maxWidth = `calc(${ratio}% - 12px)`;
+    leftPane.style.width = `calc(${ratio}% - 12px)`;
     
-    rightPane.style.flex = `0 0 calc(${100 - ratio}% - 9px)`;
-    rightPane.style.maxWidth = `calc(${100 - ratio}% - 9px)`;
-    rightPane.style.width = `calc(${100 - ratio}% - 9px)`;
+    rightPane.style.flex = `0 0 calc(${100 - ratio}% - 12px)`;
+    rightPane.style.maxWidth = `calc(${100 - ratio}% - 12px)`;
+    rightPane.style.width = `calc(${100 - ratio}% - 12px)`;
 
     // Update active state on ratio buttons
     document.querySelectorAll(".split-ratio-btn").forEach(btn => {
@@ -2063,36 +2063,38 @@ function renderDeckblatt(container) {
                     <div style="font-weight: bold; font-size: 0.95rem; margin-bottom: 4px; text-transform: uppercase;">
                         Bewertung durch den Prüfungsausschuss (Ergebnisübersicht):
                     </div>
-                    <table class="deckblatt-eval-table">
-                        <thead>
-                            <tr>
-                                <th style="text-align: left;">Prüfungsaufgabe</th>
-                                <th>Höchstpunktzahl</th>
-                                <th>Erreichte Punkte</th>
-                                <th>Korrektor-Paraphe</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            ${activeExamSet.tasks.map((t, idx) => {
-                                const pts = t.totalPoints || t.maxPoints || 25;
-                                const titleStr = t.title || '';
-                                const label = titleStr.includes(':') ? titleStr.split(':')[1].trim() : titleStr;
-                                const scoreVal = (scores.taskPoints && scores.taskPoints[idx] !== undefined) ? scores.taskPoints[idx] : 0;
-                                return `<tr>
-                                    <td class="label-col">${idx + 1}. Aufgabe: ${escapeHtml(label)}</td>
-                                    <td>${pts}</td>
-                                    <td style="font-weight: bold; font-size: 1.05rem; color: #dc2626;">${scoreVal}</td>
-                                    <td style="color: #64748b; font-style: italic;">${isExamSubmitted ? 'gez. Prüfer' : ''}</td>
-                                </tr>`;
-                            }).join('')}
-                            <tr class="total-row">
-                                <td class="label-col">Gesamtpunktzahl / Endnote:</td>
-                                <td>100</td>
-                                <td style="color: #dc2626; font-size: 1.15rem;">${scores.totalPoints} Punkte</td>
-                                <td><strong>Note: ${isExamSubmitted ? scores.gradeNum + ' (' + scores.gradeText + ')' : '—'}</strong></td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div class="deckblatt-eval-table-wrap">
+                        <table class="deckblatt-eval-table">
+                            <thead>
+                                <tr>
+                                    <th style="text-align: left;">Prüfungsaufgabe</th>
+                                    <th>Höchstpunktzahl</th>
+                                    <th>Erreichte Punkte</th>
+                                    <th>Korrektor-Paraphe</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${activeExamSet.tasks.map((t, idx) => {
+                                    const pts = t.totalPoints || t.maxPoints || 25;
+                                    const titleStr = t.title || '';
+                                    const label = titleStr.includes(':') ? titleStr.split(':')[1].trim() : titleStr;
+                                    const scoreVal = (scores.taskPoints && scores.taskPoints[idx] !== undefined) ? scores.taskPoints[idx] : 0;
+                                    return `<tr>
+                                        <td class="label-col">${idx + 1}. Aufgabe: ${escapeHtml(label)}</td>
+                                        <td>${pts}</td>
+                                        <td style="font-weight: bold; font-size: 1.05rem; color: #dc2626;">${scoreVal}</td>
+                                        <td style="color: #64748b; font-style: italic;">${isExamSubmitted ? 'gez. Prüfer' : ''}</td>
+                                    </tr>`;
+                                }).join('')}
+                                <tr class="total-row">
+                                    <td class="label-col">Gesamtpunktzahl / Endnote:</td>
+                                    <td>100</td>
+                                    <td style="color: #dc2626; font-size: 1.15rem;">${scores.totalPoints} Punkte</td>
+                                    <td><strong>Note: ${isExamSubmitted ? scores.gradeNum + ' (' + scores.gradeText + ')' : '—'}</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
 
                 <!-- Start Action Button -->
@@ -2328,10 +2330,12 @@ function renderTaskPage(container, pageIndex) {
             }
 
             inputHtml = `
-                <table class="exam-din-table">
-                    <thead>${thead}</thead>
-                    <tbody>${tbody}</tbody>
-                </table>
+                <div class="exam-din-table-wrap">
+                    <table class="exam-din-table">
+                        <thead>${thead}</thead>
+                        <tbody>${tbody}</tbody>
+                    </table>
+                </div>
                 ${optionsPoolHtml}
             `;
         }
