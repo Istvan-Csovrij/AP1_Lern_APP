@@ -350,6 +350,50 @@
                 </div>
             </div>
 
+            
+            <!-- Brücke AP1 ➔ AP2 Hub Card (FIAE Prüfungsbereiche) -->
+            <div class="card ap2-bridge-card" style="border: 2px solid #6366f1; background: linear-gradient(180deg, #f8faff 0%, #ffffff 100%); box-shadow: 0 4px 12px rgba(99, 102, 241, 0.15); border-radius: var(--radius); margin-bottom: 1.25rem;">
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.4rem;">
+                    <h3 style="color: #4338ca; margin: 0; font-size: 1.1rem; display: flex; align-items: center; gap: 0.45rem;">
+                        <i class="fa-solid fa-graduation-cap" style="color: #6366f1;"></i> Brücke AP1 ➔ AP2
+                    </h3>
+                    <span style="background: #ede9fe; color: #6d28d9; font-size: 0.72rem; font-weight: 800; padding: 0.15rem 0.55rem; border-radius: 999px; text-transform: uppercase; letter-spacing: 0.03em;">
+                        FIAE Hub
+                    </span>
+                </div>
+                <p style="font-size: 0.86rem; color: #475569; margin-bottom: 0.7rem; line-height: 1.35;">
+                    Spezial-Vorbereitung für die Zwischenstufe &amp; Abschlussprüfung Teil 2 (Anwendungsentwicklung).
+                </p>
+
+                <div style="display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 0.85rem; font-size: 0.82rem;">
+                    <div style="background: #eef2ff; border-left: 3px solid #6366f1; padding: 0.4rem 0.6rem; border-radius: 4px; color: #312e81; cursor: pointer;" onclick="openAp2BridgeModal('pb2')">
+                        <strong>1. Softwareprodukt planen (PB 2)</strong><br>
+                        <span style="color: #4338ca; font-size: 0.78rem;">Architektur, UI/UX, ERM, Testpläne (ca. 90 Min)</span>
+                    </div>
+                    <div style="background: #ecfeff; border-left: 3px solid #06b6d4; padding: 0.4rem 0.6rem; border-radius: 4px; color: #164e63; cursor: pointer;" onclick="openAp2BridgeModal('pb3')">
+                        <strong>2. Algorithmen &amp; Logik (PB 3)</strong><br>
+                        <span style="color: #0e7490; font-size: 0.78rem;">Pseudocode, Debugging, SQL-Joins (ca. 90 Min)</span>
+                    </div>
+                    <div style="background: #fdf2f8; border-left: 3px solid #ec4899; padding: 0.4rem 0.6rem; border-radius: 4px; color: #831843; cursor: pointer;" onclick="openAp2BridgeModal('pb4')">
+                        <strong>3. WiSo (PB 4)</strong><br>
+                        <span style="color: #be185d; font-size: 0.78rem;">Arbeitsrecht, Kündigung, Betriebsrat &amp; Verträge (ca. 60 Min)</span>
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 0.4rem; margin-bottom: 0.5rem;">
+                    <button class="btn btn-secondary" onclick="openAp2BridgeModal('files')" title="Original-Prüfungen auf deinem PC anzeigen" style="flex: 1; padding: 0.45rem 0.5rem; font-size: 0.8rem; border-radius: 6px; display: inline-flex; align-items: center; justify-content: center; gap: 0.3rem; border: 1px solid #cbd5e1; background: #f8fafc; font-weight: 600;">
+                        <i class="fa-solid fa-folder-open" style="color: #f59e0b;"></i> PC-Dateien (52)
+                    </button>
+                    <button class="btn btn-secondary" onclick="openAp2BridgeModal('web')" title="Offizielle Web-Quellen & Standards" style="flex: 1; padding: 0.45rem 0.5rem; font-size: 0.8rem; border-radius: 6px; display: inline-flex; align-items: center; gap: 0.3rem; justify-content: center; border: 1px solid #cbd5e1; background: #f8fafc; font-weight: 600;">
+                        <i class="fa-solid fa-globe" style="color: #3b82f6;"></i> Web-Quellen
+                    </button>
+                </div>
+
+                <button class="btn btn-full" id="open-ap2-bridge-btn" onclick="openAp2BridgeModal('pb2')" style="background: linear-gradient(135deg, #4f46e5, #7c3aed); color: white; font-weight: 700; font-size: 0.9rem; padding: 0.65rem 1rem; border-radius: 8px; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 0.5rem; box-shadow: 0 4px 10px rgba(79, 70, 229, 0.28); transition: transform 0.15s ease;">
+                    <i class="fa-solid fa-rocket"></i> AP2-Lernhub &amp; Aufgaben öffnen
+                </button>
+            </div>
+
             <!-- Lernfortschritt Card -->
             <div class="card stats-card">
                 <h3><i class="fa-solid fa-chart-simple"></i> Lernfortschritt</h3>
@@ -694,10 +738,714 @@
     </footer>
 
     <!-- Load diagram library, exam datasets, questions, generator and application logic -->
+    
+    <!-- ====================================================================== -->
+    <!-- BRÜCKE AP1 ➔ AP2 (FIAE ABSCHLUSSPRÜFUNG TEIL 2) MODAL & LERNHUB        -->
+    <!-- ====================================================================== -->
+    <div id="ap2-bridge-modal" class="whiteboard-modal" style="display: none;">
+        <div class="whiteboard-backdrop" onclick="closeAp2BridgeModal()"></div>
+        <div class="whiteboard-dialog" style="max-width: 1300px; height: 92vh; max-height: 920px; display: flex; flex-direction: column;">
+            
+            <!-- Header Bar -->
+            <div class="whiteboard-header" style="background: linear-gradient(135deg, #1e1b4b, #312e81); border-bottom: 2px solid #4338ca; padding: 1rem 1.5rem; color: white; display: flex; justify-content: space-between; align-items: center;">
+                <div style="display: flex; align-items: center; gap: 0.85rem;">
+                    <div style="width: 42px; height: 42px; border-radius: 10px; background: linear-gradient(135deg, #6366f1, #8b5cf6); color: white; display: flex; align-items: center; justify-content: center; font-size: 1.35rem; box-shadow: 0 4px 10px rgba(99, 102, 241, 0.4);">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                    </div>
+                    <div>
+                        <h2 style="margin: 0; font-size: 1.3rem; color: #ffffff; display: flex; align-items: center; gap: 0.6rem; font-weight: 800;">
+                            Brücke AP1 ➔ AP2: Fachinformatiker Anwendungsentwicklung (FIAE)
+                            <span style="font-size: 0.75rem; background: #4f46e5; color: #e0e7ff; padding: 0.2rem 0.6rem; border-radius: 999px; text-transform: uppercase; font-weight: 700;">
+                                Prüfungsvorbereitung &amp; Hub
+                            </span>
+                        </h2>
+                        <p style="margin: 0.2rem 0 0 0; font-size: 0.88rem; color: #c7d2fe;">
+                            Systematische Vorbereitung auf die 3 Prüfungsbereiche von AP2 (Planen, Algorithmen, WiSo) &bull; BaWü-Prüfungsarchiv &bull; Fachquellen
+                        </p>
+                    </div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 0.75rem;">
+                    <button class="btn btn-secondary" onclick="closeAp2BridgeModal()" style="background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.25); color: white; font-weight: 700; padding: 0.45rem 0.9rem; border-radius: 6px; cursor: pointer;">
+                        <i class="fa-solid fa-xmark"></i> Schließen
+                    </button>
+                </div>
+            </div>
+
+            <!-- Navigation Tabs Bar -->
+            <div style="display: flex; gap: 0.5rem; background: #f8fafc; border-bottom: 2px solid #e2e8f0; padding: 0.5rem 1.5rem 0 1.5rem; overflow-x: auto;">
+                <button class="ap2-nav-tab active" data-tab="pb2" onclick="switchAp2Tab('pb2')" style="padding: 0.75rem 1.1rem; border: none; background: none; border-bottom: 3px solid #6366f1; color: #4338ca; font-weight: 700; font-size: 0.92rem; cursor: pointer; display: flex; align-items: center; gap: 0.45rem; white-space: nowrap;">
+                    <i class="fa-solid fa-diagram-project"></i> 1. Planen eines Softwareproduktes (PB 2)
+                </button>
+                <button class="ap2-nav-tab" data-tab="pb3" onclick="switchAp2Tab('pb3')" style="padding: 0.75rem 1.1rem; border: none; background: none; border-bottom: 3px solid transparent; color: #64748b; font-weight: 600; font-size: 0.92rem; cursor: pointer; display: flex; align-items: center; gap: 0.45rem; white-space: nowrap;">
+                    <i class="fa-solid fa-code"></i> 2. Algorithmen &amp; Logik (PB 3)
+                </button>
+                <button class="ap2-nav-tab" data-tab="pb4" onclick="switchAp2Tab('pb4')" style="padding: 0.75rem 1.1rem; border: none; background: none; border-bottom: 3px solid transparent; color: #64748b; font-weight: 600; font-size: 0.92rem; cursor: pointer; display: flex; align-items: center; gap: 0.45rem; white-space: nowrap;">
+                    <i class="fa-solid fa-scale-balanced"></i> 3. WiSo – Wirtschafts- &amp; Sozialkunde (PB 4)
+                </button>
+                <button class="ap2-nav-tab" data-tab="files" onclick="switchAp2Tab('files')" style="padding: 0.75rem 1.1rem; border: none; background: none; border-bottom: 3px solid transparent; color: #64748b; font-weight: 600; font-size: 0.92rem; cursor: pointer; display: flex; align-items: center; gap: 0.45rem; white-space: nowrap;">
+                    <i class="fa-solid fa-folder-tree" style="color: #f59e0b;"></i> 4. Lokale PC-Prüfungen (BaWü)
+                </button>
+                <button class="ap2-nav-tab" data-tab="web" onclick="switchAp2Tab('web')" style="padding: 0.75rem 1.1rem; border: none; background: none; border-bottom: 3px solid transparent; color: #64748b; font-weight: 600; font-size: 0.92rem; cursor: pointer; display: flex; align-items: center; gap: 0.45rem; white-space: nowrap;">
+                    <i class="fa-solid fa-globe" style="color: #0284c7;"></i> 5. Internet-Quellen &amp; Standards
+                </button>
+            </div>
+
+            <!-- Scrollable Body for Tab Contents -->
+            <div class="whiteboard-body" style="padding: 1.5rem; overflow-y: auto; flex: 1; background: #ffffff;">
+
+                <!-- ============================================================== -->
+                <!-- TAB 1: PB 2 - PLANEN EINES SOFTWAREPRODUKTES                   -->
+                <!-- ============================================================== -->
+                <div id="ap2-tab-pb2" class="ap2-tab-content">
+                    
+                    <!-- Overview Banner -->
+                    <div style="background: linear-gradient(135deg, #eef2ff, #e0e7ff); border: 1.5px solid #c7d2fe; border-radius: 10px; padding: 1.25rem; margin-bottom: 1.5rem;">
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem;">
+                            <div>
+                                <span style="background: #4338ca; color: white; padding: 0.2rem 0.6rem; border-radius: 6px; font-size: 0.78rem; font-weight: 800; text-transform: uppercase;">Prüfungsbereich 2 &bull; Richtzeit: ca. 90 Minuten</span>
+                                <h3 style="margin: 0.5rem 0 0.3rem 0; font-size: 1.25rem; color: #1e1b4b;">Rolle: Software-Architekt &amp; Projektplaner</h3>
+                                <p style="margin: 0; color: #3730a3; font-size: 0.95rem; line-height: 1.5; max-width: 900px;">
+                                    In diesem Prüfungsteil triffst du grundlegende konzeptionelle Entscheidungen vor Beginn der Programmierung. Du musst Architekturen bewerten, ergonomische UI-Konzepte erarbeiten, Tech-Stacks begründen, Datenmodelle (ERM) skizzieren und vollständige Testpläne zur Qualitätssicherung ableiten.
+                                </p>
+                            </div>
+                            <div style="background: white; border: 1px solid #c7d2fe; border-radius: 8px; padding: 0.75rem 1rem; text-align: center; min-width: 180px;">
+                                <div style="font-size: 0.8rem; color: #64748b; font-weight: 600;">IHK-Schwerpunkte</div>
+                                <div style="font-size: 1.1rem; font-weight: 800; color: #4338ca;">Architektur &bull; UI &bull; ERM &bull; Test</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 5 Core Competency Blocks Grid -->
+                    <h4 style="margin: 0 0 1rem 0; color: #0f172a; font-size: 1.1rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <i class="fa-solid fa-cubes" style="color: #6366f1;"></i> Die 5 zentralen Fachsäulen von PB 2
+                    </h4>
+
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 1rem; margin-bottom: 2rem;">
+                        
+                        <!-- Block 1: Architektur -->
+                        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 1rem;">
+                            <h5 style="margin: 0 0 0.5rem 0; color: #1e293b; font-size: 1rem; display: flex; align-items: center; gap: 0.4rem;">
+                                <i class="fa-solid fa-sitemap" style="color: #4f46e5;"></i> 1. Software-Architekturen bewerten
+                            </h5>
+                            <p style="font-size: 0.86rem; color: #475569; margin-bottom: 0.5rem; line-height: 1.4;">
+                                <strong>Monolith vs. Microservices vs. 3-Schichten:</strong><br>
+                                &bull; <em>Wartbarkeit:</em> Schichtenarchitektur (Präsentation, Geschäftslogik, Datenhaltung) trennt Verantwortlichkeiten (Separation of Concerns).<br>
+                                &bull; <em>Skalierbarkeit:</em> Microservices erlauben gezielte Skalierung hochbelasteter Dienste; Monolithen sind bei kleineren Teams oft effizienter.<br>
+                                &bull; <em>Resilienz:</em> Ausfall eines Services legt bei Microservices nicht das Gesamtsystem lahm (Circuit Breaker).
+                            </p>
+                            <div style="background: #eef2ff; padding: 0.4rem 0.6rem; border-radius: 4px; font-size: 0.78rem; color: #312e81;">
+                                <strong>Prüfungstipp:</strong> Begründe Entscheidungen immer anhand konkreter Kennzahlen (Lastspitzen, Teamgröße, Time-to-Market, Fehlertoleranz).
+                            </div>
+                        </div>
+
+                        <!-- Block 2: UI / Usability -->
+                        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 1rem;">
+                            <h5 style="margin: 0 0 0.5rem 0; color: #1e293b; font-size: 1rem; display: flex; align-items: center; gap: 0.4rem;">
+                                <i class="fa-solid fa-paintbrush" style="color: #0284c7;"></i> 2. Benutzeroberflächen (UI) &amp; Usability
+                            </h5>
+                            <p style="font-size: 0.86rem; color: #475569; margin-bottom: 0.5rem; line-height: 1.4;">
+                                <strong>DIN EN ISO 9241-110 (Die 7 Dialoggrundsätze):</strong><br>
+                                1. <em>Aufgabenangemessenheit:</em> Keine unnötigen Eingabefelder.<br>
+                                2. <em>Selbstbeschreibungsfähigkeit:</em> Verständliche Tooltips &amp; Labels.<br>
+                                3. <em>Erwartungskonformität:</em> Gewohnte UI-Muster (z.B. Warenkorb oben rechts).<br>
+                                4. <em>Fehlertoleranz:</em> Inline-Validierung, verständliche Fehlermeldungen.<br>
+                                5. <em>Steuerbarkeit:</em> Aktionen abbrechbar, Vor/Zurück.<br>
+                                6. <em>Individualisierbarkeit:</em> Dark/Light-Mode, Schriftgröße.<br>
+                                7. <em>Lernförderlichkeit:</em> Intuitive Erstbedienung.
+                            </p>
+                            <div style="background: #e0f2fe; padding: 0.4rem 0.6rem; border-radius: 4px; font-size: 0.78rem; color: #075985;">
+                                <strong>Barrierefreiheit:</strong> WCAG 2.1 AA &amp; BITV (Farbkontrast &ge; 4.5:1, Tastaturbedienbarkeit via Tabindex).
+                            </div>
+                        </div>
+
+                        <!-- Block 3: Frameworks & Bibliotheken -->
+                        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 1rem;">
+                            <h5 style="margin: 0 0 0.5rem 0; color: #1e293b; font-size: 1rem; display: flex; align-items: center; gap: 0.4rem;">
+                                <i class="fa-solid fa-layer-group" style="color: #059669;"></i> 3. Bibliotheken, Frameworks &amp; Tools
+                            </h5>
+                            <p style="font-size: 0.86rem; color: #475569; margin-bottom: 0.5rem; line-height: 1.4;">
+                                <strong>Auswahlentscheidung strukturiert begründen:</strong><br>
+                                &bull; <em>Frontend:</em> React (großes Ökosystem, Flexibilität) vs. Angular (All-in-One Enterprise, striktes TypeScript) vs. Vue (leichtgewichtig).<br>
+                                &bull; <em>Backend:</em> Node.js/Express (asynchrones I/O, einheitliches JS) vs. Spring Boot (hohe Typsicherheit, Multi-Threading) vs. FastAPI (Auto-OpenAPI, Geschwindigkeit).<br>
+                                &bull; <em>ORM vs. SQL:</em> ORM (Prisma/Hibernate) schützt vor SQL-Injection und beschleunigt Entwicklung; natives SQL bei hochkomplexen Queries.
+                            </p>
+                            <div style="background: #ecfdf5; padding: 0.4rem 0.6rem; border-radius: 4px; font-size: 0.78rem; color: #065f46;">
+                                <strong>Kriterienmatrix:</strong> Lizenzmodell (MIT vs. GPL), Community-Aktivität, Langzeitsupport (LTS), Sicherheits-Patches.
+                            </div>
+                        </div>
+
+                        <!-- Block 4: Datenmodelle & ERM -->
+                        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 1rem;">
+                            <h5 style="margin: 0 0 0.5rem 0; color: #1e293b; font-size: 1rem; display: flex; align-items: center; gap: 0.4rem;">
+                                <i class="fa-solid fa-database" style="color: #d97706;"></i> 4. Datenmodelle &amp; Normalisierung
+                            </h5>
+                            <p style="font-size: 0.86rem; color: #475569; margin-bottom: 0.5rem; line-height: 1.4;">
+                                <strong>ER-Modelle &amp; relationale Schema:</strong><br>
+                                &bull; <em>Kardinalitäten:</em> 1:1, 1:n, m:n. <strong>Wichtig:</strong> m:n-Beziehungen MÜSSEN in relationalen Datenbanken durch eine Zwischentabelle mit 2 Fremdschlüsseln aufgelöst werden!<br>
+                                &bull; <em>1. NF:</em> Alle Attribute atomar (unteilbar).<br>
+                                &bull; <em>2. NF:</em> 1. NF + jedes Nichtschlüsselattribut hängt voll vom gesamten Primärschlüssel ab (keine Teilabhängigkeiten).<br>
+                                &bull; <em>3. NF:</em> 2. NF + keine transitiven Abhängigkeiten zwischen Nichtschlüsseln.
+                            </p>
+                            <div style="background: #fef3c7; padding: 0.4rem 0.6rem; border-radius: 4px; font-size: 0.78rem; color: #92400e;">
+                                <strong>Schlüssel kennzeichnen:</strong> Primärschlüssel (PK, unterstrichen) &amp; Fremdschlüssel (FK, gestrichelt/Pfeil).
+                            </div>
+                        </div>
+
+                        <!-- Block 5: Testpläne & QS -->
+                        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 1rem; grid-column: span 1;">
+                            <h5 style="margin: 0 0 0.5rem 0; color: #1e293b; font-size: 1rem; display: flex; align-items: center; gap: 0.4rem;">
+                                <i class="fa-solid fa-vial-circle-check" style="color: #dc2626;"></i> 5. Testpläne &amp; Qualitätssicherung
+                            </h5>
+                            <p style="font-size: 0.86rem; color: #475569; margin-bottom: 0.5rem; line-height: 1.4;">
+                                <strong>Testpyramide &amp; standardisierter Testplan:</strong><br>
+                                &bull; <em>Unit-Tests:</em> Isolierte Tests einzelner Funktionen/Klassen (JUnit, Jest).<br>
+                                &bull; <em>Integrationstests:</em> Schnittstellenprüfung zwischen Modulen und Datenbank.<br>
+                                &bull; <em>Systemtests / E2E:</em> End-to-End Benutzerabläufe (Cypress, Playwright).<br>
+                                &bull; <em>IHK-Testplan-Tabelle:</em> Test-ID &bull; Vorbedingung &bull; Testschritte &bull; Testdaten (Gültig &amp; Ungültig) &bull; Erwartetes Ergebnis &bull; Status.
+                            </p>
+                            <div style="background: #fee2e2; padding: 0.4rem 0.6rem; border-radius: 4px; font-size: 0.78rem; color: #991b1b;">
+                                <strong>TDD-Zyklus:</strong> Red (Test schlägt fehl) &rarr; Green (Minimalcode schreiben) &rarr; Refactor (Code optimieren).
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Interactive Practice Tasks for PB 2 -->
+                    <div style="border-top: 2px dashed #cbd5e1; padding-top: 1.5rem; margin-top: 1.5rem;">
+                        <h4 style="margin: 0 0 1rem 0; color: #1e1b4b; font-size: 1.15rem; display: flex; align-items: center; gap: 0.5rem;">
+                            <i class="fa-solid fa-pen-to-square" style="color: #6366f1;"></i> Interaktive Prüfungsaufgaben zu PB 2 (mit Musterlösungen)
+                        </h4>
+
+                        <!-- Task PB 2.1 -->
+                        <div style="border: 1px solid #cbd5e1; border-radius: 8px; margin-bottom: 1.25rem; background: white; overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.04);">
+                            <div style="background: #f8fafc; padding: 0.85rem 1.2rem; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center;">
+                                <div>
+                                    <span style="background: #4f46e5; color: white; padding: 0.15rem 0.5rem; border-radius: 4px; font-size: 0.75rem; font-weight: 700;">Aufgabe 2.1</span>
+                                    <strong style="margin-left: 0.5rem; color: #0f172a;">Architektur-Konzeption: Monolith vs. Microservices bei Lastspitzen</strong>
+                                </div>
+                                <span style="font-size: 0.82rem; font-weight: 700; color: #64748b;">15 Punkte</span>
+                            </div>
+                            <div style="padding: 1.2rem;">
+                                <p style="font-size: 0.92rem; color: #334155; line-height: 1.5; margin-bottom: 0.75rem;">
+                                    <strong>Ausgangssituation:</strong> Ein Online-Ticketing-System bricht beim Vorverkaufsstart beliebter Konzerte regelmäßig unter der Last von 50.000 gleichzeitigen Buchungsanfragen zusammen. Das aktuelle System ist als monolithische PHP-Anwendung mit zentraler MySQL-Datenbank aufgebaut.<br><br>
+                                    <strong>Ihre Aufgaben:</strong><br>
+                                    1. Erläutern Sie zwei gravierende Nachteile der bisherigen monolithischen Architektur bei plötzlichen Lastspitzen.<br>
+                                    2. Begründen Sie, warum die Auslagerung des Buchungsdienstes in einen eigenständigen Microservice mit Message-Queue (z.B. RabbitMQ oder Apache Kafka) die Skalierbarkeit und Ausfallsicherheit verbessert.
+                                </p>
+                                
+                                <button class="btn btn-secondary" id="sol-pb2-1-btn" onclick="toggleAp2Solution('sol-pb2-1')" style="margin-top: 0.5rem; font-size: 0.84rem; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; border: 1.5px solid #6366f1; color: #4338ca; background: #eef2ff; font-weight: 700;">
+                                    <i class="fa-solid fa-lightbulb"></i> Musterlösung &amp; Korrekturhinweise anzeigen
+                                </button>
+
+                                <div id="sol-pb2-1" style="display: none; margin-top: 1rem; background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 8px; padding: 1rem; font-size: 0.9rem; color: #166534; line-height: 1.5;">
+                                    <h5 style="margin: 0 0 0.5rem 0; color: #14532d; font-size: 0.95rem;"><i class="fa-solid fa-circle-check"></i> IHK-Musterlösung &amp; Bewertungsmaßstab:</h5>
+                                    <strong>Zu 1. Nachteile der monolithischen Architektur:</strong>
+                                    <ul style="margin: 0.3rem 0 0.75rem 1.2rem; padding: 0;">
+                                        <li><strong>Keine gezielte Skalierung:</strong> Um den überlasteten Buchungsteil zu skalieren, muss der gesamte Monolith mehrfach geklont werden, was enorme Serverressourcen für ungenutzte Module (z.B. FAQ, Profilverwaltung) verschwendet.</li>
+                                        <li><strong>Single Point of Failure:</strong> Wenn der Ticket-Kaufprozess die Datenbankverbindungen erschöpft oder den Webserver zum Absturz bringt, ist die gesamte Website (auch für reine Besucher/Info-Seiten) nicht mehr erreichbar.</li>
+                                    </ul>
+                                    <strong>Zu 2. Begründung Microservice &amp; Message-Queue:</strong>
+                                    <ul style="margin: 0.3rem 0 0 1.2rem; padding: 0;">
+                                        <li><strong>Entkopplung durch Message-Queue:</strong> Eintreffende Buchungsanfragen werden sofort in die Queue geschrieben und dem Nutzer quittiert (z.B. Warteraum/Reihenfolge). Lastspitzen werden geglättet (Load-Leveling), ohne dass der Server abstürzt.</li>
+                                        <li><strong>Horizontale Skalierung:</strong> Für den Buchungs-Worker können bei Bedarf innerhalb von Sekunden per Container-Orchestrierung (z.B. Kubernetes) 20 zusätzliche Instanzen hochgefahren werden.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Task PB 2.2 -->
+                        <div style="border: 1px solid #cbd5e1; border-radius: 8px; margin-bottom: 1.25rem; background: white; overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.04);">
+                            <div style="background: #f8fafc; padding: 0.85rem 1.2rem; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center;">
+                                <div>
+                                    <span style="background: #0284c7; color: white; padding: 0.15rem 0.5rem; border-radius: 4px; font-size: 0.75rem; font-weight: 700;">Aufgabe 2.2</span>
+                                    <strong style="margin-left: 0.5rem; color: #0f172a;">Usability nach DIN EN ISO 9241-110 &amp; Barrierefreiheit</strong>
+                                </div>
+                                <span style="font-size: 0.82rem; font-weight: 700; color: #64748b;">12 Punkte</span>
+                            </div>
+                            <div style="padding: 1.2rem;">
+                                <p style="font-size: 0.92rem; color: #334155; line-height: 1.5; margin-bottom: 0.75rem;">
+                                    In einem internen Verwaltungsprogramm beschweren sich Mitarbeiter über folgendes Formularverhalten:<br>
+                                    <em>A: Bei fehlerhafter Eingabe leert sich das gesamte Formular und eine rote Meldung „Fehler 403!“ erscheint ohne Angabe des Feldes.</em><br>
+                                    <em>B: Um ein Datum einzugeben, muss exakt das Format „JJJJ/MM/TT-HH:MM“ ohne Hilfselement eingetippt werden.</em><br><br>
+                                    <strong>Ihre Aufgaben:</strong><br>
+                                    1. Ordnen Sie beiden Situationen den verletzten Grundsatz der DIN EN ISO 9241-110 zu.<br>
+                                    2. Formulieren Sie jeweils eine konkrete Verbesserungsmaßnahme.
+                                </p>
+                                
+                                <button class="btn btn-secondary" id="sol-pb2-2-btn" onclick="toggleAp2Solution('sol-pb2-2')" style="margin-top: 0.5rem; font-size: 0.84rem; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; border: 1.5px solid #0284c7; color: #0369a1; background: #f0f9ff; font-weight: 700;">
+                                    <i class="fa-solid fa-lightbulb"></i> Musterlösung &amp; Korrekturhinweise anzeigen
+                                </button>
+
+                                <div id="sol-pb2-2" style="display: none; margin-top: 1rem; background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 8px; padding: 1rem; font-size: 0.9rem; color: #166534; line-height: 1.5;">
+                                    <h5 style="margin: 0 0 0.5rem 0; color: #14532d; font-size: 0.95rem;"><i class="fa-solid fa-circle-check"></i> IHK-Musterlösung:</h5>
+                                    <strong>Zu Situation A:</strong>
+                                    <ul style="margin: 0.2rem 0 0.5rem 1.2rem; padding: 0;">
+                                        <li><strong>Verletzter Grundsatz:</strong> <em>Fehlertoleranz</em> sowie <em>Selbstbeschreibungsfähigkeit</em>.</li>
+                                        <li><strong>Maßnahme:</strong> Formulardaten bei Fehleingabe im Speicher behalten; das fehlerhafte Feld rot umranden und eine konkrete Korrekturanweisung geben (z.B. „Die Postleitzahl muss genau 5 Ziffern enthalten“).</li>
+                                    </ul>
+                                    <strong>Zu Situation B:</strong>
+                                    <ul style="margin: 0.2rem 0 0 1.2rem; padding: 0;">
+                                        <li><strong>Verletzter Grundsatz:</strong> <em>Aufgabenangemessenheit</em> sowie <em>Erwartungskonformität</em>.</li>
+                                        <li><strong>Maßnahme:</strong> Bereitstellung eines interaktiven Datepickers (Kalender-Auswahlfeld) und automatische Formatierung bei Texteingabe.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- ============================================================== -->
+                <!-- TAB 2: PB 3 - ENTWICKLUNG & ALGORITHMEN                        -->
+                <!-- ============================================================== -->
+                <div id="ap2-tab-pb3" class="ap2-tab-content" style="display: none;">
+                    
+                    <!-- Overview Banner -->
+                    <div style="background: linear-gradient(135deg, #ecfeff, #cffafe); border: 1.5px solid #a5f3fc; border-radius: 10px; padding: 1.25rem; margin-bottom: 1.5rem;">
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem;">
+                            <div>
+                                <span style="background: #0e7490; color: white; padding: 0.2rem 0.6rem; border-radius: 6px; font-size: 0.78rem; font-weight: 800; text-transform: uppercase;">Prüfungsbereich 3 &bull; Richtzeit: ca. 90 Minuten</span>
+                                <h3 style="margin: 0.5rem 0 0.3rem 0; font-size: 1.25rem; color: #164e63;">Rolle: Software-Entwickler &amp; Daten-Spezialist</h3>
+                                <p style="margin: 0; color: #155e75; font-size: 0.95rem; line-height: 1.5; max-width: 900px;">
+                                    Hier wird handfeste Programmierlogik und SQL verlangt! Du musst bestehenden Code analysieren, Fehler (Debugging) aufdecken, Schleifen und Verzweigungen in Pseudocode schreiben sowie mehrstufige relationale SQL-Abfragen mit Aggregatfunktionen und Joins erstellen.
+                                </p>
+                            </div>
+                            <div style="background: white; border: 1px solid #a5f3fc; border-radius: 8px; padding: 0.75rem 1rem; text-align: center; min-width: 180px;">
+                                <div style="font-size: 0.8rem; color: #64748b; font-weight: 600;">IHK-Schwerpunkte</div>
+                                <div style="font-size: 1.1rem; font-weight: 800; color: #0891b2;">Pseudocode &bull; Debug &bull; SQL &bull; O-Notation</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 4 Core Pillars of PB 3 -->
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 1rem; margin-bottom: 2rem;">
+                        
+                        <!-- Block 1: Algorithmen & Notationen -->
+                        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 1rem;">
+                            <h5 style="margin: 0 0 0.5rem 0; color: #1e293b; font-size: 1rem; display: flex; align-items: center; gap: 0.4rem;">
+                                <i class="fa-solid fa-code" style="color: #0891b2;"></i> 1. Algorithmen &amp; Pseudocode
+                            </h5>
+                            <p style="font-size: 0.86rem; color: #475569; margin-bottom: 0.5rem; line-height: 1.4;">
+                                &bull; <em>Struktogramme (DIN 66261):</em> Sequenz, Verzweigung, Schleifen (Kopfgesteuert <code>solange ... tue</code> vs. Fußgesteuert <code>tue ... solange</code>).<br>
+                                &bull; <em>Komplexität (Big-O):</em> $O(1)$ Konstant, $O(\log n)$ Binäre Suche, $O(n)$ Lineare Schleife, $O(n \log n)$ Merge-/Quicksort, $O(n^2)$ verschachtelte Schleifen.<br>
+                                &bull; <em>Rekursion:</em> Immer Abbruchbedingung (Basisfall) an den Anfang setzen, sonst StackOverflowError!
+                            </p>
+                        </div>
+
+                        <!-- Block 2: SQL & Joins -->
+                        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 1rem;">
+                            <h5 style="margin: 0 0 0.5rem 0; color: #1e293b; font-size: 1rem; display: flex; align-items: center; gap: 0.4rem;">
+                                <i class="fa-solid fa-database" style="color: #6366f1;"></i> 2. Komplexe SQL-Abfragen &amp; Joins
+                            </h5>
+                            <p style="font-size: 0.86rem; color: #475569; margin-bottom: 0.5rem; line-height: 1.4;">
+                                &bull; <em>INNER JOIN:</em> Nur Datensätze, die in beiden Tabellen vorkommen.<br>
+                                &bull; <em>LEFT JOIN:</em> Alle linken Datensätze, auch wenn rechts kein Treffer existiert (mit <code>WHERE r.id IS NULL</code> findet man 'Waisen').<br>
+                                &bull; <em>GROUP BY &amp; HAVING:</em> <code>WHERE</code> filtert einzelne Zeilen <em>vor</em> der Aggregation; <code>HAVING</code> filtert Gruppen <em>nach</em> der Aggregation (z.B. <code>HAVING COUNT(*) > 5</code>).
+                            </p>
+                        </div>
+
+                        <!-- Block 3: Debugging -->
+                        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 1rem;">
+                            <h5 style="margin: 0 0 0.5rem 0; color: #1e293b; font-size: 1rem; display: flex; align-items: center; gap: 0.4rem;">
+                                <i class="fa-solid fa-bug" style="color: #ef4444;"></i> 3. Code-Debugging &amp; Fehlerarten
+                            </h5>
+                            <p style="font-size: 0.86rem; color: #475569; margin-bottom: 0.5rem; line-height: 1.4;">
+                                &bull; <em>Off-by-one Error:</em> Indexüberlauf bei Arrays (z.B. <code>i &lt;= length</code> statt <code>i &lt; length</code>).<br>
+                                &bull; <em>NullReference:</em> Zugriff auf Eigenschaften nicht-initialisierter Objekte.<br>
+                                &bull; <em>Endlosschleife:</em> Schleifenvariable wird im Rumpf nicht verändert oder Abbruchbedingung ist unerreichbar.
+                            </p>
+                        </div>
+
+                        <!-- Block 4: Testdaten -->
+                        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 1rem;">
+                            <h5 style="margin: 0 0 0.5rem 0; color: #1e293b; font-size: 1rem; display: flex; align-items: center; gap: 0.4rem;">
+                                <i class="fa-solid fa-list-check" style="color: #10b981;"></i> 4. Äquivalenzklassen &amp; Grenzwerte
+                            </h5>
+                            <p style="font-size: 0.86rem; color: #475569; margin-bottom: 0.5rem; line-height: 1.4;">
+                                &bull; <em>Äquivalenzklassen:</em> Unterteilung der Eingabemenge in gültige und ungültige Klassen.<br>
+                                &bull; <em>Grenzwertanalyse:</em> Getestet werden immer der Grenzwert selbst sowie die Werte unmittelbar links und rechts davon (z.B. bei $1 \le x \le 100$: Teste 0, 1, 2 sowie 99, 100, 101).
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <!-- Interactive Practice Tasks for PB 3 -->
+                    <div style="border-top: 2px dashed #cbd5e1; padding-top: 1.5rem; margin-top: 1.5rem;">
+                        <h4 style="margin: 0 0 1rem 0; color: #164e63; font-size: 1.15rem; display: flex; align-items: center; gap: 0.5rem;">
+                            <i class="fa-solid fa-terminal" style="color: #0891b2;"></i> Interaktive Programmier- &amp; SQL-Aufgaben (PB 3)
+                        </h4>
+
+                        <!-- Task PB 3.1: Debugging -->
+                        <div style="border: 1px solid #cbd5e1; border-radius: 8px; margin-bottom: 1.25rem; background: white; overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.04);">
+                            <div style="background: #f8fafc; padding: 0.85rem 1.2rem; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center;">
+                                <div>
+                                    <span style="background: #ef4444; color: white; padding: 0.15rem 0.5rem; border-radius: 4px; font-size: 0.75rem; font-weight: 700;">Aufgabe 3.1</span>
+                                    <strong style="margin-left: 0.5rem; color: #0f172a;">Debugging: Rabattberechnung mit Schleifen- &amp; Rundungsfehler</strong>
+                                </div>
+                                <span style="font-size: 0.82rem; font-weight: 700; color: #64748b;">14 Punkte</span>
+                            </div>
+                            <div style="padding: 1.2rem;">
+                                <p style="font-size: 0.92rem; color: #334155; line-height: 1.5; margin-bottom: 0.75rem;">
+                                    Gegeben ist folgender Pseudocode, der für einen Warenkorb den Gesamtpreis abzüglich 10% Rabatt bei Erreichen von 100 € berechnen soll:
+                                </p>
+                                <pre style="background: #0f172a; color: #f8fafc; padding: 1rem; border-radius: 6px; font-family: monospace; font-size: 0.88rem; line-height: 1.4; overflow-x: auto;">
+1: FUNKTION berechneWarenkorb(artikelPreise : ARRAY OF FLOAT) : FLOAT
+2:   summe = 0
+3:   FÜR i = 0 BIS LÄNGE(artikelPreise) MACHE
+4:     summe = summe + artikelPreise[i]
+5:   ENDE FÜR
+6:   WENN summe > 100 DANN
+7:     summe = summe * 0.10
+8:   ENDE WENN
+9:   RÜCKGABE summe
+10: ENDE FUNKTION</pre>
+                                <p style="font-size: 0.92rem; color: #334155; line-height: 1.5; margin-bottom: 0.75rem;">
+                                    <strong>Aufgabe:</strong> Finden Sie die zwei gravierenden Logik- und Laufzeitfehler im Pseudocode und geben Sie die korrigierten Zeilen an.
+                                </p>
+                                
+                                <button class="btn btn-secondary" id="sol-pb3-1-btn" onclick="toggleAp2Solution('sol-pb3-1')" style="margin-top: 0.5rem; font-size: 0.84rem; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; border: 1.5px solid #ef4444; color: #b91c1c; background: #fef2f2; font-weight: 700;">
+                                    <i class="fa-solid fa-lightbulb"></i> Musterlösung &amp; Korrekturhinweise anzeigen
+                                </button>
+
+                                <div id="sol-pb3-1" style="display: none; margin-top: 1rem; background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 8px; padding: 1rem; font-size: 0.9rem; color: #166534; line-height: 1.5;">
+                                    <h5 style="margin: 0 0 0.5rem 0; color: #14532d; font-size: 0.95rem;"><i class="fa-solid fa-circle-check"></i> IHK-Musterlösung:</h5>
+                                    <strong>1. Fehler in Zeile 3 (IndexOutOfBounds / Off-by-one):</strong><br>
+                                    Das Array beginnt bei Index 0. Der letzte gültige Index ist <code>LÄNGE(artikelPreise) - 1</code>. Durch die Bedingung <code>BIS LÄNGE</code> greift Zeile 4 auf einen ungültigen Index zu.<br>
+                                    <em>Korrektur:</em> <code>FÜR i = 0 BIS LÄNGE(artikelPreise) - 1 MACHE</code><br><br>
+                                    <strong>2. Fehler in Zeile 7 (Rabatt-Berechnung):</strong><br>
+                                    Zeile 7 berechnet 10% des Preises und überschreibt damit die Summe (der Kunde müsste nur den Rabattbetrag zahlen!).<br>
+                                    <em>Korrektur:</em> <code>summe = summe * 0.90</code> oder <code>summe = summe - (summe * 0.10)</code>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Task PB 3.2: SQL -->
+                        <div style="border: 1px solid #cbd5e1; border-radius: 8px; margin-bottom: 1.25rem; background: white; overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.04);">
+                            <div style="background: #f8fafc; padding: 0.85rem 1.2rem; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center;">
+                                <div>
+                                    <span style="background: #0891b2; color: white; padding: 0.15rem 0.5rem; border-radius: 4px; font-size: 0.75rem; font-weight: 700;">Aufgabe 3.2</span>
+                                    <strong style="margin-left: 0.5rem; color: #0f172a;">SQL: 3-Tabellen-Join, Aggregation &amp; HAVING</strong>
+                                </div>
+                                <span style="font-size: 0.82rem; font-weight: 700; color: #64748b;">16 Punkte</span>
+                            </div>
+                            <div style="padding: 1.2rem;">
+                                <p style="font-size: 0.92rem; color: #334155; line-height: 1.5; margin-bottom: 0.75rem;">
+                                    Gegeben sind die Relationen:<br>
+                                    <code>tblKunde(k_id PK, nachname, ort)</code><br>
+                                    <code>tblBestellung(b_id PK, k_id FK, bestelldatum)</code><br>
+                                    <code>tblPosition(p_id PK, b_id FK, anzahl, einzelpreis)</code><br><br>
+                                    <strong>Aufgabe:</strong> Schreiben Sie eine SQL-Abfrage, die den Nachnamen des Kunden und seinen Gesamtbestellwert (Umsatz) auflistet, aber <strong>nur für Kunden, deren Gesamteinkaufswert über 500,00 € liegt</strong>. Sortieren Sie das Ergebnis absteigend nach dem Umsatz.
+                                </p>
+                                
+                                <button class="btn btn-secondary" id="sol-pb3-2-btn" onclick="toggleAp2Solution('sol-pb3-2')" style="margin-top: 0.5rem; font-size: 0.84rem; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; border: 1.5px solid #0891b2; color: #0e7490; background: #ecfeff; font-weight: 700;">
+                                    <i class="fa-solid fa-lightbulb"></i> Musterlösung &amp; SQL anzeigen
+                                </button>
+
+                                <div id="sol-pb3-2" style="display: none; margin-top: 1rem; background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 8px; padding: 1rem; font-size: 0.9rem; color: #166534; line-height: 1.5;">
+                                    <h5 style="margin: 0 0 0.5rem 0; color: #14532d; font-size: 0.95rem;"><i class="fa-solid fa-circle-check"></i> IHK-Musterlösung:</h5>
+                                    <pre style="background: #0f172a; color: #38bdf8; padding: 0.75rem; border-radius: 6px; font-family: monospace; font-size: 0.88rem; line-height: 1.4;">
+SELECT 
+    k.nachname, 
+    SUM(p.anzahl * p.einzelpreis) AS gesamtumsatz
+FROM tblKunde k
+INNER JOIN tblBestellung b ON k.k_id = b.k_id
+INNER JOIN tblPosition p ON b.b_id = p.b_id
+GROUP BY k.k_id, k.nachname
+HAVING SUM(p.anzahl * p.einzelpreis) > 500.00
+ORDER BY gesamtumsatz DESC;</pre>
+                                    <div style="margin-top: 0.5rem; font-size: 0.85rem; color: #14532d;">
+                                        <strong>Bewertungskriterien:</strong> Korrekte JOIN-Verknüpfung über FK/PK (4 Pkt), Berechnung <code>SUM(anzahl * einzelpreis)</code> (4 Pkt), <code>GROUP BY</code> mit Primärschlüssel (3 Pkt), <code>HAVING</code> statt <code>WHERE</code> für Aggregatfilter (3 Pkt), <code>ORDER BY ... DESC</code> (2 Pkt).
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- ============================================================== -->
+                <!-- TAB 3: PB 4 - WIRTSCHAFTS- & SOZIALKUNDE (WiSo)                -->
+                <!-- ============================================================== -->
+                <div id="ap2-tab-pb4" class="ap2-tab-content" style="display: none;">
+                    
+                    <!-- Overview Banner -->
+                    <div style="background: linear-gradient(135deg, #fdf2f8, #fce7f3); border: 1.5px solid #fbcfe8; border-radius: 10px; padding: 1.25rem; margin-bottom: 1.5rem;">
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem;">
+                            <div>
+                                <span style="background: #be185d; color: white; padding: 0.2rem 0.6rem; border-radius: 6px; font-size: 0.78rem; font-weight: 800; text-transform: uppercase;">Prüfungsbereich 4 &bull; Richtzeit: ca. 60 Minuten</span>
+                                <h3 style="margin: 0.5rem 0 0.3rem 0; font-size: 1.25rem; color: #831843;">Wirtschafts- und Sozialkunde (WiSo)</h3>
+                                <p style="margin: 0; color: #9d174d; font-size: 0.95rem; line-height: 1.5; max-width: 900px;">
+                                    Der unverzichtbare rechtliche und wirtschaftliche Baustein für alle IT-Berufe! Hier werden Arbeitsrecht (BBiG, KSchG, ArbZG), Kündigungsfristen, Mitbestimmung durch Betriebsrat &amp; JAV (BetrVG), Unternehmensformen (GmbH, KG, AG), Vertragsstörungen nach BGB und die Sozialversicherung geprüft.
+                                </p>
+                            </div>
+                            <div style="background: white; border: 1px solid #fbcfe8; border-radius: 8px; padding: 0.75rem 1rem; text-align: center; min-width: 180px;">
+                                <div style="font-size: 0.8rem; color: #64748b; font-weight: 600;">IHK-Schwerpunkte</div>
+                                <div style="font-size: 1.1rem; font-weight: 800; color: #be185d;">KSchG &bull; BetrVG &bull; BGB &bull; Rechtsformen</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 4 Core Pillars of WiSo -->
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 1rem; margin-bottom: 2rem;">
+                        
+                        <!-- Block 1: Arbeitsrecht & Kündigung -->
+                        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 1rem;">
+                            <h5 style="margin: 0 0 0.5rem 0; color: #1e293b; font-size: 1rem; display: flex; align-items: center; gap: 0.4rem;">
+                                <i class="fa-solid fa-user-shield" style="color: #be185d;"></i> 1. Arbeitsrecht &amp; Kündigungsschutz
+                            </h5>
+                            <p style="font-size: 0.86rem; color: #475569; margin-bottom: 0.5rem; line-height: 1.4;">
+                                &bull; <em>KSchG:</em> Greift bei Betrieben mit mehr als 10 Vollzeit-Arbeitnehmern und Beschäftigungsdauer &gt; 6 Monate.<br>
+                                &bull; <em>Ordentliche Kündigung:</em> Personenbedingt (z.B. Langzeiterkrankung ohne Besserung), Verhaltensbedingt (erfordert vorherige einschlägige Abmahnung!), Betriebsbedingt (mit Sozialauswahl: Alter, Betriebszugehörigkeit, Unterhalt, Schwerbehinderung).<br>
+                                &bull; <em>Klagefrist:</em> Kündigungsschutzklage muss innerhalb von <strong>3 Wochen</strong> nach schriftlichem Zugang beim Arbeitsgericht eingereicht werden (§ 4 KSchG)!
+                            </p>
+                        </div>
+
+                        <!-- Block 2: Mitbestimmung & Betriebsrat -->
+                        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 1rem;">
+                            <h5 style="margin: 0 0 0.5rem 0; color: #1e293b; font-size: 1rem; display: flex; align-items: center; gap: 0.4rem;">
+                                <i class="fa-solid fa-people-group" style="color: #4f46e5;"></i> 2. Mitbestimmung &amp; Betriebsrat (BetrVG)
+                            </h5>
+                            <p style="font-size: 0.86rem; color: #475569; margin-bottom: 0.5rem; line-height: 1.4;">
+                                &bull; <em>Voraussetzung:</em> Mind. 5 ständige wahlberechtigte Arbeitnehmer (ab 18 Jahren).<br>
+                                &bull; <em>Echtes Mitbestimmungsrecht (§ 87 BetrVG):</em> Beginn und Ende der täglichen Arbeitszeit, Pausen, Urlaubsgrundsätze, Einführung technischer Systeme zur Verhaltens-/Leistungsüberwachung (z.B. Zeiterfassung, Keylogger).<br>
+                                &bull; <em>Kündigungsanhörung (§ 102 BetrVG):</em> Betriebsrat MUSS vor jeder Kündigung angehört werden – Kündigung ohne Anhörung ist nichtig!
+                            </p>
+                        </div>
+
+                        <!-- Block 3: Unternehmensformen -->
+                        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 1rem;">
+                            <h5 style="margin: 0 0 0.5rem 0; color: #1e293b; font-size: 1rem; display: flex; align-items: center; gap: 0.4rem;">
+                                <i class="fa-solid fa-building" style="color: #0284c7;"></i> 3. Rechtsformen der Unternehmen
+                            </h5>
+                            <p style="font-size: 0.86rem; color: #475569; margin-bottom: 0.5rem; line-height: 1.4;">
+                                &bull; <em>Kommanditgesellschaft (KG):</em> Komplementär haftet unbeschränkt persönlich mit Privatvermögen; Kommanditist haftet nur mit seiner Kapitaleinlage.<br>
+                                &bull; <em>GmbH:</em> Mindeststammkapital 25.000 € (bei Gründung mind. 12.500 € eingezahlt), Haftung auf Gesellschaftsvermögen beschränkt.<br>
+                                &bull; <em>UG (haftungsbeschränkt):</em> Mindestkapital 1 €, Pflicht zur Rücklagenbildung (25% des Jahresgewinns) bis 25.000 € erreicht sind.
+                            </p>
+                        </div>
+
+                        <!-- Block 4: Kaufvertrag & Mängel -->
+                        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 1rem;">
+                            <h5 style="margin: 0 0 0.5rem 0; color: #1e293b; font-size: 1rem; display: flex; align-items: center; gap: 0.4rem;">
+                                <i class="fa-solid fa-file-contract" style="color: #059669;"></i> 4. Kaufvertrag &amp; Mängel (§ 437 BGB)
+                            </h5>
+                            <p style="font-size: 0.86rem; color: #475569; margin-bottom: 0.5rem; line-height: 1.4;">
+                                &bull; <em>Vorrangige Rechte (1. Stufe):</em> <strong>Nacherfüllung</strong> nach Wahl des Käufers (Beseitigung des Mangels oder Neulieferung). Der Verkäufer hat Recht auf 2 Nachbesserungsversuche.<br>
+                                &bull; <em>Nachrangige Rechte (2. Stufe):</em> Rücktritt vom Vertrag, Kaufpreisminderung oder Schadensersatz (nur nach fruchtlosem Ablauf einer angemessenen Nachfrist oder bei endgültiger Verweigerung).
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <!-- Interactive Practice Tasks for WiSo -->
+                    <div style="border-top: 2px dashed #cbd5e1; padding-top: 1.5rem; margin-top: 1.5rem;">
+                        <h4 style="margin: 0 0 1rem 0; color: #831843; font-size: 1.15rem; display: flex; align-items: center; gap: 0.5rem;">
+                            <i class="fa-solid fa-balance-scale" style="color: #be185d;"></i> Interaktive WiSo-Fallstudien &amp; Aufgaben
+                        </h4>
+
+                        <!-- Task PB 4.1 -->
+                        <div style="border: 1px solid #cbd5e1; border-radius: 8px; margin-bottom: 1.25rem; background: white; overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.04);">
+                            <div style="background: #f8fafc; padding: 0.85rem 1.2rem; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center;">
+                                <div>
+                                    <span style="background: #be185d; color: white; padding: 0.15rem 0.5rem; border-radius: 4px; font-size: 0.75rem; font-weight: 700;">WiSo Fall 1</span>
+                                    <strong style="margin-left: 0.5rem; color: #0f172a;">Kündigung wegen Krankheit &amp; Kündigungsschutzklage</strong>
+                                </div>
+                                <span style="font-size: 0.82rem; font-weight: 700; color: #64748b;">10 Punkte</span>
+                            </div>
+                            <div style="padding: 1.2rem;">
+                                <p style="font-size: 0.92rem; color: #334155; line-height: 1.5; margin-bottom: 0.75rem;">
+                                    Ein Softwareentwickler arbeitet seit 4 Jahren in einem IT-Unternehmen mit 45 Mitarbeitern. Nach einem Sportunfall ist er seit 6 Wochen krankgeschrieben. Am 10. Mai erhält er per Post die fristgerechte Kündigung zum 30. Juni mit der Begründung: „Wegen anhaltender Krankheit können wir Sie nicht mehr weiterbeschäftigen.“ Der Betriebsrat wurde vorab nicht über die Kündigung informiert.<br><br>
+                                    <strong>Fragen:</strong><br>
+                                    1. Ist die Kündigung wirksam? Begründen Sie anhand von zwei rechtlichen Aspekten.<br>
+                                    2. Bis zu welchem Datum muss der Entwickler spätestens Klage beim Arbeitsgericht einreichen?
+                                </p>
+                                
+                                <button class="btn btn-secondary" id="sol-pb4-1-btn" onclick="toggleAp2Solution('sol-pb4-1')" style="margin-top: 0.5rem; font-size: 0.84rem; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; border: 1.5px solid #be185d; color: #9d174d; background: #fdf2f8; font-weight: 700;">
+                                    <i class="fa-solid fa-lightbulb"></i> Musterlösung &amp; Paragraphen anzeigen
+                                </button>
+
+                                <div id="sol-pb4-1" style="display: none; margin-top: 1rem; background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 8px; padding: 1rem; font-size: 0.9rem; color: #166534; line-height: 1.5;">
+                                    <h5 style="margin: 0 0 0.5rem 0; color: #14532d; font-size: 0.95rem;"><i class="fa-solid fa-circle-check"></i> IHK-Musterlösung:</h5>
+                                    <strong>Zu 1. Unwirksamkeit der Kündigung:</strong>
+                                    <ul style="margin: 0.2rem 0 0.5rem 1.2rem; padding: 0;">
+                                        <li><strong>Verletzung von § 102 BetrVG:</strong> Der Betriebsrat wurde vor der Kündigung nicht angehört. Eine Kündigung ohne vorherige Anhörung des Betriebsrats ist nach § 102 Abs. 1 Satz 3 BetrVG <em>unwirksam</em>.</li>
+                                        <li><strong>KSchG-Voraussetzungen für krankheitsbedingte Kündigung nicht erfüllt:</strong> Eine 6-wöchige Arbeitsunfähigkeit nach einem Sportunfall rechtfertigt keine personenbedingte Kündigung. Es fehlt an einer negativen Gesundheitsprognose für die Zukunft und an einer erheblichen Beeinträchtigung betrieblicher Interessen. Zudem wurde kein Betriebliches Eingliederungsmanagement (BEM) durchgeführt.</li>
+                                    </ul>
+                                    <strong>Zu 2. Frist zur Kündigungsschutzklage:</strong><br>
+                                    Nach <strong>§ 4 KSchG</strong> beträgt die Klagefrist genau <strong>3 Wochen</strong> ab Zugang der schriftlichen Kündigung.<br>
+                                    Zugang: 10. Mai &rarr; Spätester Eingang beim Arbeitsgericht: <strong>31. Mai (24:00 Uhr)</strong>.
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- ============================================================== -->
+                <!-- TAB 4: LOKALE PC-PRÜFUNGEN (52 DATEIEN AUS ALEX-AP1_AP2)       -->
+                <!-- ============================================================== -->
+                <div id="ap2-tab-files" class="ap2-tab-content" style="display: none;">
+                    
+                    <div style="background: #fffbeb; border: 1.5px solid #fde68a; border-radius: 10px; padding: 1.25rem; margin-bottom: 1.5rem;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                            <div>
+                                <span style="background: #d97706; color: white; padding: 0.2rem 0.6rem; border-radius: 6px; font-size: 0.78rem; font-weight: 800; text-transform: uppercase;">Original Baden-Württemberg Archiv</span>
+                                <h3 style="margin: 0.4rem 0 0.2rem 0; font-size: 1.2rem; color: #78350f;">Lokale Prüfungs-PDFs auf deinem PC</h3>
+                                <p style="margin: 0; color: #92400e; font-size: 0.9rem;">
+                                    Pfad: <code>C:\Users\Student\OneDrive - GFN GmbH (EDU)\Dokumente\ALEX-AP1_AP2\Baden-Württembergische Abschlussprüfungen AP2</code>
+                                </p>
+                            </div>
+                            <span id="ap2-files-count" style="background: #f59e0b; color: white; font-weight: 800; padding: 0.35rem 0.8rem; border-radius: 999px; font-size: 0.85rem;">
+                                52 Dateien geladen
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Search and Filter Controls -->
+                    <div style="display: flex; gap: 0.75rem; margin-bottom: 1rem; flex-wrap: wrap;">
+                        <div style="flex: 2; min-width: 260px; position: relative;">
+                            <input type="text" id="ap2-files-search" oninput="renderAp2FilesList()" placeholder="Dateiname oder Prüfungstermin suchen (z.B. Sommer 2024, Algorithmen, WiSo)..." style="width: 100%; padding: 0.6rem 0.75rem 0.6rem 2.2rem; border: 1.5px solid #cbd5e1; border-radius: 8px; font-size: 0.9rem; box-sizing: border-box;">
+                            <i class="fa-solid fa-magnifying-glass" style="position: absolute; left: 0.8rem; top: 50%; transform: translateY(-50%); color: #94a3b8;"></i>
+                        </div>
+                        <select id="ap2-files-filter" onchange="renderAp2FilesList()" style="flex: 1; min-width: 200px; padding: 0.6rem 0.75rem; border: 1.5px solid #cbd5e1; border-radius: 8px; font-size: 0.88rem; font-weight: 600; background: white; cursor: pointer;">
+                            <option value="all">Alle Prüfungsbereiche</option>
+                            <option value="fiae">Nur FIAE (PB 2 &amp; PB 3)</option>
+                            <option value="PB 2">Nur PB 2: Planen eines Softwareproduktes</option>
+                            <option value="PB 3">Nur PB 3: Algorithmen &amp; Entwicklung</option>
+                            <option value="WiSo">Nur WiSo (PB 4)</option>
+                            <option value="FISI">Nur FISI (Netzwerke / IT-Systeme)</option>
+                        </select>
+                    </div>
+
+                    <!-- Files Table -->
+                    <div style="border: 1px solid #e2e8f0; border-radius: 8px; overflow-x: auto;">
+                        <table style="width: 100%; border-collapse: collapse; text-align: left;">
+                            <thead>
+                                <tr style="background: #f1f5f9; border-bottom: 2px solid #cbd5e1; font-size: 0.82rem; text-transform: uppercase; color: #475569;">
+                                    <th style="padding: 0.65rem 0.6rem;">Termin</th>
+                                    <th style="padding: 0.65rem 0.6rem;">Bereich</th>
+                                    <th style="padding: 0.65rem 0.6rem;">Prüfungsdatei (PDF)</th>
+                                    <th style="padding: 0.65rem 0.6rem;">Größe</th>
+                                    <th style="padding: 0.65rem 0.6rem; text-align: right;">Aktionen</th>
+                                </tr>
+                            </thead>
+                            <tbody id="ap2-files-table-body">
+                                <!-- Populated dynamically by renderAp2FilesList() -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+                <!-- ============================================================== -->
+                <!-- TAB 5: INTERNET-QUELLEN & STANDARDS                            -->
+                <!-- ============================================================== -->
+                <div id="ap2-tab-web" class="ap2-tab-content" style="display: none;">
+                    
+                    <div style="background: linear-gradient(135deg, #f0fdf4, #dcfce7); border: 1.5px solid #bbf7d0; border-radius: 10px; padding: 1.25rem; margin-bottom: 1.5rem;">
+                        <h3 style="margin: 0 0 0.3rem 0; font-size: 1.2rem; color: #14532d;">Offizielle Referenzen, Gesetzestexte &amp; Trainingsportale</h3>
+                        <p style="margin: 0; color: #166534; font-size: 0.9rem;">
+                            Diese externen Quellen decken den gesamten amtlichen Stoffkatalog der IHK/BIBB und der Kultusministerien für AP1 und AP2 ab.
+                        </p>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1rem;">
+                        
+                        <!-- Web Card 1 -->
+                        <div style="background: white; border: 1px solid #e2e8f0; border-radius: 8px; padding: 1.2rem; box-shadow: 0 2px 4px rgba(0,0,0,0.03);">
+                            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                                <i class="fa-solid fa-scale-unbalanced" style="font-size: 1.3rem; color: #be185d;"></i>
+                                <h4 style="margin: 0; font-size: 1rem; color: #0f172a;">Amtliche Gesetzestexte (WiSo)</h4>
+                            </div>
+                            <p style="font-size: 0.86rem; color: #64748b; line-height: 1.4; margin-bottom: 0.75rem;">
+                                Alle bundesweiten Gesetze im Volltext vom Bundesministerium der Justiz:
+                            </p>
+                            <ul style="margin: 0 0 0.75rem 1.2rem; padding: 0; font-size: 0.85rem; color: #334155;">
+                                <li><a href="https://www.gesetze-im-internet.de/bbig_2005/" target="_blank" style="color: #4f46e5; text-decoration: underline; font-weight: 600;">BBiG &bull; Berufsbildungsgesetz</a></li>
+                                <li><a href="https://www.gesetze-im-internet.de/kschg/" target="_blank" style="color: #4f46e5; text-decoration: underline; font-weight: 600;">KSchG &bull; Kündigungsschutzgesetz</a></li>
+                                <li><a href="https://www.gesetze-im-internet.de/betrvg/" target="_blank" style="color: #4f46e5; text-decoration: underline; font-weight: 600;">BetrVG &bull; Betriebsverfassungsgesetz</a></li>
+                                <li><a href="https://www.gesetze-im-internet.de/arbzg/" target="_blank" style="color: #4f46e5; text-decoration: underline; font-weight: 600;">ArbZG &bull; Arbeitszeitgesetz</a></li>
+                                <li><a href="https://www.gesetze-im-internet.de/bgb/" target="_blank" style="color: #4f46e5; text-decoration: underline; font-weight: 600;">BGB &bull; Bürgerliches Gesetzbuch (§§ 433 ff. Kaufvertrag)</a></li>
+                            </ul>
+                        </div>
+
+                        <!-- Web Card 2 -->
+                        <div style="background: white; border: 1px solid #e2e8f0; border-radius: 8px; padding: 1.2rem; box-shadow: 0 2px 4px rgba(0,0,0,0.03);">
+                            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                                <i class="fa-solid fa-graduation-cap" style="font-size: 1.3rem; color: #4f46e5;"></i>
+                                <h4 style="margin: 0; font-size: 1rem; color: #0f172a;">Offizielle Prüfungsmaßstäbe</h4>
+                            </div>
+                            <p style="font-size: 0.86rem; color: #64748b; line-height: 1.4; margin-bottom: 0.75rem;">
+                                Rahmenlehrpläne und Prüfungskataloge der Prüfungsausschüsse:
+                            </p>
+                            <ul style="margin: 0 0 0.75rem 1.2rem; padding: 0; font-size: 0.85rem; color: #334155;">
+                                <li><a href="https://www.bibb.de/dienst/berufesuche/de/index_berufesuche.php/profile/apprenticeship/1202" target="_blank" style="color: #4f46e5; text-decoration: underline; font-weight: 600;">BIBB &bull; Ausbildungsordnung Fachinformatiker 2020</a></li>
+                                <li><a href="https://www.ihk-aka.de/" target="_blank" style="color: #4f46e5; text-decoration: underline; font-weight: 600;">IHK AkA &bull; Aufgabenstelle für kaufmännische Prüfungen</a></li>
+                                <li><a href="https://ibbw-bw.de/" target="_blank" style="color: #4f46e5; text-decoration: underline; font-weight: 600;">IBBW Baden-Württemberg &bull; IT-Abschlussprüfungen</a></li>
+                            </ul>
+                        </div>
+
+                        <!-- Web Card 3 -->
+                        <div style="background: white; border: 1px solid #e2e8f0; border-radius: 8px; padding: 1.2rem; box-shadow: 0 2px 4px rgba(0,0,0,0.03);">
+                            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                                <i class="fa-solid fa-cubes" style="font-size: 1.3rem; color: #0284c7;"></i>
+                                <h4 style="margin: 0; font-size: 1rem; color: #0f172a;">Software-Architektur &amp; UI/UX</h4>
+                            </div>
+                            <p style="font-size: 0.86rem; color: #64748b; line-height: 1.4; margin-bottom: 0.75rem;">
+                                Konzepte, Design Patterns und Ergonomie-Standards:
+                            </p>
+                            <ul style="margin: 0 0 0.75rem 1.2rem; padding: 0; font-size: 0.85rem; color: #334155;">
+                                <li><a href="https://refactoring.guru/design-patterns" target="_blank" style="color: #4f46e5; text-decoration: underline; font-weight: 600;">Refactoring.Guru &bull; Entwurfsmuster &amp; Clean Code</a></li>
+                                <li><a href="https://martinfowler.com/architecture/" target="_blank" style="color: #4f46e5; text-decoration: underline; font-weight: 600;">Martin Fowler &bull; Software Architecture Guide</a></li>
+                                <li><a href="https://www.nngroup.com/articles/ten-usability-heuristics/" target="_blank" style="color: #4f46e5; text-decoration: underline; font-weight: 600;">NN/g &bull; 10 Usability Heuristics (Nielsen)</a></li>
+                                <li><a href="https://www.w3.org/WAI/standards-guidelines/wcag/" target="_blank" style="color: #4f46e5; text-decoration: underline; font-weight: 600;">W3C &bull; Web Content Accessibility Guidelines (WCAG 2.1)</a></li>
+                            </ul>
+                        </div>
+
+                        <!-- Web Card 4 -->
+                        <div style="background: white; border: 1px solid #e2e8f0; border-radius: 8px; padding: 1.2rem; box-shadow: 0 2px 4px rgba(0,0,0,0.03);">
+                            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem;">
+                                <i class="fa-solid fa-code" style="font-size: 1.3rem; color: #10b981;"></i>
+                                <h4 style="margin: 0; font-size: 1rem; color: #0f172a;">SQL &amp; Algorithmen interaktiv trainieren</h4>
+                            </div>
+                            <p style="font-size: 0.86rem; color: #64748b; line-height: 1.4; margin-bottom: 0.75rem;">
+                                Die besten kostenlosen Online-Trainingsumgebungen:
+                            </p>
+                            <ul style="margin: 0 0 0.75rem 1.2rem; padding: 0; font-size: 0.85rem; color: #334155;">
+                                <li><a href="https://sqlzoo.net/" target="_blank" style="color: #4f46e5; text-decoration: underline; font-weight: 600;">SQLZoo &bull; Interaktive SQL-Übungen (Joins &amp; Aggregates)</a></li>
+                                <li><a href="https://leetcode.com/" target="_blank" style="color: #4f46e5; text-decoration: underline; font-weight: 600;">LeetCode &bull; Algorithmen- &amp; Logiktraining</a></li>
+                                <li><a href="https://www.w3schools.com/sql/" target="_blank" style="color: #4f46e5; text-decoration: underline; font-weight: 600;">W3Schools &bull; SQL Referenz &amp; TryIt-Editor</a></li>
+                            </ul>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Footer -->
+            <div class="whiteboard-footer" style="padding: 0.75rem 1.5rem; background: #f8fafc; border-top: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center;">
+                <div style="font-size: 0.82rem; color: #64748b;">
+                    <i class="fa-solid fa-circle-info" style="color: #6366f1;"></i> Alle Inhalte orientieren sich an der amtlichen Verordnung über die Berufsausbildung zum Fachinformatiker (FIAE/FISI).
+                </div>
+                <button class="btn btn-secondary" onclick="closeAp2BridgeModal()" style="font-weight: 600; padding: 0.45rem 1rem; border-radius: 6px; cursor: pointer;">
+                    Schließen
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+
     <script src="diagrams.js?v=128"></script>
     <script src="exam_data.js?v=128"></script>
     <script src="questions.js?v=128"></script>
     <script src="generator.js?v=128"></script>
+    <script src="ap2_bridge.js?v=128"></script>
     <script src="app.js?v=128"></script>
 
     <!-- PIN Sicherheits-Gatekeeper -->
