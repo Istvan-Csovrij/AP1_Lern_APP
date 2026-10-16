@@ -1734,11 +1734,19 @@ function initSplitResizer() {
 
     let isDragging = false;
 
+    const setPanesPointerEvents = (val) => {
+        const leftPane = document.getElementById("exam-split-task-pane");
+        const rightPane = document.getElementById("exam-split-attachments-pane");
+        if (leftPane) leftPane.style.pointerEvents = val;
+        if (rightPane) rightPane.style.pointerEvents = val;
+    };
+
     const onMouseDown = (e) => {
         isDragging = true;
         document.body.style.cursor = "col-resize";
         document.body.style.userSelect = "none";
         resizer.classList.add("dragging");
+        setPanesPointerEvents("none");
     };
 
     const onMouseMove = (e) => {
@@ -1747,9 +1755,9 @@ function initSplitResizer() {
         const offsetX = e.clientX - rect.left;
         let percentage = (offsetX / rect.width) * 100;
         
-        // Clamp between 20% and 80%
-        if (percentage < 20) percentage = 20;
-        if (percentage > 80) percentage = 80;
+        // Clamp between 15% and 85%
+        if (percentage < 15) percentage = 15;
+        if (percentage > 85) percentage = 85;
 
         splitRatio = Math.round(percentage * 10) / 10;
         applySplitRatio(splitRatio);
@@ -1761,6 +1769,7 @@ function initSplitResizer() {
             document.body.style.cursor = "";
             document.body.style.userSelect = "";
             resizer.classList.remove("dragging");
+            setPanesPointerEvents("");
             localStorage.setItem("ap1_split_ratio", splitRatio);
         }
     };
@@ -1800,7 +1809,7 @@ function toggleExamSplitView() {
     isExamSplitView = !isExamSplitView;
     const btnText = document.getElementById("exam-split-toggle-text");
     if (btnText) {
-        btnText.textContent = isExamSplitView ? "Split-View (Nebeneinander)" : "Einspaltig (Zentriert)";
+        btnText.innerHTML = isExamSplitView ? '<i class="fa-solid fa-table-columns"></i> Split-View (Nebeneinander)' : '<i class="fa-solid fa-file-invoice" style="color: #f59e0b;"></i> Anlageblatt einblenden';
     }
     const btn = document.getElementById("exam-split-toggle-btn");
     if (btn) {
@@ -1809,14 +1818,31 @@ function toggleExamSplitView() {
             btn.style.borderColor = "#0284c7";
             btn.style.color = "#0369a1";
         } else {
-            btn.style.background = "#f1f5f9";
-            btn.style.borderColor = "#94a3b8";
-            btn.style.color = "#475569";
+            btn.style.background = "#fffbeb";
+            btn.style.borderColor = "#f59e0b";
+            btn.style.color = "#b45309";
         }
     }
     renderCurrentExamPage();
 }
 window.toggleExamSplitView = toggleExamSplitView;
+
+function closeAttachmentPane() {
+    isExamSplitView = false;
+    const btnText = document.getElementById("exam-split-toggle-text");
+    if (btnText) {
+        btnText.innerHTML = '<i class="fa-solid fa-file-invoice" style="color: #f59e0b;"></i> Anlageblatt einblenden';
+    }
+    const btn = document.getElementById("exam-split-toggle-btn");
+    if (btn) {
+        btn.style.background = "#fffbeb";
+        btn.style.borderColor = "#f59e0b";
+        btn.style.color = "#b45309";
+    }
+    renderCurrentExamPage();
+}
+window.closeAttachmentPane = closeAttachmentPane;
+
 
 function renderCurrentExamPage() {
     if (!activeExamSet) return;

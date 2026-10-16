@@ -36,6 +36,7 @@ const ExamAttachments = {
                     <div class="attachment-header">
                         <span>IBBW Abschlussprüfung Teil 1 &bull; DarSys GmbH</span>
                         <span class="attachment-tag">Anlagen-Verzeichnis</span>
+                     <button class="att-close-btn" onclick="closeAttachmentPane()" title="Anlageblatt schließen (X)"><i class="fa-solid fa-xmark"></i></button>
                     </div>
                     <div class="attachment-body">
                         <div class="attachment-doc-title">
@@ -99,7 +100,8 @@ const ExamAttachments = {
                             <button class="att-tab-btn ${this.activeAttachmentTab === 'all' ? 'active' : ''}" onclick="ExamAttachments.setTab('all')">Beide Anlagen</button>
                             <button class="att-tab-btn ${this.activeAttachmentTab === 'a1' ? 'active' : ''}" onclick="ExamAttachments.setTab('a1')">Anlage 1 (E-Mail)</button>
                             <button class="att-tab-btn ${this.activeAttachmentTab === 'a2' ? 'active' : ''}" onclick="ExamAttachments.setTab('a2')">Anlage 2 (PCs)</button>
-                        </div>
+                         <button class="att-close-btn" onclick="closeAttachmentPane()" title="Anlageblatt schließen (X)"><i class="fa-solid fa-xmark"></i></button>
+                    </div>
                     </div>
 
                     <div class="attachment-body">
@@ -225,7 +227,8 @@ const ExamAttachments = {
                             <button class="att-tab-btn ${this.activeAttachmentTab === 'all' ? 'active' : ''}" onclick="ExamAttachments.setTab('all')">Beide Anlagen</button>
                             <button class="att-tab-btn ${this.activeAttachmentTab === 'a3' ? 'active' : ''}" onclick="ExamAttachments.setTab('a3')">Anlage 3 (Netzwerkplan)</button>
                             <button class="att-tab-btn ${this.activeAttachmentTab === 'a4' ? 'active' : ''}" onclick="ExamAttachments.setTab('a4')">Anlage 4 (Kabeldatenblatt)</button>
-                        </div>
+                         <button class="att-close-btn" onclick="closeAttachmentPane()" title="Anlageblatt schließen (X)"><i class="fa-solid fa-xmark"></i></button>
+                    </div>
                     </div>
 
                     <div class="attachment-body">
@@ -316,7 +319,8 @@ const ExamAttachments = {
                             <button class="att-tab-btn ${this.activeAttachmentTab === 'all' ? 'active' : ''}" onclick="ExamAttachments.setTab('all')">Beide Anlagen</button>
                             <button class="att-tab-btn ${this.activeAttachmentTab === 'a5' ? 'active' : ''}" onclick="ExamAttachments.setTab('a5')">Anlage 5 (System)</button>
                             <button class="att-tab-btn ${this.activeAttachmentTab === 'a6' ? 'active' : ''}" onclick="ExamAttachments.setTab('a6')">Anlage 6 (XML)</button>
-                        </div>
+                         <button class="att-close-btn" onclick="closeAttachmentPane()" title="Anlageblatt schließen (X)"><i class="fa-solid fa-xmark"></i></button>
+                    </div>
                     </div>
 
                     <div class="attachment-body">
@@ -405,6 +409,7 @@ const ExamAttachments = {
                     <div class="attachment-header">
                         <span>Anlage zu IT 4 &bull; Formale Prüfungskriterien</span>
                         <span class="attachment-tag">Bewertungsrichtlinie</span>
+                     <button class="att-close-btn" onclick="closeAttachmentPane()" title="Anlageblatt schließen (X)"><i class="fa-solid fa-xmark"></i></button>
                     </div>
                     <div class="attachment-body">
                         <div class="attachment-doc-title">
@@ -434,7 +439,8 @@ const ExamAttachments = {
                 <div class="attachment-header">
                     <span>Prüfung 22 &bull; SoftTech Solutions GmbH (FA 230)</span>
                     <span class="attachment-tag">Anlagen &amp; Vorgaben</span>
-                </div>
+                 <button class="att-close-btn" onclick="closeAttachmentPane()" title="Anlageblatt schließen (X)"><i class="fa-solid fa-xmark"></i></button>
+                    </div>
                 <div class="attachment-body">
                     <div class="attachment-doc-title">
                         <i class="fa-solid fa-file-invoice" style="color: #0284c7;"></i> Aufgaben-Anlagen zu Aufgabe ${pageIndex}
@@ -455,7 +461,8 @@ const ExamAttachments = {
                 <div class="attachment-header">
                     <span>${escapeHtml(exam.title.split(':')[0])} &bull; Referenz- &amp; Anlageblatt</span>
                     <span class="attachment-tag">Szenario &amp; Hilfsmittel</span>
-                </div>
+                 <button class="att-close-btn" onclick="closeAttachmentPane()" title="Anlageblatt schließen (X)"><i class="fa-solid fa-xmark"></i></button>
+                    </div>
                 <div class="attachment-body">
                     <!-- Scenario block -->
                     <div class="attachment-doc-title">

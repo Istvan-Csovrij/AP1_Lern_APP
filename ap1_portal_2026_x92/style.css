@@ -95,8 +95,11 @@ header {
     display: flex;
     flex-direction: column;
     align-items: center;
-    max-width: 900px;
-    margin: 1.5rem auto;
+    max-width: 98vw !important;
+    width: 98vw !important;
+    margin: 0.75rem auto !important;
+    padding: 0 0.5rem !important;
+    box-sizing: border-box;
 }
 
 @media (max-width: 1200px) and (min-width: 950px) {
@@ -2530,4 +2533,62 @@ footer {
     background: #0284c7;
     color: #ffffff;
     border-color: #38bdf8;
+}
+
+
+/* Full-Width Split Desk & Navbar matching Sheets width */
+.exam-desk-container.split-mode {
+    max-width: 100% !important;
+    width: 100% !important;
+    padding: 1rem 0.75rem !important;
+}
+.exam-booklet-navbar.split-mode {
+    max-width: 100% !important;
+    width: 100% !important;
+    box-sizing: border-box;
+}
+#exam-bottom-paging-bar.split-mode {
+    max-width: 100% !important;
+    width: 100% !important;
+    box-sizing: border-box;
+}
+.exam-split-wrapper {
+    width: 100% !important;
+    max-width: 100% !important;
+    gap: 0 !important;
+}
+
+/* Ensure inner DIN-A4 sheets expand to 100% of column width when user widens them */
+.exam-split-col .exam-paper-sheet {
+    max-width: 100% !important;
+    width: 100% !important;
+}
+.exam-split-col .attachment-sheet {
+    max-width: 100% !important;
+    width: 100% !important;
+}
+
+/* Close [X] button on attachment header */
+.att-close-btn {
+    background: #fee2e2;
+    border: 1.5px solid #f87171;
+    color: #991b1b;
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    font-weight: 800;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s ease;
+    margin-left: auto;
+    flex-shrink: 0;
+}
+.att-close-btn:hover {
+    background: #dc2626 !important;
+    border-color: #b91c1c !important;
+    color: #ffffff !important;
+    transform: scale(1.1);
 }
