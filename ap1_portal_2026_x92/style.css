@@ -22,11 +22,12 @@
 }
 
 html, body {
-    width: 100%;
-    max-width: 100%;
-    overflow-x: hidden;
-    margin: 0;
-    padding: 0;
+    width: 100% !important;
+    max-width: 100% !important;
+    overflow-x: clip !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-sizing: border-box !important;
 }
 
 body {
@@ -102,6 +103,7 @@ header {
     margin: 0.5rem 0 !important;
     padding: 0 8px !important;
     box-sizing: border-box !important;
+    overflow-x: clip !important;
 }
 
 /* Exam Mode Top Blue Header expands to 100% of sheet width without blank edges */
@@ -1134,19 +1136,21 @@ footer {
     align-items: stretch !important;
     box-sizing: border-box !important;
     margin: 0 0 1.5rem 0 !important;
+    overflow-x: clip !important;
 }
 
 .exam-desk-container {
     width: 100% !important;
     max-width: 100% !important;
     background: #0f172a;
-    padding: 1.25rem 0.75rem 2.5rem 0.75rem;
+    padding: 1rem 0.5rem 2rem 0.5rem;
     border-radius: 12px;
-    box-sizing: border-box;
+    box-sizing: border-box !important;
     display: flex;
     flex-direction: column;
     align-items: stretch !important;
-    gap: 1.25rem;
+    gap: 1rem;
+    overflow-x: clip !important;
 }
 
 #exam-paper-container {
@@ -1156,6 +1160,7 @@ footer {
     align-items: stretch !important;
     justify-content: flex-start !important;
     box-sizing: border-box !important;
+    overflow-x: clip !important;
 }
 
 .exam-desk-container:not(.split-mode) .exam-paper-sheet {
@@ -2293,13 +2298,14 @@ footer {
    ========================================================================== */
 .exam-split-wrapper {
     display: flex !important;
-    flex-direction: row !important;
+    flex-direction: row;
     align-items: stretch !important;
     justify-content: flex-start !important;
     gap: 0 !important;
     width: 100% !important;
     max-width: 100% !important;
     box-sizing: border-box !important;
+    overflow: hidden !important;
 }
 
 .exam-split-col {
@@ -2429,7 +2435,11 @@ footer {
 }
 
 .attachment-body {
-    padding: 1.25rem;
+    padding: 1rem 0.85rem;
+    box-sizing: border-box;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    overflow-x: hidden;
 }
 
 .attachment-doc-title {
@@ -2559,7 +2569,7 @@ footer {
 
 @media (max-width: 768px) {
     .exam-split-wrapper {
-        flex-direction: column;
+        flex-direction: column !important;
     }
     .exam-split-resizer {
         display: none !important;
@@ -2568,8 +2578,8 @@ footer {
         min-width: 100% !important;
         max-width: 100% !important;
         width: 100% !important;
-        height: auto;
-        max-height: none;
+        height: auto !important;
+        max-height: none !important;
     }
 }
 
@@ -2673,16 +2683,17 @@ footer {
     padding: 0.75rem 0.5rem !important;
     margin: 0 !important;
     box-sizing: border-box !important;
+    overflow-x: clip !important;
 }
 .exam-booklet-navbar.split-mode {
     max-width: 100% !important;
     width: 100% !important;
-    box-sizing: border-box;
+    box-sizing: border-box !important;
 }
 #exam-bottom-paging-bar.split-mode {
     max-width: 100% !important;
     width: 100% !important;
-    box-sizing: border-box;
+    box-sizing: border-box !important;
 }
 .exam-split-wrapper {
     width: 100% !important;
@@ -2691,6 +2702,7 @@ footer {
     justify-content: flex-start !important;
     gap: 0 !important;
     box-sizing: border-box !important;
+    overflow: hidden !important;
 }
 
 /* Ensure inner DIN-A4 sheets expand to 100% of column width when user widens them without bursting */
@@ -2699,12 +2711,19 @@ footer {
     width: 100% !important;
     min-width: 0 !important;
     box-sizing: border-box !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+    overflow-x: hidden !important;
+    padding: 14px 16px !important;
 }
 .exam-split-col .attachment-sheet {
     max-width: 100% !important;
     width: 100% !important;
     min-width: 0 !important;
     box-sizing: border-box !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+    overflow-x: hidden !important;
 }
 
 /* Close [X] button on attachment header */

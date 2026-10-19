@@ -1758,9 +1758,9 @@ function initSplitResizer() {
         const offsetX = e.clientX - rect.left;
         let percentage = (offsetX / rect.width) * 100;
         
-        // Clamp between 20% and 80%
-        if (percentage < 20) percentage = 20;
-        if (percentage > 80) percentage = 80;
+        // Clamp between 25% and 75%
+        if (percentage < 25) percentage = 25;
+        if (percentage > 75) percentage = 75;
 
         splitRatio = Math.round(percentage * 10) / 10;
         applySplitRatio(splitRatio);
@@ -1792,8 +1792,8 @@ function initSplitResizer() {
         const rect = wrapper.getBoundingClientRect();
         const offsetX = e.touches[0].clientX - rect.left;
         let percentage = (offsetX / rect.width) * 100;
-        if (percentage < 20) percentage = 20;
-        if (percentage > 80) percentage = 80;
+        if (percentage < 25) percentage = 25;
+        if (percentage > 75) percentage = 75;
         splitRatio = Math.round(percentage * 10) / 10;
         applySplitRatio(splitRatio);
     };
