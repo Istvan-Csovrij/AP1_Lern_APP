@@ -41,6 +41,11 @@ const ExamAttachments = {
             return this.renderDarSysAttachments(pageIndex);
         }
 
+        // PRÜFUNG 24: SOLARTECH GMBH (ORIGINALANLAGEN 2 BIS 6: UML, VLSM, KALKULATION, NWA, HARDWARE)
+        if (examId === "exam_24") {
+            return this.renderSolarExamAttachments(pageIndex);
+        }
+
         // PRÜFUNG 22: SOFTTECH SOLUTIONS GMBH (BAWÜ SOMMER 2026 FA 230)
         if (examId === "exam_22") {
             return this.renderSoftTechAttachments(pageIndex);
@@ -48,6 +53,784 @@ const ExamAttachments = {
 
         // PRÜFUNGEN 1 BIS 21: RICHTIGE THEMENBEZOGENE ANLAGEN MIT AUSFÜLL-RAHMEN
         return this.renderGenericAttachments(exam, pageIndex);
+    },
+
+
+    // =========================================================================
+    // PRÜFUNG 24: SOLARTECH & ECOPOWER GMBH (ORIGINAL-ANLAGEN 2 BIS 6)
+    // =========================================================================
+    renderSolarExamAttachments: function(pageIndex) {
+        const isSol = this.displayMode === "solution";
+
+        // Helper header with tabs
+        const renderSolarHeader = (title, currentTab, tabList) => {
+            return `
+                <div class="attachment-header">
+                    <span>${title}</span>
+                    <div style="display: flex; gap: 4px; align-items: center; flex-wrap: wrap;">
+                        ${tabList.map(t => `
+                            <button type="button" class="att-tab-btn ${currentTab === t.id ? 'active' : ''}" onclick="ExamAttachments.setTab('${t.id}')">
+                                ${t.label}
+                            </button>
+                        `).join('')}
+                        <button type="button" class="ihk-sol-toggle-btn ${this.displayMode === 'solution' ? 'active' : ''}" onclick="ExamAttachments.setMode(ExamAttachments.displayMode === 'solution' ? 'info' : 'solution')" title="Amtliche IHK-Musterlösung einblenden">
+                            <i class="fa-solid fa-award"></i> 💡 IHK-Lösung
+                        </button>
+                        <button class="att-close-btn" onclick="closeAttachmentPane()" title="Anlageblatt schließen (X)"><i class="fa-solid fa-xmark"></i></button>
+                    </div>
+                </div>
+            `;
+        };
+
+        // Page 0: Deckblatt -> Overview of all 5 authentic Anlagen
+        if (pageIndex === 0) {
+            return `
+                <div class="attachment-sheet">
+                    <div class="attachment-header">
+                        <span>SolarTech GmbH &bull; Anlagen-Verzeichnis</span>
+                        <span class="attachment-tag">Original IHK AP1 Prüfung</span>
+                        <button class="att-close-btn" onclick="closeAttachmentPane()" title="Anlageblatt schließen (X)"><i class="fa-solid fa-xmark"></i></button>
+                    </div>
+                    <div class="attachment-body">
+                        <div class="attachment-doc-title">
+                            <i class="fa-solid fa-folder-open" style="color: #f59e0b;"></i> Übersicht der 5 amtlichen Prüfungs-Anlagen (Anlagen 2 bis 6)
+                        </div>
+                        <p style="font-size: 0.9rem; color: #475569; line-height: 1.5; margin-bottom: 1rem;">
+                            Dieser authentische Prüfungssatz kombiniert Vorgabe-Informationsblätter mit amtlichen Abgabeblättern:
+                        </p>
+
+                        <div style="display: flex; flex-direction: column; gap: 0.85rem;">
+                            <div class="anlage-summary-card" onclick="changeExamPage(1)">
+                                <div class="anlage-badge">IT 1 &bull; Aufgabe 1</div>
+                                <div style="font-size: 0.88rem; line-height: 1.45;">
+                                    <strong>📄 Anlage 2:</strong> Klassenbeschreibung (UML-Klassen XmlAnfrage, CsvAnfrage, Flaeche, Angebot, Bestellposition, Komponente)<br>
+                                    <span style="color: #0284c7; font-weight: 700;">✍️ Abgabebereich:</span> Beziehungsanalyse, Entwurfsmuster &amp; Dachflächen-Berechnung
+                                </div>
+                            </div>
+
+                            <div class="anlage-summary-card" onclick="changeExamPage(2)">
+                                <div class="anlage-badge" style="background: #0284c7;">IT 2 &bull; Aufgabe 2</div>
+                                <div style="font-size: 0.88rem; line-height: 1.45;">
+                                    <strong>✍️ Anlage 3 - Subnetz:</strong> Offizielles Abgabeblatt mit Ausfüllrahmen<br>
+                                    <span style="color: #0284c7; font-weight: 700;">🌐 VLSM-Planung:</span> 7 Teilnetze (WLAN1, WLAN2, LAN1, LAN2, Server, Mgmt, VPN Transfernetzwerk)
+                                </div>
+                            </div>
+
+                            <div class="anlage-summary-card" onclick="changeExamPage(3)">
+                                <div class="anlage-badge" style="background: #10b981;">IT 3 &bull; Aufgabe 3</div>
+                                <div style="font-size: 0.88rem; line-height: 1.45;">
+                                    <strong>📡 Anlage 6:</strong> Hardware-Datenblatt (AZOS AP-42, Getnear AP-08, ELink AP-15)<br>
+                                    <strong>💶 Anlage 4:</strong> Handelskalkulation / Bezugskalkulation (Abgabeblatt)<br>
+                                    <strong>📊 Anlage 5:</strong> Nutzwertanalyse Entscheidungsmatrix (Abgabeblatt)
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 1.25rem; padding: 0.85rem; background: #eff6ff; border: 1.5px solid #93c5fd; border-radius: 8px; font-size: 0.86rem; color: #1e40af;">
+                            <i class="fa-solid fa-lightbulb"></i> <strong>Tipp für die Bearbeitung:</strong> Wechseln Sie in den Aufgaben mit den Reitern oben zwischen den Vorgabeblättern, den interaktiven Ausfüllrahmen und den Original-Scans!
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // =====================================================================
+        // AUFGABE 1: ANLAGE 2 - KLASSENBESCHREIBUNG (IT 1)
+        // =====================================================================
+        if (pageIndex === 1) {
+            let activeTab = this.activeSubTab;
+            if (!["a2_table", "a2_scan", "a2_rahmen"].includes(activeTab)) {
+                activeTab = "a2_table";
+            }
+
+            const header = renderSolarHeader("IT 1 &bull; Softwarearchitektur &amp; OOP", activeTab, [
+                { id: "a2_table", label: "📄 Anlage 2: Klassen" },
+                { id: "a2_rahmen", label: "✍️ Entwurfs-Rahmen" },
+                { id: "a2_scan", label: "🖼️ Original-Scan" }
+            ]);
+
+            return `
+                <div class="attachment-sheet">
+                    ${header}
+                    <div class="attachment-body">
+                        
+                        ${activeTab === "a2_scan" ? `
+                            <div class="attachment-doc-title">
+                                <i class="fa-solid fa-image" style="color: #6366f1;"></i> Original-Scan: Anlage 2 - Klassenbeschreibung
+                            </div>
+                            <div style="border: 1px solid #cbd5e1; border-radius: 8px; overflow: hidden; background: #000000; text-align: center; margin-bottom: 1rem;">
+                                <img src="anlagen_scans/anlage_2_klassen.png" alt="Anlage 2 Scan" style="max-width: 100%; height: auto; display: block; margin: 0 auto;">
+                            </div>
+                        ` : ''}
+
+                        ${activeTab === "a2_table" ? `
+                            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #0f172a; padding-bottom: 6px; margin-bottom: 1rem;">
+                                <div style="font-weight: 800; font-size: 1.05rem; color: #0f172a;">Anlage 2 - Klassenbeschreibung</div>
+                                <span style="font-size: 0.8rem; background: #e0f2fe; color: #0369a1; padding: 2px 8px; border-radius: 4px; font-weight: 700;">UML 2.5 Spezifikation</span>
+                            </div>
+
+                            <p style="font-size: 0.85rem; color: #475569; line-height: 1.45; margin-bottom: 1rem;">
+                                Die folgende tabellarische Spezifikation definiert das objektorientierte Datenmodell für die Solaranlagen-Planungssoftware:
+                            </p>
+
+                            <!-- KLASSE 1: XmlAnfrage -->
+                            <div style="border: 1.5px solid #0f172a; margin-bottom: 1rem; border-radius: 4px; overflow: hidden;">
+                                <div style="display: flex; background: #ffffff;">
+                                    <div style="flex: 0 0 45%; border-right: 1.5px solid #0f172a; padding: 0.5rem 0.65rem; font-family: monospace; font-size: 0.88rem;">
+                                        <div style="font-weight: 800; border-bottom: 1px solid #cbd5e1; padding-bottom: 3px; margin-bottom: 3px; color: #0f172a;">XmlAnfrage</div>
+                                        <div style="color: #0284c7;">+XmlAnfrage(pfad: string)</div>
+                                    </div>
+                                    <div style="flex: 1; padding: 0.5rem 0.65rem; font-size: 0.84rem; line-height: 1.4; color: #334155;">
+                                        <strong>Konstruktor</strong> &ndash; Liest XML-Datei am übergebenen Pfad und erzeugt und initialisiert mit den eingelesenen Werten ein Objekt vom Typ <code>XmlAnfrage</code>.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- KLASSE 2: CsvAnfrage -->
+                            <div style="border: 1.5px solid #0f172a; margin-bottom: 1rem; border-radius: 4px; overflow: hidden;">
+                                <div style="display: flex; background: #ffffff;">
+                                    <div style="flex: 0 0 45%; border-right: 1.5px solid #0f172a; padding: 0.5rem 0.65rem; font-family: monospace; font-size: 0.88rem;">
+                                        <div style="font-weight: 800; border-bottom: 1px solid #cbd5e1; padding-bottom: 3px; margin-bottom: 3px; color: #0f172a;">CsvAnfrage</div>
+                                        <div style="color: #0284c7;">+CsvAnfrage(pfad: string)</div>
+                                    </div>
+                                    <div style="flex: 1; padding: 0.5rem 0.65rem; font-size: 0.84rem; line-height: 1.4; color: #334155;">
+                                        <strong>Konstruktor</strong> &ndash; Liest CSV-Datei am übergebenen Pfad und erzeugt und initialisiert mit den eingelesenen Werten ein Objekt vom Typ <code>CsvAnfrage</code>.
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- KLASSE 3: Flaeche -->
+                            <div style="border: 1.5px solid #0f172a; margin-bottom: 1rem; border-radius: 4px; overflow: hidden;">
+                                <div style="display: flex; background: #ffffff;">
+                                    <div style="flex: 0 0 45%; border-right: 1.5px solid #0f172a; padding: 0.5rem 0.65rem; font-family: monospace; font-size: 0.88rem;">
+                                        <div style="font-weight: 800; border-bottom: 1px solid #cbd5e1; padding-bottom: 3px; margin-bottom: 3px; color: #0f172a;">Flaeche</div>
+                                        <div style="color: #dc2626;">-bezeichnung: string</div>
+                                        <div style="color: #dc2626;">-laenge: double</div>
+                                        <div style="color: #dc2626;">-breite: double</div>
+                                        <div style="color: #0284c7; border-top: 1px solid #cbd5e1; margin-top: 3px; padding-top: 3px;">+Flaeche(...)</div>
+                                    </div>
+                                    <div style="flex: 1; padding: 0.5rem 0.65rem; font-size: 0.84rem; line-height: 1.4; color: #334155;">
+                                        <div>Bezeichnung der Dachfläche</div>
+                                        <div>Länge der Fläche (in Metern)</div>
+                                        <div>Breite der Fläche (in Metern)</div>
+                                        <div style="margin-top: 4px;"><strong>Konstruktor</strong> &ndash; übernimmt für jedes Klassenattribut einen Wert und initialisiert diese.</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- KLASSE 4: Angebot -->
+                            <div style="border: 1.5px solid #0f172a; margin-bottom: 1rem; border-radius: 4px; overflow: hidden;">
+                                <div style="display: flex; background: #ffffff;">
+                                    <div style="flex: 0 0 45%; border-right: 1.5px solid #0f172a; padding: 0.5rem 0.65rem; font-family: monospace; font-size: 0.88rem;">
+                                        <div style="font-weight: 800; border-bottom: 1px solid #cbd5e1; padding-bottom: 3px; margin-bottom: 3px; color: #0f172a;">Angebot</div>
+                                        <div style="color: #dc2626;">-id: int</div>
+                                        <div style="color: #dc2626;">-positionen: BestellPosition[ ]</div>
+                                        <div style="color: #0284c7; border-top: 1px solid #cbd5e1; margin-top: 3px; padding-top: 3px;">+Angebot(...)</div>
+                                        <div style="color: #0284c7;">+ToString(): string</div>
+                                    </div>
+                                    <div style="flex: 1; padding: 0.5rem 0.65rem; font-size: 0.84rem; line-height: 1.4; color: #334155;">
+                                        <div>Primärschlüssel des Datensatzes</div>
+                                        <div>Liste von Bestellpositionen (Komposition)</div>
+                                        <div style="margin-top: 4px;"><strong>Konstruktor</strong> &ndash; übernimmt für jedes Klassenattribut einen Wert und initialisiert diese.</div>
+                                        <div>Überschreibt <code>Object.ToString()</code> &ndash; gibt Angebot in Textform aus.</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- KLASSE 5: Bestellposition -->
+                            <div style="border: 1.5px solid #0f172a; margin-bottom: 1rem; border-radius: 4px; overflow: hidden;">
+                                <div style="display: flex; background: #ffffff;">
+                                    <div style="flex: 0 0 45%; border-right: 1.5px solid #0f172a; padding: 0.5rem 0.65rem; font-family: monospace; font-size: 0.88rem;">
+                                        <div style="font-weight: 800; border-bottom: 1px solid #cbd5e1; padding-bottom: 3px; margin-bottom: 3px; color: #0f172a;">Bestellposition</div>
+                                        <div style="color: #dc2626;">-nr: int</div>
+                                        <div style="color: #dc2626;">-komponente: Komponente</div>
+                                        <div style="color: #dc2626;">-anzahl</div>
+                                        <div style="color: #0284c7; border-top: 1px solid #cbd5e1; margin-top: 3px; padding-top: 3px;">+Bestellposition(...)</div>
+                                    </div>
+                                    <div style="flex: 1; padding: 0.5rem 0.65rem; font-size: 0.84rem; line-height: 1.4; color: #334155;">
+                                        <div>Primärschlüssel des Datensatzes</div>
+                                        <div>Die in dieser Position bestellte Komponente (Aggregation)</div>
+                                        <div>Menge der bestellten Komponenten</div>
+                                        <div style="margin-top: 4px;"><strong>Konstruktor</strong> &ndash; übernimmt für jedes Klassenattribut einen Wert und initialisiert diese.</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- KLASSE 6: Komponente (abstract) -->
+                            <div style="border: 1.5px solid #0f172a; margin-bottom: 1rem; border-radius: 4px; overflow: hidden;">
+                                <div style="display: flex; background: #ffffff;">
+                                    <div style="flex: 0 0 45%; border-right: 1.5px solid #0f172a; padding: 0.5rem 0.65rem; font-family: monospace; font-size: 0.88rem;">
+                                        <div style="font-weight: 800; font-style: italic; border-bottom: 1px solid #cbd5e1; padding-bottom: 3px; margin-bottom: 3px; color: #0f172a;">Komponente (abstract)</div>
+                                        <div style="color: #dc2626;">-id: int</div>
+                                        <div style="color: #dc2626;">-preis: double</div>
+                                        <div style="color: #0284c7; border-top: 1px solid #cbd5e1; margin-top: 3px; padding-top: 3px;">+Komponente(...)</div>
+                                        <div style="color: #0284c7;">+ToString(): string</div>
+                                    </div>
+                                    <div style="flex: 1; padding: 0.5rem 0.65rem; font-size: 0.84rem; line-height: 1.4; color: #334155;">
+                                        <div>Primärschlüssel des Datensatzes</div>
+                                        <div>Preis der Komponente</div>
+                                        <div style="margin-top: 4px;"><strong>Konstruktor</strong> &ndash; übernimmt für jedes Klassenattribut einen Wert und initialisiert diese.</div>
+                                        <div>Überschreibt <code>Object.ToString()</code> &ndash; gibt Komponente in Textform aus.</div>
+                                    </div>
+                                </div>
+                            </div>
+                        ` : ''}
+
+                        ${activeTab === "a2_rahmen" ? `
+                            <div class="attachment-doc-title">
+                                <i class="fa-solid fa-pen" style="color: #0284c7;"></i> Lösungs- &amp; Begründungsrahmen zu Aufgabe 1
+                            </div>
+                            <div style="border: 1px solid #cbd5e1; border-radius: 8px; padding: 1rem; background: #f8fafc; font-size: 0.85rem; line-height: 1.5; color: #1e293b;">
+                                <strong>Prüfungsrelevante Kernbegriffe für Ihre Ausarbeitung:</strong><br>
+                                &bull; <strong>Komposition vs. Aggregation:</strong> Gefüllte Raute (Komposition) an Angebot &bull; Offene Raute an Bestellposition &bull; Multiplizitäten: <code>1</code> zu <code>1..*</code><br>
+                                &bull; <strong>Abstrakte Klasse:</strong> Nicht instanziierbar &bull; Polymorphe Schablone für Solarmodule, Wechselrichter, Speicher &bull; Kursivschrift im UML-Diagramm<br>
+                                &bull; <strong>Entwurfsmuster:</strong> Factory Method Pattern &bull; Entkopplung von Aufrufer und Erzeugung &bull; Single-Responsibility-Principle<br>
+                                &bull; <strong>Dachflächen-Formel:</strong> Abzug von 2 &times; 0,5 m Randabstand = 11,0 m &times; 5,5 m = 30 Module.
+                            </div>
+                        ` : ''}
+
+                        ${isSol ? `
+                            <div style="margin-top: 1rem; padding: 0.85rem; background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 8px; font-size: 0.85rem; color: #166534; line-height: 1.5;">
+                                <i class="fa-solid fa-check-circle"></i> <strong>IHK-Musterlösung aktiviert:</strong> Beachten Sie die präzise Trennung von Komposition (lebenslange Bindung an Angebot) und Aggregation (Komponente existiert auch ohne Bestellposition).
+                            </div>
+                        ` : ''}
+
+                    </div>
+                </div>
+            `;
+        }
+
+        // =====================================================================
+        // AUFGABE 2: ANLAGE 3 - SUBNETZ (IT 2)
+        // =====================================================================
+        if (pageIndex === 2) {
+            let activeTab = this.activeSubTab;
+            if (!["a3_sheet", "a3_scan", "a3_info"].includes(activeTab)) {
+                activeTab = "a3_sheet";
+            }
+
+            const header = renderSolarHeader("IT 2 &bull; Subnetting nach VLSM", activeTab, [
+                { id: "a3_sheet", label: "✍️ Anlage 3: Abgabeblatt" },
+                { id: "a3_info", label: "📄 Vorgaben &amp; Formel" },
+                { id: "a3_scan", label: "🖼️ Original-Scan" }
+            ]);
+
+            return `
+                <div class="attachment-sheet">
+                    ${header}
+                    <div class="attachment-body">
+                        
+                        ${activeTab === "a3_scan" ? `
+                            <div class="attachment-doc-title">
+                                <i class="fa-solid fa-image" style="color: #6366f1;"></i> Original-Scan: Anlage 3 - Subnetz
+                            </div>
+                            <div style="border: 1px solid #cbd5e1; border-radius: 8px; overflow: hidden; background: #000000; text-align: center; margin-bottom: 1rem;">
+                                <img src="anlagen_scans/anlage_3_subnetz.png" alt="Anlage 3 Scan" style="max-width: 100%; height: auto; display: block; margin: 0 auto;">
+                            </div>
+                        ` : ''}
+
+                        ${activeTab === "a3_info" ? `
+                            <div class="attachment-doc-title">
+                                <i class="fa-solid fa-network-wired" style="color: #0284c7;"></i> VLSM-Berechnungsgrundlagen (Basisnetz: 192.168.10.0/24)
+                            </div>
+                            <div style="background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 8px; padding: 1rem; font-size: 0.86rem; line-height: 1.5; color: #1e293b; margin-bottom: 1rem;">
+                                <strong>Regeln für die VLSM-Berechnung:</strong><br>
+                                1. <strong>Sortierung nach Hostbedarf (absteigend):</strong><br>
+                                &bull; WLAN1 (50 Hosts) &bull; WLAN2 (50 Hosts) &rarr; Benötigen je 2<sup>6</sup> &ndash; 2 = 62 Adressen &rarr; <strong>/26</strong> (Schrittweite 64)<br>
+                                &bull; LAN1 (25 Hosts) &bull; LAN2 (25 Hosts) &rarr; Benötigen je 2<sup>5</sup> &ndash; 2 = 30 Adressen &rarr; <strong>/27</strong> (Schrittweite 32)<br>
+                                &bull; Server (10 Hosts) &bull; Mgmt (10 Hosts) &rarr; Benötigen je 2<sup>4</sup> &ndash; 2 = 14 Adressen &rarr; <strong>/28</strong> (Schrittweite 16)<br>
+                                &bull; VPN Transfernetz (2 Hosts) &rarr; Benötigt 2<sup>2</sup> &ndash; 2 = 2 Adressen &rarr; <strong>/30</strong> (Schrittweite 4)<br><br>
+                                2. <strong>Regel für PCs &amp; Gateways:</strong> Standard-Gateway erhält die erste nutzbare Adresse, PCs nutzen den verbleibenden Adressbereich.
+                            </div>
+                        ` : ''}
+
+                        ${activeTab === "a3_sheet" ? `
+                            <!-- OFFIZIELLER IHK-KOPF DES ABGABEBLATTS -->
+                            <div style="border-bottom: 2px solid #0f172a; padding-bottom: 8px; margin-bottom: 1rem;">
+                                <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 8px;">
+                                    <div>
+                                        <div style="font-weight: 800; font-size: 1.1rem; color: #0f172a;">Anlage 3 - Subnetz</div>
+                                        <div style="font-size: 0.8rem; font-weight: 700; color: #dc2626; margin-top: 2px;">Bitte geben Sie dieses Blatt mit Ihren Lösungen ab.</div>
+                                    </div>
+                                    <div style="font-size: 0.84rem; color: #334155;">
+                                        <span>Name, Vorname: <span style="display: inline-block; width: 140px; border-bottom: 1px solid #475569;">&nbsp;</span></span>
+                                        <span style="margin-left: 12px;">Klasse: <span style="display: inline-block; width: 60px; border-bottom: 1px solid #475569;">&nbsp;</span></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- INTERAKTIVE ODER GELÖSTE SUBNETZ-TABELLE -->
+                            <div class="att-spec-table-wrap">
+                                <table class="att-spec-table" style="font-size: 0.8rem;">
+                                    <thead>
+                                        <tr style="background: #f1f5f9; text-align: center;">
+                                            <th style="width: 18%;">Netzwerkname</th>
+                                            <th style="width: 12%;">Zahl der geplanten Hosts</th>
+                                            <th style="width: 18%;">Netzwerkadresse</th>
+                                            <th style="width: 14%;">Subnetzmaske nach CIDR</th>
+                                            <th style="width: 22%;">IP-Range PCs</th>
+                                            <th style="width: 16%;">IP-Adresse Standard-Gateway</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- WLAN1 -->
+                                        <tr>
+                                            <td style="font-weight: 700; background: #fafafa;">WLAN1</td>
+                                            <td style="text-align: center;">50</td>
+                                            <td style="font-family: monospace; ${isSol ? 'background: #f0fdf4; font-weight: 700; color: #166534;' : ''}">
+                                                ${isSol ? '192.168.10.0' : '192.168.10.<input type="text" style="width:38px; padding:2px; font-family:monospace;" placeholder="0">'}
+                                            </td>
+                                            <td style="text-align: center; font-family: monospace; ${isSol ? 'background: #f0fdf4; font-weight: 700; color: #166534;' : ''}">
+                                                ${isSol ? '/26' : '<input type="text" style="width:38px; text-align:center; padding:2px; font-family:monospace;" placeholder="/26">'}
+                                            </td>
+                                            <td style="font-family: monospace; ${isSol ? 'background: #f0fdf4; color: #166534;' : ''}">
+                                                ${isSol ? '192.168.10.2 &ndash; 192.168.10.62' : '192.168.10.<input type="text" style="width:30px; padding:2px;" placeholder="2">&ndash;<input type="text" style="width:30px; padding:2px;" placeholder="62">'}
+                                            </td>
+                                            <td style="font-family: monospace; ${isSol ? 'background: #f0fdf4; font-weight: 700; color: #166534;' : ''}">
+                                                ${isSol ? '192.168.10.1' : '192.168.10.<input type="text" style="width:34px; padding:2px;" placeholder="1">'}
+                                            </td>
+                                        </tr>
+
+                                        <!-- WLAN2 -->
+                                        <tr>
+                                            <td style="font-weight: 700; background: #fafafa;">WLAN2</td>
+                                            <td style="text-align: center;">50</td>
+                                            <td style="font-family: monospace; ${isSol ? 'background: #f0fdf4; font-weight: 700; color: #166534;' : ''}">
+                                                ${isSol ? '192.168.10.64' : '192.168.10.<input type="text" style="width:38px; padding:2px; font-family:monospace;" placeholder="64">'}
+                                            </td>
+                                            <td style="text-align: center; font-family: monospace; ${isSol ? 'background: #f0fdf4; font-weight: 700; color: #166534;' : ''}">
+                                                ${isSol ? '/26' : '<input type="text" style="width:38px; text-align:center; padding:2px; font-family:monospace;" placeholder="/26">'}
+                                            </td>
+                                            <td style="font-family: monospace; ${isSol ? 'background: #f0fdf4; color: #166534;' : ''}">
+                                                ${isSol ? '192.168.10.66 &ndash; 192.168.10.126' : '192.168.10.<input type="text" style="width:30px; padding:2px;" placeholder="66">&ndash;<input type="text" style="width:30px; padding:2px;" placeholder="126">'}
+                                            </td>
+                                            <td style="font-family: monospace; ${isSol ? 'background: #f0fdf4; font-weight: 700; color: #166534;' : ''}">
+                                                ${isSol ? '192.168.10.65' : '192.168.10.<input type="text" style="width:34px; padding:2px;" placeholder="65">'}
+                                            </td>
+                                        </tr>
+
+                                        <!-- LAN1 -->
+                                        <tr>
+                                            <td style="font-weight: 700; background: #fafafa;">LAN1</td>
+                                            <td style="text-align: center;">25</td>
+                                            <td style="font-family: monospace; ${isSol ? 'background: #f0fdf4; font-weight: 700; color: #166534;' : ''}">
+                                                ${isSol ? '192.168.10.128' : '192.168.10.<input type="text" style="width:38px; padding:2px; font-family:monospace;" placeholder="128">'}
+                                            </td>
+                                            <td style="text-align: center; font-family: monospace; ${isSol ? 'background: #f0fdf4; font-weight: 700; color: #166534;' : ''}">
+                                                ${isSol ? '/27' : '<input type="text" style="width:38px; text-align:center; padding:2px; font-family:monospace;" placeholder="/27">'}
+                                            </td>
+                                            <td style="font-family: monospace; ${isSol ? 'background: #f0fdf4; color: #166534;' : ''}">
+                                                ${isSol ? '192.168.10.130 &ndash; 192.168.10.158' : '192.168.10.<input type="text" style="width:30px; padding:2px;" placeholder="130">&ndash;<input type="text" style="width:30px; padding:2px;" placeholder="158">'}
+                                            </td>
+                                            <td style="font-family: monospace; ${isSol ? 'background: #f0fdf4; font-weight: 700; color: #166534;' : ''}">
+                                                ${isSol ? '192.168.10.129' : '192.168.10.<input type="text" style="width:34px; padding:2px;" placeholder="129">'}
+                                            </td>
+                                        </tr>
+
+                                        <!-- LAN2 -->
+                                        <tr>
+                                            <td style="font-weight: 700; background: #fafafa;">LAN2</td>
+                                            <td style="text-align: center;">25</td>
+                                            <td style="font-family: monospace; ${isSol ? 'background: #f0fdf4; font-weight: 700; color: #166534;' : ''}">
+                                                ${isSol ? '192.168.10.160' : '192.168.10.<input type="text" style="width:38px; padding:2px; font-family:monospace;" placeholder="160">'}
+                                            </td>
+                                            <td style="text-align: center; font-family: monospace; ${isSol ? 'background: #f0fdf4; font-weight: 700; color: #166534;' : ''}">
+                                                ${isSol ? '/27' : '<input type="text" style="width:38px; text-align:center; padding:2px; font-family:monospace;" placeholder="/27">'}
+                                            </td>
+                                            <td style="font-family: monospace; ${isSol ? 'background: #f0fdf4; color: #166534;' : ''}">
+                                                ${isSol ? '192.168.10.162 &ndash; 192.168.10.190' : '192.168.10.<input type="text" style="width:30px; padding:2px;" placeholder="162">&ndash;<input type="text" style="width:30px; padding:2px;" placeholder="190">'}
+                                            </td>
+                                            <td style="font-family: monospace; ${isSol ? 'background: #f0fdf4; font-weight: 700; color: #166534;' : ''}">
+                                                ${isSol ? '192.168.10.161' : '192.168.10.<input type="text" style="width:34px; padding:2px;" placeholder="161">'}
+                                            </td>
+                                        </tr>
+
+                                        <!-- Servernetzwerk -->
+                                        <tr>
+                                            <td style="font-weight: 700; background: #fafafa;">Servernetzwerk</td>
+                                            <td style="text-align: center;">10</td>
+                                            <td style="font-family: monospace; ${isSol ? 'background: #f0fdf4; font-weight: 700; color: #166534;' : ''}">
+                                                ${isSol ? '192.168.10.192' : '192.168.10.<input type="text" style="width:38px; padding:2px; font-family:monospace;" placeholder="192">'}
+                                            </td>
+                                            <td style="text-align: center; font-family: monospace; ${isSol ? 'background: #f0fdf4; font-weight: 700; color: #166534;' : ''}">
+                                                ${isSol ? '/28' : '<input type="text" style="width:38px; text-align:center; padding:2px; font-family:monospace;" placeholder="/28">'}
+                                            </td>
+                                            <td style="font-family: monospace; ${isSol ? 'background: #f0fdf4; color: #166534;' : ''}">
+                                                ${isSol ? '192.168.10.194 &ndash; 192.168.10.206' : '192.168.10.<input type="text" style="width:30px; padding:2px;" placeholder="194">&ndash;<input type="text" style="width:30px; padding:2px;" placeholder="206">'}
+                                            </td>
+                                            <td style="font-family: monospace; ${isSol ? 'background: #f0fdf4; font-weight: 700; color: #166534;' : ''}">
+                                                ${isSol ? '192.168.10.193' : '192.168.10.<input type="text" style="width:34px; padding:2px;" placeholder="193">'}
+                                            </td>
+                                        </tr>
+
+                                        <!-- Netzwerkmanagement -->
+                                        <tr>
+                                            <td style="font-weight: 700; background: #fafafa;">Netzwerkmanagement</td>
+                                            <td style="text-align: center;">10</td>
+                                            <td style="font-family: monospace; ${isSol ? 'background: #f0fdf4; font-weight: 700; color: #166534;' : ''}">
+                                                ${isSol ? '192.168.10.208' : '192.168.10.<input type="text" style="width:38px; padding:2px; font-family:monospace;" placeholder="208">'}
+                                            </td>
+                                            <td style="text-align: center; font-family: monospace; ${isSol ? 'background: #f0fdf4; font-weight: 700; color: #166534;' : ''}">
+                                                ${isSol ? '/28' : '<input type="text" style="width:38px; text-align:center; padding:2px; font-family:monospace;" placeholder="/28">'}
+                                            </td>
+                                            <td style="font-family: monospace; ${isSol ? 'background: #f0fdf4; color: #166534;' : ''}">
+                                                ${isSol ? '192.168.10.210 &ndash; 192.168.10.222' : '192.168.10.<input type="text" style="width:30px; padding:2px;" placeholder="210">&ndash;<input type="text" style="width:30px; padding:2px;" placeholder="222">'}
+                                            </td>
+                                            <td style="font-family: monospace; ${isSol ? 'background: #f0fdf4; font-weight: 700; color: #166534;' : ''}">
+                                                ${isSol ? '192.168.10.209' : '192.168.10.<input type="text" style="width:34px; padding:2px;" placeholder="209">'}
+                                            </td>
+                                        </tr>
+
+                                        <!-- VPN Transfernetzwerk -->
+                                        <tr>
+                                            <td style="font-weight: 700; background: #fafafa;">VPN Transfernetzwerk</td>
+                                            <td style="text-align: center;">2</td>
+                                            <td style="font-family: monospace; ${isSol ? 'background: #f0fdf4; font-weight: 700; color: #166534;' : ''}">
+                                                ${isSol ? '192.168.10.224' : '192.168.10.<input type="text" style="width:38px; padding:2px; font-family:monospace;" placeholder="224">'}
+                                            </td>
+                                            <td style="text-align: center; font-family: monospace; ${isSol ? 'background: #f0fdf4; font-weight: 700; color: #166534;' : ''}">
+                                                ${isSol ? '/30' : '<input type="text" style="width:38px; text-align:center; padding:2px; font-family:monospace;" placeholder="/30">'}
+                                            </td>
+                                            <td style="text-align: center; font-weight: 700; color: #64748b;">
+                                                &ndash;
+                                            </td>
+                                            <td style="font-family: monospace; line-height: 1.4; ${isSol ? 'background: #f0fdf4; font-weight: 700; color: #166534;' : ''}">
+                                                ${isSol ? '192.168.10.225<br>192.168.10.226' : '192.168.10.<input type="text" style="width:30px; padding:1px;" placeholder="225"><br>192.168.10.<input type="text" style="width:30px; padding:1px;" placeholder="226">'}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        ` : ''}
+
+                    </div>
+                </div>
+            `;
+        }
+
+        // =====================================================================
+        // AUFGABE 3: ANLAGE 6 (HARDWARE), ANLAGE 4 (KALKULATION), ANLAGE 5 (NWA)
+        // =====================================================================
+        if (pageIndex === 3) {
+            let activeTab = this.activeSubTab;
+            if (!["a6_hw", "a4_kalk", "a5_nwa", "a_scans"].includes(activeTab)) {
+                activeTab = "a6_hw";
+            }
+
+            const header = renderSolarHeader("IT 3 &bull; Hardware, Kalkulation &amp; NWA", activeTab, [
+                { id: "a6_hw", label: "📡 Anlage 6: Datenblatt" },
+                { id: "a4_kalk", label: "💶 Anlage 4: Kalkulation" },
+                { id: "a5_nwa", label: "📊 Anlage 5: NWA" },
+                { id: "a_scans", label: "🖼️ Original-Scans" }
+            ]);
+
+            return `
+                <div class="attachment-sheet">
+                    ${header}
+                    <div class="attachment-body">
+                        
+                        ${activeTab === "a_scans" ? `
+                            <div class="attachment-doc-title">
+                                <i class="fa-solid fa-images" style="color: #6366f1;"></i> Original-Scans der Anlagen 4, 5 und 6
+                            </div>
+                            <div style="display: flex; flex-direction: column; gap: 1rem;">
+                                <div>
+                                    <div style="font-weight: 700; font-size: 0.85rem; margin-bottom: 4px;">Anlage 6 (Hardware-Vergleich):</div>
+                                    <img src="anlagen_scans/anlage_6_hardware.png" style="max-width: 100%; border: 1px solid #cbd5e1; border-radius: 6px;">
+                                </div>
+                                <div>
+                                    <div style="font-weight: 700; font-size: 0.85rem; margin-bottom: 4px;">Anlage 5 (Nutzwertanalyse):</div>
+                                    <img src="anlagen_scans/anlage_5_nutzwertanalyse.png" style="max-width: 100%; border: 1px solid #cbd5e1; border-radius: 6px;">
+                                </div>
+                                <div>
+                                    <div style="font-weight: 700; font-size: 0.85rem; margin-bottom: 4px;">Anlage 4 (Bezugskalkulation):</div>
+                                    <img src="anlagen_scans/anlage_4_kalkulation.png" style="max-width: 100%; border: 1px solid #cbd5e1; border-radius: 6px;">
+                                </div>
+                            </div>
+                        ` : ''}
+
+                        ${activeTab === "a6_hw" ? `
+                            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #0f172a; padding-bottom: 6px; margin-bottom: 1rem;">
+                                <div style="font-weight: 800; font-size: 1.05rem; color: #0f172a;">Anlage 6 &bull; Hardware-Vergleich Access Points</div>
+                                <span style="font-size: 0.8rem; background: #fef3c7; color: #b45309; padding: 2px 8px; border-radius: 4px; font-weight: 700;">Vorgabe-Informationsblatt</span>
+                            </div>
+
+                            <!-- GERÄT 1: AZOS AP-42 -->
+                            <div style="border: 1.5px solid #0f172a; margin-bottom: 1.25rem; border-radius: 6px; overflow: hidden; background: #ffffff;">
+                                <div style="background: #0f172a; color: #ffffff; padding: 6px 12px; font-weight: 800; font-size: 0.95rem; display: flex; justify-content: space-between;">
+                                    <span>AZOS AP-42</span>
+                                    <span style="color: #38bdf8;">178,31 € zzgl. MwSt</span>
+                                </div>
+                                <div class="att-spec-table-wrap" style="margin: 0;">
+                                    <table class="att-spec-table" style="font-size: 0.82rem; margin: 0;">
+                                        <tr><td style="width: 35%; font-weight: 700; background: #f8fafc;">LAN</td><td>1x 1000Base-T</td></tr>
+                                        <tr><td style="font-weight: 700; background: #f8fafc;">Wireless</td><td>WLAN 802.11a/ac/b/g/n</td></tr>
+                                        <tr><td style="font-weight: 700; background: #f8fafc;">Übertragungsrate</td><td><strong>575 Mbit/s</strong> (2,4 GHz) &bull; <strong>1200 Mbit/s</strong> (5 GHz)</td></tr>
+                                        <tr><td style="font-weight: 700; background: #f8fafc;">Sicherheit</td><td>WPA, WPA-PSK, WPA2, WPA2-Enterprise, <strong>WPA3</strong></td></tr>
+                                        <tr><td style="font-weight: 700; background: #f8fafc;">Anschlüsse und Bedienung</td><td>2xLAN, 12V DC</td></tr>
+                                        <tr><td style="font-weight: 700; background: #f8fafc;">Leistungsaufnahme</td><td><strong>14,4W</strong> (Betrieb)</td></tr>
+                                        <tr><td style="font-weight: 700; background: #f8fafc;">Maximale Anzahl Clients</td><td>50</td></tr>
+                                        <tr><td style="font-weight: 700; background: #f8fafc;">Mittlere Betriebsdauer MTBF</td><td><strong>691 548 Stunden</strong> (~79 Jahre)</td></tr>
+                                        <tr><td style="font-weight: 700; background: #f8fafc;">Herstellergarantie</td><td><strong>7 Jahre</strong></td></tr>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <!-- GERÄT 2: Getnear AP-08 -->
+                            <div style="border: 1.5px solid #0f172a; margin-bottom: 1.25rem; border-radius: 6px; overflow: hidden; background: #ffffff;">
+                                <div style="background: #334155; color: #ffffff; padding: 6px 12px; font-weight: 800; font-size: 0.95rem; display: flex; justify-content: space-between;">
+                                    <span>Getnear AP-08</span>
+                                    <span style="color: #cbd5e1;">221,73 € zzgl. MwSt</span>
+                                </div>
+                                <div class="att-spec-table-wrap" style="margin: 0;">
+                                    <table class="att-spec-table" style="font-size: 0.82rem; margin: 0;">
+                                        <tr><td style="width: 35%; font-weight: 700; background: #f8fafc;">LAN</td><td>1x 1000Base-T</td></tr>
+                                        <tr><td style="font-weight: 700; background: #f8fafc;">Wireless</td><td>WLAN 802.11a/ac/b/g/n</td></tr>
+                                        <tr><td style="font-weight: 700; background: #f8fafc;">Übertragungsrate</td><td>575 Mbit/s (2,4 GHz) &bull; 867 Mbit/s (5 GHz)</td></tr>
+                                        <tr><td style="font-weight: 700; background: #f8fafc;">Sicherheit</td><td>WPA, WPA-PSK, WPA2, WPA2-Enterprise (kein WPA3!)</td></tr>
+                                        <tr><td style="font-weight: 700; background: #f8fafc;">Anschlüsse und Bedienung</td><td>LAN, 24V DC</td></tr>
+                                        <tr><td style="font-weight: 700; background: #f8fafc;">Leistungsaufnahme</td><td>16,8W (Betrieb)</td></tr>
+                                        <tr><td style="font-weight: 700; background: #f8fafc;">Maximale Anzahl Clients</td><td>50</td></tr>
+                                        <tr><td style="font-weight: 700; background: #f8fafc;">Mittlere Betriebsdauer MTBF</td><td>476 348 Stunden</td></tr>
+                                        <tr><td style="font-weight: 700; background: #f8fafc;">Herstellergarantie</td><td>3 Jahre</td></tr>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <!-- GERÄT 3: ELink AP-15 -->
+                            <div style="border: 1.5px solid #0f172a; margin-bottom: 1rem; border-radius: 6px; overflow: hidden; background: #ffffff;">
+                                <div style="background: #475569; color: #ffffff; padding: 6px 12px; font-weight: 800; font-size: 0.95rem; display: flex; justify-content: space-between;">
+                                    <span>ELink AP-15</span>
+                                    <span style="color: #cbd5e1;">237,18 € zzgl. MwSt</span>
+                                </div>
+                                <div class="att-spec-table-wrap" style="margin: 0;">
+                                    <table class="att-spec-table" style="font-size: 0.82rem; margin: 0;">
+                                        <tr><td style="width: 35%; font-weight: 700; background: #f8fafc;">LAN</td><td>1x 1000Base-T</td></tr>
+                                        <tr><td style="font-weight: 700; background: #f8fafc;">Wireless</td><td>WLAN 802.11 b/g/n (nur 2,4 GHz!)</td></tr>
+                                        <tr><td style="font-weight: 700; background: #f8fafc;">Übertragungsrate</td><td>575 Mbit/s (2,4 GHz)</td></tr>
+                                        <tr><td style="font-weight: 700; background: #f8fafc;">Sicherheit</td><td>WPA, WPA-PSK, WPA2, WPA2-Enterprise, WPA3</td></tr>
+                                        <tr><td style="font-weight: 700; background: #f8fafc;">Anschlüsse und Bedienung</td><td>LAN, 12V DC</td></tr>
+                                        <tr><td style="font-weight: 700; background: #f8fafc;">Leistungsaufnahme</td><td>15,1W (Betrieb)</td></tr>
+                                        <tr><td style="font-weight: 700; background: #f8fafc;">Maximale Anzahl Clients</td><td>50</td></tr>
+                                        <tr><td style="font-weight: 700; background: #f8fafc;">Mittlere Betriebsdauer MTBF</td><td>367 715 Stunden</td></tr>
+                                        <tr><td style="font-weight: 700; background: #f8fafc;">Herstellergarantie</td><td>3 Jahre</td></tr>
+                                    </table>
+                                </div>
+                            </div>
+                        ` : ''}
+
+                        ${activeTab === "a4_kalk" ? `
+                            <!-- OFFIZIELLER KOPF ANLAGE 4 -->
+                            <div style="border-bottom: 2px solid #0f172a; padding-bottom: 8px; margin-bottom: 1rem;">
+                                <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 8px;">
+                                    <div>
+                                        <div style="font-weight: 800; font-size: 1.1rem; color: #0f172a;">Anlage 4 &bull; Bezugskalkulation</div>
+                                        <div style="font-size: 0.8rem; font-weight: 700; color: #dc2626; margin-top: 2px;">Bitte geben Sie dieses Blatt mit Ihren Lösungen ab.</div>
+                                    </div>
+                                    <div style="font-size: 0.84rem; color: #334155;">
+                                        <span>Name, Vorname: <span style="display: inline-block; width: 140px; border-bottom: 1px solid #475569;">&nbsp;</span></span>
+                                        <span style="margin-left: 12px;">Klasse: <span style="display: inline-block; width: 60px; border-bottom: 1px solid #475569;">&nbsp;</span></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="att-spec-table-wrap">
+                                <table class="att-spec-table" style="font-size: 0.8rem;">
+                                    <thead>
+                                        <tr style="background: #f1f5f9; text-align: center;">
+                                            <th rowspan="2" style="width: 28%; vertical-align: middle;">Kalkulationsposition</th>
+                                            <th colspan="2" style="width: 24%;">AZOS AP-42</th>
+                                            <th colspan="2" style="width: 24%;">Getnear AP-08</th>
+                                            <th colspan="2" style="width: 24%;">ELink AP-15</th>
+                                        </tr>
+                                        <tr style="background: #f8fafc; text-align: center;">
+                                            <th style="width: 8%;">%</th><th style="width: 16%;">€</th>
+                                            <th style="width: 8%;">%</th><th style="width: 16%;">€</th>
+                                            <th style="width: 8%;">%</th><th style="width: 16%;">€</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td style="font-weight: 700;">Listenpreis (pro Stück)</td>
+                                            <td style="text-align: center;">&ndash;</td><td style="text-align: right; font-family: monospace;">178,31 €</td>
+                                            <td style="text-align: center;">&ndash;</td><td style="text-align: right; font-family: monospace;">221,73 €</td>
+                                            <td style="text-align: center;">&ndash;</td><td style="text-align: right; font-family: monospace;">237,18 €</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="font-weight: 700;">Listenpreis (Gesamt 10 Stk.)</td>
+                                            <td style="text-align: center;">100%</td><td style="text-align: right; font-family: monospace; ${isSol ? 'background: #f0fdf4; font-weight:700;' : ''}">${isSol ? '1.783,10 €' : '<input type="text" style="width:68px; text-align:right;" placeholder="1783,10">'}</td>
+                                            <td style="text-align: center;">100%</td><td style="text-align: right; font-family: monospace; ${isSol ? 'background: #f0fdf4; font-weight:700;' : ''}">${isSol ? '2.217,30 €' : '<input type="text" style="width:68px; text-align:right;" placeholder="2217,30">'}</td>
+                                            <td style="text-align: center;">100%</td><td style="text-align: right; font-family: monospace; ${isSol ? 'background: #f0fdf4; font-weight:700;' : ''}">${isSol ? '2.371,80 €' : '<input type="text" style="width:68px; text-align:right;" placeholder="2371,80">'}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>&ndash; Lieferrabatt</td>
+                                            <td style="text-align: center;">10%</td><td style="text-align: right; font-family: monospace; ${isSol ? 'background: #f0fdf4;' : ''}">${isSol ? '178,31 €' : '<input type="text" style="width:68px; text-align:right;">'}</td>
+                                            <td style="text-align: center;">15%</td><td style="text-align: right; font-family: monospace; ${isSol ? 'background: #f0fdf4;' : ''}">${isSol ? '332,60 €' : '<input type="text" style="width:68px; text-align:right;">'}</td>
+                                            <td style="text-align: center;">20%</td><td style="text-align: right; font-family: monospace; ${isSol ? 'background: #f0fdf4;' : ''}">${isSol ? '474,36 €' : '<input type="text" style="width:68px; text-align:right;">'}</td>
+                                        </tr>
+                                        <tr style="background: #fafafa; font-weight: 700;">
+                                            <td>= Zieleinkaufspreis</td>
+                                            <td style="text-align: center;">90%</td><td style="text-align: right; font-family: monospace; ${isSol ? 'background: #f0fdf4;' : ''}">${isSol ? '1.604,79 €' : '<input type="text" style="width:68px; text-align:right;">'}</td>
+                                            <td style="text-align: center;">85%</td><td style="text-align: right; font-family: monospace; ${isSol ? 'background: #f0fdf4;' : ''}">${isSol ? '1.884,70 €' : '<input type="text" style="width:68px; text-align:right;">'}</td>
+                                            <td style="text-align: center;">80%</td><td style="text-align: right; font-family: monospace; ${isSol ? 'background: #f0fdf4;' : ''}">${isSol ? '1.897,44 €' : '<input type="text" style="width:68px; text-align:right;">'}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>&ndash; Lieferskonti</td>
+                                            <td style="text-align: center;">2%</td><td style="text-align: right; font-family: monospace; ${isSol ? 'background: #f0fdf4;' : ''}">${isSol ? '32,10 €' : '<input type="text" style="width:68px; text-align:right;">'}</td>
+                                            <td style="text-align: center;">3%</td><td style="text-align: right; font-family: monospace; ${isSol ? 'background: #f0fdf4;' : ''}">${isSol ? '56,54 €' : '<input type="text" style="width:68px; text-align:right;">'}</td>
+                                            <td style="text-align: center;">2%</td><td style="text-align: right; font-family: monospace; ${isSol ? 'background: #f0fdf4;' : ''}">${isSol ? '37,95 €' : '<input type="text" style="width:68px; text-align:right;">'}</td>
+                                        </tr>
+                                        <tr style="background: #fafafa; font-weight: 700;">
+                                            <td>= Bareinkaufspreis</td>
+                                            <td style="text-align: center;">98%</td><td style="text-align: right; font-family: monospace; ${isSol ? 'background: #f0fdf4;' : ''}">${isSol ? '1.572,69 €' : '<input type="text" style="width:68px; text-align:right;">'}</td>
+                                            <td style="text-align: center;">97%</td><td style="text-align: right; font-family: monospace; ${isSol ? 'background: #f0fdf4;' : ''}">${isSol ? '1.828,16 €' : '<input type="text" style="width:68px; text-align:right;">'}</td>
+                                            <td style="text-align: center;">98%</td><td style="text-align: right; font-family: monospace; ${isSol ? 'background: #f0fdf4;' : ''}">${isSol ? '1.859,49 €' : '<input type="text" style="width:68px; text-align:right;">'}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>+ Bezugskosten</td>
+                                            <td style="text-align: center;">&ndash;</td><td style="text-align: right; font-family: monospace;">25,00 €</td>
+                                            <td style="text-align: center;">&ndash;</td><td style="text-align: right; font-family: monospace;">0,00 €</td>
+                                            <td style="text-align: center;">&ndash;</td><td style="text-align: right; font-family: monospace;">35,00 €</td>
+                                        </tr>
+                                        <tr style="background: #eff6ff; font-weight: 800; border-top: 2px solid #0f172a; border-bottom: 2px solid #0f172a;">
+                                            <td style="color: #1e3a8a;">= Einstandspreis (Gesamt)</td>
+                                            <td style="text-align: center;">&ndash;</td><td style="text-align: right; font-family: monospace; color: #166534; font-size: 0.9rem;">${isSol ? '1.597,69 €' : '<input type="text" style="width:72px; text-align:right; font-weight:bold;">'}</td>
+                                            <td style="text-align: center;">&ndash;</td><td style="text-align: right; font-family: monospace; color: #1e3a8a; font-size: 0.9rem;">${isSol ? '1.828,16 €' : '<input type="text" style="width:72px; text-align:right; font-weight:bold;">'}</td>
+                                            <td style="text-align: center;">&ndash;</td><td style="text-align: right; font-family: monospace; color: #1e3a8a; font-size: 0.9rem;">${isSol ? '1.894,49 €' : '<input type="text" style="width:72px; text-align:right; font-weight:bold;">'}</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="font-weight: 700; color: #475569;">= Einstandspreis (pro Stück)</td>
+                                            <td style="text-align: center;">&ndash;</td><td style="text-align: right; font-family: monospace; font-weight: 700;">${isSol ? '159,77 €' : '<input type="text" style="width:68px; text-align:right;">'}</td>
+                                            <td style="text-align: center;">&ndash;</td><td style="text-align: right; font-family: monospace; font-weight: 700;">${isSol ? '182,82 €' : '<input type="text" style="width:68px; text-align:right;">'}</td>
+                                            <td style="text-align: center;">&ndash;</td><td style="text-align: right; font-family: monospace; font-weight: 700;">${isSol ? '189,45 €' : '<input type="text" style="width:68px; text-align:right;">'}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        ` : ''}
+
+                        ${activeTab === "a5_nwa" ? `
+                            <!-- OFFIZIELLER KOPF ANLAGE 5 -->
+                            <div style="border-bottom: 2px solid #0f172a; padding-bottom: 8px; margin-bottom: 1rem;">
+                                <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 8px;">
+                                    <div>
+                                        <div style="font-weight: 800; font-size: 1.1rem; color: #0f172a;">Anlage 5 &bull; Nutzwertanalyse</div>
+                                        <div style="font-size: 0.8rem; font-weight: 700; color: #dc2626; margin-top: 2px;">Bitte geben Sie dieses Blatt mit Ihren Lösungen ab.</div>
+                                    </div>
+                                    <div style="font-size: 0.84rem; color: #334155;">
+                                        <span>Name, Vorname: <span style="display: inline-block; width: 140px; border-bottom: 1px solid #475569;">&nbsp;</span></span>
+                                        <span style="margin-left: 12px;">Klasse: <span style="display: inline-block; width: 60px; border-bottom: 1px solid #475569;">&nbsp;</span></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="att-spec-table-wrap">
+                                <table class="att-spec-table" style="font-size: 0.8rem;">
+                                    <thead>
+                                        <tr style="background: #f1f5f9; text-align: center;">
+                                            <th rowspan="2" style="width: 26%; vertical-align: middle;">Entscheidungskriterien</th>
+                                            <th rowspan="2" style="width: 14%; vertical-align: middle;">Gewichtung</th>
+                                            <th colspan="2" style="width: 20%;">AZOS AP-42</th>
+                                            <th colspan="2" style="width: 20%;">Getnear AP-08</th>
+                                            <th colspan="2" style="width: 20%;">ELink AP-15</th>
+                                        </tr>
+                                        <tr style="background: #f8fafc; text-align: center;">
+                                            <th>Punkte</th><th>gew. Pkt</th>
+                                            <th>Punkte</th><th>gew. Pkt</th>
+                                            <th>Punkte</th><th>gew. Pkt</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td style="font-weight: 700;">Übertragungsrate</td>
+                                            <td style="text-align: center; font-weight: 700;">40</td>
+                                            <td style="text-align: center;">${isSol ? '10' : '<input type="text" style="width:28px; text-align:center;">'}</td>
+                                            <td style="text-align: center; font-weight: 700; ${isSol ? 'background: #f0fdf4;' : ''}">${isSol ? '400' : '<input type="text" style="width:34px; text-align:center;">'}</td>
+                                            <td style="text-align: center;">${isSol ? '7' : '<input type="text" style="width:28px; text-align:center;">'}</td>
+                                            <td style="text-align: center; font-weight: 700; ${isSol ? 'background: #f0fdf4;' : ''}">${isSol ? '280' : '<input type="text" style="width:34px; text-align:center;">'}</td>
+                                            <td style="text-align: center;">${isSol ? '3' : '<input type="text" style="width:28px; text-align:center;">'}</td>
+                                            <td style="text-align: center; font-weight: 700; ${isSol ? 'background: #f0fdf4;' : ''}">${isSol ? '120' : '<input type="text" style="width:34px; text-align:center;">'}</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="font-weight: 700;">Sicherheit</td>
+                                            <td style="text-align: center; font-weight: 700;">30</td>
+                                            <td style="text-align: center;">${isSol ? '10' : '<input type="text" style="width:28px; text-align:center;">'}</td>
+                                            <td style="text-align: center; font-weight: 700; ${isSol ? 'background: #f0fdf4;' : ''}">${isSol ? '300' : '<input type="text" style="width:34px; text-align:center;">'}</td>
+                                            <td style="text-align: center;">${isSol ? '5' : '<input type="text" style="width:28px; text-align:center;">'}</td>
+                                            <td style="text-align: center; font-weight: 700; ${isSol ? 'background: #f0fdf4;' : ''}">${isSol ? '150' : '<input type="text" style="width:34px; text-align:center;">'}</td>
+                                            <td style="text-align: center;">${isSol ? '10' : '<input type="text" style="width:28px; text-align:center;">'}</td>
+                                            <td style="text-align: center; font-weight: 700; ${isSol ? 'background: #f0fdf4;' : ''}">${isSol ? '300' : '<input type="text" style="width:34px; text-align:center;">'}</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="font-weight: 700;">Leistungsaufnahme</td>
+                                            <td style="text-align: center; font-weight: 700;">5</td>
+                                            <td style="text-align: center;">${isSol ? '10' : '<input type="text" style="width:28px; text-align:center;">'}</td>
+                                            <td style="text-align: center; font-weight: 700; ${isSol ? 'background: #f0fdf4;' : ''}">${isSol ? '50' : '<input type="text" style="width:34px; text-align:center;">'}</td>
+                                            <td style="text-align: center;">${isSol ? '5' : '<input type="text" style="width:28px; text-align:center;">'}</td>
+                                            <td style="text-align: center; font-weight: 700; ${isSol ? 'background: #f0fdf4;' : ''}">${isSol ? '25' : '<input type="text" style="width:34px; text-align:center;">'}</td>
+                                            <td style="text-align: center;">${isSol ? '8' : '<input type="text" style="width:28px; text-align:center;">'}</td>
+                                            <td style="text-align: center; font-weight: 700; ${isSol ? 'background: #f0fdf4;' : ''}">${isSol ? '40' : '<input type="text" style="width:34px; text-align:center;">'}</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="font-weight: 700;">Betriebsdauer</td>
+                                            <td style="text-align: center; font-weight: 700;">20</td>
+                                            <td style="text-align: center;">${isSol ? '10' : '<input type="text" style="width:28px; text-align:center;">'}</td>
+                                            <td style="text-align: center; font-weight: 700; ${isSol ? 'background: #f0fdf4;' : ''}">${isSol ? '200' : '<input type="text" style="width:34px; text-align:center;">'}</td>
+                                            <td style="text-align: center;">${isSol ? '7' : '<input type="text" style="width:28px; text-align:center;">'}</td>
+                                            <td style="text-align: center; font-weight: 700; ${isSol ? 'background: #f0fdf4;' : ''}">${isSol ? '140' : '<input type="text" style="width:34px; text-align:center;">'}</td>
+                                            <td style="text-align: center;">${isSol ? '5' : '<input type="text" style="width:28px; text-align:center;">'}</td>
+                                            <td style="text-align: center; font-weight: 700; ${isSol ? 'background: #f0fdf4;' : ''}">${isSol ? '100' : '<input type="text" style="width:34px; text-align:center;">'}</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="font-weight: 700;">Garantie</td>
+                                            <td style="text-align: center; font-weight: 700;">5</td>
+                                            <td style="text-align: center;">${isSol ? '10' : '<input type="text" style="width:28px; text-align:center;">'}</td>
+                                            <td style="text-align: center; font-weight: 700; ${isSol ? 'background: #f0fdf4;' : ''}">${isSol ? '50' : '<input type="text" style="width:34px; text-align:center;">'}</td>
+                                            <td style="text-align: center;">${isSol ? '5' : '<input type="text" style="width:28px; text-align:center;">'}</td>
+                                            <td style="text-align: center; font-weight: 700; ${isSol ? 'background: #f0fdf4;' : ''}">${isSol ? '25' : '<input type="text" style="width:34px; text-align:center;">'}</td>
+                                            <td style="text-align: center;">${isSol ? '5' : '<input type="text" style="width:28px; text-align:center;">'}</td>
+                                            <td style="text-align: center; font-weight: 700; ${isSol ? 'background: #f0fdf4;' : ''}">${isSol ? '25' : '<input type="text" style="width:34px; text-align:center;">'}</td>
+                                        </tr>
+                                        <tr style="background: #eff6ff; font-weight: 800; border-top: 2px solid #0f172a; border-bottom: 2px solid #0f172a;">
+                                            <td>Punktesumme</td>
+                                            <td style="text-align: center;">100</td>
+                                            <td style="background: #e2e8f0;">&ndash;</td>
+                                            <td style="text-align: center; font-size: 0.95rem; color: #166534; font-weight: 800; background: #dcfce7;">
+                                                ${isSol ? '1000' : '<input type="text" style="width:45px; text-align:center; font-weight:bold;">'}
+                                            </td>
+                                            <td style="background: #e2e8f0;">&ndash;</td>
+                                            <td style="text-align: center; font-size: 0.95rem; color: #1e3a8a; font-weight: 800;">
+                                                ${isSol ? '620' : '<input type="text" style="width:45px; text-align:center; font-weight:bold;">'}
+                                            </td>
+                                            <td style="background: #e2e8f0;">&ndash;</td>
+                                            <td style="text-align: center; font-size: 0.95rem; color: #1e3a8a; font-weight: 800;">
+                                                ${isSol ? '585' : '<input type="text" style="width:45px; text-align:center; font-weight:bold;">'}
+                                            </td>
+                                        </tr>
+                                        <tr style="font-weight: 800;">
+                                            <td>Rangfolge</td>
+                                            <td style="background: #e2e8f0;">&ndash;</td>
+                                            <td colspan="2" style="text-align: center; font-size: 1rem; color: #166534; background: #f0fdf4;">
+                                                ${isSol ? '1 (Sieger)' : 'Rang <input type="text" style="width:25px; text-align:center;">'}
+                                            </td>
+                                            <td colspan="2" style="text-align: center; font-size: 1rem; color: #475569;">
+                                                ${isSol ? '2' : 'Rang <input type="text" style="width:25px; text-align:center;">'}
+                                            </td>
+                                            <td colspan="2" style="text-align: center; font-size: 1rem; color: #475569;">
+                                                ${isSol ? '3' : 'Rang <input type="text" style="width:25px; text-align:center;">'}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        ` : ''}
+
+                    </div>
+                </div>
+            `;
+        }
+
+        return "";
     },
 
     // =========================================================================
@@ -979,50 +1762,106 @@ const ExamAttachments = {
     renderGenericAttachments: function(exam, pageIndex) {
         const titleStr = exam.title || "";
         const examNum = titleStr.split(':')[0] || "Prüfung";
+        const isSol = this.displayMode === "solution";
+        const currentTask = (exam.tasks && exam.tasks[pageIndex - 1]) ? exam.tasks[pageIndex - 1] : null;
+        const taskTitle = currentTask ? currentTask.title : `Aufgabe ${pageIndex}`;
 
         return `
             <div class="attachment-sheet">
                 <div class="attachment-header">
-                    <span>${escapeHtml(examNum)} &bull; Aufgaben-Anlageblatt</span>
-                    <span class="attachment-tag">Szenario &amp; Technische Referenz</span>
-                    <button class="att-close-btn" onclick="closeAttachmentPane()" title="Anlageblatt schließen (X)"><i class="fa-solid fa-xmark"></i></button>
+                    <span>${escapeHtml(examNum)} &bull; Anlageblatt zu Aufgabe ${pageIndex}</span>
+                    <div style="display: flex; gap: 4px; align-items: center; flex-wrap: wrap;">
+                        <button type="button" class="ihk-sol-toggle-btn ${isSol ? 'active' : ''}" onclick="ExamAttachments.setMode(ExamAttachments.displayMode === 'solution' ? 'info' : 'solution')" title="Amtliche IHK-Musterlösung einblenden">
+                            <i class="fa-solid fa-award"></i> 💡 IHK-Lösung
+                        </button>
+                        <button class="att-close-btn" onclick="closeAttachmentPane()" title="Anlageblatt schließen (X)"><i class="fa-solid fa-xmark"></i></button>
+                    </div>
                 </div>
                 <div class="attachment-body">
                     
                     <!-- 1. AUTHENTISCHES SZENARIO & KUNDENPROFIL -->
                     <div class="attachment-doc-title">
-                        <i class="fa-solid fa-building" style="color: #4f46e5;"></i> Ausgangssituation &amp; Kundenprofil
+                        <i class="fa-solid fa-building" style="color: #4f46e5;"></i> Ausgangssituation &amp; Projektkontext
                     </div>
                     <div style="background: #eff6ff; border-left: 3px solid #3b82f6; border-radius: 6px; padding: 0.85rem 1rem; font-size: 0.88rem; color: #1e3a8a; line-height: 1.5; margin-bottom: 1.25rem;">
-                        ${escapeHtml(exam.ausgangssituation || 'Das Systemhaus plant und implementiert die IT-Infrastruktur für den Kunden.')}
+                        ${escapeHtml(exam.ausgangssituation || 'Das IT-Systemhaus plant und implementiert die IT-Infrastruktur für den Kunden.')}
                     </div>
 
-                    <!-- 2. ANLAGEN-DATENBLATT FÜR DIE AKTUELLE AUFGABE -->
-                    <div class="attachment-doc-title">
-                        <i class="fa-solid fa-clipboard-list" style="color: #0284c7;"></i> Technische Parameter &amp; Vorgaben zu Aufgabe ${pageIndex}
-                    </div>
+                    <!-- 2. ANLAGEN-DOKUMENT NACH THEMENBEREICH DER AUFGABE -->
+                    ${pageIndex === 1 ? `
+                        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #0f172a; padding-bottom: 6px; margin-bottom: 1rem;">
+                            <div style="font-weight: 800; font-size: 1.05rem; color: #0f172a;">Anlage 1 &bull; Lastenheft &amp; Software-Spezifikation</div>
+                            <span style="font-size: 0.8rem; background: #e0e7ff; color: #3730a3; padding: 2px 8px; border-radius: 4px; font-weight: 700;">Konzeption &amp; Usability</span>
+                        </div>
+                        <div style="background: #f8fafc; border: 1.5px solid #cbd5e1; border-radius: 8px; padding: 1rem; font-size: 0.86rem; color: #1e293b; line-height: 1.5; margin-bottom: 1rem;">
+                            <strong>Auszug aus dem Pflichtenheft zu ${escapeHtml(taskTitle)}:</strong><br>
+                            &bull; <strong>Usability &amp; Ergonomie (DIN EN ISO 9241-110):</strong> Aufgabenangemessenheit, Selbstbeschreibungsfähigkeit, Erwartungskonformität, Fehlertoleranz und Steuerbarkeit.<br>
+                            &bull; <strong>SMART-Kriterien für Projektziele:</strong> Spezifisch (präzise formuliert), Messbar (Kennzahl vorhanden), Akzeptiert/Attraktiv, Realistisch (im Zeit-/Budgetrahmen) und Terminiert (fester Endtermin).<br>
+                            &bull; <strong>UML-Modellierung:</strong> Use-Case-Diagramme zur Abgrenzung der Systemgrenze und Definition der Benutzer-Interaktionen (&laquo;include&raquo; = verpflichtend integriert, &laquo;extend&raquo; = optionale Erweiterung unter Bedingung).
+                        </div>
+                    ` : ''}
 
-                    <div style="border: 1.5px solid #cbd5e1; border-radius: 8px; overflow: hidden; margin-bottom: 1.25rem; background: #ffffff;">
-                        <div style="background: #f8fafc; padding: 6px 12px; border-bottom: 1px solid #e2e8f0; font-weight: 700; font-size: 0.84rem; color: #334155;">
-                            IHK-Prüfungsstandards &bull; Formelsammlung &amp; Berechnungsregeln:
+                    ${pageIndex === 2 ? `
+                        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #0f172a; padding-bottom: 6px; margin-bottom: 1rem;">
+                            <div style="font-weight: 800; font-size: 1.05rem; color: #0f172a;">Anlage 2 &bull; Netzwerk-Infrastruktur &amp; Adressierung</div>
+                            <span style="font-size: 0.8rem; background: #dbeafe; color: #1e40af; padding: 2px 8px; border-radius: 4px; font-weight: 700;">IPv4 / IPv6 / VLAN</span>
                         </div>
-                        <div style="padding: 0.85rem; font-size: 0.85rem; line-height: 1.5; color: #1e293b;">
-                            <div style="margin-bottom: 8px;">
-                                <strong>&bull; Handelskalkulation (Vorwärtskalkulation):</strong><br>
-                                Listeneinkaufspreis (LEP) &ndash; Lieferrabatt = Zieleinkaufspreis (ZEP) &ndash; Lieferskonto = Bareinkaufspreis (BEP) + Bezugskosten = Bezugspreis (Einstandspreis) + Handlungskostenzuschlag (HKZ) = Selbstkostenpreis (SKP) + Gewinnzuschlag = Barverkaufspreis (BVP) + Kundenskonto = Zielverkaufspreis (ZVP) + Kundenrabatt = Netto-Listenverkaufspreis (LVP) + 19% USt = Brutto-Verkaufspreis.
-                            </div>
-                            <div style="margin-bottom: 8px;">
-                                <strong>&bull; IPv4-Subnetting &amp; Hostformel:</strong><br>
-                                Nutzbare Hosts = 2<sup>(32 &ndash; CIDR)</sup> &ndash; 2 (Netzwerk- und Broadcast-Adresse abgezogen).<br>
-                                /24 = 254 Hosts &bull; /25 = 126 Hosts &bull; /26 = 62 Hosts &bull; /27 = 30 Hosts &bull; /28 = 14 Hosts &bull; /29 = 6 Hosts &bull; /30 = 2 Hosts.
-                            </div>
-                            <div>
-                                <strong>&bull; Speicher- &amp; Übertragungsberechnung:</strong><br>
-                                1 Byte = 8 Bit &bull; 1 MB = 1.000 KB = 8.000 Kbit &bull; 1 MiB = 1.024 KiB = 1.048.576 Byte.<br>
-                                Übertragungszeit <em>t</em> = Datenmenge (in Bit) / Bandbreite (in Bit/s).
+                        <div class="att-spec-table-wrap" style="margin-bottom: 1rem;">
+                            <table class="att-spec-table" style="font-size: 0.82rem;">
+                                <thead>
+                                    <tr style="background: #f1f5f9;">
+                                        <th>CIDR-Präfix</th>
+                                        <th>Subnetzmaske (Dotted Decimal)</th>
+                                        <th>Host-Bits</th>
+                                        <th>Max. nutzbare Hosts</th>
+                                        <th>Typischer Verwendungszweck</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>/24</td><td>255.255.255.0</td><td>8</td><td>254</td><td>Standard-Büronetz / Großes LAN</td></tr>
+                                    <tr><td>/25</td><td>255.255.255.128</td><td>7</td><td>126</td><td>Abteilungsnetzwerk (z. B. Entwicklung)</td></tr>
+                                    <tr><td>/26</td><td>255.255.255.192</td><td>6</td><td>62</td><td>WLAN-Subnetz (Mitarbeiter / Gäste)</td></tr>
+                                    <tr><td>/27</td><td>255.255.255.224</td><td>5</td><td>30</td><td>Etagen-Netz / Labornetz</td></tr>
+                                    <tr><td>/28</td><td>255.255.255.240</td><td>4</td><td>14</td><td>Serverfarm / DMZ-Segment</td></tr>
+                                    <tr><td>/29</td><td>255.255.255.248</td><td>3</td><td>6</td><td>Management-Netzwerk (Switch/Router)</td></tr>
+                                    <tr><td>/30</td><td>255.255.255.252</td><td>2</td><td>2</td><td>Point-to-Point / Router-Transfernetz</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    ` : ''}
+
+                    ${pageIndex === 3 ? `
+                        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #0f172a; padding-bottom: 6px; margin-bottom: 1rem;">
+                            <div style="font-weight: 800; font-size: 1.05rem; color: #0f172a;">Anlage 3 &bull; Kaufmännische Handelskalkulation &amp; NWA</div>
+                            <span style="font-size: 0.8rem; background: #fef3c7; color: #92400e; padding: 2px 8px; border-radius: 4px; font-weight: 700;">Wirtschaftlichkeit</span>
+                        </div>
+                        <div style="background: #f8fafc; border: 1.5px solid #cbd5e1; border-radius: 8px; padding: 1rem; font-size: 0.85rem; line-height: 1.5; color: #1e293b; margin-bottom: 1rem;">
+                            <strong>Kaufmännisches Kalkulationsschema (Vorwärtskalkulation):</strong>
+                            <div style="margin-top: 6px; font-family: monospace; font-size: 0.86rem; background: #ffffff; padding: 8px 12px; border: 1px solid #e2e8f0; border-radius: 4px; line-height: 1.6;">
+                                &nbsp;&nbsp;Listeneinkaufspreis (LEP) netto<br>
+                                &ndash; Lieferrabatt (in % vom LEP)<br>
+                                = <strong>Zieleinkaufspreis (ZEP)</strong><br>
+                                &ndash; Lieferskonto (in % vom ZEP)<br>
+                                = <strong>Bareinkaufspreis (BEP)</strong><br>
+                                + Bezugskosten (Fracht, Verpackung, Rollgeld, Versicherung)<br>
+                                = <strong>Bezugspreis (Einstandspreis)</strong>
                             </div>
                         </div>
-                    </div>
+                    ` : ''}
+
+                    ${pageIndex >= 4 ? `
+                        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #0f172a; padding-bottom: 6px; margin-bottom: 1rem;">
+                            <div style="font-weight: 800; font-size: 1.05rem; color: #0f172a;">Anlage 4 &bull; Relationale Datenmodelle &amp; IT-Sicherheit</div>
+                            <span style="font-size: 0.8rem; background: #f0fdf4; color: #166534; padding: 2px 8px; border-radius: 4px; font-weight: 700;">3. Normalform &amp; DSGVO</span>
+                        </div>
+                        <div style="background: #f8fafc; border: 1.5px solid #cbd5e1; border-radius: 8px; padding: 1rem; font-size: 0.86rem; color: #1e293b; line-height: 1.5; margin-bottom: 1rem;">
+                            <strong>Regeln zur Normalisierung relationaler Datenbanken:</strong><br>
+                            &bull; <strong>1. Normalform (1NF):</strong> Alle Attribute sind atomar (unteilbar). Keine Wiederholungsgruppen.<br>
+                            &bull; <strong>2. Normalform (2NF):</strong> Befindet sich in 1NF und jedes Nicht-Schlüsselattribut ist voll funktional abhängig vom Primärschlüssel (keine Teilabhängigkeiten von zusammengesetzten Primärschlüsseln).<br>
+                            &bull; <strong>3. Normalform (3NF):</strong> Befindet sich in 2NF und es existieren keine transitiven Abhängigkeiten (kein Nicht-Schlüsselattribut hängt von einem anderen Nicht-Schlüsselattribut ab).<br><br>
+                            &bull; <strong>Referenzielle Integrität:</strong> Fremdschlüssel dürfen nur Werte annehmen, die als Primärschlüssel in der referenzierten Elterntabelle existieren (Verhinderung von Waisen-Datensätzen).
+                        </div>
+                    ` : ''}
 
                     <!-- 3. BEWERTUNGS- & DOKUMENTATIONSHINWEISE -->
                     <div style="background: #fefce8; border: 1.5px solid #fde047; border-radius: 8px; padding: 0.85rem; font-size: 0.85rem; color: #854d0e; line-height: 1.5;">

@@ -7192,6 +7192,385 @@ Ermitteln Sie die beiden Tabellen tblUserAccount und tblLogEntry auf dem Vorgabe
             }
         ]
     },
+    {
+        id: "exam_24",
+        title: "Prüfung 24: Original IHK AP1 – Solaranlagen-Planer & WLAN-Infrastruktur (Anlagen 2 bis 6)",
+        badge: "100 Punkte • 90 Min.",
+        subtitle: "Abschlussprüfung Teil 1 • IT-Berufe • Photovoltaik & IT-Infrastruktur GmbH",
+        ausgangssituation: "Sie sind Mitarbeiter im IT-Systemhaus. Ihr Kunde, die SolarTech & EcoPower GmbH, vertreibt und plant Photovoltaikanlagen für private und gewerbliche Gebäude. Für die Kundenberatung und Angebotserstellung wird eine neue modulare Softwarearchitektur konzipiert (Anlage 2). Gleichzeitig soll das Firmengebäude mit einem modernen, performanten WLAN sowie segmentierten Netzen für Verwaltung, Server, Gäste und VPN ausgestattet werden. Sie führen die Subnetzplanung nach VLSM für 7 Teilnetze durch (Anlage 3), berechnen die Einkaufskonditionen im Rahmen einer Handelskalkulation (Anlage 4) und ermitteln anhand technischer Gerätedatenblätter (Anlage 6) im Rahmen einer Nutzwertanalyse (Anlage 5) das optimale Access-Point-Modell.",
+        tasks: [
+            // Aufgabe 1: IT 1 Softwarearchitektur, OOP & Klassenmodellierung (30 Punkte)
+            {
+                number: 1,
+                title: "1. Aufgabe: IT 1 – Softwarearchitektur, OOP & Klassenmodellierung (30 Punkte)",
+                totalPoints: 30,
+                subtasks: [
+                    {
+                        id: "24_1_a",
+                        label: "1.1 Beziehungen im UML-Klassendiagramm analysieren & modellieren",
+                        points: 10,
+                        type: "lines",
+                        linesCount: 8,
+                        stencil: "UML-KLASSENMODELL / BEZIEHUNGEN & VERERBUNG",
+                        text: `Analysieren Sie die vorgegebene Klassenbeschreibung in Anlage 2 (rechtes Fenster).
+a) Erläutern Sie die Beziehung zwischen der Klasse 'Angebot' und der Klasse 'Bestellposition'. Handelt es sich um eine Assoziation, Aggregation oder Komposition? Begründen Sie Ihre Entscheidung und nennen Sie die Multiplizitäten (Kardinalitäten) an beiden Enden (4 Punkte).
+b) Die Klasse 'Komponente' ist als 'abstract' gekennzeichnet. Erklären Sie die fachliche und programmiertechnische Bedeutung einer abstrakten Klasse und warum konkrete Solarmodule oder Wechselrichter von dieser Klasse erben sollten (4 Punkte).
+c) Nennen Sie die Zugriffsmodifizierer (Sichtbarkeiten) der Attribute und Konstruktoren in Anlage 2 (+ und -) und begründen Sie das Prinzip der Datenkapselung (2 Punkte).`,
+                        solution: `Musterlösung nach IHK-Bewertungsmaßstab:
+a) Beziehung 'Angebot' und 'Bestellposition':
+• Art der Beziehung: Komposition (strenge existenzabhängige Aggregation). Eine 'Bestellposition' hat ohne ein konkretes übergeordnetes 'Angebot' keinen fachlichen Bestand. Wird das Angebot gelöscht, erlöschen auch die darin enthaltenen Bestellpositionen.
+• Multiplizitäten: Ein Angebot umfasst 0..* (bzw. 1..*) Bestellpositionen. Jede Bestellposition gehört zu genau 1 Angebot (1 : 1..*).
+
+b) Abstrakte Klasse 'Komponente':
+• Eine abstrakte Klasse kann nicht direkt instanziiert werden (new Komponente() ist unzulässig).
+• Sie dient als Vererbungsschablone, die gemeinsame Merkmale (-id: int, -preis: double) und Methoden (+ToString()) für alle Hardware-Bauteile (Solarmodule, Speicher, Wechselrichter) bündelt.
+• Dies ermöglicht Polymorphie: Eine Bestellposition kann jede beliebige Subklasse von 'Komponente' typsicher aufnehmen.
+
+c) Sichtbarkeiten & Kapselung:
+• '-' bedeutet private: Direkter externer Zugriff auf Objektattribute ist gesperrt.
+• '+' bedeutet public: Konstruktoren und Schnittstellenmethoden sind frei aufrufbar.
+• Das Kapselungsprinzip (Information Hiding) schützt Daten vor versehentlicher Fehlmanipulation und entkoppelt Schnittstellen von der internen Implementierung.`
+                    },
+                    {
+                        id: "24_1_b",
+                        label: "1.2 Datenimport-Konzept (XML vs. CSV) & Entwurfsmuster",
+                        points: 10,
+                        type: "lines",
+                        linesCount: 7,
+                        stencil: "DATENIMPORT-KONZEPT (XML / CSV)",
+                        text: `Laut Anlage 2 existieren zwei Klassen zum Einlesen von Kundendaten: 'XmlAnfrage' und 'CsvAnfrage'.
+a) Vergleichen Sie die beiden Datenformate XML und CSV anhand von zwei technischen Kriterien (Strukturierung, Lesbarkeit, Overhead/Dateigröße) (4 Punkte).
+b) Welches Entwurfsmuster (Design Pattern) aus der Softwareentwicklung eignet sich optimal, um je nach Dateiendung (.xml oder .csv) zur Laufzeit das passende Anfrage-Objekt zu erzeugen? Begründen Sie Ihre Wahl (4 Punkte).
+c) Welche Ausnahmebehandlung (Exception Handling) muss im Konstruktor zwingend implementiert werden, falls die Datei am übergebenen Pfad nicht existiert oder fehlerhaft formatiert ist? (2 Punkte)`,
+                        solution: `Musterlösung:
+a) Vergleich XML vs. CSV:
+• Strukturierung / Hierarchie: XML unterstützt komplexe hierarchische Baumstrukturen und Datentyp-Validierung via XSD. CSV ist rein flach und zeilenbasiert ohne native Baumstruktur.
+• Dateigröße / Overhead: CSV ist hochkompakt und besitzt minimalen Overhead. XML erzeugt durch öffnende/schließende Tags signifikant mehr Bandbreite und Speicherbedarf.
+
+b) Entwurfsmuster:
+• Factory Pattern (Fabrikmethode / Abstract Factory): Eine zentrale Fabrikmethode prüft den Dateinamen bzw. die Endung und liefert eine Instanz der passenden Klasse (XmlAnfrage oder CsvAnfrage) zurück, ohne dass der Aufrufer die Instanziierungslogik kennen muss.
+
+c) Exception Handling:
+• FileNotFoundException / IOException: Abfangen von nicht existierenden oder gesperrten Dateien.
+• FormatException / XmlException: Abfangen von Syntaxfehlern beim Parsing.
+• Saubere Ressourcenfreigabe über try-with-resources oder try-catch-finally.`
+                    },
+                    {
+                        id: "24_1_c",
+                        label: "1.3 Klasse 'Flaeche' & Dachflächen-Berechnung",
+                        points: 10,
+                        type: "lines",
+                        linesCount: 7,
+                        stencil: "METHODEN-ENTWURF & VALIDIERUNG",
+                        text: `Betrachten Sie die Klasse 'Flaeche' in Anlage 2.
+a) Entwerfen Sie eine Methode 'getFlaecheInQm(): double', die den Flächeninhalt in Quadratmetern berechnet, sowie eine Validierungsprüfung im Konstruktor, die verhindert, dass negative Werte für 'laenge' oder 'breite' übergeben werden (Pseudocode oder Programmiersprache) (6 Punkte).
+b) Ein Solarmodul hat die Abmessungen 1,75 m × 1,05 m. Eine Dachfläche ist 12,0 m lang und 6,5 m breit. Berechnen Sie die maximale Anzahl an Modulen, die montiert werden können, wenn ringsum ein Sicherheitsabstand von 0,5 m zum Dachrand eingehalten werden muss (4 Punkte).`,
+                        solution: `Musterlösung:
+a) Konstruktor-Validierung & Methode:
+public Flaeche(string bezeichnung, double laenge, double breite) {
+    if (laenge <= 0 || breite <= 0) {
+        throw new IllegalArgumentException("Länge und Breite müssen größer als 0 sein!");
+    }
+    this.bezeichnung = bezeichnung;
+    this.laenge = laenge;
+    this.breite = breite;
+}
+
+public double getFlaecheInQm() {
+    return this.laenge * this.breite;
+}
+
+b) Modul-Berechnung:
+• Nutzbare Dachlänge = 12,0 m - (2 × 0,5 m) = 11,0 m
+• Nutzbare Dachbreite = 6,5 m - (2 × 0,5 m) = 5,5 m
+• Option 1 (Längsausrichtung):
+  Anzahl in der Länge: floor(11,0 m / 1,75 m) = floor(6,28) = 6 Module
+  Anzahl in der Breite: floor(5,5 m / 1,05 m) = floor(5,23) = 5 Module
+  Gesamt = 6 × 5 = 30 Module
+
+• Option 2 (Querausrichtung):
+  Anzahl in der Länge: floor(11,0 m / 1,05 m) = floor(10,47) = 10 Module
+  Anzahl in der Breite: floor(5,5 m / 1,75 m) = floor(3,14) = 3 Module
+  Gesamt = 10 × 3 = 30 Module
+
+Ergebnis: Es können maximal 30 Solarmodule auf der Dachfläche platziert werden.`
+                    }
+                ]
+            },
+
+            // Aufgabe 2: IT 2 Netzwerktechnik & VLSM-Subnetting (35 Punkte)
+            {
+                number: 2,
+                title: "2. Aufgabe: IT 2 – Subnetting nach VLSM & Adressierungsplanung (35 Punkte)",
+                totalPoints: 35,
+                subtasks: [
+                    {
+                        id: "24_2_a",
+                        label: "2.1 VLSM-Subnetzplanung für 7 Teilnetze berechnen (Anlage 3)",
+                        points: 25,
+                        type: "table",
+                        stencil: "VLSM SUBNEZ-ADRESSTABELLE (ANLAGE 3)",
+                        text: `Für die Vernetzung des neuen Firmenstandorts der SolarTech & EcoPower GmbH steht das private Klasse-C-Netzwerk 192.168.10.0/24 zur Verfügung.
+Unterteilen Sie dieses Netzwerk unter Verwendung von VLSM (Variable Length Subnet Masking) so, dass alle in Anlage 3 geforderten 7 Teilnetze mit der jeweils minimal notwendigen Host-Kapazität bedarfsgerecht versorgt werden.
+Tragen Sie Ihre Lösungen direkt in das offizielle Abgabeblatt Anlage 3 (rechtes Fenster) ein.
+
+Anforderungen laut Anlage 3:
+1. WLAN1: 50 geplante Hosts
+2. WLAN2: 50 geplante Hosts
+3. LAN1: 25 geplante Hosts
+4. LAN2: 25 geplante Hosts
+5. Servernetzwerk: 10 geplante Hosts
+6. Netzwerkmanagement: 10 geplante Hosts
+7. VPN Transfernetzwerk: 2 geplante Hosts (Point-to-Point)
+
+Hinweis zur Adressvergabe:
+• Das Standard-Gateway belegt in den LAN/WLAN-Netzen jeweils die ERSTE nutzbare Hostadresse (.1, .65, etc.).
+• Im VPN-Transfernetzwerk erhalten die beiden Router-Schnittstellen die beiden einzigen nutzbaren Adressen.`,
+                        tableConfig: {
+                            headers: ["Netzwerkname", "Zahl Hosts", "Netzwerkadresse", "Subnetzmaske nach CIDR", "IP-Range PCs", "IP-Adresse Standard-Gateway"],
+                            rows: [
+                                ["WLAN1", "50", "192.168.10.0", "/26", "192.168.10.2 - 192.168.10.62", "192.168.10.1"],
+                                ["WLAN2", "50", "192.168.10.64", "/26", "192.168.10.66 - 192.168.10.126", "192.168.10.65"],
+                                ["LAN1", "25", "192.168.10.128", "/27", "192.168.10.130 - 192.168.10.158", "192.168.10.129"],
+                                ["LAN2", "25", "192.168.10.160", "/27", "192.168.10.162 - 192.168.10.190", "192.168.10.161"],
+                                ["Servernetzwerk", "10", "192.168.10.192", "/28", "192.168.10.194 - 192.168.10.206", "192.168.10.193"],
+                                ["Netzwerkmanagement", "10", "192.168.10.208", "/28", "192.168.10.210 - 192.168.10.222", "192.168.10.209"],
+                                ["VPN Transfernetzwerk", "2", "192.168.10.224", "/30", "-", "192.168.10.225 / 192.168.10.226"]
+                            ]
+                        },
+                        solution: `Offizielle Musterlösung für Anlage 3 (VLSM-Subnetztabelle):
+Sortierung absteigend nach Hostbedarf:
+1. WLAN1 (50 Hosts):
+   • Host-Bits: 2^6 - 2 = 62 Hosts >= 50 -> /26 (Schrittweite 64)
+   • Netzadresse: 192.168.10.0
+   • Subnetzmaske CIDR: /26 (255.255.255.192)
+   • IP-Range PCs: 192.168.10.2 bis 192.168.10.62 (wenn GW .1)
+   • Standard-Gateway: 192.168.10.1 (Broadcast: 192.168.10.63)
+
+2. WLAN2 (50 Hosts):
+   • Host-Bits: 2^6 - 2 = 62 Hosts >= 50 -> /26 (Schrittweite 64)
+   • Netzadresse: 192.168.10.64
+   • Subnetzmaske CIDR: /26 (255.255.255.192)
+   • IP-Range PCs: 192.168.10.66 bis 192.168.10.126
+   • Standard-Gateway: 192.168.10.65 (Broadcast: 192.168.10.127)
+
+3. LAN1 (25 Hosts):
+   • Host-Bits: 2^5 - 2 = 30 Hosts >= 25 -> /27 (Schrittweite 32)
+   • Netzadresse: 192.168.10.128
+   • Subnetzmaske CIDR: /27 (255.255.255.224)
+   • IP-Range PCs: 192.168.10.130 bis 192.168.10.158
+   • Standard-Gateway: 192.168.10.129 (Broadcast: 192.168.10.159)
+
+4. LAN2 (25 Hosts):
+   • Host-Bits: 2^5 - 2 = 30 Hosts >= 25 -> /27 (Schrittweite 32)
+   • Netzadresse: 192.168.10.160
+   • Subnetzmaske CIDR: /27 (255.255.255.224)
+   • IP-Range PCs: 192.168.10.162 bis 192.168.10.190
+   • Standard-Gateway: 192.168.10.161 (Broadcast: 192.168.10.191)
+
+5. Servernetzwerk (10 Hosts):
+   • Host-Bits: 2^4 - 2 = 14 Hosts >= 10 -> /28 (Schrittweite 16)
+   • Netzadresse: 192.168.10.192
+   • Subnetzmaske CIDR: /28 (255.255.255.240)
+   • IP-Range PCs: 192.168.10.194 bis 192.168.10.206
+   • Standard-Gateway: 192.168.10.193 (Broadcast: 192.168.10.207)
+
+6. Netzwerkmanagement (10 Hosts):
+   • Host-Bits: 2^4 - 2 = 14 Hosts >= 10 -> /28 (Schrittweite 16)
+   • Netzadresse: 192.168.10.208
+   • Subnetzmaske CIDR: /28 (255.255.255.240)
+   • IP-Range PCs: 192.168.10.210 bis 192.168.10.222
+   • Standard-Gateway: 192.168.10.209 (Broadcast: 192.168.10.223)
+
+7. VPN Transfernetzwerk (2 Hosts):
+   • Host-Bits: 2^2 - 2 = 2 Hosts >= 2 -> /30 (Schrittweite 4)
+   • Netzadresse: 192.168.10.224
+   • Subnetzmaske CIDR: /30 (255.255.255.252)
+   • IP-Range PCs: '-' (reines Router-Transfernetz)
+   • Standard-Gateways: 192.168.10.225 / 192.168.10.226 (Broadcast: 192.168.10.227)`
+                    },
+                    {
+                        id: "24_2_b",
+                        label: "2.2 Netzwerkanalyse & Point-to-Point Begründung",
+                        points: 10,
+                        type: "lines",
+                        linesCount: 6,
+                        stencil: "BEGRÜNDUNG / VLSM-EFFIZIENZ",
+                        text: `Beantworten Sie die folgenden netzwerktechnischen Fragestellungen:
+a) Warum wird für das VPN-Transfernetzwerk eine /30-Subnetzmaske (255.255.255.252) gewählt und wie viele IP-Adressen werden in diesem Subnetz insgesamt reserviert bzw. genutzt? (4 Punkte)
+b) Warum darf die Broadcast-Adresse eines Subnetzes niemals an einen Host vergeben werden? (3 Punkte)
+c) Wie viele IP-Adressen des ursprünglichen /24-Netzes (192.168.10.0/24) sind nach Zuweisung aller 7 Teilnetze noch frei für zukünftige Erweiterungen? Nennen Sie die Startadresse des verbleibenden freien Adressbereichs (3 Punkte).`,
+                        solution: `Musterlösung:
+a) /30-Subnetzmaske:
+• Ein Transfernetzwerk verbindet genau zwei Router-Schnittstellen miteinander.
+• Ein /30-Netz stellt genau 2^(32-30) = 4 Adressen bereit:
+  - 1x Netzadresse (.224)
+  - 2x nutzbare Hostadressen (.225 und .226 für die Router)
+  - 1x Broadcastadresse (.227)
+• Es gibt keine Adressverschwendung.
+
+b) Broadcast-Adresse:
+• Die Broadcast-Adresse dient dazu, alle Stationen innerhalb desselben Subnetzes gleichzeitig mit einem einzigen Datenpaket anzusprechen (z. B. ARP, DHCP).
+• Wäre sie einem einzelnen Gerät fest zugewiesen, würde der Broadcastverkehr gestört und es käme zu IP-Kollisionen.
+
+c) Freier Adressbereich:
+• Belegt sind die Adressen 192.168.10.0 bis 192.168.10.227 (228 Adressen).
+• Frei sind die Adressen von 192.168.10.228 bis 192.168.10.255 (28 freie IP-Adressen). Startadresse: 192.168.10.228.`
+                    }
+                ]
+            },
+
+            // Aufgabe 3: IT 3 Hardwareauswahl, Kalkulation & Nutzwertanalyse (35 Punkte)
+            {
+                number: 3,
+                title: "3. Aufgabe: IT 3 – Hardwareauswahl, Bezugskalkulation & Nutzwertanalyse (35 Punkte)",
+                totalPoints: 35,
+                subtasks: [
+                    {
+                        id: "24_3_a",
+                        label: "3.1 Technische Spezifikationsanalyse der Access Points (Anlage 6)",
+                        points: 10,
+                        type: "lines",
+                        linesCount: 7,
+                        stencil: "TECHNISCHE SPEZIFIKATIONSANALYSE",
+                        text: `Analysieren Sie das Datenblatt der drei Access Points in Anlage 6 (AZOS AP-42, Getnear AP-08, ELink AP-15).
+a) Vergleichen Sie die Wireless-Standards und Übertragungsraten der drei Geräte. Welches Gerät bietet die höchste Gesamtbandbreite und warum ist der Dual-Band-Betrieb (2,4 GHz und 5 GHz gleichzeitig) in einem Firmennetzwerk wichtig? (4 Punkte)
+b) Bewerten Sie die Sicherheitsstandards der drei Access Points. Warum ist WPA3 gegenüber WPA2 zu bevorzugen und welches Gerät erfüllt diese Anforderung nicht? (3 Punkte)
+c) Erläutern Sie die Abkürzung MTBF und deren Bedeutung für die Ausfallsicherheit im Dauerbetrieb (3 Punkte).`,
+                        solution: `Musterlösung:
+a) Wireless-Standards & Übertragungsraten:
+• AZOS AP-42: 575 Mbit/s (2,4 GHz) + 1200 Mbit/s (5 GHz, 802.11ac) = 1.775 Mbit/s Brutto (höchste Gesamtübertragungsrate!).
+• Getnear AP-08: 575 Mbit/s (2,4 GHz) + 867 Mbit/s (5 GHz) = 1.442 Mbit/s Brutto.
+• ELink AP-15: Unterstützt nur das überlaufene 2,4-GHz-Band (802.11b/g/n) mit 575 Mbit/s, kein 5 GHz!
+• Dual-Band-Vorteil: 2,4 GHz bietet gute Reichweite und Durchdringung. 5 GHz bietet hohe Kanalbreiten und störungsfreien Datendurchsatz. Beide Bänder parallel verteilen die Endgeräte optimal.
+
+b) Sicherheitsstandards:
+• AZOS AP-42 und ELink AP-15 unterstützen WPA3 (inkl. WPA3-Enterprise).
+• Getnear AP-08 unterstützt maximal WPA2-Enterprise (kein WPA3!).
+• WPA3-Vorteile: Robustes SAE-Handshake gegen Wörterbuchangriffe, zwingende 192-Bit-Sicherheitsstufe im Enterprise-Modus und geschützte Management-Frames.
+
+c) MTBF (Mean Time Between Failures):
+• Mittlere Betriebsdauer zwischen Ausfällen (statistische Zuverlässigkeit).
+• AZOS AP-42 bietet mit 691.548 Stunden (~79 Jahre) und 7 Jahren Garantie die mit Abstand höchste Zuverlässigkeit und Investitionssicherheit.`
+                    },
+                    {
+                        id: "24_3_b",
+                        label: "3.2 Kaufmännische Bezugskalkulation (Anlage 4)",
+                        points: 12,
+                        type: "table",
+                        stencil: "BEZUGSKALKULATION (ANLAGE 4)",
+                        text: `Für die Ausstattung des Firmengebäudes sollen insgesamt 10 Access Points beschafft werden.
+Ihnen liegen von den drei Herstellern folgende Konditionen vor:
+• AZOS AP-42: Listenpreis 178,31 € netto/Stück. Lieferant gewährt 10% Lieferrabatt, 2% Lieferskonto bei Zahlung innerhalb von 10 Tagen. Bezugskosten pauschal 25,00 € netto für die Gesamtsendung.
+• Getnear AP-08: Listenpreis 221,73 € netto/Stück. Lieferant gewährt 15% Lieferrabatt, 3% Lieferskonto. Bezugskosten: Frachtfreie Lieferung (0,00 €).
+• ELink AP-15: Listenpreis 237,18 € netto/Stück. Lieferant gewährt 20% Lieferrabatt, 2% Lieferskonto. Bezugskosten: 35,00 € Expressfracht netto.
+
+Berechnen Sie für alle drei Alternativen den Einstandspreis (Bezugspreis) pro Stück und Gesamt und tragen Sie Ihre Ergebnisse in die Kalkulationstabelle (Anlage 4) ein.`,
+                        tableConfig: {
+                            headers: ["Kalkulationsposition", "AZOS AP-42 (%)", "AZOS AP-42 (€)", "Getnear AP-08 (%)", "Getnear AP-08 (€)", "ELink AP-15 (%)", "ELink AP-15 (€)"],
+                            rows: [
+                                ["Listenpreis (pro Stück)", "-", "178,31 €", "-", "221,73 €", "-", "237,18 €"],
+                                ["Listenpreis (Gesamt 10 Stk.)", "100%", "1.783,10 €", "100%", "2.217,30 €", "100%", "2.371,80 €"],
+                                ["- Lieferrabatt", "10%", "178,31 €", "15%", "332,60 €", "20%", "474,36 €"],
+                                ["= Zieleinkaufspreis", "90%", "1.604,79 €", "85%", "1.884,70 €", "80%", "1.897,44 €"],
+                                ["- Lieferskonti", "2%", "32,10 €", "3%", "56,54 €", "2%", "37,95 €"],
+                                ["= Bareinkaufspreis", "98%", "1.572,69 €", "97%", "1.828,16 €", "98%", "1.859,49 €"],
+                                ["+ Bezugskosten", "-", "25,00 €", "-", "0,00 €", "-", "35,00 €"],
+                                ["= Einstandspreis (Gesamt)", "-", "1.597,69 €", "-", "1.828,16 €", "-", "1.894,49 €"],
+                                ["= Einstandspreis (pro Stück)", "-", "159,77 €", "-", "182,82 €", "-", "189,45 €"]
+                            ]
+                        },
+                        solution: `Musterlösung für Anlage 4 (Bezugskalkulation für 10 Access Points):
+
+1. AZOS AP-42:
+   • Listenpreis gesamt = 10 × 178,31 € = 1.783,10 €
+   • - 10% Lieferrabatt = -178,31 €
+   • = Zieleinkaufspreis = 1.604,79 €
+   • - 2% Lieferskonto = -32,10 €
+   • = Bareinkaufspreis = 1.572,69 €
+   • + Bezugskosten = +25,00 €
+   • = Einstandspreis gesamt = 1.597,69 € (pro Stück: 159,77 €)
+
+2. Getnear AP-08:
+   • Listenpreis gesamt = 10 × 221,73 € = 2.217,30 €
+   • - 15% Lieferrabatt = -332,60 €
+   • = Zieleinkaufspreis = 1.884,70 €
+   • - 3% Lieferskonto = -56,54 €
+   • = Bareinkaufspreis = 1.828,16 €
+   • + Bezugskosten = +0,00 €
+   • = Einstandspreis gesamt = 1.828,16 € (pro Stück: 182,82 €)
+
+3. ELink AP-15:
+   • Listenpreis gesamt = 10 × 237,18 € = 2.371,80 €
+   • - 20% Lieferrabatt = -474,36 €
+   • = Zieleinkaufspreis = 1.897,44 €
+   • - 2% Lieferskonto = -37,95 €
+   • = Bareinkaufspreis = 1.859,49 €
+   • + Bezugskosten = +35,00 €
+   • = Einstandspreis gesamt = 1.894,49 € (pro Stück: 189,45 €)`
+                    },
+                    {
+                        id: "24_3_c",
+                        label: "3.3 Nutzwertanalyse durchführen & begründen (Anlage 5)",
+                        points: 13,
+                        type: "table",
+                        stencil: "NUTZWERTANALYSE (ANLAGE 5)",
+                        text: `Führen Sie anhand der Kriterien aus Anlage 5 eine Nutzwertanalyse für die drei Access Points durch.
+Bewertungsskala: 10 Punkte (sehr gut) bis 1 Punkt (ungenügend).
+
+Kriterien und Vorgaben zur Punktevergabe:
+• Übertragungsrate (Gewichtung 40%): AZOS (Dual-Band 1200+575 Mbit/s) = 10 Pkt; Getnear (Dual-Band 867+575 Mbit/s) = 7 Pkt; ELink (nur 2.4 GHz 575 Mbit/s) = 3 Pkt.
+• Sicherheit (Gewichtung 30%): AZOS (WPA3-Enterprise) = 10 Pkt; Getnear (nur WPA2) = 5 Pkt; ELink (WPA3-Enterprise) = 10 Pkt.
+• Leistungsaufnahme (Gewichtung 5%): AZOS (14,4W) = 10 Pkt; ELink (15,1W) = 8 Pkt; Getnear (16,8W) = 5 Pkt.
+• Betriebsdauer MTBF (Gewichtung 20%): AZOS (691.548 h) = 10 Pkt; Getnear (476.348 h) = 7 Pkt; ELink (367.715 h) = 5 Pkt.
+• Garantie (Gewichtung 5%): AZOS (7 Jahre) = 10 Pkt; Getnear (3 Jahre) = 5 Pkt; ELink (3 Jahre) = 5 Pkt.
+
+Berechnen Sie in Anlage 5 die gewichteten Punkte, die Gesamtpunktesumme und leiten Sie die finale Rangfolge ab.`,
+                        tableConfig: {
+                            headers: ["Entscheidungskriterium", "Gewichtung", "AZOS (Pkt)", "AZOS (gew.)", "Getnear (Pkt)", "Getnear (gew.)", "ELink (Pkt)", "ELink (gew.)"],
+                            rows: [
+                                ["Übertragungsrate", "40", "10", "400", "7", "280", "3", "120"],
+                                ["Sicherheit", "30", "10", "300", "5", "150", "10", "300"],
+                                ["Leistungsaufnahme", "5", "10", "50", "5", "25", "8", "40"],
+                                ["Betriebsdauer (MTBF)", "20", "10", "200", "7", "140", "5", "100"],
+                                ["Garantie", "5", "10", "50", "5", "25", "5", "25"],
+                                ["Punktesumme", "100", "-", "1000", "-", "620", "-", "585"],
+                                ["Rangfolge", "-", "-", "1", "-", "2", "-", "3"]
+                            ]
+                        },
+                        solution: `Musterlösung für Anlage 5 (Nutzwertanalyse):
+
+1. AZOS AP-42:
+   • Übertragungsrate: 10 × 40 = 400
+   • Sicherheit: 10 × 30 = 300
+   • Leistungsaufnahme: 10 × 5 = 50
+   • Betriebsdauer: 10 × 20 = 200
+   • Garantie: 10 × 5 = 50
+   • Punktesumme: 1.000 Punkte -> RANG 1 (Eindeutiger Testsieger)
+
+2. Getnear AP-08:
+   • Übertragungsrate: 7 × 40 = 280
+   • Sicherheit: 5 × 30 = 150
+   • Leistungsaufnahme: 5 × 5 = 25
+   • Betriebsdauer: 7 × 20 = 140
+   • Garantie: 5 × 5 = 25
+   • Punktesumme: 620 Punkte -> RANG 2
+
+3. ELink AP-15:
+   • Übertragungsrate: 3 × 40 = 120
+   • Sicherheit: 10 × 30 = 300
+   • Leistungsaufnahme: 8 × 5 = 40
+   • Betriebsdauer: 5 × 20 = 100
+   • Garantie: 5 × 5 = 25
+   • Punktesumme: 585 Punkte -> RANG 3
+
+Entscheidungsempfehlung:
+Der AZOS AP-42 belegt mit 1.000 von 1.000 maximal erreichbaren Punkten souverän Rang 1. Er bietet sowohl die höchste Übertragungsrate (802.11ac Dual-Band), maximale Sicherheit (WPA3-Enterprise), die geringste Leistungsaufnahme (14,4W) als auch die höchste Zuverlässigkeit (MTBF > 690.000 h) und Garantiezeit (7 Jahre). Zudem ist er in der Bezugskalkulation (Anlage 4) mit 159,77 € Einstandspreis das mit Abstand günstigste Gerät.`
+                    }
+                ]
+            }
+        ]
+    },
 ];
 
 // Helper to get all exam sets
