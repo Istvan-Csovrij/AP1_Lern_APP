@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IHK Probeklausur Simulator 2026/27 – Hotel City Hof (FA 230)</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- TOP EXAM NAVIGATION BAR -->
+    <header class="exam-navbar">
+        <div class="brand-section">
+            <span class="official-stamp">
+                <i class="fa-solid fa-graduation-cap"></i> IHK &amp; Kultusministerium BaWü
+            </span>
+            <div>
+                <div class="brand-title">FA 230 • Probeklausur Winter 2026/27</div>
+                <div class="brand-subtitle">Einrichten eines IT-gestützten Arbeitsplatzes • Hotel City Hof (Hospitality IT GmbH)</div>
+            </div>
+        </div>
+
+        <div class="exam-controls">
+            <!-- TIMER -->
+            <div class="timer-box" id="timer-box" title="Prüfungs-Countdown (60 Minuten reguläre Bearbeitungszeit)">
+                <i class="fa-regular fa-clock" style="color: #38bdf8;"></i>
+                <span class="timer-display" id="timer-display">60:00</span>
+                <button class="timer-btn" id="timer-toggle-btn" onclick="toggleTimer()" title="Timer pausieren/fortsetzen">
+                    <i class="fa-solid fa-pause"></i>
+                </button>
+                <button class="timer-btn" onclick="resetTimer()" title="Timer zurücksetzen">
+                    <i class="fa-solid fa-rotate-right"></i>
+                </button>
+            </div>
+
+            <!-- POINTS COUNTER -->
+            <div class="points-box" title="Aktuell erzielte Punkte / Maximale Gesamtpunktzahl">
+                <i class="fa-solid fa-award"></i>
+                <span id="total-points-display">0 / 90 Pkt</span>
+            </div>
+
+            <!-- ACTION BUTTONS -->
+            <button class="header-action-btn" onclick="window.print()" title="Ergebnisse als PDF drucken / im Abgabeordner speichern">
+                <i class="fa-solid fa-print"></i> PDF Abgabe
+            </button>
+            <a href="assets/230_IT_Probeklausur_A.pdf" target="_blank" class="header-action-btn" title="Originales amtliches Prüfungs-PDF ansehen">
+                <i class="fa-solid fa-file-pdf"></i> Original-PDF
+            </a>
+        </div>
+    </header>
+
+    <!-- NAVIGATION TABS -->
+    <nav class="nav-tabs-bar">
+        <div class="nav-tabs">
+            <button class="nav-tab-btn active" data-tab="deckblatt" onclick="switchTaskTab('deckblatt')">
+                <i class="fa-solid fa-file-lines"></i> Deckblatt &amp; Situation
+            </button>
+            <button class="nav-tab-btn" data-tab="it1" onclick="switchTaskTab('it1')">
+                <i class="fa-solid fa-file-invoice-dollar"></i> IT 1: Angebotsvergleich <span class="badge-pts">30 P</span>
+            </button>
+            <button class="nav-tab-btn" data-tab="it2" onclick="switchTaskTab('it2')">
+                <i class="fa-solid fa-network-wired"></i> IT 2: Infrastruktur &amp; DHCP <span class="badge-pts">40 P</span>
+            </button>
+            <button class="nav-tab-btn" data-tab="it3" onclick="switchTaskTab('it3')">
+                <i class="fa-solid fa-code"></i> IT 3: SQL &amp; Programmierung <span class="badge-pts">20 P</span>
+            </button>
+            <button class="nav-tab-btn" data-tab="auswertung" onclick="switchTaskTab('auswertung')">
+                <i class="fa-solid fa-chart-line"></i> Gesamtauswertung &amp; Note
+            </button>
+        </div>
+        <div class="candidate-tag">
+            <i class="fa-solid fa-user-pen"></i> Prüfling: <strong>Fachinformatiker/in (AP1)</strong>
+        </div>
+    </nav>
+
+    <!-- MAIN WORKSPACE SPLIT VIEW -->
+    <main class="exam-container">
+
+        <!-- ============================================================== -->
+        <!-- LEFT PANE: AUFGABENSTELLUNGEN & INTERAKTIVE EINGABEFELDER -->
+        <!-- ============================================================== -->
+        <section class="pane left-pane">
+
+            <!-- TAB 0: DECKBLATT & SITUATION -->
+            <div class="task-content-section" id="section-deckblatt">
+                <div class="section-header">
+                    <div>
+                        <div class="section-title"><i class="fa-solid fa-book-open"></i> Amtliche Prüfungsunterlagen</div>
+                        <div style="font-size: 0.85rem; color: var(--text-muted);">Probeklausur Winter 2026/27 • Alle IT-Berufe (FA 230)</div>
+                    </div>
+                    <span class="points-pill">90 Punkte • 60 Min.</span>
+                </div>
+
+                <div class="exam-card">
+                    <h4 style="margin-bottom: 0.5rem; color: #1e293b;">Zu beachtende Hinweise:</h4>
+                    <ul style="padding-left: 1.25rem; font-size: 0.9rem; color: #475569; line-height: 1.6;">
+                        <li><strong>Bearbeitungszeit:</strong> 60 Minuten.</li>
+                        <li><strong>Verlangt:</strong> Alle Aufgaben (Aufgabe 1 bis 3).</li>
+                        <li><strong>Hilfsmittel:</strong> Nicht programmierbarer Taschenrechner, PC mit zugelassener Softwareausstattung.</li>
+                        <li><strong>Abgaberegelung:</strong> Erstellen Sie für Ihre Abgabe den Ordner <code>APT1_Winter_2026</code>. Alle Lösungen sind nach dem Muster <code>Nachname_Vorname_Aufgabennummer_Dateiname.pdf</code> zu benennen.</li>
+                    </ul>
+                </div>
+
+                <div class="exam-card scenario-card">
+                    <h4 style="margin-bottom: 0.5rem; color: #0284c7;"><i class="fa-solid fa-hotel"></i> Ausgangssituation</h4>
+                    <p style="font-size: 0.92rem; color: #334155; line-height: 1.55; margin-bottom: 0.75rem;">
+                        Sie absolvieren Ihre Ausbildung im 2. Ausbildungsjahr bei der <strong>Hospitality IT GmbH</strong>. Die Hospitality IT GmbH hat sich auf die IT-Infrastruktur und IT-Ausstattung von Unternehmen aus dem Hotel- und Gaststättengewerbe spezialisiert. Sie arbeiten in einem Team, das den Kunden <strong>Hotel City Hof</strong> betreut.
+                    </p>
+                    <p style="font-size: 0.92rem; color: #334155; line-height: 1.55;">
+                        Das Hotel City Hof erhält seit einigen Monaten vermehrt negative Bewertungen. Der Hauptkritikpunkt ist die <strong>veraltete Technik</strong>. Die Hotelleitung möchte die technische Ausstattung der Zimmer verbessern. Die Kommunikation und die Serviceangebote sollen über eine zentrale Tablet-Lösung bereitgestellt werden. Die Tablets sollen in allen Zimmern und allen Hotelbereichen zur Verfügung stehen.
+                    </p>
+                </div>
+
+                <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+                    <button class="btn-primary" onclick="switchTaskTab('it1')">
+                        Mit Aufgabe IT 1 beginnen <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- TAB 1: IT 1 ANGEBOTSVERGLEICH (30 Pkt) -->
+            <div class="task-content-section" id="section-it1" style="display: none;">
+                <div class="section-header">
+                    <div>
+                        <div class="section-title"><i class="fa-solid fa-file-invoice-dollar"></i> IT 1: Angebotsvergleich Tablets</div>
+                        <div style="font-size: 0.85rem; color: var(--text-muted);">Quantitativer Angebotsvergleich von 140 Tablets (Anlage 1)</div>
+                    </div>
+                    <span class="points-pill" id="it1-score-display">0 / 30 Pkt</span>
+                </div>
+
+                <div class="email-box">
+                    <div class="email-header">
+                        <strong>Von:</strong> martina.berger@hospitality-it.de<br>
+                        <strong>An:</strong> azubi@hospitality-it.de<br>
+                        <strong>Betreff:</strong> Beschaffung Tablets
+                    </div>
+                    <p style="margin-bottom: 0.5rem;">Guten Tag,</p>
+                    <p style="margin-bottom: 0.5rem;">
+                        das Hotel City Hof benötigt <strong>140 Tablets</strong>. Uns liegen bereits 2 Angebote von unseren Lieferanten vor (Angebot1.pdf, Angebot2.pdf).
+                    </p>
+                    <p style="margin-bottom: 0.5rem;">
+                        Führen Sie bitte einen <strong>quantitativen Angebotsvergleich</strong> durch. Verwenden Sie die bereitgestellte Vorlage für die Tabellenkalkulation (Angebotsvergleich.xlsx). Kennzeichnen Sie das günstigere Angebot.
+                    </p>
+                    <p>Freundliche Grüße<br><strong>Martina Berger</strong> (Projektleiterin)</p>
+                </div>
+
+                <div class="exam-card">
+                    <h4 style="margin-bottom: 0.5rem; color: #1e293b;">Interaktive Bezugspreiskalkulation (Netto in EUR):</h4>
+                    <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 0.5rem;">
+                        <i class="fa-solid fa-circle-info" style="color: #0284c7;"></i> Wichtig: Rechnen Sie Angebot 1 (Systemhaus Maier) von Brutto auf Netto um! Geben Sie Beträge mit zwei Nachkommastellen ein.
+                    </p>
+
+                    <table class="kalk-table">
+                        <thead>
+                            <tr>
+                                <th>Kalkulationsschema</th>
+                                <th style="width: 32%;">Systemhaus Maier (1)</th>
+                                <th style="width: 32%;">Digital Pro GmbH (2)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Listeneinkaufspreis (140 Stück, netto)</strong></td>
+                                <td><input type="number" step="0.01" id="m_lep" placeholder="z. B. 48235.29"></td>
+                                <td><input type="number" step="0.01" id="d_lep" placeholder="z. B. 49700.00"></td>
+                            </tr>
+                            <tr>
+                                <td>- Lieferrabatt</td>
+                                <td><input type="number" step="0.01" id="m_rabatt" placeholder="z. B. 964.71"></td>
+                                <td><input type="number" step="0.01" id="d_rabatt" placeholder="0.00"></td>
+                            </tr>
+                            <tr style="background: #f8fafc;">
+                                <td>= <strong>Zieleinkaufspreis</strong></td>
+                                <td><input type="number" step="0.01" id="m_zep"></td>
+                                <td><input type="number" step="0.01" id="d_zep"></td>
+                            </tr>
+                            <tr>
+                                <td>- Lieferskonto</td>
+                                <td><input type="number" step="0.01" id="m_skonto" placeholder="z. B. 945.41"></td>
+                                <td><input type="number" step="0.01" id="d_skonto" placeholder="z. B. 1491.00"></td>
+                            </tr>
+                            <tr style="background: #f8fafc;">
+                                <td>= <strong>Bareinkaufspreis</strong></td>
+                                <td><input type="number" step="0.01" id="m_bep"></td>
+                                <td><input type="number" step="0.01" id="d_bep"></td>
+                            </tr>
+                            <tr>
+                                <td>+ Bezugskosten (netto)</td>
+                                <td><input type="number" step="0.01" id="m_bezug" placeholder="z. B. 70.00"></td>
+                                <td><input type="number" step="0.01" id="d_bezug" placeholder="z. B. 75.00"></td>
+                            </tr>
+                            <tr style="background: #e0f2fe; font-weight: bold;">
+                                <td>= <strong>Bezugspreis (Einstandspreis)</strong></td>
+                                <td><input type="number" step="0.01" id="m_gesamt"></td>
+                                <td><input type="number" step="0.01" id="d_gesamt"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div style="margin: 1rem 0; padding: 0.75rem; background: #f8fafc; border-radius: var(--radius-sm); border: 1px solid var(--border);">
+                        <strong>Welches Angebot ist das günstigere?</strong>
+                        <div style="display: flex; gap: 1.5rem; margin-top: 0.5rem;">
+                            <label style="cursor: pointer; display: flex; align-items: center; gap: 0.4rem;">
+                                <input type="radio" name="it1_winner" value="maier"> Systemhaus Maier GmbH
+                            </label>
+                            <label style="cursor: pointer; display: flex; align-items: center; gap: 0.4rem;">
+                                <input type="radio" name="it1_winner" value="digitalpro"> Digital Pro GmbH
+                            </label>
+                        </div>
+                        <div id="it1-winner-feedback" style="margin-top: 0.5rem; font-size: 0.85rem;"></div>
+                    </div>
+
+                    <div style="display: flex; gap: 0.75rem; align-items: center;">
+                        <button class="btn-accent" onclick="checkIT1()">
+                            <i class="fa-solid fa-check-double"></i> Kalkulation prüfen &amp; bewerten (30 Pkt)
+                        </button>
+                        <button class="btn-secondary" onclick="toggleMusterloesung('it1')">
+                            <i class="fa-solid fa-lightbulb"></i> Musterlösung anzeigen
+                        </button>
+                    </div>
+
+                    <!-- MUSTERLÖSUNG IT 1 -->
+                    <div class="solution-box" id="solution-it1">
+                        <div class="solution-header">
+                            <span><i class="fa-solid fa-check-circle"></i> Offizielle IHK Musterlösung (IT 1)</span>
+                            <span>30 / 30 Punkte</span>
+                        </div>
+                        <p style="font-size: 0.88rem; line-height: 1.5; color: #166534;">
+                            <strong>1. Systemhaus Maier GmbH (Preise im Angebot sind brutto inkl. 19 % USt.):</strong><br>
+                            • Listeneinkaufspreis netto: 57.400,00 € / 1,19 = <strong>48.235,29 €</strong> (bzw. 344,54 €/Stück)<br>
+                            • Lieferrabatt (2 % ab 100 Stück): 48.235,29 € * 0,02 = <strong>964,71 €</strong><br>
+                            • Zieleinkaufspreis: 48.235,29 € - 964,71 € = <strong>47.270,58 €</strong><br>
+                            • Lieferskonto (2 % Skonto): 47.270,58 € * 0,02 = <strong>945,41 €</strong><br>
+                            • Bareinkaufspreis: 47.270,58 € - 945,41 € = <strong>46.325,17 €</strong><br>
+                            • Bezugskosten (14 Verpackungseinheiten à 5,95 € brutto): 83,30 € / 1,19 = <strong>70,00 € netto</strong> (Versand frei Haus)<br>
+                            • <strong>Bezugspreis gesamt: 46.395,17 € netto</strong><br><br>
+                            <strong>2. Digital Pro GmbH (Preise sind netto):</strong><br>
+                            • Listeneinkaufspreis netto: 140 * 355,00 € = <strong>49.700,00 €</strong><br>
+                            • Lieferrabatt: 0,00 € (da 5 % erst ab 200 Stück gewährt werden)<br>
+                            • Zieleinkaufspreis: <strong>49.700,00 €</strong><br>
+                            • Lieferskonto (3 % Skonto): 49.700,00 € * 0,03 = <strong>1.491,00 €</strong><br>
+                            • Bareinkaufspreis: 49.700,00 € - 1.491,00 € = <strong>48.209,00 €</strong><br>
+                            • Bezugskosten: Pauschale Verpackung &amp; Versand = <strong>75,00 €</strong><br>
+                            • <strong>Bezugspreis gesamt: 48.284,00 € netto</strong><br><br>
+                            <strong>Entscheidung:</strong> Das Angebot von <strong>Systemhaus Maier GmbH</strong> ist mit 46.395,17 € netto um <strong>1.888,83 € günstiger</strong> als das Angebot der Digital Pro GmbH (48.284,00 €).
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 2: IT 2 INFRASTRUKTUR & DHCP (40 Pkt) -->
+            <div class="task-content-section" id="section-it2" style="display: none;">
+                <div class="section-header">
+                    <div>
+                        <div class="section-title"><i class="fa-solid fa-network-wired"></i> IT 2: Infrastruktur und Konfiguration</div>
+                        <div style="font-size: 0.85rem; color: var(--text-muted);">WLAN-Analyse, Ausleuchtung &amp; DHCP-Server für 1.000 Clients (Anlage 2)</div>
+                    </div>
+                    <span class="points-pill" id="it2-score-display">0 / 40 Pkt</span>
+                </div>
+
+                <!-- 2.1 WLAN URSACHEN (12 Pkt) -->
+                <div class="exam-card">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                        <h4 style="color: #1e293b;">2.1 Analyse der schlechten WLAN-Datenrate (12 Punkte)</h4>
+                        <span class="points-pill" id="it2_1-score-display">0 / 12 Pkt</span>
+                    </div>
+                    <p style="font-size: 0.88rem; color: #475569; margin-bottom: 0.75rem;">
+                        Die Leitung beklagt: Sobald mehr als 50 % der Zimmer belegt sind, sinkt die Datenrate drastisch. Analysieren Sie 3 Ursachen anhand der Infrastruktur von 2010 (siehe Anlage 2 rechts):
+                    </p>
+
+                    <div style="display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 0.75rem;">
+                        <input type="text" id="wlan_u1" class="kalk-table" style="padding: 0.45rem; text-align: left;" placeholder="1. Ursache (z. B. Frequenzüberlastung 2,4 GHz / Co-Channel Interference)">
+                        <input type="text" id="wlan_u2" class="kalk-table" style="padding: 0.45rem; text-align: left;" placeholder="2. Ursache (z. B. Hohe Clientdichte / CSMA/CA Shared Medium Kollisionen)">
+                        <input type="text" id="wlan_u3" class="kalk-table" style="padding: 0.45rem; text-align: left;" placeholder="3. Ursache (z. B. Fast-Ethernet 100 Mbit Uplink Flaschenhals / Veralteter 802.11 Standard)">
+                    </div>
+
+                    <button class="btn-accent" onclick="checkIT2_1()">Ursachen bewerten (12 Pkt)</button>
+                </div>
+
+                <!-- 2.2 AUSLEUCHTUNG (8 Pkt) -->
+                <div class="exam-card">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                        <h4 style="color: #1e293b;">2.2 Ausleuchtungsplanung &amp; Accesspoints (8 Punkte)</h4>
+                        <span class="points-pill" id="it2_2-score-display">0 / 8 Pkt</span>
+                    </div>
+                    <p style="font-size: 0.88rem; color: #475569; margin-bottom: 0.75rem;">
+                        Welche Maßnahmen und Erweiterungen aus <code>erweiterung.drawio</code> gewährleisten eine lückenlose Abdeckung?
+                    </p>
+                    <div style="display: flex; flex-direction: column; gap: 0.4rem; font-size: 0.88rem; margin-bottom: 0.75rem;">
+                        <label style="cursor: pointer;"><input type="checkbox" id="ap_choice_og2"> Zusätzliche Access Points im 2. OG und 9. OG platzieren</label>
+                        <label style="cursor: pointer;"><input type="checkbox" id="ap_choice_og9"> Access Point im Wellness- &amp; Fitnessbereich (EG/Lounge) installieren</label>
+                        <label style="cursor: pointer;"><input type="checkbox" id="ap_choice_og10"> Access Point im 10. OG für die Konferenzräume</label>
+                        <label style="cursor: pointer;"><input type="checkbox" id="ap_dualband"> Upgrade auf Dual-Band (2,4 GHz + 5 GHz / Wi-Fi 6) mit Band Steering &amp; Fast Roaming</label>
+                    </div>
+                    <button class="btn-accent" onclick="checkIT2_2()">Ausleuchtung bewerten (8 Pkt)</button>
+                </div>
+
+                <!-- 2.3 DHCP SERVER subnets.txt (20 Pkt) -->
+                <div class="exam-card">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                        <h4 style="color: #1e293b;">2.3 Konfiguration DHCP-Server für 1.000 Clients (20 Punkte)</h4>
+                        <span class="points-pill" id="it2_3-score-display">0 / 20 Pkt</span>
+                    </div>
+
+                    <div class="email-box" style="margin-bottom: 0.75rem;">
+                        <div class="email-header">
+                            <strong>Von:</strong> gregor.lutz@hospitality-it.de &bull; <strong>Betreff:</strong> Vorbereitung DHCP-Server
+                        </div>
+                        <p style="font-size: 0.86rem;">
+                            Unser Kunde Hotel City Hof rechnet mit bis zu <strong>1.000 gleichzeitigen Clients</strong> (Tablets &amp; Gäste-Geräte). Passen Sie die Vorlage <code>subnets.txt</code> auf das Subnetz des Hotel City Hof an (Netzwerk: <code>172.16.0.0</code>).
+                        </p>
+                    </div>
+
+                    <table class="kalk-table">
+                        <tr>
+                            <td style="width: 35%;"><strong>Netzwerkadresse:</strong></td>
+                            <td><input type="text" id="dhcp_subnet" placeholder="z. B. 172.16.0.0" style="text-align: left;"></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Subnetzmaske (für min. 1.000 Hosts):</strong></td>
+                            <td><input type="text" id="dhcp_netmask" placeholder="z. B. 255.255.252.0" style="text-align: left;"></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Broadcast-Adresse:</strong></td>
+                            <td><input type="text" id="dhcp_broadcast" placeholder="z. B. 172.16.3.255" style="text-align: left;"></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Dynamische IP-Range Start:</strong></td>
+                            <td><input type="text" id="dhcp_range_start" placeholder="z. B. 172.16.0.10" style="text-align: left;"></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Dynamische IP-Range Ende:</strong></td>
+                            <td><input type="text" id="dhcp_range_end" placeholder="z. B. 172.16.3.250" style="text-align: left;"></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Standard-Gateway (Router):</strong></td>
+                            <td><input type="text" id="dhcp_router" placeholder="z. B. 172.16.0.254 oder 172.16.0.1" style="text-align: left;"></td>
+                        </tr>
+                    </table>
+
+                    <div style="display: flex; gap: 0.75rem; align-items: center; margin-top: 0.75rem;">
+                        <button class="btn-accent" onclick="checkIT2_3()">DHCP-Konfiguration prüfen (20 Pkt)</button>
+                        <button class="btn-secondary" onclick="toggleMusterloesung('it2')">Musterlösung anzeigen</button>
+                    </div>
+
+                    <div class="solution-box" id="solution-it2">
+                        <div class="solution-header">
+                            <span><i class="fa-solid fa-check-circle"></i> Offizielle IHK Musterlösung (IT 2)</span>
+                            <span>40 / 40 Punkte</span>
+                        </div>
+                        <p style="font-size: 0.88rem; line-height: 1.5; color: #166534;">
+                            <strong>2.1 Ursachen (12 Pkt):</strong><br>
+                            1. <em>2,4-GHz-Überlastung:</em> Veralteter 802.11b/g-Standard mit nur 3 überlappungsfreien Kanälen (1, 6, 11). Hohe Gleichkanalstörungen.<br>
+                            2. <em>CSMA/CA Shared Medium:</em> Zu viele gleichzeitige Clients teilen sich die Funkzelle, was zu Kollisionen, Backoff-Zeiten und drastischem Durchsatzeinbruch führt.<br>
+                            3. <em>Flaschenhals Uplinks:</em> Fast-Ethernet (100 Mbit/s) Uplinks der alten Switches bremsen die Access Points aus.<br><br>
+                            <strong>2.2 Ausleuchtung (8 Pkt):</strong> Platzierung von Dual-Band Access Points in 2.OG, 9.OG, 10.OG und Wellness-Bereich mit Band Steering &amp; 802.11k/r/v Roaming.<br><br>
+                            <strong>2.3 DHCP / subnets.txt (20 Pkt):</strong><br>
+                            • Für 1.000 Hosts wird ein <strong>/22 Subnetz</strong> benötigt (2^10 = 1.024 Adressen).<br>
+                            • Subnetzmaske: <code>255.255.252.0</code><br>
+                            • Subnetz: <code>172.16.0.0</code> &bull; Broadcast: <code>172.16.3.255</code><br>
+                            • Nutzbare Host-Adressen: <code>172.16.0.1</code> bis <code>172.16.3.254</code> (1.022 Hosts).
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 3: IT 3 SQL & PROGRAMMIERUNG (20 Pkt) -->
+            <div class="task-content-section" id="section-it3" style="display: none;">
+                <div class="section-header">
+                    <div>
+                        <div class="section-title"><i class="fa-solid fa-code"></i> IT 3: SQL &amp; Programmierung</div>
+                        <div style="font-size: 0.85rem; color: var(--text-muted);">Sportkurse-Datenbank &amp; Preisberechnungsfunktion (Anlage 3)</div>
+                    </div>
+                    <span class="points-pill" id="it3-score-display">0 / 20 Pkt</span>
+                </div>
+
+                <!-- 3.1 SQL (10 Pkt) -->
+                <div class="exam-card">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                        <h4 style="color: #1e293b;">3.1 SQL-Abfragen für die Tablet-Kursbuchung (10 Punkte)</h4>
+                        <span class="points-pill" id="it3_1-score-display">0 / 10 Pkt</span>
+                    </div>
+                    <p style="font-size: 0.86rem; color: #475569; margin-bottom: 0.5rem;">
+                        Tabelle: <code>Sportkurse(KursID, Kurstitel, Kategorie, Tag, Startzeit, Dauer, Kosten, maxTeilnehmerzahl, aktuelleTeilnehmerzahl)</code>
+                    </p>
+
+                    <!-- Query 1 -->
+                    <div style="margin-bottom: 1rem; border-top: 1px solid #e2e8f0; padding-top: 0.5rem;">
+                        <strong style="font-size: 0.88rem;">1) Alle Kurstitel der Kategorie "Wellness" anzeigen (3 Pkt):</strong>
+                        <div style="display: flex; gap: 0.5rem; margin-top: 0.35rem;">
+                            <input type="text" id="sql_query_1" class="kalk-table" style="text-align: left; margin: 0; font-family: var(--font-mono);" placeholder="SELECT Kurstitel FROM Sportkurse WHERE Kategorie = 'Wellness';">
+                            <button class="btn-primary" onclick="executeSQL(1)" style="white-space: nowrap;"><i class="fa-solid fa-play"></i> Ausführen</button>
+                        </div>
+                        <div id="sql_feedback_1" style="font-size: 0.82rem; margin-top: 0.25rem;"></div>
+                        <div id="sql_result_1" style="margin-top: 0.4rem; overflow-x: auto;"></div>
+                    </div>
+
+                    <!-- Query 2 -->
+                    <div style="margin-bottom: 1rem; border-top: 1px solid #e2e8f0; padding-top: 0.5rem;">
+                        <strong style="font-size: 0.88rem;">2) Kurse mit freien Plätzen, absteigend nach Kosten sortiert mit Anzahl freier Plätze (4 Pkt):</strong>
+                        <div style="display: flex; gap: 0.5rem; margin-top: 0.35rem;">
+                            <input type="text" id="sql_query_2" class="kalk-table" style="text-align: left; margin: 0; font-family: var(--font-mono);" placeholder="SELECT Kurstitel, Tag, Startzeit, Dauer, Kosten, (maxTeilnehmerzahl - aktuelleTeilnehmerzahl) AS freiePlaetze FROM Sportkurse WHERE aktuelleTeilnehmerzahl < maxTeilnehmerzahl ORDER BY Kosten DESC;">
+                            <button class="btn-primary" onclick="executeSQL(2)" style="white-space: nowrap;"><i class="fa-solid fa-play"></i> Ausführen</button>
+                        </div>
+                        <div id="sql_feedback_2" style="font-size: 0.82rem; margin-top: 0.25rem;"></div>
+                        <div id="sql_result_2" style="margin-top: 0.4rem; overflow-x: auto;"></div>
+                    </div>
+
+                    <!-- Query 3 -->
+                    <div style="margin-bottom: 0.5rem; border-top: 1px solid #e2e8f0; padding-top: 0.5rem;">
+                        <strong style="font-size: 0.88rem;">3) Kursbuchung ID 1: aktuelleTeilnehmerzahl um 1 erhöhen (3 Pkt):</strong>
+                        <div style="display: flex; gap: 0.5rem; margin-top: 0.35rem;">
+                            <input type="text" id="sql_query_3" class="kalk-table" style="text-align: left; margin: 0; font-family: var(--font-mono);" placeholder="UPDATE Sportkurse SET aktuelleTeilnehmerzahl = aktuelleTeilnehmerzahl + 1 WHERE KursID = 1;">
+                            <button class="btn-primary" onclick="executeSQL(3)" style="white-space: nowrap;"><i class="fa-solid fa-play"></i> Ausführen</button>
+                        </div>
+                        <div id="sql_feedback_3" style="font-size: 0.82rem; margin-top: 0.25rem;"></div>
+                        <div id="sql_result_3" style="margin-top: 0.4rem; overflow-x: auto;"></div>
+                    </div>
+                </div>
+
+                <!-- 3.2 PROGRAMMIERUNG (10 Pkt) -->
+                <div class="exam-card">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                        <h4 style="color: #1e293b;">3.2 Preisermittlung: Funktion ermittle_Preis (10 Punkte)</h4>
+                        <span class="points-pill" id="it3_2-score-display">0 / 10 Pkt</span>
+                    </div>
+
+                    <div style="background: #f8fafc; border-left: 3px solid #0284c7; padding: 0.6rem 0.85rem; font-size: 0.85rem; color: #334155; margin-bottom: 0.75rem;">
+                        <strong>Vorgabe:</strong> Signatur: <code>ermittle_Preis(gebuchteKurse: string[], Status: string): float</code><br>
+                        • Hilfsfunktion <code>get_Betrag(Kurs: String): float</code> ist vorgegeben.<br>
+                        • Rabattstaffel (aus Preisliste.html): &gt; 3 Kurse: <strong>20 %</strong> &bull; &gt; 5 Kurse: <strong>30 %</strong> &bull; Status 'Gold': <strong>zusätzlich 50 %</strong>.
+                    </div>
+
+                    <div class="code-editor-wrapper">
+                        <div class="editor-toolbar">
+                            <span><i class="fa-brands fa-js"></i> JavaScript / Python Editor</span>
+                            <span style="font-size: 0.75rem;">Hilfsfunktion get_Betrag(kurs) ist integriert</span>
+                        </div>
+                        <textarea id="code_editor" class="code-textarea" spellcheck="false">
+function ermittle_Preis(gebuchteKurse, Status) {
+    let summe = 0.0;
+    
+    // 1. Grundsumme aufsummieren
+    for (let i = 0; i < gebuchteKurse.length; i++) {
+        summe += get_Betrag(gebuchteKurse[i]);
+    }
+    
+    // 2. Mengenrabatt (> 5 Kurse: 30%, > 3 Kurse: 20%)
+    if (gebuchteKurse.length > 5) {
+        summe = summe * 0.70;
+    } else if (gebuchteKurse.length > 3) {
+        summe = summe * 0.80;
+    }
+    
+    // 3. Statusrabatt Gold (+50%)
+    if (Status === "Gold") {
+        summe = summe * 0.50;
+    }
+    
+    return Math.round(summe * 100) / 100;
+}</textarea>
+                    </div>
+
+                    <div style="display: flex; gap: 0.75rem; align-items: center;">
+                        <button class="btn-accent" onclick="runCodeTests()">
+                            <i class="fa-solid fa-vial-circle-check"></i> Code ausführen &amp; 5 Unit-Tests starten (10 Pkt)
+                        </button>
+                        <button class="btn-secondary" onclick="toggleMusterloesung('it3')">
+                            Musterlösung in Pseudocode
+                        </button>
+                    </div>
+
+                    <!-- TEST RUNNER LOG -->
+                    <div id="test-log-output" class="test-log-card">
+                        <div style="color: #94a3b8;">Klicken Sie auf "Code ausführen", um die automatische Test-Suite zu starten.</div>
+                    </div>
+
+                    <!-- MUSTERLÖSUNG IT 3 -->
+                    <div class="solution-box" id="solution-it3">
+                        <div class="solution-header">
+                            <span><i class="fa-solid fa-check-circle"></i> Offizielle Musterlösung (IT 3)</span>
+                            <span>20 / 20 Punkte</span>
+                        </div>
+                        <pre style="background: #0f172a; color: #38bdf8; padding: 0.85rem; border-radius: 6px; font-family: monospace; font-size: 0.85rem; line-height: 1.45;">
+FUNKTION ermittle_Preis(gebuchteKurse: string[], Status: string): float
+    SET summe = 0.0
+    SET anzahl = LÄNGE(gebuchteKurse)
+
+    FÜR JEDES kurs IN gebuchteKurse MACHE
+        summe = summe + get_Betrag(kurs)
+    ENDE FÜR
+
+    WENN anzahl > 5 DANN
+        summe = summe * 0.70
+    SONST WENN anzahl > 3 DANN
+        summe = summe * 0.80
+    ENDE WENN
+
+    WENN Status == "Gold" DANN
+        summe = summe * 0.50
+    ENDE WENN
+
+    RÜCKGABE summe
+ENDE FUNKTION</pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 4: GESAMTAUSWERTUNG & NOTENSPIEGEL -->
+            <div class="task-content-section" id="section-auswertung" style="display: none;">
+                <div class="section-header">
+                    <div>
+                        <div class="section-title"><i class="fa-solid fa-square-poll-vertical"></i> Gesamtergebnis &amp; Prüfungsnoten</div>
+                        <div style="font-size: 0.85rem; color: var(--text-muted);">Offizieller IHK-Notenschlüssel (Winter 2026/27)</div>
+                    </div>
+                    <span class="points-pill" id="score-percentage">0 %</span>
+                </div>
+
+                <div class="exam-card" style="text-align: center; padding: 2rem;">
+                    <div style="font-size: 0.9rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700;">Ihre Gesamtnote</div>
+                    <div style="font-size: 2.2rem; font-weight: 800; color: #0284c7; margin: 0.5rem 0;" id="grade-display">
+                        6 (Ungenügend)
+                    </div>
+                    <p style="font-size: 0.95rem; color: #475569;">
+                        Erreicht: <strong id="summary-points-val">0</strong> von <strong>90 Punkten</strong>
+                    </p>
+                </div>
+
+                <div class="exam-card">
+                    <h4 style="margin-bottom: 0.5rem;">Punkteverteilung nach Prüfungsbereichen:</h4>
+                    <table class="kalk-table">
+                        <tr><td>IT 1: Quantitativer Angebotsvergleich Tablets</td><td style="text-align: right; font-weight: bold;">max. 30 Pkt</td></tr>
+                        <tr><td>IT 2: WLAN-Infrastruktur &amp; DHCP subnets.txt</td><td style="text-align: right; font-weight: bold;">max. 40 Pkt</td></tr>
+                        <tr><td>IT 3: SQL-Abfragen &amp; Funktion ermittle_Preis</td><td style="text-align: right; font-weight: bold;">max. 20 Pkt</td></tr>
+                        <tr style="background: #e0f2fe; font-weight: bold;"><td>Gesamtergebnis</td><td style="text-align: right;">90 Punkte (100 %)</td></tr>
+                    </table>
+                    <div style="margin-top: 1rem; display: flex; gap: 0.75rem;">
+                        <button class="btn-primary" onclick="window.print()"><i class="fa-solid fa-print"></i> Prüfungsbogen ausdrucken / als PDF speichern</button>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ============================================================== -->
+        <!-- RIGHT PANE: ORIGINALE DIGITALE ANLAGEN & DATEIEN -->
+        <!-- ============================================================== -->
+        <section class="pane right-pane">
+
+            <!-- ATTACHMENT TAB HEADER -->
+            <div class="att-tabs-header">
+                <button class="att-tab-btn active" data-att="att_it1_ang1" onclick="switchAttTab('att_it1_ang1')">
+                    <i class="fa-solid fa-file-pdf"></i> Angebot 1 (Maier)
+                </button>
+                <button class="att-tab-btn" data-att="att_it1_ang2" onclick="switchAttTab('att_it1_ang2')">
+                    <i class="fa-solid fa-file-pdf"></i> Angebot 2 (Digital Pro)
+                </button>
+                <button class="att-tab-btn" data-att="att_it2_infra" onclick="switchAttTab('att_it2_infra')">
+                    <i class="fa-solid fa-image"></i> Infrastruktur 2010 (Grafik)
+                </button>
+                <button class="att-tab-btn" data-att="att_it2_dhcp" onclick="switchAttTab('att_it2_dhcp')">
+                    <i class="fa-solid fa-file-code"></i> subnets.txt (Vorlage)
+                </button>
+                <button class="att-tab-btn" data-att="att_it3_preis" onclick="switchAttTab('att_it3_preis')">
+                    <i class="fa-solid fa-table-list"></i> Preisliste.html
+                </button>
+            </div>
+
+            <!-- SHEET: ANGEBOT 1 -->
+            <div class="att-content-sheet" id="sheet-att_it1_ang1">
+                <div class="att-sheet">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 2px solid #0284c7; padding-bottom: 0.5rem; margin-bottom: 1rem;">
+                        <div>
+                            <h3 style="color: #0f172a; margin: 0;">Systemhaus Maier GmbH</h3>
+                            <div style="font-size: 0.8rem; color: #64748b;">Bissdorfer Str. 12 &bull; 20459 Hamburg</div>
+                        </div>
+                        <a href="assets/Aufgabe 1/Angebot1.pdf" target="_blank" class="btn-secondary" style="font-size: 0.78rem;">
+                            <i class="fa-solid fa-download"></i> Original PDF
+                        </a>
+                    </div>
+                    <div style="font-size: 0.86rem; line-height: 1.5; color: #334155;">
+                        <p><strong>Angebot A576B-1112</strong> &bull; Datum: 1. Dezember 20xx</p>
+                        <p style="margin: 0.5rem 0;">Wir bedanken uns für Ihre Anfrage und bieten an:</p>
+                        <table class="kalk-table">
+                            <tr><th>Menge</th><th>Beschreibung</th><th>Einzelpreis</th><th>Gesamtpreis</th></tr>
+                            <tr><td>140 Stück</td><td>Tablet Modell TW-Tab 10 (inkl. Tischladestation)</td><td>410,00 €</td><td>57.400,00 €</td></tr>
+                        </table>
+                        <div style="background: #f8fafc; padding: 0.75rem; border-radius: 6px; border: 1px solid #e2e8f0; margin-top: 0.75rem;">
+                            <strong>Rabattstaffelung:</strong><br>
+                            • Ab 100 Stück: <strong>2 % Rabatt</strong> auf den Gerätepreis<br>
+                            • Ab 150 Stück: 3 % Rabatt auf den Gerätepreis<br><br>
+                            <strong>Lieferbedingungen:</strong> Versand frei Haus. 10er Verpackungseinheit je <strong>5,95 € brutto</strong>.<br>
+                            <strong>Zahlungsbedingungen:</strong> Zahlungsziel 30 Tage, <strong>2 % Skonto</strong> innerhalb 10 Tagen.<br>
+                            <span style="color: #b91c1c; font-weight: bold;">Hinweis: Alle Preise sind Bruttopreise (inklusive 19 % USt.)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SHEET: ANGEBOT 2 -->
+            <div class="att-content-sheet" id="sheet-att_it1_ang2" style="display: none;">
+                <div class="att-sheet">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 2px solid #047857; padding-bottom: 0.5rem; margin-bottom: 1rem;">
+                        <div>
+                            <h3 style="color: #0f172a; margin: 0;">Digital Pro GmbH</h3>
+                            <div style="font-size: 0.8rem; color: #64748b;">Wolf-Hirth-Str. 4 &bull; 75175 Pforzheim</div>
+                        </div>
+                        <a href="assets/Aufgabe 1/Angebot2.pdf" target="_blank" class="btn-secondary" style="font-size: 0.78rem;">
+                            <i class="fa-solid fa-download"></i> Original PDF
+                        </a>
+                    </div>
+                    <div style="font-size: 0.86rem; line-height: 1.5; color: #334155;">
+                        <p><strong>Angebot 2026-1733</strong> &bull; Datum: 1. Dezember 20xx</p>
+                        <table class="kalk-table">
+                            <tr><th>Menge</th><th>Bezeichnung</th><th>Einzelpreis (netto)</th></tr>
+                            <tr><td>140 x</td><td>Tablet BP-Comfort 10 (inkl. Tischladestation)</td><td>355,00 €</td></tr>
+                        </table>
+                        <div style="background: #f8fafc; padding: 0.75rem; border-radius: 6px; border: 1px solid #e2e8f0; margin-top: 0.75rem;">
+                            <strong>Konditionen:</strong><br>
+                            • Rabatt: Ab mindestens 200 Stück 5 % Rabatt (bei 140 Stück: 0 % Rabatt).<br>
+                            • Verpackung &amp; Versand Pauschale: <strong>75,00 €</strong>.<br>
+                            • Zahlungsbedingungen: Innerhalb 14 Tagen <strong>3 % Skonto</strong>.<br>
+                            <span style="color: #047857; font-weight: bold;">Hinweis: Die angegebenen Preise sind Nettopreise.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SHEET: INFRASTRUKTUR 2010 -->
+            <div class="att-content-sheet" id="sheet-att_it2_infra" style="display: none;">
+                <div class="att-sheet">
+                    <h4 style="margin: 0 0 0.5rem 0;">IT-Infrastruktur Hotel City Hof (Stand 2010)</h4>
+                    <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 0.75rem;">
+                        Auszug aus <code>infrastruktur_cityhof.png</code>:
+                    </p>
+                    <div style="text-align: center; background: white; border: 1px solid #cbd5e1; border-radius: 8px; padding: 0.5rem; overflow: hidden;">
+                        <img src="assets/infrastruktur_cityhof.png" alt="Infrastruktur City Hof 2010" style="max-width: 100%; height: auto; border-radius: 4px;">
+                    </div>
+                </div>
+            </div>
+
+            <!-- SHEET: SUBNETS.TXT -->
+            <div class="att-content-sheet" id="sheet-att_it2_dhcp" style="display: none;">
+                <div class="att-sheet">
+                    <h4 style="margin: 0 0 0.4rem 0;">Vorlage subnets.txt</h4>
+                    <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 0.5rem;">
+                        Vorgegebene Beispieldatei eines anderen Kunden:
+                    </p>
+                    <pre style="background: #0f172a; color: #38bdf8; padding: 1rem; border-radius: 6px; font-family: monospace; font-size: 0.84rem; line-height: 1.45;">
+# subnets
+
+subnet 192.168.0.0 netmask 255.255.255.0 {
+    option broadcast-address 192.168.0.255;
+
+    # range of subnet
+    range 192.168.0.1 192.168.0.100;
+
+    # gateway address
+    option routers 192.168.0.254;
+
+    # DNS server address
+    option domain-name-servers 192.168.0.254, 1.1.1.1;
+
+    # lease lengths in seconds
+    default-lease-time 600;
+    max-lease-time 6300;
+}</pre>
+                </div>
+            </div>
+
+            <!-- SHEET: PREISLISTE.HTML -->
+            <div class="att-content-sheet" id="sheet-att_it3_preis" style="display: none;">
+                <div class="att-sheet" style="background: #fbf9f5; border: 1.5px solid #dcd5c9;">
+                    <div style="text-align: center; border-bottom: 2px solid #b8913d; padding-bottom: 0.5rem; margin-bottom: 0.75rem;">
+                        <h3 style="margin: 0; font-family: Georgia, serif; color: #14313a; font-size: 1.3rem;">Hotel City Hof</h3>
+                        <p style="margin: 0; font-size: 0.82rem; color: #5d7178;">Sport- und Wellnessangebote Preisliste (Preisliste.html)</p>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 0.75rem;">
+                        <!-- Sport -->
+                        <div style="background: white; border: 1px solid #cfd8d6; border-radius: 6px; padding: 0.6rem;">
+                            <h5 style="color: #1f5f66; font-size: 0.9rem; margin-bottom: 0.35rem;">🏃 Sport</h5>
+                            <table style="width: 100%; font-size: 0.8rem;">
+                                <tr><td>Morgen-Yoga (60 Min)</td><td style="text-align: right; font-weight: bold;">14 €</td></tr>
+                                <tr><td>Aqua-Fitness (45 Min)</td><td style="text-align: right; font-weight: bold;">12 €</td></tr>
+                                <tr><td>Pilates (55 Min)</td><td style="text-align: right; font-weight: bold;">15 €</td></tr>
+                                <tr><td>Rückenfit (45 Min)</td><td style="text-align: right; font-weight: bold;">12 €</td></tr>
+                                <tr><td>Nordic Walking (90 Min)</td><td style="text-align: right; font-weight: bold;">10 €</td></tr>
+                                <tr><td>Personal Training (60 Min)</td><td style="text-align: right; font-weight: bold;">55 €</td></tr>
+                            </table>
+                        </div>
+
+                        <!-- Wellness -->
+                        <div style="background: white; border: 1px solid #cfd8d6; border-radius: 6px; padding: 0.6rem;">
+                            <h5 style="color: #1f5f66; font-size: 0.9rem; margin-bottom: 0.35rem;">💆 Wellness</h5>
+                            <table style="width: 100%; font-size: 0.8rem;">
+                                <tr><td>Saunalandschaft (Tag)</td><td style="text-align: right; font-weight: bold;">18 €</td></tr>
+                                <tr><td>Klassische Massage (30m)</td><td style="text-align: right; font-weight: bold;">39 €</td></tr>
+                                <tr><td>Klassische Massage (60m)</td><td style="text-align: right; font-weight: bold;">69 €</td></tr>
+                                <tr><td>Hot-Stone-Massage (75m)</td><td style="text-align: right; font-weight: bold;">85 €</td></tr>
+                                <tr><td>Gesichtsbehandlung (60m)</td><td style="text-align: right; font-weight: bold;">65 €</td></tr>
+                                <tr><td>Private Spa für Zwei (2h)</td><td style="text-align: right; font-weight: bold;">120 €</td></tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Rabattstaffel Tiers -->
+                    <div style="background: white; border: 1px solid #cfd8d6; border-radius: 6px; padding: 0.6rem; text-align: center;">
+                        <h5 style="margin: 0 0 0.35rem 0; color: #14313a; font-size: 0.85rem;">Rabattstaffelung:</h5>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.4rem;">
+                            <div style="background: #f3f0ea; padding: 0.35rem; border-radius: 4px;">
+                                <div style="font-size: 1.15rem; font-weight: 800; color: #1f5f66;">20 %</div>
+                                <div style="font-size: 0.72rem; color: #5d7178;">Mehr als 3 Kurse</div>
+                            </div>
+                            <div style="background: #f3f0ea; padding: 0.35rem; border-radius: 4px;">
+                                <div style="font-size: 1.15rem; font-weight: 800; color: #1f5f66;">30 %</div>
+                                <div style="font-size: 0.72rem; color: #5d7178;">Mehr als 5 Kurse</div>
+                            </div>
+                            <div style="background: #f6ecd3; border: 1px solid #b8913d; padding: 0.35rem; border-radius: 4px;">
+                                <div style="font-size: 1.15rem; font-weight: 800; color: #b8913d;">50 %</div>
+                                <div style="font-size: 0.72rem; color: #78350f; font-weight: bold;">Goldstatus (Zusatz)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+</html>

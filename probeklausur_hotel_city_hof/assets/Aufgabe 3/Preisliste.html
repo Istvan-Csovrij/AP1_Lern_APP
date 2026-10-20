@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Hotel City Hof – Sport &amp; Wellness Preisliste</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Karla:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f3f0ea; --card:#fffdf9; --ink:#14313a; --muted:#5d7178; --line:#cfd8d6;
+  --accent:#1f5f66; --gold:#b8913d; --goldbg:#f6ecd3; --hero:#14313a; --herotxt:#f3f0ea;
+  box-sizing:border-box; padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){--bg:#0e1f24;--card:#14292f;--ink:#eee9df;--muted:#9bb0b4;--line:#2b464d;--accent:#6fbcc4;--gold:#d9b560;--goldbg:#2e2a1c;--hero:#0a171b;--herotxt:#eee9df}
+}
+:root[data-theme="dark"]{--bg:#0e1f24;--card:#14292f;--ink:#eee9df;--muted:#9bb0b4;--line:#2b464d;--accent:#6fbcc4;--gold:#d9b560;--goldbg:#2e2a1c;--hero:#0a171b;--herotxt:#eee9df}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Karla,"Segoe UI",Helvetica,Arial,sans-serif;font-size:17px;line-height:1.5}
+h1,h2,h3{font-family:Marcellus,Georgia,"Times New Roman",serif;font-weight:400;margin:0}
+.hero{background:var(--hero);color:var(--herotxt);padding:72px 24px 88px;text-align:center;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;left:50%;bottom:-1px;width:140%;height:56px;background:var(--bg);border-radius:50% 50% 0 0/100% 100% 0 0;transform:translateX(-50%)}
+.hero svg{width:64px;height:32px;margin-bottom:18px;color:var(--gold)}
+.hero h1{font-size:clamp(2.4rem,7vw,4rem);letter-spacing:.02em}
+.hero p{margin:14px auto 0;max-width:34ch;font-size:1.15rem;opacity:.85}
+main{max-width:1000px;margin:0 auto;padding:8px 20px 56px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:32px 30px}
+.panel h2{font-size:1.9rem;color:var(--accent);margin-bottom:4px}
+.panel .sub{color:var(--muted);margin:0 0 22px;font-size:.98rem}
+ul{list-style:none;margin:0;padding:0}
+li{display:flex;align-items:baseline;gap:10px;padding:11px 0;border-top:1px solid var(--line)}
+li:first-child{border-top:0}
+.name{font-weight:500}
+.name small{display:block;color:var(--muted);font-weight:400;font-size:.88rem}
+.dots{flex:1;border-bottom:2px dotted var(--line);transform:translateY(-4px);min-width:16px}
+.price{font-family:Marcellus,Georgia,serif;font-size:1.3rem;white-space:nowrap}
+.rabatt{margin-top:40px}
+.rabatt h2{text-align:center;font-size:1.9rem;margin-bottom:6px}
+.rabatt .lead{text-align:center;color:var(--muted);margin:0 0 24px}
+.tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.tier{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:26px 20px;text-align:center}
+.tier .pct{font-family:Marcellus,Georgia,serif;font-size:3rem;line-height:1;color:var(--accent)}
+.tier p{margin:10px 0 0}
+.tier.gold{background:var(--goldbg);border-color:var(--gold)}
+.tier.gold .pct{color:var(--gold)}
+.tier.gold strong{color:var(--gold)}
+footer{text-align:center;padding:8px 24px 56px;color:var(--muted)}
+footer p{margin:0;font-family:Marcellus,Georgia,serif;font-size:1.25rem;color:var(--ink)}
+footer small{display:block;margin-top:10px;font-size:.85rem}
+@media (max-width:760px){.grid,.tiers{grid-template-columns:1fr}.panel{padding:26px 20px}.hero{padding:56px 20px 76px}}
+@media print{.hero{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+</style>
+</head>
+<body>
+<header class="hero">
+  <svg viewBox="0 0 64 32" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M2 20c10 0 10-8 20-8s10 8 20 8 10-8 20-8"/><path d="M2 29c10 0 10-8 20-8s10 8 20 8 10-8 20-8" opacity=".5"/></svg>
+  <h1>Hotel City Hof</h1>
+  <p>Unsere Sport- und Wellnessangebote</p>
+</header>
+
+<main>
+  <div class="grid">
+    <section class="panel" aria-labelledby="sport">
+      <h2 id="sport">Sport</h2>
+      <p class="sub">Kurse und Training für Körper und Kondition</p>
+      <ul>
+        <li><span class="name">Morgen-Yoga<small>60 Min · Gruppenkurs</small></span><span class="dots"></span><span class="price">14 €</span></li>
+        <li><span class="name">Aqua-Fitness<small>45 Min · Hotelpool</small></span><span class="dots"></span><span class="price">12 €</span></li>
+        <li><span class="name">Pilates<small>55 Min · Gruppenkurs</small></span><span class="dots"></span><span class="price">15 €</span></li>
+        <li><span class="name">Rückenfit<small>45 Min · Gruppenkurs</small></span><span class="dots"></span><span class="price">12 €</span></li>
+        <li><span class="name">Nordic Walking<small>90 Min · geführte Tour</small></span><span class="dots"></span><span class="price">10 €</span></li>
+        <li><span class="name">Personal Training<small>60 Min · Einzelstunde</small></span><span class="dots"></span><span class="price">55 €</span></li>
+      </ul>
+    </section>
+
+    <section class="panel" aria-labelledby="wellness">
+      <h2 id="wellness">Wellness</h2>
+      <p class="sub">Zeit zum Abschalten und Auftanken</p>
+      <ul>
+        <li><span class="name">Saunalandschaft<small>Tageskarte</small></span><span class="dots"></span><span class="price">18 €</span></li>
+        <li><span class="name">Klassische Massage<small>30 Min</small></span><span class="dots"></span><span class="price">39 €</span></li>
+        <li><span class="name">Klassische Massage<small>60 Min</small></span><span class="dots"></span><span class="price">69 €</span></li>
+        <li><span class="name">Hot-Stone-Massage<small>75 Min</small></span><span class="dots"></span><span class="price">85 €</span></li>
+        <li><span class="name">Gesichtsbehandlung<small>60 Min</small></span><span class="dots"></span><span class="price">65 €</span></li>
+        <li><span class="name">Private Spa für Zwei<small>2 Std. · Sauna und Ruheraum</small></span><span class="dots"></span><span class="price">120 €</span></li>
+      </ul>
+    </section>
+  </div>
+
+  <section class="rabatt" aria-labelledby="rabatt">
+    <h2 id="rabatt">Ihre Vorteile</h2>
+    <p class="lead">Je mehr Sie buchen, desto mehr sparen Sie.</p>
+    <div class="tiers">
+      <div class="tier"><div class="pct">20 %</div><p>Rabatt bei der Buchung von <strong>mehr als 3 Kursen</strong></p></div>
+      <div class="tier"><div class="pct">30 %</div><p>Rabatt bei der Buchung von <strong>mehr als 5 Kursen</strong></p></div>
+      <div class="tier gold"><div class="pct">50 %</div><p>Gäste mit <strong>Goldstatus</strong> erhalten zusätzlich 50 %  Rabatt.</p></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>Das Team City Hof wünscht Ihnen einen entspannten Aufenthalt.</p>
+  <small>Alle Preise in Euro pro Person inkl. MwSt.</small>
+</footer>
+</body>
+</html>
