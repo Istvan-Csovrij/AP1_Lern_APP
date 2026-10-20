@@ -42,6 +42,11 @@ const ExamAttachments = {
         }
 
         // PRÜFUNG 24: SOLARTECH GMBH (ORIGINALANLAGEN 2 BIS 6: UML, VLSM, KALKULATION, NWA, HARDWARE)
+        // PRÜFUNG 25: HOTEL CITY HOF (PROBEKLAUSUR WINTER 2026/27 FA 230: PREISLISTE.HTML, SUBNETS.TXT, ANGEBOTE)
+        if (examId === "exam_25") {
+            return this.renderCityHofAttachments(pageIndex);
+        }
+
         if (examId === "exam_24") {
             return this.renderSolarExamAttachments(pageIndex);
         }
@@ -836,6 +841,403 @@ const ExamAttachments = {
     // =========================================================================
     // PRÜFUNG 23: DARSYS GMBH (IBBW BADEN-WÜRTTEMBERG ORIGINAL)
     // =========================================================================
+    // =========================================================================
+    // PRÜFUNG 25: HOTEL CITY HOF (ORIGINAL-PROBEKLAUSUR FA 230 WINTER 2026/27)
+    // Anlagen: Angebot 1 & 2 (Tablets), DHCP subnets.txt & Preisliste.html
+    // =========================================================================
+    renderCityHofAttachments: function(pageIndex) {
+        const isSol = this.displayMode === "solution";
+
+        if (pageIndex === 1) {
+            // IT 1: Angebotsvergleich Tablets 140 Stück
+            const isTabA2 = this.activeTab === "ch_ang2";
+            const isTabKalk = this.activeTab === "ch_kalk";
+
+            return `
+                <div class="authentic-att-wrapper">
+                    <div class="att-header-bar">
+                        <span class="att-official-badge">
+                            <i class="fa-solid fa-file-invoice-dollar"></i> IT 1: Angebotsvergleich &bull; 140 Tablets (Anlage 1)
+                        </span>
+                        <div class="att-tab-pills">
+                            <button class="att-tab-btn ${(!isTabA2 && !isTabKalk) ? 'active' : ''}" onclick="ExamAttachments.setTab('ch_ang1')">
+                                🏢 Angebot 1 (Systemhaus Maier)
+                            </button>
+                            <button class="att-tab-btn ${isTabA2 ? 'active' : ''}" onclick="ExamAttachments.setTab('ch_ang2')">
+                                🏢 Angebot 2 (Digital Pro)
+                            </button>
+                            <button class="att-tab-btn ${isTabKalk ? 'active' : ''}" onclick="ExamAttachments.setTab('ch_kalk')">
+                                📊 Kalkulationstabelle
+                            </button>
+                        </div>
+                    </div>
+
+                    ${(!isTabA2 && !isTabKalk) ? `
+                        <div class="att-paper-sheet">
+                            <div style="display: flex; justify-content: space-between; border-bottom: 2px solid #cbd5e1; padding-bottom: 0.5rem; margin-bottom: 0.75rem;">
+                                <div>
+                                    <strong style="color: #1e1b4b; font-size: 1.1rem;">Systemhaus Maier GmbH</strong><br>
+                                    <span style="font-size: 0.82rem; color: #64748b;">Bissdorfer Str. 12 &bull; 20459 Hamburg</span>
+                                </div>
+                                <div style="text-align: right; font-size: 0.82rem; color: #475569;">
+                                    <strong>Angebot A576B-1112</strong><br>
+                                    Datum: 1. Dezember 20xx
+                                </div>
+                            </div>
+                            <h4 style="color: #312e81; margin: 0 0 0.5rem 0;">Angebot: 140 Tablets Modell TW-Tab 10</h4>
+                            <p style="font-size: 0.88rem; color: #334155; margin-bottom: 0.75rem;">
+                                Inklusive Tischladestation. Einzelpreis: <strong>410,00 € brutto</strong> (inkl. 19 % USt.) &bull; Gesamt: <strong>57.400,00 € brutto</strong>.
+                            </p>
+                            <table class="att-spec-table">
+                                <tr><th style="width: 35%;">Kondition</th><th>Vorgabe des Lieferanten</th></tr>
+                                <tr><td><strong>Rabattstaffel:</strong></td><td>Ab 100 Stk.: <strong>2 % Rabatt</strong> &bull; Ab 150 Stk.: 3 % Rabatt</td></tr>
+                                <tr><td><strong>Lieferung &amp; Fracht:</strong></td><td>Lieferung innerhalb von <strong>7 Tagen</strong> &bull; Versand <strong>frei Haus</strong></td></tr>
+                                <tr><td><strong>Verpackungskosten:</strong></td><td>10er Verpackungseinheiten à <strong>5,95 € brutto</strong> (für 140 Stk. = 14 Einheiten)</td></tr>
+                                <tr><td><strong>Zahlungsbedingungen:</strong></td><td>Zahlungsziel 30 Tage &bull; Bei Zahlung innerhalb 10 Tagen: <strong>2 % Skonto</strong></td></tr>
+                                <tr><td><strong>Preisbasis:</strong></td><td><span style="color: #dc2626; font-weight: bold;">⚠️ Alle Beträge sind BRUTTOPREISE (inkl. 19 % USt.)!</span></td></tr>
+                            </table>
+                        </div>
+                    ` : isTabA2 ? `
+                        <div class="att-paper-sheet">
+                            <div style="display: flex; justify-content: space-between; border-bottom: 2px solid #cbd5e1; padding-bottom: 0.5rem; margin-bottom: 0.75rem;">
+                                <div>
+                                    <strong style="color: #1e1b4b; font-size: 1.1rem;">Digital Pro GmbH</strong><br>
+                                    <span style="font-size: 0.82rem; color: #64748b;">Wolf-Hirth-Str. 4 &bull; 75175 Pforzheim</span>
+                                </div>
+                                <div style="text-align: right; font-size: 0.82rem; color: #475569;">
+                                    <strong>Angebot 2026-1733</strong><br>
+                                    Datum: 1. Dezember 20xx
+                                </div>
+                            </div>
+                            <h4 style="color: #312e81; margin: 0 0 0.5rem 0;">Angebot: 140 Tablets Modell BP-Comfort 10</h4>
+                            <p style="font-size: 0.88rem; color: #334155; margin-bottom: 0.75rem;">
+                                Inklusive Tischladestation "Easy Safe". Einzelpreis: <strong>355,00 € netto</strong> &bull; Gesamt: <strong>49.700,00 € netto</strong>.
+                            </p>
+                            <table class="att-spec-table">
+                                <tr><th style="width: 35%;">Kondition</th><th>Vorgabe des Lieferanten</th></tr>
+                                <tr><td><strong>Rabattstaffel:</strong></td><td>Ab 200 Stk.: <strong>5 % Rabatt</strong> (bei 140 Stk. greift kein Rabatt = 0 %)</td></tr>
+                                <tr><td><strong>Lieferung &amp; Fracht:</strong></td><td>Lieferzeit: <strong>14 Tage</strong> (2 Wochen)</td></tr>
+                                <tr><td><strong>Verpackung &amp; Versand:</strong></td><td>Pauschale für Verpackung &amp; Versand: <strong>75,00 € netto</strong></td></tr>
+                                <tr><td><strong>Zahlungsbedingungen:</strong></td><td>Bei Zahlung innerhalb von 14 Tagen: <strong>3 % Skonto</strong> &bull; 30 Tage netto</td></tr>
+                                <tr><td><strong>Preisbasis:</strong></td><td><span style="color: #059669; font-weight: bold;">✓ Alle Beträge sind NETTOPREISE!</span></td></tr>
+                            </table>
+                        </div>
+                    ` : `
+                        <div class="att-paper-sheet">
+                            <h4 style="margin: 0 0 0.5rem 0; color: #1e1b4b;">Kaufmännischer Angebotsvergleich (Nettowerte auf 2 Nachkommastellen)</h4>
+                            <table class="att-spec-table">
+                                <thead>
+                                    <tr>
+                                        <th>Kalkulationsschritt</th>
+                                        <th>Systemhaus Maier GmbH</th>
+                                        <th>Digital Pro GmbH</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Listeneinkaufspreis (netto)</strong></td>
+                                        <td style="${isSol ? 'font-weight: bold; color: #047857;' : ''}">${isSol ? '48.235,29 €' : '48.235,29 € (57.400 / 1,19)'}</td>
+                                        <td style="${isSol ? 'font-weight: bold; color: #047857;' : ''}">49.700,00 € (140 × 355)</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>- Lieferrabatt</strong></td>
+                                        <td style="${isSol ? 'font-weight: bold; color: #047857;' : ''}">- 964,71 € (2 %)</td>
+                                        <td style="${isSol ? 'font-weight: bold; color: #047857;' : ''}">- 0,00 € (0 %)</td>
+                                    </tr>
+                                    <tr style="background: #f8fafc;">
+                                        <td><strong>= Zieleinkaufspreis</strong></td>
+                                        <td style="${isSol ? 'font-weight: bold; color: #047857;' : ''}">47.270,58 €</td>
+                                        <td style="${isSol ? 'font-weight: bold; color: #047857;' : ''}">49.700,00 €</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>- Liefererskonto</strong></td>
+                                        <td style="${isSol ? 'font-weight: bold; color: #047857;' : ''}">- 945,41 € (2 %)</td>
+                                        <td style="${isSol ? 'font-weight: bold; color: #047857;' : ''}">- 1.491,00 € (3 %)</td>
+                                    </tr>
+                                    <tr style="background: #f8fafc;">
+                                        <td><strong>= Bareinkaufspreis</strong></td>
+                                        <td style="${isSol ? 'font-weight: bold; color: #047857;' : ''}">46.325,17 €</td>
+                                        <td style="${isSol ? 'font-weight: bold; color: #047857;' : ''}">48.209,00 €</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>+ Bezugskosten (netto)</strong></td>
+                                        <td style="${isSol ? 'font-weight: bold; color: #047857;' : ''}">+ 70,00 € (83,30 € / 1,19)</td>
+                                        <td style="${isSol ? 'font-weight: bold; color: #047857;' : ''}">+ 75,00 €</td>
+                                    </tr>
+                                    <tr style="background: #f0fdf4; border-top: 2px solid #10b981;">
+                                        <td><strong style="color: #065f46;">= Bezugspreis (Einstandspreis)</strong></td>
+                                        <td style="font-size: 1.05rem; font-weight: 800; color: #047857;">
+                                            46.395,17 € 🏆 (Günstiger!)
+                                        </td>
+                                        <td style="font-size: 1.05rem; font-weight: 700; color: #64748b;">
+                                            48.284,00 €
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div style="background: #ecfdf5; border-left: 4px solid #10b981; padding: 0.6rem 0.85rem; border-radius: 4px; margin-top: 0.75rem; font-size: 0.85rem; color: #065f46;">
+                                <strong>Entscheidung:</strong> Systemhaus Maier ist um <strong>1.888,83 € günstiger</strong> und liefert in nur <strong>7 Tagen</strong> (statt 14 Tagen).
+                            </div>
+                        </div>
+                    `}
+                </div>
+            `;
+        }
+
+        if (pageIndex === 2) {
+            // IT 2: Infrastruktur, WLAN & DHCP subnets.txt
+            const isTabDhcp = this.activeTab === "ch_dhcp";
+
+            return `
+                <div class="authentic-att-wrapper">
+                    <div class="att-header-bar">
+                        <span class="att-official-badge">
+                            <i class="fa-solid fa-network-wired"></i> IT 2: WLAN-Infrastruktur &amp; DHCP (Anlage 2)
+                        </span>
+                        <div class="att-tab-pills">
+                            <button class="att-tab-btn ${!isTabDhcp ? 'active' : ''}" onclick="ExamAttachments.setTab('ch_infra')">
+                                📡 Infrastruktur &amp; WLAN 2010
+                            </button>
+                            <button class="att-tab-btn ${isTabDhcp ? 'active' : ''}" onclick="ExamAttachments.setTab('ch_dhcp')">
+                                ⚙️ subnets.txt (DHCP)
+                            </button>
+                        </div>
+                    </div>
+
+                    ${!isTabDhcp ? `
+                        <div class="att-paper-sheet">
+                            <h4 style="margin: 0 0 0.4rem 0; color: #1e1b4b;">Ist-Zustand IT-Infrastruktur Hotel City Hof (Stand 2010)</h4>
+                            <p style="font-size: 0.86rem; color: #475569; margin-bottom: 0.75rem;">
+                                Die Hoteltechnik basiert auf alten 802.11n Access Points (Wi-Fi 4), die rein im überlasteten 2,4-GHz-Band betrieben werden. Sobald über 50 % der Zimmer belegt sind, bricht die Datenrate drastisch ein.
+                            </p>
+                            <table class="att-spec-table">
+                                <tr><th>Schwachstelle</th><th>Technische Ursache &amp; Auswirkung</th></tr>
+                                <tr>
+                                    <td><strong>1. Frequenzüberlastung 2,4 GHz:</strong></td>
+                                    <td>Nur 3 überlappungsfreie Kanäle (1, 6, 11). Hohe Co-Channel-Interference bei vielen aktiven Smartphones &amp; Tablets.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>2. Hohe Client-Dichte (CSMA/CA):</strong></td>
+                                    <td>WLAN ist ein Shared Medium. Zu viele Endgeräte pro Zelle erzeugen hohe Latenzen und Kollisionen.</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>3. Veraltete Switches &amp; Uplinks:</strong></td>
+                                    <td>Fast-Ethernet (100 Mbit/s) Flaschenhals zwischen den Etagenverteilern und dem zentralen Gateway.</td>
+                                </tr>
+                            </table>
+                            <div style="background: #eef2ff; border-left: 4px solid #6366f1; padding: 0.6rem 0.85rem; border-radius: 4px; margin-top: 0.75rem; font-size: 0.84rem; color: #312e81;">
+                                <strong>Lösungsansatz:</strong> Upgrade auf Wi-Fi 6 (802.11ax), Dual-Band (5 GHz / 6 GHz mit Band Steering), nahtloses Roaming (802.11k/r/v) und PoE-Versorgung.
+                            </div>
+                        </div>
+                    ` : `
+                        <div class="att-paper-sheet">
+                            <h4 style="margin: 0 0 0.4rem 0; color: #1e1b4b;">DHCP-Server Konfiguration (subnets.txt) für 1.000 Clients</h4>
+                            <p style="font-size: 0.86rem; color: #475569; margin-bottom: 0.75rem;">
+                                Vorlage aus subnets.txt. Für 1.000 gleichzeitige Clients muss das /24-Subnetz auf ein <strong>/22-Subnetz</strong> erweitert werden (2^10 = 1.024 Adressen).
+                            </p>
+                            <pre style="background: #0f172a; color: #38bdf8; padding: 1rem; border-radius: 8px; font-family: monospace; font-size: 0.88rem; line-height: 1.45; overflow-x: auto;">
+# subnets.txt (Angepasst für Hotel City Hof – 1.000 Clients)
+subnet 192.168.0.0 netmask 255.255.252.0 {
+    option broadcast-address 192.168.3.255;
+
+    # Dynamische IP-Range für 1.000 Gäste-Clients & Tablets
+    range 192.168.0.10 192.168.3.250;
+
+    # Gateway Adresse
+    option routers 192.168.0.1;
+
+    # DNS Server Adressen
+    option domain-name-servers 192.168.0.1, 1.1.1.1;
+
+    # Lease-Zeiten (z. B. 4 Std. Standard, max. 8 Std. für Hotelgäste)
+    default-lease-time 14400;
+    max-lease-time 28800;
+}</pre>
+                            <div style="background: #f0fdf4; border: 1px solid #bbf7d0; padding: 0.6rem 0.85rem; border-radius: 6px; margin-top: 0.75rem; font-size: 0.84rem; color: #166534;">
+                                <strong>Prüfungskern:</strong> /22 Präfix = <code>255.255.252.0</code> &bull; Netz: <code>192.168.0.0</code> &bull; Broadcast: <code>192.168.3.255</code> &bull; Nutzbare Hosts: 1.022.
+                            </div>
+                        </div>
+                    `}
+                </div>
+            `;
+        }
+
+        if (pageIndex === 3) {
+            // IT 3: Preisliste.html & SQL
+            const isTabSql = this.activeTab === "ch_sql";
+            const isTabSim = this.activeTab === "ch_sim";
+
+            return `
+                <div class="authentic-att-wrapper">
+                    <div class="att-header-bar">
+                        <span class="att-official-badge">
+                            <i class="fa-solid fa-code"></i> IT 3: Preisliste.html &amp; Funktion ermittle_Preis (Anlage 3)
+                        </span>
+                        <div class="att-tab-pills">
+                            <button class="att-tab-btn ${(!isTabSql && !isTabSim) ? 'active' : ''}" onclick="ExamAttachments.setTab('ch_preis')">
+                                📋 Preisliste.html
+                            </button>
+                            <button class="att-tab-btn ${isTabSim ? 'active' : ''}" onclick="ExamAttachments.setTab('ch_sim')">
+                                🧮 Rabatt-Rechner
+                            </button>
+                            <button class="att-tab-btn ${isTabSql ? 'active' : ''}" onclick="ExamAttachments.setTab('ch_sql')">
+                                🗄️ SQL Schema &amp; Abfragen
+                            </button>
+                        </div>
+                    </div>
+
+                    ${(!isTabSql && !isTabSim) ? `
+                        <div class="att-paper-sheet" style="background: #fbf9f5; border: 1.5px solid #dcd5c9;">
+                            <div style="text-align: center; border-bottom: 2px solid #b8913d; padding-bottom: 0.6rem; margin-bottom: 0.85rem;">
+                                <h3 style="margin: 0; font-family: Georgia, serif; color: #14313a; font-size: 1.35rem;">Hotel City Hof</h3>
+                                <p style="margin: 0.15rem 0 0 0; font-size: 0.85rem; color: #5d7178;">Sport- und Wellnessangebote Preisliste</p>
+                            </div>
+
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                                <!-- Sport -->
+                                <div style="background: white; border: 1px solid #cfd8d6; border-radius: 8px; padding: 0.75rem;">
+                                    <h5 style="color: #1f5f66; font-size: 0.95rem; margin: 0 0 0.4rem 0;">🏃 Sport</h5>
+                                    <table style="width: 100%; font-size: 0.82rem; border-collapse: collapse;">
+                                        <tr style="border-bottom: 1px solid #eee;"><td style="padding: 0.25rem 0;">Morgen-Yoga (60 Min)</td><td style="text-align: right; font-weight: bold;">14 €</td></tr>
+                                        <tr style="border-bottom: 1px solid #eee;"><td style="padding: 0.25rem 0;">Aqua-Fitness (45 Min)</td><td style="text-align: right; font-weight: bold;">12 €</td></tr>
+                                        <tr style="border-bottom: 1px solid #eee;"><td style="padding: 0.25rem 0;">Pilates (55 Min)</td><td style="text-align: right; font-weight: bold;">15 €</td></tr>
+                                        <tr style="border-bottom: 1px solid #eee;"><td style="padding: 0.25rem 0;">Rückenfit (45 Min)</td><td style="text-align: right; font-weight: bold;">12 €</td></tr>
+                                        <tr style="border-bottom: 1px solid #eee;"><td style="padding: 0.25rem 0;">Nordic Walking (90 Min)</td><td style="text-align: right; font-weight: bold;">10 €</td></tr>
+                                        <tr><td style="padding: 0.25rem 0;">Personal Training (60 Min)</td><td style="text-align: right; font-weight: bold;">55 €</td></tr>
+                                    </table>
+                                </div>
+
+                                <!-- Wellness -->
+                                <div style="background: white; border: 1px solid #cfd8d6; border-radius: 8px; padding: 0.75rem;">
+                                    <h5 style="color: #1f5f66; font-size: 0.95rem; margin: 0 0 0.4rem 0;">💆 Wellness</h5>
+                                    <table style="width: 100%; font-size: 0.82rem; border-collapse: collapse;">
+                                        <tr style="border-bottom: 1px solid #eee;"><td style="padding: 0.25rem 0;">Saunalandschaft (Tag)</td><td style="text-align: right; font-weight: bold;">18 €</td></tr>
+                                        <tr style="border-bottom: 1px solid #eee;"><td style="padding: 0.25rem 0;">Klassische Massage (30m)</td><td style="text-align: right; font-weight: bold;">39 €</td></tr>
+                                        <tr style="border-bottom: 1px solid #eee;"><td style="padding: 0.25rem 0;">Klassische Massage (60m)</td><td style="text-align: right; font-weight: bold;">69 €</td></tr>
+                                        <tr style="border-bottom: 1px solid #eee;"><td style="padding: 0.25rem 0;">Hot-Stone-Massage (75m)</td><td style="text-align: right; font-weight: bold;">85 €</td></tr>
+                                        <tr style="border-bottom: 1px solid #eee;"><td style="padding: 0.25rem 0;">Gesichtsbehandlung (60m)</td><td style="text-align: right; font-weight: bold;">65 €</td></tr>
+                                        <tr><td style="padding: 0.25rem 0;">Private Spa für Zwei (2h)</td><td style="text-align: right; font-weight: bold;">120 €</td></tr>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <!-- Rabattstaffel Tiers -->
+                            <div style="background: white; border: 1px solid #cfd8d6; border-radius: 8px; padding: 0.75rem;">
+                                <h5 style="margin: 0 0 0.4rem 0; color: #14313a; font-size: 0.9rem;">🎁 Rabattstaffelung laut Preisliste.html:</h5>
+                                <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.5rem; text-align: center;">
+                                    <div style="background: #f3f0ea; padding: 0.5rem; border-radius: 6px;">
+                                        <div style="font-size: 1.3rem; font-weight: 800; color: #1f5f66;">20 %</div>
+                                        <div style="font-size: 0.75rem; color: #5d7178;">Mehr als 3 Kurse</div>
+                                    </div>
+                                    <div style="background: #f3f0ea; padding: 0.5rem; border-radius: 6px;">
+                                        <div style="font-size: 1.3rem; font-weight: 800; color: #1f5f66;">30 %</div>
+                                        <div style="font-size: 0.75rem; color: #5d7178;">Mehr als 5 Kurse</div>
+                                    </div>
+                                    <div style="background: #f6ecd3; border: 1px solid #b8913d; padding: 0.5rem; border-radius: 6px;">
+                                        <div style="font-size: 1.3rem; font-weight: 800; color: #b8913d;">50 %</div>
+                                        <div style="font-size: 0.75rem; color: #78350f; font-weight: bold;">Goldstatus (Zusatz)</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    ` : isTabSim ? `
+                        <div class="att-paper-sheet">
+                            <h4 style="margin: 0 0 0.5rem 0; color: #1e1b4b;">Interaktive Funktionsprüfung von ermittle_Preis</h4>
+                            <p style="font-size: 0.86rem; color: #475569; margin-bottom: 0.75rem;">
+                                Signatur: <code>ermittle_Preis(gebuchteKurse: string[], Status: string): float</code>
+                            </p>
+                            <table class="att-spec-table">
+                                <thead>
+                                    <tr>
+                                        <th>Testfall</th>
+                                        <th>Gebuchte Kurse</th>
+                                        <th>Status</th>
+                                        <th>Basispreis</th>
+                                        <th>Rabatt</th>
+                                        <th>Endbetrag</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Test 1</strong></td>
+                                        <td>Yoga (14 €) + Aqua (12 €) = 2 Kurse</td>
+                                        <td>Standard</td>
+                                        <td>26,00 €</td>
+                                        <td>0 % (&le; 3)</td>
+                                        <td style="font-weight: bold; color: #047857;">26,00 €</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Test 2</strong></td>
+                                        <td>Yoga + Aqua + Pilates + Rückenfit = 4 Kurse</td>
+                                        <td>Standard</td>
+                                        <td>53,00 €</td>
+                                        <td>20 % (> 3)</td>
+                                        <td style="font-weight: bold; color: #047857;">42,40 €</td>
+                                    </tr>
+                                    <tr style="background: #fffbeb;">
+                                        <td><strong>Test 3</strong></td>
+                                        <td>Yoga + Aqua + Pilates + Rückenfit = 4 Kurse</td>
+                                        <td><span style="background: #f59e0b; color: white; padding: 0.1rem 0.4rem; border-radius: 4px; font-weight: bold; font-size: 0.75rem;">Gold</span></td>
+                                        <td>53,00 €</td>
+                                        <td>20 % + 50 % Gold</td>
+                                        <td style="font-weight: 800; color: #b45309;">21,20 €</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Test 4</strong></td>
+                                        <td>6 Kurse gebucht (53 € + 10 € + 55 €)</td>
+                                        <td>Standard</td>
+                                        <td>118,00 €</td>
+                                        <td>30 % (> 5)</td>
+                                        <td style="font-weight: bold; color: #047857;">82,60 €</td>
+                                    </tr>
+                                    <tr style="background: #fffbeb;">
+                                        <td><strong>Test 5</strong></td>
+                                        <td>6 Kurse gebucht</td>
+                                        <td><span style="background: #f59e0b; color: white; padding: 0.1rem 0.4rem; border-radius: 4px; font-weight: bold; font-size: 0.75rem;">Gold</span></td>
+                                        <td>118,00 €</td>
+                                        <td>30 % + 50 % Gold</td>
+                                        <td style="font-weight: 800; color: #b45309;">41,30 €</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    ` : `
+                        <div class="att-paper-sheet">
+                            <h4 style="margin: 0 0 0.5rem 0; color: #1e1b4b;">Datenbankschema Sportkurse &amp; SQL-Musterlösung</h4>
+                            <div style="background: #f8fafc; border: 1px solid #e2e8f0; padding: 0.6rem 0.85rem; border-radius: 6px; font-family: monospace; font-size: 0.84rem; margin-bottom: 0.75rem;">
+                                Sportkurse(<strong>KursID</strong>, Kurstitel, Kategorie, Tag, Startzeit, Dauer, Kosten, maxTeilnehmerzahl, aktuelleTeilnehmerzahl)
+                            </div>
+                            <pre style="background: #0f172a; color: #38bdf8; padding: 0.85rem; border-radius: 6px; font-family: monospace; font-size: 0.84rem; line-height: 1.45;">
+-- 1) Kurstitel der Kategorie 'Wellness'
+SELECT Kurstitel 
+FROM Sportkurse 
+WHERE Kategorie = 'Wellness';
+
+-- 2) Kurse mit freien Plätzen sortiert nach Kosten DESC
+SELECT 
+    Kurstitel, 
+    Tag, 
+    Startzeit, 
+    Dauer, 
+    Kosten, 
+    (maxTeilnehmerzahl - aktuelleTeilnehmerzahl) AS freiePlaetze
+FROM Sportkurse
+WHERE maxTeilnehmerzahl > aktuelleTeilnehmerzahl
+ORDER BY Kosten DESC;
+
+-- 3) Kursbuchung ID 1: aktuelleTeilnehmerzahl + 1
+UPDATE Sportkurse 
+SET aktuelleTeilnehmerzahl = aktuelleTeilnehmerzahl + 1 
+WHERE KursID = 1;</pre>
+                        </div>
+                    `}
+                </div>
+            `;
+        }
+
+        return `<div class="authentic-att-wrapper"><div class="att-paper-sheet"><p>Deckblatt Prüfung 25: Hotel City Hof (Probeklausur Winter 2026/27).</p></div></div>`;
+    },
+
     renderDarSysAttachments: function(pageIndex) {
         // Page 0: Deckblatt -> Overview of all 12 authentic Anlagen
         if (pageIndex === 0) {
