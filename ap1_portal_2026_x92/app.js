@@ -201,6 +201,18 @@ document.addEventListener("DOMContentLoaded", () => {
                 alert("Die Übungsaufgaben wurden entsprechend deinen Optionen erfolgreich neu generiert!");
             });
         }
+        // URL Parameter handling (e.g. ?exam=exam_24)
+        try {
+            const urlParams = new URLSearchParams(window.location.search);
+            const targetExam = urlParams.get("exam");
+            if (targetExam) {
+                setTimeout(() => {
+                    startExamMode(false, targetExam);
+                }, 200);
+            }
+        } catch (e) {
+            console.warn("URL params error:", e);
+        }
     } catch (error) {
         console.error("Initialization error:", error);
         alert("Fehler bei der Initialisierung der Quiz-App:\n" + error.message + "\n\nStacktrace:\n" + error.stack);

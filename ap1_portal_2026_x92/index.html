@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AP1 Prüfungstrainer - Fachinformatiker</title>
-    <link rel="stylesheet" href="style.css?v=136">
+    <link rel="stylesheet" href="style.css?v=137">
     <!-- FontAwesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -108,6 +108,9 @@
                         <i class="fa-solid fa-arrow-left"></i> Haupt-Quiz fortsetzen
                     </button>
                     <button class="filter-btn active" data-theme="all">Alle Themen</button>
+                    <button class="filter-btn highlight-letzte-btn" id="open-letzte-ap1-btn" onclick="startExamMode(false, 'exam_24')" style="border: 2px solid #8b5cf6; background: linear-gradient(135deg, #ede9fe, #ddd6fe); color: #5b21b6; font-weight: 800; margin-top: 0.45rem; margin-bottom: 0.45rem; text-align: left; display: flex; align-items: center; gap: 0.5rem; cursor: pointer; box-shadow: 0 2px 6px rgba(139, 92, 246, 0.2);">
+                        <i class="fa-solid fa-fire" style="color: #ef4444;"></i> 📄 Letzte AP1-Prüfung (Original BaWü 2026 mit Anlagen 2–6)
+                    </button>
                     <button class="filter-btn highlight-arbeitsplatz-btn" data-theme="it-arbeitsplatz" id="it-arbeitsplatz-btn" style="border: 2px solid #2563eb; background: linear-gradient(135deg, #eff6ff, #dbeafe); color: #1d4ed8; font-weight: bold; margin-bottom: 0.4rem; margin-top: 0.35rem; text-align: left; display: flex; align-items: center; gap: 0.5rem; box-shadow: 0 2px 4px rgba(37, 99, 235, 0.12);">
                         <i class="fa-solid fa-desktop" style="color: #2563eb;"></i> 🎯 AP1: IT-gestützter Arbeitsplatz
                     </button>
@@ -331,13 +334,15 @@
                         <option value="exam_19">🎯 Prüfung 19: IT-Arbeitsplatz II – Kreativagentur (Desk-Sharing &amp; Zero-Trust)</option>
                         <option value="exam_20">🎯 Prüfung 20: IT-Arbeitsplatz III – CAD-Workstation (ECC, USV &amp; GPO)</option>
                         <option value="exam_21">🎯 Prüfung 21: IT-Arbeitsplatz IV – Klinikverbund (Rollout, PXE &amp; SLA)</option>
+                        <option value="exam_24" selected>🏆 Letzte AP1-Prüfung: Original BaWü Frühjahr 2026 (SolarTech &amp; WLAN – Anlagen 2 bis 6)</option>
+                        <option value="exam_23">🏛️ Prüfung 23: Original BaWü IBBW (DarSys GmbH – IT 1 bis IT 3)</option>
                         <option value="exam_22">🏆 Prüfung 22: Original Baden-Württemberg Sommer 2026 (SoftTech Solutions GmbH – FA 230)</option>
                         <option value="exam_random">🎲 Dynamische 100-Punkte Zufallsprüfung</option>
                     </select>
                 </div>
 
                 <button class="btn btn-full" id="open-exam-overview-sidebar-btn" style="background: #ecfdf5; border: 1.5px solid #10b981; color: #047857; font-weight: 700; font-size: 0.88rem; padding: 0.55rem; display: flex; align-items: center; justify-content: center; gap: 0.45rem; width: 100%; border-radius: var(--radius); cursor: pointer; margin-bottom: 0.6rem; transition: all 0.2s;">
-                    <i class="fa-solid fa-layer-group"></i> 📚 Alle 22 Prüfungen vergleichen &amp; wählen
+                    <i class="fa-solid fa-layer-group"></i> 📚 Alle 24 Prüfungen vergleichen &amp; wählen
                 </button>
 
                 <div style="display: flex; flex-direction: column; gap: 0.5rem;">
@@ -365,6 +370,19 @@
                     Spezial-Vorbereitung für die Zwischenstufe &amp; Abschlussprüfung Teil 2 (Anwendungsentwicklung).
                 </p>
 
+                <!-- Highlight Banner: Letzte AP1 Prüfung -->
+                <div style="background: linear-gradient(135deg, #fef3c7, #fde68a); border: 2px solid #f59e0b; border-radius: 8px; padding: 0.55rem 0.7rem; margin-bottom: 0.75rem; cursor: pointer; box-shadow: 0 2px 6px rgba(245, 158, 11, 0.2); transition: transform 0.15s ease;" onclick="startExamMode(false, 'exam_24')" title="Letzte AP1-Prüfung direkt im interaktiven Split-Screen starten">
+                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.2rem;">
+                        <strong style="color: #92400e; font-size: 0.86rem; display: flex; align-items: center; gap: 0.35rem;">
+                            <i class="fa-solid fa-star" style="color: #d97706;"></i> Letzte AP1-Prüfung (2026)
+                        </strong>
+                        <span style="background: #d97706; color: white; font-size: 0.68rem; font-weight: 800; padding: 0.12rem 0.45rem; border-radius: 999px;">STARTEN ➔</span>
+                    </div>
+                    <div style="font-size: 0.76rem; color: #78350f; line-height: 1.3;">
+                        SolarTech &amp; WLAN • Anlagen 2–6 im Split-View (VLSM, NWA, OOP)
+                    </div>
+                </div>
+
                 <div style="display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 0.85rem; font-size: 0.82rem;">
                     <div style="background: #eef2ff; border-left: 3px solid #6366f1; padding: 0.4rem 0.6rem; border-radius: 4px; color: #312e81; cursor: pointer;" onclick="openAp2BridgeModal('pb2')">
                         <strong>1. Softwareprodukt planen (PB 2)</strong><br>
@@ -382,7 +400,7 @@
 
                 <div style="display: flex; gap: 0.4rem; margin-bottom: 0.5rem;">
                     <button class="btn btn-secondary" onclick="openAp2BridgeModal('files')" title="Original-Prüfungen auf deinem PC anzeigen" style="flex: 1; padding: 0.45rem 0.5rem; font-size: 0.8rem; border-radius: 6px; display: inline-flex; align-items: center; justify-content: center; gap: 0.3rem; border: 1px solid #cbd5e1; background: #f8fafc; font-weight: 600;">
-                        <i class="fa-solid fa-folder-open" style="color: #f59e0b;"></i> PC-Dateien (52)
+                        <i class="fa-solid fa-folder-open" style="color: #f59e0b;"></i> PC-Dateien (81)
                     </button>
                     <button class="btn btn-secondary" onclick="openAp2BridgeModal('web')" title="Offizielle Web-Quellen & Standards" style="flex: 1; padding: 0.45rem 0.5rem; font-size: 0.8rem; border-radius: 6px; display: inline-flex; align-items: center; gap: 0.3rem; justify-content: center; border: 1px solid #cbd5e1; background: #f8fafc; font-weight: 600;">
                         <i class="fa-solid fa-globe" style="color: #3b82f6;"></i> Web-Quellen
@@ -453,12 +471,14 @@
                             <option value="exam_19">🎯 Prüfung 19: IT-Arbeitsplatz II (Agentur, Desk-Sharing)</option>
                             <option value="exam_20">🎯 Prüfung 20: IT-Arbeitsplatz III (CAD, USV, GPO)</option>
                             <option value="exam_21">🎯 Prüfung 21: IT-Arbeitsplatz IV (Rollout, PXE, SLA)</option>
+                            <option value="exam_24" selected>🏆 Letzte AP1-Prüfung: Original BaWü Frühjahr 2026 (SolarTech &amp; WLAN – Anlagen 2 bis 6)</option>
+                            <option value="exam_23">🏛️ Prüfung 23: Original BaWü IBBW (DarSys GmbH – IT 1 bis IT 3)</option>
                             <option value="exam_22">🏆 Prüfung 22: Original BaWü 2026 (SoftTech – FA 230)</option>
                             <option value="exam_23">🏛️ Prüfung 23: Original BaWü IBBW (DarSys GmbH – IT 1 bis IT 3)</option>
                             <option value="exam_random">🎲 Dynamische Zufallsprüfung</option>
                         </select>
                         <button class="btn btn-secondary" id="booklet-overview-btn" title="Katalog aller 23 Prüfungen anzeigen" style="padding: 0.38rem 0.65rem; font-size: 0.85rem; display: flex; align-items: center; gap: 0.35rem; border-radius: 6px; border: 1.5px solid #10b981; color: #047857; background: #ecfdf5; cursor: pointer; white-space: nowrap; font-weight: 600;">
-                            <i class="fa-solid fa-layer-group"></i> <span>Übersicht (23)</span>
+                            <i class="fa-solid fa-layer-group"></i> <span>Übersicht (24)</span>
                         </button>
                         <div class="exam-tabs-pills" id="booklet-tab-pills">
                             <button class="exam-tab-btn active" data-page="0">📄 Deckblatt</button>
@@ -782,7 +802,10 @@
 
             <!-- Navigation Tabs Bar -->
             <div style="display: flex; gap: 0.5rem; background: #f8fafc; border-bottom: 2px solid #e2e8f0; padding: 0.5rem 1.5rem 0 1.5rem; overflow-x: auto;">
-                <button class="ap2-nav-tab active" data-tab="pb2" onclick="switchAp2Tab('pb2')" style="padding: 0.75rem 1.1rem; border: none; background: none; border-bottom: 3px solid #6366f1; color: #4338ca; font-weight: 700; font-size: 0.92rem; cursor: pointer; display: flex; align-items: center; gap: 0.45rem; white-space: nowrap;">
+                <button class="ap2-nav-tab active" data-tab="letzte-ap1" onclick="switchAp2Tab('letzte-ap1')" style="padding: 0.75rem 1.1rem; border: none; background: #fffdf5; border-bottom: 3px solid #f59e0b; color: #b45309; font-weight: 800; font-size: 0.92rem; cursor: pointer; display: flex; align-items: center; gap: 0.45rem; white-space: nowrap; border-radius: 6px 6px 0 0;">
+                    <i class="fa-solid fa-star" style="color: #f59e0b;"></i> ⭐ Letzte AP1-Prüfung (Original 2026)
+                </button>
+                <button class="ap2-nav-tab" data-tab="pb2" onclick="switchAp2Tab('pb2')" style="padding: 0.75rem 1.1rem; border: none; background: none; border-bottom: 3px solid transparent; color: #64748b; font-weight: 600; font-size: 0.92rem; cursor: pointer; display: flex; align-items: center; gap: 0.45rem; white-space: nowrap;">
                     <i class="fa-solid fa-diagram-project"></i> 1. Planen eines Softwareproduktes (PB 2)
                 </button>
                 <button class="ap2-nav-tab" data-tab="pb3" onclick="switchAp2Tab('pb3')" style="padding: 0.75rem 1.1rem; border: none; background: none; border-bottom: 3px solid transparent; color: #64748b; font-weight: 600; font-size: 0.92rem; cursor: pointer; display: flex; align-items: center; gap: 0.45rem; white-space: nowrap;">
@@ -803,9 +826,141 @@
             <div class="whiteboard-body" style="padding: 1.5rem; overflow-y: auto; flex: 1; background: #ffffff;">
 
                 <!-- ============================================================== -->
+                <!-- TAB 0: LETZTE AP1-PRÜFUNG (ORIGINAL BAWÜ FRÜHJAHR 2026)       -->
+                <!-- ============================================================== -->
+                <div id="ap2-tab-letzte-ap1" class="ap2-tab-content" style="display: block;">
+                    
+                    <!-- Hero Banner with direct Split-View Launcher -->
+                    <div style="background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border: 2px solid #f59e0b; border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 4px 14px rgba(245, 158, 11, 0.2);">
+                        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                            <div style="flex: 1; min-width: 320px;">
+                                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.4rem;">
+                                    <span style="background: #b45309; color: white; padding: 0.2rem 0.65rem; border-radius: 6px; font-size: 0.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em;">
+                                        ⭐ Aktuellste Prüfungsunterlagen (Frühjahr 2026)
+                                    </span>
+                                    <span style="background: #ffffff; color: #b45309; border: 1px solid #f59e0b; padding: 0.15rem 0.5rem; border-radius: 6px; font-size: 0.78rem; font-weight: 700;">
+                                        100 Punkte &bull; 90 Minuten
+                                    </span>
+                                </div>
+                                <h3 style="margin: 0.2rem 0 0.4rem 0; font-size: 1.4rem; color: #78350f; font-weight: 800;">
+                                    🏆 Original IHK AP1: SolarTech &amp; EcoPower GmbH
+                                </h3>
+                                <p style="margin: 0; color: #92400e; font-size: 0.95rem; line-height: 1.45;">
+                                    Vollständig digitalisierter Prüfungssatz mit interaktivem Split-Screen: Aufgabe links, amtliche Original-Anlagen 2 bis 6 rechts (mit IHK-Lösung und Scan-Ansicht).
+                                </p>
+                            </div>
+                            <div>
+                                <button class="btn" onclick="closeAp2BridgeModal(); startExamMode(false, 'exam_24');" style="background: linear-gradient(135deg, #10b981, #047857); color: white; font-weight: 800; font-size: 1.05rem; padding: 0.8rem 1.4rem; border-radius: 8px; border: none; cursor: pointer; display: flex; align-items: center; gap: 0.55rem; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.35); transition: transform 0.15s ease;">
+                                    <i class="fa-solid fa-play"></i> Jetzt interaktiv lösen ➔
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3 Exam Tasks Overview Grid -->
+                    <h4 style="margin: 0 0 1rem 0; color: #0f172a; font-size: 1.15rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <i class="fa-solid fa-layer-group" style="color: #6366f1;"></i> Die 3 Fachaufgaben &amp; zugehörigen Anlagen
+                    </h4>
+
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
+                        
+                        <!-- IT 1 -->
+                        <div style="background: #ffffff; border: 1.5px solid #cbd5e1; border-radius: 10px; padding: 1.15rem; box-shadow: 0 2px 4px rgba(0,0,0,0.04);">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                                <span style="background: #e0e7ff; color: #4338ca; font-weight: 800; font-size: 0.78rem; padding: 0.15rem 0.5rem; border-radius: 4px;">IT 1 &bull; 30 Punkte</span>
+                                <span style="color: #64748b; font-size: 0.82rem; font-weight: 600;">OOP &amp; Architektur</span>
+                            </div>
+                            <h5 style="margin: 0 0 0.4rem 0; font-size: 1.05rem; color: #1e1b4b;">1. Softwarearchitektur Solaranlagen</h5>
+                            <p style="font-size: 0.86rem; color: #475569; line-height: 1.4; margin-bottom: 0.75rem;">
+                                Datenimport XML/CSV, Komposition vs. Aggregation, abstrakte Basisklasse <code>Komponente</code> und geometrische Dachflächen-Belegung.
+                            </p>
+                            <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 0.5rem 0.65rem; font-size: 0.82rem; color: #334155;">
+                                <strong>📎 Anlage 2:</strong> Klassenbeschreibung der 6 UML-Klassen (Sichtbarkeiten, Attribute, Konstruktoren &amp; Methoden).
+                            </div>
+                        </div>
+
+                        <!-- IT 2 -->
+                        <div style="background: #ffffff; border: 1.5px solid #cbd5e1; border-radius: 10px; padding: 1.15rem; box-shadow: 0 2px 4px rgba(0,0,0,0.04);">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                                <span style="background: #cffafe; color: #0e7490; font-weight: 800; font-size: 0.78rem; padding: 0.15rem 0.5rem; border-radius: 4px;">IT 2 &bull; 35 Punkte</span>
+                                <span style="color: #64748b; font-size: 0.82rem; font-weight: 600;">Netzwerk &amp; VLSM</span>
+                            </div>
+                            <h5 style="margin: 0 0 0.4rem 0; font-size: 1.05rem; color: #164e63;">2. Subnetzplanung Firmennetz</h5>
+                            <p style="font-size: 0.86rem; color: #475569; line-height: 1.4; margin-bottom: 0.75rem;">
+                                Aufteilung von <code>192.168.10.0/24</code> in 7 Subnetze ohne Adressverschwendung (WLAN, LAN, Server, Management, VPN-Transfer).
+                            </p>
+                            <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 0.5rem 0.65rem; font-size: 0.82rem; color: #334155;">
+                                <strong>📎 Anlage 3:</strong> Amtliche Ausfülltabelle mit Hostzahlen, Präfixen, Netz-IDs, Broadcasts und Gateways.
+                            </div>
+                        </div>
+
+                        <!-- IT 3 -->
+                        <div style="background: #ffffff; border: 1.5px solid #cbd5e1; border-radius: 10px; padding: 1.15rem; box-shadow: 0 2px 4px rgba(0,0,0,0.04);">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                                <span style="background: #fce7f3; color: #be185d; font-weight: 800; font-size: 0.78rem; padding: 0.15rem 0.5rem; border-radius: 4px;">IT 3 &bull; 35 Punkte</span>
+                                <span style="color: #64748b; font-size: 0.82rem; font-weight: 600;">Hardware &amp; Wirtschaft</span>
+                            </div>
+                            <h5 style="margin: 0 0 0.4rem 0; font-size: 1.05rem; color: #831843;">3. Hardwareauswahl, Kalkulation &amp; NWA</h5>
+                            <p style="font-size: 0.86rem; color: #475569; line-height: 1.4; margin-bottom: 0.75rem;">
+                                Auswahl der Access Points (AZOS vs. Getnear vs. ELink), kaufmännische Bezugskalkulation und Nutzwertanalyse mit Punktebewertung.
+                            </p>
+                            <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 0.5rem 0.65rem; font-size: 0.82rem; color: #334155;">
+                                <strong>📎 Anlagen 4, 5 &amp; 6:</strong> Gerätedatenblatt, Bezugskalkulationsschema &amp; Entscheidungsmatrix.
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Local Files & Download Box -->
+                    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 1.25rem;">
+                        <h4 style="margin: 0 0 0.75rem 0; color: #1e293b; font-size: 1.05rem; display: flex; align-items: center; gap: 0.45rem;">
+                            <i class="fa-solid fa-folder-open" style="color: #f59e0b;"></i> Zugehörige Original-PDF-Dateien auf deinem PC
+                        </h4>
+                        <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; background: white; padding: 0.6rem 0.85rem; border-radius: 6px; border: 1px solid #cbd5e1;">
+                                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <i class="fa-solid fa-file-pdf" style="color: #ef4444; font-size: 1.2rem;"></i>
+                                    <div>
+                                        <div style="font-weight: 700; color: #1e293b; font-size: 0.9rem;">AP1_Frühjahr_2026 2.pdf</div>
+                                        <div style="font-size: 0.78rem; color: #64748b;">Original-Aufgabensatz &bull; 3.7 MB &bull; Letzte Baden-Württembergische AP1</div>
+                                    </div>
+                                </div>
+                                <div style="display: flex; gap: 0.35rem;">
+                                    <button class="btn btn-secondary" onclick="copyAp2FilePath('C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP1\\AP1_Frühjahr_2026 2.pdf', this)" style="padding: 0.35rem 0.65rem; font-size: 0.8rem;">
+                                        <i class="fa-solid fa-copy"></i> Pfad
+                                    </button>
+                                    <a href="file:///C:/Users/Student/OneDrive%20-%20GFN%20GmbH%20(EDU)/Dokumente/ALEX-AP1_AP2/Baden-W%C3%BCrttembergische%20Abschlusspr%C3%BCfungen%20AP1/AP1_Fr%C3%BChjahr_2026%202.pdf" target="_blank" class="btn" style="padding: 0.35rem 0.65rem; font-size: 0.8rem; background: #4f46e5; color: white; text-decoration: none;">
+                                        <i class="fa-solid fa-arrow-up-right-from-square"></i> Öffnen
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div style="display: flex; justify-content: space-between; align-items: center; background: white; padding: 0.6rem 0.85rem; border-radius: 6px; border: 1px solid #cbd5e1;">
+                                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                                    <i class="fa-solid fa-file-pdf" style="color: #10b981; font-size: 1.2rem;"></i>
+                                    <div>
+                                        <div style="font-weight: 700; color: #1e293b; font-size: 0.9rem;">AP1_Frühjahr_2026_Lösung 1.pdf</div>
+                                        <div style="font-size: 0.78rem; color: #64748b;">Offizielle Musterlösung &bull; 932 KB &bull; Korrekturhinweise &amp; Bepunktung</div>
+                                    </div>
+                                </div>
+                                <div style="display: flex; gap: 0.35rem;">
+                                    <button class="btn btn-secondary" onclick="copyAp2FilePath('C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP1\\AP1_Frühjahr_2026_Lösung 1.pdf', this)" style="padding: 0.35rem 0.65rem; font-size: 0.8rem;">
+                                        <i class="fa-solid fa-copy"></i> Pfad
+                                    </button>
+                                    <a href="file:///C:/Users/Student/OneDrive%20-%20GFN%20GmbH%20(EDU)/Dokumente/ALEX-AP1_AP2/Baden-W%C3%BCrttembergische%20Abschlusspr%C3%BCfungen%20AP1/AP1_Fr%C3%BChjahr_2026_L%C3%B6sung%201.pdf" target="_blank" class="btn" style="padding: 0.35rem 0.65rem; font-size: 0.8rem; background: #10b981; color: white; text-decoration: none;">
+                                        <i class="fa-solid fa-arrow-up-right-from-square"></i> Öffnen
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- ============================================================== -->
                 <!-- TAB 1: PB 2 - PLANEN EINES SOFTWAREPRODUKTES                   -->
                 <!-- ============================================================== -->
-                <div id="ap2-tab-pb2" class="ap2-tab-content">
+                <div id="ap2-tab-pb2" class="ap2-tab-content" style="display: none;">
                     
                     <!-- Overview Banner -->
                     <div style="background: linear-gradient(135deg, #eef2ff, #e0e7ff); border: 1.5px solid #c7d2fe; border-radius: 10px; padding: 1.25rem; margin-bottom: 1.5rem;">
@@ -1320,11 +1475,13 @@ ORDER BY gesamtumsatz DESC;</pre>
                             <i class="fa-solid fa-magnifying-glass" style="position: absolute; left: 0.8rem; top: 50%; transform: translateY(-50%); color: #94a3b8;"></i>
                         </div>
                         <select id="ap2-files-filter" onchange="renderAp2FilesList()" style="flex: 1; min-width: 200px; padding: 0.6rem 0.75rem; border: 1.5px solid #cbd5e1; border-radius: 8px; font-size: 0.88rem; font-weight: 600; background: white; cursor: pointer;">
-                            <option value="all">Alle Prüfungsbereiche</option>
+                            <option value="all">Alle Prüfungsdateien (81 Dateien)</option>
+                            <option value="letzte">⭐ Nur Letzte AP1-Prüfung (Frühjahr 2026)</option>
+                            <option value="ap1">📄 Alle AP1 Prüfungen (29 Dateien)</option>
                             <option value="fiae">Nur FIAE (PB 2 &amp; PB 3)</option>
                             <option value="PB 2">Nur PB 2: Planen eines Softwareproduktes</option>
                             <option value="PB 3">Nur PB 3: Algorithmen &amp; Entwicklung</option>
-                            <option value="WiSo">Nur WiSo (PB 4)</option>
+                            <option value="WiSo">Nur WiSo (PB 4 &amp; AP1)</option>
                             <option value="FISI">Nur FISI (Netzwerke / IT-Systeme)</option>
                         </select>
                     </div>
@@ -1450,13 +1607,13 @@ ORDER BY gesamtumsatz DESC;</pre>
     </div>
 
 
-    <script src="diagrams.js?v=136"></script>
-    <script src="exam_data.js?v=136"></script>
-    <script src="questions.js?v=136"></script>
-    <script src="generator.js?v=136"></script>
-    <script src="ap2_bridge.js?v=136"></script>
-    <script src="exam_attachments.js?v=136"></script>
-    <script src="app.js?v=136"></script>
+    <script src="diagrams.js?v=137"></script>
+    <script src="exam_data.js?v=137"></script>
+    <script src="questions.js?v=137"></script>
+    <script src="generator.js?v=137"></script>
+    <script src="ap2_bridge.js?v=137"></script>
+    <script src="exam_attachments.js?v=137"></script>
+    <script src="app.js?v=137"></script>
 
     <!-- PIN Sicherheits-Gatekeeper -->
     <script>

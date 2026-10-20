@@ -375,6 +375,248 @@ const AP2_FILES_CATALOG = [
   }
 ];
 
+const AP1_FILES_CATALOG = [
+  {
+    "term": "Frühjahr 2026 (Letzte)",
+    "name": "AP1_2026.pdf",
+    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP1\\AP1_2026.pdf",
+    "size": "598 KB",
+    "category": "AP1 Aufgaben",
+    "isLatest": true
+  },
+  {
+    "term": "Frühjahr 2026 (Letzte)",
+    "name": "AP1_Frühjahr_2026 2.pdf",
+    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP1\\AP1_Frühjahr_2026 2.pdf",
+    "size": "3.7 MB",
+    "category": "AP1 Aufgaben",
+    "isLatest": true
+  },
+  {
+    "term": "Frühjahr 2026 (Letzte)",
+    "name": "AP1_Frühjahr_2026_Lösung 1.pdf",
+    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP1\\AP1_Frühjahr_2026_Lösung 1.pdf",
+    "size": "932 KB",
+    "category": "AP1 Musterlösung",
+    "isLatest": true
+  },
+  {
+    "term": "Frühjahr 2026 (Letzte)",
+    "name": "AP1_Herbst_2026 1.pdf",
+    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP1\\AP1_Herbst_2026 1.pdf",
+    "size": "1.6 MB",
+    "category": "AP1 Aufgaben",
+    "isLatest": true
+  },
+  {
+    "term": "Frühjahr 2026 (Letzte)",
+    "name": "F26BW 3.pdf",
+    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\PV-Vorbereitung\\Letzte-AP1-Prüfung\\Geladen-Baden-Württembergische Abschlussprüfungen AP1\\F26BW 3.pdf",
+    "size": "598 KB",
+    "category": "AP1 Aufgaben",
+    "isLatest": true
+  },
+  {
+    "term": "2022",
+    "name": "AP1 Frühjahr 2022.pdf",
+    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP1\\AP1 Frühjahr 2022.pdf",
+    "size": "3.8 MB",
+    "category": "AP1 Aufgaben",
+    "isLatest": false
+  },
+  {
+    "term": "2022",
+    "name": "AP1 Herbst 2022.pdf",
+    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP1\\AP1 Herbst 2022.pdf",
+    "size": "5.6 MB",
+    "category": "AP1 Aufgaben",
+    "isLatest": false
+  },
+  {
+    "term": "2022",
+    "name": "AP1 W2022-23 1.pdf",
+    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP1\\AP1 W2022-23 1.pdf",
+    "size": "715 KB",
+    "category": "AP1 Aufgaben",
+    "isLatest": false
+  },
+  {
+    "term": "2022",
+    "name": "AP1 W2022-23 Lösung 1.pdf",
+    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP1\\AP1 W2022-23 Lösung 1.pdf",
+    "size": "1.8 MB",
+    "category": "AP1 Musterlösung",
+    "isLatest": false
+  },
+  {
+    "term": "2022",
+    "name": "Abschlussprüfung Winter 2022-23 AP2 PB 2 FIAE Planen eines Softwareproduktes FA 234 Aufgaben-1.pdf",
+    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP1\\Abschlussprüfung Winter 2022-23 AP2 PB 2 FIAE Planen eines Softwareproduktes FA 234 Aufgaben-1.pdf",
+    "size": "3.8 MB",
+    "category": "AP1 Aufgaben",
+    "isLatest": false
+  },
+  {
+    "term": "2023",
+    "name": "AP1 Frühjahr 2023.pdf",
+    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP1\\AP1 Frühjahr 2023.pdf",
+    "size": "4.6 MB",
+    "category": "AP1 Aufgaben",
+    "isLatest": false
+  },
+  {
+    "term": "2023",
+    "name": "AP1 Herbst 2023.pdf",
+    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP1\\AP1 Herbst 2023.pdf",
+    "size": "3.2 MB",
+    "category": "AP1 Aufgaben",
+    "isLatest": false
+  },
+  {
+    "term": "2023",
+    "name": "AP1 S2023 Lösungen.pdf",
+    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP1\\AP1 S2023 Lösungen.pdf",
+    "size": "927 KB",
+    "category": "AP1 Musterlösung",
+    "isLatest": false
+  },
+  {
+    "term": "2023",
+    "name": "AP1 S2023.pdf",
+    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP1\\AP1 S2023.pdf",
+    "size": "4.6 MB",
+    "category": "AP1 Aufgaben",
+    "isLatest": false
+  },
+  {
+    "term": "2023",
+    "name": "Prüfungsvorbereitung-Teil1-Europa_01.09.2023 (1) 1.pdf",
+    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP1\\Prüfungsvorbereitung-Teil1-Europa_01.09.2023 (1) 1.pdf",
+    "size": "66.6 MB",
+    "category": "AP1 Aufgaben",
+    "isLatest": false
+  },
+  {
+    "term": "2024",
+    "name": "24 AP1_Herbst_2024 1.pdf",
+    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP1\\24 AP1_Herbst_2024 1.pdf",
+    "size": "3.0 MB",
+    "category": "AP1 Aufgaben",
+    "isLatest": false
+  },
+  {
+    "term": "2024",
+    "name": "AP 1 AUFGABEN Winter 2024 Baden Württemberg.pdf",
+    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP1\\AP 1 AUFGABEN Winter 2024 Baden Württemberg.pdf",
+    "size": "3.7 MB",
+    "category": "AP1 Aufgaben",
+    "isLatest": false
+  },
+  {
+    "term": "2024",
+    "name": "AP1 Früjahr 2024.pdf",
+    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP1\\AP1 Früjahr 2024.pdf",
+    "size": "5.2 MB",
+    "category": "AP1 Aufgaben",
+    "isLatest": false
+  },
+  {
+    "term": "2024",
+    "name": "AP1 Herbst 2024.pdf",
+    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP1\\AP1 Herbst 2024.pdf",
+    "size": "3.7 MB",
+    "category": "AP1 Aufgaben",
+    "isLatest": false
+  },
+  {
+    "term": "2024",
+    "name": "AP1 Herbst 2024_schriftliche_Prfg._Teil_1.pdf",
+    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP1\\AP1 Herbst 2024_schriftliche_Prfg._Teil_1.pdf",
+    "size": "227 KB",
+    "category": "AP1 Aufgaben",
+    "isLatest": false
+  },
+  {
+    "term": "2024",
+    "name": "Abschlusspruefung_Sommer_2024_Teil_2_Fachinformatiker_Anwendungsentwicklung-1.pdf",
+    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP1\\Abschlusspruefung_Sommer_2024_Teil_2_Fachinformatiker_Anwendungsentwicklung-1.pdf",
+    "size": "4.1 MB",
+    "category": "AP1 Aufgaben",
+    "isLatest": false
+  },
+  {
+    "term": "2025",
+    "name": "25 AP1_frühjahr_2025.pdf",
+    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP1\\25 AP1_frühjahr_2025.pdf",
+    "size": "2.2 MB",
+    "category": "AP1 Aufgaben",
+    "isLatest": false
+  },
+  {
+    "term": "2025",
+    "name": "AP1 Frühjahr 2025.pdf",
+    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP1\\AP1 Frühjahr 2025.pdf",
+    "size": "2.9 MB",
+    "category": "AP1 Aufgaben",
+    "isLatest": false
+  },
+  {
+    "term": "Unbekannt",
+    "name": "25 AP1_Herbst 4.pdf",
+    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP1\\25 AP1_Herbst 4.pdf",
+    "size": "6.9 MB",
+    "category": "AP1 Aufgaben",
+    "isLatest": false
+  },
+  {
+    "term": "Unbekannt",
+    "name": "25 AP1_Herbst_Lösung 3.pdf",
+    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP1\\25 AP1_Herbst_Lösung 3.pdf",
+    "size": "1.2 MB",
+    "category": "AP1 Musterlösung",
+    "isLatest": false
+  },
+  {
+    "term": "Unbekannt",
+    "name": "AP1 Beispielaufgabe Lösungen.pdf",
+    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP1\\AP1 Beispielaufgabe Lösungen.pdf",
+    "size": "454 KB",
+    "category": "AP1 Musterlösung",
+    "isLatest": false
+  },
+  {
+    "term": "Unbekannt",
+    "name": "AP1 Beispielaufgabe.pdf",
+    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP1\\AP1 Beispielaufgabe.pdf",
+    "size": "552 KB",
+    "category": "AP1 Aufgaben",
+    "isLatest": false
+  },
+  {
+    "term": "Unbekannt",
+    "name": "H22HS2.pdf",
+    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP1\\H22HS2.pdf",
+    "size": "625 KB",
+    "category": "AP1 Aufgaben",
+    "isLatest": false
+  },
+  {
+    "term": "Unbekannt",
+    "name": "H22HS3.pdf",
+    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP1\\H22HS3.pdf",
+    "size": "1.9 MB",
+    "category": "AP1 Aufgaben",
+    "isLatest": false
+  }
+];
+
+// Combined catalog of both AP1 and AP2 exam documents
+const ALL_EXAM_FILES = [
+  ...AP1_FILES_CATALOG.map(f => ({ ...f, examType: 'AP1' })),
+  ...AP2_FILES_CATALOG.map(f => ({ ...f, examType: 'AP2' }))
+];
+
+
 // State for active tab in AP2 modal
 let currentAp2Tab = "pb2";
 
@@ -471,14 +713,27 @@ function renderAp2FilesList() {
     const query = searchInput ? searchInput.value.toLowerCase().trim() : "";
     const filter = filterSelect ? filterSelect.value : "all";
 
-    const filtered = AP2_FILES_CATALOG.filter(f => {
-        const matchesQuery = f.name.toLowerCase().includes(query) || f.term.toLowerCase().includes(query) || f.category.toLowerCase().includes(query);
-        const matchesCategory = (filter === "all") || (f.category.includes(filter)) || (filter === "fiae" && (f.category.includes("PB 2") || f.category.includes("PB 3")));
+    const catalog = (typeof ALL_EXAM_FILES !== "undefined") ? ALL_EXAM_FILES : AP2_FILES_CATALOG;
+
+    const filtered = catalog.filter(f => {
+        const matchesQuery = f.name.toLowerCase().includes(query) || f.term.toLowerCase().includes(query) || (f.category && f.category.toLowerCase().includes(query));
+        let matchesCategory = true;
+        if (filter === "all") {
+            matchesCategory = true;
+        } else if (filter === "letzte") {
+            matchesCategory = !!f.isLatest;
+        } else if (filter === "ap1") {
+            matchesCategory = (f.examType === "AP1");
+        } else if (filter === "fiae") {
+            matchesCategory = (f.category && (f.category.includes("PB 2") || f.category.includes("PB 3")));
+        } else {
+            matchesCategory = (f.category && f.category.includes(filter));
+        }
         return matchesQuery && matchesCategory;
     });
 
     const countBadge = document.getElementById("ap2-files-count");
-    if (countBadge) countBadge.textContent = `${filtered.length} von ${AP2_FILES_CATALOG.length} Dateien`;
+    if (countBadge) countBadge.textContent = `${filtered.length} von ${catalog.length} Dateien`;
 
     if (filtered.length === 0) {
         container.innerHTML = `
@@ -495,23 +750,38 @@ function renderAp2FilesList() {
     container.innerHTML = filtered.map((f, i) => {
         let badgeColor = "#6366f1";
         let badgeBg = "#eef2ff";
-        if (f.category.includes("PB 2")) {
-            badgeColor = "#4338ca"; badgeBg = "#e0e7ff";
-        } else if (f.category.includes("PB 3")) {
-            badgeColor = "#0e7490"; badgeBg = "#cffafe";
-        } else if (f.category.includes("WiSo")) {
-            badgeColor = "#be185d"; badgeBg = "#fce7f3";
-        } else if (f.category.includes("FISI")) {
+        if (f.isLatest) {
             badgeColor = "#b45309"; badgeBg = "#fef3c7";
+        } else if (f.category && f.category.includes("PB 2")) {
+            badgeColor = "#4338ca"; badgeBg = "#e0e7ff";
+        } else if (f.category && f.category.includes("PB 3")) {
+            badgeColor = "#0e7490"; badgeBg = "#cffafe";
+        } else if (f.category && f.category.includes("WiSo")) {
+            badgeColor = "#be185d"; badgeBg = "#fce7f3";
+        } else if (f.category && f.category.includes("Musterlösung")) {
+            badgeColor = "#047857"; badgeBg = "#d1fae5";
+        } else if (f.category && f.category.includes("FISI")) {
+            badgeColor = "#b45309"; badgeBg = "#fef3c7";
+        } else if (f.examType === "AP1") {
+            badgeColor = "#6d28d9"; badgeBg = "#ede9fe";
         }
 
         const safePath = f.path.replace(/'/g, "\\'");
-        const fileUrl = "file:///" + encodeURI(f.path);
+        const fileUrl = "file:///" + encodeURI(f.path.replace(/\\/g, "/"));
+
+        const isLatestHighlight = f.isLatest ? "background-color: #fffdf5;" : "";
+        const latestStar = f.isLatest ? '<span style="background: #f59e0b; color: white; font-size: 0.7rem; font-weight: 800; padding: 0.1rem 0.35rem; border-radius: 4px; margin-right: 0.3rem;">⭐ NEU</span>' : '';
+
+        const interactiveBtn = (f.isLatest || (f.name && f.name.includes("2026"))) ? `
+            <button class="btn" onclick="closeAp2BridgeModal(); startExamMode(false, 'exam_24');" title="Diese Prüfung interaktiv mit Split-Screen und Anlagen lösen" style="padding: 0.35rem 0.65rem; font-size: 0.8rem; border-radius: 6px; cursor: pointer; border: none; background: #10b981; color: white; margin-left: 0.3rem; font-weight: 700;">
+                <i class="fa-solid fa-play"></i> Interaktiv
+            </button>
+        ` : '';
 
         return `
-            <tr style="border-bottom: 1px solid #e2e8f0; font-size: 0.88rem;">
+            <tr style="border-bottom: 1px solid #e2e8f0; font-size: 0.88rem; ${isLatestHighlight}">
                 <td style="padding: 0.75rem 0.6rem; font-weight: 700; color: #334155; white-space: nowrap;">
-                    ${f.term}
+                    ${latestStar}${f.term}
                 </td>
                 <td style="padding: 0.75rem 0.6rem;">
                     <span style="display: inline-block; padding: 0.2rem 0.55rem; border-radius: 999px; font-size: 0.75rem; font-weight: 700; color: ${badgeColor}; background: ${badgeBg};">
@@ -531,6 +801,7 @@ function renderAp2FilesList() {
                     <a href="${fileUrl}" target="_blank" class="btn" title="Datei im Browser / PDF-Viewer öffnen" style="padding: 0.35rem 0.65rem; font-size: 0.8rem; border-radius: 6px; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 0.25rem; background: #4f46e5; color: white; margin-left: 0.3rem;">
                         <i class="fa-solid fa-arrow-up-right-from-square"></i> Öffnen
                     </a>
+                    ${interactiveBtn}
                 </td>
             </tr>
         `;
