@@ -494,9 +494,533 @@ function runCodeTests() {
 }
 
 // ==========================================
+// 6.2 PYTHON FUNKTIONS-STUDIO & GENERATOR
+// ==========================================
+let currentPyExIndex = 0;
+
+const PYTHON_STUDIO_EXERCISES = [
+    {
+        id: "city_hof",
+        title: "🏨 Hotel City Hof: Sport- und Wellnesskurse (Original BaWü Probeklausur)",
+        desc: "Bucht ein Gast Sport- und Wellnesskurse, wird im Anschluss der Preis ermittelt und der Hotelrechnung hinzugefügt. Es gibt verschiedene Rabatte bei der Buchung von mehreren Kursen. Stammgäste mit Goldstatus können die Kurse zu einem extra reduzierten Preis buchen.",
+        fnName: "ermittle_Preis",
+        signature: "def ermittle_Preis(gebuchteKurse: list, Status: str) -> float:",
+        helperName: "get_Betrag",
+        helperDoc: "get_Betrag(kurs: str) -> float (Gibt den Einzelpreis des übergebenen Kurses zurück)",
+        rules: [
+            "Mehr als 3 Kurse gebucht (> 3): 20 % Mengenrabatt auf die Gesamtsumme",
+            "Mehr als 5 Kurse gebucht (> 5): 30 % Mengenrabatt auf die Gesamtsumme",
+            "Status 'Gold': Zusätzlich 50 % Rabatt auf den rabattierten Betrag"
+        ],
+        masterData: {
+            "Morgen-Yoga": 14.0, "Aqua-Fitness": 12.0, "Pilates": 15.0,
+            "Rückenfit": 12.0, "Nordic Walking": 10.0, "Personal Training": 55.0
+        },
+        templateCode: `def ermittle_Preis(gebuchteKurse, Status):
+    # 1. Grundpreise mit der Hilfsfunktion aufsummieren
+    summe = 0.0
+    for kurs in gebuchteKurse:
+        summe += get_Betrag(kurs)
+    
+    # 2. Mengenrabatt anwenden (Höhere Schwelle > 5 zuerst prüfen!)
+    anzahl = len(gebuchteKurse)
+    if anzahl > 5:
+        summe = summe * 0.70    # 30 % Rabatt
+    elif anzahl > 3:
+        summe = summe * 0.80    # 20 % Rabatt
+    
+    # 3. Statusrabatt für 'Gold'
+    if Status == "Gold":
+        summe = summe * 0.50    # 50 % Zusatzrabatt
+        
+    return round(summe, 2)
+`,
+        solutionCode: `def ermittle_Preis(gebuchteKurse, Status):
+    # 1. Grundsumme berechnen
+    summe = sum(get_Betrag(k) for k in gebuchteKurse)
+    
+    # 2. Mengenrabatt (Zuerst höchste Schwelle prüfen!)
+    if len(gebuchteKurse) > 5:
+        summe *= 0.70  # 30 % Rabatt
+    elif len(gebuchteKurse) > 3:
+        summe *= 0.80  # 20 % Rabatt
+        
+    # 3. Statusrabatt
+    if Status == "Gold":
+        summe *= 0.50  # 50 % Zusatzrabatt
+        
+    return round(summe, 2)`,
+        tests: [
+            { name: "2 Kurse, kein Status", args: [["Morgen-Yoga", "Aqua-Fitness"], ""], expected: 26.0 },
+            { name: "4 Kurse (> 3), kein Status", args: [["Morgen-Yoga", "Aqua-Fitness", "Pilates", "Rückenfit"], ""], expected: 42.4 },
+            { name: "6 Kurse (> 5), kein Status", args: [["Morgen-Yoga", "Aqua-Fitness", "Pilates", "Rückenfit", "Nordic Walking", "Personal Training"], ""], expected: 82.6 },
+            { name: "4 Kurse (> 3), Status 'Gold'", args: [["Morgen-Yoga", "Aqua-Fitness", "Pilates", "Rückenfit"], "Gold"], expected: 21.2 },
+            { name: "6 Kurse (> 5), Status 'Gold'", args: [["Morgen-Yoga", "Aqua-Fitness", "Pilates", "Rückenfit", "Nordic Walking", "Personal Training"], "Gold"], expected: 41.3 }
+        ]
+    },
+    {
+        id: "it_hardware",
+        title: "🛒 IT-Systemhaus: Hardware- und Zubehörbestellung",
+        desc: "Ein IT-Systemhaus ermittelt den Gesamtbestellwert für Kunden. Bei größeren Bestellungen wird ein Mengenrabatt gewährt. Kunden mit Kundentyp 'Premium' erhalten einen zusätzlichen Partnerrabatt.",
+        fnName: "berechne_Bestellwert",
+        signature: "def berechne_Bestellwert(artikelListe: list, kundenTyp: str) -> float:",
+        helperName: "get_Artikelpreis",
+        helperDoc: "get_Artikelpreis(artikel: str) -> float (Gibt den Einzelpreis des Artikels zurück)",
+        rules: [
+            "Mehr als 4 Artikel bestellt (> 4): 15 % Mengenrabatt auf die Gesamtsumme",
+            "Mehr als 8 Artikel bestellt (> 8): 25 % Mengenrabatt auf die Gesamtsumme",
+            "kundenTyp 'Premium': Zusätzlich 20 % Partnerrabatt auf den rabattierten Betrag"
+        ],
+        masterData: {
+            "USB-C-Dock": 80.0, "Patchkabel Cat6a": 8.0, "4K-Webcam": 90.0,
+            "Wireless Tastatur": 45.0, "Monitorarm Dual": 70.0, "Headset Pro": 60.0
+        },
+        templateCode: `def berechne_Bestellwert(artikelListe, kundenTyp):
+    summe = 0.0
+    for art in artikelListe:
+        summe += get_Artikelpreis(art)
+        
+    anzahl = len(artikelListe)
+    if anzahl > 8:
+        summe = summe * 0.75  # 25 % Rabatt
+    elif anzahl > 4:
+        summe = summe * 0.85  # 15 % Rabatt
+        
+    if kundenTyp == "Premium":
+        summe = summe * 0.80  # 20 % Zusatzrabatt
+        
+    return round(summe, 2)
+`,
+        solutionCode: `def berechne_Bestellwert(artikelListe, kundenTyp):
+    summe = sum(get_Artikelpreis(a) for a in artikelListe)
+    if len(artikelListe) > 8:
+        summe *= 0.75
+    elif len(artikelListe) > 4:
+        summe *= 0.85
+    if kundenTyp == "Premium":
+        summe *= 0.80
+    return round(summe, 2)`,
+        tests: [
+            { name: "3 Artikel (Standard)", args: [["USB-C-Dock", "4K-Webcam", "Headset Pro"], "Standard"], expected: 230.0 },
+            { name: "5 Artikel (> 4), Standard", args: [["USB-C-Dock", "Patchkabel Cat6a", "4K-Webcam", "Wireless Tastatur", "Monitorarm Dual"], "Standard"], expected: 249.05 },
+            { name: "5 Artikel (> 4), Premium", args: [["USB-C-Dock", "Patchkabel Cat6a", "4K-Webcam", "Wireless Tastatur", "Monitorarm Dual"], "Premium"], expected: 199.24 },
+            { name: "9 Artikel (> 8), Standard", args: [["USB-C-Dock", "USB-C-Dock", "4K-Webcam", "Wireless Tastatur", "Monitorarm Dual", "Headset Pro", "Patchkabel Cat6a", "Patchkabel Cat6a", "Patchkabel Cat6a"], "Standard"], expected: 336.75 },
+            { name: "9 Artikel (> 8), Premium", args: [["USB-C-Dock", "USB-C-Dock", "4K-Webcam", "Wireless Tastatur", "Monitorarm Dual", "Headset Pro", "Patchkabel Cat6a", "Patchkabel Cat6a", "Patchkabel Cat6a"], "Premium"], expected: 269.4 }
+        ]
+    },
+    {
+        id: "cinema",
+        title: "🎟️ Kinoticket-Rechner: Altersstaffel & Wochenendzuschlag",
+        desc: "Ein Kino berechnet den Ticketpreis für Besuchergruppen. Kinder (< 12 Jahre) zahlen 6 €, Jugendliche (< 18 Jahre) zahlen 8 €, Erwachsene zahlen 12 €. Am Wochenende (istWochenende == True) kommt pro Ticket ein Zuschlag von 2.00 € hinzu. Ab 4 Personen (>= 4) gibt es 15 % Familienrabatt auf die Gesamtsumme.",
+        fnName: "kalkuliere_Ticketpreis",
+        signature: "def kalkuliere_Ticketpreis(altersListe: list, istWochenende: bool) -> float:",
+        helperName: "get_Basistarif",
+        helperDoc: "get_Basistarif(alter: int) -> float (Gibt Basispreis zurück: < 12: 6.0€, < 18: 8.0€, sonst: 12.0€)",
+        rules: [
+            "Basispreise: Alter < 12 = 6.00 €, Alter < 18 = 8.00 €, Erwachsene = 12.00 €",
+            "istWochenende == True: +2.00 € Wochenendzuschlag pro Ticket",
+            "Ab 4 Personen (len >= 4): 15 % Gruppenrabatt auf die Gesamtsumme"
+        ],
+        masterData: {
+            "Kind (< 12)": 6.0, "Jugendlicher (< 18)": 8.0, "Erwachsener": 12.0, "Wochenendzuschlag": 2.0
+        },
+        templateCode: `def kalkuliere_Ticketpreis(altersListe, istWochenende):
+    summe = 0.0
+    for alter in altersListe:
+        preis = get_Basistarif(alter)
+        if istWochenende:
+            preis += 2.0
+        summe += preis
+            
+    if len(altersListe) >= 4:
+        summe = summe * 0.85  # 15 % Gruppenrabatt
+        
+    return round(summe, 2)
+`,
+        solutionCode: `def kalkuliere_Ticketpreis(altersListe, istWochenende):
+    summe = 0.0
+    for a in altersListe:
+        p = get_Basistarif(a)
+        if istWochenende:
+            p += 2.0
+        summe += p
+    if len(altersListe) >= 4:
+        summe *= 0.85
+    return round(summe, 2)`,
+        tests: [
+            { name: "2 Erwachsene, Wochentag", args: [[35, 40], false], expected: 24.0 },
+            { name: "2 Erwachsene, Wochenende", args: [[35, 40], true], expected: 28.0 },
+            { name: "Familie (2 Erw, 2 Kinder), Wochentag", args: [[40, 38, 8, 10], false], expected: 30.6 },
+            { name: "Familie (2 Erw, 2 Kinder), Wochenende", args: [[40, 38, 8, 10], true], expected: 37.4 },
+            { name: "Einzelfahrt Jugendlicher (< 18), Wochentag", args: [[15], false], expected: 8.0 }
+        ]
+    },
+    {
+        id: "fitness",
+        title: "🏋️ Fitness- & Health Club: Modulpakete & VIP-Treue",
+        desc: "Ein Fitnessstudio kalkuliert den Monatsbeitrag abhängig von den gewählten Modulen. Bei Buchung mehrerer Module gibt es einen Paketrabatt. Mitglieder mit VIP-Status erhalten einen zusätzlichen Treuerabatt.",
+        fnName: "berechne_Mitgliedsbeitrag",
+        signature: "def berechne_Mitgliedsbeitrag(moduleListe: list, istVIP: bool) -> float:",
+        helperName: "get_Modulbeitrag",
+        helperDoc: "get_Modulbeitrag(modul: str) -> float (Gibt monatlichen Modulpreis zurück)",
+        rules: [
+            "Mehr als 2 Module gebucht (> 2): 10 % Mehrkursrabatt",
+            "Mehr als 4 Module gebucht (> 4): 25 % Mehrkursrabatt",
+            "istVIP == True: Zusätzlich 40 % Treuerabatt auf den rabattierten Betrag"
+        ],
+        masterData: {
+            "Gym-Cardio": 30.0, "Sauna-Flat": 20.0, "Yoga & Pilates": 25.0,
+            "Crossfit-Box": 35.0, "Ernährungsberatung": 40.0, "Personal Coach": 70.0
+        },
+        templateCode: `def berechne_Mitgliedsbeitrag(moduleListe, istVIP):
+    summe = 0.0
+    for m in moduleListe:
+        summe += get_Modulbeitrag(m)
+        
+    anzahl = len(moduleListe)
+    if anzahl > 4:
+        summe = summe * 0.75  # 25 % Rabatt
+    elif anzahl > 2:
+        summe = summe * 0.90  # 10 % Rabatt
+        
+    if istVIP:
+        summe = summe * 0.60  # 40 % Treuerabatt
+        
+    return round(summe, 2)
+`,
+        solutionCode: `def berechne_Mitgliedsbeitrag(moduleListe, istVIP):
+    summe = sum(get_Modulbeitrag(m) for m in moduleListe)
+    if len(moduleListe) > 4:
+        summe *= 0.75
+    elif len(moduleListe) > 2:
+        summe *= 0.90
+    if istVIP:
+        summe *= 0.60
+    return round(summe, 2)`,
+        tests: [
+            { name: "2 Module, kein VIP", args: [["Gym-Cardio", "Sauna-Flat"], false], expected: 50.0 },
+            { name: "3 Module (> 2), kein VIP", args: [["Gym-Cardio", "Sauna-Flat", "Yoga & Pilates"], false], expected: 67.5 },
+            { name: "3 Module (> 2), VIP", args: [["Gym-Cardio", "Sauna-Flat", "Yoga & Pilates"], true], expected: 40.5 },
+            { name: "5 Module (> 4), kein VIP", args: [["Gym-Cardio", "Sauna-Flat", "Yoga & Pilates", "Crossfit-Box", "Ernährungsberatung"], false], expected: 112.5 },
+            { name: "5 Module (> 4), VIP", args: [["Gym-Cardio", "Sauna-Flat", "Yoga & Pilates", "Crossfit-Box", "Ernährungsberatung"], true], expected: 67.5 }
+        ]
+    }
+];
+
+function onSelectPythonExercise(idx) {
+    currentPyExIndex = parseInt(idx);
+    loadPythonExercise(currentPyExIndex);
+}
+
+function loadPythonExercise(idx) {
+    const ex = PYTHON_STUDIO_EXERCISES[idx];
+    if (!ex) return;
+
+    document.getElementById("py-exercise-title").textContent = ex.title;
+    document.getElementById("py-exercise-desc").textContent = ex.desc;
+    document.getElementById("py-signature-display").textContent = ex.signature;
+    document.getElementById("py-helper-display").innerHTML = `Vorgegebene Hilfsfunktion: <code>${ex.helperDoc}</code>`;
+
+    // Rules
+    const rulesList = document.getElementById("py-rules-list");
+    rulesList.innerHTML = ex.rules.map(r => `<li>${r}</li>`).join('');
+
+    // Master Data
+    const mdBox = document.getElementById("py-masterdata-display");
+    mdBox.innerHTML = Object.entries(ex.masterData).map(([k, v]) => `• ${k}: ${v.toFixed(2)} €`).join('<br>');
+
+    // Code Editor
+    document.getElementById("python_code_editor").value = ex.templateCode;
+
+    // Solution
+    document.getElementById("py-solution-code-block").textContent = ex.solutionCode;
+    document.getElementById("solution-python-studio").classList.remove("open");
+
+    // Clear test log
+    document.getElementById("py-test-log-console").innerHTML = `<div style="color: #94a3b8;"><i class="fa-solid fa-terminal"></i> Übung geladen. Klicken Sie auf "Python-Code ausführen", um die Tests zu starten.</div>`;
+}
+
+function resetPythonCode() {
+    const ex = PYTHON_STUDIO_EXERCISES[currentPyExIndex];
+    if (ex) {
+        document.getElementById("python_code_editor").value = ex.templateCode;
+        document.getElementById("py-test-log-console").innerHTML = `<div style="color: #94a3b8;"><i class="fa-solid fa-terminal"></i> Code zurückgesetzt.</div>`;
+    }
+}
+
+function togglePythonSolution() {
+    const box = document.getElementById("solution-python-studio");
+    if (box) box.classList.toggle("open");
+}
+
+function generateRandomPythonExercise() {
+    const scenarios = [
+        {
+            context: "🚗 CarSharing & E-Mobility Flotte",
+            fnName: "kalkuliere_Mietpreis",
+            param1: "fahrtenListe", param2: "hatKundenkarte",
+            items: { "Eco-Kleinwagen": 25.0, "Kombi-Familie": 45.0, "E-SUV": 65.0, "Transporter": 80.0 },
+            t1: 3, t1Pct: 0.15,
+            t2: 5, t2Pct: 0.25,
+            bonusPct: 0.30
+        },
+        {
+            context: "💻 Cloud-Hosting & Serverpakete",
+            fnName: "berechne_Monatskosten",
+            param1: "serverListe", param2: "jahresZahler",
+            items: { "vServer Basic": 15.0, "Cloud DB Pro": 35.0, "Storage 1TB": 20.0, "Dedicated GPU": 95.0 },
+            t1: 2, t1Pct: 0.10,
+            t2: 4, t2Pct: 0.20,
+            bonusPct: 0.25
+        },
+        {
+            context: "🍕 Event-Catering & Speisen",
+            fnName: "berechne_CateringRechnung",
+            param1: "speisenListe", param2: "istGrosskunde",
+            items: { "Fingerfood-Platte": 30.0, "Warmes Buffet": 45.0, "Getränke-Flat": 18.0, "Dessert-Station": 22.0 },
+            t1: 3, t1Pct: 0.10,
+            t2: 6, t2Pct: 0.20,
+            bonusPct: 0.35
+        }
+    ];
+
+    const sc = scenarios[Math.floor(Math.random() * scenarios.length)];
+    const helperName = "get_Einzelpreis";
+    const itemEntries = Object.entries(sc.items);
+
+    const newEx = {
+        id: "dynamic_" + Date.now(),
+        title: `🎲 Dynamisch generiert: ${sc.context}`,
+        desc: `Für ein System im Bereich ${sc.context} soll die Abrechnung implementiert werden. Es greift eine Mengenrabatt-Staffel sowie ein Partnerrabatt bei entsprechendem Status.`,
+        fnName: sc.fnName,
+        signature: `def ${sc.fnName}(${sc.param1}: list, ${sc.param2}: bool) -> float:`,
+        helperName: helperName,
+        helperDoc: `${helperName}(element: str) -> float (Gibt Einzelpreis zurück)`,
+        rules: [
+            `Mehr als ${sc.t1} Einheiten gebucht (> ${sc.t1}): ${(sc.t1Pct * 100).toFixed(0)} % Mengenrabatt`,
+            `Mehr als ${sc.t2} Einheiten gebucht (> ${sc.t2}): ${(sc.t2Pct * 100).toFixed(0)} % Mengenrabatt`,
+            `${sc.param2} == True: Zusätzlich ${(sc.bonusPct * 100).toFixed(0)} % Partnerrabatt auf den rabattierten Betrag`
+        ],
+        masterData: sc.items,
+        templateCode: `def ${sc.fnName}(${sc.param1}, ${sc.param2}):
+    summe = 0.0
+    for element in ${sc.param1}:
+        summe += ${helperName}(element)
+        
+    anzahl = len(${sc.param1})
+    if anzahl > ${sc.t2}:
+        summe = summe * ${1 - sc.t2Pct}
+    elif anzahl > ${sc.t1}:
+        summe = summe * ${1 - sc.t1Pct}
+        
+    if ${sc.param2}:
+        summe = summe * ${1 - sc.bonusPct}
+        
+    return round(summe, 2)
+`,
+        solutionCode: `def ${sc.fnName}(${sc.param1}, ${sc.param2}):
+    summe = sum(${helperName}(e) for e in ${sc.param1})
+    if len(${sc.param1}) > ${sc.t2}:
+        summe *= ${1 - sc.t2Pct}
+    elif len(${sc.param1}) > ${sc.t1}:
+        summe *= ${1 - sc.t1Pct}
+    if ${sc.param2}:
+        summe *= ${1 - sc.bonusPct}
+    return round(summe, 2)`,
+        tests: []
+    };
+
+    // Generate 5 tests
+    const itemNames = Object.keys(sc.items);
+    for (let t = 0; t < 5; t++) {
+        const count = t === 0 ? 1 : (t === 1 ? (sc.t1 + 1) : (t === 2 ? (sc.t2 + 1) : (sc.t1 + 1)));
+        const isBonus = (t >= 3);
+        const testList = [];
+        for (let i = 0; i < count; i++) {
+            testList.push(itemNames[i % itemNames.length]);
+        }
+        let expected = testList.reduce((acc, it) => acc + sc.items[it], 0);
+        if (count > sc.t2) expected *= (1 - sc.t2Pct);
+        else if (count > sc.t1) expected *= (1 - sc.t1Pct);
+        if (isBonus) expected *= (1 - sc.bonusPct);
+        expected = Math.round(expected * 100) / 100;
+
+        newEx.tests.push({
+            name: `Test ${t+1}: ${count} Element(e)${isBonus ? ` [mit Bonus]` : ''}`,
+            args: [testList, isBonus],
+            expected: expected
+        });
+    }
+
+    PYTHON_STUDIO_EXERCISES.push(newEx);
+    const select = document.getElementById("py-exercise-select");
+    const opt = document.createElement("option");
+    opt.value = PYTHON_STUDIO_EXERCISES.length - 1;
+    opt.textContent = `🎲 Neu: ${sc.context}`;
+    select.appendChild(opt);
+    select.value = opt.value;
+
+    onSelectPythonExercise(opt.value);
+}
+
+// ==========================================
+// PYTHON RUNNER & TRANSPILER IN JAVASCRIPT
+// ==========================================
+function runPythonStudioTests() {
+    const ex = PYTHON_STUDIO_EXERCISES[currentPyExIndex];
+    if (!ex) return;
+
+    const code = document.getElementById("python_code_editor").value;
+    const logConsole = document.getElementById("py-test-log-console");
+
+    // Dynamic helper function based on exercise masterData
+    const helperFn = function(arg) {
+        if (ex.id === "cinema") {
+            const age = parseInt(arg);
+            if (age < 12) return 6.0;
+            if (age < 18) return 8.0;
+            return 12.0;
+        }
+        return ex.masterData[arg] || 0.0;
+    };
+
+    let userFn = null;
+    try {
+        // Transpile common Python constructs to safe JS for instant in-browser execution
+        let jsCode = transpilePythonToJS(code, ex.fnName);
+        const fnFactory = new Function(ex.helperName, "get_Betrag", "get_Artikelpreis", "get_Basistarif", "get_Modulbeitrag", "get_Einzelpreis", `
+            ${jsCode}
+            if (typeof ${ex.fnName} === 'function') return ${ex.fnName};
+            throw new Error("Funktion '${ex.fnName}' konnte nicht gefunden werden.");
+        `);
+        userFn = fnFactory(helperFn, helperFn, helperFn, helperFn, helperFn, helperFn);
+    } catch (err) {
+        logConsole.innerHTML = `
+            <div style="color: #f87171; padding: 0.5rem;">
+                <strong><i class="fa-solid fa-triangle-exclamation"></i> Python Syntax- oder Übersetzungsfehler:</strong><br>
+                ${err.message}
+            </div>
+        `;
+        return;
+    }
+
+    let passed = 0;
+    let logHtml = "";
+
+    ex.tests.forEach((tc, idx) => {
+        try {
+            const res = userFn(...tc.args);
+            const num = typeof res === 'number' ? res : parseFloat(res);
+            const isMatch = !isNaN(num) && Math.abs(num - tc.expected) <= 0.05;
+
+            if (isMatch) {
+                passed++;
+                logHtml += `
+                    <div class="test-item pass">
+                        <span><i class="fa-solid fa-check"></i> ${tc.name}</span>
+                        <span>Ergebnis: ${num.toFixed(2)} € (Erwartet: ${tc.expected.toFixed(2)} €)</span>
+                    </div>
+                `;
+            } else {
+                logHtml += `
+                    <div class="test-item fail">
+                        <span><i class="fa-solid fa-xmark"></i> ${tc.name}</span>
+                        <span>Ergebnis: ${isNaN(num) ? res : num.toFixed(2)} € (Erwartet: ${tc.expected.toFixed(2)} €)</span>
+                    </div>
+                `;
+            }
+        } catch (e) {
+            logHtml += `
+                <div class="test-item fail">
+                    <span><i class="fa-solid fa-xmark"></i> ${tc.name}</span>
+                    <span>Laufzeitfehler: ${e.message}</span>
+                </div>
+            `;
+        }
+    });
+
+    logConsole.innerHTML = `
+        <div style="margin-bottom: 0.6rem; font-weight: bold; font-size: 0.95rem; color: ${passed === ex.tests.length ? '#4ade80' : '#f87171'};">
+            ${passed === ex.tests.length ? '<i class="fa-solid fa-trophy"></i> Alle ' : ''}${passed} von ${ex.tests.length} Tests bestanden!
+        </div>
+        ${logHtml}
+    `;
+}
+
+function transpilePythonToJS(pyCode, fnName) {
+    let lines = pyCode.split('\n');
+    let jsLines = [];
+    let indentStack = [0];
+
+    for (let rawLine of lines) {
+        let trimmed = rawLine.trim();
+        if (!trimmed || trimmed.startsWith('#')) continue;
+
+        let indent = rawLine.search(/\S/);
+        if (indent === -1) indent = 0;
+
+        while (indentStack.length > 1 && indent < indentStack[indentStack.length - 1]) {
+            indentStack.pop();
+            jsLines.push('}'.padStart(indentStack[indentStack.length - 1] + 1, ' '));
+        }
+
+        let l = trimmed;
+
+        // Python -> JS conversions
+        if (l.startsWith('def ')) {
+            l = l.replace(/^def\s+([a-zA-Z0-9_]+)\s*\((.*?)\)\s*(?:->.*?)?:/, 'function $1($2) {');
+            indentStack.push(indent + 4);
+        } else if (l.startsWith('elif ')) {
+            l = l.replace(/^elif\s+(.*?):$/, '} else if ($1) {');
+            l = fixPyExpr(l);
+            indentStack.push(indent + 4);
+        } else if (l.startsWith('if ')) {
+            l = l.replace(/^if\s+(.*?):$/, 'if ($1) {');
+            l = fixPyExpr(l);
+            indentStack.push(indent + 4);
+        } else if (l.startsWith('else:')) {
+            l = '} else {';
+            indentStack.push(indent + 4);
+        } else if (l.startsWith('for ') && l.includes(' in ')) {
+            l = l.replace(/^for\s+([a-zA-Z0-9_]+)\s+in\s+(.*?):$/, 'for (let $1 of $2) {');
+            indentStack.push(indent + 4);
+        } else {
+            l = fixPyExpr(l);
+            if (!l.endsWith(';') && !l.endsWith('{') && !l.endsWith('}')) {
+                l += ';';
+            }
+        }
+
+        jsLines.push(' '.repeat(indent) + l);
+    }
+
+    while (indentStack.length > 1) {
+        indentStack.pop();
+        jsLines.push('}');
+    }
+
+    return jsLines.join('\n');
+}
+
+function fixPyExpr(expr) {
+    return expr
+        .replace(/\blen\((.*?)\)/g, '($1).length')
+        .replace(/\bround\((.*?),\s*2\)/g, 'Math.round(($1) * 100) / 100')
+        .replace(/\bTrue\b/g, 'true')
+        .replace(/\bFalse\b/g, 'false')
+        .replace(/\band\b/g, '&&')
+        .replace(/\bor\b/g, '||')
+        .replace(/\bnot\b/g, '!')
+        .replace(/\bpass\b/g, '// pass');
+}
+
+// ==========================================
 // 7. INITIALISIERUNG
 // ==========================================
 window.addEventListener("DOMContentLoaded", () => {
     initTimer();
     updateTotalPoints();
+    if (typeof loadPythonExercise === 'function') {
+        loadPythonExercise(0);
+    }
 });

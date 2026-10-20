@@ -489,6 +489,39 @@ body {
     background: #0f172a;
 }
 
+.python-toolbar {
+    background: #1e293b;
+    padding: 0.6rem 0.9rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #334155;
+    color: #e2e8f0;
+    font-size: 0.85rem;
+}
+
+.exercise-select {
+    padding: 0.35rem 0.65rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid #475569;
+    background: #0f172a;
+    color: #38bdf8;
+    font-size: 0.85rem;
+    font-weight: 600;
+    outline: none;
+    cursor: pointer;
+}
+
+.python-badge {
+    background: #0284c7;
+    color: white;
+    font-size: 0.72rem;
+    font-weight: 800;
+    padding: 0.15rem 0.45rem;
+    border-radius: 4px;
+    letter-spacing: 0.04em;
+}
+
 .editor-toolbar {
     background: #1e293b;
     padding: 0.45rem 0.85rem;

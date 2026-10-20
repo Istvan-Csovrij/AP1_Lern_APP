@@ -57,6 +57,9 @@
             <button class="nav-tab-btn active" data-tab="deckblatt" onclick="switchTaskTab('deckblatt')">
                 <i class="fa-solid fa-file-lines"></i> Deckblatt &amp; Situation
             </button>
+            <button class="nav-tab-btn" data-tab="python_studio" onclick="switchTaskTab('python_studio')" style="border: 2px solid #3b82f6; background: #eff6ff; color: #1d4ed8; font-weight: 800; border-radius: 6px;">
+                <i class="fa-brands fa-python" style="color: #3b82f6; font-size: 1.15rem;"></i> 🐍 Python Funktions-Studio
+            </button>
             <button class="nav-tab-btn" data-tab="it1" onclick="switchTaskTab('it1')">
                 <i class="fa-solid fa-file-invoice-dollar"></i> IT 1: Angebotsvergleich <span class="badge-pts">30 P</span>
             </button>
@@ -114,9 +117,140 @@
                 </div>
 
                 <div style="display: flex; gap: 1rem; margin-top: 1rem;">
-                    <button class="btn-primary" onclick="switchTaskTab('it1')">
-                        Mit Aufgabe IT 1 beginnen <i class="fa-solid fa-arrow-right"></i>
+                    <button class="btn-primary" onclick="switchTaskTab('python_studio')" style="background: linear-gradient(135deg, #2563eb, #1d4ed8);">
+                        <i class="fa-brands fa-python"></i> Zum Python Funktions-Studio <i class="fa-solid fa-arrow-right"></i>
                     </button>
+                    <button class="btn-secondary" onclick="switchTaskTab('it1')">
+                        Zur IHK-Aufgabe IT 1 <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- TAB: PYTHON FUNKTIONS-STUDIO & GENERATOR -->
+            <div class="task-content-section" id="section-python_studio" style="display: none;">
+                <div class="section-header">
+                    <div>
+                        <div class="section-title"><i class="fa-brands fa-python" style="color: #3b82f6;"></i> Python Funktions-Studio &amp; Generator</div>
+                        <div style="font-size: 0.85rem; color: var(--text-muted);">Funktionen coden, Rabatt- und Tariflogik programmieren &amp; mit Unit-Tests prüfen</div>
+                    </div>
+                    <span class="python-badge">LIVE RUNNER</span>
+                </div>
+
+                <!-- SELECTOR & GENERATOR BAR -->
+                <div class="exam-card" style="background: #f0fdf4; border: 1.5px solid #86efac; padding: 1rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem;">
+                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                            <label for="py-exercise-select" style="font-weight: 700; font-size: 0.88rem; color: #166534;">Übungsaufgabe wählen:</label>
+                            <select id="py-exercise-select" class="exercise-select" onchange="onSelectPythonExercise(this.value)">
+                                <option value="0">🏨 1. Hotel City Hof (Sport &amp; Wellness – Original BaWü)</option>
+                                <option value="1">🛒 2. IT-Systemhaus (Hardware-Mengenrabatte)</option>
+                                <option value="2">🎟️ 3. Kinoticket-Rechner (Altersstaffel &amp; Wochenende)</option>
+                                <option value="3">🏋️ 4. Fitness-Club (Modulpakete &amp; VIP-Treue)</option>
+                            </select>
+                        </div>
+                        <button class="btn-accent" onclick="generateRandomPythonExercise()" style="padding: 0.45rem 0.85rem; font-size: 0.84rem; background: #059669;">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i> 🎲 Zufällige neue Aufgabe generieren
+                        </button>
+                    </div>
+                </div>
+
+                <!-- AUFGABEN-BRIEFING -->
+                <div class="exam-card" id="py-briefing-card">
+                    <h3 id="py-exercise-title" style="color: #1e293b; margin-bottom: 0.5rem; font-size: 1.1rem;">
+                        Hotel City Hof: Sport- und Wellnesskurse
+                    </h3>
+                    <p id="py-exercise-desc" style="font-size: 0.9rem; color: #475569; margin-bottom: 0.75rem; line-height: 1.55;">
+                        Bucht ein Gast Sport- und Wellnesskurse, wird im Anschluss der Preis ermittelt und der Hotelrechnung hinzugefügt. Es gibt verschiedene Rabatte bei der Buchung von mehreren Kursen. Stammgäste mit Goldstatus können die Kurse zu einem extra reduzierten Preis buchen.
+                    </p>
+
+                    <div style="background: #f8fafc; border: 1px solid #cbd5e1; border-radius: var(--radius-sm); padding: 0.75rem; font-size: 0.85rem; margin-bottom: 0.75rem;">
+                        <div style="font-weight: 700; color: #0284c7; margin-bottom: 0.35rem;">Zu implementierende Funktionssignatur:</div>
+                        <code id="py-signature-display" style="font-family: var(--font-mono); font-size: 0.92rem; color: #0369a1; font-weight: 700;">def ermittle_Preis(gebuchteKurse: list, Status: str) -> float:</code>
+                        <div style="margin-top: 0.4rem; color: #64748b;" id="py-helper-display">
+                            Vorgegebene Hilfsfunktion: <code>get_Betrag(kurs: str) -> float</code> (muss nicht implementiert werden).
+                        </div>
+                    </div>
+
+                    <!-- RABATT-REGELN & STAMMDATEN -->
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 0.5rem;">
+                        <div style="background: #fffbeb; border: 1px solid #fde68a; border-radius: var(--radius-sm); padding: 0.65rem;">
+                            <strong style="color: #92400e; font-size: 0.85rem;"><i class="fa-solid fa-tags"></i> Rabattstaffelung:</strong>
+                            <ul id="py-rules-list" style="margin-top: 0.35rem; padding-left: 1.15rem; font-size: 0.82rem; color: #78350f; line-height: 1.45;">
+                                <li>Mehr als 3 Kurse gebucht: <strong>20 % Rabatt</strong> auf den Gesamtbetrag</li>
+                                <li>Mehr als 5 Kurse gebucht: <strong>30 % Rabatt</strong> auf den Gesamtbetrag</li>
+                                <li>Status "Gold": <strong>zusätzlich 50 % Rabatt</strong> auf den rabattierten Betrag</li>
+                            </ul>
+                        </div>
+                        <div style="background: #f0fdfa; border: 1px solid #99f6e4; border-radius: var(--radius-sm); padding: 0.65rem;">
+                            <strong style="color: #0f766e; font-size: 0.85rem;"><i class="fa-solid fa-table-list"></i> Auszug Stammdaten:</strong>
+                            <div id="py-masterdata-display" style="margin-top: 0.35rem; font-size: 0.8rem; color: #115e59; max-height: 90px; overflow-y: auto;">
+                                • Morgen-Yoga: 14.00 €<br>• Aqua-Fitness: 12.00 €<br>• Pilates: 15.00 €<br>• Rückenfit: 12.00 €<br>• Nordic Walking: 10.00 €<br>• Personal Training: 55.00 €
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PYTHON CODE-EDITOR -->
+                <div class="code-editor-wrapper">
+                    <div class="python-toolbar">
+                        <span><i class="fa-brands fa-python" style="color: #38bdf8;"></i> Python 3 • Interaktiver Code-Editor</span>
+                        <div style="display: flex; gap: 0.5rem;">
+                            <button onclick="resetPythonCode()" class="btn-secondary" style="padding: 0.2rem 0.55rem; font-size: 0.75rem;">
+                                <i class="fa-solid fa-rotate-left"></i> Zurücksetzen
+                            </button>
+                        </div>
+                    </div>
+                    <textarea id="python_code_editor" class="code-textarea" style="min-height: 250px; font-size: 0.92rem; line-height: 1.55;" spellcheck="false">
+def ermittle_Preis(gebuchteKurse, Status):
+    # 1. Grundpreise mit der Hilfsfunktion aufsummieren
+    summe = 0.0
+    for kurs in gebuchteKurse:
+        summe += get_Betrag(kurs)
+    
+    # 2. Mengenrabatt anwenden (Höhere Schwelle > 5 zuerst prüfen!)
+    anzahl = len(gebuchteKurse)
+    if anzahl > 5:
+        summe = summe * 0.70    # 30 % Rabatt
+    elif anzahl > 3:
+        summe = summe * 0.80    # 20 % Rabatt
+    
+    # 3. Statusrabatt für 'Gold'
+    if Status == "Gold":
+        summe = summe * 0.50    # 50 % Zusatzrabatt
+        
+    return round(summe, 2)
+</textarea>
+                </div>
+
+                <!-- ACTIONS -->
+                <div style="display: flex; gap: 0.75rem; align-items: center; margin-bottom: 0.75rem; flex-wrap: wrap;">
+                    <button class="btn-accent" onclick="runPythonStudioTests()" style="font-size: 0.95rem; padding: 0.65rem 1.3rem;">
+                        <i class="fa-solid fa-play"></i> <strong>Python-Code ausführen &amp; Tests starten</strong>
+                    </button>
+                    <button class="btn-secondary" onclick="togglePythonSolution()">
+                        <i class="fa-solid fa-lightbulb"></i> Musterlösung anzeigen
+                    </button>
+                </div>
+
+                <!-- TEST RUNNER CONSOLE -->
+                <div class="test-log-card" id="py-test-log-console">
+                    <div style="color: #94a3b8;"><i class="fa-solid fa-terminal"></i> Klicken Sie auf "Python-Code ausführen", um die 5 Testfälle zu prüfen.</div>
+                </div>
+
+                <!-- MUSTERLÖSUNG ACCORDION -->
+                <div class="solution-box" id="solution-python-studio">
+                    <div class="solution-header">
+                        <span><i class="fa-solid fa-circle-check"></i> Python Musterlösung &amp; Erklärung</span>
+                        <span style="font-size: 0.8rem; font-weight: normal; color: #166534;">IHK-konformer Lösungsaufbau</span>
+                    </div>
+                    <pre id="py-solution-code-block" style="background: #0f172a; color: #38bdf8; padding: 0.85rem; border-radius: 6px; font-family: monospace; font-size: 0.88rem; line-height: 1.5;"></pre>
+                    <div style="margin-top: 0.75rem; font-size: 0.85rem; color: #166534; line-height: 1.5;">
+                        <strong>Schritt-für-Schritt Aufbau jeder IHK-Funktionsaufgabe:</strong><br>
+                        1. <strong>Akkumulation:</strong> Initialisieren einer Summenvariable (<code>summe = 0.0</code>) und Schleife über die Liste mit der Hilfsfunktion.<br>
+                        2. <strong>Staffelrabatt:</strong> Immer mit der <em>höchsten Bedingung</em> (z. B. <code>> 5</code>) beginnen, gefolgt von <code>elif > 3</code>.<br>
+                        3. <strong>Sonderstatus:</strong> Multiplikativer oder additiver Rabattabzug.<br>
+                        4. <strong>Rückgabe:</strong> Ergebnis mit <code>return</code> zurückgeben (nicht <code>print</code>!).
+                    </div>
                 </div>
             </div>
 
