@@ -2576,6 +2576,7 @@ function showMainQuizMode() {
     if (pauseOverlay) pauseOverlay.style.display = "none";
 
     document.body.classList.remove("exam-mode-active-body");
+    document.body.classList.remove("exam-header-collapsed");
     document.querySelector(".container").classList.remove("exam-mode-active");
     document.querySelectorAll(".sidebar").forEach(s => s.style.display = "");
     document.querySelector(".quiz-area").style.display = "block";
@@ -3293,3 +3294,18 @@ window.closeExamOverviewModal = closeExamOverviewModal;
 window.selectExamFromOverview = selectExamFromOverview;
 window.renderExamCatalog = renderExamCatalog;
 
+
+window.toggleExamHeaderVisibility = function() {
+    document.body.classList.toggle('exam-header-collapsed');
+    const isCollapsed = document.body.classList.contains('exam-header-collapsed');
+    const btn = document.getElementById('exam-toggle-header-btn');
+    if (btn) {
+        btn.style.borderColor = isCollapsed ? '#38bdf8' : '#475569';
+        btn.style.color = isCollapsed ? '#38bdf8' : '#94a3b8';
+    }
+    const minBtn = document.getElementById('header-exam-minimize-btn');
+    if (minBtn) {
+        minBtn.innerHTML = isCollapsed ? '<i class="fa-solid fa-chevron-down"></i>' : '<i class="fa-solid fa-chevron-up"></i>';
+        minBtn.title = isCollapsed ? 'Blauen Header wieder einblenden' : 'Blauen Header komplett einklappen';
+    }
+};

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AP1 Prüfungstrainer - Fachinformatiker</title>
-    <link rel="stylesheet" href="style.css?v=137">
+    <link rel="stylesheet" href="style.css?v=138">
     <!-- FontAwesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -83,16 +83,19 @@
         </div>
     </div>
 
-    <header>
-        <div class="header-container" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+    <header id="main-header">
+        <div class="header-container">
             <h1><i class="fa-solid fa-graduation-cap"></i> AP1 Prüfungstrainer</h1>
             <p>Vorbereitung auf die Abschlussprüfung Teil 1 (Fachinformatiker • nach IHK-Standard)</p>
-            <div style="margin-top: 0.85rem; display: flex; justify-content: center; gap: 0.75rem; flex-wrap: wrap;">
+            <div class="header-actions">
                 <button class="header-exam-btn" id="header-exam-overview-btn" title="Katalog aller 17 Prüfungen (nach Prüfungsstandard) anzeigen & auswählen">
                     <i class="fa-solid fa-book-bookmark"></i> 📚 Alle 17 Prüfungen vergleichen &amp; auswählen (1.700 Pkt)
                 </button>
                 <button class="header-exam-btn" onclick="lockApp()" title="Lernbereich sperren" style="background: rgba(239, 68, 68, 0.1); border: 1.5px solid #ef4444; color: #fca5a5; display: flex; align-items: center; gap: 0.4rem;">
                     <i class="fa-solid fa-lock"></i> 🔒 Sperren
+                </button>
+                <button class="header-exam-btn header-toggle-btn" id="header-exam-minimize-btn" onclick="toggleExamHeaderVisibility()" title="Blauen Header komplett einklappen für maximale Prüfungsfläche" style="display: none; background: rgba(255, 255, 255, 0.08); border-color: rgba(255, 255, 255, 0.35);">
+                    <i class="fa-solid fa-chevron-up"></i>
                 </button>
             </div>
         </div>
@@ -510,6 +513,9 @@
                         </button>
                         <button class="btn" id="exam-submit-btn" style="background-color: #10b981; color: white; font-weight: bold; font-size: 0.92rem; border: none; padding: 0.45rem 0.85rem; display: flex; align-items: center; gap: 0.4rem; border-radius: 6px; cursor: pointer;">
                             <i class="fa-solid fa-paper-plane"></i> Prüfung abgeben (100 Pkt)
+                        </button>
+                        <button class="btn" id="exam-toggle-header-btn" onclick="toggleExamHeaderVisibility()" title="Blauen Seiten-Header ein-/ausblenden für maximale Prüfungsansicht" style="padding: 0.35rem 0.65rem; font-size: 0.85rem; display: flex; align-items: center; gap: 0.35rem; border-radius: 6px; border: 1.5px solid #475569; color: #94a3b8; background: #0f172a; cursor: pointer;">
+                            <i class="fa-solid fa-arrows-up-down"></i> <span id="exam-toggle-header-text">Header</span>
                         </button>
                         <button class="btn" id="exam-exit-btn" style="background: #450a0a; border: 1.5px solid #ef4444; color: #fca5a5; font-size: 0.85rem; padding: 0.4rem 0.75rem; border-radius: 6px; cursor: pointer; display: flex; align-items: center; gap: 0.4rem; font-weight: 700;" title="Prüfung beenden und zur Hauptseite zurückkehren">
                             <i class="fa-solid fa-house"></i> <span>Zur Hauptseite</span>
@@ -1607,13 +1613,13 @@ ORDER BY gesamtumsatz DESC;</pre>
     </div>
 
 
-    <script src="diagrams.js?v=137"></script>
-    <script src="exam_data.js?v=137"></script>
-    <script src="questions.js?v=137"></script>
-    <script src="generator.js?v=137"></script>
-    <script src="ap2_bridge.js?v=137"></script>
-    <script src="exam_attachments.js?v=137"></script>
-    <script src="app.js?v=137"></script>
+    <script src="diagrams.js?v=138"></script>
+    <script src="exam_data.js?v=138"></script>
+    <script src="questions.js?v=138"></script>
+    <script src="generator.js?v=138"></script>
+    <script src="ap2_bridge.js?v=138"></script>
+    <script src="exam_attachments.js?v=138"></script>
+    <script src="app.js?v=138"></script>
 
     <!-- PIN Sicherheits-Gatekeeper -->
     <script>
