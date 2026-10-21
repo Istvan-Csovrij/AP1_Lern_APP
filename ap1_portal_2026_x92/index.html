@@ -4,10 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AP1 Prüfungstrainer - Fachinformatiker</title>
-    <link rel="stylesheet" href="style.css?v=140">
+    <link rel="stylesheet" href="style.css?v=141">
     <!-- FontAwesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        .special-tile-card {
+            transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+        }
+        .special-tile-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15) !important;
+        }
+        .special-tile-card:active {
+            transform: scale(0.98);
+        }
         .pin-pad-btn {
             background: rgba(51, 65, 85, 0.85);
             color: #f8fafc;
@@ -104,6 +114,109 @@
     <main class="container">
         <!-- Left Sidebar: Themenbereiche & Diagramm-Board -->
         <aside class="sidebar sidebar-left">
+
+            <!-- NEU: Spezial-Kacheln für die neuen Übungen & Probeklausuren -->
+            <div class="card" id="special-exercises-card" style="border: 2px solid #6366f1; background: linear-gradient(180deg, #fbfbfe 0%, #ffffff 100%); box-shadow: 0 4px 12px rgba(99, 102, 241, 0.15); margin-bottom: 0.85rem; padding: 0.85rem;">
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.65rem; border-bottom: 1.5px solid #e0e7ff; padding-bottom: 0.45rem;">
+                    <h3 style="margin: 0; color: #312e81; font-size: 0.98rem; display: flex; align-items: center; gap: 0.45rem; font-weight: 800;">
+                        <i class="fa-solid fa-shapes" style="color: #4f46e5;"></i> Spezial-Übungen &amp; Kacheln
+                    </h3>
+                    <span style="font-size: 0.68rem; background: #e0e7ff; color: #4338ca; padding: 0.15rem 0.5rem; border-radius: 999px; font-weight: 800; text-transform: uppercase;">
+                        Direkt-Zugriff ⚡
+                    </span>
+                </div>
+
+                <div style="display: flex; flex-direction: column; gap: 0.55rem;">
+                    
+                    <!-- KACHEL 1: Hotel City Hof Probeklausur 2026/27 -->
+                    <a href="../probeklausur_hotel_city_hof/" target="_blank" class="special-tile-card" style="display: block; text-decoration: none; border: 2px solid #059669; background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%); border-radius: 8px; padding: 0.65rem 0.75rem; box-shadow: 0 2px 6px rgba(5, 150, 105, 0.18);">
+                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.25rem;">
+                            <span style="background: #059669; color: white; font-size: 0.65rem; font-weight: 800; padding: 0.15rem 0.45rem; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.04em;">
+                                🏨 NEU &bull; PROBEKLAUSUR
+                            </span>
+                            <span style="font-size: 0.72rem; color: #047857; font-weight: 700;">
+                                Winter 2026/27 &bull; FA 230
+                            </span>
+                        </div>
+                        <div style="font-weight: 800; color: #064e3b; font-size: 0.9rem; margin-bottom: 0.2rem; display: flex; align-items: center; gap: 0.4rem;">
+                            <i class="fa-solid fa-hotel" style="color: #059669;"></i> Hotel City Hof (100 Pkt)
+                        </div>
+                        <div style="font-size: 0.75rem; color: #047857; line-height: 1.35; margin-bottom: 0.4rem;">
+                            140 Tablets (Angebote), WLAN &amp; <code>preisliste.html</code> / <code>subnets.txt</code>
+                        </div>
+                        <div style="display: flex; align-items: center; justify-content: flex-end; font-size: 0.78rem; font-weight: 800; color: #059669;">
+                            Klausur starten ↗
+                        </div>
+                    </a>
+
+                    <!-- KACHEL 2: Python Funktions-Studio & Test-Runner -->
+                    <a href="../probeklausur_hotel_city_hof/?tab=python_studio" target="_blank" class="special-tile-card" style="display: block; text-decoration: none; border: 2px solid #2563eb; background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border-radius: 8px; padding: 0.65rem 0.75rem; box-shadow: 0 2px 6px rgba(37, 99, 235, 0.18);">
+                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.25rem;">
+                            <span style="background: #2563eb; color: white; font-size: 0.65rem; font-weight: 800; padding: 0.15rem 0.45rem; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.04em;">
+                                🐍 INTERAKTIV
+                            </span>
+                            <span style="font-size: 0.72rem; color: #1e40af; font-weight: 700;">
+                                Live Test-Runner
+                            </span>
+                        </div>
+                        <div style="font-weight: 800; color: #1e3a8a; font-size: 0.9rem; margin-bottom: 0.2rem; display: flex; align-items: center; gap: 0.4rem;">
+                            <i class="fa-brands fa-python" style="color: #2563eb; font-size: 1.05rem;"></i> Python Funktions-Studio
+                        </div>
+                        <div style="font-size: 0.75rem; color: #1e40af; line-height: 1.35; margin-bottom: 0.4rem;">
+                            Code schreiben (<code>ermittle_preis</code>), Unit-Tests &amp; Aufgaben-Generator
+                        </div>
+                        <div style="display: flex; align-items: center; justify-content: flex-end; font-size: 0.78rem; font-weight: 800; color: #2563eb;">
+                            Studio öffnen ↗
+                        </div>
+                    </a>
+
+                    <!-- KACHEL 3: IPv4 & IPv6 Subnetting & Adress-Klassifizierung -->
+                    <div class="special-tile-card" onclick="document.getElementById('subnetting-filter-btn').click();" style="cursor: pointer; border: 2px solid #0284c7; background: linear-gradient(135deg, #f0fdf4 0%, #e0f2fe 100%); border-radius: 8px; padding: 0.65rem 0.75rem; box-shadow: 0 2px 6px rgba(2, 132, 199, 0.18);">
+                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.25rem;">
+                            <span style="background: #0284c7; color: white; font-size: 0.65rem; font-weight: 800; padding: 0.15rem 0.45rem; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.04em;">
+                                🌐 69+ AUFGABEN
+                            </span>
+                            <span style="font-size: 0.72rem; color: #0369a1; font-weight: 700;">
+                                IHK-Standard
+                            </span>
+                        </div>
+                        <div style="font-weight: 800; color: #075985; font-size: 0.9rem; margin-bottom: 0.2rem; display: flex; align-items: center; gap: 0.4rem;">
+                            <i class="fa-solid fa-network-wired" style="color: #0284c7;"></i> IPv4 &amp; IPv6 Subnetting
+                        </div>
+                        <div style="font-size: 0.75rem; color: #0369a1; line-height: 1.35; margin-bottom: 0.4rem;">
+                            Havelholz (/48 auf /64 &amp; FFFF), RFC 1918 Private IP, APIPA, EUI-64 &amp; VLSM
+                        </div>
+                        <div style="display: flex; align-items: center; justify-content: space-between; font-size: 0.78rem; font-weight: 800;">
+                            <a href="rechentrainer.html?v=141" target="_blank" onclick="event.stopPropagation();" style="color: #0284c7; text-decoration: underline; font-size: 0.73rem;">Spickzettel ↗</a>
+                            <span style="color: #0284c7;">Jetzt üben ➔</span>
+                        </div>
+                    </div>
+
+                    <!-- KACHEL 4: Rechen- & Einheiten-Trainer -->
+                    <a href="rechentrainer.html?v=141" target="_blank" class="special-tile-card" style="display: block; text-decoration: none; border: 2px solid #d97706; background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%); border-radius: 8px; padding: 0.65rem 0.75rem; box-shadow: 0 2px 6px rgba(217, 119, 6, 0.18);">
+                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.25rem;">
+                            <span style="background: #d97706; color: white; font-size: 0.65rem; font-weight: 800; padding: 0.15rem 0.45rem; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.04em;">
+                                🧮 FORMELN &amp; RECHNER
+                            </span>
+                            <span style="font-size: 0.72rem; color: #92400e; font-weight: 700;">
+                                Interaktiv
+                            </span>
+                        </div>
+                        <div style="font-weight: 800; color: #78350f; font-size: 0.9rem; margin-bottom: 0.2rem; display: flex; align-items: center; gap: 0.4rem;">
+                            <i class="fa-solid fa-calculator" style="color: #d97706;"></i> Rechentrainer (AP1 / AP2)
+                        </div>
+                        <div style="font-size: 0.75rem; color: #92400e; line-height: 1.35; margin-bottom: 0.4rem;">
+                            Subnetting-Spickzettel, Handelskalkulation, USV-Laufzeit, IEC vs. SI
+                        </div>
+                        <div style="display: flex; align-items: center; justify-content: flex-end; font-size: 0.78rem; font-weight: 800; color: #d97706;">
+                            Rechner öffnen ↗
+                        </div>
+                    </a>
+
+                </div>
+            </div>
+
+            
             <div class="card">
                 <h3><i class="fa-solid fa-filter"></i> Themenbereiche</h3>
                 <div class="theme-filters" id="theme-filters">
@@ -114,6 +227,12 @@
                     <button class="filter-btn highlight-letzte-btn" id="open-letzte-ap1-btn" onclick="startExamMode(false, 'exam_24')" style="border: 2px solid #8b5cf6; background: linear-gradient(135deg, #ede9fe, #ddd6fe); color: #5b21b6; font-weight: 800; margin-top: 0.45rem; margin-bottom: 0.45rem; text-align: left; display: flex; align-items: center; gap: 0.5rem; cursor: pointer; box-shadow: 0 2px 6px rgba(139, 92, 246, 0.2);">
                         <i class="fa-solid fa-fire" style="color: #ef4444;"></i> 📄 Letzte AP1-Prüfung (Original BaWü 2026 mit Anlagen 2–6)
                     </button>
+                    <a href="../probeklausur_hotel_city_hof/" target="_blank" class="filter-btn highlight-hotel-btn" id="open-hotel-cityhof-btn" style="border: 2px solid #059669; background: linear-gradient(135deg, #ecfdf5, #d1fae5); color: #065f46; font-weight: 800; margin-bottom: 0.45rem; text-align: left; display: flex; align-items: center; justify-content: space-between; text-decoration: none; box-shadow: 0 2px 6px rgba(5, 150, 105, 0.2);">
+                        <span style="display: flex; align-items: center; gap: 0.5rem;">
+                            <i class="fa-solid fa-hotel" style="color: #059669;"></i> 🏨 Neu: Probeklausur 2026/27 (Hotel City Hof)
+                        </span>
+                        <span style="background: #059669; color: white; font-size: 0.7rem; padding: 0.15rem 0.45rem; border-radius: 4px; font-weight: bold;">Öffnen ↗</span>
+                    </a>
                     <button class="filter-btn highlight-arbeitsplatz-btn" data-theme="it-arbeitsplatz" id="it-arbeitsplatz-btn" style="border: 2px solid #2563eb; background: linear-gradient(135deg, #eff6ff, #dbeafe); color: #1d4ed8; font-weight: bold; margin-bottom: 0.4rem; margin-top: 0.35rem; text-align: left; display: flex; align-items: center; gap: 0.5rem; box-shadow: 0 2px 4px rgba(37, 99, 235, 0.12);">
                         <i class="fa-solid fa-desktop" style="color: #2563eb;"></i> 🎯 AP1: IT-gestützter Arbeitsplatz
                     </button>
@@ -875,6 +994,36 @@
                         </div>
                     </div>
 
+                    <!-- Companion Hero Banner: Hotel City Hof Probeklausur Winter 2026/27 -->
+                    <div style="background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%); border: 2px solid #059669; border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 4px 14px rgba(5, 150, 105, 0.2);">
+                        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                            <div style="flex: 1; min-width: 320px;">
+                                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.4rem;">
+                                    <span style="background: #059669; color: white; padding: 0.2rem 0.65rem; border-radius: 6px; font-size: 0.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.04em;">
+                                        🏨 NEU: Offizielle Probeklausur (Winter 2026/27 &bull; FA 230)
+                                    </span>
+                                    <span style="background: #ffffff; color: #047857; border: 1px solid #059669; padding: 0.15rem 0.5rem; border-radius: 6px; font-size: 0.78rem; font-weight: 700;">
+                                        100 Punkte &bull; 90 Minuten
+                                    </span>
+                                </div>
+                                <h3 style="margin: 0.2rem 0 0.4rem 0; font-size: 1.4rem; color: #064e3b; font-weight: 800;">
+                                    🏨 Hotel City Hof (Hospitality IT GmbH)
+                                </h3>
+                                <p style="margin: 0; color: #047857; font-size: 0.95rem; line-height: 1.45;">
+                                    Interaktive Probeklausur mit Split-Screen &amp; Python-Studio: 140 Tablets (Angebotsvergleich &amp; Skonto), WLAN-Planung, HTML-Preisliste (<code>preisliste.html</code>), DHCP <code>subnets.txt</code> und <code>ermittle_preis()</code>.
+                                </p>
+                            </div>
+                            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                                <a href="../probeklausur_hotel_city_hof/" target="_blank" class="btn" style="background: linear-gradient(135deg, #059669, #047857); color: white; font-weight: 800; font-size: 1.05rem; padding: 0.8rem 1.4rem; border-radius: 8px; text-decoration: none; display: flex; align-items: center; gap: 0.55rem; box-shadow: 0 4px 12px rgba(5, 150, 105, 0.35);">
+                                    <i class="fa-solid fa-play"></i> Klausur starten ↗
+                                </a>
+                                <a href="../probeklausur_hotel_city_hof/?tab=python_studio" target="_blank" class="btn" style="background: linear-gradient(135deg, #2563eb, #1d4ed8); color: white; font-weight: 800; font-size: 1.05rem; padding: 0.8rem 1.4rem; border-radius: 8px; text-decoration: none; display: flex; align-items: center; gap: 0.55rem; box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35);">
+                                    <i class="fa-brands fa-python"></i> Python-Studio ↗
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- 3 Exam Tasks Overview Grid -->
                     <h4 style="margin: 0 0 1rem 0; color: #0f172a; font-size: 1.15rem; display: flex; align-items: center; gap: 0.5rem;">
                         <i class="fa-solid fa-layer-group" style="color: #6366f1;"></i> Die 3 Fachaufgaben &amp; zugehörigen Anlagen
@@ -1625,13 +1774,13 @@ ORDER BY gesamtumsatz DESC;</pre>
     </div>
 
 
-    <script src="diagrams.js?v=140"></script>
-    <script src="exam_data.js?v=140"></script>
-    <script src="questions.js?v=140"></script>
-    <script src="generator.js?v=140"></script>
-    <script src="ap2_bridge.js?v=140"></script>
-    <script src="exam_attachments.js?v=140"></script>
-    <script src="app.js?v=140"></script>
+    <script src="diagrams.js?v=141"></script>
+    <script src="exam_data.js?v=141"></script>
+    <script src="questions.js?v=141"></script>
+    <script src="generator.js?v=141"></script>
+    <script src="ap2_bridge.js?v=141"></script>
+    <script src="exam_attachments.js?v=141"></script>
+    <script src="app.js?v=141"></script>
 
     <!-- PIN Sicherheits-Gatekeeper -->
     <script>

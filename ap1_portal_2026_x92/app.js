@@ -3140,11 +3140,41 @@ function renderExamCatalog(filterText = "") {
     }
 
     if (counterBadge) {
-        counterBadge.textContent = `${EXAM_SETS.length} Prüfungen verfügbar`;
+        counterBadge.textContent = `${EXAM_SETS.length + 1} Prüfungen verfügbar (inkl. Hotel City Hof)`;
     }
 
     const q = (filterText || "").toLowerCase().trim();
     let html = "";
+
+    // Featured Hero Card for Hotel City Hof Probeklausur Winter 2026/27
+    if (!q || "hotel city hof probeklausur winter 2026/27 fa 230 tablets wlan preisliste python".includes(q)) {
+        html += `
+            <div class="exam-catalog-card" style="border: 2px solid #059669; background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%); position: relative; box-shadow: 0 4px 12px rgba(5, 150, 105, 0.2); border-radius: 10px; padding: 1.25rem;">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem;">
+                    <span style="background: #059669; color: white; font-size: 0.72rem; font-weight: 800; padding: 0.2rem 0.55rem; border-radius: 4px; text-transform: uppercase;">
+                        🏨 NEU • PROBEKLAUSUR WINTER 2026/27 (FA 230)
+                    </span>
+                    <span style="background: #ffffff; color: #047857; border: 1px solid #059669; font-size: 0.75rem; font-weight: 800; padding: 0.15rem 0.45rem; border-radius: 4px;">
+                        100 Pkt • 90 Min
+                    </span>
+                </div>
+                <h4 style="margin: 0 0 0.35rem 0; color: #064e3b; font-size: 1.15rem; font-weight: 800;">
+                    Hotel City Hof (Hospitality IT GmbH)
+                </h4>
+                <p style="font-size: 0.85rem; color: #047857; line-height: 1.45; margin-bottom: 0.85rem;">
+                    Vollständige Prüfung nach IHK-Standard: IT 1 (140 Tablets Angebotsvergleich & Skonto), IT 2 (WLAN-Ausleuchtung & PoE-Switche), IT 3 (HTML-Preisliste, DHCP <code>subnets.txt</code> & Python-Funktion).
+                </p>
+                <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                    <a href="../probeklausur_hotel_city_hof/" target="_blank" class="btn" style="background: linear-gradient(135deg, #059669, #047857); color: white; font-weight: 800; font-size: 0.88rem; padding: 0.45rem 0.85rem; border-radius: 6px; text-decoration: none; display: flex; align-items: center; gap: 0.4rem; box-shadow: 0 2px 6px rgba(5, 150, 105, 0.25);">
+                        <i class="fa-solid fa-play"></i> Klausur starten ↗
+                    </a>
+                    <a href="../probeklausur_hotel_city_hof/?tab=python_studio" target="_blank" class="btn" style="background: linear-gradient(135deg, #2563eb, #1d4ed8); color: white; font-weight: 800; font-size: 0.88rem; padding: 0.45rem 0.85rem; border-radius: 6px; text-decoration: none; display: flex; align-items: center; gap: 0.4rem; box-shadow: 0 2px 6px rgba(37, 99, 235, 0.25);">
+                        <i class="fa-brands fa-python"></i> Python-Studio ↗
+                    </a>
+                </div>
+            </div>
+        `;
+    }
 
     // Render cards for each exam set in EXAM_SETS
     EXAM_SETS.forEach((exam, index) => {
