@@ -1023,4 +1023,8 @@ window.addEventListener("DOMContentLoaded", () => {
     if (typeof loadPythonExercise === 'function') {
         loadPythonExercise(0);
     }
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('tab')) {
+        switchTaskTab(urlParams.get('tab'));
+    }
 });
