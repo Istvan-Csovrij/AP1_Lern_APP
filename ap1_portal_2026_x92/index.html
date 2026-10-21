@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AP1 Prüfungstrainer - Fachinformatiker</title>
-    <link rel="stylesheet" href="style.css?v=138">
+    <link rel="stylesheet" href="style.css?v=139">
     <!-- FontAwesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -451,38 +451,41 @@
             <div class="exam-desk-container">
                 <!-- Top Sticky Booklet Navbar -->
                 <div class="exam-booklet-navbar">
-                    <div class="exam-nav-left">
-                        <select id="booklet-exam-select" class="exam-set-selector">
-                            <option value="exam_1">Prüfung 1: Smart-Home &amp; Web</option>
-                            <option value="exam_2">Prüfung 2: Logistik &amp; 4K-Kameras</option>
-                            <option value="exam_3">Prüfung 3: Apotheke &amp; Belege</option>
-                            <option value="exam_4">Prüfung 4: Kanzlei &amp; Netzplan</option>
-                            <option value="exam_5">Prüfung 5: E-Commerce &amp; Security</option>
-                            <option value="exam_6">Prüfung 6: Cloud &amp; RZ-Effizienz</option>
-                            <option value="exam_7">Prüfung 7: Smart Factory &amp; IoT</option>
-                            <option value="exam_8">Prüfung 8: Medizintechnik &amp; TI</option>
-                            <option value="exam_9">Prüfung 9: FinTech &amp; PSD2</option>
-                            <option value="exam_10">Prüfung 10: Automotive &amp; Sensorik</option>
-                            <option value="exam_11">Prüfung 11: E-Learning &amp; WLAN</option>
-                            <option value="exam_12">Prüfung 12: Smart Grid &amp; Energie</option>
-                            <option value="exam_13">Prüfung 13: Flugsicherung &amp; Radar</option>
-                            <option value="exam_14">Prüfung 14: Hotelkette &amp; Hospitality</option>
-                            <option value="exam_15">Prüfung 15: Entsorgung &amp; Telematik</option>
-                            <option value="exam_16">Prüfung 16: E-Government &amp; BundID</option>
-                            <option value="exam_17">Prüfung 17: Enterprise Campus &amp; IPv6</option>
-                            <option value="exam_18">🎯 Prüfung 18: IT-Arbeitsplatz I (Kanzlei, Dual-4K, TB4)</option>
-                            <option value="exam_19">🎯 Prüfung 19: IT-Arbeitsplatz II (Agentur, Desk-Sharing)</option>
-                            <option value="exam_20">🎯 Prüfung 20: IT-Arbeitsplatz III (CAD, USV, GPO)</option>
-                            <option value="exam_21">🎯 Prüfung 21: IT-Arbeitsplatz IV (Rollout, PXE, SLA)</option>
-                            <option value="exam_24" selected>🏆 Letzte AP1-Prüfung: Original BaWü Frühjahr 2026 (SolarTech &amp; WLAN – Anlagen 2 bis 6)</option>
-                            <option value="exam_23">🏛️ Prüfung 23: Original BaWü IBBW (DarSys GmbH – IT 1 bis IT 3)</option>
-                            <option value="exam_22">🏆 Prüfung 22: Original BaWü 2026 (SoftTech – FA 230)</option>
-                            <option value="exam_23">🏛️ Prüfung 23: Original BaWü IBBW (DarSys GmbH – IT 1 bis IT 3)</option>
-                            <option value="exam_random">🎲 Dynamische Zufallsprüfung</option>
-                        </select>
-                        <button class="btn btn-secondary" id="booklet-overview-btn" title="Katalog aller 23 Prüfungen anzeigen" style="padding: 0.38rem 0.65rem; font-size: 0.85rem; display: flex; align-items: center; gap: 0.35rem; border-radius: 6px; border: 1.5px solid #10b981; color: #047857; background: #ecfdf5; cursor: pointer; white-space: nowrap; font-weight: 600;">
-                            <i class="fa-solid fa-layer-group"></i> <span>Übersicht (24)</span>
-                        </button>
+                    <!-- Zeile 1: Pruefungsauswahl & Aufgaben-Reiter -->
+                    <div class="exam-nav-row exam-nav-row-1">
+                        <div class="exam-nav-group-left">
+                            <select id="booklet-exam-select" class="exam-set-selector">
+                                <option value="exam_1">Prüfung 1: Smart-Home &amp; Web</option>
+                                <option value="exam_2">Prüfung 2: Logistik &amp; 4K-Kameras</option>
+                                <option value="exam_3">Prüfung 3: Apotheke &amp; Belege</option>
+                                <option value="exam_4">Prüfung 4: Kanzlei &amp; Netzplan</option>
+                                <option value="exam_5">Prüfung 5: E-Commerce &amp; Security</option>
+                                <option value="exam_6">Prüfung 6: Cloud &amp; RZ-Effizienz</option>
+                                <option value="exam_7">Prüfung 7: Smart Factory &amp; IoT</option>
+                                <option value="exam_8">Prüfung 8: Medizintechnik &amp; TI</option>
+                                <option value="exam_9">Prüfung 9: FinTech &amp; PSD2</option>
+                                <option value="exam_10">Prüfung 10: Automotive &amp; Sensorik</option>
+                                <option value="exam_11">Prüfung 11: E-Learning &amp; WLAN</option>
+                                <option value="exam_12">Prüfung 12: Smart Grid &amp; Energie</option>
+                                <option value="exam_13">Prüfung 13: Flugsicherung &amp; Radar</option>
+                                <option value="exam_14">Prüfung 14: Hotelkette &amp; Hospitality</option>
+                                <option value="exam_15">Prüfung 15: Entsorgung &amp; Telematik</option>
+                                <option value="exam_16">Prüfung 16: E-Government &amp; BundID</option>
+                                <option value="exam_17">Prüfung 17: Enterprise Campus &amp; IPv6</option>
+                                <option value="exam_18">🎯 Prüfung 18: IT-Arbeitsplatz I (Kanzlei, Dual-4K, TB4)</option>
+                                <option value="exam_19">🎯 Prüfung 19: IT-Arbeitsplatz II (Agentur, Desk-Sharing)</option>
+                                <option value="exam_20">🎯 Prüfung 20: IT-Arbeitsplatz III (CAD, USV, GPO)</option>
+                                <option value="exam_21">🎯 Prüfung 21: IT-Arbeitsplatz IV (Rollout, PXE, SLA)</option>
+                                <option value="exam_24" selected>🏆 Letzte AP1-Prüfung: Original BaWü Frühjahr 2026 (SolarTech &amp; WLAN – Anlagen 2 bis 6)</option>
+                                <option value="exam_23">🏛️ Prüfung 23: Original BaWü IBBW (DarSys GmbH – IT 1 bis IT 3)</option>
+                                <option value="exam_22">🏆 Prüfung 22: Original BaWü 2026 (SoftTech – FA 230)</option>
+                                <option value="exam_23">🏛️ Prüfung 23: Original BaWü IBBW (DarSys GmbH – IT 1 bis IT 3)</option>
+                                <option value="exam_random">🎲 Dynamische Zufallsprüfung</option>
+                            </select>
+                            <button class="btn btn-secondary" id="booklet-overview-btn" title="Katalog aller 23 Prüfungen anzeigen">
+                                <i class="fa-solid fa-layer-group"></i> <span>Übersicht (24)</span>
+                            </button>
+                        </div>
                         <div class="exam-tabs-pills" id="booklet-tab-pills">
                             <button class="exam-tab-btn active" data-page="0">📄 Deckblatt</button>
                             <button class="exam-tab-btn" data-page="1">1. Aufgabe (25 P)</button>
@@ -492,34 +495,40 @@
                         </div>
                     </div>
 
-                    <div class="exam-nav-right">
-                        <div id="exam-timer-container" class="exam-timer-badge" style="display: none;">
-                            <i class="fa-solid fa-clock-rotate-left fa-spin"></i> <span id="exam-timer">90:00</span>
+                    <!-- Zeile 2: Pruefungs-Werkzeuge & Steuerungs-Aktionen -->
+                    <div class="exam-nav-row exam-nav-row-2">
+                        <div class="exam-nav-group-left">
+                            <div id="exam-timer-container" class="exam-timer-badge" style="display: none;">
+                                <i class="fa-solid fa-clock-rotate-left fa-spin"></i> <span id="exam-timer">90:00</span>
+                            </div>
+                            <button class="btn" id="exam-pause-btn" title="Prüfung pausieren / fortsetzen" style="display: none;">
+                                <i class="fa-solid fa-pause"></i> <span id="exam-pause-btn-text">Pause</span>
+                            </button>
+                            <button class="btn btn-secondary" id="exam-whiteboard-btn" title="Diagramm-Zeichenboard als Fenster öffnen">
+                                <i class="fa-solid fa-pen-ruler"></i> <span>Skizzenblatt</span>
+                            </button>
+                            <div class="split-ratio-controls" id="split-ratio-controls">
+                                <span>Breite:</span>
+                                <button type="button" class="split-ratio-btn" onclick="setSplitRatioPreset(35)" title="Aufgabe schmaler (35%), Anlageblätter breiter (65%)">35:65</button>
+                                <button type="button" class="split-ratio-btn active" onclick="setSplitRatioPreset(50)" title="Gleichmäßig (50% / 50%)">50:50</button>
+                                <button type="button" class="split-ratio-btn" onclick="setSplitRatioPreset(65)" title="Aufgabe breiter (65%), Anlageblätter schmaler (35%)">65:35</button>
+                            </div>
                         </div>
-                        <button class="btn" id="exam-pause-btn" title="Prüfung pausieren / fortsetzen" style="display: none; padding: 0.35rem 0.65rem; font-size: 0.85rem; align-items: center; gap: 0.35rem; border-radius: 6px; border: 1.5px solid #f59e0b; color: #b45309; background: #fffbeb; font-weight: 600; cursor: pointer;">
-                            <i class="fa-solid fa-pause"></i> <span id="exam-pause-btn-text">Pause</span>
-                        </button>
-                        <button class="btn btn-secondary" id="exam-whiteboard-btn" title="Diagramm-Zeichenboard als Fenster öffnen" style="padding: 0.35rem 0.65rem; font-size: 0.85rem; display: flex; align-items: center; gap: 0.35rem; border-radius: 6px; border: 1px solid #8b5cf6; color: #6d28d9; background: #f5f3ff;">
-                            <i class="fa-solid fa-pen-ruler"></i> <span style="font-weight: 600;">Skizzenblatt</span>
-                        </button>
-                                                <div class="split-ratio-controls" id="split-ratio-controls" style="display: inline-flex; align-items: center; gap: 3px; background: #0f172a; padding: 2px 4px; border-radius: 6px; border: 1.5px solid #38bdf8;">
-                            <span style="font-size: 0.72rem; color: #94a3b8; font-weight: 700; padding: 0 3px;">Breite:</span>
-                            <button type="button" class="split-ratio-btn" onclick="setSplitRatioPreset(35)" title="Aufgabe schmaler (35%), Anlageblätter breiter (65%)">35:65</button>
-                            <button type="button" class="split-ratio-btn active" onclick="setSplitRatioPreset(50)" title="Gleichmäßig (50% / 50%)">50:50</button>
-                            <button type="button" class="split-ratio-btn" onclick="setSplitRatioPreset(65)" title="Aufgabe breiter (65%), Anlageblätter schmaler (35%)">65:35</button>
+
+                        <div class="exam-nav-group-right">
+                            <button class="btn" id="exam-split-toggle-btn" onclick="toggleExamSplitView()" title="Split-View: Aufgabe und Anlageblätter nebeneinander anzeigen mit separatem Scrollen">
+                                <i class="fa-solid fa-table-columns"></i> <span id="exam-split-toggle-text">Split-View</span>
+                            </button>
+                            <button class="btn" id="exam-submit-btn">
+                                <i class="fa-solid fa-paper-plane"></i> <span>Abgeben (100 P)</span>
+                            </button>
+                            <button class="btn" id="exam-toggle-header-btn" onclick="toggleExamHeaderVisibility()" title="Blauen Seiten-Header ein-/ausblenden für maximale Prüfungsansicht">
+                                <i class="fa-solid fa-arrows-up-down"></i> <span id="exam-toggle-header-text">Header</span>
+                            </button>
+                            <button class="btn" id="exam-exit-btn" title="Prüfung beenden und zur Hauptseite zurückkehren">
+                                <i class="fa-solid fa-house"></i> <span>Hauptseite</span>
+                            </button>
                         </div>
-                        <button class="btn" id="exam-split-toggle-btn" onclick="toggleExamSplitView()" title="Split-View: Aufgabe und Anlageblätter nebeneinander anzeigen mit separatem Scrollen" style="padding: 0.35rem 0.65rem; font-size: 0.85rem; display: flex; align-items: center; gap: 0.35rem; border-radius: 6px; border: 1.5px solid #0284c7; color: #0369a1; background: #f0f9ff; font-weight: 700; cursor: pointer;">
-                            <i class="fa-solid fa-table-columns"></i> <span id="exam-split-toggle-text">Split-View (Nebeneinander)</span>
-                        </button>
-                        <button class="btn" id="exam-submit-btn" style="background-color: #10b981; color: white; font-weight: bold; font-size: 0.92rem; border: none; padding: 0.45rem 0.85rem; display: flex; align-items: center; gap: 0.4rem; border-radius: 6px; cursor: pointer;">
-                            <i class="fa-solid fa-paper-plane"></i> Prüfung abgeben (100 Pkt)
-                        </button>
-                        <button class="btn" id="exam-toggle-header-btn" onclick="toggleExamHeaderVisibility()" title="Blauen Seiten-Header ein-/ausblenden für maximale Prüfungsansicht" style="padding: 0.35rem 0.65rem; font-size: 0.85rem; display: flex; align-items: center; gap: 0.35rem; border-radius: 6px; border: 1.5px solid #475569; color: #94a3b8; background: #0f172a; cursor: pointer;">
-                            <i class="fa-solid fa-arrows-up-down"></i> <span id="exam-toggle-header-text">Header</span>
-                        </button>
-                        <button class="btn" id="exam-exit-btn" style="background: #450a0a; border: 1.5px solid #ef4444; color: #fca5a5; font-size: 0.85rem; padding: 0.4rem 0.75rem; border-radius: 6px; cursor: pointer; display: flex; align-items: center; gap: 0.4rem; font-weight: 700;" title="Prüfung beenden und zur Hauptseite zurückkehren">
-                            <i class="fa-solid fa-house"></i> <span>Zur Hauptseite</span>
-                        </button>
                     </div>
                 </div>
 
@@ -1613,13 +1622,13 @@ ORDER BY gesamtumsatz DESC;</pre>
     </div>
 
 
-    <script src="diagrams.js?v=138"></script>
-    <script src="exam_data.js?v=138"></script>
-    <script src="questions.js?v=138"></script>
-    <script src="generator.js?v=138"></script>
-    <script src="ap2_bridge.js?v=138"></script>
-    <script src="exam_attachments.js?v=138"></script>
-    <script src="app.js?v=138"></script>
+    <script src="diagrams.js?v=139"></script>
+    <script src="exam_data.js?v=139"></script>
+    <script src="questions.js?v=139"></script>
+    <script src="generator.js?v=139"></script>
+    <script src="ap2_bridge.js?v=139"></script>
+    <script src="exam_attachments.js?v=139"></script>
+    <script src="app.js?v=139"></script>
 
     <!-- PIN Sicherheits-Gatekeeper -->
     <script>

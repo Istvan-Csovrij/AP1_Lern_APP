@@ -1194,13 +1194,13 @@ footer {
     width: 100% !important;
     max-width: 100% !important;
     background: #0f172a;
-    padding: 1rem 0.5rem 2rem 0.5rem;
+    padding: 0.35rem 0.5rem 1.5rem 0.5rem;
     border-radius: 12px;
     box-sizing: border-box !important;
     display: flex;
     flex-direction: column;
     align-items: stretch !important;
-    gap: 1rem;
+    gap: 0.5rem;
     overflow-x: clip !important;
 }
 
@@ -1218,29 +1218,44 @@ footer {
     margin: 0 auto !important;
 }
 
-/* Top Sticky Exam Booklet Navbar */
+/* Top Sticky Exam Booklet Navbar - Ultra-Kompakt (30-45% geringere Hoehe) */
 .exam-booklet-navbar {
     width: 100%;
     max-width: 860px;
     background: #1e293b;
     border: 1px solid #334155;
     border-radius: 8px;
-    padding: 0.45rem 0.85rem;
+    padding: 0.25rem 0.6rem;
     display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.45rem;
+    flex-direction: column;
+    gap: 0.28rem;
     box-shadow: 0 4px 12px rgba(0,0,0,0.3);
     position: sticky;
     top: 4px;
     z-index: 100;
+    box-sizing: border-box;
 }
 
-.exam-nav-left {
+.exam-nav-row {
+    width: 100%;
     display: flex;
     align-items: center;
-    gap: 0.6rem;
+    justify-content: space-between;
+    gap: 0.35rem;
+    flex-wrap: wrap;
+}
+
+.exam-nav-group-left, .exam-nav-group-right {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    flex-wrap: wrap;
+}
+
+.exam-nav-left, .exam-nav-right {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
     flex-wrap: wrap;
 }
 
@@ -1249,17 +1264,38 @@ footer {
     color: #f8fafc;
     border: 1.5px solid #38bdf8;
     border-radius: 6px;
-    padding: 0.45rem 0.75rem;
-    font-size: 0.9rem;
+    padding: 0.18rem 0.45rem;
+    font-size: 0.8rem;
     font-weight: 600;
     cursor: pointer;
     outline: none;
+    max-width: 270px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    height: 27px;
+}
+
+#booklet-overview-btn {
+    padding: 0.18rem 0.5rem !important;
+    font-size: 0.78rem !important;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    border-radius: 6px;
+    border: 1.5px solid #10b981;
+    color: #047857;
+    background: #ecfdf5;
+    cursor: pointer;
+    white-space: nowrap;
+    font-weight: 700;
+    height: 27px;
 }
 
 .exam-tabs-pills {
     display: flex;
     align-items: center;
-    gap: 0.35rem;
+    gap: 0.25rem;
     flex-wrap: wrap;
 }
 
@@ -1268,11 +1304,16 @@ footer {
     color: #cbd5e1;
     border: 1px solid #475569;
     border-radius: 5px;
-    padding: 0.35rem 0.65rem;
-    font-size: 0.85rem;
+    padding: 0.16rem 0.45rem;
+    font-size: 0.76rem;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.2s;
+    transition: all 0.15s;
+    height: 27px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    white-space: nowrap;
 }
 
 .exam-tab-btn:hover {
@@ -1287,25 +1328,143 @@ footer {
     font-weight: 700;
 }
 
-.exam-nav-right {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    flex-wrap: wrap;
-}
-
 .exam-timer-badge {
     background: #450a0a;
     border: 1.5px solid #ef4444;
     color: #fca5a5;
-    padding: 0.35rem 0.75rem;
+    padding: 0.15rem 0.45rem;
     border-radius: 6px;
     font-family: monospace;
-    font-size: 1rem;
+    font-size: 0.85rem;
     font-weight: bold;
     display: flex;
     align-items: center;
-    gap: 0.4rem;
+    gap: 0.3rem;
+    height: 27px;
+}
+
+#exam-pause-btn {
+    padding: 0.18rem 0.5rem !important;
+    font-size: 0.76rem !important;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    border-radius: 6px;
+    border: 1.5px solid #f59e0b;
+    color: #b45309;
+    background: #fffbeb;
+    font-weight: 600;
+    cursor: pointer;
+    height: 27px;
+}
+
+#exam-whiteboard-btn {
+    padding: 0.18rem 0.5rem !important;
+    font-size: 0.76rem !important;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    border-radius: 6px;
+    border: 1px solid #8b5cf6;
+    color: #6d28d9;
+    background: #f5f3ff;
+    font-weight: 600;
+    cursor: pointer;
+    height: 27px;
+}
+
+.split-ratio-controls {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    background: #0f172a;
+    padding: 1px 3px;
+    border-radius: 6px;
+    border: 1.5px solid #38bdf8;
+    height: 27px;
+    box-sizing: border-box;
+}
+
+.split-ratio-controls span {
+    font-size: 0.68rem;
+    color: #94a3b8;
+    font-weight: 700;
+    padding: 0 2px;
+}
+
+.split-ratio-btn {
+    background: transparent;
+    color: #cbd5e1;
+    border: none;
+    border-radius: 4px;
+    padding: 0.12rem 0.3rem;
+    font-size: 0.72rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.split-ratio-btn.active {
+    background: #38bdf8;
+    color: #0f172a;
+}
+
+#exam-split-toggle-btn {
+    padding: 0.18rem 0.5rem !important;
+    font-size: 0.76rem !important;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    border-radius: 6px;
+    border: 1.5px solid #0284c7;
+    color: #0369a1;
+    background: #f0f9ff;
+    font-weight: 700;
+    cursor: pointer;
+    height: 27px;
+}
+
+#exam-submit-btn {
+    background-color: #10b981;
+    color: white;
+    font-weight: 700;
+    font-size: 0.78rem !important;
+    border: none;
+    padding: 0.18rem 0.55rem !important;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    border-radius: 6px;
+    cursor: pointer;
+    height: 27px;
+}
+
+#exam-toggle-header-btn {
+    padding: 0.18rem 0.45rem !important;
+    font-size: 0.76rem !important;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    border-radius: 6px;
+    border: 1.5px solid #475569;
+    color: #94a3b8;
+    background: #0f172a;
+    cursor: pointer;
+    height: 27px;
+}
+
+#exam-exit-btn {
+    background: #450a0a;
+    border: 1.5px solid #ef4444;
+    color: #fca5a5;
+    font-size: 0.76rem !important;
+    padding: 0.18rem 0.5rem !important;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-weight: 700;
+    height: 27px;
 }
 
 /* White Authentic DIN-A4 Paper Sheet */
