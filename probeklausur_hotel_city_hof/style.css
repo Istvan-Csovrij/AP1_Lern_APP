@@ -4,6 +4,9 @@
    ========================================================================== */
 
 :root {
+    --theme-dark: rgb(5, 73, 99);
+    --theme-darker: rgb(3, 44, 60);
+    --theme-lighter: rgb(8, 92, 124);
     --primary: #0284c7;
     --primary-dark: #0369a1;
     --primary-light: #e0f2fe;
@@ -47,7 +50,7 @@ body {
 
 /* TOP HEADER & EXAM STATUS BAR */
 .exam-navbar {
-    background: #0f172a;
+    background: var(--theme-dark);
     color: white;
     padding: 0.75rem 1.5rem;
     display: flex;
@@ -104,8 +107,8 @@ body {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    background: #1e293b;
-    border: 1.5px solid #334155;
+    background: var(--theme-darker);
+    border: 1.5px solid rgba(56, 189, 248, 0.4);
     padding: 0.35rem 0.8rem;
     border-radius: var(--radius-sm);
 }
@@ -158,9 +161,9 @@ body {
 }
 
 .header-action-btn {
-    background: #334155;
+    background: var(--theme-lighter);
     color: #f8fafc;
-    border: 1px solid #475569;
+    border: 1px solid rgba(255, 255, 255, 0.25);
     padding: 0.38rem 0.75rem;
     border-radius: var(--radius-sm);
     font-size: 0.8rem;
@@ -173,7 +176,7 @@ body {
     text-decoration: none;
 }
 .header-action-btn:hover {
-    background: #475569;
+    background: rgb(11, 115, 155);
     color: white;
 }
 
@@ -338,7 +341,7 @@ body {
 }
 
 .kalk-table th {
-    background: #0f172a;
+    background: var(--theme-dark);
     color: white;
     padding: 0.55rem 0.75rem;
     text-align: left;
@@ -466,9 +469,9 @@ body {
 }
 
 .att-tab-btn.active {
-    background: #0f172a;
+    background: var(--theme-dark);
     color: white;
-    border-color: #0f172a;
+    border-color: var(--theme-dark);
 }
 
 .att-sheet {
@@ -483,19 +486,19 @@ body {
 .code-editor-wrapper {
     margin-top: 0.75rem;
     margin-bottom: 1rem;
-    border: 1.5px solid #cbd5e1;
+    border: 1.5px solid var(--theme-lighter);
     border-radius: var(--radius);
     overflow: hidden;
-    background: #0f172a;
+    background: var(--theme-darker);
 }
 
 .python-toolbar {
-    background: #1e293b;
+    background: var(--theme-dark);
     padding: 0.6rem 0.9rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid #334155;
+    border-bottom: 1px solid var(--theme-lighter);
     color: #e2e8f0;
     font-size: 0.85rem;
 }
@@ -503,8 +506,8 @@ body {
 .exercise-select {
     padding: 0.35rem 0.65rem;
     border-radius: var(--radius-sm);
-    border: 1px solid #475569;
-    background: #0f172a;
+    border: 1px solid var(--theme-lighter);
+    background: var(--theme-darker);
     color: #38bdf8;
     font-size: 0.85rem;
     font-weight: 600;
@@ -523,12 +526,12 @@ body {
 }
 
 .editor-toolbar {
-    background: #1e293b;
+    background: var(--theme-dark);
     padding: 0.45rem 0.85rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid #334155;
+    border-bottom: 1px solid var(--theme-lighter);
     color: #94a3b8;
     font-size: 0.8rem;
 }
@@ -536,8 +539,8 @@ body {
 .code-textarea {
     width: 100%;
     min-height: 220px;
-    background: #0f172a;
-    color: #38bdf8;
+    background: var(--theme-darker);
+    color: #7dd3fc;
     font-family: var(--font-mono);
     font-size: 0.9rem;
     line-height: 1.5;
@@ -549,7 +552,8 @@ body {
 
 /* TEST RUNNER LOG */
 .test-log-card {
-    background: #0f172a;
+    background: var(--theme-darker);
+    border: 1.5px solid var(--theme-lighter);
     border-radius: var(--radius);
     padding: 1rem;
     color: white;
@@ -562,7 +566,7 @@ body {
     display: flex;
     justify-content: space-between;
     padding: 0.45rem 0;
-    border-bottom: 1px solid #1e293b;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .test-item.pass { color: #4ade80; }
