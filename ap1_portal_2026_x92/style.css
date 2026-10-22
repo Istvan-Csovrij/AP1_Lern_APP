@@ -1214,14 +1214,16 @@ footer {
     overflow-x: clip !important;
 }
 
-.exam-desk-container:not(.split-mode) .exam-paper-sheet {
+.exam-desk-container:not(.split-mode) .exam-booklet-navbar,
+.exam-desk-container:not(.split-mode) .exam-paper-sheet,
+.exam-desk-container:not(.split-mode) .exam-bottom-bar {
     margin: 0 auto !important;
 }
 
 /* Top Sticky Exam Booklet Navbar - Ultra-Kompakt (30-45% geringere Hoehe) */
 .exam-booklet-navbar {
     width: 100%;
-    max-width: 860px;
+    max-width: 1240px;
     background: #1e293b;
     border: 1px solid #334155;
     border-radius: 8px;
@@ -1472,8 +1474,8 @@ footer {
     background: #ffffff;
     color: #000000;
     width: 100%;
-    max-width: 860px;
-    min-height: 1160px;
+    max-width: 1240px;
+    min-height: auto;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), 0 5px 15px rgba(0,0,0,0.2);
     border: 2px solid #000000;
     font-family: "Segoe UI", Arial, sans-serif;
@@ -1482,7 +1484,8 @@ footer {
     padding: 24px 28px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-start;
+    gap: 1.25rem;
 }
 
 /* Page Top Header */
@@ -2522,8 +2525,9 @@ footer {
     flex: 1 1 50%;
     min-width: 0 !important; /* CRITICAL: Enables shrinking to any ratio without overflowing parent */
     max-width: 100%;
-    height: calc(100vh - 120px);
-    max-height: 980px;
+    min-height: calc(100vh - 120px);
+    height: auto;
+    max-height: none;
     overflow-y: auto;
     overflow-x: auto; /* Internal horizontal scroll ensures wide tables/code never clip */
     padding: 0 4px;
@@ -2564,6 +2568,12 @@ footer {
     max-width: 100% !important;
     width: 100% !important;
 }
+.exam-bottom-bar {
+    width: 100%;
+    max-width: 1240px;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
 .exam-bottom-bar.split-mode {
     max-width: 100% !important;
     width: 100% !important;
@@ -2586,7 +2596,8 @@ footer {
     background: #ffffff;
     color: #000000;
     width: 100%;
-    min-height: 100%;
+    min-height: auto;
+    height: fit-content;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), 0 5px 15px rgba(0,0,0,0.2);
     border: 2px solid #f59e0b;
     border-radius: 4px;

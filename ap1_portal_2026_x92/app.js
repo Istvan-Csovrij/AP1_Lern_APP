@@ -1701,7 +1701,7 @@ function changeExamPage(targetPage) {
 }
 
 // Renders either Deckblatt (0) or one of the Tasks (1..N)
-let isExamSplitView = true;
+let isExamSplitView = false;
 let splitRatio = parseFloat(localStorage.getItem("ap1_split_ratio")) || 50; // percentage for left pane
 
 function applySplitRatio(ratio) {
