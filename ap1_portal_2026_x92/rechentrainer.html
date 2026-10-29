@@ -255,6 +255,11 @@
           </button>
 
           <!-- IPv6 (AP1 Lernfeld 3) -->
+          <!-- NEU: IPv6 & IPv4 Scopes & Adressbereiche Tabelle (IHK-Klassiker) -->
+          <button onclick="selectMiniTopic('ipv6_scopes_table')" class="topic-pill px-4 py-2 text-sm font-bold rounded-xl border-2 border-indigo-600 bg-gradient-to-r from-indigo-100 to-sky-100 hover:from-indigo-200 hover:to-sky-200 text-indigo-950 shadow-sm transition-all flex items-center gap-1.5 active:scale-95" data-topic="ipv6_scopes_table">
+            📊 IPv6 &amp; IPv4: Scopes, Bereiche &amp; Entsprechungen (Tabelle)
+          </button>
+          
           <button onclick="selectMiniTopic('ipv6_identify_type')" class="topic-pill px-3.5 py-2 text-sm font-semibold rounded-xl border border-indigo-400 bg-indigo-50 hover:bg-indigo-100 text-indigo-900 transition-all" data-topic="ipv6_identify_type">
             🏷️ IPv6: Adresstyp erkennen (fe80, fd, 2/3, ff, ::1)
           </button>
@@ -3885,6 +3890,372 @@
       },
 
       // 44. IPV6: ADRESSTYP ERKENNEN (2/3 -> GUA, fd/fc -> ULA, fe80 -> Link-Local, ff -> Multicast, ::1 -> Loopback)
+            // =========================================================================
+      // IPV6 & IPV4: SCOPES, BEREICHE & ENTSPRECHUNGEN (IHK LERNFELD 3 TABELLE)
+      // =========================================================================
+      ipv6_scopes_table: function() {
+        const tableHtml = `
+          <div class="mt-3.5 overflow-x-auto rounded-xl border border-indigo-200 bg-white shadow-xs">
+            <div class="bg-gradient-to-r from-indigo-900 to-slate-900 px-3.5 py-2 text-white text-xs font-bold flex items-center justify-between">
+              <span>📊 IHK-ÜBERSICHTSTABELLE: IPV6 ADRESSTYPEN, SCOPES & IPV4-ENTSPRECHUNG</span>
+              <span class="text-[10px] bg-indigo-500/40 text-indigo-200 px-2 py-0.5 rounded">Lernfeld 3</span>
+            </div>
+            <table class="w-full text-left text-xs">
+              <thead class="bg-indigo-50/80 text-indigo-950 font-bold border-b border-indigo-200 text-[11px]">
+                <tr>
+                  <th class="p-2.5">IPv6 Adresstyp</th>
+                  <th class="p-2.5">Präfix / Start</th>
+                  <th class="p-2.5">Gültigkeitsbereich (Scope)</th>
+                  <th class="p-2.5">Routingfähigkeit</th>
+                  <th class="p-2.5">IPv4-Entsprechung</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100 text-[11px] font-sans">
+                <tr class="hover:bg-indigo-50/40 transition-colors">
+                  <td class="p-2.5 font-bold text-indigo-900">Global Unicast (GUA)</td>
+                  <td class="p-2.5 font-mono font-bold text-emerald-700">2000::/3 (2 oder 3)</td>
+                  <td class="p-2.5">Global (weltweit)</td>
+                  <td class="p-2.5 font-semibold text-emerald-700">Ja (im Internet routbar)</td>
+                  <td class="p-2.5 font-medium text-slate-800">Öffentliche IPv4-Adresse</td>
+                </tr>
+                <tr class="hover:bg-indigo-50/40 transition-colors bg-slate-50/40">
+                  <td class="p-2.5 font-bold text-purple-900">Unique Local (ULA)</td>
+                  <td class="p-2.5 font-mono font-bold text-purple-700">fc00::/7 (fd00::/8)</td>
+                  <td class="p-2.5">Lokal (Privates Firmennetz)</td>
+                  <td class="p-2.5 font-semibold text-rose-700">Nein (nicht im Internet geroutet)</td>
+                  <td class="p-2.5 font-medium text-slate-800">Private IPv4 (RFC 1918: 10.x, 172.16-31.x, 192.168.x)</td>
+                </tr>
+                <tr class="hover:bg-indigo-50/40 transition-colors">
+                  <td class="p-2.5 font-bold text-blue-900">Link-Local</td>
+                  <td class="p-2.5 font-mono font-bold text-blue-700">fe80::/10 (fe80::)</td>
+                  <td class="p-2.5">Link-Local (nur am Interface)</td>
+                  <td class="p-2.5 font-semibold text-rose-700">Nein (niemals über Router)</td>
+                  <td class="p-2.5 font-medium text-slate-800">APIPA (169.254.x.x)</td>
+                </tr>
+                <tr class="hover:bg-indigo-50/40 transition-colors bg-slate-50/40">
+                  <td class="p-2.5 font-bold text-amber-900">Multicast</td>
+                  <td class="p-2.5 font-mono font-bold text-amber-700">ff00::/8 (beginnt mit ff)</td>
+                  <td class="p-2.5">Variabel (nach Scope-Ziffer)</td>
+                  <td class="p-2.5 font-semibold text-amber-800">Eingeschränkt (an Gruppe)</td>
+                  <td class="p-2.5 font-medium text-slate-800">IPv4 Multicast (224.0.0.0/4 &amp; Broadcast-Ersatz)</td>
+                </tr>
+                <tr class="hover:bg-indigo-50/40 transition-colors">
+                  <td class="p-2.5 font-bold text-slate-900">Loopback</td>
+                  <td class="p-2.5 font-mono font-bold text-slate-700">::1 (::1/128)</td>
+                  <td class="p-2.5">Localhost (nur eigener Rechner)</td>
+                  <td class="p-2.5 font-semibold text-rose-700">Nein (nur intern im Host)</td>
+                  <td class="p-2.5 font-medium text-slate-800">IPv4 Loopback (127.0.0.1)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        `;
+
+        const scenarios = [
+          // 1. GUA Typ & Scope
+          {
+            q: "Gegeben ist die IPv6-Adresse <code class='text-base font-bold text-indigo-700 bg-indigo-50 px-2 py-0.5 rounded border border-indigo-200'>2001:db8:85a3::8a2e:370:7334</code>.<br><br>Welcher <strong>IPv6-Adresstyp</strong> liegt hier vor und welchen <strong>Gültigkeitsbereich (Scope)</strong> besitzt er?",
+            unit: "Adresstyp (z. B. Global Unicast)",
+            expected: "Global Unicast (GUA)",
+            alts: ["GLOBAL UNICAST", "GUA", "GLOBAL", "GLOBAL UNICAST (GUA)", "GLOBAL UNICAST ADDRESS", "GLOBAL (WELTWEIT)", "GLOBAL / JA", "ÖFFENTLICH", "OEFFENTLICH"],
+            hint: "Beginnt mit '2001' (Bereich 2000::/3) -> Global Unicast (GUA). Weltweiter Scope, im Internet routbar.",
+            choices: ["Global Unicast (GUA)", "Unique Local (ULA)", "Link-Local", "Multicast", "Loopback"],
+            expl: "<strong>Global Unicast (GUA, 2000::/3)</strong> besitzt weltweiten (globalen) Scope und ist über alle Internet-Router hinweg voll routingfähig.",
+            www: {
+              was: "Global Unicast Address (GUA, Präfix 2000::/3, beginnt mit 2 oder 3).",
+              warum: "GUA-Adressen sind weltweit eindeutig und entsprechen den öffentlichen IPv4-Adressen. Sie benötigen kein NAT.",
+              wofuer: "Weltweite Ende-zu-Ende-Kommunikation, öffentliche Web- und Mailserver im Internet."
+            }
+          },
+
+          // 2. GUA IPv4 Entsprechung
+          {
+            q: "Welche <strong>IPv4-Entsprechung</strong> hat eine IPv6 <strong>Global Unicast Adresse (GUA, Präfix 2000::/3)</strong>?",
+            unit: "IPv4-Entsprechung",
+            expected: "Öffentliche IPv4-Adresse",
+            alts: ["ÖFFENTLICHE IP", "OEFFENTLICHE IP", "ÖFFENTLICHE IPV4", "OEFFENTLICHE IPV4", "ÖFFENTLICHE IPV4-ADRESSE", "OEFFENTLICHE IPV4-ADRESSE", "PUBLIC IP", "PUBLIC IPV4", "ÖFFENTLICH", "OEFFENTLICH"],
+            hint: "GUA = weltweit geroutete öffentliche Adresse im Internet.",
+            choices: ["Öffentliche IPv4-Adresse", "Private IPv4 (RFC 1918)", "APIPA (169.254.x.x)", "IPv4 Multicast", "Loopback (127.0.0.1)"],
+            expl: "Eine <strong>Global Unicast Adresse (GUA)</strong> entspricht einer <strong>öffentlichen IPv4-Adresse</strong>, da sie global im Internet geroutet wird.",
+            www: {
+              was: "Öffentliche IPv4-Adresse (Public IP).",
+              warum: "Beide Adressarten sind im weltweiten Internet routingfähig und global eindeutig registriert.",
+              wofuer: "Direkte weltweite Erreichbarkeit von Diensten ohne Adressübersetzung (NAT)."
+            }
+          },
+
+          // 3. ULA Typ & Scope
+          {
+            q: "Gegeben ist die IPv6-Adresse <code class='text-base font-bold text-purple-700 bg-purple-50 px-2 py-0.5 rounded border border-purple-200'>fd12:3456:789a:1::42</code>.<br><br>Um welchen <strong>IPv6-Adresstyp</strong> handelt es sich und wie lautet die <strong>Routingfähigkeit</strong>?",
+            unit: "Adresstyp (z. B. Unique Local / ULA)",
+            expected: "Unique Local (ULA)",
+            alts: ["UNIQUE LOCAL", "ULA", "UNIQUE LOCAL (ULA)", "UNIQUE LOCAL ADDRESS", "LOKAL", "PRIVATE IPV6", "NEIN", "NICHT GEROUTET"],
+            hint: "Beginnt mit 'fd' (Bereich fc00::/7 bzw. fd00::/8) -> Unique Local (ULA). Nur im Firmennetz/Intranet geroutet, niemals im Internet!",
+            choices: ["Unique Local (ULA)", "Global Unicast (GUA)", "Link-Local", "Multicast", "Loopback"],
+            expl: "<strong>Unique Local (ULA, fc00::/7 / fd00::/8)</strong> ist nur lokal im Firmennetz/Intranet geroutet und wird im öffentlichen Internet von Routern verworfen.",
+            www: {
+              was: "Unique Local Address (ULA, Präfix fc00::/7 bzw. fd00::/8).",
+              warum: "ULA dient der privaten firmeninternen Adressierung. Sie wird im weltweiten Internet nicht geroutet (keine Internet-Kollision).",
+              wofuer: "Interne Firmennetze, Drucker, interne Server, VPNs (entspricht privaten RFC 1918 IPv4-Netzen)."
+            }
+          },
+
+          // 4. ULA IPv4 Entsprechung
+          {
+            q: "Welche <strong>IPv4-Entsprechung</strong> hat eine IPv6 <strong>Unique Local Adresse (ULA, fc00::/7 bzw. fd00::/8)</strong>?",
+            unit: "IPv4-Entsprechung",
+            expected: "Private IPv4-Adresse (RFC 1918)",
+            alts: ["PRIVATE IP", "PRIVATE IPV4", "PRIVATE IPV4-ADRESSE", "RFC 1918", "RFC1918", "PRIVATE IP (RFC 1918)", "PRIVATE IPV4 (RFC 1918)", "PRIVATE IPV4-ADRESSE (RFC 1918)", "192.168", "10.0.0.0"],
+            hint: "ULA = firmeninterne private Adressen (wie 192.168.x.x oder 10.x.x.x nach RFC 1918).",
+            choices: ["Private IPv4-Adresse (RFC 1918)", "Öffentliche IPv4-Adresse", "APIPA (169.254.x.x)", "IPv4 Multicast", "Loopback (127.0.0.1)"],
+            expl: "Die ULA entspricht den <strong>privaten IPv4-Adressen nach RFC 1918</strong> (10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16).",
+            www: {
+              was: "Private IPv4-Adresse nach RFC 1918.",
+              warum: "Beide Adresstypen sind für firmeninterne Zwecke gedacht und werden im öffentlichen Internet nicht weitergeleitet.",
+              wofuer: "Sichere Trennung des internen Firmennetzes vom öffentlichen Internet."
+            }
+          },
+
+          // 5. Link-Local Typ & Scope
+          {
+            q: "Gegeben ist die IPv6-Adresse <code class='text-base font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded border border-blue-200'>fe80::1a2b:3c4d:5e6f:7081</code>.<br><br>Wie lautet der <strong>Gültigkeitsbereich (Scope)</strong> und darf ein Router diese Adresse in ein anderes Subnetz weiterleiten?",
+            unit: "Scope / Typ",
+            expected: "Link-Local",
+            alts: ["LINK-LOCAL", "LINK LOCAL", "LINKLOCAL", "NUR LINK", "NEIN", "NICHT GEROUTET", "FE80"],
+            hint: "Beginnt mit 'fe80' (Bereich fe80::/10) -> Link-Local. Gültig NUR am selben physikalischen Link (Switch/Segment). Router leiten sie NIEMALS weiter!",
+            choices: ["Link-Local", "Unique Local (ULA)", "Global Unicast (GUA)", "Multicast", "Loopback"],
+            expl: "<strong>Link-Local (fe80::/10)</strong> gilt nur auf dem lokalen physischen Übertragungsmedium. Router dürfen Pakete mit fe80-Adressen <strong>niemals weiterleiten</strong>!",
+            www: {
+              was: "Link-Local Adresse (Präfix fe80::/10).",
+              warum: "Sie wird auf jedem IPv6-Interface automatisch generiert. Da sie nur für das lokale Segment bestimmt ist, wird sie von Routern blockiert.",
+              wofuer: "Router-Discovery (NDP), Default Gateway-Adressierung, SLAAC-Autokonfiguration, Nachbarschaftserkennung."
+            }
+          },
+
+          // 6. Link-Local IPv4 Entsprechung
+          {
+            q: "Welche <strong>IPv4-Entsprechung</strong> hat eine IPv6 <strong>Link-Local Adresse (fe80::/10)</strong>?",
+            unit: "IPv4-Entsprechung",
+            expected: "APIPA (169.254.x.x)",
+            alts: ["APIPA", "169.254", "APIPA (169.254.X.X)", "169.254.X.X", "IPV4 LINK-LOCAL", "APIPA / LINK-LOCAL", "ZEROCONF", "LINK-LOCAL (169.254.X.X)"],
+            hint: "Automatische Notfall-IP bei Windows/Linux, wenn kein DHCP-Server antwortet: 169.254.x.x (APIPA).",
+            choices: ["APIPA (169.254.x.x)", "Private IPv4 (RFC 1918)", "Öffentliche IPv4-Adresse", "IPv4 Multicast", "Loopback (127.0.0.1)"],
+            expl: "Link-Local (fe80::/10) entspricht im IPv4-Bereich der <strong>APIPA-Adresse (169.254.0.0/16)</strong>.",
+            www: {
+              was: "APIPA (Automatic Private IP Addressing, 169.254.0.0/16).",
+              warum: "Beide Adresstypen funktionieren ohne DHCP-Server rein auf dem lokalen Link und werden von Routern nicht geroutet.",
+              wofuer: "Lokale Kommunikation zwischen Geräten im selben LAN-Segment ohne vorherige Netzwerk-Konfiguration."
+            }
+          },
+
+          // 7. Multicast Funktion
+          {
+            q: "Gegeben ist das IPv6-Paket an die Zieladresse <code class='text-base font-bold text-amber-700 bg-amber-50 px-2 py-0.5 rounded border border-amber-200'>ff02::1</code>.<br><br>Um welchen <strong>Adresstyp</strong> handelt es sich und welche IPv4-Funktion ersetzt er?",
+            unit: "Adresstyp",
+            expected: "Multicast",
+            alts: ["MULTICAST", "IPV6 MULTICAST", "ALL NODES MULTICAST", "BROADCAST-ERSATZ", "FF00", "BROADCAST"],
+            hint: "Beginnt mit 'ff' (Präfix ff00::/8) -> Multicast. In IPv6 gibt es keinen Broadcast mehr; ff02::1 ersetzt den IPv4-Broadcast an alle Geräte im Subnetz!",
+            choices: ["Multicast", "Broadcast", "Global Unicast (GUA)", "Unique Local (ULA)", "Anycast"],
+            expl: "<strong>Multicast (ff00::/8)</strong> sendet an eine definierte Gruppe. <code>ff02::1</code> ist die All-Nodes-Multicast-Adresse und <strong>ersetzt den IPv4-Broadcast</strong> vollständig!",
+            www: {
+              was: "Multicast (Präfix ff00::/8, z. B. ff02::1 All Nodes, ff02::2 All Routers).",
+              warum: "IPv6 besitzt keinen ineffizienten Broadcast mehr. Multicast entlastet Netzwerk-Karten, da uninteressierte Hosts das Paket auf Hardware-Ebene verwerfen.",
+              wofuer: "Zielgerichtete Verteilung von Steuerdaten, Router Advertisements (ICMPv6) und Medien-Streaming."
+            }
+          },
+
+          // 8. Loopback Adresse & Pendant
+          {
+            q: "Wie lautet die <strong>IPv6-Loopback-Adresse</strong> und welche IPv4-Adresse entspricht ihr?",
+            unit: "IPv6-Adresse",
+            expected: "::1",
+            alts: ["::1", "::1/128", "0:0:0:0:0:0:0:1", "127.0.0.1", "LOOPBACK"],
+            hint: "In IPv4 ist es 127.0.0.1 – in IPv6 wird sie als ::1 (bzw. ::1/128) notiert.",
+            choices: ["::1", "fe80::1", "fc00::1", "ff02::1", "::"],
+            expl: "Die IPv6-Loopback-Adresse lautet <strong>::1</strong> (vollständig <code>0000:0000:0000:0000:0000:0000:0000:0001</code>) und entspricht <strong>127.0.0.1</strong>.",
+            www: {
+              was: "::1 (Loopback-Adresse / Localhost).",
+              warum: "Sie adressiert den lokalen Netzwerk-Stack des eigenen Betriebssystems und verlässt den Rechner niemals.",
+              wofuer: "Testen des lokalen TCP/IP-Stacks und Kommunikation zwischen lokalen Prozessen (z. B. Webserver auf Port 8080)."
+            }
+          },
+
+          // 9. IPv4 RFC 1918 Klasse A: 10.x
+          {
+            q: "Ein Client erhält die IPv4-Adresse <code class='text-base font-bold text-slate-800 bg-slate-100 px-2 py-0.5 rounded border border-slate-300'>10.120.45.10</code>.<br><br>Zu welchem <strong>Bereich</strong> gehört diese IP und welches <strong>IPv6-Äquivalent</strong> hat sie?",
+            unit: "Bereich (z. B. Privat / RFC 1918)",
+            expected: "Private IPv4-Adresse (RFC 1918)",
+            alts: ["PRIVAT", "PRIVATE IP", "PRIVATE IPV4", "RFC 1918", "RFC1918", "ULA", "UNIQUE LOCAL", "KLASSE A PRIVAT"],
+            hint: "10.0.0.0 bis 10.255.255.255 ist der private Klasse-A-Bereich (RFC 1918). IPv6-Pendant: Unique Local (ULA, fd00::/8).",
+            choices: ["Private IPv4-Adresse (RFC 1918)", "Öffentliche IPv4-Adresse", "APIPA (169.254.x.x)", "Loopback (127.0.0.1)", "Multicast (Klasse D)"],
+            expl: "<code>10.120.45.10</code> liegt im privaten Bereich nach <strong>RFC 1918 (Klasse A)</strong>. Das IPv6-Pendant ist die <strong>Unique Local Adresse (ULA, fd00::/8)</strong>.",
+            www: {
+              was: "Privater IPv4-Adressbereich nach RFC 1918 (10.0.0.0/8).",
+              warum: "Im Internet nicht routingfähig; benötigt NAT (Network Address Translation) für Internetzugang.",
+              wofuer: "Große firmeninterne Unternehmensnetzwerke."
+            }
+          },
+
+          // 10. IPv4 RFC 1918 Klasse C: 192.168.x
+          {
+            q: "Ein Router vergibt die IP <code class='text-base font-bold text-slate-800 bg-slate-100 px-2 py-0.5 rounded border border-slate-300'>192.168.178.55</code>.<br><br>Zu welchem <strong>Bereich</strong> gehört sie und welche <strong>IPv6-Entsprechung</strong> besitzt sie?",
+            unit: "Bereich",
+            expected: "Private IPv4-Adresse (RFC 1918)",
+            alts: ["PRIVAT", "PRIVATE IP", "PRIVATE IPV4", "RFC 1918", "RFC1918", "KLASSE C PRIVAT", "ULA", "UNIQUE LOCAL"],
+            hint: "192.168.0.0 bis 192.168.255.255 ist der private Klasse-C-Bereich nach RFC 1918. IPv6-Pendant: Unique Local (ULA).",
+            choices: ["Private IPv4-Adresse (RFC 1918)", "Öffentliche IPv4-Adresse", "APIPA (169.254.x.x)", "Loopback (127.0.0.1)", "Multicast (Klasse D)"],
+            expl: "<code>192.168.178.55</code> ist eine <strong>private IPv4-Adresse (RFC 1918, Klasse C)</strong>. Entspricht der IPv6 <strong>Unique Local Adresse (ULA)</strong>.",
+            www: {
+              was: "Privater IPv4-Adressbereich nach RFC 1918 (192.168.0.0/16).",
+              warum: "Standard für Heim- und Kleinunternehmensnetze (SOHO).",
+              wofuer: "Lokale LAN- und WLAN-Geräte ohne direkte öffentliche Exposition."
+            }
+          },
+
+          // 11. IPv4 RFC 1918 Klasse B: 172.16 - 172.31
+          {
+            q: "Ein Server hat die IP <code class='text-base font-bold text-slate-800 bg-slate-100 px-2 py-0.5 rounded border border-slate-300'>172.25.100.1</code>.<br><br>Handelt es sich um eine <strong>private (RFC 1918)</strong> oder eine <strong>öffentliche</strong> IPv4-Adresse?",
+            unit: "Bereich",
+            expected: "Private IPv4-Adresse (RFC 1918)",
+            alts: ["PRIVAT", "PRIVATE IP", "PRIVATE IPV4", "RFC 1918", "RFC1918", "KLASSE B PRIVAT", "ULA", "UNIQUE LOCAL"],
+            hint: "Der private Klasse-B-Bereich umfasst 172.16.0.0 bis 172.31.255.255 (/12). 172.25 liegt genau darin!",
+            choices: ["Private IPv4-Adresse (RFC 1918)", "Öffentliche IPv4-Adresse", "APIPA (169.254.x.x)", "Multicast (Klasse D)"],
+            expl: "<code>172.25.100.1</code> liegt im privaten Bereich <strong>172.16.0.0 – 172.31.255.255 (RFC 1918)</strong>.",
+            www: {
+              was: "Privater IPv4-Bereich RFC 1918 Klasse B (172.16.0.0/12).",
+              warum: "Häufige IHK-Falle: Nicht ganz 172.x ist privat, sondern exakt 172.16.x.x bis 172.31.x.x!",
+              wofuer: "Mittelgroße bis große Unternehmensnetzwerke und Rechenzentrums-Subnetze."
+            }
+          },
+
+          // 12. IPv4 APIPA Diagnose
+          {
+            q: "Ein Auszubildender stellt fest, dass sein Rechner die IP <code class='text-base font-bold text-rose-700 bg-rose-50 px-2 py-0.5 rounded border border-rose-200'>169.254.12.89</code> hat und kein Internet funktioniert.<br><br>Um welchen <strong>IPv4-Bereich</strong> handelt es sich und welches <strong>IPv6-Pendant</strong> hat er?",
+            unit: "Bereich / Typ",
+            expected: "APIPA (Link-Local)",
+            alts: ["APIPA", "169.254", "LINK-LOCAL", "LINK LOCAL", "FE80", "APIPA / LINK-LOCAL", "APIPA (169.254.X.X)", "ZEROCONF"],
+            hint: "169.254.x.x wird bei Windows automatisch zugewiesen, wenn kein DHCP-Server erreichbar ist (APIPA). IPv6-Pendant: fe80::/10 (Link-Local).",
+            choices: ["APIPA (Link-Local)", "Private IPv4 (RFC 1918)", "Öffentliche IPv4-Adresse", "Loopback (127.0.0.1)"],
+            expl: "<strong>169.254.x.x ist APIPA (Link-Local)</strong>. Sie zeigt an, dass der Client keinen DHCP-Server erreichen konnte. Sie entspricht IPv6 <strong>fe80::/10 (Link-Local)</strong>.",
+            www: {
+              was: "APIPA (Automatic Private IP Addressing, 169.254.0.0/16).",
+              warum: "DHCP-Server ausgefallen oder Netzwerkkabel getrennt. Windows generiert selbst eine Notfall-IP.",
+              wofuer: "Lokale Notfall-Kommunikation im selben Subnetz; Internetzugriff ist damit NICHT möglich."
+            }
+          },
+
+          // 13. IPv4 Öffentliche IP
+          {
+            q: "Ein Webserver ist unter der IP <code class='text-base font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200'>8.8.8.8</code> erreichbar.<br><br>Um welchen <strong>Adressbereich</strong> handelt es sich und welches <strong>IPv6-Pendant</strong> hat sie?",
+            unit: "Bereich",
+            expected: "Öffentliche IPv4-Adresse",
+            alts: ["ÖFFENTLICH", "OEFFENTLICH", "ÖFFENTLICHE IP", "OEFFENTLICHE IP", "ÖFFENTLICHE IPV4", "PUBLIC", "PUBLIC IP", "GUA", "GLOBAL UNICAST"],
+            hint: "8.8.8.8 ist nicht RFC 1918, nicht APIPA und nicht Loopback -> Öffentliche IP (Public). Entspricht Global Unicast (GUA, 2000::/3).",
+            choices: ["Öffentliche IPv4-Adresse", "Private IPv4 (RFC 1918)", "APIPA (169.254.x.x)", "Loopback (127.0.0.1)", "Multicast (Klasse D)"],
+            expl: "<code>8.8.8.8</code> ist eine <strong>öffentliche IPv4-Adresse</strong> (Google DNS). Sie entspricht einer <strong>Global Unicast Adresse (GUA, 2000::/3)</strong> in IPv6.",
+            www: {
+              was: "Öffentliche IP-Adresse (Global Unicast).",
+              warum: "Sie ist weltweit einmalig und im globalen Internet voll routingfähig.",
+              wofuer: "DNS-Server, Webserver, VPN-Gateways und Cloud-Dienste."
+            }
+          },
+
+          // 14. Präfix ULA
+          {
+            q: "Mit welchem <strong>Präfix</strong> beginnt der Adressbereich für <strong>Unique Local Adressen (ULA)</strong> in IPv6?",
+            unit: "Präfix (z. B. fc00::/7)",
+            expected: "fc00::/7 (bzw. fd00::/8)",
+            alts: ["FC00::/7", "FD00::/8", "FC00", "FD00", "FC00::", "FD00::", "FC00::/7 (BZW. FD00::/8)", "FC00 / FD00"],
+            hint: "Offiziell fc00::/7 (RFC 4193), in der Praxis immer mit gesetztem Global-Bit = fd00::/8.",
+            choices: ["fc00::/7 (bzw. fd00::/8)", "2000::/3", "fe80::/10", "ff00::/8", "::1/128"],
+            expl: "Unique Local Adressen (ULA) sind durch das Präfix <strong>fc00::/7</strong> definiert; praktisch beginnen sie heute alle mit <strong>fd00::/8</strong>.",
+            www: {
+              was: "fc00::/7 bzw. fd00::/8 (ULA-Präfix).",
+              warum: "Entspricht den privaten IPv4-Netzen (RFC 1918).",
+              wofuer: "Firmeninterne Netze ohne Routing im weltweiten Internet."
+            }
+          },
+
+          // 15. Präfix Link-Local
+          {
+            q: "Mit welchem <strong>Präfix</strong> beginnt der Adressbereich für <strong>Link-Local Adressen</strong> in IPv6?",
+            unit: "Präfix (z. B. fe80::/10)",
+            expected: "fe80::/10",
+            alts: ["FE80::/10", "FE80", "FE80::", "FE80::/10 (LINK-LOCAL)"],
+            hint: "Die ersten 10 Bits sind 1111 1110 10 -> fe80::/10.",
+            choices: ["fe80::/10", "fc00::/7", "2000::/3", "ff00::/8", "::1/128"],
+            expl: "Link-Local-Adressen beginnen immer mit dem Präfix <strong>fe80::/10</strong>.",
+            www: {
+              was: "fe80::/10 (Link-Local Präfix).",
+              warum: "Wird automatisch auf jedem Interface generiert (z. B. via EUI-64 oder Zufallswert).",
+              wofuer: "Lokale Switch- und Router-Kommunikation im selben LAN-Kabel/Segment."
+            }
+          },
+
+          // 16. Präfix GUA
+          {
+            q: "Mit welchem <strong>Präfix</strong> beginnt der Adressbereich für <strong>Global Unicast Adressen (GUA)</strong> in IPv6?",
+            unit: "Präfix (z. B. 2000::/3)",
+            expected: "2000::/3",
+            alts: ["2000::/3", "2000", "2000::", "2001", "2000::/3 (BEGINNT MIT 2 ODER 3)"],
+            hint: "Die ersten 3 Bits sind 001 -> hexadezimal 2... oder 3... (Bereich 2000::/3).",
+            choices: ["2000::/3", "fc00::/7", "fe80::/10", "ff00::/8", "::1/128"],
+            expl: "Global Unicast Adressen beginnen im Bereich <strong>2000::/3</strong> (praktisch alle aktuellen Internet-Adressen mit 2xxx:...).",
+            www: {
+              was: "2000::/3 (Global Unicast Präfix).",
+              warum: "Umfasst ein Achtel des gesamten 128-Bit-IPv6-Adressraums (2000:: bis 3fff:ffff:...).",
+              wofuer: "Weltweit geroutete Internetverbindungen."
+            }
+          },
+
+          // 17. Präfix Multicast
+          {
+            q: "Mit welchem <strong>Präfix</strong> beginnt der Adressbereich für <strong>Multicast-Adressen</strong> in IPv6?",
+            unit: "Präfix (z. B. ff00::/8)",
+            expected: "ff00::/8",
+            alts: ["FF00::/8", "FF00", "FF00::", "FF", "FF::"],
+            hint: "Die ersten 8 Bits sind 1111 1111 -> hexadezimal ff -> ff00::/8.",
+            choices: ["ff00::/8", "fe80::/10", "fc00::/7", "2000::/3", "::1/128"],
+            expl: "Multicast-Adressen beginnen immer mit <strong>ff00::/8</strong> (z. B. ff02::1).",
+            www: {
+              was: "ff00::/8 (Multicast Präfix).",
+              warum: "Ersetzt den Broadcast und ermöglicht zielgerichtete Gruppenadressierung.",
+              wofuer: "Streaming, OSPFv3/RIPng-Routing-Updates, NDP Neighbor Solicitations."
+            }
+          }
+        ];
+
+        const sc = scenarios[Math.floor(Math.random() * scenarios.length)];
+        const choicesHtml = sc.choices ? `
+          <div class="mt-4 pt-3.5 border-t border-slate-200">
+            <span class="text-xs font-bold text-slate-500 uppercase tracking-wider block mb-2">⚡ Klick-Antwort (Klick trägt Antwort ein &amp; prüft):</span>
+            <div class="flex flex-wrap gap-2">
+              ${sc.choices.map(c => `
+                <button type="button" onclick="document.getElementById('mini-input').value='${c.replace(/'/g, "\\'")}'; checkMiniTask();" class="px-3.5 py-1.5 bg-indigo-50 hover:bg-indigo-100 active:bg-indigo-200 border border-indigo-300 text-indigo-900 rounded-lg text-xs font-bold transition-all shadow-xs cursor-pointer active:scale-95">
+                  ${c}
+                </button>
+              `).join('')}
+            </div>
+          </div>
+        ` : '';
+
+        return {
+          topic: "ipv6_scopes_table",
+          badge: "📊 Scopes & Äquivalente",
+          isText: true,
+          title: "IPv6 & IPv4: Scopes, Bereiche & Entsprechungen",
+          question: sc.q + choicesHtml,
+          unit: sc.unit,
+          expected: sc.expected,
+          altExpected: sc.alts,
+          alts: sc.alts,
+          hint: sc.hint,
+          expl: sc.expl,
+          tableHtml: tableHtml,
+          wasWarumWofuer: sc.www
+        };
+      },
+
       ipv6_identify_type: function() {
         const scenarios = [
           {
@@ -5430,14 +5801,14 @@
       if (currentTask.isText || typeof currentTask.expected === 'string') {
         const cleanUser = rawUser.toUpperCase().replace(/^0X/, '').replace(/\s+/g, '');
         const cleanExp = String(currentTask.expected).trim().toUpperCase().replace(/^0X/, '').replace(/\s+/g, '');
-        const alts = (currentTask.altExpected || []).map(a => String(a).trim().toUpperCase().replace(/^0X/, '').replace(/\s+/g, ''));
+        const alts = (currentTask.altExpected || currentTask.alts || []).map(a => String(a).trim().toUpperCase().replace(/^0X/, '').replace(/\s+/g, ''));
         const isMatch = (cleanUser === cleanExp) || alts.includes(cleanUser);
 
         if (isMatch) {
           score.correct++;
           score.streak++;
           updateScoreUI();
-          const detail = formatWasWarumWofuer(currentTask);
+          const detail = formatWasWarumWofuer(currentTask) + (currentTask.tableHtml || '');
           showMiniFeedback('🎉 Hervorragend! Das ist absolut richtig!', detail, 'success', true);
           if (feedbackRetryBtn) feedbackRetryBtn.classList.add('hidden');
           if (bottomRetryBtn) bottomRetryBtn.classList.add('hidden');
@@ -5448,7 +5819,7 @@
           score.wrong++;
           score.streak = 0;
           updateScoreUI();
-          const errDetail = `Erwartet: <strong>${currentTask.expected}</strong> (${currentTask.unit}).<br><span class="inline-block mt-1">Lösungsweg: <code class="bg-white/90 px-2 py-0.5 rounded border border-rose-200 font-bold">${currentTask.hint}</code></span>` + formatWasWarumWofuer(currentTask);
+          const errDetail = `Erwartet: <strong>${currentTask.expected}</strong> (${currentTask.unit}).<br><span class="inline-block mt-1">Lösungsweg: <code class="bg-white/90 px-2 py-0.5 rounded border border-rose-200 font-bold">${currentTask.hint}</code></span>` + formatWasWarumWofuer(currentTask) + (currentTask.tableHtml || '');
           showMiniFeedback(
             '❌ Leider nicht ganz richtig.',
             errDetail,
@@ -6384,7 +6755,13 @@
     }
 
     window.addEventListener('DOMContentLoaded', () => {
-      generateMiniTask();
+      const urlParams = new URLSearchParams(window.location.search);
+      const requestedTopic = urlParams.get('topic');
+      if (requestedTopic && typeof selectMiniTopic === 'function') {
+        selectMiniTopic(requestedTopic);
+      } else {
+        generateMiniTask();
+      }
       calcPower('S');
       calcOhm('U');
       calcPwr('U');
