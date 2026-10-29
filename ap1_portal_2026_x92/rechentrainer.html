@@ -228,6 +228,11 @@
           <button onclick="selectMiniTopic('media_video_bitrate')" class="topic-pill px-3.5 py-2 text-sm font-semibold rounded-xl border border-fuchsia-400 bg-fuchsia-50 hover:bg-fuchsia-100 text-fuchsia-900 transition-all" data-topic="media_video_bitrate">
             🎬 Video &amp; FPS (Auflösung ➔ FPS ➔ Datenrate &amp; Speicher)
           </button>
+                    <!-- NEU: IPv4 Spezielle Präfixe & Sonderbereiche (IHK-Klassiker) -->
+          <button onclick="selectMiniTopic('ipv4_special_ranges')" class="topic-pill px-4 py-2 text-sm font-bold rounded-xl border-2 border-sky-600 bg-gradient-to-r from-sky-100 to-cyan-100 hover:from-sky-200 hover:to-cyan-200 text-sky-950 shadow-sm transition-all flex items-center gap-1.5 active:scale-95" data-topic="ipv4_special_ranges">
+            📊 IPv4: Präfixe, Sonderbereiche &amp; RFCs (Tabelle)
+          </button>
+
           <!-- IPv4 Subnetting (AP1 / AP2 Lernfeld 3) -->
           <button onclick="selectMiniTopic('ipv4_usable_hosts')" class="topic-pill px-3.5 py-2 text-sm font-semibold rounded-xl border border-sky-400 bg-sky-50 hover:bg-sky-100 text-sky-900 transition-all" data-topic="ipv4_usable_hosts">
             🌐 IPv4: Nutzbare Hosts (2^h - 2)
@@ -3893,6 +3898,340 @@
             // =========================================================================
       // IPV6 & IPV4: SCOPES, BEREICHE & ENTSPRECHUNGEN (IHK LERNFELD 3 TABELLE)
       // =========================================================================
+      
+      // =========================================================================
+      // IPV4: PRÄFIXE, SONDERBEREICHE & RFCS (IHK LERNFELD 3 TABELLE)
+      // =========================================================================
+      ipv4_special_ranges: function() {
+        const tableHtml = `
+          <div class="mt-3.5 overflow-x-auto rounded-xl border border-sky-200 bg-white shadow-xs">
+            <div class="bg-gradient-to-r from-sky-900 to-slate-900 px-3.5 py-2 text-white text-xs font-bold flex items-center justify-between">
+              <span>📊 IHK-ÜBERSICHTSTABELLE: SPEZIELLE IPV4 PRÄFIXE, SCOPES & RFCS</span>
+              <span class="text-[10px] bg-sky-500/40 text-sky-200 px-2 py-0.5 rounded">Lernfeld 3</span>
+            </div>
+            <table class="w-full text-left text-xs">
+              <thead class="bg-sky-50/80 text-sky-950 font-bold border-b border-sky-200 text-[11px]">
+                <tr>
+                  <th class="p-2.5">Adresstyp / RFC</th>
+                  <th class="p-2.5">Präfix (CIDR)</th>
+                  <th class="p-2.5">Adressbereich</th>
+                  <th class="p-2.5">Gültigkeit / Internet-Routing</th>
+                  <th class="p-2.5">IPv6-Entsprechung</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100 text-[11px] font-sans">
+                <tr class="hover:bg-sky-50/40 transition-colors">
+                  <td class="p-2.5 font-bold text-amber-900">Loopback (Localhost)</td>
+                  <td class="p-2.5 font-mono font-bold text-amber-700">127.0.0.0/8</td>
+                  <td class="p-2.5 font-mono">127.0.0.1 – 127.255.255.254</td>
+                  <td class="p-2.5 font-semibold text-rose-700">Nein (nur lokaler Rechner)</td>
+                  <td class="p-2.5 font-medium text-slate-800 font-mono">::1/128</td>
+                </tr>
+                <tr class="hover:bg-sky-50/40 transition-colors bg-slate-50/40">
+                  <td class="p-2.5 font-bold text-emerald-900">Privat Klasse A (RFC 1918)</td>
+                  <td class="p-2.5 font-mono font-bold text-emerald-700">10.0.0.0/8</td>
+                  <td class="p-2.5 font-mono">10.0.0.0 – 10.255.255.255</td>
+                  <td class="p-2.5 font-semibold text-rose-700">Nein (Privates LAN, braucht NAT)</td>
+                  <td class="p-2.5 font-medium text-slate-800 font-mono">fc00::/7 (ULA)</td>
+                </tr>
+                <tr class="hover:bg-sky-50/40 transition-colors">
+                  <td class="p-2.5 font-bold text-emerald-900">Privat Klasse B (RFC 1918)</td>
+                  <td class="p-2.5 font-mono font-bold text-emerald-700">172.16.0.0/12</td>
+                  <td class="p-2.5 font-mono">172.16.0.0 – 172.31.255.255</td>
+                  <td class="p-2.5 font-semibold text-rose-700">Nein (Achtung: endet bei .31!)</td>
+                  <td class="p-2.5 font-medium text-slate-800 font-mono">fc00::/7 (ULA)</td>
+                </tr>
+                <tr class="hover:bg-sky-50/40 transition-colors bg-slate-50/40">
+                  <td class="p-2.5 font-bold text-emerald-900">Privat Klasse C (RFC 1918)</td>
+                  <td class="p-2.5 font-mono font-bold text-emerald-700">192.168.0.0/16</td>
+                  <td class="p-2.5 font-mono">192.168.0.0 – 192.168.255.255</td>
+                  <td class="p-2.5 font-semibold text-rose-700">Nein (Heimnetz / Kleinbüro)</td>
+                  <td class="p-2.5 font-medium text-slate-800 font-mono">fc00::/7 (ULA)</td>
+                </tr>
+                <tr class="hover:bg-sky-50/40 transition-colors">
+                  <td class="p-2.5 font-bold text-blue-900">APIPA / Link-Local (RFC 3927)</td>
+                  <td class="p-2.5 font-mono font-bold text-blue-700">169.254.0.0/16</td>
+                  <td class="p-2.5 font-mono">169.254.0.1 – 169.254.255.254</td>
+                  <td class="p-2.5 font-semibold text-rose-700">Nein (DHCP-Server fehlt/gestört!)</td>
+                  <td class="p-2.5 font-medium text-slate-800 font-mono">fe80::/10</td>
+                </tr>
+                <tr class="hover:bg-sky-50/40 transition-colors bg-slate-50/40">
+                  <td class="p-2.5 font-bold text-purple-900">Multicast (Klasse D)</td>
+                  <td class="p-2.5 font-mono font-bold text-purple-700">224.0.0.0/4</td>
+                  <td class="p-2.5 font-mono">224.0.0.0 – 239.255.255.255</td>
+                  <td class="p-2.5 font-semibold text-indigo-700">Eingeschränkt (an Gruppe)</td>
+                  <td class="p-2.5 font-medium text-slate-800 font-mono">ff00::/8</td>
+                </tr>
+                <tr class="hover:bg-sky-50/40 transition-colors">
+                  <td class="p-2.5 font-bold text-slate-900">Default Route (Standard)</td>
+                  <td class="p-2.5 font-mono font-bold text-slate-700">0.0.0.0/0</td>
+                  <td class="p-2.5 font-mono">0.0.0.0</td>
+                  <td class="p-2.5 font-semibold text-slate-700">Standard-Gateway / Alle Ziele</td>
+                  <td class="p-2.5 font-medium text-slate-800 font-mono">::/0</td>
+                </tr>
+                <tr class="hover:bg-sky-50/40 transition-colors bg-slate-50/40">
+                  <td class="p-2.5 font-bold text-rose-900">Limited Broadcast</td>
+                  <td class="p-2.5 font-mono font-bold text-rose-700">255.255.255.255/32</td>
+                  <td class="p-2.5 font-mono">255.255.255.255</td>
+                  <td class="p-2.5 font-semibold text-rose-700">Nein (wird von Routern verworfen)</td>
+                  <td class="p-2.5 font-medium text-slate-500 italic">Entfällt (durch Multicast ersetzt)</td>
+                </tr>
+                <tr class="hover:bg-sky-50/40 transition-colors">
+                  <td class="p-2.5 font-bold text-cyan-900">Carrier-Grade NAT (RFC 6598)</td>
+                  <td class="p-2.5 font-mono font-bold text-cyan-700">100.64.0.0/10</td>
+                  <td class="p-2.5 font-mono">100.64.0.0 – 100.127.255.255</td>
+                  <td class="p-2.5 font-semibold text-rose-700">Nein (Provider Shared Adressraum)</td>
+                  <td class="p-2.5 font-medium text-slate-500 italic">–</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        `;
+
+        function makeButtons(btnList) {
+          return '<div class="mt-3 flex flex-wrap gap-2">' +
+            btnList.map(b => `<button type="button" onclick="document.getElementById('mini-input').value='${b}'; checkMiniTask();" class="px-3 py-1.5 rounded-lg bg-sky-100 hover:bg-sky-200 border border-sky-300 text-sky-900 text-xs font-bold transition-all active:scale-95 shadow-2xs">${b}</button>`).join('') +
+            '</div>';
+        }
+
+        const scenarios = [
+          // 1. APIPA IP erkennen
+          {
+            q: `Ein Client-PC erhält per Autokonfiguration die IP-Adresse <span class="font-mono font-bold text-sky-700">169.254.12.88/16</span>. Zu welchem Adresstyp gehört diese und was ist die typische Ursache?` +
+               makeButtons(["APIPA (DHCP nicht erreichbar)", "Öffentliche IP-Adresse", "RFC 1918 Privates Firmennetz", "Loopback (Localhost)"]),
+            expected: "APIPA",
+            alts: ["APIPA", "APIPA (DHCP NICHT ERREICHBAR)", "APIPA (DHCP-SERVER NICHT ERREICHBAR)", "LINK-LOCAL", "LINK LOCAL", "169.254", "RFC 3927", "DHCP NICHT ERREICHBAR", "DHCP AUSGEFALLEN"],
+            unit: "Adresstyp",
+            hint: "169.254.0.0/16 ist der APIPA-Bereich (RFC 3927). Tritt auf, wenn kein DHCP-Server antwortet.",
+            was: "APIPA (Automatic Private IP Addressing) / Link-Local",
+            warum: "Wenn der DHCP-Client keine Antwort vom DHCP-Server erhält, weist sich das Betriebssystem selbst eine Adresse aus 169.254.0.0/16 zu.",
+            wofuer: "Ermöglicht Ad-hoc-Kommunikation im selben Subnetz, hat aber keinen Gateway-Zugriff und wird im Internet nicht geroutet."
+          },
+          // 2. APIPA Präfix
+          {
+            q: `Welcher offizielle IPv4-Adressbereich (Präfix mit CIDR) ist nach RFC 3927 für <strong>APIPA / Link-Local</strong> reserviert?` +
+               makeButtons(["169.254.0.0/16", "127.0.0.0/8", "10.0.0.0/8", "192.168.0.0/16"]),
+            expected: "169.254.0.0/16",
+            alts: ["169.254.0.0/16", "169.254.0.0", "169.254", "/16", "169.254.X.X"],
+            unit: "Präfix / CIDR",
+            hint: "APIPA umfasst 169.254.0.0 bis 169.254.255.255 (/16).",
+            was: "169.254.0.0/16 (RFC 3927)",
+            warum: "16 Hostbits = 65.534 Adressen für die automatische Konfiguration bei DHCP-Ausfall.",
+            wofuer: "IHK-Standardfrage bei Netzwerkausfällen und Troubleshooting."
+          },
+          // 3. APIPA Routingfähigkeit
+          {
+            q: `Wird ein Datenpaket mit der Absenderadresse <span class="font-mono font-bold text-sky-700">169.254.33.1</span> von Routern ins öffentliche Internet weitergeleitet (geroutet)?` +
+               makeButtons(["Nein (nicht im Internet geroutet)", "Ja (voll im Internet routbar)"]),
+            expected: "Nein",
+            alts: ["NEIN", "NEIN (NICHT IM INTERNET GEROUTET)", "NEIN (NICHT GEROUTET)", "NICHT GEROUTET", "NICHT ROUTBAR", "NO"],
+            unit: "Routingfähigkeit",
+            hint: "APIPA ist strikt Link-Local und darf niemals über Router weitergeleitet werden.",
+            was: "Nein – nicht internetfähig",
+            warum: "Router verwerfen APIPA-Pakete sofort. Die Adressen sind nur auf dem lokalen Link gültig.",
+            wofuer: "Sicherheit und Vermeidung von Fehlroutern im Internet."
+          },
+          // 4. Loopback Präfix
+          {
+            q: `Welcher IPv4-Adressbereich (Präfix mit CIDR) ist komplett für das <strong>Loopback-Interface (Localhost)</strong> nach RFC 1122 reserviert?` +
+               makeButtons(["127.0.0.0/8", "0.0.0.0/0", "169.254.0.0/16", "224.0.0.0/4"]),
+            expected: "127.0.0.0/8",
+            alts: ["127.0.0.0/8", "127.0.0.0", "127.0.0.1", "127", "/8"],
+            unit: "Präfix / CIDR",
+            hint: "Das gesamte Netz 127.0.0.0/8 (über 16 Mio Adressen) ist Loopback.",
+            was: "127.0.0.0/8 (Loopback / Localhost)",
+            warum: "Jede Adresse, die mit 127 beginnt, adressiert den eigenen lokalen Host.",
+            wofuer: "Testen von lokalen Serverdiensten und des internen TCP/IP-Netzwerkstacks."
+          },
+          // 5. Loopback Funktion
+          {
+            q: `Ein IT-Techniker führt auf der Eingabeaufforderung <span class="font-mono font-bold text-amber-700">ping 127.0.0.1</span> aus. Was wird damit überprüft?` +
+               makeButtons(["Lokaler TCP/IP-Stack des Rechners", "Verbindung zum Internet-Gateway", "Funktion des DHCP-Servers", "DNS-Namensauflösung"]),
+            expected: "Lokaler TCP/IP-Stack des Rechners",
+            alts: ["LOKALER TCP/IP-STACK DES RECHNERS", "TCP/IP-STACK", "TCP/IP STACK", "LOKALER TCP/IP STACK", "LOKALER STACK", "NETZWERKSTACK", "EIGENER RECHNER"],
+            unit: "Bedeutung",
+            hint: "Ping auf 127.0.0.1 prüft, ob die TCP/IP-Software auf dem eigenen Rechner intakt ist.",
+            was: "Funktion des lokalen TCP/IP-Stacks",
+            warum: "Die Pakete verlassen nicht einmal die Netzwerkkarte, sondern werden direkt im Treiber-Stack zurückgespiegelt.",
+            wofuer: "Grundlegender Diagnoseschritt bei der Fehlersuche von Netzwerkproblemen."
+          },
+          // 6. Loopback IPv6 Gegenstück
+          {
+            q: `Welche IPv6-Adresse entspricht exakt der IPv4-Loopback-Adresse <span class="font-mono font-bold text-amber-700">127.0.0.1</span>?` +
+               makeButtons(["::1", "fe80::1", "2000::1", "fc00::1"]),
+            expected: "::1",
+            alts: ["::1", "::1/128", "0:0:0:0:0:0:0:1", "::01"],
+            unit: "IPv6-Entsprechung",
+            hint: "In IPv6 ist Loopback auf eine einzige Adresse verkürzt: ::1 (bzw. ::1/128).",
+            was: "::1/128",
+            warum: "Während IPv4 ein riesiges /8-Netz verschwendet hat, nutzt IPv6 sparsam nur die Adresse ::1.",
+            wofuer: "Lokale Tests unter IPv6."
+          },
+          // 7. RFC 1918 Klasse A Präfix
+          {
+            q: `Welches Präfix (mit CIDR) definiert den privaten IPv4-Bereich der <strong>Klasse A</strong> nach RFC 1918?` +
+               makeButtons(["10.0.0.0/8", "172.16.0.0/12", "192.168.0.0/16", "169.254.0.0/16"]),
+            expected: "10.0.0.0/8",
+            alts: ["10.0.0.0/8", "10.0.0.0", "10.X.X.X", "10", "/8"],
+            unit: "Präfix / CIDR",
+            hint: "Klasse A privat: 10.0.0.0/8 (10.0.0.0 bis 10.255.255.255).",
+            was: "10.0.0.0/8 (RFC 1918 Klasse A)",
+            warum: "Bietet 16.777.214 Adressen für sehr große Unternehmens- und Campusnetze.",
+            wofuer: "Interne Firmennetze ohne öffentliche IP-Adressverschwendung."
+          },
+          // 8. RFC 1918 Klasse B Präfix
+          {
+            q: `Welches Präfix (mit CIDR) definiert den privaten IPv4-Bereich der <strong>Klasse B</strong> nach RFC 1918?` +
+               makeButtons(["172.16.0.0/12", "172.16.0.0/16", "10.0.0.0/8", "192.168.0.0/16"]),
+            expected: "172.16.0.0/12",
+            alts: ["172.16.0.0/12", "172.16.0.0", "172.16", "/12"],
+            unit: "Präfix / CIDR",
+            hint: "Klasse B privat: 172.16.0.0/12 (umfasst 16 Subnetze von 172.16.0.0 bis 172.31.255.255).",
+            was: "172.16.0.0/12 (RFC 1918 Klasse B)",
+            warum: "Achtung: Es ist eine /12-Maske (255.240.0.0), nicht /16!",
+            wofuer: "Mittlere bis große Firmennetze."
+          },
+          // 9. RFC 1918 Klasse B Grenze (IHK Falle!)
+          {
+            q: `Bis zu welcher IP-Adresse reicht der private Klasse-B-Adressbereich <span class="font-mono font-bold text-emerald-700">172.16.0.0/12</span> (IHK-Prüfungsfalle!)?` +
+               makeButtons(["172.31.255.255", "172.16.255.255", "172.255.255.255", "172.63.255.255"]),
+            expected: "172.31.255.255",
+            alts: ["172.31.255.255", "172.31", "172.31.X.X", "BIS 172.31.255.255", "172.31.255.254"],
+            unit: "End-Adresse",
+            hint: "172.16.0.0/12 geht von 172.16.0.0 bis 172.31.255.255. 172.32.x.x ist öffentlich!",
+            was: "172.31.255.255",
+            warum: "/12 bedeutet 12 Netzwerkbits: Die ersten 4 Bits des zweiten Oktetts gehören zum Netz (16 = 0001 0000 bis 31 = 0001 1111).",
+            wofuer: "Klassische IHK-Fangfrage!"
+          },
+          // 10. Ist 172.32 öffentlich oder privat?
+          {
+            q: `Ist die IPv4-Adresse <span class="font-mono font-bold text-emerald-700">172.32.14.8</span> privat (RFC 1918) oder öffentlich im Internet?` +
+               makeButtons(["Öffentlich (Internet-routbar)", "Privat (RFC 1918)"]),
+            expected: "Öffentlich",
+            alts: ["ÖFFENTLICH", "OEFFENTLICH", "ÖFFENTLICH (INTERNET-ROUTBAR)", "PUBLIC", "INTERNET-ROUTBAR", "ÖFFENTLICHE IP"],
+            unit: "Gültigkeit",
+            hint: "Der private Bereich endet exakt bei 172.31.255.255. 172.32.x.x ist bereits eine öffentliche IP!",
+            was: "Öffentlich (Internet-routbar)",
+            warum: "Da 32 > 31 ist, liegt diese IP außerhalb des RFC 1918 Bereichs.",
+            wofuer: "Wichtig bei Firewall-Regeln und Routing-Konfigurationen."
+          },
+          // 11. RFC 1918 Klasse C Präfix
+          {
+            q: `Welches Präfix (mit CIDR) definiert den privaten IPv4-Bereich der <strong>Klasse C</strong> nach RFC 1918 (typisch für Heim- und Kleinbüronetze)?` +
+               makeButtons(["192.168.0.0/16", "192.168.1.0/24", "10.0.0.0/8", "172.16.0.0/12"]),
+            expected: "192.168.0.0/16",
+            alts: ["192.168.0.0/16", "192.168.0.0", "192.168", "/16", "192.168.X.X"],
+            unit: "Präfix / CIDR",
+            hint: "Klasse C privat umfasst den gesamten Block 192.168.0.0/16 (256 Subnetze /24).",
+            was: "192.168.0.0/16 (RFC 1918 Klasse C)",
+            warum: "Reicht von 192.168.0.0 bis 192.168.255.255.",
+            wofuer: "Standard für Heimrouter (z. B. Fritz!Box) und kleine Firmen."
+          },
+          // 12. Warum NAT bei RFC 1918?
+          {
+            q: `Ein Rechner hat die private IP <span class="font-mono font-bold text-emerald-700">192.168.1.100</span>. Welcher Dienst auf dem Router ist zwingend nötig, damit er Webseiten im öffentlichen Internet aufrufen kann?` +
+               makeButtons(["NAT / PAT (Network Address Translation)", "DHCP Relay Agent", "VLAN Tagging (802.1Q)", "APIPA"]),
+            expected: "NAT",
+            alts: ["NAT", "PAT", "NAT / PAT", "NAT / PAT (NETWORK ADDRESS TRANSLATION)", "NETWORK ADDRESS TRANSLATION", "NAPT"],
+            unit: "Netzwerkdienst",
+            hint: "Private IP-Adressen (RFC 1918) werden im Internet nicht geroutet und müssen per NAT/PAT übersetzt werden.",
+            was: "NAT / PAT (Network Address Translation)",
+            warum: "Der Router tauscht die private Quell-IP gegen seine eigene öffentliche IP aus.",
+            wofuer: "Internetzugriff für Geräte in privaten Netzwerken."
+          },
+          // 13. Multicast Präfix Klasse D
+          {
+            q: `Welcher Adressbereich / welches CIDR-Präfix ist in IPv4 für <strong>Multicast (Klasse D)</strong> reserviert?` +
+               makeButtons(["224.0.0.0/4", "240.0.0.0/4", "255.255.255.0/24", "192.0.2.0/24"]),
+            expected: "224.0.0.0/4",
+            alts: ["224.0.0.0/4", "224.0.0.0", "224", "/4", "224.0.0.0 - 239.255.255.255"],
+            unit: "Präfix / CIDR",
+            hint: "Multicast reicht von 224.0.0.0 bis 239.255.255.255 (CIDR: 224.0.0.0/4).",
+            was: "224.0.0.0/4 (Multicast / Klasse D)",
+            warum: "Die ersten 4 Bits lauten immer '1110' (224 bis 239).",
+            wofuer: "Gruppenkommunikation (Streaming, Routingprotokolle wie OSPF 224.0.0.5)."
+          },
+          // 14. Multicast IPv6 Entsprechung
+          {
+            q: `Welches IPv6-Präfix entspricht dem IPv4-Multicastbereich <span class="font-mono font-bold text-purple-700">224.0.0.0/4</span>?` +
+               makeButtons(["ff00::/8", "fe80::/10", "2000::/3", "fc00::/7"]),
+            expected: "ff00::/8",
+            alts: ["FF00::/8", "FF00::", "FF00", "FF::/8", "FF"],
+            unit: "IPv6-Präfix",
+            hint: "IPv6-Multicast beginnt immer mit ff00::/8 (ff...).",
+            was: "ff00::/8",
+            warum: "Alle Multicast-Adressen in IPv6 starten mit den 8 Eins-Bits 1111 1111 (= ff).",
+            wofuer: "In IPv6 ersetzt Multicast vollständig den Broadcast."
+          },
+          // 15. Default Route
+          {
+            q: `Welche IP-Adresse und Subnetzmaske (in CIDR-Kurzform) symbolisiert die <strong>Standardroute (Default Route / Standard-Gateway)</strong> in Routing-Tabellen?` +
+               makeButtons(["0.0.0.0/0", "255.255.255.255/32", "127.0.0.0/8", "192.168.0.0/16"]),
+            expected: "0.0.0.0/0",
+            alts: ["0.0.0.0/0", "0.0.0.0", "/0", "DEFAULT ROUTE", "0.0.0.0 0.0.0.0"],
+            unit: "CIDR",
+            hint: "0.0.0.0/0 ('Quad-Zero') matcht jedes Zielnetzwerk im Routing.",
+            was: "0.0.0.0/0 (Default Route)",
+            warum: "Präfixlänge 0 bedeutet: Keine Netzwerkbits müssen übereinstimmen -> Fallback für alle unbekannten Ziele.",
+            wofuer: "Pakete, für die kein spezielleres Ziel bekannt ist, werden an das Standard-Gateway geschickt."
+          },
+          // 16. Limited Broadcast
+          {
+            q: `Wie lautet die IPv4-Adresse für den <strong>Limited Broadcast</strong> (lokaler Broadcast im eigenen Netzsegment, der niemals geroutet wird)?` +
+               makeButtons(["255.255.255.255", "0.0.0.0", "127.255.255.255", "224.0.0.1"]),
+            expected: "255.255.255.255",
+            alts: ["255.255.255.255", "255.255.255.255/32", "/32"],
+            unit: "Broadcast-IP",
+            hint: "255.255.255.255 (alle 32 Bits auf 1) ist der Limited Broadcast.",
+            was: "255.255.255.255",
+            warum: "Erreicht alle Rechner im lokalen Layer-2-Segment. Router blockieren ihn sofort.",
+            wofuer: "DHCP Discover, ARP-Anfragen und lokale Netzwerkerkennung."
+          },
+          // 17. Carrier-Grade NAT (CGNAT)
+          {
+            q: `Welcher spezielle Adressbereich (<span class="font-mono font-bold text-cyan-700">100.64.0.0/10</span>) nach RFC 6598 wird von Internet-Providern genutzt, wenn Kunden keine eigene öffentliche IPv4 mehr erhalten?` +
+               makeButtons(["Carrier-Grade NAT (CGNAT / Dual-Stack Lite)", "APIPA (Link-Local)", "RFC 1918 Privates Firmennetz", "Testnetze (RFC 5737)"]),
+            expected: "Carrier-Grade NAT",
+            alts: ["CARRIER-GRADE NAT", "CGNAT", "CARRIER GRADE NAT", "CARRIER-GRADE NAT (CGNAT / DUAL-STACK LITE)", "DS-LITE", "DUAL STACK LITE", "RFC 6598"],
+            unit: "Technologie",
+            hint: "100.64.0.0/10 ist Shared Address Space für Carrier-Grade NAT (ISP-NAT).",
+            was: "Carrier-Grade NAT (CGNAT / RFC 6598)",
+            warum: "Verhindert Adresskollisionen mit Kunden-Netzen (RFC 1918) beim Provider-NAT.",
+            wofuer: "DS-Lite und IPv4-Adressknappheit bei Internetprovidern."
+          },
+          // 18. Dokumentations-Netz TEST-NET
+          {
+            q: `Welcher der folgenden IP-Bereiche ist ein offizielles <strong>Dokumentations- und Testnetz (TEST-NET-1)</strong> nach RFC 5737 für Fachbücher und Prüfungsbeispiele?` +
+               makeButtons(["192.0.2.0/24 (TEST-NET-1)", "192.168.1.0/24", "10.0.0.0/24", "172.16.0.0/24"]),
+            expected: "192.0.2.0/24",
+            alts: ["192.0.2.0/24", "192.0.2.0", "192.0.2.0/24 (TEST-NET-1)", "TEST-NET-1", "TEST-NET", "RFC 5737"],
+            unit: "Testnetz-Präfix",
+            hint: "RFC 5737 definiert 192.0.2.0/24 (TEST-NET-1), 198.51.100.0/24 (TEST-NET-2) und 203.0.113.0/24 (TEST-NET-3).",
+            was: "192.0.2.0/24 (TEST-NET-1)",
+            warum: "Diese Adressen dürfen weltweit nicht geroutet werden und sind für Dokumentationen reserviert.",
+            wofuer: "Beispiel-IPs in IHK-Prüfungen und Handbüchern."
+          }
+        ];
+
+        const sc = scenarios[Math.floor(Math.random() * scenarios.length)];
+
+        currentTask = {
+          q: sc.q,
+          expected: sc.expected,
+          altExpected: sc.alts,
+          alts: sc.alts,
+          unit: sc.unit,
+          hint: sc.hint,
+          tableHtml: tableHtml,
+          isText: true,
+          was: sc.was,
+          warum: sc.warum,
+          wofuer: sc.wofuer
+        };
+
+        renderMiniTaskUI();
+      },
+
       ipv6_scopes_table: function() {
         const tableHtml = `
           <div class="mt-3.5 overflow-x-auto rounded-xl border border-indigo-200 bg-white shadow-xs">
