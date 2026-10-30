@@ -238,7 +238,18 @@ function initQuestions(typeMode) {
     if (typeMode === "open") {
         questions = questions.filter(q => q.type === "open-text");
     }
-    console.log(`Initialized ${questions.length} questions (Static: ${filteredStatic.length}, Dynamic: ${dynamicQs.length}) for mode: ${typeMode}`);
+    
+    // Strict Deduplication: Keine Duplikate im globalen Fragenpool
+    const seenGlobalSigs = new Set();
+    questions = questions.filter(q => {
+        if (!q || !q.question) return false;
+        const sig = q.question.toLowerCase().replace(/<[^>]+>/g, '').replace(/[^a-z0-9äöüß]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 140);
+        if (seenGlobalSigs.has(sig)) return false;
+        seenGlobalSigs.add(sig);
+        return true;
+    });
+
+    console.log(`Initialized ${questions.length} unique questions (Static: ${filteredStatic.length}, Dynamic: ${dynamicQs.length}) for mode: ${typeMode}`);
 }
 
 // Setup click handlers for filters
@@ -676,6 +687,16 @@ function filterQuestions(theme) {
             filteredQuestions = filteredQuestions.filter(q => q.type === "open-text");
         }
     }
+
+    // Strict Deduplication: Garantiert keine doppelten oder fast identischen Fragen in einer Übungsrunde
+    const seenRoundSigs = new Set();
+    filteredQuestions = filteredQuestions.filter(q => {
+        if (!q || !q.question) return false;
+        const sig = q.question.toLowerCase().replace(/<[^>]+>/g, '').replace(/[^a-z0-9äöüß]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 140);
+        if (seenRoundSigs.has(sig)) return false;
+        seenRoundSigs.add(sig);
+        return true;
+    });
     
     currentTheme = theme;
     

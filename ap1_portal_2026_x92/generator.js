@@ -162,8 +162,8 @@ function generateDynamicQuestions(typeMode = "mix") {
         { name: "Windows 11 Enterprise", target: "Große Unternehmen mit komplexer IT-Infrastruktur und Volumenlizenzen" },
         { name: "Windows 11 Education", target: "Schulpersonal, Lehrkräfte und Studierende in Bildungseinrichtungen" }
     ];
-    for (let i = 0; i < 10; i++) {
-        const targetEdition = winEditions[Math.floor(Math.random() * winEditions.length)];
+    for (let i = 0; i < winEditions.length; i++) {
+        const targetEdition = winEditions[i];
         const wrongEditions = winEditions.filter(e => e.name !== targetEdition.name).map(e => e.name);
         const isOpen = shouldBeOpenText();
 
@@ -335,19 +335,19 @@ function generateDynamicQuestions(typeMode = "mix") {
         // 2. Notation & Kürzungsregeln
         {
             topic: 2,
-            full: "2001:0db8:0000:0000:0042:0000:0000:0001",
-            short: "2001:db8::42:0:0:1",
-            q: "Fachaufgabe Netzwerk (LF 3): Kürzen Sie die folgende IPv6-Adresse normgerecht nach RFC 5952:\n2001:0db8:0000:0000:0042:0000:0000:0001\nBegründen Sie, warum das Symbol '::' nur genau einmal vorkommen darf.",
-            solution: "Gekürzte Adresse: 2001:db8::42:0:0:1\nRegeln: Führende Nullen pro Block gestrichen. Bei zwei gleich langen Nullfolgen (jeweils 2 Blöcke) MUSS die erste Folge mit '::' gekürzt werden.\nBegründung für einmaliges '::': Das Symbol '::' ersetzt eine variable Anzahl von Null-Blöcken. Bei mehrmaligem Auftreten wäre die Anzahl der Nullen je Block mathematisch mehrdeutig.",
-            mcQuestion: "Wie lautet die normgerechte Kurzform der Adresse 2001:0db8:0000:0000:0042:0000:0000:0001 nach RFC 5952?",
+            full: "2001:0db8:0001:0000:0000:0000:0000:0008",
+            short: "2001:db8:1::8",
+            q: "Fachaufgabe Netzwerk (LF 3): Kürzen Sie die folgende IPv6-Adresse normgerecht nach RFC 5952:\n2001:0db8:0001:0000:0000:0000:0000:0008\nBegründen Sie, warum das Symbol '::' nur genau einmal vorkommen darf.",
+            solution: "Gekürzte Adresse: 2001:db8:1::8\nRegeln: Führende Nullen pro Block gestrichen (0db8 -> db8, 0001 -> 1, 0008 -> 8). Die fünf aufeinanderfolgenden Nullblöcke werden durch '::' ersetzt.\nBegründung für einmaliges '::': Das Symbol '::' ersetzt eine variable Anzahl von Null-Blöcken. Bei mehrmaligem Auftreten wäre die Anzahl der Nullen je Block mathematisch mehrdeutig.",
+            mcQuestion: "Wie lautet die normgerechte Kurzform der Adresse 2001:0db8:0001:0000:0000:0000:0000:0008 nach RFC 5952?",
             mcOptions: [
-                "2001:db8::42:0:0:1",
-                "2001:db8::42::1",
-                "2001:0db8::42:0:0:1",
-                "2001:db8:0:0:42::1"
+                "2001:db8:1::8",
+                "2001:db8:1::0008",
+                "2001:0db8:1::8",
+                "2001:db8:1:0:0:0:0:8"
             ],
             correctIdx: 0,
-            expl: "Führende Nullen weg; bei gleich langen Folgen wird die erste Folge komprimiert; '::' darf nie zweimal vorkommen!"
+            expl: "Führende Nullen entfallen; die fünf Nullblöcke werden einmalig zu '::' komprimiert; '::' darf nie mehrfach auftreten!"
         },
         // 3. Prefix, Subnet-ID, Interface-ID
         {
@@ -456,8 +456,8 @@ function generateDynamicQuestions(typeMode = "mix") {
         }
     ];
 
-    for (let i = 0; i < 36; i++) {
-        const sc = ipv6Scenarios[i % ipv6Scenarios.length];
+    for (let i = 0; i < ipv6Scenarios.length; i++) {
+        const sc = ipv6Scenarios[i];
         const isOpen = shouldBeOpenText();
 
         if (isOpen) {
@@ -498,8 +498,8 @@ function generateDynamicQuestions(typeMode = "mix") {
         { name: "Ethernet (IEEE 802.3)", layer: "2", layerName: "Sicherungsschicht (Data Link Layer)", pdu: "Frames (Rahmen)", task: "Strukturierung der Bits in Rahmen (Frames), physische MAC-Adressierung und Fehlererkennung per CRC/FCS." },
         { name: "DHCP", layer: "7", layerName: "Anwendungsschicht (Application Layer)", pdu: "Daten", task: "Automatische Zuweisung von IP-Konfigurationen (IP, Subnetzmaske, Standardgateway, DNS) über den 4-stufigen DORA-Prozess (Ports 67/68)." }
     ];
-    for (let i = 0; i < 10; i++) {
-        const proto = osiProtocols[Math.floor(Math.random() * osiProtocols.length)];
+    for (let i = 0; i < osiProtocols.length; i++) {
+        const proto = osiProtocols[i];
         const wrongLayers = ["Schicht 1", "Schicht 2", "Schicht 3", "Schicht 4", "Schicht 7"].filter(l => !l.includes(proto.layer));
         const isOpen = shouldBeOpenText();
 
@@ -567,8 +567,8 @@ function generateDynamicQuestions(typeMode = "mix") {
             defense: "Deaktivierung automatischer Office-Makros, Virenscanner mit Echtzeitschutz und Dateisignatur-Überprüfung."
         }
     ];
-    for (let i = 0; i < 10; i++) {
-        const mw = malwareTypes[Math.floor(Math.random() * malwareTypes.length)];
+    for (let i = 0; i < malwareTypes.length; i++) {
+        const mw = malwareTypes[i];
         const wrongMW = malwareTypes.filter(m => m.name !== mw.name).map(m => m.name);
         const isOpen = shouldBeOpenText();
 
@@ -615,8 +615,8 @@ function generateDynamicQuestions(typeMode = "mix") {
             threats: "DDoS-Angriffe, Hardware-Defekte, Stromausfall, Ransomware-Verschlüsselung, Naturkatastrophen / Brände im Rechenzentrum."
         }
     ];
-    for (let i = 0; i < 10; i++) {
-        const goal = securityGoals[Math.floor(Math.random() * securityGoals.length)];
+    for (let i = 0; i < securityGoals.length; i++) {
+        const goal = securityGoals[i];
         const wrongGoals = securityGoals.filter(g => g.name !== goal.name).map(g => g.name);
         const isOpen = shouldBeOpenText();
 
@@ -704,8 +704,8 @@ function generateDynamicQuestions(typeMode = "mix") {
         { q: "Welches HTML-Tag wird verwendet, um eine ungeordnete Liste (mit Aufzählungspunkten) zu erstellen?", options: ["<ul>", "<ol>", "<li>", "<list>"], answer: 0, exp: "<ul> (unordered list) definiert eine ungeordnete Liste mit Punkten. <ol> (ordered list) definiert eine nummerierte Liste, und <li> steht für ein einzelnes Listenelement (list item)." },
         { q: "Wie lautet die korrekte CSS-Syntax, um alle Absätze (<p>-Elemente) fett gedruckt anzuzeigen?", options: ["p { font-weight: bold; }", "p { font-style: bold; }", "p { text-weight: bold; }", "p { text-style: bold; }"], answer: 0, exp: "Die korrekte CSS-Eigenschaft lautet 'font-weight: bold;'." }
     ];
-    for (let i = 0; i < 10; i++) {
-        const item = htmlCssQuestions[Math.floor(Math.random() * htmlCssQuestions.length)];
+    for (let i = 0; i < htmlCssQuestions.length; i++) {
+        const item = htmlCssQuestions[i];
         const isOpen = shouldBeOpenText();
 
         if (isOpen) {
@@ -759,8 +759,8 @@ function generateDynamicQuestions(typeMode = "mix") {
             explanation: "Um Durchschnittswerte pro Kategorie anzuzeigen, wird die Aggregatfunktion AVG(Preis) in Kombination mit GROUP BY Kategorie verwendet."
         }
     ];
-    for (let i = 0; i < 10; i++) {
-        const scenario = sqlScenarios[Math.floor(Math.random() * sqlScenarios.length)];
+    for (let i = 0; i < sqlScenarios.length; i++) {
+        const scenario = sqlScenarios[i];
         const isOpen = shouldBeOpenText();
         
         const qText = `Fachaufgabe SQL (LF 5 / LF 18):\n${scenario.tableDesc}\n\nAufgabe:\n${scenario.task}`;
@@ -824,8 +824,8 @@ function generateDynamicQuestions(typeMode = "mix") {
             exp: "Da die Zuordnung in beide Richtungen eindeutig ist (Mitarbeiter -> Dienstwagen: max. 1, Dienstwagen -> Mitarbeiter: 1), handelt es sich um eine 1:1-Beziehung."
         }
     ];
-    for (let i = 0; i < 10; i++) {
-        const scenario = erScenarios[Math.floor(Math.random() * erScenarios.length)];
+    for (let i = 0; i < erScenarios.length; i++) {
+        const scenario = erScenarios[i];
         const isOpen = shouldBeOpenText();
         
         if (isOpen) {
@@ -859,8 +859,8 @@ function generateDynamicQuestions(typeMode = "mix") {
         { q: "Welches Prinzip sichert in relationalen Datenbanken, dass Fremdschlüssel-Beziehungen konsistent bleiben und keine verwaisten Einträge entstehen?", options: ["Referenzielle Integrität", "Redundanzfreiheit", "Normalisierung", "Kapselung"], answer: 0, exp: "Die referenzielle Integrität stellt sicher, dass Datensätze nicht gelöscht werden können, solange andere Datensätze (über Fremdschlüssel) auf sie verweisen. Dies verhindert ungültige Beziehungen." },
         { q: "Was versteht man unter dem Begriff 'Redundanz' in einer Datenbank?", options: ["Mehrfaches Vorhandensein derselben Daten im System, was zu Inkonsistenzen führen kann.", "Fehlen von Backups im Speicher.", "Löschen von Datensätzen.", "Die Geschwindigkeit der Abfragen."], answer: 0, exp: "Redundanz bedeutet, dass dieselben Daten mehrfach abgespeichert sind. Normalisierung dient dazu, Redundanzen zu minimieren, um Inkonsistenzen zu verhindern." }
     ];
-    for (let i = 0; i < 10; i++) {
-        const item = databaseConcepts[Math.floor(Math.random() * databaseConcepts.length)];
+    for (let i = 0; i < databaseConcepts.length; i++) {
+        const item = databaseConcepts[i];
         const isOpen = shouldBeOpenText();
 
         if (isOpen) {
@@ -1235,8 +1235,8 @@ function generateDynamicQuestions(typeMode = "mix") {
             exp: "Der Text besagt: Wenn die Uptime unter den garantierten Wert fällt, erhält der Kunde Service-Gutschriften ('customer is eligible to receive service credits as financial compensation')."
         }
     ];
-    for (let i = 0; i < 10; i++) {
-        const item = englishTexts[Math.floor(Math.random() * englishTexts.length)];
+    for (let i = 0; i < englishTexts.length; i++) {
+        const item = englishTexts[i];
         const isOpen = shouldBeOpenText();
 
         if (isOpen) {
@@ -1295,8 +1295,8 @@ function generateDynamicQuestions(typeMode = "mix") {
         }
     ];
 
-    for (let i = 0; i < 15; i++) {
-        const item = contractScenarios[Math.floor(Math.random() * contractScenarios.length)];
+    for (let i = 0; i < contractScenarios.length; i++) {
+        const item = contractScenarios[i];
         const isOpen = shouldBeOpenText();
         if (isOpen) {
             dynamicQuestions.push({
@@ -1371,8 +1371,8 @@ function generateDynamicQuestions(typeMode = "mix") {
         }
     ];
 
-    for (let i = 0; i < 20; i++) {
-        const tf = trueFalseItems[Math.floor(Math.random() * trueFalseItems.length)];
+    for (let i = 0; i < trueFalseItems.length; i++) {
+        const tf = trueFalseItems[i];
         const isOpen = shouldBeOpenText();
         if (isOpen) {
             dynamicQuestions.push({
@@ -1419,8 +1419,8 @@ function generateDynamicQuestions(typeMode = "mix") {
         { entA: "Auftrag", entB: "Artikel", card: "n:m", rel: "umfasst", fkTable: "Auftragsposition (Zwischentabelle)", fkField: "FK_AuftragsNr und FK_ArtikelNr", reason: "Ein Auftrag umfasst mehrere Artikel, ein Artikel kommt in mehreren Aufträgen vor (erfordert Zwischentabelle Auftragsposition)." }
     ];
 
-    for (let i = 0; i < 25; i++) {
-        const item = erdScenarios[Math.floor(Math.random() * erdScenarios.length)];
+    for (let i = 0; i < erdScenarios.length; i++) {
+        const item = erdScenarios[i];
         const isFkQuestion = Math.random() < 0.5;
         const isOpen = shouldBeOpenText();
 
@@ -1797,8 +1797,8 @@ function generateDynamicQuestions(typeMode = "mix") {
         }
     ];
 
-    for (let i = 0; i < 35; i++) {
-        const item = umlPatterns[Math.floor(Math.random() * umlPatterns.length)];
+    for (let i = 0; i < umlPatterns.length; i++) {
+        const item = umlPatterns[i];
         const isOpen = shouldBeOpenText();
         if (isOpen) {
             dynamicQuestions.push({
@@ -4771,36 +4771,66 @@ ORDER BY gesamtumsatz_euro DESC;`;
             full: "2001:0db8:0000:0000:0000:0000:1428:57ab",
             short: "2001:db8::1428:57ab",
             distractors: ["2001:db8:0:0:0:0:1428:57ab", "2001:db8::1428:57ab::", "2001:0db8::1428:57ab"],
-            desc: "Führende Nullen in Blöcken weglassen und die längste Kette von Null-Blöcken einmalig durch :: ersetzen."
+            desc: "Führende Nullen in Blöcken weglassen (0db8 -> db8) und die zusammenhängende Kette von 4 Null-Blöcken einmalig durch :: ersetzen."
         },
         {
             full: "fe80:0000:0000:0000:020c:29ff:fe4b:8c91",
             short: "fe80::20c:29ff:fe4b:8c91",
             distractors: ["fe80:0:0:0:20c:29ff:fe4b:8c91", "fe80::020c:29ff:fe4b:8c91", "fe80::20c:29ff:fe4b:8c91::"],
-            desc: "4 aufeinanderfolgende Nullblöcke werden zu :: komprimiert, führende Null bei 020c entfällt."
+            desc: "4 aufeinanderfolgende Nullblöcke werden zu :: komprimiert, führende Null bei 020c entfällt (wird zu 20c)."
         },
         {
             full: "2001:0db8:0000:0042:0000:0000:0000:0001",
             short: "2001:db8:0:42::1",
             distractors: ["2001:db8::42::1", "2001:db8::42:0:0:0:1", "2001:0db8:0:42::1"],
-            desc: "Nur die längste Nullfolge (die 3 Nullblöcke am Ende) darf mit :: ersetzt werden! Die einzelne Null davor bleibt als :0: stehen, da :: nur genau 1-mal pro Adresse erlaubt ist!"
+            desc: "Ungleiche Nullfolgen: Die längste Nullfolge (die 3 Nullblöcke am Ende) MUSS mit :: ersetzt werden! Die einzelne Null davor bleibt als :0: stehen."
         },
         {
             full: "2001:0db8:0000:0000:0042:0000:0000:0001",
             short: "2001:db8::42:0:0:1",
             distractors: ["2001:db8::42::1", "2001:db8:0:0:42::1", "2001:0db8::42::1"],
-            desc: "Bei gleich langen Nullfolgen (hier jeweils zwei Blöcke) wird nach RFC 5952 die ERSTE Nullfolge durch :: komprimiert. :: darf niemals mehrfach vorkommen!"
+            desc: "Gleich lange Nullfolgen: Bei zwei gleich langen Folgen (je 2 Blöcke) wird nach RFC 5952 zwingend die ERSTE Folge komprimiert!"
         },
         {
             full: "0000:0000:0000:0000:0000:0000:0000:0001",
             short: "::1",
             distractors: ["0::1", "::0001", "0:0:0:0:0:0:0:1"],
             desc: "Loopback-Adresse: Alle sieben führenden 0-Blöcke werden zu :: komprimiert, der letzte Block wird zu 1."
+        },
+        {
+            full: "0000:0000:0000:0000:0000:0000:0000:0000",
+            short: "::",
+            distractors: ["::0", "0::0", "0000::0000"],
+            desc: "Unspezifizierte Adresse (Unspecified Address): Alle 8 Blöcke bestehen aus Nullen und werden zu genau :: komprimiert."
+        },
+        {
+            full: "ff02:0000:0000:0000:0000:0000:0000:0002",
+            short: "ff02::2",
+            distractors: ["ff02:0:0:0:0:0:0:2", "ff02::0002", "ff2::2"],
+            desc: "All-Routers Multicast-Adresse: Die 6 mittleren Null-Blöcke werden zu ::, führende Nullen bei 0002 entfallen zu 2."
+        },
+        {
+            full: "2001:0db8:00aa:0000:00bb:0000:00cc:00dd",
+            short: "2001:db8:aa:0:bb:0:cc:dd",
+            distractors: ["2001:db8:aa::bb:0:cc:dd", "2001:db8:aa::bb::cc:dd", "2001:0db8:aa:0:bb:0:cc:dd"],
+            desc: "WICHTIGE RFC-5952-REGEL: Ein einzelner Nullblock darf NIEMALS durch :: ersetzt werden! Er bleibt zwingend als einzelne 0 (:0:) stehen."
+        },
+        {
+            full: "fd00:0000:0000:a100:0000:0000:0000:0045",
+            short: "fd00:0:0:a100::45",
+            distractors: ["fd00::a100:0:0:0:45", "fd00::a100::45", "fd00:0:0:a100:0:0:0:45"],
+            desc: "ULA-Adresse: Die 3 Nullblöcke am Ende sind länger als die 2 Nullblöcke vorne. Daher muss zwingend die längere Folge zu :: komprimiert werden."
+        },
+        {
+            full: "2001:0db8:85a3:0000:0000:8a2e:0370:7334",
+            short: "2001:db8:85a3::8a2e:370:7334",
+            distractors: ["2001:db8:85a3:0:0:8a2e:370:7334", "2001:0db8:85a3::8a2e:0370:7334", "2001:db8:85a3::8a2e:370:7334::"],
+            desc: "Klassisches IHK-Beispiel: Die beiden Nullblöcke werden zu ::, 0370 verliert die führende Null und wird zu 370."
         }
     ];
 
-    for (let i = 0; i < 15; i++) {
-        const c = ipv6CompressCases[i % ipv6CompressCases.length];
+    for (let i = 0; i < ipv6CompressCases.length; i++) {
+        const c = ipv6CompressCases[i];
         const qText = `🌐 IPv6-Adressierung & Kürzungsregeln nach RFC 5952 (LF 3):\n\nEin Administrator richtet ein neues Interface ein. Im Logfile wird folgende unkomprimierte IPv6-Adresse angezeigt:\n${c.full}\n\nAufgabe:\nWenden Sie die offiziellen IPv6-Kürzungsregeln (RFC 5952) korrekt an:\n1. Führende Nullen innerhalb eines 16-Bit-Blocks.\n2. Mehrfache aufeinanderfolgende Blöcke aus Nullen (Verwendung von '::').\n\nWie lautet die normgerecht gekürzte Schreibweise?`;
 
         const mLoesung = `Musterlösung IPv6-Kürzung:\n\nNormgerechte Kurzform: ${c.short}\n\nRegeln nach RFC 5952:\n1. Führende Nullen in jedem Hexadezimalblock werden weggelassen (z. B. "0db8" -> "db8", "0001" -> "1"). Eine Zahl, die nur aus Nullen besteht, bleibt als einzelne "0" erhalten, wenn sie nicht durch "::" ersetzt wird.\n2. Die längste zusammenhängende Folge von Blöcken mit ausschließlich Nullen wird durch "::" (Doppel-Doppelpunkt) ersetzt.\n3. WICHTIG: "::" darf in einer IPv6-Adresse nur genau EINMAL vorkommen, da die Eindeutigkeit der Blockanzahl (insgesamt 8 Blöcke à 16 Bit = 128 Bit) sonst nicht mehr rekonstruierbar wäre!\n4. Bei gleich langen Nullfolgen wird die erste Folge komprimiert. Hex-Ziffern werden in Kleinbuchstaben geschrieben.`;
@@ -4879,8 +4909,8 @@ ORDER BY gesamtumsatz_euro DESC;`;
         }
     ];
 
-    for (let i = 0; i < 15; i++) {
-        const e = eui64Cases[i % eui64Cases.length];
+    for (let i = 0; i < eui64Cases.length; i++) {
+        const e = eui64Cases[i];
         const qText = `🌐 IPv6 EUI-64 Algorithmus & Interface-ID (LF 3):\n\nEin Netzwerk-Interface besitzt die MAC-Adresse (IEEE 802 48-Bit):\n${e.mac}\n\nFür die Stateless Address Autoconfiguration (SLAAC) soll aus dieser MAC-Adresse eine 64-Bit Interface-ID nach dem modifizierten EUI-64-Format und die zugehörige Link-Local-Adresse (Präfix fe80::/64) generiert werden.\n\nAufgaben:\n1. Beschreiben Sie die beiden Schritte zur Erzeugung der 64-Bit EUI-64 Interface-ID aus der 48-Bit MAC-Adresse.\n2. Welches Bit wird invertiert (Name und Position)? Welcher Wert ergibt sich für das erste Byte (${e.firstByteOriginal})?\n3. Geben Sie die resultierende Link-Local IPv6-Adresse an.`;
 
         const mLoesung = `Musterlösung EUI-64 Verfahren:\n\n1. Schritt 1 (Einfügen von FF:FE):\n- Die 48-Bit MAC-Adresse (${e.mac}) wird in der Mitte geteilt: ${e.mac.slice(0, 8)} und ${e.mac.slice(9)}.\n- In die Mitte werden die 16 Bits 0xFF, 0xFE (FF:FE) eingefügt -> 64 Bit.\n\n2. Schritt 2 (Universal/Local Bit invertieren):\n- Das 7. Bit des ersten Bytes (U/L-Bit, Universal/Local) wird invertiert.\n- Erstes Byte: 0x${e.firstByteOriginal} = binär ${e.firstByteBinOrig}\n- 7. Bit (von links gezählt, Bit-Index 1 bei 0-basierter Zählung von MSB zu LSB) invertiert -> binär ${e.firstByteBinFlipped} = 0x${e.firstByteFlipped}.\n- Das Bit signalisiert bei IPv6, dass es sich um eine universell verwaltete EUI-64 Kennung handelt.\n\n3. Resultierende Interface-ID & Link-Local-Adresse:\n- Interface-ID: ${e.interfaceId}\n- Vollständige Link-Local-Adresse: ${e.linkLocal}`;
@@ -4955,8 +4985,8 @@ ORDER BY gesamtumsatz_euro DESC;`;
         }
     ];
 
-    for (let i = 0; i < 15; i++) {
-        const s = subnetCases[i % subnetCases.length];
+    for (let i = 0; i < subnetCases.length; i++) {
+        const s = subnetCases[i];
         const qText = `🌐 IPv6-Subnetting & Präfix-Kalkulation (LF 3):\n\nEin Internet Service Provider (ISP) weist einem Kunden folgendes IPv6-Netzwerkpräfix zu:\n${s.assignedPrefix} (${s.desc})\n\nFür die interne Netzwerkstrukturierung sollen ausschließlich standardkonforme Subnetze mit einer Präfixlänge von ${s.targetPrefix} gebildet werden (Standardgröße für IPv6-Subnetze mit SLAAC).\n\nAufgaben:\n1. Wie viele Bits stehen dem Kunden für das Subnetting zur Verfügung?\n2. Wie viele eigenständige ${s.targetPrefix}-Subnetze kann der Kunde maximal bilden? (Geben Sie die Berechnungsformel und das Ergebnis an).\n3. Wie viele Adressen stehen in einem einzelnen ${s.targetPrefix}-Subnetz theoretisch zur Verfügung?`;
 
         const mLoesung = `Musterlösung IPv6-Subnetting:\n\n1. Subnetz-Bits:\n- Zielpräfix: ${s.targetPrefix} (64 Bit)\n- Zugewiesenes Präfix: /${64 - s.prefixDiff} (${64 - s.prefixDiff} Bit)\n- Subnetz-Bits = 64 - ${64 - s.prefixDiff} = ${s.prefixDiff} Bits.\n\n2. Anzahl möglicher Subnetze:\n- Formel: 2^(Subnetz-Bits) = 2^${s.prefixDiff}\n- 2^${s.prefixDiff} = ${s.numSubnets.toLocaleString('de-DE')} Subnetze!\n\n3. Adressen pro Subnetz:\n- Interface-ID: 128 Bit - 64 Bit = 64 Bit für Hosts.\n- 2^64 = 18.446.744.073.709.551.616 Adressen (ca. 18,4 Trillionen Adressen pro Subnetz).`;
@@ -5035,8 +5065,8 @@ ORDER BY gesamtumsatz_euro DESC;`;
         }
     ];
 
-    for (let i = 0; i < 15; i++) {
-        const sq = scopeQuestions[i % scopeQuestions.length];
+    for (let i = 0; i < scopeQuestions.length; i++) {
+        const sq = scopeQuestions[i];
         const qText = `🌐 IPv6 Adresstypen & Gültigkeitsbereiche (Scopes) (LF 3):\n\nIn der Routingtabelle und Interface-Konfiguration eines Firmenrechners taucht folgende IPv6-Adresse auf:\n${sq.addr}\n\nAufgaben:\n1. Welchem IPv6-Adresstyp gehört diese Adresse an?\n2. Welchen Gültigkeitsbereich (Scope) und welche Routingfähigkeit besitzt sie?\n3. Welchem IPv4-Konzept entspricht dieser Adresstyp?`;
 
         const mLoesung = `Musterlösung IPv6 Adresstyp:\n\n1. Adresstyp: ${sq.type}\n2. Gültigkeitsbereich / Routingfähigkeit: ${sq.scope}\n3. IPv4-Entsprechung: ${sq.ipv4Equiv}\n\nWichtige IPv6-Präfixe im Überblick:\n- fe80::/10 ➔ Link-Local (nicht geroutet, automatische Kommunikation im Segment)\n- fc00::/7 (fd00::/8) ➔ Unique Local Address (ULA, privat im Unternehmen geroutet)\n- 2000::/3 ➔ Global Unicast (GUA, weltweit öffentlich geroutet)\n- ff00::/8 ➔ Multicast (Ersatz für Broadcast! Broadcast existiert in IPv6 NICHT mehr)\n- ::1/128 ➔ Loopback (entspricht 127.0.0.1)\n- ::/128 ➔ Unspecified (entspricht 0.0.0.0)`;
@@ -5113,8 +5143,8 @@ ORDER BY gesamtumsatz_euro DESC;`;
         }
     ];
 
-    for (let i = 0; i < 15; i++) {
-        const at = autoConfTopics[i % autoConfTopics.length];
+    for (let i = 0; i < autoConfTopics.length; i++) {
+        const at = autoConfTopics[i];
         const qText = `🌐 IPv6-Konfiguration & Übergangstechniken (LF 3):\n\nThema: ${at.title}\n\nFrage:\n${at.q}`;
 
         const mLoesung = `Musterlösung ${at.title}:\n\n${at.ans}\n\nKernpunkte für die AP1-Prüfung:\n- SLAAC = Stateless (Router Advertisements via ICMPv6, DAD-Prüfung, Privacy Extensions gegen Tracking).\n- DHCPv6 Stateless = Adressen via SLAAC, Optionen (DNS) via DHCPv6.\n- DHCPv6 Stateful = Adressen & Optionen komplett vom Server (wie klassisches IPv4-DHCP).\n- DS-Lite = Reine IPv6-Anbindung beim Provider, IPv4 getunnelt über Carrier-Grade-NAT (AFTR).`;
