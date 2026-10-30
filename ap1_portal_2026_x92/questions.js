@@ -623,9 +623,9 @@ var staticQuestions = [
         isBawueFocus: true,
         theme: "lf6",
         type: "open-text",
-        question: "Fachaufgabe Vertragsrecht (LF 6): Beschreibe, was ein Käufer (Unternehmen) im Rahmen eines zweiseitigen Handelskaufs (§ 377 HGB) tun muss, wenn er eine mangelhafte Lieferung erhält, um seine Gewährleistungsrechte zu wahren.",
+        question: "Fachaufgabe IT-Beschaffung (LF 6): Beschreiben Sie, was ein IT-Unternehmen beim Wareneingang einer Hardwarelieferung tun muss, wenn es einen Mangel feststellt, um seine Gewährleistungsansprüche zu wahren.",
         musterloesung: "Der Käufer muss die gelieferte Ware unverzüglich nach der Ablieferung untersuchen und, wenn sich ein Mangel zeigt, dem Verkäufer unverzüglich Anzeige machen (Rügepflicht).",
-        explanation: "Beim B2B-Kauf (zweiseitiger Handelskauf) gilt die Rügepflicht nach § 377 HGB. Unterlässt der Käufer die unverzügliche Untersuchung und Rüge, gilt die Ware als genehmigt, es sei denn, der Mangel war nicht erkennbar."
+        explanation: "Beim gewerblichen Einkauf (B2B) gilt die gesetzliche Untersuchungs- und Rügepflicht: Offensichtliche Mängel müssen unverzüglich geprüft und gerügt werden, sonst gilt die Hardware als genehmigt."
     },
 
     // === LERNFELD 7: CYBER-PHYSISCHE SYSTEME (lf7) ===
@@ -981,7 +981,7 @@ var staticQuestions = [
         isBawueFocus: true,
         theme: "lf6",
         type: "open-text",
-        question: "Fachaufgabe Vertragsrecht (LF 6): Nenne die Rügefristen für Mängel beim zweiseitigen Handelskauf (§ 377 HGB) für offene Mängel, verdeckte Mängel und arglistig verschwiegene Mängel.",
+        question: "Fachaufgabe IT-Beschaffung (LF 6): Nennen Sie die Reklamations- und Rügefristen bei gewerblicher Hardwarebeschaffung (B2B) für offene Mängel, verdeckte Mängel und arglistig verschwiegene Mängel.",
         musterloesung: "- Offener Mangel: Unverzüglich nach der Ablieferung (Untersuchungspflicht).\n- Verdeckter Mangel: Unverzüglich nach der Entdeckung des Mangels (spätestens vor Ablauf der Gewährleistung).\n- Arglistig verschwiegener Mangel: Keine Rügepflicht zur Fristwahrung; verjährt nach der regelmäßigen Verjährungsfrist von 3 Jahren.",
         explanation: "Die strengen Rügepflichten des HGB gelten nur im B2B-Bereich. Im Verbrauchsgüterkauf (B2C) gelten diese Fristen zum Schutz des Endverbrauchers nicht."
     },
@@ -992,7 +992,7 @@ var staticQuestions = [
         isBawueFocus: true,
         theme: "lf6",
         type: "open-text",
-        question: "Fachaufgabe Vertragsrecht (LF 6): Nenne jeweils die Hauptpflichten des Verkäufers und des Käufers bei einem rechtsgültigen Kaufvertrag nach § 433 BGB.",
+        question: "Fachaufgabe IT-Beschaffung (LF 6): Nennen Sie jeweils die Hauptpflichten des Verkäufers und des Käufers bei einem rechtsgültigen Kaufvertrag über IT-Hardware.",
         musterloesung: "- Verkäufer: Übergabe der Ware frei von Sach- und Rechtsmängeln und die Verschaffung des Eigentums an der Sache.\n- Käufer: Zahlung des vereinbarten Kaufpreises und die Abnahme der gekauften Sache.",
         explanation: "Der Kaufvertrag ist ein mehrseitig verpflichtendes Rechtsgeschäft. Die Hauptleistungspflichten stehen im Synallagma (Gegenseitigkeitsverhältnis)."
     },
@@ -1223,9 +1223,9 @@ var staticQuestions = [
         isBawueFocus: true,
         theme: "lf6",
         type: "open-text",
-        question: "Fachaufgabe Kaufrecht (LF 6): Ab wann gerät ein Käufer bei einer Rechnung ohne vereinbartes Zahlungsziel automatisch in Zahlungsverzug und wie hoch ist der gesetzliche Verzugszinssatz im B2C- und B2B-Bereich?",
-        musterloesung: "- Verzugseintritt: Spätestens 30 Tage nach Fälligkeit und Zugang der Rechnung (§ 286 Abs. 3 BGB). Bei Verbrauchern (B2C) muss auf diese Folge in der Rechnung ausdrücklich hingewiesen worden sein.\n- Verzugszins B2C (Verbraucher): 5 Prozentpunkte über dem Basiszinssatz.\n- Verzugszins B2B (Unternehmen): 9 Prozentpunkte über dem Basiszinssatz (plus 40 EUR Verzugspauschale).",
-        explanation: "Der Basiszinssatz wird halbjährlich von der Deutschen Bundesbank angepasst und dient als Referenzwert für die Berechnung von Verzugszinsen."
+        question: "Fachaufgabe Lizenzmanagement (LF 6): Erläutern Sie den Unterschied zwischen einer OEM-Lizenz, einer Retail-/Box-Lizenz und einer Volumenlizenz für Betriebssysteme in Unternehmen.",
+        musterloesung: "- OEM-Lizenz (Original Equipment Manufacturer): Preisgünstiger, rechtlich fest an die erworbene Erst-Hardware gekoppelt (kein direkter Microsoft-Support, Support leistet der PC-Hersteller).\n- Retail- / Box-Lizenz: Teurer im Einzelkauf, dafür frei auf beliebige neue Hardware übertragbar (sofern vom alten Rechner deinstalliert), beinhaltet Hersteller-Support.\n- Volumenlizenz: Speziell für Unternehmen ab 5 Arbeitsplätzen; einheitlicher Lizenzschlüssel (MAK oder Key Management Service KMS) für die vollautomatisierte Verteilung und Aktivierung im Firmennetzwerk.",
+        explanation: "Lizenzmodelle sind zentraler Bestandteil von IT-Beschaffungen (LF 1 & LF 6) und entscheiden über Kosten und Flexibilität beim Rollout."
     },
     {
         id: 78,
@@ -2532,26 +2532,26 @@ Ergebnis: Der Einstandspreis beträgt 1.814,00 EUR.`,
         isHard: true,
         difficulty: "hard",
         isBawueFocus: true,
-        theme: "lf6",
+        theme: "lf2",
         type: "open-text",
-        question: "Fachaufgabe Verzugszinsen (LF 6): Ein Kunde bezahlt eine fällige Rechnung über 12.000 EUR brutto mit einer Verspätung von 45 Tagen. Berechne die Verzugszinsen, die der Verkäufer dem Kunden für diesen Zeitraum in Rechnung stellen darf. Der Zinssatz beträgt 9 % p.a. (Rechne mit der deutschen Zinsmethode: 30 Tage pro Monat, 360 Tage pro Jahr). Der Rechenweg ist anzugeben.",
-        musterloesung: `Zinsberechnungsformel:
-Z = (K * p * t) / (100 * 360)
+        question: "Fachaufgabe USV-Dimensionierung (LF 2 / LF 7): Ein Server-Rack hat eine Wirkleistung von 2.400 W bei einem Leistungsfaktor (cos phi) von 0,8. Berechnen Sie die erforderliche Mindest-Scheinleistung der USV in kVA und die Mindest-Akkukapazität in Ah bei einer Batteriespannung von 48 V für eine Autonomiezeit von 30 Minuten (Wirkungsgrad 100 %). Der Rechenweg ist anzugeben.",
+        musterloesung: `1. Scheinleistung (S):
+S = P / cos phi
+S = 2.400 W / 0,8 = 3.000 VA = 3,0 kVA
 
-wobei:
-- K (Kapital) = 12.000 EUR
-- p (Zinssatz) = 9 % p.a.
-- t (Zeitraum) = 45 Tage
+2. Benötigte Energie (E):
+t = 30 Minuten = 0,5 Stunden
+E = P * t = 2.400 W * 0,5 h = 1.200 Wh
 
-Rechnung:
-Z = (12.000 * 9 * 45) / 36.000
-Z = 4.860.000 / 36.000
-Z = 135,00 EUR
+3. Mindest-Akkukapazität (Q):
+Q = E / U
+Q = 1.200 Wh / 48 V = 25 Ah
 
-Ergebnis: Der Verkäufer darf dem Kunden für die 45 Tage Verzug 135,00 EUR Verzugszinsen berechnen.`,
-        explanation: `Lernkarte Verzugszinsen:
-- Nach der kaufmännischen Zinsmethode (deutsche Zinsmethode) hat jeder Monat 30 Tage und das Jahr 360 Tage.
-- Verzugszinsen werden bei B2B-Geschäften (Business-to-Business) gesetzlich auf 9 Prozentpunkte über dem jeweiligen Basiszinssatz festgelegt (§ 288 Abs. 2 BGB).`
+Ergebnis: Die USV muss mindestens 3,0 kVA Scheinleistung bereitstellen und die Batteriebank mindestens 25 Ah Kapazität bei 48 V aufweisen.`,
+        explanation: `USV-Berechnungsformeln für Fachinformatiker:
+- Scheinleistung: S [VA] = Wirkleistung P [W] / cos phi
+- Energiebedarf: E [Wh] = Leistung P [W] * Autonomiezeit t [h]
+- Batteriekapazität: Q [Ah] = Energie E [Wh] / Batteriespannung U [V]`
     },
     {
         id: 157,
@@ -4817,9 +4817,9 @@ WHERE Email IS NULL OR Email = '';
         difficulty: "hard",
         theme: "lf1",
         isBawueFocus: true,
-        topic: "LF 1 / WiSo - Vertragsrecht: Zweiseitiger Handelskauf & Rügepflicht (§ 377 HGB)",
+        topic: "LF 1 / WiSo - IT-Beschaffung: Wareneingang, Rügefristen & Mängelarten bei Hardware",
         type: "open-text",
-        title: "B2B-Handelskauf: Rügefristen, Mängelarten & Rechtsfolgen bei unterlassener Rüge nach § 377 HGB",
+        title: "B2B-Hardwarebeschaffung: Wareneingang, Mängelarten & Fristen",
         question: "Die IT-Solutions GmbH (Kaufmann nach HGB) bestellt beim Großhändler Server-Express OHG 20 Managed Gigabit-Switches mit je 48 Ports. Bei der Lieferung treten rechtliche Fragen auf:\n\n" +
                   "1. **Rechtsnatur des Geschäfts (2 Punkte):**\n" +
                   "   Warum handelt es sich hierbei um einen **beiderseitigen (zweiseitigen) Handelskauf** und welches Gesetzbuch findet vorrangig Anwendung?\n\n" +
@@ -4996,7 +4996,7 @@ WHERE Email IS NULL OR Email = '';
         theme: "lf1",
         isBawueFocus: true,
         type: "multiple-choice",
-        question: "Die IT-GmbH bestellt bei einem Händler 10 Monitore (B2B). Bei der Anlieferung am Montag wird die Ware unbesehen ins Lager gestellt. Nach 3 Wochen stellt sich heraus, dass 3 Monitore Glasbruch haben. Welche Rechtsfolge tritt nach § 377 HGB ein?",
+        question: "Die IT-GmbH bestellt bei einem Händler 10 Monitore (B2B). Bei der Anlieferung am Montag wird die Ware unbesehen ins Lager gestellt. Nach 3 Wochen stellt sich heraus, dass 3 Monitore Glasbruch haben. Welche Rechtsfolge tritt nach gesetzlicher Rügepflicht ein?",
         options: [
             "Der Händler muss die Monitore umtauschen, da die gesetzliche Gewährleistungsfrist 2 Jahre beträgt.",
             "Die Ware gilt als genehmigt, da die IT-GmbH ihrer unverzüglichen Untersuchungs- und Rügepflicht nicht nachgekommen ist.",
@@ -5004,14 +5004,14 @@ WHERE Email IS NULL OR Email = '';
             "Der Händler muss Schadensersatz in Höhe des doppelten Kaufpreises zahlen."
         ],
         correctAnswer: 1,
-        explanation: "Beim beiderseitigen Handelskauf (B2B) greift die Rügepflicht nach § 377 HGB. Offene Mängel müssen unverzüglich (binnen weniger Tage) gerügt werden. Nach 3 Wochen gilt die Ware als genehmigt und Gewährleistungsansprüche erlöschen."
+        explanation: "Beim B2B-Kauf greift die gesetzliche Rügepflicht: Offensichtliche Mängel müssen unverzüglich nach Erhalt geprüft und gemeldet werden. Nach 3 Wochen gilt die Ware als genehmigt und Ansprüche erlöschen."
     },
     {
         id: 237,
         theme: "lf1",
         isBawueFocus: true,
         type: "true-false",
-        question: "Wahr oder Falsch: Bei einem IT-Dienstvertrag (§ 611 BGB) schuldet der Auftragnehmer das reine fachgerechte Bemühen (z. B. IT-Beratung), während bei einem Werkvertrag (§ 631 BGB) ein konkreter, mangelfreier Erfolg (z. B. funktionierende Individualsoftware) geschuldet wird.",
+        question: "Wahr oder Falsch: Bei einem IT-Dienstvertrag schuldet der Auftragnehmer das reine fachgerechte Bemühen (z. B. IT-Beratung, Hotline), während bei einem Werkvertrag ein konkreter, mangelfreier Erfolg (z. B. funktionierende Individualsoftware) geschuldet wird.",
         options: [
             "Wahr (Richtig)",
             "Falsch"
@@ -5024,7 +5024,7 @@ WHERE Email IS NULL OR Email = '';
         theme: "lf1",
         isBawueFocus: true,
         type: "true-false",
-        question: "Wahr oder Falsch: Die gesetzliche Beweislastumkehr zugunsten des Verbrauchers (§ 477 BGB beim Verbrauchsgüterkauf) beträgt in Deutschland seit 2022 genau 12 Monate.",
+        question: "Wahr oder Falsch: Bei der gesetzlichen Gewährleistung beim Verbrauchsgüterkauf gilt eine 12-monatige Beweislastumkehr zugunsten des Käufers.",
         options: [
             "Wahr (Richtig)",
             "Falsch (Es sind weiterhin nur 6 Monate)"

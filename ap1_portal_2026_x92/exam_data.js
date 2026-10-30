@@ -1005,22 +1005,22 @@ var EXAM_SETS = [
                     },
                     {
                         id: "2_3_b",
-                        label: "b) Kaufvertragsstörungen: Lieferverzug nach BGB",
+                        label: "b) IT-Beschaffung: Lieferverzug bei Netzwerk-Hardware",
                         points: 8,
                         type: "lines",
                         linesCount: 6,
-                        stencil: "WIRTSCHAFTSRECHT / BGB LIEFERVERZUG",
-                        text: "Die bestellten Switches sollten verbindlich am 15. März geliefert werden (Fixkauf). Am 18. März ist die Ware noch nicht eingetroffen.\nba) Befindet sich der Lieferant im Verzug und ist eine Mahnung erforderlich? Begründen Sie nach BGB (3 Punkte).\nbb) Nennen Sie drei rechtliche Möglichkeiten (Rechte des Käufers) bei Vorliegen des Lieferverzugs (5 Punkte).",
-                        solution: "ba) Ja, der Lieferant befindet sich im Lieferverzug. Eine Mahnung ist gem. § 286 Abs. 2 Nr. 1 BGB NICHT erforderlich, da für die Leistung eine Zeit nach dem Kalender bestimmt war (15. März).\nbb) Rechte des Käufers:\n1. Auf Erfüllung des Vertrags bestehen (Lieferung verlangen) und ggf. Schadensersatz wegen Verzögerung fordern.\n2. Nach angemessener Nachfristsetzung: Rücktritt vom Vertrag (§ 323 BGB).\n3. Schadensersatz statt der Leistung verlangen (z. B. Mehrkosten für einen Deckungskauf bei einem anderen Händler nach § 280, 281 BGB)."
+                        stencil: "IT-BESCHAFFUNG / LIEFERVERZUG",
+                        text: "Die bestellten Gigabit-Switches für ein Kundenprojekt sollten verbindlich am 15. März geliefert werden (Fixtermin). Am 18. März ist die Ware noch nicht eingetroffen.\nba) Erläutern Sie, warum sich der Lieferant ohne vorherige Mahnung im Lieferverzug befindet (3 Punkte).\nbb) Nennen Sie drei praxisnahe Handlungsmöglichkeiten des IT-Systemhauses, um das Projekt nicht zu gefährden (5 Punkte).",
+                        solution: "ba) Lieferverzug ohne Mahnung:\nDa ein fester kalendarischer Liefertermin (15. März) verbindlich vereinbart wurde (Fixtermin), tritt der Lieferverzug mit Ablauf dieses Tages automatisch ohne Mahnung ein.\nbb) Handlungsmöglichkeiten:\n1. Nachfrist setzen und auf nachträgliche Lieferung bestehen (ggf. Verzögerungsschaden geltend machen).\n2. Rücktritt vom Vertrag und Deckungskauf: Switches bei einem anderen Großhändler sofort per Express beschaffen (die Mehrkosten können dem säumigen Lieferanten als Schadensersatz in Rechnung gestellt werden).\n3. Übergangslösung: Temporärer Einsatz von Leihtechnik oder Switches aus dem firmeneigenen Pufferbestand, um den Rollout-Termin beim Kunden zu halten."
                     },
                     {
                         id: "2_3_c",
-                        label: "c) Wareneingangskontrolle & Rügepflicht (§ 377 HGB)",
+                        label: "c) Fachgerechte IT-Wareneingangskontrolle bei Server-Komponenten",
                         points: 5,
                         type: "lines",
                         linesCount: 4,
-                        text: "Die gelieferten Serverkomponenten treffen ein. Erläutern Sie die Pflichten der LogiPharma Logistik GmbH bei der Wareneingangskontrolle nach § 377 HGB (Handelskauf) und die Rechtsfolgen einer verspäteten Mängelrüge.",
-                        solution: "Pflichten: Als beiderseitiger Handelskauf muss die Ware unverzüglich nach Ablieferung untersucht werden (Sichtprüfung auf Transportschäden, Vollständigkeit, offensichtliche Mängel).\nRechtsfolge bei Unterlassung: Rügt der Käufer den Mangel nicht unverzüglich, gilt die Ware als genehmigt (§ 377 Abs. 2 HGB), es sei denn, es handelt sich um einen versteckten Mangel."
+                        text: "Die gelieferten Serverkomponenten treffen im IT-Lager ein.\nBeschreiben Sie drei konkrete Prüfschritte einer fachgerechten IT-Wareneingangskontrolle, bevor die Komponenten im Rechenzentrum verbaut werden.",
+                        solution: "1. Äußere Sichtprüfung der Verpackung:\n- Überprüfung der Versandkartons und Antistatik-Hüllen (ESD) auf mechanische Beschädigungen, Nässe oder gebrochene Siegel.\n2. Vollständigkeits- und Identitätsabgleich:\n- Vergleich der gelieferten Artikelbezeichnungen, Teilenummern (P/N), Seriennummern (S/N) und MAC-Adressen mit Lieferschein und Bestellung.\n3. Funktions- und Konfigurationstest (Burn-in / POST):\n- Vorab-Inbetriebnahme am Prüfplatz: Firmware-Stand kontrollieren, Power-On Self Test (POST) durchführen und RAM/Datenträger auf Initialisierungsfehler testen."
                     },
                     {
                         id: "2_3_d",
@@ -1656,12 +1656,12 @@ var EXAM_SETS = [
                     },
                     {
                         id: "4_3_c",
-                        label: "c) Berufsgeheimnis (§ 203 StGB) in der Kanzlei-IT",
+                        label: "c) Vertraulichkeit & Datenschutz beim IT-Service in sensiblen Umgebungen",
                         points: 8,
                         type: "lines",
                         linesCount: 5,
-                        text: "Rechtsanwälte unterliegen dem Berufsgeheimnis nach § 203 StGB. Durch die Reform des § 203 StGB dürfen auch externe IT-Dienstleister hinzugezogen werden.\nErläutern Sie die rechtlichen Voraussetzungen (strikte Verschwiegenheitsverpflichtung) und zwei technische Schutzmaßnahmen, um den Zugriff von IT-Dienstleistern auf vertrauliche Mandantenakten auf das zwingend erforderliche Minimum zu beschränken.",
-                        solution: "Rechtliche Voraussetzungen: Nach § 203 Abs. 3 StGB müssen alle mitwirkenden Personen des IT-Dienstleisters vor Tätigkeitsbeginn ausdrücklich in Textform zur Verschwiegenheit verpflichtet und über die strafrechtlichen Folgen eines Geheimnisverrats belehrt werden.\nTechnische Maßnahmen:\n1. Prinzip der minimalen Rechtevergabe (Least Privilege): IT-Administratoren erhalten nur Systemadministrationsrechte, aber keinen direkten Lesezugriff auf das Dateisystem der Aktenverwaltung (Zero-Knowledge-Architektur).\n2. Mandantentrennung & Verschlüsselung: Speicherung der Mandantenakten in verschlüsselten Containern; Entschlüsselung nur mit den individuellen Smartcards/Zertifikaten der jeweiligen Sachbearbeiter."
+                        text: "Ein IT-Dienstleister betreut die IT-Infrastruktur einer Kanzlei mit hochsensiblen Mandantendaten.\nErläutern Sie drei technische und organisatorische Maßnahmen (TOMs), die der IT-Dienstleister gewährleisten muss, um den unbefugten Zugriff auf diese sensiblen Daten zu verhindern.",
+                        solution: "1. Prinzip der minimalen Rechte (Least Privilege) & MFA:\n- Wartungszugänge erfolgen über personalisierte Administrator-Accounts mit Multi-Faktor-Authentifizierung (MFA); kein Zugriff über generische Sammel-Accounts.\n2. Vier-Augen-Prinzip & Freigabeprozess bei Fernwartung:\n- Fernwartungssitzungen (z. B. via VPN/RDP) müssen vom Kunden aktiv autorisiert und temporär freigeschaltet werden.\n3. Lückenloses Audit-Logging:\n- Sämtliche administrativen Zugriffe, Dateioperationen und Systemänderungen werden revisionssicher und manipulationsgeschützt protokolliert."
                     }
                 ]
             },
@@ -1733,13 +1733,13 @@ var EXAM_SETS = [
                     },
                     {
                         id: "5_1_b",
-                        label: "b) Kaufvertragsstörungen: Zahlungsverzug nach BGB",
+                        label: "b) Risikomanagement & IT-Zahlungsausfälle im Onlineshop",
                         points: 6,
                         type: "lines",
                         linesCount: 5,
-                        stencil: "WIRTSCHAFTSRECHT / BGB ZAHLUNGSVERZUG",
-                        text: "Ein gewerblicher Kunde zahlt eine fällige Rechnung nicht.\nba) Erläutern Sie, wann ein Kunde ohne vorherige Mahnung nach § 286 BGB automatisch in Verzug gerät (3 Punkte).\nbb) Berechnen Sie die Höhe des gesetzlichen Verzugszinssatzes bei einem Rechtsgeschäft zwischen zwei Unternehmen (B2B) und nennen Sie die zusätzliche gesetzliche Pauschale nach § 288 Abs. 5 BGB (3 Punkte).",
-                        solution: "ba) Automatischer Verzug ohne Mahnung:\n1. Wenn für die Leistung eine Zeit nach dem Kalender bestimmt ist (§ 286 Abs. 2 Nr. 1 BGB).\n2. Spätestens 30 Tage nach Fälligkeit und Zugang einer Rechnung (bei Verbrauchern nur mit ausdrücklichem Hinweis auf der Rechnung).\nbb) B2B-Verzugszinsen:\n• Verzugszinssatz = Basiszinssatz der EZB + 9 Prozentpunkte (bei Verbrauchern B2C: Basiszinssatz + 5 Prozentpunkte).\n• Gesetzliche Verzugspauschale für Entschädigung von Beitreibungskosten = 40,00 EUR (§ 288 Abs. 5 BGB)."
+                        stencil: "E-COMMERCE / ZAHLUNGSAUSFÄLLE & MAHNWESEN",
+                        text: "Ein Kunde hat im Onlineshop auf Rechnung bestellt und bezahlt nach Fälligkeit nicht.\nba) Nennen Sie zwei automatisierte Mechanismen im Shopsystem / ERP, um Zahlungsausfälle im Vorfeld effektiv zu minimieren (3 Punkte).\nbb) Beschreiben Sie das typische IT-gestützte Vorgehen im ERP- und Lizenzverwaltungssystem, wenn eine Zahlung trotz Fälligkeit ausbleibt (3 Punkte).",
+                        solution: "ba) Vorbeugende IT-Maßnahmen:\n1. Echtzeit-Bonitätsprüfung über Schnittstellen (APIs) zu Wirtschaftsauskunfteien (z. B. SCHUFA, Creditreform) vor Freigabe riskanter Zahlungsarten wie Kauf auf Rechnung.\n2. Risikobasierte Zahlungssteuerung (Fraud Detection): Neukunden oder Kunden mit auffälliger IP-Adresse/Bestellwert werden automatisch nur sichere Zahlungsarten (Kreditkarte mit 3D-Secure 2.0, PayPal, Vorkasse) angeboten.\nbb) Vorgehen im ERP- und Lizenzsystem:\n1. Automatisierter Mahnlauf: Zeitgesteuerter Versand einer freundlichen Zahlungserinnerung per E-Mail nach Fristablauf.\n2. Eskalation & Lizenzmanagement: Bleibt die Zahlung weiterhin aus, sperrt das System automatisch das Kundenkonto für Neubestellungen und deaktiviert gebuchte digitale Softwarelizenzen oder Cloud-Dienste temporär, bevor der Vorgang an ein Inkassosystem übergeben wird."
                     },
                     {
                         id: "5_1_c",
@@ -2849,13 +2849,13 @@ var EXAM_SETS = [
                     },
                     {
                         id: "9_1_d",
-                        label: "d) Verbraucherwiderrufsrecht bei Online-Krediten",
+                        label: "d) Digitale Identitätsprüfung & eID-Verfahren beim Online-Abschluss",
                         points: 4,
                         type: "lines",
                         linesCount: 3,
-                        stencil: "WIRTSCHAFTSRECHT / BGB WIDERRUF",
-                        text: "Ein Verbraucher schließt den Kreditvertrag online über das Smartphone ab. Nennen Sie die gesetzliche Widerrufsfrist nach § 495 i. V. m. § 355 BGB und die Voraussetzung für deren Beginn.",
-                        solution: "Gesetzliche Widerrufsfrist: 14 Tage.\nVoraussetzung für Fristbeginn: Erhalt einer ordnungsgemäßen, deutlichen Widerrufsbelehrung sowie sämtlicher gesetzlicher Pflichtangaben nach § 492 Abs. 2 BGB auf einem dauerhaften Datenträger."
+                        stencil: "DIGITAL IDENTITY / ONLINE-AUTHENTIFIZIERUNG",
+                        text: "Ein Kunde schließt einen Vertrag online über das Smartphone ab.\nNennen Sie zwei moderne digitale IT-Verfahren zur sicheren Identifikation des Kunden beim Online-Vertragsabschluss und beschreiben Sie kurz deren Funktionsweise.",
+                        solution: "1. eID-Verfahren (Online-Ausweisfunktion des Personalausweises):\n- Der Kunde liest seinen Personalausweis kontaktlos per Smartphone-NFC und AusweisApp aus und gibt seine 6-stellige PIN ein. Die Daten werden verschlüsselt an den Ident-Server übertragen (hohe Sicherheit, kein Medienbruch).\n2. Video-Ident-Verfahren:\n- Der Kunde führt einen verschlüsselten Video-Chat mit einem geschulten Operator. Ausweisdokumente werden unter verschiedenen Neigungswinkeln vor die Kamera gehalten, um Sicherheitsmerkmale (Hologramme, Kippeffekte) zu prüfen; Bestätigung via TAN per SMS."
                     }
                 ]
             },
@@ -3316,13 +3316,13 @@ var EXAM_SETS = [
                     },
                     {
                         id: "11_1_b",
-                        label: "b) Urheberrecht in Bildung & Lehre (§ 60a UrhG)",
+                        label: "b) E-Learning-Inhalte & IT-Urheberrecht im LMS",
                         points: 6,
                         type: "lines",
                         linesCount: 4,
-                        stencil: "RECHT / URHEBERRECHTLICHE SCHRANKEN",
-                        text: "Ein Dozent möchte ein urheberrechtlich geschütztes Fachbuch digital im LMS für seine Kursteilnehmer bereitstellen.\nErläutern Sie die Schrankenregelung des § 60a UrhG (Zulässiger Umfang in Prozent, Empfängerkreis).",
-                        solution: "Bestimmungen nach § 60a UrhG:\n1. Zulässiger Umfang: Bis zu 15 % eines veröffentlichten Werkes dürfen digital zur Veranschaulichung im Unterricht zur Verfügung gestellt werden (vollständige Werke sind nur bei vergriffenen Werken oder kleinen Werken wie Abbildungen/Gedichten zulässig).\n2. Empfängerkreis: Der Zugriff muss passwortgeschützt und strikt auf die Teilnehmer der jeweiligen Lehrveranstaltung beschränkt sein."
+                        stencil: "IT-URHEBERRECHT / LIZENZEN & CONTENT",
+                        text: "Ein Dozent möchte Fachmaterialien digital im LMS für seine Kursteilnehmer bereitstellen.\nUnterscheiden Sie Open-Content-Lizenzen (wie Creative Commons CC-BY) und proprietäres Copyright und nennen Sie zwei Regeln für den geschützten Zugriff im LMS.",
+                        solution: "1. Open Content vs. Copyright:\n- Creative Commons (CC): Urheber gestattet ausdrücklich die freie Weitergabe und Nutzung unter bestimmten Bedingungen (z. B. CC-BY = Namensnennung; CC0 = gemeinfrei).\n- Proprietäres Copyright: Jede Vervielfältigung und Verbreitung ist ohne ausdrückliche Lizenz des Verlags/Autors verboten.\n2. Regeln im LMS:\n- Bereitstellung nur in passwortgeschützten Kursräumen, die ausschließlich für angemeldete Teilnehmer der jeweiligen Lehrveranstaltung freigeschaltet sind.\n- Download-Beschränkungen bzw. Zeitbegrenzung auf die Dauer des Kurses."
                     },
                     {
                         id: "11_1_c",
@@ -3336,13 +3336,13 @@ var EXAM_SETS = [
                     },
                     {
                         id: "11_1_d",
-                        label: "d) Gemeinnützigkeit & Umsatzsteuerfreiheit (§ 4 Nr. 21 UStG)",
+                        label: "d) IT-Infrastruktur & Cloud-Kosten für E-Learning-Plattformen (LMS)",
                         points: 4,
                         type: "lines",
                         linesCount: 3,
-                        stencil: "STEUERRECHT / UMSATZSTEUER BEI BILDUNG",
-                        text: "Erläutern Sie, unter welcher Voraussetzung Bildungsleistungen einer Akademie von der 19 % Umsatzsteuer nach § 4 Nr. 21 UStG befreit sind.",
-                        solution: "Voraussetzung: Vorliegen einer behördlichen Bescheinigung der zuständigen Landesbehörde, dass die Bildungsmaßnahme ordnungsgemäß auf einen Beruf oder eine vor einer juristischen Person des öffentlichen Rechts (z. B. zuständige Kammer) abzulegende Prüfung vorbereitet."
+                        stencil: "CLOUD COMPUTING / KOSTENMODELL & STORAGE",
+                        text: "Die Akademie betreibt ihre E-Learning-Plattform (LMS) auf einer Cloud-Infrastruktur.\nErläutern Sie die Kostenmodelle CapEx vs. OpEx und nennen Sie zwei typische IT-Kostentreiber bei Cloud-Plattformen.",
+                        solution: "1. CapEx vs. OpEx:\n- CapEx (Capital Expenditure): Hohe einmalige Investitionskosten für eigene Hardware/Server im Vorfeld.\n- OpEx (Operational Expenditure): Laufende, nutzungsabhängige Betriebskosten in der Cloud ('Pay-as-you-go', flexibel skalierbar bei schwankenden Teilnehmerzahlen).\n2. Typische IT-Kostentreiber:\n- Storage (Speicherplatz für hochauflösende Videoaufzeichnungen und Backups).\n- Egress-Traffic / Datentransfer (Kosten für das Ausliefern der Videostreams an die Clients).\n- Rechenleistung (vCPU/RAM) für Streaming- und Transcoding-Server."
                     }
                 ]
             },
@@ -3638,13 +3638,13 @@ var EXAM_SETS = [
                     },
                     {
                         id: "12_1_d",
-                        label: "d) § 14a EnWG Steuerung steuerbarer Verbraucher",
+                        label: "d) Smart Grid & IoT-Sicherheitsanforderungen vernetzter Ladeinfrastruktur",
                         points: 4,
                         type: "lines",
                         linesCount: 3,
-                        stencil: "ENERGIEWIRTSCHAFT / NETZENGPASS-MANAGEMENT",
-                        text: "Erläutern Sie das Ziel der Neuregelung des § 14a EnWG für Betreiber von privaten Wallboxen und Wärmepumpen bei drohender Netzüberlastung.",
-                        solution: "Der Netzbetreiber darf bei akuter lokaler Überlastung des Stromnetzes die Leistungsaufnahme von steuerbaren Großverbrauchern (Wallbox, Wärmepumpe) vorübergehend auf einen Mindestwert (in der Regel 4,2 kW) dimmen ('Spitzenglättung'), anstatt den Anschluss komplett abzuschalten. Als Gegenleistung erhält der Verbraucher reduzierte Netzentgelte."
+                        stencil: "IOT & IT-SICHERHEIT / SMART GRID",
+                        text: "Erläutern Sie zwei zentrale IT-Sicherheitsanforderungen an vernetzte, steuerbare IoT-Wallboxen und Ladesäulen zum Schutz vor Cyberangriffen und Manipulationen.",
+                        solution: "1. Verschlüsselte Backend-Kommunikation:\n- Die Übertragung von Steuerbefehlen und Messwerten zwischen Wallbox und zentralem Energiemanagementsystem muss per TLS (Transport Layer Security) über sichere Protokolle (z. B. OCPP 2.0.1) abgesichert sein.\n2. Sichere Firmware-Updates (OTA) & Authentifizierung:\n- Over-the-Air-Updates müssen digital kryptografisch signiert sein, damit manipulierte Fremd-Firmware abgewiesen wird; Authentifizierung am Ladepunkt via RFID oder ISO 15118 (Plug & Charge) mit individuellen Zertifikaten."
                     }
                 ]
             },
@@ -4144,13 +4144,13 @@ var EXAM_SETS = [
                     },
                     {
                         id: "14_1_b",
-                        label: "b) Beherbergungsvertrag & Gastwirtshaftung nach § 701 BGB",
+                        label: "b) IT-Schnittstellen im Hotelbetrieb: PMS & Channel Manager",
                         points: 6,
                         type: "lines",
                         linesCount: 4,
-                        stencil: "WIRTSCHAFTSRECHT / BGB BEHERBERGUNGSVERTRAG",
-                        text: "Ein Gast bucht verbindlich für 4 Nächte ein Zimmer und reist ohne Stornierung nicht an ('No-Show').\naa) Um welchen Vertragstyp nach BGB handelt es sich beim Hotelaufnahmevertrag? (2 Punkte)\nab) Welchen Anteil des Zimmerpreises darf das Hotel nach ständiger Rechtsprechung bei Nichtanreise als Schadensersatz in Rechnung stellen? (4 Punkte).",
-                        solution: "aa) Vertragstyp: Gemischter Vertrag mit schwerpunktmäßig mietvertraglichen Elementen (§ 535 BGB), ergänzt um Dienst- und Werkvertragsanteile.\nab) Vergütungsanspruch bei No-Show:\nDer Gast schuldet den vereinbarten Zimmerpreis abzüglich ersparter Aufwendungen des Hotels (z. B. nicht verbrauchtes Frühstück, Wäsche, Strom). Nach ständiger Rechtsprechung sind üblich:\n• Bei Übernachtung mit Frühstück: 80 % des Zimmerpreises (20 % ersparte Aufwendungen).\n• Bei reiner Übernachtung: 90 % des Zimmerpreises (10 % ersparte Aufwendungen)."
+                        stencil: "HOTEL-IT / PMS & CHANNEL MANAGER",
+                        text: "Das Hotel nutzt ein Property Management System (PMS) für Zimmerbuchungen.\naa) Erläutern Sie die Kernaufgabe eines Channel Managers im Zusammenspiel mit externen Buchungsportalen (OTAs wie Booking.com, Expedia) (3 Punkte).\nab) Nennen Sie zwei technische Mechanismen über API-Schnittstellen, um Doppelbuchungen in Echtzeit zu verhindern (3 Punkte).",
+                        solution: "aa) Aufgabe Channel Manager:\n- Zentrale Schnittstelle zwischen dem internen Hotel-PMS und externen Online-Portalen (OTAs). Er synchronisiert Verfügbarkeiten, Zimmerpreise und Restriktionen automatisch in beide Richtungen, sodass Raten und freie Zimmer überall synchron sind.\nab) Vermeidung von Doppelbuchungen:\n1. Bidirektionale Push-APIs (Webhooks): Sobald auf einem Portal oder im Hotel ein Zimmer gebucht wird, meldet das System die Bestandsänderung sofort in Millisekunden an alle anderen Kanäle.\n2. Zentraler Kontingent-Pool: Zimmer werden nicht fest aufgeteilt, sondern aus einem gemeinsamen virtuellen Bestand gebucht; bei erfolgreicher Buchung wird der Zähler sofort dekrementiert."
                     },
                     {
                         id: "14_1_c",
@@ -4164,13 +4164,13 @@ var EXAM_SETS = [
                     },
                     {
                         id: "14_1_d",
-                        label: "d) Digitale Meldepflicht nach Bundesmeldegesetz (BMG)",
+                        label: "d) Digitaler Self-Check-in Kiosk & Hardwarekomponenten",
                         points: 4,
                         type: "lines",
                         linesCount: 3,
-                        stencil: "MELDERECHT / § 29 BMG MELDESCHEIN",
-                        text: "Erläutern Sie die Voraussetzungen für das 'papierlose digitale Meldescheinverfahren' nach § 29, 30 BMG bei ausländischen Hotelgästen.",
-                        solution: "Voraussetzungen:\nElektronische Erfassung der Meldedaten vor oder bei Anreise und Verifikation der Identität des Gastes durch sichere elektronische Verfahren (z. B. eID-Funktion des Personalausweises, qualifizierte elektronische Signatur oder bankbestätigte 2FA-Zahlungsauthentifizierung)."
+                        stencil: "HARDWARE & KIOSKSYSTEME / SELF CHECK-IN",
+                        text: "Zur Entlastung der Rezeption soll ein digitaler Self-Check-in-Kiosk installiert werden.\nNennen Sie vier Hardwarekomponenten dieses Terminals und erläutern Sie deren konkrete IT-Funktion beim Check-in-Prozess.",
+                        solution: "1. Dokumenten-Scanner (OCR): Zum automatischen Einlesen von Personalausweis oder Reisepass für die fehlerfreie digitale Gästedaten-Erfassung.\n2. Touchscreen-Monitor: Für die interaktive Menüführung, Sprachauswahl und Unterschriftenerfassung (Sign-Pad).\n3. Bezahlterminal (EMV / NFC / PIN-Pad): Für die kontaktlose Kartenzahlung (Kreditkarte, Apple Pay, Girocard).\n4. RFID-Kodierer / Kartenspender: Beschreibt und gibt die RFID-Zimmerkarte für das elektronische Türschloss aus."
                     }
                 ]
             },
@@ -4201,13 +4201,13 @@ var EXAM_SETS = [
                     },
                     {
                         id: "14_2_c",
-                        label: "c) Haftungsprivileg für WLAN-Betreiber (§ 8 TMG / TKG)",
+                        label: "c) Technischer Schutz & Sicherheit im öffentlichen Gäste-WLAN",
                         points: 6,
                         type: "lines",
                         linesCount: 4,
-                        stencil: "RECHT / STÖRERHAFTUNG & TMG",
-                        text: "Ein Hotelgast begeht über das Hotel-WLAN eine Urheberrechtsverletzung (Filesharing). Erläutern Sie die rechtliche Lage des Hotelbetreibers bezüglich Abmahnkosten und Schadenersatz nach Abschaffung der Störerhaftung (§ 8 Abs. 3 TMG).",
-                        solution: "Rechtslage:\nDer Hotelbetreiber als Anbieter von öffentlichem Internetzugang haftet nicht auf Schadensersatz oder Abmahnkosten für Rechtsverletzungen seiner Gäste (Abschaffung der Störerhaftung). Rechteinhaber können lediglich verlangen, dass der Betreiber zumutbare Sperrmaßnahmen ergreift (z. B. Port-Sperre für Filesharing-Dienste oder DNS-Sperren), um künftige Wiederholungen zu unterbinden."
+                        stencil: "NETZWERK & IT-SICHERHEIT / GÄSTE-WLAN",
+                        text: "Das Hotel stellt seinen Gästen ein kostenloses Gäste-WLAN zur Verfügung.\nNennen Sie drei konkrete technische Netzwerkmaßnahmen, um das Hotel-Verwaltungsnetz zu schützen und Missbrauch durch Gäste zu unterbinden.",
+                        solution: "1. VLAN-Segmentierung & Firewall-Trennung:\n- Das Gäste-WLAN läuft in einem vollständig isolierten VLAN mit eigener IP-Subnetzstruktur; die Firewall blockiert jeglichen Zugriff auf interne Buchungs- und Verwaltungsserver.\n2. Client Isolation (Wireless Isolation):\n- Verhindert, dass verbundene Gastgeräte untereinander im WLAN kommunizieren können (Schutz vor Man-in-the-Middle-Angriffen und Portscans zwischen Gästen).\n3. Content-Filter & Captive Portal:\n- Vorschalten eines Portals zur Bestätigung der Nutzungsbedingungen; DNS-/Webfilter blockieren illegale File-Sharing-Netzwerke (z. B. BitTorrent-Ports sperren) und schädliche Webseiten."
                     },
                     {
                         id: "14_2_d",
@@ -5481,13 +5481,13 @@ var EXAM_SETS = [
                     },
                     {
                         id: "18_4_b",
-                        label: "b) Vertragsrecht nach BGB: Werklieferungsvertrag & Mängelrüge nach HGB",
+                        label: "b) IT-Arbeitsplatz-Rollout: Abnahmeprotokoll & Mängelmanagement",
                         points: 6,
                         type: "lines",
                         linesCount: 5,
-                        stencil: "VERTRAGSRECHT / § 650 BGB & HGB",
-                        text: "aa) Das Systemhaus liefert die Hardware, montiert die Halterungen, führt die Tertiärverkabelung durch und übergibt die 30 Plätze betriebsbereit nach Abnahmetest. Welcher Vertragstyp liegt nach BGB vor und warum? (3 Punkte).\nab) Welcher Unterschied besteht zwischen einem Handelskauf nach § 377 HGB (B2B) und einem Verbrauchsgüterkauf nach § 474 BGB hinsichtlich der Mängelrügefrist? (3 Punkte).",
-                        solution: "aa) Vertragstyp:\nWerklieferungsvertrag nach § 650 BGB.\nBegründung: Es werden bewegliche Sachen (Hardware/Monitore) geliefert, die jedoch durch individuelle Montage, Verkabelung und betriebsbereite Einrichtung zu einem funktionierenden Gesamterfolg (Werkleistung) zusammengeführt und formell abgenommen werden.\nab) Mängelrüge (§ 377 HGB vs. BGB):\n• Handelskauf (B2B nach § 377 HGB): Beide Vertragsparteien sind Kaufleute. Der Käufer hat die Ware unverzüglich nach Erhalt zu untersuchen und erkennbare Mängel unverzüglich anzuzeigen (Rügepflicht). Andernfalls gilt die Ware als genehmigt und Gewährleistungsansprüche erlöschen!\n• Verbrauchsgüterkauf (B2C nach § 474 BGB): Verbraucher unterliegen keiner unverzüglichen Rügepflicht. Gewährleistungsansprüche bleiben 24 Monate erhalten."
+                        stencil: "IT-ROLLOUT / ABNAHME & GEWÄHRLEISTUNG",
+                        text: "Das IT-Systemhaus liefert 30 Arbeitsplatz-Rechner, montiert Dockingstations, führt die Tertiärverkabelung durch und übergibt die Plätze betriebsbereit.\naa) Erläutern Sie die Bedeutung und den Inhalt eines förmlichen Abnahmeprotokolls (3 Punkte).\nab) Unterscheiden Sie offene Mängel von versteckten Mängeln und beschreiben Sie das Vorgehen bei festgestellten Funktionsfehlern (3 Punkte).",
+                        solution: "aa) Förmliches Abnahmeprotokoll:\n- Bestätigt schriftlich die ordnungsgemäße Erfüllung des Auftrags gemäß Pflichtenheft nach erfolgreichem Funktionstest aller 30 Arbeitsplätze.\n- Wesentliche Wirkungen: Übergang der Gefahr auf den Auftraggeber, Beginn der 24-monatigen Verjährungsfrist für Gewährleistungsansprüche und Fälligkeit der Vergütung.\nab) Mängelarten & Vorgehen:\n- Offener Mangel: Sofort bei der Übergabe erkennbar (z. B. fehlendes Patchkabel, beschädigtes Gehäuse) -> Sofort im Abnahmeprotokoll festhalten.\n- Versteckter Mangel: Zeigt sich erst später im laufenden Betrieb (z. B. sporadische Verbindungsabbrüche durch unsauber aufgelegte Netzwerkdosen) -> Sofort nach Entdeckung dem Dienstleister melden; dieser hat das Recht zur kostenfreien Nachbesserung (Nacherfüllung)."
                     },
                     {
                         id: "18_4_c",

@@ -1270,27 +1270,27 @@ function generateDynamicQuestions(typeMode = "mix") {
     const contractScenarios = [
         {
             desc: "Ein IT-Berater führt eine dreitägige Schulung für die Mitarbeiter eines Kunden zum Thema 'IT-Sicherheitsbewusstsein' auf Stundensatzbasis durch. Ein messbarer Lernerfolg wird vertraglich nicht garantiert.",
-            type: "Dienstvertrag (§ 611 BGB)",
+            type: "Dienstvertrag (z. B. IT-Beratung, Support)",
             reason: "Geschuldet ist das reine fachgerechte Tätigwerden / Unterrichten, nicht ein bestimmter garantierter Prüfungserfolg."
         },
         {
             desc: "Ein Systemhaus entwickelt für eine Spedition ein individuelles Tourenplanungs-Tool nach einem detaillierten Pflichtenheft mit garantierter Funktionsfähigkeit und vereinbarter Gesamtabnahme.",
-            type: "Werkvertrag (§ 631 BGB)",
+            type: "Werkvertrag (z. B. Individual-Softwareentwicklung)",
             reason: "Geschuldet ist die Herbeiführung eines konkreten, mangelfreien Erfolgs (fertige Software) inklusive förmlicher Abnahme."
         },
         {
             desc: "Ein Büro kauft 25 Standard-Office-Lizenzen (OEM-Pakete) auf DVD im Fachhandel und bezahlt die Ware sofort.",
-            type: "Kaufvertrag (§ 433 BGB)",
+            type: "Kaufvertrag (z. B. Standard-Hardware)",
             reason: "Standardsoftware auf Datenträgern wird rechtlich wie eine bewegliche Sache behandelt (Kaufvertrag mit dauerhafter Übereignung)."
         },
         {
             desc: "Ein Unternehmen mietet für 24 Monate virtuelle Server-Kapazitäten und Speicherplatz in der Cloud gegen eine monatliche Nutzungsgebühr inklusive 99,9 % Verfügbarkeits-SLA.",
-            type: "Mietvertrag (§ 535 BGB) / SaaS-Vertrag",
+            type: "Mietvertrag / SaaS (z. B. Cloud-Software, M365)",
             reason: "Geschuldet ist die zeitweise Gebrauchsüberlassung von IT-Ressourcen im vertragsgemäßen Zustand während der Mietdauer."
         },
         {
             desc: "Ein Hardware-Hersteller baut aus kundenspezifisch ausgewählten Komponenten (Gehäuse, CPU, Spezialgrafikkarten) 5 Render-Workstations und liefert diese an eine Filmproduktionsfirma.",
-            type: "Werklieferungsvertrag (§ 650 BGB)",
+            type: "Werklieferungsvertrag (z. B. maßgefertigtes Server-Rack)",
             reason: "Herstellung und Lieferung einer beweglichen Sache aus eigenem Material; unterliegt weitgehend den Vorschriften des Kaufvertragsrechts."
         }
     ];
@@ -1309,7 +1309,7 @@ function generateDynamicQuestions(typeMode = "mix") {
                 explanation: `Lernkarte IT-Vertragstypen: Dienstvertrag = Bemühen/Tätigkeit (§ 611 BGB); Werkvertrag = Konkreter Erfolg + Abnahme (§ 631 BGB); Kaufvertrag = Dauerhafte Übereignung (§ 433 BGB); Werklieferung = Herstellung beweglicher Sachen (§ 650 BGB).`
             });
         } else {
-            const allTypes = ["Dienstvertrag (§ 611 BGB)", "Werkvertrag (§ 631 BGB)", "Kaufvertrag (§ 433 BGB)", "Mietvertrag (§ 535 BGB) / SaaS-Vertrag", "Werklieferungsvertrag (§ 650 BGB)"];
+            const allTypes = ["Dienstvertrag (z. B. IT-Beratung, Support)", "Werkvertrag (z. B. Individual-Softwareentwicklung)", "Kaufvertrag (z. B. Standard-Hardware)", "Mietvertrag / SaaS (z. B. Cloud-Software, M365)", "Werklieferungsvertrag (z. B. maßgefertigtes Server-Rack)"];
             const wrongTypes = allTypes.filter(t => t !== item.type);
             const shuffledOptions = [item.type, ...wrongTypes.slice(0, 3)].sort(() => Math.random() - 0.5);
             const correctIdx = shuffledOptions.indexOf(item.type);
@@ -1342,7 +1342,7 @@ function generateDynamicQuestions(typeMode = "mix") {
         {
             q: "Wahr oder Falsch: Beim beiderseitigen Handelskauf (B2B) führt das Unterlassen der unverzüglichen Mängelrüge (§ 377 HGB) dazu, dass die Ware als genehmigt gilt und gesetzliche Gewährleistungsansprüche für offene Mängel erlöschen.",
             isTrue: true,
-            exp: "Richtig! Nach § 377 Abs. 2 HGB gilt die Ware bei unterlassener unverzüglicher Rüge als genehmigt."
+            exp: "Richtig! Beim Handelskauf (B2B) gilt die gesetzliche Rügepflicht: Offensichtliche Mängel müssen unverzüglich geprüft und gemeldet werden."
         },
         {
             q: "Wahr oder Falsch: Supportprozesse (Unterstützungsprozesse) wie Buchhaltung oder interne IT-Administration haben immer direkten Kontakt zum externen Kunden und erzeugen den Hauptumsatz.",
@@ -4721,7 +4721,7 @@ ORDER BY gesamtumsatz_euro DESC;`;
         }
     }
 
-    // MC15: BGB Vertragsrecht & Leistungsstörungen (Werkvertrag vs. Dienstvertrag, Sachmängelhaftung § 437 BGB) (LF 1 / Schwer)
+    // MC15: IT-Vertragsrecht: Werkvertrag vs. Dienstvertrag in der Softwareentwicklung (LF 1 / LF 6)
     for (let i = 0; i < 15; i++) {
         const qText = `🔥 Meisterklasse IT-Vertragsrecht & Gewährleistung (LF 1 / LF 6):\nEin Unternehmen beauftragt ein Softwarehaus mit der Erstellung einer maßgeschneiderten Warenwirtschaftssoftware für 60.000 EUR. Im Vertrag wird vereinbart, dass die Software den im Pflichtenheft definierten automatischen Lagerabgleich fehlerfrei beherrschen muss.\n\nNach der Bereitstellung stellt der Auftraggeber fest, dass der Lagerabgleich bei mehr als 100 gleichzeitigen Buchungen abstürzt. Der Auftraggeber verweigert die Abnahme und will sofort vom Vertrag zurücktreten und Schadensersatz verlangen.\n\nAufgaben:\n1. Bestimmen Sie den zutreffenden Vertragstyp nach BGB (Werkvertrag gem. § 631 BGB oder Dienstvertrag gem. § 611 BGB) und begründen Sie Ihre Entscheidung.\n2. Ist der sofortige Rücktritt des Auftraggebers rechtlich sofort zulässig? Erläutern Sie das gestufte System der Mängelrechte nach BGB (§ 437 / § 634 BGB) und die rechtlichen Voraussetzungen für Rücktritt oder Minderung.\n3. Welche Rechte hat der Auftragnehmer (Recht zur zweiten Andienung)? Wie viele Nachbesserungsversuche stehen ihm üblicherweise nach BGB zu?`;
 
@@ -4732,20 +4732,20 @@ ORDER BY gesamtumsatz_euro DESC;`;
             dynamicQuestions.push({
                 id: currentId++,
                 theme: "lf1",
-                topic: "🔥 Meisterklasse: Werkvertrag vs. Dienstvertrag & Mängelrechte BGB (LF 1)",
+                topic: "🔥 Meisterklasse: Werkvertrag vs. Dienstvertrag in der Softwareentwicklung (LF 1)",
                 isHard: true,
                 difficulty: "hard",
                 isBawueFocus: true,
                 type: "open-text",
                 question: qText,
                 musterloesung: mLoesung,
-                explanation: `Werkvertrag (§ 631 BGB), da Erfolg geschuldet. Sofortiger Rücktritt unzulässig wg. Vorrang der Nacherfüllung (§ 634 BGB, Recht zur 2. Andienung, i.d.R. 2 Versuche).`
+                explanation: `Werkvertrag, da konkreter Erfolg geschuldet. Sofortiger Rücktritt unzulässig wegen Vorrang der Nacherfüllung (Recht zur zweiten Andienung, i.d.R. 2 Nachbesserungsversuche).`
             });
         } else {
             dynamicQuestions.push({
                 id: currentId++,
                 theme: "lf1",
-                topic: "🔥 Meisterklasse: Werkvertrag vs. Dienstvertrag & Mängelrechte BGB (LF 1)",
+                topic: "🔥 Meisterklasse: Werkvertrag vs. Dienstvertrag in der Softwareentwicklung (LF 1)",
                 isHard: true,
                 difficulty: "hard",
                 isBawueFocus: true,
