@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AP1 Prüfungstrainer - Fachinformatiker</title>
-    <link rel="stylesheet" href="style.css?v=146">
+    <link rel="stylesheet" href="style.css?v=147">
     <!-- FontAwesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -155,7 +155,7 @@
                     </div>
 
                     <!-- Kachel 4: Rechen- & Einheiten-Trainer -->
-                    <a href="rechentrainer.html?topic=ipv4_special_ranges&v=146" target="_blank" class="special-mini-tile tile-calc" title="Rechentrainer (AP1 / AP2)">
+                    <a href="rechentrainer.html?topic=ipv4_special_ranges&v=147" target="_blank" class="special-mini-tile tile-calc" title="Rechentrainer (AP1 / AP2)">
                         <span class="mini-tile-content">
                             <i class="fa-solid fa-calculator" style="color: #d97706;"></i>
                             <span>Rechentrainer (AP1/AP2)</span>
@@ -430,59 +430,64 @@
             </div>
 
             
-            <!-- Brücke AP1 ➔ AP2 Hub Card (FIAE Prüfungsbereiche) -->
-            <div class="card ap2-bridge-card" style="border: 2px solid #6366f1; background: linear-gradient(180deg, #f8faff 0%, #ffffff 100%); box-shadow: 0 4px 12px rgba(99, 102, 241, 0.15); border-radius: var(--radius); margin-bottom: 1.25rem;">
-                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.4rem;">
-                    <h3 style="color: #4338ca; margin: 0; font-size: 1.1rem; display: flex; align-items: center; gap: 0.45rem;">
+            <!-- Brücke AP1 ➔ AP2 Hub Card (Kompakt & Dünn) -->
+            <div class="card ap2-bridge-card" style="border: 1.5px solid #6366f1; background: #ffffff; box-shadow: 0 2px 6px rgba(99, 102, 241, 0.08); border-radius: var(--radius); margin-bottom: 0.65rem; padding: 0.65rem 0.75rem;">
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.35rem; border-bottom: 1px solid #e0e7ff; padding-bottom: 0.25rem;">
+                    <h3 style="color: #4338ca; margin: 0; font-size: 0.88rem; display: flex; align-items: center; gap: 0.4rem; font-weight: 800; border: none; padding: 0;">
                         <i class="fa-solid fa-graduation-cap" style="color: #6366f1;"></i> Brücke AP1 ➔ AP2
                     </h3>
-                    <span style="background: #ede9fe; color: #6d28d9; font-size: 0.72rem; font-weight: 800; padding: 0.15rem 0.55rem; border-radius: 999px; text-transform: uppercase; letter-spacing: 0.03em;">
+                    <span style="background: #ede9fe; color: #6d28d9; font-size: 0.65rem; font-weight: 800; padding: 0.1rem 0.4rem; border-radius: 999px;">
                         FIAE Hub
                     </span>
                 </div>
-                <p style="font-size: 0.86rem; color: #475569; margin-bottom: 0.7rem; line-height: 1.35;">
-                    Spezial-Vorbereitung für die Zwischenstufe &amp; Abschlussprüfung Teil 2 (Anwendungsentwicklung).
-                </p>
 
-                <!-- Highlight Banner: Letzte AP1 Prüfung -->
-                <div style="background: linear-gradient(135deg, #fef3c7, #fde68a); border: 2px solid #f59e0b; border-radius: 8px; padding: 0.55rem 0.7rem; margin-bottom: 0.75rem; cursor: pointer; box-shadow: 0 2px 6px rgba(245, 158, 11, 0.2); transition: transform 0.15s ease;" onclick="startExamMode(false, 'exam_24')" title="Letzte AP1-Prüfung direkt im interaktiven Split-Screen starten">
-                    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.2rem;">
-                        <strong style="color: #92400e; font-size: 0.86rem; display: flex; align-items: center; gap: 0.35rem;">
-                            <i class="fa-solid fa-star" style="color: #d97706;"></i> Letzte AP1-Prüfung (2026)
-                        </strong>
-                        <span style="background: #d97706; color: white; font-size: 0.68rem; font-weight: 800; padding: 0.12rem 0.45rem; border-radius: 999px;">STARTEN ➔</span>
+                <!-- Highlight Mini-Kachel: Letzte AP1 Prüfung -->
+                <div class="special-mini-tile tile-calc" onclick="startExamMode(false, 'exam_24')" title="Letzte AP1-Prüfung (BaWü 2026 mit Anlagen 2-6) im Split-View starten" style="cursor: pointer; margin-bottom: 0.3rem;">
+                    <span class="mini-tile-content">
+                        <i class="fa-solid fa-star" style="color: #d97706;"></i>
+                        <span>Letzte AP1-Prüfung (2026)</span>
+                    </span>
+                    <span style="font-size: 0.65rem; background: #d97706; color: white; padding: 0.1rem 0.35rem; border-radius: 4px; font-weight: 800;">START ➔</span>
+                </div>
+
+                <!-- Die 3 Prüfungsbereiche als dünne Mini-Kacheln mit Überschrift -->
+                <div style="display: flex; flex-direction: column; gap: 0.25rem; margin-bottom: 0.35rem;">
+                    <div class="special-mini-tile" style="background: #eef2ff; border: 1px solid #c7d2fe; border-left: 3px solid #6366f1; color: #312e81; padding: 0.32rem 0.55rem;" onclick="openAp2BridgeModal('pb2')" title="PB 2: Planen eines Softwareproduktes (Architektur, UI/UX, ERM)">
+                        <span class="mini-tile-content">
+                            <i class="fa-solid fa-diagram-project" style="color: #6366f1;"></i>
+                            <span>1. Softwareprodukt (PB 2)</span>
+                        </span>
+                        <i class="fa-solid fa-arrow-right mini-tile-arrow" style="color: #6366f1;"></i>
                     </div>
-                    <div style="font-size: 0.76rem; color: #78350f; line-height: 1.3;">
-                        SolarTech &amp; WLAN • Anlagen 2–6 im Split-View (VLSM, NWA, OOP)
+                    <div class="special-mini-tile" style="background: #ecfeff; border: 1px solid #a5f3fc; border-left: 3px solid #06b6d4; color: #164e63; padding: 0.32rem 0.55rem;" onclick="openAp2BridgeModal('pb3')" title="PB 3: Algorithmen & Logik (Pseudocode, SQL, Debugging)">
+                        <span class="mini-tile-content">
+                            <i class="fa-solid fa-code" style="color: #0891b2;"></i>
+                            <span>2. Algorithmen &amp; Logik (PB 3)</span>
+                        </span>
+                        <i class="fa-solid fa-arrow-right mini-tile-arrow" style="color: #0891b2;"></i>
+                    </div>
+                    <div class="special-mini-tile" style="background: #fdf2f8; border: 1px solid #fbcfe8; border-left: 3px solid #ec4899; color: #831843; padding: 0.32rem 0.55rem;" onclick="openAp2BridgeModal('pb4')" title="PB 4: WiSo Wirtschafts- & Sozialkunde">
+                        <span class="mini-tile-content">
+                            <i class="fa-solid fa-scale-balanced" style="color: #db2777;"></i>
+                            <span>3. WiSo (PB 4)</span>
+                        </span>
+                        <i class="fa-solid fa-arrow-right mini-tile-arrow" style="color: #db2777;"></i>
                     </div>
                 </div>
 
-                <div style="display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 0.85rem; font-size: 0.82rem;">
-                    <div style="background: #eef2ff; border-left: 3px solid #6366f1; padding: 0.4rem 0.6rem; border-radius: 4px; color: #312e81; cursor: pointer;" onclick="openAp2BridgeModal('pb2')">
-                        <strong>1. Softwareprodukt planen (PB 2)</strong><br>
-                        <span style="color: #4338ca; font-size: 0.78rem;">Architektur, UI/UX, ERM, Testpläne (ca. 90 Min)</span>
-                    </div>
-                    <div style="background: #ecfeff; border-left: 3px solid #06b6d4; padding: 0.4rem 0.6rem; border-radius: 4px; color: #164e63; cursor: pointer;" onclick="openAp2BridgeModal('pb3')">
-                        <strong>2. Algorithmen &amp; Logik (PB 3)</strong><br>
-                        <span style="color: #0e7490; font-size: 0.78rem;">Pseudocode, Debugging, SQL-Joins (ca. 90 Min)</span>
-                    </div>
-                    <div style="background: #fdf2f8; border-left: 3px solid #ec4899; padding: 0.4rem 0.6rem; border-radius: 4px; color: #831843; cursor: pointer;" onclick="openAp2BridgeModal('pb4')">
-                        <strong>3. WiSo (PB 4)</strong><br>
-                        <span style="color: #be185d; font-size: 0.78rem;">Arbeitsrecht, Kündigung, Betriebsrat &amp; Verträge (ca. 60 Min)</span>
-                    </div>
-                </div>
-
-                <div style="display: flex; gap: 0.4rem; margin-bottom: 0.5rem;">
-                    <button class="btn btn-secondary" onclick="openAp2BridgeModal('files')" title="Original-Prüfungen auf deinem PC anzeigen" style="flex: 1; padding: 0.45rem 0.5rem; font-size: 0.8rem; border-radius: 6px; display: inline-flex; align-items: center; justify-content: center; gap: 0.3rem; border: 1px solid #cbd5e1; background: #f8fafc; font-weight: 600;">
+                <!-- Quellen-Buttons -->
+                <div style="display: flex; gap: 0.3rem; margin-bottom: 0.35rem;">
+                    <button class="btn btn-secondary" onclick="openAp2BridgeModal('files')" title="Original-Prüfungen auf deinem PC anzeigen" style="flex: 1; padding: 0.28rem 0.45rem; font-size: 0.76rem; border-radius: 5px; display: inline-flex; align-items: center; justify-content: center; gap: 0.3rem; border: 1px solid #cbd5e1; background: #f8fafc; font-weight: 600; white-space: nowrap;">
                         <i class="fa-solid fa-folder-open" style="color: #f59e0b;"></i> PC-Dateien (81)
                     </button>
-                    <button class="btn btn-secondary" onclick="openAp2BridgeModal('web')" title="Offizielle Web-Quellen & Standards" style="flex: 1; padding: 0.45rem 0.5rem; font-size: 0.8rem; border-radius: 6px; display: inline-flex; align-items: center; gap: 0.3rem; justify-content: center; border: 1px solid #cbd5e1; background: #f8fafc; font-weight: 600;">
+                    <button class="btn btn-secondary" onclick="openAp2BridgeModal('web')" title="Offizielle Web-Quellen & Standards" style="flex: 1; padding: 0.28rem 0.45rem; font-size: 0.76rem; border-radius: 5px; display: inline-flex; align-items: center; gap: 0.3rem; justify-content: center; border: 1px solid #cbd5e1; background: #f8fafc; font-weight: 600; white-space: nowrap;">
                         <i class="fa-solid fa-globe" style="color: #3b82f6;"></i> Web-Quellen
                     </button>
                 </div>
 
-                <button class="btn btn-full" id="open-ap2-bridge-btn" onclick="openAp2BridgeModal('pb2')" style="background: linear-gradient(135deg, #4f46e5, #7c3aed); color: white; font-weight: 700; font-size: 0.9rem; padding: 0.65rem 1rem; border-radius: 8px; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 0.5rem; box-shadow: 0 4px 10px rgba(79, 70, 229, 0.28); transition: transform 0.15s ease;">
-                    <i class="fa-solid fa-rocket"></i> AP2-Lernhub &amp; Aufgaben öffnen
+                <!-- Launch Button -->
+                <button class="btn btn-full" id="open-ap2-bridge-btn" onclick="openAp2BridgeModal('pb2')" style="background: linear-gradient(135deg, #4f46e5, #7c3aed); color: white; font-weight: 700; font-size: 0.82rem; padding: 0.42rem 0.75rem; border-radius: 6px; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 0.4rem; box-shadow: 0 2px 6px rgba(79, 70, 229, 0.2); transition: transform 0.15s ease;">
+                    <i class="fa-solid fa-rocket"></i> AP2-Lernhub öffnen ↗
                 </button>
             </div>
 
@@ -1723,13 +1728,13 @@ ORDER BY gesamtumsatz DESC;</pre>
     </div>
 
 
-    <script src="diagrams.js?v=146"></script>
-    <script src="exam_data.js?v=146"></script>
-    <script src="questions.js?v=146"></script>
-    <script src="generator.js?v=146"></script>
-    <script src="ap2_bridge.js?v=146"></script>
-    <script src="exam_attachments.js?v=146"></script>
-    <script src="app.js?v=146"></script>
+    <script src="diagrams.js?v=147"></script>
+    <script src="exam_data.js?v=147"></script>
+    <script src="questions.js?v=147"></script>
+    <script src="generator.js?v=147"></script>
+    <script src="ap2_bridge.js?v=147"></script>
+    <script src="exam_attachments.js?v=147"></script>
+    <script src="app.js?v=147"></script>
 
     <!-- PIN Sicherheits-Gatekeeper -->
     <script>
