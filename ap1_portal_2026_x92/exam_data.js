@@ -6953,7 +6953,7 @@ Führen Sie auf Grundlage des Vorgabeblatts Anlage 7 die Nutzwertanalyse durch. 
                                 ["Lärm / Lautstärke im Großraumbüro (dB(A))", "25 %", "3", "75", "5", "125", "1", "25"],
                                 ["Ökologie / Energieeffizienz (Netzteil 80 Plus / Wirkungsgrad)", "25 %", "5", "125", "4", "100", "1", "25"],
                                 ["Preis / Wirtschaftlichkeit (Budget <= 1.000 €)", "10 %", "5", "50", "4", "40", "3", "30"],
-                                ["GESAMTSUMME NUTZWERT", "100 %", "", "290", "", "425", "", "280"]
+                                ["GESAMTSUMME NUTZWERT", "100 %", "-", "", "-", "", "-", ""]
                             ],
                             solutions: {
                                 "4_3": "290",
@@ -6978,12 +6978,12 @@ Vervollständigen Sie die Angebotstabelle auf dem Vorgabeblatt Anlage 8 mit Meng
                         tableConfig: {
                             headers: ["Pos.", "Artikelbezeichnung & Leistung", "Menge", "Einzelpreis netto", "Gesamtpreis netto"],
                             rows: [
-                                ["1", "Arbeitsplatzrechner PC 2 (4-Kern 4,2 GHz, 32 GB RAM, 512 GB SSD, 6 GB GPU)", "15", "850,00 €", "12.750,00 €"],
-                                ["2", "Betriebssystem-Lizenz Microsoft Windows 10 Pro 64-Bit", "15", "110,00 €", "1.650,00 €"],
-                                ["3", "Dienstleistung: Installation des Betriebssystems und Aufbau vor Ort", "15", "40,00 €", "600,00 €"],
-                                ["", "Gesamtpreis netto", "", "", "15.000,00 €"],
-                                ["", "Zzgl. 19 % Umsatzsteuer (MwSt.)", "", "", "2.850,00 €"],
-                                ["", "Gesamtbetrag brutto", "", "", "17.850,00 €"]
+                                ["1", "Arbeitsplatzrechner PC 2 (4-Kern 4,2 GHz, 32 GB RAM, 512 GB SSD, 6 GB GPU)", "", "850,00 €", ""],
+                                ["2", "Betriebssystem-Lizenz Microsoft Windows 10 Pro 64-Bit", "", "110,00 €", ""],
+                                ["3", "Dienstleistung: Installation des Betriebssystems und Aufbau vor Ort", "", "40,00 €", ""],
+                                ["", "Gesamtpreis netto", "-", "-", ""],
+                                ["", "Zzgl. 19 % Umsatzsteuer (MwSt.)", "-", "-", ""],
+                                ["", "Gesamtbetrag brutto", "-", "-", ""]
                             ],
                             solutions: {
                                 "0_2": "15", "0_4": "12.750,00 €",
@@ -7034,12 +7034,12 @@ Vervollständigen Sie die Adresstabelle (Anlage 9) für die neu zu beschaffenden
                         tableConfig: {
                             headers: ["Device & Interface", "IP-Adresse", "Default Gateway", "Netzwerkadresse / Präfix", "Broadcast-Adresse"],
                             rows: [
-                                ["Computer Nr. 31 (NIC IPv4)", "192.168.3.81 /24", "192.168.3.2", "192.168.3.0", "192.168.3.255"],
-                                ["Computer Nr. 31 (NIC IPv6 gekürzt)", "2003:f3:700:6c00:9::51 /64", "fe80::1", "2003:f3:700:6c00::/64", "/"],
-                                ["Computer Nr. 31 (NIC IPv6 ungekürzt)", "2003:00f3:0700:6c00:0009:0000:0000:0051 /64", "fe80:0000:0000:0000:0000:0000:0000:0001", "2003:00f3:0700:6c00:0000:0000:0000:0000 /64", "/"],
-                                ["Computer Nr. 45 (NIC IPv4)", "192.168.3.95 /24", "192.168.3.2", "192.168.3.0", "192.168.3.255"],
-                                ["Computer Nr. 45 (NIC IPv6 gekürzt)", "2003:f3:700:6c00:9::5f /64", "fe80::1", "2003:f3:700:6c00::/64", "/"],
-                                ["Computer Nr. 45 (NIC IPv6 ungekürzt)", "2003:00f3:0700:6c00:0009:0000:0000:005f /64", "fe80:0000:0000:0000:0000:0000:0000:0001", "2003:00f3:0700:6c00:0000:0000:0000:0000 /64", "/"]
+                                ["Computer Nr. 31 (NIC IPv4)", "192.168.3.81 /24", "", "", ""],
+                                ["Computer Nr. 31 (NIC IPv6 gekürzt)", "", "", "", "/"],
+                                ["Computer Nr. 31 (NIC IPv6 ungekürzt)", "", "fe80:0000:0000:0000:0000:0000:0000:0001", "2003:00f3:0700:6c00:0000:0000:0000:0000 /64", "/"],
+                                ["Computer Nr. 45 (NIC IPv4)", "192.168.3.95 /24", "", "", ""],
+                                ["Computer Nr. 45 (NIC IPv6 gekürzt)", "", "", "", "/"],
+                                ["Computer Nr. 45 (NIC IPv6 ungekürzt)", "", "fe80:0000:0000:0000:0000:0000:0000:0001", "2003:00f3:0700:6c00:0000:0000:0000:0000 /64", "/"]
                             ],
                             solutions: {
                                 "0_2": "192.168.3.2", "0_3": "192.168.3.0", "0_4": "192.168.3.255",
@@ -7075,9 +7075,9 @@ Nennen Sie drei Ursachen für diese Fehlermeldung, die sich auf drei unterschied
                         tableConfig: {
                             headers: ["OSI-Schicht", "Mögliche Fehlerursache", "Verfahren / Befehl zur Diagnose"],
                             rows: [
-                                ["Schicht 1 (Physical Layer)", "Netzwerkkabel nicht eingesteckt, Wackelkontakt oder Patchkabel defekt", "Link-LED an Netzwerkkarte/Switch prüfen, Kabeltester oder Kabel austauschen"],
-                                ["Schicht 3 (Network Layer)", "Default Gateway falsch konfiguriert oder IP-Adresse im falschen Subnetz", "Befehl 'ipconfig /all', Ping auf Default Gateway (192.168.3.2) oder Loopback (127.0.0.1)"],
-                                ["Schicht 7 (Application Layer)", "DNS-Server ausgefallen oder falscher DNS-Server im Client eingetragen", "Befehl 'nslookup www.google.de', Ping direkt auf externe IP (z. B. 8.8.8.8)"]
+                                ["", "Netzwerkkabel nicht eingesteckt, Wackelkontakt oder Patchkabel defekt", "Link-LED an Netzwerkkarte/Switch prüfen, Kabeltester oder Kabel austauschen"],
+                                ["", "Default Gateway falsch konfiguriert oder IP-Adresse im falschen Subnetz", "Befehl 'ipconfig /all', Ping auf Default Gateway (192.168.3.2) oder Loopback (127.0.0.1)"],
+                                ["", "DNS-Server ausgefallen oder falscher DNS-Server im Client eingetragen", "Befehl 'nslookup www.google.de', Ping direkt auf externe IP (z. B. 8.8.8.8)"]
                             ],
                             solutions: {
                                 "0_0": "Schicht 1 (Physical Layer)",
@@ -7118,9 +7118,9 @@ Führen Sie anhand des BSI-Kriterienkatalogs (Anlage 5) eine Schutzbedarfsanalys
                         tableConfig: {
                             headers: ["Schutzziel", "Schutzbedarfskategorie", "Fachliche Begründung nach BSI IT-Grundschutz"],
                             rows: [
-                                ["Vertraulichkeit", "Vertraulich", "Kommt-/Geht-Zeiten und Personal-IDs sind personenbezogene Mitarbeiterdaten. Eine unbefugte Einsicht ermöglicht Verhaltens- und Leistungskontrollen und verletzt das Recht auf informationelle Selbstbestimmung."],
-                                ["Verfügbarkeit", "Normal", "Bei Ausfall des Zeiterfassungssystems kann temporär auf manuelle Zeiterfassung (Stundenzettel / E-Mail an Vorgesetzten) ausgewichen werden. Die eigentliche Geschäftstätigkeit der DarSys GmbH wird nicht unmittelbar gefährdet."],
-                                ["Integrität", "Normale bis erhöhte Anforderung", "Fehlerhafte Buchungen können am Monatsende vor der Gehaltsabrechnung durch Mitarbeiter oder HR manuell kontrolliert und korrigiert werden. Eine Manipulation führt nicht zu irreparablen Schäden."]
+                                ["Vertraulichkeit", "", "Kommt-/Geht-Zeiten und Personal-IDs sind personenbezogene Mitarbeiterdaten. Eine unbefugte Einsicht ermöglicht Verhaltens- und Leistungskontrollen und verletzt das Recht auf informationelle Selbstbestimmung."],
+                                ["Verfügbarkeit", "", "Bei Ausfall des Zeiterfassungssystems kann temporär auf manuelle Zeiterfassung (Stundenzettel / E-Mail an Vorgesetzten) ausgewichen werden. Die eigentliche Geschäftstätigkeit der DarSys GmbH wird nicht unmittelbar gefährdet."],
+                                ["Integrität", "", "Fehlerhafte Buchungen können am Monatsende vor der Gehaltsabrechnung durch Mitarbeiter oder HR manuell kontrolliert und korrigiert werden. Eine Manipulation führt nicht zu irreparablen Schäden."]
                             ],
                             solutions: {
                                 "0_1": "Vertraulich",
@@ -7141,15 +7141,15 @@ Ermitteln Sie die beiden Tabellen tblUserAccount und tblLogEntry auf dem Vorgabe
                         tableConfig: {
                             headers: ["Tabelle", "Spaltenname", "Datentyp", "Schlüsselart (PK / FK)"],
                             rows: [
-                                ["tblUserAccount", "persid", "INT", "PK (Primary Key)"],
+                                ["tblUserAccount", "persid", "INT", ""],
                                 ["tblUserAccount", "vorname", "VARCHAR(45)", ""],
                                 ["tblUserAccount", "nachname", "VARCHAR(45)", ""],
                                 ["tblUserAccount", "lastUpdate", "DATETIME", ""],
-                                ["tblLogEntry", "id", "INT", "PK (Primary Key)"],
+                                ["tblLogEntry", "id", "INT", ""],
                                 ["tblLogEntry", "type", "VARCHAR(20) / ENUM", ""],
                                 ["tblLogEntry", "time", "DATETIME", ""],
                                 ["tblLogEntry", "host", "VARCHAR(15)", ""],
-                                ["tblLogEntry", "persid", "INT", "FK (Foreign Key)"]
+                                ["tblLogEntry", "persid", "INT", ""]
                             ],
                             solutions: {
                                 "0_3": "PK (Primary Key)",
@@ -7329,14 +7329,23 @@ Hinweis zur Adressvergabe:
                         tableConfig: {
                             headers: ["Netzwerkname", "Zahl Hosts", "Netzwerkadresse", "Subnetzmaske nach CIDR", "IP-Range PCs", "IP-Adresse Standard-Gateway"],
                             rows: [
-                                ["WLAN1", "50", "192.168.10.0", "/26", "192.168.10.2 - 192.168.10.62", "192.168.10.1"],
-                                ["WLAN2", "50", "192.168.10.64", "/26", "192.168.10.66 - 192.168.10.126", "192.168.10.65"],
-                                ["LAN1", "25", "192.168.10.128", "/27", "192.168.10.130 - 192.168.10.158", "192.168.10.129"],
-                                ["LAN2", "25", "192.168.10.160", "/27", "192.168.10.162 - 192.168.10.190", "192.168.10.161"],
-                                ["Servernetzwerk", "10", "192.168.10.192", "/28", "192.168.10.194 - 192.168.10.206", "192.168.10.193"],
-                                ["Netzwerkmanagement", "10", "192.168.10.208", "/28", "192.168.10.210 - 192.168.10.222", "192.168.10.209"],
-                                ["VPN Transfernetzwerk", "2", "192.168.10.224", "/30", "-", "192.168.10.225 / 192.168.10.226"]
-                            ]
+                                ["WLAN1", "50", "", "", "", ""],
+                                ["WLAN2", "50", "", "", "", ""],
+                                ["LAN1", "25", "", "", "", ""],
+                                ["LAN2", "25", "", "", "", ""],
+                                ["Servernetzwerk", "10", "", "", "", ""],
+                                ["Netzwerkmanagement", "10", "", "", "", ""],
+                                ["VPN Transfernetzwerk", "2", "", "", "-", ""]
+                            ],
+                            solutions: {
+                                "0_2": "192.168.10.0", "0_3": "/26", "0_4": "192.168.10.2 - 192.168.10.62", "0_5": "192.168.10.1",
+                                "1_2": "192.168.10.64", "1_3": "/26", "1_4": "192.168.10.66 - 192.168.10.126", "1_5": "192.168.10.65",
+                                "2_2": "192.168.10.128", "2_3": "/27", "2_4": "192.168.10.130 - 192.168.10.158", "2_5": "192.168.10.129",
+                                "3_2": "192.168.10.160", "3_3": "/27", "3_4": "192.168.10.162 - 192.168.10.190", "3_5": "192.168.10.161",
+                                "4_2": "192.168.10.192", "4_3": "/28", "4_4": "192.168.10.194 - 192.168.10.206", "4_5": "192.168.10.193",
+                                "5_2": "192.168.10.208", "5_3": "/28", "5_4": "192.168.10.210 - 192.168.10.222", "5_5": "192.168.10.209",
+                                "6_2": "192.168.10.224", "6_3": "/30", "6_5": "192.168.10.225 / 192.168.10.226"
+                            }
                         },
                         solution: `Offizielle Musterlösung für Anlage 3 (VLSM-Subnetztabelle):
 Sortierung absteigend nach Hostbedarf:
@@ -7470,15 +7479,24 @@ Berechnen Sie für alle drei Alternativen den Einstandspreis (Bezugspreis) pro S
                             headers: ["Kalkulationsposition", "AZOS AP-42 (%)", "AZOS AP-42 (€)", "Getnear AP-08 (%)", "Getnear AP-08 (€)", "ELink AP-15 (%)", "ELink AP-15 (€)"],
                             rows: [
                                 ["Listenpreis (pro Stück)", "-", "178,31 €", "-", "221,73 €", "-", "237,18 €"],
-                                ["Listenpreis (Gesamt 10 Stk.)", "100%", "1.783,10 €", "100%", "2.217,30 €", "100%", "2.371,80 €"],
-                                ["- Lieferrabatt", "10%", "178,31 €", "15%", "332,60 €", "20%", "474,36 €"],
-                                ["= Zieleinkaufspreis", "90%", "1.604,79 €", "85%", "1.884,70 €", "80%", "1.897,44 €"],
-                                ["- Lieferskonti", "2%", "32,10 €", "3%", "56,54 €", "2%", "37,95 €"],
-                                ["= Bareinkaufspreis", "98%", "1.572,69 €", "97%", "1.828,16 €", "98%", "1.859,49 €"],
+                                ["Listenpreis (Gesamt 10 Stk.)", "100%", "", "100%", "", "100%", ""],
+                                ["- Lieferrabatt", "10%", "", "15%", "", "20%", ""],
+                                ["= Zieleinkaufspreis", "90%", "", "85%", "", "80%", ""],
+                                ["- Lieferskonti", "2%", "", "3%", "", "2%", ""],
+                                ["= Bareinkaufspreis", "98%", "", "97%", "", "98%", ""],
                                 ["+ Bezugskosten", "-", "25,00 €", "-", "0,00 €", "-", "35,00 €"],
-                                ["= Einstandspreis (Gesamt)", "-", "1.597,69 €", "-", "1.828,16 €", "-", "1.894,49 €"],
-                                ["= Einstandspreis (pro Stück)", "-", "159,77 €", "-", "182,82 €", "-", "189,45 €"]
-                            ]
+                                ["= Einstandspreis (Gesamt)", "-", "", "-", "", "-", ""],
+                                ["= Einstandspreis (pro Stück)", "-", "", "-", "", "-", ""]
+                            ],
+                            solutions: {
+                                "1_2": "1.783,10 €", "1_4": "2.217,30 €", "1_6": "2.371,80 €",
+                                "2_2": "178,31 €",   "2_4": "332,60 €",   "2_6": "474,36 €",
+                                "3_2": "1.604,79 €", "3_4": "1.884,70 €", "3_6": "1.897,44 €",
+                                "4_2": "32,10 €",    "4_4": "56,54 €",    "4_6": "37,95 €",
+                                "5_2": "1.572,69 €", "5_4": "1.828,16 €", "5_6": "1.859,49 €",
+                                "7_2": "1.597,69 €", "7_4": "1.828,16 €", "7_6": "1.894,49 €",
+                                "8_2": "159,77 €",   "8_4": "182,82 €",   "8_6": "189,45 €"
+                            }
                         },
                         solution: `Musterlösung für Anlage 4 (Bezugskalkulation für 10 Access Points):
 
@@ -7529,14 +7547,23 @@ Berechnen Sie in Anlage 5 die gewichteten Punkte, die Gesamtpunktesumme und leit
                         tableConfig: {
                             headers: ["Entscheidungskriterium", "Gewichtung", "AZOS (Pkt)", "AZOS (gew.)", "Getnear (Pkt)", "Getnear (gew.)", "ELink (Pkt)", "ELink (gew.)"],
                             rows: [
-                                ["Übertragungsrate", "40", "10", "400", "7", "280", "3", "120"],
-                                ["Sicherheit", "30", "10", "300", "5", "150", "10", "300"],
-                                ["Leistungsaufnahme", "5", "10", "50", "5", "25", "8", "40"],
-                                ["Betriebsdauer (MTBF)", "20", "10", "200", "7", "140", "5", "100"],
-                                ["Garantie", "5", "10", "50", "5", "25", "5", "25"],
-                                ["Punktesumme", "100", "-", "1000", "-", "620", "-", "585"],
-                                ["Rangfolge", "-", "-", "1", "-", "2", "-", "3"]
-                            ]
+                                ["Übertragungsrate", "40", "", "", "", "", "", ""],
+                                ["Sicherheit", "30", "", "", "", "", "", ""],
+                                ["Leistungsaufnahme", "5", "", "", "", "", "", ""],
+                                ["Betriebsdauer (MTBF)", "20", "", "", "", "", "", ""],
+                                ["Garantie", "5", "", "", "", "", "", ""],
+                                ["Punktesumme", "100", "-", "", "-", "", "-", ""],
+                                ["Rangfolge", "-", "-", "", "-", "", "-", ""]
+                            ],
+                            solutions: {
+                                "0_2": "10", "0_3": "400", "0_4": "7", "0_5": "280", "0_6": "3",  "0_7": "120",
+                                "1_2": "10", "1_3": "300", "1_4": "5", "1_5": "150", "1_6": "10", "1_7": "300",
+                                "2_2": "10", "2_3": "50",  "2_4": "5", "2_5": "25",  "2_6": "8",  "2_7": "40",
+                                "3_2": "10", "3_3": "200", "3_4": "7", "3_5": "140", "3_6": "5",  "3_7": "100",
+                                "4_2": "10", "4_3": "50",  "4_4": "5", "4_5": "25",  "4_6": "5",  "4_7": "25",
+                                "5_3": "1000", "5_5": "620", "5_7": "585",
+                                "6_3": "1",    "6_5": "2",   "6_7": "3"
+                            }
                         },
                         solution: `Musterlösung für Anlage 5 (Nutzwertanalyse):
 
