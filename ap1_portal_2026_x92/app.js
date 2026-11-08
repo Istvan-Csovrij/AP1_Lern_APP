@@ -2083,6 +2083,25 @@ function renderDeckblatt(container) {
 
                 ${stampHtml}
 
+                ${isExamSubmitted ? `
+                <div style="background: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%); border: 1.5px solid #6ee7b7; border-radius: 8px; padding: 12px 16px; margin: 12px 0; text-align: left; box-shadow: 0 2px 6px rgba(16, 185, 129, 0.08);">
+                    <div style="font-weight: bold; color: #065f46; font-size: 0.95rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+                        <span><i class="fa-solid fa-file-circle-check" style="color: #059669;"></i> Deine Antworten sind vollständig gespeichert!</span>
+                        <span style="font-size: 0.78rem; background: #d1fae5; color: #047857; padding: 2px 8px; border-radius: 4px; font-weight: 700;">IHK-Prüfungsheft Simulation</span>
+                    </div>
+                    <p style="font-size: 0.85rem; color: #064e3b; margin: 6px 0 0 0; line-height: 1.45;">
+                        Bei handschriftlichen IHK-Freitextaufgaben werden die Punkte im <strong>rechten Korrekturrand</strong> jeder Aufgabe eingetragen. Deine Antworten wurden automatisch mit der Musterlösung abgeglichen. Du kannst die Punkte unten mit der <strong>⚡ Auto-Korrektur</strong> neu berechnen, deine <strong>Punkte direkt eingeben (z. B. 55 Punkte)</strong> oder zu <strong>Aufgabe 1 bis 4</strong> blättern, um deine Texte mit der offiziellen Musterlösung zu vergleichen!
+                    </p>
+                    <div style="margin-top: 10px; display: flex; gap: 8px; flex-wrap: wrap;">
+                        <button type="button" onclick="autoGradeEntireExam(true); renderCurrentExamPage();" style="background: #0284c7; color: white; border: none; font-size: 0.82rem; font-weight: 700; padding: 6px 14px; border-radius: 5px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; box-shadow: 0 1px 3px rgba(2, 132, 199, 0.2);">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i> ⚡ Auto-Korrektur (Schlüsselwörter auswerten)
+                        </button>
+                        <button type="button" onclick="setCustomTotalExamScore()" style="background: #10b981; color: white; border: none; font-size: 0.82rem; font-weight: 700; padding: 6px 14px; border-radius: 5px; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; box-shadow: 0 1px 3px rgba(16, 185, 129, 0.2);">
+                            <i class="fa-solid fa-pen-to-square"></i> ✏️ Gesamtpunkte anpassen (z. B. 55 Pkt)
+                        </button>
+                    </div>
+                </div>` : ''}
+
                 <!-- Two-column info boxes -->
                 <div class="deckblatt-columns">
                     <!-- Scope box (Left) -->
@@ -2147,7 +2166,14 @@ function renderDeckblatt(container) {
                                     return `<tr>
                                         <td class="label-col">${idx + 1}. Aufgabe: ${escapeHtml(label)}</td>
                                         <td>${pts}</td>
-                                        <td style="font-weight: bold; font-size: 1.05rem; color: #dc2626;">${scoreVal}</td>
+                                        ${isExamSubmitted ? `
+                                        <td style="text-align: center; padding: 4px;">
+                                            <input type="number" min="0" max="${pts}" step="0.5" value="${scoreVal}"
+                                                   onchange="setTaskScoreDirectly(${idx}, this.value)"
+                                                   style="width: 65px; text-align: center; font-weight: bold; font-size: 1rem; border: 1.5px solid ${scoreVal >= (pts*0.5) ? '#10b981' : '#f87171'}; border-radius: 4px; padding: 3px; color: ${scoreVal >= (pts*0.5) ? '#065f46' : '#991b1b'}; background: ${scoreVal >= (pts*0.5) ? '#ecfdf5' : '#fef2f2'};"
+                                                   title="Punkte für ${idx + 1}. Aufgabe direkt anpassen">
+                                        </td>
+                                    ` : `<td style="font-weight: bold; font-size: 1.05rem; color: #dc2626;">${scoreVal}</td>`}
                                         <td style="color: #64748b; font-style: italic;">${isExamSubmitted ? 'gez. Prüfer' : ''}</td>
                                     </tr>`;
                                 }).join('')}
@@ -2532,6 +2558,156 @@ function updateSubtaskScore(subId, pointsStr, maxPoints) {
 }
 
 // Calculates scores across all tasks (dynamic task count)
+
+// =========================================================================
+// INTELLIGENTE AUTO-KORREKTUR & PUNKTE-VERWALTUNG FÜR FREITEXT-PRÜFUNGEN
+// =========================================================================
+
+// Bewertet eine einzelne Teilaufgabe anhand der Musterlösung und Schlüsselwörter
+function autoGradeSubtask(sub) {
+    if (!sub) return 0;
+    const maxPts = sub.points || 0;
+    if (maxPts <= 0) return 0;
+
+    const userVal = examAnswersData[sub.id];
+    if (userVal === undefined || userVal === null) return 0;
+
+    const userStr = typeof userVal === "string" ? userVal.trim() : JSON.stringify(userVal);
+    if (!userStr || userStr.length < 3) return 0;
+
+    // A) Zuordnungstabellen
+    if (sub.type === "table" || sub.tableConfig) {
+        let correctCells = 0;
+        let totalCells = 1;
+        if (sub.tableConfig && sub.tableConfig.rows) {
+            totalCells = sub.tableConfig.rows.length;
+            if (typeof userVal === "object") {
+                Object.keys(userVal).forEach(k => {
+                    const cellVal = (userVal[k] || "").toLowerCase().trim();
+                    if (cellVal.length > 2 && sub.solution && sub.solution.toLowerCase().includes(cellVal)) {
+                        correctCells++;
+                    }
+                });
+            } else if (typeof userVal === "string") {
+                sub.tableConfig.rows.forEach(r => {
+                    const rowText = (Array.isArray(r) ? r.join(" ") : String(r)).toLowerCase();
+                    const words = rowText.split(/\s+/).filter(w => w.length > 4);
+                    if (words.some(w => userStr.toLowerCase().includes(w))) {
+                        correctCells++;
+                    }
+                });
+            }
+            if (correctCells === 0 && userStr.length > 20) correctCells = Math.round(totalCells * 0.5);
+            return Math.min(maxPts, Math.round((correctCells / totalCells) * maxPts * 10) / 10);
+        }
+    }
+
+    // B) Freitext (lines) & Rechengitter (math-grid)
+    const solText = sub.solution || "";
+    if (!solText) {
+        return Math.min(maxPts, Math.round(maxPts * Math.min(1.0, userStr.length / 120) * 0.7 * 10) / 10);
+    }
+
+    const stopWords = new Set(["der","die","das","ein","eine","einer","eines","einem","einen","und","oder","aber","wenn","dann","nach","mit","von","für","über","unter","vor","hinter","durch","bei","aus","auf","zu","zum","zur","im","in","am","an","ist","sind","war","waren","wird","werden","wurde","wurden","kann","können","konnte","könnten","muss","müssen","sollte","sollten","wie","als","auch","nicht","dass","sich","man","es","er","sie","ihre","ihrer","ihrem","ihren","seine","seiner","seinem","seinen","welche","welcher","welches","dieser","diese","dieses"]);
+
+    const words = solText.toLowerCase().match(/[a-z0-9äöüß\-\.\/]{3,}/g) || [];
+    const keywords = [];
+    const seen = new Set();
+    words.forEach(w => {
+        if (!stopWords.has(w) && !seen.has(w) && !/^\d+$/.test(w)) {
+            seen.add(w);
+            keywords.push(w);
+        }
+    });
+
+    if (keywords.length === 0) {
+        return Math.min(maxPts, Math.round(maxPts * 0.6 * 10) / 10);
+    }
+
+    const userLower = userStr.toLowerCase();
+    let matches = 0;
+    keywords.forEach(kw => {
+        if (userLower.includes(kw)) {
+            matches++;
+        }
+    });
+
+    const keywordRatio = matches / Math.max(keywords.length * 0.35, 4);
+    const lengthBonus = Math.min(1.0, userStr.length / 100);
+
+    let scoreRatio = (Math.min(1.0, keywordRatio) * 0.8) + (lengthBonus * 0.2);
+    if (matches >= 2 && scoreRatio < 0.45) scoreRatio = 0.50;
+
+    const earned = Math.min(maxPts, Math.round(maxPts * scoreRatio * 10) / 10);
+    return Math.max(0, earned);
+}
+
+// Bewertet automatisch die gesamte Prüfung
+function autoGradeEntireExam(forceOverwrite = false) {
+    if (!activeExamSet || !activeExamSet.tasks) return;
+
+    activeExamSet.tasks.forEach(task => {
+        if (!task.subtasks) return;
+        task.subtasks.forEach(sub => {
+            if (forceOverwrite || examScores[sub.id] === undefined || examScores[sub.id] === 0) {
+                const autoPts = autoGradeSubtask(sub);
+                examScores[sub.id] = autoPts;
+            }
+        });
+    });
+}
+
+// Ermöglicht die direkte Eingabe der Punkte für eine Aufgabe auf dem Deckblatt
+function setTaskScoreDirectly(taskIdx, newPtsStr) {
+    if (!activeExamSet || !activeExamSet.tasks || !activeExamSet.tasks[taskIdx]) return;
+    const task = activeExamSet.tasks[taskIdx];
+    const maxPts = task.totalPoints || task.maxPoints || 25;
+    let newPts = parseFloat(newPtsStr);
+    if (isNaN(newPts) || newPts < 0) newPts = 0;
+    if (newPts > maxPts) newPts = maxPts;
+
+    const subCount = task.subtasks ? task.subtasks.length : 1;
+    if (task.subtasks && subCount > 0) {
+        const factor = maxPts > 0 ? (newPts / maxPts) : 0;
+        task.subtasks.forEach(sub => {
+            examScores[sub.id] = Math.round((sub.points * factor) * 10) / 10;
+        });
+    }
+
+    renderCurrentExamPage();
+}
+
+// Schnelleingabe der Gesamtpunktzahl (z.B. für extern mit KI ermittelte Punkte)
+function setCustomTotalExamScore() {
+    const cur = calculateExamScoresSummary().totalPoints;
+    const input = prompt("Gib deine gewünschte Gesamtpunktzahl (0 bis 100 Punkte) ein (z. B. 55 für dein KI-Ergebnis):", cur > 0 ? cur : "55");
+    if (input === null) return;
+    let target = parseFloat(input);
+    if (isNaN(target) || target < 0) target = 0;
+    if (target > 100) target = 100;
+
+    if (!activeExamSet || !activeExamSet.tasks) return;
+
+    activeExamSet.tasks.forEach(task => {
+        const taskMax = task.totalPoints || task.maxPoints || 25;
+        const taskTarget = (target * (taskMax / 100.0));
+        const subFactor = taskMax > 0 ? (taskTarget / taskMax) : 0;
+        if (task.subtasks) {
+            task.subtasks.forEach(sub => {
+                examScores[sub.id] = Math.round((sub.points * subFactor) * 10) / 10;
+            });
+        }
+    });
+
+    renderCurrentExamPage();
+}
+
+window.autoGradeSubtask = autoGradeSubtask;
+window.autoGradeEntireExam = autoGradeEntireExam;
+window.setTaskScoreDirectly = setTaskScoreDirectly;
+window.setCustomTotalExamScore = setCustomTotalExamScore;
+
+
 function calculateExamScoresSummary() {
     const numTasks = activeExamSet && activeExamSet.tasks ? activeExamSet.tasks.length : 4;
     if (!activeExamSet) return { taskPoints: new Array(numTasks).fill(0), totalPoints: 0, gradeNum: 6, gradeText: "ungenügend", isPassed: false };
@@ -2587,6 +2763,12 @@ function submitExam() {
     if (pauseBtn) pauseBtn.style.display = "none";
     const pauseOverlay = document.getElementById("exam-pause-overlay");
     if (pauseOverlay) pauseOverlay.style.display = "none";
+
+    // Prüfen, ob bereits Punkte manuell eingetragen wurden. Wenn nicht, intelligente Auto-Korrektur ausführen!
+    const hasManualScores = Object.values(examScores).some(p => p > 0);
+    if (!hasManualScores) {
+        autoGradeEntireExam(false);
+    }
 
     // Calculate score
     const res = calculateExamScoresSummary();
