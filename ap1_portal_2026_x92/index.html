@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AP1 Prüfungstrainer - Fachinformatiker</title>
-    <link rel="stylesheet" href="style.css?v=149">
+    <link rel="stylesheet" href="style.css?v=150">
     <!-- FontAwesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -154,6 +154,15 @@
                         <i class="fa-solid fa-arrow-right mini-tile-arrow"></i>
                     </div>
 
+                    <!-- Kachel 6: Pseudocode & Algorithmen (Lesen & Schreiben) -->
+                    <div class="special-mini-tile tile-pseudocode" onclick="document.getElementById('pseudocode-filter-btn').click();" title="Pseudocode: Fertigen Code verstehen (Trace-Tabelle) & nach Aufgabe schreiben" style="background: linear-gradient(135deg, #eef2ff 0%, #f5f3ff 100%); border-left: 3px solid #6366f1; cursor: pointer;">
+                        <span class="mini-tile-content">
+                            <i class="fa-solid fa-code" style="color: #4f46e5;"></i>
+                            <span style="font-weight: 700; color: #3730a3;">💻 Pseudocode (Lesen/Schreiben)</span>
+                        </span>
+                        <i class="fa-solid fa-arrow-right mini-tile-arrow" style="color: #4f46e5;"></i>
+                    </div>
+
                     <!-- Kachel 5: OSI-Schichtenmodell Trainer & Aufgaben (LF 3) -->
                     <div class="special-mini-tile tile-osi" onclick="document.getElementById('osi-filter-btn').click();" title="OSI-Modell: 7 Schichten, Protokolle, PDUs & Geräte" style="background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%); border-left: 3px solid #10b981; cursor: pointer;">
                         <span class="mini-tile-content">
@@ -164,7 +173,7 @@
                     </div>
 
                     <!-- Kachel 4: Rechen- & Einheiten-Trainer -->
-                    <a href="rechentrainer.html?topic=ipv4_special_ranges&v=149" target="_blank" class="special-mini-tile tile-calc" title="Rechentrainer (AP1 / AP2)">
+                    <a href="rechentrainer.html?topic=ipv4_special_ranges&v=150" target="_blank" class="special-mini-tile tile-calc" title="Rechentrainer (AP1 / AP2)">
                         <span class="mini-tile-content">
                             <i class="fa-solid fa-calculator" style="color: #d97706;"></i>
                             <span>Rechentrainer (AP1/AP2)</span>
@@ -224,8 +233,11 @@
                         <i class="fa-solid fa-calculator" style="color: #0284c7;"></i> 🔢 Zahlensysteme &amp; Einheiten
                     </button>
                     <button class="filter-btn highlight-pseudocode-btn" data-theme="pseudocode" id="pseudocode-filter-btn">
-                        <i class="fa-solid fa-code" style="color: #059669;"></i> 💻 Pseudocode &amp; Ablauf
+                        <i class="fa-solid fa-code" style="color: #059669;"></i> 💻 Pseudocode (33+ Aufgaben)
                     </button>
+                    <a href="rechentrainer.html?topic=pseudocode_trainer&v=150" target="_blank" class="filter-btn highlight-pseudocode-trainer-btn" id="open-pseudocode-trainer-btn" style="border: 1px solid #6366f1; background: #eef2ff; color: #4338ca; text-decoration: none;">
+                        <i class="fa-solid fa-graduation-cap" style="color: #6366f1;"></i> 💻 Pseudocode-Trainer (Trace &amp; Schreiben) ↗
+                    </a>
                     <a href="../probeklausur_hotel_city_hof/?tab=python_studio" target="_blank" class="filter-btn highlight-python-btn" id="open-python-studio-btn">
                         <i class="fa-brands fa-python" style="color: #2563eb;"></i> 🐍 Python Funktions-Studio ↗
                     </a>
@@ -235,7 +247,7 @@
                     <button class="filter-btn highlight-osi-btn" data-theme="osi" id="osi-filter-btn" style="border: 2px solid #10b981; background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%); color: #065f46; font-weight: 700;">
                         <i class="fa-solid fa-layer-group" style="color: #059669;"></i> 📡 OSI-Schichtenmodell
                     </button>
-                    <a href="rechentrainer.html?topic=osi_layers_trainer&v=149" target="_blank" class="filter-btn highlight-osi-trainer-btn" id="open-osi-trainer-btn" style="border: 1px solid #10b981; background: #f0fdf4; color: #047857; text-decoration: none;">
+                    <a href="rechentrainer.html?topic=osi_layers_trainer&v=150" target="_blank" class="filter-btn highlight-osi-trainer-btn" id="open-osi-trainer-btn" style="border: 1px solid #10b981; background: #f0fdf4; color: #047857; text-decoration: none;">
                         <i class="fa-solid fa-graduation-cap" style="color: #059669;"></i> 📡 OSI-Trainer (20 Aufgaben) ↗
                     </a>
                     <button class="filter-btn highlight-bawue-btn" data-theme="bawue-focus" id="bawue-focus-btn">
@@ -800,14 +812,14 @@
                     </div>
                 </div>
                 <div style="display: flex; align-items: center; gap: 0.5rem;">
-                    <a href="rechentrainer.html?topic=ipv4_special_ranges&v=149" target="_blank" class="wb-action-btn" style="color: #0369a1; border: 1px solid #bae6fd; background: #e0f2fe; text-decoration: none; padding: 0.35rem 0.75rem; border-radius: 6px; font-size: 0.85rem; display: flex; align-items: center; gap: 0.35rem; font-weight: 600;">
+                    <a href="rechentrainer.html?topic=ipv4_special_ranges&v=150" target="_blank" class="wb-action-btn" style="color: #0369a1; border: 1px solid #bae6fd; background: #e0f2fe; text-decoration: none; padding: 0.35rem 0.75rem; border-radius: 6px; font-size: 0.85rem; display: flex; align-items: center; gap: 0.35rem; font-weight: 600;">
                         <i class="fa-solid fa-up-right-from-square"></i> <span>Im neuen Tab öffnen</span>
                     </a>
                     <button id="close-rechentrainer-btn" class="wb-close-btn" style="color: #64748b; background: none; border: none; font-size: 1.8rem; cursor: pointer; line-height: 1; padding: 0 0.5rem;" title="Schließen">&times;</button>
                 </div>
             </div>
             <div style="flex: 1; width: 100%; height: 100%; overflow: hidden;">
-                <iframe src="rechentrainer.html?topic=ipv4_special_ranges&v=149" style="width: 100%; height: 100%; border: none;"></iframe>
+                <iframe src="rechentrainer.html?topic=ipv4_special_ranges&v=150" style="width: 100%; height: 100%; border: none;"></iframe>
             </div>
         </div>
     </div>
@@ -1743,13 +1755,13 @@ ORDER BY gesamtumsatz DESC;</pre>
     </div>
 
 
-    <script src="diagrams.js?v=149"></script>
-    <script src="exam_data.js?v=149"></script>
-    <script src="questions.js?v=149"></script>
-    <script src="generator.js?v=149"></script>
-    <script src="ap2_bridge.js?v=149"></script>
-    <script src="exam_attachments.js?v=149"></script>
-    <script src="app.js?v=149"></script>
+    <script src="diagrams.js?v=150"></script>
+    <script src="exam_data.js?v=150"></script>
+    <script src="questions.js?v=150"></script>
+    <script src="generator.js?v=150"></script>
+    <script src="ap2_bridge.js?v=150"></script>
+    <script src="exam_attachments.js?v=150"></script>
+    <script src="app.js?v=150"></script>
 
     <!-- PIN Sicherheits-Gatekeeper -->
     <script>

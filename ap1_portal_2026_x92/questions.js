@@ -16620,6 +16620,227 @@ Die Medienzugriffsverfahren sind auf <strong>Schicht 2 (Sicherungsschicht / MAC-
 • <strong>CSMA/CD (Carrier Sense Multiple Access / Collision Detection):</strong> Wird im klassischen Halbduplex-Ethernet (IEEE 802.3 mit Koaxial- oder Hub-Netzen) eingesetzt. Erkennt eine Kollision während des Sendens, bricht sofort ab und sendet ein JAM-Signal.<br>
 • <strong>CSMA/CA (Carrier Sense Multiple Access / Collision Avoidance):</strong> Wird im WLAN (IEEE 802.11) eingesetzt. Da Funksender während des Sendens nicht gleichzeitig zuverlässig lauschen können, wird eine Kollision durch zufällige Wartezeiten (Backoff) und optionale RTS/CTS-Signalisierung von vornherein <em>vermieden</em>.`,
         points: 3
+    },
+// =========================================================================
+    // PSEUDOCODE: TRACE-TABELLEN (LESEN) & SCHREIBEN (IHK ABSCHLUSSPRÜFUNG AP1)
+    // Basierend auf originalen IHK-Prüfungsblättern & Aufgabenstellungen (LF 5)
+    // =========================================================================
+    {
+        id: 740,
+        isHard: true,
+        difficulty: "hard",
+        isBawueFocus: true,
+        isPseudocode: true,
+        theme: "pseudocode",
+        topic: "💻 Pseudocode LESEN: Vollständiger Schreibtischtest mit Trace-Tabelle (IHK AP1 - 10 Punkte)",
+        type: "open-text",
+        question: `💻 <strong>IHK-Originalaufgabe: Schreibtischtest & Trace-Tabelle (LF 5 - 10 Punkte)</strong><br><br>
+In einem ERP-System wird die folgende Routine zur rabattierten Rechnungsprüfung ausgeführt.<br>
+Die Funktion wird mit einem Array von 4 Rechnungsbeträgen aufgerufen:<br>
+<code>rechnungen = [150.0, 600.0, 1200.0, 45.0], n = 4</code> (Indizes 0 bis 3).<br><br>
+<pre class="bg-slate-900 text-slate-100 p-3 rounded-lg text-xs font-mono my-2 overflow-x-auto">
+FUNKTION berechneRechnungsbetrag(rechnungen, n)
+    gesamtsumme := 0.0
+    skontoFaelle := 0
+    i := 0
+    
+    SOLANGE i < n MACHE
+        betrag := rechnungen[i]
+        
+        WENN betrag >= 1000.0 DANN
+            betrag := betrag * 0.90       // 10 % Großkundenrabatt
+        SONST WENN betrag >= 500.0 DANN
+            betrag := betrag * 0.95       // 5 % Stammkundenrabatt
+        ENDE WENN
+        
+        WENN betrag > 100.0 DANN
+            skontoFaelle := skontoFaelle + 1
+        ENDE WENN
+        
+        gesamtsumme := gesamtsumme + betrag
+        i := i + 1
+    ENDE SOLANGE
+    
+    RÜCKGABE (gesamtsumme, skontoFaelle)
+ENDE FUNKTION</pre>
+<strong>Aufgaben:</strong><br>
+1. Erstellen Sie eine vollständige <strong>Trace-Tabelle (Schreibtischtest)</strong> für alle Schleifendurchläufe mit den Spalten:  
+   <code>(Durchlauf | i | rechnungen[i] | betrag (nach Rabatt) | gesamtsumme | skontoFaelle)</code>.<br>
+2. Nennen Sie die finalen Rückgabewerte für <code>gesamtsumme</code> und <code>skontoFaelle</code>.<br>
+3. Begründen Sie fachlich, was passieren würde, wenn die Zeile <code>i := i + 1</code> vergessen worden wäre.`,
+        musterloesung: `1. Vollständige Trace-Tabelle (Schreibtischtest):
+
+| Durchlauf | i | rechnungen[i] | Rabatt-Bedingung | betrag (nach Rabatt) | gesamtsumme | skontoFaelle |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| **Start** | 0 | - | - | - | 0.0 € | 0 |
+| **1** | 0 | 150.0 € | keine (150 < 500) | 150.0 € | **150.0 €** | **1** (150 > 100) |
+| **2** | 1 | 600.0 € | 5 % (600 >= 500) | 570.0 € (600 * 0.95) | **720.0 €** (150 + 570) | **2** (570 > 100) |
+| **3** | 2 | 1200.0 € | 10 % (1200 >= 1000) | 1080.0 € (1200 * 0.90) | **1800.0 €** (720 + 1080) | **3** (1080 > 100) |
+| **4** | 3 | 45.0 € | keine (45 < 500) | 45.0 € | **1845.0 €** (1800 + 45) | **3** (45 <= 100) |
+| **Ende** | 4 | - | Schleifenabbruch (4 < 4 ist FALSCH) | - | **1845.0 €** | **3** |
+
+2. Finale Rückgabewerte:
+   - gesamtsumme = 1845.0 €
+   - skontoFaelle = 3
+
+3. Auswirkung bei Fehlen von 'i := i + 1':
+   - Die Schleifenvariable 'i' würde dauerhaft auf dem Initialwert 0 stehenbleiben.
+   - Die Abbruchbedingung (i < n bzw. 0 < 4) bliebe für immer WAHR.
+   - Das Programm gerät in eine **Endlosschleife** (Infinite Loop), stürzt wegen Speicherüberlauf/Hangup ab oder blockiert den Thread dauerhaft.`,
+        correctAnswer: "Trace-Tabelle: Durchlauf 1 (150€ -> Summe 150€, Skonto 1), D2 (600€ -> 570€, Summe 720€, Skonto 2), D3 (1200€ -> 1080€, Summe 1800€, Skonto 3), D4 (45€ -> 45€, Summe 1845€, Skonto 3). Rückgabe: (1845.0, 3). Fehlt i:=i+1 -> Endlosschleife.",
+        explanation: "Der Schreibtischtest mit Trace-Tabelle ist in jeder IHK AP1 Prüfung eine Garantie-Aufgabe mit bis zu 10 bis 15 Punkten. Entscheidend ist die genaue Nachverfolgung jedes Schleifendurchlaufs!",
+        points: 10
+    },
+    {
+        id: 741,
+        isBawueFocus: true,
+        isPseudocode: true,
+        theme: "pseudocode",
+        topic: "💻 Pseudocode CODE-REVIEW: Fehlersuche & Bugfixing (LF 5 - 6 Punkte)",
+        type: "open-text",
+        question: `💻 <strong>IHK-Originalaufgabe: Code-Review & Bugfixing – Durchschnittsberechnung (LF 5 - 6 Punkte)</strong><br><br>
+Ein Auszubildender legt Ihnen folgenden Pseudocode zur Überprüfung vor, der den Notendurchschnitt von 4 Prüfungsergebnissen berechnen soll:<br>
+<pre class="bg-slate-900 text-slate-100 p-3 rounded-lg text-xs font-mono my-2 overflow-x-auto">
+PROGRAMMSTART
+int[] noten := {2, 3, 1, 2}       // 4 Noten (Indizes 0 bis 3)
+int summe := 0
+
+FÜR i := 0 BIS 4 MACHE             // Zeile 5
+    summe := summe + noten[i]      // Zeile 6
+ENDE FÜR
+
+int schnitt := summe / 4           // Zeile 9
+AUSGABE "Schnitt: " + schnitt
+PROGRAMMENDE</pre>
+<strong>Aufgaben:</strong><br>
+1. Nennen und erläutern Sie die <strong>zwei schwerwiegenden logischen bzw. Laufzeitfehler</strong> in diesem Entwurf.<br>
+2. Geben Sie für beide fehlerhaften Zeilen die <strong>korrigierte Schreibweise</strong> an.`,
+        musterloesung: `1. Die zwei Fehler:
+   - Fehler 1 (Zeile 5 - Off-by-One Fehler):
+     Das Array hat 4 Elemente mit den gültigen Indizes 0, 1, 2 und 3. Die Schleife läuft mit 'FÜR i := 0 BIS 4' jedoch 5-mal. Beim fünften Durchlauf (i = 4) wird auf 'noten[4]' zugegriffen. Dies führt zu einem Laufzeitabsturz (IndexOutOfBoundsException bzw. Array-Grenzüberlauf).
+   - Fehler 2 (Zeile 9 - Ganzzahldivision / Integer-Division):
+     Sowohl 'summe' (8) als auch der Divisor 4 bzw. ungerade Summen werden als 'int' verarbeitet. Wenn die Summe z. B. 9 wäre, würde '9 / 4' durch das Abschneiden der Nachkommastellen das falsche ganzzahlige Ergebnis 2 statt 2.25 liefern. Außerdem ist die Zielvariable 'int schnitt' kein Gleitkommatyp.
+
+2. Korrigierte Zeilen:
+   - Korrektur Zeile 5:
+     FÜR i := 0 BIS 3 MACHE   (oder: FÜR i := 0 BIS LÄNGE(noten) - 1 MACHE)
+   - Korrektur Zeile 9:
+     float schnitt := summe / 4.0   (oder: double schnitt := (float)summe / 4.0)`,
+        correctAnswer: "1. Fehler 1 in Zeile 5: Schleife läuft bis 4 statt bis 3 -> IndexOutOfBoundsException (Off-by-One). Fehler 2 in Zeile 9: Integer-Division schneidet Nachkommastellen ab, 'schnitt' muss float/double sein.
+2. Korrektur: FÜR i := 0 BIS 3 MACHE | float schnitt := summe / 4.0",
+        explanation: "In IHK-Prüfungen sind die beliebtesten Fehler im Code-Review: 1. Off-by-One bei Arraygrenzen (i <= n statt i < n), 2. Ganzzahldivision ohne Nachkommastellen (int statt float/double), 3. Fehlende Initialisierung vor der Schleife.",
+        points: 6
+    },
+    {
+        id: 742,
+        isHard: true,
+        difficulty: "hard",
+        isBawueFocus: true,
+        isPseudocode: true,
+        theme: "pseudocode",
+        topic: "💻 Pseudocode SCHREIBEN: Schwellenwert-Filterung & Alert-System (LF 5 - 12 Punkte)",
+        type: "open-text",
+        question: `💻 <strong>IHK-Originalaufgabe: Algorithmenentwurf – Server-Monitoring & Latenz-Filter (LF 5 - 12 Punkte)</strong><br><br>
+In einem Rechenzentrum werden die stündlichen Ping-Zeiten eines Servers über 24 Stunden in einem Integer-Array <code>pingMs[24]</code> erfasst (Indizes 0 bis 23). Ein Wert von <code>0</code> bedeutet, dass der Ping in einen <strong>Timeout</strong> gelaufen ist (keine Antwort).<br><br>
+<strong>Entwickeln Sie im IHK-Pseudocode einen vollständigen Algorithmus, der:</strong><br>
+1. Das Array mit einer Schleife vollständig durchläuft.<br>
+2. Zählt, wie viele Messungen eine <strong>kritische Latenz von mehr als 100 ms</strong> aufweisen (Variable <code>highLatencyCount</code>).<br>
+3. Zählt, wie viele Messungen einen <strong>Timeout</strong> (Wert = 0 ms) hatten (Variable <code>timeoutCount</code>).<br>
+4. Den <strong>Durchschnittswert</strong> aller erfolgreichen Pings (Ping > 0) berechnet und ausgibt.<br>
+5. Falls mehr als 3 Timeouts aufgetreten sind, die Warnmeldung <code>"ALARM: Server instabil!"</code> ausgibt.<br><br>
+Achten Sie auf saubere Variablendeklaration, korrekte Einrückung und das IHK-KISS-Prinzip.`,
+        musterloesung: `PROGRAMMSTART
+    // Initialisierung der Variablen
+    int highLatencyCount := 0
+    int timeoutCount := 0
+    int erfolgreichePings := 0
+    int summeLatenz := 0
+    float avgLatenz := 0.0
+
+    // Schleifendurchlauf über alle 24 Stunden (Index 0 bis 23)
+    FÜR i := 0 BIS 23 MACHE
+        WENN pingMs[i] == 0 DANN
+            timeoutCount := timeoutCount + 1
+        SONST
+            // Erfolgreiche Messung
+            erfolgreichePings := erfolgreichePings + 1
+            summeLatenz := summeLatenz + pingMs[i]
+            
+            WENN pingMs[i] > 100 DANN
+                highLatencyCount := highLatencyCount + 1
+            ENDE WENN
+        ENDE WENN
+    ENDE FÜR
+
+    // Berechnung des Durchschnitts (Division durch 0 abfangen)
+    WENN erfolgreichePings > 0 DANN
+        avgLatenz := summeLatenz / (float)erfolgreichePings
+        AUSGABE "Durchschnittliche Latenz: " + avgLatenz + " ms"
+    SONST
+        AUSGABE "Keine erfolgreichen Pings vorhanden."
+    ENDE WENN
+
+    AUSGABE "Hohe Latenzen (>100ms): " + highLatencyCount
+    AUSGABE "Timeouts: " + timeoutCount
+
+    // Alarmierung bei mehr als 3 Timeouts
+    WENN timeoutCount > 3 DANN
+        AUSGABE "ALARM: Server instabil!"
+    ENDE WENN
+PROGRAMMENDE`,
+        correctAnswer: "Initialisierung: highLatencyCount:=0, timeoutCount:=0, summeLatenz:=0, count:=0. Schleife: FÜR i:=0 BIS 23 DO: WENN pingMs[i]==0 DANN timeoutCount++ SONST summe+=pingMs[i], count++, WENN pingMs[i]>100 DANN highLatencyCount++. Schnitt: summe/count. Alarm: WENN timeoutCount > 3 DANN ALARM.",
+        explanation: "Typischer Aufbau einer IHK-Programmieraufgabe: 1. Variablen initialisieren (2 Pkt), 2. Schleife mit korrekten Grenzen 0 bis 23 (2 Pkt), 3. Verzweigung für Timeout vs. Latenz (3 Pkt), 4. Durchschnittsberechnung mit Zero-Division-Check (3 Pkt), 5. Schwellenwert-Alarmierung (2 Pkt).",
+        points: 12
+    },
+    {
+        id: 743,
+        isHard: true,
+        difficulty: "hard",
+        isBawueFocus: true,
+        isPseudocode: true,
+        theme: "pseudocode",
+        topic: "💻 Pseudocode SCHREIBEN: Lineare Suche mit vorzeitigem Abbruch & Sentinel (LF 5 - 10 Punkte)",
+        type: "open-text",
+        question: `💻 <strong>IHK-Originalaufgabe: Algorithmenentwurf – Lineare Suche im Lagerbestand (LF 5 - 10 Punkte)</strong><br><br>
+Ein Warenwirtschaftssystem speichert die Artikelnummern von Lagerartikeln in einem ganzzahligen Array <code>lagerBestand[]</code> mit <code>n</code> Elementen.<br><br>
+<strong>Aufgabe:</strong><br>
+Entwickeln Sie im IHK-Pseudocode eine Funktion <code>sucheArtikel(lagerBestand, n, gesuchteNummer)</code>, die folgende Vorgaben erfüllt:<br>
+1. Das Array wird sequenziell durchsucht.<br>
+2. Sobald die <code>gesuchteNummer</code> gefunden wird, soll die Suche <strong>sofort abgebrochen</strong> und der gefundene Index als Rückgabewert geliefert werden.<br>
+3. Wenn das gesamte Array durchsucht wurde und die Nummer nicht existiert, soll der <strong>Sentinel-Wert -1</strong> zurückgegeben werden.<br>
+4. Realisieren Sie den vorzeitigen Abbruch entweder über eine <code>SOLANGE</code>-Schleife mit booleschem Flag oder über ein vorzeitiges <code>RÜCKGABE</code>-Statement.`,
+        musterloesung: `// Variante 1: Mit kopfgesteuerter SOLANGE-Schleife & Flag (IHK-Musterstandard)
+FUNKTION sucheArtikel(lagerBestand, n, gesuchteNummer)
+    int gefundenerIndex := -1
+    boolean gefunden := FALSCH
+    int i := 0
+
+    SOLANGE (i < n UND gefunden == FALSCH) MACHE
+        WENN lagerBestand[i] == gesuchteNummer DANN
+            gefundenerIndex := i
+            gefunden := WAHR
+        SONST
+            i := i + 1
+        ENDE WENN
+    ENDE SOLANGE
+
+    RÜCKGABE gefundenerIndex
+ENDE FUNKTION
+
+// -------------------------------------------------------------
+// Variante 2: Mit Zählschleife & vorzeitigem Return
+FUNKTION sucheArtikel(lagerBestand, n, gesuchteNummer)
+    FÜR i := 0 BIS n - 1 MACHE
+        WENN lagerBestand[i] == gesuchteNummer DANN
+            RÜCKGABE i       // Sofortiger Abbruch & Rückgabe des Index
+        ENDE WENN
+    ENDE FÜR
+
+    RÜCKGABE -1              // Wurde im gesamten Array nicht gefunden
+ENDE FUNKTION`,
+        correctAnswer: "FUNKTION sucheArtikel(lagerBestand, n, gesuchteNummer): FÜR i:=0 BIS n-1 DO: WENN lagerBestand[i] == gesuchteNummer DANN RÜCKGABE i. ENDE FÜR. RÜCKGABE -1.",
+        explanation: "Die lineare Suche mit vorzeitigem Abbruch ist der meistgeprüfte Suchalgorithmus in der IHK AP1. Wichtig: Niemals nach dem Finden weiterlaufen lassen (unnötige CPU-Zyklen) und -1 zurückgeben, wenn nicht gefunden!",
+        points: 10
     }
 
 ];
