@@ -228,7 +228,12 @@
           <button onclick="selectMiniTopic('media_video_bitrate')" class="topic-pill px-3.5 py-2 text-sm font-semibold rounded-xl border border-fuchsia-400 bg-fuchsia-50 hover:bg-fuchsia-100 text-fuchsia-900 transition-all" data-topic="media_video_bitrate">
             🎬 Video &amp; FPS (Auflösung ➔ FPS ➔ Datenrate &amp; Speicher)
           </button>
-                    <!-- NEU: IPv4 Spezielle Präfixe & Sonderbereiche (IHK-Klassiker) -->
+                              <!-- NEU: OSI-Schichtenmodell (7 Schichten, Protokolle, PDUs & Geräte) -->
+          <button onclick="selectMiniTopic('osi_layers_trainer')" class="topic-pill px-4 py-2 text-sm font-bold rounded-xl border-2 border-emerald-600 bg-gradient-to-r from-emerald-100 to-teal-100 hover:from-emerald-200 hover:to-teal-200 text-emerald-950 shadow-sm transition-all flex items-center gap-1.5 active:scale-95" data-topic="osi_layers_trainer">
+            📡 OSI-Modell: 7 Schichten, Protokolle, PDUs &amp; Geräte (Tabelle)
+          </button>
+
+          <!-- NEU: IPv4 Spezielle Präfixe & Sonderbereiche (IHK-Klassiker) -->
           <button onclick="selectMiniTopic('ipv4_special_ranges')" class="topic-pill px-4 py-2 text-sm font-bold rounded-xl border-2 border-sky-600 bg-gradient-to-r from-sky-100 to-cyan-100 hover:from-sky-200 hover:to-cyan-200 text-sky-950 shadow-sm transition-all flex items-center gap-1.5 active:scale-95" data-topic="ipv4_special_ranges">
             📊 IPv4: Präfixe, Sonderbereiche &amp; RFCs (Tabelle)
           </button>
@@ -3902,6 +3907,365 @@
       // =========================================================================
       // IPV4: PRÄFIXE, SONDERBEREICHE & RFCS (IHK LERNFELD 3 TABELLE)
       // =========================================================================
+      
+      // =========================================================================
+      // OSI-SCHICHTENMODELL (7 SCHICHTEN, PROTOKOLLE, PDUS & GERÄTE)
+      // =========================================================================
+      osi_layers_trainer: function() {
+        const tableHtml = `
+          <div class="mt-3.5 overflow-x-auto rounded-xl border border-emerald-300 bg-white shadow-xs">
+            <div class="bg-gradient-to-r from-emerald-900 via-teal-900 to-slate-900 px-3.5 py-2.5 text-white text-xs font-bold flex items-center justify-between">
+              <span>📊 IHK-ÜBERSICHTSTABELLE: DAS OSI-7-SCHICHTEN-REFERENZMODELL</span>
+              <span class="text-[10px] bg-emerald-500/40 text-emerald-200 px-2 py-0.5 rounded font-mono">ISO/IEC 7498-1 • Lernfeld 3</span>
+            </div>
+            <table class="w-full text-left text-xs border-collapse">
+              <thead class="bg-emerald-50 text-emerald-950 font-bold border-b border-emerald-200 text-[11px]">
+                <tr>
+                  <th class="p-2 border-r border-emerald-100 text-center">Layer</th>
+                  <th class="p-2 border-r border-emerald-100">Schichtname (DE / EN)</th>
+                  <th class="p-2 border-r border-emerald-100">Hauptgruppe</th>
+                  <th class="p-2 border-r border-emerald-100">Dateneinheit (PDU)</th>
+                  <th class="p-2 border-r border-emerald-100">Hauptaufgaben &amp; Funktionen</th>
+                  <th class="p-2 border-r border-emerald-100">Wichtige Protokolle</th>
+                  <th class="p-2">Kopplungselemente / Geräte</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100 text-[11px] font-sans">
+                <tr class="hover:bg-emerald-50/40 bg-emerald-50/20">
+                  <td class="p-2 font-mono font-bold text-emerald-800 text-center">7</td>
+                  <td class="p-2 font-bold text-slate-900">Anwendung<br><span class="text-[10px] text-slate-500 font-normal">Application Layer</span></td>
+                  <td class="p-2 font-semibold text-purple-700" rowspan="3">Anwendungsorientiert<br><span class="text-[10px] text-slate-500 font-normal">(Schichten 7 - 5)</span></td>
+                  <td class="p-2 font-mono text-purple-900 font-bold">Daten (Data)</td>
+                  <td class="p-2">Schnittstelle zur Anwendungssoftware, Bereitstellung von Netzwerkdiensten</td>
+                  <td class="p-2 font-mono text-blue-700">HTTP, HTTPS, DNS, DHCP, FTP, SFTP, SSH, SMTP, POP3, IMAP, RDP, SNMP</td>
+                  <td class="p-2 font-medium text-slate-700">Gateway, Proxy, Application-Firewall (NGFW), Content-Switch</td>
+                </tr>
+                <tr class="hover:bg-emerald-50/40">
+                  <td class="p-2 font-mono font-bold text-emerald-800 text-center">6</td>
+                  <td class="p-2 font-bold text-slate-900">Darstellung<br><span class="text-[10px] text-slate-500 font-normal">Presentation Layer</span></td>
+                  <td class="p-2 font-mono text-purple-900 font-bold">Daten (Data)</td>
+                  <td class="p-2">Datenformatierung, Übersetzung von Zeichensätzen, Datenkompression &amp; Verschlüsselung</td>
+                  <td class="p-2 font-mono text-blue-700">TLS/SSL, ASCII, UTF-8, JPEG, PNG, MPEG, JSON, XML</td>
+                  <td class="p-2 font-medium text-slate-700">Gateway</td>
+                </tr>
+                <tr class="hover:bg-emerald-50/40 bg-emerald-50/20">
+                  <td class="p-2 font-mono font-bold text-emerald-800 text-center">5</td>
+                  <td class="p-2 font-bold text-slate-900">Sitzung<br><span class="text-[10px] text-slate-500 font-normal">Session Layer</span></td>
+                  <td class="p-2 font-mono text-purple-900 font-bold">Daten (Data)</td>
+                  <td class="p-2">Aufbau, Steuerung, Synchronisation &amp; Beenden von Kommunikationssitzungen (Dialogsteuerung)</td>
+                  <td class="p-2 font-mono text-blue-700">RPC, NetBIOS, NFS, SMB, SIP, SOCKS</td>
+                  <td class="p-2 font-medium text-slate-700">Gateway</td>
+                </tr>
+                <tr class="hover:bg-teal-50/40 bg-teal-50/30">
+                  <td class="p-2 font-mono font-bold text-teal-800 text-center">4</td>
+                  <td class="p-2 font-bold text-slate-900">Transport<br><span class="text-[10px] text-slate-500 font-normal">Transport Layer</span></td>
+                  <td class="p-2 font-semibold text-sky-700" rowspan="4">Transportorientiert<br><span class="text-[10px] text-slate-500 font-normal">(Schichten 4 - 1)</span></td>
+                  <td class="p-2 font-mono text-sky-900 font-bold">Segment (TCP)<br>Datagramm (UDP)</td>
+                  <td class="p-2">Ende-zu-Ende-Verbindung, Port-Adressierung, Flusskontrolle, Fehlererkennung &amp; Reihenfolgesicherung</td>
+                  <td class="p-2 font-mono text-blue-700">TCP, UDP, SCTP</td>
+                  <td class="p-2 font-medium text-slate-700">Layer-4-Switch, Paketfilter-Firewall</td>
+                </tr>
+                <tr class="hover:bg-teal-50/40">
+                  <td class="p-2 font-mono font-bold text-teal-800 text-center">3</td>
+                  <td class="p-2 font-bold text-slate-900">Vermittlung<br><span class="text-[10px] text-slate-500 font-normal">Network Layer</span></td>
+                  <td class="p-2 font-mono text-sky-900 font-bold">Paket (Packet)</td>
+                  <td class="p-2">Wegewahl (Routing), logische Adressierung (IP), Weiterleitung über Netzwerkgrenzen hinweg</td>
+                  <td class="p-2 font-mono text-blue-700">IPv4, IPv6, ICMP, IPsec, IGMP, OSPF, BGP</td>
+                  <td class="p-2 font-medium text-slate-700">Router, Layer-3-Switch (Multilayer-Switch)</td>
+                </tr>
+                <tr class="hover:bg-teal-50/40 bg-teal-50/20">
+                  <td class="p-2 font-mono font-bold text-teal-800 text-center">2</td>
+                  <td class="p-2 font-bold text-slate-900">Sicherung<br><span class="text-[10px] text-slate-500 font-normal">Data Link Layer</span></td>
+                  <td class="p-2 font-mono text-sky-900 font-bold">Frame (Rahmen)</td>
+                  <td class="p-2">Physikalische Adressierung (MAC), Zugriffskontrolle (CSMA/CD / CA), Fehlererkennung (CRC/FCS)</td>
+                  <td class="p-2 font-mono text-blue-700">Ethernet (802.3), WLAN (802.11), ARP, VLAN (802.1Q), PPP</td>
+                  <td class="p-2 font-medium text-slate-700">Switch (Layer-2), Bridge, Access Point, NIC (Netzwerkkarte)</td>
+                </tr>
+                <tr class="hover:bg-teal-50/40">
+                  <td class="p-2 font-mono font-bold text-teal-800 text-center">1</td>
+                  <td class="p-2 font-bold text-slate-900">Bitübertragung<br><span class="text-[10px] text-slate-500 font-normal">Physical Layer</span></td>
+                  <td class="p-2 font-mono text-sky-900 font-bold">Bit / Symbol</td>
+                  <td class="p-2">Physikalische Übertragung unstrukturierter Bitströme über Kupferkabel, Glasfaser (LWL) oder Funk</td>
+                  <td class="p-2 font-mono text-blue-700">1000BASE-T, 10GBASE-SR, RJ-45, DSL, USB</td>
+                  <td class="p-2 font-medium text-slate-700">Hub, Repeater, Netzwerkkabel, Transceiver, Medienkonverter</td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="p-2.5 bg-slate-50 border-t border-emerald-100 text-[11px] text-slate-600 flex flex-wrap gap-4 justify-between">
+              <span>💡 <strong>Eselsbrücke (Top-Down 7➔1):</strong> <em>Alle Deutschen Schüler Trinken Verschiedene Sorten Bier</em></span>
+              <span>💡 <strong>Eselsbrücke (Bottom-Up 1➔7):</strong> <em>Please Do Not Throw Sausage Pizza Away</em></span>
+            </div>
+          </div>
+        `;
+
+        function makeButtons(btnList) {
+          return '<div class="mt-3 flex flex-wrap gap-2">' +
+            btnList.map(b => `<button type="button" onclick="document.getElementById('mini-input').value='${b}'; checkMiniTask();" class="px-3 py-1.5 rounded-lg bg-emerald-100 hover:bg-emerald-200 border border-emerald-300 text-emerald-900 text-xs font-bold transition-all active:scale-95 shadow-2xs">${b}</button>`).join('') +
+            '</div>';
+        }
+
+        const scenarios = [
+          // 1. Schicht 2 Switch Zuordnung
+          {
+            q: `Auf welcher Schicht des OSI-Referenzmodells arbeitet ein standardmäßiger <strong>Netzwerk-Switch (Layer-2-Switch)</strong> und welche Adressierungsart wertet er aus?` +
+               makeButtons(["Schicht 2: Sicherungsschicht (Data Link Layer)", "Schicht 3: Vermittlungsschicht (Network Layer)", "Schicht 1: Bitübertragungsschicht (Physical Layer)", "Schicht 4: Transportschicht (Transport Layer)"]),
+            expected: "Schicht 2",
+            alts: ["SCHICHT 2", "LAYER 2", "2", "SICHERUNGSSCHICHT", "DATA LINK", "DATA LINK LAYER", "SCHICHT 2 (SICHERUNGSSCHICHT)", "SICHERUNGSSCHICHT / DATA LINK LAYER", "SCHICHT 2: SICHERUNGSSCHICHT (DATA LINK LAYER)"],
+            unit: "OSI-Schicht",
+            hint: "Ein Switch leitet Frames anhand der physischen MAC-Adressen weiter -> Schicht 2 (Sicherungsschicht / Data Link Layer).",
+            was: "Schicht 2: Sicherungsschicht (Data Link Layer)",
+            warum: "Ein Layer-2-Switch liest die Quell- und Ziel-MAC-Adressen im Ethernet-Frame und lernt diese in seiner SAT/MAC-Adresstabelle (CAM-Table).",
+            wofuer: "Gezielte Weiterleitung von Datenrahmen nur an den Zielport statt an alle Ports (Vermeidung von Kollisionen)."
+          },
+          // 2. Schicht 3 Router Zuordnung
+          {
+            q: `Auf welcher OSI-Schicht arbeitet ein <strong>Router</strong> zur logischen Wegewahl (Routing) zwischen verschiedenen Subnetzen?` +
+               makeButtons(["Schicht 3: Vermittlungsschicht (Network Layer)", "Schicht 2: Sicherungsschicht (Data Link Layer)", "Schicht 4: Transportschicht (Transport Layer)", "Schicht 7: Anwendungsschicht (Application Layer)"]),
+            expected: "Schicht 3",
+            alts: ["SCHICHT 3", "LAYER 3", "3", "VERMITTLUNGSSCHICHT", "NETWORK LAYER", "SCHICHT 3 (VERMITTLUNGSSCHICHT)", "VERMITTLUNGSSCHICHT / NETWORK LAYER", "SCHICHT 3: VERMITTLUNGSSCHICHT (NETWORK LAYER)"],
+            unit: "OSI-Schicht",
+            hint: "Router arbeiten auf Schicht 3 (Vermittlungsschicht / Network Layer) anhand von IP-Adressen.",
+            was: "Schicht 3: Vermittlungsschicht (Network Layer)",
+            warum: "Router werten die IP-Header (logische Adressierung) aus und bestimmen über Routingtabellen den optimalen Pfad zum Zielnetz.",
+            wofuer: "Kopplung unterschiedlicher IP-Netzwerke und Internetanbindung."
+          },
+          // 3. Schicht 1 Hub & Repeater
+          {
+            q: `Welcher OSI-Schicht werden passive bzw. rein signalverstärkende Komponenten wie <strong>Hubs, Repeater und Netzwerkkabel</strong> zugeordnet?` +
+               makeButtons(["Schicht 1: Bitübertragungsschicht (Physical Layer)", "Schicht 2: Sicherungsschicht (Data Link Layer)", "Schicht 3: Vermittlungsschicht (Network Layer)"]),
+            expected: "Schicht 1",
+            alts: ["SCHICHT 1", "LAYER 1", "1", "BITÜBERTRAGUNGSSCHICHT", "BITUEBERTRAGUNGSSCHICHT", "PHYSICAL LAYER", "SCHICHT 1: BITÜBERTRAGUNGSSCHICHT (PHYSICAL LAYER)"],
+            unit: "OSI-Schicht",
+            hint: "Hubs und Repeater verstärken nur elektrische/optische Signale ohne Adressanalyse -> Schicht 1 (Physical).",
+            was: "Schicht 1: Bitübertragungsschicht (Physical Layer)",
+            warum: "Auf Schicht 1 existieren noch keine Frames oder Pakete, sondern nur elektrische Spannungen, Lichtwellen oder Funksignale.",
+            wofuer: "Physikalische Signalübertragung über das Medium."
+          },
+          // 4. Zwei Hauptgruppen (IHK 4-Punkte Frage!)
+          {
+            q: `In welche <strong>zwei Hauptgruppen</strong> (zusammengefasste Schichten) wird das 7-Schichten-OSI-Referenzmodell nach IHK-Standard gegliedert?` +
+               makeButtons(["Transportorientierte (1-4) & Anwendungsorientierte Schichten (5-7)", "Hardware-Schichten (1-3) & Software-Schichten (4-7)", "Netzwerkschichten (1-2) & Internetschichten (3-7)"]),
+            expected: "Transportorientierte (1-4) & Anwendungsorientierte Schichten (5-7)",
+            alts: ["TRANSPORTORIENTIERTE (1-4) & ANWENDUNGSORIENTIERTE SCHICHTEN (5-7)", "TRANSPORTSCHICHTEN UND ANWENDERSCHICHTEN", "TRANSPORTORIENTIERT UND ANWENDUNGSORIENTIERT", "TRANSPORTSCHICHTEN (1 BIS 4) UND ANWENDERSCHICHTEN (5 BIS 7)", "TRANSPORT- UND ANWENDUNGSSCHICHTEN", "1-4 UND 5-7"],
+            unit: "Hauptgruppen",
+            hint: "Schichten 1 bis 4 sind transportorientiert; Schichten 5 bis 7 sind anwendungsorientiert.",
+            was: "1. Transportorientierte Schichten (1–4) & 2. Anwendungsorientierte Schichten (5–7)",
+            warum: "Schichten 1–4 kümmern sich rein um den verlässlichen Transport der Bits durchs Netz; Schichten 5–7 kümmern sich um Sitzung, Darstellung und Software-Anwendung.",
+            wofuer: "Klassische IHK-Prüfungsaufgabe (4 Punkte in Lernfeld 3)."
+          },
+          // 5. PDU Schicht 2: Frame
+          {
+            q: `Wie lautet die offizielle Bezeichnung der Dateneinheit (<strong>Protocol Data Unit - PDU</strong>) auf der <strong>Schicht 2 (Sicherungsschicht)</strong>?` +
+               makeButtons(["Frame (Rahmen)", "Paket (Packet)", "Segment", "Bit"]),
+            expected: "Frame",
+            alts: ["FRAME", "RAHMEN", "ETHERNET-FRAME", "ETHERNET RAHMEN", "FRAME (RAHMEN)"],
+            unit: "PDU",
+            hint: "Schicht 2 arbeitet mit Frames (Rahmen), bestehend aus Header, Payload und Trailer (FCS/CRC).",
+            was: "Frame (Rahmen)",
+            warum: "Pakete aus Schicht 3 werden in Schicht 2 durch MAC-Header und FCS-Prüfsummen-Trailer zu einem Frame gekapselt.",
+            wofuer: "Physikalische Adressierung und Fehlerüberprüfung auf Verbindungsebene."
+          },
+          // 6. PDU Schicht 3: Paket
+          {
+            q: `Wie lautet die PDU-Bezeichnung der Dateneinheit auf der <strong>Schicht 3 (Vermittlungsschicht / Network Layer)</strong>?` +
+               makeButtons(["Paket (Packet)", "Frame (Rahmen)", "Segment", "Datagramm"]),
+            expected: "Paket",
+            alts: ["PAKET", "PACKET", "IP-PAKET", "IP PAKET", "PAKET (PACKET)"],
+            unit: "PDU",
+            hint: "Auf Schicht 3 (IP) spricht man von Paketen (Packets).",
+            was: "Paket (Packet)",
+            warum: "Segmente der Transportschicht erhalten auf Schicht 3 den IP-Header mit Quell- und Ziel-IP-Adresse.",
+            wofuer: "Logische Adressierung und Weiterleitung im Internet."
+          },
+          // 7. PDU Schicht 4: Segment / Datagramm
+          {
+            q: `Wie wird die Protocol Data Unit (PDU) auf der <strong>Schicht 4 (Transportschicht)</strong> bei Verwendung des verbindungsorientierten <strong>TCP-Protokolls</strong> bezeichnet?` +
+               makeButtons(["Segment", "Paket", "Frame", "Bit"]),
+            expected: "Segment",
+            alts: ["SEGMENT", "TCP-SEGMENT", "TCP SEGMENT"],
+            unit: "PDU",
+            hint: "Bei TCP spricht man von 'Segment', bei UDP von 'Datagramm'.",
+            was: "Segment (bei TCP) bzw. Datagramm (bei UDP)",
+            warum: "Der Datenstrom der Anwendung wird in Schicht 4 in handliche Segmente zerlegt und mit Portnummern versehen.",
+            wofuer: "Ende-zu-Ende-Verbindung und Steuerung des Datenflusses."
+          },
+          // 8. Protokollzuordnung: TCP & UDP
+          {
+            q: `Auf welcher OSI-Schicht arbeiten die beiden zentralen Protokolle <strong>TCP</strong> (Transmission Control Protocol) und <strong>UDP</strong> (User Datagram Protocol)?` +
+               makeButtons(["Schicht 4: Transportschicht", "Schicht 3: Vermittlungsschicht", "Schicht 7: Anwendungsschicht", "Schicht 2: Sicherungsschicht"]),
+            expected: "Schicht 4",
+            alts: ["SCHICHT 4", "LAYER 4", "4", "TRANSPORTSCHICHT", "TRANSPORT LAYER", "SCHICHT 4: TRANSPORTSCHICHT"],
+            unit: "OSI-Schicht",
+            hint: "TCP und UDP sind Schicht-4-Protokolle (Transportschicht).",
+            was: "Schicht 4: Transportschicht (Transport Layer)",
+            warum: "Sie regeln den Ende-zu-Ende-Transport zwischen Programmen mittels Portnummern.",
+            wofuer: "Unterscheidung zwischen zuverlässiger (TCP) und unzuverlässiger/schneller (UDP) Datenübertragung."
+          },
+          // 9. Protokollzuordnung: IP, ICMP, IPsec
+          {
+            q: `Welcher Schicht des OSI-Modells gehören <strong>IPv4, IPv6, ICMP (Ping) und IPsec</strong> an?` +
+               makeButtons(["Schicht 3: Vermittlungsschicht (Network Layer)", "Schicht 4: Transportschicht", "Schicht 2: Sicherungsschicht", "Schicht 7: Anwendungsschicht"]),
+            expected: "Schicht 3",
+            alts: ["SCHICHT 3", "LAYER 3", "3", "VERMITTLUNGSSCHICHT", "NETWORK LAYER", "SCHICHT 3: VERMITTLUNGSSCHICHT (NETWORK LAYER)"],
+            unit: "OSI-Schicht",
+            hint: "IP, ICMP und IPsec arbeiten auf Schicht 3 (Vermittlungsschicht).",
+            was: "Schicht 3: Vermittlungsschicht",
+            warum: "Sie realisieren die logische Adressierung und Netzsteuerung unabhängig vom physikalischen Übertragungsmedium.",
+            wofuer: "Weltweites Routing und Netzwerkanalyse."
+          },
+          // 10. Protokollzuordnung: HTTP, DNS, DHCP, SSH
+          {
+            q: `Auf welcher Schicht des OSI-Modells arbeiten Dienste und Protokolle wie <strong>HTTP, HTTPS, DNS, DHCP und SSH</strong>?` +
+               makeButtons(["Schicht 7: Anwendungsschicht (Application Layer)", "Schicht 6: Darstellungsschicht", "Schicht 4: Transportschicht", "Schicht 5: Sitzungsschicht"]),
+            expected: "Schicht 7",
+            alts: ["SCHICHT 7", "LAYER 7", "7", "ANWENDUNGSSCHICHT", "APPLICATION LAYER", "APPLICATION", "SCHICHT 7: ANWENDUNGSSCHICHT (APPLICATION LAYER)"],
+            unit: "OSI-Schicht",
+            hint: "Dienste, mit denen Benutzer oder Client-Programme direkt interagieren, gehören zu Schicht 7 (Application).",
+            was: "Schicht 7: Anwendungsschicht (Application Layer)",
+            warum: "Sie stellen standardisierte Netzwerkfunktionen für Webbrowser, Mail-Programme und Terminal-Clients bereit.",
+            wofuer: "Nutzerschnittstelle und Anwendungsdienste."
+          },
+          // 11. Schicht 6 Aufgaben: Verschlüsselung & Format
+          {
+            q: `Welche OSI-Schicht ist für die <strong>Verschlüsselung (z. B. TLS/SSL), Datenkompression</strong> sowie die Konvertierung von Datenformaten (z. B. ASCII, UTF-8, JPEG) zuständig?` +
+               makeButtons(["Schicht 6: Darstellungsschicht (Presentation Layer)", "Schicht 7: Anwendungsschicht", "Schicht 5: Sitzungsschicht", "Schicht 4: Transportschicht"]),
+            expected: "Schicht 6",
+            alts: ["SCHICHT 6", "LAYER 6", "6", "DARSTELLUNGSSCHICHT", "PRESENTATION LAYER", "PRESENTATION", "SCHICHT 6: DARSTELLUNGSSCHICHT (PRESENTATION LAYER)"],
+            unit: "OSI-Schicht",
+            hint: "Presentation Layer (Schicht 6) sorgt für die lesbare und sichere Form der Daten.",
+            was: "Schicht 6: Darstellungsschicht (Presentation Layer)",
+            warum: "Sie stellt sicher, dass Daten von verschiedenen Rechnersystemen mit unterschiedlichen Zeichensätzen korrekt interpretiert werden können.",
+            wofuer: "Verschlüsselung, Komprimierung und syntaktische Standardisierung."
+          },
+          // 12. Schicht 5 Aufgaben: Sitzungssteuerung
+          {
+            q: `Welche OSI-Schicht ist für den <strong>Aufbau, die Aufrechterhaltung, Synchronisation und den geordneten Abbau von Kommunikationssitzungen</strong> (Dialogsteuerung z. B. bei RPC oder Videokonferenzen) verantwortlich?` +
+               makeButtons(["Schicht 5: Sitzungsschicht (Session Layer)", "Schicht 4: Transportschicht", "Schicht 6: Darstellungsschicht", "Schicht 3: Vermittlungsschicht"]),
+            expected: "Schicht 5",
+            alts: ["SCHICHT 5", "LAYER 5", "5", "SITZUNGSSCHICHT", "SESSION LAYER", "SESSION", "SCHICHT 5: SITZUNGSSCHICHT (SESSION LAYER)"],
+            unit: "OSI-Schicht",
+            hint: "Session Layer (Schicht 5) koordiniert den Dialog zwischen zwei Endpunkten.",
+            was: "Schicht 5: Sitzungsschicht (Session Layer)",
+            warum: "Sie setzt Synchronisationspunkte (Checkpoints), um Verbindungsabbrüche ohne kompletten Neustart fortsetzen zu können.",
+            wofuer: "Dauerhafte Session-Verwaltung komplexer Client-Server-Interaktionen."
+          },
+          // 13. Kapselung: Trailer nur auf Schicht 2
+          {
+            q: `Welche Schicht des OSI-Referenzmodells fügt als einzige Schicht neben einem Header auch einen <strong>Trailer (FCS / CRC-Prüfsumme)</strong> an das Ende der Daten an?` +
+               makeButtons(["Schicht 2: Sicherungsschicht (Data Link Layer)", "Schicht 3: Vermittlungsschicht", "Schicht 4: Transportschicht", "Schicht 1: Bitübertragungsschicht"]),
+            expected: "Schicht 2",
+            alts: ["SCHICHT 2", "LAYER 2", "2", "SICHERUNGSSCHICHT", "DATA LINK", "SCHICHT 2: SICHERUNGSSCHICHT (DATA LINK LAYER)"],
+            unit: "OSI-Schicht",
+            hint: "Der Ethernet-Frame besitzt am Ende die Frame Check Sequence (FCS / CRC-32) -> Schicht 2.",
+            was: "Schicht 2: Sicherungsschicht (Data Link Layer)",
+            warum: "Der Frame-Trailer enthält eine 4-Byte-CRC-Prüfsumme (FCS), mit der der Empfänger Bitfehler auf der physischen Leitung sofort erkennt.",
+            wofuer: "Integritätsprüfung und Verwerfen beschädigter Übertragungsrahmen."
+          },
+          // 14. Kapselungsrichtung beim Senden
+          {
+            q: `In welcher Richtung durchlaufen die Daten die 7 Schichten des OSI-Modells beim <strong>Senden</strong> einer Nachricht (Kapselung)?` +
+               makeButtons(["Von Schicht 7 nach Schicht 1 (Top-Down)", "Von Schicht 1 nach Schicht 7 (Bottom-Up)"]),
+            expected: "Von Schicht 7 nach Schicht 1",
+            alts: ["VON SCHICHT 7 NACH SCHICHT 1", "SCHICHT 7 NACH SCHICHT 1", "7 NACH 1", "TOP-DOWN", "VON OBEN NACH UNTEN", "VON SCHICHT 7 NACH 1", "VON SCHICHT 7 NACH SCHICHT 1 (TOP-DOWN)"],
+            unit: "Kapselungsrichtung",
+            hint: "Beim Senden werden Schicht für Schicht Header hinzugefügt: Schicht 7 (Anwendung) hinunter zu Schicht 1 (Bitübertragung).",
+            was: "Von Schicht 7 nach Schicht 1 (Top-Down)",
+            warum: "Jede darunterliegende Schicht packt die Daten der oberen Schicht als Payload ein und fügt eigene Steuerinformationen (Header) an.",
+            wofuer: "Standardisierte Datenkapselung (Encapsulation)."
+          },
+          // 15. TCP vs UDP: Verbindungsorientierung & 3-Way-Handshake
+          {
+            q: `Welches Layer-4-Protokoll ist <strong>verbindungsorientiert</strong>, baut vor der Datenübertragung einen <strong>3-Way-Handshake (SYN, SYN-ACK, ACK)</strong> auf und garantiert eine fehlerfreie Zustellung?` +
+               makeButtons(["TCP (Transmission Control Protocol)", "UDP (User Datagram Protocol)", "IP (Internet Protocol)", "ICMP"]),
+            expected: "TCP",
+            alts: ["TCP", "TRANSMISSION CONTROL PROTOCOL", "TCP (TRANSMISSION CONTROL PROTOCOL)"],
+            unit: "Protokoll",
+            hint: "TCP ist verbindungsorientiert, zuverlässig und sichert die Reihenfolge.",
+            was: "TCP (Transmission Control Protocol)",
+            warum: "TCP stellt durch Sequenznummern, Acknowledgements (ACK) und automatisches erneutes Senden verloren gegangener Pakete sicher, dass alle Daten vollständig ankommen.",
+            wofuer: "Webseiten (HTTP/HTTPS), Dateiübertragung (FTP/SFTP), E-Mail (SMTP), Fernwartung (SSH)."
+          },
+          // 16. TCP vs UDP: VoIP & Streaming
+          {
+            q: `Welches Layer-4-Protokoll ist <strong>verbindungslos</strong>, verzichtet auf Bestätigungen und eignet sich wegen seiner minimalen Verzögerung (Latenz) optimal für <strong>VoIP, DNS-Abfragen und Live-Videostreaming</strong>?` +
+               makeButtons(["UDP (User Datagram Protocol)", "TCP (Transmission Control Protocol)", "IPsec", "Ethernet"]),
+            expected: "UDP",
+            alts: ["UDP", "USER DATAGRAM PROTOCOL", "UDP (USER DATAGRAM PROTOCOL)"],
+            unit: "Protokoll",
+            hint: "UDP hat minimalen Overhead (8 Byte) und keinen Handshake -> perfekt für Echtzeitkommunikation.",
+            was: "UDP (User Datagram Protocol)",
+            warum: "Bei VoIP oder Live-Streaming ist ein verlorenes Audio-/Videopaket irrelevant (kann nicht nachgeholt werden). Wichtig ist nur, dass keine Verzögerung durch erneutes Senden entsteht.",
+            wofuer: "Echtzeitanwendungen: VoIP, Online-Gaming, Live-Streaming, DNS, DHCP, SNMP."
+          },
+          // 17. Adressierungsart Schicht 2: MAC-Adresse
+          {
+            q: `Welche Adressierungsart wird auf der <strong>Schicht 2 (Sicherungsschicht)</strong> zur eindeutigen Kennzeichnung der Hardware im lokalen Subnetz verwendet?` +
+               makeButtons(["MAC-Adresse (physische Hardware-Adresse / 48 Bit)", "IP-Adresse (logische Adresse / 32 oder 128 Bit)", "Portnummer (prozessorientierte Adresse / 16 Bit)", "URL / Domainname"]),
+            expected: "MAC-Adresse",
+            alts: ["MAC-ADRESSE", "MAC", "MAC ADRESSE", "MEDIA ACCESS CONTROL", "HARDWARE-ADRESSE", "ETHERNET-ADRESSE", "MAC-ADRESSE (PHYSISCHE HARDWARE-ADRESSE / 48 BIT)"],
+            unit: "Adressierungsart",
+            hint: "Auf Schicht 2 adressieren Geräte über ihre physische MAC-Adresse (z. B. 00:1A:2B:3C:4D:5E).",
+            was: "MAC-Adresse (Media Access Control, 48 Bit)",
+            warum: "Die MAC-Adresse ist weltweit einmalig vom Hersteller in die Netzwerkkarte (NIC) eingebrannt (EUI-48).",
+            wofuer: "Lokale Zustellung von Ethernet-Frames zwischen Geräten im selben physischen Netzsegment."
+          },
+          // 18. Adressierungsart Schicht 4: Portnummer
+          {
+            q: `Welche Adressierungsform wird auf der <strong>Schicht 4 (Transportschicht)</strong> verwendet, um ankommende Datenpakete dem richtigen <strong>Anwendungsprozess bzw. Dienst</strong> zuzuordnen?` +
+               makeButtons(["Portnummer (16 Bit, z. B. Port 80, 443)", "IP-Adresse (z. B. 192.168.1.1)", "MAC-Adresse", "Subnetzmaske"]),
+            expected: "Portnummer",
+            alts: ["PORTNUMMER", "PORT", "PORTS", "PORTNUMMERN", "PORT-NUMMER", "PORTNUMMER (16 BIT, Z. B. PORT 80, 443)"],
+            unit: "Adressierungsart",
+            hint: "Schicht 4 unterscheidet Dienste anhand von Portnummern (0 bis 65535).",
+            was: "Portnummer (16 Bit)",
+            warum: "Ein Rechner kann gleichzeitig surfen (Port 443), Mails empfangen (Port 993) und Musik streamen. Erst die Portnummer ordnet das Datenpaket dem richtigen Programm zu.",
+            wofuer: "Multiplexing und Prozess-Adressierung."
+          },
+          // 19. Gateway & Proxy Zuordnung
+          {
+            q: `Auf welchen OSI-Schichten arbeitet ein <strong>Application Gateway (z. B. Web-Proxy, WAF / Content-Filter)</strong>, der Anwendungsdaten auf Viren oder verbotene Webinhalte analysiert?` +
+               makeButtons(["Schicht 7: Anwendungsschicht (Application Layer)", "Schicht 3: Vermittlungsschicht", "Schicht 2: Sicherungsschicht", "Schicht 1: Bitübertragungsschicht"]),
+            expected: "Schicht 7",
+            alts: ["SCHICHT 7", "LAYER 7", "7", "ANWENDUNGSSCHICHT", "APPLICATION LAYER", "SCHICHT 5 BIS 7", "SCHICHT 7: ANWENDUNGSSCHICHT (APPLICATION LAYER)"],
+            unit: "OSI-Schicht",
+            hint: "Gateways und Proxies analysieren die Nutzdaten bis hoch zu Schicht 7.",
+            was: "Schicht 7: Anwendungsschicht (bzw. Schichten 5–7)",
+            warum: "Sie müssen die Daten komplett entkapseln, um HTTP-Header, URLs und übertragene Dateien auf Anwendungsebene zu untersuchen.",
+            wofuer: "Inhaltliche Filterung, Caching und Sicherheit (Next Generation Firewall / Proxy)."
+          },
+          // 20. Schicht 2 Zugriffskontrolle: CSMA/CD
+          {
+            q: `Auf welcher OSI-Schicht sind Netzwerkzugriffsverfahren wie <strong>CSMA/CD (Halbduplex-Ethernet)</strong> und <strong>CSMA/CA (WLAN)</strong> angesiedelt?` +
+               makeButtons(["Schicht 2: Sicherungsschicht (Data Link Layer)", "Schicht 1: Bitübertragungsschicht", "Schicht 3: Vermittlungsschicht", "Schicht 4: Transportschicht"]),
+            expected: "Schicht 2",
+            alts: ["SCHICHT 2", "LAYER 2", "2", "SICHERUNGSSCHICHT", "DATA LINK", "MAC-SUB-LAYER", "SCHICHT 2: SICHERUNGSSCHICHT (DATA LINK LAYER)"],
+            unit: "OSI-Schicht",
+            hint: "Der MAC-Sublayer gehört zur Schicht 2 und regelt den geordneten Zugriff auf das Übertragungsmedium.",
+            was: "Schicht 2: Sicherungsschicht (MAC-Unterschicht)",
+            warum: "Carrier Sense Multiple Access regelt, wann eine Netzwerkkarte senden darf, um Datenkollisionen auf dem geteilten Übertragungsmedium zu vermeiden oder zu erkennen.",
+            wofuer: "Kollisionsvermeidung in Half-Duplex- und WLAN-Netzen."
+          }
+        ];
+
+        const sc = scenarios[Math.floor(Math.random() * scenarios.length)];
+
+        currentTask = {
+          q: sc.q,
+          expected: sc.expected,
+          altExpected: sc.alts,
+          alts: sc.alts,
+          unit: sc.unit,
+          hint: sc.hint,
+          tableHtml: tableHtml,
+          isText: true,
+          was: sc.was,
+          warum: sc.warum,
+          wofuer: sc.wofuer
+        };
+
+        renderMiniTaskUI();
+      },
+
       ipv4_special_ranges: function() {
         const tableHtml = `
           <div class="mt-3.5 overflow-x-auto rounded-xl border border-sky-200 bg-white shadow-xs">

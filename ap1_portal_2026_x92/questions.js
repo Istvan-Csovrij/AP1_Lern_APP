@@ -16313,5 +16313,313 @@ d) Standort 3: 2001:db8:8800:200::/56 | Abteilung 2: 2001:db8:8800:210::/60`,
         solutionDiagramSvg: VisualDiagrams.getIpv6SubnettingDiagramSvg ? VisualDiagrams.getIpv6SubnettingDiagramSvg() : "",
         explanation: "Hierarchisches IPv6-Subnetting: /48 -> /56 nutzt Bits 49-56 (Schrittweite 100 hex), /56 -> /60 nutzt Bits 57-60 (Schrittweite 10 hex), /60 -> /64 nutzt Bits 61-64 (Schrittweite 1 hex).",
         points: 8
+    },
+// =========================================================================
+    // OSI-SCHICHTENMODELL & NETZWERKPROTOKOLLE (LF 3 - IHK ABSCHLUSSPRÜFUNG AP1)
+    // Basierend auf originalen IHK-Unterrichtsmaterialien & Handlungsschritten
+    // =========================================================================
+    {
+        id: 731,
+        isBawueFocus: true,
+        isOSI: true,
+        theme: "osi",
+        topic: "OSI-Schichtenmodell (2 Hauptgruppen)",
+        type: "multiple-choice",
+        question: `🌐 <strong>IHK-Prüfungsaufgabe: Das OSI-Referenzmodell (LF 3 - 4 Punkte)</strong><br><br>
+Die Kommunikation in einem Unternehmensnetzwerk ist nach dem OSI-Referenzmodell (ISO/IEC 7498-1) standardisiert.<br><br>
+<strong>Frage:</strong> In welche <strong>zwei funktionalen Hauptgruppen</strong> (zusammengefasste Schichten) wird das 7-Schichten-Modell offiziell gegliedert?`,
+        options: [
+            "Transportschichten (Schichten 1 bis 4) & Anwenderschichten (Schichten 5 bis 7)",
+            "Hardwareschichten (Schichten 1 bis 3) & Softwareschichten (Schichten 4 bis 7)",
+            "Netzwerkschichten (Schichten 1 bis 2) & Internetschichten (Schichten 3 bis 7)",
+            "Physikalische Schichten (Schichten 1 bis 5) & Logische Schichten (Schichten 6 bis 7)"
+        ],
+        correctAnswer: 0,
+        explanation: `<strong>Offizielle IHK-Musterlösung (LF03V2 Handlungsschritt 1a):</strong><br>
+Das OSI-Referenzmodell teilt die 7 Schichten in zwei fundamentale Hauptgruppen:<br>
+1. <strong>Transportorientierte Schichten (Schichten 1 bis 4):</strong><br>
+   * Schicht 1: Bitübertragungsschicht (Physical Layer)<br>
+   * Schicht 2: Sicherungsschicht (Data Link Layer)<br>
+   * Schicht 3: Vermittlungsschicht (Network Layer)<br>
+   * Schicht 4: Transportschicht (Transport Layer)<br>
+   <em>Aufgabe:</em> Zuverlässiger und netzwerkunabhängiger Datentransport zwischen den Endsystemen.<br><br>
+2. <strong>Anwendungsorientierte Schichten (Schichten 5 bis 7):</strong><br>
+   * Schicht 5: Sitzungsschicht (Session Layer)<br>
+   * Schicht 6: Darstellungsschicht (Presentation Layer)<br>
+   * Schicht 7: Anwendungsschicht (Application Layer)<br>
+   <em>Aufgabe:</em> Unterstützung und Steuerung der Anwendungen und Datenformate für den Benutzer.<br><br>
+💡 <strong>Prüfungs-Eselsbrücke (Schichten 1 bis 7 von unten nach oben):</strong><br>
+<em>„<strong>P</strong>lease <strong>D</strong>o <strong>N</strong>ot <strong>T</strong>hrow <strong>S</strong>ausage <strong>P</strong>izza <strong>A</strong>way“</em> (Physical, Data Link, Network, Transport, Session, Presentation, Application)<br>
+Deutsch: <em>„<strong>A</strong>lle <strong>d</strong>eutschen <strong>S</strong>tudenten <strong>t</strong>rinken <strong>v</strong>erschiedene <strong>S</strong>orten <strong>B</strong>ier“</em> (Schichten 7 abwärts bis 1).`,
+        points: 4
+    },
+    {
+        id: 732,
+        isBawueFocus: true,
+        isOSI: true,
+        theme: "osi",
+        topic: "OSI-Schichtenmodell (Kopplungselemente)",
+        type: "open-text",
+        question: `🌐 <strong>IHK-Prüfungsaufgabe: Kopplungselemente & Netzwerkkomponenten (LF 3 - 6 Punkte)</strong><br><br>
+Im Netzwerk der Firmenzentrale werden folgende aktive und passive Netzwerkkomponenten eingesetzt:<br>
+1. <strong>Switch</strong> (Layer-2-Switch)<br>
+2. <strong>Router</strong><br>
+3. <strong>Repeater / Hub</strong><br>
+4. <strong>Application Gateway / Proxy</strong><br><br>
+<strong>Aufgabe:</strong><br>
+Geben Sie für jede der vier Komponenten die <strong>genaue Schichtnummer (1–7)</strong> und den <strong>offiziellen deutschen sowie englischen Namen der OSI-Schicht</strong> an, auf der die jeweilige Komponente primär arbeitet.`,
+        musterloesung: `1. Switch (Layer-2):
+   - Schicht: Schicht 2
+   - Name: Sicherungsschicht (Data Link Layer)
+   - Funktion: Weiterleitung von Frames anhand von MAC-Adressen (SAT-Tabelle).
+
+2. Router:
+   - Schicht: Schicht 3
+   - Name: Vermittlungsschicht (Network Layer)
+   - Funktion: Wegewahl (Routing) von Paketen zwischen unterschiedlichen logischen Netzen anhand von IP-Adressen (Routingtabelle).
+
+3. Repeater / Hub:
+   - Schicht: Schicht 1
+   - Name: Bitübertragungsschicht (Physical Layer)
+   - Funktion: Physikalische Signalverstärkung und Bitübertragung (keine Adressauswertung).
+
+4. Application Gateway / Proxy:
+   - Schicht: Schichten 5 bis 7 (primär Schicht 7)
+   - Name: Anwendungsschicht (Application Layer)
+   - Funktion: Protokollübersetzung, Inhaltsprüfung, Authentifizierung und Filterung auf Anwendungsebene.`,
+        correctAnswer: "1. Switch -> Schicht 2 (Sicherungsschicht / Data Link Layer)
+2. Router -> Schicht 3 (Vermittlungsschicht / Network Layer)
+3. Repeater/Hub -> Schicht 1 (Bitübertragungsschicht / Physical Layer)
+4. Gateway/Proxy -> Schicht 7 (Anwendungsschicht / Application Layer)",
+        explanation: "Kopplungselemente im OSI-Modell:
+- Schicht 1: Kabel, Repeater, Hub
+- Schicht 2: Bridge, Layer-2-Switch, Access Point, NIC (Netzwerkkarte)
+- Schicht 3: Router, Layer-3-Switch
+- Schicht 4-7: Gateway, Proxy, Next-Gen-Firewall (NGFW)",
+        points: 6
+    },
+    {
+        id: 733,
+        isBawueFocus: true,
+        isOSI: true,
+        theme: "osi",
+        topic: "OSI-Schichtenmodell (Protokoll-Zuordnung)",
+        type: "multiple-choice",
+        question: `🌐 <strong>IHK-Prüfungsaufgabe: Protokoll-Zuordnung (LF 3 - 4 Punkte)</strong><br><br>
+Die Netzwerkkomponenten arbeiten mit verschiedenen Protokollen. Dazu gehören u. a.:<br>
+• <strong>TCP</strong><br>
+• <strong>IP</strong><br>
+• <strong>UDP</strong><br>
+• <strong>IPsec</strong><br><br>
+<strong>Frage:</strong> Welche Zuordnung dieser vier Protokolle zu den Schichten des OSI-Modells ist normgerecht und entspricht dem IHK-Erwartungshorizont?`,
+        options: [
+            "Schicht 4 (Transportschicht): TCP, UDP | Schicht 3 (Vermittlungsschicht): IP, IPsec",
+            "Schicht 4 (Transportschicht): IP, IPsec | Schicht 3 (Vermittlungsschicht): TCP, UDP",
+            "Schicht 7 (Anwendungsschicht): TCP, UDP | Schicht 4 (Transportschicht): IP, IPsec",
+            "Schicht 3 (Vermittlungsschicht): TCP, IP | Schicht 2 (Sicherungsschicht): UDP, IPsec"
+        ],
+        correctAnswer: 0,
+        explanation: `<strong>Offizielle IHK-Lösung:</strong><br>
+• <strong>Schicht 4 (Transportschicht / Transport Layer):</strong> TCP (Transmission Control Protocol) und UDP (User Datagram Protocol). Sie regeln die Ende-zu-Ende-Verbindung und die Port-Adressierung.<br>
+• <strong>Schicht 3 (Vermittlungsschicht / Network Layer):</strong> IP (Internet Protocol) und IPsec (Internet Protocol Security). Sie regeln die logische IP-Adressierung und das Routing.<br>
+• Schichten 1, 2 sowie 5–7 sind von diesen vier Protokollen nicht belegt.`,
+        points: 4
+    },
+    {
+        id: 734,
+        isHard: true,
+        difficulty: "hard",
+        isBawueFocus: true,
+        isOSI: true,
+        theme: "osi",
+        topic: "OSI-Schichtenmodell (Große Referenztabelle)",
+        type: "open-text",
+        question: `🌐 <strong>IHK-Handlungsschritt: Die 7 Schichten des OSI-Modells (LF 3 - 7 Punkte)</strong><br><br>
+Die Informationsübertragung in modernen IP-Netzwerken erfolgt nach dem OSI-Modell (ISO/IEC 7498-1).<br><br>
+<strong>Aufgabe:</strong><br>
+Nennen Sie für alle <strong>7 Schichten (von Schicht 7 abwärts bis Schicht 1)</strong>:<br>
+a) Den offiziellen Schichtnamen (Deutsch oder Englisch)<br>
+b) Die zentrale Hauptaufgabe / Funktion dieser Schicht<br>
+c) Mindestens ein typisches Protokoll oder Kopplungselement dieser Schicht.`,
+        musterloesung: `Schicht 7: Anwendung (Application Layer)
+- Aufgabe: Schnittstelle zur Anwendungssoftware, Datenein- und Ausgabe, Netzwerkdienste für Endbenutzer.
+- Protokolle/Geräte: HTTP, HTTPS, DNS, DHCP, FTP, SMTP, SSH, RDP | Gateway, Proxy, NGFW.
+
+Schicht 6: Darstellung (Presentation Layer)
+- Aufgabe: Umwandlung von anwendungsabhängigen Formaten in netzweite Standardformate, Datenkompression, Zeichensatzkonvertierung (ASCII, UTF-8), Ver- und Entschlüsselung.
+- Protokolle/Geräte: TLS/SSL, SSH, JPEG, MIME.
+
+Schicht 5: Sitzung (Session Layer)
+- Aufgabe: Aufbau, Steuerung, Synchronisation (Checkpoints) und Beendigung von Sitzungen/Dialogen zwischen Endsystemen.
+- Protokolle/Geräte: RPC, NetBIOS, SIP, SMB.
+
+Schicht 4: Transport (Transport Layer)
+- Aufgabe: Zuverlässige oder unzuverlässige Ende-zu-Ende-Kommunikation, Segmentierung, Flusskontrolle, Port-Adressierung (Prozesszuordnung).
+- Protokolle/Geräte: TCP, UDP, SCTP | Layer-4-Switch.
+
+Schicht 3: Vermittlung (Network Layer)
+- Aufgabe: Logische Adressierung (IPv4, IPv6), Routing (Wegewahl) über Netzwerkgrenzen hinweg, Fragmentierung.
+- Protokolle/Geräte: IPv4, IPv6, ICMP, IPsec, OSPF, BGP | Router, Layer-3-Switch.
+
+Schicht 2: Sicherung (Data Link Layer)
+- Aufgabe: Zuverlässige Frame-Übertragung im lokalen Teilnetz, physische MAC-Adressierung, Fehlererkennung per Prüfsumme (CRC / FCS), Medienzugriff (CSMA/CD).
+- Protokolle/Geräte: Ethernet (IEEE 802.3), WLAN (IEEE 802.11), ARP, VLAN (802.1Q) | Layer-2-Switch, Bridge, NIC.
+
+Schicht 1: Bitübertragung (Physical Layer)
+- Aufgabe: Umwandlung von Bits in physikalische Signale (Strom, Licht, Funk), mechanische und elektrische Schnittstellendefinition (Stecker, Pinbelegung, Kabel).
+- Protokolle/Geräte: 1000BASE-T, DSL, V.24 | Patchkabel, Glasfaser, Repeater, Hub.`,
+        correctAnswer: "7: Anwendung (HTTP, DNS) | 6: Darstellung (TLS, Formate) | 5: Sitzung (RPC, Session-Steuerung) | 4: Transport (TCP, UDP, Ports) | 3: Vermittlung (IP, Routing) | 2: Sicherung (Ethernet, MAC, Frames) | 1: Bitübertragung (Signale, Kabel, Bits)",
+        explanation: "Das vollständige OSI-7-Schichtenmodell ist ein absoluter Standard in jeder AP1-Prüfung. Merksatz: Alle deutschen Studenten trinken verschiedene Sorten Bier.",
+        points: 7
+    },
+    {
+        id: 735,
+        isBawueFocus: true,
+        isOSI: true,
+        theme: "osi",
+        topic: "OSI-Schichtenmodell (PDUs & Kapselung)",
+        type: "open-text",
+        question: `🌐 <strong>IHK-Prüfungsaufgabe: PDU-Kapselung & Dateneinheiten (LF 3 - 5 Punkte)</strong><br><br>
+Beim Versenden einer E-Mail oder beim Abrufen einer Webseite durchlaufen die Daten den Protokollstapel von Schicht 7 hinab bis Schicht 1 (<strong>Kapselung / Encapsulation</strong>). Auf jeder Schicht wird ein spezifischer Header (und auf Schicht 2 ein Trailer) angehängt.<br><br>
+<strong>Aufgabe:</strong><br>
+Nennen Sie die normgerechten Fachbegriffe für die <strong>Protokolldateneinheiten (PDUs)</strong> auf den folgenden Schichten:<br>
+1. Schichten 7 bis 5 (Anwendungsorientierte Schichten)<br>
+2. Schicht 4 (Transportschicht - bei TCP bzw. UDP)<br>
+3. Schicht 3 (Vermittlungsschicht)<br>
+4. Schicht 2 (Sicherungsschicht)<br>
+5. Schicht 1 (Bitübertragungsschicht)`,
+        musterloesung: `1. Schichten 7–5: Daten (Data)
+2. Schicht 4: Segment (bei TCP) bzw. Datagramm (bei UDP)
+3. Schicht 3: Paket (Packet)
+4. Schicht 2: Frame (Datenrahmen) – besteht aus MAC-Header, Nutzlast und Prüfsummentrailer (FCS/CRC)
+5. Schicht 1: Bit (Bitstrom / Bits / physikalische Signale)
+
+💡 Kapselungsablauf (Sender, Schicht 7 ➔ 1):
+Daten ➔ TCP-Header + Daten (Segment) ➔ IP-Header + Segment (Paket) ➔ MAC-Header + Paket + CRC (Frame) ➔ Bits auf dem Medium.`,
+        correctAnswer: "1. Daten (Data)
+2. Segment / Datagramm
+3. Paket (Packet)
+4. Frame (Rahmen)
+5. Bit (Bits)",
+        explanation: "Merke für die Prüfung:
+Schicht 4 = Segment (TCP) / Datagramm (UDP)
+Schicht 3 = Paket (IP)
+Schicht 2 = Frame (MAC)
+Schicht 1 = Bit",
+        points: 5
+    },
+    {
+        id: 736,
+        isHard: true,
+        difficulty: "hard",
+        isBawueFocus: true,
+        isOSI: true,
+        theme: "osi",
+        topic: "OSI Layer 4: TCP vs. UDP Protokollvergleich",
+        type: "open-text",
+        question: `🌐 <strong>IHK-Prüfungsaufgabe: Layer-4-Protokolle – TCP vs. UDP (LF 3 / LF 9 - 6 Punkte)</strong><br><br>
+Auf der Transportschicht (OSI-Schicht 4) sind das Transmission Control Protocol (TCP) und das User Datagram Protocol (UDP) die beiden zentralen Protokolle.<br><br>
+<strong>Aufgabe:</strong><br>
+Vergleichen Sie TCP und UDP anhand der folgenden <strong>vier Kriterien</strong>:<br>
+a) Art des Verbindungsaufbaus<br>
+b) Zuverlässigkeit & Fehlerkorrektur (Bestätigung & Paketwiederholung)<br>
+c) Protokoll-Overhead (Header-Größe & Komplexität)<br>
+d) Nennen Sie je <strong>zwei typische Praxisanwendungen / Protokolle</strong>, die TCP bzw. UDP nutzen, und begründen Sie die Wahl.`,
+        musterloesung: `a) Verbindungsaufbau:
+- TCP: Verbindungsorientiert. Vor dem Datenaustausch wird eine logische Verbindung über den 3-Wege-Handshake (SYN ➔ SYN-ACK ➔ ACK) aufgebaut und am Ende sauber beendet (FIN/ACK).
+- UDP: Verbindungslos. Daten werden ohne vorherigen Handshake direkt an den Empfänger gesendet („Feuer und Vergessen“ / Best Effort).
+
+b) Zuverlässigkeit & Fehlerkontrolle:
+- TCP: Garantiert fehlerfreie und vollständige Übertragung in der richtigen Reihenfolge. Jedes empfangene Segment wird per ACK quittiert. Verlorene Pakete werden automatisch erneut gesendet (Retransmission). Fluss- und Staukontrolle (Sliding Window).
+- UDP: Keine Empfangsbestätigung, keine Flusskontrolle, keine Paketwiederholung bei Verlust. Keine Garantie für die richtige Reihenfolge.
+
+c) Protokoll-Overhead:
+- TCP: Großer Overhead; Header ist mindestens 20 Byte groß (Sequenznummer, ACK-Nummer, Flags, Window Size, Checksumme etc.).
+- UDP: Minimaler Overhead; Header ist fest nur 8 Byte klein (Quellport, Zielport, Länge, Checksumme).
+
+d) Praxis-Beispiele:
+- TCP: HTTP/HTTPS (Webseiten), SSH (sichere Fernwartung), SMTP/IMAP (E-Mail), FTP (Dateiübertragung). Begründung: Vollständigkeit und Fehlerfreiheit der Daten sind zwingend erforderlich.
+- UDP: VoIP (Internet-Telefonie), Live-Videostreaming, DNS-Abfragen, DHCP. Begründung: Minimale Latenzzeit ist wichtiger als vereinzelte verlorene Pakete (kein Ruckeln durch Nachfordern alter Frames).`,
+        correctAnswer: "TCP: Verbindungsorientiert (3-Way-Handshake SYN/ACK), zuverlässig mit Quittung & Retransmission, Header mind. 20 Byte, z.B. HTTP/SSH. UDP: Verbindungslos, Best Effort ohne Quittung, Header nur 8 Byte, z.B. VoIP/DNS.",
+        explanation: "In fast jeder AP1 wird der Unterschied zwischen TCP und UDP abgefragt! Die Schlüsselbegriffe sind: 3-Way-Handshake, ACK, Retransmission, Best-Effort, Headergröße (20 Byte vs. 8 Byte).",
+        points: 6
+    },
+    {
+        id: 737,
+        isBawueFocus: true,
+        isOSI: true,
+        theme: "osi",
+        topic: "OSI-Schichtenmodell (Adressierungsarten)",
+        type: "open-text",
+        question: `🌐 <strong>IHK-Prüfungsaufgabe: Adressierungsarten im OSI-Modell (LF 3 - 6 Punkte)</strong><br><br>
+In IP-basierten Rechnernetzen werden auf den Schichten 2, 3 und 4 drei völlig unterschiedliche Adressierungssysteme verwendet, um Daten fehlerfrei vom Absenderprogramm zum Empfängerprogramm zu transportieren.<br><br>
+<strong>Aufgabe:</strong><br>
+Benennen Sie für die <strong>Schichten 2, 3 und 4</strong> jeweils:<br>
+1. Die Bezeichnung der Adresse<br>
+2. Die Bitlänge der Adresse<br>
+3. Den genauen Zweck / Gültigkeitsbereich dieser Adresse im Netzwerk.`,
+        musterloesung: `1. Schicht 2 (Sicherungsschicht / Data Link Layer):
+   - Adresse: MAC-Adresse (Media Access Control / Ethernet-Hardware-Adresse)
+   - Bitlänge: 48 Bit (6 Byte, hexadezimale Schreibweise, z. B. 00:1A:2B:3C:4D:5E)
+   - Zweck: Physische und weltweit eindeutige Kennzeichnung der Netzwerkschnittstelle (NIC) zur lokalen Zustellung von Frames innerhalb desselben Subnetzes (Broadcast-Domäne).
+
+2. Schicht 3 (Vermittlungsschicht / Network Layer):
+   - Adresse: IP-Adresse (IPv4 oder IPv6)
+   - Bitlänge: IPv4 = 32 Bit (4 Oktette, z. B. 192.168.1.1) | IPv6 = 128 Bit (8 Hextette)
+   - Zweck: Logische und hierarchische Adressierung von Hosts zur weltweiten Wegewahl (Routing) über Subnetz- und Providergrenzen hinweg.
+
+3. Schicht 4 (Transportschicht / Transport Layer):
+   - Adresse: Portnummer
+   - Bitlänge: 16 Bit (Bereich von 0 bis 65.535)
+   - Zweck: Adressierung des konkreten Zielprozesses, Dienstes oder Anwendungsprogramms auf dem Host (Multiplexing/Demultiplexing, z. B. Port 80/443 für Webserver, Port 53 für DNS).`,
+        correctAnswer: "Schicht 2: MAC-Adresse (48 Bit) für lokale Frame-Zustellung. Schicht 3: IP-Adresse (32/128 Bit) für logisches Routing über Netze hinweg. Schicht 4: Portnummer (16 Bit) zur Identifikation des Zielprozesses/Dienstes.",
+        explanation: "Das Zusammenspiel von MAC (lokal), IP (global geroutet) und Port (Prozess auf dem Rechner) bildet die Basis moderner Netzwerktechnik (Socket = IP + Port).",
+        points: 6
+    },
+    {
+        id: 738,
+        isBawueFocus: true,
+        isOSI: true,
+        theme: "osi",
+        topic: "OSI-Schichtenmodell (Schichten 5 & 6 Aufgaben)",
+        type: "multiple-choice",
+        question: `🌐 <strong>IHK-Prüfungsaufgabe: Sitzungs- und Darstellungsschicht (LF 3 - 4 Punkte)</strong><br><br>
+Während im TCP/IP-Modell die Schichten 5 bis 7 oft in der Anwendungsschicht zusammengefasst werden, differenziert das ISO/OSI-Modell strikt zwischen Sitzungs- (Layer 5) und Darstellungsschicht (Layer 6).<br><br>
+<strong>Frage:</strong> Welche der folgenden Aussagen beschreibt die Kernfunktionen der <strong>Schichten 5 und 6</strong> vollkommen zutreffend?`,
+        options: [
+            "Schicht 6 sorgt für Datenformatierung, Zeichensatzwandlung (ASCII/UTF-8) und Verschlüsselung (TLS); Schicht 5 steuert und synchronisiert Kommunikationssitzungen (Sessions & Dialoge).",
+            "Schicht 6 routet Datenpakete zwischen verschiedenen Subnetzen; Schicht 5 überprüft die MAC-Adressen und berechnet Prüfsummen.",
+            "Schicht 6 ist für die elektrische Signalumwandlung auf Kupferkabeln zuständig; Schicht 5 stellt Ports für Anwendungsprozesse bereit.",
+            "Schicht 6 verwaltet die IP-Adressvergabe via DHCP; Schicht 5 baut den 3-Wege-Handshake via TCP auf."
+        ],
+        correctAnswer: 0,
+        explanation: `<strong>Offizielle IHK-Definition:</strong><br>
+• <strong>Schicht 6 (Darstellungsschicht / Presentation Layer):</strong> Wandelt systemspezifische Daten in standardisierte Formate um (Syntax und Semantik). Kernaufgaben sind Zeichencodierung (ASCII, UTF-8), Datenkompression sowie Verschlüsselung (z. B. SSL/TLS, SSH).<br>
+• <strong>Schicht 5 (Sitzungsschicht / Session Layer):</strong> Organisiert und steuert die logische Verbindung zwischen zwei Endpunkten. Sie regelt den Verbindungsaufbau, Dialogbetrieb (Halb-/Vollduplex) und setzt Synchronisationspunkte (Checkpoints), um nach Verbindungsabbrüchen an definierter Stelle fortzusetzen.`,
+        points: 4
+    },
+    {
+        id: 739,
+        isBawueFocus: true,
+        isOSI: true,
+        theme: "osi",
+        topic: "OSI Schicht 2: CSMA/CD & CSMA/CA Medienzugriff",
+        type: "multiple-choice",
+        question: `🌐 <strong>IHK-Prüfungsaufgabe: Medienzugriffsverfahren (LF 3 - 3 Punkte)</strong><br><br>
+In Computernetzen teilen sich oft mehrere Stationen ein gemeinsames Übertragungsmedium. Um Datenkollisionen zu behandeln, wurden Verfahren wie <strong>CSMA/CD</strong> und <strong>CSMA/CA</strong> entwickelt.<br><br>
+<strong>Frage:</strong> Auf welcher <strong>OSI-Schicht</strong> arbeiten diese Zugriffsverfahren und wofür steht die Abkürzung <strong>CD</strong> im Gegensatz zu <strong>CA</strong>?`,
+        options: [
+            "Schicht 2 (Sicherungsschicht / MAC-Sublayer); CD = Collision Detection (Kollisionserkennung im Ethernet), CA = Collision Avoidance (Kollisionsvermeidung im WLAN)",
+            "Schicht 1 (Bitübertragungsschicht); CD = Cable Distribution, CA = Carrier Attenuation",
+            "Schicht 3 (Vermittlungsschicht); CD = Connection Delivery, CA = Connection Authentication",
+            "Schicht 4 (Transportschicht); CD = Cyclic Duplication, CA = Congestion Allocation"
+        ],
+        correctAnswer: 0,
+        explanation: `<strong>IHK-Fachwissen Schicht 2:</strong><br>
+Die Medienzugriffsverfahren sind auf <strong>Schicht 2 (Sicherungsschicht / MAC-Sublayer)</strong> angesiedelt:<br>
+• <strong>CSMA/CD (Carrier Sense Multiple Access / Collision Detection):</strong> Wird im klassischen Halbduplex-Ethernet (IEEE 802.3 mit Koaxial- oder Hub-Netzen) eingesetzt. Erkennt eine Kollision während des Sendens, bricht sofort ab und sendet ein JAM-Signal.<br>
+• <strong>CSMA/CA (Carrier Sense Multiple Access / Collision Avoidance):</strong> Wird im WLAN (IEEE 802.11) eingesetzt. Da Funksender während des Sendens nicht gleichzeitig zuverlässig lauschen können, wird eine Kollision durch zufällige Wartezeiten (Backoff) und optionale RTS/CTS-Signalisierung von vornherein <em>vermieden</em>.`,
+        points: 3
     }
+
 ];

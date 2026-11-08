@@ -647,6 +647,33 @@ function filterQuestions(theme) {
                     q.topic.toLowerCase().includes("apipa")
                 ))
             );
+        } else if (theme === "osi" || theme === "osi-modell" || theme === "osi-schichten") {
+            filteredQuestions = questions.filter(q => 
+                q.theme === "osi" || 
+                q.theme === "osi-modell" || 
+                q.isOSI === true || 
+                (q.topic && (
+                    q.topic.toLowerCase().includes("osi") || 
+                    q.topic.toLowerCase().includes("schichtenmodell") || 
+                    q.topic.toLowerCase().includes("kopplungselement") || 
+                    q.topic.toLowerCase().includes("transportschicht") || 
+                    q.topic.toLowerCase().includes("sicherungsschicht") || 
+                    q.topic.toLowerCase().includes("vermittlungsschicht") || 
+                    q.topic.toLowerCase().includes("bitübertragung") || 
+                    q.topic.toLowerCase().includes("anwendungsschicht")
+                )) ||
+                (q.question && (
+                    q.question.toLowerCase().includes("osi-") || 
+                    q.question.toLowerCase().includes("osi ") || 
+                    q.question.toLowerCase().includes("osi-referenzmodell") || 
+                    q.question.toLowerCase().includes("schichtenmodell") || 
+                    q.question.toLowerCase().includes("transportschicht") || 
+                    q.question.toLowerCase().includes("sicherungsschicht") || 
+                    q.question.toLowerCase().includes("vermittlungsschicht") || 
+                    q.question.toLowerCase().includes("bitübertragungsschicht") || 
+                    q.question.toLowerCase().includes("anwendungsschicht")
+                ))
+            );
         } else if (theme === "hard-mode" || theme === "hard") {
             filteredQuestions = questions.filter(q => 
                 q.isHard === true || 
@@ -704,7 +731,7 @@ function filterQuestions(theme) {
     shuffleArray(filteredQuestions);
     
     // Limit to exactly 30 questions per round (only if not in favorites or subnetting mode to let them practice all questions)
-    if (theme !== "favorites" && theme !== "subnetting" && filteredQuestions.length > 30) {
+    if (theme !== "favorites" && theme !== "subnetting" && theme !== "osi" && filteredQuestions.length > 30) {
         filteredQuestions = filteredQuestions.slice(0, 30);
     }
     
@@ -1430,6 +1457,8 @@ function resetStats() {
 // Translate theme keys to Labels
 function getThemeLabel(key) {
     const labels = {
+        osi: "📡 OSI-Schichtenmodell (7 Schichten, LF 3)",
+        "osi-modell": "📡 OSI-Schichtenmodell (7 Schichten, LF 3)",
         "it-arbeitsplatz": "🎯 AP1: Einrichten eines IT-gestützten Arbeitsplatzes",
         arbeitsplatz: "🎯 AP1: Einrichten eines IT-gestützten Arbeitsplatzes",
         lf1: "LF 1: Unternehmen & Markt",
