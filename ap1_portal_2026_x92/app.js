@@ -608,8 +608,11 @@ function filterQuestions(theme) {
                 ))
             );
         } else if (theme === "pruefungsblatt" || theme === "checkauthority" || theme === "2d-arrays") {
-            filteredQuestions = questions.filter(q => 
-                (q.id >= 770 && q.id <= 788) || 
+            const pool = (typeof staticQuestions !== "undefined" && Array.isArray(staticQuestions)) ? staticQuestions : questions;
+            filteredQuestions = pool.filter(q => 
+                (q.id >= 770 && q.id <= 790) || 
+                q.theme === "pruefungsblatt" ||
+                q.isPruefungsblatt === true ||
                 (q.topic && (q.topic.includes("checkAuthority") || q.topic.includes("Prüfungsblatt") || q.topic.includes("2D-"))) ||
                 (q.question && (q.question.includes("checkAuthority") || q.question.includes("keyData") || q.question.includes("Prüfungsbogen")))
             );
@@ -693,8 +696,9 @@ function filterQuestions(theme) {
             filteredQuestions = questions.filter(q => q.theme === theme);
         }
         
-        // Apply Schwierigkeitsgrad filter if selected and not already in dedicated hard-mode
-        if (difficultySelect && difficultySelect.value === "hard" && theme !== "hard-mode") {
+        // Apply Schwierigkeitsgrad filter if selected and not already in dedicated hard-mode or pruefungsblatt
+        const isExemptTheme = (theme === "pruefungsblatt" || theme === "checkauthority" || theme === "2d-arrays");
+        if (!isExemptTheme && difficultySelect && difficultySelect.value === "hard" && theme !== "hard-mode") {
             const hardSubset = filteredQuestions.filter(q => 
                 q.isHard === true || 
                 q.difficulty === "hard" || 
@@ -702,24 +706,22 @@ function filterQuestions(theme) {
                 (q.topic && q.topic.includes("Meisterklasse")) ||
                 (q.question && q.question.includes("Meisterklasse"))
             );
-            // Fallback protection: Don't starve categories (especially pseudocode) down to 0 or 1 question
             if (hardSubset.length >= 5 || (theme !== "pseudocode" && hardSubset.length > 0)) {
                 filteredQuestions = hardSubset;
             }
-        } else if (difficultySelect && difficultySelect.value === "standard" && theme !== "hard-mode") {
+        } else if (!isExemptTheme && difficultySelect && difficultySelect.value === "standard" && theme !== "hard-mode") {
             const stdSubset = filteredQuestions.filter(q => 
                 !q.isHard && q.difficulty !== "hard" && !q.isMasterclass &&
                 !(q.topic && q.topic.includes("Meisterklasse")) &&
                 !(q.question && q.question.includes("Meisterklasse"))
             );
-            // Fallback protection: Don't starve categories down to 0 or 1 question
             if (stdSubset.length >= 5 || (theme !== "pseudocode" && stdSubset.length > 0)) {
                 filteredQuestions = stdSubset;
             }
         }
 
-        // Safety: If open-text mode is active, ensure 100% of filtered questions are open-text
-        if (typeSelect && typeSelect.value === "open") {
+        // Safety: If open-text mode is active, ensure 100% of filtered questions are open-text (except for pruefungsblatt)
+        if (!isExemptTheme && typeSelect && typeSelect.value === "open") {
             filteredQuestions = filteredQuestions.filter(q => q.type === "open-text");
         }
     }
@@ -739,10 +741,12 @@ function filterQuestions(theme) {
     
     // Sort / Shuffle: Für Pseudocode & Prüfungsblatt IMMER die echten Prüfungsblatt-Aufgaben (checkAuthority 782-788) an Frage 1 bis 7 pinnen!
     if (theme === "pseudocode" || theme === "pruefungsblatt" || theme === "checkauthority" || theme === "code" || theme === "algorithmen") {
-        const photoExamQs = filteredQuestions.filter(q => q.id >= 782 && q.id <= 788);
+        const photoExamQs = filteredQuestions.filter(q => q.id >= 782 && q.id <= 790);
         const codeChipQs = filteredQuestions.filter(q => (q.id >= 770 && q.id < 782) || (q.topic && q.topic.includes("IHK Original")));
         const remainingQs = filteredQuestions.filter(q => !photoExamQs.includes(q) && !codeChipQs.includes(q));
-        shuffleArray(remainingQs);
+        if (theme !== "pruefungsblatt" && theme !== "checkauthority") {
+            shuffleArray(remainingQs);
+        }
         filteredQuestions = [...photoExamQs, ...codeChipQs, ...remainingQs];
     } else {
         shuffleArray(filteredQuestions);

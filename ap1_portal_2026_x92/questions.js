@@ -17460,6 +17460,47 @@ ENDE FUNKTION`,
         correctAnswer: 0,
         explanation: "In der Informatik und in allen IHK-Prüfungen gilt universell die Zeilen-zuerst-Konvention (Row-Major): matrix[zeile][spalte]. Der erste Index i wählt die Zeile aus, der zweite Index j wählt die Spalte innerhalb dieser Zeile.",
         points: 3
+    },
+
+    {
+        id: 789,
+        isHard: true,
+        difficulty: "hard",
+        theme: "pseudocode",
+        isPseudocode: true,
+        isPruefungsblatt: true,
+        topic: "💻 IHK Original-Prüfungsblatt (MC): checkAuthority(3, 236) Rückgabewert",
+        type: "multiple-choice",
+        question: "💻 **Original IHK-Prüfungsaufgabe (Fortsetzung 2. Aufgabe e):**\n\nIhr Kollege hat die Methode `bool checkAuthority(int id, int roomNr)` erstellt. Diese greift auf folgendes globales zweidimensionales Array `keyData[][]` zu:\n\n- Mitarbeiter-ID 1 (Zeile 0): Räume 223, 312, 154, 47, 124, 236, 334\n- Mitarbeiter-ID 2 (Zeile 1): Räume 103, 401, 14, 236, 56\n- Mitarbeiter-ID 3 (Zeile 2): Räume 20, 312, 235, 17, 124, 32\n\n```text\n1  Funktion checkAuthority(id, roomNr)\n2      Für i von 0 bis (AnzahlZeilen von keyData) - 1\n3          Für j von 1 bis (AnzahlBelegteSpalten von keyData) - 1\n4              Wenn id gleich keyData[i][0] und roomNr gleich keyData[i][j] dann\n5                  Rückgabe True\n6              Ende Wenn\n7          Ende Für\n8      Ende Für\n9      Rückgabe False\n10 Ende Funktion\n```\n\nWelcher Rückgabewert wird bei Aufruf von `checkAuthority(id = 3, roomNr = 236)` geliefert und warum?",
+        options: [
+                    "False – weil Mitarbeiter 3 (Zeile 2) keinen Zutritt zu Raum 236 besitzt (Raum 236 ist nur bei MA 1 und MA 2 eingetragen)",
+                    "True – weil Raum 236 im Array vorhanden ist",
+                    "-1 – weil Raum 236 nicht gefunden wurde",
+                    "IndexOutOfBoundsException – da Mitarbeiter 3 weniger Spalten belegt als Mitarbeiter 1"
+        ],
+        correctAnswer: 0,
+        explanation: "Schreibtischtest: In Zeile 2 läuft die Schleife über i. Bei i=2 (Mitarbeiter 3) wird die innere Schleife über die Räume (20, 312, 235, 17, 124, 32) ausgeführt. Der Raum 236 ist bei Mitarbeiter 3 nicht vorhanden. Die Bedingung in Zeile 4 wird nie wahr -> Zeile 9 liefert False.",
+        points: 6
+    },
+    {
+        id: 790,
+        isHard: true,
+        difficulty: "hard",
+        theme: "pseudocode",
+        isPseudocode: true,
+        isPruefungsblatt: true,
+        topic: "💻 IHK Original-Prüfungsblatt (MC): checkAuthority(2, 236) Schleifenabbruch",
+        type: "multiple-choice",
+        question: "Gegeben ist der Pseudocode und die Tabelle `keyData[][]` aus der IHK-Aufgabe.\n\nNun wird die Funktion aufgerufen mit:\n`checkAuthority(id = 2, roomNr = 236)`\n\nBei welchen Werten der Schleifenzähler ($i$ und $j$) bricht die Funktion ab?",
+        options: [
+                    "i = 1 und j = 4 – da bei MA 2 in Spalte 4 der Raum 236 gefunden und sofort 'Rückgabe True' ausgeführt wird",
+                    "i = 0 und j = 6 – da Raum 236 bereits bei Mitarbeiter 1 gefunden wird",
+                    "i = 2 und j = 4 – am Ende des Arrays",
+                    "Die Schleife bricht nicht vorzeitig ab, sondern läuft vollständig bis Zeile 9 durch"
+        ],
+        correctAnswer: 0,
+        explanation: "Zeile i = 1 entspricht Mitarbeiter 2 (keyData[1][0] == 2). In der inneren Schleife wird bei j = 4 der Raum 236 angetroffen (keyData[1][4] == 236). Beide Bedingungen in Zeile 4 sind WAHR -> Zeile 5 führt 'Rückgabe True' aus und beendet die Funktion sofort.",
+        points: 6
     }
 
 ];
