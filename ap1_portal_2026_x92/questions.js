@@ -16387,15 +16387,15 @@ Geben Sie für jede der vier Komponenten die <strong>genaue Schichtnummer (1–7
    - Schicht: Schichten 5 bis 7 (primär Schicht 7)
    - Name: Anwendungsschicht (Application Layer)
    - Funktion: Protokollübersetzung, Inhaltsprüfung, Authentifizierung und Filterung auf Anwendungsebene.`,
-        correctAnswer: "1. Switch -> Schicht 2 (Sicherungsschicht / Data Link Layer)
+        correctAnswer: `1. Switch -> Schicht 2 (Sicherungsschicht / Data Link Layer)
 2. Router -> Schicht 3 (Vermittlungsschicht / Network Layer)
 3. Repeater/Hub -> Schicht 1 (Bitübertragungsschicht / Physical Layer)
-4. Gateway/Proxy -> Schicht 7 (Anwendungsschicht / Application Layer)",
-        explanation: "Kopplungselemente im OSI-Modell:
+4. Gateway/Proxy -> Schicht 7 (Anwendungsschicht / Application Layer)`,
+        explanation: `Kopplungselemente im OSI-Modell:
 - Schicht 1: Kabel, Repeater, Hub
 - Schicht 2: Bridge, Layer-2-Switch, Access Point, NIC (Netzwerkkarte)
 - Schicht 3: Router, Layer-3-Switch
-- Schicht 4-7: Gateway, Proxy, Next-Gen-Firewall (NGFW)",
+- Schicht 4-7: Gateway, Proxy, Next-Gen-Firewall (NGFW)`,
         points: 6
     },
     {
@@ -16496,16 +16496,16 @@ Nennen Sie die normgerechten Fachbegriffe für die <strong>Protokolldateneinheit
 
 💡 Kapselungsablauf (Sender, Schicht 7 ➔ 1):
 Daten ➔ TCP-Header + Daten (Segment) ➔ IP-Header + Segment (Paket) ➔ MAC-Header + Paket + CRC (Frame) ➔ Bits auf dem Medium.`,
-        correctAnswer: "1. Daten (Data)
+        correctAnswer: `1. Daten (Data)
 2. Segment / Datagramm
 3. Paket (Packet)
 4. Frame (Rahmen)
-5. Bit (Bits)",
-        explanation: "Merke für die Prüfung:
+5. Bit (Bits)`,
+        explanation: `Merke für die Prüfung:
 Schicht 4 = Segment (TCP) / Datagramm (UDP)
 Schicht 3 = Paket (IP)
 Schicht 2 = Frame (MAC)
-Schicht 1 = Bit",
+Schicht 1 = Bit`,
         points: 5
     },
     {
@@ -16726,8 +16726,8 @@ PROGRAMMENDE</pre>
      FÜR i := 0 BIS 3 MACHE   (oder: FÜR i := 0 BIS LÄNGE(noten) - 1 MACHE)
    - Korrektur Zeile 9:
      float schnitt := summe / 4.0   (oder: double schnitt := (float)summe / 4.0)`,
-        correctAnswer: "1. Fehler 1 in Zeile 5: Schleife läuft bis 4 statt bis 3 -> IndexOutOfBoundsException (Off-by-One). Fehler 2 in Zeile 9: Integer-Division schneidet Nachkommastellen ab, 'schnitt' muss float/double sein.
-2. Korrektur: FÜR i := 0 BIS 3 MACHE | float schnitt := summe / 4.0",
+        correctAnswer: `1. Fehler 1 in Zeile 5: Schleife läuft bis 4 statt bis 3 -> IndexOutOfBoundsException (Off-by-One). Fehler 2 in Zeile 9: Integer-Division schneidet Nachkommastellen ab, 'schnitt' muss float/double sein.
+2. Korrektur: FÜR i := 0 BIS 3 MACHE | float schnitt := summe / 4.0`,
         explanation: "In IHK-Prüfungen sind die beliebtesten Fehler im Code-Review: 1. Off-by-One bei Arraygrenzen (i <= n statt i < n), 2. Ganzzahldivision ohne Nachkommastellen (int statt float/double), 3. Fehlende Initialisierung vor der Schleife.",
         points: 6
     },
