@@ -3988,6 +3988,32 @@
         }
 
         const scenarios = [
+          // 0. IHK Original-Prüfungsblatt: checkAuthority 2D-Array
+          {
+            q: `📋 <strong>IHK Original-Prüfungsblatt: Fortsetzung 2. Aufgabe (checkAuthority):</strong><br>
+Ihr Kollege hat die Methode <code>bool checkAuthority(int id, int roomNr)</code> erstellt, die auf ein 2D-Array <code>keyData[][]</code> zugreift:<br>
+<div class="overflow-x-auto my-2.5 rounded-lg border border-slate-300 shadow-xs"><table class="w-full text-xs border-collapse font-mono bg-white text-slate-800">
+<tr class="bg-indigo-950 text-white font-bold"><th class="p-1.5 border border-indigo-900">Mitarbeiter-ID</th><th class="p-1.5 border border-indigo-900">Room1</th><th class="p-1.5 border border-indigo-900">Room2</th><th class="p-1.5 border border-indigo-900">Room3</th><th class="p-1.5 border border-indigo-900">Room4</th><th class="p-1.5 border border-indigo-900">Room5</th><th class="p-1.5 border border-indigo-900">Room6</th></tr>
+<tr class="border-b"><td class="p-1.5 border font-bold bg-slate-50">1</td><td class="p-1.5 border">223</td><td class="p-1.5 border">312</td><td class="p-1.5 border">154</td><td class="p-1.5 border">47</td><td class="p-1.5 border">124</td><td class="p-1.5 border">236</td></tr>
+<tr class="border-b"><td class="p-1.5 border font-bold bg-slate-50">2</td><td class="p-1.5 border">103</td><td class="p-1.5 border">401</td><td class="p-1.5 border">14</td><td class="p-1.5 border">236</td><td class="p-1.5 border">56</td><td class="p-1.5 border">-</td></tr>
+<tr><td class="p-1.5 border font-bold bg-slate-50">3</td><td class="p-1.5 border">20</td><td class="p-1.5 border">312</td><td class="p-1.5 border">235</td><td class="p-1.5 border">17</td><td class="p-1.5 border">124</td><td class="p-1.5 border">32</td></tr>
+</table></div>
+<pre class="bg-slate-900 text-slate-100 p-2.5 rounded-lg text-xs font-mono my-2 overflow-x-auto">
+Funktion checkAuthority(id, roomNr)
+    Für i von 0 bis (AnzahlZeilen von keyData) - 1
+        Für j von 1 bis (AnzahlBelegteSpalten von keyData) - 1
+            Wenn id gleich keyData[i][0] und roomNr gleich keyData[i][j] dann
+                Rückgabe True
+            Ende Wenn
+        Ende Für
+    Ende Für
+    Rückgabe False
+Ende Funktion</pre>
+<strong>Frage:</strong> Welcher boolesche Rückgabewert wird bei <code>checkAuthority(id = 3, roomNr = 236)</code> geliefert? (Antwort: True oder False)`,
+            a: "False",
+            buttons: makeButtons(["False", "True", "-1", "IndexOutOfBounds"]),
+            exp: "Mitarbeiter mit ID = 3 befindet sich in Zeile 2 (keyData[2][0] = 3). Seine zugelassenen Räume lauten: 20, 312, 235, 17, 124, 32. Raum 236 ist bei Mitarbeiter 3 nicht vorhanden (nur bei MA 1 und 2 eingetragen). Die Bedingung in Zeile 4 wird nie erfüllt -> Zeile 9 liefert 'False'."
+          },
           // 1. Trace-Tabelle: Modulo & Summe gerader Zahlen
           {
             q: `🔍 <strong>Pseudocode LESEN (Trace-Tabelle &amp; Schreibtischtest):</strong><br>

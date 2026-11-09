@@ -607,6 +607,12 @@ function filterQuestions(theme) {
                     q.question.toLowerCase().includes("bitweise")
                 ))
             );
+        } else if (theme === "pruefungsblatt" || theme === "checkauthority" || theme === "2d-arrays") {
+            filteredQuestions = questions.filter(q => 
+                (q.id >= 770 && q.id <= 788) || 
+                (q.topic && (q.topic.includes("checkAuthority") || q.topic.includes("Prüfungsblatt") || q.topic.includes("2D-"))) ||
+                (q.question && (q.question.includes("checkAuthority") || q.question.includes("keyData") || q.question.includes("Prüfungsbogen")))
+            );
         } else if (theme === "pseudocode" || theme === "code" || theme === "algorithmen") {
             filteredQuestions = questions.filter(q => 
                 q.theme === "pseudocode" || 
@@ -731,11 +737,19 @@ function filterQuestions(theme) {
     
     currentTheme = theme;
     
-    // Shuffle the filtered questions to make it dynamic
-    shuffleArray(filteredQuestions);
+    // Sort / Shuffle: Für Pseudocode & Prüfungsblatt IMMER die echten Prüfungsblatt-Aufgaben (checkAuthority 782-788) an Frage 1 bis 7 pinnen!
+    if (theme === "pseudocode" || theme === "pruefungsblatt" || theme === "checkauthority" || theme === "code" || theme === "algorithmen") {
+        const photoExamQs = filteredQuestions.filter(q => q.id >= 782 && q.id <= 788);
+        const codeChipQs = filteredQuestions.filter(q => (q.id >= 770 && q.id < 782) || (q.topic && q.topic.includes("IHK Original")));
+        const remainingQs = filteredQuestions.filter(q => !photoExamQs.includes(q) && !codeChipQs.includes(q));
+        shuffleArray(remainingQs);
+        filteredQuestions = [...photoExamQs, ...codeChipQs, ...remainingQs];
+    } else {
+        shuffleArray(filteredQuestions);
+    }
     
-    // Limit to exactly 30 questions per round (only if not in favorites, subnetting, osi or pseudocode to let them practice all questions)
-    if (theme !== "favorites" && theme !== "subnetting" && theme !== "osi" && theme !== "pseudocode" && filteredQuestions.length > 30) {
+    // Limit to exactly 30 questions per round (only if not in favorites, subnetting, osi, pseudocode or pruefungsblatt to let them practice all questions)
+    if (theme !== "favorites" && theme !== "subnetting" && theme !== "osi" && theme !== "pseudocode" && theme !== "pruefungsblatt" && filteredQuestions.length > 30) {
         filteredQuestions = filteredQuestions.slice(0, 30);
     }
     
@@ -1461,6 +1475,8 @@ function resetStats() {
 // Translate theme keys to Labels
 function getThemeLabel(key) {
     const labels = {
+        pruefungsblatt: "📋 IHK-Prüfungsblatt: checkAuthority & 2D-Arrays",
+        checkauthority: "📋 IHK-Prüfungsblatt: checkAuthority & 2D-Arrays",
         osi: "📡 OSI-Schichtenmodell (7 Schichten, LF 3)",
         "osi-modell": "📡 OSI-Schichtenmodell (7 Schichten, LF 3)",
         "it-arbeitsplatz": "🎯 AP1: Einrichten eines IT-gestützten Arbeitsplatzes",
