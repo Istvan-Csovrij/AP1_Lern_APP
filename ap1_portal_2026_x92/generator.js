@@ -646,18 +646,18 @@ function generateDynamicQuestions(typeMode = "mix") {
     // LERNFELD 5 & LF 10: SOFTWARE & ALGORITHMEN (lf5)
     // ==========================================
     
-    // 5.1 Pseudocode Schleifen-Tracing
-    for (let i = 0; i < 15; i++) {
+    // 5.1 Pseudocode Dynamische Aufgaben (Multiple-Choice, Text-Input & Freitext)
+    for (let i = 0; i < 20; i++) {
         const startErg = Math.floor(Math.random() * 5); // 0 bis 4
         const multiplier = Math.floor(Math.random() * 3) + 1; // 1 bis 3
         const loopLimit = Math.floor(Math.random() * 4) + 4; // 4 bis 7
+        const isHardQuestion = (i % 3 === 0);
         
         let erg = startErg;
         for (let j = 1; j < loopLimit; j++) {
             erg = erg + j * multiplier;
         }
 
-        const isOpen = shouldBeOpenText();
         const pCode = `SET erg = ${startErg}\nSET i = 1\nWHILE i < ${loopLimit} DO\n    erg = erg + (i * ${multiplier})\n    i = i + 1\nEND WHILE`;
         const explanationStr = `Durchlauf-Rechnung:\nStart: erg = ${startErg}\n` + 
             Array.from({ length: loopLimit - 1 }, (_, idx) => {
@@ -665,31 +665,70 @@ function generateDynamicQuestions(typeMode = "mix") {
                 const addValue = currentI * multiplier;
                 const prevErg = startErg + Array.from({ length: idx }, (_, k) => (k+1)*multiplier).reduce((a, b) => a + b, 0);
                 return `Durchlauf i=${currentI}: erg = ${prevErg} + (${currentI} * ${multiplier}) = ${prevErg + addValue}`;
-            }).join("\n") + `\nAm Ende bricht die Schleife bei i = ${loopLimit} ab.`;
+            }).join("\n") + `\nAm Ende bricht die Schleife bei i = ${loopLimit} ab. Endergebnis: ${erg}.`;
 
-        if (isOpen) {
+        if (isOnlyOpen || (typeMode === "mix" && i % 2 === 0)) {
+            // Freitext-Variante
             dynamicQuestions.push({
                 id: currentId++,
                 theme: "pseudocode",
                 isPseudocode: true,
-                topic: "💻 Pseudocode LESEN: Schleifen-Tracing (LF 5)",
+                isHard: isHardQuestion,
+                difficulty: isHardQuestion ? "hard" : "standard",
+                topic: `💻 Pseudocode LESEN: Schleifen-Tracing #${i + 1} (LF 5)`,
                 type: "open-text",
-                question: `Fachaufgabe Algorithmen (LF 5 - Pseudocode Tracing): Bestimme den Endwert der Variable 'erg' am Ende dieses Pseudocode-Ablaufs und notiere deine Berechnungsschritte.`,
+                question: `Fachaufgabe Algorithmen (LF 5 - Pseudocode Tracing #${i + 1}): Bestimme den Endwert der Variable 'erg' am Ende dieses Pseudocode-Ablaufs (Startwert: ${startErg}, Multiplikator: ${multiplier}, Limit: ${loopLimit}) und notiere deine Berechnungsschritte.`,
                 code: pCode,
                 musterloesung: `Ergebnis: ${erg}.\nBerechnungsschritte:\n${explanationStr}`,
-                explanation: explanationStr
+                explanation: explanationStr,
+                points: isHardQuestion ? 8 : 5
             });
-        } else {
+        } else if (i % 2 === 1 && !isOnlyOpen) {
+            // Multiple-Choice-Variante
+            const distractors = [
+                erg + multiplier,
+                Math.max(0, erg - multiplier * 2),
+                erg + loopLimit
+            ];
+            // Garantiere eindeutige Optionen
+            const uniqueOptions = Array.from(new Set([`${erg} (korrekt nach ${loopLimit - 1} Durchläufen)`, ...distractors.map(d => `${d} (Fehlerhafte Durchlaufzahl oder Fehlberechnung)`)]));
+            while (uniqueOptions.length < 4) {
+                uniqueOptions.push(`${erg + uniqueOptions.length * 3} (Fehlerhafte Iteration)`);
+            }
+            const correctOpt = uniqueOptions[0];
+            // Shuffle
+            const shuffled = [...uniqueOptions].sort(() => Math.random() - 0.5);
+            const cIdx = shuffled.indexOf(correctOpt);
+
             dynamicQuestions.push({
                 id: currentId++,
                 theme: "pseudocode",
                 isPseudocode: true,
-                topic: "💻 Pseudocode LESEN: Schleifen-Tracing (LF 5)",
+                isHard: isHardQuestion,
+                difficulty: isHardQuestion ? "hard" : "standard",
+                topic: `💻 Pseudocode LESEN: Schleifen-Tracing MC #${i + 1} (LF 5)`,
+                type: "multiple-choice",
+                question: `Fachaufgabe Algorithmen (LF 5 - Pseudocode Tracing MC #${i + 1}): Welchen Endwert hat die Variable 'erg' nach Beendigung dieses Schleifendurchlaufs?\n\n${pCode}`,
+                options: shuffled,
+                correctAnswer: cIdx,
+                explanation: explanationStr,
+                points: isHardQuestion ? 5 : 3
+            });
+        } else {
+            // Text-Input (Zahleneingabe)
+            dynamicQuestions.push({
+                id: currentId++,
+                theme: "pseudocode",
+                isPseudocode: true,
+                isHard: isHardQuestion,
+                difficulty: isHardQuestion ? "hard" : "standard",
+                topic: `💻 Pseudocode LESEN: Schleifen-Tracing #${i + 1} (LF 5)`,
                 type: "text-input",
-                question: `Fachaufgabe Algorithmen (LF 5 - Pseudocode Tracing): Welchen Wert hat die Variable 'erg' am Ende dieses Pseudocode-Ablaufs?`,
+                question: `Fachaufgabe Algorithmen (LF 5 - Pseudocode Tracing #${i + 1}): Welchen Wert hat die Variable 'erg' am Ende dieses Pseudocode-Ablaufs? (Start: ${startErg}, Limit: ${loopLimit})`,
                 code: pCode,
                 correctAnswers: [erg.toString()],
-                explanation: explanationStr
+                explanation: explanationStr,
+                points: isHardQuestion ? 5 : 3
             });
         }
     }

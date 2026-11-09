@@ -239,11 +239,12 @@ function initQuestions(typeMode) {
         questions = questions.filter(q => q.type === "open-text");
     }
     
-    // Strict Deduplication: Keine Duplikate im globalen Fragenpool
+    // Strict Deduplication: Keine Duplikate im globalen Fragenpool (unter Berücksichtigung von Programmcode)
     const seenGlobalSigs = new Set();
     questions = questions.filter(q => {
         if (!q || !q.question) return false;
-        const sig = q.question.toLowerCase().replace(/<[^>]+>/g, '').replace(/[^a-z0-9äöüß]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 140);
+        const codeSnip = (q.code || '').slice(0, 45);
+        const sig = (q.question + ' ' + codeSnip).toLowerCase().replace(/<[^>]+>/g, '').replace(/[^a-z0-9äöüß]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 160);
         if (seenGlobalSigs.has(sig)) return false;
         seenGlobalSigs.add(sig);
         return true;
@@ -695,7 +696,8 @@ function filterQuestions(theme) {
                 (q.topic && q.topic.includes("Meisterklasse")) ||
                 (q.question && q.question.includes("Meisterklasse"))
             );
-            if (hardSubset.length > 0) {
+            // Fallback protection: Don't starve categories (especially pseudocode) down to 0 or 1 question
+            if (hardSubset.length >= 5 || (theme !== "pseudocode" && hardSubset.length > 0)) {
                 filteredQuestions = hardSubset;
             }
         } else if (difficultySelect && difficultySelect.value === "standard" && theme !== "hard-mode") {
@@ -704,7 +706,8 @@ function filterQuestions(theme) {
                 !(q.topic && q.topic.includes("Meisterklasse")) &&
                 !(q.question && q.question.includes("Meisterklasse"))
             );
-            if (stdSubset.length > 0) {
+            // Fallback protection: Don't starve categories down to 0 or 1 question
+            if (stdSubset.length >= 5 || (theme !== "pseudocode" && stdSubset.length > 0)) {
                 filteredQuestions = stdSubset;
             }
         }
@@ -719,7 +722,8 @@ function filterQuestions(theme) {
     const seenRoundSigs = new Set();
     filteredQuestions = filteredQuestions.filter(q => {
         if (!q || !q.question) return false;
-        const sig = q.question.toLowerCase().replace(/<[^>]+>/g, '').replace(/[^a-z0-9äöüß]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 140);
+        const codeSnip = (q.code || '').slice(0, 45);
+        const sig = (q.question + ' ' + codeSnip).toLowerCase().replace(/<[^>]+>/g, '').replace(/[^a-z0-9äöüß]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 160);
         if (seenRoundSigs.has(sig)) return false;
         seenRoundSigs.add(sig);
         return true;
@@ -730,8 +734,8 @@ function filterQuestions(theme) {
     // Shuffle the filtered questions to make it dynamic
     shuffleArray(filteredQuestions);
     
-    // Limit to exactly 30 questions per round (only if not in favorites or subnetting mode to let them practice all questions)
-    if (theme !== "favorites" && theme !== "subnetting" && theme !== "osi" && filteredQuestions.length > 30) {
+    // Limit to exactly 30 questions per round (only if not in favorites, subnetting, osi or pseudocode to let them practice all questions)
+    if (theme !== "favorites" && theme !== "subnetting" && theme !== "osi" && theme !== "pseudocode" && filteredQuestions.length > 30) {
         filteredQuestions = filteredQuestions.slice(0, 30);
     }
     
@@ -2581,23 +2585,42 @@ function autoGradeSubtask(sub) {
         let totalCells = 1;
         if (sub.tableConfig && sub.tableConfig.rows) {
             totalCells = sub.tableConfig.rows.length;
+            let cellsAnswered = 0;
+            
+            // Check individual cell keys in examAnswersData
+            sub.tableConfig.rows.forEach((r, rIdx) => {
+                const cols = sub.tableConfig.columns || [""];
+                cols.forEach((_, cIdx) => {
+                    const cellKey = `${sub.id}_${rIdx}_${cIdx}`;
+                    const cVal = (examAnswersData[cellKey] || "").toString().toLowerCase().trim();
+                    if (cVal.length > 1) {
+                        cellsAnswered++;
+                        if (sub.solution && sub.solution.toLowerCase().includes(cVal)) {
+                            correctCells++;
+                        }
+                    }
+                });
+            });
+
             if (typeof userVal === "object") {
                 Object.keys(userVal).forEach(k => {
                     const cellVal = (userVal[k] || "").toLowerCase().trim();
-                    if (cellVal.length > 2 && sub.solution && sub.solution.toLowerCase().includes(cellVal)) {
+                    if (cellVal.length > 1 && sub.solution && sub.solution.toLowerCase().includes(cellVal)) {
                         correctCells++;
                     }
                 });
-            } else if (typeof userVal === "string") {
+            } else if (typeof userVal === "string" && userVal.length > 5) {
                 sub.tableConfig.rows.forEach(r => {
                     const rowText = (Array.isArray(r) ? r.join(" ") : String(r)).toLowerCase();
-                    const words = rowText.split(/\s+/).filter(w => w.length > 4);
+                    const words = rowText.split(/\s+/).filter(w => w.length > 3);
                     if (words.some(w => userStr.toLowerCase().includes(w))) {
                         correctCells++;
                     }
                 });
             }
-            if (correctCells === 0 && userStr.length > 20) correctCells = Math.round(totalCells * 0.5);
+            if (correctCells === 0 && (cellsAnswered > 0 || userStr.length > 10)) {
+                correctCells = Math.max(1, Math.round(totalCells * 0.45));
+            }
             return Math.min(maxPts, Math.round((correctCells / totalCells) * maxPts * 10) / 10);
         }
     }
@@ -2627,7 +2650,8 @@ function autoGradeSubtask(sub) {
     const userLower = userStr.toLowerCase();
     let matches = 0;
     keywords.forEach(kw => {
-        if (userLower.includes(kw)) {
+        const stem = kw.length > 5 ? kw.slice(0, 5) : kw;
+        if (userLower.includes(kw) || (stem.length >= 4 && userLower.includes(stem))) {
             matches++;
         }
     });

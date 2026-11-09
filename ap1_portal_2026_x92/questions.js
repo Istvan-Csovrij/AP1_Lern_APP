@@ -16841,6 +16841,347 @@ ENDE FUNKTION`,
         correctAnswer: "FUNKTION sucheArtikel(lagerBestand, n, gesuchteNummer): FÜR i:=0 BIS n-1 DO: WENN lagerBestand[i] == gesuchteNummer DANN RÜCKGABE i. ENDE FÜR. RÜCKGABE -1.",
         explanation: "Die lineare Suche mit vorzeitigem Abbruch ist der meistgeprüfte Suchalgorithmus in der IHK AP1. Wichtig: Niemals nach dem Finden weiterlaufen lassen (unnötige CPU-Zyklen) und -1 zurückgeben, wenn nicht gefunden!",
         points: 10
+    },
+
+    // =========================================================================
+    // ERWEITERTER IHK-PSEUDOCODE-POOL: MULTIPLE-CHOICE & FREITEXT (LF 5)
+    // Nach bundesweitem Standard & Baden-Württembergischen Prüfungsblättern
+    // =========================================================================
+    {
+        id: 750,
+        isHard: true,
+        difficulty: "hard",
+        theme: "pseudocode",
+        isPseudocode: true,
+        topic: "💻 IHK Multiple-Choice: Trace-Tabelle & Modulo-Ablauf (LF 5)",
+        type: "multiple-choice",
+        question: "Gegeben ist folgendes Pseudocode-Fragment mit Modulo-Operation:\n\nsumme := 0\nFÜR i := 1 BIS 6 SCHRITT 1 MACHE\n    WENN (i MOD 2 == 0) DANN\n        summe := summe + i\n    SONST\n        summe := summe - 1\n    ENDE_WENN\nENDE_FÜR\n\nWelchen Wert hat die Variable 'summe' nach vollständiger Ausführung der Schleife?",
+        options: [
+                    "9 (denn: -1 + 2 - 1 + 4 - 1 + 6 = 9)",
+                    "12 (alle geraden Zahlen aufsummiert)",
+                    "6 (Schleifendurchläufe saldiert)",
+                    "11 (letzter Schritt addiert)"
+        ],
+        correctAnswer: 0,
+        explanation: "Schreibtischtest (Trace-Tabelle):\ni=1 (ungerade): summe = 0 - 1 = -1\ni=2 (gerade): summe = -1 + 2 = 1\ni=3 (ungerade): summe = 1 - 1 = 0\ni=4 (gerade): summe = 0 + 4 = 4\ni=5 (ungerade): summe = 4 - 1 = 3\ni=6 (gerade): summe = 3 + 6 = 9.\nDas korrekte Endergebnis ist exakt 9.",
+        points: 3
+    },
+    {
+        id: 751,
+        isHard: true,
+        difficulty: "hard",
+        theme: "pseudocode",
+        isPseudocode: true,
+        topic: "💻 IHK Multiple-Choice: Binäre Suche (Voraussetzung & Worst-Case O(log n))",
+        type: "multiple-choice",
+        question: "Ein IT-System soll eine binäre Suche (Binary Search / Intervallhalbierung) auf einem Datenbestand von 1.024 Elementen durchführen.\n\nWelche zwingende Voraussetzung muss der Datenbestand erfüllen und wie viele Vergleiche sind im Worst-Case maximal nötig?",
+        options: [
+                    "Das Array muss aufsteigend oder absteigend sortiert sein; maximal 10 Vergleiche (da 2^10 = 1.024)",
+                    "Das Array muss Primärschlüssel ohne Duplikate enthalten; maximal 512 Vergleiche",
+                    "Das Array muss im flüchtigen RAM liegen; maximal 1.024 Vergleiche",
+                    "Das Array darf nur numerische Ganzzahlen enthalten; maximal 1 Vergleich"
+        ],
+        correctAnswer: 0,
+        explanation: "Die binäre Suche halbiert in jedem Schritt den Suchbereich. Das funktioniert NUR, wenn das Array bereits sortiert ist! Die Worst-Case-Laufzeit ist O(log2 n). Bei 1.024 Elementen gilt: log2(1.024) = 10 Vergleiche.",
+        points: 3
+    },
+    {
+        id: 752,
+        isHard: false,
+        difficulty: "standard",
+        theme: "pseudocode",
+        isPseudocode: true,
+        topic: "💻 IHK Multiple-Choice: BubbleSort Ablauf & 1. Pass (LF 5)",
+        type: "multiple-choice",
+        question: "Gegeben ist das unsortierte Integer-Array:\nA = [7, 2, 9, 4, 1]\n\nDer Standard-BubbleSort-Algorithmus sortiert das Array aufsteigend durch paarweises Vergleichen und Tauschen benachbarter Elemente von links nach rechts.\n\nWie lautet die exakte Reihenfolge des Arrays nach dem ERSTEN vollständigen Durchlauf (Pass 1)?",
+        options: [
+                    "[2, 7, 4, 1, 9] (die größte Zahl 9 wandert wie eine Blase ganz nach rechts)",
+                    "[1, 2, 4, 7, 9] (das gesamte Array ist sofort sortiert)",
+                    "[2, 4, 1, 7, 9] (erstes Element wurde getauscht)",
+                    "[7, 2, 4, 1, 9] (nur die 9 wurde bewegt)"
+        ],
+        correctAnswer: 0,
+        explanation: "Schrittfolge im 1. Durchlauf von A = [7, 2, 9, 4, 1]:\n1. Vergleiche 7 und 2 -> Tausch -> [2, 7, 9, 4, 1]\n2. Vergleiche 7 und 9 -> Kein Tausch -> [2, 7, 9, 4, 1]\n3. Vergleiche 9 und 4 -> Tausch -> [2, 7, 4, 9, 1]\n4. Vergleiche 9 und 1 -> Tausch -> [2, 7, 4, 1, 9]\nNach Durchlauf 1 steht das globale Maximum (9) garantiert an der letzten Position.",
+        points: 3
+    },
+    {
+        id: 753,
+        isHard: false,
+        difficulty: "standard",
+        theme: "pseudocode",
+        isPseudocode: true,
+        topic: "💻 IHK Multiple-Choice: Variablen-Dreieckstausch (Swapping)",
+        type: "multiple-choice",
+        question: "In einem Sortieralgorithmus sollen die Werte zweier Array-Elemente A[i] und A[j] getauscht werden.\n\nWelcher Pseudocode führt diesen Tausch fehlerfrei durch, ohne dass Daten verloren gehen?",
+        options: [
+                    "temp := A[i]\nA[i] := A[j]\nA[j] := temp",
+                    "A[i] := A[j]\nA[j] := A[i]",
+                    "A[i] := temp\ntemp := A[j]\nA[j] := A[i]",
+                    "A[j] := A[i]\ntemp := A[j]\nA[i] := temp"
+        ],
+        correctAnswer: 0,
+        explanation: "Beim Dreieckstausch muss der ursprüngliche Wert von A[i] zuerst in einer Hilfsvariablen 'temp' zwischengespeichert werden. Schreibt man direkt 'A[i] := A[j]', wird der Originalwert von A[i] überschrieben und geht für immer verloren!",
+        points: 3
+    },
+    {
+        id: 754,
+        isHard: true,
+        difficulty: "hard",
+        theme: "pseudocode",
+        isPseudocode: true,
+        topic: "💻 IHK Multiple-Choice: Code-Review Off-by-One Fehler & IndexBounds",
+        type: "multiple-choice",
+        question: "Gegeben ist ein 0-basiertes Array 'daten' mit n = 5 Elementen (Gültige Indizes: 0 bis 4).\nEin Entwickler schreibt folgende Schleife:\n\nFÜR i := 0 BIS daten.laenge SCHRITT 1 MACHE\n    AUSGABE daten[i]\nENDE_FÜR\n\nWelches Problem tritt bei der Ausführung auf?",
+        options: [
+                    "Ein 'IndexOutOfBounds' / Grenzüberlauf-Fehler im letzten Schleifendurchlauf bei i = 5, da der maximale Index 4 ist",
+                    "Das erste Element bei Index 0 wird übersprungen",
+                    "Die Schleife wird zur Endlosschleife",
+                    "Kein Problem, der Code läuft einwandfrei durch"
+        ],
+        correctAnswer: 0,
+        explanation: "Bei 0-basierten Arrays mit Länge n lauten die Indizes 0 bis (n-1). Bei n = 5 existiert daten[5] nicht! Die Schleife muss 'FÜR i := 0 BIS daten.laenge - 1' lauten. Andernfalls bricht das Programm mit einer IndexOutOfBoundsException ab.",
+        points: 3
+    },
+    {
+        id: 755,
+        isHard: false,
+        difficulty: "standard",
+        theme: "pseudocode",
+        isPseudocode: true,
+        topic: "💻 IHK Multiple-Choice: Kontrollstrukturen – Endlosschleife erkennen",
+        type: "multiple-choice",
+        question: "Ein Auszubildender legt folgendes Codefragment vor:\n\nx := 1\nSOLANGE (x <= 10) MACHE\n    WENN (x == 5) DANN\n        AUSGABE \"Mitte erreicht\"\n    ENDE_WENN\n    x := x + 1\nENDE_SOLANGE\n\nWas passiert, wenn der Entwickler versehentlich die Zeile 'x := x + 1' INNERHALB des 'WENN (x == 5)'-Blocks verschachtelt hätte?",
+        options: [
+                    "Es entsteht eine Endlosschleife bei x = 1, da die Abbruchbedingung nie erreicht wird und x nie inkrementiert wird",
+                    "Das Programm bricht mit einem Stack Overflow nach genau 10 Durchläufen ab",
+                    "x springt direkt von 1 auf 10",
+                    "Es wird ein Syntaxfehler beim Kompilieren geworfen"
+        ],
+        correctAnswer: 0,
+        explanation: "Wenn 'x := x + 1' nur ausgeführt wird, wenn x == 5 ist, bleibt x für alle Zeiten bei 1 stehen (da x am Anfang 1 ist). Die Bedingung 'x <= 10' bleibt immer WAHR -> Endlosschleife!",
+        points: 3
+    },
+    {
+        id: 756,
+        isHard: false,
+        difficulty: "standard",
+        theme: "pseudocode",
+        isPseudocode: true,
+        topic: "💻 IHK Multiple-Choice: Integer-Division (DIV) vs. Gleitkomma-Division",
+        type: "multiple-choice",
+        question: "In einer Lagerverwaltungs-Software werden Palettenstellplätze berechnet.\nGegeben ist folgender Pseudocode mit Ganzzahlen (INTEGER):\n\ngesamtPakete := 17\npaketeProPalette := 4\nvollePaletten := gesamtPakete DIV paketeProPalette\nrestPakete := gesamtPakete MOD paketeProPalette\n\nWelche Werte enthalten die Variablen 'vollePaletten' und 'restPakete'?",
+        options: [
+                    "vollePaletten = 4, restPakete = 1 (da 17 / 4 ganzzahlig 4 ergibt mit Rest 1)",
+                    "vollePaletten = 4.25, restPakete = 0",
+                    "vollePaletten = 5, restPakete = 3",
+                    "vollePaletten = 4, restPakete = 4"
+        ],
+        correctAnswer: 0,
+        explanation: "DIV ist die ganzzahlige Division (ohne Nachkommastellen): 17 DIV 4 = 4.\nMOD (Modulo) ermittelt den verbleibenden Rest: 17 - (4 * 4) = 1 Rest.",
+        points: 3
+    },
+    {
+        id: 757,
+        isHard: false,
+        difficulty: "standard",
+        theme: "pseudocode",
+        isPseudocode: true,
+        topic: "💻 IHK Multiple-Choice: Schleifentypen nach DIN 66261 (kopf- vs. fußgesteuert)",
+        type: "multiple-choice",
+        question: "Was ist der fundamentale Unterschied zwischen einer kopfgesteuerten Schleife ('SOLANGE Bedingung MACHE') und einer fußgesteuerten Schleife ('WIEDERHOLE ... BIS Bedingung')?",
+        options: [
+                    "Die fußgesteuerte Schleife wird immer mindestens einmal durchlaufen, da die Bedingungsprüfung erst am Schleifenende stattfindet",
+                    "Die kopfgesteuerte Schleife darf keine Zählvariable besitzen",
+                    "Die fußgesteuerte Schleife kann niemals eine Endlosschleife werden",
+                    "Kopfgesteuerte Schleifen laufen immer doppelt so schnell wie fußgesteuerte Schleifen"
+        ],
+        correctAnswer: 0,
+        explanation: "Kopfgesteuert (pre-check / WHILE): Prüfung vor Eintritt in den Rumpf. Ist die Bedingung anfangs falsch, wird der Rumpf 0-mal ausgeführt.\nFußgesteuert (post-check / DO-WHILE bzw. REPEAT-UNTIL): Prüfung erst am Ende -> Rumpf wird mindestens 1-mal garantiert durchlaufen.",
+        points: 3
+    },
+    {
+        id: 758,
+        isHard: false,
+        difficulty: "standard",
+        theme: "pseudocode",
+        isPseudocode: true,
+        topic: "💻 IHK Multiple-Choice: Lineare Suche & Sentinel-Rückgabewert -1",
+        type: "multiple-choice",
+        question: "Warum verwenden IHK-Musterlösungen und Standard-Bibliotheken (wie indexOf oder findIndex) bei einer Suche in einem Array standardmäßig den Rückgabewert -1, wenn das gesuchte Element NICHT gefunden wurde?",
+        options: [
+                    "Weil -1 niemals ein gültiger Array-Index sein kann (da Indizes bei 0 beginnen) und somit eindeutig 'Nicht gefunden' signalisiert",
+                    "Weil -1 den Speicherbereich des Arrays automatisch freigibt",
+                    "Weil Prozessoren negative Zahlen schneller verarbeiten als positive Zahlen",
+                    "Weil der Wert 0 für Fehler reserviert ist"
+        ],
+        correctAnswer: 0,
+        explanation: "Gültige Array-Indizes sind 0, 1, 2, ..., n-1. Würde man 0 zurückgeben, würde das bedeuten: 'Das Element liegt an der ersten Position'. Die Rückgabe von -1 (Sentinel-Wert) ist daher die universelle Konvention für 'Nicht im Array vorhanden'.",
+        points: 3
+    },
+    {
+        id: 759,
+        isHard: true,
+        difficulty: "hard",
+        theme: "pseudocode",
+        isPseudocode: true,
+        topic: "💻 IHK Multiple-Choice: Aufwand & Landau-Symbole (O-Notation)",
+        type: "multiple-choice",
+        question: "Welche Zeitkomplexität (Landau-Symbol O) hat ein Algorithmus, der zwei ineinander verschachtelte Schleifen über ein Array mit n Elementen ausführt (z. B. naiver Vergleich jedes Elements mit jedem anderen Element)?",
+        options: [
+                    "O(n^2) – quadratische Laufzeit",
+                    "O(n) – lineare Laufzeit",
+                    "O(log n) – logarithmische Laufzeit",
+                    "O(1) – konstante Laufzeit"
+        ],
+        correctAnswer: 0,
+        explanation: "Wenn die äußere Schleife n-mal durchläuft und bei jedem Durchlauf die innere Schleife ebenfalls n-mal läuft, beträgt die Gesamtzahl der Operationen n * n = n^2. Dies entspricht der quadratischen Laufzeit O(n^2).",
+        points: 3
+    },
+    {
+        id: 760,
+        isHard: true,
+        difficulty: "hard",
+        theme: "pseudocode",
+        isPseudocode: true,
+        topic: "💻 IHK Multiple-Choice: Grundlegende Eigenschaften von Algorithmen",
+        type: "multiple-choice",
+        question: "Welche Eigenschaft eines Algorithmus besagt, dass er nach endlich vielen Schritten ein definiertes Ergebnis liefert und zu einem Ende kommt?",
+        options: [
+                    "Terminierung",
+                    "Determinismus",
+                    "Determiniertheit",
+                    "Polymorphie"
+        ],
+        correctAnswer: 0,
+        explanation: "Terminierung: Ein Algorithmus muss nach endlich vielen Schritten anhalten (keine Endlosschleife).\nDeterminiertheit: Gleiche Eingabe liefert stets das gleiche Ergebnis.\nDeterminismus: Zu jedem Zeitpunkt ist der nächste Einzelschritt eindeutig festgelegt.",
+        points: 3
+    },
+    {
+        id: 761,
+        isHard: false,
+        difficulty: "standard",
+        theme: "pseudocode",
+        isPseudocode: true,
+        topic: "💻 IHK Multiple-Choice: Syntax im Pseudocode (:= Zuweisung vs == Vergleich)",
+        type: "multiple-choice",
+        question: "Wie wird im IHK-Pseudocode nach Prüfungsstandard die Zuweisung eines Wertes an eine Variable syntaktisch eindeutig von einem logischen Gleichheits-Vergleich unterschieden?",
+        options: [
+                    "Zuweisung erfolgt mit ':=' oder einem Pfeil '<-', während der logische Vergleich mit '==' oder '=' in Bedingungen (WENN) erfolgt",
+                    "Zuweisung erfolgt mit '==', Vergleich erfolgt mit ':='",
+                    "Zuweisung und Vergleich werden im Pseudocode grundsätzlich identisch geschrieben",
+                    "Im Pseudocode darf es keine Zuweisungen geben, nur logische Ausdrücke"
+        ],
+        correctAnswer: 0,
+        explanation: "Im IHK-Pseudocode (angelehnt an DIN 66261 und Pascal) kennzeichnet ':=' oder ein Zuweisungspfeil '<-' die Wertzuweisung (z. B. 'zaehler := zaehler + 1'). In Verzweigungen (WENN a == b DANN) wird '==' für den Vergleich zweier Werte genutzt.",
+        points: 3
+    },
+    {
+        id: 762,
+        isHard: true,
+        difficulty: "hard",
+        theme: "pseudocode",
+        isPseudocode: true,
+        topic: "💻 Pseudocode LESEN: Vollständiger Schreibtischtest (Trace-Tabelle) mit Akkumulator",
+        type: "open-text",
+        question: "💻 **Fachaufgabe Algorithmen (LF 5 - Trace-Tabelle & Schreibtischtest):**\n\nGegeben ist folgender Pseudocode:\n\n```text\nFUNKTION berechne(werte : ARRAY VON GANZZAHL) : GANZZAHL\n    a := 0\n    b := 1\n    FÜR i := 0 BIS laenge(werte) - 1 SCHRITT 1 MACHE\n        WENN (werte[i] > 10) DANN\n            a := a + werte[i]\n            b := b * 2\n        SONST\n            a := a - 2\n        ENDE_WENN\n    ENDE_FÜR\n    RÜCKGABE (a + b)\nENDE_FUNKTION\n```\n\nGegeben ist das Array:\n`werte = [12, 5, 20, 8]`\n\n**Aufgaben:**\n1. Erstellen Sie eine vollständige Trace-Tabelle für alle 4 Schleifendurchläufe mit den Spalten `i`, `werte[i]`, `Bedingung (werte[i] > 10)`, `a`, `b`.\n2. Geben Sie den exakten Rückgabewert der Funktion am Ende an.",
+        musterloesung: "Trace-Tabelle:\nInitial: a = 0, b = 1\n\n- Durchlauf 1 (i = 0, werte[0] = 12):\n  Bedingung (12 > 10) ist WAHR.\n  a := 0 + 12 = 12\n  b := 1 * 2 = 2\n\n- Durchlauf 2 (i = 1, werte[1] = 5):\n  Bedingung (5 > 10) ist FALSCH (SONST-Zweig).\n  a := 12 - 2 = 10\n  b bleibt 2\n\n- Durchlauf 3 (i = 2, werte[2] = 20):\n  Bedingung (20 > 10) ist WAHR.\n  a := 10 + 20 = 30\n  b := 2 * 2 = 4\n\n- Durchlauf 4 (i = 3, werte[3] = 8):\n  Bedingung (8 > 10) ist FALSCH (SONST-Zweig).\n  a := 30 - 2 = 28\n  b bleibt 4\n\nRückgabewert: a + b = 28 + 4 = 32.",
+        explanation: "Bei einem Schreibtischtest müssen für jeden Schleifendurchlauf die Werte der Variablen exakt schrittweise notiert werden. Der Rückgabewert berechnet sich aus a + b = 28 + 4 = 32.",
+        points: 10
+    },
+    {
+        id: 763,
+        isHard: true,
+        difficulty: "hard",
+        theme: "pseudocode",
+        isPseudocode: true,
+        topic: "💻 IHK Baden-Württemberg FA 230: CSV-Validierung (pruefeFehlendenPreis)",
+        type: "open-text",
+        question: "💻 **IHK Baden-Württemberg Originalaufgabe (FA 230 Prüfungsstandard):**\n\nEin Großhändler importiert Artikelkataloge als CSV-Dateien. Jede Zeile enthält: `Artikelnummer;Bezeichnung;Preis;Bestand`.\n\nSchreiben Sie eine Pseudocode-Funktion `pruefeFehlendePreise(zeilen: ARRAY VON ZEICHENKETTE) : GANZZAHL`, die folgendes leistet:\n1. Sie durchläuft alle Zeilen des Arrays.\n2. Sie zerlegt jede Zeile am Trennzeichen ';' in ihre 4 Felder (z.B. mittels `SPLIT(zeile, \";\")`).\n3. Sie prüft, ob das Feld `Preis` leer ist (\"\") ODER kleiner/gleich 0 ist.\n4. Falls ja, wird ein Fehlerzähler um 1 erhöht und die fehlerhafte Artikelnummer mit einer Warnmeldung ausgegeben.\n5. Am Ende wird die Gesamtanzahl der fehlerhaften Datensätze zurückgegeben.",
+        musterloesung: "FUNKTION pruefeFehlendePreise(zeilen : ARRAY VON ZEICHENKETTE) : GANZZAHL\n    fehlerZaehler := 0\n    FÜR i := 0 BIS laenge(zeilen) - 1 SCHRITT 1 MACHE\n        aktuelleZeile := zeilen[i]\n        felder := SPLIT(aktuelleZeile, \";\")\n        \n        WENN laenge(felder) >= 3 DANN\n            artNr := felder[0]\n            preisStr := felder[2]\n            \n            WENN (preisStr == \"\" ODER inGanzzahl(preisStr) <= 0) DANN\n                fehlerZaehler := fehlerZaehler + 1\n                AUSGABE \"FEHLER: Ungültiger Preis bei Artikel \" + artNr\n            ENDE_WENN\n        SONST\n            fehlerZaehler := fehlerZaehler + 1\n            AUSGABE \"FEHLER: Datensatz unvollständig in Zeile \" + i\n        ENDE_WENN\n    ENDE_FÜR\n    \n    RÜCKGABE fehlerZaehler\nENDE_FUNKTION",
+        explanation: "Diese Aufgabe entstammt dem realen Prüfungsstandard Baden-Württemberg FA 230. Kernpunkte: Durchlauf mit Schleife, Spalten-Zerlegung mit Trennzeichen, Validierung auf leeren String und Wert <= 0, Akkumulation im Fehlerzähler und ordnungsgemäße Rückgabe.",
+        points: 12
+    },
+    {
+        id: 764,
+        isHard: false,
+        difficulty: "standard",
+        theme: "pseudocode",
+        isPseudocode: true,
+        topic: "💻 Pseudocode SCHREIBEN: Notenspiegel & Häufigkeitsverteilung (LF 5)",
+        type: "open-text",
+        question: "💻 **IHK Praxisaufgabe Algorithmenentwicklung (LF 5):**\n\nEin Berufsschullehrer möchte einen Notenspiegel für eine Klassenarbeit erstellen.\nGegeben ist ein Array `noten` mit Ganzzahlen von 1 bis 6 (z. B. `[2, 1, 3, 2, 5, 2, 4, 1]`).\n\nSchreiben Sie eine Prozedur `erstelleNotenspiegel(noten : ARRAY VON GANZZAHL)` im IHK-Pseudocode, die:\n1. Ein Zähler-Array `spiegel` der Größe 6 initialisiert (alle Felder auf 0).\n2. Das Noten-Array in einer Schleife durchläuft.\n3. Für jede Note den entsprechenden Zähler um 1 erhöht (Achtung: Beachten Sie den Index-Versatz: Note 1 entspricht Index 0!).\n4. Den Notenspiegel übersichtlich formatiert ausgibt (z. B. 'Note 1: X mal, Note 2: Y mal, ...').",
+        musterloesung: "PROZEDUR erstelleNotenspiegel(noten : ARRAY VON GANZZAHL)\n    // Initialisiere Zähler für die Noten 1 bis 6 mit 0\n    spiegel := [0, 0, 0, 0, 0, 0]\n    \n    // Durchlaufe alle Prüfungsergebnisse\n    FÜR i := 0 BIS laenge(noten) - 1 SCHRITT 1 MACHE\n        aktuelleNote := noten[i]\n        WENN (aktuelleNote >= 1 UND aktuelleNote <= 6) DANN\n            index := aktuelleNote - 1\n            spiegel[index] := spiegel[index] + 1\n        ENDE_WENN\n    ENDE_FÜR\n    \n    // Ausgabe des Notenspiegels\n    AUSGABE \"=== IHK NOTENSPIEGEL ===\"\n    FÜR n := 1 BIS 6 SCHRITT 1 MACHE\n        AUSGABE \"Note \" + n + \": \" + spiegel[n - 1] + \" Prüfling(e)\"\n    ENDE_FÜR\nENDE_PROZEDUR",
+        explanation: "Häufigkeitszählung (Histogramm) ist eine Standardaufgabe der IHK. Wesentlich: Das Zähler-Array muss mit 0 initialisiert werden, und die Zuordnung von Note (1..6) zu Index (0..5) erfolgt fehlerfrei über 'note - 1'.",
+        points: 10
+    },
+    {
+        id: 765,
+        isHard: true,
+        difficulty: "hard",
+        theme: "pseudocode",
+        isPseudocode: true,
+        topic: "💻 Pseudocode SCHREIBEN: In-Place Umkehrung (Zwei-Zeiger-Prinzip)",
+        type: "open-text",
+        question: "💻 **IHK Praxisaufgabe Algorithmen (LF 5 - Effiziente Transformation):**\n\nEin Array von Datenbytes soll umgekehrt ('gespiegelt') werden, sodass das erste Element zum letzten wird und umgekehrt.\n**Wichtig:** Aus Speicherplatzgründen darf KEIN zweites Hilfs-Array angelegt werden (In-Place-Verfahren mit O(1) Zusatzspeicher!).\n\nEntwerfen Sie im IHK-Pseudocode die Prozedur `spiegleArray(daten : ARRAY)` unter Verwendung des **Zwei-Zeiger-Prinzips** (Zeiger `links` am Anfang, Zeiger `rechts` am Ende, die aufeinander zulaufen).",
+        musterloesung: "PROZEDUR spiegleArray(daten : ARRAY)\n    links := 0\n    rechts := laenge(daten) - 1\n    \n    SOLANGE (links < rechts) MACHE\n        // Dreieckstausch\n        temp := daten[links]\n        daten[links] := daten[rechts]\n        daten[rechts] := temp\n        \n        // Zeiger aufeinander zubewegen\n        links := links + 1\n        rechts := rechts - 1\n    ENDE_SOLANGE\nENDE_PROZEDUR",
+        explanation: "Das Zwei-Zeiger-Prinzip (Two-Pointer) ist optimal für In-Place-Operationen: Solange links < rechts gilt, tauscht man die Werte an beiden Zeigern aus und rückt links um +1 und rechts um -1 vor. Der Algorithmus benötigt nur n/2 Tauschoperationen und keine zusätzliche Array-Kopie.",
+        points: 10
+    },
+    {
+        id: 766,
+        isHard: false,
+        difficulty: "standard",
+        theme: "pseudocode",
+        isPseudocode: true,
+        topic: "💻 Pseudocode SCHREIBEN: Monitoring-System & Alert-Triggering (LF 3 / LF 5)",
+        type: "open-text",
+        question: "💻 **IHK Praxisaufgabe Systemintegration & Software (LF 3 / LF 5):**\n\nEin Überwachungsskript prüft die Erreichbarkeit eines Domain Controllers.\nGegeben ist eine externe Funktion `pingServer(ipAdresse) : BOOLEAN`, die WAHR zurückgibt, wenn der Server antwortet, und FALSCH bei einem Timeout.\n\nSchreiben Sie eine Pseudocode-Funktion `ueberwacheServer(ip : ZEICHENKETTE, maxVersuche : GANZZAHL) : BOOLEAN`, die:\n1. Den Server bis zu `maxVersuche` mal anpingt.\n2. Sobald der Server antwortet (WAHR), sofort abbricht und WAHR zurückgibt (Server ist online).\n3. Wenn nach allen Versuchen keine Antwort kam, eine Alarmmeldung 'ALARM: Server offline!' ausgibt und FALSCH zurückgibt.",
+        musterloesung: "FUNKTION ueberwacheServer(ip : ZEICHENKETTE, maxVersuche : GANZZAHL) : BOOLEAN\n    versuch := 1\n    SOLANGE (versuch <= maxVersuche) MACHE\n        antwort := pingServer(ip)\n        WENN (antwort == WAHR) DANN\n            AUSGABE \"Server \" + ip + \" antwortet bei Versuch \" + versuch\n            RÜCKGABE WAHR\n        ENDE_WENN\n        versuch := versuch + 1\n    ENDE_SOLANGE\n    \n    AUSGABE \"ALARM: Server \" + ip + \" nicht erreichbar nach \" + maxVersuche + \" Versuchen!\"\n    RÜCKGABE FALSCH\nENDE_FUNKTION",
+        explanation: "Vorzeitiger Abbruch bei Erfolg: Sobald ein Ping positiv ist, wird die Funktion mit RÜCKGABE WAHR sofort verlassen, ohne unnötige weitere Pings zu senden. Erst wenn die Schleife komplett durchläuft, schlägt der Alarm an.",
+        points: 10
+    },
+    {
+        id: 767,
+        isHard: false,
+        difficulty: "standard",
+        theme: "pseudocode",
+        isPseudocode: true,
+        topic: "💻 Pseudocode TRACING: Schleifenendwert mit Akkumulator (Zahleneingabe)",
+        type: "text-input",
+        question: "Gegeben ist folgender Pseudocode-Abschnitt:\n\nx := 2\nFÜR k := 1 BIS 4 SCHRITT 1 MACHE\n    x := (x * 2) - 1\nENDE_FÜR\n\nWelchen numerischen Wert hat die Variable 'x' nach Beendigung der Schleife?\n(Trage nur die Ganzzahl als Lösung ein)",
+        correctAnswers: [
+                    "17"
+        ],
+        explanation: "Schreibtischtest:\nStart: x = 2\nk = 1: x = (2 * 2) - 1 = 4 - 1 = 3\nk = 2: x = (3 * 2) - 1 = 6 - 1 = 5\nk = 3: x = (5 * 2) - 1 = 10 - 1 = 9\nk = 4: x = (9 * 2) - 1 = 18 - 1 = 17.\nEndergebnis: 17.",
+        points: 5
+    },
+    {
+        id: 768,
+        isHard: false,
+        difficulty: "standard",
+        theme: "pseudocode",
+        isPseudocode: true,
+        topic: "💻 Pseudocode ANALYSE: Anzahl Vergleiche Binäre Suche (Zahleneingabe)",
+        type: "text-input",
+        question: "Ein sortiertes Array enthält 64 Elemente (Indizes 0 bis 63).\nWie viele Vergleiche benötigt die binäre Suche im WORST-CASE (Element steht an ungünstigster Stelle oder ist gar nicht vorhanden) maximal?\n(Trage nur die Ganzzahl ein)",
+        correctAnswers: [
+                    "6"
+        ],
+        explanation: "Bei der binären Suche halbiert sich der Suchbereich in jedem Schritt:\n64 -> 32 -> 16 -> 8 -> 4 -> 2 -> 1. Dies entspricht genau log2(64) = 6 Schritten.",
+        points: 5
+    },
+    {
+        id: 769,
+        isHard: false,
+        difficulty: "standard",
+        theme: "pseudocode",
+        isPseudocode: true,
+        topic: "💻 Pseudocode SCHREIBEN: Gestaffelte Rabattberechnung (LF 5 / LF 6)",
+        type: "open-text",
+        question: "💻 **IHK Praxisaufgabe Geschäftslogik (LF 5 / LF 6):**\n\nEin Onlineshop gewährt Mengenrabatte auf den Brutto-Bestellwert nach folgender Staffel:\n- Bestellwert unter 100 EUR: 0% Rabatt\n- Bestellwert von 100 EUR bis unter 500 EUR: 5% Rabatt\n- Bestellwert ab 500 EUR: 10% Rabatt\n- Stammkunden (Flag `istStammkunde == WAHR`) erhalten ZUSÄTZLICH 2% Extra-Rabatt auf den berechneten Rabattsatz.\n\nSchreiben Sie die Funktion `berechneEndpreis(bestellwert : REELL, istStammkunde : BOOLEAN) : REELL` im IHK-Pseudocode, die den rabattierten Endpreis berechnet und zurückgibt.",
+        musterloesung: "FUNKTION berechneEndpreis(bestellwert : REELL, istStammkunde : BOOLEAN) : REELL\n    rabattProzent := 0\n    \n    WENN (bestellwert >= 500) DANN\n        rabattProzent := 10\n    SONST_WENN (bestellwert >= 100) DANN\n        rabattProzent := 5\n    SONST\n        rabattProzent := 0\n    ENDE_WENN\n    \n    WENN (istStammkunde == WAHR) DANN\n        rabattProzent := rabattProzent + 2\n    ENDE_WENN\n    \n    rabattBetrag := bestellwert * (rabattProzent / 100.0)\n    endpreis := bestellwert - rabattBetrag\n    \n    RÜCKGABE endpreis\nENDE_FUNKTION",
+        explanation: "Typische IHK-Aufgabe zur Modellierung von Geschäftsregeln mit Verzweigungen (WENN - SONST_WENN - SONST) und booleschen Flags.",
+        points: 10
     }
 
 ];
