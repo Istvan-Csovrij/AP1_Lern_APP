@@ -17349,6 +17349,117 @@ ENDE FUNKTION`,
         musterloesung: "Lösung der 3 Validierungs-Chips:\n\n- [LÜCKE 1]: (posAt <= 0)\n  (Erklärung: Wenn posAt == -1 ist, fehlt das @; wenn posAt == 0 ist, steht das @ ungültig am Anfang.)\n\n- [LÜCKE 2]: (posPunkt <= posAt + 1)\n  (Erklärung: Der Punkt muss mindestens 2 Positionen nach dem @ stehen, z.B. user@gfn.de.)\n\n- [LÜCKE 3]: (posPunkt > laenge(email) - 3)\n  (Erklärung: Nach dem Punkt müssen noch mindestens 2 Zeichen folgen, z. B. '.de', '.com'.)",
         explanation: "Klassische IHK-Prüfaufgabe zur String-Verarbeitung und Grenzwerte-Validierung nach DIN/ISO.",
         points: 10
+    },
+
+    // =========================================================================
+    // IHK ORIGINAL-PRÜFUNGSBLATT: 2D-ARRAYS & CHECKAUTHORITY (LF 5)
+    // Aufgaben nach Prüfungsbogen 'Fortsetzung 2. Aufgabe e' (IDs 782-788)
+    // =========================================================================
+    {
+        id: 782,
+        isHard: true,
+        difficulty: "hard",
+        theme: "pseudocode",
+        isPseudocode: true,
+        topic: "💻 IHK Original-Prüfungsblatt: checkAuthority 2D-Array & Zutrittsberechtigung (6 Punkte)",
+        type: "open-text",
+        question: "💻 **IHK Abschlussprüfung Teil 1 – Originalaufgabe aus dem Prüfungsbogen (6 Punkte):**\n\nIhr Kollege hat gerade die Methode `bool checkAuthority(int id, int roomNr)` erstellt. Diese übergibt eine Mitarbeiter-ID und eine Raumnummer, um abzufragen, ob für diesen Raum eine Zutrittsberechtigung besteht.\n\n**Aufgabe:**\nErmitteln und begründen Sie den Rückgabewert, der bei Aufruf der Funktion mit `id = 3` und `roomNr = 236` geliefert wird.\n\n**Hinweis laut Prüfungsbogen:**\nDie Funktion greift auf ein globales zweidimensionales Array `keyData[][]` zu. In der ersten Spalte steht die Mitarbeiter-ID. Die folgenden Spalten enthalten die Räume, für die eine Zutrittsberechtigung besteht. Der Zeilen- und Spaltenindex beginnt bei 0. Es gibt keine Kopfzeile im Array, sie dient nur zur Erläuterung.\n\n**Gegebene Tabelle keyData[][]:**\n\n| Mitarbeiter-ID (Spalte 0) | Room1 (Spalte 1) | Room2 (Spalte 2) | Room3 (Spalte 3) | Room4 (Spalte 4) | Room5 (Spalte 5) | Room6 (Spalte 6) | Roomxx (Spalte 7) |\n| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |\n| **1** | 223 | 312 | 154 | 47 | 124 | 236 | 334 |\n| **2** | 103 | 401 | 14 | 236 | 56 | *(leer)* | *(leer)* |\n| **3** | 20 | 312 | 235 | 17 | 124 | 32 | *(leer)* |\n\n**Gegebener Pseudocode:**\n```text\n1  Funktion checkAuthority(id, roomNr)\n2      Für i von 0 bis (AnzahlZeilen von keyData) - 1\n3          Für j von 1 bis (AnzahlBelegteSpalten von keyData) - 1\n4              Wenn id gleich keyData[i][0] und roomNr gleich keyData[i][j] dann\n5                  Rückgabe True\n6              Ende Wenn\n7          Ende Für\n8      Ende Für\n9      Rückgabe False\n10 Ende Funktion\n```",
+        code: "1  Funktion checkAuthority(id, roomNr)\n2      Für i von 0 bis (AnzahlZeilen von keyData) - 1\n3          Für j von 1 bis (AnzahlBelegteSpalten von keyData) - 1\n4              Wenn id gleich keyData[i][0] und roomNr gleich keyData[i][j] dann\n5                  Rückgabe True\n6              Ende Wenn\n7          Ende Für\n8      Ende Für\n9      Rückgabe False\n10 Ende Funktion",
+        musterloesung: "1. Ermittelter Rückgabewert:\nFalse\n\n2. Detaillierte Begründung (Schreibtischtest):\n- Die äußere Schleife (Zeile 2) durchläuft alle Zeilen i von 0 bis 2.\n- Bei i = 0 (Mitarbeiter-ID = 1) und i = 1 (Mitarbeiter-ID = 2) ist die Bedingung 'id (3) gleich keyData[i][0]' nicht erfüllt.\n- Bei i = 2 ist die Bedingung keyData[2][0] == 3 WAHR (Mitarbeiter 3 gefunden).\n- Die innere Schleife (Zeile 3) prüft nun alle belegten Raum-Spalten j von 1 bis 6 für Mitarbeiter 3:\n  j=1: keyData[2][1] = 20\n  j=2: keyData[2][2] = 312\n  j=3: keyData[2][3] = 235\n  j=4: keyData[2][4] = 17\n  j=5: keyData[2][5] = 124\n  j=6: keyData[2][6] = 32\n- Der gesuchte Raum 'roomNr = 236' ist in den Berechtigungen von Mitarbeiter 3 NICHT vorhanden (Raum 236 ist nur bei Mitarbeiter 1 und 2 eingetragen).\n- Die Bedingung in Zeile 4 wird somit niemals erfüllt, und Zeile 5 (Rückgabe True) wird nicht ausgeführt.\n- Nach vollständigem Durchlauf beider Schleifen wird in Zeile 9 der Rückgabewert 'False' geliefert.",
+        explanation: "Offizielle IHK-Korrekturvorgabe: 2 Punkte für die Angabe von 'False', 4 Punkte für die nachvollziehbare Begründung anhand des Arrays und der Schleifendurchläufe.",
+        points: 6
+    },
+    {
+        id: 783,
+        isHard: true,
+        difficulty: "hard",
+        theme: "pseudocode",
+        isPseudocode: true,
+        topic: "💻 IHK Original-Prüfungsblatt: checkAuthority Schreibtischtest mit Treffer (id = 2, roomNr = 236)",
+        type: "open-text",
+        question: "💻 **IHK Folgeaufgabe zum Prüfungsbogen (checkAuthority Ablauf-Analyse):**\n\nBeziehen Sie sich auf den Pseudocode und die Tabelle `keyData[][]` aus der vorherigen Aufgabe.\n\nNun wird die Funktion mit folgenden Parametern aufgerufen:\n`checkAuthority(id = 2, roomNr = 236)`\n\n**Aufgaben:**\n1. Welcher Rückgabewert (`True` oder `False`) wird geliefert?\n2. Bei welchen Werten der Schleifenzähler ($i$ und $j$) wird die Funktion beendet?\n3. Begründen Sie anhand der Zeile 4, warum die Funktion an dieser Stelle sofort abbricht.",
+        code: "1  Funktion checkAuthority(id, roomNr)\n2      Für i von 0 bis (AnzahlZeilen von keyData) - 1\n3          Für j von 1 bis (AnzahlBelegteSpalten von keyData) - 1\n4              Wenn id gleich keyData[i][0] und roomNr gleich keyData[i][j] dann\n5                  Rückgabe True\n6              Ende Wenn\n7          Ende Für\n8      Ende Für\n9      Rückgabe False\n10 Ende Funktion",
+        musterloesung: "1. Rückgabewert:\nTrue\n\n2. Schleifenzähler bei Beendigung:\ni = 1 (zweite Zeile, Mitarbeiter-ID 2)\nj = 4 (fünfte Spalte, Room4 = 236)\n\n3. Begründung:\nIn Zeile i = 1 hat keyData[1][0] den Wert 2 (stimmt mit id überein).\nDie innere Schleife läuft über j:\n- j=1: keyData[1][1] = 103 (ungleich 236)\n- j=2: keyData[1][2] = 401 (ungleich 236)\n- j=3: keyData[1][3] = 14 (ungleich 236)\n- j=4: keyData[1][4] = 236 (gleich 236 -> Treffer!)\nIn Zeile 4 ist 'id (2) gleich keyData[1][0]' UND 'roomNr (236) gleich keyData[1][4]' WAHR.\nIn Zeile 5 wird 'Rückgabe True' ausgeführt. Da eine 'Rückgabe' (return) die Funktion sofort verlässt, brechen beide Schleifen augenblicklich ab.",
+        explanation: "Wesentliches IHK-Lernziel: Ein 'Rückgabe'-Befehl (Return) beendet eine Funktion unverzüglich, unabhängig davon, wie viele Schleifendurchläufe noch ausgestanden hätten.",
+        points: 6
+    },
+    {
+        id: 784,
+        isHard: true,
+        difficulty: "hard",
+        theme: "pseudocode",
+        isPseudocode: true,
+        topic: "💻 IHK Original-Prüfungsblatt: checkAuthority Performance-Bug & Code-Optimierung",
+        type: "open-text",
+        question: "💻 **IHK Fachaufgabe Software-Qualität & Code-Optimierung (LF 5 - 8 Punkte):**\n\nEin Software-Architekt führt ein Code-Review für die gezeigte Funktion `checkAuthority` durch:\n\n```text\n1  Funktion checkAuthority(id, roomNr)\n2      Für i von 0 bis (AnzahlZeilen von keyData) - 1\n3          Für j von 1 bis (AnzahlBelegteSpalten von keyData) - 1\n4              Wenn id gleich keyData[i][0] und roomNr gleich keyData[i][j] dann\n5                  Rückgabe True\n6              Ende Wenn\n7          Ende Für\n8      Ende Für\n9      Rückgabe False\n10 Ende Funktion\n```\n\n**Kritikpunkt des Architekten:**\nIn der aktuellen Fassung wird für JEDE Zeile die innere $j$-Schleife ausgeführt, selbst wenn die Mitarbeiter-ID in Spalte 0 überhaupt nicht mit der gesuchten `id` übereinstimmt! Bei 10.000 Mitarbeitern mit je 50 Räumen führt dies zu hunderten von unberechtigten Schleifendurchläufen.\n\n**Aufgaben:**\n1. Erläutern Sie die Ineffizienz des aktuellen Codes.\n2. Schreiben Sie eine optimierte Version der Funktion im Pseudocode, bei der die innere $j$-Schleife NUR DANN betreten wird, wenn die Mitarbeiter-ID der Zeile $i$ mit der übergebenen `id` übereinstimmt. Zusätzlich soll die Funktion vorzeitig abbrechen, sobald der Mitarbeiter gefunden wurde.",
+        code: "1  Funktion checkAuthority(id, roomNr)\n2      Für i von 0 bis (AnzahlZeilen von keyData) - 1\n3          Für j von 1 bis (AnzahlBelegteSpalten von keyData) - 1\n4              Wenn id gleich keyData[i][0] und roomNr gleich keyData[i][j] dann\n5                  Rückgabe True\n6              Ende Wenn\n7          Ende Für\n8      Ende Für\n9      Rückgabe False\n10 Ende Funktion",
+        musterloesung: "1. Erklärung der Ineffizienz:\nDie innere j-Schleife (Zeile 3) wird für JEDE Zeile i gestartet, auch wenn keyData[i][0] != id ist. Dadurch werden alle Spalten j vergeblich verglichen, obwohl bereits feststeht, dass es sich um den falschen Mitarbeiter handelt.\n\n2. Optimierter Pseudocode:\n```text\nFunktion checkAuthorityOptimiert(id, roomNr)\n    Für i von 0 bis (AnzahlZeilen von keyData) - 1\n        // Prüfe ZUERST, ob dies die Zeile des gesuchten Mitarbeiters ist\n        Wenn id gleich keyData[i][0] dann\n            // Nur dann die Räume dieses Mitarbeiters durchsuchen\n            Für j von 1 bis (AnzahlBelegteSpalten von keyData) - 1\n                Wenn roomNr gleich keyData[i][j] dann\n                    Rückgabe True\n                Ende Wenn\n            Ende Für\n            // Da jede Mitarbeiter-ID eindeutig ist: Wenn der Raum nicht dabei war, sofort abbrechen!\n            Rückgabe False\n        Ende Wenn\n    Ende Für\n    \n    // Mitarbeiter-ID wurde im gesamten Array nicht gefunden\n    Rückgabe False\nEnde Funktion\n```",
+        explanation: "Dieser Schachtelungs-Fehler ist ein Klassiker in der IHK AP1: Durch das Vorziehen der ID-Prüfung vor die innere Schleife sinkt die Worst-Case-Laufzeit drastisch, da nur noch genau die Zeile des betroffenen Mitarbeiters durchsucht wird.",
+        points: 8
+    },
+    {
+        id: 785,
+        isHard: false,
+        difficulty: "standard",
+        theme: "pseudocode",
+        isPseudocode: true,
+        topic: "💻 IHK Multiple-Choice: checkAuthority(1, 47) Trace-Analyse",
+        type: "multiple-choice",
+        question: "Gegeben ist die Funktion `checkAuthority(id, roomNr)` und die 2D-Tabelle `keyData[][]` aus der IHK-Aufgabe:\n\nMitarbeiter-ID: [1: Räume 223, 312, 154, 47, 124, 236, 334]\nMitarbeiter-ID: [2: Räume 103, 401, 14, 236, 56]\nMitarbeiter-ID: [3: Räume 20, 312, 235, 17, 124, 32]\n\nWas liefert der Aufruf `checkAuthority(id = 1, roomNr = 47)`?",
+        options: [
+                    "True – bei i = 0 und j = 4, da Raum 47 in Spalte 4 von Mitarbeiter 1 steht",
+                    "False – da Raum 47 nicht bei Mitarbeiter 3 steht",
+                    "False – da der Spaltenindex erst bei 1 beginnt",
+                    "Laufzeitfehler IndexOutOfBounds – da Mitarbeiter 1 zu viele Spalten belegt"
+        ],
+        correctAnswer: 0,
+        explanation: "Zeile i = 0 ist Mitarbeiter 1 (keyData[0][0] = 1). Die innere Schleife läuft über j: j=1 (223), j=2 (312), j=3 (154), j=4 (47). Bei j=4 stimmt roomNr (47) mit keyData[0][4] überein. Die Funktion liefert in Zeile 5 sofort True zurück.",
+        points: 3
+    },
+    {
+        id: 786,
+        isHard: true,
+        difficulty: "hard",
+        theme: "pseudocode",
+        isPseudocode: true,
+        topic: "💻 IHK Praxisaufgabe: 2D-Matrix Server-Monitoring & Paketverlust-Zähler (LF 3 / LF 5)",
+        type: "open-text",
+        question: "💻 **IHK Praxisaufgabe Netzwerk-Monitoring (LF 3 / LF 5 - 10 Punkte):**\n\nEin Monitoring-System speichert Ping-Laufzeiten in einem zweidimensionalen Array `pingMatrix[][]`.\n- Zeilen: 3 Server (Zeile 0 = 'DC01', Zeile 1 = 'SQL01', Zeile 2 = 'WEB01').\n- Spalte 0: Name des Servers (Zeichenkette).\n- Spalten 1 bis 5: 5 Ping-Messwerte in Millisekunden.\n- **Wichtig:** Ein Wert von `-1` kennzeichnet einen Timeout / Paketverlust.\n\n**Gegebene Matrix pingMatrix[][]:**\n\n| Spalte 0 (Server) | Spalte 1 | Spalte 2 | Spalte 3 | Spalte 4 | Spalte 5 |\n| :--- | :--- | :--- | :--- | :--- | :--- |\n| \"DC01\" | 12 | 15 | -1 | 14 | 11 |\n| \"SQL01\" | -1 | -1 | 4 | -1 | 5 |\n| \"WEB01\" | 22 | 20 | 25 | 19 | 24 |\n\n**Aufgaben:**\n1. Ermitteln Sie das Ergebnis der Funktion `zaehleTimeouts(\"SQL01\")`.\n2. Schreiben Sie die vollständige Pseudocode-Funktion `zaehleTimeouts(serverName : ZEICHENKETTE) : GANZZAHL`, die das Array `pingMatrix` zeilenweise durchsucht, bei Übereinstimmung in Spalte 0 alle Ping-Spalten 1 bis 5 prüft, die Anzahl der `-1`-Werte zählt und zurückgibt.",
+        musterloesung: "1. Ergebnis für 'SQL01':\n3 Timeouts (in Spalte 1, Spalte 2 und Spalte 4).\n\n2. Pseudocode-Funktion:\n```text\nFUNKTION zaehleTimeouts(serverName : ZEICHENKETTE) : GANZZAHL\n    timeoutZaehler := 0\n    \n    FÜR i := 0 BIS laenge(pingMatrix) - 1 SCHRITT 1 MACHE\n        // Prüfe, ob die Zeile zum gesuchten Server gehört\n        WENN (pingMatrix[i][0] == serverName) DANN\n            // Durchlaufe alle 5 Messwert-Spalten (Index 1 bis 5)\n            FÜR j := 1 BIS 5 SCHRITT 1 MACHE\n                WENN (pingMatrix[i][j] == -1) DANN\n                    timeoutZaehler := timeoutZaehler + 1\n                ENDE_WENN\n            ENDE_FÜR\n            // Server wurde gefunden und ausgewertet -> vorzeitiger Abbruch\n            RÜCKGABE timeoutZaehler\n        ENDE_WENN\n    ENDE_FÜR\n    \n    // Server wurde nicht gefunden -> Rückgabe 0 oder -1\n    RÜCKGABE -1\nENDE_FUNKTION\n```",
+        explanation: "Identisches Schema wie auf dem Prüfungsbogen: 2D-Tabelle mit Bezeichner in Spalte 0 und variierenden Werten in den Folgespalten. Schleifenkombination mit Zeilen- und Spaltenfilterung.",
+        points: 10
+    },
+    {
+        id: 787,
+        isHard: false,
+        difficulty: "standard",
+        theme: "pseudocode",
+        isPseudocode: true,
+        topic: "💻 IHK Praxisaufgabe: 2D-Tabelle Meldebestand & Bestellautomatik (LF 5 / LF 6)",
+        type: "open-text",
+        question: "💻 **IHK Praxisaufgabe Warenwirtschaft & ERP-Systeme (LF 5 / LF 6 - 8 Punkte):**\n\nIn einem Warenwirtschaftssystem werden Artikelbestände in einer 2D-Tabelle `artikelTabelle[][]` verwaltet:\n- Spalte 0: Artikelnummer (z. B. 501, 502, 503)\n- Spalte 1: Aktueller Lagerbestand (GANZZAHL)\n- Spalte 2: Meldebestand (GANZZAHL)\n\n**Gegebene Tabelle artikelTabelle[][]:**\n\n| Artikel-Nr (Spalte 0) | Ist-Bestand (Spalte 1) | Meldebestand (Spalte 2) |\n| :--- | :--- | :--- | \n| 501 | 45 | 50 |\n| 502 | 120 | 80 |\n| 503 | 12 | 20 |\n| 504 | 95 | 30 |\n\n**Aufgaben:**\n1. Welche Artikel (Artikelnummern) müssen nachbestellt werden, wenn die Regel lautet: `Ist-Bestand <= Meldebestand`?\n2. Schreiben Sie eine Prozedur `pruefeNachbestellungen()`, die alle Zeilen der Tabelle durchläuft und für jeden unterdeckten Artikel die Meldung `'NACHBESTELLEN: Artikel ' + artNr` ausgibt.",
+        musterloesung: "1. Betroffene Artikel:\n- Artikel 501 (Ist: 45 <= Melde: 50) -> Nachbestellen!\n- Artikel 503 (Ist: 12 <= Melde: 20) -> Nachbestellen!\n(Artikel 502 mit 120 > 80 und Artikel 504 mit 95 > 30 müssen nicht nachbestellt werden).\n\n2. Pseudocode-Prozedur:\n```text\nPROZEDUR pruefeNachbestellungen()\n    anzahlZeilen := laenge(artikelTabelle)\n    \n    FÜR i := 0 BIS anzahlZeilen - 1 SCHRITT 1 MACHE\n        artNr := artikelTabelle[i][0]\n        istBestand := artikelTabelle[i][1]\n        meldeBestand := artikelTabelle[i][2]\n        \n        WENN (istBestand <= meldeBestand) DANN\n            AUSGABE \"NACHBESTELLEN: Artikel \" + artNr + \" (Bestand: \" + istBestand + \", Meldebestand: \" + meldeBestand + \")\"\n        ENDE_WENN\n    ENDE_FÜR\nENDE_PROZEDUR\n```",
+        explanation: "Klassische IHK-Fachaufgabe zur Verknüpfung von kaufmännischer Geschäftslogik (Meldebestand) mit softwaretechnischer Datenverarbeitung über 2D-Tabellen.",
+        points: 8
+    },
+    {
+        id: 788,
+        isHard: false,
+        difficulty: "standard",
+        theme: "pseudocode",
+        isPseudocode: true,
+        topic: "💻 IHK Multiple-Choice: 2D-Array Indizierungs-Konvention (Zeile vs. Spalte)",
+        type: "multiple-choice",
+        question: "In der IHK-Aufgabe greift der Ausdruck `keyData[i][j]` auf eine zweidimensionale Datenstruktur zu.\n\nWas repräsentieren die Indizes `[i]` und `[j]` nach dem standardisierten IHK-Prüfungsschema?",
+        options: [
+                    "[i] ist der Zeilenindex (von oben nach unten) und [j] ist der Spaltenindex (von links nach rechts), jeweils 0-basiert",
+                    "[i] ist der Spaltenindex und [j] ist der Zeilenindex",
+                    "[i] ist immer der Primärschlüssel und [j] ist die Datensatzlänge in Bytes",
+                    "[i] und [j] können beliebig vertauscht werden, da Matrizen symmetrisch sind"
+        ],
+        correctAnswer: 0,
+        explanation: "In der Informatik und in allen IHK-Prüfungen gilt universell die Zeilen-zuerst-Konvention (Row-Major): matrix[zeile][spalte]. Der erste Index i wählt die Zeile aus, der zweite Index j wählt die Spalte innerhalb dieser Zeile.",
+        points: 3
     }
 
 ];
