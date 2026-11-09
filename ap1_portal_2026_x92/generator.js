@@ -3,6 +3,10 @@
 // Integriert eine 50%-Regelung für offene Baden-Württemberg-Aufgaben (open-text)
 
 var VisualDiagrams = (typeof window !== "undefined" && window.VisualDiagrams) ? window.VisualDiagrams : ((typeof VisualDiagrams !== "undefined") ? VisualDiagrams : {});
+var isOnlyOpen = false;
+if (typeof window !== "undefined") {
+    window.isOnlyOpen = false;
+}
 
 function generateDynamicQuestions(typeMode = "mix") {
     const dynamicQuestions = [];
