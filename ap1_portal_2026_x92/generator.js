@@ -7,6 +7,7 @@ var VisualDiagrams = (typeof window !== "undefined" && window.VisualDiagrams) ? 
 function generateDynamicQuestions(typeMode = "mix") {
     const dynamicQuestions = [];
     let currentId = 1000;
+    const isOnlyOpen = (typeMode === "open");
 
     // Helper to decide if a generated question should be open-text based on selected mode
     function shouldBeOpenText() {
