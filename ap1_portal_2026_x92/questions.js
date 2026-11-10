@@ -17501,6 +17501,306 @@ ENDE FUNKTION`,
         correctAnswer: 0,
         explanation: "Zeile i = 1 entspricht Mitarbeiter 2 (keyData[1][0] == 2). In der inneren Schleife wird bei j = 4 der Raum 236 angetroffen (keyData[1][4] == 236). Beide Bedingungen in Zeile 4 sind WAHR -> Zeile 5 führt 'Rückgabe True' aus und beendet die Funktion sofort.",
         points: 6
+    },
+// =========================================================================
+    // IHK KODIERUNG & PSEUDOCODE: AUTHENTISCHE AUFGABENVARIANTEN (791 - 798)
+    // =========================================================================
+    {
+        id: 791,
+        theme: "pseudocode",
+        isPseudocode: true,
+        topic: "💻 Pseudocode SCHREIBEN: Schnittstellen-Aufruf & Fehlercode-Handling (LoginÜberprüfung - 10 Punkte)",
+        type: "open-text",
+        points: 10,
+        question: `💻 **IHK Abschlussprüfung Teil 1 – Programmierlogik & Schnittstelleneinbindung (10 Punkte)**\n\nSie entwickeln ein Anmelde-Modul für ein Firmenportal. Schreiben Sie den Algorithmus für die Methode \`LoginUeberpruefung(username, passwort)\` im IHK-Pseudocode.\n\n**Gegebene Rahmenbedingungen & Schnittstelle:**\n• Zur Authentifizierung steht eine bereits existierende Datenbank-Funktion zur Verfügung:\n  \`DB_Abfrage(username, passwort) : INT\`\n• Diese Funktion liefert als Rückgabewert eine Ganzzahl:\n  - **\`0\`** = Zugangsdaten sind korrekt\n  - **\`1\`** = Benutzername existiert nicht\n  - **\`2\`** = Passwort ist falsch\n\n**Ihre Aufgabenstellung:**\n1. Definieren Sie die Methode \`LoginUeberpruefung\` mit den Parametern \`username\` und \`passwort\`.\n2. Rufen Sie die vorgegebene Funktion \`DB_Abfrage\` auf und speichern Sie den Rückgabewert in einer lokalen Variablen.\n3. Werten Sie das Ergebnis mit einer Verzweigung aus:\n   - Ist das Ergebnis \`0\`, geben Sie den booleschen Wert **\`TRUE\`** zurück.\n   - Ist das Ergebnis \`1\` oder \`2\`, geben Sie auf dem Bildschirm den Text **\`"Daten nicht korrekt"\`** aus und geben Sie danach den Wert **\`FALSE\`** zurück.`,
+        solution: `Musterlösung in IHK-Pseudocode:
+
+DEF LoginUeberpruefung(username, passwort)
+    // 1. Vorgegebene Schnittstelle aufrufen und Ergebnis speichern
+    ergebnis = DB_Abfrage(username, passwort)
+    
+    // 2. Rückgabewert prüfen
+    WENN ergebnis == 0 DANN
+        GIB ZURÜCK TRUE
+    SONST
+        AUSGABE "Daten nicht korrekt"
+        GIB ZURÜCK FALSE
+    ENDE WENN
+ENDE DEF
+
+Alternative mit switch/case:
+DEF LoginUeberpruefung(username, passwort)
+    ergebnis = DB_Abfrage(username, passwort)
+    FALLS ergebnis == 0 DANN
+        GIB ZURÜCK TRUE
+    SONST
+        AUSGABE "Daten nicht korrekt"
+        GIB ZURÜCK FALSE
+    ENDE FALLS
+ENDE DEF`,
+        explanation: `💡 IHK-Bewertungsschlüssel & Prüfer-Fallen:
+1. Methodenkopf & Übergabeparameter (2 Pkt): username und passwort müssen entgegengenommen werden.
+2. Aufruf der Fremdmethode (3 Pkt): DB_Abfrage muss exakt mit den Parametern aufgerufen und einer Variablen zugewiesen werden.
+   ⚠️ Häufiger Prüfungsfehler: Selbst 'username == ...' fest im Code zu prüfen, statt die Schnittstelle aufzurufen -> führt zu 0 Punkten im Logikteil!
+3. Auswertung der Rückgabewerte (3 Pkt): Differenzierung zwischen 0 (Erfolg) und 1/2 (Fehler).
+4. Rückgabewerte & Bildschirmausgabe (2 Pkt): TRUE bei 0; Meldung "Daten nicht korrekt" PLUS FALSE bei 1 oder 2.`
+    },
+    {
+        id: 792,
+        theme: "pseudocode",
+        isPseudocode: true,
+        topic: "💻 PAP nach DIN 66001: Programmablaufplan für Methodenaufruf & Verzweigung (10 Punkte)",
+        type: "open-text",
+        points: 10,
+        question: `💻 **IHK Abschlussprüfung Teil 1 – Visuelle Modellierung mit Programmablaufplan (PAP)**\n\nStellen Sie die Logik der Login-Überprüfung aus der vorherigen Aufgabe als **Programmablaufplan (PAP) nach DIN 66001** dar.\n\n**Vorgaben der Logik:**\n- Start der Methode mit Übergabe von \`username\` und \`passwort\`\n- Aufruf von \`ergebnis = DB_Abfrage(username, passwort)\`\n- Prüfung: Ist \`ergebnis == 0\`?\n  - Ja: Rückgabe \`TRUE\` -> Ende\n  - Nein: Bildschirmausgabe \`"Daten nicht korrekt"\`, Rückgabe \`FALSE\` -> Ende\n\n**Aufgaben:**\n1. Beschreiben Sie die verwendeten DIN-Symbole (Formen) für jeden Schritt.\n2. Skizzieren Sie den PAP in Textform mit Pfeilen und Verzweigung.\n3. Nennen Sie den gravierendsten Fehler, den Prüflinge bei der Nein-Verzweigung häufig zeichnen (Stichwort: Rückwärtspfeil / Endlosschleife).`,
+        solution: `1. Normgerechte Symbole nach DIN 66001:
+• Start / Ende: Oval bzw. abgerundetes Rechteck
+• Operation / Funktionsaufruf: Rechteck (z. B. ergebnis = DB_Abfrage(username, passwort))
+• Entscheidung / Verzweigung: Raute (Bedingung ergebnis == 0?)
+• Ein-/Ausgabe: Parallelogramm (bzw. Rechteck für print "Daten nicht korrekt")
+• Kontrollfluss: Gerichtete Linien mit Pfeilspitzen
+
+2. Ablaufskizze des PAP:
+       ( Start )
+          │
+          ▼
+┌─────────────────────────────────────────┐
+│  ergebnis = DB_Abfrage(                 │  <-- Rechteck (Prozess / Aufruf)
+│      username, passwort)                │
+└─────────────────────────────────────────┘
+          │
+          ▼
+       ┌─────┐
+       │     │
+       │ ==0 ├──────────────────────────┐
+       │     │ (Ja)                     │ (Nein / 1 oder 2)
+       └─────┘                          │
+          │                             ▼
+          │                   ┌─────────────────────────┐
+          │                   │ Ausgabe:                │  <-- Parallelogramm / Ausgabe
+          │                   │ "Daten nicht korrekt"   │
+          │                   └─────────────────────────┘
+          │                             │
+          ▼                             ▼
+┌─────────────────────────┐   ┌─────────────────────────┐
+│   Gibt TRUE zurück      │   │   Gibt FALSE zurück     │  <-- Prozess / Rückgabe
+└─────────────────────────┘   └─────────────────────────┘
+          │                             │
+          └──────────────┬──────────────┘
+                         │
+                         ▼
+                      ( Ende )
+
+3. Häufigster IHK-Prüfungsfehler:
+Ein Rückwärtspfeil vom Nein-Zweig zurück nach oben vor die Eingabe! Dadurch entsteht eine Endlosschleife. Die Aufgabe verlangt aber eine Methode, die fehlschlägt und FALSE an den Aufrufer zurückgibt, nicht ein unendliches Verharren in einer Eingabeschleife.`,
+        explanation: `💡 Wichtige DIN 66001 Regeln für die IHK:
+- Verzweigungen (Rauten) MÜSSEN immer an den Ausgängen beschriftet sein (z. B. 'Ja' / 'Nein' oder '0' / '≠ 0').
+- Jeder Pfad muss sauber im gemeinsamen End-Symbol münden.`
+    },
+    {
+        id: 793,
+        theme: "pseudocode",
+        isPseudocode: true,
+        topic: "💻 Struktogramm (DIN 66261): Nassi-Shneiderman zur Login-Schnittstelle (10 Punkte)",
+        type: "open-text",
+        points: 10,
+        question: `💻 **IHK Abschlussprüfung Teil 1 – Nassi-Shneiderman Struktogramm (DIN 66261)**\n\nModellieren Sie die Methode \`LoginUeberpruefung\` als strukturiertes **Nassi-Shneiderman Struktogramm**.\n\n**Gegebene Anforderungen:**\n• Methodenaufruf \`ergebnis = DB_Abfrage(username, passwort)\`\n• Verzweigungsblock mit Bedingungsdreiecken (Wahr / Falsch)\n• Behandlung des Erfolgs- und Fehlerfalls\n\n**Aufgabenstellung:**\n1. Erstellen Sie die Textdarstellung des Struktogramms mit Blockrahmen.\n2. Erklären Sie, warum die Fehlannahme 'Die DB liefert einen Boolean (true/false)' bei dieser IHK-Aufgabe zu erheblichem Punktabzug führt.`,
+        solution: `1. Nassi-Shneiderman Struktogramm nach DIN 66261:
+
+┌─────────────────────────────────────────────────────────────┐
+│ Methode: LoginUeberpruefung(username, passwort)             │
+├─────────────────────────────────────────────────────────────┤
+│ ergebnis = DB_Abfrage(username, passwort)                   │
+├──────────────────────────────┬──────────────────────────────┤
+│ W                             ergebnis == 0                F│
+├──────────────────────────────┼──────────────────────────────┤
+│                              │ AUSGABE "Daten nicht korrekt"│
+│                              ├──────────────────────────────┤
+│ GIB ZURÜCK TRUE              │ GIB ZURÜCK FALSE             │
+└──────────────────────────────┴──────────────────────────────┘
+
+2. Warum die Boolean-Annahme Punkte kostet:
+Die Schnittstelle DB_Abfrage liefert laut Spezifikation einen INTEGER (0, 1 oder 2). Ein direkter Check wie 'WENN ergebnis == TRUE' ist typwidrig und ignoriert die Fehlernummern (1 = User nicht gefunden, 2 = falsches Passwort). In der IHK-Korrektur führt das Nichtbeachten von Rückgabewert-Spezifikationen zum Verlust der Schnittstellen-Punkte (ca. 3 bis 4 Punkte Abzug).`,
+        explanation: `💡 DIN 66261 Merkmale:
+- Keine Pfeile oder Sprünge (im Gegensatz zum PAP).
+- Feste Schachtelung: Anweisungen oben, Verzweigung mit diagonaler Dreiecksteilung für W (Wahr) und F (Falsch).`
+    },
+    {
+        id: 794,
+        theme: "pseudocode",
+        isPseudocode: true,
+        topic: "💻 Python & Pseudocode: Altersprüfung & Unreachable-Code-Falle (10 Punkte)",
+        type: "open-text",
+        points: 10,
+        question: `💻 **IHK Abschlussprüfung Teil 1 – Python-Programmierung & Code-Qualität (10 Punkte)**\n\nGegeben ist folgende Programmieraufgabe für ein E-Commerce-System:\nEs soll eine Funktion \`AltersPruefung(kunden_id, gekauftes_fk_alter)\` erstellt werden.\n\n**Vorgaben:**\n• Über die Schnittstelle \`DB_Alter_Abfragen(kunden_id)\` wird das reale Alter des Kunden aus der Datenbank geladen.\n• Wenn das reale Alter mindestens dem \`gekauftes_fk_alter\` (gefordertes Mindestalter für den Artikel) entspricht, soll \`True\` zurückgegeben werden.\n• Andernfalls soll die Meldung \`"Altersfreigabe nicht erfüllt"\` auf der Konsole ausgegeben und danach \`False\` zurückgegeben werden.\n\n**Aufgaben:**\n1. Schreiben Sie den sauberen, syntaktisch korrekten Python-Code für die Funktion.\n2. Erklären Sie den IHK-Klassiker-Fehler: Was passiert, wenn \`print("Altersfreigabe nicht erfüllt")\` NACH \`return False\` platziert wird? Welcher Fachbegriff bezeichnet solchen Code?`,
+        solution: `1. Korrekter Python-Code:
+
+def AltersPruefung(kunden_id: int, gekauftes_fk_alter: int) -> bool:
+    # 1. Reales Alter des Kunden über die Schnittstelle abfragen
+    echtes_alter = DB_Alter_Abfragen(kunden_id)
+    
+    # 2. Prüfen, ob das Alter ausreicht
+    if echtes_alter >= gekauftes_fk_alter:
+        return True
+    else:
+        # Goldene Regel: Print MUSS vor dem Return stehen!
+        print("Altersfreigabe nicht erfüllt")
+        return False
+
+2. Erklärung des Fehlers & Fachbegriff:
+Das Schlüsselwort 'return' beendet die Ausführung einer Funktion sofort und gibt die Kontrolle an das aufrufende Programm zurück. 
+Wird 'print(...)' nach 'return False' geschrieben, wird der print-Befehl NIEMALS ausgeführt.
+Der Fachbegriff hierfür lautet "Unreachable Code" (unerreichbarer Code / toter Code). In der IHK-Korrektur führt dies zu Punktabzug bei der geforderten Fehlerausgabe.`,
+        explanation: `💡 Wichtige Python-Regeln für die Prüfung:
+- Einrückung (Indentation) von 4 Leerzeichen beachten.
+- Doppelpunkt ':' nach def, if, else.
+- Boolesche Literale großschreiben: True und False (nicht true/false).`
+    },
+    {
+        id: 795,
+        theme: "pseudocode",
+        isPseudocode: true,
+        topic: "💻 Schleifen & Zähler (Counter): Kunden-Status & Aktive Benutzer zählen (12 Punkte)",
+        type: "open-text",
+        points: 12,
+        question: `💻 **IHK Abschlussprüfung Teil 1 – Schleifen, Zähler & Schnittstellen-Aufruf (12 Punkte)**\n\nSie sollen für ein CRM-System eine Funktion schreiben, die eine Liste von Kunden durchgeht und ermittelt, wie viele Kunden aktuell den Status 'Aktiv' besitzen.\n\n**Vorgaben:**\n• Gegebene Liste von Kunden-IDs: \`kunden_liste = [201, 202, 203, 204, 205]\`\n• Externe Schnittstellenfunktion: \`DB_Status_Abfragen(kunden_id: INT) : INT\`\n  - \`0\` = Kunde ist Aktiv\n  - \`1\` = Kunde ist Gesperrt\n  - \`2\` = Kunde ist Gekündigt\n\n**Ihre Aufgabenstellung:**\n1. Schreiben Sie die Funktion \`anzahl_aktive_kunden(kunden_liste)\` im IHK-Pseudocode oder in Python.\n2. Initialisieren Sie einen Zähler vor der Schleife auf 0.\n3. Iterieren Sie über alle Elemente der Kundenliste.\n4. Rufen Sie für jede ID die Funktion \`DB_Status_Abfragen\` auf.\n5. Wenn der Status 0 ist, erhöhen Sie den Zähler um 1 und geben Sie \`"Kunde [ID] ist Aktiv"\` aus.\n6. Geben Sie nach Durchlauf der gesamten Schleife die Gesamtzahl der aktiven Kunden zurück.`,
+        solution: `Variante 1: In IHK-Pseudocode
+
+FUNKTION anzahl_aktive_kunden(kunden_liste)
+    // 1. Zähler vor Beginn der Iteration initialisieren
+    zaehler_aktiv = 0
+    
+    // 2. Schleife über alle Einträge
+    FÜR JEDES k_id IN kunden_liste MACHE
+        // 3. Status über Schnittstelle ermitteln
+        status = DB_Status_Abfragen(k_id)
+        
+        // 4. Status prüfen und Zähler inkrementieren
+        WENN status == 0 DANN
+            zaehler_aktiv = zaehler_aktiv + 1
+            AUSGABE "Kunde " + k_id + " ist Aktiv"
+        ENDE WENN
+    ENDE FÜR
+    
+    // 5. Gesamtergebnis zurückgeben
+    GIB ZURÜCK zaehler_aktiv
+ENDE FUNKTION
+
+----------------------------------------------------
+Variante 2: In Python
+
+def anzahl_aktive_kunden(kunden_liste: list) -> int:
+    zaehler_aktiv = 0
+    
+    for k_id in kunden_liste:
+        status = DB_Status_Abfragen(k_id)
+        if status == 0:
+            zaehler_aktiv += 1
+            print(f"Kunde {k_id} ist Aktiv")
+            
+    return zaehler_aktiv`,
+        explanation: `💡 Die 4 goldenen Schritte für Zähler-Aufgaben in IHK-Prüfungen:
+1. Zähler VOR der Schleife mit 0 initialisieren (wer den Zähler in der Schleife auf 0 setzt, überschreibt ihn bei jedem Durchlauf!).
+2. For-Schleife über die Datenstruktur (Array/Liste).
+3. If-Bedingung zur Filterung.
+4. Zähler inkrementieren (zaehler = zaehler + 1 bzw. zaehler += 1) und erst NACH der Schleife den Endwert zurückgeben.`
+    },
+    {
+        id: 796,
+        theme: "pseudocode",
+        isPseudocode: true,
+        topic: "💻 Schleifen & Filterung: Array-Prüfung gegen Schwellenwert (Ticket-Kauf - 10 Punkte)",
+        type: "open-text",
+        points: 10,
+        question: `💻 **IHK Abschlussprüfung Teil 1 – Array-Iteration mit Schwellenwert-Logik (10 Punkte)**\n\nFür einen Online-Ticketverkauf soll ein Skript automatisiert prüfen, ob Kunden auf einer Warteliste über ausreichendes Prepaid-Guthaben verfügen.\n\n**Gegebenheiten:**\n• Warteliste: \`kunden_liste = [101, 102, 103, 104]\`\n• Ticketpreis: Pauschal **50.00 €**\n• Vorgegebene Abfragemethode: \`DB_Guthaben_Abfragen(kunden_id: INT) : FLOAT\`\n\n**Aufgabe:**\nSchreiben Sie einen Algorithmus (Pseudocode oder Python), der:\n1. Nacheinander alle Kunden aus \`kunden_liste\` durchgeht.\n2. Das jeweilige Guthaben über \`DB_Guthaben_Abfragen\` abfragt.\n3. Prüft, ob das Guthaben größer oder gleich 50.00 € ist:\n   - Wenn ja: Bildschirmausgabe \`"Kunde [ID] kann Ticket kaufen"\`\n   - Wenn nein: Bildschirmausgabe \`"Kunde [ID] hat nicht genug Guthaben"\``,
+        solution: `Musterlösung in IHK-Pseudocode:
+
+FUNKTION ticket_berechtigung_pruefen(kunden_liste)
+    TICKETPREIS = 50.00
+    
+    FÜR JEDES id IN kunden_liste MACHE
+        aktuelles_guthaben = DB_Guthaben_Abfragen(id)
+        
+        WENN aktuelles_guthaben >= TICKETPREIS DANN
+            AUSGABE "Kunde " + id + " kann Ticket kaufen"
+        SONST
+            AUSGABE "Kunde " + id + " hat nicht genug Guthaben"
+        ENDE WENN
+    ENDE FÜR
+ENDE FUNKTION
+
+Musterlösung in Python:
+
+def ticket_berechtigung_pruefen(kunden_liste):
+    ticketpreis = 50.0
+    for id in kunden_liste:
+        aktuelles_guthaben = DB_Guthaben_Abfragen(id)
+        if aktuelles_guthaben >= ticketpreis:
+            print(f"Kunde {id} kann Ticket kaufen")
+        else:
+            print(f"Kunde {id} hat nicht genug Guthaben")`,
+        explanation: `💡 Wichtige Prüfungsaspekte:
+- Bei Geldbeträgen float bzw. Nachkommastellen beachten (50.00).
+- Größer-Gleich-Operator '>=' verwenden, da genau 50,00 € zum Kauf ausreichen.
+- Beide Zweige (Erfolg und Misserfolg) mit differenzierter Ausgabe abdecken.`
+    },
+    {
+        id: 797,
+        theme: "pseudocode",
+        isPseudocode: true,
+        topic: "💻 String-Verarbeitung & Prüfungsregeln: Case-Sensitivity, .lower() / .upper() (8 Punkte)",
+        type: "open-text",
+        points: 8,
+        question: `💻 **IHK Abschlussprüfung Teil 1 – String-Vergleiche, Case-Sensitivity & Prüfungsrichtlinien (8 Punkte)**\n\nBei der Auswertung von Benutzereingaben (z. B. Rollenprüfung für \`"admin"\` oder Bestätigung mit \`"ja"\`) treten häufig Fehler durch gemischte Groß- und Kleinschreibung auf.\n\n**Aufgabenstellung:**\n1. Erläutern Sie, wie die Methoden \`.lower()\` und \`.upper()\` verwendet werden, um String-Vergleiche gegen Fehleingaben abzusichern (inklusive kurzem Codebeispiel).\n2. Erklären Sie den Unterschied in der IHK-Bewertungspraxis:\n   - Wie bewerten IHK-Prüfer Groß-/Kleinschreibung im **Pseudocode**?\n   - Wie verhält es sich bei **echtem Programmcode** (z. B. Python, Java, C#)? Nennen Sie zwei typische Python-Befehle, bei denen falsche Großschreibung zu Syntax- bzw. Laufzeitfehlern führt.`,
+        solution: `1. Funktionsweise und Beispiel:
+Strings sind case-sensitive ('Admin' != 'admin'). Um einen robusten Vergleich durchzuführen, wandelt man die Benutzereingabe mit .lower() in reine Kleinbuchstaben (oder mit .upper() in Großbuchstaben) um:
+
+eingabe = "Admin"
+if eingabe.lower() == "admin":
+    print("Zugriff gewährt")
+// Funktioniert für 'ADMIN', 'Admin', 'admin', 'aDmIn' etc.
+
+2. IHK-Bewertungspraxis bei Groß-/Kleinschreibung:
+• Bei Pseudocode (Konzept/Logik):
+  Prüfer sind sehr kulant. Ob 'WENN', 'wenn', 'GIB ZURÜCK' oder 'gib zurück' geschrieben wird, führt NICHT zu Punktabzug, da Pseudocode keine formale Sprache ist und die algorithmische Logik im Vordergrund steht.
+
+• Bei echtem Programmiercode (z. B. Python):
+  Echte Programmiersprachen unterscheiden strikt zwischen Groß- und Kleinschreibung. Fehler führen zu SyntaxError oder NameError:
+  - 'Print("...")' statt 'print("...")' -> NameError (Befehl nicht gefunden).
+  - 'true' oder 'false' statt 'True' oder 'False' -> NameError (in Python müssen boolesche Literale mit Großbuchstaben beginnen).
+  - 'Def funktion():' statt 'def funktion():' -> SyntaxError.`,
+        explanation: `💡 Prüfer-Tipp:
+Wenn in der IHK-Aufgabe nicht ausdrücklich eine bestimmte Sprache vorgeschrieben ist, ist Pseudocode oft die sicherere Wahl, weil man nicht wegen kleiner Tippfehler bei Schlüsselwörtern Punkte verliert.`
+    },
+    {
+        id: 798,
+        theme: "pseudocode",
+        isPseudocode: true,
+        topic: "💻 Schreibtischtest: Trace-Tabelle für Zähler, Akkumulator & Schleifenabbruch (10 Punkte)",
+        type: "open-text",
+        points: 10,
+        question: `💻 **IHK Abschlussprüfung Teil 1 – Schreibtischtest (Trace-Tabelle) für Algorithmus (10 Punkte)**\n\nGegeben ist folgender Pseudocode:\n\n\`\`\`plaintext\n01: zahlen = [12, 5, 18, 7, 24, 3]\n02: zaehler = 0\n03: summe = 0\n04: FÜR i = 0 BIS LÄNGE(zahlen) - 1 MACHE\n05:     WENN zahlen[i] > 10 DANN\n06:         zaehler = zaehler + 1\n07:         summe = summe + zahlen[i]\n08:     ENDE WENN\n09:     WENN summe >= 50 DANN\n10:         ABBRUCH // Schleife vorzeitig beenden\n11:     ENDE WENN\n12: ENDE FÜR\n13: GIB ZURÜCK zaehler\n\`\`\`\n\n**Aufgabenstellung:**\n1. Führen Sie einen vollständigen Schreibtischtest durch und stellen Sie die Trace-Tabelle für alle Iterationen auf.\n2. Geben Sie die finalen Werte von \`zaehler\`, \`summe\` sowie den finalen Rückgabewert an.`,
+        solution: `1. Trace-Tabelle (Schreibtischtest):
+
+| Durchlauf | i | zahlen[i] | zahlen[i] > 10? | zaehler | summe | summe >= 50? | Aktion / Bemerkung |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :--- |
+| Start | - | - | - | 0 | 0 | - | Initialisierung Zeile 02 & 03 |
+| 1 | 0 | 12 | JA (12 > 10) | 1 | 12 | NEIN (12 < 50) | zaehler=1, summe=12 |
+| 2 | 1 | 5 | NEIN (5 < 10) | 1 | 12 | NEIN (12 < 50) | Keine Addition |
+| 3 | 2 | 18 | JA (18 > 10) | 2 | 30 | NEIN (30 < 50) | zaehler=2, summe=30 |
+| 4 | 3 | 7 | NEIN (7 < 10) | 2 | 30 | NEIN (30 < 50) | Keine Addition |
+| 5 | 4 | 24 | JA (24 > 10) | 3 | 54 | JA (54 >= 50) | zaehler=3, summe=54 -> ABBRUCH! |
+
+Hinweis: Das letzte Element (Index 5, Wert 3) wird nicht mehr verarbeitet, da die Schleife bei Durchlauf 5 vorzeitig abbricht.
+
+2. Finale Werte & Rückgabewert:
+• zaehler = 3
+• summe = 54
+• Rückgabewert der Funktion = 3`,
+        explanation: `💡 Warum Schreibtischtests in der IHK volle Punkte bringen:
+- Klare Spalten für jede Variable (i, Array-Wert, zaehler, summe).
+- Prüfen der Bedingungen in separaten Schritten.
+- Erkennen von vorzeitigen Abbrüchen (break / ABBRUCH).`
     }
 
 ];
