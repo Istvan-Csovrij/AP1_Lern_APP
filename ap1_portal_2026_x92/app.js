@@ -607,19 +607,14 @@ function filterQuestions(theme) {
                     q.question.toLowerCase().includes("bitweise")
                 ))
             );
-        } else if (theme === "pruefungsblatt" || theme === "checkauthority" || theme === "2d-arrays") {
+        } else if (theme === "pseudocode" || theme === "coding" || theme === "pruefungsblatt" || theme === "code" || theme === "algorithmen" || theme === "checkauthority" || theme === "2d-arrays") {
             const pool = (typeof staticQuestions !== "undefined" && Array.isArray(staticQuestions)) ? staticQuestions : questions;
             filteredQuestions = pool.filter(q => 
-                (q.id >= 770 && q.id <= 790) || 
-                q.theme === "pruefungsblatt" ||
-                q.isPruefungsblatt === true ||
-                (q.topic && (q.topic.includes("checkAuthority") || q.topic.includes("Prüfungsblatt") || q.topic.includes("2D-"))) ||
-                (q.question && (q.question.includes("checkAuthority") || q.question.includes("keyData") || q.question.includes("Prüfungsbogen")))
-            );
-        } else if (theme === "pseudocode" || theme === "code" || theme === "algorithmen") {
-            filteredQuestions = questions.filter(q => 
                 q.theme === "pseudocode" || 
+                q.theme === "pruefungsblatt" || 
                 q.isPseudocode === true || 
+                q.isPruefungsblatt === true || 
+                (q.id >= 770 && q.id <= 790) || 
                 (q.topic && (
                     q.topic.toLowerCase().includes("pseudocode") || 
                     q.topic.toLowerCase().includes("schreibtischtest") || 
@@ -629,13 +624,19 @@ function filterQuestions(theme) {
                     q.topic.toLowerCase().includes("binaere suche") || 
                     q.topic.toLowerCase().includes("binäre suche") || 
                     q.topic.toLowerCase().includes("bubble sort") || 
-                    q.topic.toLowerCase().includes("sortier")
-                )) ||
+                    q.topic.toLowerCase().includes("sortier") || 
+                    q.topic.toLowerCase().includes("checkauthority") || 
+                    q.topic.toLowerCase().includes("prüfungsblatt") || 
+                    q.topic.toLowerCase().includes("2d-")
+                )) || 
                 (q.question && (
                     q.question.toLowerCase().includes("pseudocode") || 
                     q.question.toLowerCase().includes("schreibtischtest") || 
                     q.question.toLowerCase().includes("trace-tabelle") || 
-                    q.question.toLowerCase().includes("trace tabelle")
+                    q.question.toLowerCase().includes("trace tabelle") || 
+                    q.question.toLowerCase().includes("checkauthority") || 
+                    q.question.toLowerCase().includes("keydata") || 
+                    q.question.toLowerCase().includes("prüfungsbogen")
                 ))
             );
         } else if (theme === "subnetting" || theme === "ipv4-ipv6" || theme === "subnet" || theme === "ip-adressierung") {
@@ -1513,7 +1514,8 @@ function getThemeLabel(key) {
         hex: "🔢 Zahlensysteme & Dateneinheiten (LF 2/3)",
         subnetting: "🌐 IPv4 & IPv6 Subnetting (Gleich groß & VLSM)",
         "ipv4-ipv6": "🌐 IPv4 & IPv6 Subnetting (Gleich groß & VLSM)",
-        pseudocode: "💻 Pseudocode: Lesen & Schreiben (AP1)",
+        pseudocode: "💻 Coding & Pseudocode (Algorithmen & Logik)",
+        pruefungsblatt: "💻 Coding & Pseudocode (Algorithmen & Logik)",
         "hard-mode": "🔥 Prüfungsschwerpunkte (Schwer)",
         hard: "🔥 Prüfungsschwerpunkte (Schwer)"
     };

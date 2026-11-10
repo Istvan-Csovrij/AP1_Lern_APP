@@ -139,40 +139,22 @@
                         <i class="fa-solid fa-arrow-up-right-from-square mini-tile-arrow"></i>
                     </a>
 
-                    <!-- Kachel 2: Python Funktions-Studio & Test-Runner -->
-                    <a href="../probeklausur_hotel_city_hof/?tab=python_studio" target="_blank" class="special-mini-tile tile-python" title="Python Funktions-Studio & Test-Runner">
+                    <!-- Kachel: Coding & Pseudocode (Einheitlicher Bereich) -->
+                    <div class="special-mini-tile tile-pseudocode" onclick="document.getElementById('pseudocode-filter-btn').click();" title="Coding & Pseudocode: Algorithmen, Schreibtischtests & Programmablauf" style="background: linear-gradient(135deg, #eef2ff 0%, #f5f3ff 100%); border-left: 3px solid #6366f1; cursor: pointer;">
                         <span class="mini-tile-content">
-                            <i class="fa-brands fa-python" style="color: #2563eb;"></i>
-                            <span>Python Studio</span>
+                            <i class="fa-solid fa-code" style="color: #4f46e5;"></i>
+                            <span style="font-weight: 700; color: #3730a3;">💻 Coding &amp; Pseudocode</span>
                         </span>
-                        <i class="fa-solid fa-arrow-up-right-from-square mini-tile-arrow"></i>
-                    </a>
+                        <i class="fa-solid fa-arrow-right mini-tile-arrow" style="color: #4f46e5;"></i>
+                    </div>
 
-                    <!-- Kachel 3: IPv4 & IPv6 Subnetting & Adress-Klassifizierung -->
+                    <!-- Kachel: IPv4 & IPv6 Subnetting & Adress-Klassifizierung -->
                     <div class="special-mini-tile tile-subnet" onclick="document.getElementById('subnetting-filter-btn').click();" title="IPv4 & IPv6 Subnetting (69+ Aufgaben)">
                         <span class="mini-tile-content">
                             <i class="fa-solid fa-network-wired" style="color: #0284c7;"></i>
                             <span>IPv4 &amp; IPv6 Subnetting</span>
                         </span>
                         <i class="fa-solid fa-arrow-right mini-tile-arrow"></i>
-                    </div>
-
-                    <!-- Kachel 7: Prüfungsblatt checkAuthority & 2D-Arrays -->
-                    <div class="special-mini-tile tile-pruefungsblatt" onclick="document.getElementById('pruefungsblatt-filter-btn').click();" title="IHK-Originalaufgabe: checkAuthority(id=3, roomNr=236) mit keyData[][]" style="background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%); border-left: 3px solid #9333ea; cursor: pointer;">
-                        <span class="mini-tile-content">
-                            <i class="fa-solid fa-file-code" style="color: #9333ea;"></i>
-                            <span style="font-weight: 700; color: #581c87;">📋 Prüfungsblatt: checkAuthority (2D-Arrays)</span>
-                        </span>
-                        <i class="fa-solid fa-arrow-right mini-tile-arrow" style="color: #9333ea;"></i>
-                    </div>
-
-                    <!-- Kachel 6: Pseudocode & Algorithmen (Lesen & Schreiben) -->
-                    <div class="special-mini-tile tile-pseudocode" onclick="document.getElementById('pseudocode-filter-btn').click();" title="Pseudocode: Fertigen Code verstehen (Trace-Tabelle) & nach Aufgabe schreiben" style="background: linear-gradient(135deg, #eef2ff 0%, #f5f3ff 100%); border-left: 3px solid #6366f1; cursor: pointer;">
-                        <span class="mini-tile-content">
-                            <i class="fa-solid fa-code" style="color: #4f46e5;"></i>
-                            <span style="font-weight: 700; color: #3730a3;">💻 Pseudocode (Lesen/Schreiben)</span>
-                        </span>
-                        <i class="fa-solid fa-arrow-right mini-tile-arrow" style="color: #4f46e5;"></i>
                     </div>
 
                     <!-- Kachel 5: OSI-Schichtenmodell Trainer & Aufgaben (LF 3) -->
@@ -244,18 +226,9 @@
                     <button class="filter-btn highlight-binary-btn" data-theme="zahlensysteme" id="zahlensysteme-filter-btn">
                         <i class="fa-solid fa-calculator" style="color: #0284c7;"></i> 🔢 Zahlensysteme &amp; Einheiten
                     </button>
-                    <button class="filter-btn highlight-pruefungsblatt-btn" data-theme="pruefungsblatt" id="pruefungsblatt-filter-btn" style="background: linear-gradient(135deg, #4f46e5, #7c3aed); color: white; font-weight: 800; border: 2px solid #a855f7; box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3); border-radius: 8px;">
-                        <i class="fa-solid fa-file-signature" style="color: #facc15;"></i> 📋 IHK-Prüfungsblatt: checkAuthority &amp; 2D-Arrays (Neu!)
+                    <button class="filter-btn highlight-pseudocode-btn" data-theme="pseudocode" id="pseudocode-filter-btn" style="border: 1.5px solid #6366f1; background: linear-gradient(135deg, #eef2ff 0%, #f5f3ff 100%); color: #3730a3; font-weight: 700;">
+                        <i class="fa-solid fa-code" style="color: #4f46e5;"></i> 💻 Coding &amp; Pseudocode
                     </button>
-                    <button class="filter-btn highlight-pseudocode-btn" data-theme="pseudocode" id="pseudocode-filter-btn">
-                        <i class="fa-solid fa-code" style="color: #059669;"></i> 💻 Pseudocode & 2D-Arrays (90+ Aufgaben: Original IHK-Prüfungsblätter)
-                    </button>
-                    <a href="rechentrainer.html?topic=pseudocode_trainer&v=159" target="_blank" class="filter-btn highlight-pseudocode-trainer-btn" id="open-pseudocode-trainer-btn" style="border: 1px solid #6366f1; background: #eef2ff; color: #4338ca; text-decoration: none;">
-                        <i class="fa-solid fa-graduation-cap" style="color: #6366f1;"></i> 💻 Pseudocode-Trainer (Trace &amp; Schreiben) ↗
-                    </a>
-                    <a href="../probeklausur_hotel_city_hof/?tab=python_studio" target="_blank" class="filter-btn highlight-python-btn" id="open-python-studio-btn">
-                        <i class="fa-brands fa-python" style="color: #2563eb;"></i> 🐍 Python Funktions-Studio ↗
-                    </a>
                     <button class="filter-btn highlight-subnet-btn" data-theme="subnetting" id="subnetting-filter-btn">
                         <i class="fa-solid fa-network-wired" style="color: #0284c7;"></i> 🌐 Subnetting &amp; IPv4 / IPv6
                     </button>
