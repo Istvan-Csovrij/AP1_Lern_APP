@@ -7,7 +7,7 @@
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
     <title>AP1 Prüfungstrainer - Fachinformatiker</title>
-    <link rel="stylesheet" href="style.css?v=160">
+    <link rel="stylesheet" href="style.css?v=161">
     <!-- FontAwesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -451,13 +451,13 @@
                     <h3 style="color: #4338ca; margin: 0; font-size: 0.88rem; display: flex; align-items: center; gap: 0.4rem; font-weight: 800; border: none; padding: 0;">
                         <i class="fa-solid fa-graduation-cap" style="color: #6366f1;"></i> Brücke AP1 ➔ AP2
                     </h3>
-                    <span style="background: #ede9fe; color: #6d28d9; font-size: 0.65rem; font-weight: 800; padding: 0.1rem 0.4rem; border-radius: 999px;">
-                        FIAE Hub
+                    <span style="background: #dbeafe; color: #1e40af; font-size: 0.65rem; font-weight: 800; padding: 0.12rem 0.45rem; border-radius: 999px; letter-spacing: 0.02em;">
+                        FISI Hub (AP2)
                     </span>
                 </div>
 
                 <!-- Highlight Mini-Kachel: Letzte AP1 Prüfung -->
-                <div class="special-mini-tile tile-calc" onclick="startExamMode(false, 'exam_24')" title="Letzte AP1-Prüfung (BaWü 2026 mit Anlagen 2-6) im Split-View starten" style="cursor: pointer; margin-bottom: 0.3rem;">
+                <div class="special-mini-tile tile-calc" onclick="startExamMode(false, 'exam_24')" title="Letzte AP1-Prüfung (BaWü 2026 mit Anlagen 2-6) im Split-View starten" style="cursor: pointer; margin-bottom: 0.35rem;">
                     <span class="mini-tile-content">
                         <i class="fa-solid fa-star" style="color: #d97706;"></i>
                         <span>Letzte AP1-Prüfung (2026)</span>
@@ -465,28 +465,55 @@
                     <span style="font-size: 0.65rem; background: #d97706; color: white; padding: 0.1rem 0.35rem; border-radius: 4px; font-weight: 800;">START ➔</span>
                 </div>
 
-                <!-- Die 3 Prüfungsbereiche als dünne Mini-Kacheln mit Überschrift -->
-                <div style="display: flex; flex-direction: column; gap: 0.25rem; margin-bottom: 0.35rem;">
-                    <div class="special-mini-tile" style="background: #eef2ff; border: 1px solid #c7d2fe; border-left: 3px solid #6366f1; color: #312e81; padding: 0.32rem 0.55rem;" onclick="openAp2BridgeModal('pb2')" title="PB 2: Planen eines Softwareproduktes (Architektur, UI/UX, ERM)">
-                        <span class="mini-tile-content">
-                            <i class="fa-solid fa-diagram-project" style="color: #6366f1;"></i>
-                            <span>1. Softwareprodukt (PB 2)</span>
-                        </span>
-                        <i class="fa-solid fa-arrow-right mini-tile-arrow" style="color: #6366f1;"></i>
+                <!-- Die 3 schriftlichen Prüfungsbereiche laut IHK Prüfungsordnung -->
+                <div style="display: flex; flex-direction: column; gap: 0.3rem; margin-bottom: 0.4rem;">
+                    
+                    <!-- PB 2: Konzeption und Administration von IT-Systemen -->
+                    <div class="special-mini-tile" style="background: #eef2ff; border: 1px solid #c7d2fe; border-left: 3.5px solid #6366f1; color: #312e81; padding: 0.35rem 0.55rem; cursor: pointer;" onclick="openAp2BridgeModal('pb2')" title="PB 2: Konzept. und Administration von IT-Systemen (70 Punkte | 10 % Gewichtung)">
+                        <div class="mini-tile-content" style="display: flex; flex-direction: column; gap: 0.1rem; width: 100%;">
+                            <div style="display: flex; align-items: center; justify-content: space-between;">
+                                <span style="font-weight: 700; display: flex; align-items: center; gap: 0.35rem; font-size: 0.82rem;">
+                                    <i class="fa-solid fa-server" style="color: #6366f1;"></i>
+                                    <span>1. IT-Systeme (PB 2)</span>
+                                </span>
+                                <span style="font-size: 0.66rem; background: #c7d2fe; color: #312e81; padding: 0.05rem 0.35rem; border-radius: 4px; font-weight: 800;">70 Pkt. | 10 %</span>
+                            </div>
+                            <span style="font-size: 0.7rem; color: #4338ca; padding-left: 1.25rem;">
+                                Konzept. &amp; Administration
+                            </span>
+                        </div>
                     </div>
-                    <div class="special-mini-tile" style="background: #ecfeff; border: 1px solid #a5f3fc; border-left: 3px solid #06b6d4; color: #164e63; padding: 0.32rem 0.55rem;" onclick="openAp2BridgeModal('pb3')" title="PB 3: Algorithmen & Logik (Pseudocode, SQL, Debugging)">
-                        <span class="mini-tile-content">
-                            <i class="fa-solid fa-code" style="color: #0891b2;"></i>
-                            <span>2. Algorithmen &amp; Logik (PB 3)</span>
-                        </span>
-                        <i class="fa-solid fa-arrow-right mini-tile-arrow" style="color: #0891b2;"></i>
+
+                    <!-- PB 3: Analyse und Entwicklung von Netzwerken -->
+                    <div class="special-mini-tile" style="background: #ecfeff; border: 1px solid #a5f3fc; border-left: 3.5px solid #06b6d4; color: #164e63; padding: 0.35rem 0.55rem; cursor: pointer;" onclick="openAp2BridgeModal('pb3')" title="PB 3: Analyse und Entwicklung von Netzwerken (70 Punkte | 10 % Gewichtung)">
+                        <div class="mini-tile-content" style="display: flex; flex-direction: column; gap: 0.1rem; width: 100%;">
+                            <div style="display: flex; align-items: center; justify-content: space-between;">
+                                <span style="font-weight: 700; display: flex; align-items: center; gap: 0.35rem; font-size: 0.82rem;">
+                                    <i class="fa-solid fa-network-wired" style="color: #0891b2;"></i>
+                                    <span>2. Netzwerke (PB 3)</span>
+                                </span>
+                                <span style="font-size: 0.66rem; background: #a5f3fc; color: #164e63; padding: 0.05rem 0.35rem; border-radius: 4px; font-weight: 800;">70 Pkt. | 10 %</span>
+                            </div>
+                            <span style="font-size: 0.7rem; color: #0891b2; padding-left: 1.25rem;">
+                                Analyse &amp; Entwicklung
+                            </span>
+                        </div>
                     </div>
-                    <div class="special-mini-tile" style="background: #fdf2f8; border: 1px solid #fbcfe8; border-left: 3px solid #ec4899; color: #831843; padding: 0.32rem 0.55rem;" onclick="openAp2BridgeModal('pb4')" title="PB 4: WiSo Wirtschafts- & Sozialkunde">
-                        <span class="mini-tile-content">
-                            <i class="fa-solid fa-scale-balanced" style="color: #db2777;"></i>
-                            <span>3. WiSo (PB 4)</span>
-                        </span>
-                        <i class="fa-solid fa-arrow-right mini-tile-arrow" style="color: #db2777;"></i>
+
+                    <!-- PB 4: Wirtschafts- und Sozialkunde -->
+                    <div class="special-mini-tile" style="background: #fdf2f8; border: 1px solid #fbcfe8; border-left: 3.5px solid #ec4899; color: #831843; padding: 0.35rem 0.55rem; cursor: pointer;" onclick="openAp2BridgeModal('pb4')" title="PB 4: Wirtschafts- und Sozialkunde (30 Punkte | 10 % Gewichtung)">
+                        <div class="mini-tile-content" style="display: flex; flex-direction: column; gap: 0.1rem; width: 100%;">
+                            <div style="display: flex; align-items: center; justify-content: space-between;">
+                                <span style="font-weight: 700; display: flex; align-items: center; gap: 0.35rem; font-size: 0.82rem;">
+                                    <i class="fa-solid fa-scale-balanced" style="color: #db2777;"></i>
+                                    <span>3. WiSo (PB 4)</span>
+                                </span>
+                                <span style="font-size: 0.66rem; background: #fbcfe8; color: #831843; padding: 0.05rem 0.35rem; border-radius: 4px; font-weight: 800;">30 Pkt. | 10 %</span>
+                            </div>
+                            <span style="font-size: 0.7rem; color: #db2777; padding-left: 1.25rem;">
+                                Wirtschafts- &amp; Sozialkunde
+                            </span>
+                        </div>
                     </div>
                 </div>
 
@@ -889,13 +916,13 @@
                     </div>
                     <div>
                         <h2 style="margin: 0; font-size: 1.3rem; color: #ffffff; display: flex; align-items: center; gap: 0.6rem; font-weight: 800;">
-                            Brücke AP1 ➔ AP2: Fachinformatiker Anwendungsentwicklung (FIAE)
-                            <span style="font-size: 0.75rem; background: #4f46e5; color: #e0e7ff; padding: 0.2rem 0.6rem; border-radius: 999px; text-transform: uppercase; font-weight: 700;">
-                                Prüfungsvorbereitung &amp; Hub
+                            Brücke AP1 ➔ AP2: Die 3 schriftlichen Prüfungsbereiche
+                            <span style="font-size: 0.75rem; background: #2563eb; color: #ffffff; padding: 0.2rem 0.6rem; border-radius: 999px; text-transform: uppercase; font-weight: 800; letter-spacing: 0.03em;">
+                                FISI &amp; FIAE Hub
                             </span>
                         </h2>
                         <p style="margin: 0.2rem 0 0 0; font-size: 0.88rem; color: #c7d2fe;">
-                            Systematische Vorbereitung auf die 3 Prüfungsbereiche von AP2 (Planen, Algorithmen, WiSo) &bull; BaWü-Prüfungsarchiv &bull; Fachquellen
+                            <strong>PB 2:</strong> IT-Systeme (70 Pkt. | 10 %) &bull; <strong>PB 3:</strong> Netzwerke (70 Pkt. | 10 %) &bull; <strong>PB 4:</strong> WiSo (30 Pkt. | 10 %) &bull; <em>Projektarbeit: 50% &bull; AP1: 20% = 100% Gesamt</em>
                         </p>
                     </div>
                 </div>
@@ -912,13 +939,13 @@
                     <i class="fa-solid fa-star" style="color: #f59e0b;"></i> ⭐ Letzte AP1-Prüfung (Original 2026)
                 </button>
                 <button class="ap2-nav-tab" data-tab="pb2" onclick="switchAp2Tab('pb2')" style="padding: 0.75rem 1.1rem; border: none; background: none; border-bottom: 3px solid transparent; color: #64748b; font-weight: 600; font-size: 0.92rem; cursor: pointer; display: flex; align-items: center; gap: 0.45rem; white-space: nowrap;">
-                    <i class="fa-solid fa-diagram-project"></i> 1. Planen eines Softwareproduktes (PB 2)
+                    <i class="fa-solid fa-server" style="color: #6366f1;"></i> 1. IT-Systeme: Konzept &amp; Admin (PB 2 &bull; 70 Pkt. | 10 %)
                 </button>
                 <button class="ap2-nav-tab" data-tab="pb3" onclick="switchAp2Tab('pb3')" style="padding: 0.75rem 1.1rem; border: none; background: none; border-bottom: 3px solid transparent; color: #64748b; font-weight: 600; font-size: 0.92rem; cursor: pointer; display: flex; align-items: center; gap: 0.45rem; white-space: nowrap;">
-                    <i class="fa-solid fa-code"></i> 2. Algorithmen &amp; Logik (PB 3)
+                    <i class="fa-solid fa-network-wired" style="color: #0891b2;"></i> 2. Netzwerke: Analyse &amp; Entw. (PB 3 &bull; 70 Pkt. | 10 %)
                 </button>
                 <button class="ap2-nav-tab" data-tab="pb4" onclick="switchAp2Tab('pb4')" style="padding: 0.75rem 1.1rem; border: none; background: none; border-bottom: 3px solid transparent; color: #64748b; font-weight: 600; font-size: 0.92rem; cursor: pointer; display: flex; align-items: center; gap: 0.45rem; white-space: nowrap;">
-                    <i class="fa-solid fa-scale-balanced"></i> 3. WiSo – Wirtschafts- &amp; Sozialkunde (PB 4)
+                    <i class="fa-solid fa-scale-balanced" style="color: #db2777;"></i> 3. WiSo (PB 4 &bull; 30 Pkt. | 10 %)
                 </button>
                 <button class="ap2-nav-tab" data-tab="files" onclick="switchAp2Tab('files')" style="padding: 0.75rem 1.1rem; border: none; background: none; border-bottom: 3px solid transparent; color: #64748b; font-weight: 600; font-size: 0.92rem; cursor: pointer; display: flex; align-items: center; gap: 0.45rem; white-space: nowrap;">
                     <i class="fa-solid fa-folder-tree" style="color: #f59e0b;"></i> 4. Lokale PC-Prüfungen (BaWü)
@@ -1098,7 +1125,271 @@
                 <!-- ============================================================== -->
                 <div id="ap2-tab-pb2" class="ap2-tab-content" style="display: none;">
                     
-                    <!-- Overview Banner -->
+                    <!-- Sub-Navigation Pills (FISI vs. FIAE) -->
+                    <div style="display: flex; gap: 0.5rem; margin-bottom: 1.25rem; background: #f1f5f9; padding: 0.35rem; border-radius: 8px; border: 1px solid #cbd5e1; width: fit-content; flex-wrap: wrap;">
+                        <button id="pb2-btn-fisi" onclick="switchAp2SubTab('pb2', 'fisi')" style="border: none; padding: 0.45rem 1rem; border-radius: 6px; font-size: 0.85rem; font-weight: 700; cursor: pointer; background: #4f46e5; color: white; transition: all 0.15s ease;">
+                            <i class="fa-solid fa-server"></i> 🖥️ FISI: Konzept &amp; Administration (70 Pkt. | 10 %)
+                        </button>
+                        <button id="pb2-btn-fiae" onclick="switchAp2SubTab('pb2', 'fiae')" style="border: none; padding: 0.45rem 1rem; border-radius: 6px; font-size: 0.85rem; font-weight: 600; cursor: pointer; background: transparent; color: #475569; transition: all 0.15s ease;">
+                            <i class="fa-solid fa-laptop-code"></i> 💻 FIAE: Planen eines Softwareproduktes
+                        </button>
+                    </div>
+
+                    <!-- FISI Content (Default Active) -->
+                    <div id="pb2-content-fisi" style="display: block;">
+
+                <!-- Role / Overview Banner FISI -->
+                <div style="background: linear-gradient(135deg, #eef2ff, #e0e7ff); border: 1.5px solid #c7d2fe; border-radius: 10px; padding: 1.25rem; margin-bottom: 1.25rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem;">
+                        <div>
+                            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.4rem;">
+                                <span style="background: #4338ca; color: white; padding: 0.2rem 0.65rem; border-radius: 6px; font-size: 0.8rem; font-weight: 800; text-transform: uppercase;">Prüfungsbereich 2</span>
+                                <span style="background: #6366f1; color: white; padding: 0.2rem 0.65rem; border-radius: 6px; font-size: 0.8rem; font-weight: 800;">70 Punkte &bull; 10 % Gewichtung &bull; 90 Minuten</span>
+                            </div>
+                            <h3 style="margin: 0.3rem 0 0.25rem 0; font-size: 1.3rem; color: #1e1b4b;">Konzeption und Administration von IT-Systemen</h3>
+                            <p style="margin: 0; color: #3730a3; font-size: 0.93rem; line-height: 1.5; max-width: 920px;">
+                                Im Mittelpunkt stehen Speicherarchitekturen (RAID, JBOD, SAN/NAS), Server-Dimensionierung, Virtualisierung (Hypervisor &amp; Container), Datensicherungsstrategien (3-2-1-1-0), Hochverfügbarkeit, ITIL V4 Service-Management und Schutzbedarfsanalysen nach BSI IT-Grundschutz.
+                            </p>
+                        </div>
+                        <div style="background: white; border: 1px solid #c7d2fe; border-radius: 8px; padding: 0.75rem 1rem; text-align: center; min-width: 190px;">
+                            <div style="font-size: 0.8rem; color: #64748b; font-weight: 600;">IHK-Schwerpunkte</div>
+                            <div style="font-size: 1.05rem; font-weight: 800; color: #4338ca;">Storage &bull; RAID &bull; Virtualisierung &bull; BSI &bull; SLAs</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5 Core Competency Pillars Grid FISI -->
+                <h4 style="margin: 0 0 1rem 0; color: #0f172a; font-size: 1.1rem; display: flex; align-items: center; gap: 0.5rem;">
+                    <i class="fa-solid fa-cubes" style="color: #6366f1;"></i> Die 5 zentralen Fachsäulen von PB 2 (Systemintegration)
+                </h4>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 1rem; margin-bottom: 2rem;">
+                    
+                    <!-- Säule 1: Speichersysteme & Storage -->
+                    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 1.1rem;">
+                        <h5 style="margin: 0 0 0.5rem 0; color: #1e293b; font-size: 1rem; display: flex; align-items: center; gap: 0.45rem;">
+                            <i class="fa-solid fa-hard-drive" style="color: #4f46e5;"></i> 1. Speichersysteme (RAID, JBOD, SAN/NAS)
+                        </h5>
+                        <p style="font-size: 0.86rem; color: #475569; margin-bottom: 0.5rem; line-height: 1.45;">
+                            <strong>RAID-Kalkulation:</strong><br>
+                            &bull; <em>RAID 0 (Striping):</em> Keine Redundanz. Kapazität: \(n \cdot S\). Hohe I/O-Geschwindigkeit, aber bei 1 Ausfall sofortiger Totalverlust.<br>
+                            &bull; <em>RAID 1 (Mirroring):</em> Spiegelung. Kapazität: \(1 \cdot S\). Ausfallsicherheit für 1 Platte.<br>
+                            &bull; <em>RAID 5 (Verteilte Parität):</em> Min. 3 Platten. Netto: \((n - 1) \cdot S_{\text{kleinste}}\). Toleriert 1 Plattenausfall.<br>
+                            &bull; <em>RAID 6 (Dual Parity):</em> Min. 4 Platten. Netto: \((n - 2) \cdot S_{\text{kleinste}}\). Toleriert 2 gleichzeitige Ausfälle.<br>
+                            &bull; <em>RAID 10 (1+0):</em> Min. 4 Platten (gerade Anzahl). Netto: \(\frac{n}{2} \cdot S\). Höchste Rebuild-Performance.<br>
+                            <strong>JBOD vs. RAID 0:</strong> JBOD fasst unterschiedlich große Festplatten ohne Verschnitt zusammen. Fällt eine Platte aus, bleiben die Daten der übrigen Platten intakt.<br>
+                            <strong>SAN vs. NAS:</strong> SAN arbeitet blockbasiert (für Datenbanken/VM-Cluster via FC/iSCSI) über ein dediziertes Hochgeschwindigkeitsnetz ohne LAN-Belastung; NAS arbeitet dateibasiert (SMB/NFS) im normalen LAN.
+                        </p>
+                        <div style="background: #eef2ff; padding: 0.45rem 0.65rem; border-radius: 5px; font-size: 0.78rem; color: #312e81;">
+                            <strong>Einheiten-Falle:</strong> 1 TiB = \(1024^4\) Byte = 1024 GiB (Basis 2). 1 TB = \(1000^4\) Byte (Basis 10). IHK verlangt exakte Umrechnung!
+                        </div>
+                    </div>
+
+                    <!-- Säule 2: Server-Hardware & Stromkosten -->
+                    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 1.1rem;">
+                        <h5 style="margin: 0 0 0.5rem 0; color: #1e293b; font-size: 1rem; display: flex; align-items: center; gap: 0.45rem;">
+                            <i class="fa-solid fa-server" style="color: #0284c7;"></i> 2. Server-Hardware, Dimensionierung &amp; Strom
+                        </h5>
+                        <p style="font-size: 0.86rem; color: #475569; margin-bottom: 0.5rem; line-height: 1.45;">
+                            <strong>Hardware-Auswahl:</strong><br>
+                            &bull; <em>CPU:</em> Multi-Socket, Core-Anzahl &amp; Virtualisierungsbefehlssätze (VT-x, AMD-V).<br>
+                            &bull; <em>RAM:</em> ECC-Registered Speicher zur Erkennung &amp; Korrektur von 1-Bit-Speicherfehlern.<br>
+                            &bull; <em>Massenspeicher:</em> NVMe PCIe 4.0/5.0 vs. SAS-3 (12 Gbps) vs. SATA-SSD.<br>
+                            <strong>Stromkosten-Berechnung:</strong><br>
+                            Formel: \(E = P \cdot t\) [in kWh].<br>
+                            Beispiel: 450 W Dauerbetrieb &times; 24 h &times; 365 d = 3.942 kWh/Jahr.<br>
+                            Kosten = 3.942 kWh &times; 0,35 €/kWh = 1.379,70 € / Jahr.<br>
+                            <strong>USV-Dimensionierung:</strong> Scheinleistung \(S\) in VA vs. Wirkleistung \(P\) in Watt: \(P = S \cdot \cos \varphi\). Typische USV-Klassen: VFD (Offline), VI (Line-Interactive), VFI (Online-Dauerwandler).
+                        </p>
+                        <div style="background: #e0f2fe; padding: 0.45rem 0.65rem; border-radius: 5px; font-size: 0.78rem; color: #075985;">
+                            <strong>Autonomiezeit:</strong> Die USV muss lang genug Strom liefern, um alle VMs und Datenbanken via SNMP/Agent geordnet herunterzufahren (Graceful Shutdown).
+                        </div>
+                    </div>
+
+                    <!-- Säule 3: Virtualisierung & Cloud -->
+                    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 1.1rem;">
+                        <h5 style="margin: 0 0 0.5rem 0; color: #1e293b; font-size: 1rem; display: flex; align-items: center; gap: 0.45rem;">
+                            <i class="fa-solid fa-layer-group" style="color: #059669;"></i> 3. Virtualisierung (Hypervisor &amp; Docker) &amp; Cloud
+                        </h5>
+                        <p style="font-size: 0.86rem; color: #475569; margin-bottom: 0.5rem; line-height: 1.45;">
+                            <strong>Hypervisor-Typen:</strong><br>
+                            &bull; <em>Typ-1-Hypervisor (Bare-Metal):</em> Läuft direkt auf der Hardware (VMware ESXi, Proxmox VE, Hyper-V Server). Geringster Overhead, höchste I/O-Leistung &amp; Ausfallsicherheit.<br>
+                            &bull; <em>Typ-2-Hypervisor (Hosted):</em> Läuft auf einem Host-Betriebssystem (VirtualBox, VMware Workstation). Nur für Test- und Entwicklungsumgebungen.<br>
+                            <strong>Container (Docker / Podman) vs. VMs:</strong><br>
+                            Container teilen sich den Host-OS-Kernel, besitzen keine emulierte Hardware und starten in Sekundenbruchteilen bei minimalem RAM-Verbrauch.<br>
+                            <strong>Cloud-Modelle:</strong><br>
+                            &bull; <em>IaaS:</em> Rechner, Storage, Netzwerke (z.B. AWS EC2, Azure VMs).<br>
+                            &bull; <em>PaaS:</em> Plattform &amp; Laufzeitumgebung (z.B. Managed SQL, App Engine).<br>
+                            &bull; <em>SaaS:</em> Anwendungssoftware (z.B. Microsoft 365, Salesforce).
+                        </p>
+                        <div style="background: #ecfdf5; padding: 0.45rem 0.65rem; border-radius: 5px; font-size: 0.78rem; color: #065f46;">
+                            <strong>Bereitstellungsmodelle:</strong> Private Cloud (eigene Infrastruktur), Public Cloud (Mandantenfähig beim Hyperscaler), Hybrid Cloud (Mischform mit VPN/ExpressRoute).
+                        </div>
+                    </div>
+
+                    <!-- Säule 4: Datensicherung (3-2-1-1-0) & Hochverfügbarkeit -->
+                    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 1.1rem;">
+                        <h5 style="margin: 0 0 0.5rem 0; color: #1e293b; font-size: 1rem; display: flex; align-items: center; gap: 0.45rem;">
+                            <i class="fa-solid fa-shield-halved" style="color: #d97706;"></i> 4. Backup-Strategie (3-2-1-1-0) &amp; HA
+                        </h5>
+                        <p style="font-size: 0.86rem; color: #475569; margin-bottom: 0.5rem; line-height: 1.45;">
+                            <strong>Die 3-2-1-1-0 Methode im Detail:</strong><br>
+                            &bull; <strong>3</strong> Datenkopien (1 Produktionsdaten + 2 Backups).<br>
+                            &bull; <strong>2</strong> verschiedene Medien (z.B. NAS/Platten + LTO-Magnetband / Cloud).<br>
+                            &bull; <strong>1</strong> Kopie an einem externen Standort (Offsite / Brandabschnitt).<br>
+                            &bull; <strong>1</strong> Kopie unveränderlich (Immutable Storage / WORM) oder offline (Air-Gap zum Schutz vor Ransomware).<br>
+                            &bull; <strong>0</strong> Fehler bei regelmäßigen Wiederherstellungstests (Automated Restore Verification).<br>
+                            <strong>Backup-Typen:</strong><br>
+                            &bull; <em>Voll:</em> Alles wird gesichert. Längste Dauer, schnellster Restore.<br>
+                            &bull; <em>Differentiell:</em> Sichert alle Änderungen seit dem letzten Vollbackup.<br>
+                            &bull; <em>Inkrementell:</em> Sichert nur Änderungen seit dem letzten Backup beliebigen Typs. Kürzeste Dauer, längster Restore.<br>
+                            <strong>RPO &amp; RTO:</strong> RPO (Recovery Point Objective = maximal tolerierbarer Datenverlust in Minuten/Stunden); RTO (Recovery Time Objective = maximal tolerierbare Ausfallzeit bis Wiederanlauf).
+                        </p>
+                        <div style="background: #fef3c7; padding: 0.45rem 0.65rem; border-radius: 5px; font-size: 0.78rem; color: #92400e;">
+                            <strong>Hochverfügbarkeit (HA):</strong> Redundante Netzteile, NIC-Teaming / LACP, Aktiv-Passiv Cluster (Failover) vs. Aktiv-Aktiv Cluster (Load Balancing).
+                        </div>
+                    </div>
+
+                    <!-- Säule 5: BSI Schutzbedarfsanalyse & ITIL / SLAs -->
+                    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 1.1rem;">
+                        <h5 style="margin: 0 0 0.5rem 0; color: #1e293b; font-size: 1rem; display: flex; align-items: center; gap: 0.45rem;">
+                            <i class="fa-solid fa-list-check" style="color: #7c3aed;"></i> 5. BSI IT-Grundschutz &amp; ITIL V4 / SLAs
+                        </h5>
+                        <p style="font-size: 0.86rem; color: #475569; margin-bottom: 0.5rem; line-height: 1.45;">
+                            <strong>Schutzbedarfsanalyse nach BSI:</strong><br>
+                            Schutzbedarfskategorien: <em>normal</em>, <em>hoch</em>, <em>sehr hoch</em> für die 3 Grundwerte:<br>
+                            &bull; <em>Vertraulichkeit:</em> Schutz vor unbefugter Offenlegung (DSGVO, Betriebsgeheimnisse).<br>
+                            &bull; <em>Integrität:</em> Schutz vor unbefugter oder unbeabsichtigter Veränderung.<br>
+                            &bull; <em>Verfügbarkeit:</em> Zugriff bei Bedarf innerhalb definierter Zeitfenster.<br>
+                            <strong>Maximalprinzip (Höchstwertprinzip):</strong> Der Gesamtschutzbedarf eines Systems richtet sich stets nach dem höchsten Einzelschutzbedarf der Anwendungen oder Daten.<br>
+                            <strong>ITIL V4 Ticket-Klassifizierung:</strong><br>
+                            &bull; <em>Incident:</em> Ungeplante Störung oder Qualitätsminderung (z.B. Ausfall eines Switches).<br>
+                            &bull; <em>Service Request:</em> Standardanfrage eines Nutzers (z.B. Berechtigung vergeben, Monitor bestellen).<br>
+                            &bull; <em>Event:</em> Meldung über Zustandsänderung (z.B. Backup abgeschlossen).<br>
+                            &bull; <em>Problem:</em> Unbekannte Ursache einer oder mehrerer Störungen.
+                        </p>
+                        <div style="background: #f5f3ff; padding: 0.45rem 0.65rem; border-radius: 5px; font-size: 0.78rem; color: #5b21b6;">
+                            <strong>SLA-Formel:</strong> Verfügbarkeit \(V = \frac{\text{MTBF}}{\text{MTBF} + \text{MTTR}} \times 100\%\). MTBF = mittlere Betriebsdauer zwischen Ausfällen; MTTR = mittlere Reparaturzeit.
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Interactive Exam Tasks for PB 2 FISI -->
+                <div style="border-top: 2px dashed #cbd5e1; padding-top: 1.5rem; margin-top: 1.5rem;">
+                    <h4 style="margin: 0 0 1rem 0; color: #1e1b4b; font-size: 1.15rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <i class="fa-solid fa-pen-to-square" style="color: #6366f1;"></i> Interaktive Prüfungsaufgaben (PB 2 Original-Simulation)
+                    </h4>
+
+                    <!-- Aufgabe PB 2.1: Speichersysteme & JBOD / RAID -->
+                    <div style="border: 1px solid #cbd5e1; border-radius: 8px; margin-bottom: 1.25rem; background: white; overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.04);">
+                        <div style="background: #f8fafc; border-bottom: 1px solid #e2e8f0; padding: 0.85rem 1.15rem; display: flex; justify-content: space-between; align-items: center;">
+                            <span style="font-weight: 700; color: #1e293b; font-size: 0.95rem;">
+                                <i class="fa-solid fa-hard-drive" style="color: #4f46e5; margin-right: 0.35rem;"></i> Aufgabe 2.1: RAID 5, JBOD &amp; SAN vs. NAS (12 Punkte)
+                            </span>
+                            <span style="font-size: 0.78rem; background: #e0e7ff; color: #3730a3; padding: 0.15rem 0.5rem; border-radius: 4px; font-weight: 700;">IHK-Schwerpunkt LF 4</span>
+                        </div>
+                        <div style="padding: 1.15rem; font-size: 0.9rem; color: #334155; line-height: 1.5;">
+                            <p style="margin-top: 0;"><strong>Ausgangssituation:</strong> An einem RAID-Hostadapter stehen folgende 9 Festplatten zur Verfügung: <strong>2x 3 TB</strong> und <strong>7x 2 TB</strong>.</p>
+                            <ol style="margin-bottom: 1rem; padding-left: 1.3rem;">
+                                <li>Berechne die maximale Netto-Speicherkapazität (in TB) bei einer <strong>RAID 5</strong> Konfiguration unter Verwendung <em>aller</em> verfügbaren Festplatten.</li>
+                                <li>Berechne die Gesamtkapazität desselben Plattenpools bei Einsatz von <strong>JBOD</strong>.</li>
+                                <li>Nenne zwei signifikante Vorteile von <strong>JBOD</strong> gegenüber einem RAID 0.</li>
+                                <li>Nenne drei Vorteile eines <strong>SAN (Storage Area Network)</strong> gegenüber einem NAS (Network Attached Storage).</li>
+                            </ol>
+                            <button class="btn btn-secondary" id="sol-pb2-1-btn" onclick="toggleAp2Solution('sol-pb2-1')" style="margin-top: 0.5rem; font-size: 0.85rem; padding: 0.45rem 0.9rem;">
+                                <i class="fa-solid fa-lightbulb"></i> Musterlösung &amp; Korrekturhinweise anzeigen
+                            </button>
+                            <div id="sol-pb2-1" style="display: none; margin-top: 1rem; background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 6px; padding: 1rem; font-size: 0.88rem; color: #166534;">
+                                <strong style="display: block; margin-bottom: 0.5rem; color: #14532d; font-size: 0.95rem;">Offizielle IHK-Musterlösung:</strong>
+                                <strong>1. RAID 5 mit 9 Platten (2x 3 TB, 7x 2 TB):</strong><br>
+                                In einem Standard-RAID 5 bestimmt die kleinste Platte (hier 2 TB) die nutzbare Kapazität pro Platte. Formel: \(\text{Netto} = (n - 1) \times S_{\text{min}} = (9 - 1) \times 2\text{ TB} = 8 \times 2\text{ TB} = \mathbf{16\text{ TB}}\). (Die restlichen je 1 TB der beiden 3 TB Platten bleiben ungenutzt).<br><br>
+                                <strong>2. JBOD-Kapazität:</strong><br>
+                                JBOD addiert alle vorhandenen Kapazitäten ohne Parität und ohne Verschnitt: \(2 \times 3\text{ TB} + 7 \times 2\text{ TB} = 6\text{ TB} + 14\text{ TB} = \mathbf{20\text{ TB}}\).<br><br>
+                                <strong>3. Zwei Vorteile von JBOD gegenüber RAID 0:</strong><br>
+                                &bull; Festplatten unterschiedlicher Größen können ohne Kapazitätsverlust voll ausgenutzt werden.<br>
+                                &bull; Bei einem Defekt einer einzelnen Platte gehen in der Regel nur die darauf liegenden Daten verloren, während bei RAID 0 das gesamte logische Volume unrettbar zerstört ist (kein Totalausfall).<br><br>
+                                <strong>4. Drei Vorteile eines SAN gegenüber einem NAS:</strong><br>
+                                &bull; <em>Block-Level-Zugriff:</em> SAN stellt Block-Devices bereit (wie lokale Disks), was zwingend für Hochleistungs-Datenbanken (z.B. SQL Server, Oracle) und VM-Cluster (z.B. VMware VMFS) erforderlich ist.<br>
+                                &bull; <em>Dediziertes Hochleistungs-Netzwerk:</em> Eigene Fabrics via Fibre Channel (16/32 Gbps) oder iSCSI entlasten das reguläre LAN komplett von extremen Storage-I/O-Lasten.<br>
+                                &bull; <em>Multipathing &amp; Redundanz:</em> Standardmäßig integrierte Mehrwege-Verbindungen (MPIO) mit redundanten Host-Adaptern (HBAs) und Controllern ohne Single Point of Failure.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Aufgabe PB 2.2: Schutzbedarfsanalyse nach BSI -->
+                    <div style="border: 1px solid #cbd5e1; border-radius: 8px; margin-bottom: 1.25rem; background: white; overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.04);">
+                        <div style="background: #f8fafc; border-bottom: 1px solid #e2e8f0; padding: 0.85rem 1.15rem; display: flex; justify-content: space-between; align-items: center;">
+                            <span style="font-weight: 700; color: #1e293b; font-size: 0.95rem;">
+                                <i class="fa-solid fa-shield-halved" style="color: #7c3aed; margin-right: 0.35rem;"></i> Aufgabe 2.2: BSI IT-Grundschutz Schutzbedarfsanalyse (8 Punkte)
+                            </span>
+                            <span style="font-size: 0.78rem; background: #ede9fe; color: #5b21b6; padding: 0.15rem 0.5rem; border-radius: 4px; font-weight: 700;">IHK-Prüfung Sommer 2023</span>
+                        </div>
+                        <div style="padding: 1.15rem; font-size: 0.9rem; color: #334155; line-height: 1.5;">
+                            <p style="margin-top: 0;"><strong>Szenario:</strong> Für das Modul &bdquo;Auftrags- und Kundenverwaltung&ldquo; soll der Schutzbedarf für Vertraulichkeit, Integrität und Verfügbarkeit ermittelt werden. Folgende Begründungen liegen vor:</p>
+                            <ul style="margin-bottom: 0.8rem; padding-left: 1.3rem;">
+                                <li><em>Vertraulichkeit:</em> Es werden sensible Kundendaten verarbeitet; ein Missbrauch kann zu Schadensersatzansprüchen zwischen 50.000 € und 500.000 € führen.</li>
+                                <li><em>Integrität:</em> Manipulationen von Preis- oder Mengenangaben können einen Schaden von &gt; 50.000 € sowie erheblichen Reputationsverlust verursachen.</li>
+                                <li><em>Verfügbarkeit:</em> Da Aufträge auch zeitverzögert erfasst werden können, ist ein Ausfall von mehr als 24 Stunden ohne existenzbedrohende Schäden hinnehmbar.</li>
+                            </ul>
+                            <ol style="margin-bottom: 1rem; padding-left: 1.3rem;">
+                                <li>Ordne für jeden der drei Grundwerte die zutreffende Schutzbedarfskategorie (<em>normal</em>, <em>hoch</em> oder <em>sehr hoch</em>) zu.</li>
+                                <li>Benenne das Grundprinzip zur Festlegung des Gesamtschutzbedarfs und erkläre dessen Wirkungsweise.</li>
+                            </ol>
+                            <button class="btn btn-secondary" id="sol-pb2-2-btn" onclick="toggleAp2Solution('sol-pb2-2')" style="margin-top: 0.5rem; font-size: 0.85rem; padding: 0.45rem 0.9rem;">
+                                <i class="fa-solid fa-lightbulb"></i> Musterlösung &amp; Korrekturhinweise anzeigen
+                            </button>
+                            <div id="sol-pb2-2" style="display: none; margin-top: 1rem; background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 6px; padding: 1rem; font-size: 0.88rem; color: #166534;">
+                                <strong style="display: block; margin-bottom: 0.5rem; color: #14532d; font-size: 0.95rem;">Offizielle IHK-Musterlösung:</strong>
+                                <strong>1. Einstufung der Schutzwerte:</strong><br>
+                                &bull; <em>Vertraulichkeit:</em> <strong>hoch</strong> (Schaden 50.000 € bis 500.000 € bzw. beträchtliche Auswirkung bei Missbrauch personenbezogener Daten).<br>
+                                &bull; <em>Integrität:</em> <strong>hoch</strong> (Schaden &gt; 50.000 € sowie beträchtlicher Ansehensverlust bei Datenfälschung).<br>
+                                &bull; <em>Verfügbarkeit:</em> <strong>normal</strong> (Ausfall von mehr als 24 Stunden tolerierbar laut BSI-Kriterien).<br><br>
+                                <strong>2. Gesamtschutzbedarf:</strong><br>
+                                &bull; <em>Prinzip:</em> <strong>Maximalprinzip / Höchstwertprinzip</strong>.<br>
+                                &bull; <em>Erklärung:</em> Der Schutzbedarf des gesamten Systems wird durch den höchsten Einzelschutzbedarf der beteiligten Teilbereiche bestimmt. Da Vertraulichkeit und Integrität als &bdquo;hoch&ldquo; eingestuft sind, ist der Gesamtschutzbedarf des Systems ebenfalls <strong>hoch</strong>.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Aufgabe PB 2.3: ITIL V4 & Ticket-Klassifizierung -->
+                    <div style="border: 1px solid #cbd5e1; border-radius: 8px; margin-bottom: 1.25rem; background: white; overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.04);">
+                        <div style="background: #f8fafc; border-bottom: 1px solid #e2e8f0; padding: 0.85rem 1.15rem; display: flex; justify-content: space-between; align-items: center;">
+                            <span style="font-weight: 700; color: #1e293b; font-size: 0.95rem;">
+                                <i class="fa-solid fa-ticket" style="color: #059669; margin-right: 0.35rem;"></i> Aufgabe 2.3: ITIL V4 Klassifizierung (Incident vs. Request vs. Event) (5 Punkte)
+                            </span>
+                            <span style="font-size: 0.78rem; background: #d1fae5; color: #065f46; padding: 0.15rem 0.5rem; border-radius: 4px; font-weight: 700;">IHK-Original</span>
+                        </div>
+                        <div style="padding: 1.15rem; font-size: 0.9rem; color: #334155; line-height: 1.5;">
+                            <p style="margin-top: 0;">Klassifiziere folgende 5 Meldungen aus dem IT-Helpdesk in <em>Incident (Störung)</em>, <em>Service Request (Serviceanfrage)</em> oder <em>Event (Ereignis)</em>:</p>
+                            <ol style="margin-bottom: 1rem; padding-left: 1.3rem;">
+                                <li>Ein Mitarbeiter meldet, dass er keinen Zugriff mehr auf das ERP-System hat und eine Fehlermeldung erhält.</li>
+                                <li>Die Personalabteilung beantragt für einen neuen Mitarbeiter ein Notebook sowie ein Standard-Benutzerkonto.</li>
+                                <li>Das Monitoring-System meldet: &bdquo;Nutzung von Laufwerk D: hat 80 % erreicht&ldquo;.</li>
+                                <li>Ein Vertriebsmitarbeiter bittet um temporäre Berechtigung für den Projektordner &bdquo;Neukunden 2026&ldquo;.</li>
+                                <li>Der Netzwerk-Drucker im 2. OG druckt nur noch leere weiße Seiten.</li>
+                            </ol>
+                            <button class="btn btn-secondary" id="sol-pb2-3-btn" onclick="toggleAp2Solution('sol-pb2-3')" style="margin-top: 0.5rem; font-size: 0.85rem; padding: 0.45rem 0.9rem;">
+                                <i class="fa-solid fa-lightbulb"></i> Musterlösung &amp; Korrekturhinweise anzeigen
+                            </button>
+                            <div id="sol-pb2-3" style="display: none; margin-top: 1rem; background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 6px; padding: 1rem; font-size: 0.88rem; color: #166534;">
+                                <strong style="display: block; margin-bottom: 0.5rem; color: #14532d; font-size: 0.95rem;">Offizielle ITIL-Klassifizierung:</strong>
+                                1. ERP-Zugriffsfehler &rarr; <strong>Incident</strong> (Ungeplante Unterbrechung eines IT-Services).<br>
+                                2. Notebook- &amp; Konto-Beantragung &rarr; <strong>Service Request</strong> (Regelhafter Anforderungskatalog für neue Hard-/Software).<br>
+                                3. 80% Speicherbelegung &rarr; <strong>Event</strong> (Reine Zustandsmeldung des Monitorings zur Information/Überwachung).<br>
+                                4. Temporäre Ordnerfreigabe &rarr; <strong>Service Request</strong> (Standardisierter Antrag auf Zugriffsberechtigung).<br>
+                                5. Drucker druckt nur weiße Seiten &rarr; <strong>Incident</strong> (Minderung der vereinbarten Service-Qualität).
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                    </div>
+
+                    <!-- FIAE Content (Preserved) -->
+                    <div id="pb2-content-fiae" style="display: none;">
+<!-- Overview Banner -->
                     <div style="background: linear-gradient(135deg, #eef2ff, #e0e7ff); border: 1.5px solid #c7d2fe; border-radius: 10px; padding: 1.25rem; margin-bottom: 1.5rem;">
                         <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem;">
                             <div>
@@ -1233,11 +1524,11 @@
                                     2. Begründen Sie, warum die Auslagerung des Buchungsdienstes in einen eigenständigen Microservice mit Message-Queue (z.B. RabbitMQ oder Apache Kafka) die Skalierbarkeit und Ausfallsicherheit verbessert.
                                 </p>
                                 
-                                <button class="btn btn-secondary" id="sol-pb2-1-btn" onclick="toggleAp2Solution('sol-pb2-1')" style="margin-top: 0.5rem; font-size: 0.84rem; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; border: 1.5px solid #6366f1; color: #4338ca; background: #eef2ff; font-weight: 700;">
+                                <button class="btn btn-secondary" id="sol-pb2-fiae-1-btn" onclick="toggleAp2Solution('sol-pb2-fiae-1')" style="margin-top: 0.5rem; font-size: 0.84rem; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; border: 1.5px solid #6366f1; color: #4338ca; background: #eef2ff; font-weight: 700;">
                                     <i class="fa-solid fa-lightbulb"></i> Musterlösung &amp; Korrekturhinweise anzeigen
                                 </button>
 
-                                <div id="sol-pb2-1" style="display: none; margin-top: 1rem; background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 8px; padding: 1rem; font-size: 0.9rem; color: #166534; line-height: 1.5;">
+                                <div id="sol-pb2-fiae-1" style="display: none; margin-top: 1rem; background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 8px; padding: 1rem; font-size: 0.9rem; color: #166534; line-height: 1.5;">
                                     <h5 style="margin: 0 0 0.5rem 0; color: #14532d; font-size: 0.95rem;"><i class="fa-solid fa-circle-check"></i> IHK-Musterlösung &amp; Bewertungsmaßstab:</h5>
                                     <strong>Zu 1. Nachteile der monolithischen Architektur:</strong>
                                     <ul style="margin: 0.3rem 0 0.75rem 1.2rem; padding: 0;">
@@ -1272,11 +1563,11 @@
                                     2. Formulieren Sie jeweils eine konkrete Verbesserungsmaßnahme.
                                 </p>
                                 
-                                <button class="btn btn-secondary" id="sol-pb2-2-btn" onclick="toggleAp2Solution('sol-pb2-2')" style="margin-top: 0.5rem; font-size: 0.84rem; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; border: 1.5px solid #0284c7; color: #0369a1; background: #f0f9ff; font-weight: 700;">
+                                <button class="btn btn-secondary" id="sol-pb2-fiae-2-btn" onclick="toggleAp2Solution('sol-pb2-fiae-2')" style="margin-top: 0.5rem; font-size: 0.84rem; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; border: 1.5px solid #0284c7; color: #0369a1; background: #f0f9ff; font-weight: 700;">
                                     <i class="fa-solid fa-lightbulb"></i> Musterlösung &amp; Korrekturhinweise anzeigen
                                 </button>
 
-                                <div id="sol-pb2-2" style="display: none; margin-top: 1rem; background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 8px; padding: 1rem; font-size: 0.9rem; color: #166534; line-height: 1.5;">
+                                <div id="sol-pb2-fiae-2" style="display: none; margin-top: 1rem; background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 8px; padding: 1rem; font-size: 0.9rem; color: #166534; line-height: 1.5;">
                                     <h5 style="margin: 0 0 0.5rem 0; color: #14532d; font-size: 0.95rem;"><i class="fa-solid fa-circle-check"></i> IHK-Musterlösung:</h5>
                                     <strong>Zu Situation A:</strong>
                                     <ul style="margin: 0.2rem 0 0.5rem 1.2rem; padding: 0;">
@@ -1293,15 +1584,284 @@
                         </div>
 
                     </div>
+                    </div>
 
                 </div>
 
                 <!-- ============================================================== -->
-                <!-- TAB 2: PB 3 - ENTWICKLUNG & ALGORITHMEN                        -->
-                <!-- ============================================================== -->
                 <div id="ap2-tab-pb3" class="ap2-tab-content" style="display: none;">
                     
-                    <!-- Overview Banner -->
+                    <!-- Sub-Navigation Pills (FISI vs. FIAE) -->
+                    <div style="display: flex; gap: 0.5rem; margin-bottom: 1.25rem; background: #f1f5f9; padding: 0.35rem; border-radius: 8px; border: 1px solid #cbd5e1; width: fit-content; flex-wrap: wrap;">
+                        <button id="pb3-btn-fisi" onclick="switchAp2SubTab('pb3', 'fisi')" style="border: none; padding: 0.45rem 1rem; border-radius: 6px; font-size: 0.85rem; font-weight: 700; cursor: pointer; background: #0891b2; color: white; transition: all 0.15s ease;">
+                            <i class="fa-solid fa-network-wired"></i> 🌐 FISI: Analyse &amp; Entwicklung von Netzwerken (70 Pkt. | 10 %)
+                        </button>
+                        <button id="pb3-btn-fiae" onclick="switchAp2SubTab('pb3', 'fiae')" style="border: none; padding: 0.45rem 1rem; border-radius: 6px; font-size: 0.85rem; font-weight: 600; cursor: pointer; background: transparent; color: #475569; transition: all 0.15s ease;">
+                            <i class="fa-solid fa-code"></i> 💻 FIAE: Algorithmen &amp; Logik
+                        </button>
+                    </div>
+
+                    <!-- FISI Content (Default Active) -->
+                    <div id="pb3-content-fisi" style="display: block;">
+
+                <!-- Role / Overview Banner FISI -->
+                <div style="background: linear-gradient(135deg, #ecfeff, #cffafe); border: 1.5px solid #a5f3fc; border-radius: 10px; padding: 1.25rem; margin-bottom: 1.25rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem;">
+                        <div>
+                            <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.4rem;">
+                                <span style="background: #0e7490; color: white; padding: 0.2rem 0.65rem; border-radius: 6px; font-size: 0.8rem; font-weight: 800; text-transform: uppercase;">Prüfungsbereich 3</span>
+                                <span style="background: #0891b2; color: white; padding: 0.2rem 0.65rem; border-radius: 6px; font-size: 0.8rem; font-weight: 800;">70 Punkte &bull; 10 % Gewichtung &bull; 90 Minuten</span>
+                            </div>
+                            <h3 style="margin: 0.3rem 0 0.25rem 0; font-size: 1.3rem; color: #164e63;">Analyse und Entwicklung von Netzwerken</h3>
+                            <p style="margin: 0; color: #155e75; font-size: 0.93rem; line-height: 1.5; max-width: 920px;">
+                                Kerninhalte umfassen IPv4 &amp; IPv6 Subnetting, Routing (statisch &amp; OSPF), VLAN-Segmentierung (802.1Q), Switch- &amp; Routerkonfiguration, Firewalls &amp; DMZ-Zonen, VPN-Tunneling (IPsec &amp; WireGuard), Wi-Fi-Planung mit Nutzwertanalyse sowie Protokolldiagnose mit Wireshark.
+                            </p>
+                        </div>
+                        <div style="background: white; border: 1px solid #a5f3fc; border-radius: 8px; padding: 0.75rem 1rem; text-align: center; min-width: 190px;">
+                            <div style="font-size: 0.8rem; color: #64748b; font-weight: 600;">IHK-Schwerpunkte</div>
+                            <div style="font-size: 1.05rem; font-weight: 800; color: #0891b2;">Subnetting &bull; VLAN &bull; Routing &bull; Firewalls &bull; Nutzwert</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5 Core Competency Pillars Grid FISI -->
+                <h4 style="margin: 0 0 1rem 0; color: #0f172a; font-size: 1.1rem; display: flex; align-items: center; gap: 0.5rem;">
+                    <i class="fa-solid fa-cubes" style="color: #0891b2;"></i> Die 5 zentralen Fachsäulen von PB 3 (Netzwerktechnik)
+                </h4>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 1rem; margin-bottom: 2rem;">
+                    
+                    <!-- Säule 1: IP-Adressierung & Subnetting -->
+                    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 1.1rem;">
+                        <h5 style="margin: 0 0 0.5rem 0; color: #1e293b; font-size: 1rem; display: flex; align-items: center; gap: 0.45rem;">
+                            <i class="fa-solid fa-network-wired" style="color: #0891b2;"></i> 1. IPv4 / IPv6 Subnetting &amp; Wirkungsbereiche
+                        </h5>
+                        <p style="font-size: 0.86rem; color: #475569; margin-bottom: 0.5rem; line-height: 1.45;">
+                            <strong>IPv4 Subnetting &amp; CIDR:</strong><br>
+                            &bull; <em>Nutzbare Hosts:</em> Formel: \(2^{32 - \text{Prefix}} - 2\) (Minus Netz-ID und Broadcast).<br>
+                            &bull; <em>Subnetze:</em> /24 = 254 Hosts; /27 = 30 Hosts; /29 = 6 Hosts; /30 = 2 Hosts (Point-to-Point).<br>
+                            <strong>IPv6 Adresstypen &amp; Wirkungsbereich:</strong><br>
+                            &bull; <em>Global Unicast (2000::/3 z.B. 2001:...):</em> Weltweit eindeutig, im weltweiten Internet über Router hinweg geroutet.<br>
+                            &bull; <em>Link-Local (fe80::/10):</em> Gilt <strong>nur im lokalen Netzwerksegment (Link)</strong>. Wird von Routern <em>niemals</em> weitergeleitet! Automatische Generierung via SLAAC.<br>
+                            &bull; <em>Unique Local (fc00::/7):</em> Privates Routing im Unternehmensnetzwerk (ähnlich RFC 1918 bei IPv4).<br>
+                            &bull; <em>Multicast (ff00::/8):</em> Ersetzt IPv4 Broadcast vollständig (z.B. ff02::1 für alle Link-Nodes).
+                        </p>
+                        <div style="background: #ecfeff; padding: 0.45rem 0.65rem; border-radius: 5px; font-size: 0.78rem; color: #155e75;">
+                            <strong>IHK-Klassiker:</strong> Unterscheidung des Wirkungsbereichs zwischen globaler Unicast-Adresse (Internet) und link-lokaler Adresse (nur lokales Layer-2-Segment).
+                        </div>
+                    </div>
+
+                    <!-- Säule 2: VLANs & Switching -->
+                    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 1.1rem;">
+                        <h5 style="margin: 0 0 0.5rem 0; color: #1e293b; font-size: 1rem; display: flex; align-items: center; gap: 0.45rem;">
+                            <i class="fa-solid fa-sitemap" style="color: #4f46e5;"></i> 2. VLANs &amp; Layer-2/Layer-3 Switching
+                        </h5>
+                        <p style="font-size: 0.86rem; color: #475569; margin-bottom: 0.5rem; line-height: 1.45;">
+                            <strong>IEEE 802.1Q Tagging:</strong><br>
+                            Fügt einen 4-Byte VLAN-Header in den Ethernet-Frame ein (12 Bit VLAN-ID = 4094 IDs; 3 Bit Priority PCP).<br>
+                            &bull; <em>Access-Port (Untagged):</em> Verbindet Endgeräte (PCs, Drucker, APs). Entfernt beim Senden an den Client den Tag.<br>
+                            &bull; <em>Trunk-Port (Tagged):</em> Verbindet Switche untereinander oder mit Routern. Überträgt Frames mehrerer VLANs mit Tag.<br>
+                            <strong>Inter-VLAN-Routing:</strong><br>
+                            &bull; <em>Router-on-a-Stick:</em> Physischer Port am Router wird über Subinterfaces (z.B. g0/0.10, g0/0.20) mit 802.1Q Kapselung betrieben.<br>
+                            &bull; <em>Layer-3-Switch (SVI):</em> Switch Virtual Interfaces (z.B. <code>interface vlan 10</code>) routen intern mit voller ASIC/Wire-Speed ohne Router-Engpass.<br>
+                            <strong>Spanning Tree (STP / RSTP 802.1w):</strong> Blockiert redundante Switch-Pfade zur Vermeidung von Endlosschleifen und Broadcast-Stürmen.
+                        </p>
+                        <div style="background: #eef2ff; padding: 0.45rem 0.65rem; border-radius: 5px; font-size: 0.78rem; color: #312e81;">
+                            <strong>Sicherheits-Regel:</strong> Native VLAN niemals auf Default (VLAN 1) belassen, um VLAN-Hopping Angriffe zu verhindern.
+                        </div>
+                    </div>
+
+                    <!-- Säule 3: Routing & Protokolle -->
+                    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 1.1rem;">
+                        <h5 style="margin: 0 0 0.5rem 0; color: #1e293b; font-size: 1rem; display: flex; align-items: center; gap: 0.45rem;">
+                            <i class="fa-solid fa-route" style="color: #059669;"></i> 3. Routing, Protokolle &amp; Netzwerkdienste
+                        </h5>
+                        <p style="font-size: 0.86rem; color: #475569; margin-bottom: 0.5rem; line-height: 1.45;">
+                            <strong>Routing-Verfahren:</strong><br>
+                            &bull; <em>Statisches Routing:</em> Manuelle Pfadeinträge (Zielnetz, Maske, Next-Hop). Perfekt für Stub-Netze und Default-Route (0.0.0.0/0).<br>
+                            &bull; <em>Dynamisches Routing (OSPF):</em> Link-State-Protokoll mit Dijkstra-Algorithmus (Kürzester Pfad), schnelle Konvergenz, metrikbasiert auf Bandbreite.<br>
+                            <strong>Zentrale Netzwerkdienste:</strong><br>
+                            &bull; <em>DNS (Port 53):</em> Rekursive Namensauflösung; Record-Typen: A (IPv4), AAAA (IPv6), CNAME (Alias), MX (Mailserver), PTR (Reverse Lookup).<br>
+                            &bull; <em>DHCP DORA (Port 67/68):</em> Discover (Broadcast) &rarr; Offer (Serverangebot) &rarr; Request (Client-Anfrage) &rarr; Acknowledge (Bestätigung &amp; Lease).<br>
+                            &bull; <em>TCP vs. UDP:</em> TCP (verbindungsorientiert, 3-Way Handshake SYN / SYN-ACK / ACK, Flusskontrolle, Fehlerkorrektur); UDP (verbindungslos, Header 8 Byte, Echtzeit für Voice &amp; Streaming).
+                        </p>
+                        <div style="background: #ecfdf5; padding: 0.45rem 0.65rem; border-radius: 5px; font-size: 0.78rem; color: #065f46;">
+                            <strong>Wireshark-Filter:</strong> <code>tcp.flags.syn == 1 and tcp.flags.ack == 0</code> findet Verbindungsaufbauten; <code>dns.flags.response == 1</code> filtert DNS-Antworten.
+                        </div>
+                    </div>
+
+                    <!-- Säule 4: Firewalls, DMZ & VPN -->
+                    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 1.1rem;">
+                        <h5 style="margin: 0 0 0.5rem 0; color: #1e293b; font-size: 1rem; display: flex; align-items: center; gap: 0.45rem;">
+                            <i class="fa-solid fa-lock" style="color: #d97706;"></i> 4. Firewalls, DMZ-Architekturen &amp; VPN
+                        </h5>
+                        <p style="font-size: 0.86rem; color: #475569; margin-bottom: 0.5rem; line-height: 1.45;">
+                            <strong>DMZ-Konzepte:</strong><br>
+                            &bull; <em>Einstufige DMZ:</em> Eine Firewall mit 3 Schnittstellen (WAN, LAN, DMZ). Zugriff aus DMZ ins interne LAN ist standardmäßig blockiert.<br>
+                            &bull; <em>Zweistufige DMZ:</em> Zwei Firewalls in Reihe (äußere &amp; innere Firewall) idealerweise von unterschiedlichen Herstellern (heterogen gegen Schwachstellen).<br>
+                            <strong>Firewall-Typen:</strong><br>
+                            Paketfilter (Layer 3/4) &rarr; Stateful Inspection (prüft Verbindungsstatus im State Table) &rarr; Next-Gen Firewall (NGFW mit Deep Packet Inspection &amp; IPS).<br>
+                            <strong>VPN-Technologien (IPsec vs. WireGuard):</strong><br>
+                            &bull; <em>IPsec Tunnel-Modus:</em> Verschlüsselt gesamtes Originalpaket inkl. IP-Header (Standard für Site-to-Site Gateway-Kopplung).<br>
+                            &bull; <em>IPsec Transport-Modus:</em> Verschlüsselt nur die Nutzlast (Payload); Original-Header bleibt sichtbar (Host-to-Host).<br>
+                            &bull; <em>ESP vs. AH:</em> ESP bietet Verschlüsselung (Vertraulichkeit) + Authentizität; AH bietet nur Integrität/Authentizität ohne Vertraulichkeit.
+                        </p>
+                        <div style="background: #fef3c7; padding: 0.45rem 0.65rem; border-radius: 5px; font-size: 0.78rem; color: #92400e;">
+                            <strong>Regel für DMZ:</strong> Ein kompromittierter Webserver in der DMZ darf niemals selbstständig Verbindungen ins geschützte interne Firmen-LAN aufbauen!
+                        </div>
+                    </div>
+
+                    <!-- Säule 5: WLAN & Nutzwertanalyse -->
+                    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 1.1rem;">
+                        <h5 style="margin: 0 0 0.5rem 0; color: #1e293b; font-size: 1rem; display: flex; align-items: center; gap: 0.45rem;">
+                            <i class="fa-solid fa-wifi" style="color: #7c3aed;"></i> 5. WLAN-Technologien &amp; Nutzwertanalyse
+                        </h5>
+                        <p style="font-size: 0.86rem; color: #475569; margin-bottom: 0.5rem; line-height: 1.45;">
+                            <strong>WLAN-Standards &amp; Frequenzen:</strong><br>
+                            &bull; <em>802.11ac (Wi-Fi 5):</em> 5 GHz, MU-MIMO, max. theoretisch 6,9 Gbps.<br>
+                            &bull; <em>802.11ax (Wi-Fi 6):</em> 2,4 GHz &amp; 5 GHz, OFDMA (parallele Clients), Target Wake Time (Akku sparen), 1024-QAM Modulation.<br>
+                            &bull; <em>2,4 GHz vs. 5 GHz:</em> 2,4 GHz hat höhere Reichweite und bessere Wanddurchdringung, aber nur 3 überlappungsfreie Kanäle (1, 6, 11); 5 GHz bietet enorme Bandbreite, benötigt aber DFS/TPC.<br>
+                            &bull; <em>WPA3 Enterprise &amp; SAE:</em> WPA3-Personal nutzt den SAE-Dragonfly-Handshake gegen Offline-Wörterbuchangriffe (Schutz vor Dictionary Attacks); WPA3-Enterprise nutzt 192-Bit Verschlüsselung mit 802.1X/RADIUS.<br>
+                            <strong>Nutzwertanalyse (Entscheidungsfindung):</strong><br>
+                            Bewertung alternativer Systeme nach Kriterien (Übertragungsrate, MTBF, Sicherheit, Leistungsaufnahme, Garantie) mit prozentualer Gewichtung (Summe = 100).
+                        </p>
+                        <div style="background: #f5f3ff; padding: 0.45rem 0.65rem; border-radius: 5px; font-size: 0.78rem; color: #5b21b6;">
+                            <strong>IHK-Schema:</strong> Gewichtete Punkte = Einzelpunkte &times; Gewichtung. Rang 1 = Höchste Punktesumme.
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Interactive Exam Tasks for PB 3 FISI -->
+                <div style="border-top: 2px dashed #cbd5e1; padding-top: 1.5rem; margin-top: 1.5rem;">
+                    <h4 style="margin: 0 0 1rem 0; color: #164e63; font-size: 1.15rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <i class="fa-solid fa-pen-to-square" style="color: #0891b2;"></i> Interaktive Prüfungsaufgaben (PB 3 Original-Simulation)
+                    </h4>
+
+                    <!-- Aufgabe PB 3.1: Subnetting & IPv6 Adressanalyse -->
+                    <div style="border: 1px solid #cbd5e1; border-radius: 8px; margin-bottom: 1.25rem; background: white; overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.04);">
+                        <div style="background: #f8fafc; border-bottom: 1px solid #e2e8f0; padding: 0.85rem 1.15rem; display: flex; justify-content: space-between; align-items: center;">
+                            <span style="font-weight: 700; color: #1e293b; font-size: 0.95rem;">
+                                <i class="fa-solid fa-network-wired" style="color: #0891b2; margin-right: 0.35rem;"></i> Aufgabe 3.1: Subnetting &amp; IPv6 Wirkungsbereich (8 Punkte)
+                            </span>
+                            <span style="font-size: 0.78rem; background: #cffafe; color: #0e7490; padding: 0.15rem 0.5rem; border-radius: 4px; font-weight: 700;">IHK-Original</span>
+                        </div>
+                        <div style="padding: 1.15rem; font-size: 0.9rem; color: #334155; line-height: 1.5;">
+                            <p style="margin-top: 0;"><strong>Szenario:</strong> Einem Firmennetzwerk wird das Subnetz <code>192.168.100.128/26</code> zugewiesen. Zudem wird auf einem Server die IPv6-Konfiguration geprüft.</p>
+                            <ol style="margin-bottom: 1rem; padding-left: 1.3rem;">
+                                <li>Ermittle die Subnetzmaske in Dezimaldarstellung, die Broadcast-Adresse sowie den nutzbaren Hostbereich für das IPv4-Netz.</li>
+                                <li>Auf dem Server werden zwei IPv6-Adressen ausgegeben: <code>2001:db8:acad:1::50</code> und <code>fe80::1a2b:3c4d:5e6f</code>. Erläutere den jeweiligen <strong>Wirkungsbereich (Scope)</strong> der beiden Adressen.</li>
+                            </ol>
+                            <button class="btn btn-secondary" id="sol-pb3-1-btn" onclick="toggleAp2Solution('sol-pb3-1')" style="margin-top: 0.5rem; font-size: 0.85rem; padding: 0.45rem 0.9rem;">
+                                <i class="fa-solid fa-lightbulb"></i> Musterlösung &amp; Korrekturhinweise anzeigen
+                            </button>
+                            <div id="sol-pb3-1" style="display: none; margin-top: 1rem; background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 6px; padding: 1rem; font-size: 0.88rem; color: #166534;">
+                                <strong style="display: block; margin-bottom: 0.5rem; color: #14532d; font-size: 0.95rem;">Offizielle IHK-Musterlösung:</strong>
+                                <strong>1. IPv4 Subnetting (/26):</strong><br>
+                                &bull; <em>Subnetzmaske:</em> /26 entspricht 26 gesetzten Bits: 11111111.11111111.11111111.11000000 = <strong>255.255.255.192</strong>.<br>
+                                &bull; <em>Netzwerkgröße:</em> \(2^{32-26} = 2^6 = 64\) Adressen pro Subnetz.<br>
+                                &bull; <em>Netzadresse:</em> <code>192.168.100.128</code><br>
+                                &bull; <em>Broadcast-Adresse:</em> \(128 + 64 - 1\) = <strong>192.168.100.191</strong>.<br>
+                                &bull; <em>Nutzbarer Hostbereich:</em> <strong>192.168.100.129 bis 192.168.100.190</strong> (insgesamt 62 Hosts).<br><br>
+                                <strong>2. Wirkungsbereich der IPv6-Adressen:</strong><br>
+                                &bull; <code>2001:db8:acad:1::50</code> ist eine <strong>Global Unicast Adresse (GUA)</strong>. Wirkungsbereich: Weltweit (Global Scope). Sie ist im gesamten Internet über Router hinweg eindeutig identifizierbar und routbar.<br>
+                                &bull; <code>fe80::1a2b:3c4d:5e6f</code> ist eine <strong>Link-Local Adresse (LLA)</strong>. Wirkungsbereich: Ausschließlich das direkte lokale Netzwerksegment (Link Scope). Sie wird von Routern niemals weitergeleitet und dient der Nachbarschaftserkennung (NDP) sowie Autokonfiguration (SLAAC).
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Aufgabe PB 3.2: Nutzwertanalyse Access Points -->
+                    <div style="border: 1px solid #cbd5e1; border-radius: 8px; margin-bottom: 1.25rem; background: white; overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.04);">
+                        <div style="background: #f8fafc; border-bottom: 1px solid #e2e8f0; padding: 0.85rem 1.15rem; display: flex; justify-content: space-between; align-items: center;">
+                            <span style="font-weight: 700; color: #1e293b; font-size: 0.95rem;">
+                                <i class="fa-solid fa-table-list" style="color: #4f46e5; margin-right: 0.35rem;"></i> Aufgabe 3.2: Nutzwertanalyse WLAN Access Points (13 Punkte)
+                            </span>
+                            <span style="font-size: 0.78rem; background: #ede9fe; color: #4338ca; padding: 0.15rem 0.5rem; border-radius: 4px; font-weight: 700;">IHK Sommer 2023 / Anlage 5</span>
+                        </div>
+                        <div style="padding: 1.15rem; font-size: 0.9rem; color: #334155; line-height: 1.5;">
+                            <p style="margin-top: 0;"><strong>Situation:</strong> Zur Ausstattung von Produktionshallen stehen 3 Access Points zur Auswahl: <em>AZOS AP-42</em>, <em>Getnear AP-08</em> und <em>ELink AP-15</em>. Folgende Kriterien &amp; Gewichtungen gelten:</p>
+                            <ul style="margin-bottom: 0.8rem; padding-left: 1.3rem;">
+                                <li>Übertragungsrate (40 %): AZOS (10 Pkt.), Getnear (7 Pkt.), ELink (3 Pkt.)</li>
+                                <li>Sicherheit (30 %): AZOS WPA3 (10 Pkt.), Getnear WPA2 (5 Pkt.), ELink WPA3 (10 Pkt.)</li>
+                                <li>Leistungsaufnahme (5 %): AZOS 14,4W (10 Pkt.), Getnear 16,8W (5 Pkt.), ELink 15,1W (8 Pkt.)</li>
+                                <li>Betriebsdauer MTBF (20 %): AZOS 691.548h (10 Pkt.), Getnear 476.348h (7 Pkt.), ELink 367.715h (5 Pkt.)</li>
+                                <li>Garantie (5 %): AZOS 7 Jahre (10 Pkt.), Getnear 3 Jahre (5 Pkt.), ELink 3 Jahre (5 Pkt.)</li>
+                            </ul>
+                            <p>Berechne die gewichtete Gesamtpunktzahl für alle 3 Modelle und erstelle die Rangfolge mit Begründung.</p>
+                            <button class="btn btn-secondary" id="sol-pb3-2-btn" onclick="toggleAp2Solution('sol-pb3-2')" style="margin-top: 0.5rem; font-size: 0.85rem; padding: 0.45rem 0.9rem;">
+                                <i class="fa-solid fa-lightbulb"></i> Musterlösung &amp; Korrekturhinweise anzeigen
+                            </button>
+                            <div id="sol-pb3-2" style="display: none; margin-top: 1rem; background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 6px; padding: 1rem; font-size: 0.88rem; color: #166534;">
+                                <strong style="display: block; margin-bottom: 0.5rem; color: #14532d; font-size: 0.95rem;">Offizielle IHK-Nutzwertanalyse (Anlage 5):</strong>
+                                <table style="width: 100%; border-collapse: collapse; margin-bottom: 0.75rem; font-size: 0.85rem; background: white;">
+                                    <thead>
+                                        <tr style="background: #e2e8f0; border-bottom: 1.5px solid #94a3b8; text-align: center;">
+                                            <th style="padding: 0.4rem; text-align: left;">Kriterium</th>
+                                            <th style="padding: 0.4rem;">Gew.</th>
+                                            <th style="padding: 0.4rem;">AZOS (gew.)</th>
+                                            <th style="padding: 0.4rem;">Getnear (gew.)</th>
+                                            <th style="padding: 0.4rem;">ELink (gew.)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody style="text-align: center;">
+                                        <tr style="border-bottom: 1px solid #e2e8f0;"><td style="text-align: left; padding: 0.35rem;">Übertragungsrate</td><td>40 %</td><td>\(10 \times 40 = 400\)</td><td>\(7 \times 40 = 280\)</td><td>\(3 \times 40 = 120\)</td></tr>
+                                        <tr style="border-bottom: 1px solid #e2e8f0;"><td style="text-align: left; padding: 0.35rem;">Sicherheit</td><td>30 %</td><td>\(10 \times 30 = 300\)</td><td>\(5 \times 30 = 150\)</td><td>\(10 \times 30 = 300\)</td></tr>
+                                        <tr style="border-bottom: 1px solid #e2e8f0;"><td style="text-align: left; padding: 0.35rem;">Leistungsaufnahme</td><td>5 %</td><td>\(10 \times 5 = 50\)</td><td>\(5 \times 5 = 25\)</td><td>\(8 \times 5 = 40\)</td></tr>
+                                        <tr style="border-bottom: 1px solid #e2e8f0;"><td style="text-align: left; padding: 0.35rem;">Betriebsdauer MTBF</td><td>20 %</td><td>\(10 \times 20 = 200\)</td><td>\(7 \times 20 = 140\)</td><td>\(5 \times 20 = 100\)</td></tr>
+                                        <tr style="border-bottom: 1px solid #e2e8f0;"><td style="text-align: left; padding: 0.35rem;">Garantie</td><td>5 %</td><td>\(10 \times 5 = 50\)</td><td>\(5 \times 5 = 25\)</td><td>\(5 \times 5 = 25\)</td></tr>
+                                        <tr style="background: #f8fafc; font-weight: 800; border-top: 2px solid #cbd5e1;">
+                                            <td style="text-align: left; padding: 0.45rem;">Punktesumme</td>
+                                            <td>100 %</td>
+                                            <td style="color: #15803d;">1000 Pkt.</td>
+                                            <td>620 Pkt.</td>
+                                            <td>585 Pkt.</td>
+                                        </tr>
+                                        <tr style="background: #f1f5f9; font-weight: 800;">
+                                            <td style="text-align: left; padding: 0.45rem;">Rangfolge</td>
+                                            <td>-</td>
+                                            <td style="color: #15803d; font-size: 1rem;">1. Platz</td>
+                                            <td>2. Platz</td>
+                                            <td>3. Platz</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <strong>Entscheidung:</strong> Das Modell <strong>AZOS AP-42</strong> belegt mit der Maximalpunktzahl von 1000 Punkten unangefochten den 1. Platz, da es in allen 5 Teilkriterien die Bestnote (10 Punkte) erzielt.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Aufgabe PB 3.3: Wireshark & TCP Handshake -->
+                    <div style="border: 1px solid #cbd5e1; border-radius: 8px; margin-bottom: 1.25rem; background: white; overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.04);">
+                        <div style="background: #f8fafc; border-bottom: 1px solid #e2e8f0; padding: 0.85rem 1.15rem; display: flex; justify-content: space-between; align-items: center;">
+                            <span style="font-weight: 700; color: #1e293b; font-size: 0.95rem;">
+                                <i class="fa-solid fa-magnifying-glass-chart" style="color: #0284c7; margin-right: 0.35rem;"></i> Aufgabe 3.3: Wireshark Protokolldiagnose &amp; TCP 3-Way Handshake (6 Punkte)
+                            </span>
+                            <span style="font-size: 0.78rem; background: #e0f2fe; color: #0369a1; padding: 0.15rem 0.5rem; border-radius: 4px; font-weight: 700;">IHK-Original</span>
+                        </div>
+                        <div style="padding: 1.15rem; font-size: 0.9rem; color: #334155; line-height: 1.5;">
+                            <p style="margin-top: 0;">Ein Client (10.0.1.25) initiiert eine HTTP-Verbindung zu einem Webserver (10.0.2.100). Beschreibe die 3 Pakete des TCP 3-Wege-Handshakes anhand von Richtung, gesetzten TCP-Flags und dem Zweck jedes Pakets.</p>
+                            <button class="btn btn-secondary" id="sol-pb3-3-btn" onclick="toggleAp2Solution('sol-pb3-3')" style="margin-top: 0.5rem; font-size: 0.85rem; padding: 0.45rem 0.9rem;">
+                                <i class="fa-solid fa-lightbulb"></i> Musterlösung &amp; Korrekturhinweise anzeigen
+                            </button>
+                            <div id="sol-pb3-3" style="display: none; margin-top: 1rem; background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 6px; padding: 1rem; font-size: 0.88rem; color: #166534;">
+                                <strong style="display: block; margin-bottom: 0.5rem; color: #14532d; font-size: 0.95rem;">Offizieller Ablauf des 3-Way Handshakes:</strong>
+                                <strong>Paket 1: SYN (Synchronize)</strong> &bull; Richtung: Client &rarr; Server.<br>
+                                &bull; Gesetzte Flags: <code>SYN = 1, ACK = 0</code>. Client sendet initiale Sequenznummer (ISN) und bittet um Verbindungsaufbau.<br><br>
+                                <strong>Paket 2: SYN-ACK (Synchronize-Acknowledge)</strong> &bull; Richtung: Server &rarr; Client.<br>
+                                &bull; Gesetzte Flags: <code>SYN = 1, ACK = 1</code>. Server bestätigt den Erhalt des SYN-Pakets (\(\text{Ack-Nr} = \text{ISN}_{\text{Client}} + 1\)) und sendet seine eigene initiale Sequenznummer.<br><br>
+                                <strong>Paket 3: ACK (Acknowledge)</strong> &bull; Richtung: Client &rarr; Server.<br>
+                                &bull; Gesetzte Flags: <code>SYN = 0, ACK = 1</code>. Client bestätigt die Sequenznummer des Servers (\(\text{Ack-Nr} = \text{ISN}_{\text{Server}} + 1\)). Verbindung ist nun im Status <code>ESTABLISHED</code>; Datenübertragung kann beginnen.
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                    </div>
+
+                    <!-- FIAE Content (Preserved) -->
+                    <div id="pb3-content-fiae" style="display: none;">
+<!-- Overview Banner -->
                     <div style="background: linear-gradient(135deg, #ecfeff, #cffafe); border: 1.5px solid #a5f3fc; border-radius: 10px; padding: 1.25rem; margin-bottom: 1.5rem;">
                         <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem;">
                             <div>
@@ -1404,11 +1964,11 @@
                                     <strong>Aufgabe:</strong> Finden Sie die zwei gravierenden Logik- und Laufzeitfehler im Pseudocode und geben Sie die korrigierten Zeilen an.
                                 </p>
                                 
-                                <button class="btn btn-secondary" id="sol-pb3-1-btn" onclick="toggleAp2Solution('sol-pb3-1')" style="margin-top: 0.5rem; font-size: 0.84rem; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; border: 1.5px solid #ef4444; color: #b91c1c; background: #fef2f2; font-weight: 700;">
+                                <button class="btn btn-secondary" id="sol-pb3-fiae-1-btn" onclick="toggleAp2Solution('sol-pb3-fiae-1')" style="margin-top: 0.5rem; font-size: 0.84rem; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; border: 1.5px solid #ef4444; color: #b91c1c; background: #fef2f2; font-weight: 700;">
                                     <i class="fa-solid fa-lightbulb"></i> Musterlösung &amp; Korrekturhinweise anzeigen
                                 </button>
 
-                                <div id="sol-pb3-1" style="display: none; margin-top: 1rem; background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 8px; padding: 1rem; font-size: 0.9rem; color: #166534; line-height: 1.5;">
+                                <div id="sol-pb3-fiae-1" style="display: none; margin-top: 1rem; background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 8px; padding: 1rem; font-size: 0.9rem; color: #166534; line-height: 1.5;">
                                     <h5 style="margin: 0 0 0.5rem 0; color: #14532d; font-size: 0.95rem;"><i class="fa-solid fa-circle-check"></i> IHK-Musterlösung:</h5>
                                     <strong>1. Fehler in Zeile 3 (IndexOutOfBounds / Off-by-one):</strong><br>
                                     Das Array beginnt bei Index 0. Der letzte gültige Index ist <code>LÄNGE(artikelPreise) - 1</code>. Durch die Bedingung <code>BIS LÄNGE</code> greift Zeile 4 auf einen ungültigen Index zu.<br>
@@ -1438,11 +1998,11 @@
                                     <strong>Aufgabe:</strong> Schreiben Sie eine SQL-Abfrage, die den Nachnamen des Kunden und seinen Gesamtbestellwert (Umsatz) auflistet, aber <strong>nur für Kunden, deren Gesamteinkaufswert über 500,00 € liegt</strong>. Sortieren Sie das Ergebnis absteigend nach dem Umsatz.
                                 </p>
                                 
-                                <button class="btn btn-secondary" id="sol-pb3-2-btn" onclick="toggleAp2Solution('sol-pb3-2')" style="margin-top: 0.5rem; font-size: 0.84rem; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; border: 1.5px solid #0891b2; color: #0e7490; background: #ecfeff; font-weight: 700;">
+                                <button class="btn btn-secondary" id="sol-pb3-fiae-2-btn" onclick="toggleAp2Solution('sol-pb3-fiae-2')" style="margin-top: 0.5rem; font-size: 0.84rem; padding: 0.4rem 0.8rem; border-radius: 6px; cursor: pointer; border: 1.5px solid #0891b2; color: #0e7490; background: #ecfeff; font-weight: 700;">
                                     <i class="fa-solid fa-lightbulb"></i> Musterlösung &amp; SQL anzeigen
                                 </button>
 
-                                <div id="sol-pb3-2" style="display: none; margin-top: 1rem; background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 8px; padding: 1rem; font-size: 0.9rem; color: #166534; line-height: 1.5;">
+                                <div id="sol-pb3-fiae-2" style="display: none; margin-top: 1rem; background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 8px; padding: 1rem; font-size: 0.9rem; color: #166534; line-height: 1.5;">
                                     <h5 style="margin: 0 0 0.5rem 0; color: #14532d; font-size: 0.95rem;"><i class="fa-solid fa-circle-check"></i> IHK-Musterlösung:</h5>
                                     <pre style="background: #0f172a; color: #38bdf8; padding: 0.75rem; border-radius: 6px; font-family: monospace; font-size: 0.88rem; line-height: 1.4;">
 SELECT 
@@ -1462,11 +2022,10 @@ ORDER BY gesamtumsatz DESC;</pre>
                         </div>
 
                     </div>
+                    </div>
 
                 </div>
 
-                <!-- ============================================================== -->
-                <!-- TAB 3: PB 4 - WIRTSCHAFTS- & SOZIALKUNDE (WiSo)                -->
                 <!-- ============================================================== -->
                 <div id="ap2-tab-pb4" class="ap2-tab-content" style="display: none;">
                     
@@ -1474,7 +2033,7 @@ ORDER BY gesamtumsatz DESC;</pre>
                     <div style="background: linear-gradient(135deg, #fdf2f8, #fce7f3); border: 1.5px solid #fbcfe8; border-radius: 10px; padding: 1.25rem; margin-bottom: 1.5rem;">
                         <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem;">
                             <div>
-                                <span style="background: #be185d; color: white; padding: 0.2rem 0.6rem; border-radius: 6px; font-size: 0.78rem; font-weight: 800; text-transform: uppercase;">Prüfungsbereich 4 &bull; Richtzeit: ca. 60 Minuten</span>
+                                <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.4rem;"><span style="background: #be185d; color: white; padding: 0.2rem 0.65rem; border-radius: 6px; font-size: 0.8rem; font-weight: 800; text-transform: uppercase;">Prüfungsbereich 4</span><span style="background: #db2777; color: white; padding: 0.2rem 0.65rem; border-radius: 6px; font-size: 0.8rem; font-weight: 800;">30 Punkte &bull; 10 % Gewichtung &bull; 60 Minuten</span></div>
                                 <h3 style="margin: 0.5rem 0 0.3rem 0; font-size: 1.25rem; color: #831843;">Wirtschafts- und Sozialkunde (WiSo)</h3>
                                 <p style="margin: 0; color: #9d174d; font-size: 0.95rem; line-height: 1.5; max-width: 900px;">
                                     Der unverzichtbare rechtliche und wirtschaftliche Baustein für alle IT-Berufe! Hier werden Arbeitsrecht (BBiG, KSchG, ArbZG), Kündigungsfristen, Mitbestimmung durch Betriebsrat &amp; JAV (BetrVG), Unternehmensformen (GmbH, KG, AG), Vertragsstörungen nach BGB und die Sozialversicherung geprüft.
@@ -1614,7 +2173,8 @@ ORDER BY gesamtumsatz DESC;</pre>
                             <option value="all">Alle Prüfungsdateien (81 Dateien)</option>
                             <option value="letzte">⭐ Nur Letzte AP1-Prüfung (Frühjahr 2026)</option>
                             <option value="ap1">📄 Alle AP1 Prüfungen (29 Dateien)</option>
-                            <option value="fiae">Nur FIAE (PB 2 &amp; PB 3)</option>
+                            <option value="fisi">⭐ Nur FISI (IT-Systeme &amp; Netzwerke)</option>
+                            <option value="fiae">Nur FIAE (Softwareprodukt &amp; Algorithmen)</option>
                             <option value="PB 2">Nur PB 2: Planen eines Softwareproduktes</option>
                             <option value="PB 3">Nur PB 3: Algorithmen &amp; Entwicklung</option>
                             <option value="WiSo">Nur WiSo (PB 4 &amp; AP1)</option>
@@ -1744,12 +2304,12 @@ ORDER BY gesamtumsatz DESC;</pre>
 
 
     <script src="diagrams.js?v=160"></script>
-    <script src="exam_data.js?v=160"></script>
-    <script src="questions.js?v=160"></script>
+    <script src="exam_data.js?v=161"></script>
+    <script src="questions.js?v=161"></script>
     <script src="generator.js?v=160"></script>
-    <script src="ap2_bridge.js?v=160"></script>
+    <script src="ap2_bridge.js?v=161"></script>
     <script src="exam_attachments.js?v=160"></script>
-    <script src="app.js?v=160"></script>
+    <script src="app.js?v=161"></script>
 
     <!-- PIN Sicherheits-Gatekeeper -->
     <script>

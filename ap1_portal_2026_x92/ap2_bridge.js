@@ -725,9 +725,11 @@ function renderAp2FilesList() {
         } else if (filter === "ap1") {
             matchesCategory = (f.examType === "AP1");
         } else if (filter === "fiae") {
-            matchesCategory = (f.category && (f.category.includes("PB 2") || f.category.includes("PB 3")));
+            matchesCategory = (f.category && (f.category.includes("PB 2") || f.category.includes("PB 3") || f.name.toLowerCase().includes("fiae")));
+        } else if (filter === "fisi") {
+            matchesCategory = (f.category && (f.category.toLowerCase().includes("fisi") || f.category.toLowerCase().includes("netzwerk") || f.category.toLowerCase().includes("system") || f.name.toLowerCase().includes("fisi")));
         } else {
-            matchesCategory = (f.category && f.category.includes(filter));
+            matchesCategory = (f.category && f.category.toLowerCase().includes(filter.toLowerCase()));
         }
         return matchesQuery && matchesCategory;
     });
@@ -815,3 +817,45 @@ window.switchAp2Tab = switchAp2Tab;
 window.toggleAp2Solution = toggleAp2Solution;
 window.copyAp2FilePath = copyAp2FilePath;
 window.renderAp2FilesList = renderAp2FilesList;
+
+
+// Switch between FISI and FIAE view inside PB2 or PB3
+function switchAp2SubTab(section, mode) {
+    const fisiEl = document.getElementById(section + "-content-fisi");
+    const fiaeEl = document.getElementById(section + "-content-fiae");
+    const btnFisi = document.getElementById(section + "-btn-fisi");
+    const btnFiae = document.getElementById(section + "-btn-fiae");
+
+    const activeColor = (section === "pb2") ? "#4f46e5" : "#0891b2";
+
+    if (fisiEl && fiaeEl) {
+        if (mode === "fisi") {
+            fisiEl.style.display = "block";
+            fiaeEl.style.display = "none";
+            if (btnFisi) {
+                btnFisi.style.background = activeColor;
+                btnFisi.style.color = "white";
+                btnFisi.style.fontWeight = "700";
+            }
+            if (btnFiae) {
+                btnFiae.style.background = "transparent";
+                btnFiae.style.color = "#475569";
+                btnFiae.style.fontWeight = "600";
+            }
+        } else {
+            fisiEl.style.display = "none";
+            fiaeEl.style.display = "block";
+            if (btnFiae) {
+                btnFiae.style.background = activeColor;
+                btnFiae.style.color = "white";
+                btnFiae.style.fontWeight = "700";
+            }
+            if (btnFisi) {
+                btnFisi.style.background = "transparent";
+                btnFisi.style.color = "#475569";
+                btnFisi.style.fontWeight = "600";
+            }
+        }
+    }
+}
+window.switchAp2SubTab = switchAp2SubTab;
