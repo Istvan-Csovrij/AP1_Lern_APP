@@ -7,7 +7,7 @@
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
     <title>AP1 Prüfungstrainer - Fachinformatiker</title>
-    <link rel="stylesheet" href="style.css?v=163">
+    <link rel="stylesheet" href="style.css?v=165">
     <!-- FontAwesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -98,11 +98,29 @@
 
     <header id="main-header">
         <div class="header-container">
-            <h1><i class="fa-solid fa-graduation-cap"></i> AP1 Prüfungstrainer</h1>
-            <p>Vorbereitung auf die Abschlussprüfung Teil 1 (Fachinformatiker • nach IHK-Standard)</p>
+            <!-- Dual Mode Switcher: AP1 vs AP2 -->
+            <div class="portal-mode-toggle" id="portal-mode-toggle">
+                <button class="mode-toggle-btn active" id="mode-btn-ap1" onclick="switchPortalMode('ap1')">
+                    <i class="fa-solid fa-book-open"></i>
+                    <span class="mode-text-group">
+                        <span class="mode-title">📘 AP1 Prüfung</span>
+                        <span class="mode-badge">Teil 1 • 20 %</span>
+                    </span>
+                </button>
+                <button class="mode-toggle-btn" id="mode-btn-ap2" onclick="switchPortalMode('ap2')">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                    <span class="mode-text-group">
+                        <span class="mode-title">🚀 AP2 Prüfung</span>
+                        <span class="mode-badge">FISI Abschluss • 80 %</span>
+                    </span>
+                </button>
+            </div>
+
+            <h1 id="header-main-title"><i class="fa-solid fa-graduation-cap"></i> AP1 Prüfungstrainer</h1>
+            <p id="header-main-subtitle">Vorbereitung auf die Abschlussprüfung Teil 1 (Fachinformatiker • nach IHK-Standard • 20 % Gewichtung)</p>
             <div class="header-actions">
-                <button class="header-exam-btn" id="header-exam-overview-btn" title="Katalog aller 17 Prüfungen (nach Prüfungsstandard) anzeigen & auswählen">
-                    <i class="fa-solid fa-book-bookmark"></i> 📚 Alle 17 Prüfungen vergleichen &amp; auswählen (1.700 Pkt)
+                <button class="header-exam-btn" id="header-exam-overview-btn" onclick="handleHeaderExamButtonClick()" title="Katalog aller 17 Prüfungen (nach Prüfungsstandard) anzeigen & auswählen">
+                    <i class="fa-solid fa-book-bookmark"></i> <span id="header-exam-btn-text">📚 Alle 17 Prüfungen vergleichen &amp; auswählen (1.700 Pkt)</span>
                 </button>
                 <button class="header-exam-btn" onclick="lockApp()" title="Lernbereich sperren" style="background: rgba(239, 68, 68, 0.1); border: 1.5px solid #ef4444; color: #fca5a5; display: flex; align-items: center; gap: 0.4rem;">
                     <i class="fa-solid fa-lock"></i> 🔒 Sperren
@@ -167,7 +185,7 @@
                     </div>
 
                     <!-- Kachel 4: Rechen- & Einheiten-Trainer -->
-                    <a href="rechentrainer.html?topic=ipv4_special_ranges&v=160" target="_blank" class="special-mini-tile tile-calc" title="Rechentrainer (AP1 / AP2)">
+                    <a href="rechentrainer.html?topic=ipv4_special_ranges&v=165" target="_blank" class="special-mini-tile tile-calc" title="Rechentrainer (AP1 / AP2)">
                         <span class="mini-tile-content">
                             <i class="fa-solid fa-calculator" style="color: #d97706;"></i>
                             <span>Rechentrainer (AP1/AP2)</span>
@@ -177,14 +195,64 @@
                 </div>
             </div>
 
+
+            <!-- Spezial-Kacheln für AP2 (Wird im AP2-Modus aktiviert) -->
+            <div class="card" id="special-exercises-ap2-card" style="display: none; border: 1.5px solid #7c3aed; background: #ffffff; box-shadow: 0 2px 6px rgba(124, 58, 237, 0.08); margin-bottom: 0.65rem; padding: 0.65rem 0.75rem;">
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.4rem; border-bottom: 1px solid #ede9fe; padding-bottom: 0.3rem;">
+                    <h3 style="margin: 0; color: #5b21b6; font-size: 0.88rem; display: flex; align-items: center; gap: 0.4rem; font-weight: 800; border: none; padding: 0;">
+                        <i class="fa-solid fa-bolt" style="color: #7c3aed;"></i> AP2 Schnell-Trainer
+                    </h3>
+                    <span style="font-size: 0.65rem; background: #ede9fe; color: #6d28d9; padding: 0.1rem 0.4rem; border-radius: 999px; font-weight: 800;">
+                        FISI 🚀
+                    </span>
+                </div>
+                <div class="special-tiles-grid">
+                    <!-- Kachel 1: 53 BaWü Originalprüfungen -->
+                    <div class="special-mini-tile tile-hotel" onclick="openAp2BridgeModal('files')" title="53 BaWü Originalprüfungen Sommer 2020 - Winter 2024/25" style="background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%); border-left: 3px solid #f59e0b; cursor: pointer;">
+                        <span class="mini-tile-content">
+                            <i class="fa-solid fa-folder-open" style="color: #d97706;"></i>
+                            <span style="font-weight: 700; color: #92400e;">📁 53 Originalprüfungen</span>
+                        </span>
+                        <i class="fa-solid fa-arrow-right mini-tile-arrow" style="color: #d97706;"></i>
+                    </div>
+                    <!-- Kachel 2: PB 2 IT-Systeme Trainer -->
+                    <div class="special-mini-tile" onclick="openAp2BridgeModal('pb2')" title="PB 2: IT-Systeme (100 Pkt. | 10 %)" style="background: #eef2ff; border-left: 3px solid #6366f1; cursor: pointer;">
+                        <span class="mini-tile-content">
+                            <i class="fa-solid fa-server" style="color: #4f46e5;"></i>
+                            <span style="font-weight: 700; color: #312e81;">🖥️ PB 2: IT-Systeme</span>
+                        </span>
+                        <i class="fa-solid fa-arrow-right mini-tile-arrow" style="color: #4f46e5;"></i>
+                    </div>
+                    <!-- Kachel 3: PB 3 Netzwerke Trainer -->
+                    <div class="special-mini-tile" onclick="openAp2BridgeModal('pb3')" title="PB 3: Netzwerke (100 Pkt. | 10 %)" style="background: #ecfeff; border-left: 3px solid #0891b2; cursor: pointer;">
+                        <span class="mini-tile-content">
+                            <i class="fa-solid fa-network-wired" style="color: #0891b2;"></i>
+                            <span style="font-weight: 700; color: #164e63;">🌐 PB 3: Netzwerke</span>
+                        </span>
+                        <i class="fa-solid fa-arrow-right mini-tile-arrow" style="color: #0891b2;"></i>
+                    </div>
+                    <!-- Kachel 4: PB 4 WiSo Trainer -->
+                    <div class="special-mini-tile" onclick="openAp2BridgeModal('pb4')" title="PB 4: WiSo (100 Pkt. | 10 %)" style="background: #fdf2f8; border-left: 3px solid #db2777; cursor: pointer;">
+                        <span class="mini-tile-content">
+                            <i class="fa-solid fa-scale-balanced" style="color: #db2777;"></i>
+                            <span style="font-weight: 700; color: #831843;">⚖️ PB 4: WiSo</span>
+                        </span>
+                        <i class="fa-solid fa-arrow-right mini-tile-arrow" style="color: #db2777;"></i>
+                    </div>
+                </div>
+            </div>
+
             <!-- Themenbereiche Card (Dünn & Übersichtlich) -->
             <div class="card" style="padding: 0.65rem 0.75rem; margin-bottom: 0.65rem;">
                 <h3 style="font-size: 0.88rem; margin-bottom: 0.4rem; padding-bottom: 0.3rem;"><i class="fa-solid fa-filter"></i> Themenbereiche</h3>
                 <div class="theme-filters" id="theme-filters">
+
                     <button class="btn btn-secondary" id="resume-quiz-btn" style="border: 1.5px solid #3b82f6; color: #2563eb; font-weight: bold; margin-bottom: 0.35rem; display: none; width: 100%; text-align: left; justify-content: flex-start; gap: 0.4rem; font-size: 0.82rem; padding: 0.35rem 0.6rem;">
                         <i class="fa-solid fa-arrow-left"></i> Haupt-Quiz fortsetzen
                     </button>
-                    <button class="filter-btn active" data-theme="all">
+                    <!-- AP1 THEMENFILTER -->
+                    <div id="ap1-filters-container" class="portal-filters-container">
+                        <button class="filter-btn active" data-theme="all">
                         <i class="fa-solid fa-layer-group"></i> Alle Themen
                     </button>
                     <button class="filter-btn highlight-letzte-btn" id="open-letzte-ap1-btn" onclick="startExamMode(false, 'exam_24')" title="Original BaWü Frühjahr 2026 mit Anlagen 2 bis 6">
@@ -235,7 +303,7 @@
                     <button class="filter-btn highlight-osi-btn" data-theme="osi" id="osi-filter-btn" style="border: 2px solid #10b981; background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%); color: #065f46; font-weight: 700;">
                         <i class="fa-solid fa-layer-group" style="color: #059669;"></i> 📡 OSI-Schichtenmodell
                     </button>
-                    <a href="rechentrainer.html?topic=osi_layers_trainer&v=160" target="_blank" class="filter-btn highlight-osi-trainer-btn" id="open-osi-trainer-btn" style="border: 1px solid #10b981; background: #f0fdf4; color: #047857; text-decoration: none;">
+                    <a href="rechentrainer.html?topic=osi_layers_trainer&v=165" target="_blank" class="filter-btn highlight-osi-trainer-btn" id="open-osi-trainer-btn" style="border: 1px solid #10b981; background: #f0fdf4; color: #047857; text-decoration: none;">
                         <i class="fa-solid fa-graduation-cap" style="color: #059669;"></i> 📡 OSI-Trainer (20 Aufgaben) ↗
                     </a>
                     <button class="filter-btn highlight-bawue-btn" data-theme="bawue-focus" id="bawue-focus-btn">
@@ -247,6 +315,72 @@
                     <button class="filter-btn highlight-fav-btn" data-theme="favorites" id="favorites-filter-btn">
                         <i class="fa-solid fa-star" style="color: #ffc107;"></i> ⭐ Merkliste
                     </button>
+                    </div>
+
+                    <!-- AP2 THEMENFILTER (FISI ABSCHLUSSPRÜFUNG) -->
+                    <div id="ap2-filters-container" class="portal-filters-container" style="display: none;">
+                        <button class="filter-btn active" data-theme="ap2-all" id="ap2-all-filter-btn" style="border: 1.5px solid #7c3aed; background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%); color: #5b21b6; font-weight: 800;">
+                            <i class="fa-solid fa-layer-group" style="color: #7c3aed;"></i> 🔥 Alle AP2 Aufgaben (FISI)
+                        </button>
+                        
+                        <!-- PB 2 Filter -->
+                        <button class="filter-btn highlight-pb2-btn" data-theme="pb2-systeme" id="pb2-systeme-btn">
+                            <div style="display: flex; flex-direction: column; align-items: flex-start; text-align: left; width: 100%;">
+                                <span style="font-weight: 700; color: #312e81; font-size: 0.82rem; display: flex; align-items: center; justify-content: space-between; width: 100%;">
+                                    <span><i class="fa-solid fa-server" style="color: #6366f1;"></i> PB 2: IT-Systeme</span>
+                                    <span style="font-size: 0.65rem; background: #e0e7ff; color: #3730a3; padding: 0.05rem 0.35rem; border-radius: 4px;">100 P | 10%</span>
+                                </span>
+                                <span style="font-size: 0.7rem; color: #4b5563;">Storage, RAID, SAN, USV, Hypervisor, BSI</span>
+                            </div>
+                        </button>
+
+                        <!-- PB 3 Filter -->
+                        <button class="filter-btn highlight-pb3-btn" data-theme="pb3-netze" id="pb3-netze-btn">
+                            <div style="display: flex; flex-direction: column; align-items: flex-start; text-align: left; width: 100%;">
+                                <span style="font-weight: 700; color: #164e63; font-size: 0.82rem; display: flex; align-items: center; justify-content: space-between; width: 100%;">
+                                    <span><i class="fa-solid fa-network-wired" style="color: #0891b2;"></i> PB 3: Netzwerke</span>
+                                    <span style="font-size: 0.65rem; background: #cffafe; color: #155e75; padding: 0.05rem 0.35rem; border-radius: 4px;">100 P | 10%</span>
+                                </span>
+                                <span style="font-size: 0.7rem; color: #4b5563;">IPv4/v6, VLAN 802.1Q, OSPF, FW, Wi-Fi 6</span>
+                            </div>
+                        </button>
+
+                        <!-- PB 4 Filter -->
+                        <button class="filter-btn highlight-pb4-btn" data-theme="pb4-wiso" id="pb4-wiso-btn">
+                            <div style="display: flex; flex-direction: column; align-items: flex-start; text-align: left; width: 100%;">
+                                <span style="font-weight: 700; color: #831843; font-size: 0.82rem; display: flex; align-items: center; justify-content: space-between; width: 100%;">
+                                    <span><i class="fa-solid fa-scale-balanced" style="color: #db2777;"></i> PB 4: WiSo</span>
+                                    <span style="font-size: 0.65rem; background: #fce7f3; color: #9d174d; padding: 0.05rem 0.35rem; border-radius: 4px;">100 P | 10%</span>
+                                </span>
+                                <span style="font-size: 0.7rem; color: #4b5563;">KSchG, Betriebsrat, Kaufverträge, BGB</span>
+                            </div>
+                        </button>
+
+                        <!-- PB 3 Algo / Software Filter -->
+                        <button class="filter-btn highlight-algo-btn" data-theme="pb3-algo" id="pb3-algo-btn">
+                            <i class="fa-solid fa-code" style="color: #4f46e5;"></i> 💻 PB 3: SQL, Skripte &amp; Automatisierung
+                        </button>
+
+                        <!-- BaWü AP2 Original-Aufgaben Filter -->
+                        <button class="filter-btn highlight-bawue-btn" data-theme="bawue-ap2" id="bawue-ap2-btn" style="border: 1.5px solid #8b5cf6; background: #faf5ff; color: #6b21a8; font-weight: 700;">
+                            <i class="fa-solid fa-wand-magic-sparkles" style="color: #8b5cf6;"></i> ⭐ BaWü AP2 Original-Aufgaben (PoE, Bitraten, RFC 1918)
+                        </button>
+
+                        <!-- 53 Originalprüfungen Button -->
+                        <button class="filter-btn" onclick="openAp2BridgeModal('files')" style="border: 1px solid #f59e0b; background: #fffbeb; color: #92400e; font-weight: 600;">
+                            <i class="fa-solid fa-folder-open" style="color: #f59e0b;"></i> 📁 53 BaWü Originalprüfungen (PC-Dateien)
+                        </button>
+
+                        <!-- AP2 Rechen- & Formeltrainer -->
+                        <button class="filter-btn" onclick="openAp2BridgeModal('pb2')" style="border: 1px solid #6366f1; background: #ffffff; color: #4338ca;">
+                            <i class="fa-solid fa-calculator" style="color: #6366f1;"></i> 🧮 AP2 Formeln &amp; Rechenmodelle (USV/RAID/PoE)
+                        </button>
+
+                        <!-- Merkliste AP2 -->
+                        <button class="filter-btn highlight-fav-btn" data-theme="favorites" id="favorites-ap2-filter-btn">
+                            <i class="fa-solid fa-star" style="color: #ffc107;"></i> ⭐ Merkliste
+                        </button>
+                    </div>
                 </div>
             </div>
 
@@ -254,7 +388,7 @@
             <div class="card whiteboard-card" style="border: 1.5px solid #8b5cf6; box-shadow: 0 2px 6px rgba(139, 92, 246, 0.1); padding: 0.65rem 0.75rem;">
                 <h3 style="color: #6d28d9; margin-bottom: 0.35rem; font-size: 0.88rem; padding-bottom: 0.25rem;"><i class="fa-solid fa-pen-ruler"></i> Diagramm-Board</h3>
                 <div style="display: flex; flex-direction: column; gap: 0.3rem;">
-                    <a href="whiteboard.html?v=110" target="_blank" class="btn btn-full" style="background: linear-gradient(135deg, #8b5cf6, #6d28d9); color: white; justify-content: center; font-weight: bold; border: none; font-size: 0.82rem; display: flex; align-items: center; gap: 0.4rem; width: 100%; text-decoration: none; padding: 0.35rem 0.6rem; border-radius: 6px;">
+                    <a href="whiteboard.html?v=165" target="_blank" class="btn btn-full" style="background: linear-gradient(135deg, #8b5cf6, #6d28d9); color: white; justify-content: center; font-weight: bold; border: none; font-size: 0.82rem; display: flex; align-items: center; gap: 0.4rem; width: 100%; text-decoration: none; padding: 0.35rem 0.6rem; border-radius: 6px;">
                         <i class="fa-solid fa-up-right-from-square"></i> In neuem Tab öffnen ↗
                     </a>
                     <button class="btn btn-full btn-secondary" id="open-whiteboard-sidebar-btn" style="border: 1px solid #8b5cf6; color: #6d28d9; background: #f5f3ff; justify-content: center; font-weight: 600; font-size: 0.8rem; display: flex; align-items: center; gap: 0.35rem; width: 100%; padding: 0.3rem 0.55rem; border-radius: 6px;">
@@ -273,7 +407,7 @@
                         <span class="question-number" id="question-number">Frage 0 von 0</span>
                     </div>
                     <div style="display: flex; align-items: center; gap: 0.35rem;">
-                        <a href="whiteboard.html?v=110" target="_blank" class="btn btn-secondary" title="Zeichenboard in neuem Tab öffnen (für Splitscreen)" style="padding: 0.35rem 0.6rem; font-size: 0.85rem; display: flex; align-items: center; gap: 0.3rem; border-radius: 6px; border: 1px solid #8b5cf6; color: #6d28d9; background: #ffffff; text-decoration: none; font-weight: 600;">
+                        <a href="whiteboard.html?v=165" target="_blank" class="btn btn-secondary" title="Zeichenboard in neuem Tab öffnen (für Splitscreen)" style="padding: 0.35rem 0.6rem; font-size: 0.85rem; display: flex; align-items: center; gap: 0.3rem; border-radius: 6px; border: 1px solid #8b5cf6; color: #6d28d9; background: #ffffff; text-decoration: none; font-weight: 600;">
                             <i class="fa-solid fa-up-right-from-square"></i> <span>Tab ↗</span>
                         </a>
                         <button class="btn btn-secondary" id="quiz-whiteboard-btn" title="Diagramm-Zeichenboard als Fenster öffnen" style="padding: 0.35rem 0.65rem; font-size: 0.85rem; display: flex; align-items: center; gap: 0.35rem; border-radius: 6px; border: 1px solid #8b5cf6; color: #6d28d9; background: #f5f3ff;">
@@ -446,23 +580,23 @@
 
             
             <!-- Brücke AP1 ➔ AP2 Hub Card (Kompakt & Dünn) -->
-            <div class="card ap2-bridge-card" style="border: 1.5px solid #6366f1; background: #ffffff; box-shadow: 0 2px 6px rgba(99, 102, 241, 0.08); border-radius: var(--radius); margin-bottom: 0.65rem; padding: 0.65rem 0.75rem;">
+            <div class="card ap2-bridge-card" id="portal-ap2-center-card" style="border: 1.5px solid #6366f1; background: #ffffff; box-shadow: 0 2px 6px rgba(99, 102, 241, 0.08); border-radius: var(--radius); margin-bottom: 0.65rem; padding: 0.65rem 0.75rem;">
                 <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.35rem; border-bottom: 1px solid #e0e7ff; padding-bottom: 0.25rem;">
                     <h3 style="color: #4338ca; margin: 0; font-size: 0.88rem; display: flex; align-items: center; gap: 0.4rem; font-weight: 800; border: none; padding: 0;">
-                        <i class="fa-solid fa-graduation-cap" style="color: #6366f1;"></i> Brücke AP1 ➔ AP2
+                        <i class="fa-solid fa-graduation-cap" style="color: #6366f1;"></i> 🎓 AP2 Prüfungszentrum
                     </h3>
-                    <span style="background: #dbeafe; color: #1e40af; font-size: 0.65rem; font-weight: 800; padding: 0.12rem 0.45rem; border-radius: 999px; letter-spacing: 0.02em;">
-                        FISI Hub (AP2)
+                    <span style="background: #ede9fe; color: #6d28d9; font-size: 0.65rem; font-weight: 800; padding: 0.12rem 0.45rem; border-radius: 999px; letter-spacing: 0.02em;">
+                        FISI Abschluss (80 %)
                     </span>
                 </div>
 
-                <!-- Highlight Mini-Kachel: Letzte AP1 Prüfung -->
-                <div class="special-mini-tile tile-calc" onclick="startExamMode(false, 'exam_24')" title="Letzte AP1-Prüfung (BaWü 2026 mit Anlagen 2-6) im Split-View starten" style="cursor: pointer; margin-bottom: 0.35rem;">
+                <!-- Highlight Mini-Kachel: Letzte AP1 Prüfung oder AP2 Quick-Switch -->
+                <div class="special-mini-tile tile-calc" onclick="switchPortalMode('ap2')" title="Direkt in den AP2-Prüfungsmodus wechseln" style="cursor: pointer; margin-bottom: 0.35rem; background: #faf5ff; border: 1px solid #d8b4fe;">
                     <span class="mini-tile-content">
-                        <i class="fa-solid fa-star" style="color: #d97706;"></i>
-                        <span>Letzte AP1-Prüfung (2026)</span>
+                        <i class="fa-solid fa-bolt" style="color: #7c3aed;"></i>
+                        <span style="font-weight: 700; color: #5b21b6;">AP2-Modus aktivieren</span>
                     </span>
-                    <span style="font-size: 0.65rem; background: #d97706; color: white; padding: 0.1rem 0.35rem; border-radius: 4px; font-weight: 800;">START ➔</span>
+                    <span style="font-size: 0.65rem; background: #7c3aed; color: white; padding: 0.1rem 0.35rem; border-radius: 4px; font-weight: 800;">WECHSELN ➔</span>
                 </div>
 
                 <!-- Die 3 schriftlichen Prüfungsbereiche laut IHK Prüfungsordnung -->
@@ -529,7 +663,7 @@
 
                 <!-- Launch Button -->
                 <button class="btn btn-full" id="open-ap2-bridge-btn" onclick="openAp2BridgeModal('pb2')" style="background: linear-gradient(135deg, #4f46e5, #7c3aed); color: white; font-weight: 700; font-size: 0.82rem; padding: 0.42rem 0.75rem; border-radius: 6px; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 0.4rem; box-shadow: 0 2px 6px rgba(79, 70, 229, 0.2); transition: transform 0.15s ease;">
-                    <i class="fa-solid fa-rocket"></i> AP2-Lernhub öffnen ↗
+                    <i class="fa-solid fa-rocket"></i> AP2 Prüfungszentrum öffnen ↗
                 </button>
             </div>
 
@@ -728,7 +862,7 @@
                     </div>
                 </div>
                 <div style="display: flex; align-items: center; gap: 0.5rem;">
-                    <a href="whiteboard.html?v=110" target="_blank" class="wb-action-btn" style="color: #6d28d9; border: 1px solid #ddd6fe; background: #f5f3ff; text-decoration: none;" title="Zeichenboard in neuem Tab öffnen (für Splitscreen)">
+                    <a href="whiteboard.html?v=165" target="_blank" class="wb-action-btn" style="color: #6d28d9; border: 1px solid #ddd6fe; background: #f5f3ff; text-decoration: none;" title="Zeichenboard in neuem Tab öffnen (für Splitscreen)">
                         <i class="fa-solid fa-up-right-from-square"></i> <span class="wb-btn-label">Im neuen Tab ↗</span>
                     </a>
                     <button id="wb-download-btn" class="wb-action-btn" title="Skizze als PNG herunterladen">
@@ -827,14 +961,14 @@
                     </div>
                 </div>
                 <div style="display: flex; align-items: center; gap: 0.5rem;">
-                    <a href="rechentrainer.html?topic=ipv4_special_ranges&v=160" target="_blank" class="wb-action-btn" style="color: #0369a1; border: 1px solid #bae6fd; background: #e0f2fe; text-decoration: none; padding: 0.35rem 0.75rem; border-radius: 6px; font-size: 0.85rem; display: flex; align-items: center; gap: 0.35rem; font-weight: 600;">
+                    <a href="rechentrainer.html?topic=ipv4_special_ranges&v=165" target="_blank" class="wb-action-btn" style="color: #0369a1; border: 1px solid #bae6fd; background: #e0f2fe; text-decoration: none; padding: 0.35rem 0.75rem; border-radius: 6px; font-size: 0.85rem; display: flex; align-items: center; gap: 0.35rem; font-weight: 600;">
                         <i class="fa-solid fa-up-right-from-square"></i> <span>Im neuen Tab öffnen</span>
                     </a>
                     <button id="close-rechentrainer-btn" class="wb-close-btn" style="color: #64748b; background: none; border: none; font-size: 1.8rem; cursor: pointer; line-height: 1; padding: 0 0.5rem;" title="Schließen">&times;</button>
                 </div>
             </div>
             <div style="flex: 1; width: 100%; height: 100%; overflow: hidden;">
-                <iframe src="rechentrainer.html?topic=ipv4_special_ranges&v=160" style="width: 100%; height: 100%; border: none;"></iframe>
+                <iframe src="rechentrainer.html?topic=ipv4_special_ranges&v=165" style="width: 100%; height: 100%; border: none;"></iframe>
             </div>
         </div>
     </div>
@@ -2376,13 +2510,13 @@ ORDER BY gesamtumsatz DESC;</pre>
     </div>
 
 
-    <script src="diagrams.js?v=160"></script>
-    <script src="exam_data.js?v=163"></script>
-    <script src="questions.js?v=163"></script>
-    <script src="generator.js?v=160"></script>
-    <script src="ap2_bridge.js?v=163"></script>
-    <script src="exam_attachments.js?v=160"></script>
-    <script src="app.js?v=163"></script>
+    <script src="diagrams.js?v=165"></script>
+    <script src="exam_data.js?v=165"></script>
+    <script src="questions.js?v=165"></script>
+    <script src="generator.js?v=165"></script>
+    <script src="ap2_bridge.js?v=165"></script>
+    <script src="exam_attachments.js?v=165"></script>
+    <script src="app.js?v=165"></script>
 
     <!-- PIN Sicherheits-Gatekeeper -->
     <script>

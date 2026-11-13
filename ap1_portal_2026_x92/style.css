@@ -3299,3 +3299,149 @@ footer {
     border-color: #15803d;
 }
 
+
+
+/* ==========================================================================
+   DUAL PORTAL SWITCHER: AP1 (20%) VS AP2 (80%) MODE TOGGLE & STYLING
+   ========================================================================== */
+
+.portal-mode-toggle {
+    display: inline-flex;
+    align-items: center;
+    background: rgba(15, 23, 42, 0.45);
+    border: 1.5px solid rgba(255, 255, 255, 0.2);
+    border-radius: 9999px;
+    padding: 0.3rem 0.35rem;
+    gap: 0.45rem;
+    margin-bottom: 0.75rem;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25), inset 0 1px 2px rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(10px);
+    transition: all 0.25s ease;
+}
+
+.mode-toggle-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.45rem 1.15rem;
+    border-radius: 9999px;
+    border: 1.5px solid transparent;
+    background: transparent;
+    color: #cbd5e1;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    text-align: left;
+}
+
+.mode-toggle-btn:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.mode-toggle-btn.active#mode-btn-ap1 {
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.45);
+    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.55), inset 0 1px 1px rgba(255, 255, 255, 0.3);
+    font-weight: 700;
+}
+
+.mode-toggle-btn.active#mode-btn-ap2 {
+    background: linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%);
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.45);
+    box-shadow: 0 4px 14px rgba(124, 58, 237, 0.55), inset 0 1px 1px rgba(255, 255, 255, 0.3);
+    font-weight: 700;
+}
+
+.mode-toggle-btn i {
+    font-size: 1.15rem;
+}
+
+.mode-text-group {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.15;
+}
+
+.mode-title {
+    font-size: 0.92rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+}
+
+.mode-badge {
+    font-size: 0.68rem;
+    opacity: 0.88;
+    font-weight: 600;
+}
+
+/* Filter Containers */
+.portal-filters-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    width: 100%;
+}
+
+/* AP2 Filter Buttons Specific Highlight Styles */
+.filter-btn.highlight-pb2-btn {
+    border-left: 3.5px solid #6366f1 !important;
+    background: #f8faff;
+}
+.filter-btn.highlight-pb2-btn:hover {
+    background: #eef2ff !important;
+}
+
+.filter-btn.highlight-pb3-btn {
+    border-left: 3.5px solid #0891b2 !important;
+    background: #f0fdfa;
+}
+.filter-btn.highlight-pb3-btn:hover {
+    background: #e0f2fe !important;
+}
+
+.filter-btn.highlight-pb4-btn {
+    border-left: 3.5px solid #db2777 !important;
+    background: #fdf2f8;
+}
+.filter-btn.highlight-pb4-btn:hover {
+    background: #fce7f3 !important;
+}
+
+.filter-btn.highlight-algo-btn {
+    border-left: 3.5px solid #4f46e5 !important;
+    background: #f5f3ff;
+}
+.filter-btn.highlight-algo-btn:hover {
+    background: #ede9fe !important;
+}
+
+/* AP2 Card Active Glow when in AP2 Mode */
+body.portal-mode-ap2 #portal-ap2-center-card {
+    border: 2px solid #7c3aed !important;
+    box-shadow: 0 4px 16px rgba(124, 58, 237, 0.18) !important;
+}
+
+body.portal-mode-ap2 #main-header {
+    background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4338ca 100%) !important;
+}
+
+@media (max-width: 640px) {
+    .portal-mode-toggle {
+        width: 100%;
+        justify-content: center;
+    }
+    .mode-toggle-btn {
+        flex: 1;
+        justify-content: center;
+        padding: 0.4rem 0.6rem;
+    }
+    .mode-title {
+        font-size: 0.82rem;
+    }
+    .mode-badge {
+        font-size: 0.62rem;
+    }
+}

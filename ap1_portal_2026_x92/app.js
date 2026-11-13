@@ -1,5 +1,8 @@
 // AP1 Quiz-App Logic
 
+// Portal Exam Mode: 'ap1' (Teil 1 • 20 %) vs 'ap2' (FISI Abschluss • 80 %)
+let currentPortalMode = localStorage.getItem('portal_exam_mode') || 'ap1';
+
 let questions = [];
 let filteredQuestions = [];
 let currentQuestionIndex = 0;
@@ -95,6 +98,10 @@ document.addEventListener("DOMContentLoaded", () => {
         initQuestions(savedMode);
         loadStats();
         setupThemeFilters();
+
+        // Apply saved or default portal exam mode (AP1 vs AP2)
+        const savedPortalMode = localStorage.getItem("portal_exam_mode") || "ap1";
+        switchPortalMode(savedPortalMode);
         filterQuestions("all");
         initWhiteboard();
         initRechentrainer();
@@ -224,22 +231,33 @@ function initQuestions(typeMode) {
     const dynamicQs = typeof generateDynamicQuestions === "function" ? generateDynamicQuestions(typeMode) : [];
     const sourceQuestions = (typeof staticQuestions !== "undefined" && Array.isArray(staticQuestions)) ? staticQuestions : [];
     
+    // Mode-specific partitioning (AP1 vs AP2)
+    let pool = [];
+    if (currentPortalMode === "ap2") {
+        pool = sourceQuestions.filter(q => q.examLevel === "ap2" || (q.theme && q.theme.startsWith("pb")) || q.isBawueAp2 === true);
+        if (pool.length === 0) pool = [...sourceQuestions];
+    } else {
+        pool = sourceQuestions.filter(q => q.examLevel !== "ap2" && !(q.theme && q.theme.startsWith("pb")) && !q.isBawueAp2);
+        // Include dynamic questions for AP1
+        pool = [...pool, ...dynamicQs];
+    }
+    
     // Filter the static list based on chosen mode
     let filteredStatic = [];
     if (typeMode === "open") {
-        filteredStatic = sourceQuestions.filter(q => q.type === "open-text");
+        filteredStatic = pool.filter(q => q.type === "open-text");
     } else if (typeMode === "standard") {
-        filteredStatic = sourceQuestions.filter(q => q.type !== "open-text");
+        filteredStatic = pool.filter(q => q.type !== "open-text");
     } else {
-        filteredStatic = [...sourceQuestions];
+        filteredStatic = [...pool];
     }
     
-    questions = [...filteredStatic, ...dynamicQs];
+    questions = [...filteredStatic];
     if (typeMode === "open") {
         questions = questions.filter(q => q.type === "open-text");
     }
     
-    // Strict Deduplication: Keine Duplikate im globalen Fragenpool (unter Berücksichtigung von Programmcode)
+    // Strict Deduplication: Keine Duplikate im globalen Fragenpool
     const seenGlobalSigs = new Set();
     questions = questions.filter(q => {
         if (!q || !q.question) return false;
@@ -250,18 +268,21 @@ function initQuestions(typeMode) {
         return true;
     });
 
-    console.log(`Initialized ${questions.length} unique questions (Static: ${filteredStatic.length}, Dynamic: ${dynamicQs.length}) for mode: ${typeMode}`);
+    console.log(`[${currentPortalMode.toUpperCase()}] Initialized ${questions.length} questions for typeMode: ${typeMode}`);
 }
 
-// Setup click handlers for filters
 function setupThemeFilters() {
     const filterButtons = themeFiltersContainer.querySelectorAll(".filter-btn");
     filterButtons.forEach(btn => {
         btn.addEventListener("click", (e) => {
-            filterButtons.forEach(b => b.classList.remove("active"));
+            const theme = btn.getAttribute("data-theme");
+            if (!theme) return; // Ignore buttons with only inline onclick
+            
+            // Remove active class from sibling buttons in the same filter group container
+            const container = btn.closest(".portal-filters-container") || themeFiltersContainer;
+            container.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
             btn.classList.add("active");
             
-            const theme = btn.getAttribute("data-theme");
             filterQuestions(theme);
         });
     });
@@ -321,6 +342,39 @@ function filterQuestions(theme) {
         if (starBtn) starBtn.style.display = "inline-flex";
         if (theme === "all") {
             filteredQuestions = [...questions];
+        } else if (theme === "ap2-all") {
+            filteredQuestions = questions.filter(q => q.examLevel === "ap2" || (q.theme && q.theme.startsWith("pb")) || q.isBawueAp2 === true);
+            if (filteredQuestions.length === 0) filteredQuestions = [...questions];
+        } else if (theme === "pb2-systeme") {
+            filteredQuestions = questions.filter(q => 
+                q.theme === "pb2-systeme" || 
+                q.pruefungsbereich === "PB2" || 
+                (q.topic && (q.topic.toLowerCase().includes("pb 2") || q.topic.toLowerCase().includes("it-systeme") || q.topic.toLowerCase().includes("usv") || q.topic.toLowerCase().includes("raid") || q.topic.toLowerCase().includes("storage") || q.topic.toLowerCase().includes("hypervisor") || q.topic.toLowerCase().includes("bsi")))
+            );
+        } else if (theme === "pb3-netze") {
+            filteredQuestions = questions.filter(q => 
+                q.theme === "pb3-netze" || 
+                q.pruefungsbereich === "PB3" || 
+                (q.topic && (q.topic.toLowerCase().includes("pb 3") || q.topic.toLowerCase().includes("netzwerk") || q.topic.toLowerCase().includes("vlan") || q.topic.toLowerCase().includes("ospf") || q.topic.toLowerCase().includes("ipv6") || q.topic.toLowerCase().includes("firewall") || q.topic.toLowerCase().includes("wi-fi")))
+            );
+        } else if (theme === "pb4-wiso") {
+            filteredQuestions = questions.filter(q => 
+                q.theme === "pb4-wiso" || 
+                q.pruefungsbereich === "PB4" || 
+                (q.topic && (q.topic.toLowerCase().includes("pb 4") || q.topic.toLowerCase().includes("wiso") || q.topic.toLowerCase().includes("kschg") || q.topic.toLowerCase().includes("betriebsrat") || q.topic.toLowerCase().includes("bgb") || q.topic.toLowerCase().includes("kaufvertrag") || q.topic.toLowerCase().includes("haftung")))
+            );
+        } else if (theme === "pb3-algo") {
+            filteredQuestions = questions.filter(q => 
+                q.theme === "pb3-algo" || 
+                q.pruefungsbereich === "PB3-ALGO" || 
+                (q.topic && (q.topic.toLowerCase().includes("sql") || q.topic.toLowerCase().includes("algorithmen") || q.topic.toLowerCase().includes("skripte") || q.topic.toLowerCase().includes("automatisierung")))
+            );
+        } else if (theme === "bawue-ap2") {
+            filteredQuestions = questions.filter(q => 
+                q.isBawueAp2 === true || 
+                q.theme === "bawue-ap2" || 
+                (q.topic && (q.topic.toLowerCase().includes("bawü ap2") || q.topic.toLowerCase().includes("poe") || q.topic.toLowerCase().includes("rfc 1918") || q.topic.toLowerCase().includes("datenübertragung")))
+            );
         } else if (theme === "it-arbeitsplatz" || theme === "arbeitsplatz") {
             filteredQuestions = questions.filter(q => {
                 if (q.theme === "it-arbeitsplatz" || q.isItArbeitsplatz === true) return true;
@@ -754,7 +808,7 @@ function filterQuestions(theme) {
     }
     
     // Limit to exactly 30 questions per round (only if not in favorites, subnetting, osi, pseudocode or pruefungsblatt to let them practice all questions)
-    if (theme !== "favorites" && theme !== "subnetting" && theme !== "osi" && theme !== "pseudocode" && theme !== "pruefungsblatt" && filteredQuestions.length > 30) {
+    if (theme !== "favorites" && theme !== "subnetting" && theme !== "osi" && theme !== "pseudocode" && theme !== "pruefungsblatt" && !theme.startsWith("ap2") && !theme.startsWith("pb") && theme !== "bawue-ap2" && filteredQuestions.length > 30) {
         filteredQuestions = filteredQuestions.slice(0, 30);
     }
     
@@ -3617,3 +3671,117 @@ window.toggleExamHeaderVisibility = function() {
         minBtn.title = isCollapsed ? 'Blauen Header wieder einblenden' : 'Blauen Header komplett einklappen';
     }
 };
+
+
+// ==========================================================================
+// DUAL PORTAL MODE SWITCHER: AP1 (TEIL 1 • 20%) VS AP2 (FISI ABSCHLUSS • 80%)
+// ==========================================================================
+
+function switchPortalMode(mode) {
+    if (mode !== "ap1" && mode !== "ap2") mode = "ap1";
+    currentPortalMode = mode;
+    localStorage.setItem("portal_exam_mode", mode);
+    
+    if (mode === "ap2") {
+        document.body.classList.add("portal-mode-ap2");
+        document.body.classList.remove("portal-mode-ap1");
+    } else {
+        document.body.classList.add("portal-mode-ap1");
+        document.body.classList.remove("portal-mode-ap2");
+    }
+    
+    // Update Mode Buttons
+    const btnAp1 = document.getElementById("mode-btn-ap1");
+    const btnAp2 = document.getElementById("mode-btn-ap2");
+    if (btnAp1 && btnAp2) {
+        if (mode === "ap1") {
+            btnAp1.classList.add("active");
+            btnAp2.classList.remove("active");
+        } else {
+            btnAp2.classList.add("active");
+            btnAp1.classList.remove("active");
+        }
+    }
+    
+    // Update Header Titles
+    const headerTitle = document.getElementById("header-main-title");
+    const headerSubtitle = document.getElementById("header-main-subtitle");
+    const headerExamBtnText = document.getElementById("header-exam-btn-text");
+    const headerExamBtn = document.getElementById("header-exam-overview-btn");
+    
+    if (mode === "ap1") {
+        if (headerTitle) headerTitle.innerHTML = `<i class="fa-solid fa-graduation-cap"></i> AP1 Prüfungstrainer`;
+        if (headerSubtitle) headerSubtitle.textContent = `Vorbereitung auf die Abschlussprüfung Teil 1 (Fachinformatiker • nach IHK-Standard • 20 % Gewichtung)`;
+        if (headerExamBtnText) headerExamBtnText.innerHTML = `📚 Alle 17 Prüfungen vergleichen &amp; auswählen (1.700 Pkt)`;
+        if (headerExamBtn) headerExamBtn.title = "Katalog aller 17 AP1-Prüfungen anzeigen & auswählen";
+    } else {
+        if (headerTitle) headerTitle.innerHTML = `<i class="fa-solid fa-graduation-cap"></i> AP2 Abschlussprüfungs-Portal (FISI)`;
+        if (headerSubtitle) headerSubtitle.textContent = `Fachinformatiker Systemintegration • Abschlussprüfung Teil 2 (80 % Gesamtnote: PB 2 IT-Systeme 10%, PB 3 Netzwerke 10%, PB 4 WiSo 10%, Projektarbeit 50%)`;
+        if (headerExamBtnText) headerExamBtnText.innerHTML = `📁 53 BaWü Original-Abschlussprüfungen (AP2) anzeigen`;
+        if (headerExamBtn) headerExamBtn.title = "Katalog aller 53 BaWü AP2 Originalprüfungen öffnen";
+    }
+    
+    // Toggle Filter Containers
+    const ap1FiltersContainer = document.getElementById("ap1-filters-container");
+    const ap2FiltersContainer = document.getElementById("ap2-filters-container");
+    if (ap1FiltersContainer && ap2FiltersContainer) {
+        if (mode === "ap1") {
+            ap1FiltersContainer.style.display = "flex";
+            ap2FiltersContainer.style.display = "none";
+        } else {
+            ap1FiltersContainer.style.display = "none";
+            ap2FiltersContainer.style.display = "flex";
+        }
+    }
+    
+    // Toggle Sidebar Special Exercises
+    const specialExercisesAp1 = document.getElementById("special-exercises-card");
+    const specialExercisesAp2 = document.getElementById("special-exercises-ap2-card");
+    if (specialExercisesAp1 && specialExercisesAp2) {
+        if (mode === "ap1") {
+            specialExercisesAp1.style.display = "block";
+            specialExercisesAp2.style.display = "none";
+        } else {
+            specialExercisesAp1.style.display = "none";
+            specialExercisesAp2.style.display = "block";
+        }
+    }
+    
+    // Re-initialize and load questions
+    const typeMode = (typeSelect && typeSelect.value) ? typeSelect.value : (localStorage.getItem("ap1_type_mode") || "mix");
+    initQuestions(typeMode);
+    
+    if (mode === "ap1") {
+        if (ap1FiltersContainer) {
+            const allBtn = ap1FiltersContainer.querySelector('[data-theme="all"]');
+            if (allBtn) {
+                ap1FiltersContainer.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+                allBtn.classList.add("active");
+            }
+        }
+        filterQuestions("all");
+    } else {
+        if (ap2FiltersContainer) {
+            const ap2AllBtn = ap2FiltersContainer.querySelector('[data-theme="ap2-all"]');
+            if (ap2AllBtn) {
+                ap2FiltersContainer.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+                ap2AllBtn.classList.add("active");
+            }
+        }
+        filterQuestions("ap2-all");
+    }
+}
+window.switchPortalMode = switchPortalMode;
+
+function handleHeaderExamButtonClick() {
+    if (currentPortalMode === "ap2") {
+        if (typeof openAp2BridgeModal === "function") {
+            openAp2BridgeModal('files');
+        }
+    } else {
+        if (typeof openExamOverviewModal === "function") {
+            openExamOverviewModal();
+        }
+    }
+}
+window.handleHeaderExamButtonClick = handleHeaderExamButtonClick;

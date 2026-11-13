@@ -17803,4 +17803,536 @@ Hinweis: Das letzte Element (Index 5, Wert 3) wird nicht mehr verarbeitet, da di
 - Erkennen von vorzeitigen Abbrüchen (break / ABBRUCH).`
     }
 
+
+    // ==========================================================================
+    // BADEN-WÜRTTEMBERG AP2 ABSCHLUSSPRÜFUNG FRAGENPOOL (FISI STANDARD)
+    // Basierend auf Originalprüfungen Sommer 2020 bis Winter 2024/2025
+    // Prüfungsbereiche: PB 2 (IT-Systeme 10%), PB 3 (Netzwerke 10%), PB 4 (WiSo 10%)
+    // ==========================================================================
+
+    // --- PB 2: Konzeption und Administration von IT-Systemen (100 Pkt. | 10 %) ---
+    {
+        id: 801,
+        examLevel: "ap2",
+        pruefungsbereich: "PB2",
+        theme: "pb2-systeme",
+        topic: "PB 2: USV-Dimensionierung & Wirk-/Scheinleistung",
+        difficulty: "hard",
+        isHard: true,
+        type: "standard",
+        question: "Ein Rechenzentrums-Rack für ein BaWü-Industrieunternehmen beherbergt vier Server (je 450 W Wirkleistung, Leistungsfaktor cos φ = 0,9), ein SAN-Storage-System (650 W Wirkleistung, cos φ = 0,85) sowie zwei redundante Core-Switche (je 120 W Wirkleistung, cos φ = 0,95). Welche USV-Scheinleistung (in VA) ist mindestens erforderlich, wenn die USV dauerhaft zu maximal 75 % ausgelastet sein darf und eine Zukunftsreserve von 20 % eingeplant werden soll?",
+        options: [
+            "Ca. 2.915 VA",
+            "Ca. 4.880 VA",
+            "Ca. 1.850 VA",
+            "Ca. 7.200 VA"
+        ],
+        answer: 1,
+        explanation: `Berechnung Schritt für Schritt (IHK AP2 Standard):
+1. Scheinleistung jedes Verbrauchers ermitteln (S = P / cos φ):
+   • 4 Server: S_Server = (4 × 450 W) / 0,9 = 1.800 W / 0,9 = 2.000 VA
+   • SAN-Storage: S_SAN = 650 W / 0,85 ≈ 764,7 VA
+   • 2 Switche: S_Switch = (2 × 120 W) / 0,95 = 240 W / 0,95 ≈ 252,6 VA
+2. Gesamtscheinleistung der Last:
+   S_Last = 2.000 VA + 764,7 VA + 252,6 VA ≈ 3.017,3 VA
+3. Berücksichtigung von 20 % Zukunftsreserve:
+   S_Bedarf = 3.017,3 VA × 1,20 ≈ 3.620,8 VA
+4. Maximale Auslastung der USV von 75 % (S_USV × 0,75 = S_Bedarf):
+   S_USV = 3.620,8 VA / 0,75 ≈ 4.827,7 VA -> Die nächstgrößere Standard-Klasse ist ca. 4.880 VA bzw. 5.000 VA.`
+    },
+    {
+        id: 802,
+        examLevel: "ap2",
+        pruefungsbereich: "PB2",
+        theme: "pb2-systeme",
+        topic: "PB 2: Storage RAID 5 / 6 / 10 & URE-Risiko",
+        difficulty: "hard",
+        isHard: true,
+        type: "standard",
+        question: "Ein Administrator plant ein Storage-Array für Virtualisierung mit 8 Enterprise-HDDs à 12 TB. Warum rät der Storage-Hersteller bei dieser Plattenkapazität dringend von RAID 5 ab und fordert zwingend RAID 6 oder RAID 10?",
+        options: [
+            "RAID 5 unterstützt maximal 4 Festplatten in einer RAID-Gruppe.",
+            "Wegen der URE-Wahrscheinlichkeit (Unrecoverable Read Error von typisch 10^14 Bit) führt das Lesen von ca. 70 TB beim tagelangen Rebuild fast unausweichlich zu einem zweiten Lesefehler und damit zum Totalverlust des Arrays.",
+            "RAID 5 kann keine SSD-Caches nutzen und ist deshalb für Virtualisierung unzulässig.",
+            "Bei RAID 5 geht durch die doppelte Parität zu viel Nettospeicherplatz verloren."
+        ],
+        answer: 1,
+        explanation: `💡 Technischer Hintergrund (AP2 Kernwissen):
+Bei Festplattenkapazitäten ab 4–8 TB ist die Datenmenge, die beim Ausfall einer Platte im Rebuild von den restlichen Platten fehlerfrei gelesen werden muss (hier 7 × 12 TB = 84 TB ≈ 6,7 × 10^14 Bits), statistisch größer als die garantierte Fehlerrate von Enterprise-SATA/SAS-Platten (1 URE pro 10^14 bzw. 10^15 Bits). Tritt beim Rebuild eines RAID 5 auch nur ein einziger Sektorlesefehler auf, bricht der Rebuild ab und das gesamte Volume ist korrupt. RAID 6 toleriert zwei gleichzeitige Plattenausfälle und übersteht Lesefehler während des Rebuilds.`
+    },
+    {
+        id: 803,
+        examLevel: "ap2",
+        pruefungsbereich: "PB2",
+        theme: "pb2-systeme",
+        topic: "PB 2: Hypervisor Typ-1 vs Typ-2 & Container",
+        difficulty: "hard",
+        isHard: true,
+        type: "standard",
+        question: "Welche Aussage beschreibt den Unterschied zwischen Typ-1-Hypervisoren (z. B. VMware ESXi, Proxmox VE), Typ-2-Hypervisoren (z. B. VirtualBox) und Linux-Containern (Docker/Podman) technisch exakt?",
+        options: [
+            "Container virtualisieren die CPU-Hardware vollständig, während Typ-1-Hypervisoren nur das Gast-Betriebssystem emulieren.",
+            "Typ-1-Hypervisoren laufen direkt auf der Bare-Metal-Hardware ohne zwischengeschaltetes Host-OS; Container teilen sich den Kernel des Host-Betriebssystems und isolieren Prozesse über Linux-Namespaces und cgroups.",
+            "Typ-2-Hypervisoren bieten eine bessere I/O-Performance als Typ-1-Hypervisoren, weil sie die Gerätetreiber des Host-Betriebssystems direkt nutzen.",
+            "Container benötigen für jeden Dienst eine eigene virtuelle BIOS/UEFI-Firmware und ein eigenes Kernel-Abbild."
+        ],
+        answer: 1,
+        explanation: `Exakter Architekturvergleich:
+1. Typ-1 (Bare Metal): Hypervisor fungiert direkt als OS/Hardware-Abstraktionsschicht -> minimale Latenz, maximale Hardware-Kontrolle.
+2. Typ-2 (Hosted): Hypervisor läuft als normale Anwendungssoftware auf einem Host-OS (Windows, macOS) -> zusätzlicher Overhead für Systemcalls.
+3. Container: Keine Hardware-Virtualisierung! Container sind isolierte Prozesse, die den gemeinsamen Linux-Kernel nutzen. Isolation über Namespaces (pid, net, ipc, mnt, uts, user) und Ressourcenlimitierung über cgroups (Control Groups).`
+    },
+    {
+        id: 804,
+        examLevel: "ap2",
+        pruefungsbereich: "PB2",
+        theme: "pb2-systeme",
+        topic: "PB 2: 3-2-1-1-0 Backup-Strategie & RPO / RTO",
+        difficulty: "hard",
+        isHard: true,
+        type: "open-text",
+        points: 10,
+        question: `🛡️ **IHK AP2 Fachaufgabe: Moderne Datensicherungsstrategie (10 Punkte)**
+
+Im Rahmen eines IT-Sicherheitsaudits soll das Backup-Konzept einer Klinik modernisiert werden.
+
+**Aufgabenstellung:**
+1. Erläutern Sie die moderne **3-2-1-1-0 Backup-Regel** und schlüsseln Sie die Bedeutung jeder einzelnen Ziffer auf.
+2. Definieren und unterscheiden Sie die beiden Kernkennzahlen **RPO (Recovery Point Objective)** und **RTO (Recovery Time Objective)** anhand eines praxisnahen Beispiels.`,
+        solution: `1. Aufschlüsselung der 3-2-1-1-0 Backup-Regel:
+• 3: Mindestens DREI Kopien aller wichtigen Daten vorhalten (1 Produktionsdaten + 2 Backups).
+• 2: Die Sicherungen auf mindestens ZWEI unterschiedlichen Speichermedientypen speichern (z. B. lokales NVMe/SSD-SAN und LTO-Magnetband oder Cloud-Objektspeicher).
+• 1: Mindestens EINE Backup-Kopie an einem externen, räumlich getrennten Standort (Off-Site / Zweitrechenzentrum / Cloud) aufbewahren (Schutz vor Brand, Wasser, Einbruch).
+• 1: Mindestens EINE Kopie unveränderlich (Immutable Storage / WORM-Speicher) oder physisch getrennt (Air-Gapped / Offline-Tape) vorhalten (essenzieller Schutz gegen Ransomware-Verschlüsselung).
+• 0: NULL Fehler bei der regelmäßigen, automatisierten Wiederherstellungsprüfung (Automated Recovery Verification).
+
+2. Definition RPO vs. RTO:
+• RPO (Recovery Point Objective - maximal tolerierbarer Datenverlust):
+  Definiert den maximal akzeptablen Zeitraum zwischen der letzten Datensicherung und dem Katastrophenzeitpunkt, für den Datenverlust hingenommen werden kann.
+  Beispiel: Beträgt das RPO 2 Stunden, müssen mindestens alle 2 Stunden Snapshots/Backups erstellt werden. Bei einem Ausfall gehen maximal die Daten der letzten 2 Stunden verloren.
+• RTO (Recovery Time Objective - maximal tolerierbare Ausfallzeit):
+  Definiert die maximal zulässige Zeitspanne vom Eintritt des Störfalls bis zur vollständigen Wiederherstellung des Normalbetriebs.
+  Beispiel: Beträgt das RTO 4 Stunden, muss das Disaster-Recovery-Konzept sicherstellen, dass die Systeme innerhalb von 4 Stunden wieder einsatzbereit und für Benutzer erreichbar sind.`,
+        explanation: `In Baden-Württemberg AP2-Prüfungen ist der Ransomware-Schutz über 'Immutable Backups' (WORM / Object Lock nach S3-Standard) sowie die exakte Definition von RPO und RTO ein wiederkehrender Prüfungsschwerpunkt.`
+    },
+    {
+        id: 805,
+        examLevel: "ap2",
+        pruefungsbereich: "PB2",
+        theme: "pb2-systeme",
+        topic: "PB 2: SAN Fibre Channel vs iSCSI",
+        difficulty: "hard",
+        isHard: true,
+        type: "standard",
+        question: "Bei der Planung eines Storage Area Networks (SAN) diskutiert das Projektteam Fibre Channel (FC) und iSCSI. Welcher Begriff und welche Technologie gehören originär zu Fibre Channel?",
+        options: [
+            "IQN (iSCSI Qualified Name) und TCP-Port 3260",
+            "WWPN (World Wide Port Name) und Hardware-Zoning auf FC-Switchen",
+            "SMB3 Multichannel und Kerberos-Delegierung",
+            "NFS v4.1 mit RPC-Mount-Dienst"
+        ],
+        answer: 1,
+        explanation: `💡 Fachwissen Fibre Channel:
+• WWPN (World Wide Port Name): Eine eindeutige 64-Bit-Hexadezimaladresse jedes Fibre-Channel-Ports (HBA oder Storage-Controller).
+• Zoning: Sicherheits- und Segmentierungsverfahren auf den Brocade/Cisco FC-Switchen (Fabric), um festzulegen, welche Initiatoren (Server) mit welchen Targets (Storage) kommunizieren dürfen.
+• LUN-Masking: Konfiguration auf dem Storage-System, die einer bestimmten Host-WWPN Zugriff auf eine spezifische Logical Unit Number (LUN) gewährt.`
+    },
+    {
+        id: 806,
+        examLevel: "ap2",
+        pruefungsbereich: "PB2",
+        theme: "pb2-systeme",
+        topic: "PB 2: BSI IT-Grundschutz Schutzbedarfsfeststellung",
+        difficulty: "hard",
+        isHard: true,
+        type: "standard",
+        question: "Nach welchem Verfahren wird gemäß BSI-Standard 200-2 die Schutzbedarfsfeststellung für IT-Systeme und Anwendungen durchgeführt?",
+        options: [
+            "Ausschließlich durch Messung der jährlichen Downtime in Prozent ('Neunen-Verfügbarkeit').",
+            "Indem für die drei Grundwerte Vertraulichkeit, Integrität und Verfügbarkeit die Schadensauswirkungen bei einer Verletzung in die Kategorien 'normal', 'hoch' oder 'sehr hoch' eingestuft werden.",
+            "Durch automatische Scans mit Schwachstellen-Scannern nach CVSS-Score.",
+            "Durch Festlegung der monatlichen Backup-Kapazität in Terabyte."
+        ],
+        answer: 1,
+        explanation: `BSI IT-Grundschutz Methodik (Standard 200-2):
+Die Schutzbedarfsfeststellung bewertet für jedes Zielobjekt (Geschäftsprozesse, Anwendungen, IT-Systeme, Räume) die drei Grundwerte:
+1. Vertraulichkeit (Schutz vor unbefugter Offenlegung)
+2. Integrität (Schutz vor unbemerkter Veränderung/Fälschung)
+3. Verfügbarkeit (Zugriffsberechtigte können Daten zeitgerecht nutzen)
+Die Einstufung erfolgt in 'normal' (Schadensauswirkungen sind begrenzt), 'hoch' (beträchtliche Schäden) und 'sehr hoch' (existenzbedrohend / katastrophale Schäden / Gefahr für Leib und Leben).`
+    },
+    {
+        id: 807,
+        examLevel: "ap2",
+        pruefungsbereich: "PB2",
+        theme: "pb2-systeme",
+        topic: "PB 2: Active Directory Kerberos-Authentifizierung",
+        difficulty: "hard",
+        isHard: true,
+        type: "standard",
+        question: "In welcher Reihenfolge tauscht ein Windows-Client beim Anmeldevorgang an einer Active-Directory-Domäne die Kerberos-Tickets mit dem Domain Controller (KDC) aus?",
+        options: [
+            "1. TGS-REQ -> 2. TGS-REP -> 3. AS-REQ -> 4. AS-REP",
+            "1. AS-REQ (Authentication Service) -> 2. AS-REP (Ticket Granting Ticket TGT) -> 3. TGS-REQ (Ticket Granting Service) -> 4. TGS-REP (Service Ticket)",
+            "1. NTLM Challenge -> 2. NTLM Response -> 3. RADIUS Accept",
+            "1. LDAP Bind -> 2. LDAP Search -> 3. SMB Negotiate"
+        ],
+        answer: 1,
+        explanation: `Ablauf Kerberos v5 im Active Directory:
+1. Client sendet AS-REQ an den KDC (Authentication Service).
+2. KDC authentifiziert den Benutzer und antwortet mit AS-REP, welches das TGT (Ticket Granting Ticket) enthält.
+3. Will der Client auf eine Freigabe/Server zugreifen, sendet er das TGT per TGS-REQ an den KDC.
+4. KDC stellt mit TGS-REP das Service-Ticket für den Zielserver aus.
+5. Client authentifiziert sich mit dem Service-Ticket direkt beim Zielserver (AP-REQ / AP-REP).`
+    },
+
+    // --- PB 3: Analyse und Entwicklung von Netzwerken (100 Pkt. | 10 %) ---
+    {
+        id: 808,
+        examLevel: "ap2",
+        pruefungsbereich: "PB3",
+        theme: "pb3-netze",
+        topic: "PB 3: IPv6 Adresstypen & SLAAC mit EUI-64",
+        difficulty: "hard",
+        isHard: true,
+        type: "standard",
+        question: "Ein Client-PC mit der MAC-Adresse 00:1A:2B:3C:4D:5E generiert seine IPv6 Link-Local-Adresse mittels SLAAC nach dem EUI-64-Verfahren. Welcher Interface-Identifier und welche vollständige Link-Local-Adresse entstehen dabei?",
+        options: [
+            "fe80::001a:2bff:fe3c:4d5e",
+            "fe80::021a:2bff:fe3c:4d5e",
+            "fe80::fffe:001a:2b3c:4d5e",
+            "fc00::021a:2bff:fe3c:4d5e"
+        ],
+        answer: 1,
+        explanation: `Schritt-für-Schritt-Konstruktion nach EUI-64:
+1. Ausgangs-MAC: 00:1A:2B : 3C:4D:5E
+2. In der Mitte wird 'FF:FE' eingefügt: 001A:2BFF:FE3C:4D5E
+3. Das 7. Bit des ersten Bytes (Universal/Local Bit) wird invertiert:
+   • Erstes Byte: 0x00 = 0000 0000 b
+   • 7. Bit invertieren: 0000 0010 b = 0x02
+   • Aus 00 wird 02 -> 021a:2bff:fe3c:4d5e
+4. Voranstellen des Link-Local-Präfix fe80::/64 ergibt:
+   fe80::021a:2bff:fe3c:4d5e (Kompakte IPv6-Schreibweise).`
+    },
+    {
+        id: 809,
+        examLevel: "ap2",
+        pruefungsbereich: "PB3",
+        theme: "pb3-netze",
+        topic: "PB 3: IEEE 802.1Q VLAN Tagging & Header",
+        difficulty: "hard",
+        isHard: true,
+        type: "standard",
+        question: "Wie viele Bytes fügt der IEEE 802.1Q-Standard in einen standardmäßigen Ethernet-II-Frame ein und wie viele Bits stehen für die VLAN-ID (VID) zur Verfügung?",
+        options: [
+            "2 Bytes Header, 8 Bits für VID (maximal 256 VLANs)",
+            "4 Bytes Header, 12 Bits für VID (theoretisch 4096 IDs, nutzbar 1 bis 4094)",
+            "8 Bytes Header, 16 Bits für VID (maximal 65.536 VLANs)",
+            "6 Bytes Header, 24 Bits für VID"
+        ],
+        answer: 1,
+        explanation: `💡 802.1Q Frame-Aufbau (4 Bytes = 32 Bits):
+• TPID (Tag Protocol Identifier): 16 Bits, fester Wert 0x8100 kennzeichnet den 802.1Q-Frame.
+• TCI (Tag Control Information): 16 Bits, unterteilt in:
+  - PCP (Priority Code Point): 3 Bits für Quality of Service (IEEE 802.1p, 8 Prioritätsstufen 0–7).
+  - DEI (Drop Eligible Indicator): 1 Bit (früher CFI) für Paketverwerfung bei Überlast.
+  - VID (VLAN Identifier): 12 Bits (2^12 = 4096 Werte: 0 und 4095 reserviert, nutzbar 1 bis 4094).`
+    },
+    {
+        id: 810,
+        examLevel: "ap2",
+        pruefungsbereich: "PB3",
+        theme: "pb3-netze",
+        topic: "PB 3: OSPF Metrik-Berechnung & Area-Konzept",
+        difficulty: "hard",
+        isHard: true,
+        type: "standard",
+        question: "Ein Cisco-Router nutzt OSPFv2 mit der Standard-Referenzbandbreite von 10^8 bit/s (100 Mbit/s). Welche OSPF-Cost-Werte berechnet der Router für eine 10 Mbit/s-Ethernet-Strecke und eine 1000 Mbit/s (Gigabit)-Strecke bei unveränderter Referenzbandbreite?",
+        options: [
+            "10 Mbit/s: Cost 10 | Gigabit: Cost 1",
+            "10 Mbit/s: Cost 1 | Gigabit: Cost 100",
+            "10 Mbit/s: Cost 100 | Gigabit: Cost 0,1",
+            "10 Mbit/s: Cost 5 | Gigabit: Cost 5"
+        ],
+        answer: 0,
+        explanation: `OSPF Kostenformel: Cost = Referenzbandbreite / Schnittstellenbandbreite
+• 10 Mbit/s: Cost = 100.000.000 bit/s / 10.000.000 bit/s = 10
+• Gigabit (1.000 Mbit/s): Cost = 100.000.000 bit/s / 1.000.000.000 bit/s = 0,1 -> Da OSPF nur ganzzahlige Werte >= 1 unterstützt, wird auf Cost 1 aufgerundet!
+Merke: Um moderne Netze mit 1 Gbit/s, 10 Gbit/s und 40 Gbit/s korrekt zu differenzieren, muss die Auto-Cost Reference-Bandwidth in der Praxis auf z. B. 100000 (100 Gbit/s) angehoben werden!`
+    },
+    {
+        id: 811,
+        examLevel: "ap2",
+        pruefungsbereich: "PB3",
+        theme: "pb3-netze",
+        topic: "PB 3: Firewall-Konzepte & DMZ-Architektur",
+        difficulty: "hard",
+        isHard: true,
+        type: "open-text",
+        points: 10,
+        question: `🌐 **IHK AP2 Fachaufgabe: DMZ-Konzeption & Firewall-Sicherheitsarchitektur (10 Punkte)**
+
+Ein mittelständisches Unternehmen in Stuttgart betreibt einen öffentlich erreichbaren Webserver (HTTPS) und einen Mailserver (SMTP/IMAP). Die interne Datenbank mit Kundendaten sowie die Arbeitsplatz-Clients befinden sich im LAN.
+
+**Aufgabenstellung:**
+1. Erläutern Sie das Sicherheitsprinzip einer **dreibeinigen Firewall (3-Homed Firewall)** mit Demilitarisierter Zone (DMZ).
+2. Definieren Sie die zulässigen und verbotenen Kommunikationsflüsse zwischen den Zonen **Internet (WAN)**, **DMZ** und **internem Netzwerk (LAN)**.
+3. Begründen Sie, warum der Webserver keinesfalls direkt im internen LAN betrieben werden darf.`,
+        solution: `1. Sicherheitsprinzip einer 3-Bein-Firewall:
+Eine zentrale Firewall verfügt über mindestens drei getrennte Schnittstellen bzw. VLAN-Zonen:
+• Interface 1: WAN / Internet (untrusted - externes, unsicheres Netz).
+• Interface 2: DMZ (semi-trusted - isolierte Pufferzone für öffentlich exponierte Dienste).
+• Interface 3: LAN (trusted - geschütztes internes Firmennetzwerk).
+Die DMZ trennt das interne Netz physisch/logisch vom Internet, sodass öffentlich erreichbare Server keinen direkten Zugriff auf schützenswerte interne Ressourcen haben.
+
+2. Zulässige und verbotene Kommunikationsflüsse (Firewall-Ruleset):
+• WAN -> DMZ: ERLAUBT, aber strikt auf die benötigten Ports beschränkt (z. B. Port 443 TCP für HTTPS auf Webserver, Port 25 TCP für SMTP auf Mailserver).
+• WAN -> LAN: STRIKT VERBOTEN (kein direkter Zugriff aus dem Internet auf interne Clients/Server).
+• LAN -> WAN: ERLAUBT (über NAT/PAT für Web-Browsing der Mitarbeiter).
+• LAN -> DMZ: ERLAUBT für Administrationszwecke (z. B. SSH/RDP über dedizierte Admin-Workstations).
+• DMZ -> LAN: GRUNDSÄTZLICH VERBOTEN! Sollte ein Server in der DMZ (z. B. der Webserver) kompromittiert werden, kann der Angreifer nicht in das interne LAN vordringen. Ausnahme: Streng reglementierte Pull-/Push-Verbindungen auf definierte Datenbank-Ports (z. B. TCP 3306) mit strikter Authentifizierung.
+• DMZ -> WAN: ERLAUBT nur für Updates oder z. B. Mail-Relay (SMTP Port 25).
+
+3. Begründung:
+Wird ein Webserver direkt im internen LAN betrieben und weist eine Schwachstelle auf (z. B. Remote Code Execution durch fehlerhafte Web-Software oder Zero-Day-Exploit), befindet sich der Angreifer sofort im vertrauenswürdigen Netz. Er kann ungehindert Active-Directory-Domänencontroller scannen, Passwörter abfangen und Malware/Ransomware lateral auf alle Firmenrechner verteilen.`,
+        explanation: `Das 3-Zonen-Modell (WAN - DMZ - LAN) ist der fundamentale Standard im BaWü AP2 Prüfungsbereich 3.`
+    },
+    {
+        id: 812,
+        examLevel: "ap2",
+        pruefungsbereich: "PB3",
+        theme: "pb3-netze",
+        topic: "PB 3: Wi-Fi 6 (802.11ax) Technologien",
+        difficulty: "hard",
+        isHard: true,
+        type: "standard",
+        question: "Welche Kerntechnologie von Wi-Fi 6 (IEEE 802.11ax) ermöglicht es, einen WLAN-Kanal in mehrere kleinere Frequenzblöcke (Resource Units, RUs) aufzuteilen und so Daten mehrerer Endgeräte simultan in einem einzigen Übertragungszyklus zu transportieren?",
+        options: [
+            "OFDMA (Orthogonal Frequency Division Multiple Access)",
+            "CSMA/CA (Carrier Sense Multiple Access with Collision Avoidance)",
+            "Dynamic Frequency Selection (DFS)",
+            "WPA3 Transition Mode"
+        ],
+        answer: 0,
+        explanation: `💡 Wi-Fi 6 Technologien im Überblick:
+• OFDMA: Teilt einen 20-, 40- oder 80-MHz-Kanal in bis zu hunderte Subcarrier auf, die zu Resource Units (RUs) zusammengefasst werden. Verschiedene Clients können gleichzeitig im Up- und Downlink senden/empfangen -> minimiert Latenz und Wartezeiten bei vielen Clients.
+• MU-MIMO: Erlaubt das parallele Senden räumlicher Datenströme über mehrere Antennen (bis zu 8x8).
+• Target Wake Time (TWT): Mobil- und IoT-Geräte vereinbaren feste Aufwachzeiten zum Senden -> spart drastisch Akkuleistung.
+• BSS Coloring: Markiert Funkzellen farblich, um Gleichkanalinterferenzen zu ignorieren.`
+    },
+    {
+        id: 813,
+        examLevel: "ap2",
+        pruefungsbereich: "PB3",
+        theme: "pb3-netze",
+        topic: "PB 3: First Hop Redundancy (VRRP / HSRP)",
+        difficulty: "hard",
+        isHard: true,
+        type: "standard",
+        question: "Zwei Core-Router sollen als redundantes Standard-Gateway für Clients nach dem offenen Standard VRRP (Virtual Router Redundancy Protocol, RFC 5798) konfiguriert werden. Welche Aussage zur virtuellen MAC-Adresse und zum Verhalten bei Routerausfall trifft zu?",
+        options: [
+            "VRRP nutzt keine virtuelle MAC, die Clients müssen per DHCP eine zweite IP erhalten.",
+            "Die virtuelle MAC hat das feste IANA-Format 00-00-5E-00-01-{VRID}; fällt der Master-Router aus, übernimmt der Backup-Router mit der höheren Priorität nach Ablauf des Advertisement-Timers nahtlos die virtuelle IP und MAC ohne ARP-Änderung der Clients.",
+            "Beim Ausfall müssen alle Switche neu gebootet werden, um die Spanning-Tree-Topologie zurückzusetzen.",
+            "VRRP unterstützt ausschließlich Cisco-Hardware und funktioniert nur über serielle Leitungen."
+        ],
+        answer: 1,
+        explanation: `Funktionsweise VRRP (IHK AP2 Standard):
+1. Ein Master und ein/mehrere Backup-Router teilen sich eine virtuelle IP-Adresse (VIP).
+2. Der Master sendet in regelmäßigen Intervallen (Standard: 1 Sekunde) VRRP-Advertisements (Multicast 224.0.0.18).
+3. Die virtuelle MAC-Adresse lautet 00:00:5E:00:01:[VRID in Hex] (für IPv4).
+4. Clients tragen die VIP als Default Gateway ein.
+5. Fällt der Master aus, bemerkt der Backup-Router das Ausbleiben der Advertisements und übernimmt als neuer Master. Dank Gratuitous ARP aktualisieren die Switche ihre MAC-Tabellen sofort.`
+    },
+    {
+        id: 814,
+        examLevel: "ap2",
+        pruefungsbereich: "PB3",
+        theme: "pb3-netze",
+        topic: "PB 3: Wireshark TCP 3-Wege-Handshake Trace-Analyse",
+        difficulty: "hard",
+        isHard: true,
+        type: "standard",
+        question: "In einem Wireshark-Trace analysierst du den Verbindungsaufbau zu einem Webserver. Paket 1 hat die TCP-Flags [SYN] mit Seq=1000. Paket 2 vom Server hat [SYN, ACK] mit Seq=5000 und Ack=1001. Welche Werte für Sequence-Number (Seq) und Acknowledgment-Number (Ack) muss das abschließende Bestätigungspaket 3 des Clients enthalten?",
+        options: [
+            "Seq = 1000, Ack = 5000",
+            "Seq = 1001, Ack = 5001",
+            "Seq = 1002, Ack = 5002",
+            "Seq = 5001, Ack = 1001"
+        ],
+        answer: 1,
+        explanation: `💡 TCP Handshake Sequenznummern-Logik:
+• Paket 1 (Client -> Server): SYN, Seq = 1000. Das SYN-Flag konsumiert genau 1 Sequenznummer.
+• Paket 2 (Server -> Client): SYN-ACK, Seq = 5000, Ack = 1001 (bestätigt das SYN des Clients mit 1000 + 1).
+• Paket 3 (Client -> Server): ACK, Seq = 1001 (nächste eigene Sequenznummer), Ack = 5001 (bestätigt das SYN des Servers mit 5000 + 1).`
+    },
+
+    // --- PB 4: Wirtschafts- und Sozialkunde (100 Pkt. | 10 %) ---
+    {
+        id: 815,
+        examLevel: "ap2",
+        pruefungsbereich: "PB4",
+        theme: "pb4-wiso",
+        topic: "PB 4: Kündigungsschutzgesetz (KSchG) & Klagefrist",
+        difficulty: "hard",
+        isHard: true,
+        type: "standard",
+        question: "Ein IT-Systemintegrator arbeitet seit 3 Jahren in einem Systemhaus mit 45 Vollzeitbeschäftigten. Ihm wird am 02. Mai die ordentliche Kündigung schriftlich übergeben. Welche Klagefrist vor dem Arbeitsgericht muss er nach § 4 KSchG zwingend einhalten, wenn er die Kündigung für sozial ungerechtfertigt hält?",
+        options: [
+            "Innerhalb von 2 Wochen ab Zugang der Kündigung.",
+            "Innerhalb von 3 Wochen nach Zugang der schriftlichen Kündigung.",
+            "Innerhalb von 6 Wochen zum Monatsende.",
+            "Bis zum Ende der gesetzlichen Kündigungsfrist."
+        ],
+        answer: 1,
+        explanation: `§ 4 Satz 1 KSchG (Kündigungsschutzklage):
+Will ein Arbeitnehmer geltend machen, dass eine Kündigung sozial ungerechtfertigt oder aus anderen Gründen rechtsunwirksam ist, so muss er innerhalb von DREI WOCHEN nach Zugang der schriftlichen Kündigung Klage beim Arbeitsgericht auf Feststellung erheben, dass das Arbeitsverhältnis durch die Kündigung nicht aufgelöst ist.
+Wird diese Frist versäumt, gilt die Kündigung nach § 7 KSchG als von Anfang an rechtswirksam!`
+    },
+    {
+        id: 816,
+        examLevel: "ap2",
+        pruefungsbereich: "PB4",
+        theme: "pb4-wiso",
+        topic: "PB 4: Betriebsrat Mitbestimmung § 87 BetrVG",
+        difficulty: "hard",
+        isHard: true,
+        type: "standard",
+        question: "Die Geschäftsführung möchte eine zentrale Software einführen, die minutengenau protokolliert, wann sich Mitarbeiter an ihren Clients anmelden, welche Webseiten sie aufrufen und wie viele Tastenanschläge pro Stunde getätigt werden. Welche Rechte hat der Betriebsrat nach dem Betriebsverfassungsgesetz (BetrVG)?",
+        options: [
+            "Der Betriebsrat hat lediglich ein Informationsrecht nach § 80 BetrVG.",
+            "Der Betriebsrat hat ein erzwingbares Mitbestimmungsrecht nach § 87 Abs. 1 Nr. 6 BetrVG (Einführung und Anwendung von technischen Einrichtungen zur Überwachung des Verhaltens oder der Leistung der Arbeitnehmer). Ohne Betriebsvereinbarung ist die Einführung unzulässig.",
+            "Der Betriebsrat kann der Einführung nur widersprechen, wenn zuvor Mitarbeiter gekündigt wurden.",
+            "Der Betriebsrat hat bei IT-Systemen keinerlei Mitbestimmungsrecht, da dies unter die unternehmerische Freiheit fällt."
+        ],
+        answer: 1,
+        explanation: `§ 87 Abs. 1 Nr. 6 BetrVG (Echte Mitbestimmung):
+Der Betriebsrat hat ein erzwingbares Mitbestimmungsrecht bei der 'Einführung und Anwendung von technischen Einrichtungen, die dazu bestimmt sind, das Verhalten oder die Leistung der Arbeitnehmer zu überwachen'.
+Hierzu zählen Zeiterfassungssysteme, Videoüberwachung, Internet-Proxy-Logs, Ticket-Tracking und Keylogger. Kommt keine Einigung zwischen Arbeitgeber und Betriebsrat zustande, entscheidet die Einigungsstelle.`
+    },
+    {
+        id: 817,
+        examLevel: "ap2",
+        pruefungsbereich: "PB4",
+        theme: "pb4-wiso",
+        topic: "PB 4: Sachmängelhaftung nach BGB (§ 437 / § 439 BGB)",
+        difficulty: "hard",
+        isHard: true,
+        type: "open-text",
+        points: 10,
+        question: `⚖️ **IHK AP2 Fachaufgabe: Sachmängelrechte beim Kaufvertrag (10 Punkte)**
+
+Ein Systemhaus liefert einem gewerblichen Kunden 20 Server. Nach der Inbetriebnahme stellt der Kunde fest, dass in allen Servern statt der vertraglich vereinbarten 64 GB RAM nur 16 GB RAM verbaut sind (Sachmangel nach § 434 BGB).
+
+**Aufgabenstellung:**
+1. Welches Recht steht dem Käufer auf der **1. Stufe der Mängelansprüche (§ 439 BGB)** vorrangig zu und wer hat dabei das Wahlrecht?
+2. Unter welchen gesetzlichen Voraussetzungen darf der Käufer auf die **2. Stufe (Sekundärrechte)** übergehen und welche Rechte stehen ihm dann zur Wahl?
+3. Wie lang ist die regelmäßige Verjährungsfrist für Sachmängelansprüche nach § 438 BGB?`,
+        solution: `1. Vorrang der Nacherfüllung (1. Stufe - § 439 BGB):
+• Der Käufer hat primär Anspruch auf Nacherfüllung.
+• Wahlrecht des Käufers: Der Käufer kann nach seiner Wahl entweder die Nachbesserung (Mangelbeseitigung / Reparatur, hier: Nachrüsten der fehlenden 48 GB RAM je Server) oder die Nachlieferung (Lieferung einer mangelfreien neuen Sache) verlangen.
+• Kosten: Der Verkäufer hat alle zum Zwecke der Nacherfüllung erforderlichen Aufwendungen (Transport-, Wege-, Arbeits- und Materialkosten) zu tragen.
+
+2. Übergang auf die 2. Stufe (Sekundärrechte):
+• Voraussetzungen: Der Käufer muss dem Verkäufer eine angemessene Frist zur Nacherfüllung gesetzt haben und diese Frist ist erfolglos abgelaufen, oder der Verkäufer verweigert die Nacherfüllung ernsthaft und endgültig, oder die Nacherfüllung ist fehlgeschlagen (eine Nachbesserung gilt in der Regel nach dem zweiten erfolglosen Versuch als fehlgeschlagen).
+• Sekundärrechte des Käufers (zur Wahl):
+  - Rücktritt vom Kaufvertrag (§§ 440, 323 BGB) -> Rückabwicklung (Ware zurück, Geld zurück).
+  - ODER Minderung des Kaufpreises (§ 441 BGB) -> Ware behalten und anteiligen Kaufpreisnachlass fordern.
+  - Sowie zusätzlich oder alternativ: Schadensersatz statt der Leistung (§ 280 BGB) bzw. Ersatz vergeblicher Aufwendungen (§ 284 BGB), sofern der Verkäufer den Mangel zu vertreten hat.
+
+3. Verjährungsfrist (§ 438 Abs. 1 Nr. 3 BGB):
+• Die regelmäßige Verjährungsfrist für Mängelansprüche bei beweglichen Sachen beträgt ZWEI JAHRE ab Ablieferung der Kaufsache.`,
+        explanation: `Die Stufenfolge des deutschen Kaufrechts (Vorrang der Nacherfüllung vor Rücktritt/Minderung) ist ein unverzichtbarer Prüfungsbaustein in AP2 WiSo.`
+    },
+    {
+        id: 818,
+        examLevel: "ap2",
+        pruefungsbereich: "PB4",
+        theme: "pb4-wiso",
+        topic: "PB 4: Gesellschaftsformen & Haftung (KG vs GmbH)",
+        difficulty: "hard",
+        isHard: true,
+        type: "standard",
+        question: "Wie unterscheidet sich die Haftung der Gesellschafter einer Kommanditgesellschaft (KG) von den Gesellschaftern einer Gesellschaft mit beschränkter Haftung (GmbH)?",
+        options: [
+            "In einer KG haften alle Gesellschafter nur mit ihrer eingetragenen Einlage, bei der GmbH haften die Gesellschafter persönlich mit ihrem Privatvermögen.",
+            "In einer KG haftet der Komplementär unbeschränkt, persönlich und solidarisch mit seinem gesamten Privat- und Geschäftsvermögen, während der Kommanditist nur bis zur Höhe seiner im Handelsregister eingetragenen Einlage haftet; bei der GmbH haftet für Verbindlichkeiten der Gesellschaft grundsätzlich nur das Gesellschaftsvermögen.",
+            "Bei beiden Gesellschaftsformen haften die Geschäftsführer mit ihrem gesamten Privatvermögen für Steuerschulden und Lieferantenforderungen.",
+            "Eine GmbH haftet mit mindestens 50.000 € Privatvermögen jedes Gesellschafters."
+        ],
+        answer: 1,
+        explanation: `💡 Rechtsformen und Haftung (IHK WiSo):
+• KG (Personengesellschaft):
+  - Komplementär (Vollhafter): Haftet unmittelbar, unbeschränkt und solidarisch mit Betriebs- und Privatvermögen. Führt die Geschäfte.
+  - Kommanditist (Teilhafter): Haftung ist auf die im Handelsregister eingetragene Einlage beschränkt. Grundsätzlich von der Geschäftsführung ausgeschlossen.
+• GmbH (Kapitalgesellschaft):
+  - Juristische Person mit eigener Rechtspersönlichkeit.
+  - Mindeststammkapital 25.000 €.
+  - Für Verbindlichkeiten der GmbH haftet Gläubigern gegenüber ausschließlich das Gesellschaftsvermögen (§ 13 Abs. 2 GmbHG).`
+    },
+    {
+        id: 819,
+        examLevel: "ap2",
+        pruefungsbereich: "PB4",
+        theme: "pb4-wiso",
+        topic: "PB 4: Rügepflicht beim Handelskauf (§ 377 HGB)",
+        difficulty: "hard",
+        isHard: true,
+        type: "standard",
+        question: "Ein IT-Händler liefert einem Systemhaus (beide sind Kaufleute im Sinne des HGB, beidseitiger Handelskauf B2B) 50 Router. Der Lagerist stellt die Paletten ungeprüft ins Regal. Nach 4 Wochen wird ein Router ausgepackt und ein Transportschaden (zerbrochenes Gehäuse) festgestellt. Welche Rechtsfolge tritt nach § 377 HGB ein?",
+        options: [
+            "Der Käufer kann den Router innerhalb von 2 Jahren reklamieren, da die BGB-Gewährleistung greift.",
+            "Die Ware gilt als genehmigt, da bei einem beidseitigen Handelskauf offene Mängel unverzüglich nach der Ablieferung untersucht und gerügt werden müssen. Der Käufer verliert seine Mängelansprüche bezüglich dieses Mangels.",
+            "Der Spediteur haftet automatisch für 6 Monate.",
+            "Der Verkäufer muss den Router kostenfrei austauschen, da ein Transportschaden vorliegt."
+        ],
+        answer: 1,
+        explanation: `§ 377 HGB (Untersuchungs- und Rügepflicht beim beidseitigen Handelskauf):
+Ist der Kauf für beide Teile ein Handelsgeschäft (B2B), so hat der Käufer die Ware unverzüglich (ohne schuldhaftes Zögern, i. d. R. innerhalb von 1–2 Werktagen) nach der Ablieferung zu untersuchen und, wenn sich ein Mangel zeigt, dem Verkäufer unverzüglich Anzeige zu machen.
+Unterlässt der Käufer die Anzeige, so gilt die Ware als genehmigt, es sei denn, dass es sich um einen Mangel handelt, der bei der Untersuchung nicht erkennbar war (versteckter Mangel).`
+    },
+
+    // --- PB 3: Software, SQL & Automatisierung (100 Pkt. | 10 %) ---
+    {
+        id: 820,
+        examLevel: "ap2",
+        pruefungsbereich: "PB3-ALGO",
+        theme: "pb3-algo",
+        topic: "PB 3: Relationale SQL-Abfrage mit Aggregation",
+        difficulty: "hard",
+        isHard: true,
+        type: "open-text",
+        points: 10,
+        question: `💻 **IHK AP2 Fachaufgabe: SQL-Abfrage über 3 relationale Tabellen (10 Punkte)**
+
+Gegeben ist folgende Datenbankstruktur eines IT-Serviceunternehmens:
+• \`Kunde\` (\`KundenID\` [PK], \`Name\`, \`Ort\`)
+• \`Auftrag\` (\`AuftragsID\` [PK], \`KundenID\` [FK], \`Auftragsdatum\`)
+• \`Position\` (\`PositionsID\` [PK], \`AuftragsID\` [FK], \`Artikelbezeichnung\`, \`Menge\`, \`Einzelpreis\`)
+
+**Aufgabenstellung:**
+Formulieren Sie eine syntaktisch einwandfreie SQL-Abfrage (Standard SQL), die den **Kundennamen** (\`Kunde.Name\`) sowie den **Gesamtumsatz** aller getätigten Aufträge für jeden Kunden ausgibt. Es sollen nur Kunden berücksichtigt werden, deren Gesamtumsatz **über 10.000 €** liegt. Das Ergebnis soll absteigend nach dem Umsatz sortiert werden.`,
+        solution: `SELECT 
+    k.Name AS Kundenname,
+    SUM(p.Menge * p.Einzelpreis) AS Gesamtumsatz
+FROM 
+    Kunde k
+INNER JOIN 
+    Auftrag a ON k.KundenID = a.KundenID
+INNER JOIN 
+    Position p ON a.AuftragsID = p.AuftragsID
+GROUP BY 
+    k.KundenID, k.Name
+HAVING 
+    SUM(p.Menge * p.Einzelpreis) > 10000
+ORDER BY 
+    Gesamtumsatz DESC;`,
+        explanation: `Punkteverteilung IHK AP2:
+• 2 Punkte für korrekte SELECT-Klausel mit Alias und Aggregatfunktion SUM(Menge * Einzelpreis).
+• 3 Punkte für zwei korrekte INNER JOINs über Primär-/Fremdschlüssel.
+• 2 Punkte für GROUP BY über Kunde (KundenID und Name).
+• 2 Punkte für HAVING-Klausel (Aggregatfilter > 10000; WHERE wäre hier syntaktisch falsch!).
+• 1 Punkt für ORDER BY DESC.`
+    }
+
 ];
