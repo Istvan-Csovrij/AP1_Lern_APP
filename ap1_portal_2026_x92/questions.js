@@ -18434,4 +18434,274 @@ Ein JWT besteht aus drei Teilen, getrennt durch Punkte: [Header].[Payload].[Sign
 3. Signature: Wird mit einem geheimen Schlüssel serverseitig berechnet: HMACSHA256(base64Url(Header) + '.' + base64Url(Payload), secret). Schützt vor Manipulation (Integrität).`
     }
 
+
+    // --- Zusätzliche FIAE-Aufgaben für Software-Testing, Diagramme & BaWü Originale ---
+    {
+        id: 823,
+        examLevel: "ap2",
+        pruefungsbereich: "PB3-FIAE",
+        theme: "fiae-testing",
+        topic: "PB 3: Testfallentwurf nach Äquivalenzklassen & Grenzwertanalyse",
+        difficulty: "hard",
+        isHard: true,
+        type: "open-text",
+        points: 10,
+        question: `🧪 **IHK AP2 Fachaufgabe: Testfallentwurf nach Äquivalenzklassen & Grenzwertanalyse (10 Punkte)**
+
+Für eine Benutzerregistrierung in einer Web-Applikation soll das Passwortfeld getestet werden. Die Spezifikation lautet:
+• Das Passwort muss mindestens 8 und darf maximal 20 Zeichen lang sein.
+• Es muss mindestens einen Großbuchstaben, einen Kleinbuchstaben und eine Ziffer enthalten.
+
+**Aufgabenstellung:**
+1. Definieren Sie mindestens zwei **gültige Äquivalenzklassen (GÄK)** und mindestens drei **ungültige Äquivalenzklassen (UÄK)**.
+2. Bestimmen Sie anhand der **Grenzwertanalyse** die konkreten Testwerte für die Passwortlänge an der unteren Grenze (8 Zeichen) und an der oberen Grenze (20 Zeichen).`,
+        solution: `1. Äquivalenzklassen:
+• Gültige Äquivalenzklassen (GÄK):
+  - GÄK 1: Passwort mit 8 bis 20 Zeichen, enthaltend Groß-, Kleinbuchstabe und Ziffer (z. B. 'Passwort1').
+  - GÄK 2: Passwort mit exakt 20 Zeichen, enthaltend Groß-, Kleinbuchstabe, Ziffer und Sonderzeichen (z. B. 'SuperGeheim12345678A').
+• Ungültige Äquivalenzklassen (UÄK):
+  - UÄK 1: Passwort zu kurz (< 8 Zeichen, z. B. 'Pass1').
+  - UÄK 2: Passwort zu lang (> 20 Zeichen, z. B. 'SehrLangesSicheresPasswort2026!').
+  - UÄK 3: Passwort ohne Großbuchstaben (z. B. 'passwort123').
+  - UÄK 4: Passwort ohne Ziffern (z. B. 'PasswortOhneZahl').
+
+2. Grenzwertanalyse bezüglich der Passwortlänge:
+• Untere Grenze (8 Zeichen):
+  - 7 Zeichen (ungültig, direkt unter Grenze, z. B. 'Abc1234')
+  - 8 Zeichen (gültig, exakter Grenzwert, z. B. 'Abcd1234')
+  - 9 Zeichen (gültig, direkt über Grenze, z. B. 'Abcde1234')
+• Obere Grenze (20 Zeichen):
+  - 19 Zeichen (gültig, direkt unter Grenze)
+  - 20 Zeichen (gültig, exakter Grenzwert)
+  - 21 Zeichen (ungültig, direkt über Grenze)`,
+        explanation: `Punkteverteilung:
+• 4 Punkte für die korrekte Definition von mindestens 2 GÄK und 3 UÄK.
+• 6 Punkte für die exakten Grenzwert-Paare an den Grenzen 8 und 20 Zeichen.`
+    },
+    {
+        id: 824,
+        examLevel: "ap2",
+        pruefungsbereich: "PB3-FIAE",
+        theme: "fiae-testing",
+        topic: "PB 3: White-Box-Testing & Zyklomatische Komplexität",
+        difficulty: "hard",
+        isHard: true,
+        type: "open-text",
+        points: 10,
+        question: `🧪 **IHK AP2 Fachaufgabe: Kontrollflussgraph & Zweigüberdeckung C1 (10 Punkte)**
+
+Gegeben ist folgender Programmcode zur Bestimmung von Versandkosten:
+
+\`\`\`plaintext
+01: IF (bestellwert >= 100) THEN
+02:     versandkosten = 0;
+03: ELSE
+04:     IF (istExpress == true) THEN
+05:         versandkosten = 15;
+06:     ELSE
+07:         versandkosten = 5;
+08:     ENDIF
+09: ENDIF
+10: RETURN versandkosten;
+\`\`\`
+
+**Aufgabenstellung:**
+1. Ermitteln Sie die **zyklomatische Komplexität V(G)** nach Thomas McCabe anhand der Formel \\( V(G) = e - n + 2p \\) bzw. \\( V(G) = d + 1 \\) (wobei d die Anzahl der binären Verzweigungsknoten ist).
+2. Geben Sie die minimale Anzahl von Testfällen an, die für eine **100 %ige Zweigüberdeckung (C1)** erforderlich sind, und formulieren Sie diese Testfälle (Eingaben und erwartete Ausgaben).`,
+        solution: `1. Zyklomatische Komplexität nach McCabe:
+• Anzahl der Verzweigungsknoten (Decisions): d = 2 (Zeile 01 und Zeile 04).
+• Formel V(G) = d + 1 = 2 + 1 = 3.
+Die zyklomatische Komplexität beträgt 3. Dies ist zugleich die Obergrenze für linear unabhängige Basispfade.
+
+2. Testfälle für 100 % Zweigüberdeckung (C1):
+Für C1 müssen alle Verzweigungskanten (beide IF-Zweige true und false) mindestens einmal durchlaufen werden. Hierfür sind exakt 3 Testfälle ausreichend:
+
+• Testfall 1 (Zeile 01 = true):
+  - Eingabe: bestellwert = 120, istExpress = egal
+  - Durchlaufener Pfad: 01 ➔ 02 ➔ 10
+  - Erwartetes Ergebnis: versandkosten = 0 €
+
+• Testfall 2 (Zeile 01 = false, Zeile 04 = true):
+  - Eingabe: bestellwert = 50, istExpress = true
+  - Durchlaufener Pfad: 01 ➔ 03 ➔ 04 ➔ 05 ➔ 08 ➔ 09 ➔ 10
+  - Erwartetes Ergebnis: versandkosten = 15 €
+
+• Testfall 3 (Zeile 01 = false, Zeile 04 = false):
+  - Eingabe: bestellwert = 50, istExpress = false
+  - Durchlaufener Pfad: 01 ➔ 03 ➔ 04 ➔ 06 ➔ 07 ➔ 08 ➔ 09 ➔ 10
+  - Erwartetes Ergebnis: versandkosten = 5 €`,
+        explanation: `Die Berechnung der zyklomatischen Komplexität und der Entwurf minimaler Testsuiten für C1 ist ein Standard in BaWü FIAE AP2.`
+    },
+    {
+        id: 825,
+        examLevel: "ap2",
+        pruefungsbereich: "PB2-FIAE",
+        theme: "fiae-diagrams",
+        topic: "PB 2: UML-Klassendiagramm Entwurf Fuhrpark",
+        difficulty: "hard",
+        isHard: true,
+        type: "open-text",
+        points: 10,
+        question: `📐 **IHK AP2 Fachaufgabe: UML-Klassendiagramm aus Anforderung entwerfen (10 Punkte)**
+
+Für eine Spedition soll ein objektorientiertes Klassendiagramm entworfen werden:
+• Ein 'Fahrzeug' besitzt die Attribute 'kennzeichen: String' (private) und 'kilometerstand: int' (private) sowie die abstrakte Methode '+ berechneMaut(km: double): double'.
+• 'Lkw' und 'Pkw' erben von 'Fahrzeug'. Ein 'Lkw' hat zusätzlich das Attribut 'ladekapazitaet: double' und überschreibt die Mautberechnung.
+• Ein 'Fahrzeug' kann beliebig viele 'Wartungstermine' haben (0..*), ein 'Wartungstermin' gehört zu genau einem 'Fahrzeug' (1).
+• Wird ein Fahrzeug ausgemustert, bleiben die Wartungstermine als Nachweis für das Finanzamt eigenständig im Archiv erhalten.
+
+**Aufgabenstellung:**
+1. Beschreiben Sie die Klassenstruktur mit Sichtbarkeiten, Generalisierung/Vererbung und Beziehungen.
+2. Begründen Sie, warum zwischen Fahrzeug und Wartungstermin eine Aggregation und keine Komposition vorliegt.`,
+        solution: `1. Klassenstruktur:
+
+• Abstrakte Basisklasse: 'Fahrzeug'
+  - Attribute:
+    - - kennzeichen: String
+    - - kilometerstand: int
+  - Methoden:
+    - + abstract berechneMaut(km: double): double
+
+• Unterklassen (Generalisierung / Vererbung mit Dreieckspfeil auf Fahrzeug):
+  - 'Pkw':
+    - + berechneMaut(km: double): double (überschrieben)
+  - 'Lkw':
+    - - ladekapazitaet: double
+    - + berechneMaut(km: double): double (überschrieben)
+
+• Klasse 'Wartungstermin':
+  - - terminId: String
+  - - datum: Date
+  - - kosten: double
+
+• Beziehung Fahrzeug ➔ Wartungstermin:
+  - Beziehungsart: Aggregation (leere weiße Raute an Fahrzeug)
+  - Multiplizitäten: Fahrzeug [1] ➔ Wartungstermin [0..*]
+
+2. Begründung für Aggregation statt Komposition:
+Da die Wartungstermine laut Anforderung auch nach der Ausmusterung/Löschung des Fahrzeugs zu steuerlichen Dokumentationszwecken im Archiv erhalten bleiben müssen, besteht KEINE Existenzabhängigkeit (Lifecycle-Bound). Bei einer Komposition würden die Termine mit dem Fahrzeug vernichtet werden.`,
+        explanation: `Punkteverteilung:
+• 4 Punkte für korrekte Attribute, Methoden und Sichtbarkeiten (+, -)
+• 3 Punkte für Vererbungshierarchie und abstrakte Methode
+• 3 Punkte für Multiplizitäten und Begründung der Aggregation.`
+    },
+    {
+        id: 826,
+        examLevel: "ap2",
+        pruefungsbereich: "PB2-FIAE",
+        theme: "fiae-diagrams",
+        topic: "PB 2: Relationales Datenmodell & n:m-Beziehung",
+        difficulty: "hard",
+        isHard: true,
+        type: "open-text",
+        points: 10,
+        question: `📐 **IHK AP2 Fachaufgabe: Auflösung einer n:m-Beziehung im Datenmodell (10 Punkte)**
+
+In einer Projektmanagement-Software gilt:
+• Ein Entwickler kann in mehreren Projekten arbeiten.
+• In einem Projekt können mehrere Entwickler arbeiten.
+• Für jede Mitarbeit eines Entwicklers in einem Projekt muss die 'Rolle' (z. B. Lead Developer, Tester) und das 'Eintrittsdatum' gespeichert werden.
+
+**Aufgabenstellung:**
+1. Erläutern Sie, warum relationale Datenbanksysteme (RDBMS) n:m-Beziehungen nicht direkt speichern können.
+2. Entwerfen Sie das relationale Datenbankschema (Tabellen, Attribute, Primär- [PK] und Fremdschlüssel [FK]), das diese n:m-Beziehung fachgerecht auflöst.`,
+        solution: `1. Begründung:
+In relationalen Datenbanken verlangt die 1. Normalform atomare Wertebereiche. Eine direkte n:m-Beziehung würde erfordern, dass in einer Tabellenzeile mehrere Fremdschlüsselwerte als Liste gespeichert werden (Verletzung der Atomarität) oder redundante Zeilen entstehen (Verletzung der Eindeutigkeit). Daher müssen n:m-Beziehungen über eine Zwischentabelle (Assoziationstabelle / Junction Table) aufgelöst werden.
+
+2. Relationales Schema:
+
+Tabelle 1: Entwickler
+• EntwicklerID [PK]
+• Vorname
+• Nachname
+• Email
+
+Tabelle 2: Projekt
+• ProjektID [PK]
+• ProjektTitel
+• StartDatum
+• Status
+
+Tabelle 3: ProjektMitarbeit (Auflösungs- und Verknüpfungstabelle)
+• EntwicklerID [PK, FK zu Entwickler.EntwicklerID]
+• ProjektID [PK, FK zu Projekt.ProjektID]
+• Rolle
+• Eintrittsdatum
+
+Hinweis: Der Primärschlüssel von 'ProjektMitarbeit' ist ein zusammengesetzter Primärschlüssel aus (EntwicklerID, ProjektID). Beide Bestandteile sind zugleich Fremdschlüssel auf die jeweiligen Elterntabellen.`,
+        explanation: `Die Auflösung von n:m-Beziehungen ist ein fundamentaler Baustein in PB 2 Anwendungsentwicklung.`
+    },
+    {
+        id: 827,
+        examLevel: "ap2",
+        pruefungsbereich: "PB2-FIAE",
+        theme: "bawue-fiae",
+        topic: "PB 2: BaWü Kunden-ABC-Analyse & Pareto-Prinzip",
+        difficulty: "hard",
+        isHard: true,
+        isBawueFiae: true,
+        type: "open-text",
+        points: 10,
+        question: `⭐ **Baden-Württemberg Original AP2 FIAE: Kunden-ABC-Analyse (10 Punkte)**
+
+Ein IT-Systemhaus in Baden-Württemberg erzielt mit 5 Kunden einen Jahresumsatz von 1.000.000 €:
+• Kunde 1: 550.000 €
+• Kunde 2: 250.000 €
+• Kunde 3: 120.000 €
+• Kunde 4: 50.000 €
+• Kunde 5: 30.000 €
+
+Klassifizierungsvorgaben:
+• A-Kunden: bis 80 % des kumulierten Umsatzes
+• B-Kunden: über 80 % bis 95 % des kumulierten Umsatzes
+• C-Kunden: die restlichen 5 %
+
+**Aufgabenstellung:**
+1. Führen Sie die ABC-Analyse durch: Ermitteln Sie für jeden Kunden den prozentualen Umsatzanteil, den kumulierten Umsatz in % und ordnen Sie die Kunden den Klassen A, B oder C zu.
+2. Nennen Sie zwei strategische Handlungsempfehlungen für das Management im Umgang mit den A-Kunden.`,
+        solution: `1. Berechnung der ABC-Klassifizierung:
+
+| Kunde | Umsatz | Anteil am Gesamtumsatz | Kumulierter Umsatz | Klasse |
+| :---: | :---: | :---: | :---: | :---: |
+| Kunde 1 | 550.000 € | 55,0 % | 55,0 % | A-Kunde |
+| Kunde 2 | 250.000 € | 25,0 % | 80,0 % | A-Kunde |
+| Kunde 3 | 120.000 € | 12,0 % | 92,0 % | B-Kunde |
+| Kunde 4 | 50.000 € | 5,0 % | 97,0 % | C-Kunde (da > 95 %) |
+| Kunde 5 | 30.000 € | 3,0 % | 100,0 % | C-Kunde |
+
+Ergebnis:
+• A-Kunden: Kunde 1 und Kunde 2 (zusammen 80 % des Umsatzes bei nur 40 % der Kunden ➔ Pareto-Prinzip).
+• B-Kunde: Kunde 3 (12 % des Umsatzes).
+• C-Kunden: Kunde 4 und Kunde 5 (zusammen 8 % des Umsatzes).
+
+2. Handlungsempfehlungen für A-Kunden:
+1. Intensive persönliche Betreuung durch Key-Account-Manager und Einräumung von Vorzugskonditionen / SLAs zur langfristigen Kundenbindung (hohes Klumpenrisiko!).
+2. Frühzeitige Einbindung in Produkt-Roadmaps und bevorzugte Zuteilung erfahrener Senior-Entwickler bei Softwareprojekten.`,
+        explanation: `Die Kunden-ABC-Analyse ist das zentrale Leitszenario der baden-württembergischen AP2 FIAE Prüfung (Sommer 2021).`
+    },
+    {
+        id: 828,
+        examLevel: "ap2",
+        pruefungsbereich: "PB3-FIAE",
+        theme: "bawue-fiae",
+        topic: "PB 3: BaWü FIAE Algorithmus zur Kunden-Rabattkalkulation",
+        difficulty: "hard",
+        isHard: true,
+        isBawueFiae: true,
+        type: "standard",
+        question: "Basierend auf der BaWü FIAE Abschlussprüfung: Für die Kunden-ABC-Klassen soll ein Rabatt gewährt werden: A-Kunden erhalten 15 % Skonto, B-Kunden 5 %, C-Kunden 0 %. Bei Barzahlung gibt es generell 2 % Zusatzskonto. Ein A-Kunde kauft Softwarelizenzen für 10.000 € und zahlt bar. Wie hoch ist der finale Rechnungsbetrag, wenn die Skonti nacheinander (multiplikativ) angewendet werden?",
+        options: [
+            "8.300,00 €",
+            "8.330,00 €",
+            "8.500,00 €",
+            "8.000,00 €"
+        ],
+        answer: 1,
+        explanation: `Berechnung Schritt für Schritt:
+1. Rechnungsbetrag nach Kundenrabatt (15 % für A-Kunde):
+   10.000 € × (1 - 0,15) = 10.000 € × 0,85 = 8.500 €
+2. Abzug des Barzahlungs-Skontos (2 % auf den Zwischenbetrag):
+   8.500 € × (1 - 0,02) = 8.500 € × 0,98 = 8.330,00 €
+(Hinweis: Additive Verrechnung 15 % + 2 % = 17 % würde 8.300 € ergeben; im kaufmännischen IHK-Standard wird Skonto auf den rabattierten Rechnungsbetrag gewährt, also 8.330,00 €).`
+    }
 ];

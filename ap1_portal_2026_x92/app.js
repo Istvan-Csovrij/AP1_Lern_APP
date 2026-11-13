@@ -102,6 +102,7 @@ document.addEventListener("DOMContentLoaded", () => {
         // Apply saved or default portal exam mode (AP1 vs AP2)
         const savedPortalMode = localStorage.getItem("portal_exam_mode") || "ap1";
         switchPortalMode(savedPortalMode);
+        updateExamSelectorOptions();
         filterQuestions("all");
         initWhiteboard();
         initRechentrainer();
@@ -765,7 +766,7 @@ function filterQuestions(theme) {
         }
         
         // Apply Schwierigkeitsgrad filter if selected and not already in dedicated hard-mode or pruefungsblatt
-        const isExemptTheme = (theme === "pruefungsblatt" || theme === "checkauthority" || theme === "2d-arrays");
+        const isExemptTheme = (theme === "pruefungsblatt" || theme === "checkauthority" || theme === "2d-arrays" || currentPortalMode === "ap2" || theme.startsWith("pb") || theme.startsWith("fiae") || theme.startsWith("bawue"));
         if (!isExemptTheme && difficultySelect && difficultySelect.value === "hard" && theme !== "hard-mode") {
             const hardSubset = filteredQuestions.filter(q => 
                 q.isHard === true || 
@@ -788,9 +789,12 @@ function filterQuestions(theme) {
             }
         }
 
-        // Safety: If open-text mode is active, ensure 100% of filtered questions are open-text (except for pruefungsblatt)
+        // Safety: If open-text mode is active, ensure open-text questions are prioritized without zeroing out the list
         if (!isExemptTheme && typeSelect && typeSelect.value === "open") {
-            filteredQuestions = filteredQuestions.filter(q => q.type === "open-text");
+            const openSubset = filteredQuestions.filter(q => q.type === "open-text");
+            if (openSubset.length > 0) {
+                filteredQuestions = openSubset;
+            }
         }
     }
 
@@ -986,11 +990,30 @@ function loadQuestion() {
     submitBtn.style.display = "none";
     
     if (filteredQuestions.length === 0) {
+        // Intelligent fallback: If specific difficulty or type filter resulted in 0 questions, recover pool
+        if (currentPortalMode === "ap2") {
+            const ap2Pool = (typeof questions !== "undefined" ? questions : []).filter(q => q.examLevel === "ap2" || (q.theme && (q.theme.startsWith("pb") || q.theme.startsWith("fiae"))));
+            if (ap2Pool.length > 0) {
+                filteredQuestions = [...ap2Pool];
+            }
+        } else if (typeof questions !== "undefined" && questions.length > 0) {
+            filteredQuestions = [...questions];
+        }
+    }
+
+    if (filteredQuestions.length === 0) {
         questionThemeEl.textContent = "Keine Fragen";
         questionNumberEl.textContent = "0 von 0";
-        questionTextEl.textContent = "Für diesen Themenbereich wurden noch keine Fragen erstellt.";
+        questionTextEl.textContent = "Für diese Filter-Kombination wurden aktuell keine Fragen gefunden.";
         codeBlockContainer.style.display = "none";
-        answersContainer.innerHTML = "";
+        answersContainer.innerHTML = `
+            <div style="text-align: center; padding: 1.5rem; background: #f8fafc; border: 1px dashed #cbd5e1; border-radius: 8px;">
+                <p style="margin-bottom: 1rem; color: #64748b; font-size: 0.9rem;">Passe den Aufgabentyp ("Alle Aufgaben") oder den Schwierigkeitsgrad an, um mehr Fragen zu sehen.</p>
+                <button class="btn btn-primary" onclick="if(typeSelect) typeSelect.value='mix'; if(difficultySelect) difficultySelect.value='all'; filterQuestions(currentTheme || (currentPortalMode === 'ap2' ? 'ap2-all' : 'all'));">
+                    <i class="fa-solid fa-rotate-left"></i> Filter zurücksetzen &amp; Aufgaben anzeigen
+                </button>
+            </div>
+        `;
         if (starBtn) starBtn.style.display = "none";
         return;
     } else {
@@ -1651,7 +1674,8 @@ function startExamMode(simulation, forcedSetId) {
 
     // Determine chosen exam set from parameter or sidebar dropdown
     const sidebarSelect = document.getElementById("sidebar-exam-set-select");
-    const chosenSetId = forcedSetId || (sidebarSelect ? sidebarSelect.value : "exam_1");
+    const defaultSetId = (currentPortalMode === "ap2") ? "exam_ap2_1" : "exam_24";
+    const chosenSetId = forcedSetId || (sidebarSelect && sidebarSelect.value ? sidebarSelect.value : defaultSetId);
 
     loadExamSetById(chosenSetId);
 
@@ -3484,45 +3508,89 @@ function renderExamCatalog(filterText = "") {
         return;
     }
 
+    const isAp2Mode = (typeof currentPortalMode !== "undefined" && currentPortalMode === "ap2");
+    const filteredSets = isAp2Mode 
+        ? EXAM_SETS.filter(e => e.examLevel === "ap2")
+        : EXAM_SETS.filter(e => e.examLevel !== "ap2");
+
     if (counterBadge) {
-        counterBadge.textContent = `${EXAM_SETS.length + 1} Prüfungen verfügbar (inkl. Hotel City Hof)`;
+        if (isAp2Mode) {
+            counterBadge.textContent = `${filteredSets.length} AP2 FIAE Prüfungen verfügbar (je 100 Pkt • 90 Min)`;
+        } else {
+            counterBadge.textContent = `${filteredSets.length + 1} Prüfungen verfügbar (inkl. Hotel City Hof)`;
+        }
     }
 
     const q = (filterText || "").toLowerCase().trim();
     let html = "";
 
-    // Featured Hero Card for Hotel City Hof Probeklausur Winter 2026/27
-    if (!q || "hotel city hof probeklausur winter 2026/27 fa 230 tablets wlan preisliste python".includes(q)) {
-        html += `
-            <div class="exam-catalog-card" style="border: 2px solid #059669; background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%); position: relative; box-shadow: 0 4px 12px rgba(5, 150, 105, 0.2); border-radius: 10px; padding: 1.25rem;">
-                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem;">
-                    <span style="background: #059669; color: white; font-size: 0.72rem; font-weight: 800; padding: 0.2rem 0.55rem; border-radius: 4px; text-transform: uppercase;">
-                        🏨 NEU • PROBEKLAUSUR WINTER 2026/27 (FA 230)
-                    </span>
-                    <span style="background: #ffffff; color: #047857; border: 1px solid #059669; font-size: 0.75rem; font-weight: 800; padding: 0.15rem 0.45rem; border-radius: 4px;">
-                        100 Pkt • 90 Min
-                    </span>
+    if (isAp2Mode) {
+        // Featured Hero Card for AP2 FIAE
+        if (!q || "ap2 fiae softwareprodukt algorithmen wiso ihk bawü abschlussprüfung 100 punkte".includes(q)) {
+            html += `
+                <div class="exam-catalog-card" style="border: 2px solid #7c3aed; background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%); position: relative; box-shadow: 0 4px 12px rgba(124, 58, 237, 0.2); border-radius: 10px; padding: 1.25rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem;">
+                        <span style="background: #7c3aed; color: white; font-size: 0.72rem; font-weight: 800; padding: 0.2rem 0.55rem; border-radius: 4px; text-transform: uppercase;">
+                            🎓 AP2 FIAE • VOLLWERTIGE 100-PKT ABSCHLUSSPRÜFUNGEN
+                        </span>
+                        <span style="background: #ffffff; color: #5b21b6; border: 1px solid #7c3aed; font-size: 0.75rem; font-weight: 800; padding: 0.15rem 0.45rem; border-radius: 4px;">
+                            100 Pkt • 90 Min • FIAE
+                        </span>
+                    </div>
+                    <h4 style="margin: 0 0 0.35rem 0; color: #4c1d95; font-size: 1.15rem; font-weight: 800;">
+                        AP2 Fachinformatiker Anwendungsentwicklung (PB 2, PB 3 &amp; PB 4)
+                    </h4>
+                    <p style="font-size: 0.85rem; color: #5b21b6; line-height: 1.45; margin-bottom: 0.85rem;">
+                        Vollständige Prüfungssimulationen nach bundesweitem IHK- und BaWü-Standard: Planen eines Softwareproduktes (PB 2), Entwicklung &amp; Umsetzung von Algorithmen (PB 3) sowie Wirtschafts- und Sozialkunde (PB 4).
+                    </p>
+                    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                        <button class="btn" onclick="selectExamFromOverview('exam_ap2_1', false)" style="background: linear-gradient(135deg, #7c3aed, #6d28d9); color: white; font-weight: 800; font-size: 0.88rem; padding: 0.45rem 0.85rem; border-radius: 6px; border: none; cursor: pointer; display: flex; align-items: center; gap: 0.4rem; box-shadow: 0 2px 6px rgba(124, 58, 237, 0.25);">
+                            <i class="fa-solid fa-play"></i> PB 2 Softwareprodukt (100 Pkt)
+                        </button>
+                        <button class="btn" onclick="selectExamFromOverview('exam_ap2_2', false)" style="background: linear-gradient(135deg, #0891b2, #0e7490); color: white; font-weight: 800; font-size: 0.88rem; padding: 0.45rem 0.85rem; border-radius: 6px; border: none; cursor: pointer; display: flex; align-items: center; gap: 0.4rem; box-shadow: 0 2px 6px rgba(8, 145, 178, 0.25);">
+                            <i class="fa-solid fa-code"></i> PB 3 Algorithmen (100 Pkt)
+                        </button>
+                        <button class="btn" onclick="selectExamFromOverview('exam_ap2_3', false)" style="background: linear-gradient(135deg, #db2777, #be185d); color: white; font-weight: 800; font-size: 0.88rem; padding: 0.45rem 0.85rem; border-radius: 6px; border: none; cursor: pointer; display: flex; align-items: center; gap: 0.4rem; box-shadow: 0 2px 6px rgba(219, 39, 119, 0.25);">
+                            <i class="fa-solid fa-scale-balanced"></i> PB 4 WiSo (100 Pkt)
+                        </button>
+                    </div>
                 </div>
-                <h4 style="margin: 0 0 0.35rem 0; color: #064e3b; font-size: 1.15rem; font-weight: 800;">
-                    Hotel City Hof (Hospitality IT GmbH)
-                </h4>
-                <p style="font-size: 0.85rem; color: #047857; line-height: 1.45; margin-bottom: 0.85rem;">
-                    Vollständige Prüfung nach IHK-Standard: IT 1 (140 Tablets Angebotsvergleich & Skonto), IT 2 (WLAN-Ausleuchtung & PoE-Switche), IT 3 (HTML-Preisliste, DHCP <code>subnets.txt</code> & Python-Funktion).
-                </p>
-                <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-                    <a href="../probeklausur_hotel_city_hof/" target="_blank" class="btn" style="background: linear-gradient(135deg, #059669, #047857); color: white; font-weight: 800; font-size: 0.88rem; padding: 0.45rem 0.85rem; border-radius: 6px; text-decoration: none; display: flex; align-items: center; gap: 0.4rem; box-shadow: 0 2px 6px rgba(5, 150, 105, 0.25);">
-                        <i class="fa-solid fa-play"></i> Klausur starten ↗
-                    </a>
-                    <a href="../probeklausur_hotel_city_hof/?tab=python_studio" target="_blank" class="btn" style="background: linear-gradient(135deg, #2563eb, #1d4ed8); color: white; font-weight: 800; font-size: 0.88rem; padding: 0.45rem 0.85rem; border-radius: 6px; text-decoration: none; display: flex; align-items: center; gap: 0.4rem; box-shadow: 0 2px 6px rgba(37, 99, 235, 0.25);">
-                        <i class="fa-brands fa-python"></i> Python-Studio ↗
-                    </a>
+            `;
+        }
+    } else {
+        // Featured Hero Card for Hotel City Hof Probeklausur Winter 2026/27 (AP1)
+        if (!q || "hotel city hof probeklausur winter 2026/27 fa 230 tablets wlan preisliste python".includes(q)) {
+            html += `
+                <div class="exam-catalog-card" style="border: 2px solid #059669; background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%); position: relative; box-shadow: 0 4px 12px rgba(5, 150, 105, 0.2); border-radius: 10px; padding: 1.25rem;">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem;">
+                        <span style="background: #059669; color: white; font-size: 0.72rem; font-weight: 800; padding: 0.2rem 0.55rem; border-radius: 4px; text-transform: uppercase;">
+                            🏨 NEU • PROBEKLAUSUR WINTER 2026/27 (FA 230)
+                        </span>
+                        <span style="background: #ffffff; color: #047857; border: 1px solid #059669; font-size: 0.75rem; font-weight: 800; padding: 0.15rem 0.45rem; border-radius: 4px;">
+                            100 Pkt • 90 Min
+                        </span>
+                    </div>
+                    <h4 style="margin: 0 0 0.35rem 0; color: #064e3b; font-size: 1.15rem; font-weight: 800;">
+                        Hotel City Hof (Hospitality IT GmbH)
+                    </h4>
+                    <p style="font-size: 0.85rem; color: #047857; line-height: 1.45; margin-bottom: 0.85rem;">
+                        Vollständige Prüfung nach IHK-Standard: IT 1 (140 Tablets Angebotsvergleich &amp; Skonto), IT 2 (WLAN-Ausleuchtung &amp; PoE-Switche), IT 3 (HTML-Preisliste, DHCP <code>subnets.txt</code> &amp; Python-Funktion).
+                    </p>
+                    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                        <a href="../probeklausur_hotel_city_hof/" target="_blank" class="btn" style="background: linear-gradient(135deg, #059669, #047857); color: white; font-weight: 800; font-size: 0.88rem; padding: 0.45rem 0.85rem; border-radius: 6px; text-decoration: none; display: flex; align-items: center; gap: 0.4rem; box-shadow: 0 2px 6px rgba(5, 150, 105, 0.25);">
+                            <i class="fa-solid fa-play"></i> Klausur starten ↗
+                        </a>
+                        <a href="../probeklausur_hotel_city_hof/?tab=python_studio" target="_blank" class="btn" style="background: linear-gradient(135deg, #2563eb, #1d4ed8); color: white; font-weight: 800; font-size: 0.88rem; padding: 0.45rem 0.85rem; border-radius: 6px; text-decoration: none; display: flex; align-items: center; gap: 0.4rem; box-shadow: 0 2px 6px rgba(37, 99, 235, 0.25);">
+                            <i class="fa-brands fa-python"></i> Python-Studio ↗
+                        </a>
+                    </div>
                 </div>
-            </div>
-        `;
+            `;
+        }
     }
 
-    // Render cards for each exam set in EXAM_SETS
-    EXAM_SETS.forEach((exam, index) => {
+    // Render cards for each exam set in filteredSets
+    filteredSets.forEach((exam, index) => {
         const titleMatch = (exam.title || "").toLowerCase().includes(q);
         const scenarioMatch = (exam.ausgangssituation || "").toLowerCase().includes(q);
         const subtitleMatch = (exam.subtitle || "").toLowerCase().includes(q);
@@ -3545,13 +3613,17 @@ function renderExamCatalog(filterText = "") {
 
         // Extract company from subtitle
         const companyParts = (exam.subtitle || "").split("•");
-        const companyName = companyParts.length > 2 ? companyParts[2].trim() : "Modellunternehmen";
+        const companyName = companyParts.length > 2 ? companyParts[2].trim() : (exam.badge || "Modellunternehmen");
+
+        const badgeClass = isAp2Mode ? "exam-badge-ap2" : "exam-badge-standard";
+        const badgeLabel = isAp2Mode ? `AP2 FIAE • PRÜFUNG ${examNum}` : `PRÜFUNG ${examNum}`;
+        const badgeStyle = isAp2Mode ? `style="background: #ede9fe; color: #6d28d9; border: 1px solid #ddd6fe;"` : ``;
 
         html += `
             <div class="exam-catalog-card ${isActive ? 'active' : ''}">
                 <div class="exam-catalog-card-header">
                     <div style="display: flex; align-items: center; gap: 0.4rem;">
-                        <span class="exam-catalog-badge exam-badge-standard">PRÜFUNG ${examNum}</span>
+                        <span class="exam-catalog-badge ${badgeClass}" ${badgeStyle}>${badgeLabel}</span>
                         ${isActive ? '<span style="background: #10b981; color: white; padding: 2px 7px; border-radius: 4px; font-size: 0.72rem; font-weight: 700;"><i class="fa-solid fa-check"></i> Aktuell geladen</span>' : ''}
                     </div>
                     <span class="exam-badge-pts"><i class="fa-solid fa-stopwatch"></i> 100 P • 90 Min.</span>
@@ -3565,17 +3637,17 @@ function renderExamCatalog(filterText = "") {
                     ${(exam.tasks || []).map(t => `
                         <div class="exam-catalog-task-item">
                             <span class="exam-task-num">${t.number}.</span>
-                            <span class="exam-task-title">${escapeHtml(t.title.replace(/^\\d+\\.\\s*Aufgabe:\\s*/i, ''))}</span>
-                            <span class="exam-task-pts">${t.totalPoints || 25} P</span>
+                            <span class="exam-task-title">${escapeHtml(t.title)}</span>
+                            <span class="exam-task-pts">${t.points || 25} P</span>
                         </div>
                     `).join('')}
                 </div>
 
                 <div class="exam-catalog-actions">
-                    <button class="btn btn-catalog-practice" onclick="selectExamFromOverview('${exam.id}', false)">
-                        <i class="fa-solid fa-book-open"></i> Übungsprüfung
+                    <button class="btn btn-primary" onclick="selectExamFromOverview('${exam.id}', false)">
+                        <i class="fa-solid fa-book-open"></i> Prüfung öffnen
                     </button>
-                    <button class="btn btn-catalog-simulation" onclick="selectExamFromOverview('${exam.id}', true)">
+                    <button class="btn btn-secondary" onclick="selectExamFromOverview('${exam.id}', true)">
                         <i class="fa-solid fa-stopwatch"></i> 90-Min.-Simulation
                     </button>
                 </div>
@@ -3587,6 +3659,7 @@ function renderExamCatalog(filterText = "") {
     const randomMatches = !q || "dynamische zufallsprüfung random simulation 100 punkte mix".includes(q);
     if (randomMatches) {
         const isRandomActive = activeExamSet && activeExamSet.id.startsWith("exam_random") && isExamActive;
+        const poolCount = filteredSets.length;
         html += `
             <div class="exam-catalog-card ${isRandomActive ? 'active' : ''}" style="border: 2px dashed #8b5cf6; background: linear-gradient(180deg, #faf5ff 0%, #ffffff 40%);">
                 <div class="exam-catalog-card-header">
@@ -3597,31 +3670,33 @@ function renderExamCatalog(filterText = "") {
                     <span class="exam-badge-pts" style="background: #f5f3ff; color: #6d28d9; border-color: #ddd6fe;"><i class="fa-solid fa-bolt"></i> 100 P • Unendlich</span>
                 </div>
 
-                <div class="exam-card-title" style="color: #6d28d9;">🎲 Dynamische 100-Punkte Zufalls-Vollprüfung</div>
-                <div class="exam-card-company" style="color: #7c3aed;"><i class="fa-solid fa-shuffle"></i> Dynamischer Aufgabenpool (${EXAM_SETS.length} Prüfungssätze)</div>
+                <div class="exam-card-title" style="color: #6d28d9;">🎲 Dynamische 100-Punkte Zufalls-Vollprüfung (${isAp2Mode ? 'AP2 FIAE' : 'AP1'})</div>
+                <div class="exam-card-company" style="color: #7c3aed;"><i class="fa-solid fa-shuffle"></i> Dynamischer Aufgabenpool (${poolCount} Prüfungssätze)</div>
                 <div class="exam-card-scenario" style="border-left-color: #a855f7; background: #faf5ff;">
-                    Kombiniert bei jedem Start 4 vollwertige Aufgaben à 25 Punkte zufällig aus dem Aufgabenpool aller ${EXAM_SETS.length} Prüfungssätze. Keine Prüfung gleicht der anderen!
+                    ${isAp2Mode 
+                        ? 'Kombiniert bei jedem Start 4 vollwertige Aufgaben à 25 Punkte zufällig aus dem Aufgabenpool der AP2 FIAE Prüfungen (PB 2 Softwareprodukt, PB 3 Algorithmen & WiSo).' 
+                        : `Kombiniert bei jedem Start 4 vollwertige Aufgaben à 25 Punkte zufällig aus dem Aufgabenpool aller ${poolCount} Prüfungssätze. Keine Prüfung gleicht der anderen!`}
                 </div>
 
                 <div class="exam-catalog-tasks">
                     <div class="exam-catalog-task-item">
                         <span class="exam-task-num" style="color: #7c3aed;">1.</span>
-                        <span class="exam-task-title">Zufällige 1. Aufgabe (z. B. Subnetting, PUE, BGB oder Netzplan)</span>
+                        <span class="exam-task-title">${isAp2Mode ? 'PB 2: Software-Architektur, Design Patterns oder Lastenheft' : 'Zufällige 1. Aufgabe (z. B. Subnetting, PUE, BGB oder Netzplan)'}</span>
                         <span class="exam-task-pts">25 P</span>
                     </div>
                     <div class="exam-catalog-task-item">
                         <span class="exam-task-num" style="color: #7c3aed;">2.</span>
-                        <span class="exam-task-title">Zufällige 2. Aufgabe (z. B. RAID, Hypervisor, PoE oder MQTT)</span>
+                        <span class="exam-task-title">${isAp2Mode ? 'PB 2: UML-Klassendiagramm, ERD oder Normalisierung 1-3. NF' : 'Zufällige 2. Aufgabe (z. B. RAID, Hypervisor, PoE oder MQTT)'}</span>
                         <span class="exam-task-pts">25 P</span>
                     </div>
                     <div class="exam-catalog-task-item">
                         <span class="exam-task-num" style="color: #7c3aed;">3.</span>
-                        <span class="exam-task-title">Zufällige 3. Aufgabe (z. B. VPN, OWASP, ITIL, DSGVO oder TOMs)</span>
+                        <span class="exam-task-title">${isAp2Mode ? 'PB 3: Algorithmen, Schreibtischtests & Trace-Tabellen' : 'Zufällige 3. Aufgabe (z. B. VPN, OWASP, ITIL, DSGVO oder TOMs)'}</span>
                         <span class="exam-task-pts">25 P</span>
                     </div>
                     <div class="exam-catalog-task-item">
                         <span class="exam-task-num" style="color: #7c3aed;">4.</span>
-                        <span class="exam-task-title">Zufällige 4. Aufgabe (3NF-Datenbank, SQL & Programmier-Algorithmus)</span>
+                        <span class="exam-task-title">${isAp2Mode ? 'PB 4: WiSo (Arbeitsrecht, BGB Sachmängelrechte oder Betriebsrat)' : 'Zufällige 4. Aufgabe (3NF-Datenbank, SQL & Programmier-Algorithmus)'}</span>
                         <span class="exam-task-pts">25 P</span>
                     </div>
                 </div>
@@ -3643,7 +3718,7 @@ function renderExamCatalog(filterText = "") {
             <div style="grid-column: 1 / -1; text-align: center; padding: 3rem 1rem; color: #64748b;">
                 <i class="fa-solid fa-magnifying-glass" style="font-size: 2rem; margin-bottom: 0.75rem; color: #cbd5e1;"></i>
                 <div style="font-size: 1.1rem; font-weight: 700; color: #334155;">Keine Prüfung zum Suchbegriff "${escapeHtml(q)}" gefunden</div>
-                <div style="font-size: 0.88rem; margin-top: 0.35rem;">Probiere es mit Begriffen wie <em>Netzplan, Subnetting, Cloud, DSGVO, SQL, Kalkulation, RAID</em>.</div>
+                <div style="font-size: 0.88rem; margin-top: 0.35rem;">Probiere es mit Begriffen wie <em>${isAp2Mode ? 'Software, Algorithmen, UML, Schreibtischtest, WiSo, Scrum' : 'Netzplan, Subnetting, Cloud, DSGVO, SQL, Kalkulation, RAID'}</em>.</div>
             </div>
         `;
     }
@@ -3690,10 +3765,148 @@ window.toggleExamHeaderVisibility = function() {
 // DUAL PORTAL MODE SWITCHER: AP1 (TEIL 1 • 20%) VS AP2 (FIAE ABSCHLUSS • 80%)
 // ==========================================================================
 
+
+function updateExamSelectorOptions() {
+    const sidebarSelect = document.getElementById("sidebar-exam-set-select");
+    const bookletSelect = document.getElementById("booklet-exam-select");
+    const simTitle = document.getElementById("exam-simulator-title");
+    const simDesc = document.getElementById("exam-simulator-desc");
+    const simLabel = document.getElementById("sidebar-exam-set-label");
+    const compareBtnText = document.getElementById("sidebar-compare-btn-text");
+    const simCard = document.getElementById("sidebar-exam-card");
+    const modalTitle = document.getElementById("exam-overview-modal-title");
+    const modalSubtitle = document.getElementById("exam-overview-modal-subtitle");
+
+    if (currentPortalMode === "ap2") {
+        if (simTitle) simTitle.innerHTML = `<i class="fa-solid fa-graduation-cap"></i> AP2 FIAE Prüfungssimulation`;
+        if (simDesc) simDesc.textContent = "Trainiere 5 vollwertige 100-Punkte-Abschlussprüfungen Teil 2 (FIAE: PB 2, PB 3, PB 4 & ganzheitlich).";
+        if (simLabel) simLabel.textContent = "AP2 FIAE Prüfungssatz wählen (100 Pkt):";
+        if (compareBtnText) compareBtnText.innerHTML = "📚 Alle 5 AP2 FIAE Prüfungen vergleichen &amp; wählen";
+        if (simCard) {
+            simCard.style.borderColor = "#7c3aed";
+            simCard.style.boxShadow = "0 4px 12px rgba(124, 58, 237, 0.15)";
+        }
+        if (modalTitle) modalTitle.innerHTML = "AP2 FIAE Prüfungsübersicht &amp; Klausuren-Katalog (100 Pkt)";
+        if (modalSubtitle) modalSubtitle.textContent = "Wähle eine vollwertige AP2 FIAE Prüfung (PB 2 Planen eines Softwareproduktes, PB 3 Algorithmen, PB 4 WiSo) zur Bearbeitung im Klausurbogen.";
+
+        // Populate AP2 options
+        const ap2Options = [
+            { value: "exam_ap2_1", text: "📋 AP2-1: PB 2 – Planen eines Softwareproduktes (100 Pkt)" },
+            { value: "exam_ap2_2", text: "📋 AP2-2: PB 3 – Entwicklung und Umsetzung von Algorithmen (100 Pkt)" },
+            { value: "exam_ap2_3", text: "📋 AP2-3: PB 4 – Wirtschafts- und Sozialkunde (100 Pkt)" },
+            { value: "exam_ap2_4", text: "📋 AP2-4: Ganzheitlich FIAE – E-Commerce & Microservices (100 Pkt)" },
+            { value: "exam_ap2_5", text: "📋 AP2-5: Ganzheitlich FIAE – IoT-Flottenmanagement & Cloud (100 Pkt)" },
+            { value: "exam_random", text: "🎲 Dynamische 100-Punkte Zufallsprüfung" }
+        ];
+
+        const ap2BookletOptions = [
+            { value: "exam_ap2_1", text: "AP2-1: PB 2 – Softwareprodukt (100 Pkt)" },
+            { value: "exam_ap2_2", text: "AP2-2: PB 3 – Algorithmen (100 Pkt)" },
+            { value: "exam_ap2_3", text: "AP2-3: PB 4 – WiSo (100 Pkt)" },
+            { value: "exam_ap2_4", text: "AP2-4: Ganzheitlich I – E-Commerce (100 Pkt)" },
+            { value: "exam_ap2_5", text: "AP2-5: Ganzheitlich II – IoT & Cloud (100 Pkt)" },
+            { value: "exam_random", text: "Zufallsprüfung (100 Pkt)" }
+        ];
+
+        if (sidebarSelect) {
+            const currentVal = sidebarSelect.value;
+            sidebarSelect.innerHTML = ap2Options.map(o => `<option value="${o.value}">${o.text}</option>`).join("");
+            sidebarSelect.value = (currentVal && currentVal.startsWith("exam_ap2")) ? currentVal : "exam_ap2_1";
+        }
+        if (bookletSelect) {
+            const currentVal = bookletSelect.value;
+            bookletSelect.innerHTML = ap2BookletOptions.map(o => `<option value="${o.value}">${o.text}</option>`).join("");
+            bookletSelect.value = (currentVal && currentVal.startsWith("exam_ap2")) ? currentVal : "exam_ap2_1";
+        }
+    } else {
+        if (simTitle) simTitle.innerHTML = `<i class="fa-solid fa-file-signature"></i> Prüfungssimulation (IHK-orientiert)`;
+        if (simDesc) simDesc.textContent = "Trainiere 24 vollwertige 100-Punkte-Prüfungen nach bundesweitem Kammer-Standard (inkl. BaWü FA 230).";
+        if (simLabel) simLabel.textContent = "Prüfungssatz wählen (100 Pkt):";
+        if (compareBtnText) compareBtnText.innerHTML = "📚 Alle 24 Prüfungen vergleichen &amp; wählen";
+        if (simCard) {
+            simCard.style.borderColor = "#10b981";
+            simCard.style.boxShadow = "0 4px 6px -1px rgba(16, 185, 129, 0.1)";
+        }
+        if (modalTitle) modalTitle.innerHTML = "Prüfungsübersicht &amp; Klausuren-Katalog (Kammer-Standard)";
+        if (modalSubtitle) modalSubtitle.textContent = "Wähle eine Prüfung zur Bearbeitung im Klausurbogen nach IHK-Schema oder starte die 90-Minuten-Echtzeitsimulation.";
+
+        // Populate AP1 options
+        const ap1Options = [
+            { value: "exam_24", text: "🏆 Letzte AP1-Prüfung: Original BaWü Frühjahr 2026 (SolarTech & WLAN)" },
+            { value: "exam_23", text: "🏛️ Prüfung 23: Original BaWü IBBW (DarSys GmbH – IT 1 bis IT 3)" },
+            { value: "exam_22", text: "🏆 Prüfung 22: Original Baden-Württemberg Sommer 2026 (SoftTech Solutions GmbH – FA 230)" },
+            { value: "exam_1", text: "📋 Prüfung 1: Smart-Home & Web-Plattform" },
+            { value: "exam_2", text: "📋 Prüfung 2: Logistikzentrum & 4K-Kameras" },
+            { value: "exam_3", text: "📋 Prüfung 3: Apothekengruppe & Belege" },
+            { value: "exam_4", text: "📋 Prüfung 4: Kanzlei & DIN 69900 Netzplan" },
+            { value: "exam_5", text: "📋 Prüfung 5: E-Commerce & Cyber-Security" },
+            { value: "exam_6", text: "📋 Prüfung 6: Cloud-Migration & RZ-Effizienz" },
+            { value: "exam_7", text: "📋 Prüfung 7: Smart Factory & IoT-Sensorik" },
+            { value: "exam_8", text: "📋 Prüfung 8: Medizintechnik & Telematik (TI)" },
+            { value: "exam_9", text: "📋 Prüfung 9: FinTech-Banking & PSD2" },
+            { value: "exam_10", text: "📋 Prüfung 10: Automotive Ethernet & Sensorik" },
+            { value: "exam_11", text: "📋 Prüfung 11: E-Learning, Campus & WLAN" },
+            { value: "exam_12", text: "📋 Prüfung 12: Smart Grid, LoRaWAN & Energie" },
+            { value: "exam_13", text: "📋 Prüfung 13: Flugsicherung & Georedundanz" },
+            { value: "exam_14", text: "📋 Prüfung 14: Hotelkette & Hospitality IoT" },
+            { value: "exam_15", text: "📋 Prüfung 15: Entsorgung & Fuhrpark-Telematik" },
+            { value: "exam_16", text: "📋 Prüfung 16: E-Government & BundID" },
+            { value: "exam_17", text: "📋 Prüfung 17: Enterprise Campus & IPv6-Migration" },
+            { value: "exam_18", text: "🎯 Prüfung 18: IT-Arbeitsplatz I – Steuerkanzlei (Dual-4K, TB4 & TCO)" },
+            { value: "exam_19", text: "🎯 Prüfung 19: IT-Arbeitsplatz II – Kreativagentur (Desk-Sharing & Zero-Trust)" },
+            { value: "exam_20", text: "🎯 Prüfung 20: IT-Arbeitsplatz III – CAD-Workstation (ECC, USV & GPO)" },
+            { value: "exam_21", text: "🎯 Prüfung 21: IT-Arbeitsplatz IV – Klinikverbund (Rollout, PXE & SLA)" },
+            { value: "exam_random", text: "🎲 Dynamische 100-Punkte Zufallsprüfung" }
+        ];
+
+        const ap1BookletOptions = [
+            { value: "exam_24", text: "Prüfung 24: BaWü Frühjahr 2026 (SolarTech)" },
+            { value: "exam_23", text: "Prüfung 23: BaWü IBBW (DarSys GmbH)" },
+            { value: "exam_22", text: "Prüfung 22: BaWü Sommer 2026 (SoftTech)" },
+            { value: "exam_1", text: "Prüfung 1: Smart-Home & Web" },
+            { value: "exam_2", text: "Prüfung 2: Logistik & 4K-Kameras" },
+            { value: "exam_3", text: "Prüfung 3: Apotheke & Belege" },
+            { value: "exam_4", text: "Prüfung 4: Kanzlei & Netzplan" },
+            { value: "exam_5", text: "Prüfung 5: E-Commerce & Security" },
+            { value: "exam_6", text: "Prüfung 6: Cloud & RZ-Effizienz" },
+            { value: "exam_7", text: "Prüfung 7: Smart Factory & IoT" },
+            { value: "exam_8", text: "Prüfung 8: Medizintechnik & TI" },
+            { value: "exam_9", text: "Prüfung 9: FinTech & PSD2" },
+            { value: "exam_10", text: "Prüfung 10: Automotive Ethernet" },
+            { value: "exam_11", text: "Prüfung 11: Campus WLAN" },
+            { value: "exam_12", text: "Prüfung 12: Smart Grid & LoRaWAN" },
+            { value: "exam_13", text: "Prüfung 13: Flugsicherung" },
+            { value: "exam_14", text: "Prüfung 14: Hotel & Hospitality" },
+            { value: "exam_15", text: "Prüfung 15: Entsorgung & Telematik" },
+            { value: "exam_16", text: "Prüfung 16: E-Government & BundID" },
+            { value: "exam_17", text: "Prüfung 17: Enterprise IPv6" },
+            { value: "exam_18", text: "Prüfung 18: Arbeitsplatz I (Kanzlei)" },
+            { value: "exam_19", text: "Prüfung 19: Arbeitsplatz II (Agentur)" },
+            { value: "exam_20", text: "Prüfung 20: Arbeitsplatz III (CAD)" },
+            { value: "exam_21", text: "Prüfung 21: Arbeitsplatz IV (Klinik)" },
+            { value: "exam_random", text: "Zufallsprüfung (100 Pkt)" }
+        ];
+
+        if (sidebarSelect) {
+            const currentVal = sidebarSelect.value;
+            sidebarSelect.innerHTML = ap1Options.map(o => `<option value="${o.value}">${o.text}</option>`).join("");
+            sidebarSelect.value = (currentVal && !currentVal.startsWith("exam_ap2")) ? currentVal : "exam_24";
+        }
+        if (bookletSelect) {
+            const currentVal = bookletSelect.value;
+            bookletSelect.innerHTML = ap1BookletOptions.map(o => `<option value="${o.value}">${o.text}</option>`).join("");
+            bookletSelect.value = (currentVal && !currentVal.startsWith("exam_ap2")) ? currentVal : "exam_24";
+        }
+    }
+}
+window.updateExamSelectorOptions = updateExamSelectorOptions;
+
+
 function switchPortalMode(mode) {
     if (mode !== "ap1" && mode !== "ap2") mode = "ap1";
     currentPortalMode = mode;
     localStorage.setItem("portal_exam_mode", mode);
+    updateExamSelectorOptions();
     
     if (mode === "ap2") {
         document.body.classList.add("portal-mode-ap2");

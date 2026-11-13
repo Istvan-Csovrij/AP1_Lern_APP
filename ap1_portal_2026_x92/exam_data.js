@@ -7598,6 +7598,741 @@ Der AZOS AP-42 belegt mit 1.000 von 1.000 maximal erreichbaren Punkten souverän
             }
         ]
     },
+
+    // ==========================================================================
+    // AP2 ABSCHLUSSPRÜFUNGEN FÜR FACHINFORMATIKER ANWENDUNGSENTWICKLUNG (FIAE)
+    // 100-Punkte Original-Klausuren nach IHK & Baden-Württemberg Standard
+    // ==========================================================================
+
+    {
+        id: "exam_ap2_1",
+        examLevel: "ap2",
+        fachrichtung: "FIAE",
+        title: "Prüfung AP2-1: PB 2 – Planen eines Softwareproduktes (Original BaWü Standard • 100 Pkt)",
+        badge: "100 Pkt • 90 Min • PB 2 FIAE",
+        subtitle: "Abschlussprüfung Teil 2 • Fachinformatiker Anwendungsentwicklung • E-Health Plattform",
+        ausgangssituation: "Sie sind Softwareentwickler in einem IT-Systemhaus in Karlsruhe. Für einen Klinikverbund soll eine neue, modulare Telemedizin-Plattform ('MediConnect') konzipiert und entwickelt werden. Die Plattform soll Patientenakten verwalten, Videosprechstunden terminieren und Abrechnungsdaten mit Krankenkassen über standardisierte Schnittstellen austauschen. Sie erstellen das Software-Architekturkonzept (Entwurfsmuster Singleton & Strategy), entwerfen das relationale Datenbankschema inklusive Normalisierung (1. bis 3. NF), modellieren die Geschäftsprozesse und Klassenstrukturen mit UML und führen die agilen Schätzungen und Sprint-Planungen nach Scrum durch.",
+        tasks: [
+            {
+                number: 1,
+                title: "1. Aufgabe: Software-Architektur, Entwurfsmuster & Microservices (25 Punkte)",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "ap2_1_1_a",
+                        label: "1.1 Entwurfsmuster Singleton Pattern analysieren & bewerten",
+                        points: 8,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "ENTWURFSMUSTER SINGLETON",
+                        text: "In der Telemedizin-Plattform soll der Zugriff auf die zentrale Datenbankverbindung über ein Singleton-Muster gesteuert werden.\na) Erläutern Sie die drei Kernkomponenten einer Singleton-Klasse (Konstruktor, Instanz-Variable, Zugriffsmethode).\nb) Diskutieren Sie einen wesentlichen Nachteil des Singleton-Musters im Hinblick auf automatisierte Unit-Tests.",
+                        solution: "a) Kernkomponenten des Singletons:\n1. Privater Konstruktor ('private DatabaseManager()'): Verhindert, dass externe Klassen neue Instanzen per 'new' erzeugen.\n2. Statische Member-Variable ('private static DatabaseManager instance'): Hält die einzige Instanz der Klasse.\n3. Öffentliche statische Zugriffsmethode ('public static DatabaseManager getInstance()'): Liefert die Instanz zurück (bei Bedarf per Lazy Loading threadsicher initialisiert).\n\nb) Nachteil bei Unit-Tests:\nSingletons führen einen globalen Programmzustand ein und lassen sich in Unit-Tests nur sehr schwer isolieren bzw. durch Mocks/Stubs austauschen, was zu unerwünschten Test-Seiteneffekten führt."
+                    },
+                    {
+                        id: "ap2_1_1_b",
+                        label: "1.2 Strategy Pattern für Krankenkassen-Abrechnungsmodelle",
+                        points: 9,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "STRATEGY PATTERN (OPEN/CLOSED)",
+                        text: "Die Abrechnung von Videosprechstunden unterscheidet sich je nach Kostenträger (Gesetzliche Krankenversicherung GKV, Private Krankenversicherung PKV, Selbstzahler). Künftig sollen neue Abrechnungsregeln ohne Modifikation des bestehenden Abrechnungsmoduls ergänzt werden können.\na) Erläutern Sie den Aufbau des Strategy Patterns (Context, Strategy-Interface, Concrete Strategies).\nb) Begründen Sie, warum das Strategy Pattern das Open/Closed Principle (OCP) erfüllt.",
+                        solution: "a) Aufbau des Strategy Patterns:\n• Strategy-Interface ('IAbrechnungsStrategie'): Definiert die gemeinsame Methodensignatur (z. B. 'berechneVerguetung(Behandlung b)').\n• Konkrete Strategien ('GkvAbrechnung', 'PkvAbrechnung', 'SelbstzahlerAbrechnung'): Implementieren das Interface mit den kassen-spezifischen Berechnungsformeln.\n• Context ('AbrechnungsService'): Hält eine Referenz auf das Strategy-Interface und delegiert die Berechnung zur Laufzeit an die gewählte Strategie.\n\nb) Einhaltung des OCP:\nDas Modul ist geschlossen für Modifikationen (der bestehende AbrechnungsService muss nicht geändert werden) und offen für Erweiterungen (eine neue Kasse wie 'BG_Abrechnung' wird einfach als neue Klasse implementiert)."
+                    },
+                    {
+                        id: "ap2_1_1_c",
+                        label: "1.3 Monolithische vs. Microservices-Architektur",
+                        points: 8,
+                        type: "lines",
+                        linesCount: 4,
+                        stencil: "SOFTWARE-ARCHITEKTUR",
+                        text: "Nennen Sie zwei Vorteile und zwei Herausforderungen/Nachteile bei der Umstellung von einer monolithischen Architektur auf Microservices für die Klinikplattform.",
+                        solution: "Vorteile von Microservices:\n1. Unabhängige Skalierbarkeit und Deploybarkeit einzelner Dienste (z. B. Videosprechstunde kann skaliert werden, ohne die Patientenakte neu zu starten).\n2. Technologische Freiheit (Dienste können in unterschiedlichen Programmiersprachen/Frameworks entwickelt werden).\n\nHerausforderungen/Nachteile:\n1. Höhere Komplexität bei Monitoring, Logging und Netzwerk-Latenzen (Distributed Tracing erforderlich).\n2. Gewährleistung von Datenkonsistenz über Servicegrenzen hinweg (Eventual Consistency statt lokaler DB-Transaktionen)."
+                    }
+                ]
+            },
+            {
+                number: 2,
+                title: "2. Aufgabe: UML-Klassen- & Anwendungsfallmodellierung (25 Punkte)",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "ap2_1_2_a",
+                        label: "2.1 Komposition vs. Aggregation im UML-Klassendiagramm",
+                        points: 9,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "UML-BEZIEHUNGEN",
+                        text: "In der Plattform werden die Klassen 'Patientenakte', 'Behandlungseintrag' und 'Arzt' modelliert.\na) Welche Beziehungsart (Komposition oder Aggregation) liegt zwischen 'Patientenakte' und 'Behandlungseintrag' vor? Begründen Sie Ihre Wahl fachlich.\nb) Wie unterscheidet sich die Beziehung zwischen 'Patientenakte' und 'Arzt'?",
+                        solution: "a) Patientenakte ➔ Behandlungseintrag: KOMPOSITION (ausgefüllte schwarze Raute an der Patientenakte).\nBegründung: Es besteht strikte Existenzabhängigkeit (Lifecycle-Bound). Ein Behandlungseintrag kann ohne die zugehörige Patientenakte nicht existieren. Wird die Akte gelöscht, werden zwingend auch alle Behandlungseinträge gelöscht.\n\nb) Patientenakte ➔ Arzt: AGGREGATION oder ASSOZIATION (leere weiße Raute oder einfache Verbindung).\nBegründung: Ein behandelnder Arzt existiert unabhängig von einer einzelnen Patientenakte weiter. Das Löschen einer Patientenakte hat keinen Einfluss auf die Existenz des Arztes."
+                    },
+                    {
+                        id: "ap2_1_2_b",
+                        label: "2.2 Use-Case-Diagramm mit Stereotypen <<include>> & <<extend>>",
+                        points: 8,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "USE-CASE STEREOTYPEN",
+                        text: "Für das Modul 'Videosprechstunde' existieren die Anwendungsfälle 'Sprechstunde durchführen', 'Identität per eGK verifizieren' und 'Elektronisches Rezept ausstellen'.\nOrdnung Sie den Beziehungen die Stereotypen <<include>> und <<extend>> zu und begründen Sie die Pfeilrichtung.",
+                        solution: "1. 'Sprechstunde durchführen' ➔ <<include>> ➔ 'Identität per eGK verifizieren':\nDie Verifikation der Identität ist zwingender Bestandteil jeder Sprechstunde. Der Pfeil zeigt vom Basis-Use-Case ('Sprechstunde durchführen') zum inkludierten Use Case.\n\n2. 'Elektronisches Rezept ausstellen' ➔ <<extend>> ➔ 'Sprechstunde durchführen':\nDas Ausstellen eines Rezepts ist optional und erfolgt nur bei medizinischem Bedarf (Extension Point). Der Pfeil zeigt vom erweiternden Use Case ('Rezept ausstellen') zum Basis-Use-Case."
+                    },
+                    {
+                        id: "ap2_1_2_c",
+                        label: "2.3 Sequenzdiagramm: Interaktionsrahmen alt, opt, loop",
+                        points: 8,
+                        type: "lines",
+                        linesCount: 4,
+                        stencil: "SEQUENZDIAGRAMM",
+                        text: "Erläutern Sie die Bedeutung und den Einsatz der drei UML-Interaktionsrahmen 'alt', 'opt' und 'loop' im Kontext eines Terminbuchungsprozesses.",
+                        solution: "• 'alt' (Alternative / if-else): Stellt Verzweigungen mit Bedingungen dar. Z. B. [Termin frei] ➔ Bestätigung senden; [Termin belegt] ➔ Fehlermeldung & Alternativvorschlag.\n• 'opt' (Option / if ohne else): Verhalten wird nur ausgeführt, wenn der Guard erfüllt ist. Z. B. [SMS-Benachrichtigung gewünscht] ➔ SMS versenden.\n• 'loop' (Schleife): Wiederholter Aufruf von Nachrichten. Z. B. [für jeden Kalendereintrag] ➔ Verfügbarkeit prüfen."
+                    }
+                ]
+            },
+            {
+                number: 3,
+                title: "3. Aufgabe: Relationale Datenmodellierung & Normalisierung (25 Punkte)",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "ap2_1_3_a",
+                        label: "3.1 Schrittweise Normalisierung bis zur 3. Normalform",
+                        points: 12,
+                        type: "lines",
+                        linesCount: 7,
+                        stencil: "NORMALISIERUNG 1. BIS 3. NF",
+                        text: "Gegeben ist folgende Tabelle: 'Rezeptur' (RezeptNr, AusstellDatum, PatientNr, PatientName, PLZ, Ort, MedNr, MedName, Dosierung). Primärschlüssel ist (RezeptNr, MedNr).\nÜberführen Sie die Relation schrittweise in die 3. Normalform. Geben Sie für jede Normalform die Relationen mit Primärschlüsseln [PK] und Fremdschlüsseln [FK] an.",
+                        solution: "1. Normalform (1. NF): Alle Attribute sind atomar.\nRezeptur(RezeptNr [PK], MedNr [PK], AusstellDatum, PatientNr, PatientName, PLZ, Ort, MedName, Dosierung)\n\n2. Normalform (2. NF): Keine partiellen Abhängigkeiten von Teilen des Primärschlüssels:\n• Rezept(RezeptNr [PK], AusstellDatum, PatientNr, PatientName, PLZ, Ort)\n• Medikament(MedNr [PK], MedName)\n• RezeptPosition(RezeptNr [PK, FK], MedNr [PK, FK], Dosierung)\n\n3. Normalform (3. NF): Keine transitiven Abhängigkeiten unter Nicht-Schlüsselattributen (PatientName, PLZ hängen von PatientNr ab; Ort hängt von PLZ ab):\n• Ort_PLZ(PLZ [PK], Ort)\n• Patient(PatientNr [PK], PatientName, PLZ [FK])\n• Rezept(RezeptNr [PK], AusstellDatum, PatientNr [FK])\n• Medikament(MedNr [PK], MedName)\n• RezeptPosition(RezeptNr [PK, FK], MedNr [PK, FK], Dosierung)"
+                    },
+                    {
+                        id: "ap2_1_3_b",
+                        label: "3.2 Referenzielle Integrität & ON DELETE CASCADE",
+                        points: 7,
+                        type: "lines",
+                        linesCount: 4,
+                        stencil: "DATENBANK-INTEGRITÄT",
+                        text: "a) Definieren Sie den Begriff 'Referenzielle Integrität'.\nb) Welche Auswirkung hat die Klausel 'ON DELETE CASCADE' bei der Fremdschlüssel-Definition zwischen 'Rezept' und 'RezeptPosition'?",
+                        solution: "a) Referenzielle Integrität: Ein Zustand relationaler Datenbanken, bei dem jeder Fremdschlüsselwert auf einen tatsächlich existierenden Primärschlüsselwert in der verknüpften Elterntabelle verweist oder NULL ist. Verwaiste Datensätze (Orphan Records) sind ausgeschlossen.\n\nb) Auswirkung von ON DELETE CASCADE: Wird ein Datensatz in der Tabelle 'Rezept' gelöscht, löscht das RDBMS automatisch und kaskadierend alle zugehörigen Datensätze in der Tabelle 'RezeptPosition'."
+                    },
+                    {
+                        id: "ap2_1_3_c",
+                        label: "3.3 Datenbank-Indexierung (B-Tree Index)",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 4,
+                        stencil: "B-TREE INDEX",
+                        text: "Auf der Tabelle 'Patient' soll ein Index auf das Feld 'Nachname' angelegt werden. Erläutern Sie den Vor- und Nachteil dieses Indexes bei Lese- und Schreiboperationen.",
+                        solution: "• Vorteil (Leseoperationen): SELECT-Abfragen mit 'WHERE Nachname = ?' oder 'ORDER BY Nachname' werden drastisch beschleunigt, da der B-Tree eine gezielte Suche in O(log n) statt eines Full Table Scans (O(n)) ermöglicht.\n• Nachteil (Schreiboperationen): Bei jedem INSERT, UPDATE oder DELETE auf der Spalte 'Nachname' muss der B-Tree balanciert und reorganisiert werden, was zusätzlichen I/O- und Speicheraufwand verursacht."
+                    }
+                ]
+            },
+            {
+                number: 4,
+                title: "4. Aufgabe: Anforderungsanalyse, ISO/IEC 25010 & Scrum Sprint-Planung (25 Punkte)",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "ap2_1_4_a",
+                        label: "4.1 Lastenheft vs. Pflichtenheft",
+                        points: 7,
+                        type: "lines",
+                        linesCount: 4,
+                        stencil: "LASTENHEFT / PFLICHTENHEFT",
+                        text: "Vergleichen Sie Lastenheft und Pflichtenheft hinsichtlich Auftraggeber/Auftragnehmer, Fragestellung ('Was' vs. 'Wie') und rechtlicher Bedeutung.",
+                        solution: "• Lastenheft: Wird vom Auftraggeber (Kunde) erstellt. Beschreibt die Gesamtheit der Forderungen (WAS soll wofür erreicht werden?). Basis für die Angebotseinholung.\n• Pflichtenheft: Wird vom Auftragnehmer (Entwickler) erstellt. Beschreibt den konkreten Realisierungsvorschlag (WIE und WOMIT werden die Anforderungen technisch gelöst?). Nach Freigabe wird es vertragliche Grundlage der Leistungsabnahme."
+                    },
+                    {
+                        id: "ap2_1_4_b",
+                        label: "4.2 Qualitätskriterien nach ISO/IEC 25010",
+                        points: 8,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "ISO/IEC 25010",
+                        text: "Nennen Sie vier Qualitätsmerkmale für Software nach ISO/IEC 25010 und geben Sie je ein konkretes Beispiel für die Telemedizin-Plattform an.",
+                        solution: "1. Performanz / Zeiteffizienz: Video-Stream Latenz < 150 ms; API-Antwortzeit bei Rezeptabfragen < 200 ms.\n2. Sicherheit: Ende-zu-Ende-Verschlüsselung nach TLS 1.3; Zwei-Faktor-Authentifizierung für Ärzte.\n3. Zuverlässigkeit / Verfügbarkeit: Hochverfügbarkeit von 99,9 % im Jahresmittel; automatisches Failover.\n4. Benutzbarkeit (Usability): Barrierefreier Zugriff (WCAG 2.1 Level AA) für ältere Patienten."
+                    },
+                    {
+                        id: "ap2_1_4_c",
+                        label: "4.3 Scrum-Sprintplanung & INVEST-Kriterien",
+                        points: 10,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "AGILES SCRUM & INVEST",
+                        text: "a) Erläutern Sie das INVEST-Prinzip für hochwertige User Stories.\nb) Was unterscheidet die 'Definition of Ready' (DoR) von der 'Definition of Done' (DoD)?",
+                        solution: "a) INVEST-Kriterien:\n• I - Independent: Unabhängig von anderen Stories implementierbar.\n• N - Negotiable: Verhandelbar zwischen Team und Product Owner.\n• V - Valuable: Bietet messbaren Mehrwert für den Endanwender/Kunden.\n• E - Estimable: Aufwand kann vom Team geschätzt werden.\n• S - Small: Klein genug, um innerhalb eines Sprints fertiggestellt zu werden.\n• T - Testable: Durch klare Akzeptanzkriterien verifizierbar.\n\nb) DoR vs. DoD:\n• Definition of Ready: Kriterien, die eine User Story erfüllen muss, BEVOR sie in das Sprint Backlog übernommen werden darf (z. B. geschätzt, Akzeptanzkriterien vorhanden).\n• Definition of Done: Gemeinsames Qualitätskriterium, das erfüllt sein muss, DAMIT ein Inkrement als fertig gilt (z. B. Unit-Tests grün, Code-Review bestanden, Dokumentation aktualisiert)."
+                    }
+                ]
+            }
+        ]
+    },
+
+    {
+        id: "exam_ap2_2",
+        examLevel: "ap2",
+        fachrichtung: "FIAE",
+        title: "Prüfung AP2-2: PB 3 – Entwicklung und Umsetzung von Algorithmen (Original BaWü Standard • 100 Pkt)",
+        badge: "100 Pkt • 90 Min • PB 3 FIAE",
+        subtitle: "Abschlussprüfung Teil 2 • Fachinformatiker Anwendungsentwicklung • Logistik & Routenoptimierung",
+        ausgangssituation: "Sie arbeiten als Anwendungsentwickler bei einem Logistik-Dienstleister in Stuttgart. Das interne Tourenplanungs- und Lagerverwaltungssystem soll um intelligente Sortier-, Such- und Abrechnungsalgorithmen erweitert werden. Sie analysieren gegebene Algorithmen mit systematischen Schreibtischtests (Trace-Tabellen), implementieren optimierte Datenstrukturen (Stack, Queue, Hash-Map), optimieren SQL-Abfragen für Frachtsendungen und wenden die SOLID-Prinzipien der objektorientierten Programmierung an.",
+        tasks: [
+            {
+                number: 1,
+                title: "1. Aufgabe: Algorithmen-Analyse, Schreibtischtest & Trace-Tabelle (25 Punkte)",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "ap2_2_1_a",
+                        label: "1.1 Vollständiger Schreibtischtest (Trace-Tabelle)",
+                        points: 15,
+                        type: "lines",
+                        linesCount: 8,
+                        stencil: "TRACE-TABELLE",
+                        text: "Gegeben ist folgender Pseudocode zur Frachtgewichtsberechnung:\n\n01: gewichte = [25, 12, 45, 8, 30, 15]\n02: ladung = 0\n03: anzahl = 0\n04: FÜR i = 0 BIS LÄNGE(gewichte) - 1 MACHE\n05:     WENN gewichte[i] >= 20 DANN\n06:         ladung = ladung + gewichte[i]\n07:         anzahl = anzahl + 1\n08:     ENDE WENN\n09:     WENN ladung >= 80 DANN\n10:         VERLASSE SCHLEIFE\n11:     ENDE WENN\n12: ENDE FÜR\n13: GIB ZURÜCK ladung\n\nErstellen Sie die Trace-Tabelle für alle Iterationen und geben Sie die finalen Werte von 'ladung', 'anzahl' und den Rückgabewert an.",
+                        solution: "Trace-Tabelle (Schreibtischtest):\n| Durchlauf | i | gewichte[i] | gewichte[i] >= 20? | ladung | anzahl | ladung >= 80? | Bemerkung |\n| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :--- |\n| Start | - | - | - | 0 | 0 | - | Init |\n| 1 | 0 | 25 | JA | 25 | 1 | NEIN (25 < 80) | ladung=25, anzahl=1 |\n| 2 | 1 | 12 | NEIN | 25 | 1 | NEIN (25 < 80) | Keine Addition |\n| 3 | 2 | 45 | JA | 70 | 2 | NEIN (70 < 80) | ladung=70, anzahl=2 |\n| 4 | 3 | 8 | NEIN | 70 | 2 | NEIN (70 < 80) | Keine Addition |\n| 5 | 4 | 30 | JA | 100 | 3 | JA (100 >= 80) | Abbruchbedingung erfüllt! |\n\nDas Element bei Index 5 (Wert 15) wird wegen vorzeitigen Schleifenabbruchs nicht mehr geprüft.\nFinale Werte: ladung = 100, anzahl = 3, Rückgabewert = 100."
+                    },
+                    {
+                        id: "ap2_2_1_b",
+                        label: "1.2 Laufzeitkomplexität & Schleifenoptimierung",
+                        points: 10,
+                        type: "lines",
+                        linesCount: 4,
+                        stencil: "O-NOTATION",
+                        text: "a) Bestimmen Sie die Worst-Case-Laufzeitkomplexität des Algorithmus in der O-Notation bezogen auf die Array-Länge n.\nb) Welche Maßnahme verbessert die Effizienz, wenn das Array Millionen Einträge umfasst und wiederholt nach bestimmten Gewichtsschwellen gesucht wird?",
+                        solution: "a) Laufzeitkomplexität: O(n) linearer Aufwand im Worst Case (wenn die Abbruchschwelle nicht erreicht wird und alle n Elemente durchlaufen werden müssen).\n\nb) Optimierungsmaßnahme: Das Array vorab sortieren oder in einem Binären Suchbaum / segmentierten Index organisieren, um per Binärer Suche oder Prefix-Sum-Tree in O(log n) zu navigieren."
+                    }
+                ]
+            },
+            {
+                number: 2,
+                title: "2. Aufgabe: Datenstrukturen & Such-/Sortieralgorithmen (25 Punkte)",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "ap2_2_2_a",
+                        label: "2.1 Binäre Suche vs. Lineare Suche",
+                        points: 9,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "SUCHALGORITHMEN",
+                        text: "In einer sortierten Liste von 2.048 Frachtcontainern wird nach einer Containernummer gesucht.\na) Beschreiben Sie das Vorgehen der binären Suche.\nb) Berechnen Sie die maximale Anzahl an Vergleichen im Worst Case bei der binären Suche und vergleichen Sie diese mit der linearen Suche.",
+                        solution: "a) Vorgehen der binären Suche:\n1. Berechne den Mittelpunkt des aktuellen Suchbereichs (mid = (low + high) / 2).\n2. Ist das Element in der Mitte gleich dem Suchwert ➔ Treffer (Ende).\n3. Ist der Suchwert kleiner ➔ Suche in der linken Hälfte fortsetzen (high = mid - 1).\n4. Ist der Suchwert größer ➔ Suche in der rechten Hälfte fortsetzen (low = mid + 1).\n5. Wiederholen, bis das Element gefunden wurde oder low > high ist.\n\nb) Vergleichszahlen für n = 2.048:\n• Binäre Suche: log2(2.048) = 11 Vergleiche maximal (O(log n)).\n• Lineare Suche: 2.048 Vergleiche im Worst Case (O(n))."
+                    },
+                    {
+                        id: "ap2_2_2_b",
+                        label: "2.2 Stack (LIFO) vs. Queue (FIFO) in der Lagerlogistik",
+                        points: 8,
+                        type: "lines",
+                        linesCount: 4,
+                        stencil: "STACK & QUEUE",
+                        text: "Erklären Sie die Prinzipien LIFO und FIFO anhand zweier praktischer Abläufe im Lager (z. B. Container-Stapelung und LKW-Abfertigung an der Rampe).",
+                        solution: "• Stack (LIFO - Last In, First Out): Container-Stapelung in einer engen Lagergasse. Der zuletzt oben aufgestellte Container muss als erster wieder heruntergehoben werden, um an die darunterliegenden heranzukommen (Operationen: push, pop).\n• Queue (FIFO - First In, First Out): LKW-Warteschlange an der Einfahrtsschranke. Der LKW, der als erster ankommt, wird als erster abgefertigt und eingelassen (Operationen: enqueue, dequeue)."
+                    },
+                    {
+                        id: "ap2_2_2_c",
+                        label: "2.3 Quicksort vs. Mergesort: Stabilität & Speicherbedarf",
+                        points: 8,
+                        type: "lines",
+                        linesCount: 4,
+                        stencil: "SORTIERALGORITHMEN",
+                        text: "Vergleichen Sie Quicksort und Mergesort hinsichtlich durchschnittlicher/schlechtester Laufzeit, zusätzlichem Speicherplatzbedarf und Stabilität.",
+                        solution: "• Quicksort: Average-Laufzeit O(n log n), Worst-Case O(n²) (bei ungünstigem Pivot). Speicherbedarf O(log n) durch Rekursions-Stack (in-place). Grundsätzlich instabil.\n• Mergesort: Garantierte Laufzeit O(n log n) in allen Fällen (Best, Average, Worst). Benötigt O(n) zusätzlichen Speicherplatz zum Mischen der Teilarrays. Stabil (die relative Reihenfolge gleicher Elemente bleibt erhalten)."
+                    }
+                ]
+            },
+            {
+                number: 3,
+                title: "3. Aufgabe: Objektorientierung (OOP) & SOLID-Prinzipien (25 Punkte)",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "ap2_2_3_a",
+                        label: "3.1 Die SOLID-Prinzipien im Detail",
+                        points: 12,
+                        type: "lines",
+                        linesCount: 7,
+                        stencil: "SOLID-PRINZIPIEN",
+                        text: "Erläutern Sie die fünf SOLID-Prinzipien (S-O-L-I-D) anhand kurzer Erklärungen.",
+                        solution: "• S - Single Responsibility: Jede Klasse hat genau eine Aufgabe und nur einen Änderungsgrund.\n• O - Open/Closed: Offen für Erweiterungen, geschlossen für Modifikationen (Vererbung/Interfaces statt Code-Änderung).\n• L - Liskov Substitution: Abgeleitete Klassen müssen sich nahtlos wie ihre Basisklassen verhalten, ohne Fehler zu verursachen.\n• I - Interface Segregation: Keine gigantischen Interfaces; lieber mehrere schlanke, zweckgebundene Schnittstellen.\n• D - Dependency Inversion: Abhängigkeiten gegen Abstraktionen (Interfaces) richten, nicht gegen konkrete Klassen (Dependency Injection)."
+                    },
+                    {
+                        id: "ap2_2_3_b",
+                        label: "3.2 Verletzung des Liskov Substitution Principle (LSP)",
+                        points: 7,
+                        type: "lines",
+                        linesCount: 4,
+                        stencil: "LSP-VERSTOSS",
+                        text: "In einer Software erbt 'class GefahrgutTransport' von 'class StandardTransport'. Erläutern Sie, wie eine Verletzung des LSP aussehen könnte und wie man sie behebt.",
+                        solution: "Verletzung: Wenn 'StandardTransport' eine Methode 'planeFahrtDurchTunnel()' anbietet, aber 'GefahrgutTransport' diese mit einer Exception abbricht ('Tunneldurchfahrt verboten!'), bricht das LSP, weil der Aufrufer den Subtyp nicht wie die Basisklasse behandeln kann.\nBehebung: Auslagern in separate Schnittstellen (z. B. 'IRoutenfaehig' mit Eignungsprüfung) oder Zusammensetzung (Composition over Inheritance)."
+                    },
+                    {
+                        id: "ap2_2_3_c",
+                        label: "3.3 Abstrakte Klassen vs. Interfaces",
+                        points: 6,
+                        type: "lines",
+                        linesCount: 4,
+                        stencil: "ABSTRAKTE KLASSE VS INTERFACE",
+                        text: "Nennen Sie zwei Unterschiede zwischen einer abstrakten Klasse und einem Interface in modernen OOP-Sprachen (Java/C#).",
+                        solution: "1. Eine Klasse kann beliebig viele Interfaces implementieren (Mehrfachimplementierung), aber nur von genau einer (abstrakten) Klasse erben (Einfachvererbung).\n2. Abstrakte Klassen können Konstruktoren, Instanzvariablen (Zustand) und vollständige Methodenrümpfe definieren; Interfaces dienten primär als reine Methodensignaturen (Verträge ohne Zustand)."
+                    }
+                ]
+            },
+            {
+                number: 4,
+                title: "4. Aufgabe: Fortgeschrittenes SQL & Transaktionssicherheit (ACID) (25 Punkte)",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "ap2_2_4_a",
+                        label: "4.1 Relationale SQL-Abfrage mit Aggregation & HAVING",
+                        points: 10,
+                        type: "lines",
+                        linesCount: 6,
+                        stencil: "SQL-ABFRAGE",
+                        text: "Tabellen:\n• Spediteur (SpediteurID, Name, Land)\n• Frachtauftrag (AuftragsID, SpediteurID, Datum, Status)\n• Frachtposition (PositionsID, AuftragsID, Gewicht, Frachtpreis)\n\nFormulieren Sie ein SQL-Statement, das Name des Spediteurs und die Gesamtsumme der Frachtpreise für Spediteure aus 'Deutschland' ausgibt, deren Gesamtsumme über 50.000 € liegt. Sortieren Sie absteigend nach dem Gesamtpreis.",
+                        solution: "SELECT s.Name, SUM(fp.Frachtpreis) AS Gesamtumsatz\nFROM Spediteur s\nINNER JOIN Frachtauftrag fa ON s.SpediteurID = fa.SpediteurID\nINNER JOIN Frachtposition fp ON fa.AuftragsID = fp.AuftragsID\nWHERE s.Land = 'Deutschland'\nGROUP BY s.SpediteurID, s.Name\nHAVING SUM(fp.Frachtpreis) > 50000\nORDER BY Gesamtumsatz DESC;"
+                    },
+                    {
+                        id: "ap2_2_4_b",
+                        label: "4.2 SQL-Unterabfrage (Subquery)",
+                        points: 8,
+                        type: "lines",
+                        linesCount: 4,
+                        stencil: "SQL SUBQUERY",
+                        text: "Formulieren Sie eine SQL-Abfrage, die alle Spediteure (SpediteurID, Name) findet, die bisher noch KEINEN EINZIGEN Frachtauftrag erhalten haben (Nutzung von NOT IN oder NOT EXISTS).",
+                        solution: "SELECT SpediteurID, Name\nFROM Spediteur\nWHERE SpediteurID NOT IN (\n    SELECT DISTINCT SpediteurID FROM Frachtauftrag WHERE SpediteurID IS NOT NULL\n);"
+                    },
+                    {
+                        id: "ap2_2_4_c",
+                        label: "4.3 Das ACID-Prinzip bei Datenbank-Transaktionen",
+                        points: 7,
+                        type: "lines",
+                        linesCount: 4,
+                        stencil: "ACID-KRITERIEN",
+                        text: "Erläutern Sie die vier Buchstaben des ACID-Prinzips bei einer Frachtbuchung.",
+                        solution: "• A - Atomicity (Atomarität): Entweder wird die gesamte Frachtbuchung gebucht oder gar nichts (Rollback bei Fehler).\n• C - Consistency (Konsistenz): Vor und nach der Buchung ist die DB in einem gültigen Zustand (Integritätsregeln gewahrt).\n• I - Isolation (Isolation): Parallele Buchungen beeinflussen sich nicht gegenseitig.\n• D - Durability (Dauerhaftigkeit): Wurde ein COMMIT bestätigt, bleiben die Daten auch bei sofortigem Stromausfall erhalten."
+                    }
+                ]
+            }
+        ]
+    },
+
+    {
+        id: "exam_ap2_3",
+        examLevel: "ap2",
+        fachrichtung: "FIAE",
+        title: "Prüfung AP2-3: PB 4 – Wirtschafts- und Sozialkunde (Original IHK/BaWü Standard • 100 Pkt)",
+        badge: "100 Pkt • 60 Min • PB 4 WiSo",
+        subtitle: "Abschlussprüfung Teil 2 • Fachinformatiker (FIAE/FISI) • Arbeitsrecht, Betriebsrat & Verträge",
+        ausgangssituation: "Sie sind als Softwareentwickler bei der CloudTech GmbH angestellt. Das Unternehmen wächst und beschäftigt inzwischen 48 Mitarbeiter. Im Rahmen von internen Umstrukturierungen, Software-Vertriebsverträgen und Mitarbeiter-Mitbestimmung treten verschiedene arbeits- und vertragsrechtliche Fragestellungen auf, die Sie rechtssicher nach BGB, KSchG, BetrVG, HGB und UrhG beurteilen.",
+        tasks: [
+            {
+                number: 1,
+                title: "1. Aufgabe: Kündigungsschutzgesetz & Beendigung von Arbeitsverhältnissen (25 Punkte)",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "ap2_3_1_a",
+                        label: "1.1 Anwendungsbereich des KSchG",
+                        points: 7,
+                        type: "lines",
+                        linesCount: 4,
+                        stencil: "KSCHG VORAUSSETZUNGEN",
+                        text: "Welche zwei gesetzlichen Voraussetzungen müssen erfüllt sein, damit das Kündigungsschutzgesetz (KSchG) für einen Arbeitnehmer persönlich greift?",
+                        solution: "1. Betriebliche Voraussetzung: Der Betrieb muss in der Regel mehr als 10 Arbeitnehmer beschäftigen (ohne Auszubildende, Teilzeitkräfte anteilig berechnet nach § 23 Abs. 1 KSchG).\n2. Persönliche Voraussetzung: Das Arbeitsverhältnis in demselben Betrieb oder Unternehmen muss länger als 6 Monate ohne Unterbrechung bestanden haben (Wartezeit nach § 1 Abs. 1 KSchG)."
+                    },
+                    {
+                        id: "ap2_3_1_b",
+                        label: "1.2 Kündigungsgründe & Sozialauswahl",
+                        points: 9,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "SOZIALAUSWAHL",
+                        text: "a) Nennen Sie die drei gesetzlichen Gründe für eine sozial gerechtfertigte ordentliche Kündigung nach § 1 KSchG.\nb) Welche vier Kriterien müssen bei einer betriebsbedingten Kündigung im Rahmen der Sozialauswahl zwingend berücksichtigt werden?",
+                        solution: "a) Die drei Kündigungsgründe:\n1. Personenbedingte Kündigung (z. B. dauerhafte schwere Krankheit mit negativer Gesundheitsprognose).\n2. Verhaltensbedingte Kündigung (z. B. wiederholtes Zuspätkommen nach vorheriger einschlägiger Abmahnung).\n3. Betriebsbedingte Kündigung (dringende betriebliche Erfordernisse, z. B. Schließung einer Abteilung).\n\nb) Die 4 Kriterien der Sozialauswahl (§ 1 Abs. 3 KSchG):\n1. Dauer der Betriebszugehörigkeit\n2. Lebensalter des Arbeitnehmers\n3. Gesetzliche Unterhaltspflichten (z. B. Kinder, Ehepartner)\n4. Schwerbehinderung des Arbeitnehmers."
+                    },
+                    {
+                        id: "ap2_3_1_c",
+                        label: "1.3 Formvorschrift (§ 623 BGB) & 3-Wochen-Klagefrist (§ 4 KSchG)",
+                        points: 9,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "FRISTEN & FORMERFORDERNIS",
+                        text: "a) Ein Vorgesetzter kündigt einem Entwickler per E-Mail mit digitaler Signatur. Beurteilen Sie die Rechtswirksamkeit nach § 623 BGB.\nb) Welche Frist muss der Arbeitnehmer einhalten, wenn er Kündigungsschutzklage erheben will?",
+                        solution: "a) Rechtswirksamkeit: Die Kündigung ist nach § 623 BGB i. V. m. § 125 BGB NICHTIG (unwirksam). Das Gesetz schreibt zwingend die Schriftform (eigenhändige handschriftliche Unterschrift auf Papier) vor; die elektronische Form (E-Mail, PDF, SMS) ist ausdrücklich gesetzlich ausgeschlossen.\n\nb) Klagefrist (§ 4 KSchG): Innerhalb von 3 WOCHEN nach Zugang der schriftlichen Kündigung muss Kündigungsschutzklage beim Arbeitsgericht erhoben werden, sonst gilt die Kündigung als von Anfang an rechtswirksam."
+                    }
+                ]
+            },
+            {
+                number: 2,
+                title: "2. Aufgabe: Betriebsverfassungsgesetz & Mitbestimmung bei IT-Systemen (25 Punkte)",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "ap2_3_2_a",
+                        label: "2.1 Echte Mitbestimmung nach § 87 Abs. 1 Nr. 6 BetrVG",
+                        points: 10,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "MITBESTIMMUNG IT-SYSTEME",
+                        text: "Die Geschäftsführung plant die Einführung einer Entwickler-Software, die Git-Commits, Code-Reviews und Anwesenheitszeiten analysiert. Erläutern Sie die Mitbestimmungsrechte des Betriebsrats nach § 87 Abs. 1 Nr. 6 BetrVG.",
+                        solution: "Der Betriebsrat hat ein erzwingbares Mitbestimmungsrecht bei der 'Einführung und Anwendung von technischen Einrichtungen, die dazu bestimmt sind, das Verhalten oder die Leistung der Arbeitnehmer zu überwachen'.\nOhne vorherige Zustimmung des Betriebsrats (in Form einer Betriebsvereinbarung) darf das System nicht eingeführt werden. Kommt keine Einigung zustande, entscheidet die Einigungsstelle."
+                    },
+                    {
+                        id: "ap2_3_2_b",
+                        label: "2.2 Mitwirkung bei Einstellungen nach § 99 BetrVG",
+                        points: 8,
+                        type: "lines",
+                        linesCount: 4,
+                        stencil: "PERSONELLE MASSNAHMEN",
+                        text: "Für das Entwicklerteam soll ein Senior Developer eingestellt werden. Welche Rechte und welche Frist hat der Betriebsrat in Betrieben ab 20 Arbeitnehmern nach § 99 BetrVG?",
+                        solution: "Der Arbeitgeber muss den Betriebsrat vor jeder Einstellung unterrichten, die Bewerbungsunterlagen vorlegen und seine Zustimmung einholen. Der Betriebsrat kann der Einstellung innerhalb von EINER WOCHE schriftlich widersprechen, wenn gesetzliche Gründe nach § 99 Abs. 2 BetrVG vorliegen (z. B. Verstoß gegen interne Stellenausschreibung)."
+                    },
+                    {
+                        id: "ap2_3_2_c",
+                        label: "2.3 Anhörung vor Kündigungen nach § 102 BetrVG",
+                        points: 7,
+                        type: "lines",
+                        linesCount: 4,
+                        stencil: "ANHÖRUNG DES BETRIEBSRATS",
+                        text: "Welche Frist gilt für die Stellungnahme des Betriebsrats bei einer ordentlichen bzw. außerordentlichen Kündigung und welche Rechtsfolge hat die unterbliebene Anhörung?",
+                        solution: "• Frist ordentliche Kündigung: 1 Woche.\n• Frist außerordentliche (fristlose) Kündigung: 3 Tage.\n• Rechtsfolge: Eine Kündigung, die ohne vorherige ordnungsgemäße Anhörung des Betriebsrats ausgesprochen wird, ist absolut unwirksam (§ 102 Abs. 1 Satz 3 BetrVG)!"
+                    }
+                ]
+            },
+            {
+                number: 3,
+                title: "3. Aufgabe: Kaufvertragsstörungen & Sachmängelrechte nach BGB (25 Punkte)",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "ap2_3_3_a",
+                        label: "3.1 Vorrang der Nacherfüllung (§ 439 BGB)",
+                        points: 10,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "NACHERFÜLLUNG",
+                        text: "Ein Softwarehaus kauft 30 Server für Testumgebungen. 5 Server weisen fehlerhaften Arbeitsspeicher auf. Welche Rechte stehen dem Käufer primär auf der 1. Stufe zu und wer hat das Wahlrecht?",
+                        solution: "Primärer Anspruch (1. Stufe): Nacherfüllung nach § 439 BGB.\nDer KÄUFER hat das Wahlrecht: Er kann nach seiner Wahl entweder die Nachbesserung (Reparatur / Austausch des RAMs) oder die Nachlieferung (Lieferung mangelfreier neuer Server) verlangen.\nDer Verkäufer trägt alle Kosten für Transport, Wege, Arbeits- und Materialaufwand."
+                    },
+                    {
+                        id: "ap2_3_3_b",
+                        label: "3.2 Sekundärrechte nach Fristablauf",
+                        points: 8,
+                        type: "lines",
+                        linesCount: 4,
+                        stencil: "RÜCKTRITT & MINDERUNG",
+                        text: "Welche Rechte kann der Käufer geltend machen, wenn die Nacherfüllung nach angemessener Fristsetzung fehlgeschlagen ist?",
+                        solution: "Der Käufer kann auf der 2. Stufe wählen zwischen:\n1. Rücktritt vom Kaufvertrag (§§ 440, 323 BGB) ➔ Rückabwicklung (Ware zurück, Kaufpreis zurück).\n2. ODER Minderung des Kaufpreises (§ 441 BGB) ➔ Ware behalten mit angemessenem Preisnachlass.\nSowie zusätzlich Schadensersatz statt der Leistung (§ 280 BGB), sofern der Verkäufer den Mangel zu vertreten hat."
+                    },
+                    {
+                        id: "ap2_3_3_c",
+                        label: "3.3 Verjährung & Rügepflicht (§ 377 HGB)",
+                        points: 7,
+                        type: "lines",
+                        linesCount: 4,
+                        stencil: "HGB RÜGEPFLICHT",
+                        text: "Wie lange verjähren Sachmängelansprüche regelmäßig und welche Pflicht gilt beim beidseitigen Handelskauf (B2B) nach § 377 HGB?",
+                        solution: "• Verjährungsfrist (§ 438 BGB): Regelmäßig 2 Jahre ab Ablieferung der Sache.\n• Rügepflicht beim Handelskauf (§ 377 HGB): Beide Parteien sind Kaufleute (B2B). Der Käufer muss die Ware unverzüglich nach Ablieferung untersuchen und offene Mängel unverzüglich anzeigen. Andernfalls gilt die Ware als genehmigt und Gewährleistungsansprüche erlöschen."
+                    }
+                ]
+            },
+            {
+                number: 4,
+                title: "4. Aufgabe: Gesellschaftsformen, Haftung & Urheberrecht bei Software (25 Punkte)",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "ap2_3_4_a",
+                        label: "4.1 Kommanditgesellschaft (KG) vs. GmbH",
+                        points: 9,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "RECHTSFORMEN & HAFTUNG",
+                        text: "Vergleichen Sie die Haftungsverhältnisse bei einer Kommanditgesellschaft (KG) mit denen einer GmbH.",
+                        solution: "• Kommanditgesellschaft (KG - Personengesellschaft):\n  - Komplementär (Vollhafter): Haftet unbeschränkt, persönlich und solidarisch mit dem gesamten Geschäfts- und Privatvermögen.\n  - Kommanditist (Teilhafter): Haftet nur beschränkt bis zur Höhe seiner im Handelsregister eingetragenen Einlage.\n• GmbH (Gesellschaft mit beschränkter Haftung - Kapitalgesellschaft):\n  - Für Verbindlichkeiten haftet den Gläubigern gegenüber ausschließlich das Gesellschaftsvermögen (Mindeststammkapital 25.000 €). Keine persönliche Haftung der Gesellschafter."
+                    },
+                    {
+                        id: "ap2_3_4_b",
+                        label: "4.2 Urheberrecht an Arbeitnehmer-Software (§ 69b UrhG)",
+                        points: 8,
+                        type: "lines",
+                        linesCount: 4,
+                        stencil: "SOFTWARE-URHEBERRECHT",
+                        text: "Ein fest angestellter Programmierer entwickelt im Rahmen seines Arbeitsvertrags ein Programm. Wem stehen die wirtschaftlichen Verwertungsrechte nach § 69b UrhG zu?",
+                        solution: "Wird ein Computerprogramm von einem Arbeitnehmer in Wahrnehmung seiner Aufgaben oder nach Weisung des Arbeitgebers geschaffen, stehen nach § 69b UrhG AUSSCHLIESSLICH dem Arbeitgeber alle wirtschaftlichen Verwertungs- und Nutzungsrechte zu, sofern vertraglich nichts anderes vereinbart ist."
+                    },
+                    {
+                        id: "ap2_3_4_c",
+                        label: "4.3 Open-Source-Lizenzen: Copyleft vs. Permissive",
+                        points: 8,
+                        type: "lines",
+                        linesCount: 4,
+                        stencil: "OPEN-SOURCE-LIZENZEN",
+                        text: "Was unterscheidet Lizenzen mit strengem Copyleft (z. B. GNU GPL) von permissiven Lizenzen (z. B. MIT oder Apache 2.0)?",
+                        solution: "• Copyleft (GPL): Verlangt zwingend, dass abgeleitete Software und Modifikationen ebenfalls wieder unter derselben Open-Source-Lizenz (GPL) und mit offenem Quellcode veröffentlicht werden ('Viruseffekt').\n• Permissive Lizenzen (MIT / Apache): Erlauben die freie Weiterverwendung, Modifikation und auch die Einbindung in proprietäre, kommerzielle Closed-Source-Software, meist lediglich unter Nennung des Copyright-Hinweises."
+                    }
+                ]
+            }
+        ]
+    },
+
+    {
+        id: "exam_ap2_4",
+        examLevel: "ap2",
+        fachrichtung: "FIAE",
+        title: "Prüfung AP2-4: Ganzheitlich FIAE – E-Commerce & Microservices (Original BaWü Sommer 2024 • 100 Pkt)",
+        badge: "100 Pkt • 90 Min • Ganzheitlich FIAE",
+        subtitle: "Abschlussprüfung Teil 2 • Fachinformatiker Anwendungsentwicklung • Webshop Platform",
+        ausgangssituation: "Die FashionDirect AG beauftragt Ihr Entwicklerteam mit der Neukonzeption ihrer E-Commerce-Plattform. Das bestehende Altsystem soll durch eine moderne, cloudfähige Microservice-Architektur mit RESTful Web-Services und zentraler API-Gateway-Authentifizierung ersetzt werden. Sie erstellen die Schnittstellenspezifikation, entwerfen UML-Diagramme für die Bestellabwicklung, implementieren Kernalgorithmen für Rabatt- und Gutscheinstaffeln und definieren Testfälle zur Qualitätssicherung.",
+        tasks: [
+            {
+                number: 1,
+                title: "1. Aufgabe: RESTful API-Design & JWT-Authentifizierung (25 Punkte)",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "ap2_4_1_a",
+                        label: "1.1 REST-Prinzipien & Idempotenz",
+                        points: 10,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "REST-APIS",
+                        text: "Erläutern Sie das Prinzip der Zustandslosigkeit (Statelessness) in REST-APIs sowie die Idempotenz der Methoden GET, POST, PUT und DELETE.",
+                        solution: "• Zustandslosigkeit: Jede Client-Anfrage enthält alle zur Verarbeitung erforderlichen Informationen (z. B. Authentifizierungs-Token). Der Server speichert keine Sitzungszustände zwischen Anfragen.\n• Idempotenz:\n  - GET, PUT, DELETE sind idempotent (wiederholte Ausführung führt zum selben serverseitigen Endzustand).\n  - POST ist NICHT idempotent (wiederholtes Absenden erzeugt mehrere neue Ressourcen)."
+                    },
+                    {
+                        id: "ap2_4_1_b",
+                        label: "1.2 JSON Web Token (JWT) Architektur",
+                        points: 8,
+                        type: "lines",
+                        linesCount: 4,
+                        stencil: "JWT-AUFBAU",
+                        text: "Beschreiben Sie die drei Bestandteile eines JWT (Header, Payload, Signature) und begründen Sie, warum im Payload keine Passwörter gespeichert werden dürfen.",
+                        solution: "1. Header: Typ und Signaturalgorithmus (z. B. HS256).\n2. Payload: Claims wie Benutzer-ID, Ablaufzeit 'exp'. Wichtig: Ist nur Base64Url-kodiert, nicht verschlüsselt! Jeder kann den Inhalt lesen, weshalb Passwörter dort verboten sind.\n3. Signature: Kryptografischer Hash aus Header + Payload + Secret; garantiert die Manipulationssicherheit."
+                    },
+                    {
+                        id: "ap2_4_1_c",
+                        label: "1.3 HTTP-Statuscodes im API-Design",
+                        points: 7,
+                        type: "lines",
+                        linesCount: 4,
+                        stencil: "HTTP-STATUSCODES",
+                        text: "Nennen Sie den passenden HTTP-Statuscode für: a) Erfolgreiche Erstellung einer Ressource, b) Fehlende Authentifizierung, c) Fehlende Berechtigung, d) Ressource nicht gefunden.",
+                        solution: "a) 201 Created\nb) 401 Unauthorized\nc) 403 Forbidden\nd) 404 Not Found"
+                    }
+                ]
+            },
+            {
+                number: 2,
+                title: "2. Aufgabe: UML-Aktivitäts- & Sequenzdiagramm (25 Punkte)",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "ap2_4_2_a",
+                        label: "2.1 Aktivitätsdiagramm mit Swimlanes",
+                        points: 13,
+                        type: "lines",
+                        linesCount: 6,
+                        stencil: "UML AKTIVITÄTSDIAGRAMM",
+                        text: "Für den Bezahl- und Versandprozess soll ein Aktivitätsdiagramm modelliert werden. Erläutern Sie die Bedeutung von Swimlanes (Partitionen), Fork/Join (Parallelisierung) und Decision/Merge.",
+                        solution: "• Swimlanes: Unterteilen das Diagramm in Spalten für Rollen/Systeme (z. B. Kunde, Shop, Bezahldienst, Lager) und weisen Aktivitäten eindeutig Verantwortlichkeiten zu.\n• Fork (Synchronisationsbalken): Teilt einen Kontrollfluss in zwei parallel ablaufende Pfade auf (z. B. gleichzeitig Lagerauftrag drucken UND Rechnungs-PDF generieren).\n• Join: Führt parallele Pfade wieder zusammen; erst wenn alle eingehenden Flüsse abgeschlossen sind, geht es weiter.\n• Decision/Merge: Raute für bedingte Verzweigungen mit Guards [Bedingung] und anschließende Zusammenführung."
+                    },
+                    {
+                        id: "ap2_4_2_b",
+                        label: "2.2 Sequenzdiagramm für Bezahlvorgang",
+                        points: 12,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "UML SEQUENZDIAGRAMM",
+                        text: "Modellieren Sie die Interaktion zwischen 'Warenkorb', 'ZahlungsGateway' und 'BankAPI'. Berücksichtigen Sie den 'alt'-Block für erfolgreiche vs. fehlgeschlagene Zahlung.",
+                        solution: "1. Warenkorb sendet synchrone Nachricht 'autorisiereZahlung(betrag)' an ZahlungsGateway.\n2. ZahlungsGateway sendet synchrone Nachricht 'abbuchen(konto, betrag)' an BankAPI.\n3. BankAPI antwortet (gestrichelte Linie) mit Statuscode.\n4. alt-Block:\n   [Status = OK]: ZahlungsGateway bestätigt 'ZahlungErfolgreich', Warenkorb schließt Bestellung ab.\n   [else / abgelehnt]: ZahlungsGateway meldet 'Zahlungsfehler', Warenkorb informiert Benutzer."
+                    }
+                ]
+            },
+            {
+                number: 3,
+                title: "3. Aufgabe: Algorithmus für Rabattstaffelung & Schreibtischtest (25 Punkte)",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "ap2_4_3_a",
+                        label: "3.1 Pseudocode für Rabattberechnung",
+                        points: 13,
+                        type: "lines",
+                        linesCount: 6,
+                        stencil: "PSEUDOCODE RABATT",
+                        text: "Entwerfen Sie einen Pseudocode für eine Funktion 'berechneEndpreis(betrag, istStammkunde, gutscheinCode)'. Regeln: Ab 100 € gibt es 5 % Rabatt, Stammkunden erhalten zusätzlich 5 %, ein Code 'SUMMER10' zieht 10 € ab.",
+                        solution: "FUNKTION berechneEndpreis(betrag, istStammkunde, gutscheinCode)\n    rabattsatz = 0\n    WENN betrag >= 100 DANN rabattsatz = rabattsatz + 0.05 ENDE WENN\n    WENN istStammkunde = WAHR DANN rabattsatz = rabattsatz + 0.05 ENDE WENN\n    endpreis = betrag * (1 - rabattsatz)\n    WENN gutscheinCode = 'SUMMER10' DANN endpreis = endpreis - 10 ENDE WENN\n    WENN endpreis < 0 DANN endpreis = 0 ENDE WENN\n    GIB ZURÜCK endpreis\nENDE FUNKTION"
+                    },
+                    {
+                        id: "ap2_4_3_b",
+                        label: "3.2 Trace-Tabelle mit Testwerten",
+                        points: 12,
+                        type: "lines",
+                        linesCount: 6,
+                        stencil: "SCHREIBTISCHTEST RABATT",
+                        text: "Erstellen Sie die Trace-Tabelle für die Testfälle:\n1. betrag=50, istStammkunde=falsch, code=''\n2. betrag=120, istStammkunde=wahr, code='SUMMER10'\n3. betrag=200, istStammkunde=falsch, code='SUMMER10'",
+                        solution: "| Testfall | betrag | Stammkunde? | Code | rabattsatz | Zwischenpreis | Gutschein | Endpreis |\n| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |\n| 1 | 50 € | NEIN | - | 0 % | 50,00 € | 0 € | 50,00 € |\n| 2 | 120 € | JA | SUMMER10 | 10 % (5+5) | 108,00 € | -10 € | 98,00 € |\n| 3 | 200 € | NEIN | SUMMER10 | 5 % (nur Betrag) | 190,00 € | -10 € | 180,00 € |"
+                    }
+                ]
+            },
+            {
+                number: 4,
+                title: "4. Aufgabe: Software-Qualitätssicherung: White-Box- & Black-Box-Testing (25 Punkte)",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "ap2_4_4_a",
+                        label: "4.1 White-Box-Überdeckungsmaße (C0, C1, C2)",
+                        points: 13,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "WHITE-BOX-TESTING",
+                        text: "Definieren Sie Anweisungsüberdeckung (C0), Zweigüberdeckung (C1) und Pfadüberdeckung (C2). Begründen Sie, warum 100 % C0-Überdeckung nicht ausreicht, um alle Fehler zu finden.",
+                        solution: "• C0 (Anweisungsüberdeckung): Jede Code-Zeile muss mindestens 1x ausgeführt werden.\n• C1 (Zweigüberdeckung): Jeder Zweig aller Verzweigungen (true und false) muss mindestens 1x durchlaufen werden.\n• C2 (Pfadüberdeckung): Jeder denkbare Gesamtpfad durch das Programm wird getestet.\n\nWarum C0 nicht ausreicht:\nC0 ignoriert leere 'else'-Zweige. Ein Programm mit 'if (x > 0) y = x;' hat bei einem Test mit x=5 100 % C0-Überdeckung. Der Fehlerfall, wenn x <= 0 ist (und y undefiniert bleibt), wird von C0 komplett übersehen!"
+                    },
+                    {
+                        id: "ap2_4_4_b",
+                        label: "4.2 Black-Box-Äquivalenzklassenbildung & Grenzwertanalyse",
+                        points: 12,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "GRENZWERTANALYSE",
+                        text: "Ein Gutschein ist gültig für Bestellwerte von 50 € bis 500 €. Bestimmen Sie gültige und ungültige Äquivalenzklassen sowie die Testwerte der Grenzwertanalyse.",
+                        solution: "• Gültige Äquivalenzklasse (GÄK): Bestellwert zwischen 50,00 € und 500,00 € (Repräsentant: 250 €).\n• Ungültige Äquivalenzklasse 1 (UÄK 1): Bestellwert unter 50,00 € (Repräsentant: 30 €).\n• Ungültige Äquivalenzklasse 2 (UÄK 2): Bestellwert über 500,00 € (Repräsentant: 600 €).\n\nGrenzwertanalyse:\n- Untere Grenze (50 €): 49,99 € (ungültig), 50,00 € (gültig, Grenze), 50,01 € (gültig).\n- Obere Grenze (500 €): 499,99 € (gültig), 500,00 € (gültig, Grenze), 500,01 € (ungültig)."
+                    }
+                ]
+            }
+        ]
+    },
+
+    {
+        id: "exam_ap2_5",
+        examLevel: "ap2",
+        fachrichtung: "FIAE",
+        title: "Prüfung AP2-5: Ganzheitlich FIAE – IoT-Flottenmanagement (Original BaWü Winter 2024/25 • 100 Pkt)",
+        badge: "100 Pkt • 90 Min • Ganzheitlich FIAE",
+        subtitle: "Abschlussprüfung Teil 2 • Fachinformatiker Anwendungsentwicklung • SmartFleet Cloud",
+        ausgangssituation: "Die SmartFleet Telematics GmbH entwickelt ein cloudbasiertes Flottenmanagementsystem für Speditionen. Fahrzeuge senden im Sekundentakt Telemetriedaten (GPS-Koordinaten, Geschwindigkeit, Tankfüllstand, Motortemperatur) an das Backend. Sie konzipieren das Softwaresystem mit Entwurfsmustern (Observer & Factory Method), entwerfen ein hochperformantes relationales Datenbankschema mit Indizes, implementieren einen Geofencing-Überwachungsalgorithmus und führen die Wirtschaftlichkeitsberechnung mit Function-Point-Analyse durch.",
+        tasks: [
+            {
+                number: 1,
+                title: "1. Aufgabe: Entwurfsmuster Observer & Factory Method (25 Punkte)",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "ap2_5_1_a",
+                        label: "1.1 Observer Pattern für Echtzeit-Telemetrie",
+                        points: 13,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "OBSERVER PATTERN",
+                        text: "Beim Eintreffen neuer Telemetriedaten sollen mehrere Module gleichzeitig benachrichtigt werden (Kartenanzeige, Alarm-Monitor, Logbuch). Erläutern Sie das Observer Pattern mit Subject, Observer und update()-Methode.",
+                        solution: "• Subject ('TelemetrieEmpfaenger'): Hält eine Liste registrierter Beobachter. Bietet Methoden 'attach(observer)', 'detach(observer)' und 'notifyObservers()'.\n• Observer-Interface ('ITelemetrieObserver'): Deklariert die Methode 'update(TelemetrieDaten daten)'.\n• Konkrete Observer ('LiveMapService', 'AlarmMonitor', 'LogbuchService'): Implementieren das Interface. Bei neuen Daten ruft das Subject 'notifyObservers()' auf, wodurch alle Module lose gekoppelt benachrichtigt werden."
+                    },
+                    {
+                        id: "ap2_5_1_b",
+                        label: "1.2 Factory Method für Protokoll-Parser",
+                        points: 12,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "FACTORY METHOD",
+                        text: "Verschiedene Fahrzeug-Hersteller senden Daten in unterschiedlichen Formaten (JSON, NMEA, Binary). Erläutern Sie das Factory Method Pattern zur Erzeugung passender Parser.",
+                        solution: "• Factory Method: Kapselt die Objekterzeugung in einer Fabrikmethode ('createParser(protokollTyp)').\n• Der Aufrufer arbeitet ausschließlich gegen das gemeinsame Interface 'ITelemetrieParser' und muss die konkreten Klassen ('JsonParser', 'NmeaParser', 'BinaryParser') nicht kennen.\n• Vorteil: Neue Protokolle können ohne Modifikation des bestehenden Empfangscodes integriert werden."
+                    }
+                ]
+            },
+            {
+                number: 2,
+                title: "2. Aufgabe: Datenbankentwurf, B-Tree-Indizes & SQL-Analysen (25 Punkte)",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "ap2_5_2_a",
+                        label: "2.1 Datenbankschema für Telemetrie & Normalisierung",
+                        points: 10,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "DATENBANKSCHEMA",
+                        text: "Entwerfen Sie ein 3. NF-konformes relationales Schema für Fahrzeuge, Fahrer und Telemetriemessungen mit passenden Datentypen und Schlüsseln.",
+                        solution: "• Fahrer(FahrerID [PK], Vorname, Nachname, FuehrerscheinNr)\n• Fahrzeug(FahrzeugID [PK], Kennzeichen, Modell, Baujahr, AktuellerFahrerID [FK zu Fahrer])\n• TelemetrieMessung(MessungID [PK], FahrzeugID [FK], Zeitstempel, Breitengrad, Laengengrad, Geschwindigkeit, Tankfuellstand)"
+                    },
+                    {
+                        id: "ap2_5_2_b",
+                        label: "2.2 B-Tree-Index auf Zeitreihendaten",
+                        points: 8,
+                        type: "lines",
+                        linesCount: 4,
+                        stencil: "INDEX-PERFORMANCE",
+                        text: "Begründen Sie, warum ein zusammengesetzter Index auf (FahrzeugID, Zeitstempel) für historische Routenabfragen essenziell ist.",
+                        solution: "Abfragen nach Fahrten eines bestimmten Fahrzeugs in einem Zeitintervall ('WHERE FahrzeugID = 42 AND Zeitstempel BETWEEN ...') können direkt über den B-Tree ohne Full Table Scan in O(log n) gefunden werden. Bei Millionen Datensätzen sinkt die Abfragezeit von mehreren Sekunden auf wenige Millisekunden."
+                    },
+                    {
+                        id: "ap2_5_2_c",
+                        label: "2.3 SQL-Aggregation für Geschwindigkeitsverstösse",
+                        points: 7,
+                        type: "lines",
+                        linesCount: 4,
+                        stencil: "SQL AGGREGATION",
+                        text: "Schreiben Sie ein SQL-Statement, das für jedes Fahrzeug (Kennzeichen) die Maximalgeschwindigkeit und die Anzahl der Messungen ermittelt, bei denen mehr als 100 km/h gemessen wurden.",
+                        solution: "SELECT f.Kennzeichen, MAX(m.Geschwindigkeit) AS MaxSpeed, COUNT(m.MessungID) AS UebertreterAnzahl\nFROM Fahrzeug f\nINNER JOIN TelemetrieMessung m ON f.FahrzeugID = m.FahrzeugID\nWHERE m.Geschwindigkeit > 100\nGROUP BY f.FahrzeugID, f.Kennzeichen;"
+                    }
+                ]
+            },
+            {
+                number: 3,
+                title: "3. Aufgabe: Geofencing-Algorithmus in Pseudocode & Schreibtischtest (25 Punkte)",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "ap2_5_3_a",
+                        label: "3.1 Geofencing-Prüfung in Pseudocode",
+                        points: 13,
+                        type: "lines",
+                        linesCount: 6,
+                        stencil: "PSEUDOCODE GEOFENCING",
+                        text: "Entwerfen Sie eine Funktion 'istImGeofence(lat, lon, minLat, maxLat, minLon, maxLon)', die true zurückgibt, wenn sich das Fahrzeug innerhalb des Rechtecks befindet, sonst false.",
+                        solution: "FUNKTION istImGeofence(lat, lon, minLat, maxLat, minLon, maxLon)\n    WENN lat >= minLat UND lat <= maxLat UND lon >= minLon UND lon <= maxLon DANN\n        GIB ZURÜCK WAHR\n    SONST\n        GIB ZURÜCK FALSCH\n    ENDE WENN\nENDE FUNKTION"
+                    },
+                    {
+                        id: "ap2_5_3_b",
+                        label: "3.2 Trace-Tabelle für Grenz-Koordinaten",
+                        points: 12,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "SCHREIBTISCHTEST GEOFENCE",
+                        text: "Gegeben: Schutzbereich minLat=48.0, maxLat=49.0, minLon=8.0, maxLon=9.0.\nFühren Sie den Schreibtischtest für folgende drei GPS-Punkte durch:\nP1(48.5, 8.5), P2(49.2, 8.7), P3(48.0, 9.0).",
+                        solution: "| Punkt | lat | lon | 48.0 <= lat <= 49.0? | 8.0 <= lon <= 9.0? | Ergebnis | Status |\n| :---: | :---: | :---: | :---: | :---: | :---: | :--- |\n| P1 | 48.5 | 8.5 | JA | JA | WAHR | Innerhalb Geofence |\n| P2 | 49.2 | 8.7 | NEIN (49.2 > 49.0) | JA | FALSCH | Alarm: Außerhalb! |\n| P3 | 48.0 | 9.0 | JA (Grenzwert) | JA (Grenzwert) | WAHR | Exakt auf Grenze (Gültig) |"
+                    }
+                ]
+            },
+            {
+                number: 4,
+                title: "4. Aufgabe: Wirtschaftlichkeitsrechnung & Function-Point-Analyse (25 Punkte)",
+                totalPoints: 25,
+                subtasks: [
+                    {
+                        id: "ap2_5_4_a",
+                        label: "4.1 Function-Point-Analyse (FPA) Berechnung",
+                        points: 13,
+                        type: "lines",
+                        linesCount: 6,
+                        stencil: "FUNCTION-POINT-ANALYSE",
+                        text: "Für das Telemetrie-Portal wurden folgende Funktionskomponenten ermittelt:\n• 4 Daten-Eingaben (Inputs) à 4 FP\n• 3 Daten-Ausgaben (Outputs) à 5 FP\n• 2 Abfragen (Inquiries) à 4 FP\n• 2 interne Datenbestände (ILF) à 10 FP\n• 1 externe Schnittstelle (EIF) à 7 FP\n\nBerechnen Sie die unbewerteten Function Points (UFP) und den Entwicklungsaufwand in Personentagen bei einer Produktivität von 2 FP pro Personentag.",
+                        solution: "1. Berechnung der unbewerteten Function Points (UFP):\n• Inputs: 4 × 4 = 16 FP\n• Outputs: 3 × 5 = 15 FP\n• Inquiries: 2 × 4 = 8 FP\n• ILF: 2 × 10 = 20 FP\n• EIF: 1 × 7 = 7 FP\nGesamt-UFP = 16 + 15 + 8 + 20 + 7 = 66 Function Points.\n\n2. Entwicklungsaufwand:\nAufwand = 66 FP / (2 FP / Personentag) = 33 Personentage."
+                    },
+                    {
+                        id: "ap2_5_4_b",
+                        label: "4.2 Amortisationsrechnung (Cloud vs. On-Premises)",
+                        points: 12,
+                        type: "lines",
+                        linesCount: 5,
+                        stencil: "AMORTISATIONSRECHNUNG",
+                        text: "Ein On-Premises-Server kostet einmalig 24.000 € Anschaffung und 200 € monatliche Wartung. Eine Cloud-Lösung kostet 800 € monatlich ohne Anschaffungskosten.\nBerechnen Sie die statische Amortisationsdauer in Monaten, ab wann sich der On-Premises-Server bezahlt macht.",
+                        solution: "1. Monatliche Kostendifferenz (Einsparung bei On-Premises):\nMonatliche Einsparung = 800 € (Cloud) - 200 € (On-Premises Wartung) = 600 € / Monat.\n\n2. Amortisationsdauer:\nAmortisationszeit = Anschaffungskosten / monatliche Einsparung\nAmortisationszeit = 24.000 € / 600 € = 40 Monate (ca. 3,33 Jahre).\nAb dem 41. Monat ist der On-Premises-Server wirtschaftlicher als die Cloud-Miete."
+                    }
+                ]
+            }
+        ]
+    },
 ];
 
 // Helper to get all exam sets
