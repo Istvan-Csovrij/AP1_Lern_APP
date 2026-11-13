@@ -12,615 +12,482 @@ const AP2_FILES_CATALOG = [
   {
     "term": "Sommer 20",
     "name": "FIAE_FISI_WISO_S20.pdf",
-    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP2\\Sommer 20\\FIAE_FISI_WISO_S20.pdf",
-    "size": "164 KB",
-    "category": "PB 4: WiSo"
+    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\PV-Vorbereitung\\Letzte-AP1-Prüfung\\Baden-Württembergische Abschlussprüfungen AP2\\Sommer 20\\FIAE_FISI_WISO_S20.pdf.url",
+    "directUrl": "https://lernplattform.gfn.de/pluginfile.php/722267/mod_folder/content/0/Baden-W%C3%BCrttembergische%20Abschlusspr%C3%BCfungen%20AP2/Sommer%2020/FIAE_FISI_WISO_S20.pdf",
+    "size": "PDF / Datei",
+    "category": "PB 4: WiSo",
+    "isLatest": false
   },
   {
     "term": "Sommer 20",
     "name": "FIAE_Ganzheitliche Aufgabe 1_S20.pdf",
-    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP2\\Sommer 20\\FIAE_Ganzheitliche Aufgabe 1_S20.pdf",
-    "size": "1969 KB",
-    "category": "Allgemein"
+    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\PV-Vorbereitung\\Letzte-AP1-Prüfung\\Baden-Württembergische Abschlussprüfungen AP2\\Sommer 20\\FIAE_Ganzheitliche Aufgabe 1_S20.pdf.url",
+    "directUrl": "https://lernplattform.gfn.de/pluginfile.php/722267/mod_folder/content/0/Baden-W%C3%BCrttembergische%20Abschlusspr%C3%BCfungen%20AP2/Sommer%2020/FIAE_Ganzheitliche%20Aufgabe%201_S20.pdf",
+    "size": "PDF / Datei",
+    "category": "FIAE Fachaufgabe",
+    "isLatest": false
+  },
+  {
+    "term": "Sommer 21",
+    "name": "Ganzheitliche Aufgabe 1 FIAE S21 Anlage Kunden ABC.xlsx",
+    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\PV-Vorbereitung\\Letzte-AP1-Prüfung\\Baden-Württembergische Abschlussprüfungen AP2\\Sommer 21\\Ganzheitliche Aufgabe 1 FIAE S21 Anlage Kunden ABC.xlsx.url",
+    "directUrl": "https://lernplattform.gfn.de/pluginfile.php/722267/mod_folder/content/0/Baden-W%C3%BCrttembergische%20Abschlusspr%C3%BCfungen%20AP2/Sommer%2021/Ganzheitliche%20Aufgabe%201%20FIAE%20S21%20Anlage%20Kunden%20ABC.xlsx",
+    "size": "PDF / Datei",
+    "category": "FIAE Fachaufgabe",
+    "isLatest": false
   },
   {
     "term": "Sommer 21",
     "name": "Ganzheitliche Aufgabe 1 FIAE S21.pdf",
-    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP2\\Sommer 21\\Ganzheitliche Aufgabe 1 FIAE S21.pdf",
-    "size": "2017 KB",
-    "category": "PB 2: Planen Softwareprodukt"
+    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\PV-Vorbereitung\\Letzte-AP1-Prüfung\\Baden-Württembergische Abschlussprüfungen AP2\\Sommer 21\\Ganzheitliche Aufgabe 1 FIAE S21.pdf.url",
+    "directUrl": "https://lernplattform.gfn.de/pluginfile.php/722267/mod_folder/content/0/Baden-W%C3%BCrttembergische%20Abschlusspr%C3%BCfungen%20AP2/Sommer%2021/Ganzheitliche%20Aufgabe%201%20FIAE%20S21.pdf",
+    "size": "PDF / Datei",
+    "category": "FIAE Fachaufgabe",
+    "isLatest": false
   },
   {
     "term": "Sommer 21",
     "name": "Ganzheitliche Aufgabe 2 FIAE FISI S21.pdf",
-    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP2\\Sommer 21\\Ganzheitliche Aufgabe 2 FIAE FISI S21.pdf",
-    "size": "3104 KB",
-    "category": "PB 3: Algorithmen & Entwicklung"
+    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\PV-Vorbereitung\\Letzte-AP1-Prüfung\\Baden-Württembergische Abschlussprüfungen AP2\\Sommer 21\\Ganzheitliche Aufgabe 2 FIAE FISI S21.pdf.url",
+    "directUrl": "https://lernplattform.gfn.de/pluginfile.php/722267/mod_folder/content/0/Baden-W%C3%BCrttembergische%20Abschlusspr%C3%BCfungen%20AP2/Sommer%2021/Ganzheitliche%20Aufgabe%202%20FIAE%20FISI%20S21.pdf",
+    "size": "PDF / Datei",
+    "category": "FISI Fachaufgabe",
+    "isLatest": false
   },
   {
     "term": "Sommer 21",
     "name": "WISO FIAE FISI S21.pdf",
-    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP2\\Sommer 21\\WISO FIAE FISI S21.pdf",
-    "size": "1838 KB",
-    "category": "PB 4: WiSo"
+    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\PV-Vorbereitung\\Letzte-AP1-Prüfung\\Baden-Württembergische Abschlussprüfungen AP2\\Sommer 21\\WISO FIAE FISI S21.pdf.url",
+    "directUrl": "https://lernplattform.gfn.de/pluginfile.php/722267/mod_folder/content/0/Baden-W%C3%BCrttembergische%20Abschlusspr%C3%BCfungen%20AP2/Sommer%2021/WISO%20FIAE%20FISI%20S21.pdf",
+    "size": "PDF / Datei",
+    "category": "PB 4: WiSo",
+    "isLatest": false
   },
   {
     "term": "Sommer 22",
     "name": "FIAE Entwicklung und Umsetzung von Algorithmen_S22.pdf",
-    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP2\\Sommer 22\\FIAE Entwicklung und Umsetzung von Algorithmen_S22.pdf",
-    "size": "1015 KB",
-    "category": "PB 3: Algorithmen & Entwicklung"
+    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\PV-Vorbereitung\\Letzte-AP1-Prüfung\\Baden-Württembergische Abschlussprüfungen AP2\\Sommer 22\\FIAE Entwicklung und Umsetzung von Algorithmen_S22.pdf.url",
+    "directUrl": "https://lernplattform.gfn.de/pluginfile.php/722267/mod_folder/content/0/Baden-W%C3%BCrttembergische%20Abschlusspr%C3%BCfungen%20AP2/Sommer%2022/FIAE%20Entwicklung%20und%20Umsetzung%20von%20Algorithmen_S22.pdf",
+    "size": "PDF / Datei",
+    "category": "PB 3: Algorithmen (FIAE)",
+    "isLatest": false
   },
   {
     "term": "Sommer 22",
     "name": "FIAE_Ganzheitliche Aufgabe 1_S22.pdf",
-    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP2\\Sommer 22\\FIAE_Ganzheitliche Aufgabe 1_S22.pdf",
-    "size": "3750 KB",
-    "category": "PB 2: Planen Softwareprodukt"
+    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\PV-Vorbereitung\\Letzte-AP1-Prüfung\\Baden-Württembergische Abschlussprüfungen AP2\\Sommer 22\\FIAE_Ganzheitliche Aufgabe 1_S22.pdf.url",
+    "directUrl": "https://lernplattform.gfn.de/pluginfile.php/722267/mod_folder/content/0/Baden-W%C3%BCrttembergische%20Abschlusspr%C3%BCfungen%20AP2/Sommer%2022/FIAE_Ganzheitliche%20Aufgabe%201_S22.pdf",
+    "size": "PDF / Datei",
+    "category": "FIAE Fachaufgabe",
+    "isLatest": false
   },
   {
     "term": "Sommer 22",
     "name": "FIAE_Ganzheitliche Aufgabe 2_S22.pdf",
-    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP2\\Sommer 22\\FIAE_Ganzheitliche Aufgabe 2_S22.pdf",
-    "size": "5127 KB",
-    "category": "PB 3: Algorithmen & Entwicklung"
+    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\PV-Vorbereitung\\Letzte-AP1-Prüfung\\Baden-Württembergische Abschlussprüfungen AP2\\Sommer 22\\FIAE_Ganzheitliche Aufgabe 2_S22.pdf.url",
+    "directUrl": "https://lernplattform.gfn.de/pluginfile.php/722267/mod_folder/content/0/Baden-W%C3%BCrttembergische%20Abschlusspr%C3%BCfungen%20AP2/Sommer%2022/FIAE_Ganzheitliche%20Aufgabe%202_S22.pdf",
+    "size": "PDF / Datei",
+    "category": "FIAE Fachaufgabe",
+    "isLatest": false
   },
   {
     "term": "Sommer 22",
     "name": "FIAE_Planen eines Softwareproduktes_S22.pdf",
-    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP2\\Sommer 22\\FIAE_Planen eines Softwareproduktes_S22.pdf",
-    "size": "1273 KB",
-    "category": "PB 2: Planen Softwareprodukt"
+    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\PV-Vorbereitung\\Letzte-AP1-Prüfung\\Baden-Württembergische Abschlussprüfungen AP2\\Sommer 22\\FIAE_Planen eines Softwareproduktes_S22.pdf.url",
+    "directUrl": "https://lernplattform.gfn.de/pluginfile.php/722267/mod_folder/content/0/Baden-W%C3%BCrttembergische%20Abschlusspr%C3%BCfungen%20AP2/Sommer%2022/FIAE_Planen%20eines%20Softwareproduktes_S22.pdf",
+    "size": "PDF / Datei",
+    "category": "PB 2: Softwareprodukt (FIAE)",
+    "isLatest": false
   },
   {
     "term": "Sommer 22",
     "name": "WISO_FIAE_FISI_S22.pdf",
-    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP2\\Sommer 22\\WISO_FIAE_FISI_S22.pdf",
-    "size": "2710 KB",
-    "category": "PB 4: WiSo"
+    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\PV-Vorbereitung\\Letzte-AP1-Prüfung\\Baden-Württembergische Abschlussprüfungen AP2\\Sommer 22\\WISO_FIAE_FISI_S22.pdf.url",
+    "directUrl": "https://lernplattform.gfn.de/pluginfile.php/722267/mod_folder/content/0/Baden-W%C3%BCrttembergische%20Abschlusspr%C3%BCfungen%20AP2/Sommer%2022/WISO_FIAE_FISI_S22.pdf",
+    "size": "PDF / Datei",
+    "category": "PB 4: WiSo",
+    "isLatest": false
+  },
+  {
+    "term": "Sommer 22 (Anlagen)",
+    "name": "agb.html",
+    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\PV-Vorbereitung\\Letzte-AP1-Prüfung\\Baden-Württembergische Abschlussprüfungen AP2\\Sommer 22\\Anlagen S22\\agb.html.url",
+    "directUrl": "https://lernplattform.gfn.de/pluginfile.php/722267/mod_folder/content/0/Baden-W%C3%BCrttembergische%20Abschlusspr%C3%BCfungen%20AP2/Sommer%2022/Anlagen%20S22/agb.html",
+    "size": "PDF / Datei",
+    "category": "Allgemein",
+    "isLatest": false
+  },
+  {
+    "term": "Sommer 22 (Anlagen)",
+    "name": "index.html",
+    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\PV-Vorbereitung\\Letzte-AP1-Prüfung\\Baden-Württembergische Abschlussprüfungen AP2\\Sommer 22\\Anlagen S22\\index.html.url",
+    "directUrl": "https://lernplattform.gfn.de/pluginfile.php/722267/mod_folder/content/0/Baden-W%C3%BCrttembergische%20Abschlusspr%C3%BCfungen%20AP2/Sommer%2022/Anlagen%20S22/index.html",
+    "size": "PDF / Datei",
+    "category": "Allgemein",
+    "isLatest": false
+  },
+  {
+    "term": "Sommer 22 (Anlagen)",
+    "name": "kontakt.html",
+    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\PV-Vorbereitung\\Letzte-AP1-Prüfung\\Baden-Württembergische Abschlussprüfungen AP2\\Sommer 22\\Anlagen S22\\kontakt.html.url",
+    "directUrl": "https://lernplattform.gfn.de/pluginfile.php/722267/mod_folder/content/0/Baden-W%C3%BCrttembergische%20Abschlusspr%C3%BCfungen%20AP2/Sommer%2022/Anlagen%20S22/kontakt.html",
+    "size": "PDF / Datei",
+    "category": "Allgemein",
+    "isLatest": false
+  },
+  {
+    "term": "Sommer 22 (Anlagen)",
+    "name": "logo.gif",
+    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\PV-Vorbereitung\\Letzte-AP1-Prüfung\\Baden-Württembergische Abschlussprüfungen AP2\\Sommer 22\\Anlagen S22\\logo.gif.url",
+    "directUrl": "https://lernplattform.gfn.de/pluginfile.php/722267/mod_folder/content/0/Baden-W%C3%BCrttembergische%20Abschlusspr%C3%BCfungen%20AP2/Sommer%2022/Anlagen%20S22/logo.gif",
+    "size": "PDF / Datei",
+    "category": "Allgemein",
+    "isLatest": false
+  },
+  {
+    "term": "Sommer 22 (Anlagen)",
+    "name": "style.css",
+    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\PV-Vorbereitung\\Letzte-AP1-Prüfung\\Baden-Württembergische Abschlussprüfungen AP2\\Sommer 22\\Anlagen S22\\style.css.url",
+    "directUrl": "https://lernplattform.gfn.de/pluginfile.php/722267/mod_folder/content/0/Baden-W%C3%BCrttembergische%20Abschlusspr%C3%BCfungen%20AP2/Sommer%2022/Anlagen%20S22/style.css",
+    "size": "PDF / Datei",
+    "category": "Allgemein",
+    "isLatest": false
   },
   {
     "term": "Sommer 23",
     "name": "FIAE Entwicklung und Umsetzung von Algorithmen S23.pdf",
-    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP2\\Sommer 23\\FIAE Entwicklung und Umsetzung von Algorithmen S23.pdf",
-    "size": "973 KB",
-    "category": "PB 3: Algorithmen & Entwicklung"
-  },
-  {
-    "term": "Sommer 23",
-    "name": "FIAE Hinweis zur Bearbeitung Aufgabe 2.1 S23_.pdf",
-    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP2\\Sommer 23\\FIAE Hinweis zur Bearbeitung Aufgabe 2.1 S23_.pdf",
-    "size": "766 KB",
-    "category": "Allgemein"
+    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\PV-Vorbereitung\\Letzte-AP1-Prüfung\\Baden-Württembergische Abschlussprüfungen AP2\\Sommer 23\\FIAE Entwicklung und Umsetzung von Algorithmen S23.pdf.url",
+    "directUrl": "https://lernplattform.gfn.de/pluginfile.php/722267/mod_folder/content/0/Baden-W%C3%BCrttembergische%20Abschlusspr%C3%BCfungen%20AP2/Sommer%2023/FIAE%20Entwicklung%20und%20Umsetzung%20von%20Algorithmen%20S23.pdf",
+    "size": "PDF / Datei",
+    "category": "PB 3: Algorithmen (FIAE)",
+    "isLatest": false
   },
   {
     "term": "Sommer 23",
     "name": "FIAE Planen eines Softwareproduktes Aufgaben S23.pdf",
-    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP2\\Sommer 23\\FIAE Planen eines Softwareproduktes Aufgaben S23.pdf",
-    "size": "950 KB",
-    "category": "PB 2: Planen Softwareprodukt"
+    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\PV-Vorbereitung\\Letzte-AP1-Prüfung\\Baden-Württembergische Abschlussprüfungen AP2\\Sommer 23\\FIAE Planen eines Softwareproduktes Aufgaben S23.pdf.url",
+    "directUrl": "https://lernplattform.gfn.de/pluginfile.php/722267/mod_folder/content/0/Baden-W%C3%BCrttembergische%20Abschlusspr%C3%BCfungen%20AP2/Sommer%2023/FIAE%20Planen%20eines%20Softwareproduktes%20Aufgaben%20S23.pdf",
+    "size": "PDF / Datei",
+    "category": "PB 2: Softwareprodukt (FIAE)",
+    "isLatest": false
   },
   {
     "term": "Sommer 23",
     "name": "FISI Analyse und Entwicklung von Netzwerken Aufgaben S23.pdf",
-    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP2\\Sommer 23\\FISI Analyse und Entwicklung von Netzwerken Aufgaben S23.pdf",
-    "size": "893 KB",
-    "category": "FISI Netzwerke / IT-Systeme"
+    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\PV-Vorbereitung\\Letzte-AP1-Prüfung\\Baden-Württembergische Abschlussprüfungen AP2\\Sommer 23\\FISI Analyse und Entwicklung von Netzwerken Aufgaben S23.pdf.url",
+    "directUrl": "https://lernplattform.gfn.de/pluginfile.php/722267/mod_folder/content/0/Baden-W%C3%BCrttembergische%20Abschlusspr%C3%BCfungen%20AP2/Sommer%2023/FISI%20Analyse%20und%20Entwicklung%20von%20Netzwerken%20Aufgaben%20S23.pdf",
+    "size": "PDF / Datei",
+    "category": "PB 3: Netzwerke (FISI)",
+    "isLatest": false
   },
   {
     "term": "Sommer 23",
     "name": "FISI Konzeption und Administration von IT-Systemen Aufgaben S23.pdf",
-    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP2\\Sommer 23\\FISI Konzeption und Administration von IT-Systemen Aufgaben S23.pdf",
-    "size": "1005 KB",
-    "category": "FISI Netzwerke / IT-Systeme"
+    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\PV-Vorbereitung\\Letzte-AP1-Prüfung\\Baden-Württembergische Abschlussprüfungen AP2\\Sommer 23\\FISI Konzeption und Administration von IT-Systemen Aufgaben S23.pdf.url",
+    "directUrl": "https://lernplattform.gfn.de/pluginfile.php/722267/mod_folder/content/0/Baden-W%C3%BCrttembergische%20Abschlusspr%C3%BCfungen%20AP2/Sommer%2023/FISI%20Konzeption%20und%20Administration%20von%20IT-Systemen%20Aufgaben%20S23.pdf",
+    "size": "PDF / Datei",
+    "category": "PB 2: IT-Systeme (FISI)",
+    "isLatest": false
   },
   {
     "term": "Sommer 23",
     "name": "WiSO FISI FIAE Aufgaben S23.pdf",
-    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP2\\Sommer 23\\WiSO FISI FIAE Aufgaben S23.pdf",
-    "size": "681 KB",
-    "category": "FISI Netzwerke / IT-Systeme"
+    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\PV-Vorbereitung\\Letzte-AP1-Prüfung\\Baden-Württembergische Abschlussprüfungen AP2\\Sommer 23\\WiSO FISI FIAE Aufgaben S23.pdf.url",
+    "directUrl": "https://lernplattform.gfn.de/pluginfile.php/722267/mod_folder/content/0/Baden-W%C3%BCrttembergische%20Abschlusspr%C3%BCfungen%20AP2/Sommer%2023/WiSO%20FISI%20FIAE%20Aufgaben%20S23.pdf",
+    "size": "PDF / Datei",
+    "category": "PB 4: WiSo",
+    "isLatest": false
   },
   {
     "term": "Sommer 24",
     "name": "AP 2 PB4 WiSo AUFGABEN Sommer 2024 Baden Württemberg.pdf",
-    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP2\\Sommer 24\\AP 2 PB4 WiSo AUFGABEN Sommer 2024 Baden Württemberg.pdf",
-    "size": "1314 KB",
-    "category": "PB 4: WiSo"
+    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\PV-Vorbereitung\\Letzte-AP1-Prüfung\\Baden-Württembergische Abschlussprüfungen AP2\\Sommer 24\\AP 2 PB4 WiSo AUFGABEN Sommer 2024 Baden Württemberg.pdf.url",
+    "directUrl": "https://lernplattform.gfn.de/pluginfile.php/722267/mod_folder/content/0/Baden-W%C3%BCrttembergische%20Abschlusspr%C3%BCfungen%20AP2/Sommer%2024/AP%202%20PB4%20WiSo%20AUFGABEN%20Sommer%202024%20Baden%20W%C3%BCrttemberg.pdf",
+    "size": "PDF / Datei",
+    "category": "PB 4: WiSo",
+    "isLatest": true
   },
   {
     "term": "Sommer 24",
     "name": "Aufgaben FIAE FA234 Entwicklung und Umsetzung von Algorithmen.pdf",
-    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP2\\Sommer 24\\Aufgaben FIAE FA234 Entwicklung und Umsetzung von Algorithmen.pdf",
-    "size": "2863 KB",
-    "category": "PB 3: Algorithmen & Entwicklung"
+    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\PV-Vorbereitung\\Letzte-AP1-Prüfung\\Baden-Württembergische Abschlussprüfungen AP2\\Sommer 24\\Aufgaben FIAE FA234 Entwicklung und Umsetzung von Algorithmen.pdf.url",
+    "directUrl": "https://lernplattform.gfn.de/pluginfile.php/722267/mod_folder/content/0/Baden-W%C3%BCrttembergische%20Abschlusspr%C3%BCfungen%20AP2/Sommer%2024/Aufgaben%20FIAE%20FA234%20Entwicklung%20und%20Umsetzung%20von%20Algorithmen.pdf",
+    "size": "PDF / Datei",
+    "category": "PB 3: Algorithmen (FIAE)",
+    "isLatest": true
   },
   {
     "term": "Sommer 24",
     "name": "Aufgaben FIAE FA234 Planen eines Softwareproduktes.pdf",
-    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP2\\Sommer 24\\Aufgaben FIAE FA234 Planen eines Softwareproduktes.pdf",
-    "size": "2012 KB",
-    "category": "PB 2: Planen Softwareprodukt"
+    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\PV-Vorbereitung\\Letzte-AP1-Prüfung\\Baden-Württembergische Abschlussprüfungen AP2\\Sommer 24\\Aufgaben FIAE FA234 Planen eines Softwareproduktes.pdf.url",
+    "directUrl": "https://lernplattform.gfn.de/pluginfile.php/722267/mod_folder/content/0/Baden-W%C3%BCrttembergische%20Abschlusspr%C3%BCfungen%20AP2/Sommer%2024/Aufgaben%20FIAE%20FA234%20Planen%20eines%20Softwareproduktes.pdf",
+    "size": "PDF / Datei",
+    "category": "PB 2: Softwareprodukt (FIAE)",
+    "isLatest": true
   },
   {
     "term": "Sommer 24",
     "name": "Aufgaben FISI FA235 Analyse und Entwicklung von Netzwerken.pdf",
-    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP2\\Sommer 24\\Aufgaben FISI FA235 Analyse und Entwicklung von Netzwerken.pdf",
-    "size": "2119 KB",
-    "category": "FISI Netzwerke / IT-Systeme"
+    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\PV-Vorbereitung\\Letzte-AP1-Prüfung\\Baden-Württembergische Abschlussprüfungen AP2\\Sommer 24\\Aufgaben FISI FA235 Analyse und Entwicklung von Netzwerken.pdf.url",
+    "directUrl": "https://lernplattform.gfn.de/pluginfile.php/722267/mod_folder/content/0/Baden-W%C3%BCrttembergische%20Abschlusspr%C3%BCfungen%20AP2/Sommer%2024/Aufgaben%20FISI%20FA235%20Analyse%20und%20Entwicklung%20von%20Netzwerken.pdf",
+    "size": "PDF / Datei",
+    "category": "PB 3: Netzwerke (FISI)",
+    "isLatest": true
   },
   {
     "term": "Sommer 24",
     "name": "Aufgaben FISI FA235 Konzeption und Administration von IT-Systemen.pdf",
-    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP2\\Sommer 24\\Aufgaben FISI FA235 Konzeption und Administration von IT-Systemen.pdf",
-    "size": "2875 KB",
-    "category": "FISI Netzwerke / IT-Systeme"
+    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\PV-Vorbereitung\\Letzte-AP1-Prüfung\\Baden-Württembergische Abschlussprüfungen AP2\\Sommer 24\\Aufgaben FISI FA235 Konzeption und Administration von IT-Systemen.pdf.url",
+    "directUrl": "https://lernplattform.gfn.de/pluginfile.php/722267/mod_folder/content/0/Baden-W%C3%BCrttembergische%20Abschlusspr%C3%BCfungen%20AP2/Sommer%2024/Aufgaben%20FISI%20FA235%20Konzeption%20und%20Administration%20von%20IT-Systemen.pdf",
+    "size": "PDF / Datei",
+    "category": "PB 2: IT-Systeme (FISI)",
+    "isLatest": true
+  },
+  {
+    "term": "Winter 20-21",
+    "name": "FIAE_Ganzheitliche Aufgabe 1_Anlage_Inventar_Bilanz.xlsx",
+    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\PV-Vorbereitung\\Letzte-AP1-Prüfung\\Baden-Württembergische Abschlussprüfungen AP2\\Winter 20-21\\FIAE_Ganzheitliche Aufgabe 1_Anlage_Inventar_Bilanz.xlsx.url",
+    "directUrl": "https://lernplattform.gfn.de/pluginfile.php/722267/mod_folder/content/0/Baden-W%C3%BCrttembergische%20Abschlusspr%C3%BCfungen%20AP2/Winter%2020-21/FIAE_Ganzheitliche%20Aufgabe%201_Anlage_Inventar_Bilanz.xlsx",
+    "size": "PDF / Datei",
+    "category": "FIAE Fachaufgabe",
+    "isLatest": false
   },
   {
     "term": "Winter 20-21",
     "name": "FIAE_Ganzheitliche Aufgabe 1_Winter 2020-2021.pdf",
-    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP2\\Winter 20-21\\FIAE_Ganzheitliche Aufgabe 1_Winter 2020-2021.pdf",
-    "size": "131 KB",
-    "category": "Allgemein"
+    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\PV-Vorbereitung\\Letzte-AP1-Prüfung\\Baden-Württembergische Abschlussprüfungen AP2\\Winter 20-21\\FIAE_Ganzheitliche Aufgabe 1_Winter 2020-2021.pdf.url",
+    "directUrl": "https://lernplattform.gfn.de/pluginfile.php/722267/mod_folder/content/0/Baden-W%C3%BCrttembergische%20Abschlusspr%C3%BCfungen%20AP2/Winter%2020-21/FIAE_Ganzheitliche%20Aufgabe%201_Winter%202020-2021.pdf",
+    "size": "PDF / Datei",
+    "category": "FIAE Fachaufgabe",
+    "isLatest": false
   },
   {
     "term": "Winter 20-21",
     "name": "FISI_Ganzheitliche Aufgabe 1.pdf",
-    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP2\\Winter 20-21\\FISI_Ganzheitliche Aufgabe 1.pdf",
-    "size": "146 KB",
-    "category": "FISI Netzwerke / IT-Systeme"
+    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\PV-Vorbereitung\\Letzte-AP1-Prüfung\\Baden-Württembergische Abschlussprüfungen AP2\\Winter 20-21\\FISI_Ganzheitliche Aufgabe 1.pdf.url",
+    "directUrl": "https://lernplattform.gfn.de/pluginfile.php/722267/mod_folder/content/0/Baden-W%C3%BCrttembergische%20Abschlusspr%C3%BCfungen%20AP2/Winter%2020-21/FISI_Ganzheitliche%20Aufgabe%201.pdf",
+    "size": "PDF / Datei",
+    "category": "FISI Fachaufgabe",
+    "isLatest": false
   },
   {
     "term": "Winter 20-21",
     "name": "FISI_Ganzheitliche Aufgabe 1_Anlage_Datenblatt.pdf",
-    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP2\\Winter 20-21\\FISI_Ganzheitliche Aufgabe 1_Anlage_Datenblatt.pdf",
-    "size": "1869 KB",
-    "category": "FISI Netzwerke / IT-Systeme"
+    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\PV-Vorbereitung\\Letzte-AP1-Prüfung\\Baden-Württembergische Abschlussprüfungen AP2\\Winter 20-21\\FISI_Ganzheitliche Aufgabe 1_Anlage_Datenblatt.pdf.url",
+    "directUrl": "https://lernplattform.gfn.de/pluginfile.php/722267/mod_folder/content/0/Baden-W%C3%BCrttembergische%20Abschlusspr%C3%BCfungen%20AP2/Winter%2020-21/FISI_Ganzheitliche%20Aufgabe%201_Anlage_Datenblatt.pdf",
+    "size": "PDF / Datei",
+    "category": "FISI Fachaufgabe",
+    "isLatest": false
   },
   {
     "term": "Winter 20-21",
     "name": "Ganzheitliche Aufgabe 2_Winter 2020-2021.pdf",
-    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP2\\Winter 20-21\\Ganzheitliche Aufgabe 2_Winter 2020-2021.pdf",
-    "size": "158 KB",
-    "category": "PB 3: Algorithmen & Entwicklung"
+    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\PV-Vorbereitung\\Letzte-AP1-Prüfung\\Baden-Württembergische Abschlussprüfungen AP2\\Winter 20-21\\Ganzheitliche Aufgabe 2_Winter 2020-2021.pdf.url",
+    "directUrl": "https://lernplattform.gfn.de/pluginfile.php/722267/mod_folder/content/0/Baden-W%C3%BCrttembergische%20Abschlusspr%C3%BCfungen%20AP2/Winter%2020-21/Ganzheitliche%20Aufgabe%202_Winter%202020-2021.pdf",
+    "size": "PDF / Datei",
+    "category": "Allgemein",
+    "isLatest": false
+  },
+  {
+    "term": "Winter 20-21",
+    "name": "Ganzheitliche Aufgabe 2_Winter 2020-2021_Anlage_Darlehen.xls",
+    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\PV-Vorbereitung\\Letzte-AP1-Prüfung\\Baden-Württembergische Abschlussprüfungen AP2\\Winter 20-21\\Ganzheitliche Aufgabe 2_Winter 2020-2021_Anlage_Darlehen.xls.url",
+    "directUrl": "https://lernplattform.gfn.de/pluginfile.php/722267/mod_folder/content/0/Baden-W%C3%BCrttembergische%20Abschlusspr%C3%BCfungen%20AP2/Winter%2020-21/Ganzheitliche%20Aufgabe%202_Winter%202020-2021_Anlage_Darlehen.xls",
+    "size": "PDF / Datei",
+    "category": "Allgemein",
+    "isLatest": false
   },
   {
     "term": "Winter 20-21",
     "name": "WISO_FIAE_FISI_Winter 2020-2021.pdf",
-    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP2\\Winter 20-21\\WISO_FIAE_FISI_Winter 2020-2021.pdf",
-    "size": "731 KB",
-    "category": "PB 4: WiSo"
+    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\PV-Vorbereitung\\Letzte-AP1-Prüfung\\Baden-Württembergische Abschlussprüfungen AP2\\Winter 20-21\\WISO_FIAE_FISI_Winter 2020-2021.pdf.url",
+    "directUrl": "https://lernplattform.gfn.de/pluginfile.php/722267/mod_folder/content/0/Baden-W%C3%BCrttembergische%20Abschlusspr%C3%BCfungen%20AP2/Winter%2020-21/WISO_FIAE_FISI_Winter%202020-2021.pdf",
+    "size": "PDF / Datei",
+    "category": "PB 4: WiSo",
+    "isLatest": false
   },
   {
     "term": "Winter 21-22",
     "name": "FIAE Ganzheitliche Aufgabe 1_W21-22.pdf",
-    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP2\\Winter 21-22\\FIAE Ganzheitliche Aufgabe 1_W21-22.pdf",
-    "size": "3991 KB",
-    "category": "Allgemein"
+    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\PV-Vorbereitung\\Letzte-AP1-Prüfung\\Baden-Württembergische Abschlussprüfungen AP2\\Winter 21-22\\FIAE Ganzheitliche Aufgabe 1_W21-22.pdf.url",
+    "directUrl": "https://lernplattform.gfn.de/pluginfile.php/722267/mod_folder/content/0/Baden-W%C3%BCrttembergische%20Abschlusspr%C3%BCfungen%20AP2/Winter%2021-22/FIAE%20Ganzheitliche%20Aufgabe%201_W21-22.pdf",
+    "size": "PDF / Datei",
+    "category": "FIAE Fachaufgabe",
+    "isLatest": false
+  },
+  {
+    "term": "Winter 21-22",
+    "name": "FIAE Ganzheitliche Aufgabe 1_W21-22_Anlage ABC-BioPharm.xlsx",
+    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\PV-Vorbereitung\\Letzte-AP1-Prüfung\\Baden-Württembergische Abschlussprüfungen AP2\\Winter 21-22\\FIAE Ganzheitliche Aufgabe 1_W21-22_Anlage ABC-BioPharm.xlsx.url",
+    "directUrl": "https://lernplattform.gfn.de/pluginfile.php/722267/mod_folder/content/0/Baden-W%C3%BCrttembergische%20Abschlusspr%C3%BCfungen%20AP2/Winter%2021-22/FIAE%20Ganzheitliche%20Aufgabe%201_W21-22_Anlage%20ABC-BioPharm.xlsx",
+    "size": "PDF / Datei",
+    "category": "FIAE Fachaufgabe",
+    "isLatest": false
   },
   {
     "term": "Winter 21-22",
     "name": "FISI Ganzheitliche Aufgabe 1_W21-22.pdf",
-    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP2\\Winter 21-22\\FISI Ganzheitliche Aufgabe 1_W21-22.pdf",
-    "size": "4197 KB",
-    "category": "FISI Netzwerke / IT-Systeme"
+    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\PV-Vorbereitung\\Letzte-AP1-Prüfung\\Baden-Württembergische Abschlussprüfungen AP2\\Winter 21-22\\FISI Ganzheitliche Aufgabe 1_W21-22.pdf.url",
+    "directUrl": "https://lernplattform.gfn.de/pluginfile.php/722267/mod_folder/content/0/Baden-W%C3%BCrttembergische%20Abschlusspr%C3%BCfungen%20AP2/Winter%2021-22/FISI%20Ganzheitliche%20Aufgabe%201_W21-22.pdf",
+    "size": "PDF / Datei",
+    "category": "FISI Fachaufgabe",
+    "isLatest": false
   },
   {
     "term": "Winter 21-22",
-    "name": "Ganzheitliche Aufgabe  2_W21-22.pdf",
-    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP2\\Winter 21-22\\Ganzheitliche Aufgabe  2_W21-22.pdf",
-    "size": "3009 KB",
-    "category": "Allgemein"
+    "name": "Ganzheitliche Aufgabe 2_W21-22.pdf",
+    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\PV-Vorbereitung\\Letzte-AP1-Prüfung\\Baden-Württembergische Abschlussprüfungen AP2\\Winter 21-22\\Ganzheitliche Aufgabe 2_W21-22.pdf.url",
+    "directUrl": "https://lernplattform.gfn.de/pluginfile.php/722267/mod_folder/content/0/Baden-W%C3%BCrttembergische%20Abschlusspr%C3%BCfungen%20AP2/Winter%2021-22/Ganzheitliche%20Aufgabe%20%202_W21-22.pdf",
+    "size": "PDF / Datei",
+    "category": "Allgemein",
+    "isLatest": false
   },
   {
     "term": "Winter 21-22",
     "name": "WISO_FIAE_FISI_Winter 2021-2022.pdf",
-    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP2\\Winter 21-22\\WISO_FIAE_FISI_Winter 2021-2022.pdf",
-    "size": "2677 KB",
-    "category": "PB 4: WiSo"
+    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\PV-Vorbereitung\\Letzte-AP1-Prüfung\\Baden-Württembergische Abschlussprüfungen AP2\\Winter 21-22\\WISO_FIAE_FISI_Winter 2021-2022.pdf.url",
+    "directUrl": "https://lernplattform.gfn.de/pluginfile.php/722267/mod_folder/content/0/Baden-W%C3%BCrttembergische%20Abschlusspr%C3%BCfungen%20AP2/Winter%2021-22/WISO_FIAE_FISI_Winter%202021-2022.pdf",
+    "size": "PDF / Datei",
+    "category": "PB 4: WiSo",
+    "isLatest": false
   },
   {
     "term": "Winter 22-23",
     "name": "FIAE Entwicklung und Umsetzung von Algorithmen.pdf",
-    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP2\\Winter 22-23\\FIAE Entwicklung und Umsetzung von Algorithmen.pdf",
-    "size": "1984 KB",
-    "category": "PB 3: Algorithmen & Entwicklung"
+    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\PV-Vorbereitung\\Letzte-AP1-Prüfung\\Baden-Württembergische Abschlussprüfungen AP2\\Winter 22-23\\FIAE Entwicklung und Umsetzung von Algorithmen.pdf.url",
+    "directUrl": "https://lernplattform.gfn.de/pluginfile.php/722267/mod_folder/content/0/Baden-W%C3%BCrttembergische%20Abschlusspr%C3%BCfungen%20AP2/Winter%2022-23/FIAE%20Entwicklung%20und%20Umsetzung%20von%20Algorithmen.pdf",
+    "size": "PDF / Datei",
+    "category": "PB 3: Algorithmen (FIAE)",
+    "isLatest": false
   },
   {
     "term": "Winter 22-23",
     "name": "FIAE Planen eines Softwareproduktes.pdf",
-    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP2\\Winter 22-23\\FIAE Planen eines Softwareproduktes.pdf",
-    "size": "3876 KB",
-    "category": "PB 2: Planen Softwareprodukt"
+    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\PV-Vorbereitung\\Letzte-AP1-Prüfung\\Baden-Württembergische Abschlussprüfungen AP2\\Winter 22-23\\FIAE Planen eines Softwareproduktes.pdf.url",
+    "directUrl": "https://lernplattform.gfn.de/pluginfile.php/722267/mod_folder/content/0/Baden-W%C3%BCrttembergische%20Abschlusspr%C3%BCfungen%20AP2/Winter%2022-23/FIAE%20Planen%20eines%20Softwareproduktes.pdf",
+    "size": "PDF / Datei",
+    "category": "PB 2: Softwareprodukt (FIAE)",
+    "isLatest": false
   },
   {
     "term": "Winter 22-23",
     "name": "FIAE_FISI Ganzheitliche Aufgabe 2__W22-23.pdf",
-    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP2\\Winter 22-23\\FIAE_FISI Ganzheitliche Aufgabe 2__W22-23.pdf",
-    "size": "1413 KB",
-    "category": "FISI Netzwerke / IT-Systeme"
+    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\PV-Vorbereitung\\Letzte-AP1-Prüfung\\Baden-Württembergische Abschlussprüfungen AP2\\Winter 22-23\\FIAE_FISI Ganzheitliche Aufgabe 2__W22-23.pdf.url",
+    "directUrl": "https://lernplattform.gfn.de/pluginfile.php/722267/mod_folder/content/0/Baden-W%C3%BCrttembergische%20Abschlusspr%C3%BCfungen%20AP2/Winter%2022-23/FIAE_FISI%20Ganzheitliche%20Aufgabe%202__W22-23.pdf",
+    "size": "PDF / Datei",
+    "category": "FISI Fachaufgabe",
+    "isLatest": false
   },
   {
     "term": "Winter 22-23",
     "name": "FISI Analyse und Entwicklung von Netzwerken FA 235 Aufgaben.pdf",
-    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP2\\Winter 22-23\\FISI Analyse und Entwicklung von Netzwerken FA 235 Aufgaben.pdf",
-    "size": "2888 KB",
-    "category": "FISI Netzwerke / IT-Systeme"
+    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\PV-Vorbereitung\\Letzte-AP1-Prüfung\\Baden-Württembergische Abschlussprüfungen AP2\\Winter 22-23\\FISI Analyse und Entwicklung von Netzwerken FA 235 Aufgaben.pdf.url",
+    "directUrl": "https://lernplattform.gfn.de/pluginfile.php/722267/mod_folder/content/0/Baden-W%C3%BCrttembergische%20Abschlusspr%C3%BCfungen%20AP2/Winter%2022-23/FISI%20Analyse%20und%20Entwicklung%20von%20Netzwerken%20FA%20235%20Aufgaben.pdf",
+    "size": "PDF / Datei",
+    "category": "PB 3: Netzwerke (FISI)",
+    "isLatest": false
   },
   {
     "term": "Winter 22-23",
-    "name": "FISI Konzeption und Administration von IT-Systemen  FA 235 Aufgaben.pdf",
-    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP2\\Winter 22-23\\FISI Konzeption und Administration von IT-Systemen  FA 235 Aufgaben.pdf",
-    "size": "1946 KB",
-    "category": "FISI Netzwerke / IT-Systeme"
+    "name": "FISI Konzeption und Administration von IT-Systemen FA 235 Aufgaben.pdf",
+    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\PV-Vorbereitung\\Letzte-AP1-Prüfung\\Baden-Württembergische Abschlussprüfungen AP2\\Winter 22-23\\FISI Konzeption und Administration von IT-Systemen FA 235 Aufgaben.pdf.url",
+    "directUrl": "https://lernplattform.gfn.de/pluginfile.php/722267/mod_folder/content/0/Baden-W%C3%BCrttembergische%20Abschlusspr%C3%BCfungen%20AP2/Winter%2022-23/FISI%20Konzeption%20und%20Administration%20von%20IT-Systemen%20%20FA%20235%20Aufgaben.pdf",
+    "size": "PDF / Datei",
+    "category": "PB 2: IT-Systeme (FISI)",
+    "isLatest": false
   },
   {
     "term": "Winter 22-23",
     "name": "WISO FA 033-3 Aufgaben.pdf",
-    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP2\\Winter 22-23\\WISO FA 033-3 Aufgaben.pdf",
-    "size": "2204 KB",
-    "category": "PB 4: WiSo"
-  },
-  {
-    "term": "Winter 23",
-    "name": "FIAE Entwicklung und Umsetzung von Algorithmen Aufgaben.pdf",
-    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP2\\Winter 23\\FIAE Entwicklung und Umsetzung von Algorithmen Aufgaben.pdf",
-    "size": "2000 KB",
-    "category": "PB 3: Algorithmen & Entwicklung"
-  },
-  {
-    "term": "Winter 23",
-    "name": "FIAE Planen eines Softwareproduktes Aufgaben.pdf",
-    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP2\\Winter 23\\FIAE Planen eines Softwareproduktes Aufgaben.pdf",
-    "size": "1638 KB",
-    "category": "PB 2: Planen Softwareprodukt"
-  },
-  {
-    "term": "Winter 23",
-    "name": "FISI Analyse und Entwicklung von Netzwerken Aufgaben.pdf",
-    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP2\\Winter 23\\FISI Analyse und Entwicklung von Netzwerken Aufgaben.pdf",
-    "size": "2472 KB",
-    "category": "FISI Netzwerke / IT-Systeme"
-  },
-  {
-    "term": "Winter 23",
-    "name": "FISI Konzeption und Administration von IT-Systemen Aufgaben.pdf",
-    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP2\\Winter 23\\FISI Konzeption und Administration von IT-Systemen Aufgaben.pdf",
-    "size": "1432 KB",
-    "category": "FISI Netzwerke / IT-Systeme"
-  },
-  {
-    "term": "Winter 23",
-    "name": "W2023_WISO_ Aufgaben_alte AO.pdf",
-    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP2\\Winter 23\\W2023_WISO_ Aufgaben_alte AO.pdf",
-    "size": "1907 KB",
-    "category": "PB 4: WiSo"
-  },
-  {
-    "term": "Winter 23",
-    "name": "W2023_WISO_ Aufgaben_neue AO.pdf",
-    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP2\\Winter 23\\W2023_WISO_ Aufgaben_neue AO.pdf",
-    "size": "1836 KB",
-    "category": "PB 4: WiSo"
+    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\PV-Vorbereitung\\Letzte-AP1-Prüfung\\Baden-Württembergische Abschlussprüfungen AP2\\Winter 22-23\\WISO FA 033-3 Aufgaben.pdf.url",
+    "directUrl": "https://lernplattform.gfn.de/pluginfile.php/722267/mod_folder/content/0/Baden-W%C3%BCrttembergische%20Abschlusspr%C3%BCfungen%20AP2/Winter%2022-23/WISO%20FA%20033-3%20Aufgaben.pdf",
+    "size": "PDF / Datei",
+    "category": "PB 4: WiSo",
+    "isLatest": false
   },
   {
     "term": "Winter 24",
     "name": "FIAE Entwicklung und Umsetzung von Algorithmen AUFGABEN W24.pdf",
-    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP2\\Winter 24\\FIAE Entwicklung und Umsetzung von Algorithmen AUFGABEN W24.pdf",
-    "size": "1963 KB",
-    "category": "PB 3: Algorithmen & Entwicklung"
+    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\PV-Vorbereitung\\Letzte-AP1-Prüfung\\Baden-Württembergische Abschlussprüfungen AP2\\Winter 24\\FIAE Entwicklung und Umsetzung von Algorithmen AUFGABEN W24.pdf.url",
+    "directUrl": "https://lernplattform.gfn.de/pluginfile.php/722267/mod_folder/content/0/Baden-W%C3%BCrttembergische%20Abschlusspr%C3%BCfungen%20AP2/Winter%2024/FIAE%20Entwicklung%20und%20Umsetzung%20von%20Algorithmen%20AUFGABEN%20W24.pdf",
+    "size": "PDF / Datei",
+    "category": "PB 3: Algorithmen (FIAE)",
+    "isLatest": true
   },
   {
     "term": "Winter 24",
     "name": "FIAE Planung eines Softwareproduktes AUFGABEN W24.pdf",
-    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP2\\Winter 24\\FIAE Planung eines Softwareproduktes AUFGABEN W24.pdf",
-    "size": "2206 KB",
-    "category": "PB 2: Planen Softwareprodukt"
+    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\PV-Vorbereitung\\Letzte-AP1-Prüfung\\Baden-Württembergische Abschlussprüfungen AP2\\Winter 24\\FIAE Planung eines Softwareproduktes AUFGABEN W24.pdf.url",
+    "directUrl": "https://lernplattform.gfn.de/pluginfile.php/722267/mod_folder/content/0/Baden-W%C3%BCrttembergische%20Abschlusspr%C3%BCfungen%20AP2/Winter%2024/FIAE%20Planung%20eines%20Softwareproduktes%20AUFGABEN%20W24.pdf",
+    "size": "PDF / Datei",
+    "category": "PB 2: Softwareprodukt (FIAE)",
+    "isLatest": true
   },
   {
     "term": "Winter 24",
     "name": "FISI Analyse und Entwicklung von Netzwerken AUFGABEN W24.pdf",
-    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP2\\Winter 24\\FISI Analyse und Entwicklung von Netzwerken AUFGABEN W24.pdf",
-    "size": "3147 KB",
-    "category": "FISI Netzwerke / IT-Systeme"
+    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\PV-Vorbereitung\\Letzte-AP1-Prüfung\\Baden-Württembergische Abschlussprüfungen AP2\\Winter 24\\FISI Analyse und Entwicklung von Netzwerken AUFGABEN W24.pdf.url",
+    "directUrl": "https://lernplattform.gfn.de/pluginfile.php/722267/mod_folder/content/0/Baden-W%C3%BCrttembergische%20Abschlusspr%C3%BCfungen%20AP2/Winter%2024/FISI%20Analyse%20und%20Entwicklung%20von%20Netzwerken%20AUFGABEN%20W24.pdf",
+    "size": "PDF / Datei",
+    "category": "PB 3: Netzwerke (FISI)",
+    "isLatest": true
   },
   {
     "term": "Winter 24",
     "name": "FISI Konzeption und Administration von IT-Systemen AUFGABEN W24.pdf",
-    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP2\\Winter 24\\FISI Konzeption und Administration von IT-Systemen AUFGABEN W24.pdf",
-    "size": "2443 KB",
-    "category": "FISI Netzwerke / IT-Systeme"
+    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\PV-Vorbereitung\\Letzte-AP1-Prüfung\\Baden-Württembergische Abschlussprüfungen AP2\\Winter 24\\FISI Konzeption und Administration von IT-Systemen AUFGABEN W24.pdf.url",
+    "directUrl": "https://lernplattform.gfn.de/pluginfile.php/722267/mod_folder/content/0/Baden-W%C3%BCrttembergische%20Abschlusspr%C3%BCfungen%20AP2/Winter%2024/FISI%20Konzeption%20und%20Administration%20von%20IT-Systemen%20AUFGABEN%20W24.pdf",
+    "size": "PDF / Datei",
+    "category": "PB 2: IT-Systeme (FISI)",
+    "isLatest": true
   },
   {
     "term": "Winter 24",
     "name": "WiSo AUFGABEN W24.pdf",
-    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP2\\Winter 24\\WiSo AUFGABEN W24.pdf",
-    "size": "1932 KB",
-    "category": "PB 4: WiSo"
+    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\PV-Vorbereitung\\Letzte-AP1-Prüfung\\Baden-Württembergische Abschlussprüfungen AP2\\Winter 24\\WiSo AUFGABEN W24.pdf.url",
+    "directUrl": "https://lernplattform.gfn.de/pluginfile.php/722267/mod_folder/content/0/Baden-W%C3%BCrttembergische%20Abschlusspr%C3%BCfungen%20AP2/Winter%2024/WiSo%20AUFGABEN%20W24.pdf",
+    "size": "PDF / Datei",
+    "category": "PB 4: WiSo",
+    "isLatest": true
   },
   {
     "term": "Winter 24-25",
     "name": "AP 2 PB2 FIAE PlanSWProdukt AUFGABEN Winter 2024 Baden Württemberg.pdf",
-    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP2\\Winter 24-25\\AP 2 PB2 FIAE PlanSWProdukt AUFGABEN Winter 2024 Baden Württemberg.pdf",
-    "size": "2206 KB",
-    "category": "PB 2: Planen Softwareprodukt"
-  },
-  {
-    "term": "Winter 24-25",
-    "name": "AP 2 PB2 FISI KonzAdminIT-Systeme AUFGABEN Winter 2024 Baden Württemberg 1.pdf",
-    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP2\\Winter 24-25\\AP 2 PB2 FISI KonzAdminIT-Systeme AUFGABEN Winter 2024 Baden Württemberg 1.pdf",
-    "size": "2443 KB",
-    "category": "PB 2: Planen Softwareprodukt"
+    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\PV-Vorbereitung\\Letzte-AP1-Prüfung\\Baden-Württembergische Abschlussprüfungen AP2\\Winter 24-25\\AP 2 PB2 FIAE PlanSWProdukt AUFGABEN Winter 2024 Baden Württemberg.pdf.url",
+    "directUrl": "https://lernplattform.gfn.de/pluginfile.php/722267/mod_folder/content/0/Baden-W%C3%BCrttembergische%20Abschlusspr%C3%BCfungen%20AP2/Winter%2024-25/AP%202%20PB2%20FIAE%20PlanSWProdukt%20AUFGABEN%20Winter%202024%20Baden%20W%C3%BCrttemberg.pdf",
+    "size": "PDF / Datei",
+    "category": "PB 2: Softwareprodukt (FIAE)",
+    "isLatest": true
   },
   {
     "term": "Winter 24-25",
     "name": "AP 2 PB3 FIAE Entw.Ums.Algo AUFGABEN Winter 2024 Baden Württemberg.pdf",
-    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP2\\Winter 24-25\\AP 2 PB3 FIAE Entw.Ums.Algo AUFGABEN Winter 2024 Baden Württemberg.pdf",
-    "size": "1963 KB",
-    "category": "PB 3: Algorithmen & Entwicklung"
+    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\PV-Vorbereitung\\Letzte-AP1-Prüfung\\Baden-Württembergische Abschlussprüfungen AP2\\Winter 24-25\\AP 2 PB3 FIAE Entw.Ums.Algo AUFGABEN Winter 2024 Baden Württemberg.pdf.url",
+    "directUrl": "https://lernplattform.gfn.de/pluginfile.php/722267/mod_folder/content/0/Baden-W%C3%BCrttembergische%20Abschlusspr%C3%BCfungen%20AP2/Winter%2024-25/AP%202%20PB3%20FIAE%20Entw.Ums.Algo%20AUFGABEN%20Winter%202024%20Baden%20W%C3%BCrttemberg.pdf",
+    "size": "PDF / Datei",
+    "category": "PB 3: Algorithmen (FIAE)",
+    "isLatest": true
   },
   {
     "term": "Winter 24-25",
     "name": "AP 2 PB3 FISI AnalyEntwNetzw AUFGABEN Winter 2024 Baden Württemberg 1.pdf",
-    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP2\\Winter 24-25\\AP 2 PB3 FISI AnalyEntwNetzw AUFGABEN Winter 2024 Baden Württemberg 1.pdf",
-    "size": "3147 KB",
-    "category": "PB 3: Algorithmen & Entwicklung"
+    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\PV-Vorbereitung\\Letzte-AP1-Prüfung\\Baden-Württembergische Abschlussprüfungen AP2\\Winter 24-25\\AP 2 PB3 FISI AnalyEntwNetzw AUFGABEN Winter 2024 Baden Württemberg 1.pdf.url",
+    "directUrl": "https://lernplattform.gfn.de/pluginfile.php/722267/mod_folder/content/0/Baden-W%C3%BCrttembergische%20Abschlusspr%C3%BCfungen%20AP2/Winter%2024-25/AP%202%20PB3%20FISI%20AnalyEntwNetzw%20AUFGABEN%20Winter%202024%20Baden%20W%C3%BCrttemberg%201.pdf",
+    "size": "PDF / Datei",
+    "category": "PB 3: Netzwerke (FISI)",
+    "isLatest": true
   },
   {
     "term": "Winter 24-25",
     "name": "AP 2 PB4 WiSo AUFGABEN Winter 2024 Baden Württemberg.pdf",
-    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP2\\Winter 24-25\\AP 2 PB4 WiSo AUFGABEN Winter 2024 Baden Württemberg.pdf",
-    "size": "1932 KB",
-    "category": "PB 4: WiSo"
+    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\PV-Vorbereitung\\Letzte-AP1-Prüfung\\Baden-Württembergische Abschlussprüfungen AP2\\Winter 24-25\\AP 2 PB4 WiSo AUFGABEN Winter 2024 Baden Württemberg.pdf.url",
+    "directUrl": "https://lernplattform.gfn.de/pluginfile.php/722267/mod_folder/content/0/Baden-W%C3%BCrttembergische%20Abschlusspr%C3%BCfungen%20AP2/Winter%2024-25/AP%202%20PB4%20WiSo%20AUFGABEN%20Winter%202024%20Baden%20W%C3%BCrttemberg.pdf",
+    "size": "PDF / Datei",
+    "category": "PB 4: WiSo",
+    "isLatest": true
   }
 ];
 
-const AP1_FILES_CATALOG = [
-  {
-    "term": "Frühjahr 2026 (Letzte)",
-    "name": "AP1_2026.pdf",
-    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP1\\AP1_2026.pdf",
-    "size": "598 KB",
-    "category": "AP1 Aufgaben",
-    "isLatest": true
-  },
-  {
-    "term": "Frühjahr 2026 (Letzte)",
-    "name": "AP1_Frühjahr_2026 2.pdf",
-    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP1\\AP1_Frühjahr_2026 2.pdf",
-    "size": "3.7 MB",
-    "category": "AP1 Aufgaben",
-    "isLatest": true
-  },
-  {
-    "term": "Frühjahr 2026 (Letzte)",
-    "name": "AP1_Frühjahr_2026_Lösung 1.pdf",
-    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP1\\AP1_Frühjahr_2026_Lösung 1.pdf",
-    "size": "932 KB",
-    "category": "AP1 Musterlösung",
-    "isLatest": true
-  },
-  {
-    "term": "Frühjahr 2026 (Letzte)",
-    "name": "AP1_Herbst_2026 1.pdf",
-    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP1\\AP1_Herbst_2026 1.pdf",
-    "size": "1.6 MB",
-    "category": "AP1 Aufgaben",
-    "isLatest": true
-  },
-  {
-    "term": "Frühjahr 2026 (Letzte)",
-    "name": "F26BW 3.pdf",
-    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\PV-Vorbereitung\\Letzte-AP1-Prüfung\\Geladen-Baden-Württembergische Abschlussprüfungen AP1\\F26BW 3.pdf",
-    "size": "598 KB",
-    "category": "AP1 Aufgaben",
-    "isLatest": true
-  },
-  {
-    "term": "2022",
-    "name": "AP1 Frühjahr 2022.pdf",
-    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP1\\AP1 Frühjahr 2022.pdf",
-    "size": "3.8 MB",
-    "category": "AP1 Aufgaben",
-    "isLatest": false
-  },
-  {
-    "term": "2022",
-    "name": "AP1 Herbst 2022.pdf",
-    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP1\\AP1 Herbst 2022.pdf",
-    "size": "5.6 MB",
-    "category": "AP1 Aufgaben",
-    "isLatest": false
-  },
-  {
-    "term": "2022",
-    "name": "AP1 W2022-23 1.pdf",
-    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP1\\AP1 W2022-23 1.pdf",
-    "size": "715 KB",
-    "category": "AP1 Aufgaben",
-    "isLatest": false
-  },
-  {
-    "term": "2022",
-    "name": "AP1 W2022-23 Lösung 1.pdf",
-    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP1\\AP1 W2022-23 Lösung 1.pdf",
-    "size": "1.8 MB",
-    "category": "AP1 Musterlösung",
-    "isLatest": false
-  },
-  {
-    "term": "2022",
-    "name": "Abschlussprüfung Winter 2022-23 AP2 PB 2 FIAE Planen eines Softwareproduktes FA 234 Aufgaben-1.pdf",
-    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP1\\Abschlussprüfung Winter 2022-23 AP2 PB 2 FIAE Planen eines Softwareproduktes FA 234 Aufgaben-1.pdf",
-    "size": "3.8 MB",
-    "category": "AP1 Aufgaben",
-    "isLatest": false
-  },
-  {
-    "term": "2023",
-    "name": "AP1 Frühjahr 2023.pdf",
-    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP1\\AP1 Frühjahr 2023.pdf",
-    "size": "4.6 MB",
-    "category": "AP1 Aufgaben",
-    "isLatest": false
-  },
-  {
-    "term": "2023",
-    "name": "AP1 Herbst 2023.pdf",
-    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP1\\AP1 Herbst 2023.pdf",
-    "size": "3.2 MB",
-    "category": "AP1 Aufgaben",
-    "isLatest": false
-  },
-  {
-    "term": "2023",
-    "name": "AP1 S2023 Lösungen.pdf",
-    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP1\\AP1 S2023 Lösungen.pdf",
-    "size": "927 KB",
-    "category": "AP1 Musterlösung",
-    "isLatest": false
-  },
-  {
-    "term": "2023",
-    "name": "AP1 S2023.pdf",
-    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP1\\AP1 S2023.pdf",
-    "size": "4.6 MB",
-    "category": "AP1 Aufgaben",
-    "isLatest": false
-  },
-  {
-    "term": "2023",
-    "name": "Prüfungsvorbereitung-Teil1-Europa_01.09.2023 (1) 1.pdf",
-    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP1\\Prüfungsvorbereitung-Teil1-Europa_01.09.2023 (1) 1.pdf",
-    "size": "66.6 MB",
-    "category": "AP1 Aufgaben",
-    "isLatest": false
-  },
-  {
-    "term": "2024",
-    "name": "24 AP1_Herbst_2024 1.pdf",
-    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP1\\24 AP1_Herbst_2024 1.pdf",
-    "size": "3.0 MB",
-    "category": "AP1 Aufgaben",
-    "isLatest": false
-  },
-  {
-    "term": "2024",
-    "name": "AP 1 AUFGABEN Winter 2024 Baden Württemberg.pdf",
-    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP1\\AP 1 AUFGABEN Winter 2024 Baden Württemberg.pdf",
-    "size": "3.7 MB",
-    "category": "AP1 Aufgaben",
-    "isLatest": false
-  },
-  {
-    "term": "2024",
-    "name": "AP1 Früjahr 2024.pdf",
-    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP1\\AP1 Früjahr 2024.pdf",
-    "size": "5.2 MB",
-    "category": "AP1 Aufgaben",
-    "isLatest": false
-  },
-  {
-    "term": "2024",
-    "name": "AP1 Herbst 2024.pdf",
-    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP1\\AP1 Herbst 2024.pdf",
-    "size": "3.7 MB",
-    "category": "AP1 Aufgaben",
-    "isLatest": false
-  },
-  {
-    "term": "2024",
-    "name": "AP1 Herbst 2024_schriftliche_Prfg._Teil_1.pdf",
-    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP1\\AP1 Herbst 2024_schriftliche_Prfg._Teil_1.pdf",
-    "size": "227 KB",
-    "category": "AP1 Aufgaben",
-    "isLatest": false
-  },
-  {
-    "term": "2024",
-    "name": "Abschlusspruefung_Sommer_2024_Teil_2_Fachinformatiker_Anwendungsentwicklung-1.pdf",
-    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP1\\Abschlusspruefung_Sommer_2024_Teil_2_Fachinformatiker_Anwendungsentwicklung-1.pdf",
-    "size": "4.1 MB",
-    "category": "AP1 Aufgaben",
-    "isLatest": false
-  },
-  {
-    "term": "2025",
-    "name": "25 AP1_frühjahr_2025.pdf",
-    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP1\\25 AP1_frühjahr_2025.pdf",
-    "size": "2.2 MB",
-    "category": "AP1 Aufgaben",
-    "isLatest": false
-  },
-  {
-    "term": "2025",
-    "name": "AP1 Frühjahr 2025.pdf",
-    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP1\\AP1 Frühjahr 2025.pdf",
-    "size": "2.9 MB",
-    "category": "AP1 Aufgaben",
-    "isLatest": false
-  },
-  {
-    "term": "Unbekannt",
-    "name": "25 AP1_Herbst 4.pdf",
-    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP1\\25 AP1_Herbst 4.pdf",
-    "size": "6.9 MB",
-    "category": "AP1 Aufgaben",
-    "isLatest": false
-  },
-  {
-    "term": "Unbekannt",
-    "name": "25 AP1_Herbst_Lösung 3.pdf",
-    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP1\\25 AP1_Herbst_Lösung 3.pdf",
-    "size": "1.2 MB",
-    "category": "AP1 Musterlösung",
-    "isLatest": false
-  },
-  {
-    "term": "Unbekannt",
-    "name": "AP1 Beispielaufgabe Lösungen.pdf",
-    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP1\\AP1 Beispielaufgabe Lösungen.pdf",
-    "size": "454 KB",
-    "category": "AP1 Musterlösung",
-    "isLatest": false
-  },
-  {
-    "term": "Unbekannt",
-    "name": "AP1 Beispielaufgabe.pdf",
-    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP1\\AP1 Beispielaufgabe.pdf",
-    "size": "552 KB",
-    "category": "AP1 Aufgaben",
-    "isLatest": false
-  },
-  {
-    "term": "Unbekannt",
-    "name": "H22HS2.pdf",
-    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP1\\H22HS2.pdf",
-    "size": "625 KB",
-    "category": "AP1 Aufgaben",
-    "isLatest": false
-  },
-  {
-    "term": "Unbekannt",
-    "name": "H22HS3.pdf",
-    "path": "C:\\Users\\Student\\OneDrive - GFN GmbH (EDU)\\Dokumente\\ALEX-AP1_AP2\\Baden-Württembergische Abschlussprüfungen AP1\\H22HS3.pdf",
-    "size": "1.9 MB",
-    "category": "AP1 Aufgaben",
-    "isLatest": false
-  }
-];
-
-// Combined catalog of both AP1 and AP2 exam documents
-const ALL_EXAM_FILES = [
-  ...AP1_FILES_CATALOG.map(f => ({ ...f, examType: 'AP1' })),
-  ...AP2_FILES_CATALOG.map(f => ({ ...f, examType: 'AP2' }))
-];
-
-
-// State for active tab in AP2 modal
-let currentAp2Tab = "pb2";
-
-// Open the AP2 Bridge Modal
 function openAp2BridgeModal(targetTab) {
     const modal = document.getElementById("ap2-bridge-modal");
     if (!modal) return;
@@ -800,8 +667,8 @@ function renderAp2FilesList() {
                     <button class="btn btn-secondary" onclick="copyAp2FilePath('${safePath}', this)" title="Vollständigen Windows-Dateipfad kopieren" style="padding: 0.35rem 0.65rem; font-size: 0.8rem; border-radius: 6px; cursor: pointer; border: 1px solid #cbd5e1; background: #f8fafc;">
                         <i class="fa-solid fa-copy"></i> Pfad
                     </button>
-                    <a href="${fileUrl}" target="_blank" class="btn" title="Datei im Browser / PDF-Viewer öffnen" style="padding: 0.35rem 0.65rem; font-size: 0.8rem; border-radius: 6px; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 0.25rem; background: #4f46e5; color: white; margin-left: 0.3rem;">
-                        <i class="fa-solid fa-arrow-up-right-from-square"></i> Öffnen
+                    <a href="${f.directUrl ? f.directUrl : fileUrl}" target="_blank" class="btn" title="${f.directUrl ? 'Offiziellen Download auf GFN-Lernplattform öffnen' : 'Datei auf deinem PC öffnen'}" style="padding: 0.35rem 0.65rem; font-size: 0.8rem; border-radius: 6px; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 0.25rem; background: #4f46e5; color: white; margin-left: 0.3rem;">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i> ${f.directUrl ? 'GFN Web' : 'Öffnen'}
                     </a>
                     ${interactiveBtn}
                 </td>

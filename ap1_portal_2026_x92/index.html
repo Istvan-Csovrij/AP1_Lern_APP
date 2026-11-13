@@ -7,7 +7,7 @@
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
     <title>AP1 Prüfungstrainer - Fachinformatiker</title>
-    <link rel="stylesheet" href="style.css?v=162">
+    <link rel="stylesheet" href="style.css?v=163">
     <!-- FontAwesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -520,7 +520,7 @@
                 <!-- Quellen-Buttons -->
                 <div style="display: flex; gap: 0.3rem; margin-bottom: 0.35rem;">
                     <button class="btn btn-secondary" onclick="openAp2BridgeModal('files')" title="Original-Prüfungen auf deinem PC anzeigen" style="flex: 1; padding: 0.28rem 0.45rem; font-size: 0.76rem; border-radius: 5px; display: inline-flex; align-items: center; justify-content: center; gap: 0.3rem; border: 1px solid #cbd5e1; background: #f8fafc; font-weight: 600; white-space: nowrap;">
-                        <i class="fa-solid fa-folder-open" style="color: #f59e0b;"></i> PC-Dateien (81)
+                        <i class="fa-solid fa-folder-open" style="color: #f59e0b;"></i> BaWü AP2 (53)
                     </button>
                     <button class="btn btn-secondary" onclick="openAp2BridgeModal('web')" title="Offizielle Web-Quellen & Standards" style="flex: 1; padding: 0.28rem 0.45rem; font-size: 0.76rem; border-radius: 5px; display: inline-flex; align-items: center; gap: 0.3rem; justify-content: center; border: 1px solid #cbd5e1; background: #f8fafc; font-weight: 600; white-space: nowrap;">
                         <i class="fa-solid fa-globe" style="color: #3b82f6;"></i> Web-Quellen
@@ -1382,6 +1382,46 @@
                             </div>
                         </div>
                     </div>
+                    <!-- Aufgabe PB 2.4: PoE, Stromstärke & Video-Speicherkapazität (Original BaWü AP2) -->
+                    <div style="border: 1px solid #cbd5e1; border-radius: 8px; margin-bottom: 1.25rem; background: white; overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.04);">
+                        <div style="background: #f8fafc; border-bottom: 1px solid #e2e8f0; padding: 0.85rem 1.15rem; display: flex; justify-content: space-between; align-items: center;">
+                            <span style="font-weight: 700; color: #1e293b; font-size: 0.95rem;">
+                                <i class="fa-solid fa-bolt" style="color: #f59e0b; margin-right: 0.35rem;"></i> Aufgabe 2.4: PoE-Standard, Stromstärkeberechnung &amp; Video-Speicher (Original BaWü AP2)
+                            </span>
+                            <span style="font-size: 0.78rem; background: #fef3c7; color: #92400e; padding: 0.15rem 0.5rem; border-radius: 4px; font-weight: 700;">BaWü Prüfungsaufgabe</span>
+                        </div>
+                        <div style="padding: 1.15rem; font-size: 0.9rem; color: #334155; line-height: 1.5;">
+                            <p style="margin-top: 0;"><strong>Szenario (BaWü Abschlussprüfung):</strong> Ein Unternehmen plant die Videoüberwachung des Außengeländes mit IP-Überwachungskameras. Laut Datenblatt beträgt die maximale Leistungsaufnahme einer Kamera mit Heizung und Infrarotbeleuchtung <strong>24 W</strong> bei einer Nennspannung von <strong>48 V DC</strong>.</p>
+                            <ol style="margin-bottom: 1rem; padding-left: 1.3rem;">
+                                <li>Ermittle den passenden <strong>PoE-Standard nach IEEE 802.3</strong> (z.B. 802.3af, 802.3at oder 802.3bt) und begründe deine Auswahl.</li>
+                                <li>Berechne die maximal fließende <strong>Stromstärke in Milliampere (mA)</strong> bei voller Last.</li>
+                                <li>Ein Live-Videostream (Full HD 1920&times;1080, 30 fps, 24 Bit Farbtiefe) wird mit einem Komprimierungsfaktor von <strong>30 %</strong> übertragen. Berechne die erforderliche Datenübertragungsrate in <strong>Mbit/s</strong> (gerundet auf volle Mbit/s, Basis 10<sup>6</sup>).</li>
+                                <li>Berechne den gesamten Speicherbedarf für <strong>4 Kameras</strong> über einen Aufzeichnungszeitraum von <strong>72 Stunden</strong>.</li>
+                            </ol>
+                            <button class="btn btn-secondary" id="sol-pb2-4-btn" onclick="toggleAp2Solution('sol-pb2-4')" style="margin-top: 0.5rem; font-size: 0.85rem; padding: 0.45rem 0.9rem;">
+                                <i class="fa-solid fa-lightbulb"></i> Musterlösung &amp; Korrekturhinweise anzeigen
+                            </button>
+                            <div id="sol-pb2-4" style="display: none; margin-top: 1rem; background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 6px; padding: 1rem; font-size: 0.88rem; color: #166534;">
+                                <strong style="display: block; margin-bottom: 0.5rem; color: #14532d; font-size: 0.95rem;">Offizielle IHK-Musterlösung:</strong>
+                                <strong>1. PoE-Standard:</strong><br>
+                                &bull; <strong>IEEE 802.3at (PoE+ / Type 2)</strong>.<br>
+                                &bull; <em>Begründung:</em> IEEE 802.3af (PoE Type 1) liefert am Endgerät nur max. 12,95 W (Port: 15,4 W). Da die Kamera bis zu 24 W benötigt, ist zwingend IEEE 802.3at erforderlich, welcher bis zu 25,5 W am Endgerät (30 W am Switch-Port) bereitstellt.<br><br>
+                                <strong>2. Stromstärke \(I\) in mA:</strong><br>
+                                &bull; Formel: \(I = \frac{P}{U}\)<br>
+                                &bull; Rechnung: \(I = \frac{24\text{ W}}{48\text{ V}} = 0{,}5\text{ A} = \mathbf{500\text{ mA}}\).<br><br>
+                                <strong>3. Datenübertragungsrate Live-Stream:</strong><br>
+                                &bull; Rohdatenrate: \(1920 \times 1080 \times 30\text{ fps} \times 24\text{ Bit} = 1.492.992.000\text{ bit/s}\).<br>
+                                &bull; Mit 30 % Komprimierung: \(1.492.992.000 \times 0{,}30 = 447.897.600\text{ bit/s}\).<br>
+                                &bull; In Mbit/s (Basis \(10^6\)): \(\frac{447.897.600}{1.000.000} = 447{,}8976\text{ Mbit/s} \approx \mathbf{448\text{ Mbit/s}}\).<br><br>
+                                <strong>4. Speicherbedarf für 4 Kameras (72 Stunden):</strong><br>
+                                &bull; Gesamtzeit in Sekunden: \(72 \times 3600\text{ s} = 259.200\text{ s}\).<br>
+                                &bull; Gesamtbits: \(4 \times 448.000.000\text{ bit/s} \times 259.200\text{ s} = 464.486.400.000.000\text{ Bit}\).<br>
+                                &bull; In Byte: \(\frac{464.486.400.000.000}{8} = 58.060.800.000.000\text{ Byte}\).<br>
+                                &bull; In TiB (Basis 1024): \(\frac{58.060.800.000.000}{1024^4} \approx \mathbf{52{,}8\text{ TiB}}\) (bzw. 58,1 TB Dezimal).
+                            </div>
+                        </div>
+                    </div>
+
 
                 </div>
 
@@ -1854,6 +1894,39 @@
                             </div>
                         </div>
                     </div>
+                    <!-- Aufgabe PB 3.4: Private IPs nach RFC 1918, Subnet-Trennung & Routing (Original BaWü AP2) -->
+                    <div style="border: 1px solid #cbd5e1; border-radius: 8px; margin-bottom: 1.25rem; background: white; overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.04);">
+                        <div style="background: #f8fafc; border-bottom: 1px solid #e2e8f0; padding: 0.85rem 1.15rem; display: flex; justify-content: space-between; align-items: center;">
+                            <span style="font-weight: 700; color: #1e293b; font-size: 0.95rem;">
+                                <i class="fa-solid fa-route" style="color: #0891b2; margin-right: 0.35rem;"></i> Aufgabe 3.4: Private IPs (RFC 1918), Subnet-Trennung &amp; Routing ins Internet (Original BaWü AP2)
+                            </span>
+                            <span style="font-size: 0.78rem; background: #cffafe; color: #0e7490; padding: 0.15rem 0.5rem; border-radius: 4px; font-weight: 700;">BaWü Prüfungsaufgabe</span>
+                        </div>
+                        <div style="padding: 1.15rem; font-size: 0.9rem; color: #334155; line-height: 1.5;">
+                            <p style="margin-top: 0;"><strong>Szenario (BaWü Abschlussprüfung IT 4):</strong> Bei der Inbetriebnahme von Überwachungskameras und Arbeitsplätzen treten verschiedene Netzwerkprobleme auf:</p>
+                            <ol style="margin-bottom: 1rem; padding-left: 1.3rem;">
+                                <li>Ein Mitarbeiter möchte von zu Hause aus dem Homeoffice direkt auf eine interne Videokamera mit der IP-Adresse <code>192.168.0.33</code> zugreifen. Begründe ausführlich, warum dieser direkte Zugriff scheitert und welche zwei Lösungen diesen Zugriff ermöglichen.</li>
+                                <li>Im Büro-LAN (Netzwerk <code>192.168.0.0/24</code>) können die Clients die neuen Kameras mit den IP-Adressen <code>192.168.1.33</code> bis <code>192.168.9.33</code> nicht erreichen. Erkläre die technische Ursache.</li>
+                                <li>Bei einem neuen Arbeitsplatz-PC wurde bei der manuellen IP-Konfiguration als Standardgateway versehentlich die IP-Adresse des lokalen File-Servers (<code>192.168.0.1</code>) eingetragen. Beschreibe die exakte Auswirkung auf die Netzwerkerreichbarkeit dieses PCs.</li>
+                            </ol>
+                            <button class="btn btn-secondary" id="sol-pb3-4-btn" onclick="toggleAp2Solution('sol-pb3-4')" style="margin-top: 0.5rem; font-size: 0.85rem; padding: 0.45rem 0.9rem;">
+                                <i class="fa-solid fa-lightbulb"></i> Musterlösung &amp; Korrekturhinweise anzeigen
+                            </button>
+                            <div id="sol-pb3-4" style="display: none; margin-top: 1rem; background: #f0fdf4; border: 1.5px solid #86efac; border-radius: 6px; padding: 1rem; font-size: 0.88rem; color: #166534;">
+                                <strong style="display: block; margin-bottom: 0.5rem; color: #14532d; font-size: 0.95rem;">Offizielle IHK-Musterlösung:</strong>
+                                <strong>1. Zugriff aus dem Homeoffice:</strong><br>
+                                &bull; <em>Ursache:</em> Bei <code>192.168.0.33</code> handelt es sich um eine <strong>private IPv4-Adresse nach RFC 1918</strong> (Bereich 192.168.0.0 bis 192.168.255.255). Private Adressen werden von Routern im öffentlichen Internet nicht weitergeleitet (nicht geroutet).<br>
+                                &bull; <em>Lösungswege:</em> Einrichtung eines <strong>VPN-Tunnels</strong> (z.B. IPsec / WireGuard / SSL-VPN) zwischen Homeoffice und Unternehmensnetzwerk ODER Portweiterleitung (NAT/PAT) auf der Firewall/dem Router mit statischer WAN-IP / DynDNS.<br><br>
+                                <strong>2. Unerreichbarkeit der Kameras (192.168.1.33 ff.):</strong><br>
+                                &bull; Das Büro-LAN nutzt die Subnetzmaske <code>/24</code> (255.255.255.0). Daher reicht das lokale Netz nur von 192.168.0.0 bis 192.168.0.255.<br>
+                                &bull; Die Kameras liegen in anderen logischen Subnetzen (192.168.1.0/24 bis 192.168.9.0/24). Ohne einen <strong>Router oder Layer-3-Switch</strong>, der das Inter-VLAN-Routing übernimmt, können sich unterschiedliche Subnetze nicht direkt auf Layer 2 erreichen.<br><br>
+                                <strong>3. Falsch konfiguriertes Standardgateway (File-Server):</strong><br>
+                                &bull; <em>Auswirkung:</em> Der PC kann alle Geräte im <strong>eigenen Subnetz (192.168.0.0/24)</strong> problemlos erreichen (z.B. andere PCs, lokale Drucker, den Fileserver selbst).<br>
+                                &bull; <strong>Kein Internetzugriff:</strong> Sobald der PC ein Paket an ein externes Ziel (z.B. Webseiten im Internet oder andere Subnetze) senden will, schickt er es an das Standardgateway (den Fileserver). Da der Fileserver keine Router-Funktionalität besitzt, verwirft er die Pakete (Drop) &rarr; Internet und andere Netze sind unerreichbar! Das Gateway muss auf die interne LAN-IP des Routers zeigen.
+                            </div>
+                        </div>
+                    </div>
+
 
                 </div>
 
@@ -2154,7 +2227,7 @@ ORDER BY gesamtumsatz DESC;</pre>
                                 <span style="background: #d97706; color: white; padding: 0.2rem 0.6rem; border-radius: 6px; font-size: 0.78rem; font-weight: 800; text-transform: uppercase;">Original Baden-Württemberg Archiv</span>
                                 <h3 style="margin: 0.4rem 0 0.2rem 0; font-size: 1.2rem; color: #78350f;">Lokale Prüfungs-PDFs auf deinem PC</h3>
                                 <p style="margin: 0; color: #92400e; font-size: 0.9rem;">
-                                    Pfad: <code>C:\Users\Student\OneDrive - GFN GmbH (EDU)\Dokumente\ALEX-AP1_AP2\Baden-Württembergische Abschlussprüfungen AP2</code>
+                                    Pfad: <code>C:\Users\Student\OneDrive - GFN GmbH (EDU)\Dokumente\PV-Vorbereitung\Letzte-AP1-Prüfung\Baden-Württembergische Abschlussprüfungen AP2</code>
                                 </p>
                             </div>
                             <span id="ap2-files-count" style="background: #f59e0b; color: white; font-weight: 800; padding: 0.35rem 0.8rem; border-radius: 999px; font-size: 0.85rem;">
@@ -2304,12 +2377,12 @@ ORDER BY gesamtumsatz DESC;</pre>
 
 
     <script src="diagrams.js?v=160"></script>
-    <script src="exam_data.js?v=162"></script>
-    <script src="questions.js?v=162"></script>
+    <script src="exam_data.js?v=163"></script>
+    <script src="questions.js?v=163"></script>
     <script src="generator.js?v=160"></script>
-    <script src="ap2_bridge.js?v=162"></script>
+    <script src="ap2_bridge.js?v=163"></script>
     <script src="exam_attachments.js?v=160"></script>
-    <script src="app.js?v=162"></script>
+    <script src="app.js?v=163"></script>
 
     <!-- PIN Sicherheits-Gatekeeper -->
     <script>
