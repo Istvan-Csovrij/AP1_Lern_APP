@@ -17805,366 +17805,428 @@ Hinweis: Das letzte Element (Index 5, Wert 3) wird nicht mehr verarbeitet, da di
 
 
     // ==========================================================================
-    // BADEN-WÜRTTEMBERG AP2 ABSCHLUSSPRÜFUNG FRAGENPOOL (FISI STANDARD)
+    // BADEN-WÜRTTEMBERG AP2 ABSCHLUSSPRÜFUNG FRAGENPOOL (FIAE STANDARD)
+    // Speziell für Fachinformatiker Anwendungsentwicklung (FIAE)
     // Basierend auf Originalprüfungen Sommer 2020 bis Winter 2024/2025
-    // Prüfungsbereiche: PB 2 (IT-Systeme 10%), PB 3 (Netzwerke 10%), PB 4 (WiSo 10%)
+    // Prüfungsbereiche: PB 2 (Planen eines Softwareproduktes 10%), 
+    //                   PB 3 (Entwicklung und Umsetzung von Algorithmen 10%), 
+    //                   PB 4 (Wirtschafts- und Sozialkunde 10%)
     // ==========================================================================
 
-    // --- PB 2: Konzeption und Administration von IT-Systemen (100 Pkt. | 10 %) ---
+    // --- PB 2: Planen eines Softwareproduktes (100 Pkt. | 10 %) ---
     {
         id: 801,
         examLevel: "ap2",
-        pruefungsbereich: "PB2",
-        theme: "pb2-systeme",
-        topic: "PB 2: USV-Dimensionierung & Wirk-/Scheinleistung",
+        pruefungsbereich: "PB2-FIAE",
+        theme: "pb2-fiae-software",
+        topic: "PB 2: Entwurfsmuster Singleton Pattern",
         difficulty: "hard",
         isHard: true,
         type: "standard",
-        question: "Ein Rechenzentrums-Rack für ein BaWü-Industrieunternehmen beherbergt vier Server (je 450 W Wirkleistung, Leistungsfaktor cos φ = 0,9), ein SAN-Storage-System (650 W Wirkleistung, cos φ = 0,85) sowie zwei redundante Core-Switche (je 120 W Wirkleistung, cos φ = 0,95). Welche USV-Scheinleistung (in VA) ist mindestens erforderlich, wenn die USV dauerhaft zu maximal 75 % ausgelastet sein darf und eine Zukunftsreserve von 20 % eingeplant werden soll?",
+        question: "Ein Softwareentwickler implementiert in einer Java/C#-Enterprise-Anwendung eine zentrale Konfigurationsverwaltung nach dem Singleton-Entwurfsmuster. Welche Maßnahmen sind zwingend erforderlich, um das Singleton-Muster technisch korrekt und threadsicher umzusetzen?",
         options: [
-            "Ca. 2.915 VA",
-            "Ca. 4.880 VA",
-            "Ca. 1.850 VA",
-            "Ca. 7.200 VA"
+            "Der Konstruktor muss public sein und die Klasse muss von Thread erben.",
+            "Der Konstruktor muss private sein, eine statische Variable hält die einzige Instanz und eine statische Methode (z. B. getInstance()) liefert diese Instanz threadsicher zurück.",
+            "Die Klasse muss abstrakt sein und mindestens drei abstrakte Methoden deklarieren.",
+            "Alle Methoden müssen als final deklariert und Parameter als Call-by-Reference übergeben werden."
         ],
         answer: 1,
-        explanation: `Berechnung Schritt für Schritt (IHK AP2 Standard):
-1. Scheinleistung jedes Verbrauchers ermitteln (S = P / cos φ):
-   • 4 Server: S_Server = (4 × 450 W) / 0,9 = 1.800 W / 0,9 = 2.000 VA
-   • SAN-Storage: S_SAN = 650 W / 0,85 ≈ 764,7 VA
-   • 2 Switche: S_Switch = (2 × 120 W) / 0,95 = 240 W / 0,95 ≈ 252,6 VA
-2. Gesamtscheinleistung der Last:
-   S_Last = 2.000 VA + 764,7 VA + 252,6 VA ≈ 3.017,3 VA
-3. Berücksichtigung von 20 % Zukunftsreserve:
-   S_Bedarf = 3.017,3 VA × 1,20 ≈ 3.620,8 VA
-4. Maximale Auslastung der USV von 75 % (S_USV × 0,75 = S_Bedarf):
-   S_USV = 3.620,8 VA / 0,75 ≈ 4.827,7 VA -> Die nächstgrößere Standard-Klasse ist ca. 4.880 VA bzw. 5.000 VA.`
+        explanation: `💡 Technischer Hintergrund Singleton Pattern:
+1. Privater Konstruktor: Verhindert, dass externe Klassen mit 'new' weitere Instanzen erzeugen können.
+2. Statische Member-Variable: Hält die Referenz auf das einzige Objekt (häufig 'private static ConfigurationManager instance').
+3. Öffentliche statische Zugriffsmethode: 'public static ConfigurationManager getInstance()' liefert die Referenz. Bei Multi-Threading muss die Instanziierung synchronisiert werden (z. B. Double-Checked Locking mit 'volatile').
+Hinweis für die IHK-Prüfung: Nachteile des Singletons sind erschwertes Unit-Testing (schwer mockbar) und das Einführen eines globalen Zustands (Anti-Pattern bei falscher Nutzung).`
     },
     {
         id: 802,
         examLevel: "ap2",
-        pruefungsbereich: "PB2",
-        theme: "pb2-systeme",
-        topic: "PB 2: Storage RAID 5 / 6 / 10 & URE-Risiko",
+        pruefungsbereich: "PB2-FIAE",
+        theme: "pb2-fiae-software",
+        topic: "PB 2: Entwurfsmuster Strategy Pattern (Open/Closed)",
         difficulty: "hard",
         isHard: true,
         type: "standard",
-        question: "Ein Administrator plant ein Storage-Array für Virtualisierung mit 8 Enterprise-HDDs à 12 TB. Warum rät der Storage-Hersteller bei dieser Plattenkapazität dringend von RAID 5 ab und fordert zwingend RAID 6 oder RAID 10?",
+        question: "In einem Online-Shop sollen verschiedene Rabattberechnungen (z. B. Standardkundenrabatt, VIP-Rabatt, Saisonrabatt) flexibel zur Laufzeit ausgewählt und neue Rabattarten ohne Änderung des bestehenden Rechnungscodes hinzugefügt werden können. Welches Entwurfsmuster der Gang of Four (GoF) ist hierfür die Best Practice?",
         options: [
-            "RAID 5 unterstützt maximal 4 Festplatten in einer RAID-Gruppe.",
-            "Wegen der URE-Wahrscheinlichkeit (Unrecoverable Read Error von typisch 10^14 Bit) führt das Lesen von ca. 70 TB beim tagelangen Rebuild fast unausweichlich zu einem zweiten Lesefehler und damit zum Totalverlust des Arrays.",
-            "RAID 5 kann keine SSD-Caches nutzen und ist deshalb für Virtualisierung unzulässig.",
-            "Bei RAID 5 geht durch die doppelte Parität zu viel Nettospeicherplatz verloren."
+            "Observer Pattern (Beobachter-Muster)",
+            "Strategy Pattern (Strategie-Muster)",
+            "Decorator Pattern (Dekorierer-Muster)",
+            "Adapter Pattern (Adapter-Muster)"
         ],
         answer: 1,
-        explanation: `💡 Technischer Hintergrund (AP2 Kernwissen):
-Bei Festplattenkapazitäten ab 4–8 TB ist die Datenmenge, die beim Ausfall einer Platte im Rebuild von den restlichen Platten fehlerfrei gelesen werden muss (hier 7 × 12 TB = 84 TB ≈ 6,7 × 10^14 Bits), statistisch größer als die garantierte Fehlerrate von Enterprise-SATA/SAS-Platten (1 URE pro 10^14 bzw. 10^15 Bits). Tritt beim Rebuild eines RAID 5 auch nur ein einziger Sektorlesefehler auf, bricht der Rebuild ab und das gesamte Volume ist korrupt. RAID 6 toleriert zwei gleichzeitige Plattenausfälle und übersteht Lesefehler während des Rebuilds.`
+        explanation: `💡 Strategy Pattern (Strategie-Muster):
+• Zweck: Definiert eine Familie von Algorithmen, kapselt jeden einzelnen in einer separaten Klasse und macht sie austauschbar.
+• Architektur: Ein Interface (z. B. 'IRabattStrategie' mit der Methode 'berechneRabatt(betrag)') wird von konkreten Klassen ('StandardRabatt', 'VipRabatt', 'SaisonRabatt') implementiert. Die Rechnungs-Klasse (Context) hält eine Referenz auf das Interface.
+• Vorteil: Erfüllt das Open/Closed Principle (OCP) – neue Rabattarten können hinzugefügt werden, ohne eine einzige Zeile des bestehenden Kontexts zu modifizieren.`
     },
     {
         id: 803,
         examLevel: "ap2",
-        pruefungsbereich: "PB2",
-        theme: "pb2-systeme",
-        topic: "PB 2: Hypervisor Typ-1 vs Typ-2 & Container",
+        pruefungsbereich: "PB2-FIAE",
+        theme: "pb2-fiae-software",
+        topic: "PB 2: UML-Klassendiagramm Komposition vs Aggregation",
         difficulty: "hard",
         isHard: true,
         type: "standard",
-        question: "Welche Aussage beschreibt den Unterschied zwischen Typ-1-Hypervisoren (z. B. VMware ESXi, Proxmox VE), Typ-2-Hypervisoren (z. B. VirtualBox) und Linux-Containern (Docker/Podman) technisch exakt?",
+        question: "In einem UML-Klassendiagramm wird die Beziehung zwischen der Klasse 'Auftrag' und der Klasse 'Auftragsposition' modelliert. Warum wird diese Beziehung fachlich als Komposition (ausgefüllte schwarze Raute) und nicht als Aggregation (leere weiße Raute) dargestellt?",
         options: [
-            "Container virtualisieren die CPU-Hardware vollständig, während Typ-1-Hypervisoren nur das Gast-Betriebssystem emulieren.",
-            "Typ-1-Hypervisoren laufen direkt auf der Bare-Metal-Hardware ohne zwischengeschaltetes Host-OS; Container teilen sich den Kernel des Host-Betriebssystems und isolieren Prozesse über Linux-Namespaces und cgroups.",
-            "Typ-2-Hypervisoren bieten eine bessere I/O-Performance als Typ-1-Hypervisoren, weil sie die Gerätetreiber des Host-Betriebssystems direkt nutzen.",
-            "Container benötigen für jeden Dienst eine eigene virtuelle BIOS/UEFI-Firmware und ein eigenes Kernel-Abbild."
+            "Weil eine Auftragsposition auch ohne einen Auftrag selbstständig im System existieren kann.",
+            "Weil zwischen Auftrag und Auftragsposition eine strikte Existenzabhängigkeit besteht: Wird ein Auftrag gelöscht, verlieren die zugehörigen Auftragspositionen ihre Existenzberechtigung und werden ebenfalls gelöscht (Lifecycle-Bound).",
+            "Weil ein Auftrag von der Auftragsposition erbt.",
+            "Weil die Komposition eine Mehrfachvererbung in Java ermöglicht."
         ],
         answer: 1,
-        explanation: `Exakter Architekturvergleich:
-1. Typ-1 (Bare Metal): Hypervisor fungiert direkt als OS/Hardware-Abstraktionsschicht -> minimale Latenz, maximale Hardware-Kontrolle.
-2. Typ-2 (Hosted): Hypervisor läuft als normale Anwendungssoftware auf einem Host-OS (Windows, macOS) -> zusätzlicher Overhead für Systemcalls.
-3. Container: Keine Hardware-Virtualisierung! Container sind isolierte Prozesse, die den gemeinsamen Linux-Kernel nutzen. Isolation über Namespaces (pid, net, ipc, mnt, uts, user) und Ressourcenlimitierung über cgroups (Control Groups).`
+        explanation: `💡 UML-Beziehungsarten im Klassendiagramm:
+• Komposition (schwarze Raute am Ganzen): Strenge Teil-Ganzes-Beziehung mit Existenzabhängigkeit. Das Teil kann nicht ohne das Ganze existieren. Wird das Ganze gelöscht, werden auch die Teile zerstört (Beispiel: Auftrag -> Auftragsposition; Haus -> Zimmer).
+• Aggregation (weiße Raute am Ganzen): Lose Teil-Ganzes-Beziehung ohne Existenzabhängigkeit. Das Teil existiert auch unabhängig vom Ganzen weiter (Beispiel: Abteilung -> Mitarbeiter; Auto -> Fahrer).`
     },
     {
         id: 804,
         examLevel: "ap2",
-        pruefungsbereich: "PB2",
-        theme: "pb2-systeme",
-        topic: "PB 2: 3-2-1-1-0 Backup-Strategie & RPO / RTO",
+        pruefungsbereich: "PB2-FIAE",
+        theme: "pb2-fiae-software",
+        topic: "PB 2: Datenbank-Normalisierung (1. bis 3. NF)",
         difficulty: "hard",
         isHard: true,
         type: "open-text",
         points: 10,
-        question: `🛡️ **IHK AP2 Fachaufgabe: Moderne Datensicherungsstrategie (10 Punkte)**
+        question: `🗄️ **IHK AP2 Fachaufgabe: Relationale Datenmodellierung & Normalisierung (10 Punkte)**
 
-Im Rahmen eines IT-Sicherheitsaudits soll das Backup-Konzept einer Klinik modernisiert werden.
+Gegeben ist folgende unnormalisierte Tabelle einer Softwareentwicklungs-Agentur:
+\`Projektbuchung\` (\`BuchungsID\`, \`ProjektNr\`, \`ProjektName\`, \`EntwicklerNr\`, \`EntwicklerName\`, \`Stundensatz\`, \`GebuchteStunden\`)
+Zusammengesetzter Primärschlüssel der Buchung: (\`ProjektNr\`, \`EntwicklerNr\`).
 
 **Aufgabenstellung:**
-1. Erläutern Sie die moderne **3-2-1-1-0 Backup-Regel** und schlüsseln Sie die Bedeutung jeder einzelnen Ziffer auf.
-2. Definieren und unterscheiden Sie die beiden Kernkennzahlen **RPO (Recovery Point Objective)** und **RTO (Recovery Time Objective)** anhand eines praxisnahen Beispiels.`,
-        solution: `1. Aufschlüsselung der 3-2-1-1-0 Backup-Regel:
-• 3: Mindestens DREI Kopien aller wichtigen Daten vorhalten (1 Produktionsdaten + 2 Backups).
-• 2: Die Sicherungen auf mindestens ZWEI unterschiedlichen Speichermedientypen speichern (z. B. lokales NVMe/SSD-SAN und LTO-Magnetband oder Cloud-Objektspeicher).
-• 1: Mindestens EINE Backup-Kopie an einem externen, räumlich getrennten Standort (Off-Site / Zweitrechenzentrum / Cloud) aufbewahren (Schutz vor Brand, Wasser, Einbruch).
-• 1: Mindestens EINE Kopie unveränderlich (Immutable Storage / WORM-Speicher) oder physisch getrennt (Air-Gapped / Offline-Tape) vorhalten (essenzieller Schutz gegen Ransomware-Verschlüsselung).
-• 0: NULL Fehler bei der regelmäßigen, automatisierten Wiederherstellungsprüfung (Automated Recovery Verification).
+1. Definieren Sie kurz die Regeln für die **1., 2. und 3. Normalform (NF)**.
+2. Überführen Sie die Tabelle schrittweise in die **3. Normalform**. Geben Sie für alle resultierenden Relationen den Tabellennamen, die Attribute sowie Primärschlüssel [PK] und Fremdschlüssel [FK] an.`,
+        solution: `1. Definition der Normalformen:
+• 1. Normalform (1. NF):
+  Alle Attribute enthalten atomare (nicht weiter zerlegbare) Wertebereiche und die Tabelle ist frei von Wiederholungsgruppen.
+• 2. Normalform (2. NF):
+  Die Tabelle befindet sich in der 1. NF und jedes Nicht-Schlüsselattribut ist VOLL funktional vom GESAMTEN Primärschlüssel abhängig (keine partiellen Abhängigkeiten von Teilen eines zusammengesetzten Primärschlüssels).
+• 3. Normalform (3. NF):
+  Die Tabelle befindet sich in der 2. NF und kein Nicht-Schlüsselattribut ist TRANSITIV (über ein anderes Nicht-Schlüsselattribut) vom Primärschlüssel abhängig (keine Abhängigkeiten zwischen Nicht-Schlüsselattributen).
 
-2. Definition RPO vs. RTO:
-• RPO (Recovery Point Objective - maximal tolerierbarer Datenverlust):
-  Definiert den maximal akzeptablen Zeitraum zwischen der letzten Datensicherung und dem Katastrophenzeitpunkt, für den Datenverlust hingenommen werden kann.
-  Beispiel: Beträgt das RPO 2 Stunden, müssen mindestens alle 2 Stunden Snapshots/Backups erstellt werden. Bei einem Ausfall gehen maximal die Daten der letzten 2 Stunden verloren.
-• RTO (Recovery Time Objective - maximal tolerierbare Ausfallzeit):
-  Definiert die maximal zulässige Zeitspanne vom Eintritt des Störfalls bis zur vollständigen Wiederherstellung des Normalbetriebs.
-  Beispiel: Beträgt das RTO 4 Stunden, muss das Disaster-Recovery-Konzept sicherstellen, dass die Systeme innerhalb von 4 Stunden wieder einsatzbereit und für Benutzer erreichbar sind.`,
-        explanation: `In Baden-Württemberg AP2-Prüfungen ist der Ransomware-Schutz über 'Immutable Backups' (WORM / Object Lock nach S3-Standard) sowie die exakte Definition von RPO und RTO ein wiederkehrender Prüfungsschwerpunkt.`
+2. Überführung in die 3. Normalform:
+
+Schritt 1: Analyse der funktionalen Abhängigkeiten:
+- (ProjektNr, EntwicklerNr) -> GebuchteStunden (voll funktional abhängig vom Gesamtschlüssel)
+- ProjektNr -> ProjektName (partiell abhängig von Teil-PK ProjektNr -> verletzt 2. NF!)
+- EntwicklerNr -> EntwicklerName, Stundensatz (partiell abhängig von Teil-PK EntwicklerNr -> verletzt 2. NF!)
+
+Schritt 2: Zerlegung in 2. NF und Prüfung auf 3. NF:
+Da ProjektName nur von ProjektNr und EntwicklerName/Stundensatz nur von EntwicklerNr abhängen (keine transitiven Abhängigkeiten unter den Nicht-Schlüsseln), ergibt die Zerlegung direkt die 3. NF:
+
+Tabelle 1: Projekt
+• ProjektNr [PK]
+• ProjektName
+
+Tabelle 2: Entwickler
+• EntwicklerNr [PK]
+• EntwicklerName
+• Stundensatz
+
+Tabelle 3: Projektbuchung (Auflösung der n:m-Beziehung)
+• ProjektNr [PK, FK zu Projekt.ProjektNr]
+• EntwicklerNr [PK, FK zu Entwickler.EntwicklerNr]
+• GebuchteStunden
+
+Ergebnis: Die Datenbank ist vollständig normalisiert (3. NF), redundanzfrei und frei von Einfüge-, Änderungs- und Lösch-Anomalien.`,
+        explanation: `Punkteverteilung IHK AP2:
+• 3 Punkte für korrekte Definition der 1., 2. und 3. Normalform.
+• 3 Punkte für Beseitigung der partiellen Schlüsselabhängigkeiten (Aufspaltung in Projekt und Entwickler).
+• 3 Punkte für die korrekte Verknüpfungstabelle mit zusammengesetztem Primärschlüssel und Fremdschlüsseln.
+• 1 Punkt für Vollständigkeit und formale Korrektheit.`
     },
     {
         id: 805,
         examLevel: "ap2",
-        pruefungsbereich: "PB2",
-        theme: "pb2-systeme",
-        topic: "PB 2: SAN Fibre Channel vs iSCSI",
+        pruefungsbereich: "PB2-FIAE",
+        theme: "pb2-fiae-software",
+        topic: "PB 2: UML-Use-Case <<include>> vs <<extend>>",
         difficulty: "hard",
         isHard: true,
         type: "standard",
-        question: "Bei der Planung eines Storage Area Networks (SAN) diskutiert das Projektteam Fibre Channel (FC) und iSCSI. Welcher Begriff und welche Technologie gehören originär zu Fibre Channel?",
+        question: "In einem Use-Case-Diagramm für eine Geldautomaten-Software sind die Anwendungsfälle 'Geld abheben', 'PIN prüfen' und 'Quittung drucken' abgebildet. Welche Beziehungstypen verbinden diese Use Cases fachlich korrekt?",
         options: [
-            "IQN (iSCSI Qualified Name) und TCP-Port 3260",
-            "WWPN (World Wide Port Name) und Hardware-Zoning auf FC-Switchen",
-            "SMB3 Multichannel und Kerberos-Delegierung",
-            "NFS v4.1 mit RPC-Mount-Dienst"
+            "'Geld abheben' verbindet sich mit <<extend>> zu 'PIN prüfen'; 'Geld abheben' verbindet sich mit <<include>> zu 'Quittung drucken'.",
+            "'Geld abheben' schließt per <<include>> 'PIN prüfen' zwingend ein; 'Quittung drucken' erweitert 'Geld abheben' per <<extend>> als optionale Funktion (Extension Point).",
+            "Beide Beziehungen müssen als Vererbung (Generalisierung) dargestellt werden.",
+            "Zwischen Use Cases dürfen ausschließlich gerichtete Assoziationen ohne Stereotypen verwendet werden."
         ],
         answer: 1,
-        explanation: `💡 Fachwissen Fibre Channel:
-• WWPN (World Wide Port Name): Eine eindeutige 64-Bit-Hexadezimaladresse jedes Fibre-Channel-Ports (HBA oder Storage-Controller).
-• Zoning: Sicherheits- und Segmentierungsverfahren auf den Brocade/Cisco FC-Switchen (Fabric), um festzulegen, welche Initiatoren (Server) mit welchen Targets (Storage) kommunizieren dürfen.
-• LUN-Masking: Konfiguration auf dem Storage-System, die einer bestimmten Host-WWPN Zugriff auf eine spezifische Logical Unit Number (LUN) gewährt.`
+        explanation: `💡 UML Use-Case Stereotypen:
+• <<include>> (Einschließen): Ein Use Case ruft das Verhalten des inkludierten Use Cases ZWINGEND und immer an einer definierten Stelle auf. Ohne 'PIN prüfen' kann 'Geld abheben' nicht erfolgreich abgeschlossen werden. Der Pfeil zeigt vom Basis-Use-Case zum inkludierten Use Case.
+• <<extend>> (Erweitern): Ein optionaler Use Case erweitert den Basis-Use-Case nur unter bestimmten Bedingungen (Extension Point). Der Kunde kann wählen, ob er eine Quittung drucken möchte oder nicht. Der Pfeil zeigt vom erweiternden Use Case zum Basis-Use-Case.`
     },
     {
         id: 806,
         examLevel: "ap2",
-        pruefungsbereich: "PB2",
-        theme: "pb2-systeme",
-        topic: "PB 2: BSI IT-Grundschutz Schutzbedarfsfeststellung",
+        pruefungsbereich: "PB2-FIAE",
+        theme: "pb2-fiae-software",
+        topic: "PB 2: Lastenheft vs Pflichtenheft & ISO/IEC 25010",
         difficulty: "hard",
         isHard: true,
         type: "standard",
-        question: "Nach welchem Verfahren wird gemäß BSI-Standard 200-2 die Schutzbedarfsfeststellung für IT-Systeme und Anwendungen durchgeführt?",
+        question: "Welche Aussage grenzt Lastenheft und Pflichtenheft sowie funktionale und nicht-funktionale Anforderungen nach DIN 69901 / ISO/IEC 25010 exakt ab?",
         options: [
-            "Ausschließlich durch Messung der jährlichen Downtime in Prozent ('Neunen-Verfügbarkeit').",
-            "Indem für die drei Grundwerte Vertraulichkeit, Integrität und Verfügbarkeit die Schadensauswirkungen bei einer Verletzung in die Kategorien 'normal', 'hoch' oder 'sehr hoch' eingestuft werden.",
-            "Durch automatische Scans mit Schwachstellen-Scannern nach CVSS-Score.",
-            "Durch Festlegung der monatlichen Backup-Kapazität in Terabyte."
+            "Das Lastenheft wird vom Auftragnehmer erstellt und beschreibt das technische 'Wie'; das Pflichtenheft stammt vom Auftraggeber und beschreibt das kaufmännische 'Was'.",
+            "Das Lastenheft beschreibt die Gesamtheit der Forderungen des Auftraggebers (WAS und WOFÜR); das Pflichtenheft beschreibt die Realisierungsvorgaben des Auftragnehmers (WIE und WOMIT). Antwortzeiten unter 200 ms und DSGVO-Konformität sind nicht-funktionale Qualitätsanforderungen.",
+            "Nicht-funktionale Anforderungen beschreiben die Algorithmen im Pseudocode; funktionale Anforderungen beschreiben die Hardwarekomponenten.",
+            "Das Pflichtenheft ersetzt in agilen Projekten das Product Backlog vollständig und darf nach Unterzeichnung nicht mehr eingesehen werden."
         ],
         answer: 1,
-        explanation: `BSI IT-Grundschutz Methodik (Standard 200-2):
-Die Schutzbedarfsfeststellung bewertet für jedes Zielobjekt (Geschäftsprozesse, Anwendungen, IT-Systeme, Räume) die drei Grundwerte:
-1. Vertraulichkeit (Schutz vor unbefugter Offenlegung)
-2. Integrität (Schutz vor unbemerkter Veränderung/Fälschung)
-3. Verfügbarkeit (Zugriffsberechtigte können Daten zeitgerecht nutzen)
-Die Einstufung erfolgt in 'normal' (Schadensauswirkungen sind begrenzt), 'hoch' (beträchtliche Schäden) und 'sehr hoch' (existenzbedrohend / katastrophale Schäden / Gefahr für Leib und Leben).`
+        explanation: `Normative Definitionen (IHK AP2):
+1. Lastenheft (Auftraggeber): Anforderungskatalog des Kunden. Fokus: Fachliche Anforderungen, Zielsetzung, Rahmenbedingungen (WAS soll gelöst werden?).
+2. Pflichtenheft (Auftragnehmer): Detaillierter Lösungsvorschlag des Entwicklerteams. Fokus: Technische Architektur, Datenmodelle, Schnittstellen (WIE wird es umgesetzt?).
+3. Anforderungstypen nach ISO/IEC 25010:
+   • Funktional: Konkrete Leistungsmerkmale (z. B. 'System berechnet Skonto automatisch').
+   • Nicht-funktional: Qualitätsmerkmale wie Performanz/Latenz, IT-Sicherheit, Zuverlässigkeit, Wartbarkeit und Usability.`
     },
     {
         id: 807,
         examLevel: "ap2",
-        pruefungsbereich: "PB2",
-        theme: "pb2-systeme",
-        topic: "PB 2: Active Directory Kerberos-Authentifizierung",
+        pruefungsbereich: "PB2-FIAE",
+        theme: "pb2-fiae-software",
+        topic: "PB 2: Scrum-Rollen, Artefakte & INVEST-Kriterien",
         difficulty: "hard",
         isHard: true,
         type: "standard",
-        question: "In welcher Reihenfolge tauscht ein Windows-Client beim Anmeldevorgang an einer Active-Directory-Domäne die Kerberos-Tickets mit dem Domain Controller (KDC) aus?",
+        question: "In einem agilen Softwareentwicklungsteam nach dem Scrum-Guide entstehen Unklarheiten über Aufgaben und User Stories. Welche Aussage entspricht exakt dem offiziellen Scrum-Framework und dem INVEST-Prinzip?",
         options: [
-            "1. TGS-REQ -> 2. TGS-REP -> 3. AS-REQ -> 4. AS-REP",
-            "1. AS-REQ (Authentication Service) -> 2. AS-REP (Ticket Granting Ticket TGT) -> 3. TGS-REQ (Ticket Granting Service) -> 4. TGS-REP (Service Ticket)",
-            "1. NTLM Challenge -> 2. NTLM Response -> 3. RADIUS Accept",
-            "1. LDAP Bind -> 2. LDAP Search -> 3. SMB Negotiate"
+            "Der Scrum Master priorisiert die Einträge im Product Backlog nach betriebswirtschaftlichem Nutzen.",
+            "Der Product Owner ist alleinverantwortlich für die Pflege und Wertmaximierung des Product Backlogs; das Entwicklerteam schätzt den Aufwand; gute User Stories erfüllen die INVEST-Kriterien (Independent, Negotiable, Valuable, Estimable, Small, Testable).",
+            "Die Definition of Done (DoD) wird vom Kunden nach jedem Sprint nachträglich angepasst.",
+            "Im Daily Scrum berichtet jeder Entwickler dem Product Owner über seine Überstunden."
         ],
         answer: 1,
-        explanation: `Ablauf Kerberos v5 im Active Directory:
-1. Client sendet AS-REQ an den KDC (Authentication Service).
-2. KDC authentifiziert den Benutzer und antwortet mit AS-REP, welches das TGT (Ticket Granting Ticket) enthält.
-3. Will der Client auf eine Freigabe/Server zugreifen, sendet er das TGT per TGS-REQ an den KDC.
-4. KDC stellt mit TGS-REP das Service-Ticket für den Zielserver aus.
-5. Client authentifiziert sich mit dem Service-Ticket direkt beim Zielserver (AP-REQ / AP-REP).`
+        explanation: `Scrum Rollenverteilung & INVEST:
+• Product Owner (PO): Definiert Features, pflegt das Product Backlog und priorisiert nach Business Value.
+• Scrum Master: Sorgt für die Einhaltung des Scrum-Prozesses, beseitigt Hindernisse (Impediments) und coacht das Team.
+• Developers: Selbstorganisiertes Team, schätzt den Aufwand (z. B. mit Planning Poker in Story Points) und liefert am Sprintende ein fertiges Inkrement (gemäß Definition of Done).
+• INVEST-Kriterien für User Stories: Independent (unabhängig), Negotiable (verhandelbar), Valuable (stiftend Wert), Estimable (schätzbar), Small (klein genug für einen Sprint), Testable (testbar durch Akzeptanzkriterien).`
     },
 
-    // --- PB 3: Analyse und Entwicklung von Netzwerken (100 Pkt. | 10 %) ---
+    // --- PB 3: Entwicklung und Umsetzung von Algorithmen (100 Pkt. | 10 %) ---
     {
         id: 808,
         examLevel: "ap2",
-        pruefungsbereich: "PB3",
-        theme: "pb3-netze",
-        topic: "PB 3: IPv6 Adresstypen & SLAAC mit EUI-64",
+        pruefungsbereich: "PB3-FIAE",
+        theme: "pb3-fiae-algo",
+        topic: "PB 3: Binäre Suche vs Lineare Suche Komplexität",
         difficulty: "hard",
         isHard: true,
         type: "standard",
-        question: "Ein Client-PC mit der MAC-Adresse 00:1A:2B:3C:4D:5E generiert seine IPv6 Link-Local-Adresse mittels SLAAC nach dem EUI-64-Verfahren. Welcher Interface-Identifier und welche vollständige Link-Local-Adresse entstehen dabei?",
+        question: "In einem Datenfeld mit 1.024 Elementen soll nach einer bestimmten Kundennummer gesucht werden. Welche zwingende Voraussetzung erfordert die binäre Suche und wie viele Vergleiche sind im Worst Case bei der binären Suche im Vergleich zur linearen Suche maximal erforderlich?",
         options: [
-            "fe80::001a:2bff:fe3c:4d5e",
-            "fe80::021a:2bff:fe3c:4d5e",
-            "fe80::fffe:001a:2b3c:4d5e",
-            "fc00::021a:2bff:fe3c:4d5e"
+            "Voraussetzung: Keine; Binäre Suche: max. 512 Vergleiche; Lineare Suche: max. 1.024 Vergleiche.",
+            "Voraussetzung: Das Feld muss zwingend aufsteigend sortiert vorliegen; Binäre Suche: maximal 10 Vergleiche (O(log2 n)); Lineare Suche: maximal 1.024 Vergleiche (O(n)).",
+            "Voraussetzung: Das Feld darf nur Primzahlen enthalten; Binäre Suche: max. 1 Vergleich; Lineare Suche: max. 10 Vergleiche.",
+            "Voraussetzung: Eine Hash-Tabelle; beide Verfahren benötigen O(1) Vergleiche."
         ],
         answer: 1,
-        explanation: `Schritt-für-Schritt-Konstruktion nach EUI-64:
-1. Ausgangs-MAC: 00:1A:2B : 3C:4D:5E
-2. In der Mitte wird 'FF:FE' eingefügt: 001A:2BFF:FE3C:4D5E
-3. Das 7. Bit des ersten Bytes (Universal/Local Bit) wird invertiert:
-   • Erstes Byte: 0x00 = 0000 0000 b
-   • 7. Bit invertieren: 0000 0010 b = 0x02
-   • Aus 00 wird 02 -> 021a:2bff:fe3c:4d5e
-4. Voranstellen des Link-Local-Präfix fe80::/64 ergibt:
-   fe80::021a:2bff:fe3c:4d5e (Kompakte IPv6-Schreibweise).`
+        explanation: `💡 Algorithmenanalyse (Binäre vs Lineare Suche):
+• Voraussetzung: Die binäre Suche funktioniert NUR auf sortierten Datenbeständen!
+• Funktionsweise Binäre Suche: Bei jedem Schritt wird das Element in der Mitte mit dem Suchwert verglichen und der Suchbereich halbiert (Divide-and-Conquer).
+• Komplexität: O(log2 n).
+  Für n = 1.024 gilt: log2(1.024) = 10 Vergleiche im ungünstigsten Fall (Worst Case)!
+• Lineare Suche: Muss im Worst Case alle n Elemente sequenziell durchlaufen -> 1.024 Vergleiche (O(n)).`
     },
     {
         id: 809,
         examLevel: "ap2",
-        pruefungsbereich: "PB3",
-        theme: "pb3-netze",
-        topic: "PB 3: IEEE 802.1Q VLAN Tagging & Header",
+        pruefungsbereich: "PB3-FIAE",
+        theme: "pb3-fiae-algo",
+        topic: "PB 3: Datenstrukturen Stack (LIFO) vs Queue (FIFO)",
         difficulty: "hard",
         isHard: true,
         type: "standard",
-        question: "Wie viele Bytes fügt der IEEE 802.1Q-Standard in einen standardmäßigen Ethernet-II-Frame ein und wie viele Bits stehen für die VLAN-ID (VID) zur Verfügung?",
+        question: "Welche Aussage beschreibt die Arbeitsweise, Methoden und typischen Einsatzgebiete von Stack (Kellerspeicher) und Queue (Warteschlange) fachlich exakt?",
         options: [
-            "2 Bytes Header, 8 Bits für VID (maximal 256 VLANs)",
-            "4 Bytes Header, 12 Bits für VID (theoretisch 4096 IDs, nutzbar 1 bis 4094)",
-            "8 Bytes Header, 16 Bits für VID (maximal 65.536 VLANs)",
-            "6 Bytes Header, 24 Bits für VID"
+            "Stack arbeitet nach dem FIFO-Prinzip mit enqueue/dequeue; Queue arbeitet nach LIFO mit push/pop.",
+            "Stack arbeitet nach dem LIFO-Prinzip (Last In, First Out) mit push() und pop(); typische Einsätze sind der Methodenaufruf-Stack (Call Stack), Undo-Funktionen und Klammerprüfungen. Queue arbeitet nach FIFO (First In, First Out) mit enqueue() und dequeue(); typische Einsätze sind Druckerspooler und Event-Queues.",
+            "Beide Datenstrukturen erlauben wahlfreien Zugriff auf beliebige Indizes in O(1).",
+            "Ein Stack kann maximal 256 Elemente speichern, eine Queue unbegrenzt."
         ],
         answer: 1,
-        explanation: `💡 802.1Q Frame-Aufbau (4 Bytes = 32 Bits):
-• TPID (Tag Protocol Identifier): 16 Bits, fester Wert 0x8100 kennzeichnet den 802.1Q-Frame.
-• TCI (Tag Control Information): 16 Bits, unterteilt in:
-  - PCP (Priority Code Point): 3 Bits für Quality of Service (IEEE 802.1p, 8 Prioritätsstufen 0–7).
-  - DEI (Drop Eligible Indicator): 1 Bit (früher CFI) für Paketverwerfung bei Überlast.
-  - VID (VLAN Identifier): 12 Bits (2^12 = 4096 Werte: 0 und 4095 reserviert, nutzbar 1 bis 4094).`
+        explanation: `Stack vs Queue (IHK Basiswissen):
+• Stack (Stapel / LIFO):
+  - Das zuletzt hinzugefügte Element wird zuerst entnommen.
+  - Operationen: push (hinzufügen), pop (oberstes Element entfernen und zurückgeben), peek/top (oberstes Element ansehen).
+  - Anwendungsfälle: Syntax-Parsing (z. B. HTML/Code-Tags schließen), Backtracking (Tiefensuche), Undo/Redo in Editoren, Call-Stack bei Rekursion.
+• Queue (Warteschlange / FIFO):
+  - Das zuerst hinzugefügte Element wird zuerst entnommen.
+  - Operationen: enqueue (am Ende anstellen), dequeue (vorne entnehmen).
+  - Anwendungsfälle: Job-Scheduler, Tastaturpuffer, Druckaufträge, Breitensuche (BFS).`
     },
     {
         id: 810,
         examLevel: "ap2",
-        pruefungsbereich: "PB3",
-        theme: "pb3-netze",
-        topic: "PB 3: OSPF Metrik-Berechnung & Area-Konzept",
-        difficulty: "hard",
-        isHard: true,
-        type: "standard",
-        question: "Ein Cisco-Router nutzt OSPFv2 mit der Standard-Referenzbandbreite von 10^8 bit/s (100 Mbit/s). Welche OSPF-Cost-Werte berechnet der Router für eine 10 Mbit/s-Ethernet-Strecke und eine 1000 Mbit/s (Gigabit)-Strecke bei unveränderter Referenzbandbreite?",
-        options: [
-            "10 Mbit/s: Cost 10 | Gigabit: Cost 1",
-            "10 Mbit/s: Cost 1 | Gigabit: Cost 100",
-            "10 Mbit/s: Cost 100 | Gigabit: Cost 0,1",
-            "10 Mbit/s: Cost 5 | Gigabit: Cost 5"
-        ],
-        answer: 0,
-        explanation: `OSPF Kostenformel: Cost = Referenzbandbreite / Schnittstellenbandbreite
-• 10 Mbit/s: Cost = 100.000.000 bit/s / 10.000.000 bit/s = 10
-• Gigabit (1.000 Mbit/s): Cost = 100.000.000 bit/s / 1.000.000.000 bit/s = 0,1 -> Da OSPF nur ganzzahlige Werte >= 1 unterstützt, wird auf Cost 1 aufgerundet!
-Merke: Um moderne Netze mit 1 Gbit/s, 10 Gbit/s und 40 Gbit/s korrekt zu differenzieren, muss die Auto-Cost Reference-Bandwidth in der Praxis auf z. B. 100000 (100 Gbit/s) angehoben werden!`
-    },
-    {
-        id: 811,
-        examLevel: "ap2",
-        pruefungsbereich: "PB3",
-        theme: "pb3-netze",
-        topic: "PB 3: Firewall-Konzepte & DMZ-Architektur",
+        pruefungsbereich: "PB3-FIAE",
+        theme: "pb3-fiae-algo",
+        topic: "PB 3: Die SOLID-Prinzipien der Objektorientierung",
         difficulty: "hard",
         isHard: true,
         type: "open-text",
         points: 10,
-        question: `🌐 **IHK AP2 Fachaufgabe: DMZ-Konzeption & Firewall-Sicherheitsarchitektur (10 Punkte)**
+        question: `💻 **IHK AP2 Fachaufgabe: SOLID-Prinzipien für sauberen Code (10 Punkte)**
 
-Ein mittelständisches Unternehmen in Stuttgart betreibt einen öffentlich erreichbaren Webserver (HTTPS) und einen Mailserver (SMTP/IMAP). Die interne Datenbank mit Kundendaten sowie die Arbeitsplatz-Clients befinden sich im LAN.
+Die SOLID-Prinzipien (formuliert von Robert C. Martin / Uncle Bob) bilden das Fundament wartbarer, testbarer und erweiterbarer objektorientierter Softwarearchitektur.
 
 **Aufgabenstellung:**
-1. Erläutern Sie das Sicherheitsprinzip einer **dreibeinigen Firewall (3-Homed Firewall)** mit Demilitarisierter Zone (DMZ).
-2. Definieren Sie die zulässigen und verbotenen Kommunikationsflüsse zwischen den Zonen **Internet (WAN)**, **DMZ** und **internem Netzwerk (LAN)**.
-3. Begründen Sie, warum der Webserver keinesfalls direkt im internen LAN betrieben werden darf.`,
-        solution: `1. Sicherheitsprinzip einer 3-Bein-Firewall:
-Eine zentrale Firewall verfügt über mindestens drei getrennte Schnittstellen bzw. VLAN-Zonen:
-• Interface 1: WAN / Internet (untrusted - externes, unsicheres Netz).
-• Interface 2: DMZ (semi-trusted - isolierte Pufferzone für öffentlich exponierte Dienste).
-• Interface 3: LAN (trusted - geschütztes internes Firmennetzwerk).
-Die DMZ trennt das interne Netz physisch/logisch vom Internet, sodass öffentlich erreichbare Server keinen direkten Zugriff auf schützenswerte interne Ressourcen haben.
+1. Nennen und erläutern Sie alle **5 SOLID-Prinzipien** (vollständiger Name und Kernaussage).
+2. Beschreiben Sie am Beispiel des **Liskov Substitution Principle (LSP)**, warum das klassische Vererbungsbeispiel \`class Quadrat extends Rechteck\` in der Praxis gegen dieses Prinzip verstößt.`,
+        solution: `1. Die 5 SOLID-Prinzipien:
 
-2. Zulässige und verbotene Kommunikationsflüsse (Firewall-Ruleset):
-• WAN -> DMZ: ERLAUBT, aber strikt auf die benötigten Ports beschränkt (z. B. Port 443 TCP für HTTPS auf Webserver, Port 25 TCP für SMTP auf Mailserver).
-• WAN -> LAN: STRIKT VERBOTEN (kein direkter Zugriff aus dem Internet auf interne Clients/Server).
-• LAN -> WAN: ERLAUBT (über NAT/PAT für Web-Browsing der Mitarbeiter).
-• LAN -> DMZ: ERLAUBT für Administrationszwecke (z. B. SSH/RDP über dedizierte Admin-Workstations).
-• DMZ -> LAN: GRUNDSÄTZLICH VERBOTEN! Sollte ein Server in der DMZ (z. B. der Webserver) kompromittiert werden, kann der Angreifer nicht in das interne LAN vordringen. Ausnahme: Streng reglementierte Pull-/Push-Verbindungen auf definierte Datenbank-Ports (z. B. TCP 3306) mit strikter Authentifizierung.
-• DMZ -> WAN: ERLAUBT nur für Updates oder z. B. Mail-Relay (SMTP Port 25).
+• S - Single Responsibility Principle (SRP):
+  Eine Klasse darf nur eine einzige Verantwortung haben bzw. es darf nur einen einzigen Grund für eine Änderung dieser Klasse geben.
+  Beispiel: Eine Klasse 'Rechnung' berechnet Beträge, speichert sich aber nicht selbst in der Datenbank und druckt kein PDF (Separation of Concerns).
 
-3. Begründung:
-Wird ein Webserver direkt im internen LAN betrieben und weist eine Schwachstelle auf (z. B. Remote Code Execution durch fehlerhafte Web-Software oder Zero-Day-Exploit), befindet sich der Angreifer sofort im vertrauenswürdigen Netz. Er kann ungehindert Active-Directory-Domänencontroller scannen, Passwörter abfangen und Malware/Ransomware lateral auf alle Firmenrechner verteilen.`,
-        explanation: `Das 3-Zonen-Modell (WAN - DMZ - LAN) ist der fundamentale Standard im BaWü AP2 Prüfungsbereich 3.`
+• O - Open/Closed Principle (OCP):
+  Software-Entitäten (Klassen, Module) sollen offen für Erweiterungen sein, aber geschlossen für Modifikationen.
+  Bestehender, getesteter Code wird nicht verändert; neues Verhalten wird über Vererbung oder Interfaces (Polymorphismus) hinzugefügt.
+
+• L - Liskov Substitution Principle (LSP):
+  Subtypen müssen sich so verhalten, dass sie anstelle ihrer Basistypen eingesetzt werden können, ohne die Korrektheit des Programms zu beeinträchtigen.
+
+• I - Interface Segregation Principle (ISP):
+  Clients dürfen nicht dazu gezwungen werden, von Schnittstellen abhängig zu sein, die sie gar nicht nutzen.
+  Statt eines großen 'fettigen' Interfaces sollen mehrere kleine, spezifische Interfaces erstellt werden.
+
+• D - Dependency Inversion Principle (DIP):
+  High-Level-Module dürfen nicht von Low-Level-Modulen abhängen; beide müssen von Abstraktionen (Interfaces) abhängen.
+  Abstraktionen dürfen nicht von Details abhängen, Details müssen von Abstraktionen abhängen (Dependency Injection).
+
+2. Verletzung des LSP beim Quadrat/Rechteck-Problem:
+• Problem: Ein Rechteck hat unabhängig voneinander veränderbare Eigenschaften für 'Breite' und 'Höhe' (setBreite(b), setHoehe(h)).
+• Bei einem Quadrat müssen Breite und Höhe jedoch stets identisch sein. Wird setBreite(10) aufgerufen, muss zwingend auch die Höhe auf 10 gesetzt werden.
+• Verstoß gegen LSP: Erwartet eine Methode ein 'Rechteck' und ruft 'r.setBreite(10); r.setHoehe(5);' auf, erwartet der Aufrufer eine Fläche von 50. Wird stattdessen ein substituiertes 'Quadrat' übergeben, führt der letzte Aufruf zu einer Fläche von 25.
+Das Quadrat bricht somit die Invariante und Nachbedingungen der Basisklasse Rechteck!`,
+        explanation: `Die SOLID-Prinzipien sind der wichtigste Qualitätsmaßstab in der Fachinformatiker Anwendungsentwicklung AP2 Prüfung.`
+    },
+    {
+        id: 811,
+        examLevel: "ap2",
+        pruefungsbereich: "PB3-FIAE",
+        theme: "pb3-fiae-algo",
+        topic: "PB 3: Schreibtischtest (Trace-Tabelle) für Algorithmus",
+        difficulty: "hard",
+        isHard: true,
+        type: "open-text",
+        points: 10,
+        question: `💻 **IHK AP2 Fachaufgabe: Algorithmen-Schreibtischtest & Trace-Tabelle (10 Punkte)**
+
+Gegeben ist folgender Pseudocode zur Analyse von Kundenaufträgen:
+
+\`\`\`plaintext
+01: umsaetze = [150, 40, 320, 80, 500, 60]
+02: anzahl = 0
+03: summe = 0
+04: FÜR i = 0 BIS LÄNGE(umsaetze) - 1 MACHE
+05:     WENN umsaetze[i] >= 100 DANN
+06:         anzahl = anzahl + 1
+07:         summe = summe + umsaetze[i]
+08:     ENDE WENN
+09:     WENN summe > 600 DANN
+10:         VERLASSE SCHLEIFE // Vorzeitiger Abbruch
+11:     ENDE WENN
+12: ENDE FÜR
+13: GIB ZURÜCK summe / anzahl
+\`\`\`
+
+**Aufgabenstellung:**
+1. Erstellen Sie eine vollständige **Trace-Tabelle (Schreibtischtest)** für alle Iterationen.
+2. Geben Sie die finalen Werte der Variablen \`anzahl\`, \`summe\` sowie den finalen Rückgabewert an.`,
+        solution: `1. Trace-Tabelle (Schreibtischtest):
+
+| Durchlauf | i | umsaetze[i] | umsaetze[i] >= 100? | anzahl | summe | summe > 600? | Bemerkung |
+| :---: | :---: | :---: | :---: | :---: | :---: | :---: | :--- |
+| Start | - | - | - | 0 | 0 | - | Initialisierung (Z. 02, 03) |
+| 1 | 0 | 150 | JA (150 >= 100) | 1 | 150 | NEIN (150 > 600 ist false) | anzahl=1, summe=150 |
+| 2 | 1 | 40 | NEIN (40 < 100) | 1 | 150 | NEIN (150 > 600 ist false) | Wert wird übersprungen |
+| 3 | 2 | 320 | JA (320 >= 100) | 2 | 470 | NEIN (470 > 600 ist false) | anzahl=2, summe=470 |
+| 4 | 3 | 80 | NEIN (80 < 100) | 2 | 470 | NEIN (470 > 600 ist false) | Wert wird übersprungen |
+| 5 | 4 | 500 | JA (500 >= 100) | 3 | 970 | JA (970 > 600 ist true) | Abbruchbedingung erfüllt! |
+
+Hinweis: Das letzte Element am Index 5 (Wert 60) wird nicht mehr betrachtet, da die Schleife in Zeile 10 vorzeitig beendet wird.
+
+2. Finale Werte und Rückgabewert:
+• anzahl = 3
+• summe = 970
+• Rückgabewert (Zeile 13): 970 / 3 ≈ 323,33 (bzw. 323 bei Integer-Division).`,
+        explanation: `Schreibtischtests erfordern höchste Exaktheit: Spalten für Index, Array-Wert, Bedingungen, Akkumulatoren und Beachtung vorzeitiger Schleifenabbrüche.`
     },
     {
         id: 812,
         examLevel: "ap2",
-        pruefungsbereich: "PB3",
-        theme: "pb3-netze",
-        topic: "PB 3: Wi-Fi 6 (802.11ax) Technologien",
+        pruefungsbereich: "PB3-FIAE",
+        theme: "fiae-testing",
+        topic: "PB 3: White-Box-Testing Überdeckungsmaße (C0, C1, C2)",
         difficulty: "hard",
         isHard: true,
         type: "standard",
-        question: "Welche Kerntechnologie von Wi-Fi 6 (IEEE 802.11ax) ermöglicht es, einen WLAN-Kanal in mehrere kleinere Frequenzblöcke (Resource Units, RUs) aufzuteilen und so Daten mehrerer Endgeräte simultan in einem einzigen Übertragungszyklus zu transportieren?",
+        question: "Welche Aussage definiert die Testüberdeckungsmaße (Coverage Metrics) des White-Box-Testens (C0: Anweisungsüberdeckung, C1: Zweigüberdeckung, C2: Pfadüberdeckung) korrekt?",
         options: [
-            "OFDMA (Orthogonal Frequency Division Multiple Access)",
-            "CSMA/CA (Carrier Sense Multiple Access with Collision Avoidance)",
-            "Dynamic Frequency Selection (DFS)",
-            "WPA3 Transition Mode"
+            "C0 testet nur Kommentare; C1 testet Interfaces; C2 testet die Datenbankverbindung.",
+            "C0 (Anweisungsüberdeckung) verlangt, dass jede Code-Zeile mindestens einmal ausgeführt wurde; C1 (Zweigüberdeckung) verlangt, dass jeder Verzweigungszweig (true/false) mindestens einmal durchlaufen wurde; C2 (Pfadüberdeckung) verlangt, dass alle möglichen Pfade von Start bis Ende getestet wurden.",
+            "C1 schließt automatisch C2 vollständig mit ein.",
+            "White-Box-Testing kann durchgeführt werden, ohne den Quellcode zu kennen."
         ],
-        answer: 0,
-        explanation: `💡 Wi-Fi 6 Technologien im Überblick:
-• OFDMA: Teilt einen 20-, 40- oder 80-MHz-Kanal in bis zu hunderte Subcarrier auf, die zu Resource Units (RUs) zusammengefasst werden. Verschiedene Clients können gleichzeitig im Up- und Downlink senden/empfangen -> minimiert Latenz und Wartezeiten bei vielen Clients.
-• MU-MIMO: Erlaubt das parallele Senden räumlicher Datenströme über mehrere Antennen (bis zu 8x8).
-• Target Wake Time (TWT): Mobil- und IoT-Geräte vereinbaren feste Aufwachzeiten zum Senden -> spart drastisch Akkuleistung.
-• BSS Coloring: Markiert Funkzellen farblich, um Gleichkanalinterferenzen zu ignorieren.`
+        answer: 1,
+        explanation: `Überdeckungsmaße im Software-Testing:
+1. C0 - Anweisungsüberdeckung (Statement Coverage):
+   Misst den Prozentsatz der ausgeführten Anweisungen. Schwach, da z. B. leere else-Zweige übersehen werden.
+2. C1 - Zweigüberdeckung / Entscheidungsüberdeckung (Branch Coverage):
+   Jede Kante im Kontrollflussgraph (jeder true- und false-Zweig) muss mindestens einmal durchlaufen werden. C1 schließt C0 vollständig ein!
+3. C2 - Pfadüberdeckung (Path Coverage):
+   Jeder vollständige Pfad durch das Programm wird getestet. Bei Schleifen oft theoretisch unendlich viele Pfade (kombinatorische Explosion).`
     },
     {
         id: 813,
         examLevel: "ap2",
-        pruefungsbereich: "PB3",
-        theme: "pb3-netze",
-        topic: "PB 3: First Hop Redundancy (VRRP / HSRP)",
+        pruefungsbereich: "PB3-FIAE",
+        theme: "fiae-testing",
+        topic: "PB 3: Black-Box-Testing Äquivalenzklassen & Grenzwertanalyse",
         difficulty: "hard",
         isHard: true,
         type: "standard",
-        question: "Zwei Core-Router sollen als redundantes Standard-Gateway für Clients nach dem offenen Standard VRRP (Virtual Router Redundancy Protocol, RFC 5798) konfiguriert werden. Welche Aussage zur virtuellen MAC-Adresse und zum Verhalten bei Routerausfall trifft zu?",
+        question: "Ein Eingabefeld in einer Personalsoftware akzeptiert das Alter von Auszubildenden im Bereich von 16 bis 30 Jahren (ganzzahlig). Welche Testwerte müssen im Rahmen einer systematischen Grenzwertanalyse ausgewählt werden?",
         options: [
-            "VRRP nutzt keine virtuelle MAC, die Clients müssen per DHCP eine zweite IP erhalten.",
-            "Die virtuelle MAC hat das feste IANA-Format 00-00-5E-00-01-{VRID}; fällt der Master-Router aus, übernimmt der Backup-Router mit der höheren Priorität nach Ablauf des Advertisement-Timers nahtlos die virtuelle IP und MAC ohne ARP-Änderung der Clients.",
-            "Beim Ausfall müssen alle Switche neu gebootet werden, um die Spanning-Tree-Topologie zurückzusetzen.",
-            "VRRP unterstützt ausschließlich Cisco-Hardware und funktioniert nur über serielle Leitungen."
+            "Beliebige Werte wie 20, 25 und 100.",
+            "Exakt die Randwerte und deren direkte Nachbarn: 15, 16, 17 sowie 29, 30, 31.",
+            "Nur die Werte 16 und 30.",
+            "Nur negative Zahlen."
         ],
         answer: 1,
-        explanation: `Funktionsweise VRRP (IHK AP2 Standard):
-1. Ein Master und ein/mehrere Backup-Router teilen sich eine virtuelle IP-Adresse (VIP).
-2. Der Master sendet in regelmäßigen Intervallen (Standard: 1 Sekunde) VRRP-Advertisements (Multicast 224.0.0.18).
-3. Die virtuelle MAC-Adresse lautet 00:00:5E:00:01:[VRID in Hex] (für IPv4).
-4. Clients tragen die VIP als Default Gateway ein.
-5. Fällt der Master aus, bemerkt der Backup-Router das Ausbleiben der Advertisements und übernimmt als neuer Master. Dank Gratuitous ARP aktualisieren die Switche ihre MAC-Tabellen sofort.`
+        explanation: `💡 Grenzwertanalyse (Boundary Value Analysis):
+Erfahrungsgemäß treten Programmierfehler (Off-by-One-Errors wie '<' statt '<=') an den Grenzen von Eingabebereichen auf.
+Für das Intervall [16; 30] ergeben sich:
+• Untere Grenze (16): Testwerte 15 (ungültig, direkt darunter), 16 (gültig, Grenzwert), 17 (gültig, direkt darüber).
+• Obere Grenze (30): Testwerte 29 (gültig, direkt darunter), 30 (gültig, Grenzwert), 31 (ungültig, direkt darüber).`
     },
     {
         id: 814,
         examLevel: "ap2",
-        pruefungsbereich: "PB3",
-        theme: "pb3-netze",
-        topic: "PB 3: Wireshark TCP 3-Wege-Handshake Trace-Analyse",
+        pruefungsbereich: "PB3-FIAE",
+        theme: "pb3-fiae-algo",
+        topic: "PB 3: RESTful APIs HTTP-Methoden & Idempotenz",
         difficulty: "hard",
         isHard: true,
         type: "standard",
-        question: "In einem Wireshark-Trace analysierst du den Verbindungsaufbau zu einem Webserver. Paket 1 hat die TCP-Flags [SYN] mit Seq=1000. Paket 2 vom Server hat [SYN, ACK] mit Seq=5000 und Ack=1001. Welche Werte für Sequence-Number (Seq) und Acknowledgment-Number (Ack) muss das abschließende Bestätigungspaket 3 des Clients enthalten?",
+        question: "Was bedeutet die Eigenschaft 'Idempotenz' bei HTTP-Methoden im REST-API-Design und welche der folgenden HTTP-Methoden sind idempotent?",
         options: [
-            "Seq = 1000, Ack = 5000",
-            "Seq = 1001, Ack = 5001",
-            "Seq = 1002, Ack = 5002",
-            "Seq = 5001, Ack = 1001"
+            "Idempotent bedeutet, dass eine Methode immer einen Fehler 500 wirft; idempotent ist nur POST.",
+            "Idempotent bedeutet, dass mehrfache identische Anfragen denselben serverseitigen Zustand erzeugen wie eine einzige Anfrage. Idempotent sind GET, PUT und DELETE; POST ist NICHT idempotent.",
+            "Idempotent bedeutet, dass die Daten verschlüsselt werden; alle Methoden sind idempotent.",
+            "Nur POST ist idempotent, weil es Daten an den Server sendet."
         ],
         answer: 1,
-        explanation: `💡 TCP Handshake Sequenznummern-Logik:
-• Paket 1 (Client -> Server): SYN, Seq = 1000. Das SYN-Flag konsumiert genau 1 Sequenznummer.
-• Paket 2 (Server -> Client): SYN-ACK, Seq = 5000, Ack = 1001 (bestätigt das SYN des Clients mit 1000 + 1).
-• Paket 3 (Client -> Server): ACK, Seq = 1001 (nächste eigene Sequenznummer), Ack = 5001 (bestätigt das SYN des Servers mit 5000 + 1).`
+        explanation: `💡 REST API HTTP-Methoden & Idempotenz:
+• Definition: Eine HTTP-Methode ist idempotent, wenn die wiederholte Ausführung derselben Anfrage keine weiteren serverseitigen Zustandsänderungen bewirkt als die erste Ausführung.
+• GET: Idempotent & Safe (ändert den Serverzustand überhaupt nicht).
+• PUT: Idempotent (vollständiges Ersetzen einer Ressource: 10x 'PUT /kunden/5' setzt den Datensatz 10x auf denselben Zustand).
+• DELETE: Idempotent (das Löschen einer Ressource führt beim 1. Mal zum Löschen, danach bleibt die Ressource gelöscht).
+• POST: NICHT idempotent! Mehrfaches Absenden von 'POST /kunden' erstellt jedes Mal einen NEUEN Kundendatensatz (Duplikate!).`
     },
 
     // --- PB 4: Wirtschafts- und Sozialkunde (100 Pkt. | 10 %) ---
@@ -18177,7 +18239,7 @@ Wird ein Webserver direkt im internen LAN betrieben und weist eine Schwachstelle
         difficulty: "hard",
         isHard: true,
         type: "standard",
-        question: "Ein IT-Systemintegrator arbeitet seit 3 Jahren in einem Systemhaus mit 45 Vollzeitbeschäftigten. Ihm wird am 02. Mai die ordentliche Kündigung schriftlich übergeben. Welche Klagefrist vor dem Arbeitsgericht muss er nach § 4 KSchG zwingend einhalten, wenn er die Kündigung für sozial ungerechtfertigt hält?",
+        question: "Ein Softwareentwickler arbeitet seit 3 Jahren in einem Softwarehaus mit 45 Vollzeitbeschäftigten. Ihm wird am 02. Mai die ordentliche Kündigung schriftlich übergeben. Welche Klagefrist vor dem Arbeitsgericht muss er nach § 4 KSchG zwingend einhalten, wenn er die Kündigung für sozial ungerechtfertigt hält?",
         options: [
             "Innerhalb von 2 Wochen ab Zugang der Kündigung.",
             "Innerhalb von 3 Wochen nach Zugang der schriftlichen Kündigung.",
@@ -18186,8 +18248,8 @@ Wird ein Webserver direkt im internen LAN betrieben und weist eine Schwachstelle
         ],
         answer: 1,
         explanation: `§ 4 Satz 1 KSchG (Kündigungsschutzklage):
-Will ein Arbeitnehmer geltend machen, dass eine Kündigung sozial ungerechtfertigt oder aus anderen Gründen rechtsunwirksam ist, so muss er innerhalb von DREI WOCHEN nach Zugang der schriftlichen Kündigung Klage beim Arbeitsgericht auf Feststellung erheben, dass das Arbeitsverhältnis durch die Kündigung nicht aufgelöst ist.
-Wird diese Frist versäumt, gilt die Kündigung nach § 7 KSchG als von Anfang an rechtswirksam!`
+Will ein Arbeitnehmer geltend machen, dass eine Kündigung sozial ungerechtfertigt oder aus anderen Gründen rechtsunwirksam ist, so muss er innerhalb von DREI WOCHEN nach Zugang der schriftlichen Kündigung Klage beim Arbeitsgericht erheben.
+Wird diese 3-Wochen-Frist versäumt, gilt die Kündigung nach § 7 KSchG als von Anfang an rechtswirksam!`
     },
     {
         id: 816,
@@ -18198,17 +18260,17 @@ Wird diese Frist versäumt, gilt die Kündigung nach § 7 KSchG als von Anfang a
         difficulty: "hard",
         isHard: true,
         type: "standard",
-        question: "Die Geschäftsführung möchte eine zentrale Software einführen, die minutengenau protokolliert, wann sich Mitarbeiter an ihren Clients anmelden, welche Webseiten sie aufrufen und wie viele Tastenanschläge pro Stunde getätigt werden. Welche Rechte hat der Betriebsrat nach dem Betriebsverfassungsgesetz (BetrVG)?",
+        question: "Die Geschäftsführung möchte eine Software einführen, die Git-Commit-Zeiten der Entwickler, Tastenanschläge und Ticket-Bearbeitungsdauern automatisch auswertet. Welche Rechte stehen dem Betriebsrat nach § 87 BetrVG zu?",
         options: [
-            "Der Betriebsrat hat lediglich ein Informationsrecht nach § 80 BetrVG.",
-            "Der Betriebsrat hat ein erzwingbares Mitbestimmungsrecht nach § 87 Abs. 1 Nr. 6 BetrVG (Einführung und Anwendung von technischen Einrichtungen zur Überwachung des Verhaltens oder der Leistung der Arbeitnehmer). Ohne Betriebsvereinbarung ist die Einführung unzulässig.",
-            "Der Betriebsrat kann der Einführung nur widersprechen, wenn zuvor Mitarbeiter gekündigt wurden.",
-            "Der Betriebsrat hat bei IT-Systemen keinerlei Mitbestimmungsrecht, da dies unter die unternehmerische Freiheit fällt."
+            "Der Betriebsrat hat lediglich ein nachträgliches Informationsrecht.",
+            "Der Betriebsrat hat ein echtes, erzwingbares Mitbestimmungsrecht nach § 87 Abs. 1 Nr. 6 BetrVG (technische Einrichtungen zur Leistungs- und Verhaltenskontrolle). Ohne Betriebsvereinbarung ist die Einführung rechtswidrig.",
+            "Der Betriebsrat darf nur mitbestimmen, wenn zuvor Personal entlassen wurde.",
+            "Entwickler-Tools unterliegen als Arbeitsmittel keiner Mitbestimmung."
         ],
         answer: 1,
         explanation: `§ 87 Abs. 1 Nr. 6 BetrVG (Echte Mitbestimmung):
-Der Betriebsrat hat ein erzwingbares Mitbestimmungsrecht bei der 'Einführung und Anwendung von technischen Einrichtungen, die dazu bestimmt sind, das Verhalten oder die Leistung der Arbeitnehmer zu überwachen'.
-Hierzu zählen Zeiterfassungssysteme, Videoüberwachung, Internet-Proxy-Logs, Ticket-Tracking und Keylogger. Kommt keine Einigung zwischen Arbeitgeber und Betriebsrat zustande, entscheidet die Einigungsstelle.`
+Der Betriebsrat bestimmt mit bei der 'Einführung und Anwendung von technischen Einrichtungen, die dazu bestimmt sind, das Verhalten oder die Leistung der Arbeitnehmer zu überwachen'.
+Hierzu zählen Zeiterfassungen, Git-Commit-Tracking, Ticket-System-Analysen und Keylogger. Ohne vorherige Betriebsvereinbarung darf der Arbeitgeber solche Systeme nicht in Betrieb nehmen.`
     },
     {
         id: 817,
@@ -18222,53 +18284,47 @@ Hierzu zählen Zeiterfassungssysteme, Videoüberwachung, Internet-Proxy-Logs, Ti
         points: 10,
         question: `⚖️ **IHK AP2 Fachaufgabe: Sachmängelrechte beim Kaufvertrag (10 Punkte)**
 
-Ein Systemhaus liefert einem gewerblichen Kunden 20 Server. Nach der Inbetriebnahme stellt der Kunde fest, dass in allen Servern statt der vertraglich vereinbarten 64 GB RAM nur 16 GB RAM verbaut sind (Sachmangel nach § 434 BGB).
+Ein Softwarehaus liefert einem gewerblichen Kunden (B2B) eine Standard-Branchensoftware auf Datenträgern mit Lizenzen. Nach der Installation stellt der Kunde fest, dass das vereinbarte DATEV-Exportmodul komplett fehlt und das Programm bei Buchungsläufen abstürzt (Sachmangel nach § 434 BGB).
 
 **Aufgabenstellung:**
-1. Welches Recht steht dem Käufer auf der **1. Stufe der Mängelansprüche (§ 439 BGB)** vorrangig zu und wer hat dabei das Wahlrecht?
-2. Unter welchen gesetzlichen Voraussetzungen darf der Käufer auf die **2. Stufe (Sekundärrechte)** übergehen und welche Rechte stehen ihm dann zur Wahl?
-3. Wie lang ist die regelmäßige Verjährungsfrist für Sachmängelansprüche nach § 438 BGB?`,
+1. Welches Recht steht dem Käufer auf der **1. Stufe der Mängelansprüche (§ 439 BGB)** vorrangig zu und wer hat das Wahlrecht?
+2. Unter welchen Voraussetzungen darf der Käufer auf die **2. Stufe (Sekundärrechte)** übergehen und welche Rechte stehen ihm dann zur Wahl?
+3. Wie lang ist die gesetzliche Verjährungsfrist für Sachmängelansprüche nach § 438 BGB?`,
         solution: `1. Vorrang der Nacherfüllung (1. Stufe - § 439 BGB):
-• Der Käufer hat primär Anspruch auf Nacherfüllung.
-• Wahlrecht des Käufers: Der Käufer kann nach seiner Wahl entweder die Nachbesserung (Mangelbeseitigung / Reparatur, hier: Nachrüsten der fehlenden 48 GB RAM je Server) oder die Nachlieferung (Lieferung einer mangelfreien neuen Sache) verlangen.
-• Kosten: Der Verkäufer hat alle zum Zwecke der Nacherfüllung erforderlichen Aufwendungen (Transport-, Wege-, Arbeits- und Materialkosten) zu tragen.
+• Primärer Anspruch des Käufers: Nacherfüllung.
+• Wahlrecht des Käufers: Der Käufer kann nach seiner Wahl entweder die Nachbesserung (Fehlerbehebung / Patch) oder die Nachlieferung (Lieferung einer mangelfreien neuen Softwareversion) verlangen.
+• Kostentragung: Der Verkäufer hat alle zum Zwecke der Nacherfüllung erforderlichen Aufwendungen (insbes. Arbeits- und Materialkosten) zu tragen.
 
 2. Übergang auf die 2. Stufe (Sekundärrechte):
-• Voraussetzungen: Der Käufer muss dem Verkäufer eine angemessene Frist zur Nacherfüllung gesetzt haben und diese Frist ist erfolglos abgelaufen, oder der Verkäufer verweigert die Nacherfüllung ernsthaft und endgültig, oder die Nacherfüllung ist fehlgeschlagen (eine Nachbesserung gilt in der Regel nach dem zweiten erfolglosen Versuch als fehlgeschlagen).
-• Sekundärrechte des Käufers (zur Wahl):
-  - Rücktritt vom Kaufvertrag (§§ 440, 323 BGB) -> Rückabwicklung (Ware zurück, Geld zurück).
-  - ODER Minderung des Kaufpreises (§ 441 BGB) -> Ware behalten und anteiligen Kaufpreisnachlass fordern.
-  - Sowie zusätzlich oder alternativ: Schadensersatz statt der Leistung (§ 280 BGB) bzw. Ersatz vergeblicher Aufwendungen (§ 284 BGB), sofern der Verkäufer den Mangel zu vertreten hat.
+• Voraussetzungen: Der Käufer muss dem Verkäufer eine angemessene Frist zur Nacherfüllung gesetzt haben und diese ist erfolglos abgelaufen, ODER der Verkäufer verweigert die Nacherfüllung ernsthaft und endgültig, ODER die Nachbesserung ist fehlgeschlagen (gilt in der Regel nach dem zweiten erfolglosen Versuch als fehlgeschlagen).
+• Sekundärrechte des Käufers:
+  - Rücktritt vom Kaufvertrag (§§ 440, 323 BGB) -> Rückabwicklung (Geld zurück gegen Software-Rückgabe).
+  - ODER Minderung des Kaufpreises (§ 441 BGB) -> Behalten der Software bei herabgesetztem Kaufpreis.
+  - Sowie Schadensersatz statt der Leistung (§ 280 BGB), sofern der Verkäufer den Mangel schuldhaft verursacht hat.
 
 3. Verjährungsfrist (§ 438 Abs. 1 Nr. 3 BGB):
-• Die regelmäßige Verjährungsfrist für Mängelansprüche bei beweglichen Sachen beträgt ZWEI JAHRE ab Ablieferung der Kaufsache.`,
-        explanation: `Die Stufenfolge des deutschen Kaufrechts (Vorrang der Nacherfüllung vor Rücktritt/Minderung) ist ein unverzichtbarer Prüfungsbaustein in AP2 WiSo.`
+• Die regelmäßige Verjährungsfrist für Sachmängelansprüche beträgt ZWEI JAHRE ab Ablieferung der Sache.`,
+        explanation: `Die Stufenfolge des Mängelgewährleistungsrechts (Vorrang der Nacherfüllung vor Rücktritt/Minderung) ist ein unverzichtbarer Prüfungsbaustein in AP2 WiSo.`
     },
     {
         id: 818,
         examLevel: "ap2",
         pruefungsbereich: "PB4",
         theme: "pb4-wiso",
-        topic: "PB 4: Gesellschaftsformen & Haftung (KG vs GmbH)",
+        topic: "PB 4: Urheberrecht bei Software (§ 69a, § 69b UrhG)",
         difficulty: "hard",
         isHard: true,
         type: "standard",
-        question: "Wie unterscheidet sich die Haftung der Gesellschafter einer Kommanditgesellschaft (KG) von den Gesellschaftern einer Gesellschaft mit beschränkter Haftung (GmbH)?",
+        question: "Ein fest angestellter Softwareentwickler programmiert während seiner Arbeitszeit im Auftrag seines Arbeitgebers ein neues CRM-Modul. Nach seinem Ausscheiden aus dem Unternehmen verlangt er die Löschung des Quellcodes und behauptet, er sei als Urheber der alleinige Inhaber der Verwertungsrechte. Wie ist die Rechtslage nach § 69b UrhG?",
         options: [
-            "In einer KG haften alle Gesellschafter nur mit ihrer eingetragenen Einlage, bei der GmbH haften die Gesellschafter persönlich mit ihrem Privatvermögen.",
-            "In einer KG haftet der Komplementär unbeschränkt, persönlich und solidarisch mit seinem gesamten Privat- und Geschäftsvermögen, während der Kommanditist nur bis zur Höhe seiner im Handelsregister eingetragenen Einlage haftet; bei der GmbH haftet für Verbindlichkeiten der Gesellschaft grundsätzlich nur das Gesellschaftsvermögen.",
-            "Bei beiden Gesellschaftsformen haften die Geschäftsführer mit ihrem gesamten Privatvermögen für Steuerschulden und Lieferantenforderungen.",
-            "Eine GmbH haftet mit mindestens 50.000 € Privatvermögen jedes Gesellschafters."
+            "Der Entwickler behält alle Verwertungsrechte und kann die Weiternutzung untersagen.",
+            "Wird ein Computerprogramm von einem Arbeitnehmer in Wahrnehmung seiner Aufgaben oder nach den Weisungen seines Arbeitgebers geschaffen, so ist ausschließlich der Arbeitgeber zur Ausübung aller wirtschaftlichen Verwertungsrechte berechtigt, sofern vertraglich nichts anderes vereinbart ist (§ 69b UrhG).",
+            "Der Entwickler und der Arbeitgeber müssen sich die Einnahmen 50/50 teilen.",
+            "Computerprogramme sind in Deutschland generell nicht urheberrechtlich geschützt."
         ],
         answer: 1,
-        explanation: `💡 Rechtsformen und Haftung (IHK WiSo):
-• KG (Personengesellschaft):
-  - Komplementär (Vollhafter): Haftet unmittelbar, unbeschränkt und solidarisch mit Betriebs- und Privatvermögen. Führt die Geschäfte.
-  - Kommanditist (Teilhafter): Haftung ist auf die im Handelsregister eingetragene Einlage beschränkt. Grundsätzlich von der Geschäftsführung ausgeschlossen.
-• GmbH (Kapitalgesellschaft):
-  - Juristische Person mit eigener Rechtspersönlichkeit.
-  - Mindeststammkapital 25.000 €.
-  - Für Verbindlichkeiten der GmbH haftet Gläubigern gegenüber ausschließlich das Gesellschaftsvermögen (§ 13 Abs. 2 GmbHG).`
+        explanation: `§ 69b UrhG (Urheberrecht in Arbeits- und Dienstverhältnissen):
+Zwar bleibt der angestellte Programmierer formal Urheber (das Urheberpersönlichkeitsrecht nach deutschem Recht ist unübertragbar), jedoch stehen nach § 69b Abs. 1 UrhG ALLE vermögensrechtlichen Befugnisse und wirtschaftlichen Nutzungs- und Verwertungsrechte AUSSCHLIESSLICH dem Arbeitgeber zu. Der Arbeitgeber darf das Programm nutzen, verändern, weiterentwickeln und verkaufen.`
     },
     {
         id: 819,
@@ -18279,33 +18335,30 @@ Ein Systemhaus liefert einem gewerblichen Kunden 20 Server. Nach der Inbetriebna
         difficulty: "hard",
         isHard: true,
         type: "standard",
-        question: "Ein IT-Händler liefert einem Systemhaus (beide sind Kaufleute im Sinne des HGB, beidseitiger Handelskauf B2B) 50 Router. Der Lagerist stellt die Paletten ungeprüft ins Regal. Nach 4 Wochen wird ein Router ausgepackt und ein Transportschaden (zerbrochenes Gehäuse) festgestellt. Welche Rechtsfolge tritt nach § 377 HGB ein?",
+        question: "Ein Softwarehaus kauft von einem Hardwarehersteller (B2B, beidseitiger Handelskauf) 20 Entwickler-Laptops. Die Lieferung wird ungeprüft eingelagert. Nach 4 Wochen wird festgestellt, dass bei 5 Laptops das Display gebrochen ist. Welche Rechtsfolge greift nach § 377 HGB?",
         options: [
-            "Der Käufer kann den Router innerhalb von 2 Jahren reklamieren, da die BGB-Gewährleistung greift.",
-            "Die Ware gilt als genehmigt, da bei einem beidseitigen Handelskauf offene Mängel unverzüglich nach der Ablieferung untersucht und gerügt werden müssen. Der Käufer verliert seine Mängelansprüche bezüglich dieses Mangels.",
-            "Der Spediteur haftet automatisch für 6 Monate.",
-            "Der Verkäufer muss den Router kostenfrei austauschen, da ein Transportschaden vorliegt."
+            "Der Käufer hat 2 Jahre Zeit für die Reklamation.",
+            "Die Ware gilt als genehmigt, da bei einem beidseitigen Handelskauf offene Mängel unverzüglich (i. d. R. binnen 1–2 Tagen) nach Wareneingang gerügt werden müssen. Das Softwarehaus verliert seine Mängelansprüche bezüglich dieser offensichtlichen Schäden.",
+            "Der Verkäufer muss automatisch Schadensersatz zahlen.",
+            "Die Laptops gehen entschädigungslos in das Eigentum des Spediteurs über."
         ],
         answer: 1,
-        explanation: `§ 377 HGB (Untersuchungs- und Rügepflicht beim beidseitigen Handelskauf):
-Ist der Kauf für beide Teile ein Handelsgeschäft (B2B), so hat der Käufer die Ware unverzüglich (ohne schuldhaftes Zögern, i. d. R. innerhalb von 1–2 Werktagen) nach der Ablieferung zu untersuchen und, wenn sich ein Mangel zeigt, dem Verkäufer unverzüglich Anzeige zu machen.
-Unterlässt der Käufer die Anzeige, so gilt die Ware als genehmigt, es sei denn, dass es sich um einen Mangel handelt, der bei der Untersuchung nicht erkennbar war (versteckter Mangel).`
+        explanation: `§ 377 HGB (Untersuchungs- und Rügepflicht im Handelsrecht):
+Beim beidseitigen Handelskauf (B2B) ist der Käufer verpflichtet, die Ware unverzüglich nach Ablieferung zu untersuchen und offene Mängel sofort zu rügen. Unterlässt er dies, gilt die Ware als genehmigt und alle Gewährleistungsansprüche für diesen Mangel erlöschen.`
     },
-
-    // --- PB 3: Software, SQL & Automatisierung (100 Pkt. | 10 %) ---
     {
         id: 820,
         examLevel: "ap2",
-        pruefungsbereich: "PB3-ALGO",
-        theme: "pb3-algo",
-        topic: "PB 3: Relationale SQL-Abfrage mit Aggregation",
+        pruefungsbereich: "PB3-FIAE",
+        theme: "pb3-fiae-algo",
+        topic: "PB 3: Relationale SQL-Abfrage über 3 Tabellen mit HAVING",
         difficulty: "hard",
         isHard: true,
         type: "open-text",
         points: 10,
         question: `💻 **IHK AP2 Fachaufgabe: SQL-Abfrage über 3 relationale Tabellen (10 Punkte)**
 
-Gegeben ist folgende Datenbankstruktur eines IT-Serviceunternehmens:
+Gegeben ist folgende Datenbankstruktur einer Softwarefirma:
 • \`Kunde\` (\`KundenID\` [PK], \`Name\`, \`Ort\`)
 • \`Auftrag\` (\`AuftragsID\` [PK], \`KundenID\` [FK], \`Auftragsdatum\`)
 • \`Position\` (\`PositionsID\` [PK], \`AuftragsID\` [FK], \`Artikelbezeichnung\`, \`Menge\`, \`Einzelpreis\`)
@@ -18333,6 +18386,52 @@ ORDER BY
 • 2 Punkte für GROUP BY über Kunde (KundenID und Name).
 • 2 Punkte für HAVING-Klausel (Aggregatfilter > 10000; WHERE wäre hier syntaktisch falsch!).
 • 1 Punkt für ORDER BY DESC.`
+    },
+    {
+        id: 821,
+        examLevel: "ap2",
+        pruefungsbereich: "PB2-FIAE",
+        theme: "fiae-diagrams",
+        topic: "PB 2: UML-Sequenzdiagramm Interaktionsrahmen (alt, opt, loop)",
+        difficulty: "hard",
+        isHard: true,
+        type: "standard",
+        question: "In einem UML-Sequenzdiagramm wird ein Benutzer-Login modelliert. Welche Bedeutung haben die Interaktionsrahmen (Combined Fragments) 'alt', 'opt' und 'loop'?",
+        options: [
+            "'alt' steht für alternatives Verhalten (if-else); 'opt' steht für optionales Verhalten (if ohne else); 'loop' steht für eine Schleife (while/for).",
+            "'alt' steht für alte Methoden; 'opt' für optimierten Code; 'loop' für Loopback-Interfaces.",
+            "'alt' führt alle Zweige parallel aus; 'opt' löscht Nachrichten; 'loop' beendet das Programm.",
+            "Interaktionsrahmen dürfen in UML 2.5 nicht mehr verwendet werden."
+        ],
+        answer: 0,
+        explanation: `UML 2.5 Sequenzdiagramm Interaktionsrahmen:
+• alt (Alternatives): Stellt eine Verzweigung mit disjunkten Bedingungen dar (if-else). Genau ein Operand, dessen Guard erfüllt ist, wird ausgeführt.
+• opt (Option): Stellt Verhalten dar, das nur ausgeführt wird, wenn die Bedingung wahr ist (einfaches if ohne else).
+• loop (Schleife): Wiederholt die Interaktionsfolge mehrfach, solange die Bedingung wahr ist oder für eine festgelegte Anzahl an Iterationen.`
+    },
+    {
+        id: 822,
+        examLevel: "ap2",
+        pruefungsbereich: "PB3-FIAE",
+        theme: "pb3-fiae-algo",
+        topic: "PB 3: JSON Web Token (JWT) Struktur & Sicherheit",
+        difficulty: "hard",
+        isHard: true,
+        type: "standard",
+        question: "Ein REST-Backend nutzt JSON Web Tokens (JWT) zur zustandslosen Benutzer-Authentifizierung. Aus welchen drei Bestandteilen besteht ein JWT und warum darf das Benutzerpasswort NIEMALS im Payload eines JWT gespeichert werden?",
+        options: [
+            "Header, Payload, Signature; der Payload ist lediglich Base64Url-kodiert (nicht verschlüsselt) und kann von jedem Client im Klartext ausgelesen werden.",
+            "HTML, CSS, JavaScript; weil Passwörter in Cookies gespeichert werden müssen.",
+            "Public Key, Private Key, Salt; der Payload wird automatisch gelöscht.",
+            "Request, Response, Status; weil JWTs nur für XML-Daten zulässig sind."
+        ],
+        answer: 0,
+        explanation: `💡 Aufbau und Sicherheit von JWT (RFC 7519):
+Ein JWT besteht aus drei Teilen, getrennt durch Punkte: [Header].[Payload].[Signature]
+1. Header: Enthält den Tokentyp (JWT) und den Hashing-Algorithmus (z. B. HS256).
+2. Payload: Enthält Claims (Benutzer-ID, Rollen, Ablaufzeit 'exp').
+   WICHTIG: Der Payload ist NUR Base64Url-kodiert, NICHT verschlüsselt! Jeder Empfänger kann ihn mit einem einfachen Decoder im Klartext lesen. Vertrauliche Daten (wie Passwörter oder PINs) dürfen dort niemals enthalten sein!
+3. Signature: Wird mit einem geheimen Schlüssel serverseitig berechnet: HMACSHA256(base64Url(Header) + '.' + base64Url(Payload), secret). Schützt vor Manipulation (Integrität).`
     }
 
 ];

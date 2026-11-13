@@ -1,6 +1,6 @@
 // AP1 Quiz-App Logic
 
-// Portal Exam Mode: 'ap1' (Teil 1 • 20 %) vs 'ap2' (FISI Abschluss • 80 %)
+// Portal Exam Mode: 'ap1' (Teil 1 • 20 %) vs 'ap2' (FIAE Abschluss • 80 %)
 let currentPortalMode = localStorage.getItem('portal_exam_mode') || 'ap1';
 
 let questions = [];
@@ -234,7 +234,7 @@ function initQuestions(typeMode) {
     // Mode-specific partitioning (AP1 vs AP2)
     let pool = [];
     if (currentPortalMode === "ap2") {
-        pool = sourceQuestions.filter(q => q.examLevel === "ap2" || (q.theme && q.theme.startsWith("pb")) || q.isBawueAp2 === true);
+        pool = sourceQuestions.filter(q => q.examLevel === "ap2" || (q.theme && (q.theme.startsWith("pb") || q.theme.startsWith("fiae"))) || q.isBawueAp2 === true || q.isBawueFiae === true);
         if (pool.length === 0) pool = [...sourceQuestions];
     } else {
         pool = sourceQuestions.filter(q => q.examLevel !== "ap2" && !(q.theme && q.theme.startsWith("pb")) && !q.isBawueAp2);
@@ -343,37 +343,50 @@ function filterQuestions(theme) {
         if (theme === "all") {
             filteredQuestions = [...questions];
         } else if (theme === "ap2-all") {
-            filteredQuestions = questions.filter(q => q.examLevel === "ap2" || (q.theme && q.theme.startsWith("pb")) || q.isBawueAp2 === true);
+            filteredQuestions = questions.filter(q => q.examLevel === "ap2" || (q.theme && (q.theme.startsWith("pb") || q.theme.startsWith("fiae"))) || q.isBawueAp2 === true || q.isBawueFiae === true);
             if (filteredQuestions.length === 0) filteredQuestions = [...questions];
-        } else if (theme === "pb2-systeme") {
+        } else if (theme === "pb2-fiae-software" || theme === "pb2-systeme") {
             filteredQuestions = questions.filter(q => 
+                q.theme === "pb2-fiae-software" || 
+                q.pruefungsbereich === "PB2-FIAE" || 
                 q.theme === "pb2-systeme" || 
                 q.pruefungsbereich === "PB2" || 
-                (q.topic && (q.topic.toLowerCase().includes("pb 2") || q.topic.toLowerCase().includes("it-systeme") || q.topic.toLowerCase().includes("usv") || q.topic.toLowerCase().includes("raid") || q.topic.toLowerCase().includes("storage") || q.topic.toLowerCase().includes("hypervisor") || q.topic.toLowerCase().includes("bsi")))
+                (q.topic && (q.topic.toLowerCase().includes("softwareprodukt") || q.topic.toLowerCase().includes("uml") || q.topic.toLowerCase().includes("design pattern") || q.topic.toLowerCase().includes("entwurfsmuster") || q.topic.toLowerCase().includes("lastenheft") || q.topic.toLowerCase().includes("pflichtenheft") || q.topic.toLowerCase().includes("scrum") || q.topic.toLowerCase().includes("normalisierung") || q.topic.toLowerCase().includes("pb 2")))
             );
-        } else if (theme === "pb3-netze") {
+        } else if (theme === "pb3-fiae-algo" || theme === "pb3-netze" || theme === "pb3-algo") {
             filteredQuestions = questions.filter(q => 
+                q.theme === "pb3-fiae-algo" || 
+                q.pruefungsbereich === "PB3-FIAE" || 
+                q.theme === "pb3-algo" || 
+                q.pruefungsbereich === "PB3-ALGO" || 
                 q.theme === "pb3-netze" || 
                 q.pruefungsbereich === "PB3" || 
-                (q.topic && (q.topic.toLowerCase().includes("pb 3") || q.topic.toLowerCase().includes("netzwerk") || q.topic.toLowerCase().includes("vlan") || q.topic.toLowerCase().includes("ospf") || q.topic.toLowerCase().includes("ipv6") || q.topic.toLowerCase().includes("firewall") || q.topic.toLowerCase().includes("wi-fi")))
+                (q.topic && (q.topic.toLowerCase().includes("algorithmus") || q.topic.toLowerCase().includes("algorithmen") || q.topic.toLowerCase().includes("schreibtischtest") || q.topic.toLowerCase().includes("oop") || q.topic.toLowerCase().includes("solid") || q.topic.toLowerCase().includes("datenstruktur") || q.topic.toLowerCase().includes("sortier") || q.topic.toLowerCase().includes("suche") || q.topic.toLowerCase().includes("sql") || q.topic.toLowerCase().includes("rest api") || q.topic.toLowerCase().includes("pb 3")))
             );
         } else if (theme === "pb4-wiso") {
             filteredQuestions = questions.filter(q => 
                 q.theme === "pb4-wiso" || 
                 q.pruefungsbereich === "PB4" || 
-                (q.topic && (q.topic.toLowerCase().includes("pb 4") || q.topic.toLowerCase().includes("wiso") || q.topic.toLowerCase().includes("kschg") || q.topic.toLowerCase().includes("betriebsrat") || q.topic.toLowerCase().includes("bgb") || q.topic.toLowerCase().includes("kaufvertrag") || q.topic.toLowerCase().includes("haftung")))
+                (q.topic && (q.topic.toLowerCase().includes("pb 4") || q.topic.toLowerCase().includes("wiso") || q.topic.toLowerCase().includes("kschg") || q.topic.toLowerCase().includes("betriebsrat") || q.topic.toLowerCase().includes("bgb") || q.topic.toLowerCase().includes("kaufvertrag") || q.topic.toLowerCase().includes("haftung") || q.topic.toLowerCase().includes("urheberrecht")))
             );
-        } else if (theme === "pb3-algo") {
+        } else if (theme === "fiae-diagrams") {
             filteredQuestions = questions.filter(q => 
-                q.theme === "pb3-algo" || 
-                q.pruefungsbereich === "PB3-ALGO" || 
-                (q.topic && (q.topic.toLowerCase().includes("sql") || q.topic.toLowerCase().includes("algorithmen") || q.topic.toLowerCase().includes("skripte") || q.topic.toLowerCase().includes("automatisierung")))
+                q.theme === "fiae-diagrams" || 
+                q.isDiagram === true || 
+                (q.topic && (q.topic.toLowerCase().includes("uml") || q.topic.toLowerCase().includes("klassendiagramm") || q.topic.toLowerCase().includes("use-case") || q.topic.toLowerCase().includes("sequenzdiagramm") || q.topic.toLowerCase().includes("aktivitätsdiagramm") || q.topic.toLowerCase().includes("erd") || q.topic.toLowerCase().includes("chen")))
             );
-        } else if (theme === "bawue-ap2") {
+        } else if (theme === "fiae-testing") {
             filteredQuestions = questions.filter(q => 
+                q.theme === "fiae-testing" || 
+                (q.topic && (q.topic.toLowerCase().includes("test") || q.topic.toLowerCase().includes("anweisungsüberdeckung") || q.topic.toLowerCase().includes("zweigüberdeckung") || q.topic.toLowerCase().includes("äquivalenzklasse") || q.topic.toLowerCase().includes("grenzwertanalyse") || q.topic.toLowerCase().includes("clean code")))
+            );
+        } else if (theme === "bawue-fiae" || theme === "bawue-ap2") {
+            filteredQuestions = questions.filter(q => 
+                q.isBawueFiae === true || 
+                q.theme === "bawue-fiae" || 
                 q.isBawueAp2 === true || 
                 q.theme === "bawue-ap2" || 
-                (q.topic && (q.topic.toLowerCase().includes("bawü ap2") || q.topic.toLowerCase().includes("poe") || q.topic.toLowerCase().includes("rfc 1918") || q.topic.toLowerCase().includes("datenübertragung")))
+                (q.topic && (q.topic.toLowerCase().includes("bawü fiae") || q.topic.toLowerCase().includes("kunden abc") || q.topic.toLowerCase().includes("bawü ap2")))
             );
         } else if (theme === "it-arbeitsplatz" || theme === "arbeitsplatz") {
             filteredQuestions = questions.filter(q => {
@@ -808,7 +821,7 @@ function filterQuestions(theme) {
     }
     
     // Limit to exactly 30 questions per round (only if not in favorites, subnetting, osi, pseudocode or pruefungsblatt to let them practice all questions)
-    if (theme !== "favorites" && theme !== "subnetting" && theme !== "osi" && theme !== "pseudocode" && theme !== "pruefungsblatt" && !theme.startsWith("ap2") && !theme.startsWith("pb") && theme !== "bawue-ap2" && filteredQuestions.length > 30) {
+    if (theme !== "favorites" && theme !== "subnetting" && theme !== "osi" && theme !== "pseudocode" && theme !== "pruefungsblatt" && !theme.startsWith("ap2") && !theme.startsWith("pb") && !theme.startsWith("fiae") && theme !== "bawue-ap2" && theme !== "bawue-fiae" && filteredQuestions.length > 30) {
         filteredQuestions = filteredQuestions.slice(0, 30);
     }
     
@@ -3674,7 +3687,7 @@ window.toggleExamHeaderVisibility = function() {
 
 
 // ==========================================================================
-// DUAL PORTAL MODE SWITCHER: AP1 (TEIL 1 • 20%) VS AP2 (FISI ABSCHLUSS • 80%)
+// DUAL PORTAL MODE SWITCHER: AP1 (TEIL 1 • 20%) VS AP2 (FIAE ABSCHLUSS • 80%)
 // ==========================================================================
 
 function switchPortalMode(mode) {
@@ -3715,8 +3728,8 @@ function switchPortalMode(mode) {
         if (headerExamBtnText) headerExamBtnText.innerHTML = `📚 Alle 17 Prüfungen vergleichen &amp; auswählen (1.700 Pkt)`;
         if (headerExamBtn) headerExamBtn.title = "Katalog aller 17 AP1-Prüfungen anzeigen & auswählen";
     } else {
-        if (headerTitle) headerTitle.innerHTML = `<i class="fa-solid fa-graduation-cap"></i> AP2 Abschlussprüfungs-Portal (FISI)`;
-        if (headerSubtitle) headerSubtitle.textContent = `Fachinformatiker Systemintegration • Abschlussprüfung Teil 2 (80 % Gesamtnote: PB 2 IT-Systeme 10%, PB 3 Netzwerke 10%, PB 4 WiSo 10%, Projektarbeit 50%)`;
+        if (headerTitle) headerTitle.innerHTML = `<i class="fa-solid fa-graduation-cap"></i> AP2 Abschlussprüfungs-Portal (FIAE)`;
+        if (headerSubtitle) headerSubtitle.textContent = `Fachinformatiker Anwendungsentwicklung • Abschlussprüfung Teil 2 (80 % Gesamtnote: PB 2 Planen eines Softwareproduktes 10%, PB 3 Entwicklung von Algorithmen 10%, PB 4 WiSo 10%, Projektarbeit 50%)`;
         if (headerExamBtnText) headerExamBtnText.innerHTML = `📁 53 BaWü Original-Abschlussprüfungen (AP2) anzeigen`;
         if (headerExamBtn) headerExamBtn.title = "Katalog aller 53 BaWü AP2 Originalprüfungen öffnen";
     }
